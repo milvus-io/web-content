@@ -1575,7 +1575,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
+                "label": "Migrer d'une instance à l'autre dans un environnement S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []

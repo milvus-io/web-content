@@ -82,18 +82,16 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
         ></path>
       </svg>
     </button></h2><p>Milvus Operator 在<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes 自定义资源</a>之上定义 Milvus 集群<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">自定义资源</a>。定义了自定义资源后，你就能以声明的方式使用 K8s API 并管理 Milvus 部署栈，确保其可扩展性和高可用性。</p>
-<p>您可以通过以下任一方式安装 Milvus 操作符：</p>
-<ul>
-<li><a href="#Install-with-Helm">使用 Helm</a></li>
-<li><a href="#Install-with-kubectl">使用 kubectl</a></li>
-</ul>
-<h3 id="Install-with-Helm" class="common-anchor-header">使用 Helm 安装</h3><p>运行以下命令，使用 Helm 安装 Milvus Operator。</p>
+<div class="filter">
+ <a href="#helm">Helm</a> <a href="#kubectl">Kubectl</a></div>
+<div class="filter-helm">
+<p>使用 Helm 安装 Milvus Operator，请运行以下命令。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>安装过程结束后，您将看到类似下面的输出。</p>
+<p>安装过程结束后，你将看到类似下面的输出。</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -108,15 +106,15 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>如果之前已经安装了 Milvus Operator，请使用以下命令进行升级：</p>
+<p>如果之前安装过 Milvus Operator，请使用以下命令进行升级：</p>
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Install-with-kubectl" class="common-anchor-header">使用 kubectl 安装</h3><p>运行以下命令通过<code translate="no">kubectl</code> 安装 Milvus Operator 。</p>
+<div class="filter-kubectl">
+<p>运行以下命令安装 Milvus Operator 和<code translate="no">kubectl</code> 。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>安装过程结束后，您将看到类似下面的输出。</p>
@@ -135,12 +133,13 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>您可以按如下操作检查 Milvus Operator pod 是否正在运行：</p>
+<p>您可以按如下方法检查 Milvus Operator pod 是否正在运行：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
 milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <button class="copy-code-btn"></button></code></pre>
+</div>
 <h2 id="Deploy-Milvus" class="common-anchor-header">部署 Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,17 +155,54 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.部署 Milvus 群集</h3><p>一旦运行了 Milvus Operator pod，就可以按如下方式部署 Milvus 群集。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.部署 Milvus 群集<button data-href="#1-Deploy-a-Milvus-cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>一旦运行了 Milvus Operator pod，就可以按如下方式部署 Milvus 群集。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述命令使用默认配置部署一个 Milvus 集群，其组件和依赖项分别位于不同的 pod 中。要自定义这些设置，建议你使用<a href="https://milvus.io/tools/sizing">Milvus 大小</a>调整<a href="https://milvus.io/tools/sizing">工具</a>，根据实际数据大小调整配置，然后下载相应的 YAML 文件。要了解有关配置参数的更多信息，请参阅<a href="https://milvus.io/docs/system_configuration.md">Milvus 系统配置检查表</a>。</p>
+<p>上面的命令部署的是以<strong>Woodpecker</strong>作为消息队列（推荐用于 v2.6.0）和包括流节点在内的所有新架构组件的 Milvus 群集。</p>
+<p><strong>此部署中的架构要点：</strong></p>
+<ul>
+<li><strong>消息队列</strong>：<a href="/docs/zh/use-woodpecker.md">使用 Woodpecker</a>（减少基础设施维护）</li>
+<li><strong>流节点</strong>：为增强数据处理功能而启用</li>
+<li><strong>混合协调器</strong>：合并协调器组件，提高效率</li>
+</ul>
+<p>要自定义这些设置，我们建议您使用<a href="https://milvus.io/tools/sizing">Milvus 大小工具</a>，根据实际数据大小调整配置，然后下载相应的 YAML 文件。要了解有关配置参数的更多信息，请参阅<a href="https://milvus.io/docs/system_configuration.md">Milvus 系统配置检查表</a>。</p>
 <div class="alert note">
 <ul>
 <li>版本名称只能包含字母、数字和破折号。版本名称中不允许有圆点。</li>
 <li>你也可以在独立模式下部署 Milvus 实例，即所有组件都包含在一个 pod 中。为此，请将上述命令中的配置文件 URL 更改为<code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
-<h4 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2.检查 Milvus 集群状态</h4><p>运行以下命令检查 Milvus 集群状态</p>
+<h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2.检查 Milvus 集群状态<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>运行以下命令检查 Milvus 集群状态</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>一旦你的 Milvus 集群准备就绪，上述命令的输出应该与下面类似。如果<code translate="no">status.status</code> 字段保持<code translate="no">Unhealthy</code> ，您的 Milvus 群集仍在创建中。</p>
@@ -176,21 +212,21 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <span class="hljs-string">...</span>
 <span class="hljs-attr">status:</span>
   <span class="hljs-attr">conditions:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T05:59:41Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">StorageReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">StorageReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T06:06:23Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">Pulsar</span> <span class="hljs-string">is</span> <span class="hljs-string">ready</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">PulsarReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">PulsarReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T05:59:41Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">Etcd</span> <span class="hljs-string">endpoints</span> <span class="hljs-string">is</span> <span class="hljs-string">healthy</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">EtcdReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">EtcdReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T06:12:36Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">All</span> <span class="hljs-string">Milvus</span> <span class="hljs-string">components</span> <span class="hljs-string">are</span> <span class="hljs-string">healthy</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">MilvusClusterHealthy</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
@@ -216,7 +252,22 @@ my-release-minio-1                               1/1     Running   0          2m
 my-release-minio-2                               1/1     Running   0          2m35s
 my-release-minio-3                               1/1     Running   0          2m35s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3.将本地端口转发给 Milvus</h3><p>运行以下命令获取 Milvus 集群的服务端口。</p>
+<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3.将本地端口转发给 Milvus<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>运行以下命令获取 Milvus 集群的服务端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pod my-release-milvus-proxy-84f67cdb7f-pg6wf --template</span>
 =&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;
 19530
@@ -250,24 +301,19 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>你可以通过编辑 YAML 文件更新 Milvus 集群的配置，然后再次应用。</p>
+    </button></h2><p>你可以通过调用<code translate="no">patch</code> 命令来查看和更新 Milvus 集群的配置，方法如下：</p>
 <ol>
-<li>运行以下命令编辑 YAML 文件。</li>
-</ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl edit milvus my-release</span>
+<li><p>运行以下命令预览可能的配置。</p>
+<p>以下命令假定您要将<code translate="no">spec.components.disableMetric</code> 参数更新为<code translate="no">false</code> ms。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
+  -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
+  --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>更新 YAML 文件中的配置。以下命令假定您要将<code translate="no">proxy.healthCheckTimout</code> 参数更新为<code translate="no">1000</code> ms。</li>
-</ol>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Add the corresponding user parameters under the `spec.config` node.</span>
-<span class="hljs-comment"># For the default configuration, see https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># To update `proxy.healthCheckTimout` parameter to `1000` ms, do as follows:</span>
-<span class="hljs-attr">config:</span>
-  <span class="hljs-attr">proxy:</span>
-    <span class="hljs-attr">healthCheckTimeout:</span> <span class="hljs-number">1000</span>
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>保存更改并退出编辑器。更改将自动应用到 Milvus 群集。</li>
+<p>有关适用的配置项目，请参阅<a href="/docs/zh/system_configuration.md">系统配置</a>。</p></li>
+<li><p>更新配置。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
+  -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
+<button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">访问 Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -284,7 +330,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 配备了名为 Milvus WebUI 的内置图形用户界面工具，可通过浏览器访问。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+    </button></h2><p>Milvus 配备了一个名为 Milvus WebUI 的内置图形用户界面工具，您可以通过浏览器访问该工具。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <p>要启用对 Milvus Web UI 的访问，需要将代理 pod 的端口转发到本地端口。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091

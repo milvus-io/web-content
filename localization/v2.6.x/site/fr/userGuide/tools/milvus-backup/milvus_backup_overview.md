@@ -63,6 +63,33 @@ title: Sauvegarde Milvus
 <p>Milvus Backup facilite la sauvegarde et la restauration des métadonnées, des segments et des données dans les instances Milvus. Il fournit des interfaces vers le nord, telles que la CLI, l'API et le module Go basé sur gRPC, pour une manipulation souple des processus de sauvegarde et de restauration.</p>
 <p>Milvus Backup lit les métadonnées et les segments de la collection à partir de l'instance Milvus source pour créer une sauvegarde. Il copie ensuite les données de collecte à partir du chemin racine de l'instance Milvus source et enregistre les données copiées dans le chemin racine de la sauvegarde.</p>
 <p>Pour restaurer à partir d'une sauvegarde, Milvus Backup crée une nouvelle collection dans l'instance Milvus cible en fonction des métadonnées de la collection et des informations sur les segments dans la sauvegarde. Il copie ensuite les données de la sauvegarde depuis le chemin racine de la sauvegarde vers le chemin racine de l'instance cible.</p>
+<h2 id="Compatibility-matrix" class="common-anchor-header">Matrice de compatibilité<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Le tableau suivant répertorie les compatibilités de sauvegarde et de restauration entre les différentes versions de Milvus depuis Milvus Backup v0.5.7.</p>
+<table>
+<thead>
+<tr><th>Sauvegarde ↓ / Restauration →</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th></tr>
+</thead>
+<tbody>
+<tr><td>Milvus v2.2.x</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Milvus v2.3.x</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Milvus v2.4.x</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Milvus v2.5.x</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td></tr>
+</tbody>
+</table>
 <h2 id="Latest-release" class="common-anchor-header">Dernière version<button data-href="#Latest-release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,5 +106,5 @@ title: Sauvegarde Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.4.15">v0.4.15</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7">v0.5.7</a></li>
 </ul>

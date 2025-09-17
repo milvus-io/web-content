@@ -92,21 +92,27 @@
                 "children": []
               },
               {
+                "label": "RPM/DEB",
+                "id": "install_standalone-binary.md",
+                "order": 1,
+                "children": []
+              },
+              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               }
             ]
@@ -195,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Connexion au serveur Milvus",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -420,9 +432,28 @@
           },
           {
             "label": "Champ JSON",
-            "id": "use-json-fields.md",
+            "id": "json-field",
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "Aperçu des champs JSON",
+                "id": "json-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Indexation JSON",
+                "id": "json-indexing.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Déchiquetage JSON",
+                "id": "json-shredding.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Champ du tableau",
@@ -512,6 +543,12 @@
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
+                  },
+                  {
+                    "label": "Identifiant de la langue",
+                    "id": "language-identifier.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               },
@@ -592,6 +629,12 @@
                 "label": "Analyseurs multilingues",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Choisissez l'analyseur adapté à votre cas d'utilisation",
+                "id": "choose-the-right-analyzer-for-your-use-case.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -777,6 +820,12 @@
                 "label": "INVERSE",
                 "id": "inverted.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -1036,10 +1085,16 @@
                 "children": []
               },
               {
+                "label": "Boost Ranker",
+                "id": "boost-ranker.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "Rang de décomposition",
                 "id": "decay-ranker",
                 "isMenu": true,
-                "order": 2,
+                "order": 3,
                 "children": [
                   {
                     "label": "Aperçu de Decay Ranker",
@@ -1076,7 +1131,7 @@
               {
                 "label": "Classeur de modèles",
                 "id": "model-ranker",
-                "order": 3,
+                "order": 4,
                 "isMenu": true,
                 "children": [
                   {
@@ -1095,6 +1150,24 @@
                     "label": "Classement TEI",
                     "id": "tei-ranker.md",
                     "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Cohere Ranker",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Voyage AI Ranker",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "Classement SiliconFlow",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
                     "children": []
                   }
                 ]
@@ -1626,6 +1699,12 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
+      },
+      {
+        "label": "Pivert",
+        "id": "use-woodpecker.md",
+        "order": 13,
+        "children": []
       }
     ]
   },
@@ -1690,7 +1769,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre dans un environnement S3",
+                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -1878,7 +1957,7 @@
                 "children": []
               },
               {
-                "label": "Instructeur",
+                "label": "Instructor",
                 "id": "embed-with-instructor.md",
                 "order": 9,
                 "children": []

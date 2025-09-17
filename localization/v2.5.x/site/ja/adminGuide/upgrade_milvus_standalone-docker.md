@@ -24,7 +24,7 @@ title: Docker Composeを使用したMilvusスタンドアロンのアップグ�
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Docker Composeを使用してMilvusをアップグレードする方法について説明します。</p>
-<p>通常の場合、<a href="#Upgrade-Milvus-by-changing-its-image">Milvusのイメージを変更することでアップグレードが</a>可能です。ただし、v2.1.xからv2.5.13にアップグレードする場合は、事前に<a href="#Migrate-the-metadata">メタデータを移行する</a>必要があります。</p>
+<p>通常の場合、<a href="#Upgrade-Milvus-by-changing-its-image">イメージを変更することでMilvusをアップグレードする</a>ことができます。ただし、v2.1.xからv2.5.13にアップグレードする場合は、事前に<a href="#Migrate-the-metadata">メタデータを移行する</a>必要があります。</p>
 <div class="alter note">
 <p>セキュリティ上の問題から、Milvusはv2.2.5のリリースと同時にMinIOをRELEASE.2023-03-20T20-16-18Zにアップグレードしています。Docker Composeを使用してインストールされた以前のMilvus Standaloneリリースからアップグレードする前に、Single-Node Single-Drive MinIOデプロイメントを作成し、既存のMinIO設定とコンテンツを新しいデプロイメントに移行する必要があります。詳細については、<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">このガイドを</a>参照してください。</p>
 </div>
@@ -126,7 +126,7 @@ docker compose up -d
 </ul></li>
 <li>クラウド上にクラスターをデプロイする準備ができている場合は、次の方法を参照してください：<ul>
 <li><a href="/docs/ja/v2.5.x/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/v2.5.x/gcp.md">Kubernetesを使ってGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.5.x/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
 <li><a href="/docs/ja/v2.5.x/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>
 </ul>

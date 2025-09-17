@@ -175,7 +175,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك استخدام واجهة برمجة تطبيقات Milvus RESTful API أو SDKs لسرد جميع قواعد البيانات الموجودة وعرض تفاصيلها.</p>
+    </button></h2><p>يمكنك استخدام واجهة برمجة تطبيقات Milvus RESTful API أو حزم SDK لسرد جميع قواعد البيانات الموجودة وعرض تفاصيلها.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># List all existing databases</span>
@@ -259,7 +259,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">database.resource_groups</code></p></td>
      <td><p>سلسلة</p></td>
-     <td><p>أسماء مجموعات الموارد المقترنة بقاعدة البيانات المحددة في قائمة مفصولة بشكل شائع.</p></td>
+     <td><p>أسماء مجموعات الموارد المرتبطة بقاعدة البيانات المحددة في قائمة مفصولة بفاصلة.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.diskQuota.mb</code></p></td>
@@ -282,7 +282,22 @@ curl --request POST \
      <td><p>ما إذا كان سيتم إجبار قاعدة البيانات المحددة على رفض عمليات القراءة.</p></td>
    </tr>
 </table>
-<h3 id="Alter-database-properties" class="common-anchor-header">تغيير خصائص قاعدة البيانات</h3><p>يمكنك تغيير خصائص قاعدة بيانات موجودة على النحو التالي. يحد المثال التالي من عدد المجموعات التي يمكنك إنشاؤها في قاعدة البيانات.</p>
+<h3 id="Alter-database-properties" class="common-anchor-header">تغيير خصائص قاعدة البيانات<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك تغيير خصائص قاعدة بيانات موجودة على النحو التالي. يحد المثال التالي من عدد المجموعات التي يمكنك إنشاؤها في قاعدة البيانات.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
@@ -322,7 +337,22 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-database-properties" class="common-anchor-header">إسقاط خصائص قاعدة البيانات</h3><p>يمكنك أيضًا إعادة تعيين خاصية قاعدة بيانات عن طريق إسقاطها كما يلي. يزيل المثال التالي الحد من عدد المجموعات التي يمكنك إنشاؤها في قاعدة البيانات.</p>
+<h3 id="Drop-database-properties" class="common-anchor-header">إسقاط خصائص قاعدة البيانات<button data-href="#Drop-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك أيضًا إعادة تعيين خاصية قاعدة بيانات عن طريق إسقاطها كما يلي. يزيل المثال التالي الحد من عدد المجموعات التي يمكنك إنشاؤها في قاعدة البيانات.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
@@ -466,5 +496,35 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">كيف يمكنني إدارة الأذونات لقاعدة البيانات؟</h3><p>يستخدم Milvus التحكم في الوصول المستند إلى الدور (RBAC) لإدارة الأذونات. يمكنك إنشاء أدوار بامتيازات محددة وتعيينها للمستخدمين، وبالتالي التحكم في وصولهم إلى قواعد البيانات المختلفة. لمزيد من التفاصيل، راجع <a href="/docs/ar/rbac.md">وثائق RBAC</a>.</p>
-<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">هل هناك أي قيود على الحصص لقاعدة البيانات؟</h3><p>نعم، يسمح لك Milvus بتعيين قيود الحصص لقاعدة البيانات، مثل الحد الأقصى لعدد المجموعات. للحصول على قائمة شاملة بالقيود، يرجى الرجوع إلى <a href="/docs/ar/limitations.md">وثائق حدود ميلفوس</a>.</p>
+    </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">كيف يمكنني إدارة الأذونات لقاعدة البيانات؟<button data-href="#How-do-I-manage-permissions-for-a-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يستخدم Milvus التحكم في الوصول المستند إلى الدور (RBAC) لإدارة الأذونات. يمكنك إنشاء أدوار بامتيازات محددة وتعيينها للمستخدمين، وبالتالي التحكم في وصولهم إلى قواعد البيانات المختلفة. لمزيد من التفاصيل، راجع <a href="/docs/ar/rbac.md">وثائق RBAC</a>.</p>
+<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">هل هناك أي قيود على الحصص لقاعدة البيانات؟<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>نعم، يسمح لك Milvus بتعيين قيود الحصص لقاعدة البيانات، مثل الحد الأقصى لعدد المجموعات. للحصول على قائمة شاملة بالقيود، يرجى الرجوع إلى <a href="/docs/ar/limitations.md">وثائق حدود ميلفوس</a>.</p>

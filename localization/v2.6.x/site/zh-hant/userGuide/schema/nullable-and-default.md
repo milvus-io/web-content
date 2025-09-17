@@ -41,8 +41,7 @@ summary: >-
 <li><p>只有標量欄位 (不包括主要欄位) 支援預設值和 nullable 屬性。</p></li>
 <li><p>JSON 和陣列欄位不支援預設值。</p></li>
 <li><p>預設值或 nullable 屬性只能在建立集合時設定，之後就無法修改。</p></li>
-<li><p>啟用 nullable 屬性的標量欄位無法在群組搜尋中用作<code translate="no">group_by_field</code> 。有關群組搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/grouping-search.md">群組搜尋</a>。</p></li>
-<li><p>標記為 nullable 的欄位不能用作分割區金鑰。有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割區金</a>鑰。</p></li>
+<li><p>標記為 nullable 的欄位不能用作分割鍵。有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割區金</a>鑰。</p></li>
 <li><p>在啟用 nullable 屬性的標量欄位上建立索引時，索引將排除 null 值。</p></li>
 <li><p><strong>JSON 和 ARRAY 欄位</strong>：使用<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 運算符號篩選 JSON 或 ARRAY 欄位時，這些運算符號會在欄位層級運作，這表示它們只會評估整個 JSON 物件或陣列是否為空。例如，如果 JSON 物件中的一個 key 為空，則<code translate="no">IS NULL</code> 過濾器將不會識別該 key。如需詳細資訊，請參閱<a href="/docs/zh-hant/basic-operators.md">基本運算符</a>。</p></li>
 </ul>
@@ -62,7 +61,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><code translate="no">nullable</code> 屬性允許您在集合中儲存 null 值，在處理未知資料時提供彈性。</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">設定 nullable 屬性</h3><p>建立集合時，使用<code translate="no">nullable=True</code> 定義 nullable 欄位 (預設為<code translate="no">False</code>)。以下範例建立一個名為<code translate="no">my_collection</code> 的集合，並將<code translate="no">age</code> 欄位設定為 nullable：</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">設定 nullable 屬性<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>建立集合時，使用<code translate="no">nullable=True</code> 定義 nullable 欄位 (預設為<code translate="no">False</code>)。以下範例建立一個名為<code translate="no">my_collection</code> 的集合，並將<code translate="no">age</code> 欄位設定為 nullable：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -264,7 +278,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">插入實體</h3><p>當您插入資料到 nullable 欄位時，插入 null 或直接省略此欄位：</p>
+<h3 id="Insert-entities" class="common-anchor-header">插入實體<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>當您插入資料到 nullable 欄位時，插入 null 或直接省略此欄位：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -335,7 +364,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">使用空值進行搜尋和查詢</h3><p>當使用<code translate="no">search</code> 方法時，如果欄位包含<code translate="no">null</code> 值，搜尋結果會將該欄位回傳為 null：</p>
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">使用空值進行搜尋和查詢<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>當使用<code translate="no">search</code> 方法時，如果欄位包含<code translate="no">null</code> 值，搜尋結果會將該欄位回傳為 null：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -555,7 +599,22 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
         ></path>
       </svg>
     </button></h2><p>預設值是指定給標量欄位的預設值。如果您在插入時沒有為有預設值的欄位提供值，系統會自動使用預設值。</p>
-<h3 id="Set-default-values" class="common-anchor-header">設定預設值</h3><p>建立集合時，使用<code translate="no">default_value</code> 參數定義欄位的預設值。以下範例顯示如何將<code translate="no">age</code> 的預設值設定為<code translate="no">18</code> ，將<code translate="no">status</code> 的預設值設定為<code translate="no">&quot;active&quot;</code> ：</p>
+<h3 id="Set-default-values" class="common-anchor-header">設定預設值<button data-href="#Set-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>建立集合時，使用<code translate="no">default_value</code> 參數定義欄位的預設值。以下範例顯示如何將<code translate="no">age</code> 的預設值設定為<code translate="no">18</code> ，將<code translate="no">status</code> 的預設值設定為<code translate="no">&quot;active&quot;</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
@@ -766,7 +825,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">插入實體</h3><p>插入資料時，如果省略有預設值的欄位，或將其值設為 null，系統會使用預設值：</p>
+<h3 id="Insert-entities" class="common-anchor-header">插入實體<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>插入資料時，如果您省略有預設值的欄位或將其值設為 null，系統會使用預設值：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -847,7 +921,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <div class="alert note">
 <p>有關 nullable 和預設值設定如何生效的詳細資訊，請參閱<a href="/docs/zh-hant/nullable-and-default.md#Applicable-rules">適用規則</a>。</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">使用預設值進行搜尋和查詢</h3><p>在向量搜尋和標量篩選過程中，包含預設值的實體與任何其他實體的處理方式相同。您可以在<code translate="no">search</code> 和<code translate="no">query</code> 作業中包含預設值。</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">使用預設值進行搜尋和查詢<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在向量搜尋和標量篩選過程中，包含預設值的實體與任何其他實體的處理方式相同。您可以在<code translate="no">search</code> 和<code translate="no">query</code> 作業中包含預設值。</p>
 <p>例如，在<code translate="no">search</code> 操作中，將<code translate="no">age</code> 設定為預設值<code translate="no">18</code> 的實體將包含在結果中：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

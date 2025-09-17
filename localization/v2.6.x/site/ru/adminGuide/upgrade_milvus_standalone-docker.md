@@ -5,10 +5,10 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: 'Узнайте, как обновить автономный Milvus с помощью Docker Compose.'
-title: Обновление автономного Milvus с помощью Docker Compose
+title: Обновление автономной системы Milvus с помощью Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/ru/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ru/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/ru/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Обновление автономного Milvus с помощью Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Обновление автономной системы Milvus с помощью Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,12 +23,74 @@ title: Обновление автономного Milvus с помощью Dock
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В этой теме описывается, как обновить Milvus с помощью Docker Compose.</p>
-<p>В обычных случаях вы можете <a href="#Upgrade-Milvus-by-changing-its-image">обновить Milvus, изменив его образ</a>. Однако перед обновлением с v2.1.x до v2.6.0 необходимо <a href="#Migrate-the-metadata">перенести метаданные</a>.</p>
+    </button></h1><p>В этом руководстве описано, как обновить автономное развертывание Milvus с версии 2.5.x до версии 2.6.0 с помощью Docker Compose.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">Что нового в версии 2.6.0<button data-href="#Whats-new-in-v260" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Обновление с Milvus 2.5.x до 2.6.0 связано со значительными архитектурными изменениями:</p>
+<ul>
+<li><strong>Объединение координаторов</strong>: Устаревшие отдельные координаторы (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) были объединены в один. <code translate="no">mixCoord</code></li>
+<li><strong>Новые компоненты</strong>: Внедрение потокового узла для улучшенной обработки данных</li>
+<li><strong>Удаление компонентов</strong>: <code translate="no">indexNode</code> удален и консолидирован.</li>
+</ul>
+<p>Этот процесс обновления обеспечивает правильную миграцию на новую архитектуру. Более подробную информацию об изменениях в архитектуре см. в разделе <a href="/docs/ru/architecture_overview.md">Обзор архитектуры Milvus</a>.</p>
+<h3 id="Requirements" class="common-anchor-header">Требования<button data-href="#Requirements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>Системные требования:</strong></p>
+<ul>
+<li>Установлены Docker и Docker Compose</li>
+<li>автономная система Milvus, развернутая с помощью Docker Compose</li>
+</ul>
+<p><strong>Требования к совместимости:</strong></p>
+<ul>
+<li>Milvus v2.6.0-rc1 <strong>не совместим</strong> с v2.6.0. Прямое обновление с релиз-кандидатов не поддерживается.</li>
+<li>Если вы используете v2.6.0-rc1 и хотите сохранить свои данные, обратитесь к <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">этому руководству сообщества</a> за помощью в миграции.</li>
+<li>Перед переходом на v2.6.0 <strong>необходимо</strong> обновить версию до v2.5.16 или более поздней.</li>
+</ul>
 <div class="alter note">
-<p>По соображениям безопасности Milvus обновляет свой MinIO до RELEASE.2023-03-20T20-16-18Z с выходом v2.2.5. Перед любым обновлением с предыдущих выпусков Milvus Standalone, установленных с помощью Docker Compose, необходимо создать развертывание MinIO с одним узлом и одним диском и перенести существующие настройки и содержимое MinIO в новое развертывание. Подробности см. в <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">этом руководстве</a>.</p>
+<p>По соображениям безопасности Milvus обновляет MinIO до RELEASE.2024-12-18T13-15-44Z с выходом v2.6.0. Перед любым обновлением с предыдущих выпусков Milvus Standalone, установленных с помощью Docker Compose, необходимо создать развертывание MinIO с одним узлом и одним диском и перенести существующие настройки и содержимое MinIO в новое развертывание. Подробности см. в <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">этом руководстве</a>.</p>
 </div>
-<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Обновление Milvus путем изменения его образа<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">Процесс обновления<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,20 +105,74 @@ title: Обновление автономного Milvus с помощью Dock
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В обычных случаях вы можете обновить Milvus следующим образом:</p>
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">Шаг 1: Обновление до версии 2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="alert note">
+<p>Пропустите этот шаг, если ваше автономное развертывание уже работает с версией v2.5.16 или выше.</p>
+</div>
 <ol>
-<li><p>Измените тег образа Milvus в <code translate="no">docker-compose.yaml</code>.</p>
+<li><p>Отредактируйте существующий файл <code translate="no">docker-compose.yaml</code> и обновите тег образа Milvus до версии 2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">standalone:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
+<span class="hljs-string">...</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Примените обновление до v2.5.16:</p>
+<pre><code translate="no" class="language-bash">docker compose down
+docker compose up -d
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Проверьте обновление до v2.5.16:</p>
+<pre><code translate="no" class="language-bash">docker compose ps
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<h3 id="Step-2-Upgrade-to-v260" class="common-anchor-header">Шаг 2: Обновление до v2.6.0<button data-href="#Step-2-Upgrade-to-v260" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После успешной работы v2.5.16 обновитесь до v2.6.0:</p>
+<ol>
+<li><p>Отредактируйте существующий файл <code translate="no">docker-compose.yaml</code> и обновите теги изображений Milvus и MinIO:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">minio/minio:RELEASE.2024-12-18T13-15-44Z</span>
+
+<span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Для выполнения обновления выполните следующие команды.</p>
-<pre><code translate="no" class="language-shell">docker compose down
+<li><p>Примените финальное обновление:</p>
+<pre><code translate="no" class="language-bash">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">Перенос метаданных<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">Проверка обновления<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,40 +187,13 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ol>
-<li><p>Остановите все компоненты Milvus.</p>
-<pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Подготовьте конфигурационный файл <code translate="no">migration.yaml</code> для миграции метаданных.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
-<span class="hljs-attr">cmd:</span>
-  <span class="hljs-comment"># Option: run/backup/rollback</span>
-  <span class="hljs-attr">type:</span> <span class="hljs-string">run</span>
-  <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
-<span class="hljs-attr">config:</span>
-  <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.0</span>
-  <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
-<span class="hljs-attr">metastore:</span>
-  <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
-<span class="hljs-attr">etcd:</span>
-  <span class="hljs-attr">endpoints:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">milvus-etcd:2379</span>  <span class="hljs-comment"># Use the etcd container name</span>
-  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">by-dev</span> <span class="hljs-comment"># The root path where data is stored in etcd</span>
-  <span class="hljs-attr">metaSubPath:</span> <span class="hljs-string">meta</span>
-  <span class="hljs-attr">kvSubPath:</span> <span class="hljs-string">kv</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Запустите контейнер миграции.</p>
-<pre><code translate="no"><span class="hljs-comment"># Suppose your docker-compose run with the default milvus network,</span>
-<span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
-docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Снова запустите компоненты Milvus с новым образом Milvus.</p>
-<pre><code translate="no" class="language-shell">// Run the following only after update the milvus image tag in the docker-compose.yaml
-docker compose down
-docker compose up -d
-<button class="copy-code-btn"></button></code></pre></li>
-</ol>
+    </button></h2><p>Убедитесь, что ваше автономное развертывание работает с новой версией:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check container status</span>
+docker compose ps
+
+<span class="hljs-comment"># Check Milvus version</span>
+docker compose logs standalone | grep <span class="hljs-string">&quot;version&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

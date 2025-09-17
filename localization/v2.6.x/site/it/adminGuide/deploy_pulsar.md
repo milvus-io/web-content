@@ -36,14 +36,44 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1. Configurare Pulsar</h3><p>Per configurare Pulsar con Docker Compose, fornire i valori della sezione <code translate="no">pulsar</code> nel file <code translate="no">milvus.yaml</code> nel percorso milvus/configs.</p>
+    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1. Configurare Pulsar<button data-href="#1-Configure-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per configurare Pulsar con Docker Compose, fornire i valori della sezione <code translate="no">pulsar</code> nel file <code translate="no">milvus.yaml</code> nel percorso milvus/configs.</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Per ulteriori informazioni, vedere le <a href="/docs/it/configure_pulsar.md">configurazioni relative a Pulsar</a>.</p>
-<h3 id="2-Run-Milvus" class="common-anchor-header">2. Eseguire Milvus</h3><p>Eseguire il seguente comando per avviare Milvus che utilizza le configurazioni di Pulsar.</p>
+<h3 id="2-Run-Milvus" class="common-anchor-header">2. Eseguire Milvus<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Eseguire il seguente comando per avviare Milvus che utilizza le configurazioni di Pulsar.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Le configurazioni diventano effettive solo dopo l'avvio di Milvus. Per ulteriori informazioni, vedere <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Avvio di Milvus</a>.</div>
@@ -64,7 +94,22 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
       </svg>
     </button></h2><p>Per i cluster Milvus su K8, è possibile configurare Pulsar con lo stesso comando di avvio di Milvus. In alternativa, è possibile configurare Pulsar utilizzando il file <code translate="no">values.yml</code> nel percorso /charts/milvus nel repository <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> prima di avviare Milvus.</p>
 <p>Per i dettagli su come configurare Milvus usando Helm, fare riferimento a <a href="/docs/it/configure-helm.md">Configurare Milvus con i grafici Helm</a>. Per i dettagli sulle voci di configurazione relative a Pulsar, consultare <a href="/docs/it/configure_pulsar.md">Configurazioni relative a Pulsar</a>. |</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">Uso del file YAML</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">Uso del file YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Configurare la sezione <code translate="no">externalConfigFiles</code> nel file <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -79,6 +124,83 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>Dopo aver configurato le sezioni precedenti e salvato il file <code translate="no">values.yaml</code>, eseguire il seguente comando per installare Milvus che utilizza le configurazioni di Pulsar.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">Configurare Woodpecker con Helm<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Per i cluster Milvus su K8, è possibile configurare Woodpecker con lo stesso comando che avvia Milvus. In alternativa, è possibile configurare Woodpecker utilizzando il file <code translate="no">values.yml</code> nel percorso /charts/milvus nel repository <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> prima di avviare Milvus.</p>
+<p>Per i dettagli su come configurare Milvus usando Helm, consultare <a href="/docs/it/configure-helm.md">Configurazione di Milvus con i grafici Helm</a>. Per i dettagli sulle voci di configurazione relative a Woodpecker, fare riferimento a <a href="/docs/it/use-woodpecker.md">Configurazioni relative a Woodpecker</a>. |</p>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">Uso del file YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
+<li>Configurare la sezione <code translate="no">externalConfigFiles</code> nel file <code translate="no">values.yaml</code>.</li>
+</ol>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    woodpecker:
+      meta:
+        type: etcd # The Type of the metadata provider. currently only support etcd.
+        prefix: woodpecker # The Prefix of the metadata provider. default is woodpecker.
+      client:
+        segmentAppend:
+          queueSize: 10000 # The size of the queue for pending messages to be sent of each log.
+          maxRetries: 3 # Maximum number of retries for segment append operations.
+        segmentRollingPolicy:
+          maxSize: 256M # Maximum size of a segment.
+          maxInterval: 10m # Maximum interval between two segments, default is 10 minutes.
+          maxBlocks: 1000 # Maximum number of blocks in a segment
+        auditor:
+          maxInterval: 10s # Maximum interval between two auditing operations, default is 10 seconds.
+      logstore:
+        segmentSyncPolicy:
+          maxInterval: 200ms # Maximum interval between two sync operations, default is 200 milliseconds.
+          maxIntervalForLocalStorage: 10ms # Maximum interval between two sync operations local storage backend, default is 10 milliseconds.
+          maxBytes: 256M # Maximum size of write buffer in bytes.
+          maxEntries: 10000 # Maximum entries number of write buffer.
+          maxFlushRetries: 5 # Maximum size of write buffer in bytes.
+          retryInterval: 1000ms # Maximum interval between two retries. default is 1000 milliseconds.
+          maxFlushSize: 2M # Maximum size of a fragment in bytes to flush.
+          maxFlushThreads: 32 # Maximum number of threads to flush data
+        segmentCompactionPolicy:
+          maxSize: 2M # The maximum size of the merged files.
+          maxParallelUploads: 4 # The maximum number of parallel upload threads for compaction.
+          maxParallelReads: 8 # The maximum number of parallel read threads for compaction.
+        segmentReadPolicy:
+          maxBatchSize: 16M # Maximum size of a batch in bytes.
+          maxFetchThreads: 32 # Maximum number of threads to fetch data.
+      storage:
+        type: minio # The Type of the storage provider. Valid values: [minio, local]
+        rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
+</span><button class="copy-code-btn"></button></code></pre>
+<ol start="2">
+<li>Dopo aver configurato le sezioni precedenti e salvato il file <code translate="no">values.yaml</code>, eseguire il seguente comando per installare Milvus che utilizza le configurazioni di Woodpecker.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -99,7 +221,22 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
       </svg>
     </button></h2><p>Per i cluster Milvus su K8s, è possibile configurare Kafka con lo stesso comando che avvia Milvus. In alternativa, è possibile configurare Kafka utilizzando il file <code translate="no">values.yml</code> nel percorso /charts/milvus nel repository <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> prima di avviare Milvus.</p>
 <p>Per i dettagli su come configurare Milvus usando Helm, fare riferimento a <a href="/docs/it/configure-helm.md">Configurare Milvus con i grafici Helm</a>. Per i dettagli sulle voci di configurazione relative a Pulsar, fare riferimento a <a href="/docs/it/configure_pulsar.md">Configurazioni relative a Pulsar</a>.</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">Uso del file YAML</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">Uso del file YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Configurare la sezione <code translate="no">externalConfigFiles</code> nel file <code translate="no">values.yaml</code> se si desidera utilizzare Kafka come sistema di archiviazione dei messaggi.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -236,5 +373,5 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
     </button></h2><p>Scoprite come configurare le altre dipendenze di Milvus con Docker Compose o Helm:</p>
 <ul>
 <li><a href="/docs/it/deploy_s3.md">Configurazione dell'archiviazione degli oggetti con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/deploy_etcd.md">Configurazione del Meta Storage con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/deploy_etcd.md">Configurare il Meta Storage con Docker Compose o Helm</a></li>
 </ul>

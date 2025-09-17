@@ -193,21 +193,81 @@ helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=4.1.24
         ></path>
       </svg>
     </button></h2><p>自 Milvus 2.2.0 起，元数据与之前版本的元数据不兼容。以下示例片段假定从 Milvus 2.1.4 升级到 Milvus 2.2.0。</p>
-<h3 id="1-Check-the-Milvus-version" class="common-anchor-header">1.检查 Milvus 版本</h3><p>运行<code translate="no">$ helm list</code> 检查 Milvus 应用程序版本。您可以看到<code translate="no">APP VERSION</code> 是 2.1.4。</p>
+<h3 id="1-Check-the-Milvus-version" class="common-anchor-header">1.检查 Milvus 版本<button data-href="#1-Check-the-Milvus-version" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>运行<code translate="no">$ helm list</code> 检查 Milvus 应用程序版本。您可以看到<code translate="no">APP VERSION</code> 是 2.1.4。</p>
 <pre><code translate="no">NAME                NAMESPACE   REVISION    UPDATED                                 STATUS      CHART           APP VERSION     
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span>          <span class="hljs-keyword">default</span>     <span class="hljs-number">1</span>           <span class="hljs-number">2022</span><span class="hljs-number">-11</span><span class="hljs-number">-21</span> <span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">25.51539</span> <span class="hljs-operator">+</span><span class="hljs-number">0800</span> CST     deployed    milvus<span class="hljs-number">-3.2</span><span class="hljs-number">.18</span>   <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Check-the-running-pods" class="common-anchor-header">2.检查正在运行的 pod</h3><p>运行<code translate="no">$ kubectl get pods</code> 检查正在运行的 pod。您可以看到以下输出。</p>
+<h3 id="2-Check-the-running-pods" class="common-anchor-header">2.检查正在运行的 pod<button data-href="#2-Check-the-running-pods" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>运行<code translate="no">$ kubectl get pods</code> 检查正在运行的 pod。您可以看到以下输出。</p>
 <pre><code translate="no">NAME                                            READY   STATUS    RESTARTS   AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">84</span>s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>standalone<span class="hljs-number">-75</span>c599fffc<span class="hljs-number">-6</span>rwlj   <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">84</span>s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>minio<span class="hljs-number">-744</span>dd9586f<span class="hljs-operator">-</span>qngzv               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">84</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-image-tag" class="common-anchor-header">3.检查图像标签</h3><p>检查 pod<code translate="no">my-release-milvus-proxy-6c548f787f-scspp</code> 的图像标签。您可以看到 Milvus 集群的版本是 v2.1.4。</p>
+<h3 id="3-Check-the-image-tag" class="common-anchor-header">3.检查图像标签<button data-href="#3-Check-the-image-tag" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>检查 pod<code translate="no">my-release-milvus-proxy-6c548f787f-scspp</code> 的图像标签。您可以看到 Milvus 集群的版本是 v2.1.4。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods my-release-milvus-proxy-6c548f787f-scspp -o=jsonpath=<span class="hljs-string">&#x27;{$.spec.containers[0].image}&#x27;</span></span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">milvusdb/milvus:v2.1.4</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="4-Migrate-the-metadata" class="common-anchor-header">4.迁移元数据</h3><p>Milvus 2.2 的一个主要变化是段索引的元数据结构。因此，当 Milvus 从 v2.1.x 升级到 v2.2.0 时，你需要使用 Helm 来迁移元数据。 下面是<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一个脚本</a>，供你安全迁移元数据。</p>
+<h3 id="4-Migrate-the-metadata" class="common-anchor-header">4.迁移元数据<button data-href="#4-Migrate-the-metadata" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 2.2 的一个主要变化是段索引的元数据结构。因此，当 Milvus 从 v2.1.x 升级到 v2.2.0 时，你需要使用 Helm 来迁移元数据。 这里有<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一个脚本</a>供你安全迁移元数据。</p>
 <p>此脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
 <p>下表列出了元数据迁移的操作符。</p>
 <table>

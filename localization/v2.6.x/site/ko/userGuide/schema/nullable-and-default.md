@@ -42,7 +42,6 @@ summary: >-
 <li><p>기본 필드를 제외한 스칼라 필드만 기본값 및 null 가능 속성을 지원합니다.</p></li>
 <li><p>JSON 및 배열 필드는 기본값을 지원하지 않습니다.</p></li>
 <li><p>기본값 또는 null 가능 속성은 컬렉션 생성 중에만 구성할 수 있으며 이후에는 수정할 수 없습니다.</p></li>
-<li><p>nullable 속성이 활성화된 스칼라 필드는 그룹화 검색에서 <code translate="no">group_by_field</code> 으로 사용할 수 없습니다. 검색 그룹화에 대한 자세한 내용은 <a href="/docs/ko/grouping-search.md">검색 그룹화를</a> 참조하세요.</p></li>
 <li><p>nullable로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키에 대한 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
 <li><p>nullable 속성이 활성화된 스칼라 필드에 인덱스를 생성할 때 null 값은 인덱스에서 제외됩니다.</p></li>
 <li><p><strong>JSON 및 배열 필드</strong>: <code translate="no">IS NULL</code> 또는 <code translate="no">IS NOT NULL</code> 연산자를 사용하여 JSON 또는 ARRAY 필드를 필터링하는 경우, 이러한 연산자는 열 수준에서 작동하므로 전체 JSON 객체 또는 배열이 null인지 여부만 평가합니다. 예를 들어 JSON 객체 내부의 키가 null인 경우 <code translate="no">IS NULL</code> 필터에서는 해당 키가 인식되지 않습니다. 자세한 내용은 <a href="/docs/ko/basic-operators.md">기본 연산자를</a> 참조하세요.</p></li>
@@ -63,7 +62,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><code translate="no">nullable</code> 속성을 사용하면 컬렉션에 null 값을 저장할 수 있어 알 수 없는 데이터를 처리할 때 유연성을 제공합니다.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">null 가능 속성 설정하기</h3><p>컬렉션을 만들 때 <code translate="no">nullable=True</code> 을 사용하여 null 가능 필드를 정의합니다(기본값은 <code translate="no">False</code>). 다음 예제에서는 <code translate="no">my_collection</code> 라는 이름의 컬렉션을 만들고 <code translate="no">age</code> 필드를 nullable로 설정합니다:</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">null 가능 속성 설정하기<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션을 만들 때 <code translate="no">nullable=True</code> 을 사용하여 null 가능 필드를 정의합니다(기본값은 <code translate="no">False</code>). 다음 예제에서는 <code translate="no">my_collection</code> 라는 이름의 컬렉션을 만들고 <code translate="no">age</code> 필드를 nullable로 설정합니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -265,7 +279,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">엔티티 삽입</h3><p>null 가능 필드에 데이터를 삽입할 때는 null을 삽입하거나 이 필드를 직접 생략합니다:</p>
+<h3 id="Insert-entities" class="common-anchor-header">엔티티 삽입<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>null 가능 필드에 데이터를 삽입할 때는 null을 삽입하거나 이 필드를 직접 생략합니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -336,7 +365,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">널 값으로 검색 및 쿼리</h3><p><code translate="no">search</code> 메서드를 사용할 때 필드에 <code translate="no">null</code> 값이 포함된 경우 검색 결과는 해당 필드를 null로 반환합니다:</p>
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">널 값으로 검색 및 쿼리<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">search</code> 메서드를 사용할 때 필드에 <code translate="no">null</code> 값이 포함된 경우 검색 결과는 해당 필드를 null로 반환합니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -556,7 +600,22 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
         ></path>
       </svg>
     </button></h2><p>기본값은 스칼라 필드에 할당된 사전 설정 값입니다. 삽입 중에 기본값이 있는 필드에 값을 제공하지 않으면 시스템에서 자동으로 기본값을 사용합니다.</p>
-<h3 id="Set-default-values" class="common-anchor-header">기본값 설정</h3><p>컬렉션을 만들 때 <code translate="no">default_value</code> 매개변수를 사용하여 필드의 기본값을 정의할 수 있습니다. 다음 예는 <code translate="no">age</code> 의 기본값을 <code translate="no">18</code> 으로, <code translate="no">status</code> 을 <code translate="no">&quot;active&quot;</code> 으로 설정하는 방법을 보여줍니다:</p>
+<h3 id="Set-default-values" class="common-anchor-header">기본값 설정<button data-href="#Set-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션을 만들 때 <code translate="no">default_value</code> 매개변수를 사용하여 필드의 기본값을 정의할 수 있습니다. 다음 예는 <code translate="no">age</code> 의 기본값을 <code translate="no">18</code> 으로, <code translate="no">status</code> 을 <code translate="no">&quot;active&quot;</code> 으로 설정하는 방법을 보여줍니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
@@ -767,7 +826,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">엔티티 삽입</h3><p>데이터를 삽입할 때 기본값이 있는 필드를 생략하거나 해당 값을 null로 설정하면 시스템에서 기본값을 사용합니다:</p>
+<h3 id="Insert-entities" class="common-anchor-header">엔티티 삽입<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>데이터를 삽입할 때 기본값이 있는 필드를 생략하거나 해당 값을 null로 설정하면 시스템에서 기본값을 사용합니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -848,7 +922,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <div class="alert note">
 <p>무효화 가능 및 기본값 설정이 적용되는 방식에 대한 자세한 내용은 <a href="/docs/ko/nullable-and-default.md#Applicable-rules">적용 가능한 규칙을</a> 참조하세요.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">기본값으로 검색 및 쿼리하기</h3><p>기본값이 포함된 엔티티는 벡터 검색 및 스칼라 필터링 중에 다른 엔티티와 동일하게 취급됩니다. <code translate="no">search</code> 및 <code translate="no">query</code> 작업의 일부로 기본값을 포함할 수 있습니다.</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">기본값으로 검색 및 쿼리하기<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>기본값이 포함된 엔티티는 벡터 검색 및 스칼라 필터링 중에 다른 엔티티와 동일하게 취급됩니다. <code translate="no">search</code> 및 <code translate="no">query</code> 작업의 일부로 기본값을 포함할 수 있습니다.</p>
 <p>예를 들어 <code translate="no">search</code> 작업에서 <code translate="no">age</code> 이 기본값 <code translate="no">18</code> 으로 설정된 엔티티는 결과에 포함됩니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -1107,6 +1196,6 @@ curl --request POST \
      <td><p>Null</p></td>
      <td><p>없음/무효</p></td>
      <td><p>오류를 던짐</p></td>
-     <td><p>필드입니다: <code translate="no">username</code> 기본값: null</p><p>사용자 입력: null</p><p>결과: 작업 거부, 시스템에서 오류 발생</p></td>
+     <td><p>필드: <code translate="no">username</code> 기본값: null</p><p>사용자 입력: null</p><p>결과: 작업 거부, 시스템에서 오류 발생</p></td>
    </tr>
 </table>

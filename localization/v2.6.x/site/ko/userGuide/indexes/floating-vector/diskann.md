@@ -42,7 +42,22 @@ summary: >-
 <li><p><strong>바마나 그래프</strong> - 검색 중 효율적인 탐색을 위해 데이터 포인트(또는 벡터)를 연결하는 <strong>디스크 기반의</strong> <strong>그래프 기반</strong> 인덱스입니다.</p></li>
 <li><p><strong>제품 양자화(PQ)</strong> - 벡터의 크기를 줄여 벡터 간의 대략적인 거리를 빠르게 계산할 수 있게 해주는 <strong>인메모리</strong> 압축 방식입니다.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">색인 구성</h3><h4 id="Vamana-graph" class="common-anchor-header">바마나 그래프</h4><p>Vamana 그래프는 디스크앤의 디스크 기반 전략의 핵심입니다. 구성 중이나 구성 후에 메모리에 완전히 상주할 필요가 없기 때문에 매우 큰 데이터 세트를 처리할 수 있습니다.</p>
+<h3 id="Index-construction" class="common-anchor-header">색인 구성<button data-href="#Index-construction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">바마나 그래프</h4><p>Vamana 그래프는 디스크앤의 디스크 기반 전략의 핵심입니다. 구성 중이나 구성 후에 메모리에 완전히 상주할 필요가 없기 때문에 매우 큰 데이터 세트를 처리할 수 있습니다.</p>
 <p>다음 그림은 Vamana 그래프가 어떻게 구성되는지 보여줍니다.</p>
 <p>
   
@@ -69,7 +84,22 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> 는 사용자가 정의한 비율로, 전체 데이터 크기 중 PQ 코드용으로 예약된 비율을 나타냅니다. 이 매개변수를 사용하면 검색 정확도와 메모리 리소스 간의 균형을 맞출 수 있습니다. 매개변수 조정에 대한 자세한 내용은 <a href="/docs/ko/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN 구성을</a> 참조하세요.</p></li>
 </ul>
 <p>기본 PQ 방법에 대한 기술적 세부 사항은 <a href="/docs/ko/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ를</a> 참조하세요.</p>
-<h3 id="Search-process" class="common-anchor-header">검색 프로세스</h3><p>인덱스(디스크의 Vamana 그래프와 메모리의 PQ 코드)가 구축되면 DISKANN은 다음과 같이 ANN 검색을 수행합니다:</p>
+<h3 id="Search-process" class="common-anchor-header">검색 프로세스<button data-href="#Search-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>인덱스(디스크의 Vamana 그래프와 메모리의 PQ 코드)가 구축되면 DISKANN은 다음과 같이 ANN 검색을 수행합니다:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
@@ -145,7 +175,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN 관련 매개변수는 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해 구성할 수 있습니다:</p>
+    </button></h2><p>DISKANN 관련 매개변수는 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해서만 구성할 수 있습니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -156,7 +186,7 @@ summary: >-
     <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>매개변수 설명에 대한 자세한 내용은 <a href="/docs/ko/diskann.md#DISKANN-params">DISKANN</a> 매개변수를 참조하세요.</p>
-<h2 id="DISKANN-params" class="common-anchor-header">DISKANN 파라미터<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
+<h2 id="DISKANN-params" class="common-anchor-header">DISKANN 매개변수<button data-href="#DISKANN-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,7 +202,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>DISKANN의 매개변수를 미세 조정하면 특정 데이터 세트와 검색 워크로드에 맞게 동작을 조정하여 속도, 정확도, 메모리 사용량 간에 적절한 균형을 맞출 수 있습니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">색인 구축 매개변수</h3><p>이러한 매개변수는 DISKANN 인덱스가 구성되는 방식에 영향을 줍니다. 이 매개변수를 조정하면 인덱스 크기, 구축 시간, 검색 품질에 영향을 줄 수 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">색인 구축 매개변수<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이러한 매개변수는 DISKANN 인덱스가 구성되는 방식에 영향을 줍니다. 이 매개변수를 조정하면 인덱스 크기, 구축 시간, 검색 품질에 영향을 미칠 수 있습니다.</p>
+<div class="alert note">
+<p>아래 목록에 있는 모든 인덱스 구축 매개변수는 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해서만 구성할 수 있습니다.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -216,14 +264,33 @@ summary: >-
 <p>대부분의 경우 다음 범위 내에서 값을 설정하는 것이 좋습니다: [0.0625, 0.25].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">색인별 검색 매개변수</h3><p>이러한 매개변수는 DISKANN이 검색을 수행하는 방식에 영향을 줍니다. 이 매개변수를 조정하면 검색 속도, 지연 시간 및 리소스 사용량에 영향을 줄 수 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">색인별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이러한 매개변수는 DISKANN이 검색을 수행하는 방식에 영향을 줍니다. 이를 조정하면 검색 속도, 지연 시간 및 리소스 사용량에 영향을 줄 수 있습니다.</p>
+<div class="alert note">
+<p>아래 목록의 <code translate="no">BeamWidthRatio</code> 은 Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 통해서만 구성할 수 있습니다.</p>
+<p>아래 목록의 <code translate="no">search_list</code> 은 SDK의 검색 매개변수에서만 구성할 수 있습니다.</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>파라미터</p></th>
      <th><p>설명</p></th>
      <th><p>값 범위</p></th>
-     <th><p>조정 제안</p></th>
+     <th><p>튜닝 제안</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
@@ -235,7 +302,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>검색 작업 중에 이 매개변수는 알고리즘이 그래프를 탐색할 때 유지하는 후보 풀의 크기를 결정합니다. 값이 클수록 실제 가장 가까운 이웃을 찾을 확률이 높아지지만(리콜률이 높아짐) 검색 지연 시간도 증가합니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">100</code></p></td>

@@ -40,7 +40,22 @@ summary: >-
 <li><p><strong>Vamana Graph</strong>-<strong>ディスクベースの</strong> <strong>グラフベースの</strong>インデックスで、検索時に効率的なナビゲーションを行うためにデータポイント（またはベクトル）を連結します。</p></li>
 <li><p><strong>積量子化（PQ）</strong>- ベクトルのサイズを縮小し、ベクトル間の近似距離計算を迅速に行うための<strong>メモリ内</strong>圧縮手法。</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">インデックス構築</h3><h4 id="Vamana-graph" class="common-anchor-header">バマナグラフ</h4><p>VamanaグラフはDISKANNのディスクベース戦略の中心です。構築中も構築後も完全にメモリに常駐する必要がないため、非常に大きなデータセットを扱うことができます。</p>
+<h3 id="Index-construction" class="common-anchor-header">インデックス構築<button data-href="#Index-construction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">バマナグラフ</h4><p>VamanaグラフはDISKANNのディスクベース戦略の中心です。構築中も構築後も完全にメモリに常駐する必要がないため、非常に大きなデータセットを扱うことができます。</p>
 <p>次の図は、Vamanaグラフの構築方法を示しています。</p>
 <p>
   
@@ -67,7 +82,22 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> はユーザー定義の比率で、PQコード用に予約された総データ・サイズの割合を表します。このパラメータは、検索精度とメモリリソースのトレードオフを可能にします。パラメータチューニングの詳細については、<a href="/docs/ja/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a> を参照。</p></li>
 </ul>
 <p>基礎となるPQメソッドの技術的な詳細については、<a href="/docs/ja/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQを</a>参照してください。</p>
-<h3 id="Search-process" class="common-anchor-header">検索プロセス</h3><p>インデックス（ディスク上のVamanaグラフとメモリ上のPQコード）が構築されると、DISKANNは以下のようにANN検索を実行する：</p>
+<h3 id="Search-process" class="common-anchor-header">検索プロセス<button data-href="#Search-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>インデックス（ディスク上のVamanaグラフとメモリ上のPQコード）が構築されると、DISKANNは以下のようにANN検索を実行する：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
@@ -78,7 +108,7 @@ summary: >-
 <li><p><strong>正確な距離計算のためのノードの選択：</strong>近似結果から、最も有望な近隣ノードのサブセット（図中の緑色の丸）が、圧縮されていない元のベクトルを使用して正確な距離評価のために選択されます。これにはディスクからデータを読み込む必要があり、時間がかかります。DISKANNはこの精度とスピードの微妙なバランスをコントロールするために2つのパラメータを使用します：</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>:探索の幅を制御する比率で、近傍探索のためにいくつの近傍候補が並列に選択されるかを決定する。<code translate="no">beam_width_ratio</code> を大きくすると探索範囲が広くなり、精度が向上する可能性がありますが、計算コストとディスクI/Oが増加します。ビーム幅、つまり選択されるノードの数は、以下の式で決定されます：<code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
-<li><p><code translate="no">search_cache_budget_gb_ratio</code>:頻繁にアクセスされるディスクデータをキャッシュするために割り当てられるメモリの割合。このキャッシングはディスクI/Oを最小化するのに役立ち、データがすでにメモリ内にあるため、繰り返しの検索がより速くなります。</p></li>
+<li><p><code translate="no">search_cache_budget_gb_ratio</code>:頻繁にアクセスされるディスクデータをキャッシュするために割り当てられるメモリの割合。このキャッシングはディスクI/Oを最小化するのに役立ち、データがすでにメモリ内にあるため、繰り返しの検索が速くなります。</p></li>
 </ul>
 <p>パラメータチューニングの詳細については、<a href="/docs/ja/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configsを</a>参照してください。</p></li>
 <li><p><strong>反復探索：</strong>十分な数の近傍が見つかるまで、近似評価（PQを使用）と正確なチェック（ディスクから元のベクトルを使用）を繰り返しながら、候補の集合を繰り返し改良します。</p></li>
@@ -98,7 +128,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>デフォルトでは、Milvusの<strong>DISKANNは</strong>無効になっています。これは、RAMに快適に収まるデータセットのためのインメモリインデックスの速度を優先するためです。しかし、大規模なデータセットを扱う場合や、<strong>DISKANNの</strong>スケーラビリティとSSD最適化を利用したい場合は、簡単に有効にすることができます。</p>
+    </button></h2><p>デフォルトでは、Milvusの<strong>DISKANNは</strong>無効になっており、RAMに快適に収まるデータセットのために、インメモリインデックスの速度を優先しています。しかし、大規模なデータセットを扱う場合や、<strong>DISKANNの</strong>スケーラビリティとSSD最適化を利用したい場合は、簡単に有効にすることができます。</p>
 <p>MilvusでDISKANNを有効にする方法は以下の通りです：</p>
 <ol>
 <li><p><strong>Milvus設定ファイルの更新</strong></p>
@@ -143,7 +173,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN関連のパラメータは、Milvusの設定ファイル(<code translate="no">milvus.yaml</code>)から設定することができます：</p>
+    </button></h2><p>DISKANN関連のパラメータは、Milvusの設定ファイル(<code translate="no">milvus.yaml</code>)でのみ設定することができます：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -169,15 +199,33 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN のパラメータを微調整することで、特定のデータセットや検索ワークロードに合わせて DISKANN の動作を調整し、速度、精度、メモリ使用量の適切なバランスをとることができます。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>これらのパラメータは、DISKANNインデックスがどのように構築されるかに影響します。これらのパラメータを調整することで、インデックスサイズ、構築時間、検索品質に影響を与えることができます。</p>
+    </button></h2><p>DISKANN のパラメータを微調整することで、特定のデータセットや検索ワークロードに合わせて、速度、精度、メモリ使用量の適切なバランスをとりながら、DISKANN の動作を調整することができます。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>これらのパラメータは、DISKANNインデックスがどのように構築されるかに影響します。これらを調整することで、インデックスのサイズ、構築時間、検索品質に影響を与えることができます。</p>
+<div class="alert note">
+<p>以下のリストにある全てのインデックス構築パラメータは、Milvus設定ファイル(<code translate="no">milvus.yaml</code>)によってのみ設定することができます。</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>パラメータ</p></th>
      <th><p>説明</p></th>
      <th><p>値の範囲</p></th>
-     <th><p>チューニングの提案</p></th>
+     <th><p>チューニングサジェスチョン</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
@@ -214,14 +262,33 @@ summary: >-
 <p>ほとんどの場合、この範囲内の値を設定することを推奨する: (0.0625, 0.25])</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>これらのパラメータはDISKANNがどのように検索を行うかに影響します。これらを調整することで、検索速度、待ち時間、リソースの使用量に影響を与えることができます。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>これらのパラメータはDISKANNがどのように検索を行うかに影響します。これらのパラメータを調整することで、検索速度、待ち時間、リソースの使用量に影響を与えることができます。</p>
+<div class="alert note">
+<p>以下のリストの<code translate="no">BeamWidthRatio</code> は、Milvus設定ファイル(<code translate="no">milvus.yaml</code>)によってのみ設定可能です。</p>
+<p>下記リストの<code translate="no">search_list</code> はSDKの検索パラメータでのみ設定可能です。</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>パラメータ</p></th>
      <th><p>説明</p></th>
      <th><p>値の範囲</p></th>
-     <th><p>チューニングの提案</p></th>
+     <th><p>チューニング案</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
@@ -233,8 +300,8 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
-     <td><p>検索操作中、このパラメータは、アルゴリズムがグラフをトラバースする際に維持する候補プールのサイズを決定します。値を大きくすると、真の最近傍を見つける可能性が高くなりますが（より高いリコール）、検索の待ち時間も長くなります。</p></td>
+     <td><p><code translate="no">search_list</code></p></td>
+     <td><p>検索操作中、このパラメータは、アルゴリズムがグラフを横断する際に維持する候補プールのサイズを決定します。値を大きくすると、真の最近傍を見つける可能性が高くなりますが（より高いリコール）、検索の待ち時間も長くなります。</p></td>
      <td><p><strong>タイプ</strong>整数<strong>：</strong>[1,<em>int_max］</em></p>
 <p><strong>デフォルト値</strong>：<code translate="no">100</code></p></td>
      <td><p>パフォーマンスと精度のバランスをとるために、この値は検索したい結果の数(top_k)と等しいか、少し大きく設定することを推奨する。</p></td>

@@ -55,7 +55,7 @@ title: Exécuter Milvus avec Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fournit un fichier de configuration Docker Compose dans le référentiel Milvus. Pour installer Milvus à l'aide de Docker Compose, il suffit d'exécuter la commande suivante</p>
+    </button></h2><p>Milvus fournit un fichier de configuration Docker Compose dans le référentiel Milvus. Pour installer Milvus à l'aide de Docker Compose, il suffit d'exécuter</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
@@ -67,9 +67,16 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>Nouveautés de la version 2.6.0 :</strong></p>
+<ul>
+<li><strong>Architecture améliorée</strong>: Comprend le nouveau nœud de streaming et des composants optimisés.</li>
+<li><strong>Dépendances mises à jour</strong>: Inclut les dernières versions de MinIO et etcd</li>
+<li><strong>Configuration améliorée</strong>: Paramètres optimisés pour de meilleures performances</li>
+</ul>
+<p>Téléchargez toujours la dernière configuration de Docker Compose pour garantir la compatibilité avec les fonctionnalités de la version 2.6.0.</p>
 <ul>
 <li><p>Si vous n'avez pas réussi à exécuter la commande ci-dessus, veuillez vérifier si Docker Compose V1 est installé sur votre système. Si c'est le cas, il est conseillé de migrer vers Docker Compose V2 en raison des notes sur <a href="https://docs.docker.com/compose/">cette page</a>.</p></li>
-<li><p>Si vous rencontrez des problèmes en tirant l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en détaillant le problème, et nous vous fournirons l'assistance nécessaire.</p></li>
+<li><p>Si vous rencontrez des problèmes lors de l'extraction de l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en détaillant le problème, et nous vous fournirons l'assistance nécessaire.</p></li>
 </ul>
 </div>
 <p>Après le démarrage de Milvus,</p>
@@ -107,24 +114,20 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Pour mettre à jour la configuration de Milvus en fonction de vos besoins, vous devez modifier le fichier <code translate="no">/milvus/configs/user.yaml</code> dans le conteneur <code translate="no">milvus-standalone</code>.</p>
 <ol>
-<li>Accéder au conteneur <code translate="no">milvus-standalone</code>.</li>
-</ol>
+<li><p>Accéder au conteneur <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Ajouter des configurations supplémentaires pour remplacer les configurations par défaut. Ce qui suit suppose que vous devez remplacer le fichier par défaut <code translate="no">proxy.healthCheckTimeout</code>. Pour connaître les éléments de configuration applicables, reportez-vous à la section <a href="/docs/fr/system_configuration.md">Configuration du système</a>.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Ajouter des configurations supplémentaires pour remplacer les configurations par défaut. Ce qui suit suppose que vous devez remplacer le fichier par défaut <code translate="no">proxy.healthCheckTimeout</code>. Pour connaître les éléments de configuration applicables, reportez-vous à la section <a href="/docs/fr/system_configuration.md">Configuration du système</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Redémarrer le conteneur <code translate="no">milvus-standalone</code> pour appliquer les modifications.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Redémarrer le conteneur <code translate="no">milvus-standalone</code> pour appliquer les modifications.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
-<button class="copy-code-btn"></button></code></pre>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Arrêt et suppression de Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

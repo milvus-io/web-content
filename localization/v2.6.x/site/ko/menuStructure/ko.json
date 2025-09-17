@@ -92,21 +92,27 @@
                 "children": []
               },
               {
+                "label": "RPM/DEB",
+                "id": "install_standalone-binary.md",
+                "order": 1,
+                "children": []
+              },
+              {
                 "label": "Docker(Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Compose(Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "Docker 데스크톱(Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               }
             ]
@@ -195,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus 서버에 연결",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -420,9 +432,28 @@
           },
           {
             "label": "JSON 필드",
-            "id": "use-json-fields.md",
+            "id": "json-field",
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "JSON 필드 개요",
+                "id": "json-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "JSON 인덱싱",
+                "id": "json-indexing.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "JSON 파쇄",
+                "id": "json-shredding.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
             "label": "배열 필드",
@@ -512,6 +543,12 @@
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
+                  },
+                  {
+                    "label": "언어 식별자",
+                    "id": "language-identifier.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               },
@@ -592,6 +629,12 @@
                 "label": "다국어 분석기",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "사용 사례에 적합한 분석기 선택하기",
+                "id": "choose-the-right-analyzer-for-your-use-case.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -777,6 +820,12 @@
                 "label": "인버티드",
                 "id": "inverted.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -1036,10 +1085,16 @@
                 "children": []
               },
               {
+                "label": "부스트 랭커",
+                "id": "boost-ranker.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "부패 랭커",
                 "id": "decay-ranker",
                 "isMenu": true,
-                "order": 2,
+                "order": 3,
                 "children": [
                   {
                     "label": "디케이 랭커 개요",
@@ -1076,7 +1131,7 @@
               {
                 "label": "모델 랭커",
                 "id": "model-ranker",
-                "order": 3,
+                "order": 4,
                 "isMenu": true,
                 "children": [
                   {
@@ -1095,6 +1150,24 @@
                     "label": "TEI 랭커",
                     "id": "tei-ranker.md",
                     "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "코히어 랭커",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Voyage AI 랭커",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "실리콘플로우 랭커",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
                     "children": []
                   }
                 ]
@@ -1625,6 +1698,12 @@
         "label": "Milvus WebUI",
         "id": "milvus-webui.md",
         "order": "12",
+        "children": []
+      },
+      {
+        "label": "딱따구리",
+        "id": "use-woodpecker.md",
+        "order": 13,
         "children": []
       }
     ]

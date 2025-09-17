@@ -30,7 +30,7 @@ title: 성능 FAQ
 <p>따라서 일반적으로 인덱스를 구축하지 않았기 때문에 작은 데이터 세트(컬렉션)에 대한 쿼리 시간이 더 오래 걸립니다. 이는 세그먼트의 크기가 <code translate="no">rootCoord.minSegmentSizeToEnableindex</code> 에서 설정한 인덱스 구축 임계값에 도달하지 않았기 때문입니다. <code translate="no">create_index()</code> 을 호출하여 임계값에 도달했지만 아직 자동으로 색인되지 않은 세그먼트를 강제로 색인하면 쿼리 성능이 크게 향상됩니다.</p>
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">CPU 사용량에 영향을 미치는 요인은 무엇인가요?</h4><p>Milvus가 인덱스를 구축하거나 쿼리를 실행할 때 CPU 사용량이 증가합니다. 일반적으로 인덱스 구축은 단일 스레드에서 실행되는 Annoy를 사용하는 경우를 제외하고는 CPU 집약적입니다.</p>
 <p>쿼리를 실행할 때 CPU 사용량은 <code translate="no">nq</code> 와 <code translate="no">nprobe</code> 에 의해 영향을 받습니다. <code translate="no">nq</code> 과 <code translate="no">nprobe</code> 이 작으면 동시성이 낮고 CPU 사용량이 낮게 유지됩니다.</p>
-<h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">데이터 삽입과 검색을 동시에 수행하면 쿼리 성능에 영향을 주나요?</h4><p>삽입 작업은 CPU를 많이 사용하지 않습니다. 그러나 새 세그먼트가 인덱스 구축 임계값에 도달하지 않았을 수 있기 때문에 Milvus는 무차별 대입 검색을 사용하므로 쿼리 성능에 상당한 영향을 미칩니다.</p>
+<h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">데이터 삽입과 검색을 동시에 수행하면 쿼리 성능에 영향을 주나요?</h4><p>삽입 작업은 CPU를 많이 사용하지 않습니다. 그러나 새로운 세그먼트가 인덱스 구축 임계값에 도달하지 않았을 수 있기 때문에 Milvus는 무차별 대입 검색을 사용하므로 쿼리 성능에 상당한 영향을 미칩니다.</p>
 <p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 매개변수는 세그먼트의 인덱스 구축 임계값을 결정하며, 기본적으로 1024행으로 설정되어 있습니다. 자세한 내용은 <a href="/docs/ko/system_configuration.md">시스템 구성을</a> 참조하세요.</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">VARCHAR 필드를 색인하면 삭제 속도가 향상될 수 있나요?</h4><p>예. VARCHAR 필드를 인덱싱하면 '표현식 기준 삭제' 작업 속도를 높일 수 있지만 특정 조건에서만 가능합니다:</p>
 <ul>
@@ -45,5 +45,5 @@ title: 성능 FAQ
 <h4 id="Still-have-questions" class="common-anchor-header">아직 질문이 있으신가요?</h4><p>그럴 수 있습니다:</p>
 <ul>
 <li>GitHub에서 <a href="https://github.com/milvus-io/milvus/issues">Milvus를</a> 확인하세요. 자유롭게 질문하고, 아이디어를 공유하고, 다른 사람들을 도와주세요.</li>
-<li><a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 채널에</a> 가입하여 지원을 찾고 오픈 소스 커뮤니티에 참여하세요.</li>
+<li><a href="https://discord.com/invite/8uyFbECzPX">Discord 채널에</a> 가입하여 지원을 받고 오픈 소스 커뮤니티에 참여하세요.</li>
 </ul>

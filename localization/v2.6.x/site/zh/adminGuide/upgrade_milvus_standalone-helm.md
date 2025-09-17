@@ -5,10 +5,10 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: 了解如何使用 Helm Chart 升级 Milvus Standalone 单机版。
-title: 使用 Helm 图表升级 Milvus 单机版
+title: 使用 Helm Chart 升级 Milvus 单机版
 ---
 <div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/zh/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">使用 Helm 图表升级 Milvus 单机版<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">使用 Helm Chart 升级 Milvus 单机版<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,11 +23,8 @@ title: 使用 Helm 图表升级 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介绍如何使用 Milvus Helm 图表升级 Milvus 单机版。</p>
-<div class="alert note">
-<p>从 Milvus 2.5.x（或更早的版本）升级到 2.6.0 涉及到重大的架构变化，使得这一升级<strong>不可逆转</strong>。由于引入了新组件（如 Woodpecker 和 Streaming Node）并删除了某些组件，<strong>升级完成后无法回滚到以前的版本</strong>。有关 2.6.0 中引入的架构更改的详细信息，请参阅<a href="/docs/zh/architecture_overview.md">Milvus 架构概述</a>。</p>
-</div>
-<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>本指南介绍如何使用 Helm Chart 将 Milvus 独立部署从 v2.5.x 升级到 v2.6.0。</p>
+<h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,82 +39,58 @@ title: 使用 Helm 图表升级 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
+    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">版本 2.6.0 的新功能<button data-href="#Whats-new-in-v260" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>从 Milvus 2.5.x 升级到 2.6.0 涉及到重大的架构变化：</p>
+<ul>
+<li><strong>协调器合并</strong>：传统的独立协调器 (<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code>) 已合并为单一的协调器。<code translate="no">mixCoord</code></li>
+<li><strong>新组件</strong>：引入流节点，增强数据处理能力</li>
+<li><strong>删除组件</strong>：删除并合并<code translate="no">indexNode</code> </li>
+</ul>
+<p>此升级过程可确保向新架构的正常迁移。有关架构变化的更多信息，请参阅<a href="/docs/zh/architecture_overview.md">Milvus 架构概述</a>。</p>
+<h3 id="Requirements" class="common-anchor-header">系统要求<button data-href="#Requirements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>系统要求</strong></p>
+<ul>
 <li>Helm 版本 &gt;= 3.14.0</li>
 <li>Kubernetes 版本 &gt;= 1.20.0</li>
+<li>通过 Helm 图表部署 Milvus Standalone</li>
 </ul>
-<div class="alert note">
-<p>自 Milvus Helm 图表版本 4.2.21 起，我们引入了 pulsar-v3.x 图表作为依赖。为了向后兼容，请将 Helm 升级到 v3.14 或更高版本，并确保在使用<code translate="no">helm upgrade</code> 时添加<code translate="no">--reset-then-reuse-values</code> 选项。</p>
-</div>
-<h2 id="Check-the-Milvus-version" class="common-anchor-header">检查 Milvus 版本<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>运行以下命令检查新的 Milvus 版本。</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm search repo zilliztech/milvus --versions</span>
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p><code translate="no">https://milvus-io.github.io/milvus-helm/</code> 上的 Milvus Helm Charts repo 已归档，你可以从<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 获取进一步更新，具体如下：</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
-helm repo update zilliztech
-<span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
-<button class="copy-code-btn"></button></code></pre>
-<p>归档软件源仍可用于 4.0.31 之前的图表。对于后续版本，请使用新版本库。</p>
-</div>
-<pre><code translate="no">NAME                    CHART VERSION   APP VERSION             DESCRIPTION                                       
-zilliztech/milvus       4.1.34          2.4.5                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.33          2.4.4                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.32          2.4.3                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.31          2.4.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.30          2.4.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.29          2.4.0                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.24          2.3.11                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.23          2.3.10                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.22          2.3.10                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.21          2.3.10                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.20          2.3.10                  Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.18          2.3.10                  Milvus is an open-source vector database built ... 
-zilliztech/milvus       4.1.18          2.3.9                   Milvus is an open-source vector database built ...                                       
-zilliztech/milvus       4.1.17          2.3.8                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.16          2.3.7                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.15          2.3.5                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.14          2.3.6                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.13          2.3.5                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.12          2.3.5                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.11          2.3.4                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.10          2.3.3                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.9           2.3.3                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.8           2.3.2                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.7           2.3.2                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.6           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.5           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.4           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.3           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.2           2.3.1                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.1           2.3.0                   Milvus is an open-source vector database built ...
-zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
-<button class="copy-code-btn"></button></code></pre>
-<p>您可以按以下方式选择 Milvus 的升级路径：</p>
-<div style="display: none;">- 进行滚动升级](#conduct-a-rolling-upgrade) 从 Milvus v2.2.3 及以后的版本升级到 v2.6.0。</div>
+<p><strong>兼容性要求：</strong></p>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升级 Milvus</a>，从 v2.2.3 之前的次版本升级到 v2.6.0。</p></li>
-<li><p>在从 Milvus v2.1.x 升级到 v2.6.0 之前<a href="#Migrate-the-metadata">迁移元数据</a>。</p></li>
+<li>Milvus v2.6.0-rc1 与 v2.6.0<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
+<li>如果您当前正在运行 v2.6.0-rc1，并需要保留数据，请参考<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">本社区指南</a>以获取迁移帮助。</li>
+<li>在升级到 v2.6.0 之前<strong>，必须</strong>升级到 v2.5.16 或更高版本。</li>
 </ul>
-<div style="display:none;">
-<h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">进行滚动升级<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
+<div class="alert note">
+自 Milvus Helm 图表 4.2.21 版起，我们引入了 pulsar-v3.x 图表作为依赖。为了向后兼容，请将 Helm 升级到 v3.14 或更高版本，并确保在使用<code translate="no">helm upgrade</code> 时添加<code translate="no">--reset-then-reuse-values</code> 选项。</div>
+<h2 id="Upgrade-process" class="common-anchor-header">升级过程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,35 +105,32 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自 Milvus 2.2.3 起，您可以将 Milvus 协调器配置为主动待机模式工作，并为它们启用滚动升级功能，这样 Milvus 就可以在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定的停机时间。</p>
-<p>滚动升级要求协调程序以活动-待机模式工作。您可以使用我们提供的<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">脚本</a>将协调程序配置为活动-待机模式，然后开始滚动升级。</p>
-<p>基于 Kubernetes 提供的滚动更新功能，上述脚本会根据部署的依赖关系对部署进行有序更新。此外，Milvus 还实现了一种机制，确保其组件在升级过程中与依赖它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
-<p>该脚本仅适用于升级与 Helm 一起安装的 Milvus。下表列出了脚本中可用的命令标志。</p>
-<table>
-<thead>
-<tr><th>参数</th><th>说明</th><th>默认值</th><th>需要</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">i</code></td><td>Milvus 实例名称</td><td><code translate="no">None</code></td><td>为真</td></tr>
-<tr><td><code translate="no">n</code></td><td>Milvus 安装的命名空间</td><td><code translate="no">default</code></td><td>假</td></tr>
-<tr><td><code translate="no">t</code></td><td>Milvus 目标版本</td><td><code translate="no">None</code></td><td>真</td></tr>
-<tr><td><code translate="no">w</code></td><td>新的 Milvus 图像标签</td><td><code translate="no">milvusdb/milvus:v2.2.3</code></td><td>真</td></tr>
-<tr><td><code translate="no">o</code></td><td>操作符</td><td><code translate="no">update</code></td><td>假</td></tr>
-</tbody>
-</table>
-<p>确保 Milvus 实例中的所有部署都处于正常状态后。你可以运行以下命令将 Milvus 实例升级到 2.6.0。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.6.0 -w &#x27;milvusdb/milvus:v2.6.0&#x27;
+    </button></h2><h3 id="Step-1-Upgrade-Helm-Chart" class="common-anchor-header">步骤 1：升级 Helm 图表<button data-href="#Step-1-Upgrade-Helm-Chart" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>首先，将您的 Milvus Helm 图表升级到 5.0.0 版本：</p>
+<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<ol>
-<li>该脚本<strong>不适</strong>用于与<strong>RocksMQ</strong> 一起安装的 Milvus 实例。</li>
-<li>脚本对部署的升级顺序进行了硬编码，无法更改。</li>
-<li>脚本使用<code translate="no">kubectl patch</code> 更新部署，使用<code translate="no">kubectl rollout status</code> 观察部署状态。</li>
-<li>脚本使用<code translate="no">kubectl patch</code> 将部署的<code translate="no">app.kubernetes.io/version</code> 标签更新为命令中<code translate="no">-t</code> 标志后指定的标签。</li>
-</ol>
-</div>
-</div>
-<h2 id="Upgrade-Milvus-using-Helm" class="common-anchor-header">使用 Helm 升级 Milvus<button data-href="#Upgrade-Milvus-using-Helm" class="anchor-icon" translate="no">
+位于<code translate="no">https://milvus-io.github.io/milvus-helm/</code> 的 Milvus Helm 图表 repo 已归档。对于 4.0.31 及更高版本的图表，请使用新版本库<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 。</div>
+<p>要检查 Helm 图表版本与 Milvus 版本的兼容性：</p>
+<pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
+<button class="copy-code-btn"></button></code></pre>
+<p>本指南假定您安装的是最新版本。如果需要安装特定版本，请相应指定<code translate="no">--version</code> 参数。</p>
+<h3 id="Step-2-Upgrade-to-v2516" class="common-anchor-header">第 2 步：升级至版本 2.5.16<button data-href="#Step-2-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -175,12 +145,20 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要将 Milvus 从 v2.2.3 之前的次版本升级到最新版本，请运行以下命令：</p>
-<pre><code translate="no" class="language-shell">helm repo update
-helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=5.0.0 # use the helm chart version here
+    </button></h3><div class="alert-note">
+<p>如果你的单机部署已经运行 v2.5.16 或更高版本，请跳过此步骤。</p>
+</div>
+<p>将 Milvus 单机版升级到 v2.5.16：</p>
+<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.5.16&quot;</span> \
+  --reset-then-reuse-values \
+  --version=4.2.58
 <button class="copy-code-btn"></button></code></pre>
-<p>在前面的命令中使用 Helm 图表版本。有关如何获取 Helm 图表版本的详细信息，请参阅<a href="#Check-the-Milvus-version">检查 Milvus 版本</a>。</p>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">迁移元数据<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
+<p>等待升级完成：</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
+kubectl get pods
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-3-Upgrade-to-v260" class="common-anchor-header">步骤 3：升级到 v2.6.0<button data-href="#Step-3-Upgrade-to-v260" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -195,68 +173,29 @@ helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=5.0.0 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自 Milvus 2.2.0 起，元数据与之前版本的元数据不兼容。以下示例片段假定从 Milvus 2.1.4 升级到 Milvus 2.2.0。</p>
-<h3 id="1-Check-the-Milvus-version" class="common-anchor-header">1.检查 Milvus 版本</h3><p>运行<code translate="no">$ helm list</code> 检查 Milvus 应用程序版本。您可以看到<code translate="no">APP VERSION</code> 是 2.1.4。</p>
-<pre><code translate="no">NAME                NAMESPACE   REVISION    UPDATED                                 STATUS      CHART           APP VERSION     
-my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span>          <span class="hljs-keyword">default</span>     <span class="hljs-number">1</span>           <span class="hljs-number">2022</span><span class="hljs-number">-11</span><span class="hljs-number">-21</span> <span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">25.51539</span> <span class="hljs-operator">+</span><span class="hljs-number">0800</span> CST     deployed    milvus<span class="hljs-number">-3.2</span><span class="hljs-number">.18</span>   <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>
+    </button></h3><p>v2.5.16 成功运行后，升级到 v2.6.0：</p>
+<pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.0&quot;</span> \
+  --reset-then-reuse-values \
+  --version=5.0.0
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Check-the-running-pods" class="common-anchor-header">2.检查正在运行的 pod</h3><p>运行<code translate="no">$ kubectl get pods</code> 检查正在运行的 pod。您可以看到以下输出。</p>
-<pre><code translate="no">NAME                                            READY   STATUS    RESTARTS   AGE
-my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">84</span>s
-my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>standalone<span class="hljs-number">-75</span>c599fffc<span class="hljs-number">-6</span>rwlj   <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">84</span>s
-my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>minio<span class="hljs-number">-744</span>dd9586f<span class="hljs-operator">-</span>qngzv               <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>     <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>          <span class="hljs-number">84</span>s
+<h2 id="Verify-the-upgrade" class="common-anchor-header">验证升级<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>确认您的独立部署正在运行新版本：</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
+kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-image-tag" class="common-anchor-header">3.检查图像标签</h3><p>检查 pod<code translate="no">my-release-milvus-proxy-6c548f787f-scspp</code> 的图像标签。您可以看到 Milvus 集群的版本是 v2.1.4。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods my-release-milvus-proxy-6c548f787f-scspp -o=jsonpath=<span class="hljs-string">&#x27;{$.spec.containers[0].image}&#x27;</span></span>
-<span class="hljs-meta prompt_"># </span><span class="language-bash">milvusdb/milvus:v2.1.4</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="4-Migrate-the-metadata" class="common-anchor-header">4.迁移元数据</h3><p>Milvus 2.2 的一个主要变化是段索引的元数据结构。因此，当 Milvus 从 v2.1.x 升级到 v2.2.0 时，你需要使用 Helm 来迁移元数据。 这里有<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一个脚本</a>供你安全迁移元数据。</p>
-<p>该脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
-<p>下表列出了元数据迁移的操作符。</p>
-<table>
-<thead>
-<tr><th>参数</th><th>说明</th><th>默认值</th><th>需要</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">i</code></td><td>Milvus 实例名称。</td><td><code translate="no">None</code></td><td>真</td></tr>
-<tr><td><code translate="no">n</code></td><td>Milvus 安装的命名空间。</td><td><code translate="no">default</code></td><td>假</td></tr>
-<tr><td><code translate="no">s</code></td><td>Milvus 源版本。</td><td><code translate="no">None</code></td><td>真</td></tr>
-<tr><td><code translate="no">t</code></td><td>目标 Milvus 版本。</td><td><code translate="no">None</code></td><td>目标版本</td></tr>
-<tr><td><code translate="no">r</code></td><td>Milvus 元的根路径。</td><td><code translate="no">by-dev</code></td><td>假</td></tr>
-<tr><td><code translate="no">w</code></td><td>新的 Milvus 图像标签。</td><td><code translate="no">milvusdb/milvus:v2.2.0</code></td><td>假</td></tr>
-<tr><td><code translate="no">m</code></td><td>元迁移图像标签。</td><td><code translate="no">milvusdb/meta-migration:v2.2.0</code></td><td>假</td></tr>
-<tr><td><code translate="no">o</code></td><td>元迁移操作符。</td><td><code translate="no">migrate</code></td><td>假</td></tr>
-<tr><td><code translate="no">d</code></td><td>迁移完成后是否删除迁移 pod。</td><td><code translate="no">false</code></td><td>否</td></tr>
-<tr><td><code translate="no">c</code></td><td>元迁移 pvc 的存储类别。</td><td><code translate="no">default storage class</code></td><td>假</td></tr>
-<tr><td><code translate="no">e</code></td><td>Milvus 使用的 etcd enpoint。</td><td><code translate="no">etcd svc installed with milvus</code></td><td>错误</td></tr>
-</tbody>
-</table>
-<h4 id="1-Migrate-the-metadata" class="common-anchor-header">1.迁移元数据</h4><ol>
-<li>下载<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">迁移脚本</a>。</li>
-<li>停止 Milvus 组件。Milvus etcd 中的任何实时会话都可能导致迁移失败。</li>
-<li>创建 Milvus 元数据备份。</li>
-<li>迁移 Milvus 元数据。</li>
-<li>使用新镜像启动 Milvus 组件。</li>
-</ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-260" class="common-anchor-header">2.将 Milvus 从 2.1.x 版升级到 2.6.0 版</h4><p>以下命令假定你将 Milvus 从 v2.1.4 升级到 2.6.0。请将它们更改为适合你需要的版本。</p>
-<ol>
-<li><p>指定 Milvus 实例名称、源 Milvus 版本和目标 Milvus 版本。</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.6.0
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>如果你的 Milvus 没有安装在默认的 K8s 命名空间，请用<code translate="no">-n</code> 指定命名空间。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>如果 Milvus 安装的是自定义<code translate="no">rootpath</code> ，请用<code translate="no">-r</code> 指定根路径。</p>
-<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.6</span>.<span class="hljs-number">0</span> -<span class="hljs-attribute">r</span> by-dev
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>如果你的 Milvus 安装的是自定义<code translate="no">image</code> ，请用<code translate="no">-w</code> 指定图片标签。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0 -r by-dev -w milvusdb/milvus:v2.6.0
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>如果想在迁移完成后自动移除迁移 pod，请设置<code translate="no">-d true</code> 。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0 -w milvusdb/milvus:v2.6.0 -d <span class="hljs-literal">true</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>如果迁移失败，请回滚并重新迁移。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.6.0 -r by-dev -o migrate -w milvusdb/milvus:v2.6.0
-<button class="copy-code-btn"></button></code></pre></li>
-</ol>
+<p>如需其他支持，请查阅<a href="https://milvus.io/docs">Milvus 文档</a>或<a href="https://github.com/milvus-io/milvus/discussions">社区论坛</a>。</p>

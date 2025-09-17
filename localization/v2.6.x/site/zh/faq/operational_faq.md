@@ -18,13 +18,51 @@ title: 操作常见问题
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">从 Docker Hub 提取 Milvus Docker 镜像失败怎么办？</h4><p>如果从 Docker Hub 拉取 Milvus Docker 镜像失败，请尝试添加其他注册镜像。</p>
+    </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">什么是 QueryNode 委托器，它的职责是什么？</h4><p>当 Collections 加载时，QueryNode 会订阅来自消息队列的插入和删除消息的 DML 通道。订阅这些通道的 QueryNode（称为委托人）负责</p>
+<ul>
+<li>管理因持续插入而需要额外内存的增加区段。</li>
+<li>接收删除信息，并将其传递给持有相关分段的其他 QueryNode。</li>
+</ul>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">如何识别 Collections 的委托人节点？</h4><p>使用 Birdwatcher。</p>
+<p>按照<a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">以下</a>步骤安装 Birdwatcher，然后运行以下命令：</p>
+<pre><code translate="no" class="language-shell">./birdwatcher
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
+Milvus(my-release) &gt; show segment-loaded-grpc --collection &lt;your-collectionID&gt;
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Map server ID to pod IP</span>
+Milvus(my-release) &gt; show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">如果查询节点内存使用不平衡，可以调整哪些参数？</h4><p>有时，查询节点的内存会发生变化，因为有些节点作为委托人会使用更多内存。如果某个委托人的内存较大，可调整 queryCoord.delegatorMemoryOverloadFactor 以将封存的程序段卸载到其他节点，减少内存使用量。</p>
+<ul>
+<li>默认值为 0.1。</li>
+<li>增加该值（如增加到 0.3 或更高）会使系统将更多密封线段从超载的 delegator 卸载到其他 QueryNodes，有助于平衡内存使用。你也可以尝试将值增加到 1，这意味着不会在委托节点中加载密封片段。</li>
+</ul>
+<p>如果不想重启集群，可以用 Birdwatcher 修改 Milvus 配置：</p>
+<pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
+Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
+
+# Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
+<span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">如何为 Collections 设置 shard_num？</h4><p>最佳做法是，对于向量维度为 768 的 Collections，建议每 ~1 亿个向量至少使用 1 个 shard。对于重写使用情况，每 ~1 亿向量使用 4 个分区。</p>
+<p>例如，如果有 1 亿向量，则使用 1-4 个碎片。如果有 5 亿向量，则使用 5-10 个碎片。</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">如果从 Docker Hub 拉取 Milvus Docker 镜像失败怎么办？</h4><p>如果从 Docker Hub 拉取 Milvus Docker 镜像失败，请尝试添加其他注册镜像。</p>
 <p>中国大陆的用户可以在<strong>/etc.docker/daemon.json</strong> 中的 registry-mirrors 数组中添加网址 "https://registry.docker-cn.com"。</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Docker 是安装和运行 Milvus 的唯一方式吗？</h4><p>Docker 是部署 Milvus 的有效方式，但不是唯一的方式。你也可以从源代码部署 Milvus。这需要 Ubuntu（18.04 或更高版本）或 CentOS（7 或更高版本）。更多信息，请参阅<a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">从源代码构建 Milvus</a>。</p>
+<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Docker 是安装和运行 Milvus 的唯一方式吗？</h4><p>Docker 是部署 Milvus 的有效方法，但不是唯一的方法。你也可以从源代码部署 Milvus。这需要 Ubuntu（18.04 或更高版本）或 CentOS（7 或更高版本）。更多信息，请参阅<a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">从源代码构建 Milvus</a>。</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">影响召回率的主要因素是什么？</h4><p>召回率主要受索引类型和搜索参数的影响。</p>
 <p>对于 FLAT 索引，Milvus 在一个 Collection 内进行穷举扫描，100% 返回。</p>
 <p>对于 IVF 索引，nprobe 参数决定了 Collections 内的搜索范围。增加 nprobe 会增加搜索到的向量比例和召回率，但会降低查询性能。</p>
@@ -53,7 +91,7 @@ title: 操作常见问题
 <pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">我可以在断开互联网的情况下部署 Milvus 吗？</h4><p>可以。您可以在离线环境下安装 Milvus。请参阅<a href="/docs/zh/install_offline-helm.md">离线安装 Milvus</a>获取更多信息。</p>
-<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">在哪里可以找到 Milvus 生成的日志？</h4><p>Milvus 日志默认打印到 stout（标准输出）和 stderr（标准错误），但是我们强烈建议在生产中将日志重定向到持久卷。为此，请更新<strong>Milvus.yaml</strong> 中的<code translate="no">log.file.rootPath</code> 。而如果你用<code translate="no">milvus-helm</code> chart 部署 Milvus，也需要先通过<code translate="no">--set log.persistence.enabled=true</code> 启用日志持久性。</p>
+<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">在哪里可以找到 Milvus 生成的日志？</h4><p>Milvus 日志默认打印到 stout（标准输出）和 stderr（标准错误），但我们强烈建议在生产中将日志重定向到持久卷。为此，请更新<strong>Milvus.yaml</strong> 中的<code translate="no">log.file.rootPath</code> 。而如果你用<code translate="no">milvus-helm</code> chart 部署 Milvus，也需要先通过<code translate="no">--set log.persistence.enabled=true</code> 启用日志持久性。</p>
 <p>如果你没有更改配置，使用 kubectl logs<pod-name> 或 docker logs CONTAINER 也能帮你找到日志。</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">在插入数据之前，我可以为段创建索引吗？</h4><p>可以。但我们建议在为每个数据段创建索引之前，分批插入数据，每批不应超过 256 MB。</p>
 <h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">能否在多个 Milvus 实例之间共享一个 etcd 实例？</h4><p>可以，您可以在多个 Milvus 实例之间共享一个 etcd 实例。为此，在启动每个 Milvus 实例之前，需要在每个实例的配置文件中将<code translate="no">etcd.rootPath</code> 更改为单独的值。</p>
@@ -105,5 +143,5 @@ title: 操作常见问题
 <h4 id="Still-have-questions" class="common-anchor-header">仍有问题？</h4><p>你可以</p>
 <ul>
 <li>查看 GitHub 上的<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。随时提问、分享想法并帮助其他用户。</li>
-<li>加入我们的<a href="https://discuss.milvus.io/">Milvus 论坛</a>或<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 频道</a>，寻求支持并参与我们的开源社区。</li>
+<li>加入我们的<a href="https://discuss.milvus.io/">Milvus 论坛</a>或<a href="https://discord.com/invite/8uyFbECzPX">Discord 频道</a>，寻求支持并参与我们的开源社区。</li>
 </ul>

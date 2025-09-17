@@ -44,11 +44,41 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Kami sangat senang mengumumkan Milvus 2.5.13! Versi ini meningkatkan pengalaman Anda dengan fitur-fitur baru, seperti kemampuan untuk menghapus properti field dan menggunakan fungsi <code translate="no">cast</code> untuk indeks JSON. Versi ini juga memberikan berbagai peningkatan kinerja dan stabilitas secara umum, sambil menyelesaikan berbagai bug untuk memastikan sistem yang lebih kuat. Kami mendorong Anda untuk meningkatkan ke 2.5.13 dan menjelajahi pembaruan terbaru ini!</p>
-<h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
+<h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Menambahkan dukungan untuk menjatuhkan properti dari sebuah bidang<a href="https://github.com/milvus-io/milvus/pull/41954">(#41954</a>).</li>
 <li>Menambahkan fungsi <code translate="no">cast</code> untuk digunakan dengan indeks JSON<a href="https://github.com/milvus-io/milvus/pull/42504">(#42504)</a>.</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Meningkatkan ukuran buffer impor default<a href="https://github.com/milvus-io/milvus/pull/42542">(#42542)</a>.</li>
 <li>Mempercepat proses pembangunan dispatcher<a href="https://github.com/milvus-io/milvus/pull/42544">(#42544</a>)<a href="https://github.com/milvus-io/milvus/pull/42544">.</a></li>
 <li>Menghilangkan batasan keseimbangan antara tugas saluran dan segmen<a href="https://github.com/milvus-io/milvus/pull/42410">(#42410).</a></li>
@@ -63,7 +93,22 @@ title: Catatan Rilis
 <li>Log akses sekarang mendukung pengambilan ekspresi pencarian hibrida dan bidang<a href="https://github.com/milvus-io/milvus/pull/41921">(#41921).</a></li>
 <li>Menambahkan semantik pemindahan eksplisit ke antarmuka <code translate="no">get_batch_view</code> <a href="https://github.com/milvus-io/milvus/pull/42402">(#42402)</a>.</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki kebocoran pipeline/delegator<a href="https://github.com/milvus-io/milvus/pull/42583">(#42583)</a>.</li>
 <li>Memperbaiki logika pemilihan delegator ketika melepaskan segmen untuk menghindari potensi kepanikan MixCoord<a href="https://github.com/milvus-io/milvus/pull/42572">(#42572).</a></li>
 <li>Memperbaiki bug yang dapat menyebabkan kerusakan penulisan data selama validasi<a href="https://github.com/milvus-io/milvus/pull/42555">(#42555).</a></li>
@@ -107,10 +152,40 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Kami dengan senang hati mempersembahkan Milvus 2.5.12 kepada Anda! Rilis ini memperkenalkan kemampuan baru seperti dukungan indeks JSON untuk ekspresi <code translate="no">contains</code>, bersama dengan beberapa peningkatan termasuk respons API <code translate="no">DescribeCollection</code> yang diperbarui dan pemadatan kedaluwarsa data yang lebih ketat. Versi ini juga menggabungkan pembaruan ketergantungan yang penting untuk memperbaiki CVE dan berbagai perbaikan bug untuk meningkatkan stabilitas dan kinerja. Kami mendorong Anda untuk meningkatkan ke Milvus 2.5.12 untuk mendapatkan manfaat dari peningkatan dan perbaikan terbaru ini!</p>
-<h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
+<h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Menambahkan dukungan indeks JSON untuk JSON <code translate="no">contains</code> expr<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>).</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>API <code translate="no">DescribeCollection</code> sekarang menyertakan cap waktu pembaruan dalam hasilnya<a href="https://github.com/milvus-io/milvus/pull/41600">(#41600</a>)<a href="https://github.com/milvus-io/milvus/pull/41600">.</a></li>
 <li>Antarmuka <code translate="no">DescribeIndex</code> sekarang mengeluarkan informasi versi indeks<a href="https://github.com/milvus-io/milvus/pull/41841">(#41841).</a></li>
 <li>Menambahkan dukungan untuk pemadatan kedaluwarsa yang lebih ketat untuk membersihkan data yang dihapus tanpa harus menunggu banyak penghapusan<a href="https://github.com/milvus-io/milvus/pull/41856">(#41856)</a>.</li>
@@ -124,7 +199,22 @@ title: Catatan Rilis
 <li>Menambahkan parameter untuk mengabaikan pengecualian tipe konfigurasi<a href="https://github.com/milvus-io/milvus/pull/41773">(#41773).</a></li>
 <li>Mengatur worker <code translate="no">totalSlot</code> dalam mode standalone menjadi setengah dari mode cluster<a href="https://github.com/milvus-io/milvus/pull/41731">(#41731).</a></li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki kebocoran goroutine di <code translate="no">ants.pool</code> <a href="https://github.com/milvus-io/milvus/pull/41893">(#41893)</a>.</li>
 <li>Memperbaiki masalah di mana nama penganalisis tidak diatur dalam sub-permintaan pencarian hybrid<a href="https://github.com/milvus-io/milvus/pull/41897">(#41897).</a></li>
 <li>Memperbaiki masalah penugasan ganda di <code translate="no">ChannelManager</code> <a href="https://github.com/milvus-io/milvus/pull/41877">(#41877)</a>.</li>
@@ -167,7 +257,22 @@ title: Catatan Rilis
 </table>
 <p>Kami sangat senang mengumumkan peluncuran Milvus 2.5.11! Versi ini memperkenalkan fitur-fitur baru yang hebat seperti kemampuan multi-analyzer dan dukungan tokenizer yang diperluas (Jieba, Lindera, ICU, Pengenal Bahasa). Kami juga telah melakukan beberapa peningkatan, termasuk pembaruan kumpulan thread pemuatan segmen dinamis dan pemfilteran hapus yang dioptimalkan selama impor binlog. Perbaikan bug utama mengatasi potensi masalah penurunan segmen, kegagalan pencarian BM25, dan kesalahan pemfilteran statistik JSON.</p>
 <p>Kami menyarankan Anda untuk meningkatkan ke 2.5.11 untuk memanfaatkan peningkatan dan perbaikan ini!</p>
-<h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
+<h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Menambahkan kemampuan untuk mengonfigurasi beberapa penganalisis (tokenizer) untuk dukungan multi bahasa dan memilih yang sesuai berdasarkan instruksi dari data input<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
 <li>Meningkatkan fungsionalitas BM25 Analyzer<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
 <li>Memperkenalkan API <code translate="no">run_analyzer</code> untuk uji coba untuk membantu menganalisis hasil tokenisasi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md">Ikhtisar Penganalisis</a>.</li>
@@ -187,7 +292,22 @@ title: Catatan Rilis
 <li>Menambahkan dukungan untuk ekspresi rentang biner dalam indeks jalur JSON<a href="https://github.com/milvus-io/milvus/pull/41317">(#41317)</a>.</li>
 <li>Menambahkan dukungan untuk jenis pencocokan infiks dan sufiks dalam statistik JSON<a href="https://github.com/milvus-io/milvus/pull/41388">(#41388)</a>.</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Peningkatan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Peningkatan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Mengaktifkan pembaruan dinamis pada ukuran kumpulan utas pemuatan Segmen<a href="https://github.com/milvus-io/milvus/pull/41549">(#41549).</a></li>
 <li>Pemfilteran hapus yang dipercepat selama impor binlog<a href="https://github.com/milvus-io/milvus/pull/41552">(#41552)</a>.</li>
 <li>Menambahkan parameter pemantauan untuk rasio filter ekspresi<a href="https://github.com/milvus-io/milvus/pull/41403">(#41403).</a></li>
@@ -196,7 +316,22 @@ title: Catatan Rilis
 <li>Penanganan yang disesuaikan untuk tanda hubung di header metadata gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372).</a></li>
 <li>Meningkatkan versi Go ke 1.24.1 untuk mengatasi CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki masalah di mana segmen mungkin tidak dijatuhkan dengan benar saat menjatuhkan partisi<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>)<a href="https://github.com/milvus-io/milvus/pull/41543">.</a></li>
 <li>Memperbaiki penyisipan massal untuk menggunakan daftar bidang input dari function runner, bukan daftar bidang skema<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561).</a></li>
 <li>Memperbaiki kegagalan pencarian BM25 yang terjadi ketika <code translate="no">avgdl</code> (panjang dokumen rata-rata) adalah NaN<a href="https://github.com/milvus-io/milvus/pull/41503">(#41503</a>)<a href="https://github.com/milvus-io/milvus/pull/41503">.</a></li>
@@ -233,7 +368,22 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Milvus 2.5.10 memberikan peningkatan kinerja pencarian dan pemuatan, pelaporan metrik yang lebih baik, dan dukungan SVE yang diperluas untuk komputasi metrik yang dipercepat. Rilis ini juga mencakup beberapa perbaikan bug yang meningkatkan stabilitas dan ketepatan. Kami mendorong Anda untuk meng-upgrade atau mencobanya-umpan balik Anda sangat berharga dalam membantu kami membuat Milvus menjadi lebih baik!</p>
-<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Abaikan metrik indeks pelaporan untuk indeks yang tidak ada<a href="https://github.com/milvus-io/milvus/pull/41296">(#41296</a>)</li>
 <li>Gunakan mode pemindaian untuk LIKE bahkan ketika ada indeks terbalik<a href="https://github.com/milvus-io/milvus/pull/41309">(#41309</a>)</li>
 <li>Mengoptimalkan kinerja untuk ekspresi SUKA<a href="https://github.com/milvus-io/milvus/pull/41222">(#41222)</a></li>
@@ -241,7 +391,22 @@ title: Catatan Rilis
 <li>RESTful: membuat batas waktu default dapat dikonfigurasi<a href="https://github.com/milvus-io/milvus/pull/41225">(#41225</a>)</li>
 <li>Mengaktifkan dukungan SVE untuk komputasi metrik L2 dalam fungsi FP16 / NY<a href="https://github.com/zilliztech/knowhere/pull/1134">(knowhere #1134</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki indeks JSON yang tidak berfungsi untuk filter string<a href="https://github.com/milvus-io/milvus/pull/41383">(#41383</a>)</li>
 <li>Lewati pemeriksaan dimensi untuk bidang non-vektor dalam pemeriksaan awal<a href="https://github.com/milvus-io/milvus/pull/41329">(#41329)</a></li>
 <li>Alter collection sekarang memperbarui skema dengan benar<a href="https://github.com/milvus-io/milvus/pull/41308">(#41308</a>)</li>
@@ -275,13 +440,43 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Kami sangat senang mengumumkan Milvus 2.5.9, yang membawa peningkatan kinerja untuk statistik kunci JSON, kemampuan pengindeksan yang lebih baik, dan beberapa perbaikan bug penting yang meningkatkan stabilitas dan penanganan data. Kami mendorong Anda untuk meng-upgrade atau mencoba versi ini, dan seperti biasa, umpan balik Anda sangat kami hargai karena kami terus menyempurnakan Milvus.</p>
-<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Mendukung normalisasi skor lompatan untuk perangkingan ulang berbobot<a href="https://github.com/milvus-io/milvus/pull/40905">(#40905</a>)</li>
 <li>Meningkatkan kinerja pembuatan statistik kunci JSON dengan menambahkan dokumen secara berkelompok<a href="https://github.com/milvus-io/milvus/pull/40898">(#40898</a>)</li>
 <li>Gunakan <code translate="no">int32</code> saat membuat indeks larik untuk tipe elemen <code translate="no">int8</code>/<code translate="no">int16</code> <a href="https://github.com/milvus-io/milvus/pull/41186">(#41186</a>)</li>
 <li>Menyelaraskan hasil pencarian brute-force dengan perilaku indeks JSON untuk ekspresi <code translate="no">exists</code> <a href="https://github.com/milvus-io/milvus/pull/41056">(#41056</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki masalah yang menyebabkan kebingungan traceID jika klien mengirim traceID<a href="https://github.com/milvus-io/milvus/pull/41149">(#41149</a>)</li>
 <li>Memperbaiki potensi kerusakan karena penggunaan <code translate="no">noexcept</code> yang salah, yang menyebabkan kegagalan IO<a href="https://github.com/milvus-io/milvus/pull/41221">(#41221</a>)</li>
 <li>Menyelesaikan loop saldo normal tak terbatas yang dipicu setelah penangguhan saldo<a href="https://github.com/milvus-io/milvus/pull/41196">(#41196</a>)</li>
@@ -330,11 +525,41 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Kami dengan senang hati mengumumkan peluncuran Milvus 2.5.8, yang menampilkan peningkatan pada ekspresi JSON, validasi UTF-8, penggunaan memori, dan logika penyeimbangan. Versi ini juga menyertakan beberapa perbaikan bug penting untuk meningkatkan konkurensi dan penanganan data. Kami mendorong Anda untuk meng-upgrade atau mencobanya, dan seperti biasa, umpan balik Anda akan membantu kami untuk terus menyempurnakan Milvus!</p>
-<h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
+<h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Mendukung ekspresi JSON <code translate="no">null</code>/<code translate="no">exists</code> <a href="https://github.com/milvus-io/milvus/pull/41002">(#41002</a>)</li>
 <li>Mendukung penguraian vektor yang jarang dari struktur Parket dalam sisipan massal<a href="https://github.com/milvus-io/milvus/pull/40874">(#40874</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Menyeimbangkan koleksi dengan jumlah baris terbesar terlebih dahulu<a href="https://github.com/milvus-io/milvus/pull/40958">(#40958</a>)</li>
 <li>Mendukung validasi string UTF-8 selama impor<a href="https://github.com/milvus-io/milvus/pull/40746">(#40746</a>)</li>
 <li>Tambahkan validasi UTF-8 untuk semua bidang VARCHAR<a href="https://github.com/milvus-io/milvus/pull/40993">(#40993</a>)</li>
@@ -347,7 +572,22 @@ title: Catatan Rilis
 <li>Mengoptimalkan penggunaan meta mutex DataCoord<a href="https://github.com/milvus-io/milvus/pull/40753">(#40753</a>)</li>
 <li>Memperkenalkan langganan batch di <code translate="no">MsgDispatcher</code> <a href="https://github.com/milvus-io/milvus/pull/40596">(#40596</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki kerusakan yang melibatkan input yang dapat dibatalkan dan tipe data mmap yang terus bertambah<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
 <li>Memperbaiki potensi kehilangan data dalam operasi penghapusan yang disebabkan oleh ID binlog ganda<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>),<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
 <li>Menambahkan kunci indeks bidang untuk <code translate="no">GetSegmentsIndexStates</code> untuk menghindari potensi kepanikan saat penyisipan saat membuat koleksi<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
@@ -387,10 +627,40 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Kami sangat senang mengumumkan rilis Milvus 2.5.7, yang disorot oleh fitur JSON Path Index yang baru diperkenalkan. Fitur ini memungkinkan Anda untuk membuat indeks terbalik pada kolom dinamis atau JSON untuk meningkatkan kinerja kueri secara signifikan. Bersamaan dengan fungsionalitas baru ini, kami telah melakukan banyak peningkatan dan perbaikan bug untuk keandalan yang lebih baik, penanganan kesalahan yang lebih baik, dan peningkatan kegunaan. Kami mendorong Anda untuk meng-upgrade atau mencobanya, dan seperti biasa, umpan balik Anda sangat kami hargai karena kami terus meningkatkan Milvus!</p>
-<h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
+<h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong>Indeks Jalur JSON</strong>: Untuk memenuhi kebutuhan pengguna akan skema dinamis, Milvus 2.5.7 memperkenalkan kemampuan untuk membangun indeks pada kolom dinamis dan kolom JSON. Dengan fitur ini, Anda dapat membuat indeks terbalik untuk kolom dinamis atau jalur JSON tertentu, yang secara efektif melewati proses pemuatan JSON yang lebih lambat dan sangat meningkatkan kinerja kueri. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/use-json-fields.md">Bidang JSON</a>.</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Peningkatan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Peningkatan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Susun ulang sub-ekspresi untuk ekspresi gabungan<a href="https://github.com/milvus-io/milvus/pull/40186">(#40186</a>)</li>
 <li>Menambahkan lebih banyak opsi konfigurasi untuk <code translate="no">interimindex</code> untuk mendukung mode<a href="https://github.com/milvus-io/milvus/pull/40429"> yang</a> disempurnakan<a href="https://github.com/milvus-io/milvus/pull/40429">(#40429</a>)</li>
 <li>Gunakan metrik penghitung yang benar untuk penghitungan WA secara keseluruhan<a href="https://github.com/milvus-io/milvus/pull/40679">(#40679</a>)</li>
@@ -403,7 +673,22 @@ title: Catatan Rilis
 <li>Mencatat posisi awal penghapusan pesan<a href="https://github.com/milvus-io/milvus/pull/40678">(#40678</a>)</li>
 <li>Mendukung pengambilan binlog segmen dengan antarmuka <code translate="no">GetSegmentsInfo</code> yang baru<a href="https://github.com/milvus-io/milvus/pull/40466">(#40466</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Gunakan <code translate="no">newInsertDataWithFunctionOutputField</code> saat mengimpor file binlog<a href="https://github.com/milvus-io/milvus/pull/40742">(#40742</a>)</li>
 <li>Memperbaiki masalah di mana properti mmap gagal diterapkan saat membuat koleksi<a href="https://github.com/milvus-io/milvus/pull/40515">(#40515</a>)</li>
 <li>Jangan hapus file centroid ketika pengambilan sampel gagal; sebagai gantinya, tunggu GC<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>)</li>
@@ -448,7 +733,22 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Kami dengan senang hati mengumumkan peluncuran Milvus 2.5.6, yang menampilkan peningkatan yang berharga pada toolchain, pencatatan, metrik, dan penanganan larik, serta beberapa perbaikan bug untuk meningkatkan keandalan dan kinerja. Pembaruan ini mencakup penanganan konkurensi yang disempurnakan, tugas pemadatan yang lebih kuat, dan peningkatan utama lainnya. Kami mendorong Anda untuk meng-upgrade atau mencobanya, dan seperti biasa, kami menyambut umpan balik Anda untuk membantu kami terus meningkatkan Milvus!</p>
-<h3 id="Improvements" class="common-anchor-header">Peningkatan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Peningkatan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Tingkatkan rantai alat Go ke 1.22.7<a href="https://github.com/milvus-io/milvus/pull/40399">(#40399</a>)</li>
 <li>Meningkatkan versi Rust ke 1.83<a href="https://github.com/milvus-io/milvus/pull/40317">(#40317</a>)</li>
 <li>Meningkatkan versi Etcd ke 3.5.18<a href="https://github.com/milvus-io/milvus/pull/40230">(#40230</a>)</li>
@@ -458,7 +758,22 @@ title: Catatan Rilis
 <li>Menambahkan lebih banyak metrik untuk komponen CGO asinkron<a href="https://github.com/milvus-io/milvus/pull/40232">(#40232</a>)</li>
 <li>Bersihkan cache lokasi pecahan setelah koleksi dirilis<a href="https://github.com/milvus-io/milvus/pull/40228">(#40228</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki kerusakan larik yang disebabkan oleh pengabaian validitas<a href="https://github.com/milvus-io/milvus/pull/40433">(#40433</a>)</li>
 <li>Memperbaiki masalah di mana ekspresi <code translate="no">null</code> tidak berfungsi untuk bidang JSON<a href="https://github.com/milvus-io/milvus/pull/40457">(#40457</a>)</li>
 <li>Memperbaiki masalah yang menyimpan offset yang salah ketika membangun Tantivy dengan field yang dapat dinolkan<a href="https://github.com/milvus-io/milvus/pull/40453">(#40453</a>)</li>
@@ -504,16 +819,61 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Milvus 2.5.5 membawa peningkatan yang signifikan dalam hal jumlah koleksi dan partisi yang dapat didukung oleh sebuah cluster. Sekarang Milvus dapat dijalankan dengan 10 ribu koleksi dan 100 ribu partisi. Rilis ini juga mengatasi beberapa bug kritis, termasuk statistik kecocokan yang hilang dan masalah kebuntuan dalam kueri multi-tahap. Selain itu, rilis ini juga mencakup berbagai peningkatan kemampuan pengamatan dan keamanan. Kami sangat menyarankan agar semua pengguna yang menjalankan Milvus 2.5.x untuk melakukan upgrade sesegera mungkin.</p>
-<h3 id="Dependency-Upgrade" class="common-anchor-header">Peningkatan Ketergantungan</h3><p>Ditingkatkan ke ETCD 3.5.18 untuk memperbaiki beberapa CVE.</p>
+<h3 id="Dependency-Upgrade" class="common-anchor-header">Peningkatan Ketergantungan<button data-href="#Dependency-Upgrade" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ditingkatkan ke ETCD 3.5.18 untuk memperbaiki beberapa CVE.</p>
 <ul>
 <li>[2.5] Memperbarui rakit ke cuvs<a href="https://github.com/milvus-io/milvus/pull/39221">(#39221</a>)</li>
 <li>[2.5] Memperbarui versi Knowhere<a href="https://github.com/milvus-io/milvus/pull/39673">(#39673</a>, <a href="https://github.com/milvus-io/milvus/pull/39574">#39574</a>)</li>
 </ul>
-<h3 id="Critical-Bugs" class="common-anchor-header">Bug Kritis</h3><ul>
+<h3 id="Critical-Bugs" class="common-anchor-header">Bug Kritis<button data-href="#Critical-Bugs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>[2.5] Menggunakan awalan <code translate="no">text_log</code> untuk file offset null textmatchindex<a href="https://github.com/milvus-io/milvus/pull/39936">(#39936)</a></li>
 <li>[2.5] Menambahkan sub-pool tugas untuk tugas multi-tahap untuk menghindari kebuntuan<a href="https://github.com/milvus-io/milvus/pull/40081">(#40081</a>)</li>
 </ul>
-<h3 id="Bug-Fixes" class="common-anchor-header">Perbaikan Bug</h3><ul>
+<h3 id="Bug-Fixes" class="common-anchor-header">Perbaikan Bug<button data-href="#Bug-Fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>[2.5] Memperbaiki kebuntuan penjadwal tugas<a href="https://github.com/milvus-io/milvus/pull/40121">(#40121)</a></li>
 <li>[2.5] Memperbaiki kondisi balapan yang menyebabkan beberapa indeks identik dibuat<a href="https://github.com/milvus-io/milvus/pull/40180">(#40180</a>)</li>
 <li>[2.5] Memperbaiki masalah di mana koleksi dengan nama ganda dapat dibuat<a href="https://github.com/milvus-io/milvus/pull/40147">(#40147</a>)</li>
@@ -551,7 +911,22 @@ title: Catatan Rilis
 <li>[2.5] Menambahkan pembatas kecepatan untuk RESTful v1<a href="https://github.com/milvus-io/milvus/pull/39555">(#399555)</a></li>
 <li>[2.5] Menghapus nomor partisi yang dikodekan dengan kode keras di penangan RESTful<a href="https://github.com/milvus-io/milvus/pull/40113">(#40113</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><h4 id="Observability" class="common-anchor-header">Pengamatan</h4><ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Observability" class="common-anchor-header">Pengamatan</h4><ul>
 <li>Menambahkan metrik monitor untuk mengambil data mentah<a href="https://github.com/milvus-io/milvus/pull/40155">(#40155</a>)</li>
 <li>[2.5] Menambahkan metrik get vector latency dan pesan kesalahan batas permintaan yang disempurnakan<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
 <li>[2.5] Menambahkan metrik untuk antrean proxy<a href="https://github.com/milvus-io/milvus/pull/40071">(#40071</a>)</li>
@@ -615,13 +990,43 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Kami sangat senang mengumumkan rilis Milvus 2.5.4, yang memperkenalkan pengoptimalan kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Sorotan yang menonjol dari rilis ini adalah dukungannya untuk 10.000 koleksi dan 1 juta partisi, yang menandai tonggak penting untuk kasus penggunaan multi-penyewa. Versi ini juga mengatasi beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan, dua bug kritis dapat menyebabkan kehilangan data. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
-<h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
+<h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Mendukung isolasi PartitionKey untuk meningkatkan kinerja dengan beberapa kunci partisi<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/use-partition-key.md">Gunakan Kunci Partisi</a>.</li>
 <li>Sparse Index kini mendukung DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.5.x/sparse_vector.md">Vektor Jarang</a>.</li>
 <li>Menambahkan dukungan untuk <code translate="no">is_null</code> dalam ekspresi<a href="https://github.com/milvus-io/milvus/pull/38931">(#38931</a>)</li>
 <li>Hak akses root dapat disesuaikan<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Mendukung 10 ribu koleksi dan 1 juta partisi dalam satu cluster<a href="https://github.com/milvus-io/milvus/pull/37630">(#37630</a>)</li>
 <li>Informasi delta segmen yang di-cache untuk mempercepat Koordinator Kueri<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
 <li>Membaca metadata secara bersamaan di tingkat koleksi untuk mempercepat pemulihan kegagalan<a href="https://github.com/milvus-io/milvus/pull/38900">(#38900</a>)</li>
@@ -638,13 +1043,43 @@ title: Catatan Rilis
 <li>Menambahkan kontrol versi untuk indeks skalar<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>
 <li>Meningkatkan kecepatan pengambilan informasi koleksi dari RootCoord dengan menghindari salinan yang tidak perlu<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
 </ul>
-<h3 id="Critial-Bug-fixs" class="common-anchor-header">Perbaikan Bug Penting</h3><ul>
+<h3 id="Critial-Bug-fixs" class="common-anchor-header">Perbaikan Bug Penting<button data-href="#Critial-Bug-fixs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki kegagalan pencarian untuk kunci utama dengan indeks<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
 <li>Memperbaiki potensi masalah kehilangan data yang disebabkan oleh memulai ulang MixCoord dan melakukan pembilasan secara bersamaan<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
 <li>Memperbaiki kegagalan penghapusan yang dipicu oleh konkurensi yang tidak tepat antara tugas statistik dan pemadatan L0 setelah MixCoord dimulai ulang<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
 <li>Memperbaiki ketidakcocokan indeks terbalik skalar saat meningkatkan dari 2.4 ke 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki masalah kueri lambat yang disebabkan oleh perincian kunci kasar selama pemuatan multi-kolom<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
 <li>Memperbaiki masalah di mana penggunaan alias dapat menyebabkan iterator melintasi database yang salah<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>)</li>
 <li>Memperbaiki kegagalan pembaruan grup sumber daya saat mengubah basis data<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>)</li>
@@ -684,7 +1119,22 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Milvus 2.5.3 memberikan perbaikan bug kritis dan peningkatan kinerja untuk meningkatkan stabilitas, keandalan, dan kegunaan secara keseluruhan. Versi ini menyempurnakan penanganan konkurensi, meningkatkan pengindeksan dan pengambilan data, dan memperbarui beberapa komponen utama untuk pengalaman pengguna yang lebih kuat.</p>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki masalah di mana menggunakan filter <code translate="no">IN</code> pada primary key <code translate="no">VARCHAR</code> dapat mengembalikan hasil kosong.<a href="https://github.com/milvus-io/milvus/pull/39108">(#39108</a>)</li>
 <li>Memperbaiki masalah konkurensi antara operasi query dan delete yang dapat menyebabkan hasil yang salah.<a href="https://github.com/milvus-io/milvus/pull/39054">(#39054</a>)</li>
 <li>Memperbaiki kegagalan yang disebabkan oleh pemfilteran berulang ketika <code translate="no">expr</code> kosong dalam permintaan kueri.<a href="https://github.com/milvus-io/milvus/pull/39034">(#39034</a>)</li>
@@ -695,7 +1145,22 @@ title: Catatan Rilis
 <li>Memperbaiki kemungkinan kondisi perlombaan bidang kolom yang disebabkan oleh kueri dan pemuatan data secara bersamaan.<a href="https://github.com/milvus-io/milvus/pull/39152">(#39152</a>)</li>
 <li>Memperbaiki kegagalan penyisipan massal ketika bidang yang dapat dinullkan atau nilai_default tidak disertakan dalam data.<a href="https://github.com/milvus-io/milvus/pull/39111">(#39111</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Menambahkan API grup sumber daya untuk antarmuka RESTful.<a href="https://github.com/milvus-io/milvus/pull/39092">(#39092</a>)</li>
 <li>Mengoptimalkan kinerja pengambilan dengan memanfaatkan metode bitset SIMD.<a href="https://github.com/milvus-io/milvus/pull/39041">(#39041</a>)</li>
 <li>Menggunakan stempel waktu MVCC sebagai stempel waktu jaminan saat ditentukan.<a href="https://github.com/milvus-io/milvus/pull/39019">(#39019</a>)</li>
@@ -728,12 +1193,42 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Milvus 2.5.2 mendukung modifikasi panjang maksimum untuk kolom VARCHAR dan menyelesaikan beberapa masalah kritis yang berkaitan dengan konkurensi, partisi drop, dan penanganan statistik BM25 selama impor. Kami sangat menyarankan untuk melakukan upgrade ke versi ini untuk meningkatkan stabilitas dan performa.</p>
-<h3 id="Improvements" class="common-anchor-header">Peningkatan</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Peningkatan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Menghasilkan log penggunaan disk hanya jika jalur yang ditentukan tidak ada.<a href="https://github.com/milvus-io/milvus/pull/38822">(#38822</a>)</li>
 <li>Menambahkan parameter untuk menyetel panjang VARCHAR maksimum dan mengembalikan batasnya ke 65.535.<a href="https://github.com/milvus-io/milvus/pull/38883">(#38883</a>)</li>
 <li>Mendukung konversi tipe parameter untuk ekspresi.<a href="https://github.com/milvus-io/milvus/pull/38782">(#38782</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki potensi kebuntuan dalam skenario konkurensi.<a href="https://github.com/milvus-io/milvus/pull/38863">(#38863</a>)</li>
 <li>Menghasilkan file index_null_offset hanya untuk bidang yang mendukung nilai nol.<a href="https://github.com/milvus-io/milvus/pull/38834">(#38834</a>)</li>
 <li>Memperbaiki penggunaan paket retrieve setelah bebas dalam fase pengurangan.<a href="https://github.com/milvus-io/milvus/pull/38841">(#38841</a>)</li>
@@ -766,10 +1261,40 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Milvus 2.5.1 berfokus pada serangkaian perbaikan bug yang menangani pemuatan memori, daftar RBAC, penyeimbangan simpul kueri, dan pengindeksan segmen tersegel, sementara juga meningkatkan UI Web dan penyadap. Kami sangat menyarankan untuk meningkatkan ke 2.5.1 untuk meningkatkan stabilitas dan keandalan.</p>
-<h3 id="Improvement" class="common-anchor-header">Peningkatan</h3><ul>
+<h3 id="Improvement" class="common-anchor-header">Peningkatan<button data-href="#Improvement" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbarui halaman koleksi dan kueri UI web.<a href="https://github.com/milvus-io/milvus/pull/38701">(#38701</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Memperbaiki masalah OOM dengan menambahkan faktor memori untuk estimasi pemuatan.<a href="https://github.com/milvus-io/milvus/pull/38722">(#38722</a>)</li>
 <li>Memperbaiki perluasan grup hak istimewa saat mencantumkan kebijakan di RootCoord.<a href="https://github.com/milvus-io/milvus/pull/38760">(#38760</a>)</li>
 <li>Memperbaiki masalah dengan daftar grup hak istimewa dan koleksi.<a href="https://github.com/milvus-io/milvus/pull/38738">(#38738</a>)</li>
@@ -806,7 +1331,22 @@ title: Catatan Rilis
 </tbody>
 </table>
 <p>Milvus 2.5.0 membawa kemajuan yang signifikan untuk meningkatkan kegunaan, skalabilitas, dan kinerja bagi pengguna yang berurusan dengan pencarian vektor dan manajemen data berskala besar. Dengan rilis ini, Milvus mengintegrasikan fitur-fitur baru yang kuat seperti pencarian berbasis istilah, pemadatan klaster untuk kueri yang dioptimalkan, dan dukungan serbaguna untuk metode pencarian vektor yang jarang dan padat. Peningkatan dalam manajemen klaster, pengindeksan, dan penanganan data memperkenalkan tingkat fleksibilitas dan kemudahan penggunaan yang baru, membuat Milvus menjadi basis data vektor yang lebih kuat dan mudah digunakan.</p>
-<h3 id="Key-Features" class="common-anchor-header">Fitur Utama</h3><h4 id="Full-Text-Search" class="common-anchor-header">Pencarian Teks Lengkap</h4><p>Milvus 2.5 mendukung pencarian teks lengkap yang diimplementasikan dengan Sparse-BM25! Fitur ini merupakan pelengkap penting bagi kemampuan pencarian semantik Milvus yang kuat, terutama dalam skenario yang melibatkan kata-kata langka atau istilah teknis. Pada versi sebelumnya, Milvus mendukung vektor jarang untuk membantu skenario pencarian kata kunci. Vektor-vektor jarang ini dihasilkan di luar Milvus oleh model neural seperti SPLADEv2/BGE-M3 atau model statistik seperti algoritma BM25.</p>
+<h3 id="Key-Features" class="common-anchor-header">Fitur Utama<button data-href="#Key-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Full-Text-Search" class="common-anchor-header">Pencarian Teks Lengkap</h4><p>Milvus 2.5 mendukung pencarian teks lengkap yang diimplementasikan dengan Sparse-BM25! Fitur ini merupakan pelengkap penting bagi kemampuan pencarian semantik Milvus yang kuat, terutama dalam skenario yang melibatkan kata-kata langka atau istilah teknis. Pada versi sebelumnya, Milvus mendukung vektor jarang untuk membantu skenario pencarian kata kunci. Vektor-vektor jarang ini dihasilkan di luar Milvus oleh model neural seperti SPLADEv2/BGE-M3 atau model statistik seperti algoritma BM25.</p>
 <p>Didukung oleh <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus 2.5 memiliki analisis bawaan dan ekstraksi vektor jarang, memperluas API dari hanya menerima vektor sebagai input menjadi menerima teks secara langsung. Informasi statistik BM25 diperbarui secara real time saat data dimasukkan, sehingga meningkatkan kegunaan dan akurasi. Selain itu, vektor yang jarang berdasarkan algoritma perkiraan tetangga terdekat (ANN) menawarkan kinerja yang lebih kuat daripada sistem pencarian kata kunci standar.</p>
 <p>Untuk detailnya, lihat <a href="/docs/id/v2.5.x/analyzer-overview.md">Ikhtisar Penganalisis</a> dan <a href="/docs/id/v2.5.x/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">WebUI Manajemen Klaster (Beta)</h4><p>Untuk mendukung data yang sangat besar dan fitur yang kaya dengan lebih baik, desain Milvus yang canggih mencakup berbagai ketergantungan, banyak peran node, struktur data yang kompleks, dan banyak lagi. Aspek-aspek ini dapat menimbulkan tantangan untuk penggunaan dan pemeliharaan.</p>
@@ -825,7 +1365,22 @@ title: Catatan Rilis
 <p>PRQ adalah perpaduan antara PQ dan AQ (Additive Quantizer). Dibandingkan dengan PQ, PRQ membutuhkan waktu pembuatan yang lebih lama untuk menghasilkan penarikan yang lebih baik, terutama pada tingkat kompresi yang tinggi, dengan kata lain kompresi biner.</p>
 <h4 id="Clustering-Compaction-Beta" class="common-anchor-header">Pemadatan Pengelompokan (Beta)</h4><p>Milvus 2.5 memperkenalkan Pemadatan Clustering untuk mempercepat pencarian dan mengurangi biaya dalam koleksi yang besar. Dengan menentukan bidang skalar sebagai kunci pengelompokan, data didistribusikan kembali berdasarkan rentang untuk mengoptimalkan penyimpanan dan pengambilan. Bertindak seperti indeks global, fitur ini memungkinkan Milvus memangkas data secara efisien selama kueri berdasarkan metadata pengelompokan, sehingga meningkatkan kinerja pencarian ketika filter skalar diterapkan.</p>
 <p>Untuk detailnya, lihat <a href="/docs/id/v2.5.x/clustering-compaction.md">Pemadatan Klaster</a>.</p>
-<h3 id="Other-Features" class="common-anchor-header">Fitur Lainnya</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">Streaming Node (Beta)</h4><p>Milvus 2.5 memperkenalkan komponen baru yang disebut streaming node, yang menyediakan layanan Write-Ahead Logging (WAL). Hal ini memungkinkan Milvus untuk mencapai konsensus sebelum dan sesudah membaca dan menulis saluran, membuka fitur, fungsi, dan pengoptimalan baru. Fitur ini dinonaktifkan secara default pada Milvus 2.5 dan akan tersedia secara resmi pada versi 3.0.</p>
+<h3 id="Other-Features" class="common-anchor-header">Fitur Lainnya<button data-href="#Other-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">Streaming Node (Beta)</h4><p>Milvus 2.5 memperkenalkan komponen baru yang disebut streaming node, yang menyediakan layanan Write-Ahead Logging (WAL). Hal ini memungkinkan Milvus untuk mencapai konsensus sebelum dan sesudah membaca dan menulis saluran, membuka fitur, fungsi, dan pengoptimalan baru. Fitur ini dinonaktifkan secara default pada Milvus 2.5 dan akan tersedia secara resmi pada versi 3.0.</p>
 <h4 id="IPv6-Support" class="common-anchor-header">Dukungan IPv6</h4><p>Milvus sekarang mendukung IPv6, yang memungkinkan konektivitas dan kompatibilitas jaringan yang lebih luas.</p>
 <h4 id="CSV-Bulk-Import" class="common-anchor-header">Impor Massal CSV</h4><p>Selain format JSON dan Parquet, Milvus sekarang mendukung impor data secara langsung dalam format CSV.</p>
 <h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">Templat Ekspresi untuk Akselerasi Kueri</h4><p>Milvus sekarang mendukung templat ekspresi, meningkatkan efisiensi penguraian ekspresi, terutama dalam skenario dengan ekspresi yang kompleks.</p>
@@ -838,7 +1393,22 @@ title: Catatan Rilis
 <li><strong>Dukungan MVCC</strong>: Pengguna kini dapat menggunakan iterator tanpa terpengaruh oleh perubahan data berikutnya seperti penyisipan dan penghapusan, berkat Kontrol Konkurensi Multi-Versi (MVCC).</li>
 <li><strong>Kursor Persisten</strong>: Milvus sekarang mendukung kursor persisten untuk QueryIterator, sehingga pengguna dapat melanjutkan iterasi dari posisi terakhir setelah Milvus dimulai ulang tanpa perlu memulai ulang seluruh proses iterasi.</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Peningkatan</h3><h4 id="Deletion-Optimization" class="common-anchor-header">Optimalisasi Penghapusan</h4><p>Meningkatkan kecepatan dan mengurangi penggunaan memori untuk penghapusan berskala besar dengan mengoptimalkan penggunaan kunci dan manajemen memori.</p>
+<h3 id="Improvements" class="common-anchor-header">Peningkatan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Deletion-Optimization" class="common-anchor-header">Optimalisasi Penghapusan</h4><p>Meningkatkan kecepatan dan mengurangi penggunaan memori untuk penghapusan berskala besar dengan mengoptimalkan penggunaan kunci dan manajemen memori.</p>
 <h4 id="Dependencies-Upgrade" class="common-anchor-header">Peningkatan Ketergantungan</h4><p>Peningkatan ke ETCD 3.5.16 dan Pulsar 3.0.7 LTS, memperbaiki CVE yang ada dan meningkatkan keamanan. Catatan: Upgrade ke Pulsar 3.x tidak kompatibel dengan versi 2.x sebelumnya.</p>
 <p>Untuk pengguna yang sudah memiliki penerapan Milvus yang berfungsi, Anda perlu meng-upgrade komponen ETCD dan Pulsar sebelum dapat menggunakan fitur dan fungsi baru. Untuk detailnya, lihat <a href="/docs/id/v2.5.x/upgrade-pulsar-v3.md">Meningkatkan Pulsar dari 2.x ke 3.x</a></p>
 <h4 id="Local-Storage-V2" class="common-anchor-header">Penyimpanan Lokal V2</h4><p>Memperkenalkan format file lokal baru di Milvus 2.5, meningkatkan efisiensi pemuatan dan kueri untuk data skalar, mengurangi overhead memori, dan meletakkan dasar untuk pengoptimalan di masa mendatang.</p>

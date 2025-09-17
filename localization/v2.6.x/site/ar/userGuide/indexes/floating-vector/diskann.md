@@ -45,7 +45,22 @@ summary: >-
 <li><p><strong>الرسم البياني Vamana Graph</strong> - فهرس <strong>قائم على القرص</strong> <strong>قائم على الرسم البياني</strong> يربط نقاط البيانات (أو المتجهات) للتنقل الفعال أثناء البحث.</p></li>
 <li><p><strong>تكميم المنتج (PQ)</strong> - طريقة ضغط <strong>داخل الذاكرة</strong> تقلل من حجم المتجهات، مما يتيح إجراء حسابات تقريبية سريعة للمسافة بين المتجهات.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">بناء الفهرس</h3><h4 id="Vamana-graph" class="common-anchor-header">الرسم البياني فامانا</h4><p>يُعدّ الرسم البياني Vamana محوريًا في استراتيجية DISKANN القائمة على القرص. ويمكنه التعامل مع مجموعات البيانات الكبيرة جدًا لأنه لا يحتاج إلى التواجد بشكل كامل في الذاكرة أثناء الإنشاء أو بعده.</p>
+<h3 id="Index-construction" class="common-anchor-header">بناء الفهرس<button data-href="#Index-construction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">الرسم البياني فامانا</h4><p>يُعدّ الرسم البياني Vamana محوريًا في استراتيجية DISKANN القائمة على القرص. ويمكنه التعامل مع مجموعات البيانات الكبيرة جدًا لأنه لا يحتاج إلى التواجد بشكل كامل في الذاكرة أثناء الإنشاء أو بعده.</p>
 <p>يوضح الشكل التالي كيف يتم بناء الرسم البياني لـ Vamana.</p>
 <p>
   
@@ -55,7 +70,7 @@ summary: >-
 <li><p><strong>الاتصالات العشوائية الأولية:</strong> يتم تمثيل كل نقطة بيانات (متجه) كعقدة في الرسم البياني. يتم توصيل هذه العقد في البداية بشكل عشوائي، مما يشكل شبكة كثيفة. وعادةً ما تبدأ العقدة بحوالي 500 حافة (أو وصلات) للاتصال الواسع.</p></li>
 <li><p><strong>التنقيح من أجل الكفاءة:</strong> يخضع الرسم البياني العشوائي الأولي لعملية تحسين لجعله أكثر كفاءة للبحث. ويتضمن ذلك خطوتين رئيسيتين:</p>
 <ul>
-<li><p><strong>تشذيب الحواف الزائدة عن الحاجة:</strong> تتجاهل الخوارزمية الاتصالات غير الضرورية بناءً على المسافات بين العقد. تعطي هذه الخطوة الأولوية للحواف الأعلى جودة.</p>
+<li><p><strong>تشذيب الحواف الزائدة عن الحاجة:</strong> تستبعد الخوارزمية الاتصالات غير الضرورية بناءً على المسافات بين العقد. تعطي هذه الخطوة الأولوية للحواف الأعلى جودة.</p>
 <p>تقيد المعلمة <code translate="no">max_degree</code> الحد الأقصى لعدد الحواف لكل عقدة. يؤدي ارتفاع <code translate="no">max_degree</code> إلى رسم بياني أكثر كثافة، مما قد يؤدي إلى العثور على المزيد من الجيران ذوي الصلة (استدعاء أعلى) ولكن أيضًا زيادة استخدام الذاكرة ووقت البحث.</p></li>
 <li><p><strong>إضافة اختصارات استراتيجية:</strong> يقدم Vamana حوافًا بعيدة المدى، تربط بين نقاط البيانات المتباعدة في فضاء المتجه. تسمح هذه الاختصارات لعمليات البحث بالقفز بسرعة عبر الرسم البياني، متجاوزةً العقد الوسيطة ومسرّعةً عملية التنقل بشكل كبير.</p>
 <p>تحدد المعلمة <code translate="no">search_list_size</code> اتساع عملية تنقيح الرسم البياني. يؤدي ارتفاع <code translate="no">search_list_size</code> إلى توسيع نطاق البحث عن الجيران أثناء الإنشاء ويمكن أن يحسّن الدقة النهائية، ولكنه يزيد من وقت بناء الفهرس.</p></li>
@@ -72,7 +87,22 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> هي نسبة يحددها المستخدم، تمثل جزءًا من إجمالي حجم البيانات المحجوزة لرموز PQ. تسمح هذه المعلمة بالمفاضلة بين دقة البحث وموارد الذاكرة. لمزيد من المعلومات حول ضبط المعلمة، راجع <a href="/docs/ar/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">تكوينات DISKANN</a>.</p></li>
 </ul>
 <p>للحصول على التفاصيل الفنية حول طريقة PQ الأساسية، راجع <a href="/docs/ar/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
-<h3 id="Search-process" class="common-anchor-header">عملية البحث</h3><p>بمجرد إنشاء الفهرس (الرسم البياني Vamana على القرص ورموز PQ في الذاكرة)، يقوم DISKANN بإجراء عمليات بحث ANN على النحو التالي:</p>
+<h3 id="Search-process" class="common-anchor-header">عملية البحث<button data-href="#Search-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بمجرد إنشاء الفهرس (الرسم البياني Vamana على القرص ورموز PQ في الذاكرة)، يقوم DISKANN بإجراء عمليات بحث ANN على النحو التالي:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
@@ -148,7 +178,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكن تكوين المعلمات المتعلقة بـ DISKANN من خلال ملف تكوين Milvus (<code translate="no">milvus.yaml</code>):</p>
+    </button></h2><p>لا يمكن تكوين المعلمات المتعلقة بـ DISKANN إلا من خلال ملف تكوين Milvus (<code translate="no">milvus.yaml</code>):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -175,7 +205,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>يسمح لك الضبط الدقيق لمعلمات DISKANN بتكييف سلوكها مع مجموعة البيانات الخاصة بك وعبء عمل البحث، وتحقيق التوازن الصحيح بين السرعة والدقة واستخدام الذاكرة.</p>
-<h3 id="Index-building-params" class="common-anchor-header">بارامترات بناء الفهرس</h3><p>تؤثر هذه المعلمات على كيفية إنشاء فهرس DISKANN. يمكن أن يؤثر تعديلها على حجم الفهرس ووقت الإنشاء وجودة البحث.</p>
+<h3 id="Index-building-params" class="common-anchor-header">بارامترات بناء الفهرس<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تؤثر هذه المعلمات على كيفية إنشاء فهرس DISKANN. يمكن أن يؤثر تعديلها على حجم الفهرس ووقت إنشائه وجودة البحث.</p>
+<div class="alert note">
+<p>لا يمكن تكوين جميع بارامترات بناء الفهرس في القائمة أدناه إلا من خلال ملف تكوين ملف Milvus (<code translate="no">milvus.yaml</code>)</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -219,7 +267,26 @@ summary: >-
 <p>في معظم الحالات، نوصيك بتعيين قيمة ضمن هذا النطاق: (0.0625، 0.25]</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>تؤثر هذه المعلمات على كيفية إجراء DISKANN لعمليات البحث. يمكن أن يؤثر ضبطها على سرعة البحث، والكمون واستخدام الموارد.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تؤثر هذه المعلمات على كيفية إجراء DISKANN لعمليات البحث. يمكن أن يؤثر ضبطها على سرعة البحث، والكمون واستخدام الموارد.</p>
+<div class="alert note">
+<p>لا يمكن تكوين <code translate="no">BeamWidthRatio</code> في القائمة أدناه إلا عبر ملف تكوين Milvus الخاص بك (<code translate="no">milvus.yaml</code>)</p>
+<p>لا يمكن تكوين <code translate="no">search_list</code> في القائمة أدناه إلا في باراميات البحث في SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -238,10 +305,10 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>أثناء عملية البحث، تحدد هذه المعلمة حجم مخزن التخزين المرشح الذي تحتفظ به الخوارزمية أثناء اجتيازها للرسم البياني. تزيد القيمة الأكبر من فرص العثور على الجيران الأقرب الحقيقيين (استدعاء أعلى) ولكنها تزيد أيضًا من زمن انتقال البحث.</p></td>
      <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1، <em>int_max</em>]</p>
 <p><strong>القيمة الافتراضية</strong>: <code translate="no">100</code></p></td>
-     <td><p>للحصول على توازن جيد بين الأداء والدقة، يوصى بتعيين هذه القيمة لتكون مساوية لعدد النتائج التي تريد استرجاعها (top_k) أو أكبر قليلاً من عدد النتائج التي تريد استرجاعها.</p></td>
+     <td><p>لتحقيق توازن جيد بين الأداء والدقة، يوصى بتعيين هذه القيمة لتكون مساوية لعدد النتائج التي تريد استرجاعها (top_k) أو أكبر قليلاً من عدد النتائج التي تريد استرجاعها.</p></td>
    </tr>
 </table>

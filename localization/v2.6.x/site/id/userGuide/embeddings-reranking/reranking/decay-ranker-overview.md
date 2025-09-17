@@ -32,7 +32,7 @@ beta: Milvus 2.6.x
 </ul>
 <p>Semua skenario ini memiliki kebutuhan yang sama: menyeimbangkan kemiripan vektor dengan faktor numerik lain seperti waktu, jarak, atau popularitas.</p>
 <p>Pemeringkat pembusukan di Milvus memenuhi kebutuhan ini dengan menyesuaikan peringkat pencarian berdasarkan nilai bidang numerik. Mereka memungkinkan Anda untuk menyeimbangkan kemiripan vektor dengan "kesegaran", "kedekatan", atau properti numerik lain dari data Anda, menciptakan pengalaman pencarian yang lebih intuitif dan relevan secara kontekstual.</p>
-<h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Usage-notes" class="common-anchor-header">Catatan penggunaan<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -49,8 +49,14 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>Peringkat peluruhan tidak dapat digunakan dengan pencarian pengelompokan.</p></li>
-<li><p>Bidang yang digunakan untuk peringkat peluruhan harus berupa angka (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, atau <code translate="no">DOUBLE</code>).</p></li>
+<li><p>Bidang yang digunakan untuk pemeringkatan peluruhan harus berupa angka (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, atau <code translate="no">DOUBLE</code>).</p></li>
 <li><p>Setiap pemeringkat peluruhan hanya dapat menggunakan satu bidang numerik.</p></li>
+<li><p><strong>Konsistensi unit waktu</strong>: Ketika menggunakan peringkat peluruhan berbasis waktu, satuan untuk parameter <code translate="no">origin</code>, <code translate="no">scale</code>, dan <code translate="no">offset</code> harus sesuai dengan satuan yang digunakan dalam data koleksi Anda:</p>
+<ul>
+<li>Jika koleksi Anda menyimpan stempel waktu dalam <strong>satuan detik</strong>, gunakan satuan detik untuk semua parameter</li>
+<li>Jika koleksi Anda menyimpan cap waktu dalam <strong>milidetik</strong>, gunakan milidetik untuk semua parameter</li>
+<li>Jika koleksi Anda menyimpan cap waktu dalam <strong>mikrodetik</strong>, gunakan mikrodetik untuk semua parameter</li>
+</ul></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Bagaimana cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,8 +73,23 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Peringkat peluruhan meningkatkan pencarian vektor tradisional dengan memasukkan faktor numerik seperti waktu atau jarak geografis ke dalam proses pemeringkatan. Keseluruhan prosesnya mengikuti tahap-tahap berikut:</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Tahap 1: Menghitung skor kemiripan yang dinormalisasi</h3><p>Pertama, Milvus menghitung dan menormalkan skor kemiripan vektor untuk memastikan perbandingan yang konsisten:</p>
+    </button></h2><p>Peringkat peluruhan menyempurnakan pencarian vektor tradisional dengan memasukkan faktor numerik seperti waktu atau jarak geografis ke dalam proses pemeringkatan. Keseluruhan prosesnya mengikuti tahap-tahap berikut ini:</p>
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Tahap 1: Menghitung skor kemiripan yang dinormalisasi<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pertama, Milvus menghitung dan menormalkan skor kemiripan vektor untuk memastikan perbandingan yang konsisten:</p>
 <ul>
 <li><p>Untuk metrik jarak <strong>L2</strong> dan <strong>JACCARD</strong> (di mana nilai yang lebih rendah menunjukkan kemiripan yang lebih tinggi):</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
@@ -76,20 +97,65 @@ beta: Milvus 2.6.x
 <p>Ini mengubah jarak menjadi skor kemiripan antara 0-1, di mana lebih tinggi lebih baik.</p></li>
 <li><p>Untuk metrik <strong>IP</strong>, <strong>COSINE</strong>, dan <strong>BM25</strong> (di mana nilai yang lebih tinggi sudah mengindikasikan kecocokan yang lebih baik): Skor digunakan secara langsung tanpa normalisasi.</p></li>
 </ul>
-<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">Tahap 2: Menghitung skor pembusukan</h3><p>Selanjutnya, Milvus menghitung skor peluruhan berdasarkan nilai bidang numerik (seperti stempel waktu atau jarak) menggunakan pemeringkat peluruhan yang Anda pilih:</p>
+<h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">Tahap 2: Menghitung skor pembusukan<button data-href="#Stage-2-Calculate-decay-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Selanjutnya, Milvus menghitung skor peluruhan berdasarkan nilai bidang numerik (seperti stempel waktu atau jarak) menggunakan pemeringkat peluruhan yang Anda pilih:</p>
 <ul>
 <li><p>Setiap pemeringkat peluruhan mengubah nilai numerik mentah menjadi skor relevansi yang dinormalisasi antara 0-1</p></li>
 <li><p>Skor peluruhan menunjukkan seberapa relevan sebuah item berdasarkan "jaraknya" dari titik ideal</p></li>
 </ul>
 <p>Rumus perhitungan spesifik bervariasi tergantung pada jenis pemeringkat peluruhan. Untuk detail tentang cara menghitung skor peluruhan, lihat halaman khusus untuk <a href="/docs/id/gaussian-decay.md#Formula">Peluruhan Gaussian</a>, <a href="/docs/id/exponential-decay.md#Formula">Peluruhan Eksponensial</a>, <a href="/docs/id/linear-decay.md#Formula">Peluruhan Linier</a>.</p>
-<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Tahap 3: Menghitung skor akhir</h3><p>Terakhir, Milvus menggabungkan skor kemiripan yang dinormalisasi dan skor peluruhan untuk menghasilkan skor peringkat akhir:</p>
+<h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Tahap 3: Menghitung skor akhir<button data-href="#Stage-3-Compute-final-scores" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Terakhir, Milvus menggabungkan skor kemiripan yang dinormalisasi dan skor peluruhan untuk menghasilkan skor peringkat akhir:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Dalam kasus pencarian hibrida (menggabungkan beberapa bidang vektor), Milvus mengambil skor kemiripan ternormalisasi maksimum di antara permintaan pencarian:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Misalnya, jika sebuah makalah penelitian mendapat skor 0,82 dari kesamaan vektor dan 0,91 dari pencarian teks berbasis BM25 dalam pencarian hibrida, Milvus menggunakan 0,91 sebagai skor kesamaan dasar sebelum menerapkan faktor peluruhan.</p>
-<h3 id="Decay-ranking-in-action" class="common-anchor-header">Peringkat peluruhan dalam aksi</h3><p>Mari kita lihat peringkat peluruhan dalam skenario praktis-mencari <strong>"makalah penelitian AI"</strong> dengan peluruhan berbasis waktu:</p>
+<h3 id="Decay-ranking-in-action" class="common-anchor-header">Peringkat peluruhan dalam aksi<button data-href="#Decay-ranking-in-action" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mari kita lihat peringkat peluruhan dalam skenario praktis-mencari <strong>"makalah penelitian AI"</strong> dengan peluruhan berbasis waktu:</p>
 <div class="alert note">
 <p>Dalam contoh ini, skor peluruhan mencerminkan bagaimana relevansi berkurang seiring berjalannya waktu-makalah yang lebih baru menerima skor yang mendekati 1,0, makalah yang lebih lama menerima skor yang lebih rendah. Nilai-nilai ini dihitung dengan menggunakan pemeringkat peluruhan tertentu. Untuk detailnya, lihat <a href="/docs/id/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pemeringkat peluruhan yang tepat</a>.</p>
 </div>
@@ -204,7 +270,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p><a href="/docs/id/gaussian-decay.md">Peluruhan Gaussian</a></p></li>
 <li><p><a href="/docs/id/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
-<li><p><a href="/docs/id/exponential-decay.md">Peluruhan Eksponensial</a></p></li>
+<li><p><a href="/docs/id/linear-decay.md">Peluruhan Linier</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Contoh implementasi<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -225,10 +291,26 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Sebelum menggunakan fungsi peluruhan, Anda harus terlebih dahulu membuat koleksi dengan bidang numerik yang sesuai (seperti stempel waktu, jarak, dll.) yang akan digunakan untuk perhitungan peluruhan. Untuk contoh kerja lengkap termasuk penyiapan koleksi, definisi skema, dan penyisipan data, lihat <a href="/docs/id/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Menerapkan Pemeringkatan Berbasis Waktu di Milvus</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Membuat pemeringkat peluruhan</h3><p>Untuk mengimplementasikan pemeringkatan peluruhan, pertama-tama tentukan objek <code translate="no">Function</code> dengan konfigurasi yang sesuai:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Membuat pemeringkat peluruhan<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk mengimplementasikan pemeringkatan peluruhan, pertama-tama tentukan objek <code translate="no">Function</code> dengan konfigurasi yang sesuai:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 decay_ranker = Function(
     name=<span class="hljs-string">&quot;time_decay&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;timestamp&quot;</span>],    <span class="hljs-comment"># Numeric field to use for decay</span>
@@ -236,9 +318,9 @@ decay_ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,            <span class="hljs-comment"># Specify decay reranker. Must be &quot;decay&quot;</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;gauss&quot;</span>,            <span class="hljs-comment"># Choose decay function type: &quot;gauss&quot;, &quot;exp&quot;, or &quot;linear&quot;</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).timestamp()),    <span class="hljs-comment"># Reference point (seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,      <span class="hljs-comment"># 7 days in seconds (must match collection data unit)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,         <span class="hljs-comment"># 1 day no-decay zone (must match collection data unit)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>                    <span class="hljs-comment"># Half score at scale distance</span>
     }
 )
@@ -284,25 +366,25 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Titik referensi yang digunakan untuk menghitung skor peluruhan. Item pada nilai ini menerima skor relevansi maksimum.</p></td>
+     <td><p>Titik referensi yang digunakan untuk menghitung skor peluruhan. Item pada nilai ini menerima skor relevansi maksimum. Untuk peluruhan berbasis waktu, satuan waktu harus sesuai dengan data koleksi Anda.</p></td>
      <td><ul>
 <li>Untuk stempel waktu: waktu saat ini (misalnya, <code translate="no">int(time.time())</code>)</li>
 <li>Untuk geolokasi: koordinat pengguna saat ini</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.scale</code></p></td>
+          <td><p><code translate="no">params.scale</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Jarak atau waktu saat relevansi turun ke nilai <code translate="no">decay</code>. Mengontrol seberapa cepat relevansi menurun. Nilai yang lebih besar membuat penurunan relevansi yang lebih bertahap; nilai yang lebih kecil membuat penurunan yang lebih curam.</p></td>
+     <td><p>Jarak atau waktu saat relevansi turun ke nilai <code translate="no">decay</code>. Mengontrol seberapa cepat relevansi menurun. Untuk peluruhan berbasis waktu, unit waktu harus sesuai dengan data koleksi Anda. Nilai yang lebih besar menciptakan penurunan relevansi yang lebih bertahap; nilai yang lebih kecil menciptakan penurunan yang lebih curam.</p></td>
      <td><ul>
 <li>Untuk waktu: periode dalam detik (misalnya, <code translate="no">7 * 24 * 60 * 60</code> selama 7 hari)</li>
 <li>Untuk jarak: meter (misalnya, <code translate="no">5000</code> untuk 5 km)</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.offset</code></p></td>
+          <td><p><code translate="no">params.offset</code></p></td>
      <td><p>Tidak</p></td>
-     <td><p>Menciptakan "zona tanpa peluruhan" di sekitar <code translate="no">origin</code> di mana item mempertahankan nilai penuh (nilai peluruhan = 1,0). Item dalam kisaran <code translate="no">origin</code> ini mempertahankan relevansi maksimum.</p></td>
+     <td><p>Menciptakan "zona tanpa peluruhan" di sekitar <code translate="no">origin</code> di mana item mempertahankan nilai penuh (nilai peluruhan = 1,0). Item dalam kisaran <code translate="no">origin</code> ini mempertahankan relevansi maksimum. Untuk peluruhan berbasis waktu, unit waktu harus sesuai dengan data koleksi Anda.</p></td>
      <td><ul>
 <li>Untuk waktu: periode dalam detik (misalnya, <code translate="no">24 * 60 * 60</code> selama 1 hari)</li>
 <li>Untuk jarak: meter (misalnya, <code translate="no">500</code> untuk 500m)</li>
@@ -315,7 +397,22 @@ decay_ranker = Function(
      <td><p><code translate="no">0.5</code> (default)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Menerapkan ke pencarian vektor standar</h3><p>Setelah menentukan pemeringkat peluruhan Anda, Anda dapat menerapkannya selama operasi pencarian dengan meneruskannya ke parameter <code translate="no">ranker</code>:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Menerapkan ke pencarian vektor standar<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah menentukan pemeringkat peluruhan Anda, Anda dapat menerapkannya selama operasi pencarian dengan meneruskannya ke parameter <code translate="no">ranker</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
@@ -327,7 +424,22 @@ results = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Terapkan ke pencarian hibrida</h3><p>Pemeringkat peluruhan juga dapat diterapkan pada operasi pencarian hibrida yang menggabungkan beberapa bidang vektor:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Terapkan ke pencarian hibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pemeringkat peluruhan juga dapat diterapkan pada operasi pencarian hibrida yang menggabungkan beberapa bidang vektor:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>

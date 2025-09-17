@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Timeline dei social media</p></td>
      <td><p>Feed di attività, aggiornamenti di stato</p></td>
-     <td><p>Enfatizza i contenuti freschi, ma permette di far emergere quelli vecchi e virali</p></td>
+     <td><p>Enfatizza i contenuti freschi, ma permette di far emergere i contenuti virali più vecchi</p></td>
    </tr>
    <tr>
      <td><p>Sistemi di notifica</p></td>
@@ -99,13 +99,16 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Il decadimento esponenziale crea una curva che all'inizio scende rapidamente, poi si appiattisce gradualmente in una lunga coda che si avvicina ma non raggiunge mai lo zero. Questo modello matematico compare spesso in fenomeni naturali come il decadimento radioattivo, il declino della popolazione e la rilevanza delle informazioni nel tempo.</p>
+<div class="alert note">
+<p>Tutti i parametri temporali (<code translate="no">origin</code>, <code translate="no">offset</code>, <code translate="no">scale</code>) devono utilizzare la stessa unità dei dati della raccolta. Se la raccolta memorizza i timestamp in un'unità diversa (millisecondi, microsecondi), regolare tutti i parametri di conseguenza.</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/exp-decay.png" alt="Exp Decay" class="doc-image" id="exp-decay" />
-   </span> <span class="img-wrapper"> <span>Decadimento esponenziale</span> </span></p>
-<p>Il grafico qui sopra mostra come il decadimento esponenziale influenzerebbe le classifiche degli articoli di notizie in una piattaforma digitale di notizie:</p>
+   </span> <span class="img-wrapper"> <span>Decadimento Exp</span> </span></p>
+<p>Il grafico qui sopra mostra come il decadimento esponenziale influenzerebbe le classifiche degli articoli di notizie in una piattaforma di notizie digitali:</p>
 <ul>
-<li><p><code translate="no">origin</code> (momento attuale): Il momento attuale, dove la rilevanza è massima (1.0).</p></li>
+<li><p><code translate="no">origin</code> (ora attuale): Il momento attuale, in cui la rilevanza è massima (1.0).</p></li>
 <li><p><code translate="no">offset</code> (3 ore): La "finestra delle ultime notizie": tutte le storie pubblicate nelle ultime 3 ore mantengono il massimo punteggio di rilevanza (1,0), assicurando che le notizie molto recenti non vengano inutilmente penalizzate per piccole differenze temporali.</p></li>
 <li><p><code translate="no">decay</code> (0.5): Il punteggio alla distanza di scala: questo parametro controlla quanto drasticamente i punteggi diminuiscono con il tempo.</p></li>
 <li><p><code translate="no">scale</code> (24 ore): Il periodo di tempo in cui la rilevanza scende al valore di decadimento: gli articoli di 24 ore esatte hanno un punteggio di rilevanza dimezzato (0,5).</p></li>
@@ -158,11 +161,30 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Prima di utilizzare le funzioni di decadimento, è necessario creare una collezione con campi numerici appropriati (come timestamp, distanze, ecc.) che verranno utilizzati per i calcoli di decadimento. Per esempi di lavoro completi, che includono l'impostazione della raccolta, la definizione dello schema e l'inserimento dei dati, consultare l'<a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">esercitazione</a> sul <a href="/docs/it/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Creare un ranker di decadimento</h3><p>Dopo aver impostato la raccolta con un campo numerico (in questo esempio, <code translate="no">publish_time</code>), creare un ranker di decadimento esponenziale:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Creare un ranker di decadimento<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dopo aver impostato la raccolta con un campo numerico (in questo esempio, <code translate="no">publish_time</code>), creare un ranker di decadimento esponenziale:</p>
+<div class="alert note">
+<p><strong>Coerenza dell'unità di tempo</strong>: Quando si utilizza un decadimento basato sul tempo, assicurarsi che i parametri <code translate="no">origin</code>, <code translate="no">scale</code> e <code translate="no">offset</code> utilizzino la stessa unità temporale dei dati della raccolta. Se la raccolta memorizza i timestamp in secondi, utilizzare i secondi per tutti i parametri. Se utilizza i millisecondi, utilizzare i millisecondi per tutti i parametri.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-comment"># Create an exponential decay ranker for news recency</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;news_recency&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;publish_time&quot;</span>],   <span class="hljs-comment"># Numeric field to use</span>
@@ -170,14 +192,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;exp&quot;</span>,                <span class="hljs-comment"># Choose exponential decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (1 day)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Applicare alla ricerca vettoriale standard</h3><p>Dopo aver definito il ranker di decadimento, è possibile applicarlo durante le operazioni di ricerca passandolo al parametro <code translate="no">ranker</code>:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Applicare alla ricerca vettoriale standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dopo aver definito il ranker di decadimento, è possibile applicarlo durante le operazioni di ricerca passandolo al parametro <code translate="no">ranker</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -189,7 +226,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Applica alla ricerca ibrida</h3><p>I ranker di decadimento possono essere applicati anche alle operazioni di ricerca ibrida che combinano più campi vettoriali:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Applica alla ricerca ibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>I ranker di decadimento possono essere applicati anche alle operazioni di ricerca ibrida che combinano più campi vettoriali:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

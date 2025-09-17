@@ -46,7 +46,22 @@ summary: >-
 <li><p><strong>Graphique de Vamana</strong> - Un index <strong>basé sur un disque</strong> et un <strong>graphique</strong> qui relie les points de données (ou vecteurs) pour une navigation efficace pendant la recherche.</p></li>
 <li><p><strong>Quantification des produits (PQ</strong> ) - Une méthode de compression <strong>en mémoire</strong> qui réduit la taille des vecteurs, permettant des calculs rapides de la distance approximative entre les vecteurs.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">Construction de l'index</h3><h4 id="Vamana-graph" class="common-anchor-header">Graphe de Vamana</h4><p>Le graphe de Vamana est au cœur de la stratégie de DISKANN basée sur les disques. Il peut gérer de très grands ensembles de données car il n'a pas besoin de résider entièrement dans la mémoire pendant ou après sa construction.</p>
+<h3 id="Index-construction" class="common-anchor-header">Construction de l'index<button data-href="#Index-construction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">Graphe de Vamana</h4><p>Le graphe de Vamana est au cœur de la stratégie de DISKANN basée sur les disques. Il peut gérer de très grands ensembles de données car il n'a pas besoin de résider entièrement dans la mémoire pendant ou après sa construction.</p>
 <p>La figure suivante montre comment un graphe de Vamana est construit.</p>
 <p>
   
@@ -73,14 +88,29 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> est un ratio défini par l'utilisateur, représentant la fraction de la taille totale des données réservée aux codes PQ. Ce paramètre permet de trouver un compromis entre la précision de la recherche et les ressources mémoire. Pour plus d'informations sur le réglage des paramètres, reportez-vous à <a href="/docs/fr/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>.</p></li>
 </ul>
 <p>Pour plus de détails techniques sur la méthode PQ sous-jacente, voir <a href="/docs/fr/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
-<h3 id="Search-process" class="common-anchor-header">Processus de recherche</h3><p>Une fois que l'index (le graphe de Vamana sur le disque et les codes PQ en mémoire) est construit, DISKANN effectue les recherches ANN comme suit :</p>
+<h3 id="Search-process" class="common-anchor-header">Processus de recherche<button data-href="#Search-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Une fois que l'index (le graphe de Vamana sur le disque et les codes PQ en mémoire) est construit, DISKANN effectue les recherches ANN comme suit :</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
    </span> <span class="img-wrapper"> <span>Diskann 2</span> </span></p>
 <ol>
 <li><p><strong>Requête et point d'entrée :</strong> Un vecteur de requête est fourni pour localiser les voisins les plus proches. DISKANN démarre à partir d'un point d'entrée sélectionné dans le graphe de Vamana, souvent un nœud proche du centroïde global de l'ensemble de données. Le centroïde global représente la moyenne de tous les vecteurs, ce qui permet de minimiser la distance à parcourir dans le graphe pour trouver les voisins souhaités.</p></li>
-<li><p><strong>Exploration du voisinage :</strong> L'algorithme rassemble les voisins candidats potentiels (cercles en rouge dans la figure) à partir des bords du nœud actuel, en s'appuyant sur les codes PQ en mémoire pour approximer les distances entre ces candidats et le vecteur de la requête. Ces voisins potentiels sont les nœuds directement connectés au point d'entrée sélectionné par des arêtes dans le graphe de Vamana.</p></li>
+<li><p><strong>Exploration du voisinage :</strong> L'algorithme rassemble les voisins candidats potentiels (cercles en rouge sur la figure) à partir des bords du nœud actuel, en s'appuyant sur les codes PQ en mémoire pour estimer les distances entre ces candidats et le vecteur de la requête. Ces voisins potentiels sont les nœuds directement connectés au point d'entrée sélectionné par des arêtes dans le graphe de Vamana.</p></li>
 <li><p><strong>Sélection des nœuds pour un calcul précis de la distance :</strong> À partir des résultats approximatifs, un sous-ensemble des voisins les plus prometteurs (cercles en vert sur la figure) est sélectionné pour des évaluations précises de la distance en utilisant leurs vecteurs originaux non compressés. Cette opération nécessite la lecture des données à partir du disque, ce qui peut prendre beaucoup de temps. DISKANN utilise deux paramètres pour contrôler cet équilibre délicat entre précision et rapidité :</p>
 <ul>
 <li><p><code translate="no">beam_width_ratio</code>: Un ration qui contrôle l'étendue de la recherche, déterminant le nombre de voisins candidats sélectionnés en parallèle pour explorer leurs voisins. Une valeur plus élevée de <code translate="no">beam_width_ratio</code> entraîne une exploration plus large, ce qui peut conduire à une plus grande précision, mais aussi à une augmentation des coûts de calcul et des entrées/sorties sur disque. La largeur du faisceau, ou le nombre de nœuds sélectionnés, est déterminée à l'aide de la formule suivante : <code translate="no">Beam width = Number of CPU cores * beam_width_ratio</code>.</p></li>
@@ -149,7 +179,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les paramètres liés à DISKANN peuvent être configurés via votre fichier de configuration Milvus (<code translate="no">milvus.yaml</code>) :</p>
+    </button></h2><p>Les paramètres relatifs à DISKANN ne peuvent être configurés que via votre fichier de configuration Milvus (<code translate="no">milvus.yaml</code>) :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -175,13 +205,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le réglage fin des paramètres de DISKANN vous permet d'adapter son comportement à votre jeu de données spécifique et à votre charge de travail de recherche, en trouvant le bon équilibre entre la vitesse, la précision et l'utilisation de la mémoire.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Ces paramètres influencent la façon dont l'index DISKANN est construit. Leur réglage peut affecter la taille de l'index, le temps de construction et la qualité de la recherche.</p>
+    </button></h2><p>Le réglage fin des paramètres de DISKANN vous permet d'adapter son comportement à votre ensemble de données spécifique et à votre charge de travail de recherche, en trouvant le bon équilibre entre la vitesse, la précision et l'utilisation de la mémoire.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ces paramètres influencent la façon dont l'index DISKANN est construit. Leur ajustement peut affecter la taille de l'index, le temps de construction et la qualité de la recherche.</p>
+<div class="alert note">
+<p>Tous les paramètres de construction d'index de la liste ci-dessous ne peuvent être configurés que dans le fichier de configuration de Milvus (<code translate="no">milvus.yaml</code>).</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>Paramètre</p></th>
-     <th><p>Description de l'index</p></th>
+     <th><p>Description du paramètre</p></th>
      <th><p>Plage de valeurs</p></th>
      <th><p>Suggestion de réglage</p></th>
    </tr>
@@ -220,12 +268,31 @@ summary: >-
 <p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : (0.0625, 0.25)</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Ces paramètres influencent la manière dont DISKANN effectue les recherches. Leur réglage peut avoir un impact sur la vitesse de recherche, la latence et l'utilisation des ressources.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ces paramètres influencent la manière dont DISKANN effectue les recherches. Leur réglage peut avoir un impact sur la vitesse de recherche, la latence et l'utilisation des ressources.</p>
+<div class="alert note">
+<p>Le paramètre <code translate="no">BeamWidthRatio</code> de la liste ci-dessous ne peut être configuré que via votre fichier de configuration Milvus (<code translate="no">milvus.yaml</code>).</p>
+<p>Les <code translate="no">search_list</code> de la liste ci-dessous ne peuvent être configurés que dans les paramètres de recherche du SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>Paramètre</p></th>
-     <th><p>Description</p></th>
+     <th><p>Paramètre Description</p></th>
      <th><p>Plage de valeurs</p></th>
      <th><p>Suggestion de réglage</p></th>
    </tr>
@@ -239,7 +306,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>Au cours d'une opération de recherche, ce paramètre détermine la taille du groupe de candidats que l'algorithme maintient lorsqu'il parcourt le graphe. Une valeur plus élevée augmente les chances de trouver les vrais voisins les plus proches (rappel plus élevé), mais augmente également la latence de la recherche.</p></td>
      <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">100</code></p></td>

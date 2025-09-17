@@ -41,7 +41,7 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
 <li><a href="/docs/ar/v2.5.x/prerequisite-gpu.md">تحقق من متطلبات الأجهزة والبرامج</a> قبل التثبيت.</li>
 </ul>
 <div class="alert note">
-<p>إذا واجهتك أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
+<p>إذا واجهت أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">تثبيت Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,22 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
         ></path>
       </svg>
     </button></h2><p>لتثبيت Milvus مع دعم GPU باستخدام Docker Compose، اتبع الخطوات التالية.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. قم بتنزيل ملف YAML وتكوينه</h3><p>تنزيل <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> واحفظه بصيغة docker-compose.yml يدويًا، أو باستخدام الأمر التالي.</p>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. تنزيل ملف YAML وتكوينه<button data-href="#1-Download-and-configure-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تنزيل <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> واحفظه بصيغة docker-compose.yml يدويًا، أو باستخدام الأمر التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.13/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>تحتاج إلى إجراء بعض التغييرات على متغيرات البيئة الخاصة بالخدمة المستقلة في ملف YAML على النحو التالي:</p>
@@ -92,7 +107,22 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
             <span class="hljs-attr">device_ids:</span> [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>]
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus" class="common-anchor-header">2. ابدأ تشغيل Milvus</h3><p>في الدليل الذي يحتوي على docker-compose.yml، ابدأ تشغيل Milvus عن طريق التشغيل:</p>
+<h3 id="2-Start-Milvus" class="common-anchor-header">2. ابدأ تشغيل Milvus<button data-href="#2-Start-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في الدليل الذي يحتوي على docker-compose.yml، ابدأ تشغيل Milvus عن طريق التشغيل:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
 Creating milvus-etcd  ... done
@@ -100,7 +130,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا فشلت في تشغيل الأمر أعلاه، تحقق مما إذا كان نظامك يحتوي على Docker Compose V1 مثبتًا على Docker Compose V1. إذا كانت هذه هي الحالة، ننصحك بالترحيل إلى Docker Compose V2 نظرًا للملاحظات الواردة في <a href="https://docs.docker.com/compose/">هذه الصفحة</a>.</p>
+<p>إذا فشلت في تشغيل الأمر أعلاه، تحقق مما إذا كان نظامك يحتوي على Docker Compose V1 مثبتًا على نظام Docker Compose V1. إذا كانت هذه هي الحالة، ننصحك بالترحيل إلى Docker Compose V2 نظرًا للملاحظات الواردة في <a href="https://docs.docker.com/compose/">هذه الصفحة</a>.</p>
 </div>
 <p>بعد بدء تشغيل Milvus,</p>
 <ul>
@@ -153,7 +183,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <div class="alert note">
 <p>يقع الملف <code translate="no">milvus.yaml</code> في الدليل <code translate="no">/milvus/configs/</code> داخل حاوية ميلفوس.</p>
 </div>
-<p>لضبط تجمع الذاكرة، قم بتعديل الإعدادات <code translate="no">initMemSize</code> و <code translate="no">maxMemSize</code> في الملف <code translate="no">milvus.yaml</code> على النحو التالي.</p>
+<p>لتكوين تجمع الذاكرة، قم بتعديل الإعدادات <code translate="no">initMemSize</code> و <code translate="no">maxMemSize</code> في الملف <code translate="no">milvus.yaml</code> على النحو التالي.</p>
 <ol>
 <li><p>استخدم الأمر التالي لنسخ <code translate="no">milvus.yaml</code> من حاوية ميلفوس إلى جهازك المحلي. استبدل <code translate="no">&lt;milvus_container_id&gt;</code> بمعرف حاوية ميلفوس الفعلي الخاص بك.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml

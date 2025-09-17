@@ -86,7 +86,7 @@ title: Upgrade Milvus Standalone with Helm Chart
 <ul>
 <li>Milvus v2.6.0-rc1 is <strong>not compatible</strong> with v2.6.0. Direct upgrades from release candidates are not supported.</li>
 <li>If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">this community guide</a> for migration assistance.</li>
-<li>You <strong>must</strong> upgrade to v2.5.16 before upgrading to v2.6.0.</li>
+<li>You <strong>must</strong> upgrade to v2.5.16 or later before upgrading to v2.6.0.</li>
 </ul>
 <div class="alert note">
 Since Milvus Helm chart version 4.2.21, we introduced pulsar-v3.x chart as dependency. For backward compatibility, please upgrade your Helm to v3.14 or later version, and be sure to add the <code translate="no">--reset-then-reuse-values</code> option whenever you use <code translate="no">helm upgrade</code>.

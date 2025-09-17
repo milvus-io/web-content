@@ -92,21 +92,27 @@
                 "children": []
               },
               {
+                "label": "RPM/DEB",
+                "id": "install_standalone-binary.md",
+                "order": 1,
+                "children": []
+              },
+              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               }
             ]
@@ -195,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Ligar ao servidor Milvus",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -420,9 +432,28 @@
           },
           {
             "label": "Campo JSON",
-            "id": "use-json-fields.md",
+            "id": "json-field",
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "Descrição geral do campo JSON",
+                "id": "json-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Indexação JSON",
+                "id": "json-indexing.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Destruição de JSON",
+                "id": "json-shredding.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Campo de matriz",
@@ -512,6 +543,12 @@
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
+                  },
+                  {
+                    "label": "Identificador da língua",
+                    "id": "language-identifier.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               },
@@ -592,6 +629,12 @@
                 "label": "Analisadores multilingues",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Escolha o analisador certo para o seu caso de utilização",
+                "id": "choose-the-right-analyzer-for-your-use-case.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -777,6 +820,12 @@
                 "label": "INVERTIDO",
                 "id": "inverted.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -1036,10 +1085,16 @@
                 "children": []
               },
               {
+                "label": "Boost Ranker",
+                "id": "boost-ranker.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "Classificador de decaimento",
                 "id": "decay-ranker",
                 "isMenu": true,
-                "order": 2,
+                "order": 3,
                 "children": [
                   {
                     "label": "Visão geral do Decay Ranker",
@@ -1076,7 +1131,7 @@
               {
                 "label": "Classificador de modelos",
                 "id": "model-ranker",
-                "order": 3,
+                "order": 4,
                 "isMenu": true,
                 "children": [
                   {
@@ -1095,6 +1150,24 @@
                     "label": "Classificador TEI",
                     "id": "tei-ranker.md",
                     "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Cohere Ranker",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Classificador de IA do Voyage",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "Classificador SiliconFlow",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
                     "children": []
                   }
                 ]
@@ -1238,7 +1311,7 @@
                     "children": []
                   },
                   {
-                    "label": "Azulejo",
+                    "label": "Azure",
                     "id": "ingress.md",
                     "order": 3,
                     "children": []
@@ -1625,6 +1698,12 @@
         "label": "Milvus WebUI",
         "id": "milvus-webui.md",
         "order": "12",
+        "children": []
+      },
+      {
+        "label": "Pica-pau",
+        "id": "use-woodpecker.md",
+        "order": 13,
         "children": []
       }
     ]

@@ -75,7 +75,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>短语匹配适用于<code translate="no">VARCHAR</code> 字段类型，即 Milvus 中的字符串数据类型。要启用短语匹配，请配置您的 Collections Schema，将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 参数都设置为<code translate="no">True</code> ，类似于<a href="/docs/zh/keyword-match.md">文本匹配</a>。</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">设置<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code></h3><p>要启用特定<code translate="no">VARCHAR</code> 字段的短语匹配，可在定义字段 Schema 时将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 参数设置为<code translate="no">True</code> 。此配置指示 Milvus 对文本进行标记化，并创建一个具有位置信息的反向索引，以实现高效的短语匹配。</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">设置<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要启用特定<code translate="no">VARCHAR</code> 字段的短语匹配，请在定义字段 Schema 时将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 参数设置为<code translate="no">True</code> 。该配置指示 Milvus 对文本进行标记化，并创建一个具有位置信息的反向索引，以实现高效的短语匹配。</p>
 <p>下面是启用短语匹配的 Schema 定义示例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -101,7 +116,22 @@ schema.add_field(
     dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">可选：配置分析器</h3><p>短语匹配的准确性在很大程度上取决于用于标记文本数据的分析器。不同的分析器适用于不同的语言和文本格式，会影响标记化和定位的准确性。根据具体使用情况选择合适的分析器，可以优化短语匹配结果。</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">可选：配置分析器<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>短语匹配的准确性在很大程度上取决于用于标记文本数据的分析器。不同的分析器适用于不同的语言和文本格式，会影响标记化和定位的准确性。根据具体使用情况选择合适的分析器，可以优化短语匹配结果。</p>
 <p>默认情况下，Milvus 使用标准分析器，根据空白和标点符号对文本进行标记化，删除长度超过 40 个字符的标记，并将文本转换为小写。默认用法不需要额外参数。详情请参阅<a href="/docs/zh/standard-analyzer.md">标准分析器</a>。</p>
 <p>如果您的应用程序需要特定的分析器，请使用<code translate="no">analyzer_params</code> 参数进行配置。例如，以下是如何配置<code translate="no">english</code> 分析器，用于英文文本中的短语匹配：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
@@ -139,7 +169,22 @@ schema.add_field(
 <div class="alert note">
 <p><code translate="no">PHRASE_MATCH</code> 表达式不区分大小写。可以使用<code translate="no">PHRASE_MATCH</code> 或<code translate="no">phrase_match</code> 。</p>
 </div>
-<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">PHRASE_MATCH 表达式语法</h3><p>搜索时，使用<code translate="no">PHRASE_MATCH</code> 表达式指定字段、短语和可选的灵活性 (<code translate="no">slop</code>)。语法如下</p>
+<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">PHRASE_MATCH 表达式语法<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>搜索时，使用<code translate="no">PHRASE_MATCH</code> 表达式指定字段、短语和可选的灵活性 (<code translate="no">slop</code>)。语法如下</p>
 <pre><code translate="no" class="language-python">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -152,7 +197,22 @@ schema.add_field(
 <li><p><code translate="no">2</code>:允许更多的灵活性，包括术语顺序颠倒或最多在两个词组之间。例如<strong>机器学习 "</strong>过滤器将匹配<strong>"学习机器"</strong>（词序颠倒）或<strong>"机器快速促进学习"</strong>（<strong>"机器 "</strong>和<strong>"学习 "</strong>之间有两个词组<strong>）</strong>。</p></li>
 </ul></li>
 </ul>
-<h3 id="Example-dataset" class="common-anchor-header">数据集示例</h3><p>假设您有一个名为<strong>tech_articles 的</strong>Collections，其中包含以下五个实体：</p>
+<h3 id="Example-dataset" class="common-anchor-header">数据集示例<button data-href="#Example-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>假设您有一个名为<strong>tech_articles 的</strong>Collections，其中包含以下五个实体：</p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -179,7 +239,22 @@ schema.add_field(
      <td><p>"学习先进的机器算法，扩展人工智能能力</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">短语匹配查询</h3><p>使用<code translate="no">query()</code> 方法时，<strong>PHRASE_MATCH 充当</strong>标量过滤器。只有包含指定短语的文档才会返回（取决于允许的斜率）。</p>
+<h3 id="Query-with-phrase-match" class="common-anchor-header">短语匹配查询<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用<code translate="no">query()</code> 方法时，<strong>PHRASE_MATCH 充当</strong>标量过滤器。只有包含指定短语的文档才会返回（取决于允许的斜率）。</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">示例：slop = 0（精确匹配）</h4><p>此示例返回包含精确短语<strong>"machine learning "</strong>的文档，中间不包含任何额外标记。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -201,9 +276,24 @@ result = client.query(
      <td><p>"机器学习提高了大规模数据分析的效率</p></td>
    </tr>
 </table>
-<p>只有文档 1 按指定顺序包含精确短语<strong>"machine learning"</strong>，且没有附加标记。</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">使用短语匹配进行搜索</h3><p>在搜索操作中，<strong>PHRASE_MATCH</strong>用于在应用向量相似性排序之前过滤文档。这种两步法首先通过文本匹配缩小候选集的范围，然后根据向量嵌入重新对这些候选集进行排序。</p>
-<h4 id="Example-slop--1" class="common-anchor-header">示例：斜率 = 1</h4><p>这里，我们允许斜率为 1。该过滤器适用于包含<strong>"学习机 "</strong>短语的文档，并略有灵活性。</p>
+<p>只有文档 1 按指定顺序包含精确短语<strong>"machine learning"</strong>，且没有额外标记。</p>
+<h3 id="Search-with-phrase-match" class="common-anchor-header">使用短语匹配进行搜索<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在搜索操作中，<strong>PHRASE_MATCH</strong>用于在应用向量相似性排序之前过滤文档。这种两步法首先通过文本匹配缩小候选集的范围，然后根据向量嵌入重新对这些候选集进行排序。</p>
+<h4 id="Example-slop--1" class="common-anchor-header">示例：斜率 = 1</h4><p>在这里，我们允许斜率为 1。该过滤器适用于包含<strong>"learning machine（学习机器）"</strong>短语的文档，并略有灵活性。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>
 

@@ -150,7 +150,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []

@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Um campo ARRAY armazena um conjunto ordenado de elementos do mesmo tipo de dados. Eis um exemplo de como os campos ARRAY armazenam dados:</p>
+    </button></h1><p>Um campo ARRAY armazena um conjunto ordenado de elementos do mesmo tipo de dados. Aqui está um exemplo de como os campos ARRAY armazenam dados:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>
@@ -43,9 +43,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Valores predefinidos</strong>: Os campos ARRAY não suportam valores predefinidos. No entanto, você pode definir o atributo <code translate="no">nullable</code> como <code translate="no">True</code> para permitir valores nulos. Para obter detalhes, consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>Tipo de dados</strong>: Todos os elementos de um campo Matriz têm de ter o mesmo tipo de dados, conforme especificado pelo atributo <code translate="no">element_type</code>. Se definir <code translate="no">element_type</code> para <code translate="no">VARCHAR</code>, deve também definir <code translate="no">max_length</code> para os elementos da matriz.</p></li>
-<li><p><strong>Capacidade da matriz</strong>: O número de elementos num campo Array tem de ser inferior ou igual à capacidade máxima definida quando o Array foi criado, conforme especificado por <code translate="no">max_capacity</code>. O valor deve ser um número inteiro no intervalo de <strong>1</strong> a <strong>4096</strong>.</p></li>
-<li><p><strong>Tratamento de cadeias de caracteres</strong>: Os valores de cadeia de caracteres nos campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
+<li><p><strong>Tipo de dados:</strong> Todos os elementos de um campo ARRAY têm de partilhar o mesmo tipo de dados, que é definido pelo parâmetro <code translate="no">element_type</code>. Quando <code translate="no">element_type</code> é definido como <code translate="no">VARCHAR</code>, tem também de especificar <code translate="no">max_length</code> para os elementos da matriz. O parâmetro <code translate="no">element_type</code> aceita qualquer tipo de dados escalares suportado pelo Milvus, com exceção de <code translate="no">JSON</code>.</p></li>
+<li><p><strong>Capacidade da matriz</strong>: O número de elementos num campo ARRAY tem de ser inferior ou igual à capacidade máxima definida aquando da criação da matriz, tal como especificado em <code translate="no">max_capacity</code>. O valor deve ser um número inteiro dentro do intervalo de <strong>1</strong> a <strong>4096</strong>.</p></li>
+<li><p><strong>Tratamento de strings</strong>: Os valores de cadeia de caracteres nos campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Adicionar um campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,15 +65,15 @@ summary: >-
     </button></h2><p>Para utilizar os campos ARRAY do Milvus, defina o tipo de campo relevante ao criar o esquema da coleção. Este processo inclui:</p>
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados Array suportado, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Utilizar o parâmetro <code translate="no">element_type</code> para especificar o tipo de dados dos elementos da matriz. Pode ser qualquer tipo de dados escalar suportado pelo Milvus, como <code translate="no">VARCHAR</code> ou <code translate="no">INT64</code>. Todos os elementos do mesmo Array têm de ter o mesmo tipo de dados.</p></li>
-<li><p>Utilizar o parâmetro <code translate="no">max_capacity</code> para definir a capacidade máxima do array, ou seja, o número máximo de elementos que pode conter.</p></li>
+<li><p>Utilizar o parâmetro <code translate="no">element_type</code> para especificar o tipo de dados dos elementos da matriz. Todos os elementos da mesma matriz devem ter o mesmo tipo de dados.</p></li>
+<li><p>Utilizando o parâmetro <code translate="no">max_capacity</code> para definir a capacidade máxima da matriz, ou seja, o número máximo de elementos que pode conter.</p></li>
 </ol>
 <p>Eis como definir um esquema de coleção que inclui campos ARRAY:</p>
 <div class="alert note">
-<p>Se definir <code translate="no">enable_dynamic_fields=True</code> aquando da definição do esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, podendo afetar o desempenho. Para mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>
+<p>Se definir <code translate="no">enable_dynamic_fields=True</code> aquando da definição do esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, podendo afetar o desempenho. Para obter mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#http">HTTP</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -212,7 +212,7 @@ schema.WithField(entity.NewField().
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-http">export arrayField1='{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> arrayField1=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;tags&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;VarChar&quot;,
@@ -220,41 +220,41 @@ schema.WithField(entity.NewField().
         &quot;max_capacity&quot;: 10,
         &quot;max_length&quot;: 65535
     }
-}'
+}&#x27;</span>
 
-export arrayField2='{
+<span class="hljs-built_in">export</span> arrayField2=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;ratings&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;Int64&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;max_capacity&quot;: 5
     }
-}'
+}&#x27;</span>
 
-export pkField='{
+<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;pk&quot;,
     &quot;dataType&quot;: &quot;Int64&quot;,
     &quot;isPrimary&quot;: true
-}'
+}&#x27;</span>
 
-export vectorField='{
+<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;embedding&quot;,
     &quot;dataType&quot;: &quot;FloatVector&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;dim&quot;: 3
     }
-}'
+}&#x27;</span>
 
-export schema=&quot;{
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;autoID\&quot;: false,
     \&quot;fields\&quot;: [
-        $arrayField1,
-        $arrayField2,
-        $pkField,
-        $vectorField
+        <span class="hljs-variable">$arrayField1</span>,
+        <span class="hljs-variable">$arrayField2</span>,
+        <span class="hljs-variable">$pkField</span>,
+        <span class="hljs-variable">$vectorField</span>
     ]
-}&quot;
-</code></pre>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-index-params" class="common-anchor-header">Definir parâmetros de índice<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -271,7 +271,7 @@ export schema=&quot;{
         ></path>
       </svg>
     </button></h2><p>A indexação ajuda a melhorar o desempenho da pesquisa e da consulta. No Milvus, a indexação é obrigatória para campos vetoriais, mas opcional para campos escalares.</p>
-<p>O exemplo a seguir cria índices no campo vetorial <code translate="no">embedding</code> e no campo ARRAY <code translate="no">tags</code>, ambos usando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
+<p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo ARRAY <code translate="no">tags</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

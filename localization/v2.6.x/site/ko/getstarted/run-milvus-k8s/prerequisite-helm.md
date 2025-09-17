@@ -70,7 +70,7 @@ title: Kubernetes에서 Milvus를 실행하기 위한 요구 사항
 <tr><th>운영 체제</th><th>소프트웨어</th><th>참고</th></tr>
 </thead>
 <tbody>
-<tr><td>Linux 플랫폼</td><td><ul><li>쿠버네티스 1.16 이상</li><li>kubectl</li><li>헬름 3.0.0 이상</li><li>미니큐브(Milvus 스탠드얼론용)</li><li>Docker 19.03 이상(Milvus 독립형용)</li></ul></td><td>자세한 내용은 <a href="https://helm.sh/docs/">헬름 문서를</a> 참조한다.</td></tr>
+<tr><td>Linux 플랫폼</td><td><ul><li>쿠버네티스 1.16 이상</li><li>kubectl</li><li>헬름 3.0.0 이상</li><li>미니큐브(Milvus 스탠드얼론용)</li><li>도커 19.03 이상(밀버스 독립형용)</li></ul></td><td>자세한 내용은 <a href="https://helm.sh/docs/">헬름 문서를</a> 참조한다.</td></tr>
 </tbody>
 </table>
 <table>
@@ -79,11 +79,26 @@ title: Kubernetes에서 Milvus를 실행하기 위한 요구 사항
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td><a href="#Additional-disk-requirements">추가 디스크 요구 사항을</a> 참조하세요.</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>Pulsar</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Additional-disk-requirements" class="common-anchor-header">추가 디스크 요구 사항</h3><p>디스크 성능은 etcd에 매우 중요합니다. 로컬 NVMe SSD를 사용할 것을 적극 권장합니다. 디스크 응답 속도가 느리면 클러스터 선출이 자주 발생하여 결국 etcd 서비스가 저하될 수 있습니다.</p>
+<h3 id="Additional-disk-requirements" class="common-anchor-header">추가 디스크 요구 사항<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>디스크 성능은 etcd에 매우 중요합니다. 로컬 NVMe SSD를 사용할 것을 적극 권장합니다. 디스크 응답 속도가 느리면 클러스터 선출이 자주 발생하여 결국 etcd 서비스가 저하될 수 있습니다.</p>
 <p>디스크가 적격한지 테스트하려면 <a href="https://github.com/axboe/fio">fio를</a> 사용하세요.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
@@ -104,7 +119,22 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">테스트 목적으로 로컬에서 K8s 클러스터를 시작하려면 어떻게 해야 하나요?</h3><p><a href="https://minikube.sigs.k8s.io/docs/">미니큐브</a>, <a href="https://kind.sigs.k8s.io/">kind</a>, <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm과</a> 같은 도구를 사용하여 로컬에서 빠르게 Kubernetes 클러스터를 설정할 수 있습니다. 다음 절차에서는 미니큐브를 예로 들어 설명합니다.</p>
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">테스트 목적으로 로컬에서 K8s 클러스터를 시작하려면 어떻게 해야 하나요?<button data-href="#How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://minikube.sigs.k8s.io/docs/">미니큐브</a>, <a href="https://kind.sigs.k8s.io/">kind</a>, <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm과</a> 같은 도구를 사용하여 로컬에서 빠르게 Kubernetes 클러스터를 설정할 수 있습니다. 다음 절차에서는 미니큐브를 예로 들어 설명합니다.</p>
 <ol>
 <li>미니큐브 다운로드</li>
 </ol>

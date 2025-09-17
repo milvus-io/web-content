@@ -1,9 +1,9 @@
 ---
 id: operational_faq.md
 summary: Milvusでの業務に関するよくある質問と回答をご覧いただけます。
-title: 運用に関するFAQ
+title: 運用FAQ
 ---
-<h1 id="Operational-FAQ" class="common-anchor-header">運用に関するFAQ<button data-href="#Operational-FAQ" class="anchor-icon" translate="no">
+<h1 id="Operational-FAQ" class="common-anchor-header">運用FAQ<button data-href="#Operational-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,13 +18,51 @@ title: 運用に関するFAQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Docker HubからのMilvus Dockerイメージのpullに失敗した場合は？</h4><p>Docker HubからのMilvus Dockerイメージの引き抜きに失敗した場合は、他のレジストリミラーを追加してみてください。</p>
+    </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">QueryNodeデリゲータとは何ですか？</h4><p>コレクションがロードされると、QueryNode はメッセージキューから来る挿入および削除メッセージの DML チャネルをサブスクライブします。これらのチャネルをサブスクライブする QueryNode は、デリゲータと呼ばれ、以下の責任を負います：</p>
+<ul>
+<li>継続的な挿入のために追加のメモリを必要とする、増加するセグメントの管理。</li>
+<li>削除メッセージを受信し、関連するセグメントを保持する他の QueryNode に渡す。</li>
+</ul>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">コレクションのデリゲーターノードを特定するには？</h4><p>Birdwatcher を使います。</p>
+<p>Birdwatcherをインストールし、<a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">以下の</a>コマンドを実行してください：</p>
+<pre><code translate="no" class="language-shell">./birdwatcher
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
+Milvus(my-release) &gt; show segment-loaded-grpc --collection &lt;your-collectionID&gt;
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Map server ID to pod IP</span>
+Milvus(my-release) &gt; show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">クエリノードのメモリ使用量が不均衡な場合、どのようなパラメータを調整できますか？</h4><p>デリゲータとしてより多くのRAMを使用するものがあるため、クエリノードのメモリが異なることがあります。デリゲータのメモリが多い場合は、queryCoord.delegatorMemoryOverloadFactor を調整して、シーリングされたセグメントを他のノードにオフロードし、RAM 使用量を減らします。</p>
+<ul>
+<li>デフォルト値は 0.1 です。</li>
+<li>この値を大きくすると (たとえば 0.3 以上にすると)、システムはオーバーロードされたデリゲータから他の QueryNode に、より多くの封止セグメントをオフロードするようになり、メモリ使用量のバランスがとりやすくなります。値を 1 にすると、デリゲータノードに封印セグメントがロードされなくなります。</li>
+</ul>
+<p>クラスタを再起動したくない場合は、birdwatcherを使ってmilvusの設定を変更することができます：</p>
+<pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
+Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
+
+# Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
+<span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">コレクションにshard_numを設定するには？</h4><p>ベストプラクティスとして、768次元のベクターを持つコレクションでは、少なくとも1億ベクターあたり1シャードを使用することを推奨します。書き込みが多い場合は、1億ベクターあたり4シャードを使用します。</p>
+<p>例：1億個のベクターがある場合、1-4個のシャードを使用する。5億個のベクターがある場合は、5-10個のシャードを使用する。</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Docker HubからMilvus Dockerイメージをプルできなかった場合はどうすればよいですか？</h4><p>Docker HubからMilvus Dockerイメージをプルできなかった場合は、他のレジストリミラーを追加してみてください。</p>
 <p>中国本土のユーザは、<strong>/etc.docker/daemon.jsonの</strong>registry-mirrors配列に "https://registry.docker-cn.com "というURLを追加することができます。</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Milvusをインストールし、実行する唯一の方法はDockerですか？</h4><p>DockerはMilvusの効率的なデプロイ方法ですが、唯一の方法ではありません。ソースコードからMilvusをデプロイすることもできます。これにはUbuntu (18.04以上) または CentOS (7以上) が必要です。詳しくは<a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Milvusをソースコードからビルドするを</a>ご覧ください。</p>
+<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Milvusをインストールして実行するにはDockerを使うしかないのでしょうか？</h4><p>DockerはMilvusの効率的なデプロイ方法ですが、唯一の方法ではありません。ソースコードからMilvusをデプロイすることもできます。これにはUbuntu (18.04以上) または CentOS (7以上) が必要です。詳しくは<a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Milvusをソースコードからビルドするを</a>ご覧ください。</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">再現率に影響を与える主な要因は何ですか?</h4><p>検索結果は主にインデックスタイプと検索パラメータに影響されます。</p>
 <p>FLATインデックスの場合、Milvusはコレクション内を網羅的にスキャンし、100%の検索結果を返します。</p>
 <p>IVFインデックスでは、nprobeパラメータがコレクション内の検索範囲を決定します。nprobeを増加させると、検索されるベクトルの割合が増加し、リコールが増加しますが、クエリ性能は低下します。</p>
@@ -52,7 +90,7 @@ title: 運用に関するFAQ
 <h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windowsにpymilvusをインストールする際にエラーが発生しました。どうすればよいでしょうか。</h4><p>以下のコマンドでpymilvusを最新版にアップデートしてください。</p>
 <pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">インターネットに接続されていない環境でもMilvusをインストールできますか？</h4><p>オフライン環境でMilvusをインストールすることができます。詳しくは<a href="/docs/ja/install_offline-helm.md">Milvusのオフラインインストールを</a>ご参照ください。</p>
+<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Milvusはインターネットに接続していない状態でもインストールできますか？</h4><p>オフライン環境でMilvusをインストールすることができます。詳しくは<a href="/docs/ja/install_offline-helm.md">Milvusのオフラインインストールを</a>ご参照ください。</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvusが生成したログはどこにありますか?</h4><p>Milvusのログはデフォルトでstout(標準出力)とstderr(標準エラー)に出力されますが、本番環境ではログを永続ボリュームにリダイレクトすることを強く推奨します。そのためには、<strong>milvus.yamlの</strong> <code translate="no">log.file.rootPath</code> 。また、milvusを<code translate="no">milvus-helm</code> チャートでデプロイする場合、<code translate="no">--set log.persistence.enabled=true</code> を使ってログの永続化を有効にする必要があります。</p>
 <p>設定を変更していない場合は、kubectl logs<pod-name> または docker logs CONTAINER を使ってもログを見つけることができます。</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">セグメントにデータを挿入する前にインデックスを作成できますか？</h4><p>はい、できます。しかし、各セグメントにインデックスを作成する前に、256MBを超えない範囲でまとめてデータを挿入することをお勧めします。</p>
@@ -78,7 +116,7 @@ title: 運用に関するFAQ
 <p>解決策としては、Linux環境を利用することです：</p>
 <ul>
 <li>Linuxベースのオペレーティングシステムまたは仮想マシンを使用してMilvus Liteを実行してください。</li>
-<li>この方法により、ライブラリの依存関係や機能との互換性が確保されます。</li>
+<li>この方法により、ライブラリの依存関係や機能との互換性を確保することができます。</li>
 </ul>
 <h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">Milvusの "length exceeds max length "エラーとは何ですか？</h4><p>Milvusの "Length exceeds max length "エラーは、データ要素のサイズがコレクションまたはフィールドの最大許容サイズを超えた場合に発生します。以下はその例と説明です：</p>
 <ul>
@@ -104,6 +142,6 @@ title: 運用に関するFAQ
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">まだ質問がありますか?</h4><p>可能です：</p>
 <ul>
-<li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。質問をしたり、アイデアを共有したり、他の人を助けたりすることができます。</li>
-<li><a href="https://discuss.milvus.io/">Milvusフォーラムや</a> <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slackチャンネルに</a>参加して、オープンソースコミュニティに参加してください。</li>
+<li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。自由に質問したり、アイデアを共有したり、他の人を助けたりしてください。</li>
+<li><a href="https://discuss.milvus.io/">Milvusフォーラムや</a> <a href="https://discord.com/invite/8uyFbECzPX">Discordチャンネルに</a>参加して、オープンソースコミュニティに参加してください。</li>
 </ul>

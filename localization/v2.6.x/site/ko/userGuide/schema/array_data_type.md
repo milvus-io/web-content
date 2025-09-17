@@ -41,7 +41,7 @@ summary: 'ARRAY 필드는 동일한 데이터 유형의 정렬된 요소 집합�
       </svg>
     </button></h2><ul>
 <li><p><strong>기본값</strong>: ARRAY 필드는 기본값을 지원하지 않습니다. 그러나 <code translate="no">nullable</code> 속성을 <code translate="no">True</code> 으로 설정하여 null 값을 허용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p></li>
-<li><p><strong>데이터 유형</strong>: 배열 필드의 모든 요소는 <code translate="no">element_type</code> 에 지정된 대로 동일한 데이터 유형을 가져야 합니다. <code translate="no">element_type</code> 을 <code translate="no">VARCHAR</code> 으로 설정한 경우 배열 요소에 대해서도 <code translate="no">max_length</code> 을 설정해야 합니다.</p></li>
+<li><p><strong>데이터 유형:</strong> ARRAY 필드의 모든 요소는 <code translate="no">element_type</code> 매개변수로 정의되는 동일한 데이터 유형을 공유해야 합니다. <code translate="no">element_type</code> 가 <code translate="no">VARCHAR</code> 로 설정된 경우 배열 요소에 대해 <code translate="no">max_length</code> 도 지정해야 합니다. <code translate="no">element_type</code> 은 <code translate="no">JSON</code> 을 제외한 Milvus에서 지원하는 모든 스칼라 데이터 유형을 허용합니다.</p></li>
 <li><p><strong>배열 용량</strong>: 배열 필드의 요소 수는 <code translate="no">max_capacity</code> 에 지정된 대로 배열을 생성할 때 정의된 최대 용량보다 작거나 같아야 합니다. 값은 <strong>1에서</strong> <strong>4096</strong> 범위 내의 정수여야 합니다.</p></li>
 <li><p><strong>문자열 처리</strong>: 배열 필드의 문자열 값은 시맨틱 이스케이프나 변환 없이 있는 그대로 저장됩니다. 예를 들어 <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, <code translate="no">&quot;a\&quot;b&quot;</code> 은 입력한 대로 저장되고 <code translate="no">'a'b'</code> 및 <code translate="no">&quot;a&quot;b&quot;</code> 은 유효하지 않은 값으로 간주됩니다.</p></li>
 </ul>
@@ -63,7 +63,7 @@ summary: 'ARRAY 필드는 동일한 데이터 유형의 정렬된 요소 집합�
     </button></h2><p>배열 필드 Milvus를 사용하려면 컬렉션 스키마를 만들 때 관련 필드 유형을 정의합니다. 이 프로세스에는 다음이 포함됩니다:</p>
 <ol>
 <li><p><code translate="no">datatype</code> 을 지원되는 배열 데이터 유형인 <code translate="no">ARRAY</code> 으로 설정합니다.</p></li>
-<li><p><code translate="no">element_type</code> 매개변수를 사용하여 배열에 있는 요소의 데이터 유형을 지정합니다. <code translate="no">VARCHAR</code> 또는 <code translate="no">INT64</code> 과 같이 Milvus에서 지원하는 모든 스칼라 데이터 유형이 될 수 있습니다. 동일한 배열의 모든 요소는 동일한 데이터 유형이어야 합니다.</p></li>
+<li><p><code translate="no">element_type</code> 매개변수를 사용하여 배열에 있는 요소의 데이터 유형을 지정합니다. 동일한 배열의 모든 요소는 동일한 데이터 유형이어야 합니다.</p></li>
 <li><p><code translate="no">max_capacity</code> 매개변수를 사용하여 배열의 최대 용량, 즉 배열에 포함할 수 있는 최대 요소 수를 정의합니다.</p></li>
 </ol>
 <p>다음은 배열 필드를 포함하는 컬렉션 스키마를 정의하는 방법입니다:</p>
@@ -71,7 +71,7 @@ summary: 'ARRAY 필드는 동일한 데이터 유형의 정렬된 요소 집합�
 <p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 미리 정의하지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#http">HTTP</a></div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -210,7 +210,7 @@ schema.WithField(entity.NewField().
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-http">export arrayField1='{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> arrayField1=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;tags&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;VarChar&quot;,
@@ -218,41 +218,41 @@ schema.WithField(entity.NewField().
         &quot;max_capacity&quot;: 10,
         &quot;max_length&quot;: 65535
     }
-}'
+}&#x27;</span>
 
-export arrayField2='{
+<span class="hljs-built_in">export</span> arrayField2=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;ratings&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;Int64&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;max_capacity&quot;: 5
     }
-}'
+}&#x27;</span>
 
-export pkField='{
+<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;pk&quot;,
     &quot;dataType&quot;: &quot;Int64&quot;,
     &quot;isPrimary&quot;: true
-}'
+}&#x27;</span>
 
-export vectorField='{
+<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;embedding&quot;,
     &quot;dataType&quot;: &quot;FloatVector&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;dim&quot;: 3
     }
-}'
+}&#x27;</span>
 
-export schema=&quot;{
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;autoID\&quot;: false,
     \&quot;fields\&quot;: [
-        $arrayField1,
-        $arrayField2,
-        $pkField,
-        $vectorField
+        <span class="hljs-variable">$arrayField1</span>,
+        <span class="hljs-variable">$arrayField2</span>,
+        <span class="hljs-variable">$pkField</span>,
+        <span class="hljs-variable">$vectorField</span>
     ]
-}&quot;
-</code></pre>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-index-params" class="common-anchor-header">인덱스 매개변수 설정<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -269,7 +269,7 @@ export schema=&quot;{
         ></path>
       </svg>
     </button></h2><p>인덱싱은 검색 및 쿼리 성능을 개선하는 데 도움이 됩니다. Milvus에서 인덱싱은 벡터 필드의 경우 필수이지만 스칼라 필드의 경우 선택 사항입니다.</p>
-<p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 와 배열 필드 <code translate="no">tags</code> 에 인덱스를 생성하는 예제입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
+<p>다음 예제는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 와 배열 필드 <code translate="no">tags</code> 에 인덱스를 생성합니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

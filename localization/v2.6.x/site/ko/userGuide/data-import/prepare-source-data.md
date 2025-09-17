@@ -225,7 +225,22 @@ schema.verify()
 <li><strong>RemoteBulkWriter</strong>: LocalBulkWriter와 동일한 작업을 수행하지만 변환된 데이터 파일을 지정된 원격 개체 스토리지 버킷으로 추가로 전송합니다.</li>
 </ul>
 <p><strong>RemoteBulkWriter는</strong> 변환된 데이터 파일을 대상 오브젝트 스토리지 버킷으로 전송한다는 점에서 <strong>LocalBulkWriter와</strong> 다릅니다.</p>
-<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">LocalBulkWriter 설정</h3><p><strong>LocalBulkWriter는</strong> 소스 데이터 집합의 행을 추가하고 지정된 형식의 로컬 파일에 커밋합니다.</p>
+<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">LocalBulkWriter 설정<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>LocalBulkWriter는</strong> 소스 데이터 집합의 행을 추가하고 지정된 형식의 로컬 파일에 커밋합니다.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
@@ -272,7 +287,22 @@ writer = LocalBulkWriter(
 </ul>
 <p>매개변수 설정에 대한 자세한 내용은 SDK 참조에서 LocalBulkWriter를 참조하세요.</p>
 </div>
-<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">RemoteBulkWriter 설정</h3><p><strong>RemoteBulkWriter는</strong> 추가된 데이터를 로컬 파일에 커밋하는 대신 원격 버킷에 커밋합니다. 따라서 <strong>RemoteBulkWriter를</strong> 만들기 전에 <strong>ConnectParam</strong> 객체를 설정해야 합니다.</p>
+<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">RemoteBulkWriter 설정<button data-href="#Set-up-RemoteBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RemoteBulkWriter는</strong> 추가된 데이터를 로컬 파일에 커밋하는 대신 원격 버킷에 커밋합니다. 따라서 <strong>RemoteBulkWriter를</strong> 만들기 전에 <strong>ConnectParam</strong> 객체를 설정해야 합니다.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
@@ -619,7 +649,7 @@ remoteBulkWriter.getBatchFiles();
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>벌크라이터는</strong> UUID를 생성하고, 제공된 출력 디렉토리에 UUID를 사용하여 하위 폴더를 생성하며, 생성된 모든 파일을 하위 폴더에 배치합니다. 준비된 샘플 데이터를 다운로드하려면 <a href="https://assets.zilliz.com/bulk_writer.zip">여기를 클릭하세요</a>.</p>
 <p>가능한 폴더 구조는 다음과 같습니다:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
+<pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
 │       └── 1.json 

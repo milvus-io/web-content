@@ -86,7 +86,7 @@ title: Upgrade Milvus Cluster with Milvus Operator
 <ul>
 <li>Milvus v2.6.0-rc1 is <strong>not compatible</strong> with v2.6.0. Direct upgrades from release candidates are not supported.</li>
 <li>If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">this community guide</a> for migration assistance.</li>
-<li>You <strong>must</strong> upgrade to v2.5.16 with <code translate="no">mixCoord</code> enabled before upgrading to v2.6.0.</li>
+<li>You <strong>must</strong> upgrade to v2.5.16 or later with <code translate="no">mixCoord</code> enabled before upgrading to v2.6.0.</li>
 </ul>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade process<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"

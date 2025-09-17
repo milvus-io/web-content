@@ -80,7 +80,7 @@
             "children": []
           },
           {
-            "label": "تشغيل ميلفوس ستاندالون",
+            "label": "تشغيل ميلفوس مستقل",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -92,21 +92,27 @@
                 "children": []
               },
               {
+                "label": "RPM/DEB",
+                "id": "install_standalone-binary.md",
+                "order": 1,
+                "children": []
+              },
+              {
                 "label": "دوكر (لينكس)",
                 "id": "install_standalone-docker.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "تكوين Docker Compose (لينكس)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "سطح المكتب Docker Desktop (ويندوز)",
                 "id": "install_standalone-windows.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               }
             ]
@@ -195,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "الاتصال بخادم ميلفوس",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -420,9 +432,28 @@
           },
           {
             "label": "حقل JSON",
-            "id": "use-json-fields.md",
+            "id": "json-field",
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "نظرة عامة على حقل JSON",
+                "id": "json-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "فهرسة JSON",
+                "id": "json-indexing.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "تمزيق JSON",
+                "id": "json-shredding.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
             "label": "حقل المصفوفة",
@@ -512,6 +543,12 @@
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
+                  },
+                  {
+                    "label": "معرّف اللغة",
+                    "id": "language-identifier.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               },
@@ -592,6 +629,12 @@
                 "label": "محللون متعددو اللغات",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "اختر المحلل المناسب لحالة الاستخدام الخاصة بك",
+                "id": "choose-the-right-analyzer-for-your-use-case.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -777,6 +820,12 @@
                 "label": "مقلوب",
                 "id": "inverted.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -1010,7 +1059,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه المعانق TEI",
+                "label": "عناق الوجه TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -1036,10 +1085,16 @@
                 "children": []
               },
               {
+                "label": "مُعزِّز الرتبة",
+                "id": "boost-ranker.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "مصنف الاضمحلال",
                 "id": "decay-ranker",
                 "isMenu": true,
-                "order": 2,
+                "order": 3,
                 "children": [
                   {
                     "label": "نظرة عامة على مصنف الاضمحلال",
@@ -1076,7 +1131,7 @@
               {
                 "label": "مصنف الطراز",
                 "id": "model-ranker",
-                "order": 3,
+                "order": 4,
                 "isMenu": true,
                 "children": [
                   {
@@ -1095,6 +1150,24 @@
                     "label": "مصنف TEI",
                     "id": "tei-ranker.md",
                     "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "كوهير رانكر",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "مُصنِّف الذكاء الاصطناعي للرحلات",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "مصنف تدفق السيليكون",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
                     "children": []
                   }
                 ]
@@ -1625,6 +1698,12 @@
         "label": "ميلفوس ويب يويو (Milvus WebUI)",
         "id": "milvus-webui.md",
         "order": "12",
+        "children": []
+      },
+      {
+        "label": "نقار الخشب",
+        "id": "use-woodpecker.md",
+        "order": 13,
         "children": []
       }
     ]

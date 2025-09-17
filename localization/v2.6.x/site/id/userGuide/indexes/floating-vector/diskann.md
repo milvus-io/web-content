@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam skenario berskala besar, di mana dataset dapat mencakup miliaran atau bahkan triliunan vektor, metode pengindeksan dalam memori standar (misalnya, <a href="/docs/id/hnsw.md">HNSW</a>, <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>) sering kali tidak dapat mengimbangi karena keterbatasan memori. <strong>DISKANN</strong> menawarkan pendekatan berbasis disk yang mengatasi tantangan ini dengan mempertahankan akurasi dan kecepatan pencarian yang tinggi ketika ukuran dataset melebihi RAM yang tersedia.</p>
+    </button></h1><p>Dalam skenario berskala besar, di mana kumpulan data dapat mencakup miliaran atau bahkan triliunan vektor, metode pengindeksan dalam memori standar (misalnya, <a href="/docs/id/hnsw.md">HNSW</a>, <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>) sering kali tidak dapat mengimbangi karena keterbatasan memori. <strong>DISKANN</strong> menawarkan pendekatan berbasis disk yang mengatasi tantangan ini dengan mempertahankan akurasi dan kecepatan pencarian yang tinggi ketika ukuran dataset melebihi RAM yang tersedia.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,22 @@ summary: >-
 <li><p><strong>Vamana Graph</strong> - Indeks <strong>berbasis disk</strong>, <strong>berbasis grafik</strong> yang menghubungkan titik data (atau vektor) untuk navigasi yang efisien selama pencarian.</p></li>
 <li><p><strong>Product Quantization (PQ</strong> ) - Metode kompresi <strong>dalam memori</strong> yang mengurangi ukuran vektor, sehingga memungkinkan penghitungan perkiraan jarak antar vektor dengan cepat.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">Konstruksi indeks</h3><h4 id="Vamana-graph" class="common-anchor-header">Grafik Vamana</h4><p>Grafik Vamana adalah pusat dari strategi berbasis disk DISKANN. Grafik ini dapat menangani kumpulan data yang sangat besar karena tidak perlu sepenuhnya berada di memori selama atau setelah konstruksi.</p>
+<h3 id="Index-construction" class="common-anchor-header">Konstruksi indeks<button data-href="#Index-construction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">Grafik Vamana</h4><p>Grafik Vamana adalah pusat dari strategi berbasis disk DISKANN. Grafik ini dapat menangani kumpulan data yang sangat besar karena tidak perlu sepenuhnya berada di memori selama atau setelah konstruksi.</p>
 <p>Gambar berikut ini menunjukkan bagaimana graf Vamana dibangun.</p>
 <p>
   
@@ -72,7 +87,22 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> adalah rasio yang ditentukan pengguna, yang mewakili sebagian kecil dari total ukuran data yang dicadangkan untuk kode PQ. Parameter ini memungkinkan pertukaran antara akurasi pencarian dan sumber daya memori. Untuk informasi lebih lanjut tentang penyetelan parameter, lihat <a href="/docs/id/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">konfigurasi DISKANN</a>.</p></li>
 </ul>
 <p>Untuk rincian teknis tentang metode PQ yang mendasari, lihat <a href="/docs/id/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
-<h3 id="Search-process" class="common-anchor-header">Proses pencarian</h3><p>Setelah indeks (grafik Vamana pada disk dan kode PQ dalam memori) dibangun, DISKANN melakukan pencarian ANN sebagai berikut:</p>
+<h3 id="Search-process" class="common-anchor-header">Proses pencarian<button data-href="#Search-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah indeks (grafik Vamana pada disk dan kode PQ dalam memori) dibangun, DISKANN melakukan pencarian ANN sebagai berikut:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
@@ -148,7 +178,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Parameter terkait DISKANN dapat dikonfigurasi melalui file konfigurasi Milvus Anda (<code translate="no">milvus.yaml</code>):</p>
+    </button></h2><p>Parameter terkait DISKANN hanya dapat dikonfigurasi melalui file konfigurasi Milvus Anda (<code translate="no">milvus.yaml</code>):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -174,8 +204,26 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Menyempurnakan parameter DISKANN memungkinkan Anda menyesuaikan perilakunya dengan set data spesifik dan beban kerja pencarian Anda, mencapai keseimbangan yang tepat antara kecepatan, akurasi, dan penggunaan memori.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembuatan indeks</h3><p>Parameter-parameter ini mempengaruhi bagaimana indeks DISKANN dibangun. Menyesuaikannya dapat memengaruhi ukuran indeks, waktu pembuatan, dan kualitas pencarian.</p>
+    </button></h2><p>Menyempurnakan parameter DISKANN memungkinkan Anda menyesuaikan perilakunya dengan kumpulan data spesifik dan beban kerja pencarian Anda, mencapai keseimbangan yang tepat antara kecepatan, akurasi, dan penggunaan memori.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembuatan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Parameter-parameter ini mempengaruhi bagaimana indeks DISKANN dibangun. Menyesuaikannya dapat memengaruhi ukuran indeks, waktu pembuatan, dan kualitas pencarian.</p>
+<div class="alert note">
+<p>Semua parameter pembangun indeks dalam daftar di bawah ini hanya dapat dikonfigurasi melalui file konfigurasi Milvus Anda (<code translate="no">milvus.yaml</code>)</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -190,7 +238,7 @@ summary: >-
      <td><p>Mengontrol jumlah maksimum koneksi (sisi) yang dapat dimiliki setiap titik data dalam grafik Vamana.</p></td>
      <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Bilangan Bulat: [1, 512]</p>
 <p><strong>Nilai default</strong>: <code translate="no">56</code></p></td>
-     <td><p>Nilai yang lebih tinggi akan membuat grafik yang lebih padat, berpotensi meningkatkan pemanggilan (menemukan hasil yang lebih relevan) tetapi juga meningkatkan penggunaan memori dan waktu pembuatan. 
+     <td><p>Nilai yang lebih tinggi akan membuat grafik yang lebih padat, berpotensi meningkatkan pemanggilan kembali (menemukan hasil yang lebih relevan) tetapi juga meningkatkan penggunaan memori dan waktu pembuatan. 
  Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [10, 100].</p></td>
    </tr>
    <tr>
@@ -219,7 +267,26 @@ summary: >-
 <p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: (0,0625, 0,25]</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Parameter ini memengaruhi cara DISKANN melakukan pencarian. Menyesuaikan parameter ini dapat memengaruhi kecepatan pencarian, latensi, dan penggunaan sumber daya.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Parameter ini memengaruhi cara DISKANN melakukan pencarian. Menyesuaikan parameter ini dapat mempengaruhi kecepatan pencarian, latensi, dan penggunaan sumber daya.</p>
+<div class="alert note">
+<p><code translate="no">BeamWidthRatio</code> dalam daftar di bawah ini hanya dapat dikonfigurasi melalui file konfigurasi Milvus Anda (<code translate="no">milvus.yaml</code>)</p>
+<p><code translate="no">search_list</code> dalam daftar di bawah ini hanya dapat dikonfigurasi dalam parameter pencarian di SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -238,10 +305,10 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>Selama operasi pencarian, parameter ini menentukan ukuran kumpulan kandidat yang dipertahankan oleh algoritme saat melintasi grafik. Nilai yang lebih besar meningkatkan peluang menemukan tetangga terdekat yang sebenarnya (recall yang lebih tinggi) tetapi juga meningkatkan latensi pencarian.</p></td>
      <td><p><strong>Jenis</strong>: Bilangan bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Nilai default</strong>: <code translate="no">100</code></p></td>
-     <td><p>Untuk keseimbangan yang baik antara kinerja dan akurasi, disarankan untuk mengatur nilai ini sama dengan atau sedikit lebih besar dari jumlah hasil yang ingin Anda ambil (top_k).</p></td>
+     <td><p>Untuk keseimbangan yang baik antara kinerja dan akurasi, disarankan untuk menetapkan nilai ini sama dengan atau sedikit lebih besar dari jumlah hasil yang ingin Anda ambil (top_k).</p></td>
    </tr>
 </table>

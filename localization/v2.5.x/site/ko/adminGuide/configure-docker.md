@@ -58,7 +58,7 @@ title: Docker Compose로 Milvus 구성하기
       </svg>
     </button></h2><p><code translate="no">milvus.yaml</code> 에서 해당 파라미터를 조정하여 애플리케이션 시나리오에 맞게 Milvus 인스턴스를 구성하세요.</p>
 <p>각 매개변수에 대한 자세한 내용은 다음 링크를 참조하세요.</p>
-<p>정렬 기준</p>
+<p>정렬 기준:</p>
 <div class="filter">
 <a href="#component">구성 요소 또는 종속성</a> <a href="#purpose">구성 목적</a> </div>
 <div class="filter-component table-wrapper">

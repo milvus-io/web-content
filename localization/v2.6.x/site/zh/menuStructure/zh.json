@@ -92,21 +92,27 @@
                 "children": []
               },
               {
+                "label": "RPM/DEB",
+                "id": "install_standalone-binary.md",
+                "order": 1,
+                "children": []
+              },
+              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "Docker 桌面（Windows）",
                 "id": "install_standalone-windows.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               }
             ]
@@ -195,6 +201,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "连接 Milvus 服务器",
+        "id": "connect-to-milvus-server.md",
+        "order": 4,
+        "children": []
       }
     ]
   },
@@ -420,9 +432,28 @@
           },
           {
             "label": "JSON 字段",
-            "id": "use-json-fields.md",
+            "id": "json-field",
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "JSON 字段概述",
+                "id": "json-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "JSON 索引",
+                "id": "json-indexing.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "JSON 粉碎",
+                "id": "json-shredding.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
             "label": "数组字段",
@@ -512,6 +543,12 @@
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
+                  },
+                  {
+                    "label": "语言标识符",
+                    "id": "language-identifier.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               },
@@ -592,6 +629,12 @@
                 "label": "多语言分析仪",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "根据使用案例选择合适的分析仪",
+                "id": "choose-the-right-analyzer-for-your-use-case.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -777,6 +820,12 @@
                 "label": "反转",
                 "id": "inverted.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -1036,10 +1085,16 @@
                 "children": []
               },
               {
+                "label": "提升排名器",
+                "id": "boost-ranker.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "衰变排名器",
                 "id": "decay-ranker",
                 "isMenu": true,
-                "order": 2,
+                "order": 3,
                 "children": [
                   {
                     "label": "衰变排名器概述",
@@ -1076,7 +1131,7 @@
               {
                 "label": "模型排名器",
                 "id": "model-ranker",
-                "order": 3,
+                "order": 4,
                 "isMenu": true,
                 "children": [
                   {
@@ -1095,6 +1150,24 @@
                     "label": "TEI 排行榜",
                     "id": "tei-ranker.md",
                     "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Cohere Ranker",
+                    "id": "cohere-ranker.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Voyage 人工智能排名器",
+                    "id": "voyage-ai-ranker.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "SiliconFlow 排行榜",
+                    "id": "siliconflow-ranker.md",
+                    "order": 5,
                     "children": []
                   }
                 ]
@@ -1626,6 +1699,12 @@
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
+      },
+      {
+        "label": "啄木鸟",
+        "id": "use-woodpecker.md",
+        "order": 13,
+        "children": []
       }
     ]
   },
@@ -1643,7 +1722,7 @@
         "children": []
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [

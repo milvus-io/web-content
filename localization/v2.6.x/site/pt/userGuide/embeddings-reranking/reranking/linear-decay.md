@@ -100,13 +100,16 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>O declínio linear cria uma queda em linha reta que diminui a uma taxa constante até atingir exatamente zero. Este padrão aparece em muitos cenários quotidianos, como temporizadores de contagem decrescente, esgotamento de inventário e abordagens de prazos em que a relevância tem um ponto de expiração claro.</p>
+<div class="alert note">
+<p>Todos os parâmetros de tempo (<code translate="no">origin</code>, <code translate="no">offset</code>, <code translate="no">scale</code>) devem utilizar a mesma unidade que os dados da coleção. Se a sua coleção armazena carimbos de data/hora numa unidade diferente (milissegundos, microssegundos), ajuste todos os parâmetros em conformidade.</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
    </span> <span class="img-wrapper"> <span>Decaimento linear</span> </span></p>
-<p>O gráfico acima mostra como o declínio linear afectaria as listagens de eventos numa plataforma de venda de bilhetes:</p>
+<p>O gráfico acima mostra como o decaimento linear afetaria as listagens de eventos em uma plataforma de emissão de bilhetes:</p>
 <ul>
-<li><p><code translate="no">origin</code> (data atual): O momento atual, onde a relevância está no máximo (1,0).</p></li>
+<li><p><code translate="no">origin</code> (data atual): O momento atual, em que a relevância está no seu máximo (1,0).</p></li>
 <li><p><code translate="no">offset</code> (1 dia): A "janela de eventos imediatos" - todos os eventos que acontecem no dia seguinte mantêm pontuações de relevância completas (1,0), garantindo que eventos muito iminentes não sejam penalizados por pequenas diferenças de tempo.</p></li>
 <li><p><code translate="no">decay</code> (0.5): A pontuação na distância da escala - este parâmetro controla a taxa de declínio da relevância.</p></li>
 <li><p><code translate="no">scale</code> (10 dias): O período de tempo em que a relevância cai para o valor de decaimento - eventos a 10 dias de distância têm suas pontuações de relevância reduzidas à metade (0,5).</p></li>
@@ -160,7 +163,25 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Antes de utilizar as funções de decaimento, deve primeiro criar uma coleção com campos numéricos apropriados (como carimbos de data/hora, distâncias, etc.) que serão utilizados para cálculos de decaimento. Para obter exemplos de trabalho completos, incluindo a configuração da coleção, a definição do esquema e a inserção de dados, consulte <a href="/docs/pt/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial do Decay Ranker</a>.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Criar um classificador de decaimento</h3><p>Depois que sua coleção for configurada com um campo numérico (neste exemplo, <code translate="no">event_date</code> como segundos a partir de agora), crie um classificador de decaimento linear:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Criar um classificador de decaimento<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de a coleção estar configurada com um campo numérico (neste exemplo, <code translate="no">event_date</code> como segundos a partir de agora), crie um classificador de decaimento linear:</p>
+<div class="alert note">
+<p><strong>Consistência da unidade de tempo</strong>: Ao usar o decaimento baseado em tempo, certifique-se de que os parâmetros <code translate="no">origin</code>, <code translate="no">scale</code> e <code translate="no">offset</code> usem a mesma unidade de tempo que os dados da sua coleção. Se a sua coleção armazena carimbos de data/hora em segundos, utilize segundos para todos os parâmetros. Se utilizar milissegundos, utilize milissegundos para todos os parâmetros.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> time
 
@@ -168,6 +189,7 @@ beta: Milvus 2.6.x
 current_time = <span class="hljs-built_in">int</span>(time.time())
 
 <span class="hljs-comment"># Create a linear decay ranker for event listings</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;event_relevance&quot;</span>,               <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;event_date&quot;</span>],     <span class="hljs-comment"># Numeric field to use</span>
@@ -175,14 +197,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;linear&quot;</span>,             <span class="hljs-comment"># Choose linear decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicar à pesquisa vetorial padrão</h3><p>Depois de definir o seu classificador de decaimento, pode aplicá-lo durante as operações de pesquisa, passando-o para o parâmetro <code translate="no">ranker</code>:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Aplicar à pesquisa vetorial padrão<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de definir o seu classificador de decaimento, pode aplicá-lo durante as operações de pesquisa, passando-o para o parâmetro <code translate="no">ranker</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -194,7 +231,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida</h3><p>Os classificadores de decaimento também podem ser aplicados a operações de pesquisa híbrida que combinam vários campos vectoriais:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Os classificadores de decaimento também podem ser aplicados a operações de pesquisa híbrida que combinam vários campos vectoriais:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

@@ -23,7 +23,7 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南描述如何使用 Milvus Operator 升级您的 Milvus Standalone。</p>
+    </button></h1><p>本指南介绍如何使用 Milvus Operator 升级 Milvus Standalone。</p>
 <h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">升级 Milvus 操作符<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +65,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自 Milvus 2.2.3 起，你可以将 Milvus 协调器配置为主动待机模式工作，并为它们启用滚动升级功能，这样 Milvus 就能在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定程度的停机。</p>
+    </button></h2><p>自 Milvus 2.2.3 起，你可以将 Milvus 协调器配置为主动待机模式工作，并为它们启用滚动升级功能，这样 Milvus 就能在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定的停机时间。</p>
 <p>基于 Kubernetes 提供的滚动更新功能，Milvus 操作符会根据部署的依赖关系强制执行有序更新。此外，Milvus 还实施了一种机制，确保其组件在升级期间与依赖于它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
 <p>滚动升级功能默认为禁用。你需要通过配置文件明确启用它。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -151,7 +151,22 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>自 Milvus 2.2.0 起，元数据与以前版本的元数据不兼容。以下示例片段假定从 Milvus 2.1.4 升级到 Milvus v2.5.13。</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1.创建用于元数据迁移的<code translate="no">.yaml</code> 文件</h3><p>创建元数据迁移文件。下面是一个示例。需要在配置文件中指定<code translate="no">name</code> 、<code translate="no">sourceVersion</code> 和<code translate="no">targetVersion</code> 。下面的示例将<code translate="no">name</code> 设置为<code translate="no">my-release-upgrade</code> ，将<code translate="no">sourceVersion</code> 设置为<code translate="no">v2.1.4</code> ，将<code translate="no">targetVersion</code> 设置为<code translate="no">v2.5.13</code> 。这意味着你的 Milvus 实例将从 v2.1.4 升级到 v2.5.13。</p>
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1.创建用于元数据迁移的<code translate="no">.yaml</code> 文件<button data-href="#1-Create-a-yaml-file-for-metadata-migration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>创建元数据迁移文件。下面是一个示例。需要在配置文件中指定<code translate="no">name</code> 、<code translate="no">sourceVersion</code> 和<code translate="no">targetVersion</code> 。下面的示例将<code translate="no">name</code> 设置为<code translate="no">my-release-upgrade</code> ，将<code translate="no">sourceVersion</code> 设置为<code translate="no">v2.1.4</code> ，将<code translate="no">targetVersion</code> 设置为<code translate="no">v2.5.13</code> 。这意味着你的 Milvus 实例将从 v2.1.4 升级到 v2.5.13。</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
 <span class="hljs-attr">metadata:</span>
@@ -170,12 +185,57 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-comment"># backupPVC: &quot;&quot;</span>
   <span class="hljs-comment"># maxRetry: 3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2.2. 应用新配置</h3><p>运行以下命令应用新配置。</p>
+<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2.2. 应用新配置<button data-href="#2-Apply-the-new-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>运行以下命令应用新配置。</p>
 <pre><code translate="no">$ kubectl <span class="hljs-built_in">create</span> -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/<span class="hljs-built_in">config</span>/samples/milvusupgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3.3. 检查元数据迁移状态</h3><p>运行以下命令检查元数据迁移的状态。</p>
+<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3.3. 检查元数据迁移状态<button data-href="#3-Check-the-status-of-metadata-migration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>运行以下命令检查元数据迁移的状态。</p>
 <pre><code translate="no">kubectl <span class="hljs-keyword">describe</span> milvus <span class="hljs-keyword">release</span><span class="hljs-operator">-</span>name
 <button class="copy-code-btn"></button></code></pre>
 <p>输出中的状态为<code translate="no">ready</code> 意味着元数据迁移成功。</p>
 <p>或者，也可以运行<code translate="no">kubectl get pod</code> 检查所有 pod。如果所有 pod 都是<code translate="no">ready</code> ，则元数据迁移成功。</p>
-<h3 id="4-Delete-my-release-upgrade" class="common-anchor-header">4.删除<code translate="no">my-release-upgrade</code></h3><p>升级成功后，删除 YAML 文件中的<code translate="no">my-release-upgrade</code> 。</p>
+<h3 id="4-Delete-my-release-upgrade" class="common-anchor-header">4.删除<code translate="no">my-release-upgrade</code><button data-href="#4-Delete-my-release-upgrade" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>升级成功后，删除 YAML 文件中的<code translate="no">my-release-upgrade</code> 。</p>

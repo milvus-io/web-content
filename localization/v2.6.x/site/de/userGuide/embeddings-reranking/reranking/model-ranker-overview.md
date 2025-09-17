@@ -127,11 +127,47 @@ beta: Milvus 2.6.x
 </ul></td>
      <td><p>Content-Management-System, das effiziente Reranking-Funktionen mit Standardanforderungen benötigt</p></td>
    </tr>
+   <tr>
+     <td><p>Cohere</p></td>
+     <td><p>Unternehmensanwendungen, bei denen Zuverlässigkeit und einfache Integration im Vordergrund stehen</p></td>
+     <td><ul>
+<li><p>Zuverlässigkeit und Skalierbarkeit auf Unternehmensniveau</p></li>
+<li><p>Managed Service ohne Wartung der Infrastruktur</p></li>
+<li><p>Mehrsprachige Reranking-Funktionen</p></li>
+<li><p>Integrierte Ratenbegrenzung und Fehlerbehandlung</p></li>
+</ul></td>
+     <td><p>E-Commerce-Plattform, die eine hochverfügbare Suche mit konstanter API-Leistung und mehrsprachigen Produktkatalogen erfordert</p></td>
+   </tr>
+   <tr>
+     <td><p>Voyage AI</p></td>
+     <td><p>RAG-Anwendungen mit spezifischen Leistungs- und Kontextanforderungen</p></td>
+     <td><ul>
+<li><p>Speziell für Reranking-Aufgaben trainierte Modelle</p></li>
+<li><p>Granulare Trunkierungskontrollen für unterschiedliche Dokumentenlängen</p></li>
+<li><p>Optimierte Inferenz für Produktionsworkloads</p></li>
+<li><p>Mehrere Modellvarianten (rerank-2, rerank-lite, etc.)</p></li>
+</ul></td>
+     <td><p>Forschungsdatenbank mit unterschiedlichen Dokumentenlängen, die eine fein abgestimmte Leistungskontrolle und ein spezielles semantisches Verständnis erfordern</p></td>
+   </tr>
+   <tr>
+     <td><p>SiliconFlow</p></td>
+     <td><p>Anwendungen, die lange Dokumente mit Kosteneffizienz-Prioritäten verarbeiten</p></td>
+     <td><ul>
+<li><p>Fortschrittliches Chunking von Dokumenten mit konfigurierbarer Überlappung</p></li>
+<li><p>Chunk-basiertes Scoring (der Chunk mit der höchsten Punktzahl repräsentiert das Dokument)</p></li>
+<li><p>Unterstützung für verschiedene Reranking-Modelle</p></li>
+<li><p>Kosteneffizient mit Standard- und Pro-Modell-Varianten</p></li>
+</ul></td>
+     <td><p>Suchsystem für technische Dokumentationen zur Verarbeitung umfangreicher Handbücher und Dokumente, die eine intelligente Segmentierung und Überlappungssteuerung erfordern</p></td>
+   </tr>
 </table>
-<p>Detaillierte Informationen zur Implementierung der einzelnen Modelldienste finden Sie in der entsprechenden Dokumentation:</p>
+<p>Detaillierte Informationen über die Implementierung der einzelnen Modelldienste finden Sie in der entsprechenden Dokumentation:</p>
 <ul>
 <li><p><a href="/docs/de/vllm-ranker.md">vLLM-Rangierer</a></p></li>
 <li><p><a href="/docs/de/tei-ranker.md">TEI-Rangierer</a></p></li>
+<li><p><a href="/docs/de/cohere-ranker.md">Cohere Ranker</a></p></li>
+<li><p><a href="/docs/de/voyage-ai-ranker.md">Voyage AI-Rangierer</a></p></li>
+<li><p><a href="/docs/de/siliconflow-ranker.md">SiliconFlow-Rangierer</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Implementierung<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -148,14 +184,31 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bevor Sie Model Ranker implementieren, stellen Sie sicher, dass Sie über Folgendes verfügen</p>
+    </button></h2><p>Bevor Sie Model Ranker implementieren, stellen Sie sicher, dass Sie über Folgendes verfügen:</p>
 <ul>
-<li><p>Eine Milvus-Sammlung mit einem <code translate="no">VARCHAR</code> Feld, das den zu bewertenden Text enthält</p></li>
-<li><p>Einen laufenden externen Modelldienst (vLLM oder TEI), der für Ihre Milvus-Instanz zugänglich ist</p></li>
+<li><p>Eine Milvus-Sammlung mit einem <code translate="no">VARCHAR</code> -Feld, das den neu zu bewertenden Text enthält</p></li>
+<li><p>Einen laufenden externen Modelldienst, der für Ihre Milvus-Instanz zugänglich ist</p></li>
 <li><p>Geeignete Netzwerkverbindungen zwischen Milvus und dem von Ihnen gewählten Modelldienst</p></li>
 </ul>
-<p>Modell-Ranker lassen sich nahtlos sowohl in die Standard-Vektorsuche als auch in hybride Suchoperationen integrieren. Die Implementierung umfasst die Erstellung eines Funktionsobjekts, das Ihre Rangordnungskonfiguration definiert, und dessen Übergabe an Suchoperationen.</p>
-<h3 id="Create-a-model-ranker" class="common-anchor-header">Erstellen eines Modell-Rankers</h3><p>Um Modell-Ranking zu implementieren, definieren Sie zunächst ein Function-Objekt mit der entsprechenden Konfiguration:</p>
+<p>Modell-Ranker lassen sich nahtlos sowohl in die Standard-Vektorsuche als auch in hybride Suchvorgänge integrieren. Die Implementierung umfasst die Erstellung eines Funktionsobjekts, das Ihre Rangordnungskonfiguration definiert, und dessen Übergabe an Suchoperationen.</p>
+<h3 id="Create-a-model-ranker" class="common-anchor-header">Erstellen eines Modell-Rankers<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um Modell-Ranking zu implementieren, definieren Sie zunächst ein Function-Objekt mit der entsprechenden Konfiguration. In diesem Beispiel wird die TEI als Dienstanbieter verwendet:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -170,12 +223,20 @@ model_ranker = Function(
     function_type=FunctionType.RERANK,  <span class="hljs-comment"># Must be set to RERANK</span>
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;model&quot;</span>,  <span class="hljs-comment"># Specify model reranker. Must be &quot;model&quot;</span>
-        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot; or &quot;vllm&quot;</span>
+        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>,  <span class="hljs-comment"># Model service endpoint</span>
         <span class="hljs-comment"># &quot;maxBatch&quot;: 32  # Optional: batch size for processing</span>
     }
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -205,7 +266,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Ein Wörterbuch, das die Konfiguration für die modellbasierte Ranglistenfunktion enthält. Die verfügbaren Parameter (Schlüssel) variieren je nach Anbieter (<code translate="no">tei</code> oder <code translate="no">vllm</code>). Weitere Einzelheiten finden Sie unter <a href="/docs/de/vllm-ranker.md">vLLM Ranker</a> oder <a href="/docs/de/tei-ranker.md">TEI Ranker</a>.</p></td>
+     <td><p>Ein Wörterbuch, das die Konfiguration für die modellbasierte Ranglistenfunktion enthält. Die verfügbaren Parameter (Schlüssel) variieren je nach Dienstanbieter.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -218,13 +279,13 @@ model_ranker = Function(
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>Ja</p></td>
      <td><p>Der Modelldienstanbieter, der für das Reranking verwendet werden soll.</p></td>
-     <td><p><code translate="no">"tei"</code> oder <code translate="no">"vllm"</code></p></td>
+     <td><p><code translate="no">"tei"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Ja</p></td>
      <td><p>Die Anzahl der Abfrage-Strings muss genau mit der Anzahl der Abfragen in Ihrem Suchvorgang übereinstimmen (auch bei Verwendung von Abfrage-Vektoren anstelle von Text), andernfalls wird ein Fehler gemeldet.</p></td>
-     <td><p><code translate="no">["search query"]</code></p></td>
+     <td><p><em>["Suchanfrage"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.endpoint</code></p></td>
@@ -233,13 +294,30 @@ model_ranker = Function(
      <td><p><code translate="no">"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">maxBatch</code></p></td>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>Nein</p></td>
      <td><p>Maximale Anzahl von Dokumenten, die in einem einzigen Stapel verarbeitet werden. Größere Werte erhöhen den Durchsatz, benötigen aber mehr Speicher.</p></td>
      <td><p><code translate="no">32</code> (Standard)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Auf Standard-Vektorsuche anwenden</h3><p>Nachdem Sie Ihren Modell-Ranker definiert haben, können Sie ihn bei Suchvorgängen anwenden, indem Sie ihn an den Ranker-Parameter übergeben:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Auf Standard-Vektorsuche anwenden<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nachdem Sie Ihren Modell-Ranker definiert haben, können Sie ihn bei Suchvorgängen anwenden, indem Sie ihn an den Ranker-Parameter übergeben:</p>
+<div class="multipleCode">
+   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
@@ -251,7 +329,32 @@ results = client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Auf hybride Suche anwenden</h3><p>Modell-Ranker können auch auf hybride Suchvorgänge angewendet werden, die mehrere Vektorfelder kombinieren:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Auf die hybride Suche anwenden<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Modell-Ranker können auch auf hybride Suchoperationen angewendet werden, die mehrere Vektorfelder kombinieren:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
@@ -277,4 +380,12 @@ hybrid_results = client.hybrid_search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

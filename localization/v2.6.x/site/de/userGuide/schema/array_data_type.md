@@ -43,8 +43,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Standardwerte</strong>: ARRAY-Felder unterstützen keine Standardwerte. Sie können jedoch das Attribut <code translate="no">nullable</code> auf <code translate="no">True</code> setzen, um Nullwerte zuzulassen. Einzelheiten finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>Datentyp</strong>: Alle Elemente in einem Array-Feld müssen denselben Datentyp haben, der durch <code translate="no">element_type</code> festgelegt ist. Wenn Sie <code translate="no">element_type</code> auf <code translate="no">VARCHAR</code> setzen, sollten Sie auch <code translate="no">max_length</code> für die Array-Elemente festlegen.</p></li>
-<li><p><strong>Array-Kapazität</strong>: Die Anzahl der Elemente in einem Array-Feld muss kleiner oder gleich der maximalen Kapazität sein, die bei der Erstellung des Arrays festgelegt wurde, wie in <code translate="no">max_capacity</code> angegeben. Der Wert sollte eine ganze Zahl im Bereich von <strong>1</strong> bis <strong>4096</strong> sein.</p></li>
+<li><p><strong>Datentyp:</strong> Alle Elemente in einem ARRAY-Feld müssen denselben Datentyp haben, der durch den Parameter <code translate="no">element_type</code> definiert ist. Wenn <code translate="no">element_type</code> auf <code translate="no">VARCHAR</code> gesetzt ist, müssen Sie auch <code translate="no">max_length</code> für Array-Elemente angeben. Der <code translate="no">element_type</code> akzeptiert jeden skalaren Datentyp, der von Milvus unterstützt wird, mit Ausnahme von <code translate="no">JSON</code>.</p></li>
+<li><p><strong>Array-Kapazität</strong>: Die Anzahl der Elemente in einem ARRAY-Feld muss kleiner oder gleich der maximalen Kapazität sein, die bei der Erstellung des Arrays festgelegt wurde, wie unter <code translate="no">max_capacity</code> angegeben. Der Wert sollte eine ganze Zahl im Bereich von <strong>1</strong> bis <strong>4096</strong> sein.</p></li>
 <li><p><strong>Behandlung von Zeichenketten</strong>: String-Werte in Array-Feldern werden so gespeichert, wie sie sind, ohne semantisches Escaping oder Konvertierung. Zum Beispiel werden <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> und <code translate="no">&quot;a\&quot;b&quot;</code> wie eingegeben gespeichert, während <code translate="no">'a'b'</code> und <code translate="no">&quot;a&quot;b&quot;</code> als ungültige Werte betrachtet werden.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAY-Feld hinzufügen<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -65,15 +65,15 @@ summary: >-
     </button></h2><p>Um ARRAY-Felder in Milvus zu verwenden, definieren Sie den entsprechenden Feldtyp bei der Erstellung des Sammlungsschemas. Dieser Prozess beinhaltet:</p>
 <ol>
 <li><p>Einstellung von <code translate="no">datatype</code> auf den unterstützten Array-Datentyp <code translate="no">ARRAY</code>.</p></li>
-<li><p>Verwenden Sie den Parameter <code translate="no">element_type</code>, um den Datentyp der Elemente im Array anzugeben. Dies kann ein beliebiger skalarer Datentyp sein, der von Milvus unterstützt wird, z. B. <code translate="no">VARCHAR</code> oder <code translate="no">INT64</code>. Alle Elemente in einem Array müssen denselben Datentyp haben.</p></li>
-<li><p>Verwenden Sie den Parameter <code translate="no">max_capacity</code>, um die maximale Kapazität des Arrays zu definieren, d.h. die maximale Anzahl der Elemente, die es enthalten kann.</p></li>
+<li><p>Verwendung des Parameters <code translate="no">element_type</code> zur Angabe des Datentyps der Elemente im Array. Alle Elemente im gleichen Array müssen den gleichen Datentyp haben.</p></li>
+<li><p>Mit dem Parameter <code translate="no">max_capacity</code> wird die maximale Kapazität des Arrays festgelegt, d. h. die maximale Anzahl der Elemente, die es enthalten kann.</p></li>
 </ol>
 <p>So definieren Sie ein Auflistungsschema, das ARRAY-Felder enthält:</p>
 <div class="alert note">
 <p>Wenn Sie bei der Definition des Schemas <code translate="no">enable_dynamic_fields=True</code> einstellen, können Sie mit Milvus skalare Felder einfügen, die nicht im Voraus definiert wurden. Dies kann jedoch die Komplexität von Abfragen und Verwaltung erhöhen und möglicherweise die Leistung beeinträchtigen. Weitere Informationen finden Sie unter <a href="/docs/de/enable-dynamic-field.md">Dynamisches Feld</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#http">HTTP</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -212,7 +212,7 @@ schema.WithField(entity.NewField().
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-http">export arrayField1='{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> arrayField1=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;tags&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;VarChar&quot;,
@@ -220,41 +220,41 @@ schema.WithField(entity.NewField().
         &quot;max_capacity&quot;: 10,
         &quot;max_length&quot;: 65535
     }
-}'
+}&#x27;</span>
 
-export arrayField2='{
+<span class="hljs-built_in">export</span> arrayField2=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;ratings&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;Int64&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;max_capacity&quot;: 5
     }
-}'
+}&#x27;</span>
 
-export pkField='{
+<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;pk&quot;,
     &quot;dataType&quot;: &quot;Int64&quot;,
     &quot;isPrimary&quot;: true
-}'
+}&#x27;</span>
 
-export vectorField='{
+<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;embedding&quot;,
     &quot;dataType&quot;: &quot;FloatVector&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;dim&quot;: 3
     }
-}'
+}&#x27;</span>
 
-export schema=&quot;{
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;autoID\&quot;: false,
     \&quot;fields\&quot;: [
-        $arrayField1,
-        $arrayField2,
-        $pkField,
-        $vectorField
+        <span class="hljs-variable">$arrayField1</span>,
+        <span class="hljs-variable">$arrayField2</span>,
+        <span class="hljs-variable">$pkField</span>,
+        <span class="hljs-variable">$vectorField</span>
     ]
-}&quot;
-</code></pre>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-index-params" class="common-anchor-header">Index-Parameter festlegen<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -697,7 +697,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zusätzlich zur grundlegenden skalaren Feldfilterung können Sie die Suche nach Vektorähnlichkeit mit skalaren Feldfiltern kombinieren. Der folgende Code zeigt zum Beispiel, wie man einen Skalarfeldfilter zu einer Vektorsuche hinzufügt:</p>
+    </button></h2><p>Zusätzlich zur grundlegenden skalaren Feldfilterung können Sie die Vektorsuche mit skalaren Feldfiltern kombinieren. Der folgende Code zeigt zum Beispiel, wie man einen Skalarfeldfilter zu einer Vektorsuche hinzufügt:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>

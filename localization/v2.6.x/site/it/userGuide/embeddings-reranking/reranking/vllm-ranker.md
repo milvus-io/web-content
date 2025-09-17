@@ -31,7 +31,6 @@ beta: Milvus 2.6.x
 <li><p>Sistemi di assistenza clienti che devono far coincidere i problemi degli utenti con le relative soluzioni</p></li>
 <li><p>Ricerca nel commercio elettronico che deve comprendere gli attributi del prodotto e l'intento dell'utente.</p></li>
 </ul>
-<p>Rispetto a <a href="/docs/it/tei-ranker.md">TEI Ranker</a>, vLLM Ranker offre una maggiore flessibilità nella selezione dei modelli e nella personalizzazione, rendendolo ideale per applicazioni di ricerca specializzate o complesse, dove le opzioni di configurazione aggiuntive offrono vantaggi significativi.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,8 +48,8 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Prima di implementare vLLM Ranker in Milvus, assicurarsi di disporre di:</p>
 <ul>
-<li><p>una raccolta Milvus con un campo <code translate="no">VARCHAR</code> contenente il testo da rerankizzare</p></li>
-<li><p>Un servizio vLLM funzionante con capacità di reranking. Per istruzioni dettagliate sulla configurazione di un servizio vLLM, consultare la <a href="https://docs.vllm.ai/en/latest/getting_started/installation.html">documentazione ufficiale di vLLM</a>. Per verificare la disponibilità del servizio vLLM:</p>
+<li><p>Una raccolta Milvus con un campo <code translate="no">VARCHAR</code> contenente il testo da rerankizzare</p></li>
+<li><p>Un servizio vLLM funzionante con funzionalità di reranking. Per istruzioni dettagliate sulla configurazione di un servizio vLLM, consultare la <a href="https://docs.vllm.ai/en/latest/getting_started/installation.html">documentazione ufficiale di vLLM</a>. Per verificare la disponibilità del servizio vLLM:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Replace YOUR_VLLM_ENDPOINT_URL with the actual URL (e.g., http://&lt;service-ip&gt;:&lt;port&gt;/v1/rerank)</span>
 <span class="hljs-comment"># Replace &#x27;BAAI/bge-reranker-base&#x27; if you deployed a different model</span>
 
@@ -87,6 +86,8 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
         ></path>
       </svg>
     </button></h2><p>Per utilizzare vLLM Ranker nella vostra applicazione Milvus, create un oggetto Function che specifichi come deve funzionare il reranking. Questa funzione verrà passata alle operazioni di ricerca di Milvus per migliorare la classificazione dei risultati.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -104,12 +105,35 @@ vllm_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;vllm&quot;</span>,         <span class="hljs-comment"># Specifies vLLM service</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># vLLM service address</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">64</span>,              <span class="hljs-comment"># Optional: batch size</span>
+        <span class="hljs-string">&quot;max_client_batch_size&quot;</span>: <span class="hljs-number">32</span>,              <span class="hljs-comment"># Optional: batch size</span>
         <span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>: <span class="hljs-number">256</span>,  <span class="hljs-comment"># Optional: Use last 256 tokens</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">Parametri specifici del ranker vLLM</h3><p>I seguenti parametri sono specifici del ranker vLLM:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">Parametri specifici del ranker vLLM<button data-href="#vLLM-ranker-specific-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>I seguenti parametri sono specifici del ranker vLLM:</p>
 <table>
    <tr>
      <th><p>Parametro</p></th>
@@ -118,9 +142,39 @@ vllm_ranker = Function(
      <th><p>Valore / Esempio</p></th>
    </tr>
    <tr>
+     <td><p><code translate="no">reranker</code></p></td>
+     <td><p>Sì</p></td>
+     <td><p>Deve essere impostato su <code translate="no">"model"</code> per abilitare il reranking del modello.</p></td>
+     <td><p><code translate="no">"model"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">provider</code></p></td>
+     <td><p>Sì</p></td>
+     <td><p>Il fornitore di servizi del modello da usare per il reranking.</p></td>
+     <td><p><code translate="no">"vllm"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queries</code></p></td>
+     <td><p>Sì</p></td>
+     <td><p>Elenco delle stringhe di query utilizzate dal modello di reranking per calcolare i punteggi di rilevanza. Il numero di stringhe di query deve corrispondere esattamente al numero di query dell'operazione di ricerca (anche quando si usano vettori di query al posto del testo), altrimenti verrà segnalato un errore.</p></td>
+     <td><p><em>["query di ricerca"]</em></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">endpoint</code></p></td>
+     <td><p>Sì</p></td>
+     <td><p>Indirizzo del servizio vLLM.</p></td>
+     <td><p><code translate="no">"http://localhost:8080"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Poiché i servizi modello potrebbero non elaborare tutti i dati in una volta sola, questo parametro imposta la dimensione del batch per l'accesso al servizio modello in più richieste.</p></td>
+     <td><p><code translate="no">32</code> (predefinito)</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">truncate_prompt_tokens</code></p></td>
      <td><p>No</p></td>
-     <td><p>Se impostato su un numero intero <em>k</em>, utilizzerà solo gli ultimi <em>k</em> token del prompt (cioè, troncamento a sinistra). Il valore predefinito è Nessuno (cioè nessun troncamento).</p></td>
+     <td><p>Se impostato su un numero intero <em>k</em>, utilizzerà solo gli ultimi <em>k</em> token della richiesta (cioè, troncamento a sinistra). Il valore predefinito è Nessuno (cioè nessun troncamento).</p></td>
      <td><p><code translate="no">256</code></p></td>
    </tr>
 </table>
@@ -143,6 +197,8 @@ vllm_ranker = Function(
         ></path>
       </svg>
     </button></h2><p>Per applicare vLLM Ranker a una ricerca vettoriale standard:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -153,6 +209,14 @@ results = client.search(
 <span class="highlighted-wrapper-line">    ranker=vllm_ranker,                         <span class="hljs-comment"># Apply vLLM reranking</span></span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Applicare alla ricerca ibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -170,6 +234,8 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><p>vLLM Ranker può essere utilizzato anche con la ricerca ibrida per combinare metodi di reperimento densi e radi:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Configure dense vector search</span>
@@ -196,4 +262,12 @@ hybrid_results = client.hybrid_search(
 <span class="highlighted-wrapper-line">    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span></span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

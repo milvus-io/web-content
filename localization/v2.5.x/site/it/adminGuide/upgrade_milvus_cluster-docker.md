@@ -20,7 +20,7 @@ title: Aggiornamento del cluster Milvus con Docker Compose
         ></path>
       </svg>
     </button></h1><p>Questo argomento descrive come aggiornare Milvus utilizzando Docker Compose.</p>
-<p>In casi normali, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus cambiando la sua immagine</a>. Tuttavia, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a> prima di qualsiasi aggiornamento dalla versione v2.1.x alla versione v2.5.13.</p>
+<p>In casi normali, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus cambiando la sua immagine</a>. Tuttavia, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a> prima di qualsiasi aggiornamento dalla v2.1.x alla v2.5.13.</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Aggiornare Milvus cambiando l'immagine<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -90,14 +90,74 @@ title: 故障排除
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. etcd pod 挂起</h3><p>etcd 集群默认使用 pvc。需要为 Kubernetes 集群预先配置 StorageClass。</p>
-<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. etcd pod 崩溃</h3><p>当 etcd pod 崩溃时，<code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code> ，可以登录该 pod 并删除<code translate="no">/bitnami/etcd/data/member_id</code> 文件。</p>
-<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3.当<code translate="no">etcd-0</code> 仍在运行时，多个 pod 不断崩溃</h3><p>如果多个 pod 在<code translate="no">etcd-0</code> 仍在运行时不断崩溃，您可以运行以下代码。</p>
+    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. etcd pod 挂起<button data-href="#1-etcd-pod-pending" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>etcd 集群默认使用 pvc。需要为 Kubernetes 集群预先配置 StorageClass。</p>
+<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. etcd pod 崩溃<button data-href="#2-etcd-pod-crash" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>当 etcd pod 崩溃时，<code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code> ，可以登录该 pod 并删除<code translate="no">/bitnami/etcd/data/member_id</code> 文件。</p>
+<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3.当<code translate="no">etcd-0</code> 仍在运行时，多个 pod 不断崩溃<button data-href="#3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果多个 pod 在<code translate="no">etcd-0</code> 仍在运行时不断崩溃，您可以运行以下代码。</p>
 <pre><code translate="no">kubectl scale sts <span class="hljs-operator">&lt;</span>etcd<span class="hljs-operator">-</span>sts<span class="hljs-operator">&gt;</span> <span class="hljs-comment">--replicas=1</span>
 # <span class="hljs-keyword">delete</span> the pvc <span class="hljs-keyword">for</span> etcd<span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> etcd<span class="hljs-number">-2</span>
 kubectl scale sts <span class="hljs-operator">&lt;</span>etcd<span class="hljs-operator">-</span>sts<span class="hljs-operator">&gt;</span> <span class="hljs-comment">--replicas=3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="4-All-pods-crash" class="common-anchor-header">4.所有 pod 均崩溃</h3><p>当所有 pod 崩溃时，请尝试复制<code translate="no">/bitnami/etcd/data/member/snap/db</code> 文件。使用<code translate="no">https://github.com/etcd-io/bbolt</code> 修改数据库数据。</p>
+<h3 id="4-All-pods-crash" class="common-anchor-header">4.所有 pod 均崩溃<button data-href="#4-All-pods-crash" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>当所有 pod 崩溃时，请尝试复制<code translate="no">/bitnami/etcd/data/member/snap/db</code> 文件。使用<code translate="no">https://github.com/etcd-io/bbolt</code> 修改数据库数据。</p>
 <p>所有 Milvus 元数据都保存在<code translate="no">key</code> 数据桶中。备份该数据桶中的数据并运行以下命令。请注意，<code translate="no">by-dev/meta/session</code> 文件中的前缀数据不需要备份。</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">0</span>
 <span class="hljs-comment"># delete the pvc for etcd-0, etcd-1, etcd-2</span>
@@ -105,8 +165,8 @@ kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">
 <span class="hljs-comment"># restore the backup data</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><br/></p>
-<p>如果您在解决问题时需要帮助，请随时联系我们：</p>
+<p>如果您在解决问题时需要帮助，请随时</p>
 <ul>
-<li>加入我们的<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 频道</a>，寻求 Milvus 团队的支持。</li>
+<li>加入我们的<a href="https://discord.com/invite/8uyFbECzPX">Discord 频道</a>，寻求 Milvus 团队的支持。</li>
 <li>在 GitHub 上<a href="https://github.com/milvus-io/milvus/issues/new/choose">提交问题</a>，并详细说明您的问题。</li>
 </ul>

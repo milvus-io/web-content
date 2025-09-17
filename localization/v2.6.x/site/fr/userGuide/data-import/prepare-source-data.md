@@ -227,7 +227,22 @@ schema.verify()
 <li><strong>RemoteBulkWriter</strong>: Effectue la même tâche que LocalBulkWriter, mais transfère en plus les fichiers de données convertis vers un panier de stockage d'objets distant spécifié.</li>
 </ul>
 <p><strong>RemoteBulkWriter</strong> diffère de <strong>LocalBulkWriter</strong> en ce que <strong>RemoteBulkWriter</strong> transfère les fichiers de données convertis vers une unité de stockage d'objets cible.</p>
-<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Configuration de LocalBulkWriter</h3><p>Un <strong>LocalBulkWriter</strong> ajoute des lignes au jeu de données source et les enregistre dans un fichier local au format spécifié.</p>
+<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Configuration de LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Un <strong>LocalBulkWriter</strong> ajoute des lignes au jeu de données source et les enregistre dans un fichier local au format spécifié.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
@@ -257,7 +272,7 @@ writer = LocalBulkWriter(
 <div class="language-python">
 <p>Lors de la création d'un <strong>LocalBulkWriter</strong>, vous devez :</p>
 <ul>
-<li>Faire référence au schéma créé dans <code translate="no">schema</code>.</li>
+<li>faire référence au schéma créé dans <code translate="no">schema</code>.</li>
 <li>Définir <code translate="no">local_path</code> comme répertoire de sortie.</li>
 <li>Définir <code translate="no">file_type</code> comme type de fichier de sortie.</li>
 <li>Si votre jeu de données contient un grand nombre d'enregistrements, il est conseillé de segmenter vos données en fixant <code translate="no">segment_size</code> à une valeur appropriée.</li>
@@ -274,7 +289,22 @@ writer = LocalBulkWriter(
 </ul>
 <p>Pour plus de détails sur le paramétrage, reportez-vous à LocalBulkWriter dans la référence SDK.</p>
 </div>
-<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Configuration de RemoteBulkWriter</h3><p>Au lieu d'enregistrer les données ajoutées dans un fichier local, un <strong>RemoteBulkWriter</strong> les enregistre dans un panier distant. Par conséquent, vous devez configurer un objet <strong>ConnectParam</strong> avant de créer un <strong>RemoteBulkWriter</strong>.</p>
+<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Configuration de RemoteBulkWriter<button data-href="#Set-up-RemoteBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Au lieu d'enregistrer les données ajoutées dans un fichier local, un <strong>RemoteBulkWriter</strong> les enregistre dans un panier distant. Par conséquent, vous devez configurer un objet <strong>ConnectParam</strong> avant de créer un <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
@@ -376,7 +406,7 @@ writer = RemoteBulkWriter(
 <p>Un <strong>BulkWriter</strong> possède deux méthodes : <code translate="no">append_row()</code> ajoute une ligne à partir d'un jeu de données source et <code translate="no">commit()</code> valide les lignes ajoutées dans un fichier local ou un bucket distant.</p>
 </div>
 <div class="language-java">
-<p>Un <strong>BulkWriter</strong> possède deux méthodes : <code translate="no">appendRow()</code> ajoute une ligne à partir d'un jeu de données source et <code translate="no">commit()</code> enregistre les lignes ajoutées dans un fichier local ou un panier distant.</p>
+<p>Un <strong>BulkWriter</strong> possède deux méthodes : <code translate="no">appendRow()</code> ajoute une ligne à partir d'un jeu de données source et <code translate="no">commit()</code> enregistre les lignes ajoutées dans un fichier local ou dans une base de données distante.</p>
 </div>
 <p>À des fins de démonstration, le code suivant ajoute des données générées de manière aléatoire.</p>
 <div class="multipleCode">
@@ -621,7 +651,7 @@ remoteBulkWriter.getBatchFiles();
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>BulkWriter</strong> génère un UUID, crée un sous-dossier utilisant l'UUID dans le répertoire de sortie fourni et place tous les fichiers générés dans le sous-dossier. <a href="https://assets.zilliz.com/bulk_writer.zip">Cliquez ici</a> pour télécharger l'exemple de données préparé.</p>
 <p>Les structures de dossier possibles sont les suivantes :</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
+<pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
 │       └── 1.json 

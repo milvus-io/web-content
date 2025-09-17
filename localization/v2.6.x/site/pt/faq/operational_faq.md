@@ -20,13 +20,51 @@ title: FAQ operacional
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">E se eu não conseguir extrair a imagem do Milvus Docker do Docker Hub?</h4><p>Se não conseguiu extrair a imagem do Milvus Docker do Docker Hub, tente adicionar outros espelhos de registo.</p>
+    </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">O que é um delegador QueryNode e quais são as suas responsabilidades?</h4><p>Quando uma coleção é carregada, um QueryNode subscreve canais DML para mensagens de inserção e eliminação provenientes da fila de mensagens. O QueryNode que assina esses canais, conhecido como delegador, é responsável por:</p>
+<ul>
+<li>Gerenciar segmentos crescentes que exigem memória adicional devido a inserções em andamento.</li>
+<li>Receber mensagens de exclusão e passá-las para outros QueryNodes que mantêm os segmentos relevantes.</li>
+</ul>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">Como identificar nós delegadores para uma coleção?</h4><p>Use o Birdwatcher.</p>
+<p>Instale o Birdwatcher da seguinte <a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">forma</a> e, em seguida, execute o seguinte comando:</p>
+<pre><code translate="no" class="language-shell">./birdwatcher
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
+Milvus(my-release) &gt; show segment-loaded-grpc --collection &lt;your-collectionID&gt;
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Map server ID to pod IP</span>
+Milvus(my-release) &gt; show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">Que parâmetros podem ser ajustados se a utilização da memória do nó de consulta estiver desequilibrada?</h4><p>Por vezes, a memória do nó de consulta varia porque alguns actuam como delegadores utilizando mais RAM. Se a memória de um delegador for alta, ajuste queryCoord.delegatorMemoryOverloadFactor para descarregar segmentos selados para outros nós e reduzir o uso de RAM.</p>
+<ul>
+<li>O valor padrão é 0,1.</li>
+<li>Aumentar esse valor (por exemplo, para 0,3 ou mais) fará com que o sistema descarregue mais segmentos selados do delegador sobrecarregado para outros QueryNodes, ajudando a equilibrar o uso da memória. E também pode tentar aumentar o valor até 1, o que significa que nenhum segmento selado será carregado nos nós delegadores.</li>
+</ul>
+<p>Se não quiser reiniciar o cluster, pode modificar a configuração do milvus com o birdwatcher:</p>
+<pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
+Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
+
+# Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
+<span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">Como definir shard_num para uma coleção?</h4><p>Como prática recomendada, para uma coleção com vectores de dimensão 768, recomenda-se a utilização de pelo menos 1 shard por ~100 milhões de vectores. Para casos de uso de escrita pesada, use 4 shards por ~100 milhões de vetores.</p>
+<p>Por exemplo, se tiver 100 milhões de vectores, utilize 1-4 shards. Se tiver 500 milhões de vectores, utilize 5-10 fragmentos.</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">E se eu não conseguir extrair a imagem do Milvus Docker do Docker Hub?</h4><p>Se não conseguiu extrair a imagem do Milvus Docker do Docker Hub, tente adicionar outros espelhos de registo.</p>
 <p>Os utilizadores da China continental podem adicionar o URL "https://registry.docker-cn.com" à matriz registry-mirrors em <strong>/etc.docker/daemon.json</strong>.</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">O Docker é a única maneira de instalar e executar o Milvus?</h4><p>O Docker é uma maneira eficiente de implantar o Milvus, mas não é a única maneira. Você também pode implantar o Milvus a partir do código fonte. Isso requer Ubuntu (18.04 ou superior) ou CentOS (7 ou superior). Consulte <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Criação do Milvus a partir do código-fonte</a> para obter mais informações.</p>
+<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">O Docker é a única maneira de instalar e executar o Milvus?</h4><p>O Docker é uma maneira eficiente de implantar o Milvus, mas não é a única maneira. Também é possível implantar o Milvus a partir do código fonte. Isso requer Ubuntu (18.04 ou superior) ou CentOS (7 ou superior). Consulte <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Criação do Milvus a partir do código-fonte</a> para obter mais informações.</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">Quais são os principais factores que afectam a recuperação?</h4><p>A recuperação é afetada principalmente pelo tipo de índice e pelos parâmetros de pesquisa.</p>
 <p>Para o índice FLAT, o Milvus faz uma pesquisa exaustiva dentro de uma coleção, com um retorno de 100%.</p>
 <p>Para os índices IVF, o parâmetro nprobe determina o âmbito de uma pesquisa dentro da coleção. O aumento de nprobe aumenta a proporção de vectores pesquisados e a recuperação, mas diminui o desempenho da consulta.</p>
@@ -64,7 +102,7 @@ title: FAQ operacional
 <li>Se o multi-tenancy estiver habilitado na sua instância Pulsar, considere alocar um tenant ou namespace separado para cada instância Milvus. Para isso, é necessário alterar <code translate="no">pulsar.tenant</code> ou <code translate="no">pulsar.namespace</code> nos ficheiros de configuração das suas instâncias Milvus para um valor único para cada uma delas antes de as iniciar.</li>
 <li>Se não planeia ativar o multi-tenancy na sua instância Pulsar, considere alterar <code translate="no">msgChannel.chanNamePrefix.cluster</code> nos ficheiros de configuração das suas instâncias Milvus para um valor único para cada uma antes de as iniciar.</li>
 </ul>
-<h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">Posso partilhar uma instância MinIO entre várias instâncias Milvus?</h4><p>Sim, pode partilhar uma instância MinIO entre várias instâncias Milvus. Para tal, é necessário alterar <code translate="no">minio.rootPath</code> para um valor único para cada instância Milvus nos ficheiros de configuração de cada uma delas antes de as iniciar.</p>
+<h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">Posso compartilhar uma instância MinIO entre várias instâncias Milvus?</h4><p>Sim, pode partilhar uma instância MinIO entre várias instâncias Milvus. Para tal, é necessário alterar <code translate="no">minio.rootPath</code> para um valor único para cada instância Milvus nos ficheiros de configuração de cada uma delas antes de as iniciar.</p>
 <h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">Como posso lidar com a mensagem de erro <code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>?</h4><p>A mensagem de erro <code translate="no">Illegal uri [example.db]</code> indica que está a tentar ligar-se ao Milvus Lite utilizando uma versão anterior do PyMilvus que não suporta este tipo de ligação. Para resolver este problema, actualize a sua instalação do PyMilvus para, pelo menos, a versão 2.4.2, que inclui suporte para ligação ao Milvus Lite.</p>
 <p>Você pode atualizar o PyMilvus usando o seguinte comando:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
@@ -107,5 +145,5 @@ title: FAQ operacional
 <h4 id="Still-have-questions" class="common-anchor-header">Ainda tem dúvidas?</h4><p>Você pode:</p>
 <ul>
 <li>Confira <a href="https://github.com/milvus-io/milvus/issues">o Milvus</a> no GitHub. Sinta-se à vontade para fazer perguntas, partilhar ideias e ajudar os outros.</li>
-<li>Junte-se ao nosso <a href="https://discuss.milvus.io/">Fórum Milvus</a> ou <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar suporte e envolver-se com a nossa comunidade de código aberto.</li>
+<li>Junte-se ao nosso <a href="https://discuss.milvus.io/">Fórum Milvus</a> ou ao <a href="https://discord.com/invite/8uyFbECzPX">canal Discord</a> para obter apoio e envolver-se com a nossa comunidade de código aberto.</li>
 </ul>

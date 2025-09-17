@@ -7,7 +7,7 @@ summary: >-
   Operator
 title: Instal Milvus Cluster dengan Operator Milvus
 ---
-<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Menjalankan Milvus di Kubernetes dengan Operator Milvus<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Menjalankan Milvus di Kubernetes dengan Milvus Operator<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,13 +83,11 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator mendefinisikan sumber daya khusus klaster Milvus di atas <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Sumber Daya Khusus Kubernetes</a>. Ketika sumber daya khusus didefinisikan, Anda dapat menggunakan API K8s dengan cara deklaratif dan mengelola tumpukan penerapan Milvus untuk memastikan skalabilitas dan ketersediaannya yang tinggi.</p>
-<p>Anda dapat menginstal Milvus Operator dengan salah satu cara berikut:</p>
-<ul>
-<li><a href="#Install-with-Helm">Dengan Helm</a></li>
-<li><a href="#Install-with-kubectl">Dengan kubectl</a></li>
-</ul>
-<h3 id="Install-with-Helm" class="common-anchor-header">Menginstal dengan Helm</h3><p>Jalankan perintah berikut untuk menginstal Milvus Operator dengan Helm.</p>
+    </button></h2><p>Milvus Operator mendefinisikan sumber daya khusus klaster Milvus di atas <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Sumber Daya Khusus Kubernetes</a>. Ketika sumber daya khusus didefinisikan, Anda dapat menggunakan API K8s dengan cara deklaratif dan mengelola tumpukan penerapan Milvus untuk memastikan skalabilitas dan ketersediaan yang tinggi.</p>
+<div class="filter">
+ <a href="#helm">Helm</a> <a href="#kubectl">Kubectl</a></div>
+<div class="filter-helm">
+<p>Jalankan perintah berikut untuk menginstal Milvus Operator dengan Helm.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
@@ -110,18 +108,18 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>Jika Anda telah menginstal Milvus Operator sebelumnya, tingkatkan dengan menggunakan perintah berikut:</p>
+<p>Jika Anda telah menginstal Milvus Operator sebelumnya, lakukan upgrade menggunakan perintah berikut:</p>
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Install-with-kubectl" class="common-anchor-header">Instal dengan kubectl</h3><p>Jalankan perintah berikut untuk menginstal Milvus Operator dengan <code translate="no">kubectl</code>.</p>
+<div class="filter-kubectl">
+<p>Jalankan perintah berikut untuk menginstal Milvus Operator dengan <code translate="no">kubectl</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda akan melihat output yang mirip dengan berikut ini setelah proses instalasi berakhir.</p>
+<p>Anda akan melihat output yang mirip dengan yang berikut ini setelah proses instalasi berakhir.</p>
 <pre><code translate="no" class="language-shell">namespace/milvus-operator created
 customresourcedefinition.apiextensions.k8s.io/milvusclusters.milvus.io created
 serviceaccount/milvus-operator-controller-manager created
@@ -143,6 +141,7 @@ deployment.apps/milvus-operator-controller-manager created
 NAME                               READY   STATUS    RESTARTS   AGE
 milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <button class="copy-code-btn"></button></code></pre>
+</div>
 <h2 id="Deploy-Milvus" class="common-anchor-header">Menyebarkan Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,17 +157,54 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Menyebarkan cluster Milvus</h3><p>Setelah pod Milvus Operator berjalan, Anda dapat men-deploy cluster Milvus sebagai berikut.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Menyebarkan cluster Milvus<button data-href="#1-Deploy-a-Milvus-cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah pod Milvus Operator berjalan, Anda dapat men-deploy cluster Milvus sebagai berikut.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas men-deploy cluster Milvus dengan komponen dan dependensinya dalam pod terpisah menggunakan konfigurasi default. Untuk menyesuaikan pengaturan ini, kami sarankan Anda menggunakan <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> untuk menyesuaikan konfigurasi berdasarkan ukuran data Anda yang sebenarnya, lalu mengunduh file YAML yang sesuai. Untuk mempelajari lebih lanjut tentang parameter konfigurasi, lihat <a href="https://milvus.io/docs/system_configuration.md">Daftar Periksa Konfigurasi Sistem Milvus.</a></p>
+<p>Perintah di atas men-deploy cluster Milvus dengan <strong>Woodpecker</strong> sebagai antrean pesan (disarankan untuk v2.6.0) dan semua komponen arsitektur baru termasuk Streaming Node.</p>
+<p><strong>Sorotan arsitektur dalam penerapan ini:</strong></p>
+<ul>
+<li><strong>Antrian Pesan</strong>: <a href="/docs/id/use-woodpecker.md">Menggunakan Woodpecker</a> (mengurangi pemeliharaan infrastruktur)</li>
+<li><strong>Streaming Node</strong>: Diaktifkan untuk pemrosesan data yang ditingkatkan</li>
+<li><strong>Koordinator Campuran</strong>: Komponen koordinator yang terkonsolidasi untuk meningkatkan efisiensi</li>
+</ul>
+<p>Untuk menyesuaikan pengaturan ini, kami sarankan Anda menggunakan <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> untuk menyesuaikan konfigurasi berdasarkan ukuran data Anda yang sebenarnya, lalu mengunduh file YAML yang sesuai. Untuk mempelajari lebih lanjut tentang parameter konfigurasi, lihat <a href="https://milvus.io/docs/system_configuration.md">Daftar Periksa Konfigurasi Sistem Milvus.</a></p>
 <div class="alert note">
 <ul>
 <li>Nama rilis hanya boleh terdiri dari huruf, angka, dan tanda hubung. Titik tidak diperbolehkan dalam nama rilis.</li>
 <li>Anda juga dapat menggunakan instans Milvus dalam mode mandiri, di mana semua komponennya berada dalam satu pod. Untuk melakukannya, ubah URL berkas konfigurasi pada perintah di atas menjadi <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
-<h4 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Memeriksa status cluster Milvus</h4><p>Jalankan perintah berikut untuk memeriksa status cluster Milvus</p>
+<h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Memeriksa status cluster Milvus<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jalankan perintah berikut untuk memeriksa status cluster Milvus</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Setelah cluster Milvus Anda siap, keluaran dari perintah di atas akan serupa dengan yang berikut ini. Jika bidang <code translate="no">status.status</code> tetap <code translate="no">Unhealthy</code>, cluster Milvus Anda masih dalam proses pembuatan.</p>
@@ -178,21 +214,21 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <span class="hljs-string">...</span>
 <span class="hljs-attr">status:</span>
   <span class="hljs-attr">conditions:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T05:59:41Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">StorageReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">StorageReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T06:06:23Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">Pulsar</span> <span class="hljs-string">is</span> <span class="hljs-string">ready</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">PulsarReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">PulsarReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T05:59:41Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">Etcd</span> <span class="hljs-string">endpoints</span> <span class="hljs-string">is</span> <span class="hljs-string">healthy</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">EtcdReady</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">EtcdReady</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;2021-11-02T06:12:36Z&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">lastTransitionTime:</span> <span class="hljs-string">&quot;xxxx-xx-xxTxx:xx:xxZ&quot;</span>
     <span class="hljs-attr">message:</span> <span class="hljs-string">All</span> <span class="hljs-string">Milvus</span> <span class="hljs-string">components</span> <span class="hljs-string">are</span> <span class="hljs-string">healthy</span>
     <span class="hljs-attr">reason:</span> <span class="hljs-string">MilvusClusterHealthy</span>
     <span class="hljs-attr">status:</span> <span class="hljs-string">&quot;True&quot;</span>
@@ -218,7 +254,22 @@ my-release-minio-1                               1/1     Running   0          2m
 my-release-minio-2                               1/1     Running   0          2m35s
 my-release-minio-3                               1/1     Running   0          2m35s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Meneruskan port lokal ke Milvus</h3><p>Jalankan perintah berikut untuk mendapatkan port di mana cluster Milvus Anda melayani.</p>
+<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Meneruskan port lokal ke Milvus<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jalankan perintah berikut untuk mendapatkan port di mana cluster Milvus Anda melayani.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pod my-release-milvus-proxy-84f67cdb7f-pg6wf --template</span>
 =&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;
 19530
@@ -252,24 +303,19 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat memperbarui konfigurasi cluster Milvus Anda dengan mengedit berkas YAML dan menerapkannya lagi.</p>
+    </button></h2><p>Anda dapat melihat dan memperbarui konfigurasi cluster Milvus Anda dengan memanggil perintah <code translate="no">patch</code> sebagai berikut:</p>
 <ol>
-<li>Jalankan perintah berikut untuk mengedit berkas YAML.</li>
-</ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl edit milvus my-release</span>
+<li><p>Jalankan perintah berikut untuk melihat pratinjau konfigurasi yang akan dibuat.</p>
+<p>Asummes berikut ini yang ingin Anda perbarui parameter <code translate="no">spec.components.disableMetric</code> menjadi <code translate="no">false</code> ms.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
+  -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
+  --dry-run=client -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Perbarui konfigurasi dalam berkas YAML. Asummes berikut ini yang ingin Anda perbarui parameter <code translate="no">proxy.healthCheckTimout</code> menjadi <code translate="no">1000</code> ms.</li>
-</ol>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Add the corresponding user parameters under the `spec.config` node.</span>
-<span class="hljs-comment"># For the default configuration, see https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># To update `proxy.healthCheckTimout` parameter to `1000` ms, do as follows:</span>
-<span class="hljs-attr">config:</span>
-  <span class="hljs-attr">proxy:</span>
-    <span class="hljs-attr">healthCheckTimeout:</span> <span class="hljs-number">1000</span>
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Simpan perubahan dan keluar dari editor. Perubahan akan diterapkan ke cluster Milvus secara otomatis.</li>
+<p>Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a>.</p></li>
+<li><p>Perbarui konfigurasi.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
+  -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
+<button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Mengakses Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"

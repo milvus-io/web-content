@@ -46,7 +46,22 @@ summary: >-
 <li><p><strong>Vamana Graph</strong> - Un indice <strong>basato su disco</strong> e <strong>su grafo</strong> che collega i punti di dati (o vettori) per una navigazione efficiente durante la ricerca.</p></li>
 <li><p><strong>Quantizzazione del prodotto (PQ)</strong> - Un metodo di compressione <strong>in memoria</strong> che riduce le dimensioni dei vettori, consentendo un rapido calcolo approssimativo della distanza tra i vettori.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">Costruzione dell'indice</h3><h4 id="Vamana-graph" class="common-anchor-header">Grafo di Vamana</h4><p>Il grafo Vamana è il fulcro della strategia basata su disco di DISKANN. Può gestire insiemi di dati molto grandi perché non ha bisogno di risiedere completamente in memoria durante o dopo la costruzione.</p>
+<h3 id="Index-construction" class="common-anchor-header">Costruzione dell'indice<button data-href="#Index-construction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">Grafo di Vamana</h4><p>Il grafo Vamana è il fulcro della strategia basata su disco di DISKANN. Può gestire insiemi di dati molto grandi perché non ha bisogno di risiedere completamente in memoria durante o dopo la costruzione.</p>
 <p>La figura seguente mostra come viene costruito un grafo Vamana.</p>
 <p>
   
@@ -57,7 +72,7 @@ summary: >-
 <li><p><strong>Raffinamento per l'efficienza:</strong> Il grafo casuale iniziale viene sottoposto a un processo di ottimizzazione per renderlo più efficiente per la ricerca. Ciò comporta due fasi fondamentali:</p>
 <ul>
 <li><p><strong>Potatura degli spigoli ridondanti:</strong> L'algoritmo scarta le connessioni non necessarie in base alle distanze tra i nodi. Questo passaggio dà priorità ai bordi di qualità superiore.</p>
-<p>Il parametro <code translate="no">max_degree</code> limita il numero massimo di bordi per nodo. Un valore più alto di <code translate="no">max_degree</code> determina un grafo più denso, che potenzialmente può trovare più vicini rilevanti (maggiore richiamo), ma anche aumentare l'uso della memoria e il tempo di ricerca.</p></li>
+<p>Il parametro <code translate="no">max_degree</code> limita il numero massimo di bordi per nodo. Un valore più alto di <code translate="no">max_degree</code> si traduce in un grafo più denso, che potenzialmente può trovare più vicini rilevanti (maggiore richiamo), ma anche aumentare l'uso della memoria e il tempo di ricerca.</p></li>
 <li><p><strong>Aggiunta di scorciatoie strategiche:</strong> Vamana introduce bordi a lungo raggio, che collegano punti di dati molto distanti tra loro nello spazio vettoriale. Queste scorciatoie consentono alle ricerche di saltare rapidamente attraverso il grafo, aggirando i nodi intermedi e accelerando notevolmente la navigazione.</p>
 <p>Il parametro <code translate="no">search_list_size</code> determina l'ampiezza del processo di raffinamento del grafo. Un valore più alto di <code translate="no">search_list_size</code> estende la ricerca dei vicini durante la costruzione e può migliorare la precisione finale, ma aumenta il tempo di costruzione dell'indice.</p></li>
 </ul></li>
@@ -73,7 +88,22 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> è un rapporto definito dall'utente, che rappresenta la frazione della dimensione totale dei dati riservata ai codici PQ. Questo parametro consente di trovare un compromesso tra la precisione della ricerca e le risorse di memoria. Per ulteriori informazioni sulla regolazione dei parametri, consultare le <a href="/docs/it/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">configurazioni DISKANN</a>.</p></li>
 </ul>
 <p>Per i dettagli tecnici sul metodo PQ sottostante, consultare <a href="/docs/it/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
-<h3 id="Search-process" class="common-anchor-header">Processo di ricerca</h3><p>Una volta costruito l'indice (il grafico Vamana su disco e i codici PQ in memoria), DISKANN esegue le ricerche di RNA come segue:</p>
+<h3 id="Search-process" class="common-anchor-header">Processo di ricerca<button data-href="#Search-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Una volta costruito l'indice (il grafico Vamana su disco e i codici PQ in memoria), DISKANN esegue le ricerche di RNA come segue:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
@@ -134,7 +164,7 @@ summary: >-
 </ul></li>
 </ul>
 <p>Una volta apportate queste modifiche, riavviare l'istanza Milvus per rendere effettive le impostazioni. Ora Milvus sfrutterà le capacità di DISKANN per gestire grandi insiemi di dati, offrendo una ricerca vettoriale efficiente e scalabile.</p>
-<h2 id="Configure-DISKANN" class="common-anchor-header">Configurare DISKANN<button data-href="#Configure-DISKANN" class="anchor-icon" translate="no">
+<h2 id="Configure-DISKANN" class="common-anchor-header">Configurazione di DISKANN<button data-href="#Configure-DISKANN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,7 +179,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>I parametri relativi a DISKANN possono essere configurati tramite il file di configurazione di Milvus (<code translate="no">milvus.yaml</code>):</p>
+    </button></h2><p>I parametri relativi a DISKANN possono essere configurati solo tramite il file di configurazione di Milvus (<code translate="no">milvus.yaml</code>):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -176,14 +206,32 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>La regolazione fine dei parametri di DISKANN consente di adattare il suo comportamento al dataset specifico e al carico di lavoro della ricerca, trovando il giusto equilibrio tra velocità, precisione e utilizzo della memoria.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice</h3><p>Questi parametri influenzano il modo in cui viene costruito l'indice DISKANN. La loro regolazione può influenzare le dimensioni dell'indice, il tempo di costruzione e la qualità della ricerca.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Questi parametri influenzano il modo in cui viene costruito l'indice DISKANN. La loro regolazione può influenzare le dimensioni dell'indice, il tempo di costruzione e la qualità della ricerca.</p>
+<div class="alert note">
+<p>Tutti i parametri di costruzione dell'indice dell'elenco seguente possono essere configurati solo tramite il file di configurazione di Milvus (<code translate="no">milvus.yaml</code>).</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>Parametro</p></th>
      <th><p>Descrizione</p></th>
      <th><p>Valore Intervallo</p></th>
-     <th><p>Suggerimento per la regolazione</p></th>
+     <th><p>Suggerimento per la messa a punto</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
@@ -200,7 +248,7 @@ summary: >-
      <td><p>Durante la costruzione dell'indice, questo parametro definisce la dimensione del pool di candidati utilizzato per la ricerca dei vicini più prossimi per ogni nodo. Per ogni nodo aggiunto al grafo, l'algoritmo mantiene un elenco dei <code translate="no">search_list_size</code> migliori candidati trovati finora. La ricerca dei vicini si ferma quando questo elenco non può più essere migliorato. Da questa lista finale di candidati, i migliori <code translate="no">max_degree</code> nodi vengono selezionati per formare i bordi finali.</p></td>
      <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">100</code></p></td>
-     <td><p>Un valore maggiore di <code translate="no">search_list_size</code> aumenta la probabilità di trovare i veri vicini per ogni nodo, il che può portare a un grafo di qualità superiore e a migliori prestazioni di ricerca (recall). Tuttavia, ciò comporta un tempo di creazione dell'indice significativamente più lungo. Deve essere sempre impostato a un valore maggiore o uguale a <code translate="no">max_degree</code>.</p></td>
+     <td><p>Un valore maggiore di <code translate="no">search_list_size</code> aumenta la probabilità di trovare i veri vicini per ogni nodo, il che può portare a un grafo di qualità superiore e a migliori prestazioni di ricerca (recall). Tuttavia, ciò ha il costo di un tempo di creazione dell'indice significativamente più lungo. Dovrebbe essere sempre impostato a un valore maggiore o uguale a <code translate="no">max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -217,17 +265,36 @@ summary: >-
      <td><p><strong>Tipo</strong>: Variabile <strong>Intervallo</strong>: (0,0, 0,25]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">0.125</code></p></td>
      <td><p>Un rapporto più alto porta a risultati di ricerca più accurati, allocando una percentuale maggiore di memoria per i codici PQ, memorizzando di fatto più informazioni sui vettori originali. Un rapporto più basso riduce l'uso della memoria, ma potenzialmente sacrifica l'accuratezza, poiché i codici PQ più piccoli conservano meno informazioni. Questo approccio è adatto a scenari in cui i vincoli di memoria sono un problema, consentendo potenzialmente l'indicizzazione di insiemi di dati più grandi.</p>
-<p>Nella maggior parte dei casi, si consiglia di impostare un valore all'interno di questo intervallo: (0,0625, 0,25].</p></td>
+<p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: (0,0625, 0,25].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice</h3><p>Questi parametri influenzano il modo in cui DISKANN esegue le ricerche. La loro regolazione può influire sulla velocità di ricerca, sulla latenza e sull'utilizzo delle risorse.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Questi parametri influenzano il modo in cui DISKANN esegue le ricerche. La loro regolazione può influire sulla velocità di ricerca, sulla latenza e sull'utilizzo delle risorse.</p>
+<div class="alert note">
+<p>I parametri <code translate="no">BeamWidthRatio</code> dell'elenco seguente possono essere configurati solo tramite il file di configurazione di Milvus (<code translate="no">milvus.yaml</code>).</p>
+<p>I <code translate="no">search_list</code> dell'elenco seguente possono essere configurati solo nei parametri di ricerca dell'SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>Parametro</p></th>
      <th><p>Descrizione</p></th>
-     <th><p>Intervallo di valori</p></th>
-     <th><p>Suggerimento per la regolazione</p></th>
+     <th><p>Valore Intervallo</p></th>
+     <th><p>Suggerimento per la messa a punto</p></th>
    </tr>
    <tr>
      <td><p>Vamana</p></td>
@@ -239,7 +306,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>Durante un'operazione di ricerca, questo parametro determina la dimensione del pool di candidati che l'algoritmo mantiene durante l'attraversamento del grafo. Un valore maggiore aumenta le possibilità di trovare i veri vicini (richiamo più elevato), ma aumenta anche la latenza della ricerca.</p></td>
      <td><p><strong>Tipo</strong>: Intero <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">100</code></p></td>

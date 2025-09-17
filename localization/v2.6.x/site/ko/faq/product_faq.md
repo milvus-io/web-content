@@ -64,7 +64,7 @@ title: 제품 FAQ
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvus는 동시 검색이 가능한가요?</h4><p>네. 동일한 컬렉션에 대한 쿼리의 경우, Milvus는 증분 데이터와 기록 데이터를 동시에 검색합니다. 그러나 서로 다른 컬렉션에 대한 쿼리는 순차적으로 수행됩니다. 기록 데이터는 매우 방대한 데이터 세트가 될 수 있지만, 기록 데이터에 대한 검색은 상대적으로 더 많은 시간이 소요되며 기본적으로 연속적으로 수행됩니다.</p>
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">해당 컬렉션이 삭제된 후에도 MinIO의 데이터가 남아있는 이유는 무엇인가요?</h4><p>MinIO의 데이터는 데이터 롤백의 편의를 위해 일정 기간 동안 유지되도록 설계되었습니다.</p>
 <h4 id="Does-Milvus-support-message-engines-other-than-Pulsar" class="common-anchor-header">Milvus는 Pulsar 이외의 메시지 엔진을 지원하나요?</h4><p>네. Milvus 2.1.0에서는 Kafka가 지원됩니다.</p>
-<h4 id="Whats-the-difference-between-a-search-and-a-query" class="common-anchor-header">검색과 쿼리의 차이점은 무엇인가요?</h4><p>Milvus에서 벡터 유사도 검색은 유사도 계산과 벡터 인덱스 가속을 기반으로 벡터를 검색합니다. 벡터 유사도 검색과 달리, 벡터 쿼리는 부울 표현식을 기반으로 스칼라 필터링을 통해 벡터를 검색합니다. 부울 표현식은 스칼라 필드 또는 기본 키 필드를 필터링하고 필터와 일치하는 모든 결과를 검색합니다. 쿼리에는 유사성 메트릭이나 벡터 인덱스가 포함되지 않습니다.</p>
+<h4 id="Whats-the-difference-between-a-search-and-a-query" class="common-anchor-header">검색과 쿼리의 차이점은 무엇인가요?</h4><p>Milvus에서 벡터 유사도 검색은 유사도 계산과 벡터 인덱스 가속을 기반으로 벡터를 검색합니다. 벡터 유사도 검색과 달리, 벡터 쿼리는 부울 식을 기반으로 스칼라 필터링을 통해 벡터를 검색합니다. 부울 표현식은 스칼라 필드 또는 기본 키 필드를 필터링하고 필터와 일치하는 모든 결과를 검색합니다. 쿼리에는 유사성 메트릭이나 벡터 인덱스가 포함되지 않습니다.</p>
 <h4 id="Why-does-a-float-vector-value-have-a-precision-of-7-decimal-digits-in-Milvus" class="common-anchor-header">Milvus에서 실수 벡터 값의 정밀도가 소수점 이하 7자리인 이유는 무엇인가요?</h4><p>Milvus는 벡터를 Float32 배열로 저장하는 것을 지원합니다. Float32 값의 정밀도는 소수점 이하 7자리입니다. 1.3476964684980388 같은 Float64 값의 경우에도 Milvus는 1.347696으로 저장합니다. 따라서 Milvus에서 이러한 벡터를 검색하면 Float64 값의 정밀도가 손실됩니다.</p>
 <h4 id="How-does-Milvus-handle-vector-data-types-and-precision" class="common-anchor-header">Milvus는 벡터 데이터 유형과 정밀도를 어떻게 처리하나요?</h4><p>Milvus는 Binary, Float32, Float16 및 BFloat16 벡터 유형을 지원합니다.</p>
 <ul>
@@ -118,5 +118,5 @@ value_set = <span class="hljs-built_in">set</span>()
 <h4 id="Still-have-questions" class="common-anchor-header">아직 질문이 있으신가요?</h4><p>문의하세요:</p>
 <ul>
 <li>GitHub에서 <a href="https://github.com/milvus-io/milvus/issues">Milvus를</a> 확인하세요. 질문을 제기하고, 아이디어를 공유하고, 다른 사람들을 도울 수 있습니다.</li>
-<li><a href="https://slack.milvus.io/">Slack 커뮤니티에</a> 가입하여 지원을 찾고 오픈 소스 커뮤니티에 참여하세요.</li>
+<li><a href="https://discord.com/invite/8uyFbECzPX">Discord 채널에</a> 가입하여 지원을 찾고 오픈소스 커뮤니티에 참여하세요.</li>
 </ul>

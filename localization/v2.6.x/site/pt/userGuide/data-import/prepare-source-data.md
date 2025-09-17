@@ -224,10 +224,25 @@ schema.verify()
     </button></h2><p><strong>BulkWriter</strong> é uma ferramenta concebida para converter conjuntos de dados brutos num formato adequado para importação através da API de importação RESTful. Ele oferece dois tipos de gravadores:</p>
 <ul>
 <li><strong>LocalBulkWriter</strong>: Lê o conjunto de dados designado e o transforma em um formato fácil de usar.</li>
-<li><strong>RemoteBulkWriter</strong>: Executa a mesma tarefa que o LocalBulkWriter, mas transfere adicionalmente os arquivos de dados convertidos para um bucket de armazenamento de objetos remoto especificado.</li>
+<li><strong>RemoteBulkWriter</strong>: Executa a mesma tarefa que o LocalBulkWriter, mas transfere adicionalmente os arquivos de dados convertidos para um bucket de armazenamento de objeto remoto especificado.</li>
 </ul>
 <p><strong>RemoteBulkWriter</strong> difere de <strong>LocalBulkWriter</strong> porque <strong>RemoteBulkWriter</strong> transfere os arquivos de dados convertidos para um bucket de armazenamento de objetos de destino.</p>
-<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Configurar o LocalBulkWriter</h3><p>Um <strong>LocalBulkWriter</strong> acrescenta linhas do conjunto de dados de origem e transfere-as para um ficheiro local do formato especificado.</p>
+<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Configurar o LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um <strong>LocalBulkWriter</strong> acrescenta linhas do conjunto de dados de origem e transfere-as para um ficheiro local do formato especificado.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
@@ -270,11 +285,26 @@ writer = LocalBulkWriter(
 <li>Referenciar o esquema criado em <code translate="no">CollectionSchema()</code>.</li>
 <li>Definir o diretório de saída em <code translate="no">withLocalPath()</code>.</li>
 <li>Definir o tipo de ficheiro de saída em <code translate="no">withFileType()</code>.</li>
-<li>Se o conjunto de dados contiver um grande número de registos, é aconselhável segmentar os dados, definindo <code translate="no">withChunkSize()</code> para um valor adequado.</li>
+<li>Se o conjunto de dados contiver um grande número de registos, é aconselhável segmentar os dados definindo <code translate="no">withChunkSize()</code> para um valor adequado.</li>
 </ul>
 <p>Para obter detalhes sobre as definições de parâmetros, consulte LocalBulkWriter na referência do SDK.</p>
 </div>
-<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Configurar o RemoteBulkWriter</h3><p>Em vez de confirmar os dados anexados a um arquivo local, um <strong>RemoteBulkWriter</strong> confirma-os em um bucket remoto. Por conseguinte, deve configurar um objeto <strong>ConnectParam</strong> antes de criar um <strong>RemoteBulkWriter</strong>.</p>
+<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Configurar o RemoteBulkWriter<button data-href="#Set-up-RemoteBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Em vez de confirmar os dados anexados a um arquivo local, um <strong>RemoteBulkWriter</strong> confirma-os em um bucket remoto. Por conseguinte, deve configurar um objeto <strong>ConnectParam</strong> antes de criar um <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
@@ -355,7 +385,7 @@ writer = RemoteBulkWriter(
 <p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">connect_param</code>. Para mais pormenores sobre as definições dos parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> na referência do SDK.</p>
 </div>
 <div class="language-java">
-<p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">StorageConnectParam</code>. Para mais informações sobre as definições dos parâmetros, consulte RemoteBulkWriter e StorageConnectParam na referência do SDK.</p>
+<p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">StorageConnectParam</code>. Para obter detalhes sobre as definições dos parâmetros, consulte RemoteBulkWriter e StorageConnectParam na referência do SDK.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">Iniciar a escrita<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -621,7 +651,7 @@ remoteBulkWriter.getBatchFiles();
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>O BulkWriter</strong> gera um UUID, cria uma subpasta utilizando o UUID no diretório de saída fornecido e coloca todos os ficheiros gerados na subpasta. <a href="https://assets.zilliz.com/bulk_writer.zip">Clique aqui</a> para descarregar os dados de amostra preparados.</p>
 <p>As estruturas de pastas possíveis são as seguintes:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
+<pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
 │       └── 1.json 

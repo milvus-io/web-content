@@ -91,14 +91,17 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>指數衰減創造了一條曲線，一開始下降得很快，然後逐漸變平，形成一條接近但永遠不會到零的長尾。這種數學模式經常出現在自然現象中，例如放射性衰減、人口下降、資訊隨時間的相關性等。</p>
+    </button></h2><p>指數衰減創造了一條曲線，一開始下降得很快，然後逐漸變平，形成一條接近但永遠不會到零的長尾。這種數學模式經常出現在自然現象中，如放射性衰減、人口下降、資訊隨時間的相關性等。</p>
+<div class="alert note">
+<p>所有時間參數 (<code translate="no">origin</code>,<code translate="no">offset</code>,<code translate="no">scale</code>) 必須使用與收集資料相同的單位。如果您的資料集以不同單位 (毫秒、微秒) 儲存時間戳記，請相應調整所有參數。</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/exp-decay.png" alt="Exp Decay" class="doc-image" id="exp-decay" />
    </span> <span class="img-wrapper"> <span>指數衰減</span> </span></p>
 <p>上圖顯示指數衰減如何影響數位新聞平台的新聞文章排名：</p>
 <ul>
-<li><p><code translate="no">origin</code> (當前時間）：當前時刻，相關度達到最大值 (1.0)。</p></li>
+<li><p><code translate="no">origin</code> (當前時間）：當前時刻，相關性達到最大值 (1.0)。</p></li>
 <li><p><code translate="no">offset</code> (3 小時)：突發新聞窗口」- 所有在過去 3 小時內發表的新聞都維持完整的相關性評分 (1.0)，確保最近的新聞不會因為微小的時間差異而受到不必要的懲罰。</p></li>
 <li><p><code translate="no">decay</code> (0.5):尺度距離的分數 - 此參數可控制分數隨時間遞減的程度。</p></li>
 <li><p><code translate="no">scale</code> (24 小時)：相關性下降至衰減數值的時間段 - 24 小時前的新聞，其相關性評分會減半 (0.5)。</p></li>
@@ -151,11 +154,30 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>在使用遞減函數之前，您必須先建立一個具有適當數值欄位 (如時間戳記、距離等) 的集合，這些欄位將用於遞減計算。如需完整的工作範例，包括集合設定、模式定義和資料插入，請參閱<a href="/docs/zh-hant/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker Tutorial</a>。</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器</h3><p>在您的資料集中設定了數值欄位 (本範例中為<code translate="no">publish_time</code>)，請建立指數衰減排名器：</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">建立衰減排名器<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在您的資料集中設定了數值欄位 (在本範例中為<code translate="no">publish_time</code>)，請建立指數衰減排名器：</p>
+<div class="alert note">
+<p><strong>時間單位一致性</strong>：當使用基於時間的遞減時，請確保<code translate="no">origin</code>,<code translate="no">scale</code>, 和<code translate="no">offset</code> 參數與您的收集資料使用相同的時間單位。如果您的資料集以秒為單位儲存時間戳記，則所有參數都使用秒。如果使用毫秒，則所有參數都使用毫秒。</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-comment"># Create an exponential decay ranker for news recency</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;news_recency&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;publish_time&quot;</span>],   <span class="hljs-comment"># Numeric field to use</span>
@@ -163,14 +185,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;exp&quot;</span>,                <span class="hljs-comment"># Choose exponential decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (1 day)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">應用於標準向量搜尋</h3><p>定義衰減排序器之後，您可以將它傳給<code translate="no">ranker</code> 參數，在搜尋操作中應用它：</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">套用至標準向量搜尋<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定義衰減排位器之後，您可以在搜尋作業時將它套用到<code translate="no">ranker</code> 參數：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -182,7 +219,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">應用於混合搜尋</h3><p>衰減排序器也可以應用於結合多向量場的混合搜尋作業：</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">套用至混合搜尋<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>衰減排序器也可應用於結合多向量場的混合搜尋作業：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

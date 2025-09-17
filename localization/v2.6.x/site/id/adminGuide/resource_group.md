@@ -113,7 +113,7 @@ node_num = <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Membuat daftar grup sumber daya.</p>
 <p>Setelah Anda membuat grup sumber daya, Anda dapat melihatnya di daftar grup sumber daya.</p>
-<p>Untuk melihat daftar grup sumber daya dalam suatu instans Milvus, lakukan hal berikut:</p>
+<p>Untuk melihat daftar grup sumber daya dalam instans Milvus, lakukan hal berikut:</p>
 <pre><code translate="no" class="language-python">rgs = milvus_client.list_resource_groups()
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Resource group list: <span class="hljs-subst">{rgs}</span>&quot;</span>)
 
@@ -232,7 +232,7 @@ except Exception:
     </button></h2><p>Saat ini, Milvus tidak dapat melakukan penskalaan masuk dan keluar secara mandiri di lingkungan cloud-native. Namun, dengan menggunakan <strong>Declarative Resource Group API</strong> bersama dengan orkestrasi kontainer, Milvus dapat dengan mudah mencapai isolasi sumber daya dan manajemen untuk QueryNodes. Berikut ini adalah praktik yang baik untuk mengelola QueryNodes di lingkungan cloud:</p>
 <ol>
 <li><p>Secara default, Milvus membuat <strong>__default_resource_group</strong>. Grup sumber daya ini tidak dapat dihapus dan juga berfungsi sebagai grup sumber daya pemuatan default untuk semua koleksi dan QueryNode yang berlebihan selalu ditugaskan ke grup tersebut. Oleh karena itu, kita dapat membuat grup sumber daya yang tertunda untuk menampung sumber daya QueryNode yang tidak digunakan, sehingga sumber daya QueryNode tidak digunakan oleh <strong>__default_resource_group</strong>.</p>
-<p>Selain itu, jika kita secara ketat menerapkan batasan <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>, kita dapat secara tepat mengontrol penugasan QueryNode dalam cluster. Mari kita asumsikan saat ini hanya ada satu QueryNode di dalam cluster dan menginisialisasi cluster. Berikut adalah contoh pengaturannya:</p>
+<p>Selain itu, jika kita secara ketat menerapkan batasan <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>, kita dapat secara tepat mengontrol penugasan QueryNode dalam cluster. Mari kita asumsikan saat ini hanya ada satu QueryNode di dalam cluster dan menginisialisasi cluster. Berikut ini adalah contoh pengaturannya:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
 _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&quot;</span>

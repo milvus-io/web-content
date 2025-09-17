@@ -76,8 +76,23 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フレーズマッチはmilvusの文字列データ型である<code translate="no">VARCHAR</code> フィールドタイプで機能します。フレーズ一致を有効にするには、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方のパラメータを<code translate="no">True</code> に設定して、<a href="/docs/ja/keyword-match.md">テキスト一致と</a>同様にコレクションスキーマを構成します。</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header"><code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code></h3><p>特定の<code translate="no">VARCHAR</code> フィールドでフレーズ一致を有効にするには、フィールドスキーマを定義する際に<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方のパラメータを<code translate="no">True</code> に設定します。この設定により、Milvusはテキストをトークン化し、効率的なフレーズマッチに必要な位置情報を持つ転置インデックスを作成するように指示します。</p>
+    </button></h2><p>フレーズマッチはMilvusの文字列データ型である<code translate="no">VARCHAR</code> フィールドタイプで機能します。フレーズ一致を有効にするには、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方のパラメータを<code translate="no">True</code> に設定して、<a href="/docs/ja/keyword-match.md">テキスト一致と</a>同様にコレクションスキーマを構成します。</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header"><code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>特定の<code translate="no">VARCHAR</code> フィールドでフレーズ一致を有効にするには、フィールドスキーマを定義する際に<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方のパラメータを<code translate="no">True</code> に設定します。この設定により、Milvusはテキストをトークン化し、効率的なフレーズマッチに必要な位置情報を持つ転置インデックスを作成するように指示します。</p>
 <p>以下はフレーズ一致を有効にするスキーマ定義の例です：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -103,8 +118,23 @@ schema.add_field(
     dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">オプション：アナライザーの設定</h3><p>フレーズ・マッチングの精度は、テキスト・データのトークン化に使用するアナライザーに大きく依存します。異なるアナライザーは異なる言語やテキスト形式に適しており、トークン化と位置の精度に影響を与えます。特定の使用ケースに適したアナライザを選択することで、フレーズ マッチングの結果を最適化できます。</p>
-<p>デフォルトでは、Milvusは標準アナライザーを使用します。このアナライザーは、空白と句読点に基づいてテキストをトークン化し、40文字以上のトークンを削除し、テキストを小文字に変換します。デフォルトでは追加のパラメータは必要ありません。詳細については、<a href="/docs/ja/standard-analyzer.md">Standard Analyzerを</a>参照してください。</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">オプション：アナライザーの設定<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>フレーズ・マッチングの精度は、テキスト・データのトークン化に使用するアナライザーに大きく依存します。異なるアナライザーは異なる言語やテキスト形式に対応し、トークン化と位置の精度に影響を与えます。特定の使用ケースに適したアナライザを選択することで、フレーズ マッチングの結果を最適化できます。</p>
+<p>デフォルトでは、Milvusは標準アナライザーを使用し、空白と句読点に基づいてテキストをトークン化し、40文字以上のトークンを削除し、テキストを小文字に変換します。デフォルトでは追加のパラメータは必要ありません。詳細については、<a href="/docs/ja/standard-analyzer.md">Standard Analyzerを</a>参照してください。</p>
 <p>アプリケーションで特定のアナライザが必要な場合は、<code translate="no">analyzer_params</code> パラメータを使用して設定します。例えば、<code translate="no">english</code> アナライザを英語テキストのフレーズマッチ用に設定する方法を以下に示します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -121,7 +151,7 @@ schema.add_field(
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusは様々な言語や用途に合わせたアナライザをサポートしています。詳細については、<a href="/docs/ja/analyzer-overview.md">Analyzer Overviewを</a>参照してください。</p>
+<p>Milvusは様々な言語やユースケースに合わせた複数のアナライザーをサポートしています。詳細については、<a href="/docs/ja/analyzer-overview.md">Analyzer Overviewを</a>参照してください。</p>
 <h2 id="Use-phrase-match" class="common-anchor-header">フレーズ一致を使用する<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,7 +171,22 @@ schema.add_field(
 <div class="alert note">
 <p><code translate="no">PHRASE_MATCH</code> 式は大文字と小文字を区別しません。<code translate="no">PHRASE_MATCH</code> または<code translate="no">phrase_match</code> のいずれかを使用できます。</p>
 </div>
-<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">PHRASE_MATCH式の構文</h3><p><code translate="no">PHRASE_MATCH</code> 式を使用して、検索時にフィールド、フレーズ、およびオプションの柔軟性 (<code translate="no">slop</code>) を指定します。構文は以下のとおりです：</p>
+<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">PHRASE_MATCH式の構文<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">PHRASE_MATCH</code> 式を使用して、検索時にフィールド、フレーズ、およびオプションの柔軟性 (<code translate="no">slop</code>) を指定します。構文は以下のとおりです：</p>
 <pre><code translate="no" class="language-python">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -154,7 +199,22 @@ schema.add_field(
 <li><p><code translate="no">2</code>:用語の順序を逆にしたり、間に最大2つのトークンを入れるなど、より柔軟に対応できます。例例：<strong>"machine learning "</strong>のフィルターは、<strong>"learning machine"</strong>（語順が逆）または<strong>"machine quickly boosts learning"</strong>（<strong>"machine "</strong>と "<strong>learning "</strong>の間に2つのトークンがある）にマッチする。</p></li>
 </ul></li>
 </ul>
-<h3 id="Example-dataset" class="common-anchor-header">データセットの例</h3><p>次の5つのエンティティを含む<strong>tech_articlesという</strong>コレクションがあるとする：</p>
+<h3 id="Example-dataset" class="common-anchor-header">データセットの例<button data-href="#Example-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次の5つのエンティティを含む<strong>tech_articlesという</strong>コレクションがあるとする：</p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -181,7 +241,22 @@ schema.add_field(
      <td><p>"高度な機械アルゴリズムの学習がAIの能力を拡張する"</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">フレーズマッチによるクエリ</h3><p><code translate="no">query()</code> メソッドを使用する場合、<strong>PHRASE_MATCH は</strong>スカラーフィルターとして機能します。指定されたフレーズを含むドキュメントのみが（許容されるスループに従って）返される。</p>
+<h3 id="Query-with-phrase-match" class="common-anchor-header">フレーズマッチによるクエリ<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">query()</code> メソッドを使用する場合、<strong>PHRASE_MATCH は</strong>スカラーフィルターとして機能します。指定されたフレーズを含むドキュメントのみが（許容されるスループに従って）返される。</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">例: slop = 0 (完全一致)</h4><p>この例では、<strong>"machine learning "という</strong>フレーズを正確に含む文書を、間に余計なトークンを入れずに返します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -204,7 +279,22 @@ result = client.query(
    </tr>
 </table>
 <p>ドキュメント1だけが、指定された順序で、追加のトークンなしで正確なフレーズ<strong>"machine learning "</strong>を含んでいます。</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">フレーズ一致検索</h3><p>検索操作では、ベクトル類似度ランキングを適用する前に、<strong>PHRASE_MATCHを</strong>使用して文書をフィルタリングする。この2段階のアプローチは、まずテキストマッチによって候補を絞り込み、次にそれらの候補をベクトル埋め込みに基づいて再ランク付けする。</p>
+<h3 id="Search-with-phrase-match" class="common-anchor-header">フレーズ一致検索<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>検索操作では、ベクトル類似度ランキングを適用する前に、<strong>PHRASE_MATCHを</strong>使用して文書をフィルタリングする。この2段階のアプローチは、まずテキストマッチによって候補を絞り込み、次にそれらの候補をベクトル埋め込みに基づいて再ランク付けする。</p>
 <h4 id="Example-slop--1" class="common-anchor-header">例: スロップ = 1</h4><p>ここでは、slop = 1を許容する。このフィルターは、<strong>"learning machine "という</strong>フレーズを含む文書に、若干の柔軟性を持たせて適用される。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>
@@ -231,7 +321,7 @@ result_slop1 = client.search(
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"ディープラーニングマシンのアーキテクチャは計算負荷を最適化する" 3</p></td>
+     <td><p>"ディープラーニングマシンのアーキテクチャは計算負荷を最適化する"</p></td>
    </tr>
    <tr>
      <td><p>5</p></td>

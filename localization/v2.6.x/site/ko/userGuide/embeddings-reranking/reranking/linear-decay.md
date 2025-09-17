@@ -2,7 +2,7 @@
 id: linear-decay.md
 title: 선형 감쇠Compatible with Milvus 2.6.x
 summary: >-
-  선형 감쇠는 검색 결과에서 절대 0점에서 끝나는 직선형 감소를 만듭니다. 다가오는 이벤트 카운트다운에서 이벤트가 지나갈 때까지 관련성이
+  선형 감쇠는 검색 결과에서 절대 0점에서 끝나는 직선형 감소를 생성합니다. 다가오는 이벤트 카운트다운에서 이벤트가 지나갈 때까지 관련성이
   서서히 사라지는 것처럼, 선형 감쇠는 항목이 이상적인 지점에서 멀어질수록 관련성이 완전히 사라질 때까지 예측 가능하고 꾸준히 감소합니다. 이
   접근 방식은 특정 경계를 벗어난 항목이 결과에서 완전히 제외되도록 하여 명확한 컷오프가 있는 일관된 감쇠율을 원하는 경우에 이상적입니다.
 beta: Milvus 2.6.x
@@ -94,7 +94,10 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>선형 감쇠는 정확히 0에 도달할 때까지 일정한 비율로 감소하는 직선형 하락을 만듭니다. 이 패턴은 카운트다운 타이머, 재고 고갈, 관련성 만료 시점이 명확한 마감일 다가오기 등 많은 일상적인 시나리오에서 나타납니다.</p>
+    </button></h2><p>선형 감쇠는 정확히 0에 도달할 때까지 일정한 비율로 감소하는 직선형 하락을 만듭니다. 이 패턴은 카운트다운 타이머, 재고 고갈, 관련성 만료 시점이 명확한 마감일 접근과 같은 많은 일상적인 시나리오에서 나타납니다.</p>
+<div class="alert note">
+<p>모든 시간 매개변수(<code translate="no">origin</code>, <code translate="no">offset</code>, <code translate="no">scale</code>)는 수집 데이터와 동일한 단위를 사용해야 합니다. 컬렉션에서 타임스탬프를 다른 단위(밀리초, 마이크로초)로 저장하는 경우 모든 매개변수를 그에 맞게 조정하세요.</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
@@ -155,7 +158,25 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>감쇠 함수를 사용하기 전에 먼저 감쇠 계산에 사용할 적절한 숫자 필드(타임스탬프, 거리 등)가 있는 컬렉션을 만들어야 합니다. 컬렉션 설정, 스키마 정의, 데이터 삽입을 포함한 전체 작업 예제는 <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">감쇠 순위 자습서를</a> 참조하세요.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">감쇠 랭커 생성하기</h3><p>컬렉션에 숫자 필드(이 예에서는 <code translate="no">event_date</code> 를 지금부터 초로 설정)를 설정한 후 선형 감쇠 순위자를 만듭니다:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">감쇠 랭커 생성하기<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션에 숫자 필드(이 예에서는 <code translate="no">event_date</code> 를 지금부터 몇 초 후로 설정)를 설정한 후 선형 감쇠 순위자를 만듭니다:</p>
+<div class="alert note">
+<p><strong>시간 단위 일관성</strong>: 시간 기반 감쇠를 사용하는 경우 <code translate="no">origin</code>, <code translate="no">scale</code>, <code translate="no">offset</code> 매개변수가 컬렉션 데이터와 동일한 시간 단위를 사용하는지 확인하세요. 수집에서 타임스탬프를 초 단위로 저장하는 경우 모든 매개변수에 초를 사용합니다. 밀리초를 사용하는 경우 모든 매개변수에 밀리초를 사용합니다.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> time
 
@@ -163,6 +184,7 @@ beta: Milvus 2.6.x
 current_time = <span class="hljs-built_in">int</span>(time.time())
 
 <span class="hljs-comment"># Create a linear decay ranker for event listings</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;event_relevance&quot;</span>,               <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;event_date&quot;</span>],     <span class="hljs-comment"># Numeric field to use</span>
@@ -170,14 +192,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;linear&quot;</span>,             <span class="hljs-comment"># Choose linear decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기</h3><p>감쇠 순위자를 정의한 후 <code translate="no">ranker</code> 매개변수에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>감쇠 순위자를 정의한 후 <code translate="no">ranker</code> 매개변수에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -189,7 +226,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용</h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 연산에도 디케이 레이커를 적용할 수 있습니다:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 작업에도 디케이 랭커를 적용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

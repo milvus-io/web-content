@@ -26,7 +26,7 @@ title: Memutakhirkan Milvus Standalone dengan Docker Compose
     </button></h1><p>Topik ini menjelaskan cara memutakhirkan Milvus menggunakan Docker Compose.</p>
 <p>Dalam kasus normal, Anda dapat memutakhirkan <a href="#Upgrade-Milvus-by-changing-its-image">Milvus dengan mengubah citranya.</a> Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan pemutakhiran apa pun dari v2.1.x ke v2.5.13.</p>
 <div class="alter note">
-<p>Karena masalah keamanan, Milvus mengupgrade MinIO ke RELEASE.2023-03-20T20-16-18Z dengan rilis v2.2.5. Sebelum peningkatan apa pun dari rilis Milvus Standalone sebelumnya diinstal menggunakan Docker Compose, Anda harus membuat penerapan MinIO Single-Node Single-Drive dan memigrasikan pengaturan dan konten MinIO yang sudah ada ke penerapan yang baru. Untuk detailnya, lihat <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">panduan ini</a>.</p>
+<p>Karena masalah keamanan, Milvus mengupgrade MinIO ke RELEASE.2023-03-20T20-16-18Z dengan rilis v2.2.5. Sebelum pemutakhiran apa pun dari rilis Milvus Standalone sebelumnya diinstal menggunakan Docker Compose, Anda harus membuat penerapan MinIO Single-Node Single-Drive dan memigrasikan pengaturan dan konten MinIO yang ada ke penerapan yang baru. Untuk detailnya, lihat <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">panduan ini</a>.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Tingkatkan Milvus dengan mengubah gambarnya<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"

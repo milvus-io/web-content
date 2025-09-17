@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在大规模场景中，数据集可能包括数十亿甚至数万亿个向量，标准的内存索引方法（如<a href="/docs/zh/hnsw.md">HNSW</a>、<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>）往往因内存限制而跟不上步伐。<strong>DISKANN</strong>提供了一种基于磁盘的方法，可以在数据集大小超过可用 RAM 时保持较高的搜索精度和速度，从而应对这些挑战。</p>
+    </button></h1><p>在大规模场景中，数据集可能包括数十亿甚至数万亿向量，标准的内存索引方法（如<a href="/docs/zh/hnsw.md">HNSW</a>、<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>）往往会因内存限制而跟不上步伐。<strong>DISKANN</strong>提供了一种基于磁盘的方法，可以在数据集大小超过可用 RAM 时保持较高的搜索精度和速度，从而应对这些挑战。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,22 @@ summary: >-
 <li><p><strong>Vamana 图形</strong>- 一种<strong>基于磁盘的</strong> <strong>图形</strong>索引，可将数据点（或向量）连接起来，以便在搜索过程中高效导航。</p></li>
 <li><p><strong>乘积量化 (PQ)</strong>- 一种<strong>内存</strong>压缩方法，可减小向量的大小，从而快速计算向量之间的近似距离。</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">索引构建</h3><h4 id="Vamana-graph" class="common-anchor-header">瓦马纳图</h4><p>Vamana 图是 DISKANN 基于磁盘策略的核心。它可以处理非常大的数据集，因为在构建过程中或之后，它不需要完全驻留在内存中。</p>
+<h3 id="Index-construction" class="common-anchor-header">索引构建<button data-href="#Index-construction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">瓦马纳图</h4><p>Vamana 图是 DISKANN 基于磁盘策略的核心。它可以处理非常大的数据集，因为在构建过程中或之后，它不需要完全驻留在内存中。</p>
 <p>下图显示了 Vamana 图的构建过程。</p>
 <p>
   
@@ -68,7 +83,22 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> 是用户定义的比率，表示为 PQ 代码保留的总数据大小的一部分。该参数允许在搜索精度和内存资源之间进行权衡。有关参数调整的更多信息，请参阅<a href="/docs/zh/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>。</p></li>
 </ul>
 <p>有关底层 PQ 方法的技术细节，请参阅<a href="/docs/zh/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>。</p>
-<h3 id="Search-process" class="common-anchor-header">搜索过程</h3><p>建立索引（磁盘上的 Vamana 图和内存中的 PQ 代码）后，DISKANN 将执行 ANN 搜索，具体过程如下：</p>
+<h3 id="Search-process" class="common-anchor-header">搜索过程<button data-href="#Search-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>建立索引（磁盘上的 Vamana 图和内存中的 PQ 代码）后，DISKANN 将执行 ANN 搜索，具体过程如下：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
@@ -99,7 +129,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>默认情况下，Milvus 会禁用<strong>DISKANN</strong>，以优先提高内存中索引的速度，以适应 RAM 中的数据集。不过，如果你正在处理海量数据集，或者想利用<strong>DISKANN</strong> 的可扩展性和固态硬盘优化，你可以轻松启用它。</p>
+    </button></h2><p>默认情况下，Milvus 会禁用<strong>DISKANN</strong>，以优先提高内存中索引的速度，以适应 RAM 中的数据集。不过，如果你正在处理海量数据集，或想利用<strong>DISKANN</strong> 的可扩展性和固态硬盘优化，你可以轻松启用它。</p>
 <p>下面介绍如何在 Milvus 中启用 DISKANN：</p>
 <ol>
 <li><p><strong>更新 Milvus 配置文件</strong></p>
@@ -144,7 +174,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN 相关参数可通过 Milvus 配置文件 (<code translate="no">milvus.yaml</code>) 进行配置：</p>
+    </button></h2><p>DISKANN 相关参数只能通过 Milvus 配置文件 (<code translate="no">milvus.yaml</code>) 进行配置：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -171,12 +201,30 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>对 DISKANN 的参数进行微调，可让您根据特定的数据集和搜索工作量调整其行为，在速度、准确性和内存使用之间取得适当的平衡。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引构建参数</h3><p>这些参数会影响 DISKANN 索引的构建方式。调整这些参数会影响索引大小、构建时间和搜索质量。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引构建参数<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>这些参数会影响 DISKANN 索引的构建方式。调整这些参数会影响索引大小、构建时间和搜索质量。</p>
+<div class="alert note">
+<p>下面列出的所有索引构建参数只能通过 Milvus 配置文件 (<code translate="no">milvus.yaml</code>) 进行配置。</p>
+</div>
 <table>
    <tr>
      <th></th>
      <th><p>参数</p></th>
-     <th><p>说明</p></th>
+     <th><p>参数</p></th>
      <th><p>值范围</p></th>
      <th><p>调整建议</p></th>
    </tr>
@@ -211,11 +259,30 @@ summary: >-
      <td><p>控制 PQ 代码（数据点的压缩表示）相对于未压缩数据的大小。</p></td>
      <td><p><strong>类型</strong>：浮点<strong>范围</strong>：（0.0, 0.25］</p>
 <p><strong>默认值</strong>：<code translate="no">0.125</code></p></td>
-     <td><p>比率越高，搜索结果越精确，因为 PQ 代码分配的内存比例越大，有效存储的原始向量信息就越多。然而，这需要更多内存，限制了处理大型数据集的能力。 较低的比率可减少内存使用量，但可能会牺牲精确度，因为较小的 PQ 代码保留的信息较少。这种方法适用于内存受限的情况，有可能实现对大型数据集的索引。</p>
+     <td><p>比率越高，搜索结果越精确，因为 PQ 代码分配的内存比例越大，有效存储的原始向量信息越多。然而，这需要更多内存，限制了处理大型数据集的能力。 较低的比率可减少内存使用量，但可能会牺牲精确度，因为较小的 PQ 代码保留的信息较少。这种方法适用于内存受限的情况，有可能实现对大型数据集的索引。</p>
 <p>在大多数情况下，我们建议在此范围内设置一个值：（0.0625, 0.25］</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>这些参数会影响 DISKANN 执行搜索的方式。调整这些参数会影响搜索速度、延迟和资源使用。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>这些参数会影响 DISKANN 执行搜索的方式。调整这些参数会影响搜索速度、延迟和资源使用。</p>
+<div class="alert note">
+<p>下面列表中的<code translate="no">BeamWidthRatio</code> 只能通过 Milvus 配置文件进行配置 (<code translate="no">milvus.yaml</code>)</p>
+<p>下表中的<code translate="no">search_list</code> 只能在 SDK 的搜索参数中配置。</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -234,7 +301,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>在搜索操作过程中，该参数决定了算法在遍历图时所维护的候选池的大小。数值越大，找到真正近邻的几率越大（召回率更高），但也会增加搜索延迟。</p></td>
      <td><p><strong>类型</strong>： 整数整数[1，<em>int_max］</em></p>
 <p><strong>默认值</strong>：<code translate="no">100</code></p></td>

@@ -23,8 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The TEI Ranker leverages the <a href="/docs/tei-ranker.md">Text Embedding Inference (TEI)</a> service from Hugging Face to enhance search relevance through semantic reranking. It represents an advanced approach to search result ordering that goes beyond traditional vector similarity.</p>
-<p>Compared to <a href="/docs/vllm-ranker.md">vLLM Ranker</a>, TEI Ranker offers straightforward integration with Hugging Face’s ecosystem and pre-trained reranking models, making it ideal for applications where ease of deployment and maintenance are priorities.</p>
+    </button></h1><p>The TEI Ranker leverages the <a href="https://huggingface.co/docs/text-embeddings-inference/index">Text Embedding Inference (TEI)</a> service from Hugging Face to enhance search relevance through semantic reranking. It represents an advanced approach to search result ordering that goes beyond traditional vector similarity.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,6 +60,13 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>To use TEI Ranker in your Milvus application, create a Function object that specifies how the reranking should operate. This function will be passed to Milvus search operations to enhance result ranking.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -78,11 +84,19 @@ tei_ranker = Function(
         <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,                 <span class="hljs-comment"># Specifies TEI as the service provider</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>],  <span class="hljs-comment"># Query text for relevance evaluation</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment"># Your TEI service URL</span>
-        <span class="hljs-string">&quot;maxBatch&quot;</span>: <span class="hljs-number">32</span>,                    <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
+        <span class="hljs-string">&quot;max_client_batch_size&quot;</span>: <span class="hljs-number">32</span>,                    <span class="hljs-comment"># Optional: batch size for processing (default: 32)</span>
         <span class="hljs-string">&quot;truncate&quot;</span>: <span class="hljs-literal">True</span>,                <span class="hljs-comment"># Optional: Truncate the inputs that are longer than the maximum supported size</span>
         <span class="hljs-string">&quot;truncation_direction&quot;</span>: <span class="hljs-string">&quot;Right&quot;</span>,    <span class="hljs-comment"># Optional: Direction to truncate the inputs</span>
     }
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">TEI ranker-specific parameters<button data-href="#TEI-ranker-specific-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -106,6 +120,36 @@ tei_ranker = Function(
      <th><p>Required?</p></th>
      <th><p>Description</p></th>
      <th><p>Value / Example</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">reranker</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Must be set to <code translate="no">"model"</code> to enable model reranking.</p></td>
+     <td><p><code translate="no">"model"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">provider</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>The model service provider to use for reranking.</p></td>
+     <td><p><code translate="no">"tei"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queries</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>List of query strings used by the rerank model to calculate relevance scores. The number of query strings must match exactly the number of queries in your search operation (even when using query vectors instead of text), otherwise an error will be reported.</p></td>
+     <td><p><em>["search query"]</em></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">endpoint</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Your TEI service URL.</p></td>
+     <td><p><code translate="no">"http://localhost:8080"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Since model services may not process all data at once, this sets the batch size for accessing the model service in multiple requests.</p></td>
+     <td><p><code translate="no">32</code> (default)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">truncate</code></p></td>
@@ -143,6 +187,13 @@ tei_ranker = Function(
         ></path>
       </svg>
     </button></h2><p>To apply TEI Ranker to a standard vector search:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -153,6 +204,14 @@ results = client.search(
 <span class="highlighted-wrapper-line">    ranker=tei_ranker,                         <span class="hljs-comment"># Apply tei reranking</span></span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Apply to hybrid search<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -170,6 +229,13 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><p>TEI Ranker can also be used with hybrid search to combine dense and sparse retrieval methods:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Configure dense vector search</span>
@@ -196,4 +262,12 @@ hybrid_results = client.hybrid_search(
     limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

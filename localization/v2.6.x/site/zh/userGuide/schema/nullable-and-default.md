@@ -41,9 +41,8 @@ summary: >-
 <li><p>只有标量字段（主字段除外）支持默认值和 nullable 属性。</p></li>
 <li><p>JSON 和数组字段不支持默认值。</p></li>
 <li><p>默认值或 nullable 属性只能在创建 Collections 时配置，之后不能修改。</p></li>
-<li><p>启用了可归零属性的标量字段不能在分组搜索中用作<code translate="no">group_by_field</code> 。有关分组搜索的更多信息，请参阅<a href="/docs/zh/grouping-search.md">分组搜索</a>。</p></li>
-<li><p>标记为可归零的字段不能用作分区键。有关分区键的更多信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区键</a>。</p></li>
-<li><p>在启用了可归零属性的标量字段上创建索引时，索引将排除空值。</p></li>
+<li><p>标记为 nullable 的字段不能用作分区键。有关分区键的更多信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区键</a>。</p></li>
+<li><p>在启用 nullable 属性的标量字段上创建索引时，索引将排除空值。</p></li>
 <li><p><strong>JSON 和 ARRAY 字段</strong>：当使用<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 操作符对 JSON 或 ARRAY 字段进行过滤时，这些操作符在列级别工作，这表明它们只评估整个 JSON 对象或数组是否为空。例如，如果 JSON 对象中的某个键为空，<code translate="no">IS NULL</code> 过滤器将无法识别该键。有关详细信息，请参阅<a href="/docs/zh/basic-operators.md">基本操作符</a>。</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Nullable 属性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
@@ -62,7 +61,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>通过<code translate="no">nullable</code> 属性，可以在 Collections 中存储空值，从而在处理未知数据时提供灵活性。</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">设置 nullable 属性</h3><p>创建 Collections 时，使用<code translate="no">nullable=True</code> 定义可归零字段（默认为<code translate="no">False</code> ）。下面的示例创建了一个名为<code translate="no">my_collection</code> 的 Collection，并将<code translate="no">age</code> 字段设置为可归零：</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">设置 nullable 属性<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>创建 Collections 时，使用<code translate="no">nullable=True</code> 定义可归零字段（默认为<code translate="no">False</code> ）。下面的示例创建了一个名为<code translate="no">my_collection</code> 的 Collection，并将<code translate="no">age</code> 字段设置为 nullable：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -264,7 +278,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">插入实体</h3><p>在可空字段中插入数据时，插入空值或直接省略该字段：</p>
+<h3 id="Insert-entities" class="common-anchor-header">插入实体<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在可空字段中插入数据时，插入空值或直接省略该字段：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -335,7 +364,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">使用空值进行搜索和查询</h3><p>使用<code translate="no">search</code> 方法时，如果字段包含<code translate="no">null</code> 值，则搜索结果将以空值返回该字段：</p>
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">使用空值搜索和查询<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用<code translate="no">search</code> 方法时，如果字段包含<code translate="no">null</code> 值，则搜索结果将以空值返回该字段：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -555,7 +599,22 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
         ></path>
       </svg>
     </button></h2><p>默认值是分配给标量字段的预设值。如果在插入时没有为有默认值的字段提供值，系统会自动使用默认值。</p>
-<h3 id="Set-default-values" class="common-anchor-header">设置默认值</h3><p>创建 Collections 时，使用<code translate="no">default_value</code> 参数定义字段的默认值。下面的示例显示了如何将<code translate="no">age</code> 的默认值设置为<code translate="no">18</code> ，将<code translate="no">status</code> 的默认值设置为<code translate="no">&quot;active&quot;</code> ：</p>
+<h3 id="Set-default-values" class="common-anchor-header">设置默认值<button data-href="#Set-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>创建 Collections 时，使用<code translate="no">default_value</code> 参数定义字段的默认值。下面的示例显示了如何将<code translate="no">age</code> 的默认值设置为<code translate="no">18</code> ，将<code translate="no">status</code> 的默认值设置为<code translate="no">&quot;active&quot;</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
@@ -766,7 +825,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">插入实体</h3><p>插入数据时，如果省略有默认值的字段或将其值设为空，系统就会使用默认值：</p>
+<h3 id="Insert-entities" class="common-anchor-header">插入实体<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>插入数据时，如果省略有默认值的字段或将其值设为空，系统就会使用默认值：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -847,7 +921,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <div class="alert note">
 <p>有关可空值和默认值设置如何生效的更多信息，请参阅<a href="/docs/zh/nullable-and-default.md#Applicable-rules">适用规则</a>。</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">使用默认值进行搜索和查询</h3><p>在向量搜索和标量过滤过程中，包含默认值的实体与其他实体的处理方式相同。您可以将默认值作为<code translate="no">search</code> 和<code translate="no">query</code> 操作符的一部分。</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">使用默认值进行搜索和查询<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在向量搜索和标量过滤过程中，包含默认值的实体与其他实体的处理方式相同。您可以将默认值作为<code translate="no">search</code> 和<code translate="no">query</code> 操作符的一部分。</p>
 <p>例如，在<code translate="no">search</code> 操作符中，将<code translate="no">age</code> 设置为默认值<code translate="no">18</code> 的实体将包含在结果中：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

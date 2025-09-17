@@ -66,7 +66,7 @@ title: Run Milvus in Docker (Linux)
 <p><strong>What’s new in v2.6.0:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Enhanced data processing capabilities</li>
-<li><strong>WoodPecker MQ</strong>: Improved message queue with reduced maintenance overhead</li>
+<li><strong>Woodpecker MQ</strong>: Improved message queue with reduced maintenance overhead, see <a href="/docs/use-woodpecker.md">Use Woodpecker</a> for detail</li>
 <li><strong>Optimized Architecture</strong>: Consolidated components for better performance</li>
 </ul>
 <p>Always download the latest script to ensure you get the most recent configurations and architecture improvements.</p>

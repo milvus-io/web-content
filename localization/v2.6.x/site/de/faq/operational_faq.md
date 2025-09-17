@@ -18,7 +18,45 @@ title: Häufig gestellte Fragen zum Betrieb
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Was ist, wenn ich das Milvus-Docker-Abbild nicht von Docker Hub abrufen konnte?</h4><p>Wenn Sie das Milvus-Docker-Abbild nicht von Docker Hub abrufen konnten, versuchen Sie, andere Registry-Mirrors hinzuzufügen.</p>
+    </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">Was ist ein QueryNode-Delegator, und was sind seine Aufgaben?</h4><p>Wenn eine Sammlung geladen wird, abonniert ein QueryNode DML-Kanäle für Einfüge- und Löschnachrichten, die aus der Nachrichtenwarteschlange kommen. Der QueryNode, der diese Kanäle abonniert, der so genannte Delegator, ist verantwortlich für:</p>
+<ul>
+<li>Verwaltung zunehmender Segmente, die aufgrund laufender Einfügungen zusätzlichen Speicher benötigen.</li>
+<li>Empfang von Löschnachrichten und deren Weitergabe an andere QueryNodes, die die entsprechenden Segmente halten.</li>
+</ul>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">Wie kann man Delegator-Knoten für eine Sammlung identifizieren?</h4><p>Verwenden Sie Birdwatcher.</p>
+<p>Installieren Sie Birdwatcher wie <a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">folgt</a> und führen Sie dann den folgenden Befehl aus:</p>
+<pre><code translate="no" class="language-shell">./birdwatcher
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
+Milvus(my-release) &gt; show segment-loaded-grpc --collection &lt;your-collectionID&gt;
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Map server ID to pod IP</span>
+Milvus(my-release) &gt; show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">Welche Parameter können angepasst werden, wenn der Abfrageknoten-Speicher unausgeglichen ist?</h4><p>Manchmal variiert der Abfrageknotenspeicher, weil einige als Delegatoren agieren und mehr RAM benötigen. Wenn der Speicher eines Delegators hoch ist, passen Sie queryCoord.delegatorMemoryOverloadFactor an, um versiegelte Segmente auf andere Knoten auszulagern und die RAM-Nutzung zu reduzieren.</p>
+<ul>
+<li>Der Standardwert ist 0.1.</li>
+<li>Eine Erhöhung dieses Wertes (z. B. auf 0,3 oder höher) führt dazu, dass das System mehr versiegelte Segmente von dem überlasteten Delegator auf andere QueryNodes auslagert, was zu einem Ausgleich der Speichernutzung beiträgt. Sie können auch versuchen, den Wert auf 1 zu erhöhen, was bedeutet, dass keine versiegelten Segmente in den Delegator-Knoten geladen werden.</li>
+</ul>
+<p>Wenn Sie den Cluster nicht neu starten wollen, können Sie die Konfiguration von milvus mit birdwatcher ändern:</p>
+<pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
+Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
+
+# Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
+<span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">Wie setzt man shard_num für eine Sammlung?</h4><p>Als Best Practice wird für eine Sammlung mit Vektoren der Dimension 768 empfohlen, mindestens 1 Shard pro ~100 Millionen Vektoren zu verwenden. Für häufige Schreibvorgänge sollten Sie 4 Shards pro ~100 Millionen Vektoren verwenden.</p>
+<p>Wenn Sie z. B. 100 Millionen Vektoren haben, verwenden Sie 1-4 Scherben. Wenn Sie 500 Millionen Vektoren haben, verwenden Sie 5-10 Scherben.</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Was passiert, wenn ich das Milvus-Docker-Image nicht von Docker Hub abrufen kann?</h4><p>Wenn Sie das Milvus-Docker-Abbild nicht von Docker Hub abrufen konnten, versuchen Sie, andere Registry-Mirrors hinzuzufügen.</p>
 <p>Benutzer aus Festlandchina können die URL "https://registry.docker-cn.com" zum Array registry-mirrors in <strong>/etc.docker/daemon.json</strong> hinzufügen.</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
@@ -28,7 +66,7 @@ title: Häufig gestellte Fragen zum Betrieb
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">Welches sind die Hauptfaktoren, die den Abruf beeinflussen?</h4><p>Der Abruf wird hauptsächlich durch den Indextyp und die Suchparameter beeinflusst.</p>
 <p>Bei FLAT-Indizes führt Milvus einen vollständigen Scan innerhalb einer Sammlung durch, mit einer 100%igen Rückgabe.</p>
 <p>Bei IVF-Indizes bestimmt der Parameter nprobe den Umfang einer Suche innerhalb der Sammlung. Eine Erhöhung von nprobe erhöht den Anteil der durchsuchten Vektoren und den Rücklauf, verschlechtert aber die Abfrageleistung.</p>
-<p>Beim HNSW-Index bestimmt der Parameter ef die Breite der Graphensuche. Eine Erhöhung von ef erhöht die Anzahl der im Graphen gesuchten Punkte und die Wiederauffindbarkeit, verschlechtert jedoch die Abfrageleistung.</p>
+<p>Beim HNSW-Index bestimmt der Parameter ef die Breite der Graphensuche. Eine Erhöhung von ef erhöht die Anzahl der gesuchten Punkte im Graphen und die Wiederauffindbarkeit, verschlechtert jedoch die Abfrageleistung.</p>
 <p>Weitere Informationen finden Sie unter <a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">Vektorindizierung</a>.</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">Warum sind meine Änderungen an den Konfigurationsdateien nicht wirksam geworden?</h4><p>Milvus unterstützt keine Änderungen an den Konfigurationsdateien während der Laufzeit. Sie müssen Milvus Docker neu starten, damit Änderungen an den Konfigurationsdateien wirksam werden.</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">Woher weiß ich, ob Milvus erfolgreich gestartet wurde?</h4><p>Wenn Milvus unter Verwendung von Docker Compose gestartet wurde, führen Sie <code translate="no">docker ps</code> aus, um zu beobachten, wie viele Docker-Container ausgeführt werden, und um zu überprüfen, ob die Milvus-Dienste korrekt gestartet wurden.</p>
@@ -45,7 +83,7 @@ title: Häufig gestellte Fragen zum Betrieb
 <p>Führen Sie den Befehl lscpu aus, um zu überprüfen, ob Ihre CPU die oben genannten SIMD-Befehlssätze unterstützt:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>lscpu |<span class="hljs-params"> grep -e sse4_2 -e avx -e avx2 -e avx512
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Warum gibt Milvus während des Starts <code translate="no">illegal instruction</code> zurück?</h4><p>Milvus erfordert, dass Ihre CPU einen SIMD-Befehlssatz unterstützt: SSE4.2, AVX, AVX2, oder AVX512. Die CPU muss mindestens einen dieser Befehle unterstützen, um sicherzustellen, dass Milvus normal funktioniert. Ein <code translate="no">illegal instruction</code> Fehler, der während des Starts zurückgegeben wird, deutet darauf hin, dass Ihre CPU keinen der vier oben genannten Befehlssätze unterstützt.</p>
+<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Warum gibt Milvus während des Starts <code translate="no">illegal instruction</code> zurück?</h4><p>Milvus setzt voraus, dass Ihre CPU einen SIMD-Befehlssatz unterstützt: SSE4.2, AVX, AVX2, oder AVX512. Die CPU muss mindestens einen dieser Befehle unterstützen, um sicherzustellen, dass Milvus normal funktioniert. Ein <code translate="no">illegal instruction</code> Fehler, der während des Starts zurückgegeben wird, deutet darauf hin, dass Ihre CPU keinen der vier oben genannten Befehlssätze unterstützt.</p>
 <p>Siehe <a href="/docs/de/prerequisite-docker.md">CPU-Unterstützung für SIMD-Befehlssatz</a>.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">Kann ich Milvus unter Windows installieren?</h4><p>Ja. Sie können Milvus unter Windows entweder durch Kompilieren aus dem Quellcode oder aus einem Binärpaket installieren.</p>
 <p>Siehe <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Milvus unter Windows ausführen</a>, um zu erfahren, wie man Milvus unter Windows installiert.</p>
@@ -105,5 +143,5 @@ title: Häufig gestellte Fragen zum Betrieb
 <h4 id="Still-have-questions" class="common-anchor-header">Haben Sie noch Fragen?</h4><p>Sie können:</p>
 <ul>
 <li>Schauen Sie sich <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> auf GitHub an. Hier können Sie Fragen stellen, Ideen austauschen und anderen helfen.</li>
-<li>Treten Sie unserem <a href="https://discuss.milvus.io/">Milvus Forum</a> oder <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack Channel</a> bei, um Unterstützung zu erhalten und sich mit unserer Open-Source-Community auszutauschen.</li>
+<li>Treten Sie unserem <a href="https://discuss.milvus.io/">Milvus-Forum</a> oder <a href="https://discord.com/invite/8uyFbECzPX">Discord-Kanal</a> bei, um Unterstützung zu erhalten und sich mit unserer Open-Source-Community auszutauschen.</li>
 </ul>

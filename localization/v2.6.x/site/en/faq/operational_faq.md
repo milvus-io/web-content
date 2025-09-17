@@ -18,7 +18,45 @@ title: Operational FAQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">What if I failed to pull the Milvus Docker image from Docker Hub?</h4><p>If you failed to pull the Milvus Docker image from Docker Hub, try adding other registry mirrors.</p>
+    </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">What is a QueryNode delegator, and what are its responsibilities?</h4><p>When a collection loads, a QueryNode subscribes to DML channels for insert and delete messages coming from the message queue. The QueryNode that subscribes to these channels, known as the delegator, is responsible for:</p>
+<ul>
+<li>Managing increasing segments that require additional memory because of ongoing inserts.</li>
+<li>Receiving delete messages and passing them to other QueryNodes that hold the relevant segments.</li>
+</ul>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">How to identify delegator nodes for a collection?</h4><p>Use Birdwatcher.</p>
+<p>Install Birdwatcher following <a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">this</a>, then run the following command:</p>
+<pre><code translate="no" class="language-shell">./birdwatcher
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
+Milvus(my-release) &gt; show segment-loaded-grpc --collection &lt;your-collectionID&gt;
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Map server ID to pod IP</span>
+Milvus(my-release) &gt; show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">What parameters can be adjusted if query node memory usage is unbalanced?</h4><p>Sometimes, query node memory varies because some act as delegators using more RAM. If a delegator’s memory is high, adjust queryCoord.delegatorMemoryOverloadFactor to offload sealed segments to other nodes and reduce RAM usage.</p>
+<ul>
+<li>The default value is 0.1.</li>
+<li>Increasing this value (e.g., to 0.3 or higher) will cause the system to offload more sealed segments from the overloaded delegator to other QueryNodes, helping balance memory usage. And you can also try to increase value up to 1, which means no sealed segments will be loaded in the delegator nodes.</li>
+</ul>
+<p>If you don’t want to restart the cluster, you can modify milvus config with birdwatcher:</p>
+<pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
+Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
+
+# Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
+<span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">How to set shard_num for a collection?</h4><p>As a best practice, for a collection with vectors of dimension 768, it is recommended to use at least 1 shard per ~100 million vectors. For heavy write use case, use 4 shards per ~100 million vectors.</p>
+<p>E.g. if you have 100 million vectors, use 1-4 shards. If you have 500m vectors, use 5-10 shards.</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">What if I failed to pull the Milvus Docker image from Docker Hub?</h4><p>If you failed to pull the Milvus Docker image from Docker Hub, try adding other registry mirrors.</p>
 <p>Users from Mainland China can add the URL “https://registry.docker-cn.com” to the registry-mirrors array in <strong>/etc.docker/daemon.json</strong>.</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
@@ -107,5 +145,5 @@ This prioritization can result in fewer unique results than the limit if your co
 <h4 id="Still-have-questions" class="common-anchor-header">Still have questions?</h4><p>You can:</p>
 <ul>
 <li>Check out <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> on GitHub. Feel free to ask questions, share ideas, and help others.</li>
-<li>Join our <a href="https://discuss.milvus.io/">Milvus Forum</a> or <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack Channel</a> to find support and engage with our open-source community.</li>
+<li>Join our <a href="https://discuss.milvus.io/">Milvus Forum</a> or <a href="https://discord.com/invite/8uyFbECzPX">Discord channel</a> to find support and engage with our open-source community.</li>
 </ul>

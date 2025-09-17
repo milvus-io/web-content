@@ -43,8 +43,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>القيم الافتراضية</strong>: لا تدعم حقول ARRAY القيم الافتراضية. ومع ذلك، يمكنك تعيين السمة <code translate="no">nullable</code> إلى <code translate="no">True</code> للسماح بالقيم الفارغة. لمزيد من التفاصيل، ارجع إلى <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>نوع البيانات</strong>: يجب أن يكون لجميع العناصر في حقل المصفوفة نفس نوع البيانات، كما هو محدد من قبل <code translate="no">element_type</code>. إذا قمت بتعيين <code translate="no">element_type</code> إلى <code translate="no">VARCHAR</code> ، يجب عليك أيضًا تعيين <code translate="no">max_length</code> لعناصر المصفوفة.</p></li>
-<li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل المصفوفة أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد بواسطة <code translate="no">max_capacity</code>. يجب أن تكون القيمة عددًا صحيحًا ضمن النطاق من <strong>1</strong> إلى <strong>4096</strong>.</p></li>
+<li><p><strong>نوع البيانات:</strong> يجب أن تشترك جميع العناصر في حقل ARRAY في نفس نوع البيانات، والذي يتم تعريفه بواسطة المعلمة <code translate="no">element_type</code>. عندما يتم تعيين <code translate="no">element_type</code> على <code translate="no">VARCHAR</code> ، يجب أيضًا تحديد <code translate="no">max_length</code> لعناصر الصفيف. يقبل <code translate="no">element_type</code> أي نوع بيانات قياسي مدعوم من قبل ميلفوس، باستثناء <code translate="no">JSON</code>.</p></li>
+<li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل ARRAY أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد في <code translate="no">max_capacity</code>. يجب أن تكون القيمة عددًا صحيحًا ضمن النطاق من <strong>1</strong> إلى <strong>4096</strong>.</p></li>
 <li><p><strong>التعامل مع السلسلة</strong>: يتم تخزين قيم السلسلة في حقول المصفوفات كما هي، دون هروب دلالي أو تحويل. على سبيل المثال، يتم تخزين <code translate="no">'a&quot;b'</code> و <code translate="no">&quot;a'b&quot;</code> و <code translate="no">'a\'b'</code> و <code translate="no">&quot;a\&quot;b&quot;</code> كما تم إدخالها، بينما <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> تعتبر قيمًا غير صالحة.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">إضافة حقل ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -65,7 +65,7 @@ summary: >-
     </button></h2><p>لاستخدام حقول ARRAY Milvus، قم بتعريف نوع الحقل ذي الصلة عند إنشاء مخطط المجموعة. تتضمن هذه العملية:</p>
 <ol>
 <li><p>تعيين <code translate="no">datatype</code> إلى نوع بيانات المصفوفة المدعوم، <code translate="no">ARRAY</code>.</p></li>
-<li><p>استخدام المعلمة <code translate="no">element_type</code> لتحديد نوع بيانات العناصر في المصفوفة. يمكن أن يكون هذا أي نوع بيانات قياسي مدعوم من قبل Milvus، مثل <code translate="no">VARCHAR</code> أو <code translate="no">INT64</code>. يجب أن تكون جميع العناصر في نفس المصفوفة من نفس نوع البيانات.</p></li>
+<li><p>استخدام المعلمة <code translate="no">element_type</code> لتحديد نوع بيانات العناصر في المصفوفة. يجب أن تكون جميع العناصر في نفس المصفوفة من نفس نوع البيانات.</p></li>
 <li><p>استخدام المعلمة <code translate="no">max_capacity</code> لتحديد السعة القصوى للمصفوفة، أي الحد الأقصى لعدد العناصر التي يمكن أن تحتويها.</p></li>
 </ol>
 <p>إليك كيفية تعريف مخطط مجموعة يتضمن حقول ARRAY:</p>
@@ -73,7 +73,7 @@ summary: >-
 <p>إذا قمت بتعيين <code translate="no">enable_dynamic_fields=True</code> عند تعريف المخطط، يسمح لك Milvus بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي ذلك إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#http">HTTP</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -212,7 +212,7 @@ schema.WithField(entity.NewField().
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-http">export arrayField1='{
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> arrayField1=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;tags&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;VarChar&quot;,
@@ -220,41 +220,41 @@ schema.WithField(entity.NewField().
         &quot;max_capacity&quot;: 10,
         &quot;max_length&quot;: 65535
     }
-}'
+}&#x27;</span>
 
-export arrayField2='{
+<span class="hljs-built_in">export</span> arrayField2=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;ratings&quot;,
     &quot;dataType&quot;: &quot;Array&quot;,
     &quot;elementDataType&quot;: &quot;Int64&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;max_capacity&quot;: 5
     }
-}'
+}&#x27;</span>
 
-export pkField='{
+<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;pk&quot;,
     &quot;dataType&quot;: &quot;Int64&quot;,
     &quot;isPrimary&quot;: true
-}'
+}&#x27;</span>
 
-export vectorField='{
+<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;embedding&quot;,
     &quot;dataType&quot;: &quot;FloatVector&quot;,
     &quot;elementTypeParams&quot;: {
         &quot;dim&quot;: 3
     }
-}'
+}&#x27;</span>
 
-export schema=&quot;{
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;autoID\&quot;: false,
     \&quot;fields\&quot;: [
-        $arrayField1,
-        $arrayField2,
-        $pkField,
-        $vectorField
+        <span class="hljs-variable">$arrayField1</span>,
+        <span class="hljs-variable">$arrayField2</span>,
+        <span class="hljs-variable">$pkField</span>,
+        <span class="hljs-variable">$vectorField</span>
     ]
-}&quot;
-</code></pre>
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-index-params" class="common-anchor-header">تعيين بارامترات الفهرس<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

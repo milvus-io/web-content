@@ -1,11 +1,11 @@
 ---
 id: prerequisite-docker.md
-label: Docker requirements
-related_key: Docker
-summary: 了解使用 Docker Compose 安裝 Milvus 前的必要準備。
-title: 使用 Docker Compose 安裝 Milvus 的需求
+label: Standalone requirements
+related_key: Standalone
+summary: 了解安裝 Milvus Standalone 前的必要準備。
+title: 安裝 Milvus Standalone 的要求
 ---
-<h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 安裝 Milvus 的需求<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Requirements-for-Installing-Milvus-Standalone" class="common-anchor-header">安裝 Milvus Standalone 的要求<button data-href="#Requirements-for-Installing-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ title: 使用 Docker Compose 安裝 Milvus 的需求
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在安裝 Milvus 實例之前，請檢查您的硬體和軟體是否符合需求。</p>
+    </button></h1><p>在安裝 Milvus Standalone 實例之前，請檢查您的硬體和軟體是否符合要求。</p>
 <h2 id="Hardware-requirements" class="common-anchor-header">硬體需求<button data-href="#Hardware-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,11 +79,26 @@ title: 使用 Docker Compose 安裝 Milvus 的需求
 </thead>
 <tbody>
 <tr><td>etcd</td><td>3.5.0</td><td>請參閱<a href="#Additional-disk-requirements">其他磁碟需求</a>。</td></tr>
-<tr><td>MinIO</td><td>RELEASE.2023-03-20T20-16-18Z</td><td></td></tr>
+<tr><td>MinIO</td><td>RELEASE.2024-12-18T13-15-44Z</td><td></td></tr>
 <tr><td>脈動星</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Additional-disk-requirements" class="common-anchor-header">額外的磁碟需求</h3><p>磁碟效能對 etcd 至關重要。強烈建議您使用本機 NVMe SSD。較慢的磁碟回應速度可能會導致頻繁的群集選舉，最終會降低 etcd 服務的效能。</p>
+<h3 id="Additional-disk-requirements" class="common-anchor-header">額外的磁碟需求<button data-href="#Additional-disk-requirements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>磁碟效能對 etcd 至關重要。強烈建議您使用本機 NVMe SSD。較慢的磁碟回應速度可能會導致頻繁的群集選舉，最終會降低 etcd 服務的效能。</p>
 <p>要測試您的磁碟是否合格，請使用<a href="https://github.com/axboe/fio">fio</a>。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest

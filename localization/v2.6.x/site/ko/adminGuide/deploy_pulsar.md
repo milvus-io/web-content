@@ -36,14 +36,44 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1. Pulsar 구성하기</h3><p>Docker Compose로 Pulsar를 구성하려면 milvus/configs 경로의 <code translate="no">milvus.yaml</code> 파일에 <code translate="no">pulsar</code> 섹션에 값을 입력합니다.</p>
+    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1. Pulsar 구성하기<button data-href="#1-Configure-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Docker Compose로 Pulsar를 구성하려면 milvus/configs 경로의 <code translate="no">milvus.yaml</code> 파일에 <code translate="no">pulsar</code> 섹션에 값을 입력합니다.</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>자세한 내용은 <a href="/docs/ko/configure_pulsar.md">Pulsar 관련 구성을</a> 참조하세요.</p>
-<h3 id="2-Run-Milvus" class="common-anchor-header">2. Milvus 실행</h3><p>다음 명령어를 실행하여 Pulsar 설정을 사용하는 Milvus를 시작합니다.</p>
+<h3 id="2-Run-Milvus" class="common-anchor-header">2. Milvus 실행<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 명령어를 실행하여 Pulsar 설정을 사용하는 Milvus를 시작합니다.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">구성은 Milvus가 시작된 후에만 적용됩니다. 자세한 내용은 <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Milvus 시작하기를</a> 참조하세요.</div>
@@ -64,7 +94,22 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
       </svg>
     </button></h2><p>K8의 Milvus 클러스터의 경우, Milvus를 시작하는 것과 동일한 명령으로 Pulsar를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> 리포지토리의 /charts/milvus 경로에 있는 <code translate="no">values.yml</code> 파일을 사용하여 Pulsar를 구성할 수 있습니다.</p>
 <p>헬름을 사용하여 밀버스를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 밀버스 구성하기를</a> 참조하세요. 펄사 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_pulsar.md">펄사 관련 구성을</a> 참고한다.</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용하기</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용하기<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><code translate="no">values.yaml</code> 파일에서 <code translate="no">externalConfigFiles</code> 섹션을 구성합니다.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -82,7 +127,84 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-Kafka-with-Helm" class="common-anchor-header">헬름으로 Kafka 구성<button data-href="#Configure-Kafka-with-Helm" class="anchor-icon" translate="no">
+<h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">헬름으로 딱따구리 구성하기<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>K8의 Milvus 클러스터의 경우, Milvus를 시작하는 것과 동일한 명령으로 Woodpecker를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> 리포지토리의 /charts/milvus 경로에 있는 <code translate="no">values.yml</code> 파일을 사용하여 Woodpecker를 구성할 수 있습니다.</p>
+<p>헬름을 사용하여 밀버스를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 밀버스 구성하기를</a> 참조하세요. 우드페커 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/use-woodpecker.md">우드페커 관련 구성을</a> 참조한다.</p>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용하기<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
+<li><code translate="no">values.yaml</code> 파일에서 <code translate="no">externalConfigFiles</code> 섹션을 구성합니다.</li>
+</ol>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    woodpecker:
+      meta:
+        type: etcd # The Type of the metadata provider. currently only support etcd.
+        prefix: woodpecker # The Prefix of the metadata provider. default is woodpecker.
+      client:
+        segmentAppend:
+          queueSize: 10000 # The size of the queue for pending messages to be sent of each log.
+          maxRetries: 3 # Maximum number of retries for segment append operations.
+        segmentRollingPolicy:
+          maxSize: 256M # Maximum size of a segment.
+          maxInterval: 10m # Maximum interval between two segments, default is 10 minutes.
+          maxBlocks: 1000 # Maximum number of blocks in a segment
+        auditor:
+          maxInterval: 10s # Maximum interval between two auditing operations, default is 10 seconds.
+      logstore:
+        segmentSyncPolicy:
+          maxInterval: 200ms # Maximum interval between two sync operations, default is 200 milliseconds.
+          maxIntervalForLocalStorage: 10ms # Maximum interval between two sync operations local storage backend, default is 10 milliseconds.
+          maxBytes: 256M # Maximum size of write buffer in bytes.
+          maxEntries: 10000 # Maximum entries number of write buffer.
+          maxFlushRetries: 5 # Maximum size of write buffer in bytes.
+          retryInterval: 1000ms # Maximum interval between two retries. default is 1000 milliseconds.
+          maxFlushSize: 2M # Maximum size of a fragment in bytes to flush.
+          maxFlushThreads: 32 # Maximum number of threads to flush data
+        segmentCompactionPolicy:
+          maxSize: 2M # The maximum size of the merged files.
+          maxParallelUploads: 4 # The maximum number of parallel upload threads for compaction.
+          maxParallelReads: 8 # The maximum number of parallel read threads for compaction.
+        segmentReadPolicy:
+          maxBatchSize: 16M # Maximum size of a batch in bytes.
+          maxFetchThreads: 32 # Maximum number of threads to fetch data.
+      storage:
+        type: minio # The Type of the storage provider. Valid values: [minio, local]
+        rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
+</span><button class="copy-code-btn"></button></code></pre>
+<ol start="2">
+<li>앞의 섹션을 구성하고 <code translate="no">values.yaml</code> 파일을 저장한 후, 다음 명령을 실행하여 Woodpecker 구성을 사용하는 Milvus를 설치합니다.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Configure-Kafka-with-Helm" class="common-anchor-header">헬름으로 카프카 구성하기<button data-href="#Configure-Kafka-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -99,7 +221,22 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
       </svg>
     </button></h2><p>K8의 Milvus 클러스터의 경우, Milvus를 시작하는 것과 동일한 명령으로 Kafka를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> 리포지토리의 /charts/milvus 경로에 있는 <code translate="no">values.yml</code> 파일을 사용하여 Kafka를 구성할 수 있습니다.</p>
 <p>헬름을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 Milvus 구성을</a> 참조하세요. Pulsar 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_pulsar.md">Pulsar 관련 구성을</a> 참고한다.</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용하기</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용하기<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>Kafka를 메시지 저장 시스템으로 사용하려면 <code translate="no">values.yaml</code> 파일에서 <code translate="no">externalConfigFiles</code> 섹션을 구성합니다.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -215,7 +352,7 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
 <div class="alert note">
 <p><strong>RocksMQ와 NATS 중 어떤 것을 선택해야 하나요?</strong></p>
 <p>RockMQ는 CGO를 사용하여 RocksDB와 상호 작용하고 자체적으로 메모리를 관리하는 반면, Milvus 설치에 내장된 순수 GO NATS는 메모리 관리를 Go의 가비지 컬렉터(GC)에 위임합니다.</p>
-<p>데이터 패킷이 64KB보다 작은 시나리오에서는 메모리 사용량, CPU 사용량, 응답 시간 측면에서 RocksDB가 더 나은 성능을 보입니다. 반면에 데이터 패킷이 64KB보다 큰 경우, 충분한 메모리와 이상적인 GC 스케줄링으로 응답 시간 측면에서 NATS가 우수합니다.</p>
+<p>데이터 패킷이 64KB보다 작은 시나리오에서는 메모리 사용량, CPU 사용량, 응답 시간 측면에서 RocksDB가 더 나은 성능을 보입니다. 반면 데이터 패킷이 64KB보다 큰 경우, 충분한 메모리와 이상적인 GC 스케줄링으로 응답 시간 측면에서 NATS가 우수합니다.</p>
 <p>현재는 실험용으로만 NATS를 사용하는 것이 좋습니다.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">

@@ -149,7 +149,22 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>Milvus 2.2.0부터는 메타데이터가 이전 릴리즈의 메타데이터와 호환되지 않습니다. 다음 예제 코드 조각은 Milvus 2.1.4에서 Milvus 2.5.13으로 업그레이드하는 경우를 가정합니다.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. 메타데이터 마이그레이션을 위한 <code translate="no">.yaml</code> 파일 만들기</h3><p>메타데이터 마이그레이션 파일을 만듭니다. 다음은 예시입니다. 구성 파일에 <code translate="no">name</code>, <code translate="no">sourceVersion</code>, <code translate="no">targetVersion</code> 을 지정해야 합니다. 다음 예에서는 <code translate="no">name</code> 을 <code translate="no">my-release-upgrade</code> 으로 , <code translate="no">sourceVersion</code> 을 <code translate="no">v2.1.4</code> 으로 , <code translate="no">targetVersion</code> 을 <code translate="no">v2.5.13</code> 으로 설정합니다. 즉, Milvus 클러스터가 v2.1.4에서 v2.5.13으로 업그레이드됩니다.</p>
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. 메타데이터 마이그레이션을 위한 <code translate="no">.yaml</code> 파일 만들기<button data-href="#1-Create-a-yaml-file-for-metadata-migration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>메타데이터 마이그레이션 파일을 만듭니다. 다음은 예시입니다. 구성 파일에 <code translate="no">name</code>, <code translate="no">sourceVersion</code>, <code translate="no">targetVersion</code> 을 지정해야 합니다. 다음 예에서는 <code translate="no">name</code> 을 <code translate="no">my-release-upgrade</code> 으로 , <code translate="no">sourceVersion</code> 을 <code translate="no">v2.1.4</code> 으로 , <code translate="no">targetVersion</code> 을 <code translate="no">v2.5.13</code> 으로 설정합니다. 즉, Milvus 클러스터가 v2.1.4에서 v2.5.13으로 업그레이드됩니다.</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
 <span class="hljs-attr">metadata:</span>
@@ -168,12 +183,57 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-comment"># backupPVC: &quot;&quot;</span>
   <span class="hljs-comment"># maxRetry: 3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. 새 구성 적용</h3><p>다음 명령을 실행하여 새 구성을 생성합니다.</p>
+<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. 새 구성 적용<button data-href="#2-Apply-the-new-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 명령을 실행하여 새 구성을 생성합니다.</p>
 <pre><code translate="no">$ kubectl <span class="hljs-built_in">create</span> -f https://github.com/zilliztech/milvus-operator/blob/main/<span class="hljs-built_in">config</span>/samples/beta/milvusupgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. 메타데이터 마이그레이션 상태 확인</h3><p>다음 명령을 실행하여 메타데이터 마이그레이션 상태를 확인합니다.</p>
+<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. 메타데이터 마이그레이션 상태 확인<button data-href="#3-Check-the-status-of-metadata-migration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 명령을 실행하여 메타데이터 마이그레이션 상태를 확인합니다.</p>
 <pre><code translate="no">kubectl <span class="hljs-keyword">describe</span> milvus <span class="hljs-keyword">release</span><span class="hljs-operator">-</span>name
 <button class="copy-code-btn"></button></code></pre>
 <p>출력에 <code translate="no">ready</code> 상태가 표시되면 메타데이터 마이그레이션이 성공했음을 의미합니다.</p>
 <p>또는 <code translate="no">kubectl get pod</code> 을 실행하여 모든 파드를 확인할 수도 있습니다. 모든 파드가 <code translate="no">ready</code> 이면 메타데이터 마이그레이션이 성공한 것입니다.</p>
-<h3 id="4-Delete-my-release-upgrade" class="common-anchor-header">4. 삭제 <code translate="no">my-release-upgrade</code></h3><p>업그레이드가 성공하면 YAML 파일에서 <code translate="no">my-release-upgrade</code> 을 삭제합니다.</p>
+<h3 id="4-Delete-my-release-upgrade" class="common-anchor-header">4. 삭제 <code translate="no">my-release-upgrade</code><button data-href="#4-Delete-my-release-upgrade" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>업그레이드가 성공하면 YAML 파일에서 <code translate="no">my-release-upgrade</code> 을 삭제합니다.</p>

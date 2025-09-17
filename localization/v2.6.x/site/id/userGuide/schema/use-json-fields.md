@@ -4,8 +4,8 @@ title: Bidang JSON
 summary: >-
   Milvus memungkinkan Anda untuk menyimpan dan mengindeks data terstruktur dalam
   satu bidang menggunakan tipe data JSON. Hal ini memungkinkan skema yang
-  fleksibel dengan atribut bersarang dan tetap memungkinkan penyaringan yang
-  efisien melalui pengindeksan jalur JSON.
+  fleksibel dengan atribut bersarang dan tetap memungkinkan pemfilteran yang
+  efisien melalui pengindeksan JSON.
 ---
 <h1 id="JSON-Field" class="common-anchor-header">Bidang JSON<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus memungkinkan Anda untuk menyimpan dan mengindeks data terstruktur dalam satu bidang menggunakan tipe data <code translate="no">JSON</code>. Hal ini memungkinkan skema yang fleksibel dengan atribut bersarang sambil tetap memungkinkan pemfilteran yang efisien melalui pengindeksan jalur JSON.</p>
+    </button></h1><p>Milvus memungkinkan Anda untuk menyimpan dan mengindeks data terstruktur dalam satu bidang menggunakan tipe data <code translate="no">JSON</code>. Hal ini memungkinkan skema yang fleksibel dengan atribut bersarang sambil tetap memungkinkan pemfilteran yang efisien melalui pengindeksan JSON.</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">Apa yang dimaksud dengan bidang JSON?<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -428,7 +428,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-values-inside-the-JSON-field--Milvus-2511+" class="common-anchor-header">Mengindeks nilai di dalam bidang JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-values-inside-the-JSON-field--Milvus-2511+" class="anchor-icon" translate="no">
+<h2 id="Index-values-inside-the-JSON-field" class="common-anchor-header">Mengindeks nilai di dalam bidang JSON<button data-href="#Index-values-inside-the-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -443,15 +443,102 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk mempercepat pemfilteran skalar pada bidang JSON, Milvus mendukung pengindeksan bidang JSON menggunakan <strong>pengindeksan jalur JSON</strong>. Hal ini memungkinkan Anda untuk memfilter berdasarkan kunci atau nilai bersarang di dalam objek JSON tanpa memindai seluruh bidang.</p>
+    </button></h2><p>Untuk mempercepat pemfilteran skalar pada bidang JSON, Milvus mendukung jenis-jenis indeks berikut ini:</p>
+<ul>
+<li><p><strong>Indeks jalur JSON</strong> - mengindeks jalur JSON tertentu dengan tipe skalar yang dideklarasikan.</p></li>
+<li><p><strong>Indeks datar JSON</strong> - mengindeks seluruh objek JSON (atau subtree) dengan inferensi tipe otomatis.</p></li>
+</ul>
 <div class="alert note">
-<p>Mengindeks bidang JSON bersifat <strong>opsional</strong>. Anda masih dapat melakukan kueri atau memfilter berdasarkan jalur JSON tanpa indeks, namun hal ini dapat mengakibatkan kinerja yang lebih lambat karena pencarian secara brute force.</p>
+<p>Mengindeks bidang JSON bersifat <strong>opsional</strong>. Anda masih bisa melakukan kueri atau memfilter berdasarkan jalur JSON tanpa indeks, namun hal ini bisa mengakibatkan kinerja yang lebih lambat karena pencarian secara brute force.</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">Sintaks pengindeksan jalur JSON</h3><p>Untuk membuat indeks jalur JSON, tentukan:</p>
+<h3 id="Choose-between-path-index-and-flat-index--Milvus-26x" class="common-anchor-header">Pilih antara indeks jalur dan indeks datar<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Choose-between-path-index-and-flat-index--Milvus-26x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
+   <tr>
+     <th><p><strong>Kemampuan</strong></p></th>
+     <th><p><strong>Indeks Jalur JSON</strong></p></th>
+     <th><p><strong>Indeks Datar JSON</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>Apa yang diindeks</p></td>
+     <td><p>Jalur spesifik yang Anda beri nama</p></td>
+     <td><p>Semua jalur yang diratakan di bawah jalur objek</p></td>
+   </tr>
+   <tr>
+     <td><p>Penanganan tipe</p></td>
+     <td><p>Anda mendeklarasikan <code translate="no">json_cast_type</code> (tipe skalar)</p></td>
+     <td><p>Harus berupa JSON (inferensi tipe otomatis)</p></td>
+   </tr>
+   <tr>
+     <td><p>Larik sebagai LHS¹</p></td>
+     <td><p>Didukung</p></td>
+     <td><p>Tidak didukung</p></td>
+   </tr>
+   <tr>
+     <td><p>Kecepatan kueri</p></td>
+     <td><p><strong>Tinggi</strong> pada jalur yang diindeks</p></td>
+     <td><p><strong>Tinggi</strong>, rata-rata sedikit lebih rendah</p></td>
+   </tr>
+   <tr>
+     <td><p>Penggunaan disk</p></td>
+     <td><p>Lebih rendah</p></td>
+     <td><p>Lebih tinggi</p></td>
+   </tr>
+</table>
+<p>¹ <em>Larik sebagai LHS</em> berarti sisi kiri ekspresi filter adalah larik JSON, misalnya:</p>
+<pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
+json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
+<button class="copy-code-btn"></button></code></pre>
+<p>Dalam kasus ini, <code translate="no">metadata[&quot;tags&quot;]</code> adalah sebuah larik. Pengindeksan datar JSON tidak mempercepat filter semacam itu - gunakan indeks jalur JSON dengan tipe cast array sebagai gantinya.</p>
+<p><strong>Gunakan indeks jalur JSON ketika:</strong></p>
+<ul>
+<li><p>Anda sudah mengetahui tombol pintas untuk melakukan kueri sebelumnya.</p></li>
+<li><p>Anda perlu memfilter di mana sisi kiri adalah larik.</p></li>
+<li><p>Anda ingin meminimalkan penggunaan disk.</p></li>
+</ul>
+<p><strong>Gunakan indeks datar JSON bila:</strong></p>
+<ul>
+<li><p>Anda ingin mengindeks seluruh subpohon (termasuk akar).</p></li>
+<li><p>Struktur JSON Anda sering berubah.</p></li>
+<li><p>Anda menginginkan cakupan kueri yang lebih luas tanpa mendeklarasikan setiap jalur.</p></li>
+</ul>
+<h3 id="JSON-path-indexing" class="common-anchor-header">Pengindeksan jalur JSON<button data-href="#JSON-path-indexing" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk membuat indeks jalur JSON, tentukan:</p>
 <ul>
 <li><p><strong>Jalur JSON</strong> (<code translate="no">json_path</code>): Jalur ke kunci atau bidang bersarang di dalam objek JSON yang ingin Anda indeks.</p>
 <ul>
-<li><p>Contoh: <code translate="no">metadata[&quot;category&quot;]</code></p>
+<li><p>Contoh:</p>
+<ul>
+<li><p>Untuk sebuah kunci, <code translate="no">metadata[&quot;category&quot;]</code></p></li>
+<li><p>Untuk bidang bersarang, <code translate="no">metadata[&quot;contact&quot;][&quot;email&quot;]</code></p></li>
+</ul>
 <p>Ini menentukan di mana mesin pengindeks harus mencari di dalam struktur JSON.</p></li>
 </ul></li>
 <li><p><strong>Tipe cast JSON</strong> (<code translate="no">json_cast_type</code>): Tipe data yang harus digunakan Milvus ketika menginterpretasikan dan mengindeks nilai pada jalur yang ditentukan.</p>
@@ -607,8 +694,8 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Gunakan fungsi cast JSON untuk konversi tipe<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h3><p>Jika kunci bidang JSON Anda berisi nilai dalam format yang salah (misalnya, angka yang disimpan sebagai string), Anda dapat menggunakan fungsi cast untuk mengonversi nilai selama pengindeksan.</p>
-<h4 id="Supported-cast-functions" class="common-anchor-header">Fungsi cast yang didukung</h4><p>Fungsi cast tidak peka terhadap huruf besar/kecil. Jenis berikut ini didukung:</p>
+<h4 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Gunakan fungsi cast JSON untuk konversi tipe<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>Jika kunci bidang JSON Anda berisi nilai dalam format yang salah (misalnya, angka yang disimpan sebagai string), Anda dapat menggunakan fungsi cast untuk mengonversi nilai selama pengindeksan.</p>
+<h5 id="Supported-cast-functions" class="common-anchor-header">Fungsi cast yang didukung</h5><p>Fungsi cast tidak peka terhadap huruf besar/kecil. Jenis berikut ini didukung:</p>
 <table>
    <tr>
      <th><p>Fungsi Cast</p></th>
@@ -621,7 +708,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
      <td><p>Ubah <code translate="no">"99.99"</code> menjadi <code translate="no">99.99</code></p></td>
    </tr>
 </table>
-<h4 id="Example-Cast-string-numbers-to-double" class="common-anchor-header">Contoh: Mengubah angka string menjadi ganda</h4><div class="multipleCode">
+<h5 id="Example-Cast-string-numbers-to-double" class="common-anchor-header">Contoh: Mengubah angka string menjadi ganda</h5><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert string numbers to double for indexing</span>
 index_params.add_index(
@@ -683,7 +770,96 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 <li><p>Jika konversi gagal (misalnya, string non-numerik), nilainya akan dilewati dan tidak diindeks.</p></li>
 </ul>
 </div>
-<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Menerapkan indeks ke koleksi</h3><p>Setelah mendefinisikan parameter indeks, Anda dapat menerapkannya ke koleksi menggunakan <code translate="no">create_index()</code>:</p>
+<h3 id="JSON-flat-indexing--Milvus-26x" class="common-anchor-header">Pengindeksan datar JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#JSON-flat-indexing--Milvus-26x" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk pengindeksan <strong>datar JSON</strong>, Milvus mengindeks semua pasangan nilai-kunci dalam jalur objek JSON (termasuk objek bersarang) dengan <em>meratakan</em> struktur JSON dan secara otomatis menyimpulkan jenis setiap nilai.</p>
+<h4 id="How-flattening-and-type-inference-work" class="common-anchor-header">Bagaimana perataan dan inferensi tipe bekerja</h4><p>Ketika Anda membuat indeks datar JSON pada jalur objek, Milvus akan</p>
+<ol>
+<li><p><strong>Meratakan</strong> - Secara rekursif menelusuri objek mulai dari <code translate="no">json_path</code> yang ditentukan dan mengekstrak pasangan nilai-kunci bersarang sebagai jalur yang memenuhi syarat. Menggunakan contoh <code translate="no">metadata</code> sebelumnya:</p>
+<pre><code translate="no" class="language-json"><span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;electronics&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">99.99</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;supplier&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;USA&quot;</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>menjadi:</p>
+<pre><code translate="no" class="language-plaintext">metadata[&quot;category&quot;] = &quot;electronics&quot;
+metadata[&quot;price&quot;] = 99.99
+metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>Menyimpulkan tipe secara otomatis</strong> - Untuk setiap nilai, Milvus menentukan tipenya dengan urutan sebagai berikut:</p>
+<pre><code translate="no" class="language-plaintext">unsigned integer → signed integer → floating-point → string
+<button class="copy-code-btn"></button></code></pre>
+<p>Tipe pertama yang sesuai dengan nilai tersebut digunakan untuk pengindeksan.</p>
+<p>Ini berarti tipe yang disimpulkan akan selalu menjadi <strong>salah satu dari keempat</strong> tipe <strong>tersebut</strong>.</p>
+<p>Inferensi tipe dilakukan <strong>per dokumen</strong>, sehingga jalur yang sama dapat memiliki tipe yang berbeda di seluruh dokumen.</p>
+<p>Setelah inferensi tipe, data yang diratakan direpresentasikan secara internal sebagai istilah dengan tipe yang disimpulkan, misalnya:</p>
+<pre><code translate="no" class="language-plaintext">(&quot;category&quot;, Text, &quot;electronics&quot;)
+(&quot;price&quot;, Double, 99.99)
+(&quot;supplier.country&quot;, Text, &quot;USA&quot;)
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<h4 id="Example-Create-JSON-flat-index" class="common-anchor-header">Contoh: Membuat indeks datar JSON</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Create a flat index on the root object of the JSON column (covers the entire JSON subtree)</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,          <span class="hljs-comment"># Or &quot;INVERTED&quot;, same as Path Index</span>
+    index_name=<span class="hljs-string">&quot;metadata_flat&quot;</span>,      <span class="hljs-comment"># Unique index name</span>
+    params={
+        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&#x27;metadata&#x27;</span>,     <span class="hljs-comment"># Object path: the root object of the column</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;JSON&quot;</span>     <span class="hljs-comment"># Key difference: must be &quot;JSON&quot; for Flat Index; case-insensitive</span></span>
+    }
+)
+
+<span class="hljs-comment"># 2. Optionally, create a flat index on a sub-object (e.g., supplier subtree)</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    index_name=<span class="hljs-string">&quot;metadata_supplier_flat&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&#x27;metadata[&quot;supplier&quot;]&#x27;</span>,  <span class="hljs-comment"># Object path: sub-object path</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;JSON&quot;</span></span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Menerapkan indeks ke koleksi<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah mendefinisikan parameter indeks, Anda dapat menerapkannya ke koleksi menggunakan <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_index(
@@ -743,7 +919,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah menyisipkan dan mengindeks bidang JSON, Anda dapat memfilternya menggunakan ekspresi filter standar dengan sintaks jalur JSON.</p>
+    </button></h2><p>Setelah menyisipkan dan mengindeks bidang JSON, Anda dapat memfilternya menggunakan ekspresi filter standar dengan sintaksis jalur JSON.</p>
 <p>Sebagai contoh:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -814,29 +990,119 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="What-are-the-differences-between-a-JSON-field-and-the-dynamic-field" class="common-anchor-header">Apa perbedaan antara bidang JSON dan bidang dinamis?</h3><ul>
+    </button></h2><h3 id="What-are-the-differences-between-a-JSON-field-and-the-dynamic-field" class="common-anchor-header">Apa perbedaan antara bidang JSON dan bidang dinamis?<button data-href="#What-are-the-differences-between-a-JSON-field-and-the-dynamic-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Bidang JSON</strong> ditentukan oleh skema. Anda harus mendeklarasikan bidang secara eksplisit di dalam skema.</p></li>
 <li><p><strong>Field dinamis</strong> adalah objek JSON tersembunyi (<code translate="no">$meta</code>) yang secara otomatis menyimpan field apa pun yang tidak didefinisikan dalam skema.</p></li>
 </ul>
 <p>Keduanya mendukung struktur bersarang dan pengindeksan jalur JSON, tetapi bidang dinamis lebih cocok untuk struktur data opsional atau yang terus berkembang.</p>
 <p>Lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a> untuk detailnya.</p>
-<h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">Apakah ada batasan ukuran bidang JSON?</h3><p>Ya. Setiap bidang JSON dibatasi hingga 65.536 byte.</p>
-<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">Apakah field JSON mendukung pengaturan nilai default?</h3><p>Tidak, bidang JSON tidak mendukung nilai default. Namun, Anda dapat mengatur <code translate="no">nullable=True</code> saat mendefinisikan bidang untuk mengizinkan entri kosong.</p>
+<h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">Apakah ada batasan ukuran bidang JSON?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ya. Setiap bidang JSON dibatasi hingga 65.536 byte.</p>
+<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">Apakah field JSON mendukung pengaturan nilai default?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tidak, bidang JSON tidak mendukung nilai default. Namun, Anda dapat mengatur <code translate="no">nullable=True</code> saat mendefinisikan bidang untuk mengizinkan entri kosong.</p>
 <p>Lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a> untuk detailnya.</p>
-<h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Apakah ada konvensi penamaan untuk kunci bidang JSON?</h3><p>Ya, untuk memastikan kompatibilitas dengan kueri dan pengindeksan:</p>
+<h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Apakah ada konvensi penamaan untuk kunci bidang JSON?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ya, untuk memastikan kompatibilitas dengan kueri dan pengindeksan:</p>
 <ul>
 <li><p>Gunakan hanya huruf, angka, dan garis bawah pada kunci JSON.</p></li>
 <li><p>Hindari penggunaan karakter khusus, spasi, atau titik (<code translate="no">.</code>, <code translate="no">/</code>, dll.).</p></li>
 <li><p>Kunci yang tidak kompatibel dapat menyebabkan masalah penguraian dalam ekspresi filter.</p></li>
 </ul>
-<h3 id="How-does-Milvus-handle-string-values-in-JSON-fields" class="common-anchor-header">Bagaimana Milvus menangani nilai string dalam bidang JSON?</h3><p>Milvus menyimpan nilai string persis seperti yang muncul di input JSON-tanpa transformasi semantik. String yang dikutip dengan tidak benar dapat mengakibatkan kesalahan selama penguraian.</p>
+<h3 id="How-does-Milvus-handle-string-values-in-JSON-fields" class="common-anchor-header">Bagaimana Milvus menangani nilai string dalam bidang JSON?<button data-href="#How-does-Milvus-handle-string-values-in-JSON-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus menyimpan nilai string persis seperti yang muncul di input JSON-tanpa transformasi semantik. String yang dikutip dengan tidak benar dapat mengakibatkan kesalahan selama penguraian.</p>
 <p><strong>Contoh string yang valid</strong>:</p>
 <pre><code translate="no" class="language-plaintext">&quot;a\&quot;b&quot;, &quot;a&#x27;b&quot;, &quot;a\\b&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Contoh string yang tidak valid</strong>:</p>
 <pre><code translate="no" class="language-plaintext">&#x27;a&quot;b&#x27;, &#x27;a\&#x27;b&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="What-filtering-logic-does-Milvus-use-for-indexed-JSON-paths" class="common-anchor-header">Logika pemfilteran apa yang digunakan Milvus untuk jalur JSON yang diindeks?</h3><ul>
+<h3 id="What-filtering-logic-does-Milvus-use-for-indexed-JSON-paths" class="common-anchor-header">Logika pemfilteran apa yang digunakan Milvus untuk jalur JSON yang diindeks?<button data-href="#What-filtering-logic-does-Milvus-use-for-indexed-JSON-paths" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Pengindeksan Numerik</strong>:</p>
 <p>Jika indeks dibuat dengan <code translate="no">json_cast_type=&quot;double&quot;</code>, hanya kondisi filter numerik (misalnya, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">== 42</code>) yang akan memanfaatkan indeks. Kondisi non-numerik mungkin akan kembali ke pemindaian brute-force.</p></li>
 <li><p><strong>Pengindeksan String</strong>:</p>
@@ -844,8 +1110,68 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
 <li><p><strong>Pengindeksan Boolean</strong>:</p>
 <p>Pengindeksan Boolean berperilaku mirip dengan pengindeksan string, dengan penggunaan indeks hanya jika kondisinya benar-benar cocok dengan benar atau salah.</p></li>
 </ul>
-<h3 id="What-about-numeric-precision-when-indexing-JSON-fields" class="common-anchor-header">Bagaimana dengan ketepatan numerik ketika mengindeks bidang JSON?</h3><p>Milvus menyimpan semua nilai numerik yang diindeks sebagai nilai ganda.</p>
-<p>Jika nilai numerik melebihi <strong>2^53</strong>, maka nilai tersebut akan kehilangan presisi. Hilangnya presisi ini dapat mengakibatkan kueri filter tidak dapat mencocokkan nilai di luar rentang dengan tepat.</p>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="common-anchor-header">Dapatkah saya membuat beberapa indeks pada jalur JSON yang sama dengan jenis cast yang berbeda?</h3><p>Tidak, setiap jalur JSON <strong>hanya</strong> mendukung <strong>satu indeks</strong>. Anda harus memilih satu <code translate="no">json_cast_type</code> yang cocok dengan data Anda. Membuat beberapa indeks pada jalur yang sama dengan jenis cast yang berbeda tidak didukung.</p>
-<h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">Bagaimana jika nilai pada jalur JSON memiliki tipe yang tidak konsisten?</h3><p>Tipe yang tidak konsisten di seluruh entitas dapat menyebabkan <strong>pengindeksan parsial</strong>. Misalnya, jika <code translate="no">metadata[&quot;price&quot;]</code> disimpan sebagai angka (<code translate="no">99.99</code>) dan string (<code translate="no">&quot;99.99&quot;</code>), dan indeks didefinisikan dengan <code translate="no">json_cast_type=&quot;double&quot;</code>, hanya nilai numerik yang akan diindeks. Entri berbentuk string akan dilewati dan tidak akan muncul dalam hasil filter.</p>
-<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">Dapatkah saya menggunakan filter dengan tipe yang berbeda dari tipe cast yang diindeks?</h3><p>Jika ekspresi filter Anda menggunakan jenis yang berbeda dari indeks <code translate="no">json_cast_type</code>, sistem <strong>tidak</strong> akan <strong>menggunakan indeks</strong>, dan mungkin akan kembali ke pemindaian brute-force yang lebih lambat-jika data memungkinkan. Untuk performa terbaik, selalu selaraskan ekspresi filter Anda dengan tipe cast indeks.</p>
+<h3 id="What-about-numeric-precision-when-indexing-JSON-fields" class="common-anchor-header">Bagaimana dengan ketepatan numerik ketika mengindeks bidang JSON?<button data-href="#What-about-numeric-precision-when-indexing-JSON-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus menyimpan semua nilai numerik yang diindeks sebagai nilai ganda.</p>
+<p>Jika nilai numerik melebihi <strong>2^53</strong>, maka nilai tersebut akan kehilangan presisi. Hilangnya presisi ini dapat menyebabkan kueri filter tidak dapat mencocokkan nilai di luar rentang dengan tepat.</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="common-anchor-header">Dapatkah saya membuat beberapa indeks pada jalur JSON yang sama dengan jenis cast yang berbeda?<button data-href="#Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tidak, setiap jalur JSON <strong>hanya</strong> mendukung <strong>satu indeks</strong>. Anda harus memilih satu <code translate="no">json_cast_type</code> yang cocok dengan data Anda. Membuat beberapa indeks pada jalur yang sama dengan tipe cast yang berbeda tidak didukung.</p>
+<h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">Bagaimana jika nilai pada jalur JSON memiliki tipe yang tidak konsisten?<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tipe yang tidak konsisten di seluruh entitas dapat menyebabkan <strong>pengindeksan parsial</strong>. Misalnya, jika <code translate="no">metadata[&quot;price&quot;]</code> disimpan sebagai angka (<code translate="no">99.99</code>) dan string (<code translate="no">&quot;99.99&quot;</code>), dan indeks didefinisikan dengan <code translate="no">json_cast_type=&quot;double&quot;</code>, hanya nilai numerik yang akan diindeks. Entri berbentuk string akan dilewati dan tidak akan muncul dalam hasil filter.</p>
+<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">Dapatkah saya menggunakan filter dengan tipe yang berbeda dari tipe cast yang diindeks?<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika ekspresi filter Anda menggunakan jenis yang berbeda dari indeks <code translate="no">json_cast_type</code>, sistem <strong>tidak</strong> akan <strong>menggunakan indeks</strong>, dan mungkin akan kembali ke pemindaian brute-force yang lebih lambat-jika data memungkinkan. Untuk performa terbaik, selalu selaraskan ekspresi filter Anda dengan tipe cast indeks.</p>

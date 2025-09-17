@@ -825,7 +825,7 @@
             "children": []
           },
           {
-            "label": "Elasticsearchからmilvusへのクエリ",
+            "label": "Elasticsearchクエリからmilvusへ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 9,
             "children": []

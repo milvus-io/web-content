@@ -150,6 +150,6 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><p>Explore <a href="/docs/pt/v2.5.x/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/v2.5.x/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
 <li><p>Explore o <a href="/docs/pt/v2.5.x/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
-<li><p>Explore o <a href="https://github.com/zilliztech/attu">Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/v2.5.x/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

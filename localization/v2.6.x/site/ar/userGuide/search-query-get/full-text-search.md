@@ -6,8 +6,8 @@ summary: >-
   محددة في مجموعات البيانات النصية، ثم تقوم بترتيب النتائج بناءً على مدى
   ملاءمتها. تتغلب هذه الميزة على قيود البحث الدلالي، التي قد تغفل المصطلحات
   الدقيقة، مما يضمن حصولك على النتائج الأكثر دقة وذات الصلة بالسياق. بالإضافة
-  إلى ذلك، تعمل هذه الميزة على تبسيط عمليات البحث المتجهية من خلال قبول مدخلات
-  نصية أولية، وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى
+  إلى ذلك، تعمل هذه الميزة على تبسيط عمليات البحث المتجهة من خلال قبول مدخلات
+  النص الخام، وتحويل بياناتك النصية تلقائيًا إلى تضمينات متفرقة دون الحاجة إلى
   إنشاء تضمينات متجهة يدويًا.
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">البحث في النص الكامل<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
@@ -84,7 +84,22 @@ summary: >-
 <li><p>حقل <code translate="no">VARCHAR</code> يقوم بتخزين المستندات النصية الخام، مع تعيين السمة <code translate="no">enable_analyzer</code> على <code translate="no">True</code>. وهذا يسمح لـ Milvus بترميز النص إلى مصطلحات محددة لمعالجة الدالة.</p></li>
 <li><p>حقل <code translate="no">SPARSE_FLOAT_VECTOR</code> محجوز لتخزين التضمينات المتفرقة التي سيقوم ميلفوس بإنشائها تلقائيًا للحقل <code translate="no">VARCHAR</code>.</p></li>
 </ul>
-<h3 id="Define-the-collection-schema" class="common-anchor-header">تحديد مخطط المجموعة</h3><p>أولاً، قم بإنشاء المخطط وإضافة الحقول اللازمة:</p>
+<h3 id="Define-the-collection-schema" class="common-anchor-header">تحديد مخطط المجموعة<button data-href="#Define-the-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أولاً، قم بإنشاء المخطط وإضافة الحقول اللازمة:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
@@ -215,7 +230,7 @@ schema.WithField(entity.NewField().
 <p>في هذا التكوين</p>
 <ul>
 <li><p><code translate="no">id</code>: يعمل كمفتاح أساسي ويتم إنشاؤه تلقائيًا باستخدام <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: يخزن بيانات النص الخام لعمليات البحث عن النص الكامل. يجب أن يكون نوع البيانات هو <code translate="no">VARCHAR</code> ، حيث أن <code translate="no">VARCHAR</code> هو نوع بيانات سلسلة ميلفوس لتخزين النص. قم بتعيين <code translate="no">enable_analyzer=True</code> للسماح لـ Milvus بترميز النص. بشكل افتراضي، يستخدم ميلفوس<a href="/docs/ar/standard-analyzer.md"> محلل</a> <code translate="no">standard</code><a href="/docs/ar/standard-analyzer.md"></a> لتحليل النص. لتكوين محلل مختلف، ارجع إلى <a href="/docs/ar/analyzer-overview.md">نظرة عامة على المحلل</a>.</p></li>
+<li><p><code translate="no">text</code>: يخزن بيانات النص الخام لعمليات البحث عن النص الكامل. يجب أن يكون نوع البيانات هو <code translate="no">VARCHAR</code> ، حيث أن <code translate="no">VARCHAR</code> هو نوع بيانات سلسلة ميلفوس لتخزين النص. قم بتعيين <code translate="no">enable_analyzer=True</code> للسماح لـ Milvus بترميز النص. بشكل افتراضي، يستخدم Milvus <a href="/docs/ar/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ar/standard-analyzer.md"> محلل</a> لتحليل النص. لتكوين محلل مختلف، ارجع إلى <a href="/docs/ar/analyzer-overview.md">نظرة عامة على المحلل</a>.</p></li>
 <li><p><code translate="no">sparse</code>:: حقل متجه محجوز لتخزين التضمينات المتفرقة التي تم إنشاؤها داخليًا لعمليات البحث عن النص الكامل. يجب أن يكون نوع البيانات <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>الآن، قم بتعريف الدالة التي ستقوم بتحويل النص إلى تمثيلات متجهية متناثرة ثم قم بإضافتها إلى المخطط:</p>
@@ -318,7 +333,22 @@ schema.WithFunction(function)
 <div class="alert note">
 <p>بالنسبة للمجموعات التي تحتوي على حقول متعددة <code translate="no">VARCHAR</code> تتطلب تحويل النص إلى متجهات متناثرة، أضف دوال منفصلة إلى مخطط المجموعة، مع التأكد من أن كل دالة لها اسم فريد وقيمة <code translate="no">output_field_names</code>.</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">تكوين الفهرس</h3><p>بعد تحديد المخطط بالحقول الضرورية والدالة المدمجة، قم بإعداد الفهرس لمجموعتك. لتبسيط هذه العملية، استخدم <code translate="no">AUTOINDEX</code> كـ <code translate="no">index_type</code> ، وهو خيار يسمح لـ Milvus باختيار وتكوين نوع الفهرس الأنسب بناءً على بنية بياناتك.</p>
+<h3 id="Configure-the-index" class="common-anchor-header">تكوين الفهرس<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد تحديد المخطط بالحقول الضرورية والدالة المدمجة، قم بإعداد الفهرس لمجموعتك. لتبسيط هذه العملية، استخدم <code translate="no">AUTOINDEX</code> كـ <code translate="no">index_type</code> ، وهو خيار يسمح لـ Milvus باختيار وتكوين نوع الفهرس الأنسب بناءً على بنية بياناتك.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -339,9 +369,9 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-fvParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
-fvParams.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
-fvParams.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+params.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+params.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+params.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
@@ -406,12 +436,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. قيم صالحة:</p>
-<ul>
-<li><p><code translate="no">"DAAT_MAXSCORE"</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. توفر MaxScore أداءً أفضل لقيم <em>k</em> العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li>
-<li><p><code translate="no">"DAAT_WAND"</code>: معالجة استعلام DAAT المحسّنة باستخدام خوارزمية WAND. تقوم WAND بتقييم عدد أقل من المستندات التي تم الوصول إليها من خلال الاستفادة من درجات التأثير القصوى لتخطي المستندات غير المنافسة، ولكن لديها نفقات أعلى لكل ضربة. هذا يجعل WAND أكثر كفاءة للاستعلامات ذات القيم <em>k</em> الصغيرة أو الاستعلامات القصيرة، حيث يكون التخطي أكثر جدوى.</p></li>
-<li><p><code translate="no">"TAAT_NAIVE"</code>: معالجة استعلام المصطلح الأساسي في الوقت (TAAT). على الرغم من أنها أبطأ مقارنةً بـ <code translate="no">DAAT_MAXSCORE</code> و <code translate="no">DAAT_WAND</code> ، إلا أن <code translate="no">TAAT_NAIVE</code> تقدم ميزة فريدة. على عكس خوارزميات DAAT، التي تستخدم درجات التأثير القصوى المخزنة مؤقتًا والتي تظل ثابتة بغض النظر عن التغييرات التي تطرأ على معلمة التجميع العالمية (avgdl)، يتكيف <code translate="no">TAAT_NAIVE</code> ديناميكيًا مع هذه التغييرات.</p></li>
-</ul></td>
+     <td><p>الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. قيم صالحة:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. توفر MaxScore أداءً أفضل لقيم <em>k</em> العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: معالجة استعلام DAAT الأمثل باستخدام خوارزمية WAND. تقوم WAND بتقييم عدد أقل من المستندات التي تم الوصول إليها من خلال الاستفادة من درجات التأثير القصوى لتخطي المستندات غير المنافسة، ولكن لديها نفقات أعلى لكل ضربة. هذا يجعل WAND أكثر كفاءة للاستعلامات ذات القيم <em>k</em> الصغيرة أو الاستعلامات القصيرة، حيث يكون التخطي أكثر جدوى.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: معالجة استعلام المصطلح الأساسي في الوقت (TAAT). على الرغم من أنها أبطأ مقارنةً بـ <code translate="no">DAAT_MAXSCORE</code> و <code translate="no">DAAT_WAND</code> ، إلا أن <code translate="no">TAAT_NAIVE</code> تقدم ميزة فريدة. على عكس خوارزميات DAAT، التي تستخدم درجات التأثير القصوى المخزنة مؤقتًا والتي تظل ثابتة بغض النظر عن التغييرات التي تطرأ على معلمة التجميع العالمية (avgdl)، يتكيف <code translate="no">TAAT_NAIVE</code> ديناميكيًا مع هذه التغييرات.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -422,7 +447,22 @@ indexes.add(IndexParam.builder()
      <td><p>يتحكم في مدى تطبيع طول المستند. يتم استخدام القيم بين 0 و1 عادة، مع وجود قيمة افتراضية شائعة حوالي 0.75. القيمة 1 تعني عدم تطبيع الطول، بينما القيمة 0 تعني التطبيع الكامل.</p></td>
    </tr>
 </table>
-<h3 id="Create-the-collection" class="common-anchor-header">إنشاء المجموعة</h3><p>الآن أنشئ المجموعة باستخدام المخطط ومعلمات الفهرس المحددة.</p>
+<h3 id="Create-the-collection" class="common-anchor-header">إنشاء المجموعة<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الآن أنشئ المجموعة باستخدام المخطط ومعلمات الفهرس المحددة.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -550,7 +590,7 @@ client.insert(InsertReq.builder()
       </svg>
     </button></h2><p>بمجرد إدراج البيانات في مجموعتك، يمكنك إجراء عمليات بحث نصية كاملة باستخدام استعلامات نصية خام. يقوم Milvus تلقائيًا بتحويل استعلامك إلى متجه متناثر وترتيب نتائج البحث المتطابقة باستخدام خوارزمية BM25، ثم يُرجع أعلىK (<code translate="no">limit</code>) النتائج.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 }
@@ -644,12 +684,16 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
      <td><p>نسبة المصطلحات منخفضة الأهمية لتجاهلها أثناء البحث. لمزيد من التفاصيل، راجع <a href="/docs/ar/sparse_vector.md">Sparse Vector</a>.</p></td>
    </tr>
    <tr>
+     <td></td>
+     <td></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>نص استعلام أولي بلغة طبيعية. يقوم ميلفوس بتحويل الاستعلام النصي تلقائياً إلى متجهات متفرقة باستخدام الدالة BM25 - <strong>لا</strong> تقدم متجهات محسوبة مسبقاً.</p></td>
+     <td><p>نص استعلام أولي بلغة طبيعية. يقوم ميلفوس بتحويل الاستعلام النصي تلقائياً إلى متجهات متفرقة باستخدام الدالة BM25 - لا تقدم متجهات محسوبة مسبقاً.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
-     <td><p>اسم الحقل الذي يحتوي على المتجهات المتفرقة التي تم إنشاؤها داخلياً.</p></td>
+     <td><p>اسم الحقل الذي يحتوي على متجهات متفرقة تم إنشاؤها داخلياً.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_fields</code></p></td>
@@ -675,7 +719,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">هل يمكنني إخراج أو الوصول إلى المتجهات المتفرقة التي تم إنشاؤها بواسطة دالة BM25 في البحث عن النص الكامل؟</h3><p>لا، المتجهات المتفرقة التي تم إنشاؤها بواسطة دالة BM25 لا يمكن الوصول إليها أو إخراجها مباشرةً في البحث عن النص الكامل. فيما يلي التفاصيل:</p>
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">هل يمكنني إخراج أو الوصول إلى المتجهات المتفرقة التي تم إنشاؤها بواسطة دالة BM25 في البحث عن النص الكامل؟<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لا، المتجهات المتفرقة التي تم إنشاؤها بواسطة دالة BM25 لا يمكن الوصول إليها أو إخراجها مباشرةً في البحث عن النص الكامل. فيما يلي التفاصيل:</p>
 <ul>
 <li><p>تقوم الدالة BM25 بإنشاء متجهات متفرقة داخليًا للترتيب والاسترجاع</p></li>
 <li><p>يتم تخزين هذه المتجهات في الحقل المتناثر ولكن لا يمكن تضمينها في <code translate="no">output_fields</code></p></li>
@@ -702,7 +761,22 @@ client.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">لماذا أحتاج إلى تعريف حقل متجه متناثر إذا لم يكن بإمكاني الوصول إليه؟</h3><p>يعمل حقل المتجه المتناثر بمثابة فهرس بحث داخلي، على غرار فهارس قواعد البيانات التي لا يتفاعل معها المستخدمون مباشرةً.</p>
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">لماذا أحتاج إلى تعريف حقل متجه متناثر إذا لم يكن بإمكاني الوصول إليه؟<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يعمل حقل المتجه المتناثر بمثابة فهرس بحث داخلي، على غرار فهارس قواعد البيانات التي لا يتفاعل معها المستخدمون مباشرةً.</p>
 <p><strong>أساس منطقي للتصميم</strong>:</p>
 <ul>
 <li><p>فصل الاهتمامات: أنت تعمل مع النص (الإدخال/الإخراج)، بينما يتعامل ميلفوس مع المتجهات (المعالجة الداخلية)</p></li>

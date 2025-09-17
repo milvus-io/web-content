@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: تعرف على كيفية ترقية مجموعة Milvus العنقودية باستخدام Docker Compose.
 title: ترقية مجموعة Milvus العنقودية باستخدام Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>مشغِّل Milvusمشغل</a><a href="/docs/ar/v2.5.x/configure_operator.md" class=''>Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل</a><a href="/docs/ar/v2.5.x/configure-helm.md" class=''>Milvusمشغل</a><a href="/docs/ar/v2.5.x/configure_operator.md" class=''>Milvusمشغل Milvusمشغل Docker</a><a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>مشغل Milvusمشغل</a><a href="/docs/ar/v2.5.x/configure_operator.md" class=''>Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل Milvusمشغل</a><a href="/docs/ar/v2.5.x/configure-helm.md" class=''>Milvusمشغل</a><a href="/docs/ar/v2.5.x/configure_operator.md" class=''>Docker</a><a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">ترقية مجموعة Milvus العنقودية باستخدام Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -39,10 +39,25 @@ summary: >-
       </svg>
     </button></h2><p><strong>DISKANN</strong>結合了高效向量搜尋的兩項關鍵技術：</p>
 <ul>
-<li><p><strong>Vamana 圖形</strong>-<strong>以磁碟為基礎</strong>、<strong>以圖形為</strong> <strong>基</strong>礎的索引，可連結資料點（或向量）以在搜尋過程中進行有效率的導航。</p></li>
+<li><p><strong>Vamana 圖形</strong>-<strong>以磁碟為基礎</strong>、<strong>以圖形為</strong> <strong>基</strong>礎的索引，可連結資料點（或向量）以在搜尋過程中有效導航。</p></li>
 <li><p><strong>Product Quantization (PQ)</strong>- 縮小向量大小的<strong>記憶體內</strong>壓縮方法，可快速計算向量間的近似距離。</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">索引建構</h3><h4 id="Vamana-graph" class="common-anchor-header">Vamana 圖形</h4><p>Vamana 圖是 DISKANN 基於磁碟策略的核心。它可以處理非常大的資料集，因為它不需要在建立期間或之後完全駐留在記憶體中。</p>
+<h3 id="Index-construction" class="common-anchor-header">索引建構<button data-href="#Index-construction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">Vamana 圖形</h4><p>Vamana 圖是 DISKANN 基於磁碟策略的核心。它可以處理非常大的資料集，因為它不需要在建立期間或之後完全駐留在記憶體中。</p>
 <p>下圖顯示 Vamana 圖是如何建構的。</p>
 <p>
   
@@ -69,7 +84,22 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> 是使用者定義的比率，代表保留給 PQ 代碼的總資料大小的部分。此參數允許在搜尋準確度和記憶體資源之間進行權衡。有關參數調整的詳細資訊，請參閱<a href="/docs/zh-hant/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>。</p></li>
 </ul>
 <p>有關基本 PQ 方法的技術細節，請參閱<a href="/docs/zh-hant/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>。</p>
-<h3 id="Search-process" class="common-anchor-header">搜尋過程</h3><p>一旦建立索引（磁碟上的 Vamana 圖形和記憶體中的 PQ 代碼），DISKANN 就會執行 ANN 搜尋，如下所示：</p>
+<h3 id="Search-process" class="common-anchor-header">搜尋過程<button data-href="#Search-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>一旦建立索引（磁碟上的 Vamana 圖形和記憶體中的 PQ 代碼），DISKANN 就會執行 ANN 搜尋，如下所示：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
@@ -145,7 +175,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DISKANN 相關參數可以透過 Milvus 配置檔 (<code translate="no">milvus.yaml</code>) 設定：</p>
+    </button></h2><p>DISKANN 相關參數只能透過 Milvus 配置檔 (<code translate="no">milvus.yaml</code>) 設定：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -172,7 +202,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>微調 DISKANN 的參數可讓您根據特定資料集和搜尋工作負載調整其行為，在速度、準確性和記憶體使用量之間取得適當的平衡。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>這些參數會影響 DISKANN 索引的建構方式。調整這些參數會影響索引大小、建立時間和搜尋品質。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>這些參數會影響 DISKANN 索引的建構方式。調整這些參數會影響索引大小、建立時間和搜尋品質。</p>
+<div class="alert note">
+<p>以下清單中的所有索引建立參數，只能透過您的 Milvus 配置檔 (<code translate="no">milvus.yaml</code>) 來設定。</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -182,7 +230,7 @@ summary: >-
      <th><p>調整建議</p></th>
    </tr>
    <tr>
-     <td><p>連線數</p></td>
+     <td><p>邊</p></td>
      <td><p><code translate="no">MaxDegree</code></p></td>
      <td><p>控制每個資料點在 Vamana 圖形中的最大連線（邊）數。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 512]</p>
@@ -213,10 +261,29 @@ summary: >-
      <td><p><strong>類型</strong>：浮點<strong>範圍</strong>：(0.0, 0.25)</p>
 <p><strong>預設值</strong>：<code translate="no">0.125</code></p></td>
      <td><p>較高的比率會為 PQ 碼分配較大比例的記憶體，有效地儲存原始向量的更多資訊，從而獲得更精確的搜尋結果。較低的比率會減少記憶體使用量，但可能會犧牲精確度，因為較小的 PQ 代碼會保留較少的資訊。此方法適用於需要考慮記憶體限制的情況，有可能使大型資料集的索引成為可能。</p>
-<p>在大多數情況下，我們建議您設定此範圍內的值：(0.0625, 0.25] 。</p></td>
+<p>在大多數情況下，我們建議您在此範圍內設定值：(0.0625, 0.25] 。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>這些參數會影響 DISKANN 執行搜尋的方式。調整這些參數會影響搜尋速度、延遲和資源使用。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>這些參數會影響 DISKANN 執行搜尋的方式。調整它們會影響搜尋速度、延遲和資源使用。</p>
+<div class="alert note">
+<p>下面清單中的<code translate="no">BeamWidthRatio</code> 只能透過您的 Milvus 配置檔 (<code translate="no">milvus.yaml</code>) 來設定。</p>
+<p>以下清單中的<code translate="no">search_list</code> 只能在 SDK 的搜尋參數中設定。</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -226,7 +293,7 @@ summary: >-
      <th><p>調整建議</p></th>
    </tr>
    <tr>
-     <td><p>並行</p></td>
+     <td><p>Vamana</p></td>
      <td><p><code translate="no">BeamWidthRatio</code></p></td>
      <td><p>透過決定相對於可用 CPU 核心數的最大平行磁碟 I/O 請求數，控制搜尋期間的平行程度。</p></td>
      <td><p><strong>類型</strong>：浮動<strong>範圍</strong>：[1，max(128 / CPU 數目，16)</p>
@@ -235,7 +302,7 @@ summary: >-
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>在搜尋作業期間，此參數會決定演算法在遍歷圖時所維護的候選池大小。較大的值會增加找到真正最近鄰居的機會 (較高的召回率)，但也會增加搜尋延遲。</p></td>
      <td><p><strong>類型</strong>：整<strong>數</strong>整數<strong>範圍</strong>：[1、<em>int_max］</em></p>
 <p><strong>預設值</strong>：<code translate="no">100</code></p></td>

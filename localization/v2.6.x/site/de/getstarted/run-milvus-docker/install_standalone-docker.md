@@ -63,8 +63,15 @@ title: Milvus in Docker ausführen (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> im eigenständigen Bereitstellungsmodus verwenden möchten, wird empfohlen, die Bereitstellungsmethode <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a> zu verwenden.</p>
-<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, kontaktieren Sie uns unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> und teilen Sie uns die Details des Problems mit.</p>
+<p><strong>Was ist neu in v2.6.0:</strong></p>
+<ul>
+<li><strong>Streaming Node</strong>: Verbesserte Datenverarbeitungsmöglichkeiten</li>
+<li><strong>Woodpecker MQ</strong>: Verbesserte Nachrichtenwarteschlange mit reduziertem Wartungsaufwand, siehe <a href="/docs/de/use-woodpecker.md">Woodpecker verwenden</a> für Details</li>
+<li><strong>Optimierte Architektur</strong>: Konsolidierte Komponenten für bessere Leistung</li>
+</ul>
+<p>Laden Sie immer das neueste Skript herunter, um sicherzustellen, dass Sie die neuesten Konfigurationen und Architekturverbesserungen erhalten.</p>
+<p>Wenn Sie <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> im eigenständigen Bereitstellungsmodus verwenden möchten, empfiehlt sich die Verwendung der <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose-Bereitstellungsmethode</a>.</p>
+<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, wenden Sie sich bitte an <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie das Problem, damit wir Ihnen den nötigen Support bieten können.</p>
 </div>
 <p>Nachdem Sie das Installationsskript ausgeführt haben:</p>
 <ul>
@@ -99,7 +106,37 @@ EOF
 <p>Starten Sie dann den Dienst wie folgt neu:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Anhalten und Löschen von Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
+<p>Die zutreffenden Konfigurationselemente finden Sie unter <a href="/docs/de/system_configuration.md">Systemkonfiguration</a>.</p>
+<h2 id="Upgrade-Milvus" class="common-anchor-header">Upgrade von Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Sie können ein Upgrade auf die neueste Version von Milvus durchführen, indem Sie den integrierten Upgrade-Befehl verwenden. Dadurch werden automatisch die neueste Konfiguration und das neueste Milvus-Image heruntergeladen:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Der Upgrade-Befehl lädt automatisch:</p>
+<ul>
+<li>Lädt das neueste Installationsskript mit aktualisierten Konfigurationen herunter</li>
+<li>Holt das neueste Milvus-Docker-Image</li>
+<li>Startet den Container mit der neuen Version neu</li>
+<li>Behält Ihre bestehenden Daten und Konfigurationen bei</li>
+</ul>
+<p>Dies ist der empfohlene Weg, um Ihren Milvus-Einzelbetrieb zu aktualisieren.</p>
+</div>
+<h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvus stoppen und löschen<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,11 +158,7 @@ EOF
 # </span><span class="language-bash">Delete Milvus data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können die neueste Version von Milvus wie folgt aktualisieren</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade Milvus</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Wie geht es weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Wie geht es jetzt weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -20,7 +20,45 @@ title: Pertanyaan Umum Operasional
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Bagaimana jika saya gagal menarik citra Milvus Docker dari Docker Hub?</h4><p>Jika Anda gagal menarik citra Milvus Docker dari Docker Hub, coba tambahkan mirror registri lainnya.</p>
+    </button></h1><h4 id="What-is-a-QueryNode-delegator-and-what-are-its-responsibilities" class="common-anchor-header">Apa yang dimaksud dengan delegator QueryNode, dan apa saja tanggung jawabnya?</h4><p>Ketika koleksi dimuat, QueryNode berlangganan saluran DML untuk menyisipkan dan menghapus pesan yang berasal dari antrean pesan. QueryNode yang berlangganan saluran ini, yang dikenal sebagai delegator, bertanggung jawab untuk:</p>
+<ul>
+<li>Mengelola peningkatan segmen yang membutuhkan memori tambahan karena penyisipan yang sedang berlangsung.</li>
+<li>Menerima pesan yang dihapus dan meneruskannya ke QueryNode lain yang menyimpan segmen yang relevan.</li>
+</ul>
+<h4 id="How-to-identify-delegator-nodes-for-a-collection" class="common-anchor-header">Bagaimana cara mengidentifikasi simpul delegator untuk sebuah koleksi?</h4><p>Gunakan Birdwatcher.</p>
+<p>Instal Birdwatcher dengan mengikuti langkah <a href="https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher">berikut</a>, lalu jalankan perintah berikut:</p>
+<pre><code translate="no" class="language-shell">./birdwatcher
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Find delegator nodes <span class="hljs-keyword">for</span> your collection</span>
+Milvus(my-release) &gt; show segment-loaded-grpc --collection &lt;your-collectionID&gt;
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Map server ID to pod IP</span>
+Milvus(my-release) &gt; show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-parameters-can-be-adjusted-if-query-node-memory-usage-is-unbalanced" class="common-anchor-header">Parameter apa yang dapat disesuaikan jika penggunaan memori simpul kueri tidak seimbang?</h4><p>Terkadang, memori simpul kueri bervariasi karena beberapa bertindak sebagai delegator yang menggunakan lebih banyak RAM. Jika memori delegator tinggi, sesuaikan queryCoord.delegatorMemoryOverloadFactor untuk melepaskan segmen yang disegel ke node lain dan mengurangi penggunaan RAM.</p>
+<ul>
+<li>Nilai defaultnya adalah 0,1.</li>
+<li>Meningkatkan nilai ini (misalnya, menjadi 0,3 atau lebih tinggi) akan menyebabkan sistem melepaskan lebih banyak segmen tersegel dari delegator yang kelebihan beban ke QueryNode lain, sehingga membantu menyeimbangkan penggunaan memori. Dan Anda juga dapat mencoba meningkatkan nilai hingga 1, yang berarti tidak ada segmen tersegel yang akan dimuat di node delegator.</li>
+</ul>
+<p>Jika Anda tidak ingin memulai ulang klaster, Anda dapat memodifikasi konfigurasi milvus dengan birdwatcher:</p>
+<pre><code translate="no">.<span class="hljs-operator">/</span>birdwatcher
+Offline <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">connect</span> <span class="hljs-comment">--etcd &lt;your-etcd-ip&gt;:2379 --auto</span>
+
+# Change delegatorMemoryOverloadFactor <span class="hljs-keyword">to</span> <span class="hljs-number">0.3</span> <span class="hljs-keyword">without</span> restart, <span class="hljs-keyword">default</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0.1</span>
+<span class="hljs-keyword">set</span> config<span class="hljs-operator">-</span>etcd <span class="hljs-comment">--key queryCoord.delegatorMemoryOverloadFactor --value 0.3</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="How-to-set-shardnum-for-a-collection" class="common-anchor-header">Bagaimana cara mengatur shard_num untuk sebuah koleksi?</h4><p>Sebagai praktik terbaik, untuk koleksi dengan vektor berdimensi 768, disarankan untuk menggunakan setidaknya 1 shard per ~100 juta vektor. Untuk kasus penggunaan penulisan yang berat, gunakan 4 pecahan per ~100 juta vektor.</p>
+<p>Misalnya, jika Anda memiliki 100 juta vektor, gunakan 1-4 pecahan. Jika Anda memiliki 500 juta vektor, gunakan 5-10 pecahan.</p>
+<h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Bagaimana jika saya gagal menarik citra Milvus Docker dari Docker Hub?</h4><p>Jika Anda gagal menarik citra Milvus Docker dari Docker Hub, coba tambahkan cermin registri lainnya.</p>
 <p>Pengguna dari Tiongkok Daratan dapat menambahkan URL "https://registry.docker-cn.com" ke larik registri-mirror di <strong>/etc.docker/daemon.json</strong>.</p>
 <pre><code translate="no"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span><span class="hljs-punctuation">]</span>
@@ -107,5 +145,5 @@ title: Pertanyaan Umum Operasional
 <h4 id="Still-have-questions" class="common-anchor-header">Masih memiliki pertanyaan?</h4><p>Tentu saja bisa:</p>
 <ul>
 <li>Lihat <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> di GitHub. Jangan ragu untuk mengajukan pertanyaan, berbagi ide, dan membantu orang lain.</li>
-<li>Bergabunglah dengan <a href="https://discuss.milvus.io/">Forum Milvus</a> atau <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Saluran Slack</a> untuk mendapatkan dukungan dan terlibat dengan komunitas sumber terbuka kami.</li>
+<li>Bergabunglah dengan <a href="https://discuss.milvus.io/">Forum Milvus</a> atau <a href="https://discord.com/invite/8uyFbECzPX">saluran Discord</a> kami untuk mendapatkan dukungan dan terlibat dengan komunitas sumber terbuka kami.</li>
 </ul>

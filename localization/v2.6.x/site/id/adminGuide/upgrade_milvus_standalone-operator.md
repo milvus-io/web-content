@@ -5,10 +5,10 @@ order: 0
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Pelajari cara meng-upgrade Milvus mandiri dengan operator Milvus.
-title: Mengupgrade Milvus Standalone dengan Milvus Operator
+title: Memutakhirkan Milvus Standalone dengan Milvus Operator
 ---
 <div class="tab-wrapper"><a href="/docs/id/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/id/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/id/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Mengupgrade Milvus Standalone dengan Milvus Operator<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">Memutakhirkan Milvus Standalone dengan Milvus Operator<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ title: Mengupgrade Milvus Standalone dengan Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini menjelaskan cara mengupgrade Milvus standalone Anda dengan operator Milvus.</p>
-<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">Memutakhirkan operator Milvus Anda<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
+    </button></h1><p>Panduan ini menjelaskan cara mengupgrade deployment mandiri Milvus Anda dari v2.5.x ke v2.6.0 menggunakan Milvus Operator.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Sebelum Anda memulai<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,21 +39,29 @@ title: Mengupgrade Milvus Standalone dengan Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jalankan perintah berikut untuk mengupgrade versi operator Milvus Anda ke v1.3.0.</p>
-<pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
-helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
-helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Setelah Anda mengupgrade operator Milvus Anda ke versi terbaru, Anda memiliki beberapa pilihan berikut:</p>
+    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">Apa yang baru di v2.6.0<button data-href="#Whats-new-in-v260" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Peningkatan dari Milvus 2.5.x ke 2.6.0 melibatkan perubahan arsitektur yang signifikan:</p>
 <ul>
-<li>Untuk mengupgrade Milvus dari v2.2.3, Anda dapat <a href="#Conduct-a-rolling-upgrade">melakukan upgrade bergilir.</a></li>
-<li>Untuk mengupgrade Milvus dari rilis minor sebelum v2.2.3 ke 2.6.0, Anda disarankan untuk mengupgrade <a href="#Upgrade-Milvus-by-changing-its-image">Milvus dengan mengubah versi gambarnya.</a></li>
-<li>Untuk memutakhirkan Milvus dari v2.1.x ke 2.6.0, Anda perlu melakukan <a href="#Migrate-the-metadata">migrasi metadata</a> sebelum melakukan pemutakhiran.</li>
+<li><strong>Konsolidasi koordinator</strong>: Koordinator yang sebelumnya terpisah (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah dikonsolidasikan menjadi satu <code translate="no">mixCoord</code></li>
+<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang ditingkatkan</li>
+<li><strong>Penghapusan komponen</strong>: <code translate="no">indexNode</code> telah dihapus dan dikonsolidasikan</li>
 </ul>
-<blockquote>
-<p><strong>Catatan</strong>: Sangat disarankan untuk mengupgrade satu versi minor dalam satu waktu, dan menggunakan rilis stabil terbaru dari versi minor tersebut. Sebagai contoh, jika Anda meningkatkan dari v2.4.x ke v2.6.x, Anda sebaiknya meningkatkan ke v2.4.x terbaru, lalu ke v2.5.x terbaru, dan terakhir ke v2.6.x. Hal ini untuk memastikan bahwa Anda menggunakan rilis stabil terbaru dari setiap versi minor, yang kemungkinan besar akan kompatibel dengan data dan konfigurasi yang sudah ada.</p>
-</blockquote>
-<h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Melakukan pemutakhiran bergilir<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
+<p>Proses peningkatan ini memastikan migrasi yang tepat ke arsitektur baru. Untuk informasi lebih lanjut tentang perubahan arsitektur, lihat <a href="/docs/id/architecture_overview.md">Tinjauan Arsitektur Milvus</a>.</p>
+<h3 id="Requirements" class="common-anchor-header">Persyaratan<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,46 +76,104 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sejak Milvus 2.2.3, anda dapat mengkonfigurasi koordinator Milvus untuk bekerja dalam mode siaga aktif dan mengaktifkan fitur peningkatan bergilir untuk mereka, sehingga Milvus dapat merespon permintaan yang masuk selama peningkatan koordinator. Pada rilis sebelumnya, koordinator akan dihapus dan kemudian dibuat selama peningkatan, yang dapat menyebabkan waktu henti tertentu pada layanan.</p>
-<p>Berdasarkan kemampuan pembaruan bergulir yang disediakan oleh Kubernetes, operator Milvus memberlakukan pembaruan yang teratur pada penerapan sesuai dengan ketergantungannya. Selain itu, Milvus mengimplementasikan mekanisme untuk memastikan bahwa komponennya tetap kompatibel dengan komponen yang bergantung padanya selama peningkatan, sehingga secara signifikan mengurangi potensi downtime layanan.</p>
-<p>Fitur peningkatan bergulir dinonaktifkan secara default. Anda perlu mengaktifkannya secara eksplisit melalui file konfigurasi.</p>
+    </button></h3><p><strong>Persyaratan sistem:</strong></p>
+<ul>
+<li>Kubernetes cluster dengan Milvus mandiri yang digunakan melalui Milvus Operator</li>
+<li><code translate="no">kubectl</code> yang dikonfigurasi untuk mengakses cluster Anda</li>
+<li>Helm 3.x terinstal</li>
+</ul>
+<p><strong>Persyaratan kompatibilitas:</strong></p>
+<ul>
+<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.0. Upgrade langsung dari kandidat rilis tidak didukung.</li>
+<li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan lihat <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
+<li>Anda <strong>harus</strong> meng-upgrade ke v2.5.16 atau yang lebih baru sebelum meng-upgrade ke v2.6.0.</li>
+</ul>
+<h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">Langkah 1: Tingkatkan Operator Milvus<button data-href="#Step-1-Upgrade-Milvus-Operator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pertama, tingkatkan Operator Milvus Anda ke v1.3.0:</p>
+<pre><code translate="no" class="language-bash">helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
+helm repo update zilliztech-milvus-operator
+helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
+<button class="copy-code-btn"></button></code></pre>
+<p>Verifikasi peningkatan operator:</p>
+<pre><code translate="no" class="language-bash">kubectl -n milvus-operator get pods
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Upgrade-your-Milvus-standalone" class="common-anchor-header">Langkah 2: Upgrade Milvus mandiri Anda<button data-href="#Step-2-Upgrade-your-Milvus-standalone" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="21-Upgrade-to-v2516" class="common-anchor-header">2.1 Tingkatkan ke v2.5.16</h4><div class="alert-note">
+<p>Lewati langkah ini jika penyebaran mandiri Anda sudah menjalankan v2.5.16 atau lebih tinggi.</p>
+</div>
+<p>Buat file konfigurasi <code translate="no">milvusupgrade.yaml</code> untuk memutakhirkan ke v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Terapkan konfigurasi:</p>
+<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
+<button class="copy-code-btn"></button></code></pre>
+<p>Tunggu hingga selesai:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
+kubectl get pods
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="22-Upgrade-to-v260" class="common-anchor-header">2.2 Tingkatkan ke v2.6.0</h4><p>Setelah v2.5.16 berjalan dengan sukses, tingkatkan ke v2.6.0:</p>
+<p>Perbarui file konfigurasi Anda (<code translate="no">milvusupgrade.yaml</code> dalam contoh ini):</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada file konfigurasi di atas, atur <code translate="no">spec.components.enableRollingUpdate</code> ke <code translate="no">true</code> dan atur <code translate="no">spec.components.image</code> ke versi Milvus yang diinginkan.</p>
-<p>Secara default, Milvus melakukan pemutakhiran bergilir untuk koordinator dengan cara berurutan, di mana Milvus mengganti image pod koordinator satu demi satu. Untuk mengurangi waktu peningkatan, pertimbangkan untuk mengatur <code translate="no">spec.components.imageUpdateMode</code> ke <code translate="no">all</code> sehingga Milvus mengganti semua gambar pod secara bersamaan.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">all</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+<p>Terapkan peningkatan akhir:</p>
+<pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda dapat mengatur <code translate="no">spec.components.imageUpdateMode</code> ke <code translate="no">rollingDowngrade</code> agar Milvus mengganti image pod koordinator dengan versi yang lebih rendah.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingDowngrade</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:&lt;some-older-version&gt;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Kemudian simpan konfigurasi Anda sebagai berkas YAML (misalnya, <code translate="no">milvusupgrade.yaml</code>) dan tambal berkas konfigurasi ini ke instans Milvus Anda sebagai berikut:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Memutakhirkan Milvus dengan mengubah citranya<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">Verifikasi peningkatan<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,63 +188,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pada kasus normal, Anda cukup memperbarui Milvus Anda ke versi terbaru dengan mengubah image-nya. Namun, perhatikan bahwa akan ada waktu henti tertentu saat mengupgrade Milvus dengan cara ini.</p>
-<p>Buatlah berkas konfigurasi sebagai berikut dan simpan sebagai <strong>milvusupgrade.yaml</strong>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-    <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-<span class="hljs-attr">labels:</span>
-    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-comment"># Omit other fields ...</span>
-  <span class="hljs-attr">components:</span>
-   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+    </button></h2><p>Konfirmasikan bahwa penerapan mandiri Anda telah menjalankan versi baru:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check pod status</span>
+kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian jalankan perintah berikut ini untuk melakukan peningkatan:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">Migrasi metadata<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Sejak Milvus 2.2.0, metadata tidak kompatibel dengan metadata pada rilis sebelumnya. Contoh cuplikan berikut mengasumsikan peningkatan dari Milvus 2.1.4 ke Milvus v2.6.0.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Buat file <code translate="no">.yaml</code> untuk migrasi metadata</h3><p>Buatlah sebuah file migrasi metadata. Berikut ini adalah contohnya. Anda perlu menentukan <code translate="no">name</code>, <code translate="no">sourceVersion</code>, dan <code translate="no">targetVersion</code> dalam file konfigurasi. Contoh berikut ini mengatur <code translate="no">name</code> ke <code translate="no">my-release-upgrade</code>, <code translate="no">sourceVersion</code> ke <code translate="no">v2.1.4</code>, dan <code translate="no">targetVersion</code> ke <code translate="no">v2.6.0</code>. Ini berarti bahwa instans Milvus Anda akan ditingkatkan dari v2.1.4 ke v2.6.0.</p>
-<pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-upgrade</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">milvus:</span>
-    <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
-    <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
-  <span class="hljs-attr">sourceVersion:</span> <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.6.0&quot;</span>
-  <span class="hljs-comment"># below are some omit default values:</span>
-  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.6.0&quot;</span>
-  <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
-  <span class="hljs-comment"># operation: upgrade</span>
-  <span class="hljs-comment"># rollbackIfFailed: true</span>
-  <span class="hljs-comment"># backupPVC: &quot;&quot;</span>
-  <span class="hljs-comment"># maxRetry: 3</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. Menerapkan konfigurasi baru</h3><p>Jalankan perintah berikut untuk menerapkan konfigurasi baru.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-built_in">create</span> -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/<span class="hljs-built_in">config</span>/samples/milvusupgrade.yaml
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. Memeriksa status migrasi metadata</h3><p>Jalankan perintah berikut untuk memeriksa status migrasi metadata Anda.</p>
-<pre><code translate="no">kubectl <span class="hljs-keyword">describe</span> milvus <span class="hljs-keyword">release</span><span class="hljs-operator">-</span>name
-<button class="copy-code-btn"></button></code></pre>
-<p>Status <code translate="no">ready</code> pada keluaran berarti migrasi metadata berhasil.</p>
-<p>Atau, Anda juga dapat menjalankan <code translate="no">kubectl get pod</code> untuk memeriksa semua pod. Jika semua pod adalah <code translate="no">ready</code>, migrasi metadata berhasil.</p>
-<h3 id="4-Delete-my-release-upgrade" class="common-anchor-header">4. Hapus <code translate="no">my-release-upgrade</code></h3><p>Jika peningkatan berhasil, hapus <code translate="no">my-release-upgrade</code> dalam berkas YAML.</p>
+<p>Untuk dukungan tambahan, lihat <a href="https://milvus.io/docs">dokumentasi Milvus</a> atau <a href="https://github.com/milvus-io/milvus/discussions">forum komunitas</a>.</p>

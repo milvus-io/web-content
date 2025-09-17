@@ -70,7 +70,7 @@ title: إدارة مجموعات الموارد
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>باستثناء الحالات التالية:</p>
 <ul>
-<li>عندما يكون عدد عُقَد الاستعلام في مجموعة Milvus غير كافٍ، أي <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ، ستكون هناك دائمًا مجموعات موارد بدون عدد كافٍ من عُقَد الاستعلام.</li>
+<li>عندما يكون عدد عُقد الاستعلام في مجموعة Milvus غير كافٍ، أي <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ، ستكون هناك دائمًا مجموعات موارد بدون عدد كافٍ من عُقد الاستعلام.</li>
 <li>عندما يكون عدد عُقد الاستعلام في مجموعة Milvus زائدًا، أي <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ، سيتم دائمًا وضع عُقد الاستعلام الزائدة في <strong> مجموعة الموارد __المجموعة_الافتراضية_الموارد</strong> أولاً.</li>
 </ul>
 <p>وبالطبع، إذا تغير عدد عُقد الاستعلام في المجموعة، سيحاول الميلفوس باستمرار تعديلها لتلبية الشروط النهائية. لذلك، يمكنك أولًا تطبيق تغييرات تكوين مجموعة الموارد ثم إجراء تحجيم QueryNode.</p>
@@ -295,7 +295,7 @@ milvus_client.update_resource_groups({
 scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>توسيع نطاق الكتلة في</p>
+<li><p>توسيع نطاق المجموعة إلى الداخل</p>
 <p>وبالمثل، يمكننا إنشاء قواعد توسيع نطاق في التي تعطي الأولوية لاختيار QueryNodes من مجموعة الموارد <strong>_pending_nodes</strong>. يمكن الحصول على هذه المعلومات من خلال واجهة برمجة التطبيقات <code translate="no">describe_resource_group</code>. تحقيق هدف التوسع في مجموعة الموارد المحددة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({

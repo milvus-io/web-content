@@ -78,7 +78,22 @@ summary: >-
 <li><p>儲存原始文字文件的<code translate="no">VARCHAR</code> 欄位，其<code translate="no">enable_analyzer</code> 屬性設定為<code translate="no">True</code> 。這可讓 Milvus 將文字標記化為特定詞彙，以便進行功能處理。</p></li>
 <li><p>預留一個<code translate="no">SPARSE_FLOAT_VECTOR</code> 欄位，用來儲存 Milvus 會自動為<code translate="no">VARCHAR</code> 欄位產生的稀疏嵌入。</p></li>
 </ul>
-<h3 id="Define-the-collection-schema" class="common-anchor-header">定義集合模式</h3><p>首先，建立模式並新增必要的欄位：</p>
+<h3 id="Define-the-collection-schema" class="common-anchor-header">定義集合模式<button data-href="#Define-the-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>首先，建立模式並新增必要的欄位：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
@@ -209,8 +224,8 @@ schema.WithField(entity.NewField().
 <p>在此設定中、</p>
 <ul>
 <li><p><code translate="no">id</code>:作為主索引鍵，並由<code translate="no">auto_id=True</code> 自動產生。</p></li>
-<li><p><code translate="no">text</code>: 儲存您的原始文字資料，用於全文檢索作業。資料類型必須是<code translate="no">VARCHAR</code> ，因為<code translate="no">VARCHAR</code> 是 Milvus 用來儲存文字的字串資料類型。設定<code translate="no">enable_analyzer=True</code> 以允許 Milvus 對文字進行 tokenize。預設情況下，Milvus 使用<code translate="no">standard</code><a href="/docs/zh-hant/standard-analyzer.md"> 分析器</a>進行文字分析。要設定不同的分析器，請參閱<a href="/docs/zh-hant/analyzer-overview.md">分析器總覽</a>。</p></li>
-<li><p><code translate="no">sparse</code>資料類型：預留向量欄位，用於儲存內部產生的稀疏嵌入，以進行全文檢索作業。資料類型必須是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
+<li><p><code translate="no">text</code>: 儲存您的原始文字資料，用於全文檢索作業。資料類型必須是<code translate="no">VARCHAR</code> ，因為<code translate="no">VARCHAR</code> 是 Milvus 用來儲存文字的字串資料類型。設定<code translate="no">enable_analyzer=True</code> 以允許 Milvus 對文字進行 tokenize。預設情況下，Milvus 使用 <a href="/docs/zh-hant/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/zh-hant/standard-analyzer.md"> 分析器</a>進行文字分析。若要設定不同的分析器，請參考<a href="/docs/zh-hant/analyzer-overview.md">分析器總覽</a>。</p></li>
+<li><p><code translate="no">sparse</code>資料類型：預留向量欄位，以儲存內部產生的稀疏嵌入，用於全文檢索作業。資料類型必須是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 </ul>
 <p>現在，定義一個函式，將您的文字轉換為稀疏向量表示，然後將其加入模式：</p>
 <div class="multipleCode">
@@ -312,7 +327,22 @@ schema.WithFunction(function)
 <div class="alert note">
 <p>對於具有多個<code translate="no">VARCHAR</code> 欄位、需要將文字轉換為稀疏向量的資料集，請在資料集模式中加入不同的函式，確保每個函式都有唯一的名稱和<code translate="no">output_field_names</code> 值。</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">設定索引</h3><p>在定義包含必要欄位和內建函式的模式後，為您的集合設定索引。為了簡化這個過程，請使用<code translate="no">AUTOINDEX</code> 作為<code translate="no">index_type</code> ，這個選項允許 Milvus 根據您的資料結構來選擇和設定最適合的索引類型。</p>
+<h3 id="Configure-the-index" class="common-anchor-header">設定索引<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在定義包含必要欄位和內建函式的模式後，為您的集合設定索引。為了簡化這個過程，請使用<code translate="no">AUTOINDEX</code> 作為<code translate="no">index_type</code> ，這個選項允許 Milvus 根據您的資料結構來選擇和設定最適合的索引類型。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -333,9 +363,9 @@ index_params.add_index(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-fvParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
-fvParams.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
-fvParams.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+params.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+params.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+params.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
 
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
@@ -400,12 +430,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>用於建立和查詢索引的演算法。有效值：</p>
-<ul>
-<li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設）：使用 MaxScore 演算法的最佳化 Document-at-a-Time (DAAT) 查詢處理。MaxScore 透過跳過可能影響最小的詞彙和文件，為高<em>k</em>值或包含許多詞彙的查詢提供更好的效能。為了達到這個目的，MaxScore 會根據最大影響分數，將詞彙分為必要和非必要兩組，並將重點放在對 top-k 結果有貢獻的詞彙上。</p></li>
-<li><p><code translate="no">"DAAT_WAND"</code>:使用 WAND 演算法優化 DAAT 查詢處理。WAND 利用最大影響分數跳過非競爭性文件，評估較少的命中文件，但每次命中的開銷較高。這使得 WAND 對於<em>k</em>值較小的查詢或較短的查詢更有效率，在這些情況下跳過是較可行的。</p></li>
-<li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT) 查詢處理。雖然與<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比較慢，但<code translate="no">TAAT_NAIVE</code> 提供了獨特的優勢。DAAT 演算法使用快取的最大影響分數，不論全域集合參數 (avgdl) 如何改變，這些分數都會保持靜態，而<code translate="no">TAAT_NAIVE</code> 則不同，它會動態適應這些變化。</p></li>
-</ul></td>
+     <td><p>用於建立和查詢索引的演算法。有效值：</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (預設）：使用 MaxScore 演算法的最佳化 Document-at-a-Time (DAAT) 查詢處理。MaxScore 透過跳過可能影響最小的詞彙和文件，為高<em>k</em>值或包含許多詞彙的查詢提供更好的效能。為了達到這個目的，MaxScore 會根據最大影響分數，將詞彙分為必要和非必要兩組，並將重點放在對 top-k 結果有貢獻的詞彙上。</p></li><li><p><code translate="no">"DAAT_WAND"</code>:使用 WAND 演算法優化 DAAT 查詢處理。WAND 利用最大影響分數跳過非競爭性文件，評估較少的命中文件，但每次命中的開銷較高。這使得 WAND 對於<em>k</em>值較小的查詢或較短的查詢更有效率，在這些情況下跳過是較可行的。</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>:Basic Term-at-a-Time (TAAT) 查詢處理。雖然與<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比較慢，但<code translate="no">TAAT_NAIVE</code> 提供了獨特的優勢。DAAT 演算法使用快取的最大影響分數，不論全域集合參數 (avgdl) 如何變更，這些分數都會保持靜態，而<code translate="no">TAAT_NAIVE</code> 則不同，它會動態適應這些變更。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -413,10 +438,25 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
-     <td><p>控制文件長度規範化的程度。通常使用介於 0 和 1 之間的值，一般預設值約為 0.75。值為 1 表示不進行長度規範化，而值為 0 則表示完全規範化。</p></td>
+     <td><p>控制文件長度的規範化程度。通常使用介於 0 和 1 之間的值，一般預設值約為 0.75。值為 1 表示不進行長度規範化，而值為 0 則表示完全規範化。</p></td>
    </tr>
 </table>
-<h3 id="Create-the-collection" class="common-anchor-header">建立集合</h3><p>現在使用已定義的模式和索引參數建立集合。</p>
+<h3 id="Create-the-collection" class="common-anchor-header">建立集合<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>現在使用已定義的模式和索引參數建立集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -542,7 +582,7 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將資料插入資料庫後，您就可以使用原始文字查詢來執行全文檢索。Milvus 會自動將您的查詢轉換成稀疏向量，並使用 BM25 演算法將配對的搜尋結果排序，然後傳回 topK (<code translate="no">limit</code>) 結果。</p>
+    </button></h2><p>將資料插入資料庫後，您就可以使用原始文字查詢來執行全文檢索。Milvus 會自動將您的查詢轉換成稀疏向量，並使用 BM25 演算法對匹配的搜尋結果進行排序，然後傳回 topK (<code translate="no">limit</code>) 結果。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {
@@ -638,8 +678,12 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
      <td><p>搜尋時要忽略的低重要性詞彙比例。詳情請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p></td>
    </tr>
    <tr>
+     <td></td>
+     <td></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>自然語言的原始查詢文字。Milvus 使用 BM25 函式自動將您的文字查詢轉換成稀疏向量 -<strong>請勿</strong>提供預先計算的向量。</p></td>
+     <td><p>自然語言的原始查詢文字。Milvus 使用 BM25 函式自動將您的文字查詢轉換成稀疏向量 - 請勿提供預先計算的向量。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>
@@ -669,7 +713,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">我可以在全文檢索中輸出或存取 BM25 函式所產生的稀疏向量嗎？</h3><p>不可以，BM25 函式產生的稀疏向量無法直接在全文檢索中存取或輸出。以下是詳細資訊：</p>
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">我可以在全文檢索中輸出或存取 BM25 函式所產生的稀疏向量嗎？<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>不可以，BM25 函式產生的稀疏向量無法直接在全文檢索中存取或輸出。以下是詳細資訊：</p>
 <ul>
 <li><p>BM25 函式會在內部產生稀疏向量，用於排序和檢索</p></li>
 <li><p>這些向量會儲存在稀疏欄位中，但無法包含在<code translate="no">output_fields</code></p></li>
@@ -696,7 +755,22 @@ client.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">如果我不能存取稀疏向量欄位，為什麼我需要定義它？</h3><p>稀疏向量欄位作為內部搜尋索引，類似於使用者不會直接互動的資料庫索引。</p>
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">如果我無法存取稀疏向量欄位，為什麼我需要定義它？<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>稀疏向量欄位作為內部搜尋索引，類似於使用者不會直接互動的資料庫索引。</p>
 <p><strong>設計原理</strong>：</p>
 <ul>
 <li><p>關注點的分離：您處理文字 (輸入/輸出)，Milvus 處理向量 (內部處理)</p></li>

@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusではプライマリフィールドを除くスカラーフィールドに<code translate="no">nullable</code> 属性とデフォルト値を設定することができます。<code translate="no">nullable=True</code> とマークされたフィールドについては、データ挿入時にフィールドをスキップするか、直接NULL値に設定することができます。フィールドにデフォルト値がある場合、挿入時にフィールドにデータが指定されないと、システムは自動的にこの値を適用します。</p>
+    </button></h1><p>Milvusではプライマリフィールドを除くスカラーフィールドに<code translate="no">nullable</code> 属性とデフォルト値を設定することができます。<code translate="no">nullable=True</code> とマークされたフィールドについては、データ挿入時にそのフィールドをスキップするか、直接NULL値を設定することができます。フィールドにデフォルト値がある場合、挿入時にフィールドにデータが指定されないと、システムは自動的にこの値を適用します。</p>
 <p>デフォルト値とnullable属性は、null値を持つデータセットの取り扱いを可能にし、デフォルト値の設定を保持することで、他のデータベースシステムからmilvusへのデータ移行を合理化します。コレクションを作成する際、値が不明確なフィールドに対して、nullableを有効にしたり、デフォルト値を設定することもできます。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,9 +39,8 @@ summary: >-
     </button></h2><ul>
 <li><p>プライマリフィールドを除くスカラーフィールドのみが、デフォルト値とnullable属性をサポートしています。</p></li>
 <li><p>JSONフィールドと配列フィールドはデフォルト値をサポートしていません。</p></li>
-<li><p>デフォルト値または nullable 属性は、コレクション作成時にのみ設定でき、その後変更することはできません。</p></li>
-<li><p>nullable 属性が有効なスカラー・フィールドは、グループ化検索で<code translate="no">group_by_field</code> として使用できません。グループ化検索の詳細については、<a href="/docs/ja/grouping-search.md">グループ化検索を</a>参照してください。</p></li>
-<li><p>Nullableとマークされたフィールドはパーティション・キーとして使用できません。パーティション・キーの詳細については、「<a href="/docs/ja/use-partition-key.md">パーティション・キーの使用</a>」を参照してください。</p></li>
+<li><p>デフォルト値または nullable 属性は、コレクションの作成時にのみ設定でき、その後変更することはできません。</p></li>
+<li><p>nullable としてマークされたフィールドは、パーティション・キーとして使用できません。パーティション・キーの詳細は、"<a href="/docs/ja/use-partition-key.md">パーティション・キーの使用</a>" を参照してください。</p></li>
 <li><p>NULL可能属性を有効にしたスカラー・フィールドにインデックスを作成する場合、NULL値はインデックスから除外されます。</p></li>
 <li><p><strong>JSONフィールドとARRAYフィールド</strong>：JSONまたはARRAYフィールドのフィルタリングに<code translate="no">IS NULL</code> または<code translate="no">IS NOT NULL</code> 演算子を使用する場合、これらの演算子は列レベルで動作します。これは、JSONオブジェクトまたは配列全体がNULLであるかどうかだけを評価することを意味します。たとえば、JSONオブジェクト内のキーがNULLの場合、<code translate="no">IS NULL</code> のフィルタでは認識されません。詳細については、「<a href="/docs/ja/basic-operators.md">基本演算子</a>」を参照してください。</p></li>
 </ul>
@@ -61,7 +60,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><code translate="no">nullable</code> 属性を使用すると、NULL 値をコレクションに格納できるようになり、未知のデータを扱う際に柔軟性が生まれます。</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Nullable属性の設定</h3><p>コレクションを作成するとき、<code translate="no">nullable=True</code> を使用して nullable フィールドを定義します（デフォルトは<code translate="no">False</code> ）。次の例では、<code translate="no">my_collection</code> という名前のコレクションを作成し、<code translate="no">age</code> フィールドを nullable に設定しています：</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Nullable属性の設定<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクションを作成するとき、<code translate="no">nullable=True</code> を使用して nullable フィールドを定義します（デフォルトは<code translate="no">False</code> ）。次の例では、<code translate="no">my_collection</code> という名前のコレクションを作成し、<code translate="no">age</code> フィールドを nullable に設定しています：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -263,7 +277,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">エンティティの挿入</h3><p>ヌル可能フィールドにデータを挿入する場合は、ヌルを挿入するか、このフィールドを直接省略します：</p>
+<h3 id="Insert-entities" class="common-anchor-header">エンティティの挿入<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ヌル可能フィールドにデータを挿入する場合は、ヌルを挿入するか、このフィールドを直接省略します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -334,7 +363,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">ヌル値での検索とクエリ</h3><p><code translate="no">search</code> メソッドを使用する場合、フィールドに<code translate="no">null</code> 値が含まれていると、検索結果はそのフィールドを null として返します：</p>
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">ヌル値での検索とクエリ<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">search</code> メソッドを使用する場合、フィールドに<code translate="no">null</code> 値が含まれていると、検索結果はそのフィールドを null として返します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -554,7 +598,22 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
         ></path>
       </svg>
     </button></h2><p>デフォルト値は、スカラー・フィールドに割り当てられた事前設定値です。挿入時に既定値のあるフィールドに値を指定しないと、システムは自動的に既定値を使用します。</p>
-<h3 id="Set-default-values" class="common-anchor-header">デフォルト値の設定</h3><p>コレクションを作成するとき、<code translate="no">default_value</code> パラメータを使用してフィールドのデフォルト値を定義します。次の例は、<code translate="no">age</code> のデフォルト値を<code translate="no">18</code> に、<code translate="no">status</code> のデフォルト値を<code translate="no">&quot;active&quot;</code> に設定する方法を示しています：</p>
+<h3 id="Set-default-values" class="common-anchor-header">デフォルト値の設定<button data-href="#Set-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクションを作成するとき、<code translate="no">default_value</code> パラメータを使用してフィールドのデフォルト値を定義します。次の例は、<code translate="no">age</code> のデフォルト値を<code translate="no">18</code> に、<code translate="no">status</code> のデフォルト値を<code translate="no">&quot;active&quot;</code> に設定する方法を示しています：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
@@ -765,7 +824,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">エンティティの挿入</h3><p>データを挿入するとき、デフォルト値を持つフィールドを省略するか、その値をNULLに設定すると、システムはデフォルト値を使用します：</p>
+<h3 id="Insert-entities" class="common-anchor-header">エンティティの挿入<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>データを挿入するとき、デフォルト値を持つフィールドを省略するか、その値をNULLに設定すると、システムはデフォルト値を使用します：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -846,7 +920,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <div class="alert note">
 <p>nullable およびデフォルト値の設定がどのように有効になるかの詳細については、<a href="/docs/ja/nullable-and-default.md#Applicable-rules">適用可能な</a>ルールを参照してください。</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">デフォルト値を含む検索とクエリ</h3><p>デフォルト値を含むエンティティは、ベクトル検索およびスカラーフィルタリングで他のエンティティと同じように扱われます。デフォルト値は、<code translate="no">search</code> および<code translate="no">query</code> 操作の一部として含めることができます。</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">デフォルト値を含む検索とクエリ<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>デフォルト値を含むエンティティは、ベクトル検索およびスカラーフィルタリングで他のエンティティと同じように扱われます。デフォルト値は、<code translate="no">search</code> および<code translate="no">query</code> 操作の一部として含めることができます。</p>
 <p>たとえば、<code translate="no">search</code> の操作では、<code translate="no">age</code> がデフォルト値の<code translate="no">18</code> に設定されたエンティティが結果に含まれます：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -1057,7 +1146,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下の表は、異なる設定の組み合わせにおけるNULL可能なカラムとデフォルト値の振る舞いをまとめたものです。これらのルールは、ヌル値を挿入しようとした場合、またはフィールド値が提供されなかった場合にMilvusがどのようにデータを処理するかを決定します。</p>
+    </button></h2><p>以下の表は、異なる設定の組み合わせにおけるNULL可能なカラムとデフォルト値の振る舞いをまとめたものです。これらのルールは、NULL値を挿入しようとした場合、またはフィールド値が提供されなかった場合にMilvusがどのようにデータを処理するかを決定します。</p>
 <table>
    <tr>
      <th><p>ヌル可能</p></th>

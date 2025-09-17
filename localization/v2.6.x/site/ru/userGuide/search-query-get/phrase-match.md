@@ -79,7 +79,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Фразовое соответствие работает с типом поля <code translate="no">VARCHAR</code>, строковым типом данных в Milvus. Чтобы включить согласование фраз, настройте схему коллекции, установив для параметров <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> значение <code translate="no">True</code>, аналогичное параметру <a href="/docs/ru/keyword-match.md">text match</a>.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Установите <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code></h3><p>Чтобы включить согласование фраз для определенного поля <code translate="no">VARCHAR</code>, при определении схемы поля установите оба параметра <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> в значение <code translate="no">True</code>. Эта конфигурация указывает Milvus на токенизацию текста и создание инвертированного индекса с позиционной информацией, необходимой для эффективного сопоставления фраз.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Установите <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы включить согласование фраз для определенного поля <code translate="no">VARCHAR</code>, при определении схемы поля установите оба параметра <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> в значение <code translate="no">True</code>. Эта конфигурация указывает Milvus на токенизацию текста и создание инвертированного индекса с позиционной информацией, необходимой для эффективного сопоставления фраз.</p>
 <p>Вот пример определения схемы для включения функции поиска фраз:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -105,7 +120,22 @@ schema.add_field(
     dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Необязательно: Настроить анализатор</h3><p>Точность сопоставления фраз существенно зависит от анализатора, используемого для токенизации текстовых данных. Разные анализаторы подходят для разных языков и форматов текста, что влияет на точность токенизации и позиционирования. Выбор подходящего анализатора для конкретного случая использования позволит оптимизировать результаты сопоставления фраз.</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Необязательно: Настроить анализатор<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Точность сопоставления фраз существенно зависит от анализатора, используемого для токенизации текстовых данных. Разные анализаторы подходят для разных языков и форматов текста, что влияет на точность токенизации и позиционирования. Выбор подходящего анализатора для конкретного случая использования позволит оптимизировать результаты сопоставления фраз.</p>
 <p>По умолчанию в Milvus используется стандартный анализатор, который выполняет токенизацию текста с учетом пробелов и пунктуации, удаляет лексемы длиной более 40 символов и преобразует текст в строчные буквы. При использовании по умолчанию никаких дополнительных параметров не требуется. Подробнее см. в разделе <a href="/docs/ru/standard-analyzer.md">Стандартный анализатор</a>.</p>
 <p>Если вашему приложению требуется определенный анализатор, настройте его с помощью параметра <code translate="no">analyzer_params</code>. Например, здесь показано, как настроить анализатор <code translate="no">english</code> для поиска фраз в английском тексте:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
@@ -143,7 +173,22 @@ schema.add_field(
 <div class="alert note">
 <p>Выражение <code translate="no">PHRASE_MATCH</code> не зависит от регистра. Вы можете использовать либо <code translate="no">PHRASE_MATCH</code>, либо <code translate="no">phrase_match</code>.</p>
 </div>
-<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">Синтаксис выражения PHRASE_MATCH</h3><p>Используйте выражение <code translate="no">PHRASE_MATCH</code>, чтобы указать поле, фразу и необязательную гибкость (<code translate="no">slop</code>) при поиске. Синтаксис следующий:</p>
+<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">Синтаксис выражения PHRASE_MATCH<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Используйте выражение <code translate="no">PHRASE_MATCH</code>, чтобы указать поле, фразу и необязательную гибкость (<code translate="no">slop</code>) при поиске. Синтаксис следующий:</p>
 <pre><code translate="no" class="language-python">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -156,7 +201,22 @@ schema.add_field(
 <li><p><code translate="no">2</code>: Обеспечивает большую гибкость, включая обратный порядок терминов или до двух лексем между ними. Пример: Фильтр для <strong>"машинного обучения"</strong> будет соответствовать <strong>"обучающей машине"</strong> (термины перевернуты) или <strong>"машина быстро ускоряет обучение"</strong> (две лексемы между <strong>"машиной"</strong> и <strong>"обучением")</strong>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Example-dataset" class="common-anchor-header">Пример набора данных</h3><p>Предположим, у вас есть коллекция <strong>tech_articles</strong>, содержащая следующие пять сущностей:</p>
+<h3 id="Example-dataset" class="common-anchor-header">Пример набора данных<button data-href="#Example-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Предположим, у вас есть коллекция <strong>tech_articles</strong>, содержащая следующие пять сущностей:</p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -183,7 +243,22 @@ schema.add_field(
      <td><p>"Изучение передовых машинных алгоритмов расширяет возможности ИИ".</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">Запрос с фразовым соответствием</h3><p>При использовании метода <code translate="no">query()</code> <strong>PHRASE_MATCH</strong> действует как скалярный фильтр. Возвращаются только документы, содержащие указанную фразу (с учетом допустимого slop).</p>
+<h3 id="Query-with-phrase-match" class="common-anchor-header">Запрос с фразовым соответствием<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При использовании метода <code translate="no">query()</code> <strong>PHRASE_MATCH</strong> действует как скалярный фильтр. Возвращаются только документы, содержащие указанную фразу (с учетом допустимого slop).</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">Пример: slop = 0 (точное совпадение)</h4><p>В этом примере возвращаются документы, содержащие точную фразу <strong>"машинное обучение"</strong> без лишних лексем между ними.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -206,7 +281,22 @@ result = client.query(
    </tr>
 </table>
 <p>Только документ 1 содержит точную фразу <strong>"машинное обучение"</strong> в указанном порядке без дополнительных лексем.</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">Поиск с использованием фразового соответствия</h3><p>В операциях поиска <strong>PHRASE_MATCH</strong> используется для фильтрации документов перед применением ранжирования по векторному сходству. Этот двухэтапный подход сначала сужает набор кандидатов путем текстового соответствия, а затем переранжирует их на основе векторных вкраплений.</p>
+<h3 id="Search-with-phrase-match" class="common-anchor-header">Поиск с использованием фразового соответствия<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В операциях поиска <strong>PHRASE_MATCH</strong> используется для фильтрации документов перед применением ранжирования по векторному сходству. Этот двухэтапный подход сначала сужает набор кандидатов путем текстового соответствия, а затем переранжирует их на основе векторных вкраплений.</p>
 <h4 id="Example-slop--1" class="common-anchor-header">Пример: slop = 1</h4><p>Здесь мы допускаем значение slop = 1. Фильтр применяется к документам, содержащим фразу <strong>"обучающая машина"</strong>, с небольшой гибкостью.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>

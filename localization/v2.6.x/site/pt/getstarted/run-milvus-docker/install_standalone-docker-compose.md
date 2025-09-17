@@ -67,8 +67,15 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>O que há de novo na v2.6.0:</strong></p>
 <ul>
-<li><p>Se não conseguir executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se este for o caso, é aconselhável migrar para o Docker Compose V2 devido às notas nesta <a href="https://docs.docker.com/compose/">página</a>.</p></li>
+<li><strong>Arquitetura aprimorada</strong>: Apresenta o novo nó de streaming e componentes otimizados</li>
+<li><strong>Dependências atualizadas</strong>: Inclui as versões mais recentes do MinIO e do etcd</li>
+<li><strong>Configuração aprimorada</strong>: Configurações otimizadas para melhor desempenho</li>
+</ul>
+<p>Sempre baixe a configuração mais recente do Docker Compose para garantir a compatibilidade com os recursos da v2.6.0.</p>
+<ul>
+<li><p>Se você não conseguiu executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se este for o caso, é aconselhável migrar para o Docker Compose V2 devido às notas nesta <a href="https://docs.docker.com/compose/">página</a>.</p></li>
 <li><p>Se tiver algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e fornecer-lhe-emos o apoio necessário.</p></li>
 </ul>
 </div>
@@ -107,24 +114,20 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Para atualizar a configuração do Milvus de acordo com as suas necessidades, é necessário modificar o ficheiro <code translate="no">/milvus/configs/user.yaml</code> no contentor <code translate="no">milvus-standalone</code>.</p>
 <ol>
-<li>Aceda ao contentor <code translate="no">milvus-standalone</code>.</li>
-</ol>
+<li><p>Aceda ao contentor <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Adicione configurações adicionais para substituir as configurações padrão. A seguir, presume-se que você precisa substituir a configuração padrão <code translate="no">proxy.healthCheckTimeout</code>. Para obter os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">Configuração do sistema</a>.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Adicione configurações adicionais para substituir as configurações padrão. A seguir, presume-se que você precisa substituir a configuração padrão <code translate="no">proxy.healthCheckTimeout</code>. Para obter os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">Configuração do sistema</a>.</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>Reinicie o contentor <code translate="no">milvus-standalone</code> para aplicar as alterações.</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Reinicie o contentor <code translate="no">milvus-standalone</code> para aplicar as alterações.</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
-<button class="copy-code-btn"></button></code></pre>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Parar e eliminar o Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

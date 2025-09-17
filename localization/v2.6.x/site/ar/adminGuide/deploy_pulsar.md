@@ -36,14 +36,44 @@ summary: تعرّف على كيفية تكوين تخزين الرسائل با�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1. تكوين بولسار</h3><p>لتهيئة Pulsar مع Docker Compose، قم بتوفير القيم الخاصة بك للقسم <code translate="no">pulsar</code> في الملف <code translate="no">milvus.yaml</code> على مسار milvus/configs.</p>
+    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1. تكوين بولسار<button data-href="#1-Configure-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتهيئة Pulsar مع Docker Compose، قم بتوفير القيم الخاصة بك للقسم <code translate="no">pulsar</code> في الملف <code translate="no">milvus.yaml</code> على مسار milvus/configs.</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>راجع <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة بـ Pulsar</a> لمزيد من المعلومات.</p>
-<h3 id="2-Run-Milvus" class="common-anchor-header">2. تشغيل ميلفوس</h3><p>قم بتشغيل الأمر التالي لبدء تشغيل Milvus الذي يستخدم تكوينات Pulsar.</p>
+<h3 id="2-Run-Milvus" class="common-anchor-header">2. تشغيل ميلفوس<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتشغيل الأمر التالي لبدء تشغيل Milvus الذي يستخدم تكوينات Pulsar.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">لا تدخل التكوينات حيز التنفيذ إلا بعد بدء تشغيل ميلفوس. انظر <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">بدء تشغيل Milvus</a> لمزيد من المعلومات.</div>
@@ -64,7 +94,22 @@ summary: تعرّف على كيفية تكوين تخزين الرسائل با�
       </svg>
     </button></h2><p>بالنسبة لمجموعات Milvus على K8s، يمكنك تكوين Pulsar في نفس الأمر الذي يبدأ تشغيل Milvus. وبدلاً من ذلك، يمكنك تكوين Pulsar باستخدام الملف <code translate="no">values.yml</code> على المسار /charts/milvus في مستودع <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
 <p>للحصول على تفاصيل حول كيفية تكوين ملف Milvus باستخدام Helm، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm</a>. للحصول على تفاصيل حول عناصر التكوين المتعلقة بـ Pulsar، راجع <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة بـ Pulsar</a>. |</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">استخدام ملف YAML</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">استخدام ملف YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>قم بتكوين القسم <code translate="no">externalConfigFiles</code> في الملف <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -78,7 +123,84 @@ summary: تعرّف على كيفية تكوين تخزين الرسائل با�
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>بعد تهيئة الأقسام السابقة وحفظ الملف <code translate="no">values.yaml</code> ، قم بتشغيل الأمر التالي لتثبيت ملف Milvus الذي يستخدم تكوينات بولسار.</li>
+<li>بعد تكوين الأقسام السابقة وحفظ الملف <code translate="no">values.yaml</code> ، قم بتشغيل الأمر التالي لتثبيت ملف Milvus الذي يستخدم تكوينات Pulsar.</li>
+</ol>
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">تكوين Woodpecker مع Helm<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>بالنسبة لمجموعات ميلفوس على K8s، يمكنك تكوين Woodpecker في نفس الأمر الذي يبدأ تشغيل ميلفوس. وبدلاً من ذلك، يمكنك تكوين Woodpecker باستخدام الملف <code translate="no">values.yml</code> على المسار /charts/milvus في مستودع <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
+<p>للحصول على تفاصيل حول كيفية تكوين ميلفوس باستخدام Helm، راجع <a href="/docs/ar/configure-helm.md">تكوين ميلفوس باستخدام مخططات Helm</a>. للحصول على تفاصيل حول عناصر التكوين المتعلقة بنقار الخشب، ارجع إلى <a href="/docs/ar/use-woodpecker.md">تكوينات متعلقة بنقار الخشب</a>. |</p>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">استخدام ملف YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
+<li>قم بتكوين القسم <code translate="no">externalConfigFiles</code> في الملف <code translate="no">values.yaml</code>.</li>
+</ol>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    woodpecker:
+      meta:
+        type: etcd # The Type of the metadata provider. currently only support etcd.
+        prefix: woodpecker # The Prefix of the metadata provider. default is woodpecker.
+      client:
+        segmentAppend:
+          queueSize: 10000 # The size of the queue for pending messages to be sent of each log.
+          maxRetries: 3 # Maximum number of retries for segment append operations.
+        segmentRollingPolicy:
+          maxSize: 256M # Maximum size of a segment.
+          maxInterval: 10m # Maximum interval between two segments, default is 10 minutes.
+          maxBlocks: 1000 # Maximum number of blocks in a segment
+        auditor:
+          maxInterval: 10s # Maximum interval between two auditing operations, default is 10 seconds.
+      logstore:
+        segmentSyncPolicy:
+          maxInterval: 200ms # Maximum interval between two sync operations, default is 200 milliseconds.
+          maxIntervalForLocalStorage: 10ms # Maximum interval between two sync operations local storage backend, default is 10 milliseconds.
+          maxBytes: 256M # Maximum size of write buffer in bytes.
+          maxEntries: 10000 # Maximum entries number of write buffer.
+          maxFlushRetries: 5 # Maximum size of write buffer in bytes.
+          retryInterval: 1000ms # Maximum interval between two retries. default is 1000 milliseconds.
+          maxFlushSize: 2M # Maximum size of a fragment in bytes to flush.
+          maxFlushThreads: 32 # Maximum number of threads to flush data
+        segmentCompactionPolicy:
+          maxSize: 2M # The maximum size of the merged files.
+          maxParallelUploads: 4 # The maximum number of parallel upload threads for compaction.
+          maxParallelReads: 8 # The maximum number of parallel read threads for compaction.
+        segmentReadPolicy:
+          maxBatchSize: 16M # Maximum size of a batch in bytes.
+          maxFetchThreads: 32 # Maximum number of threads to fetch data.
+      storage:
+        type: minio # The Type of the storage provider. Valid values: [minio, local]
+        rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
+</span><button class="copy-code-btn"></button></code></pre>
+<ol start="2">
+<li>| بعد تكوين الأقسام السابقة وحفظ الملف <code translate="no">values.yaml</code> ، قم بتشغيل الأمر التالي لتثبيت ملف Milvus الذي يستخدم تكوينات Woodpecker.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -97,9 +219,24 @@ summary: تعرّف على كيفية تكوين تخزين الرسائل با�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالنسبة لمجموعات Milvus على K8s، يمكنك تكوين Kafka في نفس الأمر الذي يبدأ تشغيل Milvus. وبدلاً من ذلك، يمكنك تكوين كافكا باستخدام الملف <code translate="no">values.yml</code> على مسار /charts/milvus في مستودع <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
+    </button></h2><p>بالنسبة لمجموعات ميلفوس على K8s، يمكنك تكوين كافكا في نفس الأمر الذي يبدأ تشغيل ميلفوس. بدلاً من ذلك، يمكنك تهيئة كافكا باستخدام الملف <code translate="no">values.yml</code> على المسار /charts/milvus في مستودع <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
 <p>للحصول على تفاصيل حول كيفية تكوين ملف Milvus باستخدام Helm، راجع <a href="/docs/ar/configure-helm.md">تكوين ملف Milvus باستخدام مخططات Helm</a>. للحصول على تفاصيل حول عناصر التكوين المتعلقة بـ Pulsar، راجع <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة بـ Pulsar</a>.</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">استخدام ملف YAML</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">استخدام ملف YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>قم بتكوين القسم <code translate="no">externalConfigFiles</code> في الملف <code translate="no">values.yaml</code> إذا كنت تريد استخدام كافكا كنظام تخزين الرسائل.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -214,7 +351,7 @@ summary: تعرّف على كيفية تكوين تخزين الرسائل با�
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p><strong>الاختيار بين RocksMQ و NATS؟</strong></p>
-<p>يستخدم RocksMQ CGO للتفاعل مع RocksDB ويدير الذاكرة بنفسه، بينما يقوم NATS المدمج في تثبيت Milvus بتفويض إدارة الذاكرة إلى جامع القمامة الخاص بـ Go (GC).</p>
+<p>يستخدم RocksMQ CGO للتفاعل مع RocksDB ويدير الذاكرة بنفسه، بينما يقوم NATS المدمج في تثبيت Milvus بتفويض إدارة الذاكرة إلى جامع القمامة (GC) الخاص بـ Go.</p>
 <p>في السيناريو الذي تكون فيه حزمة البيانات أصغر من 64 كيلوبايت، يتفوق RocksDB من حيث استخدام الذاكرة واستخدام وحدة المعالجة المركزية ووقت الاستجابة. من ناحية أخرى، إذا كانت حزمة البيانات أكبر من 64 كيلوبايت، يتفوق NATS من حيث وقت الاستجابة مع وجود ذاكرة كافية وجدولة GC مثالية.</p>
 <p>في الوقت الحالي، يُنصح باستخدام NATS للتجارب فقط.</p>
 </div>

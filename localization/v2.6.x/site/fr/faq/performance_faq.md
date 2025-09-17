@@ -39,7 +39,7 @@ title: FAQ sur les performances
 <li><strong>Index INVERTED</strong>: Cet index est utile pour les expressions <code translate="no">IN</code> ou <code translate="no">==</code> sur les champs VARCHAR à clé non primaire.</li>
 <li><strong>Index Trie</strong>: Cet index est utile pour les requêtes de préfixe (par exemple, <code translate="no">LIKE prefix%</code>) sur des champs VARCHAR non primaires.</li>
 </ul>
-<p>Toutefois, l'indexation d'un champ VARCHAR n'accélère pas le processus :</p>
+<p>Cependant, l'indexation d'un champ VARCHAR n'accélère pas le processus :</p>
 <ul>
 <li><strong>Suppression par ID</strong>: lorsque le champ VARCHAR est la clé primaire.</li>
 <li><strong>Les expressions non liées</strong>: Lorsque le champ VARCHAR ne fait pas partie de l'expression de suppression.</li>
@@ -47,5 +47,5 @@ title: FAQ sur les performances
 <h4 id="Still-have-questions" class="common-anchor-header">Vous avez encore des questions ?</h4><p>Vous pouvez le faire :</p>
 <ul>
 <li>Consulter <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> sur GitHub. N'hésitez pas à poser des questions, à partager des idées et à aider les autres.</li>
-<li>Rejoignez notre <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canal Slack</a> pour trouver de l'aide et vous engager avec notre communauté open-source.</li>
+<li>Rejoignez notre <a href="https://discord.com/invite/8uyFbECzPX">canal Discord</a> pour trouver de l'aide et vous engager avec notre communauté open-source.</li>
 </ul>

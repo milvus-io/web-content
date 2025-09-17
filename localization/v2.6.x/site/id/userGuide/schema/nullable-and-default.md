@@ -46,7 +46,6 @@ summary: >-
 <li><p>Hanya bidang skalar, tidak termasuk bidang utama, yang mendukung nilai default dan atribut nullable.</p></li>
 <li><p>Bidang JSON dan Array tidak mendukung nilai default.</p></li>
 <li><p>Nilai default atau atribut nullable hanya dapat dikonfigurasikan selama pembuatan koleksi dan tidak dapat dimodifikasi setelahnya.</p></li>
-<li><p>Bidang skalar dengan atribut nullable yang diaktifkan tidak dapat digunakan sebagai <code translate="no">group_by_field</code> di Pencarian Pengelompokan. Untuk informasi lebih lanjut tentang pengelompokan pencarian, lihat Mengelompokkan <a href="/docs/id/grouping-search.md">Pencarian</a>.</p></li>
 <li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Untuk informasi lebih lanjut tentang kunci partisi, lihat <a href="/docs/id/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p></li>
 <li><p>Saat membuat indeks pada bidang skalar dengan atribut nullable diaktifkan, nilai nol akan dikecualikan dari indeks.</p></li>
 <li><p><strong>Bidang JSON dan ARRAY</strong>: Saat menggunakan operator <code translate="no">IS NULL</code> atau <code translate="no">IS NOT NULL</code> untuk memfilter bidang JSON atau ARRAY, operator ini bekerja pada tingkat kolom, yang mengindikasikan bahwa operator ini hanya mengevaluasi apakah seluruh objek JSON atau array bernilai nol. Misalnya, jika sebuah kunci di dalam objek JSON bernilai null, maka kunci tersebut tidak akan dikenali oleh filter <code translate="no">IS NULL</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/basic-operators.md">Operator Dasar</a>.</p></li>
@@ -67,7 +66,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Atribut <code translate="no">nullable</code> memungkinkan Anda menyimpan nilai null dalam koleksi, sehingga memberikan fleksibilitas saat menangani data yang tidak diketahui.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Mengatur atribut yang dapat dinolkan</h3><p>Saat membuat koleksi, gunakan <code translate="no">nullable=True</code> untuk menentukan bidang yang dapat dinullkan (defaultnya adalah <code translate="no">False</code>). Contoh berikut ini membuat koleksi bernama <code translate="no">my_collection</code> dan menetapkan field <code translate="no">age</code> sebagai nullable:</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Mengatur atribut yang dapat dinolkan<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Saat membuat koleksi, gunakan <code translate="no">nullable=True</code> untuk menentukan bidang yang dapat dinullkan (defaultnya adalah <code translate="no">False</code>). Contoh berikut ini membuat koleksi bernama <code translate="no">my_collection</code> dan menetapkan field <code translate="no">age</code> sebagai nullable:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -269,7 +283,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Menyisipkan entitas</h3><p>Ketika Anda menyisipkan data ke dalam bidang yang dapat dinullkan, sisipkan null atau hilangkan bidang ini secara langsung:</p>
+<h3 id="Insert-entities" class="common-anchor-header">Menyisipkan entitas<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ketika Anda menyisipkan data ke dalam bidang yang dapat dinullkan, sisipkan null atau hilangkan bidang ini secara langsung:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -340,7 +369,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">Pencarian dan kueri dengan nilai null</h3><p>Saat menggunakan metode <code translate="no">search</code>, jika sebuah bidang berisi nilai <code translate="no">null</code>, hasil pencarian akan mengembalikan bidang tersebut sebagai null:</p>
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">Pencarian dan kueri dengan nilai null<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Saat menggunakan metode <code translate="no">search</code>, jika sebuah bidang berisi nilai <code translate="no">null</code>, hasil pencarian akan mengembalikan bidang tersebut sebagai null:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -560,7 +604,22 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
         ></path>
       </svg>
     </button></h2><p>Nilai default adalah nilai yang telah ditetapkan sebelumnya yang ditetapkan ke bidang skalar. Jika Anda tidak memberikan nilai untuk sebuah bidang dengan nilai default saat penyisipan, sistem akan secara otomatis menggunakan nilai default.</p>
-<h3 id="Set-default-values" class="common-anchor-header">Mengatur nilai default</h3><p>Saat membuat koleksi, gunakan parameter <code translate="no">default_value</code> untuk menentukan nilai default untuk suatu bidang. Contoh berikut ini menunjukkan cara menetapkan nilai default dari <code translate="no">age</code> menjadi <code translate="no">18</code> dan <code translate="no">status</code> menjadi <code translate="no">&quot;active&quot;</code>:</p>
+<h3 id="Set-default-values" class="common-anchor-header">Mengatur nilai default<button data-href="#Set-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Saat membuat koleksi, gunakan parameter <code translate="no">default_value</code> untuk menentukan nilai default untuk suatu bidang. Contoh berikut ini menunjukkan cara menetapkan nilai default dari <code translate="no">age</code> menjadi <code translate="no">18</code> dan <code translate="no">status</code> menjadi <code translate="no">&quot;active&quot;</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
@@ -771,7 +830,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Menyisipkan entitas</h3><p>Saat menyisipkan data, jika Anda menghilangkan bidang dengan nilai default atau menyetel nilainya menjadi nol, sistem akan menggunakan nilai default:</p>
+<h3 id="Insert-entities" class="common-anchor-header">Menyisipkan entitas<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Saat menyisipkan data, jika Anda menghilangkan bidang dengan nilai default atau menyetel nilainya menjadi nol, sistem akan menggunakan nilai default:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -852,7 +926,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <div class="alert note">
 <p>Untuk informasi lebih lanjut tentang bagaimana pengaturan nilai nol dan nilai default berlaku, lihat <a href="/docs/id/nullable-and-default.md#Applicable-rules">Aturan yang berlaku</a>.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Pencarian dan kueri dengan nilai default</h3><p>Entitas yang berisi nilai default diperlakukan sama seperti entitas lain selama pencarian vektor dan pemfilteran skalar. Anda dapat menyertakan nilai default sebagai bagian dari operasi <code translate="no">search</code> dan <code translate="no">query</code>.</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Pencarian dan kueri dengan nilai default<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Entitas yang berisi nilai default diperlakukan sama seperti entitas lain selama pencarian vektor dan pemfilteran skalar. Anda dapat menyertakan nilai default sebagai bagian dari operasi <code translate="no">search</code> dan <code translate="no">query</code>.</p>
 <p>Sebagai contoh, dalam operasi <code translate="no">search</code>, entitas dengan <code translate="no">age</code> yang disetel ke nilai default <code translate="no">18</code> akan disertakan dalam hasil:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -1068,7 +1157,7 @@ curl --request POST \
    <tr>
      <th><p>Nullable</p></th>
      <th><p>Nilai Default</p></th>
-     <th><p>Tipe Nilai Default</p></th>
+     <th><p>Jenis Nilai Default</p></th>
      <th><p>Masukan Pengguna</p></th>
      <th><p>Hasil</p></th>
      <th><p>Contoh</p></th>

@@ -57,7 +57,22 @@ title: Jalankan Milvus di Docker (Linux)
         ></path>
       </svg>
     </button></h2><p>Milvus menyediakan skrip instalasi untuk menginstalnya sebagai kontainer Docker. Setelah Anda menginstal Docker Desktop pada Microsoft Windows, Anda dapat mengakses Docker CLI dari PowerShell atau Windows Command Prompt dalam mode <strong>administrator</strong> dan dari WSL 2. </p>
-<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Dari PowerShell atau Windows Command Prompt</h3><p>Jika Anda lebih akrab dengan PowerShell atau Windows Command Prompt, prompt perintahnya adalah sebagai berikut.</p>
+<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Dari PowerShell atau Windows Command Prompt<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda lebih akrab dengan PowerShell atau Windows Command Prompt, prompt perintahnya adalah sebagai berikut.</p>
 <ol>
 <li><p>Buka Desktop Docker dalam mode administrator dengan mengeklik kanan dan memilih Jalankan <strong>sebagai administrator</strong>.</p></li>
 <li><p>Unduh skrip instalasi dan simpan sebagai <code translate="no">standalone.bat</code>.</p>
@@ -89,7 +104,22 @@ Delete successfully. # Data has been removed.​
 
 </code></pre></li>
 </ol>
-<h3 id="From-WSL-2​" class="common-anchor-header">Dari WSL 2</h3><p>Jika Anda lebih suka memulai Milvus menggunakan perintah Linux dan skrip shell pada Windows, pastikan bahwa Anda sudah menginstal perintah WSL 2. Untuk detail tentang cara menginstal perintah WSL 2, Anda dapat merujuk ke <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">artikel Microsoft</a> ini.</p>
+<h3 id="From-WSL-2​" class="common-anchor-header">Dari WSL 2<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda lebih suka memulai Milvus menggunakan perintah Linux dan skrip shell pada Windows, pastikan bahwa Anda sudah menginstal perintah WSL 2. Untuk detail tentang cara menginstal perintah WSL 2, Anda dapat merujuk ke <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">artikel Microsoft</a> ini.</p>
 <ol>
 <li><p>Mulai WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -140,11 +170,26 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h2><p>Setelah Anda menginstal Docker Desktop pada Microsoft Windows, Anda dapat mengakses CLI Docker dari PowerShell atau Command Prompt Windows dalam mode <strong>administrator</strong>. Anda dapat menjalankan Docker Compose baik di PowerShell, Windows Command Prompt, atau WSL 2 untuk memulai Milvus.</p>
-<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Dari PowerShell atau Windows Command Prompt</h3><ol>
+<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Dari PowerShell atau Windows Command Prompt<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p>Buka Docker Desktop dalam mode administrator dengan mengeklik kanan dan memilih <strong>Run as administrator</strong>.</p></li>
 <li><p>Jalankan perintah berikut ini di PowerShell atau Windows Command Prompt untuk mengunduh berkas konfigurasi Docker Compose untuk Milvus Standalone dan memulai Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -161,7 +206,22 @@ Creating milvus-standalone ... done​
 </ul></li>
 </ol>
 <p>Anda juga dapat memanggil perintah Docker Compose versi Linux jika Anda telah menginstal WSL 2.</p>
-<h3 id="From-WSL-2​" class="common-anchor-header">Dari WSL 2</h3><p>Prosedurnya serupa dengan menggunakan Docker Compose untuk menginstal Milvus di sistem Linux.</p>
+<h3 id="From-WSL-2​" class="common-anchor-header">Dari WSL 2<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prosedurnya serupa dengan menggunakan Docker Compose untuk menginstal Milvus di sistem Linux.</p>
 <ol>
 <li><p>Mulai WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -170,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Unduh berkas konfigurasi Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Mulai Milvus.</p>
@@ -197,7 +257,22 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header">Bagaimana cara mengatasi kesalahan <code translate="no">Docker Engine stopped</code>?</h3><p>Setelah Anda menginstal Docker Desktop pada Windows, Anda mungkin mengalami kesalahan <code translate="no">Docker Engine stopped</code> jika komputer Anda tidak terkonfigurasi dengan benar. Dalam kasus ini, Anda mungkin perlu melakukan pemeriksaan berikut.</p>
+    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header">Bagaimana cara mengatasi kesalahan <code translate="no">Docker Engine stopped</code>?<button data-href="#How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah Anda menginstal Docker Desktop pada Windows, Anda mungkin mengalami kesalahan <code translate="no">Docker Engine stopped</code> jika komputer Anda tidak terkonfigurasi dengan benar. Dalam kasus ini, Anda mungkin perlu melakukan pemeriksaan berikut.</p>
 <ol>
 <li><p>Periksa apakah virtualisasi diaktifkan.</p>
 <p>Anda dapat memeriksa apakah virtualisasi telah diaktifkan dengan melihat tab <strong>Performa</strong> di <strong>Task Manager</strong>.</p>
@@ -235,7 +310,22 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
    </span> <span class="img-wrapper"> <span>Memulai Docker Desktop sebagai Administrator</span> </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">Bagaimana cara mengatasi masalah terkait WSL saat men-deploy Milvus?</h3><p>Jika Anda mengalami masalah terkait WSL saat menjalankan Milvus dari WSL 2, Anda mungkin perlu memeriksa apakah Anda telah mengonfigurasi Docker Desktop untuk menggunakan mesin berbasis WSL 2 sebagai berikut.</p>
+<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">Bagaimana cara mengatasi masalah terkait WSL saat men-deploy Milvus?<button data-href="#How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Jika Anda mengalami masalah terkait WSL saat menjalankan Milvus dari WSL 2, Anda mungkin perlu memeriksa apakah Anda telah mengonfigurasi Docker Desktop untuk menggunakan mesin berbasis WSL 2 sebagai berikut.</p>
 <ol>
 <li><p>Pastikan bahwa "Gunakan mesin berbasis WSL 2" dicentang di <strong>Pengaturan</strong> &gt; <strong>Umum</strong>. </p>
 <p>
@@ -248,7 +338,22 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Pilih distribusi WSL 2 di Pengaturan Desktop Docker</span> </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Bagaimana cara menangani kesalahan terkait volume yang muncul selama startup Milvus yang berbunyi <code translate="no">Read config failed</code>?</h3><p>
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Bagaimana cara menangani kesalahan terkait volume yang muncul selama startup Milvus yang berbunyi <code translate="no">Read config failed</code>?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Prompt kesalahan baca konfigurasi gagal saat pengaktifan Milvus</span> </span></p>

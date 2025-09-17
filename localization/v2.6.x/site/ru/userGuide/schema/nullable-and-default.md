@@ -3,7 +3,7 @@ id: nullable-and-default.md
 title: Nullable & Default
 summary: >-
   Milvus позволяет установить атрибут nullable и значения по умолчанию для
-  скалярных полей, за исключением первичного поля. Для полей, отмеченных как
+  скалярных полей, за исключением первичного поля. Для полей, помеченных как
   nullable=True, вы можете пропустить поле при вставке данных или установить для
   него прямое нулевое значение, и система будет воспринимать его как нулевое, не
   вызывая ошибки. Если поле имеет значение по умолчанию, система автоматически
@@ -45,8 +45,7 @@ summary: >-
 <li><p>Только скалярные поля, за исключением первичного поля, поддерживают значения по умолчанию и атрибут nullable.</p></li>
 <li><p>Поля JSON и Array не поддерживают значения по умолчанию.</p></li>
 <li><p>Значения по умолчанию или атрибут nullable можно настроить только при создании коллекции и не изменять после этого.</p></li>
-<li><p>Скалярные поля с включенным атрибутом nullable нельзя использовать в качестве <code translate="no">group_by_field</code> в группировочном поиске. Дополнительные сведения о группировочном поиске см. в разделе <a href="/docs/ru/grouping-search.md">Группировочный поиск</a>.</p></li>
-<li><p>Поля, помеченные как nullable, нельзя использовать в качестве ключей разделов. Дополнительные сведения о ключах разделов см. в разделе <a href="/docs/ru/use-partition-key.md">Использование ключей разделов</a>.</p></li>
+<li><p>Поля, помеченные как nullable, нельзя использовать в качестве ключей разделов. Дополнительные сведения о ключах разделов см. в разделе <a href="/docs/ru/use-partition-key.md">Использование ключа раздела</a>.</p></li>
 <li><p>При создании индекса по скалярному полю с включенным атрибутом nullable нулевые значения будут исключены из индекса.</p></li>
 <li><p><strong>Поля JSON и ARRAY</strong>: При использовании операторов <code translate="no">IS NULL</code> или <code translate="no">IS NOT NULL</code> для фильтрации полей JSON или ARRAY эти операторы работают на уровне столбцов, что означает, что они оценивают только то, является ли весь объект JSON или массив нулевым. Например, если ключ внутри объекта JSON равен null, он не будет распознан фильтром <code translate="no">IS NULL</code>. Дополнительную информацию см. в разделе <a href="/docs/ru/basic-operators.md">Основные операторы</a>.</p></li>
 </ul>
@@ -66,7 +65,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Атрибут <code translate="no">nullable</code> позволяет хранить в коллекции нулевые значения, обеспечивая гибкость при работе с неизвестными данными.</p>
-<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Установка атрибута nullable</h3><p>При создании коллекции используйте <code translate="no">nullable=True</code> для определения полей с нулевыми значениями (по умолчанию используется <code translate="no">False</code>). Следующий пример создает коллекцию с именем <code translate="no">my_collection</code> и устанавливает поле <code translate="no">age</code> как nullable:</p>
+<h3 id="Set-the-nullable-attribute" class="common-anchor-header">Установка атрибута nullable<button data-href="#Set-the-nullable-attribute" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При создании коллекции используйте <code translate="no">nullable=True</code> для определения полей с нулевыми значениями (по умолчанию используется <code translate="no">False</code>). Следующий пример создает коллекцию с именем <code translate="no">my_collection</code> и устанавливает поле <code translate="no">age</code> как nullable:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -268,7 +282,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Вставка сущностей</h3><p>При вставке данных в поле с нулевым значением вставьте null или непосредственно опустите это поле:</p>
+<h3 id="Insert-entities" class="common-anchor-header">Вставка сущностей<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При вставке данных в поле с нулевым значением вставьте null или непосредственно опустите это поле:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -339,7 +368,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values" class="common-anchor-header">Поиск и запрос с нулевыми значениями</h3><p>При использовании метода <code translate="no">search</code>, если поле содержит значения <code translate="no">null</code>, результат поиска вернет поле как null:</p>
+<h3 id="Search-and-query-with-null-values" class="common-anchor-header">Поиск и запрос с нулевыми значениями<button data-href="#Search-and-query-with-null-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При использовании метода <code translate="no">search</code>, если поле содержит значения <code translate="no">null</code>, результат поиска вернет поле как null:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -559,7 +603,22 @@ fmt.Println(<span class="hljs-string">&quot;age: &quot;</span>, resultSet.GetCol
         ></path>
       </svg>
     </button></h2><p>Значения по умолчанию - это предустановленные значения, присваиваемые скалярным полям. Если при вставке вы не указываете значение для поля, имеющего значение по умолчанию, система автоматически использует значение по умолчанию.</p>
-<h3 id="Set-default-values" class="common-anchor-header">Установка значений по умолчанию</h3><p>При создании коллекции используйте параметр <code translate="no">default_value</code>, чтобы задать значение по умолчанию для поля. В следующем примере показано, как установить значение по умолчанию для <code translate="no">age</code> на <code translate="no">18</code> и <code translate="no">status</code> на <code translate="no">&quot;active&quot;</code>:</p>
+<h3 id="Set-default-values" class="common-anchor-header">Установка значений по умолчанию<button data-href="#Set-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При создании коллекции используйте параметр <code translate="no">default_value</code>, чтобы задать значение по умолчанию для поля. В следующем примере показано, как установить значение по умолчанию для <code translate="no">age</code> на <code translate="no">18</code> и <code translate="no">status</code> на <code translate="no">&quot;active&quot;</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(
@@ -770,7 +829,22 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Вставка сущностей</h3><p>При вставке данных, если вы опустите поля со значением по умолчанию или установите для них значение null, система будет использовать значение по умолчанию:</p>
+<h3 id="Insert-entities" class="common-anchor-header">Вставка сущностей<button data-href="#Insert-entities" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При вставке данных, если вы опустите поля со значением по умолчанию или установите для них значение null, система будет использовать значение по умолчанию:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -851,7 +925,22 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <div class="alert note">
 <p>Дополнительные сведения о том, как вступают в силу параметры nullable и значения по умолчанию, см. в разделе <a href="/docs/ru/nullable-and-default.md#Applicable-rules">Применимые правила</a>.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Поиск и запрос со значениями по умолчанию</h3><p>Сущности, содержащие значения по умолчанию, при векторном поиске и скалярной фильтрации обрабатываются так же, как и любые другие сущности. Значения по умолчанию можно включать в операции <code translate="no">search</code> и <code translate="no">query</code>.</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Поиск и запрос со значениями по умолчанию<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Сущности, содержащие значения по умолчанию, при векторном поиске и скалярной фильтрации обрабатываются так же, как и любые другие сущности. Значения по умолчанию можно включать в операции <code translate="no">search</code> и <code translate="no">query</code>.</p>
 <p>Например, при операции <code translate="no">search</code> в результаты будут включены сущности, у которых для <code translate="no">age</code> установлено значение по умолчанию <code translate="no">18</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

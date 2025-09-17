@@ -92,15 +92,18 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>線形減衰は、正確にゼロに達するまで一定の割合で減少する直線的なドロップを作成します。このパターンは、カウントダウンタイマー、在庫の枯渇、関連性に明確な有効期限がある期限アプローチなど、多くの日常的なシナリオに現れます。</p>
+    </button></h2><p>線形減衰は、正確にゼロに達するまで一定の割合で減少する直線的なドロップを作成します。このパターンは、カウントダウンタイマー、在庫の枯渇、関連性に明確な期限がある期限アプローチなど、多くの日常的なシナリオに現れる。</p>
+<div class="alert note">
+<p>すべての時間パラメータ (<code translate="no">origin</code>,<code translate="no">offset</code>,<code translate="no">scale</code>) は、コレクションデータと同じ単位を使用する必要があります。コレクションが異なる単位(ミリ秒、マイクロ秒)でタイムスタンプを保存する場合、すべてのパラメータをそれに応じて調整します。</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
    </span> <span class="img-wrapper"> <span>線形減衰</span> </span></p>
-<p>上のグラフは、線形減衰がチケット販売プラットフォームのイベントリストにどのような影響を与えるかを示しています：</p>
+<p>上のグラフは、線形減衰がチケット販売プラットフォームのイベントリストにどのように影響するかを示しています：</p>
 <ul>
-<li><p><code translate="no">origin</code> (現在の日付）：現在の日付）：関連性が最大（1.0）である現時点。</p></li>
-<li><p><code translate="no">offset</code> (1日）：(1日): "直近のイベントウィンドウ"-翌日以内に開催されるすべてのイベントは、関連性のスコア(1.0)を維持し、非常に差し迫ったイベントがわずかな時間差でペナルティを受けないようにします。</p></li>
+<li><p><code translate="no">origin</code> (現在の日付）：現在の日付）：関連性が最大（1.0）になる現在。</p></li>
+<li><p><code translate="no">offset</code> (1日）：(1日): "直近のイベントウィンドウ"-翌日中に開催されるすべてのイベントは、関連性のスコア(1.0)を維持し、非常に差し迫ったイベントがわずかな時間差でペナルティを受けないようにします。</p></li>
 <li><p><code translate="no">decay</code> (0.5):このパラメータは関連性の低下率をコントロールします。</p></li>
 <li><p><code translate="no">scale</code> (10日）：関連性が減衰値まで低下する期間。10日先のイベントの関連性スコアは半分（0.5）になる。</p></li>
 </ul>
@@ -153,7 +156,25 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>減衰関数を使用する前に、まず減衰計算に使用する適切な数値フィールド（タイムスタンプ、距離など）を持つコレクションを作成する必要があります。コレクションのセットアップ、スキーマ定義、データ挿入を含む完全な作業例については、<a href="/docs/ja/tutorial-implement-a-time-based-ranking-in-milvus.md">ディケイランカーチュートリアルを</a>参照してください。</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">ディケイランカーの作成</h3><p>コレクションを数値フィールド（この例では、<code translate="no">event_date</code> as seconds from now）でセットアップした後、線形ディケイランカーを作成します：</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">ディケイランカーの作成<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>コレクションに数値フィールド（この例では、<code translate="no">event_date</code> as seconds from now）を設定したら、線形ディケイランカーを作成します：</p>
+<div class="alert note">
+<p><strong>時間単位の一貫性</strong>時間ベースのディケイを使用する場合、<code translate="no">origin</code> 、<code translate="no">scale</code> 、<code translate="no">offset</code> パラメータがコレクションデータと同じ時間単位を使用していることを確認します。コレクションがタイムスタンプを秒単位で保存する場合、すべてのパラメータに秒を使用します。ミリ秒を使用する場合は、すべてのパラメータにミリ秒を使用する。</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> time
 
@@ -161,6 +182,7 @@ beta: Milvus 2.6.x
 current_time = <span class="hljs-built_in">int</span>(time.time())
 
 <span class="hljs-comment"># Create a linear decay ranker for event listings</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;event_relevance&quot;</span>,               <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;event_date&quot;</span>],     <span class="hljs-comment"># Numeric field to use</span>
@@ -168,14 +190,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;linear&quot;</span>,             <span class="hljs-comment"># Choose linear decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル検索に適用</h3><p>ディケイランカを定義した後、<code translate="no">ranker</code> パラメータに渡すことで、検索操作中に適用することができます：</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル検索への適用<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ディケイランカーを定義した後、<code translate="no">ranker</code> パラメータに渡すことで、検索操作中に適用することができます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -187,7 +224,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用</h3><p>ディケイランカーは複数のベクトル場を組み合わせたハイブリッド検索操作にも適用できます：</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ディケイランカーは複数のベクトルフィールドを組み合わせたハイブリッド検索操作にも適用できます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

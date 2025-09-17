@@ -23,12 +23,8 @@ title: Docker Composeを使用したMilvusスタンドアロンのアップグ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、Docker Composeを使用してMilvusをアップグレードする方法について説明します。</p>
-<p>通常の場合、<a href="#Upgrade-Milvus-by-changing-its-image">イメージを変更することでMilvusをアップグレードする</a>ことができます。ただし、v2.1.xからv2.6.0へアップグレードする場合は、事前に<a href="#Migrate-the-metadata">メタデータを移行する</a>必要があります。</p>
-<div class="alter note">
-<p>セキュリティ上の問題から、Milvusはv2.2.5のリリースと同時にMinIOをRELEASE.2023-03-20T20-16-18Zにアップグレードしています。Docker Composeを使用してインストールされた以前のMilvus Standaloneリリースからのアップグレードの前に、Single-Node Single-Drive MinIOデプロイメントを作成し、既存のMinIO設定とコンテンツを新しいデプロイメントに移行する必要があります。詳細については、<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">このガイドを</a>参照してください。</p>
-</div>
-<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">イメージを変更してMilvusをアップグレードする<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
+    </button></h1><p>このガイドでは、Docker Composeを使用してMilvusスタンドアロンのデプロイメントをv2.5.xからv2.6.0にアップグレードする方法について説明します。</p>
+<h2 id="Before-you-start" class="common-anchor-header">始める前に<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,20 +39,140 @@ title: Docker Composeを使用したMilvusスタンドアロンのアップグ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>通常の場合、Milvusは次のようにアップグレードできます：</p>
+    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">v2.6.0の新機能<button data-href="#Whats-new-in-v260" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 2.5.xから2.6.0へのアップグレードには、アーキテクチャ上の大きな変更が含まれます：</p>
+<ul>
+<li><strong>コーディネータの統合</strong>：従来の別々のコーディネータ(<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code>)は1つに統合されました。<code translate="no">mixCoord</code></li>
+<li><strong>新しいコンポーネント</strong>データ処理強化のためのストリーミング・ノードの導入</li>
+<li><strong>コンポーネントの削除</strong>：<code translate="no">indexNode</code> を削除、統合</li>
+</ul>
+<p>このアップグレードプロセスにより、新アーキテクチャへの適切な移行が保証される。アーキテクチャ変更の詳細については、<a href="/docs/ja/architecture_overview.md">Milvusアーキテクチャ概要を</a>ご参照ください。</p>
+<h3 id="Requirements" class="common-anchor-header">要件<button data-href="#Requirements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>システム要件</strong></p>
+<ul>
+<li>DockerおよびDocker Composeのインストール</li>
+<li>Docker Compose経由でデプロイされたMilvusスタンドアロン</li>
+</ul>
+<p><strong>互換性要件</strong></p>
+<ul>
+<li>Milvus v2.6.0-rc1はv2.6.0と<strong>互換性がありません</strong>。リリース候補からの直接のアップグレードはサポートされていません。</li>
+<li>現在v2.6.0-rc1を使用しており、データを保持する必要がある場合は、<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">このコミュニティガイドを</a>参照して移行を支援してください。</li>
+<li>v2.6.0にアップグレードする前にv2.5.16以降にアップグレードする<strong>必要があります</strong>。</li>
+</ul>
+<div class="alter note">
+<p>Milvusはセキュリティ上の懸念から、v2.6.0のリリースと同時にMinIOをRELEASE.2024-12-18T13-15-44Zにアップグレードします。Docker Composeを使用してインストールされた以前のMilvus Standaloneリリースからのアップグレードの前に、Single-Node Single-Drive MinIOデプロイメントを作成し、既存のMinIO設定とコンテンツを新しいデプロイメントに移行する必要があります。詳細については、<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">このガイドを</a>参照してください。</p>
+</div>
+<h2 id="Upgrade-process" class="common-anchor-header">アップグレード手順<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">ステップ1: v2.5.16へのアップグレード<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="alert note">
+<p>スタンドアロン配置でv2.5.16以降がすでに実行されている場合は、この手順を飛ばし ます。</p>
+</div>
 <ol>
-<li><p><code translate="no">docker-compose.yaml</code> の Milvus イメージ タグを変更します。</p>
+<li><p>既存の<code translate="no">docker-compose.yaml</code> ファイルを編集し、Milvus イメージ タグを v2.5.16 に更新します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">standalone:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.16</span>
+<span class="hljs-string">...</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>v2.5.16へのアップグレードを適用します：</p>
+<pre><code translate="no" class="language-bash">docker compose down
+docker compose up -d
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>v2.5.16へのアップグレードを確認する：</p>
+<pre><code translate="no" class="language-bash">docker compose ps
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<h3 id="Step-2-Upgrade-to-v260" class="common-anchor-header">ステップ2: v2.6.0へのアップグレード<button data-href="#Step-2-Upgrade-to-v260" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>v2.5.16が正常に実行されたら、v2.6.0にアップグレードします：</p>
+<ol>
+<li><p>既存の<code translate="no">docker-compose.yaml</code> ファイルを編集し、Milvus と MinIO のイメージタグを更新します：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-minio</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">minio/minio:RELEASE.2024-12-18T13-15-44Z</span>
+
+<span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>以下のコマンドを実行してアップグレードを実行します。</p>
-<pre><code translate="no" class="language-shell">docker compose down
+<li><p>最終的なアップグレードを適用します：</p>
+<pre><code translate="no" class="language-bash">docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">メタデータの移行<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">アップグレードの確認<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,40 +187,13 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ol>
-<li><p>すべてのMilvusコンポーネントを停止する。</p>
-<pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>メタマイグレーション用の設定ファイル<code translate="no">migration.yaml</code> を準備する。</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
-<span class="hljs-attr">cmd:</span>
-  <span class="hljs-comment"># Option: run/backup/rollback</span>
-  <span class="hljs-attr">type:</span> <span class="hljs-string">run</span>
-  <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
-<span class="hljs-attr">config:</span>
-  <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.0</span>
-  <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
-<span class="hljs-attr">metastore:</span>
-  <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
-<span class="hljs-attr">etcd:</span>
-  <span class="hljs-attr">endpoints:</span>
-    <span class="hljs-bullet">-</span> <span class="hljs-string">milvus-etcd:2379</span>  <span class="hljs-comment"># Use the etcd container name</span>
-  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">by-dev</span> <span class="hljs-comment"># The root path where data is stored in etcd</span>
-  <span class="hljs-attr">metaSubPath:</span> <span class="hljs-string">meta</span>
-  <span class="hljs-attr">kvSubPath:</span> <span class="hljs-string">kv</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>マイグレーションコンテナを実行します。</p>
-<pre><code translate="no"><span class="hljs-comment"># Suppose your docker-compose run with the default milvus network,</span>
-<span class="hljs-comment"># and you put migration.yaml in the same directory with docker-compose.yaml.</span>
-docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>新しいMilvusイメージでMilvusコンポーネントを再度起動する。</p>
-<pre><code translate="no" class="language-shell">// Run the following only after update the milvus image tag in the docker-compose.yaml
-docker compose down
-docker compose up -d
-<button class="copy-code-btn"></button></code></pre></li>
-</ol>
+    </button></h2><p>スタンドアロンで新しいバージョンが動作していることを確認します：</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check container status</span>
+docker compose ps
+
+<span class="hljs-comment"># Check Milvus version</span>
+docker compose logs standalone | grep <span class="hljs-string">&quot;version&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,12 +210,12 @@ docker compose up -d
         ></path>
       </svg>
     </button></h2><ul>
-<li>次の方法もご覧ください：<ul>
+<li>また、次の方法もご参照ください：<ul>
 <li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
 </ul></li>
-<li>クラウド上にクラスターをデプロイする準備ができている場合は、次の方法を参照してください：<ul>
+<li>クラウド上にクラスターをデプロイする準備ができましたら、以下の方法もご覧ください：<ul>
 <li><a href="/docs/ja/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
 <li><a href="/docs/ja/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/azure.md">Kubernetesを使用してMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>
 </ul>

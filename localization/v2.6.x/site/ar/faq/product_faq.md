@@ -120,5 +120,5 @@ value_set = <span class="hljs-built_in">set</span>()
 <h4 id="Still-have-questions" class="common-anchor-header">هل لا تزال لديك أسئلة؟</h4><p>يمكنك ذلك:</p>
 <ul>
 <li>تحقق من <a href="https://github.com/milvus-io/milvus/issues">ميلفوس</a> على GitHub. نرحب بك لطرح الأسئلة ومشاركة الأفكار ومساعدة الآخرين.</li>
-<li>انضم إلى <a href="https://slack.milvus.io/">مجتمع Slack</a> الخاص بنا للحصول على الدعم والتفاعل مع مجتمعنا مفتوح المصدر.</li>
+<li>انضم إلى <a href="https://discord.com/invite/8uyFbECzPX">قناة Discord</a> الخاصة بنا للحصول على الدعم والتفاعل مع مجتمعنا مفتوح المصدر.</li>
 </ul>

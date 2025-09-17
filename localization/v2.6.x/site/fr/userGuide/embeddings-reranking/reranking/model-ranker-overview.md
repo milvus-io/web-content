@@ -5,11 +5,11 @@ summary: >-
   La recherche vectorielle traditionnelle classe les résultats uniquement en
   fonction de la similarité mathématique, c'est-à-dire de la proximité des
   vecteurs dans un espace à haute dimension. Bien qu'efficace, cette approche
-  passe souvent à côté de la véritable pertinence sémantique. Pensez à la
-  recherche de "meilleures pratiques pour l'optimisation des bases de données" :
-  vous pourriez recevoir des documents à forte similarité vectorielle qui
-  mentionnent fréquemment ces termes, mais qui ne fournissent pas réellement de
-  stratégies d'optimisation exploitables.
+  passe souvent à côté de la véritable pertinence sémantique. Pensez à une
+  recherche sur les "meilleures pratiques pour l'optimisation des bases de
+  données" : vous pourriez recevoir des documents à forte similarité vectorielle
+  qui mentionnent fréquemment ces termes, mais qui ne fournissent pas réellement
+  de stratégies d'optimisation exploitables.
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">Aperçu de Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -97,7 +97,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus prend en charge les fournisseurs de services de modèle suivants pour le reclassement, chacun ayant des caractéristiques distinctes :</p>
+    </button></h2><p>Milvus prend en charge les fournisseurs de services de modèle suivants pour le reclassement, chacun présentant des caractéristiques distinctes :</p>
 <table>
    <tr>
      <th><p>Fournisseur</p></th>
@@ -127,11 +127,47 @@ beta: Milvus 2.6.x
 </ul></td>
      <td><p>Système de gestion de contenu nécessitant des capacités de reclassement efficaces avec des exigences standard</p></td>
    </tr>
+   <tr>
+     <td><p>Cohérence</p></td>
+     <td><p>Applications d'entreprise privilégiant la fiabilité et la facilité d'intégration</p></td>
+     <td><ul>
+<li><p>Fiabilité et évolutivité de niveau entreprise</p></li>
+<li><p>Service géré sans maintenance de l'infrastructure</p></li>
+<li><p>Capacités de relecture multilingue</p></li>
+<li><p>Limitation de la vitesse et gestion des erreurs intégrées</p></li>
+</ul></td>
+     <td><p>Plateforme de commerce électronique nécessitant une recherche à haute disponibilité avec des performances API constantes et des catalogues de produits multilingues</p></td>
+   </tr>
+   <tr>
+     <td><p>Voyage AI</p></td>
+     <td><p>Applications RAG avec des exigences spécifiques en matière de performance et de contexte</p></td>
+     <td><ul>
+<li><p>Modèles spécialement formés pour les tâches de reranking</p></li>
+<li><p>Contrôles granulaires de la troncature pour diverses longueurs de documents</p></li>
+<li><p>Inférence optimisée pour les charges de travail de production</p></li>
+<li><p>Variantes de modèles multiples (rerank-2, rerank-lite, etc.)</p></li>
+</ul></td>
+     <td><p>Base de données de recherche avec différentes longueurs de documents nécessitant un contrôle des performances très fin et une compréhension sémantique spécialisée</p></td>
+   </tr>
+   <tr>
+     <td><p>SiliconFlow</p></td>
+     <td><p>Applications traitant des documents longs avec des priorités de rentabilité</p></td>
+     <td><ul>
+<li><p>Traitement avancé des morceaux de documents avec chevauchement configurable</p></li>
+<li><p>Notation basée sur les morceaux (le morceau ayant obtenu la meilleure note représente le document)</p></li>
+<li><p>Prise en charge de divers modèles de reclassement</p></li>
+<li><p>Rentabilité grâce à des variantes du modèle standard et du modèle pro</p></li>
+</ul></td>
+     <td><p>Système de recherche de documentation technique traitant les manuels et documents longs qui nécessitent une segmentation intelligente et un contrôle des chevauchements.</p></td>
+   </tr>
 </table>
-<p>Pour des informations détaillées sur l'implémentation de chaque modèle de service, reportez-vous à la documentation correspondante :</p>
+<p>Pour des informations détaillées sur l'implémentation de chaque modèle de service, veuillez vous référer à la documentation correspondante :</p>
 <ul>
 <li><p><a href="/docs/fr/vllm-ranker.md">vLLM Ranker</a></p></li>
 <li><p><a href="/docs/fr/tei-ranker.md">TEI Ranker</a></p></li>
+<li><p><a href="/docs/fr/cohere-ranker.md">Cohere Ranker</a></p></li>
+<li><p><a href="/docs/fr/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
+<li><p><a href="/docs/fr/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">Mise en œuvre<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -148,14 +184,31 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Avant d'implémenter Model Ranker, assurez-vous d'avoir :</p>
+    </button></h2><p>Avant d'implémenter Model Ranker, assurez-vous que vous disposez des éléments suivants</p>
 <ul>
 <li><p>une collection Milvus avec un champ <code translate="no">VARCHAR</code> contenant le texte à reclasser</p></li>
-<li><p>Un service de modèle externe en cours d'exécution (vLLM ou TEI) accessible à votre instance Milvus.</p></li>
-<li><p>Une connectivité réseau appropriée entre Milvus et le service de modélisation choisi.</p></li>
+<li><p>Un service de modèle externe en cours d'exécution accessible à votre instance Milvus</p></li>
+<li><p>Une connectivité réseau appropriée entre Milvus et le service de modèle choisi.</p></li>
 </ul>
-<p>Les classeurs de modèles s'intègrent parfaitement aux opérations de recherche vectorielle standard et de recherche hybride. La mise en œuvre implique la création d'un objet Function qui définit votre configuration de reclassement et la transmet aux opérations de recherche.</p>
-<h3 id="Create-a-model-ranker" class="common-anchor-header">Créer un classeur de modèles</h3><p>Pour mettre en œuvre un classeur de modèles, définissez d'abord un objet Function avec la configuration appropriée :</p>
+<p>Les classeurs de modèles s'intègrent parfaitement aux opérations de recherche vectorielle standard et de recherche hybride. La mise en œuvre consiste à créer un objet Function qui définit votre configuration de reclassement et à le transmettre aux opérations de recherche.</p>
+<h3 id="Create-a-model-ranker" class="common-anchor-header">Créer un classeur de modèles<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour mettre en œuvre un classeur de modèles, il faut d'abord définir un objet Function avec la configuration appropriée. Dans cet exemple, nous utilisons le TEI comme fournisseur de services :</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -170,18 +223,26 @@ model_ranker = Function(
     function_type=FunctionType.RERANK,  <span class="hljs-comment"># Must be set to RERANK</span>
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;model&quot;</span>,  <span class="hljs-comment"># Specify model reranker. Must be &quot;model&quot;</span>
-        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot; or &quot;vllm&quot;</span>
+        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>,  <span class="hljs-comment"># Model service endpoint</span>
         <span class="hljs-comment"># &quot;maxBatch&quot;: 32  # Optional: batch size for processing</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>Paramètre</p></th>
-     <th><p>Obligatoire ?</p></th>
-     <th><p>Description</p></th>
+     <th><p>Nécessaire ?</p></th>
+     <th><p>Description de l'objet</p></th>
      <th><p>Valeur / Exemple</p></th>
    </tr>
    <tr>
@@ -205,7 +266,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Dictionnaire contenant la configuration de la fonction de reclassement basée sur un modèle. Les paramètres disponibles (clés) varient en fonction du fournisseur (<code translate="no">tei</code> ou <code translate="no">vllm</code>). Se référer à <a href="/docs/fr/vllm-ranker.md">vLLM Ranker</a> ou <a href="/docs/fr/tei-ranker.md">TEI Ranker</a> pour plus de détails.</p></td>
+     <td><p>Dictionnaire contenant la configuration de la fonction de reclassement basée sur un modèle. Les paramètres disponibles (clés) varient en fonction du fournisseur de services.</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -217,29 +278,46 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Le fournisseur de services de modèle à utiliser pour le reclassement.</p></td>
-     <td><p><code translate="no">"tei"</code> ou <code translate="no">"vllm"</code></p></td>
+     <td><p>Le fournisseur de services de modélisation à utiliser pour le reclassement.</p></td>
+     <td><p><code translate="no">"tei"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Oui</p></td>
      <td><p>Le nombre de chaînes de requête doit correspondre exactement au nombre de requêtes dans votre opération de recherche (même si vous utilisez des vecteurs de requête au lieu de texte), sinon une erreur sera signalée.</p></td>
-     <td><p><code translate="no">["search query"]</code></p></td>
+     <td><p><em>["search query"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.endpoint</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>URL du service de modèle.</p></td>
+     <td><p>URL du service modèle.</p></td>
      <td><p><code translate="no">"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">maxBatch</code></p></td>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>Non</p></td>
      <td><p>Nombre maximal de documents à traiter en un seul lot. Des valeurs plus élevées augmentent le débit mais nécessitent plus de mémoire.</p></td>
      <td><p><code translate="no">32</code> (par défaut)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Appliquer à la recherche vectorielle standard</h3><p>Après avoir défini votre modèle de classement, vous pouvez l'appliquer lors des opérations de recherche en le passant au paramètre ranker :</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Appliquer à la recherche vectorielle standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Après avoir défini votre modèle de classement, vous pouvez l'appliquer lors des opérations de recherche en le passant au paramètre ranker :</p>
+<div class="multipleCode">
+   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
@@ -251,7 +329,32 @@ results = client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride</h3><p>Les classificateurs de modèles peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Appliquer à la recherche hybride<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Les classificateurs de modèles peuvent également être appliqués aux opérations de recherche hybride qui combinent plusieurs champs de vecteurs :</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
@@ -277,4 +380,12 @@ hybrid_results = client.hybrid_search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

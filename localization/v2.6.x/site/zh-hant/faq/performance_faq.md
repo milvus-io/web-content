@@ -45,5 +45,5 @@ title: 效能常見問題
 <h4 id="Still-have-questions" class="common-anchor-header">還有問題嗎？</h4><p>您可以</p>
 <ul>
 <li>在 GitHub 上查看<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。隨時提出問題、分享想法並幫助他人。</li>
-<li>加入我們的<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 頻道</a>，尋找支援並參與我們的開放原始碼社群。</li>
+<li>加入我們的<a href="https://discord.com/invite/8uyFbECzPX">Discord 頻道</a>，尋找支援並參與我們的開放原始碼社群。</li>
 </ul>

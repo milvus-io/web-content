@@ -46,7 +46,22 @@ summary: >-
 <li><p><strong>Vamana Graph</strong> - Un índice <strong>basado en disco y en gráficos</strong> que conecta puntos de datos (o vectores) para una navegación eficiente durante la búsqueda.</p></li>
 <li><p><strong>Cuantización de productos (PQ)</strong>: método de compresión <strong>en memoria</strong> que reduce el tamaño de los vectores y permite calcular rápidamente distancias aproximadas entre vectores.</p></li>
 </ul>
-<h3 id="Index-construction" class="common-anchor-header">Construcción de índices</h3><h4 id="Vamana-graph" class="common-anchor-header">Gráfico Vamana</h4><p>El grafo Vamana es fundamental en la estrategia basada en disco de DISKANN. Puede manejar conjuntos de datos muy grandes porque no necesita residir completamente en memoria durante o después de su construcción.</p>
+<h3 id="Index-construction" class="common-anchor-header">Construcción de índices<button data-href="#Index-construction" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Vamana-graph" class="common-anchor-header">Gráfico Vamana</h4><p>El grafo Vamana es fundamental en la estrategia basada en disco de DISKANN. Puede manejar conjuntos de datos muy grandes porque no necesita residir completamente en memoria durante o después de su construcción.</p>
 <p>La siguiente figura muestra cómo se construye un grafo Vamana.</p>
 <p>
   
@@ -73,7 +88,22 @@ summary: >-
 <li><p><code translate="no">pq_code_budget_gb_ratio</code> es una proporción definida por el usuario, que representa la fracción del tamaño total de los datos reservada para los códigos PQ. Este parámetro permite un equilibrio entre la precisión de la búsqueda y los recursos de memoria. Para más información sobre el ajuste de parámetros, consulte <a href="/docs/es/diskann.md#share-CEVtdKUBuou0g7xHU1uc1rmYnsd">DISKANN configs</a>.</p></li>
 </ul>
 <p>Para más detalles técnicos sobre el método PQ subyacente, consulte <a href="/docs/es/ivf-pq.md#share-MA6SdYG0io3EASxoSpyc7JW3nvc">IVF_PQ</a>.</p>
-<h3 id="Search-process" class="common-anchor-header">Proceso de búsqueda</h3><p>Una vez construido el índice (el gráfico Vamana en disco y los códigos PQ en memoria), DISKANN realiza las búsquedas RNA de la siguiente manera:</p>
+<h3 id="Search-process" class="common-anchor-header">Proceso de búsqueda<button data-href="#Search-process" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Una vez construido el índice (el gráfico Vamana en disco y los códigos PQ en memoria), DISKANN realiza las búsquedas RNA de la siguiente manera:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/diskann-2.png" alt="Diskann 2" class="doc-image" id="diskann-2" />
@@ -149,7 +179,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Los parámetros relacionados con DISKANN pueden configurarse a través de su archivo de configuración de Milvus (<code translate="no">milvus.yaml</code>):</p>
+    </button></h2><p>Los parámetros relacionados con DISKANN sólo pueden configurarse a través de su archivo de configuración de Milvus (<code translate="no">milvus.yaml</code>):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">common:</span>
   <span class="hljs-attr">DiskIndex:</span>
@@ -176,7 +206,25 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>El ajuste fino de los parámetros de DISKANN le permite adaptar su comportamiento a su conjunto de datos específico y a la carga de trabajo de búsqueda, logrando el equilibrio adecuado entre velocidad, precisión y uso de memoria.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices</h3><p>Estos parámetros influyen en el modo en que se construye el índice DISKANN. Su ajuste puede afectar al tamaño del índice, al tiempo de construcción y a la calidad de la búsqueda.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Estos parámetros influyen en el modo en que se construye el índice DISKANN. Su ajuste puede afectar al tamaño del índice, al tiempo de construcción y a la calidad de la búsqueda.</p>
+<div class="alert note">
+<p>Todos los parámetros de construcción del índice de la siguiente lista sólo pueden configurarse a través de su archivo de configuración de Milvus (<code translate="no">milvus.yaml</code>)</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -200,7 +248,7 @@ summary: >-
      <td><p>Durante la construcción del índice, este parámetro define el tamaño del grupo de candidatos utilizado cuando se buscan los vecinos más cercanos para cada nodo. Para cada nodo que se añade al grafo, el algoritmo mantiene una lista de los <code translate="no">search_list_size</code> mejores candidatos encontrados hasta el momento. La búsqueda de vecinos se detiene cuando esta lista ya no puede mejorarse. De esta lista final de candidatos, se seleccionan los mejores <code translate="no">max_degree</code> nodos para formar las aristas finales.</p></td>
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valor por defecto</strong>: <code translate="no">100</code></p></td>
-     <td><p>Un valor mayor de <code translate="no">search_list_size</code> aumenta la probabilidad de encontrar los verdaderos vecinos más cercanos de cada nodo, lo que puede dar lugar a un gráfico de mayor calidad y a un mejor rendimiento de la búsqueda (recall). Sin embargo, esto tiene el coste de un tiempo de construcción del índice significativamente mayor. Debe fijarse siempre en un valor mayor o igual que <code translate="no">max_degree</code>.</p></td>
+     <td><p>Un valor mayor de <code translate="no">search_list_size</code> aumenta la probabilidad de encontrar los verdaderos vecinos más cercanos de cada nodo, lo que puede dar lugar a un gráfico de mayor calidad y un mejor rendimiento de la búsqueda (recall). Sin embargo, esto tiene el coste de un tiempo de construcción del índice significativamente mayor. Debe fijarse siempre en un valor mayor o igual que <code translate="no">max_degree</code>.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -220,7 +268,26 @@ summary: >-
 <p>En la mayoría de los casos, se recomienda establecer un valor dentro de este intervalo: (0,0625, 0,25].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos del índice</h3><p>Estos parámetros influyen en el modo en que DISKANN realiza las búsquedas. Su ajuste puede influir en la velocidad de búsqueda, la latencia y el uso de recursos.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos del índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Estos parámetros influyen en el modo en que DISKANN realiza las búsquedas. Su ajuste puede influir en la velocidad de búsqueda, la latencia y el uso de recursos.</p>
+<div class="alert note">
+<p>Los parámetros <code translate="no">BeamWidthRatio</code> de la siguiente lista sólo pueden configurarse a través del archivo de configuración de Milvus (<code translate="no">milvus.yaml</code>)</p>
+<p>Los <code translate="no">search_list</code> de la siguiente lista sólo pueden configurarse en los parámetros de búsqueda del SDK.</p>
+</div>
 <table>
    <tr>
      <th></th>
@@ -233,13 +300,13 @@ summary: >-
      <td><p>Vamana</p></td>
      <td><p><code translate="no">BeamWidthRatio</code></p></td>
      <td><p>Controla el grado de paralelismo durante la búsqueda determinando el número máximo de peticiones de E/S de disco paralelas en relación con el número de núcleos de CPU disponibles.</p></td>
-     <td><p><strong>Tipo</strong>: Float <strong>Rango</strong>: [1, max(128 / número de CPU, 16)]</p>
+     <td><p><strong>Tipo</strong>: Float <strong>Rango</strong>: [1, max(128 / número CPU, 16)]</p>
 <p><strong>Valor por defecto</strong>: <code translate="no">4.0</code></p></td>
      <td><p>Los valores más altos aumentan el paralelismo, lo que puede acelerar la búsqueda en sistemas con CPUs y SSDs potentes. En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [1.0, 4.0].</p></td>
    </tr>
    <tr>
      <td></td>
-     <td><p><code translate="no">SearchListSize</code></p></td>
+     <td><p><code translate="no">search_list</code></p></td>
      <td><p>Durante una operación de búsqueda, este parámetro determina el tamaño de la reserva de candidatos que el algoritmo mantiene mientras recorre el gráfico. Un valor mayor aumenta las posibilidades de encontrar a los verdaderos vecinos más cercanos (mayor recall), pero también aumenta la latencia de la búsqueda.</p></td>
      <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valor por defecto</strong>: <code translate="no">100</code></p></td>

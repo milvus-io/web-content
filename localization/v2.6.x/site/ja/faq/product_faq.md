@@ -79,7 +79,7 @@ title: 製品に関するFAQ
 <li><strong>ガベージコレクション</strong>：ガベージコレクション (GC) と呼ばれる別プロセスが、定期的に "Dropped" セグメントを削除する。これにより、ストレージの効率的な使用が保証されますが、削除とスペースの再利用の間に若干の遅延が生じる可能性があります。</li>
 </ul>
 <h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">挿入、削除、またはアップサートされたデータを、フラッシュを待たずに操作直後に見ることはできますか？</h4><p>Milvusでは、ストレージとコンピュートの分離アーキテクチャを採用しているため、データの可視性はフラッシュ操作に直接関係しません。一貫性レベルを使用してデータの可読性を管理することができます。</p>
-<p>一貫性レベルを選択する際には、一貫性とパフォーマンスのトレードオフを考慮してください。即時の可視性が必要な操作には、"Strong "一貫性レベルを使用する。書き込みを高速に行うには、一貫性を弱くすることを優先します（データはすぐには見えないかもしれません）。詳細については、「<a href="/docs/ja/consistency.md">一貫性</a>」を参照してください。</p>
+<p>一貫性レベルを選択する際には、一貫性とパフォーマンスのトレードオフを考慮してください。即時の可視性が必要な操作には、"Strong "一貫性レベルを使用する。書き込みを高速に行うには、一貫性を弱くすることを優先する（データはすぐには見えないかもしれない）。詳細については、「<a href="/docs/ja/consistency.md">一貫性</a>」を参照してください。</p>
 <h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">パーティション・キー機能を有効にした後、milvusのデフォルト値<code translate="no">num_partitions</code> 。</h4><p>パーティションキー機能を有効にすると、Milvusの<code translate="no">num_partitions</code> のデフォルト値は<code translate="no">16</code> に設定されます。このデフォルト値は安定性とパフォーマンス上の理由から選択されています。<code translate="no">create_collection</code> 関数で指定することにより、必要に応じて<code translate="no">num_partitions</code> の値を調整することができます。</p>
 <h4 id="Is-there-a-maximum-length-limit-for-scalar-filtering-expressions" class="common-anchor-header">スカラーフィルタリング式の長さの上限はありますか？</h4><p>はい、スカラー・フィルタリング式の最大長は、<code translate="no">milvus.yaml</code> 設定ファイルで定義される RPC 転送制限によって制約されます。具体的には、この制限はプロキシ・セクションの<code translate="no">serverMaxRecvSize</code> パラメータによって設定されます：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
@@ -92,7 +92,7 @@ title: 製品に関するFAQ
   <span class="hljs-attr">grpc:</span>
     <span class="hljs-attr">serverMaxRecvSize:</span> <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>デフォルトでは、各 RPC 要求の最大サイズは 64MB です。したがって、入力ベクターの次元データとメタデータを含む合計サイズは、正常に実行するためにこの制限を下回る必要があります。</p>
+<p>デフォルトでは、各 RPC 要求の最大サイズは 64MB です。したがって、入力ベクトルの次元データとメタデータを含む合計サイズは、正常に実行するためにこの制限を下回る必要があります。</p>
 <h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">コレクションから指定されたスカラー・フィールドの一意の値をすべて取得するにはどうすればよいですか？</h4><p>現在のところ、これを実現する直接的な方法はありません。回避策として、query_iteratorを使用して特定のフィールドのすべての値を取得し、手動で重複排除を実行することをお勧めします。Milvus 2.6ではこの機能を直接サポートする予定です。query_iteratorの使用例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
 iterator = client.query_iterator(
@@ -113,10 +113,10 @@ value_set = <span class="hljs-built_in">set</span>()
 <span class="hljs-comment"># value_set will contain unique values for target column    </span>
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="What-are-the-limitations-of-using-dynamic-fields-For-example-are-there-size-limits-modification-methods-or-indexing-restrictions" class="common-anchor-header">動的フィールドの使用にはどのような制限がありますか？例えば、サイズ制限、修正方法、インデックス作成の制限などがありますか？</h4><p>ダイナミック・フィールドは内部的にJSONフィールドで表現され、サイズ制限は65,536バイトです。動的フィールドはアップサートをサポートしており、フィールドの追加や更新が可能です。しかし、Milvus 2.5.1では、ダイナミックフィールドはインデックスをサポートしていません。JSONのインデックス追加サポートは将来のリリースで導入される予定です。</p>
-<h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">Milvusはスキーマの変更をサポートしていますか？</h4><p>Milvusバージョン2.5.0では、スキーマの変更は、<code translate="no">mmap</code> パラメータのようなプロパティの調整など、特定の変更に限定されています。また、varcharフィールドの<code translate="no">max_length</code> 、配列フィールドの<code translate="no">max_capacity</code> 。しかしながら、スキーマのフィールドの追加や削除は将来のリリースで計画されており、Milvusのスキーマ管理の柔軟性を向上させます。</p>
+<h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">Milvusはスキーマの変更をサポートしていますか？</h4><p>Milvusバージョン2.5.0では、スキーマの変更は、<code translate="no">mmap</code> パラメータのようなプロパティの調整など、特定の変更に限定されています。また、varcharフィールドの<code translate="no">max_length</code> 、配列フィールドの<code translate="no">max_capacity</code> 。しかし、スキーマのフィールドの追加や削除ができるようになり、Milvusのスキーマ管理の柔軟性が向上する予定です。</p>
 <h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">VarCharのmax_lengthを変更する場合、データの再編成が必要ですか?</h4><p>いいえ、VarCharフィールドの<code translate="no">max_length</code> を変更しても、圧縮や再編成などのデータ再編成は必要ありません。この調整では主に、フィールドに挿入される新しいデータの検証基準が更新され、既存のデータは影響を受けません。その結果、この変更は軽量とみなされ、システムに大きなオーバーヘッドを課しません。</p>
 <h4 id="Still-have-questions" class="common-anchor-header">まだ質問がありますか？</h4><p>できます：</p>
 <ul>
-<li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。質問を投げかけたり、アイデアを共有したり、他の人を助けたりすることができます。</li>
-<li><a href="https://slack.milvus.io/">Slackのコミュニティに</a>参加し、オープンソースコミュニティに参加してください。</li>
+<li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。質問をしたり、アイデアを共有したり、他の人を助けたりすることができます。</li>
+<li>私たちの<a href="https://discord.com/invite/8uyFbECzPX">Discordチャンネルに</a>参加して、サポートを見つけたり、私たちのオープンソースコミュニティに参加してください。</li>
 </ul>

@@ -283,7 +283,22 @@ curl --request POST \
      <td><p>Fuerza a la base de datos especificada a denegar operaciones de lectura.</p></td>
    </tr>
 </table>
-<h3 id="Alter-database-properties" class="common-anchor-header">Modificar las propiedades de una base de datos</h3><p>Puede modificar las propiedades de una base de datos existente como se indica a continuación. El siguiente ejemplo limita el número de colecciones que se pueden crear en la base de datos.</p>
+<h3 id="Alter-database-properties" class="common-anchor-header">Modificar las propiedades de una base de datos<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Puede modificar las propiedades de una base de datos existente como se indica a continuación. El siguiente ejemplo limita el número de colecciones que se pueden crear en la base de datos.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
@@ -323,7 +338,22 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-database-properties" class="common-anchor-header">Eliminar propiedades de la base de datos</h3><p>También puedes restablecer una propiedad de la base de datos eliminándola como se indica a continuación. El siguiente ejemplo elimina el límite del número de colecciones que puedes crear en la base de datos.</p>
+<h3 id="Drop-database-properties" class="common-anchor-header">Eliminar propiedades de la base de datos<button data-href="#Drop-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>También puedes restablecer una propiedad de la base de datos eliminándola como se indica a continuación. El siguiente ejemplo elimina el límite del número de colecciones que puedes crear en la base de datos.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
@@ -467,5 +497,35 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">¿Cómo gestiono los permisos de una base de datos?</h3><p>Milvus utiliza el Control de Acceso Basado en Roles (RBAC) para gestionar los permisos. Puede crear roles con privilegios específicos y asignarlos a usuarios, controlando así su acceso a diferentes bases de datos. Para más detalles, consulte la <a href="/docs/es/rbac.md">documentación de RBAC</a>.</p>
-<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">¿Existen limitaciones de cuota para una base de datos?</h3><p>Sí, Milvus le permite establecer limitaciones de cuota para una base de datos, como el número máximo de colecciones. Para obtener una lista completa de limitaciones, consulte la <a href="/docs/es/limitations.md">documentación</a> de <a href="/docs/es/limitations.md">Milvus Limits</a>.</p>
+    </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">¿Cómo gestiono los permisos de una base de datos?<button data-href="#How-do-I-manage-permissions-for-a-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus utiliza el Control de Acceso Basado en Roles (RBAC) para gestionar los permisos. Puede crear roles con privilegios específicos y asignarlos a usuarios, controlando así su acceso a diferentes bases de datos. Para más detalles, consulte la <a href="/docs/es/rbac.md">documentación de RBAC</a>.</p>
+<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">¿Existen limitaciones de cuota para una base de datos?<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sí, Milvus le permite establecer limitaciones de cuota para una base de datos, como el número máximo de colecciones. Para obtener una lista completa de limitaciones, consulte la <a href="/docs/es/limitations.md">documentación</a> de <a href="/docs/es/limitations.md">Milvus Limits</a>.</p>

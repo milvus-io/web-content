@@ -55,7 +55,7 @@ title: Docker ComposeでMilvusを起動する(Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusはDocker Composeの設定ファイルをMilvusリポジトリに用意しています。Docker Composeを使用してMilvusをインストールするには、以下のコマンドを実行してください。</p>
+    </button></h2><p>MilvusはDocker Composeの設定ファイルをMilvusリポジトリに用意しています。Docker Composeを使用してMilvusをインストールするには、以下を実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
@@ -67,8 +67,15 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>v2.6.0の新機能</strong></p>
 <ul>
-<li><p>上記コマンドの実行に失敗した場合は、システムにDocker Compose V1がインストールされているか確認してください。もしそうであれば、<a href="https://docs.docker.com/compose/">このページの</a>注意事項に従い、Docker Compose V2に移行することをお勧めします。</p></li>
+<li><strong>アーキテクチャの強化</strong>：新しいStreaming Nodeと最適化されたコンポーネントが特徴です。</li>
+<li><strong>更新された依存関係</strong>：MinIOとetcdの最新バージョンを含む</li>
+<li><strong>設定の改善</strong>：最適化された設定によりパフォーマンスが向上</li>
+</ul>
+<p>v2.6.0の機能との互換性を確保するため、常に最新のDocker Compose設定をダウンロードしてください。</p>
+<ul>
+<li><p>上記コマンドの実行に失敗した場合は、システムにDocker Compose V1がインストールされているか確認してください。もしそうであれば、<a href="https://docs.docker.com/compose/">このページの</a>注意事項に従ってDocker Compose V2に移行することをお勧めします。</p></li>
 <li><p>もしイメージのプルに関して問題が発生した場合は、<a href="mailto:community@zilliz.com">community@zilliz.com</a>まで問題の詳細をご連絡ください。</p></li>
 </ul>
 </div>
@@ -107,24 +114,20 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>お客様のニーズに合わせてMilvusの設定を更新するには、<code translate="no">milvus-standalone</code> コンテナ内の<code translate="no">/milvus/configs/user.yaml</code> ファイルを変更する必要があります。</p>
 <ol>
-<li><code translate="no">milvus-standalone</code> コンテナにアクセスします。</li>
-</ol>
+<li><p><code translate="no">milvus-standalone</code> コンテナにアクセスします。</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li>デフォルトの構成を上書きするための追加構成を追加します。以下では、デフォルトの<code translate="no">proxy.healthCheckTimeout</code> を上書きする必要があることを想定しています。該当する構成項目については、「<a href="/docs/ja/system_configuration.md">システム構成</a>」を参照。</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>デフォルトの構成を上書きするための追加構成を追加します。以下では、デフォルトの<code translate="no">proxy.healthCheckTimeout</code> を上書きする必要があることを想定しています。該当する構成項目については、「<a href="/docs/ja/system_configuration.md">システム構成</a>」を参照。</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
-<button class="copy-code-btn"></button></code></pre>
-<ol>
-<li><code translate="no">milvus-standalone</code> コンテナを再起動し、変更を適用する。</li>
-</ol>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><code translate="no">milvus-standalone</code> コンテナを再起動し、変更を適用する。</p>
 <pre><code translate="no" class="language-shell">docker restart milvus-standalone
-<button class="copy-code-btn"></button></code></pre>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvusの停止と削除<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

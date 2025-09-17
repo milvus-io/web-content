@@ -92,20 +92,23 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>线性衰减是指以恒定的速度直线下降，直至降到零。这种模式出现在许多日常场景中，如倒计时器、库存耗尽以及相关性有明确到期点的截止日期临近。</p>
+    </button></h2><p>线性衰减是指以恒定的速度直线下降，直至降到零。这种模式出现在许多日常场景中，如倒计时计时器、库存消耗和截止日期临近等，在这些场景中，相关性都有一个明确的到期点。</p>
+<div class="alert note">
+<p>所有时间参数（<code translate="no">origin</code>,<code translate="no">offset</code>,<code translate="no">scale</code> ）必须使用与 Collections 数据相同的单位。如果您的 Collections 以不同的单位（毫秒、微秒）存储时间戳，请相应调整所有参数。</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
    </span> <span class="img-wrapper"> <span>线性衰减</span> </span></p>
 <p>上图显示了线性衰减如何影响票务平台上的活动列表：</p>
 <ul>
-<li><p><code translate="no">origin</code> (当前日期）：当前时刻，相关性达到最大值（1.0）。</p></li>
+<li><p><code translate="no">origin</code> (当前日期）：当前时刻，相关性达到最大值 (1.0)。</p></li>
 <li><p><code translate="no">offset</code> (1天）：即时事件窗口"--所有在第二天内发生的事件都能保持满分相关性分数（1.0），确保即将发生的事件不会因为微小的时间差而受到影响。</p></li>
 <li><p><code translate="no">decay</code> (0.5):尺度距离得分--该参数控制相关性下降的速度。</p></li>
 <li><p><code translate="no">scale</code> (10天）：相关性下降到衰减值的时间段--10 天后的事件相关性得分减半（0.5）。</p></li>
 </ul>
 <p>从直线曲线中可以看出，超过大约 16 天的事件相关性正好为零，根本不会出现在搜索结果中。这就形成了一个明确的界限，确保用户只能在规定的时间窗口内看到相关的即将发生的事件。</p>
-<p>这种行为反映了活动计划的典型运作方式--近期的活动最相关，未来几周内的活动重要性递减，而太远（或已经过去）的活动则根本不应该出现。</p>
+<p>这种行为反映了活动计划的典型运作方式--近期的活动最相关，未来几周内的活动重要性递减，而过于久远的活动（或已经过去的活动）则根本不应该出现。</p>
 <h2 id="Formula" class="common-anchor-header">计算公式<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,7 +136,7 @@ beta: Milvus 2.6.x
 <li><p>从<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>s 减去调整后的距离，再除以<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>s</p></li>
 <li><p>确保结果永远不低于零：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>max</mi><mo stretchy="false">(</mo><mi>result</mi><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)\max</mo></mrow><annotation encoding="application/x-tex">(result, 0)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord mathnormal">result</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span></span></span>0<span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose">)</span></span></span></span></p></li>
 </ol>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>s 计算将缩放和衰减参数转换为分数为零的点。例如，在衰减=0.5 和比例=7 的情况下，分数将在距离=14（比例值的两倍）时正好为零。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>s 计算将缩放和衰减参数转换为分数为零的点。例如，如果衰减值=0.5，缩放值=7，那么在距离=14（缩放值的两倍）处得分将正好为零。</p>
 <h2 id="Use-linear-decay" class="common-anchor-header">使用线性衰减<button data-href="#Use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,7 +156,25 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>在使用衰减函数之前，必须先创建一个带有适当数值字段（如时间戳、距离等）的 Collection，这些数值字段将用于衰减计算。有关包括集合设置、Schema 定义和数据插入在内的完整工作示例，请参阅《<a href="/docs/zh/tutorial-implement-a-time-based-ranking-in-milvus.md">衰减排名器教程》</a>。</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">创建衰减排名器</h3><p>用数字字段（在本例中，<code translate="no">event_date</code> ，即从现在开始的秒）设置好 Collections 后，创建一个线性衰减排序器：</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">创建衰减排名器<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在使用数字字段（在本例中，<code translate="no">event_date</code> ，即从现在开始的秒）设置好您的 Collections 后，创建一个线性衰减排序器：</p>
+<div class="alert note">
+<p><strong>时间单位一致性</strong>：使用基于时间的衰减时，请确保<code translate="no">origin</code> 、<code translate="no">scale</code> 和<code translate="no">offset</code> 参数与您的 Collections 数据使用相同的时间单位。如果您的 Collections 以秒为单位存储时间戳，则所有参数都使用秒。如果使用毫秒，则所有参数都使用毫秒。</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> time
 
@@ -161,6 +182,7 @@ beta: Milvus 2.6.x
 current_time = <span class="hljs-built_in">int</span>(time.time())
 
 <span class="hljs-comment"># Create a linear decay ranker for event listings</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;event_relevance&quot;</span>,               <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;event_date&quot;</span>],     <span class="hljs-comment"># Numeric field to use</span>
@@ -168,14 +190,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;linear&quot;</span>,             <span class="hljs-comment"># Choose linear decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: current_time,           <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,           <span class="hljs-comment"># 12 hour immediate events window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>         <span class="hljs-comment"># 7 days (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">应用于标准向量搜索</h3><p>定义好衰减排序器后，您就可以在搜索操作中将其应用到<code translate="no">ranker</code> 参数中：</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">应用于标准向量搜索<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定义衰减排序器后，您可以通过将其传递给<code translate="no">ranker</code> 参数，在搜索操作中应用该排序器：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -187,7 +224,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索</h3><p>衰减排序器还可以应用于结合多个向量场的混合搜索操作：</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>衰减排序器还可以应用于结合多个向量场的混合搜索操作：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

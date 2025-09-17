@@ -96,5 +96,5 @@ title: Установка Milvus Java SDK
 <li><a href="/docs/ru/v2.5.x/single-vector-search.md">Одновекторный поиск</a></li>
 <li><a href="/docs/ru/v2.5.x/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
-<li><p>Изучите <a href="/api-reference/java/v2.4.x/About.md">справочник Milvus Java API</a></p></li>
+<li><p>Изучите <a href="/api-reference/java/v2.4.x/About.md">справку по API Milvus Java</a></p></li>
 </ul>

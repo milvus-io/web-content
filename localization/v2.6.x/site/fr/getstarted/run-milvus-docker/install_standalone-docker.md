@@ -55,7 +55,7 @@ title: Exécuter Milvus dans Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fournit un script d'installation pour l'installer en tant que conteneur Docker. Le script est disponible dans le <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">référentiel Milvus</a>. Pour installer Milvus dans Docker, exécutez simplement</p>
+    </button></h2><p>Milvus fournit un script d'installation pour l'installer en tant que conteneur Docker. Le script est disponible dans le <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">référentiel Milvus</a>. Pour installer Milvus dans Docker, il suffit d'exécuter</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
@@ -63,8 +63,15 @@ title: Exécuter Milvus dans Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p><strong>Nouveautés de la version 2.6.0 :</strong></p>
+<ul>
+<li><strong>Streaming Node</strong>: Capacités de traitement des données améliorées</li>
+<li><strong>Woodpecker MQ</strong>: File d'attente de messages améliorée avec une réduction des coûts de maintenance, voir <a href="/docs/fr/use-woodpecker.md">Use Woodpecker</a> pour plus de détails.</li>
+<li><strong>Architecture optimisée</strong>: Consolidation des composants pour de meilleures performances</li>
+</ul>
+<p>Téléchargez toujours le dernier script pour vous assurer d'obtenir les configurations les plus récentes et les améliorations de l'architecture.</p>
 <p>Si vous souhaitez utiliser <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> en mode de déploiement autonome, il est recommandé d'utiliser la méthode de déploiement <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>Si vous rencontrez des problèmes lors de l'extraction de l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en détaillant le problème et nous vous fournirons l'assistance nécessaire.</p>
+<p>Si vous rencontrez des problèmes lors du déploiement de l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en détaillant le problème, et nous vous fournirons l'assistance nécessaire.</p>
 </div>
 <p>Après avoir exécuté le script d'installation :</p>
 <ul>
@@ -99,6 +106,36 @@ EOF
 <p>Redémarrez ensuite le service comme suit :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Pour les éléments de configuration applicables, voir <a href="/docs/fr/system_configuration.md">Configuration du système</a>.</p>
+<h2 id="Upgrade-Milvus" class="common-anchor-header">Mise à niveau de Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Vous pouvez passer à la dernière version de Milvus à l'aide de la commande de mise à niveau intégrée. Cette commande télécharge automatiquement la dernière configuration et l'image Milvus :</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Upgrade Milvus to the latest version</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>La commande de mise à niveau télécharge automatiquement</p>
+<ul>
+<li>Télécharge le dernier script d'installation avec les configurations mises à jour</li>
+<li>Télécharge la dernière image Docker de Milvus</li>
+<li>Redémarre le conteneur avec la nouvelle version</li>
+<li>Préserve vos données et configurations existantes</li>
+</ul>
+<p>Il s'agit de la méthode recommandée pour mettre à niveau votre déploiement autonome Milvus.</p>
+</div>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Arrêter et supprimer Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,10 +158,6 @@ EOF
 # </span><span class="language-bash">Delete Milvus data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Vous pouvez mettre à jour la dernière version de Milvus en procédant comme suit</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade Milvus</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
-<button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +173,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Après avoir installé Milvus dans Docker, vous pouvez :</p>
+    </button></h2><p>Après avoir installé Milvus dans Docker, vous pouvez.. :</p>
 <ul>
 <li><p>Consulter <a href="/docs/fr/quickstart.md">Quickstart</a> pour voir ce que Milvus peut faire.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>

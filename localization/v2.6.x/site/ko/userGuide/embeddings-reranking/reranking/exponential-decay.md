@@ -4,7 +4,7 @@ title: 지수 감쇠Compatible with Milvus 2.6.x
 summary: >-
   지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 만들어냅니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의
   중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색
-  가능하도록 유지합니다. 이 접근 방식은 근접성이나 최신성을 우선순위로 두고 싶지만 먼 거리의 항목을 완전히 배제하고 싶지 않을 때
+  가능하도록 유지합니다. 이 접근 방식은 근접성 또는 최신성을 우선순위로 두고 싶지만 더 먼 거리의 옵션을 완전히 배제하고 싶지 않을 때
   이상적입니다.
 beta: Milvus 2.6.x
 ---
@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 생성합니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의 중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색할 수 있도록 합니다. 이 접근 방식은 근접성이나 최신성에 높은 우선순위를 부여하고 싶지만 먼 거리에 있는 옵션을 완전히 없애고 싶지 않을 때 이상적입니다.</p>
+    </button></h1><p>지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 생성합니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의 중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색 가능하도록 유지합니다. 이 접근 방식은 근접성이나 최신성에 높은 우선순위를 부여하고 싶지만 더 먼 옵션을 완전히 없애고 싶지 않을 때 이상적입니다.</p>
 <p>다른 감쇠 함수와 달리</p>
 <ul>
 <li><p>가우스 감쇠는 보다 점진적인 종 모양의 감쇠를 생성합니다.</p></li>
@@ -95,11 +95,14 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>지수적 감쇠는 처음에는 빠르게 하락하다가 점차 평평해져 0에 가까워지지만 결코 0에 도달하지 않는 긴 꼬리 모양의 곡선을 만듭니다. 이 수학적 패턴은 방사능 붕괴, 인구 감소, 시간에 따른 정보 관련성과 같은 자연 현상에서 자주 나타납니다.</p>
+<div class="alert note">
+<p>모든 시간 매개변수(<code translate="no">origin</code>, <code translate="no">offset</code>, <code translate="no">scale</code>)는 수집 데이터와 동일한 단위를 사용해야 합니다. 컬렉션에서 타임스탬프를 다른 단위(밀리초, 마이크로초)로 저장하는 경우 모든 매개변수를 그에 맞게 조정하세요.</p>
+</div>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/exp-decay.png" alt="Exp Decay" class="doc-image" id="exp-decay" />
     지수 </span> <span class="img-wrapper"> <span>붕괴</span> </span></p>
-<p>위의 그래프는 지수 붕괴가 디지털 뉴스 플랫폼에서 뉴스 기사 순위에 어떤 영향을 미치는지 보여줍니다:</p>
+<p>위의 그래프는 디지털 뉴스 플랫폼에서 지수 감쇠가 뉴스 기사 순위에 어떤 영향을 미치는지 보여줍니다:</p>
 <ul>
 <li><p><code translate="no">origin</code> (현재 시간): 관련성이 최대(1.0)인 현재 시점입니다.</p></li>
 <li><p><code translate="no">offset</code> (3시간): 지난 3시간 이내에 게시된 모든 기사의 관련성 점수가 최대(1.0)로 유지되는 '속보 창'으로, 아주 최근의 뉴스가 사소한 시간 차이로 인해 불필요하게 불이익을 받지 않도록 합니다.</p></li>
@@ -134,7 +137,7 @@ beta: Milvus 2.6.x
 <li><p>스케일과 감쇠 매개변수에서 계산한 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ를</span></span></span></span> 곱합니다.</p></li>
 <li><p>지수를 구하면 0과 1 사이의 값을 얻을 수 있습니다: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo stretchy="false">(</mo><mi>λ⋅값</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exp(\lambda \cdot 값)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">값</span><span class="mclose">)</span></span></span></span>.</p></li>
 </ol>
-<p> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">λ\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span> 계산은 스케일 및 감쇠 매개변수를 지수 함수의 비율 매개변수로 변환합니다. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ\람다</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ가</span></span></span></span> 음수일수록 초기 하락이 더 가파르게 나타납니다.</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">λ\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span> 계산은 스케일 및 감쇠 매개변수를 지수 함수의 비율 매개변수로 변환합니다. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ\람다</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ가</span></span></span></span> 음수일수록 초기 하락이 더 가파르게 나타납니다.</p>
 <h2 id="Use-exponential-decay" class="common-anchor-header">지수 감쇠 사용<button data-href="#Use-exponential-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,11 +157,30 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>감쇠 함수를 사용하기 전에 먼저 감쇠 계산에 사용할 적절한 숫자 필드(타임스탬프, 거리 등)가 있는 컬렉션을 만들어야 합니다. 컬렉션 설정, 스키마 정의, 데이터 삽입을 포함한 전체 작업 예제는 <a href="/docs/ko/tutorial-implement-a-time-based-ranking-in-milvus.md">감쇠 순위 자습서를</a> 참조하세요.</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">감쇠 랭커 생성하기</h3><p>숫자 필드(이 예에서는 <code translate="no">publish_time</code>)로 컬렉션을 설정한 후 지수 감쇠 순위자를 생성합니다:</p>
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">감쇠 랭커 생성하기<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>숫자 필드(이 예에서는 <code translate="no">publish_time</code>)로 컬렉션을 설정한 후 지수 감쇠 순위자를 만듭니다:</p>
+<div class="alert note">
+<p><strong>시간 단위 일관성</strong>: 시간 기반 감쇠를 사용하는 경우 <code translate="no">origin</code>, <code translate="no">scale</code>, <code translate="no">offset</code> 매개변수가 컬렉션 데이터와 동일한 시간 단위를 사용하는지 확인하세요. 컬렉션에서 타임스탬프를 초 단위로 저장하는 경우 모든 매개변수에 초를 사용합니다. 밀리초를 사용하는 경우 모든 매개변수에 밀리초를 사용합니다.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> datetime
 
 <span class="hljs-comment"># Create an exponential decay ranker for news recency</span>
+<span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
 ranker = Function(
     name=<span class="hljs-string">&quot;news_recency&quot;</span>,                  <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;publish_time&quot;</span>],   <span class="hljs-comment"># Numeric field to use</span>
@@ -166,14 +188,29 @@ ranker = Function(
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;decay&quot;</span>,              <span class="hljs-comment"># Specify decay reranker</span>
         <span class="hljs-string">&quot;function&quot;</span>: <span class="hljs-string">&quot;exp&quot;</span>,                <span class="hljs-comment"># Choose exponential decay</span>
-        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time</span>
-        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window</span>
+        <span class="hljs-string">&quot;origin&quot;</span>: <span class="hljs-built_in">int</span>(datetime.datetime.now().timestamp()),  <span class="hljs-comment"># Current time (seconds, matching collection data)</span>
+        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,            <span class="hljs-comment"># 3 hour breaking news window (seconds)</span>
         <span class="hljs-string">&quot;decay&quot;</span>: <span class="hljs-number">0.5</span>,                     <span class="hljs-comment"># Half score at scale distance</span>
-        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (1 day)</span>
+        <span class="hljs-string">&quot;scale&quot;</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>             <span class="hljs-comment"># 24 hours (in seconds, matching collection data)</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기</h3><p>디케이 랭커를 정의한 후 <code translate="no">ranker</code> 매개변수에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">표준 벡터 검색에 적용하기<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>감쇠 순위자를 정의한 후 <code translate="no">ranker</code> 매개변수에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -185,7 +222,22 @@ result = milvus_client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용</h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 연산에도 디케이 레이커를 적용할 수 있습니다:</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 작업에도 디케이 랭커를 적용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define dense vector search request</span>

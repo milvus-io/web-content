@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 데이터베이스는 데이터를 구성하고 관리하기 위한 논리적 단위 역할을 합니다. 데이터 보안을 강화하고 멀티 테넌시를 달성하기 위해 여러 데이터베이스를 만들어 서로 다른 애플리케이션 또는 테넌트에 대한 데이터를 논리적으로 분리할 수 있습니다. 예를 들어 사용자 A의 데이터를 저장하는 데이터베이스와 사용자 B를 위한 또 다른 데이터베이스를 만드는 것입니다.</p>
+    </button></h2><p>Milvus에서 데이터베이스는 데이터를 구성하고 관리하기 위한 논리적 단위 역할을 합니다. 데이터 보안을 강화하고 멀티 테넌시를 달성하기 위해 여러 데이터베이스를 생성하여 서로 다른 애플리케이션 또는 테넌트의 데이터를 논리적으로 분리할 수 있습니다. 예를 들어 사용자 A의 데이터를 저장하는 데이터베이스와 사용자 B를 위한 또 다른 데이터베이스를 만드는 것입니다.</p>
 <h2 id="Create-database" class="common-anchor-header">데이터베이스 만들기<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -259,7 +259,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">database.resource_groups</code></p></td>
      <td><p>문자열</p></td>
-     <td><p>지정된 데이터베이스와 연결된 리소스 그룹의 이름을 쉼표로 구분한 목록입니다.</p></td>
+     <td><p>쉼표로 구분된 목록으로 지정된 데이터베이스와 연결된 리소스 그룹의 이름입니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.diskQuota.mb</code></p></td>
@@ -282,7 +282,22 @@ curl --request POST \
      <td><p>지정한 데이터베이스에서 읽기 작업을 거부하도록 할지 여부입니다.</p></td>
    </tr>
 </table>
-<h3 id="Alter-database-properties" class="common-anchor-header">데이터베이스 속성 변경</h3><p>다음과 같이 기존 데이터베이스의 속성을 변경할 수 있습니다. 다음 예제는 데이터베이스에서 만들 수 있는 컬렉션의 수를 제한합니다.</p>
+<h3 id="Alter-database-properties" class="common-anchor-header">데이터베이스 속성 변경<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음과 같이 기존 데이터베이스의 속성을 변경할 수 있습니다. 다음 예제는 데이터베이스에서 만들 수 있는 컬렉션의 수를 제한합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
@@ -322,7 +337,22 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-database-properties" class="common-anchor-header">데이터베이스 속성 삭제</h3><p>다음과 같이 데이터베이스 속성을 삭제하여 재설정할 수도 있습니다. 다음 예제는 데이터베이스에서 만들 수 있는 컬렉션 수에 대한 제한을 제거합니다.</p>
+<h3 id="Drop-database-properties" class="common-anchor-header">데이터베이스 속성 삭제<button data-href="#Drop-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음과 같이 데이터베이스 속성을 삭제하여 재설정할 수도 있습니다. 다음 예제는 데이터베이스에서 만들 수 있는 컬렉션 수에 대한 제한을 제거합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
@@ -466,5 +496,35 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">데이터베이스에 대한 권한은 어떻게 관리하나요?</h3><p>Milvus는 역할 기반 액세스 제어(RBAC)를 사용하여 권한을 관리합니다. 특정 권한이 있는 역할을 생성하고 사용자에게 할당하여 다양한 데이터베이스에 대한 액세스를 제어할 수 있습니다. 자세한 내용은 <a href="/docs/ko/rbac.md">RBAC 설명서를</a> 참조하세요.</p>
-<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">데이터베이스에 대한 쿼터 제한이 있나요?</h3><p>예, Milvus에서는 최대 컬렉션 수와 같은 데이터베이스에 대한 쿼터 제한을 설정할 수 있습니다. 전체 제한 목록은 <a href="/docs/ko/limitations.md">Milvus 제한 문서를</a> 참조하세요.</p>
+    </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">데이터베이스에 대한 권한은 어떻게 관리하나요?<button data-href="#How-do-I-manage-permissions-for-a-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus는 역할 기반 액세스 제어(RBAC)를 사용하여 권한을 관리합니다. 특정 권한이 있는 역할을 생성하고 사용자에게 할당하여 다양한 데이터베이스에 대한 액세스를 제어할 수 있습니다. 자세한 내용은 <a href="/docs/ko/rbac.md">RBAC 설명서를</a> 참조하세요.</p>
+<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">데이터베이스에 대한 쿼터 제한이 있나요?<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>예, Milvus에서는 최대 컬렉션 수와 같은 데이터베이스에 대한 쿼터 제한을 설정할 수 있습니다. 전체 제한 목록은 <a href="/docs/ko/limitations.md">Milvus 제한 문서를</a> 참조하세요.</p>

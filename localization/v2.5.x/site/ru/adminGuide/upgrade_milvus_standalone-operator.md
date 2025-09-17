@@ -151,7 +151,22 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>Начиная с Milvus 2.2.0, метаданные несовместимы с метаданными предыдущих выпусков. Следующие фрагменты примеров предполагают обновление с Milvus 2.1.4 до Milvus v2.5.13.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Создание файла <code translate="no">.yaml</code> для миграции метаданных</h3><p>Создайте файл миграции метаданных. Ниже приведен пример. В файле конфигурации необходимо указать <code translate="no">name</code>, <code translate="no">sourceVersion</code> и <code translate="no">targetVersion</code>. В следующем примере <code translate="no">name</code> устанавливается на <code translate="no">my-release-upgrade</code>, <code translate="no">sourceVersion</code> - на <code translate="no">v2.1.4</code>, а <code translate="no">targetVersion</code> - на <code translate="no">v2.5.13</code>. Это означает, что ваш экземпляр Milvus будет обновлен с версии 2.1.4 до версии 2.5.13.</p>
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Создание файла <code translate="no">.yaml</code> для миграции метаданных<button data-href="#1-Create-a-yaml-file-for-metadata-migration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Создайте файл миграции метаданных. Ниже приведен пример. В файле конфигурации необходимо указать <code translate="no">name</code>, <code translate="no">sourceVersion</code> и <code translate="no">targetVersion</code>. В следующем примере <code translate="no">name</code> устанавливается на <code translate="no">my-release-upgrade</code>, <code translate="no">sourceVersion</code> - на <code translate="no">v2.1.4</code>, а <code translate="no">targetVersion</code> - на <code translate="no">v2.5.13</code>. Это означает, что ваш экземпляр Milvus будет обновлен с версии 2.1.4 до версии 2.5.13.</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
 <span class="hljs-attr">metadata:</span>
@@ -170,12 +185,57 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
   <span class="hljs-comment"># backupPVC: &quot;&quot;</span>
   <span class="hljs-comment"># maxRetry: 3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. Примените новую конфигурацию</h3><p>Выполните следующую команду, чтобы применить новую конфигурацию.</p>
+<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. Примените новую конфигурацию<button data-href="#2-Apply-the-new-configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Выполните следующую команду, чтобы применить новую конфигурацию.</p>
 <pre><code translate="no">$ kubectl <span class="hljs-built_in">create</span> -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/<span class="hljs-built_in">config</span>/samples/milvusupgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. Проверьте состояние миграции метаданных</h3><p>Выполните следующую команду, чтобы проверить статус миграции метаданных.</p>
+<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. Проверьте состояние миграции метаданных<button data-href="#3-Check-the-status-of-metadata-migration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Выполните следующую команду, чтобы проверить статус миграции метаданных.</p>
 <pre><code translate="no">kubectl <span class="hljs-keyword">describe</span> milvus <span class="hljs-keyword">release</span><span class="hljs-operator">-</span>name
 <button class="copy-code-btn"></button></code></pre>
 <p>Статус <code translate="no">ready</code> в выводе означает, что миграция метаданных прошла успешно.</p>
 <p>Также можно выполнить команду <code translate="no">kubectl get pod</code>, чтобы проверить все поды. Если все капсулы имеют статус <code translate="no">ready</code>, миграция метаданных выполнена успешно.</p>
-<h3 id="4-Delete-my-release-upgrade" class="common-anchor-header">4. Удалить <code translate="no">my-release-upgrade</code></h3><p>После успешного обновления удалите <code translate="no">my-release-upgrade</code> в YAML-файле.</p>
+<h3 id="4-Delete-my-release-upgrade" class="common-anchor-header">4. Удалить <code translate="no">my-release-upgrade</code><button data-href="#4-Delete-my-release-upgrade" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После успешного обновления удалите <code translate="no">my-release-upgrade</code> в YAML-файле.</p>

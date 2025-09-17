@@ -58,7 +58,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>模型排序器通过一个定义明确的工作流程，将语言模型理解能力集成到 Milvus 搜索流程中：</p>
+    </button></h2><p>模型排序器通过一个定义明确的工作流程，将语言模型理解能力整合到 Milvus 搜索流程中：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" />
@@ -121,11 +121,47 @@ beta: Milvus 2.6.x
 </ul></td>
      <td><p>内容管理系统需要具有标准要求的高效 Rerankers 功能</p></td>
    </tr>
+   <tr>
+     <td><p>一致性</p></td>
+     <td><p>优先考虑可靠性和易集成性的企业应用程序</p></td>
+     <td><ul>
+<li><p>企业级可靠性和可扩展性</p></li>
+<li><p>托管服务，无需维护基础设施</p></li>
+<li><p>多语言 Rerankers 功能</p></li>
+<li><p>内置速率限制和错误处理功能</p></li>
+</ul></td>
+     <td><p>需要高可用性搜索、一致的 API 性能和多语言产品目录的电子商务平台</p></td>
+   </tr>
+   <tr>
+     <td><p>Voyage AI</p></td>
+     <td><p>具有特定性能和上下文要求的 RAG 应用程序</p></td>
+     <td><ul>
+<li><p>专为 Rerankers 任务训练的模型</p></li>
+<li><p>针对不同文档长度的精细截断控制</p></li>
+<li><p>针对生产工作负载进行优化推理</p></li>
+<li><p>多种模型变体（Rerank-2、Rerank-lite 等）</p></li>
+</ul></td>
+     <td><p>具有不同文档长度的研究数据库，需要微调性能控制和专门的语义理解</p></td>
+   </tr>
+   <tr>
+     <td><p>SiliconFlow</p></td>
+     <td><p>具有成本效益优先级的长文档处理应用</p></td>
+     <td><ul>
+<li><p>可配置重叠的高级文档分块</p></li>
+<li><p>基于分块的评分（得分最高的分块代表文档）</p></li>
+<li><p>支持多种 Rerankers 模型</p></li>
+<li><p>通过标准和专业模型变体实现成本效益</p></li>
+</ul></td>
+     <td><p>技术文档搜索系统处理需要智能分割和重叠控制的冗长手册和论文</p></td>
+   </tr>
 </table>
 <p>有关各模型服务实施的详细信息，请参阅专用文档：</p>
 <ul>
 <li><p><a href="/docs/zh/vllm-ranker.md">vLLM 排序器</a></p></li>
 <li><p><a href="/docs/zh/tei-ranker.md">TEI 排序器</a></p></li>
+<li><p><a href="/docs/zh/cohere-ranker.md">Cohere 排序器</a></p></li>
+<li><p><a href="/docs/zh/voyage-ai-ranker.md">Voyage AI 排序器</a></p></li>
+<li><p><a href="/docs/zh/siliconflow-ranker.md">SiliconFlow Ranker</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">实施<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -145,11 +181,28 @@ beta: Milvus 2.6.x
     </button></h2><p>在实施模型排名器之前，请确保您拥有</p>
 <ul>
 <li><p>具有<code translate="no">VARCHAR</code> 字段的 Milvus Collections，其中包含要重新排名的文本</p></li>
-<li><p>可访问 Milvus 实例的正在运行的外部模型服务（vLLM 或 TEI</p></li>
-<li><p>Milvus 与所选模型服务之间的适当网络连接</p></li>
+<li><p>可访问 Milvus 实例的正在运行的外部模型服务</p></li>
+<li><p>Milvus 与所选模型服务之间有适当的网络连接</p></li>
 </ul>
 <p>模型排序器可与标准向量搜索和混合搜索操作无缝集成。实现方法包括创建一个定义 Reranker 配置的 Function 对象，并将其传递给搜索操作。</p>
-<h3 id="Create-a-model-ranker" class="common-anchor-header">创建模型排序器</h3><p>要实现模型 Rerankers，首先要定义一个具有相应配置的 Function 对象：</p>
+<h3 id="Create-a-model-ranker" class="common-anchor-header">创建模型排序器<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要实现模型 Rerankers，首先要定义一个具有相应配置的 Function 对象。在本例中，我们使用 TEI 作为服务提供者：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -164,12 +217,20 @@ model_ranker = Function(
     function_type=FunctionType.RERANK,  <span class="hljs-comment"># Must be set to RERANK</span>
     params={
         <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;model&quot;</span>,  <span class="hljs-comment"># Specify model reranker. Must be &quot;model&quot;</span>
-        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot; or &quot;vllm&quot;</span>
+        <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;tei&quot;</span>,  <span class="hljs-comment"># Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
         <span class="hljs-string">&quot;queries&quot;</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>],  <span class="hljs-comment"># Query text</span>
         <span class="hljs-string">&quot;endpoint&quot;</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>,  <span class="hljs-comment"># Model service endpoint</span>
         <span class="hljs-comment"># &quot;maxBatch&quot;: 32  # Optional: batch size for processing</span>
     }
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -199,7 +260,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>是</p></td>
-     <td><p>包含基于模型的 Reranker 功能配置的字典。可用参数（键）因提供程序（<code translate="no">tei</code> 或<code translate="no">vllm</code> ）而异。详情请参考<a href="/docs/zh/vllm-ranker.md">vLLM Ranker</a>或<a href="/docs/zh/tei-ranker.md">TEI Ranker</a>。</p></td>
+     <td><p>包含基于模型的 Reranker 功能配置的字典。可用参数（键）因服务提供商而异。</p></td>
      <td><p>{...}</p></td>
    </tr>
    <tr>
@@ -212,13 +273,13 @@ model_ranker = Function(
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>是</p></td>
      <td><p>用于重新排序的模型服务提供商。</p></td>
-     <td><p><code translate="no">"tei"</code> 或<code translate="no">"vllm"</code></p></td>
+     <td><p><code translate="no">"tei"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>是</p></td>
-     <td><p>重排模型用于计算相关性得分的查询字符串列表。 查询字符串的数量必须与搜索操作中的查询数量完全匹配（即使使用查询向量代替文本），否则将报错。</p></td>
-     <td><p><code translate="no">["search query"]</code></p></td>
+     <td><p>Rerankers 模型用于计算相关性得分的查询字符串列表。 查询字符串的数量必须与搜索操作中的查询数量完全匹配（即使使用查询向量代替文本），否则将报错。</p></td>
+     <td><p><em>["搜索查询"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.endpoint</code></p></td>
@@ -227,13 +288,30 @@ model_ranker = Function(
      <td><p><code translate="no">"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">maxBatch</code></p></td>
+     <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>否</p></td>
      <td><p>单个批次中要处理的最大文档数。数值越大，吞吐量越大，但需要的内存也越多。</p></td>
      <td><p><code translate="no">32</code> (默认值）</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">应用于标准向量搜索</h3><p>定义模型排序器后，可以通过将其传递给排序器参数，在搜索操作过程中应用该排序器：</p>
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">应用于标准向量搜索<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定义模型排序器后，您可以通过将其传递给排序器参数，在搜索操作过程中应用该排序器：</p>
+<div class="multipleCode">
+   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
@@ -245,7 +323,32 @@ results = client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索</h3><p>模型排序器也可以应用于结合多个向量场的混合搜索操作：</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>模型排序器还可应用于结合多个向量场的混合搜索操作符：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
@@ -271,4 +374,12 @@ hybrid_results = client.hybrid_search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

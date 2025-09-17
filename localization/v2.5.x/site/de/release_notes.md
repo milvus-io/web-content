@@ -44,11 +44,41 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Wir freuen uns, Milvus 2.5.13 ankündigen zu können! Diese Version verbessert Ihre Erfahrung mit neuen Funktionen, wie der Möglichkeit, Feldeigenschaften zu löschen und eine <code translate="no">cast</code> Funktion für JSON-Indizes zu verwenden. Außerdem bietet sie eine Reihe von allgemeinen Leistungs- und Stabilitätsverbesserungen und behebt zahlreiche Fehler, um ein robusteres System zu gewährleisten. Wir empfehlen Ihnen, auf 2.5.13 zu aktualisieren und diese neuesten Updates zu entdecken!</p>
-<h3 id="Features" class="common-anchor-header">Funktionen</h3><ul>
+<h3 id="Features" class="common-anchor-header">Funktionen<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Unterstützung für das Löschen von Eigenschaften aus einem Feld wurde hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/41954">(#41954</a>).</li>
 <li>Es wurde eine <code translate="no">cast</code> Funktion zur Verwendung mit JSON-Indizes hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/42504">(#42504</a>).</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Die Standard-Importpuffergröße wurde erhöht<a href="https://github.com/milvus-io/milvus/pull/42542">(#42542</a>).</li>
 <li>Beschleunigung des Dispatcher-Erstellungsprozesses<a href="https://github.com/milvus-io/milvus/pull/42544">(#42544</a>).</li>
 <li>Gleichgewichtseinschränkungen zwischen Kanal- und Segmentaufgaben wurden entfernt<a href="https://github.com/milvus-io/milvus/pull/42410">(#42410</a>).</li>
@@ -63,7 +93,22 @@ title: Hinweise zur Veröffentlichung
 <li>Zugriffsprotokolle unterstützen nun den Abruf von hybriden Suchausdrücken und Feldern<a href="https://github.com/milvus-io/milvus/pull/41921">(#41921</a>).</li>
 <li>Explizite Verschiebe-Semantik zur <code translate="no">get_batch_view</code> Schnittstelle hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/42402">(#42402</a>).</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Ein Pipeline/Delegator-Leck wurde behoben<a href="https://github.com/milvus-io/milvus/pull/42583">(#42583</a>).</li>
 <li>Die Delegator-Auswahllogik beim Freigeben eines Segments wurde korrigiert, um eine mögliche MixCoord-Panik zu vermeiden<a href="https://github.com/milvus-io/milvus/pull/42572">(#42572</a>).</li>
 <li>Es wurde ein Fehler behoben, der während der Validierung zur Beschädigung von Daten führen konnte<a href="https://github.com/milvus-io/milvus/pull/42555">(#42555</a>).</li>
@@ -76,7 +121,7 @@ title: Hinweise zur Veröffentlichung
 <li>Die Tantivy-Version wurde aktualisiert, um eine Stemmer-Panik zu beheben<a href="https://github.com/milvus-io/milvus/pull/42172">(#42172</a>).</li>
 <li>Es wurde ein Problem behoben, bei dem Vektorausgabefelder nicht abgerufen werden konnten, wenn ein neuer Zwischenindex verwendet wurde<a href="https://github.com/milvus-io/milvus/pull/42183">(#42183</a>).</li>
 <li>Es wurde vermieden, sich auf Knowhere für die Thread-Kontrolle zu verlassen, wenn der Knowhere-Iterator aufgerufen wurde<a href="https://github.com/milvus-io/milvus/pull/42133">(#42133</a>).</li>
-<li>Es wurde ein Problem behoben, bei dem Segmente während einer Balance-Channel-Operation vorzeitig freigegeben werden konnten<a href="https://github.com/milvus-io/milvus/pull/42043">(#42043</a>).</li>
+<li>Es wurde ein Problem behoben, bei dem Segmente während einer Balance Channel Operation vorzeitig freigegeben werden konnten<a href="https://github.com/milvus-io/milvus/pull/42043">(#42043</a>).</li>
 <li>Die <code translate="no">DescribeIndex</code> RESTful Schnittstelle enthält nun einen Zeitstempel<a href="https://github.com/milvus-io/milvus/pull/42105">(#42105</a>).</li>
 <li>Verwendung von Sperren, um die Atomarität des Fallenlassens von Segmentindizes sicherzustellen<a href="https://github.com/milvus-io/milvus/pull/42076">(#42076</a>).</li>
 <li>Eine Proxy-Panik im Shard-Client-Manager wurde behoben<a href="https://github.com/milvus-io/milvus/pull/42026">(#42026</a>).</li>
@@ -106,11 +151,41 @@ title: Hinweise zur Veröffentlichung
 <tr><td>2.5.12</td><td>2.5.10</td><td>2.5.9</td><td>2.5.9</td></tr>
 </tbody>
 </table>
-<p>Wir freuen uns, Ihnen Milvus 2.5.12 vorstellen zu können! Diese Version bietet neue Funktionen wie die Unterstützung von JSON-Indizes für <code translate="no">contains</code> Ausdrücke sowie verschiedene Verbesserungen, darunter aktualisierte <code translate="no">DescribeCollection</code> API-Antworten und eine strengere Verdichtung der Daten. Diese Version enthält auch wichtige Aktualisierungen der Abhängigkeiten, um CVEs zu beheben, sowie zahlreiche Fehlerkorrekturen, um die Stabilität und Leistung zu verbessern. Wir empfehlen Ihnen, auf Milvus 2.5.12 zu aktualisieren, um von diesen neuesten Verbesserungen und Korrekturen zu profitieren!</p>
-<h3 id="Features" class="common-anchor-header">Funktionen</h3><ul>
+<p>Wir freuen uns, Ihnen Milvus 2.5.12 vorstellen zu können! Diese Version bietet neue Funktionen wie die Unterstützung von JSON-Indizes für <code translate="no">contains</code> -Ausdrücke sowie verschiedene Verbesserungen, darunter aktualisierte <code translate="no">DescribeCollection</code> API-Antworten und eine strengere Verdichtung der Daten. Diese Version enthält auch wichtige Aktualisierungen der Abhängigkeiten, um CVEs zu beheben, sowie zahlreiche Fehlerkorrekturen, um die Stabilität und Leistung zu verbessern. Wir empfehlen Ihnen, auf Milvus 2.5.12 zu aktualisieren, um von diesen neuesten Verbesserungen und Korrekturen zu profitieren!</p>
+<h3 id="Features" class="common-anchor-header">Funktionen<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>JSON-Index-Unterstützung für JSON <code translate="no">contains</code> expr<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>).</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Die <code translate="no">DescribeCollection</code> API enthält nun den Zeitstempel der Aktualisierung in ihren Ergebnissen<a href="https://github.com/milvus-io/milvus/pull/41600">(#41600</a>).</li>
 <li>Die <code translate="no">DescribeIndex</code> Schnittstelle gibt nun Indexversionsinformationen aus<a href="https://github.com/milvus-io/milvus/pull/41841">(#41841</a>).</li>
 <li>Unterstützung für eine strengere Ablaufkompaktierung wurde hinzugefügt, um gelöschte Daten zu bereinigen, ohne unbedingt auf eine große Anzahl von Löschungen zu warten<a href="https://github.com/milvus-io/milvus/pull/41856">(#41856</a>).</li>
@@ -124,7 +199,22 @@ title: Hinweise zur Veröffentlichung
 <li>Parameter zum Ignorieren von Konfigurationstyp-Ausnahmen hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/41773">(#41773</a>).</li>
 <li>Setzt Worker <code translate="no">totalSlot</code> im Einzelplatzmodus auf die Hälfte des Wertes im Clustermodus<a href="https://github.com/milvus-io/milvus/pull/41731">(#41731</a>).</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Ein Goroutine-Leck in <code translate="no">ants.pool</code> wurde behoben<a href="https://github.com/milvus-io/milvus/pull/41893">(#41893</a>).</li>
 <li>Es wurde ein Problem behoben, bei dem der Name des Analysators in hybriden Suchanfragen nicht gesetzt wurde<a href="https://github.com/milvus-io/milvus/pull/41897">(#41897</a>).</li>
 <li>Problem mit doppelten Zuweisungen in <code translate="no">ChannelManager</code> behoben<a href="https://github.com/milvus-io/milvus/pull/41877">(#41877</a>).</li>
@@ -167,7 +257,22 @@ title: Hinweise zur Veröffentlichung
 </table>
 <p>Wir freuen uns, die Veröffentlichung von Milvus 2.5.11 ankündigen zu können! Diese Version bietet leistungsstarke neue Funktionen wie die Multi-Analysator-Fähigkeit und erweiterte Tokenizer-Unterstützung (Jieba, Lindera, ICU, Language Identifier). Außerdem haben wir mehrere Verbesserungen vorgenommen, darunter die Aktualisierung des Threadpools für das dynamische Laden von Segmenten und die optimierte Filterung von Löschvorgängen während des binlog-Imports. Wichtige Fehlerkorrekturen betreffen potenzielle Probleme mit dem Fallenlassen von Segmenten, BM25-Suchfehlern und JSON-Statistik-Filterungsfehlern.</p>
 <p>Wir empfehlen Ihnen, auf 2.5.11 zu aktualisieren, um von diesen Verbesserungen und Fehlerbehebungen zu profitieren!</p>
-<h3 id="Features" class="common-anchor-header">Funktionen</h3><ul>
+<h3 id="Features" class="common-anchor-header">Funktionen<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Es wurde die Möglichkeit hinzugefügt, mehrere Analyzer (Tokenizer) für die Unterstützung von mehreren Sprachen zu konfigurieren und den entsprechenden Analyzer auf der Grundlage der Anweisungen der Eingabedaten auszuwählen<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
 <li>Die Funktionalität des BM25 Analyzers wurde verbessert<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
 <li>Einführung einer <code translate="no">run_analyzer</code> API für Trockenübungen, um die Analyse der Tokenisierungsergebnisse zu erleichtern. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/analyzer-overview.md">Analyzer-Übersicht</a>.</li>
@@ -187,7 +292,22 @@ title: Hinweise zur Veröffentlichung
 <li>Unterstützung für binäre Bereichsausdrücke in JSON-Pfadindizes wurde hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/41317">(#41317</a>).</li>
 <li>Unterstützung für Infix- und Suffix-Match-Typen in JSON-Statistiken wurde hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/41388">(#41388</a>).</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Dynamische Aktualisierungen der Größe des Segmentlade-Threadpools wurden aktiviert<a href="https://github.com/milvus-io/milvus/pull/41549">(#41549</a>).</li>
 <li>Beschleunigte Löschfilterung während des Binlog-Imports<a href="https://github.com/milvus-io/milvus/pull/41552">(#41552</a>).</li>
 <li>Überwachungsparameter für die Expression Filter Ratio wurden hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/41403">(#41403</a>).</li>
@@ -196,7 +316,22 @@ title: Hinweise zur Veröffentlichung
 <li>Die Behandlung von Bindestrichen in gRPC-Metadaten-Headern wurde angepasst<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
 <li>Aktualisierung der Go-Version auf 1.24.1 zur Behebung von CVEs<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Es wurde ein Problem behoben, bei dem Segmente möglicherweise nicht korrekt gelöscht wurden, wenn eine Partition gelöscht wurde<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
 <li>Bulk-Insert behoben, so dass die Eingabefeldliste des Funktionsläufers statt der Feldliste des Schemas verwendet wurde<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561</a>).</li>
 <li>BM25-Suchfehler behoben, die auftraten, wenn <code translate="no">avgdl</code> (durchschnittliche Dokumentlänge) NaN war<a href="https://github.com/milvus-io/milvus/pull/41503">(#41503</a>).</li>
@@ -233,15 +368,45 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Milvus 2.5.10 bietet eine verbesserte Such- und Ladeleistung, verbesserte Metrikberichte und erweiterte SVE-Unterstützung für eine beschleunigte Metrikberechnung. Diese Version enthält außerdem mehrere Fehlerkorrekturen, die die Stabilität und Korrektheit erhöhen. Wir möchten Sie ermutigen, ein Upgrade durchzuführen oder es auszuprobieren - Ihr Feedback ist von unschätzbarem Wert, um Milvus noch besser zu machen!</p>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Ignorieren der Meldung von Indexmetriken für nicht existierende Indizes<a href="https://github.com/milvus-io/milvus/pull/41296">(#41296</a>)</li>
 <li>Scan-Modus für LIKE verwenden, auch wenn ein invertierter Index existiert<a href="https://github.com/milvus-io/milvus/pull/41309">(#41309</a>)</li>
 <li>Optimierung der Leistung für LIKE-Ausdrücke<a href="https://github.com/milvus-io/milvus/pull/41222">(#41222</a>)</li>
 <li>Optimiere das Indexformat für verbesserte Ladeleistung<a href="https://github.com/milvus-io/milvus/pull/41041">(#41041</a>)</li>
 <li>RESTful: Konfigurierbarkeit des Standard-Timeouts<a href="https://github.com/milvus-io/milvus/pull/41225">(#41225</a>)</li>
-<li>SVE-Unterstützung für L2-Metrik-Berechnung in FP16 / NY-Funktionen aktivieren<a href="https://github.com/zilliztech/knowhere/pull/1134">(knowhere #1134</a>)</li>
+<li>SVE-Unterstützung für L2-Metrikberechnung in FP16 / NY-Funktionen aktivieren<a href="https://github.com/zilliztech/knowhere/pull/1134">(knowhere #1134</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Fix JSON Index funktioniert nicht für String-Filter<a href="https://github.com/milvus-io/milvus/pull/41383">(#41383</a>)</li>
 <li>Dimensionsprüfung für Nicht-Vektorfelder in der Vorprüfung überspringen<a href="https://github.com/milvus-io/milvus/pull/41329">(#41329</a>)</li>
 <li>Alter collection aktualisiert das Schema nun korrekt<a href="https://github.com/milvus-io/milvus/pull/41308">(#41308</a>)</li>
@@ -275,13 +440,43 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Wir freuen uns, Milvus 2.5.9 ankündigen zu können. Diese Version bietet eine verbesserte Leistung für JSON-Schlüsselstatistiken, erweiterte Indizierungsfunktionen und mehrere kritische Fehlerbehebungen, die die Stabilität und die Datenverarbeitung verbessern. Wir möchten Sie ermutigen, ein Upgrade durchzuführen oder diese Version auszuprobieren, und wie immer sind wir für Ihr Feedback dankbar, um Milvus weiter zu verbessern.</p>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Unterstützung des Überspringens der Punkte-Normalisierung für den gewichteten Re-Ranker<a href="https://github.com/milvus-io/milvus/pull/40905">(#40905</a>)</li>
 <li>Verbesserung der Leistung bei der Erstellung von JSON-Schlüsselstatistiken durch Hinzufügen von Dokumenten in Batches<a href="https://github.com/milvus-io/milvus/pull/40898">(#40898</a>)</li>
 <li>Verwendung von <code translate="no">int32</code> bei der Erstellung von Array-Indizes für <code translate="no">int8</code>/<code translate="no">int16</code> Elementtypen<a href="https://github.com/milvus-io/milvus/pull/41186">(#41186</a>)</li>
-<li>Anpassen der Brute-Force-Suchergebnisse an das Verhalten des JSON-Index für den Ausdruck <code translate="no">exists</code> <a href="https://github.com/milvus-io/milvus/pull/41056">(#41056</a>)</li>
+<li>Anpassen der Brute-Force-Suchergebnisse an das Verhalten des JSON-Index für den <code translate="no">exists</code> Ausdruck<a href="https://github.com/milvus-io/milvus/pull/41056">(#41056</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Ein Problem behoben, das zu TraceID-Verwechslungen führte, wenn der Client eine TraceID sendete<a href="https://github.com/milvus-io/milvus/pull/41149">(#41149</a>)</li>
 <li>Ein möglicher Absturz aufgrund einer falschen Verwendung von <code translate="no">noexcept</code> wurde behoben, was zu IO-Fehlern führte<a href="https://github.com/milvus-io/milvus/pull/41221">(#41221</a>)</li>
 <li>Behebung einer normalen Endlosschleife, die nach der Aussetzung des Gleichgewichts ausgelöst wurde<a href="https://github.com/milvus-io/milvus/pull/41196">(#41196</a>)</li>
@@ -294,14 +489,14 @@ title: Hinweise zur Veröffentlichung
 <li>Zurücksetzen von Metriken entfernt, um genaue Berichte zu gewährleisten<a href="https://github.com/milvus-io/milvus/pull/41081">(#41081</a>)</li>
 <li>Ein Fehler wurde behoben, der verhinderte, dass <code translate="no">null</code> Daten durch <code translate="no">null</code> Ausdrücke gefiltert werden konnten<a href="https://github.com/milvus-io/milvus/pull/41135">(#41135</a>)</li>
 <li>Ignoriert wachsende Segmente ohne Startposition für Siegelrichtlinien<a href="https://github.com/milvus-io/milvus/pull/41131">(#41131</a>)</li>
-<li>Das Aktualisieren von ursprünglichen Such-/Abfrageanfragen bei Wiederholungsversuchen wurde vermieden<a href="https://github.com/milvus-io/milvus/pull/41127">(#41127</a>)</li>
+<li>Vermeidet das Aktualisieren von ursprünglichen Such-/Abfrageanfragen während Wiederholungsversuchen<a href="https://github.com/milvus-io/milvus/pull/41127">(#41127</a>)</li>
 <li>Ein Segmentierungsfehler wurde behoben, wenn <code translate="no">LoadArrowReaderFromRemote</code> in einem Ausnahmepfad läuft<a href="https://github.com/milvus-io/milvus/pull/41071">(#41071</a>)</li>
 <li>Probleme mit manuellem Ausgleich und Ausgleichsprüfung behoben<a href="https://github.com/milvus-io/milvus/pull/41038">(#41038</a>)</li>
 <li>Validiertes Schema ist nicht <code translate="no">nil</code> für JSON-Statistiken mit Lazy <code translate="no">DescribeCollection</code> <a href="https://github.com/milvus-io/milvus/pull/41068">(#41068</a>)</li>
 <li>Fehler bei der Cursorbewegung beim Vergleich zweier Spalten behoben<a href="https://github.com/milvus-io/milvus/pull/41054">(#41054</a>)</li>
 <li>Behobener Absturz beim Einfügen von sowohl <code translate="no">null</code> als auch non-null Arrays mit wachsender mmap open<a href="https://github.com/milvus-io/milvus/pull/41052">(#41052</a>)</li>
 <li>Ein arm64 Kompilierungsproblem wurde behoben<a href="https://github.com/milvus-io/milvus/pull/41058">(#41058</a>)</li>
-<li>Ein Bypass-Thread-Pool-Modus wurde hinzugefügt, um blockierende Einfüge-/Ladeoperationen durch wachsende Indizes zu vermeiden<a href="https://github.com/milvus-io/milvus/pull/41013">(#41013</a>)</li>
+<li>Ein Bypass-Threadpool-Modus wurde hinzugefügt, um blockierende Einfüge-/Ladeoperationen durch wachsende Indizes zu vermeiden<a href="https://github.com/milvus-io/milvus/pull/41013">(#41013</a>)</li>
 <li>JSON-Formatfehler behoben<a href="https://github.com/milvus-io/milvus/pull/41031">(#41031</a>)</li>
 <li>Ein 404-Fehler in der WebUI wurde behoben, wenn <code translate="no">http.enablepprof</code> falsch ist<a href="https://github.com/milvus-io/milvus/pull/41007">(#41007</a>)</li>
 </ul>
@@ -330,13 +525,43 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Wir freuen uns, die Veröffentlichung von Milvus 2.5.8 ankündigen zu können, die Verbesserungen bei JSON-Ausdrücken, UTF-8-Validierung, Speichernutzung und Ausgleichslogik enthält. Diese Version enthält auch mehrere wichtige Fehlerkorrekturen zur Verbesserung der Gleichzeitigkeit und der Datenverarbeitung. Wir möchten Sie ermutigen, ein Upgrade durchzuführen oder es auszuprobieren, und wie immer hilft uns Ihr Feedback, Milvus kontinuierlich zu verbessern!</p>
-<h3 id="Features" class="common-anchor-header">Merkmale</h3><ul>
+<h3 id="Features" class="common-anchor-header">Merkmale<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Unterstützung von JSON <code translate="no">null</code>/<code translate="no">exists</code> Ausdrücken<a href="https://github.com/milvus-io/milvus/pull/41002">(#41002</a>)</li>
 <li>Unterstützung für das Parsen von Sparse-Vektoren aus Parquet-Strukturen bei Bulk-Inserts<a href="https://github.com/milvus-io/milvus/pull/40874">(#40874</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Balanciert die Sammlung mit der größten Zeilenzahl zuerst<a href="https://github.com/milvus-io/milvus/pull/40958">(#40958</a>)</li>
-<li>Unterstützt UTF-8 String-Validierung während des Imports<a href="https://github.com/milvus-io/milvus/pull/40746">(#40746</a>)</li>
+<li>Unterstützung von UTF-8 String-Validierung während des Imports<a href="https://github.com/milvus-io/milvus/pull/40746">(#40746</a>)</li>
 <li>Hinzufügen von UTF-8 Validierung für alle VARCHAR Felder<a href="https://github.com/milvus-io/milvus/pull/40993">(#40993</a>)</li>
 <li>Vermeiden Sie eine erneute Abfrage, wenn die hybride Suche nur den PK als Ausgabefeld anfordert<a href="https://github.com/milvus-io/milvus/pull/40906">(#40906</a>)</li>
 <li>Verfeinerung von Array-Ansichten zur Optimierung der Speichernutzung<a href="https://github.com/milvus-io/milvus/pull/40206">(#40206</a>)</li>
@@ -347,7 +572,22 @@ title: Hinweise zur Veröffentlichung
 <li>Optimierung der DataCoord-Meta-Mutex-Nutzung<a href="https://github.com/milvus-io/milvus/pull/40753">(#40753</a>)</li>
 <li>Einführung von Batch-Abonnements in <code translate="no">MsgDispatcher</code> <a href="https://github.com/milvus-io/milvus/pull/40596">(#40596</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Es wurde ein Absturz behoben, der durch nullbare Eingabe und wachsende mmap-Datentypen verursacht wurde<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
 <li>Möglicher Datenverlust bei Löschoperationen durch doppelte binlog IDs behoben<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>),<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
 <li>Feldindex-Sperren für <code translate="no">GetSegmentsIndexStates</code> hinzugefügt, um eine mögliche Panik beim Einfügen während der Erstellung der Sammlung zu vermeiden<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
@@ -387,10 +627,40 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Wir freuen uns, die Veröffentlichung von Milvus 2.5.7 ankündigen zu können. Das Highlight ist die neu eingeführte JSON Path Index-Funktion. Dies ermöglicht es Ihnen, invertierte Indizes auf dynamische oder JSON-Spalten zu erstellen, um die Abfrageleistung erheblich zu verbessern. Neben dieser neuen Funktionalität haben wir zahlreiche Verbesserungen und Fehlerbehebungen vorgenommen, um die Zuverlässigkeit zu erhöhen, die Fehlerbehandlung zu verfeinern und die Benutzerfreundlichkeit zu verbessern. Wir ermutigen Sie zum Upgrade oder zum Ausprobieren, und wie immer sind wir für Ihr Feedback sehr dankbar, um Milvus weiter zu verbessern!</p>
-<h3 id="Features" class="common-anchor-header">Funktionen</h3><ul>
+<h3 id="Features" class="common-anchor-header">Funktionen<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><strong>JSON-Pfad-Index</strong>: Um den Bedürfnissen der Benutzer nach dynamischen Schemata gerecht zu werden, führt Milvus 2.5.7 die Möglichkeit ein, Indizes für dynamische Spalten und JSON-Spalten zu erstellen. Mit dieser Funktion können Sie invertierte Indizes für bestimmte dynamische Spalten oder JSON-Pfade erstellen, wodurch der langsamere JSON-Ladeprozess effektiv umgangen und die Abfrageleistung erheblich verbessert wird. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/use-json-fields.md">JSON-Feld</a>.</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Neuordnung von Unterausdrücken für konjunktionale Ausdrücke<a href="https://github.com/milvus-io/milvus/pull/40186">(#40186</a>)</li>
 <li>Hinzufügen weiterer Konfigurationsoptionen für <code translate="no">interimindex</code> zur Unterstützung von verfeinerten Modi<a href="https://github.com/milvus-io/milvus/pull/40429">(#40429</a>)</li>
 <li>Verwendung der korrekten Zählermetriken für WA-Gesamtberechnungen<a href="https://github.com/milvus-io/milvus/pull/40679">(#40679</a>)</li>
@@ -403,7 +673,22 @@ title: Hinweise zur Veröffentlichung
 <li>Protokollierung der Startposition von Löschmeldungen<a href="https://github.com/milvus-io/milvus/pull/40678">(#40678</a>)</li>
 <li>Unterstützung des Abrufs von Segment-Binlogs mit der neuen <code translate="no">GetSegmentsInfo</code> Schnittstelle<a href="https://github.com/milvus-io/milvus/pull/40466">(#40466</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Verwendung von <code translate="no">newInsertDataWithFunctionOutputField</code> beim Importieren von Binlog-Dateien<a href="https://github.com/milvus-io/milvus/pull/40742">(#40742</a>)</li>
 <li>Es wurde ein Problem behoben, bei dem mmap-Eigenschaften beim Erstellen einer Sammlung nicht angewendet wurden<a href="https://github.com/milvus-io/milvus/pull/40515">(#40515</a>)</li>
 <li>Löscht die centroids-Datei nicht, wenn das Sampling fehlschlägt; stattdessen wird auf GC gewartet<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>)</li>
@@ -447,8 +732,23 @@ title: Hinweise zur Veröffentlichung
 <tr><td>2.5.6</td><td>2.5.5</td><td>2.5.5</td><td>2.5.5</td></tr>
 </tbody>
 </table>
-<p>Wir freuen uns, die Veröffentlichung von Milvus 2.5.6 ankündigen zu können. Diese Version enthält wertvolle Verbesserungen in den Bereichen Toolchains, Logging, Metriken und Array-Handling sowie mehrere Bugfixes zur Verbesserung der Zuverlässigkeit und Leistung. Dieses Update beinhaltet eine verfeinerte Gleichzeitigkeitsbehandlung, robustere Verdichtungsaufgaben und andere wichtige Verbesserungen. Wir möchten Sie ermutigen, ein Upgrade durchzuführen oder es auszuprobieren, und wie immer freuen wir uns über Ihr Feedback, damit wir Milvus kontinuierlich verbessern können!</p>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<p>Wir freuen uns, die Veröffentlichung von Milvus 2.5.6 ankündigen zu können. Diese Version enthält wertvolle Verbesserungen in den Bereichen Toolchains, Logging, Metriken und Array-Handling sowie mehrere Fehlerkorrekturen für verbesserte Zuverlässigkeit und Leistung. Dieses Update beinhaltet eine verfeinerte Gleichzeitigkeitsbehandlung, robustere Verdichtungsaufgaben und andere wichtige Verbesserungen. Wir möchten Sie ermutigen, ein Upgrade durchzuführen oder es auszuprobieren, und wie immer freuen wir uns über Ihr Feedback, damit wir Milvus kontinuierlich verbessern können!</p>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Upgrade der Go-Toolchain auf 1.22.7<a href="https://github.com/milvus-io/milvus/pull/40399">(#40399</a>)</li>
 <li>Aktualisierung der Rust-Version auf 1.83<a href="https://github.com/milvus-io/milvus/pull/40317">(#40317</a>)</li>
 <li>Erhöhen der Etcd Version auf 3.5.18<a href="https://github.com/milvus-io/milvus/pull/40230">(#40230</a>)</li>
@@ -458,7 +758,22 @@ title: Hinweise zur Veröffentlichung
 <li>Hinzufügen weiterer Metriken für asynchrone CGO-Komponenten<a href="https://github.com/milvus-io/milvus/pull/40232">(#40232</a>)</li>
 <li>Bereinigung des Shard Location Cache nach Freigabe einer Collection<a href="https://github.com/milvus-io/milvus/pull/40228">(#40228</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Array-Korruption behoben, die durch Ignorieren der Gültigkeit verursacht wurde<a href="https://github.com/milvus-io/milvus/pull/40433">(#40433</a>)</li>
 <li>Es wurde ein Problem behoben, bei dem <code translate="no">null</code> Ausdrücke nicht für JSON-Felder funktionierten<a href="https://github.com/milvus-io/milvus/pull/40457">(#40457</a>)</li>
 <li>Es wurde ein Problem behoben, das den falschen Offset speicherte, wenn Tantivy mit einem nullbaren Feld gebaut wurde<a href="https://github.com/milvus-io/milvus/pull/40453">(#40453</a>)</li>
@@ -504,16 +819,61 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Milvus 2.5.5 bringt erhebliche Verbesserungen bei der Anzahl der Sammlungen und Partitionen, die ein einzelner Cluster unterstützen kann. Es ist nun möglich, Milvus mit 10K Sammlungen und 100K Partitionen zu betreiben. In dieser Version wurden auch mehrere kritische Fehler behoben, darunter fehlende Match-Statistiken und ein Deadlock-Problem bei mehrstufigen Abfragen. Außerdem enthält sie zahlreiche Verbesserungen in Bezug auf Beobachtbarkeit und Sicherheit. Wir empfehlen allen Anwendern, die Milvus 2.5.x einsetzen, so bald wie möglich ein Upgrade durchzuführen.</p>
-<h3 id="Dependency-Upgrade" class="common-anchor-header">Upgrade der Abhängigkeiten</h3><p>Aktualisiert auf ETCD 3.5.18, um mehrere CVEs zu beheben.</p>
+<h3 id="Dependency-Upgrade" class="common-anchor-header">Upgrade der Abhängigkeiten<button data-href="#Dependency-Upgrade" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Aktualisiert auf ETCD 3.5.18, um mehrere CVEs zu beheben.</p>
 <ul>
 <li>[2.5] Raft auf cuvs aktualisiert<a href="https://github.com/milvus-io/milvus/pull/39221">(#39221</a>)</li>
 <li>[2.5] Aktualisierte Knowhere-Version<a href="https://github.com/milvus-io/milvus/pull/39673">(#39673</a>, <a href="https://github.com/milvus-io/milvus/pull/39574">#39574</a>)</li>
 </ul>
-<h3 id="Critical-Bugs" class="common-anchor-header">Kritische Bugs</h3><ul>
+<h3 id="Critical-Bugs" class="common-anchor-header">Kritische Bugs<button data-href="#Critical-Bugs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>[2.5] <code translate="no">text_log</code> Präfix für textmatchindex Null-Offset-Datei verwendet<a href="https://github.com/milvus-io/milvus/pull/39936">(#39936</a>)</li>
 <li>[2.5] Sub-Task-Pool für mehrstufige Aufgaben hinzugefügt, um Deadlocks zu vermeiden<a href="https://github.com/milvus-io/milvus/pull/40081">(#40081</a>)</li>
 </ul>
-<h3 id="Bug-Fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-Fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-Fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>[2.5] Deadlock im Aufgabenplaner behoben<a href="https://github.com/milvus-io/milvus/pull/40121">(#40121</a>)</li>
 <li>[2.5] Race Condition behoben, die dazu führte, dass mehrere identische Indizes erstellt wurden<a href="https://github.com/milvus-io/milvus/pull/40180">(#40180</a>)</li>
 <li>[2.5] Problem behoben, bei dem Sammlungen mit doppelten Namen erstellt werden konnten<a href="https://github.com/milvus-io/milvus/pull/40147">(#40147</a>)</li>
@@ -547,11 +907,26 @@ title: Hinweise zur Veröffentlichung
 <li>[2.5] Root-Benutzer konnte alle Sammlungen auflisten, auch wenn <code translate="no">common.security.rootShouldBindRole</code> gesetzt war<a href="https://github.com/milvus-io/milvus/pull/39714">(#39714</a>)</li>
 <li>[2.5] Flowgraph-Leck behoben<a href="https://github.com/milvus-io/milvus/pull/39686">(#39686</a>)</li>
 <li>[2.5] Verwendete param item formatter, um setconfig Overlay zu vermeiden<a href="https://github.com/milvus-io/milvus/pull/39636">(#39636</a>)</li>
-<li>[2.5] Metastore-Berechtigungsname mit Berechtigungsname "all" geprüft<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
+<li>[2.5] Metastore-Privilegname mit Privilegname "all" geprüft<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
 <li>[2.5] Ratenbegrenzer für RESTful v1 hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/39555">(#39555</a>)</li>
 <li>[2.5] Hardcodierte Partitionsnummer im RESTful Handler entfernt<a href="https://github.com/milvus-io/milvus/pull/40113">(#40113</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><h4 id="Observability" class="common-anchor-header">Beobachtbarkeit</h4><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Observability" class="common-anchor-header">Beobachtbarkeit</h4><ul>
 <li>Monitor-Metrik zum Abrufen von Rohdaten hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/40155">(#40155</a>)</li>
 <li>[2.5] Metrik für die Latenzzeit von Get-Vektoren hinzugefügt und Fehlermeldung zum Anfragelimit verfeinert<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
 <li>[2.5] Metrik für Proxy-Warteschlange hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/40071">(#40071</a>)</li>
@@ -615,13 +990,43 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Wir freuen uns, die Veröffentlichung von Milvus 2.5.4 ankündigen zu können, die wichtige Leistungsoptimierungen und neue Funktionen wie PartitionKey-Isolierung, Sparse Index mit DAAT MaxScore und verbesserte Sperrmechanismen enthält. Ein herausragendes Highlight dieser Version ist die Unterstützung von 10.000 Collections und 1 Million Partitionen, was einen wichtigen Meilenstein für mandantenfähige Anwendungsfälle darstellt. In dieser Version wurden außerdem mehrere Fehler behoben, die die allgemeine Stabilität und Zuverlässigkeit verbessern, wobei zwei der kritischen Fehler zu Datenverlusten führen können. Wir ermutigen Sie, diese neueste Version zu aktualisieren oder auszuprobieren, und wir freuen uns auf Ihr Feedback, das uns hilft, Milvus kontinuierlich zu verbessern!</p>
-<h3 id="Features" class="common-anchor-header">Merkmale</h3><ul>
+<h3 id="Features" class="common-anchor-header">Merkmale<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Unterstützt PartitionKey-Isolierung zur Verbesserung der Leistung bei mehreren Partitionsschlüsseln<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/use-partition-key.md">Partitionsschlüssel verwenden</a>.</li>
 <li>Sparse Index unterstützt jetzt DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/sparse_vector.md">Sparse Vector</a>.</li>
 <li>Unterstützung für <code translate="no">is_null</code> in Ausdrücken hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/38931">(#38931</a>)</li>
 <li>Root-Rechte können angepasst werden<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Unterstützung von 10K Sammlungen und 1 Million Partitionen in einem Cluster<a href="https://github.com/milvus-io/milvus/pull/37630">(#37630</a>)</li>
 <li>Zwischengespeicherte Segment-Delta-Informationen zur Beschleunigung des Query Coordinators<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
 <li>Gleichzeitiges Lesen von Metadaten auf der Sammlungsebene zur Beschleunigung der Fehlerbehebung<a href="https://github.com/milvus-io/milvus/pull/38900">(#38900</a>)</li>
@@ -638,19 +1043,49 @@ title: Hinweise zur Veröffentlichung
 <li>Versionskontrolle für skalare Indizes hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>
 <li>Die Geschwindigkeit des Abrufs von Sammlungsinformationen aus RootCoord wurde verbessert, indem unnötige Kopien vermieden wurden<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
 </ul>
-<h3 id="Critial-Bug-fixs" class="common-anchor-header">Kritische Fehlerbehebungen</h3><ul>
+<h3 id="Critial-Bug-fixs" class="common-anchor-header">Kritische Fehlerbehebungen<button data-href="#Critial-Bug-fixs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Suchfehler für Primärschlüssel mit Indizes behoben<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
 <li>Potenzieller Datenverlust durch gleichzeitigen Neustart von MixCoord und Flushing behoben<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
 <li>Löschfehler behoben, der durch unsachgemäße Gleichzeitigkeit zwischen Statistik-Tasks und L0-Verdichtung nach MixCoord-Neustarts ausgelöst wurde<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
 <li>Skalare invertierte Index-Inkompatibilität beim Upgrade von 2.4 auf 2.5 behoben<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Langsame Abfrageprobleme behoben, die durch grobe Sperrgranularität beim Laden von mehreren Spalten verursacht wurden<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
 <li>Es wurde ein Problem behoben, bei dem die Verwendung von Aliasen dazu führen konnte, dass ein Iterator die falsche Datenbank durchlief<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>)</li>
 <li>Es wurde ein Fehler bei der Aktualisierung von Ressourcengruppen behoben, wenn die Datenbank geändert wurde<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>)</li>
 <li>Es wurde ein sporadisches Problem behoben, bei dem der tantivy-Index Index-Dateien während der Freigabe nicht löschen konnte<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
 <li>Langsame Indexierung behoben, die durch zu viele Threads verursacht wurde<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
-<li>Es wurde ein Problem behoben, das verhinderte, dass Festplattenkontingent-Prüfungen während des Massenimports übersprungen wurden<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
+<li>Es wurde ein Problem behoben, das verhinderte, dass Festplattenkontingentprüfungen während des Massenimports übersprungen wurden<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
 <li>Freeze-Probleme behoben, die durch zu viele Message-Queue-Konsumenten verursacht wurden, indem die Gleichzeitigkeit begrenzt wurde<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
 <li>Behobene Abfrage-Timeouts, die durch MixCoord-Neustarts während großflächiger Verdichtungen verursacht wurden<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
 <li>Probleme mit Channel-Ungleichgewicht, verursacht durch Knoten-Ausfallzeiten, wurden behoben<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
@@ -684,7 +1119,22 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Milvus 2.5.3 bietet kritische Fehlerbehebungen und Leistungsverbesserungen zur Verbesserung der allgemeinen Stabilität, Zuverlässigkeit und Benutzerfreundlichkeit. Diese Version verfeinert die Gleichzeitigkeitsbehandlung, verbessert die Indizierung und den Abruf von Daten und aktualisiert mehrere Schlüsselkomponenten, um die Benutzerfreundlichkeit zu erhöhen.</p>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Es wurde ein Problem behoben, bei dem die Verwendung eines <code translate="no">IN</code> Filters auf einem <code translate="no">VARCHAR</code> Primärschlüssel leere Ergebnisse liefern konnte.<a href="https://github.com/milvus-io/milvus/pull/39108">(#39108</a>)</li>
 <li>Es wurde ein Gleichzeitigkeitsproblem zwischen Abfrage- und Löschoperationen behoben, das zu falschen Ergebnissen führen konnte.<a href="https://github.com/milvus-io/milvus/pull/39054">(#39054</a>)</li>
 <li>Es wurde ein Fehler behoben, der durch iteratives Filtern verursacht wurde, wenn ein <code translate="no">expr</code> in einer Abfrage leer war.<a href="https://github.com/milvus-io/milvus/pull/39034">(#39034</a>)</li>
@@ -695,7 +1145,22 @@ title: Hinweise zur Veröffentlichung
 <li>Es wurde eine mögliche Spaltenfeld-Race-Bedingung behoben, die durch gleichzeitiges Abfragen und Laden von Daten verursacht wurde.<a href="https://github.com/milvus-io/milvus/pull/39152">(#39152</a>)</li>
 <li>Bulk-Insert-Fehler wurden behoben, wenn nullable oder default_value Felder nicht in den Daten enthalten waren.<a href="https://github.com/milvus-io/milvus/pull/39111">(#39111</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Hinzufügen einer Ressourcengruppen-API für die RESTful-Schnittstelle.<a href="https://github.com/milvus-io/milvus/pull/39092">(#39092</a>)</li>
 <li>Optimierte Abrufleistung durch Nutzung von Bitset SIMD Methoden.<a href="https://github.com/milvus-io/milvus/pull/39041">(#39041</a>)</li>
 <li>Der MVCC-Zeitstempel wurde als Garantiezeitstempel verwendet, wenn er angegeben wurde.<a href="https://github.com/milvus-io/milvus/pull/39019">(#39019</a>)</li>
@@ -728,12 +1193,42 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Milvus 2.5.2 unterstützt die Änderung der maximalen Länge für VARCHAR-Spalten und behebt mehrere kritische Probleme im Zusammenhang mit Gleichzeitigkeit, Partitionsabbrüchen und der Behandlung von BM25-Statistiken beim Import. Wir empfehlen dringend ein Upgrade auf diese Version, um die Stabilität und Leistung zu verbessern.</p>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><ul>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Festplattennutzungsprotokolle werden nur noch erzeugt, wenn der angegebene Pfad nicht existiert.<a href="https://github.com/milvus-io/milvus/pull/38822">(#38822</a>)</li>
 <li>Es wurde ein Parameter zur Einstellung der maximalen VARCHAR-Länge hinzugefügt und das Limit auf 65.535 zurückgesetzt<a href="https://github.com/milvus-io/milvus/pull/38883">(#38883</a>).</li>
 <li>Unterstützt die Konvertierung von Parametertypen für Ausdrücke.<a href="https://github.com/milvus-io/milvus/pull/38782">(#38782</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Mögliche Deadlocks in Gleichzeitigkeitsszenarien wurden behoben.<a href="https://github.com/milvus-io/milvus/pull/38863">(#38863</a>)</li>
 <li>Die index_null_offset-Datei wurde nur für Felder erzeugt, die Nullwerte unterstützen.<a href="https://github.com/milvus-io/milvus/pull/38834">(#38834</a>)</li>
 <li>Die Verwendung des Abrufplans nach dem Freigeben in der Reduzierungsphase wurde korrigiert.<a href="https://github.com/milvus-io/milvus/pull/38841">(#38841</a>)</li>
@@ -766,10 +1261,40 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Milvus 2.5.1 konzentriert sich auf eine Reihe von Fehlerkorrekturen, die sich mit dem Laden von Speicher, RBAC-Listen, dem Ausgleich von Abfrageknoten und der versiegelten Segmentindizierung befassen und gleichzeitig die Web-UI und die Interceptoren verbessern. Wir empfehlen dringend, auf 2.5.1 zu aktualisieren, um die Stabilität und Zuverlässigkeit zu verbessern.</p>
-<h3 id="Improvement" class="common-anchor-header">Verbesserung</h3><ul>
+<h3 id="Improvement" class="common-anchor-header">Verbesserung<button data-href="#Improvement" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Aktualisierung der Web-UI-Sammlungs- und Abfrageseiten.<a href="https://github.com/milvus-io/milvus/pull/38701">(#38701</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Behebung von OOM-Problemen durch Hinzufügen eines Speicherfaktors zu Ladeschätzungen.<a href="https://github.com/milvus-io/milvus/pull/38722">(#38722</a>)</li>
 <li>Die Erweiterung von Berechtigungsgruppen bei der Auflistung von Richtlinien in RootCoord wurde korrigiert.<a href="https://github.com/milvus-io/milvus/pull/38760">(#38760</a>)</li>
 <li>Es wurden Probleme bei der Auflistung von Berechtigungsgruppen und Sammlungen behoben.<a href="https://github.com/milvus-io/milvus/pull/38738">(#38738</a>)</li>
@@ -806,13 +1331,28 @@ title: Hinweise zur Veröffentlichung
 </tbody>
 </table>
 <p>Milvus 2.5.0 bringt bedeutende Fortschritte zur Verbesserung der Benutzerfreundlichkeit, Skalierbarkeit und Leistung für Benutzer, die mit Vektorsuche und umfangreicher Datenverwaltung zu tun haben. Mit dieser Version integriert Milvus leistungsstarke neue Funktionen wie die begriffsbasierte Suche, Clustering-Kompaktierung für optimierte Abfragen und vielseitige Unterstützung für spärliche und dichte Vektorsuchmethoden. Verbesserungen in den Bereichen Cluster-Management, Indizierung und Datenhandhabung bieten ein neues Maß an Flexibilität und Benutzerfreundlichkeit und machen Milvus zu einer noch robusteren und benutzerfreundlicheren Vektordatenbank.</p>
-<h3 id="Key-Features" class="common-anchor-header">Wesentliche Merkmale</h3><h4 id="Full-Text-Search" class="common-anchor-header">Volltextsuche</h4><p>Milvus 2.5 unterstützt die mit Sparse-BM25 implementierte Volltextsuche! Diese Funktion ist eine wichtige Ergänzung zu den starken semantischen Suchfähigkeiten von Milvus, insbesondere in Szenarien, die seltene Wörter oder technische Begriffe beinhalten. In früheren Versionen unterstützte Milvus Sparse-Vektoren, um bei der Stichwortsuche zu helfen. Diese spärlichen Vektoren wurden außerhalb von Milvus durch neuronale Modelle wie SPLADEv2/BGE-M3 oder statistische Modelle wie den BM25-Algorithmus erzeugt.</p>
-<p>Milvus 2.5 basiert auf <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> und verfügt über eingebaute Analysatoren und Sparse-Vektor-Extraktion, wodurch die API nicht mehr nur Vektoren als Eingabe empfängt, sondern direkt Text akzeptiert. Die statistischen BM25-Informationen werden in Echtzeit aktualisiert, wenn Daten eingefügt werden, was die Benutzerfreundlichkeit und Genauigkeit erhöht. Darüber hinaus bieten spärliche Vektoren, die auf ANN-Algorithmen (Approximate Nearest Neighbour) basieren, eine bessere Leistung als Standard-Schlüsselwortsuchsysteme.</p>
+<h3 id="Key-Features" class="common-anchor-header">Wesentliche Merkmale<button data-href="#Key-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Full-Text-Search" class="common-anchor-header">Volltextsuche</h4><p>Milvus 2.5 unterstützt die mit Sparse-BM25 implementierte Volltextsuche! Diese Funktion ist eine wichtige Ergänzung zu den starken semantischen Suchfähigkeiten von Milvus, insbesondere in Szenarien, die seltene Wörter oder technische Begriffe beinhalten. In früheren Versionen unterstützte Milvus Sparse-Vektoren, um bei der Stichwortsuche zu helfen. Diese spärlichen Vektoren wurden außerhalb von Milvus durch neuronale Modelle wie SPLADEv2/BGE-M3 oder statistische Modelle wie den BM25-Algorithmus erzeugt.</p>
+<p>Milvus 2.5 basiert auf <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> und verfügt über eingebaute Analysatoren und Sparse-Vektor-Extraktion, wodurch die API von einer reinen Vektoreingabe auf eine direkte Texteingabe erweitert wird. Die statistischen BM25-Informationen werden in Echtzeit aktualisiert, wenn Daten eingefügt werden, was die Benutzerfreundlichkeit und Genauigkeit erhöht. Darüber hinaus bieten spärliche Vektoren, die auf ANN-Algorithmen (Approximate Nearest Neighbour) basieren, eine bessere Leistung als Standard-Schlüsselwortsuchsysteme.</p>
 <p>Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/analyzer-overview.md">Analyzer-Übersicht</a> und <a href="/docs/de/v2.5.x/full-text-search.md">Volltextsuche</a>.</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">Cluster Management WebUI (Beta)</h4><p>Um massive Daten und umfangreiche Funktionen besser zu unterstützen, umfasst das ausgeklügelte Design von Milvus verschiedene Abhängigkeiten, zahlreiche Knotenrollen, komplexe Datenstrukturen und mehr. Diese Aspekte können eine Herausforderung für die Nutzung und Wartung darstellen.</p>
 <p>Milvus 2.5 führt eine integrierte Cluster Management WebUI ein, die die Schwierigkeiten bei der Systemwartung reduziert, indem sie die komplexen Informationen der Milvus-Laufzeitumgebung visualisiert. Dazu gehören Details zu Datenbanken und Sammlungen, Segmenten, Kanälen, Abhängigkeiten, Knotenstatus, Aufgabeninformationen, langsame Abfragen und vieles mehr.</p>
 <p>Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/milvus-webui.md">Milvus WebUI</a>.</p>
-<h4 id="Text-Match" class="common-anchor-header">Textabgleich</h4><p>Milvus 2.5 nutzt die Analyse- und Indizierungsfunktionen von <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> für die Textvorverarbeitung und den Aufbau von Indizes und unterstützt den präzisen Abgleich von Textdaten in natürlicher Sprache auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche nach bestimmten Bedingungen verwendet und kann skalare Filter zur Verfeinerung von Abfrageergebnissen einbeziehen, so dass Ähnlichkeitssuchen innerhalb von Vektoren, die skalare Kriterien erfüllen, möglich sind.</p>
+<h4 id="Text-Match" class="common-anchor-header">Textabgleich</h4><p>Milvus 2.5 nutzt die Analyse- und Indizierungsfunktionen von <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> für die Textvorverarbeitung und den Indexaufbau und unterstützt den präzisen Abgleich von Textdaten in natürlicher Sprache auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche nach bestimmten Bedingungen verwendet und kann skalare Filterung zur Verfeinerung von Abfrageergebnissen einbeziehen, was eine Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/v2.5.x/analyzer-overview.md">Analyzer Overview</a> und <a href="/docs/de/v2.5.x/keyword-match.md">Text Match</a>.</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">Bitmap-Index</h4><p>Ein neuer skalarer Datenindex wurde der Milvus-Familie hinzugefügt. Der BitMap-Index verwendet ein Array von Bits, dessen Länge der Anzahl der Zeilen entspricht, um die Existenz von Werten darzustellen und die Suche zu beschleunigen.</p>
 <p>Bitmap-Indizes haben sich traditionell für Felder mit niedriger Kardinalität bewährt, die nur eine geringe Anzahl unterschiedlicher Werte aufweisen, z. B. eine Spalte mit Geschlechtsinformationen, die nur zwei mögliche Werte enthält: männlich und weiblich.</p>
@@ -821,11 +1361,26 @@ title: Hinweise zur Veröffentlichung
 <p>Standardwerte und löschbare Eigenschaften bieten Milvus mehr Flexibilität. Benutzer können diese Funktion für Felder mit unsicheren Werten bei der Erstellung von Sammlungen nutzen. Es vereinfacht auch die Datenmigration von anderen Datenbanksystemen zu Milvus, indem es die Handhabung von Datensätzen mit Nullwerten unter Beibehaltung der ursprünglichen Standardwerteinstellungen ermöglicht.</p>
 <p>Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/nullable-and-default.md">Nullable &amp; Default Value</a>.</p>
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">Faiss-basierte HNSW SQ/PQ/PRQ</h4><p>Durch die enge Zusammenarbeit mit der Faiss-Gemeinschaft konnte der HNSW-Algorithmus in Faiss sowohl in Bezug auf die Funktionalität als auch auf die Leistung erheblich verbessert werden. Aus Gründen der Stabilität und Wartungsfreundlichkeit hat Milvus 2.5 seine Unterstützung für HNSW offiziell von hnswlib nach Faiss verlagert.</p>
-<p>Basierend auf Faiss unterstützt Milvus 2.5 mehrere Quantisierungsmethoden für HNSW, um den Anforderungen verschiedener Szenarien gerecht zu werden: SQ (Scalar Quantizer), PQ (Product Quantizer) und PRQ (Product Residual Quantizer). SQ und PQ sind häufiger anzutreffen; SQ bietet eine gute Abfrageleistung und Aufbaugeschwindigkeit, während PQ bei gleichem Komprimierungsverhältnis eine bessere Wiedererkennung bietet. Viele Vektordatenbanken verwenden in der Regel eine binäre Quantisierung, die eine einfache Form der SQ-Quantisierung darstellt.</p>
+<p>Basierend auf Faiss unterstützt Milvus 2.5 mehrere Quantisierungsmethoden für HNSW, um den Anforderungen verschiedener Szenarien gerecht zu werden: SQ (Scalar Quantizer), PQ (Product Quantizer) und PRQ (Product Residual Quantizer). SQ und PQ sind häufiger anzutreffen; SQ bietet eine gute Abfrageleistung und Erstellungsgeschwindigkeit, während PQ bei gleichem Komprimierungsverhältnis eine bessere Wiedererkennung bietet. Viele Vektordatenbanken verwenden in der Regel eine binäre Quantisierung, die eine einfache Form der SQ-Quantisierung darstellt.</p>
 <p>PRQ ist eine Verschmelzung von PQ und AQ (Additive Quantizer). Im Vergleich zu PQ sind längere Erstellungszeiten erforderlich, um einen besseren Recall zu erzielen, insbesondere bei hohen Komprimierungsraten, wie bei der binären Komprimierung.</p>
 <h4 id="Clustering-Compaction-Beta" class="common-anchor-header">Clustering-Verdichtung (Beta)</h4><p>Milvus 2.5 führt die Clustering Compaction ein, um die Suche zu beschleunigen und die Kosten in großen Sammlungen zu reduzieren. Durch die Angabe eines skalaren Feldes als Clustering-Schlüssel werden die Daten nach Bereichen umverteilt, um die Speicherung und den Abruf zu optimieren. Diese Funktion funktioniert wie ein globaler Index und ermöglicht Milvus, Daten bei Abfragen auf der Grundlage von Clustering-Metadaten effizient zu beschneiden und die Suchleistung zu verbessern, wenn skalare Filter angewendet werden.</p>
 <p>Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/clustering-compaction.md">Clustering Compaction</a>.</p>
-<h3 id="Other-Features" class="common-anchor-header">Andere Funktionen</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">Streaming-Knoten (Beta)</h4><p>Mit Milvus 2.5 wird eine neue Komponente namens Streaming Node eingeführt, die WAL-Dienste (Write-Ahead Logging) bereitstellt. Dadurch ist Milvus in der Lage, vor und nach dem Lesen und Schreiben von Kanälen einen Konsens zu erzielen, wodurch neue Merkmale, Funktionalitäten und Optimierungen möglich werden. Diese Funktion ist in Milvus 2.5 standardmäßig deaktiviert und wird in Version 3.0 offiziell verfügbar sein.</p>
+<h3 id="Other-Features" class="common-anchor-header">Andere Funktionen<button data-href="#Other-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">Streaming-Knoten (Beta)</h4><p>Mit Milvus 2.5 wird eine neue Komponente namens Streaming Node eingeführt, die WAL-Dienste (Write-Ahead Logging) bereitstellt. Dadurch ist Milvus in der Lage, vor und nach dem Lesen und Schreiben von Kanälen einen Konsens zu erzielen, wodurch neue Merkmale, Funktionalitäten und Optimierungen möglich werden. Diese Funktion ist in Milvus 2.5 standardmäßig deaktiviert und wird in Version 3.0 offiziell verfügbar sein.</p>
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6-Unterstützung</h4><p>Milvus unterstützt jetzt IPv6, was eine erweiterte Netzwerkkonnektivität und Kompatibilität ermöglicht.</p>
 <h4 id="CSV-Bulk-Import" class="common-anchor-header">CSV-Bulk-Import</h4><p>Zusätzlich zu den JSON- und Parquet-Formaten unterstützt Milvus jetzt auch den direkten Massenimport von Daten im CSV-Format.</p>
 <h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">Expression Templates zur Abfrage-Beschleunigung</h4><p>Milvus unterstützt jetzt Ausdrucksvorlagen, die die Effizienz des Ausdrucks-Parsing verbessern, insbesondere in Szenarien mit komplexen Ausdrücken.</p>
@@ -838,13 +1393,28 @@ title: Hinweise zur Veröffentlichung
 <li><strong>MVCC-Unterstützung</strong>: Dank der Multi-Version Concurrency Control (MVCC) können Benutzer jetzt Iteratoren verwenden, ohne von nachfolgenden Datenänderungen wie Einfügungen und Löschungen betroffen zu sein.</li>
 <li><strong>Persistenter Cursor</strong>: Milvus unterstützt jetzt einen persistenten Cursor für QueryIterator, so dass Benutzer die Iteration nach einem Neustart von Milvus an der letzten Position wieder aufnehmen können, ohne den gesamten Iterationsprozess neu starten zu müssen.</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Verbesserungen</h3><h4 id="Deletion-Optimization" class="common-anchor-header">Optimierung des Löschens</h4><p>Verbesserte Geschwindigkeit und verringerter Speicherverbrauch bei umfangreichen Löschvorgängen durch Optimierung der Sperrenverwendung und der Speicherverwaltung.</p>
+<h3 id="Improvements" class="common-anchor-header">Verbesserungen<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Deletion-Optimization" class="common-anchor-header">Optimierung des Löschens</h4><p>Verbesserte Geschwindigkeit und verringerter Speicherverbrauch bei umfangreichen Löschvorgängen durch Optimierung der Sperrenverwendung und der Speicherverwaltung.</p>
 <h4 id="Dependencies-Upgrade" class="common-anchor-header">Upgrade der Abhängigkeiten</h4><p>Upgrade auf ETCD 3.5.16 und Pulsar 3.0.7 LTS, wobei bestehende CVEs behoben und die Sicherheit verbessert wurde. Hinweis: Das Upgrade auf Pulsar 3.x ist nicht mit früheren 2.x-Versionen kompatibel.</p>
 <p>Benutzer, die bereits eine funktionierende Milvus-Installation haben, müssen die ETCD- und Pulsar-Komponenten aktualisieren, bevor sie die neuen Features und Funktionen nutzen können. Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/upgrade-pulsar-v3.md">Upgrade von Pulsar von 2.x auf 3.x</a></p>
 <h4 id="Local-Storage-V2" class="common-anchor-header">Lokale Speicherung V2</h4><p>In Milvus 2.5 wurde ein neues lokales Dateiformat eingeführt, das die Lade- und Abfrageeffizienz für skalare Daten verbessert, den Speicher-Overhead reduziert und die Grundlage für künftige Optimierungen schafft.</p>
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">Optimierung des Ausdrucks-Parsing</h4><p>Verbessertes Parsen von Ausdrücken durch Implementierung von Caching für wiederholte Ausdrücke, Aktualisierung von ANTLR und Optimierung der Leistung von <code translate="no">NOT IN</code> Klauseln.</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">Verbesserte DDL-Gleichzeitigkeitsleistung</h4><p>Die Gleichzeitigkeitsleistung von Data Definition Language (DDL)-Operationen wurde optimiert.</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">Angleichung der RESTful-API-Funktionen</h4><p>Angleichung der Funktionen der RESTful-API an andere SDKs zur Gewährleistung der Konsistenz.</p>
-<h4 id="Security--Configuration-Updates" class="common-anchor-header">Aktualisierungen für Sicherheit und Konfiguration</h4><p>Unterstützung von TLS zur Sicherung der Kommunikation zwischen Knoten in komplexeren oder Unternehmensumgebungen. Details finden Sie unter <a href="/docs/de/v2.5.x/tls.md">Sicherheitskonfiguration</a>.</p>
+<h4 id="Security--Configuration-Updates" class="common-anchor-header">Aktualisierungen für Sicherheit und Konfiguration</h4><p>Unterstützung von TLS zur Sicherung der Kommunikation zwischen Knoten in komplexeren oder Unternehmensumgebungen. Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/tls.md">Sicherheitskonfiguration</a>.</p>
 <h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">Leistungsverbesserungen bei der Komprimierung</h4><p>Die maximale Segmentbegrenzung bei der gemischten Komprimierung wurde aufgehoben und kleinere Segmente werden nun zuerst priorisiert, wodurch die Effizienz verbessert und Abfragen bei großen oder fragmentierten Datensätzen beschleunigt werden.</p>
 <h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">Score-basierter Channel-Ausgleich</h4><p>Es wurde eine Richtlinie eingeführt, die die Lasten dynamisch über die Kanäle hinweg ausgleicht und so die Ressourcennutzung und die Gesamtstabilität in groß angelegten Implementierungen verbessert.</p>
