@@ -120,7 +120,7 @@ Once you've made these changes, restart your Milvus instance for the settings to
 
 ## Configure DISKANN
 
-DISKANN-related parameters can be configured via your Milvus configuration file (`milvus.yaml`):
+DISKANN-related parameters can only be configured via your Milvus configuration file (`milvus.yaml`):
 
 ```yaml
 # milvus.yaml
@@ -142,6 +142,12 @@ Fine-tuning DISKANN's parameters allows you to tailor its behavior to your speci
 ### Index building params
 
 These parameters influence how the DISKANN index is constructed. Adjusting them can affect the index size, build time, and search quality.
+
+<div class="alert note">
+    
+All the index building params in the list below can only be configured via your Milvus configuration file (`milvus.yaml`)
+
+</div>
 
 <table>
    <tr>
@@ -197,6 +203,14 @@ These parameters influence how the DISKANN index is constructed. Adjusting them 
 
 These parameters influence how DISKANN performs searches. Adjusting them can impact search speed, latency, and resource usage.
 
+<div class="alert note">
+    
+The <code>BeamWidthRatio</code> in the list below can only be configured via your Milvus configuration file (`milvus.yaml`)
+
+The <code>search_list</code> in the list below can only be configured in the search params in SDK.
+
+</div>
+
 <table>
    <tr>
      <th></th>
@@ -217,7 +231,7 @@ These parameters influence how DISKANN performs searches. Adjusting them can imp
    </tr>
    <tr>
      <td></td>
-     <td><p><code>SearchListSize</code></p></td>
+     <td><p><code>search_list</code></p></td>
      <td><p>During a search operation, this parameter determines the size of the candidate pool that the algorithm maintains as it traverses the graph. A larger value increases the chances of finding the true nearest neighbors (higher recall) but also increases search latency.</p></td>
      <td><p><strong>Type</strong>: Integer
  <strong>Range</strong>: [1, <em>int_max</em>]</p>

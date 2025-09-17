@@ -18,8 +18,6 @@ The default value and nullable attributes streamline data migration from other d
 
 - Default values or the nullable attribute can only be configured during collection creation and cannot be modified afterward.
 
-- Scalar fields with the nullable attribute enabled cannot be used as `group_by_field` in Grouping Search. For more information about grouping search, refer to [Grouping Search](grouping-search.md).
-
 - Fields marked as nullable cannot be used as partition keys. For more information about partition keys, refer to [Use Partition Key](use-partition-key.md).
 
 - When creating an index on a scalar field with the nullable attribute enabled, null values will be excluded from the index.

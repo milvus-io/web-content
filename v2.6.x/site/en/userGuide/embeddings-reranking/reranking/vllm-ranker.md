@@ -19,8 +19,6 @@ vLLM Ranker is particularly valuable for applications where precision and contex
 
 - E-commerce search that must understand product attributes and user intent
 
-Compared to [TEI Ranker](tei-ranker.md), vLLM Ranker offers greater flexibility in model selection and customization, making it ideal for specialized or complex search applications where the additional configuration options provide significant benefits.
-
 ## Prerequisites
 
 Before implementing vLLM Ranker in Milvus, ensure you have:
@@ -56,6 +54,14 @@ Before implementing vLLM Ranker in Milvus, ensure you have:
 
 To use vLLM Ranker in your Milvus application, create a Function object that specifies how the reranking should operate. This function will be passed to Milvus search operations to enhance result ranking.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 from pymilvus import MilvusClient, Function, FunctionType
 
@@ -74,10 +80,26 @@ vllm_ranker = Function(
         "provider": "vllm",         # Specifies vLLM service
         "queries": ["renewable energy developments"],  # Query text
         "endpoint": "http://localhost:8080",  # vLLM service address
-        "maxBatch": 64,              # Optional: batch size
+        "max_client_batch_size": 32,              # Optional: batch size
         "truncate_prompt_tokens": 256,  # Optional: Use last 256 tokens
     }
 )
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```
 
 ### vLLM ranker-specific parameters
@@ -90,6 +112,36 @@ The following parameters are specific to the vLLM ranker:
      <th><p>Required?</p></th>
      <th><p>Description</p></th>
      <th><p>Value / Example</p></th>
+   </tr>
+   <tr>
+     <td><p><code>reranker</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Must be set to <code>"model"</code> to enable model reranking.</p></td>
+     <td><p><code>"model"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>provider</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>The model service provider to use for reranking.</p></td>
+     <td><p><code>"vllm"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>queries</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>List of query strings used by the rerank model to calculate relevance scores. The number of query strings must match exactly the number of queries in your search operation (even when using query vectors instead of text), otherwise an error will be reported.</p></td>
+     <td><p><em>["search query"]</em></p></td>
+   </tr>
+   <tr>
+     <td><p><code>endpoint</code></p></td>
+     <td><p>Yes</p></td>
+     <td><p>Your vLLM service address.</p></td>
+     <td><p><code>"http://localhost:8080"</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code>max_client_batch_size</code></p></td>
+     <td><p>No</p></td>
+     <td><p>Since model services may not process all data at once, this sets the batch size for accessing the model service in multiple requests.</p></td>
+     <td><p><code>32</code> (default)</p></td>
    </tr>
    <tr>
      <td><p><code>truncate_prompt_tokens</code></p></td>
@@ -109,6 +161,14 @@ For general parameters shared across all model rankers (e.g., `provider`, `queri
 
 To apply vLLM Ranker to a standard vector search:
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 # Execute search with vLLM reranking
 results = client.search(
@@ -123,9 +183,33 @@ results = client.search(
 )
 ```
 
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 ## Apply to hybrid search
 
 vLLM Ranker can also be used with hybrid search to combine dense and sparse retrieval methods:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import AnnSearchRequest
@@ -156,3 +240,20 @@ hybrid_results = client.hybrid_search(
     output_fields=["document"]
 )
 ```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+

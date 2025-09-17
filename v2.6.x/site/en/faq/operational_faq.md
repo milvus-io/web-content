@@ -6,6 +6,60 @@ title: Operational FAQ
 
 # Operational FAQ
 
+#### What is a QueryNode delegator, and what are its responsibilities?
+
+When a collection loads, a QueryNode subscribes to DML channels for insert and delete messages coming from the message queue. The QueryNode that subscribes to these channels, known as the delegator, is responsible for:
+ - Managing increasing segments that require additional memory because of ongoing inserts.
+ - Receiving delete messages and passing them to other QueryNodes that hold the relevant segments.
+
+#### How to identify delegator nodes for a collection?
+
+Use Birdwatcher. 
+
+Install Birdwatcher following [this](https://milvus.io/docs/birdwatcher_install_guides.md#Install-Birdwatcher), then run the following command:
+
+```shell
+./birdwatcher
+# Find delegator nodes for your collection
+Milvus(my-release) > show segment-loaded-grpc --collection <your-collectionID>
+
+ServerID 2
+Channel by-dev-rootcoord-dml_2, collection: 430123456789, version 1
+Leader view for channel: by-dev-rootcoord-dml_2
+Growing segments count: 1, ids: [430123456789_4]
+
+# Map server ID to pod IP
+Milvus(my-release) > show session
+
+Node(s) querynode
+        ID: 1        Version: 2.4.0        Address: 10.0.0.4:19530
+        ID: 2        Version: 2.4.0        Address: 10.0.0.5:19530
+        ID: 3        Version: 2.4.0        Address: 10.0.0.6:19530
+```
+
+#### What parameters can be adjusted if query node memory usage is unbalanced?
+
+Sometimes, query node memory varies because some act as delegators using more RAM. If a delegator's memory is high, adjust queryCoord.delegatorMemoryOverloadFactor to offload sealed segments to other nodes and reduce RAM usage.
+- The default value is 0.1.
+- Increasing this value (e.g., to 0.3 or higher) will cause the system to offload more sealed segments from the overloaded delegator to other QueryNodes, helping balance memory usage. And you can also try to increase value up to 1, which means no sealed segments will be loaded in the delegator nodes.
+
+If you don’t want to restart the cluster, you can modify milvus config with birdwatcher:
+
+```
+./birdwatcher
+Offline > connect --etcd <your-etcd-ip>:2379 --auto
+
+# Change delegatorMemoryOverloadFactor to 0.3 without restart, default value is 0.1
+set config-etcd --key queryCoord.delegatorMemoryOverloadFactor --value 0.3
+```
+
+#### How to set shard_num for a collection?
+
+As a best practice, for a collection with vectors of dimension 768, it is recommended to use at least 1 shard per ~100 million vectors. For heavy write use case, use 4 shards per ~100 million vectors.
+
+E.g. if you have 100 million vectors, use 1-4 shards. If you have 500m vectors, use 5-10 shards.
+
+
 
 #### What if I failed to pull the Milvus Docker image from Docker Hub?
 
@@ -189,4 +243,4 @@ pip install pymilvus>=2.4.2
 You can:
 
 - Check out [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub. Feel free to ask questions, share ideas, and help others.
-- Join our [Milvus Forum](https://discuss.milvus.io/) or [Slack Channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) to find support and engage with our open-source community.
+- Join our [Milvus Forum](https://discuss.milvus.io/) or [Discord channel](https://discord.com/invite/8uyFbECzPX) to find support and engage with our open-source community.

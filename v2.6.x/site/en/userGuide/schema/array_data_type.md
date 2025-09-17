@@ -19,9 +19,9 @@ An ARRAY field stores an ordered set of elements of the same data type. Here's a
 
 - **Default Values**: ARRAY fields do not support default values. However, you can set the `nullable` attribute to `True` to allow null values. For details, refer to [Nullable & Default](nullable-and-default.md).
 
-- **Data Type**: All elements in an Array field must have the same data type, as specified by the `element_type`. If you set `element_type` to `VARCHAR`, you should also set `max_length` for the array elements.
+- **Data Type:** All elements in an ARRAY field must share the same data type, which is defined by the `element_type` parameter. When `element_type` is set to `VARCHAR`, you must also specify the `max_length` for array elements. The `element_type` accepts any scalar data type supported by Milvus, with the exception of `JSON`.
 
-- **Array Capacity**: The number of elements in an Array field must be less than or equal to the maximum capacity defined when the Array was created, as specified by `max_capacity`. The value should be an integer within the range from **1** to **4096**.
+- **Array Capacity**: The number of elements in an ARRAY field must be less than or equal to the maximum capacity defined when the Array was created, as specified by `max_capacity`. The value should be an integer within the range from **1** to **4096**.
 
 - **String Handling**: String values in Array fields are stored as-is, without semantic escaping or conversion. For example, `'a"b'`, `"a'b"`, `'a\'b'`, and `"a\"b"` are stored as entered, while `'a'b'` and `"a"b"` are considered invalid values.
 
@@ -31,7 +31,7 @@ To use ARRAY fields Milvus, define the relevant field type when creating the col
 
 1. Setting `datatype` to the supported Array data type, `ARRAY`.
 
-1. Using the `element_type` parameter to specify the data type of elements in the array. This can be any scalar data type supported by Milvus, such as `VARCHAR` or `INT64`. All elements in the same Array must be of the same data type.
+1. Using the `element_type` parameter to specify the data type of elements in the array. All elements in the same array must be of the same data type.
 
 1. Using the `max_capacity` parameter to define the maximum capacity of the array, i.e., the maximum number of elements it can contain.
 
@@ -48,7 +48,7 @@ If you set `enable_dynamic_fields=True` when defining the schema, Milvus allows 
     <a href="#java">Java</a>
     <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#http">HTTP</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -197,7 +197,7 @@ const schema = [
 ];
 ```
 
-```http
+```bash
 export arrayField1='{
     "fieldName": "tags",
     "dataType": "Array",

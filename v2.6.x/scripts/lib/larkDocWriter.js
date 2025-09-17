@@ -21,129 +21,9 @@ class larkDocWriter {
         this.targets = targets
         this.skip_image_download = skip_image_download
         this.imageDir = imageDir
-        this.block_types = [
-            "page",
-            "text",
-            "heading1",
-            "heading2",
-            "heading3",
-            "heading4",
-            "heading5",
-            "heading6",
-            "heading7",
-            "heading8",
-            "heading9",
-            "bullet",
-            "ordered",
-            "code",
-            "quote",
-            null,
-            "todo",
-            "bitable",
-            "callout",
-            "chat_card",
-            "diagram",
-            "divider",
-            "file",
-            "grid",
-            "grid_column",
-            "iframe",
-            "image",
-            "isv",
-            "mindnote",
-            "sheet",
-            "table",
-            "table_cell",
-            "view",
-            "quote_container",
-            "task",
-            "okr",
-            "okr_objective",
-            "okr_key_result",
-            "okr_progress",
-            "add_ons",
-            "jira_issue",
-            "wiki_catelog",
-            "board"
-        ]
-        this.code_langs = [
-            null,
-            "PlainText",
-            "ABAP",
-            "Ada",
-            "Apache",
-            "Apex",
-            "Assembly",
-            "Bash",
-            "CSharp",
-            "C++",
-            "C",
-            "COBOL",
-            "CSS",
-            "CoffeeScript",
-            "D",
-            "Dart",
-            "Delphi",
-            "Django",
-            "Dockerfile",
-            "Erlang",
-            "Fortran",
-            "FoxPro",
-            "Go",
-            "Groovy",
-            "HTML",
-            "HTMLBars",
-            "HTTP",
-            "Haskell",
-            "JSON",
-            "Java",
-            "JavaScript",
-            "Julia",
-            "Kotlin",
-            "LateX",
-            "Lisp",
-            "Logo",
-            "Lua",
-            "MATLAB",
-            "Makefile",
-            "Markdown",
-            "Nginx",
-            "Objective",
-            "OpenEdgeABL",
-            "PHP",
-            "Perl",
-            "PostScript",
-            "Power",
-            "Prolog",
-            "ProtoBuf",
-            "Python",
-            "R",
-            "RPG",
-            "Ruby",
-            "Rust",
-            "SAS",
-            "SCSS",
-            "SQL",
-            "Scala",
-            "Scheme",
-            "Scratch",
-            "Shell",
-            "Swift",
-            "Thrift",
-            "TypeScript",
-            "VBScript",
-            "Visual",
-            "XML",
-            "YAML",
-            "CMake",
-            "Diff",
-            "Gherkin",
-            "GraphQL",
-            "OpenGL Shading Language",
-            "Properties",
-            "Solidity",
-            "TOML",        
-        ]
+        this.iframes = []
+        this.block_types = this.__block_types()
+        this.code_langs = this.__code_langs()
         this.tokenFetcher = new larkTokenFetcher()
         this.downloader = new Downloader({}, imageDir)
     }
@@ -449,7 +329,7 @@ class larkDocWriter {
         })).json()).data.items
     }
 
-    async __is_to_publish (title, slug) {
+    async __is_to_publish (title, slug, token=null) {
         if (!this.records) {
             await this.__listed_docs()
         }
@@ -457,8 +337,7 @@ class larkDocWriter {
         const result = this.records.filter(record => {
             const record_slug = record["fields"]["Slug"] instanceof Array ? record["fields"]["Slug"][0].text : record["fields"]["Slug"]
 
-            if (record["fields"]["Docs"] && record["fields"]["Docs"]["text"] === title && record_slug == slug && record["fields"]["Targets"] &&
-                record["fields"]["Progress"] && (record["fields"]["Progress"] === "Draft" || record["fields"]["Progress"] === "Publish")) {
+            if (((record["fields"]["Docs"] && record["fields"]["Docs"]["text"] === title && record_slug == slug) || record["fields"]["Docs"]["link"].endsWith(token)) && record["fields"]["Targets"] && record["fields"]["Progress"] && (record["fields"]["Progress"] === "Draft" || record["fields"]["Progress"] === "Publish")) {
 
                 const targets = record["fields"]["Targets"].map(item => item.trim().toLowerCase())
 
@@ -580,6 +459,7 @@ class larkDocWriter {
         markdown = markdown.replace(/(\s*\n){3,}/g, '\n\n').replace(/(<br\/>){2,}/, "<br/>").replace(/<br>/g, '<br/>');
         markdown = markdown.replace(/^[\||\s][\s|\||<br\/>]*\|\n/gm, '')
         markdown = markdown.replace(/\s*<tr>\n(\s*<td>(<br\/>)*<\/td>\n)*\s*<\/tr>/g, '')
+        markdown = this.__example_http_urls(markdown)
         markdown = this.__mdx_patches(markdown)
 
         const description = this.__extract_description(markdown)
@@ -601,12 +481,41 @@ class larkDocWriter {
         if (this.targets.split('.').includes('zilliz')) {
             markdown = markdown.replace(/http:\/\/localhost:19530/g, 'YOUR_CLUSTER_ENDPOINT')
             markdown = markdown.replace(/127.0.0.1:19530/g, 'YOUR_CLUSTER_ENDPOINT')
+            markdown = markdown.replace(/localhost:19530/g, 'YOUR_CLUSTER_ENDPOINT')
             markdown = markdown.replace(/root:Milvus/g, 'YOUR_CLUSTER_TOKEN')
         }
 
         if (this.targets.split('.').includes('milvus')) {
             markdown = markdown.replace(/YOUR_CLUSTER_ENDPOINT/g, 'http://localhost:19530')
             markdown = markdown.replace(/YOUR_CLUSTER_TOKEN/g, 'root:Milvus')
+        }
+
+        if (slug === 'home') {
+            let description = this.__extract_description(markdown)
+
+            // remove title
+            markdown = markdown.split('\n').filter(line => line !== `# ${title}`).join('\n');
+
+            // remove description
+            markdown = markdown.split('\n').filter(line => line !== description).join('\n');
+
+            // add imports
+            imports = [...imports.split('\n'), ...[
+                "\n\nimport Hero from '@site/src/components/Hero';",
+                "\n\nimport Bars from '@site/src/components/Bars';",
+                "\n\nimport Blocks from '@site/src/components/Blocks';",
+                "\n\nimport Cards from '@site/src/components/Cards';",
+                "\n\nimport Stories from '@site/src/components/Stories';",
+                "\n\nimport Banner from '@site/src/components/Banner';"
+            ]].join('\n');
+        }
+
+        if (markdown.match(/\<Supademo/g)) {
+            imports = imports + "\n\nimport Supademo from '@site/src/components/Supademo';"
+        }
+
+        if (markdown.match(/\<Grid/g)) {
+            imports = imports + "\n\nimport Grid from '@site/src/components/Grid';"
         }
 
         if (path) {
@@ -621,6 +530,9 @@ class larkDocWriter {
     }
 
     __front_matters (title, suffix, slug, beta, notebook, type, token, sidebar_position=undefined, sidebar_label="", keywords="", displayed_sidebar=this.displayedSidebar, description="") {
+        let hide_title = '';
+        let hide_toc = '';
+        
         if (keywords !== "") {
             keywords = keywords + ',' + this.keyword_picker().join(',')
             keywords = "keywords: \n  - " + keywords.split(',').map(item => item.trim()).join('\n  - ') + '\n'
@@ -635,6 +547,15 @@ class larkDocWriter {
 
         if (description) {
             description = description.trim().replace('\n', '|').replace(/\[(.*)\]\(.*\)/g, '$1').replace(':', '').replace(/\*+|_+/g, '').replace(/\"/g, "\\\"")
+            description = description.replace(/<\/?[^>]+>/g, '').trim()
+            if (description.length === 0) {
+                description = title
+            }
+        }
+
+        if (slug === 'home') {
+            hide_title = "hide_title: true";
+            hide_toc = "hide_table_of_contents: true";
         }
 
         let front_matter = '---\n' + 
@@ -649,6 +570,8 @@ class larkDocWriter {
         `sidebar_position: ${sidebar_position}` + '\n' +
         keywords +
         displayed_sidebar + '\n' +
+        `${hide_title ? hide_title  + '\n' : ''}` +
+        `${hide_toc ? hide_toc  + '\n' : ''}` +
         '---'
 
         return front_matter
@@ -662,9 +585,9 @@ class larkDocWriter {
         if (block_types.match(/(code){2,}/g) || cond) {
             return ["import Admonition from '@theme/Admonition';", "import Tabs from '@theme/Tabs';",
             "import TabItem from '@theme/TabItem';"].join('\n')
-        } else {
-            return "import Admonition from '@theme/Admonition';" + "\n"
         }
+
+        return "import Admonition from '@theme/Admonition';" + "\n"
     }
 
     async __markdown(blocks=null, indent=0) {
@@ -709,7 +632,7 @@ class larkDocWriter {
             } else if (this.block_types[block['block_type']-1] === 'image') {
                 markdown.push(idt + (await this.__image(block['image'])));
             } else if (this.block_types[block['block_type']-1] === 'iframe') {
-                markdown.push(idt + (await this.__iframe(block['iframe'])));
+                markdown.push(idt + (await this.__iframe(block)));
             } else if (this.block_types[block['block_type']-1] === 'table') {
                 markdown.push(await this.__table(block['table'], indent));
             } else if (this.block_types[block['block_type']-1] === 'sheet') {
@@ -718,6 +641,15 @@ class larkDocWriter {
                 markdown.push(await this.__callout(block, indent));
             } else if (this.block_types[block['block_type']-1] === 'board') {
                 markdown.push(await this.__board(block['board'], indent));
+            } else if (this.block_types[block['block_type']-1] === 'grid') {
+                markdown.push(await this.__grid(block, indent));
+            } else if (this.block_types[block['block_type']-1] === 'add_ons') {
+                // supademo add-ons
+                if (block['add_ons']['component_type_id'] === 'blk_682093ba9580c002363b9dc3') {
+                    markdown.push(await this.__supademo(block['add_ons'], indent));
+                }
+            } else if (this.block_types[block['block_type']-1] === 'source_synced') {
+                markdown.push(await this.__source_synced(block, indent));
             } else if (block['block_type'] === 999 && block['children']) {
                 const children = block['children'].map(child => {
                     return this.__retrieve_block_by_id(child)
@@ -736,48 +668,203 @@ class larkDocWriter {
             .replace(/\n\s*<tr>\n(\s*<td.*><p><\/p><\/td>\n)*\s*<\/tr>/g, '');
     }
 
-    __mdx_patches(content) {
-        var code_marks = [...content.matchAll(/`+/g)].map(match => { return { idx: match.index, match: match[0] } })
+    __example_http_urls(content) {
+        // Find all fenced code blocks and mark their ranges
+        const codeBlockRegex = /```[\s\S]*?```/g;
+        let codeBlocks = [];
+        let match;
+        while ((match = codeBlockRegex.exec(content)) !== null) {
+            codeBlocks.push({ start: match.index, end: match.index + match[0].length });
+        }
 
-        if (code_marks.length % 2 === 0) {
-            const code_pairs = code_marks.map((mark, i) => {
-                if (i % 2 === 0) {
-                    return { start: mark.idx + mark.match.length, end: code_marks[i+1].idx }
+        // Helper to check if a position is inside any code block
+        function isInCodeBlock(pos) {
+            return codeBlocks.some(block => pos >= block.start && pos < block.end);
+        }
+
+        // Match URLs, including those containing <, >, [, ], {, }
+        const urlRegex = /https?:\/\/[^\s'")]+/g;
+        let result = '';
+        let lastIndex = 0;
+
+        // Find all URLs and process those outside code blocks
+        while ((match = urlRegex.exec(content)) !== null) {
+            const urlStart = match.index;
+            const urlEnd = urlStart + match[0].length;
+
+            // Append content before the URL
+            result += content.slice(lastIndex, urlStart);
+
+            if (!isInCodeBlock(urlStart)) {
+                // If the url contains <, [, or {, treat it as an example and encode it
+                if (/[<\[\{]/.test(match[0])) {
+                    result += match[0].replace('http', '<i>http</i>')
                 } else {
-                    return null
+                    result += match[0];
                 }
-            }).filter(mark => mark)
-        
-            const tags = [...content.matchAll(/<([^\n]*?)>+?/g)]
+            } else {
+                // Inside code block, leave as is
+                result += match[0];
+            }
 
-            // console.log(tags.map(tag => tag[0]))
-        
-            tags.forEach((tag, i) => {
-                if (tag && tag[1].endsWith('/')) {
-                    tags[i] = null
-                }
-        
-                if (tag && !tag[1].trim().split(' ')[0].startsWith('/')) {
-                    const end_tag_idx = tags.findIndex(t => t && t[1].endsWith(`/${tag[1].trim().split(' ')[0]}`))
-                    if (end_tag_idx > i) {
-                        tags[i] = null
-                        tags[end_tag_idx] = null
+            lastIndex = urlEnd;
+        }
+
+        // Append remaining content
+        result += content.slice(lastIndex);
+
+        return result;
+    }
+
+    __mdx_patches(content) {
+        const ranges = [];
+        let match;
+    
+        // Get ranges for code blocks
+        const code_marks = [...content.matchAll(/`+/g)];
+        if (code_marks.length % 2 === 0) {
+            for (let i = 0; i < code_marks.length; i += 2) {
+                ranges.push({ start: code_marks[i].index, end: code_marks[i+1].index + code_marks[i+1][0].length });
+            }
+        } else {
+            return content;
+        }
+
+        const KNOWN_HTML_TAGS = new Set(['p', 'strong', 'ul', 'li', 'table', 'tr', 'td', 'th', 'a', 'div', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'em', 'i', 'b', 'br', 'hr', 'code']);
+
+        // Find all tag-like elements and pair them, escape unpaired ones
+        // Modified regex to also match self-closing tags
+        const tag_like_regex = /<\/?([a-zA-Z0-9\-:]+)(?:\s+[^>]*)?\s*\/?>/g;
+        let tag_matches = [];
+        let tag_stack = [];
+        let unpaired_tags = new Set();
+
+        while ((match = tag_like_regex.exec(content)) !== null) {
+            // Check if self-closing tag
+            const isSelfClosing = match[0].endsWith('/>');
+            tag_matches.push({ index: match.index, tag: match[1], isClosing: match[0][1] === '/', isSelfClosing, length: match[0].length });
+        }
+
+        // Pair tags using a stack
+        for (let i = 0; i < tag_matches.length; i++) {
+            const { tag, isClosing, isSelfClosing, index } = tag_matches[i];
+            if (isSelfClosing) {
+                // Self-closing tags are always paired
+                continue;
+            }
+            if (!isClosing) {
+                tag_stack.push({ tag, index, i });
+            } else {
+                // Find last matching opening tag
+                let found = false;
+                for (let j = tag_stack.length - 1; j >= 0; j--) {
+                    if (tag_stack[j].tag === tag) {
+                        tag_stack.splice(j, 1);
+                        found = true;
+                        break;
                     }
                 }
-            })
-        
-            const acorns = tags.filter(tag => tag).filter(acorn => !code_pairs.some(pair => pair.start < acorn.index && pair.end > acorn.index))
-
-            // console.log(acorns.map(acorn => acorn[0]))
-        
-            acorns.forEach((acorn, i) => {
-                const c = acorn[0].match(/</g).length - 1
-                const a = acorn[0].replace(/</g, '\\<').replace('"{', '"\\{');
-                content = content.slice(0, acorn.index + i) + a + content.slice(acorn.index + i + acorn[0].length + c)
-            })
+                if (!found) {
+                    unpaired_tags.add(i); // closing tag without opening
+                }
+            }
         }
-        
-        return content.replace(/\\\\/g, '\\');
+
+        // Any tags left in stack are unpaired opening tags
+        tag_stack.forEach(openTag => unpaired_tags.add(openTag.i));
+
+        // Get ranges for valid html/mdx tags (paired or self-closing only)
+        for (let i = 0; i < tag_matches.length; i++) {
+            const { tag, index, length, isSelfClosing } = tag_matches[i];
+            if (
+                (isSelfClosing ||
+                !unpaired_tags.has(i)) &&
+                (KNOWN_HTML_TAGS.has(tag.toLowerCase()) ||
+                (tag.match(/^[A-Z]/) && /[a-z]/.test(tag)) ||
+                tag.includes('-'))
+            ) {
+                ranges.push({ start: index, end: index + length });
+            }
+        }
+
+        // Get ranges for MDX expressions
+        const mdx_expr_regex = /\{[^}]+\}/g;
+        while (match = mdx_expr_regex.exec(content)) {
+            ranges.push({ start: match.index, end: match.index + match[0].length });
+        }
+
+        // Get ranges for markdown links and images
+        const markdown_link_image_regex = /!?\[[^\]]*\]\([^)]+\)/g;
+        while (match = markdown_link_image_regex.exec(content)) {
+            ranges.push({ start: match.index, end: match.index + match[0].length });
+        }
+
+        // Escape curly braces inside <code>...</code> tags
+        // Find all <code>...</code> blocks and escape { and } inside them
+        const code_tag_regex = /<code>([\s\S]*?)<\/code>/g;
+        let code_tag_matches = [];
+        while ((match = code_tag_regex.exec(content)) !== null) {
+            code_tag_matches.push({ start: match.index, end: match.index + match[0].length });
+        }
+        // Add code tag ranges to ranges so they are not double-escaped
+        code_tag_matches.forEach(r => ranges.push(r));
+
+        // Now, build the result string
+        let result = "";
+        for (let i = 0; i < content.length; i++) {
+            // Check if inside a <code>...</code> block
+            const in_code_tag = code_tag_matches.some(r => i >= r.start && i < r.end);
+            const in_range = ranges.some(r => i >= r.start && i < r.end);
+
+            if (in_code_tag) {
+                // Escape curly braces and sqaure brackets only inside <code>...</code>
+                switch (content[i]) {
+                    case '{':
+                        result += '&#123;';
+                        break;
+                    case '}':
+                        result += '&#125;';
+                        break;
+                    case '[':
+                        result += '&#91;';
+                        break;
+                    case ']':
+                        result += '&#93;';
+                        break;
+                    default:
+                        result += content[i];
+                        break;
+                }
+            } else if (in_range) {
+                result += content[i];
+            } else {
+                switch (content[i]) {
+                    case '<':
+                        result += '&lt;';
+                        break;
+                    case '>':
+                        result += '&gt;';
+                        break;
+                    case '{':
+                        result += '&#123;';
+                        break;
+                    case '}':
+                        result += '&#125;';
+                        break;
+                    case ']':
+                        result += '&#93;';
+                        break;
+                    case '[':
+                        result += '&#91;';
+                        break;
+                    default:
+                        result += content[i];
+                        break;
+                }
+            }
+        }
+
+        return result;
     }
 
     async __page(page) {
@@ -785,7 +872,7 @@ class larkDocWriter {
     }
 
     async __text(text) {
-        return await this.__text_elements(text['elements'])
+        return await this.__text_elements(text['elements']);
     }
 
     async __heading(heading, level) {
@@ -839,7 +926,9 @@ class larkDocWriter {
             children = await this.__markdown(children, indent+4)
         }
 
-        return ' '.repeat(indent) + '1. ' + await this.__text_elements(block['ordered']['elements']) + '\n\n' + children;
+        let content = await this.__text_elements(block['ordered']['elements'])
+
+        return ' '.repeat(indent) + '1. ' + content + '\n\n' + children;
     }
 
     async __callout(block, indent) {
@@ -876,12 +965,13 @@ class larkDocWriter {
         return raw.replace(/(\s*\n){3,}/g, `\n${' '.repeat(indent)}\n`);
     }
 
-    async __code(block, indent, prev, next, blocks) {
-        const code = block.code
+    async __code(code, indent, prev, next, blocks) {
         const valid_langs = ['Python', 'JavaScript', 'Java', 'Go', 'Bash']
         let lang = code.style.language ? this.code_langs[code['style']['language']] : 'plaintext'
         let elements = (await Promise.all(code['elements'].map( async x => {
-            return await this.__text_run(x, code['elements'], true)
+            let content = await this.__text_run(x, code['elements'], true)
+            content = content.replaceAll('&#36;', '$')
+            return content
         }))).join('') 
 
         if (valid_langs.includes(lang)) {
@@ -1148,8 +1238,14 @@ class larkDocWriter {
         }
     }
 
-    async __iframe(iframe) {
-        const root = this.imageDir.replace(/^static\//g, '')
+    async __iframe(block) {
+        const root = this.imageDir.replace(/^static\//g, '');
+        const block_id = block['block_id'];
+        const iframe = block['iframe'];
+        const existing_iframe = this.iframes.find(x => x.block_id === block_id)
+        if (existing_iframe) {
+            return `![${existing_iframe.caption}](/${root}/${existing_iframe.caption}.png)`;
+        }
 
         if (iframe['component']['iframe_type'] !== 8) {
             return '';
@@ -1158,23 +1254,34 @@ class larkDocWriter {
             const key = url.pathname.split('/')[2]
             const node = url.searchParams.get('node-id').split('-').join(":") 
             const caption = (await this.downloader.__fetchCaption(key, node)).nodes[node].document.name;
+            this.iframes.push({
+                block_id,
+                caption
+            })
             return `![${caption}](/${root}/${caption}.png)`;
         } else {
             try {
                 const url = new URL(decodeURIComponent(iframe.component.url))
                 const key = url.pathname.split('/')[2]
                 const node = url.searchParams.get('node-id').split('-').join(":") 
-    
                 const caption = (await this.downloader.__fetchCaption(key, node)).nodes[node].document.name;
-                const result = await this.downloader.__downloadIframe(key, node);
-                result.body.pipe(fs.createWriteStream(`${this.downloader.target_path}/${caption}.png`));
+
+                if (!fs.existsSync(`${this.downloader.target_path}/${caption}.png`)) {
+                    const result = await this.downloader.__downloadIframe(key, node);
+                    result.body.pipe(fs.createWriteStream(`${this.downloader.target_path}/${caption}.png`));
+                    this.iframes.push({
+                        block_id,
+                        caption
+                    })
+                }
+
                 return `![${caption}](/${root}/${caption}.png)`;
             } catch (error) {
                 console.log(error)
                 console.log("-------------- A retry is needed -----------------");
-                console.log("Sleeping for 5 seconds")
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                this.__iframe(iframe)
+                console.log("Sleeping for a minute")
+                await new Promise(resolve => setTimeout(resolve, 60000));
+                this.__iframe(block)
             }
         }
     }
@@ -1219,10 +1326,9 @@ class larkDocWriter {
                     const rowspan = merge.row_span > 1 ? ` rowspan="${merge.row_span}"` : "";
                     let cell_text = this.__filter_content(cell_texts[cell_idx], this.targets).trim()
                         .replace(/^\n/, '')
-                        .replace(/<br\/>/g, '\n')
+                        .replace(/<br\/>/g, '\n\n');
 
-                    cell_text = converter.makeHtml(cell_text)
-                        
+                    cell_text = converter.makeHtml(cell_text).replace(/\n/g, '');
                     if (i === 0) {
                         html += ` ${' '.repeat(indent)}    <th${colspan}${rowspan}>${cell_text}</th>\n`;
                     } else {
@@ -1268,7 +1374,7 @@ class larkDocWriter {
                     cell = cell.toString()
                 }
 
-                cell = cell.trim().replace(/<br>/g, '\n');
+                cell = cell.trim().replace(/<br>/g, '\n\n');
 
                 if (ridx === 0) {
                     result += `${' '.repeat(indent) + '    '.repeat(2)}<th${colspan ? " " + colspan : ""}${rowspan ? " " + rowspan : ""}>${converter.makeHtml(cell).replace(/\n/g, '')}</th>\n`
@@ -1302,34 +1408,70 @@ class larkDocWriter {
 
     }
 
+    async __supademo(addons, indent) {
+        const record = JSON.parse(addons['record']);
+
+        return ' '.repeat(indent) + `<Supademo id="${record['id']}" title="" ${record['isShowcase'] ? 'isShowcase' : ''} />`;
+    }
+
+    async __grid(block, indent) {
+        const grid_columns = block.children.map(child => this.__retrieve_block_by_id(child));
+        const column_size = block.grid.column_size;
+        const width_ratios = grid_columns.map(column => column.grid_column.width_ratio);
+
+        // Await all columns' children markdown
+        const columnsContent = await Promise.all(
+            grid_columns.map(async column => {
+                const children = column.children.map(child => this.__retrieve_block_by_id(child));
+                // Join all children's markdown for this column
+                let childMarkdowns = await this.__markdown(children, indent + 8);
+                childMarkdowns = childMarkdowns.replace(/({#[0-9a-z-]+})/g, "\\$1")
+                return `${' '.repeat(indent + 4)}<div>\n\n${' '.repeat(indent + 8)}${childMarkdowns.trim()}\n\n${' '.repeat(indent + 4)}</div>`;
+            })
+        );
+
+        return (
+            `${' '.repeat(indent)}<Grid columnSize="${column_size}" widthRatios="${width_ratios.join(',')}">\n\n` +
+                columnsContent.join('\n\n') +
+            `\n\n${' '.repeat(indent)}</Grid>\n`
+        );
+    }
+
+    async __source_synced(block, indent) {
+        let children = block.children.map(child => this.__retrieve_block_by_id(child));
+        let content = await this.__markdown(children, indent);
+        return content;
+    }
+
     __retrieve_block_by_id(block_id) {
         if (!this.page_blocks) {
             throw new Error('Page blocks not found');
         }
-
         // console.log(this.page_blocks)
         return this.page_blocks.find(x => x['block_id'] === block_id);
     }
 
     async __equation(element, elements, asis=false) {
         let content = element['equation']['content'];
+        let style = element['equation']['text_element_style'];
 
         let prev = elements[elements.indexOf(element) - 1] || null;
         let prev_element_type = prev? prev['equation'] ? 'equation' : 'text_run' : null;
         let next = elements[elements.indexOf(element) + 1] || null;
         let next_element_type = next? next['equation'] ? 'equation' : 'text_run' : null;
+        let rip_off_line_breaks = false;
 
         // separate single equation
         if (!prev && !next) {
             return `$$\n${content.trim()}\n$$\n`;
         }
-        
+
         // inline single equation 
         if ((!prev || prev_element_type === 'text_run') && (!next ||next_element_type === 'text_run')) {
             return `$${content.trim()}$`;
         }
 
-        return content;        
+        return content;     
     }
 
     async __text_run(element, elements, asis=false) {
@@ -1337,41 +1479,45 @@ class larkDocWriter {
         let style = element['text_run']['text_element_style'];
 
         if (!content.match(/^\s+$/) && !asis) {
+            element['text_run']['content'] = element['text_run']['content'].replace(/\$/g, '&#36;')
+            content = element['text_run']['content'] // escape $ for markdown
+
             if (style['inline_code']) {
                 content = this.__style_markdown(element, elements, 'inline_code', '`');
-            } else {                
-                if (style['bold']) {
-                    content = this.__style_markdown(element, elements, 'bold', '**');
+                content = content.replaceAll('&#36;', '#')
+            }
+                           
+            if (style['bold']) {
+                content = this.__style_markdown(element, elements, 'bold', '**');
+            }
+
+            if (style['italic']) {
+                content = this.__style_markdown(element, elements, 'italic', '*');
+            }
+
+            if (style['strikethrough']) {
+                content = this.__style_markdown(element, elements, 'strikethrough', '~~');
+            }
+
+            if ('link' in style) {
+                const url = await this.__convert_link(decodeURIComponent(style['link']['url']))
+
+                var prefix = [...content.matchAll(/(^\*\*|^\*|^~~)/g)]
+                var suffix = [...content.matchAll(/(\*\*$|\*$|~~$)/g)]
+
+                if (prefix.length > 0) {
+                    prefix = prefix[0][0]
+                } else {
+                    prefix = ''
                 }
 
-                if (style['italic']) {
-                    content = this.__style_markdown(element, elements, 'italic', '*');
+                if (suffix.length > 0) {
+                    suffix = suffix[0][0]
+                } else {
+                    suffix = ''
                 }
 
-                if (style['strikethrough']) {
-                    content = this.__style_markdown(element, elements, 'strikethrough', '~~');
-                }
-
-                if ('link' in style) {
-                    const url = await this.__convert_link(decodeURIComponent(style['link']['url']))
-
-                    var prefix = [...content.matchAll(/(^\*\*|^\*|^~~)/g)]
-                    var suffix = [...content.matchAll(/(\*\*$|\*$|~~$)/g)]
-
-                    if (prefix.length > 0) {
-                        prefix = prefix[0][0]
-                    } else {
-                        prefix = ''
-                    }
-
-                    if (suffix.length > 0) {
-                        suffix = suffix[0][0]
-                    } else {
-                        suffix = ''
-                    }
-
-                    content = `${prefix}[${content.replace(prefix, '').replace(suffix, '')}](${url})${suffix}`;
-                }
+                content = `${prefix}[${content.replace(prefix, '').replace(suffix, '')}](${url})${suffix}`;
             }
         }
 
@@ -1417,15 +1563,13 @@ class larkDocWriter {
         return content;
     }
 
-    async __mention_doc(element, asis=false) {
+    async __mention_doc(element) {
         let title = element['mention_doc']['title'];
         let url = await this.__convert_link(decodeURIComponent(element['mention_doc']['url']));
-        if (url && !asis) {
+        if (url) {
             return `[${title}](${url})`;
         } else {
-            if (!asis) {
-                console.log(`Cannot find ${title}`)
-            }
+            console.log(`Cannot find ${title}`)
             return title;
         }
         
@@ -1536,6 +1680,144 @@ class larkDocWriter {
         }
 
         return sdks
+    }
+
+    __block_types() {
+        return [
+            "page",
+            "text",
+            "heading1",
+            "heading2",
+            "heading3",
+            "heading4",
+            "heading5",
+            "heading6",
+            "heading7",
+            "heading8",
+            "heading9",
+            "bullet",
+            "ordered",
+            "code",
+            "quote",
+            null,
+            "todo",
+            "bitable",
+            "callout",
+            "chat_card",
+            "diagram",
+            "divider",
+            "file",
+            "grid",
+            "grid_column",
+            "iframe",
+            "image",
+            "isv",
+            "mindnote",
+            "sheet",
+            "table",
+            "table_cell",
+            "view",
+            "quote_container",
+            "task",
+            "okr",
+            "okr_objective",
+            "okr_key_result",
+            "okr_progress",
+            "add_ons",
+            "jira_issue",
+            "wiki_catelog",
+            "board",
+            "agenda",
+            "agenda_item",
+            "agenda_item_title",
+            "agenda_item_content",
+            "link_preview",
+            "source_synced",
+            "reference_synced",
+            "sub_page_list",
+            "ai_template"
+        ]
+    }
+
+    __code_langs() {
+        return [
+            null,
+            "PlainText",
+            "ABAP",
+            "Ada",
+            "Apache",
+            "Apex",
+            "Assembly",
+            "Bash",
+            "CSharp",
+            "C++",
+            "C",
+            "COBOL",
+            "CSS",
+            "CoffeeScript",
+            "D",
+            "Dart",
+            "Delphi",
+            "Django",
+            "Dockerfile",
+            "Erlang",
+            "Fortran",
+            "FoxPro",
+            "Go",
+            "Groovy",
+            "HTML",
+            "HTMLBars",
+            "HTTP",
+            "Haskell",
+            "JSON",
+            "Java",
+            "JavaScript",
+            "Julia",
+            "Kotlin",
+            "LateX",
+            "Lisp",
+            "Logo",
+            "Lua",
+            "MATLAB",
+            "Makefile",
+            "Markdown",
+            "Nginx",
+            "Objective",
+            "OpenEdgeABL",
+            "PHP",
+            "Perl",
+            "PostScript",
+            "Power",
+            "Prolog",
+            "ProtoBuf",
+            "Python",
+            "R",
+            "RPG",
+            "Ruby",
+            "Rust",
+            "SAS",
+            "SCSS",
+            "SQL",
+            "Scala",
+            "Scheme",
+            "Scratch",
+            "Shell",
+            "Swift",
+            "Thrift",
+            "TypeScript",
+            "VBScript",
+            "Visual",
+            "XML",
+            "YAML",
+            "CMake",
+            "Diff",
+            "Gherkin",
+            "GraphQL",
+            "OpenGL Shading Language",
+            "Properties",
+            "Solidity",
+            "TOML",        
+        ]
     }
 
     keyword_picker() {

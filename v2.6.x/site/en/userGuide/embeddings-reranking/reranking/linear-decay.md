@@ -63,6 +63,12 @@ Choose linear decay when:
 
 Linear decay creates a straight-line drop that decreases at a constant rate until reaching exactly zero. This pattern appears in many everyday scenarios like countdown timers, inventory depletion, and deadline approaches where relevance has a clear expiration point.
 
+<div class="alert note">
+
+All time parameters (`origin`, `offset`, `scale`) must use the same unit as the collection data. If your collection stores timestamps in a different unit (milliseconds, microseconds), adjust all parameters accordingly.
+
+</div>
+
 ![Linear Decay](../../../../../assets/linear-decay.png)
 
 The graph above shows how linear decay would affect event listings on a ticketing platform:
@@ -121,6 +127,12 @@ Before using decay functions, you must first create a collection with appropriat
 
 After your collection is set up with a numeric field (in this example, `event_date` as seconds from now), create a linear decay ranker:
 
+<div class="alert note">
+
+**Time unit consistency**: When using time-based decay, ensure that `origin`, `scale`, and `offset` parameters use the same time unit as your collection data. If your collection stores timestamps in seconds, use seconds for all parameters. If it uses milliseconds, use milliseconds for all parameters.
+
+</div>
+
 ```python
 from pymilvus import Function, FunctionType
 import time
@@ -129,6 +141,7 @@ import time
 current_time = int(time.time())
 
 # Create a linear decay ranker for event listings
+# Note: All time parameters must use the same unit as your collection data
 ranker = Function(
     name="event_relevance",               # Function identifier
     input_field_names=["event_date"],     # Numeric field to use
@@ -136,10 +149,10 @@ ranker = Function(
     params={
         "reranker": "decay",              # Specify decay reranker
         "function": "linear",             # Choose linear decay
-        "origin": current_time,           # Current time
-        "offset": 12 * 60 * 60,           # 12 hour immediate events window
+        "origin": current_time,           # Current time (seconds, matching collection data)
+        "offset": 12 * 60 * 60,           # 12 hour immediate events window (seconds)
         "decay": 0.5,                     # Half score at scale distance
-        "scale": 7 * 24 * 60 * 60         # 7 days (in seconds)
+        "scale": 7 * 24 * 60 * 60         # 7 days (in seconds, matching collection data)
     }
 )
 ```

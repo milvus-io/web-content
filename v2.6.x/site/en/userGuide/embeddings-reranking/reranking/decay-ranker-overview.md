@@ -21,13 +21,18 @@ These scenarios all share a common need: balancing vector similarity with other 
 
 Decay rankers in Milvus address this need by adjusting search rankings based on numeric field values. They allow you to balance vector similarity with "freshness," "nearness," or other numeric properties of your data, creating more intuitive and contextually relevant search experiences.
 
-## Limits
+## Usage notes
 
 - Decay ranking cannot be used with grouping searches.
 
 - The field used for decay ranking must be numeric (`INT8`, `INT16`, `INT32`, `INT64`, `FLOAT`, or `DOUBLE`).
 
 - Each decay ranker can only use one numeric field.
+
+- **Time unit consistency**: When using time-based decay ranking, the units for `origin`, `scale`, and `offset` parameters must match the units used in your collection data:
+  - If your collection stores timestamps in **seconds**, use seconds for all parameters
+  - If your collection stores timestamps in **milliseconds**, use milliseconds for all parameters
+  - If your collection stores timestamps in **microseconds**, use microseconds for all parameters
 
 ## How it works
 
@@ -188,7 +193,7 @@ For detailed information about how each decay ranker calculates scores and speci
 
 - [Exponential Decay](exponential-decay.md)
 
-- [Exponential Decay](exponential-decay.md)
+- [Linear Decay](linear-decay.md)
 
 ## Implementation example
 
@@ -208,6 +213,7 @@ To implement decay ranking, first define a `Function` object with the appropriat
 from pymilvus import Function, FunctionType
 
 # Create a decay function for timestamp-based decay
+# Note: All time parameters must use the same unit as your collection data
 decay_ranker = Function(
     name="time_decay",                  # Function identifier
     input_field_names=["timestamp"],    # Numeric field to use for decay
@@ -215,9 +221,9 @@ decay_ranker = Function(
     params={
         "reranker": "decay",            # Specify decay reranker. Must be "decay"
         "function": "gauss",            # Choose decay function type: "gauss", "exp", or "linear"
-        "origin": int(datetime.datetime(2025, 1, 15).timestamp()),    # Reference point
-        "scale": 7 * 24 * 60 * 60,      # 7 days in seconds
-        "offset": 24 * 60 * 60,         # 1 day no-decay zone
+        "origin": int(datetime.datetime(2025, 1, 15).timestamp()),    # Reference point (seconds)
+        "scale": 7 * 24 * 60 * 60,      # 7 days in seconds (must match collection data unit)
+        "offset": 24 * 60 * 60,         # 1 day no-decay zone (must match collection data unit)
         "decay": 0.5                    # Half score at scale distance
     }
 )
@@ -267,27 +273,27 @@ decay_ranker = Function(
    <tr>
      <td><p><code>params.origin</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Reference point from which decay score is calculated. Items at this value receive maximum relevance scores.</p></td>
+     <td><p>Reference point from which decay score is calculated. Items at this value receive maximum relevance scores. For time-based decay, the time unit must match your collection data.</p></td>
      <td><ul>
 <li>For timestamps: current time (e.g., <code>int(time.time())</code>)</li>
 <li>For geolocation: user's current coordinates</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code>params.scale</code></p></td>
+          <td><p><code>params.scale</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Distance or time at which relevance drops to the <code>decay</code> value. Controls how quickly relevance declines.
- Larger values create a more gradual decline in relevance; smaller values create a steeper decline.</p></td>
+     <td><p>Distance or time at which relevance drops to the <code>decay</code> value. Controls how quickly relevance declines. For time-based decay, the time unit must match your collection data.
+Larger values create a more gradual decline in relevance; smaller values create a steeper decline.</p></td>
      <td><ul>
 <li>For time: period in seconds (e.g., <code>7 * 24 * 60 * 60</code> for 7 days)</li>
 <li>For distance: meters (e.g., <code>5000</code> for 5km)</li>
 </ul></td>
    </tr>
    <tr>
-     <td><p><code>params.offset</code></p></td>
+          <td><p><code>params.offset</code></p></td>
      <td><p>No</p></td>
      <td><p>Creates a "no-decay zone" around the <code>origin</code> where items maintain full scores (decay score = 1.0).
- Items within this range of the <code>origin</code> maintain maximum relevance.</p></td>
+Items within this range of the <code>origin</code> maintain maximum relevance. For time-based decay, the time unit must match your collection data.</p></td>
      <td><ul>
 <li>For time: period in seconds (e.g., <code>24 * 60 * 60</code> for 1 day)</li>
 <li>For distance: meters (e.g., <code>500</code> for 500m)</li>
