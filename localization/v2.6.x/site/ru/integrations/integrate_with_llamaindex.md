@@ -20,10 +20,10 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LlamaInd
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>В этом руководстве показано, как построить систему Retrieval-Augmented Generation (RAG) с помощью LlamaIndex и Milvus.</p>
-<p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает релевантные документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
+<p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает соответствующие документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a> - это простой и гибкий фреймворк для подключения пользовательских источников данных к большим языковым моделям (LLM). <a href="https://milvus.io/">Milvus</a> - самая продвинутая в мире база векторных данных с открытым исходным кодом, созданная для поиска сходства встраивания и приложений искусственного интеллекта.</p>
 <p>В этом блокноте мы покажем быструю демонстрацию использования MilvusVectorStore.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
@@ -41,7 +41,22 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LlamaInd
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-dependencies" class="common-anchor-header">Установите зависимости</h3><p>Сниппеты кода на этой странице требуют наличия зависимостей pymilvus и llamaindex. Вы можете установить их с помощью следующих команд:</p>
+    </button></h2><h3 id="Install-dependencies" class="common-anchor-header">Установите зависимости<button data-href="#Install-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Сниппеты кода на этой странице требуют наличия зависимостей pymilvus и llamaindex. Вы можете установить их с помощью следующих команд:</p>
 <pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
@@ -51,12 +66,42 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LlamaInd
 <div class="alert note">
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong>. (Нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </div>
-<h3 id="Setup-OpenAI" class="common-anchor-header">Настройка OpenAI</h3><p>Для начала добавим ключ openai api. Это позволит нам получить доступ к chatgpt.</p>
+<h3 id="Setup-OpenAI" class="common-anchor-header">Настройка OpenAI<button data-href="#Setup-OpenAI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Для начала добавим ключ openai api. Это позволит нам получить доступ к chatgpt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
 openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-data" class="common-anchor-header">Подготовьте данные</h3><p>Вы можете загрузить примеры данных с помощью следующих команд:</p>
+<h3 id="Prepare-data" class="common-anchor-header">Подготовьте данные<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Вы можете загрузить примеры данных с помощью следующих команд:</p>
 <pre><code translate="no" class="language-python">! mkdir -p <span class="hljs-string">&#x27;data/&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
@@ -76,7 +121,22 @@ openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Generate-our-data" class="common-anchor-header">Сгенерируйте наши данные</h3><p>В качестве первого примера сгенерируем документ из файла <code translate="no">paul_graham_essay.txt</code>. Это одно эссе Пола Грэма под названием <code translate="no">What I Worked On</code>. Для генерации документов мы будем использовать SimpleDirectoryReader.</p>
+    </button></h2><h3 id="Generate-our-data" class="common-anchor-header">Сгенерируйте наши данные<button data-href="#Generate-our-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В качестве первого примера сгенерируем документ из файла <code translate="no">paul_graham_essay.txt</code>. Это одно эссе Пола Грэма под названием <code translate="no">What I Worked On</code>. Для генерации документов мы будем использовать SimpleDirectoryReader.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> SimpleDirectoryReader
 
 <span class="hljs-comment"># load documents</span>
@@ -88,7 +148,22 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 95f25e4d-f270-4650-87ce-006d69d82033
 </code></pre>
-<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Создание индекса по данным</h3><p>Теперь, когда у нас есть документ, мы можем создать индекс и вставить его. Для индекса мы будем использовать MilvusVectorStore. MilvusVectorStore принимает несколько аргументов:</p>
+<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Создание индекса по данным<button data-href="#Create-an-index-across-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Теперь, когда у нас есть документ, мы можем создать индекс и вставить его. Для индекса мы будем использовать MilvusVectorStore. MilvusVectorStore принимает несколько аргументов:</p>
 <h4 id="basic-args" class="common-anchor-header">основные аргументы</h4><ul>
 <li><code translate="no">uri (str, optional)</code>: URI для подключения, в виде "https://address:port" для Milvus или облачного сервиса Zilliz, или "path/to/local/milvus.db" для локального Milvus. По умолчанию "./milvus_llamaindex.db".</li>
 <li><code translate="no">token (str, optional)</code>: Токен для входа в систему. Пустой, если не используется rbac, если используется rbac, то, скорее всего, будет "имя пользователя:пароль".</li>
@@ -110,7 +185,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">similarity_metric (str, optional)</code>: Метрика сходства, используемая для плотного встраивания; в настоящее время поддерживаются IP, COSINE и L2.</li>
 </ul>
 <h4 id="sparse-field" class="common-anchor-header">поле sparse (разреженное)</h4><ul>
-<li><code translate="no">enable_sparse (bool)</code>: Булевский флаг для включения или отключения разреженного встраивания. По умолчанию False.</li>
+<li><code translate="no">enable_sparse (bool)</code>: Булевский флаг для включения или отключения плотного встраивания. По умолчанию False.</li>
 <li><code translate="no">sparse_embedding_field (str)</code>: Имя поля разреженного встраивания, по умолчанию DEFAULT_SPARSE_EMBEDDING_KEY.</li>
 <li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: Если enable_sparse равно True, этот объект должен быть предоставлен для преобразования текста в разреженную вставку. Если None, то будет использоваться функция разреженного вложения по умолчанию (BGEM3SparseEmbeddingFunction).</li>
 <li><code translate="no">sparse_index_config (dict, optional)</code>: Конфигурация, используемая для построения индекса разреженного вкрапления. По умолчанию - None.</li>
@@ -156,7 +231,22 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <li>Если вы хотите использовать <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, полностью управляемый облачный сервис для Milvus, настройте <code translate="no">uri</code> и <code translate="no">token</code>, которые соответствуют <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">публичной конечной точке и ключу Api</a> в Zilliz Cloud.</li>
 </ul>
 </div>
-<h3 id="Query-the-data" class="common-anchor-header">Запрос данных</h3><p>Теперь, когда наш документ хранится в индексе, мы можем задавать вопросы к индексу. Индекс будет использовать хранящиеся в нем данные в качестве базы знаний для chatgpt.</p>
+<h3 id="Query-the-data" class="common-anchor-header">Запрос данных<button data-href="#Query-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Теперь, когда наш документ хранится в индексе, мы можем задавать вопросы к индексу. Индекс будет использовать хранящиеся в нем данные в качестве базы знаний для chatgpt.</p>
 <pre><code translate="no" class="language-python">query_engine = index.as_query_engine()
 res = query_engine.query(<span class="hljs-string">&quot;What did the author learn?&quot;</span>)
 <span class="hljs-built_in">print</span>(res)

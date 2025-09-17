@@ -825,27 +825,33 @@
             "children": []
           },
           {
+            "label": "구문 검색",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Milvus에 대한 Elasticsearch 쿼리",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "검색 이터레이터",
             "id": "with-iterators.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "파티션 키 사용",
             "id": "use-partition-key.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "순위 재조정",
             "id": "reranking.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -2010,7 +2016,7 @@
             "children": []
           },
           {
-            "label": "12개의 실험실",
+            "label": "12개의 랩",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []

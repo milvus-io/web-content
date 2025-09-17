@@ -130,7 +130,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -150,7 +150,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -825,27 +825,33 @@
             "children": []
           },
           {
+            "label": "Сопоставление фраз",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Запросы Elasticsearch к Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Поисковые итераторы",
             "id": "with-iterators.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Использование ключа раздела",
             "id": "use-partition-key.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Рерайтинг",
             "id": "reranking.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]

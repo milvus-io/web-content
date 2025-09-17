@@ -825,27 +825,33 @@
             "children": []
           },
           {
+            "label": "تطابق العبارات",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "استعلامات البحث المرن إلى ميلفوس",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "مكرر البحث",
             "id": "with-iterators.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "استخدام مفتاح التقسيم",
             "id": "use-partition-key.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "إعادة التصنيف",
             "id": "reranking.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]

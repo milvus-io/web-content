@@ -825,27 +825,33 @@
             "children": []
           },
           {
+            "label": "Correspondência de frases",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Consultas Elasticsearch para Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Iteradores de pesquisa",
             "id": "with-iterators.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Utilizar chave de partição",
             "id": "use-partition-key.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]

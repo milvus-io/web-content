@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Pencocokan FrasaCompatible with Milvus 2.6.x
+title: Pencocokan FrasaCompatible with Milvus 2.5.17+
 summary: >-
   Pencocokan frasa memungkinkan Anda mencari dokumen yang mengandung istilah
   kueri Anda sebagai frasa yang tepat. Secara default, kata-kata harus muncul
@@ -8,9 +8,9 @@ summary: >-
   "pembelajaran mesin robotika" mencocokkan teks seperti "... model pembelajaran
   mesin robotika yang khas...", di mana kata "robotika", "mesin", dan
   "pembelajaran" muncul secara berurutan tanpa kata lain di antaranya.
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Pencocokan Frasa<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Pencocokan Frasa<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,7 +79,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Pencocokan frasa bekerja dengan tipe bidang <code translate="no">VARCHAR</code>, tipe data string di Milvus. Untuk mengaktifkan pencocokan frasa, konfigurasikan skema koleksi Anda dengan mengatur parameter <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code>, mirip dengan pencocokan <a href="/docs/id/keyword-match.md">teks</a>.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Tetapkan <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code></h3><p>Untuk mengaktifkan pencocokan frasa untuk bidang <code translate="no">VARCHAR</code> tertentu, setel kedua parameter <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code> ketika mendefinisikan skema bidang. Konfigurasi ini menginstruksikan Milvus untuk menandai teks dan membuat indeks terbalik dengan informasi posisi yang diperlukan untuk pencocokan frasa yang efisien.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Tetapkan <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk mengaktifkan pencocokan frasa untuk bidang <code translate="no">VARCHAR</code> tertentu, setel kedua parameter <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> ke <code translate="no">True</code> ketika mendefinisikan skema bidang. Konfigurasi ini menginstruksikan Milvus untuk menandai teks dan membuat indeks terbalik dengan informasi posisi yang diperlukan untuk pencocokan frasa yang efisien.</p>
 <p>Berikut adalah contoh definisi skema untuk mengaktifkan pencocokan frasa:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -105,7 +120,22 @@ schema.add_field(
     dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opsional: Mengonfigurasi penganalisis</h3><p>Akurasi pencocokan frasa sangat bergantung pada penganalisis yang digunakan untuk memberi token pada data teks Anda. Penganalisis yang berbeda sesuai dengan bahasa dan format teks yang berbeda, yang memengaruhi tokenisasi dan akurasi posisi. Memilih penganalisis yang sesuai untuk kasus penggunaan spesifik Anda akan mengoptimalkan hasil pencocokan frasa.</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opsional: Mengonfigurasi penganalisis<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Akurasi pencocokan frasa sangat bergantung pada penganalisis yang digunakan untuk memberi token pada data teks Anda. Penganalisis yang berbeda sesuai dengan bahasa dan format teks yang berbeda, yang memengaruhi tokenisasi dan akurasi posisi. Memilih penganalisis yang sesuai untuk kasus penggunaan spesifik Anda akan mengoptimalkan hasil pencocokan frasa.</p>
 <p>Secara default, Milvus menggunakan penganalisis standar, yang memberi token pada teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengonversi teks menjadi huruf kecil. Tidak ada parameter tambahan yang diperlukan untuk penggunaan default. Lihat <a href="/docs/id/standard-analyzer.md">Penganalisis Standar</a> untuk detailnya.</p>
 <p>Jika aplikasi Anda memerlukan penganalisis tertentu, konfigurasikan menggunakan parameter <code translate="no">analyzer_params</code>. Sebagai contoh, berikut adalah cara mengonfigurasi <code translate="no">english</code> analyzer untuk pencocokan frasa dalam teks bahasa Inggris:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
@@ -143,7 +173,22 @@ schema.add_field(
 <div class="alert note">
 <p>Ekspresi <code translate="no">PHRASE_MATCH</code> tidak peka huruf besar/kecil. Anda dapat menggunakan <code translate="no">PHRASE_MATCH</code> atau <code translate="no">phrase_match</code>.</p>
 </div>
-<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">Sintaks ekspresi PHRASE_MATCH</h3><p>Gunakan ekspresi <code translate="no">PHRASE_MATCH</code> untuk menentukan bidang, frasa, dan fleksibilitas opsional (<code translate="no">slop</code>) saat melakukan pencarian. Sintaksnya adalah:</p>
+<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">Sintaks ekspresi PHRASE_MATCH<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Gunakan ekspresi <code translate="no">PHRASE_MATCH</code> untuk menentukan bidang, frasa, dan fleksibilitas opsional (<code translate="no">slop</code>) saat melakukan pencarian. Sintaksnya adalah:</p>
 <pre><code translate="no" class="language-python">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -156,7 +201,22 @@ schema.add_field(
 <li><p><code translate="no">2</code>: Memungkinkan fleksibilitas yang lebih besar, termasuk urutan istilah yang dibalik atau hingga dua token di antaranya. Contoh: Filter untuk <strong>"machine learning"</strong> akan cocok dengan <strong>"learning machine"</strong> (istilah dibalik) atau <strong>"machine quickly boosts learning"</strong> (dua token di antara <strong>"machine"</strong> dan <strong>"learning")</strong>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Example-dataset" class="common-anchor-header">Contoh kumpulan data</h3><p>Misalkan Anda memiliki koleksi bernama <strong>tech_articles</strong> yang berisi lima entitas berikut ini:</p>
+<h3 id="Example-dataset" class="common-anchor-header">Contoh kumpulan data<button data-href="#Example-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Misalkan Anda memiliki koleksi bernama <strong>tech_articles</strong> yang berisi lima entitas berikut ini:</p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -183,7 +243,22 @@ schema.add_field(
      <td><p>"Mempelajari algoritme mesin tingkat lanjut memperluas kemampuan AI"</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">Kueri dengan pencocokan frasa</h3><p>Saat menggunakan metode <code translate="no">query()</code>, <strong>PHRASE_MATCH</strong> bertindak sebagai filter skalar. Hanya dokumen yang mengandung frasa yang ditentukan (sesuai dengan slop yang diizinkan) yang dikembalikan.</p>
+<h3 id="Query-with-phrase-match" class="common-anchor-header">Kueri dengan pencocokan frasa<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Saat menggunakan metode <code translate="no">query()</code>, <strong>PHRASE_MATCH</strong> bertindak sebagai filter skalar. Hanya dokumen yang mengandung frasa yang ditentukan (sesuai dengan slop yang diizinkan) yang dikembalikan.</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">Contoh: slop = 0 (sama persis)</h4><p>Contoh ini mengembalikan dokumen yang berisi frasa yang sama persis dengan <strong>"pembelajaran mesin"</strong> tanpa token tambahan di antaranya.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -206,7 +281,22 @@ result = client.query(
    </tr>
 </table>
 <p>Hanya dokumen 1 yang mengandung frasa yang sama persis dengan <strong>"machine learning"</strong> dalam urutan yang ditentukan tanpa token tambahan.</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">Pencarian dengan pencocokan frasa</h3><p>Dalam operasi pencarian, <strong>PHRASE_MATCH</strong> digunakan untuk memfilter dokumen sebelum menerapkan peringkat kemiripan vektor. Pendekatan dua langkah ini pertama-tama mempersempit kumpulan kandidat dengan pencocokan tekstual dan kemudian memberi peringkat ulang pada kandidat tersebut berdasarkan sematan vektor.</p>
+<h3 id="Search-with-phrase-match" class="common-anchor-header">Pencarian dengan pencocokan frasa<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dalam operasi pencarian, <strong>PHRASE_MATCH</strong> digunakan untuk memfilter dokumen sebelum menerapkan peringkat kemiripan vektor. Pendekatan dua langkah ini pertama-tama mempersempit kumpulan kandidat dengan pencocokan tekstual dan kemudian memberi peringkat ulang pada kandidat tersebut berdasarkan sematan vektor.</p>
 <h4 id="Example-slop--1" class="common-anchor-header">Contoh: slop = 1</h4><p>Di sini, kami mengizinkan slop sebesar 1. Filter diterapkan pada dokumen yang mengandung frasa <strong>"mesin pembelajaran"</strong> dengan sedikit fleksibilitas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>

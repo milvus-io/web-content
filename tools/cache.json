@@ -262,7 +262,7 @@
     "v2.5.x/site/en/about/milvus_adopters.md": "2025-01-14T08:40:20.649Z",
     "v2.5.x/site/en/about/overview.md": "2025-04-10T02:38:08.132Z",
     "v2.5.x/site/en/about/roadmap.md": "2025-03-10T08:26:35.775Z",
-    "v2.5.x/site/en/menuStructure/en.json": "2025-06-09T08:54:43.459Z",
+    "v2.5.x/site/en/menuStructure/en.json": "2025-09-17T08:06:42.378Z",
     "v2.5.x/site/en/adminGuide/allocate.md": "2025-01-14T08:43:02.166Z",
     "v2.5.x/site/en/adminGuide/authenticate.md": "2025-01-14T08:43:03.251Z",
     "v2.5.x/site/en/adminGuide/chunk_cache.md": "2025-01-14T08:43:04.262Z",
@@ -614,7 +614,8 @@
     "v2.5.x/site/en/integrations/use_milvus_in_anythingllm.md": "2025-05-16T10:06:06.604Z",
     "v2.5.x/site/en/userGuide/schema/analyzer/multi-language-analyzers.md": "2025-06-02T08:41:57.562Z",
     "v2.5.x/site/en/integrations/NLWeb_with_milvus.md": "2025-05-21T22:21:15.709Z",
-    "v2.5.x/site/en/getstarted/schema-hands-on.md": "2025-06-03T03:31:31.836Z"
+    "v2.5.x/site/en/getstarted/schema-hands-on.md": "2025-06-03T03:31:31.836Z",
+    "v2.5.x/site/en/userGuide/search-query-get/phrase-match.md": "2025-09-17T07:50:22.163Z"
   },
   "v2.6.x": {
     "v2.6.x/site/en/about/comparison.md": "2025-06-12T06:03:49.458Z",
@@ -747,7 +748,7 @@
     "v2.6.x/site/en/integrations/integrate_with_hugging-face.md": "2025-07-14T08:49:42.954Z",
     "v2.6.x/site/en/integrations/integrate_with_jina.md": "2025-06-12T06:07:29.474Z",
     "v2.6.x/site/en/integrations/integrate_with_langfuse.md": "2025-06-12T06:07:30.866Z",
-    "v2.6.x/site/en/integrations/integrate_with_llamaindex.md": "2025-06-12T06:07:33.480Z",
+    "v2.6.x/site/en/integrations/integrate_with_llamaindex.md": "2025-09-17T07:48:15.143Z",
     "v2.6.x/site/en/integrations/integrate_with_memgpt.md": "2025-06-12T06:07:34.720Z",
     "v2.6.x/site/en/integrations/integrate_with_openai.md": "2025-06-12T06:07:35.952Z",
     "v2.6.x/site/en/integrations/integrate_with_pytorch.md": "2025-06-12T06:07:37.492Z",
@@ -978,7 +979,7 @@
     "v2.6.x/site/en/userGuide/search-query-get/metric.md": "2025-07-11T03:20:49.439Z",
     "v2.6.x/site/en/userGuide/search-query-get/mmap.md": "2025-06-12T06:14:26.278Z",
     "v2.6.x/site/en/userGuide/search-query-get/multi-vector-search.md": "2025-06-12T06:14:28.972Z",
-    "v2.6.x/site/en/userGuide/search-query-get/phrase-match.md": "2025-06-12T06:14:31.626Z",
+    "v2.6.x/site/en/userGuide/search-query-get/phrase-match.md": "2025-09-17T07:48:35.855Z",
     "v2.6.x/site/en/userGuide/search-query-get/range-search.md": "2025-06-12T06:14:33.102Z",
     "v2.6.x/site/en/userGuide/search-query-get/single-vector-search.md": "2025-06-12T06:14:35.926Z",
     "v2.6.x/site/en/userGuide/search-query-get/use-partition-key.md": "2025-06-12T06:14:37.778Z",

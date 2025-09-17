@@ -217,7 +217,7 @@
             "children": []
           },
           {
-            "label": "Storage/Computing",
+            "label": "Archiviazione/Computing",
             "id": "four_layers.md",
             "order": 1,
             "children": []
@@ -825,27 +825,33 @@
             "children": []
           },
           {
+            "label": "Abbinamento di frasi",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Query Elasticsearch a Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Iteratori di ricerca",
             "id": "with-iterators.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Utilizzare la chiave di partizione",
             "id": "use-partition-key.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -2330,7 +2336,7 @@
         "children": []
       },
       {
-        "label": "Utilizzare AsyncMilvusClient con asyncio",
+        "label": "Usare AsyncMilvusClient con asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
         "children": []

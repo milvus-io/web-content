@@ -354,7 +354,7 @@
             "children": []
           },
           {
-            "label": "檢視館藏",
+            "label": "檢視收藏集",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -825,27 +825,33 @@
             "children": []
           },
           {
+            "label": "詞組搭配",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Elasticsearch 查詢至 Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "搜尋迭代器",
             "id": "with-iterators.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "使用磁碟分割金鑰",
             "id": "use-partition-key.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "重新排名",
             "id": "reranking.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]

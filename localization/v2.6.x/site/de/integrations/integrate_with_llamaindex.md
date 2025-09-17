@@ -20,8 +20,8 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und LlamaIndex
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Diese Anleitung zeigt, wie man ein Retrieval-Augmented Generation (RAG) System mit LlamaIndex und Milvus aufbaut.</p>
 <p>Das RAG-System kombiniert ein Retrieval-System mit einem generativen Modell, um neuen Text auf der Grundlage einer vorgegebenen Aufforderung zu generieren. Das System sucht zunächst mit Milvus relevante Dokumente aus einem Korpus und verwendet dann ein generatives Modell, um neuen Text auf der Grundlage der gefundenen Dokumente zu generieren.</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a> ist ein einfaches, flexibles Daten-Framework für die Verbindung benutzerdefinierter Datenquellen mit großen Sprachmodellen (LLMs). <a href="https://milvus.io/">Milvus</a> ist die weltweit fortschrittlichste Open-Source-Vektordatenbank, die für die Einbettung von Ähnlichkeitssuche und KI-Anwendungen entwickelt wurde.</p>
@@ -41,7 +41,22 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und LlamaIndex
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-dependencies" class="common-anchor-header">Abhängigkeiten installieren</h3><p>Die Codeschnipsel auf dieser Seite benötigen die Abhängigkeiten pymilvus und llamaindex. Sie können diese mit den folgenden Befehlen installieren:</p>
+    </button></h2><h3 id="Install-dependencies" class="common-anchor-header">Abhängigkeiten installieren<button data-href="#Install-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Codeschnipsel auf dieser Seite benötigen die Abhängigkeiten pymilvus und llamaindex. Sie können diese mit den folgenden Befehlen installieren:</p>
 <pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
@@ -51,12 +66,42 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und LlamaIndex
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die gerade installierten Abhängigkeiten zu aktivieren. (Klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
-<h3 id="Setup-OpenAI" class="common-anchor-header">OpenAI einrichten</h3><p>Beginnen wir mit dem Hinzufügen des openai api Schlüssels. Dies wird uns den Zugang zu chatgpt ermöglichen.</p>
+<h3 id="Setup-OpenAI" class="common-anchor-header">OpenAI einrichten<button data-href="#Setup-OpenAI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Beginnen wir mit dem Hinzufügen des openai api Schlüssels. Dies wird uns den Zugang zu chatgpt ermöglichen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
 openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-data" class="common-anchor-header">Daten vorbereiten</h3><p>Sie können Beispieldaten mit den folgenden Befehlen herunterladen:</p>
+<h3 id="Prepare-data" class="common-anchor-header">Daten vorbereiten<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können Beispieldaten mit den folgenden Befehlen herunterladen:</p>
 <pre><code translate="no" class="language-python">! mkdir -p <span class="hljs-string">&#x27;data/&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
@@ -76,7 +121,22 @@ openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Generate-our-data" class="common-anchor-header">Erzeugen Sie unsere Daten</h3><p>Als erstes Beispiel wollen wir ein Dokument aus der Datei <code translate="no">paul_graham_essay.txt</code> generieren. Es handelt sich um einen einzelnen Aufsatz von Paul Graham mit dem Titel <code translate="no">What I Worked On</code>. Um die Dokumente zu generieren, werden wir den SimpleDirectoryReader verwenden.</p>
+    </button></h2><h3 id="Generate-our-data" class="common-anchor-header">Erzeugen Sie unsere Daten<button data-href="#Generate-our-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Als erstes Beispiel wollen wir ein Dokument aus der Datei <code translate="no">paul_graham_essay.txt</code> generieren. Es handelt sich um einen einzelnen Aufsatz von Paul Graham mit dem Titel <code translate="no">What I Worked On</code>. Um die Dokumente zu generieren, werden wir den SimpleDirectoryReader verwenden.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> SimpleDirectoryReader
 
 <span class="hljs-comment"># load documents</span>
@@ -88,7 +148,22 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 95f25e4d-f270-4650-87ce-006d69d82033
 </code></pre>
-<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Erstellen Sie einen Index über die Daten</h3><p>Nun, da wir ein Dokument haben, können wir einen Index erstellen und das Dokument einfügen. Für den Index werden wir einen MilvusVectorStore verwenden. MilvusVectorStore nimmt ein paar Argumente entgegen:</p>
+<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Erstellen Sie einen Index über die Daten<button data-href="#Create-an-index-across-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nun, da wir ein Dokument haben, können wir einen Index erstellen und das Dokument einfügen. Für den Index werden wir einen MilvusVectorStore verwenden. MilvusVectorStore nimmt ein paar Argumente entgegen:</p>
 <h4 id="basic-args" class="common-anchor-header">Grundargumente</h4><ul>
 <li><code translate="no">uri (str, optional)</code>: Die URI, zu der eine Verbindung hergestellt werden soll, kommt in Form von "https://address:port" für Milvus oder Zilliz Cloud Service, oder "path/to/local/milvus.db" für das lite local Milvus. Die Standardeinstellung ist "./milvus_llamaindex.db".</li>
 <li><code translate="no">token (str, optional)</code>: Das Token für den Log-In. Leer, wenn kein rbac verwendet wird. Wenn rbac verwendet wird, wird es wahrscheinlich "username:password" sein.</li>
@@ -125,7 +200,7 @@ documents = SimpleDirectoryReader(
 <li>Für "WeightedRanker" wird erwartet:<ul>
 <li>"Gewichte" (Liste von Floats): Eine Liste mit genau zwei Gewichten:<ol>
 <li>Die Gewichtung für die dichte Einbettungskomponente.</li>
-<li>Die Gewichtung für die spärliche Einbettungskomponente. Diese Gewichte werden verwendet, um die Bedeutung der dichten und spärlichen Komponenten der Einbettungen im hybriden Retrievalprozess anzupassen. Der Standardwert ist ein leeres Wörterbuch, was bedeutet, dass der Ranker mit seinen vordefinierten Standardeinstellungen arbeitet.</li>
+<li>Die Gewichtung für die spärliche Einbettungskomponente. Diese Gewichte werden verwendet, um die Wichtigkeit der dichten und spärlichen Komponenten der Einbettungen im hybriden Retrievalprozess anzupassen. Der Standardwert ist ein leeres Wörterbuch, was bedeutet, dass der Ranker mit seinen vordefinierten Standardeinstellungen arbeitet.</li>
 </ol></li>
 </ul></li>
 </ul></li>
@@ -153,10 +228,25 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <ul>
 <li>Die Einstellung von <code translate="no">uri</code> als lokale Datei, z. B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> automatisch alle Daten in dieser Datei speichert.</li>
 <li>Wenn Sie große Datenmengen haben, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Server-Uri, z. B.<code translate="no">http://localhost:19530</code>, als <code translate="no">uri</code>.</li>
-<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, nutzen möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
+<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 </div>
-<h3 id="Query-the-data" class="common-anchor-header">Abfrage der Daten</h3><p>Nun, da unser Dokument im Index gespeichert ist, können wir Fragen an den Index stellen. Der Index wird die in ihm gespeicherten Daten als Wissensbasis für chatgpt verwenden.</p>
+<h3 id="Query-the-data" class="common-anchor-header">Abfrage der Daten<button data-href="#Query-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nun, da unser Dokument im Index gespeichert ist, können wir Fragen an den Index stellen. Der Index wird die in ihm gespeicherten Daten als Wissensbasis für chatgpt verwenden.</p>
 <pre><code translate="no" class="language-python">query_engine = index.as_query_engine()
 res = query_engine.query(<span class="hljs-string">&quot;What did the author learn?&quot;</span>)
 <span class="hljs-built_in">print</span>(res)

@@ -825,27 +825,33 @@
             "children": []
           },
           {
+            "label": "Pencocokan Frasa",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Kueri Elasticsearch ke Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Iterator Pencarian",
             "id": "with-iterators.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Gunakan Kunci Partisi",
             "id": "use-partition-key.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Pemeringkatan ulang",
             "id": "reranking.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -907,7 +913,7 @@
             "children": []
           },
           {
-            "label": "Cohere.",
+            "label": "Cohere",
             "id": "embed-with-cohere.md",
             "order": 8,
             "children": []

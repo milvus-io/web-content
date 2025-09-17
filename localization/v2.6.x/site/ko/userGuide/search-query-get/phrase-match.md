@@ -1,13 +1,13 @@
 ---
 id: phrase-match.md
-title: 구문 검색Compatible with Milvus 2.6.x
+title: 구문 검색Compatible with Milvus 2.5.17+
 summary: >-
   구문 검색을 사용하면 검색어가 포함된 문서를 정확한 구문으로 검색할 수 있습니다. 기본적으로 단어는 동일한 순서로 서로 바로 옆에 나타나야
   합니다. 예를 들어, '로봇 공학 머신 러닝'에 대한 쿼리는 '...일반적인 로봇 공학 머신 러닝 모델...'과 같은 텍스트와 일치하며,
-  여기서 '로봇 공학', '기계', '학습'이라는 단어가 그 사이에 다른 단어 없이 순차적으로 나타납니다.
-beta: Milvus 2.6.x
+  여기서 '로봇 공학', '기계', '학습'이라는 단어가 다른 단어 없이 순서대로 나타납니다.
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">구문 검색<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">구문 검색<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,7 +76,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>구문 일치는 Milvus의 문자열 데이터 유형인 <code translate="no">VARCHAR</code> 필드 유형에서 작동합니다. 구문 일치를 사용하려면 <a href="/docs/ko/keyword-match.md">텍스트 일치와</a> 유사하게 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 매개 변수를 모두 <code translate="no">True</code> 로 설정하여 컬렉션 스키마를 구성하세요.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header"><code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code></h3><p>특정 <code translate="no">VARCHAR</code> 필드에 대해 구문 일치를 사용하려면 필드 스키마를 정의할 때 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 매개 변수를 모두 <code translate="no">True</code> 으로 설정합니다. 이 구성은 Milvus가 텍스트를 토큰화하고 효율적인 구문 일치를 위해 필요한 위치 정보가 포함된 반전 인덱스를 생성하도록 지시합니다.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header"><code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>특정 <code translate="no">VARCHAR</code> 필드에 대해 구문 일치를 사용하려면 필드 스키마를 정의할 때 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 매개 변수를 모두 <code translate="no">True</code> 으로 설정합니다. 이 구성은 Milvus가 텍스트를 토큰화하고 효율적인 구문 일치를 위해 필요한 위치 정보가 포함된 반전 인덱스를 생성하도록 지시합니다.</p>
 <p>다음은 구문 일치를 활성화하는 스키마 정의 예시입니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -102,7 +117,22 @@ schema.add_field(
     dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">선택 사항입니다: 분석기 구성</h3><p>구문 일치 정확도는 텍스트 데이터를 토큰화하는 데 사용되는 분석기에 따라 크게 달라집니다. 분석기마다 언어와 텍스트 형식에 적합하며, 토큰화 및 위치 정확도에 영향을 미칩니다. 특정 사용 사례에 적합한 분석기를 선택하면 구문 매칭 결과를 최적화할 수 있습니다.</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">선택 사항입니다: 분석기 구성<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>구문 일치 정확도는 텍스트 데이터를 토큰화하는 데 사용되는 분석기에 따라 크게 달라집니다. 분석기마다 언어와 텍스트 형식에 적합하며, 토큰화 및 위치 정확도에 영향을 미칩니다. 특정 사용 사례에 적합한 분석기를 선택하면 구문 매칭 결과를 최적화할 수 있습니다.</p>
 <p>기본적으로 Milvus는 공백과 구두점을 기반으로 텍스트를 토큰화하고, 40자 이상의 토큰을 제거하며, 텍스트를 소문자로 변환하는 표준 분석기를 사용합니다. 기본 사용에는 추가 매개변수가 필요하지 않습니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준 분석기를</a> 참조하세요.</p>
 <p>애플리케이션에 특정 분석기가 필요한 경우 <code translate="no">analyzer_params</code> 매개변수를 사용하여 구성하세요. 예를 들어, 다음은 영어 텍스트의 구문 일치를 위해 <code translate="no">english</code> 분석기를 구성하는 방법입니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
@@ -140,7 +170,22 @@ schema.add_field(
 <div class="alert note">
 <p><code translate="no">PHRASE_MATCH</code> 표현식은 대소문자를 구분하지 않습니다. <code translate="no">PHRASE_MATCH</code> 또는 <code translate="no">phrase_match</code> 을 사용할 수 있습니다.</p>
 </div>
-<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">PHRASE_MATCH 표현식 구문</h3><p><code translate="no">PHRASE_MATCH</code> 표현식을 사용하여 검색할 때 필드, 구문 및 선택적 유연성(<code translate="no">slop</code>)을 지정합니다. 구문은 다음과 같습니다:</p>
+<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">PHRASE_MATCH 표현식 구문<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">PHRASE_MATCH</code> 표현식을 사용하여 검색할 때 필드, 구문 및 선택적 유연성(<code translate="no">slop</code>)을 지정합니다. 구문은 다음과 같습니다:</p>
 <pre><code translate="no" class="language-python">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -148,12 +193,27 @@ schema.add_field(
 <li><p><code translate="no">phrase</code><strong>:</strong> 검색할 정확한 구문입니다.</p></li>
 <li><p><code translate="no">slop</code> (선택 사항)<strong>:</strong> 일치하는 토큰에서 허용되는 최대 위치 수를 지정하는 정수입니다.</p>
 <ul>
-<li><p><code translate="no">0</code> (기본값): 정확한 구문만 일치시킵니다. 예시: <strong>'머신 러닝</strong> '에 대한 필터는 <strong>'머신 러닝'</strong> 은 정확히 일치하지만 <strong>'머신 부스트 러닝'</strong> 이나 <strong>'러닝 머신'</strong>은 일치하지 않습니다 <strong>.</strong></p></li>
+<li><p><code translate="no">0</code> (기본값): 정확한 구문만 일치시킵니다. 예시: <strong>'머신 러닝</strong> '에 대한 필터는 ' <strong>머신 러닝'</strong> 은 정확히 일치하지만 <strong>'머신 부스트 러닝'</strong> 이나 <strong>'러닝 머신'</strong>은 일치하지 않습니다 <strong>.</strong></p></li>
 <li><p><code translate="no">1</code>: 용어 하나 추가 또는 위치의 사소한 이동과 같은 사소한 변형을 허용합니다. 예시: <strong>"machine learning"</strong> 에 대한 필터는 <strong>"machine boosts learning"</strong> ( <strong>"machine"</strong> 과 <strong>"learning"</strong> 사이에 하나의 토큰이 있음 <strong>)</strong>과 일치하지만 <strong>"learning machine"</strong> (용어가 뒤바뀜)은 일치하지 않습니다.</p></li>
 <li><p><code translate="no">2</code>: 용어 순서가 반전되거나 그 사이에 토큰이 최대 2개까지 포함되는 등 더 많은 유연성을 허용합니다. 예시: <strong>"machine learning"</strong> 에 대한 필터는 <strong>"learning machine"</strong> (용어가 반전됨) 또는 <strong>"machine quickly boosts learning"</strong> ( <strong>"machine"</strong> 과 <strong>"learning"</strong> 사이에 두 개의 토큰이 있음)과 일치합니다.</p></li>
 </ul></li>
 </ul>
-<h3 id="Example-dataset" class="common-anchor-header">데이터 집합 예시</h3><p>다음 5개의 엔티티가 포함된 <strong>tech_articles라는</strong> 이름의 컬렉션이 있다고 가정해 보겠습니다:</p>
+<h3 id="Example-dataset" class="common-anchor-header">데이터 집합 예시<button data-href="#Example-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 5개의 엔티티가 포함된 <strong>tech_articles라는</strong> 이름의 컬렉션이 있다고 가정해 보겠습니다:</p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -180,7 +240,22 @@ schema.add_field(
      <td><p>"고급 머신 알고리즘 학습으로 AI 기능 확장"</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">구문 일치를 통한 쿼리</h3><p><code translate="no">query()</code> 메서드를 사용할 때 <strong>PHRASE_MATCH는</strong> 스칼라 필터 역할을 합니다. 지정된 구문이 포함된 문서만(허용된 기울기에 따라) 반환됩니다.</p>
+<h3 id="Query-with-phrase-match" class="common-anchor-header">구문 일치를 통한 쿼리<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">query()</code> 메서드를 사용할 때 <strong>PHRASE_MATCH는</strong> 스칼라 필터 역할을 합니다. 지정된 구문이 포함된 문서만(허용된 기울기에 따라) 반환됩니다.</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">예: slop = 0(정확히 일치)</h4><p>이 예는 중간에 추가 토큰 없이 <strong>"machine learning"이라는</strong> 정확한 문구가 포함된 문서를 반환합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -203,7 +278,22 @@ result = client.query(
    </tr>
 </table>
 <p>문서 1에만 추가 토큰 없이 지정된 순서대로 <strong>"machine learning"이라는</strong> 정확한 문구가 포함되어 있습니다.</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">구문 검색으로 검색</h3><p>검색 작업에서 벡터 유사도 순위를 적용하기 전에 문서를 필터링하는 데 <strong>PHRASE_MATCH가</strong> 사용됩니다. 이 2단계 접근 방식은 먼저 텍스트 일치를 통해 후보 집합을 좁힌 다음 벡터 임베딩을 기반으로 후보의 순위를 다시 매깁니다.</p>
+<h3 id="Search-with-phrase-match" class="common-anchor-header">구문 검색으로 검색<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>검색 작업에서 벡터 유사도 순위를 적용하기 전에 문서를 필터링하는 데 <strong>PHRASE_MATCH가</strong> 사용됩니다. 이 2단계 접근 방식은 먼저 텍스트 일치를 통해 후보 집합을 좁힌 다음 벡터 임베딩을 기반으로 후보의 순위를 다시 매깁니다.</p>
 <h4 id="Example-slop--1" class="common-anchor-header">예: 슬로프 = 1</h4><p>여기서는 슬로프 1을 허용합니다. 이 필터는 <strong>'학습 기계'라는</strong> 문구가 포함된 문서에 약간의 유연성을 가지고 적용됩니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>

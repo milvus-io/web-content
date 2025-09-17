@@ -825,27 +825,33 @@
             "children": []
           },
           {
+            "label": "Coincidencia de frases",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Consultas de Elasticsearch a Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Iteradores de búsqueda",
             "id": "with-iterators.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Nueva clasificación",
             "id": "reranking.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -2151,7 +2157,7 @@
             "children": []
           },
           {
-            "label": "Sin estructurar",
+            "label": "No estructurado",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []

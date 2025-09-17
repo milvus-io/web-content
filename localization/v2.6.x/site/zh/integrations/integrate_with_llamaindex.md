@@ -18,8 +18,8 @@ title: 使用 Milvus 和 LlamaIndex 的检索增强生成（RAG）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南演示了如何使用 LlamaIndex 和 Milvus 构建检索-增强生成（RAG）系统。</p>
 <p>RAG 系统结合了检索系统和生成模型，可根据给定提示生成新文本。该系统首先使用 Milvus 从语料库中检索相关文档，然后使用生成模型根据检索到的文档生成新文本。</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a>是一个简单、灵活的数据框架，用于将自定义数据源连接到大型语言模型（LLMs）。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，专为支持嵌入式相似性搜索和人工智能应用而构建。</p>
@@ -39,7 +39,22 @@ title: 使用 Milvus 和 LlamaIndex 的检索增强生成（RAG）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-dependencies" class="common-anchor-header">安装依赖项</h3><p>本页面上的代码片段需要 pymilvus 和 llamaindex 依赖项。您可以使用以下命令安装它们：</p>
+    </button></h2><h3 id="Install-dependencies" class="common-anchor-header">安装依赖项<button data-href="#Install-dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>本页面上的代码片段需要 pymilvus 和 llamaindex 依赖项。您可以使用以下命令安装它们：</p>
 <pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
@@ -49,12 +64,42 @@ title: 使用 Milvus 和 LlamaIndex 的检索增强生成（RAG）
 <div class="alert note">
 <p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重新启动运行时</strong>。(点击屏幕上方的 "Runtime（运行时）"菜单，从下拉菜单中选择 "Restart session（重新启动会话）"）。</p>
 </div>
-<h3 id="Setup-OpenAI" class="common-anchor-header">设置 OpenAI</h3><p>首先让我们添加 openai api 密钥。这将允许我们访问 chatgpt。</p>
+<h3 id="Setup-OpenAI" class="common-anchor-header">设置 OpenAI<button data-href="#Setup-OpenAI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>首先让我们添加 openai api 密钥。这将允许我们访问 chatgpt。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
 openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-data" class="common-anchor-header">准备数据</h3><p>您可以使用以下命令下载样本数据：</p>
+<h3 id="Prepare-data" class="common-anchor-header">准备数据<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以使用以下命令下载样本数据：</p>
 <pre><code translate="no" class="language-python">! mkdir -p <span class="hljs-string">&#x27;data/&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
@@ -74,7 +119,22 @@ openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Generate-our-data" class="common-anchor-header">生成数据</h3><p>作为第一个例子，让我们从文件<code translate="no">paul_graham_essay.txt</code> 中生成一个文档。这是保罗-格雷厄姆（Paul Graham）的一篇题为<code translate="no">What I Worked On</code> 的文章。我们将使用 SimpleDirectoryReader 生成文档。</p>
+    </button></h2><h3 id="Generate-our-data" class="common-anchor-header">生成数据<button data-href="#Generate-our-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>作为第一个例子，让我们从文件<code translate="no">paul_graham_essay.txt</code> 中生成一个文档。这是保罗-格雷厄姆（Paul Graham）的一篇题为<code translate="no">What I Worked On</code> 的文章。我们将使用 SimpleDirectoryReader 生成文档。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> SimpleDirectoryReader
 
 <span class="hljs-comment"># load documents</span>
@@ -86,7 +146,22 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 95f25e4d-f270-4650-87ce-006d69d82033
 </code></pre>
-<h3 id="Create-an-index-across-the-data" class="common-anchor-header">创建数据索引</h3><p>现在我们有了文档，可以创建索引并插入文档。对于索引，我们将使用 MilvusVectorStore。MilvusVectorStore 需要几个参数：</p>
+<h3 id="Create-an-index-across-the-data" class="common-anchor-header">创建数据索引<button data-href="#Create-an-index-across-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>现在我们有了文档，可以创建索引并插入文档。对于索引，我们将使用 MilvusVectorStore。MilvusVectorStore 需要几个参数：</p>
 <h4 id="basic-args" class="common-anchor-header">基本参数</h4><ul>
 <li><code translate="no">uri (str, optional)</code>:要连接的 URI，对于 Milvus 或 Zilliz Cloud 服务，其形式为 "https://address:port"；对于本地的精简版 Milvus，其形式为 "path/to/local/milvus.db"。默认为"./milvus_llamaindex.db"。</li>
 <li><code translate="no">token (str, optional)</code>:登录令牌。不使用 rbac 时为空，使用 rbac 时很可能是 "username:password"。</li>
@@ -114,7 +189,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">sparse_index_config (dict, optional)</code>:用于构建稀疏嵌入索引的配置。默认为 "无"。</li>
 </ul>
 <h4 id="hybrid-ranker" class="common-anchor-header">混合排序器</h4><ul>
-<li><p><code translate="no">hybrid_ranker (str)</code>:指定混合搜索查询中使用的排名器类型。目前只支持 ["RRFRanker", "WeightedRanker"]。默认为 "RRFRanker"。</p></li>
+<li><p><code translate="no">hybrid_ranker (str)</code>:指定混合搜索查询中使用的排名器类型。目前仅支持["RRFRanker", "WeightedRanker"]。默认为 "RRFRanker"。</p></li>
 <li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>:混合排名器的配置参数。该字典的结构取决于所使用的特定排名器：</p>
 <ul>
 <li>对于 "RRFRanker"，它应包括<ul>
@@ -154,7 +229,22 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<h3 id="Query-the-data" class="common-anchor-header">查询数据</h3><p>现在我们已经将文档存储到了索引中，可以针对索引提出问题。索引会将自身存储的数据作为 chatgpt 的知识库。</p>
+<h3 id="Query-the-data" class="common-anchor-header">查询数据<button data-href="#Query-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>现在我们已经将文档存储在索引中，可以针对索引提出问题。索引会将自身存储的数据作为 chatgpt 的知识库。</p>
 <pre><code translate="no" class="language-python">query_engine = index.as_query_engine()
 res = query_engine.query(<span class="hljs-string">&quot;What did the author learn?&quot;</span>)
 <span class="hljs-built_in">print</span>(res)

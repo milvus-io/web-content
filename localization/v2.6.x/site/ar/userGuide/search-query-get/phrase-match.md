@@ -1,15 +1,15 @@
 ---
 id: phrase-match.md
-title: مطابقة العباراتCompatible with Milvus 2.6.x
+title: مطابقة العباراتCompatible with Milvus 2.5.17+
 summary: >-
   تتيح لك مطابقة العبارة البحث عن المستندات التي تحتوي على مصطلحات الاستعلام
   الخاصة بك كعبارة تامة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب وبجوار
   بعضها البعض مباشرةً. على سبيل المثال، يتطابق الاستعلام عن "تعلم الآلة
   الروبوتية" مع نص مثل "...نماذج تعلم الآلة الروبوتية النموذجية..."، حيث تظهر
   الكلمات "روبوتات" و"آلة" و"تعلم" في تسلسل دون أي كلمات أخرى بينها.
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">مطابقة العبارات<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">مطابقة العبارات<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,7 +25,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>تتيح لك مطابقة العبارة البحث عن المستندات التي تحتوي على مصطلحات الاستعلام الخاصة بك كعبارة تامة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب وبجوار بعضها البعض مباشرةً. على سبيل المثال، يطابق الاستعلام عن <strong>"تعلّم الآلة الروبوتية"</strong> نصًا مثل <em>"... نماذج تعلّم الآلة الروبوتية النموذجية..."،</em> حيث تظهر الكلمات <strong>"روبوتات" و</strong> <strong>"آلة"</strong> و <strong>"تعلّم"</strong> في تسلسل دون وجود كلمات أخرى بينها.</p>
-<p>ومع ذلك، في سيناريوهات العالم الحقيقي، يمكن أن تكون مطابقة العبارات الصارمة صارمة للغاية. قد ترغب في مطابقة نص مثل <em>"... نماذج التعلم الآلي المعتمدة على نطاق واسع في مجال الروبوتات...".</em> هنا، توجد نفس الكلمات الرئيسية ولكن ليس جنبًا إلى جنب أو بالترتيب الأصلي. للتعامل مع هذا، تدعم مطابقة العبارات معلمة <code translate="no">slop</code> ، والتي تقدم مرونة. تحدد القيمة <code translate="no">slop</code> عدد التبدلات الموضعية المسموح بها بين المصطلحات في العبارة. على سبيل المثال، باستخدام <code translate="no">slop</code> من 1، يمكن أن يطابق الاستعلام عن <strong>"التعلّم الآلي"</strong> نصًا مثل <em>"...تعلم عميق للآلة..."،</em> حيث تفصل كلمة واحدة (<strong>"عميق")</strong> بين المصطلحات الأصلية.</p>
+<p>ومع ذلك، في سيناريوهات العالم الحقيقي، يمكن أن تكون مطابقة العبارات الصارمة صارمة للغاية. قد ترغب في مطابقة نص مثل <em>"... نماذج التعلم الآلي المعتمدة على نطاق واسع في مجال الروبوتات...".</em> هنا، توجد نفس الكلمات الرئيسية ولكن ليس جنبًا إلى جنب أو بالترتيب الأصلي. للتعامل مع هذا، تدعم مطابقة العبارات معلمة <code translate="no">slop</code> ، والتي تقدم مرونة. تحدد القيمة <code translate="no">slop</code> عدد التبدلات الموضعية المسموح بها بين المصطلحات في العبارة. على سبيل المثال، باستخدام <code translate="no">slop</code> من 1، يمكن أن يطابق الاستعلام عن <strong>"التعلم الآلي"</strong> نصًا مثل <em>"...التعلم العميق للآلة..."،</em> حيث تفصل كلمة واحدة (<strong>"عميق")</strong> بين المصطلحات الأصلية.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +78,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>تعمل مطابقة العبارات مع نوع الحقل <code translate="no">VARCHAR</code> ، وهو نوع بيانات السلسلة في Milvus. لتمكين مطابقة العبارات، قم بتكوين مخطط مجموعتك عن طريق تعيين كل من المعلمات <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> إلى <code translate="no">True</code> ، على غرار <a href="/docs/ar/keyword-match.md">مطابقة النص</a>.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">قم بتعيين <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code></h3><p>لتمكين مطابقة العبارات لحقل <code translate="no">VARCHAR</code> محدد، قم بتعيين كل من المعلمات <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> إلى <code translate="no">True</code> عند تحديد مخطط الحقل. يرشد هذا التكوين ميلفوس إلى ترميز النص وإنشاء فهرس مقلوب مع المعلومات الموضعية المطلوبة لمطابقة العبارات بكفاءة.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">قم بتعيين <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتمكين مطابقة العبارات لحقل <code translate="no">VARCHAR</code> محدد، قم بتعيين كل من المعلمات <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> إلى <code translate="no">True</code> عند تحديد مخطط الحقل. يرشد هذا التكوين ميلفوس إلى ترميز النص وإنشاء فهرس مقلوب مع المعلومات الموضعية المطلوبة لمطابقة العبارات بكفاءة.</p>
 <p>فيما يلي مثال على تعريف مخطط لتمكين مطابقة العبارات:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -104,8 +119,23 @@ schema.add_field(
     dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">اختياري: تكوين محلل</h3><p>تعتمد دقة مطابقة العبارات بشكل كبير على المحلل المستخدم لترميز البيانات النصية. تتناسب المحللات المختلفة مع لغات وتنسيقات نصية مختلفة، مما يؤثر على الترميز والدقة الموضعية. سيؤدي اختيار محلل مناسب لحالة الاستخدام الخاصة بك إلى تحسين نتائج مطابقة العبارات.</p>
-<p>بشكل افتراضي، يستخدم Milvus المحلل القياسي، والذي يقوم بترميز النص استنادًا إلى المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا توجد معلمات إضافية مطلوبة للاستخدام الافتراضي. راجع <a href="/docs/ar/standard-analyzer.md">المحلل القياسي</a> للحصول على التفاصيل.</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">اختياري: تكوين محلل<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تعتمد دقة مطابقة العبارات بشكل كبير على المحلل المستخدم لترميز البيانات النصية. تتناسب المحللات المختلفة مع لغات وتنسيقات نصية مختلفة، مما يؤثر على الترميز والدقة الموضعية. سيؤدي اختيار محلل مناسب لحالة الاستخدام الخاصة بك إلى تحسين نتائج مطابقة العبارات.</p>
+<p>بشكل افتراضي، يستخدم Milvus المحلل القياسي، الذي يقوم بترميز النص استنادًا إلى المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا توجد معلمات إضافية مطلوبة للاستخدام الافتراضي. راجع <a href="/docs/ar/standard-analyzer.md">المحلل القياسي</a> للحصول على التفاصيل.</p>
 <p>إذا كان تطبيقك يتطلب محللًا معينًا، فقم بتكوينه باستخدام المعلمة <code translate="no">analyzer_params</code>. على سبيل المثال، إليك كيفية تكوين محلل <code translate="no">english</code> لمطابقة العبارات في النص الإنجليزي:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -142,7 +172,22 @@ schema.add_field(
 <div class="alert note">
 <p>التعبير <code translate="no">PHRASE_MATCH</code> غير حساس لحالة الأحرف. يمكنك استخدام إما <code translate="no">PHRASE_MATCH</code> أو <code translate="no">phrase_match</code>.</p>
 </div>
-<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">بناء جملة تعبير PHRASE_MATCH</h3><p>استخدم التعبير <code translate="no">PHRASE_MATCH</code> لتحديد الحقل والعبارة والمرونة الاختيارية (<code translate="no">slop</code>) عند البحث. بناء الجملة هو</p>
+<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">بناء جملة تعبير PHRASE_MATCH<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>استخدم التعبير <code translate="no">PHRASE_MATCH</code> لتحديد الحقل والعبارة والمرونة الاختيارية (<code translate="no">slop</code>) عند البحث. بناء الجملة هو</p>
 <pre><code translate="no" class="language-python">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -155,7 +200,22 @@ schema.add_field(
 <li><p><code translate="no">2</code>: يسمح بمزيد من المرونة، بما في ذلك ترتيب المصطلح المعكوس أو ما يصل إلى رمزين بينهما. مثال: سيطابق مرشح <strong>"تعلّم الآلة"</strong> مع <strong>"آلة التعلّم</strong> <strong>"</strong> (المصطلحات المعكوسة) أو <strong>"آلة</strong> التعلّم <strong>بسرعة تعزز التعلّم"</strong> (رمزين بين <strong>"آلة"</strong> و <strong>"تعلّم")</strong>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Example-dataset" class="common-anchor-header">مثال على مجموعة البيانات</h3><p>لنفترض أن لديك مجموعة باسم <strong>tech_articles</strong> تحتوي على الكيانات الخمسة التالية:</p>
+<h3 id="Example-dataset" class="common-anchor-header">مثال على مجموعة البيانات<button data-href="#Example-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لنفترض أن لديك مجموعة باسم <strong>tech_articles</strong> تحتوي على الكيانات الخمسة التالية:</p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -171,7 +231,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"تعمل البنى الآلية للتعلم العميق على تحسين الأحمال الحاسوبية"</p></td>
+     <td><p>"تعمل البنى الآلية للتعلم العميق على تحسين الأحمال الحسابية"</p></td>
    </tr>
    <tr>
      <td><p>4</p></td>
@@ -182,7 +242,22 @@ schema.add_field(
      <td><p>"تعلم خوارزميات الآلة المتقدمة يوسع قدرات الذكاء الاصطناعي"</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">الاستعلام مع مطابقة العبارة</h3><p>عند استخدام طريقة <code translate="no">query()</code> ، يعمل <strong>PHRASE_MATCH</strong> كمرشح قياسي. لا يتم إرجاع سوى المستندات التي تحتوي على العبارة المحددة (مع مراعاة الانحدار المسموح به).</p>
+<h3 id="Query-with-phrase-match" class="common-anchor-header">الاستعلام مع مطابقة العبارة<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عند استخدام الأسلوب <code translate="no">query()</code> ، يعمل <strong>PHRASE_MATCH</strong> كمرشح قياسي. لا يتم إرجاع سوى المستندات التي تحتوي على العبارة المحددة (مع مراعاة الانحدار المسموح به).</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">مثال: المنحدر = 0 (مطابقة تامة)</h4><p>يقوم هذا المثال بإرجاع المستندات التي تحتوي على عبارة <strong>"التعلّم الآلي"</strong> بالضبط دون أي رموز إضافية بينهما.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -205,7 +280,22 @@ result = client.query(
    </tr>
 </table>
 <p>يحتوي المستند 1 فقط على العبارة التامة <strong>"التعلم الآلي"</strong> بالترتيب المحدد بدون رموز إضافية.</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">البحث مع مطابقة العبارة</h3><p>في عمليات البحث، يتم استخدام <strong>PHRASE_MATCH</strong> لتصفية المستندات قبل تطبيق ترتيب تشابه المتجهات. يعمل هذا النهج المكون من خطوتين أولاً على تضييق المجموعة المرشحة عن طريق المطابقة النصية ثم إعادة ترتيب تلك المستندات المرشحة بناءً على تضمينات المتجهات.</p>
+<h3 id="Search-with-phrase-match" class="common-anchor-header">البحث مع مطابقة العبارة<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في عمليات البحث، يتم استخدام <strong>PHRASE_MATCH</strong> لتصفية المستندات قبل تطبيق ترتيب تشابه المتجهات. يعمل هذا النهج المكون من خطوتين أولاً على تضييق المجموعة المرشحة عن طريق المطابقة النصية ثم إعادة ترتيب تلك المستندات المرشحة بناءً على تضمينات المتجهات.</p>
 <h4 id="Example-slop--1" class="common-anchor-header">مثال: المنحدر = 1</h4><p>هنا، نسمح هنا بـ 1. يتم تطبيق عامل التصفية على المستندات التي تحتوي على عبارة <strong>"آلة التعلم"</strong> مع مرونة طفيفة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>
@@ -302,7 +392,7 @@ result_slop2 = client.search(
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>"تعلم خوارزميات الآلة المتقدمة يوسع قدرات الذكاء الاصطناعي"</p></td>
+     <td><p>"تعلم خوارزميات الآلة المتقدمة يوسع من قدرات الذكاء الاصطناعي"</p></td>
    </tr>
 </table>
 <h2 id="Considerations" class="common-anchor-header">الاعتبارات<button data-href="#Considerations" class="anchor-icon" translate="no">

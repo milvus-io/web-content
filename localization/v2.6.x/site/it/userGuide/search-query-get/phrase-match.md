@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Corrispondenza di fraseCompatible with Milvus 2.6.x
+title: Corrispondenza di fraseCompatible with Milvus 2.5.17+
 summary: >-
   La corrispondenza di frase consente di cercare i documenti che contengono i
   termini della query come frase esatta. Per impostazione predefinita, le parole
@@ -9,9 +9,9 @@ summary: >-
   come "...typical robotics machine learning models...", dove le parole
   "robotics", "machine" e "learning" appaiono in sequenza senza altre parole tra
   loro.
-beta: Milvus 2.6.x
+beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Corrispondenza di frase<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Corrispondenza di frase<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,7 +80,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>La corrispondenza per frase funziona con il tipo di campo <code translate="no">VARCHAR</code>, il tipo di dati stringa di Milvus. Per abilitare la corrispondenza di frase, configurare lo schema della raccolta impostando entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code>, in modo simile alla <a href="/docs/it/keyword-match.md">corrispondenza di testo</a>.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code></h3><p>Per abilitare la corrispondenza di frasi per un campo specifico <code translate="no">VARCHAR</code>, impostare entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> quando si definisce lo schema del campo. Questa configurazione indica a Milvus di tokenizzare il testo e di creare un indice invertito con le informazioni posizionali necessarie per una corrispondenza efficiente delle frasi.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per abilitare la corrispondenza di frasi per un campo specifico <code translate="no">VARCHAR</code>, impostare entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> quando si definisce lo schema del campo. Questa configurazione indica a Milvus di tokenizzare il testo e di creare un indice invertito con le informazioni posizionali necessarie per una corrispondenza efficiente delle frasi.</p>
 <p>Ecco un esempio di definizione dello schema per abilitare la corrispondenza delle frasi:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -106,9 +121,24 @@ schema.add_field(
     dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opzionale: Configurare un analizzatore</h3><p>L'accuratezza della corrispondenza delle frasi dipende in modo significativo dall'analizzatore utilizzato per la tokenizzazione dei dati di testo. Analizzatori diversi si adattano a lingue e formati di testo diversi, influenzando la tokenizzazione e la precisione posizionale. La selezione di un analizzatore appropriato per il vostro caso d'uso specifico ottimizzerà i risultati della corrispondenza delle frasi.</p>
-<p>Per impostazione predefinita, Milvus utilizza l'analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Per l'uso predefinito non sono richiesti parametri aggiuntivi. Per ulteriori informazioni, consultare l'<a href="/docs/it/standard-analyzer.md">analizzatore standard</a>.</p>
-<p>Se l'applicazione richiede un analizzatore specifico, configurarlo usando il parametro <code translate="no">analyzer_params</code>. Ad esempio, ecco come configurare l'analizzatore <code translate="no">english</code> per la corrispondenza di frasi nel testo inglese:</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opzionale: Configurare un analizzatore<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'accuratezza della corrispondenza delle frasi dipende in modo significativo dall'analizzatore utilizzato per la tokenizzazione dei dati di testo. Analizzatori diversi si adattano a lingue e formati di testo diversi, influenzando la tokenizzazione e la precisione posizionale. La selezione di un analizzatore appropriato per il vostro caso d'uso specifico ottimizzerà i risultati della corrispondenza delle frasi.</p>
+<p>Per impostazione predefinita, Milvus utilizza l'analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Per l'uso predefinito non sono richiesti parametri aggiuntivi. Per ulteriori informazioni, consultare l'<a href="/docs/it/standard-analyzer.md">Analizzatore standard</a>.</p>
+<p>Se l'applicazione richiede un analizzatore specifico, è necessario configurarlo con il parametro <code translate="no">analyzer_params</code>. Ad esempio, ecco come configurare l'analizzatore <code translate="no">english</code> per la corrispondenza di frasi nel testo inglese:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -140,11 +170,26 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta abilitata la corrispondenza per un campo <code translate="no">VARCHAR</code> nello schema della raccolta, è possibile eseguire corrispondenze di frasi utilizzando l'espressione <code translate="no">PHRASE_MATCH</code>.</p>
+    </button></h2><p>Una volta attivata la corrispondenza per un campo <code translate="no">VARCHAR</code> nello schema della raccolta, è possibile eseguire corrispondenze di frasi utilizzando l'espressione <code translate="no">PHRASE_MATCH</code>.</p>
 <div class="alert note">
 <p>L'espressione <code translate="no">PHRASE_MATCH</code> non fa distinzione tra maiuscole e minuscole. Si può usare sia <code translate="no">PHRASE_MATCH</code> che <code translate="no">phrase_match</code>.</p>
 </div>
-<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">Sintassi dell'espressione PHRASE_MATCH</h3><p>Utilizzare l'espressione <code translate="no">PHRASE_MATCH</code> per specificare il campo, la frase e la flessibilità opzionale (<code translate="no">slop</code>) durante la ricerca. La sintassi è:</p>
+<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">Sintassi dell'espressione PHRASE_MATCH<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizzare l'espressione <code translate="no">PHRASE_MATCH</code> per specificare il campo, la frase e la flessibilità opzionale (<code translate="no">slop</code>) durante la ricerca. La sintassi è:</p>
 <pre><code translate="no" class="language-python">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -154,10 +199,25 @@ schema.add_field(
 <ul>
 <li><p><code translate="no">0</code> (predefinito): Corrisponde solo alle frasi esatte. Esempio: Un filtro per <strong>"machine learning"</strong> corrisponderà esattamente a <strong>"machine learning"</strong>, ma non a <strong>"machine boosts learning"</strong> o <strong>"learning machine".</strong></p></li>
 <li><p><code translate="no">1</code>: Consente variazioni minime, ad esempio un termine in più o un piccolo spostamento di posizione. Esempio: Un filtro per <strong>"machine learning"</strong> corrisponderà a <strong>"machine boosts learning"</strong> (un token tra <strong>"machine"</strong> e <strong>"learning")</strong> ma non a <strong>"learning machine"</strong> (termini invertiti).</p></li>
-<li><p><code translate="no">2</code>: Permette una maggiore flessibilità, includendo l'ordine inverso dei termini o fino a due token in mezzo. Esempio: Un filtro per <strong>"machine learning"</strong> corrisponderà a <strong>"machine learning"</strong> (termini invertiti) o <strong>"machine quickly boosts learning"</strong> (due token tra <strong>"machine"</strong> e <strong>"learning")</strong>.</p></li>
+<li><p><code translate="no">2</code>: Permette una maggiore flessibilità, includendo l'ordine inverso dei termini o fino a due token tra di essi. Esempio: Un filtro per <strong>"machine learning"</strong> corrisponderà a <strong>"machine learning"</strong> (termini invertiti) o <strong>"machine quickly boosts learning"</strong> (due token tra <strong>"machine"</strong> e <strong>"learning")</strong>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Example-dataset" class="common-anchor-header">Esempio di set di dati</h3><p>Supponiamo di avere una raccolta denominata <strong>tech_articles</strong> contenente le seguenti cinque entità:</p>
+<h3 id="Example-dataset" class="common-anchor-header">Esempio di set di dati<button data-href="#Example-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Supponiamo di avere una raccolta denominata <strong>tech_articles</strong> contenente le seguenti cinque entità:</p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -184,7 +244,22 @@ schema.add_field(
      <td><p>"L'apprendimento di algoritmi macchina avanzati espande le capacità dell'IA".</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">Query con corrispondenza di frase</h3><p>Quando si utilizza il metodo <code translate="no">query()</code>, <strong>PHRASE_MATCH</strong> agisce come un filtro scalare. Vengono restituiti solo i documenti che contengono la frase specificata (con lo slop consentito).</p>
+<h3 id="Query-with-phrase-match" class="common-anchor-header">Query con corrispondenza di frase<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si utilizza il metodo <code translate="no">query()</code>, <strong>PHRASE_MATCH</strong> agisce come un filtro scalare. Vengono restituiti solo i documenti che contengono la frase specificata (con lo slop consentito).</p>
 <h4 id="Example-slop--0-exact-match" class="common-anchor-header">Esempio: slop = 0 (corrispondenza esatta)</h4><p>Questo esempio restituisce i documenti che contengono la frase esatta <strong>"machine learning"</strong> senza alcun token aggiuntivo in mezzo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -207,7 +282,22 @@ result = client.query(
    </tr>
 </table>
 <p>Solo il documento 1 contiene la frase esatta <strong>"machine learning"</strong> nell'ordine specificato senza token aggiuntivi.</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">Ricerca con corrispondenza di frase</h3><p>Nelle operazioni di ricerca, <strong>PHRASE_MATCH</strong> viene utilizzato per filtrare i documenti prima di applicare il ranking di similarità vettoriale. Questo approccio in due fasi restringe dapprima l'insieme dei candidati tramite la corrispondenza testuale e poi li classifica nuovamente in base alle incorporazioni vettoriali.</p>
+<h3 id="Search-with-phrase-match" class="common-anchor-header">Ricerca con corrispondenza di frase<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nelle operazioni di ricerca, <strong>PHRASE_MATCH</strong> viene utilizzato per filtrare i documenti prima di applicare il ranking di similarità vettoriale. Questo approccio in due fasi restringe dapprima l'insieme dei candidati tramite la corrispondenza testuale e poi li classifica nuovamente in base alle incorporazioni vettoriali.</p>
 <h4 id="Example-slop--1" class="common-anchor-header">Esempio: slop = 1</h4><p>Il filtro viene applicato ai documenti che contengono la frase <strong>"learning machine"</strong> con una leggera flessibilità.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>

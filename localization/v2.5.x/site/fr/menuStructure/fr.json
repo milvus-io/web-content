@@ -825,27 +825,33 @@
             "children": []
           },
           {
+            "label": "Correspondance des phrases",
+            "id": "phrase-match.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Requêtes Elasticsearch vers Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Recherche d'itérateurs",
             "id": "with-iterators.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Utiliser la clé de partition",
             "id": "use-partition-key.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -1575,7 +1581,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
+                "label": "Migrer d'une instance à l'autre dans un environnement S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
