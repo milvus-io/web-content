@@ -43,29 +43,23 @@ During data ingestion, Milvus builds the NGRAM index by performing two main step
 
     For example, with `min_gram=2` and `max_gram=3`, the string `"AI database"` is broken down as follows:
 
-![Build Ngram Index](../../../../../assets/build-ngram-index.png)
-
     - **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
-
     - **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
 
-    <div class="alert note">
-    
-    - For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive). For example, with `[2,4]` and the word `"text"`, Milvus generates:
-    
-    - **2-grams:** `te`, `ex`, `xt`
-    
-    - **3-grams:** `tex`, `ext`
-    
-    - **4-grams:** `text`
-    
-    - N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `"向量数据库"` with `min_gram = 2` is decomposed into: `"向量"`, `"量数"`, `"数据"`, `"据库"`.
-    
-    - Spaces and punctuation are treated as characters during decomposition.
-    
-    - Decomposition preserves original case, and matching is case-sensitive. For example, `"Database"` and `"database"` will generate different n-grams and require exact case matching during queries.
-    
-    </div>
+    ![Build Ngram Index](../../../../../assets/build-ngram-index.png)
+
+    > **Note**  
+    > - For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive).  
+    >   Example: with `[2,4]` and the word `"text"`, Milvus generates:  
+    >   - **2-grams:** `te`, `ex`, `xt`  
+    >   - **3-grams:** `tex`, `ext`  
+    >   - **4-grams:** `text`  
+    >
+    > - N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `"向量数据库"` with `min_gram = 2` is decomposed into: `"向量"`, `"量数"`, `"数据"`, `"据库"`.  
+    >
+    > - Spaces and punctuation are treated as characters during decomposition.  
+    >
+    > - Decomposition preserves original case, and matching is case-sensitive. For example, `"Database"` and `"database"` will generate different n-grams and require exact case matching during queries.
 
 1. **Build an inverted index**: An **inverted index** is created that maps each generated n-gram to a list of the document IDs containing it.
 
@@ -73,11 +67,12 @@ During data ingestion, Milvus builds the NGRAM index by performing two main step
 
 ![Build Ngram Index 2](../../../../../assets/build-ngram-index-2.png)
 
-    <div class="alert note">
-    
-    A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
 
-    </div>
+<div class="alert note">
+    
+A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](mmap.md).
+
+</div>
 
 ### Phase 2: Accelerate queries
 
@@ -240,7 +235,7 @@ For more information on filter expression syntax, refer to [Basic Operators](bas
 
 - **Unicode**: NGRAM decomposition is character-based and language-agnostic and includes whitespace and punctuation.
 
-- **Space–time trade-off**: Wider gram ranges `[min_gram, max_gram]` produce more grams and larger indexes. If memory is tight, consider `mmap` mode for large posting lists. For more information, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
+- **Space–time trade-off**: Wider gram ranges `[min_gram, max_gram]` produce more grams and larger indexes. If memory is tight, consider `mmap` mode for large posting lists. For more information, refer to [Use mmap](mmap.md).
 
 - **Immutability**: `min_gram` and `max_gram` cannot be changed in place—rebuild the index to adjust them.
 
