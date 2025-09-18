@@ -200,7 +200,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>Determines whether Milvus uses mmap when loading shredding data.</p><p>For details, refer to <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Use mmap</a>.</p></td>
+     <td><p>Determines whether Milvus uses mmap when loading shredding data.</p><p>For details, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></td>
      <td><p>true</p></td>
      <td><p>This setting is generally optimized for performance. Only adjust it if you have specific memory management needs or constraints on your system.</p></td>
    </tr>
