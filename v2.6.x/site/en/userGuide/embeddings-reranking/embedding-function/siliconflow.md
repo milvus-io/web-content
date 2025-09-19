@@ -97,7 +97,7 @@ Keep your API keys in `milvus.yaml`; Milvus reads them at startup and overrides 
         providers:
           siliconflow:
             credential: apikey_dev      # ← choose any label you defined above
-            # url: https://api.siliconflow.cn/v1/embeddings   # (optional) custom endpoint
+            # url: https://api.siliconflow.cn/v1/embeddings   # (optional) custom url
     ```
 
     This binds a specific key to every request Milvus sends to the OpenAI embeddings endpoint.

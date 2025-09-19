@@ -111,7 +111,7 @@ Keep your API keys in `milvus.yaml`; Milvus reads them at startup and overrides 
         providers:
           cohere:
             credential: apikey_dev      # ← choose any label you defined above
-            # url: https://api.cohere.com/v2/embed   # (optional) custom endpoint
+            # url: https://api.cohere.com/v2/embed   # (optional) custom url
     ```
 
     This binds a specific key to every request Milvus sends to the Cohere embeddings endpoint.

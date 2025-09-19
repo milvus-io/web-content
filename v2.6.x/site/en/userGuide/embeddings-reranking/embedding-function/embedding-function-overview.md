@@ -162,7 +162,7 @@ function:
     providers:
       openai:                         # calls OpenAI
         credential: apikey1           # Reference to the credential label
-        # url:                        # (optional) custom endpoint
+        # url:                        # (optional) custom url
 
       bedrock:                        # calls AWS Bedrock
         credential: aksk1             # Reference to the credential label
@@ -170,7 +170,7 @@ function:
 
       vertexai:                       # calls Google Vertex AI
         credential: gcp1              # Reference to the credential label
-        # url:                        # (optional) custom endpoint
+        # url:                        # (optional) custom url
 
       tei:                            # Built-in Tiny Embedding model
         enable: true                  # Whether to enable TEI model service

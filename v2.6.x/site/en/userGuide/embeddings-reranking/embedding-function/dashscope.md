@@ -87,7 +87,7 @@ Keep your API keys in `milvus.yaml`; Milvus reads them at startup and overrides 
         providers:
           dashscope:
             credential: apikey_dev      # ← choose any label you defined above
-            # url: https://dashscope-intl.aliyuncs.com/compatible-mode/v1   # (optional) custom endpoint
+            # url: https://dashscope-intl.aliyuncs.com/compatible-mode/v1   # (optional) custom url
     ```
 
     This binds a specific key to every request Milvus sends to the DashScope embeddings endpoint.

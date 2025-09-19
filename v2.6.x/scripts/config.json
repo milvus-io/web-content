@@ -469,6 +469,11 @@
                         "token": "TfyKbOUpdoPiFwxlux0cHLzKnGh",
                         "type": "image",
                         "alt_text": "birdwatcher-output"
+                    },
+                    {
+                        "token": "A19NwPlGIh1YrGbSBZKcNKz0nhd",
+                        "type": "board",
+                        "alt_text": "how-inverted-index-works"
                     }
                 ]
             }
