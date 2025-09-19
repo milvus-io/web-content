@@ -60,26 +60,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus uses <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> to implement inverted indexing. Here’s the process:</p>
+    </button></h2><p>An <strong>INVERTED index</strong> in Milvus maps each unique field value (term) to the set of document IDs where that value occurs. This structure enables fast lookups for fields with repeated or categorical values.</p>
+<p>As shown in the diagram, the process works in two steps:</p>
 <ol>
-<li><p><strong>Tokenization</strong>: Milvus breaks down your data into searchable terms</p></li>
-<li><p><strong>Term dictionary</strong>: Creates a sorted list of all unique terms</p></li>
-<li><p><strong>Inverted lists</strong>: Maps each term to the documents containing it</p></li>
+<li><p><strong>Forward mapping (ID → Term):</strong> Each document ID points to the field value it contains.</p></li>
+<li><p><strong>Inverted mapping (Term → IDs):</strong> Milvus collects unique terms and builds a reverse mapping from each term to all IDs that contain it.</p></li>
 </ol>
-<p>For example, given these two sentences:</p>
-<ul>
-<li><p><strong>“Milvus is a cloud-native vector database”</strong></p></li>
-<li><p><strong>“Milvus is very good at performance”</strong></p></li>
-</ul>
-<p>The inverted index maps terms like <strong>“Milvus”</strong> → <strong>[Document 0, Document 1]</strong>, <strong>“cloud-native”</strong> → <strong>[Document 0]</strong>, and <strong>“performance”</strong> → <strong>[Document 1]</strong>.</p>
+<p>For example, the value <strong>“electronics”</strong> maps to IDs <strong>1</strong> and <strong>3</strong>, while <strong>“books”</strong> maps to IDs <strong>2</strong> and <strong>5</strong>.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
-    <span>Inverted Index</span>
+    <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+    <span>How Inverted Index Works</span>
   </span>
 </p>
-<p>When you filter by a term, Milvus looks up the term in the dictionary and instantly retrieves all matching documents.</p>
-<p>INVERTED indexes support all scalar field types: <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, and <strong>ARRAY</strong>. However, the index parameters for indexing a JSON field are slightly different from regular scalar fields.</p>
+<p>When you filter for a specific value (e.g., <code translate="no">category == &quot;electronics&quot;</code>), Milvus simply looks up the term in the index and retrieves the matching IDs directly. This avoids scanning the full dataset and enables fast filtering, especially for categorical or repeated values.</p>
+<p>INVERTED indexes support all scalar field types, such as <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, and <strong>ARRAY</strong>. However, the index parameters for indexing a JSON field are slightly different from regular scalar fields.</p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">Create indexes on non-JSON fields<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
