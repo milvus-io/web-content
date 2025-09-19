@@ -3,7 +3,7 @@ id: embedding-function-overview.md
 title: Panoramica della funzione di incorporamentoCompatible with Milvus 2.6.x
 summary: >-
   Il modulo Function di Milvus consente di trasformare i dati di testo grezzi in
-  embeddings vettoriali chiamando automaticamente i fornitori esterni di servizi
+  embedding vettoriali chiamando automaticamente i fornitori esterni di servizi
   di embedding (come OpenAI, AWS Bedrock, Google Vertex AI, ecc.). Con il modulo
   Function, non è più necessario interfacciarsi manualmente con le API di
   embedding: Milvus gestisce l'intero processo di invio delle richieste ai
@@ -46,9 +46,9 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Qualsiasi campo di input incorporato dal modulo Function deve sempre contenere un valore; se viene fornito un null, il modulo lancia un errore.</p></li>
+<li><p>Qualsiasi campo di input che il modulo Function incorpora deve sempre contenere un valore; se viene fornito un null, il modulo lancia un errore.</p></li>
 <li><p>Il modulo Function elabora solo i campi definiti esplicitamente nello schema della collezione; non genera incorporazioni per i campi dinamici.</p></li>
-<li><p>I campi di input da incorporare devono essere di tipo <code translate="no">VARCHAR</code>.</p></li>
+<li><p>I campi di input da incorporare devono essere del tipo <code translate="no">VARCHAR</code>.</p></li>
 <li><p>Il modulo Function può incorporare un campo di input in:</p>
 <ul>
 <li><p><code translate="no">FLOAT_VECTOR</code></p></li>
@@ -79,55 +79,55 @@ beta: Milvus 2.6.x
      <th><p>Metodo di autenticazione</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/v2.6.x/openai.md">OpenAI</a></p></td>
+     <td><p><a href="/docs/it/openai.md">OpenAI</a></p></td>
      <td><p>testo-incorporamento-3-*</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chiave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/v2.6.x/azure-openai.md">Azure OpenAI</a></p></td>
+     <td><p><a href="/docs/it/azure-openai.md">Azure OpenAI</a></p></td>
      <td><p>Basato sulla distribuzione</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chiave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/v2.6.x/dashscope.md">DashScope</a></p></td>
+     <td><p><a href="/docs/it/dashscope.md">DashScope</a></p></td>
      <td><p>testo-embedding-v3</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chiave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/v2.6.x/bedrock.md">Bedrock</a></p></td>
+     <td><p><a href="/docs/it/bedrock.md">Bedrock</a></p></td>
      <td><p>amazon.titan-embed-text-v2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Coppia AK/SK</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/v2.6.x/vertex-ai.md">Vertice AI</a></p></td>
+     <td><p><a href="/docs/it/vertex-ai.md">Vertice AI</a></p></td>
      <td><p>testo-embedding-005</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Credenziale JSON dell'account del servizio GCP</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/v2.6.x/voyage-ai.md">Voyage AI</a></p></td>
+     <td><p><a href="/docs/it/voyage-ai.md">Voyage AI</a></p></td>
      <td><p>voyage-3, voyage-lite-02</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>Chiave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/v2.6.x/cohere.md">Cohere</a></p></td>
+     <td><p><a href="/docs/it/cohere.md">Cohere</a></p></td>
      <td><p>embed-english-v3.0</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>Chiave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/v2.6.x/siliconflow.md">SiliconFlow</a></p></td>
+     <td><p><a href="/docs/it/siliconflow.md">SiliconFlow</a></p></td>
      <td><p>BAAI/bge-grande-zh-v1.5</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chiave API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/it/v2.6.x/hugging-face-tei.md">Faccia da abbracciare</a></p></td>
+     <td><p><a href="/docs/it/hugging-face-tei.md">Faccia da abbracciare</a></p></td>
      <td><p>Qualsiasi modello servito da TEI</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>Chiave API opzionale</p></td>
@@ -151,8 +151,8 @@ beta: Milvus 2.6.x
     </button></h2><p>Il diagramma seguente mostra il funzionamento della funzione in Milvus.</p>
 <ol>
 <li><p><strong>Testo in ingresso</strong>: Gli utenti inseriscono in Milvus i dati grezzi (ad esempio i documenti).</p></li>
-<li><p><strong>Generazione degli embeddings</strong>: Il modulo Function di Milvus chiama automaticamente il fornitore di modelli configurato per convertire i dati grezzi in embeddings vettoriali.</p></li>
-<li><p><strong>Memorizzare gli embeddings</strong>: Gli embeddings risultanti sono memorizzati in campi vettoriali esplicitamente definiti all'interno delle collezioni di Milvus.</p></li>
+<li><p><strong>Generazione di embeddings</strong>: Il modulo Function di Milvus chiama automaticamente il fornitore di modelli configurato per convertire i dati grezzi in embeddings vettoriali.</p></li>
+<li><p><strong>Memorizzare gli embeddings</strong>: Gli embeddings risultanti vengono memorizzati in campi vettoriali esplicitamente definiti all'interno delle collezioni di Milvus.</p></li>
 <li><p><strong>Interrogazione del testo</strong>: Gli utenti inviano query testuali a Milvus.</p></li>
 <li><p><strong>Ricerca semantica</strong>: Milvus converte internamente le query in embeddings vettoriali, effettua ricerche di somiglianza con gli embeddings memorizzati e recupera i risultati rilevanti.</p></li>
 <li><p><strong>Restituzione dei risultati</strong>: Milvus restituisce all'applicazione i risultati migliori.</p></li>
@@ -182,14 +182,29 @@ beta: Milvus 2.6.x
 <li><p><strong>File di configurazione</strong> (<code translate="no">milvus.yaml</code>):</p>
 <p>L'esempio di questo argomento dimostra la <strong>configurazione consigliata</strong> utilizzando <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Variabili d'ambiente</strong>:</p>
-<p>Per informazioni dettagliate sulla configurazione delle credenziali tramite variabili d'ambiente, consultare la documentazione del fornitore del servizio di embedding (ad esempio, <a href="/docs/it/v2.6.x/openai.md">OpenAI</a> o <a href="/docs/it/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p></li>
+<p>Per informazioni dettagliate sulla configurazione delle credenziali tramite variabili d'ambiente, consultare la documentazione del fornitore del servizio di embedding (ad esempio, <a href="/docs/it/openai.md">OpenAI</a> o <a href="/docs/it/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
 <p>Il diagramma seguente mostra il processo di configurazione delle credenziali tramite il file di configurazione di Milvus (<code translate="no">milvus.yaml</code>) e quindi il richiamo della Funzione all'interno di Milvus.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>Overflow della configurazione delle credenziali</span> </span></p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Passo 1: Aggiungere le credenziali al file di configurazione di Milvus</h3><p>Nel file <code translate="no">milvus.yaml</code>, modificare il blocco <code translate="no">credential</code> con le voci per ogni provider a cui si deve accedere:</p>
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Passo 1: Aggiungere le credenziali al file di configurazione di Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nel file <code translate="no">milvus.yaml</code>, modificare il blocco <code translate="no">credential</code> con le voci per ogni provider a cui si deve accedere:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -210,13 +225,28 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">gcp1:</span>                        
     <span class="hljs-attr">credential_json:</span> <span class="hljs-string">&lt;BASE64_OF_JSON&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">Passo 2: Configurare le impostazioni del provider</h3><p>Nello stesso file di configurazione (<code translate="no">milvus.yaml</code>), modificare il blocco <code translate="no">function</code> per indicare a Milvus quale chiave utilizzare per incorporare le chiamate di servizio:</p>
+<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">Passo 2: Configurare le impostazioni del provider<button data-href="#Step-2-Configure-provider-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nello stesso file di configurazione (<code translate="no">milvus.yaml</code>), modificare il blocco <code translate="no">function</code> per indicare a Milvus quale chiave utilizzare per incorporare le chiamate di servizio:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">openai:</span>                         <span class="hljs-comment"># calls OpenAI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey1</span>           <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">bedrock:</span>                        <span class="hljs-comment"># calls AWS Bedrock</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">aksk1</span>             <span class="hljs-comment"># Reference to the credential label</span>
@@ -224,12 +254,12 @@ beta: Milvus 2.6.x
 
       <span class="hljs-attr">vertexai:</span>                       <span class="hljs-comment"># calls Google Vertex AI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">gcp1</span>              <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni su come applicare la configurazione di Milvus, fate riferimento a <a href="/docs/it/v2.6.x/dynamic_config.md">Configurare Milvus al volo</a>.</p>
+<p>Per ulteriori informazioni su come applicare la configurazione di Milvus, fate riferimento a <a href="/docs/it/dynamic_config.md">Configurare Milvus al volo</a>.</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">Utilizzare la funzione di incorporamento<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -246,7 +276,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Una volta configurate le credenziali nel file di configurazione di Milvus, seguite questi passaggi per definire e utilizzare le funzioni di incorporamento.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Passo 1: Definire i campi dello schema</h3><p>Per utilizzare una funzione di incorporamento, creare una raccolta con uno schema specifico. Questo schema deve includere almeno tre campi necessari:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Passo 1: Definire i campi dello schema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per utilizzare una funzione di incorporamento, creare una raccolta con uno schema specifico. Questo schema deve includere almeno tre campi necessari:</p>
 <ul>
 <li><p>Il <strong>campo primario</strong> che identifica in modo univoco ogni entità della raccolta.</p></li>
 <li><p>Un <strong>campo scalare</strong> che memorizza i dati grezzi da incorporare.</p></li>
@@ -275,7 +320,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Aggiungere la funzione di embedding allo schema</h3><p>Il modulo Function di Milvus converte automaticamente i dati grezzi memorizzati in un campo scalare in embedding e li memorizza nel campo vettoriale esplicitamente definito.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Aggiungere la funzione di embedding allo schema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il modulo Function di Milvus converte automaticamente i dati grezzi memorizzati in un campo scalare in embedding e li memorizza nel campo vettoriale esplicitamente definito.</p>
 <p>L'esempio seguente aggiunge un modulo Function (<code translate="no">openai_embedding</code>) che converte il campo scalare <code translate="no">&quot;document&quot;</code> in embedding, memorizzando i vettori risultanti nel campo vettoriale <code translate="no">&quot;dense&quot;</code> definito in precedenza.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
@@ -309,7 +369,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Tipo di funzione utilizzata. Per l'incorporazione di testo, impostare il valore su <code translate="no">FunctionType.TEXTEMBEDDING</code>.<br><strong>Nota:</strong> Milvus accetta <code translate="no">FunctionType.BM25</code> (per la trasformazione sparse-embedding) e <code translate="no">FunctionType.RERANK</code> (per il reranking) per questo parametro. Per maggiori dettagli, consultare la sezione <a href="/docs/it/v2.6.x/full-text-search.md">Ricerca di testi completi</a> e <a href="/docs/it/v2.6.x/decay-ranker-overview.md">Panoramica del Decay Ranker</a>.</p></td>
+     <td><p>Tipo di funzione utilizzata. Per l'incorporazione del testo, impostare il valore su <code translate="no">FunctionType.TEXTEMBEDDING</code>.<br><strong>Nota:</strong> Milvus accetta <code translate="no">FunctionType.BM25</code> (per la trasformazione sparse-embedding) e <code translate="no">FunctionType.RERANK</code> (per il reranking) per questo parametro. Per maggiori dettagli, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca di testi completi</a> e <a href="/docs/it/decay-ranker-overview.md">Panoramica del Decay Ranker</a>.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -360,9 +420,24 @@ schema.add_function(text_embedding_function)
    </tr>
 </table>
 <div class="alert note">
-<p>Per le raccolte con più campi scalari che richiedono la conversione da testo a vettore, aggiungere funzioni separate allo schema della raccolta, assicurandosi che ogni funzione abbia un nome e un valore <code translate="no">output_field_names</code> unici.</p>
+<p>Per le raccolte con più campi scalari che richiedono la conversione da testo a vettore, aggiungere funzioni separate allo schema della raccolta, assicurandosi che ogni funzione abbia un nome unico e un valore <code translate="no">output_field_names</code>.</p>
 </div>
-<h3 id="Step-3-Configure-index" class="common-anchor-header">Passo 3: Configurare l'indice</h3><p>Dopo aver definito lo schema con i campi necessari e la funzione incorporata, impostare l'indice per la raccolta. Per semplificare questo processo, utilizzare <code translate="no">AUTOINDEX</code> come <code translate="no">index_type</code>, un'opzione che consente a Milvus di scegliere e configurare il tipo di indice più adatto in base alla struttura dei dati.</p>
+<h3 id="Step-3-Configure-index" class="common-anchor-header">Passo 3: Configurare l'indice<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dopo aver definito lo schema con i campi necessari e la funzione incorporata, impostare l'indice per la raccolta. Per semplificare questo processo, utilizzare <code translate="no">AUTOINDEX</code> come <code translate="no">index_type</code>, un'opzione che consente a Milvus di scegliere e configurare il tipo di indice più adatto in base alla struttura dei dati.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -373,7 +448,22 @@ index_params.add_index(
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Create-collection" class="common-anchor-header">Passo 4: Creare la collezione</h3><p>Creare ora la collezione utilizzando lo schema e i parametri dell'indice definiti.</p>
+<h3 id="Step-4-Create-collection" class="common-anchor-header">Passo 4: Creare la collezione<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Creare ora la collezione utilizzando lo schema e i parametri dell'indice definiti.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -381,7 +471,22 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">Passo 5: Inserire i dati</h3><p>Dopo aver configurato la raccolta e l'indice, si è pronti a inserire i dati grezzi. In questo processo, è sufficiente fornire il testo grezzo. Il modulo Function, definito in precedenza, genera automaticamente il vettore sparse corrispondente per ogni voce di testo.</p>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">Passo 5: Inserire i dati<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dopo aver configurato la raccolta e l'indice, si è pronti a inserire i dati grezzi. In questo processo, è sufficiente fornire il testo grezzo. Il modulo Function, definito in precedenza, genera automaticamente il vettore sparse corrispondente per ogni voce di testo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -389,7 +494,22 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Passo 6: Eseguire la ricerca vettoriale</h3><p>Dopo l'inserimento dei dati, è possibile eseguire una ricerca semantica utilizzando il testo grezzo della query. Milvus converte automaticamente la query in un vettore di incorporamento, recupera i documenti pertinenti in base alla somiglianza e restituisce i risultati più corrispondenti.</p>
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Passo 6: Eseguire la ricerca vettoriale<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dopo l'inserimento dei dati, è possibile eseguire una ricerca semantica utilizzando il testo grezzo della query. Milvus converte automaticamente la query in un vettore di incorporamento, recupera i documenti pertinenti in base alla somiglianza e restituisce i risultati più corrispondenti.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -404,7 +524,7 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sulle operazioni di ricerca e interrogazione, consultare <a href="/docs/it/v2.6.x/single-vector-search.md">Ricerca vettoriale</a> e <a href="/docs/it/v2.6.x/get-and-scalar-query.md">interrogazione</a> <a href="/docs/it/v2.6.x/single-vector-search.md">di base</a>.</p>
+<p>Per ulteriori informazioni sulle operazioni di ricerca e interrogazione, consultare <a href="/docs/it/single-vector-search.md">Ricerca vettoriale</a> e <a href="/docs/it/get-and-scalar-query.md">interrogazione</a> <a href="/docs/it/single-vector-search.md">di base</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -420,20 +540,80 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">Qual è la differenza tra la configurazione delle credenziali in milvus.yaml e le variabili d'ambiente?</h3><p>Entrambi i metodi funzionano, ma l'uso di <code translate="no">milvus.yaml</code> è l'approccio consigliato, in quanto fornisce una gestione centralizzata delle credenziali e una denominazione coerente delle credenziali tra tutti i provider. Quando si usano le variabili d'ambiente, i nomi delle variabili variano a seconda del fornitore del servizio di embedding, quindi si consiglia di consultare la pagina dedicata di ciascun fornitore per capire i nomi specifici delle variabili d'ambiente richiesti (ad esempio, <a href="/docs/it/v2.6.x/openai.md">OpenAI</a> o <a href="/docs/it/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p>
-<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">Cosa succede se non si specifica un parametro di credenziale nella definizione della funzione?</h3><p>Milvus segue questo ordine di risoluzione delle credenziali:</p>
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">Qual è la differenza tra la configurazione delle credenziali in milvus.yaml e le variabili d'ambiente?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Entrambi i metodi funzionano, ma l'uso di <code translate="no">milvus.yaml</code> è l'approccio consigliato, in quanto fornisce una gestione centralizzata delle credenziali e una denominazione coerente delle credenziali tra tutti i provider. Quando si usano le variabili d'ambiente, i nomi delle variabili variano a seconda del fornitore del servizio di embedding, quindi si consiglia di consultare la pagina dedicata di ciascun fornitore per capire i nomi specifici delle variabili d'ambiente richiesti (ad esempio, <a href="/docs/it/openai.md">OpenAI</a> o <a href="/docs/it/azure-openai.md">Azure OpenAI</a>).</p>
+<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">Cosa succede se non si specifica un parametro di credenziale nella definizione della funzione?<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus segue questo ordine di risoluzione delle credenziali:</p>
 <ol>
 <li>Per prima cosa, cerca la credenziale predefinita configurata per quel provider nel file <code translate="no">milvus.yaml</code>.</li>
 <li>Se non esistono credenziali predefinite in milvus.yaml, si ricorre alle variabili d'ambiente (se configurate).</li>
 <li>Se non sono configurate né le credenziali di <code translate="no">milvus.yaml</code> né le variabili d'ambiente, Milvus lancia un errore.</li>
 </ol>
-<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">Come posso verificare che gli embeddings siano generati correttamente?</h3><p>È possibile verificare</p>
+<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">Come posso verificare che gli embeddings siano generati correttamente?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile verificare</p>
 <ol>
 <li>interrogando la collezione dopo l'inserimento per vedere se il campo vettoriale contiene dei dati</li>
 <li>verificando che la lunghezza del campo vettoriale corrisponda alle dimensioni previste</li>
 <li>Eseguendo una semplice ricerca di similarità per verificare che le incorporazioni producano risultati significativi.</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Quando eseguo una ricerca di similarità, posso usare un vettore di query invece del testo grezzo?</h3><p>Sì, è possibile utilizzare vettori di query precalcolati invece di testo grezzo per la ricerca di similarità. Il modulo Function converte automaticamente le query di testo grezzo in embedding, ma è anche possibile fornire direttamente i dati vettoriali al parametro dati dell'operazione di ricerca. Nota: la dimensione del vettore di query fornito deve essere coerente con la dimensione delle incorporazioni vettoriali generate dal modulo Function.</p>
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Quando eseguo una ricerca di similarità, posso usare un vettore di query invece del testo grezzo?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sì, è possibile utilizzare vettori di query precalcolati invece di testo grezzo per la ricerca di similarità. Il modulo Function converte automaticamente le query di testo grezzo in embedding, ma è anche possibile fornire direttamente i dati vettoriali al parametro dati dell'operazione di ricerca. Nota: la dimensione del vettore di query fornito deve essere coerente con la dimensione delle incorporazioni vettoriali generate dal modulo Function.</p>
 <p><strong>Esempio</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(

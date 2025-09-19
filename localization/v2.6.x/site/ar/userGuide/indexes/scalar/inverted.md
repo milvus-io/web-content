@@ -45,7 +45,7 @@ summary: >-
 <li><p><strong>الاستعلام عن قيم حقول JSON</strong>: تصفية على مفاتيح محددة داخل هياكل JSON</p></li>
 </ul>
 <p><strong>فائدة الأداء</strong>: يمكن للفهارس INVERTED تقليل وقت الاستعلام من ثوانٍ إلى أجزاء من الثانية على مجموعات البيانات الكبيرة من خلال إلغاء الحاجة إلى عمليات مسح المجموعة الكاملة.</p>
-<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">كيف تعمل الفهارس المقلوبة<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">كيفية عمل الفهارس المقلوبة<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,24 +60,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يستخدم ميلفوس <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> لتنفيذ الفهرسة المقلوبة. إليك العملية</p>
+    </button></h2><p>يقوم فهرس <strong>INVERTED</strong> في Milvus بتعيين كل قيمة حقل فريد (مصطلح) إلى مجموعة معرّفات المستندات التي تظهر فيها تلك القيمة. تتيح هذه البنية إمكانية البحث السريع عن الحقول ذات القيم المتكررة أو الفئوية.</p>
+<p>كما هو موضح في الرسم البياني، تعمل العملية في خطوتين:</p>
 <ol>
-<li><p><strong>الترميز</strong>: يقسم ميلفوس بياناتك إلى مصطلحات قابلة للبحث</p></li>
-<li><p><strong>قاموس المصطلحات</strong>: إنشاء قائمة مرتبة من جميع المصطلحات الفريدة</p></li>
-<li><p><strong>قوائم مقلوبة</strong>: يقوم بتعيين كل مصطلح إلى المستندات التي تحتوي عليه</p></li>
+<li><p><strong>التعيين الأمامي (المعرف ← المصطلح):</strong> يشير كل معرّف مستند إلى قيمة الحقل الذي يحتوي عليه.</p></li>
+<li><p><strong>التعيين المقلوب (المصطلح → المعرفات):</strong> يجمع Milvus المصطلحات الفريدة ويبني تعيينًا معكوسًا من كل مصطلح إلى جميع المعرفات التي تحتوي عليه.</p></li>
 </ol>
-<p>على سبيل المثال، بالنظر إلى هاتين الجملتين</p>
-<ul>
-<li><p><strong>"Milvus هي قاعدة بيانات متجهة سحابية أصلية"</strong></p></li>
-<li><p><strong>"ميلفوس جيدة جدًا في الأداء"</strong></p></li>
-</ul>
-<p>يعيّن الفهرس المقلوب مصطلحات مثل <strong>"Milvus"</strong> → <strong>[المستند 0، المستند 1]</strong>، و <strong>"سحابي أصلي"</strong> → <strong>[المستند 0]</strong>، و <strong>"أداء"</strong> → <strong>[المستند 1]</strong>.</p>
+<p>على سبيل المثال، يتم تعيين القيمة <strong>"إلكترونيات"</strong> إلى المعرفين <strong>1</strong> <strong>و3،</strong> بينما يتم تعيين <strong>"كتب"</strong> إلى المعرفين <strong>2</strong> <strong>و5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
-   </span> <span class="img-wrapper"> <span>الفهرس المقلوب</span> </span></p>
-<p>عندما تقوم بالتصفية حسب مصطلح، يبحث Milvus عن المصطلح في القاموس ويسترجع على الفور جميع المستندات المطابقة.</p>
-<p>تدعم الفهارس المقلوبة جميع أنواع الحقول العددية: <strong>BOOL</strong> و <strong>INT8</strong> و <strong>INT16</strong> و <strong>INT32</strong> و <strong>INT64</strong> و <strong>FLOAT</strong> و <strong>DOUBLE</strong> و <strong>VARCHAR</strong> و <strong>JSON</strong> و <strong>ARRAY</strong>. ومع ذلك، فإن معلمات الفهرس لفهرسة حقل JSON تختلف قليلاً عن الحقول العددية العادية.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   </span> <span class="img-wrapper"> <span>كيف يعمل الفهرس المعكوس</span> </span></p>
+<p>عندما تقوم بالتصفية بحثًا عن قيمة معينة (على سبيل المثال، <code translate="no">category == &quot;electronics&quot;</code>)، يبحث Milvus ببساطة عن المصطلح في الفهرس ويسترجع المعرفات المطابقة مباشرة. هذا يتجنب مسح مجموعة البيانات الكاملة ويتيح التصفية السريعة، خاصةً للقيم الفئوية أو المتكررة.</p>
+<p>تدعم الفهارس INVERTED جميع أنواع الحقول القياسية، مثل <strong>BOOL</strong> و <strong>INT8</strong> و <strong>INT16</strong> و <strong>INT16</strong> و <strong>INT32</strong> و <strong>INT64</strong> و <strong>FLOAT و FLOAT</strong> و <strong>DOUBLE</strong> و <strong>VARCHAR</strong> و <strong>JSON</strong> و <strong>ARRAY</strong>. ومع ذلك، فإن معلمات الفهرس لفهرسة حقل JSON تختلف قليلاً عن الحقول القياسية العادية.</p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">إنشاء فهارس على حقول غير JSON<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

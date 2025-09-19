@@ -155,10 +155,25 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. نشر مجموعة ميلفوس</h3><p>بمجرد تشغيل جراب مشغل Milvus، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. نشر مجموعة ميلفوس<button data-href="#1-Deploy-a-Milvus-cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بمجرد تشغيل جراب مشغل Milvus، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم الأمر أعلاه بنشر مجموعة Milvus مع <strong>Woodpecker</strong> كقائمة انتظار للرسائل (موصى به للإصدار 2.6.0) وجميع المكونات المعمارية الجديدة بما في ذلك عقدة البث.</p>
+<p>يقوم الأمر أعلاه بنشر مجموعة Milvus مع <strong>Woodpecker</strong> كقائمة انتظار للرسائل (موصى به للإصدار 2.6.2) وجميع المكونات المعمارية الجديدة بما في ذلك عقدة البث.</p>
 <p><strong>أبرز الملامح المعمارية في هذا النشر:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: <a href="/docs/ar/use-woodpecker.md">يستخدم Woodpecker</a> (يقلل من صيانة البنية التحتية)</li>
@@ -172,7 +187,22 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <li>يمكنك أيضًا نشر مثيل Milvus في الوضع المستقل، حيث يتم تضمين جميع مكوناته داخل حجرة واحدة. للقيام بذلك، قم بتغيير عنوان URL لملف التكوين في الأمر أعلاه إلى <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
-<h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. تحقق من حالة مجموعة ميلفوس</h3><p>قم بتشغيل الأمر التالي للتحقق من حالة مجموعة ميلفوس العنقودية</p>
+<h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. تحقق من حالة مجموعة ميلفوس<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتشغيل الأمر التالي للتحقق من حالة مجموعة ميلفوس العنقودية</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>بمجرد أن تصبح مجموعة Milvus جاهزة، يجب أن تكون مخرجات الأمر أعلاه مشابهة لما يلي. إذا بقي الحقل <code translate="no">status.status</code> <code translate="no">Unhealthy</code> ، فإن مجموعة ميلفوس الخاصة بك لا تزال قيد الإنشاء.</p>
@@ -222,7 +252,22 @@ my-release-minio-1                               1/1     Running   0          2m
 my-release-minio-2                               1/1     Running   0          2m35s
 my-release-minio-3                               1/1     Running   0          2m35s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. إعادة توجيه منفذ محلي إلى ميلفوس</h3><p>قم بتشغيل الأمر التالي للحصول على المنفذ الذي تعمل عليه مجموعة Milvus العنقودية الخاصة بك.</p>
+<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. إعادة توجيه منفذ محلي إلى ميلفوس<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتشغيل الأمر التالي للحصول على المنفذ الذي تعمل عليه مجموعة Milvus العنقودية الخاصة بك.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pod my-release-milvus-proxy-84f67cdb7f-pg6wf --template</span>
 =&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;
 19530
@@ -378,5 +423,5 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

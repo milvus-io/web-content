@@ -204,7 +204,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">IN</code>: Used to match values within a specific set or range.</p></li>
-<li><p><code translate="no">LIKE</code>: Used to match a pattern (mostly for text fields).</p></li>
+<li><p><code translate="no">LIKE</code>: Used to match a pattern (mostly for text fields).  Milvus allows you to build an <code translate="no">NGRAM</code> index on VARCHAR or JSON fields to accelerate text queries. For details, refer to <a href="/docs/ngram.md">NGRAM</a>.</p></li>
 </ul>
 <h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Example 1: Using <code translate="no">IN</code> to Match Multiple Values<button data-href="#Example-1-Using-IN-to-Match-Multiple-Values" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -563,7 +563,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where <code translate="no">metadata</code> is null</strong></p>
+<p><strong>Example 1: Retrieve entities where metadata is null</strong></p>
 <p>To find entities where the <code translate="no">metadata</code> field is either missing or explicitly set to None:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
@@ -573,7 +573,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where <code translate="no">metadata</code> is not null</strong></p>
+<p><strong>Example 2: Retrieve entities where metadata is not null</strong></p>
 <p>To find entities where the <code translate="no">metadata</code> field is not null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
@@ -627,7 +627,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 1: Retrieve entities where <code translate="no">tags</code> is null</strong></p>
+<p><strong>Example 1: Retrieve entities where tags is null</strong></p>
 <p>To retrieve entities where the <code translate="no">tags</code> field is either missing or explicitly set to <code translate="no">None</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
@@ -637,7 +637,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example 2: Retrieve entities where <code translate="no">tags</code> is not null</strong></p>
+<p><strong>Example 2: Retrieve entities where tags is not null</strong></p>
 <p>To retrieve entities where the <code translate="no">tags</code> field is not null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
@@ -685,3 +685,21 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus offers a range of basic operators that give you flexibility in filtering and querying your data. By combining comparison, range, arithmetic, and logical operators, you can create powerful filter expressions to narrow down your search results and retrieve the data you need efficiently.</p>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>Is there a limit to the length of the match value list in filter conditions (e.g., filter=’color in ["red", "green", “blue”]')? What should I do if the list is too long?</strong></p>
+<p>Zilliz Cloud does not impose a length limit on the match value list in filter conditions. However, an excessively long list can significantly impact query performance.
+If your filter condition includes a long list of match values or a complex expression with many elements, we recommend using <a href="/docs/filtering-templating.md">Filter Templating</a> to improve query performance.</p>

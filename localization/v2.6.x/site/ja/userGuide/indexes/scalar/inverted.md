@@ -42,7 +42,7 @@ summary: >-
 <li><p><strong>JSONフィールド値のクエリー</strong>：JSON構造内の特定のキーにフィルターをかける</p></li>
 </ul>
 <p><strong>パフォーマンス上の利点</strong>：INVERTEDインデックスは、コレクション全体のスキャンを不要にすることで、大規模なデータセットのクエリ時間を数秒から数ミリ秒に短縮することができる。</p>
-<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">INVERTEDインデックスの仕組み<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">INVERTED インデックスの仕組み<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,24 +57,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは<a href="https://github.com/quickwit-oss/tantivy">Tantivyを</a>使用してインバーテッドインデックスを実装しています。以下はそのプロセスである：</p>
+    </button></h2><p>Milvusの<strong>INVERTEDインデックスは</strong>、一意のフィールド値（用語）を、その値が出現するドキュメントIDの集合にマッピングします。この構造により、繰り返し値やカテゴリ値を持つフィールドの高速検索が可能になります。</p>
+<p>図に示すように、処理は2つのステップで行われる：</p>
 <ol>
-<li><p><strong>トークン化</strong>：Milvusはデータを検索可能な用語に分解します。</p></li>
-<li><p><strong>用語辞書</strong>：すべてのユニークな用語のソートされたリストを作成します。</p></li>
-<li><p><strong>転置リスト</strong>：各用語をそれを含む文書にマッピング</p></li>
+<li><p><strong>前方マッピング（ID → 用語）：</strong>各文書IDは、それが含むフィールド値を指す。</p></li>
+<li><p><strong>反転マッピング（用語 → ID）：</strong>Milvusはユニークな用語を収集し、各用語からそれを含むすべてのIDへの逆マッピングを構築します。</p></li>
 </ol>
-<p>例えば、次の2つの文章があるとする：</p>
-<ul>
-<li><p><strong>「Milvusはクラウドネイティブのベクトルデータベースである"</strong></p></li>
-<li><p><strong>「Milvusはパフォーマンスに優れている</strong></p></li>
-</ul>
-<p>転置インデックスでは、<strong>"Milvus"</strong>→<strong>[文書0, 文書1]</strong>、<strong>"cloud-native"</strong>→<strong>[文書0]</strong>、<strong>"performance"</strong>→<strong>[文書1]</strong>のような用語がマッピングされる。</p>
+<p>例えば、<strong>"electronics "</strong>という値はID1と<strong>3に</strong>、<strong>"books "</strong>はID2と<strong>5に</strong>マッピングされます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
-   </span> <span class="img-wrapper"> <span>転置インデックス</span> </span></p>
-<p>用語でフィルタリングすると、Milvusはその用語を辞書で検索し、一致するすべての文書を瞬時に取得します。</p>
-<p>INVERTEDインデックスはすべてのスカラーフィールド型をサポートします：<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>JSON</strong>、<strong>ARRAY</strong>です。ただし、JSONフィールドにインデックスを作成する際のインデックス・パラメータは、通常のスカラー・フィールドとは若干異なります。</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   </span> <span class="img-wrapper"> <span>転置インデックスの仕組み</span> </span></p>
+<p>特定の値(例:<code translate="no">category == &quot;electronics&quot;</code>)を検索する場合、Milvusは単純にインデックスでその用語を検索し、一致するIDを直接取得します。これにより、データセット全体をスキャンする必要がなくなり、特にカテゴリ値や繰り返し値の高速フィルタリングが可能になります。</p>
+<p>INVERTEDインデックスは、<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>JSON</strong>、<strong>ARRAYなど</strong>、すべてのスカラーフィールド型をサポートしています。ただし、JSONフィールドにインデックスを作成する際のインデックス・パラメータは、通常のスカラー・フィールドとは若干異なります。</p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">JSON以外のフィールドにインデックスを作成する<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

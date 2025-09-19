@@ -18,7 +18,7 @@ summary: 當您需要對資料執行頻繁的篩選查詢時，倒轉式索引�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>當您需要對資料執行頻繁的篩選查詢時，<code translate="no">INVERTED</code> 索引可以顯著提高查詢性能。Milvus 使用倒排索引來快速找到符合篩選條件的精確記錄，而不是掃描所有文件。</p>
+    </button></h1><p>當您需要對資料執行頻繁的篩選查詢時，<code translate="no">INVERTED</code> 索引可以顯著提高查詢性能。Milvus 使用倒排索引來快速找出符合篩選條件的精確記錄，而不是掃描所有文件。</p>
 <h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">何時使用反轉索引<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ summary: 當您需要對資料執行頻繁的篩選查詢時，倒轉式索引�
 <li><p><strong>查詢 JSON 欄位值</strong>：篩選 JSON 結構中的特定鍵</p></li>
 </ul>
 <p><strong>效能優勢</strong>：INVERTED 索引不需要進行全集掃描，可將大型資料集的查詢時間從幾秒縮短至幾毫秒。</p>
-<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">INVERTED 索引如何運作<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">INVERTED 索引如何工作<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,24 +56,19 @@ summary: 當您需要對資料執行頻繁的篩選查詢時，倒轉式索引�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 使用<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>來實作反轉索引。流程如下</p>
+    </button></h2><p>Milvus 中的<strong>INVERTED 索引</strong>將每個唯一欄位值（術語）對應到出現該值的文件 ID 集。這種結構能夠快速查找具有重複或分類值的欄位。</p>
+<p>如圖所示，此過程分為兩個步驟：</p>
 <ol>
-<li><p><strong>標記化</strong>：Milvus 將您的資料分解為可搜尋的詞彙</p></li>
-<li><p><strong>詞彙字典</strong>：建立所有獨特詞彙的排序清單</p></li>
-<li><p><strong>反向清單</strong>：將每個詞彙對應到包含該詞彙的文件</p></li>
+<li><p><strong>前向映射 (ID → 詞彙)：</strong>每個文件 ID 指向其包含的欄位值。</p></li>
+<li><p><strong>反向映射 (術語 → ID)：</strong>Milvus 收集獨特的術語，並從每個術語到包含該術語的所有 ID 建立反向映射。</p></li>
 </ol>
-<p>例如，給出這兩個句子：</p>
-<ul>
-<li><p><strong>"Milvus 是雲原生向量資料庫</strong></p></li>
-<li><p><strong>「Milvus 的性能非常出色」</strong></p></li>
-</ul>
-<p>倒排索引會將<strong>「Milvus」</strong>→<strong>[文件 0、文件 1]</strong>、<strong>「cloud-native」</strong>→<strong>[文件 0]</strong>、<strong>「效能」</strong>→<strong>[文件 1]</strong>等詞彙對映。</p>
+<p>例如，值<strong>「electronics」</strong>對應到 ID<strong>1</strong>和<strong>3</strong>，而<strong>「books」</strong>對應到 ID<strong>2</strong>和<strong>5</strong>。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
-   </span> <span class="img-wrapper"> <span>反向索引</span> </span></p>
-<p>當您使用詞彙進行篩選時，Milvus 會在字典中查找該詞彙，並立即檢索所有匹配的文件。</p>
-<p>INVERTED 索引支援所有標量欄位類型：<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>JSON</strong> 和<strong>ARRAY</strong>。然而，索引 JSON 欄位的索引參數與一般標量欄位略有不同。</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   </span> <span class="img-wrapper"> <span>反向索引如何運作</span> </span></p>
+<p>當您篩選特定值 (例如<code translate="no">category == &quot;electronics&quot;</code>)，Milvus 只需在索引中查找該詞，並直接檢索匹配的 ID。這可以避免掃描整個資料集，並實現快速篩選，特別是對於分類或重複值。</p>
+<p>INVERTED 索引支援所有標量欄位類型，例如<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>JSON</strong> 和<strong>ARRAY</strong>。然而，索引 JSON 欄位的索引參數與一般標量欄位略有不同。</p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">在非 JSON 欄位上建立索引<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

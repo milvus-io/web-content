@@ -2,8 +2,8 @@
 id: string.md
 title: Campo stringa
 summary: >-
-  In Milvus, VARCHAR è il tipo di dati utilizzato per memorizzare dati stringa.
-  Quando si definisce un campo VARCHAR, due parametri sono obbligatori:
+  In Milvus, VARCHAR è il tipo di dati utilizzato per memorizzare i dati
+  stringa.
 ---
 <h1 id="String-Field" class="common-anchor-header">Campo stringa<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> è il tipo di dati utilizzato per memorizzare dati stringa. Quando si definisce un campo <code translate="no">VARCHAR</code>, due parametri sono obbligatori:</p>
+    </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> è il tipo di dati utilizzato per memorizzare dati stringa.</p>
+<p>Quando si definisce un campo <code translate="no">VARCHAR</code>, due parametri sono obbligatori:</p>
 <ul>
 <li><p>Impostare <code translate="no">datatype</code> su <code translate="no">DataType.VARCHAR</code>.</p></li>
 <li><p>Specificare <code translate="no">max_length</code>, che definisce il numero massimo di byte che il campo <code translate="no">VARCHAR</code> può memorizzare. L'intervallo valido per <code translate="no">max_length</code> va da 1 a 65.535.</p></li>
@@ -249,6 +250,9 @@ schema.WithField(entity.NewField().
       </svg>
     </button></h2><p>L'indicizzazione aiuta a migliorare le prestazioni delle ricerche e delle query. In Milvus, l'indicizzazione è obbligatoria per i campi vettoriali, ma facoltativa per i campi scalari.</p>
 <p>L'esempio seguente crea indici sul campo vettoriale <code translate="no">embedding</code> e sul campo scalare <code translate="no">varchar_field1</code>, entrambi usando il tipo di indice <code translate="no">AUTOINDEX</code>. Con questo tipo, Milvus seleziona automaticamente l'indice più adatto in base al tipo di dati. È anche possibile personalizzare il tipo di indice e i parametri per ogni campo. Per maggiori dettagli, consultare la sezione <a href="/docs/it/index-explained.md">Indice spiegato</a>.</p>
+<div class="alert note">
+<p>È anche possibile costruire un indice <code translate="no">NGRAM</code> per accelerare il filtraggio <code translate="no">LIKE</code> sui campi <code translate="no">VARCHAR</code>. Per i dettagli, fare riferimento a <a href="/docs/it/ngram.md">NGRAM</a>.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -339,7 +343,7 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta definiti lo schema e l'indice, creare una collezione che includa i campi stringa.</p>
+    </button></h2><p>Una volta definiti lo schema e l'indice, creare una collezione che includa campi stringa.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
@@ -659,7 +663,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per recuperare le entità in cui <code translate="no">varchar_field1</code> ha il valore <code translate="no">&quot;Unknown&quot;</code>, utilizzare la seguente espressione. Poiché il valore predefinito di <code translate="no">varchar_field1</code> è <code translate="no">&quot;Unknown&quot;</code>, il risultato atteso dovrebbe includere entità con <code translate="no">varchar_field1</code> esplicitamente impostato su <code translate="no">&quot;Unknown&quot;</code> o con <code translate="no">varchar_field1</code> impostato su null.</p>
+<p>Per recuperare le entità in cui <code translate="no">varchar_field1</code> ha il valore <code translate="no">&quot;Unknown&quot;</code>, utilizzare la seguente espressione. Poiché il valore predefinito di <code translate="no">varchar_field1</code> è <code translate="no">&quot;Unknown&quot;</code>, il risultato atteso dovrebbe includere entità con <code translate="no">varchar_field1</code> impostato esplicitamente su <code translate="no">&quot;Unknown&quot;</code> o con <code translate="no">varchar_field1</code> impostato su null.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>

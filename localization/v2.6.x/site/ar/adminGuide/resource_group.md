@@ -90,7 +90,7 @@ title: إدارة مجموعات الموارد
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.6.0. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
+<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.6.2. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
 </div>
 <ol>
 <li><p>إنشاء مجموعة موارد.</p>
@@ -213,7 +213,7 @@ except Exception:
     print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>لمزيد من التفاصيل، يُرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
+<p>لمزيد من التفاصيل، يرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">ممارسة جيدة لإدارة توسيع نطاق المجموعة<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,7 +232,7 @@ except Exception:
     </button></h2><p>في الوقت الحالي، لا يمكن لـ Milvus التوسع بشكل مستقل في البيئات السحابية الأصلية. ومع ذلك، باستخدام <strong>واجهة برمجة تطبيقات مجموعة الموارد التوضيحية</strong> بالاقتران مع تنسيق الحاويات، يمكن لـ Milvus تحقيق عزل الموارد وإدارتها بسهولة لـ QueryNodes. فيما يلي ممارسة جيدة لإدارة QueryNodes في بيئة سحابية:</p>
 <ol>
 <li><p>بشكل افتراضي، ينشئ Milvus <strong> مجموعة_موارد_افتراضية</strong>. لا يمكن حذف مجموعة الموارد هذه وتعمل أيضًا كمجموعة موارد التحميل الافتراضية لجميع المجموعات ويتم دائمًا تعيين QueryNodes الزائدة عن الحاجة إليها. لذلك، يمكننا إنشاء مجموعة موارد معلقة للاحتفاظ بموارد QueryNode غير المستخدمة، مما يمنع موارد QueryNode من أن تشغلها <strong>_مجموعة_الموارد_الافتراضية_المجموعة</strong>.</p>
-<p>بالإضافة إلى ذلك، إذا فرضنا القيد بصرامة <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> ، يمكننا التحكم بدقة في تخصيص QueryNode في المجموعة. لنفترض أنه يوجد حاليًا عقدة استعلام واحدة فقط في المجموعة ونقوم بتهيئة المجموعة. إليك مثال على الإعداد:</p>
+<p>بالإضافة إلى ذلك، إذا فرضنا القيد بصرامة <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> ، يمكننا التحكم بدقة في تخصيص QueryNode في المجموعة. لنفترض أنه لا يوجد حاليًا سوى عقدة استعلام واحدة فقط في المجموعة ونقوم بتهيئة المجموعة. إليك مثال على الإعداد:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
 _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&quot;</span>

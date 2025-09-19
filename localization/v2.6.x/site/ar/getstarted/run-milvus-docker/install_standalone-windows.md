@@ -57,7 +57,22 @@ title: تشغيل Milvus في Docker (لينكس)
         ></path>
       </svg>
     </button></h2><p>يوفر Milvus برنامج نصي للتثبيت لتثبيته كحاوية Docker. بمجرد تثبيت Docker Desktop على Microsoft Windows، يمكنك الوصول إلى Docker CLI من PowerShell أو موجه أوامر Windows في وضع <strong>المسؤول</strong> ومن WSL 2. </p>
-<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">من PowerShell أو موجه أوامر ويندوز</h3><p>إذا كنت على دراية أكثر بـ PowerShell أو موجه أوامر Windows، فإن موجه الأوامر يكون على النحو التالي.</p>
+<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">من PowerShell أو موجه أوامر ويندوز<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كنت على دراية أكثر بـ PowerShell أو موجه أوامر Windows، فإن موجه الأوامر يكون على النحو التالي.</p>
 <ol>
 <li><p>افتح Docker Desktop في وضع المسؤول عن طريق النقر بزر الماوس الأيمن واختيار <strong>تشغيل كمسؤول</strong>.</p></li>
 <li><p>قم بتنزيل البرنامج النصي للتثبيت واحفظه باسم <code translate="no">standalone.bat</code>.</p>
@@ -89,7 +104,22 @@ Delete successfully. # Data has been removed.​
 
 </code></pre></li>
 </ol>
-<h3 id="From-WSL-2​" class="common-anchor-header">من WSL 2</h3><p>إذا كنت تفضل بدء تشغيل ميلفوس باستخدام أوامر لينكس والبرامج النصية على ويندوز، تأكد من أنك قمت بالفعل بتثبيت الأمر WSL 2. للحصول على تفاصيل حول كيفية تثبيت الأمر WSL 2، يمكنك الرجوع إلى <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">مقالة مايكروسوفت</a> هذه.</p>
+<h3 id="From-WSL-2​" class="common-anchor-header">من WSL 2<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كنت تفضل بدء تشغيل ميلفوس باستخدام أوامر لينكس والبرامج النصية على ويندوز، تأكد من أنك قمت بالفعل بتثبيت الأمر WSL 2. للحصول على تفاصيل حول كيفية تثبيت الأمر WSL 2، يمكنك الرجوع إلى <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">مقالة مايكروسوفت</a> هذه.</p>
 <ol>
 <li><p>ابدأ تشغيل WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -140,11 +170,26 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h2><p>بمجرد تثبيت Docker Desktop على Microsoft Windows، يمكنك الوصول إلى Docker CLI من PowerShell أو موجه أوامر Windows في وضع <strong>المسؤول</strong>. يمكنك تشغيل Docker Compose إما في PowerShell أو موجه أوامر Windows أو موجه أوامر Windows أو WSL 2 لبدء تشغيل Milvus.</p>
-<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">من PowerShell أو موجه أوامر Windows</h3><ol>
+<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">من PowerShell أو موجه أوامر Windows<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p>افتح Docker Desktop في وضع المسؤول عن طريق النقر بزر الماوس الأيمن وتحديد <strong>تشغيل كمسؤول</strong>.</p></li>
 <li><p>قم بتشغيل الأوامر التالية في PowerShell أو موجه أوامر Windows لتنزيل ملف تكوين Docker Compose لـ Milvus Standalone وبدء تشغيل Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.2/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -161,7 +206,22 @@ Creating milvus-standalone ... done​
 </ul></li>
 </ol>
 <p>يمكنك أيضًا استدعاء إصدار لينكس من أوامر Docker Compose إذا كان لديك WSL 2 مثبتًا.</p>
-<h3 id="From-WSL-2​" class="common-anchor-header">من WSL 2</h3><p>الإجراء مشابه لاستخدام Docker Compose لتثبيت Milvus في أنظمة لينكس.</p>
+<h3 id="From-WSL-2​" class="common-anchor-header">من WSL 2<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الإجراء مشابه لاستخدام Docker Compose لتثبيت Milvus في أنظمة لينكس.</p>
 <ol>
 <li><p>ابدأ WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -170,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>قم بتنزيل ملف تهيئة ميلفوس.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.2/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>ابدأ تشغيل ميلفوس.</p>
@@ -197,7 +257,22 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header">كيف يمكنني التعامل مع الخطأ <code translate="no">Docker Engine stopped</code> ؟</h3><p>بمجرد تثبيت Docker Desktop في Windows، قد تواجه الخطأ <code translate="no">Docker Engine stopped</code> إذا لم يتم تكوين جهاز الكمبيوتر الخاص بك بشكل صحيح. في هذه الحالة، قد تحتاج إلى إجراء الفحوصات التالية.</p>
+    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header">كيف يمكنني التعامل مع الخطأ <code translate="no">Docker Engine stopped</code> ؟<button data-href="#How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بمجرد تثبيت Docker Desktop في Windows، قد تواجه الخطأ <code translate="no">Docker Engine stopped</code> إذا لم يتم تكوين جهاز الكمبيوتر الخاص بك بشكل صحيح. في هذه الحالة، قد تحتاج إلى إجراء الفحوصات التالية.</p>
 <ol>
 <li><p>تحقق مما إذا تم تمكين المحاكاة الافتراضية.</p>
 <p>يمكنك التحقق مما إذا كانت المحاكاة الافتراضية ممكّنة من خلال النظر إلى علامة التبويب <strong>الأداء</strong> في <strong>إدارة المهام</strong>.</p>
@@ -235,7 +310,22 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
    </span> <span class="img-wrapper"> <span>ابدأ تشغيل Docker Desktop كمسؤول</span> </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">كيف يمكنني التعامل مع المشاكل المتعلقة ب WSL أثناء نشر ميلفوس؟</h3><p>إذا واجهتَ مشاكل متعلقة بـ WSL أثناء تشغيل Milvus من WSL 2، فقد تحتاج إلى التحقق مما إذا كنت قد قمت بتكوين Docker Desktop لاستخدام المحرك المستند إلى WSL 2 على النحو التالي.</p>
+<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">كيف يمكنني التعامل مع المشاكل المتعلقة ب WSL أثناء نشر ميلفوس؟<button data-href="#How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا واجهتَ مشاكل متعلقة بـ WSL أثناء تشغيل Milvus من WSL 2، فقد تحتاج إلى التحقق مما إذا كنت قد قمت بتكوين Docker Desktop لاستخدام المحرك المستند إلى WSL 2 على النحو التالي.</p>
 <ol>
 <li><p>تأكد من تحديد "استخدام المحرك المستند إلى WSL 2" في <strong>الإعدادات</strong> &gt; <strong>عام</strong>. </p>
 <p>
@@ -248,7 +338,22 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>حدد توزيعات WSL 2 في إعدادات سطح المكتب Docker Desktop</span> </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">كيف يمكنني التعامل مع الأخطاء المتعلقة بوحدة التخزين التي تظهر أثناء بدء تشغيل Milvus التي تقرأ <code translate="no">Read config failed</code> ؟</h3><p>
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">كيف يمكنني التعامل مع الأخطاء المتعلقة بوحدة التخزين التي تظهر أثناء بدء تشغيل Milvus التي تقرأ <code translate="no">Read config failed</code> ؟<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>فشل قراءة موجه خطأ في قراءة التكوين أثناء بدء تشغيل Milvus</span> </span></p>
@@ -281,7 +386,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
 <li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
 <li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
+<li><a href="/docs/ar/insert-update-delete.md">إدراج وإضافة وحذف</a></li>
 <li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>

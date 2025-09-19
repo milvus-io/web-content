@@ -42,7 +42,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>検索システムのデータモデル設計には、ビジネスニーズを分析し、情報をスキーマで表現されたデータモデルに抽象化することが含まれる。十分に定義されたスキーマは、データモデルをビジネス上の目的に合致させ、データの一貫性とサービスの質を保証するために重要である。  さらに、適切なデータ型とインデックスを選択することは、ビジネス目標を経済的に達成するために重要です。</p>
-<h3 id="Analyzing-Business-Needs" class="common-anchor-header">ビジネスニーズの分析</h3><p>ビジネス・ニーズに効果的に対応するためには、ユーザーが実行するクエリのタイプを分析し、最適な検索方法を決定することから始まります。</p>
+<h3 id="Analyzing-Business-Needs" class="common-anchor-header">ビジネスニーズの分析<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ビジネス・ニーズに効果的に対応するためには、ユーザーが実行するクエリのタイプを分析し、最適な検索方法を決定することから始まります。</p>
 <ul>
 <li><p><strong>ユーザーのクエリー</strong>ユーザーが実行すると予想されるクエリのタイプを特定する。これは、スキーマが実際のユースケースをサポートし、検索パフォーマンスを最適化するのに役立ちます。これには以下が含まれる：</p>
 <ul>
@@ -59,7 +74,22 @@ summary: >-
 <li><p><strong>メタデータのフィルタリング</strong>：ベクトル検索の上に、日付範囲、カテゴリー、タグなどの制約を適用する。</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">ビジネス要件を検索データモデルに変換</h3><p>次のステップは、ビジネス要件を具体的なデータモデルに変換することです。情報の中核となるコンポーネントとその検索方法を特定します：</p>
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">ビジネス要件を検索データモデルに変換<button data-href="#Translates-Business-Requirements-into-a-Search-Data-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次のステップは、ビジネス要件を具体的なデータモデルに変換することです。情報の中核となるコンポーネントとその検索方法を特定します：</p>
 <ul>
 <li><p>生のコンテンツ（テキスト、画像、音声）、関連するメタデータ（タイトル、タグ、著者名）、コンテキスト属性（タイムスタンプ、ユーザー行動など）など、保存する必要のあるデータを定義する。</p></li>
 <li><p>各要素に適切なデータタイプとフォーマットを決定します。例えば</p>
@@ -87,11 +117,41 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、データモデルはコレクションスキーマで表現されます。コレクションスキーマ内で適切なフィールドを設計することは、効果的な検索を可能にする鍵です。各フィールドはコレクションに格納された特定のデータタイプを定義し、検索プロセスにおいて明確な役割を果たします。Milvusは<strong>ベクトルフィールドと</strong> <strong>スカラーフィールドの</strong>2種類のフィールドをサポートしています。</p>
+    </button></h2><p>Milvusでは、データモデルはコレクションスキーマで表現されます。コレクションスキーマ内で適切なフィールドを設計することは、効果的な検索を可能にする鍵です。各フィールドはコレクションに格納されたデータの特定のタイプを定義し、検索プロセスにおいて明確な役割を果たします。Milvusは<strong>ベクトルフィールドと</strong> <strong>スカラーフィールドの</strong>2種類のフィールドをサポートしています。</p>
 <p>ベクターと補助的なスカラーフィールドを含むフィールドのスキーマにデータモデルをマッピングすることができます。各フィールドがデータモデルの属性と相関していることを確認し、特にベクトルタイプ（denseまたはspase）とその次元に注意してください。</p>
-<h3 id="Vector-Field" class="common-anchor-header">ベクトル・フィールド</h3><p>ベクトル・フィールドは、テキスト、画像、音声などの非構造化データの埋め込みを格納します。これらの埋め込みは、データ型や利用する検索方法によって、密なもの、疎なもの、バイナリのものがあります。一般的に、密なベクトルは意味検索に使用され、疎なベクトルは全文検索や語彙照合に適している。バイナリ・ベクトルは、ストレージや計算リソースが限られている場合に有用である。コレクションは、マルチモーダルまたはハイブリッド検索ストラテジーを可能にするために、複数のベクトルフィールドを含むことができる。このトピックの詳細ガイドについては、<a href="/docs/ja/multi-vector-search.md">マルチベクターハイブリッド検索を</a>参照してください。</p>
+<h3 id="Vector-Field" class="common-anchor-header">ベクトル・フィールド<button data-href="#Vector-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ベクトル・フィールドは、テキスト、画像、音声などの非構造化データの埋め込みを格納します。これらの埋め込みは、データ型や利用する検索方法によって、密なもの、疎なもの、バイナリのものがあります。一般的に、密なベクトルは意味検索に使用され、疎なベクトルは全文検索や語彙照合に適している。バイナリ・ベクトルは、ストレージや計算リソースが限られている場合に有用である。コレクションは、マルチモーダルまたはハイブリッド検索ストラテジーを可能にするために、複数のベクトルフィールドを含むことができる。このトピックの詳細ガイドについては、<a href="/docs/ja/multi-vector-search.md">マルチベクターハイブリッド検索を</a>参照してください。</p>
 <p>Milvusは以下のベクトルデータ型をサポートしています:<a href="/docs/ja/dense-vector.md">Dense Vectorは</a> <code translate="no">FLOAT_VECTOR</code> 、<a href="/docs/ja/sparse_vector.md">Sparse Vectorは</a> <code translate="no">SPARSE_FLOAT_VECTOR</code> 、<a href="/docs/ja/binary-vector.md">Binary Vectorは</a> <code translate="no">BINARY_VECTOR</code> 。</p>
-<h3 id="Scalar-Field" class="common-anchor-header">スカラーフィールド</h3><p>スカラーフィールドは、数値、文字列、日付などのプリミティブで構造化された値-一般にメタデータと呼ばれる-を格納します。これらの値はベクターの検索結果と一緒に返すことができ、フィルタリングやソートに不可欠です。これらの値により、文書を特定のカテゴリや定義された時間範囲に限定するなど、特定の属性に基づいて検索結果を絞り込むことができます。</p>
+<h3 id="Scalar-Field" class="common-anchor-header">スカラーフィールド<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>スカラーフィールドは、数値、文字列、日付などのプリミティブで構造化された値-一般にメタデータと呼ばれる-を格納します。これらの値はベクターの検索結果と一緒に返すことができ、フィルタリングやソートに不可欠です。これらの値により、文書を特定のカテゴリや定義された時間範囲に限定するなど、特定の属性に基づいて検索結果を絞り込むことができます。</p>
 <p>Milvusは、ベクトル以外のデータの保存やフィルタリングのために、<code translate="no">BOOL</code> 、<code translate="no">INT8/16/32/64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、<code translate="no">VARCHAR</code> 、<code translate="no">JSON</code> 、<code translate="no">ARRAY</code> などのスカラー型をサポートしています。これらの型は検索操作の精度とカスタマイズ性を高めます。</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">スキーマ設計における高度な機能の活用<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,13 +169,73 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>スキーマを設計する場合、サポートされているデータ型を使ってデータをフィールドにマッピングするだけでは十分ではありません。フィールド間の関係や、コンフィギュレーションに利用できるストラテジーを十分に理解することが不可欠です。設計段階で主要な機能を念頭に置いておくことで、スキーマが当面のデータ処理要件を満たすだけでなく、将来のニーズに対しても拡張性と適応性を持つようになります。これらの機能を注意深く統合することにより、Milvusの機能を最大限に活用し、より広範なデータ戦略と目的をサポートする強力なデータアーキテクチャを構築することができます。以下はコレクションスキーマを作成する主な機能の概要です：</p>
-<h3 id="Primary-Key" class="common-anchor-header">主キー</h3><p>主キーフィールドは、コレクション内の各エンティティを一意に識別するため、スキーマの基本的な構成要素です。主キーの定義は必須である。これは、整数または文字列型のスカラー・フィールドで、<code translate="no">is_primary=True</code> としてマークされなければならない。オプションで、プライマリ・キーに<code translate="no">auto_id</code> を有効にすることができます。プライマリ・キーには、データがコレクションに取り込まれるにつれてモノリシックに増加する整数番号が自動的に割り当てられます。</p>
+<h3 id="Primary-Key" class="common-anchor-header">主キー<button data-href="#Primary-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>主キーフィールドは、コレクション内の各エンティティを一意に識別するため、スキーマの基本要素です。主キーの定義は必須である。これは整数型または文字列型のスカラー・フィールドで、<code translate="no">is_primary=True</code> としてマークされなければならない。オプションで、プライマリ・キーに<code translate="no">auto_id</code> を有効にすることができます。プライマリ・キーには、データがコレクションに取り込まれるにつれてモノリシックに増加する整数番号が自動的に割り当てられます。</p>
 <p>詳細については、<a href="/docs/ja/primary-field.md">プライマリフィールドとAutoIDを</a>参照してください。</p>
-<h3 id="Partitioning" class="common-anchor-header">パーティショニング</h3><p>検索を高速化するために、オプションでパーティショニングをオンにできます。特定のスカラー・フィールドをパーティショニングに指定し、検索時にこのフィールドに基づくフィルタリング基準を指定することで、検索範囲を関連するパーティションのみに効果的に制限できます。この方法は、検索領域を減らすことで検索操作の効率を大幅に向上させる。</p>
+<h3 id="Partitioning" class="common-anchor-header">パーティショニング<button data-href="#Partitioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>検索を高速化するために、オプションでパーティショニングをオンにできます。特定のスカラー・フィールドをパーティショニングに指定し、検索時にこのフィールドに基づくフィルタリング基準を指定することで、検索範囲を関連するパーティションのみに効果的に制限できます。この方法は、検索領域を減らすことで検索操作の効率を大幅に向上させる。</p>
 <p>詳細は「<a href="/docs/ja/use-partition-key.md">パーティション・キーの使用</a>」を参照。</p>
-<h3 id="Analyzer" class="common-anchor-header">アナライザー</h3><p>アナライザーは、テキストデータの処理と変換に不可欠なツールである。主な機能は、生のテキストをトークンに変換し、インデックス付けや検索のために構造化することである。文字列をトークン化し、ストップワードを削除し、個々の単語をトークンにステミングします。</p>
+<h3 id="Analyzer" class="common-anchor-header">アナライザー<button data-href="#Analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>アナライザーは、テキストデータの処理と変換に不可欠なツールである。主な機能は、生のテキストをトークンに変換し、インデックス付けや検索のために構造化することである。文字列をトークン化し、ストップワードを削除し、個々の単語をトークンにステミングします。</p>
 <p>詳細については、「<a href="/docs/ja/analyzer-overview.md">Analyzer の概要</a>」を参照してください。</p>
-<h3 id="Function" class="common-anchor-header">機能</h3><p>Milvusではスキーマの一部として組み込み関数を定義し、特定のフィールドを自動的に導出することができます。例えば、<code translate="no">VARCHAR</code> フィールドからスパースベクトルを生成する組み込み BM25 関数を追加して、全文検索をサポートすることができます。これらの関数派生フィールドは、前処理を合理化し、コレクションが自己完結的でクエリに対応できる状態を維持することを保証する。</p>
+<h3 id="Function" class="common-anchor-header">機能<button data-href="#Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusではスキーマの一部として組み込み関数を定義し、特定のフィールドを自動的に導出することができます。例えば、<code translate="no">VARCHAR</code> フィールドからスパースベクトルを生成する組み込み BM25 関数を追加して、全文検索をサポートすることができます。これらの関数派生フィールドは、前処理を合理化し、コレクションが自己完結的でクエリに対応できる状態を維持することを保証する。</p>
 <p>詳細については、<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">実例<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +302,7 @@ summary: >-
    <tr>
      <td><p>テキスト密ベクトル (<code translate="no">FLOAT_VECTOR</code>)</p></td>
      <td><p>テキスト埋め込みモデルによって生成された密なベクトル</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/BaGlwzDmyiyVvVk6NurcFclInCd?from=from_parent_docs">基本ベクトル探索</a></p></td>
+     <td><p><a href="/docs/ja/single-vector-search.md">基本ベクトル探索</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -191,7 +311,7 @@ summary: >-
    <tr>
      <td><p>text_sparse_vector (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
      <td><p>組み込みの BM25 関数によって自動生成された疎なベクトル</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/RQTRwhOVPiwnwokqr4scAtyfnBf?from=from_parent_docs">全文検索</a></p></td>
+     <td><p><a href="/docs/ja/full-text-search.md">全文検索</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -199,7 +319,22 @@ summary: >-
    </tr>
 </table>
 <p>スキーマの詳細と、さまざまなタイプのフィールドを追加するための詳細なガイダンスについては、<a href="/docs/ja/schema.md">スキーマの説明を</a>参照してください。</p>
-<h3 id="Initialize-schema" class="common-anchor-header">スキーマの初期化</h3><p>はじめに、空のスキーマを作成する必要があります。このステップによって、データモデルを定義するための基礎構造が確立される。</p>
+<h3 id="Initialize-schema" class="common-anchor-header">スキーマの初期化<button data-href="#Initialize-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>はじめに、空のスキーマを作成する必要があります。このステップによって、データモデルを定義するための基礎構造が確立される。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -230,7 +365,22 @@ schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Skip this step using cURL</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-fields" class="common-anchor-header">フィールドの追加</h3><p>スキーマを作成したら、次はデータを構成するフィールドを指定します。各フィールドは、それぞれのデータ型と属性に関連付けられています。</p>
+<h3 id="Add-fields" class="common-anchor-header">フィールドの追加<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>スキーマを作成したら、次はデータを構成するフィールドを指定します。各フィールドは、それぞれのデータ型と属性に関連付けられています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
@@ -398,7 +548,22 @@ schema.addField(AddFieldReq.builder()
 <li><p>パーティション・キー：<code translate="no">timestamp</code> がパーティション・キーとして割り当てられ、パーティションによるフィルタリングが可能になる。これは次のようなものである。</p></li>
 <li><p>テキストアナライザ：テキストアナライザが2つの文字列フィールド<code translate="no">title</code> と<code translate="no">text</code> に適用され、それぞれテキストマッチと全文検索をサポートする。</p></li>
 </ul>
-<h3 id="Optional-Add-functions" class="common-anchor-header">(オプション）関数の追加</h3><p>データ照会機能を強化するために、関数をスキーマに組み込むことができます。例えば、特定のフィールドに関連する処理を行う関数を作成することができる。</p>
+<h3 id="Optional-Add-functions" class="common-anchor-header">(オプション）関数の追加<button data-href="#Optional-Add-functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>データ照会機能を強化するために、関数をスキーマに組み込むことができます。例えば、特定のフィールドに関連する処理を行う関数を作成することができる。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

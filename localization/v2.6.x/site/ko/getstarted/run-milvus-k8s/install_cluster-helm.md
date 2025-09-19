@@ -61,7 +61,7 @@ title: 헬름으로 Milvus 클러스터 설치
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>설치하기 전에 <a href="/docs/ko/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
+<li><p>설치 전 <a href="/docs/ko/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
 <li><p>밀버스를 설치하기 전에 <a href="https://milvus.io/tools/sizing">밀버스 사이징 툴을</a> 사용하여 데이터 크기에 따라 하드웨어 요구 사항을 추정하는 것을 권장합니다. 이렇게 하면 Milvus 설치를 위한 최적의 성능과 리소스 할당을 보장하는 데 도움이 됩니다.</p></li>
 </ul>
 <div class="alert note">
@@ -107,12 +107,27 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. 밀버스 클러스터 배포</h3><p>헬름 차트를 설치했으면, 쿠버네티스에서 밀버스를 시작할 수 있다. 이 섹션에서는 Milvus 클러스터를 배포하는 방법을 안내한다.</p>
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. 밀버스 클러스터 배포<button data-href="#1-Deploy-a-Milvus-cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>헬름 차트를 설치했으면, 쿠버네티스에서 밀버스를 시작할 수 있다. 이 섹션에서는 Milvus 클러스터를 배포하는 방법을 안내한다.</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>대신 독립형 배포가 필요하신가요?</strong></p>
 <p>개발 또는 테스트를 위해 독립 실행형 모드(단일 노드)로 Milvus를 배포하려면 이 명령을 사용하세요:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.2 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -122,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>참고</strong>: 독립 실행형 모드는 기본 메시지 큐로 딱따구리를 사용하며 스트리밍 노드 구성 요소를 활성화합니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요</a> 및 <a href="/docs/ko/use-woodpecker.md">딱따구리 사용하기를</a> 참조하세요.</p>
 </div>
 <p><strong>Milvus 클러스터 배포:</strong></p>
-<p>다음 명령은 Woodpecker를 권장 메시지 큐로 사용하여 v2.6.0에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
+<p>다음 명령은 Woodpecker를 권장 메시지 큐로 사용하여 v2.6.2에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.2 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -135,7 +150,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li>메시지 큐로 <strong>Woodpecker를</strong> 사용합니다(유지보수 감소를 위해 권장).</li>
 <li>성능 향상을 위해 새로운 <strong>스트리밍 노드</strong> 구성 요소를 활성화합니다.</li>
 <li>레거시 <strong>인덱스 노드를</strong> 비활성화합니다(이제 데이터 노드에서 기능을 처리합니다).</li>
-<li>Pulsar를 비활성화하고 대신 Woodpecker를 사용합니다.</li>
+<li>Pulsar를 비활성화하여 대신 Woodpecker 사용</li>
 </ul>
 <div class="alert note">
 <p><strong>Milvus 2.6.x의 아키텍처 변경 사항:</strong></p>
@@ -149,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>대체 메시지 큐 옵션:</strong></p>
 <p>우드페커 대신 <strong>Pulsar</strong> (기존 선택 사항)를 사용하려는 경우:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.0 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.2 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -171,10 +186,25 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </ul>
 <p>자세한 내용은 <a href="https://artifacthub.io/packages/helm/milvus/milvus">밀버스 헬름 차트와</a> <a href="https://helm.sh/docs/">헬름 문서를</a> 참고한다.</p>
 </div>
-<h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. 밀버스 클러스터 상태 확인</h3><p>파드 상태를 확인하여 배포가 성공했는지 확인한다:</p>
+<h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. 밀버스 클러스터 상태 확인<button data-href="#2-Check-Milvus-cluster-status" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>파드 상태를 확인하여 배포가 성공했는지 확인한다:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>모든 파드가 "실행 중" 상태가 표시될 때까지 기다립니다.</strong> v2.6.0 구성에서는 다음과 유사한 파드가 표시되어야 합니다:</p>
+<p><strong>모든 파드가 "실행 중" 상태가 표시될 때까지 기다립니다.</strong> v2.6.2 구성에서는 다음과 유사한 파드가 표시되어야 합니다:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -198,11 +228,26 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>확인해야 할 주요 구성 요소</strong></p>
 <ul>
-<li><strong>Milvus 구성 요소</strong>: <code translate="no">mixcoord</code>, <code translate="no">datanode</code>, <code translate="no">querynode</code>, <code translate="no">proxy</code>, <code translate="no">streaming-node</code></li>
+<li><strong>밀버스 컴포넌트</strong> <code translate="no">mixcoord</code>, <code translate="no">datanode</code>, <code translate="no">querynode</code>, <code translate="no">proxy</code>, <code translate="no">streaming-node</code></li>
 <li><strong>종속성</strong>: <code translate="no">etcd</code> (메타데이터), <code translate="no">minio</code> (오브젝트 스토리지), <code translate="no">pulsar</code> (메시지 큐)</li>
 </ul>
 <p>포트 포워딩이 설정되면 <code translate="no">http://127.0.0.1:9091/webui/</code> 에서 <strong>Milvus 웹UI에</strong> 액세스할 수도 있습니다(다음 단계 참조). 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus WebUI를</a> 참조하세요.</p>
-<h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Milvus에 연결하기</h3><p>쿠버네티스 외부에서 Milvus 클러스터에 연결하려면 포트 포워딩을 설정해야 합니다.</p>
+<h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Milvus에 연결하기<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>쿠버네티스 외부에서 Milvus 클러스터에 연결하려면 포트 포워딩을 설정해야 합니다.</p>
 <p><strong>포트 포워딩을 설정합니다:</strong></p>
 <pre><code translate="no" class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre>
@@ -297,7 +342,22 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
         ></path>
       </svg>
     </button></h2><p>네트워크가 제한된 환경에 있는 경우, 이 섹션의 절차에 따라 Milvus 클러스터를 시작하세요.</p>
-<h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. Milvus 매니페스트 가져오기</h3><p>다음 명령을 실행하여 Milvus 매니페스트를 가져옵니다.</p>
+<h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. Milvus 매니페스트 가져오기<button data-href="#1-Get-Milvus-manifest" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 명령을 실행하여 Milvus 매니페스트를 가져옵니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm template my-release zilliztech/milvus &gt; milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>위 명령은 Milvus 클러스터에 대한 차트 템플릿을 렌더링하고 출력을 <code translate="no">milvus_manifest.yaml</code> 이라는 매니페스트 파일에 저장합니다. 이 매니페스트를 사용하여 별도의 파드에 구성 요소 및 종속 요소와 함께 Milvus 클러스터를 설치할 수 있습니다.</p>
@@ -307,19 +367,79 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>Milvus 구성을 변경하려면, 템플릿을 다운로드하고 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> 템플릿을 다운로드하여 원하는 설정을 지정한 다음 <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> 을 사용하여 매니페스트를 적절히 렌더링합니다.</li>
 </ul>
 </div>
-<h3 id="2-Download-image-pulling-script" class="common-anchor-header">2. 이미지 풀링 스크립트 다운로드</h3><p>이미지 풀링 스크립트는 Python으로 개발되었습니다. <code translate="no">requirement.txt</code> 파일에서 해당 스크립트와 종속 요소를 다운로드해야 합니다.</p>
+<h3 id="2-Download-image-pulling-script" class="common-anchor-header">2. 이미지 풀링 스크립트 다운로드<button data-href="#2-Download-image-pulling-script" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이미지 풀링 스크립트는 Python으로 개발되었습니다. <code translate="no">requirement.txt</code> 파일에서 해당 스크립트와 종속 요소를 다운로드해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Pull-and-save-images" class="common-anchor-header">3. 이미지 가져오기 및 저장</h3><p>다음 명령을 실행하여 필요한 이미지를 가져와 저장합니다.</p>
+<h3 id="3-Pull-and-save-images" class="common-anchor-header">3. 이미지 가져오기 및 저장<button data-href="#3-Pull-and-save-images" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 명령을 실행하여 필요한 이미지를 가져와 저장합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -r requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">python3 save_image.py --manifest milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이미지는 현재 디렉토리의 <code translate="no">images</code> 이라는 하위 폴더로 가져옵니다.</p>
-<h3 id="4-Load-images" class="common-anchor-header">4. 이미지 로드</h3><p>이제 다음과 같이 네트워크가 제한된 환경의 호스트에 이미지를 로드할 수 있습니다:</p>
+<h3 id="4-Load-images" class="common-anchor-header">4. 이미지 로드<button data-href="#4-Load-images" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 다음과 같이 네트워크가 제한된 환경의 호스트에 이미지를 로드할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> $(find . -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.tar.gz&quot;</span>) ; <span class="hljs-keyword">do</span> gunzip -c <span class="hljs-variable">$image</span> | docker load; <span class="hljs-keyword">done</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="5-Deploy-Milvus" class="common-anchor-header">5. Milvus 배포</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f milvus_manifest.yaml</span>
+<h3 id="5-Deploy-Milvus" class="common-anchor-header">5. Milvus 배포<button data-href="#5-Deploy-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>지금까지는 온라인 설치의 <a href="#2-Check-Milvus-cluster-status">2</a>, <a href="#3-Forward-a-local-port-to-Milvus">3단계에</a> 따라 클러스터 상태를 확인하고 로컬 포트를 Milvus로 전달할 수 있습니다.</p>
 <h2 id="Upgrade-running-Milvus-cluster" class="common-anchor-header">실행 중인 Milvus 클러스터 업그레이드<button data-href="#Upgrade-running-Milvus-cluster" class="anchor-icon" translate="no">
@@ -398,5 +518,5 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
 <li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링하기</a>.</p></li>
 </ul>

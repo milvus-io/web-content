@@ -41,7 +41,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>搜索系统的数据模型设计包括分析业务需求，并将信息抽象为模式表达的数据模型。定义明确的 Schema 对于使数据模型与业务目标保持一致、确保数据一致性和服务质量非常重要。  此外，选择适当的数据类型和索引对于经济地实现业务目标也很重要。</p>
-<h3 id="Analyzing-Business-Needs" class="common-anchor-header">分析业务需求</h3><p>要有效满足业务需求，首先要分析用户将执行的查询类型，并确定最合适的搜索方法。</p>
+<h3 id="Analyzing-Business-Needs" class="common-anchor-header">分析业务需求<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要有效满足业务需求，首先要分析用户将执行的查询类型，并确定最合适的搜索方法。</p>
 <ul>
 <li><p><strong>用户查询：</strong>确定用户预期执行的查询类型。这有助于确保您的 Schema 支持真实世界的用例并优化搜索性能。这些查询可能包括</p>
 <ul>
@@ -54,11 +69,26 @@ summary: >-
 <li><p><strong>搜索方法：</strong>根据用户将执行的查询类型选择适当的搜索技术。不同的方法服务于不同的目的，通常可以结合使用以获得更强大的结果：</p>
 <ul>
 <li><p><strong>语义搜索</strong>：使用密集向量相似性来查找具有相似含义的项目，非常适合文本或图像等非结构化数据。</p></li>
-<li><p><strong>全文搜索</strong>：用关键字匹配补充语义搜索。  全文搜索可利用词法分析，避免将长词分解成零散的标记，在检索过程中抓住特殊术语。</p></li>
+<li><p><strong>全文搜索</strong>：用关键字匹配补充语义搜索。  全文搜索可以利用词法分析，避免将长词分解成零散的标记，在检索过程中抓住特殊术语。</p></li>
 <li><p><strong>元数据过滤</strong>：在向量搜索的基础上，应用日期范围、类别或标签等约束条件。</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">将业务需求转化为搜索数据模型</h3><p>下一步是将业务需求转化为具体的数据模型，方法是确定信息的核心组件及其搜索方法：</p>
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">将业务需求转化为搜索数据模型<button data-href="#Translates-Business-Requirements-into-a-Search-Data-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下一步是将业务需求转化为具体的数据模型，方法是确定信息的核心组件及其搜索方法：</p>
 <ul>
 <li><p>定义需要存储的数据，如原始内容（文本、图像、音频）、相关元数据（标题、标签、作者）和上下文属性（时间戳、用户行为等）。</p></li>
 <li><p>为每个元素确定适当的数据类型和格式。例如</p>
@@ -88,9 +118,39 @@ summary: >-
       </svg>
     </button></h2><p>在 Milvus 中，数据模型通过 Collections Schema 表达。在 Collections 模式中设计正确的字段是实现有效检索的关键。每个字段都定义了存储在 Collections 中的特定数据类型，并在搜索过程中扮演着不同的角色。在高层次上，Milvus 支持两种主要类型的字段：<strong>向量字段</strong>和<strong>标量字段</strong>。</p>
 <p>现在，您可以将数据模型映射到字段 Schema 中，包括向量和任何辅助标量字段。确保每个字段都与数据模型中的属性相关联，尤其要注意向量类型（密集型或标量型）及其维度。</p>
-<h3 id="Vector-Field" class="common-anchor-header">向量字段</h3><p>向量字段存储文本、图像和音频等非结构化数据类型的嵌入。这些嵌入可能是密集型、稀疏型或二进制型，具体取决于数据类型和使用的检索方法。通常，密集向量用于语义搜索，而稀疏向量则更适合全文或词性匹配。当存储和计算资源有限时，二进制向量很有用。一个 Collections 可能包含多个向量场，以实现多模式或混合检索策略。有关该主题的详细指南，请参阅<a href="/docs/zh/multi-vector-search.md">多向量混合检索</a>。</p>
+<h3 id="Vector-Field" class="common-anchor-header">向量字段<button data-href="#Vector-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>向量字段存储文本、图像和音频等非结构化数据类型的嵌入。这些嵌入可能是密集型、稀疏型或二进制型，具体取决于数据类型和使用的检索方法。通常，密集向量用于语义搜索，而稀疏向量则更适合全文或词性匹配。当存储和计算资源有限时，二进制向量很有用。一个 Collections 可能包含多个向量场，以实现多模式或混合检索策略。有关该主题的详细指南，请参阅<a href="/docs/zh/multi-vector-search.md">多向量混合检索</a>。</p>
 <p>Milvus 支持向量数据类型：<code translate="no">FLOAT_VECTOR</code> 表示<a href="/docs/zh/dense-vector.md">密集</a>向量，<code translate="no">SPARSE_FLOAT_VECTOR</code> 表示<a href="/docs/zh/sparse_vector.md">稀疏向量</a>，<code translate="no">BINARY_VECTOR</code> 表示<a href="/docs/zh/binary-vector.md">二进制向量</a></p>
-<h3 id="Scalar-Field" class="common-anchor-header">标量字段</h3><p>标量字段存储原始的结构化值，通常称为元数据，如数字、字符串或日期。这些值可以与向量搜索结果一起返回，对于筛选和排序至关重要。它们允许你根据特定属性缩小搜索结果的范围，比如将文档限制在特定类别或定义的时间范围内。</p>
+<h3 id="Scalar-Field" class="common-anchor-header">标量字段<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>标量字段存储原始的结构化值，通常称为元数据，如数字、字符串或日期。这些值可以与向量搜索结果一起返回，对于筛选和排序至关重要。它们允许你根据特定属性缩小搜索结果的范围，比如将文档限制在特定类别或定义的时间范围内。</p>
 <p>Milvus 支持标量类型，如<code translate="no">BOOL</code>,<code translate="no">INT8/16/32/64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>,<code translate="no">VARCHAR</code>,<code translate="no">JSON</code> 和<code translate="no">ARRAY</code> ，用于存储和过滤非向量数据。这些类型提高了搜索操作的精度和定制化程度。</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">在模式设计中利用高级功能<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,13 +168,73 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在设计 Schema 时，仅仅使用支持的数据类型将数据映射到字段是不够的。必须全面了解字段之间的关系以及可用的配置策略。在设计阶段牢记关键功能，可确保 Schema 不仅能满足当前的数据处理要求，还具有可扩展性和适应性，以满足未来的需求。通过精心整合这些功能，您可以构建一个强大的数据架构，最大限度地发挥 Milvus 的功能，并支持您更广泛的数据策略和目标。以下是创建 Collections Schema 的主要功能概述：</p>
-<h3 id="Primary-Key" class="common-anchor-header">主键</h3><p>主键字段是 Schema 的基本组成部分，因为它能唯一标识 Collections 中的每个实体。必须定义主键。它必须是整数或字符串类型的标量字段，并标记为<code translate="no">is_primary=True</code> 。可选择为主键启用<code translate="no">auto_id</code> ，主键会自动分配整数，随着更多数据被采集到 Collections 中，整数也会随之增长。</p>
+<h3 id="Primary-Key" class="common-anchor-header">主键<button data-href="#Primary-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>主键字段是 Schema 的基本组成部分，因为它能唯一标识 Collections 中的每个实体。必须定义主键。它必须是整数或字符串类型的标量字段，并标记为<code translate="no">is_primary=True</code> 。可选择为主键启用<code translate="no">auto_id</code> ，主键会自动分配整数，随着更多数据被采集到 Collections 中，整数也会随之增长。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/primary-field.md">主字段和自动 ID</a>。</p>
-<h3 id="Partitioning" class="common-anchor-header">分区</h3><p>为了加快搜索速度，可以选择打开分区。通过为分区指定一个特定的标量字段，并在搜索过程中根据该字段指定过滤条件，可以有效地将搜索范围限制在相关的分区中。这种方法通过缩小搜索域，大大提高了检索操作的效率。</p>
+<h3 id="Partitioning" class="common-anchor-header">分区<button data-href="#Partitioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>为了加快搜索速度，可以选择打开分区。通过为分区指定一个特定的标量字段，并在搜索过程中根据该字段指定过滤条件，可以有效地将搜索范围限制在相关的分区中。这种方法通过缩小搜索域，大大提高了检索操作的效率。</p>
 <p>更多详情，请参阅<a href="/docs/zh/use-partition-key.md">使用 Partition Key</a>。</p>
-<h3 id="Analyzer" class="common-anchor-header">分析器</h3><p>分析器是处理和转换文本数据的重要工具。它的主要功能是将原始文本转换为标记，并对其进行结构化处理，以便编制索引和进行检索。具体做法是对字符串进行标记化处理，去掉停顿词，并将单个词的词干转化为标记。</p>
+<h3 id="Analyzer" class="common-anchor-header">分析器<button data-href="#Analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>分析器是处理和转换文本数据的重要工具。它的主要功能是将原始文本转换为标记，并对其进行结构化处理，以便编制索引和进行检索。具体做法是对字符串进行标记化处理，去掉停顿词，并将单个词的词干转化为标记。</p>
 <p>更多详情，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>。</p>
-<h3 id="Function" class="common-anchor-header">功能</h3><p>Milvus 允许你定义内置函数作为 Schema 的一部分，以自动推导出某些字段。例如，您可以添加内置 BM25 函数，从<code translate="no">VARCHAR</code> 字段生成稀疏向量，以支持全文搜索。这些函数派生字段可简化预处理，并确保 Collections 保持自足和查询就绪。</p>
+<h3 id="Function" class="common-anchor-header">功能<button data-href="#Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 允许你定义内置函数作为 Schema 的一部分，以自动推导出某些字段。例如，您可以添加内置 BM25 函数，从<code translate="no">VARCHAR</code> 字段生成稀疏向量，以支持全文搜索。这些函数派生字段可简化预处理，并确保 Collections 保持自足和查询就绪。</p>
 <p>更多详情，请参阅<a href="/docs/zh/full-text-search.md">全文检索</a>。</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">真实世界示例<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -131,7 +251,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本节中，我们将概述上图所示多媒体文档搜索应用程序的 Schema 设计和代码示例。该 Schema 设计用于管理包含文章的数据集，数据映射到以下字段：</p>
+    </button></h2><p>在本节中，我们将概述上图所示多媒体文档搜索应用程序的 Schema 设计和代码示例。该 Schema 设计用于管理包含文章的数据集，文章数据映射到以下字段：</p>
 <table>
    <tr>
      <th><p><strong>字段</strong></p></th>
@@ -181,7 +301,7 @@ summary: >-
    <tr>
      <td><p>文本密集向量 (<code translate="no">FLOAT_VECTOR</code>)</p></td>
      <td><p>由文本 Embeddings 模型生成的密集向量</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/BaGlwzDmyiyVvVk6NurcFclInCd?from=from_parent_docs">基本向量搜索</a></p></td>
+     <td><p><a href="/docs/zh/single-vector-search.md">基本向量搜索</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -190,7 +310,7 @@ summary: >-
    <tr>
      <td><p>文本稀疏向量 (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
      <td><p>由内置 BM25 函数自动生成的稀疏向量</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/RQTRwhOVPiwnwokqr4scAtyfnBf?from=from_parent_docs">全文搜索</a></p></td>
+     <td><p><a href="/docs/zh/full-text-search.md">全文搜索</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -198,7 +318,22 @@ summary: >-
    </tr>
 </table>
 <p>有关<a href="/docs/zh/schema.md">Schema 的</a>更多信息以及添加各类字段的详细指导，请参阅<a href="/docs/zh/schema.md">Schema Explained</a>。</p>
-<h3 id="Initialize-schema" class="common-anchor-header">初始化模式</h3><p>首先，我们需要创建一个空模式。这一步为定义数据模型建立了基础结构。</p>
+<h3 id="Initialize-schema" class="common-anchor-header">初始化模式<button data-href="#Initialize-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>首先，我们需要创建一个空模式。这一步为定义数据模型建立了基础结构。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -229,7 +364,22 @@ schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Skip this step using cURL</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-fields" class="common-anchor-header">添加字段</h3><p>创建 Schema 后，下一步就是指定构成数据的字段。每个字段都与各自的数据类型和属性相关联。</p>
+<h3 id="Add-fields" class="common-anchor-header">添加字段<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>创建 Schema 后，下一步就是指定构成数据的字段。每个字段都与各自的数据类型和属性相关联。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
@@ -397,7 +547,22 @@ schema.addField(AddFieldReq.builder()
 <li><p>Partition Key：<code translate="no">timestamp</code> 被指定为分区键，允许通过分区进行过滤。这可能是</p></li>
 <li><p>文本分析器：文本分析器应用于 2 个字符串字段<code translate="no">title</code> 和<code translate="no">text</code> ，分别支持文本匹配和全文搜索。</p></li>
 </ul>
-<h3 id="Optional-Add-functions" class="common-anchor-header">(可选）添加功能</h3><p>为增强数据查询功能，可在 Schema 中加入函数。例如，可以创建一个函数来处理与特定字段相关的数据。</p>
+<h3 id="Optional-Add-functions" class="common-anchor-header">(可选）添加功能<button data-href="#Optional-Add-functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>为增强数据查询功能，可在 Schema 中加入函数。例如，可以创建一个函数来处理与特定字段相关的数据。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

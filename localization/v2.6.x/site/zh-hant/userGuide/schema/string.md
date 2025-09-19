@@ -1,7 +1,7 @@
 ---
 id: string.md
 title: 字串欄位
-summary: 在 Milvus 中，VARCHAR 是用來儲存字串資料的資料類型。定義 VARCHAR 欄位時，有兩個參數是必須的：
+summary: 在 Milvus 中，VARCHAR 是用來儲存字串資料的資料類型。
 ---
 <h1 id="String-Field" class="common-anchor-header">字串欄位<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,8 @@ summary: 在 Milvus 中，VARCHAR 是用來儲存字串資料的資料類型。�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，<code translate="no">VARCHAR</code> 是用來儲存字串資料的資料類型。當您定義<code translate="no">VARCHAR</code> 欄位時，有兩個參數是必須的：</p>
+    </button></h1><p>在 Milvus 中，<code translate="no">VARCHAR</code> 是用來儲存字串資料的資料類型。</p>
+<p>當您定義<code translate="no">VARCHAR</code> 欄位時，有兩個參數是必須的：</p>
 <ul>
 <li><p>設定<code translate="no">datatype</code> 為<code translate="no">DataType.VARCHAR</code> 。</p></li>
 <li><p>指定<code translate="no">max_length</code>, 定義<code translate="no">VARCHAR</code> 欄位可儲存的最大位元組數。<code translate="no">max_length</code> 的有效範圍是 1 到 65,535 。</p></li>
@@ -47,7 +48,7 @@ summary: 在 Milvus 中，VARCHAR 是用來儲存字串資料的資料類型。�
 <li><p><code translate="no">varchar_field2</code>：最多可儲存 200 位元組，允許空值，但沒有預設值。</p></li>
 </ul>
 <div class="alert note">
-<p>如果您在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許您插入事先未定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，有可能影響效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
+<p>如果您在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許您插入未事先定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，有可能影響效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -246,7 +247,10 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>索引有助於改善搜尋與查詢效能。在 Milvus 中，對向量欄位必須建立索引，但對標量值欄位則是可選的。</p>
-<p>以下範例在向量欄位<code translate="no">embedding</code> 和標量欄位<code translate="no">varchar_field1</code> 上建立索引，兩者都使用<code translate="no">AUTOINDEX</code> 索引類型。使用這種類型，Milvus 會根據資料類型自動選擇最適合的索引。您也可以自訂每個欄位的索引類型和參數。詳情請參閱<a href="/docs/zh-hant/index-explained.md">Index Explained</a>。</p>
+<p>以下範例在向量欄位<code translate="no">embedding</code> 和標量欄位<code translate="no">varchar_field1</code> 上建立索引，兩者都使用<code translate="no">AUTOINDEX</code> 索引類型。使用這種類型，Milvus 會根據資料類型自動選擇最適合的索引。您也可以自訂每個欄位的索引類型和參數。詳情請參閱<a href="/docs/zh-hant/index-explained.md">索引說明</a>。</p>
+<div class="alert note">
+<p>您也可以建立<code translate="no">NGRAM</code> 索引，以加速<code translate="no">VARCHAR</code> 欄位上的<code translate="no">LIKE</code> 過濾。詳情請參閱<a href="/docs/zh-hant/ngram.md">NGRAM</a>。</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

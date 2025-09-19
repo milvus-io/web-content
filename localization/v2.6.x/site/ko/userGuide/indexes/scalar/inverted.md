@@ -58,24 +58,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 <a href="https://github.com/quickwit-oss/tantivy">Tantivy를</a> 사용해 인버트 인덱싱을 구현합니다. 그 과정은 다음과 같습니다:</p>
+    </button></h2><p>Milvus의 <strong>INVERTED 인덱스는</strong> 각각의 고유 필드 값(용어)을 해당 값이 있는 문서 ID 집합에 매핑합니다. 이 구조는 반복되거나 범주형 값이 있는 필드를 빠르게 조회할 수 있게 해줍니다.</p>
+<p>다이어그램에서 볼 수 있듯이 이 프로세스는 두 단계로 진행됩니다:</p>
 <ol>
-<li><p><strong>토큰화</strong>: Milvus는 데이터를 검색 가능한 용어로 분류합니다.</p></li>
-<li><p><strong>용어 사전</strong>: 모든 고유 용어의 정렬된 목록을 생성합니다.</p></li>
-<li><p><strong>반전 목록</strong>: 각 용어를 해당 용어가 포함된 문서에 매핑</p></li>
+<li><p><strong>포워드 매핑(ID → 용어):</strong> 각 문서 ID는 문서에 포함된 필드 값을 가리킵니다.</p></li>
+<li><p><strong>역매핑(용어 → ID):</strong> Milvus는 고유한 용어를 수집하고 각 용어에서 해당 용어가 포함된 모든 ID로 역매핑을 구축합니다.</p></li>
 </ol>
-<p>예를 들어 다음 두 문장이 있다고 가정해 보겠습니다:</p>
-<ul>
-<li><p><strong>"Milvus는 클라우드 네이티브 벡터 데이터베이스입니다."</strong></p></li>
-<li><p><strong>"Milvus는 성능이 매우 우수합니다."</strong></p></li>
-</ul>
-<p>반전된 인덱스는 <strong>"Milvus"</strong> → <strong>[문서 0, 문서 1]</strong>, <strong>"클라우드 네이티브"</strong> → <strong>[문서 0]</strong>, <strong>"성능"</strong> → <strong>[문서 1]</strong>과 같은 용어를 매핑합니다.</p>
+<p>예를 들어, <strong>'electronics'</strong> 값은 ID <strong>1과</strong> <strong>3에</strong> 매핑되고 <strong>'books'는</strong> ID <strong>2와</strong> <strong>5에</strong> 매핑됩니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
-   </span> <span class="img-wrapper"> <span>반전 인덱스</span> </span></p>
-<p>용어를 기준으로 필터링하면 Milvus는 사전에서 해당 용어를 찾아 일치하는 모든 문서를 즉시 검색합니다.</p>
-<p>반전 인덱스는 모든 스칼라 필드 유형을 지원합니다: <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, <strong>ARRAY</strong>. 그러나 JSON 필드를 색인하기 위한 인덱스 매개변수는 일반 스칼라 필드와 약간 다릅니다.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   </span> <span class="img-wrapper"> <span>반전 인덱스의 작동 방식</span> </span></p>
+<p>특정 값(예: <code translate="no">category == &quot;electronics&quot;</code>)을 필터링하면 Milvus는 색인에서 해당 용어를 조회하여 일치하는 ID를 직접 검색합니다. 이렇게 하면 전체 데이터 세트를 스캔하지 않아도 되며, 특히 범주형 또는 반복되는 값에 대해 빠른 필터링이 가능합니다.</p>
+<p>INVERTED 인덱스는 <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, <strong>ARRAY와</strong> 같은 모든 스칼라 필드 유형을 지원합니다. 그러나 JSON 필드를 색인하기 위한 인덱스 매개변수는 일반 스칼라 필드와 약간 다릅니다.</p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">JSON이 아닌 필드에 인덱스 생성<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

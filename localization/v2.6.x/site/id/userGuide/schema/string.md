@@ -3,8 +3,7 @@ id: string.md
 title: Bidang String
 summary: >-
   Di Milvus, VARCHAR adalah tipe data yang digunakan untuk menyimpan data
-  string. Ketika Anda mendefinisikan sebuah field VARCHAR, dua parameter wajib
-  dimasukkan:
+  string.
 ---
 <h1 id="String-Field" class="common-anchor-header">Bidang String<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Di Milvus, <code translate="no">VARCHAR</code> adalah tipe data yang digunakan untuk menyimpan data string. Ketika Anda mendefinisikan bidang <code translate="no">VARCHAR</code>, dua parameter wajib dimasukkan:</p>
+    </button></h1><p>Di Milvus, <code translate="no">VARCHAR</code> adalah tipe data yang digunakan untuk menyimpan data string.</p>
+<p>Ketika Anda mendefinisikan bidang <code translate="no">VARCHAR</code>, dua parameter wajib dimasukkan:</p>
 <ul>
 <li><p>Tetapkan <code translate="no">datatype</code> ke <code translate="no">DataType.VARCHAR</code>.</p></li>
 <li><p>Tentukan <code translate="no">max_length</code>, yang mendefinisikan jumlah maksimum byte yang dapat disimpan oleh field <code translate="no">VARCHAR</code>. Kisaran yang valid untuk <code translate="no">max_length</code> adalah dari 1 hingga 65.535.</p></li>
@@ -249,7 +249,10 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>Pengindeksan membantu meningkatkan kinerja pencarian dan kueri. Di Milvus, pengindeksan adalah wajib untuk bidang vektor, tetapi opsional untuk bidang skalar.</p>
-<p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code> dan bidang skalar <code translate="no">varchar_field1</code>, keduanya menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe data. Anda juga dapat menyesuaikan jenis indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
+<p>Contoh berikut ini membuat indeks pada bidang vektor <code translate="no">embedding</code> dan bidang skalar <code translate="no">varchar_field1</code>, keduanya menggunakan tipe indeks <code translate="no">AUTOINDEX</code>. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe data. Anda juga dapat menyesuaikan jenis indeks dan parameter untuk setiap field. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks.</a></p>
+<div class="alert note">
+<p>Anda juga dapat membuat indeks <code translate="no">NGRAM</code> untuk mempercepat pemfilteran <code translate="no">LIKE</code> pada bidang <code translate="no">VARCHAR</code>. Untuk detailnya, lihat <a href="/docs/id/ngram.md">NGRAM</a>.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -340,7 +343,7 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah skema dan indeks ditentukan, buatlah koleksi yang menyertakan bidang string.</p>
+    </button></h2><p>Setelah skema dan indeks didefinisikan, buatlah koleksi yang menyertakan bidang-bidang string.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>

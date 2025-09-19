@@ -19,6 +19,145 @@ title: Notes de mise à jour
         ></path>
       </svg>
     </button></h1><p>Découvrez les nouveautés de Milvus ! Cette page résume les nouvelles fonctionnalités, les améliorations, les problèmes connus et les corrections de bogues de chaque version. Vous trouverez dans cette section les notes de version pour chaque version publiée après la v2.6.0. Nous vous conseillons de consulter régulièrement cette page pour prendre connaissance des mises à jour.</p>
+<h2 id="v262" class="common-anchor-header">v2.6.2<button data-href="#v262" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Date de publication : 19 septembre 2025</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Version Milvus</th><th style="text-align:left">Version SDK Python</th><th style="text-align:left">Version SDK Node.js</th><th style="text-align:left">Version SDK Java</th><th style="text-align:left">Version du SDK Go</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Nous sommes ravis d'annoncer la sortie de Milvus 2.6.2 ! Cette mise à jour introduit de nouvelles fonctionnalités puissantes, des améliorations significatives des performances et des corrections critiques qui rendent le système plus stable et prêt pour la production. Parmi les nouveautés, citons les mises à jour partielles de champs avec upsert, le déchiquetage JSON pour accélérer le filtrage dynamique des champs, l'indexation NGram pour des requêtes LIKE plus rapides et une évolution plus souple des schémas sur les collections existantes. Basée sur les commentaires de la communauté, cette version offre une base plus solide pour les déploiements dans le monde réel, et nous encourageons tous les utilisateurs à effectuer une mise à niveau pour profiter de ces améliorations.</p>
+<h3 id="Features" class="common-anchor-header">Fonctionnalités<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Ajout de la prise en charge du déchiquetage JSON pour accélérer le filtrage dynamique des champs. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/json-shredding.md">Déchiquetage JSON</a>.</li>
+<li>Ajout de la prise en charge de l'index NGRAM pour accélérer les opérations similaires. Pour plus de détails, voir <a href="/docs/fr/ngram.md">NGRAM</a>.</li>
+<li>Ajout de la prise en charge des mises à jour partielles de champs avec l'API upsert. Pour plus d'informations, reportez-vous à <a href="/docs/fr/upsert-entities.md">Upsert Entities</a>.</li>
+<li>Ajout de la prise en charge de la fonction Boost. Pour plus de détails, voir <a href="/docs/fr/boost-ranker.md">Boost Ranker</a>.</li>
+<li>Ajout de la prise en charge du regroupement par champs JSON et champs dynamiques<a href="https://github.com/milvus-io/milvus/pull/43203">(#43203</a>)</li>
+<li>Ajout du support pour l'activation du schéma dynamique sur les collections existantes<a href="https://github.com/milvus-io/milvus/pull/44151">(#44151</a>)</li>
+<li>Ajout de la prise en charge de l'abandon des index sans libérer les collections<a href="https://github.com/milvus-io/milvus/pull/42941">(#42941</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Améliorations<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>[StorageV2] Modification de la taille du fichier journal en taille compressée<a href="https://github.com/milvus-io/milvus/pull/44402">(#44402</a>)</li>
+<li>[StorageV2] Ajout de champs enfants dans les informations de chargement<a href="https://github.com/milvus-io/milvus/pull/44384">(#44384</a>)</li>
+<li>[StorageV2] Ajout de la prise en charge de l'inclusion des clés de partition et de clustering dans le groupe système<a href="https://github.com/milvus-io/milvus/pull/44372">(#44372</a>)</li>
+<li>Suppression du délai d'attente pour les tâches de compactage<a href="https://github.com/milvus-io/milvus/pull/44277">(#44277</a>)</li>
+<li>[StorageV2] Activation de la construction avec Azure<a href="https://github.com/milvus-io/milvus/pull/44177">(#44177</a>)</li>
+<li>[StorageV2] Utilisation des informations de groupe pour estimer l'utilisation de la logique<a href="https://github.com/milvus-io/milvus/pull/44356">(#44356</a>)</li>
+<li>[StorageV2] Utilisation des informations de division de groupe pour estimer l'utilisation<a href="https://github.com/milvus-io/milvus/pull/44338">(#44338</a>)</li>
+<li>[StorageV2] Sauvegarde des résultats des groupes de colonnes dans le compactage<a href="https://github.com/milvus-io/milvus/pull/44327">(#44327</a>)</li>
+<li>[StorageV2] Ajout de configurations pour la politique de fractionnement basée sur la taille<a href="https://github.com/milvus-io/milvus/pull/44301">(#44301</a>)</li>
+<li>[StorageV2] Ajout de la prise en charge de la politique de fractionnement basée sur le schéma et la taille<a href="https://github.com/milvus-io/milvus/pull/44282">(#44282</a>)</li>
+<li>[StorageV2] Ajout d'une politique de partage configurable<a href="https://github.com/milvus-io/milvus/pull/44258">(#44258</a>)</li>
+<li>[CachingLayer] Ajout de plus de métriques et de configurations<a href="https://github.com/milvus-io/milvus/pull/44276">(#44276</a>)</li>
+<li>Ajout de la prise en charge de l'attente que tous les index soient prêts avant de charger des segments<a href="https://github.com/milvus-io/milvus/pull/44313">(#44313</a>)</li>
+<li>Ajout d'une métrique de latence interne pour le noeud de rescore<a href="https://github.com/milvus-io/milvus/pull/44010">(#44010</a>)</li>
+<li>Optimisation du format du journal d'accès lors de l'impression des paramètres KV<a href="https://github.com/milvus-io/milvus/pull/43742">(#43742</a>)</li>
+<li>Ajout d'une configuration pour modifier la taille du lot d'instantanés de vidage<a href="https://github.com/milvus-io/milvus/pull/44215">(#44215</a>)</li>
+<li>Réduction de l'intervalle de nettoyage de la tâche de compactage<a href="https://github.com/milvus-io/milvus/pull/44207">(#44207</a>)</li>
+<li>Amélioration du tri par fusion pour prendre en charge plusieurs champs<a href="https://github.com/milvus-io/milvus/pull/44191">(#44191</a>)<a href="https://github.com/milvus-io/milvus/pull/43994">(#43994</a>)</li>
+<li>Ajout d'une estimation des ressources de charge pour l'indexation par paliers<a href="https://github.com/milvus-io/milvus/pull/44171">(#44171</a>)</li>
+<li>Ajout de la configuration de l'index automatique pour le cas de la déduplication<a href="https://github.com/milvus-io/milvus/pull/44186">(#44186</a>)</li>
+<li>Ajout de la configuration pour autoriser les caractères personnalisés dans les noms (<a href="https://github.com/milvus-io/milvus/pull/44063">#44063</a>)</li>
+<li>Ajout du support de cchannel pour les services de streaming<a href="https://github.com/milvus-io/milvus/pull/44143">(#44143</a>)</li>
+<li>Ajout d'un mutex et d'une vérification de l'étendue pour protéger les suppressions simultanées<a href="https://github.com/milvus-io/milvus/pull/44128">(#44128</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correction de bugs<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Alignement du comportement des expressions exists entre brute force et index<a href="https://github.com/milvus-io/milvus/pull/44030">(#44030</a>)</li>
+<li>Correction d'une erreur lors du renommage vers une collection abandonnée<a href="https://github.com/milvus-io/milvus/pull/44436">(#44436</a>)</li>
+<li>[StorageV2] Vérification de la longueur des champs enfants<a href="https://github.com/milvus-io/milvus/pull/44405">(#44405</a>)</li>
+<li>[StorageV2] Activation d'Azure par défaut<a href="https://github.com/milvus-io/milvus/pull/44377">(#44377</a>)</li>
+<li>Correction du chemin de téléchargement des compactions L0 sous les datanodes de pooling<a href="https://github.com/milvus-io/milvus/pull/44374">(#44374</a>)</li>
+<li>Désactivation du renommage si le cryptage de la base de données est activé<a href="https://github.com/milvus-io/milvus/pull/44225">(#44225</a>)</li>
+<li>Suppression de la propriété dynamicfield.enable<a href="https://github.com/milvus-io/milvus/pull/44335">(#44335</a>)</li>
+<li>Marquage des tâches comme échouées lorsque l'ID pré-alloué est invalide<a href="https://github.com/milvus-io/milvus/pull/44350">(#44350</a>)</li>
+<li>Saut des vérifications MVCC sur les expressions de comparaison PK<a href="https://github.com/milvus-io/milvus/pull/44353">(#44353</a>)</li>
+<li>Correction du bug json_contains pour les statistiques<a href="https://github.com/milvus-io/milvus/pull/44325">(#44325</a>)</li>
+<li>Ajout d'une vérification de l'initialisation du système de fichiers pour le noeud de requête et le noeud de streaming<a href="https://github.com/milvus-io/milvus/pull/44360">(#44360</a>)</li>
+<li>Correction de la cible de compactage vide lorsque le segment a été ramassé<a href="https://github.com/milvus-io/milvus/pull/44270">(#44270</a>)</li>
+<li>Correction d'une condition de course lors de l'initialisation de l'index d'horodatage<a href="https://github.com/milvus-io/milvus/pull/44317">(#44317</a>)</li>
+<li>Vérification que arraydata est nil pour éviter une panique<a href="https://github.com/milvus-io/milvus/pull/44332">(#44332</a>)</li>
+<li>Correction du bug de construction des stats JSON pour les objets imbriqués<a href="https://github.com/milvus-io/milvus/pull/44303">(#44303</a>)</li>
+<li>Evite la réécriture de mmap par plusieurs champs JSON<a href="https://github.com/milvus-io/milvus/pull/44299">(#44299</a>)</li>
+<li>Unification des formats de données valides<a href="https://github.com/milvus-io/milvus/pull/44296">(#44296</a>)</li>
+<li>Cachement des identifiants des fournisseurs d'embedding/reranking dans l'interface web<a href="https://github.com/milvus-io/milvus/pull/44275">(#44275</a>)</li>
+<li>Correction du chemin du statslog sous les datanodes de pooling<a href="https://github.com/milvus-io/milvus/pull/44288">(#44288</a>)</li>
+<li>Correction du chemin de l'oracle IDF<a href="https://github.com/milvus-io/milvus/pull/44266">(#44266</a>)</li>
+<li>Utilisation du point de contrôle du snapshot de récupération si aucun vchannel n'est en cours de récupération<a href="https://github.com/milvus-io/milvus/pull/44246">(#44246</a>)</li>
+<li>Limitation du nombre de colonnes dans les statistiques JSON<a href="https://github.com/milvus-io/milvus/pull/44233">(#44233</a>)</li>
+<li>Création d'un index n-gramme pour le comptage des ressources de charge<a href="https://github.com/milvus-io/milvus/pull/44237">(#44237</a>)</li>
+<li>Déduction du type de métrique à partir de résultats de recherche non vides<a href="https://github.com/milvus-io/milvus/pull/44222">(#44222</a>)</li>
+<li>Correction de l'écriture multi-segments n'écrivant qu'un seul segment<a href="https://github.com/milvus-io/milvus/pull/44256">(#44256</a>)</li>
+<li>Correction du tri par fusion hors plage<a href="https://github.com/milvus-io/milvus/pull/44230">(#44230</a>)</li>
+<li>Ajout d'une vérification UTF-8 avant d'exécuter la fonction BM25<a href="https://github.com/milvus-io/milvus/pull/44220">(#44220</a>)</li>
+<li>Réessai d'une ancienne session si elle existe<a href="https://github.com/milvus-io/milvus/pull/44208">(#44208</a>)</li>
+<li>Ajout d'une limite de taille de tampon Kafka pour éviter les OOM de datanodes<a href="https://github.com/milvus-io/milvus/pull/44106">(#44106</a>)</li>
+<li>Correction d'une panique en étendant la plage de garde des verrous<a href="https://github.com/milvus-io/milvus/pull/44130">(#44130</a>)</li>
+<li>Correction des segments croissants qui ne sont pas vidés lors d'un changement de schéma<a href="https://github.com/milvus-io/milvus/pull/44412">(#44412</a>)</li>
+<li>[StorageV2] Gestion des erreurs d'E/S<a href="https://github.com/milvus-io/milvus/pull/44255">(#44255</a>)</li>
+<li>Prévention d'une panique si le chemin de l'index Tantivy n'existe pas<a href="https://github.com/milvus-io/milvus/pull/44135">(#44135</a>)</li>
+</ul>
 <h2 id="v261" class="common-anchor-header">v2.6.1<button data-href="#v261" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +176,7 @@ title: Notes de mise à jour
     </button></h2><p>Date de publication : 3 septembre 2025</p>
 <table>
 <thead>
-<tr><th style="text-align:left">Version Milvus</th><th style="text-align:left">Version SDK Python</th><th style="text-align:left">Version SDK Node.js</th><th style="text-align:left">Version SDK Java</th><th style="text-align:left">Version du SDK Go</th></tr>
+<tr><th style="text-align:left">Version Milvus</th><th style="text-align:left">Version du SDK Python</th><th style="text-align:left">Version SDK Node.js</th><th style="text-align:left">Version SDK Java</th><th style="text-align:left">Version du SDK Go</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td></tr>
@@ -71,7 +210,7 @@ title: Notes de mise à jour
 <li>Ajoute une limite de vitesse d'écriture configurable au graveur de disque<a href="https://github.com/milvus-io/milvus/pull/43912">(#43912</a>)</li>
 <li>Les paramètres SegCore peuvent maintenant être mis à jour dynamiquement sans redémarrer le service Milvus<a href="https://github.com/milvus-io/milvus/pull/43231">(#43231</a>)</li>
 <li>Ajout de mesures unifiées de latence gRPC pour une meilleure observabilité<a href="https://github.com/milvus-io/milvus/pull/44089">(#44089</a>)</li>
-<li>Inclut les horodatages des requêtes du client dans les en-têtes gRPC pour simplifier le débogage<a href="https://github.com/milvus-io/milvus/pull/44059">(#44059</a>)</li>
+<li>Inclut les horodatages des requêtes client dans les en-têtes gRPC pour simplifier le débogage<a href="https://github.com/milvus-io/milvus/pull/44059">(#44059</a>)</li>
 <li>Supporte le niveau de journal de trace pour segcore<a href="https://github.com/milvus-io/milvus/pull/44003">(#44003</a>)</li>
 <li>Ajout d'un commutateur configurable pour ajuster les garanties de cohérence pour une plus grande disponibilité<a href="https://github.com/milvus-io/milvus/pull/43874">(#43874</a>)</li>
 <li>Implémentation d'un mécanisme robuste de rewatch pour gérer les échecs de connexion etcd<a href="https://github.com/milvus-io/milvus/pull/43829">(#43829</a>)</li>

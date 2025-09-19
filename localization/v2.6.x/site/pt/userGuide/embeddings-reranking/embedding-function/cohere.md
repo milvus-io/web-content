@@ -113,7 +113,22 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Se uma chave de API para o mesmo fornecedor estiver presente tanto no ficheiro de configuração como numa variável de ambiente, o Milvus utiliza sempre o valor em <code translate="no">milvus.yaml</code> e ignora a variável de ambiente.</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Opção 1: Ficheiro de configuração (recomendado e de maior prioridade)</h3><p>Manter as suas chaves API em <code translate="no">milvus.yaml</code>; o Milvus lê-as no arranque e substitui qualquer variável de ambiente para o mesmo fornecedor.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Opção 1: Ficheiro de configuração (recomendado e de maior prioridade)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Manter as suas chaves API em <code translate="no">milvus.yaml</code>; o Milvus lê-as no arranque e substitui qualquer variável de ambiente para o mesmo fornecedor.</p>
 <ol>
 <li><p>**Declare as suas chaves em <code translate="no">credential:</code></p>
 <p>Pode listar uma ou várias chaves API - dê a cada uma delas uma etiqueta que invente e que referenciará mais tarde.</p>
@@ -124,19 +139,34 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">apikey_prod:</span>           <span class="hljs-comment"># production environment</span>
     <span class="hljs-attr">apikey:</span> <span class="hljs-string">&lt;YOUR_PROD_KEY&gt;</span>    
 <button class="copy-code-btn"></button></code></pre>
-<p>Colocar as chaves da API aqui torna-as persistentes através de reinicializações e permite-lhe mudar de chave apenas mudando uma etiqueta.</p></li>
-<li><p><strong>Dizer ao Milvus qual a chave a usar para as chamadas OpenAI</strong></p>
+<p>Colocar as chaves da API aqui torna-as persistentes através de reinicializações e permite-lhe mudar de chave apenas alterando uma etiqueta.</p></li>
+<li><p><strong>Dizer ao Milvus qual a chave a utilizar para as chamadas OpenAI</strong></p>
 <p>No mesmo ficheiro, aponte o fornecedor Cohere para a etiqueta que pretende utilizar.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">cohere:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
-        <span class="hljs-comment"># url: https://api.cohere.com/v2/embed   # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url: https://api.cohere.com/v2/embed   # (optional) custom url</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Isso vincula uma chave específica a cada solicitação que o Milvus envia ao endpoint de embeddings do Cohere.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Opção 2: variável de ambiente</h3><p>Utilize este método quando executar o Milvus com o Docker Compose e preferir manter os segredos fora dos ficheiros e das imagens.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Opção 2: variável de ambiente<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilize este método quando executar o Milvus com o Docker Compose e preferir manter os segredos fora dos ficheiros e das imagens.</p>
 <p>O Milvus recorre à variável de ambiente somente se nenhuma chave para o provedor for encontrada em <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
@@ -159,7 +189,7 @@ beta: Milvus 2.6.x
     <span class="hljs-comment"># Set the environment variable pointing to the OpenAI API key inside the container</span>
     <span class="hljs-attr">MILVUSAI_COHERE_API_KEY:</span> <span class="hljs-string">&lt;MILVUSAI_COHERE_API_KEY&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O bloco <code translate="no">environment:</code> injeta a chave apenas no contêiner do Milvus, deixando o sistema operacional do host intacto. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configurar o Milvus com o Docker Compose</a>.</p>
+<p>O bloco <code translate="no">environment:</code> injeta a chave apenas no contêiner do Milvus, deixando o sistema operacional do host intocado. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md#Configure-Milvus-with-Docker-Compose">Configurar o Milvus com o Docker Compose</a>.</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">Usar a função de incorporação<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +206,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Depois que as credenciais forem configuradas, siga estas etapas para definir e usar funções de incorporação.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Etapa 1: definir campos de esquema</h3><p>Para usar uma função de incorporação, crie uma coleção com um esquema específico. Este esquema deve incluir pelo menos três campos necessários:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Etapa 1: definir campos de esquema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para usar uma função de incorporação, crie uma coleção com um esquema específico. Este esquema deve incluir pelo menos três campos necessários:</p>
 <ul>
 <li><p>O campo primário que identifica de forma exclusiva cada entidade numa coleção.</p></li>
 <li><p>Um campo escalar que armazena os dados brutos a serem incorporados.</p></li>
@@ -203,7 +248,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Adicionar a função de incorporação ao esquema</h3><p>O módulo Function em Milvus converte automaticamente os dados brutos armazenados num campo escalar em embeddings e armazena-os no campo vetorial explicitamente definido.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Adicionar a função de incorporação ao esquema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O módulo Function em Milvus converte automaticamente os dados brutos armazenados num campo escalar em embeddings e armazena-os no campo vetorial explicitamente definido.</p>
 <p>O exemplo abaixo adiciona um módulo Function (<code translate="no">cohere_func</code>) que converte o campo escalar <code translate="no">&quot;document&quot;</code> em embeddings, armazenando os vectores resultantes no campo vetorial <code translate="no">&quot;dense&quot;</code> definido anteriormente.</p>
 <p>Depois de ter definido a sua função de incorporação, adicione-a ao seu esquema de coleção. Isto instrui o Milvus a utilizar a função de incorporação especificada para processar e armazenar os embeddings dos seus dados de texto.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function specifically for embedding model provider</span>

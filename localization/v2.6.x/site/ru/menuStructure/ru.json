@@ -136,7 +136,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -156,7 +156,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -432,9 +432,28 @@
           },
           {
             "label": "JSON-поле",
-            "id": "use-json-fields.md",
+            "id": "json-field",
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "Обзор полей JSON",
+                "id": "json-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Индексирование JSON",
+                "id": "json-indexing.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Измельчение JSON",
+                "id": "json-shredding.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Поле массива",
@@ -524,6 +543,12 @@
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
+                  },
+                  {
+                    "label": "Идентификатор языка",
+                    "id": "language-identifier.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               },
@@ -569,7 +594,7 @@
                     "children": []
                   },
                   {
-                    "label": "Остановить",
+                    "label": "Остановите",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -604,6 +629,12 @@
                 "label": "Многоязычные анализаторы",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Выберите подходящий анализатор для вашего случая использования",
+                "id": "choose-the-right-analyzer-for-your-use-case.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -789,6 +820,12 @@
                 "label": "ИНВЕРТИРОВАННЫЙ",
                 "id": "inverted.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -1048,10 +1085,16 @@
                 "children": []
               },
               {
+                "label": "Boost Ranker",
+                "id": "boost-ranker.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "Ранкер распада",
                 "id": "decay-ranker",
                 "isMenu": true,
-                "order": 2,
+                "order": 3,
                 "children": [
                   {
                     "label": "Обзор Decay Ranker",
@@ -1088,7 +1131,7 @@
               {
                 "label": "Рейтинг моделей",
                 "id": "model-ranker",
-                "order": 3,
+                "order": 4,
                 "isMenu": true,
                 "children": [
                   {

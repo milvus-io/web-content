@@ -41,7 +41,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Los operadores de comparación se utilizan para filtrar datos en función de la igualdad, la desigualdad o el tamaño. Son aplicables a campos numéricos y de texto.</p>
-<h3 id="Supported-Comparison-Operators" class="common-anchor-header">Operadores de comparación admitidos:</h3><ul>
+<h3 id="Supported-Comparison-Operators" class="common-anchor-header">Operadores de comparación admitidos:<button data-href="#Supported-Comparison-Operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><code translate="no">==</code> (Igual a)</p></li>
 <li><p><code translate="no">!=</code> (No igual a)</p></li>
 <li><p><code translate="no">&gt;</code> (Mayor que)</p></li>
@@ -49,22 +64,112 @@ summary: >-
 <li><p><code translate="no">&gt;=</code> (Mayor o igual que)</p></li>
 <li><p><code translate="no">&lt;=</code> (Menor o igual que)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">Ejemplo 1: Filtrado con Igual a (<code translate="no">==</code>)</h3><p>Suponga que tiene un campo llamado <code translate="no">status</code> y desea encontrar todas las entidades en las que <code translate="no">status</code> es "activo". Puede utilizar el operador de igualdad <code translate="no">==</code>:</p>
+<h3 id="Example-1-Filtering-with-Equal-To-" class="common-anchor-header">Ejemplo 1: Filtrado con Igual a (<code translate="no">==</code>)<button data-href="#Example-1-Filtering-with-Equal-To-" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Suponga que tiene un campo llamado <code translate="no">status</code> y desea encontrar todas las entidades en las que <code translate="no">status</code> es "activo". Puede utilizar el operador de igualdad <code translate="no">==</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">Ejemplo 2: Filtrado con no igual a (<code translate="no">!=</code>)</h3><p>Para encontrar entidades donde <code translate="no">status</code> no sea "inactivo":</p>
+<h3 id="Example-2-Filtering-with-Not-Equal-To-" class="common-anchor-header">Ejemplo 2: Filtrado con no igual a (<code translate="no">!=</code>)<button data-href="#Example-2-Filtering-with-Not-Equal-To-" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar entidades donde <code translate="no">status</code> no sea "inactivo":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-" class="common-anchor-header">Ejemplo 3: Filtrado con Mayor que (<code translate="no">&gt;</code>)</h3><p>Si desea encontrar todas las entidades con un <code translate="no">age</code> mayor que 30:</p>
+<h3 id="Example-3-Filtering-with-Greater-Than-" class="common-anchor-header">Ejemplo 3: Filtrado con Mayor que (<code translate="no">&gt;</code>)<button data-href="#Example-3-Filtering-with-Greater-Than-" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si desea encontrar todas las entidades con un <code translate="no">age</code> mayor que 30:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than" class="common-anchor-header">Ejemplo 4: Filtrar con menor que</h3><p>Para encontrar las entidades en las que <code translate="no">price</code> es inferior a 100:</p>
+<h3 id="Example-4-Filtering-with-Less-Than" class="common-anchor-header">Ejemplo 4: Filtrar con menor que<button data-href="#Example-4-Filtering-with-Less-Than" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar las entidades en las que <code translate="no">price</code> es inferior a 100:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="common-anchor-header">Ejemplo 5: Filtrado con mayor o igual que (<code translate="no">&gt;=</code>)</h3><p>Si desea encontrar todas las entidades con <code translate="no">rating</code> mayor o igual a 4:</p>
+<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="common-anchor-header">Ejemplo 5: Filtrado con mayor o igual que (<code translate="no">&gt;=</code>)<button data-href="#Example-5-Filtering-with-Greater-Than-or-Equal-To-" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si desea encontrar todas las entidades con <code translate="no">rating</code> mayor o igual a 4:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">Ejemplo 6: Filtrado con menor o igual que</h3><p>Para encontrar entidades con <code translate="no">discount</code> menor o igual a 10%:</p>
+<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">Ejemplo 6: Filtrado con menor o igual que<button data-href="#Example-6-Filtering-with-Less-Than-or-Equal-To" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar entidades con <code translate="no">discount</code> menor o igual a 10%:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Range-operators" class="common-anchor-header">Operadores de rango<button data-href="#Range-operators" class="anchor-icon" translate="no">
@@ -83,27 +188,117 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Los operadores de rango ayudan a filtrar datos basándose en conjuntos o rangos de valores específicos.</p>
-<h3 id="Supported-Range-Operators" class="common-anchor-header">Operadores de rango admitidos:</h3><ul>
+<h3 id="Supported-Range-Operators" class="common-anchor-header">Operadores de rango admitidos:<button data-href="#Supported-Range-Operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><code translate="no">IN</code>: Se utilizan para buscar valores dentro de un conjunto o rango específico.</p></li>
-<li><p><code translate="no">LIKE</code>: Se utiliza para coincidir con un patrón (principalmente para campos de texto).</p></li>
+<li><p><code translate="no">LIKE</code>: Se utiliza para coincidir con un patrón (principalmente para campos de texto).  Milvus le permite construir un índice <code translate="no">NGRAM</code> en campos VARCHAR o JSON para acelerar las consultas de texto. Para más detalles, consulte <a href="/docs/es/ngram.md">NGRAM</a>.</p></li>
 </ul>
-<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Ejemplo 1: Uso de <code translate="no">IN</code> para buscar varios valores</h3><p>Si desea encontrar todas las entidades en las que <code translate="no">color</code> es "rojo", "verde" o "azul":</p>
+<h3 id="Example-1-Using-IN-to-Match-Multiple-Values" class="common-anchor-header">Ejemplo 1: Uso de <code translate="no">IN</code> para buscar múltiples valores<button data-href="#Example-1-Using-IN-to-Match-Multiple-Values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si desea encontrar todas las entidades en las que <code translate="no">color</code> es "rojo", "verde" o "azul":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Esto es útil cuando se quiere comprobar la pertenencia a una lista de valores.</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Ejemplo 2: Utilización de <code translate="no">LIKE</code> para la búsqueda de patrones</h3><p>El operador <code translate="no">LIKE</code> se utiliza para la comparación de patrones en campos de cadena. Puede coincidir con subcadenas en distintas posiciones dentro del texto: como <strong>prefijo</strong>, <strong>infijo</strong> o <strong>sufijo</strong>. El operador <code translate="no">LIKE</code> utiliza el símbolo <code translate="no">%</code> como comodín, que puede coincidir con cualquier número de caracteres (incluido el cero).</p>
+<h3 id="Example-2-Using-LIKE-for-Pattern-Matching" class="common-anchor-header">Ejemplo 2: Utilización de <code translate="no">LIKE</code> para la búsqueda de patrones<button data-href="#Example-2-Using-LIKE-for-Pattern-Matching" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>El operador <code translate="no">LIKE</code> se utiliza para la comparación de patrones en campos de cadena. Puede coincidir con subcadenas en distintas posiciones dentro del texto: como <strong>prefijo</strong>, <strong>infijo</strong> o <strong>sufijo</strong>. El operador <code translate="no">LIKE</code> utiliza el símbolo <code translate="no">%</code> como comodín, que puede coincidir con cualquier número de caracteres (incluido el cero).</p>
 <div class="alert note">
 <p>En la mayoría de los casos, la búsqueda por <strong>infijos</strong> o <strong>sufijos</strong> es mucho más lenta que la búsqueda por prefijos. Utilícelas con precaución si el rendimiento es crítico.</p>
 </div>
-<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Coincidencia de prefijo (comienza por)</h3><p>Para realizar una coincidencia de <strong>prefijo</strong>, en la que la cadena comienza con un patrón dado, puede colocar el patrón al principio y utilizar <code translate="no">%</code> para que coincida con los caracteres que le siguen. Por ejemplo, para buscar todos los productos cuyo <code translate="no">name</code> empiece por "Prod":</p>
+<h3 id="Prefix-Match-Starts-With" class="common-anchor-header">Coincidencia de prefijo (comienza por)<button data-href="#Prefix-Match-Starts-With" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para realizar una coincidencia de <strong>prefijo</strong>, en la que la cadena comienza con un patrón dado, puede colocar el patrón al principio y utilizar <code translate="no">%</code> para que coincida con los caracteres que le siguen. Por ejemplo, para buscar todos los productos cuyo <code translate="no">name</code> empiece por "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Esto coincidirá con cualquier producto cuyo nombre empiece por "Prod", como "Producto A", "Producto B", etc.</p>
-<h3 id="Suffix-Match-Ends-With" class="common-anchor-header">Coincidencia de sufijo (termina con)</h3><p>Para una coincidencia de <strong>sufijo</strong>, en la que la cadena termina con un patrón dado, coloque el símbolo <code translate="no">%</code> al principio del patrón. Por ejemplo, para buscar todos los productos cuyo <code translate="no">name</code> termine en "XYZ":</p>
+<h3 id="Suffix-Match-Ends-With" class="common-anchor-header">Coincidencia de sufijo (termina con)<button data-href="#Suffix-Match-Ends-With" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para una coincidencia de <strong>sufijo</strong>, en la que la cadena termina con un patrón dado, coloque el símbolo <code translate="no">%</code> al principio del patrón. Por ejemplo, para buscar todos los productos cuyo <code translate="no">name</code> termine en "XYZ":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Esto coincidirá con cualquier producto cuyo nombre termine en "XYZ", como "ProductXYZ", "SampleXYZ", etc.</p>
-<h3 id="Infix-Match-Contains" class="common-anchor-header">Coincidencia infija (contiene)</h3><p>Para realizar una coincidencia <strong>infija</strong>, en la que el patrón puede aparecer en cualquier lugar de la cadena, puede colocar el símbolo <code translate="no">%</code> tanto al principio como al final del patrón. Por ejemplo, para buscar todos los productos cuyo <code translate="no">name</code> contenga la palabra "Pro":</p>
+<h3 id="Infix-Match-Contains" class="common-anchor-header">Coincidencia infija (contiene)<button data-href="#Infix-Match-Contains" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para realizar una coincidencia <strong>infija</strong>, en la que el patrón puede aparecer en cualquier lugar de la cadena, puede colocar el símbolo <code translate="no">%</code> tanto al principio como al final del patrón. Por ejemplo, para buscar todos los productos cuyo <code translate="no">name</code> contenga la palabra "Pro":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Esto coincidirá con cualquier producto cuyo nombre contenga la subcadena "Pro", como "Product", "ProLine" o "SuperPro".</p>
@@ -123,7 +318,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Los operadores aritméticos le permiten crear condiciones basadas en cálculos que implican campos numéricos.</p>
-<h3 id="Supported-Arithmetic-Operators" class="common-anchor-header">Operadores aritméticos admitidos:</h3><ul>
+<h3 id="Supported-Arithmetic-Operators" class="common-anchor-header">Operadores aritméticos admitidos:<button data-href="#Supported-Arithmetic-Operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><code translate="no">+</code> (Suma)</p></li>
 <li><p><code translate="no">-</code> (Resta)</p></li>
 <li><p><code translate="no">*</code> (Multiplicación)</p></li>
@@ -131,10 +341,40 @@ summary: >-
 <li><p><code translate="no">%</code> (Módulo)</p></li>
 <li><p><code translate="no">**</code> (Exponenciación)</p></li>
 </ul>
-<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">Ejemplo 1: Utilización del módulo (<code translate="no">%</code>)</h3><p>Para encontrar entidades donde el <code translate="no">id</code> es un número par (es decir, divisible por 2):</p>
+<h3 id="Example-1-Using-Modulus-" class="common-anchor-header">Ejemplo 1: Utilización del módulo (<code translate="no">%</code>)<button data-href="#Example-1-Using-Modulus-" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar entidades donde el <code translate="no">id</code> es un número par (es decir, divisible por 2):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">Ejemplo 2: Uso de la exponenciación (<code translate="no">**</code>)</h3><p>Para encontrar entidades donde <code translate="no">price</code> elevado a la potencia de 2 es mayor que 1000:</p>
+<h3 id="Example-2-Using-Exponentiation-" class="common-anchor-header">Ejemplo 2: Uso de la exponenciación (<code translate="no">**</code>)<button data-href="#Example-2-Using-Exponentiation-" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar entidades donde <code translate="no">price</code> elevado a la potencia de 2 es mayor que 1000:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Logical-Operators" class="common-anchor-header">Operadores lógicos<button data-href="#Logical-Operators" class="anchor-icon" translate="no">
@@ -153,18 +393,78 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Los operadores lógicos se utilizan para combinar varias condiciones en una expresión de filtro más compleja. Entre ellos se incluyen <code translate="no">AND</code>, <code translate="no">OR</code> y <code translate="no">NOT</code>.</p>
-<h3 id="Supported-Logical-Operators" class="common-anchor-header">Operadores lógicos admitidos:</h3><ul>
+<h3 id="Supported-Logical-Operators" class="common-anchor-header">Operadores lógicos admitidos:<button data-href="#Supported-Logical-Operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><code translate="no">AND</code>: Combina varias condiciones que deben ser todas verdaderas.</p></li>
 <li><p><code translate="no">OR</code>: Combina condiciones donde al menos una debe ser verdadera.</p></li>
 <li><p><code translate="no">NOT</code>: Niega una condición.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">Ejemplo 1: Uso de <code translate="no">AND</code> para combinar condiciones</h3><p>Para encontrar todos los productos donde <code translate="no">price</code> es mayor que 100 y <code translate="no">stock</code> es mayor que 50:</p>
+<h3 id="Example-1-Using-AND-to-Combine-Conditions" class="common-anchor-header">Ejemplo 1: Uso de <code translate="no">AND</code> para combinar condiciones<button data-href="#Example-1-Using-AND-to-Combine-Conditions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar todos los productos donde <code translate="no">price</code> es mayor que 100 y <code translate="no">stock</code> es mayor que 50:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">Ejemplo 2: Uso de <code translate="no">OR</code> para combinar condiciones</h3><p>Para encontrar todos los productos donde <code translate="no">color</code> es "rojo" o "azul":</p>
+<h3 id="Example-2-Using-OR-to-Combine-Conditions" class="common-anchor-header">Ejemplo 2: Uso de <code translate="no">OR</code> para combinar condiciones<button data-href="#Example-2-Using-OR-to-Combine-Conditions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar todos los productos donde <code translate="no">color</code> es "rojo" o "azul":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">Ejemplo 3: Uso de <code translate="no">NOT</code> para excluir una condición</h3><p>Para encontrar todos los productos en los que <code translate="no">color</code> no es "verde":</p>
+<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition" class="common-anchor-header">Ejemplo 3: Uso de <code translate="no">NOT</code> para excluir una condición<button data-href="#Example-3-Using-NOT-to-Exclude-a-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para encontrar todos los productos en los que <code translate="no">color</code> no es "verde":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">Operadores IS NULL e IS NOT NULL<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
@@ -190,7 +490,22 @@ summary: >-
 <div class="alert note">
 <p>Los operadores no distinguen entre mayúsculas y minúsculas, por lo que puede utilizar <code translate="no">IS NULL</code> o <code translate="no">is null</code>, y <code translate="no">IS NOT NULL</code> o <code translate="no">is not null</code>.</p>
 </div>
-<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Campos escalares regulares con valores nulos</h3><p>Milvus permite filtrar campos escalares regulares, como cadenas o números, con valores nulos.</p>
+<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Campos escalares regulares con valores nulos<button data-href="#Regular-Scalar-Fields-with-Null-Values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus permite filtrar campos escalares regulares, como cadenas o números, con valores nulos.</p>
 <div class="alert note">
 <p>Una cadena vacía <code translate="no">&quot;&quot;</code> no se trata como un valor nulo para un campo <code translate="no">VARCHAR</code>.</p>
 </div>
@@ -203,7 +518,22 @@ summary: >-
 <p>Para recuperar entidades en las que el campo <code translate="no">description</code> no es nulo y el campo <code translate="no">price</code> es superior a 10:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">Campos JSON con valores nulos</h3><p>Milvus permite filtrar campos JSON que contienen valores nulos. Un campo JSON se trata como nulo de las siguientes maneras:</p>
+<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">Campos JSON con valores nulos<button data-href="#JSON-Fields-with-Null-Values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus permite filtrar campos JSON que contienen valores nulos. Un campo JSON se trata como nulo de las siguientes maneras:</p>
 <ul>
 <li><p>Todo el objeto JSON se establece explícitamente como None (nulo), por ejemplo, <code translate="no">{&quot;metadata&quot;: None}</code>.</p></li>
 <li><p>El propio campo JSON falta por completo en la entidad.</p></li>
@@ -234,7 +564,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Ejemplo 1: Recuperar entidades donde <code translate="no">metadata</code> es nulo</strong></p>
+<p><strong>Ejemplo 1: Recuperar entidades cuyos metadatos son nulos</strong></p>
 <p>Para encontrar entidades en las que el campo <code translate="no">metadata</code> falta o está explícitamente establecido como Ninguno:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 
@@ -244,7 +574,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Ejemplo 2: Recuperar entidades en las que <code translate="no">metadata</code> no es nulo</strong></p>
+<p><strong>Ejemplo 2: Recuperar entidades cuyos metadatos no son nulos</strong></p>
 <p>Para buscar entidades en las que el campo <code translate="no">metadata</code> no sea nulo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
 
@@ -254,7 +584,22 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">Campos ARRAY con valores nulos</h3><p>Milvus permite filtrar campos ARRAY que contienen valores nulos. Un campo ARRAY se trata como nulo de las siguientes maneras:</p>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">Campos ARRAY con valores nulos<button data-href="#ARRAY-Fields-with-Null-Values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus permite filtrar campos ARRAY que contienen valores nulos. Un campo ARRAY se trata como nulo de las siguientes maneras:</p>
 <ul>
 <li><p>Todo el campo ARRAY se establece explícitamente como None (nulo), por ejemplo, <code translate="no">&quot;tags&quot;: None</code>.</p></li>
 <li><p>El campo ARRAY falta por completo en la entidad.</p></li>
@@ -283,7 +628,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Ejemplo 1: Recuperar entidades donde <code translate="no">tags</code> es nulo</strong></p>
+<p><strong>Ejemplo 1: Recuperar entidades donde tags es null</strong></p>
 <p>Para recuperar entidades donde el campo <code translate="no">tags</code> falta o está explícitamente establecido en <code translate="no">None</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
@@ -293,7 +638,7 @@ summary: >-
 <span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Ejemplo 2: Recuperar entidades en las que <code translate="no">tags</code> no es nulo</strong></p>
+<p><strong>Ejemplo 2: Recuperar entidades donde tags no es nulo</strong></p>
 <p>Para recuperar entidades en las que el campo <code translate="no">tags</code> no es nulo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
 
@@ -340,4 +685,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus ofrece una serie de operadores básicos que le proporcionan flexibilidad a la hora de filtrar y consultar sus datos. Combinando operadores de comparación, de rango, aritméticos y lógicos, puede crear potentes expresiones de filtrado para acotar los resultados de búsqueda y recuperar los datos que necesita de forma eficiente.</p>
+    </button></h2><p>Milvus ofrece una serie de operadores básicos que le proporcionan flexibilidad a la hora de filtrar y consultar sus datos. Combinando operadores de comparación, de rango, aritméticos y lógicos, puede crear potentes expresiones de filtrado para acotar los resultados de búsqueda y recuperar los datos que necesita de forma eficaz.</p>
+<h2 id="FAQ" class="common-anchor-header">PREGUNTAS FRECUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>¿Existe un límite para la longitud de la lista de valores coincidentes en las condiciones de filtrado (por ejemplo, filter='color en ["rojo", "verde", "azul"]')? ¿Qué debo hacer si la lista es demasiado larga?</strong></p>
+<p>Zilliz Cloud no impone un límite de longitud a la lista de valores coincidentes en las condiciones de filtrado. Sin embargo, una lista excesivamente larga puede afectar significativamente al rendimiento de la consulta. Si su condición de filtro incluye una lista larga de valores coincidentes o una expresión compleja con muchos elementos, le recomendamos que utilice <a href="/docs/es/filtering-templating.md">Filter Templating</a> para mejorar el rendimiento de la consulta.</p>

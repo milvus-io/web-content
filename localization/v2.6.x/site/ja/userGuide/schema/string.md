@@ -1,7 +1,7 @@
 ---
 id: string.md
 title: 文字列フィールド
-summary: Milvusでは、VARCHARは文字列データを格納するために使用されるデータ型です。VARCHARフィールドを定義する場合、2つのパラメータが必須です：
+summary: milvusでは、VARCHARは文字列データを格納するために使用されるデータ型です。
 ---
 <h1 id="String-Field" class="common-anchor-header">文字列フィールド<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,8 @@ summary: Milvusでは、VARCHARは文字列データを格納するために使�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusにおいて、<code translate="no">VARCHAR</code> は文字列データを格納するために使用されるデータ型です。<code translate="no">VARCHAR</code> フィールドを定義する場合、2つのパラメータが必須です：</p>
+    </button></h1><p>Milvusにおいて、<code translate="no">VARCHAR</code> は文字列データを格納するために使用されるデータ型です。</p>
+<p><code translate="no">VARCHAR</code> フィールドを定義する場合、2つのパラメータが必須です：</p>
 <ul>
 <li><p><code translate="no">datatype</code> を<code translate="no">DataType.VARCHAR</code> に設定する。</p></li>
 <li><p><code translate="no">VARCHAR</code> フィールドが格納できる最大バイト数を定義する<code translate="no">max_length</code> を指定します。<code translate="no">max_length</code> の有効範囲は 1 から 65,535 です。</p></li>
@@ -246,7 +247,10 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>インデックスは検索とクエリのパフォーマンス向上に役立ちます。Milvusでは、インデックス作成はベクトルフィールドでは必須ですが、スカラーフィールドではオプションです。</p>
-<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> とスカラー・フィールド<code translate="no">varchar_field1</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細については、「<a href="/docs/ja/index-explained.md">インデックスの説明</a>」を参照してください。</p>
+<p>以下の例では、<code translate="no">AUTOINDEX</code> インデックス・タイプを使用して、ベクトル・フィールド<code translate="no">embedding</code> とスカラー・フィールド<code translate="no">varchar_field1</code> にインデックスを作成しています。このタイプでは、Milvusはデータ型に基づいて自動的に最適なインデックスを選択します。また、各フィールドのインデックスタイプとパラメータをカスタマイズすることもできます。詳細は<a href="/docs/ja/index-explained.md">インデックスの</a>説明を参照してください。</p>
+<div class="alert note">
+<p>また、<code translate="no">VARCHAR</code> フィールドの<code translate="no">LIKE</code> フィルタリングを高速化するために、<code translate="no">NGRAM</code> インデックスを構築することもできます。詳細は<a href="/docs/ja/ngram.md">NGRAMを</a>参照。</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -337,7 +341,7 @@ indexParams.<span class="hljs-title function_">push</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スキーマとインデックスを定義したら、文字列フィールドを含むコレクションを作成します。</p>
+    </button></h2><p>スキーマとインデックスが定義されたら、文字列フィールドを含むコレクションを作成する。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>

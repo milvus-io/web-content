@@ -19,6 +19,145 @@ title: 版本说明
         ></path>
       </svg>
     </button></h1><p>了解 Milvus 的新功能！本页总结了每个版本的新功能、改进、已知问题和错误修复。您可以在本部分找到 v2.6.0 之后每个版本的发布说明。我们建议您定期访问此页面以了解更新信息。</p>
+<h2 id="v262" class="common-anchor-header">v2.6.2<button data-href="#v262" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>发布日期：2025 年 9 月 19 日</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Milvus 版本</th><th style="text-align:left">Python SDK 版本</th><th style="text-align:left">Node.js SDK 版本</th><th style="text-align:left">Java SDK 版本</th><th style="text-align:left">Go SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>我们很高兴地宣布 Milvus 2.6.2 正式发布！此次更新引入了强大的新功能、显著的性能提升和关键修复，使系统更加稳定，更适合生产。其亮点包括使用 upsert 进行部分字段更新、使用 JSON Shredding 加速动态字段过滤、使用 NGram 索引实现更快的 LIKE 查询，以及在现有 Collections 上实现更灵活的 Schema 演进。该版本基于社区反馈，为实际部署奠定了更坚实的基础，我们鼓励所有用户升级以利用这些改进。</p>
+<h3 id="Features" class="common-anchor-header">新增功能<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>添加了对 JSON Shredding 的支持，以加速动态字段过滤。有关详细信息，请参阅<a href="/docs/zh/json-shredding.md">JSON Shredding</a>。</li>
+<li>已添加对 NGRAM 索引的支持，以加速同类操作。有关详情，请参阅<a href="/docs/zh/ngram.md">NGRAM</a>。</li>
+<li>已添加对 upsert API 部分字段更新的支持。有关详情，请参阅 "<a href="/docs/zh/upsert-entities.md">Upsert Entities</a>"。</li>
+<li>已添加对 Boost 功能的支持。详情请参阅<a href="/docs/zh/boost-ranker.md">Boost Ranker</a>。</li>
+<li>已添加对按 JSON 字段和动态字段分组的支持<a href="https://github.com/milvus-io/milvus/pull/43203">(#43203</a>)</li>
+<li>已添加对在现有 Collections 上启用动态 Schema 的支持<a href="https://github.com/milvus-io/milvus/pull/44151">（#44151）</a></li>
+<li>已添加对删除索引而不释放 Collections 的支持<a href="https://github.com/milvus-io/milvus/pull/42941">(#42941</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">改进<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>[存储2]将日志文件大小改为压缩大小<a href="https://github.com/milvus-io/milvus/pull/44402">(#44402</a>)</li>
+<li>[存储2]在加载信息中添加了子字段<a href="https://github.com/milvus-io/milvus/pull/44384">(#44384</a>)</li>
+<li>[StorageV2]在系统组中添加了对包含 Partition Key 和集群 Key 的支持<a href="https://github.com/milvus-io/milvus/pull/44372">(#44372</a>)</li>
+<li>删除了压缩任务的超时<a href="https://github.com/milvus-io/milvus/pull/44277">（#44277）</a></li>
+<li>[StorageV2]启用与 Azure 一起构建<a href="https://github.com/milvus-io/milvus/pull/44177">(#44177</a>)</li>
+<li>[StorageV2] 利用组信息估算逻辑使用量<a href="https://github.com/milvus-io/milvus/pull/44356">(#44356</a>)</li>
+<li>[StorageV2] 利用组拆分信息估算使用量<a href="https://github.com/milvus-io/milvus/pull/44338">(#44338</a>)</li>
+<li>[StorageV2] 在压缩中保存列组结果<a href="https://github.com/milvus-io/milvus/pull/44327">(#44327</a>)</li>
+<li>[StorageV2] 为基于大小的拆分策略添加了配置<a href="https://github.com/milvus-io/milvus/pull/44301">（#44301）</a></li>
+<li>[StorageV2] 添加了对基于 Schema 和基于大小的拆分策略的支持<a href="https://github.com/milvus-io/milvus/pull/44282">(#44282</a>)</li>
+<li>[StorageV2] 已添加可配置的拆分策略<a href="https://github.com/milvus-io/milvus/pull/44258">(#44258</a>)</li>
+<li>[缓存层]添加了更多指标和配置<a href="https://github.com/milvus-io/milvus/pull/44276">(#44276</a>)</li>
+<li>添加了在加载段之前等待所有索引准备就绪的支持<a href="https://github.com/milvus-io/milvus/pull/44313">（#44313）</a></li>
+<li>为重核节点添加了内部核心延迟指标<a href="https://github.com/milvus-io/milvus/pull/44010">（#44010）</a></li>
+<li>优化了打印 KV 参数时的访问日志格式<a href="https://github.com/milvus-io/milvus/pull/43742">(#43742</a>)</li>
+<li>添加了修改转储快照批量大小的配置<a href="https://github.com/milvus-io/milvus/pull/44215">（#44215）</a></li>
+<li>缩短了压缩任务清理间隔<a href="https://github.com/milvus-io/milvus/pull/44207">（#44207）</a></li>
+<li>增强了合并排序以支持多个字段<a href="https://github.com/milvus-io/milvus/pull/44191">（#44191</a>）<a href="https://github.com/milvus-io/milvus/pull/43994">(#43994</a>)</li>
+<li>为分层索引添加了负载资源估算<a href="https://github.com/milvus-io/milvus/pull/44171">(#44171</a>)</li>
+<li>为重复数据删除情况添加了自动索引配置<a href="https://github.com/milvus-io/milvus/pull/44186">(#44186</a>)</li>
+<li>已添加配置，允许在名称中使用自定义字符 (<a href="https://github.com/milvus-io/milvus/pull/44063">#44063</a>)</li>
+<li>为流媒体服务添加了对 cchannel 的支持<a href="https://github.com/milvus-io/milvus/pull/44143">（＃44143）</a></li>
+<li>已添加互斥和范围检查，以保护并发删除<a href="https://github.com/milvus-io/milvus/pull/44128">（#44128）</a></li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">错误修复<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>在暴力和索引之间调整了 exists 表达式的行为<a href="https://github.com/milvus-io/milvus/pull/44030">(#44030</a>)</li>
+<li>修复了重命名到删除的 Collections 时的错误<a href="https://github.com/milvus-io/milvus/pull/44436">（#44436）</a></li>
+<li>[存储空间 2]检查子字段长度<a href="https://github.com/milvus-io/milvus/pull/44405">(#44405</a>)</li>
+<li>[存储V2]默认打开 Azure<a href="https://github.com/milvus-io/milvus/pull/44377">(#44377</a>)</li>
+<li>更正了池化数据节点下 L0 压缩的上传路径<a href="https://github.com/milvus-io/milvus/pull/44374">(#44374</a>)</li>
+<li>如果启用了数据库加密，则不允许重命名<a href="https://github.com/milvus-io/milvus/pull/44225">(#44225</a>)</li>
+<li>禁止删除 dynamicfield.enable 属性<a href="https://github.com/milvus-io/milvus/pull/44335">（#44335）</a></li>
+<li>当预分配 ID 无效时，将任务标记为失败<a href="https://github.com/milvus-io/milvus/pull/44350">（#44350）</a></li>
+<li>跳过 PK 比较表达式的 MVCC 检查<a href="https://github.com/milvus-io/milvus/pull/44353">（#44353）</a></li>
+<li>修复了统计的 json_contains 错误<a href="https://github.com/milvus-io/milvus/pull/44325">（#44325）</a></li>
+<li>为查询节点和流节点添加了初始化文件系统检查<a href="https://github.com/milvus-io/milvus/pull/44360">（#44360）</a></li>
+<li>修正了当段被垃圾收集时的空压缩目标<a href="https://github.com/milvus-io/milvus/pull/44270">（#44270）</a></li>
+<li>修正了初始化时间戳索引时的竞赛条件<a href="https://github.com/milvus-io/milvus/pull/44317">（#44317）</a></li>
+<li>检查数组数据是否为空，以防止出现恐慌<a href="https://github.com/milvus-io/milvus/pull/44332">（#44332）</a></li>
+<li>修正了为嵌套对象构建 JSON 统计信息的错误<a href="https://github.com/milvus-io/milvus/pull/44303">(#44303</a>)</li>
+<li>避免了多个 JSON 字段的 mmap 重写<a href="https://github.com/milvus-io/milvus/pull/44299">（#44299）</a></li>
+<li>统一有效数据格式<a href="https://github.com/milvus-io/milvus/pull/44296">（#44296）</a></li>
+<li>隐藏网页用户界面中嵌入/Reranking 提供商的凭证<a href="https://github.com/milvus-io/milvus/pull/44275">（#44275）</a></li>
+<li>更正了池化数据节点下的统计日志路径<a href="https://github.com/milvus-io/milvus/pull/44288">（#44288）</a></li>
+<li>更正了 IDF 甲骨文的路径<a href="https://github.com/milvus-io/milvus/pull/44266">（#44266）</a></li>
+<li>如果没有 vchannel 正在恢复，则使用恢复快照检查点<a href="https://github.com/milvus-io/milvus/pull/44246">（#44246）</a></li>
+<li>限制 JSON 统计数据中的列数<a href="https://github.com/milvus-io/milvus/pull/44233">（#44233）</a></li>
+<li>创建负载资源计数 n-gram 索引（<a href="https://github.com/milvus-io/milvus/pull/44237">#44237）</a></li>
+<li>从非空搜索结果中推断度量类型<a href="https://github.com/milvus-io/milvus/pull/44222">（#44222）</a></li>
+<li>修复了多分段写入只能写入一个分段的问题<a href="https://github.com/milvus-io/milvus/pull/44256">（#44256）</a></li>
+<li>修复了合并排序超出范围的问题<a href="https://github.com/milvus-io/milvus/pull/44230">（#44230）</a></li>
+<li>在执行 BM25 函数前添加了 UTF-8 检查<a href="https://github.com/milvus-io/milvus/pull/44220">（#44220）</a></li>
+<li>重试已存在的旧会话<a href="https://github.com/milvus-io/milvus/pull/44208">（#44208）</a></li>
+<li>添加了 Kafka 缓冲区大小限制，以防止数据节点 OOM<a href="https://github.com/milvus-io/milvus/pull/44106">(#44106</a>)</li>
+<li>通过扩展锁保护范围修复了恐慌<a href="https://github.com/milvus-io/milvus/pull/44130">（#44130）</a></li>
+<li>修复了在 Schema 更改时未刷新不断增长的数据段的问题<a href="https://github.com/milvus-io/milvus/pull/44412">（#44412）</a></li>
+<li>[StorageV2]处理 IO 错误<a href="https://github.com/milvus-io/milvus/pull/44255">(#44255</a>)</li>
+<li>防止在 Tantivy 索引路径不存在时发生恐慌<a href="https://github.com/milvus-io/milvus/pull/44135">(#44135</a>)</li>
+</ul>
 <h2 id="v261" class="common-anchor-header">v2.6.1<button data-href="#v261" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -288,13 +427,13 @@ title: 版本说明
 <ul>
 <li>顺序敏感：单词必须以与查询中相同的顺序出现。</li>
 <li>连续匹配：除非使用了斜率值，否则单词必须紧挨着出现。</li>
-<li>斜率（可选）：这是一个可调整的参数，允许少量的词语间隔，从而实现模糊短语匹配。</li>
+<li>斜率（可选）：这是一个可调整的参数，允许少量间隔词，从而实现模糊短语匹配。</li>
 </ul>
 <p>更多信息，请参阅<a href="/docs/zh/phrase-match.md">短语匹配</a>。</p>
 <h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">最小哈希 LSH 索引（测试版）</h4><p>为满足模型训练中重复数据删除的需求，Milvus 2.6 增加了对 MINHASH_LSH 索引的支持。该功能提供了一种计算效率高、可扩展的方法，用于估算文档之间的 Jaccard 相似性，以识别近似重复的文档。用户可以在预处理过程中为文本文档生成 MinHash 签名，并在 Milvus 中使用 MINHASH_LSH 索引高效地查找大规模数据集中的相似内容，从而提高数据清理和模型质量。</p>
-<h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">时间感知衰减函数</h4><p>Milvus 2.6 引入了时间感知衰减函数，以解决信息价值随时间变化的情况。在结果重新排序过程中，用户可以根据时间戳字段应用指数、高斯或线性衰减函数来调整文档的相关性得分。这可以确保优先处理较新的内容，这对于新闻提要、电子商务和人工智能 Agents 内存等应用至关重要。</p>
+<h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">时间感知衰减函数</h4><p>Milvus 2.6 引入了时间感知衰减函数，以解决信息价值随时间变化的情况。在结果重新排序过程中，用户可以根据时间戳字段应用指数、高斯或线性衰减函数来调整文档的相关性得分。这可以确保优先处理较新的内容，这对新闻源、电子商务和人工智能 Agents 的记忆等应用至关重要。</p>
 <p>如需了解更多信息，请参阅 "<a href="/docs/zh/decay-ranker-overview.md">衰减排名器概述</a>"。</p>
-<h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">为在线 Schema 演进添加字段</h4><p>为了提供更大的模式灵活性，Milvus 2.6 现在支持向现有 Collections 的模式在线添加新的标量字段。这就避免了在应用需求发生变化时创建新的 Collections 和执行破坏性数据迁移的需要。</p>
+<h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">为在线 Schema 演进添加字段</h4><p>为了提供更大的模式灵活性，Milvus 2.6 现在支持向现有 Collections 的模式在线添加新的标量字段。这就避免了在应用需求发生变化时创建新 Collections 和执行破坏性数据迁移的需要。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>
 <h4 id="INT8-Vector-Support" class="common-anchor-header">INT8 向量支持</h4><p>为了应对产生 8 位整数嵌入的量化模型的使用日益增多，Milvus 2.6 增加了对 INT8 向量的本地数据类型支持。这样，用户就可以直接摄取这些向量，而无需去量化，从而节省了计算、网络带宽和存储成本。该功能最初支持 HNSW 系列索引。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/dense-vector.md">密集向量</a>。</p>

@@ -60,24 +60,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus verwendet <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, um invertierte Indizes zu implementieren. Hier ist der Prozess:</p>
+    </button></h2><p>Ein <strong>INVERTED-Index</strong> in Milvus ordnet jeden eindeutigen Feldwert (Term) dem Satz von Dokument-IDs zu, in denen dieser Wert vorkommt. Diese Struktur ermöglicht eine schnelle Suche nach Feldern mit sich wiederholenden oder kategorischen Werten.</p>
+<p>Wie im Diagramm dargestellt, läuft der Prozess in zwei Schritten ab:</p>
 <ol>
-<li><p><strong>Tokenisierung</strong>: Milvus zerlegt Ihre Daten in durchsuchbare Begriffe</p></li>
-<li><p><strong>Begriffs-Wörterbuch</strong>: Erzeugt eine sortierte Liste aller eindeutigen Begriffe</p></li>
-<li><p><strong>Umgekehrte Listen</strong>: Ordnet jeden Begriff den Dokumenten zu, die ihn enthalten</p></li>
+<li><p><strong>Vorwärtszuordnung (ID → Begriff):</strong> Jede Dokument-ID verweist auf den in ihr enthaltenen Feldwert.</p></li>
+<li><p><strong>Umgekehrtes Mapping (Term → IDs):</strong> Milvus sammelt eindeutige Begriffe und erstellt ein umgekehrtes Mapping von jedem Begriff zu allen IDs, die ihn enthalten.</p></li>
 </ol>
-<p>Nehmen wir zum Beispiel diese beiden Sätze:</p>
-<ul>
-<li><p><strong>"Milvus ist eine Cloud-native Vektordatenbank"</strong></p></li>
-<li><p><strong>"Milvus hat eine sehr gute Leistung"</strong></p></li>
-</ul>
-<p>Der invertierte Index ordnet Begriffe wie <strong>"Milvus"</strong> → <strong>[Dokument 0, Dokument 1]</strong>, <strong>"cloud-native"</strong> → <strong>[Dokument 0]</strong> und <strong>"Leistung"</strong> → <strong>[Dokument 1]</strong> zu.</p>
+<p>Zum Beispiel wird der Wert <strong>"Elektronik"</strong> den IDs <strong>1</strong> und <strong>3</strong> zugeordnet, während <strong>"Bücher"</strong> den IDs <strong>2</strong> und <strong>5</strong> zugeordnet wird.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
-   </span> <span class="img-wrapper"> <span>Umgekehrter Index</span> </span></p>
-<p>Wenn Sie nach einem Begriff filtern, schlägt Milvus den Begriff im Wörterbuch nach und findet sofort alle passenden Dokumente.</p>
-<p>INVERTED-Indizes unterstützen alle skalaren Feldtypen: <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> und <strong>ARRAY</strong>. Die Indexparameter für die Indizierung eines JSON-Feldes unterscheiden sich jedoch geringfügig von normalen skalaren Feldern.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   </span> <span class="img-wrapper"> <span>So funktioniert der umgekehrte Index</span> </span></p>
+<p>Wenn Sie nach einem bestimmten Wert filtern (z. B. <code translate="no">category == &quot;electronics&quot;</code>), sucht Milvus einfach nach dem Begriff im Index und ruft die passenden IDs direkt ab. Dadurch wird das Scannen des gesamten Datensatzes vermieden und eine schnelle Filterung ermöglicht, insbesondere bei kategorischen oder sich wiederholenden Werten.</p>
+<p>INVERTED-Indizes unterstützen alle skalaren Feldtypen, wie <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> und <strong>ARRAY</strong>. Die Indexparameter für die Indizierung eines JSON-Feldes unterscheiden sich jedoch geringfügig von den regulären skalaren Feldern.</p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">Erstellen von Indizes für Nicht-JSON-Felder<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

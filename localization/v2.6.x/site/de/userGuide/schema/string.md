@@ -2,9 +2,8 @@
 id: string.md
 title: String-Feld
 summary: >-
-  In Milvus ist VARCHAR der Datentyp, der zum Speichern von Zeichenkettendaten
-  verwendet wird. Wenn Sie ein VARCHAR-Feld definieren, sind zwei Parameter
-  obligatorisch:
+  In Milvus ist VARCHAR der Datentyp, der für die Speicherung von
+  Zeichenkettendaten verwendet wird.
 ---
 <h1 id="String-Field" class="common-anchor-header">String-Feld<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus ist <code translate="no">VARCHAR</code> der Datentyp, der zum Speichern von Zeichenkettendaten verwendet wird. Wenn Sie ein <code translate="no">VARCHAR</code> Feld definieren, sind zwei Parameter obligatorisch:</p>
+    </button></h1><p>In Milvus ist <code translate="no">VARCHAR</code> der Datentyp, der zum Speichern von Zeichenkettendaten verwendet wird.</p>
+<p>Wenn Sie ein <code translate="no">VARCHAR</code> Feld definieren, sind zwei Parameter obligatorisch:</p>
 <ul>
 <li><p>Setzen Sie den <code translate="no">datatype</code> auf <code translate="no">DataType.VARCHAR</code>.</p></li>
 <li><p>Geben Sie die <code translate="no">max_length</code> an, die die maximale Anzahl von Bytes definiert, die das <code translate="no">VARCHAR</code> Feld speichern kann. Der gültige Bereich für <code translate="no">max_length</code> liegt zwischen 1 und 65.535.</p></li>
@@ -249,7 +249,10 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>Die Indizierung trägt zur Verbesserung der Such- und Abfrageleistung bei. In Milvus ist die Indexierung für Vektorfelder obligatorisch, für skalare Felder jedoch optional.</p>
-<p>Das folgende Beispiel erstellt Indizes für das Vektorfeld <code translate="no">embedding</code> und das Skalarfeld <code translate="no">varchar_field1</code>, die beide den Indextyp <code translate="no">AUTOINDEX</code> verwenden. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Einzelheiten finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
+<p>Das folgende Beispiel erstellt Indizes für das Vektorfeld <code translate="no">embedding</code> und das Skalarfeld <code translate="no">varchar_field1</code>, die beide den Indextyp <code translate="no">AUTOINDEX</code> verwenden. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Details finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
+<div class="alert note">
+<p>Sie können auch einen <code translate="no">NGRAM</code> Index erstellen, um die <code translate="no">LIKE</code> Filterung auf <code translate="no">VARCHAR</code> Felder zu beschleunigen. Einzelheiten hierzu finden Sie unter <a href="/docs/de/ngram.md">NGRAM</a>.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

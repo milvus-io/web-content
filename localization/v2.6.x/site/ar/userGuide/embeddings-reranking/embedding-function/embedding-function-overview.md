@@ -5,10 +5,10 @@ summary: >-
   تسمح لك وحدة الوظيفة في Milvus بتحويل البيانات النصية الخام إلى تضمينات متجهة
   من خلال الاتصال تلقائيًا بموفري خدمة التضمين الخارجيين (مثل OpenAI وAWS
   Bedrock وGoogle Vertex AI، إلخ). باستخدام الوحدة النمطية Function، لم تعد
-  بحاجة إلى التفاعل يدويًا مع واجهات برمجة تطبيقات التضمين - حيث تتولى ميلفوس
-  العملية الكاملة لإرسال الطلبات إلى مقدمي الخدمات، واستلام التضمينات، وتخزينها
-  في مجموعاتك. للبحث الدلالي، تحتاج إلى توفير بيانات استعلام أولية فقط، وليس
-  متجه استعلام. ينشئ Milvus متجه الاستعلام بنفس النموذج الذي استخدمته في
+  بحاجة إلى التفاعل يدويًا مع واجهات برمجة تطبيقات التضمين - حيث يتعامل ميلفوس
+  مع العملية الكاملة لإرسال الطلبات إلى مقدمي الخدمات، واستلام التضمينات،
+  وتخزينها في مجموعاتك. للبحث الدلالي، تحتاج إلى توفير بيانات استعلام أولية فقط،
+  وليس متجه استعلام. ينشئ Milvus متجه الاستعلام بنفس النموذج الذي استخدمته في
   الاستيعاب، ويقارنه بالمتجهات المخزنة، ويعيد النتائج الأكثر صلة.
 beta: Milvus 2.6.x
 ---
@@ -27,7 +27,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تسمح لك وحدة الدالة في Milvus بتحويل البيانات النصية الخام إلى تضمينات متجهة عن طريق الاتصال تلقائيًا بموفري خدمة التضمين الخارجيين (مثل OpenAI و AWS Bedrock و Google Vertex AI، إلخ). باستخدام الوحدة النمطية Function، لم تعد بحاجة إلى التفاعل يدويًا مع واجهات برمجة تطبيقات التضمين - حيث تتولى ميلفوس العملية الكاملة لإرسال الطلبات إلى مقدمي الخدمات، واستلام التضمينات، وتخزينها في مجموعاتك. للبحث الدلالي، تحتاج إلى توفير بيانات استعلام أولية فقط، وليس متجه استعلام. ينشئ Milvus متجه الاستعلام بنفس النموذج الذي استخدمته في الاستيعاب، ويقارنه بالمتجهات المخزنة، ويعيد النتائج الأكثر صلة.</p>
+    </button></h1><p>تسمح لك وحدة الدالة في Milvus بتحويل البيانات النصية الخام إلى تضمينات متجهة عن طريق الاتصال تلقائيًا بموفري خدمة التضمين الخارجيين (مثل OpenAI و AWS Bedrock و Google Vertex AI، إلخ). باستخدام الوحدة النمطية Function، لم تعد بحاجة إلى التفاعل يدويًا مع واجهات برمجة تطبيقات التضمين - حيث يتعامل ميلفوس مع العملية الكاملة لإرسال الطلبات إلى مقدمي الخدمات، واستلام التضمينات، وتخزينها في مجموعاتك. للبحث الدلالي، تحتاج إلى توفير بيانات استعلام أولية فقط، وليس متجه استعلام. ينشئ Milvus متجه الاستعلام بنفس النموذج الذي استخدمته في الاستيعاب، ويقارنه بالمتجهات المخزنة، ويعيد النتائج الأكثر صلة.</p>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>يجب أن يحتوي أي حقل إدخال تقوم الوحدة النمطية "الدالة" بتضمينه على قيمة دائمًا؛ إذا تم توفير حقل فارغ، فستعرض الوحدة النمطية خطأ.</p></li>
-<li><p>تعالج الوحدة النمطية الدالة فقط الحقول التي تم تعريفها صراحةً في مخطط المجموعة؛ ولا تنشئ تضمينات للحقول الديناميكية.</p></li>
+<li><p>تعالج الوحدة النمطية الدالة فقط الحقول التي تم تعريفها صراحةً في مخطط المجموعة؛ فهي لا تنشئ تضمينات للحقول الديناميكية.</p></li>
 <li><p>يجب أن تكون حقول الإدخال المراد تضمينها من النوع <code translate="no">VARCHAR</code>.</p></li>
 <li><p>يمكن للوحدة النمطية الدالة تضمين حقل الإدخال إلى:</p>
 <ul>
@@ -77,55 +77,55 @@ beta: Milvus 2.6.x
      <th><p>طريقة التوثيق</p></th>
    </tr>
    <tr>
-     <td><p><a href="/docs/ar/v2.6.x/openai.md">OpenAI</a></p></td>
-     <td><p>تضمين النص-تضمين النص-3-*</p></td>
+     <td><p><a href="/docs/ar/openai.md">OpenAI</a></p></td>
+     <td><p>تضمين النص-3-*</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>مفتاح API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ar/v2.6.x/azure-openai.md">Azure OpenAI</a></p></td>
+     <td><p><a href="/docs/ar/azure-openai.md">Azure OpenAI</a></p></td>
      <td><p>قائم على النشر</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>مفتاح API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ar/v2.6.x/dashscope.md">داش سكوب</a></p></td>
+     <td><p><a href="/docs/ar/dashscope.md">داش سكوب</a></p></td>
      <td><p>تضمين النص-تضمين النص-ف3</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>مفتاح API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ar/v2.6.x/bedrock.md">بيدروك</a></p></td>
-     <td><p>أمازون.تيتان-تضمين-نص-ف2</p></td>
+     <td><p><a href="/docs/ar/bedrock.md">بيدروك</a></p></td>
+     <td><p>أمازون.تيتان-تضمين النص-ف2</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>زوج AK/SK</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ar/v2.6.x/vertex-ai.md">فيرتكس AI</a></p></td>
+     <td><p><a href="/docs/ar/vertex-ai.md">فيرتكس AI</a></p></td>
      <td><p>تضمين النص-005</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>بيانات اعتماد JSON لحساب خدمة GCP</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ar/v2.6.x/voyage-ai.md">Voyage AI</a></p></td>
+     <td><p><a href="/docs/ar/voyage-ai.md">Voyage AI</a></p></td>
      <td><p>رحلة-3، رحلة-لايت-02</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>مفتاح واجهة برمجة التطبيقات</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ar/v2.6.x/cohere.md">كوهير</a></p></td>
+     <td><p><a href="/docs/ar/cohere.md">كوهير</a></p></td>
      <td><p>تضمين-الإنجليزية-v3.0</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code> / <code translate="no">INT8_VECTOR</code></p></td>
      <td><p>مفتاح API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ar/v2.6.x/siliconflow.md">سيليكون فلو</a></p></td>
+     <td><p><a href="/docs/ar/siliconflow.md">سيليكون فلو</a></p></td>
      <td><p>BAAI/Bge-large-zh-v1.5</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>مفتاح API</p></td>
    </tr>
    <tr>
-     <td><p><a href="/docs/ar/v2.6.x/hugging-face-tei.md">وجه المعانقة</a></p></td>
+     <td><p><a href="/docs/ar/hugging-face-tei.md">وجه المعانقة</a></p></td>
      <td><p>أي نموذج مخدوم من TEI</p></td>
      <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
      <td><p>مفتاح API اختياري</p></td>
@@ -174,20 +174,35 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل استخدام دالة التضمين مع Milvus، قم بتكوين بيانات اعتماد خدمة التضمين للوصول إلى Milvus.</p>
+    </button></h2><p>قبل استخدام دالة تضمين مع Milvus، قم بتكوين بيانات اعتماد خدمة التضمين للوصول إلى Milvus.</p>
 <p>يتيح لك Milvus توفير بيانات اعتماد خدمة التضمين بطريقتين:</p>
 <ul>
 <li><p><strong>ملف التكوين</strong> (<code translate="no">milvus.yaml</code>):</p>
 <p>يوضح المثال في هذا الموضوع <strong>الإعداد الموصى به</strong> باستخدام <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>متغيرات البيئة</strong>:</p>
-<p>للحصول على تفاصيل حول تكوين بيانات الاعتماد عبر متغيرات البيئة، راجع وثائق موفر خدمة التضمين (على سبيل المثال، <a href="/docs/ar/v2.6.x/openai.md">OpenAI</a> أو <a href="/docs/ar/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p></li>
+<p>للحصول على تفاصيل حول تكوين بيانات الاعتماد عبر متغيرات البيئة، راجع وثائق موفر خدمة التضمين (على سبيل المثال، <a href="/docs/ar/openai.md">OpenAI</a> أو <a href="/docs/ar/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
 <p>يوضح الرسم البياني التالي عملية تكوين بيانات الاعتماد عبر ملف تكوين Milvus (<code translate="no">milvus.yaml</code>) ثم استدعاء الوظيفة داخل Milvus.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>تجاوز تكوين بيانات الاعتماد</span> </span></p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">الخطوة 1: إضافة بيانات الاعتماد إلى ملف تكوين Milvus</h3><p>في ملف <code translate="no">milvus.yaml</code> الخاص بك، قم بتحرير كتلة <code translate="no">credential</code> مع إدخالات لكل موفر تحتاج إلى الوصول إليه:</p>
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">الخطوة 1: إضافة بيانات الاعتماد إلى ملف تكوين Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في ملف <code translate="no">milvus.yaml</code> الخاص بك، قم بتحرير كتلة <code translate="no">credential</code> مع إدخالات لكل موفر تحتاج إلى الوصول إليه:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -208,13 +223,28 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">gcp1:</span>                        
     <span class="hljs-attr">credential_json:</span> <span class="hljs-string">&lt;BASE64_OF_JSON&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">الخطوة 2: تكوين إعدادات الموفر</h3><p>في ملف التكوين نفسه (<code translate="no">milvus.yaml</code>)، قم بتحرير المكوِّن <code translate="no">function</code> لإخبار ميلفوس بالمفتاح الذي يجب استخدامه لتضمين استدعاءات الخدمة:</p>
+<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">الخطوة 2: تكوين إعدادات الموفر<button data-href="#Step-2-Configure-provider-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في ملف التكوين نفسه (<code translate="no">milvus.yaml</code>)، قم بتحرير المكوِّن <code translate="no">function</code> لإخبار ميلفوس بالمفتاح الذي يجب استخدامه لتضمين استدعاءات الخدمة:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">openai:</span>                         <span class="hljs-comment"># calls OpenAI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey1</span>           <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">bedrock:</span>                        <span class="hljs-comment"># calls AWS Bedrock</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">aksk1</span>             <span class="hljs-comment"># Reference to the credential label</span>
@@ -222,12 +252,12 @@ beta: Milvus 2.6.x
 
       <span class="hljs-attr">vertexai:</span>                       <span class="hljs-comment"># calls Google Vertex AI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">gcp1</span>              <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول كيفية تطبيق تكوين Milvus، راجع <a href="/docs/ar/v2.6.x/dynamic_config.md">تكوين Milvus أثناء التنقل</a>.</p>
+<p>لمزيد من المعلومات حول كيفية تطبيق تكوين Milvus، راجع <a href="/docs/ar/dynamic_config.md">تكوين Milvus أثناء التنقل</a>.</p>
 <h2 id="Use-embedding-function" class="common-anchor-header">استخدام وظيفة التضمين<button data-href="#Use-embedding-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -244,7 +274,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>بمجرد تكوين بيانات الاعتماد في ملف تكوين Milvus الخاص بك، اتبع هذه الخطوات لتعريف دوال التضمين واستخدامها.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">الخطوة 1: تحديد حقول المخطط</h3><p>لاستخدام دالة التضمين، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية على الأقل:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">الخطوة 1: تحديد حقول المخطط<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لاستخدام دالة التضمين، قم بإنشاء مجموعة بمخطط محدد. يجب أن يتضمن هذا المخطط ثلاثة حقول ضرورية على الأقل:</p>
 <ul>
 <li><p><strong>الحقل الأساسي</strong> الذي يحدد بشكل فريد كل كيان في المجموعة.</p></li>
 <li><p><strong>حقل قياسي</strong> يخزن البيانات الأولية المراد تضمينها.</p></li>
@@ -273,7 +318,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط</h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل المتجه المحدد صراحةً.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل متجه محدد بشكل صريح.</p>
 <p>يضيف المثال أدناه وحدة الدالة النمطية (<code translate="no">openai_embedding</code>) التي تحول الحقل القياسي <code translate="no">&quot;document&quot;</code> إلى تضمينات، وتخزين المتجهات الناتجة في الحقل المتجه <code translate="no">&quot;dense&quot;</code> المحدد مسبقًا.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
@@ -307,7 +367,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>نوع الدالة المستخدمة. لتضمين النص، اضبط القيمة على <code translate="no">FunctionType.TEXTEMBEDDING</code>.<br><strong>ملاحظة:</strong> يقبل Milvus <code translate="no">FunctionType.BM25</code> (لتحويل التضمين المتناثر) و <code translate="no">FunctionType.RERANK</code> (لإعادة الترتيب) لهذه المعلمة. ارجع إلى <a href="/docs/ar/v2.6.x/decay-ranker-overview.md">نظرة عامة</a> على <a href="/docs/ar/v2.6.x/full-text-search.md">البحث عن النص الكامل</a> وتناقص <a href="/docs/ar/v2.6.x/decay-ranker-overview.md">التصنيف</a> للحصول على التفاصيل.</p></td>
+     <td><p>نوع الدالة المستخدمة. لتضمين النص، اضبط القيمة على <code translate="no">FunctionType.TEXTEMBEDDING</code>.<br><strong>ملاحظة:</strong> يقبل Milvus <code translate="no">FunctionType.BM25</code> (لتحويل التضمين المتناثر) و <code translate="no">FunctionType.RERANK</code> (لإعادة الترتيب) لهذه المعلمة. ارجع إلى <a href="/docs/ar/decay-ranker-overview.md">نظرة عامة</a> على <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a> وتناقص <a href="/docs/ar/decay-ranker-overview.md">التصنيف</a> للحصول على التفاصيل.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -360,7 +420,22 @@ schema.add_function(text_embedding_function)
 <div class="alert note">
 <p>بالنسبة للمجموعات التي تحتوي على حقول قياسية متعددة تتطلب تحويل النص إلى متجه، أضف دوال منفصلة إلى مخطط المجموعة، وتأكد من أن كل دالة لها اسم فريد وقيمة <code translate="no">output_field_names</code>.</p>
 </div>
-<h3 id="Step-3-Configure-index" class="common-anchor-header">الخطوة 3: تكوين الفهرس</h3><p>بعد تحديد المخطط مع الحقول الضرورية والدالة المدمجة، قم بإعداد الفهرس لمجموعتك. لتبسيط هذه العملية، استخدم <code translate="no">AUTOINDEX</code> كـ <code translate="no">index_type</code> ، وهو خيار يسمح لـ Milvus باختيار وتكوين نوع الفهرس الأنسب بناءً على بنية بياناتك.</p>
+<h3 id="Step-3-Configure-index" class="common-anchor-header">الخطوة 3: تكوين الفهرس<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد تحديد المخطط مع الحقول الضرورية والدالة المدمجة، قم بإعداد الفهرس لمجموعتك. لتبسيط هذه العملية، استخدم <code translate="no">AUTOINDEX</code> كـ <code translate="no">index_type</code> ، وهو خيار يسمح لـ Milvus باختيار وتكوين نوع الفهرس الأنسب بناءً على بنية بياناتك.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -371,7 +446,22 @@ index_params.add_index(
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Create-collection" class="common-anchor-header">الخطوة 4: إنشاء مجموعة</h3><p>الآن قم بإنشاء المجموعة باستخدام المخطط ومعلمات الفهرس المحددة.</p>
+<h3 id="Step-4-Create-collection" class="common-anchor-header">الخطوة 4: إنشاء مجموعة<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الآن قم بإنشاء المجموعة باستخدام المخطط ومعلمات الفهرس المحددة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -379,7 +469,22 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">الخطوة 5: إدراج البيانات</h3><p>بعد إعداد المجموعة والفهرس الخاص بك، تكون جاهزًا لإدراج بياناتك الأولية. في هذه العملية، تحتاج فقط إلى توفير النص الخام. تقوم وحدة الدالة التي حددناها سابقًا بإنشاء المتجه المتناثر المقابل تلقائيًا لكل إدخال نصي.</p>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">الخطوة 5: إدراج البيانات<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد إعداد المجموعة والفهرس الخاص بك، تكون جاهزًا لإدراج بياناتك الأولية. في هذه العملية، تحتاج فقط إلى توفير النص الخام. تقوم وحدة الدالة التي حددناها سابقًا بإنشاء المتجه المتناثر المقابل تلقائيًا لكل إدخال نصي.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -387,7 +492,22 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">الخطوة 6: إجراء بحث المتجه</h3><p>بعد إدراج البيانات، قم بإجراء بحث دلالي باستخدام نص الاستعلام الخام. يقوم Milvus تلقائيًا بتحويل استعلامك إلى متجه تضمين تلقائيًا، ويسترجع المستندات ذات الصلة بناءً على التشابه، ويعيد النتائج الأكثر مطابقة.</p>
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">الخطوة 6: إجراء بحث المتجه<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد إدراج البيانات، قم بإجراء بحث دلالي باستخدام نص الاستعلام الخام. يقوم Milvus تلقائيًا بتحويل استعلامك إلى متجه تضمين تلقائيًا، ويسترجع المستندات ذات الصلة بناءً على التشابه، ويعيد النتائج الأكثر مطابقة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -402,7 +522,7 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول عمليات البحث والاستعلام، راجع <a href="/docs/ar/v2.6.x/single-vector-search.md">البحث المتجه الأساسي</a> <a href="/docs/ar/v2.6.x/get-and-scalar-query.md">والاستعلام</a>.</p>
+<p>لمزيد من المعلومات حول عمليات البحث والاستعلام، راجع <a href="/docs/ar/single-vector-search.md">البحث المتجه الأساسي</a> <a href="/docs/ar/get-and-scalar-query.md">والاستعلام</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -418,20 +538,80 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">ما الفرق بين تكوين بيانات الاعتماد في milvus.yaml مقابل متغيرات البيئة؟</h3><p>تعمل كلتا الطريقتين، ولكن استخدام <code translate="no">milvus.yaml</code> هو النهج الموصى به لأنه يوفر إدارة مركزية لبيانات الاعتماد وتسمية متسقة لبيانات الاعتماد عبر جميع الموفرين. عند استخدام متغيرات البيئة، تختلف أسماء المتغيرات اعتمادًا على موفر خدمة التضمين، لذا راجع الصفحة المخصصة لكل موفر لفهم أسماء متغيرات البيئة المحددة المطلوبة (على سبيل المثال، <a href="/docs/ar/v2.6.x/openai.md">OpenAI</a> أو <a href="/docs/ar/v2.6.x/azure-openai.md">Azure OpenAI</a>).</p>
-<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">ماذا يحدث إذا لم أحدد معلمة بيانات الاعتماد في تعريف الدالة؟</h3><p>يتبع ميلفوس ترتيب حل بيانات الاعتماد هذا:</p>
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">ما الفرق بين تكوين بيانات الاعتماد في milvus.yaml مقابل متغيرات البيئة؟<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تعمل كلتا الطريقتين، ولكن استخدام <code translate="no">milvus.yaml</code> هو النهج الموصى به لأنه يوفر إدارة مركزية لبيانات الاعتماد وتسمية متسقة لبيانات الاعتماد عبر جميع الموفرين. عند استخدام متغيرات البيئة، تختلف أسماء المتغيرات اعتمادًا على موفر خدمة التضمين، لذا راجع الصفحة المخصصة لكل موفر لفهم أسماء متغيرات البيئة المحددة المطلوبة (على سبيل المثال، <a href="/docs/ar/openai.md">OpenAI</a> أو <a href="/docs/ar/azure-openai.md">Azure OpenAI</a>).</p>
+<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">ماذا يحدث إذا لم أحدد معلمة بيانات الاعتماد في تعريف الدالة؟<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يتبع ميلفوس ترتيب حل بيانات الاعتماد هذا:</p>
 <ol>
 <li>أولاً، يبحث عن بيانات الاعتماد الافتراضية التي تم تكوينها لهذا الموفر في الملف <code translate="no">milvus.yaml</code> </li>
-<li>في حالة عدم وجود بيانات اعتماد افتراضية في ملف milvus.yaml، فإنه يعود إلى متغيرات البيئة (إذا تم تكوينها)</li>
+<li>في حالة عدم وجود بيانات الاعتماد الافتراضية في ملف milvus.yaml، فإنه يعود إلى متغيرات البيئة (إذا تم تكوينها)</li>
 <li>إذا لم يتم تكوين بيانات الاعتماد <code translate="no">milvus.yaml</code> ولا متغيرات البيئة، فسيقوم ميلفوس بإلقاء خطأ</li>
 </ol>
-<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">كيف يمكنني التحقق من أن التضمينات يتم إنشاؤها بشكل صحيح؟</h3><p>يمكنك التحقق من ذلك عن طريق:</p>
+<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">كيف يمكنني التحقق من أن التضمينات يتم إنشاؤها بشكل صحيح؟<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك التحقق من ذلك عن طريق:</p>
 <ol>
 <li>الاستعلام عن مجموعتك بعد التضمين لمعرفة ما إذا كان حقل المتجه يحتوي على بيانات</li>
 <li>التحقق من أن طول الحقل المتجه يطابق أبعادك المتوقعة</li>
 <li>إجراء بحث تشابه بسيط للتحقق من أن التضمينات تنتج نتائج ذات مغزى</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">عندما أقوم بإجراء بحث تشابه، هل يمكنني استخدام متجه استعلام بدلاً من النص الخام؟</h3><p>نعم، يمكنك استخدام متجهات الاستعلام المحسوبة مسبقًا بدلاً من النص الخام للبحث عن التشابه. بينما تقوم الوحدة النمطية "الدالة" تلقائيًا بتحويل الاستعلامات النصية الأولية إلى استعلامات نصية أولية إلى متجهات، يمكنك أيضًا توفير بيانات المتجهات مباشرةً إلى معلمة البيانات في عملية البحث الخاصة بك. ملاحظة: يجب أن يكون حجم أبعاد متجه الاستعلام المقدم متوافقًا مع حجم أبعاد المتجهات المضمنة التي تم إنشاؤها بواسطة الوحدة النمطية Function.</p>
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">عندما أقوم بإجراء بحث تشابه، هل يمكنني استخدام متجه استعلام بدلاً من النص الخام؟<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>نعم، يمكنك استخدام متجهات الاستعلام المحسوبة مسبقًا بدلاً من النص الخام للبحث عن التشابه. بينما تقوم الوحدة النمطية "الدالة" تلقائيًا بتحويل الاستعلامات النصية الأولية إلى استعلامات نصية أولية إلى متجهات، يمكنك أيضًا توفير بيانات المتجهات مباشرةً إلى معلمة البيانات في عملية البحث الخاصة بك. ملاحظة: يجب أن يكون حجم أبعاد متجه الاستعلام المقدم متوافقًا مع حجم أبعاد المتجهات المضمنة التي تم إنشاؤها بواسطة الوحدة النمطية Function.</p>
 <p><strong>مثال</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(

@@ -61,24 +61,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus utilise <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> pour mettre en œuvre l'indexation inversée. Voici le processus :</p>
+    </button></h2><p>Un <strong>index INVERTED</strong> dans Milvus associe chaque valeur de champ unique (terme) à l'ensemble des ID de documents où cette valeur apparaît. Cette structure permet des recherches rapides pour les champs comportant des valeurs répétées ou catégorielles.</p>
+<p>Comme le montre le diagramme, le processus se déroule en deux étapes :</p>
 <ol>
-<li><p><strong>Tokenisation</strong>: Milvus décompose vos données en termes pouvant faire l'objet d'une recherche.</p></li>
-<li><p><strong>Dictionnaire de termes</strong>: Création d'une liste triée de tous les termes uniques.</p></li>
-<li><p><strong>Listes inversées</strong>: Associe chaque terme aux documents qui le contiennent</p></li>
+<li><p><strong>Mappage en amont (ID → terme) :</strong> Chaque identifiant de document pointe vers la valeur de champ qu'il contient.</p></li>
+<li><p><strong>Mappage inversé (Terme → ID) :</strong> Milvus collecte des termes uniques et établit une correspondance inversée entre chaque terme et tous les ID qui le contiennent.</p></li>
 </ol>
-<p>Par exemple, si l'on considère ces deux phrases :</p>
-<ul>
-<li><p><strong>"Milvus est une base de données vectorielle native dans le nuage"</strong></p></li>
-<li><p><strong>"Milvus est très performant"</strong></p></li>
-</ul>
-<p>L'index inversé associe des termes tels que <strong>"Milvus"</strong> → <strong>[Document 0, Document 1]</strong>, <strong>"cloud-native"</strong> → <strong>[Document 0]</strong>, et <strong>"performance"</strong> → <strong>[Document 1]</strong>.</p>
+<p>Par exemple, la valeur <strong>"électronique"</strong> correspond aux ID <strong>1</strong> et <strong>3</strong>, tandis que <strong>"livres"</strong> correspond aux ID <strong>2</strong> et <strong>5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
-   </span> <span class="img-wrapper"> <span>Index inversé</span> </span></p>
-<p>Lorsque vous filtrez par un terme, Milvus recherche le terme dans le dictionnaire et récupère instantanément tous les documents correspondants.</p>
-<p>Les index INVERTS prennent en charge tous les types de champs scalaires : <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> et <strong>ARRAY</strong>. Cependant, les paramètres d'indexation d'un champ JSON sont légèrement différents de ceux des champs scalaires ordinaires.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   </span> <span class="img-wrapper"> <span>Fonctionnement de l'index inversé</span> </span></p>
+<p>Lorsque vous filtrez pour une valeur spécifique (par exemple, <code translate="no">category == &quot;electronics&quot;</code>), Milvus recherche simplement le terme dans l'index et récupère directement les ID correspondants. Cela évite de parcourir l'ensemble des données et permet un filtrage rapide, en particulier pour les valeurs catégorielles ou répétées.</p>
+<p>Les index INVERTED prennent en charge tous les types de champs scalaires, tels que <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> et <strong>ARRAY</strong>. Toutefois, les paramètres d'indexation d'un champ JSON sont légèrement différents de ceux des champs scalaires ordinaires.</p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">Création d'index sur des champs non JSON<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,9 +164,9 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p><strong>Créez des index après le chargement des données</strong>: Pour de meilleures performances, créez des index sur les collections qui contiennent déjà des données.</p></li>
-<li><p><strong>Utilisez des noms d'index descriptifs</strong>: Choisissez des noms qui indiquent clairement le champ et l'objectif.</p></li>
+<li><p><strong>Utilisez des noms d'index descriptifs</strong>: Choisissez des noms qui indiquent clairement le champ et l'objectif</p></li>
 <li><p><strong>Contrôler les performances des index</strong>: Vérifiez les performances des requêtes avant et après la création d'index.</p></li>
-<li><p><strong>Tenez compte de vos modèles de requête</strong>: Créez des index sur les champs que vous filtrez fréquemment</p></li>
+<li><p><strong>Tenez compte de vos schémas de requête</strong>: Créez des index sur les champs que vous filtrez fréquemment</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Prochaines étapes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

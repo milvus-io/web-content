@@ -23,7 +23,7 @@ title: 使用 Docker Compose 升级 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介绍如何使用 Docker Compose 将 Milvus Standalone 部署从 v2.5.x 升级到 v2.6.0。</p>
+    </button></h1><p>本指南介绍如何使用 Docker Compose 将 Milvus Standalone 部署从 v2.5.x 升级到 v2.6.2。</p>
 <h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,26 +39,56 @@ title: 使用 Docker Compose 升级 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">v2.6.0 的新功能</h3><p>从 Milvus 2.5.x 升级到 2.6.0 涉及重大架构变更：</p>
+    </button></h2><h3 id="Whats-new-in-v262" class="common-anchor-header">v2.6.2 中的新功能<button data-href="#Whats-new-in-v262" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>从 Milvus 2.5.x 升级到 2.6.2 涉及重大架构变更：</p>
 <ul>
-<li><strong>协调器合并</strong>：传统的独立协调器（<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code> ）已合并为单一协调器。<code translate="no">mixCoord</code></li>
+<li><strong>协调器整合</strong>：传统的独立协调器 (<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code>) 已合并为单一协调器。<code translate="no">mixCoord</code></li>
 <li><strong>新组件</strong>：引入流节点，增强数据处理能力</li>
 <li><strong>删除组件</strong>：删除并合并<code translate="no">indexNode</code> </li>
 </ul>
 <p>此升级过程可确保向新架构的适当迁移。有关架构变化的更多信息，请参阅<a href="/docs/zh/architecture_overview.md">Milvus 架构概述</a>。</p>
-<h3 id="Requirements" class="common-anchor-header">系统要求</h3><p><strong>系统要求：</strong></p>
+<h3 id="Requirements" class="common-anchor-header">系统要求<button data-href="#Requirements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>系统要求：</strong></p>
 <ul>
 <li>已安装 Docker 和 Docker Compose</li>
 <li>通过 Docker Compose 部署 Milvus 单机版</li>
 </ul>
 <p><strong>兼容性要求：</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 与 v2.6.0<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
+<li>Milvus v2.6.0-rc1 与 v2.6.2<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
 <li>如果您当前正在运行 v2.6.0-rc1，并需要保留数据，请参考<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">本社区指南</a>以获取迁移帮助。</li>
-<li>在升级到 v2.6.0 之前<strong>，必须</strong>升级到 v2.5.16 或更高版本。</li>
+<li>在升级到 v2.6.2 之前，您<strong>必须</strong>升级到 v2.5.16 或更高版本。</li>
 </ul>
 <div class="alter note">
-<p>出于安全考虑，Milvus 在发布 v2.6.0 时将 MinIO 升级到 RELEASE.2024-12-18T13-15-44Z。在使用 Docker Compose 从以前安装的 Milvus Standalone 版本升级之前，应创建一个 Single-Node Single-Drive MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
+<p>出于安全考虑，Milvus 在发布 v2.6.2 时将 MinIO 升级到 RELEASE.2024-12-18T13-15-44Z。在使用 Docker Compose 从以前安装的 Milvus Standalone 版本升级之前，应创建一个 Single-Node Single-Drive MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +105,22 @@ title: 使用 Docker Compose 升级 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">第 1 步：升级到版本 2.5.16</h3><div class="alert note">
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">第 1 步：升级到版本 2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="alert note">
 <p>如果您的独立部署已在运行 v2.5.16 或更高版本，请跳过此步骤。</p>
 </div>
 <ol>
@@ -94,7 +139,22 @@ docker compose up -d
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-2-Upgrade-to-v260" class="common-anchor-header">步骤 2：升级至 v2.6.0</h3><p>v2.5.16 成功运行后，升级到 v2.6.0：</p>
+<h3 id="Step-2-Upgrade-to-v262" class="common-anchor-header">步骤 2：升级至 v2.6.2<button data-href="#Step-2-Upgrade-to-v262" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>v2.5.16 成功运行后，升级到 v2.6.2：</p>
 <ol>
 <li><p>编辑现有的<code translate="no">docker-compose.yaml</code> 文件，更新 Milvus 和 MinIO 图像标签：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -105,7 +165,7 @@ docker compose up -d
 <span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.2</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>应用最终升级：</p>
 <pre><code translate="no" class="language-bash">docker compose down
@@ -127,7 +187,7 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>确认独立部署正在运行新版本：</p>
+    </button></h2><p>确认您的独立部署正在运行新版本：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check container status</span>
 docker compose ps
 

@@ -432,9 +432,28 @@
           },
           {
             "label": "JSON 欄位",
-            "id": "use-json-fields.md",
+            "id": "json-field",
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "JSON 欄位概述",
+                "id": "json-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "JSON 索引",
+                "id": "json-indexing.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "JSON 粉碎",
+                "id": "json-shredding.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
             "label": "陣列欄位",
@@ -524,6 +543,12 @@
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
+                  },
+                  {
+                    "label": "語言識別碼",
+                    "id": "language-identifier.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               },
@@ -604,6 +629,12 @@
                 "label": "多語言分析儀",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "針對您的使用個案選擇正確的分析儀",
+                "id": "choose-the-right-analyzer-for-your-use-case.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -789,6 +820,12 @@
                 "label": "反轉",
                 "id": "inverted.md",
                 "order": 1,
+                "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 2,
                 "children": []
               }
             ]
@@ -1048,10 +1085,16 @@
                 "children": []
               },
               {
+                "label": "提升排名",
+                "id": "boost-ranker.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "衰減排名",
                 "id": "decay-ranker",
                 "isMenu": true,
-                "order": 2,
+                "order": 3,
                 "children": [
                   {
                     "label": "Decay Ranker 總覽",
@@ -1088,7 +1131,7 @@
               {
                 "label": "模型排名器",
                 "id": "model-ranker",
-                "order": 3,
+                "order": 4,
                 "isMenu": true,
                 "children": [
                   {
@@ -2232,7 +2275,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格舞曲",
+            "label": "拉格",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []

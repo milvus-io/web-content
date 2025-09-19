@@ -45,7 +45,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>El diseño del modelo de datos de un sistema de búsqueda implica analizar las necesidades empresariales y abstraer la información en un modelo de datos expresado en un esquema. Un esquema bien definido es importante para alinear el modelo de datos con los objetivos empresariales, garantizando la coherencia de los datos y la calidad del servicio.  Además, elegir los tipos de datos y el índice adecuados es importante para alcanzar el objetivo empresarial de forma económica.</p>
-<h3 id="Analyzing-Business-Needs" class="common-anchor-header">Análisis de las necesidades empresariales</h3><p>Para responder eficazmente a las necesidades de la empresa hay que empezar por analizar los tipos de consultas que realizarán los usuarios y determinar los métodos de búsqueda más adecuados.</p>
+<h3 id="Analyzing-Business-Needs" class="common-anchor-header">Análisis de las necesidades empresariales<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para responder eficazmente a las necesidades de la empresa hay que empezar por analizar los tipos de consultas que realizarán los usuarios y determinar los métodos de búsqueda más adecuados.</p>
 <ul>
 <li><p><strong>Consultas de los usuarios:</strong> Identifique los tipos de consultas que se espera que realicen los usuarios. Esto ayuda a garantizar que su esquema es compatible con los casos de uso del mundo real y optimiza el rendimiento de la búsqueda. Por ejemplo</p>
 <ul>
@@ -57,12 +72,27 @@ summary: >-
 </ul></li>
 <li><p><strong>Métodos de búsqueda:</strong> Elija las técnicas de búsqueda apropiadas que se ajusten a los tipos de consultas que realizarán sus usuarios. Los distintos métodos sirven para diferentes propósitos y a menudo pueden combinarse para obtener resultados más potentes:</p>
 <ul>
-<li><p><strong>Búsqueda semántica</strong>: Utiliza la similitud vectorial densa para encontrar elementos con significado similar, ideal para datos no estructurados como texto o imágenes.</p></li>
+<li><p><strong>Búsqueda semántica</strong>: Utiliza la similitud de vectores densos para encontrar elementos con significado similar, ideal para datos no estructurados como texto o imágenes.</p></li>
 <li><p><strong>Búsqueda de texto completo</strong>: Complementa la búsqueda semántica con la concordancia de palabras clave.  La búsqueda de texto completo puede utilizar el análisis léxico para evitar dividir palabras largas en tokens fragmentados, captando los términos especiales durante la recuperación.</p></li>
 <li><p><strong>Filtrado de metadatos</strong>: Además de la búsqueda vectorial, aplica restricciones como intervalos de fechas, categorías o etiquetas.</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Traducir los requisitos empresariales en un modelo de datos de búsqueda</h3><p>El siguiente paso consiste en traducir tus requisitos empresariales en un modelo de datos concreto, identificando los componentes centrales de tu información y sus métodos de búsqueda:</p>
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Traducir los requisitos empresariales en un modelo de datos de búsqueda<button data-href="#Translates-Business-Requirements-into-a-Search-Data-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>El siguiente paso consiste en traducir tus requisitos empresariales en un modelo de datos concreto, identificando los componentes básicos de tu información y sus métodos de búsqueda:</p>
 <ul>
 <li><p>Defina los datos que necesita almacenar, como el contenido en bruto (texto, imágenes, audio), los metadatos asociados (títulos, etiquetas, autoría) y los atributos contextuales (marcas de tiempo, comportamiento del usuario, etc.).</p></li>
 <li><p>Determine los tipos de datos y formatos adecuados para cada elemento. Por ejemplo:</p>
@@ -92,9 +122,39 @@ summary: >-
       </svg>
     </button></h2><p>En Milvus, el modelo de datos se expresa a través de un esquema de colección. El diseño de los campos correctos dentro de un esquema de colección es clave para permitir una recuperación eficaz. Cada campo define un tipo particular de datos almacenados en la colección y desempeña un papel distinto en el proceso de búsqueda. A grandes rasgos, Milvus admite dos tipos principales de campos: <strong>campos vectoriales</strong> y <strong>campos escalares</strong>.</p>
 <p>Ahora, puede mapear su modelo de datos en un esquema de campos, incluyendo vectores y cualquier campo escalar auxiliar. Asegúrese de que cada campo se correlaciona con los atributos de su modelo de datos, especialmente preste atención a su tipo de vector (denso o spase) y su dimensión.</p>
-<h3 id="Vector-Field" class="common-anchor-header">Campo vectorial</h3><p>Los campos vectoriales almacenan incrustaciones de tipos de datos no estructurados como texto, imágenes y audio. Estas incrustaciones pueden ser densas, dispersas o binarias, dependiendo del tipo de datos y del método de recuperación utilizado. Normalmente, los vectores densos se utilizan para la búsqueda semántica, mientras que los vectores dispersos son más adecuados para la búsqueda de texto completo o léxica. Los vectores binarios son útiles cuando el almacenamiento y los recursos informáticos son limitados. Una colección puede contener varios campos vectoriales para permitir estrategias de recuperación multimodales o híbridas. Para obtener una guía detallada sobre este tema, consulte la <a href="/docs/es/multi-vector-search.md">Búsqueda híbrida multivectorial</a>.</p>
+<h3 id="Vector-Field" class="common-anchor-header">Campo vectorial<button data-href="#Vector-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Los campos vectoriales almacenan incrustaciones de tipos de datos no estructurados como texto, imágenes y audio. Estas incrustaciones pueden ser densas, dispersas o binarias, dependiendo del tipo de datos y del método de recuperación utilizado. Normalmente, los vectores densos se utilizan para la búsqueda semántica, mientras que los vectores dispersos son más adecuados para la búsqueda de texto completo o léxica. Los vectores binarios son útiles cuando el almacenamiento y los recursos informáticos son limitados. Una colección puede contener varios campos vectoriales para permitir estrategias de recuperación multimodales o híbridas. Para obtener una guía detallada sobre este tema, consulte la <a href="/docs/es/multi-vector-search.md">Búsqueda híbrida multivectorial</a>.</p>
 <p>Milvus admite los tipos de datos vectoriales: <code translate="no">FLOAT_VECTOR</code> para <a href="/docs/es/dense-vector.md">vectores densos</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> para <a href="/docs/es/sparse_vector.md">vectores dispersos</a> y <code translate="no">BINARY_VECTOR</code> para <a href="/docs/es/binary-vector.md">vectores binarios</a>.</p>
-<h3 id="Scalar-Field" class="common-anchor-header">Campo escalar</h3><p>Los campos escalares almacenan valores primitivos estructurados, comúnmente denominados metadatos, como números, cadenas o fechas. Estos valores pueden devolverse junto con los resultados de la búsqueda vectorial y son esenciales para filtrar y ordenar. Permiten acotar los resultados de la búsqueda en función de atributos específicos, como limitar los documentos a una categoría concreta o a un intervalo de tiempo definido.</p>
+<h3 id="Scalar-Field" class="common-anchor-header">Campo escalar<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Los campos escalares almacenan valores primitivos estructurados, comúnmente denominados metadatos, como números, cadenas o fechas. Estos valores pueden devolverse junto con los resultados de la búsqueda vectorial y son esenciales para filtrar y ordenar. Permiten acotar los resultados de la búsqueda en función de atributos específicos, como limitar los documentos a una categoría concreta o a un intervalo de tiempo definido.</p>
 <p>Milvus admite tipos escalares como <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, y <code translate="no">ARRAY</code> para almacenar y filtrar datos no vectoriales. Estos tipos mejoran la precisión y la personalización de las operaciones de búsqueda.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Aprovechar las funciones avanzadas en el diseño de esquemas<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -112,13 +172,73 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Al diseñar un esquema, no basta con asignar los datos a los campos utilizando los tipos de datos admitidos. Es esencial conocer a fondo las relaciones entre los campos y las estrategias disponibles para su configuración. Tener en cuenta las características clave durante la fase de diseño garantiza que el esquema no sólo satisfaga los requisitos inmediatos de gestión de datos, sino que también sea escalable y adaptable a las necesidades futuras. Al integrar cuidadosamente estas características, puede construir una arquitectura de datos sólida que maximice las capacidades de Milvus y apoye su estrategia y objetivos de datos más amplios. He aquí un resumen de las características clave que crean un esquema de colección:</p>
-<h3 id="Primary-Key" class="common-anchor-header">Clave primaria</h3><p>Un campo de clave primaria es un componente fundamental de un esquema, ya que identifica de forma única a cada entidad dentro de una colección. Es obligatorio definir una clave primaria. Deberá ser un campo escalar de tipo entero o cadena y marcado como <code translate="no">is_primary=True</code>. Opcionalmente, puede activar <code translate="no">auto_id</code> para la clave primaria, a la que se asignan automáticamente números enteros que crecen monolíticamente a medida que se ingestan más datos en la colección.</p>
+<h3 id="Primary-Key" class="common-anchor-header">Clave primaria<button data-href="#Primary-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Un campo de clave primaria es un componente fundamental de un esquema, ya que identifica de forma única a cada entidad dentro de una colección. Es obligatorio definir una clave primaria. Deberá ser un campo escalar de tipo entero o cadena y marcado como <code translate="no">is_primary=True</code>. Opcionalmente, puede activar <code translate="no">auto_id</code> para la clave primaria, a la que se asignan automáticamente números enteros que crecen monolíticamente a medida que se ingestan más datos en la colección.</p>
 <p>Para más detalles, consulte <a href="/docs/es/primary-field.md">Campo primario y AutoID</a>.</p>
-<h3 id="Partitioning" class="common-anchor-header">Particionamiento</h3><p>Para acelerar la búsqueda, puede activar opcionalmente la partición. Al designar un campo escalar específico para la partición y especificar criterios de filtrado basados en este campo durante las búsquedas, el alcance de la búsqueda puede limitarse eficazmente sólo a las particiones relevantes. Este método mejora significativamente la eficacia de las operaciones de recuperación al reducir el ámbito de búsqueda.</p>
+<h3 id="Partitioning" class="common-anchor-header">Particionamiento<button data-href="#Partitioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para acelerar la búsqueda, puede activar opcionalmente la partición. Al designar un campo escalar específico para la partición y especificar criterios de filtrado basados en este campo durante las búsquedas, el alcance de la búsqueda puede limitarse eficazmente sólo a las particiones relevantes. Este método mejora significativamente la eficacia de las operaciones de recuperación al reducir el ámbito de búsqueda.</p>
 <p>Para más detalles, consulte <a href="/docs/es/use-partition-key.md">Utilizar clave de partición</a>.</p>
-<h3 id="Analyzer" class="common-anchor-header">Analizador</h3><p>Un analizador es una herramienta esencial para procesar y transformar datos de texto. Su función principal es convertir el texto bruto en tokens y estructurarlos para su indexación y recuperación. Para ello, tokeniza la cadena, elimina las palabras vacías y convierte las palabras individuales en tokens.</p>
+<h3 id="Analyzer" class="common-anchor-header">Analizador<button data-href="#Analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Un analizador es una herramienta esencial para procesar y transformar datos de texto. Su función principal es convertir el texto bruto en tokens y estructurarlos para su indexación y recuperación. Para ello, tokeniza la cadena, elimina las palabras vacías y convierte las palabras individuales en tokens.</p>
 <p>Para más información, consulte la sección <a href="/docs/es/analyzer-overview.md">Descripción general del analizador</a>.</p>
-<h3 id="Function" class="common-anchor-header">Función</h3><p>Milvus le permite definir funciones integradas como parte del esquema para derivar automáticamente ciertos campos. Por ejemplo, puede añadir una función BM25 integrada que genere un vector disperso a partir de un campo <code translate="no">VARCHAR</code> para facilitar la búsqueda de texto completo. Estos campos derivados de funciones agilizan el preprocesamiento y garantizan que la colección siga siendo autónoma y esté preparada para las consultas.</p>
+<h3 id="Function" class="common-anchor-header">Función<button data-href="#Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus le permite definir funciones integradas como parte del esquema para derivar automáticamente ciertos campos. Por ejemplo, puede añadir una función BM25 integrada que genere un vector disperso a partir de un campo <code translate="no">VARCHAR</code> para facilitar la búsqueda de texto completo. Estos campos derivados de funciones agilizan el preprocesamiento y garantizan que la colección siga siendo autónoma y esté preparada para las consultas.</p>
 <p>Para más información, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">Un ejemplo real<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,7 +305,7 @@ summary: >-
    <tr>
      <td><p>vector_denso_texto (<code translate="no">FLOAT_VECTOR</code>)</p></td>
      <td><p>vector denso generado por un modelo de incrustación de texto</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/BaGlwzDmyiyVvVk6NurcFclInCd?from=from_parent_docs">Búsqueda básica de vectores</a></p></td>
+     <td><p><a href="/docs/es/single-vector-search.md">Búsqueda básica de vectores</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -194,7 +314,7 @@ summary: >-
    <tr>
      <td><p>text_sparse_vector (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
      <td><p>vector disperso autogenerado por una función BM25 integrada</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/RQTRwhOVPiwnwokqr4scAtyfnBf?from=from_parent_docs">Búsqueda de texto completo</a></p></td>
+     <td><p><a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -202,7 +322,22 @@ summary: >-
    </tr>
 </table>
 <p>Si desea más información sobre los esquemas y una guía detallada para añadir distintos tipos de campos, consulte <a href="/docs/es/schema.md">Explicación de los esquemas</a>.</p>
-<h3 id="Initialize-schema" class="common-anchor-header">Inicializar el esquema</h3><p>Para empezar, necesitamos crear un esquema vacío. Este paso establece una estructura fundacional para definir el modelo de datos.</p>
+<h3 id="Initialize-schema" class="common-anchor-header">Inicializar el esquema<button data-href="#Initialize-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para empezar, necesitamos crear un esquema vacío. Este paso establece una estructura fundacional para definir el modelo de datos.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -233,7 +368,22 @@ schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Skip this step using cURL</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-fields" class="common-anchor-header">Añadir campos</h3><p>Una vez creado el esquema, el siguiente paso es especificar los campos que compondrán sus datos. Cada campo está asociado a sus respectivos tipos de datos y atributos.</p>
+<h3 id="Add-fields" class="common-anchor-header">Añadir campos<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Una vez creado el esquema, el siguiente paso es especificar los campos que compondrán sus datos. Cada campo está asociado a sus respectivos tipos de datos y atributos.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
@@ -401,7 +551,22 @@ schema.addField(AddFieldReq.builder()
 <li><p>Clave de partición: el <code translate="no">timestamp</code> se asigna como clave de partición permitiendo el filtrado por particiones. Puede ser</p></li>
 <li><p>Analizador de texto: el analizador de texto se aplica a 2 campos de cadena <code translate="no">title</code> y <code translate="no">text</code> para soportar la coincidencia de texto y la búsqueda de texto completo respectivamente.</p></li>
 </ul>
-<h3 id="Optional-Add-functions" class="common-anchor-header">(Opcional) Añadir funciones</h3><p>Para mejorar las capacidades de consulta de datos, se pueden incorporar funciones al esquema. Por ejemplo, se puede crear una función para procesar relacionados con campos específicos.</p>
+<h3 id="Optional-Add-functions" class="common-anchor-header">(Opcional) Añadir funciones<button data-href="#Optional-Add-functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para mejorar las capacidades de consulta de datos, se pueden incorporar funciones al esquema. Por ejemplo, se puede crear una función para procesar relacionados con campos específicos.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

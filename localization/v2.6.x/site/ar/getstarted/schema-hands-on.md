@@ -44,7 +44,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>ينطوي تصميم نموذج البيانات لنظام البحث على تحليل احتياجات العمل وتجريد المعلومات في نموذج بيانات معبر عن المخطط. يعد المخطط المحدد جيدًا أمرًا مهمًا لمواءمة نموذج البيانات مع أهداف العمل، وضمان اتساق البيانات وجودة الخدمة.  بالإضافة إلى ذلك، يعد اختيار أنواع البيانات والفهرس المناسبين أمرًا مهمًا في تحقيق هدف العمل بشكل اقتصادي.</p>
-<h3 id="Analyzing-Business-Needs" class="common-anchor-header">تحليل احتياجات العمل</h3><p>تبدأ المعالجة الفعالة لاحتياجات العمل بتحليل أنواع الاستعلامات التي سيقوم بها المستخدمون وتحديد طرق البحث الأنسب.</p>
+<h3 id="Analyzing-Business-Needs" class="common-anchor-header">تحليل احتياجات العمل<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تبدأ المعالجة الفعالة لاحتياجات العمل بتحليل أنواع الاستعلامات التي سيقوم بها المستخدمون وتحديد طرق البحث الأنسب.</p>
 <ul>
 <li><p><strong>استعلامات المستخدم:</strong> تحديد أنواع الاستعلامات المتوقع أن يقوم بها المستخدمون. يساعد ذلك على ضمان دعم مخططك لحالات الاستخدام في العالم الحقيقي وتحسين أداء البحث. قد تتضمن هذه الاستعلامات:</p>
 <ul>
@@ -61,7 +76,22 @@ summary: >-
 <li><p><strong>تصفية البيانات الوصفية</strong>: علاوة على البحث المتجه، تطبيق قيود مثل نطاقات التاريخ أو الفئات أو العلامات.</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">ترجمة متطلبات العمل إلى نموذج بيانات البحث</h3><p>الخطوة التالية هي ترجمة متطلبات عملك إلى نموذج بيانات ملموس، من خلال تحديد المكونات الأساسية لمعلوماتك وطرق البحث الخاصة بها:</p>
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">ترجمة متطلبات العمل إلى نموذج بيانات البحث<button data-href="#Translates-Business-Requirements-into-a-Search-Data-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الخطوة التالية هي ترجمة متطلبات عملك إلى نموذج بيانات ملموس، من خلال تحديد المكونات الأساسية لمعلوماتك وطرق البحث الخاصة بها:</p>
 <ul>
 <li><p>تحديد البيانات التي تحتاج إلى تخزينها، مثل المحتوى الخام (النصوص والصور والصوت)، والبيانات الوصفية المرتبطة بها (العناوين والعلامات والعلامات والتأليف)، والسمات السياقية (الطوابع الزمنية وسلوك المستخدم، إلخ).</p></li>
 <li><p>تحديد أنواع البيانات والتنسيقات المناسبة لكل عنصر. على سبيل المثال:</p>
@@ -91,9 +121,39 @@ summary: >-
       </svg>
     </button></h2><p>في ميلفوس، يتم التعبير عن نموذج البيانات من خلال مخطط المجموعة. يعد تصميم الحقول الصحيحة داخل مخطط المجموعة أمرًا أساسيًا لتمكين الاسترجاع الفعال. يحدد كل حقل نوعًا معينًا من البيانات المخزنة في المجموعة ويلعب دورًا مميزًا في عملية البحث. على المستوى العالي، يدعم Milvus نوعين رئيسيين من الحقول: <strong>الحقول المتجهة</strong> <strong>والحقول القياسية</strong>.</p>
 <p>الآن، يمكنك تعيين نموذج البيانات الخاص بك إلى مخطط للحقول، بما في ذلك المتجهات وأي حقول قياسية مساعدة. تأكد من ارتباط كل حقل بالسمات من نموذج البيانات الخاص بك، وانتبه بشكل خاص إلى نوع المتجه (كثيف أو قياسي) وبُعده.</p>
-<h3 id="Vector-Field" class="common-anchor-header">الحقل المتجه</h3><p>تخزن الحقول المتجهة تضمينات لأنواع البيانات غير المنظمة مثل النصوص والصور والصوت. قد تكون هذه التضمينات كثيفة أو متناثرة أو ثنائية، اعتمادًا على نوع البيانات وطريقة الاسترجاع المستخدمة. عادةً ما يتم استخدام المتجهات الكثيفة للبحث الدلالي، في حين أن المتجهات المتفرقة مناسبة بشكل أفضل لمطابقة النص الكامل أو المطابقة المعجمية. تكون المتجهات الثنائية مفيدة عندما تكون موارد التخزين والموارد الحاسوبية محدودة. قد تحتوي المجموعة على العديد من حقول المتجهات لتمكين استراتيجيات الاسترجاع متعدد الوسائط أو المختلطة. للحصول على دليل مفصل حول هذا الموضوع، يرجى الرجوع إلى <a href="/docs/ar/multi-vector-search.md">البحث الهجين متعدد المتجهات</a>.</p>
+<h3 id="Vector-Field" class="common-anchor-header">الحقل المتجه<button data-href="#Vector-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تخزن الحقول المتجهة تضمينات لأنواع البيانات غير المنظمة مثل النصوص والصور والصوت. قد تكون هذه التضمينات كثيفة أو متناثرة أو ثنائية، اعتمادًا على نوع البيانات وطريقة الاسترجاع المستخدمة. عادةً ما يتم استخدام المتجهات الكثيفة للبحث الدلالي، في حين أن المتجهات المتفرقة مناسبة بشكل أفضل لمطابقة النص الكامل أو المطابقة المعجمية. تكون المتجهات الثنائية مفيدة عندما تكون موارد التخزين والموارد الحاسوبية محدودة. قد تحتوي المجموعة على العديد من حقول المتجهات لتمكين استراتيجيات الاسترجاع متعدد الوسائط أو المختلطة. للحصول على دليل مفصل حول هذا الموضوع، يرجى الرجوع إلى <a href="/docs/ar/multi-vector-search.md">البحث الهجين متعدد المتجهات</a>.</p>
 <p>يدعم ميلفوس أنواع بيانات المتجهات: <code translate="no">FLOAT_VECTOR</code> للمتجهات <a href="/docs/ar/dense-vector.md">الكثيفة،</a> <code translate="no">SPARSE_FLOAT_VECTOR</code> للمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a> و <code translate="no">BINARY_VECTOR</code> <a href="/docs/ar/binary-vector.md">للمتجهات الثنائية</a></p>
-<h3 id="Scalar-Field" class="common-anchor-header">الحقول العددية</h3><p>تخزن الحقول العددية قيمًا بدائية منظمة - يشار إليها عادةً بالبيانات الوصفية - مثل الأرقام أو السلاسل أو التواريخ. يمكن إرجاع هذه القيم جنبًا إلى جنب مع نتائج البحث المتجهة وهي ضرورية للتصفية والفرز. فهي تسمح لك بتضييق نتائج البحث بناءً على سمات محددة، مثل حصر المستندات في فئة معينة أو نطاق زمني محدد.</p>
+<h3 id="Scalar-Field" class="common-anchor-header">الحقول العددية<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تخزن الحقول العددية قيمًا بدائية منظمة - يشار إليها عادةً بالبيانات الوصفية - مثل الأرقام أو السلاسل أو التواريخ. يمكن إرجاع هذه القيم جنبًا إلى جنب مع نتائج البحث المتجهة وهي ضرورية للتصفية والفرز. فهي تسمح لك بتضييق نتائج البحث بناءً على سمات محددة، مثل حصر المستندات في فئة معينة أو نطاق زمني محدد.</p>
 <p>يدعم ميلفوس أنواعًا قياسية مثل <code translate="no">BOOL</code> و <code translate="no">INT8/16/32/64</code> و و <code translate="no">FLOAT</code> و <code translate="no">DOUBLE</code> و <code translate="no">VARCHAR</code> و <code translate="no">JSON</code> و <code translate="no">ARRAY</code> لتخزين وتصفية البيانات غير المتجهة. تعزز هذه الأنواع دقة عمليات البحث وتخصيصها.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">الاستفادة من الميزات المتقدمة في تصميم المخطط<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -111,13 +171,73 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>عند تصميم مخطط، لا يكفي مجرد تعيين بياناتك إلى الحقول باستخدام أنواع البيانات المدعومة. من الضروري أن يكون لديك فهم شامل للعلاقات بين الحقول والاستراتيجيات المتاحة للتكوين. إن وضع الميزات الرئيسية في الاعتبار أثناء مرحلة التصميم يضمن أن المخطط لا يلبي متطلبات معالجة البيانات الفورية فحسب، بل إنه قابل للتطوير والتكيف مع الاحتياجات المستقبلية. من خلال دمج هذه الميزات بعناية، يمكنك بناء بنية بيانات قوية تزيد من إمكانيات ميلفوس وتدعم استراتيجية وأهداف البيانات الأوسع نطاقًا. فيما يلي نظرة عامة على الميزات الرئيسية التي تنشئ مخطط تجميع:</p>
-<h3 id="Primary-Key" class="common-anchor-header">المفتاح الأساسي</h3><p>يعد حقل المفتاح الأساسي مكونًا أساسيًا في المخطط، حيث إنه يحدد بشكل فريد كل كيان داخل المجموعة. تعريف المفتاح الأساسي إلزامي. يجب أن يكون حقلًا قياسيًا من النوع الصحيح أو السلسلة ويتم تمييزه على أنه <code translate="no">is_primary=True</code>. اختياريًا، يمكنك تمكين <code translate="no">auto_id</code> للمفتاح الأساسي، والذي يتم تعيينه تلقائيًا بأرقام صحيحة تنمو بشكل متجانس كلما تم إدخال المزيد من البيانات في المجموعة.</p>
+<h3 id="Primary-Key" class="common-anchor-header">المفتاح الأساسي<button data-href="#Primary-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يعد حقل المفتاح الأساسي مكونًا أساسيًا في المخطط، حيث إنه يحدد بشكل فريد كل كيان داخل المجموعة. تعريف المفتاح الأساسي إلزامي. يجب أن يكون حقلًا قياسيًا من النوع الصحيح أو السلسلة ويتم تمييزه على أنه <code translate="no">is_primary=True</code>. اختياريًا، يمكنك تمكين <code translate="no">auto_id</code> للمفتاح الأساسي، والذي يتم تعيينه تلقائيًا بأرقام صحيحة تنمو بشكل متجانس كلما تم إدخال المزيد من البيانات في المجموعة.</p>
 <p>لمزيد من التفاصيل، راجع <a href="/docs/ar/primary-field.md">الحقل الأساسي والمعرف التلقائي</a>.</p>
-<h3 id="Partitioning" class="common-anchor-header">التقسيم</h3><p>لتسريع البحث، يمكنك اختياريًا تشغيل التقسيم. من خلال تعيين حقل قياسي محدد للتقسيم وتحديد معايير التصفية استنادًا إلى هذا الحقل أثناء عمليات البحث، يمكن أن يقتصر نطاق البحث بشكل فعال على الأقسام ذات الصلة فقط. تعمل هذه الطريقة على تحسين كفاءة عمليات الاسترجاع بشكل كبير من خلال تقليل نطاق البحث.</p>
+<h3 id="Partitioning" class="common-anchor-header">التقسيم<button data-href="#Partitioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتسريع البحث، يمكنك اختياريًا تشغيل التقسيم. من خلال تعيين حقل قياسي محدد للتقسيم وتحديد معايير التصفية استنادًا إلى هذا الحقل أثناء عمليات البحث، يمكن أن يقتصر نطاق البحث بشكل فعال على الأقسام ذات الصلة فقط. تعمل هذه الطريقة على تحسين كفاءة عمليات الاسترجاع بشكل كبير من خلال تقليل نطاق البحث.</p>
 <p>لمزيد من التفاصيل، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p>
-<h3 id="Analyzer" class="common-anchor-header">المحلل</h3><p>يعد المحلل أداة أساسية لمعالجة البيانات النصية وتحويلها. وتتمثل وظيفته الرئيسية في تحويل النص الخام إلى رموز وهيكلتها للفهرسة والاسترجاع. وهو يقوم بذلك عن طريق ترميز السلسلة، وإسقاط كلمات التوقف، وتجزئة الكلمات الفردية إلى رموز.</p>
+<h3 id="Analyzer" class="common-anchor-header">المحلل<button data-href="#Analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يعد المحلل أداة أساسية لمعالجة البيانات النصية وتحويلها. وتتمثل وظيفته الرئيسية في تحويل النص الخام إلى رموز وهيكلتها للفهرسة والاسترجاع. وهو يقوم بذلك عن طريق ترميز السلسلة، وإسقاط كلمات التوقف، وتجزئة الكلمات الفردية إلى رموز.</p>
 <p>لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحلِّل</a>.</p>
-<h3 id="Function" class="common-anchor-header">الوظيفة</h3><p>يسمح لك Milvus بتعريف الدوال المضمنة كجزء من المخطط لاشتقاق حقول معينة تلقائيًا. على سبيل المثال، يمكنك إضافة دالة BM25 مدمجة تقوم بإنشاء متجه متناثر من حقل <code translate="no">VARCHAR</code> لدعم البحث في النص الكامل. تعمل هذه الحقول المشتقة من الدالة على تبسيط المعالجة المسبقة وضمان بقاء المجموعة مكتفية بذاتها وجاهزة للاستعلام.</p>
+<h3 id="Function" class="common-anchor-header">الوظيفة<button data-href="#Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يسمح لك Milvus بتعريف الدوال المضمنة كجزء من المخطط لاشتقاق حقول معينة تلقائيًا. على سبيل المثال، يمكنك إضافة دالة BM25 مدمجة تقوم بإنشاء متجه متناثر من حقل <code translate="no">VARCHAR</code> لدعم البحث في النص الكامل. تعمل هذه الحقول المشتقة من الدالة على تبسيط المعالجة المسبقة وضمان بقاء المجموعة مكتفية بذاتها وجاهزة للاستعلام.</p>
 <p>لمزيد من التفاصيل، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">مثال من العالم الحقيقي<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -184,7 +304,7 @@ summary: >-
    <tr>
      <td><p>text_dense_vector (<code translate="no">FLOAT_VECTOR</code>)</p></td>
      <td><p>متجه كثيف تم إنشاؤه بواسطة نموذج تضمين النص</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/BaGlwzDmyiyVvVk6NurcFclInCd?from=from_parent_docs">بحث المتجه الأساسي</a></p></td>
+     <td><p><a href="/docs/ar/single-vector-search.md">بحث المتجه الأساسي</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -193,7 +313,7 @@ summary: >-
    <tr>
      <td><p>text_sparse_vector (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
      <td><p>متجه متناثر يتم إنشاؤه تلقائيًا بواسطة دالة BM25 المدمجة</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/RQTRwhOVPiwnwokqr4scAtyfnBf?from=from_parent_docs">بحث النص الكامل</a></p></td>
+     <td><p><a href="/docs/ar/full-text-search.md">بحث النص الكامل</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -201,7 +321,22 @@ summary: >-
    </tr>
 </table>
 <p>لمزيد من المعلومات حول المخططات وإرشادات مفصلة حول إضافة أنواع مختلفة من الحقول، يرجى الرجوع إلى <a href="/docs/ar/schema.md">شرح المخطط</a>.</p>
-<h3 id="Initialize-schema" class="common-anchor-header">تهيئة المخطط</h3><p>للبدء، نحتاج إلى إنشاء مخطط فارغ. تؤسس هذه الخطوة بنية أساسية لتحديد نموذج البيانات.</p>
+<h3 id="Initialize-schema" class="common-anchor-header">تهيئة المخطط<button data-href="#Initialize-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>للبدء، نحتاج إلى إنشاء مخطط فارغ. تؤسس هذه الخطوة بنية أساسية لتحديد نموذج البيانات.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -232,7 +367,22 @@ schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Skip this step using cURL</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-fields" class="common-anchor-header">إضافة حقول</h3><p>حالما يتم إنشاء المخطط، الخطوة التالية هي تحديد الحقول التي ستضم بياناتك. يرتبط كل حقل بأنواع البيانات والسمات الخاصة به.</p>
+<h3 id="Add-fields" class="common-anchor-header">إضافة حقول<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>حالما يتم إنشاء المخطط، الخطوة التالية هي تحديد الحقول التي ستضم بياناتك. يرتبط كل حقل بأنواع البيانات والسمات الخاصة به.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
@@ -400,7 +550,22 @@ schema.addField(AddFieldReq.builder()
 <li><p>مفتاح التقسيم: يتم تعيين <code translate="no">timestamp</code> كمفتاح تقسيم يسمح بالتصفية حسب الأقسام. قد يكون هذا</p></li>
 <li><p>محلل النص: يتم تطبيق محلل النص على حقلي السلسلة <code translate="no">title</code> و <code translate="no">text</code> لدعم مطابقة النص والبحث عن النص الكامل على التوالي.</p></li>
 </ul>
-<h3 id="Optional-Add-functions" class="common-anchor-header">(اختياري) إضافة دوال</h3><p>لتعزيز قدرات الاستعلام عن البيانات، يمكن دمج الدوال في المخطط. على سبيل المثال، يمكن إنشاء دالة لمعالجة متعلقة بحقول محددة.</p>
+<h3 id="Optional-Add-functions" class="common-anchor-header">(اختياري) إضافة دوال<button data-href="#Optional-Add-functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتعزيز قدرات الاستعلام عن البيانات، يمكن دمج الدوال في المخطط. على سبيل المثال، يمكن إنشاء دالة لمعالجة متعلقة بحقول محددة.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

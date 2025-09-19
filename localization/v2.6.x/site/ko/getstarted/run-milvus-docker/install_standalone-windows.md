@@ -56,8 +56,23 @@ title: Docker에서 Milvus 실행(Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 Docker 컨테이너로 설치할 수 있는 설치 스크립트를 제공합니다. Microsoft Windows에 Docker Desktop을 설치한 후에는 <strong>관리자</strong> 모드의 PowerShell 또는 Windows 명령 프롬프트에서 그리고 WSL 2에서 Docker CLI에 액세스할 수 있습니다. </p>
-<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">PowerShell 또는 Windows 명령 프롬프트에서</h3><p>PowerShell 또는 Windows 명령 프롬프트에 더 익숙한 경우, 명령 프롬프트는 다음과 같습니다.</p>
+    </button></h2><p>Milvus는 Docker 컨테이너로 설치하기 위한 설치 스크립트를 제공합니다. Microsoft Windows에 Docker Desktop을 설치한 후에는 <strong>관리자</strong> 모드의 PowerShell 또는 Windows 명령 프롬프트에서 그리고 WSL 2에서 Docker CLI에 액세스할 수 있습니다. </p>
+<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">PowerShell 또는 Windows 명령 프롬프트에서<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PowerShell 또는 Windows 명령 프롬프트에 더 익숙한 경우, 명령 프롬프트는 다음과 같습니다.</p>
 <ol>
 <li><p>마우스 오른쪽 버튼을 클릭하고 <strong>관리자 권한으로 실행을</strong> 선택하여 관리자 모드에서 Docker Desktop을 엽니다.</p></li>
 <li><p>설치 스크립트를 다운로드하여 <code translate="no">standalone.bat</code> 에 저장합니다.</p>
@@ -89,7 +104,22 @@ Delete successfully. # Data has been removed.​
 
 </code></pre></li>
 </ol>
-<h3 id="From-WSL-2​" class="common-anchor-header">WSL 2에서</h3><p>Windows에서 Linux 명령어와 셸 스크립트를 사용하여 Milvus를 시작하려면 WSL 2 명령어를 이미 설치했는지 확인하세요. WSL 2 명령어를 설치하는 방법에 대한 자세한 내용은 이 <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft 문서를</a> 참조하세요.</p>
+<h3 id="From-WSL-2​" class="common-anchor-header">WSL 2에서<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Windows에서 Linux 명령어와 셸 스크립트를 사용하여 Milvus를 시작하려면 WSL 2 명령어를 이미 설치했는지 확인하세요. WSL 2 명령어를 설치하는 방법에 대한 자세한 내용은 이 <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft 문서를</a> 참조하세요.</p>
 <ol>
 <li><p>WSL 2를 시작합니다.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -140,11 +170,26 @@ Delete successfully.​
         ></path>
       </svg>
     </button></h2><p>Microsoft Windows에 Docker Desktop을 설치한 후에는 <strong>관리자</strong> 모드의 PowerShell 또는 Windows 명령 프롬프트에서 Docker CLI에 액세스할 수 있습니다. PowerShell, Windows 명령 프롬프트 또는 WSL 2에서 Docker Compose를 실행하여 Milvus를 시작할 수 있습니다.</p>
-<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">PowerShell 또는 Windows 명령 프롬프트에서</h3><ol>
+<h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">PowerShell 또는 Windows 명령 프롬프트에서<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><p>마우스 오른쪽 버튼을 클릭하고 <strong>관리자 권한으로 실행을</strong> 선택하여 관리자 모드에서 Docker 데스크톱을 엽니다.</p></li>
 <li><p>PowerShell 또는 Windows 명령 프롬프트에서 다음 명령을 실행하여 Milvus Standalone용 Docker Compose 구성 파일을 다운로드하고 Milvus를 시작합니다.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.2/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -161,7 +206,22 @@ Creating milvus-standalone ... done​
 </ul></li>
 </ol>
 <p>WSL 2가 설치되어 있는 경우 Linux 버전의 Docker Compose 명령을 호출할 수도 있습니다.</p>
-<h3 id="From-WSL-2​" class="common-anchor-header">WSL 2에서</h3><p>이 절차는 Docker Compose를 사용하여 Linux 시스템에 Milvus를 설치하는 것과 유사합니다.</p>
+<h3 id="From-WSL-2​" class="common-anchor-header">WSL 2에서<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 절차는 Docker Compose를 사용하여 Linux 시스템에 Milvus를 설치하는 것과 유사합니다.</p>
 <ol>
 <li><p>WSL 2를 시작합니다.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -170,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Milvus 구성 파일을 다운로드합니다.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.2/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus를 시작합니다.</p>
@@ -197,7 +257,22 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header"><code translate="no">Docker Engine stopped</code> 오류는 어떻게 처리하나요?</h3><p>컴퓨터가 제대로 구성되지 않은 경우 Windows에 Docker Desktop을 설치한 후 <code translate="no">Docker Engine stopped</code> 오류가 발생할 수 있습니다. 이 경우 다음 사항을 확인해야 할 수 있습니다.</p>
+    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header"><code translate="no">Docker Engine stopped</code> 오류는 어떻게 처리하나요?<button data-href="#How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컴퓨터가 제대로 구성되지 않은 경우 Windows에 Docker Desktop을 설치한 후 <code translate="no">Docker Engine stopped</code> 오류가 발생할 수 있습니다. 이 경우 다음 사항을 확인해야 할 수 있습니다.</p>
 <ol>
 <li><p>가상화가 활성화되어 있는지 확인합니다.</p>
 <p>가상화가 활성화되어 있는지 여부는 <strong>작업 관리자의</strong> <strong>성능</strong> 탭에서 확인할 수 있습니다.</p>
@@ -235,7 +310,22 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
    </span> <span class="img-wrapper"> <span>관리자 권한으로 Docker Desktop 시작</span> </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">Milvus를 배포하는 동안 WSL 관련 문제가 발생하면 어떻게 처리할 수 있나요?</h3><p>WSL 2에서 Milvus를 실행하는 동안 WSL 관련 문제가 발생한 경우, 다음과 같이 WSL 2 기반 엔진을 사용하도록 Docker Desktop을 구성했는지 확인해야 할 수 있습니다.</p>
+<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">Milvus를 배포하는 동안 WSL 관련 문제가 발생하면 어떻게 처리할 수 있나요?<button data-href="#How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>WSL 2에서 Milvus를 실행하는 동안 WSL 관련 문제가 발생한 경우, 다음과 같이 WSL 2 기반 엔진을 사용하도록 Docker Desktop을 구성했는지 확인해야 할 수 있습니다.</p>
 <ol>
 <li><p><strong>설정</strong> &gt; <strong>일반에서</strong>"WSL 2 기반 엔진 사용"이 선택되어 있는지 확인합니다. </p>
 <p>
@@ -248,7 +338,22 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Docker Desktop 설정에서 WSL 2 배포를 선택합니다</span> </span>.</p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header"><code translate="no">Read config failed</code>Milvus 시작 시 다음과 같은 볼륨 관련 오류 메시지가 표시되는 경우 어떻게 처리할 수 있나요?</h3><p>
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header"><code translate="no">Read config failed</code>Milvus 시작 시 다음과 같은 볼륨 관련 오류 메시지가 표시되는 경우 어떻게 처리할 수 있나요?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Milvus 시작 시 구성 실패 오류 프롬프트 읽기</span> </span></p>

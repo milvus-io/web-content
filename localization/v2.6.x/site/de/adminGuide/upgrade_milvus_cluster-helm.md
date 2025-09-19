@@ -23,7 +23,7 @@ title: Upgrade des Milvus-Clusters mit Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Diese Anleitung beschreibt, wie Sie Ihren Milvus-Cluster mit Helm Chart von v2.5.x auf v2.6.0 aktualisieren.</p>
+    </button></h1><p>Diese Anleitung beschreibt, wie Sie Ihren Milvus-Cluster mit Helm Chart von v2.5.x auf v2.6.2 aktualisieren.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,14 +39,44 @@ title: Upgrade des Milvus-Clusters mit Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v260" class="common-anchor-header">Was ist neu in v2.6.0</h3><p>Das Upgrade von Milvus 2.5.x auf 2.6.0 bringt erhebliche Änderungen der Architektur mit sich:</p>
+    </button></h2><h3 id="Whats-new-in-v262" class="common-anchor-header">Was ist neu in v2.6.2<button data-href="#Whats-new-in-v262" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Das Upgrade von Milvus 2.5.x auf 2.6.2 bringt erhebliche Änderungen der Architektur mit sich:</p>
 <ul>
-<li><strong>Koordinatorenkonsolidierung</strong>: Die früheren separaten Koordinatoren (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) wurden zu einem einzigen konsolidiert. <code translate="no">mixCoord</code></li>
+<li><strong>Konsolidierung der Koordinatoren</strong>: Die bisherigen separaten Koordinatoren (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) wurden zu einem einzigen konsolidiert. <code translate="no">mixCoord</code></li>
 <li><strong>Neue Komponenten</strong>: Einführung des Streaming Node für eine verbesserte Datenverarbeitung</li>
 <li><strong>Entfernung von Komponenten</strong>: <code translate="no">indexNode</code> wurde entfernt und konsolidiert.</li>
 </ul>
 <p>Dieser Upgrade-Prozess gewährleistet eine ordnungsgemäße Migration auf die neue Architektur. Weitere Informationen zu den Änderungen an der Architektur finden Sie in der <a href="/docs/de/architecture_overview.md">Milvus-Architekturübersicht</a>.</p>
-<h3 id="Requirements" class="common-anchor-header">Anforderungen</h3><p><strong>Systemanforderungen:</strong></p>
+<h3 id="Requirements" class="common-anchor-header">Anforderungen<button data-href="#Requirements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>Systemanforderungen:</strong></p>
 <ul>
 <li>Helm-Version &gt;= 3.14.0</li>
 <li>Kubernetes-Version &gt;= 1.20.0</li>
@@ -54,12 +84,12 @@ title: Upgrade des Milvus-Clusters mit Helm Chart
 </ul>
 <p><strong>Kompatibilitätsanforderungen:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v2.6.0 <strong>kompatibel</strong>. Direkte Upgrades von Release Candidates werden nicht unterstützt.</li>
-<li>Wenn Sie derzeit v2.6.0-rc1 verwenden und Ihre Daten erhalten müssen, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Unterstützung bei der Migration.</li>
-<li>Vor dem Upgrade auf v2.6.0 <strong>müssen</strong> Sie ein Upgrade auf v2.5.16 oder höher mit aktivierter <code translate="no">mixCoordinator</code> durchführen.</li>
+<li>Milvus v2.6.0-rc1 ist <strong>nicht</strong> mit v2.6.2 <strong>kompatibel</strong>. Direkte Upgrades von Release Candidates werden nicht unterstützt.</li>
+<li>Wenn Sie derzeit v2.6.0-rc1 einsetzen und Ihre Daten erhalten müssen, finden Sie in <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">diesem Community-Leitfaden</a> Unterstützung bei der Migration.</li>
+<li>Vor dem Upgrade auf v2.6.2 <strong>müssen</strong> Sie ein Upgrade auf v2.5.16 oder höher mit aktivierter <code translate="no">mixCoordinator</code> durchführen.</li>
 </ul>
 <div class="alert note">
-Seit Milvus Helm Chart Version 4.2.21 haben wir pulsar-v3.x Chart als Abhängigkeit eingeführt. Aus Gründen der Abwärtskompatibilität aktualisieren Sie bitte Ihren Helm auf v3.14 oder eine spätere Version und stellen Sie sicher, dass Sie die Option <code translate="no">--reset-then-reuse-values</code> hinzufügen, wenn Sie <code translate="no">helm upgrade</code> verwenden.</div>
+Seit Milvus Helm Chart Version 4.2.21 haben wir pulsar-v3.x Chart als Abhängigkeit eingeführt. Um die Abwärtskompatibilität zu gewährleisten, aktualisieren Sie bitte Ihren Helm auf v3.14 oder eine spätere Version und fügen Sie die Option <code translate="no">--reset-then-reuse-values</code> hinzu, wenn Sie <code translate="no">helm upgrade</code> verwenden.</div>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Prozess<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,17 +105,47 @@ Seit Milvus Helm Chart Version 4.2.21 haben wir pulsar-v3.x Chart als Abhängigk
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Helm-Chart" class="common-anchor-header">Schritt 1: Helm-Diagramm aktualisieren</h3><p>Aktualisieren Sie zunächst Ihr Milvus Helm-Diagramm auf Version 5.0.0:</p>
+    </button></h2><h3 id="Step-1-Upgrade-Helm-Chart" class="common-anchor-header">Schritt 1: Helm-Diagramm aktualisieren<button data-href="#Step-1-Upgrade-Helm-Chart" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Aktualisieren Sie zunächst Ihr Milvus Helm-Diagramm auf Version 5.0.0:</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Das Milvus Helm Charts Repo unter <code translate="no">https://milvus-io.github.io/milvus-helm/</code> wurde archiviert. Verwenden Sie das neue Repo <code translate="no">https://zilliztech.github.io/milvus-helm/</code> für Diagrammversionen 4.0.31 und später.</div>
-<p>So prüfen Sie die Kompatibilität der Helm-Chart-Version mit den Milvus-Versionen:</p>
+<p>So überprüfen Sie die Kompatibilität der Helm-Chart-Version mit den Milvus-Versionen:</p>
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <p>Dieser Leitfaden geht davon aus, dass Sie die neueste Version installieren. Wenn Sie eine bestimmte Version installieren müssen, geben Sie den Parameter <code translate="no">--version</code> entsprechend an.</p>
-<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">Schritt 2: Upgrade auf v2.5.16 mit mixCoordinator</h3><p>Überprüfen Sie, ob Ihr Cluster derzeit getrennte Koordinatoren verwendet:</p>
+<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">Schritt 2: Upgrade auf v2.5.16 mit mixCoordinator<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Überprüfen Sie, ob Ihr Cluster derzeit getrennte Koordinatoren verwendet:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>Wenn Sie separate Coordinator-Pods (<code translate="no">datacoord</code>, <code translate="no">querycoord</code>, <code translate="no">indexcoord</code>) sehen, aktualisieren Sie auf v2.5.16 und aktivieren Sie <code translate="no">mixCoordinator</code>:</p>
@@ -107,13 +167,28 @@ Das Milvus Helm Charts Repo unter <code translate="no">https://milvus-io.github.
   --version=4.2.58
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<p>Warten Sie, bis das Upgrade abgeschlossen ist:</p>
+<p>Warten Sie den Abschluss des Upgrades ab:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v260" class="common-anchor-header">Schritt 3: Upgrade auf v2.6.0</h3><p>Sobald v2.5.16 erfolgreich mit <code translate="no">mixCoordinator</code> läuft, führen Sie ein Upgrade auf v2.6.0 durch:</p>
+<h3 id="Step-3-Upgrade-to-v262" class="common-anchor-header">Schritt 3: Upgrade auf v2.6.2<button data-href="#Step-3-Upgrade-to-v262" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sobald v2.5.16 erfolgreich mit <code translate="no">mixCoordinator</code> läuft, führen Sie ein Upgrade auf v2.6.2 durch:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.0&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.2&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span> \
   --reset-then-reuse-values \

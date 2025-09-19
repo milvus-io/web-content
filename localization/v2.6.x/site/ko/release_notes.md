@@ -19,6 +19,145 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 알아보세요! 이 페이지에는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항이 요약되어 있습니다. 이 섹션에서 v2.6.0 이후 출시된 각 버전에 대한 릴리스 노트를 확인할 수 있습니다. 이 페이지를 정기적으로 방문하여 업데이트에 대해 알아보는 것이 좋습니다.</p>
+<h2 id="v262" class="common-anchor-header">v2.6.2<button data-href="#v262" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>릴리스 날짜: 2025년 9월 19일</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Milvus 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.6.2의 출시를 발표하게 되어 기쁩니다! 이번 업데이트에는 강력한 새 기능, 대폭적인 성능 향상, 중요한 수정 사항이 포함되어 있어 시스템을 더욱 안정적이고 프로덕션에 바로 사용할 수 있습니다. 주요 기능으로는 업서트를 통한 부분 필드 업데이트, 동적 필드 필터링을 가속화하기 위한 JSON 파쇄, 더 빠른 좋아요 쿼리를 위한 NGram 인덱싱, 기존 컬렉션의 보다 유연한 스키마 진화 등이 있습니다. 커뮤니티 피드백을 바탕으로 구축된 이번 릴리스는 실제 배포를 위한 더욱 강력한 기반을 제공하며, 모든 사용자가 이러한 개선 사항을 활용할 수 있도록 업그레이드하는 것이 좋습니다.</p>
+<h3 id="Features" class="common-anchor-header">주요 기능<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>동적 필드 필터링을 가속화하기 위해 JSON 파쇄에 대한 지원이 추가되었습니다. 자세한 내용은 <a href="/docs/ko/json-shredding.md">JSON 파쇄를</a> 참조하세요.</li>
+<li>유사 작업 가속화를 위해 NGRAM 인덱스에 대한 지원이 추가되었습니다. 자세한 내용은 <a href="/docs/ko/ngram.md">NGRAM을</a> 참조하세요.</li>
+<li>업서트 API로 부분 필드 업데이트에 대한 지원이 추가되었습니다. 자세한 내용은 <a href="/docs/ko/upsert-entities.md">업서트 엔티티를</a> 참조하세요.</li>
+<li>부스트 기능에 대한 지원이 추가되었습니다. 자세한 내용은 <a href="/docs/ko/boost-ranker.md">부스트 랭커를</a> 참고하세요.</li>
+<li>JSON 필드 및 동적 필드별 그룹화 지원 추가<a href="https://github.com/milvus-io/milvus/pull/43203">(#43203</a>)</li>
+<li>기존 컬렉션에서 동적 스키마 활성화 지원 추가<a href="https://github.com/milvus-io/milvus/pull/44151">(#44151</a>)</li>
+<li>컬렉션을 해제하지 않고 인덱스를 삭제하는 기능 지원 추가<a href="https://github.com/milvus-io/milvus/pull/42941">(#42941</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">개선 사항<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>[StorageV2] 로그 파일 크기를 압축된 크기로 변경<a href="https://github.com/milvus-io/milvus/pull/44402">(#44402</a>).</li>
+<li>[StorageV2] 로드 정보에 자식 필드 추가<a href="https://github.com/milvus-io/milvus/pull/44384">(#44384</a>)</li>
+<li>[StorageV2] 시스템 그룹에 파티션 및 클러스터링 키 포함 지원 추가<a href="https://github.com/milvus-io/milvus/pull/44372">(#44372</a>)</li>
+<li>압축 작업 시간 초과 제거<a href="https://github.com/milvus-io/milvus/pull/44277">(#44277</a>)</li>
+<li>[StorageV2] Azure로 빌드 활성화<a href="https://github.com/milvus-io/milvus/pull/44177">(#44177</a>)</li>
+<li>[StorageV2] 로직 사용량 추정을 위해 그룹 정보 활용<a href="https://github.com/milvus-io/milvus/pull/44356">(#44356</a>)</li>
+<li>[StorageV2] 사용량 추정을 위해 그룹 분할 정보 활용<a href="https://github.com/milvus-io/milvus/pull/44338">(#44338</a>)</li>
+<li>[StorageV2] 저장된 컬럼 그룹으로 인한 압축 결과<a href="https://github.com/milvus-io/milvus/pull/44327">(#44327</a>)</li>
+<li>[StorageV2] 크기 기반 분할 정책에 대한 구성 추가<a href="https://github.com/milvus-io/milvus/pull/44301">(#44301</a>)</li>
+<li>[StorageV2] 스키마 기반 및 크기 기반 분할 정책에 대한 지원 추가<a href="https://github.com/milvus-io/milvus/pull/44282">(#44282</a>).</li>
+<li>[StorageV2] 구성 가능한 분할 정책 추가<a href="https://github.com/milvus-io/milvus/pull/44258">(#44258</a>)</li>
+<li>[CachingLayer] 더 많은 메트릭 및 구성 추가<a href="https://github.com/milvus-io/milvus/pull/44276">(#44276</a>)</li>
+<li>세그먼트를 로드하기 전에 모든 인덱스가 준비될 때까지 기다리는 지원 추가<a href="https://github.com/milvus-io/milvus/pull/44313">(#44313</a>).</li>
+<li>리스코어 노드에 대한 내부 코어 지연 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/44010">(#44010</a>).</li>
+<li>KV 매개변수 인쇄 시 최적화된 액세스 로그 형식<a href="https://github.com/milvus-io/milvus/pull/43742">(#43742</a>)</li>
+<li>덤프 스냅샷 배치 크기를 수정하는 구성 추가<a href="https://github.com/milvus-io/milvus/pull/44215">(#44215</a>).</li>
+<li>압축 작업 정리 간격 단축<a href="https://github.com/milvus-io/milvus/pull/44207">(#44207</a>)</li>
+<li>여러 필드를 지원하도록 병합 정렬 개선<a href="https://github.com/milvus-io/milvus/pull/44191">(#44191</a>)<a href="https://github.com/milvus-io/milvus/pull/43994">(#43994</a>)</li>
+<li>계층형 인덱스에 대한 로드 리소스 추정 추가<a href="https://github.com/milvus-io/milvus/pull/44171">(#44171</a>)</li>
+<li>중복 제거 사례에 대한 자동 인덱스 구성 추가<a href="https://github.com/milvus-io/milvus/pull/44186">(#44186</a>)</li>
+<li>이름에 사용자 정의 문자를 허용하는 구성 추가(<a href="https://github.com/milvus-io/milvus/pull/44063">#44063</a>)</li>
+<li>스트리밍 서비스용 cchannel 지원 추가<a href="https://github.com/milvus-io/milvus/pull/44143">(#44143</a>)</li>
+<li>동시 삭제를 방지하기 위한 뮤텍스 및 범위 검사 추가<a href="https://github.com/milvus-io/milvus/pull/44128">(#44128</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>무차별 대입과 인덱스 간에 존재하는 표현식의 동작을 정렬했습니다<a href="https://github.com/milvus-io/milvus/pull/44030">(#44030</a>).</li>
+<li>삭제된 컬렉션으로 이름 변경 시 발생하는 오류 수정<a href="https://github.com/milvus-io/milvus/pull/44436">(#44436</a>)</li>
+<li>[StorageV2] 자식 필드 길이 확인<a href="https://github.com/milvus-io/milvus/pull/44405">(#44405</a>)</li>
+<li>[StorageV2] 기본적으로 Azure 켜기<a href="https://github.com/milvus-io/milvus/pull/44377">(#44377</a>)</li>
+<li>풀링 데이터노드에서 L0 압축의 업로드 경로 수정<a href="https://github.com/milvus-io/milvus/pull/44374">(#44374</a>)</li>
+<li>데이터베이스 암호화가 활성화된 경우 이름 변경이 허용되지 않음<a href="https://github.com/milvus-io/milvus/pull/44225">(#44225</a>)</li>
+<li>dynamicfield.enable 속성 삭제를 허용하지 않음<a href="https://github.com/milvus-io/milvus/pull/44335">(#44335</a>).</li>
+<li>사전 할당된 ID가 유효하지 않은 경우 작업을 실패로 표시<a href="https://github.com/milvus-io/milvus/pull/44350">(#44350</a>)</li>
+<li>PK 비교 표현식에서 MVCC 검사 생략<a href="https://github.com/milvus-io/milvus/pull/44353">(#44353</a>)</li>
+<li>통계에 대한 json_contains 버그 수정<a href="https://github.com/milvus-io/milvus/pull/44325">(#44325</a>).</li>
+<li>쿼리 노드 및 스트리밍 노드에 대한 초기화 파일 시스템 검사 추가<a href="https://github.com/milvus-io/milvus/pull/44360">(#44360</a>).</li>
+<li>세그먼트 가비지 수집 시 빈 압축 대상 수정<a href="https://github.com/milvus-io/milvus/pull/44270">(#44270</a>).</li>
+<li>타임스탬프 인덱스 초기화 시 경합 조건 수정<a href="https://github.com/milvus-io/milvus/pull/44317">(#44317</a>).</li>
+<li>패닉을 방지하기 위해 arraydata가 nil인지 확인<a href="https://github.com/milvus-io/milvus/pull/44332">(#44332</a>).</li>
+<li>중첩된 객체에 대한 빌드 JSON 통계 버그 수정<a href="https://github.com/milvus-io/milvus/pull/44303">(#44303</a>).</li>
+<li>여러 JSON 필드에 의한 mmap 재작성 방지<a href="https://github.com/milvus-io/milvus/pull/44299">(#44299</a>)</li>
+<li>유효한 데이터 형식 통합<a href="https://github.com/milvus-io/milvus/pull/44296">(#44296</a>)</li>
+<li>웹 UI에서 임베딩/랭크 재조정 공급자의 자격 증명 숨기기<a href="https://github.com/milvus-io/milvus/pull/44275">(#44275</a>)</li>
+<li>풀링 데이터노드에서 통계 로그 경로 수정<a href="https://github.com/milvus-io/milvus/pull/44288">(#44288</a>)</li>
+<li>IDF 오라클 경로 수정<a href="https://github.com/milvus-io/milvus/pull/44266">(#44266</a>)</li>
+<li>복구 중인 v채널이 없는 경우 복구 스냅샷 체크포인트 사용<a href="https://github.com/milvus-io/milvus/pull/44246">(#44246</a>)</li>
+<li>JSON 통계의 제한된 열 번호<a href="https://github.com/milvus-io/milvus/pull/44233">(#44233</a>)</li>
+<li>로드 리소스 카운트 n-그램 인덱스<a href="https://github.com/milvus-io/milvus/pull/44237">(#44237</a>)</li>
+<li>비어 있지 않은 검색 결과에서 메트릭 유형 추론<a href="https://github.com/milvus-io/milvus/pull/44222">(#44222</a>)</li>
+<li>다중 세그먼트 쓰기가 하나의 세그먼트만 쓰도록 수정<a href="https://github.com/milvus-io/milvus/pull/44256">(#44256</a>)</li>
+<li>범위를 벗어난 병합 정렬 수정<a href="https://github.com/milvus-io/milvus/pull/44230">(#44230</a>)</li>
+<li>BM25 함수 실행 전 UTF-8 검사 추가<a href="https://github.com/milvus-io/milvus/pull/44220">(#44220</a>)</li>
+<li>이전 세션이 존재할 경우 재시도<a href="https://github.com/milvus-io/milvus/pull/44208">(#44208</a>)</li>
+<li>데이터노드 OOM을 방지하기 위해 Kafka 버퍼 크기 제한 추가<a href="https://github.com/milvus-io/milvus/pull/44106">(#44106</a>).</li>
+<li>잠금 가드 범위 확장을 통한 패닉 수정<a href="https://github.com/milvus-io/milvus/pull/44130">(#44130</a>)</li>
+<li>스키마 변경 시 증가하는 세그먼트가 플러시되지 않는 문제 수정<a href="https://github.com/milvus-io/milvus/pull/44412">(#44412</a>)</li>
+<li>[StorageV2] IO 오류 처리<a href="https://github.com/milvus-io/milvus/pull/44255">(#44255</a>)</li>
+<li>탄티비 인덱스 경로가 존재하지 않는 경우 패닉 방지<a href="https://github.com/milvus-io/milvus/pull/44135">(#44135</a>)</li>
+</ul>
 <h2 id="v261" class="common-anchor-header">v2.6.1<button data-href="#v261" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -248,9 +387,9 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h3><p>2.6부터 Milvus는 성능, 확장성 및 사용 편의성을 개선하기 위한 중요한 아키텍처 변경 사항을 도입했습니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">Milvus 아키텍처 개요를</a> 참조하세요.</p>
-<h4 id="Streaming-Node-GA" class="common-anchor-header">스트리밍 노드(GA)</h4><p>이전 버전에서는 스트리밍 데이터가 프록시에 의해 WAL에 쓰여지고 쿼리 노드와 데이터 노드에 의해 읽혀졌습니다. 이 아키텍처는 쓰기 측에서 합의를 달성하기 어려웠고 읽기 측에서 복잡한 로직이 필요했습니다. 또한 쿼리 위임자가 쿼리 노드에 위치하여 확장성을 저해했습니다. Milvus 2.5.0에서는 2.6.0 버전에서 GA가 되는 스트리밍 노드가 도입되었습니다. 이 구성 요소는 이제 모든 샤드 수준의 WAL 읽기/쓰기 작업을 담당하며 쿼리 위임자 역할도 수행하여 앞서 언급한 문제를 해결하고 새로운 최적화를 가능하게 합니다.</p>
+<h4 id="Streaming-Node-GA" class="common-anchor-header">스트리밍 노드(GA)</h4><p>이전 버전에서는 스트리밍 데이터가 프록시에 의해 WAL에 쓰여지고 쿼리노드와 데이터노드에 의해 읽혀졌습니다. 이 아키텍처는 쓰기 측에서 합의를 달성하기 어려웠고 읽기 측에서 복잡한 로직이 필요했습니다. 또한 쿼리 위임자가 쿼리 노드에 위치하여 확장성을 저해했습니다. Milvus 2.5.0에서는 2.6.0 버전에서 GA가 되는 스트리밍 노드가 도입되었습니다. 이 구성 요소는 이제 모든 샤드 수준의 WAL 읽기/쓰기 작업을 담당하며 쿼리 위임자 역할도 수행하여 앞서 언급한 문제를 해결하고 새로운 최적화를 가능하게 합니다.</p>
 <p><strong>중요 업그레이드 공지</strong>: 스트리밍 노드는 아키텍처가 크게 변경되었으므로 이전 버전에서 Milvus 2.6.0-rc1로 직접 업그레이드하는 것은 지원되지 않습니다.</p>
-<h4 id="Woodpecker-Native-WAL" class="common-anchor-header">딱따구리 네이티브 WAL</h4><p>Milvus는 이전에 WAL을 위해 Kafka 또는 Pulsar와 같은 외부 시스템에 의존했습니다. 이러한 시스템은 기능적으로는 훌륭했지만, 특히 중소규모 배포의 경우 상당한 운영 복잡성과 리소스 오버헤드가 추가되었습니다. Milvus 2.6에서는 이러한 시스템이 특수 목적의 클라우드 네이티브 WAL 시스템인 Woodpecker로 대체됩니다. 우드페커는 오브젝트 스토리지용으로 설계되어 로컬 및 오브젝트 스토리지 기반 제로 디스크 모드를 모두 지원하며, 운영을 간소화하는 동시에 성능과 확장성을 개선합니다.</p>
+<h4 id="Woodpecker-Native-WAL" class="common-anchor-header">딱따구리 네이티브 WAL</h4><p>Milvus는 이전에 WAL을 위해 Kafka 또는 Pulsar와 같은 외부 시스템에 의존했습니다. 이러한 시스템은 기능적으로는 훌륭했지만, 특히 중소규모 배포의 경우 상당한 운영 복잡성과 리소스 오버헤드를 추가했습니다. Milvus 2.6에서는 이러한 시스템이 특수 목적의 클라우드 네이티브 WAL 시스템인 Woodpecker로 대체됩니다. 우드페커는 오브젝트 스토리지용으로 설계되어 로컬 및 오브젝트 스토리지 기반 제로 디스크 모드를 모두 지원하며, 운영을 간소화하는 동시에 성능과 확장성을 개선합니다.</p>
 <h4 id="DataNode-and-IndexNode-Merge" class="common-anchor-header">데이터노드와 인덱스노드 병합</h4><p>Milvus 2.6에서는 압축, 대량 가져오기, 통계 수집, 인덱스 구축과 같은 작업이 이제 통합된 스케줄러로 관리됩니다. 이전에 데이터 노드에서 처리하던 데이터 지속성 기능이 스트리밍 노드로 옮겨졌습니다. 배포와 유지 관리를 간소화하기 위해 IndexNode와 DataNode가 단일 DataNode 구성 요소로 병합되었습니다. 이제 이 통합 노드가 이러한 모든 중요한 작업을 실행하여 운영 복잡성을 줄이고 리소스 활용을 최적화합니다.</p>
 <h4 id="Coordinator-Merge-into-MixCoord" class="common-anchor-header">코디네이터를 MixCoord로 병합</h4><p>별도의 RootCoord, QueryCoord, DataCoord 모듈을 사용한 이전 설계에서는 모듈 간 통신에 복잡성이 발생했습니다. 시스템 설계를 단순화하기 위해 이러한 구성 요소는 MixCoord라는 단일 통합 코디네이터로 병합되었습니다. 이러한 통합은 네트워크 기반 통신을 내부 함수 호출로 대체하여 분산 프로그래밍의 복잡성을 줄여 시스템 운영의 효율성을 높이고 개발 및 유지보수를 간소화합니다.</p>
 <h3 id="Key-Features" class="common-anchor-header">주요 기능<button data-href="#Key-Features" class="anchor-icon" translate="no">

@@ -432,9 +432,28 @@
           },
           {
             "label": "JSONフィールド",
-            "id": "use-json-fields.md",
+            "id": "json-field",
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "JSONフィールドの概要",
+                "id": "json-field-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "JSONインデックス",
+                "id": "json-indexing.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "JSONシュレッダー",
+                "id": "json-shredding.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
             "label": "配列フィールド",
@@ -524,6 +543,12 @@
                     "id": "icu-tokenizer.md",
                     "order": 4,
                     "children": []
+                  },
+                  {
+                    "label": "言語識別子",
+                    "id": "language-identifier.md",
+                    "order": 5,
+                    "children": []
                   }
                 ]
               },
@@ -604,6 +629,12 @@
                 "label": "多言語アナライザー",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "ユースケースに適したアナライザーを選ぶ",
+                "id": "choose-the-right-analyzer-for-your-use-case.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -790,6 +821,12 @@
                 "id": "inverted.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "NGRAM",
+                "id": "ngram.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -936,7 +973,7 @@
             "children": []
           },
           {
-            "label": "Elasticsearchクエリからmilvusへ",
+            "label": "Elasticsearchからmilvusへのクエリ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 10,
             "children": []
@@ -1048,10 +1085,16 @@
                 "children": []
               },
               {
+                "label": "ブースト・ランカー",
+                "id": "boost-ranker.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "崩壊ランカー",
                 "id": "decay-ranker",
                 "isMenu": true,
-                "order": 2,
+                "order": 3,
                 "children": [
                   {
                     "label": "ディケイ・ランカーの概要",
@@ -1088,7 +1131,7 @@
               {
                 "label": "モデルランカー",
                 "id": "model-ranker",
-                "order": 3,
+                "order": 4,
                 "isMenu": true,
                 "children": [
                   {
@@ -2654,7 +2697,7 @@
             "children": []
           },
           {
-            "label": "レコメンダー・システム",
+            "label": "推薦システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

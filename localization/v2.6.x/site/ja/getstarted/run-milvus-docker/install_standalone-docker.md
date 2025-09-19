@@ -63,10 +63,10 @@ title: DockerでMilvusを起動する(Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.0の新機能</strong></p>
+<p><strong>v2.6.2の新機能</strong></p>
 <ul>
 <li><strong>ストリーミングノード</strong>：データ処理機能の強化</li>
-<li><a href="/docs/ja/use-woodpecker.md">Woodpecker</a><strong>MQ</strong>: メンテナンスのオーバーヘッドを削減した改良版メッセージキュー。</li>
+<li><a href="/docs/ja/use-woodpecker.md">Woodpecker</a><strong>MQ</strong>: メンテナンスのオーバーヘッドを削減した改良型メッセージキュー。</li>
 <li><strong>最適化されたアーキテクチャ</strong>：パフォーマンス向上のためのコンポーネントの統合</li>
 </ul>
 <p>常に最新のスクリプトをダウンロードし、最新の設定とアーキテクチャの改善を確認してください。</p>
