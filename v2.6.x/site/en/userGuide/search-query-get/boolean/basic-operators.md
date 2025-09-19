@@ -82,7 +82,7 @@ Range operators help filter data based on specific sets or ranges of values.
 
 - `IN`: Used to match values within a specific set or range.
 
-- `LIKE`: Used to match a pattern (mostly for text fields).
+- `LIKE`: Used to match a pattern (mostly for text fields).  Milvus allows you to build an `NGRAM` index on VARCHAR or JSON fields to accelerate text queries. For details, refer to [NGRAM](ngram.md).
 
 ### Example 1: Using `IN` to Match Multiple Values
 
@@ -286,7 +286,7 @@ data = [
 ]
 ```
 
-**Example 1: Retrieve entities where `metadata` is null**
+**Example 1: Retrieve entities where metadata is null**
 
 To find entities where the `metadata` field is either missing or explicitly set to None:
 
@@ -300,7 +300,7 @@ filter = 'metadata IS NULL'
 # ]
 ```
 
-**Example 2: Retrieve entities where `metadata` is not null**
+**Example 2: Retrieve entities where metadata is not null**
 
 To find entities where the `metadata` field is not null:
 
@@ -352,7 +352,7 @@ data = [
 ]
 ```
 
-**Example 1: Retrieve entities where `tags` is null**
+**Example 1: Retrieve entities where tags is null**
 
 To retrieve entities where the `tags` field is either missing or explicitly set to `None`:
 
@@ -366,7 +366,7 @@ filter = 'tags IS NULL'
 # ]
 ```
 
-**Example 2: Retrieve entities where `tags` is not null**
+**Example 2: Retrieve entities where tags is not null**
 
 To retrieve entities where the `tags` field is not null:
 
@@ -399,3 +399,10 @@ filter = 'history_temperatures[0] > 30'
 ## Conclusion
 
 Milvus offers a range of basic operators that give you flexibility in filtering and querying your data. By combining comparison, range, arithmetic, and logical operators, you can create powerful filter expressions to narrow down your search results and retrieve the data you need efficiently.
+
+## FAQ
+
+**Is there a limit to the length of the match value list in filter conditions (e.g., filter='color in ["red", "green", "blue"]')? What should I do if the list is too long?**
+
+Zilliz Cloud does not impose a length limit on the match value list in filter conditions. However, an excessively long list can significantly impact query performance.
+If your filter condition includes a long list of match values or a complex expression with many elements, we recommend using [Filter Templating](filtering-templating.md) to improve query performance.

@@ -48,7 +48,7 @@ Of course, if the number of QueryNodes in the cluster changes, the Milvus will c
 
 <div class="alert note">
 
-All code samples on this page are in PyMilvus 2.6.0. Upgrade your PyMilvus installation before running them.
+All code samples on this page are in PyMilvus 2.6.2. Upgrade your PyMilvus installation before running them.
 
 </div>
 

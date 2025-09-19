@@ -1,12 +1,14 @@
 ---
 id: string.md
 title: "String Field"
-summary: "In Milvus, VARCHAR is the data type used for storing string data. When you define a VARCHAR field, two parameters are mandatory:"
+summary: "In Milvus, VARCHAR is the data type used for storing string data."
 ---
 
 # String Field
 
-In Milvus, `VARCHAR` is the data type used for storing string data. When you define a `VARCHAR` field, two parameters are mandatory:
+In Milvus, `VARCHAR` is the data type used for storing string data. 
+
+When you define a `VARCHAR` field, two parameters are mandatory:
 
 - Set the `datatype` to `DataType.VARCHAR`.
 
@@ -234,6 +236,12 @@ export schema="{
 Indexing helps improve search and query performance. In Milvus, indexing is mandatory for vector fields but optional for scalar fields.
 
 The following example creates indexes on the vector field `embedding` and the scalar field `varchar_field1`, both using the `AUTOINDEX` index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to [Index Explained](index-explained.md).
+
+<div class="alert note">
+
+You can also builds an `NGRAM` index to accelerate `LIKE` filtering on `VARCHAR` fields. For details, refer to [NGRAM](ngram.md).
+
+</div>
 
 <div class="multipleCode">
     <a href="#python">Python</a>

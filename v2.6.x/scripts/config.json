@@ -421,6 +421,56 @@
                         "alt_text": "scann"
                     },
                     {
+                        "token": "NZcFw5PuxhQcl1bUG60cS54QnMu",
+                        "type": "board",
+                        "alt_text": "language-detection-workflow"
+                    },
+                    {
+                        "token": "JwMZwIYUwhbSZ4bjhxcc1PfNnvx",
+                        "type": "board",
+                        "alt_text": "analyzer-workflow"
+                    },
+                    {
+                        "token": "QZqlwniNDhE82ZbzE09cd7uHnWd",
+                        "type": "board",
+                        "alt_text": "build-ngram-index"
+                    },
+                    {
+                        "token": "BVPlwaN7Lh7UZibGopwcAcYQn1d",
+                        "type": "board",
+                        "alt_text": "build-ngram-index-2"
+                    },
+                    {
+                        "token": "XKwRwOPv6hqzpTb3ue8cbM8WnGe",
+                        "type": "board",
+                        "alt_text": "accelerate-queries"
+                    },
+                    {
+                        "token": "Q3LawAQIKht1FKbsM3EcoQAHnvc",
+                        "type": "board",
+                        "alt_text": "upsert-in-override-mode"
+                    },
+                    {
+                        "token": "NZNKwxm9ahmi87b487TcuCrNn4c",
+                        "type": "board",
+                        "alt_text": "upsert-in-merge-mode"
+                    },
+                    {
+                        "token": "Hq0awfjC7h0Ty3bvsUEcasOHncb",
+                        "type": "board",
+                        "alt_text": "boost-ranker-mechanism"
+                    },
+                    {
+                        "token": "FcrMw6pY8h2jE8b2PQ3cp4fTnch",
+                        "type": "board",
+                        "alt_text": "json-shredding-flow"
+                    },
+                    {
+                        "token": "TfyKbOUpdoPiFwxlux0cHLzKnGh",
+                        "type": "image",
+                        "alt_text": "birdwatcher-output"
+                    },
+                    {
                         "token": "A19NwPlGIh1YrGbSBZKcNKz0nhd",
                         "type": "board",
                         "alt_text": "how-inverted-index-works"
