@@ -8,6 +8,41 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.18
+
+Release date: September 19, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.18          | 2.5.16            | 2.5.12              | 2.5.13           |
+
+We were excited to announce Milvus 2.5.18! This release delivered critical performance enhancements and stability improvements. We strongly encouraged all users to upgrade to benefit from these optimizations.
+
+### Improvements
+
+- Removed timeout for compaction task ([#44278](https://github.com/milvus-io/milvus/pull/44278))
+- Forbade panic when tantivy index path did not exist ([#44136](https://github.com/milvus-io/milvus/pull/44136))
+- Updated knowhere version ([#44292](https://github.com/milvus-io/milvus/pull/44292))
+- Added param to modify delete snapshot size ([#44213](https://github.com/milvus-io/milvus/pull/44213))
+- Added mutex and range check to prevent concurrent delete ([#44202](https://github.com/milvus-io/milvus/pull/44202))
+- Removed name check for alter index task ([#44056](https://github.com/milvus-io/milvus/pull/44056))
+- Returned collection metadata from cache ([#43911](https://github.com/milvus-io/milvus/pull/43911))
+- Supported expr result cache ([#43882](https://github.com/milvus-io/milvus/pull/43882))
+- Made build ratio of interim index configurable ([#43938](https://github.com/milvus-io/milvus/pull/43938))
+- Used function def determine field IsFunctionOutput only ([#44009](https://github.com/milvus-io/milvus/pull/44009))
+- Used rlock for list privilege groups ([#44006](https://github.com/milvus-io/milvus/pull/44006))
+- Added param item forcing all indices ready for segment ([#44329](https://github.com/milvus-io/milvus/pull/44329))
+
+### Bug fixes
+
+- Fixed a bug that caused incorrect metrics for compaction tasks ([#44280](https://github.com/milvus-io/milvus/pull/44280))
+- Resolved an issue with invalid pre-allocated segment IDs during compaction ([#44351](https://github.com/milvus-io/milvus/pull/44351))
+- Corrected a bug where GetCompactionTo incorrectly returned empty results during clustering compaction ([#44271](https://github.com/milvus-io/milvus/pull/44271))
+- Added a nil check for arraydata to prevent a system panic ([#44333](https://github.com/milvus-io/milvus/pull/44333))
+- Implemented a UTF-8 check in BM25FunctionRunner to handle non-UTF-8 strings ([#44221](https://github.com/milvus-io/milvus/pull/44221))
+- Expanded the lock range for dump\_snapshot to prevent coredumps during delete operations ([#44131](https://github.com/milvus-io/milvus/pull/44131))
+- Invalidated the proxy cache for alias creation to ensure updates were immediately reflected ([#44073](https://github.com/milvus-io/milvus/pull/44073))
+
 ## v2.5.17
 
 Release date: August 21, 2025
