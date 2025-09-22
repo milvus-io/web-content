@@ -60,7 +60,7 @@ title: تثبيت Milvus Python SDK
     </button></h2><p>يتوفر PyMilvus في <a href="https://pypi.org/project/pymilvus/">فهرس حزمة Python</a>.</p>
 <div class="alert note">
 يوصى بتثبيت إصدار PyMilvus الذي يطابق إصدار خادم Milvus الذي قمت بتثبيته. لمزيد من المعلومات، راجع <a href="/docs/ar/v2.5.x/release_notes.md">ملاحظات الإصدار</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">14</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">16</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">تحقق من التثبيت<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

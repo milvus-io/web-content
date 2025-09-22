@@ -19,6 +19,84 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2518" class="common-anchor-header">v2.5.18<button data-href="#v2518" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: September 19, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.18</td><td>2.5.16</td><td>2.5.12</td><td>2.5.13</td></tr>
+</tbody>
+</table>
+<p>We were excited to announce Milvus 2.5.18! This release delivered critical performance enhancements and stability improvements. We strongly encouraged all users to upgrade to benefit from these optimizations.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Removed timeout for compaction task (<a href="https://github.com/milvus-io/milvus/pull/44278">#44278</a>)</li>
+<li>Forbade panic when tantivy index path did not exist (<a href="https://github.com/milvus-io/milvus/pull/44136">#44136</a>)</li>
+<li>Updated knowhere version (<a href="https://github.com/milvus-io/milvus/pull/44292">#44292</a>)</li>
+<li>Added param to modify delete snapshot size (<a href="https://github.com/milvus-io/milvus/pull/44213">#44213</a>)</li>
+<li>Added mutex and range check to prevent concurrent delete (<a href="https://github.com/milvus-io/milvus/pull/44202">#44202</a>)</li>
+<li>Removed name check for alter index task (<a href="https://github.com/milvus-io/milvus/pull/44056">#44056</a>)</li>
+<li>Returned collection metadata from cache (<a href="https://github.com/milvus-io/milvus/pull/43911">#43911</a>)</li>
+<li>Supported expr result cache (<a href="https://github.com/milvus-io/milvus/pull/43882">#43882</a>)</li>
+<li>Made build ratio of interim index configurable (<a href="https://github.com/milvus-io/milvus/pull/43938">#43938</a>)</li>
+<li>Used function def determine field IsFunctionOutput only (<a href="https://github.com/milvus-io/milvus/pull/44009">#44009</a>)</li>
+<li>Used rlock for list privilege groups (<a href="https://github.com/milvus-io/milvus/pull/44006">#44006</a>)</li>
+<li>Added param item forcing all indices ready for segment (<a href="https://github.com/milvus-io/milvus/pull/44329">#44329</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed a bug that caused incorrect metrics for compaction tasks (<a href="https://github.com/milvus-io/milvus/pull/44280">#44280</a>)</li>
+<li>Resolved an issue with invalid pre-allocated segment IDs during compaction (<a href="https://github.com/milvus-io/milvus/pull/44351">#44351</a>)</li>
+<li>Corrected a bug where GetCompactionTo incorrectly returned empty results during clustering compaction (<a href="https://github.com/milvus-io/milvus/pull/44271">#44271</a>)</li>
+<li>Added a nil check for arraydata to prevent a system panic (<a href="https://github.com/milvus-io/milvus/pull/44333">#44333</a>)</li>
+<li>Implemented a UTF-8 check in BM25FunctionRunner to handle non-UTF-8 strings (<a href="https://github.com/milvus-io/milvus/pull/44221">#44221</a>)</li>
+<li>Expanded the lock range for dump_snapshot to prevent coredumps during delete operations (<a href="https://github.com/milvus-io/milvus/pull/44131">#44131</a>)</li>
+<li>Invalidated the proxy cache for alias creation to ensure updates were immediately reflected (<a href="https://github.com/milvus-io/milvus/pull/44073">#44073</a>)</li>
+</ul>
 <h2 id="v2517" class="common-anchor-header">v2.5.17<button data-href="#v2517" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

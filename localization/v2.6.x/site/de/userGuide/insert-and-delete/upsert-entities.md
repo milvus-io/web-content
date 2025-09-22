@@ -59,8 +59,8 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Upsert im Überschreibungsmodus</span> </span></p>
 <p>Wenn die Zielsammlung die Option <code translate="no">autoid</code> für ihr Primärfeld aktiviert hat, generiert Milvus einen neuen Primärschlüssel für die in der Nutzlast der Anforderung enthaltenen Daten, bevor es sie einfügt.</p>
-<p>Bei Feldern, für die <code translate="no">nullable</code> aktiviert ist, können Sie sie in der <code translate="no">upsert</code> Anfrage auslassen, wenn sie keine Aktualisierungen erfordern.</p>
-<h3 id="Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="common-anchor-header">Upsert im Merge-Modus | Kompatibel mit Milvus v2.6.2+<button data-href="#Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="anchor-icon" translate="no">
+<p>Bei Feldern, für die <code translate="no">nullable</code> aktiviert ist, können Sie sie in der Anforderung <code translate="no">upsert</code> auslassen, wenn sie keine Aktualisierungen erfordern.</p>
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert im Zusammenführungsmodus<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sie können auch das Kennzeichen <code translate="no">partial_update</code> verwenden, um eine Upsert-Anfrage im Merge-Modus zu bearbeiten. Dadurch können Sie nur die Felder in die Nutzlast der Anforderung aufnehmen, die aktualisiert werden müssen.</p>
+    </button></h3><p>Sie können auch das Kennzeichen <code translate="no">partial_update</code> verwenden, um eine Upsert-Anfrage im Merge-Modus zu bearbeiten. Dadurch können Sie nur die Felder, die aktualisiert werden müssen, in die Nutzlast der Anforderung aufnehmen.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
@@ -345,7 +345,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können auch Entitäten in eine bestimmte Partition einfügen. Die folgenden Codeschnipsel gehen davon aus, dass Sie eine Partition namens <strong>PartitionA</strong> in Ihrer Sammlung haben.</p>
+    </button></h2><p>Sie können Entitäten auch in eine bestimmte Partition einfügen. Die folgenden Codeschnipsel gehen davon aus, dass Sie eine Partition namens <strong>PartitionA</strong> in Ihrer Sammlung haben.</p>
 <p>Die drei Entitäten, falls in der Partition vorhanden, werden durch die in der Anfrage enthaltenen überschrieben.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

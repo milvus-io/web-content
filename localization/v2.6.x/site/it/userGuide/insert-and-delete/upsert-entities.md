@@ -60,7 +60,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Upsert in modalità Override</span> </span></p>
 <p>Se la collezione di destinazione ha <code translate="no">autoid</code> abilitato sul suo campo primario, Milvus genererà una nuova chiave primaria per i dati trasportati nel payload della richiesta prima di inserirli.</p>
 <p>Per i campi con <code translate="no">nullable</code> abilitato, è possibile ometterli nella richiesta <code translate="no">upsert</code> se non richiedono aggiornamenti.</p>
-<h3 id="Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="common-anchor-header">Upsert in modalità merge | Compatibile con Milvus v2.6.2+<button data-href="#Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert in modalità merge<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>È anche possibile utilizzare il flag <code translate="no">partial_update</code> per far funzionare una richiesta di upsert in modalità merge. Questo permette di includere nel payload della richiesta solo i campi che devono essere aggiornati.</p>
+    </button></h3><p>È possibile utilizzare il flag <code translate="no">partial_update</code> anche per far funzionare una richiesta di upsert in modalità merge. Ciò consente di includere nel payload della richiesta solo i campi che devono essere aggiornati.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
@@ -142,7 +142,7 @@ summary: >-
     </button></h3><p>Sulla base del contenuto di cui sopra, ci sono diversi limiti e restrizioni da seguire:</p>
 <ul>
 <li><p>La richiesta <code translate="no">upsert</code> deve sempre includere le chiavi primarie delle entità di destinazione.</p></li>
-<li><p>La collezione di destinazione deve essere caricata e disponibile per le query.</p></li>
+<li><p>L'insieme di destinazione deve essere caricato e disponibile per le query.</p></li>
 <li><p>Tutti i campi specificati nella richiesta devono esistere nello schema dell'insieme di destinazione.</p></li>
 <li><p>I valori di tutti i campi specificati nella richiesta devono corrispondere ai tipi di dati definiti nello schema.</p></li>
 <li><p>Per qualsiasi campo derivato da un altro tramite funzioni, Milvus rimuoverà il campo derivato durante l'upsert per consentire il ricalcolo.</p></li>

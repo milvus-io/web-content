@@ -58,7 +58,7 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
    </span> <span class="img-wrapper"> <span>الإدراج في وضع التجاوز</span> </span></p>
 <p>إذا تم تمكين <code translate="no">autoid</code> في المجموعة المستهدفة على الحقل الأساسي الخاص بها، فسيقوم Milvus بإنشاء مفتاح أساسي جديد للبيانات المنقولة في حمولة الطلب قبل إدراجها.</p>
 <p>بالنسبة للحقول التي تم تمكين <code translate="no">nullable</code> ، يمكنك حذفها في طلب <code translate="no">upsert</code> إذا كانت لا تتطلب أي تحديثات.</p>
-<h3 id="Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="common-anchor-header">Upsert في وضع الدمج |متوافق مع Milvus v2.6.2+<button data-href="#Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">الإدراج في وضع الدمج<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,7 +73,7 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك أيضًا استخدام العلامة <code translate="no">partial_update</code> لجعل طلب upsert يعمل في وضع الدمج. يسمح لك هذا بتضمين الحقول التي تحتاج إلى تحديث فقط في حمولة الطلب.</p>
+    </button></h3><p>يمكنك أيضًا استخدام العلامة <code translate="no">partial_update</code> لجعل طلب الإضافة يعمل في وضع الدمج. يتيح لك ذلك تضمين الحقول التي تحتاج إلى تحديث فقط في حمولة الطلب.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
@@ -104,7 +104,7 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
 <li><p>للحفاظ على القيمة الأصلية للحقل <code translate="no">issue</code> ، تحتاج إما إلى تمكين <code translate="no">partial_update</code> وحذف الحقل <code translate="no">issue</code> أو تضمين الحقل <code translate="no">issue</code> بقيمته الأصلية في الطلب <code translate="no">upsert</code>.</p></li>
 </ul></li>
 <li><p><strong>رفع المفاتيح في الحقل الديناميكي</strong>.</p>
-<p>لنفترض أنك قمت بتمكين المفتاح الديناميكي في مثال المجموعة، وكانت أزواج المفاتيح-القيم في الحقل الديناميكي لكيان ما مشابهة لـ <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
+<p>لنفترض أنك قمت بتمكين المفتاح الديناميكي في مجموعة الأمثلة، وكانت أزواج المفاتيح-القيم في الحقل الديناميكي لكيان ما مشابهة لـ <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
 <p>عندما تدرج الكيان بمفاتيح مثل <code translate="no">author</code> أو <code translate="no">year</code> أو أو <code translate="no">tags</code> أو تضيف مفاتيح أخرى، لاحظ ذلك:</p>
 <ul>
 <li><p>إذا قمت بإعادة إدراج مع تعطيل <code translate="no">partial_update</code> ، فإن السلوك الافتراضي هو <strong>التجاوز</strong>. وهذا يعني أن قيمة الحقل الديناميكي سيتم تجاوزها من قبل جميع الحقول غير المعرفة من قبل المخطط المدرجة في الطلب وقيمها.</p>
@@ -493,7 +493,7 @@ curl --request POST \
     </button></h2><p>يوضّح المثال البرمجي التالي كيفية رفع إدراج الكيانات مع تحديثات جزئية. قم بتوفير الحقول التي تحتاج إلى تحديثات وقيمها الجديدة فقط، بالإضافة إلى علامة التحديث الجزئي الصريحة.</p>
 <p>في المثال التالي، سيتم تحديث الحقل <code translate="no">issue</code> الخاص بالكيانات المحددة في طلب التحديث إلى القيم المضمنة في الطلب.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python">data=[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>,

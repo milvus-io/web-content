@@ -44,7 +44,7 @@ title: 헬름 차트로 Milvus 클러스터 업그레이드하기
 <li>쿠버네티스 버전 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Milvus-Helm 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가해야 한다.</p>
+<p>밀버스-헬름 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속 요소로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가해야 한다.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">밀버스 헬름 차트 확인<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus의 업그레이드 경로는 다음과 같이 선택할 수 있습니다:</p>
-<div style="display: none;">- 밀버스 v2.2.3 이상 릴리스에서 v2.5.17로 [롤링 업그레이드 수행](#conduct-a-rolling-upgrade).</div>
+<div style="display: none;">- 밀버스 v2.2.3 이상 릴리스에서 v2.5.18로 [롤링 업그레이드 수행](#conduct-a-rolling-upgrade).</div>
 <ul>
-<li><p>v2.2.3 이전 마이너 릴리스에서 v2.5.17로 업그레이드하려면<a href="#Upgrade-Milvus-using-Helm">헬름을 사용하여 Milvus를 업그레이드</a> 한다.</p></li>
-<li><p>Milvus v2.1.x에서 v2.5.17로 업그레이드하기 전에<a href="#Migrate-the-metadata">메타데이터를 마이그레이션한다</a>.</p></li>
+<li><p>v2.2.3 이전 마이너 릴리스에서 v2.5.18로 업그레이드하려면<a href="#Upgrade-Milvus-using-Helm">헬름을 사용하여 Milvus를 업그레이드</a> 한다.</p></li>
+<li><p>Milvus v2.1.x에서 v2.5.18로 업그레이드하기 전에<a href="#Migrate-the-metadata">메타데이터를 마이그레이션한다</a>.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">롤링 업그레이드 수행<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>작동</td><td><code translate="no">update</code></td><td>False</td></tr>
 </tbody>
 </table>
-<p>Milvus 인스턴스의 모든 배포가 정상 상태에 있는지 확인했습니다. 다음 명령을 실행하여 Milvus 인스턴스를 2.5.17로 업그레이드할 수 있습니다.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.17 -w &#x27;milvusdb/milvus:v2.5.17&#x27;
+<p>Milvus 인스턴스의 모든 배포가 정상 상태에 있는지 확인했습니다. 다음 명령을 실행하여 Milvus 인스턴스를 2.5.18로 업그레이드할 수 있습니다.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.18 -w &#x27;milvusdb/milvus:v2.5.18&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

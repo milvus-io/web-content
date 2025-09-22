@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode utilizar <code translate="no">upsert</code> para inserir uma nova entidade ou atualizar uma entidade existente, dependendo se a chave primária fornecida no pedido de upsert existe na coleção. Se a chave primária não for encontrada, ocorre uma operação de inserção. Caso contrário, será efectuada uma operação de atualização.</p>
+    </button></h2><p>É possível utilizar <code translate="no">upsert</code> para inserir uma nova entidade ou atualizar uma entidade existente, dependendo se a chave primária fornecida no pedido de upsert existe na coleção. Se a chave primária não for encontrada, ocorre uma operação de inserção. Caso contrário, será efectuada uma operação de atualização.</p>
 <p>Um upsert no Milvus funciona em modo de <strong>substituição</strong> ou <strong>de fusão</strong>.</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">Upsert em modo de substituição<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Upsert em modo de substituição</span> </span></p>
 <p>Se a coleção de destino tiver <code translate="no">autoid</code> ativado no seu campo primário, o Milvus irá gerar uma nova chave primária para os dados transportados na carga do pedido antes de os inserir.</p>
 <p>Para os campos com <code translate="no">nullable</code> ativado, pode omiti-los no pedido <code translate="no">upsert</code> se não necessitarem de qualquer atualização.</p>
-<h3 id="Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="common-anchor-header">Upsert em modo de fusão | Compatível com Milvus v2.6.2+<button data-href="#Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert no modo de mesclagem<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Também pode utilizar o sinalizador <code translate="no">partial_update</code> para fazer com que um pedido de upsert funcione em modo de fusão. Isto permite-lhe incluir apenas os campos que necessitam de atualização na carga do pedido.</p>
+    </button></h3><p>Também pode utilizar o sinalizador <code translate="no">partial_update</code> para fazer com que um pedido de inserção ascendente funcione em modo de fusão. Isto permite-lhe incluir apenas os campos que necessitam de atualização na carga do pedido.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />

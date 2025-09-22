@@ -59,8 +59,8 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>Menyisipkan Dalam Mode Penggantian</span> </span></p>
 <p>Jika koleksi target memiliki <code translate="no">autoid</code> yang diaktifkan pada bidang utamanya, Milvus akan menghasilkan kunci utama baru untuk data yang dibawa dalam muatan permintaan sebelum menyisipkannya.</p>
-<p>Untuk bidang dengan <code translate="no">nullable</code> yang diaktifkan, Anda dapat menghilangkannya dalam permintaan <code translate="no">upsert</code> jika bidang tersebut tidak memerlukan pembaruan.</p>
-<h3 id="Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="common-anchor-header">Menyisipkan dalam mode penggabungan | Kompatibel dengan Milvus v2.6.2+<button data-href="#Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="anchor-icon" translate="no">
+<p>Untuk field dengan <code translate="no">nullable</code> yang diaktifkan, Anda dapat menghilangkannya dalam permintaan <code translate="no">upsert</code> jika field tersebut tidak memerlukan pembaruan.</p>
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Menyisipkan dalam mode penggabungan<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda juga dapat menggunakan bendera <code translate="no">partial_update</code> untuk membuat permintaan upsert bekerja dalam mode penggabungan. Hal ini memungkinkan Anda untuk menyertakan hanya bidang yang perlu diperbarui dalam muatan permintaan.</p>
+    </button></h3><p>Anda juga dapat menggunakan bendera <code translate="no">partial_update</code> untuk membuat permintaan upsert bekerja dalam mode penggabungan. Ini memungkinkan Anda untuk menyertakan hanya bidang yang perlu diperbarui dalam muatan permintaan.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
@@ -119,7 +119,7 @@ summary: >-
 <p>Ketika Anda meng-upsert field <code translate="no">extras</code> dari entitas dengan data JSON yang telah dimodifikasi, perhatikan hal itu:</p>
 <ul>
 <li><p>Jika Anda meng-upsert dengan <code translate="no">partial_update</code> dinonaktifkan, perilaku defaultnya adalah <strong>menimpa</strong>. Artinya, nilai bidang JSON yang disertakan dalam permintaan akan menimpa nilai asli bidang JSON entitas target.</p>
-<p>Misalnya, jika data yang disertakan dalam permintaan adalah <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code>, pasangan nilai-kunci di bidang <code translate="no">extras</code> dari entitas target akan diperbarui menjadi <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
+<p>Misalnya, jika data yang disertakan dalam permintaan adalah <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code>, pasangan key-value di bidang <code translate="no">extras</code> dari entitas target akan diperbarui menjadi <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
 <li><p>Jika Anda meng-upload dengan <code translate="no">partial_update</code> yang diaktifkan, perilaku defaultnya adalah <strong>menggabungkan</strong>. Ini berarti nilai bidang JSON yang disertakan dalam permintaan akan digabungkan dengan nilai asli bidang JSON entitas target.</p>
 <p>Misalnya, jika data yang disertakan dalam permintaan adalah <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code>, pasangan nilai-kunci di bidang <code translate="no">extras</code> entitas target akan menjadi <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> setelah udpate.</p></li>
 </ul></li>
@@ -145,7 +145,7 @@ summary: >-
 <li><p>Koleksi target harus dimuat dan tersedia untuk kueri.</p></li>
 <li><p>Semua bidang yang ditentukan dalam permintaan harus ada dalam skema koleksi target.</p></li>
 <li><p>Nilai semua field yang ditentukan dalam permintaan harus sesuai dengan tipe data yang ditentukan dalam skema.</p></li>
-<li><p>Untuk setiap field yang diturunkan dari fungsi lain yang menggunakan fungsi, Milvus akan menghapus field turunan selama upsert untuk memungkinkan penghitungan ulang.</p></li>
+<li><p>Untuk setiap field yang diturunkan dari fungsi lain yang menggunakan fungsi, Milvus akan menghapus field turunan selama upsert untuk memungkinkan perhitungan ulang.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">Meng-upsert entitas-entitas dalam sebuah koleksi<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"

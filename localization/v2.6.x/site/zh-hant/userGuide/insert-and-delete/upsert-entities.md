@@ -58,7 +58,7 @@ summary: upsert 操作提供了在集合中插入或更新實體的便捷方法�
    </span> <span class="img-wrapper"> <span>在覆寫模式下的 Upsert</span> </span></p>
 <p>如果目標集合的主欄位啟用了<code translate="no">autoid</code> ，Milvus 會在插入前為請求付載中攜帶的資料產生一個新的主索引鍵。</p>
 <p>對於啟用<code translate="no">nullable</code> 的欄位，如果它們不需要任何更新，您可以在<code translate="no">upsert</code> 請求中省略它們。</p>
-<h3 id="Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="common-anchor-header">在合併模式下的 Upsert | 相容於 Milvus v2.6.2+<button data-href="#Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">在合併模式中倒插<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,11 +73,11 @@ summary: upsert 操作提供了在集合中插入或更新實體的便捷方法�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您也可以使用<code translate="no">partial_update</code> 標誌使 upsert 請求在合併模式下工作。這允許您只包含需要更新的欄位在請求付載中。</p>
+    </button></h3><p>您也可以使用<code translate="no">partial_update</code> 標誌，使 upsert 請求以合併模式運作。這可讓您在請求有效負載中只包含需要更新的欄位。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
-   </span> <span class="img-wrapper"> <span>以合併模式進行上載</span> </span></p>
+   </span> <span class="img-wrapper"> <span>合併模式下的 UPSERT</span> </span></p>
 <p>要執行合併，在<code translate="no">upsert</code> 請求中將<code translate="no">partial_update</code> 設為<code translate="no">True</code> ，同時設置主索引鍵和要更新的字段及其新值。</p>
 <p>接收到這樣的請求後，Milvus 會執行強一致性查詢來擷取實體，根據請求中的資料更新欄位值，插入修改後的資料，然後刪除請求中帶有原始主索引鍵的現有實體。</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsert 行為：特別注意事項<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
@@ -118,7 +118,7 @@ summary: upsert 操作提供了在集合中插入或更新實體的便捷方法�
 <ul>
 <li><p>如果您在<code translate="no">partial_update</code> 禁用的情況下 upsert，預設行為是<strong>覆蓋</strong>。這表示包含在請求中的 JSON 欄位值將覆寫目標實體 JSON 欄位的原始值。</p>
 <p>例如，如果請求中包含的資料是<code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> ，則目標實體<code translate="no">extras</code> 欄位中的鍵值對將更新為<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
-<li><p>如果您在啟用<code translate="no">partial_update</code> 的情況下進行 upsert，預設行為是<strong>合併</strong>。這表示包含在請求中的 JSON 欄位的值將與目標實體的 JSON 欄位的原始值合併。</p>
+<li><p>如果啟用<code translate="no">partial_update</code> 的 upsert，預設行為是<strong>合併</strong>。這表示包含在請求中的 JSON 欄位的值將與目標實體的 JSON 欄位的原始值合併。</p>
 <p>例如，如果請求中包含的資料是<code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> ，則在 udpate 之後，目標實體<code translate="no">extras</code> 欄位中的鍵值對將變成<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
 </ul></li>
 </ul>

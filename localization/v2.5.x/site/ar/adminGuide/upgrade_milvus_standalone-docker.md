@@ -4,7 +4,7 @@ label: Docker Compose
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: تعرف على كيفية ترقية Milvus المستقل مع Docker Compose.
+summary: تعرف على كيفية ترقية Milvus مستقل مع Docker Compose.
 title: ترقية Milvus Standalone باستخدام Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>مشغل</a><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>MilvusHelmDocker</a><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
@@ -24,7 +24,7 @@ title: ترقية Milvus Standalone باستخدام Docker Compose
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية ترقية Milvus الخاص بك باستخدام Docker Compose.</p>
-<p>في الحالات العادية، يمكنك ترقية <a href="#Upgrade-Milvus-by-changing-its-image">Milvus عن طريق تغيير صورته</a>. ومع ذلك، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار 2.1.x إلى الإصدار 2.5.17.</p>
+<p>في الحالات العادية، يمكنك ترقية <a href="#Upgrade-Milvus-by-changing-its-image">Milvus عن طريق تغيير صورته</a>. ومع ذلك، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار 2.1.x إلى الإصدار 2.5.18.</p>
 <div class="alter note">
 <p>نظرًا لمخاوف أمنية، يقوم Milvus بترقية MinIO الخاص به إلى RELEASE.2023-03-20T20-16-18Z مع إصدار الإصدار 2.2.5. قبل إجراء أي ترقيات من إصدارات Milvus Standalone السابقة المثبتة باستخدام Docker Compose، يجب عليك إنشاء نشر MinIO أحادي العقدة أحادي القيادة وترحيل إعدادات MinIO الحالية والمحتوى إلى النشر الجديد. لمزيد من التفاصيل، راجع <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">هذا الدليل</a>.</p>
 </div>
@@ -49,7 +49,7 @@ title: ترقية Milvus Standalone باستخدام Docker Compose
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.17</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.18</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>قم بتشغيل الأوامر التالية لتنفيذ الترقية.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.17</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.18</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>

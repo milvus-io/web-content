@@ -34,7 +34,7 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">upsert</code> を使用して、新しいエンティティを挿入するか、既存のエンティティを更新することができます。主キーが見つからない場合は、挿入操作が発生します。そうでない場合は、更新操作が実行されます。</p>
+    </button></h2><p><code translate="no">upsert</code> を使用して、新しいエンティティを挿入するか、既存のエンティティを更新することができます。主キーが見つからない場合は、挿入操作が発生します。そうでなければ、更新操作が実行されます。</p>
 <p>Milvusのupsertは<strong>override</strong>または<strong>merge</strong>モードで動作します。</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">オーバーライドモードでのupsert<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,14 +51,14 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>オーバーライドモードで動作するupsertリクエストは、挿入と削除を組み合わせたものです。既存のエンティティの<code translate="no">upsert</code> リクエストを受信すると、Milvus はリクエスト ペイロードで運ばれたデータを挿入し、同時にデータで指定された元の主キーを持つ既存のエンティティを削除します。</p>
+    </button></h3><p>オーバーライドモードで動作するupsertリクエストは、挿入と削除を組み合わせたものです。既存のエンティティの<code translate="no">upsert</code> リクエストを受信すると、Milvusはリクエスト ペイロードで運ばれたデータを挿入し、同時にデータで指定された元の主キーを持つ既存のエンティティを削除します。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
    </span> <span class="img-wrapper"> <span>上書きモードでのアップサート</span> </span></p>
 <p>ターゲット コレクションのプライマリ フィールドで<code translate="no">autoid</code> が有効になっている場合、Milvusはリクエスト ペイロードに含まれるデータの新しいプライマリ キーを生成してから挿入します。</p>
 <p><code translate="no">nullable</code> が有効なフィールドについては、更新が不要な場合、<code translate="no">upsert</code> リクエストで省略することができます。</p>
-<h3 id="Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="common-anchor-header">マージモードでのアップサート｜Milvus v2.6.2+と互換性があります。<button data-href="#Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">マージモードでのアップサート<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,7 +73,7 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">partial_update</code> フラグを使用して、マージモードでupsertリクエストを動作させることもできます。これにより、更新が必要なフィールドのみをリクエストペイロードに含めることができます。</p>
+    </button></h3><p><code translate="no">partial_update</code> フラグを使用して、upsertリクエストをマージモードで動作させることもできます。これにより、更新が必要なフィールドのみをリクエストのペイロードに含めることができます。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-merge-mode.png" alt="Upsert In Merge Mode" class="doc-image" id="upsert-in-merge-mode" />
@@ -95,7 +95,7 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>マージ機能を使用する前に考慮すべき特別な注意事項がいくつかあります。以下のケースは、<code translate="no">title</code> および<code translate="no">issue</code> という 2 つのスカラ・フィールドと、<code translate="no">id</code> というプライマリ・キー、<code translate="no">vector</code> というベクトル・フィールドを持つコレクションがあると仮定します。</p>
+    </button></h3><p>マージ機能を使用する前に考慮すべき特別な注意事項がいくつかあります。以下のケースは、<code translate="no">title</code> および<code translate="no">issue</code> という 2 つのスカラ・フィールドと、<code translate="no">id</code> というプライマリ・キー、<code translate="no">vector</code> というベクトル・フィールドを持つコレクションがあると仮定しています。</p>
 <ul>
 <li><p><code translate="no">nullable</code> <strong>が有効になって</strong><strong>いるフィールドをアップサートします</strong> <strong>。</strong></p>
 <p><code translate="no">issue</code> フィールドは NULL にすることができるとします。これらのフィールドをアップサートする場合、以下の点に注意してください：</p>

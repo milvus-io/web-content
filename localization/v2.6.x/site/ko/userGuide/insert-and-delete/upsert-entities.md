@@ -58,7 +58,7 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
    </span> <span class="img-wrapper"> <span>재정의 모드에서 업서트</span> </span></p>
 <p>대상 컬렉션의 기본 필드에 <code translate="no">autoid</code> 가 활성화된 경우, Milvus는 요청 페이로드에 포함된 데이터에 대한 새 기본 키를 생성한 후 삽입합니다.</p>
 <p><code translate="no">nullable</code> 가 활성화된 필드의 경우 업데이트가 필요하지 않은 경우 <code translate="no">upsert</code> 요청에서 생략할 수 있습니다.</p>
-<h3 id="Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="common-anchor-header">병합 모드에서 업서트 | Milvus v2.6.2+와 호환 가능<button data-href="#Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">병합 모드에서 업서트<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,7 +95,7 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>병합 기능을 사용하기 전에 고려해야 할 몇 가지 특별한 주의 사항이 있습니다. 다음 사례에서는 <code translate="no">title</code> 및 <code translate="no">issue</code> 이라는 두 개의 스칼라 필드와 기본 키 <code translate="no">id</code> 및 <code translate="no">vector</code> 이라는 벡터 필드가 있는 컬렉션이 있다고 가정합니다.</p>
+    </button></h3><p>병합 기능을 사용하기 전에 고려해야 할 몇 가지 특별한 주의 사항이 있습니다. 다음 사례에서는 <code translate="no">title</code> 및 <code translate="no">issue</code> 이라는 두 개의 스칼라 필드와 <code translate="no">id</code> 이라는 기본 키 및 <code translate="no">vector</code> 이라는 벡터 필드가 있는 컬렉션이 있다고 가정합니다.</p>
 <ul>
 <li><p><code translate="no">nullable</code> 이 활성화된<strong>필드를 업서트합니다</strong> <strong>.</strong></p>
 <p><code translate="no">issue</code> 필드는 null일 수 있다고 가정합니다. 이러한 필드를 업서트할 때 주의하세요:</p>
@@ -143,7 +143,7 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
 <li><p>대상 컬렉션이 로드되어 있고 쿼리에 사용할 수 있어야 합니다.</p></li>
 <li><p>요청에 지정된 모든 필드는 대상 컬렉션의 스키마에 존재해야 합니다.</p></li>
 <li><p>요청에 지정된 모든 필드의 값은 스키마에 정의된 데이터 유형과 일치해야 합니다.</p></li>
-<li><p>함수를 사용하여 다른 필드에서 파생된 필드의 경우, Milvus는 재계산을 허용하기 위해 업서트 중에 파생된 필드를 제거합니다.</p></li>
+<li><p>함수를 사용하여 다른 필드에서 파생된 필드의 경우, Milvus는 재계산을 위해 업서트 중에 파생된 필드를 제거합니다.</p></li>
 </ul>
 <h2 id="Upsert-entities-in-a-collection" class="common-anchor-header">컬렉션의 엔티티 업서트<button data-href="#Upsert-entities-in-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -490,7 +490,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 코드 예제는 부분 업데이트가 있는 엔티티를 삽입하는 방법을 보여줍니다. 업데이트가 필요한 필드와 새 값만 명시적인 부분 업데이트 플래그와 함께 제공하세요.</p>
+    </button></h2><p>다음 코드 예제는 부분 업데이트가 있는 엔티티를 업서트하는 방법을 보여줍니다. 업데이트가 필요한 필드와 새 값만 명시적인 부분 업데이트 플래그와 함께 제공하세요.</p>
 <p>다음 예제에서는 업서트 요청에 지정된 엔티티의 <code translate="no">issue</code> 필드가 요청에 포함된 값으로 업데이트됩니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
