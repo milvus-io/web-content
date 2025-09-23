@@ -5,9 +5,6 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
-- NONE = 0
-Sets the data type to __NoneType__.
-
 - BOOL = 1
 Sets the data type to __Boolean__.
 
@@ -46,7 +43,4 @@ Sets the data type to __Binary Vector__.
 
 - FLOAT_VECTOR = 101
 Sets the data type to __Float Vector__.
-
-- UNKNOWN = 999
-Sets the data type to __Unknown__.
 

@@ -4,9 +4,6 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
-- NONE = 0
-Sets the data type to **NoneType**.
-
 - BOOL = 1
 Sets the data type to **Boolean**.
 
@@ -54,7 +51,4 @@ Sets the data type to **Binary Vector**.
 - SPARSE_FLOAT_VECTOR = 104
 
     Sets the data type to **Sparse Vector**.
-
-- UNKNOWN = 999
-Sets the data type to **Unknown**.
 
