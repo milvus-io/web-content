@@ -30,7 +30,7 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/integrate_with_langchain.md">RAG مع Milvus وLangChain</a></td><td>RAG</td><td>ميلفوس، لانغشين</td></tr>
 <tr><td><a href="/docs/ar/milvus_hybrid_search_retriever.md">مسترجع البحث الهجين ميلفوس في مسترجع البحث الهجين في لانجتشين</a></td><td>البحث الهجين</td><td>ميلفوس، لانغتشين</td></tr>
 <tr><td><a href="/docs/ar/basic_usage_langchain.md">استخدام ميلفوس كمخزن متجه في لانغتشين</a></td><td>البحث الدلالي</td><td>ميلفوس، لانجتشين</td></tr>
-<tr><td><a href="/docs/ar/full_text_search_with_langchain.md">استخدام البحث عن النص الكامل مع لانغ تشين وميلفوس</a></td><td>البحث عن النص الكامل</td><td>ميلفوس، لانجتشين</td></tr>
+<tr><td><a href="/docs/ar/full_text_search_with_langchain.md">استخدام البحث بالنص الكامل مع لانج تشين وميلفوس</a></td><td>البحث عن النص الكامل</td><td>ميلفوس، لانجتشين</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_haystack.md">RAG مع ميلفوس وميلفوس وهايستاك</a></td><td>RAG</td><td>ميلفوس، هايستاك</td></tr>
 <tr><td><a href="/docs/ar/llamaindex_milvus_async.md">RAG مع ميلفوس وLlamaIndex Async API</a></td><td>المزامنة</td><td>ميلفوس، لاما إندكس</td></tr>
 <tr><td><a href="/docs/ar/milvus_rag_with_vllm.md">بناء RAG باستخدام Milvus وvLLLM وLama 3.1</a></td><td>RAG</td><td>ميلفوس و vLLLM و LlamaIndex</td></tr>
@@ -92,5 +92,6 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/milvus_and_n8n.md">الشروع في العمل مع ميلفوس و n8n</a></td><td>التنسيق</td><td>ميلفوس، n8n</td></tr>
 <tr><td><a href="/docs/ar/use_milvus_in_anythingllm.md">استخدام Milvus في AnythingLLM</a></td><td>التنسيق</td><td>ميلفوس، AnythingLLLM</td></tr>
 <tr><td><a href="/docs/ar/NLWeb_with_milvus.md">استخدام NLWeb مع ميلفوس</a></td><td>مصادر البيانات</td><td>ميلفوس، إن إل ويب</td></tr>
+<tr><td><a href="/docs/ar/langextract_milvus_demo.md">تكامل لانج إكستراكت + ميلفوس</a></td><td>مصادر البيانات</td><td>ميلفوس، لانج إكستراكت</td></tr>
 </tbody>
 </table>

@@ -48,5 +48,6 @@ title: نظرة عامة على البرامج التعليمية
 <tr><td><a href="/docs/ar/dna_sequence_classification.md">تصنيف الحمض النووي</a></td><td>التصنيف</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/text_search_engine.md">محرك البحث النصي</a></td><td>البحث الدلالي</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/image_deduplication_system.md">إلغاء تكرار الصور</a></td><td>الازدواجية</td><td>البحث المتجه</td></tr>
+<tr><td><a href="/docs/ar/generating_milvus_query_filter_expressions.md">توليد تعبيرات تصفية استعلامات ميلفوس مع نماذج اللغة الكبيرة</a></td><td>تصفية البيانات الوصفية</td><td>البحث المتجه</td></tr>
 </tbody>
 </table>

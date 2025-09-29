@@ -51,7 +51,7 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/evaluation_with_phoenix.md">아리제 페오닉스를 사용한 평가</a></td><td>평가 및 관찰 가능성</td><td>Milvus, 아리제 피닉스</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_langfuse.md">랑퓨즈의 Milvus</a></td><td>관찰 가능성</td><td>Milvus, Langfuse</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_openai.md">Milvus와 OpenAI를 사용한 시맨틱 검색</a></td><td>시맨틱 검색</td><td>Milvus, OpenAI</td></tr>
-<tr><td><a href="/docs/ko/integrate_with_cohere.md">Milvus와 Cohere를 사용한 질문 답변</a></td><td>시맨틱 검색</td><td>밀버스, 코히어</td></tr>
+<tr><td><a href="/docs/ko/integrate_with_cohere.md">Milvus와 Cohere를 이용한 질문 답변</a></td><td>시맨틱 검색</td><td>밀버스, 코히어</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_hugging-face.md">밀버스와 허깅페이스를 이용한 질문 답변</a></td><td>질문 답변</td><td>밀버스, 허깅페이스</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_pytorch.md">밀버스와 파이토치를 이용한 이미지 검색</a></td><td>시맨틱 검색</td><td>밀버스, 파이토치</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_sentencetransformers.md">Milvus와 SentenceTransfomers를 사용한 동영상 검색</a></td><td>시맨틱 검색</td><td>밀버스, 센텐스 트랜스포머</td></tr>
@@ -90,5 +90,6 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/milvus_and_n8n.md">Milvus 및 n8n 시작하기</a></td><td>오케스트레이션</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/ko/use_milvus_in_anythingllm.md">AnythingLLM에서 Milvus 사용</a></td><td>오케스트레이션</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/ko/NLWeb_with_milvus.md">Milvus와 함께 NLWeb 사용</a></td><td>데이터 소스</td><td>Milvus, NLWeb</td></tr>
+<tr><td><a href="/docs/ko/langextract_milvus_demo.md">LangExtract + Milvus 통합</a></td><td>데이터 소스</td><td>Milvus, LangExtract</td></tr>
 </tbody>
 </table>

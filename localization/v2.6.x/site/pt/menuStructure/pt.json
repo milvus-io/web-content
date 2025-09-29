@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "LangExtract",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2686,6 +2692,12 @@
         "children": []
       },
       {
+        "label": "Geração de expressões de filtros de consulta Milvus com modelos de linguagem de grande dimensão",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
+        "children": []
+      },
+      {
         "label": "Explorar mais",
         "id": "explore-more",
         "order": 99,
@@ -2737,7 +2749,7 @@
     ]
   },
   {
-    "label": "Perguntas frequentes",
+    "label": "FAQs",
     "id": "faq",
     "isMenu": true,
     "order": 9,

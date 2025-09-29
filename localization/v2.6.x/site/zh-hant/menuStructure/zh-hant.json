@@ -2275,7 +2275,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格",
+            "label": "拉格舞曲",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []
@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "LangExtract",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2683,6 +2689,12 @@
         "label": "使用 Milvus 進行文字轉影像搜尋",
         "id": "text_image_search.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "使用大型語言模型產生 Milvus 查詢篩選表達式",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
         "children": []
       },
       {

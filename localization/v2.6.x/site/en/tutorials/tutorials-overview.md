@@ -48,5 +48,6 @@ title: Tutorials Overview
 <tr><td><a href="/docs/dna_sequence_classification.md">DNA Classification</a></td><td>Classification</td><td>vector search</td></tr>
 <tr><td><a href="/docs/text_search_engine.md">Text Search Engine</a></td><td>Semantic Search</td><td>vector search</td></tr>
 <tr><td><a href="/docs/image_deduplication_system.md">Image Deduplication</a></td><td>Deduplication</td><td>vector search</td></tr>
+<tr><td><a href="/docs/generating_milvus_query_filter_expressions.md">Generating Milvus Query Filter Expressions with Large Language Models</a></td><td>Metadata Filtering</td><td>vector search</td></tr>
 </tbody>
 </table>

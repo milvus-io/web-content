@@ -1722,7 +1722,7 @@
         "children": []
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -1751,7 +1751,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和还原",
+                "label": "在一个实例中进行备份和恢复",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "语言提取",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2683,6 +2689,12 @@
         "label": "使用 Milvus 进行文本到图片搜索",
         "id": "text_image_search.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "利用大型语言模型生成 Milvus 查询过滤器表达式",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
         "children": []
       },
       {

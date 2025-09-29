@@ -92,5 +92,6 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/milvus_and_n8n.md">Démarrer avec Milvus et n8n</a></td><td>Orchestration</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/fr/use_milvus_in_anythingllm.md">Utiliser Milvus dans AnythingLLM</a></td><td>Orchestration</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/fr/NLWeb_with_milvus.md">Utiliser NLWeb avec Milvus</a></td><td>Sources de données</td><td>Milvus, NLWeb</td></tr>
+<tr><td><a href="/docs/fr/langextract_milvus_demo.md">Intégration LangExtract + Milvus</a></td><td>Sources de données</td><td>Milvus, LangExtract</td></tr>
 </tbody>
 </table>

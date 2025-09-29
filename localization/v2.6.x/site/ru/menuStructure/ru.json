@@ -136,7 +136,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -156,7 +156,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -594,7 +594,7 @@
                     "children": []
                   },
                   {
-                    "label": "Остановите",
+                    "label": "Остановить",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "LangExtract",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2683,6 +2689,12 @@
         "label": "Поиск по тексту и изображению с помощью Milvus",
         "id": "text_image_search.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "Генерация выражений фильтра запросов Milvus с помощью больших языковых моделей",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
         "children": []
       },
       {

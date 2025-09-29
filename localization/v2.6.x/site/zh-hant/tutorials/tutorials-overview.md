@@ -48,5 +48,6 @@ title: 教學總覽
 <tr><td><a href="/docs/zh-hant/dna_sequence_classification.md">DNA 分類</a></td><td>分類</td><td>向量搜尋</td></tr>
 <tr><td><a href="/docs/zh-hant/text_search_engine.md">文字搜尋引擎</a></td><td>語意搜尋</td><td>向量搜尋</td></tr>
 <tr><td><a href="/docs/zh-hant/image_deduplication_system.md">影像重複刪除</a></td><td>重複資料刪除</td><td>向量搜尋</td></tr>
+<tr><td><a href="/docs/zh-hant/generating_milvus_query_filter_expressions.md">使用大型語言模型產生 Milvus 查詢篩選表達式</a></td><td>元資料篩選</td><td>向量搜尋</td></tr>
 </tbody>
 </table>

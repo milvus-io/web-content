@@ -48,5 +48,6 @@ title: チュートリアル概要
 <tr><td><a href="/docs/ja/dna_sequence_classification.md">DNA分類</a></td><td>分類</td><td>ベクトル検索</td></tr>
 <tr><td><a href="/docs/ja/text_search_engine.md">テキスト検索エンジン</a></td><td>セマンティック検索</td><td>ベクトル検索</td></tr>
 <tr><td><a href="/docs/ja/image_deduplication_system.md">画像重複排除</a></td><td>重複排除</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/generating_milvus_query_filter_expressions.md">大規模言語モデルによるmilvusクエリフィルタ式の生成</a></td><td>メタデータのフィルタリング</td><td>ベクトル検索</td></tr>
 </tbody>
 </table>

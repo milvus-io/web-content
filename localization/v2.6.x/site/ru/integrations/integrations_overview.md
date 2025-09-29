@@ -92,5 +92,6 @@ title: Обзор интеграций
 <tr><td><a href="/docs/ru/milvus_and_n8n.md">Начало работы с Milvus и n8n</a></td><td>Оркестрация</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/ru/use_milvus_in_anythingllm.md">Использование Milvus в AnythingLLM</a></td><td>Оркестровка</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/ru/NLWeb_with_milvus.md">Использование NLWeb с Milvus</a></td><td>Источники данных</td><td>Milvus, NLWeb</td></tr>
+<tr><td><a href="/docs/ru/langextract_milvus_demo.md">Интеграция LangExtract + Milvus</a></td><td>Источники данных</td><td>Milvus, LangExtract</td></tr>
 </tbody>
 </table>

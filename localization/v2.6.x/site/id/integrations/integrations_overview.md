@@ -92,5 +92,6 @@ title: Ikhtisar Integrasi
 <tr><td><a href="/docs/id/milvus_and_n8n.md">Memulai dengan Milvus dan n8n</a></td><td>Orkestrasi</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/id/use_milvus_in_anythingllm.md">Menggunakan Milvus di AnythingLLM</a></td><td>Orkestrasi</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/id/NLWeb_with_milvus.md">Menggunakan NLWeb dengan Milvus</a></td><td>Sumber Data</td><td>Milvus, NLWeb</td></tr>
+<tr><td><a href="/docs/id/langextract_milvus_demo.md">Integrasi LangExtract + Milvus</a></td><td>Sumber Data</td><td>Milvus, LangExtract</td></tr>
 </tbody>
 </table>

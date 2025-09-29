@@ -92,5 +92,6 @@ title: Integrations Overview
 <tr><td><a href="/docs/milvus_and_n8n.md">Getting Started with Milvus and n8n</a></td><td>Orchestration</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/use_milvus_in_anythingllm.md">Use Milvus in AnythingLLM</a></td><td>Orchestration</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/NLWeb_with_milvus.md">Using NLWeb with Milvus</a></td><td>Data Sources</td><td>Milvus, NLWeb</td></tr>
+<tr><td><a href="/docs/langextract_milvus_demo.md">LangExtract + Milvus Integration</a></td><td>Data Sources</td><td>Milvus, LangExtract</td></tr>
 </tbody>
 </table>

@@ -24,7 +24,7 @@ title: 集成概述
 <tr><th>教程</th><th>使用案例</th><th>合作伙伴或堆栈</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus 和 LLamaIndex</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus、LLamaIndex</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_langchain.md">使用 Milvus 和 LangChain 的 RAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/zh/milvus_hybrid_search_retriever.md">Milvus 混合搜索检索器在 LangChain 中的应用</a></td><td>混合搜索</td><td>Milvus、LangChain</td></tr>
 <tr><td><a href="/docs/zh/basic_usage_langchain.md">在LangChain中使用Milvus作为向量库</a></td><td>语义搜索</td><td>Milvus、LangChain</td></tr>
@@ -90,5 +90,6 @@ title: 集成概述
 <tr><td><a href="/docs/zh/milvus_and_n8n.md">开始使用 Milvus 和 n8n</a></td><td>编排</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_in_anythingllm.md">在 AnythingLLM 中使用 Milvus</a></td><td>编排</td><td>Milvus、AnythingLLM</td></tr>
 <tr><td><a href="/docs/zh/NLWeb_with_milvus.md">在 Milvus 中使用 NLWeb</a></td><td>数据源</td><td>Milvus、NLWeb</td></tr>
+<tr><td><a href="/docs/zh/langextract_milvus_demo.md">LangExtract + Milvus 集成</a></td><td>数据源</td><td>Milvus、LangExtract</td></tr>
 </tbody>
 </table>

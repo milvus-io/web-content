@@ -761,7 +761,7 @@
     "v2.6.x/site/en/integrations/integrate_with_voyageai.md": "2025-06-12T06:07:50.677Z",
     "v2.6.x/site/en/integrations/integrate_with_whyhow.md": "2025-06-12T06:07:52.066Z",
     "v2.6.x/site/en/integrations/integration_with_mindsdb.md": "2025-06-12T06:07:54.189Z",
-    "v2.6.x/site/en/integrations/integrations_overview.md": "2025-06-12T06:07:57.205Z",
+    "v2.6.x/site/en/integrations/integrations_overview.md": "2025-09-29T02:43:31.674Z",
     "v2.6.x/site/en/integrations/kafka-connect-milvus.md": "2025-06-12T06:07:58.931Z",
     "v2.6.x/site/en/integrations/knowledge_table_with_milvus.md": "2025-06-12T06:08:00.398Z",
     "v2.6.x/site/en/integrations/kotaemon_with_milvus.md": "2025-06-12T06:08:01.642Z",
@@ -859,13 +859,13 @@
     "v2.6.x/site/en/tutorials/image_deduplication_system.md": "2025-06-12T06:11:22.315Z",
     "v2.6.x/site/en/tutorials/image_similarity_search.md": "2025-06-12T06:11:23.472Z",
     "v2.6.x/site/en/tutorials/movie_recommendation_with_milvus.md": "2025-06-12T06:11:24.912Z",
-    "v2.6.x/site/en/tutorials/multimodal_rag_with_milvus.md": "2025-06-12T06:11:26.435Z",
+    "v2.6.x/site/en/tutorials/multimodal_rag_with_milvus.md": "2025-09-29T02:44:14.226Z",
     "v2.6.x/site/en/tutorials/question_answering_system.md": "2025-06-12T06:11:27.482Z",
     "v2.6.x/site/en/tutorials/quickstart_with_attu.md": "2025-07-14T08:52:27.990Z",
     "v2.6.x/site/en/tutorials/recommendation_system.md": "2025-06-12T06:11:29.722Z",
     "v2.6.x/site/en/tutorials/text_image_search.md": "2025-06-12T06:11:31.126Z",
     "v2.6.x/site/en/tutorials/text_search_engine.md": "2025-06-12T06:11:32.068Z",
-    "v2.6.x/site/en/tutorials/tutorials-overview.md": "2025-06-12T06:11:33.056Z",
+    "v2.6.x/site/en/tutorials/tutorials-overview.md": "2025-09-29T02:44:20.467Z",
     "v2.6.x/site/en/tutorials/use-async-milvus-client-with-asyncio.md": "2025-06-12T06:11:34.449Z",
     "v2.6.x/site/en/tutorials/use_ColPali_with_milvus.md": "2025-06-12T06:11:35.849Z",
     "v2.6.x/site/en/tutorials/vector_visualization.md": "2025-07-28T08:39:42.515Z",
@@ -1002,7 +1002,7 @@
     "v2.6.x/site/en/userGuide/tools/milvus-cdc/manage-cdc-tasks.md": "2025-06-12T06:15:04.254Z",
     "v2.6.x/site/en/userGuide/tools/milvus-cdc/milvus-cdc-overview.md": "2025-06-12T06:15:05.639Z",
     "v2.6.x/site/en/userGuide/tools/milvus-webui.md": "2025-06-12T06:15:07.664Z",
-    "v2.6.x/site/en/menuStructure/en.json": "2025-09-19T13:41:16.055Z",
+    "v2.6.x/site/en/menuStructure/en.json": "2025-09-29T02:58:27.507Z",
     "v2.6.x/site/en/reference/architecture/streaming_service.md": "2025-06-23T08:40:52.156Z",
     "v2.6.x/site/en/adminGuide/scale-standalone.md": "2025-07-02T07:32:10.597Z",
     "v2.6.x/site/en/integrations/langchain/langchain_milvus_async.md": "2025-07-14T08:50:28.212Z",
@@ -1022,6 +1022,8 @@
     "v2.6.x/site/en/userGuide/schema/analyzer/tokenizer/language-identifier.md": "2025-09-19T13:19:47.812Z",
     "v2.6.x/site/en/userGuide/schema/json-field-overview.md": "2025-09-19T13:20:06.095Z",
     "v2.6.x/site/en/userGuide/schema/json-indexing.md": "2025-09-19T13:20:23.793Z",
-    "v2.6.x/site/en/userGuide/schema/json-shredding.md": "2025-09-19T13:20:42.293Z"
+    "v2.6.x/site/en/userGuide/schema/json-shredding.md": "2025-09-19T13:20:42.293Z",
+    "v2.6.x/site/en/integrations/langextract_milvus_demo.md": "2025-09-29T02:43:48.048Z",
+    "v2.6.x/site/en/tutorials/generating_milvus_query_filter_expressions.md": "2025-09-29T02:44:01.752Z"
   }
 }

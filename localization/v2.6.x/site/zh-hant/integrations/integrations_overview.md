@@ -90,5 +90,6 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/milvus_and_n8n.md">開始使用 Milvus 和 n8n</a></td><td>協調</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/zh-hant/use_milvus_in_anythingllm.md">在 AnythingLLM 中使用 Milvus</a></td><td>協調</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/zh-hant/NLWeb_with_milvus.md">在 Milvus 中使用 NLWeb</a></td><td>資料來源</td><td>Milvus, NLWeb</td></tr>
+<tr><td><a href="/docs/zh-hant/langextract_milvus_demo.md">LangExtract + Milvus 整合</a></td><td>資料來源</td><td>Milvus、LangExtract</td></tr>
 </tbody>
 </table>

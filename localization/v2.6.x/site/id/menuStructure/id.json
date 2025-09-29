@@ -917,7 +917,7 @@
             "order": 6,
             "children": [
               {
-                "label": "Penjelasan Pemfilteran",
+                "label": "Penjelasan Penyaringan",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "LangExtract",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2683,6 +2689,12 @@
         "label": "Pencarian Teks-ke-Gambar dengan Milvus",
         "id": "text_image_search.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "Menghasilkan Ekspresi Filter Kueri Milvus dengan Model Bahasa Besar",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
         "children": []
       },
       {

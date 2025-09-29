@@ -48,5 +48,6 @@ title: Обзор учебников
 <tr><td><a href="/docs/ru/dna_sequence_classification.md">Классификация ДНК</a></td><td>Классификация</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/text_search_engine.md">Система текстового поиска</a></td><td>Семантический поиск</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/image_deduplication_system.md">Дедупликация изображений</a></td><td>Дедупликация</td><td>векторный поиск</td></tr>
+<tr><td><a href="/docs/ru/generating_milvus_query_filter_expressions.md">Генерация выражений фильтра запросов Milvus с помощью больших языковых моделей</a></td><td>Фильтрация метаданных</td><td>векторный поиск</td></tr>
 </tbody>
 </table>
