@@ -88,7 +88,7 @@ title: Atualizar o Milvus Standalone com o Docker Compose
 <li>É <strong>necessário</strong> atualizar para a versão 2.5.16 ou posterior antes de atualizar para a versão 2.6.2.</li>
 </ul>
 <div class="alter note">
-<p>Devido a questões de segurança, o Milvus actualiza o seu MinIO para RELEASE.2024-12-18T13-15-44Z com o lançamento da v2.6.2. Antes de qualquer atualização de versões anteriores do Milvus Standalone instaladas usando o Docker Compose, você deve criar uma implantação do MinIO de nó único e unidade única e migrar as configurações e o conteúdo existentes do MinIO para a nova implantação. Para obter detalhes, consulte <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">este guia</a>.</p>
+<p>Devido a questões de segurança, a Milvus actualiza o seu MinIO para RELEASE.2024-12-18T13-15-44Z com o lançamento da v2.6.2.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,7 +105,7 @@ title: Atualizar o Milvus Standalone com o Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">Etapa 1: atualizar para v2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">Passo 1: Atualização para a v2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,7 +121,7 @@ title: Atualizar o Milvus Standalone com o Docker Compose
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Ignore esta etapa se sua implantação autônoma já estiver executando a v2.5.16 ou superior.</p>
+<p>Ignore este passo se a sua implementação autónoma já estiver a executar a v2.5.16 ou superior.</p>
 </div>
 <ol>
 <li><p>Edite o ficheiro <code translate="no">docker-compose.yaml</code> existente e actualize a etiqueta de imagem Milvus para a v2.5.16:</p>
@@ -216,6 +216,6 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
 <li>Se estiver pronto para implantar seu cluster em nuvens:<ul>
 <li>Saiba como implantar <a href="/docs/pt/eks.md">o Milvus no Amazon EKS com o Terraform</a></li>
 <li>Saiba como implantar <a href="/docs/pt/gcp.md">o Milvus Cluster no GCP com Kubernetes</a></li>
-<li>Saiba como implantar <a href="/docs/pt/azure.md">o Milvus no Microsoft Azure com o Kubernetes</a></li>
+<li>Saiba como <a href="/docs/pt/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul></li>
 </ul>

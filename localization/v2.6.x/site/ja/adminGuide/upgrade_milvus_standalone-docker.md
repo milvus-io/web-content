@@ -88,7 +88,7 @@ title: Docker Composeを使用したMilvusスタンドアロンのアップグ�
 <li>v2.6.2にアップグレードする前にv2.5.16以降にアップグレードする<strong>必要があります</strong>。</li>
 </ul>
 <div class="alter note">
-<p>Milvusはセキュリティ上の懸念から、v2.6.2のリリースと同時にMinIOをRELEASE.2024-12-18T13-15-44Zにアップグレードします。Docker Composeを使用してインストールされた以前のMilvus Standaloneリリースからのアップグレードの前に、Single-Node Single-Drive MinIOデプロイメントを作成し、既存のMinIO設定とコンテンツを新しいデプロイメントに移行する必要があります。詳細については、<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">このガイドを</a>参照してください。</p>
+<p>セキュリティ上の懸念から、Milvusはv2.6.2のリリースと同時にMinIOをRELEASE.2024-12-18T13-15-44Zにアップグレードします。</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">アップグレード手順<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -121,10 +121,10 @@ title: Docker Composeを使用したMilvusスタンドアロンのアップグ�
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>スタンドアロン配置でv2.5.16以降がすでに実行されている場合は、この手順を飛ばし ます。</p>
+<p>スタンドアロン デプロイメントですでにv2.5.16以降を実行している場合は、この手順をスキップします。</p>
 </div>
 <ol>
-<li><p>既存の<code translate="no">docker-compose.yaml</code> ファイルを編集し、Milvus イメージ タグを v2.5.16 に更新します：</p>
+<li><p>既存の<code translate="no">docker-compose.yaml</code> ファイルを編集し、Milvus イメージタグを v2.5.16 に更新します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

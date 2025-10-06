@@ -193,7 +193,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Depois de instalar o Milvus Standalone, você pode:</p>
 <ul>
-<li><p>Verificar <a href="/docs/pt/quickstart.md">o Quickstart</a> para ver o que o Milvus pode fazer.</p></li>
+<li><p>Verificar o <a href="/docs/pt/quickstart.md">Quickstart</a> para ver o que o Milvus pode fazer.</p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
 <li><a href="/docs/pt/manage_databases.md">Gerir bases de dados</a></li>

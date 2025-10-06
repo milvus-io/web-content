@@ -60,7 +60,7 @@ title: 使用 Docker Compose 升级 Milvus 单机版
 <li><strong>新组件</strong>：引入流节点，增强数据处理能力</li>
 <li><strong>删除组件</strong>：删除并合并<code translate="no">indexNode</code> </li>
 </ul>
-<p>此升级过程可确保向新架构的适当迁移。有关架构变化的更多信息，请参阅<a href="/docs/zh/architecture_overview.md">Milvus 架构概述</a>。</p>
+<p>此升级过程可确保向新架构的正常迁移。有关架构变化的更多信息，请参阅<a href="/docs/zh/architecture_overview.md">Milvus 架构概述</a>。</p>
 <h3 id="Requirements" class="common-anchor-header">系统要求<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,9 +88,9 @@ title: 使用 Docker Compose 升级 Milvus 单机版
 <li>在升级到 v2.6.2 之前，您<strong>必须</strong>升级到 v2.5.16 或更高版本。</li>
 </ul>
 <div class="alter note">
-<p>出于安全考虑，Milvus 在发布 v2.6.2 时将 MinIO 升级到 RELEASE.2024-12-18T13-15-44Z。在使用 Docker Compose 从以前安装的 Milvus Standalone 版本升级之前，应创建一个 Single-Node Single-Drive MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
+<p>出于安全考虑，Milvus 在发布 v2.6.2 的同时将 MinIO 升级到 RELEASE.2024-12-18T13-15-44Z。</p>
 </div>
-<h2 id="Upgrade-process" class="common-anchor-header">升级流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">升级过程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,7 +105,7 @@ title: 使用 Docker Compose 升级 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">第 1 步：升级到版本 2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">第 1 步：升级到 v2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,7 +121,7 @@ title: 使用 Docker Compose 升级 Milvus 单机版
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>如果您的独立部署已在运行 v2.5.16 或更高版本，请跳过此步骤。</p>
+<p>如果您的独立部署已运行 v2.5.16 或更高版本，请跳过此步骤。</p>
 </div>
 <ol>
 <li><p>编辑现有的<code translate="no">docker-compose.yaml</code> 文件，将 Milvus 映像标记更新为 v2.5.16：</p>

@@ -88,7 +88,7 @@ title: Обновление автономной системы Milvus с пом
 <li>Перед переходом на v2.6.2 <strong>необходимо</strong> обновить версию до v2.5.16 или более поздней.</li>
 </ul>
 <div class="alter note">
-<p>По соображениям безопасности Milvus обновляет MinIO до RELEASE.2024-12-18T13-15-44Z с выходом v2.6.2. Перед любым обновлением с предыдущих выпусков Milvus Standalone, установленных с помощью Docker Compose, необходимо создать развертывание MinIO с одним узлом и одним диском и перенести существующие настройки и содержимое MinIO в новое развертывание. Для получения подробной информации см. <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">данное руководство</a>.</p>
+<p>По соображениям безопасности Milvus обновляет MinIO до RELEASE.2024-12-18T13-15-44Z с выходом v2.6.2.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Процесс обновления<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,7 +105,7 @@ title: Обновление автономной системы Milvus с пом
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">Шаг 1: Обновление до версии 2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">Шаг 1: Обновление до v2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -124,7 +124,7 @@ title: Обновление автономной системы Milvus с пом
 <p>Пропустите этот шаг, если ваше автономное развертывание уже работает с версией v2.5.16 или выше.</p>
 </div>
 <ol>
-<li><p>Отредактируйте существующий файл <code translate="no">docker-compose.yaml</code> и обновите тег образа Milvus до версии 2.5.16:</p>
+<li><p>Отредактируйте существующий файл <code translate="no">docker-compose.yaml</code> и обновите тег образа Milvus до версии v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

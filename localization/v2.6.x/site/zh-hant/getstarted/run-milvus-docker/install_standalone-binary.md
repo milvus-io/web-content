@@ -79,7 +79,7 @@ title: 使用 RPM/DEB 套件安裝 Milvus 單機版
         ></path>
       </svg>
     </button></h2><p>要安裝 RPM/DEB 套件，您可以使用系統的套件管理員。</p>
-<p>對於以 RPM 為基礎的系統 (例如 CentOS、Fedora 和 RHEL)，請使用<code translate="no">yum</code> 指令來安裝套件。</p>
+<p>對於以 RPM 為基礎的系統 (例如 CentOS、Fedora 和 RHEL)，請使用<code translate="no">yum</code> 指令安裝套件。</p>
 <pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.0-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>

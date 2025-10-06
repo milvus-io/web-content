@@ -90,7 +90,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
 <li>Sie <strong>müssen</strong> auf v2.5.16 oder höher aktualisieren, bevor Sie auf v2.6.2 aktualisieren können.</li>
 </ul>
 <div class="alter note">
-<p>Aufgrund von Sicherheitsbedenken aktualisiert Milvus seine MinIO mit der Veröffentlichung von v2.6.2 auf RELEASE.2024-12-18T13-15-44Z. Vor Upgrades von früheren Milvus Standalone-Releases, die mit Docker Compose installiert wurden, sollten Sie eine Single-Node Single-Drive MinIO-Bereitstellung erstellen und die vorhandenen MinIO-Einstellungen und -Inhalte in die neue Bereitstellung migrieren. Einzelheiten hierzu finden Sie in <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">diesem Leitfaden</a>.</p>
+<p>Aufgrund von Sicherheitsbedenken aktualisiert Milvus seine MinIO mit der Veröffentlichung von v2.6.2 auf RELEASE.2024-12-18T13-15-44Z.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Prozess<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +123,7 @@ title: Upgrade von Milvus Standalone mit Docker Compose
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Überspringen Sie diesen Schritt, wenn in Ihrer Einzelplatzbereitstellung bereits Version 2.5.16 oder höher ausgeführt wird.</p>
+<p>Überspringen Sie diesen Schritt, wenn Ihr Standalone-Einsatz bereits mit v2.5.16 oder höher läuft.</p>
 </div>
 <ol>
 <li><p>Bearbeiten Sie Ihre bestehende <code translate="no">docker-compose.yaml</code> Datei und aktualisieren Sie das Milvus Image Tag auf v2.5.16:</p>

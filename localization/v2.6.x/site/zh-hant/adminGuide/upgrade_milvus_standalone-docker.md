@@ -84,13 +84,13 @@ title: 使用 Docker Compose 升級 Milvus 單機版
 <p><strong>相容性需求：</strong></p>
 <ul>
 <li>Milvus v2.6.0-rc1 與 v2.6.2<strong>不相容</strong>。不支援從候選版本直接升級。</li>
-<li>如果您目前正在執行 v2.6.0-rc1，並需要保留您的資料，請參考<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以取得遷移協助。</li>
+<li>如果您目前正在執行 v2.6.0-rc1，並需要保留您的資料，請參閱<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">此社群指南</a>以取得遷移協助。</li>
 <li>在升級到 v2.6.2 之前，您<strong>必須</strong>升級到 v2.5.16 或更新版本。</li>
 </ul>
 <div class="alter note">
-<p>基於安全考量，Milvus 隨著 v2.6.2 的發行，將 MinIO 升級至 RELEASE.2024-12-18T13-15-44Z。在從使用 Docker Compose 安裝的先前 Milvus Standalone 版本進行任何升級之前，您應該先建立一個 Single-Node Single-Drive MinIO 部署，並將現有的 MinIO 設定和內容遷移到新部署。如需詳細資訊，請參閱<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
+<p>基於安全考量，Milvus 隨著 v2.6.2 的發行，將 MinIO 升級至 RELEASE.2024-12-18T13-15-44Z。</p>
 </div>
-<h2 id="Upgrade-process" class="common-anchor-header">升級程序<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
+<h2 id="Upgrade-process" class="common-anchor-header">升級流程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,7 +121,7 @@ title: 使用 Docker Compose 升級 Milvus 單機版
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>如果您的獨立部署已在執行 v2.5.16 或更高版本，請跳過此步驟。</p>
+<p>如果您的單機部署已執行 v2.5.16 或更高版本，請跳過此步驟。</p>
 </div>
 <ol>
 <li><p>編輯您現有的<code translate="no">docker-compose.yaml</code> 檔案，並將 Milvus 映像標籤更新為 v2.5.16：</p>

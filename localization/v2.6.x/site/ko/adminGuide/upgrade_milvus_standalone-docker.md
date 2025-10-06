@@ -88,7 +88,7 @@ title: Docker Compose로 Milvus 스탠드얼론 업그레이드하기
 <li>v2.6.2로 업그레이드하기 전에 v2.5.16 이상으로 <strong>업그레이드해야</strong> 합니다.</li>
 </ul>
 <div class="alter note">
-<p>보안 문제로 인해 Milvus는 v2.6.2 릴리스와 함께 MinIO를 RELEASE.2024-12-18T13-15-44Z로 업그레이드합니다. Docker Compose를 사용하여 설치된 이전 Milvus 독립 실행형 릴리스에서 업그레이드하기 전에 단일 노드 단일 드라이브 MinIO 배포를 생성하고 기존 MinIO 설정 및 콘텐츠를 새 배포로 마이그레이션해야 합니다. 자세한 내용은 <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">이 가이드를</a> 참조하세요.</p>
+<p>보안 문제로 인해 Milvus는 v2.6.2 릴리스와 함께 MinIO를 RELEASE.2024-12-18T13-15-44Z로 업그레이드합니다.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">업그레이드 프로세스<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,7 +105,7 @@ title: Docker Compose로 Milvus 스탠드얼론 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">1단계: v2.5.16으로 업그레이드<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">1단계: v2.5.16으로 업그레이드하기<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -213,7 +213,7 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
 <li>다음 방법을 알아볼 수도 있습니다:<ul>
 <li><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a></li>
 </ul></li>
-<li>클라우드에 클러스터를 배포할 준비가 되었다면 다음과 같이 하세요:<ul>
+<li>클라우드에 클러스터를 배포할 준비가 되었나요?<ul>
 <li><a href="/docs/ko/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
 <li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
 <li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>

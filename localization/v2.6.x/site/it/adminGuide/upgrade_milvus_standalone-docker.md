@@ -88,7 +88,7 @@ title: Aggiornamento di Milvus standalone con Docker Compose
 <li>Prima di passare alla versione 2.6.2, <strong>è necessario</strong> eseguire l'aggiornamento alla versione 2.5.16 o successiva.</li>
 </ul>
 <div class="alter note">
-<p>A causa di problemi di sicurezza, Milvus aggiorna il suo MinIO a RELEASE.2024-12-18T13-15-44Z con il rilascio della v2.6.2. Prima di qualsiasi aggiornamento da versioni precedenti di Milvus Standalone installate con Docker Compose, è necessario creare un deployment MinIO a singolo nodo e singola unità e migrare le impostazioni e i contenuti di MinIO esistenti al nuovo deployment. Per i dettagli, consultare <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">questa guida</a>.</p>
+<p>A causa di problemi di sicurezza, Milvus aggiorna il suo MinIO a RELEASE.2024-12-18T13-15-44Z con il rilascio della v2.6.2.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo di aggiornamento<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,7 +105,7 @@ title: Aggiornamento di Milvus standalone con Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">Passo 1: aggiornamento alla versione 2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Upgrade-to-v2516" class="common-anchor-header">Passo 1: Aggiornamento alla versione 2.5.16<button data-href="#Step-1-Upgrade-to-v2516" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,7 +121,7 @@ title: Aggiornamento di Milvus standalone con Docker Compose
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Saltare questo passaggio se l'installazione standalone è già in esecuzione con la versione 2.5.16 o superiore.</p>
+<p>Saltare questo passaggio se la distribuzione standalone è già in esecuzione con la versione 2.5.16 o superiore.</p>
 </div>
 <ol>
 <li><p>Modificare il file <code translate="no">docker-compose.yaml</code> esistente e aggiornare il tag immagine Milvus alla versione 2.5.16:</p>

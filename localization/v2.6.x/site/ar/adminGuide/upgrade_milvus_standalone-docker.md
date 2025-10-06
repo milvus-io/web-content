@@ -88,7 +88,7 @@ title: ترقية Milvus Standalone باستخدام Docker Compose
 <li><strong>يجب</strong> الترقية إلى الإصدار 2.5.16 أو أحدث قبل الترقية إلى الإصدار 2.6.2.</li>
 </ul>
 <div class="alter note">
-<p>نظرًا لمخاوف أمنية، قامت شركة Milvus بترقية الإصدار MinIO إلى RELEASE.2024-12-18T13-15-44Z مع إصدار الإصدار 2.6.2. قبل إجراء أي ترقيات من إصدارات Milvus Standalone السابقة المثبتة باستخدام Docker Compose، يجب عليك إنشاء نشر MinIO أحادي العقدة أحادي القيادة وترحيل إعدادات MinIO الحالية والمحتوى إلى النشر الجديد. للحصول على التفاصيل، راجع <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">هذا الدليل</a>.</p>
+<p>نظرًا لمخاوف أمنية، تقوم شركة Milvus بترقية MinIO إلى RELEASE.2024-12-18T13-15-44Z مع إصدار الإصدار 2.6.2.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">عملية الترقية<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -124,7 +124,7 @@ title: ترقية Milvus Standalone باستخدام Docker Compose
 <p>تخطي هذه الخطوة إذا كان النشر المستقل الخاص بك يعمل بالفعل بالإصدار 2.5.16 أو أعلى.</p>
 </div>
 <ol>
-<li><p>حرر ملف <code translate="no">docker-compose.yaml</code> الموجود لديك وقم بتحديث علامة صورة Milvus إلى الإصدار 2.5.16:</p>
+<li><p>قم بتحرير ملفك الحالي <code translate="no">docker-compose.yaml</code> وقم بتحديث علامة صورة Milvus إلى الإصدار 2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

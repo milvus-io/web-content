@@ -88,7 +88,7 @@ title: Memutakhirkan Milvus Standalone dengan Docker Compose
 <li>Anda <strong>harus</strong> meng-upgrade ke v2.5.16 atau yang lebih baru sebelum meng-upgrade ke v2.6.2.</li>
 </ul>
 <div class="alter note">
-<p>Karena masalah keamanan, Milvus mengupgrade MinIO ke RELEASE.2024-12-18T13-15-44Z dengan rilis v2.6.2. Sebelum peningkatan apa pun dari rilis Milvus Standalone sebelumnya diinstal menggunakan Docker Compose, Anda harus membuat penerapan MinIO Single-Node Single-Drive dan memigrasikan pengaturan dan konten MinIO yang ada ke penerapan yang baru. Untuk detailnya, lihat <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">panduan ini</a>.</p>
+<p>Karena masalah keamanan, Milvus mengupgrade MinIO ke RELEASE.2024-12-18T13-15-44Z dengan rilis v2.6.2.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -124,7 +124,7 @@ title: Memutakhirkan Milvus Standalone dengan Docker Compose
 <p>Lewati langkah ini jika penerapan mandiri Anda sudah menjalankan v2.5.16 atau lebih tinggi.</p>
 </div>
 <ol>
-<li><p>Edit berkas <code translate="no">docker-compose.yaml</code> Anda yang sudah ada dan perbarui tag gambar Milvus ke v2.5.16:</p>
+<li><p>Edit file <code translate="no">docker-compose.yaml</code> Anda yang sudah ada dan perbarui tag gambar Milvus ke v2.5.16:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

@@ -88,7 +88,7 @@ title: Mise à niveau de Milvus Standalone avec Docker Compose
 <li>Vous <strong>devez</strong> passer à la version 2.5.16 ou à une version ultérieure avant de passer à la version 2.6.2.</li>
 </ul>
 <div class="alter note">
-<p>Pour des raisons de sécurité, Milvus met à niveau son MinIO vers RELEASE.2024-12-18T13-15-44Z avec la sortie de la v2.6.2. Avant toute mise à niveau à partir des versions précédentes de Milvus Standalone installées à l'aide de Docker Compose, vous devez créer un déploiement MinIO Single-Node Single-Drive et migrer les paramètres et le contenu MinIO existants vers le nouveau déploiement. Pour plus de détails, reportez-vous à <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">ce guide</a>.</p>
+<p>Pour des raisons de sécurité, Milvus met à niveau son MinIO vers RELEASE.2024-12-18T13-15-44Z avec la sortie de la v2.6.2.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à niveau<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -121,10 +121,10 @@ title: Mise à niveau de Milvus Standalone avec Docker Compose
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Sautez cette étape si votre déploiement autonome utilise déjà la version 2.5.16 ou une version supérieure.</p>
+<p>Sautez cette étape si votre déploiement autonome utilise déjà la version 2.5.16 ou une version plus récente.</p>
 </div>
 <ol>
-<li><p>Modifiez votre fichier <code translate="no">docker-compose.yaml</code> existant et mettez à jour la balise d'image Milvus vers la version 2.5.16 :</p>
+<li><p>Modifier le fichier <code translate="no">docker-compose.yaml</code> existant et mettre à jour la balise d'image Milvus vers la version 2.5.16 :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>

@@ -197,7 +197,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
 <li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
 <li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإضافة وحذف</a></li>
+<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
 <li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>

@@ -110,7 +110,7 @@ dpkg -l | grep milvus
 <p>Vous pouvez vérifier l'état du service Milvus à l'aide de la commande suivante :</p>
 <pre><code translate="no" class="language-shell">systemctl status milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Si Milvus fonctionne correctement, vous devriez obtenir le résultat suivant :</p>
+<p>Si Milvus fonctionne correctement, vous devriez voir le résultat suivant :</p>
 <pre><code translate="no"><span class="hljs-string">●</span> <span class="hljs-string">milvus.service</span> <span class="hljs-bullet">-</span> <span class="hljs-string">Milvus</span> <span class="hljs-string">Standalone</span> <span class="hljs-string">Server</span>
    <span class="hljs-attr">Loaded:</span> <span class="hljs-string">loaded</span> <span class="hljs-string">(/lib/systemd/system/milvus.service;</span> <span class="hljs-string">enabled;</span> <span class="hljs-attr">vendor preset:</span> <span class="hljs-string">enabled)</span>
    <span class="hljs-attr">Active:</span> <span class="hljs-string">active</span> <span class="hljs-string">(running)</span> <span class="hljs-string">since</span> <span class="hljs-string">Fri</span> <span class="hljs-number">2025-08-10 10:30:00 </span><span class="hljs-string">UTC;</span> <span class="hljs-string">5s</span> <span class="hljs-string">ago</span>
