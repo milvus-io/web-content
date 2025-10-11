@@ -38,6 +38,9 @@ This upgrade process ensures proper migration to the new architecture. For more 
 - If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
 - You **must** upgrade to v2.5.16 or later with `mixCoord` enabled before upgrading to v2.6.2.
 
+**Message Queue limitations**: When upgrading to Milvus v2.6.2, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+
+
 ## Upgrade process
 
 ### Step 1: Upgrade Milvus Operator

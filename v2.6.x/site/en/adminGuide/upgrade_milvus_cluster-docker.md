@@ -12,6 +12,13 @@ This topic describes how to upgrade your Milvus using Docker Compose.
 
 In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.6.2.
 
+<div class="alert note">
+
+**Message Queue limitations**: When upgrading to Milvus v2.6.2, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+
+
+</div>
+
 ## Upgrade Milvus by changing its image
 
 In normal cases, you can upgrade Milvus as follows:
