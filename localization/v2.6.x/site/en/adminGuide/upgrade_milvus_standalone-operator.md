@@ -88,6 +88,7 @@ title: Upgrade Milvus Standalone with Milvus Operator
 <li>If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">this community guide</a> for migration assistance.</li>
 <li>You <strong>must</strong> upgrade to v2.5.16 or later before upgrading to v2.6.0.</li>
 </ul>
+<p><strong>Message Queue limitations</strong>: When upgrading to Milvus v2.6.0, you must maintain your current message queue choice (Pulsar or Kafka). Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade process<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

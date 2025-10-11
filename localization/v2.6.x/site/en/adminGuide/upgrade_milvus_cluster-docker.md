@@ -21,6 +21,9 @@ title: Upgrade Milvus Cluster with Docker Compose
       </svg>
     </button></h1><p>This topic describes how to upgrade your Milvus using Docker Compose.</p>
 <p>In normal cases, you can <a href="#Upgrade-Milvus-by-changing-its-image">upgrade Milvus by changing its image</a>. However, you need to <a href="#Migrate-the-metadata">migrate the metadata</a> before any upgrade from v2.1.x to v2.6.0.</p>
+<div class="alert note">
+<p><strong>Message Queue limitations</strong>: When upgrading to Milvus v2.6.0, you must maintain your current message queue choice (Pulsar or Kafka). Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.</p>
+</div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Upgrade Milvus by changing its image<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
