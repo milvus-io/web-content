@@ -11,6 +11,13 @@ Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stre
 
 You can configure Pulsar with [Docker Compose](https://docs.docker.com/get-started/overview/) or on K8s and configure Kafka on K8s.
 
+<div class="alert note">
+
+**Message Queue limitations**: When upgrading to Milvus v2.6.0, you must maintain your current message queue choice (Pulsar or Kafka). Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+
+
+</div>
+
 ## Configure Pulsar with Docker Compose
 
 ### 1. Configure Pulsar
