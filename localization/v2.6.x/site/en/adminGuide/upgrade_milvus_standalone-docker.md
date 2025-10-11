@@ -87,6 +87,7 @@ title: Upgrade Milvus Standalone with Docker Compose
 <li>If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">this community guide</a> for migration assistance.</li>
 <li>You <strong>must</strong> upgrade to v2.5.16 or later before upgrading to v2.6.2.</li>
 </ul>
+<p><strong>Message Queue limitations</strong>: When upgrading to Milvus v2.6.2, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.</p>
 <div class="alter note">
 <p>Due to security concerns, Milvus upgrades its MinIO to RELEASE.2024-12-18T13-15-44Z with the release of v2.6.2.</p>
 </div>
