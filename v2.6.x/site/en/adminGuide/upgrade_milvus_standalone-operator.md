@@ -12,13 +12,13 @@ title: Upgrade Milvus Standalone with Milvus Operator
 
 # Upgrade Milvus Standalone with Milvus Operator
 
-This guide describes how to upgrade your Milvus standalone deployment from v2.5.x to v2.6.2 using Milvus Operator.
+This guide describes how to upgrade your Milvus standalone deployment from v2.5.x to v2.6.3 using Milvus Operator.
 
 ## Before you start
 
-### What's new in v2.6.2
+### What's new in v2.6.3
 
-Upgrading from Milvus 2.5.x to 2.6.2 involves significant architectural changes:
+Upgrading from Milvus 2.5.x to 2.6.3 involves significant architectural changes:
 
 - **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
 - **New components**: Introduction of Streaming Node for enhanced data processing
@@ -34,11 +34,11 @@ This upgrade process ensures proper migration to the new architecture. For more 
 - Helm 3.x installed
 
 **Compatibility requirements:**
-- Milvus v2.6.0-rc1 is **not compatible** with v2.6.2. Direct upgrades from release candidates are not supported.
+- Milvus v2.6.0-rc1 is **not compatible** with v2.6.3. Direct upgrades from release candidates are not supported.
 - If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
-- You **must** upgrade to v2.5.16 or later before upgrading to v2.6.2.
+- You **must** upgrade to v2.5.16 or later before upgrading to v2.6.3.
 
-**Message Queue limitations**: When upgrading to Milvus v2.6.2, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+**Message Queue limitations**: When upgrading to Milvus v2.6.3, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
 
 ## Upgrade process
@@ -94,9 +94,9 @@ Wait for completion:
 kubectl get pods
 ```
 
-#### 2.2 Upgrade to v2.6.2
+#### 2.2 Upgrade to v2.6.3
 
-Once v2.5.16 is running successfully, upgrade to v2.6.2:
+Once v2.5.16 is running successfully, upgrade to v2.6.3:
 
 Update your configuration file (`milvusupgrade.yaml` in this example):
 
@@ -107,7 +107,7 @@ metadata:
   name: my-release  # Replace with your actual release name
 spec:
   components:
-    image: milvusdb/milvus:v2.6.2
+    image: milvusdb/milvus:v2.6.3
 ```
 
 Apply the final upgrade:

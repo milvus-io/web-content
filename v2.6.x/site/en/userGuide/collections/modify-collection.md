@@ -118,6 +118,43 @@ curl --request POST \
 
 ## Set Collection Properties
 
+You can modify collection-level properties after a collection is created.
+
+### Supported properties
+
+<table>
+   <tr>
+     <th><p>Property</p></th>
+     <th><p>Description</p></th>
+   </tr>
+   <tr>
+     <td><p><code>collection.ttl.seconds</code></p></td>
+     <td><p>If the data of a collection needs to be deleted after a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes all entities from the collection. </p><p>The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.</p><p>For details, refer to <a href="set-collection-ttl.md">Set Collection TTL</a>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code>mmap.enabled</code></p></td>
+     <td><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize data placement policy based on access frequency, expanding storage capacity for collections without impacting search performance.</p><p>For details, refer to <a href="mmap.md">Use mmap</a>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code>partitionkey.isolation</code></p></td>
+     <td><p>With Partition Key Isolation enabled, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance.</p><p>For details, refer to <a href="use-partition-key.md#Use-Partition-Key-Isolation">Use Partition Key Isolation</a>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code>dynamicfield.enabled</code></p></td>
+     <td><p>Enables the dynamic field for collections that were created without enabling it. Once enabled, you can insert entities with fields not defined in the original schema. For details, refer to <a href="enable-dynamic-field.md">Dynamic Field</a>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code>allow_insert_auto_id</code></p></td>
+     <td><p>Whether to allow a collection to accept user-provided primary key values when AutoID has been enabled for the collection.</p><ul><li><p>When set to <strong>"true"</strong>: Inserts, upserts, and bulk imports use the user-provided primary key if present; otherwise, primary key values are auto-generated.</p></li><li><p>When set to <strong>"false"</strong>: User-provided primary key values are rejected or ignored and primary key values are always auto-generated. The default is <strong>"false"</strong>.</p></li></ul></td>
+   </tr>
+   <tr>
+     <td></td>
+     <td></td>
+   </tr>
+</table>
+
+### Example 1: Set collection TTL
+
 The following code snippet demonstrates how to set collection TTL.
 
 <div class="multipleCode">
@@ -186,26 +223,194 @@ curl --request POST \
 }'
 ```
 
-The applicable collection properties are as follows:
+### Example 2: Enable mmap
 
-<table>
-   <tr>
-     <th><p>Property</p></th>
-     <th><p>When to Use</p></th>
-   </tr>
-   <tr>
-     <td><p><code>collection.ttl.seconds</code></p></td>
-     <td><p>If the data of a collection needs to be deleted after a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes all entities from the collection.  The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete. For details, refer to <a href="set-collection-ttl.md">Set Collection TTL</a>.</p></td>
-   </tr>
-   <tr>
-     <td><p><code>mmap.enabled</code></p></td>
-     <td><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize data placement policy based on access frequency, expanding storage capacity for collections without impacting search performance.</p><p>For details, refer to <a href="mmap.md">Use mmap</a>.</p></td>
-   </tr>
-   <tr>
-     <td><p><code>partitionkey.isolation</code></p></td>
-     <td><p>With Partition Key Isolation enabled, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance. For details, refer to <a href="use-partition-key.md#Use-Partition-Key-Isolation">Use Partition Key Isolation</a>.</p></td>
-   </tr>
-</table>
+The following code snippet demonstrates how to enable mmap.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import MilvusClient
+
+client.alter_collection_properties(
+    collection_name="my_collection",
+    properties={"mmap.enabled": True}
+)
+```
+
+```java
+Map<String, String> properties = new HashMap<>();
+properties.put("mmap.enabled", "True");
+
+AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+        .collectionName("my_collection")
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+```
+
+```javascript
+await client.alterCollectionProperties({
+    collection_name: "my_collection",
+    properties: {
+        "mmap.enabled": true
+    }
+});
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+### Example 3: Enable partition key
+
+The following code snippet demonstrates how to enable the partition key.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import MilvusClient
+
+client.alter_collection_properties(
+    collection_name="my_collection",
+    properties={"partitionkey.isolation": True}
+)
+```
+
+```java
+Map<String, String> properties = new HashMap<>();
+properties.put("partitionkey.isolation", "True");
+
+AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+        .collectionName("my_collection")
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+```
+
+```javascript
+await client.alterCollectionProperties({
+    collection_name: "my_collection",
+    properties: {
+        "partitionkey.isolation": true
+    }
+});
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+### Example 4: Enable dynamic field
+
+The following code snippet demonstrates how to enable the dynamic field.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import MilvusClient
+
+client.alter_collection_properties(
+    collection_name="my_collection",
+    properties={"dynamicfield.enabled": True}
+)
+```
+
+```java
+Map<String, String> properties = new HashMap<>();
+properties.put("dynamicfield.enabled", "True");
+
+AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+        .collectionName("my_collection")
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+```
+
+```javascript
+await client.alterCollectionProperties({
+    collection_name: "my_collection",
+    properties: {
+        "dynamicfield.enabled": true
+    }
+});
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+### Example 5: Enable allow_insert_auto_id
+
+The `allow_insert_auto_id` property allows a collection with AutoID enabled to accept user-provided primary key values during insert, upsert, and bulk import. When set to **"true"**, Milvus uses the user-provided primary key value if present; otherwise it auto-generates. Default is **"false"**.
+
+The example below shows how to enable `allow_insert_auto_id`:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.alter_collection_properties(
+    collection_name="my_collection",
+    # highlight-next-line
+    properties={"allow_insert_auto_id": "true"}
+)
+# After enabling, inserts with a PK column will use that PK; otherwise Milvus auto-generates.
+```
+
+```java
+// java
+```
+
+```javascript
+// js
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
 
 ## Drop Collection Properties
 
