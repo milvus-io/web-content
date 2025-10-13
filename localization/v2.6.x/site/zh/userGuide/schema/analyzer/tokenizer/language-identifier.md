@@ -3,7 +3,7 @@ id: language-identifier.md
 title: 语言识别器Compatible with Milvus v2.5.15+
 summary: >-
   语言识别器（language_identifier）是一个专门的标记器，旨在通过自动语言分析过程来增强 Milvus
-  的文本搜索功能。它的主要功能是检测文本字段的语言，然后动态应用最适合该语言的预配置分析器。这对于处理多种语言的应用程序来说尤为重要，因为它消除了按输入手动分配语言的需要。
+  的文本搜索功能。它的主要功能是检测文本字段的语言，然后动态应用最适合该语言的预配置分析器。这对于处理多种语言的应用程序来说尤为重要，因为它消除了根据每次输入手动分配语言的需要。
 beta: Milvus v2.5.15+
 ---
 <h1 id="Language-Identifier" class="common-anchor-header">语言识别器<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.5.15+</span><button data-href="#Language-Identifier" class="anchor-icon" translate="no">
@@ -44,7 +44,7 @@ beta: Milvus v2.5.15+
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/language-detection-workflow.png" alt="Language Detection Workflow" class="doc-image" id="language-detection-workflow" />
    </span> <span class="img-wrapper"> <span>语言检测工作流程</span> </span></p>
 <ol>
-<li><p><strong>输入：</strong>工作流程以输入文本字符串开始。</p></li>
+<li><p><strong>输入：</strong>工作流程以文本字符串作为输入开始。</p></li>
 <li><p><strong>语言检测：</strong>首先将该字符串传递给语言检测引擎，尝试识别语言。Milvus 支持两种引擎：<strong>Whatlang</strong>和<strong>lingua</strong>。</p></li>
 <li><p><strong>分析器选择：</strong></p>
 <ul>
@@ -97,7 +97,7 @@ beta: Milvus v2.5.15+
      <td><p>精度比速度更重要的应用</p></td>
    </tr>
 </table>
-<p>一个重要的考虑因素是引擎的命名约定。虽然两个引擎都以英文返回语言名称，但它们对某些语言使用了不同的术语（例如，<code translate="no">whatlang</code> 返回<code translate="no">Mandarin</code> ，而<code translate="no">lingua</code> 返回<code translate="no">Chinese</code> ）。分析仪的关键字必须与所选检测引擎返回的名称完全匹配。</p>
+<p>一个重要的考虑因素是引擎的命名约定。虽然两个引擎都以英文返回语言名称，但它们对某些语言使用不同的术语（例如，<code translate="no">whatlang</code> 返回<code translate="no">Mandarin</code> ，而<code translate="no">lingua</code> 返回<code translate="no">Chinese</code> ）。分析仪的关键字必须与所选检测引擎返回的名称完全匹配。</p>
 <h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -109,7 +109,7 @@ beta: Milvus v2.6.2+
 <p><table>
 <tr>
 <th><p>ID</p></th>
-<th><p>JenisDokumen</p></th>
+<th><p>Jenis Dokumen</p></th>
 <th><p>Skor</p></th>
 <th><p>Peringkat</p></th>
 <th><p>segmen</p></th>

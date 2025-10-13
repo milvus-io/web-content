@@ -157,7 +157,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <p>Haga que los dispositivos GPU <code translate="no">0</code> y <code translate="no">1</code> sean visibles para Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Puede detener y eliminar este contenedor como se indica a continuación.</p>
+<p>Puede detener y eliminar este contenedor de la siguiente manera.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose down</span>
 <span class="hljs-meta prompt_">

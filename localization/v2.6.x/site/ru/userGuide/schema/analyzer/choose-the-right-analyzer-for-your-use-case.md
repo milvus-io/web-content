@@ -43,7 +43,7 @@ summary: Примечания
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>Рабочий процесс анализатора</span> </span></p>
 <ol>
-<li><p><strong>Токенизация (обязательно):</strong> На этом начальном этапе применяется <strong>токенизатор</strong>, разбивающий непрерывную строку текста на дискретные, осмысленные единицы, называемые токенами. Метод токенизации может значительно отличаться в зависимости от языка и типа содержимого.</p></li>
+<li><p><strong>Токенизация (обязательно):</strong> На этом начальном этапе применяется <strong>токенизатор</strong>, разбивающий непрерывную строку текста на дискретные, осмысленные единицы, называемые токенами. Метод токенизации может существенно различаться в зависимости от языка и типа содержимого.</p></li>
 <li><p><strong>Фильтрация токенов (необязательно):</strong> После токенизации применяются <strong>фильтры</strong> для изменения, удаления или уточнения токенов. Эти операции могут включать преобразование всех лексем в строчные буквы, удаление общих бессмысленных слов (например, стоп-слов) или сокращение слов до их корневой формы (стемминг).</p></li>
 </ol>
 <p><strong>Пример</strong>:</p>
@@ -88,7 +88,7 @@ summary: Примечания
      <td><p>Поиск компонента многословной фразы не возвращает документы, содержащие полную фразу.</p></td>
      <td><p><code translate="no">"state-of-the-art"</code> → <code translate="no">['state-of-the-art']</code></p></td>
      <td><p>Анализатор с <a href="/docs/ru/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> токенизатором</p></td>
-     <td><p>Используйте <a href="/docs/ru/standard-tokenizer.md"><code translate="no">standard</code></a> токенайзер для разделения на знаки препинания и пробелы; используйте пользовательский <a href="/docs/ru/regex-filter.md">регекс-фильтр</a>.</p></td>
+     <td><p>Используйте <a href="/docs/ru/standard-tokenizer.md"><code translate="no">standard</code></a> токенизатор для разделения на знаки препинания и пробелы; используйте пользовательский <a href="/docs/ru/regex-filter.md">регекс-фильтр</a>.</p></td>
    </tr>
    <tr>
      <td><p>Языковые несоответствия</p></td>
@@ -526,7 +526,7 @@ schema.add_field(
      <td><p><a href="/docs/ru/cncharonly-filter.md"><code translate="no">cncharonly</code></a></p></td>
      <td><p>Китайский</p></td>
      <td><p>Сохраняет только китайские иероглифы</p></td>
-     <td><ul><li><p>Ввод: <code translate="no">["Hello", "世界", "123"]</code></p></li><li><p>Выход: <code translate="no">[[], ['世界'], []]</code></p></li></ul></td>
+     <td><ul><li><p>Ввод: <code translate="no">["Hello", "世界", "123"]</code></p></li><li><p>Выходные данные: <code translate="no">[[], ['世界'], []]</code></p></li></ul></td>
    </tr>
 </table>
 <h3 id="Step-3-Combine-and-implement" class="common-anchor-header">Шаг 3: Объединить и реализовать<button data-href="#Step-3-Combine-and-implement" class="anchor-icon" translate="no">

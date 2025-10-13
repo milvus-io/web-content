@@ -79,7 +79,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.13</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>En el archivo de configuración anterior, establezca <code translate="no">spec.components.enableRollingUpdate</code> en <code translate="no">true</code> y <code translate="no">spec.components.image</code> en la versión de Milvus deseada.</p>
-<p>Por defecto, Milvus realiza la actualización continua de los coordinadores de forma ordenada, sustituyendo las imágenes de los pods de los coordinadores una tras otra. Para reducir el tiempo de actualización, considere configurar <code translate="no">spec.components.imageUpdateMode</code> a <code translate="no">all</code> para que Milvus reemplace todas las imágenes de pod al mismo tiempo.</p>
+<p>Por defecto, Milvus realiza la actualización continua para los coordinadores de forma ordenada, en la que sustituye las imágenes del pod de coordinador una tras otra. Para reducir el tiempo de actualización, considere configurar <code translate="no">spec.components.imageUpdateMode</code> a <code translate="no">all</code> para que Milvus reemplace todas las imágenes de pod al mismo tiempo.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

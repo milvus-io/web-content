@@ -24,7 +24,7 @@ beta: Milvus v2.5.15+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">language_identifier</code> هو مُعرّف لغة متخصص مصمم لتعزيز قدرات البحث عن النص في ميلفوس من خلال أتمتة عملية تحليل اللغة. وتتمثل وظيفته الأساسية في الكشف عن لغة حقل النص ثم تطبيق محلل تم تكوينه مسبقًا بشكل ديناميكي وهو الأكثر ملاءمة لتلك اللغة. يعد هذا الأمر ذا قيمة خاصة للتطبيقات التي تتعامل مع مجموعة متنوعة من اللغات، حيث أنه يلغي الحاجة إلى تعيين اللغة يدويًا على أساس كل مدخل.</p>
+    </button></h1><p><code translate="no">language_identifier</code> هو مُعرّف لغة متخصص مصمم لتعزيز قدرات البحث عن النص في ميلفوس من خلال أتمتة عملية تحليل اللغة. وتتمثل وظيفته الأساسية في اكتشاف لغة حقل نصي ثم تطبيق محلل تم تكوينه مسبقًا بشكل ديناميكي وهو الأكثر ملاءمة لتلك اللغة. يعد هذا الأمر ذا قيمة خاصة للتطبيقات التي تتعامل مع مجموعة متنوعة من اللغات، حيث أنه يلغي الحاجة إلى التعيين اليدوي للغة على أساس كل مدخل.</p>
 <p>من خلال توجيه البيانات النصية بذكاء إلى خط أنابيب المعالجة المناسب، يعمل <code translate="no">language_identifier</code> على تبسيط عملية استيعاب البيانات متعددة اللغات ويضمن ترميزًا دقيقًا لعمليات البحث والاسترجاع اللاحقة.</p>
 <h2 id="Language-detection-workflow" class="common-anchor-header">سير عمل الكشف عن اللغة<button data-href="#Language-detection-workflow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,9 +201,9 @@ beta: Milvus v2.5.15+
 <li><p><code translate="no">identifier</code> - يحدد محرك اكتشاف اللغة المراد استخدامه (<code translate="no">whatlang</code> أو <code translate="no">lingua</code>). افتراضي إلى <code translate="no">whatlang</code> إذا لم يتم تحديده</p></li>
 <li><p><code translate="no">mapping</code> - ينشئ أسماء مستعارة مخصصة لمحللاتك، مما يسمح لك باستخدام أسماء وصفية بدلاً من تنسيق الإخراج الدقيق لمحرك الكشف</p></li>
 </ul>
-<p>يعمل الرمز المميز من خلال الكشف أولاً عن لغة النص المدخل، ثم تحديد المحلل المناسب من التكوين الخاص بك. في حالة فشل الكشف أو عدم وجود محلل مطابق، فإنه يعود تلقائيًا إلى محلل <code translate="no">default</code> الخاص بك.</p>
+<p>يعمل الرمز المميز من خلال الكشف أولاً عن لغة النص المدخل، ثم تحديد المحلل المناسب من التكوين الخاص بك. إذا فشل الكشف أو لم يوجد محلل مطابق، فإنه يعود تلقائيًا إلى محلل <code translate="no">default</code> الخاص بك.</p>
 <h4 id="Recommended-Direct-name-matching" class="common-anchor-header">موصى به: مطابقة الاسم المباشر</h4><p>يجب أن تتطابق أسماء المحللات الخاصة بك تمامًا مع مخرجات محرك اكتشاف اللغة الذي اخترته. هذا النهج أبسط ويتجنب الالتباس المحتمل.</p>
-<p>بالنسبة لكل من <code translate="no">whatlang</code> و <code translate="no">lingua</code> ، استخدم أسماء اللغات كما هو موضح في الوثائق الخاصة بكل منها:</p>
+<p>بالنسبة لكل من <code translate="no">whatlang</code> و <code translate="no">lingua</code> ، استخدم أسماء اللغات كما هو موضح في الوثائق الخاصة بكل منهما:</p>
 <ul>
 <li><p><a href="https://github.com/greyblake/whatlang-rs/blob/master/SUPPORTED_LANGUAGES.md">اللغات المدعومة من whatlang</a> (استخدم عمود<strong>"اللغة</strong>")</p></li>
 <li><p><a href="https://github.com/pemistahl/lingua?tab=readme-ov-file#3-which-languages-are-supported">اللغات المدعومة من lingua</a></p></li>
@@ -226,7 +226,7 @@ beta: Milvus v2.5.15+
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Alternative-approach-Custom-names-with-mapping" class="common-anchor-header">النهج البديل: الأسماء المخصصة مع التعيين</h4><p>إذا كنت تفضل استخدام أسماء المحللين المخصصة أو تحتاج إلى الحفاظ على التوافق مع التكوينات الحالية، يمكنك استخدام المعلمة <code translate="no">mapping</code>. يؤدي هذا إلى إنشاء أسماء مستعارة لمحللاتك - ستعمل كل من أسماء محرك الكشف الأصلية وأسماءك المخصصة.</p>
+<h4 id="Alternative-approach-Custom-names-with-mapping" class="common-anchor-header">النهج البديل: الأسماء المخصصة مع التعيين</h4><p>إذا كنت تفضل استخدام أسماء المحللين المخصصة أو تحتاج إلى الحفاظ على التوافق مع التكوينات الحالية، يمكنك استخدام المعلمة <code translate="no">mapping</code>. يؤدي ذلك إلى إنشاء أسماء مستعارة لمحللاتك - ستعمل كل من أسماء محرك الكشف الأصلية وأسماءك المخصصة.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;language_identifier&quot;</span>,

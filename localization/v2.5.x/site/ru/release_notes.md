@@ -884,7 +884,7 @@ title: Информация о выпуске
 <li>[2.5] Исправлена паника querycoord в угловом случае<a href="https://github.com/milvus-io/milvus/pull/40058">(#40058</a>)</li>
 <li>[2.5] Улучшена функция isbalanced для корректного подсчета пар кавычек<a href="https://github.com/milvus-io/milvus/pull/40002">(#40002</a>)</li>
 <li>[2.5] Исправлено отрицательное -1 при выполнении задач уплотнения<a href="https://github.com/milvus-io/milvus/pull/39955">(#39955</a>)</li>
-<li>[2.5] Исправлена ошибка, при которой сегмент никогда не переходил из состояния sealed в состояние flushing<a href="https://github.com/milvus-io/milvus/pull/39996">(#39996</a>)</li>
+<li>[2.5] Исправлена ошибка, из-за которой сегмент мог никогда не переходить из состояния sealed в состояние flushing<a href="https://github.com/milvus-io/milvus/pull/39996">(#39996</a>)</li>
 <li>Пропущено создание индекса первичного ключа при загрузке индекса pk<a href="https://github.com/milvus-io/milvus/pull/39922">(#39922</a>)</li>
 <li>[2.5] Пропускалось создание текстового индекса, когда сегмент был нулевым после сортировки<a href="https://github.com/milvus-io/milvus/pull/39969">(#39969</a>)</li>
 <li>[2.5] Исправлена ошибка поиска по самой ранней позиции<a href="https://github.com/milvus-io/milvus/pull/39966">(#39966</a>)</li>

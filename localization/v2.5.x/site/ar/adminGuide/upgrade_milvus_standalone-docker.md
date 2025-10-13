@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: تعرف على كيفية ترقية Milvus مستقل مع Docker Compose.
 title: ترقية Milvus Standalone باستخدام Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>مشغل</a><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>MilvusHelmDocker</a><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>مشغل</a><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-helm.md" class=''>MilvusHelmDocker</a><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">ترقية Milvus Standalone باستخدام Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

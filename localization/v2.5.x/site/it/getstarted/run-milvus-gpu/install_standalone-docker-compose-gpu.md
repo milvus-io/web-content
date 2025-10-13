@@ -130,7 +130,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se non si riesce a eseguire il comando precedente, verificare se nel sistema è installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p>
+<p>Se non si è riusciti a eseguire il comando precedente, verificare se nel sistema è installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p>
 </div>
 <p>Dopo aver avviato Milvus,</p>
 <ul>
@@ -179,7 +179,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dopo che Milvus è stato avviato, è possibile personalizzare il pool di memoria modificando le impostazioni di <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> nel file <code translate="no">milvus.yaml</code>.</p>
+    </button></h2><p>Dopo che Milvus è in funzione, è possibile personalizzare il pool di memoria modificando le impostazioni di <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> nel file <code translate="no">milvus.yaml</code>.</p>
 <div class="alert note">
 <p>Il file <code translate="no">milvus.yaml</code> si trova nella directory <code translate="no">/milvus/configs/</code> all'interno del contenitore Milvus.</p>
 </div>
@@ -234,7 +234,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/it/v2.5.x/manage_databases.md">Gestire i database</a></li>
 <li><a href="/docs/it/v2.5.x/manage-collections.md">Gestire le collezioni</a></li>
 <li><a href="/docs/it/v2.5.x/manage-partitions.md">Gestire le partizioni</a></li>
-<li><a href="/docs/it/v2.5.x/insert-update-delete.md">Inserimento, inserimento ed eliminazione</a></li>
+<li><a href="/docs/it/v2.5.x/insert-update-delete.md">Inserire, inserire ed eliminare</a></li>
 <li><a href="/docs/it/v2.5.x/single-vector-search.md">Ricerca a vettore singolo</a></li>
 <li><a href="/docs/it/v2.5.x/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>

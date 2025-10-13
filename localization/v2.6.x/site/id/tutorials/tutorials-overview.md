@@ -43,12 +43,13 @@ title: Ikhtisar Tutorial
 <tr><td><a href="/docs/id/vector_visualization.md">Visualisasi Vektor</a></td><td>Mulai cepat</td><td>Pencarian Vektor</td></tr>
 <tr><td><a href="/docs/id/movie_recommendation_with_milvus.md">Rekomendasi Film dengan Milvus</a></td><td>Sistem Rekomendasi</td><td>pencarian vektor</td></tr>
 <tr><td><a href="/docs/id/funnel_search_with_matryoshka.md">Pencarian Corong dengan Penyematan Matryoshka</a></td><td>Mulai cepat</td><td>Pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/question_answering_system.md">Sistem Penjawaban Pertanyaan</a></td><td>Menjawab Pertanyaan</td><td>Pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/question_answering_system.md">Sistem Penjawab Pertanyaan</a></td><td>Menjawab Pertanyaan</td><td>Pencarian vektor</td></tr>
 <tr><td><a href="/docs/id/recommendation_system.md">Sistem Rekomendasi</a></td><td>Sistem Rekomendasi</td><td>Pencarian Vektor</td></tr>
 <tr><td><a href="/docs/id/video_similarity_search.md">Pencarian Kemiripan Video</a></td><td>Pencarian Semantik</td><td>Pencarian Vektor</td></tr>
 <tr><td><a href="/docs/id/audio_similarity_search.md">Pencarian Kemiripan Audio</a></td><td>Pencarian Semantik</td><td>pencarian vektor</td></tr>
 <tr><td><a href="/docs/id/dna_sequence_classification.md">Klasifikasi DNA</a></td><td>Klasifikasi</td><td>pencarian vektor</td></tr>
 <tr><td><a href="/docs/id/text_search_engine.md">Mesin Pencari Teks</a></td><td>Pencarian Semantik</td><td>Pencarian Vektor</td></tr>
 <tr><td><a href="/docs/id/image_deduplication_system.md">Deduplikasi Gambar</a></td><td>Deduplikasi</td><td>Pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/generating_milvus_query_filter_expressions.md">Menghasilkan Ekspresi Filter Kueri Milvus dengan Model Bahasa Besar</a></td><td>Pemfilteran Metadata</td><td>Pencarian vektor</td></tr>
 </tbody>
 </table>

@@ -626,7 +626,7 @@ title: 發佈筆記
 <tr><td>2.5.7</td><td>2.5.6</td><td>2.5.6</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>我們很高興地宣佈 Milvus 2.5.7 正式發行，新推出的 JSON Path Index 功能是其中的亮點。這可讓您在動態或 JSON 列上建立反向索引，大幅提升查詢效能。除了這些新功能之外，我們還做了許多增強功能和錯誤修正，以獲得更好的可靠性、更精緻的錯誤處理，以及更高的可用性。我們鼓勵您升級或試用，並一如既往地衷心感謝您的反饋意見，我們將繼續改進 Milvus！</p>
+<p>我們很高興地宣佈 Milvus 2.5.7 正式發行，新推出的 JSON Path Index 功能是其中的亮點。這可讓您在動態或 JSON 列上建立反向索引，大幅提升查詢效能。除了這些新功能之外，我們還做了許多增強功能和錯誤修正，以獲得更好的可靠性、更精緻的錯誤處理，以及更佳的可用性。我們鼓勵您升級或試用，並一如既往地衷心感謝您的反饋意見，我們將繼續改進 Milvus！</p>
 <h3 id="Features" class="common-anchor-header">功能特色<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -818,7 +818,7 @@ title: 發佈筆記
 <tr><td>2.5.5</td><td>2.5.4</td><td>2.5.5</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.5 在單一叢集可支援的集合和分割區數量方面帶來了顯著的改進。現在，運行 Milvus 的 10K 集合和 100K 磁碟分割是完全可行的。此版本也解決了幾個重要的錯誤，包括遺失匹配統計資料和多階段查詢中的死鎖問題。此外，它還包含許多可觀察性與安全性的強化。我們強烈建議所有執行 Milvus 2.5.x 的使用者儘快升級。</p>
+<p>Milvus 2.5.5 在單一叢集可支援的集合和分割區數量方面帶來了顯著的改進。現在，運行 Milvus 的 10K 集合和 100K 磁碟分割是完全可行的。這個版本也解決了幾個重要的錯誤，包括遺失匹配統計資料和多階段查詢中的死鎖問題。此外，它還包含許多可觀察性與安全性的強化。我們強烈建議所有執行 Milvus 2.5.x 的使用者儘快升級。</p>
 <h3 id="Dependency-Upgrade" class="common-anchor-header">相依性升級<button data-href="#Dependency-Upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1330,7 +1330,7 @@ title: 發佈筆記
 <tr><td>2.5.0</td><td>2.5.1</td><td>2.5.2</td><td>2.5.2</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.0 為處理向量搜尋與大規模資料管理的使用者帶來了顯著的進步，以提升可用性、可擴充性與效能。在此版本中，Milvus 整合了強大的新功能，例如：基於術語的搜尋、針對最佳化查詢的聚類壓縮，以及對稀疏與密集向量搜尋方法的多樣化支援。在群集管理、索引和資料處理方面的強化，將彈性和易用性提升到新的層級，使 Milvus 成為更強大、更易於使用的向量資料庫。</p>
+<p>Milvus 2.5.0 為處理向量搜尋與大規模資料管理的使用者帶來重大進步，以提升可用性、可擴充性與效能。在此版本中，Milvus 整合了強大的新功能，例如：基於術語的搜尋、針對最佳化查詢的聚類壓縮，以及對稀疏與密集向量搜尋方法的多樣化支援。在群集管理、索引和資料處理方面的強化，將彈性和易用性提升到新的層級，使 Milvus 成為更強大、更易於使用的向量資料庫。</p>
 <h3 id="Key-Features" class="common-anchor-header">主要功能<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1350,7 +1350,7 @@ title: 發佈筆記
 <p>在<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> 的支援下，Milvus 2.5 內建了分析器和稀疏向量萃取，將 API 從僅接收向量作為輸入擴展到直接接受文字。當資料插入時，BM25 統計資訊會即時更新，提升可用性與精確度。此外，以近似近鄰 (ANN) 演算法為基礎的稀疏向量，提供比標準關鍵字搜尋系統更強大的效能。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md">Analyzer 概觀</a>與<a href="/docs/zh-hant/v2.5.x/full-text-search.md">全文</a>檢索。</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">叢集管理 WebUI (測試版)</h4><p>為了更好地支援海量資料和豐富的功能，Milvus 的精密設計包括各種依賴關係、眾多節點角色、複雜的資料結構等。這些方面都可能為使用和維護帶來挑戰。</p>
-<p>Milvus 2.5 引入了內建的叢集管理 WebUI，透過可視化 Milvus 複雜的運行環境資訊，降低系統維護的難度。這包括資料庫和資料集、網段、頻道、相依性、節點健康狀態、任務資訊、緩慢查詢等詳細資訊。</p>
+<p>Milvus 2.5 引入了內建的叢集管理 WebUI，透過可視化 Milvus 複雜的運行環境資訊，降低系統維護的難度。這包括資料庫和資料集、網段、頻道、依存關係、節點健康狀態、任務資訊、緩慢查詢等詳細資訊。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <h4 id="Text-Match" class="common-anchor-header">文字匹配</h4><p>Milvus 2.5 利用<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>的分析器和索引進行文字預處理和索引建立，支援根據特定詞彙對文字資料進行精確的自然語言匹配。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細查詢結果，允許在符合標量條件的向量內進行相似性搜尋。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/analyzer-overview.md">Analyzer 概觀</a>和<a href="/docs/zh-hant/v2.5.x/keyword-match.md">文字匹配</a>。</p>
@@ -1380,7 +1380,7 @@ title: 發佈筆記
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">串流節點 (測試版)</h4><p>Milvus 2.5 引入了一個稱為串流節點 (streaming node) 的新元件，提供先寫後記錄 (WAL) 服務。這可讓 Milvus 在讀寫通道前後達成共識，解鎖新特性、功能和最佳化。Milvus 2.5 預設停用此功能，並將於 3.0 版正式提供。</p>
+    </button></h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">串流節點 (測試版)</h4><p>Milvus 2.5 引入了一個稱為串流節點的新元件，提供先寫後記錄 (WAL) 服務。這可讓 Milvus 在讀寫通道前後達成共識，釋放新特性、功能和最佳化。Milvus 2.5 預設停用此功能，並將於 3.0 版正式提供。</p>
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6 支援</h4><p>Milvus 現在支援 IPv6，擴大網路連線性與相容性。</p>
 <h4 id="CSV-Bulk-Import" class="common-anchor-header">CSV 大量匯入</h4><p>除了 JSON 和 Parquet 格式外，Milvus 現在還支援直接大量匯入 CSV 格式的資料。</p>
 <h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">加速查詢的表達式範本</h4><p>Milvus 現在支援表達式範本，提高表達式解析效率，特別是在使用複雜表達式的情況下。</p>

@@ -2,7 +2,7 @@
 id: configure-docker.md
 label: Docker Compose
 related_key: configure
-summary: Configurar Milvus con Docker Compose.
+summary: Configure Milvus con Docker Compose.
 title: Configurar Milvus con Docker Compose
 ---
 <h1 id="Configure-Milvus-with-Docker-Compose" class="common-anchor-header">Configurar Milvus con Docker Compose<button data-href="#Configure-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
@@ -156,7 +156,7 @@ En la versión actual, todos los parámetros tienen efecto sólo después de rei
     </td>
   </tr>
   <tr>
-    <td>Cuotas y límites</td>
+    <td>Cuota y límites</td>
     <td>
         <ul>
             <li><a href="/docs/es/v2.5.x/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>

@@ -57,7 +57,7 @@ title: Запуск Milvus с помощью Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus предоставляет конфигурационный файл Docker Compose в репозитории Milvus. Чтобы установить Milvus с помощью Docker Compose, просто выполните команду</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Что нового в версии 2.6.0:</strong></p>
+<p><strong>Что нового в версии 2.6.3:</strong></p>
 <ul>
-<li><strong>Улучшенная архитектура</strong>: Новая потоковая нода и оптимизированные компоненты.</li>
+<li><strong>Улучшенная архитектура</strong>: Включает новый узел потоковой передачи и оптимизированные компоненты</li>
 <li><strong>Обновленные зависимости</strong>: Включает последние версии MinIO и etcd</li>
 <li><strong>Улучшенная конфигурация</strong>: Оптимизированы настройки для повышения производительности</li>
 </ul>
-<p>Всегда загружайте последнюю версию конфигурации Docker Compose для обеспечения совместимости с функциями v2.6.0.</p>
+<p>Всегда загружайте последнюю версию конфигурации Docker Compose, чтобы обеспечить совместимость с функциями версии 2.6.3.</p>
 <ul>
 <li><p>Если вам не удалось выполнить приведенную выше команду, проверьте, установлена ли в вашей системе Docker Compose V1. Если это так, рекомендуем перейти на Docker Compose V2 в соответствии с примечаниями на <a href="https://docs.docker.com/compose/">этой странице</a>.</p></li>
 <li><p>Если у вас возникнут проблемы с извлечением образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, сообщив подробности проблемы, и мы окажем вам необходимую поддержку.</p></li>

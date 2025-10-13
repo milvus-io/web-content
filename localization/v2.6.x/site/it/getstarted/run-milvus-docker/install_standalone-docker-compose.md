@@ -57,7 +57,7 @@ title: Eseguire Milvus con Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus fornisce un file di configurazione di Docker Compose nel repository Milvus. Per installare Milvus usando Docker Compose, è sufficiente eseguire</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novità della versione 2.6.0:</strong></p>
+<p><strong>Novità della versione 2.6.3:</strong></p>
 <ul>
 <li><strong>Architettura migliorata</strong>: Presenta il nuovo Streaming Node e componenti ottimizzati.</li>
 <li><strong>Dipendenze aggiornate</strong>: Include le ultime versioni di MinIO e etcd.</li>
 <li><strong>Configurazione migliorata</strong>: Impostazioni ottimizzate per migliorare le prestazioni</li>
 </ul>
-<p>Scaricare sempre l'ultima configurazione di Docker Compose per garantire la compatibilità con le funzioni della versione 2.6.0.</p>
+<p>Scaricare sempre l'ultima configurazione di Docker Compose per garantire la compatibilità con le funzioni della versione 2.6.3.</p>
 <ul>
 <li><p>Se non si riesce a eseguire il comando precedente, verificare se nel sistema è installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p></li>
 <li><p>Se si riscontrano problemi nell'estrazione dell'immagine, contattateci all'indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> con i dettagli del problema e vi forniremo il supporto necessario.</p></li>
@@ -97,7 +97,7 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>È anche possibile accedere alla Milvus WebUI all'indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per saperne di più sulla propria istanza Milvus. Per ulteriori informazioni, consultare <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>.</p>
-<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opzionale) Aggiornare le configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
+<h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornare le configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

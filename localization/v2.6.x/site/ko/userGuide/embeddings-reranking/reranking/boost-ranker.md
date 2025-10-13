@@ -470,7 +470,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">name</code></p></td>
      <td><p>예</p></td>
-     <td><p>이 함수의 고유 식별자</p></td>
+     <td><p>이 함수에 대한 고유 식별자</p></td>
      <td><p><code translate="no">"rrf"</code></p></td>
    </tr>
    <tr>

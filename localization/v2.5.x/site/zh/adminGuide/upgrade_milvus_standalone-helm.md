@@ -44,7 +44,7 @@ title: 使用 Helm 图表升级 Milvus 单机版
 <li>Kubernetes 版本 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>自 Milvus Helm 图表版本 4.2.21 起，我们引入了 pulsar-v3.x 图表作为依赖。为了向后兼容，请将 Helm 升级到 v3.14 或更高版本，并确保在使用<code translate="no">helm upgrade</code> 时添加<code translate="no">--reset-then-reuse-values</code> 选项。</p>
+<p>自 Milvus Helm 图表 4.2.21 版起，我们引入了 pulsar-v3.x 图表作为依赖。为了向后兼容，请将 Helm 升级到 v3.14 或更高版本，并确保在使用<code translate="no">helm upgrade</code> 时添加<code translate="no">--reset-then-reuse-values</code> 选项。</p>
 </div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">检查 Milvus 版本<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -268,7 +268,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h3><p>Milvus 2.2 的一个主要变化是段索引的元数据结构。因此，当 Milvus 从 v2.1.x 升级到 v2.2.0 时，你需要使用 Helm 来迁移元数据。 这里有<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一个脚本</a>供你安全迁移元数据。</p>
-<p>此脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
+<p>该脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
 <p>下表列出了元数据迁移的操作符。</p>
 <table>
 <thead>

@@ -228,7 +228,7 @@ beta: Milvus v2.5.15+
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Alternative-approach-Custom-names-with-mapping" class="common-anchor-header">Enfoque alternativo: Nombres personalizados con mapeo</h4><p>Si prefiere utilizar nombres de analizador personalizados o necesita mantener la compatibilidad con configuraciones existentes, puede utilizar el parámetro <code translate="no">mapping</code>. De este modo, se crean alias para los analizadores, y funcionarán tanto los nombres originales del motor de detección como los nombres personalizados.</p>
+<h4 id="Alternative-approach-Custom-names-with-mapping" class="common-anchor-header">Enfoque alternativo: Nombres personalizados con mapeo</h4><p>Si prefiere utilizar nombres de analizadores personalizados o necesita mantener la compatibilidad con configuraciones existentes, puede utilizar el parámetro <code translate="no">mapping</code>. De este modo, se crean alias para los analizadores, y funcionarán tanto los nombres originales del motor de detección como los nombres personalizados.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;language_identifier&quot;</span>,
@@ -371,5 +371,5 @@ result_fr = client.run_analyzer(<span class="hljs-string">&quot;Café français 
     </button></h2><ul>
 <li><p><strong>Un solo idioma por campo:</strong> Opera sobre un campo como una unidad de texto única y homogénea. Está diseñado para manejar diferentes idiomas en diferentes registros de datos, como por ejemplo un registro que contenga una frase en inglés y el siguiente una frase en francés.</p></li>
 <li><p><strong>No admite cadenas de texto en varios idiomas:</strong> <strong>No</strong> está diseñado para manejar una única cadena que contenga texto de varias lenguas. Por ejemplo, un único campo <code translate="no">VARCHAR</code> que contenga tanto una frase en inglés como una frase entrecomillada en japonés se procesará como una única lengua.</p></li>
-<li><p><strong>Procesamiento de la lengua dominante:</strong> En las situaciones de mezcla de idiomas, es probable que el motor de detección identifique el idioma dominante y aplique el analizador correspondiente a todo el texto. El resultado será una tokenización deficiente o nula del texto extranjero incrustado.</p></li>
+<li><p><strong>Procesamiento de la lengua dominante:</strong> En los casos de mezcla de idiomas, es probable que el motor de detección identifique el idioma dominante y aplique el analizador correspondiente a todo el texto. El resultado será una tokenización deficiente o nula del texto extranjero incrustado.</p></li>
 </ul>

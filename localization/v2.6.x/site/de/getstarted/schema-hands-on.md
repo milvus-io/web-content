@@ -45,7 +45,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Der Entwurf eines Datenmodells für ein Suchsystem umfasst die Analyse der Geschäftsanforderungen und die Abstraktion der Informationen in ein schemaexprimiertes Datenmodell. Ein gut definiertes Schema ist wichtig, um das Datenmodell an den Geschäftszielen auszurichten und die Konsistenz der Daten und die Qualität der Dienste sicherzustellen.  Darüber hinaus ist die Auswahl geeigneter Datentypen und Indizes wichtig, um das Geschäftsziel wirtschaftlich zu erreichen.</p>
-<h3 id="Analyzing-Business-Needs" class="common-anchor-header">Analyse des Geschäftsbedarfs</h3><p>Die effektive Erfüllung der geschäftlichen Anforderungen beginnt mit der Analyse der Abfragetypen, die die Benutzer durchführen werden, und der Bestimmung der am besten geeigneten Suchmethoden.</p>
+<h3 id="Analyzing-Business-Needs" class="common-anchor-header">Analyse des Geschäftsbedarfs<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die effektive Erfüllung der geschäftlichen Anforderungen beginnt mit der Analyse der Abfragetypen, die die Benutzer durchführen werden, und der Bestimmung der am besten geeigneten Suchmethoden.</p>
 <ul>
 <li><p><strong>Benutzerabfragen:</strong> Identifizieren Sie die Arten von Abfragen, die die Benutzer voraussichtlich durchführen werden. So können Sie sicherstellen, dass Ihr Schema reale Anwendungsfälle unterstützt und die Suchleistung optimiert. Dazu können gehören:</p>
 <ul>
@@ -62,7 +77,22 @@ summary: >-
 <li><p><strong>Filterung von Metadaten</strong>: Zusätzlich zur Vektorsuche können Beschränkungen wie Datumsbereiche, Kategorien oder Tags angewendet werden.</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Übersetzt Geschäftsanforderungen in ein Suchdatenmodell</h3><p>Der nächste Schritt besteht darin, Ihre Geschäftsanforderungen in ein konkretes Datenmodell zu übersetzen, indem Sie die Kernkomponenten Ihrer Informationen und deren Suchmethoden identifizieren:</p>
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Übersetzt Geschäftsanforderungen in ein Suchdatenmodell<button data-href="#Translates-Business-Requirements-into-a-Search-Data-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Der nächste Schritt besteht darin, Ihre Geschäftsanforderungen in ein konkretes Datenmodell zu übersetzen, indem Sie die Kernkomponenten Ihrer Informationen und deren Suchmethoden identifizieren:</p>
 <ul>
 <li><p>Definieren Sie die Daten, die Sie speichern müssen, wie z. B. Rohinhalte (Text, Bilder, Audio), zugehörige Metadaten (Titel, Tags, Urheberschaft) und kontextbezogene Attribute (Zeitstempel, Nutzerverhalten usw.)</p></li>
 <li><p>Bestimmen Sie die geeigneten Datentypen und -formate für jedes Element. Zum Beispiel:</p>
@@ -92,9 +122,39 @@ summary: >-
       </svg>
     </button></h2><p>In Milvus wird das Datenmodell durch ein Sammlungsschema ausgedrückt. Die Gestaltung der richtigen Felder innerhalb eines Sammlungsschemas ist der Schlüssel zur Ermöglichung eines effektiven Abrufs. Jedes Feld definiert einen bestimmten Typ von Daten, die in der Sammlung gespeichert sind, und spielt eine bestimmte Rolle im Suchprozess. Milvus unterstützt zwei Haupttypen von Feldern: <strong>Vektorfelder</strong> und <strong>Skalarfelder</strong>.</p>
 <p>Nun können Sie Ihr Datenmodell in ein Feldschema abbilden, das Vektoren und alle skalaren Hilfsfelder enthält. Vergewissern Sie sich, dass jedes Feld mit den Attributen Ihres Datenmodells korreliert, und achten Sie insbesondere auf den Vektortyp (dicht oder spärlich) und seine Dimension.</p>
-<h3 id="Vector-Field" class="common-anchor-header">Vektorfeld</h3><p>Vektorfelder speichern Einbettungen für unstrukturierte Datentypen wie Text, Bilder und Audio. Diese Einbettungen können dicht, spärlich oder binär sein, je nach Datentyp und verwendeter Abrufmethode. Typischerweise werden dichte Vektoren für die semantische Suche verwendet, während spärliche Vektoren besser für die Volltextsuche oder den lexikalischen Abgleich geeignet sind. Binäre Vektoren sind nützlich, wenn die Speicher- und Rechenressourcen begrenzt sind. Eine Sammlung kann mehrere Vektorfelder enthalten, um multimodale oder hybride Abfragestrategien zu ermöglichen. Eine ausführliche Anleitung zu diesem Thema finden Sie in der <a href="/docs/de/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
+<h3 id="Vector-Field" class="common-anchor-header">Vektorfeld<button data-href="#Vector-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vektorfelder speichern Einbettungen für unstrukturierte Datentypen wie Text, Bilder und Audio. Diese Einbettungen können dicht, spärlich oder binär sein, je nach Datentyp und verwendeter Abrufmethode. Typischerweise werden dichte Vektoren für die semantische Suche verwendet, während spärliche Vektoren besser für die Volltextsuche oder den lexikalischen Abgleich geeignet sind. Binäre Vektoren sind nützlich, wenn die Speicher- und Rechenressourcen begrenzt sind. Eine Sammlung kann mehrere Vektorfelder enthalten, um multimodale oder hybride Abfragestrategien zu ermöglichen. Eine ausführliche Anleitung zu diesem Thema finden Sie in der <a href="/docs/de/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
 <p>Milvus unterstützt die folgenden Vektordatentypen: <code translate="no">FLOAT_VECTOR</code> für <a href="/docs/de/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> für <a href="/docs/de/sparse_vector.md">Sparse Vector</a> und <code translate="no">BINARY_VECTOR</code> für <a href="/docs/de/binary-vector.md">Binary Vector</a></p>
-<h3 id="Scalar-Field" class="common-anchor-header">Skalares Feld</h3><p>Skalare Felder speichern primitive, strukturierte Werte - üblicherweise als Metadaten bezeichnet - wie Zahlen, Zeichenketten oder Daten. Diese Werte können zusammen mit Vektorsuchergebnissen zurückgegeben werden und sind für die Filterung und Sortierung unerlässlich. Sie ermöglichen es Ihnen, die Suchergebnisse auf der Grundlage bestimmter Attribute einzugrenzen, z. B. die Beschränkung von Dokumenten auf eine bestimmte Kategorie oder einen bestimmten Zeitraum.</p>
+<h3 id="Scalar-Field" class="common-anchor-header">Skalares Feld<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Skalare Felder speichern primitive, strukturierte Werte - üblicherweise als Metadaten bezeichnet - wie Zahlen, Zeichenketten oder Daten. Diese Werte können zusammen mit Vektorsuchergebnissen zurückgegeben werden und sind für die Filterung und Sortierung unerlässlich. Sie ermöglichen es Ihnen, die Suchergebnisse auf der Grundlage bestimmter Attribute einzugrenzen, z. B. die Beschränkung von Dokumenten auf eine bestimmte Kategorie oder einen bestimmten Zeitraum.</p>
 <p>Milvus unterstützt skalare Typen wie <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> und <code translate="no">ARRAY</code> zur Speicherung und Filterung von Nicht-Vektordaten. Diese Typen verbessern die Präzision und Anpassung von Suchvorgängen.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Nutzung erweiterter Funktionen beim Schemadesign<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -112,13 +172,73 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Beim Entwerfen eines Schemas reicht es nicht aus, Ihre Daten einfach nur mit Hilfe der unterstützten Datentypen auf Felder abzubilden. Es ist wichtig, die Beziehungen zwischen den Feldern und die für die Konfiguration verfügbaren Strategien genau zu kennen. Durch die Berücksichtigung der wichtigsten Funktionen in der Entwurfsphase wird sichergestellt, dass das Schema nicht nur die unmittelbaren Anforderungen an die Datenverarbeitung erfüllt, sondern auch skalierbar und für künftige Anforderungen anpassbar ist. Durch die sorgfältige Integration dieser Funktionen können Sie eine starke Datenarchitektur aufbauen, die die Fähigkeiten von Milvus maximiert und Ihre breitere Datenstrategie und Ziele unterstützt. Im Folgenden finden Sie einen Überblick über die wichtigsten Funktionen zur Erstellung eines Sammelschemas:</p>
-<h3 id="Primary-Key" class="common-anchor-header">Primärschlüssel</h3><p>Ein Primärschlüsselfeld ist eine grundlegende Komponente eines Schemas, da es jede Entität innerhalb einer Sammlung eindeutig identifiziert. Die Definition eines Primärschlüssels ist obligatorisch. Es muss ein skalares Feld vom Typ Ganzzahl oder String sein und als <code translate="no">is_primary=True</code> gekennzeichnet sein. Optional können Sie <code translate="no">auto_id</code> für den Primärschlüssel aktivieren, dem automatisch ganzzahlige Nummern zugewiesen werden, die monolithisch wachsen, wenn mehr Daten in die Sammlung aufgenommen werden.</p>
+<h3 id="Primary-Key" class="common-anchor-header">Primärschlüssel<button data-href="#Primary-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ein Primärschlüsselfeld ist eine grundlegende Komponente eines Schemas, da es jede Entität innerhalb einer Sammlung eindeutig identifiziert. Die Definition eines Primärschlüssels ist obligatorisch. Es muss ein skalares Feld vom Typ Ganzzahl oder String sein und als <code translate="no">is_primary=True</code> gekennzeichnet sein. Optional können Sie <code translate="no">auto_id</code> für den Primärschlüssel aktivieren, dem automatisch ganzzahlige Nummern zugewiesen werden, die monolithisch wachsen, wenn mehr Daten in die Sammlung aufgenommen werden.</p>
 <p>Weitere Einzelheiten finden Sie unter <a href="/docs/de/primary-field.md">Primärfeld &amp; AutoID</a>.</p>
-<h3 id="Partitioning" class="common-anchor-header">Partitionierung</h3><p>Um die Suche zu beschleunigen, können Sie optional die Partitionierung aktivieren. Indem Sie ein bestimmtes Skalarfeld für die Partitionierung festlegen und bei der Suche Filterkriterien auf der Grundlage dieses Feldes angeben, kann der Suchumfang effektiv auf die relevanten Partitionen beschränkt werden. Diese Methode erhöht die Effizienz der Suchvorgänge erheblich, indem sie den Suchbereich reduziert.</p>
+<h3 id="Partitioning" class="common-anchor-header">Partitionierung<button data-href="#Partitioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um die Suche zu beschleunigen, können Sie optional die Partitionierung aktivieren. Indem Sie ein bestimmtes Skalarfeld für die Partitionierung festlegen und bei der Suche Filterkriterien auf der Grundlage dieses Feldes angeben, kann der Suchumfang effektiv auf die relevanten Partitionen beschränkt werden. Diese Methode erhöht die Effizienz der Suchvorgänge erheblich, indem sie den Suchbereich reduziert.</p>
 <p>Weitere Einzelheiten finden Sie unter <a href="/docs/de/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p>
-<h3 id="Analyzer" class="common-anchor-header">Analysator</h3><p>Ein Analyzer ist ein wichtiges Werkzeug für die Verarbeitung und Umwandlung von Textdaten. Seine Hauptfunktion ist die Umwandlung von Rohtext in Token und deren Strukturierung für die Indizierung und den Abruf. Dies geschieht durch die Tokenisierung der Zeichenfolge, das Entfernen von Stoppwörtern und das Stemming der einzelnen Wörter in Token.</p>
+<h3 id="Analyzer" class="common-anchor-header">Analysator<button data-href="#Analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ein Analyzer ist ein wichtiges Werkzeug für die Verarbeitung und Umwandlung von Textdaten. Seine Hauptfunktion ist die Umwandlung von Rohtext in Token und deren Strukturierung für die Indizierung und den Abruf. Dies geschieht durch die Tokenisierung der Zeichenfolge, das Entfernen von Stoppwörtern und das Stemming der einzelnen Wörter in Token.</p>
 <p>Weitere Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md">Analyzer Overview</a>.</p>
-<h3 id="Function" class="common-anchor-header">Funktion</h3><p>Milvus ermöglicht es Ihnen, integrierte Funktionen als Teil des Schemas zu definieren, um bestimmte Felder automatisch abzuleiten. Sie können zum Beispiel eine integrierte BM25-Funktion hinzufügen, die einen Sparse-Vektor aus einem <code translate="no">VARCHAR</code> -Feld erzeugt, um die Volltextsuche zu unterstützen. Diese von Funktionen abgeleiteten Felder rationalisieren die Vorverarbeitung und gewährleisten, dass die Sammlung in sich geschlossen und abfragebereit bleibt.</p>
+<h3 id="Function" class="common-anchor-header">Funktion<button data-href="#Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus ermöglicht es Ihnen, integrierte Funktionen als Teil des Schemas zu definieren, um bestimmte Felder automatisch abzuleiten. Sie können zum Beispiel eine integrierte BM25-Funktion hinzufügen, die einen Sparse-Vektor aus einem <code translate="no">VARCHAR</code> -Feld erzeugt, um die Volltextsuche zu unterstützen. Diese von Funktionen abgeleiteten Felder rationalisieren die Vorverarbeitung und gewährleisten, dass die Sammlung in sich geschlossen und abfragebereit bleibt.</p>
 <p>Weitere Einzelheiten finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">Ein Beispiel aus der Praxis<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,7 +305,7 @@ summary: >-
    <tr>
      <td><p>text_dichter_vektor (<code translate="no">FLOAT_VECTOR</code>)</p></td>
      <td><p>dichter Vektor, der durch ein Texteinbettungsmodell erzeugt wurde</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/BaGlwzDmyiyVvVk6NurcFclInCd?from=from_parent_docs">Einfache Vektorsuche</a></p></td>
+     <td><p><a href="/docs/de/single-vector-search.md">Einfache Vektorsuche</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -194,7 +314,7 @@ summary: >-
    <tr>
      <td><p>text_sparse_vector (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
      <td><p>automatisch durch eine eingebaute BM25-Funktion erzeugter Sparse-Vektor</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/RQTRwhOVPiwnwokqr4scAtyfnBf?from=from_parent_docs">Volltextsuche</a></p></td>
+     <td><p><a href="/docs/de/full-text-search.md">Volltextsuche</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -202,7 +322,22 @@ summary: >-
    </tr>
 </table>
 <p>Weitere Informationen zu Schemata und eine detaillierte Anleitung zum Hinzufügen verschiedener Feldtypen finden Sie unter <a href="/docs/de/schema.md">Schema erklärt</a>.</p>
-<h3 id="Initialize-schema" class="common-anchor-header">Schema initialisieren</h3><p>Zu Beginn müssen wir ein leeres Schema erstellen. Mit diesem Schritt wird eine grundlegende Struktur für die Definition des Datenmodells geschaffen.</p>
+<h3 id="Initialize-schema" class="common-anchor-header">Schema initialisieren<button data-href="#Initialize-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Zu Beginn müssen wir ein leeres Schema erstellen. Mit diesem Schritt wird eine grundlegende Struktur für die Definition des Datenmodells geschaffen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -233,7 +368,22 @@ schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Skip this step using cURL</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-fields" class="common-anchor-header">Felder hinzufügen</h3><p>Sobald das Schema erstellt ist, müssen im nächsten Schritt die Felder festgelegt werden, aus denen die Daten bestehen sollen. Jedes Feld ist mit den entsprechenden Datentypen und Attributen verbunden.</p>
+<h3 id="Add-fields" class="common-anchor-header">Felder hinzufügen<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sobald das Schema erstellt ist, müssen im nächsten Schritt die Felder festgelegt werden, aus denen die Daten bestehen sollen. Jedes Feld ist mit den entsprechenden Datentypen und Attributen verbunden.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
@@ -401,7 +551,22 @@ schema.addField(AddFieldReq.builder()
 <li><p>Partitionsschlüssel: <code translate="no">timestamp</code> wird als Partitionsschlüssel zugewiesen und ermöglicht die Filterung nach Partitionen. Dies kann sein</p></li>
 <li><p>Textanalyzer: Der Textanalyzer wird auf die beiden String-Felder <code translate="no">title</code> und <code translate="no">text</code> angewendet, um eine Textübereinstimmung bzw. eine Volltextsuche zu unterstützen.</p></li>
 </ul>
-<h3 id="Optional-Add-functions" class="common-anchor-header">(Optional) Funktionen hinzufügen</h3><p>Um die Möglichkeiten der Datenabfrage zu verbessern, können Funktionen in das Schema aufgenommen werden. So kann zum Beispiel eine Funktion erstellt werden, die bestimmte Felder verarbeitet.</p>
+<h3 id="Optional-Add-functions" class="common-anchor-header">(Optional) Funktionen hinzufügen<button data-href="#Optional-Add-functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um die Möglichkeiten der Datenabfrage zu verbessern, können Funktionen in das Schema aufgenommen werden. So kann zum Beispiel eine Funktion erstellt werden, die bestimmte Felder verarbeitet.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

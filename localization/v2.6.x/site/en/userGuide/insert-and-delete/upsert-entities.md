@@ -62,7 +62,7 @@ summary: >-
 </p>
 <p>If the target collection has <code translate="no">autoid</code> enabled on its primary field, Milvus will generate a new primary key for the data carried in the request payload before inserting it.</p>
 <p>For fields with <code translate="no">nullable</code> enabled, you can omit them in the <code translate="no">upsert</code> request if they do not require any updates.</p>
-<h3 id="Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="common-anchor-header">Upsert in merge mode | Compatible with Milvus v2.6.2+<button data-href="#Upsert-in-merge-mode--Compatible-with-Milvus-v262+" class="anchor-icon" translate="no">
+<h3 id="Upsert-in-merge-mode--Milvus-v262+" class="common-anchor-header">Upsert in merge mode<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#Upsert-in-merge-mode--Milvus-v262+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

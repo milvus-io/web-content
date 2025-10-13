@@ -421,7 +421,7 @@ res = client.search(
 <li><p>Évitez d'utiliser des caractères spéciaux, des espaces ou des points (<code translate="no">.</code>, <code translate="no">/</code>, etc.).</p></li>
 <li><p>Les clés incompatibles peuvent entraîner des problèmes d'analyse dans les expressions de filtre.</p></li>
 </ul>
-<h3 id="How-does-Milvus-handle-string-values-in-JSON-fields" class="common-anchor-header">Comment Milvus traite-t-il les valeurs de chaîne dans les champs JSON ?<button data-href="#How-does-Milvus-handle-string-values-in-JSON-fields" class="anchor-icon" translate="no">
+<h3 id="How-does-Milvus-handle-string-values-in-JSON-fields" class="common-anchor-header">Comment Milvus gère-t-il les valeurs de chaîne dans les champs JSON ?<button data-href="#How-does-Milvus-handle-string-values-in-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

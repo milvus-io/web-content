@@ -30,7 +30,7 @@
         "children": []
       },
       {
-        "label": "Referências",
+        "label": "Benchmarks",
         "id": "benchmark.md",
         "order": 4,
         "children": []
@@ -1311,7 +1311,7 @@
                     "children": []
                   },
                   {
-                    "label": "Azure",
+                    "label": "Azulejo",
                     "id": "ingress.md",
                     "order": 3,
                     "children": []
@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "LangExtract",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2683,6 +2689,12 @@
         "label": "Pesquisa de texto para imagem com Milvus",
         "id": "text_image_search.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "Geração de expressões de filtros de consulta Milvus com modelos de linguagem de grande dimensão",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
         "children": []
       },
       {

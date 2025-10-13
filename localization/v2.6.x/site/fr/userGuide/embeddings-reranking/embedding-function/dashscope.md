@@ -89,7 +89,22 @@ beta: Milvus 2.6.x
 <div class="alert note">
 <p>Si une clé API pour le même fournisseur est présente à la fois dans le fichier de configuration et dans une variable d'environnement, Milvus utilise toujours la valeur dans <code translate="no">milvus.yaml</code> et ignore la variable d'environnement.</p>
 </div>
-<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1 : Fichier de configuration (recommandé et plus prioritaire)</h3><p>Conservez vos clés API dans <code translate="no">milvus.yaml</code>; Milvus les lit au démarrage et remplace toute variable d'environnement pour le même fournisseur.</p>
+<h3 id="Option-1-Configuration-file-recommended--higher-priority" class="common-anchor-header">Option 1 : Fichier de configuration (recommandé et plus prioritaire)<button data-href="#Option-1-Configuration-file-recommended--higher-priority" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Conservez vos clés API dans <code translate="no">milvus.yaml</code>; Milvus les lit au démarrage et remplace toute variable d'environnement pour le même fournisseur.</p>
 <ol>
 <li><p>**Déclarez vos clés sous <code translate="no">credential:</code></p>
 <p>Vous pouvez lister une ou plusieurs clés API - donnez à chacune une étiquette que vous inventez et à laquelle vous ferez référence plus tard.</p>
@@ -108,16 +123,31 @@ beta: Milvus 2.6.x
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">dashscope:</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey_dev</span>      <span class="hljs-comment"># ← choose any label you defined above</span>
-        <span class="hljs-comment"># url: https://dashscope-intl.aliyuncs.com/compatible-mode/v1   # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url: https://dashscope-intl.aliyuncs.com/compatible-mode/v1   # (optional) custom url</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Cela permet de lier une clé spécifique à chaque demande que Milvus envoie au point de terminaison DashScope embeddings.</p></li>
 </ol>
-<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2 : Variable d'environnement</h3><p>Utilisez cette méthode lorsque vous exécutez Milvus avec Docker Compose et que vous préférez garder les secrets hors des fichiers et des images.</p>
+<h3 id="Option-2-Environment-variable" class="common-anchor-header">Option 2 : Variable d'environnement<button data-href="#Option-2-Environment-variable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilisez cette méthode lorsque vous exécutez Milvus avec Docker Compose et que vous préférez garder les secrets hors des fichiers et des images.</p>
 <p>Milvus se rabat sur la variable d'environnement uniquement si aucune clé pour le fournisseur n'est trouvée dans <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
      <th><p>Variable</p></th>
-     <th><p>Obligatoire</p></th>
+     <th><p>Nécessaire</p></th>
      <th><p>Description de la variable</p></th>
    </tr>
    <tr>
@@ -152,7 +182,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Une fois les informations d'identification configurées, suivez ces étapes pour définir et utiliser les fonctions d'intégration.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Étape 1 : Définir les champs du schéma</h3><p>Pour utiliser une fonction d'intégration, créez une collection avec un schéma spécifique. Ce schéma doit comprendre au moins trois champs nécessaires :</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Étape 1 : Définir les champs du schéma<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour utiliser une fonction d'intégration, créez une collection avec un schéma spécifique. Ce schéma doit comprendre au moins trois champs nécessaires :</p>
 <ul>
 <li><p>Le champ primaire qui identifie de manière unique chaque entité d'une collection.</p></li>
 <li><p>Un champ scalaire qui stocke les données brutes à intégrer.</p></li>
@@ -179,7 +224,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Étape 2 : Ajouter la fonction d'intégration au schéma</h3><p>Le module Function de Milvus convertit automatiquement les données brutes stockées dans un champ scalaire en embeddings et les stocke dans le champ vectoriel explicitement défini.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Étape 2 : Ajouter la fonction d'intégration au schéma<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le module Function de Milvus convertit automatiquement les données brutes stockées dans un champ scalaire en embeddings et les stocke dans le champ vectoriel explicitement défini.</p>
 <p>L'exemple ci-dessous ajoute un module Function (<code translate="no">ali</code>) qui convertit le champ scalaire <code translate="no">&quot;document&quot;</code> en embeddings, en stockant les vecteurs résultants dans le champ vectoriel <code translate="no">&quot;dense&quot;</code> défini précédemment.</p>
 <p>Une fois que vous avez défini votre fonction d'intégration, ajoutez-la à votre schéma de collection. Cela indique à Milvus d'utiliser la fonction d'intégration spécifiée pour traiter et stocker les intégrations à partir de vos données textuelles.</p>
 <pre><code translate="no" class="language-python">

@@ -229,7 +229,7 @@ docker start &lt;milvus_container_id&gt;
 <ul>
 <li><p>Prüfen Sie <a href="/docs/de/v2.5.x/quickstart.md">Quickstart</a>, um zu sehen, was Milvus alles kann.</p></li>
 <li><p>Prüfen Sie <a href="/docs/de/v2.5.x/milvus-webui.md">Milvus WebUI</a>, um mehr über die Milvus-Instanz zu erfahren.</p></li>
-<li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
+<li><p>Lernen Sie die Grundfunktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/v2.5.x/manage_databases.md">Datenbanken verwalten</a></li>
 <li><a href="/docs/de/v2.5.x/manage-collections.md">Sammlungen verwalten</a></li>

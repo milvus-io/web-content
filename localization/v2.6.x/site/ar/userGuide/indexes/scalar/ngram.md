@@ -2,7 +2,7 @@
 id: ngram.md
 title: NGRAMCompatible with Milvus v2.6.2+
 summary: >-
-  تم إنشاء فهرس NGRAM في Milvus لتسريع استعلامات LIKE على حقول VARCHAR أو مسارات
+  تم بناء فهرس NGRAM في Milvus لتسريع استعلامات LIKE على حقول VARCHAR أو مسارات
   JSON محددة داخل حقول JSON. قبل بناء الفهرس، يقسّم ميلفوس النص إلى سلاسل فرعية
   قصيرة ومتداخلة بطول ثابت n، والمعروفة باسم n-غرامات. على سبيل المثال، إذا كان
   n = 3، تُقسّم كلمة "Milvus" إلى 3 جرامات: "Mil" و"ilv" و"lvu" و"vus". ثم
@@ -55,7 +55,7 @@ beta: Milvus v2.6.2+
     </button></h2><p>يقوم ميلفوس بتنفيذ فهرس <code translate="no">NGRAM</code> في عملية من مرحلتين:</p>
 <ol>
 <li><p><strong>بناء الفهرس</strong>: إنشاء ن-غرامات لكل مستند وبناء فهرس مقلوب أثناء الاستيعاب.</p></li>
-<li><p><strong>تسريع الاستعلامات</strong>: استخدام الفهرس للتصفية إلى مجموعة مرشحة صغيرة، ثم التحقق من التطابقات التامة.</p></li>
+<li><p><strong>تسريع الاستعلامات</strong>: استخدام الفهرس للتصفية إلى مجموعة مرشحة صغيرة، ثم التحقق من التطابق التام.</p></li>
 </ol>
 <h3 id="Phase-1-Build-the-index" class="common-anchor-header">المرحلة 1: بناء الفهرس<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,48 +79,40 @@ beta: Milvus v2.6.2+
 <li><p><code translate="no">min_gram</code>: أقصر n-غرام لتوليد. يحدد هذا أيضًا الحد الأدنى لطول السلسلة الفرعية للاستعلام التي يمكن أن تستفيد من الفهرس.</p></li>
 <li><p><code translate="no">max_gram</code>: أطول n-غرام لتوليدها. في وقت الاستعلام، يتم استخدامه أيضًا كحد أقصى لحجم النافذة عند تقسيم سلاسل الاستعلام الطويلة.</p></li>
 </ul>
-<p>على سبيل المثال، مع <code translate="no">min_gram=2</code> و <code translate="no">max_gram=3</code> ، يتم تقسيم السلسلة <code translate="no">&quot;AI database&quot;</code> على النحو التالي:</p></li>
-</ol>
+<p>على سبيل المثال، مع <code translate="no">min_gram=2</code> و <code translate="no">max_gram=3</code> ، يتم تقسيم السلسلة <code translate="no">&quot;AI database&quot;</code> على النحو التالي:</p>
+<ul>
+<li><strong>2 جرامات</strong> <code translate="no">AI</code> ، <code translate="no">I_</code> ، <code translate="no">_d</code> ، ، <code translate="no">da</code> ، <code translate="no">at</code> ، ...</li>
+<li><strong>3 - جرامات:</strong> <code translate="no">AI_</code> ، <code translate="no">I_d</code> ، <code translate="no">_da</code> ، ، <code translate="no">dat</code> ، <code translate="no">ata</code> ، ...</li>
+</ul>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" />
    </span> <span class="img-wrapper"> <span>بناء فهرس نغرام</span> </span></p>
-<pre><code translate="no">- **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
-
-- **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
-
-&lt;div class=&quot;alert note&quot;&gt;
-
-- For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive). For example, with `[2,4]` and the word `&quot;text&quot;`, Milvus generates:
-
-- **2-grams:** `te`, `ex`, `xt`
-
-- **3-grams:** `tex`, `ext`
-
-- **4-grams:** `text`
-
-- N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `&quot;向量数据库&quot;` with `min_gram = 2` is decomposed into: `&quot;向量&quot;`, `&quot;量数&quot;`, `&quot;数据&quot;`, `&quot;据库&quot;`.
-
-- Spaces and punctuation are treated as characters during decomposition.
-
-- Decomposition preserves original case, and matching is case-sensitive. For example, `&quot;Database&quot;` and `&quot;database&quot;` will generate different n-grams and require exact case matching during queries.
-
-&lt;/div&gt;
-</code></pre>
-<ol>
-<li><p><strong>بناء فهرس مقلوب</strong>: يتم إنشاء فهرس <strong>مقلوب</strong> يقوم بتعيين كل n-gram تم إنشاؤه إلى قائمة بمعرفات المستندات التي تحتوي عليه.</p>
-<p>على سبيل المثال، إذا ظهر نغرام 2 <code translate="no">&quot;AI&quot;</code> في المستندات التي تحمل المعرفات 1 و5 و6 و8 و9، فإن الفهرس يسجل <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code>. ثم يُستخدم هذا الفهرس في وقت الاستعلام لتضييق نطاق البحث بسرعة.</p></li>
+<blockquote>
+<p><strong>ملاحظة</strong></p>
+<ul>
+<li><p>بالنسبة للنطاق <code translate="no">[min_gram, max_gram]</code> ، يقوم ميلفوس بتوليد جميع النغرامات لكل طول بين القيمتين (شاملًا).<br>
+مثال: مع <code translate="no">[2,4]</code> والكلمة <code translate="no">&quot;text&quot;</code> ، يولد ميلفوس :</p>
+<ul>
+<li><strong>2-غرامات</strong> <code translate="no">te</code> ، <code translate="no">ex</code>, <code translate="no">xt</code></li>
+<li><strong>3-غرامات:</strong> <code translate="no">tex</code>, <code translate="no">ext</code></li>
+<li><strong>4 - 4 جرامات</strong>: <code translate="no">text</code></li>
+</ul></li>
+<li><p>يعتمد تحليل N-gram على الأحرف ولا يعتمد على اللغة. على سبيل المثال، في اللغة الصينية، يتحلل <code translate="no">&quot;向量数据库&quot;</code> مع <code translate="no">min_gram = 2</code> إلى: <code translate="no">&quot;向量&quot;</code> ، <code translate="no">&quot;量数&quot;</code> ، <code translate="no">&quot;数据&quot;</code> ، ، <code translate="no">&quot;据库&quot;</code>.</p></li>
+<li><p>يتم التعامل مع المسافات وعلامات الترقيم على أنها أحرف أثناء التحليل.</p></li>
+<li><p>يحافظ التفكيك على حالة الأحرف الأصلية، وتكون المطابقة حساسة لحالة الأحرف. على سبيل المثال، <code translate="no">&quot;Database&quot;</code> و <code translate="no">&quot;database&quot;</code> سينشئان ن-غرامات مختلفة ويتطلبان مطابقة حالة الأحرف بالضبط أثناء الاستعلامات.</p></li>
+</ul>
+</blockquote></li>
+<li><p><strong>إنشاء فهرس مقلوب</strong>: يتم إنشاء فهرس <strong>مقلوب</strong> يقوم بتعيين كل ن-غرام مولد إلى قائمة بمعرفات المستندات التي تحتوي عليه.</p>
+<p>على سبيل المثال، إذا ظهر 2 نغرام <code translate="no">&quot;AI&quot;</code> في المستندات التي تحمل المعرفات 1 و5 و6 و8 و9، فإن الفهرس يسجل <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code>. ثم يُستخدم هذا الفهرس في وقت الاستعلام لتضييق نطاق البحث بسرعة.</p></li>
 </ol>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" />
    </span> <span class="img-wrapper"> <span>بناء فهرس نغرام 2</span> </span></p>
-<pre><code translate="no">&lt;div class=&quot;alert note&quot;&gt;
-
-A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
-
-&lt;/div&gt;
-</code></pre>
+<div class="alert note">
+<p>يؤدي النطاق الأوسع <code translate="no">[min_gram, max_gram]</code> إلى إنشاء المزيد من الجرامات وقوائم تعيين أكبر. إذا كانت الذاكرة ضيقة، فكر في وضع mmap لقوائم الترحيل الكبيرة جدًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/mmap.md">استخدام mmap</a>.</p>
+</div>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">المرحلة 2: تسريع الاستعلامات<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,7 +128,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عندما يتم تنفيذ مرشح <code translate="no">LIKE</code> ، يستخدم ميلفوس فهرس NGRAM لتسريع الاستعلام في الخطوات التالية:</p>
+    </button></h3><p>عند تنفيذ مرشح <code translate="no">LIKE</code> ، يستخدم ميلفوس فهرس NGRAM لتسريع الاستعلام في الخطوات التالية:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/accelerate-queries.png" alt="Accelerate Queries" class="doc-image" id="accelerate-queries" />
@@ -323,7 +315,7 @@ client.create_index(
     </button></h2><ul>
 <li><p><strong>أنواع الحقول</strong>: مدعومة على <code translate="no">VARCHAR</code> و <code translate="no">JSON</code> الحقول. بالنسبة لـ JSON، قدم كلاً من <code translate="no">params.json_path</code> و <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
 <li><p><strong>يونيكود</strong>: يعتمد تحليل NGRAM على الأحرف ولا يعتمد على اللغة ويتضمن المسافات البيضاء وعلامات الترقيم.</p></li>
-<li><p><strong>المفاضلة بين المساحة والوقت</strong>: نطاقات غرامات أوسع <code translate="no">[min_gram, max_gram]</code> تنتج غرامات أكثر وفهارس أكبر. إذا كانت الذاكرة ضيقة، فكر في وضع <code translate="no">mmap</code> لقوائم الترحيل الكبيرة. لمزيد من المعلومات، راجع <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">استخدام mmap</a>.</p></li>
+<li><p><strong>المفاضلة بين المساحة والوقت</strong>: نطاقات غرامات أوسع <code translate="no">[min_gram, max_gram]</code> تنتج غرامات أكثر وفهارس أكبر. إذا كانت الذاكرة ضيقة، فكر في وضع <code translate="no">mmap</code> لقوائم الترحيل الكبيرة. لمزيد من المعلومات، راجع <a href="/docs/ar/mmap.md">استخدام mmap</a>.</p></li>
 <li><p><strong>الثبات</strong>: لا يمكن تغيير <code translate="no">min_gram</code> و <code translate="no">max_gram</code> في المكان - قم بإعادة بناء الفهرس لتعديلها.</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">أفضل الممارسات<button data-href="#Best-practices" class="anchor-icon" translate="no">

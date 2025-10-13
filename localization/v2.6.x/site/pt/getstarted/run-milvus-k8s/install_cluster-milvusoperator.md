@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Depois que o pod do Milvus Operator estiver em execução, você poderá implantar um cluster do Milvus da seguinte maneira.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O comando acima implementa um cluster Milvus com o <strong>Woodpecker</strong> como a fila de mensagens (recomendado para a v2.6.0) e todos os novos componentes de arquitetura, incluindo o nó de fluxo contínuo.</p>
+<p>O comando acima implementa um cluster Milvus com o <strong>Woodpecker</strong> como fila de mensagens (recomendado para a v2.6.3) e todos os novos componentes de arquitetura, incluindo o nó de fluxo contínuo.</p>
 <p><strong>Destaques da arquitetura nesta implementação:</strong></p>
 <ul>
 <li><strong>Fila de mensagens</strong>: <a href="/docs/pt/use-woodpecker.md">Usa o Woodpecker</a> (reduz a manutenção da infraestrutura)</li>

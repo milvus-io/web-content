@@ -61,24 +61,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus utiliza <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> para implementar la indexación invertida. El proceso es el siguiente</p>
+    </button></h2><p>Un <strong>índice INVERTIDO</strong> en Milvus asigna cada valor de campo único (término) al conjunto de ID de documentos en los que aparece ese valor. Esta estructura permite realizar búsquedas rápidas de campos con valores repetidos o categóricos.</p>
+<p>Como se muestra en el diagrama, el proceso funciona en dos pasos:</p>
 <ol>
-<li><p><strong>Tokenización</strong>: Milvus descompone sus datos en términos buscables</p></li>
-<li><p><strong>Diccionario de términos</strong>: Crea una lista ordenada de todos los términos únicos</p></li>
-<li><p><strong>Listas invertidas</strong>: Asigna cada término a los documentos que lo contienen</p></li>
+<li><p><strong>Asignación directa (ID → Término):</strong> Cada ID de documento apunta al valor del campo que contiene.</p></li>
+<li><p><strong>Mapeo inverso (Término → ID):</strong> Milvus recopila términos únicos y construye un mapeo inverso desde cada término a todos los IDs que lo contienen.</p></li>
 </ol>
-<p>Por ejemplo, dadas estas dos frases</p>
-<ul>
-<li><p><strong>"Milvus es una base de datos vectorial nativa de la nube"</strong></p></li>
-<li><p><strong>"Milvus es muy bueno en rendimiento"</strong></p></li>
-</ul>
-<p>El índice invertido mapea términos como <strong>"Milvus"</strong> → <strong>[Documento 0, Documento 1]</strong>, " <strong>nativo de la nube"</strong> → <strong>[Documento 0]</strong>, y <strong>"rendimiento"</strong> → <strong>[Documento 1]</strong>.</p>
+<p>Por ejemplo, el valor <strong>"electrónica"</strong> corresponde a los ID <strong>1</strong> y <strong>3</strong>, mientras que <strong>"libros"</strong> corresponde a los ID <strong>2</strong> y <strong>5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
-   </span> <span class="img-wrapper"> <span>Índice invertido</span> </span></p>
-<p>Cuando filtra por un término, Milvus busca el término en el diccionario y recupera al instante todos los documentos coincidentes.</p>
-<p>Los índices INVERTIDOS admiten todos los tipos de campos escalares: <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> y <strong>ARRAY</strong>. Sin embargo, los parámetros de índice para indexar un campo JSON son ligeramente diferentes a los de los campos escalares normales.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   </span> <span class="img-wrapper"> <span>Cómo funciona el índice invertido</span> </span></p>
+<p>Cuando se filtra un valor específico (por ejemplo, <code translate="no">category == &quot;electronics&quot;</code>), Milvus simplemente busca el término en el índice y recupera directamente los ID coincidentes. Esto evita tener que escanear el conjunto de datos completo y permite un filtrado rápido, especialmente para valores categóricos o repetidos.</p>
+<p>Los índices INVERTED admiten todos los tipos de campos escalares, como <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> y <strong>ARRAY</strong>. Sin embargo, los parámetros de índice para indexar un campo JSON son ligeramente diferentes a los de los campos escalares normales.</p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">Creación de índices en campos no JSON<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,9 +1,7 @@
 ---
 id: string.md
 title: حقل السلسلة
-summary: >-
-  في ميلفوس، VARCHAR هو نوع البيانات المستخدم لتخزين بيانات السلسلة. عندما تقوم
-  بتعريف حقل VARCHAR، هناك معلمتان إلزاميتان:
+summary: في Milvus، VARCHAR هو نوع البيانات المستخدم لتخزين بيانات السلسلة.
 ---
 <h1 id="String-Field" class="common-anchor-header">حقل السلسلة<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في ميلفوس، <code translate="no">VARCHAR</code> هو نوع البيانات المستخدم لتخزين بيانات السلسلة. عندما تقوم بتعريف حقل <code translate="no">VARCHAR</code> ، هناك معلمتان إلزاميتان:</p>
+    </button></h1><p>في ميلفوس، <code translate="no">VARCHAR</code> هو نوع البيانات المستخدم لتخزين بيانات السلسلة.</p>
+<p>عندما تقوم بتعريف حقل <code translate="no">VARCHAR</code> ، هناك معلمتان إلزاميتان:</p>
 <ul>
 <li><p>تعيين <code translate="no">datatype</code> إلى <code translate="no">DataType.VARCHAR</code>.</p></li>
 <li><p>حدد <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات التي يمكن للحقل <code translate="no">VARCHAR</code> تخزينها. النطاق الصالح <code translate="no">max_length</code> هو من 1 إلى 65,535 65,535.</p></li>
@@ -248,9 +247,12 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>تساعد الفهرسة على تحسين أداء البحث والاستعلام. في ميلفوس، الفهرسة إلزامية للحقول المتجهة ولكنها اختيارية للحقول القياسية.</p>
-<p>ينشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل القياسي <code translate="no">varchar_field1</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
+<p>ينشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل القياسي <code translate="no">varchar_field1</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. للحصول على التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
+<div class="alert note">
+<p>يمكنك أيضًا إنشاء فهرس <code translate="no">NGRAM</code> لتسريع عملية التصفية <code translate="no">LIKE</code> على حقول <code translate="no">VARCHAR</code>. لمزيد من التفاصيل، راجع <a href="/docs/ar/ngram.md">NGRAM</a>.</p>
+</div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
 
 index_params = client.prepare_index_params()
@@ -341,7 +343,7 @@ indexParams.<span class="hljs-title function_">push</span>({
       </svg>
     </button></h2><p>بمجرد تعريف المخطط والفهرس، قم بإنشاء مجموعة تتضمن حقول سلسلة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">نودجيز</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -661,7 +663,7 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>لاسترداد الكيانات حيث <code translate="no">varchar_field1</code> له القيمة <code translate="no">&quot;Unknown&quot;</code> ، استخدم التعبير التالي أدناه. نظرًا لأن القيمة الافتراضية لـ <code translate="no">varchar_field1</code> هي <code translate="no">&quot;Unknown&quot;</code> ، يجب أن تتضمن النتيجة المتوقعة كيانات ذات <code translate="no">varchar_field1</code> تم تعيينها صراحةً إلى <code translate="no">&quot;Unknown&quot;</code> أو مع تعيين <code translate="no">varchar_field1</code> إلى لا شيء.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter entities with `varchar_field1` with value `Unknown`</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 

@@ -48,5 +48,6 @@ title: 튜토리얼 개요
 <tr><td><a href="/docs/ko/dna_sequence_classification.md">DNA 분류</a></td><td>분류</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/text_search_engine.md">텍스트 검색 엔진</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/image_deduplication_system.md">이미지 중복 제거</a></td><td>중복 제거</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/generating_milvus_query_filter_expressions.md">대규모 언어 모델로 Milvus 쿼리 필터 표현식 생성하기</a></td><td>메타데이터 필터링</td><td>벡터 검색</td></tr>
 </tbody>
 </table>

@@ -153,7 +153,7 @@ summary: >-
     </button></h3><p>Se si vogliono trovare tutte le entità con <code translate="no">rating</code> maggiore o uguale a 4:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">Esempio 6: Filtro con meno o uguale a<button data-href="#Example-6-Filtering-with-Less-Than-or-Equal-To" class="anchor-icon" translate="no">
+<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To" class="common-anchor-header">Esempio 6: Filtraggio con meno o uguale a<button data-href="#Example-6-Filtering-with-Less-Than-or-Equal-To" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -627,7 +627,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Esempio 1: Recuperare le entità in cui tag è nullo</strong></p>
+<p><strong>Esempio 1: Recupero delle entità in cui tag è nullo</strong></p>
 <p>Per recuperare le entità in cui il campo <code translate="no">tags</code> manca o è esplicitamente impostato su <code translate="no">None</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
@@ -701,4 +701,4 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>Esiste un limite alla lunghezza dell'elenco di valori corrispondenti nelle condizioni di filtro (ad esempio, filtro='colore in ["rosso", "verde", "blu"]')? Cosa devo fare se l'elenco è troppo lungo?</strong></p>
-<p>Zilliz Cloud non impone un limite di lunghezza all'elenco di valori di corrispondenza nelle condizioni di filtro. Tuttavia, un elenco troppo lungo può avere un impatto significativo sulle prestazioni della query. Se la condizione di filtro include un lungo elenco di valori di corrispondenza o un'espressione complessa con molti elementi, si consiglia di utilizzare <a href="/docs/it/filtering-templating.md">Filter Templating</a> per migliorare le prestazioni della query.</p>
+<p>Zilliz Cloud non impone un limite di lunghezza all'elenco dei valori di corrispondenza nelle condizioni di filtro. Tuttavia, un elenco troppo lungo può avere un impatto significativo sulle prestazioni della query. Se la condizione di filtro include un lungo elenco di valori di corrispondenza o un'espressione complessa con molti elementi, si consiglia di utilizzare <a href="/docs/it/filtering-templating.md">Filter Templating</a> per migliorare le prestazioni della query.</p>

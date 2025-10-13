@@ -87,7 +87,7 @@ beta: Milvus v2.6.2+
 <div class="alert note">
 <p>Não é possível usar o Boost Ranker como o classificador em uma pesquisa híbrida de vários vetores. No entanto, é possível usá-lo como classificador em qualquer um de seus sub-solicitações (<code translate="no">AnnSearchRequest</code>).</p>
 </div>
-<h2 id="Examples-of-Boost-Ranker" class="common-anchor-header">Exemplos do Boost Ranker<button data-href="#Examples-of-Boost-Ranker" class="anchor-icon" translate="no">
+<h2 id="Examples-of-Boost-Ranker" class="common-anchor-header">Exemplos de Boost Ranker<button data-href="#Examples-of-Boost-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -624,7 +624,7 @@ client.search(
    <tr>
      <td><p><code translate="no">functions</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Especifica os nomes dos classificadores de destino em uma lista.</p></td>
+     <td><p>Especifica os nomes dos classificadores de destino numa lista.</p></td>
      <td><p><code translate="no">["fix_weight_ranker", "random_weight_ranker"]</code></p></td>
    </tr>
    <tr>

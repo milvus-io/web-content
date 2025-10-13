@@ -119,7 +119,7 @@ Delete successfully. # Data has been removed.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se si preferisce avviare Milvus usando i comandi Linux e gli script di shell su Windows, assicurarsi di aver già installato il comando WSL 2. Per i dettagli su come installare il comando WSL 2, potete consultare questo <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">articolo di Microsoft</a>.</p>
+    </button></h3><p>Se si preferisce avviare Milvus utilizzando i comandi Linux e gli script di shell su Windows, assicurarsi di aver già installato il comando WSL 2. Per i dettagli su come installare il comando WSL 2, potete consultare questo <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">articolo di Microsoft</a>.</p>
 <ol>
 <li><p>Avviare WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>Aprire Docker Desktop in modalità amministratore facendo clic con il pulsante destro del mouse e selezionando <strong>Esegui come amministratore</strong>.</p></li>
 <li><p>Eseguite i seguenti comandi in PowerShell o nel Prompt dei comandi di Windows per scaricare il file di configurazione di Docker Compose per Milvus Standalone e avviare Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -198,14 +198,14 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>A seconda della connessione di rete, il download delle immagini per l'installazione di Milvus potrebbe richiedere un po' di tempo. Una volta che i contenitori denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, si può notare che</p>
+<p>A seconda della connessione di rete, il download delle immagini per l'installazione di Milvus potrebbe richiedere un po' di tempo. Una volta che i contenitori denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, si può osservare che</p>
 <ul>
 <li><p>Il contenitore <strong>milvus-etcd</strong> non espone alcuna porta all'host e mappa i suoi dati nei <strong>volumi/etcd</strong> della cartella corrente.</p></li>
 <li><p>Il contenitore <strong>milvus-minio</strong> serve le porte <strong>9090</strong> e <strong>9091</strong> localmente con le credenziali di autenticazione predefinite e mappa i suoi dati su <strong>volumi/minio</strong> nella cartella corrente.</p></li>
 <li><p>Il contenitore <strong>milvus-standalone</strong> serve localmente le porte <strong>19530</strong> con le impostazioni predefinite e mappa i suoi dati su <strong>volumi/milvus</strong> nella cartella corrente.</p></li>
 </ul></li>
 </ol>
-<p>È inoltre possibile richiamare la versione Linux dei comandi di Docker Compose se si dispone di WSL 2.</p>
+<p>È anche possibile richiamare la versione Linux dei comandi di Docker Compose se si dispone di WSL 2.</p>
 <h3 id="From-WSL-2​" class="common-anchor-header">Da WSL 2<button data-href="#From-WSL-2​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Scaricare il file di configurazione di Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Avviare Milvus.</p>
@@ -357,7 +357,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Errore di lettura della configurazione non riuscita all'avvio di Milvus</span> </span></p>
-<p>Per risolvere l'errore visualizzato all'avvio di Milvus, che recita "Read config failed", è necessario verificare se il volume montato nel contenitore Milvus è corretto. Se il volume è montato correttamente nel contenitore, si può usare il comando <code translate="no">docker exec</code> per entrare nel contenitore ed elencare la cartella <strong>/milvus/configs</strong> come segue.</p>
+<p>Per risolvere l'errore visualizzato durante l'avvio di Milvus, che recita "Read config failed", è necessario verificare se il volume montato nel contenitore Milvus è corretto. Se il volume è montato correttamente nel contenitore, si può usare il comando <code translate="no">docker exec</code> per entrare nel contenitore ed elencare la cartella <strong>/milvus/configs</strong> come segue.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />

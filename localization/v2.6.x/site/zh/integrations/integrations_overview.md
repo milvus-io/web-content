@@ -34,7 +34,7 @@ title: 集成概述
 <tr><td><a href="/docs/zh/milvus_rag_with_vllm.md">使用 Milvus、vLLM 和 Llama 3.1 构建 RAG</a></td><td>RAG</td><td>Milvus、vLLM、LlamaIndex</td></tr>
 <tr><td><a href="/docs/zh/llamaindex_milvus_full_text_search.md">使用 LlamaIndex 和 Milvus 进行全文搜索</a></td><td>全文搜索</td><td>Milvus、LlamaIndex</td></tr>
 <tr><td><a href="/docs/zh/dify_with_milvus.md">使用 Milvus 部署 Dify</a></td><td>协调</td><td>Milvus、Dify</td></tr>
-<tr><td><a href="/docs/zh/rag_with_langflow.md">使用 Milvus 和 Langflow 构建 RAG 系统</a></td><td>协调</td><td>Milvus, Langflow</td></tr>
+<tr><td><a href="/docs/zh/rag_with_langflow.md">用 Milvus 和 Langflow 构建 RAG 系统</a></td><td>协调</td><td>Milvus, Langflow</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_in_private_gpt.md">在 PrivateGPT 中使用 Milvus</a></td><td>协调</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_in_docsgpt.md">在 DocsGPT 中使用 Milvus</a></td><td>协调</td><td>DocsGPT、Milvus</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_with_sambanova.md">在 SambaNova 中使用 Milvus</a></td><td>协调</td><td>Milvus, SambaNova</td></tr>
@@ -49,7 +49,7 @@ title: 集成概述
 <tr><td><a href="/docs/zh/integrate_with_ragas.md">使用 Ragas 和 Milvus 进行 RAG 评估</a></td><td>评估</td><td>Milvus、Ragas</td></tr>
 <tr><td><a href="/docs/zh/evaluation_with_deepeval.md">使用 DeepEval 进行评估</a></td><td>评估与可观察性</td><td>Milvus、DeepEval</td></tr>
 <tr><td><a href="/docs/zh/evaluation_with_phoenix.md">使用 Arize Pheonix 进行评估</a></td><td>评估与可观察性</td><td>Milvus、Arize Pheonix</td></tr>
-<tr><td><a href="/docs/zh/integrate_with_langfuse.md">Milvus 在 Langfuse 中的应用</a></td><td>可观察性</td><td>Milvus、Langfuse</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_langfuse.md">Langfuse 中的 Milvus</a></td><td>可观察性</td><td>Milvus、Langfuse</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_openai.md">使用 Milvus 和 OpenAI 进行语义搜索</a></td><td>语义搜索</td><td>Milvus、OpenAI</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_cohere.md">使用 Milvus 和 Cohere 进行问题解答</a></td><td>语义搜索</td><td>Milvus、Cohere</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_hugging-face.md">使用 Milvus 和 HuggingFace 进行问题解答</a></td><td>问题解答</td><td>Milvus、HuggingFace</td></tr>
@@ -90,5 +90,6 @@ title: 集成概述
 <tr><td><a href="/docs/zh/milvus_and_n8n.md">开始使用 Milvus 和 n8n</a></td><td>编排</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_in_anythingllm.md">在 AnythingLLM 中使用 Milvus</a></td><td>编排</td><td>Milvus、AnythingLLM</td></tr>
 <tr><td><a href="/docs/zh/NLWeb_with_milvus.md">在 Milvus 中使用 NLWeb</a></td><td>数据源</td><td>Milvus、NLWeb</td></tr>
+<tr><td><a href="/docs/zh/langextract_milvus_demo.md">LangExtract + Milvus 集成</a></td><td>数据源</td><td>Milvus、LangExtract</td></tr>
 </tbody>
 </table>

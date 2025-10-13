@@ -241,7 +241,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El operador <code translate="no">LIKE</code> se utiliza para la concordancia de patrones en campos de cadena. Puede coincidir con subcadenas en distintas posiciones dentro del texto: como <strong>prefijo</strong>, <strong>infijo</strong> o <strong>sufijo</strong>. El operador <code translate="no">LIKE</code> utiliza el símbolo <code translate="no">%</code> como comodín, que puede coincidir con cualquier número de caracteres (incluido el cero).</p>
+    </button></h3><p>El operador <code translate="no">LIKE</code> se utiliza para la comparación de patrones en campos de cadena. Puede coincidir con subcadenas en distintas posiciones dentro del texto: como <strong>prefijo</strong>, <strong>infijo</strong> o <strong>sufijo</strong>. El operador <code translate="no">LIKE</code> utiliza el símbolo <code translate="no">%</code> como comodín, que puede coincidir con cualquier número de caracteres (incluido el cero).</p>
 <div class="alert note">
 <p>En la mayoría de los casos, la búsqueda por <strong>infijos</strong> o <strong>sufijos</strong> es mucho más lenta que la búsqueda por prefijos. Utilícelas con precaución si el rendimiento es crítico.</p>
 </div>
@@ -667,7 +667,7 @@ summary: >-
 <p>Por ejemplo, si tiene un campo <code translate="no">product</code> que contiene múltiples claves como <code translate="no">price</code>, <code translate="no">model</code>, y <code translate="no">tags</code>, siempre haga referencia a la clave directamente:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para buscar registros en los que la primera temperatura de una matriz de temperaturas registradas supere un valor determinado, utilice:</p>
+<p>Para buscar registros en los que la primera temperatura de un array de temperaturas registradas supere un determinado valor, utilice:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Conclusion" class="common-anchor-header">Conclusión<button data-href="#Conclusion" class="anchor-icon" translate="no">

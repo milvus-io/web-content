@@ -50,5 +50,6 @@ title: Übersicht Tutorials
 <tr><td><a href="/docs/de/dna_sequence_classification.md">DNA-Klassifizierung</a></td><td>Klassifizierung</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/text_search_engine.md">Text-Suchmaschine</a></td><td>Semantische Suche</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/image_deduplication_system.md">Bild-Deduplizierung</a></td><td>Deduplizierung</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/generating_milvus_query_filter_expressions.md">Generierung von Milvus Query Filterausdrücken mit großen Sprachmodellen</a></td><td>Metadaten-Filterung</td><td>Vektorsuche</td></tr>
 </tbody>
 </table>

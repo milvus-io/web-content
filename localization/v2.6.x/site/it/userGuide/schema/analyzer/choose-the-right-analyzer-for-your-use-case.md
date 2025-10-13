@@ -43,8 +43,8 @@ summary: Note
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/analyzer-workflow.png" alt="Analyzer Workflow" class="doc-image" id="analyzer-workflow" />
    </span> <span class="img-wrapper"> <span>Flusso di lavoro dell'analizzatore</span> </span></p>
 <ol>
-<li><p><strong>Tokenizzazione (necessaria):</strong> Questa fase iniziale applica un <strong>tokenizer</strong> per scomporre una stringa continua di testo in unità discrete e significative, chiamate token. Il metodo di tokenizzazione può variare significativamente a seconda della lingua e del tipo di contenuto.</p></li>
-<li><p><strong>Filtraggio dei token (opzionale):</strong> Dopo la tokenizzazione, vengono applicati dei <strong>filtri</strong> per modificare, rimuovere o perfezionare i token. Queste operazioni possono includere la conversione di tutti i token in minuscolo, la rimozione di parole comuni senza significato (come le stopword) o la riduzione delle parole alla loro radice (stemming).</p></li>
+<li><p><strong>Tokenizzazione (necessaria):</strong> Questa fase iniziale applica un <strong>tokenizer</strong> per scomporre una stringa continua di testo in unità discrete e significative, chiamate token. Il metodo di tokenizzazione può variare in modo significativo a seconda della lingua e del tipo di contenuto.</p></li>
+<li><p><strong>Filtraggio dei tokens (opzionale):</strong> Dopo la tokenizzazione, vengono applicati dei <strong>filtri</strong> per modificare, rimuovere o perfezionare i token. Queste operazioni possono includere la conversione di tutti i token in minuscolo, la rimozione di parole comuni senza significato (come le stopword) o la riduzione delle parole alla loro forma radicale (stemming).</p></li>
 </ol>
 <p><strong>Esempio</strong>:</p>
 <pre><code translate="no" class="language-plaintext">Input: &quot;Hello World!&quot; 
@@ -67,7 +67,7 @@ summary: Note
         ></path>
       </svg>
     </button></h2><p>La scelta dell'analizzatore sbagliato può rendere i documenti rilevanti non ricercabili o restituire risultati irrilevanti.</p>
-<p>La tabella seguente riassume i problemi più comuni causati da una scelta errata dell'analizzatore e fornisce soluzioni praticabili per diagnosticare i problemi di ricerca.</p>
+<p>La tabella seguente riassume i problemi più comuni causati da una scelta impropria dell'analizzatore e fornisce soluzioni praticabili per diagnosticare i problemi di ricerca.</p>
 <table>
    <tr>
      <th><p>Problema</p></th>
@@ -129,10 +129,10 @@ summary: Note
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se non si specifica un analizzatore quando si utilizzano funzioni di recupero del testo come la ricerca full text, Milvus utilizza automaticamente l'analizzatore <a href="/docs/it/standard-analyzer.md"><code translate="no">standard</code></a> ...l'analizzatore.</p>
+    </button></h3><p>Se non si specifica un analizzatore quando si usano funzioni di recupero del testo come la ricerca full text, Milvus usa automaticamente l'analizzatore <a href="/docs/it/standard-analyzer.md"><code translate="no">standard</code></a> ...l'analizzatore.</p>
 <p>L'analizzatore <code translate="no">standard</code>:</p>
 <ul>
-<li><p>Divide il testo in base agli spazi e alla punteggiatura</p></li>
+<li><p>divide il testo in base agli spazi e alla punteggiatura</p></li>
 <li><p>Converte tutti i token in minuscolo</p></li>
 <li><p>Rimuove una serie di stop word inglesi comuni e la maggior parte della punteggiatura.</p></li>
 </ul>
@@ -820,7 +820,7 @@ analyzer_params = {
     </button></h2><p>Dopo aver selezionato l'analizzatore, è possibile integrarlo con le funzioni di recupero del testo fornite da Milvus.</p>
 <ul>
 <li><p><strong>Ricerca di testo completo</strong></p>
-<p>Gli analizzatori hanno un impatto diretto sulla ricerca full text basata su BM25 attraverso la generazione di vettori sparsi. Utilizzare lo stesso analizzatore sia per l'indicizzazione che per l'interrogazione, per garantire una tokenizzazione coerente. Gli analizzatori specifici per la lingua forniscono generalmente un punteggio BM25 migliore rispetto a quelli generici. Per i dettagli sull'implementazione, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca di testo completo</a>.</p></li>
+<p>Gli analizzatori hanno un impatto diretto sulla ricerca full text basata su BM25 attraverso la generazione di vettori sparsi. Utilizzare lo stesso analizzatore sia per l'indicizzazione che per l'interrogazione per garantire una tokenizzazione coerente. Gli analizzatori specifici per la lingua forniscono generalmente un punteggio BM25 migliore rispetto a quelli generici. Per i dettagli sull'implementazione, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca di testo completo</a>.</p></li>
 <li><p><strong>Corrispondenza di testo</strong></p>
 <p>Le operazioni di corrispondenza del testo eseguono una corrispondenza esatta dei token tra le query e il contenuto indicizzato in base ai risultati dell'analizzatore. Per i dettagli sull'implementazione, fare riferimento a <a href="/docs/it/keyword-match.md">Corrispondenza di testo</a>.</p></li>
 <li><p><strong>Corrispondenza di frase</strong></p>

@@ -80,7 +80,7 @@
             "children": []
           },
           {
-            "label": "تشغيل ميلفوس مستقل",
+            "label": "تشغيل ميلفوس ستاندالون",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "لانجإكستراكتكت",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2683,6 +2689,12 @@
         "label": "البحث بتحويل النص إلى صورة مع ميلفوس",
         "id": "text_image_search.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "توليد تعبيرات مرشح استعلامات ميلفوس مع نماذج اللغة الكبيرة",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
         "children": []
       },
       {

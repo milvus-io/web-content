@@ -189,7 +189,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    </tr>
    <tr>
      <td><p>多语种或未知语言</p></td>
-     <td><p>❌ 否</p></td>
+     <td><p>否</p></td>
      <td><p><code translate="no">standard</code> 分析仪缺乏处理不同字符集和标记化规则所需的特定语言逻辑。</p></td>
      <td><p>使用带有 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a>标记化器进行单编码标记化。 </p><p>或者，考虑配置<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>或<a href="/docs/zh/language-identifier.md">语言标识符</a>，以便更精确地处理多语言内容。</p></td>
    </tr>

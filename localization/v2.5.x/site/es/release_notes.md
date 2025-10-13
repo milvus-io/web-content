@@ -116,7 +116,7 @@ title: Notas de la versión
 <li>Se ha corregido un problema de duplicación de auto-ID entre operaciones de importación e inserción<a href="https://github.com/milvus-io/milvus/pull/42520">(nº 42520</a>).</li>
 <li>Se ha garantizado que las tareas estadísticas de importación de segmentos sólo se activan mediante <code translate="no">import_checker</code> <a href="https://github.com/milvus-io/milvus/pull/42487">(nº 42487</a>).</li>
 <li>Se ha corregido un error con <code translate="no">is null</code> para el índice Marisa<a href="https://github.com/milvus-io/milvus/pull/42421">(#42421</a>).</li>
-<li>Garantizar que las tareas de estadísticas sólo se activan para los segmentos vaciados<a href="https://github.com/milvus-io/milvus/pull/42425">(#42425</a>).</li>
+<li>Garantizar que las tareas de estadísticas sólo se activan para los segmentos descargados<a href="https://github.com/milvus-io/milvus/pull/42425">(#42425</a>).</li>
 <li>Restablecimiento del estado de compactación cuando finalizan las estadísticas de segmentos<a href="https://github.com/milvus-io/milvus/pull/42005">(#42005</a>).</li>
 <li>Se ha actualizado la versión de Tantivy para solucionar un problema de pánico de stemmer<a href="https://github.com/milvus-io/milvus/pull/42172">(#42172</a>).</li>
 <li>Se ha solucionado un problema por el que no se podían recuperar los campos de salida del vector cuando se utilizaba un nuevo índice provisional<a href="https://github.com/milvus-io/milvus/pull/42183">(#42183</a>).</li>
@@ -339,7 +339,7 @@ title: Notas de la versión
 <li>Se ha corregido un problema por el que la creación de índices de estadísticas JSON podía fallar si los datos contenían un mapa vacío<a href="https://github.com/milvus-io/milvus/pull/41506">(#41506</a>).</li>
 <li>Se ha corregido la API <code translate="no">AlterCollection</code> para que guarde correctamente la fecha y hora de modificación<a href="https://github.com/milvus-io/milvus/pull/41469">(#41469</a>).</li>
 <li>Se ha corregido un error de filtrado intermitente en las estadísticas JSON en <code translate="no">ConjunctExpr</code> y se ha mejorado la lógica de cálculo de ranuras de tareas para acelerar la creación de estadísticas JSON<a href="https://github.com/milvus-io/milvus/pull/41458">(#41458</a>).</li>
-<li>Corregida una fuga de oráculo IDF en el cálculo de estadísticas BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
+<li>Corregida una fuga del oráculo IDF en el cálculo de estadísticas BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
 <li>Se ha garantizado que los temas precreados se comprueben primero durante la validación del número de fragmentos<a href="https://github.com/milvus-io/milvus/pull/41421">(nº 41421</a>).</li>
 <li>Se ha corregido un informe erróneo de bloqueo que se producía en las pruebas unitarias<a href="https://github.com/milvus-io/milvus/pull/41377">(#41377</a>).</li>
 </ul>
@@ -524,7 +524,7 @@ title: Notas de la versión
 <tr><td>2.5.8</td><td>2.5.6</td><td>2.5.7</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>Nos complace anunciar el lanzamiento de Milvus 2.5.8, que incluye mejoras en las expresiones JSON, la validación UTF-8, el uso de memoria y la lógica de equilibrado. Esta versión también incluye múltiples correcciones de errores importantes para mejorar la concurrencia y el manejo de datos. Le animamos a que actualice o lo pruebe y, como siempre, ¡sus comentarios nos ayudan a perfeccionar Milvus continuamente!</p>
+<p>Nos complace anunciar el lanzamiento de Milvus 2.5.8, que incluye mejoras en las expresiones JSON, la validación UTF-8, el uso de memoria y la lógica de equilibrado. Esta versión también incluye múltiples correcciones de errores importantes para mejorar la concurrencia y el manejo de datos. Le animamos a que actualice o pruebe Milvus y, como siempre, ¡sus comentarios nos ayudan a perfeccionarlo continuamente!</p>
 <h3 id="Features" class="common-anchor-header">Características<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -689,7 +689,7 @@ title: Notas de la versión
         ></path>
       </svg>
     </button></h3><ul>
-<li>Utilizar <code translate="no">newInsertDataWithFunctionOutputField</code> al importar archivos binlog<a href="https://github.com/milvus-io/milvus/pull/40742">(#40742</a>)</li>
+<li>Uso de <code translate="no">newInsertDataWithFunctionOutputField</code> al importar archivos binlog<a href="https://github.com/milvus-io/milvus/pull/40742">(#40742</a>)</li>
 <li>Se ha corregido un problema por el que las propiedades mmap no se aplicaban al crear una colección<a href="https://github.com/milvus-io/milvus/pull/40515">(#40515</a>)</li>
 <li>No eliminar el archivo centroids cuando falla el muestreo; en su lugar, esperar a GC<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>)</li>
 <li>Solucionados los problemas de pérdida de mensajes durante la búsqueda<a href="https://github.com/milvus-io/milvus/pull/40736">(#40736</a>)</li>
@@ -732,7 +732,7 @@ title: Notas de la versión
 <tr><td>2.5.6</td><td>2.5.5</td><td>2.5.5</td><td>2.5.5</td></tr>
 </tbody>
 </table>
-<p>Nos complace anunciar el lanzamiento de Milvus 2.5.6, que incluye valiosas mejoras en las cadenas de herramientas, el registro, las métricas y el manejo de matrices, así como múltiples correcciones de errores para mejorar la fiabilidad y el rendimiento. Esta actualización incluye un manejo mejorado de la concurrencia, tareas de compactación más robustas y otras mejoras clave. Le animamos a que la actualice o la pruebe y, como siempre, agradecemos sus comentarios para ayudarnos a mejorar Milvus continuamente.</p>
+<p>Nos complace anunciar el lanzamiento de Milvus 2.5.6, que incluye valiosas mejoras en las cadenas de herramientas, el registro, las métricas y el manejo de matrices, así como múltiples correcciones de errores para mejorar la fiabilidad y el rendimiento. Esta actualización incluye una mejor gestión de la concurrencia, tareas de compactación más robustas y otras mejoras clave. Le animamos a que la actualice o la pruebe y, como siempre, agradecemos sus comentarios para ayudarnos a mejorar Milvus continuamente.</p>
 <h3 id="Improvements" class="common-anchor-header">Mejoras<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -909,7 +909,7 @@ title: Notas de la versión
 <li>[2.5] Usado el formateador de elementos param para evitar la superposición de setconfig<a href="https://github.com/milvus-io/milvus/pull/39636">(#39636</a>)</li>
 <li>[2.5] Comprobado el nombre de privilegio del metastore con el nombre de privilegio "todos"<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
 <li>[2.5] Añadido limitador de velocidad para RESTful v1<a href="https://github.com/milvus-io/milvus/pull/39555">(#39555</a>)</li>
-<li>[2.5] Eliminado el número de partición codificado en el gestor RESTful<a href="https://github.com/milvus-io/milvus/pull/40113">(#40113</a>)</li>
+<li>[2.5] Eliminado el número de partición en el gestor RESTful<a href="https://github.com/milvus-io/milvus/pull/40113">(#40113</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Mejoras<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1037,7 +1037,7 @@ title: Notas de la versión
 <li>Eliminación de filtros Bloom innecesarios en QueryNode y DataNode para reducir el uso de memoria<a href="https://github.com/milvus-io/milvus/pull/38913">(#38913</a>)</li>
 <li>Aceleración de la carga de datos mediante la aceleración de la generación, programación y ejecución de tareas en QueryCoord<a href="https://github.com/milvus-io/milvus/pull/38905">(#38905</a>)</li>
 <li>Reducción del bloqueo en DataCoord para acelerar las operaciones de carga e inserción<a href="https://github.com/milvus-io/milvus/pull/38904">(nº 38904</a>).</li>
-<li>Añadidos nombres de campos primarios en <code translate="no">SearchResult</code> y <code translate="no">QueryResults</code> <a href="https://github.com/milvus-io/milvus/pull/39222">(#39222</a>)</li>
+<li>Adición de nombres de campo primario en <code translate="no">SearchResult</code> y <code translate="no">QueryResults</code> <a href="https://github.com/milvus-io/milvus/pull/39222">(#39222</a>)</li>
 <li>Utilización del tamaño del binlog y del tamaño del índice como estándar de limitación de la cuota de disco<a href="https://github.com/milvus-io/milvus/pull/38844">(#38844</a>)</li>
 <li>Optimizado el uso de memoria para la búsqueda de texto completo knowhere/#1011</li>
 <li>Añadido control de versiones para índices escalares<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>
@@ -1080,13 +1080,13 @@ title: Notas de la versión
         ></path>
       </svg>
     </button></h3><ul>
-<li>Solucionados los problemas de consultas lentas causadas por la granularidad de bloqueo grueso durante la carga de varias columnas<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
+<li>Solucionados los problemas de consultas lentas causadas por la granularidad de bloqueo grueso durante la carga de múltiples columnas<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
 <li>Se ha corregido un problema por el que el uso de alias podía hacer que un iterador recorriera la base de datos incorrecta<a href="https://github.com/milvus-io/milvus/pull/39248">(nº 39248</a>).</li>
-<li>Se ha corregido un fallo en la actualización de grupos de recursos al modificar la base de datos<a href="https://github.com/milvus-io/milvus/pull/39356">(nº 39356</a>).</li>
+<li>Se ha corregido un error de actualización de grupos de recursos al modificar la base de datos<a href="https://github.com/milvus-io/milvus/pull/39356">(nº 39356</a>).</li>
 <li>Se ha corregido un problema esporádico por el que el índice tantivy no podía eliminar los archivos de índice durante la liberación<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
 <li>Corregida la lentitud de indexación causada por tener demasiados hilos<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
 <li>Se ha solucionado un problema que impedía que se omitieran las comprobaciones de cuota de disco durante la importación masiva<a href="https://github.com/milvus-io/milvus/pull/39319">(nº 39319</a>).</li>
-<li>Resueltos los problemas de congelación causados por demasiados consumidores de cola de mensajes mediante la limitación de la concurrencia<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
+<li>Resueltos los problemas de congelación causados por demasiados consumidores de cola de mensajes limitando la concurrencia<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
 <li>Corregidos los tiempos de espera de las consultas causados por los reinicios de MixCoord durante las compactaciones a gran escala<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
 <li>Solucionados los problemas de desequilibrio de canales causados por el tiempo de inactividad de los nodos<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
 <li>Arreglado un problema que podía provocar que el balance de canales se atascara.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
@@ -1330,7 +1330,7 @@ title: Notas de la versión
 <tr><td>2.5.0</td><td>2.5.1</td><td>2.5.2</td><td>2.5.2</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.0 aporta avances significativos para mejorar la usabilidad, escalabilidad y rendimiento de los usuarios que trabajan con búsquedas vectoriales y gestión de datos a gran escala. Con esta versión, Milvus integra nuevas y potentes funciones como la búsqueda basada en términos, la compactación de clústeres para optimizar las consultas y la compatibilidad versátil con métodos de búsqueda vectorial dispersa y densa. Las mejoras en la gestión de clusters, indexación y manejo de datos introducen nuevos niveles de flexibilidad y facilidad de uso, haciendo de Milvus una base de datos vectorial aún más robusta y fácil de usar.</p>
+<p>Milvus 2.5.0 aporta avances significativos para mejorar la facilidad de uso, la escalabilidad y el rendimiento para los usuarios que se ocupan de la búsqueda vectorial y la gestión de datos a gran escala. Con esta versión, Milvus integra nuevas y potentes funciones como la búsqueda basada en términos, la compactación de clústeres para optimizar las consultas y la compatibilidad versátil con métodos de búsqueda vectorial dispersa y densa. Las mejoras en la gestión de clusters, indexación y manejo de datos introducen nuevos niveles de flexibilidad y facilidad de uso, haciendo de Milvus una base de datos vectorial aún más robusta y fácil de usar.</p>
 <h3 id="Key-Features" class="common-anchor-header">Características principales<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

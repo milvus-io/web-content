@@ -160,7 +160,7 @@ beta: Milvus v2.5.15+
 </table>
 <div class="alert note">
 <ul>
-<li><p><strong>匹配是關鍵：</strong>您的分析器名稱<strong>必須完全符合</strong>偵測引擎的語言輸出。例如，如果您使用<code translate="no">whatlang</code> ，中文文字的關鍵字必須是<code translate="no">Mandarin</code> 。</p></li>
+<li><p><strong>匹配是關鍵：</strong>您的分析器名稱<strong>必須完全符合</strong>偵測引擎的語言輸出。例如，如果您使用<code translate="no">whatlang</code> ，則中文文本的關鍵必須是<code translate="no">Mandarin</code> 。</p></li>
 <li><p><strong>最佳實務：</strong>上表提供了幾種常見語言的建議配置，但並非詳盡無遺的清單。如需更全面的分析儀選擇指南，請參閱<a href="/docs/zh-hant/choose-the-right-analyzer-for-your-use-case.md">Choose the Right Analyzer for Your Use Case</a>。</p></li>
 <li><p><strong>偵測器輸出</strong>：如需檢測引擎傳回的完整語言名稱清單，請參閱<a href="https://github.com/greyblake/whatlang-rs">Whatlang 支援的語言表</a>和<a href="https://github.com/pemistahl/lingua-rs">Lingua 支援的語言清單</a>。</p></li>
 </ul>

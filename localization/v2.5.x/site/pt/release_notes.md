@@ -1,6 +1,6 @@
 ---
 id: release_notes.md
-summary: Notas de lançamento do Milvus
+summary: Milvus Release Notes
 title: Notas de lançamento
 ---
 <h1 id="Release-Notes" class="common-anchor-header">Notas de lançamento<button data-href="#Release-Notes" class="anchor-icon" translate="no">
@@ -255,7 +255,7 @@ title: Notas de lançamento
 <tr><td>2.5.11</td><td>2.5.8</td><td>2.5.8</td><td>2.5.8</td></tr>
 </tbody>
 </table>
-<p>Temos o prazer de anunciar o lançamento do Milvus 2.5.11! Esta versão introduz novas funcionalidades poderosas como a capacidade de multi-analisador e suporte alargado de tokenizadores (Jieba, Lindera, ICU, Language Identifier). Também fizemos várias melhorias, incluindo atualizações dinâmicas do pool de threads de carregamento de segmentos e filtragem de exclusão otimizada durante as importações de binlogs. As principais correções de erros abordam possíveis problemas de queda de segmento, falhas de pesquisa BM25 e erros de filtragem de estatísticas JSON.</p>
+<p>Temos o prazer de anunciar o lançamento do Milvus 2.5.11! Esta versão introduz novas e poderosas funcionalidades como a capacidade de multi-analisador e suporte alargado a tokenizadores (Jieba, Lindera, ICU, Language Identifier). Também fizemos várias melhorias, incluindo atualizações do pool de threads de carregamento dinâmico de segmentos e filtragem de exclusão otimizada durante as importações de binlogs. As principais correções de erros abordam possíveis problemas de queda de segmento, falhas de pesquisa BM25 e erros de filtragem de estatísticas JSON.</p>
 <p>Recomendamos que atualize para a versão 2.5.11 para aproveitar essas melhorias e correções!</p>
 <h3 id="Features" class="common-anchor-header">Recursos<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -313,7 +313,7 @@ title: Notas de lançamento
 <li>Adicionados parâmetros de monitorização para o rácio do filtro de expressão<a href="https://github.com/milvus-io/milvus/pull/41403">(#41403</a>).</li>
 <li>Adicionada uma opção de configuração para forçar a reconstrução de índices para a versão mais recente<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>).</li>
 <li>Melhorada a mensagem de registo de erros para a política de lista<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368</a>).</li>
-<li>Manuseamento adaptado para hífenes em cabeçalhos de metadados gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
+<li>Manuseamento adaptado para hífenes nos cabeçalhos de metadados gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
 <li>Atualização da versão Go para 1.24.1 para resolver CVEs<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Correções de erros<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
@@ -1410,7 +1410,7 @@ title: Notas de lançamento
       </svg>
     </button></h3><h4 id="Deletion-Optimization" class="common-anchor-header">Otimização da eliminação</h4><p>Melhoria da velocidade e redução da utilização de memória para eliminações em grande escala, optimizando a utilização de bloqueios e a gestão de memória.</p>
 <h4 id="Dependencies-Upgrade" class="common-anchor-header">Atualização de dependências</h4><p>Atualizada para ETCD 3.5.16 e Pulsar 3.0.7 LTS, corrigindo CVEs existentes e melhorando a segurança. Nota: A atualização para o Pulsar 3.x não é compatível com as versões anteriores 2.x.</p>
-<p>Para os utilizadores que já têm uma implementação Milvus a funcionar, é necessário atualizar os componentes ETCD e Pulsar antes de poder utilizar as novas caraterísticas e funções. Para obter detalhes, consulte <a href="/docs/pt/v2.5.x/upgrade-pulsar-v3.md">Atualizar a Pulsar de 2.x para 3.x</a></p>
+<p>Para os utilizadores que já têm uma implementação Milvus em funcionamento, é necessário atualizar os componentes ETCD e Pulsar antes de poder utilizar as novas caraterísticas e funções. Para obter detalhes, consulte <a href="/docs/pt/v2.5.x/upgrade-pulsar-v3.md">Atualizar a Pulsar de 2.x para 3.x</a></p>
 <h4 id="Local-Storage-V2" class="common-anchor-header">Armazenamento local V2</h4><p>Introduziu um novo formato de arquivo local no Milvus 2.5, melhorando a eficiência de carregamento e consulta para dados escalares, reduzindo a sobrecarga de memória e estabelecendo as bases para futuras otimizações.</p>
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">Otimização da análise de expressões</h4><p>Melhoria da análise de expressões através da implementação de cache para expressões repetidas, atualização do ANTLR e otimização do desempenho das cláusulas <code translate="no">NOT IN</code>.</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">Desempenho aprimorado da simultaneidade de DDL</h4><p>Otimizado o desempenho de simultaneidade das operações da Linguagem de Definição de Dados (DDL).</p>

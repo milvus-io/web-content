@@ -594,7 +594,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Fermarsi",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -1121,7 +1121,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tutorial: Implementare una classifica basata sul tempo in Milvus",
+                    "label": "Tutorial: Implementare la classificazione basata sul tempo in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -2177,7 +2177,7 @@
             "children": []
           },
           {
-            "label": "Dificare",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "Estratto di lingua",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2662,7 +2668,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -2683,6 +2689,12 @@
         "label": "Ricerca da testo a immagine con Milvus",
         "id": "text_image_search.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "Generazione di espressioni di filtro per query Milvus con modelli linguistici di grandi dimensioni",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
         "children": []
       },
       {

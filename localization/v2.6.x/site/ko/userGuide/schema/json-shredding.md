@@ -25,7 +25,7 @@ beta: Milvus 2.6.2+
 <p>JSON 파쇄는 대부분의 JSON 쿼리 시나리오에 효과적입니다. 성능 이점은 다음과 같은 경우에 더욱 두드러집니다:</p>
 <ul>
 <li><p>더<strong>크고 복잡한 JSON 문서</strong> - 문서 크기가 커질수록 성능이 크게 향상됩니다.</p></li>
-<li><p><strong>읽기가 많은 워크로드</strong> - JSON 키에 대한 필터링, 정렬 또는 검색이 빈번한 경우</p></li>
+<li><p><strong>읽기가 많은 워크로드</strong> - JSON 키에 대한 필터링, 정렬 또는 검색이 잦은 경우</p></li>
 <li><p><strong>혼합 쿼리 패턴</strong> - 서로 다른 JSON 키에 대한 쿼리는 하이브리드 스토리지 접근 방식의 이점을 누릴 수 있습니다.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">작동 방식<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -196,7 +196,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>Milvus가 조각화된 데이터를 로드할 때 mmap을 사용할지 여부를 결정합니다.</p><p>자세한 내용은 <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">mmap 사용을</a> 참조하세요.</p></td>
+     <td><p>Milvus가 조각화된 데이터를 로드할 때 mmap을 사용할지 여부를 결정합니다.</p><p>자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하세요.</p></td>
      <td><p>true</p></td>
      <td><p>이 설정은 일반적으로 성능에 최적화되어 있습니다. 시스템에 특정 메모리 관리가 필요하거나 제약이 있는 경우에만 이 설정을 조정하세요.</p></td>
    </tr>
@@ -346,7 +346,7 @@ beta: Milvus 2.6.2+
     </button></h3><ul>
 <li><p><strong>공유 키 쿼리가</strong> 가장 극적인 성능 향상(최대 89배 빨라짐)을 보여줍니다.</p></li>
 <li><p><strong>입력된 키 쿼리는</strong> 일관되게 15~30배의 성능 향상을 제공합니다.</p></li>
-<li><p><strong>모든 쿼리 유형이</strong> 성능 저하 없이 JSON 파쇄의 이점을 누립니다.</p></li>
+<li><p><strong>모든 쿼리 유형에서</strong> 성능 저하 없이 JSON 파쇄의 이점을 누릴 수 있습니다.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -376,7 +376,7 @@ beta: Milvus 2.6.2+
 <li><p><strong>JSON 파쇄와 JSON 인덱싱 중에서 어떻게 선택하나요?</strong></p>
 <ul>
 <li><p><strong>JSON 파</strong> 쇄는 문서에 자주 나타나는 키, 특히 복잡한 JSON 구조에 이상적입니다. 컬럼형 저장과 역 인덱싱의 장점을 결합한 것으로, 다양한 키를 쿼리하는 읽기 작업량이 많은 시나리오에 적합합니다. 그러나 아주 작은 JSON 문서에는 성능 향상이 미미하므로 권장되지 않습니다. JSON 문서의 전체 크기에서 키 값이 차지하는 비율이 작을수록 파쇄로 인한 성능 최적화가 더 잘 이루어집니다.</p></li>
-<li><p><strong>JSON 인덱싱은</strong> 특정 키 기반 쿼리의 타깃 최적화에 더 적합하며 스토리지 오버헤드가 더 낮습니다. 더 단순한 JSON 구조에 적합합니다. JSON 파쇄는 배열 내부의 키에 대한 쿼리에는 적용되지 않으므로 이를 가속화하려면 JSON 인덱스가 필요하다는 점에 유의하세요.</p></li>
+<li><p><strong>JSON 인덱싱은</strong> 특정 키 기반 쿼리의 타겟 최적화에 더 적합하며 스토리지 오버헤드가 더 낮습니다. 더 단순한 JSON 구조에 적합합니다. JSON 파쇄는 배열 내부의 키에 대한 쿼리에는 적용되지 않으므로 이를 가속화하려면 JSON 인덱스가 필요하다는 점에 유의하세요.</p></li>
 </ul></li>
 <li><p><strong>오류가 발생하면 어떻게 하나요?</strong></p>
 <p>빌드 또는 로드 프로세스가 실패하는 경우 <code translate="no">common.enabledJSONKeyStats=false</code> 을 설정하여 기능을 빠르게 비활성화할 수 있습니다. 남은 작업을 모두 지우려면 <a href="/docs/ko/birdwatcher_usage_guides.md">Birdwatcher에서</a> <code translate="no">remove stats-task &lt;task_id&gt;</code> 명령을 사용하세요. 쿼리가 실패하면 <code translate="no">common.usingJsonStatsForQuery=false</code> 을 설정하여 파쇄된 데이터를 우회하여 원래 쿼리 경로로 되돌립니다.</p></li>

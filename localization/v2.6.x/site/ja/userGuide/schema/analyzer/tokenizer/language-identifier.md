@@ -48,7 +48,7 @@ beta: Milvus v2.5.15+
 <li><p><strong>アナライザーの選択：</strong></p>
 <ul>
 <li><p><strong>成功：</strong>言語の検出に成功すると、検出された言語名に対応するアナライザが<code translate="no">analyzers</code> 辞書に設定されているかどうかがチェックされます。一致するアナライザが見つかると、指定したアナライザが入力テキストに適用されます。たとえば、"Mandarin" というテキストが検出されると、<code translate="no">jieba</code> のトークナイザにルーティングされます。</p></li>
-<li><p><strong>フォールバック：</strong>検出が失敗した場合、または検出には成功したが特定のアナライザが指定されていない場合、システムは事前に設定された<strong>デフォルトのアナライザに</strong>デフォルト設定します。<code translate="no">default</code> アナライザーは、検出に失敗した場合と、一致するアナライザーがない場合の両方のフォールバックです。</p></li>
+<li><p><strong>フォールバック：</strong>検出が失敗した場合、または検出には成功したが特定のアナライザが指定されていない場合、システムは事前に設定された<strong>デフォルトのアナライザに</strong>デフォルト設定します。<code translate="no">default</code> アナライザーは、検出に失敗した場合にも、一致するアナライザーがない場合にも使用できます。</p></li>
 </ul></li>
 </ol>
 <p>適切な解析器が選択されると、テキストがトークン化されて処理され、ワークフローが完了します。</p>
@@ -198,7 +198,7 @@ beta: Milvus v2.5.15+
 <li><p><code translate="no">mapping</code> - アナライザ用のカスタムエイリアスを作成し、検出エンジンの正確な出力形式ではなく、説明的な名前を使用できるようにします。</p></li>
 </ul>
 <p>トークナイザは、まず入力テキストの言語を検出し、次に設定から適切なアナライザを選択します。検出が失敗した場合、または一致するアナライザが存在しない場合は、自動的に<code translate="no">default</code> アナライザにフォールバックします。</p>
-<h4 id="Recommended-Direct-name-matching" class="common-anchor-header">推奨名前の直接一致</h4><p>アナライザ名は、選択した言語検出エンジンの出力と正確に一致させる。この方法はより簡単で、潜在的な混乱を避けることができます。</p>
+<h4 id="Recommended-Direct-name-matching" class="common-anchor-header">推奨名前の直接一致</h4><p>アナライザ名は、選択した言語検出エンジンの出力と正確に一致させる。この方法の方がシンプルで、潜在的な混乱を避けることができます。</p>
 <p><code translate="no">whatlang</code> と<code translate="no">lingua</code> の両方について、それぞれのドキュメントに示されている言語名を使用してください：</p>
 <ul>
 <li><p><a href="https://github.com/greyblake/whatlang-rs/blob/master/SUPPORTED_LANGUAGES.md">whatlangがサポートしている言語</a>（<strong>"Language</strong>"列を使う）</p></li>
@@ -261,7 +261,7 @@ beta: Milvus v2.5.15+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一般的なシナリオですぐに使用できる設定をいくつか紹介します。各例には設定と検証コードの両方が含まれているため、設定をすぐにテストできます。</p>
+    </button></h2><p>ここでは、一般的なシナリオですぐに使用できる設定をいくつか紹介します。各例には設定と検証コードの両方が含まれているため、設定をすぐにテストできます。</p>
 <h3 id="English-and-Chinese-detection" class="common-anchor-header">英語と中国語の検出<button data-href="#English-and-Chinese-detection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

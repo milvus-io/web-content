@@ -4,7 +4,7 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: تعرف على كيفية ترقية مجموعة Milvus العنقودية باستخدام مشغل Milvus.
+summary: تعرف على كيفية ترقية مجموعة ميلفوس العنقودية باستخدام مشغل ميلفوس.
 title: ترقية مجموعة ميلفوس العنقودية باستخدام مشغل ميلفوس
 ---
 <div class="tab-wrapper"><a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-operator.md" class='active '>مشغل ميلفوس ميلفوس</a><a href="/docs/ar/v2.5.x/upgrade_milvus_cluster-helm.md" class=''>هيلم</a></div>
@@ -66,7 +66,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>منذ الإصدار Milvus 2.2.3، يمكنك تكوين منسقي Milvus للعمل في وضع الاستعداد النشط وتمكين ميزة الترقية المتجددة لهم، بحيث يمكن لـ Milvus الاستجابة للطلبات الواردة أثناء ترقيات المنسق. في الإصدارات السابقة، يجب إزالة المنسقين ثم إنشاؤهم أثناء الترقية، مما قد يؤدي إلى تعطل معين للخدمة.</p>
-<p>استنادًا إلى إمكانيات التحديث المتداول التي توفرها Kubernetes، يفرض مشغل Milvus تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
+<p>استنادًا إلى إمكانات التحديث المتجدد التي توفرها Kubernetes، يفرض مشغل Milvus تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
 <p>يتم تعطيل ميزة الترقية المتجددة بشكل افتراضي. تحتاج إلى تمكينها بشكل صريح من خلال ملف تهيئة.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

@@ -294,7 +294,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p>La siguiente tabla enumera las operaciones que puede realizar para la migración de metadatos.</p>
 <table>
 <thead>
-<tr><th>Parámetros</th><th>Descripción</th><th>Valor por defecto</th><th>Obligatorio</th></tr>
+<tr><th>Parámetros</th><th>Descripción</th><th>Valor por defecto</th><th>Requerido</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">i</code></td><td>El nombre de instancia de Milvus.</td><td><code translate="no">None</code></td><td>Verdadero</td></tr>

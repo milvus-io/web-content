@@ -165,7 +165,7 @@ index_params.add_index(
 <div class="alert note">
 <p>数组应包含相同类型的元素，以优化索引。有关详细信息，请参阅<a href="/docs/zh/array_data_type.md">数组字段</a>。</p>
 </div>
-<h3 id="Supported-cast-functions" class="common-anchor-header">支持的投影函数<button data-href="#Supported-cast-functions" class="anchor-icon" translate="no">
+<h3 id="Supported-cast-functions" class="common-anchor-header">支持的铸入函数<button data-href="#Supported-cast-functions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -381,7 +381,7 @@ index_params.add_index(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>您也可以只索引 JSON 结构的一部分，例如所有<code translate="no">supplier</code> 信息：</p>
+<p>您也可以只索引 JSON 结构的一部分，如所有<code translate="no">supplier</code> 信息：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Index a sub-object</span>
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,

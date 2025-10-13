@@ -199,7 +199,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>Menentukan apakah Milvus menggunakan mmap saat memuat data yang diparut.</p><p>Untuk detailnya, lihat <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Gunakan mmap</a>.</p></td>
+     <td><p>Menentukan apakah Milvus menggunakan mmap saat memuat data yang diparut.</p><p>Untuk detailnya, lihat <a href="/docs/id/mmap.md">Gunakan mmap</a>.</p></td>
      <td><p>true</p></td>
      <td><p>Pengaturan ini umumnya dioptimalkan untuk kinerja. Hanya sesuaikan jika Anda memiliki kebutuhan atau batasan manajemen memori tertentu pada sistem Anda.</p></td>
    </tr>

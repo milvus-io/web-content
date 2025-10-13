@@ -20,7 +20,7 @@ beta: Milvus v2.6.2+
         ></path>
       </svg>
     </button></h1><p>Boost Ranker 不完全依赖基于向量距离计算的语义相似性，而是让您以有意义的方式影响搜索结果。它是使用元数据过滤快速调整搜索结果的理想选择。</p>
-<p>当搜索请求中包含提升排名器功能时，Milvus 会使用该功能中的可选过滤条件，在搜索结果候选项中查找匹配项，并通过应用指定权重来提升这些匹配项的得分，从而帮助提升或降低匹配实体在最终结果中的排名。</p>
+<p>当搜索请求中包含提升排名器功能时，Milvus 会使用该功能中的可选过滤条件，在搜索结果候选项中查找匹配项，并通过应用指定权重来提升这些匹配项的分数，从而帮助提升或降低匹配实体在最终结果中的排名。</p>
 <h2 id="When-to-use-Boost-Ranker" class="common-anchor-header">何时使用提升排名器<button data-href="#When-to-use-Boost-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

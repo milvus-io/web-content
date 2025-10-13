@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Abra o Docker Desktop no modo de administrador clicando com o botão direito do rato e selecionando <strong>Executar como administrador</strong>.</p></li>
 <li><p>Execute os seguintes comandos no PowerShell ou no prompt de comando do Windows para baixar o arquivo de configuração do Docker Compose para o Milvus Standalone e iniciar o Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -204,7 +204,7 @@ Creating milvus-standalone ... done​
 <ul>
 <li><p>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.</p></li>
 <li><p>O contentor <strong>milvus-minio</strong> serve as portas <strong>9090</strong> e <strong>9091</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</p></li>
-<li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as predefinições e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</p></li>
+<li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</p></li>
 </ul></li>
 </ol>
 <p>Também pode chamar a versão Linux dos comandos do Docker Compose se tiver a WSL 2 instalada.</p>
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Baixe o arquivo de configuração do Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.0/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicie o Milvus.</p>
@@ -334,7 +334,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Usar o mecanismo baseado em WSL 2 em Configurações do Docker Desktop</span> </span></p></li>
-<li><p>Selecione, de entre as distribuições WSL 2 instaladas, aquela em que pretende ativar a integração do Docker, acedendo a: <strong>Configurações</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integração WSL</strong>.</p>
+<li><p>Selecione, de entre as suas distribuições WSL 2 instaladas, aquela em que pretende ativar a integração do Docker, acedendo a: <strong>Configurações</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integração WSL</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
@@ -403,6 +403,6 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
 <li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
-<li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p>Explore o <a href="https://github.com/zilliztech/attu">Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

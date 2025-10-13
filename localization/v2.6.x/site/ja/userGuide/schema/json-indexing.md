@@ -195,7 +195,7 @@ index_params.add_index(
    </tr>
 </table>
 <div class="alert note">
-<p>変換に失敗した場合（例えば、数値でない文字列）、値はスキップされ、インデックスは作成されない。</p>
+<p>変換に失敗した場合（例：非数値文字列）、値はスキップされ、インデックスは作成されない。</p>
 </div>
 <h2 id="Create-JSON-indexes" class="common-anchor-header">JSON インデックスの作成<button data-href="#Create-JSON-indexes" class="anchor-icon" translate="no">
       <svg translate="no"

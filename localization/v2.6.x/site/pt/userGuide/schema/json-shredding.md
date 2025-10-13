@@ -110,7 +110,7 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A classificação da <a href="/docs/pt/json-shredding.md#Phase-1-Ingestion--key-classification">fase 1</a> determina a disposição do armazenamento. Milvus usa um formato colunar optimizado para consultas.</p>
+    </button></h3><p>A classificação da <a href="/docs/pt/json-shredding.md#Phase-1-Ingestion--key-classification">fase 1</a> determina a disposição do armazenamento. O Milvus utiliza um formato colunar optimizado para consultas.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/json-shredding-flow.png" alt="Json Shredding Flow" class="doc-image" id="json-shredding-flow" />
@@ -154,7 +154,7 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para ativar a funcionalidade, defina <code translate="no">common.enabledJSONKeyStats</code> como <code translate="no">true</code> no seu ficheiro de configuração <code translate="no">milvus.yaml</code>. Os novos dados accionam automaticamente o processo de trituração.</p>
+    </button></h2><p>Para ativar a funcionalidade, defina <code translate="no">common.enabledJSONKeyStats</code> para <code translate="no">true</code> no seu ficheiro de configuração <code translate="no">milvus.yaml</code>. Os novos dados accionam automaticamente o processo de trituração.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">common:</span>
@@ -199,7 +199,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>Determina se o Milvus usa mmap ao carregar dados fragmentados.</p><p>Para obter detalhes, consulte <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Usar mmap</a>.</p></td>
+     <td><p>Determina se o Milvus usa mmap ao carregar dados fragmentados.</p><p>Para obter detalhes, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p></td>
      <td><p>true</p></td>
      <td><p>Esta configuração é geralmente otimizada para desempenho. Ajuste-a apenas se tiver necessidades específicas de gestão de memória ou restrições no seu sistema.</p></td>
    </tr>
@@ -348,7 +348,7 @@ beta: Milvus 2.6.2+
       </svg>
     </button></h3><ul>
 <li><p><strong>As consultas chave partilhadas</strong> apresentam as melhorias mais significativas (até 89x mais rápidas)</p></li>
-<li><p><strong>As consultas de chave tipada</strong> fornecem ganhos de desempenho consistentes de 15-30x</p></li>
+<li><p><strong>As consultas de chave digitada</strong> fornecem ganhos de desempenho consistentes de 15-30x</p></li>
 <li><p><strong>Todos os tipos de consulta</strong> beneficiam do JSON Shredding sem regressões de desempenho</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">PERGUNTAS FREQUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">

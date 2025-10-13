@@ -1751,7 +1751,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Sauvegarde et restauration en une seule instance",
+                "label": "Backup and Restore in One Instance",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -1769,7 +1769,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
+                "label": "Migrer d'une instance à l'autre dans un environnement S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -1779,7 +1779,7 @@
         ]
       },
       {
-        "label": "Observateur d'oiseaux",
+        "label": "Birdwatcher",
         "id": "birdwatcher",
         "order": 2,
         "children": [
@@ -1969,7 +1969,7 @@
                 "children": []
               },
               {
-                "label": "Nomique",
+                "label": "Nomic",
                 "id": "embed-with-nomic.md",
                 "order": 11,
                 "children": []
@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "LangExtract",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2683,6 +2689,12 @@
         "label": "Recherche texte-image avec Milvus",
         "id": "text_image_search.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "Génération d'expressions de filtre de requête Milvus avec de grands modèles de langage",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
         "children": []
       },
       {

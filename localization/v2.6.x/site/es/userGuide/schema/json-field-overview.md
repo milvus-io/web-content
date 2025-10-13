@@ -334,7 +334,7 @@ res = client.search(
    </tr>
    <tr>
      <td><p>Trituración JSON</p></td>
-     <td><p>Aceleración general en muchas claves, flexible para consultas variadas</p></td>
+     <td><p>Aceleración general de muchas claves, flexible para consultas variadas</p></td>
      <td><p>No (no acelera valores dentro de matrices)</p></td>
      <td><p>Configuración de almacenamiento adicional, las matrices siguen necesitando un índice por clave</p></td>
    </tr>
@@ -383,7 +383,7 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>Sí. Cada campo JSON está limitado a 65.536 bytes.</p>
-<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">¿Soporta un campo JSON establecer un valor por defecto?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
+<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">¿Admite un campo JSON un valor por defecto?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

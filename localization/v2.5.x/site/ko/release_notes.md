@@ -367,7 +367,7 @@ title: 릴리스 노트
 <tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.10은 향상된 검색 및 로드 성능, 향상된 메트릭 보고 기능, 가속화된 메트릭 계산을 위한 확장된 SVE 지원을 제공합니다. 또한 이번 릴리스에는 안정성과 정확성을 향상시키는 여러 버그 수정이 포함되어 있습니다. 업그레이드하거나 사용해 보시기 바랍니다. 여러분의 피드백은 Milvus를 더욱 개선하는 데 큰 도움이 됩니다!</p>
+<p>Milvus 2.5.10은 향상된 검색 및 로드 성능, 향상된 메트릭 보고 기능, 가속화된 메트릭 계산을 위한 확장된 SVE 지원을 제공합니다. 이 릴리스에는 안정성과 정확성을 높이는 여러 버그 수정도 포함되어 있습니다. 업그레이드하거나 사용해 보시기 바랍니다. 여러분의 피드백은 Milvus를 더욱 개선하는 데 큰 도움이 됩니다!</p>
 <h3 id="Improvements" class="common-anchor-header">개선 사항<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -412,7 +412,7 @@ title: 릴리스 노트
 <li>컬렉션 변경이 이제 스키마를 올바르게 업데이트합니다<a href="https://github.com/milvus-io/milvus/pull/41308">(#41308</a>).</li>
 <li>macOS 빌드 수정을 위한 knowhere 버전 업데이트<a href="https://github.com/milvus-io/milvus/pull/41315">(#41315</a>)</li>
 <li>세그먼트 인덱스 초기화가 완료되기 전에 인덱스를 나열할 때 패닉 방지<a href="https://github.com/milvus-io/milvus/pull/41299">(#41299</a>).</li>
-<li>로그 레벨 변경으로 성능 회귀 문제 해결<a href="https://github.com/milvus-io/milvus/pull/41269">(#41269</a>)</li>
+<li>로그 레벨을 변경하여 성능 회귀 문제 해결<a href="https://github.com/milvus-io/milvus/pull/41269">(#41269</a>)</li>
 <li>워커 클라이언트를 제거하기 전에 클라이언트 닫기<a href="https://github.com/milvus-io/milvus/pull/41254">(#41254</a>)</li>
 </ul>
 <h2 id="v259" class="common-anchor-header">v2.5.9<button data-href="#v259" class="anchor-icon" translate="no">
@@ -494,7 +494,7 @@ title: 릴리스 노트
 <li>수동 잔액 및 잔액 확인 문제 해결<a href="https://github.com/milvus-io/milvus/pull/41038">(#41038</a>)</li>
 <li>지연된 <code translate="no">DescribeCollection</code> 을 사용하는 JSON 통계에 대해 유효성 검사된 스키마가 <code translate="no">nil</code> 가 아님<a href="https://github.com/milvus-io/milvus/pull/41068">(#41068</a>).</li>
 <li>두 열을 비교할 때 커서 이동 버그 수정<a href="https://github.com/milvus-io/milvus/pull/41054">(#41054</a>)</li>
-<li>성장하는 mmap이 열려 있는 상태에서 <code translate="no">null</code> 및 null이 아닌 배열을 모두 삽입할 때 발생하는 크래시를 해결했습니다<a href="https://github.com/milvus-io/milvus/pull/41052">(#41052</a>).</li>
+<li>성장하는 mmap이 열려 있는 상태에서 <code translate="no">null</code> 및 null이 아닌 배열을 모두 삽입할 때 발생하는 충돌을 해결했습니다<a href="https://github.com/milvus-io/milvus/pull/41052">(#41052</a>).</li>
 <li>arm64 컴파일 문제 수정<a href="https://github.com/milvus-io/milvus/pull/41058">(#41058</a>)</li>
 <li>인덱스 증가로 인한 삽입/로드 작업 차단을 방지하기 위해 바이패스 스레드 풀 모드 추가<a href="https://github.com/milvus-io/milvus/pull/41013">(#41013</a>).</li>
 <li>JSON 형식 오류 수정<a href="https://github.com/milvus-io/milvus/pull/41031">(#41031</a>)</li>
@@ -1136,7 +1136,7 @@ title: 릴리스 노트
       </svg>
     </button></h3><ul>
 <li><code translate="no">VARCHAR</code> 기본 키에 <code translate="no">IN</code> 필터를 사용하면 빈 결과가 반환될 수 있는 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39108">(#39108</a>)</li>
-<li>잘못된 결과를 초래할 수 있는 쿼리 작업과 삭제 작업 간의 동시성 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39054">(#39054</a>)</li>
+<li>잘못된 결과로 이어질 수 있는 쿼리 작업과 삭제 작업 간의 동시성 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39054">(#39054</a>)</li>
 <li>쿼리 요청에서 <code translate="no">expr</code> 이 비어 있을 때 반복 필터링으로 인해 발생하는 오류를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39034">(#39034</a>)</li>
 <li>구성 업데이트 중 디스크 오류로 인해 기본 구성 설정이 사용되던 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39072">(#39072</a>)</li>
 <li>클러스터링 압축으로 인해 삭제된 데이터가 손실될 수 있는 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39133">(#39133</a>)</li>

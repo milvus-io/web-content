@@ -183,7 +183,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <div class="alert note">
 <p>يقع الملف <code translate="no">milvus.yaml</code> في الدليل <code translate="no">/milvus/configs/</code> داخل حاوية ميلفوس.</p>
 </div>
-<p>لتكوين تجمع الذاكرة، قم بتعديل الإعدادات <code translate="no">initMemSize</code> و <code translate="no">maxMemSize</code> في الملف <code translate="no">milvus.yaml</code> على النحو التالي.</p>
+<p>لضبط تجمع الذاكرة، قم بتعديل الإعدادات <code translate="no">initMemSize</code> و <code translate="no">maxMemSize</code> في الملف <code translate="no">milvus.yaml</code> على النحو التالي.</p>
 <ol>
 <li><p>استخدم الأمر التالي لنسخ <code translate="no">milvus.yaml</code> من حاوية ميلفوس إلى جهازك المحلي. استبدل <code translate="no">&lt;milvus_container_id&gt;</code> بمعرف حاوية ميلفوس الفعلي الخاص بك.</p>
 <pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml

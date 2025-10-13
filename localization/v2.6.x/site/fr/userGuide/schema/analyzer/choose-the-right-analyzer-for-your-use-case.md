@@ -94,7 +94,7 @@ summary: Notes
      <td><p>Non-concordance des langues</p></td>
      <td><p>Les résultats de la recherche pour une langue spécifique sont absurdes ou inexistants.</p></td>
      <td><p>Texte chinois : <code translate="no">"机器学习"</code> → <code translate="no">['机器学习']</code> (un jeton)</p></td>
-     <td><p><a href="/docs/fr/english-analyzer.md"><code translate="no">english</code></a> Analyseur</p></td>
+     <td><p><a href="/docs/fr/english-analyzer.md"><code translate="no">english</code></a> analyseur</p></td>
      <td><p>Utilisez un analyseur spécifique à la langue, tel que <a href="/docs/fr/chinese-analyzer.md"><code translate="no">chinese</code></a>.</p></td>
    </tr>
 </table>
@@ -182,7 +182,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>Créer un analyseur personnalisé avec un <a href="/docs/fr/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> et un filtre <a href="/docs/fr/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> filtre.</p></td>
    </tr>
    <tr>
-     <td><p>Langues séparées par des espaces, comme le texte français/espagnol</p></td>
+     <td><p>Langues séparées par des espaces comme le texte français/espagnol</p></td>
      <td><p>⚠️ Peut-être</p></td>
      <td><p>Les caractères accentués (<code translate="no">café</code> vs. <code translate="no">cafe</code>) peuvent ne pas correspondre.</p></td>
      <td><p>Pour obtenir de meilleurs résultats, il est recommandé d'utiliser un analyseur personnalisé doté de la fonction <a href="/docs/fr/ascii-folding-filter.md"><code translate="no">asciifolding</code></a> est recommandé pour obtenir de meilleurs résultats.</p></td>
@@ -452,7 +452,7 @@ schema.add_field(
    </tr>
 </table>
 <div class="alert note">
-<p>Pour les langues d'Asie de l'Est (chinois, japonais, coréen, etc.), privilégiez plutôt les <a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">filtres spécifiques à la langue</a>. Ces langues utilisent généralement des approches différentes pour le traitement des textes et peuvent ne pas bénéficier de manière significative de la troncature.</p>
+<p>Pour les langues d'Asie de l'Est (chinois, japonais, coréen, etc.), il est préférable d'utiliser des <a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">filtres spécifiques à la langue</a>. Ces langues utilisent généralement des approches différentes pour le traitement des textes et peuvent ne pas bénéficier de manière significative de la troncature.</p>
 </div>
 <h4 id="Text-normalization-filters" class="common-anchor-header">Filtres de normalisation de texte</h4><p>Ces filtres normalisent les variations de texte afin d'améliorer la cohérence des correspondances :</p>
 <table>

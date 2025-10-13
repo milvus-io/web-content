@@ -20,8 +20,11 @@ title: Memutakhirkan Milvus Cluster dengan Docker Compose
         ></path>
       </svg>
     </button></h1><p>Topik ini menjelaskan cara memutakhirkan Milvus menggunakan Docker Compose.</p>
-<p>Dalam kasus normal, Anda dapat memutakhirkan <a href="#Upgrade-Milvus-by-changing-its-image">Milvus dengan mengubah citranya.</a> Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan pemutakhiran apa pun dari v2.1.x ke v2.6.0.</p>
-<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Memutakhirkan Milvus dengan mengubah citranya<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
+<p>Dalam kasus normal, Anda dapat memutakhirkan <a href="#Upgrade-Milvus-by-changing-its-image">Milvus dengan mengubah citranya.</a> Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan pemutakhiran apa pun dari v2.1.x ke v2.6.3.</p>
+<div class="alert note">
+<p><strong>Keterbatasan Antrian Pesan</strong>: Ketika mengupgrade ke Milvus v2.6.3, anda harus mempertahankan pilihan antrian pesan anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</p>
+</div>
+<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Memutakhirkan Milvus dengan mengubah gambarnya<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,42 +39,42 @@ title: Memutakhirkan Milvus Cluster dengan Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam kasus normal, Anda dapat memutakhirkan Milvus dengan cara berikut:</p>
+    </button></h2><p>Dalam kasus normal, anda dapat memutakhirkan Milvus dengan cara berikut:</p>
 <ol>
-<li><p>Ubah tag gambar Milvus di <code translate="no">docker-compose.yaml</code>.</p>
-<p>Perhatikan bahwa Anda perlu mengubah tag image untuk Proxy, semua koordinator, dan semua node pekerja.</p>
+<li><p>Ubahlah tag gambar Milvus di <code translate="no">docker-compose.yaml</code>.</p>
+<p>Perhatikan bahwa Anda perlu mengubah tag gambar untuk Proxy, semua koordinator, dan semua node pekerja.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.3</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-proxy</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.3</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querycoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querycoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>  
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.3</span>  
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querynode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querynode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.3</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.3</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexnode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexnode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span> 
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.3</span> 
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datacoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datacoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>   
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.3</span>   
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datanode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.0</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.3</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Jalankan perintah berikut untuk melakukan peningkatan.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -105,7 +108,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.0</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.3</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>

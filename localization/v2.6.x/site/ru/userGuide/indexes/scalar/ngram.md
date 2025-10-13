@@ -80,35 +80,30 @@ beta: Milvus v2.6.2+
 <li><p><code translate="no">min_gram</code>: Самая короткая n-грамма для генерации. Это также определяет минимальную длину подстроки запроса, для которой может быть использован индекс.</p></li>
 <li><p><code translate="no">max_gram</code>: Самая длинная генерируемая n-грамма. Во время запроса она также используется в качестве максимального размера окна при разбиении длинных строк запроса.</p></li>
 </ul>
-<p>Например, при использовании <code translate="no">min_gram=2</code> и <code translate="no">max_gram=3</code> строка <code translate="no">&quot;AI database&quot;</code> разбивается следующим образом:</p></li>
-</ol>
+<p>Например, при использовании <code translate="no">min_gram=2</code> и <code translate="no">max_gram=3</code> строка <code translate="no">&quot;AI database&quot;</code> разбивается следующим образом:</p>
+<ul>
+<li><strong>2-граммы:</strong> <code translate="no">AI</code>, <code translate="no">I_</code>, <code translate="no">_d</code>, <code translate="no">da</code>, <code translate="no">at</code>, ...</li>
+<li><strong>3-граммы:</strong> <code translate="no">AI_</code>, <code translate="no">I_d</code>, <code translate="no">_da</code>, <code translate="no">dat</code>, <code translate="no">ata</code>, ...</li>
+</ul>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" />
    </span> <span class="img-wrapper"> <span>Построить индекс Ngram</span> </span></p>
-<pre><code translate="no">- **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
-
-- **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
-
-&lt;div class=&quot;alert note&quot;&gt;
-
-- For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive). For example, with `[2,4]` and the word `&quot;text&quot;`, Milvus generates:
-
-- **2-grams:** `te`, `ex`, `xt`
-
-- **3-grams:** `tex`, `ext`
-
-- **4-grams:** `text`
-
-- N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `&quot;向量数据库&quot;` with `min_gram = 2` is decomposed into: `&quot;向量&quot;`, `&quot;量数&quot;`, `&quot;数据&quot;`, `&quot;据库&quot;`.
-
-- Spaces and punctuation are treated as characters during decomposition.
-
-- Decomposition preserves original case, and matching is case-sensitive. For example, `&quot;Database&quot;` and `&quot;database&quot;` will generate different n-grams and require exact case matching during queries.
-
-&lt;/div&gt;
-</code></pre>
-<ol>
+<blockquote>
+<p><strong>Примечание</strong></p>
+<ul>
+<li><p>Для диапазона <code translate="no">[min_gram, max_gram]</code> Milvus генерирует все n-граммы для каждой длины между этими двумя значениями (включительно).<br>
+Пример: для <code translate="no">[2,4]</code> и слова <code translate="no">&quot;text&quot;</code> Milvus генерирует:</p>
+<ul>
+<li><strong>2-граммы:</strong> <code translate="no">te</code>, <code translate="no">ex</code>, <code translate="no">xt</code></li>
+<li><strong>3-граммы:</strong> <code translate="no">tex</code>, <code translate="no">ext</code></li>
+<li><strong>4-граммы</strong>: <code translate="no">text</code></li>
+</ul></li>
+<li><p>Декомпозиция N-грамм основана на символах и не зависит от языка. Например, в китайском языке <code translate="no">&quot;向量数据库&quot;</code> с <code translate="no">min_gram = 2</code> декомпозируется на: <code translate="no">&quot;向量&quot;</code>, <code translate="no">&quot;量数&quot;</code>, <code translate="no">&quot;数据&quot;</code>, <code translate="no">&quot;据库&quot;</code>.</p></li>
+<li><p>Пробелы и знаки препинания при декомпозиции рассматриваются как символы.</p></li>
+<li><p>При разложении сохраняется исходный регистр, и соответствие зависит от регистра. Например, <code translate="no">&quot;Database&quot;</code> и <code translate="no">&quot;database&quot;</code> будут генерировать разные n-граммы и потребуют точного соответствия регистру при запросах.</p></li>
+</ul>
+</blockquote></li>
 <li><p><strong>Построение инвертированного индекса</strong>: Создается <strong>инвертированный индекс</strong>, который сопоставляет каждую сгенерированную n-грамму со списком содержащих ее идентификаторов документов.</p>
 <p>Например, если 2-грамма <code translate="no">&quot;AI&quot;</code> встречается в документах с идентификаторами 1, 5, 6, 8 и 9, в индекс записывается <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code>. Этот индекс затем используется во время запроса для быстрого сужения области поиска.</p></li>
 </ol>
@@ -116,13 +111,10 @@ beta: Milvus v2.6.2+
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" />
    </span> <span class="img-wrapper"> <span>Построение индекса Ngram 2</span> </span></p>
-<pre><code translate="no">&lt;div class=&quot;alert note&quot;&gt;
-
-A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
-
-&lt;/div&gt;
-</code></pre>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Этап 2: ускорение запросов<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Более широкий диапазон <code translate="no">[min_gram, max_gram]</code> создает больше грамм и большие списки отображения. Если память ограничена, используйте режим mmap для очень больших списков отображения. Подробности см. в разделе <a href="/docs/ru/mmap.md">Использование mmap</a>.</p>
+</div>
+<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Этап 2: Ускорение запросов<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -324,7 +316,7 @@ client.create_index(
     </button></h2><ul>
 <li><p><strong>Типы полей</strong>: Поддерживаются поля <code translate="no">VARCHAR</code> и <code translate="no">JSON</code>. Для JSON необходимо указать <code translate="no">params.json_path</code> и <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
 <li><p><strong>Юникод</strong>: Разложение NGRAM основано на символах, не зависит от языка и включает пробельные символы и знаки препинания.</p></li>
-<li><p><strong>Компромисс между пространством и временем</strong>: более широкие диапазоны грамм <code translate="no">[min_gram, max_gram]</code> дают больше грамм и большие индексы. Если память ограничена, используйте режим <code translate="no">mmap</code> для больших списков постинга. Для получения дополнительной информации обратитесь к разделу <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Использование mmap</a>.</p></li>
+<li><p><strong>Компромисс между пространством и временем</strong>: более широкие диапазоны грамм <code translate="no">[min_gram, max_gram]</code> дают больше грамм и большие индексы. Если память ограничена, используйте режим <code translate="no">mmap</code> для больших списков постинга. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/mmap.md">Использование mmap</a>.</p></li>
 <li><p><strong>Неизменяемость</strong>: <code translate="no">min_gram</code> и <code translate="no">max_gram</code> не могут быть изменены на месте - для их корректировки нужно перестроить индекс.</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">Лучшие практики<button data-href="#Best-practices" class="anchor-icon" translate="no">

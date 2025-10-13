@@ -20,10 +20,10 @@ title: RAG multimodal avec Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Si vous souhaitez expérimenter l'effet final de ce tutoriel, vous pouvez aller directement à la <a href="https://demos.milvus.io/multimodal-image-search/">démo en ligne</a> et l'essayer.</p>
+<p>Si vous souhaitez expérimenter l'effet final de ce tutoriel, vous pouvez aller directement à la <a href="https://demos.milvus.io/multimodal-image-search/">démo en ligne</a>.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>Ce tutoriel présente le RAG multimodal alimenté par Milvus, le <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">modèle BGE visualisé</a> et <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Avec ce système, les utilisateurs peuvent télécharger une image et éditer des instructions textuelles, qui sont traitées par le modèle de recherche composé de BGE pour rechercher des images candidates. GPT-4o joue ensuite le rôle d'un re-ranker, en sélectionnant l'image la plus appropriée et en expliquant les raisons de son choix. Cette puissante combinaison permet une expérience de recherche d'images transparente et intuitive, en s'appuyant sur Milvus pour une recherche efficace, sur le modèle BGE pour un traitement et une mise en correspondance précis des images, et sur GPT-4o pour un reranking avancé.</p>
+<p>Ce tutoriel présente le RAG multimodal alimenté par Milvus, le <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">modèle BGE visualisé</a> et <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Avec ce système, les utilisateurs peuvent télécharger une image et éditer des instructions textuelles, qui sont traitées par le modèle de recherche composé de BGE pour rechercher des images candidates. GPT-4o joue ensuite le rôle d'un re-ranker, en sélectionnant l'image la plus appropriée et en expliquant les raisons de son choix. Cette puissante combinaison permet une expérience de recherche d'images transparente et intuitive, en tirant parti de Milvus pour une recherche efficace, du modèle BGE pour un traitement et une mise en correspondance précis des images, et de GPT-4o pour un reranking avancé.</p>
 <h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,22 @@ title: RAG multimodal avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Installer les dépendances</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm</span>
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Installer les dépendances<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/FlagOpen/FlagEmbedding.git</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -e FlagEmbedding</span>
@@ -47,21 +62,51 @@ title: RAG multimodal avec Milvus
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" (Redémarrer la session) dans le menu déroulant).</p>
 </div>
-<h3 id="Download-Data" class="common-anchor-header">Télécharger les données</h3><p>La commande suivante permet de télécharger les données de l'exemple et de les extraire dans un dossier local "./images_folder" :</p>
+<h3 id="Download-Data" class="common-anchor-header">Télécharger les données<button data-href="#Download-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La commande suivante permet de télécharger les données de l'exemple et de les extraire dans un dossier local "./images_folder" :</p>
 <ul>
-<li><p><strong>images</strong>: Un sous-ensemble d'<a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> contenant environ 900 images des catégories "Appliance", "Cell_Phones_and_Accessories", et "Electronics".</p></li>
-<li><p><strong>leopard.jpg</strong>: Un exemple d'image de requête.</p></li>
+<li><strong>images</strong>: Un sous-ensemble d'<a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> contenant environ 900 images des catégories "Appliance", "Cell_Phones_and_Accessories" et "Electronics".</li>
+<li><strong>leopard.jpg</strong>: Un exemple d'image de requête.</li>
 </ul>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf amazon_reviews_2023_subset.tar.gz</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-Embedding-Model" class="common-anchor-header">Modèle d'intégration des charges</h3><p>Nous utiliserons le modèle Visualized BGE "bge-visualized-base-en-v1.5" pour générer des embeddings pour les images et le texte.</p>
+<h3 id="Load-Embedding-Model" class="common-anchor-header">Modèle d'intégration des charges<button data-href="#Load-Embedding-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous utiliserons le modèle Visualized BGE "bge-visualized-base-en-v1.5" pour générer des embeddings pour les images et le texte.</p>
 <p><strong>1. Télécharger le poids</strong></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>2. Construire l'encodeur</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">from</span> FlagEmbedding.visual.modeling <span class="hljs-keyword">import</span> Visualized_BGE
+<span class="hljs-keyword">from</span> visual_bge.modeling <span class="hljs-keyword">import</span> Visualized_BGE
 
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">Encoder</span>:
@@ -99,8 +144,23 @@ encoder = Encoder(model_name, model_path)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cette section chargera des images d'exemple dans la base de données avec les embeddings correspondants.</p>
-<h3 id="Generate-embeddings" class="common-anchor-header">Générer des embeddings</h3><p>Charger toutes les images jpeg du répertoire de données et appliquer l'encodeur pour convertir les images en embeddings.</p>
+    </button></h2><p>Cette section chargera des images d'exemple dans la base de données avec les encastrements correspondants.</p>
+<h3 id="Generate-embeddings" class="common-anchor-header">Générer des embeddings<button data-href="#Generate-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Charger toutes les images jpeg du répertoire de données et appliquer l'encodeur pour convertir les images en embeddings.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
@@ -126,7 +186,22 @@ image_dict = {}
 
 Number of encoded images: 900
 </code></pre>
-<h3 id="Insert-into-Milvus" class="common-anchor-header">Insérer dans Milvus</h3><p>Insérer dans la collection Milvus les images avec les chemins d'accès correspondants et les embeddings.</p>
+<h3 id="Insert-into-Milvus" class="common-anchor-header">Insérer dans Milvus<button data-href="#Insert-into-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Insérer dans la collection Milvus les images avec les chemins d'accès correspondants et les embeddings.</p>
 <div class="alert note">
 <p>Comme pour l'argument de <code translate="no">MilvusClient</code>:</p>
 <ul>
@@ -159,7 +234,15 @@ milvus_client.insert(
     data=[{<span class="hljs-string">&quot;image_path&quot;</span>: k, <span class="hljs-string">&quot;vector&quot;</span>: v} <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> image_dict.items()],
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{'insert_count': 900,
+<pre><code translate="no">DEBUG:pymilvus.milvus_client.milvus_client:Created new connection using: 7f33daeed99a4d8e8a5e28d47673ecc8
+DEBUG:pymilvus.milvus_client.milvus_client:Successfully created collection: multimodal_rag_demo
+DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on collection: multimodal_rag_demo
+
+
+
+
+
+{'insert_count': 900,
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
 </code></pre>
@@ -179,7 +262,22 @@ milvus_client.insert(
         ></path>
       </svg>
     </button></h2><p>Dans cette section, nous allons tout d'abord rechercher des images pertinentes à l'aide d'une requête multimodale, puis utiliser le service LLM pour classer les résultats et trouver le meilleur avec une explication.</p>
-<h3 id="Run-search" class="common-anchor-header">Exécuter la recherche</h3><p>Nous sommes maintenant prêts à effectuer la recherche avancée d'images avec des données de requête composées à la fois d'images et d'instructions textuelles.</p>
+<h3 id="Run-search" class="common-anchor-header">Exécuter la recherche<button data-href="#Run-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous sommes maintenant prêts à effectuer la recherche avancée d'images avec des données de requête composées à la fois d'images et d'instructions textuelles.</p>
 <pre><code translate="no" class="language-python">query_image = os.path.join(
     data_dir, <span class="hljs-string">&quot;leopard.jpg&quot;</span>
 )  <span class="hljs-comment"># Change to your own query image path</span>
@@ -201,7 +299,22 @@ retrieved_images = [hit.get(<span class="hljs-string">&quot;entity&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['./images_folder/images/518Gj1WQ-RL._AC_.jpg', './images_folder/images/41n00AOfWhL._AC_.jpg', './images_folder/images/51Wqge9HySL._AC_.jpg', './images_folder/images/51R2SZiywnL._AC_.jpg', './images_folder/images/516PebbMAcL._AC_.jpg', './images_folder/images/51RrgfYKUfL._AC_.jpg', './images_folder/images/515DzQVKKwL._AC_.jpg', './images_folder/images/51BsgVw6RhL._AC_.jpg', './images_folder/images/51INtcXu9FL._AC_.jpg']
 </code></pre>
-<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">Reclassement avec GPT-4o</h3><p>Nous utiliserons un LLM pour classer les images et générer une explication pour le meilleur résultat en fonction de la requête de l'utilisateur et des résultats récupérés.</p>
+<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">Reclassement avec GPT-4o<button data-href="#Rerank-with-GPT-4o" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous utiliserons un LLM pour classer les images et générer une explication pour le meilleur résultat en fonction de la requête de l'utilisateur et des résultats récupérés.</p>
 <p><strong>1. Créer une vue panoramique</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> cv2
@@ -422,4 +535,19 @@ best_img.show()
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
    </span> <span class="img-wrapper"> <span>Le meilleur résultat</span> </span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide</h3><p>Pour savoir comment démarrer une démo en ligne avec ce tutoriel, veuillez vous référer à l <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">'exemple d'application</a>.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour savoir comment démarrer une démo en ligne avec ce tutoriel, veuillez vous référer à l <a href="https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/multimodal_rag_with_milvus">'exemple d'application</a>.</p>

@@ -21,7 +21,7 @@ beta: Milvus v2.6.2+
         ></path>
       </svg>
     </button></h1><p>ブースト・ランカーは、ベクトル距離に基づいて計算された意味的類似性だけに頼るのではなく、意味のある方法で検索結果に影響を与えることができます。メタデータフィルタリングを使って検索結果を素早く調整するのに理想的です。</p>
-<p>検索リクエストにBoost Ranker機能が含まれている場合、Milvusは機能内のオプションのフィルタリング条件を使用して検索結果候補の中から一致するものを見つけ、指定されたウェイトを適用することで一致したエンティティのスコアをブーストし、最終結果における一致したエンティティの順位を昇格または降格させます。</p>
+<p>検索リクエストにBoost Ranker機能が含まれている場合、Milvusは機能内のオプションのフィルタリング条件を使用して検索結果候補の中からマッチするものを見つけ、指定されたウェイトを適用することでマッチしたエンティティのスコアをブーストし、最終結果におけるマッチしたエンティティの順位を昇格または降格させます。</p>
 <h2 id="When-to-use-Boost-Ranker" class="common-anchor-header">Boost Rankerを使用するタイミング<button data-href="#When-to-use-Boost-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ beta: Milvus v2.6.2+
    </tr>
    <tr>
      <td><p>ビジネス主導のコンテンツ優先順位付け</p></td>
-     <td><ul><li><p>Eコマースの検索結果でプレミアム商品を強調する</p></li><li><p>ユーザーエンゲージメント指標（閲覧数、「いいね！」数、シェア数など）が高いコンテンツの認知度を高める</p></li><li><p>タイムセンシティブな検索アプリケーションで最近のコンテンツを上位表示する</p></li><li><p>検証済みまたは信頼できるソースからのコンテンツを優先する</p></li><li><p>正確なフレーズまたは関連性の高いキーワードに一致する検索結果を高める</p></li></ul></td>
+     <td><ul><li><p>Eコマースの検索結果でプレミアム商品を強調する</p></li><li><p>ユーザーエンゲージメント指標（閲覧数、「いいね！」数、シェア数など）の高いコンテンツの可視性を高める</p></li><li><p>タイムセンシティブな検索アプリケーションで最近のコンテンツを上位表示する</p></li><li><p>検証済みまたは信頼できるソースからのコンテンツを優先する</p></li><li><p>正確なフレーズまたは関連性の高いキーワードに一致する検索結果を高める</p></li></ul></td>
      <td rowspan="2"><p>インデックスを再構築したり、ベクトル埋め込みモデルを変更したりする必要がなく、オプションのメタデータフィルタをリアルタイムに適用することで、検索結果で特定のアイテムを即座に昇格または降格させることができます。このメカニズムにより、進化するビジネス要件に容易に適応する、柔軟でダイナミックな検索ランキングが可能になります。</p></td>
    </tr>
    <tr>
@@ -362,7 +362,7 @@ beta: Milvus v2.6.2+
 <p><table>
 <tr>
 <th><p>ID</p></th>
-<th><p>ドックタイプ</p></th>
+<th><p>DocType</p></th>
 <th><p>スコア</p></th>
 <th><p>重み付けスコア</p></th>
 <th><p>順位</p></th>
@@ -475,7 +475,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>はい</p></td>
-     <td><p>関数を適用するベクトルフィールドのリスト（RRFランカーでは空でなければならない）</p></td>
+     <td><p>関数を適用するベクトルフィールドのリスト（RRF Rankerでは空でなければならない）</p></td>
      <td><p><code translate="no">[]</code></p></td>
    </tr>
    <tr>
@@ -499,7 +499,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">params.filter</code></p></td>
      <td><p>No</p></td>
-     <td><p>検索結果のエンティティ間のマッチングに使用するフィルタ式を指定する。<a href="/docs/ja/boolean.md">フィルタリングの説明</a>」で説明した、有効な基本フィルタ式を指定できます。</p><p><strong>注：</strong> <code translate="no">==</code> 、<code translate="no">&gt;</code> 、<code translate="no">&lt;</code> などの基本的な演算子のみを使用します。<code translate="no">text_match</code> 、<code translate="no">phrase_match</code> などの高度な演算子を使用すると、検索パ フォーマンスが低下します。</p></td>
+     <td><p>検索結果のエンティティ間のマッチングに使用するフィルタ式を指定する。<a href="/docs/ja/boolean.md">フィルタリングの説明</a>」で説明した、有効な基本フィルタ式を指定できます。</p><p><strong>注：</strong> <code translate="no">==</code> 、<code translate="no">&gt;</code> 、<code translate="no">&lt;</code> などの基本演算子のみを使用します。<code translate="no">text_match</code> 、<code translate="no">phrase_match</code> などの高度な演算子を使用すると、検索パ フォーマンスが低下します。</p></td>
      <td><p><code translate="no">"doctype == 'abstract'"</code></p></td>
    </tr>
    <tr>
@@ -559,7 +559,7 @@ client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>検索結果に影響を与えるために、1つの検索で複数のBoost Rankerを組み合わせることができます。そのためには、複数の Boost Rankers を作成し、<strong>FunctionScore</strong>インスタンスでそれらを参照し、<strong>FunctionScore</strong>インスタンスを検索リクエストのランカーとして使用します。</p>
+    </button></h3><p>検索結果に影響を与えるために、1つの検索で複数のBoost Rankerを組み合わせることができます。そのためには、複数の Boost Ranker を作成し、<strong>FunctionScore</strong>インスタンスでそれらを参照し、<strong>FunctionScore</strong>インスタンスを検索リクエストのランカーとして使用します。</p>
 <p>次の例では、<strong>0.8</strong>から<strong>1.2</strong> の間の重みを適用して、識別されたすべてのエンティティのスコアを変更する方法を示します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType, FunctionScore
 
@@ -609,7 +609,7 @@ client.search(
     ranker=ranker
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>具体的には、2 つの Boost ランカーがあり、1 つは見つかったすべてのエンティティに固定の重みを適用し、もう 1 つはランダムな重みを割り当てます。次に、<strong>FunctionScore</strong> でこれら 2 つのランカーを参照し、重みが検出されたエンティティのスコアにどのように影響するかを定義する。</p>
+<p>具体的には、2 つの Boost Ranker があり、1 つは見つかったすべてのエンティティに固定の重みを適用し、もう 1 つはランダムな重みを割り当てます。次に、<strong>FunctionScore</strong> でこれら 2 つのランカーを参照し、重みが検出されたエンティティのスコアにどのように影響するかを定義する。</p>
 <p>次の表に、<strong>FunctionScore</strong>インスタンスの作成に必要なパラメータを示します。</p>
 <table>
    <tr>

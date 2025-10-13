@@ -3,7 +3,7 @@ id: json-field-overview.md
 title: JSON 欄位概述
 summary: >-
   在建立商品目錄、內容管理系統或使用者偏好引擎等應用程式時，您通常需要在向量嵌入的同時儲存彈性的元資料。產品屬性因類別而異，使用者偏好隨時間演變，而文件屬性則有複雜的嵌套結構。Milvus
-  中的 JSON 欄位可讓您在不犧牲效能的情況下儲存和查詢彈性的結構化資料，從而解決這項挑戰。
+  中的 JSON 欄位可讓您在不犧牲效能的情況下，儲存和查詢彈性的結構化資料，從而解決這項挑戰。
 ---
 <h1 id="JSON-Field-Overview" class="common-anchor-header">JSON 欄位概述<button data-href="#JSON-Field-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -340,7 +340,7 @@ res = client.search(
    </tr>
 </table>
 <p><strong>提示：</strong>您可以結合這些方法--例如，使用 JSON 切碎來加速廣泛的查詢，使用 JSON 索引來處理高頻陣列鍵，使用 NGRAM 索引來處理彈性的文字搜尋。</p>
-<p>有關實施的詳細資訊，請參閱：</p>
+<p>如需實施細節，請參閱：</p>
 <ul>
 <li><p><a href="/docs/zh-hant/json-indexing.md">JSON 索引</a></p></li>
 <li><p><a href="/docs/zh-hant/json-shredding.md">JSON 切碎</a></p></li>

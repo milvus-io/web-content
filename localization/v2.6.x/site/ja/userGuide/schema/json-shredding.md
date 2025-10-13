@@ -71,7 +71,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p>動的なキー</p></td>
-     <td><p>頻繁に現れるがデータ型がまちまちなキー（例えば、文字列のときもあれば整数のときもある）。</p></td>
+     <td><p>頻繁に出現するが、データ型がまちまちなキー（例えば、文字列のときもあれば整数のときもある）。</p></td>
    </tr>
    <tr>
      <td><p>共有キー</p></td>
@@ -112,7 +112,7 @@ beta: Milvus 2.6.2+
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/json-shredding-flow.png" alt="Json Shredding Flow" class="doc-image" id="json-shredding-flow" />
    </span> <span class="img-wrapper"> <span>Jsonシュレッダーフロー</span> </span></p>
 <ul>
-<li><p><strong>細断されたカラム</strong>：<strong>型付き</strong> <strong>キーと</strong> <strong>動的</strong> <strong>キーの</strong>場合、データは専用のカラムに書き込まれる。このカラム型ストレージにより、Milvusはドキュメント全体を処理することなく、指定されたキーの必要なデータのみを読み出すことができるため、クエリ時に高速でダイレクトなスキャンが可能となる。</p></li>
+<li><p><strong>細断されたカラム</strong>：<strong>型付き</strong> <strong>キーと</strong> <strong>動的</strong> <strong>キーの</strong>場合、データは専用のカラムに書き込まれる。このカラム型ストレージにより、Milvusはドキュメント全体を処理することなく、指定されたキーに必要なデータのみを読み出すことができるため、クエリ時に高速でダイレクトなスキャンが可能となる。</p></li>
 <li><p><strong>共有カラム</strong>：すべての<strong>共有キーは</strong>単一のコンパクトなバイナリJSONカラムにまとめて格納される。このカラムには共有キーの<strong>転置インデックスが</strong>構築される。このインデックスは、Milvusがデータを迅速に刈り込み、検索空間を指定されたキーを含む行のみに効果的に絞り込むことで、頻度の低いキーのクエリを高速化する上で極めて重要である。</p></li>
 </ul>
 <h3 id="Phase-3-Query-execution" class="common-anchor-header">フェーズ 3：クエリの実行<button data-href="#Phase-3-Query-execution" class="anchor-icon" translate="no">
@@ -195,7 +195,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>Milvusが細断データをロードする際にmmapを使用するかどうかを決定します。</p><p>詳細については、<a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">mmapを使用するを</a>参照してください。</p></td>
+     <td><p>Milvusが細断データをロードする際にmmapを使用するかどうかを決定します。</p><p>詳細については、<a href="/docs/ja/mmap.md">mmapを使用するを</a>参照してください。</p></td>
      <td><p>真</p></td>
      <td><p>この設定は一般的にパフォーマンスに最適化されています。特定のメモリ管理が必要であったり、システムに制約がある場合にのみ調整してください。</p></td>
    </tr>

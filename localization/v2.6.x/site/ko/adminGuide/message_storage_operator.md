@@ -60,8 +60,9 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
 </ul></li>
 <li>Milvus 시스템이 실행되는 동안에는 메시지 저장소를 변경할 수 없습니다.</li>
 <li>Kafka 2.x 또는 3.x 버전만 지원됩니다.</li>
+<li><strong>업그레이드 제한</strong>: <strong>메시지 큐 제한</strong>: Milvus v2.6.3으로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중에 다른 메시지 큐 시스템 간에 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ 구성<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ 구성하기<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -185,7 +186,7 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
 <div class="alert note">
 <p><strong>RocksMQ와 NATS 중 어떤 것을 선택해야 하나요?</strong></p>
 <p>RockMQ는 CGO를 사용하여 RocksDB와 상호 작용하고 자체적으로 메모리를 관리하는 반면, Milvus 설치에 내장된 순수-GO NATS는 메모리 관리를 Go의 가비지 컬렉터(GC)에 위임합니다.</p>
-<p>데이터 패킷이 64KB보다 작은 시나리오에서는 메모리 사용량, CPU 사용량, 응답 시간 측면에서 RocksDB가 더 우수한 성능을 보입니다. 반면에 데이터 패킷이 64KB보다 큰 경우, 충분한 메모리와 이상적인 GC 스케줄링으로 응답 시간 측면에서 NATS가 우수합니다.</p>
+<p>데이터 패킷이 64KB보다 작은 시나리오에서는 메모리 사용량, CPU 사용량, 응답 시간 측면에서 RocksDB가 더 나은 성능을 보입니다. 반면에 데이터 패킷이 64KB보다 큰 경우, 충분한 메모리와 이상적인 GC 스케줄링으로 응답 시간 측면에서 NATS가 우수합니다.</p>
 <p>현재 NATS는 실험용으로만 사용하는 것이 좋습니다.</p>
 </div>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Pulsar 구성<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
@@ -205,7 +206,22 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
       </svg>
     </button></h2><p>Pulsar는 최근 변경 사항의 로그를 관리하고, 스트림 로그를 출력하며, 로그 구독을 제공합니다. 메시지 저장을 위한 Pulsar 구성은 Milvus 독립형과 Milvus 클러스터 모두에서 지원됩니다. 그러나 Milvus Operator를 사용할 때는 Milvus 클러스터의 메시지 저장소로만 Pulsar를 구성할 수 있습니다. <code translate="no">spec.dependencies.pulsar</code> 에서 필수 필드를 추가하여 Pulsar를 구성하세요.</p>
 <p><code translate="no">pulsar</code> <code translate="no">external</code> 및 <code translate="no">inCluster</code> 을 지원합니다.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">외부 펄서</h3><p><code translate="no">external</code> 는 외부 Pulsar 서비스를 사용함을 나타냅니다. 외부 Pulsar 서비스를 구성하는 데 사용되는 필드는 다음과 같습니다:</p>
+<h3 id="External-Pulsar" class="common-anchor-header">외부 펄서<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> 는 외부 Pulsar 서비스를 사용함을 나타냅니다. 외부 Pulsar 서비스를 구성하는 데 사용되는 필드는 다음과 같습니다:</p>
 <ul>
 <li><code translate="no">external</code>:  <code translate="no">true</code> 값은 Milvus가 외부 Pulsar 서비스를 사용함을 나타냅니다.</li>
 <li><code translate="no">endpoints</code>: Pulsar의 엔드포인트입니다.</li>
@@ -229,7 +245,22 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">내부 펄서</h3><p><code translate="no">inCluster</code> 는 Milvus 클러스터가 시작되면 클러스터에서 Pulsar 서비스가 자동으로 시작됨을 나타냅니다.</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">내부 펄서<button data-href="#Internal-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> 는 Milvus 클러스터가 시작되면 클러스터에서 Pulsar 서비스가 자동으로 시작됨을 나타냅니다.</p>
 <h4 id="Example" class="common-anchor-header">예제</h4><p>다음은 내부 Pulsar 서비스를 구성하는 예제입니다.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -291,7 +322,22 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
       </svg>
     </button></h2><p>Pulsar는 Milvus 클러스터의 기본 메시지 저장소입니다. Kafka를 사용하려면 선택적 필드 <code translate="no">msgStreamType</code> 를 추가하여 Kafka를 구성합니다.</p>
 <p><code translate="no">kafka</code> <code translate="no">external</code> 및 <code translate="no">inCluster</code> 을 지원합니다.</p>
-<h3 id="External-Kafka" class="common-anchor-header">외부 카프카</h3><p><code translate="no">external</code> 는 외부 Kafka 서비스를 사용함을 나타냅니다.</p>
+<h3 id="External-Kafka" class="common-anchor-header">외부 카프카<button data-href="#External-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> 는 외부 Kafka 서비스를 사용함을 나타냅니다.</p>
 <p>외부 Kafka 서비스를 구성하는 데 사용되는 필드는 다음과 같습니다:</p>
 <ul>
 <li><code translate="no">external</code>: <code translate="no">true</code> 값은 Milvus가 외부 Kafka 서비스를 사용함을 나타냅니다.</li>
@@ -327,7 +373,22 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
 <blockquote>
 <p>SASL 구성은 운영자 v0.8.5 이상 버전에서 지원됩니다.</p>
 </blockquote>
-<h3 id="Internal-Kafka" class="common-anchor-header">내부 카프카</h3><p><code translate="no">inCluster</code> 는 Milvus 클러스터가 시작되면 클러스터에서 Kafka 서비스가 자동으로 시작됨을 나타냅니다.</p>
+<h3 id="Internal-Kafka" class="common-anchor-header">내부 카프카<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> 는 Milvus 클러스터가 시작되면 클러스터에서 Kafka 서비스가 자동으로 시작됨을 나타냅니다.</p>
 <h4 id="Example" class="common-anchor-header">예제</h4><p>다음 예는 내부 Kafka 서비스를 구성하는 예제입니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

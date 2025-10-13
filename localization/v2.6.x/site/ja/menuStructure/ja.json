@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "ラングエキストラクト",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2686,6 +2692,12 @@
         "children": []
       },
       {
+        "label": "大規模言語モデルによるMilvusクエリフィルタ式の生成",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
+        "children": []
+      },
+      {
         "label": "もっと見る",
         "id": "explore-more",
         "order": 99,
@@ -2697,7 +2709,7 @@
             "children": []
           },
           {
-            "label": "レコメンダー・システム",
+            "label": "推薦システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

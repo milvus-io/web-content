@@ -184,7 +184,22 @@ beta: Milvus 2.6.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>자격 증명 구성 오버플로</span> </span></p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">1단계: Milvus 구성 파일에 자격 증명 추가하기</h3><p><code translate="no">milvus.yaml</code> 파일에서 액세스해야 하는 각 공급업체에 대한 항목으로 <code translate="no">credential</code> 블록을 편집합니다:</p>
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">1단계: Milvus 구성 파일에 자격 증명 추가하기<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">milvus.yaml</code> 파일에서 액세스해야 하는 각 공급업체에 대한 항목으로 <code translate="no">credential</code> 블록을 편집합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -205,13 +220,28 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">gcp1:</span>                        
     <span class="hljs-attr">credential_json:</span> <span class="hljs-string">&lt;BASE64_OF_JSON&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">2단계: 공급자 설정 구성</h3><p>동일한 구성 파일(<code translate="no">milvus.yaml</code>)에서 <code translate="no">function</code> 블록을 편집하여 서비스 호출 임베딩에 사용할 키를 Milvus에 알려줍니다:</p>
+<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">2단계: 공급자 설정 구성<button data-href="#Step-2-Configure-provider-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>동일한 구성 파일(<code translate="no">milvus.yaml</code>)에서 <code translate="no">function</code> 블록을 편집하여 서비스 호출 임베딩에 사용할 키를 Milvus에 알려줍니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">openai:</span>                         <span class="hljs-comment"># calls OpenAI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey1</span>           <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">bedrock:</span>                        <span class="hljs-comment"># calls AWS Bedrock</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">aksk1</span>             <span class="hljs-comment"># Reference to the credential label</span>
@@ -219,7 +249,7 @@ beta: Milvus 2.6.x
 
       <span class="hljs-attr">vertexai:</span>                       <span class="hljs-comment"># calls Google Vertex AI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">gcp1</span>              <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
@@ -241,7 +271,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Milvus 구성 파일에 자격 증명이 구성되면 다음 단계에 따라 임베딩 함수를 정의하고 사용하세요.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">1단계: 스키마 필드 정의</h3><p>임베딩 함수를 사용하려면 특정 스키마로 컬렉션을 만듭니다. 이 스키마에는 최소 3개의 필수 필드가 포함되어야 합니다:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">1단계: 스키마 필드 정의<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>임베딩 함수를 사용하려면 특정 스키마로 컬렉션을 만듭니다. 이 스키마에는 최소 3개의 필수 필드가 포함되어야 합니다:</p>
 <ul>
 <li><p>컬렉션의 각 엔티티를 고유하게 식별하는 <strong>기본 필드</strong>.</p></li>
 <li><p>임베드할 원시 데이터를 저장하는 <strong>스칼라 필드</strong>.</p></li>
@@ -270,7 +315,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">2단계: 스키마에 임베딩 함수 추가하기</h3><p>Milvus의 함수 모듈은 스칼라 필드에 저장된 원시 데이터를 임베딩으로 자동 변환하여 명시적으로 정의된 벡터 필드에 저장합니다.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">2단계: 스키마에 임베딩 함수 추가하기<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus의 함수 모듈은 스칼라 필드에 저장된 원시 데이터를 임베딩으로 자동 변환하여 명시적으로 정의된 벡터 필드에 저장합니다.</p>
 <p>아래 예는 스칼라 필드 <code translate="no">&quot;document&quot;</code> 를 임베딩으로 변환하여 결과 벡터를 앞서 정의한 <code translate="no">&quot;dense&quot;</code> 벡터 필드에 저장하는 함수 모듈(<code translate="no">openai_embedding</code>)을 추가하는 예제입니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
@@ -357,7 +417,22 @@ schema.add_function(text_embedding_function)
 <div class="alert note">
 <p>텍스트를 벡터로 변환해야 하는 여러 스칼라 필드가 있는 컬렉션의 경우 컬렉션 스키마에 별도의 함수를 추가하여 각 함수가 고유한 이름과 <code translate="no">output_field_names</code> 값을 갖도록 하세요.</p>
 </div>
-<h3 id="Step-3-Configure-index" class="common-anchor-header">3단계: 인덱스 구성</h3><p>필요한 필드와 기본 제공 함수로 스키마를 정의한 후에는 컬렉션의 인덱스를 설정합니다. 이 과정을 간소화하기 위해 <code translate="no">AUTOINDEX</code> 을 <code translate="no">index_type</code> 으로 사용하면 Milvus가 데이터 구조에 따라 가장 적합한 인덱스 유형을 선택하고 구성할 수 있습니다.</p>
+<h3 id="Step-3-Configure-index" class="common-anchor-header">3단계: 인덱스 구성<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>필요한 필드와 기본 제공 함수로 스키마를 정의한 후에는 컬렉션의 인덱스를 설정합니다. 이 과정을 간소화하기 위해 <code translate="no">AUTOINDEX</code> 을 <code translate="no">index_type</code> 으로 사용하면 Milvus가 데이터 구조에 따라 가장 적합한 인덱스 유형을 선택하고 구성할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -368,7 +443,22 @@ index_params.add_index(
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Create-collection" class="common-anchor-header">4단계: 컬렉션 만들기</h3><p>이제 정의한 스키마 및 인덱스 매개변수를 사용하여 컬렉션을 생성합니다.</p>
+<h3 id="Step-4-Create-collection" class="common-anchor-header">4단계: 컬렉션 만들기<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 정의한 스키마 및 인덱스 매개변수를 사용하여 컬렉션을 생성합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -376,7 +466,22 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">5단계: 데이터 삽입</h3><p>컬렉션과 인덱스를 설정했으면 이제 원시 데이터를 삽입할 준비가 되었습니다. 이 과정에서는 원시 텍스트만 제공하면 됩니다. 앞서 정의한 함수 모듈이 각 텍스트 항목에 해당하는 스파스 벡터를 자동으로 생성합니다.</p>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">5단계: 데이터 삽입<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션과 인덱스를 설정했으면 이제 원시 데이터를 삽입할 준비가 되었습니다. 이 과정에서는 원시 텍스트만 제공하면 됩니다. 앞서 정의한 함수 모듈이 각 텍스트 항목에 해당하는 스파스 벡터를 자동으로 생성합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -384,7 +489,22 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">6단계: 벡터 검색 수행</h3><p>데이터를 입력한 후 원시 쿼리 텍스트를 사용하여 시맨틱 검색을 수행합니다. Milvus는 자동으로 쿼리를 임베딩 벡터로 변환하고 유사도에 따라 관련 문서를 검색한 후 가장 일치하는 결과를 반환합니다.</p>
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">6단계: 벡터 검색 수행<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>데이터를 입력한 후 원시 쿼리 텍스트를 사용하여 시맨틱 검색을 수행합니다. Milvus는 자동으로 쿼리를 임베딩 벡터로 변환하고 유사도에 따라 관련 문서를 검색한 후 가장 일치하는 결과를 반환합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -415,20 +535,80 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">milvus.yaml에서 자격 증명을 구성하는 것과 환경 변수를 구성하는 것의 차이점은 무엇인가요?</h3><p>두 가지 방법 모두 작동하지만, 중앙 집중식 자격 증명 관리와 모든 공급업체에서 일관된 자격 증명 이름을 제공하기 때문에 <code translate="no">milvus.yaml</code> 을 사용하는 것이 권장됩니다. 환경 변수를 사용하는 경우 임베딩 서비스 제공업체에 따라 변수 이름이 다르므로 각 제공업체의 전용 페이지를 참조하여 필요한 특정 환경 변수 이름(예: <a href="/docs/ko/openai.md">OpenAI</a> 또는 <a href="/docs/ko/azure-openai.md">Azure OpenAI</a>)을 파악하세요.</p>
-<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">함수 정의에 자격 증명 매개변수를 지정하지 않으면 어떻게 되나요?</h3><p>Milvus는 다음과 같은 자격 증명 확인 순서를 따릅니다:</p>
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">milvus.yaml에서 자격 증명을 구성하는 것과 환경 변수를 구성하는 것의 차이점은 무엇인가요?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>두 가지 방법 모두 작동하지만, 중앙 집중식 자격 증명 관리와 모든 공급업체에서 일관된 자격 증명 이름을 제공하기 때문에 <code translate="no">milvus.yaml</code> 을 사용하는 것이 권장됩니다. 환경 변수를 사용하는 경우 임베딩 서비스 제공업체에 따라 변수 이름이 다르므로 각 제공업체의 전용 페이지를 참조하여 필요한 특정 환경 변수 이름(예: <a href="/docs/ko/openai.md">OpenAI</a> 또는 <a href="/docs/ko/azure-openai.md">Azure OpenAI</a>)을 파악하세요.</p>
+<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">함수 정의에 자격 증명 매개변수를 지정하지 않으면 어떻게 되나요?<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus는 다음과 같은 자격 증명 확인 순서를 따릅니다:</p>
 <ol>
 <li>먼저 <code translate="no">milvus.yaml</code> 파일에서 해당 공급자에 대해 구성된 기본 자격 증명을 찾습니다.</li>
 <li>milvus.yaml에 기본 자격 증명이 없는 경우 환경 변수(구성된 경우)로 되돌아갑니다.</li>
 <li><code translate="no">milvus.yaml</code> 자격 증명이나 환경 변수가 모두 구성되지 않은 경우 Milvus는 오류를 발생시킵니다.</li>
 </ol>
-<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">임베딩이 올바르게 생성되고 있는지 확인하려면 어떻게 해야 하나요?</h3><p>다음 방법으로 확인할 수 있습니다:</p>
+<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">임베딩이 올바르게 생성되고 있는지 확인하려면 어떻게 해야 하나요?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 방법으로 확인할 수 있습니다:</p>
 <ol>
 <li>삽입 후 컬렉션을 쿼리하여 벡터 필드에 데이터가 포함되어 있는지 확인합니다.</li>
 <li>벡터 필드 길이가 예상 차원과 일치하는지 확인</li>
 <li>임베딩이 의미 있는 결과를 생성하는지 확인하기 위해 간단한 유사성 검색을 수행합니다.</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">유사도 검색을 수행할 때 원시 텍스트가 아닌 쿼리 벡터를 사용할 수 있나요?</h3><p>예. 유사도 검색에 원시 텍스트 대신 미리 계산된 쿼리 벡터를 사용할 수 있습니다. 함수 모듈은 원시 텍스트 쿼리를 임베딩으로 자동 변환하지만, 검색 작업의 데이터 매개변수에 벡터 데이터를 직접 제공할 수도 있습니다. 참고: 제공한 쿼리 벡터의 차원 크기는 함수 모듈에서 생성된 벡터 임베딩의 차원 크기와 일치해야 합니다.</p>
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">유사도 검색을 수행할 때 원시 텍스트가 아닌 쿼리 벡터를 사용할 수 있나요?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>예. 유사도 검색에 원시 텍스트 대신 미리 계산된 쿼리 벡터를 사용할 수 있습니다. 함수 모듈은 원시 텍스트 쿼리를 임베딩으로 자동 변환하지만, 검색 작업의 데이터 매개변수에 벡터 데이터를 직접 제공할 수도 있습니다. 참고: 제공한 쿼리 벡터의 차원 크기는 함수 모듈에서 생성된 벡터 임베딩의 차원 크기와 일치해야 합니다.</p>
 <p><strong>예시</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(

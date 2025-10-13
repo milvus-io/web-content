@@ -336,7 +336,7 @@ res = client.search(
      <td><p>Triturazione JSON</p></td>
      <td><p>Accelerazione generale su molte chiavi, flessibile per query diverse</p></td>
      <td><p>No (non accelera i valori all'interno degli array)</p></td>
-     <td><p>Configurazione extra dello storage, gli array hanno ancora bisogno di un indice per chiave</p></td>
+     <td><p>Configurazione extra dello storage, gli array necessitano ancora di un indice per chiave</p></td>
    </tr>
    <tr>
      <td><p>Indice NGRAM</p></td>

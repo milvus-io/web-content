@@ -22,7 +22,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
     </button></h1><p>O Milvus usa RocksMQ, Pulsar ou Kafka para gerenciar logs de alterações recentes, gerar logs de fluxo e fornecer assinaturas de log. Este tópico apresenta como configurar as dependências de armazenamento de mensagens quando você instala o Milvus com o Milvus Operator. Para obter mais detalhes, consulte <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configurar o armazenamento de mensagens com o Milvus Operator</a> no repositório do Milvus Operator.</p>
 <p>Este tópico pressupõe que você tenha implantado o Milvus Operator.</p>
 <div class="alert note">Consulte <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Implantar o Milvus Operator</a> para obter mais informações. </div>
-<p>É necessário especificar um arquivo de configuração para usar o Milvus Operator para iniciar um cluster do Milvus.</p>
+<p>É necessário especificar um ficheiro de configuração para utilizar o Milvus Operator para iniciar um cluster Milvus.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Só é necessário editar o modelo de código em <code translate="no">milvus_cluster_default.yaml</code> para configurar dependências de terceiros. As secções seguintes apresentam como configurar o armazenamento de objectos, etcd, e Pulsar respetivamente.</p>
@@ -60,6 +60,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 </ul></li>
 <li>O armazenamento de mensagens não pode ser alterado enquanto o sistema Milvus estiver a funcionar.</li>
 <li>Apenas a versão 2.x ou 3.x do Kafka é suportada.</li>
+<li><strong>Limitações da atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.3, é necessário manter a escolha da fila de mensagens atual. Não é possível alternar entre sistemas de filas de mensagens diferentes durante a atualização. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar o RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -106,7 +107,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 <h5 id="Key-configuration-options" class="common-anchor-header">Principais opções de configuração:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: Define explicitamente o RocksMQ como a fila de mensagens</li>
 <li><code translate="no">persistence.enabled</code>: Habilita o armazenamento persistente para os dados do RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Quando verdadeiro, o PVC será apagado quando a instância do Milvus for apagada</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Quando verdadeiro, o PVC será excluído quando a instância do Milvus for excluída</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Especificação padrão do PVC do Kubernetes</li>
 <li><code translate="no">accessModes</code>: Normalmente <code translate="no">ReadWriteOnce</code> para armazenamento em bloco</li>
 <li><code translate="no">storageClassName</code>: A classe de armazenamento do seu cluster</li>
@@ -205,7 +206,22 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
       </svg>
     </button></h2><p>O Pulsar gerencia logs de mudanças recentes, gera logs de fluxo de saída e fornece assinaturas de log. A configuração do Pulsar para armazenamento de mensagens é suportada tanto no Milvus standalone quanto no Milvus cluster. No entanto, com o Milvus Operator, só é possível configurar a Pulsar como armazenamento de mensagens para o Milvus cluster. Adicione os campos obrigatórios em <code translate="no">spec.dependencies.pulsar</code> para configurar a Pulsar.</p>
 <p><code translate="no">pulsar</code> suporta <code translate="no">external</code> e <code translate="no">inCluster</code>.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">Pulsar externo</h3><p><code translate="no">external</code> indica o uso de um serviço Pulsar externo. Os campos usados para configurar um serviço Pulsar externo incluem:</p>
+<h3 id="External-Pulsar" class="common-anchor-header">Pulsar externo<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> indica o uso de um serviço Pulsar externo. Os campos usados para configurar um serviço Pulsar externo incluem:</p>
 <ul>
 <li><code translate="no">external</code>:  Um valor <code translate="no">true</code> indica que o Milvus usa um serviço Pulsar externo.</li>
 <li><code translate="no">endpoints</code>: Os endpoints do Pulsar.</li>
@@ -229,7 +245,22 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">Pulsar interno</h3><p><code translate="no">inCluster</code> indica que quando um cluster Milvus é iniciado, um serviço Pulsar é iniciado automaticamente no cluster.</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">Pulsar interno<button data-href="#Internal-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> indica que quando um cluster Milvus é iniciado, um serviço Pulsar é iniciado automaticamente no cluster.</p>
 <h4 id="Example" class="common-anchor-header">Exemplo</h4><p>O exemplo a seguir configura um serviço Pulsar interno.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -291,7 +322,22 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
       </svg>
     </button></h2><p>O Pulsar é o armazenamento de mensagens padrão em um cluster Milvus. Se pretender utilizar o Kafka, adicione o campo opcional <code translate="no">msgStreamType</code> para configurar o Kafka.</p>
 <p><code translate="no">kafka</code> suporta <code translate="no">external</code> e <code translate="no">inCluster</code>.</p>
-<h3 id="External-Kafka" class="common-anchor-header">Kafka externo</h3><p><code translate="no">external</code> indica a utilização de um serviço Kafka externo.</p>
+<h3 id="External-Kafka" class="common-anchor-header">Kafka externo<button data-href="#External-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> indica a utilização de um serviço Kafka externo.</p>
 <p>Os campos utilizados para configurar um serviço Kafka externo incluem:</p>
 <ul>
 <li><code translate="no">external</code>: Um valor <code translate="no">true</code> indica que o Milvus utiliza um serviço Kafka externo.</li>
@@ -327,7 +373,22 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 <blockquote>
 <p>As configurações SASL são suportadas na versão v0.8.5 ou superior do operador.</p>
 </blockquote>
-<h3 id="Internal-Kafka" class="common-anchor-header">Kafka interno</h3><p><code translate="no">inCluster</code> indica que quando um cluster Milvus é iniciado, um serviço Kafka é iniciado automaticamente no cluster.</p>
+<h3 id="Internal-Kafka" class="common-anchor-header">Kafka interno<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> indica que quando um cluster Milvus é iniciado, um serviço Kafka é iniciado automaticamente no cluster.</p>
 <h4 id="Example" class="common-anchor-header">Exemplo</h4><p>O exemplo a seguir configura um serviço Kafka interno.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

@@ -629,7 +629,7 @@ summary: >-
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Exemplo 1: Recuperar entidades onde as etiquetas são nulas</strong></p>
-<p>Para recuperar entidades em que o campo <code translate="no">tags</code> está em falta ou explicitamente definido como <code translate="no">None</code>:</p>
+<p>Para obter entidades em que o campo <code translate="no">tags</code> está em falta ou explicitamente definido como <code translate="no">None</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
 
 <span class="hljs-comment"># Example output:</span>

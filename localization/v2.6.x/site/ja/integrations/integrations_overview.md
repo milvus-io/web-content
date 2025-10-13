@@ -90,5 +90,6 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/milvus_and_n8n.md">Milvusとn8nを使い始める</a></td><td>オーケストレーション</td><td>Milvus、n8n</td></tr>
 <tr><td><a href="/docs/ja/use_milvus_in_anythingllm.md">AnythingLLMでMilvusを使う</a></td><td>オーケストレーション</td><td>Milvus、AnythingLLM</td></tr>
 <tr><td><a href="/docs/ja/NLWeb_with_milvus.md">MilvusでNLWebを使う</a></td><td>データソース</td><td>Milvus、NLWeb</td></tr>
+<tr><td><a href="/docs/ja/langextract_milvus_demo.md">LangExtractとMilvusの統合</a></td><td>データソース</td><td>Milvus、LangExtract</td></tr>
 </tbody>
 </table>

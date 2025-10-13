@@ -3,7 +3,7 @@ id: language-identifier.md
 title: SprachidentifikatorCompatible with Milvus v2.5.15+
 summary: >-
   Der language_identifier ist ein spezieller Tokenizer, der die
-  Textsuchfähigkeiten von Milvus durch die Automatisierung des
+  Textsuchfunktionen von Milvus durch die Automatisierung des
   Sprachanalyseprozesses verbessern soll. Seine Hauptfunktion besteht darin, die
   Sprache eines Textfeldes zu erkennen und dann dynamisch einen
   vorkonfigurierten Analysator anzuwenden, der für diese Sprache am besten
@@ -55,7 +55,7 @@ beta: Milvus v2.5.15+
 <li><p><strong>Auswahl des Analyzers:</strong></p>
 <ul>
 <li><p><strong>Erfolg:</strong> Wenn die Sprache erfolgreich erkannt wurde, prüft das System, ob für den erkannten Sprachnamen ein entsprechender Analyzer in Ihrem <code translate="no">analyzers</code> Wörterbuch konfiguriert ist. Wenn eine Übereinstimmung gefunden wird, wendet das System den angegebenen Analyzer auf den Eingabetext an. Zum Beispiel würde ein erkannter "Mandarin"-Text an einen <code translate="no">jieba</code> Tokenizer weitergeleitet werden.</p></li>
-<li><p><strong>Fallback:</strong> Wenn die Erkennung fehlschlägt oder wenn eine Sprache erfolgreich erkannt wurde, Sie aber kein spezifisches Analyseprogramm dafür angegeben haben, verwendet das System standardmäßig ein vorkonfiguriertes <strong>Standard-Analyseprogramm</strong>. Dies ist ein wichtiger Punkt zur Klarstellung; das Analysegerät <code translate="no">default</code> ist ein Fallback sowohl für die fehlgeschlagene Erkennung als auch für das Fehlen eines passenden Analysegeräts.</p></li>
+<li><p><strong>Fallback:</strong> Wenn die Erkennung fehlschlägt oder wenn eine Sprache erfolgreich erkannt wurde, Sie aber kein spezifisches Analyseprogramm dafür angegeben haben, verwendet das System standardmäßig ein vorkonfiguriertes <strong>Standard-Analyseprogramm</strong>. Dies ist ein wichtiger Punkt zur Klarstellung; das Analysegerät <code translate="no">default</code> ist ein Fallback sowohl für den Fall, dass die Erkennung fehlschlägt als auch für den Fall, dass kein passendes Analysegerät vorhanden ist.</p></li>
 </ul></li>
 </ol>
 <p>Nachdem das passende Analyseprogramm ausgewählt wurde, wird der Text tokenisiert und verarbeitet, womit der Arbeitsablauf abgeschlossen ist.</p>
@@ -370,7 +370,7 @@ result_fr = client.run_analyzer(<span class="hljs-string">&quot;Café français 
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Eine Sprache pro Feld:</strong> Ein Feld wird als eine einzige, homogene Texteinheit betrachtet. Sie ist dafür ausgelegt, verschiedene Sprachen in verschiedenen Datensätzen zu verarbeiten, z. B. wenn ein Datensatz einen englischen Satz und der nächste einen französischen Satz enthält.</p></li>
+<li><p><strong>Eine Sprache pro Feld:</strong> Ein Feld wird als eine einzige, homogene Texteinheit betrachtet. Sie ist so konzipiert, dass sie verschiedene Sprachen in verschiedenen Datensätzen verarbeiten kann, z. B. wenn ein Datensatz einen englischen Satz und der nächste einen französischen Satz enthält.</p></li>
 <li><p><strong>Keine gemischtsprachigen Zeichenketten:</strong> Es ist <strong>nicht</strong> dafür ausgelegt, eine einzelne Zeichenfolge zu verarbeiten, die Text in mehreren Sprachen enthält. So wird beispielsweise ein einzelnes Feld <code translate="no">VARCHAR</code>, das sowohl einen englischen Satz als auch eine japanische Phrase in Anführungszeichen enthält, als eine einzige Sprache verarbeitet.</p></li>
 <li><p><strong>Verarbeitung der dominanten Sprache:</strong> In gemischtsprachigen Szenarien wird die Erkennungsmaschine wahrscheinlich die dominante Sprache identifizieren, und der entsprechende Analysator wird auf den gesamten Text angewendet. Dies führt dazu, dass der eingebettete Fremdtext nur unzureichend oder gar nicht tokenisiert wird.</p></li>
 </ul>

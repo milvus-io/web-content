@@ -19,6 +19,262 @@ title: Информация о выпуске
         ></path>
       </svg>
     </button></h1><p>Узнайте, что нового появилось в Milvus! На этой странице собраны новые возможности, улучшения, известные проблемы и исправления ошибок в каждом выпуске. В этом разделе вы найдете примечания к выпуску для каждой версии после v2.6.0. Мы рекомендуем вам регулярно посещать эту страницу, чтобы узнавать об обновлениях.</p>
+<h2 id="v263" class="common-anchor-header">v2.6.3<button data-href="#v263" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Дата выхода: 11 октября 2025 г.</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Версия Milvus</th><th style="text-align:left">Версия Python SDK</th><th style="text-align:left">Node.js SDK Версия</th><th style="text-align:left">Java SDK Версия</th><th style="text-align:left">Go SDK Версия</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Мы рады сообщить о выходе версии Milvus 2.6.3, в которой появилось множество новых интересных функций, улучшений и исправлений критических ошибок. Эта версия повышает производительность системы, расширяет функциональность и исправляет ключевые проблемы, обеспечивая более стабильную работу для всех пользователей. Ниже приведены основные моменты этого выпуска:</p>
+<h3 id="New-Features" class="common-anchor-header">Новые возможности<button data-href="#New-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Первичный ключ с включенным автоидентификатором: Пользователи теперь могут записывать поле первичного ключа, когда включена функция <code translate="no">autoid</code>.<a href="https://github.com/milvus-io/milvus/pull/44424">(#44424</a> <a href="https://github.com/milvus-io/milvus/pull/44530">#44530</a>)</li>
+<li>Ручное уплотнение для сегментов L0: Добавлена поддержка ручного уплотнения сегментов L0.<a href="https://github.com/milvus-io/milvus/pull/44440">(#44440</a>)</li>
+<li>Кодировка ID кластера в AutoID: Автоматически генерируемые ID теперь будут включать ID кластера.<a href="https://github.com/milvus-io/milvus/pull/44471">(#44471</a>)</li>
+<li>Поддержка токенизатора gRPC: Интеграция токенизатора gRPC для повышения гибкости запросов.<a href="https://github.com/milvus-io/milvus/pull/41994">(#41994</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Улучшения<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Усовершенствована система проверки баланса путем внедрения очереди приоритетов, что улучшает распределение задач.<a href="https://github.com/milvus-io/milvus/pull/43992">(#43992</a>)</li>
+<li>Предварительная загрузка статистики BM25 для запечатанных сегментов и оптимизированная сериализация.<a href="https://github.com/milvus-io/milvus/pull/44279">(#44279</a>)</li>
+<li>Нулевые поля теперь могут быть использованы в качестве входных данных для функций BM25.<a href="https://github.com/milvus-io/milvus/pull/44586">(#44586</a>)</li>
+<li>Добавлена поддержка Azure Blob Storage в Woodpecker.<a href="https://github.com/milvus-io/milvus/pull/44592">(#44592</a>)</li>
+<li>Очистка маленьких файлов сразу после уплотнения сегментов Woodpecker.<a href="https://github.com/milvus-io/milvus/pull/44473">(#44473</a>)</li>
+<li>Включена функция случайных баллов для повышающих запросов.<a href="https://github.com/milvus-io/milvus/pull/44214">(#44214</a>)</li>
+<li>Новые параметры конфигурации для типа вектора <code translate="no">int8</code> в автоиндексации.<a href="https://github.com/milvus-io/milvus/pull/44554">(#44554</a>)</li>
+<li>Добавлены параметры для управления политикой повторных запросов в гибридном поиске.<a href="https://github.com/milvus-io/milvus/pull/44466">(#44466</a>)</li>
+<li>Добавлена поддержка управления вставкой полей вывода функций.<a href="https://github.com/milvus-io/milvus/pull/44162">(#44162</a>)</li>
+<li>Функция decay теперь поддерживает настраиваемое объединение баллов для повышения производительности.<a href="https://github.com/milvus-io/milvus/pull/44066">(#44066</a>)</li>
+<li>Улучшена производительность двоичного поиска в строках.<a href="https://github.com/milvus-io/milvus/pull/44469">(#44469</a>)</li>
+<li>Добавлена поддержка разреженных фильтров в запросах. <a href="https://github.com/milvus-io/milvus/pull/44347">(#44347</a>)</li>
+<li>Различные обновления для улучшения функциональности многоуровневых индексов.<a href="https://github.com/milvus-io/milvus/pull/44433">(#44433</a>)</li>
+<li>Добавлено отслеживание использования ресурсов хранения для скалярного и векторного поиска.<a href="https://github.com/milvus-io/milvus/pull/44414">(#44414</a> <a href="https://github.com/milvus-io/milvus/pull/44308">#44308</a>)</li>
+<li>Добавлено использование ресурсов хранения для delete/upsert/restful<a href="https://github.com/milvus-io/milvus/pull/44512">(#44512</a>)</li>
+<li>Включены гранулярные цели flush для операций <code translate="no">flushall</code>.<a href="https://github.com/milvus-io/milvus/pull/44234">(#44234</a>)</li>
+<li>Датаноды теперь используют файловую систему без синглтонов для лучшего управления ресурсами.<a href="https://github.com/milvus-io/milvus/pull/44418">(#44418</a>)</li>
+<li>Добавлены опции конфигурации для пакетной обработки в метаданных. <a href="https://github.com/milvus-io/milvus/pull/44645">(#44645</a>)</li>
+<li>Сообщения об ошибках теперь включают имя базы данных для большей ясности.<a href="https://github.com/milvus-io/milvus/pull/44618">(#44618</a>)</li>
+<li>Перемещен тест трассировки в репозиторий <code translate="no">milvus-common</code> для лучшей модульности.<a href="https://github.com/milvus-io/milvus/pull/44605">(#44605</a>)</li>
+<li>Перемещены файлы юнит-тестов C API в каталог <code translate="no">src</code> для лучшей организации.<a href="https://github.com/milvus-io/milvus/pull/44458">(#44458</a>)</li>
+<li>Go SDK теперь позволяет пользователям вставлять данные первичного ключа, если включен <code translate="no">autoid</code>.<a href="https://github.com/milvus-io/milvus/pull/44561">(#44561</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Исправления ошибок<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Устранены уязвимости CVE-2020-25576 и WS-2023-0223.<a href="https://github.com/milvus-io/milvus/pull/44163">(#44163</a>)</li>
+<li>Исправлена проблема, при которой логические ресурсы использовались для метрик в центре квот на потоковых узлах.<a href="https://github.com/milvus-io/milvus/pull/44613">(#44613</a>)</li>
+<li>Установите <code translate="no">mixcoord</code> в <code translate="no">activatefunc</code> при включении режима ожидания.<a href="https://github.com/milvus-io/milvus/pull/44621">(#44621</a>)</li>
+<li>Устранена избыточная инициализация компонентов хранилища V2. <a href="https://github.com/milvus-io/milvus/pull/44597">#44597</a>)</li>
+<li>Исправлена блокировка задачи уплотнения из-за выхода из цикла исполнителя.<a href="https://github.com/milvus-io/milvus/pull/44543">(#44543</a>)</li>
+<li>Устранено использование загруженных ресурсов в деструкторе <code translate="no">insert/deleterecord</code>.<a href="https://github.com/milvus-io/milvus/pull/44555">(#44555</a>)</li>
+<li>Исправлена проблема, из-за которой репликатор не мог остановиться, и улучшен валидатор конфигурации репликатора.<a href="https://github.com/milvus-io/milvus/pull/44531">(#44531</a>)</li>
+<li>Установка <code translate="no">mmap_file_raii_</code> на <code translate="no">nullptr</code> при отключенном mmap.<a href="https://github.com/milvus-io/milvus/pull/44516">(#44516</a>)</li>
+<li>Заставило <code translate="no">diskfilemanager</code> использовать файловую систему из контекста.<a href="https://github.com/milvus-io/milvus/pull/44535">(#44535</a>)</li>
+<li>Принудительный виртуальный хост для OSS и COS в хранилище V2.<a href="https://github.com/milvus-io/milvus/pull/44484">(#44484</a>)</li>
+<li>Установлено значение <code translate="no">report_value</code> по умолчанию, когда <code translate="no">extrainfo</code> не является <code translate="no">nil</code>, для совместимости.<a href="https://github.com/milvus-io/milvus/pull/44529">(#44529</a>)</li>
+<li>Очищены метрики коллекций после удаления коллекций в rootcoord.<a href="https://github.com/milvus-io/milvus/pull/44511">(#44511</a>)</li>
+<li>Исправлена ошибка загрузки сегмента из-за дублирования свойств поля <code translate="no">mmap.enable</code>.<a href="https://github.com/milvus-io/milvus/pull/44465">(#44465</a>)</li>
+<li>Исправлены ошибки разбора конфигурации нагрузки для динамических реплик.<a href="https://github.com/milvus-io/milvus/pull/44430">(#44430</a>)</li>
+<li>Обработка ввода строки в столбец для динамических столбцов в Go SDK.<a href="https://github.com/milvus-io/milvus/pull/44626">(#44626</a>)</li>
+</ul>
+<h2 id="v262" class="common-anchor-header">v2.6.2<button data-href="#v262" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Дата выпуска: 19 сентября 2025 года</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Версия Milvus</th><th style="text-align:left">Версия Python SDK</th><th style="text-align:left">Node.js SDK Версия</th><th style="text-align:left">Java SDK Версия</th><th style="text-align:left">Go SDK Версия</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Мы рады объявить о выходе Milvus 2.6.2! В этом обновлении представлены новые мощные функции, значительные улучшения производительности и критические исправления, которые делают систему более стабильной и готовой к производству. Среди основных возможностей - частичное обновление полей с помощью upsert, измельчение JSON для ускорения динамической фильтрации полей, индексация NGram для ускорения запросов LIKE и более гибкое изменение схемы существующих коллекций. Созданный на основе отзывов сообщества, этот выпуск обеспечивает более прочную основу для реальных развертываний, и мы рекомендуем всем пользователям обновиться, чтобы воспользоваться этими улучшениями.</p>
+<h3 id="Features" class="common-anchor-header">Особенности<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Добавлена поддержка JSON Shredding для ускорения динамической фильтрации полей. Подробности см. в разделе <a href="/docs/ru/json-shredding.md">"Измельчение JSON"</a>.</li>
+<li>Добавлена поддержка NGRAM Index для ускорения операций типа. Подробнее см. в разделе <a href="/docs/ru/ngram.md">NGRAM</a>.</li>
+<li>Добавлена поддержка частичного обновления полей с помощью Upsert API. Подробнее см. в разделе <a href="/docs/ru/upsert-entities.md">Upsert Entities</a>.</li>
+<li>Добавлена поддержка функции Boost Function. Подробности см. в разделе <a href="/docs/ru/boost-ranker.md">Boost Ranker</a>.</li>
+<li>Добавлена поддержка группировки по JSON-полям и динамическим полям<a href="https://github.com/milvus-io/milvus/pull/43203">(#43203</a>)</li>
+<li>Добавлена поддержка включения динамической схемы для существующих коллекций<a href="https://github.com/milvus-io/milvus/pull/44151">(#44151</a>)</li>
+<li>Добавлена поддержка сброса индексов без освобождения коллекций<a href="https://github.com/milvus-io/milvus/pull/42941">(#42941</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Улучшения<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>[StorageV2] Изменен размер файла журнала на сжатый<a href="https://github.com/milvus-io/milvus/pull/44402">(#44402</a>)</li>
+<li>[StorageV2] Добавлены дочерние поля в информации о загрузке<a href="https://github.com/milvus-io/milvus/pull/44384">(#44384</a>)</li>
+<li>[StorageV2] Добавлена поддержка включения ключей разделов и кластеризации в системную группу<a href="https://github.com/milvus-io/milvus/pull/44372">(#44372</a>)</li>
+<li>Удален таймаут для задач уплотнения<a href="https://github.com/milvus-io/milvus/pull/44277">(#44277</a>)</li>
+<li>[StorageV2] Включена сборка с Azure<a href="https://github.com/milvus-io/milvus/pull/44177">(#44177</a>)</li>
+<li>[StorageV2] Использование информации о группе для оценки использования логики<a href="https://github.com/milvus-io/milvus/pull/44356">(#44356</a>)</li>
+<li>[StorageV2] Использование информации о разделении групп для оценки использования<a href="https://github.com/milvus-io/milvus/pull/44338">(#44338</a>)</li>
+<li>[StorageV2] Сохранение результатов групп столбцов при уплотнении<a href="https://github.com/milvus-io/milvus/pull/44327">(#44327</a>)</li>
+<li>[StorageV2] Добавлены конфигурации для политики разделения на основе размера<a href="https://github.com/milvus-io/milvus/pull/44301">(#44301</a>)</li>
+<li>[StorageV2] Добавлена поддержка политики разделения на основе схемы и размера<a href="https://github.com/milvus-io/milvus/pull/44282">(#44282</a>)</li>
+<li>[StorageV2] Добавлена настраиваемая политика разделения<a href="https://github.com/milvus-io/milvus/pull/44258">(#44258</a>)</li>
+<li>[CachingLayer] Добавлено больше метрик и конфигураций<a href="https://github.com/milvus-io/milvus/pull/44276">(#44276</a>)</li>
+<li>Добавлена поддержка ожидания готовности всех индексов перед загрузкой сегментов<a href="https://github.com/milvus-io/milvus/pull/44313">(#44313</a>)</li>
+<li>Добавлена метрика задержки внутреннего ядра для узла rescore<a href="https://github.com/milvus-io/milvus/pull/44010">(#44010</a>)</li>
+<li>Оптимизирован формат журнала доступа при печати KV-параметров<a href="https://github.com/milvus-io/milvus/pull/43742">(#43742</a>)</li>
+<li>Добавлена настройка для изменения размера партии снимков дампа<a href="https://github.com/milvus-io/milvus/pull/44215">(#44215</a>)</li>
+<li>Уменьшен интервал очистки задач уплотнения<a href="https://github.com/milvus-io/milvus/pull/44207">(#44207</a>)</li>
+<li>Улучшена сортировка слиянием для поддержки нескольких полей<a href="https://github.com/milvus-io/milvus/pull/44191">(#44191</a>)<a href="https://github.com/milvus-io/milvus/pull/43994">(#43994</a>)</li>
+<li>Добавлена оценка ресурсов нагрузки для многоуровневого индекса<a href="https://github.com/milvus-io/milvus/pull/44171">(#44171</a>)</li>
+<li>Добавлена настройка автоиндекса для случая дедупликации<a href="https://github.com/milvus-io/milvus/pull/44186">(#44186</a>)</li>
+<li>Добавлена настройка, позволяющая использовать пользовательские символы в именах (<a href="https://github.com/milvus-io/milvus/pull/44063">#44063</a>)</li>
+<li>Добавлена поддержка cchannel для потокового сервиса<a href="https://github.com/milvus-io/milvus/pull/44143">(#44143</a>)</li>
+<li>Добавлен мьютекс и проверка диапазона для защиты одновременных удалений<a href="https://github.com/milvus-io/milvus/pull/44128">(#44128</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Исправления ошибок<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Выровнено поведение выражений exists между грубой силой и индексом<a href="https://github.com/milvus-io/milvus/pull/44030">(#44030</a>)</li>
+<li>Исправлена ошибка при переименовании в удаленную коллекцию<a href="https://github.com/milvus-io/milvus/pull/44436">(#44436</a>)</li>
+<li>[StorageV2] Проверена длина дочерних полей<a href="https://github.com/milvus-io/milvus/pull/44405">(#44405</a>)</li>
+<li>[StorageV2] Включение Azure по умолчанию<a href="https://github.com/milvus-io/milvus/pull/44377">(#44377</a>)</li>
+<li>Исправлен путь загрузки компиляций L0 при объединении датанодов<a href="https://github.com/milvus-io/milvus/pull/44374">(#44374</a>)</li>
+<li>Запрещено переименование, если включено шифрование базы данных<a href="https://github.com/milvus-io/milvus/pull/44225">(#44225</a>)</li>
+<li>Запрещено удаление свойства dynamicfield.enable<a href="https://github.com/milvus-io/milvus/pull/44335">(#44335</a>)</li>
+<li>Помечать задачи как неудачные, если предварительно выделенный ID недействителен<a href="https://github.com/milvus-io/milvus/pull/44350">(#44350</a>)</li>
+<li>Пропущены проверки MVCC в выражениях сравнения PK<a href="https://github.com/milvus-io/milvus/pull/44353">(#44353</a>)</li>
+<li>Исправлена ошибка json_contains для статистики<a href="https://github.com/milvus-io/milvus/pull/44325">(#44325</a>)</li>
+<li>Добавлена проверка файловой системы инициализации для узла запроса и потокового узла<a href="https://github.com/milvus-io/milvus/pull/44360">(#44360</a>)</li>
+<li>Исправлена пустая цель уплотнения, когда сегмент был собран в мусор<a href="https://github.com/milvus-io/milvus/pull/44270">(#44270</a>)</li>
+<li>Исправлено состояние гонки при инициализации индекса временных меток<a href="https://github.com/milvus-io/milvus/pull/44317">(#44317</a>)</li>
+<li>Проверено, является ли arraydata nil, чтобы предотвратить панику<a href="https://github.com/milvus-io/milvus/pull/44332">(#44332</a>)</li>
+<li>Исправлена ошибка сборки JSON-статистики для вложенных объектов<a href="https://github.com/milvus-io/milvus/pull/44303">(#44303</a>)</li>
+<li>Предотвращена перезапись mmap при использовании нескольких полей JSON<a href="https://github.com/milvus-io/milvus/pull/44299">(#44299</a>)</li>
+<li>Унифицированы допустимые форматы данных<a href="https://github.com/milvus-io/milvus/pull/44296">(#44296</a>)</li>
+<li>Скрыты учетные данные провайдеров встраивания/реранжирования в веб-интерфейсе<a href="https://github.com/milvus-io/milvus/pull/44275">(#44275</a>)</li>
+<li>Исправлен путь к statslog под пулом датанодов<a href="https://github.com/milvus-io/milvus/pull/44288">(#44288</a>)</li>
+<li>Исправлен путь к оракулу IDF<a href="https://github.com/milvus-io/milvus/pull/44266">(#44266</a>)</li>
+<li>Использование контрольной точки снапшота восстановления, если ни один vchannel не восстанавливается<a href="https://github.com/milvus-io/milvus/pull/44246">(#44246</a>)</li>
+<li>Ограничено количество столбцов в JSON-статистике<a href="https://github.com/milvus-io/milvus/pull/44233">(#44233</a>)</li>
+<li>Сделан n-граммовый индекс подсчета ресурсов нагрузки<a href="https://github.com/milvus-io/milvus/pull/44237">(#44237</a>)</li>
+<li>Вывод типа метрики из непустых результатов поиска<a href="https://github.com/milvus-io/milvus/pull/44222">(#44222</a>)</li>
+<li>Исправлена многосегментная запись только одного сегмента<a href="https://github.com/milvus-io/milvus/pull/44256">(#44256</a>)</li>
+<li>Исправлена сортировка слиянием вне диапазона<a href="https://github.com/milvus-io/milvus/pull/44230">(#44230</a>)</li>
+<li>Добавлена проверка UTF-8 перед выполнением функции BM25<a href="https://github.com/milvus-io/milvus/pull/44220">(#44220</a>)</li>
+<li>Повторное обращение к старой сессии, если она существует<a href="https://github.com/milvus-io/milvus/pull/44208">(#44208</a>)</li>
+<li>Добавлено ограничение размера буфера Kafka для предотвращения OOM датанода<a href="https://github.com/milvus-io/milvus/pull/44106">(#44106</a>)</li>
+<li>Исправлена паника при расширении диапазона защиты блокировки<a href="https://github.com/milvus-io/milvus/pull/44130">(#44130</a>)</li>
+<li>Исправлено, что растущие сегменты не удалялись при изменении схемы<a href="https://github.com/milvus-io/milvus/pull/44412">(#44412</a>)</li>
+<li>[StorageV2] Обработка ошибок ввода-вывода<a href="https://github.com/milvus-io/milvus/pull/44255">(#44255</a>)</li>
+<li>Предотвращение паники, если путь к индексу Tantivy не существует<a href="https://github.com/milvus-io/milvus/pull/44135">(#44135</a>)</li>
+</ul>
 <h2 id="v261" class="common-anchor-header">v2.6.1<button data-href="#v261" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +365,7 @@ title: Информация о выпуске
 <li>Исправление потенциального состояния гонки при загрузке текстовых и JSON-индексов<a href="https://github.com/milvus-io/milvus/pull/43811">(#43811</a>)</li>
 <li>Исправление несоответствия статуса узла, которое могло возникнуть после перезапуска QueryCoord<a href="https://github.com/milvus-io/milvus/pull/43941">(#43941</a>)</li>
 <li>Обеспечивает правильную очистку "грязного" QueryNode после перезапуска<a href="https://github.com/milvus-io/milvus/pull/43909">(#43909</a>)</li>
-<li>Устранена проблема, из-за которой состояние повтора не обрабатывалось корректно для запросов с непустой полезной нагрузкой<a href="https://github.com/milvus-io/milvus/pull/44068">(#44068</a>)</li>
+<li>Исправление проблемы, при которой состояние повтора не обрабатывалось корректно для запросов с непустой полезной нагрузкой<a href="https://github.com/milvus-io/milvus/pull/44068">(#44068</a>)</li>
 <li>Исправлена ошибка, из-за которой bulk writer v2 не использовал правильное имя ведра<a href="https://github.com/milvus-io/milvus/pull/44083">(#44083</a>)</li>
 <li>Повышение безопасности за счет скрытия чувствительных элементов от конечной точки RESTful get_configs<a href="https://github.com/milvus-io/milvus/pull/44057">(#44057</a>)</li>
 <li>Обеспечивает идемпотентность загрузки объектов для woodpecker во время повторных попыток таймаута<a href="https://github.com/milvus-io/milvus/pull/43947">(#43947</a>)</li>

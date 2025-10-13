@@ -241,7 +241,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p><a href="/docs/ko/standard-analyzer.md"><code translate="no">standard</code></a></p></td>
      <td><p>대부분의 공백으로 구분된 언어(영어, 프랑스어, 독일어, 스페인어 등)</p></td>
      <td><ul><li><p>토큰화 도구: <code translate="no">standard</code></p></li><li><p>필터: <code translate="no">lowercase</code></p></li></ul></td>
-     <td><p>초기 텍스트 처리를 위한 범용 분석기. 단일 언어 시나리오의 경우 언어별 분석기(예: <code translate="no">english</code>)가 더 나은 성능을 제공합니다.</p></td>
+     <td><p>초기 텍스트 처리를 위한 범용 분석기. 단일 언어 시나리오의 경우, 언어별 분석기(예: <code translate="no">english</code>)가 더 나은 성능을 제공합니다.</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ko/english-analyzer.md"><code translate="no">english</code></a></p></td>
@@ -727,7 +727,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>일본어 사전 및 필터가 포함된 <code translate="no">lindera</code> 토큰화기를 사용하여 구두점을 정리하고 토큰 길이를 조절하세요:</p>
+    </button></h3><p>일본어 사전 및 필터와 함께 <code translate="no">lindera</code> 토큰화기를 사용하여 구두점을 정리하고 토큰 길이를 조절하세요:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,

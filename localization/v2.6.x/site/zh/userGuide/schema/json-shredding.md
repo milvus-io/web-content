@@ -113,8 +113,8 @@ beta: Milvus 2.6.2+
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/json-shredding-flow.png" alt="Json Shredding Flow" class="doc-image" id="json-shredding-flow" />
    </span> <span class="img-wrapper"> <span>Json 粉碎流程</span> </span></p>
 <ul>
-<li><p><strong>切碎列</strong>：对于<strong>键入</strong>和<strong>动态</strong> <strong>键</strong>，数据被写入专用列。这种列式存储允许在查询时进行快速、直接的扫描，因为 Milvus 可以只读取给定键所需的数据，而无需处理整个文档。</p></li>
-<li><p><strong>共享列</strong>：所有<strong>共享键</strong>都一起存储在一个紧凑的二进制 JSON 列中。在这一列上建立了共享键<strong>反转索引</strong>。该索引对于加速低频键的查询至关重要，它允许 Milvus 快速剪裁数据，有效地将搜索空间缩小到仅包含指定键的行。</p></li>
+<li><p><strong>切碎列</strong>：对于<strong>类型</strong> <strong>键</strong>和<strong>动态</strong> <strong>键</strong>，数据被写入专用列。这种列式存储允许在查询时进行快速、直接的扫描，因为 Milvus 可以只读取给定键所需的数据，而无需处理整个文档。</p></li>
+<li><p><strong>共享列</strong>：所有<strong>共享键</strong>都一起存储在一个紧凑的二进制 JSON 列中。在这一列上建立共享键<strong>反转索引</strong>。该索引对于加速低频键的查询至关重要，它允许 Milvus 快速剪裁数据，有效地将搜索空间缩小到仅包含指定键的行。</p></li>
 </ul>
 <h3 id="Phase-3-Query-execution" class="common-anchor-header">第 3 阶段查询执行<button data-href="#Phase-3-Query-execution" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -196,7 +196,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>决定 Milvus 在加载粉碎数据时是否使用 mmap。</p><p>有关详情，请参阅<a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">使用 mmap</a>。</p></td>
+     <td><p>决定 Milvus 在加载粉碎数据时是否使用 mmap。</p><p>有关详情，请参阅<a href="/docs/zh/mmap.md">使用 mmap</a>。</p></td>
      <td><p>真</p></td>
      <td><p>此设置通常为性能优化。只有在系统有特定内存管理需求或限制的情况下才会调整它。</p></td>
    </tr>

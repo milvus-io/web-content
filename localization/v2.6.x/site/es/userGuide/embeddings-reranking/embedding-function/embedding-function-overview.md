@@ -4,7 +4,7 @@ title: Visión general de la función de incrustaciónCompatible with Milvus 2.6
 summary: >-
   El módulo Function de Milvus le permite transformar datos de texto sin
   procesar en incrustaciones vectoriales llamando automáticamente a proveedores
-  de servicios de incrustación externos (como OpenAI, AWS Bedrock, Google Vertex
+  externos de servicios de incrustación (como OpenAI, AWS Bedrock, Google Vertex
   AI, etc.). Con el módulo Function, ya no tendrá que interactuar manualmente
   con las API de incrustación: Milvus se encarga de todo el proceso de envío de
   solicitudes a los proveedores, recepción de incrustaciones y almacenamiento en
@@ -189,7 +189,22 @@ beta: Milvus 2.6.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>Desbordamiento de configuración de credenciales</span> </span></p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Paso 1: Agregar credenciales al archivo de configuración de Milvus</h3><p>En su archivo <code translate="no">milvus.yaml</code>, edite el bloque <code translate="no">credential</code> con entradas para cada proveedor al que necesite acceder:</p>
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Paso 1: Agregar credenciales al archivo de configuración de Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>En su archivo <code translate="no">milvus.yaml</code>, edite el bloque <code translate="no">credential</code> con entradas para cada proveedor al que necesite acceder:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -210,13 +225,28 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">gcp1:</span>                        
     <span class="hljs-attr">credential_json:</span> <span class="hljs-string">&lt;BASE64_OF_JSON&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">Paso 2: Configure los ajustes del proveedor</h3><p>En el mismo archivo de configuración (<code translate="no">milvus.yaml</code>), edite el bloque <code translate="no">function</code> para indicar a Milvus qué clave debe utilizar para incrustar las llamadas de servicio:</p>
+<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">Paso 2: Configure los ajustes del proveedor<button data-href="#Step-2-Configure-provider-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>En el mismo archivo de configuración (<code translate="no">milvus.yaml</code>), edite el bloque <code translate="no">function</code> para indicar a Milvus qué clave debe utilizar para incrustar las llamadas de servicio:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">openai:</span>                         <span class="hljs-comment"># calls OpenAI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey1</span>           <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">bedrock:</span>                        <span class="hljs-comment"># calls AWS Bedrock</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">aksk1</span>             <span class="hljs-comment"># Reference to the credential label</span>
@@ -224,7 +254,7 @@ beta: Milvus 2.6.x
 
       <span class="hljs-attr">vertexai:</span>                       <span class="hljs-comment"># calls Google Vertex AI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">gcp1</span>              <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
@@ -246,7 +276,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Una vez configuradas las credenciales en su archivo de configuración de Milvus, siga estos pasos para definir y utilizar las funciones de incrustación.</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Paso 1: Definir campos de esquema</h3><p>Para utilizar una función de incrustación, cree una colección con un esquema específico. Este esquema debe incluir al menos tres campos necesarios:</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">Paso 1: Definir campos de esquema<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para utilizar una función de incrustación, cree una colección con un esquema específico. Este esquema debe incluir al menos tres campos necesarios:</p>
 <ul>
 <li><p>El <strong>campo primario</strong> que identifica de forma única a cada entidad de una colección.</p></li>
 <li><p>Un <strong>campo escalar</strong> que almacena los datos brutos que se van a incrustar.</p></li>
@@ -275,7 +320,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Paso 2: Añadir la función de incrustación al esquema</h3><p>El módulo Function de Milvus convierte automáticamente los datos brutos almacenados en un campo escalar en incrustaciones y los almacena en el campo vectorial definido explícitamente.</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Paso 2: Añadir la función de incrustación al esquema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>El módulo Function de Milvus convierte automáticamente los datos brutos almacenados en un campo escalar en incrustaciones y los almacena en el campo vectorial definido explícitamente.</p>
 <p>El ejemplo siguiente añade un módulo Function (<code translate="no">openai_embedding</code>) que convierte el campo escalar <code translate="no">&quot;document&quot;</code> en incrustaciones, almacenando los vectores resultantes en el campo vectorial <code translate="no">&quot;dense&quot;</code> definido anteriormente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
@@ -362,7 +422,22 @@ schema.add_function(text_embedding_function)
 <div class="alert note">
 <p>Para colecciones con varios campos escalares que requieren conversión de texto a vector, añada funciones independientes al esquema de la colección, asegurándose de que cada función tiene un nombre y un valor <code translate="no">output_field_names</code> únicos.</p>
 </div>
-<h3 id="Step-3-Configure-index" class="common-anchor-header">Paso 3: Configurar el índice</h3><p>Tras definir el esquema con los campos necesarios y la función incorporada, configure el índice para su colección. Para simplificar este proceso, utilice <code translate="no">AUTOINDEX</code> como <code translate="no">index_type</code>, una opción que permite a Milvus elegir y configurar el tipo de índice más adecuado en función de la estructura de sus datos.</p>
+<h3 id="Step-3-Configure-index" class="common-anchor-header">Paso 3: Configurar el índice<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tras definir el esquema con los campos necesarios y la función incorporada, configure el índice para su colección. Para simplificar este proceso, utilice <code translate="no">AUTOINDEX</code> como <code translate="no">index_type</code>, una opción que permite a Milvus elegir y configurar el tipo de índice más adecuado en función de la estructura de sus datos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -373,7 +448,22 @@ index_params.add_index(
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Create-collection" class="common-anchor-header">Paso 4: Crear la colección</h3><p>Ahora cree la colección utilizando el esquema y los parámetros de índice definidos.</p>
+<h3 id="Step-4-Create-collection" class="common-anchor-header">Paso 4: Crear la colección<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ahora cree la colección utilizando el esquema y los parámetros de índice definidos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -381,7 +471,22 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">Paso 5: Insertar datos</h3><p>Una vez configurada la colección y el índice, está listo para insertar los datos sin procesar. En este proceso, sólo necesita proporcionar el texto sin procesar. El módulo Function que definimos anteriormente genera automáticamente el vector disperso correspondiente para cada entrada de texto.</p>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">Paso 5: Insertar datos<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Una vez configurada la colección y el índice, está listo para insertar los datos sin procesar. En este proceso, sólo necesita proporcionar el texto sin procesar. El módulo Function que definimos anteriormente genera automáticamente el vector disperso correspondiente para cada entrada de texto.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -389,7 +494,22 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Paso 6: Realizar la búsqueda de vectores</h3><p>Después de insertar los datos, realice una búsqueda semántica utilizando el texto en bruto de la consulta. Milvus convierte automáticamente su consulta en un vector de incrustación, recupera los documentos relevantes basándose en la similitud y devuelve los resultados más coincidentes.</p>
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Paso 6: Realizar la búsqueda de vectores<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Después de insertar los datos, realice una búsqueda semántica utilizando el texto en bruto de la consulta. Milvus convierte automáticamente su consulta en un vector de incrustación, recupera los documentos relevantes basándose en la similitud y devuelve los resultados más coincidentes.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -420,20 +540,80 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">¿Cuál es la diferencia entre configurar las credenciales en milvus.yaml o en variables de entorno?</h3><p>Ambos métodos funcionan, pero el uso de <code translate="no">milvus.yaml</code> es el enfoque recomendado, ya que proporciona una gestión centralizada de credenciales y una nomenclatura de credenciales coherente en todos los proveedores. Cuando se utilizan variables de entorno, los nombres de las variables varían en función del proveedor de servicios de incrustación, así que consulte la página dedicada de cada proveedor para comprender los nombres específicos de las variables de entorno necesarios (por ejemplo, <a href="/docs/es/openai.md">OpenAI</a> o <a href="/docs/es/azure-openai.md">Azure OpenAI</a>).</p>
-<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">¿Qué pasa si no especifico un parámetro de credencial en la definición de la función?</h3><p>Milvus sigue este orden de resolución de credenciales:</p>
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">¿Cuál es la diferencia entre configurar las credenciales en milvus.yaml o en variables de entorno?<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ambos métodos funcionan, pero el uso de <code translate="no">milvus.yaml</code> es el enfoque recomendado, ya que proporciona una gestión centralizada de credenciales y una nomenclatura de credenciales coherente en todos los proveedores. Cuando se utilizan variables de entorno, los nombres de las variables varían en función del proveedor de servicios de incrustación, así que consulte la página dedicada de cada proveedor para comprender los nombres específicos de las variables de entorno necesarios (por ejemplo, <a href="/docs/es/openai.md">OpenAI</a> o <a href="/docs/es/azure-openai.md">Azure OpenAI</a>).</p>
+<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">¿Qué pasa si no especifico un parámetro de credencial en la definición de la función?<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus sigue este orden de resolución de credenciales:</p>
 <ol>
 <li>Primero, busca la credencial por defecto configurada para ese proveedor en el archivo <code translate="no">milvus.yaml</code> </li>
 <li>Si no existe ninguna credencial por defecto en milvus.yaml, recurre a las variables de entorno (si están configuradas).</li>
 <li>Si no están configuradas ni las credenciales de <code translate="no">milvus.yaml</code> ni las variables de entorno, Milvus arrojará un error.</li>
 </ol>
-<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">¿Cómo puedo verificar que las incrustaciones se están generando correctamente?</h3><p>Puede comprobarlo</p>
+<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">¿Cómo puedo verificar que las incrustaciones se están generando correctamente?<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Puede comprobarlo</p>
 <ol>
 <li>Consultando su colección después de la inserción para ver si el campo vectorial contiene datos</li>
 <li>Comprobando que la longitud del campo vectorial coincide con las dimensiones esperadas</li>
 <li>Realizando una simple búsqueda de similitud para verificar que las incrustaciones producen resultados significativos.</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Al realizar una búsqueda por similitud, ¿puedo utilizar un vector de consulta en lugar de texto sin procesar?</h3><p>Sí, puede utilizar vectores de consulta precalculados en lugar de texto sin procesar para la búsqueda de similitudes. Aunque el módulo Function convierte automáticamente las consultas de texto sin procesar en incrustaciones, también puede proporcionar directamente datos vectoriales al parámetro de datos en su operación de búsqueda. Nota: El tamaño del vector de consulta proporcionado debe coincidir con el tamaño de las incrustaciones vectoriales generadas por el módulo Function.</p>
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Al realizar una búsqueda por similitud, ¿puedo utilizar un vector de consulta en lugar de texto sin procesar?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sí, puede utilizar vectores de consulta precalculados en lugar de texto sin procesar para la búsqueda de similitudes. Aunque el módulo Function convierte automáticamente las consultas de texto sin procesar en incrustaciones, también puede proporcionar directamente datos vectoriales al parámetro de datos en su operación de búsqueda. Nota: El tamaño del vector de consulta proporcionado debe coincidir con el tamaño de las incrustaciones vectoriales generadas por el módulo Function.</p>
 <p><strong>Ejemplo</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(

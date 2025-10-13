@@ -387,7 +387,7 @@ title: リリースノート
 <li>存在しないインデックスのインデックスメトリクスの報告を無視するようになりました<a href="https://github.com/milvus-io/milvus/pull/41296">。</a></li>
 <li>転置インデックスが存在する場合でもLIKEのスキャンモードを使用するように<a href="https://github.com/milvus-io/milvus/pull/41309">なりました</a>。</li>
 <li>LIKE式の性能を最適化しました<a href="https://github.com/milvus-io/milvus/pull/41222">(#41222</a>)。</li>
-<li>インデックスの書式を最適化し、ロードパフォーマンスを改善した<a href="https://github.com/milvus-io/milvus/pull/41041">(#41041</a>)</li>
+<li>インデックスの書式を最適化し、ロード性能を改善した<a href="https://github.com/milvus-io/milvus/pull/41041">(#41041</a>)</li>
 <li>RESTful: デフォルトのタイムアウトを設定可能にした<a href="https://github.com/milvus-io/milvus/pull/41225">(#41225</a>)。</li>
 <li>FP16 / NY関数におけるL2メトリック計算のSVEサポートを有効にした<a href="https://github.com/zilliztech/knowhere/pull/1134">(knowhere #1134</a>)</li>
 </ul>
@@ -663,7 +663,7 @@ title: リリースノート
     </button></h3><ul>
 <li>接続式のサブ式の順序を変更しました<a href="https://github.com/milvus-io/milvus/pull/40186">。</a></li>
 <li><code translate="no">interimindex</code> 、洗練されたモードをサポートするための設定オプションを追加しました<a href="https://github.com/milvus-io/milvus/pull/40429">。</a></li>
-<li>WA全体の計算に正しいカウンターメトリックを使用するようにした<a href="https://github.com/milvus-io/milvus/pull/40679">(#40679</a>)</li>
+<li>WA全体の計算に正しいカウンタメトリックを使用するようにした<a href="https://github.com/milvus-io/milvus/pull/40679">(#40679</a>)</li>
 <li>セグメントプルーン設定を更新可能にした(<a href="https://github.com/milvus-io/milvus/pull/40632">#40632</a>)。</li>
 <li>L0のブロックに基づくチャネルシールポリシーを追加<a href="https://github.com/milvus-io/milvus/pull/40535">(#40535</a>)</li>
 <li>タスクのメタデータをキーレベルでロックできるようにした(<a href="https://github.com/milvus-io/milvus/pull/40353">#40353</a>)</li>
@@ -702,7 +702,7 @@ title: リリースノート
 <li><code translate="no">jsonKey</code> statsのガベージクリーンアップロジックを修正し、JSON key statsフィルタを改善した<a href="https://github.com/milvus-io/milvus/pull/40039">(#40039</a>)。</li>
 <li>無効なJSONポインタエラーを捕捉するようにした<a href="https://github.com/milvus-io/milvus/pull/40626">(#40626</a>)</li>
 <li>ポリシーの一覧表示において、RBACスター権限を空で返すようにした<a href="https://github.com/milvus-io/milvus/pull/40557">(#40557</a>)</li>
-<li>QueryNodeのスキーマにフィールドが存在しない場合のパニックを回避した<a href="https://github.com/milvus-io/milvus/pull/40542">(#40542</a>)</li>
+<li>QueryNodeにおいて、スキーマにフィールドが存在しない場合のパニックを回避した<a href="https://github.com/milvus-io/milvus/pull/40542">(#40542</a>)</li>
 <li>検索/問い合わせにおける参照コレクションの問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/40550">(#40550</a>)。</li>
 <li>スパースベクタの空行を処理するようにした<a href="https://github.com/milvus-io/milvus/pull/40586">(#40586</a>)</li>
 <li>コレクション作成時の型/インデックスパラメータの重複チェックを追加<a href="https://github.com/milvus-io/milvus/pull/40465">(#40465</a>)</li>

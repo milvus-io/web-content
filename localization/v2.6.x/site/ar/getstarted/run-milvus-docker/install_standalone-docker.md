@@ -63,7 +63,7 @@ title: تشغيل Milvus في Docker (لينكس)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>ما الجديد في الإصدار 2.6.0:</strong></p>
+<p><strong>ما الجديد في الإصدار 2.6.3:</strong></p>
 <ul>
 <li><strong>عقدة التدفق</strong>: قدرات معالجة البيانات المحسّنة</li>
 <li><strong>نقار الخشب MQ</strong>: قائمة انتظار محسّنة للرسائل مع تقليل نفقات الصيانة، انظر <a href="/docs/ar/use-woodpecker.md">استخدام نقار الخشب</a> للحصول على التفاصيل</li>

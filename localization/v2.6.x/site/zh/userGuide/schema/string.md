@@ -1,7 +1,7 @@
 ---
 id: string.md
 title: 字符串字段
-summary: 在 Milvus 中，VARCHAR 是用于存储字符串数据的数据类型。定义 VARCHAR 字段时，有两个参数是必须的：
+summary: 在 Milvus 中，VARCHAR 是用于存储字符串数据的数据类型。
 ---
 <h1 id="String-Field" class="common-anchor-header">字符串字段<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,8 @@ summary: 在 Milvus 中，VARCHAR 是用于存储字符串数据的数据类型�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，<code translate="no">VARCHAR</code> 是用于存储字符串数据的数据类型。定义<code translate="no">VARCHAR</code> 字段时，有两个参数是必须的：</p>
+    </button></h1><p>在 Milvus 中，<code translate="no">VARCHAR</code> 是用于存储字符串数据的数据类型。</p>
+<p>定义<code translate="no">VARCHAR</code> 字段时，有两个参数是必须的：</p>
 <ul>
 <li><p>将<code translate="no">datatype</code> 设置为<code translate="no">DataType.VARCHAR</code> 。</p></li>
 <li><p>指定<code translate="no">max_length</code> ，它定义了<code translate="no">VARCHAR</code> 字段可存储的最大字节数。<code translate="no">max_length</code> 的有效范围为 1 至 65,535 字节。</p></li>
@@ -246,7 +247,10 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>索引有助于提高搜索和查询性能。在 Milvus 中，对于向量字段必须建立索引，但对于标量字段可选。</p>
-<p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 和标量字段<code translate="no">varchar_field1</code> 创建了索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。您还可以自定义每个字段的索引类型和参数。有关详情，请参阅<a href="/docs/zh/index-explained.md">索引说明</a>。</p>
+<p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 和标量字段<code translate="no">varchar_field1</code> 创建了索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。您还可以自定义每个字段的索引类型和参数。详情请参阅 "<a href="/docs/zh/index-explained.md">索引说明"</a>。</p>
+<div class="alert note">
+<p>您还可以建立<code translate="no">NGRAM</code> 索引，以加速对<code translate="no">VARCHAR</code> 字段的<code translate="no">LIKE</code> 过滤。有关详情，请参阅<a href="/docs/zh/ngram.md">NGRAM</a>。</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

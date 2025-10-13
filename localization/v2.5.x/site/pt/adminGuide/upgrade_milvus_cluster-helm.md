@@ -319,7 +319,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 </ol>
 <h4 id="2-Upgrade-Milvus-from-v21x-to-220" class="common-anchor-header">2. Atualizar o Milvus da v2.1.x para a 2.2.0</h4><p>Os comandos a seguir assumem que você atualizou o Milvus da v2.1.4 para a 2.2.0. Altere-os para as versões que atendam às suas necessidades.</p>
 <ol>
-<li><p>Especifique o nome da instância do Milvus, a versão de origem do Milvus e a versão de destino do Milvus.</p>
+<li><p>Especifique o nome da instância do Milvus, a versão do Milvus de origem e a versão do Milvus de destino.</p>
 <pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique o espaço de nomes com <code translate="no">-n</code> se o seu Milvus não estiver instalado no espaço de nomes K8s predefinido.</p>

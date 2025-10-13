@@ -262,7 +262,7 @@ summary: >-
     </button></h3><p>لإجراء مطابقة <strong>البادئة،</strong> حيث تبدأ السلسلة بنمط معين، يمكنك وضع النمط في البداية واستخدام <code translate="no">%</code> لمطابقة أي أحرف تليه. على سبيل المثال، للعثور على جميع المنتجات التي يبدأ اسمها <code translate="no">name</code> بـ "Prod":</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>سيطابق هذا أي منتج يبدأ اسمه بـ "Prod"، مثل "المنتج أ"، "المنتج ب"، إلخ.</p>
+<p>سوف يطابق هذا أي منتج يبدأ اسمه بـ "Prod"، مثل "المنتج أ"، "المنتج ب"، إلخ.</p>
 <h3 id="Suffix-Match-Ends-With" class="common-anchor-header">مطابقة لاحقة (تنتهي بـ)<button data-href="#Suffix-Match-Ends-With" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -563,7 +563,7 @@ summary: >-
   }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>مثال 1: استرداد الكيانات حيث البيانات الوصفية فارغة</strong></p>
+<p><strong>مثال 1: استرداد الكيانات التي تكون فيها البيانات الوصفية فارغة</strong></p>
 <p>للعثور على الكيانات التي يكون فيها الحقل <code translate="no">metadata</code> إما مفقودًا أو تم تعيينه صراحةً إلى لا شيء:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
 

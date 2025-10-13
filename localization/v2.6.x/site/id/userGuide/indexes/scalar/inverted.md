@@ -60,24 +60,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menggunakan <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> untuk mengimplementasikan pengindeksan terbalik. Inilah prosesnya:</p>
+    </button></h2><p><strong>Indeks INVERTED</strong> di Milvus memetakan setiap nilai bidang (istilah) yang unik ke himpunan ID dokumen di mana nilai tersebut muncul. Struktur ini memungkinkan pencarian cepat untuk bidang dengan nilai yang berulang atau nilai kategorikal.</p>
+<p>Seperti yang ditunjukkan pada diagram, prosesnya bekerja dalam dua langkah:</p>
 <ol>
-<li><p><strong>Tokenisasi</strong>: Milvus memecah data Anda menjadi istilah-istilah yang dapat dicari</p></li>
-<li><p><strong>Kamus istilah</strong>: Membuat daftar terurut dari semua istilah unik</p></li>
-<li><p><strong>Daftar terbalik</strong>: Memetakan setiap istilah ke dokumen yang mengandungnya</p></li>
+<li><p><strong>Pemetaan maju (ID → Istilah):</strong> Setiap ID dokumen menunjuk ke nilai bidang yang dikandungnya.</p></li>
+<li><p><strong>Pemetaan terbalik (Istilah → ID):</strong> Milvus mengumpulkan istilah-istilah unik dan membuat pemetaan terbalik dari setiap istilah ke semua ID yang mengandungnya.</p></li>
 </ol>
-<p>Sebagai contoh, berikut ini adalah dua kalimat:</p>
-<ul>
-<li><p><strong>"Milvus adalah basis data vektor asli awan"</strong></p></li>
-<li><p><strong>"Milvus sangat bagus dalam hal kinerja"</strong></p></li>
-</ul>
-<p>Indeks terbalik memetakan istilah seperti <strong>"Milvus"</strong> → <strong>[Dokumen 0, Dokumen 1]</strong>, <strong>"cloud-native"</strong> → <strong>[Dokumen 0]</strong>, dan <strong>"kinerja"</strong> → <strong>[Dokumen 1]</strong>.</p>
+<p>Sebagai contoh, nilai <strong>"elektronik"</strong> dipetakan ke ID <strong>1</strong> dan <strong>3</strong>, sementara <strong>"buku"</strong> dipetakan ke ID <strong>2</strong> dan <strong>5</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/inverted-index.png" alt="Inverted Index" class="doc-image" id="inverted-index" />
-   </span> <span class="img-wrapper"> <span>Indeks Terbalik</span> </span></p>
-<p>Ketika Anda memfilter berdasarkan istilah, Milvus akan mencari istilah tersebut di kamus dan langsung mengambil semua dokumen yang cocok.</p>
-<p>Indeks terbalik mendukung semua jenis bidang skalar: <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, dan <strong>ARRAY</strong>. Namun, parameter indeks untuk mengindeks bidang JSON sedikit berbeda dari bidang skalar biasa.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" />
+   </span> <span class="img-wrapper"> <span>Cara Kerja Indeks Terbalik</span> </span></p>
+<p>Ketika Anda memfilter nilai tertentu (misalnya, <code translate="no">category == &quot;electronics&quot;</code>), Milvus cukup mencari istilah tersebut di dalam indeks dan mengambil ID yang cocok secara langsung. Hal ini untuk menghindari pemindaian dataset secara keseluruhan dan memungkinkan pemfilteran yang cepat, terutama untuk nilai kategorikal atau nilai yang berulang.</p>
+<p>Indeks INVERTED mendukung semua jenis bidang skalar, seperti <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, dan <strong>ARRAY</strong>. Namun, parameter indeks untuk mengindeks bidang JSON sedikit berbeda dari bidang skalar biasa.</p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">Membuat indeks pada bidang non-JSON<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

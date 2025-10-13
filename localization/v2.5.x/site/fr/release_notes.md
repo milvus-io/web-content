@@ -118,7 +118,7 @@ title: Notes de mise à jour
 <li>Correction d'un bug avec <code translate="no">is null</code> pour l'index Marisa<a href="https://github.com/milvus-io/milvus/pull/42421">(#42421</a>).</li>
 <li>S'assurer que les tâches de statistiques ne sont déclenchées que pour les segments vidés<a href="https://github.com/milvus-io/milvus/pull/42425">(#42425</a>).</li>
 <li>Réinitialisation de l'état du compactage lorsque les statistiques des segments sont terminées<a href="https://github.com/milvus-io/milvus/pull/42005">(#42005</a>).</li>
-<li>Mise à jour de la version Tantivy pour corriger une panique du stemmer<a href="https://github.com/milvus-io/milvus/pull/42172">(#42172</a>).</li>
+<li>Mise à jour de la version Tantivy pour corriger une panique de stemmer<a href="https://github.com/milvus-io/milvus/pull/42172">(#42172</a>).</li>
 <li>Correction d'un problème où les champs de sortie des vecteurs ne pouvaient pas être récupérés lors de l'utilisation d'un nouvel index intermédiaire<a href="https://github.com/milvus-io/milvus/pull/42183">(#42183</a>).</li>
 <li>Eviter de dépendre de Knowhere pour le contrôle des threads lors de l'appel à l'itérateur Knowhere<a href="https://github.com/milvus-io/milvus/pull/42133">(#42133</a>).</li>
 <li>Correction d'un problème où des segments pouvaient être libérés prématurément lors d'une opération de balance channel<a href="https://github.com/milvus-io/milvus/pull/42043">(#42043</a>).</li>
@@ -340,7 +340,7 @@ title: Notes de mise à jour
 <li>Correction de l'API <code translate="no">AlterCollection</code> pour enregistrer correctement l'horodatage de la modification<a href="https://github.com/milvus-io/milvus/pull/41469">(#41469</a>).</li>
 <li>Correction d'une erreur de filtrage intermittente dans les statistiques JSON sous <code translate="no">ConjunctExpr</code> et amélioration de la logique de calcul du slot de tâche pour accélérer la construction des statistiques JSON<a href="https://github.com/milvus-io/milvus/pull/41458">(#41458</a>).</li>
 <li>Correction d'une fuite de l'oracle IDF dans le calcul des statistiques BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
-<li>Vérification que les sujets pré-créés sont vérifiés en premier lors de la validation du numéro de shard<a href="https://github.com/milvus-io/milvus/pull/41421">(#41421</a>).</li>
+<li>Vérification que les sujets pré-créés sont vérifiés en premier lors de la validation du numéro du shard<a href="https://github.com/milvus-io/milvus/pull/41421">(#41421</a>).</li>
 <li>Correction d'un rapport erroné de blocage survenant dans les tests unitaires<a href="https://github.com/milvus-io/milvus/pull/41377">(#41377</a>).</li>
 </ul>
 <h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
@@ -949,7 +949,7 @@ title: Notes de mise à jour
 <li>Prise en charge de la création de collections avec description<a href="https://github.com/milvus-io/milvus/pull/40028">(#40028</a>)</li>
 <li>[2.5] Exportation de l'intervalle de temps de requête d'index dans la configuration<a href="https://github.com/milvus-io/milvus/pull/40118">(#40118</a>)</li>
 <li>[2.5] Synchronisation de la valeur par défaut de proxy.maxTaskNum à 1024<a href="https://github.com/milvus-io/milvus/pull/40073">(#40073</a>)</li>
-<li>Diminution de la limite des instantanés de vidage de 10w à 1w<a href="https://github.com/milvus-io/milvus/pull/40102">(#40102</a>)</li>
+<li>Diminution de la limite d'instantanés de dump de 10w à 1w<a href="https://github.com/milvus-io/milvus/pull/40102">(#40102</a>)</li>
 <li>[2.5] Évite la copie d'octets de la chaîne à la tranche pour les pk batch existants<a href="https://github.com/milvus-io/milvus/pull/40097">(#40097</a>)</li>
 <li>Prise en charge du retour des propriétés configurables lors de la description de l'index<a href="https://github.com/milvus-io/milvus/pull/40043">(#40043</a>)</li>
 <li>Optimisation des performances des expressions pour certains points<a href="https://github.com/milvus-io/milvus/pull/39938">(#39938</a>)</li>
@@ -1355,7 +1355,7 @@ title: Notes de mise à jour
 <h4 id="Text-Match" class="common-anchor-header">Correspondance de texte</h4><p>Milvus 2.5 exploite les analyseurs et l'indexation de <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> pour le prétraitement du texte et la création d'index, prenant en charge la correspondance précise en langage naturel des données textuelles basées sur des termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
 <p>Pour plus de détails, reportez-vous à la section <a href="/docs/fr/v2.5.x/analyzer-overview.md">Vue d'ensemble de l'analyseur</a> et à la section <a href="/docs/fr/v2.5.x/keyword-match.md">Correspondance de texte</a>.</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">Index Bitmap</h4><p>Un nouvel index de données scalaires a été ajouté à la famille Milvus. L'index BitMap utilise un tableau de bits, d'une longueur égale au nombre de lignes, pour représenter l'existence de valeurs et accélérer les recherches.</p>
-<p>Les index Bitmap sont traditionnellement efficaces pour les champs à faible cardinalité, qui présentent un nombre modeste de valeurs distinctes - par exemple, une colonne contenant des informations sur le sexe avec seulement deux valeurs possibles : homme et femme.</p>
+<p>Les index Bitmap sont traditionnellement efficaces pour les champs à faible cardinalité, qui ont un nombre modeste de valeurs distinctes - par exemple, une colonne contenant des informations sur le sexe avec seulement deux valeurs possibles : homme et femme.</p>
 <p>Pour plus de détails, voir <a href="/docs/fr/v2.5.x/bitmap.md">Index bitmap</a>.</p>
 <h4 id="Nullable--Default-Value" class="common-anchor-header">Valeur nulle et valeur par défaut</h4><p>Milvus prend désormais en charge la définition de propriétés nullables et de valeurs par défaut pour les champs scalaires autres que le champ de clé primaire. Pour les champs scalaires marqués comme <code translate="no">nullable=True</code>, les utilisateurs peuvent omettre le champ lors de l'insertion de données ; le système le traitera comme une valeur nulle ou une valeur par défaut (si elle est définie) sans générer d'erreur.</p>
 <p>Les valeurs par défaut et les propriétés nullables offrent une plus grande flexibilité à Milvus. Les utilisateurs peuvent utiliser cette fonctionnalité pour les champs dont les valeurs sont incertaines lors de la création de collections. Elles simplifient également la migration des données d'autres systèmes de base de données vers Milvus, en permettant de traiter des ensembles de données contenant des valeurs nulles tout en préservant les paramètres de valeur par défaut d'origine.</p>

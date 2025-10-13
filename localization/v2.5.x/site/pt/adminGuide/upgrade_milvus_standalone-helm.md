@@ -130,7 +130,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
         ></path>
       </svg>
     </button></h2><p>Desde a versão 2.2.3 do Milvus, é possível configurar os coordenadores do Milvus para funcionarem em modo de espera ativa e ativar a funcionalidade de atualização contínua para os mesmos, de modo a que o Milvus possa responder aos pedidos recebidos durante as actualizações dos coordenadores. Nas versões anteriores, os coordenadores devem ser removidos e depois criados durante uma atualização, o que pode provocar um certo tempo de inatividade do serviço.</p>
-<p>As actualizações contínuas requerem que os coordenadores trabalhem em modo de espera ativa. Pode utilizar <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">o script</a> que fornecemos para configurar os coordenadores para trabalharem em modo de espera ativa e iniciar a atualização contínua.</p>
+<p>As actualizações contínuas exigem que os coordenadores trabalhem em modo de espera ativa. Pode utilizar <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">o script</a> que fornecemos para configurar os coordenadores para trabalharem em modo de espera ativa e iniciar a atualização contínua.</p>
 <p>Com base nos recursos de atualização contínua fornecidos pelo Kubernetes, o script acima impõe uma atualização ordenada das implantações de acordo com suas dependências. Além disso, o Milvus implementa um mecanismo para garantir que os seus componentes permanecem compatíveis com os que dependem deles durante a atualização, reduzindo significativamente o potencial tempo de inatividade do serviço.</p>
 <p>O script aplica-se apenas à atualização do Milvus instalado com o Helm. A tabela a seguir lista os sinalizadores de comando disponíveis nos scripts.</p>
 <table>
@@ -297,7 +297,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 </ol>
 <h4 id="2-Upgrade-Milvus-from-v21x-to-2513" class="common-anchor-header">2. Atualizar o Milvus da v2.1.x para a 2.5.13</h4><p>Os comandos a seguir assumem que você atualizou o Milvus da v2.1.4 para a 2.5.13. Altere-os para as versões que atendam às suas necessidades.</p>
 <ol>
-<li><p>Especifique o nome da instância do Milvus, a versão do Milvus de origem e a versão do Milvus de destino.</p>
+<li><p>Especifique o nome da instância do Milvus, a versão de origem do Milvus e a versão de destino do Milvus.</p>
 <pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.13
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique o espaço de nomes com <code translate="no">-n</code> se o seu Milvus não estiver instalado no espaço de nomes K8s predefinido.</p>
@@ -306,7 +306,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><p>Especifique o caminho da raiz com <code translate="no">-r</code> se o seu Milvus estiver instalado com o <code translate="no">rootpath</code> personalizado.</p>
 <pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">13</span> -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Especifique a tag de imagem com <code translate="no">-w</code> se o seu Milvus estiver instalado com um <code translate="no">image</code> personalizado.</p>
+<li><p>Especifique a etiqueta de imagem com <code translate="no">-w</code> se o seu Milvus estiver instalado com um <code translate="no">image</code> personalizado.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.13 -r by-dev -w milvusdb/milvus:v2.5.13
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Defina <code translate="no">-d true</code> se pretender remover automaticamente o pod de migração após a conclusão da migração.</p>

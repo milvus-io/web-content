@@ -66,7 +66,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>Desde a versão 2.2.3 do Milvus, é possível configurar os coordenadores do Milvus para funcionarem em modo de espera ativa e ativar a funcionalidade de atualização contínua para os mesmos, de modo a que o Milvus possa responder aos pedidos recebidos durante as actualizações do coordenador. Nas versões anteriores, os coordenadores devem ser removidos e depois criados durante uma atualização, o que pode provocar um certo tempo de inatividade do serviço.</p>
-<p>Com base nas capacidades de atualização contínua fornecidas pela Kubernetes, o operador do Milvus impõe uma atualização ordenada das implementações de acordo com as suas dependências. Além disso, o Milvus implementa um mecanismo para garantir que os seus componentes permanecem compatíveis com os que dependem deles durante a atualização, reduzindo significativamente o potencial tempo de inatividade do serviço.</p>
+<p>Com base nas capacidades de atualização contínua fornecidas pela Kubernetes, o operador do Milvus impõe uma atualização ordenada das implementações de acordo com as suas dependências. Além disso, o Milvus implementa um mecanismo para garantir que os seus componentes permanecem compatíveis com os que deles dependem durante a atualização, reduzindo significativamente o potencial tempo de inatividade do serviço.</p>
 <p>A funcionalidade de atualização contínua está desactivada por defeito. É necessário activá-la explicitamente através de um ficheiro de configuração.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -79,7 +79,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.13</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste ficheiro de configuração acima, defina <code translate="no">spec.components.enableRollingUpdate</code> para <code translate="no">true</code> e defina <code translate="no">spec.components.image</code> para a versão desejada do Milvus.</p>
-<p>Por predefinição, o Milvus efectua a atualização contínua dos coordenadores de forma ordenada, substituindo as imagens do pod do coordenador uma após a outra. Para reduzir o tempo de atualização, considere definir <code translate="no">spec.components.imageUpdateMode</code> como <code translate="no">all</code> para que o Milvus substitua todas as imagens de pod ao mesmo tempo.</p>
+<p>Por predefinição, o Milvus efectua uma atualização contínua para os coordenadores de forma ordenada, substituindo as imagens do pod do coordenador uma após a outra. Para reduzir o tempo de atualização, considere definir <code translate="no">spec.components.imageUpdateMode</code> para <code translate="no">all</code> para que o Milvus substitua todas as imagens de pod ao mesmo tempo.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -119,7 +119,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em casos normais, pode simplesmente atualizar o seu Milvus para a versão mais recente alterando a sua imagem. No entanto, tenha em atenção que haverá um certo tempo de inatividade ao atualizar o Milvus desta forma.</p>
+    </button></h2><p>Em casos normais, pode simplesmente atualizar o seu Milvus para a versão mais recente, alterando a sua imagem. No entanto, tenha em atenção que haverá um certo tempo de inatividade ao atualizar o Milvus desta forma.</p>
 <p>Crie um ficheiro de configuração da seguinte forma e guarde-o como <strong>milvusupgrade.yaml</strong>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -148,7 +148,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Desde o Milvus 2.2.0, os metadados são incompatíveis com os das versões anteriores. Os seguintes exemplos pressupõem uma atualização do Milvus 2.1.4 para o Milvus 2.5.13.</p>
+    </button></h2><p>Desde o Milvus 2.2.0, os metadados são incompatíveis com os das versões anteriores. Os seguintes exemplos assumem uma atualização do Milvus 2.1.4 para o Milvus 2.5.13.</p>
 <h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Criar um ficheiro <code translate="no">.yaml</code> para migração de metadados<button data-href="#1-Create-a-yaml-file-for-metadata-migration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

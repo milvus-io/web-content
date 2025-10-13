@@ -2,7 +2,7 @@
 id: basic-operators.md
 title: Grundlegende Operatoren
 summary: >-
-  Milvus bietet eine Vielzahl grundlegender Operatoren, mit denen Sie Daten
+  Milvus bietet eine Vielzahl von grundlegenden Operatoren, mit denen Sie Daten
   effizient filtern und abfragen können. Mit diesen Operatoren können Sie Ihre
   Suchbedingungen auf der Grundlage von skalaren Feldern, numerischen
   Berechnungen, logischen Bedingungen und mehr verfeinern. Die Kenntnis der

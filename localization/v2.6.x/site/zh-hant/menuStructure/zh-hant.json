@@ -1041,7 +1041,7 @@
                 "children": []
               },
               {
-                "label": "航程 AI",
+                "label": "Voyage AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1361,7 +1361,7 @@
             "children": []
           },
           {
-            "label": "在飛行中",
+            "label": "飛行中",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
@@ -2553,6 +2553,12 @@
             "id": "NLWeb_with_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "LangExtract",
+            "id": "langextract_milvus_demo.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2683,6 +2689,12 @@
         "label": "使用 Milvus 進行文字轉影像搜尋",
         "id": "text_image_search.md",
         "order": 16,
+        "children": []
+      },
+      {
+        "label": "使用大型語言模型產生 Milvus 查詢篩選表達式",
+        "id": "generating_milvus_query_filter_expressions.md",
+        "order": 17,
         "children": []
       },
       {

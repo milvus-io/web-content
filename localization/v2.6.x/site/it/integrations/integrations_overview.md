@@ -41,7 +41,7 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/use_milvus_in_docsgpt.md">Utilizzare Milvus in DocsGPT</a></td><td>Ochestrazione</td><td>DocsGPT, Milvus</td></tr>
 <tr><td><a href="/docs/it/use_milvus_with_sambanova.md">Utilizzare Milvus con SambaNova</a></td><td>Orchestrazione</td><td>Milvus, SambaNova</td></tr>
 <tr><td><a href="/docs/it/milvus_rag_with_dynamiq.md">Come iniziare con Dynamiq e Milvus</a></td><td>Orchestrazione</td><td>Milvus, Dynamiq</td></tr>
-<tr><td><a href="/docs/it/llama_stack_with_milvus.md">Creare RAG con Llama Stack con Milvus</a></td><td>Orchestrazione</td><td>Milvus, Llama Stack</td></tr>
+<tr><td><a href="/docs/it/llama_stack_with_milvus.md">Costruire RAG con Llama Stack con Milvus</a></td><td>Orchestrazione</td><td>Milvus, Llama Stack</td></tr>
 <tr><td><a href="/docs/it/integrate_with_memgpt.md">Agente Chatbot con Milvus e MemGPT</a></td><td>Agente</td><td>Milvus, MemGPT</td></tr>
 <tr><td><a href="/docs/it/llama_agents_metadata.md">Sistemi multi-agente con Mistral AI, Milvus e Llama-agents</a></td><td>Agente</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
 <tr><td><a href="/docs/it/quickstart_mem0_with_milvus.md">Come iniziare con Mem0 e Milvus</a></td><td>Agenti</td><td>Mem0, Milvus</td></tr>
@@ -92,5 +92,6 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/milvus_and_n8n.md">Come iniziare con Milvus e n8n</a></td><td>Orchestrazione</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/it/use_milvus_in_anythingllm.md">Utilizzare Milvus in AnythingLLM</a></td><td>Orchestrazione</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/it/NLWeb_with_milvus.md">Utilizzo di NLWeb con Milvus</a></td><td>Fonti di dati</td><td>Milvus, NLWeb</td></tr>
+<tr><td><a href="/docs/it/langextract_milvus_demo.md">Integrazione LangExtract + Milvus</a></td><td>Fonti di dati</td><td>Milvus, LangExtract</td></tr>
 </tbody>
 </table>

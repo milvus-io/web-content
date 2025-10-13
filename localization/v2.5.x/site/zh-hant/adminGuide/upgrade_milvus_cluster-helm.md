@@ -44,7 +44,7 @@ title: 使用 Helm 圖表升級 Milvus 集群
 <li>Kubernetes 版本 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>自 Milvus Helm 圖表版本 4.2.21 起，我們引入 pulsar-v3.x 圖表作為相依性。為了向下相容性，請升級您的 helm 至 v3.14 或更高版本，並確保在使用<code translate="no">helm upgrade</code> 時加入<code translate="no">--reset-then-reuse-values</code> 選項。</p>
+<p>自 Milvus Helm 圖表版本 4.2.21 起，我們引入 pulsar-v3.x 圖表作為依賴。為了向下相容性，請升級您的 helm 至 v3.14 或更高版本，並確保在使用<code translate="no">helm upgrade</code> 時加入<code translate="no">--reset-then-reuse-values</code> 選項。</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">檢查 Milvus Helm 海圖<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"

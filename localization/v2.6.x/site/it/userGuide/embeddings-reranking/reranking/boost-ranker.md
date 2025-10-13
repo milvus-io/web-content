@@ -502,7 +502,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">params.filter</code></p></td>
      <td><p>No</p></td>
-     <td><p>Specifica l'espressione di filtro che verrà usata per abbinare le entità tra i risultati della ricerca. Può essere una qualsiasi espressione di filtro di base valida, come indicato in <a href="/docs/it/boolean.md">Filtraggio spiegato</a>.</p><p><strong>Nota</strong>: utilizzare solo operatori di base, come <code translate="no">==</code>, <code translate="no">&gt;</code>, o <code translate="no">&lt;</code>. L'uso di operatori avanzati, come <code translate="no">text_match</code> o <code translate="no">phrase_match</code>, peggiora le prestazioni della ricerca.</p></td>
+     <td><p>Specifica l'espressione di filtro che verrà usata per abbinare le entità tra i risultati della ricerca. Può essere una qualsiasi espressione di filtro di base valida menzionata in <a href="/docs/it/boolean.md">Spiegazioni sui filtri</a>.</p><p><strong>Nota</strong>: utilizzare solo operatori di base, come <code translate="no">==</code>, <code translate="no">&gt;</code>, o <code translate="no">&lt;</code>. L'uso di operatori avanzati, come <code translate="no">text_match</code> o <code translate="no">phrase_match</code>, peggiora le prestazioni della ricerca.</p></td>
      <td><p><code translate="no">"doctype == 'abstract'"</code></p></td>
    </tr>
    <tr>
@@ -527,7 +527,7 @@ ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una volta che la funzione Boost Ranker è pronta, si può fare riferimento ad essa in una richiesta di ricerca. L'esempio seguente presuppone che sia già stata creata una raccolta con i seguenti campi: <strong>id</strong>, <strong>vector</strong> e <strong>doctype</strong>.</p>
+    </button></h3><p>Una volta che la funzione Boost Ranker è pronta, si può fare riferimento ad essa in una richiesta di ricerca. L'esempio seguente presuppone che sia già stata creata una collezione con i seguenti campi: <strong>id</strong>, <strong>vector</strong> e <strong>doctype</strong>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Connect to the Milvus server</span>

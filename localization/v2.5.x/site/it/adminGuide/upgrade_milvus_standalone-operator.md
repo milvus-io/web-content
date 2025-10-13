@@ -46,7 +46,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <button class="copy-code-btn"></button></code></pre>
 <p>Una volta aggiornato l'operatore Milvus alla versione più recente, avete le seguenti possibilità:</p>
 <ul>
-<li>Per aggiornare Milvus dalla v2.2.3 o da release successive alla 2.5.13, è possibile <a href="#Conduct-a-rolling-upgrade">eseguire un aggiornamento continuo</a>.</li>
+<li>Per aggiornare Milvus dalla versione 2.2.3 o successive alla 2.5.13, è possibile <a href="#Conduct-a-rolling-upgrade">eseguire un aggiornamento continuo</a>.</li>
 <li>Per aggiornare Milvus da una release minore precedente alla v2.2.3 alla 2.5.13, si consiglia di <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus cambiando la versione dell'immagine</a>.</li>
 <li>Per aggiornare Milvus dalla v2.1.x alla 2.5.13, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a> prima dell'aggiornamento effettivo.</li>
 </ul>
@@ -67,7 +67,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
       </svg>
     </button></h2><p>A partire da Milvus 2.2.3, è possibile configurare i coordinatori di Milvus per lavorare in modalità active-standby e abilitare la funzione di aggiornamento continuo per loro, in modo che Milvus possa rispondere alle richieste in arrivo durante gli aggiornamenti dei coordinatori. Nelle versioni precedenti, i coordinatori dovevano essere rimossi e poi creati durante un aggiornamento, il che poteva comportare alcuni tempi di inattività del servizio.</p>
 <p>Basandosi sulle funzionalità di aggiornamento continuo fornite da Kubernetes, il gestore di Milvus impone un aggiornamento ordinato delle distribuzioni in base alle loro dipendenze. Inoltre, Milvus implementa un meccanismo per garantire che i suoi componenti rimangano compatibili con quelli che dipendono da loro durante l'aggiornamento, riducendo in modo significativo il potenziale downtime del servizio.</p>
-<p>La funzione di aggiornamento continuo è disattivata per impostazione predefinita. È necessario abilitarla esplicitamente attraverso un file di configurazione.</p>
+<p>La funzione di aggiornamento continuo è disabilitata per impostazione predefinita. È necessario abilitarla esplicitamente attraverso un file di configurazione.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

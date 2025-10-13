@@ -241,7 +241,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p><a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a></p></td>
      <td><p>スペースで区切られたほとんどの言語（英語、フランス語、ドイツ語、スペイン語など）</p></td>
      <td><ul><li><p>トーケナイザー<code translate="no">standard</code></p></li><li><p>フィルタ：<code translate="no">lowercase</code></p></li></ul></td>
-     <td><p>初期テキスト処理用の汎用解析器。モノリンガルのシナリオでは、言語固有のアナライザ (<code translate="no">english</code> など) を使用すると、パフォーマンスが向上します。</p></td>
+     <td><p>初期テキスト処理用の汎用解析器。単言語シナリオでは、言語固有のアナライザ (<code translate="no">english</code> など) の方が優れたパフォーマンスを発揮します。</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ja/english-analyzer.md"><code translate="no">english</code></a></p></td>
@@ -287,7 +287,7 @@ schema.add_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>詳細な使用法については、<a href="/docs/ja/full-text-search.md">全文検索</a>、<a href="/docs/ja/keyword-match.md">テキスト一致</a>、<a href="/docs/ja/phrase-match.md">フレーズ一致を</a>参照してください。</p>
+<p>詳細な使用方法については、<a href="/docs/ja/full-text-search.md">全文検索</a>、<a href="/docs/ja/keyword-match.md">テキスト一致</a>、<a href="/docs/ja/phrase-match.md">フレーズ一致を</a>参照してください。</p>
 </div>
 <h2 id="Path-B-Create-a-custom-analyzer" class="common-anchor-header">パスB：カスタム・アナライザーを作成する<button data-href="#Path-B-Create-a-custom-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -585,7 +585,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>チェックすべき一般的な問題</p>
 <ul>
-<li><p><strong>過剰なトークン化</strong>：専門用語の間違った分割</p></li>
+<li><p><strong>過剰なトークン化</strong>：専門用語が誤って分割されている</p></li>
 <li><p><strong>トークン不足</strong>：フレーズが正しく分割されていない</p></li>
 <li><p><strong>トークンの欠落</strong>：重要な用語が除外される</p></li>
 </ul>

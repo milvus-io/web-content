@@ -2,8 +2,8 @@
 id: string.md
 title: Campo String
 summary: >-
-  No Milvus, VARCHAR é o tipo de dados utilizado para armazenar dados de cadeia.
-  Quando se define um campo VARCHAR, dois parâmetros são obrigatórios:
+  Em Milvus, VARCHAR é o tipo de dados utilizado para armazenar dados de cadeia
+  de caracteres.
 ---
 <h1 id="String-Field" class="common-anchor-header">Campo String<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>No Milvus, <code translate="no">VARCHAR</code> é o tipo de dados utilizado para armazenar dados de cadeia. Quando se define um campo <code translate="no">VARCHAR</code>, são obrigatórios dois parâmetros:</p>
+    </button></h1><p>No Milvus, <code translate="no">VARCHAR</code> é o tipo de dados utilizado para armazenar dados de cadeia.</p>
+<p>Quando define um campo <code translate="no">VARCHAR</code>, são obrigatórios dois parâmetros:</p>
 <ul>
 <li><p>Definir o <code translate="no">datatype</code> como <code translate="no">DataType.VARCHAR</code>.</p></li>
 <li><p>Especifique o parâmetro <code translate="no">max_length</code>, que define o número máximo de bytes que o campo <code translate="no">VARCHAR</code> pode armazenar. O intervalo válido para <code translate="no">max_length</code> é de 1 a 65.535.</p></li>
@@ -248,7 +249,10 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>A indexação ajuda a melhorar o desempenho da pesquisa e da consulta. No Milvus, a indexação é obrigatória para campos vetoriais, mas opcional para campos escalares.</p>
-<p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo escalar <code translate="no">varchar_field1</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para obter detalhes, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
+<p>O exemplo seguinte cria índices no campo vetorial <code translate="no">embedding</code> e no campo escalar <code translate="no">varchar_field1</code>, ambos utilizando o tipo de índice <code translate="no">AUTOINDEX</code>. Com este tipo, o Milvus seleciona automaticamente o índice mais adequado com base no tipo de dados. Também pode personalizar o tipo de índice e os parâmetros para cada campo. Para mais detalhes, consulte <a href="/docs/pt/index-explained.md">Índice Explicado</a>.</p>
+<div class="alert note">
+<p>Pode também construir um índice <code translate="no">NGRAM</code> para acelerar a filtragem <code translate="no">LIKE</code> nos campos <code translate="no">VARCHAR</code>. Para obter detalhes, consulte <a href="/docs/pt/ngram.md">NGRAM</a>.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

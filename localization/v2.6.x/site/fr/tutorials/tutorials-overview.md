@@ -50,5 +50,6 @@ title: Vue d'ensemble des didacticiels
 <tr><td><a href="/docs/fr/dna_sequence_classification.md">Classification de l'ADN</a></td><td>Classification</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/text_search_engine.md">Moteur de recherche textuelle</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/image_deduplication_system.md">Déduplication d'images</a></td><td>Déduplication</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/generating_milvus_query_filter_expressions.md">Génération d'expressions de filtre de requête Milvus avec de grands modèles de langage</a></td><td>Filtrage des métadonnées</td><td>recherche vectorielle</td></tr>
 </tbody>
 </table>

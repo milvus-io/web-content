@@ -46,8 +46,8 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <button class="copy-code-btn"></button></code></pre>
 <p>بمجرد أن تقوم بترقية مشغل ميلفوس الخاص بك إلى أحدث إصدار، يكون لديك الخيارات التالية:</p>
 <ul>
-<li>لترقية ميلفوس من الإصدار 2.2.3 أو الإصدارات الأحدث إلى الإصدار 2.5.13، يمكنك <a href="#Conduct-a-rolling-upgrade">إجراء ترقية متجددة</a>.</li>
-<li>لترقية Milvus من إصدار ثانوي قبل الإصدار 2.2.3 إلى 2.5.13، يُنصح بترقية Milvus <a href="#Upgrade-Milvus-by-changing-its-image">عن طريق تغيير إصدار الصورة الخاص به</a>.</li>
+<li>لترقية Milvus من الإصدار 2.2.3 أو الإصدارات الأحدث إلى الإصدار 2.5.13، يمكنك <a href="#Conduct-a-rolling-upgrade">إجراء ترقية متجددة</a>.</li>
+<li>لترقية ميلفوس من إصدار ثانوي قبل الإصدار 2.2.3 إلى 2.5.13، يُنصح بترقية ميلفوس <a href="#Upgrade-Milvus-by-changing-its-image">عن طريق تغيير إصدار الصورة الخاص به</a>.</li>
 <li>لترقية Milvus من الإصدار 2.1.x إلى الإصدار 2.5.13، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل الترقية الفعلية.</li>
 </ul>
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">إجراء ترقية متجددة<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -66,7 +66,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>منذ الإصدار Milvus 2.2.3، يمكنك تكوين منسقي Milvus للعمل في وضع الاستعداد النشط وتمكين ميزة الترقية المتجددة لهم، بحيث يمكن لـ Milvus الاستجابة للطلبات الواردة أثناء ترقيات المنسق. في الإصدارات السابقة، يجب إزالة المنسقين ثم إنشاؤهم أثناء الترقية، مما قد يؤدي إلى تعطل معين للخدمة.</p>
-<p>استنادًا إلى إمكانات التحديث المتجدد التي توفرها Kubernetes، يفرض مشغل Milvus تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
+<p>استنادًا إلى إمكانيات التحديث المتجدد التي توفرها Kubernetes، يفرض مشغل Milvus تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
 <p>يتم تعطيل ميزة الترقية المتجددة بشكل افتراضي. تحتاج إلى تمكينها بشكل صريح من خلال ملف تهيئة.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

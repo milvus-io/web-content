@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>資訊檢索系統（也稱為搜尋引擎）對於各種人工智慧（AI）應用而言是不可或缺的，例如檢索增強世代（Retrieval-augmented generation，RAG）、視覺搜尋和產品推薦。這些系統的核心是精心設計的資料模型，用以組織、索引和擷取資訊。</p>
+    </button></h1><p>資訊檢索系統（也稱為搜尋引擎）對於各種 AI 應用程式而言是不可或缺的，例如檢索增量生成 (RAG)、視覺搜尋和產品推薦。這些系統的核心是精心設計的資料模型，用以組織、索引和擷取資訊。</p>
 <p>Milvus 可讓您透過集合模式指定搜尋資料模型，組織非結構化資料、其密集或稀疏向量表示法，以及結構化的元資料。無論您處理的是文字、影像或其他資料類型，這份實務指南將協助您了解並應用關鍵的模式概念，以便在實務中設計搜尋資料模型。</p>
 <p>
   
@@ -42,7 +42,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>搜尋系統的資料模型設計包括分析業務需求，並將資訊抽象為模式表達的資料模型。定義良好的模式對於使資料模型符合業務目標、確保資料一致性和服務品質非常重要。  此外，選擇適當的資料類型和索引對於經濟地達成業務目標也很重要。</p>
-<h3 id="Analyzing-Business-Needs" class="common-anchor-header">分析業務需求</h3><p>要有效解決業務需求，首先要分析使用者將執行的查詢類型，並決定最適合的搜尋方法。</p>
+<h3 id="Analyzing-Business-Needs" class="common-anchor-header">分析業務需求<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要有效解決業務需求，首先要分析使用者將執行的查詢類型，並決定最適合的搜尋方法。</p>
 <ul>
 <li><p><strong>使用者查詢：</strong>確定使用者預期執行的查詢類型。這有助於確保您的模式支援真實世界的使用個案，並最佳化搜尋效能。這些可能包括</p>
 <ul>
@@ -50,7 +65,7 @@ summary: >-
 <li><p>尋找與參考影像相似或符合文字描述的影像</p></li>
 <li><p>依據名稱、類別或品牌等屬性搜尋產品</p></li>
 <li><p>根據結構化的元資料（例如出版日期、標籤、評分）過濾項目</p></li>
-<li><p>在混合查詢中結合多種條件（例如，在視覺搜尋中，同時考慮圖片及其標題的語意相似性）</p></li>
+<li><p>在混合查詢中結合多重條件（例如，在視覺搜尋中，同時考慮圖片及其標題的語意相似性）</p></li>
 </ul></li>
 <li><p><strong>搜尋方法：</strong>根據使用者將執行的查詢類型，選擇適當的搜尋技術。不同的方法可達到不同的目的，而且通常可以結合使用，以獲得更強大的結果：</p>
 <ul>
@@ -59,9 +74,24 @@ summary: >-
 <li><p><strong>元資料篩選</strong>：在向量搜尋之上，應用日期範圍、類別或標籤等限制條件。</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">將業務需求轉換為搜尋資料模型</h3><p>下一步是將您的業務需求轉換成具體的資料模型，方法是辨識資訊的核心元件及其搜尋方法：</p>
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">將業務需求轉換為搜尋資料模型<button data-href="#Translates-Business-Requirements-into-a-Search-Data-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下一步是將您的業務需求轉換成具體的資料模型，方法是辨識資訊的核心元件及其搜尋方法：</p>
 <ul>
-<li><p>定義您需要儲存的資料，例如原始內容 (文字、影像、音訊)、相關的元資料 (標題、標籤、作者)，以及情境屬性 (時間戳記、使用者行為等)</p></li>
+<li><p>定義您需要儲存的資料，例如原始內容 (文字、影像、音訊)、相關的元資料 (標題、標籤、作者)，以及上下文屬性 (時間戳記、使用者行為等)</p></li>
 <li><p>為每個元素決定適當的資料類型和格式。例如</p>
 <ul>
 <li><p>文字描述 → 字串</p></li>
@@ -89,9 +119,39 @@ summary: >-
       </svg>
     </button></h2><p>在 Milvus 中，資料模型透過集合模式來表達。在集合模式中設計正確的欄位是實現有效檢索的關鍵。每個欄位定義了儲存於資料集中的特定資料類型，並在搜尋過程中扮演獨特的角色。在高層次上，Milvus 支援兩種主要的欄位類型：<strong>向量欄位</strong>和<strong>標量欄位</strong>。</p>
 <p>現在，您可以將資料模型映射為欄位模式，包括向量和任何輔助標量欄位。確保每個欄位都與資料模型的屬性相關，尤其要注意向量類型（dense 或 spase）及其維度。</p>
-<h3 id="Vector-Field" class="common-anchor-header">向量欄位</h3><p>向量欄位會儲存文字、影像和音訊等非結構化資料類型的嵌入。這些嵌入可能是密集、稀疏或二進位，視資料類型和使用的檢索方法而定。通常，密集向量用於語意搜尋，而稀疏向量則較適合全文或詞彙比對。當儲存和計算資源有限時，二進位向量就很有用。一個資料集可能包含數個向量欄位，以啟用多模式或混合式的檢索策略。有關此主題的詳細指南，請參考<a href="/docs/zh-hant/multi-vector-search.md">多向量混合檢索</a>。</p>
+<h3 id="Vector-Field" class="common-anchor-header">向量欄位<button data-href="#Vector-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>向量欄位會儲存文字、影像和音訊等非結構化資料類型的嵌入。這些嵌入可能是密集、稀疏或二進位，視資料類型和使用的檢索方法而定。通常，密集向量用於語意搜尋，而稀疏向量則較適合全文或詞彙比對。當儲存和計算資源有限時，二進位向量就很有用。一個資料集可能包含數個向量欄位，以啟用多模式或混合式的檢索策略。有關此主題的詳細指南，請參考<a href="/docs/zh-hant/multi-vector-search.md">多向量混合檢索</a>。</p>
 <p>Milvus 支援向量資料類型：<code translate="no">FLOAT_VECTOR</code> 代表<a href="/docs/zh-hant/dense-vector.md">密集向量</a>，<code translate="no">SPARSE_FLOAT_VECTOR</code> 代表<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>，<code translate="no">BINARY_VECTOR</code> 代表<a href="/docs/zh-hant/binary-vector.md">二進位向量</a></p>
-<h3 id="Scalar-Field" class="common-anchor-header">標量欄位</h3><p>標量欄位儲存原始、結構化的值，通常稱為元資料，例如數字、字串或日期。這些值可以與向量搜尋結果一起傳回，對於篩選和排序非常重要。它們允許您根據特定屬性縮小搜尋結果的範圍，例如將文件限制在特定類別或定義的時間範圍內。</p>
+<h3 id="Scalar-Field" class="common-anchor-header">標量欄位<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>標量欄位儲存原始、結構化的值，通常稱為元資料，例如數字、字串或日期。這些值可以與向量搜尋結果一起傳回，對於篩選和排序非常重要。它們允許您根據特定屬性縮小搜尋結果的範圍，例如將文件限制在特定類別或定義的時間範圍內。</p>
 <p>Milvus 支援標量類型，例如<code translate="no">BOOL</code>,<code translate="no">INT8/16/32/64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>,<code translate="no">VARCHAR</code>,<code translate="no">JSON</code>, 和<code translate="no">ARRAY</code> ，用於儲存和過濾非向量資料。這些類型增強了搜尋作業的精確度與客製化。</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">在模式設計中利用進階功能<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,13 +169,73 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>設計模式時，僅使用支援的資料類型將資料映射到欄位是不夠的。必須徹底瞭解欄位之間的關係以及可用於配置的策略。在設計階段牢記關鍵功能，可確保模式不僅能滿足當前的資料處理需求，還能擴充並適應未來的需求。通過仔細整合這些功能，您可以建立一個強大的數據架構，最大限度地發揮 Milvus 的功能，並支持您更廣泛的數據策略和目標。以下是建立集合模式的主要功能概述：</p>
-<h3 id="Primary-Key" class="common-anchor-header">主鍵</h3><p>主鍵字段是模式的基本組成部分，因為它唯一識別集合中的每個實體。定義主索引鍵是必須的。它必須是整數或字串類型的標量欄位，並標示為<code translate="no">is_primary=True</code> 。您可以選擇為主索引鍵啟用<code translate="no">auto_id</code> ，主索引鍵會自動指派整數，並隨著更多資料被擷取到資料集中而單一成長。</p>
+<h3 id="Primary-Key" class="common-anchor-header">主鍵<button data-href="#Primary-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>主鍵字段是模式的基本組成部分，因為它唯一識別集合中的每個實體。定義主索引鍵是必須的。它必須是整數或字串類型的標量欄位，並標示為<code translate="no">is_primary=True</code> 。您可以選擇為主索引鍵啟用<code translate="no">auto_id</code> ，主索引鍵會自動指派整數，並隨著更多資料被擷取到資料集中而單一成長。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/primary-field.md">Primary Field &amp; AutoID</a>。</p>
-<h3 id="Partitioning" class="common-anchor-header">分割</h3><p>為了加快搜尋速度，您可以選擇開啟分割。透過指定特定的標量欄位進行分割，並在搜尋過程中根據此欄位指定篩選條件，可有效地將搜尋範圍限制為僅相關的分割。此方法可縮小搜尋範圍，大幅提升檢索作業的效率。</p>
+<h3 id="Partitioning" class="common-anchor-header">分割<button data-href="#Partitioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>為了加快搜尋速度，您可以選擇開啟分割。透過指定特定的標量欄位進行分割，並在搜尋過程中根據此欄位指定篩選條件，可有效地將搜尋範圍限制為僅相關的分割。此方法可縮小搜尋範圍，大幅提升檢索作業的效率。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割鍵</a>。</p>
-<h3 id="Analyzer" class="common-anchor-header">分析器</h3><p>分析器是處理和轉換文字資料的重要工具。它的主要功能是將原始文字轉換為標記，並將它們結構化，以便編制索引和進行檢索。分析器會將字串標記化、刪除停頓字詞，並將個別字詞轉化成標記。</p>
+<h3 id="Analyzer" class="common-anchor-header">分析器<button data-href="#Analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>分析器是處理和轉換文字資料的重要工具。它的主要功能是將原始文字轉換為標記，並將它們結構化，以便編制索引和進行檢索。分析器會將字串標記化、刪除停頓字詞，並將個別字詞轉化成標記。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/analyzer-overview.md">Analyzer 概觀</a>。</p>
-<h3 id="Function" class="common-anchor-header">功能</h3><p>Milvus 允許您定義內建函式作為模式的一部分，以自動衍生某些欄位。例如，您可以新增內建 BM25 函式，從<code translate="no">VARCHAR</code> 欄位產生稀疏向量，以支援全文檢索。這些由函式衍生的欄位可簡化預先處理程序，並確保資料集維持自足且可隨時查詢。</p>
+<h3 id="Function" class="common-anchor-header">功能<button data-href="#Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 允許您定義內建函式作為模式的一部分，以自動衍生某些欄位。例如，您可以新增內建 BM25 函式，從<code translate="no">VARCHAR</code> 欄位產生稀疏向量，以支援全文檢索。這些由函式衍生的欄位可簡化預先處理程序，並確保資料集維持自足且可隨時查詢。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">真實世界範例<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +302,7 @@ summary: >-
    <tr>
      <td><p>text_dense_vector (<code translate="no">FLOAT_VECTOR</code>)</p></td>
      <td><p>由文字嵌入模型產生的密集向量</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/BaGlwzDmyiyVvVk6NurcFclInCd?from=from_parent_docs">基本向量搜尋</a></p></td>
+     <td><p><a href="/docs/zh-hant/single-vector-search.md">基本向量搜尋</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -191,7 +311,7 @@ summary: >-
    <tr>
      <td><p>text_sparse_vector (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
      <td><p>內建 BM25 函式自動產生的稀疏向量</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/RQTRwhOVPiwnwokqr4scAtyfnBf?from=from_parent_docs">全文檢索</a></p></td>
+     <td><p><a href="/docs/zh-hant/full-text-search.md">全文檢索</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -199,7 +319,22 @@ summary: >-
    </tr>
 </table>
 <p>如需更多關於模式的資訊，以及新增各類欄位的詳細指引，請參閱<a href="/docs/zh-hant/schema.md">Schema Explained</a>。</p>
-<h3 id="Initialize-schema" class="common-anchor-header">初始化模式</h3><p>首先，我們需要建立一個空模式。此步驟為定義資料模型建立基礎結構。</p>
+<h3 id="Initialize-schema" class="common-anchor-header">初始化模式<button data-href="#Initialize-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>首先，我們需要建立一個空模式。此步驟為定義資料模型建立基礎結構。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -230,7 +365,22 @@ schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Skip this step using cURL</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-fields" class="common-anchor-header">新增欄位</h3><p>一旦建立了模式，下一步就是指定組成資料的欄位。每個欄位都與各自的資料類型和屬性相關聯。</p>
+<h3 id="Add-fields" class="common-anchor-header">新增欄位<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>一旦建立了模式，下一步就是指定組成資料的欄位。每個欄位都與各自的資料類型和屬性相關聯。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
@@ -398,7 +548,22 @@ schema.addField(AddFieldReq.builder()
 <li><p>分區鍵：<code translate="no">timestamp</code> 被指定為分區鍵，可透過分區進行篩選。這可能是</p></li>
 <li><p>文字分析器：文字分析器應用於 2 個字串欄位<code translate="no">title</code> 和<code translate="no">text</code> ，以分別支援文字匹配和全文搜尋。</p></li>
 </ul>
-<h3 id="Optional-Add-functions" class="common-anchor-header">(選用）新增功能</h3><p>為了增強資料查詢功能，可在模式中加入函式。例如，可以建立函式來處理特定欄位的相關資料。</p>
+<h3 id="Optional-Add-functions" class="common-anchor-header">(選用）新增功能<button data-href="#Optional-Add-functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>為了增強資料查詢功能，可在模式中加入函式。例如，可以建立函式來處理特定欄位的相關資料。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

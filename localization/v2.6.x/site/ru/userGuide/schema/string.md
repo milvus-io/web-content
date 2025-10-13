@@ -1,9 +1,7 @@
 ---
 id: string.md
 title: Строковое поле
-summary: >-
-  В Milvus VARCHAR - это тип данных, используемый для хранения строковых данных.
-  При определении поля VARCHAR обязательными являются два параметра:
+summary: 'В Milvus VARCHAR - это тип данных, используемый для хранения строковых данных.'
 ---
 <h1 id="String-Field" class="common-anchor-header">Строковое поле<button data-href="#String-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В Milvus <code translate="no">VARCHAR</code> - это тип данных, используемый для хранения строковых данных. Когда вы определяете поле <code translate="no">VARCHAR</code>, два параметра являются обязательными:</p>
+    </button></h1><p>В Milvus <code translate="no">VARCHAR</code> - это тип данных, используемый для хранения строковых данных.</p>
+<p>Когда вы определяете поле <code translate="no">VARCHAR</code>, два параметра являются обязательными:</p>
 <ul>
 <li><p>Установите <code translate="no">datatype</code> в <code translate="no">DataType.VARCHAR</code>.</p></li>
 <li><p>Укажите <code translate="no">max_length</code>, который определяет максимальное количество байт, которое может хранить поле <code translate="no">VARCHAR</code>. Диапазон допустимых значений для <code translate="no">max_length</code> составляет от 1 до 65 535.</p></li>
@@ -249,6 +248,9 @@ schema.WithField(entity.NewField().
       </svg>
     </button></h2><p>Индексирование помогает повысить производительность поиска и запросов. В Milvus индексирование является обязательным для векторных полей и необязательным для скалярных.</p>
 <p>В следующем примере создаются индексы для векторного поля <code translate="no">embedding</code> и скалярного поля <code translate="no">varchar_field1</code>, оба с использованием типа индекса <code translate="no">AUTOINDEX</code>. При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс на основе типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробнее см. в разделе <a href="/docs/ru/index-explained.md">"Объяснение индекса</a>".</p>
+<div class="alert note">
+<p>Вы также можете создать индекс <code translate="no">NGRAM</code>, чтобы ускорить фильтрацию <code translate="no">LIKE</code> по полям <code translate="no">VARCHAR</code>. Подробности см. в разделе <a href="/docs/ru/ngram.md">NGRAM</a>.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

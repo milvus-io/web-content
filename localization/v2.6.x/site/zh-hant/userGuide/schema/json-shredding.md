@@ -68,7 +68,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p>類型鍵</p></td>
-     <td><p>存在於大多數文件中，且始終擁有相同資料類型（例如，所有整數或所有字串）的鍵。</p></td>
+     <td><p>存在於大多數文件中，且總是具有相同資料類型的關鍵（例如，所有整數或所有字串）。</p></td>
    </tr>
    <tr>
      <td><p>動態鍵值</p></td>
@@ -196,7 +196,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>決定 Milvus 在載入切碎資料時是否使用 mmap。</p><p>詳情請參閱<a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">使用 mmap</a>。</p></td>
+     <td><p>決定 Milvus 在載入切碎資料時是否使用 mmap。</p><p>詳情請參閱<a href="/docs/zh-hant/mmap.md">使用 mmap</a>。</p></td>
      <td><p>true</p></td>
      <td><p>此設定一般為效能最佳化。只有在您的系統有特定記憶體管理需求或限制時，才調整它。</p></td>
    </tr>
@@ -376,8 +376,8 @@ beta: Milvus 2.6.2+
 <li><p><strong>如何在 JSON 切碎和 JSON 索引之間進行選擇？</strong></p>
 <ul>
 <li><p><strong>JSON 切碎</strong>非常適合在您的文件中經常出現的鍵，尤其是複雜的 JSON 結構。它結合了列式儲存和倒轉索引的優點，非常適合您查詢許多不同鍵的重讀情境。但是，不建議用於非常小的 JSON 文件，因為性能增益微乎其微。關鍵值佔 JSON 文件總大小的比例越小，粉碎的性能優化效果就越好。</p></li>
-<li><p><strong>JSON 索引</strong>更適合針對特定的基於關鍵值的查詢進行有針對性的優化，並且具有較低的存儲開銷。它適用於較簡單的 JSON 結構。請注意，JSON 切碎並不涵蓋對陣列內部鍵的查詢，因此您需要 JSON 索引來加速這些查詢。</p></li>
+<li><p><strong>JSON 索引</strong>更適合針對特定的基於關鍵值的查詢進行有針對性的優化，並且具有較低的儲存開銷。它適用於較簡單的 JSON 結構。請注意，JSON 切碎並不涵蓋對陣列內部鍵的查詢，因此您需要 JSON 索引來加速這些查詢。</p></li>
 </ul></li>
 <li><p><strong>如果遇到錯誤怎麼辦？</strong></p>
-<p>如果建立或載入過程失敗，您可以透過設定<code translate="no">common.enabledJSONKeyStats=false</code> 快速停用該功能。若要清除任何剩餘任務，請使用<a href="/docs/zh-hant/birdwatcher_usage_guides.md">Birdwatcher</a> 中的<code translate="no">remove stats-task &lt;task_id&gt;</code> 指令。如果查詢失敗，請設定<code translate="no">common.usingJsonStatsForQuery=false</code> 以回復原始查詢路徑，繞過粉碎的資料。</p></li>
+<p>如果建立或載入過程失敗，您可以透過設定<code translate="no">common.enabledJSONKeyStats=false</code> 快速停用該功能。若要清除任何剩餘任務，請使用<a href="/docs/zh-hant/birdwatcher_usage_guides.md">Birdwatcher</a> 中的<code translate="no">remove stats-task &lt;task_id&gt;</code> 指令。如果查詢失敗，請設定<code translate="no">common.usingJsonStatsForQuery=false</code> 以恢復原始查詢路徑，繞過粉碎的資料。</p></li>
 </ul>

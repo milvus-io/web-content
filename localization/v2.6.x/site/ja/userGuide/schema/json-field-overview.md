@@ -101,7 +101,7 @@ summary: >-
    <tr>
      <td><p>クエリ</p></td>
      <td><p>JSONフィールド内のフィールド名またはターゲット・キーを使用してクエリ：<code translate="no">metadata["key"]</code> 。</p></td>
-     <td><p>ダイナミック・フィールド・キーを使って直接クエリする：<code translate="no">"dynamic_key"</code> または<code translate="no">#meta</code> 経由：<code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>ダイナミック・フィールドのキーを使って直接クエリーする：<code translate="no">"dynamic_key"</code> または<code translate="no">#meta</code> を経由して：<code translate="no">#meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">基本的な操作<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -119,7 +119,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSONフィールドを使用する基本的なワークフローは、スキーマでフィールドを定義し、データを挿入し、特定のフィルター式を使用してデータをクエリすることです。</p>
+    </button></h2><p>JSONフィールドを使用するための基本的なワークフローは、スキーマでJSONフィールドを定義し、データを挿入し、特定のフィルター式を使用してデータをクエリすることです。</p>
 <h3 id="Define-a-JSON-field" class="common-anchor-header">JSONフィールドの定義<button data-href="#Define-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

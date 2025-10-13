@@ -117,7 +117,7 @@ beta: Milvus 2.6.2+
    </span> <span class="img-wrapper"> <span>Json Shredding Fluss</span> </span></p>
 <ul>
 <li><p><strong>Geschredderte Spalten</strong>: Für <strong>typisierte</strong> und <strong>dynamische</strong> <strong>Schlüssel</strong> werden die Daten in dedizierte Spalten geschrieben. Diese spaltenförmige Speicherung ermöglicht schnelle, direkte Scans bei Abfragen, da Milvus nur die benötigten Daten für einen bestimmten Schlüssel lesen kann, ohne das gesamte Dokument zu verarbeiten.</p></li>
-<li><p><strong>Gemeinsame Spalte</strong>: Alle <strong>gemeinsam genutzten Schlüssel</strong> werden zusammen in einer einzigen, kompakten binären JSON-Spalte gespeichert. Auf dieser Spalte wird ein <strong>invertierter Index für</strong> gemeinsame Schlüssel erstellt. Dieser Index ist von entscheidender Bedeutung für die Beschleunigung von Abfragen zu Schlüsseln mit geringer Häufigkeit, da er Milvus ermöglicht, die Daten schnell zu beschneiden und den Suchraum effektiv auf die Zeilen zu beschränken, die den angegebenen Schlüssel enthalten.</p></li>
+<li><p><strong>Gemeinsame Spalte</strong>: Alle <strong>gemeinsam genutzten Schlüssel</strong> werden zusammen in einer einzigen, kompakten binären JSON-Spalte gespeichert. Auf dieser Spalte wird ein <strong>invertierter Index für</strong> gemeinsame Schlüssel erstellt. Dieser Index ist entscheidend für die Beschleunigung von Abfragen nach Schlüsseln mit geringer Häufigkeit, da er Milvus ermöglicht, die Daten schnell zu beschneiden und so den Suchraum auf die Zeilen zu beschränken, die den angegebenen Schlüssel enthalten.</p></li>
 </ul>
 <h3 id="Phase-3-Query-execution" class="common-anchor-header">Phase 3: Ausführung der Abfrage<button data-href="#Phase-3-Query-execution" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -199,13 +199,13 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>Legt fest, ob Milvus mmap beim Laden von Shredding-Daten verwendet.</p><p>Einzelheiten finden Sie unter <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">mmap verwenden</a>.</p></td>
+     <td><p>Legt fest, ob Milvus mmap beim Laden von Shredding-Daten verwendet.</p><p>Einzelheiten finden Sie unter <a href="/docs/de/mmap.md">mmap verwenden</a>.</p></td>
      <td><p>true</p></td>
      <td><p>Diese Einstellung ist im Allgemeinen für die Leistung optimiert. Passen Sie sie nur an, wenn Sie spezielle Anforderungen an die Speicherverwaltung oder Einschränkungen auf Ihrem System haben.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code></p></td>
-     <td><p>Die maximale Anzahl von JSON-Schlüsseln, die in geshredderten Spalten gespeichert werden. </p><p>Wenn die Anzahl der häufig vorkommenden Schlüssel diese Grenze überschreitet, priorisiert Milvus die häufigsten für das Shredding, und die restlichen Schlüssel werden in der gemeinsamen Spalte gespeichert.</p></td>
+     <td><p>Die maximale Anzahl von JSON-Schlüsseln, die in geshredderten Spalten gespeichert werden. </p><p>Wenn die Anzahl der häufig vorkommenden Schlüssel diese Grenze überschreitet, priorisiert Milvus die häufigsten Schlüssel für das Shredding, und die restlichen Schlüssel werden in der gemeinsamen Spalte gespeichert.</p></td>
      <td><p>1024</p></td>
      <td><p>Dies ist für die meisten Szenarien ausreichend. Für JSON mit Tausenden von häufig vorkommenden Schlüsseln müssen Sie diesen Wert möglicherweise erhöhen, aber überwachen Sie die Speichernutzung.</p></td>
    </tr>
@@ -348,7 +348,7 @@ beta: Milvus 2.6.2+
       </svg>
     </button></h3><ul>
 <li><p><strong>Gemeinsame Schlüsselabfragen</strong> zeigen die größten Verbesserungen (bis zu 89x schneller)</p></li>
-<li><p><strong>Typisierte Schlüsselabfragen</strong> bieten konsistente 15-30-fache Leistungssteigerungen</p></li>
+<li><p><strong>Typisierte Schlüsselabfragen</strong> bieten konsistente 15-30fache Leistungssteigerungen</p></li>
 <li><p><strong>Alle Abfragetypen</strong> profitieren vom JSON Shredding ohne Leistungseinbußen.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">

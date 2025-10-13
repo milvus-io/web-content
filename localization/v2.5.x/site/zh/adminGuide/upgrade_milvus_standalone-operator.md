@@ -101,7 +101,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingDowngrade</span>
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:&lt;some-older-version&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然后将配置保存为 YAML 文件（例如<code translate="no">milvusupgrade.yaml</code> ），并将此配置文件修补到 Milvus 实例中，如下所示：</p>
+<p>然后将配置保存为 YAML 文件（例如<code translate="no">milvusupgrade.yaml</code> ），并将此配置文件修补到 Milvus 实例中，具体方法如下：</p>
 <pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">通过更改映像升级 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">

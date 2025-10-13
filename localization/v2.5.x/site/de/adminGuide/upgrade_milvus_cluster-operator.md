@@ -149,7 +149,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>Seit Milvus 2.2.0 sind die Metadaten nicht mehr mit denen früherer Versionen kompatibel. Die folgenden Beispielschnipsel gehen von einem Upgrade von Milvus 2.1.4 auf Milvus 2.5.13 aus.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Erstellen Sie eine <code translate="no">.yaml</code> Datei für die Migration von Metadaten<button data-href="#1-Create-a-yaml-file-for-metadata-migration" class="anchor-icon" translate="no">
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Erstellen Sie eine <code translate="no">.yaml</code> Datei für die Metadaten-Migration<button data-href="#1-Create-a-yaml-file-for-metadata-migration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

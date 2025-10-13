@@ -4,7 +4,7 @@ title: Déchiquetage JSONCompatible with Milvus 2.6.2+
 summary: >-
   Le déchiquetage JSON accélère les requêtes JSON en convertissant le stockage
   traditionnel basé sur les lignes en un stockage optimisé en colonnes. Tout en
-  conservant la souplesse de JSON pour la modélisation des données, Milvus
+  conservant la flexibilité de JSON pour la modélisation des données, Milvus
   effectue en coulisses une optimisation en colonnes qui améliore
   considérablement l'accès et l'efficacité des requêtes.
 beta: Milvus 2.6.2+
@@ -161,7 +161,7 @@ beta: Milvus 2.6.2+
   <span class="hljs-attr">enabledJSONKeyStats:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Une fois activé, Milvus commencera à analyser et à restructurer vos données JSON dès leur ingestion, sans autre intervention manuelle.</p>
+<p>Une fois activé, Milvus commencera à analyser et à restructurer vos données JSON dès l'ingestion, sans autre intervention manuelle.</p>
 <h2 id="Parameter-tuning" class="common-anchor-header">Réglage des paramètres<button data-href="#Parameter-tuning" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,7 +199,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>Détermine si Milvus utilise mmap lors du chargement des données déchiquetées.</p><p>Pour plus de détails, voir <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Utiliser mmap</a>.</p></td>
+     <td><p>Détermine si Milvus utilise mmap lors du chargement des données déchiquetées.</p><p>Pour plus de détails, voir <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p></td>
      <td><p>true (vrai)</p></td>
      <td><p>Ce paramètre est généralement optimisé pour les performances. Ne l'ajustez que si vous avez des besoins ou des contraintes spécifiques en matière de gestion de la mémoire sur votre système.</p></td>
    </tr>

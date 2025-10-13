@@ -42,7 +42,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>검색 시스템의 데이터 모델 설계에는 비즈니스 요구 사항을 분석하고 스키마로 표현된 데이터 모델로 정보를 추상화하는 작업이 포함됩니다. 잘 정의된 스키마는 데이터 모델을 비즈니스 목표에 맞추고, 데이터 일관성과 서비스 품질을 보장하는 데 중요합니다.  또한 적절한 데이터 유형과 인덱스를 선택하는 것은 비즈니스 목표를 경제적으로 달성하는 데 중요합니다.</p>
-<h3 id="Analyzing-Business-Needs" class="common-anchor-header">비즈니스 요구 분석</h3><p>비즈니스 요구 사항을 효과적으로 해결하기 위해서는 사용자가 수행할 쿼리 유형을 분석하고 가장 적합한 검색 방법을 결정하는 것부터 시작해야 합니다.</p>
+<h3 id="Analyzing-Business-Needs" class="common-anchor-header">비즈니스 요구 분석<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>비즈니스 요구 사항을 효과적으로 해결하기 위해서는 사용자가 수행할 쿼리 유형을 분석하고 가장 적합한 검색 방법을 결정하는 것부터 시작해야 합니다.</p>
 <ul>
 <li><p><strong>사용자 쿼리:</strong> 사용자가 수행할 것으로 예상되는 쿼리 유형을 파악합니다. 이를 통해 스키마가 실제 사용 사례를 지원하고 검색 성능을 최적화할 수 있습니다. 여기에는 다음이 포함될 수 있습니다:</p>
 <ul>
@@ -59,7 +74,22 @@ summary: >-
 <li><p><strong>메타데이터 필터링</strong>: 벡터 검색에 더해 날짜 범위, 카테고리 또는 태그와 같은 제약 조건을 적용합니다.</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">비즈니스 요구 사항을 검색 데이터 모델로 번역</h3><p>다음 단계는 정보의 핵심 구성 요소와 그 검색 방법을 파악하여 비즈니스 요구 사항을 구체적인 데이터 모델로 변환하는 것입니다:</p>
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">비즈니스 요구 사항을 검색 데이터 모델로 번역<button data-href="#Translates-Business-Requirements-into-a-Search-Data-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 단계는 정보의 핵심 구성 요소와 그 검색 방법을 파악하여 비즈니스 요구 사항을 구체적인 데이터 모델로 변환하는 것입니다:</p>
 <ul>
 <li><p>원시 콘텐츠(텍스트, 이미지, 오디오), 관련 메타데이터(제목, 태그, 작성자), 상황별 속성(타임스탬프, 사용자 행동 등) 등 저장해야 하는 데이터를 정의합니다.</p></li>
 <li><p>각 요소에 적합한 데이터 유형과 형식을 결정합니다. 예를 들어</p>
@@ -89,9 +119,39 @@ summary: >-
       </svg>
     </button></h2><p>Milvus에서 데이터 모델은 컬렉션 스키마를 통해 표현됩니다. 컬렉션 스키마 내에서 올바른 필드를 설계하는 것은 효과적인 검색을 가능하게 하는 핵심입니다. 각 필드는 컬렉션에 저장된 특정 유형의 데이터를 정의하며 검색 프로세스에서 고유한 역할을 합니다. 상위 수준에서 Milvus는 <strong>벡터 필드</strong> 와 <strong>스칼라 필드라는</strong> 두 가지 주요 유형의 필드를 지원합니다.</p>
 <p>이제 데이터 모델을 벡터 및 보조 스칼라 필드를 포함한 필드 스키마에 매핑할 수 있습니다. 각 필드가 데이터 모델의 속성과 연관되어 있는지 확인하고, 특히 벡터 유형(밀도 또는 스페이스) 및 차원에 주의하세요.</p>
-<h3 id="Vector-Field" class="common-anchor-header">벡터 필드</h3><p>벡터 필드는 텍스트, 이미지, 오디오와 같은 비정형 데이터 유형에 대한 임베딩을 저장합니다. 이러한 임베딩은 데이터 유형과 사용되는 검색 방법에 따라 고밀도, 스파스 또는 바이너리일 수 있습니다. 일반적으로 고밀도 벡터는 시맨틱 검색에 사용되는 반면, 스파스 벡터는 전체 텍스트 또는 어휘 매칭에 더 적합합니다. 이진 벡터는 저장 공간과 계산 리소스가 제한되어 있을 때 유용합니다. 컬렉션에는 여러 개의 벡터 필드가 포함되어 멀티모달 또는 하이브리드 검색 전략을 사용할 수 있습니다. 이 주제에 대한 자세한 가이드는 <a href="/docs/ko/multi-vector-search.md">멀티-벡터 하이브리드 검색을</a> 참조하세요.</p>
+<h3 id="Vector-Field" class="common-anchor-header">벡터 필드<button data-href="#Vector-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>벡터 필드는 텍스트, 이미지, 오디오와 같은 비정형 데이터 유형에 대한 임베딩을 저장합니다. 이러한 임베딩은 데이터 유형과 사용되는 검색 방법에 따라 고밀도, 스파스 또는 바이너리일 수 있습니다. 일반적으로 고밀도 벡터는 시맨틱 검색에 사용되는 반면, 스파스 벡터는 전체 텍스트 또는 어휘 매칭에 더 적합합니다. 이진 벡터는 저장 공간과 계산 리소스가 제한되어 있을 때 유용합니다. 컬렉션에는 여러 개의 벡터 필드가 포함되어 멀티모달 또는 하이브리드 검색 전략을 사용할 수 있습니다. 이 주제에 대한 자세한 가이드는 <a href="/docs/ko/multi-vector-search.md">멀티-벡터 하이브리드 검색을</a> 참조하세요.</p>
 <p><a href="/docs/ko/dense-vector.md">밀도 벡터</a>는 <code translate="no">FLOAT_VECTOR</code>, <a href="/docs/ko/sparse_vector.md">스파스 벡터는</a> <code translate="no">SPARSE_FLOAT_VECTOR</code>, <a href="/docs/ko/binary-vector.md">바이너리 벡터는</a> <code translate="no">BINARY_VECTOR</code> 에서 벡터 데이터 유형을 지원합니다.</p>
-<h3 id="Scalar-Field" class="common-anchor-header">스칼라 필드</h3><p>스칼라 필드는 숫자, 문자열 또는 날짜와 같은 원시적이고 구조화된 값(일반적으로 메타데이터라고 함)을 저장합니다. 이러한 값은 벡터 검색 결과와 함께 반환될 수 있으며 필터링 및 정렬에 필수적입니다. 특정 카테고리나 정의된 시간 범위로 문서를 제한하는 등 특정 속성을 기반으로 검색 결과의 범위를 좁힐 수 있습니다.</p>
+<h3 id="Scalar-Field" class="common-anchor-header">스칼라 필드<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스칼라 필드는 숫자, 문자열 또는 날짜와 같은 원시적이고 구조화된 값(일반적으로 메타데이터라고 함)을 저장합니다. 이러한 값은 벡터 검색 결과와 함께 반환될 수 있으며 필터링 및 정렬에 필수적입니다. 특정 카테고리나 정의된 시간 범위로 문서를 제한하는 등 특정 속성을 기반으로 검색 결과의 범위를 좁힐 수 있습니다.</p>
 <p>Milvus는 벡터가 아닌 데이터를 저장하고 필터링하기 위해 <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, <code translate="no">ARRAY</code> 과 같은 스칼라 유형을 지원합니다. 이러한 유형은 검색 작업의 정밀도와 사용자 정의 기능을 향상시킵니다.</p>
 <h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">스키마 설계에서 고급 기능 활용<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,13 +169,73 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>스키마를 설계할 때 단순히 지원되는 데이터 유형을 사용하여 데이터를 필드에 매핑하는 것만으로는 충분하지 않습니다. 필드 간의 관계와 구성에 사용할 수 있는 전략을 철저히 이해하는 것이 필수적입니다. 설계 단계에서 주요 기능을 염두에 두면 스키마가 즉각적인 데이터 처리 요구 사항을 충족할 뿐만 아니라 향후 필요에 따라 확장 및 조정할 수 있습니다. 이러한 기능을 신중하게 통합하면 Milvus의 기능을 극대화하고 보다 광범위한 데이터 전략과 목표를 지원하는 강력한 데이터 아키텍처를 구축할 수 있습니다. 다음은 컬렉션 스키마를 만드는 주요 기능에 대한 개요입니다:</p>
-<h3 id="Primary-Key" class="common-anchor-header">기본 키</h3><p>기본 키 필드는 컬렉션 내의 각 엔티티를 고유하게 식별하므로 스키마의 기본 구성 요소입니다. 기본 키를 정의하는 것은 필수입니다. 정수 또는 문자열 유형의 스칼라 필드여야 하며 <code translate="no">is_primary=True</code> 로 표시되어야 합니다. 선택적으로 컬렉션에 데이터가 더 많이 수집될수록 정수가 자동으로 할당되는 기본 키에 <code translate="no">auto_id</code> 를 활성화할 수 있습니다.</p>
+<h3 id="Primary-Key" class="common-anchor-header">기본 키<button data-href="#Primary-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>기본 키 필드는 컬렉션 내의 각 엔티티를 고유하게 식별하므로 스키마의 기본 구성 요소입니다. 기본 키를 정의하는 것은 필수입니다. 정수 또는 문자열 유형의 스칼라 필드여야 하며 <code translate="no">is_primary=True</code> 로 표시되어야 합니다. 선택적으로 컬렉션에 데이터가 더 많이 수집될수록 정수가 자동으로 할당되는 기본 키에 <code translate="no">auto_id</code> 를 활성화할 수 있습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/primary-field.md">기본 필드 및 자동 ID를</a> 참조하세요.</p>
-<h3 id="Partitioning" class="common-anchor-header">파티셔닝</h3><p>검색 속도를 높이려면 선택적으로 파티셔닝을 켤 수 있습니다. 파티셔닝을 위해 특정 스칼라 필드를 지정하고 검색 중에 이 필드를 기준으로 필터링 기준을 지정하면 검색 범위를 관련 파티션으로만 효과적으로 제한할 수 있습니다. 이 방법은 검색 도메인을 줄임으로써 검색 작업의 효율성을 크게 향상시킵니다.</p>
+<h3 id="Partitioning" class="common-anchor-header">파티셔닝<button data-href="#Partitioning" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>검색 속도를 높이려면 선택적으로 파티셔닝을 켤 수 있습니다. 파티셔닝을 위해 특정 스칼라 필드를 지정하고 검색 중에 이 필드를 기반으로 필터링 기준을 지정하면 검색 범위를 관련 파티션으로만 효과적으로 제한할 수 있습니다. 이 방법은 검색 도메인을 줄임으로써 검색 작업의 효율성을 크게 향상시킵니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p>
-<h3 id="Analyzer" class="common-anchor-header">분석기</h3><p>분석기는 텍스트 데이터를 처리하고 변환하는 데 필수적인 도구입니다. 주요 기능은 원시 텍스트를 토큰으로 변환하고 색인 및 검색을 위해 구조화하는 것입니다. 문자열을 토큰화하고, 중지 단어를 삭제하고, 개별 단어의 어간을 토큰으로 변환하는 방식으로 이를 수행합니다.</p>
+<h3 id="Analyzer" class="common-anchor-header">분석기<button data-href="#Analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>분석기는 텍스트 데이터를 처리하고 변환하는 데 필수적인 도구입니다. 주요 기능은 원시 텍스트를 토큰으로 변환하고 색인 및 검색을 위해 구조화하는 것입니다. 문자열을 토큰화하고, 중지 단어를 삭제하고, 개별 단어의 어간을 토큰으로 변환하는 방식으로 이를 수행합니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/analyzer-overview.md">분석기 개요를</a> 참조하세요.</p>
-<h3 id="Function" class="common-anchor-header">기능</h3><p>Milvus를 사용하면 스키마의 일부로 내장 함수를 정의하여 특정 필드를 자동으로 도출할 수 있습니다. 예를 들어, <code translate="no">VARCHAR</code> 필드에서 스파스 벡터를 생성하는 기본 제공 BM25 함수를 추가하여 전체 텍스트 검색을 지원할 수 있습니다. 이러한 함수 파생 필드는 전처리를 간소화하고 컬렉션이 독립적이고 쿼리 준비가 된 상태로 유지되도록 합니다.</p>
+<h3 id="Function" class="common-anchor-header">기능<button data-href="#Function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus를 사용하면 스키마의 일부로 내장 함수를 정의하여 특정 필드를 자동으로 도출할 수 있습니다. 예를 들어, <code translate="no">VARCHAR</code> 필드에서 스파스 벡터를 생성하는 기본 제공 BM25 함수를 추가하여 전체 텍스트 검색을 지원할 수 있습니다. 이러한 함수 파생 필드는 전처리를 간소화하고 컬렉션이 독립적이고 쿼리 준비가 된 상태로 유지되도록 합니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">실제 예제<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +302,7 @@ summary: >-
    <tr>
      <td><p>text_dense_vector (<code translate="no">FLOAT_VECTOR</code>)</p></td>
      <td><p>텍스트 임베딩 모델에 의해 생성된 고밀도 벡터</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/BaGlwzDmyiyVvVk6NurcFclInCd?from=from_parent_docs">기본 벡터 검색</a></p></td>
+     <td><p><a href="/docs/ko/single-vector-search.md">기본 벡터 검색</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -191,15 +311,30 @@ summary: >-
    <tr>
      <td><p>text_sparse_vector (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
      <td><p>내장된 BM25 함수에 의해 자동 생성된 스파스 벡터</p></td>
-     <td><p><a href="https://zilliverse.feishu.cn/wiki/RQTRwhOVPiwnwokqr4scAtyfnBf?from=from_parent_docs">전체 텍스트 검색</a></p></td>
+     <td><p><a href="/docs/ko/full-text-search.md">전체 텍스트 검색</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>출력</p></td>
    </tr>
 </table>
-<p>스키마에 대한 자세한 내용과 다양한 유형의 필드 추가에 대한 자세한 안내는 <a href="/docs/ko/schema.md">스키마 설명을</a> 참조하세요.</p>
-<h3 id="Initialize-schema" class="common-anchor-header">스키마 초기화</h3><p>시작하려면 먼저 빈 스키마를 만들어야 합니다. 이 단계에서는 데이터 모델을 정의하기 위한 기본 구조를 설정합니다.</p>
+<p>스키마에 대한 자세한 내용과 다양한 유형의 필드 추가에 대한 자세한 지침은 <a href="/docs/ko/schema.md">스키마 설명을</a> 참조하세요.</p>
+<h3 id="Initialize-schema" class="common-anchor-header">스키마 초기화<button data-href="#Initialize-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>시작하려면 먼저 빈 스키마를 만들어야 합니다. 이 단계에서는 데이터 모델을 정의하기 위한 기본 구조를 설정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -230,7 +365,22 @@ schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Skip this step using cURL</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-fields" class="common-anchor-header">필드 추가</h3><p>스키마가 생성되면 다음 단계는 데이터를 구성할 필드를 지정하는 것입니다. 각 필드는 각각의 데이터 유형 및 속성과 연결됩니다.</p>
+<h3 id="Add-fields" class="common-anchor-header">필드 추가<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스키마가 생성되면 다음 단계는 데이터를 구성할 필드를 지정하는 것입니다. 각 필드는 각각의 데이터 유형 및 속성과 연결됩니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
@@ -398,7 +548,22 @@ schema.addField(AddFieldReq.builder()
 <li><p>파티션 키: 파티션별로 필터링할 수 있도록 <code translate="no">timestamp</code> 이 파티션 키로 할당됩니다. 예를 들면 다음과 같습니다.</p></li>
 <li><p>텍스트 분석기: 텍스트 분석기가 2개의 문자열 필드 <code translate="no">title</code> 및 <code translate="no">text</code> 에 적용되어 각각 텍스트 일치 및 전체 텍스트 검색을 지원합니다.</p></li>
 </ul>
-<h3 id="Optional-Add-functions" class="common-anchor-header">(선택 사항) 기능 추가</h3><p>데이터 쿼리 기능을 향상시키기 위해 함수를 스키마에 통합할 수 있습니다. 예를 들어 특정 필드와 관련된 처리를 위해 함수를 만들 수 있습니다.</p>
+<h3 id="Optional-Add-functions" class="common-anchor-header">(선택 사항) 기능 추가<button data-href="#Optional-Add-functions" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>데이터 쿼리 기능을 향상시키기 위해 함수를 스키마에 통합할 수 있습니다. 예를 들어 특정 필드와 관련된 처리를 위해 함수를 만들 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType

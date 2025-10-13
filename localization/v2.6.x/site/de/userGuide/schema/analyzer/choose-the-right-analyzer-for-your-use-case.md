@@ -469,7 +469,7 @@ schema.add_field(
      <td><ul><li><p>Eingabe: <code translate="no">["café", "naïve", "résumé"]</code></p></li><li><p>Ausgabe: <code translate="no">[['cafe'], ['naive'], ['resume']]</code></p></li></ul></td>
    </tr>
 </table>
-<h4 id="Token-filtering" class="common-anchor-header">Token-Filterung</h4><p>Steuern Sie, welche Token auf der Grundlage des Zeicheninhalts oder der Länge erhalten bleiben:</p>
+<h4 id="Token-filtering" class="common-anchor-header">Token-Filterung</h4><p>Steuern Sie, welche Token auf der Grundlage von Zeicheninhalt oder -länge erhalten bleiben:</p>
 <table>
    <tr>
      <th><p>Filter</p></th>
@@ -824,5 +824,5 @@ analyzer_params = {
 <li><p><strong>Textabgleich</strong></p>
 <p>Textabgleichsoperationen führen einen exakten Tokenabgleich zwischen Abfragen und indiziertem Inhalt auf der Grundlage Ihrer Analysatorausgabe durch. Einzelheiten zur Implementierung finden Sie unter <a href="/docs/de/keyword-match.md">Textabgleich</a>.</p></li>
 <li><p><strong>Phrasenabgleich</strong></p>
-<p>Der Phrasenabgleich erfordert eine konsistente Tokenisierung von Mehrwortausdrücken, um die Phrasengrenzen und die Bedeutung beizubehalten. Einzelheiten zur Implementierung finden Sie unter <a href="/docs/de/phrase-match.md">Phrasenabgleich</a>.</p></li>
+<p>Der Phrasenabgleich erfordert eine konsistente Tokenisierung von Mehrwortausdrücken, um die Phrasengrenzen und die Bedeutung zu erhalten. Einzelheiten zur Implementierung finden Sie unter <a href="/docs/de/phrase-match.md">Phrasenabgleich</a>.</p></li>
 </ul>

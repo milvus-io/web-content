@@ -91,7 +91,7 @@ beta: Milvus 2.6.2+
 <button class="copy-code-btn"></button></code></pre>
 <p>In base a questi dati, le chiavi verrebbero classificate come segue:</p>
 <ul>
-<li><p><strong>Chiavi digitate</strong>: <code translate="no">a</code> e <code translate="no">f</code> (sempre un intero)</p></li>
+<li><p><strong>Chiavi digitate</strong>: <code translate="no">a</code> e <code translate="no">f</code> (sempre un numero intero)</p></li>
 <li><p><strong>Chiavi dinamiche</strong>: <code translate="no">b</code> (misto stringa/integro)</p></li>
 <li><p><strong>Chiavi condivise</strong>: <code translate="no">e</code> (chiave che appare raramente).</p></li>
 </ul>
@@ -199,13 +199,13 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>Determina se Milvus usa mmap quando carica i dati triturati.</p><p>Per i dettagli, consultare <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Usa mmap</a>.</p></td>
+     <td><p>Determina se Milvus usa mmap quando carica i dati triturati.</p><p>Per i dettagli, consultare <a href="/docs/it/mmap.md">Usa mmap</a>.</p></td>
      <td><p>vero</p></td>
      <td><p>Questa impostazione è generalmente ottimizzata per le prestazioni. Regolatela solo se avete esigenze o vincoli specifici di gestione della memoria sul vostro sistema.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code></p></td>
-     <td><p>Il numero massimo di chiavi JSON che verranno memorizzate nelle colonne triturate. </p><p>Se il numero di chiavi che compaiono frequentemente supera questo limite, Milvus darà priorità a quelle più frequenti per la triturazione e le chiavi rimanenti saranno memorizzate nella colonna condivisa.</p></td>
+     <td><p>Il numero massimo di chiavi JSON da memorizzare nelle colonne triturate. </p><p>Se il numero di chiavi che compaiono frequentemente supera questo limite, Milvus darà priorità a quelle più frequenti per la triturazione e le chiavi rimanenti saranno memorizzate nella colonna condivisa.</p></td>
      <td><p>1024</p></td>
      <td><p>Questo limite è sufficiente per la maggior parte degli scenari. Per JSON con migliaia di chiavi frequenti, potrebbe essere necessario aumentare questo limite, ma è necessario monitorare l'utilizzo della memoria.</p></td>
    </tr>
@@ -213,7 +213,7 @@ beta: Milvus 2.6.2+
      <td><p><code translate="no">dataCoord.jsonStatsShreddingRatioThreshold</code></p></td>
      <td><p>Il rapporto minimo di ricorrenze che una chiave JSON deve avere per essere considerata per la triturazione in una colonna tritata.</p><p>Una chiave è considerata frequente se il suo rapporto è superiore a questa soglia.</p></td>
      <td><p>0.3</p></td>
-     <td><p><strong>Aumenta</strong> (ad esempio, a 0,5) se il numero di chiavi che soddisfano i criteri di frantumazione supera il limite di <code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code>. In questo modo si rende più severa la soglia, riducendo il numero di chiavi che si qualificano per la triturazione.</p><p><strong>Diminuire</strong> (ad esempio, a 0,1) se si desidera distruggere un numero maggiore di chiavi che appaiono meno frequentemente della soglia predefinita del 30%.</p></td>
+     <td><p><strong>Aumenta</strong> (ad esempio, a 0,5) se il numero di chiavi che soddisfano i criteri di triturazione supera il limite di <code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code>. In questo modo si rende più severa la soglia, riducendo il numero di chiavi che si qualificano per la triturazione.</p><p><strong>Diminuire</strong> (ad esempio, a 0,1) se si desidera distruggere un numero maggiore di chiavi che appaiono meno frequentemente della soglia predefinita del 30%.</p></td>
    </tr>
 </table>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Parametri di riferimento delle prestazioni<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
@@ -348,7 +348,7 @@ beta: Milvus 2.6.2+
       </svg>
     </button></h3><ul>
 <li><p>Le<strong>query a chiave condivisa</strong> mostrano i miglioramenti più evidenti (fino a 89 volte più veloci)</p></li>
-<li><p><strong>Le query con chiave tipizzata</strong> forniscono un aumento costante delle prestazioni di 15-30x</p></li>
+<li><p><strong>Le query con chiave digitata</strong> forniscono un aumento costante delle prestazioni di 15-30 volte</p></li>
 <li><p><strong>Tutti i tipi di query</strong> traggono vantaggio dal JSON Shredding senza regressioni delle prestazioni</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -378,9 +378,9 @@ beta: Milvus 2.6.2+
 </ol></li>
 <li><p><strong>Come si sceglie tra la triturazione JSON e l'indicizzazione JSON?</strong></p>
 <ul>
-<li><p>La<strong>triturazione JSON</strong> è ideale per le chiavi che appaiono frequentemente nei documenti, soprattutto per le strutture JSON complesse. Combina i vantaggi dell'archiviazione colonnare e dell'indicizzazione inversa, rendendola adatta a scenari di lettura intensiva in cui si interrogano molte chiavi diverse. Tuttavia, non è consigliata per documenti JSON molto piccoli, poiché il guadagno in termini di prestazioni è minimo. Quanto minore è la proporzione tra il valore della chiave e la dimensione totale del documento JSON, tanto migliore sarà l'ottimizzazione delle prestazioni grazie alla triturazione.</p></li>
+<li><p>La<strong>triturazione JSON</strong> è ideale per le chiavi che appaiono frequentemente nei documenti, soprattutto per le strutture JSON complesse. Combina i vantaggi dell'archiviazione colonnare e dell'indicizzazione inversa, rendendola adatta a scenari di lettura intensiva in cui si interrogano molte chiavi diverse. Tuttavia, non è consigliata per documenti JSON molto piccoli, poiché il guadagno in termini di prestazioni è minimo. Quanto minore è la proporzione del valore della chiave rispetto alla dimensione totale del documento JSON, tanto migliore sarà l'ottimizzazione delle prestazioni grazie alla triturazione.</p></li>
 <li><p>L<strong>'indicizzazione JSON</strong> è migliore per l'ottimizzazione mirata di query specifiche basate su chiavi e ha un minore overhead di memorizzazione. È adatta alle strutture JSON più semplici. Si noti che la triturazione JSON non copre le query su chiavi all'interno di array, per cui è necessario un indice JSON per accelerarle.</p></li>
 </ul></li>
 <li><p><strong>Cosa succede se si verifica un errore?</strong></p>
-<p>Se il processo di compilazione o di caricamento fallisce, è possibile disabilitare rapidamente la funzione impostando <code translate="no">common.enabledJSONKeyStats=false</code>. Per cancellare i compiti rimanenti, utilizzare il comando <code translate="no">remove stats-task &lt;task_id&gt;</code> in <a href="/docs/it/birdwatcher_usage_guides.md">Birdwatcher</a>. Se una query non va a buon fine, impostare <code translate="no">common.usingJsonStatsForQuery=false</code> per tornare al percorso originale della query, aggirando i dati triturati.</p></li>
+<p>Se il processo di compilazione o di caricamento fallisce, è possibile disabilitare rapidamente la funzione impostando <code translate="no">common.enabledJSONKeyStats=false</code>. Per cancellare i compiti rimanenti, utilizzare il comando <code translate="no">remove stats-task &lt;task_id&gt;</code> in <a href="/docs/it/birdwatcher_usage_guides.md">Birdwatcher</a>. Se una query fallisce, impostare <code translate="no">common.usingJsonStatsForQuery=false</code> per ritornare al percorso originale della query, evitando i dati distrutti.</p></li>
 </ul>

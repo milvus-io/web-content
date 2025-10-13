@@ -535,7 +535,7 @@ summary: >-
 <li><p>实体中完全没有 JSON 字段。</p></li>
 </ul>
 <div class="alert note">
-<p>如果 JSON 对象中的某些元素（如单个键）为空，则字段仍被视为非空。例如，尽管<code translate="no">category</code> 关键字为空，但<code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> 不会被视为空字段。</p>
+<p>如果 JSON 对象中的某些元素为空（如单个键），则字段仍被视为非空。例如，尽管<code translate="no">category</code> 关键字为空，但<code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> 不会被视为空字段。</p>
 </div>
 <p>为进一步说明 Milvus 如何处理带有空值的 JSON 字段，请考虑以下带有 JSON 字段<code translate="no">metadata</code> 的示例数据：</p>
 <pre><code translate="no" class="language-python">data = [
@@ -681,7 +681,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供了一系列基本操作符，让您可以灵活地过滤和查询数据。通过结合比较、范围、算术和逻辑操作符，您可以创建功能强大的过滤表达式，从而缩小搜索结果的范围，并高效检索所需的数据。</p>
+    </button></h2><p>Milvus 提供了一系列基本操作符，让您可以灵活地过滤和查询数据。通过结合比较、范围、算术和逻辑操作符，您可以创建功能强大的过滤表达式，以缩小搜索结果的范围，并高效检索所需的数据。</p>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

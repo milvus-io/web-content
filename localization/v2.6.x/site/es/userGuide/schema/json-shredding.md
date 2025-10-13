@@ -24,7 +24,7 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>JSON shredding acelera las consultas JSON convirtiendo el almacenamiento tradicional basado en filas en almacenamiento columnar optimizado. Al tiempo que mantiene la flexibilidad de JSON para el modelado de datos, Milvus realiza una optimización columnar entre bastidores que mejora drásticamente el acceso y la eficiencia de las consultas.</p>
+    </button></h1><p>JSON shredding acelera las consultas JSON convirtiendo el almacenamiento tradicional basado en filas en almacenamiento columnar optimizado. Al tiempo que mantiene la flexibilidad de JSON para el modelado de datos, Milvus realiza entre bastidores una optimización columnar que mejora drásticamente el acceso y la eficiencia de las consultas.</p>
 <p>La trituración JSON es eficaz para la mayoría de los escenarios de consulta JSON. Los beneficios de rendimiento se vuelven más pronunciados con</p>
 <ul>
 <li><p><strong>Documentos JSON más grandes y complejos</strong> - Mayores ganancias de rendimiento a medida que aumenta el tamaño del documento.</p></li>
@@ -46,7 +46,7 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El proceso de trituración de JSON se realiza en tres fases distintas para optimizar los datos y acelerar su recuperación.</p>
+    </button></h2><p>El proceso de trituración de JSON se desarrolla en tres fases distintas para optimizar los datos y acelerar su recuperación.</p>
 <h3 id="Phase-1-Ingestion--key-classification" class="common-anchor-header">Fase 1: Ingestión y clasificación de claves<button data-href="#Phase-1-Ingestion--key-classification" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,7 +199,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
-     <td><p>Determina si Milvus utiliza mmap al cargar datos triturados.</p><p>Para más detalles, consulte <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Usar mmap</a>.</p></td>
+     <td><p>Determina si Milvus utiliza mmap al cargar datos triturados.</p><p>Para más detalles, consulte <a href="/docs/es/mmap.md">Usar mmap</a>.</p></td>
      <td><p>true</p></td>
      <td><p>Este ajuste está generalmente optimizado para el rendimiento. Ajústelo sólo si tiene necesidades específicas de gestión de memoria o restricciones en su sistema.</p></td>
    </tr>
@@ -348,8 +348,8 @@ beta: Milvus 2.6.2+
       </svg>
     </button></h3><ul>
 <li><p>Las<strong>consultas clave compartidas</strong> presentan las mejoras más espectaculares (hasta 89 veces más rápidas).</p></li>
-<li><p>Las<strong>consultas de claves tipificadas</strong> ofrecen un aumento constante del rendimiento de 15 a 30 veces.</p></li>
-<li><p><strong>Todos los tipos de consulta</strong> se benefician de JSON Shredding sin regresiones de rendimiento.</p></li>
+<li><p>Las<strong>consultas con claves tipificadas</strong> ofrecen un aumento constante del rendimiento de 15 a 30 veces.</p></li>
+<li><p><strong>Todos los tipos de consulta</strong> se benefician de JSON Shredding sin regresiones en el rendimiento.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">PREGUNTAS FRECUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

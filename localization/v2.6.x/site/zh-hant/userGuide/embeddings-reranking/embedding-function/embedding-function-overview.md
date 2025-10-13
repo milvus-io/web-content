@@ -5,7 +5,7 @@ summary: >-
   Milvus 的 Function 模組可讓您透過自動呼叫外部嵌入式服務供應商 (如 OpenAI、AWS Bedrock、Google Vertex AI
   等)，將原始文字資料轉換為向量嵌入式。有了 Function 模組，您就不需要再手動與嵌入式 API 連接-Milvus
   會處理向提供者傳送請求、接收嵌入式資料，以及將其儲存在您的集合中的整個過程。對於語意搜尋，您只需要提供原始查詢資料，而不需要查詢向量。Milvus
-  會以您用於接收的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。
+  會以您用於擷取的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">嵌入功能概述<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 的 Function 模組可讓您透過自動呼叫外部嵌入式服務供應商 (如 OpenAI、AWS Bedrock、Google Vertex AI 等)，將原始文字資料轉換為向量嵌入式。有了 Function 模組，您就不需要再手動與嵌入式 API 連接-Milvus 會處理向提供者傳送請求、接收嵌入式資料，以及將其儲存在您的集合中的整個過程。對於語意搜尋，您只需要提供原始查詢資料，而不需要查詢向量。Milvus 會以您用於接收的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。</p>
+    </button></h1><p>Milvus 的 Function 模組可讓您透過自動呼叫外部嵌入式服務供應商 (如 OpenAI、AWS Bedrock、Google Vertex AI 等)，將原始文字資料轉換為向量嵌入式。有了 Function 模組，您就不需要再手動與嵌入式 API 連接-Milvus 會處理向提供者傳送請求、接收嵌入式並將其儲存在您的集合中的整個過程。對於語意搜尋，您只需要提供原始查詢資料，而不需要查詢向量。Milvus 會以您用於擷取的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -183,7 +183,22 @@ beta: Milvus 2.6.x
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" />
    </span> <span class="img-wrapper"> <span>憑證配置溢出</span> </span></p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">步驟 1：將憑證新增至 Milvus 配置檔案</h3><p>在您的<code translate="no">milvus.yaml</code> 檔案中，編輯<code translate="no">credential</code> 區塊，為您需要存取的每個提供者加入條目：</p>
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">步驟 1：將憑證新增至 Milvus 配置檔案<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在您的<code translate="no">milvus.yaml</code> 檔案中，編輯<code translate="no">credential</code> 區塊，為您需要存取的每個提供者加入條目：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml credential store section</span>
 <span class="hljs-comment"># This section defines all your authentication credentials for external embedding providers</span>
 <span class="hljs-comment"># Each credential gets a unique name (e.g., aksk1, apikey1) that you&#x27;ll reference elsewhere</span>
@@ -204,13 +219,28 @@ beta: Milvus 2.6.x
   <span class="hljs-attr">gcp1:</span>                        
     <span class="hljs-attr">credential_json:</span> <span class="hljs-string">&lt;BASE64_OF_JSON&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">步驟 2：配置提供商設定</h3><p>在相同的配置文件 (<code translate="no">milvus.yaml</code>) 中，編輯<code translate="no">function</code> 區塊，告訴 Milvus 在嵌入服務呼叫時使用哪個憑證：</p>
+<h3 id="Step-2-Configure-provider-settings" class="common-anchor-header">步驟 2：配置提供商設定<button data-href="#Step-2-Configure-provider-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在相同的配置文件 (<code translate="no">milvus.yaml</code>) 中，編輯<code translate="no">function</code> 區塊，告訴 Milvus 在嵌入服務呼叫時使用哪個憑證：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">function:</span>
   <span class="hljs-attr">textEmbedding:</span>
     <span class="hljs-attr">providers:</span>
       <span class="hljs-attr">openai:</span>                         <span class="hljs-comment"># calls OpenAI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">apikey1</span>           <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">bedrock:</span>                        <span class="hljs-comment"># calls AWS Bedrock</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">aksk1</span>             <span class="hljs-comment"># Reference to the credential label</span>
@@ -218,7 +248,7 @@ beta: Milvus 2.6.x
 
       <span class="hljs-attr">vertexai:</span>                       <span class="hljs-comment"># calls Google Vertex AI</span>
         <span class="hljs-attr">credential:</span> <span class="hljs-string">gcp1</span>              <span class="hljs-comment"># Reference to the credential label</span>
-        <span class="hljs-comment"># url:                        # (optional) custom endpoint</span>
+        <span class="hljs-comment"># url:                        # (optional) custom url</span>
 
       <span class="hljs-attr">tei:</span>                            <span class="hljs-comment"># Built-in Tiny Embedding model</span>
         <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>                  <span class="hljs-comment"># Whether to enable TEI model service</span>
@@ -240,7 +270,22 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>一旦在 Milvus 配置文件中配置了憑證，請按照以下步驟定義和使用嵌入函數。</p>
-<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步驟 1：定義模式欄位</h3><p>若要使用嵌入功能，請建立具有特定模式的集合。此模式必須包含至少三個必要欄位：</p>
+<h3 id="Step-1-Define-schema-fields" class="common-anchor-header">步驟 1：定義模式欄位<button data-href="#Step-1-Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要使用嵌入功能，請建立具有特定模式的集合。此模式必須包含至少三個必要欄位：</p>
 <ul>
 <li><p>唯一識別集合中每個實體的<strong>主要欄位</strong>。</p></li>
 <li><p>儲存要嵌入的原始資料的<strong>標量欄位</strong>。</p></li>
@@ -269,7 +314,22 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：在模式中加入嵌入函數</h3><p>Milvus 中的 Function 模組會自動將儲存在標量欄位中的原始資料轉換為嵌入資料，並將其儲存在明確定義的向量欄位中。</p>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：在模式中加入嵌入函數<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 中的 Function 模組會自動將儲存在標量欄位中的原始資料轉換為嵌入資料，並將其儲存在明確定義的向量欄位中。</p>
 <p>下面的範例新增了一個 Function 模組 (<code translate="no">openai_embedding</code>)，將標量欄位<code translate="no">&quot;document&quot;</code> 轉換成嵌入式資料，將產生的向量儲存到之前定義的<code translate="no">&quot;dense&quot;</code> 向量欄位中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
@@ -356,7 +416,22 @@ schema.add_function(text_embedding_function)
 <div class="alert note">
 <p>對於具有多個需要將文字轉換為向量的標量欄位的集合，請在集合模式中加入單獨的函式，確保每個函式都有唯一的名稱和<code translate="no">output_field_names</code> 值。</p>
 </div>
-<h3 id="Step-3-Configure-index" class="common-anchor-header">步驟 3：配置索引</h3><p>定義包含必要欄位和內建函式的模式後，為您的集合設定索引。為了簡化這個過程，請使用<code translate="no">AUTOINDEX</code> 作為<code translate="no">index_type</code> ，這個選項允許 Milvus 根據您的資料結構選擇和配置最適合的索引類型。</p>
+<h3 id="Step-3-Configure-index" class="common-anchor-header">步驟 3：配置索引<button data-href="#Step-3-Configure-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定義包含必要欄位和內建函式的模式後，為您的集合設定索引。為了簡化這個過程，請使用<code translate="no">AUTOINDEX</code> 作為<code translate="no">index_type</code> ，這個選項允許 Milvus 根據您的資料結構選擇和配置最適合的索引類型。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -367,7 +442,22 @@ index_params.add_index(
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Create-collection" class="common-anchor-header">步驟 4：建立集合</h3><p>現在使用已定義的模式和索引參數建立資料集。</p>
+<h3 id="Step-4-Create-collection" class="common-anchor-header">步驟 4：建立集合<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>現在使用已定義的模式和索引參數建立資料集。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -375,7 +465,22 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">步驟 5：插入資料</h3><p>設定資料集和索引後，您就可以插入原始資料了。在這個過程中，您只需要提供原始文字。我們之前定義的 Function 模組會自動為每個文字項目產生相對應的稀疏向量。</p>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">步驟 5：插入資料<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>設定資料集和索引後，您就可以插入原始資料了。在這個過程中，您只需要提供原始文字。我們之前定義的 Function 模組會自動為每個文字項目產生相對應的稀疏向量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -383,7 +488,22 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">步驟 6：執行向量搜尋</h3><p>插入資料後，使用原始查詢文字執行語意搜尋。Milvus 會自動將您的查詢轉換成嵌入向量，根據相似度擷取相關文件，並傳回最匹配的結果。</p>
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">步驟 6：執行向量搜尋<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>插入資料後，使用原始查詢文字執行語意搜尋。Milvus 會自動將您的查詢轉換成嵌入向量，根據相似度擷取相關文件，並傳回最匹配的結果。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -414,20 +534,80 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">在 milvus.yaml 與環境變數中設定憑證有何不同？</h3><p>兩種方法都可以使用，但建議使用<code translate="no">milvus.yaml</code> ，因為它提供集中化的憑證管理，並在所有提供者之間提供一致的憑證命名。使用環境變數時，變數名稱因嵌入服務供應商而異，因此請參閱各供應商的專屬頁面，以瞭解所需的特定環境變數名稱 (例如，<a href="/docs/zh-hant/openai.md">OpenAI</a>或<a href="/docs/zh-hant/azure-openai.md">Azure OpenAI</a>)。</p>
-<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">如果我沒有在函式定義中指定憑證參數，會發生什麼情況？</h3><p>Milvus 遵循此憑證解析順序：</p>
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">在 milvus.yaml 與環境變數中設定憑證有何不同？<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>兩種方法都可以使用，但建議使用<code translate="no">milvus.yaml</code> ，因為它提供集中化的憑證管理，並在所有提供者之間提供一致的憑證命名。使用環境變數時，變數名稱因嵌入服務供應商而異，因此請參閱各供應商的專屬頁面，以瞭解所需的特定環境變數名稱 (例如，<a href="/docs/zh-hant/openai.md">OpenAI</a>或<a href="/docs/zh-hant/azure-openai.md">Azure OpenAI</a>)。</p>
+<h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">如果我沒有在函式定義中指定憑證參數，會發生什麼情況？<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 遵循此憑證解析順序：</p>
 <ol>
 <li>首先，它會尋找<code translate="no">milvus.yaml</code> 檔案中為該提供者設定的預設憑證。</li>
 <li>如果在 milvus.yaml 中不存在默认凭据，它将返回到环境变量（如果已配置）。</li>
 <li>如果<code translate="no">milvus.yaml</code> 認證或環境變數都沒有設定，Milvus 會產生錯誤。</li>
 </ol>
-<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">我如何驗證嵌入是否正確產生？</h3><p>您可以透過以下方式檢查</p>
+<h3 id="How-can-I-verify-that-embeddings-are-being-generated-correctly" class="common-anchor-header">我如何驗證嵌入是否正確產生？<button data-href="#How-can-I-verify-that-embeddings-are-being-generated-correctly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以透過以下方式檢查</p>
 <ol>
 <li>在插入後查詢您的集合，看看向量欄位是否包含資料</li>
 <li>檢查向量領域的長度是否符合您的預期尺寸</li>
 <li>執行簡單的相似性搜尋，以驗證嵌入是否產生有意義的結果</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">執行相似性搜尋時，我可以使用查詢向量而不是原始文字嗎？</h3><p>可以，您可以使用預先計算好的查詢向量來代替原始文字進行相似性搜尋。雖然 Function 模組會自動將原始文字查詢轉換為嵌入式資料，但您也可以在搜尋作業中直接提供向量資料至資料參數。注意：您所提供的查詢向量的尺寸大小，必須與您的 Function 模組所產生的向量內嵌的尺寸大小一致。</p>
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">執行相似性搜尋時，我可以使用查詢向量而不是原始文字嗎？<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>可以，您可以使用預先計算好的查詢向量來代替原始文字進行相似性搜尋。雖然 Function 模組會自動將原始文字查詢轉換為嵌入式資料，但您也可以在搜尋作業中直接提供向量資料至資料參數。注意：您所提供的查詢向量的尺寸大小，必須與您的 Function 模組所產生的向量嵌入的尺寸大小一致。</p>
 <p><strong>範例</strong>：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(

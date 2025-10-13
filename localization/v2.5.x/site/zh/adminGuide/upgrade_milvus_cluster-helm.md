@@ -289,8 +289,8 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 2.2 的一个主要变化是段索引的元数据结构。因此，当 Milvus 从 v2.1.x 升级到 v2.2.0 时，你需要使用 Helm 来迁移元数据。 下面是<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一个脚本</a>，供你安全迁移元数据。</p>
-<p>此脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
+    </button></h3><p>Milvus 2.2 的一个主要变化是段索引的元数据结构。因此，当 Milvus 从 v2.1.x 升级到 v2.2.0 时，你需要使用 Helm 来迁移元数据。 这里有<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一个脚本</a>供你安全迁移元数据。</p>
+<p>该脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
 <p>下表列出了元数据迁移的操作符。</p>
 <table>
 <thead>

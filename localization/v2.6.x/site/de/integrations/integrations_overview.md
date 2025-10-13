@@ -23,7 +23,7 @@ title: Übersicht über Integrationen
     </button></h1><p>Auf dieser Seite finden Sie eine Liste von Tutorials, die Ihnen die Interaktion mit Milvus und Tools von Drittanbietern erleichtern.</p>
 <table>
 <thead>
-<tr><th>Lehrgang</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
+<tr><th>Lernprogramm</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/de/integrate_with_llamaindex.md">RAG mit Milvus und LlamaIndex</a></td><td>RAG</td><td>Milvus, LLamaIndex</td></tr>
@@ -92,5 +92,6 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/milvus_and_n8n.md">Erste Schritte mit Milvus und n8n</a></td><td>Orchestrierung</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/de/use_milvus_in_anythingllm.md">Verwendung von Milvus in AnythingLLM</a></td><td>Orchestrierung</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/de/NLWeb_with_milvus.md">Verwendung von NLWeb mit Milvus</a></td><td>Daten-Quellen</td><td>Milvus, NLWeb</td></tr>
+<tr><td><a href="/docs/de/langextract_milvus_demo.md">LangExtract + Milvus-Integration</a></td><td>Datenquellen</td><td>Milvus, LangExtract</td></tr>
 </tbody>
 </table>

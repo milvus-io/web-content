@@ -57,7 +57,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
         ></path>
       </svg>
     </button></h2><p>Configurate la vostra istanza di Milvus per adattarla agli scenari delle vostre applicazioni regolando i parametri corrispondenti in <code translate="no">milvus.yaml</code>.</p>
-<p>Per ulteriori informazioni su ciascun parametro, consultate i seguenti link.</p>
+<p>Per maggiori informazioni su ciascun parametro, consultate i seguenti link.</p>
 <p>Ordinati per:</p>
 <div class="filter">
 <a href="#component">Componenti o dipendenze</a> <a href="#purpose">Finalità della configurazione</a> </div>

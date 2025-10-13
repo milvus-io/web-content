@@ -62,7 +62,7 @@ title: Verwalten von Ressourcengruppen
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Das Attribut <strong>requests</strong> gibt die Bedingungen an, die eine Ressourcengruppe erfüllen muss.</li>
+<li>Das <strong>requests-Attribut</strong> legt die Bedingungen fest, die eine Ressourcengruppe erfüllen muss.</li>
 <li>Das <strong>limits-Attribut</strong> legt die Höchstgrenzen für eine Ressourcengruppe fest.</li>
 <li>Die Attribute <strong>transfer_from</strong> und <strong>transfer_to</strong> beschreiben, von welchen Ressourcengruppen eine Ressourcengruppe vorzugsweise Ressourcen beziehen bzw. an welche Ressourcengruppen sie Ressourcen übertragen soll.</li>
 </ul>

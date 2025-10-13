@@ -184,7 +184,7 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h3><p>Wenn Ihr JSON-Feldschlüssel Werte in einem falschen Format enthält (z. B. Zahlen, die als Strings gespeichert sind), können Sie eine Cast-Funktion an das Argument <code translate="no">json_cast_function</code> übergeben, um diese Werte zum Zeitpunkt der Indexierung zu konvertieren.</p>
-<p>Bei Cast-Funktionen wird die Groß- und Kleinschreibung nicht berücksichtigt. Die folgenden Funktionen werden unterstützt:</p>
+<p>Bei Cast-Funktionen wird die Groß-/Kleinschreibung nicht berücksichtigt. Die folgenden Funktionen werden unterstützt:</p>
 <table>
    <tr>
      <th><p>Cast-Funktion</p></th>
@@ -450,7 +450,7 @@ MilvusClient.create_index(
         ></path>
       </svg>
     </button></h3><p>Wenn Ihr Filterausdruck einen anderen Typ verwendet als der Index <code translate="no">json_cast_type</code>, wird Milvus den Index nicht verwenden und kann auf einen langsameren Brute-Force-Scan zurückgreifen, wenn die Daten dies zulassen. Um die beste Leistung zu erzielen, sollten Sie Ihren Filterausdruck immer an den Cast-Typ des Indexes anpassen. Wenn zum Beispiel ein numerischer Index mit <code translate="no">json_cast_type=&quot;double&quot;</code> erstellt wird, werden nur numerische Filterbedingungen den Index nutzen.</p>
-<h3 id="When-creating-a-JSON-index-what-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="common-anchor-header">Was passiert beim Erstellen eines JSON-Index, wenn ein JSON-Schlüssel inkonsistente Datentypen in verschiedenen Entitäten aufweist?<button data-href="#When-creating-a-JSON-index-what-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="anchor-icon" translate="no">
+<h3 id="When-creating-a-JSON-index-what-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="common-anchor-header">Was passiert bei der Erstellung eines JSON-Index, wenn ein JSON-Schlüssel inkonsistente Datentypen für verschiedene Entitäten aufweist?<button data-href="#When-creating-a-JSON-index-what-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -54,7 +54,7 @@ beta: Milvus v2.5.15+
 <li><p><strong>Rilevamento della lingua:</strong> Questa stringa viene prima passata a un motore di rilevamento della lingua, che cerca di identificare la lingua. Milvus supporta due motori: <strong>whatlang</strong> e <strong>lingua</strong>.</p></li>
 <li><p><strong>Selezione dell'analizzatore:</strong></p>
 <ul>
-<li><p><strong>Successo:</strong> Se la lingua viene rilevata con successo, il sistema verifica se il nome della lingua rilevata ha un analizzatore corrispondente configurato nel dizionario <code translate="no">analyzers</code>. Se viene trovata una corrispondenza, il sistema applica l'analizzatore specificato al testo in ingresso. Ad esempio, un testo rilevato come "mandarino" viene indirizzato a un tokenizzatore <code translate="no">jieba</code>.</p></li>
+<li><p><strong>Successo:</strong> Se la lingua viene rilevata con successo, il sistema controlla se il nome della lingua rilevata ha un analizzatore corrispondente configurato nel dizionario <code translate="no">analyzers</code>. Se viene trovata una corrispondenza, il sistema applica l'analizzatore specificato al testo in ingresso. Ad esempio, un testo rilevato come "mandarino" viene indirizzato a un tokenizzatore <code translate="no">jieba</code>.</p></li>
 <li><p><strong>Fallback:</strong> Se il rilevamento fallisce, o se una lingua viene rilevata con successo ma non è stato fornito un analizzatore specifico per essa, il sistema si affida a un <strong>analizzatore</strong> predefinito preconfigurato. Questo è un punto cruciale di chiarimento: l'analizzatore <code translate="no">default</code> è un ripiego sia per il fallimento del rilevamento che per l'assenza di un analizzatore corrispondente.</p></li>
 </ul></li>
 </ol>

@@ -1,6 +1,6 @@
 ---
 id: tutorials-overview.md
-summary: Questa pagina fornisce un elenco di tutorial per interagire con Milvus.
+summary: Questa pagina fornisce un elenco di esercitazioni per interagire con Milvus.
 title: Panoramica dei tutorial
 ---
 <h1 id="Tutorials-Overview" class="common-anchor-header">Panoramica dei tutorial<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">
@@ -32,11 +32,11 @@ title: Panoramica dei tutorial
 <tr><td><a href="/docs/it/multimodal_rag_with_milvus.md">RAG multimodale con Milvus</a></td><td>RAG</td><td>ricerca vettoriale, campo dinamico</td></tr>
 <tr><td><a href="/docs/it/multimodal_rag_with_milvus.md">Ricerca multimodale con vettori multipli</a></td><td>Ricerca semantica</td><td>multi vettoriale, ricerca ibrida</td></tr>
 <tr><td><a href="/docs/it/graph_rag_with_milvus.md">RAG grafico con Milvus</a></td><td>RAG</td><td>ricerca a grafo</td></tr>
-<tr><td><a href="/docs/it/contextual_retrieval_with_milvus.md">Ricerca contestuale con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/contextual_retrieval_with_milvus.md">Recupero contestuale con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/hdbscan_clustering_with_milvus.md">Raggruppamento HDBSCAN con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/use_ColPali_with_milvus.md">Utilizzare ColPali per il recupero multimodale con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/quickstart_with_attu.md">Avvio rapido con Attu</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
-<tr><td><a href="/docs/it/use-async-milvus-client-with-asyncio.md">Usare AsyncMilvusClient con asyncio</a></td><td>AsyncIO</td><td>AsyncIO, ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/use-async-milvus-client-with-asyncio.md">Utilizzare AsyncMilvusClient con asyncio</a></td><td>AsyncIO</td><td>AsyncIO, ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/text_image_search.md">Ricerca da testo a immagine con Milvus</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/vector_visualization.md">Visualizzazione vettoriale</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/movie_recommendation_with_milvus.md">Raccomandazione di film con Milvus</a></td><td>Sistema di raccomandazione</td><td>ricerca vettoriale</td></tr>
@@ -47,6 +47,7 @@ title: Panoramica dei tutorial
 <tr><td><a href="/docs/it/audio_similarity_search.md">Ricerca per similarità audio</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/dna_sequence_classification.md">Classificazione del DNA</a></td><td>Classificazione</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/text_search_engine.md">Motore di ricerca testuale</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
-<tr><td><a href="/docs/it/image_deduplication_system.md">Deduplicazione delle immagini</a></td><td>Deduplicazione</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/image_deduplication_system.md">Deduplicazione di immagini</a></td><td>Deduplicazione</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/generating_milvus_query_filter_expressions.md">Generazione di espressioni di filtro per query Milvus con modelli linguistici di grandi dimensioni</a></td><td>Filtraggio dei metadati</td><td>ricerca vettoriale</td></tr>
 </tbody>
 </table>

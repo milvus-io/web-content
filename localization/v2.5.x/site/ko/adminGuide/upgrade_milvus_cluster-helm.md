@@ -44,7 +44,7 @@ title: 헬름 차트로 Milvus 클러스터 업그레이드하기
 <li>쿠버네티스 버전 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>밀버스-헬름 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속 요소로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가해야 한다.</p>
+<p>밀버스-헬름 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속 요소로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가하시기 바랍니다.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">밀버스 헬름 차트 확인<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -79,7 +79,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.13</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada file konfigurasi di atas, atur <code translate="no">spec.components.enableRollingUpdate</code> ke <code translate="no">true</code> dan atur <code translate="no">spec.components.image</code> ke versi Milvus yang diinginkan.</p>
-<p>Secara default, Milvus melakukan pemutakhiran bergilir untuk koordinator dengan cara berurutan, di mana Milvus mengganti image pod koordinator satu demi satu. Untuk mengurangi waktu peningkatan, pertimbangkan untuk mengatur <code translate="no">spec.components.imageUpdateMode</code> ke <code translate="no">all</code> sehingga Milvus mengganti semua gambar pod secara bersamaan.</p>
+<p>Secara default, Milvus melakukan pemutakhiran bergilir untuk koordinator dengan cara berurutan, di mana Milvus mengganti image pod koordinator satu demi satu. Untuk mengurangi waktu peningkatan, pertimbangkan untuk mengatur <code translate="no">spec.components.imageUpdateMode</code> ke <code translate="no">all</code> sehingga Milvus mengganti semua gambar pod pada waktu yang sama.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

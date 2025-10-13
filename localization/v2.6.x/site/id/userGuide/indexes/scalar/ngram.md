@@ -80,48 +80,40 @@ beta: Milvus v2.6.2+
 <li><p><code translate="no">min_gram</code>: N-gram terpendek yang akan dihasilkan. Ini juga mendefinisikan panjang substring kueri minimum yang dapat memanfaatkan indeks.</p></li>
 <li><p><code translate="no">max_gram</code>: N-gram terpanjang yang akan dihasilkan. Pada waktu kueri, ini juga digunakan sebagai ukuran jendela maksimum ketika memisahkan string kueri yang panjang.</p></li>
 </ul>
-<p>Sebagai contoh, dengan <code translate="no">min_gram=2</code> dan <code translate="no">max_gram=3</code>, string <code translate="no">&quot;AI database&quot;</code> dipecah sebagai berikut:</p></li>
-</ol>
+<p>Misalnya, dengan <code translate="no">min_gram=2</code> dan <code translate="no">max_gram=3</code>, string <code translate="no">&quot;AI database&quot;</code> dipecah sebagai berikut:</p>
+<ul>
+<li><strong>2-gram:</strong> <code translate="no">AI</code>, <code translate="no">I_</code>, <code translate="no">_d</code>, <code translate="no">da</code>, <code translate="no">at</code>, ...</li>
+<li><strong>3-gram:</strong> <code translate="no">AI_</code>, <code translate="no">I_d</code>, <code translate="no">_da</code>, <code translate="no">dat</code>, <code translate="no">ata</code>, ...</li>
+</ul>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" />
    </span> <span class="img-wrapper"> <span>Membangun Indeks Ngram</span> </span></p>
-<pre><code translate="no">- **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
-
-- **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
-
-&lt;div class=&quot;alert note&quot;&gt;
-
-- For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive). For example, with `[2,4]` and the word `&quot;text&quot;`, Milvus generates:
-
-- **2-grams:** `te`, `ex`, `xt`
-
-- **3-grams:** `tex`, `ext`
-
-- **4-grams:** `text`
-
-- N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `&quot;向量数据库&quot;` with `min_gram = 2` is decomposed into: `&quot;向量&quot;`, `&quot;量数&quot;`, `&quot;数据&quot;`, `&quot;据库&quot;`.
-
-- Spaces and punctuation are treated as characters during decomposition.
-
-- Decomposition preserves original case, and matching is case-sensitive. For example, `&quot;Database&quot;` and `&quot;database&quot;` will generate different n-grams and require exact case matching during queries.
-
-&lt;/div&gt;
-</code></pre>
-<ol>
-<li><p><strong>Membangun indeks terbalik</strong>: <strong>Indeks terbalik</strong> dibuat yang memetakan setiap n-gram yang dihasilkan ke daftar ID dokumen yang mengandungnya.</p>
+<blockquote>
+<p><strong>Catatan</strong></p>
+<ul>
+<li><p>Untuk rentang <code translate="no">[min_gram, max_gram]</code>, Milvus menghasilkan semua n-gram untuk setiap panjang di antara dua nilai (inklusif).<br>
+Contoh: dengan <code translate="no">[2,4]</code> dan kata <code translate="no">&quot;text&quot;</code>, Milvus menghasilkan:</p>
+<ul>
+<li><strong>2-gram:</strong> <code translate="no">te</code>, <code translate="no">ex</code>, <code translate="no">xt</code></li>
+<li><strong>3-gram:</strong> <code translate="no">tex</code>, <code translate="no">ext</code></li>
+<li><strong>4-gram</strong>: <code translate="no">text</code></li>
+</ul></li>
+<li><p>Penguraian N-gram adalah berbasis karakter dan bahasa-agnostik. Sebagai contoh, dalam bahasa Mandarin, <code translate="no">&quot;向量数据库&quot;</code> dengan <code translate="no">min_gram = 2</code> diuraikan menjadi: <code translate="no">&quot;向量&quot;</code>, <code translate="no">&quot;量数&quot;</code>, <code translate="no">&quot;数据&quot;</code>, <code translate="no">&quot;据库&quot;</code>.</p></li>
+<li><p>Spasi dan tanda baca diperlakukan sebagai karakter selama penguraian.</p></li>
+<li><p>Penguraian mempertahankan huruf besar/kecil, dan pencocokan peka terhadap huruf besar/kecil. Sebagai contoh, <code translate="no">&quot;Database&quot;</code> dan <code translate="no">&quot;database&quot;</code> akan menghasilkan n-gram yang berbeda dan membutuhkan pencocokan huruf yang tepat selama kueri.</p></li>
+</ul>
+</blockquote></li>
+<li><p><strong>Membangun indeks terbalik</strong>: <strong>Indeks terbalik</strong> dibuat untuk memetakan setiap n-gram yang dihasilkan ke daftar ID dokumen yang mengandungnya.</p>
 <p>Misalnya, jika 2-gram <code translate="no">&quot;AI&quot;</code> muncul di dokumen dengan ID 1, 5, 6, 8, dan 9, indeks akan mencatat <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code>. Indeks ini kemudian digunakan pada waktu kueri untuk mempersempit cakupan pencarian dengan cepat.</p></li>
 </ol>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" />
    </span> <span class="img-wrapper"> <span>Membangun Indeks Ngram 2</span> </span></p>
-<pre><code translate="no">&lt;div class=&quot;alert note&quot;&gt;
-
-A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
-
-&lt;/div&gt;
-</code></pre>
+<div class="alert note">
+<p>Jangkauan <code translate="no">[min_gram, max_gram]</code> yang lebih luas akan menghasilkan lebih banyak gram dan daftar pemetaan yang lebih besar. Jika memori terbatas, pertimbangkan mode mmap untuk daftar pemetaan yang sangat besar. Untuk detailnya, lihat <a href="/docs/id/mmap.md">Menggunakan mmap</a>.</p>
+</div>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Tahap 2: Mempercepat kueri<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -137,7 +129,7 @@ A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ketika filter <code translate="no">LIKE</code> dijalankan, Milvus menggunakan indeks NGRAM untuk mempercepat kueri dengan langkah-langkah berikut:</p>
+    </button></h3><p>Ketika pemetaan <code translate="no">LIKE</code> dijalankan, Milvus menggunakan indeks NGRAM untuk mempercepat kueri dengan langkah-langkah berikut:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/accelerate-queries.png" alt="Accelerate Queries" class="doc-image" id="accelerate-queries" />
@@ -324,7 +316,7 @@ client.create_index(
     </button></h2><ul>
 <li><p><strong>Jenis bidang</strong>: Didukung pada bidang <code translate="no">VARCHAR</code> dan <code translate="no">JSON</code>. Untuk JSON, sediakan <code translate="no">params.json_path</code> dan <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
 <li><p><strong>Unicode</strong>: Penguraian NGRAM berbasis karakter dan bahasa-agnostik serta menyertakan spasi dan tanda baca.</p></li>
-<li><p><strong>Pertukaran ruang-waktu</strong>: Rentang gram yang lebih luas <code translate="no">[min_gram, max_gram]</code> menghasilkan lebih banyak gram dan indeks yang lebih besar. Jika memori terbatas, pertimbangkan mode <code translate="no">mmap</code> untuk daftar posting yang besar. Untuk informasi lebih lanjut, lihat <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Menggunakan mmap</a>.</p></li>
+<li><p><strong>Pertukaran ruang-waktu</strong>: Rentang gram yang lebih luas <code translate="no">[min_gram, max_gram]</code> menghasilkan lebih banyak gram dan indeks yang lebih besar. Jika memori terbatas, pertimbangkan mode <code translate="no">mmap</code> untuk daftar posting yang besar. Untuk informasi lebih lanjut, lihat <a href="/docs/id/mmap.md">Menggunakan mmap</a>.</p></li>
 <li><p><strong>Kekekalan</strong>: <code translate="no">min_gram</code> dan <code translate="no">max_gram</code> tidak dapat diubah di tempatnya-bangun kembali indeks untuk menyesuaikannya.</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">Praktik terbaik<button data-href="#Best-practices" class="anchor-icon" translate="no">

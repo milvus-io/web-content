@@ -624,7 +624,7 @@ client.search(
    <tr>
      <td><p><code translate="no">functions</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Указывает имена целевых ранжиров в виде списка.</p></td>
+     <td><p>Указывает имена целевых ранжиров в списке.</p></td>
      <td><p><code translate="no">["fix_weight_ranker", "random_weight_ranker"]</code></p></td>
    </tr>
    <tr>
