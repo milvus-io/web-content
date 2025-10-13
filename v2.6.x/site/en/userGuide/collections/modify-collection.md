@@ -271,6 +271,14 @@ await client.alterCollectionProperties({
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "collectionName": "my_collection",
+    "properties": {
+      "mmap.enabled": "true"
+    }
+  }'
 ```
 
 ### Example 3: Enable partition key
@@ -321,6 +329,15 @@ await client.alterCollectionProperties({
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token>" \
+  -d '{
+    "collectionName": "my_collection",
+    "properties": {
+      "partitionkey.isolation": "true"
+    }
+  }'
 ```
 
 ### Example 4: Enable dynamic field
@@ -371,6 +388,15 @@ await client.alterCollectionProperties({
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token>" \
+  -d '{
+    "collectionName": "my_collection",
+    "properties": {
+      "dynamicfield.enabled": "true"
+    }
+  }'
 ```
 
 ### Example 5: Enable allow_insert_auto_id
@@ -397,11 +423,24 @@ client.alter_collection_properties(
 ```
 
 ```java
-// java
+Map<String, String> properties = new HashMap<>();
+properties.put("allow_insert_auto_id", "True");
+
+AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+        .collectionName("my_collection")
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
 ```
 
 ```javascript
-// js
+await client.alterCollectionProperties({
+    collection_name: "my_collection",
+    properties: {
+        "allow_insert_auto_id": true
+    }
+});
 ```
 
 ```go
@@ -410,6 +449,15 @@ client.alter_collection_properties(
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token>" \
+  -d '{
+    "collectionName": "my_collection",
+    "properties": {
+      "allow_insert_auto_id": "true"
+    }
+  }'
 ```
 
 ## Drop Collection Properties
