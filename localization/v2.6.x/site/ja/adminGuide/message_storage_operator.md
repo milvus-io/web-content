@@ -59,9 +59,10 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
 <li>後方互換性のため、2.3から導入されたNatsはこれらの優先ルールに参加しません。</li>
 </ul></li>
 <li>Milvusシステムの実行中にメッセージストレージを変更することはできません。</li>
-<li>Kafka 2.x または 3.x バージョンのみがサポートされています。</li>
+<li>Kafka 2.x または 3.x バージョンのみがサポートされます。</li>
+<li><strong>アップグレードの制限</strong> <strong>メッセージキューの制限</strong>Milvus v2.6.3へアップグレードする場合、現在のメッセージキューを維持する必要があります。アップグレード中に異なるメッセージキューシステムを切り替えることはサポートされていません。メッセージキューシステムの変更は将来のバージョンでサポートされる予定です。</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQの設定<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ の設定<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,7 +79,7 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
       </svg>
     </button></h2><p>RocksMQはMilvusスタンドアロンのデフォルトのメッセージストレージです。</p>
 <div class="alert note">
-<p>現在、RocksMQをMilvusスタンドアロンのメッセージストレージとして設定できるのはMilvus Operatorのみです。</p>
+<p>現在、RocksMQをMilvusスタンドアロンのメッセージストレージとして設定できるのは、Milvus Operatorのみです。</p>
 </div>
 <h4 id="Example" class="common-anchor-header">設定例</h4><p>以下の例ではRocksMQサービスを設定しています。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -205,7 +206,22 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
       </svg>
     </button></h2><p>Pulsarは最近の変更のログを管理し、ストリーム・ログを出力し、ログ購読を提供します。メッセージ・ストレージ用にPulsarを設定することは、MilvusスタンドアロンおよびMilvusクラスタの両方でサポートされています。ただしMilvus Operatorでは、Milvusクラスタのメッセージ・ストレージとしてのみPulsarを構成することができます。Pulsarを設定するには、<code translate="no">spec.dependencies.pulsar</code> の下に必須フィールドを追加してください。</p>
 <p><code translate="no">pulsar</code> <code translate="no">external</code> および をサポートしています。<code translate="no">inCluster</code></p>
-<h3 id="External-Pulsar" class="common-anchor-header">外部Pulsar</h3><p><code translate="no">external</code> は外部Pulsarサービスの使用を示します。 外部Pulsarサービスの構成に使用されるフィールドには以下が含まれます：</p>
+<h3 id="External-Pulsar" class="common-anchor-header">外部Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> は外部Pulsarサービスの使用を示します。 外部Pulsarサービスの構成に使用されるフィールドには以下が含まれます：</p>
 <ul>
 <li><code translate="no">external</code>:  <code translate="no">true</code> 値は、Milvusが外部Pulsarサービスを使用していることを示します。</li>
 <li><code translate="no">endpoints</code>:Pulsarのエンドポイント。</li>
@@ -229,7 +245,22 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">内部Pulsar</h3><p><code translate="no">inCluster</code> は、Milvusクラスタが起動すると、クラスタ内で自動的にPulsarサービスが起動することを示します。</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">内部Pulsar<button data-href="#Internal-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> は、Milvusクラスタが起動すると、クラスタ内で自動的にPulsarサービスが起動することを示します。</p>
 <h4 id="Example" class="common-anchor-header">例</h4><p>以下の例では、内部Pulsarサービスを構成します。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -290,8 +321,23 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
         ></path>
       </svg>
     </button></h2><p>PulsarはMilvusクラスタにおけるデフォルトのメッセージ・ストレージです。Kafkaを使用する場合は、オプションのフィールド<code translate="no">msgStreamType</code> 。</p>
-<p><code translate="no">kafka</code> は および をサポートしています。<code translate="no">external</code> <code translate="no">inCluster</code></p>
-<h3 id="External-Kafka" class="common-anchor-header">外部Kafka</h3><p><code translate="no">external</code> は外部Kafkaサービスを使用することを示します。</p>
+<p><code translate="no">kafka</code> は<code translate="no">external</code> および<code translate="no">inCluster</code> をサポートしています。</p>
+<h3 id="External-Kafka" class="common-anchor-header">外部Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> は外部Kafkaサービスを使用することを示します。</p>
 <p>外部Kafkaサービスの設定に使用されるフィールドは以下のとおりです：</p>
 <ul>
 <li><code translate="no">external</code>:<code translate="no">true</code> の値は、Milvusが外部Kafkaサービスを使用していることを示します。</li>
@@ -327,7 +373,22 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
 <blockquote>
 <p>SASLの設定はoperator v0.8.5以上のバージョンでサポートされています。</p>
 </blockquote>
-<h3 id="Internal-Kafka" class="common-anchor-header">内部Kafka</h3><p><code translate="no">inCluster</code> は、Milvusクラスタが起動すると、クラスタ内でKafkaサービスが自動的に起動することを示します。</p>
+<h3 id="Internal-Kafka" class="common-anchor-header">内部Kafka<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> は、Milvusクラスタが起動すると、クラスタ内でKafkaサービスが自動的に起動することを示します。</p>
 <h4 id="Example" class="common-anchor-header">例</h4><p>次の例では、内部Kafkaサービスを設定します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

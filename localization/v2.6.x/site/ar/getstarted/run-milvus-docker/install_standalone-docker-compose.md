@@ -57,7 +57,7 @@ title: تشغيل Milvus باستخدام Docker Compose (لينكس)
       </svg>
     </button></h2><p>يوفر Milvus ملف تكوين Docker Compose في مستودع Milvus. لتثبيت ملف Milvus باستخدام Docker Compose، ما عليك سوى تشغيل</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.2/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>الجديد في الإصدار 2.6.2:</strong></p>
+<p><strong>الجديد في الإصدار 2.6.3:</strong></p>
 <ul>
 <li><strong>بنية محسّنة</strong>: يتميز بالعقدة المتدفقة الجديدة والمكونات المحسنة</li>
 <li><strong>التبعيات المحدثة</strong>: يتضمن أحدث إصدارات MinIO و etcd</li>
 <li><strong>تهيئة محسّنة</strong>: إعدادات محسّنة لأداء أفضل</li>
 </ul>
-<p>قم دائمًا بتنزيل أحدث تكوين Docker Compose لضمان التوافق مع ميزات الإصدار 2.6.2.</p>
+<p>قم دائمًا بتنزيل أحدث تكوين Docker Compose لضمان التوافق مع ميزات الإصدار 2.6.3.</p>
 <ul>
 <li><p>إذا لم تتمكن من تشغيل الأمر أعلاه، يُرجى التحقق مما إذا كان نظامك يحتوي على Docker Compose V1 مثبتًا. إذا كانت هذه هي الحالة، ننصحك بالترحيل إلى Docker Compose V2 نظرًا للملاحظات الواردة في <a href="https://docs.docker.com/compose/">هذه الصفحة</a>.</p></li>
 <li><p>إذا واجهت أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p></li>

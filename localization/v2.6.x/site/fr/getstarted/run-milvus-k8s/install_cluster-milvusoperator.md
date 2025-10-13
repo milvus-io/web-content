@@ -119,7 +119,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <p>Exécutez la commande suivante pour installer Milvus Operator avec <code translate="no">kubectl</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Vous obtiendrez un résultat similaire au suivant à la fin du processus d'installation.</p>
+<p>Vous obtiendrez un résultat similaire à celui qui suit à la fin de la procédure d'installation.</p>
 <pre><code translate="no" class="language-shell">namespace/milvus-operator created
 customresourcedefinition.apiextensions.k8s.io/milvusclusters.milvus.io created
 serviceaccount/milvus-operator-controller-manager created
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Une fois que le pod Milvus Operator fonctionne, vous pouvez déployer un cluster Milvus comme suit.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La commande ci-dessus déploie un cluster Milvus avec <strong>Woodpecker</strong> comme file d'attente de messages (recommandé pour la version 2.6.2) et tous les nouveaux composants architecturaux, y compris le nœud de streaming.</p>
+<p>La commande ci-dessus déploie un cluster Milvus avec <strong>Woodpecker</strong> comme file d'attente de messages (recommandé pour la version 2.6.3) et tous les nouveaux composants architecturaux, y compris le nœud de streaming.</p>
 <p><strong>Points forts de l'architecture dans ce déploiement :</strong></p>
 <ul>
 <li><strong>File d'attente de messages</strong>: <a href="/docs/fr/use-woodpecker.md">Utilise Woodpecker</a> (réduit la maintenance de l'infrastructure)</li>

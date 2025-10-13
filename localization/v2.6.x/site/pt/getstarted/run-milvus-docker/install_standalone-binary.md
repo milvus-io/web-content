@@ -57,13 +57,13 @@ title: Instalar o Milvus Standalone com o pacote RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode transferir o pacote RPM/DEB de acordo com a arquitetura do seu sistema a partir da <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.2">página Milvus Releases</a>.</p>
+    </button></h2><p>Pode transferir o pacote RPM/DEB de acordo com a arquitetura do seu sistema a partir da <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.3">página Milvus Releases</a>.</p>
 <ul>
-<li>Para x86_64/amd64, baixe o pacote <strong>milvus_2.6.0-1_amd64.deb</strong> ou <strong>milvus_2.6.0-1_amd64.rpm</strong>.</li>
-<li>Para ARM64, faça o download do pacote <strong>milvus_2.6.0-1_arm64.deb</strong> ou <strong>milvus_2.6.0-1_arm64.rpm</strong>.</li>
+<li>Para x86_64/amd64, faça o download do pacote <strong>milvus_2.6.0-1_amd64.deb</strong> ou <strong>milvus_2.6.0-1_amd64.rpm</strong>.</li>
+<li>Para ARM64, baixe o pacote <strong>milvus_2.6.0-1_arm64.deb</strong> ou <strong>milvus_2.6.0-1_arm64.rpm</strong>.</li>
 </ul>
 <p>O comando a seguir pressupõe que você vai executar o Milvus Standalone em uma máquina x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.2/milvus_2.6.0-1_amd64.rpm -O milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus_2.6.0-1_amd64.rpm -O milvus_2.6.0-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Instalar o pacote RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,7 +193,7 @@ dpkg -l | grep milvus
       </svg>
     </button></h2><p>Depois de instalar o Milvus Standalone, você pode:</p>
 <ul>
-<li><p>Verificar o <a href="/docs/pt/quickstart.md">Quickstart</a> para ver o que o Milvus pode fazer.</p></li>
+<li><p>Verificar <a href="/docs/pt/quickstart.md">o Quickstart</a> para ver o que o Milvus pode fazer.</p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
 <li><a href="/docs/pt/manage_databases.md">Gerir bases de dados</a></li>
@@ -204,7 +204,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
-<li><p><a href="/docs/pt/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/pt/scaleout.md">Escalar o cluster do Milvus</a>.</p></li>
 <li><p>Implantar seu cluster Milvu em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>

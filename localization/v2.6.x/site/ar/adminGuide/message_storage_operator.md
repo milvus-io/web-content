@@ -60,6 +60,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
 </ul></li>
 <li>لا يمكن تغيير تخزين الرسائل أثناء تشغيل نظام ميلفوس.</li>
 <li>يتم دعم إصدار كافكا 2.x أو 3.x فقط.</li>
+<li><strong>قيود الترقية</strong>: <strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus الإصدار 2.6.3 من Milvus، يجب الحفاظ على اختيار قائمة انتظار الرسائل الحالية. التبديل بين أنظمة طابور الرسائل المختلفة أثناء الترقية غير مدعوم. سيتوفر دعم تغيير أنظمة قائمة انتظار الرسائل في الإصدارات المستقبلية.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">تكوين RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,9 +77,9 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RocksMQ هو مخزن الرسائل الافتراضي في نظام Milvus المستقل.</p>
+    </button></h2><p>RocksMQ هو التخزين الافتراضي للرسائل في نظام Milvus المستقل.</p>
 <div class="alert note">
-<p>في الوقت الحالي، يمكنك فقط تكوين RocksMQ كمخزن للرسائل في نظام Milvus المستقل باستخدام مشغل Milvus.</p>
+<p>وحالياً، يمكنك فقط تكوين RocksMQ كمخزن للرسائل في نظام Milvus المستقل مع مشغل Milvus.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">مثال</h4><p>يقوم المثال التالي بتكوين خدمة RocksMQ.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -205,7 +206,22 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
       </svg>
     </button></h2><p>يدير Pulsar سجلات التغييرات الأخيرة، ويخرج سجلات الدفق، ويوفر اشتراكات السجل. يتم دعم تكوين Pulsar لتخزين الرسائل في كل من Milvus المستقل و Milvus cluster. ومع ذلك، مع مشغل Milvus، يمكنك فقط تكوين Pulsar كمخزن للرسائل لمجموعة Milvus العنقودية. أضف الحقول المطلوبة ضمن <code translate="no">spec.dependencies.pulsar</code> لتكوين Pulsar.</p>
 <p><code translate="no">pulsar</code> يدعم <code translate="no">external</code> و <code translate="no">inCluster</code>.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">بولسار خارجي</h3><p><code translate="no">external</code> يشير إلى استخدام خدمة بولسار خارجية. تتضمن الحقول المستخدمة لتكوين خدمة بولسار خارجية ما يلي:</p>
+<h3 id="External-Pulsar" class="common-anchor-header">بولسار خارجي<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> يشير إلى استخدام خدمة بولسار خارجية. تتضمن الحقول المستخدمة لتكوين خدمة بولسار خارجية ما يلي:</p>
 <ul>
 <li><code translate="no">external</code>:  تشير القيمة <code translate="no">true</code> إلى أن ميلفوس يستخدم خدمة بولسار خارجية.</li>
 <li><code translate="no">endpoints</code>: نقاط نهاية بولسار.</li>
@@ -229,7 +245,22 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">بولسار داخلي</h3><p><code translate="no">inCluster</code> يشير إلى أنه عند بدء تشغيل مجموعة Milvus، تبدأ خدمة Pulsar تلقائياً في المجموعة.</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">بولسار داخلي<button data-href="#Internal-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> يشير إلى أنه عند بدء تشغيل مجموعة Milvus، تبدأ خدمة Pulsar تلقائياً في المجموعة.</p>
 <h4 id="Example" class="common-anchor-header">مثال</h4><p>يقوم المثال التالي بتكوين خدمة Pulsar داخلية.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -291,7 +322,22 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
       </svg>
     </button></h2><p>Pulsar هو مخزن الرسائل الافتراضي في مجموعة Milvus. إذا كنت تريد استخدام كافكا، أضف الحقل الاختياري <code translate="no">msgStreamType</code> لتكوين كافكا.</p>
 <p><code translate="no">kafka</code> يدعم <code translate="no">external</code> و <code translate="no">inCluster</code>.</p>
-<h3 id="External-Kafka" class="common-anchor-header">كافكا الخارجية</h3><p><code translate="no">external</code> يشير إلى استخدام خدمة كافكا خارجية.</p>
+<h3 id="External-Kafka" class="common-anchor-header">كافكا الخارجية<button data-href="#External-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> يشير إلى استخدام خدمة كافكا خارجية.</p>
 <p>تتضمن الحقول المستخدمة لتكوين خدمة كافكا خارجية ما يلي:</p>
 <ul>
 <li><code translate="no">external</code>: تشير القيمة <code translate="no">true</code> إلى أن ميلفوس يستخدم خدمة كافكا خارجية.</li>
@@ -327,7 +373,22 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
 <blockquote>
 <p>يتم دعم تكوينات SASL في المشغل الإصدار 0.8.5 أو إصدار أعلى.</p>
 </blockquote>
-<h3 id="Internal-Kafka" class="common-anchor-header">كافكا الداخلية</h3><p><code translate="no">inCluster</code> يشير إلى أنه عند بدء تشغيل مجموعة Milvus، تبدأ خدمة كافكا تلقائيًا في المجموعة.</p>
+<h3 id="Internal-Kafka" class="common-anchor-header">كافكا الداخلية<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> يشير إلى أنه عند بدء تشغيل مجموعة Milvus، تبدأ خدمة كافكا تلقائيًا في المجموعة.</p>
 <h4 id="Example" class="common-anchor-header">مثال</h4><p>يقوم المثال التالي بتكوين خدمة كافكا داخلية.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

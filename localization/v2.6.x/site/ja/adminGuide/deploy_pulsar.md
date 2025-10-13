@@ -21,6 +21,9 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
       </svg>
     </button></h1><p>Milvusは、最近の変更のログ管理、ストリームログの出力、ログ購読の提供にPulsarまたはKafkaを使用します。Pulsarはデフォルトのメッセージ・ストレージ・システムです。このトピックでは、Docker ComposeまたはHelmを使用してメッセージ・ストレージを設定する方法を紹介します。</p>
 <p><a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>またはK8s上でPulsarを構成し、K8s上でKafkaを構成することができます。</p>
+<div class="alert note">
+<p><strong>メッセージ・キューの制限</strong>Milvus v2.6.3にアップグレードする場合、現在選択しているメッセージ・キューを維持する必要があります。アップグレード中の異なるメッセージキューシステム間の切り替えはサポートされていません。メッセージ・キュー・システムの変更は、将来のバージョンでサポートされる予定です。</p>
+</div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker ComposeでPulsarを構成する<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,14 +39,44 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1.Pulsarの構成</h3><p>Docker ComposeでPulsarを設定するには、milvus/configパスの<code translate="no">milvus.yaml</code> ファイル内の<code translate="no">pulsar</code> セクションに値を指定します。</p>
+    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1.Pulsarの構成<button data-href="#1-Configure-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Docker ComposeでPulsarを設定するには、milvus/configパスの<code translate="no">milvus.yaml</code> ファイル内の<code translate="no">pulsar</code> セクションに値を指定します。</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
-<h3 id="2-Run-Milvus" class="common-anchor-header">2.Milvusの実行</h3><p>以下のコマンドを実行し、Pulsar設定を使用するMilvusを起動します。</p>
+<h3 id="2-Run-Milvus" class="common-anchor-header">2.Milvusの実行<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下のコマンドを実行し、Pulsar設定を使用するMilvusを起動します。</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">設定はMilvusの起動後にのみ有効になります。詳細は<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Milvusの起動を</a>ご参照ください。</div>
@@ -64,7 +97,22 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
       </svg>
     </button></h2><p>K8s上のMilvusクラスタの場合、Milvusの起動と同じコマンドでPulsarを設定することができます。あるいは、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使ってPulsarを設定することもできます。</p>
 <p>Helmを使ったMilvusの設定方法の詳細については、<a href="/docs/ja/configure-helm.md">Helm Chartsを使ったMilvusの設定を</a>ご参照ください。Pulsar関連の設定項目の詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><code translate="no">values.yaml</code> ファイルの<code translate="no">externalConfigFiles</code> セクションを設定します。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -97,9 +145,24 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するのと同じコマンドでWoodpeckerを設定することができます。あるいは、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使用してWoodpeckerを設定することもできます。</p>
+    </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するのと同じコマンドでWoodpeckerを設定することができます。あるいは、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使ってWoodpeckerを設定することもできます。</p>
 <p>Helmを使用したMilvusの設定方法の詳細については、<a href="/docs/ja/configure-helm.md">Helm Chartsを使用したMilvusの設定を</a>参照してください。Woodpecker関連の設定項目の詳細については、<a href="/docs/ja/use-woodpecker.md">woodpecker関連の設定を</a>参照してください。</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li><code translate="no">values.yaml</code> ファイルの<code translate="no">externalConfigFiles</code> セクションを設定します。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -160,8 +223,23 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
         ></path>
       </svg>
     </button></h2><p>K8s上のMilvusクラスタでは、Milvusの起動と同じコマンドでKafkaを設定することができます。また、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使用してKafkaを設定することもできます。</p>
-<p>Helmを使用したMilvusの設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helmチャートを使用したMilvusの設定</a>」を参照してください。Pulsar関連の設定項目の詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用</h3><ol>
+<p>Helmを使用したMilvusの設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helm Chartsを使用したMilvusの設定</a>」を参照してください。Pulsar関連の設定項目の詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>メッセージ・ストレージ・システムとしてKafkaを使用する場合は、<code translate="no">values.yaml</code> ファイルの<code translate="no">externalConfigFiles</code> セクションを設定します。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -277,7 +355,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
 <div class="alert note">
 <p><strong>RocksMQとNATSのどちらを選択しますか？</strong></p>
 <p>RockMQはRocksDBとのやりとりにCGOを使用し、それ自身でメモリを管理しますが、Milvusインストールに組み込まれている純粋なGO NATSはメモリ管理をGoのガベージコレクタ(GC)に委譲します。</p>
-<p>データパケットが64kbより小さい場合、RocksDBはメモリ使用量、CPU使用量、レスポンスタイムの点で優れている。一方、データパケットが64kbより大きい場合は、十分なメモリと理想的なGCスケジューリングがあれば、NATSの方が応答時間の点で優れている。</p>
+<p>データパケットが64kbより小さい場合、RocksDBはメモリ使用量、CPU使用量、レスポンスタイムの点で優れている。一方、データ・パケットが64kbより大きい場合は、十分なメモリと理想的なGCスケジューリングがあれば、NATSの方が応答時間の点で優れている。</p>
 <p>現在のところ、NATSは実験にのみ使用することをお勧めします。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">次のページ<button data-href="#Whats-next" class="anchor-icon" translate="no">

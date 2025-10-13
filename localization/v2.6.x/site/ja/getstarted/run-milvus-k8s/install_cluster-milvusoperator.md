@@ -173,11 +173,11 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operatorポッドが起動したら、次のようにMilvusクラスタをデプロイできます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>(v2.6.2で推奨)、Streaming Nodeを含むすべての新しいアーキテクチャコンポーネントを備えたMilvusクラスタをデプロイします。</p>
+<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>(v2.6.3で推奨)、Streaming Nodeを含むすべての新しいアーキテクチャコンポーネントを備えたMilvusクラスタをデプロイします。</p>
 <p><strong>このデプロイにおけるアーキテクチャのハイライト</strong></p>
 <ul>
 <li><strong>メッセージキュー</strong>：<a href="/docs/ja/use-woodpecker.md">Woodpeckerを使用</a>（インフラメンテナンスの軽減）</li>
-<li><strong>ストリーミング・ノード</strong>：データ処理の強化</li>
+<li><strong>ストリーミング・ノード</strong>データ処理の強化</li>
 <li><strong>ミックス・コーディネーター</strong>：コーディネータコンポーネントの統合による効率化</li>
 </ul>
 <p>これらの設定をカスタマイズするには、<a href="https://milvus.io/tools/sizing">Milvus Sizing Toolを</a>使用して実際のデータサイズに基づいて設定を調整し、対応するYAMLファイルをダウンロードすることをお勧めします。コンフィギュレーションパラメータの詳細については、<a href="https://milvus.io/docs/system_configuration.md">Milvusシステムコンフィギュレーションチェックリストを</a>ご参照ください。</p>
@@ -421,7 +421,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
-<li><p>Milvusのデバッグとダイナミックな設定更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
+<li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

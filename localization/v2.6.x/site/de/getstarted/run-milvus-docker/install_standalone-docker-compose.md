@@ -57,7 +57,7 @@ title: Milvus mit Docker Compose ausführen (Linux)
       </svg>
     </button></h2><p>Milvus bietet eine Docker Compose-Konfigurationsdatei im Milvus-Repository. Um Milvus mit Docker Compose zu installieren, führen Sie einfach</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.2/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Was ist neu in Version 2.6.2?</strong></p>
+<p><strong>Was ist neu in Version 2.6.3?</strong></p>
 <ul>
 <li><strong>Verbesserte Architektur</strong>: Enthält den neuen Streaming Node und optimierte Komponenten</li>
 <li><strong>Aktualisierte Abhängigkeiten</strong>: Enthält die neuesten Versionen von MinIO und etcd</li>
 <li><strong>Verbesserte Konfiguration</strong>: Optimierte Einstellungen für bessere Leistung</li>
 </ul>
-<p>Laden Sie immer die neueste Konfiguration von Docker Compose herunter, um die Kompatibilität mit den Funktionen von v2.6.2 sicherzustellen.</p>
+<p>Laden Sie immer die neueste Konfiguration von Docker Compose herunter, um die Kompatibilität mit den Funktionen von v2.6.3 sicherzustellen.</p>
 <ul>
 <li><p>Wenn Sie den obigen Befehl nicht ausführen konnten, überprüfen Sie bitte, ob auf Ihrem System Docker Compose V1 installiert ist. Wenn dies der Fall ist, sollten Sie aufgrund der Hinweise auf <a href="https://docs.docker.com/compose/">dieser Seite</a> auf Docker Compose V2 migrieren.</p></li>
 <li><p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, kontaktieren Sie uns unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie uns das Problem.</p></li>
@@ -87,7 +87,7 @@ Creating milvus-standalone ... done
 <li>Der <strong>milvus-standalone-Container</strong> bedient lokal die Ports <strong>19530</strong> mit den Standardeinstellungen und ordnet seine Daten den <strong>Volumes/milvus</strong> im aktuellen Ordner zu.</li>
 </ul></li>
 </ul>
-<p>Mit folgendem Befehl können Sie überprüfen, ob die Container funktionieren und laufen:</p>
+<p>Mit folgendem Befehl können Sie überprüfen, ob die Container laufen und in Betrieb sind:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker-compose ps</span>
 
       Name                     Command                  State                            Ports

@@ -19,6 +19,123 @@ title: ملاحظات الإصدار
         ></path>
       </svg>
     </button></h1><p>اكتشف الجديد في Milvus! تلخص هذه الصفحة الميزات الجديدة والتحسينات والمشاكل المعروفة وإصلاحات الأخطاء في كل إصدار. يمكنك العثور على ملاحظات الإصدار لكل إصدار تم إصداره بعد الإصدار 2.6.0 في هذا القسم. نقترح عليك زيارة هذه الصفحة بانتظام للتعرف على التحديثات.</p>
+<h2 id="v263" class="common-anchor-header">v2.6.3<button data-href="#v263" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>تاريخ الإصدار 11 أكتوبر 2025</p>
+<table>
+<thead>
+<tr><th style="text-align:left">إصدار ميلفوس</th><th style="text-align:left">إصدار Python SDK</th><th style="text-align:left">إصدار Node.js SDK</th><th style="text-align:left">إصدار Java SDK</th><th style="text-align:left">إصدار Go SDK</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>يسرنا أن نعلن عن إصدار الإصدار Milvus 2.6.3، والذي يقدم مجموعة متنوعة من الميزات الجديدة المثيرة والتحسينات وإصلاحات الأخطاء الهامة. يعمل هذا الإصدار على تحسين أداء النظام وتوسيع الوظائف وإصلاح المشكلات الرئيسية، مما يوفر تجربة أكثر استقرارًا لجميع المستخدمين. فيما يلي أبرز ميزات هذا الإصدار:</p>
+<h3 id="New-Features" class="common-anchor-header">الميزات الجديدة<button data-href="#New-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>المفتاح الأساسي مع تمكين المعرف التلقائي: يمكن للمستخدمين الآن كتابة حقل المفتاح الأساسي عند تمكين <code translate="no">autoid</code>.<a href="https://github.com/milvus-io/milvus/pull/44424">(#44424</a> <a href="https://github.com/milvus-io/milvus/pull/44530">#44530</a>)</li>
+<li>الضغط اليدوي لمقاطع L0: تمت إضافة دعم لضغط مقاطع L0 يدوياً.<a href="https://github.com/milvus-io/milvus/pull/44440">(#44440</a>)</li>
+<li>ترميز معرّف المجموعة في المعرّف التلقائي: ستتضمن المعرّفات التي يتم إنشاؤها تلقائيًا الآن معرّف المجموعة.<a href="https://github.com/milvus-io/milvus/pull/44471">(#44471</a>)</li>
+<li>دعم ترميز gRPC: تكامل أداة ترميز gRPC لتعزيز مرونة الاستعلام.<a href="https://github.com/milvus-io/milvus/pull/41994">(#41994</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">التحسينات<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>تحسين مدقق التوازن من خلال تنفيذ قائمة انتظار ذات أولوية، وتحسين توزيع المهام.<a href="https://github.com/milvus-io/milvus/pull/43992">(#43992</a>)</li>
+<li>إحصائيات BM25 المحملة مسبقًا لقطاعات مختومة وتسلسل محسن.<a href="https://github.com/milvus-io/milvus/pull/44279">(#44279</a>)</li>
+<li>يمكن الآن استخدام الحقول القابلة للإلغاء كمدخلات لدوال BM25. (<a href="https://github.com/milvus-io/milvus/pull/44586">#44586</a>)</li>
+<li>إضافة دعم لتخزين Azure Blob Storage في Woodpecker.<a href="https://github.com/milvus-io/milvus/pull/44592">(#44592</a>)</li>
+<li>تطهير الملفات الصغيرة مباشرةً بعد ضغط مقطع Woodpecker.<a href="https://github.com/milvus-io/milvus/pull/44473">(#44473</a>)</li>
+<li>تمكين وظيفة النتيجة العشوائية لتعزيز الاستعلامات.<a href="https://github.com/milvus-io/milvus/pull/44214">(#44214</a>)</li>
+<li>خيارات تكوين جديدة لنوع المتجه <code translate="no">int8</code> في الفهرسة التلقائية.<a href="https://github.com/milvus-io/milvus/pull/44554">(#44554</a>)</li>
+<li>تمت إضافة عناصر معلمات للتحكم في سياسة إعادة البحث الهجين.<a href="https://github.com/milvus-io/milvus/pull/44466">(#44466</a>)</li>
+<li>تمت إضافة دعم للتحكم في إدراج حقول مخرجات الدالة.<a href="https://github.com/milvus-io/milvus/pull/44162">(#44162</a>)</li>
+<li>تدعم دالة الاضمحلال الآن دمج الدرجات القابلة للتكوين لتحسين الأداء.<a href="https://github.com/milvus-io/milvus/pull/44066">(#44066</a>)</li>
+<li>تحسين أداء البحث الثنائي على السلاسل.<a href="https://github.com/milvus-io/milvus/pull/44469">(#44469</a>)</li>
+<li>تقديم دعم للمرشحات المتفرقة في الاستعلامات. <a href="https://github.com/milvus-io/milvus/pull/44347">(#44347</a>)</li>
+<li>تحديثات مختلفة لتحسين وظيفة الفهرس المتدرج.<a href="https://github.com/milvus-io/milvus/pull/44433">(#44433</a>)</li>
+<li>إضافة تتبع استخدام موارد التخزين لعمليات البحث القياسية والمتجهة.<a href="https://github.com/milvus-io/milvus/pull/44414">(#44414</a> <a href="https://github.com/milvus-io/milvus/pull/44308">#44308</a>)</li>
+<li>إضافة استخدام التخزين للحذف/التعديل/الاستراحة<a href="https://github.com/milvus-io/milvus/pull/44512">(# 44512</a>)</li>
+<li>تمكين أهداف التدفق الحبيبي لعمليات <code translate="no">flushall</code>.<a href="https://github.com/milvus-io/milvus/pull/44234">(#44234</a>)</li>
+<li>ستستخدم Datanodes الآن نظام ملفات غير منفصلة لإدارة الموارد بشكل أفضل.<a href="https://github.com/milvus-io/milvus/pull/44418">(#44418</a>)</li>
+<li>خيارات التكوين المضافة لمعالجة الدُفعات في البيانات الوصفية. <a href="https://github.com/milvus-io/milvus/pull/44645">(#44645</a>)</li>
+<li>تتضمن رسائل الخطأ الآن اسم قاعدة البيانات لتوضيح أفضل.<a href="https://github.com/milvus-io/milvus/pull/44618">(#44618</a>)</li>
+<li>تم نقل اختبار التتبع إلى مستودع <code translate="no">milvus-common</code> لتحسين النمذجة.<a href="https://github.com/milvus-io/milvus/pull/44605">(#44605</a>)</li>
+<li>نقل ملفات اختبار وحدة C API جانبًا إلى دليل <code translate="no">src</code> لتنظيم أفضل.<a href="https://github.com/milvus-io/milvus/pull/44458">(#44458</a>)</li>
+<li>تسمح الآن Go SDK للمستخدمين بإدراج بيانات المفتاح الأساسي إذا تم تمكين <code translate="no">autoid</code>.<a href="https://github.com/milvus-io/milvus/pull/44561">(#44561</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">إصلاحات الأخطاء<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>تم حل الثغرات الأمنية CVE-2020-25576 و WS-2023-0223.<a href="https://github.com/milvus-io/milvus/pull/44163">(#44163</a>)</li>
+<li>تم إصلاح مشكلة استخدام الموارد المنطقية للمقاييس في مركز الحصص في عقد التدفق.<a href="https://github.com/milvus-io/milvus/pull/44613">(#44613</a>)</li>
+<li>تعيين <code translate="no">mixcoord</code> في <code translate="no">activatefunc</code> عند تمكين وضع الاستعداد.<a href="https://github.com/milvus-io/milvus/pull/44621">(#44621</a>)</li>
+<li>إزالة التهيئة الزائدة عن الحاجة لمكونات التخزين V2. <a href="https://github.com/milvus-io/milvus/pull/44597">#44597</a>)</li>
+<li>إصلاح حظر مهمة الضغط بسبب الخروج من حلقة المنفذ. (<a href="https://github.com/milvus-io/milvus/pull/44543">#44543</a>)</li>
+<li>إعادة تحميل استخدام الموارد المحملة في المدمر <code translate="no">insert/deleterecord</code>.<a href="https://github.com/milvus-io/milvus/pull/44555">(#44555</a>)</li>
+<li>تم إصلاح مشكلة تعذر توقف المُكرر وتحسين أداة التحقق من صحة تكوين النسخ المتماثل. (<a href="https://github.com/milvus-io/milvus/pull/44531">#44531</a>)</li>
+<li>تعيين <code translate="no">mmap_file_raii_</code> إلى <code translate="no">nullptr</code> عند تعطيل mmap.<a href="https://github.com/milvus-io/milvus/pull/44516">(#44516</a>)</li>
+<li>جعل <code translate="no">diskfilemanager</code> يستخدم نظام الملفات من السياق.<a href="https://github.com/milvus-io/milvus/pull/44535">(#44535</a>)</li>
+<li>فرض المضيف الظاهري لـ OSS وCOS في التخزين V2.<a href="https://github.com/milvus-io/milvus/pull/44484">(#44484</a>)</li>
+<li>تعيين القيمة الافتراضية <code translate="no">report_value</code> عندما لا يكون <code translate="no">extrainfo</code> <code translate="no">nil</code> للتوافق.<a href="https://github.com/milvus-io/milvus/pull/44529">(#44529</a>)</li>
+<li>تنظيف مقاييس المجموعة بعد إسقاط المجموعات في rootcoord. (<a href="https://github.com/milvus-io/milvus/pull/44511">#44511</a>)</li>
+<li>تم إصلاح فشل تحميل المقطع بسبب تكرار خصائص الحقل <code translate="no">mmap.enable</code>.<a href="https://github.com/milvus-io/milvus/pull/44465">(#44465</a>)</li>
+<li>تم إصلاح أخطاء تحليل تكوين التحميل للنسخ المتماثلة الديناميكية.<a href="https://github.com/milvus-io/milvus/pull/44430">(#44430</a>)</li>
+<li>معالجة إدخال صف إلى عمود للأعمدة الديناميكية في Go SDK.<a href="https://github.com/milvus-io/milvus/pull/44626">(#44626</a>)</li>
+</ul>
 <h2 id="v262" class="common-anchor-header">v2.6.2<button data-href="#v262" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +160,7 @@ title: ملاحظات الإصدار
 <tr><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>نحن متحمسون للإعلان عن إصدار الإصدار Milvus 2.6.2! يقدم هذا التحديث ميزات جديدة قوية، وتحسينات كبيرة في الأداء، وإصلاحات مهمة تجعل النظام أكثر استقرارًا وجاهزًا للإنتاج. تتضمن الميزات البارزة تحديثات جزئية للحقول مع التحديثات الجزئية مع ميزة الإدراج، وتقطيع JSON Shredding لتسريع تصفية الحقول الديناميكية، وفهرسة NGram لفهرسة NGram من أجل استعلامات LIKE أسرع، وتطوير مخطط أكثر مرونة على المجموعات الحالية. بناءً على ملاحظات المجتمع، يوفر هذا الإصدار أساسًا أقوى لعمليات النشر في العالم الحقيقي، ونحن نشجع جميع المستخدمين على الترقية للاستفادة من هذه التحسينات.</p>
+<p>نحن متحمسون للإعلان عن إصدار الإصدار Milvus 2.6.2! يقدم هذا التحديث ميزات جديدة قوية، وتحسينات كبيرة في الأداء، وإصلاحات مهمة تجعل النظام أكثر استقرارًا وجاهزًا للإنتاج. تتضمن الميزات البارزة تحديثات جزئية للحقول مع التحديثات الجزئية مع ميزة الإدراج، وتقطيع JSON Shredding لتسريع تصفية الحقول الديناميكية، وفهرسة NGram لفهرسة NGram من أجل استعلامات LIKE أسرع، وتطوير مخطط أكثر مرونة على المجموعات الحالية. استنادًا إلى ملاحظات المجتمع، يوفر هذا الإصدار أساسًا أقوى لعمليات النشر في العالم الحقيقي، ونحن نشجع جميع المستخدمين على الترقية للاستفادة من هذه التحسينات.</p>
 <h3 id="Features" class="common-anchor-header">الميزات<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +210,7 @@ title: ملاحظات الإصدار
 <li>[StorageV2] استخدام معلومات تقسيم المجموعة لتقدير الاستخدام<a href="https://github.com/milvus-io/milvus/pull/44338">(#44338</a>)</li>
 <li>[StorageV2] نتائج مجموعة الأعمدة المحفوظة في الضغط<a href="https://github.com/milvus-io/milvus/pull/44327">(#44327</a>)</li>
 <li>[StorageV2] تكوينات مضافة لنهج التقسيم المستند إلى الحجم<a href="https://github.com/milvus-io/milvus/pull/44301">(#44301</a>)</li>
-<li>[StorageV2] تمت إضافة دعم لنهج التقسيم المستند إلى المخطط والقائم على الحجم<a href="https://github.com/milvus-io/milvus/pull/44282">(#44282</a>)</li>
+<li>[StorageV2] تمت إضافة دعم لنهج التقسيم المستند إلى المخطط ونهج التقسيم المستند إلى الحجم<a href="https://github.com/milvus-io/milvus/pull/44282">(#44282</a>)</li>
 <li>[StorageV2] إضافة نهج تقسيم قابل للتكوين<a href="https://github.com/milvus-io/milvus/pull/44258">(#44258</a>)</li>
 <li>[طبقة التخزين المؤقت] تمت إضافة المزيد من المقاييس والتكوينات<a href="https://github.com/milvus-io/milvus/pull/44276">(#44276</a>)</li>
 <li>تمت إضافة دعم لانتظار أن تكون جميع المؤشرات جاهزة قبل تحميل المقاطع<a href="https://github.com/milvus-io/milvus/pull/44313">(#44313</a>)</li>
@@ -242,7 +359,7 @@ title: ملاحظات الإصدار
     </button></h3><ul>
 <li>إصلاح مشكلة محتملة لنفاد الذاكرة (OOM) أثناء عمليات استيراد ملفات الباركيه<a href="https://github.com/milvus-io/milvus/pull/43756">(43756/43756</a>)</li>
 <li>إصلاح مشكلة تعذر استرداد العقد الاحتياطية إذا انتهت صلاحية عقد الإيجار<a href="https://github.com/milvus-io/milvus/pull/44112">(#44112</a>)</li>
-<li>معالجة حالة إعادة محاولة الضغط بشكل صحيح<a href="https://github.com/milvus-io/milvus/pull/44119">(#44119</a>)</li>
+<li>يعالج حالة إعادة محاولة الضغط بشكل صحيح<a href="https://github.com/milvus-io/milvus/pull/44119">(#44119</a>)</li>
 <li>إصلاح حالة الجمود المحتملة بين طلبات القراءة المستمرة وتحميل الفهرس التي قد تمنع تحميل الفهرس<a href="https://github.com/milvus-io/milvus/pull/43937">(# 43937</a>)</li>
 <li>إصلاح الخلل الذي قد يتسبب في فشل عمليات حذف البيانات في سيناريوهات عالية التكرار<a href="https://github.com/milvus-io/milvus/pull/43831">(# 43831</a>)</li>
 <li>إصلاح حالة سباق محتملة عند تحميل فهارس النصوص وفهارس JSON<a href="https://github.com/milvus-io/milvus/pull/43811">(#43811</a>)</li>
@@ -257,9 +374,9 @@ title: ملاحظات الإصدار
 <li>تحسين آلية اكتشاف الخدمة الداخلية للعقد المتدفقة<a href="https://github.com/milvus-io/milvus/pull/44033">(#44033</a>)</li>
 <li>إصلاح منطق مجموعة الموارد لتصفية عقد التدفق بشكل صحيح<a href="https://github.com/milvus-io/milvus/pull/43984">(#43984</a>)</li>
 <li>يضيف تسمية اسم قاعدة البيانات إلى المقاييس لمنع تعارض التسمية في بيئات قواعد البيانات المتعددة<a href="https://github.com/milvus-io/milvus/pull/43808">(#43808</a>)</li>
-<li>يعمل على إصلاح خطأ منطقي في معالجة حالة المهام الداخلية<a href="https://github.com/milvus-io/milvus/pull/43777">(43777/4</a>)</li>
+<li>إصلاح خطأ منطقي في معالجة حالة المهام الداخلية<a href="https://github.com/milvus-io/milvus/pull/43777">(43777/4</a>)</li>
 <li>يحسن توقيت تهيئة المقاييس الداخلية لتجنب الذعر المحتمل<a href="https://github.com/milvus-io/milvus/pull/43773">(43773/4373</a>)</li>
-<li>إصلاح عطل محتمل نادر في خادم HTTP الداخلي<a href="https://github.com/milvus-io/milvus/pull/43799">(#43799</a>)</li>
+<li>إصلاح تعطل محتمل نادر في خادم HTTP الداخلي<a href="https://github.com/milvus-io/milvus/pull/43799">(#43799</a>)</li>
 </ul>
 <h2 id="v260" class="common-anchor-header">v2.6.0<button data-href="#v260" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -289,7 +406,7 @@ title: ملاحظات الإصدار
 <div class="alert warning">
 <p>الترقية المباشرة من إصدارات ما قبل الإصدار 2.6.0 غير مدعومة بسبب التغييرات المعمارية. يرجى اتباع <a href="/docs/ar/upgrade_milvus_cluster-operator.md">دليل الترقية</a> الخاص بنا.</p>
 </div>
-<h3 id="Whats-new-in-260-since-RC" class="common-anchor-header">الجديد في الإصدار 2.6.0 (منذ RC)<button data-href="#Whats-new-in-260-since-RC" class="anchor-icon" translate="no">
+<h3 id="Whats-new-in-260-since-RC" class="common-anchor-header">ما الجديد في 2.6.0 (منذ RC)<button data-href="#Whats-new-in-260-since-RC" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -343,7 +460,7 @@ title: ملاحظات الإصدار
 <li>رموز محسّنة لدعم اللغة العالمية</li>
 <li>طبقة التخزين المؤقت مع التحميل البطيء - معالجة مجموعات البيانات الأكبر من الذاكرة</li>
 </ul>
-<h2 id="v260-rc1" class="common-anchor-header">الإصدار 2.6.0-rc1<button data-href="#v260-rc1" class="anchor-icon" translate="no">
+<h2 id="v260-rc1" class="common-anchor-header">الإصدار 2.6.0.0-rc1<button data-href="#v260-rc1" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -387,7 +504,7 @@ title: ملاحظات الإصدار
         ></path>
       </svg>
     </button></h3><p>منذ الإصدار 2.6، أدخلت Milvus تغييرات معمارية مهمة تهدف إلى تحسين الأداء وقابلية التوسع وسهولة الاستخدام. لمزيد من المعلومات، راجع <a href="/docs/ar/architecture_overview.md">نظرة عامة</a> على <a href="/docs/ar/architecture_overview.md">نظرة عامة على بنية Milvus</a>.</p>
-<h4 id="Streaming-Node-GA" class="common-anchor-header">عقدة التدفق (GA)</h4><p>في الإصدارات السابقة، كان يتم كتابة البيانات المتدفقة إلى WAL بواسطة الوكيل، وقراءتها بواسطة QueryNode وDataNode. جعلت هذه البنية من الصعب تحقيق الإجماع على جانب الكتابة، مما تطلب منطقًا معقدًا على جانب القراءة. بالإضافة إلى ذلك، تم وضع مفوض الاستعلام في QueryNode، مما أعاق قابلية التوسع. قدم الإصدار 2.5.0 من ميلفوس 2.5.0 عقدة التدفق، والتي أصبحت GA في الإصدار 2.6.0. هذا المكون مسؤول الآن عن جميع عمليات قراءة/كتابة WAL على مستوى السرداب ويعمل أيضًا كمفوض استعلام، مما أدى إلى حل المشكلات المذكورة أعلاه وتمكين التحسينات الجديدة.</p>
+<h4 id="Streaming-Node-GA" class="common-anchor-header">عقدة التدفق (GA)</h4><p>في الإصدارات السابقة، كان يتم كتابة البيانات المتدفقة إلى WAL بواسطة الوكيل، وقراءتها بواسطة QueryNode وDataNode. جعلت هذه البنية من الصعب تحقيق الإجماع على جانب الكتابة، مما تطلب منطقًا معقدًا على جانب القراءة. بالإضافة إلى ذلك، تم وضع مفوض الاستعلام في QueryNode، مما أعاق قابلية التوسع. قدم الإصدار 2.5.0 من Milvus 2.5.0 عقدة التدفق، والتي أصبحت GA في الإصدار 2.6.0. هذا المكون مسؤول الآن عن جميع عمليات قراءة/كتابة WAL على مستوى السرداب ويعمل أيضًا كمفوض استعلام، مما أدى إلى حل المشكلات المذكورة أعلاه وتمكين التحسينات الجديدة.</p>
 <p><strong>إشعار ترقية مهم</strong>: يعد تدفق العقدة تغييرًا معماريًا كبيرًا، لذلك لا يتم دعم الترقية المباشرة إلى Milvus 2.6.0-rc1 من الإصدارات السابقة.</p>
 <h4 id="Woodpecker-Native-WAL" class="common-anchor-header">وودبيكر الأصلي WAL</h4><p>كان ميلفوس يعتمد في السابق على أنظمة خارجية مثل Kafka أو Pulsar في نظام WAL الخاص به. وعلى الرغم من أن هذه الأنظمة كانت فعالة، إلا أنها أضافت تعقيدًا تشغيليًا كبيرًا ونفقات زائدة على الموارد، خاصةً بالنسبة لعمليات النشر الصغيرة والمتوسطة الحجم. في الإصدار Milvus 2.6، تم استبدال هذه الأنظمة ب Woodpecker، وهو نظام WAL مصمم خصيصًا للسحابة. صُمم Woodpecker لتخزين الكائنات، حيث يدعم كلاً من وضعي التخزين المحلي وتخزين الكائنات القائم على التخزين الصفري القائم على التخزين المحلي والكائنات، مما يبسط العمليات مع تحسين الأداء وقابلية التوسع.</p>
 <h4 id="DataNode-and-IndexNode-Merge" class="common-anchor-header">دمج عقدة البيانات وعقدة الفهرس</h4><p>في الإصدار Milvus 2.6، تتم الآن إدارة مهام مثل الضغط والاستيراد الجماعي وجمع الإحصائيات وبناء الفهرس بواسطة جدولة موحدة. تم نقل وظيفة ثبات البيانات التي كانت تتم معالجتها سابقًا بواسطة DataNode إلى عقدة التدفق. لتبسيط عملية النشر والصيانة، تم دمج عقدة الفهرس وعقدة البيانات في مكون DataNode واحد. تقوم هذه العقدة المدمجة الآن بتنفيذ جميع هذه المهام الحرجة، مما يقلل من التعقيد التشغيلي ويحسن استخدام الموارد.</p>

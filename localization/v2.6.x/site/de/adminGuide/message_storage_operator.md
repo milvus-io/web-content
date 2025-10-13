@@ -62,8 +62,9 @@ summary: >-
 </ul></li>
 <li>Der Nachrichtenspeicher kann nicht geändert werden, während das Milvus-System läuft.</li>
 <li>Es wird nur die Kafka-Version 2.x oder 3.x unterstützt.</li>
+<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Beschränkungen für Nachrichtenwarteschlangen</strong>: Bei einem Upgrade auf Milvus v2.6.3 müssen Sie Ihre aktuelle Auswahl an Nachrichtenwarteschlangen beibehalten. Ein Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ konfigurieren<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">Konfigurieren von RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,7 +107,7 @@ summary: >-
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">Die wichtigsten Konfigurationsoptionen:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Legt RocksMQ explizit als Nachrichtenwarteschlange fest</li>
+<li><code translate="no">msgStreamType</code>: rocksmq: Legt explizit RocksMQ als Nachrichtenwarteschlange fest</li>
 <li><code translate="no">persistence.enabled</code>: Aktiviert persistente Speicherung für RocksMQ-Daten</li>
 <li><code translate="no">persistence.pvcDeletion</code>: Wenn true, wird die PVC gelöscht, wenn die Milvus-Instanz gelöscht wird</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Standard-Kubernetes-PVC-Spezifikation</li>
@@ -186,7 +187,7 @@ summary: >-
 </ol>
 <div class="alert note">
 <p><strong>Zwischen RocksMQ und NATS wählen?</strong></p>
-<p>RockMQ verwendet CGO für die Interaktion mit RocksDB und verwaltet den Speicher selbst, während das in die Milvus-Installation eingebettete reine Go-NATS seine Speicherverwaltung an den Garbage Collector (GC) von Go delegiert.</p>
+<p>RockMQ verwendet CGO zur Interaktion mit RocksDB und verwaltet den Speicher selbst, während das in die Milvus-Installation eingebettete reine Go-NATS seine Speicherverwaltung an den Garbage Collector (GC) von Go delegiert.</p>
 <p>In dem Szenario, in dem das Datenpaket kleiner als 64 kb ist, schneidet RocksDB in Bezug auf Speicherverbrauch, CPU-Nutzung und Antwortzeit besser ab. Ist das Datenpaket hingegen größer als 64 kb, so ist NATS bei ausreichendem Speicher und idealer GC-Planung in Bezug auf die Antwortzeit überlegen.</p>
 <p>Derzeit wird empfohlen, NATS nur für Experimente zu verwenden.</p>
 </div>
@@ -207,7 +208,22 @@ summary: >-
       </svg>
     </button></h2><p>Pulsar verwaltet Protokolle der letzten Änderungen, gibt Stream-Protokolle aus und bietet Protokollabonnements. Die Konfiguration von Pulsar für die Nachrichtenspeicherung wird sowohl in Milvus standalone als auch in Milvus cluster unterstützt. Mit Milvus Operator können Sie Pulsar jedoch nur als Nachrichtenspeicher für Milvus-Cluster konfigurieren. Fügen Sie die erforderlichen Felder unter <code translate="no">spec.dependencies.pulsar</code> hinzu, um Pulsar zu konfigurieren.</p>
 <p><code translate="no">pulsar</code> unterstützt <code translate="no">external</code> und <code translate="no">inCluster</code>.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">Externer Pulsar</h3><p><code translate="no">external</code> gibt an, dass ein externer Pulsar-Dienst verwendet wird. Die zur Konfiguration eines externen Pulsar-Dienstes verwendeten Felder umfassen:</p>
+<h3 id="External-Pulsar" class="common-anchor-header">Externer Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> gibt an, dass ein externer Pulsar-Dienst verwendet wird. Die zur Konfiguration eines externen Pulsar-Dienstes verwendeten Felder umfassen:</p>
 <ul>
 <li><code translate="no">external</code>:  Ein <code translate="no">true</code> Wert zeigt an, dass Milvus einen externen Pulsar-Dienst verwendet.</li>
 <li><code translate="no">endpoints</code>: Die Endpunkte von Pulsar.</li>
@@ -231,7 +247,22 @@ summary: >-
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">Interner Pulsar</h3><p><code translate="no">inCluster</code> zeigt an, dass beim Start eines Milvus-Clusters automatisch ein Pulsar-Dienst im Cluster gestartet wird.</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">Interner Pulsar<button data-href="#Internal-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> zeigt an, dass beim Start eines Milvus-Clusters automatisch ein Pulsar-Dienst im Cluster gestartet wird.</p>
 <h4 id="Example" class="common-anchor-header">Beispiel</h4><p>Das folgende Beispiel konfiguriert einen internen Pulsar-Dienst.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -293,7 +324,22 @@ summary: >-
       </svg>
     </button></h2><p>Pulsar ist der Standardspeicher für Nachrichten in einem Milvus-Cluster. Wenn Sie Kafka verwenden möchten, fügen Sie das optionale Feld <code translate="no">msgStreamType</code> hinzu, um Kafka zu konfigurieren.</p>
 <p><code translate="no">kafka</code> unterstützt <code translate="no">external</code> und <code translate="no">inCluster</code>.</p>
-<h3 id="External-Kafka" class="common-anchor-header">Externes Kafka</h3><p><code translate="no">external</code> gibt die Verwendung eines externen Kafka-Dienstes an.</p>
+<h3 id="External-Kafka" class="common-anchor-header">Externes Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> gibt die Verwendung eines externen Kafka-Dienstes an.</p>
 <p>Folgende Felder werden zur Konfiguration eines externen Kafka-Dienstes verwendet:</p>
 <ul>
 <li><code translate="no">external</code>: Der Wert <code translate="no">true</code> zeigt an, dass Milvus einen externen Kafka-Dienst verwendet.</li>
@@ -329,7 +375,22 @@ summary: >-
 <blockquote>
 <p>SASL-Konfigurationen werden in der Version operator v0.8.5 oder höher unterstützt.</p>
 </blockquote>
-<h3 id="Internal-Kafka" class="common-anchor-header">Internes Kafka</h3><p><code translate="no">inCluster</code> gibt an, dass beim Start eines Milvus-Clusters automatisch ein Kafka-Dienst im Cluster gestartet wird.</p>
+<h3 id="Internal-Kafka" class="common-anchor-header">Internes Kafka<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> gibt an, dass beim Start eines Milvus-Clusters automatisch ein Kafka-Dienst im Cluster gestartet wird.</p>
 <h4 id="Example" class="common-anchor-header">Beispiel</h4><p>Das folgende Beispiel konfiguriert einen internen Kafka-Dienst.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

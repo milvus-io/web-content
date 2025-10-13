@@ -20,7 +20,10 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
         ></path>
       </svg>
     </button></h1><p>Milvus 使用 Pulsar 或 Kafka 管理最近更改的日志、输出流日志并提供日志订阅。Pulsar 是默认的消息存储系统。本主题介绍如何使用 Docker Compose 或 Helm 配置消息存储。</p>
-<p>你可以使用<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>或在 K8s 上配置 Pulsar，并在 K8s 上配置 Kafka。</p>
+<p>您可以使用<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>或在 K8s 上配置 Pulsar，并在 K8s 上配置 Kafka。</p>
+<div class="alert note">
+<p><strong>消息队列限制</strong>：升级到 Milvus v2.6.3 时，必须保持当前的消息队列选择。不支持在升级期间在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+</div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 配置 Pulsar<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,14 +39,44 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1.配置 Pulsar</h3><p>要使用 Docker Compose 配置 Pulsar，请在 Milvus/configs 路径下的<code translate="no">milvus.yaml</code> 文件中提供<code translate="no">pulsar</code> 部分的值。</p>
+    </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1.配置 Pulsar<button data-href="#1-Configure-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要使用 Docker Compose 配置 Pulsar，请在 Milvus/configs 路径下的<code translate="no">milvus.yaml</code> 文件中提供<code translate="no">pulsar</code> 部分的值。</p>
 <pre><code translate="no"><span class="hljs-attr">pulsar:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>更多信息，请参阅<a href="/docs/zh/configure_pulsar.md">Pulsar 相关配置</a>。</p>
-<h3 id="2-Run-Milvus" class="common-anchor-header">2.运行 Milvus</h3><p>运行以下命令启动使用 Pulsar 配置的 Milvus。</p>
+<h3 id="2-Run-Milvus" class="common-anchor-header">2.运行 Milvus<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>运行以下命令启动使用 Pulsar 配置的 Milvus。</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">配置仅在 Milvus 启动后生效。更多信息，请参阅<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">启动 Milvus</a>。</div>
@@ -62,9 +95,24 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对于 K8s 上的 Milvus 集群，可以在启动 Milvus 的同一命令中配置 Pulsar。或者，你也可以在启动 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 Pulsar。</p>
+    </button></h2><p>对于 K8s 上的 Milvus 群集，可以在启动 Milvus 的同一命令中配置 Pulsar。或者，你也可以在启动 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 Pulsar。</p>
 <p>有关如何使用 Helm 配置 Milvus 的详情，请参阅<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>。有关 Pulsar 相关配置项的详情，请参阅<a href="/docs/zh/configure_pulsar.md">Pulsar 相关配置</a>。</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>在<code translate="no">values.yaml</code> 文件中配置<code translate="no">externalConfigFiles</code> 部分。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -99,7 +147,22 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
       </svg>
     </button></h2><p>对于 K8s 上的 Milvus 集群，可以在启动 Milvus 的同一命令中配置啄木鸟。或者，也可以在启动 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 Woodpecker。</p>
 <p>有关如何使用 Helm<a href="/docs/zh/configure-helm.md">配置</a> Milvus 的详情，请参阅<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>。有关 Woodpecker 相关配置项的详情，请参阅<a href="/docs/zh/use-woodpecker.md">woodpecker 相关配置</a>。</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>在<code translate="no">values.yaml</code> 文件中配置<code translate="no">externalConfigFiles</code> 部分。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
@@ -161,7 +224,22 @@ summary: 了解如何使用 Docker Compose 或 Helm 配置消息存储。
       </svg>
     </button></h2><p>对于 K8s 上的 Milvus 集群，可以在启动 Milvus 的同一命令中配置 Kafka。或者，你也可以在启动 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">Milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 Kafka。</p>
 <p>有关如何使用 Helm<a href="/docs/zh/configure-helm.md">配置</a> Milvus 的详情，请参阅《<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>》。有关 Pulsar 相关配置项的详情，请参阅<a href="/docs/zh/configure_pulsar.md">Pulsar 相关配置</a>。</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件</h3><ol>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ol>
 <li>如果要使用 Kafka 作为消息存储系统，请配置<code translate="no">values.yaml</code> 文件中的<code translate="no">externalConfigFiles</code> 部分。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>

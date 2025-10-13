@@ -60,6 +60,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 </ul></li>
 <li>當 Milvus 系統在執行時，訊息儲存是無法改變的。</li>
 <li>僅支援 Kafka 2.x 或 3.x 版本。</li>
+<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.3時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +79,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
       </svg>
     </button></h2><p>RocksMQ 是 Milvus 單機版的預設訊息儲存空間。</p>
 <div class="alert note">
-<p>目前，你只能透過 Milvus Operator 設定 RocksMQ 為 Milvus standalone 的訊息儲存空間。</p>
+<p>目前，你只能使用 Milvus Operator 來設定 RocksMQ 為 Milvus standalone 的訊息儲存空間。</p>
 </div>
 <h4 id="Example" class="common-anchor-header">範例</h4><p>下面的例子配置了一個 RocksMQ 服務。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
@@ -204,8 +205,23 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
         ></path>
       </svg>
     </button></h2><p>Pulsar 管理最近變更的日誌、輸出串流日誌，並提供日誌訂閱。Milvus 獨立版和 Milvus 集群都支援配置 Pulsar 作訊息儲存。然而，使用 Milvus Operator，您只能設定 Pulsar 為 Milvus 叢集的訊息儲存。添加<code translate="no">spec.dependencies.pulsar</code> 下的必填欄位以配置 Pulsar。</p>
-<p><code translate="no">pulsar</code> 支援 和 。<code translate="no">external</code> <code translate="no">inCluster</code></p>
-<h3 id="External-Pulsar" class="common-anchor-header">外部 Pulsar</h3><p><code translate="no">external</code> 表示使用外部 Pulsar 服務。 用於設定外部 Pulsar 服務的欄位包括：</p>
+<p><code translate="no">pulsar</code> 支援<code translate="no">external</code> 和<code translate="no">inCluster</code> 。</p>
+<h3 id="External-Pulsar" class="common-anchor-header">外部 Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> 表示使用外部 Pulsar 服務。 用於設定外部 Pulsar 服務的欄位包括：</p>
 <ul>
 <li><code translate="no">external</code>:  <code translate="no">true</code> 值表示 Milvus 使用外部 Pulsar 服務。</li>
 <li><code translate="no">endpoints</code>:Pulsar 的端點。</li>
@@ -229,7 +245,22 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">內部 Pulsar</h3><p><code translate="no">inCluster</code> 表示當 Milvus 集群啟動時，Pulsar 服務會在集群中自動啟動。</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">內部 Pulsar<button data-href="#Internal-Pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> 表示當 Milvus 集群啟動時，Pulsar 服務會在集群中自動啟動。</p>
 <h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例設定內部 Pulsar 服務。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -290,8 +321,23 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
         ></path>
       </svg>
     </button></h2><p>Pulsar 是 Milvus 叢集的預設訊息儲存空間。如果要使用 Kafka，請加入可選欄位<code translate="no">msgStreamType</code> 來設定 Kafka。</p>
-<p><code translate="no">kafka</code> 支援 和 。<code translate="no">external</code> <code translate="no">inCluster</code></p>
-<h3 id="External-Kafka" class="common-anchor-header">外部 Kafka</h3><p><code translate="no">external</code> 表示使用外部 Kafka 服務。</p>
+<p><code translate="no">kafka</code> 支援<code translate="no">external</code> 和<code translate="no">inCluster</code> 。</p>
+<h3 id="External-Kafka" class="common-anchor-header">外部 Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">external</code> 表示使用外部 Kafka 服務。</p>
 <p>用於設定外部 Kafka 服務的欄位包括</p>
 <ul>
 <li><code translate="no">external</code>:<code translate="no">true</code> 值表示 Milvus 使用外部 Kafka 服務。</li>
@@ -327,7 +373,22 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 <blockquote>
 <p>操作員 v0.8.5 或更高版本支援 SASL 配置。</p>
 </blockquote>
-<h3 id="Internal-Kafka" class="common-anchor-header">內部 Kafka</h3><p><code translate="no">inCluster</code> 表示當 Milvus 叢集啟動時，叢集中的 Kafka 服務會自動啟動。</p>
+<h3 id="Internal-Kafka" class="common-anchor-header">內部 Kafka<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">inCluster</code> 表示當 Milvus 叢集啟動時，叢集中的 Kafka 服務會自動啟動。</p>
 <h4 id="Example" class="common-anchor-header">範例</h4><p>以下範例設定內部 Kafka 服務。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

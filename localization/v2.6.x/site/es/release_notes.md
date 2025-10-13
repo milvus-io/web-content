@@ -19,6 +19,123 @@ title: Notas de la versión
         ></path>
       </svg>
     </button></h1><p>Descubra las novedades de Milvus. Esta página resume las nuevas características, mejoras, problemas conocidos y correcciones de errores de cada versión. Puede encontrar las notas de la versión para cada versión publicada después de la v2.6.0 en esta sección. Le sugerimos que visite regularmente esta página para conocer las actualizaciones.</p>
+<h2 id="v263" class="common-anchor-header">v2.6.3<button data-href="#v263" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Fecha de lanzamiento: 11 de octubre de 2025</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Versión de Milvus</th><th style="text-align:left">Versión del SDK de Python</th><th style="text-align:left">Versión del SDK de Node.js</th><th style="text-align:left">Versión del SDK de Java</th><th style="text-align:left">Versión del SDK de Go</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Nos complace anunciar el lanzamiento de Milvus 2.6.3, que introduce una variedad de nuevas e interesantes características, mejoras y correcciones de errores críticos. Esta versión mejora el rendimiento del sistema, amplía la funcionalidad y corrige problemas clave, proporcionando una experiencia más estable para todos los usuarios. A continuación se presentan los aspectos más destacados de esta versión:</p>
+<h3 id="New-Features" class="common-anchor-header">Nuevas funciones<button data-href="#New-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Clave primaria con AutoID activado: Ahora los usuarios pueden escribir el campo de clave primaria cuando <code translate="no">autoid</code> está habilitado.<a href="https://github.com/milvus-io/milvus/pull/44424">(#44424</a> <a href="https://github.com/milvus-io/milvus/pull/44530">#44530</a>)</li>
+<li>Compactación manual de segmentos L0: Se ha añadido soporte para la compactación manual de segmentos L0.<a href="https://github.com/milvus-io/milvus/pull/44440">(#44440</a>)</li>
+<li>Codificación de ID de clúster en AutoID: Los ID generados automáticamente incluirán ahora el ID de clúster.<a href="https://github.com/milvus-io/milvus/pull/44471">(#44471</a>)</li>
+<li>Soporte de Tokenizer gRPC: Integración del tokenizador gRPC para mejorar la flexibilidad de las consultas.<a href="https://github.com/milvus-io/milvus/pull/41994">(#41994</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Mejoras<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Refinado el comprobador de balance implementando una cola de prioridad, mejorando la distribución de tareas.<a href="https://github.com/milvus-io/milvus/pull/43992">(#43992</a>)</li>
+<li>Estadísticas BM25 precargadas para segmentos sellados y serialización optimizada.<a href="https://github.com/milvus-io/milvus/pull/44279">(#44279</a>)</li>
+<li>Los campos anulables ahora se pueden utilizar como entrada para las funciones BM25.<a href="https://github.com/milvus-io/milvus/pull/44586">(#44586</a>)</li>
+<li>Añadido soporte para Azure Blob Storage en Woodpecker.<a href="https://github.com/milvus-io/milvus/pull/44592">(#44592</a>)</li>
+<li>Purga de archivos pequeños justo después de la compactación de segmentos de Woodpecker.<a href="https://github.com/milvus-io/milvus/pull/44473">(#44473</a>)</li>
+<li>Habilitada la funcionalidad de puntuación aleatoria para potenciar las consultas.<a href="https://github.com/milvus-io/milvus/pull/44214">(#44214</a>)</li>
+<li>Nuevas opciones de configuración para el tipo de vector <code translate="no">int8</code> en la autoindexación.<a href="https://github.com/milvus-io/milvus/pull/44554">(#44554</a>)</li>
+<li>Añadidos elementos de parámetro para controlar la política de consultas de búsqueda híbrida.<a href="https://github.com/milvus-io/milvus/pull/44466">(#44466</a>)</li>
+<li>Añadido soporte para controlar la inserción de campos de salida de funciones.<a href="https://github.com/milvus-io/milvus/pull/44162">(#44162</a>)</li>
+<li>La función de decaimiento ahora soporta la fusión de puntuación configurable para un mejor rendimiento.<a href="https://github.com/milvus-io/milvus/pull/44066">(#44066</a>)</li>
+<li>Se ha mejorado el rendimiento de la búsqueda binaria en cadenas.<a href="https://github.com/milvus-io/milvus/pull/44469">(#44469</a>)</li>
+<li>Se ha introducido soporte para filtros dispersos en las consultas. <a href="https://github.com/milvus-io/milvus/pull/44347">(#44347</a>)</li>
+<li>Varias actualizaciones para mejorar la funcionalidad de los índices por niveles.<a href="https://github.com/milvus-io/milvus/pull/44433">(#44433</a>)</li>
+<li>Añadido seguimiento del uso de recursos de almacenamiento para búsquedas escalares y vectoriales.<a href="https://github.com/milvus-io/milvus/pull/44414">(</a> <a href="https://github.com/milvus-io/milvus/pull/44308">#44414 #44308</a>)</li>
+<li>Añadido uso de almacenamiento para delete/upsert/restful<a href="https://github.com/milvus-io/milvus/pull/44512">(#44512</a>)</li>
+<li>Habilitados objetivos de descarga granular para operaciones <code translate="no">flushall</code>.<a href="https://github.com/milvus-io/milvus/pull/44234">(#44234</a>)</li>
+<li>Datanodes ahora utilizará un sistema de archivos no-singleton para una mejor gestión de los recursos.<a href="https://github.com/milvus-io/milvus/pull/44418">(#44418</a>)</li>
+<li>Añadidas opciones de configuración para el procesamiento por lotes en metadatos. <a href="https://github.com/milvus-io/milvus/pull/44645">(#44645</a>)</li>
+<li>Los mensajes de error incluyen ahora el nombre de la base de datos para mayor claridad.<a href="https://github.com/milvus-io/milvus/pull/44618">(#44618</a>)</li>
+<li>Movida la prueba de rastreo al repositorio <code translate="no">milvus-common</code> para una mejor modularización.<a href="https://github.com/milvus-io/milvus/pull/44605">(#44605</a>)</li>
+<li>Movidos los archivos de pruebas unitarias de la API de C al directorio <code translate="no">src</code> para una mejor organización.<a href="https://github.com/milvus-io/milvus/pull/44458">(#44458</a>)</li>
+<li>Go SDK ahora permite a los usuarios insertar datos de clave primaria si <code translate="no">autoid</code> está habilitado.<a href="https://github.com/milvus-io/milvus/pull/44561">(#44561</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Corrección de errores<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Resueltas las vulnerabilidades CVE-2020-25576 y WS-2023-0223.<a href="https://github.com/milvus-io/milvus/pull/44163">(#44163</a>)</li>
+<li>Solucionado un problema por el que se utilizaban recursos lógicos para métricas en el centro de cuotas en nodos de streaming.<a href="https://github.com/milvus-io/milvus/pull/44613">(#44613</a>)</li>
+<li>Establecido <code translate="no">mixcoord</code> en <code translate="no">activatefunc</code> al habilitar el modo de espera.<a href="https://github.com/milvus-io/milvus/pull/44621">(#44621</a>)</li>
+<li>Eliminada la inicialización redundante de componentes de almacenamiento V2. <a href="https://github.com/milvus-io/milvus/pull/44597">#44597</a>)</li>
+<li>Corregido el bloqueo de la tarea de compactación debido a la salida del bucle del ejecutor.<a href="https://github.com/milvus-io/milvus/pull/44543">(#44543</a>)</li>
+<li>Refinanciado el uso de recursos cargados en el destructor <code translate="no">insert/deleterecord</code>.<a href="https://github.com/milvus-io/milvus/pull/44555">(#44555</a>)</li>
+<li>Se ha solucionado un problema por el que el replicador no podía detenerse y se ha mejorado el validador de configuración de replicación.<a href="https://github.com/milvus-io/milvus/pull/44531">(#44531</a>)</li>
+<li>Establecido <code translate="no">mmap_file_raii_</code> a <code translate="no">nullptr</code> cuando mmap está deshabilitado.<a href="https://github.com/milvus-io/milvus/pull/44516">(#44516</a>)</li>
+<li>Hecho <code translate="no">diskfilemanager</code> utilizar el sistema de archivos desde el contexto.<a href="https://github.com/milvus-io/milvus/pull/44535">(#44535</a>)</li>
+<li>Forzado host virtual para OSS y COS en almacenamiento V2.<a href="https://github.com/milvus-io/milvus/pull/44484">(#44484</a>)</li>
+<li>Establecido <code translate="no">report_value</code> valor por defecto cuando <code translate="no">extrainfo</code> no es <code translate="no">nil</code> por compatibilidad.<a href="https://github.com/milvus-io/milvus/pull/44529">(#44529</a>)</li>
+<li>Limpiadas las métricas de colección después de soltar colecciones en rootcoord.<a href="https://github.com/milvus-io/milvus/pull/44511">(#44511</a>)</li>
+<li>Corregido fallo de carga de segmento debido a propiedades duplicadas del campo <code translate="no">mmap.enable</code>.<a href="https://github.com/milvus-io/milvus/pull/44465">(#44465</a>)</li>
+<li>Corregidos errores de análisis de configuración de carga para réplicas dinámicas.<a href="https://github.com/milvus-io/milvus/pull/44430">(#44430</a>)</li>
+<li>Manejado la entrada de fila a columna para columnas dinámicas en Go SDK.<a href="https://github.com/milvus-io/milvus/pull/44626">(#44626</a>)</li>
+</ul>
 <h2 id="v262" class="common-anchor-header">v2.6.2<button data-href="#v262" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -420,7 +537,7 @@ title: Notas de la versión
 <li>Se ha integrado el <a href="/docs/es/lindera-tokenizer.md">tokenizador Lindera</a> para mejorar la compatibilidad con idiomas asiáticos como el japonés y el coreano.</li>
 <li>Ahora es posible seleccionar el tokenizador a nivel de fila, con el <a href="/docs/es/icu-tokenizer.md">tokenizador ICU</a> de uso general disponible como alternativa para situaciones multilingües.</li>
 </ul>
-<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Entrada y salida de datos con funciones de incrustación</h4><p>Milvus 2.6 introduce la capacidad "Data-in, Data-Out" que simplifica el desarrollo de aplicaciones de IA al integrarse directamente con modelos de incrustación de terceros (por ejemplo, de OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Ahora los usuarios pueden insertar y consultar datos de texto sin procesar, y Milvus llamará automáticamente al servicio de modelo especificado para convertir el texto en vectores en tiempo real. Esto elimina la necesidad de un proceso de conversión vectorial independiente.</p>
+<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Entrada y salida de datos con funciones de incrustación</h4><p>Milvus 2.6 introduce una función "Data-in, Data-Out" que simplifica el desarrollo de aplicaciones de IA al integrarse directamente con modelos de incrustación de terceros (por ejemplo, de OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Ahora los usuarios pueden insertar y consultar datos de texto sin procesar, y Milvus llamará automáticamente al servicio de modelo especificado para convertir el texto en vectores en tiempo real. Esto elimina la necesidad de un proceso de conversión vectorial independiente.</p>
 <p>Para más información, consulte <a href="/docs/es/embedding-function-overview.md">Visión general de la función de incrustación</a>.</p>
 <h4 id="Phrase-Match" class="common-anchor-header">Coincidencia de frases</h4><p>La concordancia de frases es una función de búsqueda de texto que sólo devuelve resultados cuando la secuencia exacta de palabras de una consulta aparece de forma consecutiva y en el orden correcto dentro de un documento.</p>
 <p><strong>Características principales</strong>:</p>
