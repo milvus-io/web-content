@@ -8,6 +8,148 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.3
+
+Release date: October 11, 2025
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.6.3          | 2.6.2             | 2.6.1               | 2.6.5            | 2.6.1          |
+
+We are pleased to announce the release of Milvus 2.6.3, which introduces a variety of exciting new features, improvements, and critical bug fixes. This version enhances system performance, expands functionality, and fixes key issues, providing a more stable experience for all users. Below are the highlights of this release:
+
+### New Features
+
+- Primary Key with AutoID Enabled: Users can now write the primary key field when `autoid` is enabled. ([#44424](https://github.com/milvus-io/milvus/pull/44424) [#44530](https://github.com/milvus-io/milvus/pull/44530))
+- Manual Compaction for L0 Segments: Added support for manually compacting L0 segments. ([#44440](https://github.com/milvus-io/milvus/pull/44440))
+- Cluster ID Encoding in AutoID: Auto-generated IDs will now include the cluster ID. ([#44471](https://github.com/milvus-io/milvus/pull/44471))
+- gRPC Tokenizer Support: Integration of gRPC tokenizer for enhanced query flexibility. ([#41994](https://github.com/milvus-io/milvus/pull/41994))
+
+### Improvements
+
+- Refined the balance checker by implementing a priority queue, improving task distribution. ([#43992](https://github.com/milvus-io/milvus/pull/43992))
+- Preloaded BM25 stats for sealed segments and optimized serialization. ([#44279](https://github.com/milvus-io/milvus/pull/44279))
+- Nullable fields can now be used as input for BM25 functions. ([#44586](https://github.com/milvus-io/milvus/pull/44586))
+- Added support for Azure Blob Storage in Woodpecker. ([#44592](https://github.com/milvus-io/milvus/pull/44592))
+- Purged small files right after Woodpecker segment compaction. ([#44473](https://github.com/milvus-io/milvus/pull/44473))
+- Enabled random score functionality for boosting queries. ([#44214](https://github.com/milvus-io/milvus/pull/44214))
+- New configuration options for the `int8` vector type in autoindexing. ([#44554](https://github.com/milvus-io/milvus/pull/44554))
+- Added parameter items to control hybrid search requery policy. ([#44466](https://github.com/milvus-io/milvus/pull/44466))
+- Added support for controlling the insertion of function output fields. ([#44162](https://github.com/milvus-io/milvus/pull/44162))
+- The decay function now supports configurable score merging for better performance. ([#44066](https://github.com/milvus-io/milvus/pull/44066))
+- Improved the performance of binary search on strings. ([#44469](https://github.com/milvus-io/milvus/pull/44469))
+- Introduced support for sparse filters in queries.  ([#44347](https://github.com/milvus-io/milvus/pull/44347))
+- Various updates to enhance tiered index functionality. ([#44433](https://github.com/milvus-io/milvus/pull/44433))
+- Added storage resource usage tracking for scalar and vector searches. ([#44414](https://github.com/milvus-io/milvus/pull/44414) [#44308](https://github.com/milvus-io/milvus/pull/44308))
+- Add storage usage for delete/upsert/restful ([#44512](https://github.com/milvus-io/milvus/pull/44512))
+- Enabled granular flush targets for `flushall` operations. ([#44234](https://github.com/milvus-io/milvus/pull/44234))
+- Datanodes will now use a non-singleton file system for better resource management. ([#44418](https://github.com/milvus-io/milvus/pull/44418))
+- Added configuration options for batch processing in metadata.  ([#44645](https://github.com/milvus-io/milvus/pull/44645))
+- Error messages now include the database name for better clarity. ([#44618](https://github.com/milvus-io/milvus/pull/44618))
+- Moved tracer test to the `milvus-common` repository for better modularization. ([#44605](https://github.com/milvus-io/milvus/pull/44605))
+- Moved C API unit test files aside to `src` directory for better organization. ([#44458](https://github.com/milvus-io/milvus/pull/44458))
+- Go SDK now allows users to insert primary key data if `autoid` is enabled. ([#44561](https://github.com/milvus-io/milvus/pull/44561))
+
+### Bug fixes
+
+- Resolved CVE-2020-25576 and WS-2023-0223 vulnerabilities. ([#44163](https://github.com/milvus-io/milvus/pull/44163))
+- Fixed an issue where logical resources were used for metrics in the quota center on streaming nodes. ([#44613](https://github.com/milvus-io/milvus/pull/44613))
+- Set `mixcoord` in `activatefunc` when enabling standby. ([#44621](https://github.com/milvus-io/milvus/pull/44621))
+- Removed redundant initialization of storage V2 components. [#44597](https://github.com/milvus-io/milvus/pull/44597))
+- Fixed compaction task blocking due to executor loop exit. ([#44543](https://github.com/milvus-io/milvus/pull/44543))
+- Refunded loaded resource usage in the `insert/deleterecord` destructor. ([#44555](https://github.com/milvus-io/milvus/pull/44555))
+- Fixed an issue where the replicator could not stop and enhanced the replicate config validator. ([#44531](https://github.com/milvus-io/milvus/pull/44531))
+- Set `mmap_file_raii_` to `nullptr` when mmap is disabled. ([#44516](https://github.com/milvus-io/milvus/pull/44516))
+- Made `diskfilemanager` use the file system from the context. ([#44535](https://github.com/milvus-io/milvus/pull/44535))
+- Forced virtual host for OSS and COS in storage V2. ([#44484](https://github.com/milvus-io/milvus/pull/44484))
+- Set `report_value` default value when `extrainfo` is not `nil` for compatibility. ([#44529](https://github.com/milvus-io/milvus/pull/44529))
+- Cleaned up collection metrics after dropping collections in rootcoord. ([#44511](https://github.com/milvus-io/milvus/pull/44511))
+- Fixed segment loading failure due to duplicate field `mmap.enable` properties. ([#44465](https://github.com/milvus-io/milvus/pull/44465))
+- Fixed load config parsing errors for dynamic replicas. ([#44430](https://github.com/milvus-io/milvus/pull/44430))
+- Handled row-to-column input for dynamic columns in Go SDK. ([#44626](https://github.com/milvus-io/milvus/pull/44626))
+
+## v2.6.2
+
+Release date: September 19, 2025
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.6.2          | 2.6.2             | 2.6.0               | 2.6.4            | 2.6.1          |
+
+We’re excited to announce the release of Milvus 2.6.2! This update introduces powerful new features, significant performance enhancements, and critical fixes that make the system more stable and production-ready. Highlights include partial field updates with upsert, JSON Shredding to accelerate dynamic field filtering, NGram indexing for faster LIKE queries, and more flexible schema evolution on existing collections. Built on community feedback, this release delivers a stronger foundation for real-world deployments, and we encourage all users to upgrade to take advantage of these improvements.
+
+### Features
+
+- Added support for JSON Shredding to accelerate dynamic field filtering. For details, refer to [JSON Shredding](json-shredding.md).
+- Added support for NGRAM Index to accelerate like operation. For details, refer to [NGRAM](ngram.md).
+- Added support for partial field updates with upsert API. For details, refer to [Upsert Entities](upsert-entities.md).
+- Added support for Boost Function. For details, refer to [Boost Ranker](boost-ranker.md).
+- Added support for group by JSON fields and dynamic fields ([#43203](https://github.com/milvus-io/milvus/pull/43203))
+- Added support for enabling dynamic schema on existing collections ([#44151](https://github.com/milvus-io/milvus/pull/44151))
+- Added support for dropping indexes without releasing collections ([#42941](https://github.com/milvus-io/milvus/pull/42941))
+
+### Improvements
+
+- [StorageV2] Changed log file size to compressed size ([#44402](https://github.com/milvus-io/milvus/pull/44402))
+- [StorageV2] Added child fields in load info ([#44384](https://github.com/milvus-io/milvus/pull/44384))
+- [StorageV2] Added support for including partition and clustering keys in system group ([#44372](https://github.com/milvus-io/milvus/pull/44372))
+- Removed timeout for compaction tasks ([#44277](https://github.com/milvus-io/milvus/pull/44277))
+- [StorageV2] Enabled build with Azure ([#44177](https://github.com/milvus-io/milvus/pull/44177))
+- [StorageV2] Utilized group info for estimating logic usage ([#44356](https://github.com/milvus-io/milvus/pull/44356))
+- [StorageV2] Utilized group split info to estimate usage ([#44338](https://github.com/milvus-io/milvus/pull/44338))
+- [StorageV2] Saved column group results in compaction ([#44327](https://github.com/milvus-io/milvus/pull/44327))
+- [StorageV2] Added configurations for size-based split policy ([#44301](https://github.com/milvus-io/milvus/pull/44301))
+- [StorageV2] Added support for schema-based and size-based split policy ([#44282](https://github.com/milvus-io/milvus/pull/44282))
+- [StorageV2] Added configurable split policy ([#44258](https://github.com/milvus-io/milvus/pull/44258))
+- [CachingLayer] Added more metrics and configurations ([#44276](https://github.com/milvus-io/milvus/pull/44276))
+- Added support for waiting for all indices to be ready before loading segments ([#44313](https://github.com/milvus-io/milvus/pull/44313))
+- Added internal core latency metric for rescore node ([#44010](https://github.com/milvus-io/milvus/pull/44010))
+- Optimized access log format when printing KV params ([#43742](https://github.com/milvus-io/milvus/pull/43742))
+- Added configuration to modify dump snapshot batch size ([#44215](https://github.com/milvus-io/milvus/pull/44215))
+- Reduced compaction task cleanup interval ([#44207](https://github.com/milvus-io/milvus/pull/44207))
+- Enhanced merge sort to support multiple fields ([#44191](https://github.com/milvus-io/milvus/pull/44191))([#43994](https://github.com/milvus-io/milvus/pull/43994))
+- Added load resource estimation for tiered index ([#44171](https://github.com/milvus-io/milvus/pull/44171))
+- Added autoindex config for deduplication case ([#44186](https://github.com/milvus-io/milvus/pull/44186))
+- Added configuration to allow custom characters in names  ([#44063](https://github.com/milvus-io/milvus/pull/44063))
+- Added support for cchannel for streaming service ([#44143](https://github.com/milvus-io/milvus/pull/44143))
+- Added mutex and range check to guard concurrent deletions ([#44128](https://github.com/milvus-io/milvus/pull/44128))
+
+### Bug fixes
+
+- Aligned the behavior of exists expressions between brute force and index ([#44030](https://github.com/milvus-io/milvus/pull/44030))
+- Fixed error on renaming to a dropped collection ([#44436](https://github.com/milvus-io/milvus/pull/44436))
+- [StorageV2] Checked child fields length ([#44405](https://github.com/milvus-io/milvus/pull/44405))
+- [StorageV2] Turned on Azure by default ([#44377](https://github.com/milvus-io/milvus/pull/44377))
+- Corrected upload path of L0 compactions under pooling datanodes ([#44374](https://github.com/milvus-io/milvus/pull/44374))
+- Disallowed renaming if database encryption is enabled ([#44225](https://github.com/milvus-io/milvus/pull/44225))
+- Disallowed deletion of dynamicfield.enable property ([#44335](https://github.com/milvus-io/milvus/pull/44335))
+- Marked tasks as failed when pre-allocated ID is invalid ([#44350](https://github.com/milvus-io/milvus/pull/44350))
+- Skipped MVCC checks on PK compare expressions ([#44353](https://github.com/milvus-io/milvus/pull/44353))
+- Fixed json_contains bug for stats ([#44325](https://github.com/milvus-io/milvus/pull/44325))
+- Added initialization filesystem check for query node and streaming node ([#44360](https://github.com/milvus-io/milvus/pull/44360))
+- Fixed empty compaction target when segment was garbage collected ([#44270](https://github.com/milvus-io/milvus/pull/44270))
+- Fixed race condition when initializing timestamp index ([#44317](https://github.com/milvus-io/milvus/pull/44317))
+- Checked if arraydata is nil to prevent panic ([#44332](https://github.com/milvus-io/milvus/pull/44332))
+- Fixed build JSON stats bug for nested objects ([#44303](https://github.com/milvus-io/milvus/pull/44303))
+- Avoided mmap rewrite by multiple JSON fields ([#44299](https://github.com/milvus-io/milvus/pull/44299))
+- Unified valid data formats ([#44296](https://github.com/milvus-io/milvus/pull/44296))
+- Hid credentials of embedding/reranking providers in web UI ([#44275](https://github.com/milvus-io/milvus/pull/44275))
+- Corrected statslog path under pooling datanodes ([#44288](https://github.com/milvus-io/milvus/pull/44288))
+- Corrected path of IDF oracle ([#44266](https://github.com/milvus-io/milvus/pull/44266))
+- Used recovery snapshot checkpoint if no vchannel is recovering ([#44246](https://github.com/milvus-io/milvus/pull/44246))
+- Limited column number in JSON stats ([#44233](https://github.com/milvus-io/milvus/pull/44233))
+- Made load resource count n-gram index ([#44237](https://github.com/milvus-io/milvus/pull/44237))
+- Deduced metric type from non-empty search results ([#44222](https://github.com/milvus-io/milvus/pull/44222))
+- Fixed multi-segment write only writing one segment ([#44256](https://github.com/milvus-io/milvus/pull/44256))
+- Fixed merge sort out of range ([#44230](https://github.com/milvus-io/milvus/pull/44230))
+- Added UTF-8 check before executing BM25 function ([#44220](https://github.com/milvus-io/milvus/pull/44220))
+- Retried old session if it exists ([#44208](https://github.com/milvus-io/milvus/pull/44208))
+- Added Kafka buffer size limit to prevent datanode OOM ([#44106](https://github.com/milvus-io/milvus/pull/44106))
+- Fixed panic by extending lock guarding range ([#44130](https://github.com/milvus-io/milvus/pull/44130))
+- Fixed growing segments not being flushed on schema change ([#44412](https://github.com/milvus-io/milvus/pull/44412))
+- [StorageV2] Handled IO errors ([#44255](https://github.com/milvus-io/milvus/pull/44255))
+- Prevented panic if Tantivy index path does not exist ([#44135](https://github.com/milvus-io/milvus/pull/44135))
+
 ## v2.6.1
 
 Release date: September 3, 2025

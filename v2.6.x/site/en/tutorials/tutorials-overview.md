@@ -34,3 +34,4 @@ This page provides a list of tutorials for you to interact with Milvus.
 | [DNA Classification](dna_sequence_classification.md) | Classification | vector search |
 | [Text Search Engine](text_search_engine.md) | Semantic Search | vector search |
 | [Image Deduplication](image_deduplication_system.md) | Deduplication | vector search |
+| [Generating Milvus Query Filter Expressions with Large Language Models](generating_milvus_query_filter_expressions.md) | Metadata Filtering | vector search |

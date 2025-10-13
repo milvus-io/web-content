@@ -24,7 +24,7 @@ If the target collection has `autoid` enabled on its primary field, Milvus will 
 
 For fields with `nullable` enabled, you can omit them in the `upsert` request if they do not require any updates.
 
-### Upsert in merge mode | Compatible with Milvus v2.6.2+
+### Upsert in merge mode | Milvus v2.6.2+
 
 You can also use the `partial_update` flag to make an upsert request work in merge mode. This allows you to include only the fields that need updating in the request payload.
 

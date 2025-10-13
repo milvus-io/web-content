@@ -76,3 +76,4 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Getting Started with Milvus and n8n](milvus_and_n8n.md) | Orchestration | Milvus, n8n |
 | [Use Milvus in AnythingLLM](use_milvus_in_anythingllm.md) | Orchestration | Milvus, AnythingLLM |
 | [Using NLWeb with Milvus](NLWeb_with_milvus.md) | Data Sources | Milvus, NLWeb |
+| [LangExtract + Milvus Integration](langextract_milvus_demo.md) | Data Sources | Milvus, LangExtract |
