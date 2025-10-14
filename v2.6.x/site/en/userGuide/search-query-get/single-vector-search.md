@@ -117,6 +117,7 @@ FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.60234957
 SearchReq searchReq = SearchReq.builder()
         .collectionName("quick_setup")
         .data(Collections.singletonList(queryVector))
+        .annsField("vector")
         .topK(3)
         .build();
 
@@ -971,6 +972,50 @@ curl --request POST \
 }'
 ```
 
+## Temporarily set a timezone for a search
+
+If your collection has a `TIMESTAMPTZ` field, you can temporarily override the database or collection default timezone for a single operation by setting the `timezone` parameter in the search call. This controls how `TIMESTAMPTZ` values are displayed and compared during the operation.
+
+The value of `timezone` must be a valid [IANA time zone identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (for example, **Asia/Shanghai**, **America/Chicago**, or **UTC**). For details on how to use a `TIMESTAMPTZ` field, refer to [TIMESTAMPTZ Field](timestamptz-field.md).
+
+The example below shows how to temporarily set a timezone for a search operation:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+res = client.search(
+    collection_name="quick_setup",
+    anns_field="vector",
+    data=[query_vector],
+    limit=3,
+    search_params={"metric_type": "IP"},
+    # highlight-next-line
+    timezone="America/Havana",
+)
+```
+
+```java
+// java
+```
+
+```javascript
+// js
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 ## Enhancing ANN Search
 
 AUTOINDEX considerably flattens the learning curve of ANN searches. However, the search results may not always be correct as the top-K increases. By reducing the search scope, improving search result relevancy, and diversifying the search results, Milvus works out the following search enhancements.
@@ -995,7 +1040,7 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 
 - Hybrid Search
 
-    A collection can include up to four vector fields to save the vector embeddings generated using different embedding models. By doing so, you can use a hybrid search to rerank the search results from these vector fields, improving the recall rate.
+    A collection can include multiple vector fields to save the vector embeddings generated using different embedding models. By doing so, you can use a hybrid search to rerank the search results from these vector fields, improving the recall rate.
 
     For more about hybrid search, refer to [Hybrid Search](multi-vector-search.md).
 
@@ -1011,7 +1056,7 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 
     For details on full-text search, refer to [Full Text Search](full-text-search.md).
 
-- Keyword Match
+- Text Match
 
     Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
 
@@ -1030,4 +1075,8 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 - Clustering Compaction
 
     For details on clustering compactions, refer to [Clustering Compaction](clustering-compaction.md).
+
+- Use reranking
+
+    For details on using rankers to enhance search result relevance, refer to [Decay Ranker Overview](decay-ranker-overview.md) and [Model Ranker Overview](model-ranker-overview.md).
 

@@ -34,7 +34,7 @@ The process of creating a collection involves three key steps: defining the coll
 
 ### Define schema
 
-For multi-vector hybrid search, we should define multiple vector fields within a collection schema. By default, each collection can accommodate up to 4 vector fields. However, if necessary, you can adjust the `proxy.maxVectorFieldNum` to include up to 10 vector fields in a collection as needed.
+For multi-vector hybrid search, we should define multiple vector fields within a collection schema. However, if necessary, you can adjust the [`proxy.maxVectorFieldNum`](configure_proxy.md#proxymaxVectorFieldNum) to include up to 10 vector fields in a collection as needed.
 
 This example incorporates the following fields into the schema:
 
@@ -299,6 +299,16 @@ export schema='{
 ```
 
 ### Create index
+
+After defining the collection schema, the next step is to configure the vector indexes and specify the similarity metrics. In the given example:
+
+- `text_dense_index`: an index of type `AUTOINDEX` with `IP` metric type is created for the text dense vector field.
+
+- `text_sparse_index`: an index of type`SPARSE_INVERTED_INDEX`with `BM25` metric type is used for the text sparse vector field.
+
+- `image_dense_index`: an index of type `AUTOINDEX` with `IP` metric type is created for the image dense vector field.
+
+You can choose other index types as necessary to best suit your needs and data types. For further information on the supported index types, please refer to the documentation on [available index types](index-vector-fields.md).
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -638,11 +648,11 @@ curl --request POST \
 
 ## Perform Hybrid Search
 
-### Create multiple AnnSearchRequest instances
+### Step 1: Create multiple AnnSearchRequest instances
 
 Hybrid Search is implemented by creating multiple `AnnSearchRequest` in the `hybrid_search()` function, where each `AnnSearchRequest` represents a basic ANN search request for a specific vector field. Therefore, before conducting a Hybrid Search, it is necessary to create an `AnnSearchRequest` for each vector field.
 
-In addition, by configuring the `expr` parameter in an `AnnSearchRequest`, you can set the filtering conditions for your hybrid search. Please refer to [Filtered Search](filtered-search.md) and [Filtering](boolean.md).
+In addition, by configuring the `expr` parameter in an `AnnSearchRequest`, you can set the filtering conditions for your hybrid search. Please refer to [Filtered Search](filtered-search.md) and [Filtering Explained](boolean.md).
 
 <div class="alert note">
 
@@ -808,57 +818,13 @@ export req='[
 
 Given that the parameter `limit` is set to 2, each `AnnSearchRequest` returns 2 search results. In this example, 3 `AnnSearchRequest` instances are created, resulting in a total of 6 search results.
 
-### Configure a reranking strategy
+### Step 2: Configure a reranking strategy
 
-To merge and rerank the sets of ANN search results, selecting an appropriate reranking strategy is essential. Milvus offers two types of reranking strategies: 
-
-- **WeightedRanker**: Use this strategy if the results need to emphasize a particular vector field. WeightedRanker allows you to assign greater weight to certain vector fields, highlighting them more prominently.
-
-- **RRFRanker (Reciprocal Rank Fusion Ranker)**: Choose this strategy when no specific emphasis is required. RRFRanker effectively balances the importance of each vector field.
-
-For more details about the mechanisms of these two reranking strategies, refer to [Reranking](weighted-ranker.md).
+To merge and rerank the sets of ANN search results, selecting an appropriate reranking strategy is essential. Milvus offers several types of reranking strategies. For more details on these reranking mechanisms, please refer to [Reranking](reranking). 
 
 In this example, since there is no particular emphasis on specific search queries, we will proceed with the RRFRanker strategy.
 
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-from pymilvus import RRFRanker
-
-ranker = RRFRanker(100)
-```
-
-```java
-import io.milvus.v2.service.vector.request.ranker.BaseRanker;
-import io.milvus.v2.service.vector.request.ranker.RRFRanker;
-
-BaseRanker reranker = new RRFRanker(100);
-```
-
-```go
-reranker := milvusclient.NewRRFReranker().WithK(100)
-```
-
-```javascript
-import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
-
-const rerank = RRFRanker("100");
-```
-
-```bash
-export rerank='{
-        "strategy": "rrf",
-        "params": { "k": 100}
-    }'
-```
-
-### Perform a Hybrid Search
+### Step 3: Perform a Hybrid Search
 
 Before initiating a Hybrid Search, ensure that the collection is loaded. If any vector fields within the collection lack an index or are not loaded into memory, an error will occur upon executing the Hybrid Search method.
 
@@ -959,3 +925,25 @@ The following is the output:
 ```
 
 With the `limit=2` parameter specified for the Hybrid Search, Milvus will rerank the six results obtained from the three searches. Ultimately, they will return only the top two most similar results.
+
+## Advanced usage
+
+### Temporarily set a timezone for a hybrid search
+
+If your collection has a `TIMESTAMPTZ` field, you can temporarily override the database or collection default timezone for a single operation by setting the `timezone` parameter in the hybrid search call. This controls how `TIMESTAMPTZ` values are displayed and compared during the operation.
+
+The value of `timezone` must be a valid [IANA time zone identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (for example, **Asia/Shanghai**, **America/Chicago**, or **UTC**). For details on how to use a `TIMESTAMPTZ` field, refer to [TIMESTAMPTZ Field](timestamptz-field.md).
+
+The example below shows how to temporarily set a timezone for a hybrid search operation:
+
+```python
+res = client.hybrid_search(
+    collection_name="my_collection",
+    reqs=reqs,
+    ranker=ranker,
+    limit=2,
+    # highlight-next-line
+    timezone="America/Havana",
+)
+```
+

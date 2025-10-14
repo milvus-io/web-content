@@ -270,6 +270,11 @@ The following table lists possible database properties.
      <td><p>boolean</p></td>
      <td><p>Whether to force the specified database to deny reading operations.</p></td>
    </tr>
+   <tr>
+     <td><p><code>database.timezone</code></p></td>
+     <td><p>string</p></td>
+     <td><p>Specifies the default timezone applied to time-sensitive operations within the database, particularly for <code>TIMESTAMPTZ</code> fields. Collections inherit the database timezone unless a collection-level timezone is set. A query-level timezone parameter can temporarily override both database and collection defaults. The value must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code>TIMESTAMPTZ</code> field, refer to <a href="timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></td>
+   </tr>
 </table>
 
 ### Alter database properties

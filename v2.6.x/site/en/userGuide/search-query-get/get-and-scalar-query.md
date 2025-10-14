@@ -39,36 +39,15 @@ A Collection can store various types of scalar fields. You can have Milvus filte
    </tr>
    <tr>
      <td><p>Mandatory parameters</p></td>
-     <td><ul>
-<li>Collection name</li>
-<li>Primary keys</li>
-</ul></td>
-     <td><ul>
-<li>Collection name</li>
-<li>Filtering expressions</li>
-</ul></td>
-     <td><ul>
-<li><p>Collection name</p></li>
-<li><p>Filtering expressions</p></li>
-<li><p>Number of entities to return per query</p></li>
-</ul></td>
+     <td><ul><li><p>Collection name</p></li><li><p>Primary keys</p></li></ul></td>
+     <td><ul><li><p>Collection name</p></li><li><p>Filtering expressions</p></li></ul></td>
+     <td><ul><li><p>Collection name</p></li><li><p>Filtering expressions</p></li><li><p>Number of entities to return per query</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Optional parameters</p></td>
-     <td><ul>
-<li>Partition name</li>
-<li>Output fields</li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return</p></li>
-<li><p>Output fields</p></li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return in total</p></li>
-<li><p>Output fields</p></li>
-</ul></td>
+     <td><ul><li><p>Partition name</p></li><li><p>Output fields</p></li></ul></td>
+     <td><ul><li><p>Partition name</p></li><li><p>Number of entities to return</p></li><li><p>Output fields</p></li></ul></td>
+     <td><ul><li><p>Partition name</p></li><li><p>Number of entities to return in total</p></li><li><p>Output fields</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Returns</p></td>
@@ -82,7 +61,7 @@ For more on metadata filtering, refer to .
 
 ## Use Get
 
-When you need to find entities by their primary keys, you can use the **Get** method. The following code examples assume that there are three fields named `id`, `vector`, and `color` in your collection and return the entities with primary keys `1`, `2`, and `3`.
+When you need to find entities by their primary keys, you can use the **Get** method. The following code examples assume that there are three fields named `id`, `vector`, and `color` in your collection.
 
 ```python
 [
@@ -754,6 +733,50 @@ if err != nil {
 
 ```javascript
 // node
+```
+
+```bash
+# restful
+```
+
+## Temporarily set a timezone for a query
+
+If your collection has a `TIMESTAMPTZ` field, you can temporarily override the database or collection default timezone for a single operation by setting the `timezone` parameter in the query call. This controls how `TIMESTAMPTZ` values are displayed and compared during the operation.
+
+The value of `timezone` must be a valid [IANA time zone identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (for example, **Asia/Shanghai**, **America/Chicago**, or **UTC**). For details on how to use a `TIMESTAMPTZ` field, refer to [TIMESTAMPTZ Field](timestamptz-field.md).
+
+The example below shows how to temporarily set a timezone for a query operation:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Query data and display the tsz field converted to "America/Havana"
+results = client.query(
+    collection_name,
+    filter="id <= 10",
+    output_fields=["id", "tsz", "vec"],
+    limit=2,
+    # highlight-next-line
+    timezone="America/Havana",
+)
+```
+
+```java
+// java
+```
+
+```javascript
+// js
+```
+
+```go
+// go
 ```
 
 ```bash
