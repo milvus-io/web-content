@@ -62,36 +62,15 @@ summary: >-
    </tr>
    <tr>
      <td><p>Mandatory parameters</p></td>
-     <td><ul>
-<li>Collection name</li>
-<li>Primary keys</li>
-</ul></td>
-     <td><ul>
-<li>Collection name</li>
-<li>Filtering expressions</li>
-</ul></td>
-     <td><ul>
-<li><p>Collection name</p></li>
-<li><p>Filtering expressions</p></li>
-<li><p>Number of entities to return per query</p></li>
-</ul></td>
+     <td><ul><li><p>Collection name</p></li><li><p>Primary keys</p></li></ul></td>
+     <td><ul><li><p>Collection name</p></li><li><p>Filtering expressions</p></li></ul></td>
+     <td><ul><li><p>Collection name</p></li><li><p>Filtering expressions</p></li><li><p>Number of entities to return per query</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Optional parameters</p></td>
-     <td><ul>
-<li>Partition name</li>
-<li>Output fields</li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return</p></li>
-<li><p>Output fields</p></li>
-</ul></td>
-     <td><ul>
-<li><p>Partition name</p></li>
-<li><p>Number of entities to return in total</p></li>
-<li><p>Output fields</p></li>
-</ul></td>
+     <td><ul><li><p>Partition name</p></li><li><p>Output fields</p></li></ul></td>
+     <td><ul><li><p>Partition name</p></li><li><p>Number of entities to return</p></li><li><p>Output fields</p></li></ul></td>
+     <td><ul><li><p>Partition name</p></li><li><p>Number of entities to return in total</p></li><li><p>Output fields</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Returns</p></td>
@@ -116,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by their primary keys, you can use the <strong>Get</strong> method. The following code examples assume that there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> in your collection and return the entities with primary keys <code translate="no">1</code>, <code translate="no">2</code>, and <code translate="no">3</code>.</p>
+    </button></h2><p>When you need to find entities by their primary keys, you can use the <strong>Get</strong> method. The following code examples assume that there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> in your collection.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -770,6 +749,48 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-query" class="common-anchor-header">Temporarily set a timezone for a query<button data-href="#Temporarily-set-a-timezone-for-a-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>If your collection has a <code translate="no">TIMESTAMPTZ</code> field, you can temporarily override the database or collection default timezone for a single operation by setting the <code translate="no">timezone</code> parameter in the query call. This controls how <code translate="no">TIMESTAMPTZ</code> values are displayed and compared during the operation.</p>
+<p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p>
+<p>The example below shows how to temporarily set a timezone for a query operation:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
+results = client.query(
+    collection_name,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>, <span class="hljs-string">&quot;vec&quot;</span>],
+    limit=<span class="hljs-number">2</span>,
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

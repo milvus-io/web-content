@@ -93,7 +93,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>For multi-vector hybrid search, we should define multiple vector fields within a collection schema. By default, each collection can accommodate up to 4 vector fields. However, if necessary, you can adjust the <code translate="no">proxy.maxVectorFieldNum</code> to include up to 10 vector fields in a collection as needed.</p>
+    </button></h3><p>For multi-vector hybrid search, we should define multiple vector fields within a collection schema. However, if necessary, you can adjust the <a href="/docs/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> to include up to 10 vector fields in a collection as needed.</p>
 <p>This example incorporates the following fields into the schema:</p>
 <ul>
 <li><p><code translate="no">id</code>: Serves as the primary key for storing text IDs. This field is of data type <code translate="no">INT64</code>.</p></li>
@@ -355,7 +355,14 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><div class="multipleCode">
+    </button></h3><p>After defining the collection schema, the next step is to configure the vector indexes and specify the similarity metrics. In the given example:</p>
+<ul>
+<li><p><code translate="no">text_dense_index</code>: an index of type <code translate="no">AUTOINDEX</code> with <code translate="no">IP</code> metric type is created for the text dense vector field.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: an index of type<code translate="no">SPARSE_INVERTED_INDEX</code>with <code translate="no">BM25</code> metric type is used for the text sparse vector field.</p></li>
+<li><p><code translate="no">image_dense_index</code>: an index of type <code translate="no">AUTOINDEX</code> with <code translate="no">IP</code> metric type is created for the image dense vector field.</p></li>
+</ul>
+<p>You can choose other index types as necessary to best suit your needs and data types. For further information on the supported index types, please refer to the documentation on <a href="/docs/index-vector-fields.md">available index types</a>.</p>
+<div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
@@ -693,7 +700,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Create multiple AnnSearchRequest instances<button data-href="#Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Step 1: Create multiple AnnSearchRequest instances<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -709,7 +716,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h3><p>Hybrid Search is implemented by creating multiple <code translate="no">AnnSearchRequest</code> in the <code translate="no">hybrid_search()</code> function, where each <code translate="no">AnnSearchRequest</code> represents a basic ANN search request for a specific vector field. Therefore, before conducting a Hybrid Search, it is necessary to create an <code translate="no">AnnSearchRequest</code> for each vector field.</p>
-<p>In addition, by configuring the <code translate="no">expr</code> parameter in an <code translate="no">AnnSearchRequest</code>, you can set the filtering conditions for your hybrid search. Please refer to <a href="/docs/filtered-search.md">Filtered Search</a> and <a href="/docs/boolean.md">Filtering</a>.</p>
+<p>In addition, by configuring the <code translate="no">expr</code> parameter in an <code translate="no">AnnSearchRequest</code>, you can set the filtering conditions for your hybrid search. Please refer to <a href="/docs/filtered-search.md">Filtered Search</a> and <a href="/docs/boolean.md">Filtering Explained</a>.</p>
 <div class="alert note">
 <p>In Hybrid Search, each <code translate="no">AnnSearchRequest</code> supports only one query data.</p>
 </div>
@@ -857,7 +864,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Given that the parameter <code translate="no">limit</code> is set to 2, each <code translate="no">AnnSearchRequest</code> returns 2 search results. In this example, 3 <code translate="no">AnnSearchRequest</code> instances are created, resulting in a total of 6 search results.</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">Configure a reranking strategy<button data-href="#Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Step 2: Configure a reranking strategy<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -872,41 +879,9 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>To merge and rerank the sets of ANN search results, selecting an appropriate reranking strategy is essential. Milvus offers two types of reranking strategies:</p>
-<ul>
-<li><p><strong>WeightedRanker</strong>: Use this strategy if the results need to emphasize a particular vector field. WeightedRanker allows you to assign greater weight to certain vector fields, highlighting them more prominently.</p></li>
-<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Choose this strategy when no specific emphasis is required. RRFRanker effectively balances the importance of each vector field.</p></li>
-</ul>
-<p>For more details about the mechanisms of these two reranking strategies, refer to <a href="/docs/weighted-ranker.md">Reranking</a>.</p>
+    </button></h3><p>To merge and rerank the sets of ANN search results, selecting an appropriate reranking strategy is essential. Milvus offers several types of reranking strategies. For more details on these reranking mechanisms, please refer to <a href="/docs/reranking">Reranking</a>.</p>
 <p>In this example, since there is no particular emphasis on specific search queries, we will proceed with the RRFRanker strategy.</p>
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#go">Go</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#bash">cURL</a>
-</div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
-
-ranker = RRFRanker(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
-
-<span class="hljs-type">BaseRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-string">&quot;100&quot;</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
-        &quot;strategy&quot;: &quot;rrf&quot;,
-        &quot;params&quot;: { &quot;k&quot;: 100}
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">Perform a Hybrid Search<button data-href="#Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Step 3: Perform a Hybrid Search<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1005,3 +980,44 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>With the <code translate="no">limit=2</code> parameter specified for the Hybrid Search, Milvus will rerank the six results obtained from the three searches. Ultimately, they will return only the top two most similar results.</p>
+<h2 id="Advanced-usage" class="common-anchor-header">Advanced usage<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Temporarily set a timezone for a hybrid search<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>If your collection has a <code translate="no">TIMESTAMPTZ</code> field, you can temporarily override the database or collection default timezone for a single operation by setting the <code translate="no">timezone</code> parameter in the hybrid search call. This controls how <code translate="no">TIMESTAMPTZ</code> values are displayed and compared during the operation.</p>
+<p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p>
+<p>The example below shows how to temporarily set a timezone for a hybrid search operation:</p>
+<pre><code translate="no" class="language-python">res = client.hybrid_search(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    reqs=reqs,
+    ranker=ranker,
+    limit=<span class="hljs-number">2</span>,
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>

@@ -140,6 +140,7 @@ res = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
         .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
         .topK(<span class="hljs-number">3</span>)
         .build();
 
@@ -977,6 +978,48 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Temporarily set a timezone for a search<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>If your collection has a <code translate="no">TIMESTAMPTZ</code> field, you can temporarily override the database or collection default timezone for a single operation by setting the <code translate="no">timezone</code> parameter in the search call. This controls how <code translate="no">TIMESTAMPTZ</code> values are displayed and compared during the operation.</p>
+<p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p>
+<p>The example below shows how to temporarily set a timezone for a search operation:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    data=[query_vector],
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Enhancing-ANN-Search" class="common-anchor-header">Enhancing ANN Search<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1004,7 +1047,7 @@ curl --request POST \
 <p>If the returned entities hold the same value in a specific field, the search results may not represent the distribution of all vector embeddings in the vector space. To diversify the search results, consider using the grouping search.</p>
 <p>For more about grouping search, refer to <a href="/docs/grouping-search.md">Grouping Search</a>,</p></li>
 <li><p>Hybrid Search</p>
-<p>A collection can include up to four vector fields to save the vector embeddings generated using different embedding models. By doing so, you can use a hybrid search to rerank the search results from these vector fields, improving the recall rate.</p>
+<p>A collection can include multiple vector fields to save the vector embeddings generated using different embedding models. By doing so, you can use a hybrid search to rerank the search results from these vector fields, improving the recall rate.</p>
 <p>For more about hybrid search, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p></li>
 <li><p>Search Iterator</p>
 <p>A single ANN search returns a maximum of 16,384 entities. Consider using search iterators if you need more entities to return in a single search.</p>
@@ -1012,7 +1055,7 @@ curl --request POST \
 <li><p>Full-Text Search</p>
 <p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.</p>
 <p>For details on full-text search, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
-<li><p>Keyword Match</p>
+<li><p>Text Match</p>
 <p>Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.</p>
 <p>For details on keyword match, refer to <a href="/docs/keyword-match.md">Keyword Match</a>.</p></li>
 <li><p>Use Partition Key</p>
@@ -1022,4 +1065,6 @@ curl --request POST \
 <p>For details on mmap-settings, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></li>
 <li><p>Clustering Compaction</p>
 <p>For details on clustering compactions, refer to <a href="/docs/clustering-compaction.md">Clustering Compaction</a>.</p></li>
+<li><p>Use reranking</p>
+<p>For details on using rankers to enhance search result relevance, refer to <a href="/docs/decay-ranker-overview.md">Decay Ranker Overview</a> and <a href="/docs/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
 </ul>

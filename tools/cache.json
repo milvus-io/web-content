@@ -1023,6 +1023,16 @@
     "v2.6.x/site/en/userGuide/schema/json-indexing.md": "2025-10-13T09:31:41.096Z",
     "v2.6.x/site/en/userGuide/schema/json-shredding.md": "2025-10-13T09:32:01.380Z",
     "v2.6.x/site/en/integrations/langextract_milvus_demo.md": "2025-10-13T09:26:07.903Z",
-    "v2.6.x/site/en/tutorials/generating_milvus_query_filter_expressions.md": "2025-10-13T09:27:08.033Z"
+    "v2.6.x/site/en/tutorials/generating_milvus_query_filter_expressions.md": "2025-10-13T09:27:08.033Z",
+    "v2.6.x/site/en/userGuide/indexes/scalar/rtree.md": "2025-10-14T02:43:26.853Z",
+    "v2.6.x/site/en/userGuide/indexes/scalar/stl-sort.md": "2025-10-14T02:43:36.261Z",
+    "v2.6.x/site/en/userGuide/schema/array-of-structs.md": "2025-10-14T02:43:53.667Z",
+    "v2.6.x/site/en/userGuide/schema/best-practices-for-array-of-structs.md": "2025-10-14T02:44:13.720Z",
+    "v2.6.x/site/en/userGuide/schema/geometry-field.md": "2025-10-14T02:44:27.475Z",
+    "v2.6.x/site/en/userGuide/schema/timestamptz-field.md": "2025-10-14T02:44:44.611Z",
+    "v2.6.x/site/en/userGuide/search-query-get/boolean/geometry-operators.md": "2025-10-14T02:44:58.319Z",
+    "v2.6.x/site/en/userGuide/storage-optimization/eviction.md": "2025-10-14T02:45:12.296Z",
+    "v2.6.x/site/en/userGuide/storage-optimization/tiered-storage-overview.md": "2025-10-14T02:45:29.013Z",
+    "v2.6.x/site/en/userGuide/storage-optimization/warm-up.md": "2025-10-14T02:45:38.847Z"
   }
 }

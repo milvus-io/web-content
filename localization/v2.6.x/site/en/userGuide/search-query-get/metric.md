@@ -117,6 +117,13 @@ summary: >-
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p>To index vector fields in an <a href="/docs/array-of-structs.md">Array of Structs</a> field, you should prefix <code translate="no">MAX_SIM</code> to the set of metric types mentioned above, based on the vector embeddings stored in those fields. For example,</p>
+<ul>
+<li><p>For a vector field that stores vector embeddings of the <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, or <code translate="no">INT8_VECTOR</code> type, you can use <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, or <code translate="no">MAX_SIM_L2</code> as the metric type.</p></li>
+<li><p>For a vector field that stores vector embeddings of the <code translate="no">BINARY_VECTOR</code> type, you can use <code translate="no">MAX_SIM_JACCADR</code> or <code translate="no">MAX_SIM_HAMMING</code> as the metric type.</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">Euclidean distance (L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

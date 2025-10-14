@@ -56,15 +56,9 @@
         "children": []
       },
       {
-        "label": "Data Model Design for Search",
-        "id": "schema-hands-on.md",
-        "order": 1,
-        "children": []
-      },
-      {
         "label": "Install Milvus",
         "id": "install_milvus",
-        "order": 2,
+        "order": 1,
         "isMenu": true,
         "children": [
           {
@@ -174,7 +168,7 @@
       {
         "label": "Install SDKs",
         "id": "install_sdks",
-        "order": 3,
+        "order": 2,
         "children": [
           {
             "label": "PyMilvus",
@@ -205,7 +199,7 @@
       {
         "label": "Connect to Milvus Server",
         "id": "connect-to-milvus-server.md",
-        "order": 4,
+        "order": 3,
         "children": []
       }
     ]
@@ -462,21 +456,39 @@
             "children": []
           },
           {
+            "label": "Array of Structs",
+            "id": "array-of-structs.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Geometry Field",
+            "id": "geometry-field.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "TIMESTAMPTZ Field",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "Dynamic Field",
             "id": "enable-dynamic-field.md",
-            "order": 9,
+            "order": 12,
             "children": []
           },
           {
             "label": "Nullable & Default",
             "id": "nullable-and-default.md",
-            "order": 10,
+            "order": 13,
             "children": []
           },
           {
             "label": "Analyzer",
             "id": "analyzer",
-            "order": 11,
+            "order": 14,
             "children": [
               {
                 "label": "Analyzer Overview",
@@ -642,14 +654,34 @@
           {
             "label": "Alter Collection Field",
             "id": "alter-collection-field.md",
-            "order": 12,
+            "order": 15,
             "children": []
           },
           {
             "label": "Add Fields to an Existing Collection",
             "id": "add-fields-to-an-existing-collection.md",
-            "order": 13,
+            "order": 16,
             "children": []
+          },
+          {
+            "label": "Best Practices",
+            "id": "best-practices",
+            "isMenu": true,
+            "order": 17,
+            "children": [
+              {
+                "label": "Data Model Design for Search",
+                "id": "schema-hands-on.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Data Model Design with an Array of Structs",
+                "id": "best-practices-for-array-of-structs.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -827,6 +859,18 @@
                 "id": "ngram.md",
                 "order": 2,
                 "children": []
+              },
+              {
+                "label": "RTREE",
+                "id": "rtree.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -950,6 +994,12 @@
                 "label": "Random Sampling",
                 "id": "random-sampling.md",
                 "order": 5,
+                "children": []
+              },
+              {
+                "label": "Geometry Operators",
+                "id": "geometry-operators.md",
+                "order": 6,
                 "children": []
               }
             ]
@@ -1193,6 +1243,32 @@
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Tiered Storage",
+            "id": "tiered_storage",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Tiered Storage Overview",
+                "id": "tiered-storage-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Warm Up",
+                "id": "warm-up.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Eviction",
+                "id": "eviction.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           }
         ]
       }
