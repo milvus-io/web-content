@@ -890,10 +890,9 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
-<span class="hljs-type">BaseRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);
+<span class="hljs-type">RRFRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> RRFRanker.builder().k(<span class="hljs-number">100</span>).build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
