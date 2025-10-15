@@ -147,10 +147,6 @@ You can modify collection-level properties after a collection is created.
      <td><p><code>allow_insert_auto_id</code></p></td>
      <td><p>Whether to allow a collection to accept user-provided primary key values when AutoID has been enabled for the collection.</p><ul><li><p>When set to <strong>"true"</strong>: Inserts, upserts, and bulk imports use the user-provided primary key if present; otherwise, primary key values are auto-generated.</p></li><li><p>When set to <strong>"false"</strong>: User-provided primary key values are rejected or ignored and primary key values are always auto-generated. The default is <strong>"false"</strong>.</p></li></ul></td>
    </tr>
-   <tr>
-     <td><p><code>collection.timezone</code></p></td>
-     <td><p>Specifies the default timezone for this collection when handling time-sensitive operations, especially <code>TIMESTAMPTZ</code> fields. Timestamps are stored internally in UTC, and Milvus converts values for display and comparison according to this setting. If set, the collection timezone overrides the database’s default timezone; a query’s timezone parameter can temporarily override both. The value must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code>TIMESTAMPTZ</code> field, refer to <a href="timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></td>
-   </tr>
 </table>
 
 ### Example 1: Set collection TTL
@@ -472,67 +468,6 @@ curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
     "collectionName": "my_collection",
     "properties": {
       "allow_insert_auto_id": "true"
-    }
-  }'
-```
-
-### Example 6: Set collection time zone | Milvus 2.6.4+
-
-You can set a default time zone for your collection using the `collection.timezone` property. This determines how time-related data is interpreted and displayed for all operations within the collection, including data insertion, querying, and results presentation.
-
-The value of `collection.timezone` must be a valid [IANA time zone identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones), such as `Asia/Shanghai`, `America/Chicago`, or `UTC`. Using an invalid or non-standard value will result in an error when modifying the collection property.
-
-The example below shows how to set the collection time zone to **Asia/Shanghai**:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-client.alter_collection_properties(
-    collection_name="my_collection",
-    # highlight-next-line
-    properties={"collection.timezone": "Asia/Shanghai"}
-)
-```
-
-```java
-Map<String, String> properties = new HashMap<>();
-properties.put("collection.timezone", "Asia/Shanghai");
-
-AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
-        .collectionName("my_collection")
-        .properties(properties)
-        .build();
-
-client.alterCollection(alterCollectionReq);
-```
-
-```javascript
-// js
-```
-
-```go
-err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption("my_collection").WithProperty(common.CollectionDefaultTimezone, true))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-```
-
-```bash
-# restful
-curl -X POST "http://localhost:19530/v2/vectordb/collections/alter_properties" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <token>" \
-  -d '{
-    "collectionName": "my_collection",
-    "properties": {
-      "collection.timezone": "Asia/Shanghai"
     }
   }'
 ```
