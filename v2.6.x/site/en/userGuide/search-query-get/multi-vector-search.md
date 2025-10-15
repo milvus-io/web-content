@@ -835,10 +835,9 @@ ranker = RRFRanker(100)
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.ranker.BaseRanker;
 import io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
-BaseRanker reranker = new RRFRanker(100);
+RRFRanker reranker = RRFRanker.builder().k(100).build();
 ```
 
 ```go
