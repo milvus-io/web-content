@@ -508,6 +508,9 @@ curl --request POST \
       </svg>
     </button></h2><p>The following code example demonstrates how to upsert entities with partial updates. Provide only the fields needing updates and their new values, along with the explicit partial update flag.</p>
 <p>In the following example, the <code translate="no">issue</code> field of the entities specified in the upsert request will be updated to the values included in the request.</p>
+<div class="alert note">
+<p>When performing an upsert in merge mode, ensure that the entities involved in the request have the same set of fields. Suppose there are two or more entities to be upserted, as shown in the following code snippet, it is important that they include identical fields to prevent errors and maintain data integrity.</p>
+</div>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -517,11 +520,11 @@ curl --request POST \
 </div>
 <pre><code translate="no" class="language-python">data=[
     {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
         <span class="hljs-string">&quot;issue&quot;</span>: <span class="hljs-string">&quot;vol.14&quot;</span>
     },
     {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">12</span>, 
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, 
         <span class="hljs-string">&quot;issue&quot;</span>: <span class="hljs-string">&quot;vol.7&quot;</span>
     }
 ]
@@ -538,11 +541,11 @@ res = client.upsert(
 <span class="hljs-comment"># {&#x27;upsert_count&#x27;: 2}</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">3</span>);
+row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
 row1.addProperty(<span class="hljs-string">&quot;issue&quot;</span>, <span class="hljs-string">&quot;vol.14&quot;</span>);
 
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">12</span>);
+row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
 row2.addProperty(<span class="hljs-string">&quot;issue&quot;</span>, <span class="hljs-string">&quot;vol.7&quot;</span>);
 
 <span class="hljs-type">UpsertReq</span> <span class="hljs-variable">upsertReq</span> <span class="hljs-operator">=</span> UpsertReq.builder()
@@ -558,7 +561,7 @@ System.out.println(upsertResp);
 <span class="hljs-comment">//</span>
 <span class="hljs-comment">// UpsertResp(upsertCnt=2)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">pkColumn := column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">3</span>, <span class="hljs-number">12</span>})
+<pre><code translate="no" class="language-go">pkColumn := column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>})
 issueColumn = column.NewColumnString(<span class="hljs-string">&quot;issue&quot;</span>, []<span class="hljs-type">string</span>{
     <span class="hljs-string">&quot;vol.17&quot;</span>, <span class="hljs-string">&quot;vol.7&quot;</span>,
 })
@@ -574,11 +577,11 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data=[
     {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
         <span class="hljs-string">&quot;issue&quot;</span>: <span class="hljs-string">&quot;vol.14&quot;</span>
     },
     {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">12</span>, 
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, 
         <span class="hljs-string">&quot;issue&quot;</span>: <span class="hljs-string">&quot;vol.7&quot;</span>
     }
 ];
@@ -599,18 +602,26 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
-curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;data&quot;: [
-        {&quot;id&quot;: 3, &quot;issue&quot;: &quot;vol.14&quot;},
-        {&quot;id&quot;: 12, &quot;issue&quot;: &quot;vol.7&quot;}
-    ],
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;partialUpdate&quot;: true
-}&#x27;</span>
+<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;my_collection&quot;</span>
+<span class="hljs-built_in">export</span> UPSERT_DATA=<span class="hljs-string">&#x27;[
+  {
+    &quot;id&quot;: 1,
+    &quot;issue&quot;: &quot;vol.14&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;issue&quot;: &quot;vol.7&quot;
+  }
+]&#x27;</span>
+
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
+    \&quot;data\&quot;: <span class="hljs-variable">${UPSERT_DATA}</span>,
+    \&quot;partialUpdate\&quot;: true
+  }&quot;</span>
 
 <span class="hljs-comment"># {</span>
 <span class="hljs-comment">#     &quot;code&quot;: 0,</span>
