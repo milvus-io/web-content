@@ -71,20 +71,8 @@ beta: Milvus 2.6.4+
 <th><p>데이터 유형</p></th>
 </tr>
 <tr>
-<td rowspan="5"><p>벡터</p></td>
+<td><p>벡터</p></td>
 <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">INT8_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BINARY_VECTOR</code></p></td>
 </tr>
 <tr>
 <td rowspan="5"><p>스칼라</p></td>
@@ -539,7 +527,7 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>출력은 각 임베딩 목록에 대해 가장 유사한 세 개의 엔티티 목록입니다.</p>
+<p>출력은 각 임베딩 목록에 대해 가장 유사한 3개 엔티티의 목록입니다.</p>
 <p><details></p>
 <p><summary>출력</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
@@ -633,4 +621,4 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본 구조체 배열 데이터 타입의 개발은 복잡한 데이터 구조를 처리하는 Milvus의 기능이 크게 발전했음을 의미합니다. 사용 사례를 더 잘 이해하고 이 새로운 기능을 최대한 활용하려면 <a href="https://zilliverse.feishu.cn/wiki/VOkIwd5adiziGQkoDO1cRoRFnre">구조체 배열을 사용한 스키마 설계를</a> 읽어보시기 바랍니다.</p>
+    </button></h2><p>기본 구조체 배열 데이터 타입의 개발은 복잡한 데이터 구조를 처리하는 Milvus의 기능이 크게 발전했음을 의미합니다. 사용 사례를 더 잘 이해하고 이 새로운 기능을 최대한 활용하려면 <a href="/docs/ko/best-practices-for-array-of-structs.md">구조체 배열을 사용한 스키마 설계를</a> 읽어보시기 바랍니다.</p>

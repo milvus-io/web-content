@@ -58,7 +58,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>Créer des nœuds feuilles :</strong> Pour chaque objet géométrique, calculez son <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">rectangle minimal de délimitation</a> (MBR), qui est le plus petit rectangle contenant entièrement l'objet, et stockez-le en tant que nœud feuille.</p></li>
-<li><p><strong>Regrouper en boîtes plus grandes :</strong> Regroupez les nœuds feuilles proches et enveloppez chaque groupe avec un nouveau MBR, en formant des nœuds internes. Par exemple, le groupe <strong>B</strong> contient <strong>D</strong> et <strong>E</strong>; le groupe <strong>C</strong> contient <strong>F</strong> et <strong>G.</strong></p></li>
+<li><p><strong>Regrouper en boîtes plus grandes :</strong> Regroupez les nœuds feuilles proches et entourez chaque groupe d'un nouveau MBR, en formant des nœuds internes. Par exemple, le groupe <strong>B</strong> contient <strong>D</strong> et <strong>E</strong>; le groupe <strong>C</strong> contient <strong>F</strong> et <strong>G.</strong></p></li>
 <li><p><strong>Ajoutez le nœud racine :</strong> Ajoutez un nœud racine dont le RBM couvre tous les groupes internes, ce qui permet d'obtenir une structure arborescente équilibrée en hauteur.</p></li>
 </ol>
 <p>
@@ -141,7 +141,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><p>Vous filtrez avec des opérateurs géométriques dans l'expression <code translate="no">filter</code>. Lorsqu'un index <code translate="no">RTREE</code> existe sur le champ cible <code translate="no">GEOMETRY</code>, Milvus l'utilise pour élaguer automatiquement les candidats. Sans l'index, le filtre revient à un balayage complet.</p>
-<p>Pour obtenir la liste complète des opérateurs spécifiques à la géométrie disponibles, reportez-vous à la section <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Opérateurs de géométrie</a>.</p>
+<p>Pour obtenir la liste complète des opérateurs spécifiques à la géométrie disponibles, reportez-vous à la section <a href="/docs/fr/geometry-operators.md">Opérateurs de géométrie</a>.</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">Exemple 1 : Filtre uniquement<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -198,3 +198,30 @@ hits = client.search(
 <span class="hljs-built_in">print</span>(hits)  <span class="hljs-comment"># Expected: top-k by vector similarity among rows whose geo intersects the line</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour plus d'informations sur l'utilisation d'un champ <code translate="no">GEOMETRY</code>, voir <a href="/docs/fr/geometry-field.md">Champ géométrique</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Supprimer un index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilisez la méthode <code translate="no">drop_index()</code> pour supprimer un index existant d'une collection.</p>
+<div class="alert note">
+<ul>
+<li><p>Dans la <strong>version 2.6.3</strong> ou antérieure, vous devez libérer la collection avant de supprimer un index.</p></li>
+<li><p>À partir de la <strong>version 2.6.4</strong>, vous pouvez supprimer un index directement lorsqu'il n'est plus nécessaire, sans avoir à libérer la collection au préalable.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;geo_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;rtree_geo&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>

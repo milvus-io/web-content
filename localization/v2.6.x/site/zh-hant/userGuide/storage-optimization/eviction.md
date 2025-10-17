@@ -199,7 +199,7 @@ beta: Milvus 2.6.4+
 <p><strong>最佳做法</strong>：</p>
 <ul>
 <li><p>請勿設定高水準或低水準超過 ~0.80，以便為 QueryNode 的靜態使用和查詢時間突發留出空間。</p></li>
-<li><p>避免高、低水印之間有大的間隙；大間隙會延長每次驅逐週期，並增加延遲。</p></li>
+<li><p>避免高低水印之間有大的間隙；大間隙會延長每次驅逐週期，並增加延遲。</p></li>
 </ul>
 <h2 id="Configure-cache-TTL" class="common-anchor-header">設定快取記憶體 TTL<button data-href="#Configure-cache-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -216,7 +216,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>快取存活時間 (TTL)</strong>會在設定的持續時間後自動移除快取資料，即使未達到資源臨界值。它與 LRU 驅逐一起工作，防止陳舊資料無限期地佔用快取記憶體。</p>
+    </button></h2><p><strong>快取存活時間 (TTL)</strong>會在設定的持續時間後自動移除快取資料，即使未達到資源臨界值。它與 LRU 驅逐一起工作，以防止陳舊資料無限期地佔用快取記憶體。</p>
 <div class="alert note">
 <p>Cache TTL 需要<code translate="no">backgroundEvictionEnabled: true</code> ，因為它在同一個背景線程上執行。</p>
 </div>
@@ -290,7 +290,7 @@ beta: Milvus 2.6.4+
      <td><p>浮動</p></td>
      <td><p>[0.0, 1.0]</p></td>
      <td><p>分配給可移除資料的記憶體快取部分。</p></td>
-     <td><p>從<code translate="no">0.3</code> 開始。增加 (0.5-0.7) 表示驅逐頻率較低；減少 (0.1-0.2) 表示區段容量較高。</p></td>
+     <td><p>從<code translate="no">0.3</code> 開始。增加 (0.5-0.7) 表示驅逐頻率較低；減少 (0.1-0.2) 表示段容量較高。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">evictableDiskCacheRatio</code></p></td>

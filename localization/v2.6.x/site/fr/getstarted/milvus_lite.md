@@ -39,7 +39,7 @@ title: Exécution locale de Milvus Lite
 <ul>
 <li>Jupyter Notebook / Google Colab</li>
 <li>Ordinateurs portables</li>
-<li>Appareils Edge</li>
+<li>Périphériques Edge</li>
 </ul>
 <p>Milvus Lite partage la même API que Milvus Standalone et Distributed, et couvre la plupart des fonctionnalités telles que la persistance et la gestion des données vectorielles, les opérations CRUD vectorielles, la recherche vectorielle dense et éparse, le filtrage des métadonnées, la recherche multi-vectorielle et hybride. Ensemble, ils offrent une expérience cohérente dans différents types d'environnements, des appareils périphériques aux clusters dans le nuage, en s'adaptant à des cas d'utilisation de différentes tailles. Avec le même code côté client, vous pouvez exécuter des applications GenAI avec Milvus Lite sur un ordinateur portable ou un bloc-notes Jupyter, ou Milvus Standalone sur un conteneur Docker, ou Milvus Distributed sur un cluster Kubernetes à grande échelle desservant des milliards de vecteurs en production.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -78,9 +78,9 @@ title: Exécution locale de Milvus Lite
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell">pip install -U pymilvus
+    </button></h2><pre><code translate="no" class="language-shell">pip install -U pymilvus[milvus-lite]
 <button class="copy-code-btn"></button></code></pre>
-<p>Nous recommandons d'utiliser <code translate="no">pymilvus</code>. Comme <code translate="no">milvus-lite</code> est inclus dans <code translate="no">pymilvus</code> version 2.4.2 ou supérieure, vous pouvez <code translate="no">pip install</code> avec <code translate="no">-U</code> pour forcer la mise à jour vers la dernière version et <code translate="no">milvus-lite</code> est automatiquement installé.</p>
+<p>Nous recommandons d'utiliser <code translate="no">pymilvus</code>. Vous pouvez utiliser <code translate="no">pip install</code> avec <code translate="no">-U</code> pour forcer la mise à jour vers la dernière version et <code translate="no">milvus-lite</code> sera automatiquement installé.</p>
 <p>Si vous souhaitez installer explicitement le paquet <code translate="no">milvus-lite</code>, ou si vous avez installé une ancienne version de <code translate="no">milvus-lite</code> et souhaitez la mettre à jour, vous pouvez utiliser <code translate="no">pip install -U milvus-lite</code>.</p>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">Connexion à Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -186,7 +186,22 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>Lors de l'utilisation de Milvus Lite, certaines fonctionnalités ne sont pas prises en charge. Les tableaux suivants résument les limites d'utilisation de Milvus Lite.</p>
-<h3 id="Collection" class="common-anchor-header">Collection</h3><table>
+<h3 id="Collection" class="common-anchor-header">Collection<button data-href="#Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
@@ -221,7 +236,22 @@ res = client.delete(
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md">rename_collection()</a></td><td>Il n'est pas possible de renommer une collection.</td></tr>
 </tbody>
 </table>
-<h3 id="Field--Schema" class="common-anchor-header">Champ et schéma</h3><table>
+<h3 id="Field--Schema" class="common-anchor-header">Champ et schéma<button data-href="#Field--Schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
@@ -242,7 +272,22 @@ res = client.delete(
 <tr><td><code translate="no">is_partition_key</code></td><td>N</td></tr>
 </tbody>
 </table>
-<h3 id="Insert--Search" class="common-anchor-header">Insertion et recherche</h3><table>
+<h3 id="Insert--Search" class="common-anchor-header">Insertion et recherche<button data-href="#Insert--Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
@@ -288,7 +333,22 @@ res = client.delete(
 <tr><td><code translate="no">partition_name</code></td><td>N</td></tr>
 </tbody>
 </table>
-<h3 id="Load--Release" class="common-anchor-header">Chargement et libération</h3><table>
+<h3 id="Load--Release" class="common-anchor-header">Chargement et libération<button data-href="#Load--Release" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
@@ -304,7 +364,22 @@ res = client.delete(
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/close.md">close()</a></td><td>Y</td></tr>
 </tbody>
 </table>
-<h3 id="Index" class="common-anchor-header">Index</h3><table>
+<h3 id="Index" class="common-anchor-header">Index<button data-href="#Index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>Méthode / Paramètre</th><th>Pris en charge dans Milvus Lite</th></tr>
 </thead>
@@ -325,11 +400,86 @@ res = client.delete(
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 </tbody>
 </table>
-<h3 id="Vector-Index-Types" class="common-anchor-header">Types d'index vectoriels</h3><p>Milvus Lite ne prend en charge que le type d'index <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Il utilise le type FLAT quel que soit le type d'index spécifié dans la collection.</p>
-<h3 id="Search-Features" class="common-anchor-header">Fonctionnalités de recherche</h3><p>Milvus Lite prend en charge les recherches vectorielles éparses, multivectorielles et hybrides.</p>
-<h3 id="Partition" class="common-anchor-header">Partition</h3><p>Milvus Lite ne prend pas en charge les partitions et les méthodes liées aux partitions.</p>
-<h3 id="Users--Roles" class="common-anchor-header">Utilisateurs et rôles</h3><p>La Milvus Lite ne prend pas en charge les utilisateurs, les rôles et les méthodes associées.</p>
-<h3 id="Alias" class="common-anchor-header">Alias</h3><p>La version Lite de Milvus ne prend pas en charge les alias et les méthodes liées aux alias.</p>
+<h3 id="Vector-Index-Types" class="common-anchor-header">Types d'index vectoriels<button data-href="#Vector-Index-Types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Lite ne prend en charge que le type d'index <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Il utilise le type FLAT quel que soit le type d'index spécifié dans la collection.</p>
+<h3 id="Search-Features" class="common-anchor-header">Fonctionnalités de recherche<button data-href="#Search-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Lite prend en charge les recherches vectorielles éparses, multivectorielles et hybrides.</p>
+<h3 id="Partition" class="common-anchor-header">Partition<button data-href="#Partition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Lite ne prend pas en charge les partitions et les méthodes liées aux partitions.</p>
+<h3 id="Users--Roles" class="common-anchor-header">Utilisateurs et rôles<button data-href="#Users--Roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La Milvus Lite ne prend pas en charge les utilisateurs, les rôles et les méthodes associées.</p>
+<h3 id="Alias" class="common-anchor-header">Alias<button data-href="#Alias" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La version Lite de Milvus ne prend pas en charge les alias et les méthodes liées aux alias.</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Migration des données de Milvus Lite<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -362,7 +512,7 @@ optional arguments:
                         collection that need to be dumped
   -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
-<p>L'exemple suivant exporte toutes les données de la collection <code translate="no">demo_collection</code> stockées dans <code translate="no">./milvus_demo.db</code> (fichier de base de données Milvus Lite).</p>
+<p>L'exemple suivant extrait toutes les données de la collection <code translate="no">demo_collection</code> qui sont stockées dans <code translate="no">./milvus_demo.db</code> (fichier de base de données Milvus Lite).</p>
 <p>Pour exporter des données :</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
 <span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>

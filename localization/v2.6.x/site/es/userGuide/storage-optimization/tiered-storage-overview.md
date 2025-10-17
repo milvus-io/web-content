@@ -2,13 +2,11 @@
 id: tiered-storage-overview.md
 title: Visión general del almacenamiento por nivelesCompatible with Milvus 2.6.4+
 summary: >-
-  En Milvus, el modo tradicional de carga completa requiere que cada QueryNode
-  cargue todos los campos del esquema y los índices de un segmento en la
-  inicialización, incluso los datos a los que puede que nunca se acceda. Esto
-  asegura la disponibilidad inmediata de los datos, pero a menudo conduce a un
-  desperdicio de recursos, incluyendo un alto uso de memoria, una gran actividad
-  en disco y una sobrecarga significativa de E/S, especialmente cuando se
-  manejan conjuntos de datos a gran escala.
+  In Milvus, the traditional full-load mode requires each QueryNode to load all
+  schema fields and indexes of a segment at initialization, even data that may
+  never be accessed. This ensures immediate data availability but often leads to
+  wasted resources, including high memory usage, heavy disk activity, and
+  significant I/O overhead, especially when handling large-scale datasets.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Tiered-Storage-Overview" class="common-anchor-header">Visión general del almacenamiento por niveles<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Tiered-Storage-Overview" class="anchor-icon" translate="no">
@@ -27,7 +25,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>En Milvus, el <strong>modo</strong> tradicional <strong>de carga completa</strong> requiere que cada QueryNode cargue todos los campos del esquema y los índices de un <a href="https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf">segmento</a> en la inicialización, incluso los datos a los que puede que nunca se acceda. Esto garantiza la disponibilidad inmediata de los datos, pero a menudo conduce a un desperdicio de recursos, incluyendo un alto uso de memoria, una gran actividad de disco y una sobrecarga significativa de E/S, especialmente cuando se manejan conjuntos de datos a gran escala.</p>
-<p><strong>El almacenamiento por niveles</strong> resuelve este problema desvinculando la caché de datos de la carga de segmentos. En lugar de cargar todos los datos a la vez, Milvus introduce una capa de almacenamiento en caché que distingue entre datos calientes (almacenados localmente) y datos fríos (almacenados remotamente). El QueryNode carga ahora sólo metadatos ligeros inicialmente y extrae o desaloja dinámicamente los datos bajo demanda. Esto reduce significativamente el tiempo de carga, optimiza la utilización de los recursos locales y permite a los QueryNodes procesar conjuntos de datos que superan con creces su capacidad de memoria física o de disco.</p>
+<p><strong>El almacenamiento por niveles</strong> resuelve este problema desvinculando la caché de datos de la carga de segmentos. En lugar de cargar todos los datos a la vez, Milvus introduce una capa de almacenamiento en caché que distingue entre datos calientes (almacenados localmente) y datos fríos (almacenados remotamente). El QueryNode carga ahora sólo metadatos ligeros inicialmente y extrae o desaloja dinámicamente los datos bajo demanda. Esto reduce significativamente el tiempo de carga, optimiza la utilización de los recursos locales y permite a los QueryNodes procesar conjuntos de datos que superan con creces su memoria física o su capacidad de disco.</p>
 <p>Puede considerar habilitar el Almacenamiento por Niveles en escenarios como:</p>
 <ul>
 <li><p>Colecciones que superan la memoria disponible o la capacidad NVMe de un único QueryNode.</p></li>
@@ -56,7 +54,7 @@ beta: Milvus 2.6.4+
 <div class="alert note">
 <p><strong>Los metadatos</strong> incluyen esquemas, definiciones de índices, mapas de trozos, recuentos de filas y referencias a objetos remotos. Estos datos son pequeños, siempre se almacenan en caché y nunca se desalojan.</p>
 </div>
-<h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">Modo de carga completa frente a modo de almacenamiento por niveles<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
+<h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">Modo de carga completa frente al modo de almacenamiento por niveles<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

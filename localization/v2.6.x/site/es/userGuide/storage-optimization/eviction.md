@@ -52,7 +52,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p>Desalojo</p></td>
-     <td><p>Durante la consulta o búsqueda, cuando el uso de memoria/disco supera los límites internos.</p></td>
+     <td><p>Durante la consulta o búsqueda, cuando el uso de memoria/disco excede los límites internos.</p></td>
      <td><p>El subproceso en segundo plano comprueba periódicamente el uso y desencadena el desalojo cuando se supera la marca de agua.</p></td>
    </tr>
    <tr>

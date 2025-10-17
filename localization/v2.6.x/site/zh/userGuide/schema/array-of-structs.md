@@ -69,20 +69,8 @@ beta: Milvus 2.6.4+
 <th><p>数据类型</p></th>
 </tr>
 <tr>
-<td rowspan="5"><p>向量</p></td>
+<td><p>向量</p></td>
 <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">INT8_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BINARY_VECTOR</code></p></td>
 </tr>
 <tr>
 <td rowspan="5"><p>标量</p></td>
@@ -103,7 +91,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>无论是在 Collections 层还是在 Structs 组合中，向量字段的数量都不得大于或等于 10。</p></li>
 <li><p><strong>可归零和默认值</strong></p>
-<p>数组结构体字段不可为空，也不接受任何默认值。</p></li>
+<p>结构数组字段不可为空，也不接受任何默认值。</p></li>
 <li><p><strong>函数</strong></p>
 <p>不能使用函数从 Struct 中的标量字段派生出向量字段。</p></li>
 <li><p><strong>索引类型和度量类型</strong></p>
@@ -631,4 +619,4 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本地结构数组数据类型的开发代表着 Milvus 处理复杂数据结构能力的重大进步。为了更好地了解其使用案例并最大限度地利用这一新功能，我们建议您阅读《<a href="https://zilliverse.feishu.cn/wiki/VOkIwd5adiziGQkoDO1cRoRFnre">使用结构数组的 Schema 设计</a>》。</p>
+    </button></h2><p>本地结构数组数据类型的开发代表着 Milvus 处理复杂数据结构能力的重大进步。为了更好地了解其使用案例并最大限度地利用这一新功能，我们建议您阅读《<a href="/docs/zh/best-practices-for-array-of-structs.md">使用结构数组的 Schema 设计</a>》。</p>

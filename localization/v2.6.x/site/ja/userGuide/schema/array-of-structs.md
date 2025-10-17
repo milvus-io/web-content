@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>エンティティのArray of Structsフィールドは、Struct要素の順序付きセットを格納します。Array内の各Structは、複数のベクトルとスカラーフィールドで構成される、定義済みの同じスキーマを共有します。</p>
+    </button></h1><p>エンティティ内のArray of Structsフィールドは、Struct要素の順序付きセットを格納します。Array内の各Structは、複数のベクトルとスカラーフィールドで構成される、定義済みの同じスキーマを共有します。</p>
 <p>以下は、Array of Structs フィールドを含むコレクションのエンティティの例です。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
@@ -62,7 +62,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>データ型</strong></p>
-<p>コレクションを作成するとき、Array フィールドの要素のデータ型として Struct 型を使用できます。しかし、既存のコレクションにArray of Structsを追加することはできず、Milvusはコレクションフィールドのデータ型としてStruct型の使用をサポートしていません。</p>
+<p>コレクションを作成するとき、Array フィールドの要素のデータ型として Struct 型を使用できます。しかし、既存のコレクションにArray of Structsを追加することはできませんし、Milvusはコレクションフィールドのデータ型としてStruct型の使用をサポートしていません。</p>
 <p>ArrayフィールドのStructは同じスキーマを共有しており、Arrayフィールドの作成時に定義する必要があります。</p>
 <p>Struct スキーマには、以下の表に示すように、ベクトルフィールドとスカラーフィールドの両方が含まれます：</p>
 <p><table>
@@ -71,20 +71,8 @@ beta: Milvus 2.6.4+
 <th><p>データ型</p></th>
 </tr>
 <tr>
-<td rowspan="5"><p>ベクター</p></td>
+<td><p>ベクター</p></td>
 <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">INT8_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BINARY_VECTOR</code></p></td>
 </tr>
 <tr>
 <td rowspan="5"><p>スカラー</p></td>
@@ -633,4 +621,4 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ネイティブのArray of Structsデータ型の開発は、milvusの複雑なデータ構造を扱う能力の大きな進歩を意味します。その使用例をより理解し、この新機能を最大限に活用するために、<a href="https://zilliverse.feishu.cn/wiki/VOkIwd5adiziGQkoDO1cRoRFnre">Array of Structsを使用したスキーマ設計を</a>読むことをお勧めします。</p>
+    </button></h2><p>ネイティブのArray of Structsデータ型の開発は、milvusの複雑なデータ構造を扱う能力の大きな進歩を意味します。その使用例をより理解し、この新機能を最大限に活用するために、<a href="/docs/ja/best-practices-for-array-of-structs.md">Array of Structsを使用したスキーマ設計を</a>読むことをお勧めします。</p>

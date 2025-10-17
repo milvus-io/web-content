@@ -18,7 +18,7 @@ title: ローカルでMilvus Liteを動かす
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このページでは、Milvus Liteを使ってローカルでMilvusを実行する方法を説明します。Milvus Liteは<a href="https://github.com/milvus-io/milvus">Milvusの</a>軽量版です。<a href="https://github.com/milvus-io/milvus">Milvusは</a>オープンソースのベクトルデータベースで、ベクトル埋め込みと類似性検索によりAIアプリケーションを強化します。</p>
+    </button></h1><p>このページでは、Milvus Liteを使ってローカルでMilvusを実行する方法を説明します。Milvus Liteは<a href="https://github.com/milvus-io/milvus">Milvusの</a>軽量版です。<a href="https://github.com/milvus-io/milvus">Milvusは</a>オープンソースのベクトルデータベースであり、ベクトル埋め込みと類似性検索によってAIアプリケーションを強化します。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ title: ローカルでMilvus Liteを動かす
 <li>ラップトップ</li>
 <li>エッジデバイス</li>
 </ul>
-<p>Milvus LiteはMilvus StandaloneおよびDistributedと同じAPIを共有し、ベクトルデータの永続化と管理、ベクトルCRUD操作、スパースおよびデンスベクトル検索、メタデータフィルタリング、マルチベクトルおよびhybrid_searchなど、ほとんどの機能をカバーしています。これらの機能を組み合わせることで、エッジデバイスからクラウド上のクラスタまで、さまざまなタイプの環境にわたって一貫したエクスペリエンスを提供し、さまざまな規模のユースケースにフィットします。同じクライアント側のコードで、ラップトップやJupyter Notebook上のMilvus Lite、Dockerコンテナ上のMilvus Standalone、または本番環境で数十億のベクターに対応する大規模なKubernetesクラスタ上のMilvus DistributedでGenAIアプリを実行することができます。</p>
+<p>Milvus LiteはMilvus StandaloneおよびDistributedと同じAPIを共有し、ベクトルデータの永続化と管理、ベクトルCRUD操作、スパースおよびデンスベクトル検索、メタデータフィルタリング、マルチベクトルおよびhybrid_searchなど、ほとんどの機能をカバーしています。これらを組み合わせることで、エッジデバイスからクラウド上のクラスタまで、さまざまなタイプの環境にわたって一貫したエクスペリエンスを提供し、さまざまな規模のユースケースにフィットします。同じクライアント側のコードで、ラップトップやJupyter Notebook上のMilvus Lite、Dockerコンテナ上のMilvus Standalone、または本番環境で数十億のベクターに対応する大規模なKubernetesクラスタ上のMilvus DistributedでGenAIアプリを実行することができます。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,10 +78,10 @@ title: ローカルでMilvus Liteを動かす
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell">pip install -U pymilvus
+    </button></h2><pre><code translate="no" class="language-shell">pip install -U pymilvus[milvus-lite]
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">pymilvus</code> の利用を推奨します。<code translate="no">milvus-lite</code> は<code translate="no">pymilvus</code> バージョン2.4.2以上に含まれているため、<code translate="no">pip install</code> を<code translate="no">-U</code> で強制的に最新版にアップデートすると、<code translate="no">milvus-lite</code> が自動的にインストールされます。</p>
-<p><code translate="no">milvus-lite</code> パッケージを明示的にインストールしたい場合や、古いバージョンの<code translate="no">milvus-lite</code> をインストールしており、それをアップデートしたい場合は、<code translate="no">pip install -U milvus-lite</code> 。</p>
+<p><code translate="no">pymilvus</code> のご利用をお勧めします。<code translate="no">-U</code> を使って<code translate="no">pip install</code> を実行すると、自動的に<code translate="no">milvus-lite</code> がインストールされます。</p>
+<p><code translate="no">milvus-lite</code> パッケージを明示的にインストールしたい場合、または古いバージョンの<code translate="no">milvus-lite</code> をインストールしてアップデートしたい場合は、<code translate="no">pip install -U milvus-lite</code> を実行してください。</p>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">Milvus Liteへの接続<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +186,22 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>Milvus Liteを使用する場合、いくつかの機能がサポートされていないことに注意してください。以下の表はMilvus Liteの利用制限をまとめたものです。</p>
-<h3 id="Collection" class="common-anchor-header">コレクション</h3><table>
+<h3 id="Collection" class="common-anchor-header">コレクション<button data-href="#Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>メソッド / パラメータ</th><th>Milvus Liteでサポートされる機能</th></tr>
 </thead>
@@ -221,7 +236,22 @@ res = client.delete(
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md">rename_collection()</a></td><td>コレクション名の変更はサポートしていません。</td></tr>
 </tbody>
 </table>
-<h3 id="Field--Schema" class="common-anchor-header">フィールドとスキーマ</h3><table>
+<h3 id="Field--Schema" class="common-anchor-header">フィールドとスキーマ<button data-href="#Field--Schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>メソッド / パラメータ</th><th>Milvus Liteでサポートされているもの</th></tr>
 </thead>
@@ -242,7 +272,22 @@ res = client.delete(
 <tr><td><code translate="no">is_partition_key</code></td><td>N</td></tr>
 </tbody>
 </table>
-<h3 id="Insert--Search" class="common-anchor-header">挿入と検索</h3><table>
+<h3 id="Insert--Search" class="common-anchor-header">挿入と検索<button data-href="#Insert--Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>メソッド / パラメータ</th><th>milvus Liteでサポートされている</th></tr>
 </thead>
@@ -288,7 +333,22 @@ res = client.delete(
 <tr><td><code translate="no">partition_name</code></td><td>N</td></tr>
 </tbody>
 </table>
-<h3 id="Load--Release" class="common-anchor-header">ロード＆リリース</h3><table>
+<h3 id="Load--Release" class="common-anchor-header">ロード＆リリース<button data-href="#Load--Release" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>方法 / パラメータ</th><th>Milvus Liteでサポートされています。</th></tr>
 </thead>
@@ -304,7 +364,22 @@ res = client.delete(
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/close.md">close()</a></td><td>Y</td></tr>
 </tbody>
 </table>
-<h3 id="Index" class="common-anchor-header">インデックス</h3><table>
+<h3 id="Index" class="common-anchor-header">インデックス<button data-href="#Index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th>メソッド / パラメータ</th><th>Milvus Liteでサポートされている。</th></tr>
 </thead>
@@ -325,11 +400,86 @@ res = client.delete(
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 </tbody>
 </table>
-<h3 id="Vector-Index-Types" class="common-anchor-header">ベクトルインデックス型</h3><p>Milvus Liteは<a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>インデックスタイプのみをサポートしています。コレクションで指定されたインデックスタイプに関係なく、FLATタイプを使用します。</p>
-<h3 id="Search-Features" class="common-anchor-header">検索機能</h3><p>Milvus Liteはスパースベクトル、マルチベクトル、ハイブリッド検索をサポートしています。</p>
-<h3 id="Partition" class="common-anchor-header">パーティション</h3><p>Milvus Liteはパーティションおよびパーティション関連メソッドをサポートしていません。</p>
-<h3 id="Users--Roles" class="common-anchor-header">ユーザとロール</h3><p>Milvus Liteはユーザとロールおよび関連メソッドをサポートしていません。</p>
-<h3 id="Alias" class="common-anchor-header">エイリアス</h3><p>Milvus Liteはエイリアスおよびエイリアス関連メソッドに対応しておりません。</p>
+<h3 id="Vector-Index-Types" class="common-anchor-header">ベクトルインデックス型<button data-href="#Vector-Index-Types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Liteは<a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>インデックスタイプのみをサポートしています。コレクションで指定されたインデックスタイプに関係なく、FLATタイプを使用します。</p>
+<h3 id="Search-Features" class="common-anchor-header">検索機能<button data-href="#Search-Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Liteはスパースベクトル、マルチベクトル、ハイブリッド検索をサポートしています。</p>
+<h3 id="Partition" class="common-anchor-header">パーティション<button data-href="#Partition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Liteはパーティションおよびパーティション関連メソッドをサポートしていません。</p>
+<h3 id="Users--Roles" class="common-anchor-header">ユーザとロール<button data-href="#Users--Roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Liteはユーザとロールおよび関連メソッドをサポートしていません。</p>
+<h3 id="Alias" class="common-anchor-header">エイリアス<button data-href="#Alias" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Liteはエイリアスおよびエイリアス関連メソッドに対応しておりません。</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Milvus Liteからのデータ移行について<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

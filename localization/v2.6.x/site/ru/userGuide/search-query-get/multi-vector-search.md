@@ -77,8 +77,23 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Процесс создания коллекции включает три ключевых этапа: определение схемы коллекции, настройка параметров индекса и создание коллекции.</p>
-<h3 id="Define-schema" class="common-anchor-header">Определение схемы</h3><p>Для многовекторного гибридного поиска мы должны определить несколько векторных полей в схеме коллекции. По умолчанию каждая коллекция может содержать до 4 векторных полей. Однако при необходимости вы можете настроить <code translate="no">proxy.maxVectorFieldNum</code> так, чтобы включить в коллекцию до 10 векторных полей.</p>
-<p>В данном примере в схему включены следующие поля:</p>
+<h3 id="Define-schema" class="common-anchor-header">Определение схемы<button data-href="#Define-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Для многовекторного гибридного поиска мы должны определить несколько векторных полей в схеме коллекции. Подробнее об ограничениях на количество векторных полей, допустимых в коллекции, см. в разделе <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Лимиты Zilliz Cloud</a>.  Однако при необходимости можно настроить параметр <a href="/docs/ru/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> чтобы включить в коллекцию до 10 векторных полей.</p>
+<p>В этом примере в схему включены следующие поля:</p>
 <ul>
 <li><p><code translate="no">id</code>: Служит в качестве первичного ключа для хранения текстовых идентификаторов. Это поле имеет тип данных <code translate="no">INT64</code>.</p></li>
 <li><p><code translate="no">text</code>: Используется для хранения текстового содержимого. Это поле имеет тип данных <code translate="no">VARCHAR</code> с максимальной длиной 1000 байт. Для облегчения полнотекстового поиска параметр <code translate="no">enable_analyzer</code> устанавливается в значение <code translate="no">True</code>.</p></li>
@@ -319,7 +334,29 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">Создание индекса</h3><div class="multipleCode">
+<h3 id="Create-index" class="common-anchor-header">Создание индекса<button data-href="#Create-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После определения схемы коллекции следующим шагом будет настройка векторных индексов и указание метрик сходства. В приведенном примере:</p>
+<ul>
+<li><p><code translate="no">text_dense_index</code>: для векторного поля text dense создается индекс типа <code translate="no">AUTOINDEX</code> с метрикой <code translate="no">IP</code>.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: индекс типа<code translate="no">SPARSE_INVERTED_INDEX</code>с метрическим типом <code translate="no">BM25</code> используется для текстового разреженного векторного поля.</p></li>
+<li><p><code translate="no">image_dense_index</code>: индекс типа <code translate="no">AUTOINDEX</code> с метрическим типом <code translate="no">IP</code> создается для плотного векторного поля изображения.</p></li>
+</ul>
+<p>При необходимости вы можете выбрать другие типы индексов, чтобы наилучшим образом удовлетворить ваши потребности и типы данных. Для получения дополнительной информации о поддерживаемых типах индексов обратитесь к документации по <a href="/docs/ru/index-vector-fields.md">доступным типам индексов</a>.</p>
+<div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -433,7 +470,22 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">Создать коллекцию</h3><p>Создайте коллекцию с именем <code translate="no">demo</code> со схемой коллекции и индексами, настроенными в предыдущих двух шагах.</p>
+<h3 id="Create-collection" class="common-anchor-header">Создание коллекции<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Создайте коллекцию с именем <code translate="no">demo</code> со схемой коллекции и индексами, настроенными в предыдущих двух шагах.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -627,12 +679,27 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Создание нескольких экземпляров AnnSearchRequest</h3><p>Гибридный поиск реализуется путем создания нескольких <code translate="no">AnnSearchRequest</code> в функции <code translate="no">hybrid_search()</code>, где каждый <code translate="no">AnnSearchRequest</code> представляет собой базовый запрос на поиск ANN для определенного векторного поля. Поэтому перед проведением гибридного поиска необходимо создать <code translate="no">AnnSearchRequest</code> для каждого векторного поля.</p>
-<p>Кроме того, настроив параметр <code translate="no">expr</code> в <code translate="no">AnnSearchRequest</code>, вы можете задать условия фильтрации для гибридного поиска. См. раздел <a href="/docs/ru/filtered-search.md">"Фильтрованный поиск"</a> и <a href="/docs/ru/boolean.md">"Фильтрация</a>".</p>
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Шаг 1: Создайте несколько экземпляров AnnSearchRequest<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Гибридный поиск реализуется путем создания нескольких <code translate="no">AnnSearchRequest</code> в функции <code translate="no">hybrid_search()</code>, где каждый <code translate="no">AnnSearchRequest</code> представляет собой базовый запрос на поиск ANN для определенного векторного поля. Поэтому перед проведением гибридного поиска необходимо создать <code translate="no">AnnSearchRequest</code> для каждого векторного поля.</p>
+<p>Кроме того, настроив параметр <code translate="no">expr</code> в <code translate="no">AnnSearchRequest</code>, вы можете задать условия фильтрации для гибридного поиска. См. раздел <a href="/docs/ru/filtered-search.md">"Фильтрация поиска"</a> и <a href="/docs/ru/boolean.md">"Объяснение фильтрации</a>".</p>
 <div class="alert note">
-<p>В гибридном поиске каждый <code translate="no">AnnSearchRequest</code> поддерживает только один запрос данных.</p>
+<p>В гибридном поиске каждый <code translate="no">AnnSearchRequest</code> поддерживает только один запрос.</p>
 </div>
-<p>Чтобы продемонстрировать возможности различных векторных полей поиска, мы создадим три поисковых запроса <code translate="no">AnnSearchRequest</code>, используя примерный запрос. Для этого мы также будем использовать его предварительно вычисленные плотные векторы. Поисковые запросы будут ориентированы на следующие векторные поля:</p>
+<p>Чтобы продемонстрировать возможности различных векторных полей поиска, мы создадим три поисковых запроса <code translate="no">AnnSearchRequest</code>, используя образец запроса. Для этого мы также будем использовать его предварительно вычисленные плотные векторы. Поисковые запросы будут ориентированы на следующие векторные поля:</p>
 <ul>
 <li><p><code translate="no">text_dense</code> для семантического поиска текста, позволяющего понимать контекст и извлекать информацию на основе смысла, а не прямого соответствия ключевым словам.</p></li>
 <li><p><code translate="no">text_sparse</code>для полнотекстового поиска или подбора ключевых слов, ориентированного на точное совпадение слов или фраз в тексте.</p></li>
@@ -771,36 +838,39 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Учитывая, что параметр <code translate="no">limit</code> имеет значение 2, каждый <code translate="no">AnnSearchRequest</code> возвращает 2 результата поиска. В данном примере создано 3 экземпляра <code translate="no">AnnSearchRequest</code>, что дает в общей сложности 6 результатов поиска.</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">Настройка стратегии ранжирования</h3><p>Чтобы объединить и ранжировать наборы результатов поиска ANN, необходимо выбрать подходящую стратегию ранжирования. Milvus предлагает два типа стратегий ранжирования:</p>
-<ul>
-<li><p><strong>WeightedRanker</strong>: Используйте эту стратегию, если в результатах необходимо сделать акцент на определенном векторном поле. WeightedRanker позволяет присвоить больший вес определенным векторным полям, выделяя их более заметно.</p></li>
-<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Выбирайте эту стратегию, когда не требуется особого акцента. RRFRanker эффективно уравновешивает важность каждого векторного поля.</p></li>
-</ul>
-<p>Более подробно о механизмах работы этих двух стратегий ранжирования читайте в разделе <a href="/docs/ru/weighted-ranker.md">"Ранжирование</a>".</p>
-<p>В данном примере, поскольку особый акцент на конкретных поисковых запросах не делается, мы будем использовать стратегию RRFRanker.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
-
-ranker = RRFRanker(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
-
-<span class="hljs-type">BaseRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-string">&quot;100&quot;</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
-        &quot;strategy&quot;: &quot;rrf&quot;,
-        &quot;params&quot;: { &quot;k&quot;: 100}
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">Выполнение гибридного поиска</h3><p>Перед началом гибридного поиска убедитесь, что коллекция загружена. Если у векторных полей в коллекции нет индекса или они не загружены в память, при выполнении метода Hybrid Search возникнет ошибка.</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Шаг 2: Настройка стратегии ранжирования<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы объединить и ранжировать наборы результатов поиска ANN, необходимо выбрать подходящую стратегию ранжирования. Milvus предлагает несколько типов стратегий ранжирования. Более подробную информацию об этих механизмах ранжирования см. в разделе <a href="/docs/ru/reranking">"Ранжирование</a>".</p>
+<p>В данном примере, поскольку нет особого акцента на конкретных поисковых запросах, мы будем использовать стратегию RRFRanker.</p>
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Шаг 3: Выполните гибридный поиск<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Прежде чем приступить к гибридному поиску, убедитесь, что коллекция загружена. Если у векторных полей в коллекции нет индекса или они не загружены в память, при выполнении метода Hybrid Search возникнет ошибка.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

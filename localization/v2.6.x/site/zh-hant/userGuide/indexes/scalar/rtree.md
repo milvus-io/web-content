@@ -138,7 +138,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><p>您可以使用<code translate="no">filter</code> 表達式中的幾何運算符號進行過濾。當目標<code translate="no">GEOMETRY</code> 欄位上存在<code translate="no">RTREE</code> 時，Milvus 會使用它來自動刪除候選項目。如果沒有索引，篩選就會退回到完全掃描。</p>
-<p>如需可用的特定幾何運算符號的完整清單，請參閱幾何<a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">運算符號</a>。</p>
+<p>如需可用的特定幾何運算符號的完整清單，請參閱幾何<a href="/docs/zh-hant/geometry-operators.md">運算符號</a>。</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">範例 1：僅篩選<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,4 +194,31 @@ hits = client.search(
 )
 <span class="hljs-built_in">print</span>(hits)  <span class="hljs-comment"># Expected: top-k by vector similarity among rows whose geo intersects the line</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關如何使用<code translate="no">GEOMETRY</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/geometry-field.md">幾何欄位</a>。</p>
+<p>有關如何使用<code translate="no">GEOMETRY</code> 欄位的詳細資訊，請參閱幾何<a href="/docs/zh-hant/geometry-field.md">欄位</a>。</p>
+<h2 id="Drop-an-index" class="common-anchor-header">移除索引<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>使用<code translate="no">drop_index()</code> 方法從集合中移除現有索引。</p>
+<div class="alert note">
+<ul>
+<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能刪除索引。</p></li>
+<li><p>從<strong>v2.6.4</strong>或更高版本開始，一旦不再需要索引，您可以直接將其刪除，而不需要先釋放集合。</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;geo_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;rtree_geo&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>

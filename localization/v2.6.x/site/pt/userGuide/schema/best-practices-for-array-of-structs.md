@@ -1,7 +1,7 @@
 ---
 id: best-practices-for-array-of-structs.md
 title: >-
-  Design do modelo de dados com um conjunto de estruturasCompatible with Milvus
+  Conceção do modelo de dados com uma matriz de structsCompatible with Milvus
   2.6.4+
 summary: >-
   As aplicações modernas de IA, especialmente na Internet das Coisas (IoT) e na
@@ -13,7 +13,7 @@ summary: >-
   de dados aninhados.
 beta: Milvus 2.6.4+
 ---
-<h1 id="Data-Model-Design-with-an-Array-of-Structs" class="common-anchor-header">Design do modelo de dados com um conjunto de estruturas<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Data-Model-Design-with-an-Array-of-Structs" class="anchor-icon" translate="no">
+<h1 id="Data-Model-Design-with-an-Array-of-Structs" class="common-anchor-header">Conceção do modelo de dados com uma matriz de structs<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Data-Model-Design-with-an-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,7 +103,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>Cada campo Array tem um atributo que especifica o número máximo de elementos que o campo Array pode conter para cada entidade. Defina-o com base no limite superior do seu caso de utilização. Por exemplo, existem 1000 blocos de texto por documento ou 100 manobras por cena de condução.</p>
 <p>Um valor excessivamente elevado desperdiça memória e terá de efetuar alguns cálculos para determinar o número máximo de Structs no campo Matriz.</p>
-<h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">Indexar campos vectoriais em Structs<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
+<h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">Indexar campos de vetor em Structs<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -200,7 +200,7 @@ beta: Milvus 2.6.4+
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
 <p>Pode constatar que a estrutura do conjunto de dados CoVLA é altamente hierárquica, dividindo os dados recolhidos em vários ficheiros <code translate="no">.jsonl</code>, juntamente com os clips de vídeo no formato <code translate="no">.mp4</code>.</p>
-<p>No Milvus, é possível utilizar um campo JSON ou um campo Array-of-Structs para criar estruturas aninhadas num esquema de coleção. Quando as incorporações de vectores fazem parte do formato aninhado, apenas é suportado um campo Array-of-Structs. No entanto, um campo Struct dentro de uma matriz não pode conter outras estruturas aninhadas. Para armazenar o conjunto de dados CoVLA mantendo as relações essenciais, é necessário remover a hierarquia desnecessária e aplanar os dados para que se ajustem ao esquema da coleção Milvus.</p>
+<p>Em Milvus, é possível utilizar um campo JSON ou um campo Array-of-Structs para criar estruturas aninhadas num esquema de coleção. Quando as incorporações de vectores fazem parte do formato aninhado, apenas é suportado um campo Array-of-Structs. No entanto, um campo Struct dentro de uma matriz não pode conter outras estruturas aninhadas. Para armazenar o conjunto de dados CoVLA mantendo as relações essenciais, é necessário remover a hierarquia desnecessária e aplanar os dados para que se ajustem ao esquema da coleção Milvus.</p>
 <p>O diagrama abaixo ilustra como podemos modelar este conjunto de dados utilizando o esquema ilustrado no esquema seguinte:</p>
 <p>
   
@@ -350,7 +350,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Todos os campos vectoriais têm de ser indexados. Para indexar os campos vectoriais num elemento Struct, é necessário utilizar <code translate="no">EMB_LIST_HNSW</code> como tipo de índice e o tipo de métrica <code translate="no">MAX_SIM</code> para medir as semelhanças entre as incorporações vectoriais.</p>
+    </button></h3><p>Todos os campos vectoriais têm de ser indexados. Para indexar os campos de vetor num elemento Struct, é necessário utilizar <code translate="no">EMB_LIST_HNSW</code> como tipo de índice e o tipo de métrica <code translate="no">MAX_SIM</code> para medir as semelhanças entre as incorporações de vetor.</p>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(

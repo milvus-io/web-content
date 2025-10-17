@@ -95,7 +95,7 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>マージ機能を使用する前に考慮すべき特別な注意事項がいくつかあります。以下のケースは、<code translate="no">title</code> および<code translate="no">issue</code> という 2 つのスカラ・フィールドと、<code translate="no">id</code> というプライマリ・キー、<code translate="no">vector</code> というベクトル・フィールドを持つコレクションがあると仮定します。</p>
+    </button></h3><p>マージ機能を使用する前に考慮すべき特別な注意事項がいくつかあります。以下のケースは、<code translate="no">title</code> および<code translate="no">issue</code> という 2 つのスカラ・フィールドと、<code translate="no">id</code> というプライマリ・キー、<code translate="no">vector</code> というベクトル・フィールドを持つコレクションがあると仮定しています。</p>
 <ul>
 <li><p><code translate="no">nullable</code> <strong>が有効になって</strong><strong>いるフィールドをアップサートします</strong> <strong>。</strong></p>
 <p><code translate="no">issue</code> フィールドは NULL にすることができるとします。これらのフィールドをアップサートする場合、以下の点に注意してください：</p>
@@ -114,7 +114,7 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
 </ul></li>
 <li><p><strong>JSONフィールドのアップサート</strong></p>
 <p>サンプル・コレクションに<code translate="no">extras</code> というスキーマ定義の JSON フィールドがあり、エンティティのこの JSON フィールドのキー・バリュー・ペアが<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> と類似しているとします。</p>
-<p>変更されたJSONデータでエンティティの<code translate="no">extras</code> フィールドをアップサートする場合、以下の点に注意してください：</p>
+<p>変更されたJSONデータでエンティティの<code translate="no">extras</code> フィールドをupsertする場合、以下の点に注意してください：</p>
 <ul>
 <li><p><code translate="no">partial_update</code> が無効な状態でアップサートすると、デフォルトの動作は<strong>オーバーライドに</strong>なります。これは、要求に含まれる JSON フィールドの値が、ターゲット・エンティティの JSON フィールドの元の値をオーバーライドすることを意味します。</p>
 <p>たとえば、要求に含まれるデータが<code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> の場合、ターゲット・エンティティの<code translate="no">extras</code> フィールドのキーと値のペアは<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> に更新されます。</p></li>
@@ -492,15 +492,18 @@ curl --request POST \
       </svg>
     </button></h2><p>以下のコード例は、部分的な更新でエンティティをアップサートする方法を示している。更新が必要なフィールドとその新しい値のみを、明示的な部分更新フラグとともに指定します。</p>
 <p>以下の例では、upsert 要求で指定されたエンティティの<code translate="no">issue</code> フィールドが、要求に含まれる値に更新されます。</p>
+<div class="alert note">
+<p>マージモードでupsertを実行する場合は、その要求に関係するエンティティが同じフィールドセットを持って いることを確認してください。次のコード・スニペットに示すように、upsert するエンティティが 2 つ以上あるとすると、エラーを防いでデータの整合性を維持するために、それらのエンティティに同じフィールドが含まれていることが重要です。</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[
     {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
         <span class="hljs-string">&quot;issue&quot;</span>: <span class="hljs-string">&quot;vol.14&quot;</span>
     },
     {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">12</span>, 
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, 
         <span class="hljs-string">&quot;issue&quot;</span>: <span class="hljs-string">&quot;vol.7&quot;</span>
     }
 ]
@@ -517,11 +520,11 @@ res = client.upsert(
 <span class="hljs-comment"># {&#x27;upsert_count&#x27;: 2}</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">3</span>);
+row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
 row1.addProperty(<span class="hljs-string">&quot;issue&quot;</span>, <span class="hljs-string">&quot;vol.14&quot;</span>);
 
 <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
-row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">12</span>);
+row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
 row2.addProperty(<span class="hljs-string">&quot;issue&quot;</span>, <span class="hljs-string">&quot;vol.7&quot;</span>);
 
 <span class="hljs-type">UpsertReq</span> <span class="hljs-variable">upsertReq</span> <span class="hljs-operator">=</span> UpsertReq.builder()
@@ -537,7 +540,7 @@ System.out.println(upsertResp);
 <span class="hljs-comment">//</span>
 <span class="hljs-comment">// UpsertResp(upsertCnt=2)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">pkColumn := column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">3</span>, <span class="hljs-number">12</span>})
+<pre><code translate="no" class="language-go">pkColumn := column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>})
 issueColumn = column.NewColumnString(<span class="hljs-string">&quot;issue&quot;</span>, []<span class="hljs-type">string</span>{
     <span class="hljs-string">&quot;vol.17&quot;</span>, <span class="hljs-string">&quot;vol.7&quot;</span>,
 })
@@ -553,11 +556,11 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data=[
     {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
         <span class="hljs-string">&quot;issue&quot;</span>: <span class="hljs-string">&quot;vol.14&quot;</span>
     },
     {
-        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">12</span>, 
+        <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, 
         <span class="hljs-string">&quot;issue&quot;</span>: <span class="hljs-string">&quot;vol.7&quot;</span>
     }
 ];
@@ -578,18 +581,26 @@ _, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
-curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;data&quot;: [
-        {&quot;id&quot;: 3, &quot;issue&quot;: &quot;vol.14&quot;},
-        {&quot;id&quot;: 12, &quot;issue&quot;: &quot;vol.7&quot;}
-    ],
-    &quot;collectionName&quot;: &quot;my_collection&quot;,
-    &quot;partialUpdate&quot;: true
-}&#x27;</span>
+<span class="hljs-built_in">export</span> COLLECTION_NAME=<span class="hljs-string">&quot;my_collection&quot;</span>
+<span class="hljs-built_in">export</span> UPSERT_DATA=<span class="hljs-string">&#x27;[
+  {
+    &quot;id&quot;: 1,
+    &quot;issue&quot;: &quot;vol.14&quot;
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;issue&quot;: &quot;vol.7&quot;
+  }
+]&#x27;</span>
+
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/upsert&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;<span class="hljs-variable">${COLLECTION_NAME}</span>\&quot;,
+    \&quot;data\&quot;: <span class="hljs-variable">${UPSERT_DATA}</span>,
+    \&quot;partialUpdate\&quot;: true
+  }&quot;</span>
 
 <span class="hljs-comment"># {</span>
 <span class="hljs-comment">#     &quot;code&quot;: 0,</span>

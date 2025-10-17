@@ -213,7 +213,7 @@ summary: Milvus 支持对几何字段进行空间过滤的一系列操作符，�
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that only touch a line string at their boundaries.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_TOUCHES(geo_field, &#x27;LINESTRING(0 0, 1 1)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="STWITHIN--stwithin" class="common-anchor-header">ST_WITHIN / ST_within<button data-href="#STWITHIN--stwithin" class="anchor-icon" translate="no">
+<h2 id="STWITHIN--stwithin" class="common-anchor-header">ST_WITHIN / st_within<button data-href="#STWITHIN--stwithin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

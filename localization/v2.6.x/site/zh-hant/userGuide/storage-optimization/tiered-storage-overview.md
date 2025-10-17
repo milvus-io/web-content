@@ -23,7 +23,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>在 Milvus 中，傳統的<strong>全載模式</strong>要求每個 QueryNode 在初始化時載入一個<a href="https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf">區段</a>的所有模式欄位和索引，即使是可能永遠不會被存取的資料。這可確保資料的即時可用性，但通常會造成資源浪費，包括高記憶體使用率、大量磁碟活動以及顯著的 I/O 開銷，尤其是在處理大型資料集時。</p>
-<p><strong>分層儲存</strong>透過將資料快取與區段載入解耦來解決這個挑戰。Milvus 不再一次載入所有資料，而是引進一個快取層，區分熱資料 (本機快取) 和冷資料 (遠端儲存)。QueryNode 現在最初只載入輕量級的元資料，並依需求動態拉取或驅逐資料。這可大幅縮短載入時間、最佳化本機資源利用率，並使 QueryNode 能夠處理遠遠超過其實體記憶體或磁碟容量的資料集。</p>
+<p><strong>分層儲存</strong>透過將資料快取與區段載入解耦來解決這個挑戰。Milvus 不會一次載入所有資料，而是引入一個快取層，區分熱資料 (本機快取) 和冷資料 (遠端儲存)。QueryNode 現在最初只載入輕量級的元資料，並依需求動態拉取或驅逐資料。這可大幅縮短載入時間、最佳化本機資源利用率，並使 QueryNode 能夠處理遠遠超過其實體記憶體或磁碟容量的資料集。</p>
 <p>在下列情況下，您可以考慮啟用分層儲存：</p>
 <ul>
 <li><p>超過單一 QueryNode 可用記憶體或 NVMe 容量的資料集</p></li>
@@ -50,7 +50,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>分層儲存改變了 QueryNode 管理區段資料的方式。QueryNode 現在不再在載入時快取每個欄位和索引，而是只載入<strong>元資料</strong>，並使用快取層動態地取得和驅逐資料。</p>
 <div class="alert note">
-<p><strong>元資料</strong>包括模式、索引定義、塊映射、行數以及遠端物件的參照。這些資料都很小，而且永遠都會快取，也不會被驅逐。</p>
+<p><strong>元資料</strong>包括模式、索引定義、群組映射、行數以及遠端物件的參照。這些資料都很小，而且永遠都會快取，也不會被驅逐。</p>
 </div>
 <h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">全載模式與分層儲存模式的比較<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -357,7 +357,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>可能的原因包括</p>
 <ul>
 <li><p>頻繁查詢冷資料，而冷資料必須從儲存中取得。</p></li>
-<li><p>超量承載比率過高，導致頻繁驅逐。</p></li>
+<li><p>超量提交比率過高，導致頻繁驅逐。</p></li>
 <li><p>水印設定太靠近，導致頻繁同步驅逐。</p></li>
 </ul>
 <h3 id="Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="common-anchor-header">分層儲存是否可以透過過度提交快取記憶體來處理無限制的資料？<button data-href="#Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="anchor-icon" translate="no">

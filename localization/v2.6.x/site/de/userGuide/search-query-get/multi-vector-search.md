@@ -37,8 +37,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Arbeitsablauf der hybriden Suche</span> </span></p>
 <p>Die Multi-Vektor-Hybridsuche integriert verschiedene Suchmethoden oder überspannt Einbettungen aus verschiedenen Modalitäten:</p>
 <ul>
-<li><p><strong>Sparse-Dense Vector Search</strong>: <a href="/docs/de/dense-vector.md">Dense Vectors</a> eignen sich hervorragend für die Erfassung semantischer Beziehungen, während <a href="/docs/de/sparse_vector.md">Sparse Vectors</a> sehr effektiv für den präzisen Abgleich von Schlüsselwörtern sind. Die hybride Suche kombiniert diese Ansätze, um sowohl ein breites konzeptionelles Verständnis als auch eine exakte Begriffsrelevanz zu gewährleisten und so die Suchergebnisse zu verbessern. Durch die Nutzung der Stärken der einzelnen Methoden überwindet die hybride Suche die Einschränkungen der einzelnen Ansätze und bietet eine bessere Leistung bei komplexen Abfragen. Hier finden Sie einen detaillierten <a href="/docs/de/full_text_search_with_milvus.md">Leitfaden</a> zur hybriden Suche, die die semantische Suche mit der Volltextsuche kombiniert.</p></li>
-<li><p><strong>Multimodale Vektorsuche</strong>: Die multimodale Vektorsuche ist eine leistungsstarke Technik, mit der Sie verschiedene Datentypen durchsuchen können, darunter Text, Bilder, Audio und andere. Der Hauptvorteil dieses Ansatzes ist die Fähigkeit, verschiedene Modalitäten zu einer nahtlosen und kohärenten Sucherfahrung zu vereinen. Bei der Produktsuche kann ein Benutzer beispielsweise eine Textabfrage eingeben, um Produkte zu finden, die sowohl mit Text als auch mit Bildern beschrieben sind. Durch die Kombination dieser Modalitäten mittels einer hybriden Suchmethode können Sie die Suchgenauigkeit verbessern oder die Suchergebnisse anreichern.</p></li>
+<li><p><strong>Sparse-Dense Vector Search</strong>: <a href="/docs/de/dense-vector.md">Dense Vectors</a> eignen sich hervorragend für die Erfassung semantischer Beziehungen, während <a href="/docs/de/sparse_vector.md">Sparse Vectors</a> sehr effektiv für den präzisen Abgleich von Schlüsselwörtern sind. Bei der hybriden Suche werden diese Ansätze kombiniert, um sowohl ein breites konzeptionelles Verständnis als auch eine exakte Begriffsrelevanz zu gewährleisten und so die Suchergebnisse zu verbessern. Durch die Nutzung der Stärken der einzelnen Methoden überwindet die hybride Suche die Einschränkungen der einzelnen Ansätze und bietet eine bessere Leistung bei komplexen Suchanfragen. Hier finden Sie einen detaillierten <a href="/docs/de/full_text_search_with_milvus.md">Leitfaden</a> zur hybriden Suche, die die semantische Suche mit der Volltextsuche kombiniert.</p></li>
+<li><p><strong>Multimodale Vektorsuche</strong>: Die multimodale Vektorsuche ist eine leistungsstarke Technik, mit der Sie verschiedene Datentypen durchsuchen können, darunter Text, Bilder, Audio und andere. Der Hauptvorteil dieses Ansatzes ist die Fähigkeit, verschiedene Modalitäten zu einer nahtlosen und zusammenhängenden Sucherfahrung zu vereinen. Bei der Produktsuche kann ein Benutzer beispielsweise eine Textabfrage eingeben, um Produkte zu finden, die sowohl mit Text als auch mit Bildern beschrieben sind. Durch die Kombination dieser Modalitäten mittels einer hybriden Suchmethode können Sie die Suchgenauigkeit verbessern oder die Suchergebnisse anreichern.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Beispiel<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Der Prozess der Erstellung einer Sammlung umfasst drei wichtige Schritte: Definition des Sammlungsschemas, Konfiguration der Indexparameter und Erstellung der Sammlung.</p>
-<h3 id="Define-schema" class="common-anchor-header">Definieren des Schemas</h3><p>Für die hybride Suche mit mehreren Vektoren sollten wir mehrere Vektorfelder in einem Sammelschema definieren. Standardmäßig kann jede Sammlung bis zu 4 Vektorfelder aufnehmen. Bei Bedarf können Sie jedoch die <code translate="no">proxy.maxVectorFieldNum</code> anpassen, um bis zu 10 Vektorfelder in eine Sammlung aufzunehmen.</p>
+<h3 id="Define-schema" class="common-anchor-header">Definieren des Schemas<button data-href="#Define-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Für die hybride Suche mit mehreren Vektorfeldern sollten Sie mehrere Vektorfelder in einem Sammlungsschema definieren. Details zu den Beschränkungen für die Anzahl der in einer Sammlung zulässigen Vektorfelder finden Sie unter <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>.  Falls erforderlich, können Sie jedoch die <a href="/docs/de/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> anpassen, um bei Bedarf bis zu 10 Vektorfelder in eine Sammlung aufzunehmen.</p>
 <p>In diesem Beispiel werden die folgenden Felder in das Schema aufgenommen:</p>
 <ul>
 <li><p><code translate="no">id</code>: Dient als Primärschlüssel für die Speicherung von Text-IDs. Dieses Feld ist vom Datentyp <code translate="no">INT64</code>.</p></li>
@@ -320,7 +335,29 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">Index erstellen</h3><div class="multipleCode">
+<h3 id="Create-index" class="common-anchor-header">Index erstellen<button data-href="#Create-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nach der Definition des Sammlungsschemas ist der nächste Schritt die Konfiguration der Vektorindizes und die Festlegung der Ähnlichkeitsmetriken. Im gegebenen Beispiel:</p>
+<ul>
+<li><p><code translate="no">text_dense_index</code>: wird ein Index vom Typ <code translate="no">AUTOINDEX</code> mit dem Metrik-Typ <code translate="no">IP</code> für das Text-Density-Vektorfeld erstellt.</p></li>
+<li><p><code translate="no">text_sparse_index</code>Ein Index des Typs<code translate="no">SPARSE_INVERTED_INDEX</code>mit dem Metrik-Typ <code translate="no">BM25</code> wird für das Text-Sparse-Vektorfeld verwendet.</p></li>
+<li><p><code translate="no">image_dense_index</code>Ein Index vom Typ <code translate="no">AUTOINDEX</code> mit dem metrischen Typ <code translate="no">IP</code> wird für das dichte Bildvektorfeld erstellt.</p></li>
+</ul>
+<p>Sie können andere Indextypen wählen, die Ihren Bedürfnissen und Datentypen am besten entsprechen. Weitere Informationen zu den unterstützten Indextypen finden Sie in der Dokumentation zu den <a href="/docs/de/index-vector-fields.md">verfügbaren Indextypen</a>.</p>
+<div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -434,7 +471,22 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen</h3><p>Erstellen Sie eine Sammlung mit dem Namen <code translate="no">demo</code> mit dem Schema der Sammlung und den Indizes, die in den beiden vorherigen Schritten konfiguriert wurden.</p>
+<h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Erstellen Sie eine Sammlung mit dem Namen <code translate="no">demo</code> mit dem Sammlungsschema und den Indizes, die in den beiden vorherigen Schritten konfiguriert wurden.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -628,8 +680,23 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Erstellen Sie mehrere AnnSearchRequest-Instanzen</h3><p>Die hybride Suche wird durch die Erstellung mehrerer <code translate="no">AnnSearchRequest</code> in der Funktion <code translate="no">hybrid_search()</code> implementiert, wobei jede <code translate="no">AnnSearchRequest</code> eine grundlegende ANN-Suchanfrage für ein bestimmtes Vektorfeld darstellt. Daher muss vor der Durchführung einer Hybrid Search für jedes Vektorfeld eine <code translate="no">AnnSearchRequest</code> erstellt werden.</p>
-<p>Darüber hinaus können Sie durch die Konfiguration des Parameters <code translate="no">expr</code> in einer <code translate="no">AnnSearchRequest</code> die Filterbedingungen für Ihre hybride Suche festlegen. Bitte lesen Sie hierzu den Abschnitt <a href="/docs/de/filtered-search.md">Gefilterte Suche</a> und <a href="/docs/de/boolean.md">Filterung</a>.</p>
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Schritt 1: Erstellen mehrerer AnnSearchRequest-Instanzen<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die hybride Suche wird durch die Erstellung mehrerer <code translate="no">AnnSearchRequest</code> in der Funktion <code translate="no">hybrid_search()</code> implementiert, wobei jede <code translate="no">AnnSearchRequest</code> eine grundlegende ANN-Suchanfrage für ein bestimmtes Vektorfeld darstellt. Daher muss vor der Durchführung einer Hybrid Search für jedes Vektorfeld eine <code translate="no">AnnSearchRequest</code> erstellt werden.</p>
+<p>Darüber hinaus können Sie durch die Konfiguration des Parameters <code translate="no">expr</code> in einer <code translate="no">AnnSearchRequest</code> die Filterbedingungen für Ihre hybride Suche festlegen. Weitere Informationen finden Sie unter <a href="/docs/de/filtered-search.md">Gefilterte Suche</a> und <a href="/docs/de/boolean.md">Filterung erklärt</a>.</p>
 <div class="alert note">
 <p>Bei der hybriden Suche unterstützt jede <code translate="no">AnnSearchRequest</code> nur eine Abfrage.</p>
 </div>
@@ -772,36 +839,39 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Da der Parameter <code translate="no">limit</code> auf 2 gesetzt ist, liefert jede <code translate="no">AnnSearchRequest</code> 2 Suchergebnisse. In diesem Beispiel werden 3 <code translate="no">AnnSearchRequest</code> Instanzen erstellt, was zu insgesamt 6 Suchergebnissen führt.</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">Konfigurieren Sie eine Ranglistenstrategie</h3><p>Um die ANN-Suchergebnissätze zusammenzuführen und neu zu ordnen, ist die Auswahl einer geeigneten Rangfolgestrategie unerlässlich. Milvus bietet zwei Arten von Reranking-Strategien an:</p>
-<ul>
-<li><p><strong>GewogenerRanker</strong>: Verwenden Sie diese Strategie, wenn die Ergebnisse ein bestimmtes Vektorfeld hervorheben sollen. Mit WeightedRanker können Sie bestimmten Vektorfeldern ein höheres Gewicht zuweisen und sie dadurch stärker hervorheben.</p></li>
-<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Wählen Sie diese Strategie, wenn keine besondere Betonung erforderlich ist. RRFRanker gleicht die Bedeutung der einzelnen Vektorfelder effektiv aus.</p></li>
-</ul>
-<p>Weitere Einzelheiten zu den Mechanismen dieser beiden Rangordnungsstrategien finden Sie unter <a href="/docs/de/weighted-ranker.md">Rangordnung</a>.</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Schritt 2: Konfigurieren Sie eine Ranglistenstrategie<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um die ANN-Suchergebnissätze zusammenzuführen und neu zu ordnen, ist die Auswahl einer geeigneten Rangordnungsstrategie unerlässlich. Milvus bietet mehrere Arten von Ranking-Strategien an. Weitere Einzelheiten zu diesen Ranking-Mechanismen finden Sie unter <a href="/docs/de/reranking">Reranking</a>.</p>
 <p>Da in diesem Beispiel kein besonderer Schwerpunkt auf bestimmten Suchanfragen liegt, werden wir mit der RRFRanker-Strategie fortfahren.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
-
-ranker = RRFRanker(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
-
-<span class="hljs-type">BaseRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-string">&quot;100&quot;</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
-        &quot;strategy&quot;: &quot;rrf&quot;,
-        &quot;params&quot;: { &quot;k&quot;: 100}
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">Durchführen einer hybriden Suche</h3><p>Bevor Sie eine hybride Suche starten, stellen Sie sicher, dass die Sammlung geladen ist. Wenn Vektorfelder in der Sammlung keinen Index haben oder nicht in den Speicher geladen sind, tritt bei der Ausführung der Methode Hybrid Search ein Fehler auf.</p>
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Schritt 3: Durchführen einer hybriden Suche<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bevor Sie eine hybride Suche starten, stellen Sie sicher, dass die Sammlung geladen ist. Wenn Vektorfelder innerhalb der Sammlung keinen Index haben oder nicht in den Speicher geladen sind, tritt bei der Ausführung der Methode Hybrid Search ein Fehler auf.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -879,4 +949,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Die Ausgabe sieht folgendermaßen aus:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit dem Parameter <code translate="no">limit=2</code>, der für die Hybrid Search angegeben wurde, ordnet Milvus die sechs Ergebnisse aus den drei Suchvorgängen neu an. Letztendlich werden nur die beiden ähnlichsten Ergebnisse zurückgegeben.</p>
+<p>Mit dem Parameter <code translate="no">limit=2</code>, der für die hybride Suche angegeben wurde, ordnet Milvus die sechs Ergebnisse aus den drei Suchvorgängen neu an. Letztendlich werden nur die beiden ähnlichsten Ergebnisse zurückgegeben.</p>

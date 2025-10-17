@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，<strong>Warm Up</strong>可消除首次存取冷資料時發生的首次延遲，從而與分層儲存相輔相成。配置完成後，Warm Up 會在區段變為可查詢之前，將選定欄位或索引預先載入快取記憶體，以確保經常存取的資料在載入後立即可用。</p>
+    </button></h1><p>在 Milvus 中，<strong>Warm Up</strong>可消除首次存取冷資料時發生的首次延遲，從而與分層儲存相輔相成。配置完成後，Warm Up 會在區段變為可查詢之前，預先將選取的欄位或索引載入快取記憶體，以確保載入後可立即使用經常存取的資料。</p>
 <h2 id="Why-warm-up" class="common-anchor-header">為什麼要預熱<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -123,10 +123,10 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">vectorIndex</code></p></td>
      <td><p><code translate="no">sync</code> |<code translate="no">disable</code></p></td>
      <td><p>控制是否預先載入向量索引。</p></td>
-     <td><p>對於對搜尋延遲非常重要的向量索引，請使用<code translate="no">sync</code> 。在批次或低頻率的工作負載中，<code translate="no">disable</code> ，以獲得更快的分段準備。</p></td>
+     <td><p>對於對搜尋延遲非常重要的向量索引，請使用<code translate="no">sync</code> 。在批次或低頻率的工作負載中，<code translate="no">disable</code> ，以獲得更快的分割準備。</p></td>
    </tr>
 </table>
-<h2 id="Best-practices" class="common-anchor-header">最佳做法<button data-href="#Best-practices" class="anchor-icon" translate="no">
+<h2 id="Best-practices" class="common-anchor-header">最佳實務<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -141,10 +141,10 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>預熱只會影響<strong>初始載入</strong>。如果快取資料稍後被驅逐，下一次查詢會依需求重新載入。</p>
+    </button></h2><p>預熱只會影響<strong>初始載入</strong>。如果緩存資料稍後被驅逐，下一次查詢會依需求重新載入。</p>
 <ul>
 <li><p>避免過度使用<code translate="no">sync</code> 。預載太多欄位會增加載入時間和快取記憶體壓力。</p></li>
 <li><p>以保守的方式開始 - 只對經常存取的欄位和索引啟用「預熱」功能。</p></li>
 <li><p>監控查詢延遲和快取記憶體指標，然後視需要擴大預載。</p></li>
-<li><p>對於混合工作負載，將<code translate="no">sync</code> 應用於對效能敏感的集合，將<code translate="no">disable</code> 應用於對容量導向的集合。</p></li>
+<li><p>對於混合工作負載，將<code translate="no">sync</code> 應用於對效能敏感的集合，將<code translate="no">disable</code> 應用於以容量為導向的集合。</p></li>
 </ul>

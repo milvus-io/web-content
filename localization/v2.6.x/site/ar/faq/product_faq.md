@@ -88,7 +88,7 @@ title: الأسئلة الشائعة حول المنتج
   <span class="hljs-attr">grpc:</span>
     <span class="hljs-attr">serverMaxRecvSize:</span> <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بشكل افتراضي، يكون الحد الأقصى لحجم كل طلب طلب استدعاء أوامر الشراء (RPC) 64 ميغابايت. لذلك، يجب أن يكون طول تعبير التصفية أقل من هذا الحد لضمان نجاح المعالجة.</p>
+<p>بشكل افتراضي، يكون الحد الأقصى لحجم كل طلب طلب استدعاء أوامر شرائية (RPC) 64 ميغابايت. لذلك، يجب أن يكون طول تعبير التصفية أقل من هذا الحد لضمان نجاح المعالجة.</p>
 <h4 id="When-performing-a-bulk-vector-search-how-many-vectors-can-be-specified-at-once-Is-there-a-limit" class="common-anchor-header">عند إجراء بحث مجمّع عن المتجهات، كم عدد المتجهات التي يمكن تحديدها مرة واحدة؟ هل هناك حد؟</h4><p>نعم، إن عدد المتجهات التي يمكن تحديدها في البحث عن المتجهات المجمعة محدود بحجم نقل RPC، كما هو محدد في ملف التكوين <code translate="no">milvus.yaml</code>. يتم تحديد هذا الحد بواسطة المعلمة <code translate="no">serverMaxRecvSize</code> ضمن قسم الوكيل:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">grpc:</span>

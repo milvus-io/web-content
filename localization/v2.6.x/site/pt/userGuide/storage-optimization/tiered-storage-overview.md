@@ -123,7 +123,7 @@ beta: Milvus 2.6.4+
 <li><p>Equilibra a latência da consulta e a eficiência dos recursos</p></li>
 </ul>
 <p><strong>Configuração</strong></p>
-<p>A carga parcial é o comportamento padrão quando o armazenamento em camadas está ativado. Para minimizar a latência de primeiro acesso para campos ou índices críticos, use <strong>o Warm Up</strong> para pré-carregar os dados antes das consultas. Consulte <a href="/docs/pt/warm-up.md">Warm Up</a> para obter exemplos de configuração.</p>
+<p>A carga parcial é o comportamento padrão quando o armazenamento em camadas está ativado. Para minimizar a latência de primeiro acesso para campos ou índices críticos, use <strong>Warm Up</strong> para pré-carregar os dados antes das consultas. Consulte <a href="/docs/pt/warm-up.md">Warm Up</a> para obter exemplos de configuração.</p>
 <h4 id="Eviction" class="common-anchor-header">Evicção</h4><p>Para manter o uso saudável dos recursos, Milvus libera automaticamente os dados em cache não utilizados quando os limites são atingidos.</p>
 <p>O despejo segue uma política de <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">Menos Recentemente Usado (LRU)</a> e é governado por parâmetros configuráveis:</p>
 <ul>
@@ -360,7 +360,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>As possíveis causas incluem:</p>
 <ul>
-<li><p>Consultas frequentes a dados frios, que devem ser buscados no armazenamento.</p></li>
+<li><p>Consultas frequentes a dados frios, que devem ser obtidos do armazenamento.</p></li>
 <li><p>Um rácio de sobrecomprometimento demasiado elevado, levando a despejos frequentes.</p></li>
 <li><p>Marcas d'água definidas muito próximas umas das outras, causando despejo síncrono frequente.</p></li>
 </ul>

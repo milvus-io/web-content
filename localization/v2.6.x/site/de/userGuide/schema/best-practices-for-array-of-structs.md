@@ -477,7 +477,7 @@ client.create_collection(
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachdem Sie die Daten entsprechend bearbeitet haben, können Sie sie wie folgt einfügen:</p>
+<p>Nachdem Sie die Daten entsprechend verarbeitet haben, können Sie sie wie folgt einfügen:</p>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;video_id&quot;</span>: <span class="hljs-string">&quot;0a0fc7a5db365174&quot;</span>, ...}
     ...

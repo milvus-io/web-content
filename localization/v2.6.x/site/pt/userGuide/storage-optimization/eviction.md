@@ -3,7 +3,7 @@ id: eviction.md
 title: EvicçãoCompatible with Milvus 2.6.4+
 summary: >-
   O Eviction gerencia os recursos de cache de cada QueryNode no Milvus. Quando
-  ativado, remove automaticamente os dados em cache assim que os limites de
+  ativado, remove automaticamente os dados em cache quando os limites de
   recursos são atingidos, garantindo um desempenho estável e evitando o
   esgotamento da memória ou do disco.
 beta: Milvus 2.6.4+
@@ -195,7 +195,7 @@ beta: Milvus 2.6.4+
      <td><p>flutuante</p></td>
      <td><p>(0.0, 1.0]</p></td>
      <td><p>Nível de utilização do disco em que o despejo assíncrono começa.</p></td>
-     <td><p>Comece em <code translate="no">0.8</code>. Mantenha um intervalo razoável da marca de água baixa (por exemplo, 0,05-0,10) para evitar accionamentos frequentes.</p></td>
+     <td><p>Começa em <code translate="no">0.8</code>. Mantenha um intervalo razoável da marca de água baixa (por exemplo, 0,05-0,10) para evitar accionamentos frequentes.</p></td>
    </tr>
 </table>
 <p><strong>Melhores práticas</strong>:</p>
@@ -218,7 +218,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>O TTL (Cache Time-to-Live)</strong> remove automaticamente os dados armazenados em cache após uma duração definida, mesmo que os limites de recursos não sejam atingidos. Funciona juntamente com o despejo LRU para evitar que dados obsoletos ocupem o cache indefinidamente.</p>
+    </button></h2><p><strong>O TTL (Cache Time-to-Live)</strong> remove automaticamente os dados armazenados em cache após uma duração definida, mesmo que os limites de recursos não sejam atingidos. Ele funciona junto com o despejo LRU para evitar que dados obsoletos ocupem o cache indefinidamente.</p>
 <div class="alert note">
 <p>O TTL do cache requer <code translate="no">backgroundEvictionEnabled: true</code>, pois é executado no mesmo thread em segundo plano.</p>
 </div>

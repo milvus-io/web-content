@@ -123,7 +123,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">vectorIndex</code></p></td>
      <td><p><code translate="no">sync</code> |<code translate="no">disable</code></p></td>
      <td><p>控制是否预加载向量索引。</p></td>
-     <td><p>对于对搜索延迟至关重要的向量索引，请使用<code translate="no">sync</code> 。在批处理或低频率工作负载中，<code translate="no">disable</code> ，以加快分段准备速度。</p></td>
+     <td><p>对于对搜索延迟至关重要的向量索引，请使用<code translate="no">sync</code> 。在批处理或低频率工作负载中，<code translate="no">disable</code> ，以加快分段准备。</p></td>
    </tr>
 </table>
 <h2 id="Best-practices" class="common-anchor-header">最佳实践<button data-href="#Best-practices" class="anchor-icon" translate="no">

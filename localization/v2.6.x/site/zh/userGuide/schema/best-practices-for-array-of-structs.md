@@ -38,7 +38,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h2><p>从自动驾驶到多模态检索，现代人工智能应用越来越依赖于嵌套的异构数据。传统的平面数据模型难以表示复杂的关系，如<strong>"一个文档包含许多注释块</strong>"或<strong>"一个驾驶场景包含多个观察到的操作</strong>"。这正是 Milvus 的结构数组数据类型的优势所在。</p>
-<p>数组结构体允许您存储一组有序的结构化元素，其中每个结构体都包含自己的标量字段和向量嵌入的组合。这使得它非常适合于</p>
+<p>数组结构体允许您存储一组有序的结构化元素，其中每个结构体都包含自己的标量字段和向量嵌入的组合。因此，它非常适合于</p>
 <ul>
 <li><p><strong>分层数据</strong>：具有多个子记录的父实体，如具有许多文本块的书籍或具有许多注释帧的视频。</p></li>
 <li><p><strong>多模态嵌入</strong>：每个 Struct 都可以容纳多个向量，如文本嵌入加图像嵌入，以及元数据。</p></li>
@@ -134,7 +134,7 @@ beta: Milvus 2.6.4+
 <li><p>场景的帧级<strong>标题</strong>。</p></li>
 </ul>
 <p>这种分层、多模式的特性使其成为结构阵列功能的理想候选对象。有关 CoVLA 数据集的详细信息，请参阅<a href="https://turingmotors.github.io/covla-ad/">CoVLA 数据集网站</a>。</p>
-<h3 id="Step-1-Map-the-dataset-into-a-collection-schema" class="common-anchor-header">第 1 步：将数据集映射到 Collections Schema 中<button data-href="#Step-1-Map-the-dataset-into-a-collection-schema" class="anchor-icon" translate="no">
+<h3 id="Step-1-Map-the-dataset-into-a-collection-schema" class="common-anchor-header">步骤 1：将数据集映射到 Collections Schema 中<button data-href="#Step-1-Map-the-dataset-into-a-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -205,7 +205,7 @@ beta: Milvus 2.6.4+
 <li><p><code translate="no">captions</code> 是一个 Struct 数组，每个 Struct 都有以下字段：</p>
 <ul>
 <li><p><code translate="no">frame_id</code> 标识当前视频中的特定帧。</p></li>
-<li><p><code translate="no">plain_caption</code> 是对当前帧的描述，不包含周围环境，如天气、路况等，<code translate="no">plain_cap_vector</code> 是其对应的向量嵌入。</p></li>
+<li><p><code translate="no">plain_caption</code> 是对当前帧的描述，不包含周围环境，如天气、路况等，<code translate="no">plain_cap_vector</code> 是其相应的向量嵌入。</p></li>
 <li><p><code translate="no">rich_caption</code> 是对当前有环境的帧的描述，<code translate="no">rich_cap_vector</code> 是其对应的向量嵌入。</p></li>
 <li><p><code translate="no">risk</code> 是对当前帧中小我车辆所面临风险的描述，<code translate="no">risk_vector</code> 是其对应的向量嵌入，以及</p></li>
 <li><p>帧的其他所有属性，如<code translate="no">road</code>,<code translate="no">weather</code>,<code translate="no">is_tunnel</code>,<code translate="no">has_pedestrain</code>, 等。</p></li>

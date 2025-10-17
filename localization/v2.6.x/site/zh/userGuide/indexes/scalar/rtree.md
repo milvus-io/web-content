@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">RTREE</code> 索引是一种基于树的数据结构，可加速对 Milvus 中<code translate="no">GEOMETRY</code> 字段的查询。如果您的 Collections 以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">已知文本 (WKT)</a>格式存储点、线或多边形等几何对象，并且希望加速空间过滤，<code translate="no">RTREE</code> 是理想的选择。</p>
+    </button></h1><p><code translate="no">RTREE</code> 索引是一种基于树的数据结构，可加速对 Milvus 中<code translate="no">GEOMETRY</code> 字段的查询。如果您的 Collections 以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">已知文本 (WKT)</a>格式存储点、线或多边形等几何对象，并且希望加速空间过滤，那么<code translate="no">RTREE</code> 是理想的选择。</p>
 <h2 id="How-it-works" class="common-anchor-header">工作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,7 +138,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><p>您可以使用<code translate="no">filter</code> 表达式中的几何操作符进行过滤。当目标<code translate="no">GEOMETRY</code> 字段上存在<code translate="no">RTREE</code> 时，Milvus 会使用它来自动修剪候选项。如果没有索引，过滤器将退回到全扫描。</p>
-<p>有关可用的特定几何操作符的完整列表，请参阅<a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">几何操作符</a>。</p>
+<p>有关可用的特定几何操作符的完整列表，请参阅<a href="/docs/zh/geometry-operators.md">几何操作符</a>。</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">例 1：仅筛选<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -195,3 +195,30 @@ hits = client.search(
 <span class="hljs-built_in">print</span>(hits)  <span class="hljs-comment"># Expected: top-k by vector similarity among rows whose geo intersects the line</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>有关如何使用<code translate="no">GEOMETRY</code> 字段的更多信息，请参阅<a href="/docs/zh/geometry-field.md">几何字段</a>。</p>
+<h2 id="Drop-an-index" class="common-anchor-header">删除索引<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>使用<code translate="no">drop_index()</code> 方法从 Collections 中删除现有索引。</p>
+<div class="alert note">
+<ul>
+<li><p>在<strong>v2.6.3</strong>或更早版本中，删除索引前必须释放 Collections。</p></li>
+<li><p>从<strong>v2.6.4</strong>或更高版本开始，一旦不再需要索引，就可以直接删除索引，而无需先释放 Collections。</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;geo_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;rtree_geo&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>

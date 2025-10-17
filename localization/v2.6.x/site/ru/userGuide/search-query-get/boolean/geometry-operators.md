@@ -108,7 +108,7 @@ summary: >-
       </svg>
     </button></h2><p>Оператор <code translate="no">ST_EQUALS</code> возвращает значение TRUE, если две геометрии пространственно идентичны, то есть имеют одинаковый набор точек и размерность. Это полезно для проверки, представляют ли два сохраненных геометрических объекта одно и то же местоположение и форму.</p>
 <p><strong>Пример</strong></p>
-<p>Предположим, вам нужно проверить, является ли сохраненная геометрия (например, точка или многоугольник) точно такой же, как целевая геометрия. Например, можно сравнить сохраненную точку с определенной точкой интереса.</p>
+<p>Предположим, вам нужно проверить, является ли сохраненная геометрия (например, точка или многоугольник) точно такой же, как целевая геометрия. Например, можно сравнить сохраненную точку с конкретной точкой интереса.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to check if a geometry matches a specific point</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_EQUALS(geo_field, &#x27;POINT(10 20)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -171,7 +171,7 @@ summary: >-
       </svg>
     </button></h2><p>Оператор <code translate="no">ST_INTERSECTS</code> возвращает значение <code translate="no">TRUE</code>, если две геометрии имеют общую точку на границах или внутренностях. Это оператор общего назначения для обнаружения любой формы пространственного перекрытия.</p>
 <p><strong>Пример</strong></p>
-<p>Если у вас есть коллекция дорог, и вы хотите найти все дороги, которые пересекают или касаются определенной строки, представляющей предлагаемую новую дорогу, вы можете использовать <code translate="no">ST_INTERSECTS</code>.</p>
+<p>Если у вас есть коллекция дорог и вы хотите найти все дороги, которые пересекают или касаются определенной линии, представляющей предполагаемую новую дорогу, вы можете использовать <code translate="no">ST_INTERSECTS</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that intersect with a specific line string.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_INTERSECTS(geo_field, &#x27;LINESTRING (1 1, 2 2)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

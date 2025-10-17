@@ -52,7 +52,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_EQUALS(A, B)</code> / <code translate="no">st_equals(A, B)</code></p></td>
-     <td><p>Devolve TRUE se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão.</p></td>
+     <td><p>Devolve VERDADEIRO se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão.</p></td>
      <td><p>Duas geometrias (A e B) são exatamente iguais no espaço?</p></td>
    </tr>
    <tr>
@@ -72,7 +72,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_OVERLAPS(A, B)</code> / <code translate="no">st_overlaps(A, B)</code></p></td>
-     <td><p>Devolve VERDADEIRO se as geometrias A e B tiverem a mesma dimensão, se sobrepuserem parcialmente e nenhuma delas contiver totalmente a outra.</p></td>
+     <td><p>Devolve VERDADEIRO se as geometrias A e B tiverem a mesma dimensão, se sobrepuserem parcialmente e nenhuma contiver totalmente a outra.</p></td>
      <td><p>Duas parcelas de terreno (A e B) sobrepõem-se?</p></td>
    </tr>
    <tr>
@@ -108,7 +108,7 @@ summary: >-
       </svg>
     </button></h2><p>O operador <code translate="no">ST_EQUALS</code> devolve TRUE se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão. Isto é útil para verificar se dois objectos geométricos armazenados representam exatamente a mesma localização e forma.</p>
 <p><strong>Exemplo</strong></p>
-<p>Suponha que pretende verificar se uma geometria armazenada (como um ponto ou um polígono) é exatamente igual a uma geometria de destino. Por exemplo, é possível comparar um ponto armazenado com um ponto de interesse específico.</p>
+<p>Suponha que pretende verificar se uma geometria armazenada (como um ponto ou polígono) é exatamente igual a uma geometria de destino. Por exemplo, é possível comparar um ponto armazenado com um ponto de interesse específico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to check if a geometry matches a specific point</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_EQUALS(geo_field, &#x27;POINT(10 20)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -2,8 +2,8 @@
 id: geometry-operators.md
 title: 幾何運算符號
 summary: >-
-  Milvus 支援一系列運算符號，用於在 GEOMETRY
-  欄位上進行空間篩選，這些運算符號對於管理和分析幾何資料非常重要。這些運算符允許您根據物件之間的幾何關係檢索實體。
+  Milvus 支援一組運算元，用於在 GEOMETRY
+  欄位上進行空間篩選，這對於管理和分析幾何資料非常重要。這些運算符允許您根據物件之間的幾何關係檢索實體。
 ---
 <h1 id="Geometry-Operators" class="common-anchor-header">幾何運算符號<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus 支援一組運算元，用於<code translate="no">GEOMETRY</code> 欄位的空間篩選，對於管理和分析幾何資料非常重要。這些運算符允許您根據物件之間的幾何關係檢索實體。</p>
 <p>所有幾何運算符號都使用兩個幾何參數：在您的集合模式中定義的<code translate="no">GEOMETRY</code> 欄位名稱，以及以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a>(WKT) 格式表示的目標幾何物件。</p>
-<p>要了解更多關於 Milvus 中<code translate="no">GEOMETRY</code> 欄位的資訊，請參考幾何<a href="/docs/zh-hant/geometry-field.md">欄位</a>。</p>
+<p>要瞭解更多關於 Milvus 中<code translate="no">GEOMETRY</code> 欄位的資訊，請參考幾何<a href="/docs/zh-hant/geometry-field.md">欄位</a>。</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">支援的幾何運算符號<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +55,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_CONTAINS(A, B)</code> /<code translate="no">st_contains(A, B)</code></p></td>
-     <td><p>如果幾何圖 A 完全包含幾何圖 B，且兩者內部至少有一個共同點，則回傳 TRUE。</p></td>
+     <td><p>如果幾何圖 A 完全包含幾何圖 B，且兩者內部至少有一個共同點，則傳回值為 TRUE。</p></td>
      <td><p>城市邊界 (A) 是否包含特定公園 (B)？</p></td>
    </tr>
    <tr>

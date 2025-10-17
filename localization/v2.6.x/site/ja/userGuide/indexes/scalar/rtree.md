@@ -138,7 +138,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><p><code translate="no">filter</code> 式でジオメトリ演算子を使用してフィルタリングします。対象の<code translate="no">GEOMETRY</code> フィールドに<code translate="no">RTREE</code> が存在する場合、milvus はそれを使用して候補を自動的にプルーニングします。インデックスがない場合、フィルタはフルスキャンに戻ります。</p>
-<p>使用可能なジオメトリ固有の演算子の完全なリストについては、<a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">ジオメトリ演算子を</a>参照してください。</p>
+<p>使用可能なジオメトリ固有の演算子の完全なリストについては、<a href="/docs/ja/geometry-operators.md">ジオメトリ演算子を</a>参照してください。</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">例 1：フィルタのみ<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,4 +194,31 @@ hits = client.search(
 )
 <span class="hljs-built_in">print</span>(hits)  <span class="hljs-comment"># Expected: top-k by vector similarity among rows whose geo intersects the line</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">GEOMETRY</code> フィールドの使い方については、<a href="/docs/ja/geometry-field.md">Geometry Field</a> を参照してください。</p>
+<p><code translate="no">GEOMETRY</code> フィールドの使用方法については、<a href="/docs/ja/geometry-field.md">Geometry Field</a> を参照してください。</p>
+<h2 id="Drop-an-index" class="common-anchor-header">インデックスの削除<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>コレクションから既存のインデックスを削除するには、<code translate="no">drop_index()</code> メソッドを使用します。</p>
+<div class="alert note">
+<ul>
+<li><p><strong>v2.6.3</strong>以前では、インデックスを削除する前にコレクションを解放する必要があります。</p></li>
+<li><p><strong>v2.6.4</strong>以降では、インデックスが不要になったら直接削除できます。</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;geo_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;rtree_geo&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>

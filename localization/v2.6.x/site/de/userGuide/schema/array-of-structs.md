@@ -72,20 +72,8 @@ beta: Milvus 2.6.4+
 <th><p>Datentyp</p></th>
 </tr>
 <tr>
-<td rowspan="5"><p>Vektor</p></td>
+<td><p>Vektor</p></td>
 <td><p><code translate="no">FLOAT_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">INT8_VECTOR</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">BINARY_VECTOR</code></p></td>
 </tr>
 <tr>
 <td rowspan="5"><p>Skalar</p></td>
@@ -634,4 +622,4 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Entwicklung eines nativen Array of Structs-Datentyps stellt einen großen Fortschritt in der Fähigkeit von Milvus dar, komplexe Datenstrukturen zu verarbeiten. Um die Anwendungsfälle besser zu verstehen und diese neue Funktion optimal zu nutzen, sollten Sie <a href="https://zilliverse.feishu.cn/wiki/VOkIwd5adiziGQkoDO1cRoRFnre">Schema Design Using an Array of Structs</a> lesen.</p>
+    </button></h2><p>Die Entwicklung eines nativen Array of Structs-Datentyps stellt einen großen Fortschritt in der Fähigkeit von Milvus dar, komplexe Datenstrukturen zu verarbeiten. Um die Anwendungsfälle besser zu verstehen und diese neue Funktion optimal zu nutzen, sollten Sie <a href="/docs/de/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a> lesen.</p>

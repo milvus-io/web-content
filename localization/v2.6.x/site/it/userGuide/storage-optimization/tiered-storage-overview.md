@@ -27,10 +27,10 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>In Milvus, la <strong>modalità</strong> tradizionale <strong>full-load</strong> richiede che ogni QueryNode carichi tutti i campi dello schema e gli indici di un <a href="https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf">segmento</a> al momento dell'inizializzazione, anche i dati che potrebbero non essere mai consultati. Questo garantisce la disponibilità immediata dei dati, ma spesso comporta uno spreco di risorse, tra cui un elevato utilizzo della memoria, un'intensa attività su disco e un significativo overhead di I/O, soprattutto quando si gestiscono insiemi di dati di grandi dimensioni.</p>
-<p>Lo<strong>storage a livelli</strong> affronta questa sfida disaccoppiando la cache dei dati dal caricamento dei segmenti. Invece di caricare tutti i dati in una sola volta, Milvus introduce un livello di caching che distingue tra dati caldi (memorizzati nella cache locale) e dati freddi (memorizzati in remoto). Il QueryNode carica inizialmente solo metadati leggeri e preleva o evade dinamicamente i dati su richiesta. Ciò riduce significativamente il tempo di caricamento, ottimizza l'utilizzo delle risorse locali e consente ai QueryNode di elaborare insiemi di dati che superano di gran lunga la loro memoria fisica o la capacità del disco.</p>
+<p>Lo<strong>storage a livelli</strong> affronta questa sfida disaccoppiando la cache dei dati dal caricamento dei segmenti. Invece di caricare tutti i dati in una sola volta, Milvus introduce un livello di caching che distingue tra dati caldi (memorizzati nella cache locale) e dati freddi (memorizzati in remoto). Il QueryNode carica inizialmente solo metadati leggeri e preleva o evade dinamicamente i dati su richiesta. Questo riduce significativamente i tempi di caricamento, ottimizza l'utilizzo delle risorse locali e consente ai QueryNode di elaborare insiemi di dati che superano di gran lunga la loro memoria fisica o la capacità del disco.</p>
 <p>Si può prendere in considerazione l'attivazione dell'archiviazione a livelli in scenari quali:</p>
 <ul>
-<li><p>Raccolte che superano la memoria disponibile o la capacità NVMe di un singolo QueryNode</p></li>
+<li><p>Collezioni che superano la memoria disponibile o la capacità NVMe di un singolo QueryNode</p></li>
 <li><p>Carichi di lavoro analitici o batch in cui la velocità di caricamento è più importante della latenza di prima interrogazione.</p></li>
 <li><p>Carichi di lavoro misti che possono tollerare occasionali mancanze della cache per i dati a cui si accede meno frequentemente.</p></li>
 </ul>
@@ -134,7 +134,7 @@ beta: Milvus 2.6.4+
 <p><strong>Vantaggi</strong></p>
 <ul>
 <li><p>Mantiene stabile l'utilizzo della cache tra i vari carichi di lavoro</p></li>
-<li><p>Massimizza il riutilizzo della cache prevenendo i crash</p></li>
+<li><p>Massimizza il riutilizzo della cache evitando gli arresti anomali</p></li>
 <li><p>Mantiene prestazioni prevedibili nel tempo</p></li>
 </ul>
 <p><strong>Configurazione</strong></p>

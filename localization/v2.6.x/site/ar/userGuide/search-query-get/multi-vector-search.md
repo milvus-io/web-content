@@ -75,7 +75,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>تتضمن عملية إنشاء مجموعة ثلاث خطوات رئيسية: تحديد مخطط المجموعة، وتكوين معلمات الفهرس، وإنشاء المجموعة.</p>
-<h3 id="Define-schema" class="common-anchor-header">تحديد المخطط</h3><p>بالنسبة للبحث المختلط متعدد المتجهات، يجب أن نحدد حقول متجهات متعددة داخل مخطط المجموعة. بشكل افتراضي، يمكن أن تستوعب كل مجموعة ما يصل إلى 4 حقول متجهة. ومع ذلك، إذا لزم الأمر، يمكنك ضبط <code translate="no">proxy.maxVectorFieldNum</code> لتضمين ما يصل إلى 10 حقول متجهة في مجموعة حسب الحاجة.</p>
+<h3 id="Define-schema" class="common-anchor-header">تحديد المخطط<button data-href="#Define-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بالنسبة للبحث المختلط متعدد المتجهات، يجب أن نحدد حقول متجهات متعددة داخل مخطط المجموعة. للحصول على تفاصيل حول الحدود المفروضة على عدد الحقول المتجهة المسموح بها في المجموعة، راجع <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">حدود Zilliz Cloud Limits</a>.  ومع ذلك، إذا لزم الأمر، يمكنك ضبط <a href="/docs/ar/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> لتضمين ما يصل إلى 10 حقول متجهة في مجموعة حسب الحاجة.</p>
 <p>يدمج هذا المثال الحقول التالية في المخطط:</p>
 <ul>
 <li><p><code translate="no">id</code>: يعمل كمفتاح أساسي لتخزين المعرفات النصية. هذا الحقل من نوع البيانات <code translate="no">INT64</code>.</p></li>
@@ -317,8 +332,30 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">إنشاء فهرس</h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<h3 id="Create-index" class="common-anchor-header">إنشاء فهرس<button data-href="#Create-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد تحديد مخطط المجموعة، فإن الخطوة التالية هي تكوين فهارس المتجهات وتحديد مقاييس التشابه. في المثال المعطى</p>
+<ul>
+<li><p><code translate="no">text_dense_index</code>: يتم إنشاء فهرس من النوع <code translate="no">AUTOINDEX</code> بنوع مقياس <code translate="no">IP</code> لحقل المتجه الكثيف النصي.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: يتم استخدام فهرس من النوع<code translate="no">SPARSE_INVERTED_INDEX</code>مع النوع المتري <code translate="no">BM25</code> لحقل المتجه النصي المتناثر.</p></li>
+<li><p><code translate="no">image_dense_index</code>:: يتم إنشاء فهرس من النوع <code translate="no">AUTOINDEX</code> مع النوع المتري <code translate="no">IP</code> لحقل متجه كثيف الصورة.</p></li>
+</ul>
+<p>يمكنك اختيار أنواع أخرى من الفهارس حسب الضرورة لتناسب احتياجاتك وأنواع البيانات. لمزيد من المعلومات حول أنواع الفهارس المدعومة، يرجى الرجوع إلى الوثائق الخاصة <a href="/docs/ar/index-vector-fields.md">بأنواع الفهارس المتاحة</a>.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index parameters</span>
@@ -431,7 +468,22 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>قم بإنشاء مجموعة باسم <code translate="no">demo</code> مع مخطط المجموعة والفهارس التي تم تكوينها في الخطوتين السابقتين.</p>
+<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بإنشاء مجموعة باسم <code translate="no">demo</code> مع مخطط المجموعة والفهارس التي تم تكوينها في الخطوتين السابقتين.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -625,14 +677,29 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">إنشاء مثيلات AnnSearchRequest متعددة</h3><p>يتم تنفيذ البحث الهجين من خلال إنشاء عدة <code translate="no">AnnSearchRequest</code> في الدالة <code translate="no">hybrid_search()</code> ، حيث يمثل كل <code translate="no">AnnSearchRequest</code> طلب بحث ANN أساسي لحقل متجه معين. لذلك، قبل إجراء بحث مختلط، من الضروري إنشاء <code translate="no">AnnSearchRequest</code> لكل حقل متجه.</p>
-<p>بالإضافة إلى ذلك، من خلال تكوين المعلمة <code translate="no">expr</code> في <code translate="no">AnnSearchRequest</code> ، يمكنك تعيين شروط التصفية للبحث الهجين الخاص بك. يرجى الرجوع إلى <a href="/docs/ar/filtered-search.md">البحث المصفى</a> <a href="/docs/ar/boolean.md">والتصفية</a>.</p>
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">الخطوة 1: إنشاء مثيلات AnnSearchRequest متعددة<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يتم تنفيذ البحث الهجين من خلال إنشاء عدة <code translate="no">AnnSearchRequest</code> في الدالة <code translate="no">hybrid_search()</code> ، حيث يمثل كل <code translate="no">AnnSearchRequest</code> طلب بحث ANN أساسي لحقل متجه معين. لذلك، قبل إجراء البحث الهجين، من الضروري إنشاء <code translate="no">AnnSearchRequest</code> لكل حقل متجه.</p>
+<p>بالإضافة إلى ذلك، من خلال تكوين المعلمة <code translate="no">expr</code> في <code translate="no">AnnSearchRequest</code> ، يمكنك تعيين شروط التصفية للبحث الهجين الخاص بك. يُرجى الرجوع إلى <a href="/docs/ar/boolean.md">شرح</a> <a href="/docs/ar/filtered-search.md">البحث المختلط</a> والتصفية.</p>
 <div class="alert note">
 <p>في البحث المختلط، يدعم كل <code translate="no">AnnSearchRequest</code> بيانات استعلام واحدة فقط في البحث المختلط.</p>
 </div>
-<p>لتوضيح إمكانيات حقول متجهات البحث المختلفة، سنقوم بإنشاء ثلاثة طلبات بحث <code translate="no">AnnSearchRequest</code> باستخدام نموذج استعلام. سنستخدم أيضًا متجهاته الكثيفة المحسوبة مسبقًا لهذه العملية. ستستهدف طلبات البحث حقول المتجهات التالية:</p>
+<p>لتوضيح إمكانيات حقول متجهات البحث المختلفة، سنقوم بإنشاء ثلاثة <code translate="no">AnnSearchRequest</code> طلبات بحث باستخدام نموذج استعلام. سنستخدم أيضًا متجهاته الكثيفة المحسوبة مسبقًا لهذه العملية. ستستهدف طلبات البحث حقول المتجهات التالية:</p>
 <ul>
-<li><p><code translate="no">text_dense</code> للبحث الدلالي في النص الدلالي، مما يسمح بفهم السياق واسترجاعه بناءً على المعنى بدلاً من المطابقة المباشرة للكلمات المفتاحية</p></li>
+<li><p><code translate="no">text_dense</code> للبحث الدلالي عن النص الدلالي، مما يسمح بفهم السياق واسترجاعه بناءً على المعنى بدلاً من المطابقة المباشرة للكلمات المفتاحية</p></li>
 <li><p><code translate="no">text_sparse</code>للبحث في النص الكامل أو مطابقة الكلمات المفتاحية، مع التركيز على مطابقة الكلمات أو العبارات الدقيقة داخل النص.</p></li>
 <li><p><code translate="no">image_dense</code>للبحث متعدد الوسائط من نص إلى صورة، لاسترداد صور المنتجات ذات الصلة بناءً على المحتوى الدلالي للاستعلام.</p></li>
 </ul>
@@ -769,38 +836,41 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>بالنظر إلى أن المعلمة <code translate="no">limit</code> مضبوطة على 2، فإن كل <code translate="no">AnnSearchRequest</code> يُرجع نتيجتي بحث. في هذا المثال، يتم إنشاء 3 مثيلات <code translate="no">AnnSearchRequest</code> ، مما ينتج عنه إجمالي 6 نتائج بحث.</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">تكوين استراتيجية إعادة الترتيب</h3><p>لدمج مجموعات نتائج بحث الشبكة النشطة وإعادة ترتيبها، من الضروري اختيار استراتيجية إعادة ترتيب مناسبة. يقدم ميلفوس نوعين من استراتيجيات إعادة الترتيب:</p>
-<ul>
-<li><p><strong>استراتيجية إعادة الترتيب المرجحة</strong>: استخدم هذه الاستراتيجية إذا كانت النتائج تحتاج إلى التركيز على مجال متجه معين. يسمح لك WeightedRanker بتعيين وزن أكبر لحقول متجهات معينة، وإبرازها بشكل أكثر بروزًا.</p></li>
-<li><p><strong>RRRFRanker (مصنف دمج الرتب المتبادل)</strong>: اختر هذه الاستراتيجية عند عدم الحاجة إلى تركيز محدد. يوازن RRRFRanker بشكل فعال بين أهمية كل حقل متجه.</p></li>
-</ul>
-<p>لمزيد من التفاصيل حول آليات هاتين الاستراتيجيتين لإعادة التصنيف، راجع <a href="/docs/ar/weighted-ranker.md">إعادة التصنيف</a>.</p>
-<p>في هذا المثال، بما أنه لا يوجد تركيز خاص على استعلامات بحث محددة، سنستمر في هذا المثال باستراتيجية RRFRanker.</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">الخطوة 2: تكوين استراتيجية إعادة الترتيب<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لدمج وإعادة ترتيب مجموعات نتائج بحث الشبكة النشطة ANN، من الضروري اختيار استراتيجية إعادة ترتيب مناسبة. يقدم ميلفوس عدة أنواع من استراتيجيات إعادة الترتيب. لمزيد من التفاصيل حول آليات إعادة الترتيب هذه، يُرجى الرجوع إلى <a href="/docs/ar/reranking">إعادة الترتيب</a>.</p>
+<p>في هذا المثال، بما أنه لا يوجد تركيز خاص على استعلامات بحث محددة، سنشرع في استخدام استراتيجية إعادة الترتيب RRFRanker.</p>
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">الخطوة 3: إجراء بحث مختلط<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قبل بدء البحث المختلط، تأكد من تحميل المجموعة. إذا كانت أي حقول متجهة داخل المجموعة تفتقر إلى فهرس أو لم يتم تحميلها في الذاكرة، سيحدث خطأ عند تنفيذ طريقة البحث الهجين.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
-
-ranker = RRFRanker(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
-
-<span class="hljs-type">BaseRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-string">&quot;100&quot;</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
-        &quot;strategy&quot;: &quot;rrf&quot;,
-        &quot;params&quot;: { &quot;k&quot;: 100}
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">إجراء بحث هجين</h3><p>قبل الشروع في البحث الهجين، تأكد من تحميل المجموعة. إذا كانت أي حقول متجهة داخل المجموعة تفتقر إلى فهرس أو لم يتم تحميلها في الذاكرة، فسيحدث خطأ عند تنفيذ طريقة البحث الهجين.</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 res = client.hybrid_search(

@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
 <p>Verwenden Sie ein GEOMETRY-Feld, wenn Sie z. B. Vektorähnlichkeit mit räumlichen Beschränkungen kombinieren müssen:</p>
 <ul>
 <li><p>Location-Base Service (LBS): "Finde ähnliche POIs <strong>innerhalb</strong> dieses Stadtblocks".</p></li>
-<li><p>Multimodale Suche: "ähnliche Fotos <strong>im Umkreis von 1 km</strong> von diesem Punkt abrufen"</p></li>
+<li><p>Multimodale Suche: "Finde ähnliche Fotos <strong>innerhalb von 1 km</strong> von diesem Punkt"</p></li>
 <li><p>Karten und Logistik: "Anlagen <strong>innerhalb</strong> einer Region" oder "Routen <strong>, die</strong> einen Weg <strong>kreuzen</strong> "</p></li>
 </ul>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Was ist ein GEOMETRY-Feld?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
@@ -254,7 +254,7 @@ result = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="common-anchor-header">Wenn ich die Funktion für dynamische Felder für meine Sammlung aktiviert habe, kann ich dann geometrische Daten in einen dynamischen Feldschlüssel einfügen?<button data-href="#If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h2><h3 id="If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="common-anchor-header">Kann ich geometrische Daten in einen dynamischen Feldschlüssel einfügen, wenn ich die dynamische Feldfunktion für meine Sammlung aktiviert habe?<button data-href="#If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -301,4 +301,4 @@ result = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ja, das GEOMETRY-Feld unterstützt das Attribut <code translate="no">nullable</code> und einen Standardwert im WKT-Format. Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+    </button></h3><p>Ja, das Feld GEOMETRY unterstützt das Attribut <code translate="no">nullable</code> und einen Standardwert im WKT-Format. Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p>

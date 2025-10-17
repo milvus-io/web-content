@@ -3,7 +3,7 @@ id: tiered-storage-overview.md
 title: 分层存储概述Compatible with Milvus 2.6.4+
 summary: >-
   在 Milvus 中，传统的满载模式要求每个 QueryNode 在初始化时加载段的所有 Schema
-  字段和索引，甚至包括可能永远不会访问的数据。这虽然确保了数据的即时可用性，但往往会造成资源浪费，包括内存使用率高、磁盘活动频繁以及 I/O
+  字段和索引，甚至包括可能永远不会被访问的数据。这虽然确保了数据的即时可用性，但往往会造成资源浪费，包括内存使用率高、磁盘活动频繁以及 I/O
   开销大，尤其是在处理大规模数据集时。
 beta: Milvus 2.6.4+
 ---
@@ -50,7 +50,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>分层存储改变了 QueryNode 管理段数据的方式。QueryNode 现在不再在加载时缓存每个字段和索引，而是只加载<strong>元数据</strong>，并使用缓存层动态获取和删除数据。</p>
 <div class="alert note">
-<p><strong>元数据</strong>包括 Schema、索引定义、块映射、行计数和远程对象引用。这些数据很小，始终处于缓存状态，并且永远不会被驱逐。</p>
+<p><strong>元数据</strong>包括 Schema、索引定义、块映射、行计数和远程对象引用。这些数据很小，始终处于缓存状态，而且永远不会被驱逐。</p>
 </div>
 <h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">全负载模式与分层存储模式的比较<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
       <svg translate="no"

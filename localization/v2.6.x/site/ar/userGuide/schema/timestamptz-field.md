@@ -399,7 +399,7 @@ res = client.search(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا كانت مجموعتك تحتوي على حقلين متجهين أو أكثر، يمكنك إجراء عمليات بحث مختلطة مع تصفية الطابع الزمني. لمزيد من التفاصيل، راجع <a href="/docs/ar/multi-vector-search.md">البحث المختلط متعدد المتجهات</a>.</p>
+<p>إذا كانت مجموعتك تحتوي على حقلي متجهين أو أكثر، يمكنك إجراء عمليات بحث مختلطة مع تصفية الطابع الزمني. لمزيد من التفاصيل، راجع <a href="/docs/ar/multi-vector-search.md">البحث المختلط متعدد المتجهات</a>.</p>
 </div>
 <h2 id="Advanced-usage" class="common-anchor-header">الاستخدام المتقدم<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"

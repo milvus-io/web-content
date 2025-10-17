@@ -52,7 +52,7 @@ beta: Milvus 2.6.4+
 <li><p><strong>Incorporazione multimodale</strong>: Ogni struttura può contenere più vettori, come l'incorporazione di testo e l'incorporazione di immagini, oltre ai metadati.</p></li>
 <li><p><strong>Dati temporali o sequenziali</strong>: Le strutture in un campo Array rappresentano naturalmente serie temporali o eventi graduali.</p></li>
 </ul>
-<p>A differenza delle soluzioni tradizionali che memorizzano blob JSON o dividono i dati in più raccolte, l'Array di strutture offre l'applicazione nativa dello schema, l'indicizzazione dei vettori e l'archiviazione efficiente all'interno di Milvus.</p>
+<p>A differenza delle soluzioni tradizionali, che memorizzano blob JSON o dividono i dati in più raccolte, l'array di strutture offre l'applicazione nativa dello schema, l'indicizzazione dei vettori e l'archiviazione efficiente all'interno di Milvus.</p>
 <h2 id="Schema-design-guidelines" class="common-anchor-header">Linee guida per la progettazione degli schemi<button data-href="#Schema-design-guidelines" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -26,7 +26,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>En Milvus, <strong>Warm</strong> Up complementa el almacenamiento por niveles eliminando la latencia de primer impacto que se produce cuando se accede a datos fríos por primera vez. Una vez configurado, Warm Up precarga campos o índices seleccionados en la caché antes de que un segmento sea consultable, garantizando que los datos a los que se accede con frecuencia estén disponibles inmediatamente después de la carga.</p>
-<h2 id="Why-warm-up" class="common-anchor-header">Por qué Warm Up<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
+<h2 id="Why-warm-up" class="common-anchor-header">¿Por qué Warm Up?<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -49,7 +49,7 @@ beta: Milvus 2.6.4+
 <li><p><strong>Los índices vectoriales</strong> son esenciales para el rendimiento de la búsqueda y deben estar listos inmediatamente.</p></li>
 <li><p><strong>La latencia de arranque en frío</strong> tras el reinicio del QueryNode o la carga de un nuevo segmento es inaceptable.</p></li>
 </ul>
-<p>Por el contrario, <strong>no se recomienda</strong> Warm Up para los campos o índices que se consultan con poca frecuencia. Desactivar Warm Up acorta el tiempo de carga del segmento y conserva espacio en la caché, lo que resulta ideal para campos vectoriales grandes o campos escalares no críticos.</p>
+<p>Por el contrario, <strong>no se recomienda</strong> Warm Up para campos o índices que se consultan con poca frecuencia. Desactivar Warm Up acorta el tiempo de carga del segmento y conserva espacio en la caché, lo que resulta ideal para campos vectoriales grandes o campos escalares no críticos.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuración<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

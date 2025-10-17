@@ -188,7 +188,7 @@ beta: Milvus 2.6.4+
      <td><p>galleggiante</p></td>
      <td><p>(0.0, 1.0]</p></td>
      <td><p>Livello di utilizzo del disco per il quale si interrompe lo sfratto.</p></td>
-     <td><p>Iniziare con <code translate="no">0.75</code>. Regolare più in basso se l'I/O del disco è limitato.</p></td>
+     <td><p>Iniziare da <code translate="no">0.75</code>. Regolare più in basso se l'I/O del disco è limitato.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">diskHighWatermarkRatio</code></p></td>
@@ -304,6 +304,6 @@ beta: Milvus 2.6.4+
 </table>
 <p><strong>Comportamento limite</strong>:</p>
 <ul>
-<li><p><code translate="no">1.0</code>: Tutta la cache è evitabile - l'evicitazione si attiva di rado, ma un numero inferiore di segmenti è adatto a ogni QueryNode.</p></li>
+<li><p><code translate="no">1.0</code>: Tutta la cache è evitabile - l'evicitazione si attiva raramente, ma per ogni QueryNode è possibile inserire un numero inferiore di segmenti.</p></li>
 <li><p><code translate="no">0.0</code>: Nessuna cache evitabile - lo svuotamento avviene frequentemente; si inseriscono più segmenti, ma la latenza può aumentare.</p></li>
 </ul>

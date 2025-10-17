@@ -26,7 +26,7 @@ summary: >-
 <p>Utilice el índice <code translate="no">STL_SORT</code> si ejecuta con frecuencia consultas con:</p>
 <ul>
 <li><p>Filtrado por comparación con los operadores <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, y <code translate="no">&lt;=</code> </p></li>
-<li><p>Filtrado de rangos con los operadores <code translate="no">IN</code> y <code translate="no">LIKE</code> </p></li>
+<li><p>Filtrado por rango con los operadores <code translate="no">IN</code> y <code translate="no">LIKE</code> </p></li>
 </ul>
 <h2 id="Supported-data-types" class="common-anchor-header">Tipos de datos admitidos<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"

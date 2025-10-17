@@ -2,9 +2,9 @@
 id: multi-vector-search.md
 title: Pencarian Hibrida Multi-Vektor
 summary: >-
-  Di banyak aplikasi, sebuah objek dapat dicari dengan sekumpulan informasi yang
-  kaya seperti judul dan deskripsi, atau dengan berbagai modalitas seperti teks,
-  gambar, dan audio. Sebagai contoh, sebuah tweet dengan sepotong teks dan
+  Dalam banyak aplikasi, sebuah objek dapat dicari dengan sekumpulan informasi
+  yang kaya seperti judul dan deskripsi, atau dengan berbagai modalitas seperti
+  teks, gambar, dan audio. Sebagai contoh, sebuah tweet dengan sepotong teks dan
   gambar akan dicari jika teks atau gambar tersebut sesuai dengan semantik
   permintaan pencarian. Pencarian hibrida meningkatkan pengalaman pencarian
   dengan menggabungkan pencarian di berbagai bidang ini. Milvus mendukung hal
@@ -77,8 +77,23 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Proses membuat koleksi melibatkan tiga langkah utama: mendefinisikan skema koleksi, mengonfigurasi parameter indeks, dan membuat koleksi.</p>
-<h3 id="Define-schema" class="common-anchor-header">Tentukan skema</h3><p>Untuk pencarian hibrida multi-vektor, kita harus mendefinisikan beberapa bidang vektor dalam skema koleksi. Secara default, setiap koleksi dapat menampung hingga 4 bidang vektor. Namun, jika perlu, Anda dapat menyesuaikan <code translate="no">proxy.maxVectorFieldNum</code> untuk menyertakan hingga 10 bidang vektor dalam koleksi sesuai kebutuhan.</p>
-<p>Contoh ini memasukkan bidang-bidang berikut ke dalam skema:</p>
+<h3 id="Define-schema" class="common-anchor-header">Tentukan skema<button data-href="#Define-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk pencarian hibrida multi-vektor, kita harus menentukan beberapa bidang vektor dalam skema koleksi. Untuk detail tentang batasan jumlah bidang vektor yang diizinkan dalam koleksi, lihat <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Batas Zilliz Cloud</a>.  Namun, jika perlu, Anda dapat menyesuaikan parameter <a href="/docs/id/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> untuk menyertakan hingga 10 bidang vektor dalam koleksi sesuai kebutuhan.</p>
+<p>Contoh ini memasukkan bidang berikut ke dalam skema:</p>
 <ul>
 <li><p><code translate="no">id</code>: Berfungsi sebagai kunci utama untuk menyimpan ID teks. Bidang ini bertipe data <code translate="no">INT64</code>.</p></li>
 <li><p><code translate="no">text</code>: Digunakan untuk menyimpan konten tekstual. Bidang ini bertipe data <code translate="no">VARCHAR</code> dengan panjang maksimum 1000 byte. Opsi <code translate="no">enable_analyzer</code> diatur ke <code translate="no">True</code> untuk memfasilitasi pencarian teks lengkap.</p></li>
@@ -319,7 +334,29 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">Membuat indeks</h3><div class="multipleCode">
+<h3 id="Create-index" class="common-anchor-header">Membuat indeks<button data-href="#Create-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah mendefinisikan skema koleksi, langkah selanjutnya adalah mengonfigurasi indeks vektor dan menentukan metrik kemiripan. Dalam contoh yang diberikan:</p>
+<ul>
+<li><p><code translate="no">text_dense_index</code>: sebuah indeks bertipe <code translate="no">AUTOINDEX</code> dengan tipe metrik <code translate="no">IP</code> dibuat untuk bidang vektor padat teks.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: indeks bertipe<code translate="no">SPARSE_INVERTED_INDEX</code>dengan tipe metrik <code translate="no">BM25</code> digunakan untuk bidang vektor teks jarang.</p></li>
+<li><p><code translate="no">image_dense_index</code>indeks bertipe <code translate="no">AUTOINDEX</code> dengan tipe metrik <code translate="no">IP</code> dibuat untuk bidang vektor padat gambar.</p></li>
+</ul>
+<p>Anda dapat memilih jenis indeks lain yang diperlukan untuk menyesuaikan dengan kebutuhan dan jenis data Anda. Untuk informasi lebih lanjut tentang jenis indeks yang didukung, silakan lihat dokumentasi tentang <a href="/docs/id/index-vector-fields.md">jenis indeks yang tersedia</a>.</p>
+<div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -433,7 +470,22 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi</h3><p>Buat koleksi bernama <code translate="no">demo</code> dengan skema koleksi dan indeks yang telah dikonfigurasi di dua langkah sebelumnya.</p>
+<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Buat koleksi bernama <code translate="no">demo</code> dengan skema koleksi dan indeks yang telah dikonfigurasikan di dua langkah sebelumnya.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -627,10 +679,25 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Membuat beberapa instance AnnSearchRequest</h3><p>Pencarian Hibrida diimplementasikan dengan membuat beberapa <code translate="no">AnnSearchRequest</code> dalam fungsi <code translate="no">hybrid_search()</code>, di mana setiap <code translate="no">AnnSearchRequest</code> merepresentasikan permintaan pencarian ANN dasar untuk bidang vektor tertentu. Oleh karena itu, sebelum melakukan Pencarian Hibrida, perlu untuk membuat <code translate="no">AnnSearchRequest</code> untuk setiap bidang vektor.</p>
-<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> di <code translate="no">AnnSearchRequest</code>, Anda dapat mengatur kondisi pemfilteran untuk pencarian hybrid Anda. Silakan lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/boolean.md">Pemfilteran</a>.</p>
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Langkah 1: Buat beberapa instance AnnSearchRequest<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pencarian Hibrida diimplementasikan dengan membuat beberapa <code translate="no">AnnSearchRequest</code> dalam fungsi <code translate="no">hybrid_search()</code>, di mana setiap <code translate="no">AnnSearchRequest</code> mewakili permintaan pencarian ANN dasar untuk bidang vektor tertentu. Oleh karena itu, sebelum melakukan Pencarian Hibrida, perlu untuk membuat <code translate="no">AnnSearchRequest</code> untuk setiap bidang vektor.</p>
+<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> di <code translate="no">AnnSearchRequest</code>, Anda dapat mengatur kondisi pemfilteran untuk pencarian hybrid Anda. Silakan lihat <a href="/docs/id/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/boolean.md">Penjelasan Pemfilteran</a>.</p>
 <div class="alert note">
-<p>Dalam Pencarian Hibrida, setiap <code translate="no">AnnSearchRequest</code> hanya mendukung satu data kueri.</p>
+<p>Dalam Pencarian Hibrid, setiap <code translate="no">AnnSearchRequest</code> hanya mendukung satu data kueri.</p>
 </div>
 <p>Untuk mendemonstrasikan kemampuan berbagai bidang vektor pencarian, kami akan membuat tiga permintaan pencarian <code translate="no">AnnSearchRequest</code> menggunakan contoh kueri. Kami juga akan menggunakan vektor padat yang telah dihitung sebelumnya untuk proses ini. Permintaan pencarian akan menargetkan bidang vektor berikut ini:</p>
 <ul>
@@ -771,36 +838,39 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Dengan parameter <code translate="no">limit</code> yang disetel ke 2, setiap <code translate="no">AnnSearchRequest</code> mengembalikan 2 hasil pencarian. Dalam contoh ini, 3 contoh <code translate="no">AnnSearchRequest</code> dibuat, menghasilkan total 6 hasil pencarian.</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">Mengonfigurasi strategi pemeringkatan ulang</h3><p>Untuk menggabungkan dan memberi peringkat ulang kumpulan hasil pencarian ANN, memilih strategi perangkingan ulang yang sesuai sangatlah penting. Milvus menawarkan dua jenis strategi pemeringkatan ulang:</p>
-<ul>
-<li><p><strong>Pemeringkat Tertimbang</strong>: Gunakan strategi ini jika hasil pencarian perlu menekankan bidang vektor tertentu. WeightedRanker memungkinkan Anda untuk memberikan bobot yang lebih besar pada bidang vektor tertentu, menyorotnya dengan lebih menonjol.</p></li>
-<li><p><strong>RRFRanker (Pemeringkat Fusi Peringkat Timbal Balik)</strong>: Pilih strategi ini ketika tidak ada penekanan khusus yang diperlukan. RRFRanker secara efektif menyeimbangkan pentingnya setiap bidang vektor.</p></li>
-</ul>
-<p>Untuk detail lebih lanjut tentang mekanisme kedua strategi pemeringkatan ulang ini, lihat <a href="/docs/id/weighted-ranker.md">Pemeringkatan</a> Ulang.</p>
-<p>Dalam contoh ini, karena tidak ada penekanan khusus pada kueri penelusuran tertentu, kita akan melanjutkan dengan strategi RRFRanker.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
-
-ranker = RRFRanker(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
-
-<span class="hljs-type">BaseRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-string">&quot;100&quot;</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
-        &quot;strategy&quot;: &quot;rrf&quot;,
-        &quot;params&quot;: { &quot;k&quot;: 100}
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">Melakukan Pencarian Hibrida</h3><p>Sebelum memulai Pencarian Hibrida, pastikan bahwa koleksi telah dimuat. Jika ada bidang vektor dalam koleksi yang tidak memiliki indeks atau tidak dimuat ke dalam memori, maka akan terjadi kesalahan saat menjalankan metode Pencarian Hibrida.</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Langkah 2: Konfigurasikan strategi perankingan ulang<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk menggabungkan dan memberi peringkat ulang kumpulan hasil pencarian ANN, memilih strategi peringkat ulang yang sesuai sangatlah penting. Milvus menawarkan beberapa jenis strategi pemeringkatan ulang. Untuk detail lebih lanjut tentang mekanisme pemeringkatan ulang ini, silakan lihat <a href="/docs/id/reranking">Pemeringkatan</a> Ulang.</p>
+<p>Dalam contoh ini, karena tidak ada penekanan khusus pada kueri penelusuran tertentu, kami akan melanjutkan dengan strategi RRFRanker.</p>
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Langkah 3: Lakukan Pencarian Hibrida<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sebelum memulai Pencarian Hibrida, pastikan koleksi telah dimuat. Jika ada bidang vektor dalam koleksi yang tidak memiliki indeks atau tidak dimuat ke dalam memori, kesalahan akan terjadi saat mengeksekusi metode Pencarian Hibrida.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

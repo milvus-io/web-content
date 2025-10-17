@@ -135,5 +135,5 @@ client.create_index(
     </button></h2><ul>
 <li><p><strong>필드 유형:</strong> 숫자 및 <code translate="no">TIMESTAMPTZ</code> 필드에서 작동합니다. 데이터 유형에 대한 자세한 내용은 <a href="/docs/ko/number.md">부울 및 숫자</a> 및 <a href="/docs/ko/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p></li>
 <li><p><strong>매개변수:</strong> 인덱스 매개변수가 필요하지 않습니다.</p></li>
-<li><p><strong>M맵은 지원되지 않습니다:</strong> <code translate="no">STL_SORT</code> 에는 메모리 매핑 모드를 사용할 수 없습니다.</p></li>
+<li><p><strong>Mmap은 지원되지 않습니다:</strong> <code translate="no">STL_SORT</code> 에는 메모리 매핑 모드를 사용할 수 없습니다.</p></li>
 </ul>

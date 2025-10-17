@@ -129,7 +129,7 @@ summary: >-
       </svg>
     </button></h2><p>El operador <code translate="no">ST_CONTAINS</code> devuelve TRUE si la primera geometría contiene completamente a la segunda. Esto es útil para encontrar puntos dentro de un polígono, o polígonos más pequeños dentro de uno más grande.</p>
 <p><strong>Ejemplo</strong></p>
-<p>Imagine que tiene una colección de distritos urbanos y desea encontrar un punto de interés específico, como un restaurante, que se encuentre dentro de los límites de un distrito determinado.</p>
+<p>Imagine que dispone de una colección de distritos urbanos y desea encontrar un punto de interés específico, como un restaurante, que se encuentre dentro de los límites de un distrito determinado.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries completely within a specific polygon.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_CONTAINS(geo_field, &#x27;POLYGON ((0 0, 10 0, 10 10, 0 10, 0 0))&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

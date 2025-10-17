@@ -140,7 +140,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><p>É possível filtrar com operadores de geometria na expressão <code translate="no">filter</code>. Quando existe um índice <code translate="no">RTREE</code> no campo de destino <code translate="no">GEOMETRY</code>, o Milvus utiliza-o para eliminar automaticamente os candidatos. Sem o índice, o filtro volta a ser uma pesquisa completa.</p>
-<p>Para obter uma lista completa dos operadores específicos de geometria disponíveis, consulte <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Operadores de geometria</a>.</p>
+<p>Para obter uma lista completa dos operadores específicos de geometria disponíveis, consulte <a href="/docs/pt/geometry-operators.md">Operadores de geometria</a>.</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">Exemplo 1: Filtrar apenas<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -196,4 +196,31 @@ hits = client.search(
 )
 <span class="hljs-built_in">print</span>(hits)  <span class="hljs-comment"># Expected: top-k by vector similarity among rows whose geo intersects the line</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para mais informações sobre como utilizar um campo <code translate="no">GEOMETRY</code>, consulte <a href="/docs/pt/geometry-field.md">Campo geométrico</a>.</p>
+<p>Para mais informações sobre como utilizar um campo <code translate="no">GEOMETRY</code>, consulte <a href="/docs/pt/geometry-field.md">Campo de geometria</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Eliminar um índice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilize o método <code translate="no">drop_index()</code> para remover um índice existente de uma coleção.</p>
+<div class="alert note">
+<ul>
+<li><p>Na <strong>versão 2.6.3</strong> ou anterior, é necessário libertar a coleção antes de eliminar um índice.</p></li>
+<li><p>A partir da <strong>versão 2.6.4</strong> ou posterior, pode eliminar um índice diretamente quando este já não for necessário, sem necessidade de libertar primeiro a coleção.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;geo_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;rtree_geo&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>

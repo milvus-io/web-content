@@ -80,7 +80,7 @@ beta: Milvus 2.6.4+
 <p><strong>Empfohlene Einstellung</strong>:</p>
 <p>Aktivieren Sie beide Modi für ein optimales Gleichgewicht. Die asynchrone Verdrängung verwaltet die Cache-Nutzung proaktiv, während die synchrone Verdrängung als Sicherheitsfallback fungiert, wenn die Ressourcen fast erschöpft sind.</p>
 <div class="alert note">
-<p>Bei verdrängbaren Feldern und Indizes entspricht die Verdrängungseinheit der Ladegranularität: Skalar-/Vektorfelder werden pro Chunk verdrängt, Skalar-/Vektorindizes pro Segment.</p>
+<p>Bei verdrängbaren Feldern und Indizes entspricht die Verdrängungseinheit der Ladegranularität: Skalar-/Vektorfelder werden pro Chunk verdrängt, Skalar-/Vektorindizes werden pro Segment verdrängt.</p>
 </div>
 <h2 id="Enable-eviction" class="common-anchor-header">Aktivieren der Verdrängung<button data-href="#Enable-eviction" class="anchor-icon" translate="no">
       <svg translate="no"

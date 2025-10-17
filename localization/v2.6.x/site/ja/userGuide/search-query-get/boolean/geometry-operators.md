@@ -49,7 +49,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_EQUALS(A, B)</code> /<code translate="no">st_equals(A, B)</code></p></td>
-     <td><p>2つのジオメトリが空間的に同一である場合に TRUE を返します。</p></td>
+     <td><p>2つのジオメトリが空間的に同一である場合、つまり点の集合と次元が同じである場合に TRUE を返します。</p></td>
      <td><p>2つの形状（AとB）は空間的に全く同じか？</p></td>
    </tr>
    <tr>
@@ -64,7 +64,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_INTERSECTS(A, B)</code> /<code translate="no">st_intersects(A, B)</code></p></td>
-     <td><p>ジオメトリAとBが少なくとも1つの共通点を持つ場合にTRUEを返す。これは最も一般的で広く使われている空間クエリである。</p></td>
+     <td><p>ジオメトリAとBが少なくとも1つの共通点を持つ場合にTRUEを返す。これは最も一般的で広く使われている空間クエリです。</p></td>
      <td><p>検索エリア(A)は店舗ロケーション(B)のいずれかと交差するか？</p></td>
    </tr>
    <tr>
@@ -75,7 +75,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">ST_TOUCHES(A, B)</code> /<code translate="no">st_touches(A, B)</code></p></td>
      <td><p>ジオメトリ A と B が共通の境界を共有しているが、内部が交差していない場合に TRUE を返す。</p></td>
-     <td><p>隣接する2つの敷地（AとB）は境界を共有しているか？</p></td>
+     <td><p>隣り合う2つの敷地（AとB）は境界を共有しているか？</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">ST_WITHIN(A, B)</code> /<code translate="no">st_within(A, B)</code></p></td>
@@ -231,7 +231,7 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">ST_WITHIN</code> 演算子は、1 番目のジオメトリが 2 番目のジオメトリの内部または境界に完全に含まれる場合、<code translate="no">TRUE</code> を返します。これは<code translate="no">ST_CONTAINS</code> の逆数です。</p>
 <p><strong>例</strong></p>
-<p>指定された大きな公園区域内にある小さな住宅地をすべて検索したい。</p>
+<p>指定された大きな公園領域内にある小さな住宅地をすべて検索したい。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that are completely within a larger polygon.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_WITHIN(geo_field, &#x27;POLYGON((110 38, 115 38, 115 42, 110 42, 110 38))&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

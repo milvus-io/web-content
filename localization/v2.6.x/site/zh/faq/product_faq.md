@@ -57,10 +57,10 @@ title: 产品常见问题
 <p>为避免这种情况，可尝试将<code translate="no">nprobe</code> 设置得大一些，将<code translate="no">nlist</code> 和<code translate="no">k</code> 设置得小一些。</p>
 <p>更多信息请参见<a href="/docs/zh/index.md">向量索引</a>。</p>
 <h4 id="What-is-the-maximum-vector-dimension-supported-in-Milvus" class="common-anchor-header">Milvus 支持的最大向量维度是多少？</h4><p>默认情况下，Milvus 最多可管理 32,768 维的向量。你可以增加<code translate="no">Proxy.maxDimension</code> 的值，以允许更大维度的向量。</p>
-<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus 是否支持苹果 M1 CPU？</h4><p>目前的 Milvus 版本不直接支持苹果 M1 CPU。Milvus 2.3 之后，Milvus 会提供 ARM64 架构的 Docker 镜像。</p>
+<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus 支持苹果 M1 CPU 吗？</h4><p>目前的 Milvus 版本不直接支持苹果 M1 CPU。Milvus 2.3 之后，Milvus 会提供 ARM64 架构的 Docker 镜像。</p>
 <h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvus 在主键字段上支持哪些数据类型？</h4><p>在当前版本中，Milvus 同时支持 INT64 和字符串。</p>
 <h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus 可以扩展吗？</h4><p>是的。您可以在 Kubernetes 上使用 Helm Chart 部署多节点的 Milvus 集群。更多说明请参阅《<a href="/docs/zh/scaleout.md">扩展指南》</a>。</p>
-<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什么是增长段和封存段？</h4><p>当有搜索请求时，Milvus 会同时搜索增量数据和历史数据。增量数据是最近更新的数据，它们存储在增长段中，在达到在对象存储中持久化的阈值之前在内存中缓冲，并为它们建立更高效的索引。历史数据是一段时间前的更新，它们位于已在对象存储中持久化的封存段中。增量数据和历史数据共同构成了整个搜索数据集。这种设计使任何数据输入 Milvus 后都能立即搜索。对于 Milvus Distributed 而言，有更复杂的因素来决定刚录入的记录何时可以显示在搜索结果中。在<a href="https://milvus.io/docs/consistency.md">一致性级别</a>了解更多细微差别。</p>
+<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什么是增长段和封存段？</h4><p>当有搜索请求时，Milvus 会同时搜索增量数据和历史数据。增量数据是最近更新的数据，它们存储在增长段中，在达到在对象存储中持久化的阈值之前在内存中缓冲，并为它们建立更高效的索引。历史数据是一段时间前的更新，它们位于已在对象存储中持久化的封存段中。增量数据和历史数据共同构成了整个搜索数据集。这种设计使任何输入到 Milvus 的数据都可以即时搜索。对于 Milvus Distributed 而言，有更复杂的因素来决定刚录入的记录何时可以显示在搜索结果中。在<a href="https://milvus.io/docs/consistency.md">一致性级别</a>了解更多细微差别。</p>
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvus 可用于并发搜索吗？</h4><p>是的。对于同一 Collections 的查询，Milvus 会同时搜索增量数据和历史数据。不过，对不同 Collection 的查询是串联进行的。历史数据可能是一个极其庞大的数据集，因此对历史数据的搜索相对更耗时，而且基本上是串联进行的。</p>
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">为什么相应的 Collections 被删除后，MinIO 中的数据仍会保留？</h4><p>MinIO 中的数据被设计为保留一段时间，以方便数据回滚。</p>
 <h4 id="Does-Milvus-support-message-engines-other-than-Pulsar" class="common-anchor-header">Milvus 是否支持 Pulsar 以外的消息引擎？</h4><p>支持。Milvus 2.1.0 支持 Kafka。</p>

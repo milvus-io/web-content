@@ -283,7 +283,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h3><p>是的，<code translate="no">GEOMETRY</code> 欄位支援 mmap。如需詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">使用 mmap</a>。</p>
-<h3 id="Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="common-anchor-header">我是否可以將 GEOMETRY 欄位定義為可為空或設定預設值？<button data-href="#Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="anchor-icon" translate="no">
+<h3 id="Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="common-anchor-header">我是否可以將 GEOMETRY 欄位定義為可空值或設定預設值？<button data-href="#Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

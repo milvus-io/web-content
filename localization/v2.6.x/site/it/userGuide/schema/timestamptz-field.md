@@ -193,7 +193,7 @@ client.insert(collection_name, data)
         ></path>
       </svg>
     </button></h3><p><code translate="no">TIMESTAMPTZ</code> supporta i confronti scalari, l'aritmetica degli intervalli e l'estrazione delle componenti temporali.</p>
-<p>Prima di poter eseguire operazioni di filtraggio sui campi di <code translate="no">TIMESTAMPTZ</code>, accertarsi che:</p>
+<p>Prima di poter eseguire operazioni di filtraggio sui campi di <code translate="no">TIMESTAMPTZ</code>, assicurarsi che:</p>
 <ul>
 <li><p>Sia stato creato un indice su ciascun campo vettoriale.</p></li>
 <li><p>L'insieme sia stato caricato in memoria.</p></li>

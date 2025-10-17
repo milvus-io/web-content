@@ -69,7 +69,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>풀로드 모드와 계층형 저장소 모드는 모두 동일한 데이터를 처리하지만, QueryNode가 이러한 구성 요소를 캐시하는 시기와 방법에서 차이가 있습니다.</p>
 <ul>
-<li><p><strong>풀로드 모드</strong>: 로드 시 QueryNode는 메타데이터, 필드 데이터, 인덱스를 포함한 전체 컬렉션 데이터를 오브젝트 스토리지에서 캐시합니다.</p></li>
+<li><p><strong>풀로드 모드</strong>: 로드 시 QueryNode는 메타데이터, 필드 데이터, 인덱스를 포함한 전체 컬렉션 데이터를 객체 스토리지에서 캐시합니다.</p></li>
 <li><p><strong>계층형 저장소 모드</strong>: 로드 시 QueryNode는 메타데이터만 캐시합니다. 필드 데이터는 청크 단위로 온디맨드 방식으로 가져옵니다. 인덱스 파일은 첫 번째 쿼리에서 필요할 때까지 원격으로 유지되며, 그 다음에는 전체 세그먼트별 인덱스가 가져와 캐시됩니다.</p></li>
 </ul>
 <p>아래 다이어그램은 이러한 차이점을 보여줍니다.</p>
@@ -321,7 +321,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>두 가지 일반적인 원인이 있습니다:</p>
 <ul>
 <li><p>쿼리 노드가 너무 적은 리소스로 구성되었습니다. 워터마크는 사용 가능한 리소스에 상대적이기 때문에 프로비저닝이 부족하면 잘못된 판단이 증폭됩니다.</p></li>
-<li><p>쿼리 노드 리소스가 다른 워크로드와 공유되므로 계층형 스토리지가 실제 사용 가능한 용량을 올바르게 평가할 수 없습니다.</p></li>
+<li><p>쿼리노드 리소스가 다른 워크로드와 공유되므로 계층형 스토리지가 실제 사용 가능한 용량을 올바르게 평가할 수 없습니다.</p></li>
 </ul>
 <h3 id="Why-do-some-queries-fail-under-high-concurrency" class="common-anchor-header">일부 쿼리가 높은 동시성에서 실패하는 이유는 무엇인가요?<button data-href="#Why-do-some-queries-fail-under-high-concurrency" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -338,7 +338,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>너무 많은 쿼리가 동시에 핫 데이터에 도달하는 경우, 쿼리 노드 리소스 제한이 여전히 초과될 수 있습니다. 리소스 예약 시간 초과로 인해 일부 스레드가 실패할 수 있습니다. 부하가 감소한 후 재시도하거나 리소스를 더 할당하면 이 문제를 해결할 수 있습니다.</p>
+    </button></h3><p>너무 많은 쿼리가 동시에 핫 데이터에 도달하는 경우, 쿼리 노드 리소스 제한을 초과할 수 있습니다. 리소스 예약 시간 초과로 인해 일부 스레드가 실패할 수 있습니다. 부하가 감소한 후 재시도하거나 리소스를 더 할당하면 이 문제를 해결할 수 있습니다.</p>
 <h3 id="Why-does-searchquery-latency-increase-after-enabling-Tiered-Storage" class="common-anchor-header">계층형 스토리지를 활성화한 후 검색/쿼리 지연 시간이 증가하는 이유는 무엇인가요?<button data-href="#Why-does-searchquery-latency-increase-after-enabling-Tiered-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

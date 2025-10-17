@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
 <li><p>다중 모드 검색: "이 지점에서 <strong>1km 이내에</strong> 있는 유사한 사진 검색"</p></li>
 <li><p>지도 및 물류: "한 지역 <strong>내의</strong> 자산" 또는 "경로와 <strong>교차하는</strong> 경로"</p></li>
 </ul>
-<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">지리 필드란 무엇인가요?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">지오메트리 필드란 무엇인가요?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,7 +120,7 @@ milvus_client.create_collection(collection_name, schema=schema, consistency_leve
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>지오메트리 데이터가 있는 엔티티를 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a> 형식으로 삽입합니다. 다음은 여러 지오포인트가 있는 예제입니다:</p>
+    </button></h3><p>지오메트리 데이터가 있는 엔티티를 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a> 형식으로 삽입합니다. 다음은 여러 지오포인트가 포함된 예제입니다:</p>
 <pre><code translate="no" class="language-python">rng = np.random.default_rng(seed=<span class="hljs-number">19530</span>)
 geo_points = [
     <span class="hljs-string">&#x27;POINT(13.399710 52.518010)&#x27;</span>,
@@ -219,7 +219,7 @@ result = milvus_client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;hit: <span class="hljs-subst">{hit}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-Accelerate-queries" class="common-anchor-header">다음: 쿼리 가속화<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
+<h2 id="Next-Accelerate-queries" class="common-anchor-header">다음 쿼리 가속화<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

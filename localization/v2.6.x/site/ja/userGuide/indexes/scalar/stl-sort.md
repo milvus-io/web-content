@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>数値フィールド（例：<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code> ）。詳細は「<a href="/docs/ja/number.md">Boolean &amp; Number</a>」を参照。</p></li>
+<li><p>数値フィールド（例：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> ）。詳細は「<a href="/docs/ja/number.md">Boolean &amp; Number</a>」を参照。</p></li>
 <li><p><code translate="no">TIMESTAMPTZ</code> フィールド。詳細は「<a href="/docs/ja/timestamptz-field.md">TIMESTAMPTZフィールド</a>」を参照。</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -59,11 +59,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは2つのフェーズで<code translate="no">STL_SORT</code> ：</p>
+    </button></h2><p>milvusは2つのフェーズで<code translate="no">STL_SORT</code> ：</p>
 <ol>
 <li><p><strong>インデックスの構築</strong></p>
 <ul>
-<li><p>インジェスト中、Milvusはインデックスされたフィールドのすべての値を収集します。</p></li>
+<li><p>インジェスト中、Milvusはインデックスされたフィールドの全ての値を収集します。</p></li>
 <li><p>値はC++ STLの<a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sortを</a>使用して昇順にソートされます。</p></li>
 <li><p>各値はエンティティIDと対にされ、ソートされた配列がインデックスとして永続化されます。</p></li>
 </ul></li>

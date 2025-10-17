@@ -48,7 +48,7 @@ beta: Milvus 2.6.4+
     </button></h2><p>حقل GEOMETRY هو نوع بيانات معرّف من قبل المخطط (<code translate="no">DataType.GEOMETRY</code>) في ميلفوس يقوم بتخزين البيانات الهندسية. عند العمل مع حقول الهندسة، فإنك تتفاعل مع البيانات باستخدام تنسيق <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">النص المعروف (WKT)</a> ، وهو تمثيل مقروء بشري يستخدم لإدراج البيانات والاستعلام عنها. داخليًا، تقوم Milvus بتحويل WKT إلى <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">ثنائي معروف (WKB)</a> للتخزين والمعالجة الفعالة، ولكنك لا تحتاج إلى التعامل مع WKB مباشرة.</p>
 <p>يدعم نوع البيانات <code translate="no">GEOMETRY</code> الكائنات الهندسية التالية:</p>
 <ul>
-<li><p><strong>النقطة</strong>: <code translate="no">POINT (x y)</code> ؛ على سبيل المثال، <code translate="no">POINT (13.403683 52.520711)</code> حيث <code translate="no">x</code> = خط الطول و <code translate="no">y</code> = خط العرض</p></li>
+<li><p><strong>نقطة</strong>: <code translate="no">POINT (x y)</code> ؛ على سبيل المثال، <code translate="no">POINT (13.403683 52.520711)</code> حيث <code translate="no">x</code> = خط الطول و <code translate="no">y</code> = خط العرض</p></li>
 <li><p><strong>LINESTRING</strong>: <code translate="no">LINESTRING (x1 y1, x2 y2, …)</code> ؛ على سبيل المثال, <code translate="no">LINESTRING (13.40 52.52, 13.41 52.51)</code></p></li>
 <li><p><strong>POLYGON</strong>: <code translate="no">POLYGON ((x1 y1, x2 y2, x3 y3, x1 y1))</code> ؛ على سبيل المثال, <code translate="no">POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))</code></p></li>
 <li><p><strong>MULTIPOINT</strong>: <code translate="no">MULTIPOINT ((x1 y1), (x2 y2), …)</code> ؛ على سبيل المثال, <code translate="no">MULTIPOINT ((10 40), (40 30), (20 20), (30 10))</code></p></li>
@@ -236,7 +236,7 @@ result = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بشكل افتراضي، ستؤدي الاستعلامات على حقول <code translate="no">GEOMETRY</code> بدون فهرس إلى إجراء مسح كامل لجميع الصفوف، وهو ما قد يكون بطيئًا في مجموعات البيانات الكبيرة. لتسريع الاستعلامات الهندسية، قم بإنشاء فهرس <code translate="no">RTREE</code> على حقل GEOMETRY الخاص بك.</p>
+    </button></h2><p>بشكل افتراضي، ستؤدي الاستعلامات على حقول <code translate="no">GEOMETRY</code> بدون فهرس إلى إجراء مسح كامل لجميع الصفوف، وهو ما قد يكون بطيئًا في مجموعات البيانات الكبيرة. لتسريع الاستعلامات الهندسية، قم بإنشاء فهرس <code translate="no">RTREE</code> على حقل GEOMETRY.</p>
 <p>لمزيد من التفاصيل، راجع <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

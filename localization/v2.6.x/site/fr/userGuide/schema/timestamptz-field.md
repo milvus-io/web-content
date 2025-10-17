@@ -287,7 +287,7 @@ results = client.query(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">INTERVAL</code> suivent la <a href="https://www.w3.org/TR/xmlschema-2/#duration">syntaxe de durée ISO 8601</a>. Par exemple, les valeurs cURL suivent la syntaxe de durée ISO 8601 :</p>
+<p><code translate="no">INTERVAL</code> suivent la <a href="https://www.w3.org/TR/xmlschema-2/#duration">syntaxe de durée ISO 8601</a>. Par exemple :</p>
 <ul>
 <li><p><code translate="no">P1D</code> → 1 jour</p></li>
 <li><p><code translate="no">PT3H</code> → 3 heures</p></li>
@@ -373,7 +373,7 @@ results = client.query(
 <li><p>Le résultat est renvoyé sous la forme d'un tableau de composants extraits (par exemple, <code translate="no">[2024, 12, 31]</code>).</p></li>
 </ul>
 </div>
-<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Recherche avec filtrage par horodatage</h4><p>Vous pouvez combiner le filtrage <code translate="no">TIMESTAMPTZ</code> avec la recherche de similarité vectorielle pour limiter les résultats à la fois en fonction du temps et de la similarité.</p>
+<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Recherche avec filtrage par horodatage</h4><p>Vous pouvez combiner le filtrage <code translate="no">TIMESTAMPTZ</code> avec la recherche de similarité vectorielle pour restreindre les résultats à la fois en fonction du temps et de la similarité.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define a time-based filter expression</span>
@@ -484,5 +484,5 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Par défaut, les requêtes sur les champs <code translate="no">TIMESTAMPTZ</code> sans index effectueront un balayage complet de toutes les lignes, ce qui peut être lent sur les grands ensembles de données. Pour accélérer les requêtes d'horodatage, créez un index <code translate="no">STL_SORT</code> sur votre champ <code translate="no">TIMESTAMPTZ</code>.</p>
+    </button></h3><p>Par défaut, les requêtes sur les champs <code translate="no">TIMESTAMPTZ</code> sans index effectuent un balayage complet de toutes les lignes, ce qui peut être lent sur les grands ensembles de données. Pour accélérer les requêtes d'horodatage, créez un index <code translate="no">STL_SORT</code> sur votre champ <code translate="no">TIMESTAMPTZ</code>.</p>
 <p>Pour plus d'informations, reportez-vous à <a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT</a>.</p>
