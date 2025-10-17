@@ -68,7 +68,7 @@ client.create_index(
 
 You filter with geometry operators in the `filter` expression. When an `RTREE` exists on the target `GEOMETRY` field, Milvus uses it to prune candidates automatically. Without the index, the filter falls back to a full scan.
 
-For a full list of available geometry-specific operators, refer to [Geometry Operators](https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf).
+For a full list of available geometry-specific operators, refer to [Geometry Operators](geometry-operators.md).
 
 ### Example 1: Filter only
 
@@ -106,3 +106,22 @@ print(hits)  # Expected: top-k by vector similarity among rows whose geo interse
 ```
 
 For more information on how to use a `GEOMETRY` field, refer to [Geometry Field](geometry-field.md).
+
+## Drop an index
+
+Use the `drop_index()` method to remove an existing index from a collection.
+
+<div class="alert note">
+
+- In **v2.6.3** or earlier, you must release the collection before dropping an index.
+
+- From **v2.6.4** or later, you can drop an index directly once it’s no longer needed—no need to release the collection first.
+
+</div>
+
+```python
+client.drop_index(
+    collection_name="geo_demo",   # Name of the collection
+    index_name="rtree_geo" # Name of the index to drop
+)
+```

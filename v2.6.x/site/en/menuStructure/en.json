@@ -787,6 +787,12 @@
                 "id": "scann.md",
                 "order": 10,
                 "children": []
+              },
+              {
+                "label": "AISAQ",
+                "id": "aisaq.md",
+                "order": 11,
+                "children": []
               }
             ]
           },

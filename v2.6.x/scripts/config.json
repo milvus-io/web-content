@@ -494,6 +494,16 @@
                         "token": "PATjwyoKzhPELnb14kBcnAEAnGv",
                         "type": "board",
                         "alt_text": "dataset-model"
+                    },
+                    {
+                        "token": "S5cHwsXsPhOLfQb3Tatc4jqAn9e",
+                        "type": "board",
+                        "alt_text": "bitmap"
+                    },
+                    {
+                        "token": "F4IVwmrXPh7HujbBSXlcw98HnNf",
+                        "type": "board",
+                        "alt_text": "aisaq-vs-diskann"
                     }
                 ]
             }

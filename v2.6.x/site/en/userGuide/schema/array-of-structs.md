@@ -53,20 +53,8 @@ In the example above, the `chunks` field is an Array of Structs field, and each 
          <th><p>Data Type</p></th>
        </tr>
        <tr>
-         <td rowspan="5"><p>Vector</p></td>
+         <td><p>Vector</p></td>
          <td><p><code>FLOAT_VECTOR</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>FLOAT16_VECTOR</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>BFLOAT16_VECTOR</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>INT8_VECTOR</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>BINARY_VECTOR</code></p></td>
        </tr>
        <tr>
          <td rowspan="5"><p>Scalar</p></td>
@@ -686,5 +674,5 @@ In the above code example, `embeddingList1` is an embedding list of one vector, 
 
 ## Next steps
 
-The development of a native Array of Structs data type represents a major advancement in Milvus's capability to handle complex data structures. To better understand its use cases and maximize this new feature, you are encouraged to read [Schema Design Using an Array of Structs](https://zilliverse.feishu.cn/wiki/VOkIwd5adiziGQkoDO1cRoRFnre).
+The development of a native Array of Structs data type represents a major advancement in Milvus's capability to handle complex data structures. To better understand its use cases and maximize this new feature, you are encouraged to read [Schema Design Using an Array of Structs](best-practices-for-array-of-structs.md).
 

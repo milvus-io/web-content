@@ -434,6 +434,12 @@ The following code example demonstrates how to upsert entities with partial upda
 
 In the following example, the `issue` field of the entities specified in the upsert request will be updated to the values included in the request.
 
+<div class="alert note">
+
+When performing an upsert in merge mode, ensure that the entities involved in the request have the same set of fields. Suppose there are two or more entities to be upserted, as shown in the following code snippet, it is important that they include identical fields to prevent errors and maintain data integrity.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -445,11 +451,11 @@ In the following example, the `issue` field of the entities specified in the ups
 ```python
 data=[
     {
-        "id": 3,
+        "id": 1,
         "issue": "vol.14"
     },
     {
-        "id": 12, 
+        "id": 2, 
         "issue": "vol.7"
     }
 ]
@@ -468,11 +474,11 @@ print(res)
 
 ```java
 JsonObject row1 = new JsonObject();
-row1.addProperty("id", 3);
+row1.addProperty("id", 1);
 row1.addProperty("issue", "vol.14");
 
 JsonObject row2 = new JsonObject();
-row2.addProperty("id", 12);
+row2.addProperty("id", 2);
 row2.addProperty("issue", "vol.7");
 
 UpsertReq upsertReq = UpsertReq.builder()
@@ -490,7 +496,7 @@ System.out.println(upsertResp);
 ```
 
 ```go
-pkColumn := column.NewColumnInt64("id", []int64{3, 12})
+pkColumn := column.NewColumnInt64("id", []int64{1, 2})
 issueColumn = column.NewColumnString("issue", []string{
     "vol.17", "vol.7",
 })
@@ -508,11 +514,11 @@ if err != nil {
 ```javascript
 const data=[
     {
-        "id": 3,
+        "id": 1,
         "issue": "vol.14"
     },
     {
-        "id": 12, 
+        "id": 2, 
         "issue": "vol.7"
     }
 ];
@@ -535,18 +541,26 @@ console.log(res)
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:Milvus"
 
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/upsert" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "data": [
-        {"id": 3, "issue": "vol.14"},
-        {"id": 12, "issue": "vol.7"}
-    ],
-    "collectionName": "my_collection",
-    "partialUpdate": true
-}'
+export COLLECTION_NAME="my_collection"
+export UPSERT_DATA='[
+  {
+    "id": 1,
+    "issue": "vol.14"
+  },
+  {
+    "id": 2,
+    "issue": "vol.7"
+  }
+]'
+
+curl -X POST "http://localhost:19530/v2/vectordb/entities/upsert" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer ${TOKEN}" \
+  -d "{
+    \"collectionName\": \"${COLLECTION_NAME}\",
+    \"data\": ${UPSERT_DATA},
+    \"partialUpdate\": true
+  }"
 
 # {
 #     "code": 0,

@@ -68,6 +68,32 @@ In this configuration:
 
 - `params`: Additional configuration options for searching on the index. To learn more search parameters available for the `GPU_CAGRA` index, refer to [Index-specific search params](gpu-cagra.md#Index-specific-search-params).
 
+## Enable CPU search at load time | Milvus 2.6.4+
+
+To enable CPU search dynamically at load time, edit the following config in `milvus.yaml`:
+
+```yaml
+# milvus.yaml
+knowhere:
+  GPU_CAGRA:
+    load: 
+      adapt_for_cpu: true
+```
+
+**Behavior**
+
+- When `load.adapt_for_cpu` is set to `true`, Milvus converts the **GPU_CAGRA** index into a CPU-executable format (HNSW-like) during load.
+
+- Subsequent search operations are executed on CPU, even if the index was originally built for GPU.
+
+- If omitted or false, the index stays on GPU and searches run on GPU.
+
+<div class="alert note">
+
+Use load-time CPU adaptation in hybrid or cost-sensitive environments where GPU resources are reserved for index building but searches run on CPU.
+
+</div>
+
 ## Index params
 
 This section provides an overview of the parameters used for building an index and performing searches on the index.

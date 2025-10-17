@@ -1,31 +1,87 @@
 ---
 id: primary-field.md
 title: "Primary Field & AutoID"
-summary: "The primary field uniquely identifies an entity. This page introduces how to add the primary field of two different data types and how to enable Milvus to automatically allocate primary field values."
+summary: "Every collection in Milvus must have a primary field to uniquely identify each entity. This field ensures that every entity can be inserted, updated, queried, or deleted without ambiguity."
 ---
 
 # Primary Field & AutoID
 
-The primary field uniquely identifies an entity. This page introduces how to add the primary field of two different data types and how to enable Milvus to automatically allocate primary field values.
+Every collection in Milvus must have a primary field to uniquely identify each entity. This field ensures that every entity can be inserted, updated, queried, or deleted without ambiguity.
 
-## Overview
+Depending on your use case, you can either let Milvus automatically generate IDs (AutoID) or assign your own IDs manually.
 
-In a collection, the primary key of each entity should be globally unique. When adding the primary field, you need to explicitly set its data type to **VARCHAR** or **INT64**. Setting its data type to **INT64** indicates that the primary keys should be an integer similar to `12345`; Setting its data type to **VARCHAR** indicates that the primary keys should be a string similar to `my_entity_1234`.
+## What is a primary field?
 
-You can also enable **AutoID** to make Milvus automatically allocate primary keys for incoming entities. Once you have enabled **AutoID** in your collection, do not include primary keys when inserting entities.
+A primary field acts as the unique key for each entity in a collection, similar to a primary key in a traditional database. Milvus uses the primary field to manage entities during insert, upsert, delete, and query operations.
 
-The primary field in a collection does not have a default value and cannot be null.
+Key requirements:
+
+- Each collection must have **exactly one** primary field.
+
+- Primary field values cannot be null or duplicated.
+
+- The data type must be specified at creation and cannot be changed later.
 
 <div class="alert note">
 
-- A standard `insert` operation with a primary key that already exists in the collection will not overwrite the old entry. Instead, it will create a new, separate entity with the same primary key. This can lead to unexpected search results and data redundancy.
-- If your use case involves updating existing data or you suspect that the data you are inserting may already exist, it is highly recommended to use the upsert operation. The upsert operation will intelligently update the entity if the primary key exists, or insert a new one if it does not. For more details, refer to [Upsert Entities](upsert-entities.md).
+The primary field is always defined as part of the collection schema. You cannot modify or remove it after creation.
 
 </div>
 
-## Use Int64 Primary Keys
+## Supported data types
 
-To use primary keys of the Int64 type, you need to set `datatype` to `DataType.INT64` and set `is_primary` to `true`. If you also need Milvus to allocate the primary keys for the incoming entities, also set `auto_id` to `true`.
+The primary field must use a supported scalar data type that can uniquely identify entities.
+
+<table>
+   <tr>
+     <th><p>Data Type</p></th>
+     <th><p>Description</p></th>
+   </tr>
+   <tr>
+     <td><p><code>INT64</code></p></td>
+     <td><p>64-bit integer type, commonly used with AutoID. This is the recommended option for most use cases.</p></td>
+   </tr>
+   <tr>
+     <td><p><code>VARCHAR</code></p></td>
+     <td><p>Variable-length string type. Use this when entity identifiers come from external systems (for example, product codes or user IDs). Requires the <code>max_length</code> property to define the maximum number of bytes allowed per value.</p></td>
+   </tr>
+</table>
+
+## Choose between AutoID and Manual IDs
+
+Milvus supports two modes for assigning primary key values.
+
+<table>
+   <tr>
+     <th><p>Mode</p></th>
+     <th><p>Description</p></th>
+     <th><p>Recommended For</p></th>
+   </tr>
+   <tr>
+     <td><p>AutoID</p></td>
+     <td><p>Milvus automatically generates unique identifiers for inserted or imported entities.</p></td>
+     <td><p>Most scenarios where you don’t need to manage IDs manually.</p></td>
+   </tr>
+   <tr>
+     <td><p>Manual ID</p></td>
+     <td><p>You provide unique IDs yourself when inserting or importing data.</p></td>
+     <td><p>When IDs must align with external systems or pre-existing datasets.</p></td>
+   </tr>
+</table>
+
+<div class="alert note">
+
+If you are unsure which mode to choose, [start with AutoID](primary-field.md#Quickstart-Use-AutoID) for simpler ingestion and guaranteed uniqueness.
+
+</div>
+
+## Quickstart: Use AutoID
+
+You can let Milvus handle ID generation automatically.
+
+### Step 1: Create a collection with AutoID
+
+Enable `auto_id=True` in your primary field definition. Milvus will handle ID generation automatically.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -38,79 +94,49 @@ To use primary keys of the Int64 type, you need to set `datatype` to `DataType.I
 ```python
 from pymilvus import MilvusClient, DataType
 
-schema = MilvusClient.create_schema()
+client = MilvusClient(uri="http://localhost:19530")
 
+schema = client.create_schema()
+
+# Define primary field with AutoID enabled
+# highlight-start
 schema.add_field(
-    field_name="my_id",
-    datatype=DataType.INT64,
-    # highlight-start
+    field_name="id", # Primary field name
     is_primary=True,
-    auto_id=True,
-    # highlight-end
+    auto_id=True,  # Milvus generates IDs automatically; Defaults to False
+    datatype=DataType.INT64
 )
+# highlight-end
+
+# Define the other fields
+schema.add_field(field_name="embedding", datatype=DataType.FLOAT_VECTOR, dim=4) # Vector field
+schema.add_field(field_name="category", datatype=DataType.VARCHAR, max_length=1000) # Scalar field of the VARCHAR type
+
+# Create the collection
+if client.has_collection("demo_autoid"):
+    client.drop_collection("demo_autoid")
+client.create_collection(collection_name="demo_autoid", schema=schema)
 ```
 
 ```java
-import io.milvus.v2.common.DataType;
-import io.milvus.v2.service.collection.request.AddFieldReq; 
-import io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-CreateCollectionReq.CollectionSchema schema = client.createSchema();
-
-schema.addField(AddFieldReq.builder()
-        .fieldName("my_id")
-        .dataType(DataType.Int64)
-        // highlight-start
-        .isPrimaryKey(true)
-        .autoID(true)
-        // highlight-end
-        .build());
-);
+// java
 ```
 
 ```javascript
-import { DataType } from "@zilliz/milvus2-sdk-node";
-
-const schema = [
-  {
-    name: "pk",
-    description: "ID field",
-    data_type: DataType.INT64,
-    is_primary_key: true,
-    max_length: 100,
-  },
-];
+// nodejs
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
-
-schema := entity.NewSchema()
-schema.WithField(entity.NewField().WithName("my_id").
-    WithDataType(entity.FieldTypeInt64).
-    WithIsPrimaryKey(true).
-    WithIsAutoID(true),
-)
+// go
 ```
 
 ```bash
-export primaryField='{
-    "fieldName": "my_id",
-    "dataType": "Int64",
-    "isPrimary": true
-}'
-
-export schema="{
-    \"autoID\": true,
-    \"fields\": [
-        $primaryField
-    ]
-}"
+# restful
 ```
 
-## Use VarChar Primary Keys
+### Step 2: Insert Data
 
-To use VarChar primary keys, in addition to changing the value of the `data_type` parameter to `DataType.VARCHAR`, you also need to set the `max_length` parameter for the field. 
+**Important:** Do not include the primary field column in your data. Milvus generates IDs automatically.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -121,68 +147,211 @@ To use VarChar primary keys, in addition to changing the value of the `data_type
 </div>
 
 ```python
-schema.add_field(
-    field_name="my_id",
-    datatype=DataType.VARCHAR,
-    # highlight-start
-    is_primary=True,
-    auto_id=True,
-    max_length=512,
-    # highlight-end
-)
+data = [
+    {"embedding": [0.1, 0.2, 0.3, 0.4], "category": "book"},
+    {"embedding": [0.2, 0.3, 0.4, 0.5], "category": "toy"},
+]
+
+res = client.insert(collection_name="demo_autoid", data=data)
+print("Generated IDs:", res.get("ids"))
+
+# Output example:
+# Generated IDs: [461526052788333649, 461526052788333650]
 ```
 
 ```java
-schema.addField(AddFieldReq.builder()
-        .fieldName("my_id")
-        .dataType(DataType.VarChar)
-        // highlight-start
-        .isPrimaryKey(true)
-        .autoID(true)
-        .maxLength(512)
-        // highlight-end
-        .build());
+// java
 ```
 
 ```javascript
-schema.push({
-    name: "my_id",
-    data_type: DataType.VarChar,
-    // highlight-start
-    is_primary_key: true,
-    autoID: true,
-    maxLength: 512
-    // highlight-end
-});
+// nodejs
 ```
 
 ```go
-schema := entity.NewSchema()
-schema.WithField(entity.NewField().WithName("my_id").
-    WithDataType(entity.FieldTypeVarChar).
-    // highlight-start
-    WithIsPrimaryKey(true).
-    WithIsAutoID(true).
-    WithMaxLength(512),
-    // highlight-end
-)
+// go
 ```
 
 ```bash
-export primaryField='{
-    "fieldName": "my_id",
-    "dataType": "VarChar",
-    "isPrimary": true
-}'
-
-export schema="{
-    \"autoID\": true,
-    \"fields\": [
-        $primaryField
-    ],
-    \"params\": {
-        \"max_length\": 512
-    }
-}"
+# restful
 ```
+
+<div class="alert note">
+
+Use `upsert()` instead of `insert()` when working with existing entities to avoid duplicate ID errors.
+
+</div>
+
+## Use manual IDs
+
+If you need to control IDs manually, disable AutoID and provide your own values.
+
+### Step 1: Create a collection without AutoID
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import MilvusClient, DataType
+
+client = MilvusClient(uri="http://localhost:19530")
+
+schema = client.create_schema()
+
+# Define the primary field without AutoID
+# highlight-start
+schema.add_field(
+    field_name="product_id",
+    is_primary=True,
+    auto_id=False,  # You'll provide IDs manually at data ingestion
+    datatype=DataType.VARCHAR,
+    max_length=100 # Required when datatype is VARCHAR
+)
+# highlight-end
+
+# Define the other fields
+schema.add_field(field_name="embedding", datatype=DataType.FLOAT_VECTOR, dim=4) # Vector field
+schema.add_field(field_name="category", datatype=DataType.VARCHAR, max_length=1000) # Scalar field of the VARCHAR type
+
+# Create the collection
+if client.has_collection("demo_manual_ids"):
+    client.drop_collection("demo_manual_ids")
+client.create_collection(collection_name="demo_manual_ids", schema=schema)
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+### Step 2: Insert data with your IDs
+
+You must include the primary field column in every insert operation.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Each entity must contain the primary field `product_id`
+data = [
+    {"product_id": "PROD-001", "embedding": [0.1, 0.2, 0.3, 0.4], "category": "book"},
+    {"product_id": "PROD-002", "embedding": [0.2, 0.3, 0.4, 0.5], "category": "toy"},
+]
+
+res = client.insert(collection_name="demo_manual_ids", data=data)
+print("Generated IDs:", res.get("ids"))
+
+# Output example:
+# Generated IDs: ['PROD-001', 'PROD-002']
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+Your responsibilities:
+
+- Ensure all IDs are unique across all entities
+
+- Include the primary field in every insert/import operation
+
+- Handle ID conflicts and duplicate detection yourself
+
+## Advanced usage
+
+### Migrate data with existing AutoIDs
+
+To preserve existing IDs during data migration, enable the `allow_insert_auto_id` property by making the `alter_collection_properties` call. When set to true, Milvus accepts user-provided IDs even if AutoID is enabled.
+
+For configuration details, refer to [Modify Collection](modify-collection.md#Example-5-Enable-allowinsertautoid).
+
+### Ensure global AutoID uniqueness across clusters
+
+When running multiple Milvus clusters, configure a unique cluster ID for each to ensure AutoIDs never overlap.
+
+**Configuration:** Edit the `common.clusterID` config in `milvus.yaml` before initializing your cluster:
+
+```yaml
+common:
+  clusterID: 3   # Must be unique across all clusters (Range: 0-7)
+```
+
+In this config, `clusterID` specifies the unique identifier used in AutoID generation, ranging from 0 to 7 (supports up to eight clusters).
+
+<div class="alert note">
+
+Milvus handles bit-reversal internally to enable future expansion without ID overlap. No manual configuration needed beyond setting the cluster ID.
+
+</div>
+
+## Reference: How AutoID works
+
+Understanding how AutoID generates unique identifiers internally can help you [configure cluster IDs](primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters) correctly and troubleshoot ID-related issues.
+
+AutoID uses a structured 64-bit format to guarantee uniqueness:
+
+```plaintext
+[sign_bit][cluster_id][physical_ts][logical_ts]
+```
+
+<table>
+   <tr>
+     <th><p>Segment</p></th>
+     <th><p>Description</p></th>
+   </tr>
+   <tr>
+     <td><p><code>sign_bit</code></p></td>
+     <td><p>Reserved for internal use</p></td>
+   </tr>
+   <tr>
+     <td><p><code>cluster_id</code></p></td>
+     <td><p>Identifies which cluster generated the ID (value range: 0-7)</p></td>
+   </tr>
+   <tr>
+     <td><p><code>physical_ts</code></p></td>
+     <td><p>Timestamp in milliseconds when the ID was generated</p></td>
+   </tr>
+   <tr>
+     <td><p><code>logical_ts</code></p></td>
+     <td><p>Counter to distinguish IDs created in the same millisecond</p></td>
+   </tr>
+</table>
+
+<div class="alert note">
+
+Even when AutoID is enabled with `VARCHAR` as the data type, Milvus still generates numeric IDs. These are stored as numeric strings with a maximum length of 20 characters (uint64 range).
+
+</div>
 

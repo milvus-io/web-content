@@ -178,7 +178,7 @@ In this example:
 
 - Milvus generates substrings of length 2 to 4 and stores them in the inverted index.
 
-For more information on how to index a JSON field, refer to [JSON Field](use-json-fields.md).
+For more information on how to index a JSON field, refer to [JSON Indexing](json-indexing.md).
 
 ## Queries accelerated by NGRAM
 
@@ -228,6 +228,25 @@ Supported query types:
     ```
 
 For more information on filter expression syntax, refer to [Basic Operators](basic-operators.md).
+
+## Drop an index
+
+Use the `drop_index()` method to remove an existing index from a collection.
+
+<div class="alert note">
+
+- In **v2.6.3** or earlier, you must release the collection before dropping an index.
+
+- From **v2.6.4** or later, you can drop an index directly once it’s no longer needed—no need to release the collection first.
+
+</div>
+
+```python
+client.drop_index(
+    collection_name="Documents",   # Name of the collection
+    index_name="ngram_index" # Name of the index to drop
+)
+```
 
 ## Usage notes
 

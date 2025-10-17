@@ -99,7 +99,26 @@ client.create_index(
 )
 ```
 
-For detailed information about JSON field indexing, including supported paths, data types, and limitations, refer to [JSON Field](use-json-fields.md).
+For detailed information about JSON field indexing, including supported paths, data types, and limitations, refer to [JSON Indexing](json-indexing.md).
+
+## Drop an index
+
+Use the `drop_index()` method to remove an existing index from a collection.
+
+<div class="alert note">
+
+- In **v2.6.3** or earlier, you must release the collection before dropping an index.
+
+- From **v2.6.4** or later, you can drop an index directly once it’s no longer needed—no need to release the collection first.
+
+</div>
+
+```python
+client.drop_index(
+    collection_name="my_collection",   # Name of the collection
+    index_name="category_index" # Name of the index to drop
+)
+```
 
 ## Best practices
 
@@ -115,5 +134,5 @@ For detailed information about JSON field indexing, including supported paths, d
 
 - Learn about [other index types](index-explained.md)
 
-- See [JSON field indexing](use-json-fields.md#Index-values-inside-the-JSON-field) for advanced JSON indexing scenarios
+- See [JSON Indexing](json-indexing.md) for advanced JSON indexing scenarios
 

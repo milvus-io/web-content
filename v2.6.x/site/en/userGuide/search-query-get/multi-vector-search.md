@@ -34,7 +34,7 @@ The process of creating a collection involves three key steps: defining the coll
 
 ### Define schema
 
-For multi-vector hybrid search, we should define multiple vector fields within a collection schema. However, if necessary, you can adjust the [`proxy.maxVectorFieldNum`](configure_proxy.md#proxymaxVectorFieldNum) to include up to 10 vector fields in a collection as needed.
+For multi-vector hybrid search, we should define multiple vector fields within a collection schema. For details about the limits on the number of vector fields allowed in a collection, see [Zilliz Cloud Limits](https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f).  However, if necessary, you can adjust the [`proxy.maxVectorFieldNum`](configure_proxy.md#proxymaxVectorFieldNum) to include up to 10 vector fields in a collection as needed.
 
 This example incorporates the following fields into the schema:
 
