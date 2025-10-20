@@ -71,7 +71,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>컬렉션을 만드는 과정에는 컬렉션 스키마 정의, 인덱스 매개변수 구성, 컬렉션 생성의 세 가지 주요 단계가 포함됩니다.</p>
-<h3 id="Define-schema" class="common-anchor-header">스키마 정의</h3><p>다중 벡터 하이브리드 검색의 경우, 컬렉션 스키마 내에 여러 개의 벡터 필드를 정의해야 합니다. 기본적으로 각 컬렉션은 최대 4개의 벡터 필드를 수용할 수 있습니다. 그러나 필요한 경우 필요에 따라 컬렉션에 최대 10개의 벡터 필드를 포함하도록 <code translate="no">proxy.maxVectorFieldNum</code> 을 조정할 수 있습니다.</p>
+<h3 id="Define-schema" class="common-anchor-header">스키마 정의<button data-href="#Define-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다중 벡터 하이브리드 검색의 경우, 컬렉션 스키마 내에 여러 개의 벡터 필드를 정의해야 합니다. 기본적으로 각 컬렉션은 최대 4개의 벡터 필드를 수용할 수 있습니다. 그러나 필요한 경우 필요에 따라 컬렉션에 최대 10개의 벡터 필드를 포함하도록 <code translate="no">proxy.maxVectorFieldNum</code> 을 조정할 수 있습니다.</p>
 <p>이 예에서는 다음 필드를 스키마에 통합합니다:</p>
 <ul>
 <li><p><code translate="no">id</code>: 텍스트 ID를 저장하는 기본 키 역할을 합니다. 이 필드의 데이터 유형은 <code translate="no">INT64</code> 입니다.</p></li>
@@ -313,7 +328,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">색인 생성</h3><div class="multipleCode">
+<h3 id="Create-index" class="common-anchor-header">색인 생성<button data-href="#Create-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -427,7 +457,22 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기</h3><p>앞의 두 단계에서 구성한 컬렉션 스키마와 인덱스를 사용하여 <code translate="no">demo</code> 이라는 이름의 컬렉션을 생성합니다.</p>
+<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>앞의 두 단계에서 구성한 컬렉션 스키마와 인덱스를 사용하여 <code translate="no">demo</code> 이라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -621,7 +666,22 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">여러 개의 AnnSearchRequest 인스턴스 생성하기</h3><p>하이브리드 검색은 <code translate="no">hybrid_search()</code> 함수에 <code translate="no">AnnSearchRequest</code> 을 여러 개 생성하여 구현되며, 각 <code translate="no">AnnSearchRequest</code> 은 특정 벡터 필드에 대한 기본 ANN 검색 요청을 나타냅니다. 따라서 하이브리드 검색을 수행하기 전에 각 벡터 필드에 대해 <code translate="no">AnnSearchRequest</code> 을 생성해야 합니다.</p>
+    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">여러 개의 AnnSearchRequest 인스턴스 생성하기<button data-href="#Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>하이브리드 검색은 <code translate="no">hybrid_search()</code> 함수에 <code translate="no">AnnSearchRequest</code> 을 여러 개 생성하여 구현되며, 각 <code translate="no">AnnSearchRequest</code> 은 특정 벡터 필드에 대한 기본 ANN 검색 요청을 나타냅니다. 따라서 하이브리드 검색을 수행하기 전에 각 벡터 필드에 대해 <code translate="no">AnnSearchRequest</code> 을 생성해야 합니다.</p>
 <p>또한 <code translate="no">AnnSearchRequest</code> 에서 <code translate="no">expr</code> 파라미터를 구성하여 하이브리드 검색의 필터링 조건을 설정할 수 있습니다. <a href="/docs/ko/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/boolean.md">필터링을</a> 참조하세요.</p>
 <div class="alert note">
 <p>하이브리드 검색에서 각 <code translate="no">AnnSearchRequest</code> 은 하나의 쿼리 데이터만 지원합니다.</p>
@@ -765,7 +825,22 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">limit</code> 매개 변수가 2로 설정되어 있으면 <code translate="no">AnnSearchRequest</code> 각각 2개의 검색 결과를 반환합니다. 이 예에서는 3개의 <code translate="no">AnnSearchRequest</code> 인스턴스가 생성되어 총 6개의 검색 결과가 생성됩니다.</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">순위 재조정 전략 구성</h3><p>ANN 검색 결과 집합을 병합하고 재랭크하려면 적절한 재랭크 전략을 선택하는 것이 필수적입니다. 밀버스는 두 가지 유형의 재랭크 전략을 제공합니다:</p>
+<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">순위 재조정 전략 구성<button data-href="#Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ANN 검색 결과 집합을 병합하고 재랭크하려면 적절한 재랭크 전략을 선택하는 것이 필수적입니다. 밀버스는 두 가지 유형의 재랭크 전략을 제공합니다:</p>
 <ul>
 <li><p><strong>가중 순위</strong>: 결과에서 특정 벡터 필드를 강조해야 하는 경우 이 전략을 사용합니다. 가중랭커를 사용하면 특정 벡터 필드에 더 큰 가중치를 할당하여 더 눈에 띄게 강조할 수 있습니다.</p></li>
 <li><p><strong>RRFRanker(상호 순위 융합 랭커)</strong>: 특별히 강조할 필요가 없는 경우 이 전략을 선택하세요. RRFRanker는 각 벡터 필드의 중요도를 효과적으로 균형 있게 조정합니다.</p></li>
@@ -778,10 +853,9 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 
 ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
 
-<span class="hljs-type">BaseRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);
+<span class="hljs-type">RRFRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> RRFRanker.builder().k(<span class="hljs-number">100</span>).build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -794,7 +868,22 @@ ranker = RRFRanker(<span class="hljs-number">100</span>)
         &quot;params&quot;: { &quot;k&quot;: 100}
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">하이브리드 검색 수행</h3><p>하이브리드 검색을 시작하기 전에 컬렉션이 로드되었는지 확인합니다. 컬렉션 내의 벡터 필드에 인덱스가 없거나 메모리에 로드되지 않은 경우 하이브리드 검색 메서드를 실행할 때 오류가 발생합니다.</p>
+<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">하이브리드 검색 수행<button data-href="#Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>하이브리드 검색을 시작하기 전에 컬렉션이 로드되었는지 확인합니다. 컬렉션 내의 벡터 필드에 인덱스가 없거나 메모리에 로드되지 않은 경우 하이브리드 검색 메서드를 실행할 때 오류가 발생합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

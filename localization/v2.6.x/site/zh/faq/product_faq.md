@@ -21,8 +21,8 @@ title: 产品常见问题
     </button></h1><h4 id="How-much-does-Milvus-cost" class="common-anchor-header">Milvus 的成本是多少？</h4><p>Milvus 是一个 100% 免费的开源项目。</p>
 <p>在使用 Milvus 进行生产或发布时，请遵守<a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>。</p>
 <p>Milvus 背后的公司 Zilliz 还为那些不想构建和维护自己的分布式实例的用户提供完全托管的云版平台。<a href="https://zilliz.com/cloud">Zilliz Cloud</a>可自动维护数据的可靠性，并允许用户只为其使用付费。</p>
-<h4 id="Does-Milvus-support-non-x86-architectures" class="common-anchor-header">Milvus 支持非 x86 架构吗？</h4><p>Milvus不能在非x86平台上安装或运行。</p>
-<p>您的 CPU 必须支持以下指令集之一才能运行 Milvus：SSE4.2、AVX、AVX2、AVX512。这些都是 x86 专用 SIMD 指令集。</p>
+<h4 id="Does-Milvus-support-non-x86-architectures" class="common-anchor-header">Milvus 支持非 x86 架构吗？</h4><p>是的，Milvus 支持 x86 和 ARM 架构。ARM64 支持通过多种部署选项提供，包括 Docker 映像、RPM/DEB 包和 Milvus Lite。</p>
+<p>对于 x86 平台，您的 CPU 应支持以下指令集之一，以获得最佳性能：SSE4.2、AVX、AVX2、AVX512。对于 ARM 平台，Milvus 可在基于 ARM64 的处理器上运行，包括苹果 M1/M2 芯片和其他 ARM64 系统。</p>
 <h4 id="Where-does-Milvus-store-data" class="common-anchor-header">Milvus 在哪里存储数据？</h4><p>Milvus 处理两种类型的数据：插入数据和元数据。</p>
 <p>插入数据（包括向量数据、标量数据和特定于 Collections 的 Schema）以增量日志的形式存储在持久存储中。Milvus 支持多种对象存储后端，包括<a href="https://min.io/">MinIO</a>、<a href="https://aws.amazon.com/s3/?nc1=h_ls">AWS S3</a>、<a href="https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes">谷歌云存储</a>（GCS）、<a href="https://azure.microsoft.com/en-us/products/storage/blobs">Azure Blob 存储</a>、<a href="https://www.alibabacloud.com/product/object-storage-service">阿里云 OSS</a> 和<a href="https://www.tencentcloud.com/products/cos">腾讯云对象存储</a>（COS）。</p>
 <p>元数据在 Milvus 内部生成。每个 Milvus 模块都有自己的元数据，这些元数据存储在 etcd 中。</p>
@@ -33,7 +33,7 @@ title: 产品常见问题
 <p>如果出现这种情况，查询时将返回哪个数据副本仍是未知行为。这一限制将在今后的版本中修复。</p>
 <h4 id="What-is-the-maximum-length-of-self-defined-entity-primary-keys" class="common-anchor-header">自定义实体主键的最大长度是多少？</h4><p>实体主键必须是非负 64 位整数。</p>
 <h4 id="What-is-the-maximum-amount-of-data-that-can-be-added-per-insert-operation" class="common-anchor-header">每次插入操作可添加的最大数据量是多少？</h4><p>插入操作的大小不得超过 1,024 MB。这是 gRPC 规定的限制。</p>
-<h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">在特定分区中搜索时，Collection 的大小会影响查询性能吗？</h4><p>不会。如果指定了搜索的分区，Milvus 只搜索指定的分区。</p>
+<h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">在特定分区中搜索时，Collection 的大小会影响查询性能吗？</h4><p>不会。如果为搜索指定了分区，Milvus 只搜索指定的分区。</p>
 <h4 id="Does-Milvus-need-to-load-the-entire-collection-when-partitions-are-specified-for-a-search" class="common-anchor-header">为搜索指定分区时，Milvus 是否需要加载整个 Collections？</h4><p>这取决于搜索需要哪些数据。搜索前必须加载搜索结果中可能显示的所有分区。</p>
 <ul>
 <li>例如，如果只想搜索特定分区，则不需要加载所有分区。调用<code translate="no">load_partition()</code> 加载目标分区，<em>然后</em>在<code translate="no">search()</code> 方法调用中指定分区。</li>
@@ -57,8 +57,8 @@ title: 产品常见问题
 <p>为避免这种情况，可尝试将<code translate="no">nprobe</code> 设置得大一些，将<code translate="no">nlist</code> 和<code translate="no">k</code> 设置得小一些。</p>
 <p>更多信息请参见<a href="/docs/zh/index.md">向量索引</a>。</p>
 <h4 id="What-is-the-maximum-vector-dimension-supported-in-Milvus" class="common-anchor-header">Milvus 支持的最大向量维度是多少？</h4><p>默认情况下，Milvus 最多可管理 32,768 维的向量。你可以增加<code translate="no">Proxy.maxDimension</code> 的值，以允许更大维度的向量。</p>
-<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus 支持苹果 M1 CPU 吗？</h4><p>目前的 Milvus 版本不直接支持苹果 M1 CPU。Milvus 2.3 之后，Milvus 会提供 ARM64 架构的 Docker 镜像。</p>
-<h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvus 在主键字段上支持哪些数据类型？</h4><p>在当前版本中，Milvus 同时支持 INT64 和字符串。</p>
+<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus 是否支持苹果 M1 CPU？</h4><p>是的，Milvus 支持苹果 M1/M2 CPU 和其他苹果硅处理器。通过 Docker 映像、RPM/DEB 包和 Milvus Lite，可支持 ARM64，使其与包括 M1、M2 和更新处理器在内的苹果硅芯片兼容。</p>
+<h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvus 在主键字段上支持哪些数据类型？</h4><p>在当前版本中，Milvus 支持 INT64 和字符串。</p>
 <h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus 可以扩展吗？</h4><p>是的。您可以在 Kubernetes 上使用 Helm Chart 部署多节点的 Milvus 集群。更多说明请参阅《<a href="/docs/zh/scaleout.md">扩展指南》</a>。</p>
 <h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什么是增长段和封存段？</h4><p>当有搜索请求时，Milvus 会同时搜索增量数据和历史数据。增量数据是最近更新的数据，它们存储在增长段中，在达到在对象存储中持久化的阈值之前在内存中缓冲，并为它们建立更高效的索引。历史数据是一段时间前的更新，它们位于已在对象存储中持久化的封存段中。增量数据和历史数据共同构成了整个搜索数据集。这种设计使任何输入到 Milvus 的数据都可以即时搜索。对于 Milvus Distributed 而言，有更复杂的因素来决定刚录入的记录何时可以显示在搜索结果中。在<a href="https://milvus.io/docs/consistency.md">一致性级别</a>了解更多细微差别。</p>
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvus 可用于并发搜索吗？</h4><p>是的。对于同一 Collections 的查询，Milvus 会同时搜索增量数据和历史数据。不过，对不同 Collection 的查询是串联进行的。历史数据可能是一个极其庞大的数据集，因此对历史数据的搜索相对更耗时，而且基本上是串联进行的。</p>
@@ -69,7 +69,7 @@ title: 产品常见问题
 <h4 id="How-does-Milvus-handle-vector-data-types-and-precision" class="common-anchor-header">Milvus 如何处理向量数据类型和精度？</h4><p>Milvus 支持二进制、Float32、Float16 和 BFloat16 向量类型。</p>
 <ul>
 <li>二进制向量：将二进制数据存储为 0 和 1 的序列，用于图像处理和信息检索。</li>
-<li>Float32 向量：默认存储精度约为小数点后 7 位。即使是 Float64 值，也是以 Float32 精度存储的，因此在检索时可能会丢失精度。</li>
+<li>Float32 向量：默认存储精度约为小数点后 7 位。即使是 Float64 值也是以 Float32 精度存储的，这可能会导致检索时的精度损失。</li>
 <li>Float16 和 BFloat16 向量：可降低精度和内存使用量。Float16 适用于带宽和存储有限的应用，而 BFloat16 则兼顾了范围和效率，常用于深度学习，在不显著影响精度的情况下降低计算要求。</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus 是否支持为标量或向量场指定默认值？</h4><p>目前，Milvus 2.4.x 不支持为标量或向量场指定默认值。该功能计划在未来版本中推出。</p>
@@ -93,7 +93,7 @@ title: 产品常见问题
     <span class="hljs-attr">serverMaxRecvSize:</span> <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>默认情况下，每个 RPC 请求的最大大小为 64MB。因此，输入向量（包括其维度数据和元数据）的总大小必须小于此限制，以确保成功执行。</p>
-<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">如何从 Collections 中获取给定标量字段的所有唯一值？</h4><p>目前还没有直接的方法来实现这一目标。作为一种变通方法，我们建议使用查询迭代器获取特定字段的所有值，然后手动执行重复数据删除。我们计划在 Milvus 2.6 中添加对该功能的直接支持。使用 query_iterator 的示例：</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">如何从 Collections 中获取给定标量字段的所有唯一值？</h4><p>目前还没有直接的方法来实现这一目标。作为一种变通方法，我们建议使用查询迭代器检索特定字段的所有值，然后手动执行重复数据删除。我们计划在 Milvus 2.6 中添加对该功能的直接支持。使用 query_iterator 的示例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
 iterator = client.query_iterator(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
