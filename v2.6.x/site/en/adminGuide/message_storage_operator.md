@@ -36,7 +36,7 @@ There are also other limitations for specifying the message storage:
   - Nats introduced in 2.3 do not participate in these priority rules for backward compatibility.
 - The message storage cannot be changed while the Milvus system is running. 
 - Only Kafka 2.x or 3.x verison is supported.
-- **Upgrade limitations**: **Message Queue limitations**: When upgrading to Milvus v2.6.3, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+- **Upgrade limitations**: **Message Queue limitations**: When upgrading to Milvus v2.6.4, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
 
 ## Configure RocksMQ

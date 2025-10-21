@@ -8,6 +8,70 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.4
+
+Release date: October 21, 2025
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.6.4          | 2.6.2             | 2.6.1               | 2.6.6            | 2.6.1          |
+
+We are excited to announce the release of Milvus 2.6.4, featuring a range of powerful new capabilities, performance enhancements, and essential bug fixes. This update introduces important features such as Struct in ARRAY for advanced data modeling. Additionally, we have enabled JSON Shredding by default, further improving query performance and efficiency. Several critical bugs have also been addressed to ensure greater stability and reliability. With this release, Milvus continues to provide a more robust and efficient experience for all users. Below are the key highlights of this release.
+
+### Features
+
+- Struct in ARRAY:  Milvus introduced the new data type, Struct, allowing users to organize and manage multiple related fields within a single entity. Currently, Struct can only be used as an element under DataType.ARRAY, enabling features like Array of Vector, where each row contains multiple vectors, opening up new possibilities for complex data modeling and search. ([#42148](https://github.com/milvus-io/milvus/pull/42148))
+- Supported Qwen GTE-rerank-v2 model in DashScope ([#44660](https://github.com/milvus-io/milvus/pull/44660))
+
+### Improvements
+
+- **Upgraded Go version to 1.24.6** with image builder ([#44763](https://github.com/milvus-io/milvus/pull/44763))
+- Enabled default JSON Shredding ([#44811](https://github.com/milvus-io/milvus/pull/44811))
+- Added disk quota for loaded binlog size to prevent query node load failures ([#44932](https://github.com/milvus-io/milvus/pull/44932))
+- Enabled mmap support for struct array in MemVectorIndex ([#44832](https://github.com/milvus-io/milvus/pull/44832))
+- Added caching layer management for TextMatchIndex ([#44768](https://github.com/milvus-io/milvus/pull/44768))
+- Optimized bitmap reverse lookup performance  ([#44838](https://github.com/milvus-io/milvus/pull/44838))
+- Updated Knowhere version ([#44707](https://github.com/milvus-io/milvus/pull/44707) [#44765](https://github.com/milvus-io/milvus/pull/44765))
+- Removed logical usage checks during segment loading ([#44770](https://github.com/milvus-io/milvus/pull/44770))
+- Added access log field for template value length information ([#44783](https://github.com/milvus-io/milvus/pull/44783))
+- Allowed overwriting current index type during index build ([#44754](https://github.com/milvus-io/milvus/pull/44754))
+- Added load parameters for vector index ([#44749](https://github.com/milvus-io/milvus/pull/44749))
+- Unified compaction executor task state management ([#44722](https://github.com/milvus-io/milvus/pull/44722))
+- Added refined logs for task scheduler in QueryCoord ([#44725](https://github.com/milvus-io/milvus/pull/44725))
+- Ensured accesslog.$consistency_level represents actual value used  ([#44711](https://github.com/milvus-io/milvus/pull/44711))
+- Removed redundant channel manager from datacoord ([#44679](https://github.com/milvus-io/milvus/pull/44679))
+
+### Bug fixes
+
+- Removed GCC from build Dockerfile to fix CVE ([#44882](https://github.com/milvus-io/milvus/pull/44882))
+- Ensured deterministic search result ordering when scores are equal ([#44884](https://github.com/milvus-io/milvus/pull/44884))
+- Reranked before requery if reranker didn't use field data ([#44943](https://github.com/milvus-io/milvus/pull/44943))
+- Ensured promise fulfillment when CreateArrowFileSystem throws an exception ([#44976](https://github.com/milvus-io/milvus/pull/44976))
+- Fixed missing disk encryption config ([#44839](https://github.com/milvus-io/milvus/pull/44839))
+- Fixed deactivate balance checker causing balance stop issue ([#44836](https://github.com/milvus-io/milvus/pull/44836))
+- Fixed issue where "not equal" doesn't include "none"  ([#44960](https://github.com/milvus-io/milvus/pull/44960))
+- Supported JSON default value in CreateArrowScalarFromDefaultValue ([#44952](https://github.com/milvus-io/milvus/pull/44952))
+- Used short debug string to avoid newlines in debug logs ([#44929](https://github.com/milvus-io/milvus/pull/44929))
+- Fixed exists expression for JSON flat index ([#44951](https://github.com/milvus-io/milvus/pull/44951))
+- Unified JSON exists path semantics ([#44926](https://github.com/milvus-io/milvus/pull/44926))
+- Fixed panic caused by empty internal insert message ([#44906](https://github.com/milvus-io/milvus/pull/44906))
+- Updated AI/SAQ parameters ([#44862](https://github.com/milvus-io/milvus/pull/44862))
+- Removed limit on deduplication when autoindex is disabled ([#44824](https://github.com/milvus-io/milvus/pull/44824))
+- Avoided concurrent reset/add operations on DataCoord metrics ([#44815](https://github.com/milvus-io/milvus/pull/44815))
+- Fixed bug in JSON_contains(path, int) ([#44818](https://github.com/milvus-io/milvus/pull/44818))
+- Avoided eviction in caching layer during JSON handling ([#44813](https://github.com/milvus-io/milvus/pull/44813))
+- Fixed wrong results from the exp filter when skipped ([#44779](https://github.com/milvus-io/milvus/pull/44779))
+- Checked if query node is SQN with label and streaming node list ([#44793](https://github.com/milvus-io/milvus/pull/44793))
+- Fixed BM25 with boost returning unordered results ([#44759](https://github.com/milvus-io/milvus/pull/44759))
+- Fixed bulk import with auto ID ([#44694](https://github.com/milvus-io/milvus/pull/44694))
+- Passed file system via FileManagerContext when loading index ([#44734](https://github.com/milvus-io/milvus/pull/44734))
+- Used "eventually" and fixed task ID appearing in both executing and completed states ([#44715](https://github.com/milvus-io/milvus/pull/44715))
+- Removed incorrect start time tick to avoid filtering DMLs with timeticks less than it ([#44692](https://github.com/milvus-io/milvus/pull/44692))
+- Made AWS credential provider a singleton ([#44705](https://github.com/milvus-io/milvus/pull/44705))
+- Disabled shredding for JSON path containing digits ([#44808](https://github.com/milvus-io/milvus/pull/44808))
+- Fixed valid unit test for TestUnaryRangeJsonNullable ([#44990](https://github.com/milvus-io/milvus/pull/44990))
+- Fixed unit tests and removed file system fallback logic ([#44686](https://github.com/milvus-io/milvus/pull/44686))
+
 ## v2.6.3
 
 Release date: October 11, 2025
