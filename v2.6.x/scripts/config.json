@@ -504,6 +504,11 @@
                         "token": "F4IVwmrXPh7HujbBSXlcw98HnNf",
                         "type": "board",
                         "alt_text": "aisaq-vs-diskann"
+                    },
+                    {
+                        "token": "NuokbSgbroyVPQx14fKcm37bnoh",
+                        "type": "image",
+                        "alt_text": "deduplication-workflow"
                     }
                 ]
             }

@@ -90,11 +90,7 @@ Mathematically, if two signatures have Jaccard similarity $s$,
 
 - The probability they match in all $r$ rows of a band is $s^r$
 
-- The probability that they match in **at least one band** is:
-
-$$
-1 - (1 - s^r)^b
-$$
+- The probability that they match in **at least one band** is $1 - (1 - s^r)^b$
 
 For details, refer to [Locality-sensitive hashing](https://en.wikipedia.org/wiki/Locality-sensitive_hashing).
 
@@ -118,7 +114,7 @@ The number of bands is controlled by the `mh_lsh_band` parameter. For more infor
 
 </div>
 
-### MHJACCARD: Comparing MinHash signatures in Milvus
+### MHJACCARD: Comparing MinHash signatures
 
 MinHash signatures approximate the Jaccard similarity between sets using fixed-length binary vectors. However, since these signatures do not preserve the original sets, standard metrics such as `JACCARD`, `L2`, or `COSINE` cannot be directly applied to compare them.
 
@@ -136,6 +132,24 @@ Using other metrics will either be invalid or yield incorrect results.
 
 For more information about this metric type, refer to [MHJACCARD](metric.md#MHJACCARD).
 
+### Deduplication workflow
+
+The deduplication process powered by MinHash LSH allows Milvus to efficiently identify and filter out near-duplicate text or structured records before inserting them into the collection.
+
+<img src="../../../../../assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600">
+
+1. **Chunk & preprocess**: Split incoming text data or structured data (e.g., records, fields) into chunks; normalize text (lowercasing, punctuation removal), and remove stopwords as needed.
+
+1. **Feature construction**: Build the token set used for MinHash (e.g., shingles from text; concatenated field tokens for structured data).
+
+1. **MinHash signature generation**: Compute MinHash signatures for each chunk or record.
+
+1. **Binary vector conversion**: Convert the signature to a binary vector compatible with Milvus.
+
+1. **Search before insert**: Use the MinHash LSH index to search the target collection for near-duplicates of the incoming item.
+
+1. **Insert & store**: Insert only unique items into the collection. They become searchable for future dedup checks.
+
 ## Prerequisites
 
 Before using MinHash LSH in Milvus, you must first generate **MinHash signatures**. These compact binary signatures approximate Jaccard similarity between sets and are required for `MHJACCARD`-based search in Milvus.
@@ -144,7 +158,7 @@ Before using MinHash LSH in Milvus, you must first generate **MinHash signatures
 
 Depending on your workload, you can choose:
 
-- Use Python's `datasketch` for simplicity (recommended for prototyping)
+- Use Python's [`datasketch`](https://ekzhu.github.io/datasketch/) for simplicity (recommended for prototyping)
 
 - Use distributed tools (e.g., Spark, Ray) for large-scale datasets
 
@@ -178,7 +192,7 @@ def generate_minhash_signature(text, num_perm=MINHASH_DIM) -> bytes:
     return m.hashvalues.astype('>u8').tobytes()  # Returns 2048 bytes
 ```
 
-Each signature is 256 × 64 bits = 2048 bytes. This byte string can be directly inserted into a Milvus `BINARY_VECTOR` field. For more information on binary vectors used in Milvus, refer to [Binary Vector](binary-vector.md).
+Each signature is 256 × 64 bits = 2048 bytes. This byte string can be directly inserted into a `BINARY_VECTOR` field. For more information on binary vectors used in Milvus, refer to [Binary Vector](binary-vector.md).
 
 ### (Optional) Prepare raw token sets (for refined search)
 
@@ -200,16 +214,40 @@ def extract_token_set(text: str) -> str:
     return " ".join(tokens)
 ```
 
-## Use MinHash LSH in Milvus
+## Use MinHash LSH
 
 Once your MinHash vectors and original token sets are ready, you can store, index, and search them using Milvus with `MINHASH_LSH`.
 
-### Connect to Milvus
+### Connect to your cluster
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import MilvusClient
 
 client = MilvusClient(uri="http://localhost:19530")  # Update if your URI is different
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```
 
 ### Define collection schema
@@ -224,6 +262,14 @@ Define a schema with:
 
 - Optionally, a `document` field for original text
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 from pymilvus import DataType
 
@@ -236,9 +282,33 @@ schema.add_field("token_set", DataType.VARCHAR, max_length=1000)  # required for
 schema.add_field("document", DataType.VARCHAR, max_length=1000)
 ```
 
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 ### Build index parameters and create collection
 
 Build a `MINHASH_LSH` index with Jaccard refinement enabled:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 index_params = client.prepare_index_params()
@@ -256,6 +326,22 @@ index_params.add_index(
 client.create_collection("minhash_demo", schema=schema, index_params=index_params)
 ```
 
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 For more information on index building parameters, refer to [Index building params](minhash-lsh.md#Index-building-params).
 
 ### Insert data
@@ -267,6 +353,14 @@ For each document, prepare:
 - A serialized token set string
 
 - (Optionally) the original text
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 documents = [
@@ -289,6 +383,22 @@ client.insert("minhash_demo", insert_data)
 client.flush("minhash_demo")
 ```
 
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 ### Perform similarity search
 
 Milvus supports two modes of similarity search using MinHash LSH:
@@ -301,14 +411,46 @@ Milvus supports two modes of similarity search using MinHash LSH:
 
 To perform a similarity search, generate a MinHash signature for the query document. This signature must match the same dimension and encoding format used during data insertion.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 query_text = "neural networks model patterns in data"
 query_sig = generate_minhash_signature(query_text)
 ```
 
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 #### 5.2 Approximate search (LSH-only)
 
 This is fast and scalable but may miss close matches or include false positives:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 # highlight-start
@@ -326,7 +468,7 @@ approx_results = client.search(
     search_params=search_params,
     limit=3,
     output_fields=["doc_id", "document"],
-    consistency_level="Bounded"
+    consistency_level="Strong"
 )
 
 for i, hit in enumerate(approx_results[0]):
@@ -334,9 +476,33 @@ for i, hit in enumerate(approx_results[0]):
     print(f"{i+1}. Similarity: {sim:.3f} | {hit['entity']['document']}")
 ```
 
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 #### 5.3 Refined search (recommended for accuracy):
 
 This enables accurate Jaccard comparison using the original token sets stored in Milvus. It's slightly slower but recommended for quality-sensitive tasks:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 # highlight-start
@@ -357,12 +523,28 @@ refined_results = client.search(
     search_params=search_params,
     limit=3,
     output_fields=["doc_id", "document"],
-    consistency_level="Bounded"
+    consistency_level="Strong"
 )
 
 for i, hit in enumerate(refined_results[0]):
     sim = 1 - hit['distance']
     print(f"{i+1}. Similarity: {sim:.3f} | {hit['entity']['document']}")
+```
+
+```java
+// java
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```
 
 ## Index params
