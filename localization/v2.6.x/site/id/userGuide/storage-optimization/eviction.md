@@ -143,8 +143,8 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Tanda air menentukan kapan penggusuran cache dimulai dan diakhiri untuk memori dan disk. Setiap jenis sumber daya memiliki dua ambang batas:</p>
 <ul>
-<li><p><strong>Tanda air tinggi:</strong> Penggusuran dimulai saat penggunaan melebihi nilai ini.</p></li>
-<li><p><strong>Tanda air rendah:</strong> Penggusuran berlanjut hingga penggunaan turun di bawah nilai ini.</p></li>
+<li><p><strong>Tanda air tinggi</strong>: Penggusuran sinkronisasi dimulai saat penggunaan melebihi nilai ini.</p></li>
+<li><p><strong>Tanda air rendah</strong>: Penggusuran berlanjut hingga penggunaan turun di bawah nilai ini.</p></li>
 </ul>
 <div class="alert note">
 <p>Konfigurasi ini hanya berlaku ketika <a href="/docs/id/eviction.md#Enable-eviction">penggusuran diaktifkan</a>.</p>

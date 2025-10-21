@@ -253,7 +253,7 @@ results = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam contoh di atas,</p>
+<p>Pada contoh di atas,</p>
 <ul>
 <li><p><code translate="no">tsz</code> adalah nama bidang <code translate="no">TIMESTAMPTZ</code> yang didefinisikan dalam skema.</p></li>
 <li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> adalah literal stempel waktu dalam format <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>, termasuk offset zona waktu.</p></li>

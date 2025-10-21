@@ -98,7 +98,7 @@ beta: Milvus 2.6.4+
 <p>In diesem Modus:</p>
 <ul>
 <li><p>Die PQ-Daten werden separat auf der Festplatte gespeichert, ohne Redundanz.</p></li>
-<li><p>Dieses Design minimiert die Indexgröße, führt aber zu mehr E/A-Vorgängen während der Diagrammdurchquerung.</p></li>
+<li><p>Dieses Design minimiert die Indexgröße, führt aber zu mehr E/A-Vorgängen während der Diagrammüberquerung.</p></li>
 <li><p>Um den IOPS-Overhead zu mindern, führt AISAQ zwei Optimierungen ein:</p>
 <ul>
 <li><p>Eine Rearrange-Strategie, die PQ-Vektoren nach Priorität sortiert, um die Datenlokalität zu verbessern.</p></li>
@@ -190,6 +190,6 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p>Die Festplattenleistung ist wichtig. AISAQ hängt stark von SSD IOPS ab; schlechter Speicher kann QPS reduzieren.</p></li>
-<li><p>AISAQ-Performance-Modus ≈ DISKANN-Latenz, kann aber ein Mehrfaches an Speicherplatz erfordern.</p></li>
+<li><p>AISAQ-Performance-Modus ≈ DISKANN-Latenz, kann jedoch ein Mehrfaches an Speicherplatz erfordern.</p></li>
 <li><p>Der AISAQ-Skalierungsmodus eignet sich für Offline-Such- oder Datenarchivierungsarbeitslasten, bei denen QPS weniger wichtig ist.</p></li>
 </ul>

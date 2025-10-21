@@ -287,7 +287,7 @@ results = client.query(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">INTERVAL</code> suivent la <a href="https://www.w3.org/TR/xmlschema-2/#duration">syntaxe de durée ISO 8601</a>. Par exemple :</p>
+<p><code translate="no">INTERVAL</code> suivent la <a href="https://www.w3.org/TR/xmlschema-2/#duration">syntaxe de durée ISO 8601</a>. Par exemple, les valeurs cURL suivent la syntaxe de durée ISO 8601 :</p>
 <ul>
 <li><p><code translate="no">P1D</code> → 1 jour</p></li>
 <li><p><code translate="no">PT3H</code> → 3 heures</p></li>

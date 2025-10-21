@@ -88,7 +88,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para utilizar um campo <code translate="no">GEOMETRY</code>, defina-o explicitamente no esquema da coleção ao criar a coleção. O exemplo seguinte demonstra como criar uma coleção com um campo <code translate="no">geo</code> do tipo <code translate="no">DataType.GEOMETRY</code>.</p>
+    </button></h3><p>Para utilizar um campo <code translate="no">GEOMETRY</code>, defina-o explicitamente no esquema da coleção ao criar a coleção. O exemplo a seguir demonstra como criar uma coleção com um campo <code translate="no">geo</code> do tipo <code translate="no">DataType.GEOMETRY</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -178,12 +178,12 @@ milvus_client.load_collection(collection_name)
 <p>Uma vez cumpridos estes requisitos, pode utilizar expressões com operadores de geometria dedicados para filtrar a sua coleção com base nos valores geométricos.</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">Definir expressões de filtro</h4><p>Para filtrar no campo <code translate="no">GEOMETRY</code>, use um operador específico de geometria com o seguinte formato de expressão: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, onde:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> é um operador de geometria suportado (por exemplo, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Para obter uma lista completa dos operadores disponíveis, consulte <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Operadores de geometria</a>.</p></li>
+<li><p><code translate="no">{operator}</code> é um operador de geometria suportado (por exemplo, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Para obter uma lista completa dos operadores disponíveis, consulte <a href="/docs/pt/geometry-operators.md">Operadores de geometria</a>.</p></li>
 <li><p><code translate="no">geo_field</code> é o nome do campo <code translate="no">GEOMETRY</code> definido no seu esquema de coleção.</p></li>
 <li><p><code translate="no">'{wkt}'</code> é a cadeia WKT que representa o objeto de geometria que está a filtrar.</p></li>
 </ul>
 <div class="alert note">
-<p>Alguns operadores, como <code translate="no">ST_DWITHIN</code>, podem exigir parâmetros adicionais. Para obter detalhes e exemplos de utilização de cada operador, consulte <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Operadores de geometria</a>.</p>
+<p>Alguns operadores, como <code translate="no">ST_DWITHIN</code>, podem exigir parâmetros adicionais. Para obter detalhes e exemplos de utilização de cada operador, consulte <a href="/docs/pt/geometry-operators.md">Operadores de geometria</a>.</p>
 </div>
 <p>Os exemplos seguintes demonstram como utilizar diferentes operadores específicos de geometria numa expressão de filtro:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Exemplo 1: Encontrar entidades dentro de uma área retangular</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -237,8 +237,8 @@ result = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Por defeito, as consultas em <code translate="no">GEOMETRY</code> campos sem um índice executarão uma pesquisa completa de todas as linhas, o que pode ser lento em grandes conjuntos de dados. Para acelerar as consultas geométricas, crie um índice <code translate="no">RTREE</code> no seu campo GEOMETRY.</p>
-<p>Para obter detalhes, consulte <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>.</p>
+    </button></h2><p>Por defeito, as consultas em <code translate="no">GEOMETRY</code> campos sem um índice executam uma pesquisa completa de todas as linhas, o que pode ser lento em grandes conjuntos de dados. Para acelerar as consultas geométricas, crie um índice <code translate="no">RTREE</code> no seu campo GEOMETRY.</p>
+<p>Para obter detalhes, consulte <a href="/docs/pt/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">PERGUNTAS FREQUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

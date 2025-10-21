@@ -151,8 +151,9 @@ beta: Milvus 2.6.4+
 <li><p>필드의 <code translate="no">element_type</code> 속성을 <code translate="no">DataType.STRUCT</code> 으로 설정하여 필드를 Struct의 배열로 만듭니다.</p></li>
 <li><p>Struct 스키마를 만들고 필수 필드를 포함합니다. 그런 다음 필드의 <code translate="no">struct_schema</code> 속성에서 Struct 스키마를 참조합니다.</p></li>
 <li><p>필드의 <code translate="no">max_capacity</code> 속성을 적절한 값으로 설정하여 각 엔티티가 이 필드에 포함할 수 있는 최대 구조체 수를 지정합니다.</p></li>
+<li><p><strong>(선택 사항</strong>) Struct 요소 내의 모든 필드에 <code translate="no">mmap.enabled</code> 을 설정하여 Struct의 핫 데이터와 콜드 데이터의 균형을 맞출 수 있습니다.</p></li>
 </ol>
-<p>다음은 구조체 배열을 포함하는 컬렉션 스키마를 정의하는 방법입니다:</p>
+<p>다음은 Struct의 배열을 포함하는 컬렉션 스키마를 정의하는 방법입니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -177,8 +178,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -427,6 +428,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 <p>특히 검색 요청의 <code translate="no">anns_field</code> 매개변수 값으로 Struct 요소 내의 벡터 필드 이름을 직접 사용할 수 있으며, <code translate="no">EmbeddingList</code> 을 사용하여 쿼리 벡터를 깔끔하게 정리할 수 있습니다.</p>
 <div class="alert note">
 <p>밀버스는 구조체 배열의 임베딩 목록에 대한 검색 쿼리 벡터를 보다 깔끔하게 구성할 수 있도록 <code translate="no">EmbeddingList</code> 을 제공합니다.</p>
+<p>단, <code translate="no">EmbeddingList</code> 은 <code translate="no">search_iterator()</code> 요청은 물론 범위 검색이나 검색 매개변수 그룹화 없이 <code translate="no">search()</code> 요청에만 사용할 수 있습니다.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -527,7 +529,7 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>출력은 각 임베딩 목록에 대해 가장 유사한 3개 엔티티의 목록입니다.</p>
+<p>출력은 각 임베딩 목록에 대해 가장 유사한 세 개의 엔티티 목록입니다.</p>
 <p><details></p>
 <p><summary>출력</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>

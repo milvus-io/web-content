@@ -25,7 +25,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Der Index <code translate="no">RTREE</code> ist eine baumbasierte Datenstruktur, die die Abfrage von <code translate="no">GEOMETRY</code> Feldern in Milvus beschleunigt. Wenn Ihre Sammlung geometrische Objekte wie Punkte, Linien oder Polygone im <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known text (WKT)-F</a> ormat speichert und Sie die räumliche Filterung beschleunigen möchten, ist <code translate="no">RTREE</code> eine ideale Wahl.</p>
-<h2 id="How-it-works" class="common-anchor-header">Wie es funktioniert<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">Wie das funktioniert<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -216,8 +216,8 @@ hits = client.search(
     </button></h2><p>Verwenden Sie die Methode <code translate="no">drop_index()</code>, um einen vorhandenen Index aus einer Sammlung zu entfernen.</p>
 <div class="alert note">
 <ul>
-<li><p>In <strong>v2.6.3</strong> oder früher müssen Sie die Sammlung freigeben, bevor Sie einen Index löschen können.</p></li>
-<li><p>Ab <strong>Version 2.6.4</strong> können Sie einen Index direkt löschen, sobald er nicht mehr benötigt wird, ohne die Sammlung vorher freigeben zu müssen.</p></li>
+<li><p>In <strong>v2.6.3</strong> oder früher müssen Sie die Sammlung freigeben, bevor Sie einen skalaren Index löschen können.</p></li>
+<li><p>Ab <strong>Version 2.6.4</strong> können Sie einen skalaren Index direkt löschen, sobald er nicht mehr benötigt wird, ohne die Sammlung vorher freigeben zu müssen.</p></li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(

@@ -136,5 +136,5 @@ client.create_index(
     </button></h2><ul>
 <li><p><strong>Типы полей:</strong> Работает с числовыми полями и полями <code translate="no">TIMESTAMPTZ</code>. Дополнительные сведения о типах данных см. в разделах <a href="/docs/ru/number.md">Булевые и числовые</a> <a href="/docs/ru/timestamptz-field.md">поля</a> и <a href="/docs/ru/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p></li>
 <li><p><strong>Параметры:</strong> Параметры индекса не требуются.</p></li>
-<li><p><strong>Mmap не поддерживается:</strong> Режим отображения в памяти недоступен для <code translate="no">STL_SORT</code>.</p></li>
+<li><p><strong>Mmap не поддерживается:</strong> Режим с отображением памяти недоступен для <code translate="no">STL_SORT</code>.</p></li>
 </ul>

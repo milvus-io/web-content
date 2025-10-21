@@ -178,12 +178,12 @@ milvus_client.load_collection(collection_name)
 <p>Setelah persyaratan ini terpenuhi, Anda dapat menggunakan ekspresi dengan operator geometri khusus untuk memfilter koleksi Anda berdasarkan nilai geometri.</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">Menentukan ekspresi filter</h4><p>Untuk memfilter pada bidang <code translate="no">GEOMETRY</code>, gunakan operator khusus geometri dengan format ekspresi berikut: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, di mana:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> adalah operator geometri yang didukung (misalnya, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Untuk daftar lengkap operator yang tersedia, lihat <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Operator Geometri</a>.</p></li>
+<li><p><code translate="no">{operator}</code> adalah operator geometri yang didukung (misalnya, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Untuk daftar lengkap operator yang tersedia, lihat <a href="/docs/id/geometry-operators.md">Operator Geometri</a>.</p></li>
 <li><p><code translate="no">geo_field</code> adalah nama bidang <code translate="no">GEOMETRY</code> yang didefinisikan dalam skema koleksi Anda.</p></li>
 <li><p><code translate="no">'{wkt}'</code> adalah string WKT yang mewakili objek geometri yang Anda filter.</p></li>
 </ul>
 <div class="alert note">
-<p>Beberapa operator, seperti <code translate="no">ST_DWITHIN</code>, mungkin memerlukan parameter tambahan. Untuk detail dan contoh penggunaan setiap operator, lihat <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Operator Geometri</a>.</p>
+<p>Beberapa operator, seperti <code translate="no">ST_DWITHIN</code>, mungkin memerlukan parameter tambahan. Untuk detail dan contoh penggunaan setiap operator, lihat <a href="/docs/id/geometry-operators.md">Operator Geometri</a>.</p>
 </div>
 <p>Contoh berikut ini menunjukkan cara menggunakan operator khusus geometri yang berbeda dalam ekspresi filter:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Contoh 1: Menemukan entitas dalam area persegi panjang</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -238,7 +238,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>Secara default, kueri pada bidang <code translate="no">GEOMETRY</code> tanpa indeks akan melakukan pemindaian penuh dari semua baris, yang dapat menjadi lambat pada set data yang besar. Untuk mempercepat kueri geometrik, buatlah indeks <code translate="no">RTREE</code> pada bidang GEOMETRI Anda.</p>
-<p>Untuk detailnya, lihat <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>.</p>
+<p>Untuk detailnya, lihat <a href="/docs/id/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

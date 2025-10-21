@@ -143,8 +143,8 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>As marcas d'água definem quando o despejo do cache começa e termina para a memória e o disco. Cada tipo de recurso tem dois limites:</p>
 <ul>
-<li><p><strong>Marca d'água alta:</strong> O despejo começa quando o uso excede esse valor.</p></li>
-<li><p><strong>Marca de água baixa:</strong> O despejo continua até que o uso caia abaixo desse valor.</p></li>
+<li><p><strong>Marca d'água alta</strong>: O despejo assíncrono começa quando o uso excede esse valor.</p></li>
+<li><p><strong>Marca d'água baixa</strong>: O despejo continua até que o uso caia abaixo desse valor.</p></li>
 </ul>
 <div class="alert note">
 <p>Esta configuração só tem efeito quando <a href="/docs/pt/eviction.md#Enable-eviction">o despejo está ativado</a>.</p>
@@ -220,7 +220,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p><strong>O TTL (Cache Time-to-Live)</strong> remove automaticamente os dados armazenados em cache após uma duração definida, mesmo que os limites de recursos não sejam atingidos. Ele funciona junto com o despejo LRU para evitar que dados obsoletos ocupem o cache indefinidamente.</p>
 <div class="alert note">
-<p>O TTL do cache requer <code translate="no">backgroundEvictionEnabled: true</code>, pois é executado no mesmo thread em segundo plano.</p>
+<p>O TTL de cache requer <code translate="no">backgroundEvictionEnabled: true</code>, pois é executado no mesmo thread em segundo plano.</p>
 </div>
 <p><strong>Exemplo de YAML</strong>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>

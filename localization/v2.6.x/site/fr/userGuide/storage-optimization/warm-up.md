@@ -2,7 +2,7 @@
 id: warm-up.md
 title: RéchauffementCompatible with Milvus 2.6.4+
 summary: >-
-  Dans Milvus, Warm Up complète Tiered Storage en éliminant la latence de
+  Dans Milvus, Warm Up complète Tiered Storage en réduisant la latence de
   premier accès qui se produit lorsque des données froides sont consultées pour
   la première fois. Une fois configuré, Warm Up précharge des champs ou des
   index sélectionnés dans le cache avant qu'un segment ne devienne
@@ -25,7 +25,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dans Milvus, <strong>Warm Up</strong> complète Tiered Storage en éliminant la latence de premier accès qui se produit lorsque des données froides sont accédées pour la première fois. Une fois configuré, Warm Up précharge des champs ou des index sélectionnés dans le cache avant qu'un segment ne devienne interrogeable, ce qui garantit que les données fréquemment consultées sont disponibles immédiatement après le chargement.</p>
+    </button></h1><p>Dans Milvus, <strong>Warm Up</strong> complète Tiered Storage en réduisant la latence de premier accès qui se produit lorsque des données froides sont consultées pour la première fois. Une fois configuré, Warm Up précharge des champs ou des index sélectionnés dans le cache avant qu'un segment ne devienne interrogeable, ce qui garantit que les données fréquemment consultées sont disponibles immédiatement après le chargement.</p>
 <h2 id="Why-warm-up" class="common-anchor-header">Pourquoi réchauffer<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,13 +41,13 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/fr/tiered-storage-overview.md#Lazy-load">Lazy Load</a> dans Tiered Storage améliore l'efficacité en ne chargeant initialement que les métadonnées. Cependant, cela peut entraîner un temps de latence lors de la première requête sur des données froides, car les blocs ou les index requis doivent être récupérés à partir du stockage objet.</p>
+    </button></h2><p><a href="/docs/fr/tiered-storage-overview.md#Phase-1-Lazy-load">Lazy Load</a> dans Tiered Storage améliore l'efficacité en ne chargeant initialement que les métadonnées. Cependant, cela peut entraîner un temps de latence lors de la première requête sur des données froides, car les blocs ou les index requis doivent être récupérés à partir du stockage objet.</p>
 <p><strong>Warm Up</strong> résout ce problème en mettant proactivement en cache les données critiques lors de l'initialisation du segment.</p>
 <p>Il est particulièrement utile dans les cas suivants</p>
 <ul>
-<li><p>Certains <strong>index scalaires</strong> sont fréquemment utilisés dans les conditions de filtrage.</p></li>
-<li><p><strong>Les index vectoriels</strong> sont essentiels pour les performances de recherche et doivent être prêts immédiatement.</p></li>
-<li><p><strong>La latence de démarrage à froid</strong> après le redémarrage du QueryNode ou le chargement d'un nouveau segment est inacceptable.</p></li>
+<li><p>Certains index scalaires sont fréquemment utilisés dans les conditions de filtrage.</p></li>
+<li><p>Les index vectoriels sont essentiels pour les performances de recherche et doivent être prêts immédiatement.</p></li>
+<li><p>La latence de démarrage à froid après le redémarrage du QueryNode ou le chargement d'un nouveau segment est inacceptable.</p></li>
 </ul>
 <p>En revanche, le réchauffement <strong>n'</strong> est <strong>pas recommandé</strong> pour les champs ou les index rarement interrogés. La désactivation de la fonction Warm Up réduit le temps de chargement des segments et préserve l'espace du cache, ce qui est idéal pour les grands champs vectoriels ou les champs scalaires non critiques.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p><code translate="no">disable</code></p></td>
-     <td><p>Sauter le préchargement. Le segment devient interrogeable plus rapidement, mais la première requête peut déclencher un chargement à la demande.</p></td>
+     <td><p>Sauter le préchargement. Le segment devient interrogeable plus rapidement, mais la première interrogation peut déclencher un chargement à la demande.</p></td>
      <td><p>À utiliser pour les données volumineuses ou rarement consultées, telles que les champs vectoriels bruts ou les champs scalaires non critiques.</p></td>
    </tr>
 </table>
@@ -145,7 +145,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le préchauffage n'affecte que le <strong>chargement initial</strong>. Si les données mises en cache sont expulsées ultérieurement, la requête suivante les rechargera à la demande.</p>
+    </button></h2><p>Le préchauffage n'affecte que le chargement initial. Si les données mises en cache sont expulsées ultérieurement, la requête suivante les rechargera à la demande.</p>
 <ul>
 <li><p>Évitez d'abuser de <code translate="no">sync</code>. Le préchargement d'un trop grand nombre de champs augmente le temps de chargement et la pression sur le cache.</p></li>
 <li><p>Commencez de manière prudente : activez Warm Up uniquement pour les champs et les index auxquels on accède fréquemment.</p></li>

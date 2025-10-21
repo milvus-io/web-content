@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">RTREE</code> 索引是一种基于树的数据结构，可加速对 Milvus 中<code translate="no">GEOMETRY</code> 字段的查询。如果您的 Collections 以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">已知文本 (WKT)</a>格式存储点、线或多边形等几何对象，并且希望加速空间过滤，那么<code translate="no">RTREE</code> 是理想的选择。</p>
+    </button></h1><p><code translate="no">RTREE</code> 索引是一种基于树的数据结构，可加速对 Milvus 中<code translate="no">GEOMETRY</code> 字段的查询。如果您的 Collections 以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">已知文本 (WKT)</a>格式存储点、线或多边形等几何对象，并且希望加速空间过滤，<code translate="no">RTREE</code> 是理想的选择。</p>
 <h2 id="How-it-works" class="common-anchor-header">工作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -213,8 +213,8 @@ hits = client.search(
     </button></h2><p>使用<code translate="no">drop_index()</code> 方法从 Collections 中删除现有索引。</p>
 <div class="alert note">
 <ul>
-<li><p>在<strong>v2.6.3</strong>或更早版本中，删除索引前必须释放 Collections。</p></li>
-<li><p>从<strong>v2.6.4</strong>或更高版本开始，一旦不再需要索引，就可以直接删除索引，而无需先释放 Collections。</p></li>
+<li><p>在<strong>v2.6.3</strong>或更早版本中，删除标量索引前必须释放 Collections。</p></li>
+<li><p>从<strong>v2.6.4</strong>或更高版本开始，一旦不再需要标量索引，就可以直接删除，无需先释放 Collections。</p></li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(

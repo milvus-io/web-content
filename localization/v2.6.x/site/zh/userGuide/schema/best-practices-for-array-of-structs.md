@@ -38,7 +38,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h2><p>从自动驾驶到多模态检索，现代人工智能应用越来越依赖于嵌套的异构数据。传统的平面数据模型难以表示复杂的关系，如<strong>"一个文档包含许多注释块</strong>"或<strong>"一个驾驶场景包含多个观察到的操作</strong>"。这正是 Milvus 的结构数组数据类型的优势所在。</p>
-<p>数组结构体允许您存储一组有序的结构化元素，其中每个结构体都包含自己的标量字段和向量嵌入的组合。因此，它非常适合于</p>
+<p>数组结构体允许您存储一组有序的结构化元素，其中每个结构体都包含自己的标量字段和向量嵌入的组合。这使得它非常适合于</p>
 <ul>
 <li><p><strong>分层数据</strong>：具有多个子记录的父实体，如具有许多文本块的书籍或具有许多注释帧的视频。</p></li>
 <li><p><strong>多模态嵌入</strong>：每个 Struct 都可以容纳多个向量，如文本嵌入加图像嵌入，以及元数据。</p></li>
@@ -95,7 +95,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>每个数组字段都有一个属性，用于指定每个实体的数组字段可容纳的最大元素数。根据用例的上限来设置。例如，每个文档有 1000 个文本块，或每个驾驶场景有 100 个操作。</p>
 <p>过高的值会浪费内存，因此需要进行一些计算来确定 Array 字段中 Struct 的最大数量。</p>
-<h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">在 Struct 中索引向量字段<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
+<h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">在 Structs 中索引向量字段<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,7 +112,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>对于向量场，包括 Collections 中的向量场和 Struct 中定义的向量场，都必须进行索引。对于 Struct 中的向量字段，应使用<code translate="no">EMB_LIST_HNSW</code> 作为索引类型，使用<code translate="no">MAX_SIM</code> 作为度量类型。</p>
 <p>有关所有适用限制的详细信息，请参阅<a href="/docs/zh/array-of-structs.md#Limits">限制</a>。</p>
-<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">真实世界示例为自动驾驶建立 CoVLA 数据集模型<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
+<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">实际示例为自动驾驶建立 CoVLA 数据集模型<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,7 +149,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>CoVLA 数据集是一个大规模、多模态驾驶数据集，包含 10,000 个视频片段，总时长超过 80 小时。该数据集以 20Hz 的速率对帧进行采样，并为每一帧添加详细的自然语言说明以及车辆状态和检测到的物体坐标信息。</p>
+    </button></h3><p>CoVLA 数据集是一个大规模、多模态驾驶数据集，包含 10,000 个视频片段，总时长超过 80 小时。该数据集以 20Hz 的频率对帧进行采样，并为每一帧添加详细的自然语言说明以及车辆状态和检测到的物体坐标信息。</p>
 <p>数据集结构如下：</p>
 <pre><code translate="no" class="language-python">├── video_1                                       (VIDEO) <span class="hljs-comment"># video.mp4</span>
 │   ├── video_id                                  (INT)
@@ -192,7 +192,7 @@ beta: Milvus 2.6.4+
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以发现，CoVLA 数据集的结构具有很强的层次性，将 Collections 数据分为多个<code translate="no">.jsonl</code> 文件，同时还有<code translate="no">.mp4</code> 格式的视频片段。</p>
-<p>在 Milvus 中，您可以使用 JSON 字段或 Array-of-Structs 字段在 Collections Schema 中创建嵌套结构。当向量嵌入是嵌套格式的一部分时，只支持结构数组字段。不过，数组内的结构体本身不能包含更多嵌套结构。要在保留基本关系的同时存储 CoVLA 数据集，就需要删除不必要的层次结构，并将数据扁平化，使其符合 Milvus Collections Schema。</p>
+<p>在 Milvus 中，您可以使用 JSON 字段或 Array-of-Structs 字段在 Collections Schema 中创建嵌套结构。当向量嵌入是嵌套格式的一部分时，只支持结构数组字段。不过，数组内的结构体本身不能包含更多嵌套结构。要在保留基本关系的同时存储 CoVLA 数据集，就需要删除不必要的层次结构并将数据扁平化，使其符合 Milvus Collections Schema。</p>
 <p>下图说明了我们如何使用下面的 Schema 模式为这个数据集建模：</p>
 <p>
   
@@ -205,10 +205,10 @@ beta: Milvus 2.6.4+
 <li><p><code translate="no">captions</code> 是一个 Struct 数组，每个 Struct 都有以下字段：</p>
 <ul>
 <li><p><code translate="no">frame_id</code> 标识当前视频中的特定帧。</p></li>
-<li><p><code translate="no">plain_caption</code> 是对当前帧的描述，不包含周围环境，如天气、路况等，<code translate="no">plain_cap_vector</code> 是其相应的向量嵌入。</p></li>
+<li><p><code translate="no">plain_caption</code> 是对当前帧的描述，不包含周围环境，如天气、路况等，<code translate="no">plain_cap_vector</code> 是其对应的向量嵌入。</p></li>
 <li><p><code translate="no">rich_caption</code> 是对当前有环境的帧的描述，<code translate="no">rich_cap_vector</code> 是其对应的向量嵌入。</p></li>
 <li><p><code translate="no">risk</code> 是对当前帧中小我车辆所面临风险的描述，<code translate="no">risk_vector</code> 是其对应的向量嵌入，以及</p></li>
-<li><p>帧的其他所有属性，如<code translate="no">road</code>,<code translate="no">weather</code>,<code translate="no">is_tunnel</code>,<code translate="no">has_pedestrain</code>, 等。</p></li>
+<li><p>帧的所有其他属性，如<code translate="no">road</code>,<code translate="no">weather</code>,<code translate="no">is_tunnel</code>,<code translate="no">has_pedestrain</code>, 等。</p></li>
 </ul></li>
 <li><p><code translate="no">traffic_lights</code> 是一个 JSON 主体，包含当前帧中标识的所有交通信号灯。</p></li>
 <li><p><code translate="no">front_cars</code> 也是一个 JSON 体，包含当前帧中识别出的所有前导车。</p></li>

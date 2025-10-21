@@ -41,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>数値フィールド（例：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> ）。詳細は「<a href="/docs/ja/number.md">Boolean &amp; Number</a>」を参照。</p></li>
+<li><p>数値フィールド（例：<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code> ）。詳細は「<a href="/docs/ja/number.md">Boolean &amp; Number</a>」を参照。</p></li>
 <li><p><code translate="no">TIMESTAMPTZ</code> フィールド。詳細は「<a href="/docs/ja/timestamptz-field.md">TIMESTAMPTZフィールド</a>」を参照。</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -63,7 +63,7 @@ summary: >-
 <ol>
 <li><p><strong>インデックスの構築</strong></p>
 <ul>
-<li><p>インジェスト中、Milvusはインデックスされたフィールドの全ての値を収集します。</p></li>
+<li><p>インジェスト中、Milvusはインデックスされたフィールドのすべての値を収集します。</p></li>
 <li><p>値はC++ STLの<a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sortを</a>使用して昇順にソートされます。</p></li>
 <li><p>各値はエンティティIDと対にされ、ソートされた配列がインデックスとして永続化されます。</p></li>
 </ul></li>

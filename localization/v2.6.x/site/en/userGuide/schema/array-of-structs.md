@@ -152,6 +152,7 @@ beta: Milvus 2.6.4+
 <li><p>Set the field’s <code translate="no">element_type</code> attribute to <code translate="no">DataType.STRUCT</code> to make the field an Array of Structs.</p></li>
 <li><p>Create a Struct schema and include the required fields. Then, reference the Struct schema in the field’s <code translate="no">struct_schema</code> attribute.</p></li>
 <li><p>Set the field’s <code translate="no">max_capacity</code> attribute to an appropriate value to specify the maximum number of Structs each entity can contain in this field.</p></li>
+<li><p>(<strong>Optional</strong>) You can set <code translate="no">mmap.enabled</code> for any field within the Struct element to balance the hot and cold data in the Struct.</p></li>
 </ol>
 <p>Here’s how you can define a collection schema that includes an Array of Structs:</p>
 <div class="multipleCode">
@@ -183,8 +184,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -448,6 +449,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 <p>Specifically, you can directly use the names of the vector fields within Struct elements as the value for the <code translate="no">anns_field</code> parameter in a search request, and use <code translate="no">EmbeddingList</code> to organize query vectors neatly.</p>
 <div class="alert note">
 <p>Milvus provides <code translate="no">EmbeddingList</code> to help you organize query vectors for searches against an embedding list in an Array of Structs more neatly.</p>
+<p>However, <code translate="no">EmbeddingList</code> can used only in <code translate="no">search()</code> requests without range search or grouping search parameters, let alone <code translate="no">search_iterator()</code> requests.</p>
 </div>
 <div class="multipleCode">
     <a href="#python">Python</a>

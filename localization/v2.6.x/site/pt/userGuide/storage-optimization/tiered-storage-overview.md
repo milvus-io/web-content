@@ -3,11 +3,11 @@ id: tiered-storage-overview.md
 title: Visão geral do armazenamento em camadasCompatible with Milvus 2.6.4+
 summary: >-
   No Milvus, o modo tradicional de carga completa requer que cada QueryNode
-  carregue todos os campos do esquema e índices de um segmento na inicialização,
+  carregue todos os campos de dados e índices de um segmento na inicialização,
   mesmo os dados que podem nunca ser acedidos. Isso garante a disponibilidade
   imediata dos dados, mas muitas vezes leva ao desperdício de recursos,
-  incluindo alto uso de memória, atividade pesada em disco e sobrecarga
-  significativa de E/S, especialmente ao lidar com conjuntos de dados em grande
+  incluindo alto uso de memória, atividade pesada de disco e sobrecarga
+  significativa de E/S, especialmente ao lidar com conjuntos de dados de grande
   escala.
 beta: Milvus 2.6.4+
 ---
@@ -26,16 +26,19 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>No Milvus, o <strong>modo</strong> tradicional <strong>de carga completa</strong> requer que cada QueryNode carregue todos os campos do esquema e índices de um <a href="https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf">segmento</a> na inicialização, mesmo os dados que podem nunca ser acedidos. Isso garante a disponibilidade imediata dos dados, mas muitas vezes leva ao desperdício de recursos, incluindo alto uso de memória, atividade pesada de disco e sobrecarga significativa de E/S, especialmente ao lidar com conjuntos de dados de grande escala.</p>
-<p><strong>O Armazenamento em camadas</strong> resolve esse desafio desacoplando o cache de dados do carregamento de segmentos. Em vez de carregar todos os dados de uma vez, o Milvus introduz uma camada de cache que distingue entre dados quentes (armazenados em cache localmente) e dados frios (armazenados remotamente). O QueryNode agora carrega apenas metadados leves inicialmente e puxa ou evita dinamicamente os dados sob demanda. Isso reduz significativamente o tempo de carregamento, otimiza a utilização de recursos locais e permite que os QueryNodes processem conjuntos de dados que excedem em muito sua memória física ou capacidade de disco.</p>
-<p>Você pode considerar a ativação do armazenamento em camadas em cenários como:</p>
+    </button></h1><p>No Milvus, o modo tradicional <em>de carga completa</em> requer que cada QueryNode carregue todos os campos de dados e índices de um <a href="/docs/pt/glossary.md#Segment">segmento</a> na inicialização, mesmo os dados que podem nunca ser acedidos. Isso garante a disponibilidade imediata dos dados, mas muitas vezes leva ao desperdício de recursos, incluindo alto uso de memória, atividade pesada de disco e sobrecarga significativa de E/S, especialmente ao lidar com conjuntos de dados de grande escala.</p>
+<p><em>O Armazenamento em camadas</em> resolve esse desafio desacoplando o cache de dados do carregamento de segmentos. Em vez de carregar todos os dados de uma vez, o Milvus introduz uma camada de cache que distingue entre dados quentes (armazenados em cache localmente) e dados frios (armazenados remotamente). O QueryNode agora carrega apenas <em>metadados</em> leves inicialmente e puxa ou evita dinamicamente os dados sob demanda. Isso reduz significativamente o tempo de carregamento, otimiza a utilização de recursos locais e permite que os QueryNodes processem conjuntos de dados que excedem em muito sua memória física ou capacidade de disco.</p>
+<p>Considere ativar o armazenamento em camadas em cenários como:</p>
 <ul>
 <li><p>Coleções que excedem a memória disponível ou a capacidade NVMe de um único QueryNode</p></li>
 <li><p>Cargas de trabalho analíticas ou em lote em que o carregamento mais rápido é mais importante do que a latência da primeira consulta</p></li>
-<li><p>Cargas de trabalho mistas que podem tolerar falhas ocasionais no cache para dados acessados com menos frequência</p></li>
+<li><p>Cargas de trabalho mistas que podem tolerar falhas ocasionais de cache para dados acedidos com menos frequência</p></li>
 </ul>
 <div class="alert note">
-<p>Para obter mais detalhes sobre segmentos e blocos, consulte <a href="https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf">Segmento explicado</a>.</p>
+<ul>
+<li><p><em>Os metadados</em> incluem esquema, definições de índice, mapas de partes, contagens de linhas e referências a objectos remotos. Esse tipo de dados é pequeno, sempre armazenado em cache e nunca evacuado.</p></li>
+<li><p>Para obter mais detalhes sobre segmentos e pedaços, consulte <a href="/docs/pt/glossary.md#Segment">Segmento</a>.</p></li>
+</ul>
 </div>
 <h2 id="How-it-works" class="common-anchor-header">Como funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,11 +55,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O armazenamento em camadas altera a forma como o QueryNode gerencia os dados do segmento. Em vez de armazenar em cache todos os campos e índices no momento do carregamento, o QueryNode agora carrega apenas <strong>metadados</strong> e usa uma camada de cache para buscar e despejar dados dinamicamente.</p>
-<div class="alert note">
-<p><strong>Os metadados</strong> incluem esquemas, definições de índices, mapas de partes, contagens de linhas e referências a objectos remotos. Esses dados são pequenos, sempre armazenados em cache e nunca são removidos.</p>
-</div>
-<h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">Modo de carga total vs. modo de armazenamento em camadas<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
+    </button></h2><p>O armazenamento em camadas altera a forma como o QueryNode gerencia os dados do segmento. Em vez de armazenar em cache todos os campos e índices no momento do carregamento, o QueryNode agora carrega apenas metadados e usa uma camada de cache para buscar e despejar dados dinamicamente.</p>
+<h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">Modo de carga completa vs. modo de armazenamento em camadas<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +71,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Embora os modos de Armazenamento de Carga Total e Armazenamento em Camadas lidem com os mesmos dados, diferem em quando e como o QueryNode coloca estes componentes em cache.</p>
+    </button></h3><p>Embora os modos de carregamento completo e de armazenamento em camadas lidem com os mesmos dados, diferem em <em>quando</em> e <em>como</em> o QueryNode coloca estes componentes em cache.</p>
 <ul>
 <li><p><strong>Modo de carga completa</strong>: No momento do carregamento, o QueryNode coloca em cache os dados da coleção completa, incluindo metadados, dados de campo e índices, a partir do armazenamento de objectos.</p></li>
 <li><p><strong>Modo de armazenamento em camadas</strong>: No momento do carregamento, o QueryNode coloca em cache apenas os metadados. Os dados de campo são extraídos sob demanda na granularidade de partes. Os arquivos de índice permanecem remotos até que a primeira consulta precise deles; então, todo o índice por segmento é obtido e armazenado em cache.</p></li>
@@ -96,49 +96,37 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No armazenamento em camadas, o fluxo de trabalho tem três fases:</p>
+    </button></h3><p>No armazenamento em camadas, o fluxo de trabalho tem as seguintes fases:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-loading-workflow.png" alt="Querynode Loading Workflow" class="doc-image" id="querynode-loading-workflow" />
-   </span> <span class="img-wrapper"> <span>Fluxo de trabalho de carregamento do Querynode</span> </span></p>
-<h4 id="Lazy-load" class="common-anchor-header">Carregamento lento</h4><p>Na inicialização, o Milvus executa um carregamento lento, armazenando em cache apenas <strong>os metadados</strong> que contêm definições de esquema, informações de índice, mapeamentos de pedaços e contagens de linhas.</p>
-<p>Nenhum dado de campo ou arquivo de índice é baixado neste estágio. Isso faz com que as coleções possam ser consultadas rapidamente e minimiza o uso de recursos de inicialização.</p>
-<p><strong>Vantagens</strong></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/load-workflow.png" alt="Load Workflow" class="doc-image" id="load-workflow" />
+   </span> <span class="img-wrapper"> <span>Fluxo de trabalho de carregamento</span> </span></p>
+<h4 id="Phase-1-Lazy-load" class="common-anchor-header">Fase 1: Carregamento lento</h4><p>Na inicialização, o Milvus executa uma carga lenta, armazenando em cache apenas metadados de nível de segmento, como definições de esquema, informações de índice e mapeamentos de pedaços.</p>
+<p>Nenhum dado de campo real ou arquivos de índice são armazenados em cache neste estágio. Isso permite que as coleções se tornem consultáveis quase imediatamente após a inicialização, mantendo o consumo mínimo de memória e disco.</p>
+<p>Como os dados de campo e os ficheiros de índice permanecem no armazenamento remoto até serem acedidos pela primeira vez, a <em>primeira consulta</em> pode sofrer latência adicional, uma vez que os dados necessários têm de ser obtidos a pedido. Para atenuar esse efeito para campos ou índices críticos, é possível usar a estratégia <a href="/docs/pt/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up</a> para pré-carregá-los proativamente antes que o segmento se torne consultável.</p>
+<p><strong>Configuração</strong></p>
+<p>Aplicado automaticamente quando o armazenamento em camadas está ativado. Nenhuma outra configuração manual é necessária.</p>
+<h4 id="Phase-2-Warm-up" class="common-anchor-header">Fase 2: Aquecimento</h4><p>Para reduzir a latência de primeiro acesso introduzida pela <a href="/docs/pt/tiered-storage-overview.md#Phase-1-Lazy-load">carga preguiçosa</a>, o Milvus fornece um mecanismo de *Aquecimento.</p>
+<p>Antes que um segmento se torne consultável, o Milvus pode proativamente buscar e armazenar em cache campos ou índices específicos do armazenamento de objetos, garantindo que a primeira consulta atinja diretamente os dados em cache em vez de acionar o carregamento sob demanda.</p>
+<p><strong>Configuração</strong></p>
+<p>As definições de Warm Up são definidas na secção Tiered Storage de <strong>milvus.yaml</strong>. É possível ativar ou desativar o pré-carregamento para cada campo ou tipo de índice e especificar a estratégia preferida. Consulte <a href="/docs/pt/warm-up.md">Warm Up</a> para obter exemplos de configuração.</p>
+<h4 id="Phase-3-Partial-load" class="common-anchor-header">Fase 3: carregamento parcial</h4><p>Quando as consultas ou pesquisas começam, o QueryNode executa um <em>carregamento parcial</em>, obtendo apenas os blocos de dados ou arquivos de índice necessários do armazenamento de objetos.</p>
 <ul>
-<li><p>Tempo de carregamento da coleção significativamente mais rápido</p></li>
-<li><p>Mínima ocupação de memória e disco</p></li>
-<li><p>Permite que os QueryNodes tratem mais segmentos em simultâneo</p></li>
+<li><p><strong>Campos</strong>: Carregado sob demanda no <strong>nível do bloco</strong>. Somente os pedaços de dados que correspondem às condições de consulta atuais são obtidos, minimizando o uso de E/S e memória.</p></li>
+<li><p><strong>Índices</strong>: Carregados sob demanda no <strong>nível do segmento</strong>. Os ficheiros de índice têm de ser obtidos como unidades completas e não podem ser divididos em blocos.</p></li>
 </ul>
 <p><strong>Configuração</strong></p>
-<p>Aplicado automaticamente quando o armazenamento em camadas está ativado. Nenhuma configuração manual é necessária.</p>
-<h4 id="Partial-load" class="common-anchor-header">Carga parcial</h4><p>Quando uma operação de consulta ou pesquisa é iniciada, o QueryNode executa um carregamento parcial, obtendo apenas os pedaços de campo ou índices necessários do armazenamento de objetos e armazenando-os temporariamente em cache para reutilização.</p>
+<p>A carga parcial é aplicada automaticamente quando o armazenamento em camadas está ativado. Nenhuma configuração manual é necessária. Para minimizar a latência de primeiro acesso para dados críticos, combine com <a href="/docs/pt/warm-up.md">Warm Up</a>.</p>
+<h4 id="Phase-4-Eviction" class="common-anchor-header">Fase 4: Evicção</h4><p>Para manter o uso saudável dos recursos, Milvus libera automaticamente os dados em cache não utilizados quando os limites são atingidos.</p>
+<p>O despejo segue uma política de <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">Menos Utilizados Recentemente (LRU)</a>, garantindo que os dados acessados com pouca frequência sejam removidos primeiro enquanto os dados ativos permanecem no cache.</p>
+<p>O despejo é regido pelos seguintes itens configuráveis:</p>
 <ul>
-<li><p><strong>Campos</strong>: Carregados a pedido ao nível do <strong>bloco</strong> </p></li>
-<li><p><strong>Índices:</strong> Carregados na primeira vez que são acedidos ao nível do <strong>segmento</strong> </p></li>
-</ul>
-<p><strong>Vantagens</strong></p>
-<ul>
-<li><p>Reduz a pressão sobre a memória e o disco</p></li>
-<li><p>Permite que o Milvus consulte grandes conjuntos de dados de forma eficiente</p></li>
-<li><p>Equilibra a latência da consulta e a eficiência dos recursos</p></li>
+<li><p><strong>Marcas d'água</strong>: Define os limites de memória ou disco que acionam e interrompem o despejo.</p></li>
+<li><p><strong>TTL da cache</strong>: remove dados obsoletos da cache após uma duração definida de inatividade.</p></li>
+<li><p><strong>Taxa de comprometimento excessivo</strong>: Permite o excesso de assinatura temporária do cache antes do início do despejo agressivo, ajudando a absorver picos de carga de trabalho de curto prazo.</p></li>
 </ul>
 <p><strong>Configuração</strong></p>
-<p>A carga parcial é o comportamento padrão quando o armazenamento em camadas está ativado. Para minimizar a latência de primeiro acesso para campos ou índices críticos, use <strong>Warm Up</strong> para pré-carregar os dados antes das consultas. Consulte <a href="/docs/pt/warm-up.md">Warm Up</a> para obter exemplos de configuração.</p>
-<h4 id="Eviction" class="common-anchor-header">Evicção</h4><p>Para manter o uso saudável dos recursos, Milvus libera automaticamente os dados em cache não utilizados quando os limites são atingidos.</p>
-<p>O despejo segue uma política de <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">Menos Recentemente Usado (LRU)</a> e é governado por parâmetros configuráveis:</p>
-<ul>
-<li><p><strong>Marcas d'água:</strong> Define os limites de início e fim do despejo</p></li>
-<li><p><strong>TTL da cache:</strong> remove itens obsoletos da cache após uma duração definida</p></li>
-<li><p><strong>Rácio de sobrecompromisso:</strong> Permite o excesso de subscrição temporária antes que o despejo acelere</p></li>
-</ul>
-<p><strong>Benefícios</strong></p>
-<ul>
-<li><p>Mantém o uso do cache estável entre as cargas de trabalho</p></li>
-<li><p>Maximiza a reutilização do cache enquanto evita falhas</p></li>
-<li><p>Mantém o desempenho previsível ao longo do tempo</p></li>
-</ul>
-<p><strong>Configuração</strong></p>
-<p>Habilite e ajuste os parâmetros de despejo em <code translate="no">milvus.yaml</code>. Consulte <a href="/docs/pt/eviction.md">Evicção</a> para obter uma configuração detalhada.</p>
+<p>Habilite e ajuste os parâmetros de despejo em <strong>milvus.yaml</strong>. Consulte <a href="/docs/pt/eviction.md">Evicção</a> para obter uma configuração detalhada.</p>
 <h2 id="Getting-started" class="common-anchor-header">Introdução<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,11 +2,11 @@
 id: warm-up.md
 title: PemanasanCompatible with Milvus 2.6.4+
 summary: >-
-  Di Milvus, Pemanasan melengkapi Penyimpanan Berjenjang dengan menghilangkan
-  latensi yang terjadi saat data dingin diakses untuk pertama kalinya. Setelah
-  dikonfigurasi, Warm Up melakukan pramuat bidang atau indeks yang dipilih ke
-  dalam cache sebelum segmen dapat di-query, sehingga memastikan bahwa data yang
-  sering diakses tersedia segera setelah dimuat.
+  Di Milvus, Warm Up melengkapi Tiered Storage dengan mengurangi latensi yang
+  terjadi saat data dingin diakses untuk pertama kalinya. Setelah dikonfigurasi,
+  Warm Up melakukan pramuat bidang atau indeks yang dipilih ke dalam cache
+  sebelum segmen dapat dimintai, sehingga memastikan bahwa data yang sering
+  diakses tersedia segera setelah dimuat.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Warm-Up" class="common-anchor-header">Pemanasan<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Warm-Up" class="anchor-icon" translate="no">
@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Di Milvus, <strong>Pemanasan</strong> melengkapi Penyimpanan Berjenjang dengan menghilangkan latensi yang terjadi saat data dingin diakses untuk pertama kalinya. Setelah dikonfigurasi, Pemanasan melakukan pramuat bidang atau indeks yang dipilih ke dalam cache sebelum segmen dapat dimintakan, sehingga memastikan bahwa data yang sering diakses tersedia segera setelah dimuat.</p>
+    </button></h1><p>Di Milvus, <strong>Pemanasan</strong> melengkapi Penyimpanan Berjenjang dengan mengurangi latensi yang terjadi saat data dingin diakses untuk pertama kalinya. Setelah dikonfigurasi, Pemanasan melakukan pramuat bidang atau indeks yang dipilih ke dalam cache sebelum segmen dapat dimintai, sehingga memastikan bahwa data yang sering diakses tersedia segera setelah dimuat.</p>
 <h2 id="Why-warm-up" class="common-anchor-header">Mengapa pemanasan<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,13 +40,13 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/id/tiered-storage-overview.md#Lazy-load">Lazy Load</a> di Penyimpanan Berjenjang meningkatkan efisiensi dengan hanya memuat metadata pada awalnya. Namun, hal ini dapat menyebabkan latensi pada kueri pertama ke data dingin, karena potongan atau indeks yang diperlukan harus diambil dari penyimpanan objek.</p>
+    </button></h2><p><a href="/docs/id/tiered-storage-overview.md#Phase-1-Lazy-load">Lazy Load</a> di Penyimpanan Berjenjang meningkatkan efisiensi dengan hanya memuat metadata pada awalnya. Namun, hal ini dapat menyebabkan latensi pada kueri pertama ke data dingin, karena potongan atau indeks yang diperlukan harus diambil dari penyimpanan objek.</p>
 <p><strong>Warm Up</strong> memecahkan masalah ini dengan menyimpan data penting secara proaktif di cache selama inisialisasi segmen.</p>
 <p>Ini sangat bermanfaat ketika:</p>
 <ul>
-<li><p><strong>Indeks skalar</strong> tertentu sering digunakan dalam kondisi filter.</p></li>
-<li><p><strong>Indeks vektor</strong> sangat penting untuk kinerja pencarian dan harus segera disiapkan.</p></li>
-<li><p><strong>Latensi cold-start</strong> setelah QueryNode dimulai ulang atau pemuatan segmen baru tidak dapat diterima.</p></li>
+<li><p>Indeks skalar tertentu sering digunakan dalam kondisi filter.</p></li>
+<li><p>Indeks vektor sangat penting untuk kinerja pencarian dan harus segera disiapkan.</p></li>
+<li><p>Latensi cold-start setelah QueryNode dimulai ulang atau pemuatan segmen baru tidak dapat diterima.</p></li>
 </ul>
 <p>Sebaliknya, Pemanasan <strong>tidak disarankan</strong> untuk bidang atau indeks yang jarang ditanyakan. Menonaktifkan Pemanasan akan mempersingkat waktu pemuatan segmen dan menghemat ruang cache - ideal untuk bidang vektor besar atau bidang skalar yang tidak kritis.</p>
 <h2 id="Configuration" class="common-anchor-header">Konfigurasi<button data-href="#Configuration" class="anchor-icon" translate="no">
@@ -144,7 +144,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pemanasan hanya memengaruhi <strong>beban awal</strong>. Jika data yang di-cache kemudian digusur, kueri berikutnya akan memuat ulang sesuai permintaan.</p>
+    </button></h2><p>Pemanasan hanya memengaruhi beban awal. Jika data yang di-cache kemudian digusur, kueri berikutnya akan memuat ulang sesuai permintaan.</p>
 <ul>
 <li><p>Hindari penggunaan <code translate="no">sync</code> secara berlebihan. Memuat terlalu banyak bidang akan meningkatkan waktu muat dan tekanan cache.</p></li>
 <li><p>Mulailah secara konservatif - aktifkan Pemanasan hanya untuk bidang dan indeks yang sering diakses.</p></li>

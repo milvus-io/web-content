@@ -150,11 +150,12 @@ beta: Milvus 2.6.4+
 <li><p>تعيين نوع بيانات الحقل إلى <code translate="no">DataType.ARRAY</code> عند إضافة الحقل كحقل مصفوفة إلى مخطط المجموعة.</p></li>
 <li><p>قم بتعيين سمة الحقل <code translate="no">element_type</code> إلى <code translate="no">DataType.STRUCT</code> لجعل الحقل مصفوفة من الهياكل.</p></li>
 <li><p>قم بإنشاء مخطط Struct (بنية) وقم بتضمين الحقول المطلوبة. بعد ذلك، قم بالإشارة إلى مخطط الهيكل في سمة الحقل <code translate="no">struct_schema</code>.</p></li>
-<li><p>اضبط سمة الحقل <code translate="no">max_capacity</code> على قيمة مناسبة لتحديد الحد الأقصى لعدد الهياكل التي يمكن أن يحتويها كل كيان في هذا الحقل.</p></li>
+<li><p>قم بتعيين سمة الحقل <code translate="no">max_capacity</code> إلى قيمة مناسبة لتحديد الحد الأقصى لعدد الهياكل التي يمكن أن يحتويها كل كيان في هذا الحقل.</p></li>
+<li><p><strong>(اختياري</strong>) يمكنك تعيين <code translate="no">mmap.enabled</code> لأي حقل داخل عنصر Struct لموازنة البيانات الساخنة والباردة في Struct.</p></li>
 </ol>
-<p>إليك كيفية تعريف مخطط مجموعة يتضمن مصفوفة من الهياكل:</p>
+<p>إليك كيفية تحديد مخطط مجموعة يتضمن مصفوفة من الهياكل:</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 schema = MilvusClient.create_schema()
@@ -177,8 +178,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -193,7 +194,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>توضح الأسطر المظللة في المثال البرمجي أعلاه إجراء تضمين مصفوفة من الهياكل في مخطط مجموعة.</p>
+<p>توضّح الأسطر المظللة في مثال الشيفرة أعلاه إجراء تضمين مصفوفة من الهياكل في مخطط مجموعة.</p>
 <h2 id="Set-index-params" class="common-anchor-header">تعيين بارامترات الفهرس<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -427,9 +428,10 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 <p>على وجه التحديد، يمكنك استخدام أسماء حقول المتجهات داخل عناصر Structs مباشرةً كقيمة للمعلمة <code translate="no">anns_field</code> في طلب البحث، واستخدام <code translate="no">EmbeddingList</code> لتنظيم متجهات الاستعلام بشكل منظم.</p>
 <div class="alert note">
 <p>يوفر Milvus <code translate="no">EmbeddingList</code> لمساعدتك في تنظيم ناقلات الاستعلام لعمليات البحث مقابل قائمة تضمين في مصفوفة من الهياكل بشكل أكثر دقة.</p>
+<p>ومع ذلك، يمكن استخدام <code translate="no">EmbeddingList</code> فقط في طلبات <code translate="no">search()</code> دون البحث عن النطاق أو تجميع معلمات البحث، ناهيك عن طلبات <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> EmbeddingList
 
 <span class="hljs-comment"># each query embedding list triggers a single search</span>
@@ -458,7 +460,7 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يستخدم طلب البحث أعلاه <code translate="no">chunks[text_vector]</code> للإشارة إلى الحقل <code translate="no">text_vector</code> في عناصر Structs. يمكنك استخدام هذه الصيغة لتعيين المعلمات <code translate="no">anns_field</code> و <code translate="no">output_fields</code>.</p>
+<p>يستخدم طلب البحث أعلاه <code translate="no">chunks[text_vector]</code> للإشارة إلى الحقل <code translate="no">text_vector</code> في عناصر Struct. يمكنك استخدام هذه الصيغة لتعيين المعلمات <code translate="no">anns_field</code> و <code translate="no">output_fields</code>.</p>
 <p>سيكون الناتج قائمة بالكيانات الثلاثة الأكثر تشابهًا.</p>
 <p><details></p>
 <p><summary>الإخراج</summary></p>

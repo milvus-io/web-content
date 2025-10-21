@@ -153,6 +153,7 @@ beta: Milvus 2.6.4+
 <li><p>Tetapkan atribut <code translate="no">element_type</code> field ke <code translate="no">DataType.STRUCT</code> untuk menjadikan field sebagai Array dari Struktur.</p></li>
 <li><p>Buat skema Struktur dan sertakan bidang yang diperlukan. Lalu, rujuk skema Struktur di atribut <code translate="no">struct_schema</code> bidang.</p></li>
 <li><p>Atur atribut <code translate="no">max_capacity</code> bidang ke nilai yang sesuai untuk menentukan jumlah maksimum Struktur yang dapat ditampung oleh setiap entitas dalam bidang ini.</p></li>
+<li><p><strong>(Opsional</strong>) Anda bisa menetapkan <code translate="no">mmap.enabled</code> untuk bidang apa pun dalam elemen Struct untuk menyeimbangkan data panas dan data dingin dalam Struct.</p></li>
 </ol>
 <p>Berikut ini cara mendefinisikan skema koleksi yang menyertakan Array of Structs:</p>
 <div class="multipleCode">
@@ -179,8 +180,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -428,7 +429,8 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
     </button></h2><p>Anda dapat melakukan pencarian vektor pada bidang vektor dari koleksi dan Array of Structs.</p>
 <p>Secara khusus, Anda dapat secara langsung menggunakan nama-nama bidang vektor dalam elemen Struct sebagai nilai untuk parameter <code translate="no">anns_field</code> dalam permintaan pencarian, dan menggunakan <code translate="no">EmbeddingList</code> untuk mengatur vektor kueri dengan rapi.</p>
 <div class="alert note">
-<p>Milvus menyediakan <code translate="no">EmbeddingList</code> untuk membantu Anda mengatur vektor kueri untuk pencarian terhadap daftar penyisipan dalam larik Struktur dengan lebih rapi.</p>
+<p>Milvus menyediakan <code translate="no">EmbeddingList</code> untuk membantu Anda mengatur vektor kueri untuk pencarian terhadap daftar penyisipan dalam larik Struct dengan lebih rapi.</p>
+<p>Namun, <code translate="no">EmbeddingList</code> hanya dapat digunakan pada permintaan <code translate="no">search()</code> tanpa pencarian rentang atau pengelompokan parameter pencarian, apalagi permintaan <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

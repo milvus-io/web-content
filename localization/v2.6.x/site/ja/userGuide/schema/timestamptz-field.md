@@ -396,7 +396,7 @@ res = client.search(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>コレクションに2つ以上のベクトルフィールドがある場合、タイムスタンプフィルタリングとハイブリッド検索を実行できます。詳細については、<a href="/docs/ja/multi-vector-search.md">Multi-Vector Hybrid Searchを</a>参照してください。</p>
+<p>コレクションに2つ以上のベクトルフィールドがある場合、タイムスタンプフィルタリングとハイブリッド検索を実行できます。詳細は<a href="/docs/ja/multi-vector-search.md">Multi-Vector Hybrid Searchを</a>参照してください。</p>
 </div>
 <h2 id="Advanced-usage" class="common-anchor-header">高度な使用法<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"

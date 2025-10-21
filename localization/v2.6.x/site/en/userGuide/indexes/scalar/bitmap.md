@@ -112,8 +112,8 @@ client.create_index(
     </button></h2><p>Use the <code translate="no">drop_index()</code> method to remove an existing index from a collection.</p>
 <div class="alert note">
 <ul>
-<li><p>In <strong>v2.6.3</strong> or earlier, you must release the collection before dropping an index.</p></li>
-<li><p>From <strong>v2.6.4</strong> or later, you can drop an index directly once it’s no longer needed—no need to release the collection first.</p></li>
+<li><p>In <strong>v2.6.3</strong> or earlier, you must release the collection before dropping a scalar index.</p></li>
+<li><p>From <strong>v2.6.4</strong> or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.</p></li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(

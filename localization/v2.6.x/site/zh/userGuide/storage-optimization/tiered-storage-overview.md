@@ -2,9 +2,9 @@
 id: tiered-storage-overview.md
 title: 分层存储概述Compatible with Milvus 2.6.4+
 summary: >-
-  在 Milvus 中，传统的满载模式要求每个 QueryNode 在初始化时加载段的所有 Schema
-  字段和索引，甚至包括可能永远不会被访问的数据。这虽然确保了数据的即时可用性，但往往会造成资源浪费，包括内存使用率高、磁盘活动频繁以及 I/O
-  开销大，尤其是在处理大规模数据集时。
+  在 Milvus
+  中，传统的满载模式要求每个查询节点在初始化时加载段的所有数据字段和索引，即使是可能永远不会被访问的数据。这虽然确保了数据的即时可用性，但往往会造成资源浪费，包括内存使用率高、磁盘活动频繁以及
+  I/O 开销大，尤其是在处理大规模数据集时。
 beta: Milvus 2.6.4+
 ---
 <h1 id="Tiered-Storage-Overview" class="common-anchor-header">分层存储概述<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Tiered-Storage-Overview" class="anchor-icon" translate="no">
@@ -22,54 +22,54 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，传统的<strong>满载模式</strong>要求每个 QueryNode 在初始化时加载<a href="https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf">段</a>的所有 Schema 字段和索引，甚至包括可能永远不会访问的数据。这虽然确保了数据的即时可用性，但往往会导致资源浪费，包括内存使用率高、磁盘活动频繁和 I/O 开销大，尤其是在处理大规模数据集时。</p>
-<p><strong>分层存储</strong>通过将数据<strong>缓存</strong>与分段加载解耦来应对这一挑战。Milvus 引入了一个缓存层，区分热数据（本地缓存）和冷数据（远程存储），而不是一次性加载所有数据。现在，QueryNode 最初只加载轻量级元数据，然后按需动态提取或删除数据。这大大缩短了加载时间，优化了本地资源利用率，并使查询节点能够处理远远超出其物理内存或磁盘容量的数据集。</p>
-<p>在以下情况下，可以考虑启用分层存储：</p>
+    </button></h1><p>在 Milvus 中，传统的<em>满载</em>模式要求每个查询节点在初始化时加载<a href="/docs/zh/glossary.md#Segment">段</a>的所有数据字段和索引，甚至包括可能永远不会被访问的数据。这可确保数据的即时可用性，但往往会导致资源浪费，包括内存使用率高、磁盘活动频繁和 I/O 开销大，尤其是在处理大规模数据集时。</p>
+<p><em>分层存储</em>通过将数据<em>缓存</em>与分段加载解耦来应对这一挑战。Milvus 引入了一个缓存层，区分热数据（本地缓存）和冷数据（远程存储），而不是一次性加载所有数据。现在，QueryNode 最初只加载轻量级<em>元数据</em>，然后按需动态提取或删除数据。这大大缩短了加载时间，优化了本地资源利用率，并使查询节点能够处理远远超出其物理内存或磁盘容量的数据集。</p>
+<p>在以下情况下，请考虑启用分层存储：</p>
 <ul>
 <li><p>超过单个 QueryNode 可用内存或 NVMe 容量的集合</p></li>
 <li><p>加载速度比首次查询延迟更重要的分析或批处理工作负载</p></li>
-<li><p>混合型工作负载，可容忍访问频率较低的数据偶尔出现缓存缺失</p></li>
+<li><p>对于访问频率较低的数据，可容忍偶尔缓存缺失的混合工作负载</p></li>
 </ul>
 <div class="alert note">
-<p>有关段和块的更多详情，请参阅 "<a href="https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf">段说明</a>"。</p>
-</div>
-<h2 id="How-it-works" class="common-anchor-header">工作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>分层存储改变了 QueryNode 管理段数据的方式。QueryNode 现在不再在加载时缓存每个字段和索引，而是只加载<strong>元数据</strong>，并使用缓存层动态获取和删除数据。</p>
-<div class="alert note">
-<p><strong>元数据</strong>包括 Schema、索引定义、块映射、行计数和远程对象引用。这些数据很小，始终处于缓存状态，而且永远不会被驱逐。</p>
-</div>
-<h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">全负载模式与分层存储模式的比较<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>虽然满载模式和分层存储模式处理的数据相同，但它们在 QueryNode 缓存这些组件的时间和方式上有所不同。</p>
 <ul>
-<li><p><strong>全负载模式</strong>：在加载时，QueryNode 从对象存储中缓存完整的 Collections 数据，包括元数据、字段数据和索引。</p></li>
+<li><p><em>元数据</em>包括 Schema、索引定义、块映射、行计数和远程对象引用。这类数据较小，始终处于缓存状态，且永不被驱逐。</p></li>
+<li><p>有关段和块的更多详情，请参阅<a href="/docs/zh/glossary.md#Segment">段</a>。</p></li>
+</ul>
+</div>
+<h2 id="How-it-works" class="common-anchor-header">如何工作<button data-href="#How-it-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>分层存储改变了 QueryNode 管理段数据的方式。QueryNode 现在不再在加载时缓存每个字段和索引，而是只加载元数据，并使用缓存层动态获取和驱逐数据。</p>
+<h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">满载模式与分层存储模式的比较<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>虽然满载模式和分层存储模式处理的数据相同，但它们在 QueryNode 缓存这些组件的<em>时间</em>和<em>方式</em>上有所不同。</p>
+<ul>
+<li><p><strong>满载模式</strong>：在加载时，QueryNode 从对象存储中缓存完整的 Collections 数据，包括元数据、字段数据和索引。</p></li>
 <li><p><strong>分层存储模式</strong>：加载时，QueryNode 只缓存元数据。字段数据以块为粒度按需提取。索引文件保持远程状态，直到第一次查询需要它们；然后获取并缓存整个分段索引。</p></li>
 </ul>
 <p>下图显示了这些差异。</p>
@@ -92,49 +92,37 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在分层存储模式下，工作流程分为三个阶段：</p>
+    </button></h3><p>在分层存储模式下，工作流程分为以下几个阶段：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-loading-workflow.png" alt="Querynode Loading Workflow" class="doc-image" id="querynode-loading-workflow" />
-   </span> <span class="img-wrapper"> <span>查询节点加载工作流程</span> </span></p>
-<h4 id="Lazy-load" class="common-anchor-header">懒加载</h4><p>初始化时，Milvus 执行懒加载，只缓存包含 Schema 定义、索引信息、块映射和行数的<strong>元数据</strong>。</p>
-<p>在此阶段不下载字段数据或索引文件。这样就能快速查询集合，并最大限度地减少启动资源的使用。</p>
-<p><strong>优点</strong></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/load-workflow.png" alt="Load Workflow" class="doc-image" id="load-workflow" />
+   </span> <span class="img-wrapper"> <span>加载工作流程</span> </span></p>
+<h4 id="Phase-1-Lazy-load" class="common-anchor-header">阶段 1：懒惰加载</h4><p>初始化时，Milvus 执行懒加载，只缓存段级元数据，如 Schema 定义、索引信息和块映射。</p>
+<p>在此阶段不会缓存实际字段数据或索引文件。这样，Collections 几乎可以在启动后立即开始查询，同时将内存和磁盘消耗降到最低。</p>
+<p>由于字段数据和索引文件在首次访问前一直保存在远程存储中，因此<em>首次查询</em>可能会出现额外的延迟，因为必须按需获取所需数据。为减轻关键字段或索引的这种影响，可以使用<a href="/docs/zh/tiered-storage-overview.md#Phase-2-Warm-up">预热</a>策略，在段可查询前主动预加载它们。</p>
+<p><strong>配置</strong></p>
+<p>启用分层存储时自动应用。无需其他手动设置。</p>
+<h4 id="Phase-2-Warm-up" class="common-anchor-header">阶段 2：预热</h4><p>为减少<a href="/docs/zh/tiered-storage-overview.md#Phase-1-Lazy-load">懒加载</a>带来的首次命中延迟，Milvus 提供了*预热机制。</p>
+<p>在段可查询之前，Milvus 可主动从对象存储中获取并缓存特定字段或索引，确保首次查询直接命中缓存数据，而不是触发按需加载。</p>
+<p><strong>配置</strong></p>
+<p>预热设置定义在<strong>milvus.yaml</strong> 的分层存储部分。你可以为每个字段或索引类型启用或禁用预加载，并指定首选策略。有关配置示例，请参阅<a href="/docs/zh/warm-up.md">预热</a>。</p>
+<h4 id="Phase-3-Partial-load" class="common-anchor-header">第 3 阶段：部分加载</h4><p>一旦开始查询或搜索，查询节点就会执行<em>部分加载</em>，仅从对象存储中获取所需的数据块或索引文件。</p>
 <ul>
-<li><p>大大加快了 Collections 的加载时间</p></li>
-<li><p>内存和磁盘占用最小</p></li>
-<li><p>使查询节点能够同时处理更多数据段</p></li>
+<li><p><strong>字段</strong>：按需加载数据<strong>块级别</strong>。只获取符合当前查询条件的数据块，从而最大限度地减少 I/O 和内存使用。</p></li>
+<li><p><strong>索引</strong>：在<strong>段级别</strong>按需加载。索引文件必须作为完整单元获取，不能分割成块。</p></li>
 </ul>
 <p><strong>配置</strong></p>
-<p>启用分层存储时自动应用。无需手动设置。</p>
-<h4 id="Partial-load" class="common-anchor-header">部分加载</h4><p>开始查询或搜索操作时，查询节点会执行部分加载，仅从对象存储中获取所需的字段块或索引，并将其临时缓存以备重用。</p>
+<p>启用分层存储时，会自动应用部分加载。无需手动设置。要尽量减少关键数据的首次命中延迟，请与<a href="/docs/zh/warm-up.md">预热</a>结合使用。</p>
+<h4 id="Phase-4-Eviction" class="common-anchor-header">第 4 阶段：驱逐</h4><p>为保持健康的资源使用，当达到阈值时，Milvus 会自动释放未使用的缓存数据。</p>
+<p>驱逐遵循 "<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">最近最少使用"（LRU）</a>策略，确保不常访问的数据首先被删除，而活动数据仍保留在缓存中。</p>
+<p>驱逐受以下可配置项的制约：</p>
 <ul>
-<li><p><strong>字段</strong>：按需加载<strong>块级</strong></p></li>
-<li><p><strong>索引：</strong>在<strong>段</strong>级别首次访问时加载</p></li>
-</ul>
-<p><strong>优点</strong></p>
-<ul>
-<li><p>减少内存和磁盘压力</p></li>
-<li><p>允许 Milvus 高效查询大型数据集</p></li>
-<li><p>平衡查询延迟和资源效率</p></li>
+<li><p><strong>水印</strong>：定义触发和停止驱逐的内存或磁盘阈值。</p></li>
+<li><p><strong>缓存 TTL</strong>：在规定的不活动时间后删除过时的缓存数据。</p></li>
+<li><p><strong>超额订购比率</strong>：允许在强制驱逐开始前临时超量占用缓存，帮助吸收短期工作负载峰值。</p></li>
 </ul>
 <p><strong>配置</strong></p>
-<p>启用分层存储时，部分加载是默认行为。要尽量减少关键字段或索引的首次命中延迟，请使用<strong>预热</strong>功能在查询前预载数据。有关配置示例，请参阅<a href="/docs/zh/warm-up.md">预热</a>。</p>
-<h4 id="Eviction" class="common-anchor-header">驱逐</h4><p>为保持健康的资源使用，当达到阈值时，Milvus 会自动释放未使用的缓存数据。</p>
-<p>驱逐遵循 "<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">最近最少使用"（LRU）</a>策略，并受可配置参数的控制：</p>
-<ul>
-<li><p><strong>水印：</strong>定义驱逐的开始和停止阈值</p></li>
-<li><p><strong>缓存 TTL：</strong>在定义的持续时间后删除过期缓存项</p></li>
-<li><p><strong>超量订购比率：</strong>在加速驱逐前允许临时超量订阅</p></li>
-</ul>
-<p><strong>优势</strong></p>
-<ul>
-<li><p>跨工作负载保持缓存使用稳定</p></li>
-<li><p>最大限度地提高缓存重用率，同时防止崩溃</p></li>
-<li><p>长期保持可预测的性能</p></li>
-</ul>
-<p><strong>配置</strong></p>
-<p>在<code translate="no">milvus.yaml</code> 中启用和调整驱逐参数。有关详细配置，请参阅 "<a href="/docs/zh/eviction.md">驱逐</a>"。</p>
+<p>在<strong>Milvus.yaml</strong> 中启用并调整驱逐参数。有关详细配置，请参阅 "<a href="/docs/zh/eviction.md">驱逐</a>"。</p>
 <h2 id="Getting-started" class="common-anchor-header">开始使用<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -166,7 +154,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus 2.6.4 以上版本</p></li>
+<li><p>Milvus 2.6.4 及以上版本</p></li>
 <li><p>具有专用内存和磁盘资源的查询节点</p></li>
 <li><p>对象存储后端（S3、MinIO 等）</p></li>
 </ul>

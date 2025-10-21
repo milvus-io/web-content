@@ -2,7 +2,7 @@
 id: warm-up.md
 title: AquecimentoCompatible with Milvus 2.6.4+
 summary: >-
-  No Milvus, o Warm Up complementa o armazenamento em camadas, eliminando a
+  No Milvus, o Warm Up complementa o armazenamento em camadas ao aliviar a
   latência de primeiro acesso que ocorre quando os dados frios são acessados
   pela primeira vez. Uma vez configurado, o Warm Up pré-carrega campos ou
   índices selecionados na cache antes de um segmento se tornar consultável,
@@ -25,7 +25,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>No Milvus, <strong>o Warm Up</strong> complementa o armazenamento em camadas, eliminando a latência de primeiro acesso que ocorre quando os dados frios são acessados pela primeira vez. Uma vez configurado, o Warm Up pré-carrega campos ou índices selecionados na cache antes de um segmento se tornar consultável, assegurando que os dados frequentemente acedidos estão disponíveis imediatamente após o carregamento.</p>
+    </button></h1><p>No Milvus, <strong>o Warm Up</strong> complementa o armazenamento em camadas ao aliviar a latência do primeiro acesso que ocorre quando os dados frios são acessados pela primeira vez. Uma vez configurado, o Warm Up pré-carrega campos ou índices selecionados na cache antes de um segmento se tornar consultável, assegurando que os dados frequentemente acedidos estão disponíveis imediatamente após o carregamento.</p>
 <h2 id="Why-warm-up" class="common-anchor-header">Porquê o aquecimento<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,13 +41,13 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/pt/tiered-storage-overview.md#Lazy-load">O Lazy Load</a> no armazenamento em camadas melhora a eficiência carregando apenas metadados inicialmente. No entanto, isso pode causar latência na primeira consulta a dados frios, pois os blocos ou índices necessários devem ser obtidos do armazenamento de objetos.</p>
+    </button></h2><p><a href="/docs/pt/tiered-storage-overview.md#Phase-1-Lazy-load">O Lazy Load</a> no armazenamento em camadas melhora a eficiência carregando apenas metadados inicialmente. No entanto, isso pode causar latência na primeira consulta a dados frios, pois os blocos ou índices necessários devem ser obtidos do armazenamento de objetos.</p>
 <p><strong>O Warm Up</strong> resolve esse problema fazendo proativamente o cache de dados críticos durante a inicialização do segmento.</p>
 <p>É especialmente benéfico quando:</p>
 <ul>
-<li><p>Certos <strong>índices escalares</strong> são frequentemente usados em condições de filtro.</p></li>
-<li><p><strong>Os índices vetoriais</strong> são essenciais para o desempenho da pesquisa e devem estar prontos imediatamente.</p></li>
-<li><p><strong>A latência de início a frio</strong> após a reinicialização do QueryNode ou o carregamento de um novo segmento é inaceitável.</p></li>
+<li><p>Certos índices escalares são frequentemente usados em condições de filtro.</p></li>
+<li><p>Os índices vetoriais são essenciais para o desempenho da pesquisa e devem estar prontos imediatamente.</p></li>
+<li><p>A latência de início a frio após a reinicialização do QueryNode ou o carregamento de um novo segmento é inaceitável.</p></li>
 </ul>
 <p>Por outro lado, o Warm Up <strong>não</strong> é <strong>recomendado</strong> para campos ou índices consultados com pouca frequência. A desativação do Warm Up reduz o tempo de carregamento do segmento e conserva o espaço do cache - ideal para campos vetoriais grandes ou campos escalares não críticos.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuração<button data-href="#Configuration" class="anchor-icon" translate="no">
@@ -145,7 +145,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Warm Up afeta apenas a <strong>carga inicial</strong>. Se os dados em cache forem despejados posteriormente, a próxima consulta os recarregará sob demanda.</p>
+    </button></h2><p>O Warm Up afeta apenas a carga inicial. Se os dados em cache forem despejados posteriormente, a próxima consulta os recarregará sob demanda.</p>
 <ul>
 <li><p>Evite o uso excessivo de <code translate="no">sync</code>. O pré-carregamento de muitos campos aumenta o tempo de carregamento e a pressão do cache.</p></li>
 <li><p>Comece de forma conservadora - active o Warm Up apenas para campos e índices que são frequentemente acedidos.</p></li>

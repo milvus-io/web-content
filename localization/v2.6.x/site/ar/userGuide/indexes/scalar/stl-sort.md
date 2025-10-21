@@ -77,7 +77,7 @@ summary: >-
 <li><p>يتم تمرير معرفات الكيانات المطابقة إلى منفذ الاستعلام لتجميع النتائج النهائية.</p></li>
 </ul></li>
 </ol>
-<p>يقلل ذلك من تعقيد الاستعلام من <strong>O(n)</strong> (مسح كامل) إلى <strong>O(log n + m)</strong>، حيث <em>m</em> هو عدد مرات التطابق.</p>
+<p>وهذا يقلل من تعقيد الاستعلام من <strong>O(n)</strong> (مسح كامل) إلى <strong>O(log n + m)</strong>، حيث <em>m</em> هو عدد مرات التطابق.</p>
 <h2 id="Create-an-STLSORT-index" class="common-anchor-header">إنشاء فهرس STL_SORT<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

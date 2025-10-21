@@ -216,8 +216,8 @@ hits = client.search(
     </button></h2><p>Utilisez la méthode <code translate="no">drop_index()</code> pour supprimer un index existant d'une collection.</p>
 <div class="alert note">
 <ul>
-<li><p>Dans la <strong>version 2.6.3</strong> ou antérieure, vous devez libérer la collection avant de supprimer un index.</p></li>
-<li><p>À partir de la <strong>version 2.6.4</strong>, vous pouvez supprimer un index directement lorsqu'il n'est plus nécessaire, sans avoir à libérer la collection au préalable.</p></li>
+<li><p>Dans la <strong>version 2.6.3</strong> ou antérieure, vous devez libérer la collection avant de supprimer un index scalaire.</p></li>
+<li><p>À partir de la <strong>version 2.6.4</strong>, vous pouvez supprimer un index scalaire directement lorsqu'il n'est plus nécessaire, sans avoir à libérer la collection au préalable.</p></li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(

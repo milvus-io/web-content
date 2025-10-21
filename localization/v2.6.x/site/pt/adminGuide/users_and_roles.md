@@ -42,7 +42,22 @@ summary: >-
       </svg>
     </button></h2><p>Após a inicialização de uma instância do Milvus, é gerado automaticamente um utilizador raiz para autenticação quando se liga ao Milvus pela primeira vez. O nome de utilizador do utilizador raiz é <code translate="no">root</code> e a palavra-passe é <code translate="no">Milvus</code>. A função predefinida do utilizador raiz é <code translate="no">admin</code>, que tem acesso a todos os recursos. Para garantir a segurança dos dados, mantenha as credenciais do utilizador raiz seguras para evitar o acesso não autorizado.</p>
 <p>Para operações diárias, recomendamos a criação de utilizadores em vez de utilizar o utilizador raiz.</p>
-<h3 id="Create-a-user" class="common-anchor-header">Criar um utilizador</h3><p>O exemplo a seguir mostra como criar um usuário com o nome de usuário <code translate="no">user_1</code> e a senha <code translate="no">P@ssw0rd</code>. O nome de utilizador e a palavra-passe do utilizador devem seguir estas regras:</p>
+<h3 id="Create-a-user" class="common-anchor-header">Criar um utilizador<button data-href="#Create-a-user" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O exemplo a seguir mostra como criar um usuário com o nome de usuário <code translate="no">user_1</code> e a senha <code translate="no">P@ssw0rd</code>. O nome de utilizador e a palavra-passe do utilizador devem seguir estas regras:</p>
 <ul>
 <li><p>Nome de utilizador: Deve começar com uma letra e só pode incluir letras maiúsculas ou minúsculas, números e sublinhados.</p></li>
 <li><p>Palavra-passe: Deve ter entre 8 e 64 caracteres e deve incluir três das seguintes opções: letras maiúsculas, letras minúsculas, números e caracteres especiais.</p></li>
@@ -125,7 +140,22 @@ curl --request POST \
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Update-password" class="common-anchor-header">Atualizar palavra-passe</h3><p>Depois de criar um utilizador, pode atualizar a palavra-passe caso se esqueça.</p>
+<h3 id="Update-password" class="common-anchor-header">Atualizar palavra-passe<button data-href="#Update-password" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de criar um utilizador, pode atualizar a palavra-passe caso se esqueça.</p>
 <p>A nova palavra-passe também deve seguir a seguinte regra:</p>
 <ul>
 <li>Deve ter de 8 a 64 caracteres e incluir três dos seguintes: letras maiúsculas, letras minúsculas, números e caracteres especiais.</li>
@@ -174,7 +204,22 @@ client.updatePassword(updatePasswordReq);
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-users" class="common-anchor-header">Listar utilizadores</h3><p>Depois de criar vários utilizadores, pode listar e visualizar todos os utilizadores existentes.</p>
+<h3 id="List-users" class="common-anchor-header">Listar utilizadores<button data-href="#List-users" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de criar vários utilizadores, pode listar e visualizar todos os utilizadores existentes.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -216,7 +261,22 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><p>O Milvus fornece uma função incorporada chamada <code translate="no">admin</code>, que é uma função de administrador que pode aceder a recursos em todas as instâncias e tem privilégios para todas as operações. Para uma gestão de acesso mais refinada e uma maior segurança dos dados, recomenda-se que crie funções personalizadas com base nas suas necessidades.</p>
-<h3 id="Create-a-role" class="common-anchor-header">Criar uma função</h3><p>O exemplo a seguir demonstra como criar uma função chamada <code translate="no">role_a</code>.</p>
+<h3 id="Create-a-role" class="common-anchor-header">Criar uma função<button data-href="#Create-a-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O exemplo a seguir demonstra como criar uma função chamada <code translate="no">role_a</code>.</p>
 <p>O nome da função deve seguir a seguinte regra:</p>
 <ul>
 <li>Deve começar com uma letra e só pode incluir letras maiúsculas ou minúsculas, números e sublinhados.</li>
@@ -251,7 +311,22 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-roles" class="common-anchor-header">Listar funções</h3><p>Depois de criar várias funções, pode listar e visualizar todas as funções existentes.</p>
+<h3 id="List-roles" class="common-anchor-header">Listar funções<button data-href="#List-roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de criar várias funções, pode listar e visualizar todas as funções existentes.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

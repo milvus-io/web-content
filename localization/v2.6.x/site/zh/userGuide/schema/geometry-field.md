@@ -175,14 +175,14 @@ milvus_client.load_collection(collection_name)
 <p>满足这些要求后，您就可以使用带有专用几何操作符的表达式，根据几何值对 Collections 进行过滤。</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">定义过滤表达式</h4><p>要在<code translate="no">GEOMETRY</code> 字段上进行筛选，请使用具有以下表达式格式的几何专用操作符：<code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>其中</p>
 <ul>
-<li><p><code translate="no">{operator}</code> 是支持的几何操作符（如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code> ）。有关可用操作符的完整列表，请参阅<a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">几何操作符</a>。</p></li>
+<li><p><code translate="no">{operator}</code> 是支持的几何操作符（如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code> ）。有关可用操作符的完整列表，请参阅<a href="/docs/zh/geometry-operators.md">几何操作符</a>。</p></li>
 <li><p><code translate="no">geo_field</code> 是在 Collections Schema 中定义的<code translate="no">GEOMETRY</code> 字段的名称。</p></li>
 <li><p><code translate="no">'{wkt}'</code> 是 WKT 字符串，代表您要筛选的几何对象。</p></li>
 </ul>
 <div class="alert note">
-<p>某些操作符（如<code translate="no">ST_DWITHIN</code> ）可能需要附加参数。有关各操作符的详细信息和使用示例，请参阅<a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">几何操作符</a>。</p>
+<p>某些操作符（如<code translate="no">ST_DWITHIN</code> ）可能需要附加参数。有关各操作符的详细信息和使用示例，请参阅<a href="/docs/zh/geometry-operators.md">几何操作符</a>。</p>
 </div>
-<p>以下示例演示了如何在筛选表达式中使用不同的特定几何运算符：</p>
+<p>以下示例演示了如何在筛选表达式中使用不同的特定几何图形操作符：</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">示例 1：查找矩形区域内的实体</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 bottom_right_lon, bottom_right_lat = <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>
 bounding_box_wkt = <span class="hljs-string">f&quot;POLYGON((<span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>))&quot;</span>
@@ -235,7 +235,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>默认情况下，在没有索引的情况下，对<code translate="no">GEOMETRY</code> 字段的查询将对所有行执行全扫描，这在大型数据集上可能会比较慢。要加速几何查询，请在 GEOMETRY 字段上创建<code translate="no">RTREE</code> 索引。</p>
-<p>有关详细信息，请参阅<a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>。</p>
+<p>有关详细信息，请参阅<a href="/docs/zh/rtree.md">RTREE</a>。</p>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

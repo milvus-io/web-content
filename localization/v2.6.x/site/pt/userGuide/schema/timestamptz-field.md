@@ -460,7 +460,7 @@ res = client.search(
      <td><p>Mais alto</p></td>
    </tr>
 </table>
-<p>Para obter instruções passo-a-passo e exemplos de código, consulte as páginas dedicadas:</p>
+<p>Para obter instruções passo a passo e exemplos de código, consulte as páginas dedicadas:</p>
 <ul>
 <li><p><a href="/docs/pt/modify-collection.md#Example-6-Set-collection-time-zone">Modificar coleção</a></p></li>
 <li><p><a href="/docs/pt/manage_databases.md#Manage-database-properties">Base de dados</a></p></li>

@@ -189,7 +189,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Performa disk penting. AISAQ sangat bergantung pada IOPS SSD; penyimpanan yang buruk dapat mengurangi QPS.</p></li>
+<li><p>Performa disk sangat penting. AISAQ sangat bergantung pada IOPS SSD; penyimpanan yang buruk dapat mengurangi QPS.</p></li>
 <li><p>Mode performa AISAQ ≈ latensi DISKANN, tetapi mungkin memerlukan ruang disk beberapa kali lebih besar.</p></li>
 <li><p>Mode skala AISAQ cocok untuk pencarian offline atau beban kerja pengarsipan data di mana QPS tidak terlalu penting.</p></li>
 </ul>

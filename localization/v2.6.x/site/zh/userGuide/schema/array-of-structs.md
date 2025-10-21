@@ -91,7 +91,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>无论是在 Collections 层还是在 Structs 组合中，向量字段的数量都不得大于或等于 10。</p></li>
 <li><p><strong>可归零和默认值</strong></p>
-<p>结构数组字段不可为空，也不接受任何默认值。</p></li>
+<p>数组结构体字段不可为空，也不接受任何默认值。</p></li>
 <li><p><strong>函数</strong></p>
 <p>不能使用函数从 Struct 中的标量字段派生出向量字段。</p></li>
 <li><p><strong>索引类型和度量类型</strong></p>
@@ -149,8 +149,9 @@ beta: Milvus 2.6.4+
 <li><p>将字段的<code translate="no">element_type</code> 属性设置为<code translate="no">DataType.STRUCT</code> ，使字段成为结构数组。</p></li>
 <li><p>创建一个 Struct 模式并包含所需字段。然后，在字段的<code translate="no">struct_schema</code> 属性中引用 Struct 模式。</p></li>
 <li><p>将字段的<code translate="no">max_capacity</code> 属性设置为适当的值，以指定每个实体在该字段中可包含的最大 Struct 数量。</p></li>
+<li><p><strong>(可选</strong>）可以为 Struct 元素中的任何字段设置<code translate="no">mmap.enabled</code> ，以平衡 Struct 中的冷热数据。</p></li>
 </ol>
-<p>下面是如何定义包含数组 Struct 的 Collections 模式：</p>
+<p>下面是如何定义包含 Struct 数组的 Collections 模式：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -175,8 +176,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -191,7 +192,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述代码示例中高亮显示的几行说明了在 Collections 模式中包含一个 Array of Structs 的过程。</p>
+<p>上述代码示例中高亮显示的几行说明了在 Collections 模式中包含 Struct 数组的过程。</p>
 <h2 id="Set-index-params" class="common-anchor-header">设置索引参数<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -425,6 +426,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 <p>具体来说，你可以直接使用 Struct 元素中向量字段的名称作为搜索请求中<code translate="no">anns_field</code> 参数的值，并使用<code translate="no">EmbeddingList</code> 来整齐地组织查询向量。</p>
 <div class="alert note">
 <p>Milvus 提供的<code translate="no">EmbeddingList</code> 可以帮助你更整齐地组织针对 Structs 数组中的嵌入列表进行搜索的查询向量。</p>
+<p>不过，<code translate="no">EmbeddingList</code> 只能用于没有范围搜索或分组搜索参数的<code translate="no">search()</code> 请求，更不用说<code translate="no">search_iterator()</code> 请求了。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

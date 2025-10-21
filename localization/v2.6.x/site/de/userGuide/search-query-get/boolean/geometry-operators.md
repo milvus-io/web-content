@@ -108,7 +108,7 @@ summary: >-
       </svg>
     </button></h2><p>Der Operator <code translate="no">ST_EQUALS</code> gibt TRUE zurück, wenn zwei Geometrien räumlich identisch sind, d. h. sie haben denselben Satz von Punkten und dieselbe Dimension. Dies ist nützlich, um zu überprüfen, ob zwei gespeicherte Geometrieobjekte genau denselben Ort und dieselbe Form repräsentieren.</p>
 <p><strong>Beispiel</strong></p>
-<p>Nehmen wir an, Sie wollen überprüfen, ob eine gespeicherte Geometrie (z. B. ein Punkt oder ein Polygon) genau dieselbe ist wie eine Zielgeometrie. Sie können zum Beispiel einen gespeicherten Punkt mit einem bestimmten Punkt von Interesse vergleichen.</p>
+<p>Nehmen wir an, Sie möchten überprüfen, ob eine gespeicherte Geometrie (z. B. ein Punkt oder ein Polygon) genau dieselbe ist wie eine Zielgeometrie. Sie können zum Beispiel einen gespeicherten Punkt mit einem bestimmten Punkt von Interesse vergleichen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to check if a geometry matches a specific point</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_EQUALS(geo_field, &#x27;POINT(10 20)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

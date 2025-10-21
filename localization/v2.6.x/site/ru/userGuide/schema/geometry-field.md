@@ -178,12 +178,12 @@ milvus_client.load_collection(collection_name)
 <p>После выполнения этих требований вы можете использовать выражения со специальными геометрическими операторами для фильтрации коллекции на основе геометрических значений.</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">Определение выражений фильтрации</h4><p>Для фильтрации по полю <code translate="no">GEOMETRY</code> используйте оператор, специфичный для геометрии, со следующим форматом выражения: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, где:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> это поддерживаемый геометрический оператор (например, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Полный список доступных операторов см. в разделе <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Операторы геометрии</a>.</p></li>
+<li><p><code translate="no">{operator}</code> это поддерживаемый геометрический оператор (например, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Полный список доступных операторов см. в разделе <a href="/docs/ru/geometry-operators.md">Операторы геометрии</a>.</p></li>
 <li><p><code translate="no">geo_field</code> это имя поля <code translate="no">GEOMETRY</code>, определенного в схеме вашей коллекции.</p></li>
 <li><p><code translate="no">'{wkt}'</code> WKT-строка, представляющая объект геометрии, по которому выполняется фильтрация.</p></li>
 </ul>
 <div class="alert note">
-<p>Некоторые операторы, например <code translate="no">ST_DWITHIN</code>, могут требовать дополнительных параметров. Подробности и примеры использования каждого оператора см. в разделе <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Операторы геометрии</a>.</p>
+<p>Некоторые операторы, например <code translate="no">ST_DWITHIN</code>, могут требовать дополнительных параметров. Подробности и примеры использования каждого оператора см. в разделе <a href="/docs/ru/geometry-operators.md">Операторы геометрии</a>.</p>
 </div>
 <p>В следующих примерах показано, как использовать различные операторы геометрии в выражении фильтрации:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Пример 1: Поиск сущностей в прямоугольной области</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -238,7 +238,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>По умолчанию запросы к полям <code translate="no">GEOMETRY</code> без индекса выполняют полное сканирование всех строк, что может быть медленным при работе с большими наборами данных. Чтобы ускорить геометрические запросы, создайте индекс <code translate="no">RTREE</code> для поля GEOMETRY.</p>
-<p>Подробности см. в разделе <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>.</p>
+<p>Подробности см. в разделе <a href="/docs/ru/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

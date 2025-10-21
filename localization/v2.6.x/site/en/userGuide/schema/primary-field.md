@@ -42,12 +42,9 @@ summary: >-
 <p>Key requirements:</p>
 <ul>
 <li><p>Each collection must have <strong>exactly one</strong> primary field.</p></li>
-<li><p>Primary field values cannot be null or duplicated.</p></li>
+<li><p>Primary field values cannot be null.</p></li>
 <li><p>The data type must be specified at creation and cannot be changed later.</p></li>
 </ul>
-<div class="alert note">
-<p>The primary field is always defined as part of the collection schema. You cannot modify or remove it after creation.</p>
-</div>
 <h2 id="Supported-data-types" class="common-anchor-header">Supported data types<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,7 +175,41 @@ client.create_collection(collection_name=<span class="hljs-string">&quot;demo_au
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+});
+
+<span class="hljs-comment">// Define schema fields</span>
+<span class="hljs-keyword">const</span> schema = [
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Primary field&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Milvus generates IDs automatically</span>
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Vector field&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+    <span class="hljs-attr">dim</span>: <span class="hljs-number">4</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;category&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Scalar field&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>,
+  },
+];
+
+<span class="hljs-comment">// Create the collection</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;demo_autoid&quot;</span>,
+  <span class="hljs-attr">fields</span>: schema,
+});
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -220,7 +251,17 @@ res = client.insert(collection_name=<span class="hljs-string">&quot;demo_autoid&
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
+    {<span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>], <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;book&quot;</span>},
+    {<span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;toy&quot;</span>},
+];
+
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;demo_autoid&quot;</span>,
+    <span class="hljs-attr">fields_data</span>: data,
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -293,7 +334,39 @@ client.create_collection(collection_name=<span class="hljs-string">&quot;demo_ma
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript">
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+  <span class="hljs-attr">username</span>: <span class="hljs-string">&quot;username&quot;</span>,
+  <span class="hljs-attr">password</span>: <span class="hljs-string">&quot;Aa12345!!&quot;</span>,
+});
+
+<span class="hljs-keyword">const</span> schema = [
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;product_id&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,
+    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FLOAT_VECTOR</span>,
+    <span class="hljs-attr">dim</span>: <span class="hljs-number">4</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;category&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">1000</span>,
+  },
+];
+
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;demo_autoid&quot;</span>,
+  <span class="hljs-attr">schema</span>: schema,
+});
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -336,7 +409,18 @@ res = client.insert(collection_name=<span class="hljs-string">&quot;demo_manual_
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript">
+<span class="hljs-keyword">const</span> data = [
+    {<span class="hljs-string">&quot;product_id&quot;</span>: <span class="hljs-string">&quot;PROD-001&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>], <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;book&quot;</span>},
+    {<span class="hljs-string">&quot;product_id&quot;</span>: <span class="hljs-string">&quot;PROD-002&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;toy&quot;</span>},
+];
+
+<span class="hljs-keyword">const</span> insert = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;demo_autoid&quot;</span>,
+    <span class="hljs-attr">fields_data</span>: data,
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(insert);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>

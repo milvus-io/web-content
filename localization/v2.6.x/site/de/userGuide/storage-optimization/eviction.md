@@ -144,11 +144,11 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Wasserzeichen legen fest, wann die Cache-Evakuierung sowohl für den Arbeitsspeicher als auch für die Festplatte beginnt und endet. Jeder Ressourcentyp hat zwei Schwellenwerte:</p>
 <ul>
-<li><p><strong>Hohe Wassermarke:</strong> Die Räumung beginnt, wenn die Nutzung diesen Wert überschreitet.</p></li>
-<li><p><strong>Niedrige Wassermarke:</strong> Die Verdrängung wird fortgesetzt, bis die Nutzung unter diesen Wert fällt.</p></li>
+<li><p><strong>Hohe Wassermarke</strong>: Die asynchrone Verdrängung beginnt, wenn die Nutzung diesen Wert überschreitet.</p></li>
+<li><p><strong>Niedrige Wassermarke</strong>: Die Verdrängung wird fortgesetzt, bis die Nutzung unter diesen Wert fällt.</p></li>
 </ul>
 <div class="alert note">
-<p>Diese Konfiguration wird nur wirksam, wenn <a href="/docs/de/eviction.md#Enable-eviction">die Räumung aktiviert ist</a>.</p>
+<p>Diese Konfiguration wird nur wirksam, wenn <a href="/docs/de/eviction.md#Enable-eviction">die Verdrängung aktiviert ist</a>.</p>
 </div>
 <p><strong>Beispiel YAML</strong>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
@@ -188,7 +188,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">diskLowWatermarkRatio</code></p></td>
      <td><p>float</p></td>
      <td><p>(0.0, 1.0]</p></td>
-     <td><p>Festplattennutzungsgrad, bei dem die Verdrängung endet.</p></td>
+     <td><p>Festplattennutzungsgrad, bei dem die Auslagerung endet.</p></td>
      <td><p>Beginnen Sie bei <code translate="no">0.75</code>. Niedriger einstellen, wenn die Festplatten-E/A begrenzt ist.</p></td>
    </tr>
    <tr>
@@ -219,7 +219,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Die Cache-Time-to-Live (TTL)</strong> entfernt automatisch zwischengespeicherte Daten nach einer bestimmten Zeit, auch wenn die Ressourcenschwellenwerte nicht erreicht werden. Sie arbeitet mit der LRU-Evakuierung zusammen, um zu verhindern, dass veraltete Daten den Cache auf unbestimmte Zeit belegen.</p>
+    </button></h2><p><strong>Die Cache-Time-to-Live (TTL)</strong> entfernt zwischengespeicherte Daten automatisch nach einer bestimmten Zeit, auch wenn die Ressourcenschwellenwerte nicht erreicht werden. Sie arbeitet mit der LRU-Evakuierung zusammen, um zu verhindern, dass veraltete Daten den Cache auf unbestimmte Zeit belegen.</p>
 <div class="alert note">
 <p>Cache TTL erfordert <code translate="no">backgroundEvictionEnabled: true</code>, da es auf demselben Hintergrund-Thread läuft.</p>
 </div>

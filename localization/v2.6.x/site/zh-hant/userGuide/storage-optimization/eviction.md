@@ -22,7 +22,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Eviction 管理 Milvus 中每個 QueryNode 的快取資源。啟用後，一旦達到資源臨界值，它會自動移除快取資料，以確保穩定的效能，並防止記憶體或磁碟耗盡。</p>
-<p>驅逐使用<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">最近最少使用 (LRU)</a>策略來回收快取空間。元資料永遠都會被快取而不會被驅逐，因為元資料對於查詢規劃來說是不可或缺的，而且通常都很小。</p>
+<p>驅逐使用<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">最近最少使用 (LRU)</a>政策來回收快取空間。元資料永遠都會被快取而不會被驅逐，因為元資料對於查詢規劃來說是不可或缺的，而且通常都很小。</p>
 <div class="alert note">
 <p>驅逐必須明確啟用。如果沒有設定，快取資料會繼續累積，直到資源耗盡為止。</p>
 </div>
@@ -61,7 +61,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p>最適合</p></td>
      <td><p>可容忍短暫延遲尖峰的工作負載，或當異步驅逐無法快速回收空間時。</p></td>
-     <td><p>需要流暢效能的延遲敏感型工作負載。適用於主動式資源管理。</p></td>
+     <td><p>需要平穩效能的延遲敏感型工作負載。適用於主動式資源管理。</p></td>
    </tr>
    <tr>
      <td><p>注意事項</p></td>
@@ -141,8 +141,8 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>水印定義記憶體和磁碟的快取驅逐開始和結束的時間。每種資源類型有兩個臨界值：</p>
 <ul>
-<li><p><strong>高水準：</strong>當使用量超過此值時開始驅逐。</p></li>
-<li><p><strong>低水印：</strong>驅逐持續，直到使用量低於此值為止。</p></li>
+<li><p><strong>高水印</strong>：當使用量超過此值時，即開始同步驅逐。</p></li>
+<li><p><strong>低水印</strong>：驅逐持續，直到使用量低於此值。</p></li>
 </ul>
 <div class="alert note">
 <p>只有<a href="/docs/zh-hant/eviction.md#Enable-eviction">啟用驅逐時</a>，此設定才會生效。</p>
@@ -216,7 +216,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>快取存活時間 (TTL)</strong>會在設定的持續時間後自動移除快取資料，即使未達到資源臨界值。它與 LRU 驅逐一起工作，以防止陳舊資料無限期地佔用快取記憶體。</p>
+    </button></h2><p><strong>快取存活時間 (TTL)</strong>會在設定的持續時間後自動移除快取資料，即使未達到資源臨界值。它與 LRU 驅逐一起工作，防止陳舊資料無限期地佔用快取記憶體。</p>
 <div class="alert note">
 <p>Cache TTL 需要<code translate="no">backgroundEvictionEnabled: true</code> ，因為它在同一個背景線程上執行。</p>
 </div>
@@ -290,7 +290,7 @@ beta: Milvus 2.6.4+
      <td><p>浮動</p></td>
      <td><p>[0.0, 1.0]</p></td>
      <td><p>分配給可移除資料的記憶體快取部分。</p></td>
-     <td><p>從<code translate="no">0.3</code> 開始。增加 (0.5-0.7) 表示驅逐頻率較低；減少 (0.1-0.2) 表示段容量較高。</p></td>
+     <td><p>從<code translate="no">0.3</code> 開始。增加 (0.5-0.7) 表示驅逐頻率較低；減少 (0.1-0.2) 表示區段容量較高。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">evictableDiskCacheRatio</code></p></td>

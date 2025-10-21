@@ -50,7 +50,7 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p><strong>Datos jerárquicos</strong>: Entidades padre con múltiples registros hijo, como un libro con muchos trozos de texto, o un vídeo con muchos fotogramas anotados.</p></li>
 <li><p><strong>Incrustaciones multimodales</strong>: Cada Estructura puede contener múltiples vectores, como incrustaciones de texto más incrustaciones de imagen, junto con metadatos.</p></li>
-<li><p><strong>Datos temporales o secuenciales</strong>: Los Structs de un campo Array representan de forma natural series temporales o eventos paso a paso.</p></li>
+<li><p><strong>Datos temporales o secuenciales</strong>: Los Structs en un campo Array representan de forma natural series temporales o eventos paso a paso.</p></li>
 </ul>
 <p>A diferencia de las soluciones tradicionales que almacenan blobs JSON o dividen los datos en múltiples colecciones, la matriz de estructuras proporciona una aplicación nativa del esquema, indexación de vectores y almacenamiento eficiente dentro de Milvus.</p>
 <h2 id="Schema-design-guidelines" class="common-anchor-header">Directrices de diseño de esquemas<button data-href="#Schema-design-guidelines" class="anchor-icon" translate="no">
@@ -68,7 +68,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Además de todas las directrices discutidas en <a href="/docs/es/schema-hands-on.md">Diseño del Modelo de Datos para la Búsqueda</a>, también debe considerar las siguientes cosas antes de empezar a utilizar una Matriz de Structs en su diseño del modelo de datos.</p>
+    </button></h2><p>Además de todas las directrices discutidas en <a href="/docs/es/schema-hands-on.md">Diseño del Modelo de Datos para la Búsqueda</a>, también debe considerar las siguientes cosas antes de empezar a utilizar una Matriz de Structs en el diseño de su modelo de datos.</p>
 <h3 id="Define-the-Struct-schema" class="common-anchor-header">Definir el esquema Struct<button data-href="#Define-the-Struct-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

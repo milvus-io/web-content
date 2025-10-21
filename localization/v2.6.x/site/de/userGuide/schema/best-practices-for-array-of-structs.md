@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Moderne KI-Anwendungen, insbesondere im Internet der Dinge (IoT) und beim autonomen Fahren, verarbeiten in der Regel umfangreiche, strukturierte Ereignisse: einen Sensormesswert mit Zeitstempel und Vektoreinbettung, ein Diagnoseprotokoll mit Fehlercode und Audioschnipsel oder einen Fahrtabschnitt mit Standort, Geschwindigkeit und Szenenkontext. Diese erfordern, dass die Datenbank von Haus aus die Aufnahme und Suche von verschachtelten Daten unterstützt.</p>
-<p>Anstatt den Benutzer aufzufordern, seine atomaren Strukturereignisse in flache Datenmodelle umzuwandeln, führt Milvus das Array of Structs ein, bei dem jedes Struct im Array Skalare und Vektoren enthalten kann, wodurch die semantische Integrität erhalten bleibt und eine robuste verschachtelte Filterung und hybride Suche ermöglicht wird.</p>
+<p>Anstatt den Benutzer aufzufordern, seine atomaren Strukturereignisse in flache Datenmodelle umzuwandeln, führt Milvus das Array of Structs ein, bei dem jede Struct im Array Skalare und Vektoren enthalten kann, wodurch die semantische Integrität erhalten bleibt und eine robuste verschachtelte Filterung und hybride Suche ermöglicht wird.</p>
 <h2 id="Why-Array-of-Structs" class="common-anchor-header">Warum Array of Structs<button data-href="#Why-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h2><p>Moderne KI-Anwendungen, vom autonomen Fahren bis zum multimodalen Retrieval, stützen sich zunehmend auf verschachtelte, heterogene Daten. Herkömmliche flache Datenmodelle haben Schwierigkeiten, komplexe Beziehungen wie<strong>"ein Dokument mit vielen kommentierten Chunks</strong>" oder<strong>"eine Fahrszene mit mehreren beobachteten Manövern</strong>" darzustellen. Hier kommt der Datentyp Array of Structs in Milvus ins Spiel.</p>
-<p>Ein Array of Structs ermöglicht es Ihnen, eine geordnete Menge strukturierter Elemente zu speichern, wobei jede Struct ihre eigene Kombination aus skalaren Feldern und Vektoreinbettungen enthält. Dies macht ihn ideal für:</p>
+<p>Ein Array of Structs ermöglicht es Ihnen, eine geordnete Menge strukturierter Elemente zu speichern, wobei jede Struct ihre eigene Kombination von skalaren Feldern und Vektoreinbettungen enthält. Dies macht ihn ideal für:</p>
 <ul>
 <li><p><strong>Hierarchische Daten</strong>: Übergeordnete Entitäten mit mehreren untergeordneten Datensätzen, z. B. ein Buch mit vielen Textabschnitten oder ein Video mit vielen kommentierten Einzelbildern.</p></li>
 <li><p><strong>Multimodale Einbettungen</strong>: Jede Struktur kann mehrere Vektoren enthalten, wie z. B. eine Texteinbettung plus eine Bildeinbettung, zusammen mit Metadaten.</p></li>
@@ -477,7 +477,7 @@ client.create_collection(
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachdem Sie die Daten entsprechend verarbeitet haben, können Sie sie wie folgt einfügen:</p>
+<p>Nachdem Sie die Daten entsprechend bearbeitet haben, können Sie sie wie folgt einfügen:</p>
 <pre><code translate="no" class="language-python">data = [
     {<span class="hljs-string">&quot;video_id&quot;</span>: <span class="hljs-string">&quot;0a0fc7a5db365174&quot;</span>, ...}
     ...

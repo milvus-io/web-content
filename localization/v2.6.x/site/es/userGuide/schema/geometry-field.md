@@ -178,12 +178,12 @@ milvus_client.load_collection(collection_name)
 <p>Una vez cumplidos estos requisitos, puedes utilizar expresiones con operadores geométricos dedicados para filtrar tu colección en función de los valores geométricos.</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">Definir expresiones de filtrado</h4><p>Para filtrar en el campo <code translate="no">GEOMETRY</code>, utilice un operador específico de geometría con el siguiente formato de expresión: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, donde:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> es un operador geométrico compatible (por ejemplo, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Para obtener una lista completa de los operadores disponibles, consulte <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Operadores de geometría</a>.</p></li>
+<li><p><code translate="no">{operator}</code> es un operador geométrico compatible (por ejemplo, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Para obtener una lista completa de los operadores disponibles, consulte <a href="/docs/es/geometry-operators.md">Operadores de geometría</a>.</p></li>
 <li><p><code translate="no">geo_field</code> es el nombre del campo <code translate="no">GEOMETRY</code> definido en el esquema de su colección.</p></li>
 <li><p><code translate="no">'{wkt}'</code> es la cadena WKT que representa el objeto geométrico sobre el que se está filtrando.</p></li>
 </ul>
 <div class="alert note">
-<p>Algunos operadores, como <code translate="no">ST_DWITHIN</code>, pueden requerir parámetros adicionales. Para obtener detalles y ejemplos de uso de cada operador, consulte <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Operadores de geometría</a>.</p>
+<p>Algunos operadores, como <code translate="no">ST_DWITHIN</code>, pueden requerir parámetros adicionales. Para obtener detalles y ejemplos de uso de cada operador, consulte <a href="/docs/es/geometry-operators.md">Operadores de geometría</a>.</p>
 </div>
 <p>Los siguientes ejemplos muestran cómo utilizar distintos operadores específicos de geometría en una expresión de filtro:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Ejemplo 1: Buscar entidades dentro de un área rectangular</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -238,7 +238,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>Por defecto, las consultas en campos <code translate="no">GEOMETRY</code> sin un índice realizarán una exploración completa de todas las filas, lo que puede resultar lento en conjuntos de datos de gran tamaño. Para acelerar las consultas geométricas, cree un índice <code translate="no">RTREE</code> en su campo GEOMETRÍA.</p>
-<p>Para más información, consulte <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>.</p>
+<p>Para más información, consulte <a href="/docs/es/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">PREGUNTAS FRECUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

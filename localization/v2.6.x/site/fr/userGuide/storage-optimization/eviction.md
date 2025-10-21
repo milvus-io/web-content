@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>L'éviction gère les ressources de cache de chaque nœud de requête dans Milvus. Lorsqu'elle est activée, elle supprime automatiquement les données mises en cache lorsque les seuils de ressources sont atteints, ce qui garantit des performances stables et empêche l'épuisement de la mémoire ou du disque.</p>
-<p>L'éviction utilise une politique de <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">moindre utilisation (LRU</a> ) pour récupérer l'espace du cache. Les métadonnées sont toujours mises en cache et ne sont jamais évacuées, car elles sont essentielles pour la planification des requêtes et sont généralement de petite taille.</p>
+<p>L'éviction utilise une politique de <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">moindre utilisation (LRU)</a> pour récupérer l'espace du cache. Les métadonnées sont toujours mises en cache et ne sont jamais évacuées, car elles sont essentielles pour la planification des requêtes et sont généralement de petite taille.</p>
 <div class="alert note">
 <p>L'éviction doit être explicitement activée. Sans configuration, les données mises en cache continueront à s'accumuler jusqu'à ce que les ressources soient épuisées.</p>
 </div>
@@ -143,8 +143,8 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Les points de repère définissent le moment où l'éviction du cache commence et se termine pour la mémoire et le disque. Chaque type de ressource dispose de deux seuils :</p>
 <ul>
-<li><p><strong>Filigrane élevé :</strong> L'éviction commence lorsque l'utilisation dépasse cette valeur.</p></li>
-<li><p><strong>Filigrane bas :</strong> L'éviction se poursuit jusqu'à ce que l'utilisation tombe en dessous de cette valeur.</p></li>
+<li><p><strong>Filigrane élevé</strong>: L'éviction asynchrone commence lorsque l'utilisation dépasse cette valeur.</p></li>
+<li><p><strong>Filigrane bas</strong>: L'éviction se poursuit jusqu'à ce que l'utilisation tombe en dessous de cette valeur.</p></li>
 </ul>
 <div class="alert note">
 <p>Cette configuration ne prend effet que lorsque <a href="/docs/fr/eviction.md#Enable-eviction">l'éviction est activée</a>.</p>

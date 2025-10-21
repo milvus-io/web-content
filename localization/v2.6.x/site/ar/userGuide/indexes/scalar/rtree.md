@@ -57,7 +57,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>إنشاء العقد الورقية:</strong> لكل كائن هندسي، قم بحساب <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">الحد الأدنى للمستطيل المحيط</a> به (MBR)، وهو أصغر مستطيل يحتوي على الكائن بالكامل، وقم بتخزينه كعقدة ورقة.</p></li>
-<li><p><strong>جمِّع في مربعات أكبر:</strong> قم بتجميع العقد الورقية القريبة معًا ولف كل مجموعة مع MBR جديدة، لتكوين عقد داخلية. على سبيل المثال، تحتوي المجموعة <strong>B</strong> على <strong>D</strong> <strong>وE؛</strong> وتحتوي المجموعة <strong>C</strong> على <strong>F</strong> <strong>وG</strong>.</p></li>
+<li><p><strong>جمِّع في مربعات أكبر:</strong> قم بتجميع العقد الورقية القريبة معًا ولف كل مجموعة مع MBR جديد، لتكوين عقد داخلية. على سبيل المثال، تحتوي المجموعة <strong>B</strong> على <strong>D</strong> <strong>وE؛</strong> وتحتوي المجموعة <strong>C</strong> على <strong>F</strong> <strong>وG</strong>.</p></li>
 <li><p><strong>أضف عقدة الجذر:</strong> أضف عقدة جذر تغطي MBR جميع المجموعات الداخلية، مما ينتج عنه بنية شجرة متوازنة الارتفاع.</p></li>
 </ol>
 <p>
@@ -215,8 +215,8 @@ hits = client.search(
     </button></h2><p>استخدم الأسلوب <code translate="no">drop_index()</code> لإزالة فهرس موجود من مجموعة.</p>
 <div class="alert note">
 <ul>
-<li><p>في الإصدار <strong>2.6.3 أو الإصدار 2.6.3</strong> أو الإصدارات الأقدم، يجب عليك تحرير المجموعة قبل إسقاط فهرس.</p></li>
-<li><p>اعتبارًا من الإصدار <strong>2.6.4</strong> أو الإصدار الأحدث، يمكنك إسقاط فهرس مباشرةً بمجرد عدم الحاجة إليه - لا حاجة لتحرير المجموعة أولاً.</p></li>
+<li><p>في الإصدار <strong>2.6.3 أو الإصدار 2.6.3</strong> أو الإصدارات الأقدم، يجب عليك تحرير المجموعة قبل إسقاط فهرس قياسي.</p></li>
+<li><p>اعتبارًا من الإصدار <strong>2.6.4</strong> أو الإصدار الأحدث، يمكنك إسقاط فهرس قياسي مباشرةً بمجرد عدم الحاجة إليه - لا حاجة لتحرير المجموعة أولاً.</p></li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(

@@ -151,7 +151,8 @@ beta: Milvus 2.6.4+
 <li><p>Defina o tipo de dados de um campo para <code translate="no">DataType.ARRAY</code> ao adicionar o campo como um campo Array ao esquema da coleção.</p></li>
 <li><p>Defina o atributo <code translate="no">element_type</code> do campo como <code translate="no">DataType.STRUCT</code> para tornar o campo uma Matriz de Structs.</p></li>
 <li><p>Crie um esquema Struct e inclua os campos necessários. Em seguida, faça referência ao esquema Struct no atributo <code translate="no">struct_schema</code> do campo.</p></li>
-<li><p>Defina o atributo <code translate="no">max_capacity</code> do campo com um valor apropriado para especificar o número máximo de Estruturas que cada entidade pode conter neste campo.</p></li>
+<li><p>Defina o atributo <code translate="no">max_capacity</code> do campo com um valor adequado para especificar o número máximo de Estruturas que cada entidade pode conter neste campo.</p></li>
+<li><p><strong>(Opcional</strong>) Pode definir <code translate="no">mmap.enabled</code> para qualquer campo dentro do elemento Struct para equilibrar os dados quentes e frios no Struct.</p></li>
 </ol>
 <p>Veja como você pode definir um esquema de coleção que inclui uma Matriz de Structs:</p>
 <div class="multipleCode">
@@ -178,8 +179,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -409,7 +410,7 @@ TEXT_SNIPPETS = [
 data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)]
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Pesquisa de vetor num campo Matriz de Structs<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
+<h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">Pesquisa de vetor num campo de Matriz de Estruturas<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -424,10 +425,11 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível realizar pesquisas vetoriais nos campos vetoriais de uma coleção e em uma Matriz de Structs.</p>
+    </button></h2><p>Você pode realizar pesquisas vetoriais nos campos vetoriais de uma coleção e em uma Matriz de Structs.</p>
 <p>Especificamente, você pode usar diretamente os nomes dos campos vetoriais dentro de elementos Struct como o valor do parâmetro <code translate="no">anns_field</code> em uma solicitação de pesquisa e usar <code translate="no">EmbeddingList</code> para organizar os vetores de consulta de forma organizada.</p>
 <div class="alert note">
-<p>Milvus fornece <code translate="no">EmbeddingList</code> para ajudá-lo a organizar vetores de consulta para pesquisas em uma lista de incorporação em uma matriz de Structs de forma mais organizada.</p>
+<p>Milvus fornece <code translate="no">EmbeddingList</code> para ajudá-lo a organizar vetores de consulta para pesquisas em uma lista de incorporação em um array de Structs de forma mais organizada.</p>
+<p>No entanto, <code translate="no">EmbeddingList</code> só pode ser usado em pedidos <code translate="no">search()</code> sem pesquisa de intervalo ou parâmetros de pesquisa de agrupamento, muito menos em pedidos <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

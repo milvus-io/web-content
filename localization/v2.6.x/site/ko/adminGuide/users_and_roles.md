@@ -39,7 +39,22 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 인스턴스를 초기화한 후, Milvus에 처음 접속할 때 인증을 위해 루트 사용자가 자동으로 생성됩니다. 루트 사용자의 사용자 이름은 <code translate="no">root</code> 이고 비밀번호는 <code translate="no">Milvus</code> 입니다. 루트 사용자의 기본 역할은 <code translate="no">admin</code> 이며 모든 리소스에 대한 액세스 권한이 있습니다. 데이터 보안을 위해 루트 사용자의 자격 증명을 안전하게 보관하여 무단 액세스를 방지하세요.</p>
 <p>일상적인 작업의 경우 루트 사용자를 사용하는 대신 사용자를 만드는 것이 좋습니다.</p>
-<h3 id="Create-a-user" class="common-anchor-header">사용자 만들기</h3><p>다음 예는 사용자 아이디 <code translate="no">user_1</code> 와 비밀번호 <code translate="no">P@ssw0rd</code> 를 사용하여 사용자를 만드는 방법을 보여줍니다. 사용자의 사용자 아이디와 비밀번호는 다음 규칙을 따라야 합니다:</p>
+<h3 id="Create-a-user" class="common-anchor-header">사용자 만들기<button data-href="#Create-a-user" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 예는 사용자 아이디 <code translate="no">user_1</code> 와 비밀번호 <code translate="no">P@ssw0rd</code> 를 사용하여 사용자를 만드는 방법을 보여줍니다. 사용자의 사용자 아이디와 비밀번호는 다음 규칙을 따라야 합니다:</p>
 <ul>
 <li><p>사용자 아이디: 문자로 시작해야 하며 대문자 또는 소문자, 숫자, 밑줄만 포함할 수 있습니다.</p></li>
 <li><p>비밀번호: 8~64자 길이여야 하며 대문자, 소문자, 숫자, 특수 문자 중 세 가지를 포함해야 합니다.</p></li>
@@ -122,7 +137,22 @@ curl --request POST \
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Update-password" class="common-anchor-header">비밀번호 업데이트</h3><p>사용자를 만든 후 비밀번호를 잊어버린 경우 비밀번호를 업데이트할 수 있습니다.</p>
+<h3 id="Update-password" class="common-anchor-header">비밀번호 업데이트<button data-href="#Update-password" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>사용자를 만든 후 비밀번호를 잊어버린 경우 비밀번호를 업데이트할 수 있습니다.</p>
 <p>새 비밀번호는 다음 규칙을 따라야 합니다:</p>
 <ul>
 <li>8~64자 길이여야 하며 대문자, 소문자, 숫자, 특수 문자 중 세 가지를 포함해야 합니다.</li>
@@ -171,7 +201,22 @@ client.updatePassword(updatePasswordReq);
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-users" class="common-anchor-header">사용자 나열하기</h3><p>여러 사용자를 만든 후 기존 사용자를 모두 나열하고 볼 수 있습니다.</p>
+<h3 id="List-users" class="common-anchor-header">사용자 나열하기<button data-href="#List-users" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>여러 사용자를 만든 후 기존 사용자를 모두 나열하고 볼 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -213,7 +258,22 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><p>Milvus는 모든 인스턴스의 리소스에 액세스할 수 있고 모든 작업에 대한 권한이 있는 관리자 역할인 <code translate="no">admin</code> 이라는 기본 제공 역할을 제공합니다. 보다 세분화된 액세스 관리와 향상된 데이터 보안을 위해 필요에 따라 사용자 지정 역할을 만드는 것이 좋습니다.</p>
-<h3 id="Create-a-role" class="common-anchor-header">역할 만들기</h3><p>다음 예에서는 <code translate="no">role_a</code> 라는 역할을 만드는 방법을 보여 줍니다.</p>
+<h3 id="Create-a-role" class="common-anchor-header">역할 만들기<button data-href="#Create-a-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 예에서는 <code translate="no">role_a</code> 라는 역할을 만드는 방법을 보여 줍니다.</p>
 <p>역할 이름은 다음 규칙을 따라야 합니다:</p>
 <ul>
 <li>문자로 시작해야 하며 대문자 또는 소문자, 숫자 및 밑줄만 포함할 수 있습니다.</li>
@@ -248,7 +308,22 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-roles" class="common-anchor-header">역할 나열</h3><p>여러 역할을 만든 후 기존 역할을 모두 나열하고 볼 수 있습니다.</p>
+<h3 id="List-roles" class="common-anchor-header">역할 나열<button data-href="#List-roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>여러 역할을 만든 후 기존 역할을 모두 나열하고 볼 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

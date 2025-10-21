@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
 <li><p>다중 모드 검색: "이 지점에서 <strong>1km 이내에</strong> 있는 유사한 사진 검색"</p></li>
 <li><p>지도 및 물류: "한 지역 <strong>내의</strong> 자산" 또는 "경로와 <strong>교차하는</strong> 경로"</p></li>
 </ul>
-<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">지오메트리 필드란 무엇인가요?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">지리 필드란 무엇인가요?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,7 +120,7 @@ milvus_client.create_collection(collection_name, schema=schema, consistency_leve
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>지오메트리 데이터가 있는 엔티티를 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a> 형식으로 삽입합니다. 다음은 여러 지오포인트가 포함된 예제입니다:</p>
+    </button></h3><p>지오메트리 데이터가 있는 엔티티를 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a> 형식으로 삽입합니다. 다음은 여러 지오포인트가 있는 예제입니다:</p>
 <pre><code translate="no" class="language-python">rng = np.random.default_rng(seed=<span class="hljs-number">19530</span>)
 geo_points = [
     <span class="hljs-string">&#x27;POINT(13.399710 52.518010)&#x27;</span>,
@@ -175,12 +175,12 @@ milvus_client.load_collection(collection_name)
 <p>이러한 요구 사항이 충족되면 전용 기하학 연산자가 포함된 표현식을 사용하여 기하학 값을 기반으로 컬렉션을 필터링할 수 있습니다.</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">필터 표현식 정의</h4><p><code translate="no">GEOMETRY</code> 필드를 필터링하려면 다음 표현식 형식의 도형 전용 연산자를 사용합니다: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code> 여기서</p>
 <ul>
-<li><p><code translate="no">{operator}</code> 는 지원되는 도형 연산자입니다(예: <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). 사용 가능한 연산자의 전체 목록은 도형 <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">연산자를</a> 참조하십시오.</p></li>
+<li><p><code translate="no">{operator}</code> 는 지원되는 도형 연산자입니다(예: <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). 사용 가능한 연산자의 전체 목록은 도형 <a href="/docs/ko/geometry-operators.md">연산자를</a> 참조하십시오.</p></li>
 <li><p><code translate="no">geo_field</code> 컬렉션 스키마에 정의된 <code translate="no">GEOMETRY</code> 필드의 이름입니다.</p></li>
 <li><p><code translate="no">'{wkt}'</code> 는 필터링하려는 지오메트리 객체를 나타내는 WKT 문자열입니다.</p></li>
 </ul>
 <div class="alert note">
-<p><code translate="no">ST_DWITHIN</code> 와 같은 일부 연산자에는 추가 매개 변수가 필요할 수 있습니다. 각 연산자에 대한 자세한 내용과 사용 예는 <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">지오메트리 연산자를</a> 참조하십시오.</p>
+<p><code translate="no">ST_DWITHIN</code> 와 같은 일부 연산자에는 추가 매개 변수가 필요할 수 있습니다. 각 연산자에 대한 자세한 내용과 사용 예는 <a href="/docs/ko/geometry-operators.md">지오메트리 연산자를</a> 참조하십시오.</p>
 </div>
 <p>다음 예에서는 필터 표현식에서 다양한 도형 관련 연산자를 사용하는 방법을 보여줍니다:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">예 1: 직사각형 영역 내에서 엔티티 찾기</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -219,7 +219,7 @@ result = milvus_client.search(
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;hit: <span class="hljs-subst">{hit}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-Accelerate-queries" class="common-anchor-header">다음 쿼리 가속화<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
+<h2 id="Next-Accelerate-queries" class="common-anchor-header">다음: 쿼리 가속화<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -235,7 +235,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>기본적으로 인덱스가 없는 <code translate="no">GEOMETRY</code> 필드에 대한 쿼리는 모든 행에 대한 전체 스캔을 수행하므로 대규모 데이터 집합에서는 속도가 느려질 수 있습니다. 기하학 쿼리 속도를 높이려면 GEOMETRY 필드에 <code translate="no">RTREE</code> 인덱스를 만드세요.</p>
-<p>자세한 내용은 <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE를</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/rtree.md">RTREE를</a> 참조하세요.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

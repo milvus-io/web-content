@@ -77,7 +77,7 @@ summary: >-
 <li><p>Les identifiants des entités correspondantes sont transmis à l'exécuteur de la requête pour l'assemblage du résultat final.</p></li>
 </ul></li>
 </ol>
-<p>Cela réduit la complexité de la requête de <strong>O(n)</strong> (balayage complet) à <strong>O(log n + m)</strong>, où <em>m</em> est le nombre de correspondances.</p>
+<p>La complexité de la requête est ainsi réduite de <strong>O(n)</strong> (balayage complet) à <strong>O(log n + m)</strong>, où <em>m</em> est le nombre de correspondances.</p>
 <h2 id="Create-an-STLSORT-index" class="common-anchor-header">Créer un index STL_SORT<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

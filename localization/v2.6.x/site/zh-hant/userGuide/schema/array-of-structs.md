@@ -90,7 +90,7 @@ beta: Milvus 2.6.4+
 </tr>
 </table></p>
 <p>保持集合層級和 Structs 合併的向量欄位數量不超過或等於 10。</p></li>
-<li><p><strong>可為空與預設值</strong></p>
+<li><p><strong>可空值與預設值</strong></p>
 <p>Structs 陣列欄位不可為空，也不接受任何預設值。</p></li>
 <li><p><strong>函數</strong></p>
 <p>您不能使用函數從 Struct 中的標量欄位衍生出向量欄位。</p></li>
@@ -148,9 +148,10 @@ beta: Milvus 2.6.4+
 <li><p>在集合模式中加入陣列欄位時，設定欄位的資料類型為<code translate="no">DataType.ARRAY</code> 。</p></li>
 <li><p>將欄位的<code translate="no">element_type</code> 屬性設定為<code translate="no">DataType.STRUCT</code> ，使欄位成為 Struct 陣列。</p></li>
 <li><p>建立 Struct 結構描述，並包含所需欄位。然後，在欄位的<code translate="no">struct_schema</code> 屬性中引用 Struct 結構描述。</p></li>
-<li><p>將欄位的<code translate="no">max_capacity</code> 屬性設定為適當的值，以指定每個實體在此欄位中可包含的最大 Struct 數量。</p></li>
+<li><p>設定欄位的<code translate="no">max_capacity</code> 屬性為適當的值，以指定每個實體在此欄位中可包含的最大 Struct 數量。</p></li>
+<li><p><strong>(可選</strong>）您可以為 Struct 元素中的任何欄位設定<code translate="no">mmap.enabled</code> ，以平衡 Struct 中的冷熱資料。</p></li>
 </ol>
-<p>以下是如何定義包含 Structs 陣列的集合模式：</p>
+<p>以下是您如何定義包含 Array of Structs 的集合模式：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -175,8 +176,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -191,7 +192,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述程式碼範例中高亮顯示的幾行說明在集合模式中包含 Structs 陣列的程序。</p>
+<p>上述程式碼範例中高亮顯示的幾行說明了在集合模式中包含 Structs 陣列的程序。</p>
 <h2 id="Set-index-params" class="common-anchor-header">設定索引參數<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -424,7 +425,8 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
     </button></h2><p>您可以對集合和 Array of Structs 中的向量欄位執行向量搜尋。</p>
 <p>具體來說，你可以直接使用 Struct 元素中向量欄位的名稱作為搜尋請求中<code translate="no">anns_field</code> 參數的值，並使用<code translate="no">EmbeddingList</code> 來整齊地組織查詢向量。</p>
 <div class="alert note">
-<p>Milvus 提供了<code translate="no">EmbeddingList</code> 來幫助您更整齊地組織對 Structs 陣列中的 embedding list 進行搜尋的查詢向量。</p>
+<p>Milvus 提供了<code translate="no">EmbeddingList</code> 來幫助您更整齊地組織查詢向量，以便針對 Structs 陣列中的嵌入清單進行搜尋。</p>
+<p>不過，<code translate="no">EmbeddingList</code> 只能用於<code translate="no">search()</code> 沒有範圍搜尋或群組搜尋參數的請求，更不用說<code translate="no">search_iterator()</code> 請求了。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

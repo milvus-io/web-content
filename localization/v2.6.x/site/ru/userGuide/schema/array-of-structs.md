@@ -99,7 +99,7 @@ beta: Milvus 2.6.4+
 <p>Вы не можете использовать функцию для получения векторного поля из скалярного поля внутри структуры.</p></li>
 <li><p><strong>Тип индекса и тип метрики</strong></p>
 <p>Все векторные поля в коллекции должны быть проиндексированы. Чтобы проиндексировать векторное поле в поле массива структур, Milvus использует список вкраплений для организации векторных вкраплений в каждом элементе структуры и индексирует весь список вкраплений в целом.</p>
-<p>Вы можете использовать <code translate="no">HNSW</code> в качестве типа индекса и любой метрический тип, перечисленный ниже, чтобы построить индексы для списков вкраплений в поле Array of Structs.</p>
+<p>Вы можете использовать <code translate="no">HNSW</code> в качестве типа индекса и любой метрический тип, перечисленный ниже, для построения индексов для списков вкраплений в поле Array of Structs.</p>
 <p><table>
 <tr>
 <th><p>Тип индекса</p></th>
@@ -152,6 +152,7 @@ beta: Milvus 2.6.4+
 <li><p>Установите для атрибута <code translate="no">element_type</code> поля значение <code translate="no">DataType.STRUCT</code>, чтобы сделать поле массивом структур.</p></li>
 <li><p>Создайте схему Struct и включите в нее необходимые поля. Затем сделайте ссылку на схему Struct в атрибуте поля <code translate="no">struct_schema</code>.</p></li>
 <li><p>Установите для атрибута <code translate="no">max_capacity</code> поля соответствующее значение, чтобы указать максимальное количество структур, которые каждая сущность может содержать в этом поле.</p></li>
+<li><p><strong>(Необязательно</strong>) Вы можете установить <code translate="no">mmap.enabled</code> для любого поля в элементе Struct, чтобы сбалансировать горячие и холодные данные в Struct.</p></li>
 </ol>
 <p>Вот как можно определить схему коллекции, включающую массив структур:</p>
 <div class="multipleCode">
@@ -178,8 +179,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -212,7 +213,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
       </svg>
     </button></h2><p>Индексация обязательна для всех векторных полей, включая как векторные поля в коллекции, так и поля, определенные в элементе Struct.</p>
 <p>Применимые параметры индекса зависят от используемого типа индекса. Для получения подробной информации о применимых параметрах индекса обратитесь к разделу <a href="/docs/ru/index-explained.md">"Объяснение индекса"</a> и страницам документации, относящимся к выбранному типу индекса.</p>
-<p>Чтобы проиндексировать поле списка вложений, необходимо установить тип индекса <code translate="no">HNSW</code> и использовать <code translate="no">MAX_SIM_COSINE</code> в качестве типа метрики для Milvus для измерения сходства между списками вложений.</p>
+<p>Чтобы проиндексировать поле списка вложений, необходимо установить тип индекса <code translate="no">HNSW</code>, и использовать <code translate="no">MAX_SIM_COSINE</code> в качестве типа метрики для Milvus для измерения сходства между списками вложений.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
@@ -428,6 +429,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 <p>В частности, вы можете напрямую использовать имена векторных полей в элементах Struct в качестве значения параметра <code translate="no">anns_field</code> в поисковом запросе, а также использовать <code translate="no">EmbeddingList</code> для аккуратной организации векторов запроса.</p>
 <div class="alert note">
 <p>Milvus предоставляет <code translate="no">EmbeddingList</code>, чтобы помочь вам более аккуратно организовать векторы запросов для поиска по списку вложений в массиве структур.</p>
+<p>Однако <code translate="no">EmbeddingList</code> можно использовать только в запросах <code translate="no">search()</code> без параметров поиска по диапазону или группировки, не говоря уже о запросах <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

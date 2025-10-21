@@ -139,13 +139,13 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>水印定义内存和磁盘的缓存驱逐开始和结束时间。每种资源类型有两个阈值：</p>
 <ul>
-<li><p><strong>高水印：</strong>当使用量超过此值时，开始驱逐。</p></li>
-<li><p><strong>低水印：</strong>继续驱逐，直到使用率低于此值。</p></li>
+<li><p><strong>高水印</strong>：当使用量超过此值时，开始同步驱逐。</p></li>
+<li><p><strong>低水印</strong>：继续驱逐，直到使用率低于此值。</p></li>
 </ul>
 <div class="alert note">
 <p>此配置仅在<a href="/docs/zh/eviction.md#Enable-eviction">启用驱逐</a>时生效。</p>
 </div>
-<p><strong>示例 YAML</strong>：</p>
+<p><strong>YAML 示例</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">segcore:</span>
     <span class="hljs-attr">tieredStorage:</span>
@@ -177,7 +177,7 @@ beta: Milvus 2.6.4+
      <td><p>浮点数</p></td>
      <td><p>(0.0, 1.0]</p></td>
      <td><p>异步驱逐开始时的内存使用水平。</p></td>
-     <td><p>从<code translate="no">0.8</code> 开始。与低水位线保持合理的差距（例如 0.05-0.10），以防止频繁触发。</p></td>
+     <td><p>从<code translate="no">0.8</code> 开始。与低水位线保持适当差距（例如 0.05-0.10），以防止频繁触发。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">diskLowWatermarkRatio</code></p></td>

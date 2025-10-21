@@ -3,10 +3,10 @@ id: warm-up.md
 title: AufwärmenCompatible with Milvus 2.6.4+
 summary: >-
   In Milvus ergänzt Warm Up den Tiered Storage, indem es die First-Hit-Latenz
-  beseitigt, die beim ersten Zugriff auf kalte Daten auftritt. Einmal
-  konfiguriert, lädt Warm Up ausgewählte Felder oder Indizes in den Cache vor,
-  bevor ein Segment abfragbar wird, um sicherzustellen, dass Daten, auf die
-  häufig zugegriffen wird, sofort nach dem Laden verfügbar sind.
+  verringert, die auftritt, wenn zum ersten Mal auf kalte Daten zugegriffen
+  wird. Einmal konfiguriert, lädt Warm Up ausgewählte Felder oder Indizes in den
+  Cache vor, bevor ein Segment abfragbar wird, um sicherzustellen, dass Daten,
+  auf die häufig zugegriffen wird, sofort nach dem Laden verfügbar sind.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Warm-Up" class="common-anchor-header">Aufwärmen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Warm-Up" class="anchor-icon" translate="no">
@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus ergänzt <strong>Warm Up</strong> den Tiered Storage, indem es die First-Hit-Latenz beseitigt, die beim ersten Zugriff auf kalte Daten auftritt. Einmal konfiguriert, lädt Warm Up ausgewählte Felder oder Indizes in den Cache vor, bevor ein Segment abfragbar wird, um sicherzustellen, dass Daten, auf die häufig zugegriffen wird, sofort nach dem Laden verfügbar sind.</p>
+    </button></h1><p>In Milvus ergänzt <strong>Warm Up</strong> den Tiered Storage, indem es die First-Hit-Latenz verringert, die auftritt, wenn zum ersten Mal auf kalte Daten zugegriffen wird. Einmal konfiguriert, lädt Warm Up ausgewählte Felder oder Indizes in den Cache vor, bevor ein Segment abfragbar wird, um sicherzustellen, dass Daten, auf die häufig zugegriffen wird, sofort nach dem Laden verfügbar sind.</p>
 <h2 id="Why-warm-up" class="common-anchor-header">Warum Warm Up<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,15 +40,15 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/de/tiered-storage-overview.md#Lazy-load">Lazy Load</a> in Tiered Storage verbessert die Effizienz, indem zunächst nur Metadaten geladen werden. Dies kann jedoch bei der ersten Abfrage von kalten Daten zu Latenzzeiten führen, da die erforderlichen Chunks oder Indizes aus dem Objektspeicher geholt werden müssen.</p>
+    </button></h2><p><a href="/docs/de/tiered-storage-overview.md#Phase-1-Lazy-load">Lazy Load</a> in Tiered Storage verbessert die Effizienz, indem zunächst nur Metadaten geladen werden. Dies kann jedoch bei der ersten Abfrage von kalten Daten zu Latenzzeiten führen, da die erforderlichen Chunks oder Indizes aus dem Objektspeicher geholt werden müssen.</p>
 <p><strong>Warm Up</strong> löst dieses Problem durch proaktives Zwischenspeichern kritischer Daten während der Segmentinitialisierung.</p>
 <p>Dies ist besonders vorteilhaft, wenn:</p>
 <ul>
-<li><p>Bestimmte <strong>skalare Indizes</strong> werden häufig in Filterbedingungen verwendet.</p></li>
-<li><p><strong>Vektorindizes</strong> sind für die Suchleistung unerlässlich und müssen sofort zur Verfügung stehen.</p></li>
-<li><p>Die<strong>Kaltstart-Latenzzeit</strong> nach einem QueryNode-Neustart oder dem Laden eines neuen Segments ist inakzeptabel.</p></li>
+<li><p>Bestimmte skalare Indizes werden häufig in Filterbedingungen verwendet.</p></li>
+<li><p>Vektorindizes sind für die Suchleistung wichtig und müssen sofort verfügbar sein.</p></li>
+<li><p>Die Kaltstart-Latenzzeit nach einem QueryNode-Neustart oder dem Laden eines neuen Segments ist inakzeptabel.</p></li>
 </ul>
-<p>Im Gegensatz dazu wird Warm Up für Felder oder Indizes, die nur selten abgefragt werden, <strong>nicht empfohlen</strong>. Die Deaktivierung von Warm Up verkürzt die Segmentladezeit und spart Cache-Speicherplatz - ideal für große Vektorfelder oder unkritische skalare Felder.</p>
+<p>Im Gegensatz dazu wird Warm Up <strong>nicht</strong> für Felder oder Indizes <strong>empfohlen</strong>, die nur selten abgefragt werden. Die Deaktivierung von Warm Up verkürzt die Segmentladezeit und spart Cache-Speicherplatz - ideal für große Vektorfelder oder unkritische skalare Felder.</p>
 <h2 id="Configuration" class="common-anchor-header">Konfiguration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +74,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p><code translate="no">sync</code> (Standard)</p></td>
      <td><p>Vorladen, bevor das Segment abfragbar wird. Die Ladezeit erhöht sich leicht, aber die erste Abfrage verursacht keine Latenz.</p></td>
-     <td><p>Verwenden Sie diese Option für leistungskritische Daten, die sofort verfügbar sein müssen, z. B. skalare Indizes mit hoher Frequenz oder Schlüsselvektorindizes für die Suche.</p></td>
+     <td><p>Verwenden Sie diese Option für leistungskritische Daten, die sofort verfügbar sein müssen, wie z. B. skalare Indizes mit hoher Frequenz oder Schlüsselvektorindizes, die bei der Suche verwendet werden.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">disable</code></p></td>
@@ -144,7 +144,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Warm Up wirkt sich nur auf die <strong>anfängliche Last</strong> aus. Wenn zwischengespeicherte Daten später entfernt werden, werden sie bei der nächsten Abfrage bei Bedarf neu geladen.</p>
+    </button></h2><p>Warm Up wirkt sich nur auf die anfängliche Last aus. Wenn zwischengespeicherte Daten später entfernt werden, werden sie bei der nächsten Abfrage bei Bedarf neu geladen.</p>
 <ul>
 <li><p>Vermeiden Sie die übermäßige Verwendung von <code translate="no">sync</code>. Das Vorladen zu vieler Felder erhöht die Ladezeit und den Druck auf den Cache.</p></li>
 <li><p>Beginnen Sie konservativ - aktivieren Sie Warm Up nur für Felder und Indizes, auf die häufig zugegriffen wird.</p></li>

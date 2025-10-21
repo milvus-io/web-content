@@ -52,7 +52,7 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p>Desalojo</p></td>
-     <td><p>Durante la consulta o búsqueda, cuando el uso de memoria/disco excede los límites internos.</p></td>
+     <td><p>Durante la consulta o búsqueda, cuando el uso de memoria/disco supera los límites internos.</p></td>
      <td><p>El subproceso en segundo plano comprueba periódicamente el uso y desencadena el desalojo cuando se supera la marca de agua.</p></td>
    </tr>
    <tr>
@@ -143,8 +143,8 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Las marcas de agua definen cuándo comienza y termina el desalojo de la caché, tanto para la memoria como para el disco. Cada tipo de recurso tiene dos umbrales:</p>
 <ul>
-<li><p><strong>Marca de agua alta:</strong> El desalojo comienza cuando el uso supera este valor.</p></li>
-<li><p><strong>Marca de agua baja:</strong> El desalojo continúa hasta que el uso cae por debajo de este valor.</p></li>
+<li><p><strong>Marca de agua alta</strong>: El desalojo asíncrono comienza cuando el uso supera este valor.</p></li>
+<li><p><strong>Marca de agua baja</strong>: El desalojo continúa hasta que el uso cae por debajo de este valor.</p></li>
 </ul>
 <div class="alert note">
 <p>Esta configuración sólo tiene efecto cuando <a href="/docs/es/eviction.md#Enable-eviction">el desalojo está activado</a>.</p>
@@ -195,7 +195,7 @@ beta: Milvus 2.6.4+
      <td><p>float</p></td>
      <td><p>(0.0, 1.0]</p></td>
      <td><p>Nivel de uso de disco donde comienza la evicción asíncrona.</p></td>
-     <td><p>Empieza en <code translate="no">0.8</code>. Mantenga un intervalo razonable desde la marca de agua baja (por ejemplo, 0,05-0,10) para evitar disparos frecuentes.</p></td>
+     <td><p>Empieza en <code translate="no">0.8</code>. Mantenga una distancia razonable desde la marca de agua baja (por ejemplo, 0,05-0,10) para evitar disparos frecuentes.</p></td>
    </tr>
 </table>
 <p><strong>Mejores prácticas</strong>:</p>

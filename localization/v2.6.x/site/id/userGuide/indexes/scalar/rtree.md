@@ -215,8 +215,8 @@ hits = client.search(
     </button></h2><p>Gunakan metode <code translate="no">drop_index()</code> untuk menghapus indeks yang ada dari koleksi.</p>
 <div class="alert note">
 <ul>
-<li><p>Pada <strong>v2.6.3</strong> atau yang lebih lama, Anda harus melepaskan koleksi sebelum menghapus indeks.</p></li>
-<li><p>Mulai <strong>v2.6.4</strong> atau yang lebih baru, Anda dapat membuang indeks secara langsung setelah indeks itu tidak diperlukan lagi-tidak perlu melepaskan koleksi terlebih dahulu.</p></li>
+<li><p>Pada <strong>v2.6.3</strong> atau yang lebih lama, Anda harus melepaskan koleksi sebelum menghapus indeks skalar.</p></li>
+<li><p>Mulai <strong>v2.6.4</strong> atau yang lebih baru, Anda dapat membuang indeks skalar secara langsung setelah indeks tersebut tidak lagi diperlukan-tidak perlu melepaskan koleksi terlebih dahulu.</p></li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(

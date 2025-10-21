@@ -215,8 +215,8 @@ hits = client.search(
     </button></h2><p>Utilice el método <code translate="no">drop_index()</code> para eliminar un índice existente de una colección.</p>
 <div class="alert note">
 <ul>
-<li><p>En <strong>v2.6.3</strong> o versiones anteriores, debe liberar la colección antes de eliminar un índice.</p></li>
-<li><p>A partir de la versión <strong>2.6.4</strong>, puedes eliminar un índice directamente cuando ya no lo necesites, sin necesidad de liberar primero la colección.</p></li>
+<li><p>En <strong>v2.6.3</strong> o versiones anteriores, debes liberar la colección antes de eliminar un índice escalar.</p></li>
+<li><p>A partir de la versión <strong>2.6.4</strong>, puedes eliminar un índice escalar directamente cuando ya no lo necesites, sin necesidad de liberar primero la colección.</p></li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(

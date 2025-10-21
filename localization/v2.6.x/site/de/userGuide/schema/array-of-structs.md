@@ -151,9 +151,10 @@ beta: Milvus 2.6.4+
 <li><p>Setzen Sie den Datentyp eines Feldes auf <code translate="no">DataType.ARRAY</code>, wenn Sie das Feld als Array-Feld zum Schema der Sammlung hinzufügen.</p></li>
 <li><p>Setzen Sie das Attribut <code translate="no">element_type</code> des Felds auf <code translate="no">DataType.STRUCT</code>, um das Feld zu einem Array von Structs zu machen.</p></li>
 <li><p>Erstellen Sie ein Struct-Schema und fügen Sie die erforderlichen Felder ein. Dann referenzieren Sie das Struct-Schema im Attribut <code translate="no">struct_schema</code> des Feldes.</p></li>
-<li><p>Setzen Sie das Attribut <code translate="no">max_capacity</code> des Feldes auf einen geeigneten Wert, um die maximale Anzahl von Structs anzugeben, die jede Entität in diesem Feld enthalten kann.</p></li>
+<li><p>Setzen Sie das Attribut <code translate="no">max_capacity</code> des Felds auf einen geeigneten Wert, um die maximale Anzahl von Structs anzugeben, die jede Entität in diesem Feld enthalten kann.</p></li>
+<li><p><strong>(Optional</strong>) Sie können <code translate="no">mmap.enabled</code> für jedes Feld innerhalb des Struct-Elements festlegen, um die heißen und kalten Daten in der Struktur auszugleichen.</p></li>
 </ol>
-<p>Hier sehen Sie, wie Sie ein Auflistungsschema definieren können, das ein Array von Structs enthält:</p>
+<p>So können Sie ein Sammelschema definieren, das ein Array von Structs enthält:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -178,8 +179,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -427,7 +428,8 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
     </button></h2><p>Sie können Vektorsuchen in den Vektorfeldern einer Sammlung und in einem Array of Structs durchführen.</p>
 <p>Insbesondere können Sie die Namen der Vektorfelder innerhalb von Struct-Elementen direkt als Wert für den <code translate="no">anns_field</code> -Parameter in einer Suchanfrage verwenden und <code translate="no">EmbeddingList</code> verwenden, um Abfragevektoren ordentlich zu organisieren.</p>
 <div class="alert note">
-<p>Milvus stellt <code translate="no">EmbeddingList</code> zur Verfügung, um Abfragevektoren für die Suche nach einer Einbettungsliste in einem Array von Structs übersichtlicher zu organisieren.</p>
+<p>Milvus stellt <code translate="no">EmbeddingList</code> zur Verfügung, um Ihnen zu helfen, Abfragevektoren für Suchen gegen eine Einbettungsliste in einem Array von Structs ordentlicher zu organisieren.</p>
+<p>Allerdings kann <code translate="no">EmbeddingList</code> nur in <code translate="no">search()</code> Anfragen ohne Bereichssuche oder gruppierende Suchparameter verwendet werden, geschweige denn in <code translate="no">search_iterator()</code> Anfragen.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

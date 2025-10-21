@@ -2,7 +2,7 @@
 id: warm-up.md
 title: Warm Up
 summary: >-
-  In Milvus, Warm Up complements Tiered Storage by eliminating first-hit latency
+  In Milvus, Warm Up complements Tiered Storage by alleviating first-hit latency
   that occurs when cold data is accessed for the first time. Once configured,
   Warm Up preloads selected fields or indexes into the cache before a segment
   becomes queryable, ensuring that frequently accessed data is available
@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, <strong>Warm Up</strong> complements Tiered Storage by eliminating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading.</p>
+    </button></h1><p>In Milvus, <strong>Warm Up</strong> complements Tiered Storage by alleviating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading.</p>
 <h2 id="Why-warm-up" class="common-anchor-header">Why warm up<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,13 +40,13 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/tiered-storage-overview.md#Lazy-load">Lazy Load</a> in Tiered Storage improves efficiency by loading only metadata initially. However, this can cause latency on the first query to cold data, since required chunks or indexes must be fetched from object storage.</p>
+    </button></h2><p><a href="/docs/tiered-storage-overview.md#Phase-1-Lazy-load">Lazy Load</a> in Tiered Storage improves efficiency by loading only metadata initially. However, this can cause latency on the first query to cold data, since required chunks or indexes must be fetched from object storage.</p>
 <p><strong>Warm Up</strong> solves this problem by proactively caching critical data during segment initialization.</p>
 <p>It is especially beneficial when:</p>
 <ul>
-<li><p>Certain <strong>scalar indexes</strong> are frequently used in filter conditions.</p></li>
-<li><p><strong>Vector indexes</strong> are essential for search performance and must be ready immediately.</p></li>
-<li><p><strong>Cold-start latency</strong> after QueryNode restart or new segment load is unacceptable.</p></li>
+<li><p>Certain scalar indexes are frequently used in filter conditions.</p></li>
+<li><p>Vector indexes are essential for search performance and must be ready immediately.</p></li>
+<li><p>Cold-start latency after QueryNode restart or new segment load is unacceptable.</p></li>
 </ul>
 <p>In contrast, Warm Up is <strong>not recommended</strong> for fields or indexes queried infrequently. Disabling Warm Up shortens segment load time and conserves cache space—ideal for large vector fields or non-critical scalar fields.</p>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
@@ -144,7 +144,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Warm Up only affects the <strong>initial load</strong>. If cached data is later evicted, the next query will reload it on demand.</p>
+    </button></h2><p>Warm Up only affects the initial load. If cached data is later evicted, the next query will reload it on demand.</p>
 <ul>
 <li><p>Avoid overusing <code translate="no">sync</code>. Preloading too many fields increases load time and cache pressure.</p></li>
 <li><p>Start conservatively—enable Warm Up only for fields and indexes that are frequently accessed.</p></li>

@@ -39,7 +39,22 @@ summary: >-
       </svg>
     </button></h2><p>初始化 Milvus 實例後，第一次連接 Milvus 時會自動產生一個根用戶進行認證。根用戶的用戶名是<code translate="no">root</code> ，密碼是<code translate="no">Milvus</code> 。根用戶的默認角色是<code translate="no">admin</code> ，可以訪問所有資源。為了確保資料安全，請妥善保管 root 使用者的憑證，以防止未經授權的存取。</p>
 <p>對於日常操作，我們建議您建立使用者，而不是使用 root 使用者。</p>
-<h3 id="Create-a-user" class="common-anchor-header">建立使用者</h3><p>以下範例顯示如何建立使用者，使用者名稱為<code translate="no">user_1</code> ，密碼為<code translate="no">P@ssw0rd</code> 。使用者的使用者名稱和密碼必須遵循這些規則：</p>
+<h3 id="Create-a-user" class="common-anchor-header">建立使用者<button data-href="#Create-a-user" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下範例顯示如何建立使用者，使用者名稱為<code translate="no">user_1</code> ，密碼為<code translate="no">P@ssw0rd</code> 。使用者的使用者名稱和密碼必須遵循這些規則：</p>
 <ul>
 <li><p>使用者名稱：必須以字母開頭，且只能包含大寫或小寫字母、數字和底線。</p></li>
 <li><p>密碼：長度必須為 8-64 個字元，且必須包含下列三項：大寫字母、小寫字母、數字和特殊字符。</p></li>
@@ -122,7 +137,22 @@ curl --request POST \
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Update-password" class="common-anchor-header">更新密碼</h3><p>建立使用者後，如果忘記了，可以更新密碼。</p>
+<h3 id="Update-password" class="common-anchor-header">更新密碼<button data-href="#Update-password" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>建立使用者後，如果忘記了，可以更新密碼。</p>
 <p>新密碼也必須遵循以下規則：</p>
 <ul>
 <li>長度必須為 8-64 個字元，並包含下列三項：大寫字母、小寫字母、數字及特殊字符。</li>
@@ -171,7 +201,22 @@ client.updatePassword(updatePasswordReq);
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-users" class="common-anchor-header">列出使用者</h3><p>建立數個使用者後，您可以列出並檢視所有現有使用者。</p>
+<h3 id="List-users" class="common-anchor-header">列出使用者<button data-href="#List-users" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>建立數個使用者後，您可以列出並檢視所有現有使用者。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -213,7 +258,22 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><p>Milvus 提供了一個內建的角色<code translate="no">admin</code> ，這是一個管理員角色，可以存取所有實體下的資源，並擁有所有操作的權限。為了更精細的存取管理和增強資料安全性，建議您依據需求建立自訂角色。</p>
-<h3 id="Create-a-role" class="common-anchor-header">建立角色</h3><p>下面的示例演示了如何创建名为<code translate="no">role_a</code> 的角色。</p>
+<h3 id="Create-a-role" class="common-anchor-header">建立角色<button data-href="#Create-a-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面的示例演示了如何创建名为<code translate="no">role_a</code> 的角色。</p>
 <p>角色名稱必須遵循以下規則：</p>
 <ul>
 <li>必須以字母開頭，且只能包含大寫或小寫字母、數字和底線。</li>
@@ -248,7 +308,22 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-roles" class="common-anchor-header">列出角色</h3><p>建立數個角色後，您可以列出並檢視所有現有的角色。</p>
+<h3 id="List-roles" class="common-anchor-header">列出角色<button data-href="#List-roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>建立數個角色後，您可以列出並檢視所有現有的角色。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

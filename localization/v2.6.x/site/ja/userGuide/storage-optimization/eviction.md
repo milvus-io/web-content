@@ -140,11 +140,11 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>ウォーターマークは、メモリとディスクの両方について、キャッシュ退避の開始と終了のタイミングを定義します。各リソース・タイプには2つのしきい値があります：</p>
 <ul>
-<li><p><strong>高いウォーターマーク：</strong>使用量がこの値を超えると立ち退きが開始されます。</p></li>
-<li><p><strong>低ウォーターマーク：</strong>使用量がこの値を下回るまで、立ち退きが継続されます。</p></li>
+<li><p><strong>高いウォーターマーク</strong>：使用量がこの値を超えると非同期エビクションが開始されます。</p></li>
+<li><p><strong>低ウォーターマーク</strong>：使用量がこの値を下回るまで退避を継続する。</p></li>
 </ul>
 <div class="alert note">
-<p>この構成は、<a href="/docs/ja/eviction.md#Enable-eviction">立ち退きが有効になっている</a>場合にのみ有効になります。</p>
+<p>この構成は、<a href="/docs/ja/eviction.md#Enable-eviction">evictionが有効になっている</a>場合にのみ有効になります。</p>
 </div>
 <p><strong>YAMLの例</strong>：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>

@@ -179,12 +179,12 @@ milvus_client.load_collection(collection_name)
 <p>Une fois ces conditions remplies, vous pouvez utiliser des expressions avec des opérateurs géométriques dédiés pour filtrer votre collection sur la base des valeurs géométriques.</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">Définition des expressions de filtrage</h4><p>Pour filtrer sur le champ <code translate="no">GEOMETRY</code>, utilisez un opérateur spécifique à la géométrie avec le format d'expression suivant : <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, où :</p>
 <ul>
-<li><p><code translate="no">{operator}</code> est un opérateur géométrique pris en charge (par exemple, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Pour obtenir la liste complète des opérateurs disponibles, reportez-vous à la section <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Opérateurs géométriques</a>.</p></li>
+<li><p><code translate="no">{operator}</code> est un opérateur géométrique pris en charge (par exemple, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Pour obtenir la liste complète des opérateurs disponibles, reportez-vous à la section <a href="/docs/fr/geometry-operators.md">Opérateurs géométriques</a>.</p></li>
 <li><p><code translate="no">geo_field</code> est le nom du champ <code translate="no">GEOMETRY</code> défini dans le schéma de votre collection.</p></li>
 <li><p><code translate="no">'{wkt}'</code> est la chaîne WKT représentant l'objet géométrique sur lequel vous effectuez le filtrage.</p></li>
 </ul>
 <div class="alert note">
-<p>Certains opérateurs, tels que <code translate="no">ST_DWITHIN</code>, peuvent nécessiter des paramètres supplémentaires. Pour plus de détails et d'exemples d'utilisation de chaque opérateur, reportez-vous à <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Opérateurs de géométrie</a>.</p>
+<p>Certains opérateurs, tels que <code translate="no">ST_DWITHIN</code>, peuvent nécessiter des paramètres supplémentaires. Pour plus de détails et d'exemples d'utilisation de chaque opérateur, reportez-vous à <a href="/docs/fr/geometry-operators.md">Opérateurs de géométrie</a>.</p>
 </div>
 <p>Les exemples suivants montrent comment utiliser différents opérateurs spécifiques à la géométrie dans une expression de filtrage :</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Exemple 1 : Recherche d'entités dans une zone rectangulaire</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -239,7 +239,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>Par défaut, les requêtes sur les champs <code translate="no">GEOMETRY</code> sans index effectueront un balayage complet de toutes les lignes, ce qui peut être lent sur les grands ensembles de données. Pour accélérer les requêtes géométriques, créez un index <code translate="no">RTREE</code> sur votre champ GEOMETRY.</p>
-<p>Pour plus d'informations, reportez-vous à <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>.</p>
+<p>Pour plus d'informations, reportez-vous à <a href="/docs/fr/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

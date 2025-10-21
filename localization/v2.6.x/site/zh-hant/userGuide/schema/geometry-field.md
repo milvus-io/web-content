@@ -175,12 +175,12 @@ milvus_client.load_collection(collection_name)
 <p>一旦滿足這些要求，您就可以使用具有專用幾何運算符號的表達式，根據幾何值篩選集合。</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">定義篩選表達式</h4><p>若要在<code translate="no">GEOMETRY</code> 欄位上進行篩選，請使用具備下列表達式格式的專用幾何運算符：<code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>其中：</p>
 <ul>
-<li><p><code translate="no">{operator}</code> 是支援的幾何運算符號 (例如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code>)。如需可用運算符的完整清單，請參閱<a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">幾何運算符</a>。</p></li>
+<li><p><code translate="no">{operator}</code> 是支援的幾何運算符號 (例如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code>)。如需可用運算符的完整清單，請參閱<a href="/docs/zh-hant/geometry-operators.md">幾何運算符</a>。</p></li>
 <li><p><code translate="no">geo_field</code> 是在集合模式中定義的<code translate="no">GEOMETRY</code> 欄位的名稱。</p></li>
 <li><p><code translate="no">'{wkt}'</code> 是 WKT 字串，代表您要篩選的幾何物件。</p></li>
 </ul>
 <div class="alert note">
-<p>某些運算符號，例如<code translate="no">ST_DWITHIN</code> ，可能需要額外的參數。有關各運算符的詳細資訊和使用範例，請參閱<a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">幾何運算符</a>。</p>
+<p>某些運算符號，例如<code translate="no">ST_DWITHIN</code> ，可能需要額外的參數。有關各運算符的詳細資訊和使用範例，請參閱<a href="/docs/zh-hant/geometry-operators.md">幾何運算符</a>。</p>
 </div>
 <p>以下範例示範如何在篩選表達式中使用不同的特定幾何運算符：</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">範例 1：尋找矩形區域內的實體</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -235,7 +235,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>預設情況下，在沒有索引的<code translate="no">GEOMETRY</code> 欄位上進行查詢時，會對所有行執行完整掃描，這在大型資料集上可能會很慢。若要加速幾何查詢，請在 GEOMETRY 欄位上建立<code translate="no">RTREE</code> 索引。</p>
-<p>如需詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>。</p>
+<p>如需詳細資訊，請參閱<a href="/docs/zh-hant/rtree.md">RTREE</a>。</p>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

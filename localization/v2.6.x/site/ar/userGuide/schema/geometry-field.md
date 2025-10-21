@@ -45,7 +45,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>حقل GEOMETRY هو نوع بيانات معرّف من قبل المخطط (<code translate="no">DataType.GEOMETRY</code>) في ميلفوس يقوم بتخزين البيانات الهندسية. عند العمل مع حقول الهندسة، فإنك تتفاعل مع البيانات باستخدام تنسيق <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">النص المعروف (WKT)</a> ، وهو تمثيل مقروء بشري يستخدم لإدراج البيانات والاستعلام عنها. داخليًا، تقوم Milvus بتحويل WKT إلى <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">ثنائي معروف (WKB)</a> للتخزين والمعالجة الفعالة، ولكنك لا تحتاج إلى التعامل مع WKB مباشرة.</p>
+    </button></h2><p>حقل GEOMETRY هو نوع بيانات معرّف من قبل المخطط (<code translate="no">DataType.GEOMETRY</code>) في ميلفوس يقوم بتخزين البيانات الهندسية. عند العمل مع حقول الهندسة، فإنك تتفاعل مع البيانات باستخدام تنسيق <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">النص المعروف (WKT)</a> ، وهو تمثيل مقروء بشري يستخدم لإدراج البيانات والاستعلام عنها. داخليًا، يقوم Milvus بتحويل WKT إلى <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">ثنائي معروف (WKB)</a> للتخزين والمعالجة الفعالة، ولكنك لا تحتاج إلى التعامل مع WKB مباشرة.</p>
 <p>يدعم نوع البيانات <code translate="no">GEOMETRY</code> الكائنات الهندسية التالية:</p>
 <ul>
 <li><p><strong>نقطة</strong>: <code translate="no">POINT (x y)</code> ؛ على سبيل المثال، <code translate="no">POINT (13.403683 52.520711)</code> حيث <code translate="no">x</code> = خط الطول و <code translate="no">y</code> = خط العرض</p></li>
@@ -177,12 +177,12 @@ milvus_client.load_collection(collection_name)
 <p>بمجرد استيفاء هذه المتطلبات، يمكنك استخدام التعبيرات ذات العوامل الهندسية المخصصة لتصفية مجموعتك بناءً على القيم الهندسية.</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">تحديد تعبيرات التصفية</h4><p>للتصفية على الحقل <code translate="no">GEOMETRY</code> ، استخدم مشغلًا مخصصًا للهندسة باستخدام صيغة التعبير التالية: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code> ، حيث:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> هو مشغل هندسي مدعوم (على سبيل المثال، <code translate="no">ST_CONTAINS</code> ، <code translate="no">ST_INTERSECTS</code>). للحصول على قائمة كاملة بالمشغلات المتاحة، راجع <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">مشغلات الهندسة</a>.</p></li>
+<li><p><code translate="no">{operator}</code> هو مشغل هندسي مدعوم (على سبيل المثال، <code translate="no">ST_CONTAINS</code> ، <code translate="no">ST_INTERSECTS</code>). للحصول على قائمة كاملة بالمشغلات المتاحة، راجع <a href="/docs/ar/geometry-operators.md">مشغلات الهندسة</a>.</p></li>
 <li><p><code translate="no">geo_field</code> هو اسم الحقل <code translate="no">GEOMETRY</code> المحدد في مخطط مجموعتك.</p></li>
 <li><p><code translate="no">'{wkt}'</code> هو سلسلة WKT التي تمثل الكائن الهندسي الذي تقوم بالتصفية عليه.</p></li>
 </ul>
 <div class="alert note">
-<p>قد تتطلب بعض المشغلات، مثل <code translate="no">ST_DWITHIN</code> ، معلمات إضافية. للاطلاع على التفاصيل وأمثلة الاستخدام لكل مشغل، ارجع إلى <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">مشغلات الهندسة</a>.</p>
+<p>قد تتطلب بعض المشغلات، مثل <code translate="no">ST_DWITHIN</code> ، معلمات إضافية. للاطلاع على التفاصيل وأمثلة الاستخدام لكل مشغل، ارجع إلى <a href="/docs/ar/geometry-operators.md">مشغلات الهندسة</a>.</p>
 </div>
 <p>توضّح الأمثلة التالية كيفية استخدام مشغّلات مختلفة خاصة بالهندسة في تعبير تصفية:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">مثال 1: البحث عن الكيانات داخل منطقة مستطيلة</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -209,7 +209,7 @@ query_results = milvus_client.query(
 <span class="hljs-keyword">for</span> ret <span class="hljs-keyword">in</span> query_results:
     <span class="hljs-built_in">print</span>(ret)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">المثال 3: الجمع بين التشابه المتجهي والمرشح المكاني</h4><pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
+<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">مثال 3: الجمع بين التشابه المتجهي والمرشح المكاني</h4><pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
 result = milvus_client.search(
     collection_name,
     vectors_to_search,
@@ -236,8 +236,8 @@ result = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بشكل افتراضي، ستؤدي الاستعلامات على حقول <code translate="no">GEOMETRY</code> بدون فهرس إلى إجراء مسح كامل لجميع الصفوف، وهو ما قد يكون بطيئًا في مجموعات البيانات الكبيرة. لتسريع الاستعلامات الهندسية، قم بإنشاء فهرس <code translate="no">RTREE</code> على حقل GEOMETRY.</p>
-<p>لمزيد من التفاصيل، راجع <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>.</p>
+    </button></h2><p>بشكل افتراضي، ستؤدي الاستعلامات على حقول <code translate="no">GEOMETRY</code> بدون فهرس إلى إجراء مسح كامل لجميع الصفوف، وهو ما قد يكون بطيئًا في مجموعات البيانات الكبيرة. لتسريع الاستعلامات الهندسية، قم بإنشاء فهرس <code translate="no">RTREE</code> على حقل GEOMETRY الخاص بك.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

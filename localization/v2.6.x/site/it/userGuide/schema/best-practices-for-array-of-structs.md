@@ -120,7 +120,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>L'indicizzazione è obbligatoria per i campi vettoriali, compresi quelli di una collezione e quelli definiti in una struttura. Per i campi vettoriali in una struttura, si deve usare <code translate="no">EMB_LIST_HNSW</code> come tipo di indice e <code translate="no">MAX_SIM</code> come tipo di metrica.</p>
 <p>Per i dettagli su tutti i limiti applicabili, fare riferimento ai <a href="/docs/it/array-of-structs.md#Limits">limiti</a>.</p>
-<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Un esempio reale: Modellazione del set di dati CoVLA per la guida autonoma<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
+<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Un esempio reale: Modellare il set di dati CoVLA per la guida autonoma<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -199,7 +199,7 @@ beta: Milvus 2.6.4+
 ├── ...
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
-<p>Si può notare che la struttura del dataset CoVLA è altamente gerarchica, dividendo i dati raccolti in più file <code translate="no">.jsonl</code>, insieme ai video clip nel formato <code translate="no">.mp4</code>.</p>
+<p>È possibile notare che la struttura del dataset CoVLA è altamente gerarchica, dividendo i dati raccolti in più file <code translate="no">.jsonl</code>, insieme ai video clip nel formato <code translate="no">.mp4</code>.</p>
 <p>In Milvus, è possibile utilizzare un campo JSON o un campo Array-of-Structs per creare strutture annidate all'interno di uno schema di raccolta. Quando le incorporazioni vettoriali fanno parte del formato annidato, è supportato solo un campo Array-of-Structs. Tuttavia, una struttura all'interno di un array non può a sua volta contenere altre strutture annidate. Per memorizzare il set di dati CoVLA mantenendo le relazioni essenziali, è necessario rimuovere la gerarchia non necessaria e appiattire i dati in modo che si adattino allo schema della raccolta Milvus.</p>
 <p>Il diagramma seguente illustra come possiamo modellare questo set di dati utilizzando lo schema illustrato nello schema seguente:</p>
 <p>

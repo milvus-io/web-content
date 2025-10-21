@@ -1,11 +1,11 @@
 ---
 id: tiered-storage-overview.md
-title: 階層ストレージの概要Compatible with Milvus 2.6.4+
+title: 階層型ストレージの概要Compatible with Milvus 2.6.4+
 summary: >-
-  Milvusでは、従来のフルロードモードでは、各QueryNodeは初期化時にセグメントの全てのスキーマフィールドとインデックスを、たとえアクセスされることのないデータであってもロードする必要があります。これは即座にデータを利用できるようにしますが、特に大規模なデータセットを扱う場合、高いメモリ使用量、重いディスクアクティビティ、大きなI/Oオーバーヘッドなど、リソースの浪費につながることがよくあります。
+  Milvusでは、従来のフルロードモードでは、各QueryNodeは初期化時にセグメントの全てのデータフィールドとインデックスをロードする必要があります。これは即座にデータを利用できるようにしますが、特に大規模なデータセットを扱う場合、高いメモリ使用量、重いディスクアクティビティ、大きなI/Oオーバーヘッドなど、リソースの浪費につながることがよくあります。
 beta: Milvus 2.6.4+
 ---
-<h1 id="Tiered-Storage-Overview" class="common-anchor-header">階層ストレージの概要<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Tiered-Storage-Overview" class="anchor-icon" translate="no">
+<h1 id="Tiered-Storage-Overview" class="common-anchor-header">階層型ストレージの概要<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Tiered-Storage-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,16 +20,19 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは、従来の<strong>フルロードモードでは</strong>、各QueryNodeは初期化時に<a href="https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf">セグメントの</a>全てのスキーマフィールドとインデックスを、たとえアクセスされることのないデータであってもロードする必要があります。これにより、即座にデータを利用できるようになりますが、特に大規模なデータセットを扱う場合、メモリ使用量の多さ、ディスク使用量の多さ、I/Oオーバーヘッドの大きさなど、リソースの浪費につながることがよくあります。</p>
-<p><strong>ティアード・ストレージは</strong>、データ・キャッシングをセグメントのロードから切り離すことで、この課題に対処します。Milvusは、すべてのデータを一度にロードする代わりに、ホットデータ（ローカルにキャッシュされたデータ）とコールドデータ（リモートで保存されたデータ）を区別するキャッシュレイヤーを導入します。QueryNodeは軽量なメタデータのみを最初にロードし、オンデマンドで動的にデータをプルまたはエヴィッシュします。これにより、ロード時間が大幅に短縮され、ローカルリソースの使用率が最適化され、QueryNodeは物理メモリまたはディスク容量をはるかに超えるデータセットを処理できるようになります。</p>
-<p>以下のようなシナリオでは、Tiered Storageの有効化を検討できます：</p>
+    </button></h1><p>Milvusでは、従来の<em>フルロードモードでは</em>、各QueryNodeが初期化時に<a href="/docs/ja/glossary.md#Segment">セグメントの</a>全てのデータフィールドとインデックスをロードする必要があります。これにより、即座にデータを利用できるようになりますが、特に大規模なデータセットを扱う場合、高いメモリ使用量、重いディスクアクティビティ、大きなI/Oオーバーヘッドなど、リソースの浪費につながることがよくあります。</p>
+<p><em>ティアード・ストレージは</em>、データ・キャッシングをセグメントのロードから切り離すことで、この課題に対処します。Milvusは、すべてのデータを一度にロードする代わりに、ホットデータ（ローカルにキャッシュされたデータ）とコールドデータ（リモートで保存されたデータ）を区別するキャッシュレイヤーを導入します。QueryNodeは軽量な<em>メタデータのみを</em>最初にロードし、オンデマンドで動的にデータをプルまたはエヴィッシュします。これにより、ロード時間が大幅に短縮され、ローカルリソースの使用率が最適化され、QueryNodeは物理メモリやディスク容量をはるかに超えるデータセットを処理できるようになります。</p>
+<p>以下のようなシナリオでは、Tiered Storageを有効にすることを検討してください：</p>
 <ul>
 <li><p>単一のQueryNodeで利用可能なメモリまたはNVMe容量を超えるコレクション</p></li>
 <li><p>ファーストクエリのレイテンシよりも、より高速なロードが重要な分析ワークロードまたはバッチワークロード</p></li>
 <li><p>アクセス頻度の低いデータのキャッシュミスを許容できる混合ワークロード</p></li>
 </ul>
 <div class="alert note">
-<p>セグメントとチャンクの詳細については、<a href="https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf">セグメントの説明を</a>参照してください。</p>
+<ul>
+<li><p><em>メタデータには</em>、スキーマ、インデックス定義、チャンクマップ、行数、リモートオブジェクトへの参照が含まれる。この種のデータは小さく、常にキャッシュされ、削除されることはない。</p></li>
+<li><p>セグメントとチャンクの詳細については、<a href="/docs/ja/glossary.md#Segment">セグメント</a> を参照。</p></li>
+</ul>
 </div>
 <h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,11 +49,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tiered Storageは、QueryNodeがセグメントデータを管理する方法を変更します。ロード時にすべてのフィールドとインデックスをキャッシュする代わりに、QueryNodeは<strong>メタデータのみを</strong>ロードし、キャッシュレイヤーを使用して動的にデータをフェッチおよびエヴィクトします。</p>
-<div class="alert note">
-<p><strong>メタデータには</strong>スキーマ、インデックス定義、チャンクマップ、行数、リモートオブジェクトへの参照が含まれます。このデータは小さく、常にキャッシュされ、決して削除されることはない。</p>
-</div>
-<h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">フルロード・モードとティアード・ストレージ・モードの比較<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
+    </button></h2><p>Tiered StorageはQueryNodeがセグメントデータを管理する方法を変更します。ロード時にすべてのフィールドとインデックスをキャッシュする代わりに、QueryNodeはメタデータのみをロードし、キャッシュレイヤーを使用して動的にデータをフェッチおよびエヴィクトします。</p>
+<h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">フルロードモードとティアードストレージモードの比較<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +65,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>フルロードモードと階層化ストレージモードはどちらも同じデータを扱いますが、QueryNodeがこれらのコンポーネントをキャッシュするタイミングと方法が異なります。</p>
+    </button></h3><p>フルロードモードと階層化ストレージモードはどちらも同じデータを扱いますが、QueryNodeがこれらのコンポーネントをキャッシュする<em>タイミングと</em> <em>方法が</em>異なります。</p>
 <ul>
 <li><p><strong>フルロードモード</strong>：ロード時に、QueryNodeはメタデータ、フィールドデータ、インデックスを含む完全なコレクションデータをオブジェクトストレージからキャッシュします。</p></li>
 <li><p><strong>階層ストレージモード</strong>：ロード時に、QueryNodeはメタデータのみをキャッシュします。フィールドデータはチャンク単位でオンデマンドでプルされます。インデックス・ファイルは、最初のクエリが必要とするまでリモートのままです。その後、セグメントごとのインデックス全体がフェッチされ、キャッシュされます。</p></li>
@@ -90,50 +90,38 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tiered Storageでは、ワークフローには3つのフェーズがあります：</p>
+    </button></h3><p>Tiered Storageでは、ワークフローは以下のフェーズに分かれます：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-loading-workflow.png" alt="Querynode Loading Workflow" class="doc-image" id="querynode-loading-workflow" />
-   </span> <span class="img-wrapper"> <span>クエリノード・ロード・ワークフロー</span> </span></p>
-<h4 id="Lazy-load" class="common-anchor-header">遅延ロード</h4><p>初期化時、Milvusは遅延ロードを実行し、スキーマ定義、インデックス情報、チャンクマッピング、行数を含む<strong>メタデータのみを</strong>キャッシュします。</p>
-<p>この段階ではフィールドデータやインデックスファイルはダウンロードされません。これにより、コレクションをすばやくクエリ可能にし、起動時のリソースの使用を最小限に抑えます。</p>
-<p><strong>利点</strong></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/load-workflow.png" alt="Load Workflow" class="doc-image" id="load-workflow" />
+   </span> <span class="img-wrapper"> <span>ロードワークフロー</span> </span></p>
+<h4 id="Phase-1-Lazy-load" class="common-anchor-header">フェーズ1: 遅延ロード</h4><p>初期化時、Milvusは遅延ロードを実行し、スキーマ定義、インデックス情報、チャンクマッピングなどのセグメントレベルのメタデータのみをキャッシュします。</p>
+<p>この段階では実際のフィールドデータやインデックスファイルはキャッシュされません。これにより、メモリとディスクの消費を最小限に抑えながら、コレクションを起動後すぐにクエリ可能にすることができます。</p>
+<p>フィールドデータとインデックスファイルは最初にアクセスされるまでリモートストレージに残るため、<em>最初のクエリは</em>必要なデータをオンデマンドでフェッチする必要があり、さらに待ち時間が発生する可能性があります。クリティカルなフィールドやインデックスについてこの影響を軽減するには、<a href="/docs/ja/tiered-storage-overview.md#Phase-2-Warm-up">ウォームアップ</a>戦略を使用して、セグメントがクエリ可能になる前にそれらを事前にロードすることができます。</p>
+<p><strong>構成</strong></p>
+<p>Tiered Storageを有効にすると自動的に適用されます。その他の手動設定は必要ありません。</p>
+<h4 id="Phase-2-Warm-up" class="common-anchor-header">フェーズ2：ウォームアップ</h4><p><a href="/docs/ja/tiered-storage-overview.md#Phase-1-Lazy-load">遅延ロードによって</a>もたらされるファーストヒットレイテンシを削減するために、Milvusは*Warm Upメカニズムを提供します。</p>
+<p>セグメントがクエリ可能になる前に、Milvusはオブジェクトストレージから特定のフィールドまたはインデックスをプロアクティブにフェッチしてキャッシュし、最初のクエリがオンデマンドロードをトリガする代わりにキャッシュされたデータに直接ヒットするようにします。</p>
+<p><strong>設定</strong></p>
+<p>ウォームアップ設定は<strong>milvus.yamlの</strong>Tiered Storageセクションで定義されます。フィールドまたはインデックスタイプごとにプリロードを有効または無効にし、優先するストラテジーを指定できます。構成例については<a href="/docs/ja/warm-up.md">ウォームアップを</a>参照してください。</p>
+<h4 id="Phase-3-Partial-load" class="common-anchor-header">フェーズ 3: 部分ロード</h4><p>クエリまたは検索が開始されると、QueryNode は<em>パーシャルロードを</em>実行し、オブジェクトストレージから必要なデータチャンクまたはインデックスファイルのみをフェッチします。</p>
 <ul>
-<li><p>コレクションのロード時間が大幅に短縮</p></li>
-<li><p>最小限のメモリとディスクフットプリント</p></li>
-<li><p>クエリノードがより多くのセグメントを同時に処理可能</p></li>
+<li><p><strong>フィールド</strong>：<strong>チャンクレベルで</strong>オンデマンドにロードされます。現在のクエリ条件に一致するデータチャンクのみがフェッチされ、I/Oとメモリの使用を最小限に抑えます。</p></li>
+<li><p><strong>インデックス</strong>：<strong>セグメント・</strong>レベルでオンデマンドでロードされます。インデックス・ファイルは完全な単位としてフェッチされる必要があり、チャンク間で分割することはできません。</p></li>
 </ul>
 <p><strong>構成</strong></p>
-<p>Tiered Storageを有効にすると自動的に適用されます。手動設定は不要</p>
-<h4 id="Partial-load" class="common-anchor-header">部分ロード</h4><p>クエリまたは検索操作が開始されると、QueryNode は部分ロードを実行し、必要なフィールド・チャンクまたはインデックスのみをオブジェクト・ストレージからフェッチし、再利用のために一時的にキャッシュします。</p>
+<p>部分ロードは、Tiered Storageが有効な場合に自動的に適用される。手動設定は不要。クリティカルなデータのファーストヒットレイテンシを最小化するには、<a href="/docs/ja/warm-up.md">ウォームアップと</a>組み合わせます。</p>
+<h4 id="Phase-4-Eviction" class="common-anchor-header">フェーズ4: エビクション</h4><p>健全なリソース利用を維持するため、Milvusはしきい値に達すると未使用のキャッシュデータを自動的に解放します。</p>
+<p>退避は<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">LRU(Least Recently Used)</a>ポリシーに従い、アクセス頻度の低いデータが最初に削除され、アクティブなデータはキャッシュに残ります。</p>
+<p>立ち退きは、以下の設定可能な項目によって管理されます：</p>
 <ul>
-<li><p><strong>フィールド</strong>：<strong>チャンクレベルで</strong>オンデマンドにロード</p></li>
-<li><p><strong>インデックス：</strong> <strong>セグメント</strong>レベルで初めてアクセスされたときにロードされる。</p></li>
-</ul>
-<p><strong>利点</strong></p>
-<ul>
-<li><p>メモリとディスクへの負荷を軽減</p></li>
-<li><p>Milvusによる大規模データセットの効率的なクエリが可能</p></li>
-<li><p>クエリレイテンシとリソース効率のバランス</p></li>
+<li><p><strong>ウォーターマーク</strong>：メモリまたはディスクのしきい値を定義して、立ち退きのトリガーと停止を設定します。</p></li>
+<li><p><strong>キャッシュTTL</strong>: 定義された非アクティブ時間が経過すると、古いキャッシュ・データを削除します。</p></li>
+<li><p><strong>オーバーコミット率</strong>：積極的な立ち退きを開始する前に一時的なキャッシュのオーバーサブスクリプションを許可し、短期的なワークロードの急増を吸収するのに役立ちます。</p></li>
 </ul>
 <p><strong>構成</strong></p>
-<p>部分ロードは、Tiered Storageが有効な場合のデフォルトの動作です。クリティカルなフィールドやインデックスのファーストヒットレイテンシを最小化するには、<strong>ウォームアップを</strong>使用してクエリ前にデータをプリロードします。構成例については<a href="/docs/ja/warm-up.md">Warm Upを</a>参照してください。</p>
-<h4 id="Eviction" class="common-anchor-header">立ち退き</h4><p>リソースの健全な使用を維持するため、Milvusはしきい値に達すると未使用のキャッシュデータを自動的に解放します。</p>
-<p>退避は<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">LRU（Least Recently Used）</a>ポリシーに従い、設定可能なパラメータによって管理されます：</p>
-<ul>
-<li><p><strong>透かし：</strong>消去の開始と停止のしきい値を定義します。</p></li>
-<li><p><strong>キャッシュTTL:</strong>定義された期間が経過すると、古くなったキャッシュ項目を削除します。</p></li>
-<li><p><strong>オーバーコミット率：</strong>退去が加速する前に一時的なオーバーサブスクリプションを許可します。</p></li>
-</ul>
-<p><strong>利点</strong></p>
-<ul>
-<li><p>ワークロード全体でキャッシュ使用量を安定させる</p></li>
-<li><p>クラッシュを防止しながらキャッシュの再利用を最大化</p></li>
-<li><p>長期間にわたって予測可能なパフォーマンスを維持</p></li>
-</ul>
-<p><strong>構成</strong></p>
-<p><code translate="no">milvus.yaml</code> で、立ち退きパラメータを有効にして調整する。詳細な構成については、「<a href="/docs/ja/eviction.md">Eviction</a>」を参照してください。</p>
-<h2 id="Getting-started" class="common-anchor-header">はじめに<button data-href="#Getting-started" class="anchor-icon" translate="no">
+<p><strong>milvus.yamlで</strong>evictionパラメータを有効にして調整します。詳細な設定については、「<a href="/docs/ja/eviction.md">Eviction</a>」を参照してください。</p>
+<h2 id="Getting-started" class="common-anchor-header">開始<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -164,7 +152,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Milvus 2.6.4 以上</p></li>
+<li><p>milvus 2.6.4以上</p></li>
 <li><p>専用のメモリとディスクリソースを持つQueryNode</p></li>
 <li><p>オブジェクトストレージバックエンド（S3、MinIOなど）</p></li>
 </ul>
@@ -373,4 +361,4 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>いいえ。オーバーコミット比率により、QueryNodeは物理メモリが許容するよりも多くのセグメントを扱うことができますが、高すぎる比率は頻繁な立ち退き、キャッシュのスラッシング、またはクエリの失敗につながる可能性があります。</p>
+    </button></h3><p>いいえ。オーバーコミット比率により、QueryNodeは物理メモリが許容するよりも多くのセグメントを扱うことができますが、高すぎる比率は頻繁な立ち退き、キャッシュのスラッシング、クエリの失敗を引き起こす可能性があります。</p>

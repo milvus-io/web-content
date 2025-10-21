@@ -38,7 +38,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>從自動駕駛到多模式檢索等現代人工智能應用程式，越來越依賴於嵌套的異質資料。傳統的平面資料模型難以呈現複<strong>雜的關</strong>係，例如<strong>「一個文件包含許多註釋區塊</strong>」或<strong>「一個駕駛場景包含多個觀察到的動作</strong>」。這正是 Milvus 的 Array of Structs 資料類型的優點所在。</p>
+    </button></h2><p>現代人工智能應用程式，從自動駕駛到多模態檢索，越來越依賴嵌套的異質資料。傳統的平面資料模型難以呈現複<strong>雜的關</strong>係，例如<strong>「一個文件包含許多註釋區塊</strong>」或<strong>「一個駕駛場景包含多個觀察到的動作</strong>」。這正是 Milvus 的 Array of Structs 資料類型的優點所在。</p>
 <p>Structs 陣列允許您儲存一組有序的結構化元素，其中每個 Struct 包含其標量欄位和向量嵌入的組合。這使得它非常適用於</p>
 <ul>
 <li><p><strong>分層資料</strong>：具有多個子記錄的父實體，例如具有許多文字區塊的書籍，或具有許多註解畫格的視訊。</p></li>
@@ -128,7 +128,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>由<a href="https://tur.ing/posts/s1QUA1uh">圖靈汽車公司</a>推出並在 2025 年電腦視覺應用冬季會議 (Winter Conference on Applications of Computer Vision, WACV) 上接受的綜合視覺-語言-動作 (Comprehensive Vision-Language-Action, CoVLA) 資料集，為訓練和評估自動駕駛中的視覺-語言-動作 (Vision-Language-Action, VLA) 模型提供了豐富的基礎。每個資料點（通常是視訊片段）不僅包含原始視覺輸入，還包含描述下列內容的結構化字幕：</p>
+    </button></h2><p>由<a href="https://tur.ing/posts/s1QUA1uh">圖靈汽車公司</a>推出並在 2025 年電腦視覺應用冬季會議 (Winter Conference on Applications of Computer Vision, WACV) 上接受的「視覺-語言-動作綜合資料集」(Comprehensive Vision-Language-Action, CoVLA) 為訓練和評估自動駕駛中的視覺-語言-動作 (Vision-Language-Action, VLA) 模型提供了豐富的基礎。每個資料點（通常是視訊片段）不僅包含原始視覺輸入，還包含描述下列內容的結構化字幕：</p>
 <ul>
 <li><p><strong>自我車輛的行為</strong>(例如：「向左並線，同時讓開迎面駛來的車輛」)、</p></li>
 <li><p><strong>偵測到的</strong>存在<strong>物件</strong>(例如：前方車輛、行人、交通燈)，以及</p></li>
@@ -208,7 +208,7 @@ beta: Milvus 2.6.4+
 <li><p><code translate="no">frame_id</code> 識別目前視訊中的特定幀。</p></li>
 <li><p><code translate="no">plain_caption</code> 是目前畫面的描述，不包含周遭環境，例如天氣、路況等，<code translate="no">plain_cap_vector</code> 是其相對應的向量嵌入。</p></li>
 <li><p><code translate="no">rich_caption</code> 是有環境環境的目前畫面的描述，<code translate="no">rich_cap_vector</code> 是其相對應的向量嵌入。</p></li>
-<li><p><code translate="no">risk</code> 是小我車輛在目前幀中所面臨風險的描述，<code translate="no">risk_vector</code> 是其對應的向量嵌入，以及</p></li>
+<li><p><code translate="no">risk</code> 是小我車輛在目前幀中所面臨風險的描述，<code translate="no">risk_vector</code> 是其相對應的向量嵌入，以及</p></li>
 <li><p>是該幀的所有其他屬性，例如<code translate="no">road</code>,<code translate="no">weather</code>,<code translate="no">is_tunnel</code>,<code translate="no">has_pedestrain</code>, 等等...</p></li>
 </ul></li>
 <li><p><code translate="no">traffic_lights</code> 是一個 JSON 組織體，包含目前畫面中識別出的所有交通燈號。</p></li>

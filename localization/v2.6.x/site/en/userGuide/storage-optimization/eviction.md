@@ -142,8 +142,8 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Watermarks define when cache eviction begins and ends for both memory and disk. Each resource type has two thresholds:</p>
 <ul>
-<li><p><strong>High watermark:</strong> Eviction starts when usage exceeds this value.</p></li>
-<li><p><strong>Low watermark:</strong> Eviction continues until usage falls below this value.</p></li>
+<li><p><strong>High watermark</strong>: Async eviction starts when usage exceeds this value.</p></li>
+<li><p><strong>Low watermark</strong>: Eviction continues until usage falls below this value.</p></li>
 </ul>
 <div class="alert note">
 <p>This configuration takes effect only when <a href="/docs/eviction.md#Enable-eviction">eviction is enabled</a>.</p>

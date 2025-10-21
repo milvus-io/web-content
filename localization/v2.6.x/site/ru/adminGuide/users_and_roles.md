@@ -42,7 +42,22 @@ summary: >-
       </svg>
     </button></h2><p>После инициализации экземпляра Milvus автоматически создается корневой пользователь для аутентификации при первом подключении к Milvus. Имя пользователя root - <code translate="no">root</code>, а пароль - <code translate="no">Milvus</code>. Роль root-пользователя по умолчанию - <code translate="no">admin</code>, которая имеет доступ ко всем ресурсам. Для обеспечения безопасности данных, пожалуйста, храните учетные данные корневого пользователя в безопасности, чтобы предотвратить несанкционированный доступ.</p>
 <p>Для повседневной работы мы рекомендуем создавать пользователей, а не использовать root-пользователя.</p>
-<h3 id="Create-a-user" class="common-anchor-header">Создание пользователя</h3><p>В следующем примере показано, как создать пользователя с именем пользователя <code translate="no">user_1</code> и паролем <code translate="no">P@ssw0rd</code>. Имя пользователя и пароль для него должны соответствовать следующим правилам:</p>
+<h3 id="Create-a-user" class="common-anchor-header">Создание пользователя<button data-href="#Create-a-user" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующем примере показано, как создать пользователя с именем пользователя <code translate="no">user_1</code> и паролем <code translate="no">P@ssw0rd</code>. Имя пользователя и пароль для него должны соответствовать следующим правилам:</p>
 <ul>
 <li><p>Имя пользователя: должно начинаться с буквы и может включать только заглавные или строчные буквы, цифры и знаки подчеркивания.</p></li>
 <li><p>Пароль: должен состоять из 8-64 символов и включать три из следующих: заглавные буквы, строчные буквы, цифры и специальные символы.</p></li>
@@ -125,7 +140,22 @@ curl --request POST \
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Update-password" class="common-anchor-header">Обновление пароля</h3><p>После создания пользователя вы можете обновить пароль, если забудете его.</p>
+<h3 id="Update-password" class="common-anchor-header">Обновление пароля<button data-href="#Update-password" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После создания пользователя вы можете обновить пароль, если забудете его.</p>
 <p>Новый пароль также должен соответствовать следующему правилу:</p>
 <ul>
 <li>Он должен состоять из 8-64 символов и включать три из следующих элементов: заглавные буквы, строчные буквы, цифры и специальные символы.</li>
@@ -174,7 +204,22 @@ client.updatePassword(updatePasswordReq);
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-users" class="common-anchor-header">Список пользователей</h3><p>После создания нескольких пользователей вы можете составить список и просмотреть всех существующих пользователей.</p>
+<h3 id="List-users" class="common-anchor-header">Список пользователей<button data-href="#List-users" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После создания нескольких пользователей вы можете составить список и просмотреть всех существующих пользователей.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -216,7 +261,22 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><p>Milvus предоставляет встроенную роль <code translate="no">admin</code>, которая представляет собой роль администратора, имеющего доступ к ресурсам всех экземпляров и привилегии для всех операций. Для более тонкого управления доступом и повышения безопасности данных рекомендуется создавать собственные роли в соответствии с вашими потребностями.</p>
-<h3 id="Create-a-role" class="common-anchor-header">Создание роли</h3><p>В следующем примере показано, как создать роль с именем <code translate="no">role_a</code>.</p>
+<h3 id="Create-a-role" class="common-anchor-header">Создание роли<button data-href="#Create-a-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующем примере показано, как создать роль с именем <code translate="no">role_a</code>.</p>
 <p>Имя роли должно соответствовать следующему правилу:</p>
 <ul>
 <li>Оно должно начинаться с буквы и может содержать только прописные или строчные буквы, цифры и символы подчеркивания.</li>
@@ -251,7 +311,22 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-roles" class="common-anchor-header">Список ролей</h3><p>После создания нескольких ролей вы можете перечислить и просмотреть все существующие роли.</p>
+<h3 id="List-roles" class="common-anchor-header">Список ролей<button data-href="#List-roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После создания нескольких ролей вы можете перечислить и просмотреть все существующие роли.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

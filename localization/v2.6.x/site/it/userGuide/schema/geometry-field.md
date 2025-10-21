@@ -3,7 +3,7 @@ id: geometry-field.md
 title: Campo geometricoCompatible with Milvus 2.6.4+
 summary: >-
   Quando si realizzano applicazioni come i sistemi informativi geografici (GIS),
-  gli strumenti di mappatura o i servizi basati sulla localizzazione, spesso è
+  gli strumenti di mappatura o i servizi basati sulla localizzazione, è spesso
   necessario memorizzare e interrogare dati geometrici. Il tipo di dati GEOMETRY
   di Milvus risolve questa sfida, fornendo un modo nativo per memorizzare e
   interrogare dati geometrici flessibili.
@@ -46,7 +46,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un campo GEOMETRIA è un tipo di dati definito dallo schema (<code translate="no">DataType.GEOMETRY</code>) in Milvus che memorizza dati geometrici. Quando si lavora con i campi geometrici, si interagisce con i dati utilizzando il formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, una rappresentazione leggibile dall'uomo utilizzata sia per l'inserimento dei dati che per le interrogazioni. Internamente, Milvus converte WKT in <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB)</a> per una memorizzazione e un'elaborazione efficienti, ma non è necessario gestire direttamente WKB.</p>
+    </button></h2><p>Un campo GEOMETRIA è un tipo di dati definito dallo schema (<code translate="no">DataType.GEOMETRY</code>) in Milvus che memorizza dati geometrici. Quando si lavora con i campi geometrici, si interagisce con i dati utilizzando il formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, una rappresentazione leggibile dall'uomo utilizzata sia per l'inserimento dei dati che per le interrogazioni. Internamente, Milvus converte WKT in <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB)</a> per una memorizzazione e un'elaborazione efficiente, ma non è necessario gestire direttamente WKB.</p>
 <p>Il tipo di dati <code translate="no">GEOMETRY</code> supporta i seguenti oggetti geometrici:</p>
 <ul>
 <li><p><strong>POINT</strong>: <code translate="no">POINT (x y)</code>; ad esempio, <code translate="no">POINT (13.403683 52.520711)</code> dove <code translate="no">x</code> = longitudine e <code translate="no">y</code> = latitudine.</p></li>
@@ -178,12 +178,12 @@ milvus_client.load_collection(collection_name)
 <p>Una volta soddisfatti questi requisiti, è possibile utilizzare espressioni con operatori geometrici dedicati per filtrare l'insieme in base ai valori geometrici.</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">Definire le espressioni di filtro</h4><p>Per filtrare sul campo <code translate="no">GEOMETRY</code>, utilizzare un operatore specifico per la geometria con il seguente formato di espressione: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, dove:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> è un operatore geometrico supportato (ad esempio, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Per un elenco completo degli operatori disponibili, consultare <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Operatori geometrici</a>.</p></li>
+<li><p><code translate="no">{operator}</code> è un operatore geometrico supportato (ad esempio, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Per un elenco completo degli operatori disponibili, consultare <a href="/docs/it/geometry-operators.md">Operatori geometrici</a>.</p></li>
 <li><p><code translate="no">geo_field</code> è il nome del campo <code translate="no">GEOMETRY</code> definito nello schema della raccolta.</p></li>
 <li><p><code translate="no">'{wkt}'</code> è la stringa WKT che rappresenta l'oggetto geometrico su cui si sta filtrando.</p></li>
 </ul>
 <div class="alert note">
-<p>Alcuni operatori, come <code translate="no">ST_DWITHIN</code>, possono richiedere parametri aggiuntivi. Per i dettagli e gli esempi di utilizzo di ciascun operatore, fare riferimento a <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Operatori geometrici</a>.</p>
+<p>Alcuni operatori, come <code translate="no">ST_DWITHIN</code>, possono richiedere parametri aggiuntivi. Per i dettagli e gli esempi di utilizzo di ciascun operatore, fare riferimento a <a href="/docs/it/geometry-operators.md">Operatori geometrici</a>.</p>
 </div>
 <p>Gli esempi seguenti mostrano come utilizzare diversi operatori specifici per la geometria in un'espressione di filtro:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Esempio 1: Trova entità all'interno di un'area rettangolare</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -210,7 +210,7 @@ query_results = milvus_client.query(
 <span class="hljs-keyword">for</span> ret <span class="hljs-keyword">in</span> query_results:
     <span class="hljs-built_in">print</span>(ret)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">Esempio 3: combinare la somiglianza vettoriale con un filtro spaziale</h4><pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
+<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">Esempio 3: combinare la similarità vettoriale con un filtro spaziale</h4><pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
 result = milvus_client.search(
     collection_name,
     vectors_to_search,
@@ -238,7 +238,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>Per impostazione predefinita, le query sui campi <code translate="no">GEOMETRY</code> senza indice eseguono una scansione completa di tutte le righe, che può essere lenta su grandi insiemi di dati. Per accelerare le query geometriche, creare un indice <code translate="no">RTREE</code> sul campo GEOMETRIA.</p>
-<p>Per maggiori dettagli, consultare <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>.</p>
+<p>Per maggiori dettagli, consultare <a href="/docs/it/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

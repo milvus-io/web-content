@@ -24,7 +24,7 @@ summary: >-
       </svg>
     </button></h1><p>O Milvus suporta um conjunto de operadores para filtragem espacial nos campos <code translate="no">GEOMETRY</code>, essenciais para a gestão e análise de dados geométricos. Estes operadores permitem recuperar entidades com base nas relações geométricas entre objectos.</p>
 <p>Todos os operadores geométricos funcionam com dois argumentos geométricos: o nome do campo <code translate="no">GEOMETRY</code> definido no seu esquema de coleção e um objeto geométrico de destino representado no formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT).</p>
-<p>Para saber mais sobre os campos <code translate="no">GEOMETRY</code> no Milvus, consulte <a href="/docs/pt/geometry-field.md">Campo geométrico</a>.</p>
+<p>Para saber mais sobre os campos <code translate="no">GEOMETRY</code> no Milvus, consulte <a href="/docs/pt/geometry-field.md">Campo Geométrico</a>.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">Operadores de geometria suportados<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,7 +108,7 @@ summary: >-
       </svg>
     </button></h2><p>O operador <code translate="no">ST_EQUALS</code> devolve TRUE se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão. Isto é útil para verificar se dois objectos geométricos armazenados representam exatamente a mesma localização e forma.</p>
 <p><strong>Exemplo</strong></p>
-<p>Suponha que pretende verificar se uma geometria armazenada (como um ponto ou polígono) é exatamente igual a uma geometria de destino. Por exemplo, é possível comparar um ponto armazenado com um ponto de interesse específico.</p>
+<p>Suponha que pretende verificar se uma geometria armazenada (como um ponto ou um polígono) é exatamente igual a uma geometria de destino. Por exemplo, é possível comparar um ponto armazenado com um ponto de interesse específico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to check if a geometry matches a specific point</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_EQUALS(geo_field, &#x27;POINT(10 20)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

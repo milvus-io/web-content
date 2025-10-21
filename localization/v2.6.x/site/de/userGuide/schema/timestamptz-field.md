@@ -49,7 +49,7 @@ beta: Milvus 2.6.4+
 <div class="alert note">
 <ul>
 <li><p>Sie können <code translate="no">nullable=True</code> für <code translate="no">TIMESTAMPTZ</code> Felder einstellen, um fehlende Werte zuzulassen.</p></li>
-<li><p>Sie können einen Standard-Zeitstempelwert mit dem Attribut <code translate="no">default_value</code> im <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601-Format</a> angeben.</p></li>
+<li><p>Sie können einen Standardzeitstempelwert mit dem Attribut <code translate="no">default_value</code> im <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601-Format</a> angeben.</p></li>
 </ul>
 <p>Siehe <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a> für weitere Informationen.</p>
 </div>
@@ -259,7 +259,7 @@ results = client.query(
 <li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> ist ein Zeitstempel-Literal im <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601-Format</a>, einschließlich seines Zeitzonen-Offsets.</p></li>
 <li><p><code translate="no">!=</code> vergleicht den Feldwert mit diesem Literal. Andere unterstützte Operatoren sind <code translate="no">==</code>, <code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code> und <code translate="no">&gt;=</code>.</p></li>
 </ul>
-<h4 id="Interval-operations" class="common-anchor-header">Intervalloperationen</h4><p>Sie können mit <code translate="no">TIMESTAMPTZ</code> Feldern arithmetische Operationen durchführen, indem Sie <strong>INTERVAL-Werte</strong> im <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">ISO 8601-Dauerformat</a> verwenden. So können Sie beim Filtern von Daten Zeiträume wie Tage, Stunden oder Minuten zu einem Zeitstempel addieren oder davon subtrahieren.</p>
+<h4 id="Interval-operations" class="common-anchor-header">Intervalloperationen</h4><p>Sie können mit <code translate="no">TIMESTAMPTZ</code> Feldern arithmetische Operationen durchführen, indem Sie <strong>INTERVAL-Werte</strong> im <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">ISO 8601-Dauerformat</a> verwenden. Damit können Sie beim Filtern von Daten Zeiträume wie Tage, Stunden oder Minuten zu einem Zeitstempel addieren oder davon subtrahieren.</p>
 <p>Zum Beispiel filtert die folgende Abfrage Entitäten, bei denen der Zeitstempel (<code translate="no">tsz</code>) plus null Tage <strong>nicht gleich</strong> <strong>2025-01-03T00:00:00+08:00</strong> ist:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

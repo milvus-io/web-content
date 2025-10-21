@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
 <p>Verwenden Sie ein GEOMETRY-Feld, wenn Sie z. B. Vektorähnlichkeit mit räumlichen Beschränkungen kombinieren müssen:</p>
 <ul>
 <li><p>Location-Base Service (LBS): "Finde ähnliche POIs <strong>innerhalb</strong> dieses Stadtblocks".</p></li>
-<li><p>Multimodale Suche: "Finde ähnliche Fotos <strong>innerhalb von 1 km</strong> von diesem Punkt"</p></li>
+<li><p>Multimodale Suche: "ähnliche Fotos <strong>im Umkreis von 1 km</strong> von diesem Punkt abrufen"</p></li>
 <li><p>Karten und Logistik: "Anlagen <strong>innerhalb</strong> einer Region" oder "Routen <strong>, die</strong> einen Weg <strong>kreuzen</strong> "</p></li>
 </ul>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Was ist ein GEOMETRY-Feld?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
@@ -178,12 +178,12 @@ milvus_client.load_collection(collection_name)
 <p>Sobald diese Voraussetzungen erfüllt sind, können Sie Ausdrücke mit speziellen Geometrieoperatoren verwenden, um Ihre Sammlung auf der Grundlage der geometrischen Werte zu filtern.</p>
 <h4 id="Define-filter-expressions" class="common-anchor-header">Definieren von Filterausdrücken</h4><p>Um nach dem Feld <code translate="no">GEOMETRY</code> zu filtern, verwenden Sie einen geometriespezifischen Operator mit dem folgenden Ausdrucksformat: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, wobei:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> ein unterstützter Geometrieoperator ist (z. B. <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Eine vollständige Liste der verfügbaren Operatoren finden Sie unter <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Geometrie-Operatoren</a>.</p></li>
+<li><p><code translate="no">{operator}</code> ein unterstützter Geometrieoperator ist (z. B. <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Eine vollständige Liste der verfügbaren Operatoren finden Sie unter <a href="/docs/de/geometry-operators.md">Geometrie-Operatoren</a>.</p></li>
 <li><p><code translate="no">geo_field</code> ist der Name des Feldes <code translate="no">GEOMETRY</code>, das in Ihrem Sammlungsschema definiert ist.</p></li>
 <li><p><code translate="no">'{wkt}'</code> ist die WKT-Zeichenkette, die das Geometrieobjekt darstellt, nach dem Sie filtern.</p></li>
 </ul>
 <div class="alert note">
-<p>Einige Operatoren, wie z. B. <code translate="no">ST_DWITHIN</code>, können zusätzliche Parameter erfordern. Einzelheiten und Verwendungsbeispiele für jeden Operator finden Sie unter <a href="https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf">Geometrieoperatoren</a>.</p>
+<p>Einige Operatoren, wie z. B. <code translate="no">ST_DWITHIN</code>, können zusätzliche Parameter erfordern. Einzelheiten und Verwendungsbeispiele für jeden Operator finden Sie unter <a href="/docs/de/geometry-operators.md">Geometrieoperatoren</a>.</p>
 </div>
 <p>Die folgenden Beispiele zeigen, wie verschiedene geometriespezifische Operatoren in einem Filterausdruck verwendet werden können:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Beispiel 1: Suche nach Objekten innerhalb eines rechteckigen Bereichs</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
@@ -238,7 +238,7 @@ result = milvus_client.search(
         ></path>
       </svg>
     </button></h2><p>Standardmäßig führen Abfragen auf <code translate="no">GEOMETRY</code> Felder ohne Index einen vollständigen Scan aller Zeilen durch, was bei großen Datensätzen langsam sein kann. Um geometrische Abfragen zu beschleunigen, erstellen Sie einen <code translate="no">RTREE</code> Index auf Ihr GEOMETRY Feld.</p>
-<p>Einzelheiten hierzu finden Sie unter <a href="https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf">RTREE</a>.</p>
+<p>Einzelheiten hierzu finden Sie unter <a href="/docs/de/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,4 +301,4 @@ result = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ja, das Feld GEOMETRY unterstützt das Attribut <code translate="no">nullable</code> und einen Standardwert im WKT-Format. Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+    </button></h3><p>Ja, das GEOMETRY-Feld unterstützt das Attribut <code translate="no">nullable</code> und einen Standardwert im WKT-Format. Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p>

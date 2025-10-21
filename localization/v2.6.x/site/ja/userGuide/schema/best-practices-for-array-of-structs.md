@@ -20,7 +20,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>現代のAIアプリケーション、特にモノのインターネット（IoT）や自律走行では、リッチで構造化されたイベントを推論するのが一般的だ。例えば、タイムスタンプとベクトル埋め込みを持つセンサーの読み取り値、エラーコードとオーディオスニペットを持つ診断ログ、あるいは位置、速度、シーンコンテキストを持つ旅行セグメントなどである。これらは、データベースがネスト化されたデータの取り込みと検索をネイティブにサポートする必要があります。</p>
+    </button></h1><p>現代のAIアプリケーション、特にモノのインターネット（IoT）や自律走行では、リッチで構造化されたイベントを推論するのが一般的だ。例えば、タイムスタンプとベクトル埋め込みを含むセンサーの読み取り値、エラーコードとオーディオスニペットを含む診断ログ、あるいは位置、速度、シーンコンテキストを含むトリップセグメントなどである。これらは、データベースがネスト化されたデータの取り込みと検索をネイティブにサポートする必要があります。</p>
 <p>Milvusは、ユーザーにアトミックな構造イベントをフラットなデータモデルに変換することを求める代わりに、Array of Structsを導入します。Array内の各Structはスカラーやベクトルを保持することができ、セマンティックインテグリティを保持し、堅牢なネストフィルタリングとハイブリッド検索を可能にします。</p>
 <h2 id="Why-Array-of-Structs" class="common-anchor-header">なぜArray of Structsなのか？<button data-href="#Why-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自律走行からマルチモーダル検索に至るまで、最新のAIアプリケーションは、入れ子構造になった異種データにますます依存するようになっている。従来のフラットなデータモデルでは、<strong>「1つのドキュメントに多数の注釈が付けられたチャンク</strong>」や<strong>「1つの運転シーンに複数の観察された操作</strong>」のような複雑な関係を表現するのに苦労する。そこでMilvusのArray of Structsデータ型が威力を発揮します。</p>
+    </button></h2><p>自律走行からマルチモーダル検索に至るまで、最新のAIアプリケーションは、ネスト化された異種データにますます依存するようになっている。従来のフラットなデータモデルでは、<strong>「1つのドキュメントに多数の注釈が付けられたチャンク</strong>」や<strong>「1つの運転シーンに複数の観察された操作</strong>」のような複雑な関係を表現するのに苦労する。そこでMilvusのArray of Structsデータ型が威力を発揮します。</p>
 <p>Array of Structsでは、構造化された要素の順序付きセットを格納することができ、各Structはスカラーフィールドとベクトル埋め込みを独自に組み合わせて格納します。そのため、以下のような用途に最適です：</p>
 <ul>
 <li><p><strong>階層データ</strong>：階層的データ：複数の子レコードを持つ親エンティティ。例えば、多くのテキストチャンクを持つ書籍や、多くのアノテーションフレームを持つ動画など。</p></li>
@@ -61,7 +61,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h2><p><a href="/docs/ja/schema-hands-on.md">検索のためのデータモデル設計で</a>説明したすべてのガイドラインに加え、データモデル設計でArray of Structsの使用を開始する前に以下のことも考慮する必要があります。</p>
-<h3 id="Define-the-Struct-schema" class="common-anchor-header">Struct スキーマの定義<button data-href="#Define-the-Struct-schema" class="anchor-icon" translate="no">
+<h3 id="Define-the-Struct-schema" class="common-anchor-header">構造体スキーマの定義<button data-href="#Define-the-Struct-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,7 +78,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>コレクションに Array フィールドを追加する前に、内部の Struct スキーマを定義します。構造体の各フィールドは、スカラー<strong>（VARCHAR</strong>、<strong>INT</strong>、<strong>BOOLEAN</strong> など）またはベクトル<strong>（FLOAT_VECTOR</strong>）で明示的に型付けする必要があります。</p>
 <p>Struct スキーマには、検索や表示に使用するフィールドのみを含めるようにして、無駄のないスキーマを維持することをお勧めします。未使用のメタデータで肥大化しないようにしましょう。</p>
-<h3 id="Set-the-max-capacity-thoughtfully" class="common-anchor-header">最大容量は慎重に設定する<button data-href="#Set-the-max-capacity-thoughtfully" class="anchor-icon" translate="no">
+<h3 id="Set-the-max-capacity-thoughtfully" class="common-anchor-header">最大容量は慎重に設定しましょう<button data-href="#Set-the-max-capacity-thoughtfully" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -205,7 +205,7 @@ beta: Milvus 2.6.4+
 <li><p><code translate="no">captions</code> は Struct の配列で、各 Struct は以下のフィールドを持つ：</p>
 <ul>
 <li><p><code translate="no">frame_id</code> は、現在のビデオ内の特定のフレームを識別します。</p></li>
-<li><p><code translate="no">plain_caption</code> は、天候や道路状況などの周囲環境を含まない現在のフレームの説明であり、<code translate="no">plain_cap_vector</code> はその対応するベクトル埋め込み。</p></li>
+<li><p><code translate="no">plain_caption</code> は、天候や道路状況などの周囲環境を含まない現在のフレームの説明であり、<code translate="no">plain_cap_vector</code> は、それに対応するベクトル埋め込みです。</p></li>
 <li><p><code translate="no">rich_caption</code> は周囲環境を含む現在のフレームの説明であり、<code translate="no">rich_cap_vector</code> はその対応するベクトル埋め込みである。</p></li>
 <li><p><code translate="no">risk</code> は現在のフレームで自車両が直面するリスクの記述であり、<code translate="no">risk_vector</code> はその対応するベクトル埋め込みである。</p></li>
 <li><p><code translate="no">road</code>,<code translate="no">weather</code>,<code translate="no">is_tunnel</code>,<code translate="no">has_pedestrain</code>, etc...のようなフレームの他のすべての属性。</p></li>
@@ -391,7 +391,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>スキーマとインデックスの準備ができたら、次のようにターゲット・コレクションを作成します：</p>
+    </button></h3><p>スキーマとインデックスの準備ができたら、以下のようにターゲットコレクションを作成します：</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 client.create_collection(

@@ -62,7 +62,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><ul>
 <li><p><strong>データ型</strong></p>
-<p>コレクションを作成するとき、Array フィールドの要素のデータ型として Struct 型を使用できます。しかし、既存のコレクションにArray of Structsを追加することはできませんし、Milvusはコレクションフィールドのデータ型としてStruct型の使用をサポートしていません。</p>
+<p>コレクションを作成するとき、Array フィールドの要素のデータ型として Struct 型を使用できます。しかし、既存のコレクションにArray of Structsを追加することはできず、Milvusはコレクションフィールドのデータ型としてStruct型の使用をサポートしていません。</p>
 <p>ArrayフィールドのStructは同じスキーマを共有しており、Arrayフィールドの作成時に定義する必要があります。</p>
 <p>Struct スキーマには、以下の表に示すように、ベクトルフィールドとスカラーフィールドの両方が含まれます：</p>
 <p><table>
@@ -128,7 +128,7 @@ beta: Milvus 2.6.4+
 <li><p><strong>アップサート・データ</strong></p>
 <p>構造体はマージ・モードでのアップサートをサポートしていません。ただし、オーバーライド・モードでアップサートを実行して Structs 内のデータを更新することはできます。マージ・モードでのアップサートとオーバーライド・モードでのアップサートの違いの詳細については、<a href="/docs/ja/upsert-entities.md#Overview">アップサート・エンティティを</a>参照してください。</p></li>
 <li><p><strong>スカラー・フィルタリング</strong></p>
-<p>検索やクエリ内のフィルタリング式で、Array of Structs や Struct 要素内のフィールドを使用することはできません。</p></li>
+<p>検索やクエリ内のフィルタリング式では、Array of Structs や Struct 要素内のフィールドを使用できません。</p></li>
 </ul>
 <h2 id="Add-Array-of-Structs" class="common-anchor-header">構造体配列の追加<button data-href="#Add-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,8 +151,9 @@ beta: Milvus 2.6.4+
 <li><p>フィールドの<code translate="no">element_type</code> 属性を<code translate="no">DataType.STRUCT</code> に設定して、フィールドを Struct の Array にします。</p></li>
 <li><p>Struct スキーマを作成し、必要なフィールドを含めます。次に、フィールドの<code translate="no">struct_schema</code> 属性で Struct スキーマを参照します。</p></li>
 <li><p>フィールドの<code translate="no">max_capacity</code> 属性を適切な値に設定し、各エンティティがこのフィールドに含めることができる Struct の最大数を指定します。</p></li>
+<li><p><strong>(オプション</strong>）Struct 要素内の任意のフィールドに<code translate="no">mmap.enabled</code> を設定して、Struct 内のホットデータとコールドデータのバランスを取ることができます。</p></li>
 </ol>
-<p>以下は、Array of Structs を含むコレクションスキーマを定義する方法です：</p>
+<p>以下は、Struct の Array を含むコレクションスキーマを定義する方法です：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -177,8 +178,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -426,7 +427,8 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
     </button></h2><p>コレクションやArray of Structsのベクトルフィールドに対してベクトル検索を行うことができます。</p>
 <p>具体的には、検索リクエストの<code translate="no">anns_field</code> パラメータの値として Struct 要素内のベクトルフィールド名を直接使用することができ、<code translate="no">EmbeddingList</code> を使用してクエリベクトルを整然と整理することができます。</p>
 <div class="alert note">
-<p>Milvusは、Array of Structs内のエンベッディングリストに対する検索のクエリベクトルをよりきれいに整理するために、<code translate="no">EmbeddingList</code> 。</p>
+<p>Milvusは、Array of Structs内のエンベッディングリストに対する検索のクエリベクタをよりきれいに整理するために、<code translate="no">EmbeddingList</code> 。</p>
+<p>しかし、<code translate="no">EmbeddingList</code> は、<code translate="no">search_iterator()</code> リクエストはもちろん、範囲検索やグループ化検索パラメータを持たない<code translate="no">search()</code> リクエストでしか使えません。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

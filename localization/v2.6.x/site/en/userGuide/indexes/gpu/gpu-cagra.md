@@ -180,26 +180,17 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">build_algo</code></p></td>
-     <td><p>Selects the graph generation algorithm before pruning. Possible values:</p>
-<ul>
-<li><p><code translate="no">IVF_PQ</code>: Offers higher quality but slower build time.</p></li>
-<li><p><code translate="no">NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</p></li>
-</ul></td>
+     <td><p>Selects the graph generation algorithm before pruning. Possible values:</p><ul><li><p><code translate="no">IVF_PQ</code>: Offers higher quality but slower build time.</p></li><li><p><code translate="no">NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</p></li></ul></td>
      <td><p><code translate="no">IVF_PQ</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
-     <td><p>Decides whether to cache the original dataset in GPU memory. Possible values:</p>
-<ul>
-<li><p><code translate="no">"true"</code>: Caches the original dataset to enhance recall by refining search results.</p></li>
-<li><p><code translate="no">"false"</code>: Does not cache the original dataset to save gpu memory.</p></li>
-</ul></td>
+     <td><p>Decides whether to cache the original dataset in GPU memory. Possible values:</p><ul><li><p><code translate="no">"true"</code>: Caches the original dataset to enhance recall by refining search results.</p></li><li><p><code translate="no">"false"</code>: Does not cache the original dataset to save gpu memory.</p></li></ul></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>Decides whether to use GPU for index-building and CPU for search.
- Setting this parameter to <code translate="no">"true"</code> requires the presence of the <code translate="no">ef</code> parameter in the search requests.</p></td>
+     <td><p>Decides whether to use GPU for index-building and CPU for search.</p><p>Setting this parameter to <code translate="no">"true"</code> requires the presence of the <code translate="no">ef</code> parameter in the search requests.</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>
@@ -247,8 +238,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Specifies the query time/accuracy trade-off. A higher <code translate="no">ef</code> value leads to more accurate but slower search.
- This parameter is mandatory if you set <code translate="no">adapt_for_cpu</code> to <code translate="no">true</code> when you build the index.</p></td>
+     <td><p>Specifies the query time/accuracy trade-off. A higher <code translate="no">ef</code> value leads to more accurate but slower search.</p><p>This parameter is mandatory if you set <code translate="no">adapt_for_cpu</code> to <code translate="no">true</code> when you build the index.</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>

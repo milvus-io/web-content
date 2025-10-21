@@ -213,8 +213,8 @@ hits = client.search(
     </button></h2><p>使用<code translate="no">drop_index()</code> 方法從集合中移除現有索引。</p>
 <div class="alert note">
 <ul>
-<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能刪除索引。</p></li>
-<li><p>從<strong>v2.6.4</strong>或更高版本開始，一旦不再需要索引，您可以直接將其刪除，而不需要先釋放集合。</p></li>
+<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能刪除標量索引。</p></li>
+<li><p>從<strong>v2.6.4</strong>或更新版本開始，您可以在不再需要標量索引時直接將其刪除，而不需要先釋放集合。</p></li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(

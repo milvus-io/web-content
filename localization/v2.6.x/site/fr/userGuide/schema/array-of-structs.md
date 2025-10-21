@@ -151,9 +151,10 @@ beta: Milvus 2.6.4+
 <li><p>Définir le type de données d'un champ sur <code translate="no">DataType.ARRAY</code> lors de l'ajout du champ en tant que champ de tableau au schéma de la collection.</p></li>
 <li><p>Attribuez la valeur <code translate="no">DataType.STRUCT</code> à l'attribut <code translate="no">element_type</code> de la rubrique pour en faire un tableau de structures.</p></li>
 <li><p>Créez un schéma Struct et incluez les champs requis. Faites ensuite référence au schéma Struct dans l'attribut <code translate="no">struct_schema</code> du champ.</p></li>
-<li><p>Attribuez à l'attribut <code translate="no">max_capacity</code> du champ une valeur appropriée pour spécifier le nombre maximal de structures que chaque entité peut contenir dans ce champ.</p></li>
+<li><p>Attribuez à l'attribut <code translate="no">max_capacity</code> du champ une valeur appropriée pour spécifier le nombre maximum de structures que chaque entité peut contenir dans ce champ.</p></li>
+<li><p><strong>(Facultatif</strong>) Vous pouvez définir <code translate="no">mmap.enabled</code> pour n'importe quel champ de l'élément Struct afin d'équilibrer les données chaudes et froides dans la structure.</p></li>
 </ol>
-<p>Voici comment définir un schéma de collection qui inclut un tableau de structures :</p>
+<p>Voici comment définir un schéma de collection comprenant un tableau de structures :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -178,8 +179,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -428,6 +429,7 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
 <p>Plus précisément, vous pouvez utiliser directement les noms des champs vectoriels dans les éléments Struct comme valeur du paramètre <code translate="no">anns_field</code> dans une requête de recherche, et utiliser <code translate="no">EmbeddingList</code> pour organiser proprement les vecteurs de requête.</p>
 <div class="alert note">
 <p>Milvus fournit <code translate="no">EmbeddingList</code> pour vous aider à organiser plus proprement les vecteurs de requête pour les recherches sur une liste d'intégration dans un tableau de structures.</p>
+<p>Cependant, <code translate="no">EmbeddingList</code> ne peut être utilisé que dans les requêtes <code translate="no">search()</code> sans paramètres de recherche de plage ou de regroupement, et encore moins dans les requêtes <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -459,8 +461,8 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La requête de recherche ci-dessus utilise <code translate="no">chunks[text_vector]</code> pour faire référence au champ <code translate="no">text_vector</code> dans les éléments de la structure. Vous pouvez utiliser cette syntaxe pour définir les paramètres <code translate="no">anns_field</code> et <code translate="no">output_fields</code>.</p>
-<p>Le résultat sera une liste des trois entités les plus similaires.</p>
+<p>La demande de recherche ci-dessus utilise <code translate="no">chunks[text_vector]</code> pour faire référence au champ <code translate="no">text_vector</code> dans les éléments de la structure. Vous pouvez utiliser cette syntaxe pour définir les paramètres <code translate="no">anns_field</code> et <code translate="no">output_fields</code>.</p>
+<p>Le résultat serait une liste des trois entités les plus similaires.</p>
 <p><details></p>
 <p><summary>Sortie</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>
@@ -622,4 +624,4 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le développement d'un type de données natif Array of Structs représente une avancée majeure dans la capacité de Milvus à traiter des structures de données complexes. Pour mieux comprendre les cas d'utilisation et maximiser cette nouvelle fonctionnalité, nous vous invitons à lire <a href="/docs/fr/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs (Conception de schémas à l'aide d'un tableau de structures)</a>.</p>
+    </button></h2><p>Le développement d'un type de données natif Array of Structs représente une avancée majeure dans la capacité de Milvus à traiter des structures de données complexes. Pour mieux comprendre les cas d'utilisation et maximiser cette nouvelle fonctionnalité, nous vous encourageons à lire <a href="/docs/fr/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs (Conception de schémas à l'aide d'un tableau de structures)</a>.</p>

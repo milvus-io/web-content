@@ -75,7 +75,7 @@ summary: >-
    <tr>
      <td><p><code translate="no">ST_TOUCHES(A, B)</code> /<code translate="no">st_touches(A, B)</code></p></td>
      <td><p>ジオメトリ A と B が共通の境界を共有しているが、内部が交差していない場合に TRUE を返す。</p></td>
-     <td><p>隣り合う2つの敷地（AとB）は境界を共有しているか？</p></td>
+     <td><p>隣接する2つの敷地（AとB）は境界を共有しているか？</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">ST_WITHIN(A, B)</code> /<code translate="no">st_within(A, B)</code></p></td>

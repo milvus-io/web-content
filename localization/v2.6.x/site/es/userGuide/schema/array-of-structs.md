@@ -92,7 +92,7 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">BOOLEAN</code></p></td>
 </tr>
 </table></p>
-<p>El número de campos vectoriales, tanto a nivel de colección como en los Structs combinados, no debe ser superior o igual a 10.</p></li>
+<p>El número de campos vectoriales, tanto a nivel de colección como en los Structs combinados, no debe ser mayor o igual a 10.</p></li>
 <li><p><strong>Valores nulos y por defecto</strong></p>
 <p>Un campo Array of Structs no es anulable y no acepta ningún valor por defecto.</p></li>
 <li><p><strong>Función</strong></p>
@@ -151,7 +151,8 @@ beta: Milvus 2.6.4+
 <li><p>Establezca el tipo de datos de un campo en <code translate="no">DataType.ARRAY</code> cuando añada el campo como campo Array al esquema de la colección.</p></li>
 <li><p>Establezca el atributo <code translate="no">element_type</code> del campo en <code translate="no">DataType.STRUCT</code> para que el campo sea una matriz de estructuras.</p></li>
 <li><p>Cree un esquema Struct e incluya los campos necesarios. A continuación, haga referencia al esquema Struct en el atributo <code translate="no">struct_schema</code> del campo.</p></li>
-<li><p>Establezca el atributo <code translate="no">max_capacity</code> del campo en un valor apropiado para especificar el número máximo de Structs que cada entidad puede contener en este campo.</p></li>
+<li><p>Establezca el atributo <code translate="no">max_capacity</code> del campo en un valor adecuado para especificar el número máximo de Structs que cada entidad puede contener en este campo.</p></li>
+<li><p><strong>(Opcional</strong>) Puedes establecer <code translate="no">mmap.enabled</code> para cualquier campo dentro del elemento Struct para equilibrar los datos calientes y fríos en el Struct.</p></li>
 </ol>
 <p>Así es como puedes definir un esquema de colección que incluya un Array de Structs:</p>
 <div class="multipleCode">
@@ -178,8 +179,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)</span>
 <span class="highlighted-comment-line"></span>
-<span class="highlighted-comment-line"><span class="hljs-comment"># add multiple vector fields to the struct</span></span>
-<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)</span>
+<span class="highlighted-comment-line"><span class="hljs-comment"># add a vector field to the struct with mmap enabled</span></span>
+<span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># reference the struct schema in an Array field with its </span></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># element type set to `DataType.STRUCT`</span></span>
@@ -427,7 +428,8 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
     </button></h2><p>Puedes realizar búsquedas vectoriales en los campos vectoriales de una colección y en un Array of Structs.</p>
 <p>En concreto, puede utilizar directamente los nombres de los campos vectoriales dentro de los elementos Struct como valor para el parámetro <code translate="no">anns_field</code> en una petición de búsqueda, y utilizar <code translate="no">EmbeddingList</code> para organizar ordenadamente los vectores de consulta.</p>
 <div class="alert note">
-<p>Milvus proporciona <code translate="no">EmbeddingList</code> para ayudarle a organizar vectores de consulta para búsquedas contra una lista de incrustación en una matriz de Structs de forma más ordenada.</p>
+<p>Milvus proporciona <code translate="no">EmbeddingList</code> para ayudarle a organizar vectores de consulta para búsquedas contra una lista de incrustación en un Array de Structs de forma más ordenada.</p>
+<p>Sin embargo, <code translate="no">EmbeddingList</code> sólo puede utilizarse en peticiones <code translate="no">search()</code> sin parámetros de búsqueda de rango o agrupación, y mucho menos en peticiones <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -459,7 +461,7 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La petición de búsqueda anterior utiliza <code translate="no">chunks[text_vector]</code> para referirse al campo <code translate="no">text_vector</code> de los elementos Struct. Puede utilizar esta sintaxis para establecer los parámetros <code translate="no">anns_field</code> y <code translate="no">output_fields</code>.</p>
+<p>La petición de búsqueda anterior utiliza <code translate="no">chunks[text_vector]</code> para referirse al campo <code translate="no">text_vector</code> en elementos Struct. Puede utilizar esta sintaxis para establecer los parámetros <code translate="no">anns_field</code> y <code translate="no">output_fields</code>.</p>
 <p>La salida sería una lista de las tres entidades más similares.</p>
 <p><details></p>
 <p><summary>Salida</summary></p>

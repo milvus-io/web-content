@@ -103,7 +103,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>Chaque champ de tableau possède un attribut qui spécifie le nombre maximum d'éléments que le champ de tableau peut contenir pour chaque entité. Définissez cette capacité en fonction de la limite supérieure de votre cas d'utilisation. Par exemple, il y a 1 000 morceaux de texte par document, ou 100 manœuvres par scène de conduite.</p>
 <p>Une valeur trop élevée entraîne un gaspillage de mémoire et vous devrez effectuer des calculs pour déterminer le nombre maximal de structures dans le champ Array.</p>
-<h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">Indexer les champs vectoriels dans les structures<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
+<h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">Indexation des champs vectoriels dans les structures<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
