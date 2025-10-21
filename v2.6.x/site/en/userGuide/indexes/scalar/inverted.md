@@ -107,9 +107,9 @@ Use the `drop_index()` method to remove an existing index from a collection.
 
 <div class="alert note">
 
-- In **v2.6.3** or earlier, you must release the collection before dropping an index.
+- In **v2.6.3** or earlier, you must release the collection before dropping a scalar index.
 
-- From **v2.6.4** or later, you can drop an index directly once it’s no longer needed—no need to release the collection first.
+- From **v2.6.4** or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.
 
 </div>
 

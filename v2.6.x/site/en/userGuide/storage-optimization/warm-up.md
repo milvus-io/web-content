@@ -1,27 +1,27 @@
 ---
 id: warm-up.md
 title: "Warm Up"
-summary: "In Milvus, Warm Up complements Tiered Storage by eliminating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading."
+summary: "In Milvus, Warm Up complements Tiered Storage by alleviating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading."
 beta: Milvus 2.6.4+
 ---
 
 # Warm Up
 
-In Milvus, **Warm Up** complements Tiered Storage by eliminating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading.
+In Milvus, **Warm Up** complements Tiered Storage by alleviating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading.
 
 ## Why warm up
 
-[Lazy Load](tiered-storage-overview.md#Lazy-load) in Tiered Storage improves efficiency by loading only metadata initially. However, this can cause latency on the first query to cold data, since required chunks or indexes must be fetched from object storage.
+[Lazy Load](tiered-storage-overview.md#Phase-1-Lazy-load) in Tiered Storage improves efficiency by loading only metadata initially. However, this can cause latency on the first query to cold data, since required chunks or indexes must be fetched from object storage.
 
 **Warm Up** solves this problem by proactively caching critical data during segment initialization.
 
 It is especially beneficial when:
 
-- Certain **scalar indexes** are frequently used in filter conditions.
+- Certain scalar indexes are frequently used in filter conditions.
 
-- **Vector indexes** are essential for search performance and must be ready immediately.
+- Vector indexes are essential for search performance and must be ready immediately.
 
-- **Cold-start latency** after QueryNode restart or new segment load is unacceptable.
+- Cold-start latency after QueryNode restart or new segment load is unacceptable.
 
 In contrast, Warm Up is **not recommended** for fields or indexes queried infrequently. Disabling Warm Up shortens segment load time and conserves cache space—ideal for large vector fields or non-critical scalar fields.
 
@@ -100,7 +100,7 @@ queryNode:
 
 ## Best practices
 
-Warm Up only affects the **initial load**. If cached data is later evicted, the next query will reload it on demand.
+Warm Up only affects the initial load. If cached data is later evicted, the next query will reload it on demand.
 
 - Avoid overusing `sync`. Preloading too many fields increases load time and cache pressure.
 

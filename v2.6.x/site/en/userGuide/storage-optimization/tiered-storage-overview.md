@@ -1,17 +1,17 @@
 ---
 id: tiered-storage-overview.md
 title: "Tiered Storage Overview"
-summary: "In Milvus, the traditional full-load mode requires each QueryNode to load all schema fields and indexes of a segment at initialization, even data that may never be accessed. This ensures immediate data availability but often leads to wasted resources, including high memory usage, heavy disk activity, and significant I/O overhead, especially when handling large-scale datasets."
+summary: "In Milvus, the traditional full-load mode requires each QueryNode to load all data fields and indexes of a segment at initialization, even data that may never be accessed. This ensures immediate data availability but often leads to wasted resources, including high memory usage, heavy disk activity, and significant I/O overhead, especially when handling large-scale datasets."
 beta: Milvus 2.6.4+
 ---
 
 # Tiered Storage Overview
 
-In Milvus, the traditional **full-load mode** requires each QueryNode to load all schema fields and indexes of a [segment](https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf) at initialization, even data that may never be accessed. This ensures immediate data availability but often leads to wasted resources, including high memory usage, heavy disk activity, and significant I/O overhead, especially when handling large-scale datasets.
+In Milvus, the traditional *full-load* mode requires each QueryNode to load all data fields and indexes of a [segment](glossary.md#Segment) at initialization, even data that may never be accessed. This ensures immediate data availability but often leads to wasted resources, including high memory usage, heavy disk activity, and significant I/O overhead, especially when handling large-scale datasets.
 
-**Tiered Storage** addresses this challenge by decoupling data caching from segment loading. Instead of loading all data at once, Milvus introduces a caching layer that distinguishes between hot data (cached locally) and cold data (stored remotely). The QueryNode now loads only lightweight metadata initially and dynamically pulls or evicts data on demand. This significantly reduces load time, optimizes local resource utilization, and enables QueryNodes to process datasets that far exceed their physical memory or disk capacity.
+*Tiered Storage* addresses this challenge by decoupling data caching from segment loading. Instead of loading all data at once, Milvus introduces a caching layer that distinguishes between hot data (cached locally) and cold data (stored remotely). The QueryNode now loads only lightweight *metadata* initially and dynamically pulls or evicts data on demand. This significantly reduces load time, optimizes local resource utilization, and enables QueryNodes to process datasets that far exceed their physical memory or disk capacity.
 
-You can consider enabling Tiered Storage in scenarios such as:
+Consider enabling Tiered Storage in scenarios such as:
 
 - Collections that exceed the available memory or NVMe capacity of a single QueryNode
 
@@ -21,23 +21,19 @@ You can consider enabling Tiered Storage in scenarios such as:
 
 <div class="alert note">
 
-For more details on segments and chunks, refer to [Segment Explained](https://zilliverse.feishu.cn/wiki/IBX3w5p4Tipy1KkNxI6cbEOwnGf).
+- *Metadata* includes schema, index definitions, chunk maps, row counts, and references to remote objects. This type of data is small, always cached, and never evicted.
+
+- For more details on segments and chunks, refer to [Segment](glossary.md#Segment).
 
 </div>
 
 ## How it works
 
-Tiered Storage changes how QueryNode manages segment data. Instead of caching every field and index at load time, QueryNode now loads **metadata** only and uses a caching layer to fetch and evict data dynamically.
-
-<div class="alert note">
-
-**Metadata** includes schema, index definitions, chunk maps, row counts, and references to remote objects. This data is small, always cached, and never evicted.
-
-</div>
+Tiered Storage changes how QueryNode manages segment data. Instead of caching every field and index at load time, QueryNode now loads metadata only and uses a caching layer to fetch and evict data dynamically.
 
 ### Full-load mode vs. Tiered Storage mode
 
-While both full-load and Tiered Storage modes handle the same data, they differ in when and how QueryNode caches these components.
+While both full-load and Tiered Storage modes handle the same data, they differ in *when* and *how* QueryNode caches these components.
 
 - **Full-load mode**: At load time, QueryNode caches full collection data, including metadata, field data, and indexes, from object storage.
 
@@ -49,71 +45,61 @@ The diagram below shows these differences.
 
 ### QueryNode loading workflow
 
-Under Tiered Storage, the workflow has three phases:
+Under Tiered Storage, the workflow has these phases:
 
-![Querynode Loading Workflow](../../../../assets/querynode-loading-workflow.png)
+![Load Workflow](../../../../assets/load-workflow.png)
 
-#### Lazy load
+#### Phase 1: Lazy load
 
-At initialization, Milvus performs a lazy load, caching only **metadata** that contains schema definitions, index information, chunk mappings, and row counts.
+At initialization, Milvus performs a lazy load, caching only segment-level metadata such as schema definitions, index information, and chunk mappings.
 
-No field data or index files are downloaded at this stage. This makes collections queryable quickly and minimizes startup resource use.
+No actual field data or index files are cached at this stage. This allows collections to become queryable almost immediately after startup while keeping memory and disk consumption minimal.
 
-**Benefits**
-
-- Significantly faster collection load time
-
-- Minimal memory and disk footprint
-
-- Enables QueryNodes to handle more segments concurrently
+Because field data and index files remain in remote storage until first accessed, the *first query* may experience additional latency as required data must be fetched on demand. To mitigate this effect for critical fields or indexes, you can use the [Warm Up](tiered-storage-overview.md#Phase-2-Warm-up) strategy to proactively preload them before the segment becomes queryable.
 
 **Configuration**
 
-Automatically applied when Tiered Storage is enabled. No manual setting is required.
+Automatically applied when Tiered Storage is enabled. No other manual setting is required.
 
-#### Partial load
+#### Phase 2: Warm up
 
-When a query or search operation begins, the QueryNode performs a partial load, fetching only the required field chunks or indexes from object storage and temporarily caching them for reuse.
+To reduce the first-hit latency introduced by [lazy load](tiered-storage-overview.md#Phase-1-Lazy-load), Milvus provides a *Warm Up mechanism.
 
-- **Fields**: Loaded on demand at the **chunk** level
-
-- **Indexes:** Loaded the first time they are accessed at the **segment** level
-
-**Benefits**
-
-- Reduces memory and disk pressure
-
-- Allows Milvus to query large datasets efficiently
-
-- Balances query latency and resource efficiency
+Before a segment becomes queryable, Milvus can proactively fetch and cache specific fields or indexes from object storage, ensuring that the first query directly hits cached data instead of triggering on-demand loading.
 
 **Configuration**
 
-Partial load is the default behavior when Tiered Storage is enabled. To minimize first-hit latency for critical fields or indexes, use **Warm Up** to preload data before queries. See [Warm Up](warm-up.md) for configuration examples.
+Warm Up settings are defined in the Tiered Storage section of **milvus.yaml**. You can enable or disable preloading for each field or index type and specify the preferred strategy. See [Warm Up](warm-up.md) for configuration examples.
 
-#### Eviction
+#### Phase 3: Partial load
+
+Once queries or searches begin, the QueryNode performs a *partial load*, fetching only the required data chunks or index files from object storage.
+
+- **Fields**: Loaded on demand at the **chunk level**. Only data chunks that match the current query conditions are fetched, minimizing I/O and memory use.
+
+- **Indexes**: Loaded on demand at the **segment level**. Index files must be fetched as complete units and cannot be split across chunks.
+
+**Configuration**
+
+Partial load is automatically applied when Tiered Storage is enabled. No manual setting is required. To minimize first-hit latency for critical data, combine with [Warm Up](warm-up.md).
+
+#### Phase 4: Eviction
 
 To maintain healthy resource usage, Milvus automatically releases unused cached data when thresholds are reached.
 
-Eviction follows a [Least Recently Used (LRU)](https://en.wikipedia.org/wiki/Cache_replacement_policies) policy and is governed by configurable parameters:
+Eviction follows a [Least Recently Used (LRU)](https://en.wikipedia.org/wiki/Cache_replacement_policies) policy, ensuring that infrequently accessed data is removed first while active data remains in cache.
 
-- **Watermarks:** Define start and stop thresholds for eviction
+Eviction is governed by the following configurable items:
 
-- **Cache TTL:** Removes stale cached items after a defined duration
+- **Watermarks**: Define memory or disk thresholds that trigger and stop eviction.
 
-- **Overcommit ratio:** Allows temporary oversubscription before eviction accelerates
+- **Cache TTL**: Removes stale cached data after a defined duration of inactivity.
 
-**Benefits**
-
-- Keeps cache usage stable across workloads
-
-- Maximizes cache reuse while preventing crashes
-
-- Maintains predictable performance over time
+- **Overcommit ratio**: Allows temporary cache oversubscription before aggressive eviction begins, helping absorb short-term workload spikes.
 
 **Configuration**
 
-Enable and tune eviction parameters in `milvus.yaml`. See [Eviction](eviction.md) for detailed configuration.
+Enable and tune eviction parameters in **milvus.yaml**. See [Eviction](eviction.md) for detailed configuration.
 
 ## Getting started
 

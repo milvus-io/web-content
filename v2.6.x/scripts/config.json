@@ -509,6 +509,11 @@
                         "token": "NuokbSgbroyVPQx14fKcm37bnoh",
                         "type": "image",
                         "alt_text": "deduplication-workflow"
+                    },
+                    {
+                        "token": "IbpqwpTFghdA37bU6dDc5eCUnfh",
+                        "type": "board",
+                        "alt_text": "load-workflow"
                     }
                 ]
             }

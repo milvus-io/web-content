@@ -120,26 +120,17 @@ The following table lists the parameters that can be configured in `params` when
    </tr>
    <tr>
      <td><p><code>build_algo</code></p></td>
-     <td><p>Selects the graph generation algorithm before pruning. Possible values:</p>
-<ul>
-<li><p><code>IVF_PQ</code>: Offers higher quality but slower build time.</p></li>
-<li><p><code>NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</p></li>
-</ul></td>
+     <td><p>Selects the graph generation algorithm before pruning. Possible values:</p><ul><li><p><code>IVF_PQ</code>: Offers higher quality but slower build time.</p></li><li><p><code>NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</p></li></ul></td>
      <td><p><code>IVF_PQ</code></p></td>
    </tr>
    <tr>
      <td><p><code>cache_dataset_on_device</code></p></td>
-     <td><p>Decides whether to cache the original dataset in GPU memory. Possible values:</p>
-<ul>
-<li><p><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</p></li>
-<li><p><code>"false"</code>: Does not cache the original dataset to save gpu memory.</p></li>
-</ul></td>
+     <td><p>Decides whether to cache the original dataset in GPU memory. Possible values:</p><ul><li><p><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</p></li><li><p><code>"false"</code>: Does not cache the original dataset to save gpu memory.</p></li></ul></td>
      <td><p><code>"false"</code></p></td>
    </tr>
    <tr>
      <td><p><code>adapt_for_cpu</code></p></td>
-     <td><p>Decides whether to use GPU for index-building and CPU for search.
- Setting this parameter to <code>"true"</code> requires the presence of the <code>ef</code> parameter in the search requests.</p></td>
+     <td><p>Decides whether to use GPU for index-building and CPU for search.</p><p>Setting this parameter to <code>"true"</code> requires the presence of the <code>ef</code> parameter in the search requests.</p></td>
      <td><p><code>"false"</code></p></td>
    </tr>
 </table>
@@ -176,8 +167,7 @@ The following table lists the parameters that can be configured in `search_param
    </tr>
    <tr>
      <td><p><code>ef</code></p></td>
-     <td><p>Specifies the query time/accuracy trade-off. A higher <code>ef</code> value leads to more accurate but slower search.
- This parameter is mandatory if you set <code>adapt_for_cpu</code> to <code>true</code> when you build the index.</p></td>
+     <td><p>Specifies the query time/accuracy trade-off. A higher <code>ef</code> value leads to more accurate but slower search.</p><p>This parameter is mandatory if you set <code>adapt_for_cpu</code> to <code>true</code> when you build the index.</p></td>
      <td><p><code>[top_k, int_max]</code></p></td>
    </tr>
 </table>

@@ -126,7 +126,7 @@ Once these requirements are met, you can use expressions with dedicated geometry
 
 To filter on the `GEOMETRY` field, use a geometry-specific operator with the following expression format: `"{operator}(geo_field,'{wkt}')"`, where:
 
-- `{operator}` is a supported geometry operator (e.g., `ST_CONTAINS`, `ST_INTERSECTS`). For a full list of available operators, refer to [Geometry Operators](https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf).
+- `{operator}` is a supported geometry operator (e.g., `ST_CONTAINS`, `ST_INTERSECTS`). For a full list of available operators, refer to [Geometry Operators](geometry-operators.md).
 
 - `geo_field` is the name of the `GEOMETRY` field defined in your collection schema.
 
@@ -134,7 +134,7 @@ To filter on the `GEOMETRY` field, use a geometry-specific operator with the fol
 
 <div class="alert note">
 
-Some operators, such as `ST_DWITHIN`, may require additional parameters. For details and usage examples of each operator, refer to [Geometry Operators](https://zilliverse.feishu.cn/wiki/SOgiwzPxpisy8MkhtuecZqFbnaf).
+Some operators, such as `ST_DWITHIN`, may require additional parameters. For details and usage examples of each operator, refer to [Geometry Operators](geometry-operators.md).
 
 </div>
 
@@ -195,7 +195,7 @@ for hits in result:
 
 By default, queries on `GEOMETRY` fields without an index will perform a full scan of all rows, which can be slow on large datasets. To accelerate geometric queries, create an `RTREE` index on your GEOMETRY field.
 
-For details, refer to [RTREE](https://zilliverse.feishu.cn/wiki/RlY2wylVQiZswikT0G2cBHVznTf).
+For details, refer to [RTREE](rtree.md).
 
 ## FAQ
 

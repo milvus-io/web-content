@@ -18,15 +18,9 @@ Key requirements:
 
 - Each collection must have **exactly one** primary field.
 
-- Primary field values cannot be null or duplicated.
+- Primary field values cannot be null.
 
 - The data type must be specified at creation and cannot be changed later.
-
-<div class="alert note">
-
-The primary field is always defined as part of the collection schema. You cannot modify or remove it after creation.
-
-</div>
 
 ## Supported data types
 
@@ -123,7 +117,41 @@ client.create_collection(collection_name="demo_autoid", schema=schema)
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+  address: "localhost:19530",
+});
+
+// Define schema fields
+const schema = [
+  {
+    name: "id",
+    description: "Primary field",
+    data_type: DataType.Int64,
+    is_primary_key: true,
+    autoID: true, // Milvus generates IDs automatically
+  },
+  {
+    name: "embedding",
+    description: "Vector field",
+    data_type: DataType.FloatVector,
+    dim: 4,
+  },
+  {
+    name: "category",
+    description: "Scalar field",
+    data_type: DataType.VarChar,
+    max_length: 1000,
+  },
+];
+
+// Create the collection
+await client.createCollection({
+  collection_name: "demo_autoid",
+  fields: schema,
+});
+
 ```
 
 ```go
@@ -164,7 +192,17 @@ print("Generated IDs:", res.get("ids"))
 ```
 
 ```javascript
-// nodejs
+const data = [
+    {"embedding": [0.1, 0.2, 0.3, 0.4], "category": "book"},
+    {"embedding": [0.2, 0.3, 0.4, 0.5], "category": "toy"},
+];
+
+const res = await client.insert({
+    collection_name: "demo_autoid",
+    fields_data: data,
+});
+
+console.log(res);
 ```
 
 ```go
@@ -228,7 +266,39 @@ client.create_collection(collection_name="demo_manual_ids", schema=schema)
 ```
 
 ```javascript
-// nodejs
+
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+  address: "localhost:19530",
+  username: "username",
+  password: "Aa12345!!",
+});
+
+const schema = [
+  {
+    name: "product_id",
+    data_type: DataType.VARCHAR,
+    is_primary_key: true,
+    autoID: false,
+  },
+  {
+    name: "embedding",
+    data_type: DataType.FLOAT_VECTOR,
+    dim: 4,
+  },
+  {
+    name: "category",
+    data_type: DataType.VARCHAR,
+    max_length: 1000,
+  },
+];
+
+const res = await client.createCollection({
+  collection_name: "demo_autoid",
+  schema: schema,
+});
+
 ```
 
 ```go
@@ -270,7 +340,18 @@ print("Generated IDs:", res.get("ids"))
 ```
 
 ```javascript
-// nodejs
+
+const data = [
+    {"product_id": "PROD-001", "embedding": [0.1, 0.2, 0.3, 0.4], "category": "book"},
+    {"product_id": "PROD-002", "embedding": [0.2, 0.3, 0.4, 0.5], "category": "toy"},
+];
+
+const insert = await client.insert({
+    collection_name: "demo_autoid",
+    fields_data: data,
+});
+
+console.log(insert);
 ```
 
 ```go

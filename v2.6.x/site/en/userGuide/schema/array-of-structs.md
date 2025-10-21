@@ -138,6 +138,8 @@ To use an Array of Structs in Milvus, you need to define an array field when cre
 
 1. Set the field's `max_capacity` attribute to an appropriate value to specify the maximum number of Structs each entity can contain in this field.
 
+1. (**Optional**) You can set `mmap.enabled` for any field within the Struct element to balance the hot and cold data in the Struct.
+
 Here's how you can define a collection schema that includes an Array of Structs:
 
 <div class="multipleCode">
@@ -172,8 +174,8 @@ struct_schema = MilvusClient.create_struct_field_schema()
 struct_schema.add_field("text", DataType.VARCHAR, max_length=65535)
 struct_schema.add_field("chapter", DataType.VARCHAR, max_length=512)
 
-# add multiple vector fields to the struct
-struct_schema.add_field("text_vector", DataType.FLOAT_VECTOR, dim=5)
+# add a vector field to the struct with mmap enabled
+struct_schema.add_field("text_vector", DataType.FLOAT_VECTOR, mmap_enabled=True, dim=5)
 
 # reference the struct schema in an Array field with its 
 # element type set to `DataType.STRUCT`
@@ -444,6 +446,8 @@ Specifically, you can directly use the names of the vector fields within Struct 
 <div class="alert note">
 
 Milvus provides `EmbeddingList` to help you organize query vectors for searches against an embedding list in an Array of Structs more neatly.
+
+However, `EmbeddingList` can used only in `search()` requests without range search or grouping search parameters, let alone `search_iterator()` requests.
 
 </div>
 

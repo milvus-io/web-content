@@ -104,9 +104,9 @@ queryNode:
 
 Watermarks define when cache eviction begins and ends for both memory and disk. Each resource type has two thresholds:
 
-- **High watermark:** Eviction starts when usage exceeds this value.
+- **High watermark**: Async eviction starts when usage exceeds this value.
 
-- **Low watermark:** Eviction continues until usage falls below this value.
+- **Low watermark**: Eviction continues until usage falls below this value.
 
 <div class="alert note">
 
