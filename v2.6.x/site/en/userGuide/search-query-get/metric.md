@@ -110,6 +110,16 @@ The table below summarizes the characteristics of the similarity distance values
    </tr>
 </table>
 
+<div class="alert note">
+
+To index vector fields in an [Array of Structs](array-of-structs.md) field, you should prefix `MAX_SIM` to the set of metric types mentioned above, based on the vector embeddings stored in those fields. For example,
+
+- For a vector field that stores vector embeddings of the `FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, or `INT8_VECTOR` type, you can use `MAX_SIM_COSINE`, `MAX_SIM_IP`, or `MAX_SIM_L2` as the metric type.
+
+- For a vector field that stores vector embeddings of the `BINARY_VECTOR` type, you can use `MAX_SIM_JACCADR` or `MAX_SIM_HAMMING` as the metric type.
+
+</div>
+
 ## Euclidean distance (L2)
 
 Essentially, Euclidean distance measures the length of a segment that connects 2 points.

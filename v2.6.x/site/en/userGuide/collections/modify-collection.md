@@ -147,10 +147,6 @@ You can modify collection-level properties after a collection is created.
      <td><p><code>allow_insert_auto_id</code></p></td>
      <td><p>Whether to allow a collection to accept user-provided primary key values when AutoID has been enabled for the collection.</p><ul><li><p>When set to <strong>"true"</strong>: Inserts, upserts, and bulk imports use the user-provided primary key if present; otherwise, primary key values are auto-generated.</p></li><li><p>When set to <strong>"false"</strong>: User-provided primary key values are rejected or ignored and primary key values are always auto-generated. The default is <strong>"false"</strong>.</p></li></ul></td>
    </tr>
-   <tr>
-     <td></td>
-     <td></td>
-   </tr>
 </table>
 
 ### Example 1: Set collection TTL

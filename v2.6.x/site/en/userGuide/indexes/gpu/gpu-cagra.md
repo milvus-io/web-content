@@ -68,6 +68,32 @@ In this configuration:
 
 - `params`: Additional configuration options for searching on the index. To learn more search parameters available for the `GPU_CAGRA` index, refer to [Index-specific search params](gpu-cagra.md#Index-specific-search-params).
 
+## Enable CPU search at load time | Milvus 2.6.4+
+
+To enable CPU search dynamically at load time, edit the following config in `milvus.yaml`:
+
+```yaml
+# milvus.yaml
+knowhere:
+  GPU_CAGRA:
+    load: 
+      adapt_for_cpu: true
+```
+
+**Behavior**
+
+- When `load.adapt_for_cpu` is set to `true`, Milvus converts the **GPU_CAGRA** index into a CPU-executable format (HNSW-like) during load.
+
+- Subsequent search operations are executed on CPU, even if the index was originally built for GPU.
+
+- If omitted or false, the index stays on GPU and searches run on GPU.
+
+<div class="alert note">
+
+Use load-time CPU adaptation in hybrid or cost-sensitive environments where GPU resources are reserved for index building but searches run on CPU.
+
+</div>
+
 ## Index params
 
 This section provides an overview of the parameters used for building an index and performing searches on the index.
@@ -94,26 +120,17 @@ The following table lists the parameters that can be configured in `params` when
    </tr>
    <tr>
      <td><p><code>build_algo</code></p></td>
-     <td><p>Selects the graph generation algorithm before pruning. Possible values:</p>
-<ul>
-<li><p><code>IVF_PQ</code>: Offers higher quality but slower build time.</p></li>
-<li><p><code>NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</p></li>
-</ul></td>
+     <td><p>Selects the graph generation algorithm before pruning. Possible values:</p><ul><li><p><code>IVF_PQ</code>: Offers higher quality but slower build time.</p></li><li><p><code>NN_DESCENT</code>: Provides a quicker build with potentially lower recall.</p></li></ul></td>
      <td><p><code>IVF_PQ</code></p></td>
    </tr>
    <tr>
      <td><p><code>cache_dataset_on_device</code></p></td>
-     <td><p>Decides whether to cache the original dataset in GPU memory. Possible values:</p>
-<ul>
-<li><p><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</p></li>
-<li><p><code>"false"</code>: Does not cache the original dataset to save gpu memory.</p></li>
-</ul></td>
+     <td><p>Decides whether to cache the original dataset in GPU memory. Possible values:</p><ul><li><p><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</p></li><li><p><code>"false"</code>: Does not cache the original dataset to save gpu memory.</p></li></ul></td>
      <td><p><code>"false"</code></p></td>
    </tr>
    <tr>
      <td><p><code>adapt_for_cpu</code></p></td>
-     <td><p>Decides whether to use GPU for index-building and CPU for search.
- Setting this parameter to <code>"true"</code> requires the presence of the <code>ef</code> parameter in the search requests.</p></td>
+     <td><p>Decides whether to use GPU for index-building and CPU for search.</p><p>Setting this parameter to <code>"true"</code> requires the presence of the <code>ef</code> parameter in the search requests.</p></td>
      <td><p><code>"false"</code></p></td>
    </tr>
 </table>
@@ -150,8 +167,7 @@ The following table lists the parameters that can be configured in `search_param
    </tr>
    <tr>
      <td><p><code>ef</code></p></td>
-     <td><p>Specifies the query time/accuracy trade-off. A higher <code>ef</code> value leads to more accurate but slower search.
- This parameter is mandatory if you set <code>adapt_for_cpu</code> to <code>true</code> when you build the index.</p></td>
+     <td><p>Specifies the query time/accuracy trade-off. A higher <code>ef</code> value leads to more accurate but slower search.</p><p>This parameter is mandatory if you set <code>adapt_for_cpu</code> to <code>true</code> when you build the index.</p></td>
      <td><p><code>[top_k, int_max]</code></p></td>
    </tr>
 </table>
