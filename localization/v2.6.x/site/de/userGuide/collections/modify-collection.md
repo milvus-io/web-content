@@ -163,7 +163,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Wenn die Daten einer Sammlung nach einer bestimmten Zeit gelöscht werden müssen, sollten Sie die Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abgelaufen ist, löscht Milvus alle Entitäten aus der Sammlung. </p><p>Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist.</p><p>Details finden Sie unter <a href="/docs/de/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
+     <td><p>Wenn die Daten einer Sammlung nach einer bestimmten Zeit gelöscht werden müssen, sollten Sie die Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL-Zeit abgelaufen ist, löscht Milvus alle Entitäten aus der Sammlung. </p><p>Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist.</p><p>Details finden Sie unter <a href="/docs/de/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
@@ -180,10 +180,6 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>Gibt an, ob eine Sammlung vom Benutzer bereitgestellte Primärschlüsselwerte akzeptieren darf, wenn AutoID für die Sammlung aktiviert wurde.</p><ul><li><p>Bei Einstellung auf <strong>"true"</strong>: Inserts, Upserts und Massenimporte verwenden den vom Benutzer bereitgestellten Primärschlüssel, falls vorhanden; andernfalls werden die Primärschlüsselwerte automatisch generiert.</p></li><li><p>Bei Einstellung auf <strong>"false"</strong>: Vom Benutzer bereitgestellte Primärschlüsselwerte werden zurückgewiesen oder ignoriert und Primärschlüsselwerte werden immer automatisch generiert. Der Standardwert ist <strong>"false"</strong>.</p></li></ul></td>
-   </tr>
-   <tr>
-     <td></td>
-     <td></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Beispiel 1: TTL für Sammlungen festlegen<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
@@ -325,7 +321,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der folgende Codeausschnitt zeigt, wie man den Partitionsschlüssel aktiviert.</p>
+    </button></h3><p>Der folgende Codeschnipsel demonstriert, wie der Partitionsschlüssel aktiviert wird.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

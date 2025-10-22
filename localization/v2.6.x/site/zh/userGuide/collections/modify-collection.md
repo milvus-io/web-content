@@ -161,7 +161,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>如果需要在特定时间后删除 Collections 的数据，可考虑设置其生存时间（TTL）（以秒为单位）。一旦 TTL 超时，Milvus 就会删除 Collection 中的所有实体。 </p><p>删除是异步的，这表明在删除完成之前，搜索和查询仍然可以进行。</p><p>详情请参阅<a href="/docs/zh/set-collection-ttl.md">设置 Collections TTL</a>。</p></td>
+     <td><p>如果需要在特定时间后删除 Collections 的数据，可考虑设置其生存时间（TTL），单位为秒。一旦 TTL 超时，Milvus 就会删除 Collection 中的所有实体。 </p><p>删除是异步的，这表明在删除完成之前，搜索和查询仍然可以进行。</p><p>详情请参阅<a href="/docs/zh/set-collection-ttl.md">设置 Collections TTL</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
@@ -178,10 +178,6 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>当为 Collections 启用自动 ID 时，是否允许 Collections 接受用户提供的主键值。</p><ul><li><p>设置为<strong>"true "</strong>时：插入、向上插入和批量导入时，如果存在用户提供的主键，则使用用户提供的主键；否则，将自动生成主键值。</p></li><li><p>设置为<strong>"false "</strong>时：用户提供的主键值将被拒绝或忽略，主键值始终是自动生成的。默认值为<strong>"false"</strong>。</p></li></ul></td>
-   </tr>
-   <tr>
-     <td></td>
-     <td></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">示例 1：设置 Collections TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">

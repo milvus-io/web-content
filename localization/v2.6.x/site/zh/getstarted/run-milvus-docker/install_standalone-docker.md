@@ -63,7 +63,7 @@ title: 在 Docker 中运行 Milvus (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>版本 2.6.3 中的新功能：</strong></p>
+<p><strong>版本 2.6.4 中的新功能：</strong></p>
 <ul>
 <li><strong>流节点</strong>增强数据处理能力</li>
 <li><strong>啄木鸟 MQ</strong>：改进了消息队列，减少了维护开销，详情请参见<a href="/docs/zh/use-woodpecker.md">使用啄木鸟</a></li>

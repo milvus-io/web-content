@@ -44,7 +44,7 @@ title: 使用 Helm 图表升级 Milvus 单机版
 <li>Kubernetes 版本 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>自 Milvus Helm 图表 4.2.21 版起，我们引入了 pulsar-v3.x 图表作为依赖。为了向后兼容，请将 Helm 升级到 v3.14 或更高版本，并确保在使用<code translate="no">helm upgrade</code> 时添加<code translate="no">--reset-then-reuse-values</code> 选项。</p>
+<p>自 Milvus Helm 图表版本 4.2.21 起，我们引入了 pulsar-v3.x 图表作为依赖。为了向后兼容，请将 Helm 升级到 v3.14 或更高版本，并确保在使用<code translate="no">helm upgrade</code> 时添加<code translate="no">--reset-then-reuse-values</code> 选项。</p>
 </div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">检查 Milvus 版本<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以按以下方式选择 Milvus 的升级路径：</p>
-<div style="display: none;">- 进行滚动升级](#conduct-a-rolling-upgrade) 从 Milvus v2.2.3 及以后的版本升级到 v2.5.18。</div>
+<div style="display: none;">- 进行滚动升级](#conduct-a-rolling-upgrade) 从 Milvus v2.2.3 及以后的版本升级到 v2.5.19。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升级 Milvus</a>，从 v2.2.3 之前的次版本升级到 v2.5.18。</p></li>
-<li><p>在从 Milvus v2.1.x 升级到 v2.5.18 之前<a href="#Migrate-the-metadata">迁移元数据</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升级 Milvus</a>，从 v2.2.3 之前的次版本升级到 v2.5.19。</p></li>
+<li><p>在从 Milvus v2.1.x 升级到 v2.5.19 之前<a href="#Migrate-the-metadata">迁移元数据</a>。</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">进行滚动升级<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作符</td><td><code translate="no">update</code></td><td>假</td></tr>
 </tbody>
 </table>
-<p>确保 Milvus 实例中的所有部署都处于正常状态后。你可以运行以下命令将 Milvus 实例升级到 2.5.18。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.18 -w &#x27;milvusdb/milvus:v2.5.18&#x27;
+<p>确保 Milvus 实例中的所有部署都处于正常状态后。你可以运行以下命令将 Milvus 实例升级到 2.5.19。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.19 -w &#x27;milvusdb/milvus:v2.5.19&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -268,7 +268,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h3><p>Milvus 2.2 的一个主要变化是段索引的元数据结构。因此，当 Milvus 从 v2.1.x 升级到 v2.2.0 时，你需要使用 Helm 来迁移元数据。 下面是<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">一个脚本</a>，供你安全迁移元数据。</p>
-<p>此脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
+<p>该脚本仅适用于安装在 K8s 集群上的 Milvus。如果过程中出现错误，请先使用回滚操作符回滚到之前的版本。</p>
 <p>下表列出了元数据迁移的操作符。</p>
 <table>
 <thead>
@@ -295,25 +295,25 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li>迁移 Milvus 元数据。</li>
 <li>使用新镜像启动 Milvus 组件。</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2518" class="common-anchor-header">2.将 Milvus 从 2.1.x 版升级到 2.5.18 版</h4><p>以下命令假定你将 Milvus 从 v2.1.4 升级到 2.5.18。请将它们更改为适合你需要的版本。</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-2519" class="common-anchor-header">2.将 Milvus 从 2.1.x 版升级到 2.5.19 版</h4><p>以下命令假定你将 Milvus 从 v2.1.4 升级到 2.5.19。请将它们更改为适合你需要的版本。</p>
 <ol>
 <li><p>指定 Milvus 实例名称、源 Milvus 版本和目标 Milvus 版本。</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.18
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.19
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果 Milvus 没有安装在默认的 K8s 命名空间，请用<code translate="no">-n</code> 指定命名空间。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.18
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果 Milvus 安装的是自定义<code translate="no">rootpath</code> ，请用<code translate="no">-r</code> 指定根路径。</p>
-<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">18</span> -<span class="hljs-attribute">r</span> by-dev
+<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">19</span> -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果你的 Milvus 安装的是自定义<code translate="no">image</code> ，请用<code translate="no">-w</code> 指定图片标签。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.18 -r by-dev -w milvusdb/milvus:v2.5.18
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19 -r by-dev -w milvusdb/milvus:v2.5.19
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果想在迁移完成后自动移除迁移 pod，请设置<code translate="no">-d true</code> 。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.18 -w milvusdb/milvus:v2.5.18 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19 -w milvusdb/milvus:v2.5.19 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果迁移失败，请回滚并重新迁移。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.18 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.18 -r by-dev -o migrate -w milvusdb/milvus:v2.5.18
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19 -r by-dev -o migrate -w milvusdb/milvus:v2.5.19
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

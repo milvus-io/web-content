@@ -171,7 +171,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald Sie Docker Desktop unter Microsoft Windows installiert haben, können Sie über die PowerShell oder die Windows-Eingabeaufforderung im <strong>Administratormodus</strong> auf die Docker CLI zugreifen. Sie können Docker Compose entweder in PowerShell, der Windows-Eingabeaufforderung oder WSL 2 ausführen, um Milvus zu starten.</p>
+    </button></h2><p>Sobald Sie Docker Desktop auf Microsoft Windows installiert haben, können Sie über die PowerShell oder die Windows-Eingabeaufforderung im <strong>Administratormodus</strong> auf die Docker-CLI zugreifen. Sie können Docker Compose entweder in PowerShell, der Windows-Eingabeaufforderung oder WSL 2 ausführen, um Milvus zu starten.</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Von PowerShell oder der Windows-Eingabeaufforderung aus<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Öffnen Sie Docker Desktop im Administratormodus, indem Sie mit der rechten Maustaste klicken und <strong>Als Administrator ausführen</strong> wählen.</p></li>
 <li><p>Führen Sie die folgenden Befehle in PowerShell oder der Windows-Eingabeaufforderung aus, um die Docker Compose-Konfigurationsdatei für Milvus Standalone herunterzuladen und Milvus zu starten.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Laden Sie die Milvus-Konfigurationsdatei herunter.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Starten Sie Milvus.</p>
@@ -283,7 +283,7 @@ Creating milvus-standalone ... done​
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
    </span> <span class="img-wrapper"> <span>Virtualisierung im Task-Manager</span> </span></p>
 <p>Wenn die Virtualisierung deaktiviert ist, müssen Sie möglicherweise die BIOS-Einstellungen der Firmware Ihres Motherboards überprüfen. Die Art und Weise, wie Sie die Virtualisierung in den BIOS-Einstellungen aktivieren können, variiert je nach Motherboard-Hersteller. Für die ASUS-Hauptplatine können Sie zum Beispiel <a href="https://www.asus.com/support/faq/1043786/">diesen Artikel</a> zur Aktivierung der Virtualisierung lesen.</p>
-<p>Anschließend müssen Sie Ihren Computer neu starten und Hyper-V aktivieren. Einzelheiten hierzu finden Sie in diesem <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft-Artikel</a>.</p></li>
+<p>Anschließend müssen Sie Ihren Computer neu starten und Hyper-V aktivieren. Weitere Informationen finden Sie in diesem <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft-Artikel</a>.</p></li>
 <li><p>Überprüfen Sie, ob der Docker Desktop Service gestartet wurde.</p>
 <p>Sie können den folgenden Befehl ausführen, um den Docker Desktop Service zu starten.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
@@ -291,7 +291,7 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
-<li><p>Prüfen Sie, ob die WSL ordnungsgemäß installiert wurde.</p>
+<li><p>Überprüfen Sie, ob die WSL ordnungsgemäß installiert wurde.</p>
 <p>Sie können den folgenden Befehl ausführen, um den WSL 2-Befehl zu installieren oder zu aktualisieren.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
@@ -359,7 +359,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Fehlermeldung "Read config failed" beim Starten von Milvus</span> </span></p>
-<p>Um die Fehlermeldung beim Starten von Milvus "Read config failed" zu beheben, müssen Sie überprüfen, ob das in den Milvus-Container eingebundene Volume korrekt ist. Wenn das Volume korrekt in den Container eingebunden ist, können Sie den Befehl <code translate="no">docker exec</code> verwenden, um in den Container zu gelangen und den Ordner <strong>/milvus/configs</strong> wie folgt aufzulisten.</p>
+<p>Um die Fehlermeldung "Read config failed" beim Starten von Milvus zu beheben, müssen Sie überprüfen, ob das in den Milvus-Container eingebundene Volume korrekt ist. Wenn das Volume korrekt in den Container eingebunden ist, können Sie den Befehl <code translate="no">docker exec</code> verwenden, um in den Container zu gelangen und den Ordner <strong>/milvus/configs</strong> wie folgt aufzulisten.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />

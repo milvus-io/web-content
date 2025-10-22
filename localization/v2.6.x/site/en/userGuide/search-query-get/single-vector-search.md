@@ -140,6 +140,7 @@ res = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
         .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
         .topK(<span class="hljs-number">3</span>)
         .build();
 
@@ -1004,7 +1005,7 @@ curl --request POST \
 <p>If the returned entities hold the same value in a specific field, the search results may not represent the distribution of all vector embeddings in the vector space. To diversify the search results, consider using the grouping search.</p>
 <p>For more about grouping search, refer to <a href="/docs/grouping-search.md">Grouping Search</a>,</p></li>
 <li><p>Hybrid Search</p>
-<p>A collection can include up to four vector fields to save the vector embeddings generated using different embedding models. By doing so, you can use a hybrid search to rerank the search results from these vector fields, improving the recall rate.</p>
+<p>A collection can include multiple vector fields to save the vector embeddings generated using different embedding models. By doing so, you can use a hybrid search to rerank the search results from these vector fields, improving the recall rate.</p>
 <p>For more about hybrid search, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p></li>
 <li><p>Search Iterator</p>
 <p>A single ANN search returns a maximum of 16,384 entities. Consider using search iterators if you need more entities to return in a single search.</p>
@@ -1012,7 +1013,7 @@ curl --request POST \
 <li><p>Full-Text Search</p>
 <p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.</p>
 <p>For details on full-text search, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
-<li><p>Keyword Match</p>
+<li><p>Text Match</p>
 <p>Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.</p>
 <p>For details on keyword match, refer to <a href="/docs/keyword-match.md">Keyword Match</a>.</p></li>
 <li><p>Use Partition Key</p>
@@ -1022,4 +1023,6 @@ curl --request POST \
 <p>For details on mmap-settings, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></li>
 <li><p>Clustering Compaction</p>
 <p>For details on clustering compactions, refer to <a href="/docs/clustering-compaction.md">Clustering Compaction</a>.</p></li>
+<li><p>Use reranking</p>
+<p>For details on using rankers to enhance search result relevance, refer to <a href="/docs/decay-ranker-overview.md">Decay Ranker Overview</a> and <a href="/docs/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
 </ul>

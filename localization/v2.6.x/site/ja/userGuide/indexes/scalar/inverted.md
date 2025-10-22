@@ -39,9 +39,9 @@ summary: >-
 <ul>
 <li><p><strong>特定の値でフィルタリング</strong>する：フィールドが特定の値に等しいすべてのレコードを検索します（例：<code translate="no">category == &quot;electronics&quot;</code> ）。</p></li>
 <li><p><strong>テキストコンテンツのフィルタリング</strong>：<code translate="no">VARCHAR</code> フィールドを効率的に検索する。</p></li>
-<li><p><strong>JSONフィールド値のクエリー</strong>：JSON構造内の特定のキーにフィルターをかける</p></li>
+<li><p><strong>JSONフィールド値のクエリ</strong>：JSON構造内の特定のキーにフィルターをかける</p></li>
 </ul>
-<p><strong>パフォーマンス上の利点</strong>：INVERTEDインデックスは、コレクション全体のスキャンを不要にすることで、大規模なデータセットのクエリ時間を数秒から数ミリ秒に短縮することができる。</p>
+<p><strong>パフォーマンス上の利点</strong>: INVERTED インデックスは、コレクション全体のスキャンを不要にすることで、大規模なデータセットのクエリ時間を数秒から数ミリ秒に短縮することができます。</p>
 <h2 id="How-INVERTED-indexes-work" class="common-anchor-header">INVERTED インデックスの仕組み<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -142,8 +142,35 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>サポートされているパス、データ型、制限など、JSONフィールド・インデックスの詳細については、「<a href="/docs/ja/use-json-fields.md">JSONフィールド</a>」を参照してください。</p>
-<h2 id="Best-practices" class="common-anchor-header">ベストプラクティス<button data-href="#Best-practices" class="anchor-icon" translate="no">
+<p>サポートされているパス、データ型、制限など、JSONフィールド・インデックスの詳細については、「<a href="/docs/ja/json-indexing.md">JSONインデックス</a>」を参照してください。</p>
+<h2 id="Drop-an-index" class="common-anchor-header">インデックスの削除<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>コレクションから既存のインデックスを削除するには、<code translate="no">drop_index()</code> メソッドを使用します。</p>
+<div class="alert note">
+<ul>
+<li><p><strong>v2.6.3</strong>以前では、スカラインデックスを削除する前にコレクションを解放する必要があります。</p></li>
+<li><p><strong>v2.6.4</strong>以降では、スカラインデックスが不要になったら直接削除できる。</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;category_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Best-practices" class="common-anchor-header">ベスト・プラクティス<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -159,7 +186,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>データのロード後にインデックスを作成</strong>する：パフォーマンスを向上させるために、すでにデータを含むコレクションにインデックスを作成します。</p></li>
+<li><p><strong>データのロード後にインデックスを作成</strong>する：データをロードした後にインデックスを作成する。</p></li>
 <li><p><strong>説明的なインデックス名を使用する</strong>：フィールドと目的を明確に示す名前を選択する</p></li>
 <li><p><strong>インデックスのパフォーマンスを監視する</strong>：インデックス作成前と作成後のクエリパフォーマンスをチェックする</p></li>
 <li><p><strong>クエリのパターンを考慮する</strong>：頻繁にフィルタリングするフィールドにインデックスを作成する</p></li>
@@ -181,5 +208,5 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p><a href="/docs/ja/index-explained.md">他のインデックスタイプについて</a>学ぶ</p></li>
-<li><p>JSON インデックスの高度なシナリオについては、<a href="/docs/ja/use-json-fields.md#Index-values-inside-the-JSON-field">JSON フィールドインデックスを</a>参照してください。</p></li>
+<li><p>高度な JSON インデックス作成シナリオについては、<a href="/docs/ja/json-indexing.md">JSON インデックス作成を</a>参照してください。</p></li>
 </ul>

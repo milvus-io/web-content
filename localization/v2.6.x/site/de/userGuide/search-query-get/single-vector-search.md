@@ -44,7 +44,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die ANN- und die k-Nächste-Nachbarn-Suche (kNN) sind die üblichen Methoden bei Vektorähnlichkeitssuchen. Bei der kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem Abfragevektor in der Suchanfrage vergleichen, bevor Sie die ähnlichsten herausfinden, was zeit- und ressourcenaufwändig ist.</p>
+    </button></h2><p>Die ANN- und die k-Nächste-Nachbarn-Suche (kNN) sind die üblichen Methoden bei Vektorähnlichkeitssuchen. Bei der kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem in der Suchanfrage enthaltenen Abfragevektor vergleichen, bevor Sie die ähnlichsten herausfinden, was zeit- und ressourcenaufwändig ist.</p>
 <p>Im Gegensatz zur kNN-Suche wird bei einem ANN-Suchalgorithmus eine <strong>Indexdatei</strong> angefordert, die die sortierte Reihenfolge der Vektoreinbettungen aufzeichnet. Wenn eine Suchanfrage eingeht, können Sie die Indexdatei als Referenz verwenden, um schnell eine Untergruppe zu finden, die wahrscheinlich die Vektoreinbettungen enthält, die dem Abfragevektor am ähnlichsten sind. Dann können Sie den angegebenen <strong>metrischen Typ</strong> verwenden, um die Ähnlichkeit zwischen dem Abfragevektor und den Vektoren in der Untergruppe zu messen, die Gruppenmitglieder auf der Grundlage der Ähnlichkeit mit dem Abfragevektor zu sortieren und die <strong>Top-K-Gruppenmitglieder</strong> zu ermitteln.</p>
 <p>ANN-Suchen hängen von vorgefertigten Indizes ab, und der Suchdurchsatz, die Speichernutzung und die Korrektheit der Suche können je nach den gewählten Indextypen variieren. Sie müssen ein Gleichgewicht zwischen Suchleistung und Korrektheit finden.</p>
 <p>Um die Lernkurve zu reduzieren, bietet Milvus <strong>AUTOINDEX</strong>. Mit <strong>AUTOINDEX</strong> kann Milvus die Datenverteilung innerhalb Ihrer Sammlung analysieren, während der Index aufgebaut wird, und stellt auf der Grundlage der Analyse die optimalsten Indexparameter ein, um ein Gleichgewicht zwischen Suchleistung und Korrektheit herzustellen.</p>
@@ -136,6 +136,7 @@ res = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
         .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
         .topK(<span class="hljs-number">3</span>)
         .build();
 
@@ -274,7 +275,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>Ein größerer Wert deutet auf eine höhere Ähnlichkeit hin.</p></td>
+     <td><p>Ein größerer Wert weist auf eine höhere Ähnlichkeit hin.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
@@ -517,7 +518,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Angenommen, Sie haben mehrere Partitionen in einer Sammlung erstellt und können den Suchbereich auf eine bestimmte Anzahl von Partitionen eingrenzen. In diesem Fall können Sie die Namen der Zielpartitionen in die Suchanfrage aufnehmen, um den Suchbereich auf die angegebenen Partitionen zu beschränken. Die Verringerung der Anzahl der an der Suche beteiligten Partitionen verbessert die Suchleistung.</p>
+    </button></h2><p>Angenommen, Sie haben mehrere Partitionen in einer Sammlung erstellt und können den Suchbereich auf eine bestimmte Anzahl von Partitionen einschränken. In diesem Fall können Sie die Namen der Zielpartitionen in die Suchanfrage aufnehmen, um den Suchbereich auf die angegebenen Partitionen zu beschränken. Die Verringerung der Anzahl der an der Suche beteiligten Partitionen verbessert die Suchleistung.</p>
 <p>Das folgende Codeschnipsel geht von einer Partition namens <strong>PartitionA</strong> in Ihrer Sammlung aus.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -671,7 +672,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In einem Suchergebnis enthält Milvus standardmäßig die Werte der Primärfelder und die Ähnlichkeitsdistanzen/-punkte der Entitäten, die die Top-K-Vektoreinbettungen enthalten. Sie können die Namen der Zielfelder, einschließlich der Vektor- und Skalarfelder, als Ausgabefelder in eine Suchanfrage aufnehmen, damit die Suchergebnisse die Werte anderer Felder in diesen Entitäten enthalten.</p>
+    </button></h2><p>In einem Suchergebnis enthält Milvus standardmäßig die Werte der Primärfelder und die Ähnlichkeitsdistanzen/-bewertungen der Entitäten, die die Top-K-Vektoreinbettungen enthalten. Sie können die Namen der Zielfelder, einschließlich der Vektor- und Skalarfelder, als Ausgabefelder in eine Suchanfrage aufnehmen, damit die Suchergebnisse die Werte anderer Felder in diesen Entitäten enthalten.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -833,7 +834,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie werden feststellen, dass der Parameter <code translate="no">limit</code> in den Suchanfragen die Anzahl der Entitäten bestimmt, die in den Suchergebnissen enthalten sein sollen. Dieser Parameter gibt die maximale Anzahl der Entitäten an, die in einer einzigen Suche zurückgegeben werden sollen, und wird gewöhnlich als <strong>top-K</strong> bezeichnet.</p>
+    </button></h2><p>Sie werden feststellen, dass der Parameter <code translate="no">limit</code>, der in den Suchanfragen enthalten ist, die Anzahl der Entitäten bestimmt, die in die Suchergebnisse aufgenommen werden. Dieser Parameter gibt die maximale Anzahl der Entitäten an, die in einer einzelnen Suche zurückgegeben werden sollen, und wird normalerweise als <strong>Top-K</strong> bezeichnet.</p>
 <p>Wenn Sie paginierte Suchanfragen durchführen möchten, können Sie eine Schleife verwenden, um mehrere Suchanfragen zu senden, wobei die Parameter <strong>Limit</strong> und <strong>Offset</strong> in jeder Suchanfrage enthalten sind. Insbesondere können Sie den Parameter <strong>Limit</strong> auf die Anzahl der Entitäten setzen, die Sie in die aktuellen Abfrageergebnisse aufnehmen möchten, und den Parameter <strong>Offset</strong> auf die Gesamtzahl der Entitäten, die bereits zurückgegeben wurden.</p>
 <p>Die folgende Tabelle zeigt, wie Sie die Parameter <strong>Limit</strong> und <strong>Offset</strong> für paginierte Abfragen einstellen, wenn 100 Entitäten auf einmal zurückgegeben werden.</p>
 <table>
@@ -980,7 +981,7 @@ curl --request POST \
 <p>Wenn die zurückgegebenen Entitäten in einem bestimmten Feld denselben Wert haben, repräsentieren die Suchergebnisse möglicherweise nicht die Verteilung aller Vektoreinbettungen im Vektorraum. Um die Suchergebnisse zu diversifizieren, sollten Sie die gruppierende Suche verwenden.</p>
 <p>Weitere Informationen zur Gruppierungssuche finden Sie unter <a href="/docs/de/grouping-search.md">Gruppierungssuche</a>,</p></li>
 <li><p>Hybride Suche</p>
-<p>Eine Sammlung kann bis zu vier Vektorfelder enthalten, um die Vektoreinbettungen zu speichern, die mit verschiedenen Einbettungsmodellen erzeugt wurden. Auf diese Weise können Sie eine hybride Suche verwenden, um die Suchergebnisse aus diesen Vektorfeldern neu zu ordnen und so die Auffindungsrate zu verbessern.</p>
+<p>Eine Sammlung kann mehrere Vektorfelder enthalten, um die Vektoreinbettungen zu speichern, die mit verschiedenen Einbettungsmodellen erzeugt wurden. Auf diese Weise können Sie eine hybride Suche verwenden, um die Suchergebnisse aus diesen Vektorfeldern neu zu ordnen und so die Auffindungsrate zu verbessern.</p>
 <p>Weitere Informationen zur hybriden Suche finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p></li>
 <li><p>Such-Iterator</p>
 <p>Eine einzelne ANN-Suche liefert maximal 16.384 Entitäten. Ziehen Sie die Verwendung von Such-Iteratoren in Betracht, wenn Sie mehr Entitäten in einer einzigen Suche zurückgeben möchten.</p>
@@ -988,14 +989,16 @@ curl --request POST \
 <li><p>Volltextsuche</p>
 <p>Die Volltextsuche ist eine Funktion, die Dokumente abruft, die bestimmte Begriffe oder Phrasen in Textdatensätzen enthalten, und dann die Ergebnisse nach Relevanz einstuft. Diese Funktion überwindet die Einschränkungen der semantischen Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie die genauesten und kontextrelevanten Ergebnisse erhalten. Darüber hinaus vereinfacht sie die Vektorsuche, indem sie Rohtexteingaben akzeptiert und Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie manuell Vektoreinbettungen erstellen müssen.</p>
 <p>Einzelheiten zur Volltextsuche finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
-<li><p>Schlüsselwort-Abgleich</p>
-<p>Der Schlüsselwortabgleich in Milvus ermöglicht die präzise Suche nach Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche nach bestimmten Bedingungen verwendet und kann skalare Filter zur Verfeinerung der Abfrageergebnisse einbeziehen, so dass Ähnlichkeitssuchen innerhalb von Vektoren, die skalare Kriterien erfüllen, möglich sind.</p>
-<p>Weitere Informationen zur Schlüsselwortsuche finden Sie unter <a href="/docs/de/keyword-match.md">Schlüsselwortsuche</a>.</p></li>
+<li><p>Text-Abgleich</p>
+<p>Der Schlüsselwortabgleich in Milvus ermöglicht das präzise Auffinden von Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche nach bestimmten Bedingungen verwendet und kann eine skalare Filterung zur Verfeinerung der Abfrageergebnisse beinhalten, die eine Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
+<p>Einzelheiten zur Schlüsselwortsuche finden Sie unter <a href="/docs/de/keyword-match.md">Schlüsselwortsuche</a>.</p></li>
 <li><p>Partitionsschlüssel verwenden</p>
 <p>Die Einbeziehung mehrerer skalarer Felder in die Metadatenfilterung und die Verwendung einer recht komplizierten Filterbedingung können die Sucheffizienz beeinträchtigen. Wenn Sie ein skalares Feld als Partitionsschlüssel festlegen und eine Filterbedingung verwenden, die den Partitionsschlüssel in der Suchanfrage einbezieht, kann dies dazu beitragen, den Suchbereich auf die Partitionen zu beschränken, die den angegebenen Partitionsschlüsselwerten entsprechen.</p>
 <p>Einzelheiten zum Partitionsschlüssel finden Sie unter <a href="/docs/de/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p></li>
 <li><p>mmap verwenden</p>
 <p>Details zu den mmap-Einstellungen finden Sie unter <a href="/docs/de/mmap.md">mmap verwenden</a>.</p></li>
 <li><p>Clustering-Verdichtung</p>
-<p>Einzelheiten zur Clustering-Kompaktierung finden Sie unter <a href="/docs/de/clustering-compaction.md">Clustering-Kompaktierung</a>.</p></li>
+<p>Details zur Clustering-Kompaktierung finden Sie unter <a href="/docs/de/clustering-compaction.md">Clustering-Kompaktierung</a>.</p></li>
+<li><p>Reranking verwenden</p>
+<p>Details zur Verwendung von Rankern zur Verbesserung der Relevanz von Suchergebnissen finden Sie unter <a href="/docs/de/decay-ranker-overview.md">Decay Ranker Overview</a> und <a href="/docs/de/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
 </ul>

@@ -9,7 +9,7 @@ summary: >-
   werden. Bei n = 3 wird zum Beispiel das Wort "Milvus" in 3-Gramme aufgeteilt:
   "Mil", "ilv", "lvu", und "vus". Diese n-Gramme werden dann in einem
   invertierten Index gespeichert, der jedes Gramm den Dokument-IDs zuordnet, in
-  denen es vorkommt. Bei der Abfrage ermöglicht dieser Index Milvus eine
+  denen es vorkommt. Zur Abfragezeit ermöglicht dieser Index Milvus eine
   schnelle Eingrenzung der Suche auf eine kleine Gruppe von Kandidaten, was zu
   einer wesentlich schnelleren Abfrageausführung führt.
 beta: Milvus v2.6.2+
@@ -30,7 +30,7 @@ beta: Milvus v2.6.2+
         ></path>
       </svg>
     </button></h1><p>Der Index <code translate="no">NGRAM</code> in Milvus wurde erstellt, um <code translate="no">LIKE</code> Abfragen auf <code translate="no">VARCHAR</code> Felder oder bestimmte JSON-Pfade innerhalb von <code translate="no">JSON</code> Feldern zu beschleunigen. Bevor der Index erstellt wird, zerlegt Milvus den Text in kurze, sich überschneidende Teilstrings einer festen Länge <em>n</em>, die als <em>n-Gramme</em> bezeichnet werden. Bei <em>n = 3</em> wird zum Beispiel das Wort <em>"Milvus"</em> in 3-Gramme aufgeteilt: <em>"Mil",</em> <em>"ilv",</em> <em>"lvu",</em> und <em>"vus".</em> Diese n-Gramme werden dann in einem invertierten Index gespeichert, der jedes Gramm den Dokument-IDs zuordnet, in denen es vorkommt. Zur Abfragezeit erlaubt dieser Index Milvus, die Suche schnell auf eine kleine Gruppe von Kandidaten einzugrenzen, was zu einer viel schnelleren Ausführung der Abfrage führt.</p>
-<p>Verwenden Sie ihn, wenn Sie eine schnelle Präfix-, Suffix-, Infix- oder Wildcard-Filterung benötigen, wie zum Beispiel:</p>
+<p>Verwenden Sie ihn, wenn Sie eine schnelle Präfix-, Suffix-, Infix- oder Wildcard-Filterung benötigen:</p>
 <ul>
 <li><p><code translate="no">name LIKE &quot;data%&quot;</code></p></li>
 <li><p><code translate="no">title LIKE &quot;%vector%&quot;</code></p></li>
@@ -79,7 +79,7 @@ beta: Milvus v2.6.2+
 <li><p><strong>Zerlegen des Textes in n-Gramme</strong>: Milvus schiebt ein Fenster von <em>n</em> über jede Zeichenkette im Zielfeld und extrahiert überlappende Teilzeichenketten, oder <em>n-Gramme</em>. Die Länge dieser Teilstrings fällt in einen konfigurierbaren Bereich, <code translate="no">[min_gram, max_gram]</code>.</p>
 <ul>
 <li><p><code translate="no">min_gram</code>: Das kürzeste zu erzeugende n-Gramm. Dies definiert auch die minimale Abfrage-Teilstringlänge, die vom Index profitieren kann.</p></li>
-<li><p><code translate="no">max_gram</code>: Das längste zu erzeugende n-Gramm. Zur Abfragezeit wird es auch als maximale Fenstergröße beim Aufteilen langer Abfragezeichenfolgen verwendet.</p></li>
+<li><p><code translate="no">max_gram</code>: Das längste zu erzeugende n-Gramm. Zur Abfragezeit wird es auch als maximale Fenstergröße verwendet, wenn lange Abfragezeichenfolgen aufgeteilt werden.</p></li>
 </ul>
 <p>Zum Beispiel wird bei <code translate="no">min_gram=2</code> und <code translate="no">max_gram=3</code> die Zeichenfolge <code translate="no">&quot;AI database&quot;</code> wie folgt aufgeteilt:</p>
 <ul>
@@ -254,7 +254,7 @@ client.create_index(
 <li><p>Der Wert wird vor der n-gram-Tokenisierung in <code translate="no">VARCHAR</code> umgewandelt.</p></li>
 <li><p>Milvus erzeugt Teilstrings der Länge 2 bis 4 und speichert sie im invertierten Index.</p></li>
 </ul>
-<p>Weitere Informationen über die Indizierung eines JSON-Feldes finden Sie unter <a href="/docs/de/use-json-fields.md">JSON-Feld</a>.</p>
+<p>Weitere Informationen über die Indizierung eines JSON-Feldes finden Sie unter <a href="/docs/de/json-indexing.md">JSON-Indizierung</a>.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Durch NGRAM beschleunigte Abfragen<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -299,7 +299,34 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>Weitere Informationen zur Syntax von Filterausdrücken finden Sie unter <a href="/docs/de/basic-operators.md">Grundlegende Operatoren</a>.</p>
-<h2 id="Usage-notes" class="common-anchor-header">Verwendungshinweise<button data-href="#Usage-notes" class="anchor-icon" translate="no">
+<h2 id="Drop-an-index" class="common-anchor-header">Einen Index löschen<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Verwenden Sie die Methode <code translate="no">drop_index()</code>, um einen vorhandenen Index aus einer Sammlung zu entfernen.</p>
+<div class="alert note">
+<ul>
+<li><p>In <strong>v2.6.3</strong> oder früher müssen Sie die Sammlung freigeben, bevor Sie einen skalaren Index löschen können.</p></li>
+<li><p>Ab <strong>v2.6.4</strong> können Sie einen skalaren Index direkt löschen, sobald er nicht mehr benötigt wird - Sie müssen die Sammlung nicht mehr freigeben.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Usage-notes" class="common-anchor-header">Hinweise zur Verwendung<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

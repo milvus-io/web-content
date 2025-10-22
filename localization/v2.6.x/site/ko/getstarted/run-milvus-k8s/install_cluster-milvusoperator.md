@@ -173,8 +173,8 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 파드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령은 메시지 큐로 <strong>Woodpecker</strong> (v2.6.3에 권장)와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 사용하여 Milvus 클러스터를 배포합니다.</p>
-<p><strong>이 배포의 아키텍처 주요 내용은 다음과 같습니다:</strong></p>
+<p>위의 명령은 메시지 큐로 <strong>Woodpecker</strong> (v2.6.4에 권장)와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 사용하여 Milvus 클러스터를 배포합니다.</p>
+<p><strong>이 배포의 아키텍처 하이라이트는 다음과 같습니다:</strong></p>
 <ul>
 <li><strong>메시지 큐</strong>: <a href="/docs/ko/use-woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 감소)</li>
 <li><strong>스트리밍 노드</strong>: 향상된 데이터 처리를 위해 사용 가능</li>
@@ -285,7 +285,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>이제 포워딩된 포트를 사용하여 Milvus에 연결할 수 있습니다.</p>
+<p>이제 전달된 포트를 사용하여 Milvus에 연결할 수 있습니다.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(선택 사항) Milvus 구성 업데이트하기<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

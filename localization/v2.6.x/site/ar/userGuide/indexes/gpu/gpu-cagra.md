@@ -98,8 +98,39 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>في هذا التكوين</p>
 <ul>
-<li><code translate="no">params</code>: خيارات التكوين الإضافية للبحث على الفهرس. لمعرفة المزيد من معلمات البحث المتوفرة للفهرس <code translate="no">GPU_CAGRA</code> ، راجع <a href="/docs/ar/gpu-cagra.md#Index-specific-search-params">باراميات البحث الخاصة بالفهرس</a>.</li>
+<li><code translate="no">params</code>: خيارات التكوين الإضافية للبحث على الفهرس. لمعرفة المزيد من معلمات البحث المتوفرة للفهرس <code translate="no">GPU_CAGRA</code> ، راجع <a href="/docs/ar/gpu-cagra.md#Index-specific-search-params">بارامترات البحث الخاصة بالفهرس</a>.</li>
 </ul>
+<h2 id="Enable-CPU-search-at-load-time--Milvus-264+" class="common-anchor-header">تمكين البحث بوحدة المعالجة المركزية في وقت التحميل<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Enable-CPU-search-at-load-time--Milvus-264+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>لتمكين البحث في وحدة المعالجة المركزية ديناميكيًا في وقت التحميل، قم بتحرير التكوين التالي في <code translate="no">milvus.yaml</code>:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">knowhere:</span>
+  <span class="hljs-attr">GPU_CAGRA:</span>
+    <span class="hljs-attr">load:</span> 
+      <span class="hljs-attr">adapt_for_cpu:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>السلوك</strong></p>
+<ul>
+<li><p>عندما يتم تعيين <code translate="no">load.adapt_for_cpu</code> على <code translate="no">true</code> ، يقوم Milvus بتحويل فهرس <strong>GPU_CAGRA</strong> إلى تنسيق قابل للتنفيذ في وحدة المعالجة المركزية (مثل HNSW) أثناء التحميل.</p></li>
+<li><p>يتم تنفيذ عمليات البحث اللاحقة على وحدة المعالجة المركزية، حتى لو تم إنشاء الفهرس في الأصل لوحدة معالجة الرسومات.</p></li>
+<li><p>في حالة الحذف أو الخطأ، يبقى الفهرس على وحدة معالجة الرسومات ويتم تنفيذ عمليات البحث على وحدة معالجة الرسومات.</p></li>
+</ul>
+<div class="alert note">
+<p>استخدم التكيف مع وحدة المعالجة المركزية في وقت التحميل في البيئات المختلطة أو البيئات الحساسة للتكلفة حيث يتم حجز موارد وحدة معالجة الرسومات لبناء الفهرس ولكن عمليات البحث تعمل على وحدة المعالجة المركزية.</p>
+</div>
 <h2 id="Index-params" class="common-anchor-header">بارامترات الفهرس<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -116,7 +147,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>يقدم هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
-<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/gpu-cagra.md#Build-index">إنشاء فهرس</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/gpu-cagra.md#Build-index">إنشاء فهرس</a>.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>
@@ -135,29 +181,36 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">build_algo</code></p></td>
-     <td><p>يحدد خوارزمية إنشاء الرسم البياني قبل التقليم. القيم الممكنة:</p>
-<ul>
-<li><p><code translate="no">IVF_PQ</code>: تقدم جودة أعلى ولكن وقت بناء أبطأ.</p></li>
-<li><p><code translate="no">NN_DESCENT</code>: يوفر إنشاءً أسرع مع إمكانية استرجاع أقل.</p></li>
-</ul></td>
+     <td><p>يحدد خوارزمية إنشاء الرسم البياني قبل التقليم. القيم الممكنة:</p><ul><li><p><code translate="no">IVF_PQ</code>: تقدم جودة أعلى ولكن وقت بناء أبطأ.</p></li><li><p><code translate="no">NN_DESCENT</code>: يوفر إنشاءً أسرع مع إمكانية استرجاع أقل.</p></li></ul></td>
      <td><p><code translate="no">IVF_PQ</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
-     <td><p>يقرر ما إذا كان سيتم تخزين مجموعة البيانات الأصلية مؤقتًا في ذاكرة وحدة معالجة الرسومات. القيم الممكنة:</p>
-<ul>
-<li><p><code translate="no">"true"</code>: تخزين مجموعة البيانات الأصلية مؤقتًا لتحسين الاسترجاع من خلال تحسين نتائج البحث.</p></li>
-<li><p><code translate="no">"false"</code>: لا يخزن مجموعة البيانات الأصلية مؤقتًا لحفظ ذاكرة وحدة معالجة الرسومات.</p></li>
-</ul></td>
+     <td><p>يقرر ما إذا كان سيتم تخزين مجموعة البيانات الأصلية مؤقتًا في ذاكرة وحدة معالجة الرسومات. القيم الممكنة:</p><ul><li><p><code translate="no">"true"</code>: تخزين مجموعة البيانات الأصلية مؤقتًا لتحسين الاسترجاع من خلال تحسين نتائج البحث.</p></li><li><p><code translate="no">"false"</code>: لا يخزن مجموعة البيانات الأصلية مؤقتًا لحفظ ذاكرة وحدة معالجة الرسومات.</p></li></ul></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>يقرر ما إذا كان سيتم استخدام وحدة معالجة الرسومات لبناء الفهرس ووحدة المعالجة المركزية للبحث. يتطلب تعيين هذه المعلمة إلى <code translate="no">"true"</code> وجود المعلمة <code translate="no">ef</code> في طلبات البحث.</p></td>
+     <td><p>يقرر ما إذا كان سيتم استخدام وحدة معالجة الرسومات لبناء الفهرس ووحدة المعالجة المركزية للبحث.</p><p>يتطلب ضبط هذه المعلمة على <code translate="no">"true"</code> وجود المعلمة <code translate="no">ef</code> في طلبات البحث.</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/gpu-cagra.md#Search-on-index">البحث في الفهرس</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/gpu-cagra.md#Search-on-index">البحث في الفهرس</a>.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>
@@ -186,7 +239,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>يحدد مفاضلة وقت/دقة الاستعلام. تؤدي القيمة الأعلى <code translate="no">ef</code> إلى بحث أكثر دقة ولكن أبطأ. هذه المعلمة إلزامية إذا قمت بتعيين <code translate="no">adapt_for_cpu</code> على <code translate="no">true</code> عند إنشاء الفهرس.</p></td>
+     <td><p>يحدد مفاضلة وقت/دقة الاستعلام. تؤدي القيمة الأعلى <code translate="no">ef</code> إلى بحث أكثر دقة ولكن أبطأ.</p><p>هذه المعلمة إلزامية إذا قمت بتعيين <code translate="no">adapt_for_cpu</code> على <code translate="no">true</code> عند إنشاء الفهرس.</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>

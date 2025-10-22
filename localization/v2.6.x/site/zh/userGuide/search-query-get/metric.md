@@ -114,6 +114,13 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p>要在 "<a href="/docs/zh/array-of-structs.md">结构数组 "</a>字段中索引向量字段，应根据存储在这些字段中的向量嵌入，将<code translate="no">MAX_SIM</code> 作为上述度量类型集的前缀。例如</p>
+<ul>
+<li><p>对于存储<code translate="no">FLOAT_VECTOR</code>,<code translate="no">FLOAT16_VECTOR</code>,<code translate="no">BFLOAT16_VECTOR</code>, 或<code translate="no">INT8_VECTOR</code> 类型的向量嵌入的向量字段，可以使用<code translate="no">MAX_SIM_COSINE</code>,<code translate="no">MAX_SIM_IP</code>, 或<code translate="no">MAX_SIM_L2</code> 作为度量类型。</p></li>
+<li><p>对于存储<code translate="no">BINARY_VECTOR</code> 类型的向量嵌入的向量场，可以使用<code translate="no">MAX_SIM_JACCADR</code> 或<code translate="no">MAX_SIM_HAMMING</code> 作为度量类型。</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">欧氏距离（L2）<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,7 +141,7 @@ summary: 相似度量用于衡量向量之间的相似性。选择合适的距�
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
-   </span> <span class="img-wrapper"> <span>欧氏公因子</span> </span></p>
+   </span> <span class="img-wrapper"> <span>欧氏公制</span> </span></p>
 <p>其中<strong>a = (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>)</strong>和<strong>b = (<sub>b0</sub>,<sub>b1</sub>,...,<sub>bn-1</sub>)</strong>是 n 维欧几里得空间中的两点。</p>
 <p>这是最常用的距离度量，在数据连续时非常有用。</p>
 <div class="alert note">

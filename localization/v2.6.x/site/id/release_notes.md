@@ -19,6 +19,127 @@ title: Catatan Rilis
         ></path>
       </svg>
     </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug dalam setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.6.0 di bagian ini. Kami menyarankan agar Anda secara teratur mengunjungi halaman ini untuk mempelajari tentang pembaruan.</p>
+<h2 id="v264" class="common-anchor-header">v2.6.4<button data-href="#v264" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Tanggal rilis: 21 Oktober 2025</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Versi Milvus</th><th style="text-align:left">Versi Python SDK</th><th style="text-align:left">Versi SDK Node.js</th><th style="text-align:left">Versi SDK Java</th><th style="text-align:left">Versi Go SDK</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Kami dengan bangga mengumumkan peluncuran Milvus 2.6.4, yang menampilkan berbagai kemampuan baru yang kuat, peningkatan kinerja, dan perbaikan bug yang penting. Pembaruan ini memperkenalkan fitur-fitur penting seperti Struct dalam ARRAY untuk pemodelan data tingkat lanjut. Selain itu, kami telah mengaktifkan JSON Shredding secara default, yang selanjutnya meningkatkan kinerja dan efisiensi kueri. Beberapa bug kritis juga telah diatasi untuk memastikan stabilitas dan keandalan yang lebih baik. Dengan rilis ini, Milvus terus memberikan pengalaman yang lebih kuat dan efisien untuk semua pengguna. Di bawah ini adalah sorotan utama dari rilis ini.</p>
+<h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Struct dalam ARRAY: Milvus memperkenalkan tipe data baru, Struct, yang memungkinkan pengguna untuk mengatur dan mengelola beberapa field yang terkait dalam satu entitas. Saat ini, Struct hanya dapat digunakan sebagai elemen di bawah DataType.ARRAY, yang memungkinkan fitur-fitur seperti Array of Vector, di mana setiap baris berisi beberapa vektor, membuka kemungkinan baru untuk pemodelan dan pencarian data yang kompleks.<a href="https://github.com/milvus-io/milvus/pull/42148">(#42148</a>)</li>
+<li>Mendukung model Qwen GTE-rerank-v2 yang didukung di DashScope<a href="https://github.com/milvus-io/milvus/pull/44660">(#44660</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Peningkatan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li><strong>Meningkatkan versi Go ke 1.24.6</strong> dengan pembuat gambar<a href="https://github.com/milvus-io/milvus/pull/44763">(#44763</a>)</li>
+<li>Mengaktifkan penghancuran JSON default<a href="https://github.com/milvus-io/milvus/pull/44811">(#44811</a>)</li>
+<li>Menambahkan kuota disk untuk ukuran binlog yang dimuat untuk mencegah kegagalan pemuatan node kueri<a href="https://github.com/milvus-io/milvus/pull/44932">(#44932</a>)</li>
+<li>Mengaktifkan dukungan mmap untuk array struct di MemVectorIndex<a href="https://github.com/milvus-io/milvus/pull/44832">(#44832</a>)</li>
+<li>Menambahkan manajemen lapisan caching untuk TextMatchIndex<a href="https://github.com/milvus-io/milvus/pull/44768">(#44768</a>)</li>
+<li>Performa pencarian terbalik bitmap yang dioptimalkan (<a href="https://github.com/milvus-io/milvus/pull/44838">#44838</a>)</li>
+<li>Memperbarui versi Knowhere<a href="https://github.com/milvus-io/milvus/pull/44707">(#44707</a> <a href="https://github.com/milvus-io/milvus/pull/44765">#44765</a>)</li>
+<li>Menghapus pemeriksaan penggunaan logis selama pemuatan segmen<a href="https://github.com/milvus-io/milvus/pull/44770">(#44770</a>)</li>
+<li>Menambahkan bidang log akses untuk informasi panjang nilai templat<a href="https://github.com/milvus-io/milvus/pull/44783">(#44783</a>)</li>
+<li>Mengizinkan penimpaan jenis indeks saat ini selama pembuatan indeks<a href="https://github.com/milvus-io/milvus/pull/44754">(#44754</a>)</li>
+<li>Menambahkan parameter pemuatan untuk indeks vektor<a href="https://github.com/milvus-io/milvus/pull/44749">(#44749</a>)</li>
+<li>Manajemen status tugas eksekutor pemadatan terpadu<a href="https://github.com/milvus-io/milvus/pull/44722">(#44722</a>)</li>
+<li>Menambahkan log yang disempurnakan untuk penjadwal tugas di QueryCoord<a href="https://github.com/milvus-io/milvus/pull/44725">(#44725</a>)</li>
+<li>Memastikan accesslog.$consistency_level mewakili nilai aktual yang digunakan (<a href="https://github.com/milvus-io/milvus/pull/44711">#44711</a>)</li>
+<li>Menghapus pengelola saluran yang berlebihan dari datacoord<a href="https://github.com/milvus-io/milvus/pull/44679">(#44679</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Menghapus GCC dari build Dockerfile untuk memperbaiki CVE<a href="https://github.com/milvus-io/milvus/pull/44882">(#44882</a>)</li>
+<li>Memastikan urutan hasil pencarian deterministik ketika skor sama<a href="https://github.com/milvus-io/milvus/pull/44884">(#44884</a>)</li>
+<li>Perangkingan ulang sebelum permintaan ulang jika perangking ulang tidak menggunakan data lapangan<a href="https://github.com/milvus-io/milvus/pull/44943">(#44943</a>)</li>
+<li>Memastikan pemenuhan janji ketika CreateArrowFileSystem melempar pengecualian<a href="https://github.com/milvus-io/milvus/pull/44976">(#44976</a>)</li>
+<li>Memperbaiki konfigurasi enkripsi disk yang hilang<a href="https://github.com/milvus-io/milvus/pull/44839">(#44839)</a></li>
+<li>Memperbaiki penonaktifan pemeriksa saldo yang menyebabkan masalah penghentian saldo<a href="https://github.com/milvus-io/milvus/pull/44836">(#44836</a>)</li>
+<li>Memperbaiki masalah di mana "tidak sama" tidak termasuk "tidak ada"<a href="https://github.com/milvus-io/milvus/pull/44960">(#44960</a>)</li>
+<li>Mendukung nilai default JSON di CreateArrowScalarFromDefaultValue<a href="https://github.com/milvus-io/milvus/pull/44952">(#44952</a>)</li>
+<li>Menggunakan string debug pendek untuk menghindari baris baru dalam log debug<a href="https://github.com/milvus-io/milvus/pull/44929">(#44929</a>)</li>
+<li>Memperbaiki ekspresi eksistensi untuk indeks datar JSON<a href="https://github.com/milvus-io/milvus/pull/44951">(#44951</a>)</li>
+<li>Semantik jalur eksistensi JSON yang disatukan<a href="https://github.com/milvus-io/milvus/pull/44926">(#44926</a>)</li>
+<li>Memperbaiki kepanikan yang disebabkan oleh pesan sisipan internal yang kosong<a href="https://github.com/milvus-io/milvus/pull/44906">(#44906</a>)</li>
+<li>Memperbarui parameter AI/SAQ<a href="https://github.com/milvus-io/milvus/pull/44862">(#44862</a>)</li>
+<li>Menghapus batas deduplikasi ketika indeks otomatis dinonaktifkan<a href="https://github.com/milvus-io/milvus/pull/44824">(#44824</a>)</li>
+<li>Menghindari operasi reset/tambah secara bersamaan pada metrik DataCoord<a href="https://github.com/milvus-io/milvus/pull/44815">(#44815</a>)</li>
+<li>Memperbaiki bug di JSON_contents(path, int)<a href="https://github.com/milvus-io/milvus/pull/44818">(#44818</a>)</li>
+<li>Menghindari penggusuran di lapisan caching selama penanganan JSON<a href="https://github.com/milvus-io/milvus/pull/44813">(#44813</a>)</li>
+<li>Memperbaiki hasil yang salah dari filter exp ketika dilewati<a href="https://github.com/milvus-io/milvus/pull/44779">(#44779</a>)</li>
+<li>Memeriksa apakah node kueri adalah SQN dengan label dan daftar node streaming<a href="https://github.com/milvus-io/milvus/pull/44793">(#44793</a>)</li>
+<li>Memperbaiki BM25 dengan boost yang mengembalikan hasil yang tidak diurutkan<a href="https://github.com/milvus-io/milvus/pull/44759">(#44759)</a></li>
+<li>Memperbaiki impor massal dengan ID otomatis<a href="https://github.com/milvus-io/milvus/pull/44694">(#44694</a>)</li>
+<li>Melewati sistem file melalui FileManagerContext saat memuat indeks<a href="https://github.com/milvus-io/milvus/pull/44734">(#44734</a>)</li>
+<li>Menggunakan "akhirnya" dan memperbaiki ID tugas yang muncul di status eksekusi dan selesai<a href="https://github.com/milvus-io/milvus/pull/44715">(#44715</a>)</li>
+<li>Menghapus tanda centang waktu mulai yang salah untuk menghindari penyaringan DML dengan tanda centang waktu yang kurang dari itu<a href="https://github.com/milvus-io/milvus/pull/44692">(#44692</a>)</li>
+<li>Menjadikan penyedia kredensial AWS sebagai penyedia tunggal<a href="https://github.com/milvus-io/milvus/pull/44705">(#44705</a>)</li>
+<li>Menonaktifkan penghancuran untuk jalur JSON yang berisi angka<a href="https://github.com/milvus-io/milvus/pull/44808">(#44808</a>)</li>
+<li>Memperbaiki uji unit yang valid untuk TestUnaryRangeJsonNullable<a href="https://github.com/milvus-io/milvus/pull/44990">(#44990</a>)</li>
+<li>Memperbaiki pengujian unit dan menghapus logika fallback sistem file<a href="https://github.com/milvus-io/milvus/pull/44686">(#44686</a>)</li>
+</ul>
 <h2 id="v263" class="common-anchor-header">v2.6.3<button data-href="#v263" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -270,7 +391,7 @@ title: Catatan Rilis
 <li>Menambahkan pemeriksaan UTF-8 sebelum menjalankan fungsi BM25<a href="https://github.com/milvus-io/milvus/pull/44220">(#44220</a>)</li>
 <li>Mencoba ulang sesi lama jika ada<a href="https://github.com/milvus-io/milvus/pull/44208">(#44208</a>)</li>
 <li>Menambahkan batas ukuran buffer Kafka untuk mencegah OOM datanode<a href="https://github.com/milvus-io/milvus/pull/44106">(#44106</a>)</li>
-<li>Memperbaiki kepanikan dengan memperluas jangkauan pengamanan kunci<a href="https://github.com/milvus-io/milvus/pull/44130">(#44130</a>)</li>
+<li>Memperbaiki kepanikan dengan memperluas jangkauan penjagaan kunci<a href="https://github.com/milvus-io/milvus/pull/44130">(#44130</a>)</li>
 <li>Memperbaiki segmen yang sedang tumbuh agar tidak memerah pada perubahan skema<a href="https://github.com/milvus-io/milvus/pull/44412">(#44412</a>)</li>
 <li>[StorageV2] Menangani kesalahan IO<a href="https://github.com/milvus-io/milvus/pull/44255">(#44255</a>)</li>
 <li>Mencegah kepanikan jika jalur indeks Tantivy tidak ada<a href="https://github.com/milvus-io/milvus/pull/44135">(#44135</a>)</li>
@@ -504,7 +625,7 @@ title: Catatan Rilis
         ></path>
       </svg>
     </button></h3><p>Sejak versi 2.6, Milvus memperkenalkan perubahan arsitektur yang signifikan yang bertujuan untuk meningkatkan kinerja, skalabilitas, dan kemudahan penggunaan. Untuk informasi lebih lanjut, lihat <a href="/docs/id/architecture_overview.md">Tinjauan Arsitektur Milvus</a>.</p>
-<h4 id="Streaming-Node-GA" class="common-anchor-header">Streaming Node (GA)</h4><p>Pada versi sebelumnya, data streaming ditulis ke WAL oleh Proxy, dan dibaca oleh QueryNode dan DataNode. Arsitektur ini menyulitkan untuk mencapai konsensus di sisi penulisan, membutuhkan logika yang kompleks di sisi pembacaan. Selain itu, delegator kueri terletak di QueryNode, yang menghambat skalabilitas. Milvus 2.5.0 memperkenalkan Streaming Node, yang menjadi GA di versi 2.6.0. Komponen ini sekarang bertanggung jawab atas semua operasi baca/tulis WAL tingkat shard dan juga berfungsi sebagai delegator kueri, menyelesaikan masalah yang disebutkan di atas dan memungkinkan pengoptimalan baru.</p>
+<h4 id="Streaming-Node-GA" class="common-anchor-header">Streaming Node (GA)</h4><p>Pada versi sebelumnya, data streaming ditulis ke WAL oleh Proxy, dan dibaca oleh QueryNode dan DataNode. Arsitektur ini menyulitkan untuk mencapai konsensus di sisi penulisan, membutuhkan logika yang kompleks di sisi pembacaan. Selain itu, delegator kueri terletak di QueryNode, yang menghambat skalabilitas. Milvus 2.5.0 memperkenalkan Streaming Node, yang menjadi GA pada versi 2.6.0. Komponen ini sekarang bertanggung jawab atas semua operasi baca/tulis WAL tingkat shard dan juga berfungsi sebagai delegator kueri, menyelesaikan masalah yang disebutkan di atas dan memungkinkan pengoptimalan baru.</p>
 <p><strong>Pemberitahuan Peningkatan Penting</strong>: Streaming Node merupakan perubahan arsitektur yang signifikan, sehingga peningkatan langsung ke Milvus 2.6.0-rc1 dari versi sebelumnya tidak didukung.</p>
 <h4 id="Woodpecker-Native-WAL" class="common-anchor-header">Woodpecker Native WAL</h4><p>Milvus sebelumnya mengandalkan sistem eksternal seperti Kafka atau Pulsar untuk WAL-nya. Meskipun fungsional, sistem-sistem ini menambahkan kompleksitas operasional dan sumber daya yang signifikan, terutama untuk penerapan skala kecil hingga menengah. Di Milvus 2.6, semua itu digantikan oleh Woodpecker, sistem WAL yang dibuat khusus untuk cloud. Woodpecker dirancang untuk penyimpanan objek, mendukung mode zero-disk berbasis penyimpanan lokal dan objek, menyederhanakan operasi sekaligus meningkatkan kinerja dan skalabilitas.</p>
 <h4 id="DataNode-and-IndexNode-Merge" class="common-anchor-header">Penggabungan DataNode dan IndexNode</h4><p>Dalam Milvus 2.6, tugas-tugas seperti pemadatan, impor massal, pengumpulan statistik, dan pembuatan indeks sekarang dikelola oleh penjadwal terpadu. Fungsi persistensi data yang sebelumnya ditangani oleh DataNode telah dipindahkan ke Streaming Node. Untuk menyederhanakan penerapan dan pemeliharaan, IndexNode dan DataNode telah digabungkan menjadi satu komponen DataNode. Node yang terkonsolidasi ini sekarang menjalankan semua tugas penting ini, mengurangi kompleksitas operasional dan mengoptimalkan pemanfaatan sumber daya.</p>

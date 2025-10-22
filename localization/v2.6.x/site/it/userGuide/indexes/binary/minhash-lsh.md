@@ -46,11 +46,41 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Jaccard-similarity" class="common-anchor-header">Somiglianza di Jaccard</h3><p>La somiglianza di Jaccard misura la sovrapposizione tra due insiemi A e B, formalmente definita come:</p>
+    </button></h2><h3 id="Jaccard-similarity" class="common-anchor-header">Somiglianza di Jaccard<button data-href="#Jaccard-similarity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La somiglianza di Jaccard misura la sovrapposizione tra due insiemi A e B, formalmente definita come:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∩</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∪</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(A, B) = \frac{|A \cap B|}{|A \cup B|}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>Dove il suo valore va da 0 (completamente disgiunto) a 1 (identico).</p>
 <p>Tuttavia, calcolare esattamente la somiglianza di Jaccard tra tutte le coppie di documenti in insiemi di dati su larga scala è computazionalmente costoso-O<strong>(n²)</strong> in termini di tempo e memoria quando <strong>n</strong> è grande. Ciò lo rende impraticabile per casi d'uso come la pulizia del corpus di addestramento LLM o l'analisi dei documenti su scala web.</p>
-<h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">Firme MinHash: Somiglianza di Jaccard approssimata</h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> è una tecnica probabilistica che offre un modo efficiente per stimare la somiglianza di Jaccard. Funziona trasformando ogni insieme in un <strong>vettore di firme</strong> compatto, che conserva informazioni sufficienti per approssimare in modo efficiente la somiglianza degli insiemi.</p>
+<h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">Firme MinHash: Similitudine di Jaccard approssimata<button data-href="#MinHash-signatures-Approximate-Jaccard-similarity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> è una tecnica probabilistica che offre un modo efficiente per stimare la somiglianza di Jaccard. Funziona trasformando ogni insieme in un <strong>vettore di firme</strong> compatto, che conserva informazioni sufficienti per approssimare in modo efficiente la somiglianza degli insiemi.</p>
 <p>L<strong>'idea di base</strong>:</p>
 <p>Quanto più simili sono i due insiemi, tanto più è probabile che le loro firme MinHash corrispondano nelle stesse posizioni. Questa proprietà consente a MinHash di approssimare la somiglianza di Jaccard tra gli insiemi.</p>
 <p>Questa proprietà consente a MinHash di <strong>approssimare la somiglianza di Jaccard</strong> tra gli insiemi senza dover confrontare direttamente gli insiemi completi.</p>
@@ -68,7 +98,22 @@ summary: >-
 <div class="alert note">
 <p>Il numero di funzioni hash utilizzate determina la dimensionalità della firma MinHash. Dimensioni più elevate forniscono una migliore precisione di approssimazione, al costo di un aumento dello spazio di archiviazione e di calcolo.</p>
 </div>
-<h3 id="LSH-for-MinHash" class="common-anchor-header">LSH per MinHash</h3><p>Sebbene le firme MinHash riducano significativamente il costo del calcolo della somiglianza esatta di Jaccard tra i documenti, il confronto esaustivo di ogni coppia di vettori di firma è ancora inefficiente su scala.</p>
+<h3 id="LSH-for-MinHash" class="common-anchor-header">LSH per MinHash<button data-href="#LSH-for-MinHash" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sebbene le firme MinHash riducano significativamente il costo del calcolo della somiglianza esatta di Jaccard tra i documenti, il confronto esaustivo di ogni coppia di vettori di firma è ancora inefficiente su scala.</p>
 <p>Per risolvere questo problema, viene utilizzato <a href="https://zilliz.com/learn/Local-Sensitivity-Hashing-A-Comprehensive-Guide">LSH</a>. LSH consente una rapida ricerca approssimativa della somiglianza, garantendo che gli elementi simili siano inseriti nello stesso "bucket" con alta probabilità, evitando di confrontare direttamente ogni coppia.</p>
 <p>Il processo prevede:</p>
 <ol>
@@ -86,10 +131,9 @@ summary: >-
 <ul>
 <li><p>La probabilità che siano identiche in una riga (posizione hash) è <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s</p></li>
 <li><p>La probabilità che corrispondano in tutte le righe <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">rr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> r di una banda è <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">srs^r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span></span></span></span> s <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span></p></li>
-<li><p>La probabilità che corrispondano in <strong>almeno una banda</strong> è:</p></li>
+<li><p>La probabilità che corrispondano in <strong>almeno una riga</strong> è <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>1-</mo><mo stretchy="false">(</mo><msup><mi>1-sr</mi></msup><msup><mo stretchy="false">)</mo><mi>b1</mi></msup></mrow><annotation encoding="application/x-tex">- (1 - s^r)^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span></span></span></span> 1 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">(1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span> s</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> b</p></li>
 </ul>
-<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mo>−</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>s</mi><mi>r</mi></msup><msup><mo stretchy="false">)</mo><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">1 - (1 - s^r)^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1491em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p>Per maggiori dettagli, fare riferimento a <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">Hashing sensibile alle località</a>.</p>
+<p>Per i dettagli, si rimanda a <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">Hashing sensibile alle località</a>.</p>
 </div>
 <p>Consideriamo tre documenti con firme MinHash a 128 dimensioni:</p>
 <p>
@@ -109,7 +153,22 @@ summary: >-
 <div class="alert note">
 <p>Il numero di bande è controllato dal parametro <code translate="no">mh_lsh_band</code>. Per ulteriori informazioni, consultare i <a href="/docs/it/minhash-lsh.md#Index-building-params">parametri di costruzione dell'indice</a>.</p>
 </div>
-<h3 id="MHJACCARD-Comparing-MinHash-signatures-in-Milvus" class="common-anchor-header">MHJACCARD: Confronto delle firme MinHash in Milvus</h3><p>Le firme MinHash approssimano la somiglianza di Jaccard tra gli insiemi utilizzando vettori binari a lunghezza fissa. Tuttavia, poiché queste firme non conservano gli insiemi originali, non è possibile applicare direttamente metriche standard come <code translate="no">JACCARD</code>, <code translate="no">L2</code>, o <code translate="no">COSINE</code> per confrontarle.</p>
+<h3 id="MHJACCARD-Comparing-MinHash-signatures" class="common-anchor-header">MHJACCARD: Confronto delle firme MinHash<button data-href="#MHJACCARD-Comparing-MinHash-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le firme MinHash approssimano la somiglianza di Jaccard tra gli insiemi utilizzando vettori binari a lunghezza fissa. Tuttavia, poiché queste firme non conservano gli insiemi originali, non è possibile applicare direttamente metriche standard come <code translate="no">JACCARD</code>, <code translate="no">L2</code>, o <code translate="no">COSINE</code> per confrontarle.</p>
 <p>Per ovviare a questo problema, Milvus introduce un tipo di metrica specializzata, chiamata <code translate="no">MHJACCARD</code>, progettata appositamente per confrontare le firme MinHash.</p>
 <p>Quando si usa MinHash in Milvus:</p>
 <ul>
@@ -119,6 +178,31 @@ summary: >-
 </ul>
 <p>L'uso di altre metriche non sarà valido o darà risultati errati.</p>
 <p>Per ulteriori informazioni su questo tipo di metrica, consultare <a href="/docs/it/metric.md#MHJACCARD">MHJACCARD</a>.</p>
+<h3 id="Deduplication-workflow" class="common-anchor-header">Flusso di lavoro della deduplicazione<button data-href="#Deduplication-workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il processo di deduplicazione basato su MinHash LSH consente a Milvus di identificare e filtrare in modo efficiente i record di testo o strutturati quasi duplicati prima di inserirli nella raccolta.</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+<ol>
+<li><p><strong>Suddivisione e pre-elaborazione</strong>: Suddivisione dei dati testuali o strutturati in arrivo (ad esempio, record, campi) in pezzi; normalizzazione del testo (eliminazione delle minuscole e della punteggiatura) e rimozione delle stopword, se necessario.</p></li>
+<li><p><strong>Costruzione delle caratteristiche</strong>: Costruire l'insieme di token utilizzati per MinHash (ad esempio, shingle dal testo; token di campo concatenati per i dati strutturati).</p></li>
+<li><p><strong>Generazione della firma MinHash</strong>: Calcolo delle firme MinHash per ogni chunk o record.</p></li>
+<li><p><strong>Conversione del vettore binario</strong>: Converte la firma in un vettore binario compatibile con Milvus.</p></li>
+<li><p><strong>Ricerca prima dell'inserimento</strong>: Utilizza l'indice MinHash LSH per cercare nella collezione di destinazione i quasi duplicati dell'elemento in arrivo.</p></li>
+<li><p><strong>Inserisci e archivia</strong>: Inserisce nella collezione solo elementi unici. Questi diventano ricercabili per i futuri controlli di dedup.</p></li>
+</ol>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,17 +219,62 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Prima di utilizzare MinHash LSH in Milvus, è necessario generare <strong>le firme MinHash</strong>. Queste firme binarie compatte approssimano la somiglianza di Jaccard tra gli insiemi e sono necessarie per la ricerca basata su <code translate="no">MHJACCARD</code> in Milvus.</p>
-<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Scegliere un metodo per generare le firme MinHash</h3><p>A seconda del carico di lavoro, è possibile scegliere:</p>
+<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Scegliere un metodo per generare le firme MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A seconda del carico di lavoro, è possibile scegliere:</p>
 <ul>
-<li><p>Utilizzare <code translate="no">datasketch</code> di Python per semplicità (consigliato per la prototipazione).</p></li>
-<li><p>Utilizzare strumenti distribuiti (ad esempio, Spark, Ray) per insiemi di dati di grandi dimensioni.</p></li>
+<li><p>Usare il metodo Python <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> per semplicità (consigliato per la prototipazione)</p></li>
+<li><p>Utilizzare strumenti distribuiti (ad esempio, Spark, Ray) per insiemi di dati su larga scala.</p></li>
 <li><p>Implementare una logica personalizzata (NumPy, C++, ecc.) se la messa a punto delle prestazioni è fondamentale.</p></li>
 </ul>
-<p>In questa guida, utilizziamo <code translate="no">datasketch</code> per semplicità e compatibilità con il formato di input Milvus.</p>
-<h3 id="Install-required-libraries" class="common-anchor-header">Installare le librerie necessarie</h3><p>Installare i pacchetti necessari per questo esempio:</p>
+<p>In questa guida, utilizziamo <code translate="no">datasketch</code> per semplicità e compatibilità con il formato di input di Milvus.</p>
+<h3 id="Install-required-libraries" class="common-anchor-header">Installare le librerie necessarie<button data-href="#Install-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Installare i pacchetti necessari per questo esempio:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus datasketch numpy
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Generate-MinHash-signatures" class="common-anchor-header">Generare le firme MinHash</h3><p>Genereremo firme MinHash a 256 dimensioni, con ogni valore hash rappresentato come un intero a 64 bit. Ciò corrisponde al formato vettoriale previsto per <code translate="no">MINHASH_LSH</code>.</p>
+<h3 id="Generate-MinHash-signatures" class="common-anchor-header">Generare le firme MinHash<button data-href="#Generate-MinHash-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Genereremo firme MinHash a 256 dimensioni, con ogni valore hash rappresentato come un intero a 64 bit. Ciò corrisponde al formato vettoriale previsto per <code translate="no">MINHASH_LSH</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasketch <span class="hljs-keyword">import</span> MinHash
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -158,8 +287,23 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
         m.update(token.encode(<span class="hljs-string">&quot;utf8&quot;</span>))
     <span class="hljs-keyword">return</span> m.hashvalues.astype(<span class="hljs-string">&#x27;&gt;u8&#x27;</span>).tobytes()  <span class="hljs-comment"># Returns 2048 bytes</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ogni firma è 256 × 64 bit = 2048 byte. Questa stringa di byte può essere inserita direttamente in un campo Milvus <code translate="no">BINARY_VECTOR</code>. Per ulteriori informazioni sui vettori binari utilizzati in Milvus, consultare <a href="/docs/it/binary-vector.md">Vettore binario</a>.</p>
-<h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(Facoltativo) Preparare set di token grezzi (per la ricerca raffinata)</h3><p>Per impostazione predefinita, Milvus utilizza solo le firme MinHash e l'indice LSH per trovare i vicini approssimativi. Questo metodo è veloce, ma può restituire falsi positivi o perdere le corrispondenze più strette.</p>
+<p>Ogni firma è 256 × 64 bit = 2048 byte. Questa stringa di byte può essere inserita direttamente in un campo <code translate="no">BINARY_VECTOR</code>. Per ulteriori informazioni sui vettori binari utilizzati in Milvus, consultare <a href="/docs/it/binary-vector.md">Vettore binario</a>.</p>
+<h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(Facoltativo) Preparare set di token grezzi (per la ricerca raffinata)<button data-href="#Optional-Prepare-raw-token-sets-for-refined-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per impostazione predefinita, Milvus utilizza solo le firme MinHash e l'indice LSH per trovare i vicini approssimativi. Questo metodo è veloce, ma può restituire falsi positivi o perdere corrispondenze strette.</p>
 <p>Se si desidera una <strong>somiglianza Jaccard accurata</strong>, Milvus supporta una ricerca raffinata che utilizza i set di token originali. Per abilitarla:</p>
 <ul>
 <li><p>Memorizzare gli insiemi di token come campo separato <code translate="no">VARCHAR</code>.</p></li>
@@ -171,7 +315,7 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
     tokens = <span class="hljs-built_in">set</span>(text.lower().split())
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot; &quot;</span>.join(tokens)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-MinHash-LSH-in-Milvus" class="common-anchor-header">Utilizzare MinHash LSH in Milvus<button data-href="#Use-MinHash-LSH-in-Milvus" class="anchor-icon" translate="no">
+<h2 id="Use-MinHash-LSH" class="common-anchor-header">Utilizzare MinHash LSH<button data-href="#Use-MinHash-LSH" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,17 +331,59 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
         ></path>
       </svg>
     </button></h2><p>Una volta che i vettori MinHash e gli insiemi di token originali sono pronti, è possibile memorizzarli, indicizzarli e ricercarli utilizzando Milvus con <code translate="no">MINHASH_LSH</code>.</p>
-<h3 id="Connect-to-Milvus" class="common-anchor-header">Connettersi a Milvus</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<h3 id="Connect-to-your-cluster" class="common-anchor-header">Connettersi al cluster<button data-href="#Connect-to-your-cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)  <span class="hljs-comment"># Update if your URI is different</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-collection-schema" class="common-anchor-header">Definire lo schema della collezione</h3><p>Definire uno schema con:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Define-collection-schema" class="common-anchor-header">Definire lo schema della raccolta<button data-href="#Define-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Definire uno schema con:</p>
 <ul>
 <li><p>La chiave primaria</p></li>
 <li><p>Un campo <code translate="no">BINARY_VECTOR</code> per le firme MinHash</p></li>
-<li><p>Un campo <code translate="no">VARCHAR</code> per il set di token originali (se la ricerca raffinata è abilitata)</p></li>
-<li><p>Opzionalmente, un campo <code translate="no">document</code> per il testo originale.</p></li>
+<li><p>Un campo <code translate="no">VARCHAR</code> per l'insieme di token originali (se la ricerca raffinata è abilitata)</p></li>
+<li><p>Facoltativamente, un campo <code translate="no">document</code> per il testo originale</p></li>
 </ul>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
 
 VECTOR_DIM = MINHASH_DIM * HASH_BIT_WIDTH  <span class="hljs-comment"># 256 × 64 = 8192 bits</span>
@@ -208,7 +394,32 @@ schema.add_field(<span class="hljs-string">&quot;minhash_signature&quot;</span>,
 schema.add_field(<span class="hljs-string">&quot;token_set&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>)  <span class="hljs-comment"># required for refinement</span>
 schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-index-parameters-and-create-collection" class="common-anchor-header">Costruire i parametri dell'indice e creare la raccolta</h3><p>Costruire un indice <code translate="no">MINHASH_LSH</code> con il raffinamento di Jaccard abilitato:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Build-index-parameters-and-create-collection" class="common-anchor-header">Costruire i parametri dell'indice e creare la raccolta<button data-href="#Build-index-parameters-and-create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Costruire un indice <code translate="no">MINHASH_LSH</code> con il raffinamento di Jaccard abilitato:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;minhash_signature&quot;</span>,
@@ -223,13 +434,38 @@ index_params.add_index(
 
 client.create_collection(<span class="hljs-string">&quot;minhash_demo&quot;</span>, schema=schema, index_params=index_params)
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sui parametri di costruzione dell'indice, fare riferimento a <a href="/docs/it/minhash-lsh.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p>
-<h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><p>Per ogni documento, preparare</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Per ulteriori informazioni sui parametri di costruzione dell'indice, consultare la sezione <a href="/docs/it/minhash-lsh.md#Index-building-params">Parametri di costruzione dell'indice</a>.</p>
+<h3 id="Insert-data" class="common-anchor-header">Inserire i dati<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per ogni documento, preparare</p>
 <ul>
 <li><p>Una firma MinHash binaria</p></li>
 <li><p>Una stringa serializzata di set di token</p></li>
 <li><p>(facoltativamente) il testo originale</p></li>
 </ul>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">documents = [
     <span class="hljs-string">&quot;machine learning algorithms process data automatically&quot;</span>,
     <span class="hljs-string">&quot;deep learning uses neural networks to model patterns&quot;</span>
@@ -249,16 +485,51 @@ insert_data = []
 client.insert(<span class="hljs-string">&quot;minhash_demo&quot;</span>, insert_data)
 client.flush(<span class="hljs-string">&quot;minhash_demo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Eseguire la ricerca di similarità</h3><p>Milvus supporta due modalità di ricerca delle somiglianze utilizzando MinHash LSH:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Eseguire la ricerca di somiglianza<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus supporta due modalità di ricerca della somiglianza utilizzando MinHash LSH:</p>
 <ul>
 <li><p><strong>Ricerca approssimativa</strong> - utilizza solo le firme MinHash e LSH per ottenere risultati veloci ma probabilistici.</p></li>
 <li><p><strong>Ricerca raffinata</strong> - ricompone la somiglianza di Jaccard utilizzando i set di token originali per una maggiore precisione.</p></li>
 </ul>
 <h4 id="51-Prepare-the-query" class="common-anchor-header">5.1 Preparare la query</h4><p>Per eseguire una ricerca di similarità, si deve generare una firma MinHash per il documento da interrogare. Questa firma deve corrispondere alla stessa dimensione e allo stesso formato di codifica utilizzati durante l'inserimento dei dati.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;neural networks model patterns in data&quot;</span>
 query_sig = generate_minhash_signature(query_text)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="52-Approximate-search-LSH-only" class="common-anchor-header">5.2 Ricerca approssimativa (solo LSH)</h4><p>È veloce e scalabile, ma può mancare le corrispondenze strette o includere falsi positivi:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">search_params={</span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;MHJACCARD&quot;</span>, </span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;params&quot;</span>: {}</span>
@@ -271,14 +542,24 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
     sim = <span class="hljs-number">1</span> - hit[<span class="hljs-string">&#x27;distance&#x27;</span>]
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Similarity: <span class="hljs-subst">{sim:<span class="hljs-number">.3</span>f}</span> | <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;document&#x27;</span>]}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="53-Refined-search-recommended-for-accuracy" class="common-anchor-header">5.3 Ricerca raffinata (consigliata per la precisione):</h4><p>Consente un confronto Jaccard accurato utilizzando i set di token originali memorizzati in Milvus. È leggermente più lenta, ma è consigliata per le attività sensibili alla qualità:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">search_params = {</span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;MHJACCARD&quot;</span>,</span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;params&quot;</span>: {</span>
@@ -294,12 +575,20 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):
     sim = <span class="hljs-number">1</span> - hit[<span class="hljs-string">&#x27;distance&#x27;</span>]
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Similarity: <span class="hljs-subst">{sim:<span class="hljs-number">.3</span>f}</span> | <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;document&#x27;</span>]}</span>&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-params" class="common-anchor-header">Parametri dell'indice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -317,7 +606,22 @@ refined_results = client.search(
         ></path>
       </svg>
     </button></h2><p>Questa sezione fornisce una panoramica dei parametri utilizzati per la costruzione di un indice e per l'esecuzione di ricerche sull'indice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">params</code> quando si <a href="/docs/it/minhash-lsh.md#Build-index-parameters-and-create-collection">costruisce un indice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">params</code> quando si <a href="/docs/it/minhash-lsh.md#Build-index-parameters-and-create-collection">costruisce un indice</a>.</p>
 <table>
    <tr>
      <th><p>Parametro</p></th>
@@ -356,7 +660,22 @@ refined_results = client.search(
      <td><p>Utilizzare <code translate="no">0.01</code> per bilanciare l'uso della memoria e l'accuratezza. Valori più bassi (<code translate="no">0.001</code>) riducono i falsi positivi ma aumentano la memoria. Valori più alti (<code translate="no">0.05</code>) risparmiano memoria ma possono ridurre la precisione.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">search_params.params</code> durante la <a href="/docs/it/minhash-lsh.md#Perform-similarity-search">ricerca sull'indice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">search_params.params</code> durante la <a href="/docs/it/minhash-lsh.md#Perform-similarity-search">ricerca sull'indice</a>.</p>
 <table>
    <tr>
      <th><p>Parametro</p></th>

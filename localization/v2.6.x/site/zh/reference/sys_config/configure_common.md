@@ -1245,3 +1245,37 @@ summary: 了解如何为 Milvus 配置常用功能。
     </tr>
   </tbody>
 </table>
+<h2 id="commonclusterID" class="common-anchor-header"><code translate="no">common.clusterID</code><button data-href="#commonclusterID" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.clusterID">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>集群的唯一标识符，用于生成自动标识符，以确保多个 Milvus 集群的全局唯一性。</li>      
+        <li>有效值：[0、1、2、3、4、5、6、7] （最多支持 8 个集群）</li>      
+        <li>每个群集必须有一个唯一的 clusterID，以防止运行多个群集时出现 AutoID 重叠。</li>      
+        <li>此 ID 作为 cluster_id 段的一部分嵌入 64 位 AutoID 结构中。</li>      
+        <li>有关详细信息，请参阅<a href="/docs/zh/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">主字段和 AutoID</a>。</li>      </td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>

@@ -254,7 +254,7 @@ client.create_index(
 <li><p>El valor se convierte a <code translate="no">VARCHAR</code> antes de la tokenización n-gram.</p></li>
 <li><p>Milvus genera subcadenas de longitud 2 a 4 y las almacena en el índice invertido.</p></li>
 </ul>
-<p>Para más información sobre cómo indexar un campo JSON, consulte <a href="/docs/es/use-json-fields.md">Campo JSON</a>.</p>
+<p>Para más información sobre cómo indexar un campo JSON, consulte <a href="/docs/es/json-indexing.md">Indexación JSON</a>.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Consultas aceleradas por NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -272,7 +272,7 @@ client.create_index(
       </svg>
     </button></h2><p>Para que se aplique el índice NGRAM:</p>
 <ul>
-<li><p>La consulta debe tener como objetivo un campo <code translate="no">VARCHAR</code> (o ruta JSON) que tenga un índice <code translate="no">NGRAM</code>.</p></li>
+<li><p>La consulta debe dirigirse a un campo <code translate="no">VARCHAR</code> (o ruta JSON) que tenga un índice <code translate="no">NGRAM</code>.</p></li>
 <li><p>La parte literal del patrón <code translate="no">LIKE</code> debe tener al menos <code translate="no">min_gram</code> caracteres.<em>(Por ejemplo, si el término de consulta más corto que espera es de 2 caracteres, establezca min_gram=2 al crear el índice).</em></p></li>
 </ul>
 <p>Tipos de consulta admitidos:</p>
@@ -299,6 +299,33 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>Para más información sobre la sintaxis de las expresiones de filtrado, consulte <a href="/docs/es/basic-operators.md">Operadores básicos</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Eliminar un índice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilice el método <code translate="no">drop_index()</code> para eliminar un índice existente de una colección.</p>
+<div class="alert note">
+<ul>
+<li><p>En <strong>v2.6.3</strong> o versiones anteriores, debe liberar la colección antes de eliminar un índice escalar.</p></li>
+<li><p>A partir de la versión <strong>2.6.4</strong>, puedes eliminar un índice escalar directamente cuando ya no lo necesites, sin necesidad de liberar primero la colección.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">Notas de uso<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -315,7 +342,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Tipos de campo</strong>: Compatible con los campos <code translate="no">VARCHAR</code> y <code translate="no">JSON</code>. Para JSON, proporcione tanto <code translate="no">params.json_path</code> como <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
+<li><p><strong>Tipos de campo</strong>: Compatible con los campos <code translate="no">VARCHAR</code> y <code translate="no">JSON</code>. Para JSON, proporcione <code translate="no">params.json_path</code> y <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
 <li><p><strong>Unicode</strong>: La descomposición NGRAM se basa en caracteres y es independiente del idioma, e incluye los espacios en blanco y la puntuación.</p></li>
 <li><p><strong>Compromiso espacio-tiempo</strong>: los rangos de gramos más amplios <code translate="no">[min_gram, max_gram]</code> producen más gramos e índices más grandes. Si la memoria es escasa, considere el modo <code translate="no">mmap</code> para listas de contabilización grandes. Para más información, consulte <a href="/docs/es/mmap.md">Uso de mmap</a>.</p></li>
 <li><p><strong>Inmutabilidad</strong>: <code translate="no">min_gram</code> y <code translate="no">max_gram</code> no se pueden cambiar in situ: reconstruya el índice para ajustarlos.</p></li>

@@ -98,8 +98,39 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>In dieser Konfiguration:</p>
 <ul>
-<li><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Suche im Index. Um mehr über die für den <code translate="no">GPU_CAGRA</code> Index verfügbaren Suchparameter zu erfahren, lesen Sie bitte <a href="/docs/de/gpu-cagra.md#Index-specific-search-params">Index-spezifische Suchparameter</a>.</li>
+<li><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Suche im Index. Weitere Suchparameter, die für den <code translate="no">GPU_CAGRA</code> Index verfügbar sind, finden Sie unter <a href="/docs/de/gpu-cagra.md#Index-specific-search-params">Indexspezifische Suchparameter</a>.</li>
 </ul>
+<h2 id="Enable-CPU-search-at-load-time--Milvus-264+" class="common-anchor-header">CPU-Suche zur Ladezeit aktivieren<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Enable-CPU-search-at-load-time--Milvus-264+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Um die CPU-Suche dynamisch zur Ladezeit zu aktivieren, bearbeiten Sie die folgende Konfiguration in <code translate="no">milvus.yaml</code>:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">knowhere:</span>
+  <span class="hljs-attr">GPU_CAGRA:</span>
+    <span class="hljs-attr">load:</span> 
+      <span class="hljs-attr">adapt_for_cpu:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Verhalten</strong></p>
+<ul>
+<li><p>Wenn <code translate="no">load.adapt_for_cpu</code> auf <code translate="no">true</code> gesetzt ist, konvertiert Milvus den <strong>GPU_CAGRA-Index</strong> während des Ladens in ein CPU-ausführbares Format (HNSW-ähnlich).</p></li>
+<li><p>Nachfolgende Suchoperationen werden auf der CPU ausgeführt, auch wenn der Index ursprünglich für die GPU erstellt wurde.</p></li>
+<li><p>Wird die Option weggelassen oder ist sie falsch, bleibt der Index auf der GPU und die Suchvorgänge werden auf der GPU ausgeführt.</p></li>
+</ul>
+<div class="alert note">
+<p>Verwenden Sie die CPU-Anpassung während der Ladezeit in hybriden oder kostensensitiven Umgebungen, in denen GPU-Ressourcen für die Indexerstellung reserviert sind, die Suchvorgänge aber auf der CPU ausgeführt werden.</p>
+</div>
 <h2 id="Index-params" class="common-anchor-header">Index-Parameter<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,8 +146,23 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/gpu-cagra.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+    </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchvorgängen im Index verwendet werden.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/gpu-cagra.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -135,29 +181,36 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">build_algo</code></p></td>
-     <td><p>Wählt den Graphenerzeugungsalgorithmus vor dem Pruning. Mögliche Werte:</p>
-<ul>
-<li><p><code translate="no">IVF_PQ</code>: Bietet eine höhere Qualität, aber eine langsamere Erstellungszeit.</p></li>
-<li><p><code translate="no">NN_DESCENT</code>: Bietet einen schnelleren Aufbau mit potenziell geringerer Wiedererkennung.</p></li>
-</ul></td>
+     <td><p>Wählt den Graphenerzeugungsalgorithmus vor dem Pruning. Mögliche Werte:</p><ul><li><p><code translate="no">IVF_PQ</code>: Bietet eine höhere Qualität, aber eine langsamere Erstellungszeit.</p></li><li><p><code translate="no">NN_DESCENT</code>: Bietet einen schnelleren Aufbau mit potenziell geringerer Wiedererkennung.</p></li></ul></td>
      <td><p><code translate="no">IVF_PQ</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
-     <td><p>Legt fest, ob der Originaldatensatz im GPU-Speicher zwischengespeichert werden soll. Mögliche Werte:</p>
-<ul>
-<li><p><code translate="no">"true"</code>: Zwischenspeichern des Originaldatensatzes zur Verbesserung der Wiederauffindung durch Verfeinerung der Suchergebnisse.</p></li>
-<li><p><code translate="no">"false"</code>: Der Originaldatensatz wird nicht im Cache gespeichert, um GPU-Speicher zu sparen.</p></li>
-</ul></td>
+     <td><p>Legt fest, ob der Originaldatensatz im GPU-Speicher zwischengespeichert werden soll. Mögliche Werte:</p><ul><li><p><code translate="no">"true"</code>: Zwischenspeichern des Originaldatensatzes zur Verbesserung der Wiederauffindung durch Verfeinerung der Suchergebnisse.</p></li><li><p><code translate="no">"false"</code>: Der Originaldatensatz wird nicht im Cache gespeichert, um GPU-Speicher zu sparen.</p></li></ul></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>Entscheidet, ob die GPU für die Indexerstellung und die CPU für die Suche verwendet werden soll. Wenn dieser Parameter auf <code translate="no">"true"</code> gesetzt wird, muss der Parameter <code translate="no">ef</code> in den Suchanfragen vorhanden sein.</p></td>
+     <td><p>Entscheidet, ob die GPU für die Indexerstellung und die CPU für die Suche verwendet werden soll.</p><p>Die Einstellung dieses Parameters auf <code translate="no">"true"</code> erfordert das Vorhandensein des Parameters <code translate="no">ef</code> in den Suchanfragen.</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/gpu-cagra.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/gpu-cagra.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -186,7 +239,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Gibt den Kompromiss zwischen Abfragezeit und -genauigkeit an. Ein höherer Wert <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche. Dieser Parameter ist obligatorisch, wenn Sie <code translate="no">adapt_for_cpu</code> auf <code translate="no">true</code> setzen, wenn Sie den Index erstellen.</p></td>
+     <td><p>Legt den Kompromiss zwischen Abfragezeit und -genauigkeit fest. Ein höherer <code translate="no">ef</code> Wert führt zu einer genaueren, aber langsameren Suche.</p><p>Dieser Parameter ist obligatorisch, wenn Sie beim Erstellen des Index <code translate="no">adapt_for_cpu</code> auf <code translate="no">true</code> setzen.</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>

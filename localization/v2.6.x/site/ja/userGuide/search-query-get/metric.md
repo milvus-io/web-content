@@ -115,6 +115,13 @@ summary: >-
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p><a href="/docs/ja/array-of-structs.md">Array of Structs</a>フィールドのベクトルフィールドにインデックスを付けるには、それらのフィールドに格納されているベクトル埋め込みに基づいて、上記のメトリックタイプのセットに<code translate="no">MAX_SIM</code> をプレフィックスとして付ける必要があります。例えば</p>
+<ul>
+<li><p><code translate="no">FLOAT_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> 、<code translate="no">INT8_VECTOR</code> 型のベクトル埋め込みを格納するベクトル・フィールドでは、<code translate="no">MAX_SIM_COSINE</code> 、<code translate="no">MAX_SIM_IP</code> 、<code translate="no">MAX_SIM_L2</code> をメトリック型として使用することができます。</p></li>
+<li><p><code translate="no">BINARY_VECTOR</code> 型の埋め込みベクトルを格納するベクトル場では，<code translate="no">MAX_SIM_JACCADR</code> または<code translate="no">MAX_SIM_HAMMING</code> をメトリック型として使うことができます．</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">ユークリッド距離 (L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,7 +137,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>基本的に、ユークリッド距離は2点を結ぶセグメントの長さを測定する。</p>
+    </button></h2><p>基本的に、ユークリッド距離は2点を結ぶ線分の長さを測る。</p>
 <p>ユークリッド距離の公式は以下の通り：</p>
 <p>
   
@@ -163,7 +170,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>IPの公式</span> </span></p>
 <p>IPは、正規化されていないデータを比較する場合や、大きさや角度を気にする場合に便利です。</p>
 <div class="alert note">
-<p>埋め込み間の類似度を計算するためにIPを使う場合、埋め込みを正規化する必要があります。正規化後の内積は余弦類似度に等しくなります。</p>
+<p>IPを使って埋め込み間の類似度を計算する場合、埋め込みを正規化する必要があります。正規化後の内積は余弦類似度に等しくなります。</p>
 </div>
 <p>X'が埋め込みXから正規化されたとします：</p>
 <p>
@@ -246,7 +253,7 @@ summary: >-
 </ul>
 <p><strong>距離の定義</strong></p>
 <p>MHJACCARDは、2つのMinHash署名の何番目の位置が一致するかを測定します。一致率が高いほど、基礎となる集合がより類似していることを示す。</p>
-<p>milvusは次のように報告します：</p>
+<p>Milvusは次のように報告します：</p>
 <ul>
 <li><strong>距離 = 1 - 推定類似度（一致率）</strong></li>
 </ul>

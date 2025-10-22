@@ -161,7 +161,7 @@ Exemplo: com <code translate="no">[2,4]</code> e a palavra <code translate="no">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode criar um índice NGRAM num campo <code translate="no">VARCHAR</code> ou num caminho específico dentro de um campo <code translate="no">JSON</code>.</p>
+    </button></h2><p>É possível criar um índice NGRAM num campo <code translate="no">VARCHAR</code> ou num caminho específico dentro de um campo <code translate="no">JSON</code>.</p>
 <h3 id="Example-1-Create-on-a-VARCHAR-field" class="common-anchor-header">Exemplo 1: Criar num campo VARCHAR<button data-href="#Example-1-Create-on-a-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -253,7 +253,7 @@ client.create_index(
 <li><p>O valor é convertido para <code translate="no">VARCHAR</code> antes da tokenização do n-grama.</p></li>
 <li><p>Milvus gera substrings de comprimento 2 a 4 e armazena-os no índice invertido.</p></li>
 </ul>
-<p>Para obter mais informações sobre como indexar um campo JSON, consulte <a href="/docs/pt/use-json-fields.md">Campo JSON</a>.</p>
+<p>Para obter mais informações sobre como indexar um campo JSON, consulte <a href="/docs/pt/json-indexing.md">Indexação JSON</a>.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Consultas aceleradas por NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -272,7 +272,7 @@ client.create_index(
     </button></h2><p>Para que o índice NGRAM seja aplicado:</p>
 <ul>
 <li><p>A consulta deve ter como alvo um campo <code translate="no">VARCHAR</code> (ou caminho JSON) que tenha um índice <code translate="no">NGRAM</code>.</p></li>
-<li><p>A parte literal do padrão <code translate="no">LIKE</code> deve ter pelo menos <code translate="no">min_gram</code> caracteres.<em>(Por exemplo, se o termo de consulta mais curto esperado for 2 caracteres, defina min_gram=2 ao criar o índice).</em></p></li>
+<li><p>A parte literal do padrão <code translate="no">LIKE</code> deve ter pelo menos <code translate="no">min_gram</code> caracteres de comprimento.<em>(Por exemplo, se o termo de consulta mais curto esperado for 2 caracteres, defina min_gram=2 ao criar o índice).</em></p></li>
 </ul>
 <p>Tipos de consulta suportados:</p>
 <ul>
@@ -297,7 +297,34 @@ client.create_index(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_field[&quot;body&quot;] LIKE &quot;%database%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>Para mais informações sobre a sintaxe da expressão de filtro, consulte <a href="/docs/pt/basic-operators.md">Operadores básicos</a>.</p>
+<p>Para obter mais informações sobre a sintaxe da expressão de filtro, consulte <a href="/docs/pt/basic-operators.md">Operadores básicos</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Eliminar um índice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilize o método <code translate="no">drop_index()</code> para remover um índice existente de uma coleção.</p>
+<div class="alert note">
+<ul>
+<li><p>Na <strong>versão 2.6.3</strong> ou anterior, é necessário libertar a coleção antes de eliminar um índice escalar.</p></li>
+<li><p>A partir da versão <strong>2.6.4</strong> ou posterior, pode eliminar um índice escalar diretamente quando este já não for necessário, sem necessidade de libertar primeiro a coleção.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">Notas de utilização<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -339,7 +366,7 @@ client.create_index(
 <ul>
 <li><p>Comece com <code translate="no">min_gram=2</code>, <code translate="no">max_gram=3</code>.</p></li>
 <li><p>Defina <code translate="no">min_gram</code> como o literal mais curto que espera que os utilizadores escrevam.</p></li>
-<li><p>Defina <code translate="no">max_gram</code> próximo do comprimento típico de substrings significativas; <code translate="no">max_gram</code> maior melhora a filtragem mas aumenta o espaço.</p></li>
+<li><p>Defina <code translate="no">max_gram</code> próximo do comprimento típico de substrings significativas; um <code translate="no">max_gram</code> maior melhora a filtragem, mas aumenta o espaço.</p></li>
 </ul></li>
 <li><p><strong>Evitar gramas de baixa seletividade</strong></p>
 <p>Padrões altamente repetitivos (por exemplo, <code translate="no">&quot;aaaaaa&quot;</code>) fornecem filtragem fraca e podem produzir ganhos limitados.</p></li>

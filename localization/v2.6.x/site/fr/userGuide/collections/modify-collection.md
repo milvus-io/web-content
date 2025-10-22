@@ -179,11 +179,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
-     <td><p>Permet à une collection d'accepter des valeurs de clé primaire fournies par l'utilisateur lorsque l'option AutoID a été activée pour la collection.</p><ul><li><p>Lorsque la valeur est <strong>"true"</strong>: Les insertions, les insertions ultérieures et les importations en bloc utilisent la clé primaire fournie par l'utilisateur si elle est présente ; sinon, les valeurs de clé primaire sont générées automatiquement.</p></li><li><p>Si la valeur est <strong>"false" (faux)</strong>, les valeurs de clé primaire fournies par l'utilisateur sont générées automatiquement : Les valeurs de clé primaire fournies par l'utilisateur sont rejetées ou ignorées et les valeurs de clé primaire sont toujours générées automatiquement. La valeur par défaut est <strong>"false"</strong>.</p></li></ul></td>
-   </tr>
-   <tr>
-     <td></td>
-     <td></td>
+     <td><p>Permet ou non à une collection d'accepter des valeurs de clé primaire fournies par l'utilisateur lorsque l'option AutoID a été activée pour la collection.</p><ul><li><p>Lorsque la valeur est <strong>"true"</strong>: Les insertions, les insertions ultérieures et les importations en bloc utilisent la clé primaire fournie par l'utilisateur si elle est présente ; sinon, les valeurs de clé primaire sont générées automatiquement.</p></li><li><p>Si la valeur est <strong>"false" (faux)</strong>, les valeurs de clé primaire fournies par l'utilisateur sont générées automatiquement : Les valeurs de clé primaire fournies par l'utilisateur sont rejetées ou ignorées et les valeurs de clé primaire sont toujours générées automatiquement. La valeur par défaut est <strong>"false"</strong>.</p></li></ul></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Exemple 1 : Définir le TTL d'une collection<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">

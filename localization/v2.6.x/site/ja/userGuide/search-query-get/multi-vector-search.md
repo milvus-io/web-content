@@ -48,7 +48,7 @@ summary: >-
 <ul>
 <li><p><strong>セマンティック・テキスト検索：</strong>これは、密なベクトルを使って商品のテキスト説明をクエリすることを含む。テキスト埋め込みは、<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERTや</a> <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformersなどの</a>モデルや、<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAIの</a>ようなサービスを使用して生成することができる。</p></li>
 <li><p><strong>全文検索</strong>：ここでは、疎なベクトルとのキーワードマッチを使用して、商品のテキスト説明をクエリする。<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25の</a>ようなアルゴリズムや、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3や</a> <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADEの</a>ようなスパース埋め込みモデルをこの目的に利用することができる。</p></li>
-<li><p><strong>マルチモーダル画像検索：</strong>この手法は、密なベクトルを持つテキストクエリを用いて画像に対してクエリを行う。画像埋め込みは<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIPの</a>ようなモデルで生成できます。</p></li>
+<li><p><strong>マルチモーダル画像検索：</strong>この方法は、密なベクトルを持つテキストクエリを用いて画像に対してクエリを行う。画像埋め込みは<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIPの</a>ようなモデルで生成できます。</p></li>
 </ul>
 <p>このガイドでは、商品の生のテキスト記述と画像埋め込みが与えられた場合、上記の検索方法を組み合わせたマルチモーダルハイブリッド検索の例を説明します。マルチ・ベクトル・データを格納し、リランキング戦略でハイブリッド検索を実行する方法を示します。</p>
 <h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">複数のベクトル・フィールドを持つコレクションの作成<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
@@ -82,10 +82,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>マルチベクターハイブリッド検索では、コレクションスキーマ内に複数のベクターフィールドを定義する必要があります。デフォルトでは、各コレクションは最大4つのベクトルフィールドに対応します。しかし、必要に応じて、<code translate="no">proxy.maxVectorFieldNum</code> を調整し、コレクションに最大 10 のベクターフィールドを含めることができます。</p>
-<p>この例では、以下のフィールドをスキーマに組み込んでいる：</p>
+    </button></h3><p>マルチベクターハイブリッド検索では、コレクションスキーマ内に複数のベクターフィールドを定義する必要があります。コレクション内で許可されるベクターフィールド数の制限の詳細については、<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limitsを</a>参照してください。  ただし、必要に応じて <a href="/docs/ja/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>を調整して、必要に応じてコレクションに最大 10 のベクトル・フィールドを含めることができます。</p>
+<p>この例では、以下のフィールドをスキーマに組み込んでいます：</p>
 <ul>
-<li><p><code translate="no">id</code>:テキスト ID を格納するプライマリ・キーとして機能する。このフィールドのデータ型は<code translate="no">INT64</code> である。</p></li>
+<li><p><code translate="no">id</code>:テキスト ID を格納するプライマリ・キーとして機能する。このフィールドのデータ型は<code translate="no">INT64</code> です。</p></li>
 <li><p><code translate="no">text</code>:テキスト・コンテンツの格納に使用される。このフィールドのデータ型は<code translate="no">VARCHAR</code> で、最大長は1000バイトである。全文検索を容易にするため、<code translate="no">enable_analyzer</code> オプションは<code translate="no">True</code> に設定される。</p></li>
 <li><p><code translate="no">text_dense</code>:テキストの密なベクトルを格納するために使用される。このフィールドのデータ型は<code translate="no">FLOAT_VECTOR</code> で、ベクトル次元は 768 である。</p></li>
 <li><p><code translate="no">text_sparse</code>:テキストの疎ベクトルを格納するために使用される。このフィールドのデータ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> である。</p></li>
@@ -324,7 +324,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">インデックス作成<button data-href="#Create-index" class="anchor-icon" translate="no">
+<h3 id="Create-index" class="common-anchor-header">インデックスの作成<button data-href="#Create-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -339,7 +339,14 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><div class="multipleCode">
+    </button></h3><p>コレクション・スキーマを定義した後、次のステップは、ベクトル・インデックスを構成し、類似性メトリクスを指定することである。与えられた例では</p>
+<ul>
+<li><p><code translate="no">text_dense_index</code> <code translate="no">IP</code> メトリック・タイプを持つ タイプのインデックスが、テキスト密ベクトル・フィールド用に作成されます。<code translate="no">AUTOINDEX</code> </p></li>
+<li><p><code translate="no">text_sparse_index</code> <code translate="no">BM25</code> メトリック型を持つ 型のインデックスが、テキスト疎ベクトル・フィールドに使用されます。<code translate="no">SPARSE_INVERTED_INDEX</code></p></li>
+<li><p><code translate="no">image_dense_index</code>画像密ベクトル・フィールドには、<code translate="no">IP</code> メトリック型を持つ<code translate="no">AUTOINDEX</code> 型のインデックスが作成されます。</p></li>
+</ul>
+<p>ニーズやデータ型に合わせて、必要に応じて他のインデックス型を選択することができます。サポートされているインデックス・タイプの詳細については、<a href="/docs/ja/index-vector-fields.md">利用可能なインデックス・タイプに関する</a>ドキュメントを参照してください。</p>
+<div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -468,7 +475,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>前の2つのステップで設定したコレクションスキーマとインデックスで、<code translate="no">demo</code> という名前のコレクションを作成する。</p>
+    </button></h3><p>前の2つのステップで設定したコレクションスキーマとインデックスを使用して、<code translate="no">demo</code> という名前のコレクションを作成します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -662,7 +669,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">複数のAnnSearchRequestインスタンスを作成する。<button data-href="#Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">ステップ1：複数のAnnSearchRequestインスタンスの作成<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -677,12 +684,12 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ハイブリッド・サーチは、<code translate="no">hybrid_search()</code> 関数で複数の<code translate="no">AnnSearchRequest</code> を作成することで実装される。各<code translate="no">AnnSearchRequest</code> は、特定のベクトル・フィールドに対する基本的なANNサーチ・リクエストを表す。従って、ハイブリッド・サーチを行う前に、各ベクトル・フィールドに対して<code translate="no">AnnSearchRequest</code> を作成する必要がある。</p>
-<p>また、<code translate="no">AnnSearchRequest</code> の<code translate="no">expr</code> パラメータを設定することで、ハイブリッドサーチのフィルタリング条件を設定することができます。<a href="/docs/ja/filtered-search.md">フィルタリング検索と</a> <a href="/docs/ja/boolean.md">フィルタリングを</a>参照してください。</p>
+    </button></h3><p>ハイブリッド・サーチは、<code translate="no">hybrid_search()</code> 関数で複数の<code translate="no">AnnSearchRequest</code> を作成することで実装される。各<code translate="no">AnnSearchRequest</code> は、特定のベクトル・フィールドに対する基本的なANNサーチ・リクエストを表す。従って、ハイブリッド・サーチを行う前に、各ベクトル場に対して<code translate="no">AnnSearchRequest</code> を作成する必要がある。</p>
+<p>また、<code translate="no">AnnSearchRequest</code> の<code translate="no">expr</code> パラメータを設定することで、ハイブリッドサーチのフィルタリング条件を設定することができます。<a href="/docs/ja/filtered-search.md">フィルタリング検索と</a> <a href="/docs/ja/boolean.md">フィルタリングの</a>説明を参照してください。</p>
 <div class="alert note">
 <p>ハイブリッド検索では、<code translate="no">AnnSearchRequest</code> 、それぞれ1つのクエリーデータのみをサポートします。</p>
 </div>
-<p>様々な検索ベクトル・フィールドの機能を実証するために、サンプル・クエリを使用して3つの<code translate="no">AnnSearchRequest</code> 検索リクエストを構築します。また、このプロセスには事前に計算された密なベクトルを使用する。検索リクエストは以下のベクトルフィールドを対象とする：</p>
+<p>様々な検索ベクトル・フィールドの能力を示すために、サンプルのクエリを使用して3つの検索リクエスト（<code translate="no">AnnSearchRequest</code> ）を作成します。また、このプロセスには事前に計算された密なベクトルを使用する。検索リクエストは以下のベクトルフィールドを対象とする：</p>
 <ul>
 <li><p><code translate="no">text_dense</code> セマンティックテキスト検索では、直接的なキーワードマッチングではなく、意味に基づいて文脈の理解と検索を可能にする。</p></li>
 <li><p><code translate="no">text_sparse</code>テキスト内の単語やフレーズの完全一致に焦点を当てた、全文検索またはキーワードマッチング。</p></li>
@@ -820,8 +827,8 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>パラメータ<code translate="no">limit</code> が2に設定されているとすると、<code translate="no">AnnSearchRequest</code> はそれぞれ2つの検索結果を返す。この例では、3つの<code translate="no">AnnSearchRequest</code> インスタンスが作成され、合計6つの検索結果が得られます。</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">再ランク付け戦略の設定<button data-href="#Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<p>パラメータ<code translate="no">limit</code> が2に設定されているとすると、<code translate="no">AnnSearchRequest</code> はそれぞれ2つの検索結果を返す。この例では、3つの<code translate="no">AnnSearchRequest</code> インスタンスが作成され、合計6つの検索結果が得られる。</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">ステップ2：再ランク付け戦略の設定<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -836,35 +843,9 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ANN 検索結果のセットをマージし、ランク付けし直すには、適切な再ランク付け戦略を選択することが重要です。Milvusは2種類のリランキング戦略を提供している：</p>
-<ul>
-<li><p><strong>WeightedRanker</strong>：結果が特定のベクトルフィールドを強調する必要がある場合、この戦略を使用する。WeightedRankerでは、特定のベクトルフィールドに大きなウェイトを割り当て、より目立つように強調することができます。</p></li>
-<li><p><strong>RRFRanker（Reciprocal Rank Fusion Ranker）</strong>：特に強調する必要がない場合は、このストラテジーを選択してください。RRFRankerは、各ベクトルフィールドの重要度を効果的にバランスさせます。</p></li>
-</ul>
-<p>これら2つの再ランキング戦略のメカニズムについては、<a href="/docs/ja/weighted-ranker.md">再ランキングを</a>参照。</p>
-<p>この例では、特定の検索クエリを特に強調する必要がないため、RRFRanker戦略で進める。</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
-
-ranker = RRFRanker(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
-
-<span class="hljs-type">RRFRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> RRFRanker.builder().k(<span class="hljs-number">100</span>).build();
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-string">&quot;100&quot;</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
-        &quot;strategy&quot;: &quot;rrf&quot;,
-        &quot;params&quot;: { &quot;k&quot;: 100}
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">ハイブリッド検索の実行<button data-href="#Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+    </button></h3><p>ANN 検索結果のセットをマージしてランク付けし直すには、適切な再ランク付け戦略を選択することが 不可欠である。Milvusは数種類のリランキング戦略を提供しています。これらの再ランク付けメカニズムの詳細については、<a href="/docs/ja/reranking">再ランク付けを</a>参照してください。</p>
+<p>この例では、特定の検索クエリに特に重点を置いていないため、RRFRanker戦略で進めます。</p>
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">ステップ3：ハイブリッド検索を実行する<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -879,7 +860,7 @@ ranker = RRFRanker(<span class="hljs-number">100</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ハイブリッド検索を開始する前に、コレクションがロードされていることを確認する。コレクション内のベクトル・フィールドにインデックスがないか、メモリにロードされていない場合、ハイブリッド検索メソッドの実行時にエラーが発生します。</p>
+    </button></h3><p>ハイブリッド検索を開始する前に、コレクションがロードされていることを確認します。コレクション内のベクトル・フィールドにインデックスがなかったり、メモリにロードされていなかったりすると、ハイブリッド検索メソッドの実行時にエラーが発生する。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

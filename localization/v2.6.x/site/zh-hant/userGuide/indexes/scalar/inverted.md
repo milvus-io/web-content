@@ -19,7 +19,7 @@ summary: 當您需要對資料執行頻繁的篩選查詢時，倒轉式索引�
         ></path>
       </svg>
     </button></h1><p>當您需要對資料執行頻繁的篩選查詢時，<code translate="no">INVERTED</code> 索引可以顯著提高查詢性能。Milvus 使用倒排索引來快速找出符合篩選條件的精確記錄，而不是掃描所有文件。</p>
-<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">何時使用反轉索引<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
+<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">何時使用 INVERTED 索引<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -141,7 +141,34 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>有關 JSON 欄位索引的詳細資訊，包括支援的路徑、資料類型和限制，請參閱<a href="/docs/zh-hant/use-json-fields.md">JSON Field</a>。</p>
+<p>有關 JSON 欄位索引的詳細資訊，包括支援的路徑、資料類型和限制，請參閱<a href="/docs/zh-hant/json-indexing.md">JSON 索引</a>。</p>
+<h2 id="Drop-an-index" class="common-anchor-header">刪除索引<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>使用<code translate="no">drop_index()</code> 方法從集合中移除現有索引。</p>
+<div class="alert note">
+<ul>
+<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能刪除標量索引。</p></li>
+<li><p>從<strong>v2.6.4</strong>或更新版本開始，一旦不再需要標量索引，您就可以直接將它刪除，而不需要先釋放集合。</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;category_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Best-practices" class="common-anchor-header">最佳實務<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,5 +207,5 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>瞭解<a href="/docs/zh-hant/index-explained.md">其他索引類型</a></p></li>
-<li><p>請參閱<a href="/docs/zh-hant/use-json-fields.md#Index-values-inside-the-JSON-field">JSON 欄位索引</a>，瞭解進階的 JSON 索引情境</p></li>
+<li><p>請參閱<a href="/docs/zh-hant/json-indexing.md">JSON</a>索引，瞭解進階的 JSON 索引情境</p></li>
 </ul>

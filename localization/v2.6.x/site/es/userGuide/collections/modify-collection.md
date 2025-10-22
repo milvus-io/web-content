@@ -167,7 +167,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>El mapeo de memoria (Mmap) permite el acceso directo en memoria a grandes archivos en disco, permitiendo a Milvus almacenar índices y datos tanto en memoria como en discos duros. Este enfoque ayuda a optimizar la política de colocación de datos en función de la frecuencia de acceso, ampliando la capacidad de almacenamiento de las colecciones sin afectar al rendimiento de la búsqueda.</p><p>Para más detalles, consulte <a href="/docs/es/mmap.md">Utilizar mmap</a>.</p></td>
+     <td><p>El mapeo de memoria (Mmap) permite el acceso directo en memoria a grandes archivos en disco, permitiendo a Milvus almacenar índices y datos tanto en memoria como en discos duros. Este enfoque ayuda a optimizar la política de colocación de datos basada en la frecuencia de acceso, ampliando la capacidad de almacenamiento de las colecciones sin afectar al rendimiento de la búsqueda.</p><p>Para más detalles, consulte <a href="/docs/es/mmap.md">Utilizar mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
@@ -180,10 +180,6 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>Si se permite que una colección acepte valores de clave primaria proporcionados por el usuario cuando se ha habilitado AutoID para la colección.</p><ul><li><p>Cuando se establece en <strong>"true"</strong>: Las inserciones, upserts e importaciones masivas utilizan la clave primaria proporcionada por el usuario si está presente; de lo contrario, los valores de clave primaria se autogeneran.</p></li><li><p>Si se establece en <strong>"false"</strong>: Los valores de clave primaria proporcionados por el usuario se rechazan o ignoran y los valores de clave primaria siempre se autogeneran. El valor predeterminado es <strong>"false"</strong>.</p></li></ul></td>
-   </tr>
-   <tr>
-     <td></td>
-     <td></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Ejemplo 1: Establecer TTL de colección<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">

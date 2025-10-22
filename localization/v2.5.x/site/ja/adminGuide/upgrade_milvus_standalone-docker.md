@@ -24,9 +24,9 @@ title: Docker Composeを使用したMilvusスタンドアロンのアップグ�
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Docker Composeを使用してMilvusをアップグレードする方法について説明します。</p>
-<p>通常の場合、<a href="#Upgrade-Milvus-by-changing-its-image">イメージを変更することでMilvusをアップグレードする</a>ことができます。ただし、v2.1.xからv2.5.18にアップグレードする場合は、事前に<a href="#Migrate-the-metadata">メタデータを移行する</a>必要があります。</p>
+<p>通常の場合、<a href="#Upgrade-Milvus-by-changing-its-image">イメージを変更することでMilvusをアップグレードする</a>ことができます。ただし、v2.1.xからv2.5.19へアップグレードする場合は、事前に<a href="#Migrate-the-metadata">メタデータを移行する</a>必要があります。</p>
 <div class="alter note">
-<p>セキュリティ上の問題から、Milvusはv2.2.5のリリースと同時にMinIOをRELEASE.2023-03-20T20-16-18Zにアップグレードしています。Docker Composeを使用してインストールされた以前のMilvus Standaloneリリースからのアップグレードの前に、Single-Node Single-Drive MinIOデプロイメントを作成し、既存のMinIO設定とコンテンツを新しいデプロイメントに移行する必要があります。詳細については、<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">このガイドを</a>参照してください。</p>
+<p>セキュリティ上の問題から、Milvusはv2.2.5のリリースと同時にMinIOをRELEASE.2023-03-20T20-16-18Zにアップグレードしています。Docker Composeを使用してインストールされた以前のMilvus Standaloneリリースからアップグレードする前に、Single-Node Single-Drive MinIOデプロイメントを作成し、既存のMinIO設定とコンテンツを新しいデプロイメントに移行する必要があります。詳細については、<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">このガイドを</a>参照してください。</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">イメージを変更してMilvusをアップグレードする<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ title: Docker Composeを使用したMilvusスタンドアロンのアップグ�
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.18</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.19</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>以下のコマンドを実行してアップグレードを実行します。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.18</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.19</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>

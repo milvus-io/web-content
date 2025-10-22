@@ -117,6 +117,13 @@ summary: >-
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p>Um Vektorfelder in einem <a href="/docs/de/array-of-structs.md">Array of Structs-Feld</a> zu indizieren, sollten Sie <code translate="no">MAX_SIM</code> dem oben genannten Satz metrischer Typen vorangestellt werden, basierend auf den in diesen Feldern gespeicherten Vektoreinbettungen. Zum Beispiel,</p>
+<ul>
+<li><p>Für ein Vektorfeld, das Vektoreinbettungen des Typs <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code> oder <code translate="no">INT8_VECTOR</code> speichert, können Sie <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code> oder <code translate="no">MAX_SIM_L2</code> als metrischen Typ verwenden.</p></li>
+<li><p>Für ein Vektorfeld, das Vektoreinbettungen des Typs <code translate="no">BINARY_VECTOR</code> speichert, können Sie <code translate="no">MAX_SIM_JACCADR</code> oder <code translate="no">MAX_SIM_HAMMING</code> als metrischen Typ verwenden.</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">Euklidischer Abstand (L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

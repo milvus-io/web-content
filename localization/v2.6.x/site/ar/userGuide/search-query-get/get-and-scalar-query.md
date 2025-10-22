@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>بالإضافة إلى عمليات بحث ANN، يدعم ميلفوس أيضًا تصفية البيانات الوصفية من خلال الاستعلامات. تقدم هذه الصفحة كيفية استخدام الاستعلام، والحصول، والاستعلامات لإجراء تصفية البيانات الوصفية للبيانات الوصفية.</p>
 <div class="alert note">
-<p>إذا قمت بإضافة حقول جديدة ديناميكيًا بعد إنشاء المجموعة، فإن الاستعلامات التي تتضمن هذه الحقول ستُرجع القيم الافتراضية المحددة أو NULL للكيانات التي لم تقم بتعيين قيم محددة بشكل صريح. لمزيد من التفاصيل، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</p>
+<p>إذا قمت بإضافة حقول جديدة ديناميكيًا بعد إنشاء المجموعة، فإن الاستعلامات التي تتضمن هذه الحقول ستُرجع القيم الافتراضية المحددة أو NULL للكيانات التي لم تقم بتعيين قيم محددة بشكل صريح. للحصول على التفاصيل، راجع <a href="/docs/ar/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,36 +62,15 @@ summary: >-
    </tr>
    <tr>
      <td><p>معلمات إلزامية</p></td>
-     <td><ul>
-<li>اسم المجموعة</li>
-<li>المفاتيح الأساسية</li>
-</ul></td>
-     <td><ul>
-<li>اسم المجموعة</li>
-<li>تعبيرات التصفية</li>
-</ul></td>
-     <td><ul>
-<li><p>اسم المجموعة</p></li>
-<li><p>تعبيرات التصفية</p></li>
-<li><p>عدد الكيانات المراد إرجاعها لكل استعلام</p></li>
-</ul></td>
+     <td><ul><li><p>اسم المجموعة</p></li><li><p>المفاتيح الأساسية</p></li></ul></td>
+     <td><ul><li><p>اسم المجموعة</p></li><li><p>تعبيرات التصفية</p></li></ul></td>
+     <td><ul><li><p>اسم المجموعة</p></li><li><p>تعبيرات التصفية</p></li><li><p>عدد الكيانات المراد إرجاعها لكل استعلام</p></li></ul></td>
    </tr>
    <tr>
      <td><p>معلمات اختيارية</p></td>
-     <td><ul>
-<li>اسم القسم</li>
-<li>حقول الإخراج</li>
-</ul></td>
-     <td><ul>
-<li><p>اسم القسم</p></li>
-<li><p>عدد الكيانات المطلوب إرجاعها</p></li>
-<li><p>حقول الإخراج</p></li>
-</ul></td>
-     <td><ul>
-<li><p>اسم القسم</p></li>
-<li><p>عدد الكيانات المراد إرجاعها إجمالاً</p></li>
-<li><p>حقول الإخراج</p></li>
-</ul></td>
+     <td><ul><li><p>اسم القسم</p></li><li><p>حقول الإخراج</p></li></ul></td>
+     <td><ul><li><p>اسم القسم</p></li><li><p>عدد الكيانات المطلوب إرجاعها</p></li><li><p>حقول الإخراج</p></li></ul></td>
+     <td><ul><li><p>اسم القسم</p></li><li><p>عدد الكيانات المراد إرجاعها إجمالاً</p></li><li><p>حقول الإخراج</p></li></ul></td>
    </tr>
    <tr>
      <td><p>إرجاع</p></td>
@@ -116,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عندما تحتاج إلى البحث عن كيانات حسب مفاتيحها الأساسية، يمكنك استخدام الأسلوب <strong>Get</strong>. تفترض الأمثلة البرمجية التالية أن هناك ثلاثة حقول مسماة <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> في مجموعتك وإرجاع الكيانات ذات المفاتيح الأساسية <code translate="no">1</code> و <code translate="no">2</code> و <code translate="no">3</code>.</p>
+    </button></h2><p>عندما تحتاج إلى البحث عن كيانات حسب مفاتيحها الأساسية، يمكنك استخدام الأسلوب <strong>Get</strong>. وتفترض الأمثلة البرمجية التالية وجود ثلاثة حقول باسم <code translate="no">id</code> و <code translate="no">vector</code> و <code translate="no">color</code> في مجموعتك.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -132,7 +111,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك الحصول على الكيانات حسب معرّفاتها على النحو التالي.</p>
 <div class="multipleCode">
-   <a href="#python">بيثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -446,7 +425,7 @@ results = []
       </svg>
     </button></h2><p>يمكنك أيضًا إجراء استعلامات ضمن قسم واحد أو عدة أقسام من خلال تضمين أسماء الأقسام في طلب الحصول أو الاستعلام أو الاستعلام أو الاستعلام المتكرر. تفترض الأمثلة البرمجية التالية وجود قسم باسم <strong>PartitionA</strong> في المجموعة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,

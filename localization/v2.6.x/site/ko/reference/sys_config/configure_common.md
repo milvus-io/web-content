@@ -542,7 +542,7 @@ summary: Milvus에 공통을 구성하는 방법을 알아보세요.
   <tbody>
     <tr>
       <td>        클러스터 수준 관리자 권한      </td>
-      <td>데이터베이스 목록, 소유권 선택, 사용자 선택, 자원 그룹 설명, 자원 그룹 목록, 권한 그룹 목록, 모두 플러시, 전송 노드, 전송 복제본, 자원 그룹 업데이트, 백업 RBAC, 복원 RBAC, 데이터베이스 만들기,데이터베이스 삭제,소유권 만들기,소유권 삭제,소유권 관리,리소스 그룹 만들기,리소스 그룹 삭제,사용자 업데이트,컬렉션 이름 바꾸기,권한 그룹 만들기,권한 그룹 삭제,권한 그룹 작동</td>
+      <td>데이터베이스 목록, 소유권 선택, 사용자 선택, 리소스 그룹 설명, 리소스 그룹 목록, 권한 그룹 목록, 모두 플러시, 전송 노드, 전송 복제본, 리소스 그룹 업데이트, 백업 RBAC, 복원 RBAC, 데이터베이스 만들기,데이터베이스 삭제,소유권 만들기,소유권 삭제,소유권 관리,리소스 그룹 만들기,리소스 그룹 삭제,사용자 업데이트,컬렉션 이름 바꾸기,권한 그룹 만들기,권한 그룹 삭제,권한 그룹 작동</td>
     </tr>
   </tbody>
 </table>
@@ -1242,6 +1242,40 @@ summary: Milvus에 공통을 구성하는 방법을 알아보세요.
     <tr>
       <td>        작업이 완료될 때까지 기다렸다가 풀에서 리소스를 해제할 최대 시간입니다.      </td>
       <td>60</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonclusterID" class="common-anchor-header"><code translate="no">common.clusterID</code><button data-href="#commonclusterID" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.clusterID">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>여러 Milvus 클러스터에서 전역 고유성을 보장하기 위해 AutoID 생성에 사용되는 클러스터의 고유 식별자입니다.</li>      
+        <li>유효한 값 [0, 1, 2, 3, 4, 5, 6, 7](최대 8개 클러스터 지원)</li>      
+        <li>여러 클러스터를 실행할 때 자동 ID 중복을 방지하기 위해 각 클러스터에는 고유한 클러스터ID가 있어야 합니다.</li>      
+        <li>이 ID는 cluster_id 세그먼트의 일부로 64비트 AutoID 구조에 포함되어 있습니다.</li>      
+        <li>자세한 내용은 <a href="/docs/ko/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">기본 필드 및 AutoID를</a> 참조하세요.</li>      </td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>

@@ -163,7 +163,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Se i dati di una collezione devono essere eliminati dopo un periodo specifico, si può impostare il suo Time-To-Live (TTL) in secondi. Una volta scaduto il TTL, Milvus cancella tutte le entità della collezione. </p><p>La cancellazione è asincrona, il che significa che le ricerche e le interrogazioni sono ancora possibili prima che la cancellazione sia completata.</p><p>Per maggiori dettagli, consultare la sezione <a href="/docs/it/set-collection-ttl.md">Impostare il TTL della collezione</a>.</p></td>
+     <td><p>Se i dati di una raccolta devono essere eliminati dopo un periodo specifico, si può impostare il suo Time-To-Live (TTL) in secondi. Una volta scaduto il TTL, Milvus cancella tutte le entità della collezione. </p><p>La cancellazione è asincrona, il che significa che le ricerche e le interrogazioni sono ancora possibili prima che la cancellazione sia completata.</p><p>Per maggiori dettagli, consultare la sezione <a href="/docs/it/set-collection-ttl.md">Impostare il TTL della collezione</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
@@ -180,10 +180,6 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>Se consentire a una collezione di accettare valori di chiave primaria forniti dall'utente quando l'AutoID è stato abilitato per la collezione.</p><ul><li><p>Se impostato su <strong>"true"</strong>: Gli inserimenti, gli upsert e le importazioni massicce utilizzano la chiave primaria fornita dall'utente, se presente; altrimenti, i valori della chiave primaria vengono generati automaticamente.</p></li><li><p>Se impostato su <strong>"false"</strong>: I valori delle chiavi primarie forniti dall'utente vengono rifiutati o ignorati e i valori delle chiavi primarie vengono sempre generati automaticamente. L'impostazione predefinita è <strong>"false"</strong>.</p></li></ul></td>
-   </tr>
-   <tr>
-     <td></td>
-     <td></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Esempio 1: Impostare il TTL della raccolta<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">

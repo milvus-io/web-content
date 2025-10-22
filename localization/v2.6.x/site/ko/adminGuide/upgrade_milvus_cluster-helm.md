@@ -23,7 +23,7 @@ title: 헬름 차트로 밀버스 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드는 헬름 차트를 사용하여 Milvus 클러스터를 v2.5.x에서 v2.6.3으로 업그레이드하는 방법을 설명한다.</p>
+    </button></h1><p>이 가이드는 헬름 차트를 사용하여 Milvus 클러스터를 v2.5.x에서 v2.6.4로 업그레이드하는 방법을 설명한다.</p>
 <h2 id="Before-you-start" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: 헬름 차트로 밀버스 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v263" class="common-anchor-header">v2.6.3의 새로운 기능<button data-href="#Whats-new-in-v263" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v264" class="common-anchor-header">v2.6.4의 새로운 기능<button data-href="#Whats-new-in-v264" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,7 +54,7 @@ title: 헬름 차트로 밀버스 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 2.5.x에서 2.6.3으로 업그레이드하려면 아키텍처가 크게 변경됩니다:</p>
+    </button></h3><p>Milvus 2.5.x에서 2.6.4로 업그레이드하려면 아키텍처가 크게 변경됩니다:</p>
 <ul>
 <li><strong>코디네이터 통합</strong>: 기존의 개별 코디네이터 (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>)가 단일 코디네이터로 통합되었습니다. <code translate="no">mixCoord</code></li>
 <li><strong>새로운 구성 요소</strong>: 향상된 데이터 처리를 위한 스트리밍 노드 도입</li>
@@ -84,11 +84,11 @@ title: 헬름 차트로 밀버스 클러스터 업그레이드하기
 </ul>
 <p><strong>호환성 요구 사항:</strong></p>
 <ul>
-<li>밀버스 v2.6.0-rc1은 v2.6.3과 <strong>호환되지 않는다</strong>. 릴리스 후보에서 직접 업그레이드하는 것은 지원되지 않는다.</li>
+<li>밀버스 v2.6.0-rc1은 v2.6.4와 <strong>호환되지 않는다</strong>. 릴리스 후보에서 직접 업그레이드하는 것은 지원되지 않는다.</li>
 <li>현재 v2.6.0-rc1을 실행 중이며 데이터를 보존해야 하는 경우 <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">이 커뮤니티 가이드에서</a> 마이그레이션 지원을 참조하세요.</li>
-<li>v2.6.3으로 업그레이드하기 전에 <code translate="no">mixCoordinator</code> 을 활성화하여 v2.5.16 이상으로 <strong>업그레이드해야</strong> 합니다.</li>
+<li>v2.6.4로 업그레이드하기 전에 <code translate="no">mixCoordinator</code> 을 활성화하여 v2.5.16 이상으로 <strong>업그레이드해야</strong> 합니다.</li>
 </ul>
-<p><strong>메시지 큐 제한</strong>: Milvus v2.6.3으로 업그레이드할 때 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중에 다른 메시지 큐 시스템 간에 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한</strong>: Milvus v2.6.4로 업그레이드할 때 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중에 다른 메시지 큐 시스템 간에 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <div class="alert note">
 밀버스 헬름 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속성으로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가해야 한다.</div>
 <h2 id="Upgrade-process" class="common-anchor-header">업그레이드 프로세스<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
@@ -131,7 +131,7 @@ helm repo update zilliztech
 <pre><code translate="no" class="language-bash">helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <p>이 가이드는 최신 버전을 설치한다고 가정합니다. 특정 버전을 설치해야 하는 경우 그에 따라 <code translate="no">--version</code> 매개 변수를 지정하세요.</p>
-<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">2단계: mixCoordinator로 v2.5.16으로 업그레이드하기<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-to-v2516-with-mixCoordinator" class="common-anchor-header">2단계: mixCoordinator를 사용하여 v2.5.16으로 업그레이드하기<button data-href="#Step-2-Upgrade-to-v2516-with-mixCoordinator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,7 +172,7 @@ helm repo update zilliztech
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v263" class="common-anchor-header">3단계: v2.6.3으로 업그레이드하기<button data-href="#Step-3-Upgrade-to-v263" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v264" class="common-anchor-header">3단계: v2.6.4로 업그레이드하기<button data-href="#Step-3-Upgrade-to-v264" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,9 +187,9 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>v2.5.16이 <code translate="no">mixCoordinator</code> 에서 성공적으로 실행되면 v2.6.3으로 업그레이드합니다:</p>
+    </button></h3><p>v2.5.16이 <code translate="no">mixCoordinator</code> 에서 성공적으로 실행되면 v2.6.4로 업그레이드합니다:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.3&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.4&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span> \
   --reset-then-reuse-values \

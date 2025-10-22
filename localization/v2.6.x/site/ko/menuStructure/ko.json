@@ -56,15 +56,9 @@
         "children": []
       },
       {
-        "label": "검색을 위한 데이터 모델 설계",
-        "id": "schema-hands-on.md",
-        "order": 1,
-        "children": []
-      },
-      {
         "label": "Milvus 설치",
         "id": "install_milvus",
-        "order": 2,
+        "order": 1,
         "isMenu": true,
         "children": [
           {
@@ -174,7 +168,7 @@
       {
         "label": "SDK 설치",
         "id": "install_sdks",
-        "order": 3,
+        "order": 2,
         "children": [
           {
             "label": "PyMilvus",
@@ -205,7 +199,7 @@
       {
         "label": "Milvus 서버에 연결",
         "id": "connect-to-milvus-server.md",
-        "order": 4,
+        "order": 3,
         "children": []
       }
     ]
@@ -462,21 +456,33 @@
             "children": []
           },
           {
+            "label": "구조체 배열",
+            "id": "array-of-structs.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "지오메트리 필드",
+            "id": "geometry-field.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "다이내믹 필드",
             "id": "enable-dynamic-field.md",
-            "order": 9,
+            "order": 12,
             "children": []
           },
           {
             "label": "무효화 가능 및 기본값",
             "id": "nullable-and-default.md",
-            "order": 10,
+            "order": 13,
             "children": []
           },
           {
             "label": "분석기",
             "id": "analyzer",
-            "order": 11,
+            "order": 14,
             "children": [
               {
                 "label": "분석기 개요",
@@ -642,14 +648,34 @@
           {
             "label": "수집 필드 변경",
             "id": "alter-collection-field.md",
-            "order": 12,
+            "order": 15,
             "children": []
           },
           {
             "label": "기존 컬렉션에 필드 추가",
             "id": "add-fields-to-an-existing-collection.md",
-            "order": 13,
+            "order": 16,
             "children": []
+          },
+          {
+            "label": "모범 사례",
+            "id": "best-practices",
+            "isMenu": true,
+            "order": 17,
+            "children": [
+              {
+                "label": "검색을 위한 데이터 모델 설계",
+                "id": "schema-hands-on.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "구조 배열을 사용한 데이터 모델 설계",
+                "id": "best-practices-for-array-of-structs.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -761,6 +787,12 @@
                 "id": "scann.md",
                 "order": 10,
                 "children": []
+              },
+              {
+                "label": "AISAQ",
+                "id": "aisaq.md",
+                "order": 11,
+                "children": []
               }
             ]
           },
@@ -826,6 +858,12 @@
                 "label": "NGRAM",
                 "id": "ngram.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "RTREE",
+                "id": "rtree.md",
+                "order": 3,
                 "children": []
               }
             ]
@@ -950,6 +988,12 @@
                 "label": "무작위 샘플링",
                 "id": "random-sampling.md",
                 "order": 5,
+                "children": []
+              },
+              {
+                "label": "지오메트리 연산자",
+                "id": "geometry-operators.md",
+                "order": 6,
                 "children": []
               }
             ]
@@ -1193,6 +1237,38 @@
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "계층형 스토리지",
+            "id": "tiered_storage",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "계층형 스토리지 개요",
+                "id": "tiered-storage-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "워밍업",
+                "id": "warm-up.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "퇴거",
+                "id": "eviction.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "계층형 스토리지 모범 사례",
+                "id": "best-practices-for-tiered-storage.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       }
@@ -2360,7 +2436,7 @@
             "children": []
           },
           {
-            "label": "12개의 실험실",
+            "label": "12개의 랩",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -2403,7 +2479,7 @@
             "children": []
           },
           {
-            "label": "SiliconFlow",
+            "label": "실리콘 플로우",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []

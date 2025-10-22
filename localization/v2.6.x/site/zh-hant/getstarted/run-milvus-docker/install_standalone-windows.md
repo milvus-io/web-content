@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>在管理員模式中開啟 Docker Desktop，方法是按滑鼠右鍵並選擇<strong>以管理員身分執行</strong>。</p></li>
 <li><p>在 PowerShell 或 Windows Command Prompt 執行下列指令，為 Milvus Standalone 下載 Docker Compose 配置檔案，並啟動 Milvus。</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>下載 Milvus 配置檔案。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>啟動 Milvus。</p>
@@ -275,7 +275,7 @@ Creating milvus-standalone ... done​
     </button></h3><p>當您在 Windows 安裝 Docker Desktop 後，如果您的電腦沒有正確設定，您可能會遇到<code translate="no">Docker Engine stopped</code> 錯誤。在這種情況下，您可能需要進行以下檢查。</p>
 <ol>
 <li><p>檢查是否已啟用虛擬化。</p>
-<p>您可以查看「<strong>任務管理員</strong>」中的「<strong>效能</strong>」索引標籤，檢查虛擬化是否已啟用。</p>
+<p>您可以查看「<strong>任務管理員</strong>」中的「<strong>效能</strong>」索引標籤，以檢查虛擬化是否已啟用。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />

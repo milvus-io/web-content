@@ -179,10 +179,6 @@ curl --request POST \
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>컬렉션에 대해 AutoID가 활성화된 경우 컬렉션에서 사용자가 제공한 기본 키 값을 허용할지 여부입니다.</p><ul><li><p><strong>"true"</strong>로 설정하면: 삽입, 업서트 및 대량 가져오기는 사용자가 제공한 기본 키가 있는 경우 해당 기본 키를 사용하며, 그렇지 않으면 기본 키 값이 자동으로 생성됩니다.</p></li><li><p><strong>"false"</strong>로 설정된 경우: 사용자가 제공한 기본 키 값이 거부되거나 무시되며 기본 키 값은 항상 자동 생성됩니다. 기본값은 <strong>"false"</strong>입니다.</p></li></ul></td>
    </tr>
-   <tr>
-     <td></td>
-     <td></td>
-   </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">예 1: 컬렉션 TTL 설정<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"

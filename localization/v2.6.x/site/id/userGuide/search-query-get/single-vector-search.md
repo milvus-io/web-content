@@ -136,6 +136,7 @@ res = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
         .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
         .topK(<span class="hljs-number">3</span>)
         .build();
 
@@ -254,7 +255,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus mengurutkan hasil pencarian berdasarkan skor kemiripannya dengan vektor kueri dalam urutan menurun. Skor kemiripan juga disebut sebagai jarak ke vektor kueri, dan rentang nilainya bervariasi dengan jenis metrik yang digunakan.</p>
+<p>Milvus mengurutkan hasil pencarian berdasarkan nilai kemiripannya dengan vektor kueri dalam urutan menurun. Skor kemiripan juga disebut sebagai jarak ke vektor kueri, dan rentang nilainya bervariasi dengan jenis metrik yang digunakan.</p>
 <p>Tabel berikut mencantumkan jenis metrik yang berlaku dan rentang jarak yang sesuai.</p>
 <table>
    <tr>
@@ -517,7 +518,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Misalkan Anda telah membuat beberapa partisi dalam sebuah koleksi, dan Anda dapat mempersempit cakupan pencarian ke sejumlah partisi tertentu. Dalam hal ini, Anda dapat menyertakan nama partisi target dalam permintaan pencarian untuk membatasi cakupan pencarian dalam partisi tertentu. Mengurangi jumlah partisi yang terlibat dalam pencarian akan meningkatkan kinerja pencarian.</p>
+    </button></h2><p>Misalkan Anda telah membuat beberapa partisi dalam koleksi, dan Anda dapat mempersempit cakupan pencarian ke sejumlah partisi tertentu. Dalam hal ini, Anda dapat menyertakan nama partisi target dalam permintaan pencarian untuk membatasi cakupan pencarian dalam partisi yang ditentukan. Mengurangi jumlah partisi yang terlibat dalam pencarian akan meningkatkan kinerja pencarian.</p>
 <p>Cuplikan kode berikut ini mengasumsikan partisi bernama <strong>PartitionA</strong> dalam koleksi Anda.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -671,7 +672,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam hasil pencarian, Milvus menyertakan nilai bidang utama dan jarak/skor kemiripan dari entitas yang mengandung sematan vektor K teratas secara default. Anda dapat menyertakan nama-nama bidang target, termasuk bidang vektor dan skalar, dalam permintaan pencarian sebagai bidang keluaran untuk membuat hasil pencarian membawa nilai-nilai dari bidang lain dalam entitas-entitas ini.</p>
+    </button></h2><p>Dalam hasil pencarian, Milvus menyertakan nilai bidang utama dan jarak/kemiripan skor dari entitas yang mengandung sematan vektor top-K secara default. Anda dapat menyertakan nama-nama bidang target, termasuk bidang vektor dan skalar, dalam permintaan pencarian sebagai bidang keluaran untuk membuat hasil pencarian membawa nilai dari bidang lain dalam entitas ini.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -818,7 +819,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Limit-and-Offset" class="common-anchor-header">Menggunakan Limit dan Offset<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
+<h2 id="Use-Limit-and-Offset" class="common-anchor-header">Gunakan Batas dan Offset<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -968,7 +969,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX sangat meratakan kurva pembelajaran pencarian ANN. Namun, hasil pencarian mungkin tidak selalu benar seiring dengan meningkatnya top-K. Dengan mengurangi cakupan pencarian, meningkatkan relevansi hasil pencarian, dan mendiversifikasi hasil pencarian, Milvus melakukan peningkatan pencarian berikut ini.</p>
+    </button></h2><p>AUTOINDEX meratakan kurva pembelajaran pencarian ANN. Namun, hasil pencarian mungkin tidak selalu benar seiring dengan meningkatnya top-K. Dengan mengurangi cakupan pencarian, meningkatkan relevansi hasil pencarian, dan mendiversifikasi hasil pencarian, Milvus melakukan peningkatan pencarian berikut ini.</p>
 <ul>
 <li><p>Pencarian yang Difilter</p>
 <p>Anda dapat menyertakan kondisi pemfilteran dalam permintaan pencarian sehingga Milvus melakukan pemfilteran metadata sebelum melakukan pencarian ANN, mengurangi cakupan pencarian dari seluruh koleksi menjadi hanya entitas yang sesuai dengan kondisi pemfilteran yang ditentukan.</p>
@@ -980,7 +981,7 @@ curl --request POST \
 <p>Jika entitas yang dikembalikan memiliki nilai yang sama di bidang tertentu, hasil pencarian mungkin tidak mewakili distribusi semua sematan vektor di ruang vektor. Untuk mendiversifikasi hasil pencarian, pertimbangkan untuk menggunakan pencarian pengelompokan.</p>
 <p>Untuk mengetahui lebih lanjut tentang pencarian pengelompokan, lihat <a href="/docs/id/grouping-search.md">Pencarian Pengelompokan</a>,</p></li>
 <li><p>Pencarian Hibrida</p>
-<p>Sebuah koleksi dapat mencakup hingga empat bidang vektor untuk menyimpan penyematan vektor yang dihasilkan menggunakan model penyematan yang berbeda. Dengan demikian, Anda dapat menggunakan pencarian hibrida untuk memberi peringkat ulang hasil pencarian dari bidang vektor ini, sehingga meningkatkan tingkat penemuan kembali.</p>
+<p>Sebuah koleksi dapat menyertakan beberapa bidang vektor untuk menyimpan penyematan vektor yang dihasilkan menggunakan model penyematan yang berbeda. Dengan demikian, Anda dapat menggunakan pencarian hibrida untuk memberi peringkat ulang hasil pencarian dari bidang vektor ini, sehingga meningkatkan tingkat penemuan kembali.</p>
 <p>Untuk mengetahui lebih lanjut tentang pencarian hibrida, lihat <a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a>.</p></li>
 <li><p>Iterator Pencarian</p>
 <p>Satu pencarian ANN mengembalikan maksimal 16.384 entitas. Pertimbangkan untuk menggunakan iterator pencarian jika Anda membutuhkan lebih banyak entitas untuk dikembalikan dalam satu pencarian.</p>
@@ -988,8 +989,8 @@ curl --request POST \
 <li><p>Pencarian Teks Lengkap</p>
 <p>Pencarian teks lengkap adalah fitur yang mengambil dokumen yang mengandung istilah atau frasa tertentu dalam kumpulan data teks, lalu memberi peringkat hasil berdasarkan relevansi. Fitur ini mengatasi keterbatasan pencarian semantik, yang mungkin mengabaikan istilah yang tepat, sehingga memastikan Anda menerima hasil yang paling akurat dan relevan secara kontekstual. Selain itu, fitur ini menyederhanakan pencarian vektor dengan menerima input teks mentah, secara otomatis mengubah data teks Anda menjadi sematan yang jarang tanpa perlu membuat sematan vektor secara manual.</p>
 <p>Untuk detail tentang pencarian teks lengkap, lihat <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
-<li><p>Pencocokan Kata Kunci</p>
-<p>Pencocokan kata kunci di Milvus memungkinkan pengambilan dokumen yang tepat berdasarkan istilah tertentu. Fitur ini terutama digunakan untuk pencarian yang difilter untuk memenuhi kondisi tertentu dan dapat menggabungkan pemfilteran skalar untuk menyempurnakan hasil kueri, sehingga memungkinkan pencarian kemiripan dalam vektor yang memenuhi kriteria skalar.</p>
+<li><p>Pencocokan Teks</p>
+<p>Pencocokan kata kunci di Milvus memungkinkan pengambilan dokumen yang tepat berdasarkan istilah tertentu. Fitur ini terutama digunakan untuk pencarian yang difilter untuk memenuhi kondisi tertentu dan dapat menggabungkan pemfilteran skalar untuk menyaring hasil kueri, sehingga memungkinkan pencarian kemiripan dalam vektor yang memenuhi kriteria skalar.</p>
 <p>Untuk detail tentang pencocokan kata kunci, lihat <a href="/docs/id/keyword-match.md">Pencocokan Kata Kunci</a>.</p></li>
 <li><p>Gunakan Kunci Partisi</p>
 <p>Melibatkan beberapa bidang skalar dalam pemfilteran metadata dan menggunakan kondisi pemfilteran yang agak rumit dapat memengaruhi efisiensi pencarian. Setelah Anda menetapkan bidang skalar sebagai kunci partisi dan menggunakan kondisi pemfilteran yang melibatkan kunci partisi dalam permintaan pencarian, hal ini dapat membantu membatasi cakupan pencarian di dalam partisi yang sesuai dengan nilai kunci partisi yang ditentukan.</p>
@@ -998,4 +999,6 @@ curl --request POST \
 <p>Untuk detail tentang pengaturan mmap, lihat <a href="/docs/id/mmap.md">Menggunakan mmap</a>.</p></li>
 <li><p>Pemadatan Pengelompokan</p>
 <p>Untuk detail tentang pemadatan pengelompokan, lihat <a href="/docs/id/clustering-compaction.md">Pemadatan Pengel</a>ompokan.</p></li>
+<li><p>Menggunakan pemeringkatan</p>
+<p>Untuk detail tentang penggunaan pemeringkat untuk meningkatkan relevansi hasil penelusuran, lihat <a href="/docs/id/decay-ranker-overview.md">Ikhtisar</a> Pemeringkat <a href="/docs/id/decay-ranker-overview.md">Peluruhan</a> dan <a href="/docs/id/model-ranker-overview.md">Ikhtisar Pemeringkat Model</a>.</p></li>
 </ul>

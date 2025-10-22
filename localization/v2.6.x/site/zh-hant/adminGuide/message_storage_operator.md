@@ -60,7 +60,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 </ul></li>
 <li>當 Milvus 系統在執行時，訊息儲存是無法改變的。</li>
 <li>僅支援 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.3時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
+<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.4時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

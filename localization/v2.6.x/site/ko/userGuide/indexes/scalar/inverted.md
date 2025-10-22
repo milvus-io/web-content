@@ -143,7 +143,34 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>지원되는 경로, 데이터 유형 및 제한 사항 등 JSON 필드 인덱싱에 대한 자세한 내용은 <a href="/docs/ko/use-json-fields.md">JSON 필드를</a> 참조하세요.</p>
+<p>지원되는 경로, 데이터 유형 및 제한 사항 등 JSON 필드 인덱싱에 대한 자세한 내용은 <a href="/docs/ko/json-indexing.md">JSON 인덱싱을</a> 참조하세요.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">인덱스 삭제<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>컬렉션에서 기존 인덱스를 제거하려면 <code translate="no">drop_index()</code> 메서드를 사용합니다.</p>
+<div class="alert note">
+<ul>
+<li><p><strong>v2.6.3</strong> 이전 버전에서는 스칼라 인덱스를 삭제하기 전에 컬렉션을 해제해야 합니다.</p></li>
+<li><p><strong>v2.6.4</strong> 이상에서는 더 이상 필요하지 않은 경우 컬렉션을 먼저 릴리스할 필요 없이 바로 스칼라 인덱스를 삭제할 수 있습니다.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;category_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Best-practices" class="common-anchor-header">모범 사례<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +187,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>데이터를 로드한 후 인덱스를 만듭니다</strong>: 이미 데이터가 포함된 컬렉션에 인덱스를 작성하여 성능을 개선하세요.</p></li>
+<li><p><strong>데이터를 로드한 후 인덱스를 만듭니다</strong>: 이미 데이터가 들어 있는 컬렉션에 인덱스를 만들어 성능을 개선하세요.</p></li>
 <li><p><strong>설명이 포함된 인덱스 이름을 사용하세요</strong>: 필드와 목적을 명확하게 나타내는 이름을 선택하세요.</p></li>
 <li><p><strong>인덱스 성능 모니터링</strong>: 인덱스 생성 전후의 쿼리 성능 확인</p></li>
 <li><p><strong>쿼리 패턴을 고려하세요</strong>: 자주 필터링하는 필드에 인덱스 만들기</p></li>
@@ -182,5 +209,5 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p><a href="/docs/ko/index-explained.md">다른 인덱스 유형에</a> 대해 알아보기</p></li>
-<li><p>고급 JSON 인덱싱 시나리오는 <a href="/docs/ko/use-json-fields.md#Index-values-inside-the-JSON-field">JSON 필드 인덱싱을</a> 참조하세요.</p></li>
+<li><p>고급 JSON 인덱싱 시나리오는 <a href="/docs/ko/json-indexing.md">JSON</a> 인덱싱을 참조하세요.</p></li>
 </ul>

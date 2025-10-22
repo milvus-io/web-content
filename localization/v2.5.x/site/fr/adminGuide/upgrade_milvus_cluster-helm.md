@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez choisir le chemin de mise à niveau pour votre Milvus comme suit :</p>
-<div style="display: none;">- [Effectuer une mise à niveau continue](#conduct-a-rolling-upgrade) de Milvus v2.2.3 et versions ultérieures vers v2.5.18.</div>
+<div style="display: none;">- [Effectuer une mise à niveau continue](#conduct-a-rolling-upgrade) de Milvus v2.2.3 et versions ultérieures vers v2.5.19.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Mettre à niveau Milvus à l'aide de Helm</a> pour une mise à niveau d'une version mineure antérieure à v2.2.3 vers v2.5.18.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrer les métadonnées</a> avant la mise à niveau de Milvus v2.1.x vers v2.5.18.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Mettre à niveau Milvus à l'aide de Helm</a> pour une mise à niveau d'une version mineure antérieure à v2.2.3 vers v2.5.19.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrer les métadonnées</a> avant la mise à niveau de Milvus v2.1.x vers v2.5.19.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Effectuer une mise à niveau continue<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -130,7 +130,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
         ></path>
       </svg>
     </button></h2><p>Depuis Milvus 2.2.3, vous pouvez configurer les coordinateurs Milvus pour qu'ils fonctionnent en mode actif-veille et activer la fonction de mise à niveau continue pour eux, afin que Milvus puisse répondre aux demandes entrantes pendant les mises à niveau des coordinateurs. Dans les versions précédentes, les coordinateurs doivent être supprimés puis créés lors d'une mise à niveau, ce qui peut entraîner certains temps d'arrêt du service.</p>
-<p>Les mises à niveau en continu exigent que les coordinateurs fonctionnent en mode actif-veille. Vous pouvez utiliser <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">le script</a> que nous fournissons pour configurer les coordinateurs afin qu'ils travaillent en mode de veille active et lancer la mise à jour continue.</p>
+<p>Les mises à niveau en continu exigent que les coordinateurs fonctionnent en mode actif-veille. Vous pouvez utiliser <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">le script</a> que nous fournissons pour configurer les coordinateurs afin qu'ils travaillent en mode veille active et lancer la mise à jour continue.</p>
 <p>Basé sur les capacités de mise à jour continue fournies par Kubernetes, le script ci-dessus applique une mise à jour ordonnée des déploiements en fonction de leurs dépendances. En outre, Milvus met en œuvre un mécanisme garantissant que ses composants restent compatibles avec ceux qui en dépendent pendant la mise à niveau, ce qui réduit considérablement les temps d'arrêt potentiels des services.</p>
 <p>Le script s'applique uniquement à la mise à niveau de Milvus installé avec Helm. Le tableau suivant répertorie les drapeaux de commande disponibles dans les scripts.</p>
 <table>
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Fonctionnement</td><td><code translate="no">update</code></td><td>Faux</td></tr>
 </tbody>
 </table>
-<p>Une fois que vous vous êtes assuré que tous les déploiements de votre instance Milvus sont dans leur état normal. Vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers la version 2.5.18.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.18 -w &#x27;milvusdb/milvus:v2.5.18&#x27;
+<p>Une fois que vous vous êtes assuré que tous les déploiements de votre instance Milvus sont dans leur état normal, vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers la version 2.5.19. Vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers la version 2.5.19.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.19 -w &#x27;milvusdb/milvus:v2.5.19&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -290,7 +290,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h3><p>Un changement majeur dans Milvus 2.2 est la structure des métadonnées des index de segments. Par conséquent, vous devez utiliser Helm pour migrer les métadonnées lors de la mise à niveau de Milvus de la version 2.1.x à la version 2.2.0. Voici un <a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">script</a> qui vous permettra de migrer vos métadonnées en toute sécurité.</p>
-<p>Ce script ne s'applique qu'à Milvus installé sur un cluster K8s. Revenez d'abord à la version précédente à l'aide de l'opération de retour en arrière si une erreur se produit au cours du processus.</p>
+<p>Ce script ne s'applique qu'à Milvus installé sur un cluster K8s. Revenez d'abord à la version précédente à l'aide de l'opération de retour en arrière si une erreur se produit pendant le processus.</p>
 <p>Le tableau suivant répertorie les opérations que vous pouvez effectuer pour la migration des métadonnées.</p>
 <table>
 <thead>

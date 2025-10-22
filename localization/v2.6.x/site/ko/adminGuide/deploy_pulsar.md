@@ -22,7 +22,7 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
     </button></h1><p>Milvus는 최근 변경 사항의 로그 관리, 스트림 로그 출력, 로그 구독 제공을 위해 Pulsar 또는 Kafka를 사용합니다. 기본 메시지 저장 시스템은 Pulsar입니다. 이 항목에서는 Docker Compose 또는 Helm으로 메시지 저장소를 구성하는 방법을 소개합니다.</p>
 <p><a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> 또는 K8에서 Pulsar를 구성하고 K8에서 Kafka를 구성할 수 있습니다.</p>
 <div class="alert note">
-<p><strong>메시지 큐 제한</strong>: Milvus v2.6.3으로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중 다른 메시지 큐 시스템 간 전환은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한</strong>: Milvus v2.6.4로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중 다른 메시지 큐 시스템 간 전환은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker Compose로 Pulsar 구성하기<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,7 +96,7 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
         ></path>
       </svg>
     </button></h2><p>K8의 Milvus 클러스터의 경우, Milvus를 시작하는 것과 동일한 명령으로 Pulsar를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> 리포지토리의 /charts/milvus 경로에 있는 <code translate="no">values.yml</code> 파일을 사용하여 Pulsar를 구성할 수 있습니다.</p>
-<p>헬름을 사용하여 밀버스를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 밀버스 구성하기를</a> 참조하세요. 펄사 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_pulsar.md">펄사 관련 구성을</a> 참고한다.</p>
+<p>헬름을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 Milvus 구성하기를</a> 참조하세요. 펄사 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_pulsar.md">펄사 관련 구성을</a> 참고한다.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용하기<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

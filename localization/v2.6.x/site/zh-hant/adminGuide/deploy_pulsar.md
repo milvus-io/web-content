@@ -22,7 +22,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
     </button></h1><p>Milvus 使用 Pulsar 或 Kafka 來管理最近變更的日誌、輸出串流日誌，以及提供日誌訂閱。Pulsar 是預設的訊息儲存系統。本主題介紹如何使用 Docker Compose 或 Helm 設定訊息儲存。</p>
 <p>您可以使用<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>或在 K8s 上設定 Pulsar，並在 K8s 上設定 Kafka。</p>
 <div class="alert note">
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.3 時，您必須維持目前的訊息佇列選擇。升級期間不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.4 時，您必須維持目前的訊息佇列選擇。升級期間不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 設定 Pulsar<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -222,7 +222,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>對於 K8s 上的 Milvus 集群，你可以在啟動 Milvus 的同一個命令中配置 Kafka。另外，你也可以在啟動 Milvus 之前，使用 /charts/milvus 路徑上<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>套件庫中的<code translate="no">values.yml</code> 檔來設定 Kafka。</p>
+    </button></h2><p>對於 K8s 上的 Milvus 集群，你可以在啟動 Milvus 的同一個命令中配置 Kafka。另外，你也可以在啟動 Milvus 之前，使用 /charts/milvus 路徑上<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>套件庫中的<code translate="no">values.yml</code> 檔案來設定 Kafka。</p>
 <p>有關如何使用 Helm<a href="/docs/zh-hant/configure-helm.md">設定</a> Milvus 的詳細資訊，請參考<a href="/docs/zh-hant/configure-helm.md">Configure Milvus with Helm Charts</a>。有關 Pulsar 相關設定項的詳細資訊，請參閱<a href="/docs/zh-hant/configure_pulsar.md">Pulsar 相關設定</a>。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 檔案<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -314,7 +314,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
     </button></h2><p>NATS 是一個實驗性的訊息存放區，可以替代 RocksMQ。關於如何用 Helm 配置 Milvus 的詳細步驟，請參考<a href="/docs/zh-hant/configure-helm.md">Configure Milvus with Helm Charts</a>。關於 RocksMQ 相關設定項的詳細步驟，請參考<a href="/docs/zh-hant/configure_natsmq.md">NATS 相關設定</a>。</p>
 <ul>
 <li><p>如果你用 NATS 啟動 Milvus 並想要改變它的設定，你可以用以下 YAML 檔案中改變的設定執行<code translate="no">helm upgrade -f</code> 。</p></li>
-<li><p>如果你已經用 NATS 以外的訊息存放區安裝了 Milvus standalone 並想要將它改成 NATS，請在刷新所有集合並停止 Milvus 之後，使用下列 YAML 檔執行<code translate="no">helm upgrade -f</code> 。</p></li>
+<li><p>如果您用 NATS 以外的消息存储安装了 Milvus standalone，并想将其更改为 NATS，请在刷新所有集合并停止 Milvus 后，使用下面的 YAML 文件运行<code translate="no">helm upgrade -f</code> 。</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

@@ -19,6 +19,77 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2519" class="common-anchor-header">v2.5.19<button data-href="#v2519" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: October 22, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.19</td><td>2.5.16</td><td>2.5.13</td><td>2.5.14</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce Milvus 2.5.19! This release includes important performance optimizations, updates to Go and Arrow/Go versions, and enhanced support for hybrid search requery policies and granular flush targets. Several bug fixes also improve stability. We recommend upgrading to Milvus 2.5.19 to benefit from these improvements.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>bump go verion to 1.24.6 (<a href="https://github.com/milvus-io/milvus/pull/44718">#44718</a>)</li>
+<li>Bump Arrow/Go to v17 (<a href="https://github.com/milvus-io/milvus/pull/44663">#44663</a>)</li>
+<li>Ensure accesslog.$consistency_level represents the actual value used (<a href="https://github.com/milvus-io/milvus/pull/44708">#44708</a>)</li>
+<li>Refactor balance checker using priority queue (<a href="https://github.com/milvus-io/milvus/pull/44588">#44588</a>)</li>
+<li>Add support for granular flush targets in flushall operation (<a href="https://github.com/milvus-io/milvus/pull/44431">#44431</a>)</li>
+<li>Add configuration for hybrid search requery policy via <code translate="no">common.requery.hybridSearchPolicy</code> (<a href="https://github.com/milvus-io/milvus/pull/44467">#44467</a>)</li>
+<li>Optimize binary_search_string performance (<a href="https://github.com/milvus-io/milvus/pull/44470">#44470</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fix duplicate L0 segment load task generation during channel balancing (<a href="https://github.com/milvus-io/milvus/pull/44700">#44700</a>)</li>
+<li>Skip empty loop when processing growing segments (<a href="https://github.com/milvus-io/milvus/pull/44608">#44608</a>)</li>
+<li>Fix bulk import issue with auto ID (<a href="https://github.com/milvus-io/milvus/pull/44601">#44601</a>)</li>
+<li>Clean up collection metrics after dropping on RootCoord  (<a href="https://github.com/milvus-io/milvus/pull/44525">#44525</a>)</li>
+<li>Fix incorrect local path usage in IDF Oracle (<a href="https://github.com/milvus-io/milvus/pull/44328">#44328</a>)</li>
+</ul>
 <h2 id="v2518" class="common-anchor-header">v2.5.18<button data-href="#v2518" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

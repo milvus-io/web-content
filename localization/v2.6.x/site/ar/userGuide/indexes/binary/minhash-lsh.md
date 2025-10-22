@@ -44,11 +44,41 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Jaccard-similarity" class="common-anchor-header">تشابه جاكارد</h3><p>يقيس تشابه جاكارد التداخل بين مجموعتين (أ) و(ب)، ويُعرّف رسميًا على النحو التالي:</p>
+    </button></h2><h3 id="Jaccard-similarity" class="common-anchor-header">تشابه جاكارد<button data-href="#Jaccard-similarity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يقيس تشابه جاكارد التداخل بين مجموعتين (أ) و(ب)، ويُعرّف رسميًا على النحو التالي:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∩</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∪</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(A, B) = \frac{|A \cap B|}{|A \cup B|}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>حيث تتراوح قيمته من 0 (منفصلتان تمامًا) إلى 1 (متطابقتان).</p>
-<p>ومع ذلك، فإن حساب تشابه جاكارد بالضبط بين جميع أزواج المستندات في مجموعات البيانات واسعة النطاق مكلف حسابيًا - O<strong>(n²)</strong> من حيث الوقت والذاكرة عندما يكون <strong>n</strong> كبيرًا. وهذا يجعلها غير مجدية لحالات الاستخدام مثل تنظيف مجموعة تدريب LLM أو تحليل المستندات على نطاق الويب.</p>
-<h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">تواقيع MinHash: تشابه جاكارد التقريبي</h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> هي تقنية احتمالية توفر طريقة فعالة لتقدير تشابه جاكارد. وهي تعمل عن طريق تحويل كل مجموعة إلى <strong>متجه توقيع</strong> مضغوط، مع الحفاظ على معلومات كافية لتقريب تشابه المجموعة بكفاءة.</p>
+<p>ومع ذلك، فإن حساب تشابه جاكارد بالضبط بين جميع أزواج المستندات في مجموعات البيانات واسعة النطاق مكلف حسابيًا - O<strong>(n²)</strong> من حيث الوقت والذاكرة عندما يكون <strong>n</strong> كبيرًا. هذا يجعلها غير مجدية لحالات الاستخدام مثل تنظيف مجموعة تدريب LLM أو تحليل المستندات على نطاق الويب.</p>
+<h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">تواقيع MinHash: تشابه جاكارد التقريبي<button data-href="#MinHash-signatures-Approximate-Jaccard-similarity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> هي تقنية احتمالية توفر طريقة فعالة لتقدير تشابه جاكارد. وهي تعمل عن طريق تحويل كل مجموعة إلى <strong>متجه توقيع</strong> مضغوط، مع الحفاظ على معلومات كافية لتقريب تشابه المجموعة بكفاءة.</p>
 <p><strong>الفكرة الأساسية</strong>:</p>
 <p>كلما زاد تشابه المجموعتين، زادت احتمالية تطابق توقيعات MinHash الخاصة بهما في نفس المواضع. تمكّن هذه الخاصية MinHash من تقريب تشابه جاكارد بين المجموعتين.</p>
 <p>تسمح هذه الخاصية ل MinHash بتقريب <strong>تشابه جاكارد</strong> بين المجموعتين دون الحاجة إلى مقارنة المجموعتين الكاملتين مباشرةً.</p>
@@ -66,12 +96,27 @@ summary: >-
 <div class="alert note">
 <p>يحدد عدد دوال التجزئة المستخدمة بُعدية توقيع MinHash. توفر الأبعاد الأعلى دقة تقريب أفضل، على حساب زيادة التخزين والحساب.</p>
 </div>
-<h3 id="LSH-for-MinHash" class="common-anchor-header">LSH ل MinHash</h3><p>في حين أن توقيعات MinHash MinHash تقلل بشكل كبير من تكلفة حساب تشابه Jaccard الدقيق بين المستندات، إلا أن المقارنة الشاملة بين كل زوج من متجهات التوقيع لا تزال غير فعالة على نطاق واسع.</p>
+<h3 id="LSH-for-MinHash" class="common-anchor-header">LSH ل MinHash<button data-href="#LSH-for-MinHash" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في حين أن توقيعات MinHash MinHash تقلل بشكل كبير من تكلفة حساب تشابه Jaccard الدقيق بين المستندات، إلا أن المقارنة الشاملة بين كل زوج من متجهات التوقيع لا تزال غير فعالة على نطاق واسع.</p>
 <p>لحل هذه المشكلة، يتم استخدام <a href="https://zilliz.com/learn/Local-Sensitivity-Hashing-A-Comprehensive-Guide">LSH</a>. يتيح LSH إمكانية البحث التقريبي السريع عن التشابه التقريبي من خلال ضمان تجزئة العناصر المتشابهة في نفس "الدلو" باحتمالية عالية - مما يجنب الحاجة إلى مقارنة كل زوج مباشرةً.</p>
 <p>تتضمن العملية:</p>
 <ol>
 <li><p><strong>تجزئة التواقيع:</strong></p>
-<p>يتم تقسيم توقيع MinHash <em>ذي الأبعاد n إلى نطاقات</em> <em>b</em>. يحتوي كل نطاق على <em>ص من</em> قيم التجزئة المتتالية، وبالتالي فإن طول التوقيع الكلي يحقق: <em>n = b × r</em>.</p>
+<p>يتم تقسيم توقيع MinHash <em>ذي الأبعاد n إلى نطاقات</em> <em>b</em>. يحتوي كل نطاق على <em>ص من</em> قيم التجزئة المتتالية، وبالتالي فإن طول التوقيع الإجمالي يحقق: <em>n = b × r</em>.</p>
 <p>على سبيل المثال، إذا كان لديك توقيع MinHash ذو 128 بُعدًا<em>(n = 128</em>) وقسمته إلى 32 نطاقًا<em>(b = 32</em>)، فإن كل نطاق يحتوي على 4 قيم تجزئة<em>(r = 4</em>).</p></li>
 <li><p><strong>التجزئة على مستوى النطاق:</strong></p>
 <p>بعد التجزئة، تتم معالجة كل نطاق بشكل مستقل باستخدام دالة تجزئة قياسية لتعيينه إلى دلو. إذا أنتج توقيعان نفس قيمة التجزئة داخل النطاق - أي أنهما يقعان في نفس الدلو - يتم اعتبارهما متطابقين محتملين.</p></li>
@@ -82,11 +127,10 @@ summary: >-
 <p>لماذا تعمل هذه الطريقة؟</p>
 <p>رياضياً، إذا كان هناك توقيعان متشابهان في جاكارد <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">s</annotation></semantics></math></span></span>,</p>
 <ul>
-<li><p>فإن احتمال تطابقهما في صف واحد (موضع التجزئة) هو <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s</p></li>
-<li><p> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span>احتمالية تطابقهما في جميع الصفوف في النطاق هي</span></span></span> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">srs^r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span></span></span></span> s <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span></p></li>
-<li><p>احتمال تطابقهما في <strong>نطاق واحد على الأقل</strong> هو:</p></li>
+<li><p>يكون احتمال تطابقهما في صف واحد (موضع التجزئة) هو <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s</p></li>
+<li><p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span>احتمالية تطابقهما في جميع الصفوف في النطاق هي</span></span></span> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">srs^r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span></span></span></span> s <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span></p></li>
+<li><p>احتمال تطابقهما في <strong>نطاق واحد على الأقل</strong> هو <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>1-</mo><mo stretchy="false">(1-(</mo><msup><mi>1</mi></msup><mn>- ص ص</mn><msup><mo stretchy="false">)</mo><mi>ب1</mi></msup></mrow><annotation encoding="application/x-tex">- (1 - ص^ ص) ^ ب</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span></span></span></span> 1 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">(1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span> ص ص</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> ص</span></span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> ب</p></li>
 </ul>
-<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mo>−</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>s</mi><mi>r</mi></msup><msup><mo stretchy="false">)</mo><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">1 - (1 - s^r)^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1491em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span></span></span></span></span></span></span></span></p>
 <p>لمزيد من التفاصيل، راجع <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">التجزئة الحساسة للموقع</a>.</p>
 </div>
 <p>ضع في اعتبارك ثلاثة مستندات بتوقيعات MinHash ذات 128 بُعدًا:</p>
@@ -94,7 +138,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-1.png" alt="Lsh Workflow 1" class="doc-image" id="lsh-workflow-1" />
    </span> <span class="img-wrapper"> <span>سير عمل Lsh 1</span> </span></p>
-<p>أولاً، يقسّم LSH التوقيع ذا ال 128 بُعدًا إلى 32 نطاقًا كل منها 4 قيم متتالية:</p>
+<p>أولاً، يقسّم LSH التوقيع ذا الـ 128 بُعدًا إلى 32 نطاقًا كل منها 4 قيم متتالية:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/lsh-workflow-2.png" alt="Lsh Workflow 2" class="doc-image" id="lsh-workflow-2" />
@@ -107,7 +151,22 @@ summary: >-
 <div class="alert note">
 <p>يتم التحكم في عدد النطاقات بواسطة المعلمة <code translate="no">mh_lsh_band</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/minhash-lsh.md#Index-building-params">بارامترات بناء الفهرس</a>.</p>
 </div>
-<h3 id="MHJACCARD-Comparing-MinHash-signatures-in-Milvus" class="common-anchor-header">MHJACCARD: مقارنة توقيعات MinHash MinHash في ميلفوس</h3><p>تقارب تواقيع MinHash توقيعات MinHash تشابه جاكارد بين المجموعات باستخدام متجهات ثنائية ذات طول ثابت. ومع ذلك، نظرًا لأن هذه التواقيع لا تحافظ على المجموعات الأصلية، لا يمكن تطبيق المقاييس القياسية مثل <code translate="no">JACCARD</code> أو <code translate="no">L2</code> أو <code translate="no">COSINE</code> مباشرةً لمقارنتها.</p>
+<h3 id="MHJACCARD-Comparing-MinHash-signatures" class="common-anchor-header">MHJACCARD: مقارنة تواقيع MinHash الصغيرة<button data-href="#MHJACCARD-Comparing-MinHash-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تقارب تواقيع MinHash توقيعات MinHash تشابه Jaccard بين المجموعات باستخدام متجهات ثنائية ذات طول ثابت. ومع ذلك، نظرًا لأن هذه التواقيع لا تحافظ على المجموعات الأصلية، لا يمكن تطبيق المقاييس القياسية مثل <code translate="no">JACCARD</code> أو <code translate="no">L2</code> أو <code translate="no">COSINE</code> مباشرةً لمقارنتها.</p>
 <p>لمعالجة هذه المشكلة، يقدم Milvus نوع مقياس متخصص يسمى <code translate="no">MHJACCARD</code> ، مصمم خصيصًا لمقارنة تواقيع MinHash.</p>
 <p>عند استخدام MinHash في Milvus:</p>
 <ul>
@@ -117,6 +176,31 @@ summary: >-
 </ul>
 <p>سيكون استخدام مقاييس أخرى إما غير صالح أو سيؤدي إلى نتائج غير صحيحة.</p>
 <p>لمزيد من المعلومات حول هذا النوع من المقاييس، راجع <a href="/docs/ar/metric.md#MHJACCARD">MHJACCARD</a>.</p>
+<h3 id="Deduplication-workflow" class="common-anchor-header">سير عمل إلغاء التكرار<button data-href="#Deduplication-workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تسمح عملية إلغاء البيانات المكررة المدعومة من MinHash LSH لـ Milvus بتحديد وتصفية السجلات النصية أو السجلات المهيكلة شبه المكررة بكفاءة قبل إدراجها في المجموعة.</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+<ol>
+<li><p><strong>التجزئة والمعالجة المسبقة</strong>: تقسيم البيانات النصية الواردة أو البيانات المهيكلة (مثل السجلات والحقول) إلى أجزاء؛ وتطبيع النص (تصغير الحروف وإزالة علامات الترقيم) وإزالة الكلمات المتوقفة حسب الحاجة.</p></li>
+<li><p><strong>إنشاء الميزات</strong>: إنشاء مجموعة الرموز الرمزية المستخدمة في MinHash (على سبيل المثال، التجزئة من النص؛ رموز الحقول المتسلسلة للبيانات المهيكلة).</p></li>
+<li><p><strong>إنشاء توقيع MinHash</strong>: حساب تواقيع MinHash لكل جزء أو سجل.</p></li>
+<li><p><strong>تحويل المتجه الثنائي</strong>: تحويل التوقيع إلى متجه ثنائي متوافق مع Milvus.</p></li>
+<li><p><strong>البحث قبل الإدراج</strong>: استخدم فهرس MinHash MinHash LSH للبحث في المجموعة المستهدفة عن التكرارات القريبة من العنصر الوارد.</p></li>
+<li><p><strong>إدراج وتخزين</strong>: إدراج العناصر الفريدة فقط في المجموعة. تصبح قابلة للبحث في عمليات التحقق من التكرار في المستقبل.</p></li>
+</ol>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,18 +216,63 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل استخدام MinHash LSH في Milvus، يجب عليك أولاً إنشاء <strong>تواقيع MinHash</strong>. تقارب هذه التواقيع الثنائية المدمجة تشابه جاكارد بين المجموعات وهي مطلوبة للبحث المستند إلى <code translate="no">MHJACCARD</code> في ملفوس.</p>
-<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">اختر طريقة لتوليد تواقيع MinHash</h3><p>اعتمادًا على عبء العمل الخاص بك، يمكنك اختيار:</p>
+    </button></h2><p>قبل استخدام MinHash LSH في Milvus، يجب عليك أولاً إنشاء <strong>تواقيع MinHash</strong>. هذه التواقيع الثنائية المدمجة تقارب تشابه جاكارد بين المجموعات وهي مطلوبة للبحث المستند إلى <code translate="no">MHJACCARD</code> في Milvus.</p>
+<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">اختر طريقة لتوليد تواقيع MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>اعتمادًا على عبء العمل الخاص بك، يمكنك اختيار:</p>
 <ul>
-<li><p>استخدام Python <code translate="no">datasketch</code> للتبسيط (موصى به للنماذج الأولية)</p></li>
-<li><p>استخدام الأدوات الموزعة (مثل Spark وRay) لمجموعات البيانات واسعة النطاق</p></li>
-<li><p>تنفيذ منطق مخصص (NumPy، C++C، إلخ) إذا كان ضبط الأداء أمرًا بالغ الأهمية</p></li>
+<li><p>استخدام طريقة بايثون <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> للتبسيط (موصى به للنماذج الأولية)</p></li>
+<li><p>استخدام الأدوات الموزعة (على سبيل المثال، Spark، Ray) لمجموعات البيانات واسعة النطاق</p></li>
+<li><p>تنفيذ منطق مخصص (NumPy، C++، إلخ) إذا كان ضبط الأداء أمرًا بالغ الأهمية</p></li>
 </ul>
 <p>في هذا الدليل، نستخدم <code translate="no">datasketch</code> للتبسيط والتوافق مع تنسيق إدخال ميلفوس.</p>
-<h3 id="Install-required-libraries" class="common-anchor-header">تثبيت المكتبات المطلوبة</h3><p>قم بتثبيت الحزم اللازمة لهذا المثال:</p>
+<h3 id="Install-required-libraries" class="common-anchor-header">تثبيت المكتبات المطلوبة<button data-href="#Install-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتثبيت الحزم اللازمة لهذا المثال:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus datasketch numpy
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Generate-MinHash-signatures" class="common-anchor-header">توليد تواقيع MinHash</h3><p>سننشئ تواقيع MinHash ذات 256 بُعدًا، مع تمثيل كل قيمة تجزئة كعدد صحيح 64 بت. يتوافق هذا مع تنسيق المتجه المتوقع لـ <code translate="no">MINHASH_LSH</code>.</p>
+<h3 id="Generate-MinHash-signatures" class="common-anchor-header">توليد تواقيع MinHash<button data-href="#Generate-MinHash-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سننشئ تواقيع MinHash ذات 256 بُعدًا، مع تمثيل كل قيمة تجزئة كعدد صحيح 64 بت. يتوافق هذا مع تنسيق المتجه المتوقع لـ <code translate="no">MINHASH_LSH</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasketch <span class="hljs-keyword">import</span> MinHash
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -156,8 +285,23 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
         m.update(token.encode(<span class="hljs-string">&quot;utf8&quot;</span>))
     <span class="hljs-keyword">return</span> m.hashvalues.astype(<span class="hljs-string">&#x27;&gt;u8&#x27;</span>).tobytes()  <span class="hljs-comment"># Returns 2048 bytes</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>كل توقيع هو 256 × 64 بت = 2048 بايت. يمكن إدراج سلسلة البايت هذه مباشرة في حقل Milvus <code translate="no">BINARY_VECTOR</code>. لمزيد من المعلومات حول المتجهات الثنائية المستخدمة في ملفوس، راجع <a href="/docs/ar/binary-vector.md">المتجه الثنائي</a>.</p>
-<h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(اختياري) إعداد مجموعات الرموز الخام (للبحث المكرر)</h3><p>بشكل افتراضي، يستخدم Milvus تواقيع MinHash وفهرس LSH فقط للعثور على الجيران التقريبي. هذا سريع ولكنه قد يُرجع نتائج إيجابية خاطئة أو قد يفوتك تطابق تقريبي.</p>
+<p>كل توقيع هو 256 × 64 بت = 2048 بايت. يمكن إدراج سلسلة البايت هذه مباشرة في حقل <code translate="no">BINARY_VECTOR</code>. لمزيد من المعلومات حول المتجهات الثنائية المستخدمة في ميلفوس، راجع <a href="/docs/ar/binary-vector.md">المتجه الثنائي</a>.</p>
+<h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(اختياري) إعداد مجموعات الرموز الخام (للبحث المكرر)<button data-href="#Optional-Prepare-raw-token-sets-for-refined-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بشكل افتراضي، يستخدم Milvus تواقيع MinHash وفهرس LSH فقط للعثور على الجيران التقريبي. هذا سريع ولكنه قد يُرجع نتائج إيجابية خاطئة أو قد يفوتك تطابق تقريبي.</p>
 <p>إذا كنت تريد <strong>تشابه جاكارد دقيق،</strong> فإن ميلفوس يدعم البحث المنقح الذي يستخدم مجموعات الرموز الأصلية. لتمكينه</p>
 <ul>
 <li><p>تخزين مجموعات الرموز كحقل منفصل <code translate="no">VARCHAR</code> </p></li>
@@ -169,7 +313,7 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
     tokens = <span class="hljs-built_in">set</span>(text.lower().split())
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot; &quot;</span>.join(tokens)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-MinHash-LSH-in-Milvus" class="common-anchor-header">استخدام MinHash LSH في ميلفوس<button data-href="#Use-MinHash-LSH-in-Milvus" class="anchor-icon" translate="no">
+<h2 id="Use-MinHash-LSH" class="common-anchor-header">استخدام MinHash LSH MinHash<button data-href="#Use-MinHash-LSH" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -185,17 +329,59 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
         ></path>
       </svg>
     </button></h2><p>بمجرد أن تصبح ناقلات MinHash ومجموعات الرموز الأصلية جاهزة، يمكنك تخزينها وفهرستها والبحث فيها باستخدام Milvus مع <code translate="no">MINHASH_LSH</code>.</p>
-<h3 id="Connect-to-Milvus" class="common-anchor-header">الاتصال بـ Milvus</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<h3 id="Connect-to-your-cluster" class="common-anchor-header">اتصل بمجموعتك<button data-href="#Connect-to-your-cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)  <span class="hljs-comment"># Update if your URI is different</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-collection-schema" class="common-anchor-header">تعريف مخطط المجموعة</h3><p>قم بتعريف مخطط بـ</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Define-collection-schema" class="common-anchor-header">تعريف مخطط المجموعة<button data-href="#Define-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عرّف مخططًا بـ</p>
 <ul>
 <li><p>المفتاح الأساسي</p></li>
-<li><p>حقل <code translate="no">BINARY_VECTOR</code> لتوقيعات MinHash MinHash</p></li>
+<li><p>حقل <code translate="no">BINARY_VECTOR</code> لتوقيعات MinHash الصغيرة</p></li>
 <li><p>حقل <code translate="no">VARCHAR</code> لمجموعة الرموز الأصلية (إذا تم تمكين البحث المنقح)</p></li>
-<li><p>اختياريًا، حقل <code translate="no">document</code> للنص الأصلي</p></li>
+<li><p>بشكل اختياري، حقل <code translate="no">document</code> للنص الأصلي</p></li>
 </ul>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
 
 VECTOR_DIM = MINHASH_DIM * HASH_BIT_WIDTH  <span class="hljs-comment"># 256 × 64 = 8192 bits</span>
@@ -206,7 +392,32 @@ schema.add_field(<span class="hljs-string">&quot;minhash_signature&quot;</span>,
 schema.add_field(<span class="hljs-string">&quot;token_set&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>)  <span class="hljs-comment"># required for refinement</span>
 schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-index-parameters-and-create-collection" class="common-anchor-header">إنشاء معلمات الفهرس وإنشاء مجموعة</h3><p>بناء فهرس <code translate="no">MINHASH_LSH</code> مع تمكين تنقيح جاكارد:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Build-index-parameters-and-create-collection" class="common-anchor-header">بناء معلمات الفهرس وإنشاء مجموعة<button data-href="#Build-index-parameters-and-create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إنشاء فهرس <code translate="no">MINHASH_LSH</code> مع تمكين تنقيح جاكارد:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;minhash_signature&quot;</span>,
@@ -221,13 +432,38 @@ index_params.add_index(
 
 client.create_collection(<span class="hljs-string">&quot;minhash_demo&quot;</span>, schema=schema, index_params=index_params)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>لمزيد من المعلومات حول معلمات بناء الفهرس، راجع <a href="/docs/ar/minhash-lsh.md#Index-building-params">بارامز بناء الفهرس</a>.</p>
-<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><p>لكل مستند، قم بإعداد</p>
+<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لكل مستند، قم بإعداد</p>
 <ul>
 <li><p>توقيع ثنائي MinHash ثنائي</p></li>
 <li><p>سلسلة مجموعة رموز متسلسلة</p></li>
 <li><p>(اختياريًا) النص الأصلي</p></li>
 </ul>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">documents = [
     <span class="hljs-string">&quot;machine learning algorithms process data automatically&quot;</span>,
     <span class="hljs-string">&quot;deep learning uses neural networks to model patterns&quot;</span>
@@ -247,16 +483,51 @@ insert_data = []
 client.insert(<span class="hljs-string">&quot;minhash_demo&quot;</span>, insert_data)
 client.flush(<span class="hljs-string">&quot;minhash_demo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">إجراء بحث التشابه</h3><p>يدعم ميلفوس طريقتين للبحث عن التشابه باستخدام MinHash LSH:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Perform-similarity-search" class="common-anchor-header">إجراء بحث التشابه<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يدعم ميلفوس وضعين للبحث عن التشابه باستخدام MinHash LSH:</p>
 <ul>
 <li><p><strong>البحث التقريبي</strong> - يستخدم فقط توقيعات MinHash و LSH للحصول على نتائج سريعة ولكن احتمالية.</p></li>
 <li><p><strong>البحث المنقح</strong> - إعادة حساب تشابه جاكارد باستخدام مجموعات الرموز الأصلية لتحسين الدقة.</p></li>
 </ul>
-<h4 id="51-Prepare-the-query" class="common-anchor-header">5.1 إعداد الاستعلام</h4><p>لإجراء بحث تشابه، قم بإنشاء توقيع MinHash لمستند الاستعلام. يجب أن يتطابق هذا التوقيع مع نفس البعد وتنسيق الترميز المستخدم أثناء إدراج البيانات.</p>
+<h4 id="51-Prepare-the-query" class="common-anchor-header">5.1 إعداد الاستعلام</h4><p>لإجراء بحث تشابه، قم بإنشاء توقيع MinHash لمستند الاستعلام. يجب أن يتطابق هذا التوقيع مع نفس البعد وتنسيق الترميز المستخدم أثناء إدخال البيانات.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;neural networks model patterns in data&quot;</span>
 query_sig = generate_minhash_signature(query_text)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="52-Approximate-search-LSH-only" class="common-anchor-header">5.2 البحث التقريبي (LSH فقط)</h4><p>هذا سريع وقابل للتطوير ولكن قد يفوتك تطابق قريب أو قد يتضمن نتائج إيجابية خاطئة:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="52-Approximate-search-LSH-only" class="common-anchor-header">5.2 البحث التقريبي (LSH فقط)</h4><p>هذا سريع وقابل للتطوير ولكن قد يفوتك التطابقات القريبة أو يتضمن نتائج إيجابية خاطئة:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">search_params={</span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;MHJACCARD&quot;</span>, </span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;params&quot;</span>: {}</span>
@@ -269,14 +540,24 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
     sim = <span class="hljs-number">1</span> - hit[<span class="hljs-string">&#x27;distance&#x27;</span>]
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Similarity: <span class="hljs-subst">{sim:<span class="hljs-number">.3</span>f}</span> | <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;document&#x27;</span>]}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="53-Refined-search-recommended-for-accuracy" class="common-anchor-header">5.3 البحث المنقح (موصى به من أجل الدقة):</h4><p>يتيح ذلك إجراء مقارنة دقيقة بين جاكارد باستخدام مجموعات الرموز الأصلية المخزنة في ميلفوس. إنه أبطأ قليلاً ولكن يوصى به للمهام الحساسة للجودة:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="53-Refined-search-recommended-for-accuracy" class="common-anchor-header">5.3 البحث المنقح (موصى به للدقة):</h4><p>يمكّن هذا من إجراء مقارنة دقيقة بين جاكارد باستخدام مجموعات الرموز الأصلية المخزنة في Milvus. إنه أبطأ قليلاً ولكن يوصى به للمهام الحساسة للجودة:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">search_params = {</span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;MHJACCARD&quot;</span>,</span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;params&quot;</span>: {</span>
@@ -292,12 +573,20 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):
     sim = <span class="hljs-number">1</span> - hit[<span class="hljs-string">&#x27;distance&#x27;</span>]
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Similarity: <span class="hljs-subst">{sim:<span class="hljs-number">.3</span>f}</span> | <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;document&#x27;</span>]}</span>&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-params" class="common-anchor-header">بارامترات الفهرس<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -315,7 +604,22 @@ refined_results = client.search(
         ></path>
       </svg>
     </button></h2><p>يقدم هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
-<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/minhash-lsh.md#Build-index-parameters-and-create-collection">إنشاء فهرس</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/minhash-lsh.md#Build-index-parameters-and-create-collection">إنشاء فهرس</a>.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>
@@ -354,7 +658,22 @@ refined_results = client.search(
      <td><p>استخدم <code translate="no">0.01</code> للحصول على استخدام متوازن للذاكرة والدقة. تقلل القيم المنخفضة (<code translate="no">0.001</code>) من النتائج الإيجابية الخاطئة ولكنها تزيد من الذاكرة. توفر القيم الأعلى (<code translate="no">0.05</code>) الذاكرة ولكنها قد تقلل من الدقة.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/minhash-lsh.md#Perform-similarity-search">البحث في الفهرس</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/minhash-lsh.md#Perform-similarity-search">البحث في الفهرس</a>.</p>
 <table>
    <tr>
      <th><p>المعلمة</p></th>

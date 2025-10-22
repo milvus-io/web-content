@@ -181,10 +181,6 @@ curl --request POST \
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>Apakah mengizinkan koleksi untuk menerima nilai kunci utama yang disediakan pengguna ketika AutoID telah diaktifkan untuk koleksi tersebut.</p><ul><li><p>Bila diatur ke <strong>"true"</strong>: Sisipan, peng-update-an, dan impor massal menggunakan kunci utama yang disediakan pengguna jika ada; jika tidak, nilai kunci utama dibuat secara otomatis.</p></li><li><p>Bila diatur ke <strong>"false"</strong>: Nilai kunci utama yang disediakan pengguna ditolak atau diabaikan dan nilai kunci utama selalu dibuat secara otomatis. Nilai defaultnya adalah <strong>"false"</strong>.</p></li></ul></td>
    </tr>
-   <tr>
-     <td></td>
-     <td></td>
-   </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Contoh 1: Mengatur TTL koleksi<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"

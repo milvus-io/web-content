@@ -65,7 +65,7 @@ summary: >-
 <p>Comme le montre le diagramme, le processus se déroule en deux étapes :</p>
 <ol>
 <li><p><strong>Mappage en amont (ID → terme) :</strong> Chaque identifiant de document pointe vers la valeur de champ qu'il contient.</p></li>
-<li><p><strong>Mappage inversé (Terme → ID) :</strong> Milvus collecte des termes uniques et établit une correspondance inversée entre chaque terme et tous les ID qui le contiennent.</p></li>
+<li><p><strong>Mappage inversé (Terme → ID) :</strong> Milvus collecte les termes uniques et établit une correspondance inversée entre chaque terme et tous les ID qui le contiennent.</p></li>
 </ol>
 <p>Par exemple, la valeur <strong>"électronique"</strong> correspond aux ID <strong>1</strong> et <strong>3</strong>, tandis que <strong>"livres"</strong> correspond aux ID <strong>2</strong> et <strong>5</strong>.</p>
 <p>
@@ -146,7 +146,34 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour des informations détaillées sur l'indexation des champs JSON, y compris les chemins d'accès pris en charge, les types de données et les limitations, reportez-vous à <a href="/docs/fr/use-json-fields.md">Champ JSON</a>.</p>
+<p>Pour obtenir des informations détaillées sur l'indexation des champs JSON, y compris les chemins d'accès pris en charge, les types de données et les limitations, reportez-vous à <a href="/docs/fr/json-indexing.md">Indexation JSON</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Supprimer un index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilisez la méthode <code translate="no">drop_index()</code> pour supprimer un index existant d'une collection.</p>
+<div class="alert note">
+<ul>
+<li><p>Dans la <strong>version 2.6.3</strong> ou antérieure, vous devez libérer la collection avant de supprimer un index scalaire.</p></li>
+<li><p>À partir de la <strong>version 2.6.4</strong>, vous pouvez supprimer un index scalaire directement lorsqu'il n'est plus nécessaire, sans avoir à libérer la collection au préalable.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;category_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Best-practices" class="common-anchor-header">Meilleures pratiques<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +190,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Créez des index après le chargement des données</strong>: Pour de meilleures performances, créez des index sur les collections qui contiennent déjà des données.</p></li>
+<li><p><strong>Créez des index après avoir chargé les données</strong>: Créez des index sur des collections qui contiennent déjà des données afin d'améliorer les performances.</p></li>
 <li><p><strong>Utilisez des noms d'index descriptifs</strong>: Choisissez des noms qui indiquent clairement le champ et l'objectif</p></li>
 <li><p><strong>Contrôler les performances des index</strong>: Vérifiez les performances des requêtes avant et après la création d'index.</p></li>
 <li><p><strong>Tenez compte de vos schémas de requête</strong>: Créez des index sur les champs que vous filtrez fréquemment</p></li>
@@ -185,5 +212,5 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>En savoir plus sur les <a href="/docs/fr/index-explained.md">autres types d'index</a></p></li>
-<li><p>Voir <a href="/docs/fr/use-json-fields.md#Index-values-inside-the-JSON-field">Indexation des champs JSON</a> pour les scénarios d'indexation JSON avancés</p></li>
+<li><p>Voir <a href="/docs/fr/json-indexing.md">Indexation JSON</a> pour les scénarios d'indexation JSON avancés</p></li>
 </ul>

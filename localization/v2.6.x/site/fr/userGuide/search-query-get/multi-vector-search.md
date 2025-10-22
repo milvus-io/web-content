@@ -35,8 +35,8 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-   </span> <span class="img-wrapper"> <span>Processus de recherche hybride</span> </span></p>
-<p>La recherche hybride multi-vectorielle intègre différentes méthodes de recherche ou englobe des encastrements provenant de diverses modalités :</p>
+   </span> <span class="img-wrapper"> <span>Flux de travail de la recherche hybride</span> </span></p>
+<p>La recherche hybride multi-vectorielle intègre différentes méthodes de recherche ou couvre des encastrements provenant de diverses modalités :</p>
 <ul>
 <li><p><strong>Recherche de vecteurs denses et épars</strong>: Les <a href="/docs/fr/dense-vector.md">vecteurs denses</a> sont excellents pour capturer les relations sémantiques, tandis que les <a href="/docs/fr/sparse_vector.md">vecteurs épars</a> sont très efficaces pour la correspondance précise des mots-clés. La recherche hybride combine ces approches pour fournir à la fois une compréhension conceptuelle large et une pertinence exacte des termes, améliorant ainsi les résultats de la recherche. En tirant parti des points forts de chaque méthode, la recherche hybride surmonte les limites des approches individuelles et offre de meilleures performances pour les requêtes complexes. Voici un <a href="/docs/fr/full_text_search_with_milvus.md">guide</a> plus détaillé sur la recherche hybride qui combine la recherche sémantique et la recherche en texte intégral.</p></li>
 <li><p><strong>Recherche vectorielle multimodale</strong>: La recherche vectorielle multimodale est une technique puissante qui vous permet d'effectuer des recherches dans différents types de données, y compris le texte, les images, l'audio et d'autres. Le principal avantage de cette approche est sa capacité à unifier différentes modalités en une expérience de recherche homogène et cohérente. Par exemple, dans le cadre d'une recherche de produits, un utilisateur peut saisir une requête textuelle pour trouver des produits décrits à la fois par du texte et des images. En combinant ces modalités au moyen d'une méthode de recherche hybride, vous pouvez améliorer la précision de la recherche ou enrichir les résultats de la recherche.</p></li>
@@ -94,11 +94,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour la recherche hybride multi-vectorielle, nous devons définir plusieurs champs vectoriels dans un schéma de collection. Par défaut, chaque collection peut contenir jusqu'à 4 champs vectoriels. Cependant, si nécessaire, vous pouvez ajuster le site <code translate="no">proxy.maxVectorFieldNum</code> pour inclure jusqu'à 10 champs vectoriels dans une collection.</p>
+    </button></h3><p>Pour la recherche hybride multi-vectorielle, nous devons définir plusieurs champs vectoriels dans un schéma de collection. Pour plus de détails sur les limites du nombre de champs vectoriels autorisés dans une collection, voir <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>.  Cependant, si nécessaire, vous pouvez ajuster le schéma de collection pour inclure jusqu'à 10 champs vectoriels dans la collection. <a href="/docs/fr/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> pour inclure jusqu'à 10 champs vectoriels dans une collection.</p>
 <p>Cet exemple incorpore les champs suivants dans le schéma :</p>
 <ul>
 <li><p><code translate="no">id</code>: sert de clé primaire pour le stockage des identifiants de texte. Ce champ est de type <code translate="no">INT64</code>.</p></li>
-<li><p><code translate="no">text</code>: Utilisé pour stocker le contenu textuel. Ce champ est du type <code translate="no">VARCHAR</code> et a une longueur maximale de 1000 octets. L'option <code translate="no">enable_analyzer</code> est définie sur <code translate="no">True</code> pour faciliter la recherche en texte intégral.</p></li>
+<li><p><code translate="no">text</code>: Utilisé pour stocker le contenu textuel. Ce champ est de type <code translate="no">VARCHAR</code> et a une longueur maximale de 1000 octets. L'option <code translate="no">enable_analyzer</code> est définie sur <code translate="no">True</code> pour faciliter la recherche en texte intégral.</p></li>
 <li><p><code translate="no">text_dense</code>: Utilisé pour stocker les vecteurs denses des textes. Ce champ est de type <code translate="no">FLOAT_VECTOR</code> avec une dimension vectorielle de 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Utilisé pour stocker les vecteurs peu denses des textes. Ce champ est du type <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p><code translate="no">image_dense</code>: Utilisé pour stocker les vecteurs denses des images de produits. Ce champ est du type <code translate="no">FLOAT_VETOR</code> avec une dimension vectorielle de 512.</p></li>
@@ -351,7 +351,14 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><div class="multipleCode">
+    </button></h3><p>Après avoir défini le schéma de la collection, l'étape suivante consiste à configurer les index vectoriels et à spécifier les métriques de similarité. Dans l'exemple donné :</p>
+<ul>
+<li><p><code translate="no">text_dense_index</code>: un index de type <code translate="no">AUTOINDEX</code> avec le type de métrique <code translate="no">IP</code> est créé pour le champ vectoriel dense de texte.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: un index de type<code translate="no">SPARSE_INVERTED_INDEX</code>avec le type métrique <code translate="no">BM25</code> est utilisé pour le champ de vecteurs textuels clairsemés.</p></li>
+<li><p><code translate="no">image_dense_index</code>un index de type <code translate="no">AUTOINDEX</code> avec le type métrique <code translate="no">IP</code> est créé pour le champ vectoriel dense de l'image.</p></li>
+</ul>
+<p>Vous pouvez choisir d'autres types d'index pour répondre au mieux à vos besoins et à vos types de données. Pour plus d'informations sur les types d'index supportés, veuillez vous référer à la documentation sur les <a href="/docs/fr/index-vector-fields.md">types d'index disponibles</a>.</p>
+<div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -674,7 +681,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Créer plusieurs instances AnnSearchRequest<button data-href="#Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Étape 1 : Créer plusieurs instances AnnSearchRequest<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -690,7 +697,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
         ></path>
       </svg>
     </button></h3><p>La recherche hybride est mise en œuvre en créant plusieurs <code translate="no">AnnSearchRequest</code> dans la fonction <code translate="no">hybrid_search()</code>, où chaque <code translate="no">AnnSearchRequest</code> représente une demande de recherche ANN de base pour un champ vectoriel spécifique. Par conséquent, avant d'effectuer une recherche hybride, il est nécessaire de créer un site <code translate="no">AnnSearchRequest</code> pour chaque champ vectoriel.</p>
-<p>En outre, en configurant le paramètre <code translate="no">expr</code> dans un <code translate="no">AnnSearchRequest</code>, vous pouvez définir les conditions de filtrage de votre recherche hybride. Veuillez vous référer aux sections <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/boolean.md">Filtrage</a>.</p>
+<p>En outre, en configurant le paramètre <code translate="no">expr</code> dans un <code translate="no">AnnSearchRequest</code>, vous pouvez définir les conditions de filtrage de votre recherche hybride. Veuillez vous référer aux sections <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/boolean.md">Filtrage expliqué</a>.</p>
 <div class="alert note">
 <p>Dans la recherche hybride, chaque site <code translate="no">AnnSearchRequest</code> ne prend en charge qu'une seule donnée d'interrogation.</p>
 </div>
@@ -833,7 +840,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Étant donné que le paramètre <code translate="no">limit</code> est fixé à 2, chaque <code translate="no">AnnSearchRequest</code> renvoie 2 résultats de recherche. Dans cet exemple, 3 instances <code translate="no">AnnSearchRequest</code> sont créées, ce qui donne un total de 6 résultats de recherche.</p>
-<h3 id="Configure-a-reranking-strategy" class="common-anchor-header">Configurer une stratégie de reclassement<button data-href="#Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Étape 2 : Configuration d'une stratégie de reclassement<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -848,35 +855,9 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour fusionner et reclasser les ensembles de résultats de recherche ANN, il est essentiel de sélectionner une stratégie de reclassement appropriée. Milvus propose deux types de stratégies de reclassement :</p>
-<ul>
-<li><p><strong>WeightedRanker</strong>: Utilisez cette stratégie si les résultats doivent mettre l'accent sur un champ vectoriel particulier. WeightedRanker permet d'attribuer un poids plus important à certains champs vectoriels et de les mettre en évidence.</p></li>
-<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Choisissez cette stratégie lorsqu'aucune importance particulière n'est requise. RRFRanker équilibre efficacement l'importance de chaque champ vectoriel.</p></li>
-</ul>
-<p>Pour plus de détails sur les mécanismes de ces deux stratégies de reclassement, voir <a href="/docs/fr/weighted-ranker.md">Reranking</a>.</p>
-<p>Dans cet exemple, étant donné qu'il n'y a pas d'importance particulière à accorder à des requêtes de recherche spécifiques, nous utiliserons la stratégie RRFRanker.</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
-
-ranker = RRFRanker(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
-
-<span class="hljs-type">RRFRanker</span> <span class="hljs-variable">reranker</span> <span class="hljs-operator">=</span> RRFRanker.builder().k(<span class="hljs-number">100</span>).build();
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-string">&quot;100&quot;</span>);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
-        &quot;strategy&quot;: &quot;rrf&quot;,
-        &quot;params&quot;: { &quot;k&quot;: 100}
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-a-Hybrid-Search" class="common-anchor-header">Effectuer une recherche hybride<button data-href="#Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+    </button></h3><p>Pour fusionner et reclasser les ensembles de résultats de recherche ANN, il est essentiel de sélectionner une stratégie de reclassement appropriée. Milvus propose plusieurs types de stratégies de reclassement. Pour plus de détails sur ces mécanismes de reclassement, reportez-vous à la section <a href="/docs/fr/reranking">Reclassement</a>.</p>
+<p>Dans cet exemple, comme il n'y a pas d'importance particulière accordée à des requêtes de recherche spécifiques, nous utiliserons la stratégie RRFRanker.</p>
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Étape 3 : Effectuer une recherche hybride<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

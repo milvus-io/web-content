@@ -247,7 +247,7 @@ client.create_index(
 <li><p>この値は n-gram トークン化の前に<code translate="no">VARCHAR</code> にキャストされます。</p></li>
 <li><p>milvusは長さ2から4の部分文字列を生成し、それらを転置インデックスに格納します。</p></li>
 </ul>
-<p>JSONフィールドにインデックスを付ける方法の詳細については、<a href="/docs/ja/use-json-fields.md">JSONフィールドを</a>参照してください。</p>
+<p>JSONフィールドにインデックスを付ける方法の詳細については、<a href="/docs/ja/json-indexing.md">JSONインデックスを</a>参照してください。</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">NGRAMによって高速化されるクエリー<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -265,8 +265,8 @@ client.create_index(
       </svg>
     </button></h2><p>NGRAMインデックスを適用するには</p>
 <ul>
-<li><p>クエリは、<code translate="no">NGRAM</code> インデックスを持つ<code translate="no">VARCHAR</code> フィールド（または JSON パス）を対象としなければならない。</p></li>
-<li><p><code translate="no">LIKE</code> パターンのリテラル部分は、少なくとも<code translate="no">min_gram</code> 文字の長さでなければなりません<em>(例えば、予想される最短のクエリー項が 2 文字の場合、インデックス作成時に min_gram=2 を設定します)。</em></p></li>
+<li><p>クエリは、<code translate="no">NGRAM</code> インデックスを持つ<code translate="no">VARCHAR</code> フィールド（または JSON パス）をターゲットにする必要があります。</p></li>
+<li><p><code translate="no">LIKE</code> パターンのリテラル部分は、少なくとも<code translate="no">min_gram</code> 文字の長さでなければなりません<em>(例えば、予想される最も短いクエリー項が 2 文字の場合、インデックス作成時に min_gram=2 を設定します)。</em></p></li>
 </ul>
 <p>サポートされるクエリー型</p>
 <ul>
@@ -292,6 +292,33 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>フィルタ式の構文の詳細については、<a href="/docs/ja/basic-operators.md">基本演算</a>子を参照してください。</p>
+<h2 id="Drop-an-index" class="common-anchor-header">インデックスの削除<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>コレクションから既存のインデックスを削除するには、<code translate="no">drop_index()</code> メソッドを使用します。</p>
+<div class="alert note">
+<ul>
+<li><p><strong>v2.6.3</strong>以前では、スカラー・インデックスを削除する前にコレクションを解放する必要があります。</p></li>
+<li><p><strong>v2.6.4</strong>以降では、スカラー・インデックスが不要になったら直接削除できる。</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">使用上の注意<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -308,8 +335,8 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>フィールド・タイプ</strong>：<code translate="no">VARCHAR</code> および<code translate="no">JSON</code> フィールドでサポートされます。JSONの場合は、<code translate="no">params.json_path</code> と<code translate="no">params.json_cast_type=&quot;varchar&quot;</code> の両方を指定してください。</p></li>
-<li><p><strong>ユニコード</strong>：NGRAM分解は文字ベースであり、言語にとらわれず、空白と句読点を含む。</p></li>
+<li><p><strong>フィールド・タイプ</strong>：<code translate="no">VARCHAR</code> 、<code translate="no">JSON</code> フィールドをサポート。JSON の場合は、<code translate="no">params.json_path</code> と<code translate="no">params.json_cast_type=&quot;varchar&quot;</code> の両方を指定してください。</p></li>
+<li><p><strong>Unicode</strong>：NGRAM分解は文字ベースであり、言語にとらわれず、空白と句読点を含む。</p></li>
 <li><p><strong>スペー ス と 時間の ト レー ド オ フ</strong> ： グ ラ ム範囲<code translate="no">[min_gram, max_gram]</code> を広 く す る と 、 グ ラ ム数が増え、 イ ンデ ッ ク ス も 大 き く な り ます。メモリが限られている場合は、大きな投稿リスト用に<code translate="no">mmap</code> モードを検討してください。詳しくは<a href="/docs/ja/mmap.md">mmapを使うを</a>参照してください。</p></li>
 <li><p><strong>不変性</strong>:<code translate="no">min_gram</code> と<code translate="no">max_gram</code> は、その場で変更することはできません。</p></li>
 </ul>

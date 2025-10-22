@@ -146,7 +146,34 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener información detallada sobre la indexación de campos JSON, incluidas las rutas admitidas, los tipos de datos y las limitaciones, consulte <a href="/docs/es/use-json-fields.md">Campo JSON</a>.</p>
+<p>Para obtener información detallada sobre la indexación de campos JSON, incluidas las rutas admitidas, los tipos de datos y las limitaciones, consulte <a href="/docs/es/json-indexing.md">Indexación JSON</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Eliminar un índice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilice el método <code translate="no">drop_index()</code> para eliminar un índice existente de una colección.</p>
+<div class="alert note">
+<ul>
+<li><p>En <strong>v2.6.3</strong> o versiones anteriores, debes liberar la colección antes de eliminar un índice escalar.</p></li>
+<li><p>A partir de la versión <strong>2.6.4</strong>, puedes eliminar un índice escalar directamente cuando ya no sea necesario, sin necesidad de liberar primero la colección.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;category_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Best-practices" class="common-anchor-header">Prácticas recomendadas<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,7 +191,7 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>Cree<strong>índices después de cargar los datos</strong>: Cree índices en colecciones que ya contengan datos para mejorar el rendimiento.</p></li>
-<li><p><strong>Utilice nombres de índice descriptivos</strong>: Elija nombres que indiquen claramente el campo y el propósito</p></li>
+<li><p><strong>Utilice nombres de índices descriptivos</strong>: Elija nombres que indiquen claramente el campo y el propósito</p></li>
 <li><p><strong>Supervisar el rendimiento de los índices</strong>: Compruebe el rendimiento de las consultas antes y después de crear índices</p></li>
 <li><p><strong>Tenga en cuenta sus patrones de consulta</strong>: Cree índices en los campos por los que filtra con frecuencia</p></li>
 </ul>
@@ -185,5 +212,5 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>Más información sobre <a href="/docs/es/index-explained.md">otros tipos de índices</a></p></li>
-<li><p>Consulte <a href="/docs/es/use-json-fields.md#Index-values-inside-the-JSON-field">Indexación de campos JSON</a> para conocer escenarios avanzados de indexación JSON</p></li>
+<li><p>Consulte <a href="/docs/es/json-indexing.md">Indexación JSON</a> para conocer escenarios avanzados de indexación JSON</p></li>
 </ul>

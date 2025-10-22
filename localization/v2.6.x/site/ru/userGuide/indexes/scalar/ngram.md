@@ -140,7 +140,7 @@ beta: Milvus v2.6.2+
 <ul>
 <li><p>Если <code translate="no">L &lt; min_gram</code>, индекс не может быть использован, и запрос возвращается к полному сканированию.</p></li>
 <li><p>Если <code translate="no">min_gram ≤ L ≤ max_gram</code>, то весь термин запроса рассматривается как одна n-грамма, и дальнейшая декомпозиция не требуется.</p></li>
-<li><p>Если <code translate="no">L &gt; max_gram</code>, то термин запроса разбивается на перекрывающиеся граммы с помощью окна размером <code translate="no">max_gram</code>.</p></li>
+<li><p>Если <code translate="no">L &gt; max_gram</code>, то термин запроса разбивается на перекрывающиеся графы с помощью окна размером <code translate="no">max_gram</code>.</p></li>
 </ul>
 <p>Например, если для <code translate="no">max_gram</code> установлено значение <code translate="no">3</code>, а термин запроса <code translate="no">&quot;database&quot;</code> имеет длину <strong>8</strong>, он разбивается на 3-граммовые подстроки <code translate="no">&quot;dat&quot;</code>, <code translate="no">&quot;ata&quot;</code>, <code translate="no">&quot;tab&quot;</code> и так далее.</p></li>
 <li><p><strong>Поиск каждой грамы и пересечение</strong>: Milvus ищет каждую граму запроса в инвертированном индексе, а затем пересекает полученные списки идентификаторов документов, чтобы найти небольшой набор документов-кандидатов. Эти кандидаты содержат все граммы из запроса.</p></li>
@@ -253,7 +253,7 @@ client.create_index(
 <li><p>Значение приводится к <code translate="no">VARCHAR</code> перед токенизацией n-грамм.</p></li>
 <li><p>Milvus генерирует подстроки длиной от 2 до 4 и сохраняет их в инвертированном индексе.</p></li>
 </ul>
-<p>Для получения дополнительной информации о том, как индексировать поле JSON, обратитесь к разделу <a href="/docs/ru/use-json-fields.md">Поле JSON</a>.</p>
+<p>Для получения дополнительной информации о том, как индексировать поле JSON, обратитесь к разделу <a href="/docs/ru/json-indexing.md">Индексирование JSON</a>.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Запросы, ускоренные с помощью NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -272,7 +272,7 @@ client.create_index(
     </button></h2><p>Чтобы индекс NGRAM был применен:</p>
 <ul>
 <li><p>Запрос должен быть направлен на поле <code translate="no">VARCHAR</code> (или путь JSON), которое имеет индекс <code translate="no">NGRAM</code>.</p></li>
-<li><p>Буквенная часть шаблона <code translate="no">LIKE</code> должна иметь длину не менее <code translate="no">min_gram</code> символов.<em>(Например, если самый короткий ожидаемый термин запроса составляет 2 символа, установите min_gram=2 при создании индекса).</em></p></li>
+<li><p>Буквенная часть шаблона <code translate="no">LIKE</code> должна быть длиной не менее <code translate="no">min_gram</code> символов<em>(например, если самый короткий ожидаемый термин запроса составляет 2 символа, при создании индекса установите min_gram=2).</em></p></li>
 </ul>
 <p>Поддерживаемые типы запросов:</p>
 <ul>
@@ -298,6 +298,33 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>Для получения дополнительной информации о синтаксисе выражений фильтрации обратитесь к разделу <a href="/docs/ru/basic-operators.md">Основные операторы</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Удалить индекс<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Используйте метод <code translate="no">drop_index()</code>, чтобы удалить существующий индекс из коллекции.</p>
+<div class="alert note">
+<ul>
+<li><p>В <strong>версии 2.6.3</strong> и более ранних вы должны освободить коллекцию перед удалением скалярного индекса.</p></li>
+<li><p>Начиная с <strong>версии 2.6.4</strong> и выше, скалярный индекс можно удалять напрямую, как только в нем отпадет необходимость - не нужно сначала освобождать коллекцию.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">Примечания по использованию<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

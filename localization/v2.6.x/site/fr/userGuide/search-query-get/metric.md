@@ -118,6 +118,13 @@ summary: >-
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p>Pour indexer les champs vectoriels dans un champ <a href="/docs/fr/array-of-structs.md">Tableau de structures</a>, vous devez préfixer <code translate="no">MAX_SIM</code> à l'ensemble des types de métriques mentionnés ci-dessus, en fonction des intégrations vectorielles stockées dans ces champs. Par exemple, pour un champ vectoriel qui stocke des intégrations vectorielles, il faut ajouter le préfixe</p>
+<ul>
+<li><p>Pour un champ vectoriel qui stocke des intégrations vectorielles de type <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, ou <code translate="no">INT8_VECTOR</code>, vous pouvez utiliser <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, ou <code translate="no">MAX_SIM_L2</code> comme type métrique.</p></li>
+<li><p>Pour un champ de vecteurs qui stocke des intégrations vectorielles du type <code translate="no">BINARY_VECTOR</code>, vous pouvez utiliser <code translate="no">MAX_SIM_JACCADR</code> ou <code translate="no">MAX_SIM_HAMMING</code> comme type métrique.</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">Distance euclidienne (L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,7 +145,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/euclidean-metric.png" alt="Euclidean Metric" class="doc-image" id="euclidean-metric" />
-   </span> <span class="img-wrapper"> <span>Métrique d'Euclide</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Métrique euclidienne</span> </span></p>
 <p>où <strong>a = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> et <strong>b = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> sont deux points dans un espace euclidien à n dimensions.</p>
 <p>Il s'agit de la mesure de distance la plus couramment utilisée et elle est très utile lorsque les données sont continues.</p>
 <div class="alert note">

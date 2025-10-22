@@ -98,6 +98,37 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">params</code>:在索引上搜索的其他配置选项。要了解<code translate="no">GPU_CAGRA</code> 索引可用的更多搜索<a href="/docs/zh/gpu-cagra.md#Index-specific-search-params">参数</a>，请参阅<a href="/docs/zh/gpu-cagra.md#Index-specific-search-params">特定于索引的搜索参数</a>。</li>
 </ul>
+<h2 id="Enable-CPU-search-at-load-time--Milvus-264+" class="common-anchor-header">加载时启用 CPU 搜索<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Enable-CPU-search-at-load-time--Milvus-264+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>要在加载时动态启用 CPU 搜索，请在<code translate="no">milvus.yaml</code> 中编辑以下配置：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">knowhere:</span>
+  <span class="hljs-attr">GPU_CAGRA:</span>
+    <span class="hljs-attr">load:</span> 
+      <span class="hljs-attr">adapt_for_cpu:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>行为</strong></p>
+<ul>
+<li><p>当<code translate="no">load.adapt_for_cpu</code> 设置为<code translate="no">true</code> 时，Milvus 会在加载时将<strong>GPU_CAGRA</strong>索引转换为 CPU 可执行格式（类似 HNSW）。</p></li>
+<li><p>随后的搜索操作将在 CPU 上执行，即使索引最初是为 GPU 构建的。</p></li>
+<li><p>如果省略或为假，索引将保留在 GPU 上，搜索也在 GPU 上运行。</p></li>
+</ul>
+<div class="alert note">
+<p>在混合或对成本敏感的环境中，GPU 资源被保留用于索引构建，但搜索在 CPU 上运行，此时可使用负载时 CPU 适应。</p>
+</div>
 <h2 id="Index-params" class="common-anchor-header">索引参数<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,8 +144,23 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本节概述了用于建立索引和在索引上执行搜索的参数。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立参数</h3><p>下表列出了<a href="/docs/zh/gpu-cagra.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
+    </button></h2><p>本节概述了用于构建索引和在索引上执行搜索的参数。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引构建参数<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/gpu-cagra.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th><p>参数</p></th>
@@ -133,29 +179,36 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">build_algo</code></p></td>
-     <td><p>选择剪枝前的图生成算法。可能的值</p>
-<ul>
-<li><p><code translate="no">IVF_PQ</code>:提供更高的质量，但构建时间较慢。</p></li>
-<li><p><code translate="no">NN_DESCENT</code>:提供更快的构建速度，但可能会降低召回率。</p></li>
-</ul></td>
+     <td><p>选择剪枝前的图生成算法。可能的值</p><ul><li><p><code translate="no">IVF_PQ</code>:提供更高的质量，但构建时间较慢。</p></li><li><p><code translate="no">NN_DESCENT</code>:提供更快的构建速度，但可能会降低召回率。</p></li></ul></td>
      <td><p><code translate="no">IVF_PQ</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
-     <td><p>决定是否在 GPU 内存中缓存原始数据集。可能的值</p>
-<ul>
-<li><p><code translate="no">"true"</code>:缓存原始数据集，通过完善搜索结果来提高召回率。</p></li>
-<li><p><code translate="no">"false"</code>:不缓存原始数据集，以节省 GPU 内存。</p></li>
-</ul></td>
+     <td><p>决定是否在 GPU 内存中缓存原始数据集。可能的值</p><ul><li><p><code translate="no">"true"</code>:缓存原始数据集，通过完善搜索结果来提高召回率。</p></li><li><p><code translate="no">"false"</code>:不缓存原始数据集，以节省 GPU 内存。</p></li></ul></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>决定是否使用 GPU 建立索引和使用 CPU 进行搜索。将该参数设置为<code translate="no">"true"</code> 时，搜索请求中必须包含<code translate="no">ef</code> 参数。</p></td>
+     <td><p>决定是否使用 GPU 建立索引和使用 CPU 进行搜索。</p><p>将该参数设置为<code translate="no">"true"</code> 时，搜索请求中必须包含<code translate="no">ef</code> 参数。</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了<a href="/docs/zh/gpu-cagra.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/gpu-cagra.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th><p>参数</p></th>
@@ -184,7 +237,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>指定查询时间/准确性的权衡。<code translate="no">ef</code> 值越高，搜索越准确，但速度越慢。如果在建立索引时将<code translate="no">adapt_for_cpu</code> 设置为<code translate="no">true</code> ，则必须使用此参数。</p></td>
+     <td><p>指定查询时间/准确性的权衡。<code translate="no">ef</code> 值越高，搜索越准确，但速度越慢。</p><p>如果在建立索引时将<code translate="no">adapt_for_cpu</code> 设置为<code translate="no">true</code> ，则必须使用此参数。</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>

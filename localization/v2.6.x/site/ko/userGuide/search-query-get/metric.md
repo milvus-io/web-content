@@ -116,6 +116,13 @@ summary: >-
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p><a href="/docs/ko/array-of-structs.md">구조 배열</a> 필드에서 벡터 필드를 색인하려면 해당 필드에 저장된 벡터 임베딩을 기반으로 위에서 언급한 메트릭 유형 집합에 <code translate="no">MAX_SIM</code> 접두사를 붙여야 합니다. 예를 들어</p>
+<ul>
+<li><p><code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">INT8_VECTOR</code> 유형의 벡터 임베딩을 저장하는 벡터 필드의 경우 메트릭 유형으로 <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, <code translate="no">MAX_SIM_L2</code> 을 사용할 수 있습니다.</p></li>
+<li><p><code translate="no">BINARY_VECTOR</code> 유형의 벡터 임베딩을 저장하는 벡터 필드의 경우 메트릭 유형으로 <code translate="no">MAX_SIM_JACCADR</code> 또는 <code translate="no">MAX_SIM_HAMMING</code> 을 사용할 수 있습니다.</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">유클리드 거리(L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

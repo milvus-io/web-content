@@ -179,10 +179,6 @@ curl --request POST \
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>當已為集合啟用 AutoID 時，是否允許集合接受使用者提供的主索引鍵值。</p><ul><li><p>當設定為<strong>"true "</strong>時：如果存在，插入、上插入和大量導入會使用使用者提供的主索引鍵；否則，主索引鍵值會自動產生。</p></li><li><p>設定為<strong>"false "</strong>時：使用者提供的主索引鍵值會被拒絕或忽略，主索引鍵值永遠是自動產生的。預設為<strong>"false"</strong>。</p></li></ul></td>
    </tr>
-   <tr>
-     <td></td>
-     <td></td>
-   </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">範例 1：設定集合 TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
