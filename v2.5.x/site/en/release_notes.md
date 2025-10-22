@@ -8,6 +8,35 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.19
+
+Release date: October 22, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.19          | 2.5.16            | 2.5.13              | 2.5.14           |
+
+We are excited to announce Milvus 2.5.19! This release includes important performance optimizations, updates to Go and Arrow/Go versions, and enhanced support for hybrid search requery policies and granular flush targets. Several bug fixes also improve stability. We recommend upgrading to Milvus 2.5.19 to benefit from these improvements.
+
+### Improvements
+
+- bump go verion to 1.24.6 ([#44718](https://github.com/milvus-io/milvus/pull/44718))
+- Bump Arrow/Go to v17 ([#44663](https://github.com/milvus-io/milvus/pull/44663))
+- Ensure accesslog.$consistency_level represents the actual value used ([#44708](https://github.com/milvus-io/milvus/pull/44708))
+- Refactor balance checker using priority queue ([#44588](https://github.com/milvus-io/milvus/pull/44588))
+- Add support for granular flush targets in flushall operation ([#44431](https://github.com/milvus-io/milvus/pull/44431))
+- Add configuration for hybrid search requery policy via `common.requery.hybridSearchPolicy` ([#44467](https://github.com/milvus-io/milvus/pull/44467))
+- Optimize binary_search_string performance ([#44470](https://github.com/milvus-io/milvus/pull/44470))
+
+### Bug fixes
+
+- Fix duplicate L0 segment load task generation during channel balancing ([#44700](https://github.com/milvus-io/milvus/pull/44700))
+- Skip empty loop when processing growing segments ([#44608](https://github.com/milvus-io/milvus/pull/44608))
+- Fix bulk import issue with auto ID ([#44601](https://github.com/milvus-io/milvus/pull/44601))
+- Clean up collection metrics after dropping on RootCoord  ([#44525](https://github.com/milvus-io/milvus/pull/44525))
+- Fix incorrect local path usage in IDF Oracle ([#44328](https://github.com/milvus-io/milvus/pull/44328))
+
+
 ## v2.5.18
 
 Release date: September 19, 2025
