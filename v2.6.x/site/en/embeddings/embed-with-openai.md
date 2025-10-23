@@ -38,6 +38,10 @@ __Parameters__:
 
     The API key for accessing the OpenAI API.
 
+- __base_url__ (_string_)
+
+    The base URL for accessing the OpenAI API. The value defaults to __https://api.openai.com/v1__. However, if you are accessing a compatible API endpoint of a different model provider or a local vLLM instance, such as __http://localhost:8080/v1__, you can specify the URL here.
+
 - __dimensions__ (_int_)
 
     The number of dimensions the resulting output embeddings should have. Only supported in __text-embedding-3__ and later models.
