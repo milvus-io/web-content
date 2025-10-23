@@ -29,34 +29,36 @@ Milvus supports two complementary eviction modes (**sync** and **async**) that w
    </tr>
    <tr>
      <td><p>Trigger</p></td>
-     <td><p>During query or search when memory/disk usage exceeds internal limits.</p></td>
-     <td><p>Background thread periodically checks usage and triggers eviction when high watermark is exceeded.</p></td>
+     <td><p>Occurs during query or search when memory or disk usage exceeds internal limits.</p></td>
+     <td><p>Triggered by a background thread when usage exceeds the high watermark or when cached data reaches its time-to-live (TTL).</p></td>
    </tr>
    <tr>
      <td><p>Behavior</p></td>
-     <td><p>Query execution pauses while cache is reclaimed. Eviction continues until usage drops below the low watermark.</p></td>
-     <td><p>Runs continuously in the background; removes data when usage exceeds high watermark until it falls below the low watermark. Queries are not blocked.</p></td>
+     <td><p>Query or search operations pause temporarily while the QueryNode reclaims cache space. Eviction continues until usage drops below the low watermark or a timeout occurs. If timeout is reached and insufficient data can be reclaimed, the query or search may fail.</p></td>
+     <td><p>Runs periodically in the background, proactively evicting cached data when usage exceeds the high watermark or when data expires based on TTL. Eviction continues until usage drops below the low watermark. Queries are not blocked.</p></td>
    </tr>
    <tr>
      <td><p>Best For</p></td>
-     <td><p>Workloads that can tolerate brief latency spikes or when async eviction cannot reclaim space fast enough.</p></td>
-     <td><p>Latency-sensitive workloads requiring smooth performance. Ideal for proactive resource management.</p></td>
+     <td><p>Workloads that can tolerate brief latency spikes or temporary pauses during peak usage. Useful when async eviction cannot reclaim space fast enough.</p></td>
+     <td><p>Latency-sensitive workloads that require smooth and predictable query performance. Ideal for proactive resource management.</p></td>
    </tr>
    <tr>
      <td><p>Cautions</p></td>
-     <td><p>Adds latency to ongoing queries. May cause timeouts if insufficient reclaimable data.</p></td>
-     <td><p>Requires properly tuned watermarks. Slight background resource overhead.</p></td>
+     <td><p>Can cause short query delays or timeouts if insufficient evictable data is available.</p></td>
+     <td><p>Requires properly tuned high/low watermarks and TTL settings. Slight overhead from the background thread.</p></td>
    </tr>
    <tr>
      <td><p>Configuration</p></td>
      <td><p>Enabled via <code>evictionEnabled: true</code></p></td>
-     <td><p>Enabled via <code>backgroundEvictionEnabled: true</code> (requires <code>evictionEnabled: true</code>)</p></td>
+     <td><p>Enabled via <code>backgroundEvictionEnabled: true</code> (requires <code>evictionEnabled: true</code> at the same time)</p></td>
    </tr>
 </table>
 
 **Recommended setup**:
 
-Enable both modes for optimal balance. Async eviction manages cache usage proactively, while sync eviction acts as a safety fallback when resources are nearly exhausted.
+- Both eviction modes can be enabled together for optimal balance, provided your workload benefits from Tiered Storage and can tolerate eviction-related fetch latency.
+
+- For performance testing or latency-critical scenarios, consider disabling eviction entirely to avoid network fetch overhead after eviction.
 
 <div class="alert note">
 
@@ -104,7 +106,7 @@ queryNode:
 
 Watermarks define when cache eviction begins and ends for both memory and disk. Each resource type has two thresholds:
 
-- **High watermark**: Async eviction starts when usage exceeds this value.
+- **High watermark**: Eviction starts when usage exceeds this value.
 
 - **Low watermark**: Eviction continues until usage falls below this value.
 
@@ -212,59 +214,3 @@ queryNode:
      <td><p>Use a short TTL (hours) for highly dynamic data; use a long TTL (days) for stable datasets. Set 0 to disable time-based expiration.</p></td>
    </tr>
 </table>
-
-## Configure overcommit ratio
-
-Overcommit ratios define how much of the cache is reserved as evictable, allowing QueryNodes to temporarily exceed normal capacity before eviction intensifies.
-
-<div class="alert note">
-
-This configuration takes effect only when [eviction is enabled](eviction.md#Enable-eviction).
-
-</div>
-
-**Example YAML**:
-
-```yaml
-queryNode:
-  segcore:
-    tieredStorage:
-      evictionEnabled: true
-      # Evictable Memory Cache Ratio: 30%
-      # (30% of physical memory is reserved for storing evictable data)
-      evictableMemoryCacheRatio: 0.3
-      # Evictable Disk Cache Ratio: 30%
-      # (30% of disk capacity is reserved for storing evictable data)
-      evictableDiskCacheRatio: 0.3
-```
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Type</p></th>
-     <th><p>Range</p></th>
-     <th><p>Description</p></th>
-     <th><p>Recommended use case</p></th>
-   </tr>
-   <tr>
-     <td><p><code>evictableMemoryCacheRatio</code></p></td>
-     <td><p>float</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Portion of memory cache allocated for evictable data.</p></td>
-     <td><p>Start at <code>0.3</code>. Increase (0.5–0.7) for lower eviction frequency; decrease (0.1–0.2) for higher segment capacity.</p></td>
-   </tr>
-   <tr>
-     <td><p><code>evictableDiskCacheRatio</code></p></td>
-     <td><p>float</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Portion of disk cache allocated for evictable data.</p></td>
-     <td><p>Use similar ratios to memory unless disk I/O becomes a bottleneck.</p></td>
-   </tr>
-</table>
-
-**Boundary behavior**:
-
-- `1.0`: All cache is evictable — eviction rarely triggers, but fewer segments fit per QueryNode.
-
-- `0.0`: No evictable cache — eviction occurs frequently; more segments fit, but latency may increase.
-

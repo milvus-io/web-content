@@ -1,13 +1,13 @@
 ---
 id: warm-up.md
 title: "Warm Up"
-summary: "In Milvus, Warm Up complements Tiered Storage by alleviating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading."
+summary: "In Milvus, Warm Up complements Tiered Storage by alleviating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected types of fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading."
 beta: Milvus 2.6.4+
 ---
 
 # Warm Up
 
-In Milvus, **Warm Up** complements Tiered Storage by alleviating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading.
+In Milvus, **Warm Up** complements Tiered Storage by alleviating first-hit latency that occurs when cold data is accessed for the first time. Once configured, Warm Up preloads selected types of fields or indexes into the cache before a segment becomes queryable, ensuring that frequently accessed data is available immediately after loading.
 
 ## Why warm up
 
@@ -36,7 +36,7 @@ Warm Up is controlled under `queryNode.segcore.tieredStorage.warmup` in `milvus.
      <th><p>Typical scenario</p></th>
    </tr>
    <tr>
-     <td><p><code>sync</code> (default)</p></td>
+     <td><p><code>sync</code></p></td>
      <td><p>Preload before the segment becomes queryable. Load time increases slightly, but the first query incurs no latency.</p></td>
      <td><p>Use for performance-critical data that must be immediately available, such as high-frequency scalar indexes or key vector indexes used in search.</p></td>
    </tr>
@@ -56,9 +56,9 @@ queryNode:
       warmup:
         # options: sync, disable.
         # Specifies the timing for warming up the Tiered Storage cache.
-        # - "sync": data will be loaded into the cache before a segment is considered loaded.
-        # - "disable": data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.
-        # Defaults to "sync", except for vector field which defaults to "disable".
+        # - `sync`: data will be loaded into the cache before a segment is considered loaded.
+        # - `disable`: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.
+        # Defaults to `sync`, except for vector field which defaults to `disable`.
         scalarField: sync
         scalarIndex: sync
         vectorField: disable # cache warmup for vector field raw data is by default disabled.
