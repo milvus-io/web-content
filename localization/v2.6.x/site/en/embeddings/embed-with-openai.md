@@ -39,6 +39,8 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
 <p>The name of the OpenAI model to use for encoding. Valid options are <strong>text-embedding-3-small</strong>, <strong>text-embedding-3-large</strong>, and <strong>text-embedding-ada-002</strong> (default).</p></li>
 <li><p><strong>api_key</strong> (<em>string</em>)</p>
 <p>The API key for accessing the OpenAI API.</p></li>
+<li><p><strong>base_url</strong> (<em>string</em>)</p>
+<p>The base URL for accessing the OpenAI API. The value defaults to <strong>https://api.openai.com/v1</strong>. However, if you are accessing a compatible API endpoint of a different model provider or a local vLLM instance, such as <strong>http://localhost:8080/v1</strong>, you can specify the URL here.</p></li>
 <li><p><strong>dimensions</strong> (<em>int</em>)</p>
 <p>The number of dimensions the resulting output embeddings should have. Only supported in <strong>text-embedding-3</strong> and later models.</p></li>
 </ul>
