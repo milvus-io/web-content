@@ -51,32 +51,35 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p>Trigger</p></td>
-     <td><p>During query or search when memory/disk usage exceeds internal limits.</p></td>
-     <td><p>Background thread periodically checks usage and triggers eviction when high watermark is exceeded.</p></td>
+     <td><p>Occurs during query or search when memory or disk usage exceeds internal limits.</p></td>
+     <td><p>Triggered by a background thread when usage exceeds the high watermark or when cached data reaches its time-to-live (TTL).</p></td>
    </tr>
    <tr>
      <td><p>Behavior</p></td>
-     <td><p>Query execution pauses while cache is reclaimed. Eviction continues until usage drops below the low watermark.</p></td>
-     <td><p>Runs continuously in the background; removes data when usage exceeds high watermark until it falls below the low watermark. Queries are not blocked.</p></td>
+     <td><p>Query or search operations pause temporarily while the QueryNode reclaims cache space. Eviction continues until usage drops below the low watermark or a timeout occurs. If timeout is reached and insufficient data can be reclaimed, the query or search may fail.</p></td>
+     <td><p>Runs periodically in the background, proactively evicting cached data when usage exceeds the high watermark or when data expires based on TTL. Eviction continues until usage drops below the low watermark. Queries are not blocked.</p></td>
    </tr>
    <tr>
      <td><p>Best For</p></td>
-     <td><p>Workloads that can tolerate brief latency spikes or when async eviction cannot reclaim space fast enough.</p></td>
-     <td><p>Latency-sensitive workloads requiring smooth performance. Ideal for proactive resource management.</p></td>
+     <td><p>Workloads that can tolerate brief latency spikes or temporary pauses during peak usage. Useful when async eviction cannot reclaim space fast enough.</p></td>
+     <td><p>Latency-sensitive workloads that require smooth and predictable query performance. Ideal for proactive resource management.</p></td>
    </tr>
    <tr>
      <td><p>Cautions</p></td>
-     <td><p>Adds latency to ongoing queries. May cause timeouts if insufficient reclaimable data.</p></td>
-     <td><p>Requires properly tuned watermarks. Slight background resource overhead.</p></td>
+     <td><p>Can cause short query delays or timeouts if insufficient evictable data is available.</p></td>
+     <td><p>Requires properly tuned high/low watermarks and TTL settings. Slight overhead from the background thread.</p></td>
    </tr>
    <tr>
      <td><p>Configuration</p></td>
      <td><p>Enabled via <code translate="no">evictionEnabled: true</code></p></td>
-     <td><p>Enabled via <code translate="no">backgroundEvictionEnabled: true</code> (requires <code translate="no">evictionEnabled: true</code>)</p></td>
+     <td><p>Enabled via <code translate="no">backgroundEvictionEnabled: true</code> (requires <code translate="no">evictionEnabled: true</code> at the same time)</p></td>
    </tr>
 </table>
 <p><strong>Recommended setup</strong>:</p>
-<p>Enable both modes for optimal balance. Async eviction manages cache usage proactively, while sync eviction acts as a safety fallback when resources are nearly exhausted.</p>
+<ul>
+<li><p>Both eviction modes can be enabled together for optimal balance, provided your workload benefits from Tiered Storage and can tolerate eviction-related fetch latency.</p></li>
+<li><p>For performance testing or latency-critical scenarios, consider disabling eviction entirely to avoid network fetch overhead after eviction.</p></li>
+</ul>
 <div class="alert note">
 <p>For evictable fields and indexes, the eviction unit matches the loading granularity—scalar/vector fields are evicted by chunk, and scalar/vector indexes are evicted by segment.</p>
 </div>
@@ -142,7 +145,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Watermarks define when cache eviction begins and ends for both memory and disk. Each resource type has two thresholds:</p>
 <ul>
-<li><p><strong>High watermark</strong>: Async eviction starts when usage exceeds this value.</p></li>
+<li><p><strong>High watermark</strong>: Eviction starts when usage exceeds this value.</p></li>
 <li><p><strong>Low watermark</strong>: Eviction continues until usage falls below this value.</p></li>
 </ul>
 <div class="alert note">
@@ -247,62 +250,3 @@ beta: Milvus 2.6.4+
      <td><p>Use a short TTL (hours) for highly dynamic data; use a long TTL (days) for stable datasets. Set 0 to disable time-based expiration.</p></td>
    </tr>
 </table>
-<h2 id="Configure-overcommit-ratio" class="common-anchor-header">Configure overcommit ratio<button data-href="#Configure-overcommit-ratio" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Overcommit ratios define how much of the cache is reserved as evictable, allowing QueryNodes to temporarily exceed normal capacity before eviction intensifies.</p>
-<div class="alert note">
-<p>This configuration takes effect only when <a href="/docs/eviction.md#Enable-eviction">eviction is enabled</a>.</p>
-</div>
-<p><strong>Example YAML</strong>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">segcore:</span>
-    <span class="hljs-attr">tieredStorage:</span>
-      <span class="hljs-attr">evictionEnabled:</span> <span class="hljs-literal">true</span>
-      <span class="hljs-comment"># Evictable Memory Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of physical memory is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-comment"># Evictable Disk Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of disk capacity is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
-<button class="copy-code-btn"></button></code></pre>
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Type</p></th>
-     <th><p>Range</p></th>
-     <th><p>Description</p></th>
-     <th><p>Recommended use case</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableMemoryCacheRatio</code></p></td>
-     <td><p>float</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Portion of memory cache allocated for evictable data.</p></td>
-     <td><p>Start at <code translate="no">0.3</code>. Increase (0.5–0.7) for lower eviction frequency; decrease (0.1–0.2) for higher segment capacity.</p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableDiskCacheRatio</code></p></td>
-     <td><p>float</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Portion of disk cache allocated for evictable data.</p></td>
-     <td><p>Use similar ratios to memory unless disk I/O becomes a bottleneck.</p></td>
-   </tr>
-</table>
-<p><strong>Boundary behavior</strong>:</p>
-<ul>
-<li><p><code translate="no">1.0</code>: All cache is evictable — eviction rarely triggers, but fewer segments fit per QueryNode.</p></li>
-<li><p><code translate="no">0.0</code>: No evictable cache — eviction occurs frequently; more segments fit, but latency may increase.</p></li>
-</ul>
