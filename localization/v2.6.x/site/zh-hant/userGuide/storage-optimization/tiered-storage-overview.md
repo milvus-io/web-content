@@ -23,7 +23,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>在 Milvus 中，傳統的<em>全載</em>模式要求每個 QueryNode 在初始化時載入<a href="/docs/zh-hant/glossary.md#Segment">段</a>的所有資料欄位和索引，即使是可能永遠不會被存取的資料。這可確保資料的即時可用性，但通常會造成資源浪費，包括高記憶體使用率、大量磁碟活動以及顯著的 I/O 開銷，尤其是在處理大型資料集時。</p>
-<p><em>分層儲存</em>透過將資料快取與區段載入解耦來解決這個挑戰。Milvus 不再一次載入所有資料，而是引進一個快取層，區分熱資料 (本機快取) 和冷資料 (遠端儲存)。QueryNode 現在最初只載入輕量級的<em>元資料</em>，並依需求動態拉取或驅逐資料。這可大幅縮短載入時間、最佳化本機資源利用率，並使 QueryNode 能夠處理遠遠超過其實體記憶體或磁碟容量的資料集。</p>
+<p><em>分層儲存</em>透過將資料快取與區段載入解耦來解決這個挑戰。Milvus 不再一次載入所有資料，而是引進一個快取層，區分熱資料 (本機快取) 和冷資料 (遠端儲存)。QueryNode 現在最初只載入輕量級的<em>元資料</em>，並依需求動態拉取或驅逐欄位資料。這可大幅縮短載入時間、最佳化本機資源利用率，並使 QueryNode 能夠處理遠遠超過其實體記憶體或磁碟容量的資料集。</p>
 <p>在下列情況下，請考慮啟用分層儲存：</p>
 <ul>
 <li><p>超過單一 QueryNode 可用記憶體或 NVMe 容量的資料集</p></li>
@@ -95,17 +95,18 @@ beta: Milvus 2.6.4+
     </button></h3><p>在分層儲存模式下，工作流程有這些階段：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/load-workflow.png" alt="Load Workflow" class="doc-image" id="load-workflow" />
-   </span> <span class="img-wrapper"> <span>載入工作流程</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-load-workflow.png" alt="Querynode Load Workflow" class="doc-image" id="querynode-load-workflow" />
+   </span> <span class="img-wrapper"> <span>查詢節點載入工作流程</span> </span></p>
 <h4 id="Phase-1-Lazy-load" class="common-anchor-header">階段 1：懶惰載入</h4><p>在初始化時，Milvus 執行懶惰載入，僅快取段層級的元資料，例如模式定義、索引資訊和群組對應。</p>
 <p>在此階段不會快取實際欄位資料或索引檔案。這可讓集合在啟動後幾乎立即變得可查詢，同時保持最低的記憶體和磁碟消耗。</p>
 <p>由於欄位資料和索引檔案會保留在遠端儲存中，直到第一次存取為止，因此<em>第一次查詢</em>可能會經歷額外的延遲，因為所需的資料必須按需求取得。為了減輕關鍵欄位或索引的這種影響，您可以使用「<a href="/docs/zh-hant/tiered-storage-overview.md#Phase-2-Warm-up">預熱</a>」策略，在區段變為可查詢之前主動預先載入這些資料。</p>
 <p><strong>設定</strong></p>
-<p>啟用分層儲存時會自動套用。不需要其他手動設定。</p>
-<h4 id="Phase-2-Warm-up" class="common-anchor-header">第二階段：預熱</h4><p>為了減少<a href="/docs/zh-hant/tiered-storage-overview.md#Phase-1-Lazy-load">因懶惰負載</a>所引發的首次命中延遲，Milvus 提供了*預熱機制。</p>
-<p>在段變為可查詢之前，Milvus 可以主動從物件儲存取得並快取特定欄位或索引，確保第一次查詢直接命中快取資料，而不是觸發按需載入。</p>
+<p>啟用分層儲存時會自動套用。不需要手動設定。</p>
+<h4 id="Phase-2-Warm-up" class="common-anchor-header">第二階段：預熱</h4><p>為了減少<a href="/docs/zh-hant/tiered-storage-overview.md#Phase-1-Lazy-load">因懶惰負載</a>所引發的首次命中延遲，Milvus 提供了<em>預熱</em>機制。</p>
+<p>在段變為可查詢之前，Milvus 可以主動從物件儲存取得並快取特定欄位或索引，確保第一次查詢直接命中快取資料，而不是觸發隨選載入。</p>
+<p>在暖機期間，欄位會在區塊層級預先載入，而索引則會在區段層級預先載入。</p>
 <p><strong>設定</strong></p>
-<p>預熱設定定義在<strong>milvus.yaml</strong> 的分層儲存區段。您可以啟用或停用每個欄位或索引類型的預先載入，並指定偏好的策略。有關設定範例，請參閱「<a href="/docs/zh-hant/warm-up.md">預熱</a>」。</p>
+<p>暖機設定在<code translate="no">milvus.yaml</code> 的「分層儲存」區段中定義。您可以啟用或停用每個欄位或索引類型的預載，並指定偏好的策略。有關詳細設定，請參閱「<a href="/docs/zh-hant/warm-up.md">預熱</a>」。</p>
 <h4 id="Phase-3-Partial-load" class="common-anchor-header">第 3 階段：部分載入</h4><p>一旦開始查詢或搜尋，QueryNode 會執行<em>部分載入</em>，僅從物件儲存中取得所需的資料區塊或索引檔案。</p>
 <ul>
 <li><p><strong>欄位</strong>：按需求載入資料<strong>塊層級</strong>。僅擷取符合目前查詢條件的資料區塊，以減少 I/O 和記憶體的使用。</p></li>
@@ -113,13 +114,12 @@ beta: Milvus 2.6.4+
 </ul>
 <p><strong>設定</strong></p>
 <p>啟用分層儲存時，會自動套用部分載入。不需要手動設定。若要盡量減少關鍵資料的首次命中延遲，請結合「<a href="/docs/zh-hant/warm-up.md">預熱」</a>。</p>
-<h4 id="Phase-4-Eviction" class="common-anchor-header">第四階段：驅逐</h4><p>為了維持健康的資源使用，Milvus 會在達到臨界值時自動釋放未使用的快取資料。</p>
+<h4 id="Phase-4-Eviction" class="common-anchor-header">第四階段：驅逐</h4><p>為了維持健康的資源使用，Milvus 會在達到特定臨界值時自動釋放未使用的快取資料。</p>
 <p>遷出遵循<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">最近最少使用 (LRU)</a>政策，確保不常存取的資料會先被移除，而有效資料則保留在快取記憶體中。</p>
-<p>遷出受下列可設定項目的規範：</p>
+<p>遷出受下列可設定項目約束：</p>
 <ul>
 <li><p><strong>浮水印</strong>：定義觸發和停止驅逐的記憶體或磁碟臨界值。</p></li>
 <li><p><strong>快取 TTL</strong>：在定義的不活動持續時間後移除過時的快取資料。</p></li>
-<li><p><strong>超量訂購比率</strong>：在積極驅逐開始之前，允許暫時的快取記憶體超額訂購，協助吸收短期工作負載尖峰。</p></li>
 </ul>
 <p><strong>設定</strong></p>
 <p>在<strong>milvus.yaml</strong> 中啟用和調整驅逐參數。詳細設定請參閱<a href="/docs/zh-hant/eviction.md">驅逐</a>。</p>
@@ -202,10 +202,6 @@ beta: Milvus 2.6.4+
       
       <span class="hljs-comment"># Cache TTL (7 days)</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">604800</span>
-      
-      <span class="hljs-comment"># Overcommit Ratios</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -311,7 +307,8 @@ beta: Milvus 2.6.4+
 <li><p>QueryNode 配置的資源太少。水印是相對於可用資源而言的，因此配置不足會擴大錯誤的判斷。</p></li>
 <li><p>QueryNode 資源與其他工作負載共享，因此 Tiered Storage 無法正確評估實際可用容量。</p></li>
 </ul>
-<h3 id="Why-do-some-queries-fail-under-high-concurrency" class="common-anchor-header">為什麼有些查詢會在高併發下失敗？<button data-href="#Why-do-some-queries-fail-under-high-concurrency" class="anchor-icon" translate="no">
+<p>要解決這個問題，我們建議您為 QueryNode 分配專用資源。</p>
+<h3 id="Why-do-some-queries-fail-under-high-concurrency" class="common-anchor-header">為什麼有些查詢在高併發下會失敗？<button data-href="#Why-do-some-queries-fail-under-high-concurrency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -326,7 +323,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果太多查詢同時命中熱資料，QueryNode 資源限制仍可能會被超出。某些線程可能會因為資源預約超時而失敗。在負載降低後重試，或分配更多的資源，可以解決這個問題。</p>
+    </button></h3><p>如果太多查詢同時命中熱資料，QueryNode 的資源限制仍可能會被超出。有些線程可能會因為資源預留超時而失敗。在負載降低後重試，或分配更多的資源，可以解決這個問題。</p>
 <h3 id="Why-does-searchquery-latency-increase-after-enabling-Tiered-Storage" class="common-anchor-header">啟用分層儲存後，為何搜尋/查詢延遲會增加？<button data-href="#Why-does-searchquery-latency-increase-after-enabling-Tiered-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -345,22 +342,5 @@ beta: Milvus 2.6.4+
     </button></h3><p>可能的原因包括</p>
 <ul>
 <li><p>頻繁查詢冷資料，而冷資料必須從儲存中取得。</p></li>
-<li><p>超量提交比率過高，導致頻繁驅逐。</p></li>
-<li><p>水印設定太靠近，導致頻繁同步驅逐。</p></li>
+<li><p>水印設定得太靠近，造成頻繁的同步驅逐。</p></li>
 </ul>
-<h3 id="Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="common-anchor-header">分層儲存是否可以透過過度提交快取記憶體來處理無限制的資料？<button data-href="#Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>過度提交比率允許 QueryNode 處理比實體記憶體允許的更多區段，但是過高的比率可能會導致頻繁遷出、快取激增或查詢失敗。</p>

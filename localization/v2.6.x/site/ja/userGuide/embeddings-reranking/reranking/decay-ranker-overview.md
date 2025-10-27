@@ -23,9 +23,9 @@ beta: Milvus 2.6.x
     </button></h1><p>従来のベクトル検索では、結果は純粋にベクトルの類似性によってランク付けされる。しかし、実世界のアプリケーションでは、コンテンツが本当に関連性があるかどうかは、意味的な類似性だけではないことが多い。</p>
 <p>日常的なシナリオを考えてみよう：</p>
 <ul>
-<li><p>昨日の記事が3年前の類似記事よりも上位にランクされるべきニュース検索</p></li>
+<li><p>昨日の記事が3年前の類似記事よりも上位に表示されるべきニュース検索</p></li>
 <li><p>車で30分かかる店よりも、5分以内の店を優先するレストラン検索。</p></li>
-<li><p>検索クエリとの類似度が多少低くても、トレンド商品を上位に表示するEコマース・プラットフォーム</p></li>
+<li><p>検索クエリとの類似性が多少低くても、トレンド商品を上位に表示するEコマース・プラットフォーム</p></li>
 </ul>
 <p>これらのシナリオはすべて、ベクトルの類似性と、時間、距離、人気などの他の数値要素とのバランスをとるという共通のニーズを共有している。</p>
 <p>Milvusのディケイランカーは、数値フィールドの値に基づいて検索順位を調整することで、このニーズに対応します。これにより、ベクトルの類似性とデータの「新鮮さ」、「近さ」、またはその他の数値的特性とのバランスをとることができ、より直感的で文脈に関連した検索体験を生み出すことができます。</p>
@@ -50,9 +50,9 @@ beta: Milvus 2.6.x
 <li><p>各ディケイランカーは1つの数値フィールドしか使用できません。</p></li>
 <li><p><strong>時間単位の一貫性</strong>：時間ベースのディケイランキングを使用する場合、<code translate="no">origin</code> 、<code translate="no">scale</code> 、<code translate="no">offset</code> パラメータの単位は、コレクションデータで使用されている単位と一致する必要があります：</p>
 <ul>
-<li>コレクションがタイムスタンプを<strong>秒</strong>単位で保存する場合、すべてのパラメータに秒を使用する。</li>
-<li>コレクションがタイムスタンプを<strong>ミリ</strong>秒で格納している場合、すべてのパラメー タにミリ秒を使用する。</li>
-<li>コレクションがタイムスタンプを<strong>マイクロ秒</strong>単位で保存する場合、すべてのパラメータにマイクロ秒を使用します。</li>
+<li><p>コレクションがタイムスタンプを<strong>秒</strong>単位で保存する場合、すべてのパラメータに秒を使用する。</p></li>
+<li><p>コレクションがタイムスタンプを<strong>ミリ</strong>秒で格納している場合、すべてのパラメー タにミリ秒を使用する。</p></li>
+<li><p>コレクションがタイムスタンプを<strong>マイクロ秒</strong>単位で保存する場合、すべてのパラメータにマイクロ秒を使用します。</p></li>
 </ul></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">どのように機能するか<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -133,7 +133,7 @@ beta: Milvus 2.6.x
     </button></h3><p>最後に、Milvusは正規化された類似度スコアと減衰スコアを組み合わせ、最終的なランキングスコアを算出します：</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>ハイブリッド検索（複数のベクトルフィールドを組み合わせる）の場合、Milvusは検索リクエストの中で正規化類似度スコアが最大のものを採用する：</p>
+<p>ハイブリッド検索（複数のベクトルフィールドを組み合わせる）の場合、Milvusは検索リクエストの中から正規化類似度スコアの最大値を取ります：</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>例えば、ある研究論文がベクトル類似度で0.82、BM25ベースのテキスト検索で0.91のハイブリッド検索を行った場合、Milvusは減衰係数を適用する前に0.91を基本類似度スコアとして使用します。</p>
@@ -235,31 +235,19 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>ガウシアン (<code translate="no">gauss</code>)</p></td>
      <td><p>適度に広がる自然な感じの緩やかな減少</p></td>
-     <td><ul>
-<li><p>バランスの取れた結果を必要とする一般的な検索</p></li>
-<li><p>ユーザーが直感的に距離を感じるアプリケーション</p></li>
-<li><p>適度な距離が結果に大きなペナルティを与えない場合</p></li>
-</ul></td>
+     <td><ul><li><p>バランスの取れた結果を必要とする一般的な検索</p></li><li><p>ユーザーが直感的に距離を感じるアプリケーション</p></li><li><p>適度な距離が結果に大きなペナルティを与えない場合</p></li></ul></td>
      <td><p>レストラン検索において、3km離れた場所にある質の高いレストランは、近隣のレストランよりも低いランクではあるが、発見可能なままである。</p></td>
    </tr>
    <tr>
      <td><p>指数 (<code translate="no">exp</code>)</p></td>
      <td><p>最初は急激に減少するが、ロングテールを維持する</p></td>
-     <td><ul>
-<li><p>最新情報が重要なニュースフィード</p></li>
-<li><p>新鮮なコンテンツが重要なソーシャルメディア</p></li>
-<li><p>近接性が強く好まれるが、例外的に遠方のアイテムも表示され続けるべき場合</p></li>
-</ul></td>
+     <td><ul><li><p>最新情報が重要なニュースフィード</p></li><li><p>新鮮なコンテンツが重要なソーシャルメディア</p></li><li><p>近接性が強く好まれるが、例外的に遠方のアイテムも表示され続けるべき場合</p></li></ul></td>
      <td><p>ニュースアプリでは、昨日の記事は1週間前のコンテンツよりもはるかに上位にランクされるが、関連性の高い古い記事が表示されることもある。</p></td>
    </tr>
    <tr>
      <td><p>リニア (<code translate="no">linear</code>)</p></td>
      <td><p>一貫性があり、予測可能な減少で、明確なカットオフがある。</p></td>
-     <td><ul>
-<li><p>自然な境界線を持つアプリケーション</p></li>
-<li><p>距離制限のあるサービス</p></li>
-<li><p>有効期限や明確な閾値のあるコンテンツ</p></li>
-</ul></td>
+     <td><ul><li><p>自然な境界線を持つアプリケーション</p></li><li><p>距離制限のあるサービス</p></li><li><p>有効期限や明確な閾値のあるコンテンツ</p></li></ul></td>
      <td><p>イベント・ファインダーでは、2週間先のウィンドウを超えるイベントはまったく表示されません。</p></td>
    </tr>
 </table>
@@ -304,6 +292,8 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h3><p>ディケイランキングを実装するには、まず<code translate="no">Function</code> オブジェクトを適切な設定で定義します：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
@@ -322,6 +312,46 @@ decay_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
+
+<span class="hljs-keyword">import</span> java.time.ZoneId;
+<span class="hljs-keyword">import</span> java.time.ZonedDateTime;
+
+<span class="hljs-type">ZonedDateTime</span> <span class="hljs-variable">zdt</span> <span class="hljs-operator">=</span> ZonedDateTime.of(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">25</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, ZoneId.systemDefault());
+
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;time_decay&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;timestamp&quot;</span>))
+        .function(<span class="hljs-string">&quot;gauss&quot;</span>)
+        .origin(zdt.toInstant().toEpochMilli())
+        .scale(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .offset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .build();
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">
+<span class="hljs-keyword">import</span> {<span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> decayRanker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;time_decay&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;timestamp&quot;</span>],
+  <span class="hljs-attr">function_type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;decay&quot;</span>,
+    <span class="hljs-attr">function</span>: <span class="hljs-string">&quot;gauss&quot;</span>,
+    <span class="hljs-attr">origin</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).<span class="hljs-title function_">getTime</span>(),
+    <span class="hljs-attr">scale</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+    <span class="hljs-attr">offset</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+    <span class="hljs-attr">decay</span>: <span class="hljs-number">0.5</span>,
+  },
+};
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -338,63 +368,53 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>はい</p></td>
-     <td><p>減衰スコア計算用の数値フィールド。どのデータ属性が減衰の計算に使用されるかを決定する（例えば、時間ベースの減衰にはタイムスタンプ、位置ベースの減衰には座標）。 
- 関連する数値を含むコレクション内のフィールドである必要があります。INT8/16/32/64、FLOAT、DOUBLEをサポート。</p></td>
+     <td><p>減衰スコア計算用の数値フィールド。どのデータ属性が減衰の計算に使用されるかを決定する（例えば、時間ベースの減衰にはタイムスタンプ、位置ベースの減衰には座標）。 </p><p>関連する数値を含むコレクション内のフィールドである必要があります。INT8/16/32/64、FLOAT、DOUBLEをサポート。</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>はい</p></td>
-     <td><p>作成される関数のタイプを指定する。 すべての減衰ランカーに対して<code translate="no">RERANK</code> に設定する必要がある。</p></td>
+     <td><p>作成する関数のタイプを指定する。</p><p>すべての減衰ランカーに対して<code translate="no">RERANK</code> に設定する必要がある。</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>はい</p></td>
-     <td><p>使用するリランキング方法を指定します。 ディケイランキング機能を有効にするには、<code translate="no">"decay"</code> に設定する必要があります。</p></td>
+     <td><p>使用するリランキング方法を指定します。</p><p>ディケイランキング機能を有効にするには、<code translate="no">"decay"</code> に設定する必要があります。</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>はい</p></td>
-     <td><p>どの数学的ディケイランカーを適用するかを指定します。適切な関数を選択するためのガイダンスについては、<a href="/docs/ja/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a>セクションを参照してください。</p></td>
+     <td><p>どの数学的ディケイランカーを適用するかを指定します。関連性低下の曲線形状を決定する。</p><p>適切な関数を選択するためのガイダ ンスについては、「<a href="/docs/ja/decay-ranker-overview.md#Choose-the-right-decay-ranker">適切なディケイランカーを選択する」</a>セクションを参照。</p></td>
      <td><p><code translate="no">"gauss"</code> <code translate="no">"exp"</code> または<code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>はい</p></td>
-     <td><p>減衰スコアを計算する基準点。この値のアイテムは、最大関連性スコアを受け取ります。時間ベースの減衰の場合、時間単位は収集データと一致する必要があります。</p></td>
-     <td><ul>
-<li>タイムスタンプの場合: 現在時刻 (例:<code translate="no">int(time.time())</code>)</li>
-<li>ジオロケーションの場合：ユーザーの現在の座標</li>
-</ul></td>
+     <td><p>減衰スコアを計算する基準点。この値のアイテムは最大関連性スコアを獲得する。</p><p>時間ベースの減衰の場合、時間単位は収集データと一致する必要があります。</p></td>
+     <td><ul><li><p>タイムスタンプの場合: 現在時刻 (例:<code translate="no">int(time.time())</code>)</p></li><li><p>ジオロケーションの場合：ユーザーの現在の座標</p></li></ul></td>
    </tr>
    <tr>
-          <td><p><code translate="no">params.scale</code></p></td>
+     <td><p><code translate="no">params.scale</code></p></td>
      <td><p>はい</p></td>
-     <td><p>関連性が<code translate="no">decay</code> の値まで低下する距離または時間。関連性の低下速度を制御する。時間ベースの減衰の場合、時間単位は収集データと一致する必要があります。 値が大きいほど関連性が緩やかに低下し、値が小さいほど急激に低下します。</p></td>
-     <td><ul>
-<li>時間の場合：期間（秒）（例：<code translate="no">7 * 24 * 60 * 60</code> 7日間</li>
-<li>距離の場合：メートル（例：<code translate="no">5000</code> 、5kmの場合）</li>
-</ul></td>
+     <td><p>関連性が<code translate="no">decay</code> の値まで低下する距離または時間。関連性の低下速度を制御する。</p><p>時間ベースの減衰の場合、時間単位は収集データと一致する必要があります。</p><p>値が大きいほど関連性が緩やかに低下し、値が小さいほど 急激に低下する。</p></td>
+     <td><ul><li><p>時間の場合：期間（秒）（例：<code translate="no">7 * 24 * 60 * 60</code> 7日間</p></li><li><p>距離の場合：メートル（例：<code translate="no">5000</code> 、5kmの場合）</p></li></ul></td>
    </tr>
    <tr>
-          <td><p><code translate="no">params.offset</code></p></td>
+     <td><p><code translate="no">params.offset</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p><code translate="no">origin</code> の周囲に「減衰なしゾーン」を設定します。このゾーンでは、アイテムは満点を維持します（減衰スコア = 1.0）。<code translate="no">origin</code> のこの範囲内のアイテムは、最大の関連性を維持します。時間ベースの減衰の場合、時間単位は収集データと一致する必要があります。</p></td>
-     <td><ul>
-<li>時間の場合：秒単位の期間（例：<code translate="no">24 * 60 * 60</code> 1 日間）</li>
-<li>距離：メートル（例：<code translate="no">500</code> 500m）</li>
-</ul></td>
+     <td><p><code translate="no">origin</code> の周囲に「減衰なしゾーン」を作成し、アイテムは満点を維持します (減衰スコア = 1.0)。</p><p>時間ベースの減衰の場合、時間単位は収集データと一致する必要があります。</p><p><code translate="no">origin</code> のこの範囲内のアイテムは、最大の関連性を維持します。</p></td>
+     <td><ul><li><p>時間の場合：秒単位の期間（例：<code translate="no">24 * 60 * 60</code> 1日分）</p></li><li><p>距離の場合：メートル（例：<code translate="no">500</code> 500m）</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p><code translate="no">scale</code> 距離でのスコア値。曲線の急峻さを制御する。値が低いほど急峻な減少カーブを描き、値が高いほど緩やかな減少カーブを描く。 0 から 1 の間でなければならない。</p></td>
+     <td><p><code translate="no">scale</code> 、カーブの急勾配を制御する。値が低いほど急な減少カーブを描き、値が高いほど緩やかな減少カーブを描く。</p><p>0 から 1 の間でなければならない。</p></td>
      <td><p><code translate="no">0.5</code> (デフォルト)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル探索に適用<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル検索に適用<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -409,19 +429,51 @@ decay_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ディケイランカーを定義した後、<code translate="no">ranker</code> パラメータに渡すことで、検索操作中に適用することができます：</p>
+    </button></h3><p>減衰ランカーを定義した後、<code translate="no">ranker</code> パラメータに渡すことで、検索操作中に適用することができます：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索に適用<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;search query&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],
+  <span class="hljs-attr">rerank</span>: ranker,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索への適用<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -436,19 +488,21 @@ results = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ディケイランカーは複数のベクトルフィールドを組み合わせたハイブリッド検索にも適用できます：</p>
+    </button></h3><p>ディケイランカーは、複数のベクトルフィールドを組み合わせたハイブリッド検索操作にも適用できます：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
 dense_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
 )
 
 sparse_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
@@ -463,4 +517,57 @@ hybrid_results = milvus_client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>ハイブリッド検索では、Milvusはまずすべてのベクトルフィールドから最大の類似度スコアを見つけ、そのスコアに減衰係数を適用します。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding)))
+        .limit(<span class="hljs-number">20</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;search query&quot;</span>)))
+        .limit(<span class="hljs-number">20</span>)
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+                .collectionName(COLLECTION_NAME)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(<span class="hljs-number">10</span>)
+                .outputFields(Arrays.asList(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
+                .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> denseRequest = {
+  <span class="hljs-attr">data</span>: [your_query_vector_1], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+};
+
+<span class="hljs-keyword">const</span> sparseRequest = {
+  <span class="hljs-attr">data</span>: [your_query_vector_2], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+};
+
+<span class="hljs-keyword">const</span> hybridResults = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">hybrid_search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">data</span>: [denseRequest, sparseRequest],
+  <span class="hljs-attr">ranker</span>: decayRanker,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],
+});
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>ハイブリッド検索では、Milvusはまずすべてのベクトルフィールドから最大の類似スコアを見つけ、そのスコアにディケイファクターを適用します。</p>

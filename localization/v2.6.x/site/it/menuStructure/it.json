@@ -383,7 +383,7 @@
         "order": 2,
         "children": [
           {
-            "label": "Schema spiegato",
+            "label": "Schema Explained",
             "id": "schema.md",
             "order": 0,
             "children": []
@@ -600,7 +600,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Fermarsi",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -717,7 +717,7 @@
             "children": []
           },
           {
-            "label": "Indici vettoriali flottanti",
+            "label": "Indici vettoriali fluttuanti",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -1233,7 +1233,7 @@
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1260,12 +1260,6 @@
                 "label": "Sfratto",
                 "id": "eviction.md",
                 "order": 2,
-                "children": []
-              },
-              {
-                "label": "Migliori pratiche per lo storage a livelli",
-                "id": "best-practices-for-tiered-storage.md",
-                "order": 3,
                 "children": []
               }
             ]
@@ -1763,7 +1757,7 @@
             "children": []
           },
           {
-            "label": "Connettersi a Kafka con SASL/SSL",
+            "label": "Connect to Kafka with SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -1973,10 +1967,17 @@
         "children": []
       },
       {
+        "label": "EsportazioneLog",
+        "id": "export-log",
+        "order": 9,
+        "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
+        "children": []
+      },
+      {
         "label": "Modelli",
         "id": "models",
         "isMenu": true,
-        "order": 9,
+        "order": 10,
         "children": [
           {
             "label": "Incorporazioni",
@@ -2119,7 +2120,7 @@
       {
         "label": "Aiutante di codice SDK (MCP)",
         "id": "milvus-sdk-helper-mcp.md",
-        "order": 10,
+        "order": 11,
         "children": []
       }
     ]
@@ -2253,7 +2254,7 @@
             "children": []
           },
           {
-            "label": "Dificare",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
@@ -2744,7 +2745,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

@@ -442,7 +442,7 @@
                 "children": []
               },
               {
-                "label": "JSON 碎纸",
+                "label": "JSON 粉碎",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -1261,12 +1261,6 @@
                 "id": "eviction.md",
                 "order": 2,
                 "children": []
-              },
-              {
-                "label": "分层存储最佳实践",
-                "id": "best-practices-for-tiered-storage.md",
-                "order": 3,
-                "children": []
               }
             ]
           }
@@ -1973,10 +1967,17 @@
         "children": []
       },
       {
+        "label": "导出日志",
+        "id": "export-log",
+        "order": 9,
+        "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
+        "children": []
+      },
+      {
         "label": "模型",
         "id": "models",
         "isMenu": true,
-        "order": 9,
+        "order": 10,
         "children": [
           {
             "label": "Embeddings",
@@ -2119,7 +2120,7 @@
       {
         "label": "SDK 代码助手（MCP）",
         "id": "milvus-sdk-helper-mcp.md",
-        "order": 10,
+        "order": 11,
         "children": []
       }
     ]

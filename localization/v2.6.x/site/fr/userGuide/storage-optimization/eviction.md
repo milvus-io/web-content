@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>L'éviction gère les ressources de cache de chaque nœud de requête dans Milvus. Lorsqu'elle est activée, elle supprime automatiquement les données mises en cache lorsque les seuils de ressources sont atteints, ce qui garantit des performances stables et empêche l'épuisement de la mémoire ou du disque.</p>
-<p>L'éviction utilise une politique de <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">moindre utilisation (LRU)</a> pour récupérer l'espace du cache. Les métadonnées sont toujours mises en cache et ne sont jamais évacuées, car elles sont essentielles pour la planification des requêtes et sont généralement de petite taille.</p>
+<p>L'éviction utilise une politique de <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">moindre utilisation (LRU</a> ) pour récupérer l'espace du cache. Les métadonnées sont toujours mises en cache et ne sont jamais évacuées, car elles sont essentielles pour la planification des requêtes et sont généralement de petite taille.</p>
 <div class="alert note">
 <p>L'éviction doit être explicitement activée. Sans configuration, les données mises en cache continueront à s'accumuler jusqu'à ce que les ressources soient épuisées.</p>
 </div>
@@ -52,34 +52,37 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p>Déclenchement</p></td>
-     <td><p>Pendant une requête ou une recherche, lorsque l'utilisation de la mémoire/du disque dépasse les limites internes.</p></td>
-     <td><p>Le thread d'arrière-plan vérifie périodiquement l'utilisation et déclenche l'éviction lorsque le filigrane est dépassé.</p></td>
+     <td><p>Se produit pendant une requête ou une recherche lorsque l'utilisation de la mémoire ou du disque dépasse les limites internes.</p></td>
+     <td><p>Déclenchée par un thread d'arrière-plan lorsque l'utilisation dépasse le filigrane élevé ou lorsque les données mises en cache atteignent leur durée de vie (TTL).</p></td>
    </tr>
    <tr>
      <td><p>Comportement</p></td>
-     <td><p>L'exécution de la requête est interrompue pendant que le cache est récupéré. L'expulsion se poursuit jusqu'à ce que l'utilisation passe sous le seuil inférieur.</p></td>
-     <td><p>Exécution continue en arrière-plan ; suppression des données lorsque l'utilisation dépasse le filigrane élevé jusqu'à ce qu'elle tombe en dessous du filigrane bas. Les requêtes ne sont pas bloquées.</p></td>
+     <td><p>Les opérations d'interrogation ou de recherche s'interrompent temporairement pendant que le QueryNode récupère l'espace du cache. L'éviction se poursuit jusqu'à ce que l'utilisation passe en dessous du filigrane bas ou qu'un dépassement de délai se produise. Si le délai d'attente est atteint et que les données récupérées sont insuffisantes, la requête ou la recherche peut échouer.</p></td>
+     <td><p>S'exécute périodiquement en arrière-plan, expulsant de manière proactive les données mises en cache lorsque l'utilisation dépasse le filigrane haut ou lorsque les données expirent en fonction du TTL. L'expulsion se poursuit jusqu'à ce que l'utilisation passe sous le seuil inférieur. Les requêtes ne sont pas bloquées.</p></td>
    </tr>
    <tr>
      <td><p>Idéal pour</p></td>
-     <td><p>Les charges de travail qui peuvent tolérer de brefs pics de latence ou lorsque l'éviction asynchrone ne peut pas récupérer l'espace assez rapidement.</p></td>
-     <td><p>Charges de travail sensibles à la latence et nécessitant des performances régulières. Idéal pour une gestion proactive des ressources.</p></td>
+     <td><p>Les charges de travail qui peuvent tolérer de brefs pics de latence ou des pauses temporaires pendant les pics d'utilisation. Utile lorsque l'éviction asynchrone ne permet pas de récupérer l'espace assez rapidement.</p></td>
+     <td><p>Charges de travail sensibles à la latence qui nécessitent des performances de requête fluides et prévisibles. Idéal pour une gestion proactive des ressources.</p></td>
    </tr>
    <tr>
      <td><p>Avertissement</p></td>
-     <td><p>Ajoute de la latence aux requêtes en cours. Peut entraîner des dépassements de délai si le nombre de données récupérables est insuffisant.</p></td>
-     <td><p>Nécessite des filigranes correctement réglés. Légère surcharge des ressources en arrière-plan.</p></td>
+     <td><p>Peut entraîner de courts délais d'exécution des requêtes ou des dépassements de délai si le nombre de données à évincer est insuffisant.</p></td>
+     <td><p>Nécessite des filigranes haut/bas et des paramètres TTL correctement réglés. Légère surcharge due au fil d'exécution en arrière-plan.</p></td>
    </tr>
    <tr>
      <td><p>Configuration</p></td>
      <td><p>Activé via <code translate="no">evictionEnabled: true</code></p></td>
-     <td><p>Activé via <code translate="no">backgroundEvictionEnabled: true</code> (nécessite <code translate="no">evictionEnabled: true</code>)</p></td>
+     <td><p>Activé via <code translate="no">backgroundEvictionEnabled: true</code> (nécessite <code translate="no">evictionEnabled: true</code> en même temps)</p></td>
    </tr>
 </table>
 <p><strong>Configuration recommandée</strong>:</p>
-<p>Activez les deux modes pour un équilibre optimal. L'éviction asynchrone gère l'utilisation du cache de manière proactive, tandis que l'éviction synchrone agit comme une solution de secours lorsque les ressources sont presque épuisées.</p>
+<ul>
+<li><p>Les deux modes d'éviction peuvent être activés ensemble pour un équilibre optimal, à condition que votre charge de travail bénéficie du stockage hiérarchisé et puisse tolérer la latence de récupération liée à l'éviction.</p></li>
+<li><p>Pour les tests de performance ou les scénarios critiques en termes de latence, envisagez de désactiver complètement l'éviction afin d'éviter la surcharge de recherche sur le réseau après l'éviction.</p></li>
+</ul>
 <div class="alert note">
-<p>Pour les champs et les index évitables, l'unité d'éviction correspond à la granularité de chargement : les champs scalaires/vectoriels sont évincés par bloc, et les index scalaires/vectoriels sont évincés par segment.</p>
+<p>Pour les champs et les index évitables, l'unité d'éviction correspond à la granularité de chargement : les champs scalaires/vectoriels sont évincés par bloc et les index scalaires/vectoriels sont évincés par segment.</p>
 </div>
 <h2 id="Enable-eviction" class="common-anchor-header">Activer l'éviction<button data-href="#Enable-eviction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -143,7 +146,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Les points de repère définissent le moment où l'éviction du cache commence et se termine pour la mémoire et le disque. Chaque type de ressource dispose de deux seuils :</p>
 <ul>
-<li><p><strong>Filigrane élevé</strong>: L'éviction asynchrone commence lorsque l'utilisation dépasse cette valeur.</p></li>
+<li><p><strong>Filigrane élevé</strong>: L'éviction commence lorsque l'utilisation dépasse cette valeur.</p></li>
 <li><p><strong>Filigrane bas</strong>: L'éviction se poursuit jusqu'à ce que l'utilisation tombe en dessous de cette valeur.</p></li>
 </ul>
 <div class="alert note">
@@ -248,62 +251,3 @@ beta: Milvus 2.6.4+
      <td><p>Utilisez un TTL court (heures) pour les données très dynamiques ; utilisez un TTL long (jours) pour les ensembles de données stables. Définissez 0 pour désactiver l'expiration basée sur le temps.</p></td>
    </tr>
 </table>
-<h2 id="Configure-overcommit-ratio" class="common-anchor-header">Configuration du taux de surengagement<button data-href="#Configure-overcommit-ratio" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Les ratios d'overcommit définissent la part du cache réservée à l'éviction, ce qui permet aux QueryNodes de dépasser temporairement la capacité normale avant que l'éviction ne s'intensifie.</p>
-<div class="alert note">
-<p>Cette configuration ne prend effet que lorsque <a href="/docs/fr/eviction.md#Enable-eviction">l'éviction est activée</a>.</p>
-</div>
-<p><strong>Exemple YAML</strong>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">segcore:</span>
-    <span class="hljs-attr">tieredStorage:</span>
-      <span class="hljs-attr">evictionEnabled:</span> <span class="hljs-literal">true</span>
-      <span class="hljs-comment"># Evictable Memory Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of physical memory is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-comment"># Evictable Disk Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of disk capacity is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
-<button class="copy-code-btn"></button></code></pre>
-<table>
-   <tr>
-     <th><p>Paramètre</p></th>
-     <th><p>Type de paramètre</p></th>
-     <th><p>Fourchette</p></th>
-     <th><p>Description de la configuration</p></th>
-     <th><p>Cas d'utilisation recommandé</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableMemoryCacheRatio</code></p></td>
-     <td><p>flottant</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Partie de la mémoire cache allouée aux données pouvant être supprimées.</p></td>
-     <td><p>Démarrage à <code translate="no">0.3</code>. Augmenter (0,5-0,7) pour une fréquence d'éviction plus faible ; diminuer (0,1-0,2) pour une capacité de segment plus élevée.</p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableDiskCacheRatio</code></p></td>
-     <td><p>flottant</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Partie du cache du disque allouée aux données pouvant être évincées.</p></td>
-     <td><p>Utiliser des ratios similaires à ceux de la mémoire, sauf si les E/S sur disque deviennent un goulot d'étranglement.</p></td>
-   </tr>
-</table>
-<p><strong>Comportement limite</strong>:</p>
-<ul>
-<li><p><code translate="no">1.0</code>: Tout le cache est évitable - l'éviction se déclenche rarement, mais il y a moins de segments par noeud de requête.</p></li>
-<li><p><code translate="no">0.0</code>: Pas de cache évitable - l'éviction se produit fréquemment ; davantage de segments peuvent être traités, mais la latence peut augmenter.</p></li>
-</ul>

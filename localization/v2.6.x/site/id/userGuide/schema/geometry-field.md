@@ -31,6 +31,9 @@ beta: Milvus 2.6.4+
 <li><p>Pencarian multi-modal: "ambil foto yang mirip <strong>dalam jarak 1 km</strong> dari titik ini"</p></li>
 <li><p>Peta &amp; logistik: "aset <strong>di dalam</strong> suatu wilayah" atau "rute yang <strong>berpotongan</strong> dengan jalur"</p></li>
 </ul>
+<div class="alert note">
+<p>Bidang GEOMETRI membutuhkan PyMilvus 2.7.0rc46 atau yang lebih baru. Versi ini saat ini hanya tersedia dengan membangun dari sumbernya. Untuk instruksi, lihat <a href="https://github.com/milvus-io/pymilvus#faq">Cara membangun PyMilvus dari sumbernya</a>.</p>
+</div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Apa yang dimaksud dengan bidang GEOMETRI?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +49,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bidang GEOMETRI adalah sebuah tipe data yang ditentukan oleh skema (<code translate="no">DataType.GEOMETRY</code>) di Milvus yang menyimpan data geometri. Ketika bekerja dengan bidang geometri, Anda berinteraksi dengan data menggunakan format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT</a> ), representasi yang dapat dibaca oleh manusia yang digunakan untuk memasukkan data dan melakukan kueri. Secara internal, Milvus mengubah WKT menjadi <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB</a> ) untuk penyimpanan dan pemrosesan yang efisien, tetapi Anda tidak perlu menangani WKB secara langsung.</p>
+    </button></h2><p>Bidang GEOMETRI adalah sebuah tipe data yang didefinisikan skema (<code translate="no">DataType.GEOMETRY</code>) di Milvus yang menyimpan data geometri. Ketika bekerja dengan field geometri, Anda berinteraksi dengan data menggunakan format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT</a> ), representasi yang dapat dibaca oleh manusia yang digunakan untuk memasukkan data dan melakukan kueri. Secara internal, Milvus mengubah WKT menjadi <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB</a> ) untuk penyimpanan dan pemrosesan yang efisien, tetapi Anda tidak perlu menangani WKB secara langsung.</p>
 <p>Tipe data <code translate="no">GEOMETRY</code> mendukung objek-objek geometris berikut ini:</p>
 <ul>
 <li><p><strong>TITIK</strong>: <code translate="no">POINT (x y)</code>; misalnya, <code translate="no">POINT (13.403683 52.520711)</code> di mana <code translate="no">x</code> = bujur dan <code translate="no">y</code> = lintang</p></li>
@@ -88,7 +91,9 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menggunakan bidang <code translate="no">GEOMETRY</code>, tentukan secara eksplisit dalam skema koleksi Anda saat membuat koleksi. Contoh berikut ini menunjukkan cara membuat koleksi dengan bidang <code translate="no">geo</code> bertipe <code translate="no">DataType.GEOMETRY</code>.</p>
+    </button></h3><p>Untuk menggunakan bidang <code translate="no">GEOMETRY</code>, tentukan secara eksplisit dalam skema koleksi Anda saat membuat koleksi. Contoh berikut ini menunjukkan cara membuat koleksi dengan field <code translate="no">geo</code> bertipe <code translate="no">DataType.GEOMETRY</code>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -104,6 +109,14 @@ schema.add_field(<span class="hljs-string">&quot;embeddings&quot;</span>, DataTy
 schema.add_field(<span class="hljs-string">&quot;name&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">128</span>)
 
 milvus_client.create_collection(collection_name, schema=schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Dalam contoh ini, bidang <code translate="no">GEOMETRY</code> yang didefinisikan dalam skema koleksi mengizinkan nilai null dengan <code translate="no">nullable=True</code>. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p>
@@ -124,6 +137,8 @@ milvus_client.create_collection(collection_name, schema=schema, consistency_leve
         ></path>
       </svg>
     </button></h3><p>Masukkan entitas dengan data geometri dalam format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a>. Berikut adalah contoh dengan beberapa titik geografis:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">rng = np.random.default_rng(seed=<span class="hljs-number">19530</span>)
 geo_points = [
     <span class="hljs-string">&#x27;POINT(13.399710 52.518010)&#x27;</span>,
@@ -145,6 +160,17 @@ rows = [
 
 insert_result = milvus_client.insert(collection_name, rows)
 <span class="hljs-built_in">print</span>(insert_result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># {&#x27;insert_count&#x27;: 6, &#x27;ids&#x27;: [1, 2, 3, 4, 5, 6]}</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-3-Filtering-operations" class="common-anchor-header">Langkah 3: Operasi pemfilteran<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -164,19 +190,29 @@ insert_result = milvus_client.insert(collection_name, rows)
     </button></h3><p>Sebelum Anda dapat melakukan operasi pemfilteran pada bidang <code translate="no">GEOMETRY</code>, pastikan:</p>
 <ul>
 <li><p>Anda telah membuat indeks pada setiap bidang vektor.</p></li>
-<li><p>Koleksi telah dimuat ke dalam memori.</p></li>
+<li><p>Koleksi dimuat ke dalam memori.</p></li>
 </ul>
 <p><details></p>
 <p><summary>Tampilkan kode</summary></p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = milvus_client.prepare_index_params()
 index_params.add_index(field_name=<span class="hljs-string">&quot;embeddings&quot;</span>, metric_type=<span class="hljs-string">&quot;L2&quot;</span>)
 
 milvus_client.create_index(collection_name, index_params)
 milvus_client.load_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Setelah persyaratan ini terpenuhi, Anda dapat menggunakan ekspresi dengan operator geometri khusus untuk memfilter koleksi Anda berdasarkan nilai geometri.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">Menentukan ekspresi filter</h4><p>Untuk memfilter pada bidang <code translate="no">GEOMETRY</code>, gunakan operator khusus geometri dengan format ekspresi berikut: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, di mana:</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">Menentukan ekspresi penyaringan</h4><p>Untuk memfilter pada bidang <code translate="no">GEOMETRY</code>, gunakan operator khusus geometri dengan format ekspresi berikut: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, di mana:</p>
 <ul>
 <li><p><code translate="no">{operator}</code> adalah operator geometri yang didukung (misalnya, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Untuk daftar lengkap operator yang tersedia, lihat <a href="/docs/id/geometry-operators.md">Operator Geometri</a>.</p></li>
 <li><p><code translate="no">geo_field</code> adalah nama bidang <code translate="no">GEOMETRY</code> yang didefinisikan dalam skema koleksi Anda.</p></li>
@@ -186,7 +222,9 @@ milvus_client.load_collection(collection_name)
 <p>Beberapa operator, seperti <code translate="no">ST_DWITHIN</code>, mungkin memerlukan parameter tambahan. Untuk detail dan contoh penggunaan setiap operator, lihat <a href="/docs/id/geometry-operators.md">Operator Geometri</a>.</p>
 </div>
 <p>Contoh berikut ini menunjukkan cara menggunakan operator khusus geometri yang berbeda dalam ekspresi filter:</p>
-<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Contoh 1: Menemukan entitas dalam area persegi panjang</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Contoh 1: Menemukan entitas dalam area persegi panjang</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 bottom_right_lon, bottom_right_lat = <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>
 bounding_box_wkt = <span class="hljs-string">f&quot;POLYGON((<span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>))&quot;</span>
 
@@ -197,8 +235,28 @@ query_results = milvus_client.query(
 )
 <span class="hljs-keyword">for</span> ret <span class="hljs-keyword">in</span> query_results:
     <span class="hljs-built_in">print</span>(ret)
+    
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop D&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408223 52.516876)&#x27;, &#x27;id&#x27;: 4}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop F&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408529 52.519274)&#x27;, &#x27;id&#x27;: 6}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop A&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.39971 52.51801)&#x27;, &#x27;id&#x27;: 1}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop B&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.403934 52.522877)&#x27;, &#x27;id&#x27;: 2}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop C&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.405088 52.521124)&#x27;, &#x27;id&#x27;: 3}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop D&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408223 52.516876)&#x27;, &#x27;id&#x27;: 4}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop E&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.400092 52.521507)&#x27;, &#x27;id&#x27;: 5}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop F&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408529 52.519274)&#x27;, &#x27;id&#x27;: 6}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-2-Find-entities-within-1km-of-a-central-point" class="common-anchor-header">Contoh 2: Menemukan entitas dalam jarak 1 km dari titik pusat</h4><pre><code translate="no" class="language-python">center_point_lon, center_point_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Example-2-Find-entities-within-1km-of-a-central-point" class="common-anchor-header">Contoh 2: Menemukan entitas dalam jarak 1 km dari titik pusat</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">center_point_lon, center_point_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 radius_meters = <span class="hljs-number">1000.0</span>
 central_point_wkt = <span class="hljs-string">f&quot;POINT(<span class="hljs-subst">{center_point_lon}</span> <span class="hljs-subst">{center_point_lat}</span>)&quot;</span>
 
@@ -209,8 +267,21 @@ query_results = milvus_client.query(
 )
 <span class="hljs-keyword">for</span> ret <span class="hljs-keyword">in</span> query_results:
     <span class="hljs-built_in">print</span>(ret)
+    
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># hit: {&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.9823770523071289, &#x27;entity&#x27;: {&#x27;name&#x27;: &#x27;Shop D&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408223 52.516876)&#x27;}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">Contoh 3: Menggabungkan kemiripan vektor dengan filter spasial</h4><pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">Contoh 3: Menggabungkan kemiripan vektor dengan filter spasial</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
 result = milvus_client.search(
     collection_name,
     vectors_to_search,
@@ -221,6 +292,17 @@ result = milvus_client.search(
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> result:
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;hit: <span class="hljs-subst">{hit}</span>&quot;</span>)
+        
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># hit: {&#x27;id&#x27;: 6, &#x27;distance&#x27;: 1.3406795263290405, &#x27;entity&#x27;: {&#x27;name&#x27;: &#x27;Shop F&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408529 52.519274)&#x27;}}</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Next-Accelerate-queries" class="common-anchor-header">Berikutnya: Mempercepat kueri<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -237,7 +319,7 @@ result = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Secara default, kueri pada bidang <code translate="no">GEOMETRY</code> tanpa indeks akan melakukan pemindaian penuh dari semua baris, yang dapat menjadi lambat pada set data yang besar. Untuk mempercepat kueri geometrik, buatlah indeks <code translate="no">RTREE</code> pada bidang GEOMETRI Anda.</p>
+    </button></h2><p>Secara default, kueri pada bidang <code translate="no">GEOMETRY</code> tanpa indeks akan melakukan pemindaian penuh terhadap semua baris, yang dapat berjalan lambat pada kumpulan data yang besar. Untuk mempercepat kueri geometri, buat indeks <code translate="no">RTREE</code> pada bidang GEOMETRI Anda.</p>
 <p>Untuk detailnya, lihat <a href="/docs/id/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">PERTANYAAN UMUM<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

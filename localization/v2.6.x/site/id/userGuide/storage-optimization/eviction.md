@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
 <div class="alert note">
 <p>Penggusuran harus diaktifkan secara eksplisit. Tanpa konfigurasi, data yang ditembolok akan terus terakumulasi hingga sumber daya habis.</p>
 </div>
-<h2 id="Eviction-types" class="common-anchor-header">Jenis-jenis penggusuran<button data-href="#Eviction-types" class="anchor-icon" translate="no">
+<h2 id="Eviction-types" class="common-anchor-header">Jenis penggusuran<button data-href="#Eviction-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,32 +52,35 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p>Pemicu</p></td>
-     <td><p>Selama kueri atau pencarian ketika penggunaan memori/disk melebihi batas internal.</p></td>
-     <td><p>Thread latar belakang secara berkala memeriksa penggunaan dan memicu penggusuran ketika tanda air tinggi terlampaui.</p></td>
+     <td><p>Terjadi selama kueri atau pencarian ketika penggunaan memori atau disk melebihi batas internal.</p></td>
+     <td><p>Dipicu oleh thread latar belakang saat penggunaan melebihi batas tinggi atau saat data yang di-cache mencapai time-to-live (TTL).</p></td>
    </tr>
    <tr>
      <td><p>Perilaku</p></td>
-     <td><p>Eksekusi kueri berhenti sementara cache diambil kembali. Penggusuran berlanjut hingga penggunaan turun di bawah watermark rendah.</p></td>
-     <td><p>Berjalan terus menerus di latar belakang; menghapus data ketika penggunaan melebihi watermark tinggi hingga turun di bawah watermark rendah. Kueri tidak diblokir.</p></td>
+     <td><p>Operasi kueri atau pencarian berhenti sementara saat QueryNode mendapatkan kembali ruang cache. Penggusuran berlanjut hingga penggunaan turun di bawah watermark rendah atau terjadi timeout. Jika batas waktu tercapai dan data tidak mencukupi untuk diambil kembali, kueri atau pencarian mungkin gagal.</p></td>
+     <td><p>Berjalan secara berkala di latar belakang, secara proaktif mengusir data yang ditembolok ketika penggunaan melebihi tanda air tinggi atau ketika data kedaluwarsa berdasarkan TTL. Pengusiran berlanjut hingga penggunaan turun di bawah tanda air rendah. Kueri tidak diblokir.</p></td>
    </tr>
    <tr>
      <td><p>Paling cocok untuk</p></td>
-     <td><p>Beban kerja yang dapat mentoleransi lonjakan latensi singkat atau ketika penggusuran asinkronisasi tidak dapat mendapatkan kembali ruang dengan cukup cepat.</p></td>
-     <td><p>Beban kerja yang sensitif terhadap latensi yang membutuhkan kinerja yang lancar. Ideal untuk manajemen sumber daya proaktif.</p></td>
+     <td><p>Beban kerja yang dapat mentoleransi lonjakan latensi singkat atau jeda sementara selama penggunaan puncak. Berguna ketika penggusuran asinkronisasi tidak dapat mendapatkan kembali ruang dengan cukup cepat.</p></td>
+     <td><p>Beban kerja yang sensitif terhadap latensi yang membutuhkan kinerja kueri yang lancar dan dapat diprediksi. Ideal untuk manajemen sumber daya yang proaktif.</p></td>
    </tr>
    <tr>
      <td><p>Perhatian</p></td>
-     <td><p>Menambahkan latensi ke kueri yang sedang berlangsung. Dapat menyebabkan waktu habis jika data yang dapat diambil kembali tidak mencukupi.</p></td>
-     <td><p>Membutuhkan tanda air yang disetel dengan benar. Sedikit overhead sumber daya latar belakang.</p></td>
+     <td><p>Dapat menyebabkan penundaan kueri singkat atau waktu habis jika data yang dapat digusur tidak mencukupi.</p></td>
+     <td><p>Membutuhkan pengaturan tanda air tinggi/rendah dan TTL yang disetel dengan benar. Sedikit overhead dari utas latar belakang.</p></td>
    </tr>
    <tr>
      <td><p>Konfigurasi</p></td>
      <td><p>Diaktifkan melalui <code translate="no">evictionEnabled: true</code></p></td>
-     <td><p>Diaktifkan melalui <code translate="no">backgroundEvictionEnabled: true</code> (memerlukan <code translate="no">evictionEnabled: true</code>)</p></td>
+     <td><p>Diaktifkan melalui <code translate="no">backgroundEvictionEnabled: true</code> (memerlukan <code translate="no">evictionEnabled: true</code> pada saat yang sama)</p></td>
    </tr>
 </table>
 <p><strong>Penyiapan</strong> yang<strong>disarankan</strong>:</p>
-<p>Aktifkan kedua mode untuk keseimbangan optimal. Penggusuran asinkron mengelola penggunaan cache secara proaktif, sementara penggusuran sinkronisasi bertindak sebagai pengaman ketika sumber daya hampir habis.</p>
+<ul>
+<li><p>Kedua mode penggusuran dapat diaktifkan bersamaan untuk keseimbangan optimal, asalkan beban kerja Anda mendapat manfaat dari Penyimpanan Berjenjang dan dapat mentolerir latensi pengambilan terkait penggusuran.</p></li>
+<li><p>Untuk pengujian performa atau skenario yang sangat penting, pertimbangkan untuk menonaktifkan penggusuran sepenuhnya untuk menghindari overhead pengambilan jaringan setelah penggusuran.</p></li>
+</ul>
 <div class="alert note">
 <p>Untuk bidang dan indeks yang dapat digusur, unit penggusuran sesuai dengan perincian pemuatan-bidang skalar/vektor digusur berdasarkan potongan, dan indeks skalar/vektor digusur berdasarkan segmen.</p>
 </div>
@@ -143,7 +146,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Tanda air menentukan kapan penggusuran cache dimulai dan diakhiri untuk memori dan disk. Setiap jenis sumber daya memiliki dua ambang batas:</p>
 <ul>
-<li><p><strong>Tanda air tinggi</strong>: Penggusuran sinkronisasi dimulai saat penggunaan melebihi nilai ini.</p></li>
+<li><p><strong>Tanda air tinggi</strong>: Penggusuran dimulai saat penggunaan melebihi nilai ini.</p></li>
 <li><p><strong>Tanda air rendah</strong>: Penggusuran berlanjut hingga penggunaan turun di bawah nilai ini.</p></li>
 </ul>
 <div class="alert note">
@@ -181,14 +184,14 @@ beta: Milvus 2.6.4+
      <td><p>float</p></td>
      <td><p>(0.0, 1.0]</p></td>
      <td><p>Tingkat penggunaan memori di mana penggusuran asinkron dimulai.</p></td>
-     <td><p>Mulai dari <code translate="no">0.8</code>. Jaga jarak yang masuk akal dari watermark rendah (misalnya, 0.05-0.10) untuk mencegah pemicu yang sering terjadi.</p></td>
+     <td><p>Mulai dari <code translate="no">0.8</code>. Jaga jarak yang masuk akal dari tanda air yang rendah (misalnya, 0,05-0,10) untuk mencegah pemicu yang sering terjadi.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">diskLowWatermarkRatio</code></p></td>
      <td><p>mengambang</p></td>
      <td><p>(0.0, 1.0]</p></td>
      <td><p>Tingkat penggunaan disk di mana penggusuran berhenti.</p></td>
-     <td><p>Mulai di <code translate="no">0.75</code>. Sesuaikan lebih rendah jika I / O disk terbatas.</p></td>
+     <td><p>Mulai dari <code translate="no">0.75</code>. Sesuaikan lebih rendah jika I / O disk terbatas.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">diskHighWatermarkRatio</code></p></td>
@@ -248,62 +251,3 @@ beta: Milvus 2.6.4+
      <td><p>Gunakan TTL pendek (jam) untuk data yang sangat dinamis; gunakan TTL panjang (hari) untuk kumpulan data yang stabil. Tetapkan 0 untuk menonaktifkan kedaluwarsa berbasis waktu.</p></td>
    </tr>
 </table>
-<h2 id="Configure-overcommit-ratio" class="common-anchor-header">Mengonfigurasi rasio overcommit<button data-href="#Configure-overcommit-ratio" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Rasio overcommit menentukan berapa banyak cache yang dicadangkan sebagai penggusuran, yang memungkinkan QueryNodes untuk sementara melebihi kapasitas normal sebelum penggusuran meningkat.</p>
-<div class="alert note">
-<p>Konfigurasi ini hanya berlaku ketika <a href="/docs/id/eviction.md#Enable-eviction">penggusuran diaktifkan</a>.</p>
-</div>
-<p><strong>Contoh YAML</strong>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">segcore:</span>
-    <span class="hljs-attr">tieredStorage:</span>
-      <span class="hljs-attr">evictionEnabled:</span> <span class="hljs-literal">true</span>
-      <span class="hljs-comment"># Evictable Memory Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of physical memory is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-comment"># Evictable Disk Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of disk capacity is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
-<button class="copy-code-btn"></button></code></pre>
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Tipe</p></th>
-     <th><p>Rentang</p></th>
-     <th><p>Deskripsi</p></th>
-     <th><p>Kasus penggunaan yang disarankan</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableMemoryCacheRatio</code></p></td>
-     <td><p>mengambang</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Bagian cache memori yang dialokasikan untuk data yang dapat digusur.</p></td>
-     <td><p>Mulai dari <code translate="no">0.3</code>. Naikkan (0,5-0,7) untuk frekuensi penggusuran yang lebih rendah; turunkan (0,1-0,2) untuk kapasitas segmen yang lebih tinggi.</p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableDiskCacheRatio</code></p></td>
-     <td><p>float</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Porsi cache disk yang dialokasikan untuk data yang dapat digusur.</p></td>
-     <td><p>Gunakan rasio yang sama dengan memori kecuali jika I / O disk menjadi hambatan.</p></td>
-   </tr>
-</table>
-<p><strong>Perilaku batas</strong>:</p>
-<ul>
-<li><p><code translate="no">1.0</code>: Semua cache dapat digusur - penggusuran jarang terjadi, tetapi lebih sedikit segmen yang muat per QueryNode.</p></li>
-<li><p><code translate="no">0.0</code>: Tidak ada cache yang dapat digusur - penggusuran sering terjadi; lebih banyak segmen yang muat, tetapi latensi dapat meningkat.</p></li>
-</ul>

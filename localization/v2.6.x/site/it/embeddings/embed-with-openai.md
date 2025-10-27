@@ -41,10 +41,12 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
 <p>Il nome del modello OpenAI da utilizzare per la codifica. Le opzioni valide sono <strong>text-embedding-3-small</strong>, <strong>text-embedding-3-large</strong> e <strong>text-embedding-ada-002</strong> (predefinito).</p></li>
 <li><p><strong>api_key</strong><em>(stringa</em>)</p>
 <p>La chiave API per accedere all'API OpenAI.</p></li>
+<li><p><strong>base_url</strong><em>(stringa</em>)</p>
+<p>L'URL di base per accedere all'API OpenAI. Il valore predefinito è <strong>https://api.openai.com/v1.</strong> Tuttavia, se si accede a un endpoint API compatibile di un fornitore di modelli diverso o a un'istanza locale di vLLM, come <strong>http://localhost:8080/v1,</strong> è possibile specificare l'URL qui.</p></li>
 <li><p><strong>dimensioni</strong><em>(int</em>)</p>
 <p>Il numero di dimensioni che deve avere l'embedding di output risultante. Supportato solo nei modelli <strong>text-embedding-3</strong> e successivi.</p></li>
 </ul>
-<p>Per creare embeddings per i documenti, utilizzare il metodo <strong>encode_documents()</strong>:</p>
+<p>Per creare embeddings per i documenti, usare il metodo <strong>encode_documents()</strong>:</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,

@@ -1261,12 +1261,6 @@
                 "id": "eviction.md",
                 "order": 2,
                 "children": []
-              },
-              {
-                "label": "Praktik Terbaik untuk Penyimpanan Berjenjang",
-                "id": "best-practices-for-tiered-storage.md",
-                "order": 3,
-                "children": []
               }
             ]
           }
@@ -1973,10 +1967,17 @@
         "children": []
       },
       {
+        "label": "EksporLog",
+        "id": "export-log",
+        "order": 9,
+        "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
+        "children": []
+      },
+      {
         "label": "Model",
         "id": "models",
         "isMenu": true,
-        "order": 9,
+        "order": 10,
         "children": [
           {
             "label": "Penyematan",
@@ -2119,7 +2120,7 @@
       {
         "label": "Pembantu Kode SDK (MCP)",
         "id": "milvus-sdk-helper-mcp.md",
-        "order": 10,
+        "order": 11,
         "children": []
       }
     ]
@@ -2389,7 +2390,7 @@
         ]
       },
       {
-        "label": "Model Penyematan",
+        "label": "Embedding Models",
         "id": "integrate-embeddings-models",
         "order": 1,
         "children": [

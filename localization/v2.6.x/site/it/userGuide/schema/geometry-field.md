@@ -3,7 +3,7 @@ id: geometry-field.md
 title: Campo geometricoCompatible with Milvus 2.6.4+
 summary: >-
   Quando si realizzano applicazioni come i sistemi informativi geografici (GIS),
-  gli strumenti di mappatura o i servizi basati sulla localizzazione, è spesso
+  gli strumenti di mappatura o i servizi basati sulla localizzazione, spesso è
   necessario memorizzare e interrogare dati geometrici. Il tipo di dati GEOMETRY
   di Milvus risolve questa sfida, fornendo un modo nativo per memorizzare e
   interrogare dati geometrici flessibili.
@@ -31,6 +31,9 @@ beta: Milvus 2.6.4+
 <li><p>Ricerca multimodale: "trova foto simili <strong>entro 1 km</strong> da questo punto".</p></li>
 <li><p>Mappe e logistica: "beni <strong>all'interno di</strong> una regione" o "percorsi <strong>che intersecano</strong> un percorso".</p></li>
 </ul>
+<div class="alert note">
+<p>Il campo GEOMETRIA richiede PyMilvus 2.7.0rc46 o successivo. Questa versione è attualmente disponibile solo tramite compilazione dai sorgenti. Per le istruzioni, vedere <a href="https://github.com/milvus-io/pymilvus#faq">Come creare PyMilvus dai sorgenti</a>.</p>
+</div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Che cos'è un campo GEOMETRIA?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +49,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un campo GEOMETRIA è un tipo di dati definito dallo schema (<code translate="no">DataType.GEOMETRY</code>) in Milvus che memorizza dati geometrici. Quando si lavora con i campi geometrici, si interagisce con i dati utilizzando il formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, una rappresentazione leggibile dall'uomo utilizzata sia per l'inserimento dei dati che per le interrogazioni. Internamente, Milvus converte WKT in <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB)</a> per una memorizzazione e un'elaborazione efficienti, ma non è necessario gestire direttamente WKB.</p>
+    </button></h2><p>Un campo GEOMETRIA è un tipo di dati definito dallo schema (<code translate="no">DataType.GEOMETRY</code>) in Milvus che memorizza dati geometrici. Quando si lavora con i campi geometrici, si interagisce con i dati usando il formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, una rappresentazione leggibile dall'uomo usata sia per l'inserimento dei dati che per le interrogazioni. Internamente, Milvus converte WKT in <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB)</a> per una memorizzazione e un'elaborazione efficienti, ma non è necessario gestire direttamente WKB.</p>
 <p>Il tipo di dati <code translate="no">GEOMETRY</code> supporta i seguenti oggetti geometrici:</p>
 <ul>
 <li><p><strong>POINT</strong>: <code translate="no">POINT (x y)</code>; ad esempio, <code translate="no">POINT (13.403683 52.520711)</code> dove <code translate="no">x</code> = longitudine e <code translate="no">y</code> = latitudine.</p></li>
@@ -88,7 +91,9 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per utilizzare un campo <code translate="no">GEOMETRY</code>, è necessario definirlo esplicitamente nello schema della raccolta durante la creazione della stessa. L'esempio seguente mostra come creare una raccolta con un campo <code translate="no">geo</code> di tipo <code translate="no">DataType.GEOMETRY</code>.</p>
+    </button></h3><p>Per utilizzare un campo <code translate="no">GEOMETRY</code>, è necessario definirlo esplicitamente nello schema della raccolta durante la creazione della stessa. L'esempio seguente mostra come creare una collezione con un campo <code translate="no">geo</code> di tipo <code translate="no">DataType.GEOMETRY</code>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -104,6 +109,14 @@ schema.add_field(<span class="hljs-string">&quot;embeddings&quot;</span>, DataTy
 schema.add_field(<span class="hljs-string">&quot;name&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">128</span>)
 
 milvus_client.create_collection(collection_name, schema=schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>In questo esempio, il campo <code translate="no">GEOMETRY</code> definito nello schema della collezione consente valori nulli con <code translate="no">nullable=True</code>. Per maggiori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Nullable e Default</a>.</p>
@@ -124,6 +137,8 @@ milvus_client.create_collection(collection_name, schema=schema, consistency_leve
         ></path>
       </svg>
     </button></h3><p>Inserire le entità con i dati geometrici in formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a>. Ecco un esempio con diversi punti geografici:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">rng = np.random.default_rng(seed=<span class="hljs-number">19530</span>)
 geo_points = [
     <span class="hljs-string">&#x27;POINT(13.399710 52.518010)&#x27;</span>,
@@ -145,6 +160,17 @@ rows = [
 
 insert_result = milvus_client.insert(collection_name, rows)
 <span class="hljs-built_in">print</span>(insert_result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># {&#x27;insert_count&#x27;: 6, &#x27;ids&#x27;: [1, 2, 3, 4, 5, 6]}</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-3-Filtering-operations" class="common-anchor-header">Passo 3: Operazioni di filtraggio<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -161,18 +187,28 @@ insert_result = milvus_client.insert(collection_name, rows)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Prima di poter eseguire operazioni di filtraggio sui campi di <code translate="no">GEOMETRY</code>, accertarsi che:</p>
+    </button></h3><p>Prima di poter eseguire operazioni di filtraggio sui campi di <code translate="no">GEOMETRY</code>, assicurarsi che:</p>
 <ul>
-<li><p>Sia stato creato un indice su ogni campo vettoriale.</p></li>
+<li><p>Sia stato creato un indice su ciascun campo vettoriale.</p></li>
 <li><p>La collezione sia caricata in memoria.</p></li>
 </ul>
 <p><details></p>
 <p><summary>Mostrare il codice</summary></p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = milvus_client.prepare_index_params()
 index_params.add_index(field_name=<span class="hljs-string">&quot;embeddings&quot;</span>, metric_type=<span class="hljs-string">&quot;L2&quot;</span>)
 
 milvus_client.create_index(collection_name, index_params)
 milvus_client.load_collection(collection_name)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Una volta soddisfatti questi requisiti, è possibile utilizzare espressioni con operatori geometrici dedicati per filtrare l'insieme in base ai valori geometrici.</p>
@@ -186,7 +222,9 @@ milvus_client.load_collection(collection_name)
 <p>Alcuni operatori, come <code translate="no">ST_DWITHIN</code>, possono richiedere parametri aggiuntivi. Per i dettagli e gli esempi di utilizzo di ciascun operatore, fare riferimento a <a href="/docs/it/geometry-operators.md">Operatori geometrici</a>.</p>
 </div>
 <p>Gli esempi seguenti mostrano come utilizzare diversi operatori specifici per la geometria in un'espressione di filtro:</p>
-<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Esempio 1: Trova entità all'interno di un'area rettangolare</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Esempio 1: Trovare entità all'interno di un'area rettangolare</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 bottom_right_lon, bottom_right_lat = <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>
 bounding_box_wkt = <span class="hljs-string">f&quot;POLYGON((<span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>))&quot;</span>
 
@@ -197,8 +235,28 @@ query_results = milvus_client.query(
 )
 <span class="hljs-keyword">for</span> ret <span class="hljs-keyword">in</span> query_results:
     <span class="hljs-built_in">print</span>(ret)
+    
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop D&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408223 52.516876)&#x27;, &#x27;id&#x27;: 4}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop F&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408529 52.519274)&#x27;, &#x27;id&#x27;: 6}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop A&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.39971 52.51801)&#x27;, &#x27;id&#x27;: 1}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop B&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.403934 52.522877)&#x27;, &#x27;id&#x27;: 2}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop C&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.405088 52.521124)&#x27;, &#x27;id&#x27;: 3}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop D&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408223 52.516876)&#x27;, &#x27;id&#x27;: 4}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop E&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.400092 52.521507)&#x27;, &#x27;id&#x27;: 5}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop F&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408529 52.519274)&#x27;, &#x27;id&#x27;: 6}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-2-Find-entities-within-1km-of-a-central-point" class="common-anchor-header">Esempio 2: Trova entità entro 1 km da un punto centrale</h4><pre><code translate="no" class="language-python">center_point_lon, center_point_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Example-2-Find-entities-within-1km-of-a-central-point" class="common-anchor-header">Esempio 2: Trovare entità entro 1 km da un punto centrale</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">center_point_lon, center_point_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 radius_meters = <span class="hljs-number">1000.0</span>
 central_point_wkt = <span class="hljs-string">f&quot;POINT(<span class="hljs-subst">{center_point_lon}</span> <span class="hljs-subst">{center_point_lat}</span>)&quot;</span>
 
@@ -209,8 +267,21 @@ query_results = milvus_client.query(
 )
 <span class="hljs-keyword">for</span> ret <span class="hljs-keyword">in</span> query_results:
     <span class="hljs-built_in">print</span>(ret)
+    
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># hit: {&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.9823770523071289, &#x27;entity&#x27;: {&#x27;name&#x27;: &#x27;Shop D&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408223 52.516876)&#x27;}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">Esempio 3: Combinare la similarità vettoriale con un filtro spaziale</h4><pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">Esempio 3: Combinare la similarità vettoriale con un filtro spaziale</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
 result = milvus_client.search(
     collection_name,
     vectors_to_search,
@@ -221,6 +292,17 @@ result = milvus_client.search(
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> result:
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;hit: <span class="hljs-subst">{hit}</span>&quot;</span>)
+        
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># hit: {&#x27;id&#x27;: 6, &#x27;distance&#x27;: 1.3406795263290405, &#x27;entity&#x27;: {&#x27;name&#x27;: &#x27;Shop F&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408529 52.519274)&#x27;}}</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Next-Accelerate-queries" class="common-anchor-header">Avanti: Accelerare le query<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -237,7 +319,7 @@ result = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per impostazione predefinita, le query sui campi <code translate="no">GEOMETRY</code> senza indice eseguono una scansione completa di tutte le righe, che può essere lenta su grandi insiemi di dati. Per accelerare le query geometriche, creare un indice <code translate="no">RTREE</code> sul campo GEOMETRIA.</p>
+    </button></h2><p>Per impostazione predefinita, le query sui campi di <code translate="no">GEOMETRY</code> senza indice eseguono una scansione completa di tutte le righe, che può essere lenta su insiemi di dati di grandi dimensioni. Per accelerare le query geometriche, creare un indice <code translate="no">RTREE</code> sul campo GEOMETRIA.</p>
 <p>Per maggiori dettagli, consultare <a href="/docs/it/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

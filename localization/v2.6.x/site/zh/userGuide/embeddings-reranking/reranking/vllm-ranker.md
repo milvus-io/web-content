@@ -63,7 +63,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>成功的响应应返回按相关性得分排序的文档，类似于 OpenAI rerankers API 的响应。</p>
+<p>成功的响应应返回按相关性得分排序的文档，类似于 OpenAI rerankers API 响应。</p>
 <p>有关更多服务器参数和选项，请参阅<a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">vLLM OpenAI Compatible Server 文档</a>。</p></li>
 </ul>
 <h2 id="Create-a-vLLM-ranker-function" class="common-anchor-header">创建 vLLM Ranker 函数<button data-href="#Create-a-vLLM-ranker-function" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在 Milvus 应用程序中使用 vLLM Ranker，请创建一个 Function 对象，指定 Reranking 的操作符。该函数将传递给 Milvus 搜索操作符，以增强结果排名。</p>
+    </button></h2><p>要在你的 Milvus 应用程序中使用 vLLM Ranker，请创建一个 Function 对象，指定 Reranking 的操作符。该函数将传递给 Milvus 搜索操作符，以增强结果排名。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
@@ -106,7 +106,26 @@ vllm_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+                       .functionType(FunctionType.RERANK)
+                       .name(<span class="hljs-string">&quot;vllm_semantic_ranker&quot;</span>)
+                       .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
+                       .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>)
+                       .param(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;vllm&quot;</span>)
+                       .param(<span class="hljs-string">&quot;queries&quot;</span>, <span class="hljs-string">&quot;[\&quot;renewable energy developments\&quot;]&quot;</span>)
+                       .param(<span class="hljs-string">&quot;endpoint&quot;</span>, <span class="hljs-string">&quot;http://localhost:8080&quot;</span>)
+                       .param(<span class="hljs-string">&quot;max_client_batch_size&quot;</span>, <span class="hljs-string">&quot;32&quot;</span>)
+                       .param(<span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>, <span class="hljs-string">&quot;256&quot;</span>)
+                       .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -198,7 +217,7 @@ vllm_ranker = Function(
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
-    data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],  <span class="hljs-comment"># Search queries</span>
+    data=[your_query_vector],  <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,                   <span class="hljs-comment"># Vector field to search</span>
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
@@ -206,7 +225,23 @@ results = client.search(
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
+        .data(Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;AI Research Progress&quot;</span>), <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;What is AI&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -236,7 +271,7 @@ results = client.search(
 
 <span class="hljs-comment"># Configure dense vector search</span>
 dense_search = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],
+    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">5</span>
@@ -244,7 +279,7 @@ dense_search = AnnSearchRequest(
 
 <span class="hljs-comment"># Configure sparse vector search  </span>
 sparse_search = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],
+    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>, 
     param={},
     limit=<span class="hljs-number">5</span>
@@ -259,7 +294,31 @@ hybrid_results = client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+        .vectors(Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding1), <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding2)))
+        .limit(<span class="hljs-number">5</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .data(Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;AI Research Progress&quot;</span>), <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;What is AI&quot;</span>)))
+        .limit(<span class="hljs-number">5</span>)
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+                .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(<span class="hljs-number">5</span>)
+                .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
+                .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>

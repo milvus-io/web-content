@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pencarian vektor tradisional memberi peringkat hasil murni berdasarkan kemiripan matematis-seberapa dekat vektor cocok dalam ruang dimensi tinggi. Meskipun efisien, pendekatan ini sering kali melewatkan relevansi semantik yang sebenarnya. Pertimbangkan untuk mencari <strong>"praktik terbaik untuk pengoptimalan basis data":</strong> Anda mungkin menerima dokumen dengan kemiripan vektor yang tinggi yang sering menyebutkan istilah-istilah ini, tetapi tidak benar-benar memberikan strategi pengoptimalan yang dapat ditindaklanjuti.</p>
+    </button></h1><p>Pencarian vektor tradisional memberi peringkat hasil murni berdasarkan kemiripan matematis-seberapa dekat vektor cocok dalam ruang dimensi tinggi. Meskipun efisien, pendekatan ini sering kali melewatkan relevansi semantik yang sebenarnya. Pertimbangkan untuk mencari <strong>"praktik terbaik untuk pengoptimalan basis data":</strong> Anda mungkin menerima dokumen dengan kemiripan vektor yang tinggi yang sering menyebutkan istilah-istilah ini, tetapi tidak memberikan strategi pengoptimalan yang dapat ditindaklanjuti.</p>
 <p>Model Ranker mengubah pencarian Milvus dengan mengintegrasikan model bahasa tingkat lanjut yang memahami hubungan semantik antara kueri dan dokumen. Alih-alih hanya mengandalkan kemiripan vektor, model ini mengevaluasi makna dan konteks konten untuk memberikan hasil yang lebih cerdas dan relevan.</p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,56 +107,31 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>vLLM</p></td>
      <td><p>Aplikasi kompleks yang membutuhkan pemahaman dan penyesuaian semantik yang mendalam</p></td>
-     <td><ul>
-<li><p>Mendukung berbagai model bahasa besar</p></li>
-<li><p>Opsi penerapan yang fleksibel</p></li>
-<li><p>Persyaratan komputasi yang lebih tinggi</p></li>
-<li><p>Potensi penyesuaian yang lebih besar</p></li>
-</ul></td>
+     <td><ul><li><p>Mendukung berbagai model bahasa besar</p></li><li><p>Opsi penerapan yang fleksibel</p></li><li><p>Persyaratan komputasi yang lebih tinggi</p></li><li><p>Potensi penyesuaian yang lebih besar</p></li></ul></td>
      <td><p>Platform penelitian hukum yang menerapkan model khusus domain yang memahami terminologi hukum dan hubungan hukum kasus</p></td>
    </tr>
    <tr>
      <td><p>TEI</p></td>
      <td><p>Implementasi cepat dengan penggunaan sumber daya yang efisien</p></td>
-     <td><ul>
-<li><p>Layanan ringan yang dioptimalkan untuk operasi teks</p></li>
-<li><p>Penerapan yang lebih mudah dengan kebutuhan sumber daya yang lebih rendah</p></li>
-<li><p>Model pemeringkatan ulang yang telah dioptimalkan sebelumnya</p></li>
-<li><p>Biaya overhead infrastruktur minimal</p></li>
-</ul></td>
+     <td><ul><li><p>Layanan ringan yang dioptimalkan untuk operasi teks</p></li><li><p>Penerapan yang lebih mudah dengan kebutuhan sumber daya yang lebih rendah</p></li><li><p>Model pemeringkatan ulang yang telah dioptimalkan sebelumnya</p></li><li><p>Biaya overhead infrastruktur minimal</p></li></ul></td>
      <td><p>Sistem manajemen konten yang membutuhkan kemampuan pemeringkatan ulang yang efisien dengan persyaratan standar</p></td>
    </tr>
    <tr>
      <td><p>Cohere</p></td>
      <td><p>Aplikasi perusahaan yang memprioritaskan keandalan dan kemudahan integrasi</p></td>
-     <td><ul>
-<li><p>Keandalan dan skalabilitas tingkat perusahaan</p></li>
-<li><p>Layanan terkelola tanpa pemeliharaan infrastruktur</p></li>
-<li><p>Kemampuan pemeringkatan ulang multibahasa</p></li>
-<li><p>Pembatasan tarif bawaan dan penanganan kesalahan</p></li>
-</ul></td>
+     <td><ul><li><p>Keandalan dan skalabilitas tingkat perusahaan</p></li><li><p>Layanan terkelola tanpa pemeliharaan infrastruktur</p></li><li><p>Kemampuan pemeringkatan ulang multibahasa</p></li><li><p>Pembatasan tarif bawaan dan penanganan kesalahan</p></li></ul></td>
      <td><p>Platform e-commerce yang membutuhkan pencarian dengan ketersediaan tinggi dengan kinerja API yang konsisten dan katalog produk multibahasa</p></td>
    </tr>
    <tr>
      <td><p>Voyage AI</p></td>
      <td><p>Aplikasi RAG dengan persyaratan kinerja dan konteks yang spesifik</p></td>
-     <td><ul>
-<li><p>Model yang secara khusus dilatih untuk tugas pemeringkatan ulang</p></li>
-<li><p>Kontrol pemotongan granular untuk panjang dokumen yang beragam</p></li>
-<li><p>Inferensi yang dioptimalkan untuk beban kerja produksi</p></li>
-<li><p>Berbagai varian model (rerank-2, rerank-lite, dll.)</p></li>
-</ul></td>
+     <td><ul><li><p>Model yang secara khusus dilatih untuk tugas pemeringkatan ulang</p></li><li><p>Kontrol pemotongan granular untuk panjang dokumen yang beragam</p></li><li><p>Inferensi yang dioptimalkan untuk beban kerja produksi</p></li><li><p>Berbagai varian model (rerank-2, rerank-lite, dll.)</p></li></ul></td>
      <td><p>Basis data penelitian dengan panjang dokumen yang bervariasi yang membutuhkan kontrol kinerja yang disesuaikan dengan baik dan pemahaman semantik khusus</p></td>
    </tr>
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>Aplikasi yang memproses dokumen panjang dengan prioritas efektivitas biaya</p></td>
-     <td><ul>
-<li><p>Pemenggalan dokumen tingkat lanjut dengan tumpang tindih yang dapat dikonfigurasi</p></li>
-<li><p>Penilaian berbasis potongan (potongan dengan nilai tertinggi mewakili dokumen)</p></li>
-<li><p>Dukungan untuk beragam model pemeringkatan ulang</p></li>
-<li><p>Hemat biaya dengan varian model standar dan pro</p></li>
-</ul></td>
+     <td><ul><li><p>Pemenggalan dokumen tingkat lanjut dengan tumpang tindih yang dapat dikonfigurasi</p></li><li><p>Penilaian berbasis potongan (potongan dengan nilai tertinggi mewakili dokumen)</p></li><li><p>Dukungan untuk beragam model pemeringkatan ulang</p></li><li><p>Hemat biaya dengan varian model standar dan pro</p></li></ul></td>
      <td><p>Sistem pencarian dokumentasi teknis yang memproses manual dan dokumen panjang yang membutuhkan segmentasi cerdas dan kontrol tumpang tindih</p></td>
    </tr>
 </table>
@@ -229,7 +204,21 @@ model_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.ModelRanker;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+<span class="hljs-type">ModelRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> ModelRanker.builder()
+        .name(<span class="hljs-string">&quot;semantic_ranker&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
+        .provider(<span class="hljs-string">&quot;tei&quot;</span>)
+        .queries(Collections.singletonList(<span class="hljs-string">&quot;machine learning for time series&quot;</span>))
+        .endpoint(<span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -253,20 +242,20 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Nama bidang teks yang akan digunakan untuk pemeringkatan ulang. Harus berupa bidang tipe <code translate="no">VARCHAR</code>.</p></td>
+     <td><p>Nama bidang teks yang akan digunakan untuk pemeringkatan ulang.</p><p>Harus berupa bidang tipe <code translate="no">VARCHAR</code>.</p></td>
      <td><p><code translate="no">["document"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Menentukan jenis fungsi yang sedang dibuat. Harus disetel ke <code translate="no">RERANK</code> untuk semua pemeringkat model.</p></td>
+     <td><p>Menentukan jenis fungsi yang sedang dibuat.</p><p>Harus diatur ke <code translate="no">RERANK</code> untuk semua pemeringkat model.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Kamus yang berisi konfigurasi untuk fungsi pemeringkatan ulang berbasis model. Parameter (kunci) yang tersedia bervariasi tergantung pada penyedia layanan.</p></td>
-     <td><p>{...}</p></td>
+     <td><p>Kamus yang berisi konfigurasi untuk fungsi pemeringkatan berbasis model. Parameter (kunci) yang tersedia bervariasi tergantung pada penyedia layanan.</p></td>
+     <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
@@ -283,8 +272,8 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Daftar string kueri yang digunakan oleh model pemeringkatan ulang untuk menghitung skor relevansi. Jumlah string kueri harus sama persis dengan jumlah kueri dalam operasi pencarian Anda (meskipun menggunakan vektor kueri, bukan teks), jika tidak, kesalahan akan dilaporkan.</p></td>
-     <td><p><em>["kueri penelusuran"]</em></p></td>
+     <td><p>Daftar string kueri yang digunakan oleh model pemeringkatan ulang untuk menghitung skor relevansi.</p><p>Jumlah string kueri harus sama persis dengan jumlah kueri dalam operasi pencarian Anda (bahkan saat menggunakan vektor kueri, bukan teks), jika tidak, kesalahan akan dilaporkan.</p></td>
+     <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.endpoint</code></p></td>
@@ -295,7 +284,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>Tidak</p></td>
-     <td><p>Jumlah maksimum dokumen yang akan diproses dalam satu batch. Nilai yang lebih besar meningkatkan hasil tetapi membutuhkan lebih banyak memori.</p></td>
+     <td><p>Jumlah maksimum dokumen yang akan diproses dalam satu batch. Nilai yang lebih besar akan meningkatkan hasil tetapi membutuhkan lebih banyak memori.</p></td>
      <td><p><code translate="no">32</code> (default)</p></td>
    </tr>
 </table>
@@ -316,19 +305,35 @@ model_ranker = Function(
       </svg>
     </button></h3><p>Setelah mendefinisikan pemeringkat model Anda, Anda dapat menerapkannya selama operasi pencarian dengan meneruskannya ke parameter pemeringkat:</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
-    data=[<span class="hljs-string">&quot;machine learning for time series&quot;</span>], <span class="hljs-comment"># Number of queries must match that specified in model_ranker.params[&quot;queries&quot;] </span>
+    data=[your_query_vector], <span class="hljs-comment"># Number of query vectors must match that specified in model_ranker.params[&quot;queries&quot;] </span>
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
-    <span class="hljs-built_in">limit</span>=10,
+    limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .outputFields(Collections.singletonList(document))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -336,7 +341,7 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Terapkan ke pencarian hibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Menerapkan ke penelusuran hibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -358,14 +363,14 @@ results = client.search(
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
 dense_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;machine learning for time series&quot;</span>],
+    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
 )
 
 sparse_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;machine learning for time series&quot;</span>],
+    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
@@ -380,7 +385,31 @@ hybrid_results = client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding)))
+        .limit(<span class="hljs-number">10</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
+        .limit(<span class="hljs-number">10</span>)
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+                .collectionName(COLLECTION_NAME)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(<span class="hljs-number">10</span>)
+                .outputFields(Arrays.asList(<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>))
+                .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>

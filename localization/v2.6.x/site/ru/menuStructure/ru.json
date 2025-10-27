@@ -600,7 +600,7 @@
                     "children": []
                   },
                   {
-                    "label": "Остановить",
+                    "label": "Остановите",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -1260,12 +1260,6 @@
                 "label": "Выселение",
                 "id": "eviction.md",
                 "order": 2,
-                "children": []
-              },
-              {
-                "label": "Лучшие практики для многоуровневого хранения данных",
-                "id": "best-practices-for-tiered-storage.md",
-                "order": 3,
                 "children": []
               }
             ]
@@ -1973,10 +1967,17 @@
         "children": []
       },
       {
+        "label": "ExportLog",
+        "id": "export-log",
+        "order": 9,
+        "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
+        "children": []
+      },
+      {
         "label": "Модели",
         "id": "models",
         "isMenu": true,
-        "order": 9,
+        "order": 10,
         "children": [
           {
             "label": "Встраивания",
@@ -2119,7 +2120,7 @@
       {
         "label": "SDK Code Helper (MCP)",
         "id": "milvus-sdk-helper-mcp.md",
-        "order": 10,
+        "order": 11,
         "children": []
       }
     ]

@@ -151,7 +151,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Il diagramma seguente mostra il funzionamento della funzione in Milvus.</p>
 <ol>
 <li><p><strong>Testo in ingresso</strong>: Gli utenti inseriscono in Milvus i dati grezzi (ad esempio i documenti).</p></li>
-<li><p><strong>Generazione di embeddings</strong>: Il modulo Function di Milvus chiama automaticamente il fornitore di modelli configurato per convertire i dati grezzi in embeddings vettoriali.</p></li>
+<li><p><strong>Generazione degli embeddings</strong>: Il modulo Function di Milvus chiama automaticamente il fornitore di modelli configurato per convertire i dati grezzi in embeddings vettoriali.</p></li>
 <li><p><strong>Memorizzare gli embeddings</strong>: Gli embeddings risultanti vengono memorizzati in campi vettoriali esplicitamente definiti all'interno delle collezioni di Milvus.</p></li>
 <li><p><strong>Interrogazione del testo</strong>: Gli utenti inviano query testuali a Milvus.</p></li>
 <li><p><strong>Ricerca semantica</strong>: Milvus converte internamente le query in embeddings vettoriali, effettua ricerche di somiglianza con gli embeddings memorizzati e recupera i risultati rilevanti.</p></li>
@@ -180,7 +180,7 @@ beta: Milvus 2.6.x
 <p>Milvus consente di fornire le credenziali del servizio di embedding in due modi:</p>
 <ul>
 <li><p><strong>File di configurazione</strong> (<code translate="no">milvus.yaml</code>):</p>
-<p>L'esempio di questo argomento dimostra la <strong>configurazione consigliata</strong> utilizzando <code translate="no">milvus.yaml</code>.</p></li>
+<p>L'esempio di questo argomento mostra la <strong>configurazione consigliata</strong> utilizzando <code translate="no">milvus.yaml</code>.</p></li>
 <li><p><strong>Variabili d'ambiente</strong>:</p>
 <p>Per informazioni dettagliate sulla configurazione delle credenziali tramite variabili d'ambiente, consultare la documentazione del fornitore del servizio di embedding (ad esempio, <a href="/docs/it/openai.md">OpenAI</a> o <a href="/docs/it/azure-openai.md">Azure OpenAI</a>).</p></li>
 </ul>
@@ -298,6 +298,8 @@ beta: Milvus 2.6.x
 <li><p>Un <strong>campo vettoriale</strong> riservato a memorizzare le incorporazioni vettoriali che la funzione genererà per il campo scalare.</p></li>
 </ul>
 <p>L'esempio seguente definisce uno schema con un campo scalare <code translate="no">&quot;document&quot;</code> per memorizzare i dati testuali e un campo vettoriale <code translate="no">&quot;dense&quot;</code> per memorizzare le incorporazioni che saranno generate dal modulo Function. Ricordarsi di impostare la dimensione del vettore (<code translate="no">dim</code>) in modo che corrisponda all'output del modello di embedding scelto.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -315,12 +317,20 @@ schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64
 schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">9000</span>)
 
 <span class="hljs-comment"># Add vector field &quot;dense&quot; for storing embeddings.</span>
-<span class="hljs-comment"># IMPORTANT: Set `dim` to match the exact output dimension of the embedding model.</span>
+<span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 <span class="hljs-comment"># For instance, OpenAI&#x27;s text-embedding-3-small model outputs 1536-dimensional vectors.</span>
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Aggiungere la funzione di embedding allo schema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Passo 2: Aggiungere la funzione di incorporamento allo schema<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -337,6 +347,8 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
       </svg>
     </button></h3><p>Il modulo Function di Milvus converte automaticamente i dati grezzi memorizzati in un campo scalare in embedding e li memorizza nel campo vettoriale esplicitamente definito.</p>
 <p>L'esempio seguente aggiunge un modulo Function (<code translate="no">openai_embedding</code>) che converte il campo scalare <code translate="no">&quot;document&quot;</code> in embedding, memorizzando i vettori risultanti nel campo vettoriale <code translate="no">&quot;dense&quot;</code> definito in precedenza.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -356,6 +368,14 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the embedding function to your schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>Parametro</p></th>
@@ -364,12 +384,12 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Identificatore univoco della funzione di incorporazione all'interno di Milvus.</p></td>
+     <td><p>Identificatore univoco della funzione di embedding all'interno di Milvus.</p></td>
      <td><p><code translate="no">"openai_embedding"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Tipo di funzione utilizzata. Per l'incorporazione del testo, impostare il valore su <code translate="no">FunctionType.TEXTEMBEDDING</code>.<br><strong>Nota:</strong> Milvus accetta <code translate="no">FunctionType.BM25</code> (per la trasformazione sparse-embedding) e <code translate="no">FunctionType.RERANK</code> (per il reranking) per questo parametro. Per maggiori dettagli, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca di testi completi</a> e <a href="/docs/it/decay-ranker-overview.md">Panoramica del Decay Ranker</a>.</p></td>
+     <td><p>Tipo di funzione utilizzata. Per l'incorporazione del testo, impostare il valore su <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Nota</strong>: Milvus accetta <code translate="no">FunctionType.BM25</code> (per la trasformazione sparse-embedding) e <code translate="no">FunctionType.RERANK</code> (per il reranking) per questo parametro. Per maggiori dettagli, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca di testi completi</a> e <a href="/docs/it/decay-ranker-overview.md">Panoramica del Decay Ranker</a>.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -399,18 +419,12 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential:</code> di <code translate="no">milvus.yaml</code>. </p>
-<ul>
-<li><p>Se fornita, Milvus recupera la coppia di chiavi o il token API corrispondente e firma la richiesta sul lato server.</p></li>
-<li><p>Se omesso (<code translate="no">None</code>), Milvus ricorre alla credenziale esplicitamente configurata per il fornitore del modello di destinazione in <code translate="no">milvus.yaml</code>.</p></li>
-<li><p>Se l'etichetta è sconosciuta o la chiave di riferimento è mancante, la chiamata fallisce.</p></li>
-</ul></td>
+     <td><p>L'etichetta di una credenziale definita nella sezione di primo livello <code translate="no">credential:</code> di <code translate="no">milvus.yaml</code>. </p><ul><li><p>Se fornita, Milvus recupera la coppia di chiavi o il token API corrispondente e firma la richiesta sul lato server.</p></li><li><p>Se omesso (<code translate="no">None</code>), Milvus ricorre alla credenziale esplicitamente configurata per il fornitore del modello di destinazione in <code translate="no">milvus.yaml</code>.</p></li><li><p>Se l'etichetta è sconosciuta o la chiave di riferimento è mancante, la chiamata fallisce.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Il numero di dimensioni per gli embeddings in uscita. Per i modelli di terza generazione di OpenAI, è possibile accorciare il vettore completo per ridurre i costi e la latenza senza una perdita significativa di informazioni semantiche. Per ulteriori informazioni, consultare il <a href="https://openai.com/blog/new-embedding-models-and-api-updates">post di annuncio di OpenAI</a>.<br>
- <strong>Nota:</strong> se si accorcia la dimensione del vettore, assicurarsi che il valore <code translate="no">dim</code> specificato nel metodo <code translate="no">add_field</code> dello schema per il campo vettoriale corrisponda alla dimensione finale della funzione di incorporamento.</p></td>
+     <td><p>Il numero di dimensioni per gli embeddings in uscita. Per i modelli di terza generazione di OpenAI, è possibile accorciare il vettore completo per ridurre i costi e la latenza senza una perdita significativa di informazioni semantiche. Per ulteriori informazioni, consultare il <a href="https://openai.com/blog/new-embedding-models-and-api-updates">post di annuncio di OpenAI</a>.</p><p><strong>Nota:</strong> se si accorcia la dimensione del vettore, assicurarsi che il valore <code translate="no">dim</code> specificato nel metodo <code translate="no">add_field</code> dello schema per il campo vettoriale corrisponda alla dimensione finale della funzione di incorporamento.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -438,6 +452,8 @@ schema.add_function(text_embedding_function)
         ></path>
       </svg>
     </button></h3><p>Dopo aver definito lo schema con i campi necessari e la funzione incorporata, impostare l'indice per la raccolta. Per semplificare questo processo, utilizzare <code translate="no">AUTOINDEX</code> come <code translate="no">index_type</code>, un'opzione che consente a Milvus di scegliere e configurare il tipo di indice più adatto in base alla struttura dei dati.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -447,6 +463,14 @@ index_params.add_index(
     index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Create-collection" class="common-anchor-header">Passo 4: Creare la collezione<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -463,13 +487,23 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Creare ora la collezione utilizzando lo schema e i parametri dell'indice definiti.</p>
+    </button></h3><p>Ora si crea la collezione utilizzando lo schema e i parametri dell'indice definiti.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
     schema=schema, 
     index_params=index_params
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-5-Insert-data" class="common-anchor-header">Passo 5: Inserire i dati<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -486,13 +520,23 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Dopo aver configurato la raccolta e l'indice, si è pronti a inserire i dati grezzi. In questo processo, è sufficiente fornire il testo grezzo. Il modulo Function, definito in precedenza, genera automaticamente il vettore sparse corrispondente per ogni voce di testo.</p>
+    </button></h3><p>Dopo aver impostato la collezione e l'indice, si è pronti a inserire i dati grezzi. In questo processo, è sufficiente fornire il testo grezzo. Il modulo Function, definito in precedenza, genera automaticamente il vettore sparse corrispondente per ogni voce di testo.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Vector embeddings convert text into searchable numeric data.&#x27;</span>},
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Passo 6: Eseguire la ricerca vettoriale<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -510,6 +554,8 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
         ></path>
       </svg>
     </button></h3><p>Dopo l'inserimento dei dati, è possibile eseguire una ricerca semantica utilizzando il testo grezzo della query. Milvus converte automaticamente la query in un vettore di incorporamento, recupera i documenti pertinenti in base alla somiglianza e restituisce i risultati più corrispondenti.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -524,7 +570,15 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sulle operazioni di ricerca e interrogazione, consultare <a href="/docs/it/single-vector-search.md">Ricerca vettoriale</a> e <a href="/docs/it/get-and-scalar-query.md">interrogazione</a> <a href="/docs/it/single-vector-search.md">di base</a>.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Per ulteriori informazioni sulle operazioni di ricerca e interrogazione, consultare la sezione <a href="/docs/it/single-vector-search.md">Ricerca</a> e <a href="/docs/it/get-and-scalar-query.md">interrogazione</a> <a href="/docs/it/single-vector-search.md">vettoriale di base</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -613,8 +667,10 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sì, è possibile utilizzare vettori di query precalcolati invece di testo grezzo per la ricerca di similarità. Il modulo Function converte automaticamente le query di testo grezzo in embedding, ma è anche possibile fornire direttamente i dati vettoriali al parametro dati dell'operazione di ricerca. Nota: la dimensione del vettore di query fornito deve essere coerente con la dimensione delle incorporazioni vettoriali generate dal modulo Function.</p>
+    </button></h3><p>Sì, è possibile utilizzare vettori di query precalcolati invece di testo grezzo per la ricerca di similarità. Mentre il modulo Function converte automaticamente le query di testo grezzo in embedding, è possibile fornire direttamente i dati vettoriali al parametro <code translate="no">data</code> nelle operazioni di ricerca. <strong>Nota</strong>: la dimensione del vettore di query fornito deve essere coerente con la dimensione delle incorporazioni vettoriali generate dal modulo Function.</p>
 <p><strong>Esempio</strong>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -631,4 +687,12 @@ results = client.search(
     anns_field=<span class="hljs-string">&#x27;dense&#x27;</span>,
     limit=<span class="hljs-number">1</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

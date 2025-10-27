@@ -53,9 +53,9 @@ beta: Milvus 2.6.x
 <li><p>يمكن لكل مرتبة اضمحلال استخدام حقل رقمي واحد فقط.</p></li>
 <li><p><strong>اتساق الوحدة الزمنية</strong>: عند استخدام تصنيف الاضمحلال المستند إلى الوقت، يجب أن تتطابق وحدات المعلمات <code translate="no">origin</code> و <code translate="no">scale</code> و <code translate="no">offset</code> مع الوحدات المستخدمة في بيانات مجموعتك:</p>
 <ul>
-<li>إذا كانت مجموعتك تخزن الطوابع الزمنية <strong>بالثواني،</strong> فاستخدم الثواني لجميع المعلمات</li>
-<li>إذا كانت مجموعتك تخزن الطوابع الزمنية <strong>بالمللي</strong> ثانية، استخدم المللي ثانية لجميع المعلمات</li>
-<li>إذا كانت مجموعتك تخزن الطوابع الزمنية <strong>بالميكروثانية،</strong> فاستخدم الميكروثانية لجميع المعلمات</li>
+<li><p>إذا كانت مجموعتك تخزن الطوابع الزمنية <strong>بالثواني،</strong> فاستخدم الثواني لجميع المعلمات</p></li>
+<li><p>إذا كانت مجموعتك تخزن الطوابع الزمنية <strong>بالمللي</strong> ثانية، استخدم المللي ثانية لجميع المعلمات</p></li>
+<li><p>إذا كانت مجموعتك تخزن الطوابع الزمنية <strong>بالميكروثانية،</strong> فاستخدم الميكروثانية لجميع المعلمات</p></li>
 </ul></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">كيف يعمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -238,31 +238,19 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>غاوسي (<code translate="no">gauss</code>)</p></td>
      <td><p>انخفاض تدريجي طبيعي الشعور يمتد بشكل معتدل</p></td>
-     <td><ul>
-<li><p>عمليات البحث العامة التي تتطلب نتائج متوازنة</p></li>
-<li><p>التطبيقات التي يكون لدى المستخدمين فيها إحساس بديهي بالمسافة</p></li>
-<li><p>عندما لا ينبغي أن تؤدي المسافة المعتدلة إلى معاقبة النتائج بشدة</p></li>
-</ul></td>
+     <td><ul><li><p>عمليات البحث العامة التي تتطلب نتائج متوازنة</p></li><li><p>التطبيقات التي يكون لدى المستخدمين فيها إحساس بديهي بالمسافة</p></li><li><p>عندما لا ينبغي أن تؤدي المسافة المعتدلة إلى معاقبة النتائج بشدة</p></li></ul></td>
      <td><p>في بحث عن مطعم، تظل الأماكن ذات الجودة العالية التي تبعد 3 كم قابلة للاكتشاف، على الرغم من أنها تحتل مرتبة أقل من الخيارات القريبة</p></td>
    </tr>
    <tr>
      <td><p>أسي (<code translate="no">exp</code>)</p></td>
      <td><p>يتناقص بسرعة في البداية ولكنه يحافظ على ذيل طويل</p></td>
-     <td><ul>
-<li><p>موجز الأخبار حيث يكون التكرار أمرًا بالغ الأهمية</p></li>
-<li><p>وسائل التواصل الاجتماعي حيث يجب أن يهيمن المحتوى الجديد</p></li>
-<li><p>عندما يكون القرب مفضلاً بقوة ولكن يجب أن تظل العناصر البعيدة الاستثنائية مرئية</p></li>
-</ul></td>
+     <td><ul><li><p>موجز الأخبار حيث يكون التكرار أمرًا بالغ الأهمية</p></li><li><p>وسائل التواصل الاجتماعي حيث يجب أن يهيمن المحتوى الجديد</p></li><li><p>عندما يكون القرب مفضلاً بقوة ولكن يجب أن تظل العناصر البعيدة الاستثنائية مرئية</p></li></ul></td>
      <td><p>في تطبيق الأخبار، تحتل قصص الأمس مرتبة أعلى بكثير من المحتوى الذي مضى عليه أسبوع، ولكن يمكن أن تظل المقالات القديمة ذات الصلة الوثيقة بالموضوع تظهر</p></td>
    </tr>
    <tr>
      <td><p>خطي (<code translate="no">linear</code>)</p></td>
      <td><p>الانخفاض المتسق والمتوقع مع وجود حد فاصل واضح</p></td>
-     <td><ul>
-<li><p>التطبيقات ذات الحدود الطبيعية</p></li>
-<li><p>الخدمات ذات حدود المسافة</p></li>
-<li><p>محتوى بتواريخ انتهاء صلاحية أو حدود واضحة</p></li>
-</ul></td>
+     <td><ul><li><p>التطبيقات ذات الحدود الطبيعية</p></li><li><p>الخدمات ذات حدود المسافة</p></li><li><p>محتوى بتواريخ انتهاء صلاحية أو حدود واضحة</p></li></ul></td>
      <td><p>في أداة البحث عن الأحداث، لا تظهر الأحداث التي تتجاوز نافذة مستقبلية لمدة أسبوعين على الإطلاق</p></td>
    </tr>
 </table>
@@ -306,7 +294,9 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لتنفيذ تصنيف التضاؤل، قم أولاً بتعريف كائن <code translate="no">Function</code> بالتكوين المناسب:</p>
+    </button></h3><p>لتنفيذ تصنيف الاضمحلال، قم أولاً بتعريف كائن <code translate="no">Function</code> بالتكوين المناسب:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
@@ -325,6 +315,46 @@ decay_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
+
+<span class="hljs-keyword">import</span> java.time.ZoneId;
+<span class="hljs-keyword">import</span> java.time.ZonedDateTime;
+
+<span class="hljs-type">ZonedDateTime</span> <span class="hljs-variable">zdt</span> <span class="hljs-operator">=</span> ZonedDateTime.of(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">25</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, ZoneId.systemDefault());
+
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;time_decay&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;timestamp&quot;</span>))
+        .function(<span class="hljs-string">&quot;gauss&quot;</span>)
+        .origin(zdt.toInstant().toEpochMilli())
+        .scale(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .offset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .build();
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">
+<span class="hljs-keyword">import</span> {<span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> decayRanker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;time_decay&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;timestamp&quot;</span>],
+  <span class="hljs-attr">function_type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;decay&quot;</span>,
+    <span class="hljs-attr">function</span>: <span class="hljs-string">&quot;gauss&quot;</span>,
+    <span class="hljs-attr">origin</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).<span class="hljs-title function_">getTime</span>(),
+    <span class="hljs-attr">scale</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+    <span class="hljs-attr">offset</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+    <span class="hljs-attr">decay</span>: <span class="hljs-number">0.5</span>,
+  },
+};
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>المعلمة</p></th>
@@ -341,59 +371,49 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>حقل رقمي لحساب درجة التضاؤل. يحدد سمة البيانات التي سيتم استخدامها لحساب التضاؤل (على سبيل المثال، الطوابع الزمنية للتضاؤل المستند إلى الوقت، والإحداثيات للتضاؤل المستند إلى الموقع). 
- يجب أن يكون حقلاً في مجموعتك يحتوي على قيم رقمية ذات صلة. يدعم INT8/16/32/64، وFLOAT، وDouble.</p></td>
+     <td><p>حقل رقمي لحساب درجة التضاؤل. يحدد سمة البيانات التي سيتم استخدامها لحساب التضاؤل (على سبيل المثال، الطوابع الزمنية للتضاؤل المستند إلى الوقت، والإحداثيات للتضاؤل المستند إلى الموقع). </p><p>يجب أن يكون حقلاً في مجموعتك يحتوي على قيم رقمية ذات صلة. يدعم INT8/16/32/64، وFLOAT، وDouble.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>تحديد نوع الدالة التي يتم إنشاؤها. يجب تعيينها على <code translate="no">RERANK</code> لجميع مرتبات التضاؤل.</p></td>
+     <td><p>يحدد نوع الدالة التي يتم إنشاؤها.</p><p>يجب تعيينها على <code translate="no">RERANK</code> لجميع مرتبات الاضمحلال.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>يحدد أسلوب إعادة الترتيب المطلوب استخدامه. يجب تعيينه إلى <code translate="no">"decay"</code> لتمكين وظيفة ترتيب التضاؤل.</p></td>
+     <td><p>يحدد طريقة إعادة الترتيب المراد استخدامها.</p><p>يجب تعيينها إلى <code translate="no">"decay"</code> لتمكين وظيفة ترتيب الاضمحلال.</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>تحديد مصنف التضاؤل الرياضي المطلوب تطبيقه. يحدد شكل المنحنى الخاص بانخفاض الملاءمة. راجع قسم <a href="/docs/ar/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف التضاؤل الصحيح</a> للحصول على إرشادات حول اختيار الدالة المناسبة.</p></td>
+     <td><p>تحديد مصنف التضاؤل الرياضي المطلوب تطبيقه. يحدد شكل المنحنى الخاص بانخفاض الأهمية.</p><p>راجع قسم <a href="/docs/ar/decay-ranker-overview.md#Choose-the-right-decay-ranker">اختيار مصنف التضاؤل الصحيح</a> للحصول على إرشادات حول اختيار الدالة المناسبة.</p></td>
      <td><p><code translate="no">"gauss"</code> <code translate="no">"exp"</code> ، أو <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>النقطة المرجعية التي يتم من خلالها حساب درجة التضاؤل. تحصل العناصر عند هذه القيمة على أقصى درجات الملاءمة. بالنسبة للتضاؤل المستند إلى الوقت، يجب أن تتطابق وحدة الوقت مع بيانات المجموعة الخاصة بك.</p></td>
-     <td><ul>
-<li>بالنسبة للطوابع الزمنية: الوقت الحالي (على سبيل المثال، <code translate="no">int(time.time())</code>)</li>
-<li>بالنسبة للموقع الجغرافي: إحداثيات المستخدم الحالية</li>
-</ul></td>
+     <td><p>النقطة المرجعية التي يتم من خلالها حساب درجة التضاؤل. تحصل العناصر عند هذه القيمة على أقصى درجات الملاءمة.</p><p>بالنسبة للتضاؤل المستند إلى الوقت، يجب أن تتطابق وحدة الوقت مع بيانات المجموعة الخاصة بك.</p></td>
+     <td><ul><li><p>بالنسبة للطوابع الزمنية: الوقت الحالي (على سبيل المثال، <code translate="no">int(time.time())</code>)</p></li><li><p>بالنسبة للموقع الجغرافي: إحداثيات المستخدم الحالية</p></li></ul></td>
    </tr>
    <tr>
-          <td><p><code translate="no">params.scale</code></p></td>
+     <td><p><code translate="no">params.scale</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>المسافة أو الوقت الذي تنخفض فيه الصلة إلى القيمة <code translate="no">decay</code>. يتحكم في مدى سرعة انخفاض الصلة بالموضوع. بالنسبة للتضاؤل المستند إلى الوقت، يجب أن تتطابق وحدة الوقت مع بيانات المجموعة الخاصة بك. تؤدي القيم الأكبر إلى انخفاض تدريجي أكثر في الملاءمة؛ بينما تؤدي القيم الأصغر إلى انخفاض أكثر حدة.</p></td>
-     <td><ul>
-<li>للوقت: الفترة بالثواني (على سبيل المثال، <code translate="no">7 * 24 * 60 * 60</code> لمدة 7 أيام)</li>
-<li>للمسافة: بالأمتار (على سبيل المثال، <code translate="no">5000</code> لـ 5 كم)</li>
-</ul></td>
+     <td><p>المسافة أو الوقت الذي تنخفض فيه الصلة إلى القيمة <code translate="no">decay</code>. يتحكم في مدى سرعة انخفاض الصلة بالموضوع.</p><p>بالنسبة للتضاؤل المستند إلى الوقت، يجب أن تتطابق وحدة الوقت مع بيانات المجموعة الخاصة بك.</p><p>تؤدي القيم الأكبر إلى انخفاض تدريجي أكثر في الملاءمة؛ بينما تؤدي القيم الأصغر إلى انخفاض أكثر حدة.</p></td>
+     <td><ul><li><p>للوقت: الفترة بالثواني (على سبيل المثال، <code translate="no">7 * 24 * 60 * 60</code> لمدة 7 أيام)</p></li><li><p>للمسافة: بالأمتار (على سبيل المثال، <code translate="no">5000</code> لـ 5 كم)</p></li></ul></td>
    </tr>
    <tr>
-          <td><p><code translate="no">params.offset</code></p></td>
+     <td><p><code translate="no">params.offset</code></p></td>
      <td><p>لا يوجد</p></td>
-     <td><p>ينشئ "منطقة عدم اضمحلال" حول <code translate="no">origin</code> حيث تحافظ العناصر على الدرجات الكاملة (درجة الاضمحلال = 1.0). تحافظ العناصر داخل هذا النطاق من <code translate="no">origin</code> على أقصى قدر من الأهمية. بالنسبة للتضاؤل المستند إلى الوقت، يجب أن تتطابق وحدة الوقت مع بيانات المجموعة الخاصة بك.</p></td>
-     <td><ul>
-<li>بالنسبة للوقت: الفترة بالثواني (على سبيل المثال، <code translate="no">24 * 60 * 60</code> لمدة يوم واحد)</li>
-<li>للمسافة: متر (على سبيل المثال، <code translate="no">500</code> لـ 500 متر)</li>
-</ul></td>
+     <td><p>ينشئ "منطقة عدم اضمحلال" حول <code translate="no">origin</code> حيث تحافظ العناصر على الدرجات الكاملة (درجة الاضمحلال = 1.0).</p><p>بالنسبة للاضمحلال المستند إلى الوقت، يجب أن تتطابق وحدة الوقت مع بيانات المجموعة الخاصة بك.</p><p>تحافظ العناصر داخل هذا النطاق من <code translate="no">origin</code> على أقصى قدر من الملاءمة.</p></td>
+     <td><ul><li><p>بالنسبة للوقت: الفترة بالثواني (على سبيل المثال، <code translate="no">24 * 60 * 60</code> لمدة يوم واحد)</p></li><li><p>للمسافة: بالأمتار (على سبيل المثال، <code translate="no">500</code> لـ 500 متر)</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>لا يوجد</p></td>
-     <td><p>قيمة الدرجة في المسافة <code translate="no">scale</code> ، تتحكم في انحدار المنحنى. تُنشئ القيم المنخفضة منحنيات انحدار أكثر حدة؛ بينما تُنشئ القيم الأعلى منحنيات انحدار أكثر تدرجًا. يجب أن تكون بين 0 و1.</p></td>
+     <td><p>تتحكم قيمة الدرجة في المسافة <code translate="no">scale</code> في انحدار المنحنى. تؤدي القيم المنخفضة إلى إنشاء منحنيات انحدار أكثر حدة؛ بينما تؤدي القيم الأعلى إلى إنشاء منحنيات انحدار أكثر تدرجًا.</p><p>يجب أن تكون بين 0 و1.</p></td>
      <td><p><code translate="no">0.5</code> (افتراضي)</p></td>
    </tr>
 </table>
@@ -413,18 +433,50 @@ decay_ranker = Function(
         ></path>
       </svg>
     </button></h3><p>بعد تحديد مصنف الانحدار، يمكنك تطبيقه أثناء عمليات البحث عن طريق تمريره إلى المعلمة <code translate="no">ranker</code>:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تنطبق على البحث الهجين<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;search query&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],
+  <span class="hljs-attr">rerank</span>: ranker,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">تطبيقه على البحث الهجين<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -439,19 +491,21 @@ results = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكن أيضًا تطبيق مصنفات التضاؤل على عمليات البحث الهجين التي تجمع بين حقول متجهات متعددة:</p>
+    </button></h3><p>يمكن أيضًا تطبيق مصنفات الاضمحلال على عمليات البحث المختلطة التي تجمع بين عدة حقول متجهة:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
 dense_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
 )
 
 sparse_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
@@ -466,4 +520,57 @@ hybrid_results = milvus_client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في البحث المختلط، يعثر ميلفوس أولاً على أقصى درجة تشابه من جميع حقول المتجهات، ثم يطبق عامل التضاؤل على تلك الدرجة.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding)))
+        .limit(<span class="hljs-number">20</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;search query&quot;</span>)))
+        .limit(<span class="hljs-number">20</span>)
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+                .collectionName(COLLECTION_NAME)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(<span class="hljs-number">10</span>)
+                .outputFields(Arrays.asList(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
+                .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> denseRequest = {
+  <span class="hljs-attr">data</span>: [your_query_vector_1], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+};
+
+<span class="hljs-keyword">const</span> sparseRequest = {
+  <span class="hljs-attr">data</span>: [your_query_vector_2], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+};
+
+<span class="hljs-keyword">const</span> hybridResults = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">hybrid_search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">data</span>: [denseRequest, sparseRequest],
+  <span class="hljs-attr">ranker</span>: decayRanker,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],
+});
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>في البحث الهجين، يعثر ميلفوس أولاً على أقصى درجة تشابه من جميع حقول المتجهات، ثم يطبق عامل التضاؤل على تلك الدرجة.</p>

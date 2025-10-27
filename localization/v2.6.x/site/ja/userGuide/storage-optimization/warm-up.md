@@ -2,8 +2,8 @@
 id: warm-up.md
 title: ウォームアップCompatible with Milvus 2.6.4+
 summary: >-
-  Milvusでは、Warm Upは、コールドデータが初めてアクセスされる際に発生するファーストヒットレイテンシを緩和することにより、Tiered
-  Storageを補完する。ウォームアップを設定すると、セグメントがクエリ可能になる前に、選択したフィールドやインデックスがキャッシュにプリロードされ、頻繁にアクセスされるデータがロード後すぐに利用できるようになる。
+  Milvusでは、Warm Upは、コールドデータが初めてアクセスされたときに発生するファーストヒットレイテンシを緩和することによって、Tiered
+  Storageを補完する。ウォームアップが設定されると、セグメントがクエリ可能になる前に、選択されたタイプのフィールドやインデックスがキャッシュにプリロードされ、頻繁にアクセスされるデータがロード後すぐに利用できるようになる。
 beta: Milvus 2.6.4+
 ---
 <h1 id="Warm-Up" class="common-anchor-header">ウォームアップ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Warm-Up" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusの<strong>Warm Upは</strong>、コールドデータが初めてアクセスされる際に発生するファーストヒットレイテンシを緩和することにより、Tiered Storageを補完します。ウォームアップを設定すると、セグメントがクエリ可能になる前に、選択したフィールドやインデックスがキャッシュにプリロードされ、頻繁にアクセスされるデータがロード後すぐに利用できるようになります。</p>
+    </button></h1><p>Milvusの<strong>Warm Upは</strong>、コールドデータが初めてアクセスされる際に発生するファーストヒットレイテンシを緩和することで、Tiered Storageを補完します。ウォームアップを設定すると、セグメントがクエリ可能になる前に、選択されたタイプのフィールドやインデックスがキャッシュにプリロードされ、頻繁にアクセスされるデータがロード後すぐに利用できるようになります。</p>
 <h2 id="Why-warm-up" class="common-anchor-header">ウォームアップの理由<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tiered Storageの<a href="/docs/ja/tiered-storage-overview.md#Phase-1-Lazy-load">Lazy Loadは</a>、メタデータのみを最初にロードすることで効率を向上させる。しかし、必要なチャンクやインデックスをオブジェクトストレージからフェッチする必要があるため、コールドデータへの最初のクエリで待ち時間が発生する可能性があります。</p>
+    </button></h2><p>ティアード・ストレージの<a href="/docs/ja/tiered-storage-overview.md#Phase-1-Lazy-load">レイジー・ロードは</a>、メタデータのみを最初にロードすることで効率を向上させる。しかし、必要なチャンクやインデックスをオブジェクトストレージからフェッチする必要があるため、コールドデータへの最初のクエリで待ち時間が発生する可能性があります。</p>
 <p><strong>ウォームアップは</strong>、セグメントの初期化中に重要なデータを積極的にキャッシュすることで、この問題を解決します。</p>
 <p>特に以下のような場合に有効です：</p>
 <ul>
@@ -69,9 +69,9 @@ beta: Milvus 2.6.4+
      <th><p>典型的なシナリオ</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">sync</code> (デフォルト）</p></td>
+     <td><p><code translate="no">sync</code></p></td>
      <td><p>セグメントがクエリ可能になる前にプリロードする。ロード時間は若干長くなるが、最初のクエリに待ち時間は発生しない。</p></td>
-     <td><p>検索で使用される高頻度のスカラー・インデックスやキー・ベクター・インデックスなど、すぐに利用可能でなければならないパフォーマンス・クリティカルなデータに使用する。</p></td>
+     <td><p>検索で使用される高頻度のスカラー・インデックスやキー・ベクター・インデックスなど、即座に利用可能でなければならないパフォーマンス・クリティカルなデータに使用する。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">disable</code></p></td>
@@ -86,9 +86,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-attr">warmup:</span>
         <span class="hljs-comment"># options: sync, disable.</span>
         <span class="hljs-comment"># Specifies the timing for warming up the Tiered Storage cache.</span>
-        <span class="hljs-comment"># - &quot;sync&quot;: data will be loaded into the cache before a segment is considered loaded.</span>
-        <span class="hljs-comment"># - &quot;disable&quot;: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
-        <span class="hljs-comment"># Defaults to &quot;sync&quot;, except for vector field which defaults to &quot;disable&quot;.</span>
+        <span class="hljs-comment"># - `sync`: data will be loaded into the cache before a segment is considered loaded.</span>
+        <span class="hljs-comment"># - `disable`: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
+        <span class="hljs-comment"># Defaults to `sync`, except for vector field which defaults to `disable`.</span>
         <span class="hljs-attr">scalarField:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">scalarIndex:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">vectorField:</span> <span class="hljs-string">disable</span> <span class="hljs-comment"># cache warmup for vector field raw data is by default disabled.</span>

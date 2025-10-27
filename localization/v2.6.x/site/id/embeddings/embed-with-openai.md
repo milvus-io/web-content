@@ -41,8 +41,10 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
 <p>Nama model OpenAI yang akan digunakan untuk penyematan. Opsi yang valid adalah <strong>text-embedding-3-kecil</strong>, <strong>text-embedding-3-besar</strong>, dan <strong>text-embedding-ada-002</strong> (default).</p></li>
 <li><p><strong>api_key</strong><em>(string</em>)</p>
 <p>Kunci API untuk mengakses API OpenAI.</p></li>
-<li><p><strong>dimensions</strong><em>(int</em>)</p>
-<p>Jumlah dimensi yang harus dimiliki oleh penyematan keluaran yang dihasilkan. Hanya didukung pada model <strong>penyematan teks-3</strong> dan yang lebih baru.</p></li>
+<li><p><strong>base_url</strong><em>(string</em>)</p>
+<p>URL dasar untuk mengakses OpenAI API. Nilai defaultnya adalah <strong>https://api.openai.com/v1.</strong> Namun, jika Anda mengakses titik akhir API yang kompatibel dari penyedia model yang berbeda atau instance vLLM lokal, seperti <strong>http://localhost:8080/v1,</strong> Anda dapat menentukan URL di sini.</p></li>
+<li><p><strong>dimensi</strong><em>(int</em>)</p>
+<p>Jumlah dimensi yang harus dimiliki penyematan keluaran yang dihasilkan. Hanya didukung dalam model <strong>penyematan teks-3</strong> dan yang lebih baru.</p></li>
 </ul>
 <p>Untuk membuat sematan untuk dokumen, gunakan metode <strong>encode_documents()</strong>:</p>
 <pre><code translate="no" class="language-python">docs = [

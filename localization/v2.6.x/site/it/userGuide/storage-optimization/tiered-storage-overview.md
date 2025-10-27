@@ -27,11 +27,11 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>In Milvus, la modalità tradizionale <em>full-load</em> richiede che ogni QueryNode carichi tutti i campi dati e gli indici di un <a href="/docs/it/glossary.md#Segment">segmento</a> al momento dell'inizializzazione, anche quelli a cui non si accede mai. Questo garantisce la disponibilità immediata dei dati, ma spesso comporta uno spreco di risorse, tra cui un elevato utilizzo della memoria, un'intensa attività su disco e un significativo overhead di I/O, soprattutto quando si gestiscono insiemi di dati di grandi dimensioni.</p>
-<p>Lo<em>storage a livelli</em> affronta questa sfida disaccoppiando la cache dei dati dal caricamento dei segmenti. Invece di caricare tutti i dati in una sola volta, Milvus introduce un livello di caching che distingue tra dati caldi (memorizzati nella cache locale) e dati freddi (memorizzati in remoto). Il QueryNode carica inizialmente solo <em>metadati</em> leggeri e preleva o evade dinamicamente i dati su richiesta. Ciò riduce significativamente i tempi di caricamento, ottimizza l'utilizzo delle risorse locali e consente ai QueryNode di elaborare insiemi di dati che superano di gran lunga la loro memoria fisica o la capacità del disco.</p>
+<p>Lo<em>storage a livelli</em> affronta questa sfida disaccoppiando la cache dei dati dal caricamento dei segmenti. Invece di caricare tutti i dati in una sola volta, Milvus introduce un livello di caching che distingue tra dati caldi (memorizzati nella cache locale) e dati freddi (memorizzati in remoto). Il QueryNode carica inizialmente solo <em>metadati</em> leggeri e preleva o evade dinamicamente i dati del campo su richiesta. Questo riduce significativamente il tempo di caricamento, ottimizza l'utilizzo delle risorse locali e consente ai QueryNode di elaborare set di dati che superano di gran lunga la loro memoria fisica o la capacità del disco.</p>
 <p>Considerate la possibilità di attivare l'archiviazione a livelli in scenari quali:</p>
 <ul>
 <li><p>Collezioni che superano la memoria disponibile o la capacità NVMe di un singolo QueryNode</p></li>
-<li><p>Carichi di lavoro analitici o batch in cui la rapidità di caricamento è più importante della latenza di prima interrogazione</p></li>
+<li><p>Carichi di lavoro analitici o batch in cui la velocità di caricamento è più importante della latenza della prima interrogazione.</p></li>
 <li><p>Carichi di lavoro misti che possono tollerare occasionali mancanze della cache per i dati a cui si accede meno frequentemente.</p></li>
 </ul>
 <div class="alert note">
@@ -80,7 +80,7 @@ beta: Milvus 2.6.4+
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/full-load-mode-vs-tiered-storage-mode.png" alt="Full Load Mode Vs Tiered Storage Mode" class="doc-image" id="full-load-mode-vs-tiered-storage-mode" />
-   </span> <span class="img-wrapper"> <span>Modalità Full Load vs Modalità di archiviazione a livelli</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Modalità Full Load vs modalità di archiviazione a livelli</span> </span></p>
 <h3 id="QueryNode-loading-workflow" class="common-anchor-header">Flusso di lavoro per il caricamento dei QueryNode<button data-href="#QueryNode-loading-workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,38 +96,38 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>In modalità Tiered Storage, il flusso di lavoro si articola in queste fasi:</p>
+    </button></h3><p>In modalità Tiered Storage, il flusso di lavoro prevede queste fasi:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/load-workflow.png" alt="Load Workflow" class="doc-image" id="load-workflow" />
-   </span> <span class="img-wrapper"> <span>Flusso di lavoro di caricamento</span> </span></p>
-<h4 id="Phase-1-Lazy-load" class="common-anchor-header">Fase 1: Carico pigro</h4><p>All'inizializzazione, Milvus esegue un caricamento pigro, mettendo in cache solo i metadati a livello di segmento, come le definizioni dello schema, le informazioni sugli indici e le mappature dei chunk.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-load-workflow.png" alt="Querynode Load Workflow" class="doc-image" id="querynode-load-workflow" />
+   </span> <span class="img-wrapper"> <span>Flusso di lavoro per il caricamento del querynode</span> </span></p>
+<h4 id="Phase-1-Lazy-load" class="common-anchor-header">Fase 1: Carico pigro</h4><p>All'inizializzazione, Milvus esegue un caricamento pigro, mettendo in cache solo i metadati a livello di segmento, come le definizioni di schema, le informazioni sugli indici e le mappature dei chunk.</p>
 <p>In questa fase non vengono memorizzati nella cache i dati dei campi o i file degli indici. Questo permette alle collezioni di diventare interrogabili quasi immediatamente dopo l'avvio, mantenendo il consumo di memoria e di disco al minimo.</p>
 <p>Poiché i dati di campo e i file di indice rimangono nello storage remoto fino al primo accesso, la <em>prima query</em> può presentare una latenza aggiuntiva, poiché i dati necessari devono essere recuperati su richiesta. Per mitigare questo effetto per i campi o gli indici critici, è possibile utilizzare la strategia <a href="/docs/it/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up</a> per precaricarli in modo proattivo prima che il segmento diventi interrogabile.</p>
 <p><strong>Configurazione</strong></p>
-<p>Si applica automaticamente quando si abilita l'archiviazione a livelli. Non sono necessarie altre impostazioni manuali.</p>
-<h4 id="Phase-2-Warm-up" class="common-anchor-header">Fase 2: riscaldamento</h4><p>Per ridurre la latenza di primo impatto introdotta dal <a href="/docs/it/tiered-storage-overview.md#Phase-1-Lazy-load">caricamento pigro</a>, Milvus offre un meccanismo di *riscaldamento.</p>
+<p>Si applica automaticamente quando si abilita l'archiviazione a livelli. Non è necessaria alcuna impostazione manuale.</p>
+<h4 id="Phase-2-Warm-up" class="common-anchor-header">Fase 2: riscaldamento</h4><p>Per ridurre la latenza di primo impatto introdotta dal <a href="/docs/it/tiered-storage-overview.md#Phase-1-Lazy-load">caricamento pigro</a>, Milvus offre un meccanismo di <em>riscaldamento</em>.</p>
 <p>Prima che un segmento diventi interrogabile, Milvus è in grado di recuperare e memorizzare nella cache campi o indici specifici dallo storage degli oggetti, assicurando che la prima query colpisca direttamente i dati memorizzati nella cache invece di attivare il caricamento su richiesta.</p>
+<p>Durante il warmup, i campi vengono precaricati a livello di chunk, mentre gli indici vengono precaricati a livello di segmento.</p>
 <p><strong>Configurazione</strong></p>
-<p>Le impostazioni di Warm Up sono definite nella sezione Tiered Storage di <strong>milvus.yaml</strong>. È possibile abilitare o disabilitare il precaricamento per ogni tipo di campo o indice e specificare la strategia preferita. Per esempi di configurazione, consultare la sezione <a href="/docs/it/warm-up.md">Warm Up</a>.</p>
-<h4 id="Phase-3-Partial-load" class="common-anchor-header">Fase 3: caricamento parziale</h4><p>Una volta iniziate le query o le ricerche, il QueryNode esegue un <em>caricamento parziale</em>, recuperando solo i pezzi di dati o i file di indice necessari dal deposito oggetti.</p>
+<p>Le impostazioni di Warm Up sono definite nella sezione Tiered Storage di <code translate="no">milvus.yaml</code>. È possibile abilitare o disabilitare il precaricamento per ogni tipo di campo o indice e specificare la strategia preferita. Per le configurazioni dettagliate, vedere <a href="/docs/it/warm-up.md">Warm Up</a>.</p>
+<h4 id="Phase-3-Partial-load" class="common-anchor-header">Fase 3: caricamento parziale</h4><p>Una volta iniziate le query o le ricerche, il QueryNode esegue un <em>caricamento parziale</em>, recuperando solo i chunk di dati o i file di indice necessari dallo storage degli oggetti.</p>
 <ul>
 <li><p><strong>Campi</strong>: Caricati su richiesta a <strong>livello di chunk</strong>. Vengono recuperati solo i chunk di dati che corrispondono alle condizioni della query corrente, riducendo al minimo l'I/O e l'uso della memoria.</p></li>
 <li><p><strong>Indici</strong>: Caricati su richiesta a livello di <strong>segmento</strong>. I file degli indici devono essere recuperati come unità complete e non possono essere suddivisi in chunk.</p></li>
 </ul>
 <p><strong>Configurazione</strong></p>
-<p>Il carico parziale viene applicato automaticamente quando si abilita l'archiviazione a livelli. Non è necessaria alcuna impostazione manuale. Per ridurre al minimo la latenza di primo impatto per i dati critici, combinarlo con <a href="/docs/it/warm-up.md">Warm Up</a>.</p>
-<h4 id="Phase-4-Eviction" class="common-anchor-header">Fase 4: Evacuazione</h4><p>Per mantenere un uso sano delle risorse, Milvus rilascia automaticamente i dati inutilizzati nella cache quando vengono raggiunte delle soglie.</p>
-<p>L'eviction segue una politica di <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">Least Recently Used (LRU)</a>, assicurando che i dati a cui si accede di rado vengano rimossi per primi, mentre i dati attivi rimangono nella cache.</p>
+<p>Il carico parziale viene applicato automaticamente quando si attiva l'archiviazione a livelli. Non è necessaria alcuna impostazione manuale. Per ridurre al minimo la latenza di primo impatto per i dati critici, combinarlo con <a href="/docs/it/warm-up.md">Warm Up</a>.</p>
+<h4 id="Phase-4-Eviction" class="common-anchor-header">Fase 4: Evacuazione</h4><p>Per mantenere un uso sano delle risorse, Milvus rilascia automaticamente i dati inutilizzati nella cache quando vengono raggiunte soglie specifiche.</p>
+<p>L'eviction segue una politica <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">LRU (Least Recently Used)</a>, assicurando che i dati a cui si accede di rado vengano rimossi per primi, mentre i dati attivi rimangono nella cache.</p>
 <p>Lo svuotamento è regolato dai seguenti elementi configurabili:</p>
 <ul>
 <li><p><strong>Filigrane</strong>: Definizione di soglie di memoria o di disco che attivano e interrompono lo svuotamento.</p></li>
 <li><p><strong>TTL della cache</strong>: rimuove i dati stantii presenti nella cache dopo una durata definita di inattività.</p></li>
-<li><p><strong>Rapporto di overcommit</strong>: Consente l'oversubscription temporaneo della cache prima dell'inizio dell'eviction aggressiva, aiutando ad assorbire i picchi di carico di lavoro a breve termine.</p></li>
 </ul>
 <p><strong>Configurazione</strong></p>
 <p>Abilitare e sintonizzare i parametri di eviction in <strong>milvus.yaml</strong>. Per una configurazione dettagliata, vedere <a href="/docs/it/eviction.md">Eviction</a>.</p>
-<h2 id="Getting-started" class="common-anchor-header">Per iniziare<button data-href="#Getting-started" class="anchor-icon" translate="no">
+<h2 id="Getting-started" class="common-anchor-header">Come iniziare<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -206,10 +206,6 @@ beta: Milvus 2.6.4+
       
       <span class="hljs-comment"># Cache TTL (7 days)</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">604800</span>
-      
-      <span class="hljs-comment"># Overcommit Ratios</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Next-steps" class="common-anchor-header">Passi successivi<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,7 +224,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>Configurare il Warm Up</strong> - Ottimizzare il precaricamento per i modelli di accesso. Vedere <a href="/docs/it/warm-up.md">Warm Up</a>.</p></li>
-<li><p><strong>Messa a punto dell'Eviction</strong> - Impostare watermark e TTL appropriati per i vincoli delle risorse. Vedere <a href="/docs/it/eviction.md">Eviction</a>.</p></li>
+<li><p><strong>Messa a punto dell'Eviction</strong> - Impostare i watermark e il TTL appropriati per i vincoli delle risorse. Vedere <a href="/docs/it/eviction.md">Eviction</a>.</p></li>
 <li><p><strong>Monitorare le prestazioni</strong> - Tracciare le percentuali di accesso alla cache, la frequenza di evasione e i modelli di latenza delle query.</p></li>
 <li><p><strong>Iterare la configurazione</strong> - Regolare le impostazioni in base alle caratteristiche del carico di lavoro osservato.</p></li>
 </ol>
@@ -295,7 +291,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><p>Non necessariamente. Il Tiered Storage riduce i tempi di caricamento e l'utilizzo delle risorse, ma le query che toccano dati non memorizzati nella cache (freddi) possono avere una latenza maggiore. Per i carichi di lavoro sensibili alla latenza, si consiglia la modalità full-load.</p>
-<h3 id="Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="common-anchor-header">Perché un QueryNode continua a esaurire le risorse anche con l'archiviazione a livelli attivata?<button data-href="#Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="anchor-icon" translate="no">
+<h3 id="Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="common-anchor-header">Perché un QueryNode continua a esaurire le risorse anche con il Tiered Storage attivato?<button data-href="#Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,6 +311,7 @@ beta: Milvus 2.6.4+
 <li><p>Il QueryNode è stato configurato con un numero di risorse troppo basso. I watermark sono relativi alle risorse disponibili, quindi un approvvigionamento insufficiente amplifica le valutazioni errate.</p></li>
 <li><p>Le risorse del QueryNode sono condivise con altri carichi di lavoro, quindi Tiered Storage non è in grado di valutare correttamente la capacità effettiva disponibile.</p></li>
 </ul>
+<p>Per risolvere questo problema, si consiglia di allocare risorse dedicate ai QueryNode.</p>
 <h3 id="Why-do-some-queries-fail-under-high-concurrency" class="common-anchor-header">Perché alcune query falliscono in caso di elevata concurrency?<button data-href="#Why-do-some-queries-fail-under-high-concurrency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -330,7 +327,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se un numero eccessivo di query raggiunge contemporaneamente i dati caldi, i limiti delle risorse del QueryNode possono essere superati. Alcuni thread possono fallire a causa del timeout della prenotazione delle risorse. Il problema può essere risolto riprovando dopo che il carico è diminuito o allocando più risorse.</p>
+    </button></h3><p>Se un numero eccessivo di query colpisce contemporaneamente i dati caldi, i limiti delle risorse dei QueryNode possono essere superati. Alcuni thread possono fallire a causa del timeout della prenotazione delle risorse. Il problema può essere risolto riprovando dopo che il carico è diminuito o allocando più risorse.</p>
 <h3 id="Why-does-searchquery-latency-increase-after-enabling-Tiered-Storage" class="common-anchor-header">Perché la latenza di ricerca/query aumenta dopo aver attivato l'archiviazione a livelli?<button data-href="#Why-does-searchquery-latency-increase-after-enabling-Tiered-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -349,22 +346,5 @@ beta: Milvus 2.6.4+
     </button></h3><p>Le possibili cause sono:</p>
 <ul>
 <li><p>Frequenti interrogazioni di dati freddi, che devono essere recuperati dallo storage.</p></li>
-<li><p>Un rapporto di overcommit troppo alto, che porta a frequenti evacuazioni.</p></li>
 <li><p>Filigrane impostate troppo vicine, che causano frequenti evacuazioni sincrone.</p></li>
 </ul>
-<h3 id="Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="common-anchor-header">Lo storage a livelli può gestire dati illimitati con l'overcommit della cache?<button data-href="#Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>No. I rapporti di overcommit consentono ai QueryNode di lavorare con più segmenti di quelli consentiti dalla memoria fisica, ma rapporti troppo alti possono portare a frequenti evacuazioni, thrashing della cache o fallimenti delle query.</p>

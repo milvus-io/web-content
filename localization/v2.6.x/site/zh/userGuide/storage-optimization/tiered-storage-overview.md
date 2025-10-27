@@ -23,7 +23,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>在 Milvus 中，传统的<em>满载</em>模式要求每个查询节点在初始化时加载<a href="/docs/zh/glossary.md#Segment">段</a>的所有数据字段和索引，甚至包括可能永远不会被访问的数据。这可确保数据的即时可用性，但往往会导致资源浪费，包括内存使用率高、磁盘活动频繁和 I/O 开销大，尤其是在处理大规模数据集时。</p>
-<p><em>分层存储</em>通过将数据<em>缓存</em>与分段加载解耦来应对这一挑战。Milvus 引入了一个缓存层，区分热数据（本地缓存）和冷数据（远程存储），而不是一次性加载所有数据。现在，QueryNode 最初只加载轻量级<em>元数据</em>，然后按需动态提取或删除数据。这大大缩短了加载时间，优化了本地资源利用率，并使查询节点能够处理远远超出其物理内存或磁盘容量的数据集。</p>
+<p><em>分层存储</em>通过将数据<em>缓存</em>与分段加载解耦来应对这一挑战。Milvus 引入了一个缓存层，区分热数据（本地缓存）和冷数据（远程存储），而不是一次性加载所有数据。现在，QueryNode 最初只加载轻量级<em>元数据</em>，并根据需求动态拉取或驱逐字段数据。这大大缩短了加载时间，优化了本地资源利用率，并使查询节点能够处理远远超出其物理内存或磁盘容量的数据集。</p>
 <p>在以下情况下，请考虑启用分层存储：</p>
 <ul>
 <li><p>超过单个 QueryNode 可用内存或 NVMe 容量的集合</p></li>
@@ -95,34 +95,34 @@ beta: Milvus 2.6.4+
     </button></h3><p>在分层存储模式下，工作流程分为以下几个阶段：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/load-workflow.png" alt="Load Workflow" class="doc-image" id="load-workflow" />
-   </span> <span class="img-wrapper"> <span>加载工作流程</span> </span></p>
-<h4 id="Phase-1-Lazy-load" class="common-anchor-header">阶段 1：懒惰加载</h4><p>初始化时，Milvus 执行懒加载，只缓存段级元数据，如 Schema 定义、索引信息和块映射。</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-load-workflow.png" alt="Querynode Load Workflow" class="doc-image" id="querynode-load-workflow" />
+   </span> <span class="img-wrapper"> <span>查询节点加载工作流程</span> </span></p>
+<h4 id="Phase-1-Lazy-load" class="common-anchor-header">阶段 1：懒加载</h4><p>初始化时，Milvus 执行懒加载，只缓存段级元数据，如 Schema 定义、索引信息和块映射。</p>
 <p>在此阶段不会缓存实际字段数据或索引文件。这样，Collections 几乎可以在启动后立即开始查询，同时将内存和磁盘消耗降到最低。</p>
 <p>由于字段数据和索引文件在首次访问前一直保存在远程存储中，因此<em>首次查询</em>可能会出现额外的延迟，因为必须按需获取所需数据。为减轻关键字段或索引的这种影响，可以使用<a href="/docs/zh/tiered-storage-overview.md#Phase-2-Warm-up">预热</a>策略，在段可查询前主动预加载它们。</p>
 <p><strong>配置</strong></p>
-<p>启用分层存储时自动应用。无需其他手动设置。</p>
-<h4 id="Phase-2-Warm-up" class="common-anchor-header">阶段 2：预热</h4><p>为减少<a href="/docs/zh/tiered-storage-overview.md#Phase-1-Lazy-load">懒加载</a>带来的首次命中延迟，Milvus 提供了*预热机制。</p>
+<p>启用分层存储时自动应用。无需手动设置。</p>
+<h4 id="Phase-2-Warm-up" class="common-anchor-header">第 2 阶段：预热</h4><p>为减少<a href="/docs/zh/tiered-storage-overview.md#Phase-1-Lazy-load">懒加载</a>带来的首次命中延迟，Milvus 提供了<em>预热</em>机制。</p>
 <p>在段可查询之前，Milvus 可以主动从对象存储中获取并缓存特定字段或索引，确保首次查询直接命中缓存数据，而不是触发按需加载。</p>
+<p>预热期间，字段将在块级别预加载，而索引将在段级别预加载。</p>
 <p><strong>配置</strong></p>
-<p>预热设置定义在<strong>milvus.yaml</strong> 的分层存储部分。你可以为每个字段或索引类型启用或禁用预加载，并指定首选策略。有关配置示例，请参阅<a href="/docs/zh/warm-up.md">预热</a>。</p>
+<p>预热设置在<code translate="no">milvus.yaml</code> 的 "分层存储 "部分中定义。可以为每个字段或索引类型启用或禁用预加载，并指定首选策略。有关详细配置，请参阅<a href="/docs/zh/warm-up.md">预热</a>。</p>
 <h4 id="Phase-3-Partial-load" class="common-anchor-header">第 3 阶段：部分加载</h4><p>查询或搜索开始后，查询节点会执行<em>部分加载</em>，仅从对象存储中获取所需的数据块或索引文件。</p>
 <ul>
-<li><p><strong>字段</strong>：按需加载数据<strong>块级别</strong>。只获取符合当前查询条件的数据块，从而最大限度地减少 I/O 和内存使用。</p></li>
+<li><p><strong>字段</strong>：按需加载数据<strong>块</strong>。只获取符合当前查询条件的数据块，从而最大限度地减少 I/O 和内存使用。</p></li>
 <li><p><strong>索引</strong>：在<strong>段级别</strong>按需加载。索引文件必须作为完整单元获取，不能分割成块。</p></li>
 </ul>
 <p><strong>配置</strong></p>
 <p>启用分层存储时，会自动应用部分加载。无需手动设置。要尽量减少关键数据的首次命中延迟，请与<a href="/docs/zh/warm-up.md">预热</a>结合使用。</p>
-<h4 id="Phase-4-Eviction" class="common-anchor-header">第 4 阶段：驱逐</h4><p>为保持健康的资源使用，当达到阈值时，Milvus 会自动释放未使用的缓存数据。</p>
+<h4 id="Phase-4-Eviction" class="common-anchor-header">第 4 阶段：驱逐</h4><p>为保持健康的资源使用，当达到特定阈值时，Milvus 会自动释放未使用的缓存数据。</p>
 <p>驱逐遵循 "<a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">最近最少使用"（LRU）</a>策略，确保不常访问的数据首先被删除，而活动数据仍保留在缓存中。</p>
 <p>驱逐受以下可配置项的制约：</p>
 <ul>
 <li><p><strong>水印</strong>：定义触发和停止驱逐的内存或磁盘阈值。</p></li>
 <li><p><strong>缓存 TTL</strong>：在规定的不活动时间后删除过时的缓存数据。</p></li>
-<li><p><strong>超额订购比率</strong>：允许在强制驱逐开始前临时超量占用缓存，帮助吸收短期工作负载峰值。</p></li>
 </ul>
 <p><strong>配置</strong></p>
-<p>在<strong>Milvus.yaml</strong> 中启用并调整驱逐参数。有关详细配置，请参阅 "<a href="/docs/zh/eviction.md">驱逐</a>"。</p>
+<p>在<strong>Milvus.yaml</strong> 中启用和调整驱逐参数。有关详细配置，请参阅 "<a href="/docs/zh/eviction.md">驱逐</a>"。</p>
 <h2 id="Getting-started" class="common-anchor-header">开始使用<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -202,10 +202,6 @@ beta: Milvus 2.6.4+
       
       <span class="hljs-comment"># Cache TTL (7 days)</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">604800</span>
-      
-      <span class="hljs-comment"># Overcommit Ratios</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -290,8 +286,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>不一定。分层存储缩短了加载时间并减少了资源使用量，但接触未缓存（冷）数据的查询可能会出现更高的延迟。对于对延迟敏感的工作负载，建议使用满载模式。</p>
-<h3 id="Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="common-anchor-header">为什么即使启用了分层存储，查询节点仍然会出现资源耗尽的情况？<button data-href="#Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="anchor-icon" translate="no">
+    </button></h3><p>不一定。分层存储减少了加载时间和资源使用量，但接触未缓存（冷）数据的查询可能会出现更高的延迟。对于对延迟敏感的工作负载，建议使用满载模式。</p>
+<h3 id="Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="common-anchor-header">为什么即使启用了分层存储，查询节点仍然会耗尽资源？<button data-href="#Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -309,8 +305,9 @@ beta: Milvus 2.6.4+
     </button></h3><p>两种常见原因：</p>
 <ul>
 <li><p>查询节点配置的资源太少。水印是相对于可用资源而言的，因此配置不足会扩大误判。</p></li>
-<li><p>查询节点资源与其他工作负载共享，因此分层存储无法正确评估实际可用容量。</p></li>
+<li><p>QueryNode 资源与其他工作负载共享，因此分层存储无法正确评估实际可用容量。</p></li>
 </ul>
+<p>要解决这个问题，我们建议您为查询节点分配专用资源。</p>
 <h3 id="Why-do-some-queries-fail-under-high-concurrency" class="common-anchor-header">为什么有些查询在高并发情况下会失败？<button data-href="#Why-do-some-queries-fail-under-high-concurrency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -326,7 +323,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果太多查询同时访问热数据，查询节点资源限制仍可能会被超出。一些线程可能会因资源预留超时而失败。在负载减少后重试或分配更多资源可以解决这个问题。</p>
+    </button></h3><p>如果有太多查询同时访问热数据，查询节点资源限制仍可能会被超出。一些线程可能会因资源预留超时而失败。在负载减少后重试或分配更多资源可以解决这个问题。</p>
 <h3 id="Why-does-searchquery-latency-increase-after-enabling-Tiered-Storage" class="common-anchor-header">启用分层存储后，为什么搜索/查询延迟会增加？<button data-href="#Why-does-searchquery-latency-increase-after-enabling-Tiered-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -344,23 +341,6 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>可能的原因包括</p>
 <ul>
-<li><p>频繁查询必须从存储中获取的冷数据。</p></li>
-<li><p>超量提交比率过高，导致频繁驱逐。</p></li>
-<li><p>水印设置太近，导致频繁同步驱逐。</p></li>
+<li><p>频繁查询冷数据，而冷数据必须从存储中获取。</p></li>
+<li><p>水印设置得太近，导致频繁同步驱逐。</p></li>
 </ul>
-<h3 id="Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="common-anchor-header">分层存储能否通过超量分配缓存来处理无限数据？<button data-href="#Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>超量提交比率允许查询节点处理比物理内存所允许的更多的数据段，但过高的比率会导致频繁驱逐、缓存中断或查询失败。</p>

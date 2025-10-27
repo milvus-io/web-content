@@ -29,7 +29,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Модуль Function в Milvus позволяет преобразовывать необработанные текстовые данные в векторные вкрапления путем автоматического вызова внешних провайдеров вкраплений (таких как OpenAI, AWS Bedrock, Google Vertex AI и т. д.). Благодаря модулю Function вам больше не нужно вручную взаимодействовать с API для встраивания - весь процесс отправки запросов провайдерам, получения встраиваний и их хранения в ваших коллекциях выполняет модуль Milvus. Для семантического поиска вам нужно предоставить только исходные данные запроса, но не вектор запроса. Milvus генерирует вектор запроса по той же модели, которую вы использовали для встраивания, сравнивает его с сохраненными векторами и возвращает наиболее релевантные результаты.</p>
+    </button></h1><p>Модуль Function в Milvus позволяет преобразовывать необработанные текстовые данные в векторные вкрапления путем автоматического вызова внешних провайдеров вкраплений (таких как OpenAI, AWS Bedrock, Google Vertex AI и т. д.). С модулем Function вам больше не нужно вручную взаимодействовать с API для встраивания - Milvus сам управляет всем процессом отправки запросов провайдерам, получения встраиваний и их хранения в ваших коллекциях. Для семантического поиска вам нужно предоставить только исходные данные запроса, но не вектор запроса. Milvus генерирует вектор запроса по той же модели, которую вы использовали для встраивания, сравнивает его с сохраненными векторами и возвращает наиболее релевантные результаты.</p>
 <h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -297,7 +297,9 @@ beta: Milvus 2.6.x
 <li><p><strong>Скалярное поле</strong>, в котором хранятся исходные данные для встраивания.</p></li>
 <li><p><strong>Векторное поле</strong>, зарезервированное для хранения векторных вкраплений, которые функция будет генерировать для скалярного поля.</p></li>
 </ul>
-<p>Следующий пример определяет схему с одним скалярным полем <code translate="no">&quot;document&quot;</code> для хранения текстовых данных и одним векторным полем <code translate="no">&quot;dense&quot;</code> для хранения вкраплений, которые будут сгенерированы модулем Function. Не забудьте задать размерность вектора (<code translate="no">dim</code>), чтобы она соответствовала выходным данным выбранной вами модели встраивания.</p>
+<p>Следующий пример определяет схему с одним скалярным полем <code translate="no">&quot;document&quot;</code> для хранения текстовых данных и одним векторным полем <code translate="no">&quot;dense&quot;</code> для хранения вкраплений, которые будут сгенерированы модулем Function. Не забудьте установить размерность вектора (<code translate="no">dim</code>) в соответствии с результатами выбранной вами модели встраивания.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -315,10 +317,18 @@ schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64
 schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">9000</span>)
 
 <span class="hljs-comment"># Add vector field &quot;dense&quot; for storing embeddings.</span>
-<span class="hljs-comment"># IMPORTANT: Set `dim` to match the exact output dimension of the embedding model.</span>
+<span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 <span class="hljs-comment"># For instance, OpenAI&#x27;s text-embedding-3-small model outputs 1536-dimensional vectors.</span>
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Шаг 2: Добавьте функцию встраивания в схему<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -336,7 +346,9 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
         ></path>
       </svg>
     </button></h3><p>Модуль Function в Milvus автоматически преобразует исходные данные, хранящиеся в скалярном поле, во вкрапления и сохраняет их в явно определенном векторном поле.</p>
-<p>Приведенный ниже пример добавляет модуль Function (<code translate="no">openai_embedding</code>), который преобразует скалярное поле <code translate="no">&quot;document&quot;</code> в эмбеддинги, сохраняя полученные векторы в векторном поле <code translate="no">&quot;dense&quot;</code>, определенном ранее.</p>
+<p>Пример ниже добавляет модуль Function (<code translate="no">openai_embedding</code>), который преобразует скалярное поле <code translate="no">&quot;document&quot;</code> в эмбеддинги, сохраняя полученные векторы в векторном поле <code translate="no">&quot;dense&quot;</code>, определенном ранее.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -356,6 +368,14 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the embedding function to your schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>Параметр</p></th>
@@ -369,7 +389,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Тип используемой функции. Для встраивания текста установите значение <code translate="no">FunctionType.TEXTEMBEDDING</code>.<br><strong>Примечание:</strong> Milvus принимает для этого параметра значения <code translate="no">FunctionType.BM25</code> (для преобразования с разреженной вставкой) и <code translate="no">FunctionType.RERANK</code> (для ранжирования). Подробности см. в разделе <a href="/docs/ru/decay-ranker-overview.md">Обзор</a> <a href="/docs/ru/full-text-search.md">полнотекстового поиска</a> и <a href="/docs/ru/decay-ranker-overview.md">ранжирования по распаду</a>.</p></td>
+     <td><p>Тип используемой функции. Для встраивания текста установите значение <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Примечание</strong>: Milvus принимает для этого параметра значения <code translate="no">FunctionType.BM25</code> (для преобразования с разреженной вставкой) и <code translate="no">FunctionType.RERANK</code> (для ранжирования). Подробности см. в разделе <a href="/docs/ru/decay-ranker-overview.md">Обзор</a> <a href="/docs/ru/full-text-search.md">полнотекстового поиска</a> и <a href="/docs/ru/decay-ranker-overview.md">ранжирования по распаду</a>.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -399,18 +419,12 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>Метка учетной записи, определенная в разделе верхнего уровня <code translate="no">credential:</code> на сайте <code translate="no">milvus.yaml</code>. </p>
-<ul>
-<li><p>При указании этого параметра Milvus извлекает соответствующую пару ключей или API-токен и подписывает запрос на стороне сервера.</p></li>
-<li><p>Если метка не указана (<code translate="no">None</code>), Milvus возвращается к учетной записи, явно настроенной для провайдера целевой модели в <code translate="no">milvus.yaml</code>.</p></li>
-<li><p>Если метка неизвестна или отсутствует ключ, вызов завершается неудачей.</p></li>
-</ul></td>
+     <td><p>Метка учетной записи, определенная в разделе верхнего уровня <code translate="no">credential:</code> на сайте <code translate="no">milvus.yaml</code>. </p><ul><li><p>При указании этого параметра Milvus извлекает соответствующую пару ключей или API-токен и подписывает запрос на стороне сервера.</p></li><li><p>Если метка не указана (<code translate="no">None</code>), Milvus возвращается к учетной записи, явно настроенной для провайдера целевой модели в <code translate="no">milvus.yaml</code>.</p></li><li><p>Если метка неизвестна или отсутствует ключ, вызов завершается неудачей.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Количество измерений для выходных вкраплений. Для моделей OpenAI третьего поколения вы можете сократить полный вектор, чтобы снизить стоимость и время ожидания без существенной потери семантической информации. Более подробную информацию можно найти в <a href="https://openai.com/blog/new-embedding-models-and-api-updates">блоге анонса OpenAI</a>.<br>
- <strong>Примечание:</strong> Если вы сокращаете размерность вектора, убедитесь, что значение <code translate="no">dim</code>, указанное в методе <code translate="no">add_field</code> схемы для векторного поля, совпадает с конечной выходной размерностью вашей функции встраивания.</p></td>
+     <td><p>Количество измерений для выходных вкраплений. Для моделей OpenAI третьего поколения вы можете сократить полный вектор, чтобы снизить стоимость и время ожидания без существенной потери семантической информации. Более подробную информацию можно найти в <a href="https://openai.com/blog/new-embedding-models-and-api-updates">блоге анонса OpenAI</a>.</p><p><strong>Примечание:</strong> Если вы сокращаете размерность вектора, убедитесь, что значение <code translate="no">dim</code>, указанное в методе <code translate="no">add_field</code> схемы для векторного поля, совпадает с конечной выходной размерностью вашей функции встраивания.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -437,7 +451,9 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Определив схему с необходимыми полями и встроенной функцией, настройте индекс для коллекции. Чтобы упростить этот процесс, используйте <code translate="no">AUTOINDEX</code> в качестве <code translate="no">index_type</code>, опция, которая позволяет Milvus выбрать и настроить наиболее подходящий тип индекса на основе структуры ваших данных.</p>
+    </button></h3><p>Определив схему с необходимыми полями и встроенной функцией, настройте индекс для коллекции. Чтобы упростить этот процесс, используйте <code translate="no">AUTOINDEX</code> в качестве <code translate="no">index_type</code>, опция, которая позволяет Milvus выбрать и настроить наиболее подходящий тип индекса, основываясь на структуре ваших данных.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -447,6 +463,14 @@ index_params.add_index(
     index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Create-collection" class="common-anchor-header">Шаг 4: Создание коллекции<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -464,12 +488,22 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h3><p>Теперь создайте коллекцию, используя заданную схему и параметры индекса.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
     schema=schema, 
     index_params=index_params
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-5-Insert-data" class="common-anchor-header">Шаг 5: Вставка данных<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -486,13 +520,23 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После настройки коллекции и индекса вы готовы вставить исходные данные. В этом процессе вам нужно только предоставить исходный текст. Модуль Function, который мы определили ранее, автоматически генерирует соответствующий разреженный вектор для каждой текстовой записи.</p>
+    </button></h3><p>После настройки коллекции и индекса вы готовы к вставке исходных данных. В этом процессе вам нужно только предоставить исходный текст. Модуль Function, который мы определили ранее, автоматически генерирует соответствующий разреженный вектор для каждой текстовой записи.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Vector embeddings convert text into searchable numeric data.&#x27;</span>},
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Шаг 6: Выполните поиск вектора<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -509,7 +553,9 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После вставки данных выполните семантический поиск по необработанному тексту запроса. Milvus автоматически преобразует ваш запрос в вектор вложения, извлекает релевантные документы на основе сходства и возвращает наиболее подходящие результаты.</p>
+    </button></h3><p>После вставки данных выполните семантический поиск по необработанному тексту запроса. Milvus автоматически преобразует ваш запрос в вектор вложения, извлекает релевантные документы на основе сходства и возвращает результаты с наибольшим количеством совпадений.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -524,7 +570,15 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительные сведения об операциях поиска и запроса см. в разделе <a href="/docs/ru/single-vector-search.md">Базовый векторный поиск</a> и <a href="/docs/ru/get-and-scalar-query.md">запрос</a>.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Для получения дополнительной информации об операциях поиска и запроса обратитесь к разделу <a href="/docs/ru/single-vector-search.md">Базовый векторный поиск</a> и <a href="/docs/ru/get-and-scalar-query.md">запрос</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -613,8 +667,10 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Да, вы можете использовать предварительно вычисленные векторы запросов вместо необработанного текста для поиска сходства. Хотя модуль Function автоматически преобразует необработанные текстовые запросы во вкрапления, вы также можете напрямую указать векторные данные в параметре data в операции поиска. Примечание: размерность предоставленного вами вектора запроса должна соответствовать размерности векторных вкраплений, сгенерированных вашим функциональным модулем.</p>
+    </button></h3><p>Да, вы можете использовать предварительно вычисленные векторы запросов вместо необработанного текста для поиска сходства. Хотя модуль Function автоматически преобразует необработанные текстовые запросы во вкрапления, вы также можете напрямую указать векторные данные в параметре <code translate="no">data</code> в операции поиска. <strong>Примечание</strong>: размерность предоставленного вами вектора запроса должна соответствовать размерности векторных вкраплений, сгенерированных вашим функциональным модулем.</p>
 <p><strong>Пример</strong>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -631,4 +687,12 @@ results = client.search(
     anns_field=<span class="hljs-string">&#x27;dense&#x27;</span>,
     limit=<span class="hljs-number">1</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

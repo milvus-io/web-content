@@ -25,9 +25,12 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>ロケーションベースサービス（LBS）："この街<strong>区内で</strong>類似のPOIを見つける"</p></li>
 <li><p>マルチモーダル検索：「この地点から<strong>1km以内の</strong>類似写真を検索する。</p></li>
-<li><p>地図と物流："地域<strong>内の</strong>資産 "や "<strong>経路と交差する</strong>ルート"</p></li>
+<li><p>地図と物流："地域<strong>内の</strong>資産 "または "パスに<strong>交差する</strong>ルート"</p></li>
 </ul>
-<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">GEOMETRYフィールドとは？<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>GEOMETRYフィールドにはPyMilvus 2.7.0rc46以降が必要です。このバージョンは現在ソースからビルドすることでのみ利用可能です。手順については<a href="https://github.com/milvus-io/pymilvus#faq">PyMilvus をソースからビルドする方法</a> を参照してください。</p>
+</div>
+<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">GEOMETRYフィールドとは何ですか？<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,7 +45,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GEOMETRYフィールドとは、Milvusのスキーマ定義データタイプ(<code translate="no">DataType.GEOMETRY</code>)の一つで、幾何学データを格納するフィールドです。ジオメトリ フィールドを扱う際には、<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT (Well-Known Text)</a>フォーマットを使用してデータを扱います。Milvusは内部的にWKTを<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">WKB(Well-Known Binary)</a>に変換して効率的な保存と処理を行っていますが、WKBを直接扱う必要はありません。</p>
+    </button></h2><p>GEOMETRYフィールドとは、Milvusのスキーマ定義データタイプ(<code translate="no">DataType.GEOMETRY</code>)の一つで、幾何データを格納するフィールドです。ジオメトリ フィールドを扱う際には、<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>フォーマットを使用してデータを扱います。Milvusは内部的にWKTを<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">WKB(Well-Known Binary)</a>に変換して効率的な保存と処理を行っていますが、WKBを直接扱う必要はありません。</p>
 <p><code translate="no">GEOMETRY</code> データ型は以下の幾何学オブジェクトをサポートしています：</p>
 <ul>
 <li><p><strong>POINT</strong>:<code translate="no">POINT (x y)</code>; たとえば、<code translate="no">POINT (13.403683 52.520711)</code> （<code translate="no">x</code> = 経度、<code translate="no">y</code> = 緯度）。</p></li>
@@ -85,6 +88,8 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><p><code translate="no">GEOMETRY</code> フィールドを使用するには、コレクションの作成時にコレクションスキーマで明示的に定義します。次の例は、<code translate="no">DataType.GEOMETRY</code> 型の<code translate="no">geo</code> フィールドを持つコレクションを作成する方法を示しています。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -101,10 +106,18 @@ schema.add_field(<span class="hljs-string">&quot;name&quot;</span>, DataType.VAR
 
 milvus_client.create_collection(collection_name, schema=schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>この例では、コレクションスキーマで定義された<code translate="no">GEOMETRY</code> フィールドは、<code translate="no">nullable=True</code> でヌル値を許可します。詳細は、<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a> を参照してください。</p>
+<p>この例では、コレクションスキーマで定義された<code translate="no">GEOMETRY</code> フィールドは、<code translate="no">nullable=True</code> で NULL 値を許可します。詳細は<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a> を参照。</p>
 </div>
-<h3 id="Step-2-Insert-data" class="common-anchor-header">ステップ 2: データの挿入<button data-href="#Step-2-Insert-data" class="anchor-icon" translate="no">
+<h3 id="Step-2-Insert-data" class="common-anchor-header">ステップ 2：データの挿入<button data-href="#Step-2-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,7 +132,9 @@ milvus_client.create_collection(collection_name, schema=schema, consistency_leve
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a>形式のジオメトリデータを持つエンティティを挿入する。以下は、複数のジオポイントを持つ例です：</p>
+    </button></h3><p><a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a>形式のジオメトリデータを持つエンティティを挿入する。以下は、複数のジオポイントを持つ例である：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">rng = np.random.default_rng(seed=<span class="hljs-number">19530</span>)
 geo_points = [
     <span class="hljs-string">&#x27;POINT(13.399710 52.518010)&#x27;</span>,
@@ -141,8 +156,19 @@ rows = [
 
 insert_result = milvus_client.insert(collection_name, rows)
 <span class="hljs-built_in">print</span>(insert_result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># {&#x27;insert_count&#x27;: 6, &#x27;ids&#x27;: [1, 2, 3, 4, 5, 6]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Filtering-operations" class="common-anchor-header">ステップ 3：フィルタリング操作<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-3-Filtering-operations" class="common-anchor-header">ステップ3：フィルタリング操作<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -157,22 +183,32 @@ insert_result = milvus_client.insert(collection_name, rows)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">GEOMETRY</code> フィールドに対してフィルタリング操作を実行する前に、以下を確認してください：</p>
+    </button></h3><p><code translate="no">GEOMETRY</code> フィールドに対してフィルタリング操作を行う前に、以下を確認してください：</p>
 <ul>
-<li><p>各ベクトルフィールドにインデックスが作成されている。</p></li>
+<li><p>各ベクトル・フィールドにインデックスが作成されている。</p></li>
 <li><p>コレクションがメモリにロードされている。</p></li>
 </ul>
 <p><details></p>
 <p><summary>コードの表示</summary></p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = milvus_client.prepare_index_params()
 index_params.add_index(field_name=<span class="hljs-string">&quot;embeddings&quot;</span>, metric_type=<span class="hljs-string">&quot;L2&quot;</span>)
 
 milvus_client.create_index(collection_name, index_params)
 milvus_client.load_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>これらの要件が満たされると、専用のジオメトリ演算子を持つ式を使用して、ジオメトリ値に基づいてコレクションをフィルタリングできます。</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">フィルタ式の定義</h4><p><code translate="no">GEOMETRY</code> フィールドでフィルタするには、ジオメトリ専用の演算子を以下の式形式で使用します：<code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>ここで</p>
+<p>これらの要件が満たされたら、専用のジオメトリ演算子を持つ式を使用して、ジオメトリ値に基づいてコレクションをフィルタリングできます。</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">フィルタ式の定義</h4><p><code translate="no">GEOMETRY</code> フィールドでフィルタリングするには、以下の式形式でジオメトリ専用の演算子を使用します：<code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>ここで</p>
 <ul>
 <li><p><code translate="no">{operator}</code> はサポートされているジオメトリ演算子（例：<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code> ）。使用可能な演算子の一覧は、「<a href="/docs/ja/geometry-operators.md">ジオメトリ演算子</a>」を参照。</p></li>
 <li><p><code translate="no">geo_field</code> は、コレクションスキーマで定義されている<code translate="no">GEOMETRY</code> フィールド名です。</p></li>
@@ -182,7 +218,9 @@ milvus_client.load_collection(collection_name)
 <p><code translate="no">ST_DWITHIN</code> など、一部の演算子には追加のパラメータが必要な場合があります。各演算子の詳細と使用例については、<a href="/docs/ja/geometry-operators.md">ジオメトリ演算</a>子を参照してください。</p>
 </div>
 <p>以下の例では、さまざまなジオメトリ固有の演算子をフィルタ式で使用する方法を示します：</p>
-<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">例 1：例 1：矩形領域内のエンティティを検索する</h4><pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">例 1：例 1：矩形領域内のエンティティを検索する</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 bottom_right_lon, bottom_right_lat = <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>
 bounding_box_wkt = <span class="hljs-string">f&quot;POLYGON((<span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>))&quot;</span>
 
@@ -193,8 +231,28 @@ query_results = milvus_client.query(
 )
 <span class="hljs-keyword">for</span> ret <span class="hljs-keyword">in</span> query_results:
     <span class="hljs-built_in">print</span>(ret)
+    
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop D&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408223 52.516876)&#x27;, &#x27;id&#x27;: 4}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop F&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408529 52.519274)&#x27;, &#x27;id&#x27;: 6}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop A&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.39971 52.51801)&#x27;, &#x27;id&#x27;: 1}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop B&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.403934 52.522877)&#x27;, &#x27;id&#x27;: 2}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop C&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.405088 52.521124)&#x27;, &#x27;id&#x27;: 3}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop D&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408223 52.516876)&#x27;, &#x27;id&#x27;: 4}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop E&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.400092 52.521507)&#x27;, &#x27;id&#x27;: 5}</span>
+<span class="hljs-comment"># {&#x27;name&#x27;: &#x27;Shop F&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408529 52.519274)&#x27;, &#x27;id&#x27;: 6}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-2-Find-entities-within-1km-of-a-central-point" class="common-anchor-header">例 2：中心点から 1km 以内のエンティティを検索する。</h4><pre><code translate="no" class="language-python">center_point_lon, center_point_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Example-2-Find-entities-within-1km-of-a-central-point" class="common-anchor-header">例 2：中心点から 1km 以内のエンティティを検索</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">center_point_lon, center_point_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 radius_meters = <span class="hljs-number">1000.0</span>
 central_point_wkt = <span class="hljs-string">f&quot;POINT(<span class="hljs-subst">{center_point_lon}</span> <span class="hljs-subst">{center_point_lat}</span>)&quot;</span>
 
@@ -205,8 +263,21 @@ query_results = milvus_client.query(
 )
 <span class="hljs-keyword">for</span> ret <span class="hljs-keyword">in</span> query_results:
     <span class="hljs-built_in">print</span>(ret)
+    
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># hit: {&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.9823770523071289, &#x27;entity&#x27;: {&#x27;name&#x27;: &#x27;Shop D&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408223 52.516876)&#x27;}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">例 3: ベクトルの類似性と空間フィルタを組み合わせる</h4><pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">例3：ベクトルの類似性と空間フィルタを組み合わせる</h4><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
 result = milvus_client.search(
     collection_name,
     vectors_to_search,
@@ -217,8 +288,19 @@ result = milvus_client.search(
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> result:
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
         <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;hit: <span class="hljs-subst">{hit}</span>&quot;</span>)
+        
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># hit: {&#x27;id&#x27;: 6, &#x27;distance&#x27;: 1.3406795263290405, &#x27;entity&#x27;: {&#x27;name&#x27;: &#x27;Shop F&#x27;, &#x27;geo&#x27;: &#x27;POINT (13.408529 52.519274)&#x27;}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Next-Accelerate-queries" class="common-anchor-header">次へクエリの高速化<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Next-Accelerate-queries" class="common-anchor-header">次へクエリーの高速化<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -233,7 +315,7 @@ result = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>デフォルトでは、インデックスのない<code translate="no">GEOMETRY</code> フィールドに対するクエリは、すべての行のフルスキャンを実行します。幾何クエリを高速化するには、GEOMETRY フィールドに<code translate="no">RTREE</code> インデックスを作成します。</p>
+    </button></h2><p>デフォルトでは、インデックスなしの<code translate="no">GEOMETRY</code> フィールドに対するクエリは、すべての行のフルスキャンを実行します。幾何クエリを高速化するには、GEOMETRY フィールドに<code translate="no">RTREE</code> インデックスを作成します。</p>
 <p>詳細については、<a href="/docs/ja/rtree.md">RTREE</a> を参照してください。</p>
 <h2 id="FAQ" class="common-anchor-header">よくある質問<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

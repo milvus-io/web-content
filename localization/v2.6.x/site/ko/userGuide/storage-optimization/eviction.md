@@ -50,34 +50,37 @@ beta: Milvus 2.6.4+
    </tr>
    <tr>
      <td><p>Trigger</p></td>
-     <td><p>쿼리 또는 검색 중 메모리/디스크 사용량이 내부 한도를 초과하는 경우.</p></td>
-     <td><p>백그라운드 스레드가 주기적으로 사용량을 확인하고 높은 워터마크가 초과되면 퇴거를 트리거합니다.</p></td>
+     <td><p>쿼리 또는 검색 중에 메모리 또는 디스크 사용량이 내부 한도를 초과할 때 발생합니다.</p></td>
+     <td><p>사용량이 워터마크 상한을 초과하거나 캐시된 데이터가 TTL(Time-to-Live)에 도달하면 백그라운드 스레드에 의해 트리거됩니다.</p></td>
    </tr>
    <tr>
      <td><p>동작</p></td>
-     <td><p>캐시가 회수되는 동안 쿼리 실행이 일시 중지됩니다. 사용량이 낮은 워터마크 아래로 떨어질 때까지 퇴거가 계속됩니다.</p></td>
-     <td><p>백그라운드에서 계속 실행되며, 사용량이 높은 워터마크를 초과하면 낮은 워터마크 아래로 떨어질 때까지 데이터를 제거합니다. 쿼리는 차단되지 않습니다.</p></td>
+     <td><p>쿼리 노드가 캐시 공간을 회수하는 동안 쿼리 또는 검색 작업이 일시적으로 일시 중지됩니다. 사용량이 낮은 워터마크 아래로 떨어지거나 타임아웃이 발생할 때까지 퇴거가 계속됩니다. 타임아웃에 도달하여 회수할 수 있는 데이터가 충분하지 않은 경우 쿼리 또는 검색이 실패할 수 있습니다.</p></td>
+     <td><p>백그라운드에서 주기적으로 실행되며, 사용량이 하이 워터마크를 초과하거나 TTL에 따라 데이터가 만료되면 캐시된 데이터를 선제적으로 제거합니다. 사용량이 낮은 워터마크 아래로 떨어질 때까지 퇴거가 계속됩니다. 쿼리는 차단되지 않습니다.</p></td>
    </tr>
    <tr>
      <td><p>최적의 대상</p></td>
-     <td><p>짧은 지연 시간 급증을 견딜 수 있는 워크로드 또는 비동기 퇴거로 공간을 충분히 빠르게 회수할 수 없는 경우.</p></td>
-     <td><p>원활한 성능이 요구되는 지연 시간에 민감한 워크로드. 사전 예방적 리소스 관리에 이상적입니다.</p></td>
+     <td><p>사용량이 급증하는 동안 잠깐의 지연 시간 급증 또는 일시적인 일시 중지를 견딜 수 있는 워크로드. 비동기 퇴거로 공간을 충분히 빨리 확보할 수 없을 때 유용합니다.</p></td>
+     <td><p>원활하고 예측 가능한 쿼리 성능이 필요한 지연 시간에 민감한 워크로드. 사전 예방적 리소스 관리에 이상적입니다.</p></td>
    </tr>
    <tr>
      <td><p>주의 사항</p></td>
-     <td><p>진행 중인 쿼리에 지연 시간을 추가합니다. 회수 가능한 데이터가 충분하지 않은 경우 시간 초과가 발생할 수 있습니다.</p></td>
-     <td><p>적절하게 조정된 워터마크가 필요합니다. 약간의 백그라운드 리소스 오버헤드.</p></td>
+     <td><p>퇴거 가능한 데이터가 충분하지 않은 경우 짧은 쿼리 지연 또는 시간 초과가 발생할 수 있습니다.</p></td>
+     <td><p>적절하게 조정된 하이/로우 워터마크 및 TTL 설정이 필요합니다. 백그라운드 스레드에서 약간의 오버헤드가 발생합니다.</p></td>
    </tr>
    <tr>
-     <td><p>구성</p></td>
+     <td><p>설정</p></td>
      <td><p>다음을 통해 활성화 <code translate="no">evictionEnabled: true</code></p></td>
-     <td><p><code translate="no">backgroundEvictionEnabled: true</code> 을 통해 활성화( <code translate="no">evictionEnabled: true</code> 필요 )</p></td>
+     <td><p><code translate="no">backgroundEvictionEnabled: true</code> 을 통해 활성화(동시에 <code translate="no">evictionEnabled: true</code> 필요)</p></td>
    </tr>
 </table>
 <p><strong>권장 설정</strong>:</p>
-<p>최적의 균형을 위해 두 모드를 모두 활성화하세요. 비동기 퇴거는 캐시 사용량을 사전에 관리하는 반면, 동기 퇴거는 리소스가 거의 소진된 경우 안전 대비책으로 작동합니다.</p>
+<ul>
+<li><p>워크로드가 계층형 스토리지의 이점을 누리고 퇴거 관련 가져오기 지연 시간을 견딜 수 있다면 최적의 균형을 위해 두 퇴거 모드를 함께 사용하도록 설정할 수 있습니다.</p></li>
+<li><p>성능 테스트 또는 지연 시간이 중요한 시나리오의 경우, 퇴거 후 네트워크 가져오기 오버헤드를 피하기 위해 퇴거를 완전히 비활성화하는 것을 고려하세요.</p></li>
+</ul>
 <div class="alert note">
-<p>퇴거 가능한 필드 및 인덱스의 경우, 퇴거 단위는 로딩 단위와 일치합니다. 스칼라/벡터 필드는 청크 단위로 퇴거되고 스칼라/벡터 인덱스는 세그먼트 단위로 퇴거됩니다.</p>
+<p>퇴거 가능한 필드 및 인덱스의 경우, 퇴거 단위는 로딩 단위와 일치합니다(스칼라/벡터 필드는 청크별로 퇴거되고, 스칼라/벡터 인덱스는 세그먼트별로 퇴거됩니다).</p>
 </div>
 <h2 id="Enable-eviction" class="common-anchor-header">퇴출 활성화<button data-href="#Enable-eviction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,7 +144,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>워터마크는 메모리와 디스크 모두에 대해 캐시 제거가 시작되고 종료되는 시점을 정의합니다. 각 리소스 유형에는 두 가지 임계값이 있습니다:</p>
 <ul>
-<li><p><strong>높은 워터마크</strong>: 사용량이 이 값을 초과하면 비동기 제거가 시작됩니다.</p></li>
+<li><p><strong>높은 워터마크</strong>: 사용량이 이 값을 초과하면 퇴거가 시작됩니다.</p></li>
 <li><p><strong>낮은 워터마크</strong>: 사용량이 이 값 아래로 떨어질 때까지 퇴거가 계속됩니다.</p></li>
 </ul>
 <div class="alert note">
@@ -161,7 +164,7 @@ beta: Milvus 2.6.4+
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>매개변수</p></th>
+     <th><p>파라미터</p></th>
      <th><p>유형</p></th>
      <th><p>범위</p></th>
      <th><p>설명</p></th>
@@ -246,62 +249,3 @@ beta: Milvus 2.6.4+
      <td><p>매우 동적인 데이터의 경우 짧은 TTL(시간)을 사용하고, 안정적인 데이터 세트의 경우 긴 TTL(일)을 사용합니다. 시간 기반 만료를 사용하지 않으려면 0으로 설정합니다.</p></td>
    </tr>
 </table>
-<h2 id="Configure-overcommit-ratio" class="common-anchor-header">초과 커밋 비율 구성<button data-href="#Configure-overcommit-ratio" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>초과 커밋 비율은 퇴거 가능한 캐시의 양을 정의하여, 퇴거가 강화되기 전에 쿼리노드가 일시적으로 정상 용량을 초과할 수 있도록 합니다.</p>
-<div class="alert note">
-<p>이 구성은 <a href="/docs/ko/eviction.md#Enable-eviction">퇴거가 활성화된</a> 경우에만 적용됩니다.</p>
-</div>
-<p><strong>예제 YAML</strong>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">segcore:</span>
-    <span class="hljs-attr">tieredStorage:</span>
-      <span class="hljs-attr">evictionEnabled:</span> <span class="hljs-literal">true</span>
-      <span class="hljs-comment"># Evictable Memory Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of physical memory is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-comment"># Evictable Disk Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of disk capacity is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
-<button class="copy-code-btn"></button></code></pre>
-<table>
-   <tr>
-     <th><p>매개변수</p></th>
-     <th><p>유형</p></th>
-     <th><p>범위</p></th>
-     <th><p>설명</p></th>
-     <th><p>권장 사용 사례</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableMemoryCacheRatio</code></p></td>
-     <td><p>float</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>퇴거 가능한 데이터에 할당된 메모리 캐시 부분입니다.</p></td>
-     <td><p><code translate="no">0.3</code> 에서 시작합니다. 퇴거 빈도가 낮으면 증가(0.5-0.7), 세그먼트 용량이 높으면 감소(0.1-0.2)합니다.</p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableDiskCacheRatio</code></p></td>
-     <td><p>float</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>퇴거 가능한 데이터에 할당된 디스크 캐시 비율입니다.</p></td>
-     <td><p>디스크 I/O가 병목 현상이 발생하지 않는 한 메모리와 비슷한 비율을 사용합니다.</p></td>
-   </tr>
-</table>
-<p><strong>경계 동작</strong>:</p>
-<ul>
-<li><p><code translate="no">1.0</code>: 모든 캐시가 퇴거 가능 - 퇴거가 거의 트리거되지 않지만 쿼리 노드당 맞는 세그먼트 수가 적습니다.</p></li>
-<li><p><code translate="no">0.0</code>: 퇴거 가능한 캐시 없음 - 퇴거가 자주 발생하며, 더 많은 세그먼트가 맞지만 지연 시간이 증가할 수 있습니다.</p></li>
-</ul>

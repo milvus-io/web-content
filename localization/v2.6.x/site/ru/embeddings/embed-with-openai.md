@@ -39,8 +39,10 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
 <p>Имя модели OpenAI, которую следует использовать для кодирования. Возможные варианты: <strong>text-embedding-3-small</strong>, <strong>text-embedding-3-large</strong> и <strong>text-embedding-ada-002</strong> (по умолчанию).</p></li>
 <li><p><strong>api_key</strong><em>(строка</em>)</p>
 <p>Ключ API для доступа к API OpenAI.</p></li>
+<li><p><strong>base_url</strong><em>(string</em>)</p>
+<p>Базовый URL для доступа к OpenAI API. По умолчанию используется значение <strong>https://api.openai.com/v1.</strong> Однако если вы обращаетесь к совместимой конечной точке API другого поставщика моделей или локального экземпляра vLLM, например <strong>http://localhost:8080/v1,</strong> вы можете указать URL здесь.</p></li>
 <li><p><strong>dimensions</strong><em>(int</em>)</p>
-<p>Количество размеров, которые должны иметь результирующие выходные вкрапления. Поддерживается только в моделях <strong>text-embedding-3</strong> и более поздних.</p></li>
+<p>Количество размеров, которые должны иметь результирующие выходные эмбеддинги. Поддерживается только в моделях <strong>text-embedding-3</strong> и более поздних.</p></li>
 </ul>
 <p>Для создания вкраплений для документов используйте метод <strong>encode_documents()</strong>:</p>
 <pre><code translate="no" class="language-python">docs = [

@@ -5,7 +5,7 @@ summary: >-
   Milvus 的 Function 模組可讓您透過自動呼叫外部嵌入式服務供應商 (如 OpenAI、AWS Bedrock、Google Vertex AI
   等)，將原始文字資料轉換為向量嵌入式。有了 Function 模組，您就不需要再手動與嵌入式 API 連接-Milvus
   會處理向提供者傳送請求、接收嵌入式資料，以及將其儲存在您的集合中的整個過程。對於語意搜尋，您只需要提供原始查詢資料，而不需要查詢向量。Milvus
-  會以您用於接收的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。
+  會以您用於擷取的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">嵌入功能概述<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 的 Function 模組可讓您透過自動呼叫外部嵌入式服務供應商 (如 OpenAI、AWS Bedrock、Google Vertex AI 等)，將原始文字資料轉換為向量嵌入式。有了 Function 模組，您就不需要再手動與嵌入式 API 連接-Milvus 會處理向提供者傳送請求、接收嵌入式資料，以及將其儲存在您的集合中的整個過程。對於語意搜尋，您只需要提供原始查詢資料，而不需要查詢向量。Milvus 會以您用於擷取的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。</p>
+    </button></h1><p>Milvus 的 Function 模組可讓您透過自動呼叫外部嵌入式服務供應商 (如 OpenAI、AWS Bedrock、Google Vertex AI 等)，將原始文字資料轉換為向量嵌入式。有了 Function 模組，您就不需要再手動與嵌入式 API 連接-Milvus 會處理向提供者傳送請求、接收嵌入式資料，以及將其儲存在您的集合中的整個過程。對於語意搜尋，您只需要提供原始查詢資料，而不需要查詢向量。Milvus 會以您用於接收的相同模型產生查詢向量，將其與儲存的向量比較，並傳回最相關的結果。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -291,7 +291,9 @@ beta: Milvus 2.6.x
 <li><p>儲存要嵌入的原始資料的<strong>標量欄位</strong>。</p></li>
 <li><p>預留<strong>向量</strong>欄位，用來儲存函式將為標量欄位產生的向量嵌入。</p></li>
 </ul>
-<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense&quot;</code> 用來儲存函式模組要產生的嵌入資料。切記設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
+<p>以下範例定義了一個模式，其中一個標量欄位<code translate="no">&quot;document&quot;</code> 用來儲存文字資料，另一個向量欄位<code translate="no">&quot;dense&quot;</code> 用來儲存函式模組要產生的嵌入資料。請記得設定向量維度 (<code translate="no">dim</code>) 以符合您所選擇的嵌入模型輸出。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -309,12 +311,20 @@ schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64
 schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">9000</span>)
 
 <span class="hljs-comment"># Add vector field &quot;dense&quot; for storing embeddings.</span>
-<span class="hljs-comment"># IMPORTANT: Set `dim` to match the exact output dimension of the embedding model.</span>
+<span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 <span class="hljs-comment"># For instance, OpenAI&#x27;s text-embedding-3-small model outputs 1536-dimensional vectors.</span>
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：在模式中加入嵌入函數<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步驟 2：將嵌入函數加入模式<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -330,7 +340,9 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
         ></path>
       </svg>
     </button></h3><p>Milvus 中的 Function 模組會自動將儲存在標量欄位中的原始資料轉換為嵌入資料，並將其儲存在明確定義的向量欄位中。</p>
-<p>下面的範例新增了一個 Function 模組 (<code translate="no">openai_embedding</code>)，將標量欄位<code translate="no">&quot;document&quot;</code> 轉換成嵌入式資料，將產生的向量儲存到之前定義的<code translate="no">&quot;dense&quot;</code> 向量欄位中。</p>
+<p>以下範例新增了一個 Function 模組 (<code translate="no">openai_embedding</code>)，可將標量值欄位<code translate="no">&quot;document&quot;</code> 轉換成嵌入式資料，並將產生的向量儲存於先前定義的<code translate="no">&quot;dense&quot;</code> 向量欄位中。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -350,6 +362,14 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the embedding function to your schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>參數</p></th>
@@ -363,7 +383,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>使用的函數類型。對於文字嵌入，請將數值設為<code translate="no">FunctionType.TEXTEMBEDDING</code> 。<br><strong>注意：</strong>Milvus 接受<code translate="no">FunctionType.BM25</code> (用於稀疏嵌入轉換) 和<code translate="no">FunctionType.RERANK</code> (用於重排) 作為此參數。詳細資訊請參閱<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>和<a href="/docs/zh-hant/decay-ranker-overview.md">Decay Ranker 總覽</a>。</p></td>
+     <td><p>使用的函式類型。對於文字嵌入，請將數值設為<code translate="no">FunctionType.TEXTEMBEDDING</code> 。</p><p><strong>注意</strong>：Milvus 接受<code translate="no">FunctionType.BM25</code> (用於稀疏嵌入轉換) 和<code translate="no">FunctionType.RERANK</code> (用於重排) 作為此參數。詳細資訊請參閱<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>和<a href="/docs/zh-hant/decay-ranker-overview.md">Decay Ranker 總覽</a>。</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -373,7 +393,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>向量欄位用於儲存已產生的嵌入。目前，此參數只接受一個欄位名稱。</p></td>
+     <td><p>向量欄位，用於儲存已產生的嵌入。目前，此參數只接受一個欄位名稱。</p></td>
      <td><p><code translate="no">["dense"]</code></p></td>
    </tr>
    <tr>
@@ -393,18 +413,12 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>在<code translate="no">milvus.yaml</code> 的頂層<code translate="no">credential:</code> 部分定義的憑證的標籤。 </p>
-<ul>
-<li><p>提供時，Milvus 會擷取匹配的金鑰對或 API 令牌，並在伺服器端簽署請求。</p></li>
-<li><p>如果省略 (<code translate="no">None</code>)，Milvus 會回退到<code translate="no">milvus.yaml</code> 中為目標模型提供者明確配置的憑證。</p></li>
-<li><p>如果標籤未知或參考的金鑰遺失，則呼叫失敗。</p></li>
-</ul></td>
+     <td><p><code translate="no">milvus.yaml</code> 的頂層<code translate="no">credential:</code> 區段中定義的憑證的標籤。 </p><ul><li><p>提供時，Milvus 會擷取匹配的金鑰對或 API 令牌，並在伺服器端簽署請求。</p></li><li><p>如果省略 (<code translate="no">None</code>)，Milvus 會回退到<code translate="no">milvus.yaml</code> 中為目標模型提供者明確配置的憑證。</p></li><li><p>如果標籤未知或參考的金鑰遺失，則呼叫失敗。</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>輸出嵌入的維數。對於 OpenAI 的第三代模型，您可以縮短全向量以降低成本和延遲，而不會造成語意資訊的重大損失。如需詳細資訊，請參閱<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI 公告部落格</a>。<br>
-<strong>注意：</strong>如果您縮短向量的維度，請確保在模式的<code translate="no">add_field</code> 方法中為向量欄位指定的<code translate="no">dim</code> 值與您嵌入函式的最終輸出維度相符。</p></td>
+     <td><p>輸出嵌入的維數。對於 OpenAI 的第三代模型，您可以縮短全向量以降低成本和延遲，而不會造成語意資訊的重大損失。如需詳細資訊，請參閱<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAI 公告部落格</a>。</p><p><strong>注意：</strong>如果您縮短向量的維度，請確保在模式的<code translate="no">add_field</code> 方法中為向量欄位指定的<code translate="no">dim</code> 值與您嵌入函式的最終輸出維度相符。</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -431,7 +445,9 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>定義包含必要欄位和內建函式的模式後，為您的集合設定索引。為了簡化這個過程，請使用<code translate="no">AUTOINDEX</code> 作為<code translate="no">index_type</code> ，這個選項允許 Milvus 根據您的資料結構選擇和配置最適合的索引類型。</p>
+    </button></h3><p>定義包含必要欄位和內建函式的模式後，為您的集合設定索引。為了簡化這個過程，請使用<code translate="no">AUTOINDEX</code> 作為<code translate="no">index_type</code> ，這個選項允許 Milvus 根據您的資料結構來選擇和設定最適合的索引類型。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -441,6 +457,14 @@ index_params.add_index(
     index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Create-collection" class="common-anchor-header">步驟 4：建立集合<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -457,13 +481,23 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>現在使用已定義的模式和索引參數建立資料集。</p>
+    </button></h3><p>現在使用已定義的模式和索引參數建立集合。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
     schema=schema, 
     index_params=index_params
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-5-Insert-data" class="common-anchor-header">步驟 5：插入資料<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -480,13 +514,23 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>設定資料集和索引後，您就可以插入原始資料了。在這個過程中，您只需要提供原始文字。我們之前定義的 Function 模組會自動為每個文字項目產生相對應的稀疏向量。</p>
+    </button></h3><p>設定好集合和索引後，您就可以插入原始資料了。在這個過程中，您只需要提供原始文字。我們之前定義的 Function 模組會自動為每個文字項目產生相對應的稀疏向量。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Vector embeddings convert text into searchable numeric data.&#x27;</span>},
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-6-Perform-vector-search" class="common-anchor-header">步驟 6：執行向量搜尋<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -504,6 +548,8 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
         ></path>
       </svg>
     </button></h3><p>插入資料後，使用原始查詢文字執行語意搜尋。Milvus 會自動將您的查詢轉換成嵌入向量，根據相似度擷取相關文件，並傳回最匹配的結果。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -518,7 +564,15 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關搜尋和查詢操作的詳細資訊，請參閱<a href="/docs/zh-hant/single-vector-search.md">基本向量</a> <a href="/docs/zh-hant/get-and-scalar-query.md">搜尋和查詢</a>。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>有關搜尋與查詢操作的詳細資訊，請參閱<a href="/docs/zh-hant/single-vector-search.md">基本向量搜尋與</a> <a href="/docs/zh-hant/get-and-scalar-query.md">查詢</a>。</p>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -607,8 +661,10 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>可以，您可以使用預先計算好的查詢向量來代替原始文字進行相似性搜尋。雖然 Function 模組會自動將原始文字查詢轉換為嵌入式資料，但您也可以在搜尋作業中直接提供向量資料至資料參數。注意：您所提供的查詢向量的尺寸大小，必須與您的 Function 模組所產生的向量嵌入的尺寸大小一致。</p>
+    </button></h3><p>可以，您可以使用預先計算好的查詢向量來代替原始文字進行相似性搜尋。雖然 Function 模組會自動將原始文字查詢轉換成嵌入式資料，但您也可以在搜尋作業中直接提供向量資料給<code translate="no">data</code> 參數。<strong>注意</strong>：您所提供的查詢向量的尺寸大小，必須與您的 Function 模組所產生的向量嵌入的尺寸大小一致。</p>
 <p><strong>範例</strong>：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -625,4 +681,12 @@ results = client.search(
     anns_field=<span class="hljs-string">&#x27;dense&#x27;</span>,
     limit=<span class="hljs-number">1</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

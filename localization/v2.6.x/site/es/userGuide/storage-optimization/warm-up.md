@@ -4,8 +4,8 @@ title: CalentamientoCompatible with Milvus 2.6.4+
 summary: >-
   En Milvus, Warm Up complementa el almacenamiento por niveles aliviando la
   latencia de primer impacto que se produce cuando se accede a datos fríos por
-  primera vez. Una vez configurado, Warm Up precarga los campos o índices
-  seleccionados en la caché antes de que un segmento sea consultable,
+  primera vez. Una vez configurado, Warm Up precarga tipos seleccionados de
+  campos o índices en la caché antes de que un segmento sea consultable,
   garantizando que los datos a los que se accede con frecuencia estén
   disponibles inmediatamente después de la carga.
 beta: Milvus 2.6.4+
@@ -25,7 +25,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En Milvus, <strong>Warm</strong> Up complementa el almacenamiento por niveles aliviando la latencia de primer impacto que se produce cuando se accede a datos fríos por primera vez. Una vez configurado, Warm Up precarga campos o índices seleccionados en la caché antes de que un segmento sea consultable, garantizando que los datos a los que se accede con frecuencia estén disponibles inmediatamente después de la carga.</p>
+    </button></h1><p>En Milvus, <strong>Warm</strong> Up complementa el almacenamiento por niveles aliviando la latencia de primer impacto que se produce cuando se accede a datos fríos por primera vez. Una vez configurado, Warm Up precarga tipos seleccionados de campos o índices en la caché antes de que un segmento sea consultable, garantizando que los datos a los que se accede con frecuencia estén disponibles inmediatamente después de la carga.</p>
 <h2 id="Why-warm-up" class="common-anchor-header">Por qué Warm Up<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,9 +73,9 @@ beta: Milvus 2.6.4+
      <th><p>Escenario típico</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">sync</code> (por defecto)</p></td>
-     <td><p>Precarga antes de que el segmento sea consultable. El tiempo de carga aumenta ligeramente, pero la primera consulta no incurre en latencia.</p></td>
-     <td><p>Utilizar para datos de rendimiento crítico que deben estar disponibles inmediatamente, como índices escalares de alta frecuencia o índices vectoriales clave utilizados en la búsqueda.</p></td>
+     <td><p><code translate="no">sync</code></p></td>
+     <td><p>Carga previa antes de que el segmento pueda consultarse. El tiempo de carga aumenta ligeramente, pero la primera consulta no incurre en latencia.</p></td>
+     <td><p>Utilícelo para datos críticos para el rendimiento que deben estar disponibles inmediatamente, como índices escalares de alta frecuencia o índices vectoriales clave utilizados en la búsqueda.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">disable</code></p></td>
@@ -90,9 +90,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-attr">warmup:</span>
         <span class="hljs-comment"># options: sync, disable.</span>
         <span class="hljs-comment"># Specifies the timing for warming up the Tiered Storage cache.</span>
-        <span class="hljs-comment"># - &quot;sync&quot;: data will be loaded into the cache before a segment is considered loaded.</span>
-        <span class="hljs-comment"># - &quot;disable&quot;: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
-        <span class="hljs-comment"># Defaults to &quot;sync&quot;, except for vector field which defaults to &quot;disable&quot;.</span>
+        <span class="hljs-comment"># - `sync`: data will be loaded into the cache before a segment is considered loaded.</span>
+        <span class="hljs-comment"># - `disable`: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
+        <span class="hljs-comment"># Defaults to `sync`, except for vector field which defaults to `disable`.</span>
         <span class="hljs-attr">scalarField:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">scalarIndex:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">vectorField:</span> <span class="hljs-string">disable</span> <span class="hljs-comment"># cache warmup for vector field raw data is by default disabled.</span>

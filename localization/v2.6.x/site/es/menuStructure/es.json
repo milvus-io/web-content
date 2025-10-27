@@ -1261,12 +1261,6 @@
                 "id": "eviction.md",
                 "order": 2,
                 "children": []
-              },
-              {
-                "label": "Prácticas recomendadas para el almacenamiento por niveles",
-                "id": "best-practices-for-tiered-storage.md",
-                "order": 3,
-                "children": []
               }
             ]
           }
@@ -1449,7 +1443,7 @@
             "children": []
           },
           {
-            "label": "Configurar Chunk Cache",
+            "label": "Configurar la caché de trozos",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1973,10 +1967,17 @@
         "children": []
       },
       {
+        "label": "ExportLog",
+        "id": "export-log",
+        "order": 9,
+        "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
+        "children": []
+      },
+      {
         "label": "Modelos",
         "id": "models",
         "isMenu": true,
-        "order": 9,
+        "order": 10,
         "children": [
           {
             "label": "Incrustaciones",
@@ -2119,7 +2120,7 @@
       {
         "label": "Ayudante de código SDK (MCP)",
         "id": "milvus-sdk-helper-mcp.md",
-        "order": 10,
+        "order": 11,
         "children": []
       }
     ]
