@@ -113,6 +113,14 @@ Before using decay functions, you must first create a collection with appropriat
 
 After your collection is set up with a numeric field (in this example, `distance` in meters from the user), create a Gaussian decay ranker:
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 from pymilvus import Function, FunctionType
 
@@ -132,34 +140,131 @@ ranker = Function(
 )
 ```
 
+```java
+import io.milvus.v2.service.vector.request.ranker.DecayRanker;
+
+DecayRanker ranker = DecayRanker.builder()
+        .name("restaurant_distance_decay")
+        .inputFieldNames(Collections.singletonList("distance"))
+        .function("gauss")
+        .origin(0)
+        .offset(300)
+        .decay(0.5)
+        .scale(2000)
+        .build();
+```
+
+```javascript
+import { FunctionType } from "@zilliz/milvus2-sdk-node";
+
+const ranker = {
+  name: "restaurant_distance_decay",
+  input_field_names: ["distance"],
+  function_type: FunctionType.RERANK,
+  params: {
+    reranker: "decay",
+    function: "gauss",
+    origin: 0,
+    offset: 300,
+    decay: 0.5,
+    scale: 2000,
+  },
+};
+
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 ### Apply to standard vector search
 
 After defining your decay ranker, you can apply it during search operations by passing it to the `ranker` parameter:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 # Apply decay ranker to restaurant vector search
 result = milvus_client.search(
     collection_name,
-    data=["italian restaurants"],         # Query text
+    data=[your_query_vector],         # Replace with your query vector
     anns_field="dense",                   # Vector field to search
     limit=10,                             # Number of results
     output_fields=["name", "cuisine", "distance"],  # Fields to return
     #  highlight-next-line
     ranker=ranker,                        # Apply the decay ranker
-    consistency_level="Bounded"
+    consistency_level="Strong"
 )
+```
+
+```java
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+SearchReq searchReq = SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(new EmbeddedText("italian restaurants")))
+        .annsField("vector_field")
+        .limit(10)
+        .outputFields(Arrays.asList("name", "cuisine", "distance"))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .consistencyLevel(ConsistencyLevel.STRONG)
+        .build();
+SearchResp searchResp = client.search(searchReq);
+```
+
+```javascript
+const result = await milvusClient.search({
+  collection_name: "collection_name",
+  data: [your_query_vector], // Replace with your query vector
+  anns_field: "dense",
+  limit: 10,
+  output_fields: ["name", "cuisine", "distance"],
+  rerank: ranker,
+  consistency_level: "Strong",
+});
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```
 
 ### Apply to hybrid search
 
 Decay rankers can also be applied to hybrid search operations that combine multiple vector fields:
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 from pymilvus import AnnSearchRequest
 
 # Define dense vector search request
 dense = AnnSearchRequest(
-    data=["italian restaurants"],
+    data=[your_query_vector_1], # Replace with your query vector
     anns_field="dense",
     param={},
     limit=10
@@ -167,7 +272,7 @@ dense = AnnSearchRequest(
 
 # Define sparse vector search request
 sparse = AnnSearchRequest(
-    data=["italian restaurants"],
+    data=[your_query_vector_2], # Replace with your query vector
     anns_field="sparse_vector",
     param={},
     limit=10
@@ -182,6 +287,67 @@ hybrid_results = milvus_client.hybrid_search(
     limit=10,
     output_fields=["name", "cuisine", "distance"]
 )
+```
+
+```java
+import io.milvus.v2.service.vector.request.AnnSearchReq;
+import io.milvus.v2.service.vector.request.HybridSearchReq;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List<AnnSearchReq> searchRequests = new ArrayList<>();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("dense_vector")
+        .vectors(Collections.singletonList(new FloatVec(embedding)))
+        .limit(10)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("sparse_vector")
+        .vectors(Collections.singletonList(new EmbeddedText("italian restaurants")))
+        .limit(10)
+        .build());
+
+HybridSearchReq hybridSearchReq = HybridSearchReq.builder()
+                .collectionName(COLLECTION_NAME)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(10)
+                .outputFields(Arrays.asList("name", "cuisine", "distance"))
+                .build();
+SearchResp searchResp = client.hybridSearch(hybridSearchReq);
+```
+
+```javascript
+const denseRequest = {
+  data: [your_query_vector_1], // Replace with your query vector
+  anns_field: "dense",
+  param: {},
+  limit: 10,
+};
+
+const sparseRequest = {
+  data: [your_query_vector_2], // Replace with your query vector
+  anns_field: "sparse_vector",
+  param: {},
+  limit: 10,
+};
+
+const hybridResults = await milvusClient.search({
+  collection_name: "collection_name",
+  data: [denseRequest, sparseRequest],
+  rerank: ranker,
+  limit: 10,
+  output_fields: ["name", "cuisine", "distance"],
+});
+
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```
 
 For more information on hybrid search operations, refer to [Multi-Vector Hybrid Search](multi-vector-search.md).
