@@ -69,7 +69,7 @@ client = MilvusClient(
 )
 
 # Init schema with auto_id disabled
-schema = MilvusClient.create_schema(auto_id=False)
+schema = client.create_schema(auto_id=False)
 
 # Add fields to schema
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True, description="product id")
@@ -247,7 +247,7 @@ const functions = [
       output_field_names: ["text_sparse"],
       params: {},
     },
-]；
+];
 ```
 
 ```bash
@@ -319,8 +319,6 @@ You can choose other index types as necessary to best suit your needs and data t
 </div>
 
 ```python
-from pymilvus import MilvusClient
-
 # Prepare index parameters
 index_params = client.prepare_index_params()
 
@@ -453,8 +451,6 @@ Create a collection named `demo` with the collection schema and indexes configur
 </div>
 
 ```python
-from pymilvus import MilvusClient
-
 client.create_collection(
     collection_name="my_collection",
     schema=schema,
@@ -529,26 +525,30 @@ Since this example uses the built-in BM25 function to generate sparse embeddings
 </div>
 
 ```python
-from pymilvus import MilvusClient
+import random
+
+# Generate example vectors
+def generate_dense_vector(dim):
+    return [random.random() for _ in range(dim)]
 
 data=[
     {
         "id": 0,
         "text": "Red cotton t-shirt with round neck",
-        "text_dense": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...],
-        "image_dense": [0.6366019600530924, -0.09323198122475052, ...]
+        "text_dense": generate_dense_vector(768),
+        "image_dense": generate_dense_vector(512)
     },
     {
         "id": 1,
         "text": "Wireless noise-cancelling over-ear headphones",
-        "text_dense": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, ...],
-        "image_dense": [0.6414180010301553, 0.8976979978567611, ...]
+        "text_dense": generate_dense_vector(768),
+        "image_dense": generate_dense_vector(512)
     },
     {
         "id": 2,
         "text": "Stainless steel water bottle, 500ml",
-        "dense": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, ...],
-        "image_dense": [-0.6901259768402174, 0.6100500332193755, ...]
+        "text_dense": generate_dense_vector(768),
+        "image_dense": generate_dense_vector(512)
     }
 ]
 
@@ -680,8 +680,8 @@ To demonstrate the capabilities of various search vector fields, we will constru
 from pymilvus import AnnSearchRequest
 
 query_text = "white headphones, quiet and comfortable"
-query_dense_vector = [0.3580376395471989, -0.6023495712049978, 0.5142999509918703, ...]
-query_multimodal_vector = [0.015829865178701663, 0.5264158340734488, ...]
+query_dense_vector = generate_dense_vector(768)
+query_multimodal_vector = generate_dense_vector(512)
 
 # text semantic search (dense)
 search_param_1 = {
@@ -820,9 +820,84 @@ Given that the parameter `limit` is set to 2, each `AnnSearchRequest` returns 2 
 
 ### Step 2: Configure a reranking strategy
 
-To merge and rerank the sets of ANN search results, selecting an appropriate reranking strategy is essential. Milvus offers several types of reranking strategies. For more details on these reranking mechanisms, please refer to [Reranking](reranking). 
+To merge and rerank the sets of ANN search results, selecting an appropriate reranking strategy is essential. Milvus offers several types of reranking strategies. For more details on these reranking mechanisms, please refer to [Weighted Ranker](weighted-ranker.md) or [RRF Ranker](rrf-ranker.md). 
 
 In this example, since there is no particular emphasis on specific search queries, we will proceed with the RRFRanker strategy.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+ranker = Function(
+    name="rrf",
+    input_field_names=[], # Must be an empty list
+    function_type=FunctionType.RERANK,
+    params={
+        "reranker": "rrf", 
+        "k": 100  # Optional
+    }
+)
+```
+
+```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+Function ranker = Function.builder()
+        .name("rrf")
+        .functionType(FunctionType.RERANK)
+        .param("reranker", "rrf")
+        .param("k", "100")
+        .build()
+```
+
+```javascript
+const rerank = {
+  name: 'rrf',
+  description: 'bm25 function',
+  type: FunctionType.RERANK,
+  input_field_names: [],
+  params: {
+      "reranker": "rrf", 
+      "k": 100
+  },
+};
+```
+
+```go
+import (
+    "github.com/milvus-io/milvus/client/v2/entity"
+)
+
+ranker := entity.NewFunction().
+    WithName("rrf").
+    WithType(entity.FunctionTypeRerank).
+    WithParam("reranker", "rrf").
+    WithParam("k", "100")
+```
+
+```bash
+# Restful
+export functionScore='{
+    "functions": [
+        {
+            "name": "rrf",
+            "type": "Rerank",
+            "inputFieldNames": [],
+            "params": {
+                "reranker": "rrf",
+                "k": 100
+            }
+        }
+    ]
+}'
+
+```
 
 ### Step 3: Perform a Hybrid Search
 
@@ -837,8 +912,6 @@ Before initiating a Hybrid Search, ensure that the collection is loaded. If any 
 </div>
 
 ```python
-from pymilvus import MilvusClient
-
 res = client.hybrid_search(
     collection_name="my_collection",
     reqs=reqs,
@@ -904,7 +977,7 @@ const search = await client.search({
 
 ```bash
 curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/advanced_search" \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/hybrid_search" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
