@@ -24,7 +24,7 @@ In this tutorial, we will show you how to build a RAG(Retrieval-Augmented Genera
 
 
 ```shell
-$ pip install --upgrade pymilvus openai requests tqdm
+$ pip install --upgrade pymilvus milvus-lite openai requests tqdm
 ```
 
 <div class="alert note">

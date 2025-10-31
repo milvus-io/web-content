@@ -27,7 +27,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```python
-! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
+! pip install --upgrade --quiet pymilvus milvus-lite milvus-haystack markdown-it-py mdit_plain
 ```
 
 <div class="alert note">

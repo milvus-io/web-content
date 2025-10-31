@@ -20,7 +20,7 @@ First, install the package for Milvus and Voyage AI:
 
 
 ```python
-$ pip install --upgrade voyageai pymilvus
+$ pip install --upgrade voyageai pymilvus milvus-lite
 ```
 
 <div class="alert note">

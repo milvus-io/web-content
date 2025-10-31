@@ -20,7 +20,7 @@ This tutorial walks you through the process of building a Retrieval-Augmented Ge
 
 
 ```shell
-$ pip install --upgrade --quiet pymilvus openai requests tqdm boto3 langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
+$ pip install --upgrade --quiet pymilvus milvus-lite openai requests tqdm boto3 langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
 ```
 
 <div class="alert note">

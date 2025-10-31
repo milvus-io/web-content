@@ -22,7 +22,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```python
-$ pip install --upgrade pymilvus openai requests tqdm pandas "arize-phoenix>=4.29.0" nest_asyncio
+$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas "arize-phoenix>=4.29.0" nest_asyncio
 ```
 
 <div class="alert note">

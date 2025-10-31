@@ -24,7 +24,7 @@ Code snippets on this page require pymilvus and llamaindex dependencies. You can
 
 
 ```python
-$ pip install pymilvus>=2.4.2
+$ pip install pymilvus>=2.4.2 milvus-lite
 ```
 
 

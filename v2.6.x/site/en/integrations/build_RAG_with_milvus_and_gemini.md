@@ -24,7 +24,7 @@ First, install the required packages:
 
 
 ```shell
-$ pip install --upgrade pymilvus google-genai requests tqdm
+$ pip install --upgrade pymilvus milvus-lite google-genai requests tqdm
 ```
 
 <div class="alert note">

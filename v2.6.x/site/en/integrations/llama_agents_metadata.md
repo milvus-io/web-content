@@ -62,7 +62,7 @@ Mistral AI is a research lab building LLMs and Embeddings Models, they recently 
 
 
 ```shell
-$ pip install llama-agents pymilvus openai python-dotenv
+$ pip install llama-agents pymilvus milvus-lite openai python-dotenv
 ```
 
 

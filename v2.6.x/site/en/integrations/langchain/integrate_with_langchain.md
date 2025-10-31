@@ -25,7 +25,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```shell
-pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
+pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus milvus-lite langchain-openai bs4
 ```
 
 <div class="alert note">

@@ -26,7 +26,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```shell
-$ pip install --upgrade pymilvus langextract google-genai requests tqdm pandas
+$ pip install --upgrade pymilvus milvus-lite langextract google-genai requests tqdm pandas
 ```
 
 <div class="alert note">

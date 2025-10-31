@@ -26,7 +26,7 @@ To start, install the required dependencies by running the following command:
 
 
 ```shell
-$ pip install firecrawl-py pymilvus openai requests tqdm
+$ pip install firecrawl-py pymilvus milvus-lite openai requests tqdm
 ```
 
 <div class="alert note">

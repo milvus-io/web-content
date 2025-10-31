@@ -23,7 +23,7 @@ In this tutorial, we will use Unstructured to ingest PDF documents and then use 
 
 
 ```shell
-$ pip install -qU "unstructured[pdf]" pymilvus openai
+$ pip install -qU "unstructured[pdf]" pymilvus milvus-lite openai
 ```
 
 <div class="alert note">

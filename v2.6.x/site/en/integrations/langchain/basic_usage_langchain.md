@@ -10,12 +10,12 @@ This notebook shows how to use functionality related to the [Milvus](https://mil
 
 ## Setup
 
-You'll need to install `langchain-milvus` with `pip install -qU langchain-milvus` to use this integration.
+You'll need to install `langchain-milvus` and other necessary dependencies.
 
 
 
 ```shell
-$ pip install -qU  langchain_milvus
+$ pip install -qU langchain-milvus milvus-lite langchain-openai
 ```
 
 The latest version of pymilvus comes with a local vector database Milvus Lite, good for prototyping. If you have large scale of data such as more than a million docs, we recommend setting up a more performant Milvus server on [docker or kubernetes](https://milvus.io/docs/install_standalone-docker.md#Start-Milvus).
@@ -159,16 +159,16 @@ vector_store.add_documents(documents=documents, ids=uuids)
 
 
 
-    ['b0248595-2a41-4f6b-9c25-3a24c1278bb3',
-     'fa642726-5329-4495-a072-187e948dd71f',
-     '9905001c-a4a3-455e-ab94-72d0ed11b476',
-     'eacc7256-d7fa-4036-b1f7-83d7a4bee0c5',
-     '7508f7ff-c0c9-49ea-8189-634f8a0244d8',
-     '2e179609-3ff7-4c6a-9e05-08978903fe26',
-     'fab1f2ac-43e1-45f9-b81b-fc5d334c6508',
-     '1206d237-ee3a-484f-baf2-b5ac38eeb314',
-     'd43cbf9a-a772-4c40-993b-9439065fec01',
-     '25e667bb-6f09-4574-a368-661069301906']
+    ['31915e2d-55fd-4bfb-ae08-d441252b8e08',
+     'dbf6560a-1487-4a6e-8797-245d57874f5b',
+     'e991a253-5f37-46ae-850a-82a660e33013',
+     '2818c051-5a1a-44cb-9deb-aaaac709f616',
+     '91c7ef07-26d1-4319-b48c-9261df9ce8d7',
+     'fb258085-6400-4cd7-aa92-fc5e32ca243e',
+     'ffea9a9f-460d-4d8d-ba07-c45e9cfa1e33',
+     'eb149e29-239a-4e2c-9f99-751cb7207abf',
+     '119d4a42-fd6b-433d-842b-1e0be5df81e5',
+     '5b099eb0-98fe-40a3-b13a-300c10250960']
 
 
 
@@ -182,7 +182,7 @@ vector_store.delete(ids=[uuids[-1]])
 
 
 
-    (insert count: 0, delete count: 1, upsert count: 0, timestamp: 0, success count: 0, err count: 0, cost: 0)
+    True
 
 
 
@@ -208,8 +208,12 @@ for res in results:
     print(f"* {res.page_content} [{res.metadata}]")
 ```
 
-    * Building an exciting new project with LangChain - come check it out! [{'pk': '9905001c-a4a3-455e-ab94-72d0ed11b476', 'source': 'tweet'}]
-    * LangGraph is the best framework for building stateful, agentic applications! [{'pk': '1206d237-ee3a-484f-baf2-b5ac38eeb314', 'source': 'tweet'}]
+    WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+    I0000 00:00:1761298048.354308 7886403 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+
+
+    * Building an exciting new project with LangChain - come check it out! [{'source': 'tweet', 'pk': 'e991a253-5f37-46ae-850a-82a660e33013'}]
+    * LangGraph is the best framework for building stateful, agentic applications! [{'source': 'tweet', 'pk': 'eb149e29-239a-4e2c-9f99-751cb7207abf'}]
 
 
 #### Similarity search with score
@@ -225,7 +229,7 @@ for res, score in results:
     print(f"* [SIM={score:3f}] {res.page_content} [{res.metadata}]")
 ```
 
-    * [SIM=21192.628906] bar [{'pk': '2', 'source': 'https://example.com'}]
+    * [SIM=0.893776] The weather forecast for tomorrow is cloudy and overcast, with a high of 62 degrees. [{'source': 'news', 'pk': 'dbf6560a-1487-4a6e-8797-245d57874f5b'}]
 
 
 For a full list of all the search options available when using the `Milvus` vector store, you can visit the [API reference](https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html).
@@ -237,13 +241,16 @@ You can also transform the vector store into a retriever for easier usage in you
 
 ```python
 retriever = vector_store.as_retriever(search_type="mmr", search_kwargs={"k": 1})
-retriever.invoke("Stealing from the bank is a crime", filter={"source": "news"})
+retriever.invoke("Stealing from the bank is a crime", expr='source == "news"')
 ```
 
+    I0000 00:00:1761298049.275354 7886403 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
 
 
 
-    [Document(metadata={'pk': 'eacc7256-d7fa-4036-b1f7-83d7a4bee0c5', 'source': 'news'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
+
+
+    [Document(metadata={'source': 'news', 'pk': '2818c051-5a1a-44cb-9deb-aaaac709f616'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
 
 
 
@@ -269,6 +276,7 @@ docs = [
 vectorstore = Milvus.from_documents(
     docs,
     embeddings,
+    collection_name="partitioned_collection",  # Use a different collection name
     connection_args={"uri": URI},
     # drop_old=True,
     partition_key_field="namespace",  # Use the "namespace" field as the partition key
@@ -297,7 +305,7 @@ vectorstore.as_retriever(search_kwargs={"expr": 'namespace == "ankush"'}).invoke
 
 
 
-    [Document(page_content='i worked at facebook', metadata={'namespace': 'ankush'})]
+    [Document(metadata={'namespace': 'ankush', 'pk': 460829372217788296}, page_content='i worked at facebook')]
 
 
 
@@ -312,11 +320,10 @@ vectorstore.as_retriever(search_kwargs={"expr": 'namespace == "harrison"'}).invo
 
 
 
-    [Document(page_content='i worked at kensho', metadata={'namespace': 'harrison'})]
+    [Document(metadata={'namespace': 'harrison', 'pk': 460829372217788295}, page_content='i worked at kensho')]
 
 
 
 ## API reference
 
-For detailed documentation of all __ModuleName__VectorStore features and configurations head to the API reference: https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html
-
+For detailed documentation, head to the API reference: https://reference.langchain.com/python/integrations/langchain_milvus/

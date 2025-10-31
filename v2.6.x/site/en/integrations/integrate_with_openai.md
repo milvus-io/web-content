@@ -19,7 +19,7 @@ The data used in this example are book titles. You can download the dataset [her
 First, install the package for Milvus and OpenAI:
 
 ```shell
-pip install --upgrade openai pymilvus
+pip install --upgrade openai pymilvus milvus-lite
 ```
 
 <div class="alert note">
