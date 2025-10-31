@@ -50,12 +50,42 @@ title: Создание RAG с помощью Milvus и EmbedAnything
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Зависимости и окружение</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus openai embed_anything</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Зависимости и окружение<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus milvus-lite openai embed_anything</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </div>
-<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">Клонирование репозитория и загрузка адаптера</h3><p>Далее мы клонируем репозиторий <a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a> и добавим каталог <code translate="no">examples/adapters</code> в путь Python. Здесь хранится пользовательская реализация адаптера Milvus, которая позволяет EmbedAnything взаимодействовать с Milvus для вставки векторов.</p>
+<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">Клонирование репозитория и загрузка адаптера<button data-href="#Clone-the-Repository-and-Load-Adapter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Далее мы клонируем репозиторий <a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a> и добавим каталог <code translate="no">examples/adapters</code> в путь Python. Здесь хранится пользовательская реализация адаптера Milvus, которая позволяет EmbedAnything взаимодействовать с Milvus для вставки векторов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> sys
 
 <span class="hljs-comment"># Clone the EmbedAnything repository if not already cloned</span>
@@ -90,7 +120,22 @@ openai_client = OpenAI()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Инициализация Milvus</h3><p>Прежде чем встраивать какие-либо файлы, нам нужно подготовить два компонента, которые взаимодействуют с Milvus:</p>
+    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Инициализация Milvus<button data-href="#Initialize-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Прежде чем встраивать какие-либо файлы, нам нужно подготовить два компонента, которые взаимодействуют с Milvus:</p>
 <ol>
 <li><code translate="no">MilvusVectorAdapter</code> - Это адаптер Milvus для EmbedAnything, который используется <strong>только для встраивания векторов</strong> (т.е. вставки вложений и создания индексов). В настоящее время он <strong>не</strong> поддерживает операции поиска.</li>
 <li><code translate="no">MilvusClient</code> - Это официальный клиент с сайта <code translate="no">pymilvus</code>, который обеспечивает <strong>полный доступ</strong> к возможностям Milvus, включая векторный поиск, фильтрацию и управление коллекциями.</li>
@@ -135,7 +180,22 @@ Collection 'embed_anything_milvus_collection' created with index.
 <li>Если вы хотите использовать <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, полностью управляемый облачный сервис для Milvus, настройте <code translate="no">uri</code> и <code translate="no">token</code>, которые соответствуют <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">публичной конечной точке и ключу Api</a> в Zilliz Cloud.</li>
 </ul>
 </div>
-<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">Инициализация модели встраивания и встраивание PDF-документа</h3><p>Теперь мы инициализируем модель встраивания. Мы воспользуемся моделью <code translate="no">all-MiniLM-L12-v2 model</code> из библиотеки sentence-transformers, которая представляет собой легкую, но мощную модель для генерации вкраплений текста. Она генерирует 384-мерные вкрапления, так что это соответствует размерности нашей коллекции Milvus, установленной на 384. Это выравнивание очень важно и обеспечивает совместимость между размерами векторов, хранящихся в Milvus, и теми, которые генерирует модель.</p>
+<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">Инициализация модели встраивания и встраивание PDF-документа<button data-href="#Initialize-Embedding-Model-and-Embed-PDF-Document" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Теперь мы инициализируем модель встраивания. Мы воспользуемся моделью <code translate="no">all-MiniLM-L12-v2 model</code> из библиотеки sentence-transformers, которая представляет собой легкую, но мощную модель для генерации вкраплений текста. Она создает 384-мерные вкрапления, так что это соответствует размерности нашей коллекции Milvus, установленной на 384. Это выравнивание очень важно и обеспечивает совместимость между размерами векторов, хранящихся в Milvus, и теми, которые генерирует модель.</p>
 <p>EmbedAnything поддерживает гораздо больше моделей встраивания. За более подробной информацией обращайтесь к <a href="https://github.com/StarlightSearch/EmbedAnything">официальной документации</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the embedding model</span>
 model = EmbeddingModel.from_pretrained_hf(
@@ -153,7 +213,22 @@ data = embed_anything.embed_file(
 <pre><code translate="no">Converted 12 embeddings for insertion.
 Successfully inserted 12 embeddings.
 </code></pre>
-<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">Получение и генерация ответа</h3><p>Опять же, <code translate="no">MilvusVectorAdapter</code> от EmbedAnything в настоящее время представляет собой легковесную абстракцию, предназначенную только для векторного ввода и индексирования. Она <strong>не поддерживает</strong> запросы на <strong>поиск</strong> или извлечение информации. Поэтому для поиска релевантных документов для построения нашего конвейера RAG мы должны напрямую использовать экземпляр <code translate="no">MilvusClient</code> (<code translate="no">milvus_client</code>) для запроса к нашему векторному хранилищу Milvus.</p>
+<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">Получение и генерация ответа<button data-href="#Retrieve-and-Generate-Response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Опять же, <code translate="no">MilvusVectorAdapter</code> от EmbedAnything в настоящее время представляет собой легковесную абстракцию, предназначенную только для векторного ввода и индексирования. Она <strong>не поддерживает</strong> запросы на <strong>поиск</strong> или извлечение информации. Поэтому для поиска релевантных документов для построения нашего конвейера RAG мы должны напрямую использовать экземпляр <code translate="no">MilvusClient</code> (<code translate="no">milvus_client</code>) для запроса к нашему векторному хранилищу Milvus.</p>
 <p>Определите функцию для получения соответствующих документов из Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">retrieve_documents</span>(<span class="hljs-params">question, top_k=<span class="hljs-number">3</span></span>):
     query_vector = <span class="hljs-built_in">list</span>(

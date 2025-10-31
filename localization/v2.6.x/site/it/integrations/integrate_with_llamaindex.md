@@ -57,7 +57,7 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e LlamaIndex
         ></path>
       </svg>
     </button></h3><p>Gli snippet di codice di questa pagina richiedono le dipendenze pymilvus e llamaindex. È possibile installarle utilizzando i seguenti comandi:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -167,7 +167,7 @@ documents = SimpleDirectoryReader(
 <h4 id="basic-args" class="common-anchor-header">argomenti di base</h4><ul>
 <li><code translate="no">uri (str, optional)</code>: L'URI a cui connettersi, sotto forma di "https://address:port" per il servizio Milvus o Zilliz Cloud, o "path/to/local/milvus.db" per il Milvus locale lite. Il valore predefinito è "./milvus_llamaindex.db".</li>
 <li><code translate="no">token (str, optional)</code>: Il token per l'accesso. Vuoto se non si usa rbac, se si usa rbac sarà molto probabilmente "username:password".</li>
-<li><code translate="no">collection_name (str, optional)</code>: Il nome della raccolta in cui saranno memorizzati i dati. Il valore predefinito è "llamalection".</li>
+<li><code translate="no">collection_name (str, optional)</code>: Il nome della raccolta in cui verranno memorizzati i dati. Il valore predefinito è "llamalection".</li>
 <li><code translate="no">overwrite (bool, optional)</code>: Sovrascrivere o meno la raccolta esistente con lo stesso nome. L'impostazione predefinita è False.</li>
 </ul>
 <h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">campi scalari, compresi id doc e testo</h4><ul>
@@ -181,7 +181,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">dim (int, optional)</code>: La dimensione dei vettori di incorporamento per la collezione. Richiesto quando si crea una nuova collezione con enable_sparse è False.</li>
 <li><code translate="no">embedding_field (str, optional)</code>: Il nome del campo di incorporamento denso per l'insieme, predefinito a DEFAULT_EMBEDDING_KEY.</li>
 <li><code translate="no">index_config (dict, optional)</code>: La configurazione usata per costruire l'indice di incorporamento denso. Per impostazione predefinita, Nessuno.</li>
-<li><code translate="no">search_config (dict, optional)</code>: Configurazione utilizzata per la ricerca nell'indice denso di Milvus. Si noti che deve essere compatibile con il tipo di indice specificato da <code translate="no">index_config</code>. Valore predefinito: Nessuno.</li>
+<li><code translate="no">search_config (dict, optional)</code>: Configurazione utilizzata per la ricerca nell'indice denso di Milvus. Si noti che deve essere compatibile con il tipo di indice specificato da <code translate="no">index_config</code>. Il valore predefinito è Nessuno.</li>
 <li><code translate="no">similarity_metric (str, optional)</code>: La metrica di somiglianza da utilizzare per l'incorporazione densa; attualmente supporta IP, COSINE e L2.</li>
 </ul>
 <h4 id="sparse-field" class="common-anchor-header">campo sparse</h4><ul>

@@ -57,7 +57,7 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and LlamaIndex
         ></path>
       </svg>
     </button></h3><p>Code snippets on this page require pymilvus and llamaindex dependencies. You can install them using the following commands:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>

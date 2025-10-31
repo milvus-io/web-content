@@ -45,7 +45,7 @@ title: Génération améliorée par récupération (RAG) avec Milvus et Haystack
         ></path>
       </svg>
     </button></h2><p>Avant d'exécuter ce bloc-notes, assurez-vous que les dépendances suivantes sont installées :</p>
-<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
+<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-lite milvus-haystack markdown-it-py mdit_plain
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (Cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>

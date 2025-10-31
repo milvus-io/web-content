@@ -1275,7 +1275,7 @@
     "isMenu": true,
     "children": [
       {
-        "label": "Prepare Source Data",
+        "label": "Preparar dados de origem",
         "id": "prepare-source-data.md",
         "order": 0,
         "children": []
@@ -2176,6 +2176,12 @@
                 "id": "langchain_milvus_async.md",
                 "order": 5,
                 "children": []
+              },
+              {
+                "label": "Agente RAG",
+                "id": "agentic_rag_with_milvus_and_langgraph.md",
+                "order": 6,
+                "children": []
               }
             ]
           },
@@ -2804,7 +2810,7 @@
             "children": []
           },
           {
-            "label": "DNA Sequence Classification",
+            "label": "Classificação da sequência de ADN",
             "id": "dna_sequence_classification.md",
             "order": 9,
             "children": []

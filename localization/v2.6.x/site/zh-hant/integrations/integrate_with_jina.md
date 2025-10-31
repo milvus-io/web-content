@@ -36,7 +36,8 @@ title: 整合 Milvus 與 Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI 於 2020 年在柏林成立，是一家先進的人工智能公司，專注於透過其搜尋基礎徹底改變人工智能的未來。Jina AI 專精於多模態人工智慧，旨在透過其整合式元件套件，包括嵌入式、reerankers、prompt ops 和核心基礎架構，讓企業和開發人員能夠利用多模態資料的力量來創造價值和節省成本。 Jina AI 的尖端嵌入式擁有頂級效能，其 8192 符記長度模型是全面資料表達的理想選擇。這些嵌入式提供多語言支援，並與 OpenAI 等領先平台無縫整合，有助於跨語言應用程式的發展。</p>
+    </button></h2><p>Jina AI 於 2020 年在柏林成立，是一家先進的人工智能公司，專注於透過其搜尋基礎徹底改變人工智能的未來。Jina AI 專精於多模態 AI，旨在透過其整合式元件套件，包括 embeddings、reerankers、prompt ops 和核心基礎架構，讓企業和開發人員能夠利用多模態資料的力量來創造價值和節省成本。<br>
+Jina AI 的尖端嵌入式系統擁有頂級效能，其 8192 符記長度模型是全面資料表達的理想選擇。這些嵌入式提供多語言支援，並可與 OpenAI 等領先平台無縫整合，有助於跨語言應用程式的發展。</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Milvus 與 Jina AI 的嵌入式系統<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +71,7 @@ title: 整合 Milvus 與 Jina
       </svg>
     </button></h2><p>Jina 嵌入已經整合到 PyMilvus 模型庫中。現在，我們將以程式碼範例來展示如何實際使用 Jina embeddings。</p>
 <p>在開始之前，我們需要為 PyMilvus 安裝模型庫。</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -249,7 +250,7 @@ res = milvus_client.insert(collection_name=COLLECTION_NAME, data=data)
 <li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，對應 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>。</li>
 </ul>
 </div>
-<p>有了 Milvus 向量資料庫中的所有資料，我們現在可以透過產生查詢的向量嵌入來執行語意搜尋，並進行向量搜尋。</p>
+<p>有了 Milvus 向量資料庫中的所有資料，我們現在就可以透過為查詢產生向量嵌入來執行語意搜尋，並進行向量搜尋。</p>
 <pre><code translate="no" class="language-python">queries = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 qvecs = ef.encode_queries([queries]) <span class="hljs-comment"># This method uses `retrieval.query` as the task</span>
 
@@ -280,7 +281,7 @@ res = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在使用 embeddings 搜尋之後，Jina Ai 也提供了 reranker 來進一步提升檢索品質。</p>
+    </button></h2><p>Jina Ai 在使用 embeddings 進行搜尋後，還提供 reranker 以進一步提升檢索品質。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> JinaRerankFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>

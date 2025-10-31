@@ -55,7 +55,7 @@ title: Milvus 및 LlamaIndex를 사용한 검색 증강 생성(RAG)
         ></path>
       </svg>
     </button></h3><p>이 페이지의 코드 스니펫에는 pymilvus 및 llamaindex 종속성이 필요합니다. 다음 명령을 사용하여 설치할 수 있습니다:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>

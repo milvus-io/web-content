@@ -39,7 +39,7 @@ summary: 本页讨论向量数据库与 OpenAI 的 Embeddings API 的集成。
     </button></h2><p>在开始之前，请确保您已准备好 OpenAI API 密钥，或者您可以从<a href="https://openai.com/index/openai-api/">OpenAI 网站</a>获取一个。</p>
 <p>本示例中使用的数据是书名。你可以<a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">在这里</a>下载数据集，并将其放在运行以下代码的同一目录下。</p>
 <p>首先，安装 Milvus 和 OpenAI 的软件包：</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus
+<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，为了启用刚刚安装的依赖项，您可能需要<strong>重启运行时</strong>。(点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>

@@ -20,7 +20,7 @@ title: VannaとmilvusでSQLを書く
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p><a href="https://vanna.ai/">Vannaは</a>SQL生成と関連機能のためのオープンソースのPython RAG (Retrieval-Augmented Generation)フレームワークです。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクトルデータベースで、埋め込み類似検索やAIアプリケーションのために構築されています。</p>
+<p><a href="https://vanna.ai/">Vannaは</a>SQL生成と関連機能のためのオープンソースのPython RAG (Retrieval-Augmented Generation)フレームワークです。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクターデータベースで、埋め込み類似検索やAIアプリケーションのために構築されています。</p>
 <p>Vannaは2つの簡単なステップで動作します - あなたのデータ上でRAG「モデル」を訓練し、次にあなたのデータベース上で実行するように設定することができるSQLクエリを返す質問をします。このガイドでは、Vannaを使用して、データベースに保存されたデータに基づいてSQLクエリを生成し、実行する方法を示します。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +38,7 @@ title: VannaとmilvusでSQLを書く
         ></path>
       </svg>
     </button></h2><p>このノートブックを実行する前に、以下の依存関係がインストールされていることを確認してください：</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span>
+<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -78,7 +78,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <div class="alert note">
 <p><code translate="no">MilvusClient</code> の引数については、次のようにします：</p>
 <ul>
-<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利である。</li>
+<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>

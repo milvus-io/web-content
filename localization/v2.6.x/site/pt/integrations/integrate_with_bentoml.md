@@ -55,10 +55,10 @@ title: Geração Aumentada por Recuperação (RAG) com Milvus e BentoML
         ></path>
       </svg>
     </button></h2><p>O Milvus Lite está disponível no PyPI. Pode instalá-lo através do pip para Python 3.8+:</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se estiver a usar o Google Colab, para ativar as dependências acabadas de instalar, pode ser necessário <strong>reiniciar o runtime</strong> (Clique no menu "Runtime" no topo do ecrã, e selecione "Restart session" no menu dropdown).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o runtime</strong> (Clique no menu "Runtime" no topo do ecrã, e selecione "Restart session" no menu dropdown).</p>
 </div>
 <p>Depois de entrar no BentoCloud, podemos interagir com os serviços BentoCloud implementados em Deployments, e o END_POINT e API correspondentes estão localizados em Playground -&gt; Python. Pode descarregar os dados da cidade <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">aqui</a>.</p>
 <h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">Servir Embeddings com BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
@@ -178,7 +178,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Com os nossos embeddings e dados preparados, podemos inserir os vectores juntamente com os metadados no Milvus Lite para pesquisa de vectores mais tarde. O primeiro passo nesta secção é iniciar um cliente ligando-se ao Milvus Lite. Simplesmente importamos o módulo <code translate="no">MilvusClient</code> e inicializamos um cliente Milvus Lite que se liga à sua base de dados de vectores do Milvus Lite. O tamanho da dimensão vem do tamanho do modelo de incorporação, por exemplo, o modelo Sentence Transformer <code translate="no">all-MiniLM-L6-v2</code> produz vectores de 384 dimensões.</p>
+    </button></h2><p>Com os nossos embeddings e dados preparados, podemos inserir os vectores juntamente com os metadados no Milvus Lite para pesquisa de vectores mais tarde. O primeiro passo nesta secção é iniciar um cliente ligando-se ao Milvus Lite. Simplesmente importamos o módulo <code translate="no">MilvusClient</code> e inicializamos um cliente Milvus Lite que se liga à sua base de dados vetorial Milvus Lite. O tamanho da dimensão vem do tamanho do modelo de incorporação, por exemplo, o modelo Sentence Transformer <code translate="no">all-MiniLM-L6-v2</code> produz vectores de 384 dimensões.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>

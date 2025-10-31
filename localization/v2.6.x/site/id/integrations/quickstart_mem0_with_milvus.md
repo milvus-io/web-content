@@ -47,12 +47,42 @@ title: Memulai dengan Mem0 dan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Unduh pustaka yang diperlukan</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus</span>
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Unduh pustaka yang diperlukan<button data-href="#Download-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
 </blockquote>
-<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Mengkonfigurasi Mem0 dengan Milvus</h3><p>Kita akan menggunakan OpenAI sebagai LLM dalam contoh ini. Anda harus menyiapkan <a href="https://platform.openai.com/docs/quickstart">kunci api</a> <code translate="no">OPENAI_API_KEY</code> sebagai variabel lingkungan.</p>
+<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Mengkonfigurasi Mem0 dengan Milvus<button data-href="#Configure-Mem0-with-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kita akan menggunakan OpenAI sebagai LLM dalam contoh ini. Anda harus menyiapkan <a href="https://platform.openai.com/docs/quickstart">kunci api</a> <code translate="no">OPENAI_API_KEY</code> sebagai variabel lingkungan.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -99,7 +129,22 @@ m = Memory.from_config(config)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">Menambahkan Memori</h3><p>Fungsi <code translate="no">add</code> menyimpan teks tidak terstruktur di Milvus sebagai memori, mengaitkannya dengan pengguna tertentu dan metadata opsional.</p>
+    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">Menambahkan Memori<button data-href="#Adding-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Fungsi <code translate="no">add</code> menyimpan teks tidak terstruktur di Milvus sebagai memori, mengaitkannya dengan pengguna tertentu dan metadata opsional.</p>
 <p>Di sini, kita menambahkan memori Alice, "bekerja untuk meningkatkan kemampuan tenis saya," bersama dengan metadata yang relevan untuk konteks Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a memory to user: Working on improving tennis skills</span>
 res = m.add(
@@ -115,7 +160,22 @@ res
    'event': 'ADD'}],
  'relations': []}
 </code></pre>
-<h3 id="Update-a-Memory" class="common-anchor-header">Memperbarui Memori</h3><p>Kita dapat menggunakan nilai balik fungsi <code translate="no">add</code> untuk mengambil ID memori, yang memungkinkan kita untuk memperbarui memori ini dengan informasi baru melalui <code translate="no">update</code>.</p>
+<h3 id="Update-a-Memory" class="common-anchor-header">Memperbarui Memori<button data-href="#Update-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kita dapat menggunakan nilai balik fungsi <code translate="no">add</code> untuk mengambil ID memori, yang memungkinkan kita untuk memperbarui memori ini dengan informasi baru melalui <code translate="no">update</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get memory_id</span>
 memory_id = res[<span class="hljs-string">&quot;results&quot;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>]
 
@@ -124,7 +184,22 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'message': 'Memory updated successfully!'}
 </code></pre>
-<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Mendapatkan Semua Memori Untuk Seorang Pengguna</h3><p>Kita dapat menggunakan fungsi <code translate="no">get_all</code> untuk melihat semua memori yang disisipkan atau memfilter dengan <code translate="no">user_id</code> di Milvus.</p>
+<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Mendapatkan Semua Memori Untuk Seorang Pengguna<button data-href="#Get-All-Memory-For-a-User" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kita dapat menggunakan fungsi <code translate="no">get_all</code> untuk melihat semua memori yang disisipkan atau memfilter melalui <code translate="no">user_id</code> di Milvus.</p>
 <p>Perhatikan bahwa kita dapat melihat memori sekarang berubah dari "Bekerja untuk meningkatkan kemampuan tenis" menjadi "Suka bermain tenis di akhir pekan".</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
@@ -137,7 +212,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': '2024-11-01T19:33:47.619857-07:00',
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="View-Memory-Update-History" class="common-anchor-header">Melihat Riwayat Pembaruan Memori</h3><p>Kita juga dapat melihat riwayat pembaruan memori dengan menentukan memory_id mana yang kita minati melalui fungsi <code translate="no">history</code>.</p>
+<h3 id="View-Memory-Update-History" class="common-anchor-header">Melihat Riwayat Pembaruan Memori<button data-href="#View-Memory-Update-History" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kita juga dapat melihat riwayat pembaruan memori dengan menentukan memory_id mana yang kita minati melalui fungsi <code translate="no">history</code>.</p>
 <pre><code translate="no" class="language-python">m.history(memory_id=memory_id)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'id': '71ed3cec-5d9a-4fa6-a009-59802450c0b9',
@@ -155,7 +245,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
   'created_at': '2024-11-01T19:33:44.116920-07:00',
   'updated_at': '2024-11-01T19:33:47.619857-07:00'}]
 </code></pre>
-<h3 id="Search-Memory" class="common-anchor-header">Cari Memori</h3><p>Kita dapat menggunakan fungsi <code translate="no">search</code> untuk mencari memori yang paling berhubungan dengan pengguna.</p>
+<h3 id="Search-Memory" class="common-anchor-header">Cari Memori<button data-href="#Search-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kita dapat menggunakan fungsi <code translate="no">search</code> untuk mencari memori yang paling berhubungan dengan pengguna.</p>
 <p>Mari kita mulai dengan menambahkan memori lain untuk Alice.</p>
 <pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
@@ -201,7 +306,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': None,
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="Delete-Memory" class="common-anchor-header">Menghapus Memori</h3><p>Kita juga dapat <code translate="no">delete</code> sebuah memori dengan memberikan <code translate="no">memory_id</code> yang sesuai.</p>
+<h3 id="Delete-Memory" class="common-anchor-header">Menghapus Memori<button data-href="#Delete-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kita juga dapat <code translate="no">delete</code> sebuah memori dengan memberikan <code translate="no">memory_id</code> yang sesuai.</p>
 <p>Kita akan menghapus memori "Suka bermain tenis di akhir pekan" karena <code translate="no">memory_id</code> telah diambil, dan memanggil <code translate="no">get_all</code> untuk memverifikasi bahwa penghapusan telah berhasil.</p>
 <pre><code translate="no" class="language-python">m.delete(memory_id=memory_id)
 

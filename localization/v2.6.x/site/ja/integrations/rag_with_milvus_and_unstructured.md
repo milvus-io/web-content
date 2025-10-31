@@ -24,7 +24,7 @@ title: MilvusとUnstructuredでRAGを構築する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.unstructured.io/welcome">Unstructuredは</a>、RAG（Retrieval Augmented Generation）やモデルの微調整のために非構造化ドキュメントを取り込み、処理するためのプラットフォームとツールを提供します。コードなしのUIプラットフォームとサーバーレスAPIサービスの両方を提供し、ユーザーはUnstructuredがホストする計算リソース上でデータを処理できる。</p>
+    </button></h1><p><a href="https://docs.unstructured.io/welcome">Unstructuredは</a>、RAG（Retrieval Augmented Generation）やモデルの微調整のために非構造化ドキュメントを取り込んで処理するためのプラットフォームとツールを提供します。ノーコードUIプラットフォームとサーバーレスAPIサービスの両方を提供し、ユーザーはUnstructuredがホストする計算リソース上でデータを処理できる。</p>
 <p>このチュートリアルでは、Unstructuredを使用してPDFドキュメントをインジェストし、Milvusを使用してRAGパイプラインを構築します。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,13 +41,28 @@ title: MilvusとUnstructuredでRAGを構築する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU <span class="hljs-string">&quot;unstructured[pdf]&quot;</span> pymilvus openai</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU <span class="hljs-string">&quot;unstructured[pdf]&quot;</span> pymilvus milvus-lite openai</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p><strong>インストールオプション：</strong></p>
 <ul>
 <li>すべてのドキュメントフォーマットを処理する場合：<code translate="no">pip install &quot;unstructured[all-docs]&quot;</code></li>
-<li>特定のフォーマット（PDFなど）の場合：<code translate="no">pip install &quot;unstructured[pdf]&quot;</code></li>
+<li>特定のフォーマット（例：PDF）の場合：<code translate="no">pip install &quot;unstructured[pdf]&quot;</code></li>
 <li>その他のインストールオプションについては、<a href="https://docs.unstructured.io/open-source/installation/full-installation">Unstructuredのドキュメントを</a>ご覧ください。</li>
 </ul>
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -57,7 +72,22 @@ title: MilvusとUnstructuredでRAGを構築する
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">MilvusクライアントとOpenAIクライアントの準備</h3><p>Milvusクライアントを使用してMilvusコレクションを作成し、そこにデータを挿入することができます。</p>
+<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">MilvusクライアントとOpenAIクライアントの準備<button data-href="#Prepare-Milvus-and-OpenAI-clients" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvusクライアントを使用してMilvusコレクションを作成し、そこにデータを挿入することができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -159,7 +189,7 @@ milvus_client.load_collection(collection_name=collection_name)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unstructuredは、PDFやHTMLなど、様々なファイルタイプを処理するための柔軟で強力な取り込みパイプラインを提供する。 ローカルのPDFファイルを分割してチャンクする。そしてMilvusにデータをロードします。</p>
+    </button></h2><p>Unstructuredは、PDFやHTMLなど、様々なファイルタイプを処理するための柔軟で強力な取り込みパイプラインを提供する。 ローカルのPDFファイルを分割し、チャンクする。そしてMilvusにデータをロードします。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> warnings
 <span class="hljs-keyword">from</span> unstructured.partition.auto <span class="hljs-keyword">import</span> partition
 

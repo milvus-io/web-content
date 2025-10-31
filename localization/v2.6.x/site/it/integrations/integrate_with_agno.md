@@ -47,7 +47,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Installare le dipendenze necessarie:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
+<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus milvus-lite openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Riavvia sessione" dal menu a discesa).</p>

@@ -52,7 +52,7 @@ title: 使用 Milvus 和 BentoML 的 Retrieval-Augmented Generation (RAG)
         ></path>
       </svg>
     </button></h2><p>Milvus Lite 可在 PyPI 上找到。您可以透過 Python 3.8+ 的 pip 安裝它：</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的依賴項目，您可能需要<strong>重新啟動運行時</strong>（點擊螢幕上方的「Runtime」功能表，從下拉式功能表中選擇「Restart session」）。</p>
@@ -345,4 +345,4 @@ context = ask_a_question(question=question)
 <p>執行 RAG</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(dorag(question=question, context=context))
 <button class="copy-code-btn"></button></code></pre>
-<p>對於問劍橋在哪個州的範例問題，我們可以從 BentoML 列印整個回應。但是，如果我們花點時間來解析它，它看起來就會比較美觀，而且它應該會告訴我們劍橋位於麻薩諸塞州。</p>
+<p>對於問劍橋在哪個州的範例問題，我們可以從 BentoML 列印整個回應。但是，如果我們花點時間來解析它，它看起來就會比較美觀，而且應該會告訴我們劍橋位於麻薩諸塞州。</p>

@@ -55,7 +55,7 @@ title: 使用 Milvus 和 LlamaIndex 的检索增强生成（RAG）
         ></path>
       </svg>
     </button></h3><p>本页面上的代码片段需要 pymilvus 和 llamaindex 依赖项。您可以使用以下命令安装它们：</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>

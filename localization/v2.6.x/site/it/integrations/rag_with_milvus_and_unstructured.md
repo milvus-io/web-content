@@ -26,7 +26,7 @@ title: Costruire un RAG con Milvus e Unstructured
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.unstructured.io/welcome">Unstructured</a> fornisce una piattaforma e strumenti per l'acquisizione e l'elaborazione di documenti non strutturati per la Retrieval Augmented Generation (RAG) e la messa a punto dei modelli. Offre sia una piattaforma UI senza codice che servizi API serverless, consentendo agli utenti di elaborare i dati su risorse di calcolo ospitate da Unstructured.</p>
+    </button></h1><p><a href="https://docs.unstructured.io/welcome">Unstructured</a> fornisce una piattaforma e strumenti per l'ingestione e l'elaborazione di documenti non strutturati per la Retrieval Augmented Generation (RAG) e la messa a punto dei modelli. Offre sia una piattaforma UI senza codice che servizi API serverless, consentendo agli utenti di elaborare i dati su risorse di calcolo ospitate da Unstructured.</p>
 <p>In questo tutorial, utilizzeremo Unstructured per ingerire documenti PDF e poi useremo Milvus per costruire una pipeline RAG.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,22 @@ title: Costruire un RAG con Milvus e Unstructured
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dipendenze e ambiente</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU <span class="hljs-string">&quot;unstructured[pdf]&quot;</span> pymilvus openai</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dipendenze e ambiente<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU <span class="hljs-string">&quot;unstructured[pdf]&quot;</span> pymilvus milvus-lite openai</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p><strong>Opzioni di installazione:</strong></p>
@@ -59,7 +74,22 @@ title: Costruire un RAG con Milvus e Unstructured
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Preparare i client Milvus e OpenAI</h3><p>È possibile utilizzare il client Milvus per creare una raccolta Milvus e inserirvi i dati.</p>
+<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Preparare i client Milvus e OpenAI<button data-href="#Prepare-Milvus-and-OpenAI-clients" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile utilizzare il client Milvus per creare una raccolta Milvus e inserirvi i dati.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -161,7 +191,7 @@ milvus_client.load_collection(collection_name=collection_name)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unstructured fornisce una pipeline di ingestione flessibile e potente per elaborare vari tipi di file, tra cui PDF, HTML e altri ancora. Partiremo e divideremo un file PDF locale. Poi caricheremo i dati in Milvus.</p>
+    </button></h2><p>Unstructured fornisce una pipeline di ingestione flessibile e potente per elaborare vari tipi di file, tra cui PDF, HTML e altri ancora. Partizioniamo e dividiamo un file PDF locale. Poi caricheremo i dati in Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> warnings
 <span class="hljs-keyword">from</span> unstructured.partition.auto <span class="hljs-keyword">import</span> partition
 

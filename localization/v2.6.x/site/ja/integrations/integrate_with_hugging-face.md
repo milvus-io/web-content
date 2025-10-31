@@ -45,7 +45,7 @@ title: milvusとハグ顔を使った質問応答
 <li><code translate="no">datasets</code> <code translate="no">transformers</code>: Hugging Faceパッケージはデータを管理し、モデルを利用する。</li>
 <li><code translate="no">torch</code>強力なライブラリは、効率的なテンソル計算とディープラーニングツールを提供します。</li>
 </ul>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません。(画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -172,7 +172,7 @@ milvus_client.create_collection(
 <div class="alert note">
 <p>引数として<code translate="no">MilvusClient</code> を指定します：</p>
 <ul>
-<li><code translate="no">uri</code> をローカルファイル、例えば、<code translate="no">./milvus.db</code> に設定するのが最も便利な方法であり、自動的に<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>利用して全てのデータをこのファイルに格納する。</li>
+<li><code translate="no">uri</code> をローカルファイル、例えば、<code translate="no">./milvus.db</code> に設定するのが最も便利な方法であり、自動的に<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>利用してすべてのデータをこのファイルに格納する。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>

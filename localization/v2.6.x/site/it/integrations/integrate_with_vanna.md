@@ -40,7 +40,7 @@ title: Scrivere SQL con Vanna e Milvus
         ></path>
       </svg>
     </button></h2><p>Prima di eseguire questo notebook, assicuratevi di aver installato le seguenti dipendenze:</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span>
+<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Restart session" dal menu a discesa).</p>
@@ -99,7 +99,7 @@ vn_milvus = VannaMilvus(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Questo è un semplice esempio con pochi campioni di dati, quindi abbiamo impostato <code translate="no">n_results</code> su 2 per assicurarci di cercare i primi due risultati più simili. In pratica, si dovrebbe impostare <code translate="no">n_results</code> su un valore più alto quando si ha a che fare con set di dati di formazione più grandi.</p>
+<p>Questo è un semplice esempio con pochi campioni di dati, quindi abbiamo impostato <code translate="no">n_results</code> su 2 per assicurarci di cercare i primi due risultati più simili. In pratica, si dovrebbe impostare <code translate="no">n_results</code> su un valore più alto quando si ha a che fare con set di dati di allenamento più grandi.</p>
 <p>Utilizzeremo un database SQLite di esempio con poche tabelle contenenti alcuni dati di esempio.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> sqlite3
 

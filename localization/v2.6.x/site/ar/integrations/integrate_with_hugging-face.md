@@ -46,7 +46,7 @@ title: الإجابة عن الأسئلة باستخدام ميلفوس ومعا
 <li><code translate="no">datasets</code> <code translate="no">transformers</code>: حزم عناق الوجه تدير البيانات وتستخدم النماذج.</li>
 <li><code translate="no">torch</code>: مكتبة قوية توفر حساب الموتر الفعال وأدوات التعلم العميق.</li>
 </ul>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong>. (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، واختر "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -173,7 +173,7 @@ milvus_client.create_collection(
 <div class="alert note">
 <p>أما بالنسبة لحجة <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث أنه يستخدم تلقائيًا Milvus <a href="https://milvus.io/docs/milvus_lite.md">Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث أنه يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>

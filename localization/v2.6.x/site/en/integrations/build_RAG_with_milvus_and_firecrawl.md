@@ -61,7 +61,7 @@ title: Building RAG with Milvus and Firecrawl
         ></path>
       </svg>
     </button></h3><p>To start, install the required dependencies by running the following command:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install firecrawl-py pymilvus openai requests tqdm</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install firecrawl-py pymilvus milvus-lite openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>

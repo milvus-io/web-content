@@ -41,7 +41,7 @@ title: Valutazione con Arize Pheonix
         ></path>
       </svg>
     </button></h2><p>Prima di eseguire questo notebook, assicuratevi di avere installato le seguenti dipendenze:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Restart session" dal menu a discesa).</p>
@@ -338,7 +338,22 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <li><strong>Spiegazione AQ</strong>: Spiega perché una risposta è corretta o meno.</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Panoramica sul tracciamento di Phoenix</h3><p>Phoenix fornisce un <strong>tracing compatibile con OTEL</strong> per le applicazioni LLM, con integrazioni per framework come <strong>Langchain</strong>, <strong>LlamaIndex</strong> e SDK come <strong>OpenAI</strong> e <strong>Mistral</strong>. Il tracciamento cattura l'intero flusso di richieste, offrendo approfondimenti su:</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Panoramica sul tracciamento di Phoenix<button data-href="#Phoenix-Tracing-Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Phoenix fornisce un <strong>tracing compatibile con OTEL</strong> per le applicazioni LLM, con integrazioni per framework come <strong>Langchain</strong>, <strong>LlamaIndex</strong> e SDK come <strong>OpenAI</strong> e <strong>Mistral</strong>. Il tracciamento cattura l'intero flusso di richieste, offrendo approfondimenti su:</p>
 <ul>
 <li><strong>Latenza dell'applicazione</strong>: Identificare e ottimizzare le invocazioni LLM lente e le prestazioni dei componenti.</li>
 <li><strong>Utilizzo dei token</strong>: Disaggregazione del consumo di token per l'ottimizzazione dei costi.</li>
@@ -462,7 +477,7 @@ results_df.head()
       <td>[Copertura del codice] Prima di inviare il pull ...</td>
       <td>Prima di eseguire la copertura del codice, bisogna assicurarsi ...</td>
       <td>Prima di eseguire la copertura del codice, si dovrebbe fare ...</td>
-      <td>[Prima di inviare il pull ...</td>
+      <td>[Copertura del codice Prima di inviare il pull ...</td>
       <td>[Prima di inviare il pull...</td>
       <td>fattuale</td>
       <td>Il testo di riferimento specifica che prima di...</td>

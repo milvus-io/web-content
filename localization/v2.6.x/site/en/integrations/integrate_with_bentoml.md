@@ -56,7 +56,7 @@ BentoCloud is an AI Inference Platform for fast-moving AI teams, offering fully-
         ></path>
       </svg>
     </button></h2><p>Milvus Lite is available on PyPI. You can install it via pip for Python 3.8+:</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>

@@ -45,7 +45,7 @@ title: Retrieval-Augmented Generation (RAG) dengan Milvus dan Haystack
         ></path>
       </svg>
     </button></h2><p>Sebelum menjalankan notebook ini, pastikan Anda telah menginstal dependensi berikut:</p>
-<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
+<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-lite milvus-haystack markdown-it-py mdit_plain
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (Klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>

@@ -38,7 +38,7 @@ title: Integrate Milvus with Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI, founded in 2020 in Berlin, is a pioneering AI company focused on revolutionizing the future of artificial intelligence through its search foundation. Specializing in multimodal AI, Jina AI aims to empower businesses and developers to harness the power of multimodal data for value creation and cost savings through its integrated suite of components, including embeddings, rerankers, prompt ops, and core infrastructure.
+    </button></h2><p>Jina AI, founded in 2020 in Berlin, is a pioneering AI company focused on revolutionizing the future of artificial intelligence through its search foundation. Specializing in multimodal AI, Jina AI aims to empower businesses and developers to harness the power of multimodal data for value creation and cost savings through its integrated suite of components, including embeddings, rerankers, prompt ops, and core infrastructure.<br>
 Jina AI’s cutting-edge embeddings boast top-tier performance, featuring an 8192 token-length model ideal for comprehensive data representation. Offering multilingual support and seamless integration with leading platforms like OpenAI, these embeddings facilitate cross-lingual applications.</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Milvus and Jina AI’s Embedding<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ Jina AI’s cutting-edge embeddings boast top-tier performance, featuring an 819
       </svg>
     </button></h2><p>Jina embeddings have been integrated into the PyMilvus model library. Now, we will demonstrate code examples to show how to use Jina embeddings in action.</p>
 <p>Before we start, we need to install model library for PyMilvus.</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

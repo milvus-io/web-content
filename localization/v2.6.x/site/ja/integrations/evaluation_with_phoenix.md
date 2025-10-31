@@ -41,7 +41,7 @@ title: Arize Pheonixによる評価
         ></path>
       </svg>
     </button></h2><p>このノートブックを実行する前に、以下の依存関係がインストールされていることを確認してください：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -335,10 +335,25 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 </ul></li>
 <li><p><strong>QA評価</strong>：入力クエリに対するモデルの回答の正確性を評価する。</p>
 <ul>
-<li><strong>QA説明</strong>：回答が正しい、または正しくない理由を詳細に説明します。</li>
+<li><strong>QA説明</strong>：回答が正しいか正しくないかの理由を詳細に説明します。</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Phoenixトレースの概要</h3><p>Phoenixは<strong>OTEL互換のトレースを</strong>LLMアプリケーションに提供し、<strong>Langchainや</strong> <strong>LlamaIndexの</strong>ようなフレームワーク、<strong>OpenAIや</strong> <strong>Mistralの</strong>ようなSDKを統合します。トレースはリクエストフロー全体をキャプチャし、次のような洞察を提供します：</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Phoenixトレースの概要<button data-href="#Phoenix-Tracing-Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Phoenixは<strong>OTEL互換のトレースを</strong>LLMアプリケーションに提供し、<strong>Langchainや</strong> <strong>LlamaIndexの</strong>ようなフレームワーク、<strong>OpenAIや</strong> <strong>Mistralの</strong>ようなSDKを統合します。トレースはリクエストフロー全体をキャプチャし、以下のような洞察を提供します：</p>
 <ul>
 <li><strong>アプリケーション遅延</strong>：遅いLLM呼び出しとコンポーネントのパフォーマンスを特定し、最適化します。</li>
 <li><strong>トークンの使用状況</strong>：コスト最適化のためにトークン消費を分解します。</li>

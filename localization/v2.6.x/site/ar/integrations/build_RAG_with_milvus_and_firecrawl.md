@@ -28,7 +28,7 @@ title: بناء RAG باستخدام Milvus و Firecrawl
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_firecrawl.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>يُمكِّن<a href="https://www.firecrawl.dev/">Firecrawl</a> المطورين من إنشاء تطبيقات ذكاء اصطناعي ببيانات نظيفة يتم كشطها من أي موقع إلكتروني. من خلال قدرات متقدمة في الكشط والزحف واستخراج البيانات، يعمل Firecrawl على تبسيط عملية تحويل محتوى الموقع الإلكتروني إلى بيانات نظيفة أو بيانات منظمة لمهام سير عمل الذكاء الاصطناعي النهائية.</p>
+<p>يُمكِّن<a href="https://www.firecrawl.dev/">Firecrawl</a> المطورين من إنشاء تطبيقات ذكاء اصطناعي ببيانات نظيفة يتم كشطها من أي موقع إلكتروني. وبفضل إمكانات الكشط والزحف واستخراج البيانات المتقدمة، يعمل Firecrawl على تبسيط عملية تحويل محتوى الموقع الإلكتروني إلى بيانات نظيفة أو بيانات منظمة لمهام سير عمل الذكاء الاصطناعي النهائية.</p>
 <p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب استرجاع-مُعزَّز (RAG) باستخدام Milvus و Firecrawl. يدمج خط الأنابيب بين Firecrawl لكشط بيانات الويب، وMilvus لتخزين المتجهات، وOpenAI لتوليد استجابات ثاقبة مدركة للسياق.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,24 +45,69 @@ title: بناء RAG باستخدام Milvus و Firecrawl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة</h3><p>للبدء، قم بتثبيت التبعيات المطلوبة عن طريق تشغيل الأمر التالي:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install firecrawl-py pymilvus openai requests tqdm</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>للبدء، قم بتثبيت التبعيات المطلوبة عن طريق تشغيل الأمر التالي:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install firecrawl-py pymilvus milvus-lite openai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
-<h3 id="Setting-Up-API-Keys" class="common-anchor-header">إعداد مفاتيح واجهة برمجة التطبيقات</h3><p>لاستخدام Firecrawl لكشط البيانات من عنوان URL المحدد، تحتاج إلى الحصول على <a href="https://www.firecrawl.dev/">FIRECRAWL_API_KEY</a> وتعيينه كمتغير بيئة. أيضًا، سنستخدم OpenAI كـ LLM في هذا المثال. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">OPENAI_API_KEY</a> كمتغير بيئة أيضًا.</p>
+<h3 id="Setting-Up-API-Keys" class="common-anchor-header">إعداد مفاتيح واجهة برمجة التطبيقات<button data-href="#Setting-Up-API-Keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لاستخدام Firecrawl لكشط البيانات من عنوان URL المحدد، تحتاج إلى الحصول على <a href="https://www.firecrawl.dev/">FIRECRAWL_API_KEY</a> وتعيينه كمتغير بيئة. أيضًا، سنستخدم OpenAI كـ LLM في هذا المثال. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">OPENAI_API_KEY</a> كمتغير بيئة أيضًا.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;FIRECRAWL_API_KEY&quot;</span>] = <span class="hljs-string">&quot;fc-***********&quot;</span>
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">إعداد LLM ونموذج التضمين</h3><p>نقوم بتهيئة عميل OpenAI لإعداد نموذج التضمين.</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">إعداد LLM ونموذج التضمين<button data-href="#Prepare-the-LLM-and-Embedding-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>نقوم بتهيئة عميل OpenAI لإعداد نموذج التضمين.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
 openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
-<p>نحدد دالة لإنشاء تضمينات نصية باستخدام عميل OpenAI. نستخدم نموذج التضمين <a href="https://platform.openai.com/docs/guides/embeddings">النصي 3-نموذج التضمين الصغير</a> كمثال.</p>
+<p>حدد دالة لإنشاء تضمينات نصية باستخدام عميل OpenAI. نستخدم نموذج التضمين <a href="https://platform.openai.com/docs/guides/embeddings">النصي 3-نموذج التضمين الصغير</a> كمثال.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
         openai_client.embeddings.create(<span class="hljs-built_in">input</span>=text, model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
@@ -94,12 +139,42 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Initialize-the-Firecrawl-Application" class="common-anchor-header">تهيئة تطبيق Firecrawl</h3><p>سوف نستخدم مكتبة <code translate="no">firecrawl</code> لكشط البيانات من عنوان URL المحدد بصيغة تخفيض السعر. ابدأ بتهيئة تطبيق Firecrawl:</p>
+    </button></h2><h3 id="Initialize-the-Firecrawl-Application" class="common-anchor-header">تهيئة تطبيق Firecrawl<button data-href="#Initialize-the-Firecrawl-Application" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سوف نستخدم مكتبة <code translate="no">firecrawl</code> لكشط البيانات من عنوان URL المحدد بصيغة تخفيض السعر. ابدأ بتهيئة تطبيق Firecrawl:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> firecrawl <span class="hljs-keyword">import</span> FirecrawlApp
 
 app = FirecrawlApp(api_key=os.environ[<span class="hljs-string">&quot;FIRECRAWL_API_KEY&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Scrape-the-Target-Website" class="common-anchor-header">كشط الموقع المستهدف</h3><p>اكشط المحتوى من عنوان URL الهدف. يوفر موقع الويب <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">الوكلاء المستقلون المدعومون من LLM</a> استكشافًا متعمقًا لأنظمة الوكلاء المستقلين المبنية باستخدام نماذج لغوية كبيرة (LLMs). سنستخدم هذا المحتوى لبناء نظام RAG.</p>
+<h3 id="Scrape-the-Target-Website" class="common-anchor-header">كشط الموقع المستهدف<button data-href="#Scrape-the-Target-Website" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>اكشط المحتوى من عنوان URL الهدف. يوفر موقع الويب <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">الوكلاء المستقلون المدعومون من LLM</a> استكشافًا متعمقًا لأنظمة الوكلاء المستقلين المبنية باستخدام نماذج لغوية كبيرة (LLMs). سنستخدم هذا المحتوى لبناء نظام RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Scrape a website:</span>
 scrape_status = app.scrape_url(
     <span class="hljs-string">&quot;https://lilianweng.github.io/posts/2023-06-23-agent/&quot;</span>,
@@ -108,7 +183,22 @@ scrape_status = app.scrape_url(
 
 markdown_content = scrape_status[<span class="hljs-string">&quot;markdown&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Process-the-Scraped-Content" class="common-anchor-header">معالجة المحتوى المكشوط</h3><p>لجعل المحتوى الذي تم كشطه قابلاً للإدارة لإدراجه في ملف Milvus، نستخدم ببساطة "#" لفصل المحتوى، والذي يمكن أن يفصل تقريبًا محتوى كل جزء رئيسي من ملف العلامات المكشوط.</p>
+<h3 id="Process-the-Scraped-Content" class="common-anchor-header">معالجة المحتوى المكشوط<button data-href="#Process-the-Scraped-Content" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لجعل المحتوى الذي تم كشطه قابلاً للإدارة لإدراجه في ملف Milvus، نستخدم ببساطة "#" لفصل المحتوى، والذي يمكن أن يفصل تقريبًا محتوى كل جزء رئيسي من ملف العلامات المكشوط.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_markdown_content</span>(<span class="hljs-params">content</span>):
     <span class="hljs-keyword">return</span> [section.strip() <span class="hljs-keyword">for</span> section <span class="hljs-keyword">in</span> content.split(<span class="hljs-string">&quot;# &quot;</span>) <span class="hljs-keyword">if</span> section.strip()]
 
@@ -162,7 +252,22 @@ A complicated task usually involves many steps. An agent needs to know what they
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-collection" class="common-anchor-header">إنشاء المجموعة</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+    </button></h2><h3 id="Create-the-collection" class="common-anchor-header">إنشاء المجموعة<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
@@ -188,7 +293,22 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
+<h3 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
 
@@ -222,7 +342,22 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">استرجاع البيانات لاستعلام</h3><p>لنحدد سؤال استعلام عن الموقع الإلكتروني الذي قمنا بكشطه للتو.</p>
+    </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">استرجاع البيانات لاستعلام<button data-href="#Retrieve-data-for-a-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لنحدد سؤال استعلام عن الموقع الإلكتروني الذي قمنا بكشطه للتو.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What are the main components of autonomous agents?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>ابحث عن السؤال في المجموعة واسترجع أفضل 3 مطابقات دلالية.</p>
@@ -257,7 +392,22 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">استخدم LLM للحصول على استجابة RAG</h3><p>تحويل المستندات المسترجعة إلى تنسيق سلسلة.</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">استخدم LLM للحصول على استجابة RAG<button data-href="#Use-LLM-to-get-a-RAG-response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تحويل المستندات المسترجعة إلى تنسيق سلسلة.</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )

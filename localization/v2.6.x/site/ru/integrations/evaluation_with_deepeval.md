@@ -41,7 +41,7 @@ title: Оценка с помощью DeepEval
         ></path>
       </svg>
     </button></h2><p>Прежде чем запускать этот блокнот, убедитесь, что у вас установлены следующие зависимости:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, то для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
@@ -395,9 +395,9 @@ Evaluating 3 test case(s) in parallel: |██████████|100% (3/3
     </button></h2><p>Чтобы оценить качество генерируемых результатов в больших языковых моделях (LLM), важно сосредоточиться на двух ключевых аспектах:</p>
 <ol>
 <li><p><strong>Релевантность</strong>: Оцените, насколько эффективно подсказка направляет LLM на генерацию полезных и контекстуально подходящих ответов.</p></li>
-<li><p><strong>Верность</strong>: Измерьте точность результатов, чтобы убедиться, что модель выдает информацию, которая является фактологически верной и не содержит галлюцинаций или противоречий. Генерируемый контент должен соответствовать фактической информации, предоставленной в контексте поиска.</p></li>
+<li><p><strong>Верность</strong>: Измерьте точность результатов, чтобы убедиться, что модель выдает информацию, которая соответствует фактам и не содержит галлюцинаций или противоречий. Генерируемый контент должен соответствовать фактической информации, предоставленной в контексте поиска.</p></li>
 </ol>
-<p>Все эти факторы в совокупности обеспечивают актуальность и надежность результатов.</p>
+<p>Эти факторы в совокупности обеспечивают актуальность и надежность результатов.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> deepeval.metrics <span class="hljs-keyword">import</span> AnswerRelevancyMetric, FaithfulnessMetric
 <span class="hljs-keyword">from</span> deepeval.test_case <span class="hljs-keyword">import</span> LLMTestCase
 <span class="hljs-keyword">from</span> deepeval <span class="hljs-keyword">import</span> evaluate

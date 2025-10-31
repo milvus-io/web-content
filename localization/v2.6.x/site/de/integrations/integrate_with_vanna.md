@@ -40,10 +40,10 @@ title: SQL schreiben mit Vanna und Milvus
         ></path>
       </svg>
     </button></h2><p>Vergewissern Sie sich, dass Sie die folgenden Abhängigkeiten installiert haben, bevor Sie dieses Notizbuch ausführen:</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span>
+<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
 <p>Außerdem müssen Sie die <code translate="no">OPENAI_API_KEY</code> in Ihren Umgebungsvariablen festlegen. Sie können den API-Schlüssel von <a href="https://platform.openai.com/docs/guides/production-best-practices/api-keys">OpenAI</a> erhalten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -325,7 +325,7 @@ LLM Response: SELECT Phone FROM Customer WHERE Name = 'John Doe'
   </tbody>
 </table>
 </div>
-<p>Hier ist eine komplexere Frage. Die Informationen über den Namen des Fertigungsunternehmens befinden sich in den Dokumentdaten, bei denen es sich um Hintergrundinformationen handelt. Die generierte SQL-Abfrage ruft die Kundeninformationen auf der Grundlage des spezifischen Namens des Fertigungsunternehmens ab.</p>
+<p>Hier ist eine komplexere Frage. Die Informationen über den Namen der Herstellerfirma befinden sich in den Dokumentdaten, bei denen es sich um Hintergrundinformationen handelt. Die generierte SQL-Abfrage ruft die Kundeninformationen auf der Grundlage des spezifischen Namens des Fertigungsunternehmens ab.</p>
 <pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
 vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>

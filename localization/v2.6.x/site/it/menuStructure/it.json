@@ -383,7 +383,7 @@
         "order": 2,
         "children": [
           {
-            "label": "Schema Explained",
+            "label": "Schema spiegato",
             "id": "schema.md",
             "order": 0,
             "children": []
@@ -600,7 +600,7 @@
                     "children": []
                   },
                   {
-                    "label": "Fermarsi",
+                    "label": "Stop",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -1233,7 +1233,7 @@
             "children": []
           },
           {
-            "label": "Compattazione del clustering",
+            "label": "Compattazione dei cluster",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1757,7 +1757,7 @@
             "children": []
           },
           {
-            "label": "Connect to Kafka with SASL/SSL",
+            "label": "Connettersi a Kafka con SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2176,6 +2176,12 @@
                 "id": "langchain_milvus_async.md",
                 "order": 5,
                 "children": []
+              },
+              {
+                "label": "Agente RAG",
+                "id": "agentic_rag_with_milvus_and_langgraph.md",
+                "order": 6,
+                "children": []
               }
             ]
           },
@@ -2254,7 +2260,7 @@
             "children": []
           },
           {
-            "label": "Dify",
+            "label": "Dificare",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []

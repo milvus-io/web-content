@@ -28,7 +28,7 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/integrate_with_phidata.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://docs.agno.com/introduction">Agno</a>(früher bekannt als Phidata) ist eine leichtgewichtige Bibliothek zur Erstellung multimodaler Agenten. Sie ermöglicht es Ihnen, multimodale Agenten zu erstellen, die Text, Bilder, Audio und Video verstehen und verschiedene Werkzeuge und Wissensquellen nutzen können, um komplexe Aufgaben zu bewältigen. Agno unterstützt Multi-Agenten-Orchestrierung und ermöglicht es Teams von Agenten, zusammenzuarbeiten und Probleme gemeinsam zu lösen. Es bietet auch eine schöne Agenten-UI für die Interaktion mit Ihren Agenten.</p>
+<p><a href="https://docs.agno.com/introduction">Agno</a>(früher bekannt als Phidata) ist eine leichtgewichtige Bibliothek zur Erstellung multimodaler Agenten. Sie ermöglicht es Ihnen, multimodale Agenten zu erstellen, die Text, Bilder, Audio und Video verstehen und verschiedene Werkzeuge und Wissensquellen nutzen können, um komplexe Aufgaben zu bewältigen. Agno unterstützt die Orchestrierung mehrerer Agenten und ermöglicht es Teams von Agenten, zusammenzuarbeiten und Probleme gemeinsam zu lösen. Es bietet auch eine schöne Agenten-UI für die Interaktion mit Ihren Agenten.</p>
 <p>Die Vektordatenbank Milvus ermöglicht die effiziente Speicherung und Abfrage von Informationen in Form von Einbettungen. Mit Milvus und Agno können Sie Ihr Wissen einfach in Ihre Agenten-Workflows integrieren. Dieses Dokument ist ein grundlegender Leitfaden für die Verwendung der Milvus-Integration mit Agno.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,10 +46,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Installieren Sie die notwendigen Abhängigkeiten:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
+<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus milvus-lite openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Bildschirmrand und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
 <p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">Api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os

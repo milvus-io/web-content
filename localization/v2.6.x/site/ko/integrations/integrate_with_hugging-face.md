@@ -45,7 +45,7 @@ title: 밀버스와 허깅 페이스를 사용한 질문 답변하기
 <li><code translate="no">datasets</code>, <code translate="no">transformers</code>: Hugging Face 패키지는 데이터를 관리하고 모델을 활용합니다.</li>
 <li><code translate="no">torch</code>강력한 라이브러리는 효율적인 텐서 연산과 딥 러닝 도구를 제공합니다.</li>
 </ul>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다. (화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택하세요.)</p>

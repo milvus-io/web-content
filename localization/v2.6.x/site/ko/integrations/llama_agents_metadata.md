@@ -2,7 +2,7 @@
 id: llama_agents_metadata.md
 summary: >-
   이 노트북에서는 다양한 아이디어를 살펴봅니다: Milvus에 데이터 저장하기, 데이터 쿼리를 위해 Mistral 모델과 함께 라마 인덱스
-  사용하기, 자동화된 데이터 검색 및 읽기 에이전트 만들기, 사용자 쿼리에 기반한 메타데이터 필터링용 에이전트 개발하기 등입니다.
+  사용하기, 자동화된 데이터 검색 및 읽기 에이전트 만들기, 사용자 쿼리를 기반으로 메타데이터 필터링을 위한 에이전트 개발하기 등입니다.
 title: '미스트랄 AI, 밀버스, 라마 에이전트가 포함된 멀티 에이전트 시스템'
 ---
 <h1 id="Multi-agent-Systems-with-Mistral-AI-Milvus-and-Llama-agents" class="common-anchor-header">미스트랄 AI, 밀버스, 라마 에이전트가 포함된 멀티 에이전트 시스템<button data-href="#Multi-agent-Systems-with-Mistral-AI-Milvus-and-Llama-agents" class="anchor-icon" translate="no">
@@ -40,8 +40,8 @@ title: '미스트랄 AI, 밀버스, 라마 에이전트가 포함된 멀티 에�
 <li><p>1️⃣ Milvus에 데이터 저장: 고속 유사도 검색 및 AI 애플리케이션을 위해 설계된 효율적인 벡터 데이터베이스인 Milvus에 데이터를 저장하는 방법을 알아보세요.</p></li>
 <li><p>2️⃣ 데이터 쿼리를 위해 미스트랄 모델과 함께 라마 인덱스 사용: 라마 인덱스를 미스트랄 모델과 함께 사용해 Milvus에 저장된 데이터를 쿼리하는 방법을 알아보세요.</p></li>
 <li><p>3️⃣ 자동화된 데이터 검색 및 읽기 에이전트 만들기: 사용자 쿼리를 기반으로 데이터를 자동으로 검색하고 읽을 수 있는 에이전트를 구축하세요. 이러한 자동화된 에이전트는 빠르고 정확한 응답을 제공하여 수동 검색 작업을 줄여 사용자 경험을 향상시킵니다.</p></li>
-<li><p>4️⃣ 사용자 쿼리에 기반한 메타데이터 필터링 에이전트 개발: 사용자 쿼리에서 메타데이터 필터를 자동으로 생성하여 검색 결과를 구체화하고 상황에 맞게 조정하여 복잡한 쿼리에서도 혼동을 방지하고 검색된 정보의 정확성을 높일 수 있는 에이전트를 구현하세요.</p></li>
-<li><p>🔍 요약 이 노트북을 끝마칠 때쯤이면 강력하고 효율적인 데이터 검색 시스템을 구축하기 위해 Milvus, llama 에이전트가 포함된 llama-index, Mistral 모델을 사용하는 방법을 포괄적으로 이해하게 될 것입니다.</p></li>
+<li><p>4️⃣ 사용자 쿼리에 기반한 메타데이터 필터링 에이전트 개발: 사용자 쿼리에서 메타데이터 필터를 자동으로 생성하여 검색 결과를 구체화하고 상황에 맞게 조정하여 복잡한 쿼리에서도 혼동을 피하고 검색된 정보의 정확성을 높일 수 있는 에이전트를 구현하세요.</p></li>
+<li><p>🔍 요약 이 노트북을 다 읽고 나면, 강력하고 효율적인 데이터 검색 시스템을 구축하기 위해 Milvus, llama-index와 llama-agent, Mistral 모델을 사용하는 방법을 포괄적으로 이해할 수 있습니다.</p></li>
 </ul>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -106,7 +106,7 @@ title: '미스트랄 AI, 밀버스, 라마 에이전트가 포함된 멀티 에�
 <li>데이터 커넥터는 기본 소스 및 형식에서 기존 데이터를 수집합니다.</li>
 <li>데이터 인덱스는 LLM이 사용하기 쉽고 성능이 우수한 중간 표현으로 데이터를 구조화합니다.</li>
 <li>엔진은 데이터에 대한 자연어 액세스를 제공합니다.</li>
-<li>에이전트는 간단한 헬퍼 기능부터 API 통합 등 다양한 도구로 강화된 LLM 기반의 지식 근로자입니다.</li>
+<li>에이전트는 간단한 헬퍼 기능부터 API 통합 등 다양한 도구로 강화된 LLM 기반 지식 근로자입니다.</li>
 </ul>
 <p>
   
@@ -143,7 +143,7 @@ title: '미스트랄 AI, 밀버스, 라마 에이전트가 포함된 멀티 에�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus openai python-dotenv</span>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus milvus-lite openai python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus llama-index-readers-file llama-index-llms-ollama llama-index-llms-mistralai llama-index-embeddings-mistralai</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -456,7 +456,7 @@ query_engine_tools = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>미스트랄 네모와 라지는 네이티브 함수 호출을 지원합니다. llm의 <code translate="no">predict_and_call</code> 함수를 통해 라마 인덱스 도구와 원활하게 통합할 수 있습니다. 이를 통해 사용자는 어떤 도구든 첨부하고 어떤 도구를 호출할지(있는 경우) LLM이 결정하도록 할 수 있습니다.</p>
+    </button></h2><p>미스트랄 네모와 라지는 기본 함수 호출을 지원합니다. llm의 <code translate="no">predict_and_call</code> 함수를 통해 LlamaIndex 도구와 원활하게 통합됩니다. 이를 통해 사용자는 어떤 도구든 첨부할 수 있으며, 어떤 도구를 호출할지(있는 경우) LLM이 결정하도록 할 수 있습니다.</p>
 <p><a href="https://docs.llamaindex.ai/en/latest/module_guides/deploying/agents/">에이전트에</a> 대한 자세한 내용은 llama-index 웹사이트에서 확인할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up the LLM we will use for Function Calling</span>
 
@@ -558,7 +558,22 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
         ></path>
       </svg>
     </button></h2><p>다음은 에이전트를 사용하여 사용자의 질문에서 메타데이터 필터를 추출하여 필터링된 쿼리 엔진을 만드는 방법을 보여주는 코드 예제입니다:</p>
-<h3 id="Explanation" class="common-anchor-header">설명</h3><ul>
+<h3 id="Explanation" class="common-anchor-header">설명<button data-href="#Explanation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>프롬프트 템플릿</strong>: PromptTemplate 클래스는 사용자 질문에서 메타데이터 필터를 추출하기 위한 템플릿을 정의하는 데 사용됩니다. 이 템플릿은 언어 모델에 회사 이름, 연도 및 기타 관련 속성을 고려하도록 지시합니다.</p></li>
 <li><p><strong>LLM</strong>: 미스트랄 네모는 사용자의 질문을 기반으로 메타데이터 필터를 생성하는 데 사용됩니다. 모델에 질문과 템플릿을 입력하면 관련 필터를 추출할 수 있는 메시지가 표시됩니다.</p></li>
 <li><p><strong>메타데이터 필터</strong>: LLM의 응답을 파싱하여 <code translate="no">MetadataFilters</code> 개체를 만듭니다. 특정 필터가 언급되지 않으면 빈 <code translate="no">MetadataFilters</code> 개체가 반환됩니다.</p></li>
@@ -645,15 +660,60 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
         ></path>
       </svg>
     </button></h2><p>Mistral Large는 매우 뛰어난 추론, 지식, 코딩 기능을 갖춘 Mistral의 플래그십 모델입니다. 대규모 추론 기능이 필요하거나 고도로 전문화된 복잡한 작업에 이상적입니다. 고급 함수 호출 기능도 갖추고 있어 여러 에이전트를 조율하는 데 꼭 필요한 기능입니다.</p>
-<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">더 스마트한 모델이 필요한 이유는 무엇인가요?</h3><p>아래 질문에 대한 답은 일관되고 정확한 응답을 제공하기 위해 여러 서비스와 에이전트의 오케스트레이션이 필요하기 때문에 특히 어렵습니다. 여기에는 여러 회사의 재무 데이터와 같은 다양한 소스에서 정보를 검색하고 처리하기 위해 다양한 도구와 에이전트를 조정하는 작업이 포함됩니다.</p>
-<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">무엇이 그렇게 어려울까요?</h3><ul>
+<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">더 스마트한 모델이 필요한 이유는 무엇인가요?<button data-href="#Why-do-we-need-a-smarter-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>아래 질문에 대한 답은 일관되고 정확한 응답을 제공하기 위해 여러 서비스와 에이전트의 오케스트레이션이 필요하기 때문에 특히 어렵습니다. 여기에는 여러 회사의 재무 데이터와 같은 다양한 소스에서 정보를 검색하고 처리하기 위해 다양한 도구와 에이전트를 조정하는 작업이 포함됩니다.</p>
+<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">무엇이 그렇게 어려울까요?<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>바로 복잡성입니다: 이 문제에는 각각 고유한 기능과 데이터 소스를 가진 여러 에이전트와 서비스가 관련되어 있습니다. 이러한 에이전트가 원활하게 함께 작동하도록 조정하는 것은 복잡한 작업입니다.</li>
 </ul>
 <ul>
 <li><p>데이터 통합: 다양한 소스의 데이터를 통합해야 하는데, 데이터 형식, 구조 및 메타데이터의 다양성으로 인해 어려울 수 있습니다.</p></li>
 <li><p>문맥 이해: 이 문제는 서로 다른 정보 간의 맥락과 관계를 이해해야 할 수 있으며, 이는 인지적으로 까다로운 작업입니다.</p></li>
 </ul>
-<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">이 경우에 미스트랄 라지가 도움이 되는 이유는 무엇인가요?</h3><p>미스트랄 라지는 고급 추론 및 함수 호출 기능으로 인해 이 작업에 매우 적합합니다. 이 기능이 어떻게 도움이 되는지는 다음과 같습니다:</p>
+<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">이 경우에 미스트랄 라지가 도움이 되는 이유는 무엇인가요?<button data-href="#Why-would-Mistral-Large-help-in-this-case" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>미스트랄 라지는 고급 추론 및 함수 호출 기능으로 인해 이 작업에 매우 적합합니다. 이 기능이 어떻게 도움이 되는지는 다음과 같습니다:</p>
 <ul>
 <li><p>고급 추론: Mistral Large는 복잡한 추론 작업을 처리할 수 있으므로 여러 에이전트와 서비스를 오케스트레이션하는 데 이상적입니다. 서로 다른 정보 간의 관계를 이해하고 정보에 입각한 결정을 내릴 수 있습니다.</p></li>
 <li><p>함수 호출 기능: 미스트랄 라지에는 여러 에이전트의 작업을 조율하는 데 필수적인 고급 함수 호출 기능이 있습니다. 이를 통해 다양한 서비스를 원활하게 통합하고 오케스트레이션할 수 있습니다.</p></li>
@@ -779,4 +839,4 @@ INFO:llama_agents.message_queues.simple - Successfully published message 'human'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 노트북에서는 라마 에이전트를 사용하여 적절한 도구를 호출하여 다양한 작업을 수행하는 방법을 살펴보았습니다. 미스트랄 라지와 미스트랄 네모를 함께 사용함으로써 서로 다른 LLM의 강점을 활용하여 지능적이고 리소스 효율적인 시스템을 효과적으로 오케스트레이션하는 방법을 보여드렸습니다. 에이전트가 사용자가 요청한 데이터가 포함된 컬렉션을 선택할 수 있음을 확인했습니다.</p>
+    </button></h2><p>이 노트북에서는 라마 에이전트를 사용하여 적절한 도구를 호출하여 다양한 작업을 수행하는 방법을 살펴보았습니다. 미스트랄 대형과 미스트랄 네모를 함께 사용함으로써 서로 다른 LLM의 강점을 활용하여 지능적이고 리소스 효율적인 시스템을 효과적으로 오케스트레이션하는 방법을 보여드렸습니다. 에이전트가 사용자가 요청한 데이터가 포함된 컬렉션을 선택할 수 있음을 확인했습니다.</p>

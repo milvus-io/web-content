@@ -41,7 +41,7 @@ title: Evaluación con Arize Pheonix
         ></path>
       </svg>
     </button></h2><p>Antes de ejecutar este cuaderno, asegúrate de tener instaladas las siguientes dependencias:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si estás utilizando Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla, y selecciona "Reiniciar sesión" en el menú desplegable).</p>
@@ -298,7 +298,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     <tr>
       <th>1</th>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
-      <td>[CMake &amp; Conan\nLa biblioteca de algoritmos de Mil...</td>
+      <td>[CMake &amp; Conan\n\nLa biblioteca de algoritmos de Mil...</td>
       <td>El lenguaje de programación utilizado para escribir Knowher...</td>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
     </tr>
@@ -338,7 +338,22 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <li><strong>Explicación de la GC</strong>: Detalla por qué una respuesta es correcta o incorrecta.</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Descripción general del seguimiento de Phoenix</h3><p>Phoenix proporciona <strong>rastreo compatible con OTEL</strong> para aplicaciones LLM, con integraciones para frameworks como <strong>Langchain</strong>, <strong>LlamaIndex</strong>, y SDKs como <strong>OpenAI</strong> y <strong>Mistral</strong>. El rastreo captura todo el flujo de peticiones, ofreciendo información sobre:</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Descripción general del seguimiento de Phoenix<button data-href="#Phoenix-Tracing-Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Phoenix proporciona <strong>rastreo compatible con OTEL</strong> para aplicaciones LLM, con integraciones para frameworks como <strong>Langchain</strong>, <strong>LlamaIndex</strong>, y SDKs como <strong>OpenAI</strong> y <strong>Mistral</strong>. El rastreo captura todo el flujo de peticiones, ofreciendo información sobre:</p>
 <ul>
 <li><strong>Latencia de la aplicación</strong>: Identifica y optimiza las invocaciones LLM lentas y el rendimiento de los componentes.</li>
 <li><strong>Uso de tokens</strong>: Desglosa el consumo de tokens para optimizar costes.</li>

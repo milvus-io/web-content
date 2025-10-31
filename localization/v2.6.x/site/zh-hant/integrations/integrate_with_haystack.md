@@ -25,7 +25,7 @@ title: 使用 Milvus 和 Haystack 的檢索-擴充世代 (RAG)
         ></path>
       </svg>
     </button></h1><p>本指南展示了如何使用 Haystack 和 Milvus 建立一個檢索-增強生成 (RAG) 系統。</p>
-<p>RAG 系統結合了檢索系統與生成模型，可根據給定的提示產生新的文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
+<p>RAG 系統結合了檢索系統與生成模型，可根據給定的提示生成新的文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
 <p><a href="https://haystack.deepset.ai/">Haystack</a>是 deepset 開放源碼的 Python 框架，用於使用大型語言模型 (LLM) 建立自訂應用程式。<a href="https://milvus.io/">Milvus</a>是世界上最先進的開放原始碼向量資料庫，用於嵌入相似性搜尋和人工智能應用程式。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ title: 使用 Milvus 和 Haystack 的檢索-擴充世代 (RAG)
         ></path>
       </svg>
     </button></h2><p>執行本筆記本之前，請確定您已安裝下列相依性：</p>
-<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
+<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-lite milvus-haystack markdown-it-py mdit_plain
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -68,7 +68,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我們使用一個有關<a href="https://www.gutenberg.org/cache/epub/7785/pg7785.txt">Leonardo Da Vinci</a>的線上內容，作為我們 RAG 管道的私人知識儲存庫，對於簡單的 RAG 管道而言，這是一個很好的資料來源。</p>
+    </button></h2><p>我們使用一個關於<a href="https://www.gutenberg.org/cache/epub/7785/pg7785.txt">達芬奇的</a>線上內容，作為我們 RAG 管道的私人知識儲存庫，對於簡單的 RAG 管道而言，這是一個很好的資料來源。</p>
 <p>下載並儲存為本機文字檔。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> urllib.request
@@ -118,7 +118,7 @@ document_store = MilvusDocumentStore(
 <ul>
 <li>將<code translate="no">uri</code> 設定為本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
 <li>如果您有大規模的資料，您可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器的 uri，例如<code translate="no">http://localhost:19530</code> ，作為您的<code translate="no">uri</code> 。</li>
-<li>如果您要使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，對應 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>。</li>
+<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>，Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務，請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，這兩個網址對應 Zilliz Cloud 的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>。</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">indexing_pipeline = Pipeline()

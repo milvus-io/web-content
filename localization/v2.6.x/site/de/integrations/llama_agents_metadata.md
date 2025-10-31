@@ -87,7 +87,7 @@ title: 'Multiagentensysteme mit Mistral AI, Milvus und Llama-Agenten'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">llama-agents</code> macht es möglich, Agenten als Microservices zu betreiben. Das macht es möglich, Dienste nach oben und unten zu skalieren.</p>
+    </button></h2><p><code translate="no">llama-agents</code> macht es möglich, Agenten als Microservices zu betreiben. Das ermöglicht die Skalierung von Diensten nach oben und unten.</p>
 <h2 id="llama-index" class="common-anchor-header">lama-index<button data-href="#llama-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,7 +145,7 @@ title: 'Multiagentensysteme mit Mistral AI, Milvus und Llama-Agenten'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus openai python-dotenv</span>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus milvus-lite openai python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus llama-index-readers-file llama-index-llms-ollama llama-index-llms-mistralai llama-index-embeddings-mistralai</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -560,7 +560,22 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
         ></path>
       </svg>
     </button></h2><p>Das folgende Code-Beispiel zeigt, wie eine gefilterte Abfrage-Engine mithilfe eines Agenten erstellt wird, der Metadatenfilter aus der Frage des Benutzers extrahiert:</p>
-<h3 id="Explanation" class="common-anchor-header">Erläuterung</h3><ul>
+<h3 id="Explanation" class="common-anchor-header">Erläuterung<button data-href="#Explanation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Prompt-Vorlage</strong>: Die Klasse PromptTemplate wird verwendet, um eine Vorlage für die Extraktion von Metadatenfiltern aus der Frage des Benutzers zu definieren. Die Vorlage weist das Sprachmodell an, Firmennamen, Jahreszahlen und andere relevante Attribute zu berücksichtigen.</p></li>
 <li><p><strong>LLM</strong>: Mistral Nemo wird verwendet, um die Metadatenfilter basierend auf der Frage des Benutzers zu generieren. Das Modell wird mit der Frage und der Vorlage aufgefordert, die relevanten Filter zu extrahieren.</p></li>
 <li><p><strong>Metadaten-Filter</strong>: Die Antwort des LLM wird geparst, um ein <code translate="no">MetadataFilters</code> Objekt zu erstellen. Wenn keine spezifischen Filter erwähnt werden, wird ein leeres <code translate="no">MetadataFilters</code> Objekt zurückgegeben.</p></li>
@@ -647,15 +662,60 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
         ></path>
       </svg>
     </button></h2><p>Mistral Large ist das Flaggschiff-Modell von Mistral mit sehr guten Argumentations-, Wissens- und Kodierungsfähigkeiten. Es ist ideal für komplexe Aufgaben, die umfangreiche Fähigkeiten zum Reasoning erfordern oder hoch spezialisiert sind. Es verfügt über fortgeschrittene Funktionsaufrufe, was genau das ist, was wir brauchen, um unsere verschiedenen Agenten zu orchestrieren.</p>
-<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">Warum brauchen wir ein intelligenteres Modell?</h3><p>Die Frage, die wir im Folgenden beantworten wollen, ist besonders anspruchsvoll, weil sie die Orchestrierung mehrerer Dienste und Agenten erfordert, um eine kohärente und genaue Antwort zu geben. Dazu müssen verschiedene Tools und Agenten koordiniert werden, um Informationen aus unterschiedlichen Quellen abzurufen und zu verarbeiten, z. B. Finanzdaten von verschiedenen Unternehmen.</p>
-<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">Was ist daran so schwierig?</h3><ul>
+<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">Warum brauchen wir ein intelligenteres Modell?<button data-href="#Why-do-we-need-a-smarter-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Frage, die wir im Folgenden beantworten wollen, ist besonders anspruchsvoll, weil sie die Orchestrierung mehrerer Dienste und Agenten erfordert, um eine kohärente und genaue Antwort zu geben. Dazu müssen verschiedene Tools und Agenten koordiniert werden, um Informationen aus unterschiedlichen Quellen abzurufen und zu verarbeiten, z. B. Finanzdaten von verschiedenen Unternehmen.</p>
+<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">Was ist daran so schwierig?<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Die Komplexität: Die Frage betrifft mehrere Agenten und Dienste, die jeweils über eigene Funktionen und Datenquellen verfügen. Diese Agenten so zu koordinieren, dass sie nahtlos zusammenarbeiten, ist eine komplexe Aufgabe.</li>
 </ul>
 <ul>
 <li><p>Datenintegration: Die Frage erfordert die Integration von Daten aus verschiedenen Quellen, was aufgrund der unterschiedlichen Datenformate, -strukturen und -metadaten eine Herausforderung darstellen kann.</p></li>
 <li><p>Verständnis des Kontextes: Die Fragestellung kann ein Verständnis des Kontextes und der Beziehungen zwischen verschiedenen Informationen erfordern, was eine kognitiv anspruchsvolle Aufgabe ist.</p></li>
 </ul>
-<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">Warum sollte Mistral Large in diesem Fall helfen?</h3><p>Mistral Large ist für diese Aufgabe gut geeignet, da es über fortgeschrittene Argumentations- und Funktionsaufrufe verfügt. Hier ist, wie es hilft:</p>
+<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">Warum sollte Mistral Large in diesem Fall helfen?<button data-href="#Why-would-Mistral-Large-help-in-this-case" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mistral Large ist für diese Aufgabe gut geeignet, da es über fortgeschrittene Argumentations- und Funktionsaufrufe verfügt. Hier ist, wie es hilft:</p>
 <ul>
 <li><p>Fortgeschrittenes Reasoning: Mistral Large kann komplexe Schlussfolgerungen ziehen und ist daher ideal für die Orchestrierung von mehreren Agenten und Diensten. Er kann die Beziehungen zwischen verschiedenen Informationen verstehen und fundierte Entscheidungen treffen.</p></li>
 <li><p>Funktionsaufruf-Fähigkeiten: Mistral Large verfügt über fortschrittliche Funktionsaufrufe, die für die Koordinierung der Aktionen verschiedener Agenten unerlässlich sind. Dies ermöglicht eine nahtlose Integration und Orchestrierung von verschiedenen Diensten.</p></li>

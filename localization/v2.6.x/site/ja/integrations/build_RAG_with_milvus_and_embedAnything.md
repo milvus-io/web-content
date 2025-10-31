@@ -47,12 +47,42 @@ title: MilvusとEmbedAnythingでRAGを構築する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus openai embed_anything</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus milvus-lite openai embed_anything</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
-<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">リポジトリのクローンとアダプタのロード</h3><p>次に、<a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a>リポジトリをクローンし、<code translate="no">examples/adapters</code> ディレクトリを Python のパスに追加します。このディレクトリにはEmbedAnythingがMilvusと通信してベクトルを挿入するためのカスタムMilvusアダプタ実装が格納されています。</p>
+<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">リポジトリのクローンとアダプタのロード<button data-href="#Clone-the-Repository-and-Load-Adapter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次に、<a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a>リポジトリをクローンし、<code translate="no">examples/adapters</code> ディレクトリを Python のパスに追加します。このディレクトリにはEmbedAnythingがMilvusと通信してベクトルを挿入するためのカスタムMilvusアダプタ実装が格納されています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> sys
 
 <span class="hljs-comment"># Clone the EmbedAnything repository if not already cloned</span>
@@ -87,10 +117,25 @@ openai_client = OpenAI()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Milvusの初期化</h3><p>ファイルを埋め込む前に、Milvusとやりとりする2つのコンポーネントを準備する必要がある：</p>
+    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Milvusの初期化<button data-href="#Initialize-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ファイルを埋め込む前に、Milvusとやりとりする2つのコンポーネントを準備する必要がある：</p>
 <ol>
 <li><code translate="no">MilvusVectorAdapter</code> - これはEmbedAnything用のMilvusアダプタで、<strong>ベクトルインジェスト</strong>（エンベッディングの挿入とインデックスの作成<strong>）のみに</strong>使用します。現在のところ、検索操作はサポートして<strong>いません</strong>。</li>
-<li><code translate="no">MilvusClient</code> - これは からの公式クライアントであり、ベクター検索、フィルタリング、コレクション管理など、Milvus の<code translate="no">pymilvus</code><strong>全機能にアクセスすることが</strong>できます。</li>
+<li><code translate="no">MilvusClient</code> - これは<code translate="no">pymilvus</code> からの公式クライアントであり、ベクター検索、フィルタリング、コレクション管理など、Milvus の<strong>全機能にアクセスすることが</strong>できます。</li>
 </ol>
 <p>混乱を避けるために</p>
 <ul>
@@ -132,7 +177,22 @@ Collection 'embed_anything_milvus_collection' created with index.
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
-<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">埋め込みモデルの初期化とPDFドキュメントの埋め込み</h3><p>埋め込みモデルを初期化します。Sentence-transformersライブラリの<code translate="no">all-MiniLM-L12-v2 model</code> 。これは軽量でありながら、テキスト埋め込みを生成するための強力なモデルです。これは384次元の埋め込みを生成するので、Milvusコレクションの次元が384に設定されているのと一致します。このアラインメントは非常に重要で、Milvusに保存されたベクトル次元とモデルによって生成されたベクトル次元の互換性を保証します。</p>
+<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">埋め込みモデルの初期化とPDFドキュメントの埋め込み<button data-href="#Initialize-Embedding-Model-and-Embed-PDF-Document" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>埋め込みモデルを初期化します。Sentence-transformersライブラリの<code translate="no">all-MiniLM-L12-v2 model</code> 。これは軽量でありながら、テキスト埋め込みを生成するための強力なモデルです。これは384次元の埋め込みを生成するので、Milvusコレクションの次元が384に設定されているのと一致します。このアラインメントは非常に重要で、Milvusに保存されたベクトル次元とモデルによって生成されたベクトル次元の互換性を保証します。</p>
 <p>EmbedAnythingはさらに多くの埋め込みモデルをサポートしています。詳しくは<a href="https://github.com/StarlightSearch/EmbedAnything">公式ドキュメントを</a>参照してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the embedding model</span>
 model = EmbeddingModel.from_pretrained_hf(
@@ -150,7 +210,22 @@ data = embed_anything.embed_file(
 <pre><code translate="no">Converted 12 embeddings for insertion.
 Successfully inserted 12 embeddings.
 </code></pre>
-<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">レスポンスの取得と生成</h3><p>繰り返しますが、現在のところEmbedAnythingの<code translate="no">MilvusVectorAdapter</code> は、ベクトルの取り込みとインデックス作成のみのための軽量な抽象化です。<strong>検索クエリには対応していません</strong>。したがって、RAGパイプラインを構築するための関連文書を検索するためには、Milvusベクターストアにクエリを発行するために、<code translate="no">MilvusClient</code> インスタンス(<code translate="no">milvus_client</code>)を直接使用する必要があります。</p>
+<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">レスポンスの取得と生成<button data-href="#Retrieve-and-Generate-Response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>繰り返しますが、現在のところEmbedAnythingの<code translate="no">MilvusVectorAdapter</code> は、ベクトルの取り込みとインデックス作成のみのための軽量な抽象化です。<strong>検索クエリには対応していません</strong>。したがって、RAGパイプラインを構築するための関連文書を検索するためには、Milvusベクターストアに問い合わせるために、<code translate="no">MilvusClient</code> インスタンス(<code translate="no">milvus_client</code>)を直接使用する必要があります。</p>
 <p>Milvusから関連文書を検索する関数を定義する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">retrieve_documents</span>(<span class="hljs-params">question, top_k=<span class="hljs-number">3</span></span>):
     query_vector = <span class="hljs-built_in">list</span>(

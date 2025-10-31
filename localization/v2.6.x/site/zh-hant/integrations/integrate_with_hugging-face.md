@@ -43,7 +43,7 @@ title: 使用 Milvus 和擁抱臉回答問題
 <li><code translate="no">datasets</code>,<code translate="no">transformers</code>: Hugging Face 套件可管理資料並運用模型。</li>
 <li><code translate="no">torch</code>：一個功能強大的函式庫提供高效的張量計算和深度學習工具。</li>
 </ul>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時間</strong>。(按一下螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>

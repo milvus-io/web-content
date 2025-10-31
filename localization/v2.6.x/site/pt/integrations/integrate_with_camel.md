@@ -49,7 +49,7 @@ title: Geração Aumentada por Recuperação (RAG) com Milvus e Camel
         ></path>
       </svg>
     </button></h2><p>Vamos primeiro carregar o documento CAMEL de https://arxiv.org/pdf/2303.17760.pdf. Estes serão os nossos dados de exemplo locais.</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -165,11 +165,11 @@ vector_retriever = VectorRetriever(
     </button></h2><p>Nesta secção, vamos executar o <code translate="no">AutoRetriever</code> com as definições predefinidas. Utiliza <code translate="no">OpenAIEmbedding</code> como modelo de incorporação predefinido e <code translate="no">Milvus</code> como armazenamento vetorial predefinido.</p>
 <p>O que você precisa fazer é:</p>
 <ul>
-<li>Definir os caminhos de entrada do conteúdo, que podem ser caminhos locais ou URLs remotos</li>
+<li>Definir caminhos de entrada de conteúdo, que podem ser caminhos locais ou URLs remotos</li>
 <li>Definir o URL remoto e a chave da API para o Milvus</li>
 <li>Fornecer uma consulta</li>
 </ul>
-<p>O pipeline Auto RAG criará colecções para os caminhos de entrada de conteúdos indicados. O nome da coleção será definido automaticamente com base no nome do caminho de entrada de conteúdos e, se a coleção existir, será feita a recuperação diretamente.</p>
+<p>O pipeline Auto RAG criará colecções para os caminhos de entrada de conteúdos fornecidos. O nome da coleção será definido automaticamente com base no nome do caminho de entrada de conteúdos e, se a coleção existir, será feita a recuperação diretamente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 

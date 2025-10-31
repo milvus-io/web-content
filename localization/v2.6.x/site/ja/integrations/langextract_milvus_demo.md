@@ -25,7 +25,7 @@ title: LangExtract + Milvusインテグレーション
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>このガイドでは、<a href="https://github.com/google/langextract">LangExtractと</a> <a href="https://milvus.io/">Milvusを</a>使用してインテリジェントな文書処理・検索システムを構築する方法を説明します。</p>
-<p>LangExtractは大規模言語モデル（LLM）を使用して、構造化されていないテキスト文書から正確なソースグラウンディングで構造化された情報を抽出するPythonライブラリです。このシステムは、LangExtractの抽出機能とmilvusのベクトルストレージを組み合わせることで、意味的類似検索と正確なメタデータフィルタリングの両方を可能にします。</p>
+<p>LangExtractは大規模言語モデル(LLM)を使用して、構造化されていないテキスト文書から正確なソースグラウンディングで構造化された情報を抽出するPythonライブラリです。このシステムは、LangExtractの抽出機能とmilvusのベクトルストレージを組み合わせることで、意味的類似検索と正確なメタデータフィルタリングの両方を可能にします。</p>
 <p>この統合は、コンテンツ管理、セマンティック検索、ナレッジディスカバリー、抽出されたドキュメント属性に基づく推薦システムの構築において特に有用です。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ title: LangExtract + Milvusインテグレーション
         ></path>
       </svg>
     </button></h2><p>このノートブックを実行する前に、以下の依存関係がインストールされていることを確認してください：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus langextract google-genai requests tqdm pandas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite langextract google-genai requests tqdm pandas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -277,7 +277,7 @@ prompt = textwrap.dedent(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>抽出の品質と一貫性を向上させるために、LangExtractにいくつかの例を提供します。こ れ ら の例は、 予期 さ れ る 形式を実証 し 、 私達の抽出要件をモデルが理解す る のを助け ます。</p>
+    </button></h2><p>抽出の品質と一貫性を向上させるために、LangExtractにいくつかの例を提供します。こ れ ら の例は、 予期 さ れ る 形式を示 し 、 私達の抽出要件をモデルが理解す る のを助け ます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Provide examples to guide the model - n-shot examples for movie descriptions</span>
 <span class="hljs-comment"># Unify attribute keys to ensure consistency in extraction results</span>
 examples = [
@@ -372,7 +372,7 @@ extraction_results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次に、抽出結果を処理して、各文書のベクトル埋め込みを生成する必要があります。また、Milvusで簡単に検索できるように、抽出された属性を別々のフィールドに平坦化します。</p>
+    </button></h2><p>次に、抽出結果を処理して、各文書のベクトル埋め込みを生成する必要があります。また、Milvusで簡単に検索できるように、抽出された属性を個別のフィールドに平坦化します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n3. Processing extraction results and generating vectors...&quot;</span>)
 
 processed_data = []

@@ -41,7 +41,7 @@ title: Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus
 <ul>
 <li>Membangun aplikasi LLM yang menjawab pertanyaan pengguna yang terkait dengan dataset bank rapat.</li>
 <li>Mendefinisikan dan mengukur kualitas aplikasi LLM Anda.</li>
-<li>Meningkatkan kualitas aplikasi Anda menggunakan 2 pendekatan tambahan: DB vektor menggunakan pencarian hybrid dan perangking ulang yang canggih.</li>
+<li>Meningkatkan kualitas aplikasi Anda menggunakan 2 pendekatan tambahan: DB vektor menggunakan pencarian hybrid dan perangkingan ulang yang canggih.</li>
 </ul>
 <h2 id="Tech-Stack" class="common-anchor-header">Tumpukan Teknologi<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +61,7 @@ title: Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Basis Data Vektor</em></h4><p>Untuk aplikasi ini, kita akan menggunakan <a href="https://milvus.io/">Milvus</a> untuk mengelola dan mencari data tak terstruktur berskala besar, seperti teks, gambar, dan video.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>Kerangka Kerja LLM</em></h4><p>LlamaIndex adalah kerangka kerja orkestrasi data sumber terbuka yang menyederhanakan pembuatan aplikasi model bahasa besar (LLM) dengan memfasilitasi integrasi data pribadi dengan LLM, memungkinkan aplikasi AI generatif yang ditambah konteks melalui pipeline Retrieval-Augmented Generation (RAG). Kami akan menggunakan LlamaIndex untuk tutorial ini karena menawarkan fleksibilitas yang baik dan abstraksi API tingkat rendah yang lebih baik.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Evaluasi Kualitas Keluaran LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> menawarkan model Hakim eksklusif untuk masalah Halusinasi, Kualitas Konteks, Kepatuhan Instruksi LLM, Kualitas Pengambilan, dan tugas-tugas keandalan LLM lainnya. Kami akan menggunakan AIMon untuk menilai kualitas aplikasi LLM.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">Prasyarat<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,17 +79,37 @@ title: Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>Daftar <a href="https://docs.aimon.ai/quickstart">akun AIMon di sini</a>.</p>
-<p>Tambahkan rahasia ini ke Rahasia Colab (simbol "kunci" di panel kiri) Jika Anda berada di lingkungan colab non-google lainnya, harap ganti sendiri kode terkait google colab</p>
+<li>Daftar <a href="https://docs.aimon.ai/quickstart">akun AIMon di sini</a>.</li>
+</ol>
+<p>Tambahkan rahasia ini ke Rahasia Colab (simbol "kunci" di panel kiri)</p>
+<blockquote>
+<p>Jika Anda berada di lingkungan colab non-google lainnya, harap ganti sendiri kode terkait google colab</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p>Daftar <a href="https://platform.openai.com/docs/overview">akun OpenAI di sini</a> dan tambahkan kunci berikut ini di rahasia Colab:</p>
+</ul>
+<ol start="2">
+<li>Daftar <a href="https://platform.openai.com/docs/overview">akun OpenAI di sini</a> dan tambahkan kunci berikut ini di rahasia Colab:</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">Kunci API yang diperlukan</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">Kunci API yang diperlukan<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -244,7 +264,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">Analisis</h3><p>Kami memiliki 258 transkrip dengan total sekitar 1 juta token di semua transkrip ini. Kami memiliki rata-rata 3864 jumlah token per transkrip.</p>
+<h3 id="Analysis" class="common-anchor-header">Analisis<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kami memiliki 258 transkrip dengan total sekitar 1 juta token di semua transkrip ini. Kami memiliki rata-rata 3864 jumlah token per transkrip.</p>
 <table>
 <thead>
 <tr><th>Metrik</th><th>Nilai</th></tr>
@@ -255,7 +290,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>Rata-rata # Jumlah token per transkrip</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">Kueri</h3><p>Di bawah ini adalah 12 kueri yang akan kami jalankan pada transkrip di atas</p>
+<h3 id="Queries" class="common-anchor-header">Kueri<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di bawah ini adalah 12 kueri yang akan kami jalankan pada transkrip di atas</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -936,6 +986,18 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -974,5 +1036,150 @@ df_scores
     </tr>
   </tbody>
 </table>
-<p>Tabel di atas merangkum hasil kami. Angka aktual Anda akan bervariasi tergantung pada berbagai faktor seperti variasi kualitas respons LLM, kinerja pencarian tetangga terdekat di VectorDB, dll.</p>
+</div>
+    <div class="colab-df-buttons">
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-c43e3124-8331-40e6-97e4-b2d026a0ed70')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+<path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+</svg>
+</button></p>
+  
+   <style>.colab-df-container { display: flex; gap: 12px; }<pre><code translate="no">.colab-df-convert {
+  background-color: #E8F0FE;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  fill: #1967D2;
+  height: 32px;
+  padding: 0 0 0 0;
+  width: 32px;
+}
+
+.colab-df-convert:hover {
+  background-color: #E2EBFA;
+  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+  fill: #174EA6;
+}
+
+.colab-df-buttons div {
+  margin-bottom: 4px;
+}
+
+[theme=dark] .colab-df-convert {
+  background-color: #3B4455;
+  fill: #D2E3FC;
+}
+
+[theme=dark] .colab-df-convert:hover {
+  background-color: #434B5C;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+  fill: #FFFFFF;
+}
+</code></pre></style><pre><code translate="no">&lt;script&gt;
+  const buttonEl =
+    document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70 button.colab-df-convert');
+  buttonEl.style.display =
+    google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+  async function convertToInteractive(key) {
+    const element = document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70');
+    const dataTable =
+      await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                [key], {});
+    if (!dataTable) return;
+
+    const docLinkHtml = 'Like what you see? Visit the ' +
+      '&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;'
+      + ' to learn more about interactive tables.';
+    element.innerHTML = '';
+    dataTable['output_type'] = 'display_data';
+    await google.colab.output.renderOutput(dataTable, element);
+    const docLink = document.createElement('div');
+    docLink.innerHTML = docLinkHtml;
+    element.appendChild(docLink);
+  }
+&lt;/script&gt;
+</code></pre>
+  </div>
+<div id="df-3b8c700e-50cd-4b5f-8b23-64725b4af575">
+  <button class="colab-df-quickchart" onclick="quickchart('df-3b8c700e-50cd-4b5f-8b23-64725b4af575')"
+            title="Suggest charts"
+            style="display:none;">
+<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+width="24px">
+<g>
+<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+</g>
+</svg></p>
+  </button>
+<style>
+  .colab-df-quickchart { --bg-color: #E8F0FE; --fill-color: #1967D2; --hover-bg-color: #E2EBFA; --hover-fill-color: #174EA6; --disabled-fill-color: #AAA; --disabled-bg-color: #DDD; }<p>[theme=dark] .colab-df-quickchart { -bg-color: #3B4455; -fill-color: #D2E3FC; -hover-bg-color: #434B5C; -hover-fill-color: #FFFFFF; -disabled-bg-color: #3B4455; -disabled-fill-color:</p><p>#666; }</p><p>.colab-df-quickchart { background-color: var(-bg-color); border: none; border-radius: 50%; cursor: pointer; display: none; fill: var(-fill-color); height: 32px; padding:</p><p> 0; width: 32px; }</p><p>.colab-df-quickchart:hover { background-color: var(-hover-bg-color); box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15); fill: var(-tombol-hover-isi-warna); }</p><p>.colab-df-quickchart-complete:disabled, .colab-df-quickchart-complete:disabled:hover { background-color: var(-disabled-bg-color); fill: var(-disabled-fill-color); box-shadow: none; }</p><p>.colab-df-spinner { border:</p><p> 2px solid var(-isi-warna); border-color: transparent; border-bottom-color: var(-isi-warna); animation: spin 1s steps(1) infinite; }</p><p>@keyframes spin { 0% { border-color: transparent; border-bottom-color: var(-isi-warna); border-left-color: var(-isi-warna); } 20% { border-color: transparent; border-left-color: var(-isi-warna); border-top-color: var(-isi-warna); } 30% { border-color: transparent; border-left-color: var(-isi-warna); border-top-color: var(-isi-warna); warna-batas-kanan: var(-isi-warna); } 40% { warna-batas: transparan; warna-batas-kiri: var(-isi-warna); warna-batas-atas: var(-isi-warna); } 60% { warna-batas: transparan; warna-batas-kanan: var(-isi-warna); } 80% { border-color: transparent; border-right-color: var(-isi-warna); border-bottom-color: var(-isi-warna); } 90% { border-color: transparent; border-bottom-color: var(-isi-warna); } }</p></style> <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-3b8c700e-50cd-4b5f-8b23-64725b4af575 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script></div>
+  <div id="id_94166e57-57c1-4624-bf67-e4b68303403f">
+   <style>
+      .colab-df-generate { background-color: #E8F0FE; border: none; border-radius: 50%; cursor: pointer; display: none; fill: #1967D2; height: 32px; padding: 0 0 0 0; width: 32px; }<pre><code translate="no">  .colab-df-generate:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-generate {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-generate:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+&lt;/style&gt;
+&lt;button class=&quot;colab-df-generate&quot; onclick=&quot;generateWithVariable('df_scores')&quot;
+        title=&quot;Generate code using this dataframe.&quot;
+        style=&quot;display:none;&quot;&gt;
+</code></pre>
+<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+width="24px">
+<path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+</svg>
+</button>
+<script>
+(() =&gt; { const buttonEl = document.querySelector('#id_94166e57-57c1-4624-bf67-e4b68303403f button.colab-df-generate'); buttonEl.style.display = google.colab.kernel.accessAllowed ? 'block' : 'tidak ada';</p>
+<pre><code translate="no">  buttonEl.onclick = () =&gt; {
+    google.colab.notebook.generateWithVariable('df_scores');
+  }
+  })();
+&lt;/script&gt;
+</code></pre>
+  </div>
+<pre><code translate="no">&lt;/div&gt;
+</code></pre>
+  </div>
+<p>Tabel di atas merangkum hasil kami. Angka yang sebenarnya akan bervariasi tergantung pada berbagai faktor seperti variasi kualitas respons LLM, kinerja pencarian tetangga terdekat di VectorDB, dll.</p>
 <p>Kesimpulannya, seperti yang ditunjukkan oleh gambar di bawah ini, kami mengevaluasi skor kualitas, relevansi RAG, dan kemampuan mengikuti instruksi dari aplikasi LLM Anda. Kami menggunakan pemeringkat ulang AIMon untuk meningkatkan kualitas aplikasi secara keseluruhan dan relevansi rata-rata dokumen yang diambil dari RAG Anda.</p>

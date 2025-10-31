@@ -35,7 +35,7 @@ title: الشروع في العمل مع Dynamiq وMilvus
 <li><p><strong>تدفق فهرسة المستندات</strong>: تعرف على كيفية معالجة ملفات الإدخال (مثل ملفات PDF)، وتحويل محتواها إلى تضمينات متجهة، وتخزينها في Milvus. تضمن الاستفادة من قدرات الفهرسة عالية الأداء في Milvus أن تكون بياناتك جاهزة للاسترجاع السريع.</p></li>
 <li><p><strong>تدفق استرجاع المستندات</strong>: اكتشف كيفية الاستعلام عن تضمينات مستندات Milvus ذات الصلة واستخدامها لإنشاء استجابات ثاقبة مدركة للسياق مع وكلاء LLM من Dynamiq، مما يخلق تجربة مستخدم سلسة مدعومة بالذكاء الاصطناعي.</p></li>
 </ul>
-<p>بنهاية هذا البرنامج التعليمي، ستكتسب فهمًا قويًا لكيفية عمل Milvus وDynamiq معًا لبناء أنظمة ذكاء اصطناعي قابلة للتطوير ومدركة للسياق ومصممة خصيصًا لتلبية احتياجاتك.</p>
+<p>بنهاية هذا البرنامج التعليمي، ستكتسب فهمًا قويًا لكيفية عمل Milvus و Dynamiq معًا لبناء أنظمة ذكاء اصطناعي قابلة للتطوير ومدركة للسياق ومصممة خصيصًا لتلبية احتياجاتك.</p>
 <h2 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,12 +51,42 @@ title: الشروع في العمل مع Dynamiq وMilvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">قم بتنزيل المكتبات المطلوبة</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus</span>
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">قم بتنزيل المكتبات المطلوبة<button data-href="#Download-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
-<h3 id="Configure-the-LLM-agent" class="common-anchor-header">تكوين وكيل LLM</h3><p>سنستخدم OpenAI كعامل LLM في هذا المثال. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
+<h3 id="Configure-the-LLM-agent" class="common-anchor-header">تكوين وكيل LLM<button data-href="#Configure-the-LLM-agent" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سنستخدم OpenAI كعامل LLM في هذا المثال. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -78,7 +108,22 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
       </svg>
     </button></h2><p>يوضّح هذا البرنامج التعليمي سير عمل استرجاع - توليد معزز (RAG) لفهرسة المستندات باستخدام Milvus كقاعدة بيانات المتجهات. يأخذ سير العمل ملفات PDF المدخلة، ويعالجها إلى أجزاء أصغر، ويُنشئ تضمينات متجهة باستخدام نموذج تضمين OpenAI، ويخزن التضمينات في مجموعة Milvus لاسترجاعها بكفاءة.</p>
 <p>بحلول نهاية سير العمل هذا، سيكون لديك نظام فهرسة مستندات قابل للتطوير وفعال يدعم مهام RAG المستقبلية مثل البحث الدلالي والإجابة عن الأسئلة.</p>
-<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">استيراد المكتبات المطلوبة وتهيئة سير العمل</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Importing necessary libraries for the workflow</span>
+<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">استيراد المكتبات المطلوبة وتهيئة سير العمل<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Importing necessary libraries for the workflow</span>
 <span class="hljs-keyword">from</span> io <span class="hljs-keyword">import</span> BytesIO
 <span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
 <span class="hljs-keyword">from</span> dynamiq.nodes <span class="hljs-keyword">import</span> InputTransformer
@@ -95,12 +140,42 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <span class="hljs-comment"># Initialize the workflow</span>
 rag_wf = Workflow()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-PDF-Converter-Node" class="common-anchor-header">تعريف عقدة محول PDF</h3><pre><code translate="no" class="language-python">converter = PyPDFConverter(document_creation_mode=<span class="hljs-string">&quot;one-doc-per-page&quot;</span>)
+<h3 id="Define-PDF-Converter-Node" class="common-anchor-header">تعريف عقدة محول PDF<button data-href="#Define-PDF-Converter-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">converter = PyPDFConverter(document_creation_mode=<span class="hljs-string">&quot;one-doc-per-page&quot;</span>)
 converter_added = rag_wf.flow.add_nodes(
     converter
 )  <span class="hljs-comment"># Add node to the DAG (Directed Acyclic Graph)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Document-Splitter-Node" class="common-anchor-header">تعريف عقدة تقسيم المستند</h3><pre><code translate="no" class="language-python">document_splitter = DocumentSplitter(
+<h3 id="Define-Document-Splitter-Node" class="common-anchor-header">تعريف عقدة تقسيم المستند<button data-href="#Define-Document-Splitter-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">document_splitter = DocumentSplitter(
     split_by=<span class="hljs-string">&quot;sentence&quot;</span>,  <span class="hljs-comment"># Splits documents into sentences</span>
     split_length=<span class="hljs-number">10</span>,
     split_overlap=<span class="hljs-number">1</span>,
@@ -114,7 +189,22 @@ converter_added = rag_wf.flow.add_nodes(
 )  <span class="hljs-comment"># Set dependency on the PDF converter</span>
 splitter_added = rag_wf.flow.add_nodes(document_splitter)  <span class="hljs-comment"># Add to the DAG</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Embedding-Node" class="common-anchor-header">تعريف عقدة التضمين</h3><pre><code translate="no" class="language-python">embedder = OpenAIDocumentEmbedder(
+<h3 id="Define-Embedding-Node" class="common-anchor-header">تعريف عقدة التضمين<button data-href="#Define-Embedding-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">embedder = OpenAIDocumentEmbedder(
     connection=OpenAIConnection(api_key=os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>]),
     input_transformer=InputTransformer(
         selector={
@@ -126,7 +216,22 @@ splitter_added = rag_wf.flow.add_nodes(document_splitter)  <span class="hljs-com
 )  <span class="hljs-comment"># Set dependency on the splitter</span>
 document_embedder_added = rag_wf.flow.add_nodes(embedder)  <span class="hljs-comment"># Add to the DAG</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Milvus-Vector-Store-Node" class="common-anchor-header">تعريف عقدة مخزن متجه ميلفوس الناقل</h3><pre><code translate="no" class="language-python">vector_store = (
+<h3 id="Define-Milvus-Vector-Store-Node" class="common-anchor-header">تعريف عقدة مخزن متجه ميلفوس الناقل<button data-href="#Define-Milvus-Vector-Store-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">vector_store = (
     MilvusDocumentWriter(
         connection=MilvusConnection(
             deployment_type=MilvusDeploymentType.FILE, uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
@@ -180,7 +285,22 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 </ul></li>
 </ul>
 </div>
-<h3 id="Define-Input-Data-and-Run-the-Workflow" class="common-anchor-header">تحديد بيانات الإدخال وتشغيل سير العمل</h3><pre><code translate="no" class="language-python">file_paths = [<span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>]
+<h3 id="Define-Input-Data-and-Run-the-Workflow" class="common-anchor-header">تحديد بيانات الإدخال وتشغيل سير العمل<button data-href="#Define-Input-Data-and-Run-the-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">file_paths = [<span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>]
 input_data = {
     <span class="hljs-string">&quot;files&quot;</span>: [BytesIO(<span class="hljs-built_in">open</span>(path, <span class="hljs-string">&quot;rb&quot;</span>).read()) <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> file_paths],
     <span class="hljs-string">&quot;metadata&quot;</span>: [{<span class="hljs-string">&quot;filename&quot;</span>: path} <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> file_paths],
@@ -230,9 +350,24 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في هذا البرنامج التعليمي، ننفذ في هذا البرنامج التعليمي سير عمل استرجاع المستندات المعزز للاسترجاع (RAG). يأخذ سير العمل هذا استعلام المستخدم، ويُنشئ تضمينًا متجهًا له، ويسترجع المستندات الأكثر صلة من قاعدة بيانات Milvus vector، ويستخدم نموذج اللغة الكبيرة (LLM) لإنشاء إجابة مفصلة ومدركة للسياق بناءً على المستندات المسترجعة.</p>
+    </button></h2><p>في هذا البرنامج التعليمي، ننفذ في هذا البرنامج التعليمي سير عمل استرجاع المستندات المعززة بالاسترجاع (RAG). يأخذ سير العمل هذا استعلام المستخدم، ويُنشئ تضمينًا متجهًا له، ويسترجع المستندات الأكثر صلة من قاعدة بيانات Milvus vector، ويستخدم نموذجًا لغويًا كبيرًا (LLM) لإنشاء إجابة مفصلة ومدركة للسياق استنادًا إلى المستندات المسترجعة.</p>
 <p>من خلال اتباع سير العمل هذا، ستنشئ حلاً متكاملاً للبحث الدلالي والإجابة عن الأسئلة، يجمع بين قوة استرجاع المستندات المستند إلى المتجهات وإمكانيات نماذج اللغة الكبيرة (LLM) المتقدمة من OpenAI. يتيح هذا النهج استجابات فعالة وذكية لاستعلامات المستخدم من خلال الاستفادة من المعرفة المخزنة في قاعدة بيانات المستندات.</p>
-<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">استيراد المكتبات المطلوبة وتهيئة سير العمل</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
+<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">استيراد المكتبات المطلوبة وتهيئة سير العمل<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
 <span class="hljs-keyword">from</span> dynamiq.connections <span class="hljs-keyword">import</span> (
     OpenAI <span class="hljs-keyword">as</span> OpenAIConnection,
     Milvus <span class="hljs-keyword">as</span> MilvusConnection,
@@ -246,7 +381,22 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 <span class="hljs-comment"># Initialize the workflow</span>
 retrieval_wf = Workflow()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-OpenAI-Connection-and-Text-Embedder" class="common-anchor-header">تعريف اتصال OpenAI وتضمين النص</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Establish OpenAI connection</span>
+<h3 id="Define-OpenAI-Connection-and-Text-Embedder" class="common-anchor-header">تعريف اتصال OpenAI وتضمين النص<button data-href="#Define-OpenAI-Connection-and-Text-Embedder" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Establish OpenAI connection</span>
 openai_connection = OpenAIConnection(api_key=os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>])
 
 <span class="hljs-comment"># Define the text embedder node</span>
@@ -258,7 +408,22 @@ embedder = OpenAITextEmbedder(
 <span class="hljs-comment"># Add the embedder node to the workflow</span>
 embedder_added = retrieval_wf.flow.add_nodes(embedder)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Milvus-Document-Retriever" class="common-anchor-header">تعريف مسترجع مستندات Milvus</h3><pre><code translate="no" class="language-python">document_retriever = (
+<h3 id="Define-Milvus-Document-Retriever" class="common-anchor-header">تعريف مسترجع مستندات Milvus<button data-href="#Define-Milvus-Document-Retriever" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">document_retriever = (
     MilvusDocumentRetriever(
         connection=MilvusConnection(
             deployment_type=MilvusDeploymentType.FILE, uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
@@ -279,7 +444,22 @@ milvus_retriever_added = retrieval_wf.flow.add_nodes(document_retriever)
 2024-11-19 22:14:19 - DEBUG - Created new connection using: 98d1132773af4298a894ad5925845fd2
 2024-11-19 22:14:19 - INFO - Collection my_milvus_collection already exists. Skipping creation.
 </code></pre>
-<h3 id="Define-the-Prompt-Template" class="common-anchor-header">تعريف قالب الموجه</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the prompt template for the LLM</span>
+<h3 id="Define-the-Prompt-Template" class="common-anchor-header">تعريف قالب الموجه<button data-href="#Define-the-Prompt-Template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the prompt template for the LLM</span>
 prompt_template = <span class="hljs-string">&quot;&quot;&quot;
 Please answer the question based on the provided context.
 
@@ -294,7 +474,22 @@ Context:
 <span class="hljs-comment"># Create the prompt object</span>
 prompt = Prompt(messages=[Message(content=prompt_template, role=<span class="hljs-string">&quot;user&quot;</span>)])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-the-Answer-Generator" class="common-anchor-header">تعريف مولد الإجابة</h3><pre><code translate="no" class="language-python">answer_generator = (
+<h3 id="Define-the-Answer-Generator" class="common-anchor-header">تعريف مولد الإجابة<button data-href="#Define-the-Answer-Generator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">answer_generator = (
     OpenAI(
         connection=openai_connection,
         model=<span class="hljs-string">&quot;gpt-4o&quot;</span>,
@@ -312,7 +507,22 @@ prompt = Prompt(messages=[Message(content=prompt_template, role=<span class="hlj
 <span class="hljs-comment"># Add the answer generator node to the workflow</span>
 answer_generator_added = retrieval_wf.flow.add_nodes(answer_generator)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Run-the-Workflow" class="common-anchor-header">تشغيل سير العمل</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Run the workflow with a sample query</span>
+<h3 id="Run-the-Workflow" class="common-anchor-header">تشغيل سير العمل<button data-href="#Run-the-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Run the workflow with a sample query</span>
 sample_query = <span class="hljs-string">&quot;What is the Advanced Search Algorithms in Milvus?&quot;</span>
 
 result = retrieval_wf.run(input_data={<span class="hljs-string">&quot;query&quot;</span>: sample_query})

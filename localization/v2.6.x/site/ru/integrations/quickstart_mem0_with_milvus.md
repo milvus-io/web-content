@@ -48,12 +48,42 @@ title: Начало работы с Mem0 и Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Загрузите необходимые библиотеки</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus</span>
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Загрузите необходимые библиотеки<button data-href="#Download-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </blockquote>
-<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Настройка Mem0 с помощью Milvus</h3><p>В этом примере мы будем использовать OpenAI в качестве LLM. Вы должны подготовить <a href="https://platform.openai.com/docs/quickstart">api ключ</a> <code translate="no">OPENAI_API_KEY</code> в качестве переменной окружения.</p>
+<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Настройка Mem0 с помощью Milvus<button data-href="#Configure-Mem0-with-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В этом примере мы будем использовать OpenAI в качестве LLM. Вы должны подготовить <a href="https://platform.openai.com/docs/quickstart">api ключ</a> <code translate="no">OPENAI_API_KEY</code> в качестве переменной окружения.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -100,7 +130,22 @@ m = Memory.from_config(config)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">Добавление памяти</h3><p>Функция <code translate="no">add</code> сохраняет неструктурированный текст в Milvus в виде памяти, связывая его с конкретным пользователем и дополнительными метаданными.</p>
+    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">Добавление памяти<button data-href="#Adding-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Функция <code translate="no">add</code> сохраняет неструктурированный текст в Milvus в виде памяти, связывая его с конкретным пользователем и дополнительными метаданными.</p>
 <p>Здесь мы добавляем в Milvus воспоминание Алисы "работаю над улучшением своих навыков игры в теннис" вместе с соответствующими метаданными для контекста.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a memory to user: Working on improving tennis skills</span>
 res = m.add(
@@ -116,7 +161,22 @@ res
    'event': 'ADD'}],
  'relations': []}
 </code></pre>
-<h3 id="Update-a-Memory" class="common-anchor-header">Обновление воспоминания</h3><p>Мы можем использовать возвращаемое значение функции <code translate="no">add</code> для получения идентификатора памяти, что позволит нам обновить эту память новой информацией с помощью <code translate="no">update</code>.</p>
+<h3 id="Update-a-Memory" class="common-anchor-header">Обновление воспоминания<button data-href="#Update-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Мы можем использовать возвращаемое значение функции <code translate="no">add</code> для получения идентификатора памяти, что позволит нам обновить эту память новой информацией с помощью <code translate="no">update</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get memory_id</span>
 memory_id = res[<span class="hljs-string">&quot;results&quot;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>]
 
@@ -125,7 +185,22 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'message': 'Memory updated successfully!'}
 </code></pre>
-<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Получить всю память для пользователя</h3><p>Мы можем использовать функцию <code translate="no">get_all</code> для просмотра всех вставленных воспоминаний или фильтрации по <code translate="no">user_id</code> в Milvus.</p>
+<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Получить всю память для пользователя<button data-href="#Get-All-Memory-For-a-User" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Мы можем использовать функцию <code translate="no">get_all</code> для просмотра всех вставленных воспоминаний или фильтрации по <code translate="no">user_id</code> в Milvus.</p>
 <p>Обратите внимание, что память теперь изменилась с "Работает над улучшением навыков игры в теннис" на "Любит играть в теннис по выходным".</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
@@ -138,7 +213,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': '2024-11-01T19:33:47.619857-07:00',
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="View-Memory-Update-History" class="common-anchor-header">Просмотр истории обновления памяти</h3><p>Мы также можем просмотреть историю обновления воспоминаний, указав интересующий нас memory_id с помощью функции <code translate="no">history</code>.</p>
+<h3 id="View-Memory-Update-History" class="common-anchor-header">Просмотр истории обновления памяти<button data-href="#View-Memory-Update-History" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Мы также можем просмотреть историю обновления воспоминаний, указав интересующий нас memory_id с помощью функции <code translate="no">history</code>.</p>
 <pre><code translate="no" class="language-python">m.history(memory_id=memory_id)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'id': '71ed3cec-5d9a-4fa6-a009-59802450c0b9',
@@ -156,7 +246,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
   'created_at': '2024-11-01T19:33:44.116920-07:00',
   'updated_at': '2024-11-01T19:33:47.619857-07:00'}]
 </code></pre>
-<h3 id="Search-Memory" class="common-anchor-header">Поиск памяти</h3><p>Мы можем использовать функцию <code translate="no">search</code> для поиска наиболее связанного с пользователем воспоминания.</p>
+<h3 id="Search-Memory" class="common-anchor-header">Поиск памяти<button data-href="#Search-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Мы можем использовать функцию <code translate="no">search</code> для поиска наиболее связанного с пользователем воспоминания.</p>
 <p>Для начала добавим еще одну память для Алисы.</p>
 <pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
@@ -202,7 +307,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': None,
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="Delete-Memory" class="common-anchor-header">Удаление памяти</h3><p>Мы также можем <code translate="no">delete</code> память, предоставив соответствующее <code translate="no">memory_id</code>.</p>
+<h3 id="Delete-Memory" class="common-anchor-header">Удаление памяти<button data-href="#Delete-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Мы также можем <code translate="no">delete</code> память, предоставив соответствующее <code translate="no">memory_id</code>.</p>
 <p>Мы удалим память "Любит играть в теннис по выходным", поскольку ее <code translate="no">memory_id</code> уже была получена, и вызовем <code translate="no">get_all</code>, чтобы убедиться, что удаление прошло успешно.</p>
 <pre><code translate="no" class="language-python">m.delete(memory_id=memory_id)
 

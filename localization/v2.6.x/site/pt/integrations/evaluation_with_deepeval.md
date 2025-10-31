@@ -41,7 +41,7 @@ title: Avaliação com DeepEval
         ></path>
       </svg>
     </button></h2><p>Antes de executar este notebook, certifique-se de ter as seguintes dependências instaladas:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -375,7 +375,7 @@ result = evaluate(
 
 Evaluating 3 test case(s) in parallel: |██████████|100% (3/3) [Time Taken: 00:11,  3.91s/test case]
 </code></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #05f58d; text-decoration-color: #05f58d">✓</span> Testes terminados 🎉! Execute <span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span> para ver os resultados da avaliação no Confident AI. 
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #05f58d; text-decoration-color: #05f58d">✓</span> Testes concluídos 🎉! Execute <span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span> para ver os resultados da avaliação no Confident AI. 
 ‼️ NOTA: Você também pode executar avaliações em TODAS as métricas do deepeval diretamente no Confident AI.</pre>
 <h2 id="Evaluating-Generation" class="common-anchor-header">Avaliando a geração<button data-href="#Evaluating-Generation" class="anchor-icon" translate="no">
       <svg translate="no"

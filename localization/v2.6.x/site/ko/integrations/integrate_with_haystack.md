@@ -43,7 +43,7 @@ title: Milvus 및 Haystack을 사용한 검색 증강 생성(RAG)
         ></path>
       </svg>
     </button></h2><p>이 노트북을 실행하기 전에 다음 종속성이 설치되어 있는지 확인하세요:</p>
-<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
+<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-lite milvus-haystack markdown-it-py mdit_plain
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속성을 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>

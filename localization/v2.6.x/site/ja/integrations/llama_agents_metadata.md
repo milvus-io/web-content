@@ -36,8 +36,8 @@ title: Mistral、Milvus、Llamaエージェントによるマルチエージェ�
       </svg>
     </button></h2><p>このノートブックでは、様々なアイデアを探求する：</p>
 <ul>
-<li><p>1️⃣ Milvusにデータを格納する：高速な類似検索やAIアプリケーションのために設計された効率的なベクトルデータベースであるMilvusにデータを格納する方法を学ぶ。</p></li>
-<li><p>2️⃣ llama-indexをMistralモデルと組み合わせてデータクエリに使う: llama-indexとMistralモデルを組み合わせてMilvusに保存されたデータをクエリする方法を学ぶ。</p></li>
+<li><p>1️ ⃣ Milvusにデータを格納する: 高速な類似検索やAIアプリケーションのために設計された効率的なベクトルデータベースであるMilvusにデータを格納する方法を学ぶ。</p></li>
+<li><p>2️⃣ llama-indexとMistralモデルを使ったデータクエリ: llama-indexとMistralモデルを組み合わせてMilvusに保存されたデータをクエリする方法を学びます。</p></li>
 <li><p>3️⃣ 自動データ検索・読み込みエージェントの作成: ユーザークエリに基づいて自動的にデータを検索・読み込みできるエージェントを構築します。これらの自動化されたエージェントは、迅速かつ正確なレスポンスを提供し、手作業による検索作業を軽減することで、ユーザーエクスペリエンスを向上させます。</p></li>
 <li><p>4️︓ユーザークエリに基づくメタデータフィルタリングエージェントの開発: ユーザークエリからメタデータフィルタを⾃動⽣成するエージェントを実装する。</p></li>
 <li><p>ᔍ まとめ このノートブックの終わりには、堅牢で効率的なデータ検索システムを構築するために、Milvus、llama-indexとllama-agents、Mistralモデルの使い方を包括的に理解していることでしょう。</p></li>
@@ -126,7 +126,7 @@ title: Mistral、Milvus、Llamaエージェントによるマルチエージェ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Mistral AIはLLMとエンベッディング・モデルを構築している研究ラボで、最近Mistral NemoとMistral Largeというモデルの新バージョンをリリースしました。そのため、このノートブックではMistral NemoとMistral Largeを使います。</p>
+    </button></h2><p>Mistral AIはLLMとエンベッディング・モデルを構築している研究ラボで、最近モデルの新バージョン、Mistral NemoとMistral Largeをリリースしました。そのため、このノートブックではMistral NemoとMistral Largeを使います。</p>
 <h2 id="Install-Dependencies" class="common-anchor-header">依存関係のインストール<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -142,7 +142,7 @@ title: Mistral、Milvus、Llamaエージェントによるマルチエージェ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus openai python-dotenv</span>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus milvus-lite openai python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus llama-index-readers-file llama-index-llms-ollama llama-index-llms-mistralai llama-index-embeddings-mistralai</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -557,7 +557,22 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
         ></path>
       </svg>
     </button></h2><p>以下は、ユーザの質問からメタデータフィルタを抽出するエージェントを使用して、フィルタリングクエリエリエンジンを作成する方法を示すコード例です：</p>
-<h3 id="Explanation" class="common-anchor-header">説明</h3><ul>
+<h3 id="Explanation" class="common-anchor-header">説明<button data-href="#Explanation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>プロンプトテンプレート</strong>PromptTemplateクラスは、ユーザの質問からメタデータフィルタを抽出するためのテンプレートを定義するために使用されます。このテンプレートは言語モデルに会社名、年、その他の関連する属性を考慮するように指示します。</p></li>
 <li><p><strong>LLM</strong>: Mistral Nemoは、ユーザーの質問に基づいてメタデータフィルタを生成するために使用されます。モデルには質問とテンプレートが入力され、関連するフィルターが抽出されます。</p></li>
 <li><p><strong>メタデータフィルター</strong>：LLMからの応答は解析され、<code translate="no">MetadataFilters</code> オブジェクトが作成されます。特定のフィルターが指定されていない場合は、空の<code translate="no">MetadataFilters</code> オブジェクトが返されます。</p></li>
@@ -644,19 +659,64 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
         ></path>
       </svg>
     </button></h2><p>Mistral LargeはMistralのフラッグシップモデルで、非常に優れた推論、知識、コーディング機能を備えています。大規模な推論能力を必要とする複雑なタスクや、高度に専門化されたタスクに最適です。高度な関数呼び出し機能を備えており、様々なエージェントのオーケストレーションにまさに必要なものです。</p>
-<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">なぜよりスマートなモデルが必要なのか？</h3><p>以下に回答する質問は、首尾一貫した正確な回答を提供するために、複数のサービスとエージェントのオーケストレーションが必要であるため、特に困難です。これには、様々なツールやエージェントを調整して、異なるソース、例えば異なる会社の財務データから情報を取得し、処理することが含まれます。</p>
-<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">何がそんなに難しいのか？</h3><ul>
+<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">なぜよりスマートなモデルが必要なのか？<button data-href="#Why-do-we-need-a-smarter-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下に回答する質問は、首尾一貫した正確な回答を提供するために、複数のサービスとエージェントのオーケストレーションが必要であるため、特に困難です。これには、様々なツールやエージェントを調整して、異なるソース、例えば異なる会社の財務データから情報を取得し、処理することが含まれます。</p>
+<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">何がそんなに難しいのか？<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>複雑さだ：この問題には、それぞれが独自の機能とデータソースを持つ複数のエージェントとサービスが関わっている。これらのエージェントがシームレスに連携するように調整するのは複雑な作業だ。</li>
 </ul>
 <ul>
 <li><p>データの統合：この問題では、異なるソースからのデータを統合する必要があり、データ形式、構造、メタデータが異なるため、困難が伴う。</p></li>
 <li><p>文脈の理解：この質問では、異なる情報間のコンテキストと関係を理解する必要があります。</p></li>
 </ul>
-<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">なぜMistral Largeがこのような場合に役立つのでしょうか？</h3><p>Mistral Largeは高度な推論機能と関数呼び出し機能を備えているため、このタスクに適しています。どのように役立つかは以下の通りです：</p>
+<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">なぜMistral Largeがこのような場合に役立つのでしょうか？<button data-href="#Why-would-Mistral-Large-help-in-this-case" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mistral Largeは高度な推論機能と関数呼び出し機能を備えているため、このタスクに適しています。どのように役立つかは以下の通りです：</p>
 <ul>
 <li><p>高度な推論：Mistral Large は複雑な推論タスクを処理できるので、複数のエージェントやサービスのオーケストレーションに最適です。異なる情報間の関係を理解し、情報に基づいた意思決定を行うことができます。</p></li>
 <li><p>関数呼び出し機能：Mistral Large は、異なるエージェントのアクションを調整するのに不可欠な、高度な関数呼び出し機能を持っています。これにより、様々なサービスのシームレスな統合とオーケストレーションが可能になります。</p></li>
-<li><p>専門知識：Mistral Large は高度に専門化されたタスクのために設計されており、深いドメイン知識を必要とする複雑なクエリを処理するのに適しています。</p></li>
+<li><p>専門知識：Mistral Large は高度に専門化されたタスクのために設計されているため、深いドメイン知識を必要とする複雑なクエリを処理するのに適しています。</p></li>
 </ul>
 <p>これらの理由から、ここではMistral Nemoの代わりにMistral Largeを使う方が適していると判断しました。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_agents <span class="hljs-keyword">import</span> (

@@ -41,7 +41,7 @@ summary: >-
     </button></h2><p>قبل أن تبدأ، تأكد من أن لديك مفتاح OpenAI API جاهزًا، أو يمكنك الحصول على واحد من <a href="https://openai.com/index/openai-api/">موقع OpenAI</a>.</p>
 <p>البيانات المستخدمة في هذا المثال هي عناوين الكتب. يمكنك تنزيل مجموعة البيانات <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">من هنا</a> ووضعها في نفس الدليل حيث تقوم بتشغيل الشيفرة التالية.</p>
 <p>أولاً، قم بتثبيت الحزمة الخاصة بـ Milvus و OpenAI:</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus
+<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong>. (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، واختر "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -107,7 +107,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>بالنسبة لحجة <code translate="no">MilvusClient</code>:</p>
+<p>أما بالنسبة لحجة <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>

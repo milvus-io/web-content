@@ -47,7 +47,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Instale as dependências necessárias:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
+<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus milvus-lite openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -121,7 +121,7 @@ INFO    Loading knowledge
 INFO    Reading: https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf       
 INFO    Added documents to knowledge base                                                                             
 </code></pre>
-<h2 id="Use-agent-to-response-to-a-question" class="common-anchor-header">Utilizar um agente para responder a uma pergunta<button data-href="#Use-agent-to-response-to-a-question" class="anchor-icon" translate="no">
+<h2 id="Use-agent-to-response-to-a-question" class="common-anchor-header">Utilizar o agente para responder a uma pergunta<button data-href="#Use-agent-to-response-to-a-question" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -48,12 +48,42 @@ title: Milvus와 EmbedAnything으로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">종속성 및 환경</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus openai embed_anything</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">종속성 및 환경<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus milvus-lite openai embed_anything</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
 </div>
-<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">리포지토리 및 로드 어댑터 복제하기</h3><p>다음으로, <a href="https://github.com/StarlightSearch/EmbedAnything">임베드애니싱</a> 리포지토리를 복제하고 <code translate="no">examples/adapters</code> 디렉토리를 Python 경로에 추가합니다. 이 디렉토리에 커스텀 Milvus 어댑터 구현을 저장하여 EmbedAnything이 벡터 삽입을 위해 Milvus와 통신할 수 있도록 합니다.</p>
+<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">리포지토리 및 로드 어댑터 복제하기<button data-href="#Clone-the-Repository-and-Load-Adapter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음으로, <a href="https://github.com/StarlightSearch/EmbedAnything">임베드애니싱</a> 리포지토리를 복제하고 <code translate="no">examples/adapters</code> 디렉토리를 파이썬 경로에 추가합니다. 이 디렉토리에 커스텀 Milvus 어댑터 구현을 저장하여 EmbedAnything이 벡터 삽입을 위해 Milvus와 통신할 수 있도록 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> sys
 
 <span class="hljs-comment"># Clone the EmbedAnything repository if not already cloned</span>
@@ -88,7 +118,22 @@ openai_client = OpenAI()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Milvus 초기화</h3><p>파일을 임베드하기 전에 Milvus와 상호 작용하는 두 가지 컴포넌트를 준비해야 합니다:</p>
+    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Milvus 초기화<button data-href="#Initialize-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>파일을 임베드하기 전에 Milvus와 상호 작용하는 두 가지 컴포넌트를 준비해야 합니다:</p>
 <ol>
 <li><code translate="no">MilvusVectorAdapter</code> - 이것은 EmbedAnything용 Milvus 어댑터이며, <strong>벡터 수집</strong> (즉, 임베딩 삽입 및 인덱스 생성) <strong>에만</strong> 사용됩니다. 현재 검색 작업은 지원하지 <strong>않습니다</strong>.</li>
 <li><code translate="no">MilvusClient</code> - 공식 클라이언트는 <code translate="no">pymilvus</code> 에서 벡터 검색, 필터링, 수집 관리 등 Milvus의 모든 기능에 <strong>액세스할</strong> 수 있습니다.</li>
@@ -129,11 +174,26 @@ Collection 'embed_anything_milvus_collection' created with index.
 <p><code translate="no">MilvusVectorAdapter</code> 와 <code translate="no">MilvusClient</code> 의 인수는 다음과 같습니다:</p>
 <ul>
 <li><code translate="no">uri</code> 을 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</li>
-<li>백만 개 이상의 벡터와 같이 대량의 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에</a> 더 성능이 좋은 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "<your_username>:<your_password>"을 사용하고, 그렇지 않으면 토큰을 설정하지 마세요.</li>
+<li>백만 개 이상의 벡터와 같이 대량의 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에</a> 더 성능이 좋은 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "<your_username>:<your_password>"을 사용하고, 그렇지 않은 경우 토큰을 설정하지 마세요.</li>
 <li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정합니다.</li>
 </ul>
 </div>
-<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">임베딩 모델 초기화 및 PDF 문서 임베딩하기</h3><p>이제 임베딩 모델을 초기화하겠습니다. 텍스트 임베딩을 생성하기 위한 가볍지만 강력한 모델인 문장 변환기 라이브러리의 <code translate="no">all-MiniLM-L12-v2 model</code> 을 사용하겠습니다. 이 모델은 384차원 임베딩을 생성하므로 Milvus 컬렉션 차원이 384로 설정되어 있는 것과 일치합니다. 이 정렬은 매우 중요하며 Milvus에 저장된 벡터 차원과 모델에서 생성된 차원 간의 호환성을 보장합니다.</p>
+<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">임베딩 모델 초기화 및 PDF 문서 임베딩하기<button data-href="#Initialize-Embedding-Model-and-Embed-PDF-Document" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 임베딩 모델을 초기화하겠습니다. 텍스트 임베딩을 생성하기 위한 가볍지만 강력한 모델인 문장 변환기 라이브러리의 <code translate="no">all-MiniLM-L12-v2 model</code> 을 사용하겠습니다. 이 모델은 384차원 임베딩을 생성하므로 Milvus 컬렉션 차원이 384로 설정되어 있는 것과 일치합니다. 이 정렬은 매우 중요하며 Milvus에 저장된 벡터 차원과 모델에서 생성된 차원 간의 호환성을 보장합니다.</p>
 <p>임베드애니씽은 훨씬 더 많은 임베딩 모델을 지원합니다. 자세한 내용은 <a href="https://github.com/StarlightSearch/EmbedAnything">공식 문서를</a> 참조하세요.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the embedding model</span>
 model = EmbeddingModel.from_pretrained_hf(
@@ -151,7 +211,22 @@ data = embed_anything.embed_file(
 <pre><code translate="no">Converted 12 embeddings for insertion.
 Successfully inserted 12 embeddings.
 </code></pre>
-<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">응답 검색 및 생성</h3><p>다시 말씀드리지만, 현재 EmbedAnything의 <code translate="no">MilvusVectorAdapter</code> 은 벡터 수집 및 인덱싱만을 위한 경량 추상화입니다. <strong>검색</strong> 또는 검색 쿼리는 <strong>지원하지 않습니다</strong>. 따라서 RAG 파이프라인을 구축하기 위해 관련 문서를 검색하려면 <code translate="no">MilvusClient</code> 인스턴스(<code translate="no">milvus_client</code>)를 직접 사용하여 Milvus 벡터 저장소를 쿼리해야 합니다.</p>
+<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">응답 검색 및 생성<button data-href="#Retrieve-and-Generate-Response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다시 말씀드리지만, 현재 EmbedAnything의 <code translate="no">MilvusVectorAdapter</code> 은 벡터 수집 및 인덱싱만을 위한 경량 추상화입니다. <strong>검색</strong> 또는 검색 쿼리는 <strong>지원하지 않습니다</strong>. 따라서 RAG 파이프라인을 구축하기 위해 관련 문서를 검색하려면 <code translate="no">MilvusClient</code> 인스턴스(<code translate="no">milvus_client</code>)를 직접 사용하여 Milvus 벡터 저장소를 쿼리해야 합니다.</p>
 <p>Milvus에서 관련 문서를 검색하는 함수를 정의합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">retrieve_documents</span>(<span class="hljs-params">question, top_k=<span class="hljs-number">3</span></span>):
     query_vector = <span class="hljs-built_in">list</span>(

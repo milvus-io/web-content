@@ -49,7 +49,7 @@ title: Génération améliorée par récupération (RAG) avec Milvus et Camel
         ></path>
       </svg>
     </button></h2><p>Commençons par charger le document CAMEL à partir de https://arxiv.org/pdf/2303.17760.pdf. Il s'agira de notre exemple local de données.</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
@@ -169,7 +169,7 @@ vector_retriever = VectorRetriever(
 <li>Définir l'url distante et la clé api pour Milvus</li>
 <li>Donner une requête</li>
 </ul>
-<p>Le pipeline Auto RAG créera des collections pour les chemins d'entrée de contenu donnés, le nom de la collection sera défini automatiquement en fonction du nom du chemin d'entrée de contenu, si la collection existe, elle sera récupérée directement.</p>
+<p>Le pipeline Auto RAG créera des collections pour les chemins d'entrée de contenu donnés, le nom de la collection sera défini automatiquement sur la base du nom du chemin d'entrée de contenu, si la collection existe, elle sera récupérée directement.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 

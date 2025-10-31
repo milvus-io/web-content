@@ -55,7 +55,7 @@ title: Генерация с дополнением к поиску (RAG) с п�
         ></path>
       </svg>
     </button></h2><p>Milvus Lite доступен на PyPI. Вы можете установить его через pip для Python 3.8+:</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>

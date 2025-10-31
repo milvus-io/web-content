@@ -41,7 +41,22 @@ title: Milvus와 Unstructured로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">종속성 및 환경</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU <span class="hljs-string">&quot;unstructured[pdf]&quot;</span> pymilvus openai</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">종속성 및 환경<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU <span class="hljs-string">&quot;unstructured[pdf]&quot;</span> pymilvus milvus-lite openai</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p><strong>설치 옵션:</strong></p>
@@ -57,7 +72,22 @@ title: Milvus와 Unstructured로 RAG 구축하기
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Milvus 및 OpenAI 클라이언트 준비</h3><p>Milvus 클라이언트를 사용하여 Milvus 컬렉션을 생성하고 데이터를 삽입할 수 있습니다.</p>
+<h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Milvus 및 OpenAI 클라이언트 준비<button data-href="#Prepare-Milvus-and-OpenAI-clients" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 클라이언트를 사용하여 Milvus 컬렉션을 생성하고 데이터를 삽입할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -66,8 +96,8 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
 <div class="alert note">
 <p>인수는 <code translate="no">MilvusClient</code> 입니다:</p>
 <ul>
-<li><code translate="no">uri</code> 를 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</li>
-<li>백만 개 이상의 벡터와 같이 대량의 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에</a> 더 성능이 좋은 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "<your_username>:<your_password>"을 사용하고, 그렇지 않은 경우 토큰을 설정하지 마세요.</li>
+<li><code translate="no">uri</code> 을 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법이며, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</li>
+<li>백만 개 이상의 벡터와 같이 대량의 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에</a> 더 성능이 좋은 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "<your_username>:<your_password>"을 사용하고, 그렇지 않으면 토큰을 설정하지 마세요.</li>
 <li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정합니다.</li>
 </ul>
 </div>
@@ -171,7 +201,7 @@ elements = partition(
     chunking_strategy=<span class="hljs-string">&quot;by_title&quot;</span>,
 )  <span class="hljs-comment"># Replace with the path to your PDF file</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>PDF 파일에서 분할된 요소를 살펴보겠습니다. 각 요소는 Unstructured의 파티셔닝 프로세스를 통해 추출된 콘텐츠 청크를 나타냅니다.</p>
+<p>PDF 파일에서 분할된 요소를 살펴봅시다. 각 요소는 Unstructured의 파티셔닝 프로세스를 통해 추출된 콘텐츠 청크를 나타냅니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> element <span class="hljs-keyword">in</span> elements:
     <span class="hljs-built_in">print</span>(element)
     <span class="hljs-keyword">break</span>

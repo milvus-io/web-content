@@ -45,7 +45,7 @@ title: Avaliação com Ragas
         ></path>
       </svg>
     </button></h2><p>Antes de executar este notebook, certifique-se de ter as seguintes dependências instaladas:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm pandas ragas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas ragas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -310,7 +310,7 @@ df
     </tr>
     <tr>
       <th>2</th>
-      <td>O que deve ser garantido antes de executar a cobertura de...</td>
+      <td>O que deve ser assegurado antes de executar a cobertura de...</td>
       <td>[Cobertura de código\n\nAntes de submeter o seu pull ...</td>
       <td>Antes de executar a cobertura de código, deve ser...</td>
       <td>Antes de executar a cobertura de código, deve ser ...</td>

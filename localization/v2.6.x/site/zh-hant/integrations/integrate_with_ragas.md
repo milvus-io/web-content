@@ -43,7 +43,7 @@ title: 使用 Ragas 進行評估
         ></path>
       </svg>
     </button></h2><p>在執行本筆記本之前，請確定您已安裝下列依賴項目：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm pandas ragas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas ragas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -295,7 +295,7 @@ df
     <tr>
       <th>0</th>
       <td>什麼是硬體需求規格？</td>
-      <td>[Hardware Requirements/n（硬體需求規格）以下為硬體需求規格...</td>
+      <td>[Hardware Requirements/n（硬體需求規格）：下列規格...</td>
       <td>硬體需求規格(Hardware Requirements Specification)</td>
       <td>如果您想建立 Milvus 並從來源執行，您需要...</td>
     </tr>

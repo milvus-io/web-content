@@ -47,7 +47,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Instal dependensi yang diperlukan:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
+<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus milvus-lite openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>

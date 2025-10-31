@@ -50,12 +50,42 @@ title: بناء RAG مع Milvus و EmbedAnything
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus openai embed_anything</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus milvus-lite openai embed_anything</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، فقد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
-<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">استنساخ المستودع وتحميل المحول</h3><p>بعد ذلك، سنقوم باستنساخ مستودع <a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a> repo وإضافة الدليل <code translate="no">examples/adapters</code> إلى مسار Python. هذا هو المكان الذي نخزن فيه تطبيق محول Milvus المخصص، والذي يسمح ل EmbedAnything بالتواصل مع Milvus لإدخال المتجهات.</p>
+<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">استنساخ المستودع وتحميل المحول<button data-href="#Clone-the-Repository-and-Load-Adapter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد ذلك، سنقوم باستنساخ مستودع <a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything</a> repo وإضافة الدليل <code translate="no">examples/adapters</code> إلى مسار Python. هذا هو المكان الذي نخزن فيه تطبيق محول Milvus المخصص، والذي يسمح ل EmbedAnything بالتواصل مع Milvus لإدخال المتجهات.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> sys
 
 <span class="hljs-comment"># Clone the EmbedAnything repository if not already cloned</span>
@@ -90,7 +120,22 @@ openai_client = OpenAI()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">تهيئة ميلفوس</h3><p>قبل أن نقوم بتضمين أي ملفات، نحتاج إلى إعداد مكونين يتفاعلان مع Milvus:</p>
+    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">تهيئة ميلفوس<button data-href="#Initialize-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قبل أن نقوم بتضمين أي ملفات، نحتاج إلى إعداد مكونين يتفاعلان مع Milvus:</p>
 <ol>
 <li><code translate="no">MilvusVectorAdapter</code> - هذا هو محول Milvus لـ EmbedAnything، ويُستخدم <strong>فقط لاستيعاب المتجهات</strong> (أي إدراج التضمينات وإنشاء الفهارس). <strong>لا</strong> يدعم حاليًا عمليات البحث.</li>
 <li><code translate="no">MilvusClient</code> - هذا هو العميل الرسمي من <code translate="no">pymilvus</code> ، والذي يتيح <strong>الوصول الكامل</strong> إلى إمكانيات Milvus بما في ذلك البحث عن المتجهات والتصفية وإدارة المجموعات.</li>
@@ -135,7 +180,22 @@ Collection 'embed_anything_milvus_collection' created with index.
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، فاضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>
 </div>
-<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">تهيئة نموذج التضمين وتضمين مستند PDF</h3><p>سنقوم الآن بتهيئة نموذج التضمين. سنستخدم <code translate="no">all-MiniLM-L12-v2 model</code> من مكتبة محولات الجملة، وهو نموذج خفيف الوزن لكنه قوي لتوليد تضمينات نصية. إنه ينتج تضمينات ذات 384 بُعدًا، لذا فإن هذا يتماشى مع تعيين بُعد مجموعة ميلفوس إلى 384. هذه المحاذاة أمر بالغ الأهمية ويضمن التوافق بين الأبعاد المتجهة المخزنة في Milvus وتلك التي تم إنشاؤها بواسطة النموذج.</p>
+<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">تهيئة نموذج التضمين وتضمين مستند PDF<button data-href="#Initialize-Embedding-Model-and-Embed-PDF-Document" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سنقوم الآن بتهيئة نموذج التضمين. سنستخدم <code translate="no">all-MiniLM-L12-v2 model</code> من مكتبة محولات الجملة، وهو نموذج خفيف الوزن لكنه قوي لتوليد تضمينات نصية. إنه ينتج تضمينات ذات 384 بُعدًا، لذا فإن هذا يتماشى مع تعيين بُعد مجموعة ميلفوس إلى 384. هذه المحاذاة أمر بالغ الأهمية ويضمن التوافق بين الأبعاد المتجهة المخزنة في Milvus وتلك التي تم إنشاؤها بواسطة النموذج.</p>
 <p>يدعم EmbedAnything الكثير من نماذج التضمين. لمزيد من التفاصيل، يرجى الرجوع إلى <a href="https://github.com/StarlightSearch/EmbedAnything">الوثائق الرسمية</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the embedding model</span>
 model = EmbeddingModel.from_pretrained_hf(
@@ -153,7 +213,22 @@ data = embed_anything.embed_file(
 <pre><code translate="no">Converted 12 embeddings for insertion.
 Successfully inserted 12 embeddings.
 </code></pre>
-<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">استرجاع وتوليد الاستجابة</h3><p>مرة أخرى، فإن <code translate="no">MilvusVectorAdapter</code> من EmbedAnything حاليًا هو تجريد خفيف الوزن لاستيعاب وفهرسة المتجهات فقط. <strong>ولا يدعم</strong> استعلامات <strong>البحث</strong> أو الاسترجاع. لذلك، من أجل البحث عن المستندات ذات الصلة لبناء خط أنابيب RAG الخاص بنا، يجب أن نستخدم مباشرةً مثيل <code translate="no">MilvusClient</code> (<code translate="no">milvus_client</code>) للاستعلام عن مخزن متجهات Milvus الخاص بنا.</p>
+<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">استرجاع وتوليد الاستجابة<button data-href="#Retrieve-and-Generate-Response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>مرة أخرى، فإن <code translate="no">MilvusVectorAdapter</code> من EmbedAnything حاليًا هو تجريد خفيف الوزن لاستيعاب وفهرسة المتجهات فقط. <strong>ولا يدعم</strong> استعلامات <strong>البحث</strong> أو الاسترجاع. لذلك، من أجل البحث عن المستندات ذات الصلة لبناء خط أنابيب RAG الخاص بنا، يجب أن نستخدم مباشرةً مثيل <code translate="no">MilvusClient</code> (<code translate="no">milvus_client</code>) للاستعلام عن مخزن متجهات Milvus الخاص بنا.</p>
 <p>تحديد دالة لاسترداد المستندات ذات الصلة من Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">retrieve_documents</span>(<span class="hljs-params">question, top_k=<span class="hljs-number">3</span></span>):
     query_vector = <span class="hljs-built_in">list</span>(

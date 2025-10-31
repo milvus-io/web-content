@@ -26,7 +26,7 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/integrate_with_phidata.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://docs.agno.com/introduction">Agno</a>(구 Phidata)는 멀티모달 에이전트를 구축하기 위한 경량 라이브러리입니다. 이를 통해 텍스트, 이미지, 오디오 및 비디오를 이해하고 다양한 도구와 지식 소스를 활용하여 복잡한 작업을 수행할 수 있는 멀티모달 에이전트를 만들 수 있습니다. Agno는 멀티 에이전트 오케스트레이션을 지원하여 여러 에이전트 팀이 함께 협업하고 문제를 해결할 수 있도록 합니다. 또한 에이전트와의 상호 작용을 위한 멋진 에이전트 UI를 제공합니다.</p>
+<p><a href="https://docs.agno.com/introduction">Agno</a>(구 Phidata)는 멀티모달 에이전트를 구축하기 위한 경량 라이브러리입니다. 이를 통해 텍스트, 이미지, 오디오 및 비디오를 이해하고 다양한 도구와 지식 소스를 활용하여 복잡한 작업을 수행할 수 있는 멀티모달 에이전트를 만들 수 있습니다. Agno는 다중 에이전트 오케스트레이션을 지원하여 여러 에이전트 팀이 함께 협업하고 문제를 해결할 수 있도록 합니다. 또한 에이전트와의 상호 작용을 위한 멋진 에이전트 UI를 제공합니다.</p>
 <p>Milvus 벡터 데이터베이스를 통해 정보를 임베딩으로 효율적으로 저장하고 검색할 수 있습니다. Milvus와 Agno를 사용하면 지식을 상담원 워크플로우에 쉽게 통합할 수 있습니다. 이 문서는 Milvus와 Agno의 통합을 사용하는 방법에 대한 기본 가이드입니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비 단계<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +44,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>필요한 종속 요소를 설치합니다:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
+<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus milvus-lite openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속성을 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
@@ -84,7 +84,7 @@ vector_db = Milvus(
 <div class="alert note">
 <p>URL과 토큰을 설정하는 방법은 다음과 같습니다:</p>
 <ul>
-<li>소규모 데이터나 프로토타이핑을 위한 로컬 벡터 데이터베이스만 필요한 경우, Uri를 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법이며, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</li>
+<li>소규모 데이터나 프로토타이핑을 위한 로컬 벡터 데이터베이스만 필요한 경우, 로컬 파일(예:<code translate="no">./milvus.db</code>)로 uri를 설정하는 것이 가장 편리한 방법이며, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</li>
 <li>백만 개 이상의 벡터와 같이 대규모 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에서</a> 더 성능이 뛰어난 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "<your_username>:<your_password>"을 사용하고, 그렇지 않은 경우 토큰을 설정하지 마세요.</li>
 <li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하는 경우, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 조정합니다.</li>
 </ul>
@@ -189,4 +189,4 @@ agent.print_response(<span class="hljs-string">&quot;How to make Tom Kha Gai&quo
 ┃                                                                                                                                                             ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<p>축하합니다, 아그노에서 밀버스 사용의 기본을 배웠습니다. 아그노 사용 방법에 대해 더 자세히 알고 싶으시면 <a href="https://docs.agno.com/introduction">공식 문서를</a> 참조하세요.</p>
+<p>축하합니다. 아그노에서 밀버스 사용의 기본을 배웠습니다. 아그노 사용 방법에 대해 더 자세히 알고 싶으시면 <a href="https://docs.agno.com/introduction">공식 문서를</a> 참조하세요.</p>

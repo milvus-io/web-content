@@ -39,7 +39,7 @@ summary: 本頁討論向量資料庫與 VoyageAI 的嵌入式 API 的整合。
     </button></h2><p>在開始之前，請確認您已準備好 Voyage API 金鑰，或者您可以從<a href="https://dash.voyageai.com/api-keys">VoyageAI 網站</a>取得一個。</p>
 <p>本範例使用的資料是書名。您可以<a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">在這裡</a>下載資料集，並將其放在執行下列程式碼的同一個目錄中。</p>
 <p>首先，安裝 Milvus 和 Voyage AI 的套件：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
+<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時間</strong>。(點選螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -60,7 +60,7 @@ summary: 本頁討論向量資料庫與 VoyageAI 的嵌入式 API 的整合。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在下面的範例中，我們從下載的 CSV 檔案載入書名資料，使用 Voyage AI 嵌入模型產生向量表示，並將其儲存於 Milvus 向量資料庫，以進行語意搜尋。</p>
+    </button></h2><p>在以下範例中，我們從下載的 CSV 檔案載入書名資料，使用 Voyage AI 嵌入模型產生向量表示，並將其儲存於 Milvus 向量資料庫，以進行語意搜尋。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> voyageai
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -194,7 +194,7 @@ res = milvus_client.search(
 
 DIMENSION = <span class="hljs-number">1024</span>  <span class="hljs-comment"># Dimension of vector embedding</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>接下來我們需要為 Milvus 準備輸入資料。讓我們重複使用上一章所建立的 VoyageAI 用戶端。有關可用的 VoyageAI 多模式嵌入模型，請查看<a href="https://docs.voyageai.com/docs/multimodal-embeddings">此頁面</a>。</p>
+<p>接下來我們需要為 Milvus 準備輸入資料。讓我們重複使用前一章所建立的 VoyageAI 用戶端。有關可用的 VoyageAI 多模式嵌入模型，請查看<a href="https://docs.voyageai.com/docs/multimodal-embeddings">此頁面</a>。</p>
 <pre><code translate="no" class="language-python">pages = pdf_url_to_screenshots(<span class="hljs-string">&quot;https://www.fdrlibrary.org/documents/356632/390886/readingcopy.pdf&quot;</span>, zoom=<span class="hljs-number">3.0</span>)
 inputs = [[img] <span class="hljs-keyword">for</span> img <span class="hljs-keyword">in</span> pages]
 

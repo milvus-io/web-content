@@ -42,7 +42,7 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e LangChain
         ></path>
       </svg>
     </button></h2><p>Prima di eseguire questo notebook, assicuratevi di aver installato le seguenti dipendenze:</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
+<pre><code translate="no" class="language-shell">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus milvus-lite langchain-openai bs4
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Restart session" dal menu a discesa).</p>

@@ -40,7 +40,7 @@ title: 使用 Milvus 和 LangChain 的檢索-增強世代 (RAG)
         ></path>
       </svg>
     </button></h2><p>執行本筆記本之前，請確定您已安裝下列相依性：</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
+<pre><code translate="no" class="language-shell">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus milvus-lite langchain-openai bs4
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -111,7 +111,7 @@ docs[<span class="hljs-number">1</span>]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我們將以文件初始化一個 Milvus 向量儲存庫，將文件載入 Milvus 向量儲存庫，並在引擎蓋下建立索引。</p>
+    </button></h2><p>我們將以文件初始化一個 Milvus 向量存儲，將文件載入 Milvus 向量存儲，並在引擎蓋下建立索引。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
@@ -267,7 +267,7 @@ rag_chain2.with_config(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&quot;Self-reflection of an AI agent involves the process of synthesizing memories into higher-level inferences over time to guide the agent's future behavior. It serves as a mechanism to create higher-level summaries of past events. One approach to self-reflection involves prompting the language model with the 100 most recent observations and asking it to generate the 3 most salient high-level questions based on those observations. This process helps the AI agent optimize believability in the current moment and over time.&quot;
 </code></pre>
-<p>當我們改變搜尋條件，以第二個來源過濾文件時，由於這個部落格來源的內容與查詢問題毫無關係，因此我們得到一個沒有相關資訊的答案。</p>
+<p>當我們改變搜尋條件，以第二個來源過濾文件時，由於這個部落格來源的內容與查詢問題無關，我們得到的答案沒有相關資訊。</p>
 <pre><code translate="no" class="language-python">rag_chain2.with_config(
     configurable={
         <span class="hljs-string">&quot;retriever_search_kwargs&quot;</span>: <span class="hljs-built_in">dict</span>(

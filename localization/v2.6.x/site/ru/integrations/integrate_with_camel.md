@@ -49,7 +49,7 @@ title: Система Retrieval-Augmented Generation (RAG) с помощью Mil
         ></path>
       </svg>
     </button></h2><p>Сначала загрузим документ CAMEL с сайта https://arxiv.org/pdf/2303.17760.pdf. Это будут наши локальные данные для примера.</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей может потребоваться <strong>перезапуск среды выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>

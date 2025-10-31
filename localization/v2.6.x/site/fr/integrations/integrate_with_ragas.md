@@ -45,7 +45,7 @@ title: Évaluation avec Ragas
         ></path>
       </svg>
     </button></h2><p>Avant d'exécuter ce notebook, assurez-vous que les dépendances suivantes sont installées :</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm pandas ragas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas ragas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
@@ -296,7 +296,7 @@ df
   <tbody>
     <tr>
       <th>0</th>
-      <td>Quelles sont les exigences en matière de matériel...</td>
+      <td>Quelle est la spécification des exigences matérielles...</td>
       <td>[Exigences en matière de matériel Les spécificités suivantes...</td>
       <td>La spécification des exigences matérielles pour bui...</td>
       <td>Si vous souhaitez construire Milvus et l'exécuter à partir d...</td>
@@ -313,7 +313,7 @@ df
       <td>Qu'est-ce qui doit être assuré avant d'exécuter la cov...</td>
       <td>[Couverture de code Avant de soumettre votre pull...</td>
       <td>Avant d'exécuter la couverture du code, il faut s'assur...</td>
-      <td>Avant d'exécuter la couverture du code, vous devriez ...</td>
+      <td>Avant d'exécuter la couverture du code, vous devez ...</td>
     </tr>
   </tbody>
 </table>

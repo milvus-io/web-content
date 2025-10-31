@@ -3,9 +3,9 @@ id: evaluation_with_phoenix.md
 summary: >-
   이 가이드에서는 Milvus를 기반으로 구축된 검색 증강 생성(RAG) 파이프라인을 평가하기 위해 아리제 피오닉스를 사용하는 방법을
   설명합니다.
-title: 아리제 파이오닉스를 사용한 평가
+title: 아리제 피닉스를 사용한 평가
 ---
-<h1 id="Evaluation-with-Arize-Pheonix" class="common-anchor-header">아리제 파이오닉스를 사용한 평가<button data-href="#Evaluation-with-Arize-Pheonix" class="anchor-icon" translate="no">
+<h1 id="Evaluation-with-Arize-Pheonix" class="common-anchor-header">아리제 피닉스를 사용한 평가<button data-href="#Evaluation-with-Arize-Pheonix" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ title: 아리제 파이오닉스를 사용한 평가
         ></path>
       </svg>
     </button></h2><p>이 노트북을 실행하기 전에 다음 종속성이 설치되어 있는지 확인하세요:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
@@ -51,7 +51,7 @@ title: 아리제 파이오닉스를 사용한 평가
 
 <span class="hljs-comment"># os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;sk-*****************&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">RAG 파이프라인 정의<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
+<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">RAG 파이프라인 정의하기<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -338,7 +338,22 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <li><strong>QA 설명</strong>: 답변이 정답 또는 오답인 이유를 자세히 설명합니다.</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Phoenix 추적 개요</h3><p>Phoenix는 <strong>Langchain</strong>, <strong>LlamaIndex와</strong> 같은 프레임워크와 <strong>OpenAI</strong> 및 <strong>Mistral과</strong> 같은 SDK를 위한 통합을 통해 LLM 애플리케이션을 위한 <strong>OTEL 호환 추적을</strong> 제공합니다. 추적은 전체 요청 흐름을 캡처하여 다음에 대한 인사이트를 제공합니다:</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Phoenix 추적 개요<button data-href="#Phoenix-Tracing-Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Phoenix는 <strong>Langchain</strong>, <strong>LlamaIndex와</strong> 같은 프레임워크와 <strong>OpenAI</strong> 및 <strong>Mistral과</strong> 같은 SDK를 위한 통합을 통해 LLM 애플리케이션을 위한 <strong>OTEL 호환 추적을</strong> 제공합니다. 추적은 전체 요청 흐름을 캡처하여 다음에 대한 인사이트를 제공합니다:</p>
 <ul>
 <li><strong>애플리케이션 지연 시간</strong>: 느린 LLM 호출과 컴포넌트 성능을 식별하고 최적화합니다.</li>
 <li><strong>토큰 사용량</strong>: 비용 최적화를 위해 토큰 소비를 세분화합니다.</li>
@@ -446,7 +461,7 @@ results_df.head()
     <tr>
       <th>1</th>
       <td>이 프로그램을 작성하는 데 사용되는 프로그래밍 언어는 무엇인가요?</td>
-      <td>[CMake &amp; Conan\n\n밀레의 알고리즘 라이브러리는 ...</td>
+      <td>[CMake &amp; Conan\n\n밀레니엄의 알고리즘 라이브러리는...</td>
       <td>Knowher를 작성하는 데 사용되는 프로그래밍 언어는 무엇입니까?</td>
       <td>Knowher...를 작성하는 데 사용된 프로그래밍 언어입니다.</td>
       <td>[CMake &amp; Conan\n\n밀의 알고리즘 라이브러리입니다.</td>

@@ -45,10 +45,10 @@ title: التقييم باستخدام راغاس
         ></path>
       </svg>
     </button></h2><p>قبل تشغيل هذا الدفتر، تأكد من تثبيت التبعيات التالية:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm pandas ragas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas ragas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
+<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، فقد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 <p>سنستخدم OpenAI باعتباره LLM في هذا المثال. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -313,7 +313,7 @@ df
       <td>ما الذي يجب التأكد منه قبل تشغيل الرمز البرمجي....</td>
       <td>[تغطية الشيفرة البرمجية \nقبل إرسال عملية السحب....</td>
       <td>قبل تشغيل تغطية التعليمات البرمجية، يجب التأكد من...</td>
-      <td>قبل تشغيل تغطية التعليمات البرمجية، يجب التأكد ...</td>
+      <td>قبل تشغيل تغطية التعليمات البرمجية، يجب إجراء ...</td>
     </tr>
   </tbody>
 </table>
@@ -334,7 +334,7 @@ df
         ></path>
       </svg>
     </button></h2><p>نستخدم Ragas لتقييم أداء نتائج خط أنابيب RAG الخاص بنا.</p>
-<p>يوفر Ragas مجموعة من المقاييس سهلة الاستخدام. نأخذ <code translate="no">Answer relevancy</code> و <code translate="no">Faithfulness</code> و <code translate="no">Context recall</code> و <code translate="no">Context precision</code> كمقاييس لتقييم خط أنابيب RAG الخاص بنا. لمزيد من المعلومات حول المقاييس، يُرجى الرجوع إلى <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">مقاييس Ragas Metrics</a>.</p>
+<p>يوفر Ragas مجموعة من المقاييس سهلة الاستخدام. نأخذ <code translate="no">Answer relevancy</code> و <code translate="no">Faithfulness</code> و <code translate="no">Context recall</code> و <code translate="no">Context precision</code> كمقاييس لتقييم خط أنابيب RAG الخاص بنا. لمزيد من المعلومات حول المقاييس، يرجى الرجوع إلى <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">مقاييس Ragas Metrics</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> evaluate
 <span class="hljs-keyword">from</span> ragas.metrics <span class="hljs-keyword">import</span> AnswerRelevancy, Faithfulness, ContextRecall, ContextPrecision
 

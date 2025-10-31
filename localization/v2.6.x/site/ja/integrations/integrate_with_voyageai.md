@@ -20,7 +20,7 @@ summary: このページでは、VoyageAIのエンベッディングAPIを使っ
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>このガイドでは、Milvusベクトルデータベースと<a href="https://docs.voyageai.com/docs/embeddings">VoyageAIのEmbedding APIを</a>使用して、テキストのセマンティック検索を行う方法を紹介します。</p>
+<p>このガイドでは、Milvusベクトルデータベースと<a href="https://docs.voyageai.com/docs/embeddings">VoyageAIのEmbedding APIを</a>使用して、テキストをセマンティック検索する方法を紹介します。</p>
 <h2 id="Getting-started" class="common-anchor-header">はじめに<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ summary: このページでは、VoyageAIのエンベッディングAPIを使っ
     </button></h2><p>始める前に、Voyage APIキーが用意されているか、<a href="https://dash.voyageai.com/api-keys">VoyageAIのウェブサイトから</a>取得できることを確認してください。</p>
 <p>この例で使用するデータは本のタイトルである。データセットは<a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">こちらから</a>ダウンロードでき、以下のコードを実行するのと同じディレクトリに置くことができる。</p>
 <p>まず、MilvusとVoyage AI用のパッケージをインストールする：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
+<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動する</strong>必要があるかもしれません。(画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択する）。</p>
@@ -104,7 +104,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <div class="alert note">
 <p>引数として<code translate="no">MilvusClient</code> を指定する：</p>
 <ul>
-<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利である。</li>
+<li><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定する方法が最も便利である。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>

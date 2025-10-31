@@ -39,7 +39,7 @@ summary: Halaman ini membahas integrasi basis data vektor dengan API penyematan 
     </button></h2><p>Sebelum memulai, pastikan Anda telah menyiapkan kunci API OpenAI, atau Anda bisa mendapatkannya dari <a href="https://openai.com/index/openai-api/">situs web OpenAI</a>.</p>
 <p>Data yang digunakan dalam contoh ini adalah judul buku. Anda dapat mengunduh dataset <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">di sini</a> dan meletakkannya di direktori yang sama dengan tempat Anda menjalankan kode berikut.</p>
 <p>Pertama, instal paket untuk Milvus dan OpenAI:</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus
+<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong>. (Klik pada menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
@@ -60,7 +60,7 @@ summary: Halaman ini membahas integrasi basis data vektor dengan API penyematan 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pada contoh berikut, kita memuat data judul buku dari file CSV yang diunduh, menggunakan model penyematan OpenAI untuk menghasilkan representasi vektor, dan menyimpannya di database vektor Milvus untuk pencarian semantik.</p>
+    </button></h2><p>Pada contoh berikut, kita memuat data judul buku dari file CSV yang diunduh, menggunakan model embedding OpenAI untuk menghasilkan representasi vektor, dan menyimpannya di database vektor Milvus untuk pencarian semantik.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 

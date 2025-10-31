@@ -41,7 +41,7 @@ title: Avaliação com Arize Pheonix
         ></path>
       </svg>
     </button></h2><p>Antes de executar este notebook, certifique-se de ter as seguintes dependências instaladas:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -293,7 +293,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
       <td>quais são as especificações dos requisitos de hardware...</td>
       <td>[Requisitos de hardware\n\nAs seguintes especificaç...</td>
       <td>A especificação dos requisitos de hardware para a...</td>
-      <td>Se quiseres construir o Milvus e correr a partir da fonte...</td>
+      <td>Se queres construir o Milvus e correr a partir da fonte...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -304,7 +304,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     </tr>
     <tr>
       <th>2</th>
-      <td>O que deve ser garantido antes de executar a cobertura de...</td>
+      <td>O que deve ser assegurado antes de executar a cobertura de...</td>
       <td>[Cobertura de código\n\nAntes de submeter o seu pull ...</td>
       <td>Antes de executar a cobertura de código, deve ser...</td>
       <td>Antes de executar a cobertura de código, deve ...</td>
@@ -329,20 +329,35 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
       </svg>
     </button></h2><p>Usamos o Arize Phoenix para avaliar nosso pipeline de geração aumentada de recuperação (RAG), com foco em duas métricas principais:</p>
 <ul>
-<li><p><strong>Avaliação de alucinação</strong>: Determina se o conteúdo é factual ou alucinatório (informações não fundamentadas no contexto), garantindo a integridade dos dados.</p>
+<li><p><strong>Avaliação de alucinação</strong>: Determina se o conteúdo é factual ou alucinatório (informação não fundamentada no contexto), garantindo a integridade dos dados.</p>
 <ul>
-<li><strong>Explicação</strong> da<strong>alucinação</strong>: Explica porque é que uma resposta é factual ou não.</li>
+<li><strong>Explicação da alucinação</strong>: Explica porque é que uma resposta é factual ou não.</li>
 </ul></li>
 <li><p><strong>Avaliação de QA</strong>: Avalia a exatidão das respostas do modelo às consultas de entrada.</p>
 <ul>
 <li><strong>Explicação de QA</strong>: Detalha por que uma resposta está correta ou incorreta.</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Visão geral do Phoenix Tracing</h3><p>O Phoenix fornece <strong>rastreamento compatível com OTEL</strong> para aplicativos LLM, com integrações para estruturas como <strong>Langchain</strong>, <strong>LlamaIndex</strong> e SDKs como <strong>OpenAI</strong> e <strong>Mistral</strong>. O rastreamento captura todo o fluxo de solicitações, oferecendo insights sobre:</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Visão geral do Phoenix Tracing<button data-href="#Phoenix-Tracing-Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O Phoenix fornece <strong>rastreamento compatível com OTEL</strong> para aplicativos LLM, com integrações para estruturas como <strong>Langchain</strong>, <strong>LlamaIndex</strong> e SDKs como <strong>OpenAI</strong> e <strong>Mistral</strong>. O rastreamento captura todo o fluxo de solicitações, oferecendo insights sobre:</p>
 <ul>
 <li><strong>Latência do aplicativo</strong>: Identificar e otimizar invocações LLM lentas e desempenho de componentes.</li>
 <li><strong>Uso de token</strong>: Divida o consumo de token para otimização de custos.</li>
-<li><strong>Exceções de tempo de execução</strong>: Capturar problemas críticos como limitação de taxa.</li>
+<li><strong>Exceções em tempo de execução</strong>: Capturar problemas críticos como limitação de taxa.</li>
 <li><strong>Documentos recuperados</strong>: Analise a recuperação, a pontuação e a ordem dos documentos.</li>
 </ul>
 <p>Ao utilizar o rastreamento do Phoenix, é possível <strong>identificar gargalos</strong>, <strong>otimizar recursos</strong> e <strong>garantir a confiabilidade do sistema</strong> em várias estruturas e linguagens.</p>

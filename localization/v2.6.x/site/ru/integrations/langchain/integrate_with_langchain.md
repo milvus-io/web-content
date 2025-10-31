@@ -25,7 +25,7 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LangChai
 </a></p>
 <p>В этом руководстве показано, как построить систему Retrieval-Augmented Generation (RAG) с помощью LangChain и Milvus.</p>
 <p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает релевантные документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
-<p><a href="https://www.langchain.com/">LangChain</a> - это фреймворк для разработки приложений на основе больших языковых моделей (LLM). <a href="https://milvus.io/">Milvus</a> - самая передовая в мире база данных векторов с открытым исходным кодом, созданная для работы с приложениями поиска сходства встраивания и искусственного интеллекта.</p>
+<p><a href="https://www.langchain.com/">LangChain</a> - это фреймворк для разработки приложений на основе больших языковых моделей (LLM). <a href="https://milvus.io/">Milvus</a> - самая передовая в мире база данных векторов с открытым исходным кодом, созданная для работы с приложениями для поиска сходства вкраплений и искусственного интеллекта.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LangChai
         ></path>
       </svg>
     </button></h2><p>Перед запуском этого блокнота убедитесь, что у вас установлены следующие зависимости:</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
+<pre><code translate="no" class="language-shell">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus milvus-lite langchain-openai bs4
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, то для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>

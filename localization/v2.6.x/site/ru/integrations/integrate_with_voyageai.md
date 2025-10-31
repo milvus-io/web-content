@@ -41,7 +41,7 @@ summary: >-
     </button></h2><p>Прежде чем начать, убедитесь, что у вас готов ключ Voyage API, или получите его на <a href="https://dash.voyageai.com/api-keys">сайте VoyageAI</a>.</p>
 <p>В этом примере используются данные о названиях книг. Вы можете скачать набор данных <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">здесь</a> и поместить его в ту же директорию, где вы запускаете следующий код.</p>
 <p>Сначала установите пакет для Milvus и Voyage AI:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
+<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей вам, возможно, потребуется <strong>перезапустить среду выполнения</strong>. (Нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>

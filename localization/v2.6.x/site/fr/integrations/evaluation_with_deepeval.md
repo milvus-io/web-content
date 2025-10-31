@@ -25,7 +25,7 @@ title: Évaluation avec DeepEval
 <p>Ce guide montre comment utiliser <a href="https://docs.confident-ai.com/">DeepEval</a> pour évaluer un pipeline Retrieval-Augmented Generation (RAG) construit sur <a href="https://milvus.io/">Milvus</a>.</p>
 <p>Le système RAG combine un système de recherche avec un modèle génératif pour générer un nouveau texte basé sur une invite donnée. Le système récupère d'abord les documents pertinents d'un corpus à l'aide de Milvus, puis utilise un modèle génératif pour générer un nouveau texte basé sur les documents récupérés.</p>
 <p>DeepEval est un cadre qui vous aide à évaluer vos pipelines RAG. Il existe des outils et des cadres existants qui vous aident à construire ces pipelines, mais il peut être difficile de les évaluer et de quantifier leurs performances. C'est là que DeepEval entre en jeu.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">Prérequis<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ title: Évaluation avec DeepEval
         ></path>
       </svg>
     </button></h2><p>Avant d'exécuter ce notebook, assurez-vous que les dépendances suivantes sont installées :</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>

@@ -56,7 +56,7 @@ title: Génération améliorée par la recherche (RAG) avec Milvus et BentoML
         ></path>
       </svg>
     </button></h2><p>Milvus Lite est disponible sur PyPI. Vous pouvez l'installer via pip pour Python 3.8+ :</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
@@ -191,7 +191,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot
 <div class="alert note">
 <p>Comme pour l'argument de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Définir <code translate="no">uri</code> comme un fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</li>
+<li>La définition de <code translate="no">uri</code> comme fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</li>
 <li>Si vous avez des données à grande échelle, vous pouvez configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Dans cette configuration, veuillez utiliser l'uri du serveur, par exemple<code translate="no">http://localhost:19530</code>, comme votre <code translate="no">uri</code>.</li>
 <li>Si vous souhaitez utiliser <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service cloud entièrement géré pour Milvus, ajustez les adresses <code translate="no">uri</code> et <code translate="no">token</code>, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">point de terminaison public et à la clé Api</a> dans Zilliz Cloud.</li>
 </ul>
@@ -320,7 +320,7 @@ llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nous sommes maintenant prêts à poser une question. Cette fonction prend simplement une question et effectue un RAG pour générer le contexte pertinent à partir des informations de base. Ensuite, nous passons le contexte et la question à dorag() et nous obtenons le résultat.</p>
+    </button></h2><p>Nous sommes maintenant prêts à poser une question. Cette fonction prend simplement une question et effectue un RAG pour générer le contexte pertinent à partir des informations d'arrière-plan. Ensuite, nous passons le contexte et la question à dorag() et nous obtenons le résultat.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What state is Cambridge in?&quot;</span>
 
 

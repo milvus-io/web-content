@@ -45,7 +45,7 @@ title: Evaluación con Ragas
         ></path>
       </svg>
     </button></h2><p>Antes de ejecutar este cuaderno, asegúrate de tener instaladas las siguientes dependencias:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm pandas ragas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas ragas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si estás utilizando Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla, y selecciona "Reiniciar sesión" en el menú desplegable).</p>
@@ -305,7 +305,7 @@ df
       <th>1</th>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
       <td>[CMake &amp; Conan\nLa biblioteca de algoritmos de Mil...</td>
-      <td>¿Cuál es el lenguaje de programación utilizado...</td>
+      <td>El lenguaje de programación utilizado para escribir Knowher...</td>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
     </tr>
     <tr>

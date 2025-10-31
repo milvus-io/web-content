@@ -57,7 +57,7 @@ title: MilvusとLlamaIndexによる検索拡張生成(RAG)
         ></path>
       </svg>
     </button></h3><p>このページのコードスニペットにはpymilvusとllamaindexの依存関係が必要です。以下のコマンドでインストールできます：</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -327,7 +327,7 @@ res = query_engine.query(<span class="hljs-string">&quot;What challenges did the
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">The disease posed challenges related to the adverse impact on the business and operations, including reduced demand for Mobility offerings globally, affecting travel behavior and demand. Additionally, the pandemic led to driver supply constraints, impacted by concerns regarding COVID-19, with uncertainties about when supply levels would return to normal. The rise of the Omicron variant further affected travel, resulting in advisories and restrictions that could adversely impact both driver supply and consumer demand for Mobility offerings.
 </code></pre>
-<p>今度はファイル<code translate="no">paul_graham_essay.txt</code> から取得すると、異なる結果が得られます。</p>
+<p>こ こ で フ ァ イ ル<code translate="no">paul_graham_essay.txt</code> か ら 文書を取得す る と 、 別の結果が得 ら れます。</p>
 <pre><code translate="no" class="language-python">filters = MetadataFilters(
     filters=[ExactMatchFilter(key=<span class="hljs-string">&quot;file_name&quot;</span>, value=<span class="hljs-string">&quot;paul_graham_essay.txt&quot;</span>)]
 )

@@ -39,10 +39,10 @@ title: 使用 DeepEval 進行評估
         ></path>
       </svg>
     </button></h2><p>在執行本筆記本之前，請確定您已安裝下列依賴項目：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，要啟用剛安裝的依賴項目，您可能需要<strong>重新啟動運行時</strong>（點擊螢幕上方的「Runtime」功能表，從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時</strong>（點擊螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <p>在本範例中，我們將使用 OpenAI 作為 LLM。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -289,7 +289,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     <tr>
       <th>0</th>
       <td>什麼是硬體需求規格？</td>
-      <td>[Hardware Requirements/硬體需求規格] 以下為硬體需求規格...</td>
+      <td>[Hardware Requirements/硬體需求規格]以下為硬體需求規格...</td>
       <td>硬體需求規格是什麼？</td>
       <td>如果您想建立 Milvus 並從來源執行...</td>
     </tr>

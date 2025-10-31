@@ -47,7 +47,7 @@ title: Ответы на вопросы с помощью Milvus и обнима
 <li><code translate="no">datasets</code>, <code translate="no">transformers</code>: пакеты Hugging Face управляют данными и используют модели.</li>
 <li><code translate="no">torch</code>: мощная библиотека обеспечивает эффективные тензорные вычисления и инструменты глубокого обучения.</li>
 </ul>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong>. (Нажмите на меню "Время выполнения" в верхней части экрана и выберите "Перезапустить сеанс" из выпадающего меню).</p>

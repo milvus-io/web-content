@@ -41,10 +41,10 @@ title: Оценка с помощью Arize Pheonix
         ></path>
       </svg>
     </button></h2><p>Прежде чем запускать этот блокнот, убедитесь, что у вас установлены следующие зависимости:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Если вы используете Google Colab, то для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </div>
 <p>В этом примере мы будем использовать OpenAI в качестве LLM. Вам следует подготовить <a href="https://platform.openai.com/docs/quickstart">api ключ</a> <code translate="no">OPENAI_API_KEY</code> в качестве переменной окружения.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -338,7 +338,22 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <li><strong>Объяснение QA</strong>: Подробно объясняет, почему ответ является правильным или неправильным.</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Обзор трассировки Phoenix</h3><p>Phoenix обеспечивает <strong>OTEL-совместимую трассировку</strong> для LLM-приложений, с интеграцией таких фреймворков, как <strong>Langchain</strong>, <strong>LlamaIndex</strong>, и SDK, таких как <strong>OpenAI</strong> и <strong>Mistral</strong>. Трассировка фиксирует весь поток запросов, позволяя понять следующее:</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Обзор трассировки Phoenix<button data-href="#Phoenix-Tracing-Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Phoenix обеспечивает <strong>OTEL-совместимую трассировку</strong> для LLM-приложений, с интеграцией таких фреймворков, как <strong>Langchain</strong>, <strong>LlamaIndex</strong>, и SDK, таких как <strong>OpenAI</strong> и <strong>Mistral</strong>. Трассировка фиксирует весь поток запросов, позволяя понять следующее:</p>
 <ul>
 <li><strong>Латентность приложений</strong>: Выявление и оптимизация медленных вызовов LLM и производительности компонентов.</li>
 <li><strong>Использование токенов</strong>: Разбивка потребления токенов для оптимизации затрат.</li>

@@ -47,12 +47,42 @@ title: الشروع في العمل مع Mem0 وMilvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">تنزيل المكتبات المطلوبة</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus</span>
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">تنزيل المكتبات المطلوبة<button data-href="#Download-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </blockquote>
-<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">تكوين Mem0 مع ميلفوس</h3><p>سنستخدم OpenAI باعتباره LLM في هذا المثال. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
+<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">تكوين Mem0 مع ميلفوس<button data-href="#Configure-Mem0-with-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>سنستخدم OpenAI باعتباره LLM في هذا المثال. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -99,7 +129,22 @@ m = Memory.from_config(config)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">إضافة ذاكرة</h3><p>تقوم الدالة <code translate="no">add</code> بتخزين نص غير منظم في ميلفوس كذاكرة، وربطه بمستخدم معين وبيانات وصفية اختيارية.</p>
+    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">إضافة ذاكرة<button data-href="#Adding-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تقوم الدالة <code translate="no">add</code> بتخزين نص غير منظم في ميلفوس كذاكرة، وربطه بمستخدم معين وبيانات وصفية اختيارية.</p>
 <p>هنا، نقوم بإضافة ذاكرة أليس، "أعمل على تحسين مهاراتي في التنس"، إلى جانب البيانات الوصفية ذات الصلة بالسياق إلى ملفوس.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a memory to user: Working on improving tennis skills</span>
 res = m.add(
@@ -115,7 +160,22 @@ res
    'event': 'ADD'}],
  'relations': []}
 </code></pre>
-<h3 id="Update-a-Memory" class="common-anchor-header">تحديث الذاكرة</h3><p>يمكننا استخدام قيمة إرجاع الدالة <code translate="no">add</code> لاسترداد معرّف الذاكرة، مما يسمح لنا بتحديث هذه الذاكرة بمعلومات جديدة عبر <code translate="no">update</code>.</p>
+<h3 id="Update-a-Memory" class="common-anchor-header">تحديث الذاكرة<button data-href="#Update-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكننا استخدام قيمة إرجاع الدالة <code translate="no">add</code> لاسترداد معرّف الذاكرة، مما يسمح لنا بتحديث هذه الذاكرة بمعلومات جديدة عبر <code translate="no">update</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get memory_id</span>
 memory_id = res[<span class="hljs-string">&quot;results&quot;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>]
 
@@ -124,7 +184,22 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'message': 'Memory updated successfully!'}
 </code></pre>
-<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">الحصول على كل الذاكرة لمستخدم</h3><p>يمكننا استخدام الدالة <code translate="no">get_all</code> لعرض جميع الذكريات المدرجة أو التصفية حسب <code translate="no">user_id</code> في ميلفوس.</p>
+<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">الحصول على كل الذاكرة لمستخدم<button data-href="#Get-All-Memory-For-a-User" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكننا استخدام الدالة <code translate="no">get_all</code> لعرض جميع الذكريات المدرجة أو التصفية حسب <code translate="no">user_id</code> في ميلفوس.</p>
 <p>لاحظ أنه يمكننا أن نرى أن الذاكرة قد تغيرت الآن من "العمل على تطوير مهارات التنس" إلى "يحب لعب التنس في عطلات نهاية الأسبوع".</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
@@ -137,7 +212,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': '2024-11-01T19:33:47.619857-07:00',
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="View-Memory-Update-History" class="common-anchor-header">عرض سجل تحديث الذاكرة</h3><p>يمكننا أيضًا عرض سجل تحديث الذاكرة من خلال تحديد الذاكرة_المعرف التي نهتم بها عبر الدالة <code translate="no">history</code>.</p>
+<h3 id="View-Memory-Update-History" class="common-anchor-header">عرض سجل تحديث الذاكرة<button data-href="#View-Memory-Update-History" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكننا أيضًا عرض سجل تحديث الذاكرة من خلال تحديد الذاكرة_المعرف التي نهتم بها عبر الدالة <code translate="no">history</code>.</p>
 <pre><code translate="no" class="language-python">m.history(memory_id=memory_id)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'id': '71ed3cec-5d9a-4fa6-a009-59802450c0b9',
@@ -155,7 +245,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
   'created_at': '2024-11-01T19:33:44.116920-07:00',
   'updated_at': '2024-11-01T19:33:47.619857-07:00'}]
 </code></pre>
-<h3 id="Search-Memory" class="common-anchor-header">البحث في الذاكرة</h3><p>يمكننا استخدام الدالة <code translate="no">search</code> للبحث عن الذاكرة الأكثر ارتباطًا بالمستخدم.</p>
+<h3 id="Search-Memory" class="common-anchor-header">البحث في الذاكرة<button data-href="#Search-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكننا استخدام الدالة <code translate="no">search</code> للبحث عن الذاكرة الأكثر ارتباطًا بالمستخدم.</p>
 <p>لنبدأ بإضافة ذاكرة أخرى لـ أليس.</p>
 <pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
@@ -201,7 +306,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': None,
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="Delete-Memory" class="common-anchor-header">حذف الذاكرة</h3><p>يمكننا أيضًا <code translate="no">delete</code> ذاكرة من خلال توفير الذاكرة المقابلة <code translate="no">memory_id</code>.</p>
+<h3 id="Delete-Memory" class="common-anchor-header">حذف الذاكرة<button data-href="#Delete-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكننا أيضًا <code translate="no">delete</code> ذاكرة من خلال توفير الذاكرة المقابلة <code translate="no">memory_id</code>.</p>
 <p>سنقوم بحذف الذاكرة "يحب لعب التنس في عطلات نهاية الأسبوع" حيث تم استرجاع <code translate="no">memory_id</code> الخاص بها بالفعل، واستدعاء <code translate="no">get_all</code> للتحقق من نجاح عملية الحذف.</p>
 <pre><code translate="no" class="language-python">m.delete(memory_id=memory_id)
 

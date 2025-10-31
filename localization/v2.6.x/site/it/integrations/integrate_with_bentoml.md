@@ -38,7 +38,7 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Questa guida illustra come utilizzare un modello di embedding open-source e un modello di grande lingua su BentoCloud con il database vettoriale Milvus per costruire un'applicazione RAG (Retrieval Augmented Generation). BentoCloud è una piattaforma di inferenza AI per team di AI in rapida evoluzione, che offre un'infrastruttura completamente gestita su misura per l'inferenza di modelli. Funziona insieme a BentoML, un framework open-source per la gestione dei modelli, per facilitare la creazione e la distribuzione di servizi di modelli ad alte prestazioni. In questa demo, utilizziamo Milvus Lite come database vettoriale, che è la versione leggera di Milvus che può essere incorporata nelle applicazioni Python.</p>
+    </button></h2><p>Questa guida illustra come utilizzare un modello di embedding open-source e un modello di grande lingua su BentoCloud con il database vettoriale Milvus per costruire un'applicazione RAG (Retrieval Augmented Generation). BentoCloud è una piattaforma di inferenza AI per team di AI in rapida evoluzione, che offre un'infrastruttura completamente gestita su misura per l'inferenza di modelli. Funziona insieme a BentoML, un framework open-source per la gestione dei modelli, per facilitare la creazione e la distribuzione di servizi di modelli ad alte prestazioni. In questa demo, utilizziamo Milvus Lite come database vettoriale, che è la versione leggera di Milvus che può essere incorporata nella vostra applicazione Python.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +55,7 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e BentoML
         ></path>
       </svg>
     </button></h2><p>Milvus Lite è disponibile su PyPI. È possibile installarlo tramite pip per Python 3.8+:</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate, potrebbe essere necessario <strong>riavviare il runtime</strong> (fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Restart session" dal menu a discesa).</p>
@@ -178,7 +178,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta preparati gli embeddings e i dati, possiamo inserire i vettori insieme ai metadati in Milvus Lite per la successiva ricerca vettoriale. Il primo passo di questa sezione è avviare un client collegandosi a Milvus Lite. È sufficiente importare il modulo <code translate="no">MilvusClient</code> e inizializzare un client Milvus Lite che si connette al database vettoriale di Milvus Lite. La dimensione della dimensione deriva dalla dimensione del modello di incorporazione, ad esempio il modello Sentence Transformer <code translate="no">all-MiniLM-L6-v2</code> produce vettori di 384 dimensioni.</p>
+    </button></h2><p>Una volta preparati gli embeddings e i dati, possiamo inserire i vettori insieme ai metadati in Milvus Lite per la successiva ricerca vettoriale. Il primo passo in questa sezione è avviare un client collegandosi a Milvus Lite. È sufficiente importare il modulo <code translate="no">MilvusClient</code> e inizializzare un client Milvus Lite che si connette al database vettoriale di Milvus Lite. La dimensione della dimensione deriva dalla dimensione del modello di incorporazione, ad esempio il modello Sentence Transformer <code translate="no">all-MiniLM-L6-v2</code> produce vettori di 384 dimensioni.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>
@@ -215,7 +215,7 @@ connections.connect(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La creazione di una collezione con Milvus Lite comporta due fasi: la prima, la definizione dello schema e la seconda, la definizione dell'indice. Per questa sezione, abbiamo bisogno di un modulo: DataType, che indica il tipo di dati da inserire in un campo. Dobbiamo anche usare due funzioni per creare lo schema e aggiungere campi. create_schema(): crea lo schema di una collezione, add_field(): aggiunge un campo allo schema di una collezione.</p>
+    </button></h2><p>La creazione di una collezione con Milvus Lite comporta due fasi: la prima è la definizione dello schema e la seconda è la definizione dell'indice. Per questa sezione, abbiamo bisogno di un modulo: DataType, che indica il tipo di dati da inserire in un campo. Dobbiamo anche usare due funzioni per creare lo schema e aggiungere campi. create_schema(): crea lo schema di una collezione, add_field(): aggiunge un campo allo schema di una collezione.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Collection
 
 <span class="hljs-comment"># Create schema</span>

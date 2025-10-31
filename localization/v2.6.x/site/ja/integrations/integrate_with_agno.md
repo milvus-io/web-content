@@ -2,7 +2,7 @@
 id: integrate_with_agno.md
 title: MilvusとAgnoの統合
 summary: >-
-  Milvusのベクトルデータベースは、埋め込み情報として情報の効率的な保存と検索を可能にします。MilvusとAgnoを利用することで、Agentのワークフローにナレッジを簡単に統合することができます。このドキュメントは、MilvusとAgnoの統合の基本的な使い方を説明したものです。
+  Milvusのベクトルデータベースは、埋め込み情報として情報の効率的な保存と検索を可能にします。MilvusとAgnoを使用することで、Agentのワークフローにナレッジを簡単に統合することができます。このドキュメントは、MilvusとAgnoの統合の基本的な使い方を説明したものです。
 ---
 <h1 id="Integrate-Milvus-with-Agno" class="common-anchor-header">MilvusとAgnoの統合<button data-href="#Integrate-Milvus-with-Agno" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>必要な依存関係をインストールします：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
+<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus milvus-lite openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -83,7 +83,7 @@ vector_db = Milvus(
 <div class="alert note">
 <p>uriとtokenの設定方法は以下の通りです：</p>
 <ul>
-<li>小規模なデータやプロトタイピングのためにローカルベクターデータベースが必要な場合、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利です。</li>
+<li>小規模なデータやプロトタイピングのためにローカルのベクターデータベースが必要な場合、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利です。</li>
 <li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合は、トークンとして "<your_username>:<your_password>" を使用します。そうでない場合は、トークンを設定しないでください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、<code translate="no">uri</code> と<code translate="no">token</code> をZilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応させてください。</li>
 </ul>
@@ -103,7 +103,7 @@ vector_db = Milvus(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PDF url knowledageのベースインスタンスを作成し、データをインスタンスにロードします。例として公開レシピのPDFデータを使用します。</p>
+    </button></h2><p>PDF url knowledageのベースインスタンスを作成し、インスタンスにデータをロードします。例として公開レシピのPDFデータを使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create knowledge base</span>
 knowledge_base = PDFUrlKnowledgeBase(
     urls=[<span class="hljs-string">&quot;https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf&quot;</span>],

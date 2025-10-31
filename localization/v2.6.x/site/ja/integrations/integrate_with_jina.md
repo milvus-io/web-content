@@ -36,7 +36,8 @@ title: MilvusとJinaの統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>2020年にベルリンで設立されたJina AIは、検索基盤を通じて人工知能の未来に革命を起こすことに焦点を当てた先駆的なAI企業です。マルチモーダルAIに特化したJina AIは、エンベッディング、リランカー、プロンプトオペ、コアインフラを含む統合コンポーネント群を通じて、企業や開発者がマルチモーダルデータの力を価値創造とコスト削減のために活用できるようにすることを目指しています。 Jina AIの最先端のエンベッディングは、包括的なデータ表現に理想的な8192トークン長のモデルを特徴とし、トップクラスの性能を誇ります。多言語サポートとOpenAIのような主要プラットフォームとのシームレスな統合を提供するこれらのエンベッディングは、クロスリンガルアプリケーションを容易にします。</p>
+    </button></h2><p>2020年にベルリンで設立されたJina AIは、検索基盤を通じて人工知能の未来に革命を起こすことに焦点を当てた先駆的なAI企業です。マルチモーダルAIに特化したJina AIは、エンベッディング、リランカー、プロンプトオプス、コアインフラを含む統合コンポーネント群を通じて、企業や開発者がマルチモーダルデータの力を価値創造とコスト削減のために活用できるようにすることを目指しています。<br>
+Jina AIの最先端のエンベッディングは、包括的なデータ表現に理想的な8192トークン長モデルを特徴とし、トップクラスのパフォーマンスを誇ります。多言語サポートとOpenAIのような主要プラットフォームとのシームレスな統合を提供するこれらのエンベッディングは、クロスリンガルアプリケーションを容易にします。</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">MilvusとJina AIのエンベッディング<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +71,7 @@ title: MilvusとJinaの統合
       </svg>
     </button></h2><p>JinaエンベッディングはPyMilvusモデルライブラリに統合されています。では、実際にJinaエンベッディングをどのように使うか、コード例を示します。</p>
 <p>始める前に、PyMilvus用のモデルライブラリをインストールする必要があります。</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

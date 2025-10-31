@@ -41,7 +41,7 @@ title: DeepEvalによる評価
         ></path>
       </svg>
     </button></h2><p>このノートブックを実行する前に、以下の依存関係がインストールされていることを確認してください：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -66,7 +66,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusをベクトルストアとして、OpenAIをLLMとして使用するRAGクラスを定義します。このクラスには、テキストデータをMilvusにロードする<code translate="no">load</code> メソッド、与えられた質問に最も類似したテキストデータを検索する<code translate="no">retrieve</code> メソッド、検索された知識を使って与えられた質問に回答する<code translate="no">answer</code> メソッドが含まれます。</p>
+    </button></h2><p>Milvusをベクトルストアとして、OpenAIをLLMとして使用するRAGクラスを定義します。このクラスには、テキストデータをMilvusにロードする<code translate="no">load</code> メソッド、与えられた質問に最も類似したテキストデータを検索する<code translate="no">retrieve</code> メソッド、検索された知識を用いて与えられた質問に回答する<code translate="no">answer</code> メソッドが含まれます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
@@ -327,7 +327,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>大規模言語モデル（LLM）システムでレトリバーを評価する場合、以下の点を評価することが重要だ：</p>
+    </button></h2><p>大規模言語モデル（LLM）システムでリトリーバーを評価する場合、以下の点を評価することが重要だ：</p>
 <ol>
 <li><p><strong>ランキングの妥当性</strong>：リトリーバーが、関連性のないデータよりも関連性のある情報をいかに効果的に優先させるか。</p></li>
 <li><p><strong>文脈検索</strong>：入力に基づき、文脈に関連する情報を捕捉し、検索する能力。</p></li>

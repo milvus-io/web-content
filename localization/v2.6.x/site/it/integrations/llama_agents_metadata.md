@@ -145,7 +145,7 @@ title: 'Sistemi multi-agente con Mistral AI, Milvus e Llama-agenti'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus openai python-dotenv</span>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus milvus-lite openai python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus llama-index-readers-file llama-index-llms-ollama llama-index-llms-mistralai llama-index-embeddings-mistralai</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -482,7 +482,7 @@ llm = Ollama(model=<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
     </button></h2><p>Ora possiamo vedere il filtraggio dei metadati in azione:</p>
 <ol>
 <li>Nel primo caso, l'Agente non dovrebbe essere in grado di trovare nulla che risponda alla richiesta dell'utente, poiché si tratta di Uber e noi filtriamo solo i documenti relativi a Lyft.</li>
-<li>Nel secondo, l'agente dovrebbe essere in grado di trovare informazioni su Lyft, in quanto cercheremo solo documenti che riguardano Lyft.</li>
+<li>Nel secondo, l'agente dovrebbe essere in grado di trovare informazioni su Lyft, poiché cercheremo solo documenti che riguardano Lyft.</li>
 </ol>
 <pre><code translate="no" class="language-python">response = llm.predict_and_call(
     query_engine_tools,
@@ -560,10 +560,25 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
         ></path>
       </svg>
     </button></h2><p>Di seguito è riportato un esempio di codice che dimostra come creare un motore di query filtrata utilizzando un agente per estrarre i filtri dei metadati dalla domanda dell'utente:</p>
-<h3 id="Explanation" class="common-anchor-header">Spiegazione</h3><ul>
+<h3 id="Explanation" class="common-anchor-header">Spiegazione<button data-href="#Explanation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Modello di prompt</strong>: La classe PromptTemplate è usata per definire un modello per estrarre i filtri di metadati dalla domanda dell'utente. Il modello indica al modello linguistico di considerare i nomi delle aziende, gli anni e altri attributi rilevanti.</p></li>
 <li><p><strong>LLM</strong>: Mistral Nemo viene utilizzato per generare i filtri di metadati in base alla domanda dell'utente. Il modello viene sollecitato con la domanda e il modello per estrarre i filtri pertinenti.</p></li>
-<li><p><strong>Filtri dei metadati</strong>: La risposta del LLM viene analizzata per creare un oggetto <code translate="no">MetadataFilters</code>. Se non vengono indicati filtri specifici, viene restituito un oggetto <code translate="no">MetadataFilters</code> vuoto.</p></li>
+<li><p><strong>Filtri dei metadati</strong>: La risposta dell'LLM viene analizzata per creare un oggetto <code translate="no">MetadataFilters</code>. Se non vengono indicati filtri specifici, viene restituito un oggetto <code translate="no">MetadataFilters</code> vuoto.</p></li>
 <li><p><strong>Motore di query filtrata</strong>: il metodo <code translate="no">index.as_query_engine(filters=metadata_filters)</code> crea un motore di query che applica i filtri dei metadati estratti all'indice. Questo assicura che vengano recuperati solo i documenti che corrispondono ai criteri del filtro.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.prompts.base <span class="hljs-keyword">import</span> PromptTemplate
@@ -647,15 +662,60 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
         ></path>
       </svg>
     </button></h2><p>Mistral Large è il modello di punta di Mistral, con ottime capacità di ragionamento, conoscenza e codifica. È ideale per compiti complessi che richiedono grandi capacità di ragionamento o sono altamente specializzati. Ha capacità avanzate di chiamata di funzioni, che è esattamente ciò di cui abbiamo bisogno per orchestrare i nostri diversi agenti.</p>
-<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">Perché abbiamo bisogno di un Modello più intelligente?</h3><p>La domanda a cui si sta rispondendo è particolarmente impegnativa perché richiede l'orchestrazione di più servizi e agenti per fornire una risposta coerente e accurata. Ciò comporta il coordinamento di vari strumenti e agenti per recuperare ed elaborare informazioni da fonti diverse, come i dati finanziari di diverse aziende.</p>
-<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">Cosa c'è di così difficile?</h3><ul>
+<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">Perché abbiamo bisogno di un Modello più intelligente?<button data-href="#Why-do-we-need-a-smarter-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La domanda a cui si sta rispondendo è particolarmente impegnativa perché richiede l'orchestrazione di più servizi e agenti per fornire una risposta coerente e accurata. Ciò comporta il coordinamento di vari strumenti e agenti per recuperare ed elaborare informazioni da fonti diverse, come i dati finanziari di diverse aziende.</p>
+<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">Cosa c'è di così difficile?<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>La complessità: La domanda coinvolge più agenti e servizi, ciascuno con le proprie funzionalità e fonti di dati. Coordinare questi agenti per farli lavorare insieme senza problemi è un compito complesso.</li>
 </ul>
 <ul>
 <li><p>Integrazione dei dati: La domanda richiede l'integrazione di dati provenienti da fonti diverse, il che può essere difficile a causa delle variazioni nei formati, nelle strutture e nei metadati dei dati.</p></li>
 <li><p>Comprensione del contesto: La domanda può richiedere la comprensione del contesto e delle relazioni tra le diverse informazioni, un compito cognitivamente impegnativo.</p></li>
 </ul>
-<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">Perché Mistral Large potrebbe essere utile in questo caso?</h3><p>Mistral Large è adatto a questo compito grazie alle sue capacità avanzate di ragionamento e di chiamata di funzioni. Ecco come ci aiuta:</p>
+<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">Perché Mistral Large potrebbe essere utile in questo caso?<button data-href="#Why-would-Mistral-Large-help-in-this-case" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mistral Large è adatto a questo compito grazie alle sue capacità avanzate di ragionamento e di chiamata di funzioni. Ecco come ci aiuta:</p>
 <ul>
 <li><p>Ragionamento avanzato: Mistral Large è in grado di gestire attività di ragionamento complesse, che lo rendono ideale per l'orchestrazione di più agenti e servizi. È in grado di comprendere le relazioni tra le diverse informazioni e di prendere decisioni informate.</p></li>
 <li><p>Capacità di chiamata di funzioni: Mistral Large dispone di funzionalità avanzate di chiamata di funzioni, essenziali per coordinare le azioni di diversi agenti. Ciò consente una perfetta integrazione e orchestrazione di vari servizi.</p></li>

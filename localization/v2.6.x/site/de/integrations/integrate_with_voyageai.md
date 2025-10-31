@@ -39,9 +39,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Bevor Sie beginnen, stellen Sie sicher, dass Sie den Voyage-API-Schlüssel bereit haben, oder Sie erhalten einen von der <a href="https://dash.voyageai.com/api-keys">VoyageAI-Website</a>.</p>
-<p>Die in diesem Beispiel verwendeten Daten sind Buchtitel. Sie können den Datensatz <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">hier</a> herunterladen und im selben Verzeichnis ablegen, in dem Sie den folgenden Code ausführen.</p>
+<p>Die in diesem Beispiel verwendeten Daten sind Buchtitel. Sie können den Datensatz <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">hier</a> herunterladen und ihn in das gleiche Verzeichnis legen, in dem Sie den folgenden Code ausführen.</p>
 <p>Installieren Sie zunächst das Paket für Milvus und Voyage AI:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
+<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren. (Klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
@@ -223,7 +223,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Jetzt sind wir bereit, die Bilder zu durchsuchen. Hier ist die Abfrage ein String, aber wir können auch Bilder abfragen. (siehe die Dokumentation für die multimodale API <a href="https://docs.voyageai.com/docs/multimodal-embeddings">hier</a>). Wir verwenden matplotlib, um die Ergebnisbilder anzuzeigen.</p>
+<p>Nun sind wir bereit, die Bilder zu durchsuchen. Hier ist die Abfrage ein String, aber wir können auch Bilder abfragen. (siehe die Dokumentation für die multimodale API <a href="https://docs.voyageai.com/docs/multimodal-embeddings">hier</a>). Wir verwenden matplotlib, um die Ergebnisbilder anzuzeigen.</p>
 <pre><code translate="no" class="language-python">queries = [[<span class="hljs-string">&quot;The consequences of a dictator&#x27;s peace&quot;</span>]]
 
 query_vectors = client.multimodal_embed(

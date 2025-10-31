@@ -1085,7 +1085,7 @@
                 "children": []
               },
               {
-                "label": "Voyage AI",
+                "label": "航程 AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1701,7 +1701,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Enable Authentication",
+            "label": "啟用驗證",
             "id": "authenticate.md",
             "order": 0,
             "children": []
@@ -2175,6 +2175,12 @@
                 "label": "非同步搜尋",
                 "id": "langchain_milvus_async.md",
                 "order": 5,
+                "children": []
+              },
+              {
+                "label": "代理 RAG",
+                "id": "agentic_rag_with_milvus_and_langgraph.md",
+                "order": 6,
                 "children": []
               }
             ]

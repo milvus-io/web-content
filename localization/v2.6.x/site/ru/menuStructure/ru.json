@@ -130,7 +130,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -600,7 +600,7 @@
                     "children": []
                   },
                   {
-                    "label": "Остановите",
+                    "label": "Остановить",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -2175,6 +2175,12 @@
                 "label": "Асинхронный поиск",
                 "id": "langchain_milvus_async.md",
                 "order": 5,
+                "children": []
+              },
+              {
+                "label": "Агент RAG",
+                "id": "agentic_rag_with_milvus_and_langgraph.md",
+                "order": 6,
                 "children": []
               }
             ]

@@ -36,7 +36,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
    </span> <span class="img-wrapper"> <span>Flux de travail de la recherche hybride</span> </span></p>
-<p>La recherche hybride multi-vectorielle intègre différentes méthodes de recherche ou couvre des encastrements provenant de diverses modalités :</p>
+<p>La recherche hybride multi-vectorielle intègre différentes méthodes de recherche ou englobe des encastrements provenant de diverses modalités :</p>
 <ul>
 <li><p><strong>Recherche de vecteurs denses et épars</strong>: Les <a href="/docs/fr/dense-vector.md">vecteurs denses</a> sont excellents pour capturer les relations sémantiques, tandis que les <a href="/docs/fr/sparse_vector.md">vecteurs épars</a> sont très efficaces pour la correspondance précise des mots-clés. La recherche hybride combine ces approches pour fournir à la fois une compréhension conceptuelle large et une pertinence exacte des termes, améliorant ainsi les résultats de la recherche. En tirant parti des points forts de chaque méthode, la recherche hybride surmonte les limites des approches individuelles et offre de meilleures performances pour les requêtes complexes. Voici un <a href="/docs/fr/full_text_search_with_milvus.md">guide</a> plus détaillé sur la recherche hybride qui combine la recherche sémantique et la recherche en texte intégral.</p></li>
 <li><p><strong>Recherche vectorielle multimodale</strong>: La recherche vectorielle multimodale est une technique puissante qui vous permet d'effectuer des recherches dans différents types de données, y compris le texte, les images, l'audio et d'autres. Le principal avantage de cette approche est sa capacité à unifier différentes modalités en une expérience de recherche homogène et cohérente. Par exemple, dans le cadre d'une recherche de produits, un utilisateur peut saisir une requête textuelle pour trouver des produits décrits à la fois par du texte et des images. En combinant ces modalités au moyen d'une méthode de recherche hybride, vous pouvez améliorer la précision de la recherche ou enrichir les résultats de la recherche.</p></li>
@@ -98,7 +98,7 @@ summary: >-
 <p>Cet exemple incorpore les champs suivants dans le schéma :</p>
 <ul>
 <li><p><code translate="no">id</code>: sert de clé primaire pour le stockage des identifiants de texte. Ce champ est de type <code translate="no">INT64</code>.</p></li>
-<li><p><code translate="no">text</code>: Utilisé pour stocker le contenu textuel. Ce champ est de type <code translate="no">VARCHAR</code> et a une longueur maximale de 1000 octets. L'option <code translate="no">enable_analyzer</code> est définie sur <code translate="no">True</code> pour faciliter la recherche en texte intégral.</p></li>
+<li><p><code translate="no">text</code>: Utilisé pour stocker le contenu textuel. Ce champ est du type <code translate="no">VARCHAR</code> et a une longueur maximale de 1000 octets. L'option <code translate="no">enable_analyzer</code> est définie sur <code translate="no">True</code> pour faciliter la recherche en texte intégral.</p></li>
 <li><p><code translate="no">text_dense</code>: Utilisé pour stocker les vecteurs denses des textes. Ce champ est de type <code translate="no">FLOAT_VECTOR</code> avec une dimension vectorielle de 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Utilisé pour stocker les vecteurs peu denses des textes. Ce champ est du type <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p><code translate="no">image_dense</code>: Utilisé pour stocker les vecteurs denses des images de produits. Ce champ est du type <code translate="no">FLOAT_VETOR</code> avec une dimension vectorielle de 512.</p></li>
@@ -116,7 +116,7 @@ client = MilvusClient(
 )
 
 <span class="hljs-comment"># Init schema with auto_id disabled</span>
-schema = MilvusClient.create_schema(auto_id=<span class="hljs-literal">False</span>)
+schema = client.create_schema(auto_id=<span class="hljs-literal">False</span>)
 
 <span class="hljs-comment"># Add fields to schema</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;product id&quot;</span>)
@@ -288,7 +288,7 @@ schema.WithField(entity.NewField().
       <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&quot;text_sparse&quot;</span>],
       <span class="hljs-attr">params</span>: {},
     },
-]；
+];
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> bm25Function=<span class="hljs-string">&#x27;{
     &quot;name&quot;: &quot;text_bm25_emb&quot;,
@@ -355,14 +355,12 @@ schema.WithField(entity.NewField().
 <ul>
 <li><p><code translate="no">text_dense_index</code>: un index de type <code translate="no">AUTOINDEX</code> avec le type de métrique <code translate="no">IP</code> est créé pour le champ vectoriel dense de texte.</p></li>
 <li><p><code translate="no">text_sparse_index</code>: un index de type<code translate="no">SPARSE_INVERTED_INDEX</code>avec le type métrique <code translate="no">BM25</code> est utilisé pour le champ de vecteurs textuels clairsemés.</p></li>
-<li><p><code translate="no">image_dense_index</code>un index de type <code translate="no">AUTOINDEX</code> avec le type métrique <code translate="no">IP</code> est créé pour le champ vectoriel dense de l'image.</p></li>
+<li><p><code translate="no">image_dense_index</code>champ vectoriel dense de l'image : un index de type <code translate="no">AUTOINDEX</code> avec le type métrique <code translate="no">IP</code> est créé pour le champ vectoriel dense de l'image.</p></li>
 </ul>
 <p>Vous pouvez choisir d'autres types d'index pour répondre au mieux à vos besoins et à vos types de données. Pour plus d'informations sur les types d'index supportés, veuillez vous référer à la documentation sur les <a href="/docs/fr/index-vector-fields.md">types d'index disponibles</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-<span class="hljs-comment"># Prepare index parameters</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Add indexes</span>
@@ -490,9 +488,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
     </button></h3><p>Créez une collection nommée <code translate="no">demo</code> avec le schéma de collection et les index configurés dans les deux étapes précédentes.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client.create_collection(
+<pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
@@ -558,26 +554,30 @@ curl --request POST \
 <p>Étant donné que cet exemple utilise la fonction BM25 intégrée pour générer des encastrements denses à partir du champ de texte, vous n'avez pas besoin de fournir des vecteurs denses manuellement. Toutefois, si vous choisissez de ne pas utiliser BM25, vous devez précalculer et fournir vous-même les vecteurs d'intégration épars.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># Generate example vectors</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_dense_vector</span>(<span class="hljs-params">dim</span>):
+    <span class="hljs-keyword">return</span> [random.random() <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(dim)]
 
 data=[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>,
-        <span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...],
-        <span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6366019600530924</span>, -<span class="hljs-number">0.09323198122475052</span>, ...]
+        <span class="hljs-string">&quot;text_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">768</span>),
+        <span class="hljs-string">&quot;image_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">512</span>)
     },
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>,
-        <span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...],
-        <span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6414180010301553</span>, <span class="hljs-number">0.8976979978567611</span>, ...]
+        <span class="hljs-string">&quot;text_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">768</span>),
+        <span class="hljs-string">&quot;image_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">512</span>)
     },
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>,
-        <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...],
-        <span class="hljs-string">&quot;image_dense&quot;</span>: [-<span class="hljs-number">0.6901259768402174</span>, <span class="hljs-number">0.6100500332193755</span>, ...]
+        <span class="hljs-string">&quot;text_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">768</span>),
+        <span class="hljs-string">&quot;image_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">512</span>)
     }
 ]
 
@@ -712,8 +712,8 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
-query_dense_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.5142999509918703</span>, ...]
-query_multimodal_vector = [<span class="hljs-number">0.015829865178701663</span>, <span class="hljs-number">0.5264158340734488</span>, ...]
+query_dense_vector = generate_dense_vector(<span class="hljs-number">768</span>)
+query_multimodal_vector = generate_dense_vector(<span class="hljs-number">512</span>)
 
 <span class="hljs-comment"># text semantic search (dense)</span>
 search_param_1 = {
@@ -855,8 +855,67 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour fusionner et reclasser les ensembles de résultats de recherche ANN, il est essentiel de sélectionner une stratégie de reclassement appropriée. Milvus propose plusieurs types de stratégies de reclassement. Pour plus de détails sur ces mécanismes de reclassement, reportez-vous à la section <a href="/docs/fr/reranking">Reclassement</a>.</p>
+    </button></h3><p>Pour fusionner et reclasser les ensembles de résultats de recherche ANN, il est essentiel de sélectionner une stratégie de reclassement appropriée. Milvus propose plusieurs types de stratégies de reclassement. Pour plus de détails sur ces mécanismes de reclassement, veuillez vous référer à <a href="/docs/fr/weighted-ranker.md">Weighted Ranker</a> ou <a href="/docs/fr/rrf-ranker.md">RRF Ranker</a>.</p>
 <p>Dans cet exemple, comme il n'y a pas d'importance particulière accordée à des requêtes de recherche spécifiques, nous utiliserons la stratégie RRFRanker.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">ranker = Function(
+    name=<span class="hljs-string">&quot;rrf&quot;</span>,
+    input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
+    function_type=FunctionType.RERANK,
+    params={
+        <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>, 
+        <span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>  <span class="hljs-comment"># Optional</span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .build()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> rerank = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rrf&#x27;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">params</span>: {
+      <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>, 
+      <span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;rrf&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Restful</span>
+<span class="hljs-built_in">export</span> functionScore=<span class="hljs-string">&#x27;{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;rrf&quot;,
+            &quot;type&quot;: &quot;Rerank&quot;,
+            &quot;inputFieldNames&quot;: [],
+            &quot;params&quot;: {
+                &quot;reranker&quot;: &quot;rrf&quot;,
+                &quot;k&quot;: 100
+            }
+        }
+    ]
+}&#x27;</span>
+
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Étape 3 : Effectuer une recherche hybride<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -875,9 +934,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     </button></h3><p>Avant de lancer une recherche hybride, il faut s'assurer que la collection est chargée. Si l'un des champs vectoriels de la collection n'a pas d'index ou n'est pas chargé en mémoire, une erreur se produira lors de l'exécution de la méthode de recherche hybride.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-res = client.hybrid_search(
+<pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
     ranker=ranker,
@@ -934,7 +991,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/advanced_search&quot;</span> \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{

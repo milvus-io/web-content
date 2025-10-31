@@ -22,7 +22,7 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und Camel
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Dieser Leitfaden zeigt, wie ein Retrieval-Augmented Generation (RAG) System mit CAMEL und Milvus aufgebaut werden kann.</p>
+<p>Dieser Leitfaden zeigt, wie man ein Retrieval-Augmented Generation (RAG) System mit CAMEL und Milvus aufbaut.</p>
 <p>Das RAG-System kombiniert ein Retrievalsystem mit einem generativen Modell, um neuen Text auf der Grundlage einer vorgegebenen Aufforderung zu generieren. Das System ruft zunächst relevante Dokumente aus einem Korpus mit Milvus ab und verwendet dann ein generatives Modell, um neuen Text auf der Grundlage der abgerufenen Dokumente zu erzeugen.</p>
 <p><a href="https://www.camel-ai.org/">CAMEL</a> ist ein Multiagentensystem. <a href="https://milvus.io/">Milvus</a> ist die weltweit fortschrittlichste Open-Source-Vektordatenbank, die für die Einbettung von Ähnlichkeitssuche und KI-Anwendungen entwickelt wurde.</p>
 <p>In diesem Notizbuch zeigen wir die Verwendung des CAMEL Retrieve Moduls sowohl auf angepasste als auch auf automatische Weise. Wir zeigen auch, wie man <code translate="no">AutoRetriever</code> mit <code translate="no">ChatAgent</code> und <code translate="no">AutoRetriever</code> mit <code translate="no">RolePlaying</code> unter Verwendung von <code translate="no">Function Calling</code> kombiniert.</p>
@@ -49,7 +49,7 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und Camel
         ></path>
       </svg>
     </button></h2><p>Laden wir zunächst das CAMEL-Papier von https://arxiv.org/pdf/2303.17760.pdf. Dies werden unsere lokalen Beispieldaten sein.</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>

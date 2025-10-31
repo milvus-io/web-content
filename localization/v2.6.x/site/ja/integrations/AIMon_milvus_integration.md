@@ -34,7 +34,7 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このチュートリアルでは、<a href="https://meetingbank.github.io/">会議バンクのデータセットに関する</a>質問に回答する検索拡張世代（RAG）チャットボットを構築するお手伝いをします。</p>
+    </button></h2><p>このチュートリアルでは、<a href="https://meetingbank.github.io/">会議バンクのデータセットに関する</a>質問に回答する検索支援世代（RAG）チャットボットを構築するお手伝いをします。</p>
 <p>このチュートリアルでは以下のことを学びます：</p>
 <ul>
 <li>会議バンクデータセットに関連するユーザーの質問に答えるLLMアプリケーションを構築する。</li>
@@ -59,7 +59,7 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>ベクトルデータベース</em></h4><p>このアプリケーションでは、<a href="https://milvus.io/">Milvusを</a>使用して、テキスト、画像、動画などの大規模な非構造化データを管理・検索する。</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLMフレームワーク</em></h4><p>LlamaIndexは、オープンソースのデータオーケストレーションフレームワークであり、プライベートデータとLLMの統合を容易にすることで、大規模言語モデル（LLM）アプリケーションの構築を簡素化し、RAG（Retrieval-Augmented Generation）パイプラインを通じて、文脈を考慮した生成AIアプリケーションを可能にする。このチュートリアルではLlamaIndexを使用します。LlamaIndexは柔軟性に優れ、より低レベルのAPIを抽象化できるからです。</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM出力品質の評価</em></h4><p><a href="https://www.aimon.ai">AIMonは</a>、幻覚、文脈品質問題、LLMの命令順守、検索品質、その他のLLMの信頼性タスクに対する独自の判定モデルを提供します。LLMアプリケーションの品質判定にAIMonを使用します。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">前提条件<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,17 +77,37 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
         ></path>
       </svg>
     </button></h1><ol>
-<li><p><a href="https://docs.aimon.ai/quickstart">こちらからAIMonアカウントに</a>サインアップしてください。</p>
-<p>このシークレットをColab Secrets（左パネルの「鍵」マーク）に追加してください。 Google以外のColab環境にいる場合は、googleのColab関連コードをご自身で置き換えてください。</p>
+<li><a href="https://docs.aimon.ai/quickstart">こちらからAIMonアカウントに</a>サインアップしてください。</li>
+</ol>
+<p>このシークレットをColab Secrets（左パネルの「鍵」マーク）に追加する。</p>
+<blockquote>
+<p>Google Colab以外の環境にいる場合は、google Colab関連のコードをご自身で置き換えてください。</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p><a href="https://platform.openai.com/docs/overview">こちらからOpenAIのアカウントに</a>サインアップし、Colab secretsに以下のキーを追加してください：</p>
+</ul>
+<ol start="2">
+<li><a href="https://platform.openai.com/docs/overview">こちらからOpenAIのアカウントに</a>サインアップし、Colab secretsに以下のキーを追加してください：</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">必要なAPIキー</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">必要なAPIキー<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -242,7 +262,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">分析</h3><p>258のトランスクリプトがあり、これらのトランスクリプト全体で合計約1Mのトークンがあります。トランスクリプトあたりの平均トークン数は3864です。</p>
+<h3 id="Analysis" class="common-anchor-header">分析<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>258のトランスクリプトがあり、これらのトランスクリプト全体で合計約1Mのトークンがあります。トランスクリプトあたりの平均トークン数は3864です。</p>
 <table>
 <thead>
 <tr><th>メトリック</th><th>値</th></tr>
@@ -253,7 +288,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>平均# トランスクリプトあたりのトークン数</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">クエリー</h3><p>以下は、上記のトランスクリプトに対して実行する12のクエリーです。</p>
+<h3 id="Queries" class="common-anchor-header">クエリー<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下は、上記のトランスクリプトに対して実行する12のクエリーです。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -477,7 +527,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
         ></path>
       </svg>
     </button></h1><p>今度は、ベクトルDBを追加することで品質スコアを向上させる。これは、以前のアプローチと比較して、クエリのレイテンシを改善するのにも役立つ。</p>
-<p>注意すべき主なコンポーネントは2つある：インジェストとRAGベースのQ&amp;Aである。インジェストパイプラインは、Meeting Bankデータセットからトランスクリプトを処理し、Milvus Vectorデータベースに格納する。RAG Q&amp;Aパイプラインは、まずベクターストアから関連ドキュメントを取得することで、ユーザクエリを処理する。これらの文書はLLMが回答を生成するための基礎文書として使用される。AIMonを活用して品質スコアを計算し、<a href="https://docs.aimon.ai/detectors/hallucination">幻覚</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指示の順守</a>、<a href="https://docs.aimon.ai/checker-models/context_relevance">文脈の関連</a>性についてアプリケーションを継続的に監視する。これらは、上記の<code translate="no">quality</code> スコアの定義に使用したのと同じ3つのメトリクスです。</p>
+<p>注意すべき主なコンポーネントは2つある：インジェストとRAGベースのQ&amp;Aである。インジェストパイプラインは、Meeting Bankデータセットからトランスクリプトを処理し、Milvus Vectorデータベースに格納する。RAG Q&amp;Aパイプラインは、まずベクターストアから関連ドキュメントを取得することで、ユーザクエリを処理する。これらの文書はLLMが回答を生成するための基礎文書として使用される。AIMonを活用して品質スコアを計算し、<a href="https://docs.aimon.ai/detectors/hallucination">幻覚</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指示の遵守</a>、<a href="https://docs.aimon.ai/checker-models/context_relevance">文脈の関連</a>性についてアプリケーションを継続的に監視する。これらは、上記の<code translate="no">quality</code> スコアの定義に使用したのと同じ3つのメトリクスです。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
@@ -786,7 +836,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>次に、AIMonのLlamaIndex<a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">ポストプロセッサの再ランク統合を</a>使用して、AIMonの<a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">ドメイン適応可能な再ランクを</a>追加します。</p>
+    </button></h1><p>次に、AIMonのLlamaIndex<a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">ポストプロセッサの再ランク統合を</a>使用して、AIMonの<a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">ドメイン適応可能な再ランク付けを</a>追加します。</p>
 <p>下図に示すように、再ランク付けは、より高度なクエリ-文書マッチング機能を使用することで、最も関連性の高い文書を上位にバブルアップするのに役立ちます。AIMonのリランカーのユニークな特徴は、ドメインごとにカスタマイズできることです。LLMのプロンプトエンジニアリングと同様に、<code translate="no">task_definition</code> フィールドを使用して、ドメインごとにリランカーのパフォーマンスをカスタマイズすることができます。この最先端のリランカーは、超低レイテンシー（～2kのコンテキストに対して）で動作し、そのパフォーマンスはMTEBリランキングリーダーボードのトップ5にランクインしている。</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
@@ -895,12 +945,12 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <p>まとめると、下図に示すように、以下のことが実証されました：</p>
 <ul>
 <li>幻覚スコア、指示遵守スコア、検索関連性スコアの3つの異なる品質メトリクスの重み付けされた組み合わせを使用した品質スコアの計算。</li>
-<li>ブルートフォース（総当たり）文字列マッチング・アプローチを使って、クエリに文書をマッチングさせ、それをLLMに渡すことで、品質ベースラインを確立。</li>
+<li>ブルートフォース（総当り）文字列マッチング・アプローチを使って、クエリに文書をマッチさせ、それをLLMに渡すことで、品質ベースラインを確立。</li>
 <li>ベクターDB（ここではmilvusを使用）を使ってベースラインの品質を改善。</li>
 <li>AIMonの低レイテンシーでドメインに適応可能な再ランカーを使い、品質スコアをさらに向上させた。</li>
 <li>また、AIMonのリランカーを追加することで、検索関連性が大幅に向上することも示した。</li>
 </ul>
-<p><strong>品質スコアを</strong>さらに向上させるために、このノートブックに示したさまざまなコンポーネントを試してみることをお勧めする。1つのアイデアは、上記のinstruction_adherence検出器の<code translate="no">instructions</code> フィールドを使用して、独自の品質定義を追加することです。もう1つのアイデアは、<a href="https://docs.aimon.ai/category/checker-models">AIMonのチェッカーモデルの</a>1つを品質メトリック計算の一部として追加することです。</p>
+<p><strong>品質スコアを</strong>さらに向上させるために、このノートブックに示したさまざまなコンポーネントを試してみることをお勧めする。1つのアイデアは、上記のinstruction_adherence検出器の<code translate="no">instructions</code> フィールドを使用して、独自の品質定義を追加することです。もう1つのアイデアは、品質メトリック計算の一部として<a href="https://docs.aimon.ai/category/checker-models">AIMonのチェッカーモデルを</a>もう1つ追加することです。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df_scores = pd.DataFrame(
@@ -934,6 +984,18 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }.<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -941,7 +1003,7 @@ df_scores
       <th>アプローチ</th>
       <th>品質スコア</th>
       <th>検索関連性スコア</th>
-      <th>品質スコアの増加</th>
+      <th>品質スコアの増加(%)</th>
       <th>検索関連度スコアの増加(%)</th>
     </tr>
   </thead>
@@ -972,5 +1034,150 @@ df_scores
     </tr>
   </tbody>
 </table>
-<p>上記の表は、私たちの結果をまとめたものです。実際の数値は、LLM回答の品質のばらつき、VectorDBの最近傍探索のパフォーマンスなど、様々な要因によって異なります。</p>
-<p>結論として、下図に示すように、LLMアプリケーションの品質スコア、RAG関連性、命令フォロー能力を評価しました。AIMonのリランカーを使用して、アプリケーションの全体的な品質と、お客様のRAGから検索されたドキュメントの平均的な関連性を改善しました。</p>
+</div>
+    <div class="colab-df-buttons">
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-c43e3124-8331-40e6-97e4-b2d026a0ed70')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+<path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+</svg>
+</button></p>
+  
+   <style>.colab-df-container { display:flex; gap: 12px; }<pre><code translate="no">.colab-df-convert {
+  background-color: #E8F0FE;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  fill: #1967D2;
+  height: 32px;
+  padding: 0 0 0 0;
+  width: 32px;
+}
+
+.colab-df-convert:hover {
+  background-color: #E2EBFA;
+  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+  fill: #174EA6;
+}
+
+.colab-df-buttons div {
+  margin-bottom: 4px;
+}
+
+[theme=dark] .colab-df-convert {
+  background-color: #3B4455;
+  fill: #D2E3FC;
+}
+
+[theme=dark] .colab-df-convert:hover {
+  background-color: #434B5C;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+  fill: #FFFFFF;
+}
+</code></pre></style><pre><code translate="no">&lt;script&gt;
+  const buttonEl =
+    document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70 button.colab-df-convert');
+  buttonEl.style.display =
+    google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+  async function convertToInteractive(key) {
+    const element = document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70');
+    const dataTable =
+      await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                [key], {});
+    if (!dataTable) return;
+
+    const docLinkHtml = 'Like what you see? Visit the ' +
+      '&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;'
+      + ' to learn more about interactive tables.';
+    element.innerHTML = '';
+    dataTable['output_type'] = 'display_data';
+    await google.colab.output.renderOutput(dataTable, element);
+    const docLink = document.createElement('div');
+    docLink.innerHTML = docLinkHtml;
+    element.appendChild(docLink);
+  }
+&lt;/script&gt;
+</code></pre>
+  </div>
+<div id="df-3b8c700e-50cd-4b5f-8b23-64725b4af575">
+  <button class="colab-df-quickchart" onclick="quickchart('df-3b8c700e-50cd-4b5f-8b23-64725b4af575')"
+            title="Suggest charts"
+            style="display:none;">
+<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+width="24px">
+<g>
+<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+</g>
+</svg></p>
+  </button>
+<style>
+  .colab-df-quickchart { --bg-color：--bg-color: #E8F0FE; --fill-color：-fill-color: #1967D2; --hover-bg-color：--hover-bg-color: #E2EBFA; --hover-fill-color：#174EA6; --disabled-fill-color：-disabled-bg-color：-disabled-bg-color: #AAA; -disabled-bg-color: #DDD; }<p>[theme=dark] .colab-df-quickchart { -bg-color：-bg-color: #3B4455; -fill-color：-bg-color: #3B4455; -fill-color: #D2E3FC; -hover-bg-color：-hover-bg-color: #434B5C; -hover-fill-color：-hover-fill-color: #434B5C; -hover-fill-color: #FFFFFF; -disabled-bg-color：-disabled-bg-color: #3B4455; -disabled-fill-color：</p>#<p>}</p><p>.colab-df-quickchart { background-color: var(-bg-color); border: none; border-radius: 50%; cursor: pointer; display: none; fill: var(-fill-color); height: 32px; padding：0; width: 32px; }</p><p>.colab-df-quickchart:hover { background-color: var(-hover-bg-color); box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15); fill: var(-button-hover-fill-color); }</p><p>.colab-df-quickchart-complete:disabled, .colab-df-quickchart-complete:disabled:hover { background-color: var(-disabled-bg-color); fill: var(-disabled-fill-color); box-shadow: none; }</p><p>.colab-df-spinner { border：2px solid var(-fill-color); border-color: transparent; border-bottom-color: var(-fill-color); animation: spin 1s steps(1) infinite; }</p><p>@keyframes spin { 0% { border-color: transparent; border-bottom-color: var(-fill-color); border-left-color：var(-fill-color); } 20% { border-color: 透明; border-left-color: var(-fill-color); border-top-color: var(-fill-color); } 30% { border-color: 透明; border-left-color: var(-fill-color); border-top-color：var(-fill-color); border-right-color: var(-fill-color); } 40% { border-color: 透明; border-right-color: var(-fill-color); border-top-color: var(-fill-color); } 60% { border-color: 透明; border-right-color：var(-fill-color); } 80% { border-color: 透明; border-right-color: var(-fill-color); border-bottom-color: var(-fill-color); } 90% { border-color: 透明; border-bottom-color: var(-fill-color); }</p></style> <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-3b8c700e-50cd-4b5f-8b23-64725b4af575 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script></div>
+  <div id="id_94166e57-57c1-4624-bf67-e4b68303403f">
+   <style>
+      .colab-df-generate { background-color：#border: none; border-radius: 50%; cursor: pointer; display: none; fill：height: 32px; padding: none; fill: #1967D2; height: 32px; padding: 0 0 0 0; width: 32px; fill: none0 0 0 0; width: 32px; }; margin: 1.0px; margin: 0.0px<pre><code translate="no">  .colab-df-generate:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-generate {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-generate:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+&lt;/style&gt;
+&lt;button class=&quot;colab-df-generate&quot; onclick=&quot;generateWithVariable('df_scores')&quot;
+        title=&quot;Generate code using this dataframe.&quot;
+        style=&quot;display:none;&quot;&gt;
+</code></pre>
+<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+width="24px">
+<path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+</svg>
+</button>
+<script>
+(() =&gt; { const buttonEl = document.querySelector('#id_94166e57-57c1-4624-bf67-e4b68303403f button.colab-df-generate'); buttonEl.style.display = google.colab.kernel.accessAllowed ?block' : 'none'；</p>
+<pre><code translate="no">  buttonEl.onclick = () =&gt; {
+    google.colab.notebook.generateWithVariable('df_scores');
+  }
+  })();
+&lt;/script&gt;
+</code></pre>
+  </div>
+<pre><code translate="no">&lt;/div&gt;
+</code></pre>
+  </div>
+<p>上の表は、私たちの結果をまとめたものです。実際の数値は、LLM応答の品質のばらつき、VectorDBにおける最近傍探索のパフォーマンスなど、さまざまな要因によって異なります。</p>
+<p>結論として、下図に示すように、LLMアプリケーションの品質スコア、RAG関連性、および指示フォロー能力を評価しました。AIMonのリランカーを使用して、アプリケーションの全体的な品質と、お客様のRAGから検索されたドキュメントの平均的な関連性を改善しました。</p>

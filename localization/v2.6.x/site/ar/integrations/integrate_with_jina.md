@@ -38,7 +38,8 @@ title: دمج ميلفوس مع جينا
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>جينا للذكاء الاصطناعي، التي تأسست في عام 2020 في برلين، هي شركة رائدة في مجال الذكاء الاصطناعي تركز على إحداث ثورة في مستقبل الذكاء الاصطناعي من خلال مؤسسة البحث الخاصة بها. تهدف شركة Jina AI، المتخصصة في الذكاء الاصطناعي متعدد الوسائط، إلى تمكين الشركات والمطورين من تسخير قوة البيانات متعددة الوسائط لخلق القيمة وتوفير التكاليف من خلال مجموعة متكاملة من المكونات، بما في ذلك التضمينات، وإعادة التضمين، والعمليات الفورية، والبنية التحتية الأساسية. تتميز تضمينات Jina AI المتطورة بأداء من الدرجة الأولى، وتتميز بنموذج بطول 8192 رمزًا رمزيًا مثاليًا لتمثيل البيانات الشاملة. ومن خلال تقديم دعم متعدد اللغات والتكامل السلس مع منصات رائدة مثل OpenAI، تسهّل هذه التضمينات التطبيقات متعددة اللغات.</p>
+    </button></h2><p>جينا للذكاء الاصطناعي، التي تأسست في عام 2020 في برلين، هي شركة رائدة في مجال الذكاء الاصطناعي تركز على إحداث ثورة في مستقبل الذكاء الاصطناعي من خلال مؤسسة البحث الخاصة بها. تهدف شركة Jina AI، المتخصصة في الذكاء الاصطناعي متعدد الوسائط، إلى تمكين الشركات والمطورين من تسخير قوة البيانات متعددة الوسائط لتحقيق القيمة وتوفير التكاليف من خلال مجموعة متكاملة من المكونات، بما في ذلك التضمينات، وإعادة التضمين، والعمليات السريعة، والبنية التحتية الأساسية.<br>
+تتميز عمليات التضمين المتطورة من Jina AI بأداء من الدرجة الأولى، حيث تتميز بنموذج بطول 8192 رمزاً رمزياً مثاليًا لتمثيل البيانات الشاملة. ومن خلال تقديم دعم متعدد اللغات والتكامل السلس مع منصات رائدة مثل OpenAI، تسهّل هذه التضمينات التطبيقات متعددة اللغات.</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">تضمين ميلفوس وجينا للذكاء الاصطناعي<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ title: دمج ميلفوس مع جينا
       </svg>
     </button></h2><p>تم دمج تضمينات جينا في مكتبة نماذج PyMilvus. والآن، سنقوم بعرض أمثلة برمجية لتوضيح كيفية استخدام تضمينات جينا في العمل.</p>
 <p>قبل أن نبدأ، نحتاج إلى تثبيت مكتبة النماذج لـ PyMilvus.</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -152,7 +153,7 @@ dvecs = ef.encode_documents([doc])
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر نموذج تضمين الكود الخاص بـ Jina AI إمكانية البحث من خلال الكود والوثائق. وهو يدعم اللغة الإنجليزية و30 لغة برمجة شائعة يمكن استخدامها لتحسين التنقل في التعليمات البرمجية ومراجعة التعليمات البرمجية بشكل مبسط والمساعدة الآلية في التوثيق.</p>
+    </button></h2><p>يوفر نموذج تضمين التعليمات البرمجية الخاص بـ Jina AI إمكانية البحث من خلال التعليمات البرمجية والوثائق. وهو يدعم اللغة الإنجليزية و30 لغة برمجة شائعة يمكن استخدامها لتحسين التنقل في التعليمات البرمجية ومراجعة التعليمات البرمجية بشكل مبسط والمساعدة الآلية في التوثيق.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
@@ -205,7 +206,7 @@ dvecs = ef.encode_documents([doc])
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>مع وظيفة التضمين المتجه القوية، يمكننا الجمع بين التضمينات المسترجعة باستخدام نماذج Jina AI مع قاعدة بيانات Milvus Lite المتجهة لإجراء بحث دلالي.</p>
+    </button></h2><p>باستخدام وظيفة التضمين المتجه القوية، يمكننا الجمع بين التضمينات المسترجعة باستخدام نماذج Jina AI مع قاعدة بيانات Milvus Lite المتجهة لإجراء بحث دلالي.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -246,7 +247,7 @@ res = milvus_client.insert(collection_name=COLLECTION_NAME, data=data)
 <div class="alert note">
 <p>أما بالنسبة لحجة <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">ملف Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>

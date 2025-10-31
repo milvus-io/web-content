@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>多くのアプリケーションにおいて、オブジェクトはタイトルや説明文などの豊富な情報セット、あるいはテキスト、画像、音声などの複数のモダリティによって検索される。例えば、テキストと画像を含むツイートは、テキストか画像のどちらかが検索クエリのセマンティックにマッチすれば検索される。ハイブリッド検索は、これらの多様な分野にわたる検索を組み合わせることによって、検索体験を向上させる。Milvusは、複数のベクトルフィールドの検索を可能にし、複数の近似最近傍（ANN）検索を同時に行うことで、これをサポートしている。マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、または検索品質を向上させるために密なベクトルと疎なベクトルを検索したい場合に特に便利です。</p>
+    </button></h1><p>多くのアプリケーションにおいて、オブジェクトはタイトルや説明文などの豊富な情報セット、あるいはテキスト、画像、音声などの複数のモダリティで検索することができる。例えば、テキストと画像を含むツイートは、テキストか画像のどちらかが検索クエリのセマンティックにマッチすれば検索される。ハイブリッド検索は、これらの多様な分野にわたる検索を組み合わせることによって、検索体験を向上させる。Milvusは、複数のベクトルフィールドの検索を可能にし、複数の近似最近傍（ANN）検索を同時に行うことで、これをサポートしている。マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、または検索品質を向上させるために密なベクトルと疎なベクトルを検索したい場合に特に便利です。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
@@ -48,7 +48,7 @@ summary: >-
 <ul>
 <li><p><strong>セマンティック・テキスト検索：</strong>これは、密なベクトルを使って商品のテキスト説明をクエリすることを含む。テキスト埋め込みは、<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERTや</a> <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformersなどの</a>モデルや、<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAIの</a>ようなサービスを使用して生成することができる。</p></li>
 <li><p><strong>全文検索</strong>：ここでは、疎なベクトルとのキーワードマッチを使用して、商品のテキスト説明をクエリする。<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25の</a>ようなアルゴリズムや、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3や</a> <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADEの</a>ようなスパース埋め込みモデルをこの目的に利用することができる。</p></li>
-<li><p><strong>マルチモーダル画像検索：</strong>この方法は、密なベクトルを持つテキストクエリを用いて画像に対してクエリを行う。画像埋め込みは<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIPの</a>ようなモデルで生成できます。</p></li>
+<li><p><strong>マルチモーダル画像検索：</strong>この手法は、密なベクトルを持つテキストクエリを用いて画像に対してクエリを行う。画像埋め込みは<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIPの</a>ようなモデルで生成できます。</p></li>
 </ul>
 <p>このガイドでは、商品の生のテキスト記述と画像埋め込みが与えられた場合、上記の検索方法を組み合わせたマルチモーダルハイブリッド検索の例を説明します。マルチ・ベクトル・データを格納し、リランキング戦略でハイブリッド検索を実行する方法を示します。</p>
 <h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">複数のベクトル・フィールドを持つコレクションの作成<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
@@ -104,7 +104,7 @@ client = MilvusClient(
 )
 
 <span class="hljs-comment"># Init schema with auto_id disabled</span>
-schema = MilvusClient.create_schema(auto_id=<span class="hljs-literal">False</span>)
+schema = client.create_schema(auto_id=<span class="hljs-literal">False</span>)
 
 <span class="hljs-comment"># Add fields to schema</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;product id&quot;</span>)
@@ -276,7 +276,7 @@ schema.WithField(entity.NewField().
       <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&quot;text_sparse&quot;</span>],
       <span class="hljs-attr">params</span>: {},
     },
-]；
+];
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> bm25Function=<span class="hljs-string">&#x27;{
     &quot;name&quot;: &quot;text_bm25_emb&quot;,
@@ -348,9 +348,7 @@ schema.WithField(entity.NewField().
 <p>ニーズやデータ型に合わせて、必要に応じて他のインデックス型を選択することができます。サポートされているインデックス・タイプの詳細については、<a href="/docs/ja/index-vector-fields.md">利用可能なインデックス・タイプに関する</a>ドキュメントを参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-<span class="hljs-comment"># Prepare index parameters</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Add indexes</span>
@@ -478,9 +476,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
     </button></h3><p>前の2つのステップで設定したコレクションスキーマとインデックスを使用して、<code translate="no">demo</code> という名前のコレクションを作成します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client.create_collection(
+<pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
@@ -546,26 +542,30 @@ curl --request POST \
 <p>この例では、テキストフィールドからスパース埋め込みを生成するために組み込みのBM25関数を使用しているので、手動でスパースベクトルを与える必要はありません。しかし、BM25を使用しない場合は、スパース埋め込みを事前に計算し、自分で提供する必要があります。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># Generate example vectors</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_dense_vector</span>(<span class="hljs-params">dim</span>):
+    <span class="hljs-keyword">return</span> [random.random() <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(dim)]
 
 data=[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Red cotton t-shirt with round neck&quot;</span>,
-        <span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...],
-        <span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6366019600530924</span>, -<span class="hljs-number">0.09323198122475052</span>, ...]
+        <span class="hljs-string">&quot;text_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">768</span>),
+        <span class="hljs-string">&quot;image_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">512</span>)
     },
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>,
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Wireless noise-cancelling over-ear headphones&quot;</span>,
-        <span class="hljs-string">&quot;text_dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...],
-        <span class="hljs-string">&quot;image_dense&quot;</span>: [<span class="hljs-number">0.6414180010301553</span>, <span class="hljs-number">0.8976979978567611</span>, ...]
+        <span class="hljs-string">&quot;text_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">768</span>),
+        <span class="hljs-string">&quot;image_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">512</span>)
     },
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,
         <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Stainless steel water bottle, 500ml&quot;</span>,
-        <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...],
-        <span class="hljs-string">&quot;image_dense&quot;</span>: [-<span class="hljs-number">0.6901259768402174</span>, <span class="hljs-number">0.6100500332193755</span>, ...]
+        <span class="hljs-string">&quot;text_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">768</span>),
+        <span class="hljs-string">&quot;image_dense&quot;</span>: generate_dense_vector(<span class="hljs-number">512</span>)
     }
 ]
 
@@ -700,8 +700,8 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
-query_dense_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.5142999509918703</span>, ...]
-query_multimodal_vector = [<span class="hljs-number">0.015829865178701663</span>, <span class="hljs-number">0.5264158340734488</span>, ...]
+query_dense_vector = generate_dense_vector(<span class="hljs-number">768</span>)
+query_multimodal_vector = generate_dense_vector(<span class="hljs-number">512</span>)
 
 <span class="hljs-comment"># text semantic search (dense)</span>
 search_param_1 = {
@@ -843,9 +843,68 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ANN 検索結果のセットをマージしてランク付けし直すには、適切な再ランク付け戦略を選択することが 不可欠である。Milvusは数種類のリランキング戦略を提供しています。これらの再ランク付けメカニズムの詳細については、<a href="/docs/ja/reranking">再ランク付けを</a>参照してください。</p>
-<p>この例では、特定の検索クエリに特に重点を置いていないため、RRFRanker戦略で進めます。</p>
-<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">ステップ3：ハイブリッド検索を実行する<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+    </button></h3><p>ANN 検索結果のセットをマージしてランク付けし直すには、適切な再ランク付け戦略を選択することが 不可欠である。Milvusは数種類のリランキング戦略を提供しています。これらのリランキングメカニズムの詳細については、<a href="/docs/ja/weighted-ranker.md">Weighted Ranker</a>または<a href="/docs/ja/rrf-ranker.md">RRF Rankerを</a>参照してください。</p>
+<p>この例では、特定の検索クエリに特に重点を置いていないので、RRFRanker戦略で進めます。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">ranker = Function(
+    name=<span class="hljs-string">&quot;rrf&quot;</span>,
+    input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
+    function_type=FunctionType.RERANK,
+    params={
+        <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>, 
+        <span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>  <span class="hljs-comment"># Optional</span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .build()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> rerank = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rrf&#x27;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">params</span>: {
+      <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>, 
+      <span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;rrf&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Restful</span>
+<span class="hljs-built_in">export</span> functionScore=<span class="hljs-string">&#x27;{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;rrf&quot;,
+            &quot;type&quot;: &quot;Rerank&quot;,
+            &quot;inputFieldNames&quot;: [],
+            &quot;params&quot;: {
+                &quot;reranker&quot;: &quot;rrf&quot;,
+                &quot;k&quot;: 100
+            }
+        }
+    ]
+}&#x27;</span>
+
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">ステップ3：ハイブリッド検索の実行<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -860,12 +919,10 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ハイブリッド検索を開始する前に、コレクションがロードされていることを確認します。コレクション内のベクトル・フィールドにインデックスがなかったり、メモリにロードされていなかったりすると、ハイブリッド検索メソッドの実行時にエラーが発生する。</p>
+    </button></h3><p>ハイブリッド検索を開始する前に、コレクションがロードされていることを確認する。コレクション内のベクトル・フィールドにインデックスがない、またはメモリにロードされていない場合、ハイブリッド検索メソッドの実行時にエラーが発生します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-res = client.hybrid_search(
+<pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
     ranker=ranker,
@@ -922,7 +979,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/advanced_search&quot;</span> \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/hybrid_search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{

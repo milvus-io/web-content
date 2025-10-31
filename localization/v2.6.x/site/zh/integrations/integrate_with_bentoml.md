@@ -52,7 +52,7 @@ title: 使用 Milvus 和 BentoML 的检索增强生成（RAG）
         ></path>
       </svg>
     </button></h2><p>Milvus Lite 可在 PyPI 上获取。您可以在 Python 3.8 以上版本中通过 pip 安装它：</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "Runtime"（运行时）菜单，从下拉菜单中选择 "Restart session"（重启会话））。</p>
@@ -143,7 +143,7 @@ city_chunks = []
         sentences=texts,
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>现在，我们需要将 embeddings 和文本块匹配起来。由于嵌入列表和句子列表应按索引进行匹配，因此我们可以通过<code translate="no">enumerate</code> 任一列表进行匹配。</p>
+<p>现在，我们需要将 embeddings 和文本块匹配起来。由于列表嵌入和句子列表应按索引匹配，因此我们可以通过<code translate="no">enumerate</code> 任一列表进行匹配。</p>
 <pre><code translate="no" class="language-python">entries = []
 <span class="hljs-keyword">for</span> city_dict <span class="hljs-keyword">in</span> city_chunks:
     <span class="hljs-comment"># No need for the embeddings list if get_embeddings already returns a list of lists</span>

@@ -54,7 +54,7 @@ title: MilvusとBentoMLによる検索支援型生成(RAG)
         ></path>
       </svg>
     </button></h2><p>Milvus LiteはPyPIから入手可能です。Python 3.8+ではpip経由でインストールできます：</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>

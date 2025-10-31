@@ -41,7 +41,7 @@ summary: >-
     </button></h2><p>Sebelum memulai, pastikan Anda telah menyiapkan kunci API Voyage, atau Anda bisa mendapatkannya dari <a href="https://dash.voyageai.com/api-keys">situs web VoyageAI</a>.</p>
 <p>Data yang digunakan dalam contoh ini adalah judul buku. Anda dapat mengunduh dataset <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">di sini</a> dan menaruhnya di direktori yang sama dengan tempat Anda menjalankan kode berikut.</p>
 <p>Pertama, instal paket untuk Milvus dan Voyage AI:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
+<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong>. (Klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
@@ -111,7 +111,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">kunci Public Endpoint dan Api</a> di Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Dengan semua data dalam basis data vektor Milvus, kita sekarang dapat melakukan pencarian semantik dengan membuat penyematan vektor untuk kueri dan melakukan pencarian vektor.</p>
+<p>Dengan semua data dalam basis data vektor Milvus, kita sekarang dapat melakukan pencarian semantik dengan menghasilkan penyematan vektor untuk kueri dan melakukan pencarian vektor.</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded?&quot;</span>]
 
 query_vectors = voyage_client.embed(

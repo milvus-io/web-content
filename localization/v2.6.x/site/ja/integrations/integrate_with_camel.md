@@ -47,7 +47,7 @@ title: MilvusとCamelを使用した検索拡張ジェネレーション（RAG�
         ></path>
       </svg>
     </button></h2><p>まず、https://arxiv.org/pdf/2303.17760.pdf からCAMELペーパーをロードしてみよう。これがローカルのサンプルデータになります。</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -101,7 +101,7 @@ storage_instance = MilvusStorage(
 <div class="alert note">
 <p><code translate="no">url_and_api_key</code> ：</p>
 <ul>
-<li>ローカルファイル、例えば<code translate="no">./milvus.db</code> を<a href="https://milvus.io/docs/milvus_lite.md">Milvus</a>接続URIとして使用するのが最も便利な方法です。</li>
+<li>ローカルファイル、例えば<code translate="no">./milvus.db</code> を<a href="https://milvus.io/docs/milvus_lite.md">Milvus</a>接続URIとして使用するのが最も便利です。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。この場合、URLはサーバのURI、例えば<code translate="no">http://localhost:19530</code> を使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する接続uriとtokenを調整してください。</li>
 </ul>

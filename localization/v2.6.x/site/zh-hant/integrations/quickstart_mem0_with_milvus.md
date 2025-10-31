@@ -44,12 +44,42 @@ title: 開始使用 Mem0 和 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">下載所需的函式庫</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus</span>
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">下載所需的函式庫<button data-href="#Download-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </blockquote>
-<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">使用 Milvus 設定 Mem0</h3><p>在本範例中，我們將使用 OpenAI 作為 LLM。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
+<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">使用 Milvus 設定 Mem0<button data-href="#Configure-Mem0-with-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在本範例中，我們將使用 OpenAI 作為 LLM。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -96,7 +126,22 @@ m = Memory.from_config(config)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">新增記憶體</h3><p><code translate="no">add</code> 函式會將 Milvus 中的非結構化文字儲存為記憶體，並將其與特定使用者和可選元資料相關聯。</p>
+    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">新增記憶體<button data-href="#Adding-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">add</code> 函式會將 Milvus 中的非結構化文字儲存為記憶體，並將其與特定使用者和可選元資料相關聯。</p>
 <p>在這裡，我們要將 Alice 的記憶體「努力改善我的網球技術」，連同相關的元資料一起加入 Milvus。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a memory to user: Working on improving tennis skills</span>
 res = m.add(
@@ -112,7 +157,22 @@ res
    'event': 'ADD'}],
  'relations': []}
 </code></pre>
-<h3 id="Update-a-Memory" class="common-anchor-header">更新記憶體</h3><p>我們可以使用<code translate="no">add</code> 函式的回傳值來擷取記憶體 ID，讓我們可以透過<code translate="no">update</code> 更新此記憶體的新資訊。</p>
+<h3 id="Update-a-Memory" class="common-anchor-header">更新記憶體<button data-href="#Update-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們可以使用<code translate="no">add</code> 函式的回傳值來擷取記憶體 ID，讓我們可以透過<code translate="no">update</code> 更新此記憶體的新資訊。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get memory_id</span>
 memory_id = res[<span class="hljs-string">&quot;results&quot;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>]
 
@@ -121,7 +181,22 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'message': 'Memory updated successfully!'}
 </code></pre>
-<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">取得使用者的所有記憶體</h3><p>我們可以使用<code translate="no">get_all</code> 函式檢視所有已插入的記憶體，或依據 Milvus 中的<code translate="no">user_id</code> 篩選。</p>
+<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">取得使用者的所有記憶體<button data-href="#Get-All-Memory-For-a-User" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們可以使用<code translate="no">get_all</code> 函式檢視所有已插入的記憶體，或依據 Milvus 中的<code translate="no">user_id</code> 篩選。</p>
 <p>請注意，我們可以看到該記憶體已經從 「努力提高網球技術 」變為 「喜歡在週末打網球」。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
@@ -134,7 +209,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': '2024-11-01T19:33:47.619857-07:00',
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="View-Memory-Update-History" class="common-anchor-header">檢視記憶體更新歷史</h3><p>我們也可以透過<code translate="no">history</code> 功能，指定我們感興趣的記憶體_id，來檢視記憶體更新歷史。</p>
+<h3 id="View-Memory-Update-History" class="common-anchor-header">檢視記憶體更新歷史<button data-href="#View-Memory-Update-History" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們也可以透過<code translate="no">history</code> 功能，指定我們感興趣的記憶體_id，來檢視記憶體更新歷史。</p>
 <pre><code translate="no" class="language-python">m.history(memory_id=memory_id)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'id': '71ed3cec-5d9a-4fa6-a009-59802450c0b9',
@@ -152,7 +242,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
   'created_at': '2024-11-01T19:33:44.116920-07:00',
   'updated_at': '2024-11-01T19:33:47.619857-07:00'}]
 </code></pre>
-<h3 id="Search-Memory" class="common-anchor-header">搜尋記憶體</h3><p>我們可以使用<code translate="no">search</code> 函式來尋找使用者最相關的記憶體。</p>
+<h3 id="Search-Memory" class="common-anchor-header">搜尋記憶體<button data-href="#Search-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們可以使用<code translate="no">search</code> 函式來尋找使用者最相關的記憶體。</p>
 <p>讓我們先為 Alice 加入另一個記憶體。</p>
 <pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
@@ -198,7 +303,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': None,
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="Delete-Memory" class="common-anchor-header">刪除記憶體</h3><p>我們也可以透過提供對應的<code translate="no">memory_id</code> 來<code translate="no">delete</code> 記憶體。</p>
+<h3 id="Delete-Memory" class="common-anchor-header">刪除記憶體<button data-href="#Delete-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們也可以透過提供對應的<code translate="no">memory_id</code> 來<code translate="no">delete</code> 記憶體。</p>
 <p>我們將刪除記憶體 "Likes to play tennis on weekends"，因為它的<code translate="no">memory_id</code> 已經被擷取，並呼叫<code translate="no">get_all</code> 來驗證刪除是否成功。</p>
 <pre><code translate="no" class="language-python">m.delete(memory_id=memory_id)
 

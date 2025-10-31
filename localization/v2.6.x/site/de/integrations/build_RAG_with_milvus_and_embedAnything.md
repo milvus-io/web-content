@@ -50,12 +50,42 @@ title: RAG mit Milvus und EmbedAnything aufbauen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Abhängigkeiten und Umgebung</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus openai embed_anything</span>
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Abhängigkeiten und Umgebung<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU pymilvus milvus-lite openai embed_anything</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie eventuell <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
-<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">Klonen des Repositorys und Laden des Adapters</h3><p>Als nächstes klonen wir das <a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything-Repository</a> und fügen das Verzeichnis <code translate="no">examples/adapters</code> zum Python-Pfad hinzu. Dort speichern wir die benutzerdefinierte Milvus-Adapter-Implementierung, die es EmbedAnything ermöglicht, mit Milvus für die Vektoreinfügung zu kommunizieren.</p>
+<h3 id="Clone-the-Repository-and-Load-Adapter" class="common-anchor-header">Klonen des Repositorys und Laden des Adapters<button data-href="#Clone-the-Repository-and-Load-Adapter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Als nächstes klonen wir das <a href="https://github.com/StarlightSearch/EmbedAnything">EmbedAnything-Repository</a> und fügen das Verzeichnis <code translate="no">examples/adapters</code> zum Python-Pfad hinzu. Dort speichern wir die benutzerdefinierte Milvus-Adapter-Implementierung, die es EmbedAnything ermöglicht, mit Milvus für die Vektoreinfügung zu kommunizieren.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> sys
 
 <span class="hljs-comment"># Clone the EmbedAnything repository if not already cloned</span>
@@ -90,7 +120,22 @@ openai_client = OpenAI()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Milvus initialisieren</h3><p>Bevor wir irgendwelche Dateien einbetten, müssen wir zwei Komponenten vorbereiten, die mit Milvus interagieren:</p>
+    </button></h2><h3 id="Initialize-Milvus" class="common-anchor-header">Milvus initialisieren<button data-href="#Initialize-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Bevor wir irgendwelche Dateien einbetten, müssen wir zwei Komponenten vorbereiten, die mit Milvus interagieren:</p>
 <ol>
 <li><code translate="no">MilvusVectorAdapter</code> - Dies ist der Milvus-Adapter für EmbedAnything und wird <strong>nur für die Aufnahme von Vektoren</strong> verwendet (d.h. das Einfügen von Einbettungen und das Erstellen von Indizes). Er unterstützt derzeit <strong>keine</strong> Suchoperationen.</li>
 <li><code translate="no">MilvusClient</code> - Dies ist der offizielle Client von <code translate="no">pymilvus</code>, der den <strong>vollen Zugriff</strong> auf die Milvus-Funktionen einschließlich Vektorsuche, Filterung und Sammlungsverwaltung ermöglicht.</li>
@@ -135,7 +180,22 @@ Collection 'embed_anything_milvus_collection' created with index.
 <li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 </div>
-<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">Einbettungsmodell initialisieren und PDF-Dokument einbetten</h3><p>Nun werden wir das Einbettungsmodell initialisieren. Wir verwenden <code translate="no">all-MiniLM-L12-v2 model</code> aus der sentence-transformers-Bibliothek, ein leichtgewichtiges und dennoch leistungsstarkes Modell zur Erzeugung von Texteinbettungen. Es erzeugt 384-dimensionale Einbettungen, so dass dies mit der Dimension unserer Milvus-Sammlung übereinstimmt, die auf 384 eingestellt ist. Dieser Abgleich ist entscheidend und gewährleistet die Kompatibilität zwischen den in Milvus gespeicherten und den vom Modell erzeugten Vektordimensionen.</p>
+<h3 id="Initialize-Embedding-Model-and-Embed-PDF-Document" class="common-anchor-header">Einbettungsmodell initialisieren und PDF-Dokument einbetten<button data-href="#Initialize-Embedding-Model-and-Embed-PDF-Document" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nun werden wir das Einbettungsmodell initialisieren. Wir verwenden <code translate="no">all-MiniLM-L12-v2 model</code> aus der sentence-transformers-Bibliothek, ein leichtgewichtiges und dennoch leistungsstarkes Modell zur Erzeugung von Texteinbettungen. Es erzeugt 384-dimensionale Einbettungen, so dass dies mit der Dimension unserer Milvus-Sammlung übereinstimmt, die auf 384 eingestellt ist. Dieser Abgleich ist entscheidend und gewährleistet die Kompatibilität zwischen den in Milvus gespeicherten und den vom Modell erzeugten Vektordimensionen.</p>
 <p>EmbedAnything unterstützt eine Vielzahl weiterer Einbettungsmodelle. Für weitere Details, lesen Sie bitte die <a href="https://github.com/StarlightSearch/EmbedAnything">offizielle Dokumentation</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the embedding model</span>
 model = EmbeddingModel.from_pretrained_hf(
@@ -153,7 +213,22 @@ data = embed_anything.embed_file(
 <pre><code translate="no">Converted 12 embeddings for insertion.
 Successfully inserted 12 embeddings.
 </code></pre>
-<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">Antwort abrufen und generieren</h3><p>Auch hier ist die <code translate="no">MilvusVectorAdapter</code> von EmbedAnything derzeit nur eine leichtgewichtige Abstraktion für die Aufnahme und Indizierung von Vektoren. Sie <strong>unterstützt keine Such-</strong> oder Retrieval-Abfragen. Daher müssen wir für die Suche nach relevanten Dokumenten zum Aufbau unserer RAG-Pipeline direkt die Instanz <code translate="no">MilvusClient</code> (<code translate="no">milvus_client</code>) verwenden, um unseren Milvus-Vektorspeicher abzufragen.</p>
+<h3 id="Retrieve-and-Generate-Response" class="common-anchor-header">Antwort abrufen und generieren<button data-href="#Retrieve-and-Generate-Response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Auch hier ist die <code translate="no">MilvusVectorAdapter</code> von EmbedAnything derzeit nur eine leichtgewichtige Abstraktion für die Aufnahme und Indizierung von Vektoren. Sie <strong>unterstützt keine Such-</strong> oder Retrieval-Abfragen. Daher müssen wir für die Suche nach relevanten Dokumenten zum Aufbau unserer RAG-Pipeline direkt die Instanz <code translate="no">MilvusClient</code> (<code translate="no">milvus_client</code>) verwenden, um unseren Milvus-Vektorspeicher abzufragen.</p>
 <p>Definieren Sie eine Funktion zum Abrufen relevanter Dokumente aus Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">retrieve_documents</span>(<span class="hljs-params">question, top_k=<span class="hljs-number">3</span></span>):
     query_vector = <span class="hljs-built_in">list</span>(

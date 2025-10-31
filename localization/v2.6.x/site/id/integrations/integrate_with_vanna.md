@@ -40,7 +40,7 @@ title: Menulis SQL dengan Vanna dan Milvus
         ></path>
       </svg>
     </button></h2><p>Sebelum menjalankan notebook ini, pastikan Anda telah menginstal dependensi berikut:</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span>
+<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja terinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (Klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
@@ -243,7 +243,7 @@ training_data
     <tr>
       <th>0</th>
       <td>595b185c-e6ad-47b0-98fd-0e93ef9b6a0a-sql</td>
-      <td>Apa saja detail dari pelanggan yang bernama Joh...</td>
+      <td>Apa saja detail dari pelanggan bernama Joh...</td>
       <td>SELECT * FROM Pelanggan WHERE Nama = 'John Doe'</td>
     </tr>
     <tr>

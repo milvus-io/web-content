@@ -42,7 +42,7 @@ title: MilvusとLangChainによる検索拡張生成(RAG)
         ></path>
       </svg>
     </button></h2><p>このノートブックを実行する前に、以下の依存関係がインストールされていることを確認してください：</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
+<pre><code translate="no" class="language-shell">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus milvus-lite langchain-openai bs4
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -269,7 +269,7 @@ rag_chain2.with_config(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&quot;Self-reflection of an AI agent involves the process of synthesizing memories into higher-level inferences over time to guide the agent's future behavior. It serves as a mechanism to create higher-level summaries of past events. One approach to self-reflection involves prompting the language model with the 100 most recent observations and asking it to generate the 3 most salient high-level questions based on those observations. This process helps the AI agent optimize believability in the current moment and over time.&quot;
 </code></pre>
-<p>検索条件を変更し、2つ目のソースでドキュメントをフィルタリングすると、このブログソースのコンテンツはクエリの質問とは何の関係もないため、関連する情報のない回答が得られます。</p>
+<p>検索条件を変更し、2つ目のソースでドキュメントをフィルタリングすると、このブログソースのコンテンツはクエリの質問とは関係ないため、関連する情報のない回答が得られます。</p>
 <pre><code translate="no" class="language-python">rag_chain2.with_config(
     configurable={
         <span class="hljs-string">&quot;retriever_search_kwargs&quot;</span>: <span class="hljs-built_in">dict</span>(

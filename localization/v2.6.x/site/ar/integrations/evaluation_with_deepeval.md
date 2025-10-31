@@ -41,7 +41,7 @@ title: التقييم باستخدام DeepEval
         ></path>
       </svg>
     </button></h2><p>قبل تشغيل هذا الدفتر، تأكد من تثبيت التبعيات التالية:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -431,4 +431,4 @@ result = evaluate(
 Evaluating 3 test case(s) in parallel: |██████████|100% (3/3) [Time Taken: 00:11,  3.97s/test case]
 </code></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #05f58d; text-decoration-color: #05f58d">✓</span> تم الانتهاء من الاختبارات 🎉! قم بتشغيل <span style="color: #008000; text-decoration-color: #008000">"deepeval تسجيل الدخول"</span> لعرض نتائج التقييم على الذكاء الاصطناعي الواثق. 
-‼️ ملاحظة: يمكنك أيضًا تشغيل التقييمات على جميع مقاييس deepeval مباشرةً على الذكاء الاصطناعي الواثق بدلاً من ذلك.</pre>
+‼️ ملاحظة: يمكنك أيضًا إجراء تقييمات على جميع مقاييس deepeval مباشرةً على الذكاء الاصطناعي الواثق بدلاً من ذلك.</pre>

@@ -27,7 +27,7 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/integrate_with_phidata.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://docs.agno.com/introduction">Agno</a>(المعروفة سابقًا باسم Phidata) هي مكتبة خفيفة الوزن لبناء وكلاء متعددي الوسائط. فهي تتيح لك إنشاء وكلاء متعددي الوسائط يمكنهم فهم النصوص والصور والصوت والفيديو، والاستفادة من مختلف الأدوات ومصادر المعرفة لإنجاز المهام المعقدة. يدعم Agno التنسيق بين الوكلاء المتعددين، مما يتيح لفرق من الوكلاء التعاون وحل المشكلات معًا. كما يوفر واجهة مستخدم جميلة للوكلاء للتفاعل مع وكلائك.</p>
+<p><a href="https://docs.agno.com/introduction">Agno</a>(المعروفة سابقًا باسم Phidata) هي مكتبة خفيفة الوزن لبناء وكلاء متعددي الوسائط. وهي تتيح لك إنشاء وكلاء متعددي الوسائط يمكنهم فهم النصوص والصور والصوت والفيديو، والاستفادة من مختلف الأدوات ومصادر المعرفة لإنجاز المهام المعقدة. يدعم Agno التنسيق بين الوكلاء المتعددين، مما يتيح لفرق من الوكلاء التعاون وحل المشكلات معًا. كما يوفر واجهة مستخدم جميلة للوكلاء للتفاعل مع وكلائك.</p>
 <p>تتيح قاعدة البيانات المتجهة Milvus تخزين المعلومات واسترجاعها بكفاءة في صورة تضمينات. باستخدام Milvus و Agno، يمكنك بسهولة دمج معرفتك في سير عمل وكيلك. هذا المستند هو دليل أساسي حول كيفية استخدام تكامل Milvus مع Agno.</p>
 <h2 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>قم بتثبيت التبعيات اللازمة:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
+<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus milvus-lite openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>

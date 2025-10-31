@@ -57,7 +57,7 @@ title: Geração Aumentada por Recuperação (RAG) com Milvus e LlamaIndex
         ></path>
       </svg>
     </button></h3><p>Os snippets de código nesta página requerem as dependências pymilvus e llamaindex. Você pode instalá-las usando os seguintes comandos:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -258,7 +258,7 @@ res = query_engine.query(<span class="hljs-string">&quot;What did the author lea
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">The disease posed challenges for the author as it affected his mother's health, leading to a stroke caused by colon cancer. This resulted in her losing her balance and needing to be placed in a nursing home. The author and his sister were determined to help their mother get out of the nursing home and back to her house.
 </code></pre>
-<p>O próximo teste mostra que a substituição remove os dados anteriores.</p>
+<p>Este próximo teste mostra que a substituição remove os dados anteriores.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> Document
 
 

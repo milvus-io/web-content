@@ -61,7 +61,7 @@ title: Improve retrieval quality of your LLM Application with AIMon and Milvus
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Vector Database</em></h4><p>For this application, we will use <a href="https://milvus.io/">Milvus</a> to manage and search large-scale unstructured data, such as text, images, and videos.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLM Framework</em></h4><p>LlamaIndex is an open-source data orchestration framework that simplifies building large language model (LLM) applications by facilitating the integration of private data with LLMs, enabling context-augmented generative AI applications through a Retrieval-Augmented Generation (RAG) pipeline. We will use LlamaIndex for this tutorial since it offers a good amount of flexibility and better lower level API abstractions.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM Output Quality Evaluation</em></h4><p><a href="https://www.aimon.ai">AIMon</a> offers proprietary Judge models for Hallucination, Context Quality issues, Instruction Adherence of LLMs, Retrieval Quality and other LLM reliability tasks. We will use AIMon to judge the quality of the LLM application.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">Pre-requisites<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,17 +79,21 @@ title: Improve retrieval quality of your LLM Application with AIMon and Milvus
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>Signup for an <a href="https://docs.aimon.ai/quickstart">AIMon account here</a>.</p>
-<p>Add this secret to the Colab Secrets (the “key” symbol on the left panel)
-If you are in another non-google colab environment, please replace the google colab-related code yourself</p>
+<li>Signup for an <a href="https://docs.aimon.ai/quickstart">AIMon account here</a>.</li>
+</ol>
+<p>Add this secret to the Colab Secrets (the “key” symbol on the left panel)</p>
+<blockquote>
+<p>If you are in another non-google colab environment, please replace the google colab-related code yourself</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p>Signup for an <a href="https://platform.openai.com/docs/overview">OpenAI account here</a> and add the following key in Colab secrets:</p>
+</ul>
+<ol start="2">
+<li>Signup for an <a href="https://platform.openai.com/docs/overview">OpenAI account here</a> and add the following key in Colab secrets:</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
+</ul>
 <h3 id="Required-API-keys" class="common-anchor-header">Required API keys<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -984,6 +988,21 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1022,5 +1041,254 @@ df_scores
     </tr>
   </tbody>
 </table>
+</div>
+    <div class="colab-df-buttons">
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-c43e3124-8331-40e6-97e4-b2d026a0ed70')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+<path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+</svg>
+</button></p>
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+<pre><code translate="no">.colab-df-convert {
+  background-color: #E8F0FE;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  fill: #1967D2;
+  height: 32px;
+  padding: 0 0 0 0;
+  width: 32px;
+}
+
+.colab-df-convert:hover {
+  background-color: #E2EBFA;
+  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+  fill: #174EA6;
+}
+
+.colab-df-buttons div {
+  margin-bottom: 4px;
+}
+
+[theme=dark] .colab-df-convert {
+  background-color: #3B4455;
+  fill: #D2E3FC;
+}
+
+[theme=dark] .colab-df-convert:hover {
+  background-color: #434B5C;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+  fill: #FFFFFF;
+}
+</code></pre>
+  </style>
+<pre><code translate="no">&lt;script&gt;
+  const buttonEl =
+    document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70 button.colab-df-convert');
+  buttonEl.style.display =
+    google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+  async function convertToInteractive(key) {
+    const element = document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70');
+    const dataTable =
+      await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                [key], {});
+    if (!dataTable) return;
+
+    const docLinkHtml = 'Like what you see? Visit the ' +
+      '&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;'
+      + ' to learn more about interactive tables.';
+    element.innerHTML = '';
+    dataTable['output_type'] = 'display_data';
+    await google.colab.output.renderOutput(dataTable, element);
+    const docLink = document.createElement('div');
+    docLink.innerHTML = docLinkHtml;
+    element.appendChild(docLink);
+  }
+&lt;/script&gt;
+</code></pre>
+  </div>
+<div id="df-3b8c700e-50cd-4b5f-8b23-64725b4af575">
+  <button class="colab-df-quickchart" onclick="quickchart('df-3b8c700e-50cd-4b5f-8b23-64725b4af575')"
+            title="Suggest charts"
+            style="display:none;">
+<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+width="24px">
+<g>
+<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+</g>
+</svg></p>
+  </button>
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+<p>[theme=dark] .colab-df-quickchart {
+–bg-color: #3B4455;
+–fill-color: #D2E3FC;
+–hover-bg-color: #434B5C;
+–hover-fill-color: #FFFFFF;
+–disabled-bg-color: #3B4455;
+–disabled-fill-color: #666;
+}</p>
+<p>.colab-df-quickchart {
+background-color: var(–bg-color);
+border: none;
+border-radius: 50%;
+cursor: pointer;
+display: none;
+fill: var(–fill-color);
+height: 32px;
+padding: 0;
+width: 32px;
+}</p>
+<p>.colab-df-quickchart:hover {
+background-color: var(–hover-bg-color);
+box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+fill: var(–button-hover-fill-color);
+}</p>
+<p>.colab-df-quickchart-complete:disabled,
+.colab-df-quickchart-complete:disabled:hover {
+background-color: var(–disabled-bg-color);
+fill: var(–disabled-fill-color);
+box-shadow: none;
+}</p>
+<p>.colab-df-spinner {
+border: 2px solid var(–fill-color);
+border-color: transparent;
+border-bottom-color: var(–fill-color);
+animation:
+spin 1s steps(1) infinite;
+}</p>
+<p>@keyframes spin {
+0% {
+border-color: transparent;
+border-bottom-color: var(–fill-color);
+border-left-color: var(–fill-color);
+}
+20% {
+border-color: transparent;
+border-left-color: var(–fill-color);
+border-top-color: var(–fill-color);
+}
+30% {
+border-color: transparent;
+border-left-color: var(–fill-color);
+border-top-color: var(–fill-color);
+border-right-color: var(–fill-color);
+}
+40% {
+border-color: transparent;
+border-right-color: var(–fill-color);
+border-top-color: var(–fill-color);
+}
+60% {
+border-color: transparent;
+border-right-color: var(–fill-color);
+}
+80% {
+border-color: transparent;
+border-right-color: var(–fill-color);
+border-bottom-color: var(–fill-color);
+}
+90% {
+border-color: transparent;
+border-bottom-color: var(–fill-color);
+}
+}</p>
+</style>
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-3b8c700e-50cd-4b5f-8b23-64725b4af575 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+  <div id="id_94166e57-57c1-4624-bf67-e4b68303403f">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+<pre><code translate="no">  .colab-df-generate:hover {
+    background-color: #E2EBFA;
+    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: #174EA6;
+  }
+
+  [theme=dark] .colab-df-generate {
+    background-color: #3B4455;
+    fill: #D2E3FC;
+  }
+
+  [theme=dark] .colab-df-generate:hover {
+    background-color: #434B5C;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    fill: #FFFFFF;
+  }
+&lt;/style&gt;
+&lt;button class=&quot;colab-df-generate&quot; onclick=&quot;generateWithVariable('df_scores')&quot;
+        title=&quot;Generate code using this dataframe.&quot;
+        style=&quot;display:none;&quot;&gt;
+</code></pre>
+<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+width="24px">
+<path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+</svg>
+</button>
+<script>
+(() => {
+const buttonEl =
+document.querySelector(‘#id_94166e57-57c1-4624-bf67-e4b68303403f button.colab-df-generate’);
+buttonEl.style.display =
+google.colab.kernel.accessAllowed ? ‘block’ : 'none’;</p>
+<pre><code translate="no">  buttonEl.onclick = () =&gt; {
+    google.colab.notebook.generateWithVariable('df_scores');
+  }
+  })();
+&lt;/script&gt;
+</code></pre>
+  </div>
+<pre><code translate="no">&lt;/div&gt;
+</code></pre>
+  </div>
 <p>The above table summarizes our results. Your actual numbers will vary depending on various factors such as variations in quality of LLM responses, performance of the nearest neighbor search in the VectorDB etc.</p>
 <p>In conclusion, as shown by the figure below, we evaluated quality score, RAG relevance and instruction following capabilities of your LLM application. We used AIMon’s re-ranker to improve the overall quality of the application and the average relevance of documents retrieved from your RAG.</p>
