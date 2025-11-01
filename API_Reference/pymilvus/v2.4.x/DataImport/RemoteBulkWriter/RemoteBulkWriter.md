@@ -14,7 +14,7 @@ Constructs a **RemoteBulkWriter** object with a set of parameters, such as **sch
 
 <p><b>notes</b></p>
 
-<p>A <strong>RemoteBulkWriter</strong> object intends to rewrite your raw data in a format that Milvus understands into an AWS-S3-compatible bucket.</p>
+<p>A <strong>RemoteBulkWriter</strong> object intends to rewrite your raw data in a format that Milvus understands into an AWS-S3-compatible or a Microsoft Azure Blob Storage bucket.</p>
 
 </div>
 
@@ -35,13 +35,13 @@ writer = RemoteBulkWriter(
 
 - **schema** (*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The schema of a target collection to which the rewritten data is to be imported.
 
 - **remote_path** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The path to the directory that is to hold the rewritten data.
 

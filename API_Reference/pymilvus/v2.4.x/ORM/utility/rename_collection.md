@@ -26,14 +26,14 @@ rename_collection(
 
 - **old_collection_name** (*str*) -
 
-    **[REQUIRED]**
-The original name of the target collection.
+    **&#91;REQUIRED&#93;**
+    The original name of the target collection.
 
     Setting this to a non-existing collection results in a **MilvusException**.
 
 - **new_collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the target collection after this operation.
 

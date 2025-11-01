@@ -18,7 +18,7 @@ query(
 
 - **expr** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A scalar filtering condition to filter matching entities. 
 
@@ -106,7 +106,7 @@ query(
 
 **RETURN TYPE:**
 
-*list[dict]*
+*list&#91;dict&#93;*
 
 **RETURNS:**
 
@@ -207,9 +207,9 @@ The following operations are related to `query()`:
 
 - [search()](search.md)
 
-- [search_iterator()](search_iterator.md)
+- [search_iterator()](../../MilvusClient/Vector/search_iterator.md)
 
-- [query_iterator()](query_iterator.md)
+- [query_iterator()](../../MilvusClient/Vector/query_iterator.md)
 
 - [upsert()](upsert.md)
 

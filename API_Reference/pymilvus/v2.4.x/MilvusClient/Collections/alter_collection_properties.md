@@ -32,7 +32,7 @@ alter_collection_properties(
 
         Whether to enable mmap for the raw data and indexes of all fields in the collection.
 
-- **timeout** (*Optional[float]*) - 
+- **timeout** (*Optional&#91;float&#93;*) - 
 
     The timeout duration for this operation.
 

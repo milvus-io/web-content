@@ -8,13 +8,13 @@ This operation gets the progress of the specified bulk-import job.
 
 - **url** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The URI of your Milvus instance.
 
 - **job_id** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The ID of the bulk-import job of your interest. 
 

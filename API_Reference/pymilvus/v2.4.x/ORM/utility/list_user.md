@@ -17,13 +17,13 @@ list_user(
 
 - **username** (*string*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the user to list.
 
 - **include_role_info** (*bool*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     Whether Milvus lists the roles granted to the specified user.
 

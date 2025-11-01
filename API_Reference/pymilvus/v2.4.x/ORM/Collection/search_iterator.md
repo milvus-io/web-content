@@ -21,9 +21,9 @@ search_iterator(
 
 **PARAMETERS:**
 
-- **data** (*list[list[float]]*) - 
+- **data** (*list&#91;list&#91;float&#93;&#93;*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A list of vector embeddings.
 
@@ -31,13 +31,13 @@ search_iterator(
 
 - **anns_field** (str) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the vector field in the current collection.
 
 - **param** (dict) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The parameter settings specific to this operation.
 
@@ -200,7 +200,7 @@ The following operations are related to `search_iterator()`:
 
 - [query()](query.md)
 
-- [query_iterator()](query_iterator.md)
+- [query_iterator()](../../MilvusClient/Vector/query_iterator.md)
 
 - [upsert()](upsert.md)
 

@@ -16,7 +16,7 @@ delete(
 
 - **expr** (*string*) -
 
-    **[REQUIRED]** 
+    **&#91;REQUIRED&#93;** 
 
     A boolean expression to filter the entities to delete.
 
@@ -123,11 +123,11 @@ The following operations are related to `delete()`:
 
 - [search()](search.md)
 
-- [search_iterator()](search_iterator.md)
+- [search_iterator()](../../MilvusClient/Vector/search_iterator.md)
 
 - [query()](query.md)
 
-- [query_iterator()](query_iterator.md)
+- [query_iterator()](../../MilvusClient/Vector/query_iterator.md)
 
 - [upsert()](upsert.md)
 

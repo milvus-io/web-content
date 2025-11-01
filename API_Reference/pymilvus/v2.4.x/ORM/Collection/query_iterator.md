@@ -113,7 +113,7 @@ while True:
     res = iterator.next()
     
     if not res:
-        iterator.close()
+        res.close()
         break
 ```
 
@@ -127,7 +127,7 @@ The following operations are related to `query_iterator()`:
 
 - [search()](search.md)
 
-- [search_iterator()](search_iterator.md)
+- [search_iterator()](../../MilvusClient/Vector/search_iterator.md)
 
 - [query()](query.md)
 

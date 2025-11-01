@@ -8,6 +8,7 @@ This operation imports the prepared data files to Milvus. To learn how to prepar
 bulk_import(
     url: str,
     collection_name: str,
+    db_name: str = "default"
     files: list
 )
 ```
@@ -16,19 +17,21 @@ bulk_import(
 
 - **url** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The URI of your Milvus instance.
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of a collection in the target cluster of this operation.
 
-- **files** (*list*) -
+- **db_name** (*string*) -
 
-    **[REQUIRED]**
+    The name of the target database. The value of this parameter defaults to `default`.
+
+- **files** (*list*) -
 
     The list of string lists, each string list contains a singular row-based file path or multiple column-based file paths.
 

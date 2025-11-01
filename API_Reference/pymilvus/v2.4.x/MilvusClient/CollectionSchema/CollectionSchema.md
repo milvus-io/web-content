@@ -21,7 +21,7 @@ CollectionSchema(
 
 - **fields** (*list*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A list of **FieldSchema** objects that define the fields in the collection schema.
 
@@ -51,7 +51,7 @@ CollectionSchema(
 
         Whether allows Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.
 
-        When you set this to **True**, Milvus and  will create a field called **$meta** to store any undefined fields and their values from the data that is inserted.
+        When you set this to **True**, Milvus and  will create a field called **&#36;meta** to store any undefined fields and their values from the data that is inserted.
 
         <div class="admonition note">
 
@@ -88,6 +88,10 @@ CollectionSchema(
         <p>As an alternative, you can set <strong>partition<em>key</em>field</strong> when creating a <strong>CollectionSchema</strong> object.</p>
 
         </div>
+
+    - **partition_key_isolation** (*bool*) -
+
+        Whether to enable partition key isolation to improve further search performance in scalar filtering on the partition key. For details, refer to [Use Partition Key Isolation](https://milvus.io/docs/use-partition-key.md#Use-Partition-Key-Isolation).
 
 **RETURN TYPE:**
 

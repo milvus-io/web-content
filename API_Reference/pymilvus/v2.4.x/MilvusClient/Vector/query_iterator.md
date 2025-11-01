@@ -1,12 +1,14 @@
-# query()
+# query_iterator()
 
-This operation conducts a scalar filtering with a specified boolean expression.
+This operation conducts a scalar filtering with a specified boolean expression in an iterative manner.
 
 ## Request syntax
 
 ```python
-query(
+query_iterator(
     collection_name: str,
+    batch_size: Optional[int] = 1000,
+    limit: Optional[int] = UNLIMITED,
     filter: str,
     output_fields: Optional[List[str]] = None,
     timeout: Optional[float] = None,
@@ -23,13 +25,21 @@ query(
 
     The name of an existing collection.
 
+- **batch_size** (*int*) -
+
+    The number of entities to return each iteration. The default value is 1000.
+
+- **limit** (*int*) -
+
+    The total number of entities to return. The parameter value should be less than 16,384. 
+
 - **filter** (*str*) -
 
     **&#91;REQUIRED&#93;**
 
     A scalar filtering condition to filter matching entities. 
 
-    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
+    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md).  
 
 - **output_fields** (*list&#91;str&#93;* | *None*) -
 
@@ -124,11 +134,19 @@ query(
 
 **RETURN TYPE:**
 
-*list&#91;dict&#93;*
+*QueryIterator*
 
 **RETURNS:**
 
-A list of dictionaries with each dictionary representing a queried entity.
+A **QueryIterator** instance that provides the following methods:
+
+- `next()`
+
+    This method returns a batch of entities iteratively. Each time you call it, a new set of entities is returned until the last entity is retrieved.
+
+- `close()`
+
+    This method closes the current **QueryIterator** instance.
 
 <div class="admonition note">
 
@@ -191,173 +209,23 @@ client.insert(
 
 # 4. Conduct queries
 
-# Query without any scalar filtering condition
-# This query returns entities with their ids from 0 to 4.
-res = client.query(
+# Query with query iterator
+iterator = client.query_iterator(
     collection_name="test_collection",
-    filter="",
-    limit=5,
-) 
-
-print(res)
-
-# [{'id': 0,
-#   'vector': [0.35803765, -0.6023496, 0.18414013, -0.26286206, 0.90294385],
-#   'color': 'pink_8682'},
-#  {'id': 1,
-#   'vector': [0.19886813, 0.060235605, 0.6976963, 0.26144746, 0.8387295],
-#   'color': 'red_7025'},
-#  {'id': 2,
-#   'vector': [0.43742132, -0.55975026, 0.6457888, 0.7894059, 0.20785794],
-#   'color': 'orange_6781'},
-#  {'id': 3,
-#   'vector': [0.3172005, 0.97190446, -0.36981148, -0.48608947, 0.9579189],
-#   'color': 'pink_9298'},
-#  {'id': 4,
-#   'vector': [0.44523495, -0.8757027, 0.82207793, 0.4640629, 0.3033748],
-#   'color': 'red_4794'}]
-
-# Query with pagination
-# This query returns entities with their ids from 5 to 9.
-res = client.query(
-    collection_name="test_collection",
-    filter="",
-    offset=5,
-    limit=5
-)
-
-print(res)
-
-# [{'vector': [0.9858251, -0.81446517, 0.6299267, 0.12069069, -0.14462778],
-#   'color': 'yellow_4222',
-#   'id': 5},
-#  {'vector': [0.8371978, -0.015764369, -0.31062937, -0.56266695, -0.8984948],
-#   'color': 'red_9392',
-#   'id': 6},
-#  {'vector': [-0.33445147, -0.2567135, 0.898754, 0.9402996, 0.5378065],
-#   'color': 'grey_8510',
-#   'id': 7},
-#  {'vector': [0.3952472, 0.40002573, -0.5890507, -0.86505026, -0.6140361],
-#   'color': 'white_9381',
-#   'id': 8},
-#  {'vector': [0.57182807, 0.24070318, -0.37379134, -0.067269325, -0.6980532],
-#   'color': 'purple_4976',
-#   'id': 9}]
-
-# Query with a scalar filtering condition
-res = client.query(
-    collection_name="test_collection",
+    batch_size=1000,
     filter="id in [6,7,8]",
 )
 
-print(res)
+results = []
 
-# [{'vector': [0.8371978, -0.015764369, -0.31062937, -0.56266695, -0.8984948],
-#   'color': 'red_9392',
-#   'id': 6},
-#  {'vector': [-0.33445147, -0.2567135, 0.898754, 0.9402996, 0.5378065],
-#   'color': 'grey_8510',
-#   'id': 7},
-#  {'vector': [0.3952472, 0.40002573, -0.5890507, -0.86505026, -0.6140361],
-#   'color': 'white_9381',
-#   'id': 8}]
-
-# Query within a partition
-res = client.query(
-    collection_name="test_collection",
-    filter="id in [6,7,8]",
-    partition_names=["partitionA"],
-)
-
-print(res)
-
-# []
-
-# Query with specified output fields
-res = client.query(
-    collection_name="test_collection",
-    filter="id in [6,7,8]",
-    output_fields=["id", "vector"],
-)
-
-print(res)
-
-# [{'id': 6,
-#   'vector': [0.8371978, -0.015764369, -0.31062937, -0.56266695, -0.8984948]},
-#  {'id': 7,
-#   'vector': [-0.33445147, -0.2567135, 0.898754, 0.9402996, 0.5378065]},
-#  {'id': 8,
-#   'vector': [0.3952472, 0.40002573, -0.5890507, -0.86505026, -0.6140361]}]
-
-# Query with a customized consistency level
-res = client.query(
-    collection_name="test_collection",
-    filter="",
-    limit=5,
-    consistency_level=3,
-    graceful_time=6
-)
-
-print(res)
-
-# [{'color': 'pink_8682',
-#   'id': 0,
-#   'vector': [0.35803765, -0.6023496, 0.18414013, -0.26286206, 0.90294385]},
-#  {'color': 'red_7025',
-#   'id': 1,
-#   'vector': [0.19886813, 0.060235605, 0.6976963, 0.26144746, 0.8387295]},
-#  {'color': 'orange_6781',
-#   'id': 2,
-#   'vector': [0.43742132, -0.55975026, 0.6457888, 0.7894059, 0.20785794]},
-#  {'color': 'pink_9298',
-#   'id': 3,
-#   'vector': [0.3172005, 0.97190446, -0.36981148, -0.48608947, 0.9579189]},
-#  {'color': 'red_4794',
-#   'id': 4,
-#   'vector': [0.44523495, -0.8757027, 0.82207793, 0.4640629, 0.3033748]}]
-
-# Query with outputting all fields
-res = client.query(
-    collection_name="test_collection",
-    filter="id < 5",
-    output_fields=["*"]
-)
-
-# [{'vector': [0.35803765, -0.6023496, 0.18414013, -0.26286206, 0.90294385],
-#   'color': 'pink_8682',
-#   'id': 0},
-#  {'vector': [0.19886813, 0.060235605, 0.6976963, 0.26144746, 0.8387295],
-#   'color': 'red_7025',
-#   'id': 1},
-#  {'vector': [0.43742132, -0.55975026, 0.6457888, 0.7894059, 0.20785794],
-#   'color': 'orange_6781',
-#   'id': 2},
-#  {'vector': [0.3172005, 0.97190446, -0.36981148, -0.48608947, 0.9579189],
-#   'color': 'pink_9298',
-#   'id': 3},
-#  {'vector': [0.44523495, -0.8757027, 0.82207793, 0.4640629, 0.3033748],
-#   'color': 'red_4794',
-#   'id': 4}]
-
-# Count the loaded entities that match specific conditions
-res = client.query(
-    collection_name="test_collection",
-    filter="color like \"red_%\"",
-    output_fields=["count(*)"]
-)
-
-# [{'count(*)': 3}]
+while True:
+    result = iterator.next()
+    if not result:
+        iterator.close()
+        break
+        
+    for hit in result:
+        results.append(hit.to_dict())
+    
 ```
-
-## Related methods
-
-- [delete()](delete.md)
-
-- [get()](get.md)
-
-- [insert()](insert.md)
-
-- [search()](search.md)
-
-- [upsert()](upsert.md)
 

@@ -5,40 +5,52 @@ This is an enumeration that provides the following constants.
 ## Constants
 
 - BOOL = 1
-Sets the data type to **Boolean**.
+
+    Sets the data type to **Boolean**.
 
 - INT8 = 2
-Sets the data type to **Int8**.
+
+    Sets the data type to **Int8**.
 
 - INT16 = 3
-Sets the data type to **Int16**.
+
+    Sets the data type to **Int16**.
 
 - INT32 = 4
-Sets the data type to **Int32**.
+
+    Sets the data type to **Int32**.
 
 - INT64 = 5
-Sets the data type to **Int64**.
+
+    Sets the data type to **Int64**.
 
 - FLOAT = 10
-Sets the data type to **Float**.
+
+    Sets the data type to **Float**.
 
 - DOUBLE = 11
-Sets the data type to **Double**.
+
+    Sets the data type to **Double**.
 
 - VARCHAR = 21
-Sets the data type to **Varchar**.
+
+    Sets the data type to **Varchar**.
 
 - ARRAY = 22
-Sets the data type to **Array**.
+
+    Sets the data type to **Array**.
 
 - JSON = 23
-Sets the data type to **JSON**.
+
+    Sets the data type to **JSON**.
 
 - FLOAT_VECTOR = 101
-Sets the data type to **Float Vector**.
+
+    Sets the data type to **Float Vector**.
 
 - BINARY_VECTOR = 100
-Sets the data type to **Binary Vector**.
+
+    Sets the data type to **Binary Vector**.
 
 - FLOAT16_VECTOR = 102
 
@@ -51,4 +63,3 @@ Sets the data type to **Binary Vector**.
 - SPARSE_FLOAT_VECTOR = 104
 
     Sets the data type to **Sparse Vector**.
-

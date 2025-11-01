@@ -15,13 +15,13 @@ add_field(
 
 - **field_name** (*string*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the field.
 
 - **datatype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The data type of the field.
 
@@ -78,7 +78,7 @@ add_field(
 
 - **max_length** (*int*) -
 
-    The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: [1, 65,535].
+    The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: &#91;1, 65,535&#93;.
 
     This is mandatory for a **DataType.VARCHAR** field.
 

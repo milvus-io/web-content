@@ -15,7 +15,7 @@ describe_collection(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
@@ -87,31 +87,31 @@ A dictionary that contains detailed information about the specified collection.
 
     The number of shards the current collection has.
 
-- **description** (*str*)
+- **description** (*str*) -
 
     The description of the current collection.
 
-- **fields** (*list*)
+- **fields** (*list*) -
 
     A list of fields in the current collection.
 
-    - **field_id** (*int*)
+    - **field_id** (*int*) -
 
         The ID of the current field.
 
-    - **name** (*str*)
+    - **name** (*str*) -
 
         The name of the current field.
 
-    - **description** (*str*)
+    - **description** (*str*) -
 
         The description of the current field.
 
-    - **type** (*int*)
+    - **type** (*int*) -
 
         The type of the current field. For details, refer to DataType.
 
-    - **params** (*dict*)
+    - **params** (*dict*) -
 
         Additional attributes of the current fields.
 
@@ -119,7 +119,7 @@ A dictionary that contains detailed information about the specified collection.
 
         - For **FLOAT_VECTOR** fields, **dim** (*int*) is a possible attribute, which determines the number of vector embeddings in the value of the current field.
 
-    - **element_type** (*int*) 
+    - **element_type** (*int*) -
 
         The data type of the elements in the field values. 
 
@@ -129,7 +129,7 @@ A dictionary that contains detailed information about the specified collection.
 
         Whether the current field serves as the primary key of the collection.
 
-- **aliases** (*list*)      
+- **aliases** (*list&#91;str&#93;*)      
 
     A list of collection aliases. You can use any alias in the list to use the current collection.  
 
@@ -159,7 +159,7 @@ A dictionary that contains detailed information about the specified collection.
 
 - **enable_dynamic_field** (*bool*)
 
-    Whether to use the reserved JSON field **$meta** to save non-schema-defined fields and their values as key-value pairs.
+    Whether to use the reserved JSON field **&#36;meta** to save non-schema-defined fields and their values as key-value pairs.
 
 **EXCEPTIONS:**
 

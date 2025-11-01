@@ -69,13 +69,13 @@ print(schema)
 
 The following operations are related to `construct_from_dict()`:
 
-- [FieldSchema](../FieldSchema/FieldSchema.md)
+- [FieldSchema](../../ORM/FieldSchema/FieldSchema.md)
 
-- [DataType](../../MilvusClient/Collections/DataType.md)
+- [DataType](../Collections/DataType.md)
 
-- [add_field()](add_field.md)
+- [add_field()](../../ORM/CollectionSchema/add_field.md)
 
-- [to_dict()](to_dict.md)
+- [to_dict()](../../ORM/CollectionSchema/to_dict.md)
 
-- [verify()](verify.md)
+- [verify()](../../ORM/CollectionSchema/verify.md)
 

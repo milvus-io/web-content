@@ -16,7 +16,7 @@ insert(
 
 - **data** (*list* | *dict* | *pandas.DataFrame*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The data to insert into the current collection.
 
@@ -205,11 +205,11 @@ The following operations are related to `insert()`:
 
 - [search()](search.md)
 
-- [search_iterator()](search_iterator.md)
+- [search_iterator()](../../MilvusClient/Vector/search_iterator.md)
 
 - [query()](query.md)
 
-- [query_iterator()](query_iterator.md)
+- [query_iterator()](../../MilvusClient/Vector/query_iterator.md)
 
 - [upsert()](upsert.md)
 

@@ -24,7 +24,7 @@ CrossEncoderRerankFunction(
 
 - **model_name** (*string*)
 
-    The name of the model to use. You can specify any of the available Cross-Encoder model names, for example, `cross-encoder/ms-marco-TinyBERT-L-2-v2`, `cross-encoder/ms-marco-MiniLM-L-2-v2`, etc. If you leave this parameter unspecified, an empty string will be used. For a list of available models, refer to [Pretrained Cross-Encoders](https://www.sbert.net/docs/pretrained_cross-encoders.html#).
+    The name of the model to use. You can specify any of the available Cross-Encoder model names, for example, `cross-encoder/ms-marco-TinyBERT-L-2-v2`, `cross-encoder/ms-marco-MiniLM-L-2-v2`, etc. If you leave this parameter unspecified, an empty string will be used. For a list of available models, refer to [Pretrained Cross-Encoders](https://www.sbert.net/docs/pretrained_cross-encoders.html).
 
 - **device** (*string*)
 

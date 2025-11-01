@@ -16,7 +16,7 @@ list_aliases(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the collection whose aliases are to be listed.
 

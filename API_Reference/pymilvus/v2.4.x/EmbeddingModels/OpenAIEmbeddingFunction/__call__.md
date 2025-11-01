@@ -18,13 +18,13 @@ openai_ef(
 
 **PARAMETERS:**
 
-- **texts** (*List[str]*)
+- **texts** (*List&#91;str&#93;*)
 
     A list of string values, where each string represents text that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
 **RETURN TYPE:**
 
-*List[np.array]*
+*List&#91;np.array&#93;*
 
 **RETURNS:**
 
@@ -63,3 +63,4 @@ openai_ef(docs)
 #          3.80731490e-03,  4.72489968e-02,  2.11893879e-02,  9.96136945e-03,
 #         -5.77749610e-02,  9.73062310e-03,  4.63456511e-02, -4.32428494e-02])]
 ```
+

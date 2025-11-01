@@ -1,14 +1,15 @@
-# search()
+# search_iterator()
 
-This operation conducts a vector similarity search with an optional scalar filtering expression.
+This operation conducts a vector similarity search with an optional scalar filtering expression in an iterative manner.
 
 ## Request syntax
 
 ```python
-search(
+search_iterator(
     self,
     collection_name: str,
     data: Union[List[list], list],
+    batch_size: Optional[int] = 1000,
     filter: str = "",
     limit: int = 10,
     output_fields: Optional[List[str]] = None,
@@ -16,6 +17,7 @@ search(
     timeout: Optional[float] = None,
     partition_names: Optional[List[str]] = None,
     anns_field: Optional[str] = None,
+    round_decimal: int = -1
     **kwargs,
 ) -> List[List[dict]]
 ```
@@ -35,6 +37,10 @@ search(
     A list of vector embeddings.
 
     Milvus searches for the most similar vector embeddings to the specified ones.
+
+- **batch_size** (*int*) -
+
+    The number of entities to return each iteration. The default value is 1000.
 
 - **anns_field** (*str*) -
 
@@ -112,9 +118,17 @@ search(
 
     This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
+- **anns_field** (*string*) -
+
+    The name of the target vector field. This parameter is optional if there is only one vector field in the target collection.
+
+- **round_decimal** (*int*) -
+
+    The number of decimal places for distance values. The default value is -1, which indicates that no rounding is applied.
+
 - **kwargs** -
 
-    - **offset** (*int*) -
+    - **offset** (int) -
 
         The number of records to skip in the search result. 
 
@@ -122,7 +136,7 @@ search(
 
         The sum of this value and `limit` should be less than 16,384. 
 
-    - **round_decimal** (*int*) -
+    - **round_decimal** (int) -
 
         The number of decimal places that Milvus rounds the calculated distances to.
 
@@ -130,10 +144,18 @@ search(
 
 **RETURN TYPE:**
 
-*list&#91;dict&#93;*
+*SearchIterator*
 
 **RETURNS:**
-A list of dictionaries that contains the searched entities with specified output fields.
+A **SearchIterator** instance that provides the following methods:
+
+- `next()`
+
+    This method returns a batch of entities iteratively. Each time you call it, a new set of entities is returned until the last entity is retrieved.
+
+- `close()`
+
+    This method closes the current **SearchIterator** instance.
 
 **EXCEPTIONS:**
 
@@ -183,108 +205,24 @@ search_params = {
     "params": {}
 }
 
-# Search with limit
-res = client.search(
-    collection_name="test_collection",
-    data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
-    limit=3,
-    search_params=search_params
-)
-
-# [[{'id': 7, 'distance': 0.4801957309246063, 'entity': {}},
-#   {'id': 2, 'distance': 0.3205878734588623, 'entity': {}},
-#   {'id': 1, 'distance': 0.2993225157260895, 'entity': {}}]]
-
-# Search with filter
-res = client.search(
-    collection_name="test_collection",
-    data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
-    limit=3,
-    filter='color like "red%"',
-    search_params=search_params
-)
-
-# [[{'id': 1, 'distance': 0.2993225157260895, 'entity': {}},
-#   {'id': 4, 'distance': 0.12666261196136475, 'entity': {}},
-#   {'id': 6, 'distance': -0.3535143733024597, 'entity': {}}]]
-
-# Search with an offset
-res = client.search(
-    collection_name="test_collection",
-    data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
-    limit=3,
-    offset=3,
-    search_params=search_params
-)
-
-# [[{'id': 4, 'distance': 0.12666261196136475, 'entity': {}},
-#   {'id': 3, 'distance': 0.11930042505264282, 'entity': {}},
-#   {'id': 5, 'distance': -0.05843167006969452, 'entity': {}}]]
-
 # Search with output fields
-res = client.search(
+iterator = client.search_iterator(
     collection_name="test_collection",
     data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
-    limit=3,
+    batch_size=1000,
     output_fields=["vector", "color"],
     search_params=search_params
 )
 
-# [[{'id': 7,
-#    'distance': 0.4801957309246063,
-#    'entity': {'color': 'grey_8510',
-#     'vector': [-0.33445146679878235,
-#      -0.25671350955963135,
-#      0.8987540006637573,
-#      0.9402995705604553,
-#      0.537806510925293]}},
-#   {'id': 2,
-#    'distance': 0.3205878734588623,
-#    'entity': {'color': 'orange_6781',
-#     'vector': [0.4374213218688965,
-#      -0.5597502589225769,
-#      0.6457887887954712,
-#      0.789405882358551,
-#      0.20785793662071228]}},
-#   {'id': 1,
-#    'distance': 0.2993225157260895,
-#    'entity': {'color': 'red_7025',
-#     'vector': [0.19886812567710876,
-#      0.060235604643821716,
-#      0.697696328163147,
-#      0.2614474594593048,
-#      0.8387295007705688]}}]]
+results = []
 
-# Conduct a range search
-search_params = {
-    "metric_type": "IP",
-    "params": {
-        "radius": 0.1,
-        "range_filter": 0.8
-    }
-}
-
-res = client.search(
-    collection_name="test_collection",
-    data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
-    limit=3,
-    search_params=search_params
-)
-
-# [[{'id': 7, 'distance': 0.4801957309246063, 'entity': {}},
-#   {'id': 2, 'distance': 0.3205878734588623, 'entity': {}},
-#   {'id': 1, 'distance': 0.2993225157260895, 'entity': {}}]]
+while True:
+    result = iterator.next()
+    if not result:
+        iterator.close()
+        break
+        
+    for hit in result:
+        results.append(hit.to_dict())
 ```
-
-## Related methods
-
-- [delete()](delete.md)
-
-- [get()](get.md)
-
-- [insert()](insert.md)
-
-- [query()](query.md)
-
-- [upsert()](upsert.md)
 

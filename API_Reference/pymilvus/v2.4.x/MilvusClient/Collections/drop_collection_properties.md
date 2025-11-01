@@ -20,7 +20,7 @@ drop_collection_properties(
 
     The name of the target collection.
 
-- **property_keys** (*List[str]*) -
+- **property_keys** (*List&#91;str&#93;*) -
 
     The names of the properties to drop in a list. Possible values are as follows:
 
@@ -28,7 +28,7 @@ drop_collection_properties(
 
     - `mmap.enabled`
 
-- **timeout** (*Optional[float]*) - 
+- **timeout** (*Optional&#91;float&#93;*) - 
 
     The timeout duration for this operation.
 

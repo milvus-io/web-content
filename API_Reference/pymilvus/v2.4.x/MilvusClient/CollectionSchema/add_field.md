@@ -15,13 +15,13 @@ add_field(
 
 - **field_name** (*string*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the field.
 
-- **datatype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) - 
+- **datatype** (*[DataType](../Collections/DataType.md)*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The data type of the field.
 
@@ -78,7 +78,7 @@ add_field(
 
 - **max_length** (*int*) -
 
-    The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: [1, 65,535].
+    The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: &#91;1, 65,535&#93;.
 
     This is mandatory for a **DataType.VARCHAR** field.
 
@@ -126,7 +126,7 @@ add_field(
 
 **RETURN TYPE:**
 
-*[CollectionSchema](CollectionSchema.md)*
+*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*
 
 **RETURNS:**
 
@@ -197,13 +197,13 @@ schema.add_field(
 
 The following operations are related to `add_field()`:
 
-- [FieldSchema](../FieldSchema/FieldSchema.md)
+- [FieldSchema](../../ORM/FieldSchema/FieldSchema.md)
 
-- [DataType](../../MilvusClient/Collections/DataType.md)
+- [DataType](../Collections/DataType.md)
 
-- [construct_from_dict()](construct_from_dict.md)
+- [construct_from_dict()](../../ORM/CollectionSchema/construct_from_dict.md)
 
-- [to_dict()](to_dict.md)
+- [to_dict()](../../ORM/CollectionSchema/to_dict.md)
 
-- [verify()](verify.md)
+- [verify()](../../ORM/CollectionSchema/verify.md)
 
