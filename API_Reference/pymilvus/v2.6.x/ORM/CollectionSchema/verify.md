@@ -54,17 +54,3 @@ schema = CollectionSchema(
 schema.verify()
 ```
 
-## Related operations
-
-The following operations are related to `verify()`:
-
-- [FieldSchema](../FieldSchema/FieldSchema.md)
-
-- [DataType](../../MilvusClient/Collections/DataType.md)
-
-- [add_field()](../../MilvusClient/CollectionSchema/add_field_1.md)
-
-- [construct_from_dict()](../../MilvusClient/CollectionSchema/construct_from_dict_1.md)
-
-- [to_dict()](../../MilvusClient/CollectionSchema/to_dict_1.md)
-

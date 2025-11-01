@@ -29,7 +29,7 @@ res = utility.get_bulk_insert_state(task_id=task_id)
 **PARAMETERS:**
 
 - **task_id** (*int*) -
-**[REQUIRED]**
+**&#91;REQUIRED&#93;**
 
     A task ID returned by the do_bulk_insert() function.
 

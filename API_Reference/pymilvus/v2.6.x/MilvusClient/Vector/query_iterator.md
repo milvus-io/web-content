@@ -1,19 +1,18 @@
 # query_iterator()
 
-This operation conducts a scalar filtering with a specified boolean expression.
+This operation conducts a scalar filtering with a specified boolean expression in an iterative manner.
 
 ## Request syntax
 
 ```python
-def query_iterator(
-    self,
+query_iterator(
     collection_name: str,
     batch_size: Optional[int] = 1000,
     limit: Optional[int] = UNLIMITED,
-    filter: Optional[str] = "",
+    filter: str,
     output_fields: Optional[List[str]] = None,
-    partition_names: Optional[List[str]] = None,
     timeout: Optional[float] = None,
+    partition_names: Optional[List[str]] = None,
     **kwargs,
 ) -> List[dict]
 ```
@@ -22,23 +21,27 @@ def query_iterator(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
-- **batch_size** (int[]) -
+- **batch_size** (*int*) -
 
-    The number of entities to return per iteration. The value defaults to `1000`.
+    The number of entities to return each iteration. The default value is 1000.
+
+- **limit** (*int*) -
+
+    The total number of entities to return. The parameter value should be less than 16,384. 
 
 - **filter** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A scalar filtering condition to filter matching entities. 
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
-- **output_fields** (*list[str]* | *None*) -
+- **output_fields** (*list&#91;str&#93;* | *None*) -
 
     A list of field names to include in each entity in return.
 
@@ -49,8 +52,8 @@ def query_iterator(
     <p><b>notes</b></p>
 
     <ul>
-    <li><p>Setting this as <code>output_fields=["\*"]</code> outputs all fields.</p></li>
-    <li><p>Setting this as <code>output_fields=["count(\*)"]</code> outputs the loaded entities that match the conditions specified in the <strong>filter</strong> argument. </p></li>
+    <li><p>Setting this as <code>output_fields=&#91;"\*"&#93;</code> outputs all fields.</p></li>
+    <li><p>Setting this as <code>output_fields=&#91;"count(\*)"&#93;</code> outputs the loaded entities that match the conditions specified in the <strong>filter</strong> argument. </p></li>
     </ul>
 
     </div>
@@ -59,7 +62,7 @@ def query_iterator(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **partition_names** (*list[str]* | *None*) -
+- **partition_names** (*list&#91;str&#93;* | *None*) -
 
     A list of partition names.
 
@@ -131,11 +134,19 @@ def query_iterator(
 
 **RETURN TYPE:**
 
-*list[dict]*
+*QueryIterator*
 
 **RETURNS:**
 
-A list of dictionaries with each dictionary representing a queried entity.
+A **QueryIterator** instance that provides the following methods:
+
+- `next()`
+
+    This method returns a batch of entities iteratively. Each time you call it, a new set of entities is returned until the last entity is retrieved.
+
+- `close()`
+
+    This method closes the current **QueryIterator** instance.
 
 <div class="admonition note">
 
@@ -196,20 +207,25 @@ client.insert(
 
 # {'insert_count': 10}
 
-# 4. Conduct queries with iterator
-res = client.query_iterator(
+# 4. Conduct queries
+
+# Query with query iterator
+iterator = client.query_iterator(
     collection_name="test_collection",
-    filter="",
-    limit=5,
-) 
+    batch_size=1000,
+    filter="id in [6,7,8]",
+)
+
+results = []
 
 while True:
     result = iterator.next()
     if not result:
         iterator.close()
         break
-
-    print(result)
-    results += result
+        
+    for hit in result:
+        results.append(hit.to_dict())
+    
 ```
 

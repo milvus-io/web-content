@@ -15,7 +15,7 @@ list_databases(
 
 - **db_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     Name of the database to drop.
 
@@ -25,7 +25,7 @@ list_databases(
 
 **RETURN TYPE:**
 
-*[]string*
+*&#91;&#93;string*
 
 **RETURNS:**
 

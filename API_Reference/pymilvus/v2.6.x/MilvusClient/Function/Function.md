@@ -24,13 +24,13 @@ Function(
 
 - `name` (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the function. This identifier is used to reference the function within queries and collections.
 
 - `function_type` (*FunctionType*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The type of embedding function to use. Possible values:
 
@@ -40,13 +40,13 @@ Function(
 
     - `FunctionType.RERANK`: Applies reranking strategies to the search results.
 
-- `input_field_names` (*Union[str, List[str]]*) -
+- `input_field_names` (*Union&#91;str, List&#91;str&#93;&#93;*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the field containing the raw data that requires conversion to a vector representation. This parameter accepts only one field name.
 
-- `output_field_names` (*Union[str, List[str]]*) -
+- `output_field_names` (*Union&#91;str, List&#91;str&#93;&#93;*) -
 
     The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. This parameter accepts only one field name.
 
@@ -128,7 +128,7 @@ Function(
 
             - `reranker` (*str*): Specifies the reranking method to use. Must be set to `weighted` to use Weighted Ranker.
 
-            - `weights` (*List[float]*): Array of weights corresponding to each search path; values ∈ [0,1]. For details, refer to [Mechanism of Weighted Ranker](https://milvus.io/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker).
+            - `weights` (*List&#91;float&#93;*): Array of weights corresponding to each search path; values ∈ &#91;0,1&#93;. For details, refer to [Mechanism of Weighted Ranker](https://milvus.io/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker).
 
             - `norm_score` (*boolean*): Whether to normalize raw scores (using arctan) before weighting. For details, refer to [Mechanism of Weighted Ranker](https://milvus.io/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker).
 
@@ -182,7 +182,7 @@ Function(
                 "provider": "tei",  # Choose provider: "tei" or "vllm"
                 "queries": ["machine learning for time series"],  # Query text
                 "endpoint": "http://model-service:8080",  # Model service endpoint
-                "maxBatch": 32  # Optional (default: 32)
+                "max_client_batch_size": 32,  # Optional (default: 32)
                 "truncate": True,                # Optional: Truncate the inputs that are longer than the maximum supported size
                 "truncation_direction": "Right",    # Optional: Direction to truncate the inputs
             }
@@ -196,8 +196,52 @@ Function(
                 "provider": "vllm",         # Specifies vLLM service
                 "queries": ["renewable energy developments"],  # Query text
                 "endpoint": "http://localhost:8080",  # vLLM service address
-                "maxBatch": 64,              # Optional: batch size
+                "max_client_batch_size": 64,              # Optional: batch size
                 "truncate_prompt_tokens": 256,  # Optional: Use last 256 tokens
+            }
+            ```
+
+            **Cohere Provider**:
+
+            ```python
+            params = {
+                "reranker": "model",                  # Enables model-based reranking
+                "provider": "cohere",                 # Specifies Cohere as the service provider
+                "model_name": "rerank-english-v3.0",  # Cohere rerank model to use
+                "queries": ["renewable energy developments"],  # Query text for relevance evaluation
+                "max_client_batch_size": 128,         # Optional: batch size for model service requests (default: 128)
+                "max_tokens_per_doc": 4096,           # Optional: max tokens per document (default: 4096)
+                "credential": "your-cohere-api-key" # Optional: authentication credential for Cohere API
+            }
+            ```
+
+            **Voyage AI Provider**:
+
+            ```python
+            params = {
+                "reranker": "model",                    # Enables model-based reranking
+                "provider": "voyageai",                 # Specifies Voyage AI as the service provider
+                "model_name": "rerank-2.5",             # Voyage AI reranker to use
+                "queries": ["renewable energy developments"],  # Query text for relevance evaluation
+                "max_client_batch_size": 128,           # Optional: batch size for model service requests (default: 128)
+                "truncation": True,                     # Optional: enable input truncation (default: True)
+                "credential": "your-voyage-api-key"   # Optional: if not set, uses VOYAGE_API_KEY env var
+            }
+            
+            ```
+
+            **SiliconFlow Provider**:
+
+            ```python
+            params = {
+                "reranker": "model",                        # Enables model-based reranking
+                "provider": "siliconflow",                  # Specifies SiliconFlow as the service provider
+                "model_name": "BAAI/bge-reranker-v2-m3",    # SiliconFlow reranking model to use
+                "queries": ["renewable energy developments"],  # Query text for relevance evaluation
+                "max_client_batch_size": 128,               # Optional: batch size for model service requests (default: 128)
+                "max_chunks_per_doc": 5,                    # Optional: max chunks per document for supported models
+                "overlap_tokens": 50,                       # Optional: token overlap between chunks for supported models
+                "credential": "your-siliconflow-api-key"  # Optional: if not set, uses SILICONFLOW_API_KEY env var
             }
             ```
 
@@ -205,21 +249,29 @@ Function(
 
             - `provider` (*str*): The model service provider to use for reranking. Possible values: `"tei"` or `"vllm"`. For details, refer to [Choose a model provider for your needs](https://milvus.io/docs/model-ranker-overview.md#Choose-a-model-provider-for-your-needs).
 
-            - `queries` (*List[str]*): List of query strings used by the reranking model to calculate relevance scores.
+            - `queries` (*List&#91;str&#93;*): List of query strings used by the reranking model to calculate relevance scores.
 
             - `endpoint` (*str*): URL of the model service.
 
-            - `maxBatch` *(int)*: Maximum number of documents to process in a single batch. Default: 32.
+            - `max_client_batch_size` *(int)*: Maximum number of documents to process in a single batch. Default: 32.
 
-            - `truncate` *(bool)*: **[TEI only]** Whether to truncate inputs that exceed the maximum supported size. For details, refer to [TEI Ranker](https://milvus.io/docs/tei-ranker.md).
+            - `truncate` *(bool)*: **&#91;TEI only&#93;** Whether to truncate inputs that exceed the maximum supported size. For details, refer to [TEI Ranker](https://milvus.io/docs/tei-ranker.md).
 
-            - `truncation_direction` (*str*): **[TEI only]** Direction for truncation (`"Left"` or `"Right"`). For details, refer to [TEI Ranker](https://milvus.io/docs/tei-ranker.md).
+            - `truncation_direction` (*str*): **&#91;TEI only&#93;** Direction for truncation (`"Left"` or `"Right"`). For details, refer to [TEI Ranker](https://milvus.io/docs/tei-ranker.md).
 
-            - `truncate_prompt_tokens` *(int)*: **[vLLM only]** Number of tokens to keep from the end of the prompt when truncating. For details, refer to [vLLM Ranker](https://milvus.io/docs/vllm-ranker.md).
+            - `truncate_prompt_tokens` *(int)*: **&#91;vLLM only&#93;** Number of tokens to keep from the end of the prompt when truncating. For details, refer to [vLLM Ranker](https://milvus.io/docs/vllm-ranker.md).
+
+            - `max_tokens_per_doc` *(int)*: **&#91;Cohere only&#93;** Maximum number of tokens per document. Long documents will be automatically truncated to the specified number of tokens. For details, refer to Cohere Ranker.
+
+            - `truncation` *(bool)*: **&#91;Voyage AI only&#93;** Whether to truncate the input to satisfy the "context length limit" on the query and the documents. For details, refer to Voyage AI Ranker.
+
+            - `max_chunks_per_doc` *(int)*: **&#91;SiliconFlow only&#93;** Maximum number of chunks generated from within a document. For details, refer to SiliconFlow Ranker.
+
+            - `overlap_tokens`  *(int)*: **&#91;SiliconFlow only&#93;** Number of token overlaps between adjacent chunks when documents are chunked. For details, refer to SiliconFlow Ranker.
 
 - `description` (*str*) -
 
-    **[OPTIONAL]**
+    **&#91;OPTIONAL&#93;**
 
     A brief description of the function's purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 
@@ -306,7 +358,7 @@ A `Function` object that can be registered with a Milvus collection, facilitatin
             "provider": "tei",  # Choose provider: "tei" or "vllm"
             "queries": ["machine learning for time series"],  # Query text
             "endpoint": "http://model-service:8080",  # Model service endpoint
-            # "maxBatch": 32  # Optional: batch size for processing
+            # "max_client_batch_size": 32  # Optional: batch size for processing
         }
     )
     ```

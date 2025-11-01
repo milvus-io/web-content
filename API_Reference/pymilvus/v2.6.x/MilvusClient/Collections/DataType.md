@@ -5,40 +5,60 @@ This is an enumeration that provides the following constants.
 ## Constants
 
 - BOOL
-Sets the data type to **Boolean**.
+
+    Sets the data type to **Boolean**.
 
 - INT8
-Sets the data type to **Int8**.
+
+    Sets the data type to **Int8**.
 
 - INT16
-Sets the data type to **Int16**.
+
+    Sets the data type to **Int16**.
 
 - INT32
-Sets the data type to **Int32**.
+
+    Sets the data type to **Int32**.
 
 - INT64
-Sets the data type to **Int64**.
+
+    Sets the data type to **Int64**.
 
 - FLOAT
-Sets the data type to **Float**.
+
+    Sets the data type to **Float**.
 
 - DOUBLE
-Sets the data type to **Double**.
+
+    Sets the data type to **Double**.
 
 - VARCHAR
-Sets the data type to **Varchar**.
+
+    Sets the data type to **Varchar**.
 
 - ARRAY
-Sets the data type to **Array**.
+
+    Sets the data type to **Array**.
 
 - JSON
-Sets the data type to **JSON**.
+
+    Sets the data type to **JSON**.
+
+- GEOMETRY
+
+    Sets the datatype to **Geometry**.
+
+- STRUCT
+
+    Sets the data type of the elements in an Array field to **Struct**.
 
 - FLOAT_VECTOR
-Sets the data type to **Float Vector**.
+
+    Sets the data type to **Float Vector**.
 
 - BINARY_VECTOR
-Sets the data type to **Binary Vector**.
+
+    Sets the data type to **Binary Vector**.
 
 - FLOAT16_VECTOR
 
@@ -55,4 +75,3 @@ Sets the data type to **Binary Vector**.
 - SPARSE_FLOAT_VECTOR
 
     Sets the data type to **Sparse Vector**.
-

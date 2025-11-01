@@ -15,7 +15,7 @@ list_import_jobs(
 
 - **url** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The URI of your Milvus instance.
 

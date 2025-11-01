@@ -18,20 +18,20 @@ load_balance(
 **PARAMETERS:**
 
 - **collection_name** (*str*) -
-**[REQUIRED]**
+**&#91;REQUIRED&#93;**
 
     The name of an existing collection for which a load-balancing group is set up.
 
 - **src_node_id** (*int*) -
-**[REQUIRED]**
+**&#91;REQUIRED&#93;**
 
     The ID of the query node the collection currently uses.
 
-- **dst_node_ids** (*list[int]*) -
+- **dst_node_ids** (*list&#91;int&#93;*) -
 
     The IDs of the query nodes to be added to the load-balancing group.
 
-- **sealed_segment_ids** (*list[int]*) -
+- **sealed_segment_ids** (*list&#91;int&#93;*) -
 
     The IDs of the sealed segments to load-balance.
 

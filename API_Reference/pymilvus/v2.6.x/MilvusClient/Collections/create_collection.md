@@ -24,7 +24,7 @@ create_collection(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the collection to create.
 
@@ -98,9 +98,9 @@ create_collection(
 
     - **enable_dynamic_field** (*bool*) -
 
-        Whether to use a reserved JSON field named **$meta** to store undefined fields and their values in key-value pairs.
+        Whether to use a reserved JSON field named **&#36;meta** to store undefined fields and their values in key-value pairs.
 
-        The value defaults to **True**, indicating that the **$meta** field is used.
+        The value defaults to **True**, indicating that the **&#36;meta** field is used.
 
         This parameter is ignored if **schema** is not **None**.
 
@@ -138,6 +138,10 @@ create_collection(
         <p>For details, refer to <a href="https://milvus.io/docs/use-partition-key">Use Partition Key</a> and <a href="https://milvus.io/docs/multi_tenancy.md">Multi-tenancy</a>.</p>
 
         </div>
+
+    - **partition_key_isolation** (*bool*) -
+
+        Whether to enable partition key isolation to improve further search performance in scalar filtering on the partition key. For details, refer to [Use Partition Key Isolation](https://milvus.io/docs/use-partition-key.md#Use-Partition-Key-Isolation).
 
     - **num_partitions** (*int*) -
 
@@ -233,7 +237,7 @@ You can choose between a quick setup or a customized setup as follows:
 
     - The primary field accepts integers and does not automatically increments.
 
-    - The reserved JSON field named **$meta** is used to store non-schema-defined fields and their values.
+    - The reserved JSON field named **&#36;meta** is used to store non-schema-defined fields and their values.
 
     You can modify the names of the primary and vector fields and change the metric type. Additionally, the primary field can be set to increment automatically.
 

@@ -44,7 +44,7 @@ load(
 
     </div>
 
-- **load_fields** (*str[]*) -
+- **load_fields** (*str&#91;&#93;*) -
 
     The names of the fields to load. 
 

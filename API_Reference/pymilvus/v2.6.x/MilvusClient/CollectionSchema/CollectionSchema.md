@@ -21,7 +21,7 @@ CollectionSchema(
 
 - **fields** (*list*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A list of **FieldSchema** objects that define the fields in the collection schema.
 
@@ -41,17 +41,17 @@ CollectionSchema(
 
 - **kwargs** -
 
-    - **auto_id** (*bool*)
+    - **auto_id** (*bool*) -
 
         Whether allows the primary field to automatically increment.
 
         Setting this to **True** makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.
 
-    - **enable_dynamic_field** (*bool*)
+    - **enable_dynamic_field** (*bool*) -
 
         Whether allows Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.
 
-        When you set this to **True**, Milvus and  will create a field called **$meta** to store any undefined fields and their values from the data that is inserted.
+        When you set this to **True**, Milvus and  will create a field called **&#36;meta** to store any undefined fields and their values from the data that is inserted.
 
         <div class="admonition note">
 
@@ -61,7 +61,7 @@ CollectionSchema(
 
         </div>
 
-    - **primary_field** (*str*)
+    - **primary_field** (*str*) -
 
         The name of the primary field.
 
@@ -69,7 +69,7 @@ CollectionSchema(
 
         As an alternative, you can set **is_primary** when creating a **FieldSchema** object.
 
-    - **partition_key_field** (*str*)
+    - **partition_key_field** (*str*) -
 
         The name of the field that serves as the partition key.
 
@@ -88,6 +88,10 @@ CollectionSchema(
         <p>As an alternative, you can set <strong>partition<em>key</em>field</strong> when creating a <strong>CollectionSchema</strong> object.</p>
 
         </div>
+
+    - **partition_key_isolation** (*bool*) -
+
+        Whether to enable partition key isolation to improve further search performance in scalar filtering on the partition key. For details, refer to [Use Partition Key Isolation](https://milvus.io/docs/use-partition-key.md#Use-Partition-Key-Isolation).
 
 **RETURN TYPE:**
 

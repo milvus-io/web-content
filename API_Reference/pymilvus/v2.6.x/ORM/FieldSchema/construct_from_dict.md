@@ -60,9 +60,3 @@ print(field)
 # {'name': 'primary_key', 'description': 'test_field_schema', 'type': <DataType.INT64: 5>}
 ```
 
-## Related operations
-
-The following operations are related to `construct_from_dict()`:
-
-- [to_dict()](to_dict.md)
-

@@ -56,9 +56,3 @@ print(vector_dict)
 # {'name': 'vector', 'description': '', 'type': <DataType.FLOAT_VECTOR: 101>, 'params': {'dim': 768}}
 ```
 
-## Related operations
-
-The following operations are related to `to_dict()`:
-
-- [construct_from_dict()](construct_from_dict.md)
-

@@ -36,7 +36,19 @@ alter_collection_properties(
 
         Whether to enable partition key isolation. For details, refer to [Use Partition Key](https://milvus.io/docs/use-partition-key.md).
 
-- **timeout** (*Optional[float]*) - 
+    - **dynamicfield.enabled** (bool) -
+
+        Whether to enable the dynamic field. For details, refer to Dynamic Field.
+
+    - **allow_insert_auto_id** (*str*) -
+
+        Whether to allow a collection to accept user-provided primary key values when AutoID has been enabled for the collection.
+
+        - When set to **"true"**: Inserts, upserts, and bulk imports use the user-provided primary key if present; otherwise, primary key values are auto-generated.
+
+        - When set to **"false"**: User-provided primary key values are rejected or ignored and primary key values are always auto-generated. The default is **"false"**.
+
+- **timeout** (*Optional&#91;float&#93;*) - 
 
     The timeout duration for this operation.
 

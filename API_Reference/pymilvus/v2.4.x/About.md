@@ -35,7 +35,7 @@ from pymilvus import __version__
 
 print(__version__)
 
-# v2.4.10
+# v2.4.15
 ```
 
 To install the Model library for embedding operations, run the following command:

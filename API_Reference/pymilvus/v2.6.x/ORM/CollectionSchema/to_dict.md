@@ -59,17 +59,3 @@ print(schema_dict)
 # {'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': <DataType.INT64: 5>, 'is_primary': True, 'auto_id': False}, {'name': 'vector', 'description': '', 'type': <DataType.FLOAT_VECTOR: 101>, 'params': {'dim': 768}}]}
 ```
 
-## Related operations
-
-The following operations are related to `to_dict()`:
-
-- [FieldSchema](../FieldSchema/FieldSchema.md)
-
-- [DataType](../../MilvusClient/Collections/DataType.md)
-
-- [add_field()](../../MilvusClient/CollectionSchema/add_field_1.md)
-
-- [construct_from_dict()](../../MilvusClient/CollectionSchema/construct_from_dict_1.md)
-
-- [verify()](../../MilvusClient/CollectionSchema/verify_1.md)
-

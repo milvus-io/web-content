@@ -19,7 +19,7 @@ get_compaction_state(
 
     The compaction job ID.
 
-- **timeout** (*Optional[float]*) - 
+- **timeout** (*Optional&#91;float&#93;*) - 
 
     The timeout duration for this operation.
 

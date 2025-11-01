@@ -43,7 +43,7 @@ load(
 
     </div>
 
-- **resource_groups** (*str[]*) **-**
+- **resource_groups** (*str&#91;&#93;*) **-**
 
     A specific set of resource groups into which the current collection is to be loaded.
 
@@ -58,7 +58,7 @@ load(
 
     </div>
 
-- **load_fields** (*str[]*) -
+- **load_fields** (*str&#91;&#93;*) -
 
     The names of the fields to load. 
 

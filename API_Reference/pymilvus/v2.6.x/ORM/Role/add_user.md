@@ -14,7 +14,7 @@ add_user(
 
 - **username** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the user to add to a role.
 
