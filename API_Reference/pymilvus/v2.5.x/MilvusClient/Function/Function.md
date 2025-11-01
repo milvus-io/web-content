@@ -24,33 +24,33 @@ Function(
 
 - `name` (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the function. This identifier is used to reference the function within queries and collections.
 
 - `function_type` (*FunctionType*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The type of function for processing raw data. Possible values:
 
     - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
 
-- `input_field_names` (*Union[str, List[str]]*) -
+- `input_field_names` (*Union&#91;str, List&#91;str&#93;&#93;*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the field containing the raw data that requires conversion to vector representation. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
 
-- `output_field_names` (*Union[str, List[str]]*) -
+- `output_field_names` (*Union&#91;str, List&#91;str&#93;&#93;*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
 
 - `description` (*str*) -
 
-    **[OPTIONAL]**
+    **&#91;OPTIONAL&#93;**
 
     A brief description of the function's purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 

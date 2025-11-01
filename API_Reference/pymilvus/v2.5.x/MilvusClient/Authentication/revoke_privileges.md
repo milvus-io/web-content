@@ -19,13 +19,13 @@ revoke_privilege(
 
 - **role_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the role to revoke privileges from.
 
 - **object_type** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The type of the object from which the privilege is being revoked. 
 
@@ -39,7 +39,7 @@ revoke_privilege(
 
 - **privilege** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the privilege to revoke. 
 
@@ -47,7 +47,7 @@ revoke_privilege(
 
 - **object_name** (*str*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the object to control access for. For example, if the object type is **Collection**, the object name is the name of a collection. If the object type is **User**, the object name is the name of a database user.
 

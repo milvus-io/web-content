@@ -1,46 +1,46 @@
 # search_iterator()
 
-This operation returns a Python iterator for you to iterate over the search results. It is useful especially when the search result contains a large volume of data.
+This operation conducts a vector similarity search with an optional scalar filtering expression in an iterative manner.
 
-## Request Syntax
+## Request syntax
 
-```plaintext
-def search_iterator(
+```python
+search_iterator(
     self,
     collection_name: str,
     data: Union[List[list], list],
     batch_size: Optional[int] = 1000,
-    filter: Optional[str] = None,
-    limit: Optional[int] = UNLIMITED,
+    filter: str = "",
+    limit: int = 10,
     output_fields: Optional[List[str]] = None,
     search_params: Optional[dict] = None,
     timeout: Optional[float] = None,
     partition_names: Optional[List[str]] = None,
     anns_field: Optional[str] = None,
-    round_decimal: int = -1,
+    round_decimal: int = -1
     **kwargs,
-) -> Union[SearchIteratorV2, SearchIterator]:
+) -> List[List[dict]]
 ```
 
 **PARAMETERS:**
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
-- **data** (*List[list], list]*) -
+- **data** (*List&#91;list&#93;, list&#93;*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A list of vector embeddings.
 
-    Zilliz Cloud searches for the most similar vector embeddings to the specified ones.
+    Milvus searches for the most similar vector embeddings to the specified ones.
 
-- **batch_size** (int[]) -
+- **batch_size** (*int*) -
 
-    The number of entities to return per iteration. The value defaults to `1000`.
+    The number of entities to return each iteration. The default value is 1000.
 
 - **anns_field** (*str*) -
 
@@ -50,13 +50,9 @@ def search_iterator(
 
     A scalar filtering condition to filter matching entities. 
 
-    The value defaults to an empty string, indicating that no condition applies. 
+    The value defaults to an empty string, indicating that no condition applies.
 
-    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](boolean.md). 
-
-- **filter_params** (*dict*) -
-
-    If you choose to use placeholders in `filter` as stated in [Filtering Templating](filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
+    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
 - **limit** (*int*) -
 
@@ -66,9 +62,7 @@ def search_iterator(
 
     The sum of this value and **offset** in **param** should be less than 16,384. 
 
-    In a grouping search, however, `limit` specifies the maximum number of groups to return, rather than individual entities. Each group is formed based on the specified `group_by_field`.
-
-- **output_fields** (l*ist[str]*) -
+- **output_fields** (l*ist&#91;str&#93;*) -
 
     A list of field names to include in each entity in return.
 
@@ -96,19 +90,17 @@ def search_iterator(
 
             Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
 
-        - **level** (*int*)
+        - **max_empty_result_buckets** (*int*)
 
-            Zilliz Cloud uses a unified parameter to simplify search parameter tuning instead of leaving you to work with a bunch of search parameters specific to various index algorithms.
+            This param is only used for range search for IVF-serial indexes, including **BIN_IVF_FLAT**, **IVF_FLAT**, **IVF_SQ8**, **IVF_PQ**, and **SCANN**. The value defaults to 1 and ranges from 1 to 65536.
 
-            The value defaults to **1**, and ranges from **1** to **5**. Increasing the value results in a higher recall rate with degraded search performance.
+            During range search, the search process terminates early if the number of buckets with no valid range search results reaches the specified value. Increasing this parameter improves range search recall.
 
-        - **page_retain_order** (*bool*) -
+    - **ignore_growing** (*str*) -
 
-            Whether to retain the order of the search result when `offset` is provided. 
+        This option, when set, instructs the search to exclude data from growing segments. Utilizing this setting can potentially enhance search performance by focusing only on indexed and fully processed data.
 
-            This parameter applies only when you also set `radius`.
-
-    For details on other applicable search parameters, read [Index Vector Fields](index_vector_fields.md) to get more.
+    For details on other applicable search parameters, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
 
 - **group_by_field** (*str*)
 
@@ -124,6 +116,16 @@ def search_iterator(
 
     The value defaults to **None**. If specified, only the specified partitions are involved in queries.
 
+    This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
+
+- **anns_field** (*string*) -
+
+    The name of the target vector field. This parameter is optional if there is only one vector field in the target collection.
+
+- **round_decimal** (*int*) -
+
+    The number of decimal places for distance values. The default value is -1, which indicates that no rounding is applied.
+
 - **kwargs** -
 
     - **offset** (int) -
@@ -136,16 +138,24 @@ def search_iterator(
 
     - **round_decimal** (int) -
 
-        The number of decimal places that Zilliz Cloud rounds the calculated distances to.
+        The number of decimal places that Milvus rounds the calculated distances to.
 
-        The value defaults to **-1**, indicating that Zilliz Cloud skips rounding the calculated distances and returns the raw value.
+        The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
 
 **RETURN TYPE:**
 
-*list[dict]*
+*SearchIterator*
 
 **RETURNS:**
-A list of dictionaries that contains the searched entities with specified output fields.
+A **SearchIterator** instance that provides the following methods:
+
+- `next()`
+
+    This method returns a batch of entities iteratively. Each time you call it, a new set of entities is returned until the last entity is retrieved.
+
+- `close()`
+
+    This method closes the current **SearchIterator** instance.
 
 **EXCEPTIONS:**
 
@@ -153,15 +163,15 @@ A list of dictionaries that contains the searched entities with specified output
 
     This exception will be raised when any error occurs during this operation.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import MilvusClient
 
 # 1. Set up a milvus client
 client = MilvusClient(
-    uri="https://inxx-xxxxxxxxxxxx.api.gcp-us-west1.zillizcloud.com:19530",
-    token="user:password"
+    uri="http://localhost:19530",
+    token="root:Milvus"
 )
 
 # 2. Create a collection
@@ -189,28 +199,30 @@ client.insert(
 
 # {'insert_count': 10}
 
-# 4. Conduct a search with iterator
+# 4. Conduct a search
 search_params = {
     "metric_type": "IP",
     "params": {}
 }
 
-# Search with limit
+# Search with output fields
 iterator = client.search_iterator(
     collection_name="test_collection",
     data=[[0.05, 0.23, 0.07, 0.45, 0.13]],
-    batch_size=50,
-    limit=20000,
+    batch_size=1000,
+    output_fields=["vector", "color"],
     search_params=search_params
 )
+
+results = []
 
 while True:
     result = iterator.next()
     if not result:
         iterator.close()
         break
-    
+        
     for hit in result:
-        print(hit.to_dict())
+        results.append(hit.to_dict())
 ```
 

@@ -63,13 +63,13 @@ print(schema_dict)
 
 The following operations are related to `to_dict()`:
 
-- [FieldSchema](../FieldSchema/FieldSchema.md)
+- [FieldSchema](../../ORM/FieldSchema/FieldSchema.md)
 
-- [DataType](../../MilvusClient/Collections/DataType.md)
+- [DataType](../Collections/DataType.md)
 
-- [add_field()](add_field.md)
+- [add_field()](../../ORM/CollectionSchema/add_field.md)
 
-- [construct_from_dict()](construct_from_dict.md)
+- [construct_from_dict()](../../ORM/CollectionSchema/construct_from_dict.md)
 
-- [verify()](verify.md)
+- [verify()](../../ORM/CollectionSchema/verify.md)
 

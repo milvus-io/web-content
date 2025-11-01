@@ -12,7 +12,7 @@ drop_collection(collection_name: str) -> None
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 

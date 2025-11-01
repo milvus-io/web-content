@@ -33,7 +33,7 @@ alter_index_properties(
 
         Whether to enable mmap for the specified index. Setting this to `true` offloads the specified index onto the disk. For details, refer to [Mmap-enabled Data Storage](https://milvus.io/docs/mmap.md)
 
-- **timeout** (*Optional[float]*) - 
+- **timeout** (*Optional&#91;float&#93;*) - 
 
     The timeout duration for this operation.
 
@@ -65,7 +65,7 @@ client = MilvusClient(
 )
 
 # update properties
-properties = {"mmap.enabled": True}
+properties = {"mmap.enabled": true}
 
 client.alter_index_properties(
     collection_name="collection_name",

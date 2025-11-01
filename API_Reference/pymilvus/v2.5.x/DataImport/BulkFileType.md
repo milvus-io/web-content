@@ -9,10 +9,12 @@ This is an enumeration that provides the following constants.
     Sets the file type to **NumPy** (*.npy*).
 
 - **JSON_RB** = 2
-Sets the file type to **JSON** (*.json*).
+
+    Sets the file type to **JSON** (*.json*).
 
 - **PARQUET** = 3
-Sets the file type to [Parquet](https://parquet.apache.org/) (*.parquet*).
+
+    Sets the file type to [Parquet](https://parquet.apache.org/) (*.parquet*).
 
 - **CSV** = 4
 

@@ -16,19 +16,19 @@ construct_from_dataframe(
 
 - **name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the collection to create.
 
 - **primary_field** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the primary field. It should be one of the column labels in the following dataframe.
 
 - **dataframe** (*pandas.DataFrame*) 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The dataframe containing the data to be inserted into the collection.
 

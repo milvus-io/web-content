@@ -14,7 +14,7 @@ add_function(
 
 - `function` (*[Function](Function.md)*)
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     An instance of the `Function` class that converts data into vector embeddings. This function will be added to the schema of a collection.
 

@@ -20,11 +20,11 @@ add_privileges_to_group(
 
     The name of the target privilege group.
 
-- **privileges** (*List[str]*) -
+- **privileges** (*List&#91;str&#93;*) -
 
     The privilages to add in a list.
 
-- **timeout** (*Optional[float]*) - 
+- **timeout** (*Optional&#91;float&#93;*) - 
 
     The timeout duration for this operation.
 

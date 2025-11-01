@@ -19,13 +19,13 @@ delete(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
 - **ids** (*list* | *str* | *int*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A specific entity ID or a list of entity IDs.
 

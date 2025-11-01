@@ -24,7 +24,7 @@ compact(
 
     Whether to perform a clustering compaction. For details, refer to [Clustering Compaction](https://milvus.io/docs/clustering-compaction.md).
 
-- **timeout** (*Optional[float]*) - 
+- **timeout** (*Optional&#91;float&#93;*) - 
 
     The timeout duration for this operation.
 

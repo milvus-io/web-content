@@ -17,11 +17,11 @@ drop_database_properties(
 
 - **db_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     Name of the database whose properties are to be dropped.
 
-- **properties** (*[]string* | *None*) -
+- **properties** (*&#91;&#93;string* | *None*) -
 
     Names of the properties to drop. Possible database properties are as follows:
 
@@ -29,7 +29,7 @@ drop_database_properties(
 
         Number of replicas for the database.
 
-    - **database.resource_groups** (*[]str*) -
+    - **database.resource_groups** (*&#91;&#93;str*) -
 
         Resource groups dedicated to the database.
 

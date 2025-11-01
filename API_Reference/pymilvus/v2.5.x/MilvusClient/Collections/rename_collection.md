@@ -16,7 +16,7 @@ rename_collection(
 
 - **old_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
@@ -24,7 +24,7 @@ rename_collection(
 
 - **new_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the target collection after this operation.
 

@@ -4,7 +4,7 @@ This operation processes the input data and generates tokenized output.
 
 ## Request Syntax
 
-```python
+```plaintext
 run_analyzer(
     texts: Union[str, List[str]],
     analyzer_params: Union[str, Dict, None] = None,
@@ -14,46 +14,47 @@ run_analyzer(
 )
 ```
 
-**PARAMETERS**:
+**PARAMETERS:**
 
-- `texts` (Union[str, List[str]]) -
+- `texts` (*Union&#91;str, List&#91;str&#93;&#93;*) -
 
-  The input text or a list of texts to be analyzed.
-  
-- `analyzer_params` (Union[str, Dict, None]) -
+    The input text or a list of texts to be analyzed.
 
-  The parameters for the analyzer. If set to None, defaults to an empty dictionary.
+- `analyzer_params` (*Union&#91;str, Dict, None&#93;*) -
 
-- `with_hash` (bool) -
+    The parameters for the analyzer. If set to `None`, defaults to an empty dictionary.
 
-  Optional flag indicating whether to include hash-based processing.
+- `with_hash` (*bool*) -
 
-- `with_detail` (bool) -
+    Optional flag indicating whether to include hash-based processing.
 
-  Optional flag indicating whether to return detailed analysis output.
+- `with_detail` (*bool*) -
 
-- `timeout` (float | None) -
+    Optional flag indicating whether to return detailed analysis output.
 
-  The timeout duration for this operation. Setting this to None indicates that this operation timeouts when any response or error occurs.
+- `timeout` (*float* | *None*) -
 
-**RETURN TYPE**:
+    The timeout duration for this operation. Setting this to *None* indicates that this operation timeouts when any response or error occurs.
 
-*List[str], List[List[str]]*
+**RETURN TYPE:**
 
-**RETURNS**:
+*List&#91;str&#93;, List&#91;List&#91;str&#93;&#93;*
+
+**RETURNS:**
 
 A tuple containing:
 
 - A list of strings representing the primary tokenized output.
+
 - A list of lists of strings representing detailed token information (if detailed output is enabled).
 
-**EXCEPTIONS**:
+**EXCEPTIONS:**
 
-- MilvusException - Raised if any error occurs during this operation.
+- `MilvusException` - Raised if any error occurs during this operation.
 
 ## Examples
 
-```python
+```plaintext
 from pymilvus import MilvusClient
 
 client = MilvusClient(

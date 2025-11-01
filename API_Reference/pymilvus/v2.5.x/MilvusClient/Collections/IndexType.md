@@ -53,16 +53,16 @@ This is an enumeration that provides the following constants.
     Sets the index type to **HNSW**.
 
 - HNSW_SQ
- 
-     Sets the index type to **HNSW_SQ**.
- 
- - HNSW_PQ
- 
-     Sets the index type to **HNSW_PQ**.
- 
- - HNSW_PRQ
- 
-     Sets the index type to **HNSW_PRQ**.
+
+    Sets the index type to **HNSW_SQ**.
+
+- HNSW_PQ
+
+    Sets the index type to **HNSW_PQ**.
+
+- HNSW_PRQ
+
+    Sets the index type to **HNSW_PRQ**.
 
 - DISKANN
 

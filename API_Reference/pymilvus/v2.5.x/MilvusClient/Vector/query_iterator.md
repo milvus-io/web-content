@@ -1,19 +1,18 @@
 # query_iterator()
 
-This operation conducts a scalar filtering with a specified boolean expression.
+This operation conducts a scalar filtering with a specified boolean expression in an iterative manner.
 
-## Request syntax{#request-syntax}
+## Request syntax
 
 ```python
-def query_iterator(
-    self,
+query_iterator(
     collection_name: str,
     batch_size: Optional[int] = 1000,
     limit: Optional[int] = UNLIMITED,
-    filter: Optional[str] = "",
+    filter: str,
     output_fields: Optional[List[str]] = None,
-    partition_names: Optional[List[str]] = None,
     timeout: Optional[float] = None,
+    partition_names: Optional[List[str]] = None,
     **kwargs,
 ) -> List[dict]
 ```
@@ -22,33 +21,39 @@ def query_iterator(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
-- **batch_size** (int[]) -
+- **batch_size** (*int*) -
 
-    The number of entities to return per iteration. The value defaults to `1000`.
+    The number of entities to return each iteration. The default value is 1000.
+
+- **limit** (*int*) -
+
+    The total number of entities to return. The parameter value should be less than 16,384. 
 
 - **filter** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A scalar filtering condition to filter matching entities. 
 
-    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](boolean.md). 
+    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md).  
 
-- **output_fields** (*list[str]* | *None*) -
+- **output_fields** (*list&#91;str&#93;* | *None*) -
 
     A list of field names to include in each entity in return.
 
     The value defaults to **None**.
 
-    <div class="alert note">
+    <div class="admonition note">
+
+    <p><b>notes</b></p>
 
     <ul>
-    <li><p>Setting this as <code>output_fields=["\*"]</code> outputs all fields.</p></li>
-    <li><p>Setting this as <code>output_fields=["count(\*)"]</code> outputs the loaded entities that match the conditions specified in the <strong>filter</strong> argument. </p></li>
+    <li><p>Setting this as <code>output_fields=&#91;"\*"&#93;</code> outputs all fields.</p></li>
+    <li><p>Setting this as <code>output_fields=&#91;"count(\*)"&#93;</code> outputs the loaded entities that match the conditions specified in the <strong>filter</strong> argument. </p></li>
     </ul>
 
     </div>
@@ -57,11 +62,13 @@ def query_iterator(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **partition_names** (*list[str]* | *None*) -
+- **partition_names** (*list&#91;str&#93;* | *None*) -
 
     A list of partition names.
 
     The value defaults to **None**. If specified, only the specified partitions are involved in queries.
+
+    This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md). 
 
 - **kwargs** -
 
@@ -71,12 +78,12 @@ def query_iterator(
 
         The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
 
-        <div class="alert note">
+        <div class="admonition note">
 
-        <p>What is consistency level?</p>
+        <p><b>what is the consistency level?</b></p>
 
         <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-        <p>Zilliz Cloud provides three consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, and <strong>Eventually</strong>, with <strong>Bounded Staleness</strong> set as the default.</p>
+        <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
         <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
 
         </div>
@@ -85,9 +92,11 @@ def query_iterator(
 
         A valid timestamp. 
 
-        If this parameter is set,  executes the query only if all entities inserted before this timestamp are visible to query nodes. 
+        If this parameter is set, MilvusZilliz Cloud executes the query only if all entities inserted before this timestamp are visible to query nodes. 
 
-        <div class="alert note">
+        <div class="admonition note">
+
+        <p><b>notes</b></p>
 
         <p>This parameter is valid when the default consistency level applies.</p>
 
@@ -97,9 +106,11 @@ def query_iterator(
 
         A period of time in seconds.
 
-        The value defaults to **5**. If this parameter is set,  calculates the guarantee timestamp by subtracting this from the current timestamp.
+        The value defaults to **5**. If this parameter is set, MilvusZilliz Cloud calculates the guarantee timestamp by subtracting this from the current timestamp.
 
-        <div class="alert note">
+        <div class="admonition note">
+
+        <p><b>notes</b></p>
 
         <p>This parameter is valid when a consistency level other than the default one applies.</p>
 
@@ -123,13 +134,23 @@ def query_iterator(
 
 **RETURN TYPE:**
 
-*list[dict]*
+*QueryIterator*
 
 **RETURNS:**
 
-A list of dictionaries with each dictionary representing a queried entity.
+A **QueryIterator** instance that provides the following methods:
 
-<div class="alert note">
+- `next()`
+
+    This method returns a batch of entities iteratively. Each time you call it, a new set of entities is returned until the last entity is retrieved.
+
+- `close()`
+
+    This method closes the current **QueryIterator** instance.
+
+<div class="admonition note">
+
+<p><b>notes</b></p>
 
 <p>If the number of returned entities is less than expected, duplicate entities may exist in your collection.</p>
 
@@ -145,15 +166,15 @@ A list of dictionaries with each dictionary representing a queried entity.
 
     This exception will be raised when a parameter value doesn't match the required data type.
 
-## Examples{#examples}
+## Examples
 
 ```python
 from pymilvus import MilvusClient
 
 # 1. Set up a milvus client
 client = MilvusClient(
-    uri="https://inxx-xxxxxxxxxxxx.api.gcp-us-west1.zillizcloud.com:19530",
-    token="user:password"
+    uri="http://localhost:19530",
+    token="root:Milvus"
 )
 
 # 2. Create a collection and a partition
@@ -186,20 +207,25 @@ client.insert(
 
 # {'insert_count': 10}
 
-# 4. Conduct queries with iterator
-res = client.query_iterator(
+# 4. Conduct queries
+
+# Query with query iterator
+iterator = client.query_iterator(
     collection_name="test_collection",
-    filter="",
-    limit=5,
-) 
+    batch_size=1000,
+    filter="id in [6,7,8]",
+)
+
+results = []
 
 while True:
     result = iterator.next()
     if not result:
         iterator.close()
         break
-
-    print(result)
-    results += result
+        
+    for hit in result:
+        results.append(hit.to_dict())
+    
 ```
 

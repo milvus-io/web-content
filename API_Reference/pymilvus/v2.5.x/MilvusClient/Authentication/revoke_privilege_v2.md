@@ -20,13 +20,13 @@ revoke_privilege_v2(
 
 - **role_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the role to revoke privileges from.
 
 - **privilege** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the privilege to revoke. 
 
@@ -34,7 +34,7 @@ revoke_privilege_v2(
 
 - **collection_name** (*str*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of a collection. To revoke privileges regarding all collections in the current database, set this parameter to `*`. 
 

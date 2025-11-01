@@ -58,13 +58,13 @@ schema.verify()
 
 The following operations are related to `verify()`:
 
-- [FieldSchema](../FieldSchema/FieldSchema.md)
+- [FieldSchema](../../ORM/FieldSchema/FieldSchema.md)
 
-- [DataType](../../MilvusClient/Collections/DataType.md)
+- [DataType](../Collections/DataType.md)
 
-- [add_field()](add_field.md)
+- [add_field()](../../ORM/CollectionSchema/add_field.md)
 
-- [construct_from_dict()](construct_from_dict.md)
+- [construct_from_dict()](../../ORM/CollectionSchema/construct_from_dict.md)
 
-- [to_dict()](to_dict.md)
+- [to_dict()](../../ORM/CollectionSchema/to_dict.md)
 

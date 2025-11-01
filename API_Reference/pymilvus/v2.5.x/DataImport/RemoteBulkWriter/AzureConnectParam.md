@@ -44,7 +44,7 @@ connect_param = RemoteBulkWriter.AzureConnectParam(
 
 - **account_url** (*str*)
 
-    A string in format like `https://<storage-account>.blob.core.windows.net`.
+    A string in format like `<i>http</i>s://<storage-account>.blob.core.windows.net`.
 
     Read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) for more info.
 

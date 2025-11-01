@@ -15,7 +15,7 @@ refresh_load(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the target collection of this operation.
 

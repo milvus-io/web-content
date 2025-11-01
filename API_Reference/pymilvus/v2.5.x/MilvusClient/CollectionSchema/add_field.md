@@ -16,13 +16,13 @@ add_field(
 
 - **field_name** (*string*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the field.
 
-- **datatype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) - 
+- **datatype** (*[DataType](../Collections/DataType.md)*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The data type of the field.
 
@@ -79,7 +79,7 @@ add_field(
 
 - **max_length** (*int*) -
 
-    The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: [1, 65,535].
+    The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: &#91;1, 65,535&#93;.
 
     This is mandatory for a **DataType.VARCHAR** field.
 
@@ -168,13 +168,13 @@ add_field(
 
             Defines the tokenizer type. Possible values: `standard` (default), `whitespace`, `jieba`. For more information, refer to [Standard Tokenizer](https://milvus.io/docs/standard-tokenizer.md), [Whitespace Tokenizer](https://milvus.io/docs/whitespace-tokenizer.md), and [Jieba Tokenizer](https://milvus.io/docs/jieba-tokenizer.md).
 
-        - `filter` (*Union[List[str], List[dict]*]) -
+        - `filter` (*Union&#91;List&#91;str&#93;, List&#91;dict&#93;*&#93;) -
 
-            - Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
+            Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
 
-- **multi_analyzer_params** (*dict*)
+- **multi_analyzer_params** (*dict*) -
 
-    Configures language-specific text analyzers for multilingual collections. This parameter enables the system to apply different analyzers to documents based on their language, significantly improving text search accuracy across multiple languages. For more information, refer to [Multi-language Analyzers](multi-language-analyzers.md).
+    Configures language-specific text analyzers for multilingual collections. This parameter enables the system to apply different analyzers to documents based on their language, significantly improving text search accuracy across multiple languages. For more information, refer to [Multi-language Analyzer](https://milvus.io/docs/multi-language-analyzers.md).
 
     ```python
     multi_analyzer_params = {
@@ -196,11 +196,11 @@ add_field(
 
 - **enable_match** (*bool*)
 
-    Whether to enable keyword matching for the specified `VARCHAR` field. When set to `True`, Milvus creates an inverted index for the field, allowing for quick and efficient keyword lookups. `enable_match` works in conjunction with `enable_analyzer` to provide structured keyword-based text search, with `enable_analyzer` handling tokenization and `enable_match` handling the search operations on these tokens.
+    Whether to enable keyword matching for the specified `VARCHAR` field. When set to `True`, Milvus creates an inverted index for the field, allowing for quick and efficient keyword lookups. `enable_match` works in conjunction with `enable_analyzer` to provide structured term-based text search, with `enable_analyzer` handling tokenization and `enable_match` handling the search operations on these tokens.
 
 **RETURN TYPE:**
 
-*[CollectionSchema](CollectionSchema.md)*
+*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*
 
 **RETURNS:**
 
@@ -271,13 +271,13 @@ schema.add_field(
 
 The following operations are related to `add_field()`:
 
-- [FieldSchema](../FieldSchema/FieldSchema.md)
+- [FieldSchema](../../ORM/FieldSchema/FieldSchema.md)
 
-- [DataType](../../MilvusClient/Collections/DataType.md)
+- [DataType](../Collections/DataType.md)
 
-- [construct_from_dict()](construct_from_dict.md)
+- [construct_from_dict()](../../ORM/CollectionSchema/construct_from_dict.md)
 
-- [to_dict()](to_dict.md)
+- [to_dict()](../../ORM/CollectionSchema/to_dict.md)
 
-- [verify()](verify.md)
+- [verify()](../../ORM/CollectionSchema/verify.md)
 

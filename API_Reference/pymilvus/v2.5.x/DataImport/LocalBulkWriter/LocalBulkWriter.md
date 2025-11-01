@@ -34,13 +34,13 @@ writer = LocalBulkWriter(
 
 - **schema** (*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The schema of a target collection to which the rewritten data is to be imported.
 
 - **local_path** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The path to the directory that is to hold the rewritten data.
 

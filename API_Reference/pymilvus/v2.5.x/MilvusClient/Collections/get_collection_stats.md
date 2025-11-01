@@ -15,7 +15,7 @@ get_collection_stats(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of a collection.
 
@@ -41,7 +41,7 @@ A dictionary containing collected statistics on the specified collection.
 
 <div class="admonition note">
 
-<p><b>**why doesn't the row count match the number of entities inserted?**</b></p>
+<p><b>why doesn't the row count match the number of entities inserted?</b></p>
 
 <p>The data that you insert will go through a process before it is finally saved: Initially, it will flow in as data streams. Then, it will be stored in segments as entities. Milvus will select an appropriate growing segment to store the data in streams until the segment reaches its upper limit and becomes sealed.</p>
 <p>However, it's important to note that the row count displayed may not match the number of records that were inserted because data in streams is not taken into account.</p>

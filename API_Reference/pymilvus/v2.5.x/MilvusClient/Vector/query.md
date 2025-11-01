@@ -19,19 +19,19 @@ query(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
 - **filter** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A scalar filtering condition to filter matching entities. 
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
-- **output_fields** (*list[str]* | *None*) -
+- **output_fields** (*list&#91;str&#93;* | *None*) -
 
     A list of field names to include in each entity in return.
 
@@ -42,8 +42,8 @@ query(
     <p><b>notes</b></p>
 
     <ul>
-    <li><p>Setting this as <code>output_fields=["\*"]</code> outputs all fields.</p></li>
-    <li><p>Setting this as <code>output_fields=["count(\*)"]</code> outputs the loaded entities that match the conditions specified in the <strong>filter</strong> argument. </p></li>
+    <li><p>Setting this as <code>output_fields=&#91;"\*"&#93;</code> outputs all fields.</p></li>
+    <li><p>Setting this as <code>output_fields=&#91;"count(\*)"&#93;</code> outputs the loaded entities that match the conditions specified in the <strong>filter</strong> argument. </p></li>
     </ul>
 
     </div>
@@ -52,7 +52,7 @@ query(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **partition_names** (*list[str]* | *None*) -
+- **partition_names** (*list&#91;str&#93;* | *None*) -
 
     A list of partition names.
 
@@ -124,7 +124,7 @@ query(
 
 **RETURN TYPE:**
 
-*list[dict]*
+*list&#91;dict&#93;*
 
 **RETURNS:**
 

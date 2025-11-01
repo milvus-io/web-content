@@ -4,8 +4,9 @@ This operation conducts a vector similarity search with an optional scalar filte
 
 ## Request syntax
 
-```python
+```plaintext
 search(
+    self,
     collection_name: str,
     data: Union[List[list], list],
     filter: str = "",
@@ -14,21 +15,22 @@ search(
     search_params: Optional[dict] = None,
     timeout: Optional[float] = None,
     partition_names: Optional[List[str]] = None,
+    anns_field: Optional[str] = None,
     **kwargs,
-) -> List[dict]
+) -> List[List[dict]]
 ```
 
 **PARAMETERS:**
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
-- **data** (*List[list], list]*) -
+- **data** (*List&#91;list&#93;, list&#93;*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A list of vector embeddings.
 
@@ -60,7 +62,7 @@ search(
 
     In a grouping search, however, `limit` specifies the maximum number of groups to return, rather than individual entities. Each group is formed based on the specified `group_by_field`.
 
-- **output_fields** (l*ist[str]*) -
+- **output_fields** (l*ist&#91;str&#93;*) -
 
     A list of field names to include in each entity in return.
 
@@ -76,9 +78,31 @@ search(
 
         Possible values are **L2**, **IP**, and **COSINE**.
 
+    - **radius** (float) -
+
+        Determines the threshold of least similarity. When setting `metric_type` to `L2`, ensure that this value is greater than that of **range_filter**. Otherwise, this value should be lower than that of **range_filter**. 
+
+    - **range_filter**  (float) -  
+
+        Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
+
+    - **max_empty_result_buckets** (*int*)
+
+        This param is only used for range search for IVF-serial indexes, including **BIN_IVF_FLAT**, **IVF_FLAT**, **IVF_SQ8**, **IVF_PQ**, and **SCANN**. The value defaults to 1 and ranges from 1 to 65536.
+
+        During range search, the search process terminates early if the number of buckets with no valid range search results reaches the specified value. Increasing this parameter improves range search recall.
+
     - **params** (dict) -
 
-        Additional parameters
+        Additional parameters.
+
+        <div class="admonition note">
+
+        <p><b>notes</b></p>
+
+        <p>All additional parameters are moved to the upper <code>search_params</code>, and the <code>params</code> argument will be deprecated soon.</p>
+
+        </div>
 
         - **radius** (float) -
 
@@ -142,7 +166,7 @@ search(
 
 **RETURN TYPE:**
 
-*list[dict]*
+*list&#91;dict&#93;*
 
 **RETURNS:**
 A list of dictionaries that contains the searched entities with specified output fields.

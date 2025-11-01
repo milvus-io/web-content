@@ -26,13 +26,13 @@ reset_password(
 
 - **user** (*str*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The specific user whose password is to be reset.
 
 - **old_password** (*str*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The original password for the specified user.
 
@@ -40,7 +40,7 @@ reset_password(
 
 - **new_password** (*str*) - 
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The new password for the specified user. 
 

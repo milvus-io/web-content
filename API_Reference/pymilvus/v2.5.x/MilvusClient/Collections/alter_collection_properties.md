@@ -36,7 +36,7 @@ alter_collection_properties(
 
         Whether to enable partition key isolation. For details, refer to [Use Partition Key](https://milvus.io/docs/use-partition-key.md).
 
-- **timeout** (*Optional[float]*) - 
+- **timeout** (*Optional&#91;float&#93;*) - 
 
     The timeout duration for this operation.
 
