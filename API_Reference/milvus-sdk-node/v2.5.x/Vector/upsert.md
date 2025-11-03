@@ -27,11 +27,11 @@ milvusClient.upsert({
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
-- **data** (*RowData[]*) -
+- **data** (*RowData&#91;&#93;*) -
 
     The data to insert into the current collection.
 
@@ -89,7 +89,7 @@ milvusClient.upsert({
 
     If specified, the data is to be inserted into the specified partition.
 
-**RETURNS** *Promise\<MutationResult>*
+**RETURNS** *Promise\&lt;MutationResult&gt;*
 
 This method returns a promise that resolves to a **MutationResult** object.
 
@@ -109,47 +109,37 @@ This method returns a promise that resolves to a **MutationResult** object.
 
 **PARAMETERS:**
 
-- **IDs** (*list[string]* | *list[number]*) -
+- **IDs** (*NumberArrayId* | *StringArrayId*) -
 
     A list of the IDs of the upserted entities.
 
-- **acknowledged** (*list[string]* | *list[number]*) -
+- **acknowledged** (*boolean*) -
 
-    A boolean value indicating whether the upsert operation of the entity is successful.
+    A boolean value indicating whether the upsert operation is successful.
 
 - **delete_cnt** (*string*) -
 
-    The deleted entities
+    The deleted entities. The value stays `0` in this operation.
 
-- **err_index** (*list[number]*) -
+- **err_index** (Number&#91;&#93;) -
 
-    The number of entities involved in the upsert operation that fails to be indexed.
+    The number of entities involved in the insert operation that fails.
 
 - **insert_cnt** (*string*) -
 
-    The new entities that are inserted.
+    The new entities that are inserted. The value stays `0` in this operation.
 
-- **succ_index** (*list[number]*) -
+- **succ_index** (*list&#91;number&#93;*) -
 
     The number of entities involved in the upsert operation that have been successfully indexed.
 
 - **timestamp** (*string*) -
 
-    The timestamp indicating the time when the upsert operation occurs.
+    The timestamp at which the upsert operation occurs.
 
 - **upsert_cnt** (*string*) -
 
-    The entities that have been updated.
-
-- **stats** (*object*) -
-
-    - **key** (*string*) -
-
-        The property of the upserted data.
-
-    - **value** (*string* | *number*) -
-
-        The value of the property.
+    The entities that have been upserted.
 
 - **status** (*object*) -
 

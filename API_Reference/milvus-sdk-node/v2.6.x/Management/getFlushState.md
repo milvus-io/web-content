@@ -25,9 +25,9 @@ milvusClient.getFlushState({
 
 **PARAMETERS:**
 
-- **segment_ids** (*number[]*) -
+- **segment_ids** (*number&#91;&#93;*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A list of the target segment IDs.
 
@@ -37,7 +37,7 @@ milvusClient.getFlushState({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<GetFlushStateResponse>*
+**RETURNS** *Promise\&lt;GetFlushStateResponse&gt;*
 
 This method returns a promise that resolves to a **GetFlushStateResponse** object.
 

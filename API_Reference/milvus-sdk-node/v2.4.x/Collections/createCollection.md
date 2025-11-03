@@ -41,7 +41,7 @@ milvusClient.createCollection({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the collection to create.
 
@@ -79,7 +79,7 @@ milvusClient.createCollection({
 
 - **enable_dynamic_field** (*boolean)* -
 
-    Whether to use a reserved JSON field named **$meta** to store undefined fields and their values in key-value pairs.
+    Whether to use a reserved JSON field named **&#36;meta** to store undefined fields and their values in key-value pairs.
 
     The value defaults to **True**, indicating that the meta field is used.
 
@@ -138,7 +138,7 @@ milvusClient.createCollection({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the collection to create.
 
@@ -164,11 +164,11 @@ milvusClient.createCollection({
 
 - **enable_dynamic_field** (*boolean)* -
 
-    Whether to use a reserved JSON field named **$meta** to store undefined fields and their values in key-value pairs.
+    Whether to use a reserved JSON field named **&#36;meta** to store undefined fields and their values in key-value pairs.
 
     The value defaults to **True**, indicating that the meta field is used.
 
-- **schema** (*FieldType[]*) -
+- **schema** (*FieldType&#91;&#93;*) -
 
     - **name** (*string)* -
 
@@ -313,7 +313,7 @@ milvusClient.createCollection({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the collection to create.
 
@@ -339,11 +339,11 @@ milvusClient.createCollection({
 
 - **enable_dynamic_field** (*boolean)* -
 
-    Whether to use a reserved JSON field named **$meta** to store undefined fields and their values in key-value pairs.
+    Whether to use a reserved JSON field named **&#36;meta** to store undefined fields and their values in key-value pairs.
 
     The value defaults to **True**, indicating that the meta field is used.
 
-- **schema** (*FieldType[]*) -
+- **schema** (*FieldType&#91;&#93;*) -
 
     - **name** (*string)* -
 
@@ -446,7 +446,7 @@ milvusClient.createCollection({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-- **index_params** (*CreateIndexSimpleReq[]* | *CreateIndexSimpleReq*)
+- **index_params** (*CreateIndexSimpleReq&#91;&#93;* | *CreateIndexSimpleReq*)
 
     The index parameters.
 
@@ -470,7 +470,7 @@ milvusClient.createCollection({
 
         Extra index-related parameters in key-value pairs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise\&lt;ResStatus&gt;*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

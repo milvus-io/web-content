@@ -10,7 +10,7 @@ addCollectionFields(data: AddCollectionFieldReq): Promise<ResStatus>
 
 <p><b>notes</b></p>
 
-<p>If the collection has the dynamic field enabled and you add a static field with the same name as an existing dynamic field key, the static field will mask the dynamic field key. The original dynamic values remain accessible via the <code>$meta['field_name']</code> syntax.</p>
+<p>If the collection has the dynamic field enabled and you add a static field with the same name as an existing dynamic field key, the static field will mask the dynamic field key. The original dynamic values remain accessible via the <code>#meta&#91;'field_name'&#93;</code> syntax.</p>
 
 </div>
 
@@ -35,7 +35,7 @@ milvusClient.addCollectionFields({
 
     The name of the target database.
 
-- **fields** (*FieldType[]*) -
+- **fields** (*FieldType&#91;&#93;*) -
 
     The configurations of the fields to add, each of which is a **FieldType** object that has the following fields:
 
@@ -160,7 +160,7 @@ milvusClient.addCollectionFields({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise\&lt;ResStatus&gt;*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

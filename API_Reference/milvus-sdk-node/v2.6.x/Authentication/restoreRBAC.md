@@ -19,7 +19,7 @@ milvusClient.backupRBAC({
 
 - **RBAC_meta** (*RBACMeta*) -
 
-    - **users** (*User[]*) -
+    - **users** (*User&#91;&#93;*) -
 
         A list of user entities.
 
@@ -27,7 +27,7 @@ milvusClient.backupRBAC({
 
             The name of a user.
 
-    - **roles** (*RoleEntity[]*) -
+    - **roles** (*RoleEntity&#91;&#93;*) -
 
         A list of role entities.
 
@@ -35,7 +35,7 @@ milvusClient.backupRBAC({
 
             The name of a role.
 
-    - **grants** (*GrantEntity[]*) -
+    - **grants** (*GrantEntity&#91;&#93;*) -
 
         A list of grant entities.
 
@@ -81,7 +81,7 @@ milvusClient.backupRBAC({
 
                 The name of the affected role.
 
-    - **privilege_groups** (*PrivelegeGroup[]*) - 
+    - **privilege_groups** (*PrivelegeGroup&#91;&#93;*) - 
 
         A list of privilege-group entities.
 
@@ -89,7 +89,7 @@ milvusClient.backupRBAC({
 
             The name of a privilege group.
 
-        - **privileges** (*PrivilegeEntity[]*) -
+        - **privileges** (*PrivilegeEntity&#91;&#93;*) -
 
             A list of privileges.
 
@@ -103,7 +103,7 @@ milvusClient.backupRBAC({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise\&lt;ResStatus&gt;*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

@@ -26,11 +26,11 @@ milvusClient.insert({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
-- **data** (*RowData[]*) -
+- **data** (*RowData&#91;&#93;*) -
 
     The data to insert into the current collection.
 
@@ -88,7 +88,7 @@ milvusClient.insert({
 
     If specified, the data is to be inserted into the specified partition.
 
-**RETURNS** *Promise\<MutationResult>*
+**RETURNS** *Promise\&lt;MutationResult&gt;*
 
 This method returns a promise that resolves to a **MutationResult** object.
 
@@ -110,35 +110,35 @@ This method returns a promise that resolves to a **MutationResult** object.
 
 - **IDs** (*NumberArrayId* | *StringArrayId*) -
 
-    A list of the IDs of the upserted entities.
+    A list of the IDs of the inserted entities.
 
 - **acknowledged** (*boolean*) -
 
-    A boolean value indicating whether the upsert operation of the entity is successful.
+    A boolean value indicating whether the insert operation is successful.
 
 - **delete_cnt** (*string*) -
 
-    The deleted entities
+    The deleted entities. The value stays `0` in this operation.
 
-- **err_index** (Number[]) -
+- **err_index** (Number&#91;&#93;) -
 
-    The number of entities involved in the upsert operation that fails to be indexed.
+    The number of entities involved in the insert operation that fails.
 
 - **insert_cnt** (*string*) -
 
-    The new entities that are inserted.
+    The new entities that are inserted. 
 
-- **succ_index** (*list[number]*) -
+- **succ_index** (*list&#91;number&#93;*) -
 
-    The number of entities involved in the upsert operation that have been successfully indexed.
+    The number of entities involved in the insert operation that have been successfully indexed.
 
 - **timestamp** (*string*) -
 
-    The timestamp indicating the time when the upsert operation occurs.
+    The timestamp at which the upsert operation occurs.
 
 - **upsert_cnt** (*string*) -
 
-    The entities that have been updated.
+    The entities that have been updated. The value stays `0` in this operation.
 
 - **status** (*object*) -
 
@@ -156,7 +156,10 @@ This method returns a promise that resolves to a **MutationResult** object.
 
 ## Example
 
-```java
-
+```javascript
+const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const res = await milvusClient.listAliases({
+   collection_name: 'my_collection',
+});
 ```
 

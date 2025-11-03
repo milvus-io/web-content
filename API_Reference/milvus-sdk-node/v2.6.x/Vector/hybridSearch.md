@@ -10,20 +10,25 @@ hybridSearch(data): Promise<SearchResults>
 
 ```javascript
 milvusClient.hybridSearch({
-   db_name: string,
-   collection_name: string,
-   partition_names?: string[], 
-   data: HybridSearchSingleReq[], 
-   filter: string,
-   limit?: number,
-   offset?: number
-   output_fields?: string | list[string],
-   partition_names?: string | list[string],
-   consistency_level?: string,
-   ignore_growing?: boolean,
-   rerank?: RerankerObj,
-   timeout?: number,
- })
+    db_name: string,
+    collection_name: string,
+    partition_names?: string[], 
+    data: HybridSearchSingleReq[], 
+    limit?: number,
+    offset?: number
+    output_fields?: string | list[string],
+    metric_type?: string,
+    consistency_level?: string,
+    ignore_growing?: boolean,
+    rerank?: RerankerObj | FunctionObject | FunctionScore,
+    group_by_field?: string;
+    group_size?: number;
+    strict_group_size?: boolean;
+    hints?: string;
+    round_decimal?: number;
+    transformers? OutputTransformers;
+    timeout?: number
+})
 ```
 
 **PARAMETERS:**
@@ -34,65 +39,69 @@ milvusClient.hybridSearch({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
-    The name of the collection to search
+    The name of the collection to search.
 
-- **consistency_level** (*ConsistencyLevelEnum*) -
+- **partition_names** (*string&#91;&#93;*) -
 
-    The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+    A list of the names of the partitions to search.
 
-- **data** (*HybridSearchSingleReq[]*) -
+- **data** (*HybridSearchSingleReq&#91;&#93;*) -
 
     A list of search requests in the form of the **HybridSearchSingleReq** object.
 
-    - **data** (*VectorTypes[]* | *VectorTypes*) -
+    - **data** (*VectorTypes&#91;&#93;* | *VectorTypes*) -
 
-        **[REQUIRED]**
+        **&#91;REQUIRED&#93;**
 
         The query vectors. The following vector types are supported:
 
-        - **FloatVector** (number[])
+        - **FloatVector** (number&#91;&#93;)
 
-        - **Float16Vector** (*number*[] | *Uint8Array*)
+        - **Float16Vector** (*number*&#91;&#93; | *Uint8Array*)
 
-        - **BinaryVector** (*number*[])
+        - **BinaryVector** (*number*&#91;&#93;)
 
-        - **BFloat16Vector** (*number*[] | *Uint8Array*)
+        - **BFloat16Vector** (*number*&#91;&#93; | *Uint8Array*)
 
         - **SparseFloatVector** (*SparseVectorArray* | *SparseVectorDic* | *SparseVectorCSR* | *SparseVectorCOO*)
 
             For details on how to generate a **SparseFloatVector**, refer to this [code snippet](https://github.com/milvus-io/milvus-sdk-node/blob/f8dcac6a624f20564e19e52f2f394c19605abe46/test/tools/data.ts#L155).
 
-    - **limit** (*string*) - 
+    - **anns_field** (*string*) -
 
-        The maximum number of results to return in the request. When performing a hybrid search with multiple ANN search requests, the top results defined by **limit** from each request will be combined and re-ranked before returning the final search results.
+        The name of the target vector field for this operation. It is mandatory if you are searching in a collection with multiple vector fields.
 
-    - **expr** (*string*) -
+    - **ignore_growing** (*boolean*) -
 
-        The expression to filter the results.
+        A boolean value indicating whether to skip the search in growing segments.
+
+    - **group_by_field** (*string*) -
+
+        Groups search results by a specified field to ensure diversity and avoid returning multiple results from the same group.
+
+    - **filter** (*string*) -
+
+        A scalar filtering condition to filter matching entities. 
+
+        The value defaults to an empty string, indicating that no condition applies.
+
+        You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
     - **exprValues** (*keyValueObj*) -
 
         If you choose to use placeholders in `filter` as stated in [Filtering Templating](https://milvus.io/docs/filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
 
-    - **params** (*KeyValueObj*) -
+    - **transformers** (*OutputTransformers*) -
 
-        The additional search parameters in key-value pairs.
+        A custom function to convert data for the following data types:
 
-        - **radius** (*number*) -
+        - BFloat16Vector (`(bf16bytes: Uint8Array) => BFloat16Vector;`)
 
-            Determines the threshold of least similarity. When setting `metric_type` to `L2`, ensure that this value is greater than that of **range_filter**. Otherwise, this value should be lower than that of **range_filter**. 
+        - Float16Vector (`(f16: Uint8Array) => Float16Vector;`)
 
-        - **range_filter**  (*number*) -  
-
-            Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
-
-        - **max_empty_result_buckets** (*number*)
-
-            This param is only used for range search for IVF-serial indexes, including **BIN_IVF_FLAT**, **IVF_FLAT**, **IVF_SQ8**, **IVF_PQ**, and **SCANN**. The value defaults to 1 and ranges from 1 to 65536.
-
-            During range search, the search process terminates early if the number of buckets with no valid range search results reaches the specified value. Increasing this parameter improves range search recall.
+        - SparseFloatVector (`(sparse: SparseVectorDic) => SparseFloatVector;`)
 
 - **limit** (*number*) - 
 
@@ -110,19 +119,74 @@ milvusClient.hybridSearch({
 
     The sum of this value and `limit` should be less than 16,384. 
 
-- **output_fields** (*string[]*) -
+- **output_fields** (*string&#91;&#93;*) -
 
     A list of field names to include in each entity in return.
 
     The value defaults to **None**. If left unspecified, only the primary field is included.
 
-- **partition_names** (*string[]*) -
+- **metric_type** (*string*) -
 
-    A list of the names of the partitions to search.
+    The metric type used to measure similarity between vectors. The value varies with the vector field type. The following table lists the mapping between vector field types and their supported metric types.
 
-- **reranker** (*RerankerObj*) -
+    <table>
+       <tr>
+         <th><p>Field Type</p></th>
+         <th><p>Dimension Range</p></th>
+         <th><p>Supported Metric Types</p></th>
+         <th><p>Default Metric Type</p></th>
+       </tr>
+       <tr>
+         <td><p><code>FLOAT_VECTOR</code></p></td>
+         <td><p>2-32,768</p></td>
+         <td><p><code>COSINE</code>, <code>L2</code>, <code>IP</code></p></td>
+         <td><p><code>COSINE</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>FLOAT16_VECTOR</code></p></td>
+         <td><p>2-32,768</p></td>
+         <td><p><code>COSINE</code>, <code>L2</code>, <code>IP</code></p></td>
+         <td><p><code>COSINE</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>BFLOAT16_VECTOR</code></p></td>
+         <td><p>2-32,768</p></td>
+         <td><p><code>COSINE</code>, <code>L2</code>, <code>IP</code></p></td>
+         <td><p><code>COSINE</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>INT8_VECTOR</code></p></td>
+         <td><p>2-32,768</p></td>
+         <td><p><code>COSINE</code>, <code>L2</code>, <code>IP</code></p></td>
+         <td><p><code>COSINE</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>SPARSE_FLOAT_VECTOR</code></p></td>
+         <td><p>No need to specify the dimension.</p></td>
+         <td><p><code>IP</code>, <code>BM25</code> (used only for full text search)</p></td>
+         <td><p><code>IP</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>BINARY_VECTOR</code></p></td>
+         <td><p>8-32,768*8</p></td>
+         <td><p><code>HAMMING</code>, <code>JACCARD</code>, <code>MHJACCARD</code></p></td>
+         <td><p><code>HAMMING</code></p></td>
+       </tr>
+    </table>
 
-    A reranking strategy with its custom parameters.
+- **consistency_level** (*ConsistencyLevelEnum*) -
+
+    The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+
+- **ignore_growing** (*boolean*) -
+
+    A boolean value indicating whether to skip the search in growing segments.
+
+- **reranker** (*RerankerObj* | *FunctionObject* | *FunctionScore*) -
+
+    A reranking strategy with its custom parameters. You can either use a **RerankerObj**, a **FunctionObject**, or a **FunctionScore**.
+
+    A **RerankerObj** has the following parameters:
 
     - **strategy** (*string*) -
 
@@ -142,13 +206,99 @@ milvusClient.hybridSearch({
 
         - When using the RRFRanker strategy, you need to input the parameter value `k` into the RRFRanker. The default value of `k` is 60. This parameter helps to determine how the ranks are combined from different ANN searches, aiming to balance and blend the importance across all searches.
 
-        - When using the WeightedRanker strategy, you need to input weight values into the `WeightedRanker` function. The number of basic ANN searches in a Hybrid Search corresponds to the number of values that need to be inputted. The input values should be in the range [0,1], with values closer to 1 indicating greater importance.
+        - When using the WeightedRanker strategy, you need to input weight values into the `WeightedRanker` function. The number of basic ANN searches in a Hybrid Search corresponds to the number of values that need to be inputted. The input values should be in the range &#91;0,1&#93;, with values closer to 1 indicating greater importance.
+
+    A **FunctionObject** has the following structure.
+
+    - **name** (*string*)
+
+        The name of the function. This identifier is used to reference the function within queries and collections.
+
+    - **description** (*string*)
+
+        A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
+
+    - **type** (*[FunctionType](../Collections/FunctionType.md)*)
+
+        The type of function for processing raw data. Possible values for this parameter is`FunctionType.RERANK`.
+
+    - **input_field_names** (*string&#91;&#93;*)
+
+        Leave this parameter value as an empty array.
+
+    A **FunctionScore** has the following structure.
+
+    - **functions** (*FunctionObject&#91;&#93;*) -
+
+        A list of **FunctionObject** objects.
+
+    - **params** (*keyValueObj*) -  
+
+        Specifies how the specified functions work together. It has the following structure:
+
+        - **boost_mode** (*string*) -
+
+            Specifies how the specified weights influence the scores of any matching entities. Possible values are:
+
+            - `Multiply`
+
+                Indicates that the weighted value is equal to the original score of a matching entity multiplied by the specified weight.
+
+                This is the default value.
+
+            - `Sum`
+
+                Indicates that the weighted value is equal to the sum of the original score of a matching entity and the specified weight
+
+        - **function_mode** (*string*) -
+
+            Specifies how the weighted values from various Boost Rankers are processed. Possible values are:
+
+            - `Multiply`
+
+                Indicates that the final score of a matching entity is equal to the product of the weighted values from all Boost Rankers.
+
+                This is the default value.
+
+            - `Sum`
+
+                Indicates that the final score of a matching entity is equal to the sum of the weighted values from all Boost Rankers.
+
+- **group_by_field** (*string*) -
+
+    Groups search results by a specified field to ensure diversity and avoid returning multiple results from the same group.
+
+- **group_size** (*number*) -
+
+    The target number of entities to return within each group in a grouping search. For example, setting `group_size=2` instructs the system to return up to 2 of the most similar entities (e.g., document passages or vector representations) within each group. Without setting `group_size`, the system defaults to returning only 1 entity per group.
+
+- **strict_group_size** (*boolean*) -
+
+    This Boolean parameter dictates whether `group_size` should be strictly enforced. When `group_size=true`, the system will attempt to fill each group with exactly `group_size` results, as long as sufficient data exists within each group. If there is an insufficient number of entities in a group, it will return only the available entities, ensuring that groups with adequate data meet the specified `group_size`.
+
+- **hints** (*string*) -
+
+     A hints string to improve search performance.
+
+- **round_decimal** (*number*) -
+
+    The number of decimal places to keep in the final results.
+
+- **transformers** (*OutputTransformers*) -
+
+    A custom function to convert data for the following data types:
+
+    - BFloat16Vector (`(bf16bytes: Uint8Array) => BFloat16Vector;`)
+
+    - Float16Vector (`(f16: Uint8Array) => Float16Vector;`)
+
+    - SparseFloatVector (`(sparse: SparseVectorDic) => SparseFloatVector;`)
 
 - **timeout** (*number*) -
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<SearchResults>*
+**RETURNS** *Promise\&lt;SearchResults&gt;*
 
 This method returns a promise that resolves to a **SearchResults** object.
 
@@ -176,7 +326,7 @@ This method returns a promise that resolves to a **SearchResults** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **results** (*list[object]*) -
+- **results** (*list&#91;object&#93;*) -
 
     Each result object has the following keys:
 
@@ -190,7 +340,7 @@ This method returns a promise that resolves to a **SearchResults** object.
 
     - Plus output fields and their values.
 
-- **recalls** (*list[number]*) -
+- **recalls** (*list&#91;number&#93;*) -
 
     Each number indicates the recall rate of a search against a query vector.
 

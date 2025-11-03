@@ -20,7 +20,7 @@ milvusClient.describeUser({
 
 - **username** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the user to describe.
 
@@ -34,7 +34,7 @@ milvusClient.describeUser({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<SelectUserResponse>*
+**RETURNS** *Promise\&lt;SelectUserResponse&gt;*
 
 This method returns a promise that resolves to a **SelectUserResponse** object.
 
@@ -51,7 +51,7 @@ This method returns a promise that resolves to a **SelectUserResponse** object.
 
     A **UserResult** type.
 
-    - **roles** (*RoleEntity[]*) -
+    - **roles** (*RoleEntity&#91;&#93;*) -
 
         - **name** (*string*) - 
 

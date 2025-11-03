@@ -19,9 +19,9 @@ milvusClient.getCompactionState({
 
 - **compactionID** (*string | number*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
-    The ID of a compaction job that is returned by a call to `compact()`.
+    The ID of a compaction job that is returned by a call to [`compact()`](compact.md).
 
 - **timeout** (*number*) -
 
@@ -29,7 +29,7 @@ milvusClient.getCompactionState({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\<GetCompactionStateResponse>*
+**RETURNS** *Promise\&lt;GetCompactionStateResponse&gt;*
 
 This method returns a promise that resolves to a **GetCompactionStateResponse** object.
 

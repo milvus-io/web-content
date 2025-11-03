@@ -1,41 +1,20 @@
-# updatePassword()
+# dropPrivilegeGroup()
 
-This operation updates the password of a specific user.
+This operation adds a user to a specific role.
 
 ```javascript
-updatePassword(data): Promise<ResStatus>
+dropPrivilegeGroup(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.updateUser({
-   username: string,
-   newPassword: string,
-   oldPassword: string,
+milvusClient.dropPrivilegeGroup({
    timeout?: number
- })
+})
 ```
 
 **PARAMETERS:**
-
-- **username** (*str*) -
-
-    **[REQUIRED]**
-
-    The name of an existing user.
-
-- **oldPassword** (*str*) -
-
-    **[REQUIRED]**
-
-    The original password of the user.
-
-- **newPassword** (*str*) -
-
-    **[REQUIRED]**
-
-    The new password of the user.
 
 - **timeout** (*number*) -  
 
@@ -43,9 +22,9 @@ milvusClient.updateUser({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise\&lt;ResStatus&gt;*
 
-This method returns a promise that resolves to a **ResStatus** object.
+This method returns a list of promises, each of which resolves to a **ResStatus** object.
 
 ```javascript
 {
@@ -72,10 +51,6 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```java
-milvusClient.updateUser({
-   username: 'exampleUser',
-   newPassword: 'newPassword',
-   oldPassword: 'oldPassword',
- })
+milvusClient.dropPrivilegeGroup()
 ```
 

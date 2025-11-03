@@ -22,7 +22,7 @@ milvusClient.describeResourceGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |\<DescribeResourceGroupResponse>*
+**RETURNS** *Promise |&lt;DescribeResourceGroupResponse&gt;*
 
 This method returns a promise that resolves to a **DescribeResourceGroupResponse** object.
 
@@ -49,7 +49,7 @@ This method returns a promise that resolves to a **DescribeResourceGroupResponse
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **resource_groups** (*string[]*) -
+- **resource_groups** (*string&#91;&#93;*) -
 
     A list of resource group names.
 

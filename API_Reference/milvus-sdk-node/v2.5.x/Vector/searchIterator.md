@@ -12,38 +12,69 @@ queryIterator(data): Promise<any>
  milvusClient.query({
    db_name: string,
    collection_name: string,
-   consistency_level?: ConsistencyLevelEnum,
-   filter: string,
-   ids?: string[] | number[],
-   limit?: number,
-   offset?: number,
-   output_fields?: string[],
-   partition_names?: string[],
-   timeout?: number
- })
+   partition_names?: string[];
+   anns_field?: string;
+   data?: SearchDataType;
+   output_fields?: string[];
+   limit?: number; 
+   filter?: string; 
+   exprValues?: keyValueObj; 
+   params?: keyValueObj; 
+   metric_type?: string; 
+   consistency_level?: ConsistencyLevelEnum; 
+   ignore_growing?: boolean;
+   group_by_field?: string;
+   group_size?: number; 
+   strict_group_size?: boolean;
+   hints?: string;
+   round_decimal?: number; 
+   transformers?: OutputTransformers;
+   batchSize: number;
+   external_filter_fn: (row: SearchResultData) => boolean;
+})
 ```
 
 **PARAMETERS:**
 
+- **db_name** (*string*) -
+
+    The name of the database to which the target collection belongs.
+
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the collection to search
 
-- **consistency_level** (*ConsistencyLevelEnum*) -
+- **partition_names** (*string&#91;&#93;*) -
 
-    The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+    A list of the names of the partitions to search.
 
-- **data** (*number[]* | *number[][]*) -
+- **anns_field** (*string*) -
+
+    The name of the target vector field for this operation. It is mandatory if you are searching in a collection with multiple vector fields.
+
+- **data** (*number&#91;&#93;* | *number&#91;&#93;&#91;&#93;*) -
 
     A list of vector embeddings.
 
     Milvus searches for the most similar vector embeddings to the specified ones.
 
-- **batchSize** (*number*) -
+- **output_fields** (*string&#91;&#93;*) -
 
-    The number of entities to return per iteration.
+    A list of field names to include in each entity in return.
+
+    The value defaults to **None**. If left unspecified, only the primary field is included.
+
+- **limit** (*number*) - 
+
+    The total number of entities to return.
+
+    You can use this parameter in combination with **offset** in **param** to enable pagination.
+
+    The sum of this value and **offset** in **param** should be less than 16,384. 
+
+    In a grouping search, however, `limit` specifies the maximum number of groups to return, rather than individual entities. Each group is formed based on the specified `group_by_field`.
 
 - **filter** (*string*) -
 
@@ -56,28 +87,6 @@ queryIterator(data): Promise<any>
 - **exprValues** (*keyValueObj*) -
 
     If you choose to use placeholders in `filter` as stated in [Filtering Templating](https://milvus.io/docs/filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
-
-- **ignore_growing** (*boolean*) -
-
-    A boolean value indicating whether to skip the search in growing segments.
-
-- **limit** (*number*) - 
-
-    The total number of entities to return.
-
-    You can use this parameter in combination with **offset** in **param** to enable pagination.
-
-    The sum of this value and **offset** in **param** should be less than 16,384. 
-
-    In a grouping search, however, `limit` specifies the maximum number of groups to return, rather than individual entities. Each group is formed based on the specified `group_by_field`.
-
-- **offset** (*number*) - 
-
-    The number of records to skip in the search result. 
-
-    You can use this parameter in combination with `limit` to enable pagination.
-
-    The sum of this value and `limit` should be less than 16,384. 
 
 - **params** (*KeyValueObj*) -
 
@@ -97,29 +106,62 @@ queryIterator(data): Promise<any>
 
         During range search, the search process terminates early if the number of buckets with no valid range search results reaches the specified value. Increasing this parameter improves range search recall.
 
-    - **output_fields** (*string[]*) -
+- **metric_type** (*string*) -
 
-        A list of field names to include in each entity in return.
+    The metric type used to measure similarity between vectors. The value varies with the vector field type. The following table lists the mapping between vector field types and their supported metric types.
 
-        The value defaults to **None**. If left unspecified, only the primary field is included.
+    <table>
+       <tr>
+         <th><p>Field Type</p></th>
+         <th><p>Dimension Range</p></th>
+         <th><p>Supported Metric Types</p></th>
+         <th><p>Default Metric Type</p></th>
+       </tr>
+       <tr>
+         <td><p><code>FLOAT_VECTOR</code></p></td>
+         <td><p>2-32,768</p></td>
+         <td><p><code>COSINE</code>, <code>L2</code>, <code>IP</code></p></td>
+         <td><p><code>COSINE</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>FLOAT16_VECTOR</code></p></td>
+         <td><p>2-32,768</p></td>
+         <td><p><code>COSINE</code>, <code>L2</code>, <code>IP</code></p></td>
+         <td><p><code>COSINE</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>BFLOAT16_VECTOR</code></p></td>
+         <td><p>2-32,768</p></td>
+         <td><p><code>COSINE</code>, <code>L2</code>, <code>IP</code></p></td>
+         <td><p><code>COSINE</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>INT8_VECTOR</code></p></td>
+         <td><p>2-32,768</p></td>
+         <td><p><code>COSINE</code>, <code>L2</code>, <code>IP</code></p></td>
+         <td><p><code>COSINE</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>SPARSE_FLOAT_VECTOR</code></p></td>
+         <td><p>No need to specify the dimension.</p></td>
+         <td><p><code>IP</code>, <code>BM25</code> (used only for full text search)</p></td>
+         <td><p><code>IP</code></p></td>
+       </tr>
+       <tr>
+         <td><p><code>BINARY_VECTOR</code></p></td>
+         <td><p>8-32,768*8</p></td>
+         <td><p><code>HAMMING</code>, <code>JACCARD</code>, <code>MHJACCARD</code></p></td>
+         <td><p><code>HAMMING</code></p></td>
+       </tr>
+    </table>
 
-    - **partition_names** (*string[]*) -
+- **consistency_level** (*ConsistencyLevelEnum*) -
 
-        A list of the names of the partitions to search.
+    The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
 
-    - **timeout** (*number*) -
+- **ignore_growing** (*boolean*) -
 
-        The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
-
-- **output_fields** (*string[]*) -
-
-    A list of field names to include in each entity in return.
-
-    The value defaults to **None**. If left unspecified, only the primary field is included.
-
-- **partition_names** (*string[]*) -
-
-    A list of the names of the partitions to search.
+    A boolean value indicating whether to skip the search in growing segments.
 
 - **group_by_field** (*string*) -
 
@@ -133,11 +175,37 @@ queryIterator(data): Promise<any>
 
     This Boolean parameter dictates whether `group_size` should be strictly enforced. When `group_size=true`, the system will attempt to fill each group with exactly `group_size` results, as long as sufficient data exists within each group. If there is an insufficient number of entities in a group, it will return only the available entities, ensuring that groups with adequate data meet the specified `group_size`.
 
+- **hints** (*string*) -
+
+     A hints string to improve search performance.
+
+- **round_decimal** (*number*) -
+
+    The number of decimal places to keep in the final results.
+
+- **transformers** (*OutputTransformers*) -
+
+    A custom function to convert data for the following data types:
+
+    - BFloat16Vector (`(bf16bytes: Uint8Array) => BFloat16Vector;`)
+
+    - Float16Vector (`(f16: Uint8Array) => Float16Vector;`)
+
+    - SparseFloatVector (`(sparse: SparseVectorDic) => SparseFloatVector;`)
+
+- **batchSize** (*number*) -
+
+    The number of entities to return each iteration.
+
+- **external_filter_fn** (*(row: SearchResultData) =&gt; boolean*) -
+
+    An external filtering function that takes the search results as the argument and filters out the entities that evaluate to `false` in the function.
+
 - **timeout** (*number*) -
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<SearchResults>*
+**RETURNS** *Promise\&lt;SearchResults&gt;*
 
 This method returns a promise that resolves to a **SearchResults** object.
 
@@ -165,7 +233,7 @@ This method returns a promise that resolves to a **SearchResults** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **results** (*list[object]*) -
+- **results** (*list&#91;object&#93;*) -
 
     Each result object has the following keys:
 
@@ -179,7 +247,7 @@ This method returns a promise that resolves to a **SearchResults** object.
 
     - Plus output fields and their values.
 
-- **recalls** (*list[number]*) -
+- **recalls** (*list&#91;number&#93;*) -
 
     Each number indicates the recall rate of a search against a query vector.
 

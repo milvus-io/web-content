@@ -16,7 +16,7 @@ new MilvusClient(config: ClientConfig)
 
 - **configOrAddress** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The address of the Milvus instance. For example:
 
@@ -28,7 +28,7 @@ new MilvusClient(config: ClientConfig)
 
     - **address** (*string*) -
 
-        **[REQUIRED]**
+        **&#91;REQUIRED&#93;**
 
         The cluster endpoint. For example:
 
@@ -148,7 +148,7 @@ This method returns a Milvus Client instance that extends GRPC Client and handle
 
 ## Example
 
-```python
+```javascript
 new MilvusClient(config: ClientConfig)
 ```
 

@@ -25,11 +25,11 @@ milvusClient.getLoadState({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of a collection.
 
-- **partition_names** (*string[]*) -
+- **partition_names** (*string&#91;&#93;*) -
 
     The names of one or more partitions.
 
@@ -37,14 +37,14 @@ milvusClient.getLoadState({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\<GetLoadStateResponse>*
+**RETURNS** *Promise\&lt;GetLoadStateResponse&gt;*
 
-This method returns a promise that resolves to a GetLoadStateResponse object.
+This method returns a promise that resolves to a **GetLoadStateResponse** object.
 
 ```javascript
 {
     state: LoadState,
-    status: object
+    status: ResStatus
 }
 ```
 
@@ -62,7 +62,7 @@ This method returns a promise that resolves to a GetLoadStateResponse object.
 
     - **LoadStateNotLoad** indicates the status is unloaded.
 
-- **status** (*object*) -
+- **status** (*ResStatus*) -
 
     - **code** (*number*) -
 

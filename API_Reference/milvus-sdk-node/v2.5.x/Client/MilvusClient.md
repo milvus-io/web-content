@@ -16,7 +16,7 @@ new MilvusClient(config: ClientConfig)
 
 - **configOrAddress** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The address of the Milvus instance. For example:
 
@@ -28,7 +28,7 @@ new MilvusClient(config: ClientConfig)
 
     - **address** (*string*) -
 
-        **[REQUIRED]**
+        **&#91;REQUIRED&#93;**
 
         The cluster endpoint. For example:
 
@@ -52,21 +52,45 @@ new MilvusClient(config: ClientConfig)
 
         The ID of the cluster to connect.
 
+    - **loaderOptions** (*Options*) -
+
+        The option that converts int64 to Long format. Possible values are:
+
+        - `{ longs: Function }`
+
+            This should be a function that converts int64 to Long.js format.
+
+        - `{ longs: Number }`
+
+            This converts int64 to a number, resulting in precision loss.
+
+        - `{ longs: String }`
+
+            This converts int64 to a string. This is the default behavior.
+
     - **logLevel** (*string*) -
 
         The level of the log. Available options include: `debug`, `info`, `warn`, `error`, `panic`, and `fatal`. 
 
         The default value is `debug`.
 
-        It is recommended to use `debug` level under test and development environments, and `info` level in production environment.
+        It is recommended to use `debug` level under test and development environments, and `info` level in the production environment.
+
+    - **logPrefix** (*string*) -
+
+        The prefix of each log entry.
 
     - **maxRetries** (*number*) -
 
-        The number of attempts to retry connection if the connection is not successful.
+        The number of attempts to retry the connection if the connection is not successful.
 
     - **password** (*string*) -
 
-        The user password used to authenticate the connection.
+        The user password that is used to authenticate the connection.
+
+    - **pool** (*Options*) -
+
+        A generic poll option, which abides by the rules specified in [this repo](https://github.com/coopernurse/node-pool).
 
     - **protoFilePath** (*protoFilePath*) -
 
@@ -90,13 +114,25 @@ new MilvusClient(config: ClientConfig)
 
     - **tls** (*tls*) -
 
+        - **certChain** (*Buffer*) -
+
+            The certificate chain in the buffer.
+
         - **certChainPath** (*string*) -
 
             The file path of the certificate chain.
 
+        - **privateKey** (*Buffer*) -
+
+            The private key in the buffer.
+
         - **privateKeyPath** (*string*) -
 
             The file path of the private key.
+
+        - **rootCert** (*Buffer*) -
+
+            The root certificate in the buffer.
 
         - **rootCertPath** (*string*) -
 
@@ -106,6 +142,10 @@ new MilvusClient(config: ClientConfig)
 
             The name of the server.
 
+        - **skipCertCheck** (*boolean*) -
+
+            Whether to skip the checks against the provided certificates. Setting it `true` indicates a skip.
+
         - **verifyOptions** (*string*) -
 
             The verification options.
@@ -113,6 +153,10 @@ new MilvusClient(config: ClientConfig)
     - **token** (*string*) -
 
         The token used for connection. The token can be either an API key or a username and password pair combined with a colon in between.
+
+    - **trace** (*boolean*) -
+
+        Whether to enable tracing. 
 
     - **username** (*string*) -
 
@@ -148,7 +192,7 @@ This method returns a Milvus Client instance that extends GRPC Client and handle
 
 ## Example
 
-```python
+```javascript
 new MilvusClient(config: ClientConfig)
 ```
 

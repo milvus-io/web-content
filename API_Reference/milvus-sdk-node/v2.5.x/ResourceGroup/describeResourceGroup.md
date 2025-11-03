@@ -19,7 +19,7 @@ milvusClient.describeResourceGroup({
 
 - **resource_group** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     Name of the resource group to describe.
 
@@ -29,7 +29,7 @@ milvusClient.describeResourceGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |\<DescribeResourceGroupResponse>*
+**RETURNS** *Promise |&lt;DescribeResourceGroupResponse&gt;*
 
 This method returns a promise that resolves to a **DescribeResourceGroupResponse** object.
 

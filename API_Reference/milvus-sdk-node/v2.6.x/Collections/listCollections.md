@@ -20,7 +20,7 @@ listCollections({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
@@ -34,7 +34,7 @@ listCollections({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\<ShowCollectionsResponse>*
+**RETURNS** *Promise\&lt;ShowCollectionsResponse&gt;*
 
 This method returns a promise that resolves to a **ShowCollectionsResponse** object.
 
@@ -49,11 +49,11 @@ This method returns a promise that resolves to a **ShowCollectionsResponse** obj
 
 **PARAMETERS:**
 
-- **created_timestamps** (*string* | *list[string]*) -
+- **created_timestamps** (*string* | *list&#91;string&#93;*) -
 
     The timestamps indicating the creation time of the collections.
 
-- **created_utc_timestamps** (*string* | *list[string]*) -
+- **created_utc_timestamps** (*string* | *list&#91;string&#93;*) -
 
     The timestamps in UTC indicating the creation time of the collections.
 

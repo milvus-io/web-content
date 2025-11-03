@@ -25,11 +25,11 @@ milvusClient.getLoadingProgress({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the target collection.
 
-- **partition_names** (*string[]*) -
+- **partition_names** (*string&#91;&#93;*) -
 
     The name of the target partitions.
 
@@ -37,7 +37,7 @@ milvusClient.getLoadingProgress({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<GetLoadingProgressResponse>*
+**RETURNS** *Promise\&lt;GetLoadingProgressResponse&gt;*
 
 This method returns a promise that resolves to a **GetLoadingProgressResponse** object.
 

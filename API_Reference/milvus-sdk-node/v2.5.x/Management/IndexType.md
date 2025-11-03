@@ -61,3 +61,10 @@ Sets the index type to ScaNN.
 - **TRIE** = Trie
 Sets the index type to Trie.
 
+- **INVERTED** = 'INVERTED'
+
+    Sets the index type to INVERTED.
+
+- **BITMAP** = 'BITMAP'
+
+    Sets the index type to BITMAP.

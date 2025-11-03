@@ -4,9 +4,6 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
-- NONE = 0
-Sets the data type to **NoneType**.
-
 - BOOL = 1
 Sets the data type to **Boolean**.
 
@@ -55,5 +52,6 @@ Sets the data type to **Float Vector**.
 
     Sets the data type to **Sparse Vector**.
 
-## Example
+- Int8Vector = 105
 
+    Sets the data type to **Int8 Vector**.

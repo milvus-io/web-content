@@ -27,11 +27,11 @@ milvusClient.upsert({
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
-- **data** (*RowData[]*) -
+- **data** (*RowData&#91;&#93;*) -
 
     The data to insert into the current collection.
 
@@ -89,7 +89,7 @@ milvusClient.upsert({
 
     If specified, the data is to be inserted into the specified partition.
 
-**RETURNS** *Promise\<MutationResult>*
+**RETURNS** *Promise\&lt;MutationResult&gt;*
 
 This method returns a promise that resolves to a **MutationResult** object.
 
@@ -109,11 +109,11 @@ This method returns a promise that resolves to a **MutationResult** object.
 
 **PARAMETERS:**
 
-- **IDs** (*list[string]* | *list[number]*) -
+- **IDs** (*list&#91;string&#93;* | *list&#91;number&#93;*) -
 
     A list of the IDs of the upserted entities.
 
-- **acknowledged** (*list[string]* | *list[number]*) -
+- **acknowledged** (*list&#91;string&#93;* | *list&#91;number&#93;*) -
 
     A boolean value indicating whether the upsert operation of the entity is successful.
 
@@ -121,7 +121,7 @@ This method returns a promise that resolves to a **MutationResult** object.
 
     The deleted entities
 
-- **err_index** (*list[number]*) -
+- **err_index** (*list&#91;number&#93;*) -
 
     The number of entities involved in the upsert operation that fails to be indexed.
 
@@ -129,7 +129,7 @@ This method returns a promise that resolves to a **MutationResult** object.
 
     The new entities that are inserted.
 
-- **succ_index** (*list[number]*) -
+- **succ_index** (*list&#91;number&#93;*) -
 
     The number of entities involved in the upsert operation that have been successfully indexed.
 

@@ -20,7 +20,7 @@ milvusClient.describeRole({
 
 - **roleName** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the role to describe.
 
@@ -34,7 +34,7 @@ milvusClient.describeRole({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**Returns** *Promise\<SelectRoleResponse>*
+**Returns** *Promise\&lt;SelectRoleResponse&gt;*
 
 This method returns a promise that resolves to a **SelectRoleResponse** object.
 
@@ -47,9 +47,9 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
 **PARAMETERS:**
 
-- **RoleResult** *(RoleResult[]) -*
+- **RoleResult** *(RoleResult&#91;&#93;) -*
 
-    - **entities** (*GrantEntity[]*) -
+    - **entities** (*GrantEntity&#91;&#93;*) -
 
         - **db_name** (*string*) -
 
@@ -87,7 +87,7 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
             The name of the current role.
 
-    - **users** (*User[]*) -
+    - **users** (*User&#91;&#93;*) -
 
         - **name** (*string*) -
 
