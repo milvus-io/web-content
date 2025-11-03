@@ -7,70 +7,170 @@ summary: Milvus is an open-source vector database built to power AI applications
 
 # Milvus Roadmap
 
-Welcome to the Milvus Roadmap! Join us on our continuous journey to enhance and evolve Milvus. We are thrilled to share our accomplishments, future plans, and our vision for what lies ahead. Our roadmap is more than a list of upcoming features—it reflects our commitment to innovation and our dedication to working with the community. We invite you to delve into our roadmap, provide your feedback, and help shape the future of Milvus!
+## 🌌 Toward the Next-Gen Multimodal Database and Data Lake
 
-## Roadmap
+**Milvus Product Roadmap**  
 
-<table>
-    <thead>
-        <tr>
-            <th>Category</th>
-            <th>Milvus 2.5.x (Achieved in recent releases)</th>
-            <th>Next Release - Milvus 2.6 (Middle of CY25)</th>
-            <th>Future Roadmap - Milvus 3.0 (Within 1 year)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>AI-Driven Unstructured Data Processing</strong><br/><i>Strengthening the ability to process and analyze unstructured data using AI models and advanced technologies</i></td>
-            <td><strong>Full Text Search</strong><br/><i>Support full text search with Sparse-BM25. The new API accepts text as input and automatically generates sparse vector inside Milvus</i><br/><br/><strong>Sparse Vector (GA)</strong><br/><i>Support efficient storage and indexing method for sparse vector</i><br/></td>
-            <td><strong>Data-In and Data-Out</strong><br/><i>Support major model services to ingest original text</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Support model-based rerankers and user-defined scoring function</i><br/><br/><strong>Iterative Search</strong><br/><i>Revise query vector based on user labeling</i></td>
-            <td><strong>Support Tensors</strong><br/><i>Support list of vectors, typical usage like Colbert, Copali and Video representation</i><br/><br/><strong>Support More Data Types</strong><br/><i>e.g. Datetime, Map, GIS</i></td>
-        </tr>
-        <tr>
-            <td><strong>Search Quality & Performance</strong><br/><i>Deliver accurate, relevant, and fast results by optimizing architecture, algorithms and APIs</i></td>
-            <td><strong>Text Match Function</strong><br/><i>Quickly filter keywords/tokens in text/varchar</i><br/><br/><strong>Grouping Search Enhancement</strong><br/><i>Introduce group_size and add group by support in hybrid search</i><br/><br/><strong>Bitmap Index & Inverted Index</strong><br/><i>Accelerate filtering on tags</i></td>
-            <td><strong>Advanced Match</strong><br/><i>e.g. phrase_match, multi_match </i><br/><br/><strong>Analyzer Enhancement</strong><br/><i>Enhance Analyzer with expanded tokenizer support and improved observability</i><br/><br/><strong>JSON Filtering</strong><br/><i>Optimize JSON indexing and parsing for faster processing</i></td>
-            <td><strong>Sorting Capability</strong><br/><i>Sort by scalar fields during execution</i><br/><br/><strong>Support Data Clustering</strong><br/><i>Data co-locality</i></td>
-        </tr>
-        <tr>
-            <td><strong>Rich Functionality & Management</strong><br/><i>Developer-friendly and robust data management features</i></td>
-            <td><strong>Support csv files in data import</strong><br/><i>Bulkinsert supports csv format</i><br/><br/><strong>Support Null and Default Value</strong><br/><i>Null and Default types make importing data from other DBMS easier</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Visual management tools for DBAs</i></td>
-            <td><strong>Schema Change</strong><br/><i>e.g. Add/delete field, modify varchar length</i><br/><br/><strong>Aggregations</strong><br/><i>Scalar field aggregations, e.g. count,distinct value, min,max</i><br/><br/><strong>Support UDF</strong><br/><i>User-defined function</i></td>
-            <td><strong>Bulk Update</strong><br/><i>Support bulk updates to a specific field's value</i><br/><br/><strong>Primary Key Deduplication</strong><br/><i>By using the global pk index</i><br/><br/><strong>Data Versioning & Restore</strong><br/><i>Support data versioning by snapshot</i></td>
-        </tr>
-        <tr>
-            <td><strong>Cost Efficiency & Architecture</strong><br/><i>State-of-the-art systems with stability, cost-effectiveness, and streamlined deployment.</i></td>
-            <td><strong>Memory Optimization</strong><br/><i>Reduce OOM and load enhancement</i><br/><br/><strong>Clustering Compaction</strong><br/><i>Data re-distribution based on configuration to accelerate read performance</i><br/><br/><strong>Storage Format V2 (Beta)</strong><br/><i>Universal formats design and foundation for disk-based data access</i></td>
-            <td><strong>Tiered Storage</strong><br/><i>Support hot and cold storage for cost optimization</i><br/><br/><strong>Stream Node</strong><br/><i>Process streaming data and simplify incremental write flow</i><br/><br/><strong>MixCoord</strong><br/><i>Merge Coord logics into one</i></td>
-            <td><strong>Vector Lake</strong><br/><i>Cost-effective offline solution, spark connector and integrate with iceberg</i><br/><br/><strong>Logstore Component</strong><br/><i>Reduce dependencies on external components like pulsar</i><br/><br/><strong>Data Evict Policy</strong><br/><i>Users can define their own evict policy</i></td>
-        </tr>
-    </tbody>
-</table>
+Welcome to the Milvus Roadmap!  
 
-- Our roadmap is typically structured into three parts: the most recent release, the next upcoming release, and a mid-to-long term vision within the next year.
-- As we progress, we continually learn and occasionally adjust our focus, adding or removing items as needed.
-- These plans are indicative and subject to change, and may vary based on subscription services.
-- We steadfastly adhere to our roadmap, with our [release notes](release_notes.md) serving as a reference.
+We are ushering Milvus into a new era — the next-generation multimodal database — spanning **structured to unstructured data**, **real-time retrieval to offline analytics**, and **single-cluster performance to a global data lake architecture**.  
 
-## How to contribute
+This roadmap outlines the core objectives for **Milvus v2.6 (in progress)**, **Milvus v3.0 (targeted for late 2026)**, and **Milvus v3.1 (long-term development)**, along with the evolution plan for **Vector Lake (data lake / Loon)**.
 
-As an open-source project, Milvus thrives on community contributions. Here's how you can be a part of our journey.
+## 🧩 Milvus v2.6 (In Progress)
 
-### Share feedback
+**Timeline: Mid-2025 – End of 2025**  
 
-- Issue reporting: Encounter a bug or have a suggestion? Open an issue on our [GitHub page](https://github.com/milvus-io/milvus/issues).
+Focus: **Upgrading the data model**, **refactoring the streaming architecture**, **building hot/cold tiering capabilities**, and launching the **Vector Lake Prototype (v0.1)**.
 
-- Feature suggestions: Have ideas for new features or improvements? Join the conversation in [our active discussion thread](https://github.com/milvus-io/milvus/discussions/40263).
+### 🎯 Key Highlights
 
-### Code contributions
+#### 🔹 **Data Model Upgrade**
 
-- Pull requests: Contribute directly to our [codebase](https://github.com/milvus-io/milvus/pulls). Whether it's fixing bugs, adding features, or improving documentation, your contributions are welcome.
+- Introduce a unified **Tensor / StructList** data type to support multi-vector embedding structures, enabling compatibility with *ColBERT*, *CoLQwen*, *video*, and *multimodal vectors*.
 
-- Development guide: Check our [Contributor's Guide](https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md) for guidelines on code contributions.
+- Add **Geo Data** support, including points, regions, and spatial indexing (based on *libspatial*), to expand use cases in LBS and GIS.
 
-### Spread the word
+- Support for **Timestamp with Timezone** data type.
 
-- Social sharing: Love Milvus? Share your use cases and experiences on social media and tech blogs.
+#### 🔹 **StreamNode Architecture Refactor**
 
-- Star us on GitHub: Show your support by starring our [GitHub repository](https://github.com/milvus-io/milvus).
+- Rewrite the streaming ingestion pipeline to optimize incremental writes and real-time computation.
+
+- Significantly improve concurrency performance and stability, laying the foundation for unified real-time and offline processing.
+
+- Introduce a new message queue engine: **Woodpecker**.
+
+#### 🔹 **Hot/Cold Tiering & Storage Architecture (StorageV2)**
+
+- Support dual storage formats: **Parquet** and **Vortex**, enhancing concurrency and memory efficiency.
+
+- Implement tiered storage with automatic hot/cold data separation and intelligent scheduling.
+
+#### 🔹 **Vector Lake Prototype (v0.1)**
+
+- Integrate with **Spark** / **DuckDB** / **DataFusion** via FFI, enabling offline schema evolution and KNN queries.
+
+- Provide multimodal data visualization and a Spark ETL demo, establishing the foundational data lake architecture.
+
+## 🌠 Milvus v3.0 (Targeted for Late 2026)
+
+**Timeline: Late 2025 – Early 2026**  
+
+Focus: Comprehensive enhancements to **search experience**, **schema flexibility**, and **unstructured data support**, along with the release of **Vector Lake (v0.2)**.
+
+### 🎯 Key Highlights
+
+#### 🔹 **Search Experience Overhaul**
+
+- Introduce **More Like This (MLT)** similarity search with support for searches with position or negative examples.
+
+- Add semantic search capabilities such as **highlighting** and **boosting**.
+
+- Support **custom dictionaries** and **synonym tables**, enabling lexical and semantic rule definitions at the Analyzer layer.
+
+- Introduce **aggregation** capabilities for queries.
+
+#### 🔹 **Multi-Tenancy & Resource Management**
+
+- Enable multi-tenant deletion, statistics, and hot/cold tiering.
+
+- Improve resource isolation and scheduling strategies to support millions of tables in a single cluster.
+
+#### 🔹 **Schema & Primary Key Enhancements**
+
+- Implement **Global Primary Key Deduplication (Global PK Dedup)** to guarantee data consistency and uniqueness.
+
+- Support **flexible schema management** (adding/dropping columns, backup fill).
+
+- Allow **NULL values** in vector fields.
+
+#### 🔹 **Expanded Unstructured Data Types (BLOB / Text)**
+
+- Introduce the **BLOB type**, which provides native storage and referencing for binary data such as files, images, and videos.
+
+- Introduce **TEXT type**, which provides enhanced full-text and content-based search capabilities.
+
+#### 🔹 **Enterprise-Grade Capabilities**
+
+- Support **Snapshot-based backup and recovery**.
+
+- Provide **end-to-end tracing** and **audit logging**.
+
+- Implement **Active-Standby High Availability (HA)** across multi-cluster deployments.
+
+#### 🔹 **Vector Lake (v0.2)**
+
+- Support **TEXT / BLOB storage** and **multi-version snapshot management**.
+
+- Integrate Spark for offline indexing, clustering, deduplication, and dimensionality reduction tasks.
+
+- Deliver **ChatPDF cold-query and offline benchmark demos**.
+
+## 🪐 Milvus v3.1 (Long-Term Vision)
+
+**Timeline: Mid-2026**  
+
+Focus: **User-defined functions (UDF)**, **distributed computing integration**, **scalar query optimization**, **dynamic sharding**, and the official release of **Vector Lake (v1.0)**.
+
+### 🎯 Key Highlights
+
+#### 🔹 **UDF & Distributed Computing Ecosystem**
+
+- Support **User-Defined Functions (UDFs)**, allowing developers to inject custom logic into retrieval and computation workflows.
+
+- Deep integration with **Ray Dataset / Daft** for distributed UDF execution and multimodal data processing.
+
+#### 🔹 **Scalar Query & Local Format Evolution**
+
+- Optimize filtering and aggregation performance for scalar fields.
+
+- Enhance expression evaluation and index-accelerated execution.
+
+- Support **in-place updates** for local file formats.
+
+#### 🔹 **Advanced Search Capabilities**
+
+- Add the following features: **RankBy**, **OrderBy**, **Facet**, and **Fuzzy match** queries.
+
+- Enhance text retrieval with support for:  
+
+    - `match_phrase_prefix`
+
+    - `Completion Suggester`
+
+    - `Term Suggester`
+
+    - `Phrase Suggester`
+
+#### 🔹 **Dynamic Sharding & Scalability**
+
+- Enable **automatic shard splitting** and **load balancing** for seamless scaling.
+
+- Improve **global index building** and ensure **distributed search performance**.
+
+#### 🔹 **Vector Lake V1.0**
+
+- Deep integration with **Ray / Daft / PyTorch** to support distributed UDFs and Context Engineering use cases.
+
+- Provide **RAG (Retrieval-Augmented Generation) demos** **and import from Iceberg tables**.
+
+## 🤝 Co-Building the Future of Milvus
+
+Milvus is an open-source project driven by a global community of developers.  
+
+We warmly invite all community members to help shape the next-generation multimodal database:
+
+- 💬 **Share feedback**: Propose new features or optimization ideas
+
+- 🐛 **Report issues**: File bugs via GitHub Issues
+
+- 🔧 **Contribute code**: Submit PRs and help build core features  
+
+    - **Pull requests**: Contribute directly to our [codebase](https://github.com/milvus-io/milvus/pulls). Whether it's fixing bugs, adding features, or improving documentation, your contributions are welcome.
+
+    - **Development guide**: Check our [Contributor's Guide](https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md) for guidelines on code contributions.
+
+- ⭐ **Spread the word**: Share best practices and success stories
+
+👉 **GitHub:** [milvus-io/milvus](https://github.com/milvus-io/milvus)
