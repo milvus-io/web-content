@@ -1,4 +1,5 @@
 [
 	{ "source": "milvus", "target": "milvus" },
-	{ "source": "Milvus", "target": "Milvus" }
+	{ "source": "Milvus", "target": "Milvus" },
+	{ "source": "Shard", "target": "Shard" }
 ]

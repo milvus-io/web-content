@@ -59,5 +59,6 @@
   { "source": "Drop Collection", "target": "删除 Collection" },
   { "source": "Root coord", "target": "Root coord" },
   { "source": "Query coord", "target": "Query coord" },
-  { "source": "Data coord", "target": "Data coord" }
+  { "source": "Data coord", "target": "Data coord" },
+  { "source": "Shard", "target": "Shard" }
 ]
