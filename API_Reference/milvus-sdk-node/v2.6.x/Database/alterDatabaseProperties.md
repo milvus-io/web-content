@@ -11,7 +11,8 @@ alterDatabaseProperties(data): Promise<ResStatus>
 ```javascript
 milvusClient.alterDatabaseProperties({
     db_name: string,
-    delete_properties: Object,
+    delete_keys: Object,
+    properties: Record<string, string | number | boolean>
     timeout?: number
 })
 ```
@@ -24,7 +25,7 @@ milvusClient.alterDatabaseProperties({
 
     There should be a database with the specified name. Otherwise, exceptions will occur.
 
-- **delete_properties** (*string[]*) -
+- **delete_properties** (*string&#91;&#93;*) -
 
     Names of the properties to drop in an array. Possible database properties are as follows:
 
@@ -32,7 +33,35 @@ milvusClient.alterDatabaseProperties({
 
         Number of replicas for the database.
 
-    - **database.resource_groups** (*[]str*) -
+    - **database.resource_groups** (*&#91;&#93;str*) -
+
+        Resource groups dedicated to the database.
+
+    - **database.diskQuota.mb** (*int*) -
+
+        Disk quota allocated to the database in megabytes (**MB**).
+
+    - **database.max.collections** (*int*) -
+
+        Maximum number of collections allowed in the database.
+
+    - **database.force.deny.writing** (*bool*) -
+
+        Whether to deny all write operations in the database.
+
+    - **database.force.deny.reading** (*bool*) -
+
+        Whether to deny all read operations in the database.
+
+- **properties** (*Record&lt;string, string | number | boolean&gt;*) -
+
+    Properties and their values in key-value pairs.
+
+    - **database.replica.number** (*int*) -
+
+        Number of replicas for the database.
+
+    - **database.resource_groups** (*&#91;&#93;str*) -
 
         Resource groups dedicated to the database.
 
@@ -58,7 +87,7 @@ milvusClient.alterDatabaseProperties({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |\<ResStatus>*
+**RETURNS** *Promise |&lt;ResStatus&gt;*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

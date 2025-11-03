@@ -32,7 +32,7 @@ type ResourceGroupConfig = {
 
         Maximum number of required nodes.
 
-- **transfer_from** (*Object[]*) - 
+- **transfer_from** (*Object&#91;&#93;*) - 
 
     A list of **ResourceGroupTransfer** instances that defines the source resource groups for necessary transfers. A **ResourceGroupTransfer** instance provides the following fields:
 
@@ -40,7 +40,7 @@ type ResourceGroupConfig = {
 
         Name of a resource group.
 
-- **transfer_to** (*Object[]*) - 
+- **transfer_to** (*Object&#91;&#93;*) - 
 
     A list of **ResourceGroupTransfer** instances that defines the target resource groups for necessary transfers. A **ResourceGroupTransfer** instance provides the following fields:
 
@@ -52,7 +52,7 @@ type ResourceGroupConfig = {
 
     A filter is used to filter the query nodes with specified node labels. It has the following keys:
 
-    - **node_labels** (*{ key: string, value: string }[]*) -
+    - **node_labels** (*{ key: string, value: string }&#91;&#93;*) -
 
         Node labels in key-value pairs, as in `[{ "key": "QUERYNODE_LOCATION", "value": "dc1" }]`.
 

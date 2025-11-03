@@ -17,9 +17,9 @@ milvusClient.updateResourceGroup({
 
 **PARAMETERS:**
 
-- **resource_groups** (*{{ [key: string]: ResourceGroupConfig }}*) -
+- **resource_groups** (*{{ [key: string]: ResourceGroupConfig }&#125;*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     An object that contains the resource groups to update, with the resource group names as the keys and their updated configurations as the values, each of which is an [ResourceGroupConfig](ResourceGroupConfig.md) object.
 
@@ -29,7 +29,7 @@ milvusClient.updateResourceGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |\<ResStatus>*
+**RETURNS** *Promise |&lt;ResStatus&gt;*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

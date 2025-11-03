@@ -23,7 +23,7 @@ milvusClient.describeCollection({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
@@ -33,7 +33,7 @@ milvusClient.describeCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**Returns Promise\<DescribeCollectionResponse>*
+**Returns Promise\&lt;DescribeCollectionResponse&gt;*
 
 This method returns a promise that resolves to a **DescribeCollectionResponse** object.
 
@@ -41,16 +41,21 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 {
     aliases: string,
     collectionID: string,
+    collectionName: string,
     consistency_level: string,
     created_timestamp: string,
     created_utc_timestamp: string,
     db_name: string,
+    functions: FunctionObject[],
     num_partitions: string,
     physical_channel_names: string,
+    properties: KeyValuePair<string, string | number>[],
     schema: object,
     shards_num: int,
     start_positions: string,
     status: object,
+    update_timestamp: number,
+    update_timestamp_str: string,
     virtual_channel_names: string  
 }
 ```
@@ -64,6 +69,10 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 - **collectionID** (*string*)-
 
     The ID of the collection.
+
+- **collectionName** (*string*) -
+
+    The name of the collection.
 
 - **consistency_level** (*string*)-
 
@@ -81,6 +90,10 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     The name of the cluster to which the collection belongs.
 
+- **functions** (*FunctionObject&#91;&#93;*) -
+
+    The list of functions configured in the collection.
+
 - **num_partitions** (*string*)-
 
     The number of partitions in the collection.
@@ -88,6 +101,10 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 - **physical_channel_names** (*string*)-
 
     A list of the names of the physical channels in this collection.
+
+- **properties** (*KeyValuePair&lt;string, string | number&gt;*) -
+
+    The collection properties in key-value pairs. 
 
 - **schema** (*object*)-
 
@@ -103,9 +120,9 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     - **enable_dynamic_field** (*boolean*) -
 
-        Whether the reserved JSON field **$meta** is used to store non-schema-defined fields in key-value pairs.
+        Whether the reserved JSON field **&#36;meta** is used to store non-schema-defined fields in key-value pairs.
 
-    - **fields** (*FieldSchema[]*) -
+    - **fields** (*FieldSchema&#91;&#93;*) -
 
         A list of schema-defined fields. 
 
@@ -117,9 +134,9 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     The number of shards in the collection.
 
-- **virtual_channel_names** (*string*)-
+- **start_positions** (*string&#91;&#93;*) -
 
-A list of the names of the virtual channels in this collection.
+    A list of start positions.
 
 - **status** (*object*)-
 
@@ -135,9 +152,17 @@ A list of the names of the virtual channels in this collection.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **shards_num** (*string*)-
+- **update_timestamp** (*number*) -
 
-    The number of shards in the collection.
+    The timestamp at which the collection has been updated.
+
+- **update_timestamp_str** (*string*) -
+
+    The update timestamp in string format.
+
+- **virtual_channel_names** (*string&#91;&#93;*) -
+
+    A list of the names of the virtual channels in this collection.
 
 ## Example
 

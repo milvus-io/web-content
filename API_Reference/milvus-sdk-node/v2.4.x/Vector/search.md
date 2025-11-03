@@ -33,7 +33,7 @@ milvusClient.search({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the collection to search
 
@@ -41,7 +41,7 @@ milvusClient.search({
 
     The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
 
-- **data** (*number[]* | *number[][]*) -
+- **data** (*number&#91;&#93;* | *number&#91;&#93;&#91;&#93;*) -
 
     A list of vector embeddings.
 
@@ -93,13 +93,13 @@ milvusClient.search({
 
         During range search, the search process terminates early if the number of buckets with no valid range search results reaches the specified value. Increasing this parameter improves range search recall.
 
-- **output_fields** (*string[]*) -
+- **output_fields** (*string&#91;&#93;*) -
 
     A list of field names to include in each entity in return.
 
     The value defaults to **None**. If left unspecified, only the primary field is included.
 
-- **partition_names** (*string[]*) -
+- **partition_names** (*string&#91;&#93;*) -
 
     A list of the names of the partitions to search.
 
@@ -107,7 +107,7 @@ milvusClient.search({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<SearchResults>*
+**RETURNS** *Promise\&lt;SearchResults&gt;*
 
 This method returns a promise that resolves to a **SearchResults** object.
 

@@ -23,7 +23,7 @@ milvusClient.describeCollection({
 
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
@@ -33,7 +33,7 @@ milvusClient.describeCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**Returns Promise\<DescribeCollectionResponse>*
+**Returns Promise\&lt;DescribeCollectionResponse&gt;*
 
 This method returns a promise that resolves to a **DescribeCollectionResponse** object.
 
@@ -103,9 +103,9 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     - **enable_dynamic_field** (*boolean*) -
 
-        Whether the reserved JSON field **$meta** is used to store non-schema-defined fields in key-value pairs.
+        Whether the reserved JSON field **&#36;meta** is used to store non-schema-defined fields in key-value pairs.
 
-    - **fields** (*FieldSchema[]*) -
+    - **fields** (*FieldSchema&#91;&#93;*) -
 
         A list of schema-defined fields. 
 

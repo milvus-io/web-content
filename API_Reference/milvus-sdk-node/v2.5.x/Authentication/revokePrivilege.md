@@ -21,13 +21,13 @@ milvusClient.revokePrivilege({
 
 - **roleName** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the role to revoke privileges from.
 
 - **object** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The type of object for which the privilege is to be assigned.
 
@@ -47,7 +47,7 @@ milvusClient.revokePrivilege({
 
 - **objectName** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the object to control access for. For example, if the object type is **Collection**, the object name is the name of a collection. If the object type is **User**, the object name is the name of a database user.
 
@@ -55,7 +55,7 @@ milvusClient.revokePrivilege({
 
 - **privilegeName** (*PrivilegesTypes*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the privilege to assign. You can use any value in the **Enumeration Members** column of the following table.
 
@@ -86,7 +86,7 @@ milvusClient.revokePrivilege({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise\&lt;ResStatus&gt;*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

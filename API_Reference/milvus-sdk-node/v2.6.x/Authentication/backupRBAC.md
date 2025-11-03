@@ -22,7 +22,7 @@ milvusClient.backupRBAC({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<BackupRBACResponse>*
+**RETURNS** *Promise\&lt;BackupRBACResponse&gt;*
 
 This method returns a promise that resolves to a **BackupRBACResponse** object.
 
@@ -46,7 +46,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
 - **RBAC_meta** (RBACMeta) -
 
-    - **users** (*User[]*) -
+    - **users** (*User&#91;&#93;*) -
 
         A list of user entities.
 
@@ -54,7 +54,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
             The name of a user.
 
-    - **roles** (*RoleEntity[]*) -
+    - **roles** (*RoleEntity&#91;&#93;*) -
 
         A list of role entities.
 
@@ -62,7 +62,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
             The name of a role.
 
-    - **grants** (*GrantEntity[]*) -
+    - **grants** (*GrantEntity&#91;&#93;*) -
 
         A list of grant entities.
 
@@ -108,7 +108,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
                 The name of the affected role.
 
-    - **privilege_groups** (*PrivelegeGroup[]*) - 
+    - **privilege_groups** (*PrivelegeGroup&#91;&#93;*) - 
 
         A list of privilege-group entities.
 
@@ -116,7 +116,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
             The name of a privilege group.
 
-        - **privileges** (*PrivilegeEntity[]*) -
+        - **privileges** (*PrivilegeEntity&#91;&#93;*) -
 
             A list of privileges.
 

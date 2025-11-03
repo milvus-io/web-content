@@ -20,13 +20,13 @@ milvusClient.removePrivilegesFromGroup({
 
 - **group_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of a privilege group.
 
-- **privileges** (*string[]*) -
+- **privileges** (*string&#91;&#93;*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The list of privileges to remove from the above group.
 
@@ -36,7 +36,7 @@ milvusClient.removePrivilegesFromGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise\&lt;ResStatus&gt;*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

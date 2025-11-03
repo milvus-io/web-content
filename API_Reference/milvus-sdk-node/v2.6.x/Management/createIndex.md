@@ -11,6 +11,7 @@ createIndex(data): Promise<ResStatus>
 ```javascript
 milvusClient.createIndex([
     {
+       db_name?: string,
        collection_name: string,
        field_name: string,
        index_name?: string,
@@ -19,20 +20,33 @@ milvusClient.createIndex([
        params?: KeyValueObj,
        timeout?: number
      }
- ]);
+ ] | {
+       db_name?: string,
+       collection_name: string,
+       field_name: string,
+       index_name?: string,
+       index_type: string,
+       metric_type: string,
+       params?: KeyValueObj,
+       timeout?: number    
+ });
 ```
 
 **PARAMETERS:**
 
+- **db_name** (*string*) -
+
+    The name of the database to which the target collection belongs.
+
 - **collection_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of an existing collection.
 
 - **field_name** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the field in which to create an index.
 
@@ -58,7 +72,7 @@ milvusClient.createIndex([
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise\&lt;ResStatus&gt;*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

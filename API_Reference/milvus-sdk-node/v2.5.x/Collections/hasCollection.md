@@ -24,7 +24,7 @@ milvusClient.hasCollection({
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of a collection.
 
@@ -34,7 +34,7 @@ milvusClient.hasCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\<BoolResponse>*
+**RETURNS** *Promise\&lt;BoolResponse&gt;*
 
 This method returns a promise that resolves to a **BoolResponse** object.
 

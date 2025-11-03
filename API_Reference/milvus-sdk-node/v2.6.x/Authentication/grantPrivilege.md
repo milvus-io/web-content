@@ -22,13 +22,13 @@ grantPrivilege(data): Promise<ResStatus>
 
 - **roleName** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the role to assign privileges to.
 
 - **object** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The type of object for which the privilege is to be assigned.
 
@@ -48,7 +48,7 @@ grantPrivilege(data): Promise<ResStatus>
 
 - **objectName** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the object to control access for. For example, if the object type is **Collection**, the object name is the name of a collection. If the object type is **User**, the object name is the name of a database user.
 
@@ -56,7 +56,7 @@ grantPrivilege(data): Promise<ResStatus>
 
 - **privilegeName** (*string*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the privilege to assign. 
 
@@ -68,7 +68,7 @@ grantPrivilege(data): Promise<ResStatus>
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<ResStatus>*
+**RETURNS** *Promise\&lt;ResStatus&gt;*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

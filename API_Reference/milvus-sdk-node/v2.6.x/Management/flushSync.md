@@ -30,9 +30,9 @@ milvusClient.flushSync({
 
     The name of the target database to which the target collections belong.
 
-- **collection_names** (*string[]*) -
+- **collection_names** (*string&#91;&#93;*) -
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     A list of the target collection names.
 
@@ -42,7 +42,7 @@ milvusClient.flushSync({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\<GetFlushStateResponse>*
+**RETURNS** *Promise\&lt;GetFlushStateResponse&gt;*
 
 This method returns a promise that resolves to a **GetFlushStateResponse** object.
 

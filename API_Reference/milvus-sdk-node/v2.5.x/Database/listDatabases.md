@@ -22,7 +22,7 @@ milvusClient.listDatabases({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |\<ListDatabaseResponse>*
+**RETURNS** *Promise |&lt;ListDatabaseResponse&gt;*
 
 This method returns a promise that resolves to a **ListDatabaseResponse** object.
 
@@ -39,7 +39,7 @@ This method returns a promise that resolves to a **ListDatabaseResponse** object
 
 **PARAMETERS:**
 
-- **db_names** (*string[]*) -
+- **db_names** (*string&#91;&#93;*) -
 
     A list of database names.
 
