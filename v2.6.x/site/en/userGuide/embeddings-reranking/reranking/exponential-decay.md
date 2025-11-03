@@ -159,20 +159,18 @@ ranker = Function(
 ```
 
 ```java
-import io.milvus.common.clientenum.FunctionType;
-import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.vector.request.ranker.DecayRanker;
 
-CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
-                       .functionType(FunctionType.RERANK)
-                       .name("news_recency")
-                       .inputFieldNames(Collections.singletonList("publish_time"))
-                       .param("reranker", "decay")
-                       .param("function", "exp")
-                       .param("origin", String.valueOf(System.currentTimeMillis()))
-                       .param("offset", String.valueOf(3 * 60 * 60))
-                       .param("decay", "0.5")
-                       .param("scale", String.valueOf(24 * 60 * 60))
-                       .build();
+DecayRanker ranker = DecayRanker.builder()
+        .name("news_recency")
+        .inputFieldNames(Collections.singletonList("publish_time"))
+        .function("exp")
+        .origin(System.currentTimeMillis())
+        .offset(3 * 60 * 60)
+        .decay(0.5)
+        .scale(24 * 60 * 60)
+        .build();
+
 ```
 
 ```javascript
