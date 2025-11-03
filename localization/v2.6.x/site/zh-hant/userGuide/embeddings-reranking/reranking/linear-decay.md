@@ -3,7 +3,7 @@ id: linear-decay.md
 title: 線性衰減Compatible with Milvus 2.6.x
 summary: >-
   線性衰減 (Linear Decutation)
-  會在搜尋結果中創造一個直線下降，終點為絕對的零點。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束為止，線性遞減會隨著項目離開您的理想點而穩定地降低相關性，直到它們完全消失為止。當您想要一致的衰減率且有明確的分界線時，這種方法是最理想的選擇，可確保超過某個界限的項目完全被排除在結果之外。
+  會在搜尋結果中創造一個直線下降，終點為絕對的零點。就像即將發生的事件倒數一樣，相關性逐漸減弱，直到事件結束為止，線性遞減會隨著項目離開您的理想點而穩定地降低相關性，直到它們完全消失為止。當您想要一致的衰減率且有明確的分界線時，這種方法是最理想的選擇，可確保超出某個邊界的項目完全被排除在結果之外。
 beta: Milvus 2.6.x
 ---
 <h1 id="Linear-Decay" class="common-anchor-header">線性衰減<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Linear-Decay" class="anchor-icon" translate="no">
@@ -200,20 +200,18 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                       .functionType(FunctionType.RERANK)
-                       .name(<span class="hljs-string">&quot;event_relevance&quot;</span>)
-                       .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;event_date&quot;</span>))
-                       .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>)
-                       .param(<span class="hljs-string">&quot;function&quot;</span>, <span class="hljs-string">&quot;linear&quot;</span>)
-                       .param(<span class="hljs-string">&quot;origin&quot;</span>, String.valueOf(System.currentTimeMillis()/<span class="hljs-number">1000</span>))
-                       .param(<span class="hljs-string">&quot;offset&quot;</span>, String.valueOf(<span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .param(<span class="hljs-string">&quot;decay&quot;</span>, <span class="hljs-string">&quot;0.5&quot;</span>)
-                       .param(<span class="hljs-string">&quot;scale&quot;</span>, String.valueOf(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .build();
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;event_relevance&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;event_date&quot;</span>))
+        .function(<span class="hljs-string">&quot;linear&quot;</span>)
+        .origin(System.currentTimeMillis())
+        .offset(<span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .scale(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .build();
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 

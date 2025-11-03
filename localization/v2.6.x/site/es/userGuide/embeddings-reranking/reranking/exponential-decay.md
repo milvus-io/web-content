@@ -81,7 +81,7 @@ beta: Milvus 2.6.x
 <p>Elija el decaimiento exponencial cuando:</p>
 <ul>
 <li><p>Los usuarios esperan que los artículos muy recientes o cercanos dominen fuertemente los resultados</p></li>
-<li><p>Los artículos más antiguos o lejanos deben seguir siendo visibles si son excepcionalmente relevantes.</p></li>
+<li><p>Los artículos más antiguos o lejanos deben seguir siendo descubiertos si son excepcionalmente relevantes.</p></li>
 <li><p>La disminución de la relevancia debe ser gradual (más pronunciada al principio y más gradual después).</p></li>
 </ul>
 <h2 id="Sharp-drop-off-principle" class="common-anchor-header">Principio de caída brusca<button data-href="#Sharp-drop-off-principle" class="anchor-icon" translate="no">
@@ -202,20 +202,18 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                       .functionType(FunctionType.RERANK)
-                       .name(<span class="hljs-string">&quot;news_recency&quot;</span>)
-                       .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;publish_time&quot;</span>))
-                       .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>)
-                       .param(<span class="hljs-string">&quot;function&quot;</span>, <span class="hljs-string">&quot;exp&quot;</span>)
-                       .param(<span class="hljs-string">&quot;origin&quot;</span>, String.valueOf(System.currentTimeMillis()))
-                       .param(<span class="hljs-string">&quot;offset&quot;</span>, String.valueOf(<span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .param(<span class="hljs-string">&quot;decay&quot;</span>, <span class="hljs-string">&quot;0.5&quot;</span>)
-                       .param(<span class="hljs-string">&quot;scale&quot;</span>, String.valueOf(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .build();
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;news_recency&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;publish_time&quot;</span>))
+        .function(<span class="hljs-string">&quot;exp&quot;</span>)
+        .origin(System.currentTimeMillis())
+        .offset(<span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .scale(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .build();
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">
 <span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;

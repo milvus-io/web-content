@@ -202,20 +202,18 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                       .functionType(FunctionType.RERANK)
-                       .name(<span class="hljs-string">&quot;news_recency&quot;</span>)
-                       .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;publish_time&quot;</span>))
-                       .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>)
-                       .param(<span class="hljs-string">&quot;function&quot;</span>, <span class="hljs-string">&quot;exp&quot;</span>)
-                       .param(<span class="hljs-string">&quot;origin&quot;</span>, String.valueOf(System.currentTimeMillis()))
-                       .param(<span class="hljs-string">&quot;offset&quot;</span>, String.valueOf(<span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .param(<span class="hljs-string">&quot;decay&quot;</span>, <span class="hljs-string">&quot;0.5&quot;</span>)
-                       .param(<span class="hljs-string">&quot;scale&quot;</span>, String.valueOf(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .build();
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;news_recency&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;publish_time&quot;</span>))
+        .function(<span class="hljs-string">&quot;exp&quot;</span>)
+        .origin(System.currentTimeMillis())
+        .offset(<span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .scale(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .build();
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">
 <span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
@@ -403,4 +401,4 @@ searchRequests.add(AnnSearchReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour plus d'informations sur les opérations de recherche hybride, reportez-vous à la section <a href="/docs/fr/multi-vector-search.md">Recherche hybride multivectorielle</a>.</p>
+<p>Pour plus d'informations sur les opérations de recherche hybride, reportez-vous à la section <a href="/docs/fr/multi-vector-search.md">Recherche hybride multisectorielle</a>.</p>

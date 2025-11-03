@@ -4,7 +4,7 @@ title: 重み付けランカー
 summary: >-
   Weighted
   Rankerは、複数の検索経路から得られた結果をインテリジェントに組み合わせ、それぞれに異なる重要度の重みを割り当てることで優先順位を付けます。熟練したシェフが完璧な料理を作るために複数の食材のバランスを取るのと同様に、Weighted
-  Rankerは最も関連性の高い組み合わせの結果を提供するために、異なる検索結果のバランスを取ります。このアプローチは、特定のフィールドが他のフィールドよりも最終的なランキングに大きく貢献する必要がある、複数のベクトルフィールドやモダリティを横断して検索する場合に理想的です。
+  Rankerは最も関連性の高い組み合わせの結果を提供するために、異なる検索結果のバランスを取ります。このアプローチは、特定のフィールドが他のフィールドよりも最終的なランキングに大きく貢献するような、複数のベクトルフィールドやモダリティを横断して検索する場合に理想的です。
 ---
 <h1 id="Weighted-Ranker" class="common-anchor-header">重み付けランカー<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Weighted Rankerは、複数のベクトル検索パスからの結果を組み合わせる必要があるハイブリッド検索シナリオのために特別に設計されています。特に以下のような場合に有効です：</p>
+    </button></h2><p>Weighted Rankerは特に、複数のベクトル検索パスからの結果を組み合わせる必要があるハイブリッド検索シナリオ用に設計されています。特に以下のような場合に有効です：</p>
 <table>
    <tr>
      <th><p>使用例</p></th>
@@ -104,151 +104,145 @@ summary: >-
       </svg>
     </button></h2><p>この例では画像とテキストを含むマルチモーダルハイブリッド検索（topK=5）を示し、WeightedRanker戦略が2つのANN検索の結果をどのようにランク付けし直すかを説明する。</p>
 <ul>
-<li>画像に対するANN検索結果（topK=5）：：画像</li>
+<li><p>画像に対するANN検索結果（topK=5）：：画像</p>
+<p><table>
+<tr>
+<th><p><strong>ID</strong></p></th>
+<th><p><strong>スコア（画像）</strong></p></th>
+</tr>
+<tr>
+<td><p>101</p></td>
+<td><p>0.92</p></td>
+</tr>
+<tr>
+<td><p>203</p></td>
+<td><p>0.88</p></td>
+</tr>
+<tr>
+<td><p>150</p></td>
+<td><p>0.85</p></td>
+</tr>
+<tr>
+<td><p>198</p></td>
+<td><p>0.83</p></td>
+</tr>
+<tr>
+<td><p>175</p></td>
+<td><p>0.8</p></td>
+</tr>
+</table></p></li>
+<li><p>テキスト（topK=5）に対するANN検索結果</p>
+<p><table>
+<tr>
+<th><p><strong>ID</strong></p></th>
+<th><p><strong>スコア（テキスト）</strong></p></th>
+</tr>
+<tr>
+<td><p>198</p></td>
+<td><p>0.91</p></td>
+</tr>
+<tr>
+<td><p>101</p></td>
+<td><p>0.87</p></td>
+</tr>
+<tr>
+<td><p>110</p></td>
+<td><p>0.85</p></td>
+</tr>
+<tr>
+<td><p>175</p></td>
+<td><p>0.82</p></td>
+</tr>
+<tr>
+<td><p>250</p></td>
+<td><p>0.78</p></td>
+</tr>
+</table></p></li>
+<li><p>WeightedRankerを使用して、画像とテキストの検索結果に重みを割り当てる。画像ANN検索の重みを0.6、テキスト検索の重みを0.4とする。</p>
+<p><table>
+<tr>
+<th><p><strong>ID</strong></p></th>
+<th><p><strong>スコア（画像）</strong></p></th>
+<th><p><strong>スコア（テキスト）</strong></p></th>
+<th><p><strong>重み付けスコア</strong></p></th>
+</tr>
+<tr>
+<td><p>101</p></td>
+<td><p>0.92</p></td>
+<td><p>0.87</p></td>
+<td><p>0.6×0.92+0.4×0.87=0.90</p></td>
+</tr>
+<tr>
+<td><p>203</p></td>
+<td><p>0.88</p></td>
+<td><p>該当なし</p></td>
+<td><p>0.6×0.88+0.4×0=0.528</p></td>
+</tr>
+<tr>
+<td><p>150</p></td>
+<td><p>0.85</p></td>
+<td><p>該当なし</p></td>
+<td><p>0.6×0.85+0.4×0=0.51</p></td>
+</tr>
+<tr>
+<td><p>198</p></td>
+<td><p>0.83</p></td>
+<td><p>0.91</p></td>
+<td><p>0.6×0.83+0.4×0.91=0.86</p></td>
+</tr>
+<tr>
+<td><p>175</p></td>
+<td><p>0.80</p></td>
+<td><p>0.82</p></td>
+<td><p>0.6×0.80+0.4×0.82=0.81</p></td>
+</tr>
+<tr>
+<td><p>110</p></td>
+<td><p>画像にない</p></td>
+<td><p>0.85</p></td>
+<td><p>0.6×0+0.4×0.85=0.34</p></td>
+</tr>
+<tr>
+<td><p>250</p></td>
+<td><p>画像にない</p></td>
+<td><p>0.78</p></td>
+<td><p>0.6×0+0.4×0.78=0.312</p></td>
+</tr>
+</table></p></li>
+<li><p>再ランク付け後の最終結果（topK=5)：以下の通り。</p>
+<p><table>
+<tr>
+<th><p><strong>順位</strong></p></th>
+<th><p><strong>ID</strong></p></th>
+<th><p><strong>最終スコア</strong></p></th>
+</tr>
+<tr>
+<td><p>1</p></td>
+<td><p>101</p></td>
+<td><p>0.90</p></td>
+</tr>
+<tr>
+<td><p>2</p></td>
+<td><p>198</p></td>
+<td><p>0.86</p></td>
+</tr>
+<tr>
+<td><p>3</p></td>
+<td><p>175</p></td>
+<td><p>0.81</p></td>
+</tr>
+<tr>
+<td><p>4</p></td>
+<td><p>203</p></td>
+<td><p>0.528</p></td>
+</tr>
+<tr>
+<td><p>5</p></td>
+<td><p>150</p></td>
+<td><p>0.51</p></td>
+</tr>
+</table></p></li>
 </ul>
-<table>
-   <tr>
-     <th><p><strong>ID</strong></p></th>
-     <th><p><strong>スコア（画像）</strong></p></th>
-   </tr>
-   <tr>
-     <td><p>101</p></td>
-     <td><p>0.92</p></td>
-   </tr>
-   <tr>
-     <td><p>203</p></td>
-     <td><p>0.88</p></td>
-   </tr>
-   <tr>
-     <td><p>150</p></td>
-     <td><p>0.85</p></td>
-   </tr>
-   <tr>
-     <td><p>198</p></td>
-     <td><p>0.83</p></td>
-   </tr>
-   <tr>
-     <td><p>175</p></td>
-     <td><p>0.8</p></td>
-   </tr>
-</table>
-<ul>
-<li>テキスト（topK=5）に対するANN検索結果</li>
-</ul>
-<table>
-   <tr>
-     <th><p><strong>ID</strong></p></th>
-     <th><p><strong>スコア（テキスト）</strong></p></th>
-   </tr>
-   <tr>
-     <td><p>198</p></td>
-     <td><p>0.91</p></td>
-   </tr>
-   <tr>
-     <td><p>101</p></td>
-     <td><p>0.87</p></td>
-   </tr>
-   <tr>
-     <td><p>110</p></td>
-     <td><p>0.85</p></td>
-   </tr>
-   <tr>
-     <td><p>175</p></td>
-     <td><p>0.82</p></td>
-   </tr>
-   <tr>
-     <td><p>250</p></td>
-     <td><p>0.78</p></td>
-   </tr>
-</table>
-<ul>
-<li>WeightedRankerを使用して、画像とテキストの検索結果に重みを割り当てる。画像ANN検索の重みを0.6、テキスト検索の重みを0.4とする。</li>
-</ul>
-<table>
-   <tr>
-     <th><p><strong>ID</strong></p></th>
-     <th><p><strong>スコア（画像）</strong></p></th>
-     <th><p><strong>スコア（テキスト）</strong></p></th>
-     <th><p><strong>重み付けスコア</strong></p></th>
-   </tr>
-   <tr>
-     <td><p>101</p></td>
-     <td><p>0.92</p></td>
-     <td><p>0.87</p></td>
-     <td><p>0.6×0.92+0.4×0.87=0.90</p></td>
-   </tr>
-   <tr>
-     <td><p>203</p></td>
-     <td><p>0.88</p></td>
-     <td><p>該当なし</p></td>
-     <td><p>0.6×0.88+0.4×0=0.528</p></td>
-   </tr>
-   <tr>
-     <td><p>150</p></td>
-     <td><p>0.85</p></td>
-     <td><p>該当なし</p></td>
-     <td><p>0.6×0.85+0.4×0=0.51</p></td>
-   </tr>
-   <tr>
-     <td><p>198</p></td>
-     <td><p>0.83</p></td>
-     <td><p>0.91</p></td>
-     <td><p>0.6×0.83+0.4×0.91=0.86</p></td>
-   </tr>
-   <tr>
-     <td><p>175</p></td>
-     <td><p>0.80</p></td>
-     <td><p>0.82</p></td>
-     <td><p>0.6×0.80+0.4×0.82=0.81</p></td>
-   </tr>
-   <tr>
-     <td><p>110</p></td>
-     <td><p>画像にない</p></td>
-     <td><p>0.85</p></td>
-     <td><p>0.6×0+0.4×0.85=0.34</p></td>
-   </tr>
-   <tr>
-     <td><p>250</p></td>
-     <td><p>画像にない</p></td>
-     <td><p>0.78</p></td>
-     <td><p>0.6×0+0.4×0.78=0.312</p></td>
-   </tr>
-</table>
-<ul>
-<li>再ランク付け後の最終結果（topK=5)：以下の通り。</li>
-</ul>
-<table>
-   <tr>
-     <th><p><strong>順位</strong></p></th>
-     <th><p><strong>ID</strong></p></th>
-     <th><p><strong>最終スコア</strong></p></th>
-   </tr>
-   <tr>
-     <td><p>1</p></td>
-     <td><p>101</p></td>
-     <td><p>0.90</p></td>
-   </tr>
-   <tr>
-     <td><p>2</p></td>
-     <td><p>198</p></td>
-     <td><p>0.86</p></td>
-   </tr>
-   <tr>
-     <td><p>3</p></td>
-     <td><p>175</p></td>
-     <td><p>0.81</p></td>
-   </tr>
-   <tr>
-     <td><p>4</p></td>
-     <td><p>203</p></td>
-     <td><p>0.528</p></td>
-   </tr>
-   <tr>
-     <td><p>5</p></td>
-     <td><p>150</p></td>
-     <td><p>0.51</p></td>
-   </tr>
-</table>
 <h2 id="Usage-of-Weighted-Ranker" class="common-anchor-header">重み付きランカーの使用法<button data-href="#Usage-of-Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -265,9 +259,24 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>WeightedRankerストラテジーを使用する場合、重み値を入力する必要がある。入力する重み値の数は、ハイブリッド検索における基本ANN検索要求の数に対応させる必要がある。入力する重み値は[0,1]の範囲にあるべきで、1に近いほど重要度が高いことを示す。</p>
-<h3 id="Create-a-Weighted-Ranker" class="common-anchor-header">重み付きランカーの作成</h3><p>例えば、ハイブリッド検索にテキスト検索と画像検索の2つの基本ANN検索リクエストがあるとする。テキスト検索がより重要であると考えられる場合、より大きなウェイトが割り当てられるはずです。</p>
+<h3 id="Create-a-Weighted-Ranker" class="common-anchor-header">重み付きランカーの作成<button data-href="#Create-a-Weighted-Ranker" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>例えば、ハイブリッド検索にテキスト検索と画像検索の2つの基本ANN検索リクエストがあるとする。テキスト検索がより重要であると考えられる場合、より大きなウェイトが割り当てられるはずです。</p>
 <div class="alert note">
-<p>Milvus 2.6.x以降では、<code translate="no">Function</code> APIを介して直接リランキング戦略を設定することができます。それ以前のリリース（v2.6.0以前）をお使いの場合は、<a href="https://milvus.io/docs/2.5.x/reranking.md#Reranking">Rerankingの</a>ドキュメントを参照して設定を行ってください。</p>
+<p>Milvus 2.6.x以降では、<code translate="no">Function</code> APIを介して直接リランキング戦略を設定することができます。それ以前のリリース（v2.6.0以前）を使用している場合は、<a href="https://milvus.io/docs/v2.5.x/reranking.md#Usage-of-WeightedRanker">Rerankingの</a>ドキュメントを参照して設定を行ってください。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -284,9 +293,28 @@ rerank = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+                .name(<span class="hljs-string">&quot;weight&quot;</span>)
+                .functionType(FunctionType.RERANK)
+                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
+                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;weights\&quot;: [0.1, 0.6], \&quot;norm_score\&quot;: true}&quot;</span>)
+                .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+
+<span class="hljs-keyword">const</span> rerank = {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;weight&quot;</span>,
+    <span class="hljs-attr">input_field_names</span>: [],
+    <span class="hljs-attr">function_type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+    <span class="hljs-attr">params</span>: {
+        <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;weighted&quot;</span>,
+        <span class="hljs-attr">weights</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.9</span>],
+        <span class="hljs-attr">norm_score</span>: <span class="hljs-literal">true</span>
+    }
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Go</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -320,23 +348,38 @@ rerank = Function(
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>はい</p></td>
-     <td><p>使用するリランキング法を指定する。Weighted Ranker を使用するには<code translate="no">weighted</code> に設定する必要がある。</p></td>
+     <td><p>使用するリランキング法を指定する。</p><p>Weighted Rankerを使用するには<code translate="no">weighted</code> 。</p></td>
      <td><p><code translate="no">"weighted"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.weights</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>各探索経路に対応する重みの配列; 値∈[0,1]。 詳細は<a href="/docs/ja/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Weighted Rankerの</a>メカニズムを参照。</p></td>
+     <td><p>各探索経路に対応する重みの配列。</p><p>詳細は<a href="/docs/ja/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Weighted Ranker の仕組みを</a>参照。</p></td>
      <td><p><code translate="no">[0.1, 0.9]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.norm_score</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p>重み付けの前に生のスコアを正規化するかどうか（arctanを使用）。 詳細は<a href="/docs/ja/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Weighted Rankerの</a>メカニズムを参照。</p></td>
+     <td><p>重み付けの前に生のスコアを正規化するかどうか（arctanを使用）。</p><p>詳細は<a href="/docs/ja/weighted-ranker.md#Mechanism-of-Weighted-Ranker">Weighted Ranker の</a>仕組みを参照。</p></td>
      <td><p><code translate="no">True</code></p></td>
    </tr>
 </table>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索への適用</h3><p>Weighted Rankerは、複数のベクトル場を組み合わせたハイブリッド検索操作に特化して設計されている。ハイブリッド検索を行う際には、各検索パスの重みを指定する必要がある：</p>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">ハイブリッド検索への適用<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Weighted Rankerは、複数のベクトル場を組み合わせたハイブリッド検索操作に特化して設計されている。ハイブリッド検索を行う際には、各検索パスの重みを指定する必要がある：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, AnnSearchRequest
@@ -372,9 +415,75 @@ hybrid_results = milvus_client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;product_name&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+        
+List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;text_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;\&quot;modern dining table\&quot;&quot;</span>)))
+        .limit(<span class="hljs-number">10</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;image_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(imageEmbedding)))
+        .limit(<span class="hljs-number">10</span>)
+        .build());
+        
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+                .collectionName(COLLECTION_NAME)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(<span class="hljs-number">10</span>)
+                .outputFields(Arrays.asList(<span class="hljs-string">&quot;product_name&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>))
+                .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+
+<span class="hljs-keyword">const</span> text_search = {
+  <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;modern dining table&quot;</span>],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;text_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+};
+
+<span class="hljs-keyword">const</span> image_search = {
+  <span class="hljs-attr">data</span>: [image_embedding],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;image_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+};
+
+<span class="hljs-keyword">const</span> rerank = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;weight&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">function_type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;weighted&quot;</span>,
+    <span class="hljs-attr">weights</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.9</span>],
+    <span class="hljs-attr">norm_score</span>: <span class="hljs-literal">true</span>,
+  },
+};
+
+<span class="hljs-keyword">const</span> search = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: collection_name,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">data</span>: [text_search, image_search],
+  <span class="hljs-attr">rerank</span>: rerank,
+  output_fields = [<span class="hljs-string">&quot;product_name&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>],
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -22,8 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Selamat datang di Peta Jalan Milvus! Bergabunglah bersama kami dalam perjalanan berkelanjutan kami untuk meningkatkan dan mengembangkan Milvus. Kami sangat senang berbagi pencapaian, rencana masa depan, dan visi kami untuk masa depan. Roadmap kami lebih dari sekadar daftar fitur-fitur yang akan datang - ini mencerminkan komitmen kami terhadap inovasi dan dedikasi kami untuk bekerja sama dengan komunitas. Kami mengundang Anda untuk mempelajari peta jalan kami, memberikan umpan balik, dan membantu membentuk masa depan Milvus!</p>
-<h2 id="Roadmap" class="common-anchor-header">Peta Jalan<button data-href="#Roadmap" class="anchor-icon" translate="no">
+    </button></h1><h2 id="🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="common-anchor-header">🌌 Menuju Basis Data Multimodal dan Data Lake Generasi Berikutnya<button data-href="#🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,49 +37,181 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
-    <thead>
-        <tr>
-            <th>Kategori</th>
-            <th>Milvus 2.5.x (Dicapai dalam rilis terbaru)</th>
-            <th>Rilis Berikutnya - Milvus 2.6 (Pertengahan CY25)</th>
-            <th>Peta Jalan Masa Depan - Milvus 3.0 (Dalam 1 tahun)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Pemrosesan Data Tidak Terstruktur Berbasis AI</strong><br/><i>Memperkuat kemampuan untuk memproses dan menganalisis data tidak terstruktur menggunakan model AI dan teknologi canggih</i></td>
-            <td><strong>Pencarian Teks Lengkap</strong><br/><i>Mendukung pencarian teks lengkap dengan Sparse-BM25. API baru menerima teks sebagai input dan secara otomatis menghasilkan vektor jarang di dalam Milvus</i><br/><br/><strong>Sparse Vector (GA)</strong><br/><i>Mendukung metode penyimpanan dan pengindeksan yang efisien untuk vektor jarang</i><br/></td>
-            <td><strong>Data-In dan Data-Out</strong><br/><i>Mendukung layanan model utama untuk menelan teks asli</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Mendukung perangking berbasis model dan fungsi penilaian yang ditentukan pengguna</i><br/><br/><strong>Pencarian</strong> Iteratif<br/><i>Merevisi vektor kueri berdasarkan pelabelan pengguna</i></td>
-            <td><strong>Mendukung Tensor</strong><br/><i>Mendukung daftar vektor, penggunaan umum seperti Colbert, Copali, dan representasi Video</i><br/><br/><strong>Mendukung Lebih Banyak Tipe Data</strong><br/><i>misalnya Datetime, Peta, GIS</i></td>
-        </tr>
-        <tr>
-            <td><strong>Kualitas &amp; Performa Pencarian</strong><br/><i>Memberikan hasil yang akurat, relevan, dan cepat dengan mengoptimalkan arsitektur, algoritma, dan API</i></td>
-            <td><strong>Fungsi Pencocokan Teks</strong><br/><i>Memfilter kata kunci/token dengan cepat dalam teks/varchar</i><br/><br/><strong>Peningkatan Pencarian Pengelompokan</strong><br/><i>Memperkenalkan group_size dan menambahkan grup dengan dukungan dalam pencarian hybrid</i><br/><br/><strong>Indeks Bitmap &amp; Indeks Terbalik</strong><br/><i>Mempercepat pemfilteran pada tag</i></td>
-            <td><strong>Pencocokan Tingkat Lanjut</strong><br/><i>mis. phrase_match, multi_match </i><br/><br/><strong>Peningkatan Penganalisis</strong><br/><i>Meningkatkan Penganalisis dengan dukungan tokenizer yang diperluas dan kemampuan pengamatan yang lebih baik</i><br/><br/><strong>Pemfilteran JSON</strong><br/><i>Mengoptimalkan pengindeksan dan penguraian JSON untuk pemrosesan yang lebih cepat</i></td>
-            <td><strong>Kemampuan Penyortiran</strong><br/><i>Menyortir berdasarkan bidang skalar selama eksekusi</i><br/><br/><strong>Mendukung Pengelompokan Data</strong><br/><i>Lokalitas data</i></td>
-        </tr>
-        <tr>
-            <td><strong>Fungsionalitas &amp; Manajemen yang Kaya</strong><br/><i>Fitur manajemen data yang ramah pengembang dan kuat</i></td>
-            <td><strong>Mendukung file csv dalam impor data</strong><br/><i>Bulkinsert mendukung format csv</i><br/><br/><strong>Mendukung Nilai Null dan Default</strong><br/><i>Tipe</i> Null<i>dan Default membuat impor data dari DBMS lain menjadi lebih mudah</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Alat bantu manajemen visual untuk DBA</i></td>
-            <td><strong>Perubahan Skema</strong><br/><i>misal: menambah/menghapus field, memodifikasi panjang varchar</i><br/><br/><strong>Agregasi</strong><br/><i>Agregasi field skalar, misal: count, nilai yang berbeda, min, max</i><br/><br/><strong>Mendukung UDF</strong><br/><i>Fungsi yang ditentukan pengguna</i></td>
-            <td><strong>Pembaruan Massal</strong><br/><i>Mendukung pembaruan massal untuk nilai field tertentu</i><br/><br/><strong>Deduplikasi Kunci Utama</strong><br/><i>Dengan menggunakan indeks pk global</i><br/><br/><strong>Data Versioning &amp; Restore</strong><br/><i>Mendukung data versioning dengan snapshot</i></td>
-        </tr>
-        <tr>
-            <td><strong>Efisiensi Biaya &amp; Arsitektur</strong><br/><i>Sistem yang canggih dengan stabilitas, efektivitas biaya, dan penyebaran yang efisien.</i></td>
-            <td><strong>Pengoptimalan Memori</strong><br/><i>Mengurangi OOM dan peningkatan beban</i><br/><br/><strong>Pemadatan Clustering</strong><br/><i>Distribusi ulang data berdasarkan konfigurasi untuk mempercepat kinerja pembacaan</i><br/><br/><strong>Format Penyimpanan V2 (Beta)</strong><br/><i>Desain dan fondasi format universal untuk akses data berbasis disk</i></td>
-            <td><strong>Penyimpanan Berjenjang</strong><br/><i>Mendukung penyimpanan panas dan dingin untuk optimalisasi biaya</i><br/><br/><strong>Stream Node</strong><br/><i>Memproses data streaming dan menyederhanakan alur penulisan tambahan</i><br/><br/><strong>MixCoord</strong><br/><i>Menggabungkan logika Coord menjadi satu</i></td>
-            <td><strong>Vector Lake</strong><br/><i>Solusi offline yang hemat biaya, spark connector dan terintegrasi dengan iceberg</i><br/><br/><strong>Logstore Component</strong><br/><i>Mengurangi ketergantungan pada komponen eksternal seperti pulsar</i><br/><br/><strong>Data Evict Policy</strong><br/><i>Pengguna dapat menentukan kebijakan penggusuran mereka sendiri</i></td>
-        </tr>
-    </tbody>
-</table>
+    </button></h2><p><strong>Peta Jalan Produk Milvus</strong></p>
+<p>Selamat datang di Peta Jalan Milvus!</p>
+<p>Kami mengantarkan Milvus ke era baru - basis data multimodal generasi berikutnya - yang mencakup <strong>data terstruktur hingga data tidak terstruktur</strong>, <strong>pengambilan data secara real-time hingga analitik offline</strong>, dan <strong>kinerja cluster tunggal hingga arsitektur data lake global.</strong></p>
+<p>Peta jalan ini menguraikan tujuan utama untuk <strong>Milvus v2.6 (sedang dalam proses)</strong>, <strong>Milvus v3.0 (ditargetkan pada akhir tahun 2026)</strong>, dan <strong>Milvus v3.1 (pengembangan jangka panjang)</strong>, beserta rencana evolusi untuk <strong>Vector Lake (data lake/Loon)</strong>.</p>
+<h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (Sedang dalam Proses)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>Garis waktu: Pertengahan 2025 - Akhir 2025</strong></p>
+<p>Fokus: <strong>Meningkatkan model data</strong>, <strong>melakukan refactoring pada arsitektur streaming</strong>, <strong>membangun kemampuan tiering panas/dingin</strong>, dan meluncurkan <strong>Prototipe Vector Lake (v0.1)</strong>.</p>
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Sorotan Utama<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="🔹-Data-Model-Upgrade" class="common-anchor-header">🔹 <strong>Peningkatan Model Data</strong></h4><ul>
+<li><p>Memperkenalkan tipe data <strong>Tensor / StructList</strong> terpadu untuk mendukung struktur penyematan multi-vektor, memungkinkan kompatibilitas dengan <em>ColBERT</em>, <em>CoLQwen</em>, <em>video</em>, dan <em>vektor multimodal</em>.</p></li>
+<li><p>Menambahkan dukungan <strong>Geo Data</strong>, termasuk titik, wilayah, dan pengindeksan spasial (berdasarkan <em>libspatial</em>), untuk memperluas kasus penggunaan dalam LBS dan GIS.</p></li>
+<li><p>Dukungan untuk <strong>Timestamp dengan</strong> tipe data <strong>Timezone</strong>.</p></li>
+</ul>
+<h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header"><strong>🔹 Refaktor Arsitektur StreamNode</strong></h4><ul>
+<li><p>Menulis ulang pipeline streaming ingestion untuk mengoptimalkan penulisan tambahan dan komputasi real-time.</p></li>
+<li><p>Secara signifikan meningkatkan kinerja dan stabilitas konkurensi, meletakkan dasar untuk pemrosesan real-time dan offline yang terpadu.</p></li>
+<li><p>Memperkenalkan mesin antrean pesan yang baru: <strong>Burung</strong> Pelatuk.</p></li>
+</ul>
+<h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>Arsitektur Tiering &amp; Penyimpanan Panas/Dingin (StorageV2)</strong></h4><ul>
+<li><p>Mendukung format penyimpanan ganda: <strong>Parquet</strong> dan <strong>Vortex</strong>, meningkatkan konkurensi dan efisiensi memori.</p></li>
+<li><p>Menerapkan penyimpanan berjenjang dengan pemisahan data panas/dingin secara otomatis dan penjadwalan yang cerdas.</p></li>
+</ul>
+<h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹 <strong>Prototipe Danau Vektor (v0.1)</strong></h4><ul>
+<li><p>Terintegrasi dengan <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> melalui FFI, memungkinkan evolusi skema offline dan kueri KNN.</p></li>
+<li><p>Menyediakan visualisasi data multimodal dan demo Spark ETL, membangun arsitektur data lake yang mendasar.</p></li>
+</ul>
+<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (Ditargetkan pada Akhir 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>Garis waktu: Akhir 2025 - Awal 2026</strong></p>
+<p>Fokus: Peningkatan komprehensif pada <strong>pengalaman pencarian</strong>, <strong>fleksibilitas skema</strong>, dan <strong>dukungan data tak terstruktur</strong>, bersamaan dengan rilis <strong>Vector Lake (v0.2)</strong>.</p>
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Sorotan Utama<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header"><strong>🔹 Perombakan Pengalaman Pencarian</strong></h4><ul>
+<li><p>Memperkenalkan pencarian kemiripan <strong>More Like This (MLT)</strong> dengan dukungan untuk pencarian dengan posisi atau contoh negatif.</p></li>
+<li><p>Menambahkan kemampuan pencarian semantik seperti <strong>penyorotan</strong> dan <strong>peningkatan</strong>.</p></li>
+<li><p>Mendukung <strong>kamus khusus</strong> dan <strong>tabel sinonim</strong>, yang memungkinkan definisi aturan leksikal dan semantik pada lapisan Penganalisis.</p></li>
+<li><p>Memperkenalkan kemampuan <strong>agregasi</strong> untuk kueri.</p></li>
+</ul>
+<h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>Multi-Tenancy &amp; Manajemen Sumber Daya</strong></h4><ul>
+<li><p>Mengaktifkan penghapusan multi-penyewa, statistik, dan tiering panas/dingin.</p></li>
+<li><p>Meningkatkan isolasi sumber daya dan strategi penjadwalan untuk mendukung jutaan tabel dalam satu cluster.</p></li>
+</ul>
+<h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header"><strong>🔹 Peningkatan Skema &amp; Kunci Utama</strong></h4><ul>
+<li><p>Menerapkan <strong>Deduplikasi Kunci Utama Global (Global PK Dedup</strong> ) untuk menjamin konsistensi dan keunikan data.</p></li>
+<li><p>Mendukung <strong>manajemen skema yang fleksibel</strong> (menambah/menghapus kolom, pengisian cadangan).</p></li>
+<li><p>Mengizinkan <strong>nilai NULL</strong> dalam bidang vektor.</p></li>
+</ul>
+<h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹 <strong>Tipe Data Tidak Terstruktur yang Diperluas (BLOB / Teks)</strong></h4><ul>
+<li><p>Memperkenalkan <strong>tipe BLOB</strong>, yang menyediakan penyimpanan dan referensi asli untuk data biner seperti file, gambar, dan video.</p></li>
+<li><p>Memperkenalkan <strong>tipe TEXT</strong>, yang menyediakan kemampuan pencarian berbasis teks lengkap dan konten yang disempurnakan.</p></li>
+</ul>
+<h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>Kemampuan Kelas Perusahaan</strong></h4><ul>
+<li><p>Mendukung pencadangan <strong>dan pemulihan berbasis Snapshot</strong>.</p></li>
+<li><p>Menyediakan <strong>penelusuran ujung ke ujung</strong> dan pencatatan <strong>audit</strong>.</p></li>
+<li><p>Menerapkan <strong>Ketersediaan Tinggi Siaga Aktif (HA)</strong> di seluruh penerapan multi-cluster.</p></li>
+</ul>
+<h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
+<li><p>Mendukung <strong>penyimpanan TEXT / BLOB</strong> dan <strong>manajemen snapshot multi-versi</strong>.</p></li>
+<li><p>Mengintegrasikan Spark untuk pengindeksan offline, pengelompokan, deduplikasi, dan tugas pengurangan dimensi.</p></li>
+<li><p>Menghadirkan <strong>demo cold-query ChatPDF dan benchmark offline</strong>.</p></li>
+</ul>
+<h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">Milvus v3.1 (Visi Jangka Panjang)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>Garis waktu: Pertengahan 2026</strong></p>
+<p>Fokus: <strong>Fungsi yang ditentukan pengguna (UDF</strong>), <strong>integrasi komputasi terdistribusi</strong>, <strong>pengoptimalan kueri skalar</strong>, <strong>sharding dinamis</strong>, dan rilis resmi <strong>Vector Lake (v1.0)</strong>.</p>
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Sorotan Utama<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹 <strong>UDF &amp; Ekosistem Komputasi Terdistribusi</strong></h4><ul>
+<li><p>Mendukung <strong>User-Defined Functions (UDF)</strong>, yang memungkinkan pengembang untuk menyuntikkan logika khusus ke dalam alur kerja pengambilan dan komputasi.</p></li>
+<li><p>Integrasi mendalam dengan <strong>Ray Dataset / Daft</strong> untuk eksekusi UDF terdistribusi dan pemrosesan data multimodal.</p></li>
+</ul>
+<h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header"><strong>🔹 Kueri Skalar &amp; Evolusi Format Lokal</strong></h4><ul>
+<li><p>Mengoptimalkan kinerja pemfilteran dan agregasi untuk bidang skalar.</p></li>
+<li><p>Meningkatkan evaluasi ekspresi dan eksekusi yang dipercepat dengan indeks.</p></li>
+<li><p>Mendukung <strong>pembaruan di tempat</strong> untuk format file lokal.</p></li>
+</ul>
+<h4 id="🔹-Advanced-Search-Capabilities" class="common-anchor-header">🔹 <strong>Kemampuan Pencarian Tingkat Lanjut</strong></h4><ul>
+<li><p>Menambahkan fitur-fitur berikut: Kueri <strong>pencocokan</strong> <strong>RankBy</strong>, <strong>OrderBy</strong>, <strong>Facet</strong>, dan <strong>Fuzzy</strong>.</p></li>
+<li><p>Tingkatkan pengambilan teks dengan dukungan untuk:</p>
 <ul>
-<li>Roadmap kami biasanya terstruktur dalam tiga bagian: rilis terbaru, rilis berikutnya yang akan datang, dan visi jangka menengah hingga jangka panjang dalam satu tahun ke depan.</li>
-<li>Seiring dengan perkembangannya, kami terus belajar dan sesekali menyesuaikan fokus kami, menambahkan atau menghapus item sesuai kebutuhan.</li>
-<li>Rencana ini bersifat indikatif dan dapat berubah, dan dapat bervariasi berdasarkan layanan berlangganan.</li>
-<li>Kami tetap berpegang teguh pada peta jalan kami, dengan <a href="/docs/id/release_notes.md">catatan rilis</a> kami yang berfungsi sebagai referensi.</li>
+<li><p><code translate="no">match_phrase_prefix</code></p></li>
+<li><p><code translate="no">Completion Suggester</code></p></li>
+<li><p><code translate="no">Term Suggester</code></p></li>
+<li><p><code translate="no">Phrase Suggester</code></p></li>
+</ul></li>
 </ul>
-<h2 id="How-to-contribute" class="common-anchor-header">Bagaimana cara berkontribusi<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
+<h4 id="🔹-Dynamic-Sharding--Scalability" class="common-anchor-header">🔹 <strong>Pemecahan &amp; Skalabilitas Dinamis</strong></h4><ul>
+<li><p>Aktifkan <strong>pemisahan pecahan otomatis</strong> dan <strong>penyeimbangan beban</strong> untuk penskalaan yang mulus.</p></li>
+<li><p>Meningkatkan <strong>pembuatan indeks global</strong> dan memastikan <strong>kinerja pencarian yang terdistribusi</strong>.</p></li>
+</ul>
+<h4 id="🔹-Vector-Lake-V10" class="common-anchor-header">🔹 <strong>Vector Lake V1.0</strong></h4><ul>
+<li><p>Integrasi mendalam dengan <strong>Ray / Daft / PyTorch</strong> untuk mendukung UDF terdistribusi dan kasus penggunaan Rekayasa Konteks.</p></li>
+<li><p>Menyediakan <strong>demo RAG (Retrieval-Augmented Generation)</strong> <strong>dan mengimpor dari tabel Iceberg</strong>.</p></li>
+</ul>
+<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Bersama Membangun Masa Depan Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,16 +226,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebagai proyek sumber terbuka, Milvus berkembang dengan kontribusi komunitas. Berikut adalah cara Anda dapat menjadi bagian dari perjalanan kami.</p>
-<h3 id="Share-feedback" class="common-anchor-header">Berbagi umpan balik</h3><ul>
-<li><p>Pelaporan masalah: Menemukan bug atau punya saran? Buka masalah di <a href="https://github.com/milvus-io/milvus/issues">halaman GitHub</a> kami.</p></li>
-<li><p>Saran fitur: Punya ide untuk fitur baru atau perbaikan? Bergabunglah dengan percakapan di <a href="https://github.com/milvus-io/milvus/discussions/40263">utas diskusi aktif kami</a>.</p></li>
+    </button></h2><p>Milvus adalah proyek sumber terbuka yang digerakkan oleh komunitas pengembang global.</p>
+<p>Kami dengan hangat mengundang semua anggota komunitas untuk membantu membentuk basis data multimodal generasi berikutnya:</p>
+<ul>
+<li><p><strong>💬 Memberikan umpan balik</strong>: Mengusulkan fitur-fitur baru atau ide pengoptimalan</p></li>
+<li><p>🐛 <strong>Melaporkan masalah</strong>: Mengajukan bug melalui Masalah GitHub</p></li>
+<li><p>🔧 <strong>Kontribusi kode</strong>: Kirimkan PR dan bantu membangun fitur inti</p>
+<ul>
+<li><p><strong>Tarik permintaan</strong>: Berkontribusi langsung ke <a href="https://github.com/milvus-io/milvus/pulls">basis kode</a> kami. Baik itu memperbaiki bug, menambahkan fitur, atau meningkatkan dokumentasi, kontribusi Anda diterima.</p></li>
+<li><p><strong>Panduan pengembangan</strong>: Lihat <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Panduan Kontributor</a> kami untuk panduan kontribusi kode.</p></li>
+</ul></li>
+<li><p><strong>Menyebarkan berita</strong>: Bagikan praktik terbaik dan kisah sukses</p></li>
 </ul>
-<h3 id="Code-contributions" class="common-anchor-header">Kontribusi kode</h3><ul>
-<li><p>Tarik permintaan: Berkontribusi langsung ke <a href="https://github.com/milvus-io/milvus/pulls">basis kode</a> kami. Baik itu memperbaiki bug, menambahkan fitur, atau meningkatkan dokumentasi, kontribusi Anda diterima.</p></li>
-<li><p>Panduan pengembangan: Lihat <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Panduan Kontributor</a> kami untuk panduan kontribusi kode.</p></li>
-</ul>
-<h3 id="Spread-the-word" class="common-anchor-header">Menyebarkan berita</h3><ul>
-<li><p>Berbagi secara sosial: Suka Milvus? Bagikan kasus penggunaan dan pengalaman Anda di media sosial dan blog teknologi.</p></li>
-<li><p>Bintangi kami di GitHub: Tunjukkan dukungan Anda dengan membintangi <a href="https://github.com/milvus-io/milvus">repositori GitHub</a> kami.</p></li>
-</ul>
+<p>👉 <strong>GitHub:</strong> <a href="https://github.com/milvus-io/milvus">milvus-io/milvus</a></p>

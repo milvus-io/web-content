@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 생성합니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의 중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색 가능하도록 유지합니다. 이 접근 방식은 근접성이나 최신성에 높은 우선순위를 부여하고 싶지만 더 먼 옵션을 완전히 없애고 싶지 않을 때 이상적입니다.</p>
+    </button></h1><p>지수 감쇠는 검색 결과에서 가파른 초기 하락과 긴 꼬리를 생성합니다. 처음에는 관련성이 급격히 감소하지만 시간이 지나면서 일부 기사의 중요성이 유지되는 속보 사이클처럼, 지수 감쇠는 이상적인 범위를 벗어난 항목에 급격한 페널티를 적용하는 동시에 멀리 떨어진 항목은 계속 검색할 수 있도록 합니다. 이 접근 방식은 근접성이나 최신성에 높은 우선순위를 부여하고 싶지만 먼 거리에 있는 옵션을 완전히 없애고 싶지 않을 때 이상적입니다.</p>
 <p>다른 감쇠 함수와 달리</p>
 <ul>
 <li><p>가우스 감쇠는 보다 점진적인 종 모양의 감쇠를 생성합니다.</p></li>
@@ -77,7 +77,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>사용자가 매우 최근 또는 가까운 품목이 결과를 강력하게 지배할 것으로 기대하는 경우</p></li>
 <li><p>예외적으로 관련성이 높은 경우 오래되거나 더 먼 항목도 여전히 검색될 수 있어야 합니다.</p></li>
-<li><p>연관성 감쇠는 전면적으로 이루어져야 합니다(처음에는 가파르게, 나중에는 점진적으로).</p></li>
+<li><p>관련성 감소는 전면적으로 이루어져야 합니다(처음에는 가파르게, 나중에는 점진적으로).</p></li>
 </ul>
 <h2 id="Sharp-drop-off-principle" class="common-anchor-header">급격한 드롭오프 원칙<button data-href="#Sharp-drop-off-principle" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -197,20 +197,18 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                       .functionType(FunctionType.RERANK)
-                       .name(<span class="hljs-string">&quot;news_recency&quot;</span>)
-                       .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;publish_time&quot;</span>))
-                       .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>)
-                       .param(<span class="hljs-string">&quot;function&quot;</span>, <span class="hljs-string">&quot;exp&quot;</span>)
-                       .param(<span class="hljs-string">&quot;origin&quot;</span>, String.valueOf(System.currentTimeMillis()))
-                       .param(<span class="hljs-string">&quot;offset&quot;</span>, String.valueOf(<span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .param(<span class="hljs-string">&quot;decay&quot;</span>, <span class="hljs-string">&quot;0.5&quot;</span>)
-                       .param(<span class="hljs-string">&quot;scale&quot;</span>, String.valueOf(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .build();
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;news_recency&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;publish_time&quot;</span>))
+        .function(<span class="hljs-string">&quot;exp&quot;</span>)
+        .origin(System.currentTimeMillis())
+        .offset(<span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .scale(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .build();
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">
 <span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;

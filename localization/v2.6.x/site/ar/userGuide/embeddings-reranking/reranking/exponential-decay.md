@@ -112,7 +112,7 @@ beta: Milvus 2.6.x
 <li><p><code translate="no">scale</code> (24 ساعة): الفترة الزمنية التي تنخفض عندها الأهمية إلى قيمة الاضمحلال-المقالات الإخبارية التي مضى عليها 24 ساعة بالضبط تنخفض درجاتها إلى النصف (0.5).</p></li>
 </ul>
 <p>كما ترون من المنحنى، تستمر المقالات الإخبارية التي مضى عليها أكثر من 24 ساعة في الانخفاض في الأهمية ولكنها لا تصل إلى الصفر تمامًا. حتى القصص التي تعود إلى عدة أيام مضت تحتفظ بالحد الأدنى من الملاءمة، مما يسمح للأخبار المهمة ولكن الأقدم لا تزال تظهر في خلاصتك (وإن كان ترتيبها أقل).</p>
-<p>يحاكي هذا السلوك كيفية عمل ملاءمة الأخبار عادةً - تهيمن القصص الحديثة جدًا بقوة، ولكن لا يزال بإمكان القصص الأقدم المهمة أن تبرز إذا كانت ذات صلة استثنائية باهتمامات المستخدم.</p>
+<p>هذا السلوك يحاكي كيفية عمل ملاءمة الأخبار عادةً - تهيمن القصص الحديثة جدًا بقوة، ولكن لا يزال بإمكان القصص الأقدم المهمة أن تبرز إذا كانت ذات صلة استثنائية باهتمامات المستخدم.</p>
 <h2 id="Formula" class="common-anchor-header">المعادلة<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +135,7 @@ beta: Milvus 2.6.x
 <p>شرح ذلك بلغة بسيطة</p>
 <ol>
 <li><p>Calculate how far the field value is from the origin: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> ∣fieldvaluedoc−origin∣|fieldvalue_{doc} - origin|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">∣fieldvalue</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">doc​</span></span></span></span></span></span></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">origin∣</span></span></span></span>.</p></li>
-<li><p>اطرح الإزاحة (إن وجدت) ولكن لا تنزل أبدًا إلى ما دون الصفر: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>الحد الأقصى</mi><mo stretchy="false">(</mo><mo separator="true">0،</mo><mi>المسافة -</mi><mi>الإزاحة</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\الحد الأقصى <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(0، المسافة - الإزاحة)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">الحد الأقصى</span><span class="mopen">(</span><span class="mpunct">0،</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">المسافة</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin"> -</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal"> </span><span class="strut" style="height:1em;vertical-align:-0.25em;"></span> <span class="mord mathnormal">الإزاحة</span><span class="mclose">)</span></span></span></span>.</p></li>
+<li><p>اطرح الإزاحة (إن وجدت) ولكن لا تنخفض أبدًا إلى ما دون الصفر: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>الحد الأقصى</mi><mo stretchy="false">(</mo><mo separator="true">0،</mo><mi>المسافة -</mi><mi>الإزاحة</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\الحد الأقصى <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(0، المسافة - الإزاحة)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">الحد الأقصى</span><span class="mopen">(</span><span class="mpunct">0،</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">المسافة</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin"> -</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord mathnormal"> </span><span class="strut" style="height:1em;vertical-align:-0.25em;"></span> <span class="mord mathnormal">الإزاحة</span><span class="mclose">)</span></span></span></span>.</p></li>
 <li><p>اضرب في <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> λ</annotation></semantics></math></span></span>\lambda <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ،</span></span></span></span> والذي يتم حسابه من معلمات المقياس والتضاؤل.</p></li>
 <li><p>خذ الأس، والذي يمنحك قيمة بين 0 و1: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo stretchy="false">(</mo></mrow></semantics></math></span></span>λ <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>⋅⋅⋅value</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\ exp <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(\lambda \cdot value)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅⋅⋅</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;"> </span><span class="mord mathnormal">القيمة</span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose">)</span></span></span></span>.</p></li>
 </ol>
@@ -157,7 +157,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>يمكن تطبيق الاضمحلال الأسي على كل من عمليات البحث المتجه القياسية وعمليات البحث الهجين في ميلفوس. فيما يلي مقتطفات التعليمات البرمجية الرئيسية لتطبيق هذه الميزة.</p>
 <div class="alert note">
-<p>قبل استخدام دوال التضاؤل، يجب عليك أولاً إنشاء مجموعة تحتوي على حقول رقمية مناسبة (مثل الطوابع الزمنية والمسافات وغيرها) والتي سيتم استخدامها لحسابات التضاؤل. للحصول على أمثلة عملية كاملة بما في ذلك إعداد المجموعة، وتعريف المخطط، وإدراج البيانات، راجع <a href="/docs/ar/tutorial-implement-a-time-based-ranking-in-milvus.md">البرنامج التعليمي لمصنف التضاؤل</a>.</p>
+<p>قبل استخدام دالات التضاؤل، يجب عليك أولاً إنشاء مجموعة تحتوي على حقول رقمية مناسبة (مثل الطوابع الزمنية والمسافات وغيرها) والتي سيتم استخدامها لحسابات التضاؤل. للحصول على أمثلة عملية كاملة بما في ذلك إعداد المجموعة، وتعريف المخطط، وإدراج البيانات، راجع <a href="/docs/ar/tutorial-implement-a-time-based-ranking-in-milvus.md">البرنامج التعليمي لمصنف التضاؤل</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">إنشاء مصنف اضمحلال<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -199,20 +199,18 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                       .functionType(FunctionType.RERANK)
-                       .name(<span class="hljs-string">&quot;news_recency&quot;</span>)
-                       .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;publish_time&quot;</span>))
-                       .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>)
-                       .param(<span class="hljs-string">&quot;function&quot;</span>, <span class="hljs-string">&quot;exp&quot;</span>)
-                       .param(<span class="hljs-string">&quot;origin&quot;</span>, String.valueOf(System.currentTimeMillis()))
-                       .param(<span class="hljs-string">&quot;offset&quot;</span>, String.valueOf(<span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .param(<span class="hljs-string">&quot;decay&quot;</span>, <span class="hljs-string">&quot;0.5&quot;</span>)
-                       .param(<span class="hljs-string">&quot;scale&quot;</span>, String.valueOf(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .build();
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;news_recency&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;publish_time&quot;</span>))
+        .function(<span class="hljs-string">&quot;exp&quot;</span>)
+        .origin(System.currentTimeMillis())
+        .offset(<span class="hljs-number">3</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .scale(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .build();
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">
 <span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;

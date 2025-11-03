@@ -36,7 +36,7 @@ title: تحسين جودة استرجاع تطبيق LLM الخاص بك مع AI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في هذا البرنامج التعليمي، سنساعدك في هذا البرنامج التعليمي على إنشاء روبوت محادثة من الجيل المعزز للاسترجاع (RAG) يجيب على الأسئلة المتعلقة <a href="https://meetingbank.github.io/">بمجموعة بيانات بنك الاجتماعات</a>.</p>
+    </button></h2><p>في هذا البرنامج التعليمي، سنساعدك في هذا البرنامج التعليمي على بناء روبوت محادثة من الجيل المعزز للاسترجاع (RAG) يجيب على الأسئلة المتعلقة <a href="https://meetingbank.github.io/">بمجموعة بيانات بنك الاجتماعات</a>.</p>
 <p>ستتعلم في هذا البرنامج التعليمي ما يلي:</p>
 <ul>
 <li>إنشاء تطبيق LLM يجيب على استفسار المستخدم المتعلق بمجموعة بيانات بنك الاجتماعات.</li>
@@ -513,7 +513,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
 <pre><code translate="no">Average retrieval relevance score for brute force approach: 14.31772340191865
 </code></pre>
 <p>هذه هي درجة جودة تطبيق LLM <strong>الأساسية</strong>. يمكنك أيضًا الاطلاع على المقاييس الفردية مثل درجات الهلوسة وما إلى ذلك التي يحسبها AIMon على <a href="https://www.app.aimon.ai/llmapps?source=sidebar&amp;stage=production">واجهة مستخدم AIMon</a></p>
-<h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2. استخدام VectorDB (Milvus) لاسترجاع المستندات<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
+<h1 id="2-Use-a-VectorDB-Milvus-for-document-retrieval" class="common-anchor-header">2. استخدم VectorDB (Milvus) لاسترجاع المستندات<button data-href="#2-Use-a-VectorDB-Milvus-for-document-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -614,7 +614,7 @@ llm = OpenAI(model=<span class="hljs-string">&quot;gpt-4o-mini&quot;</span>, tem
 
 query_engine = RetrieverQueryEngine.from_args(retriever, llm)
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذه المرحلة، تم إعداد محرك الاستعلام والمسترجع و LLM. بعد ذلك، نقوم بإعداد AIMon لمساعدتنا في قياس درجات الجودة. نستخدم نفس المزخرف <code translate="no">@detect</code> الذي تم إنشاؤه في الخلايا السابقة أعلاه. الرمز الإضافي الوحيد في <code translate="no">ask_and_validate</code> هنا هو مساعدة AIMon على التفاعل مع "عقد" المستند المسترجعة من LLamaIndex.</p>
+<p>في هذه المرحلة، تم إعداد محرك الاستعلام والمسترجع و LLM. بعد ذلك، نقوم بإعداد AIMon لمساعدتنا في قياس درجات الجودة. نستخدم نفس المزخرف <code translate="no">@detect</code> الذي تم إنشاؤه في الخلايا السابقة أعلاه. الكود الإضافي الوحيد في <code translate="no">ask_and_validate</code> هنا هو مساعدة AIMon على التفاعل مع "عقد" المستند المسترجعة من LLamaIndex.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> logging
 
 
@@ -838,7 +838,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>سنقوم الآن بإضافة <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">أداة إعادة الترتيب القابلة للتكيف مع المجال</a> من AIMon باستخدام <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">تكامل إعادة الترتيب اللاحق</a> لـ LlamaIndex الخاص بـ AIMon.</p>
+    </button></h1><p>سنقوم الآن بإضافة <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">أداة إعادة الترتيب القابلة للتكيف مع المجال</a> من AIMon باستخدام <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">تكامل إعادة الترتيب اللاحق للمعالج</a> LlamaIndex من AIMon.</p>
 <p>كما هو موضح في الشكل أدناه، تساعد إعادة الترتيب في رفع المستندات الأكثر صلة إلى الأعلى باستخدام وظيفة مطابقة الاستعلام - المستند الأكثر تقدمًا. الميزة الفريدة في أداة إعادة الترتيب في AIMon هي القدرة على تخصيصها حسب المجال. على غرار الطريقة التي تطالب بها هندسة LLM، يمكنك تخصيص أداء إعادة الترتيب لكل مجال باستخدام حقل <code translate="no">task_definition</code>. تعمل أداة إعادة الترتيب المتطورة هذه بزمن انتقال منخفض للغاية دون الثانية (لسياق يبلغ حوالي 2 ألف)، ويُصنَّف أداؤها ضمن أفضل 5 في لوحة المتصدرين في إعادة ترتيب MTEB.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
@@ -1036,151 +1036,5 @@ df_scores
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-c43e3124-8331-40e6-97e4-b2d026a0ed70')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-<path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-</svg>
-</button></p>
-  
-   <style>.colab-df-container { العرض: مرن؛ الفجوة: 12 بكسل؛ }<pre><code translate="no">.colab-df-convert {
-  background-color: #E8F0FE;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-  fill: #1967D2;
-  height: 32px;
-  padding: 0 0 0 0;
-  width: 32px;
-}
-
-.colab-df-convert:hover {
-  background-color: #E2EBFA;
-  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-  fill: #174EA6;
-}
-
-.colab-df-buttons div {
-  margin-bottom: 4px;
-}
-
-[theme=dark] .colab-df-convert {
-  background-color: #3B4455;
-  fill: #D2E3FC;
-}
-
-[theme=dark] .colab-df-convert:hover {
-  background-color: #434B5C;
-  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-  fill: #FFFFFF;
-}
-</code></pre></style><pre><code translate="no">&lt;script&gt;
-  const buttonEl =
-    document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70 button.colab-df-convert');
-  buttonEl.style.display =
-    google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-  async function convertToInteractive(key) {
-    const element = document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70');
-    const dataTable =
-      await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                [key], {});
-    if (!dataTable) return;
-
-    const docLinkHtml = 'Like what you see? Visit the ' +
-      '&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;'
-      + ' to learn more about interactive tables.';
-    element.innerHTML = '';
-    dataTable['output_type'] = 'display_data';
-    await google.colab.output.renderOutput(dataTable, element);
-    const docLink = document.createElement('div');
-    docLink.innerHTML = docLinkHtml;
-    element.appendChild(docLink);
-  }
-&lt;/script&gt;
-</code></pre>
-  </div>
-<div id="df-3b8c700e-50cd-4b5f-8b23-64725b4af575">
-  <button class="colab-df-quickchart" onclick="quickchart('df-3b8c700e-50cd-4b5f-8b23-64725b4af575')"
-            title="Suggest charts"
-            style="display:none;">
-<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-width="24px">
-<g>
-<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-</g>
-</svg></p>
-  </button>
-<style>
-  .colab-df-quickchart { --bg-color: #E8F0F0FE؛ - لون التعبئة: # 1967D2؛ - اللون البيج: #E8F0F0FE؛ - لون التغطية: # E2E2EBFA؛ - لون التعبئة التحوطي: #E2EBFA؛ - لون التعبئة التحوطي: # 174EA6؛ - لون التعبئة المعطل: #174EA6؛ - لون التعبئة المعطل: #AAA؛ - لون معطل-بغ-لون: #DDDD؛ }<p>[theme=dark] .colab-df-quickchart { -bg-color: # #3B4455؛ - ملء اللون: #D2E3FC;
-–hover-bg-color: # 434B5C؛ -لون الملء التحوطي: #FFFFFFFF؛ -مثبّت: # #FFFFFFFFFF؛ -معطلة- اللون البيج: # ##B4455؛ -لون، معطل- اللون البيج: #3B4455؛ -لون التعبئة المعطل: #666؛ -لون معطل:</p><p># 6666؛ }</p><p>.colab-df-quickchart { لون الخلفية: var (-bg-color)؛ الحدود: لا شيء؛ نصف قطر الحدود: 50%؛ المؤشر: مؤشر؛ العرض: لا شيء؛ التعبئة: var (-fill-color)؛ الارتفاع: 32 بكسل؛ الحشو:</p><p> 0؛ العرض: 32 بكسل؛ }</p><p>.colab-df-quickchart:hover { لون الخلفية: var(-hover-bg-color)؛ تظليل الصندوق: 0 1p 2px 2px rgba(60, 64, 67, 0.3)، 0 1p 3px 3px 1px rgba(60, 64, 67, 0.15)؛ التعبئة: var(-button-hover-hover-fill-color)؛ }</p><p>.colab-df-quickchart-complete:معطل، .colab-df-quchart-complete:معطل:hover { لون الخلفية: var(-disabled-bg-color)؛ التعبئة: var(-disabled-fill-color)؛ تظليل الصندوق: لا شيء؛ }</p><p>.colab-df-spinner {الحدود:</p><p> 2 بكسل متين متغير (-ملء-لون)؛ لون الحدود: شفاف؛ لون الحدود السفلية: متغير (-ملء-لون)؛ الرسوم المتحركة: تدور 1 ثانية خطوات (1) لانهائية؛ }</p><p>@ @إطارات رئيسية تدور { 0٪ { لون الحدود: شفاف؛ لون الحدود السفلية: متغير (-ملء-لون)؛ لون الحدود اليسرى: var(-fill-color)؛ } 20% { لون الحدود: شفاف؛ لون الحدود اليسرى: var(-fill-color)؛ لون الحدود العلوية: var(-fill-color)؛ } 30% { لون الحدود: شفاف؛ لون الحدود اليسرى: var(-fill-color)؛ لون الحدود العلوية: var(-fill-color)؛ لون الحدود لليمين: var(-fill-color)؛ } 40% { لون الحدود: شفاف؛ لون الحدود لليمين: var(-fill-color)؛ لون الحدود لليسار: var(-fill-color)؛ } 60% { لون الحدود لليمين: شفاف؛ لون الحدود لليمين: var(-fill-color): var(-fill-color)؛ } 80 % { لون الحدود: شفاف؛ لون الحدود لليمين: var(-fill-color)؛ لون الحدود للأسفل: var(-fill-color)؛ } 90 % { لون الحدود: شفاف؛ لون الحدود للأسفل: var(-fill-color)؛ } }</p></style> <script>
-    async function quickchart(key) {
-      const quickchartButtonEl =
-        document.querySelector('#' + key + ' button');
-      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-      quickchartButtonEl.classList.add('colab-df-spinner');
-      try {
-        const charts = await google.colab.kernel.invokeFunction(
-            'suggestCharts', [key], {});
-      } catch (error) {
-        console.error('Error during call to suggestCharts:', error);
-      }
-      quickchartButtonEl.classList.remove('colab-df-spinner');
-      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-    }
-    (() => {
-      let quickchartButtonEl =
-        document.querySelector('#df-3b8c700e-50cd-4b5f-8b23-64725b4af575 button');
-      quickchartButtonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-    })();
-  </script></div>
-  <div id="id_94166e57-57c1-4624-bf67-e4b68303403f">
-   <style>
-      .colab-df-generate { لون الخلفية: #E8F0FE؛ الحدود: لا شيء؛ نصف قطر الحدود: 50%؛ المؤشر: مؤشر؛ العرض: لا شيء؛ التعبئة: # 1967D2؛ الارتفاع: 32 بكسل؛ الحشو: 0 0 0 0 0؛ العرض: 32 بكسل؛ }<pre><code translate="no">  .colab-df-generate:hover {
-    background-color: #E2EBFA;
-    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: #174EA6;
-  }
-
-  [theme=dark] .colab-df-generate {
-    background-color: #3B4455;
-    fill: #D2E3FC;
-  }
-
-  [theme=dark] .colab-df-generate:hover {
-    background-color: #434B5C;
-    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-    fill: #FFFFFF;
-  }
-&lt;/style&gt;
-&lt;button class=&quot;colab-df-generate&quot; onclick=&quot;generateWithVariable('df_scores')&quot;
-        title=&quot;Generate code using this dataframe.&quot;
-        style=&quot;display:none;&quot;&gt;
-</code></pre>
-<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-width="24px">
-<path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-</svg>
-</button>
-<script>
-(()) =&gt; { const buttonEl = document.querySelector('#id_94166e57-57c1-4624-bf67-e4b68303403403f button.colab-df-generate')؛ زرEl.style.display = google.colab.kernel.kernel.accessAllowed ? 'كتلة' : 'لا شيء';</p>
-<pre><code translate="no">  buttonEl.onclick = () =&gt; {
-    google.colab.notebook.generateWithVariable('df_scores');
-  }
-  })();
-&lt;/script&gt;
-</code></pre>
-  </div>
-<pre><code translate="no">&lt;/div&gt;
-</code></pre>
-  </div>
-<p>يلخص الجدول أعلاه نتائجنا. ستختلف أرقامك الفعلية اعتمادًا على عوامل مختلفة مثل الاختلافات في جودة استجابات LLM، وأداء أقرب بحث جار في VectorDB وما إلى ذلك.</p>
-<p>في الختام، كما هو موضح في الشكل أدناه، قمنا بتقييم درجة الجودة ومدى ملاءمة RAG والإرشادات التالية لإمكانيات تطبيق LLM الخاص بك. لقد استخدمنا أداة إعادة تصنيف AIMon لتحسين الجودة الإجمالية للتطبيق ومتوسط ملاءمة المستندات المسترجعة من RAG الخاص بك.</p>
+<p>يلخص الجدول أعلاه نتائجنا. ستختلف أرقامك الفعلية اعتمادًا على عوامل مختلفة مثل الاختلافات في جودة استجابات LLM، وأداء البحث عن أقرب جار في VectorDB وما إلى ذلك.</p>
+<p>في الختام، كما هو موضح في الشكل أدناه، قمنا بتقييم درجة الجودة، ومدى ملاءمة RAG وإمكانات اتباع التعليمات في تطبيق LLM. استخدمنا أداة إعادة تصنيف AIMon لتحسين الجودة الإجمالية للتطبيق ومتوسط ملاءمة المستندات المسترجعة من RAG الخاص بك.</p>

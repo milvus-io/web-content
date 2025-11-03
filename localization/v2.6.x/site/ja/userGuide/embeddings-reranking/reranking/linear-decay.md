@@ -20,13 +20,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>線形減衰は、検索結果の絶対的なゼロポイントで終了する直線的な減少を作成します。イベントが過ぎ去るまで関連性が徐々に薄れていくイベントのカウントダウンのように、リニア減衰はアイテムが完全に消えるまで、理想的なポイントから遠ざかるにつれて予測可能で着実な関連性の減少を適用します。このアプローチは、特定の境界を超えたアイテムが結果から完全に除外されるように、明確なカットオフで一貫した減衰率を求める場合に最適です。</p>
+    </button></h1><p>線形減衰は、検索結果の絶対的なゼロポイントで終了する直線的な減少を作成します。イベントが過ぎ去るまで関連性が徐々に薄れていくイベントカウントダウンのように、リニアディケイはアイテムが完全に消えるまで、理想的なポイントから離れるにつれて予測可能で着実な関連性の減少を適用します。このアプローチは、特定の境界を超えたアイテムが結果から完全に除外されるように、明確なカットオフで一貫した減衰率を求める場合に最適です。</p>
 <p>他の減衰関数とは異なります：</p>
 <ul>
 <li><p>ガウス減衰は、徐々にゼロに近づくが決してゼロにはならないベル曲線に従います。</p></li>
 <li><p>指数関数的減衰は、最小限の関連性のロングテールを維持し、無限に広がります。</p></li>
 </ul>
-<p>線形減衰は、明確な終点を独自に作成するため、自然な境界や期限があるアプリケーションに特に効果的です。</p>
+<p>線形減衰は、明確な終点を独自に作成するため、自然な境界や期限を持つアプリケーションに特に効果的です。</p>
 <h2 id="When-to-use-linear-decay" class="common-anchor-header">リニアディケイを使用する場合<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,7 +94,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>線形減衰は、正確にゼロに達するまで一定の割合で減少する直線的なドロップを作成します。このパターンは、カウントダウンタイマー、在庫の枯渇、関連性に明確な期限がある期限アプローチなど、多くの日常的なシナリオに現れる。</p>
 <div class="alert note">
-<p>すべての時間パラメータ (<code translate="no">origin</code>,<code translate="no">offset</code>,<code translate="no">scale</code>) は、コレクションデータと同じ単位を使用する必要があります。コレクションが異なる単位(ミリ秒、マイクロ秒)でタイムスタンプを保存する場合、それに応じてすべてのパラメータを調整します。</p>
+<p>すべての時間パラメータ (<code translate="no">origin</code>,<code translate="no">offset</code>,<code translate="no">scale</code>) は、コレクションデータと同じ単位を使用する必要があります。コレクションが異なる単位(ミリ秒、マイクロ秒)でタイムスタンプを保存する場合、すべてのパラメータをそれに応じて調整します。</p>
 </div>
 <p>
   
@@ -103,7 +103,7 @@ beta: Milvus 2.6.x
 <p>上のグラフは、線形減衰がチケット販売プラットフォームのイベントリストにどのように影響するかを示しています：</p>
 <ul>
 <li><p><code translate="no">origin</code> (現在の日付）：現在の日付）：関連性が最大（1.0）になる現在。</p></li>
-<li><p><code translate="no">offset</code> (1日）：(1日): "直近のイベントウィンドウ"-翌日以内に開催されるすべてのイベントは、関連性のスコア(1.0)を維持し、非常に差し迫ったイベントがわずかな時間差でペナルティを受けないようにします。</p></li>
+<li><p><code translate="no">offset</code> (1日）：(1日): "直近のイベントウィンドウ"-翌日中に開催されるすべてのイベントは、関連性のスコア(1.0)を維持し、非常に差し迫ったイベントがわずかな時間差でペナルティを受けないようにします。</p></li>
 <li><p><code translate="no">decay</code> (0.5):このパラメータは関連性の低下率をコントロールします。</p></li>
 <li><p><code translate="no">scale</code> (10日）：関連性が減衰値まで低下する期間。10日先のイベントの関連性スコアは半分（0.5）になる。</p></li>
 </ul>
@@ -199,20 +199,18 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                       .functionType(FunctionType.RERANK)
-                       .name(<span class="hljs-string">&quot;event_relevance&quot;</span>)
-                       .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;event_date&quot;</span>))
-                       .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>)
-                       .param(<span class="hljs-string">&quot;function&quot;</span>, <span class="hljs-string">&quot;linear&quot;</span>)
-                       .param(<span class="hljs-string">&quot;origin&quot;</span>, String.valueOf(System.currentTimeMillis()/<span class="hljs-number">1000</span>))
-                       .param(<span class="hljs-string">&quot;offset&quot;</span>, String.valueOf(<span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .param(<span class="hljs-string">&quot;decay&quot;</span>, <span class="hljs-string">&quot;0.5&quot;</span>)
-                       .param(<span class="hljs-string">&quot;scale&quot;</span>, String.valueOf(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
-                       .build();
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;event_relevance&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;event_date&quot;</span>))
+        .function(<span class="hljs-string">&quot;linear&quot;</span>)
+        .origin(System.currentTimeMillis())
+        .offset(<span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .scale(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .build();
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 

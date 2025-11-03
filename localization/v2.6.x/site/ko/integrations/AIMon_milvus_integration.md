@@ -56,7 +56,7 @@ title: AIMon 및 Milvus로 LLM 애플리케이션의 검색 품질 향상
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>벡터 데이터베이스</em></h4><p>이 애플리케이션에서는 텍스트, 이미지, 동영상과 같은 대규모 비정형 데이터를 관리하고 검색하는 데 <a href="https://milvus.io/">Milvus를</a> 사용합니다.</p>
+    </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>벡터 데이터베이스</em></h4><p>이 애플리케이션에서는 텍스트, 이미지, 동영상과 같은 대규모 비정형 데이터를 관리하고 검색하기 위해 <a href="https://milvus.io/">Milvus를</a> 사용합니다.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLM 프레임워크</em></h4><p>LlamaIndex는 오픈 소스 데이터 오케스트레이션 프레임워크로, 개인 데이터와 LLM의 통합을 용이하게 하여 대규모 언어 모델(LLM) 애플리케이션 구축을 간소화하고 검색 증강 생성(RAG) 파이프라인을 통해 문맥 증강 생성 AI 애플리케이션을 가능하게 합니다. 이 튜토리얼에서는 유연성이 뛰어나고 더 나은 하위 수준 API 추상화를 제공하는 LlamaIndex를 사용하겠습니다.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM 출력 품질 평가</em></h4><p><a href="https://www.aimon.ai">AIMon은</a> 환각, 컨텍스트 품질 문제, LLM의 명령어 준수, 검색 품질 및 기타 LLM 신뢰성 작업에 대한 독점적인 판정 모델을 제공합니다. 저희는 AIMon을 사용하여 LLM 애플리케이션의 품질을 판단합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
@@ -862,7 +862,7 @@ query_engine_with_reranking = RetrieverQueryEngine.from_args(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>쿼리를 다시 실행하고 전체 품질 점수를 다시 계산하여 개선 사항이 있는지 확인해 보겠습니다.</p>
-<p><strong>AIMon의 순위 변경은 실제로 응답을 생성하기 위해 LLM으로 전송해야 하는 컨텍스트 문서의 양을 줄여 네트워크 I/O 및 LLM 토큰 처리 비용(비용 및 시간) 측면에서 작업을 효율적으로 만들기 때문에 추가적인 지연 시간 오버헤드를 추가하지 않습니다.</strong></p>
+<p><strong>AIMon의 순위 재조정은 실제로 응답을 생성하기 위해 LLM으로 전송해야 하는 컨텍스트 문서의 양을 줄여 네트워크 I/O 및 LLM 토큰 처리 비용(비용 및 시간) 측면에서 작업을 효율적으로 만들기 때문에 추가적인 지연 시간 오버헤드를 추가하지 않습니다.</strong></p>
 <p><strong>참고: 이 단계는 2분 정도 소요됩니다.</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -1034,150 +1034,5 @@ df_scores
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-c43e3124-8331-40e6-97e4-b2d026a0ed70')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-<path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-</svg>
-</button></p>
-  
-   <style>.colab-df-container { display:flex; gap: 12px; }<pre><code translate="no">.colab-df-convert {
-  background-color: #E8F0FE;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-  fill: #1967D2;
-  height: 32px;
-  padding: 0 0 0 0;
-  width: 32px;
-}
-
-.colab-df-convert:hover {
-  background-color: #E2EBFA;
-  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-  fill: #174EA6;
-}
-
-.colab-df-buttons div {
-  margin-bottom: 4px;
-}
-
-[theme=dark] .colab-df-convert {
-  background-color: #3B4455;
-  fill: #D2E3FC;
-}
-
-[theme=dark] .colab-df-convert:hover {
-  background-color: #434B5C;
-  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-  fill: #FFFFFF;
-}
-</code></pre></style><pre><code translate="no">&lt;script&gt;
-  const buttonEl =
-    document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70 button.colab-df-convert');
-  buttonEl.style.display =
-    google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-  async function convertToInteractive(key) {
-    const element = document.querySelector('#df-c43e3124-8331-40e6-97e4-b2d026a0ed70');
-    const dataTable =
-      await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                [key], {});
-    if (!dataTable) return;
-
-    const docLinkHtml = 'Like what you see? Visit the ' +
-      '&lt;a target=&quot;_blank&quot; href=https://colab.research.google.com/notebooks/data_table.ipynb&gt;data table notebook&lt;/a&gt;'
-      + ' to learn more about interactive tables.';
-    element.innerHTML = '';
-    dataTable['output_type'] = 'display_data';
-    await google.colab.output.renderOutput(dataTable, element);
-    const docLink = document.createElement('div');
-    docLink.innerHTML = docLinkHtml;
-    element.appendChild(docLink);
-  }
-&lt;/script&gt;
-</code></pre>
-  </div>
-<div id="df-3b8c700e-50cd-4b5f-8b23-64725b4af575">
-  <button class="colab-df-quickchart" onclick="quickchart('df-3b8c700e-50cd-4b5f-8b23-64725b4af575')"
-            title="Suggest charts"
-            style="display:none;">
-<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-width="24px">
-<g>
-<path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-</g>
-</svg></p>
-  </button>
-<style>
-  .colab-df-quickchart { --bg-color: #E8F0FE; --fill-color: #1967D2; --hover-bg-color: #E2EBFA; --hover-fill-color: #174EA6; --disabled-fill-color: #AAA; --disabled-bg-color: #DDD; }<p>[theme=dark] .colab-df-quickchart { -bg-color: #3B4455; -fill-color: #D2E3FC; -hover-bg-color: #434B5C; -호버-채우기-색: #FFFFFF; -disabled-bg-color: #3B4455; -disabled-fill-color:</p><p>#666; }</p><p>.colab-df-quickchart { background-color: var(-bg-color); border: none; border-radius: 50%; cursor: pointer; display: none; fill: var(-fill-color); height: 32px; padding:</p><p> 0; width: 32px; }</p><p>.colab-df-quickchart:hover { background-color: var(-hover-bg-color); box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15); fill: var(-button-hover-fill-color); }</p><p>.colab-df-quickchart-complete:disabled, .colab-df-quickchart-complete:disabled:hover { background-color: var(-disabled-bg-color); fill: var(-disabled-fill-color); box-shadow: none; }</p><p>.colab-df-spinner { border:</p><p> 2px solid var(-fill-color); 테두리-색: 투명; 테두리-하단-색: var(</p><p>-fill-color</p><p>); 애니메이션: spin 1s steps(1) 무한; }</p><p>@keyframes spin { 0% { border-color: 투명; 테두리-하단-색: var(-fill-color); 테두리-left-color: var(-fill-color); } 20% { 테두리-색: 투명; 테두리-왼쪽-색: var(-fill-color); 테두리-위-색: var(-fill-color); } 30% { 테두리-색: 투명; 테두리-왼쪽-색: var(-fill-color); 테두리-위-색: var(-fill-color); border-right-color: var(-fill-color); } 40% { border-color: transparent; border-right-color: var(-fill-color); border-top-color: var(-fill-color); } 60% { border-color: transparent; border-right-color: var(-fill-color); } 80% { border-color: transparent; border-right-color: var(-fill-color); border-bottom-color: var(-fill-color); } 90% { border-color: transparent; border-bottom-color: var(-fill-color); } }</p></style> <script>
-    async function quickchart(key) {
-      const quickchartButtonEl =
-        document.querySelector('#' + key + ' button');
-      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-      quickchartButtonEl.classList.add('colab-df-spinner');
-      try {
-        const charts = await google.colab.kernel.invokeFunction(
-            'suggestCharts', [key], {});
-      } catch (error) {
-        console.error('Error during call to suggestCharts:', error);
-      }
-      quickchartButtonEl.classList.remove('colab-df-spinner');
-      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-    }
-    (() => {
-      let quickchartButtonEl =
-        document.querySelector('#df-3b8c700e-50cd-4b5f-8b23-64725b4af575 button');
-      quickchartButtonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-    })();
-  </script></div>
-  <div id="id_94166e57-57c1-4624-bf67-e4b68303403f">
-   <style>
-      .colab-df-generate { background-color: #E8F0FE; 테두리: 없음; 테두리-반경: 50%; 커서: 포인터; 표시: 없음; 채우기: #1967D2; 높이: 32px; 패딩: 0 0 0 0; 너비: 32px; }<pre><code translate="no">  .colab-df-generate:hover {
-    background-color: #E2EBFA;
-    box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: #174EA6;
-  }
-
-  [theme=dark] .colab-df-generate {
-    background-color: #3B4455;
-    fill: #D2E3FC;
-  }
-
-  [theme=dark] .colab-df-generate:hover {
-    background-color: #434B5C;
-    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-    fill: #FFFFFF;
-  }
-&lt;/style&gt;
-&lt;button class=&quot;colab-df-generate&quot; onclick=&quot;generateWithVariable('df_scores')&quot;
-        title=&quot;Generate code using this dataframe.&quot;
-        style=&quot;display:none;&quot;&gt;
-</code></pre>
-<p><svg translate="no" xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-width="24px">
-<path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-</svg>
-</button>
-<script>
-(() =&gt; { const buttonEl = document.querySelector('#id_94166e57-57c1-4624-bf67-e4b68303403f button.colab-df-generate'); buttonEl.style.display = google.colab.kernel.accessAllowed ? 'block' : 'none';</p>
-<pre><code translate="no">  buttonEl.onclick = () =&gt; {
-    google.colab.notebook.generateWithVariable('df_scores');
-  }
-  })();
-&lt;/script&gt;
-</code></pre>
-  </div>
-<pre><code translate="no">&lt;/div&gt;
-</code></pre>
-  </div>
-<p>위의 표는 결과를 요약한 것입니다. 실제 수치는 LLM 응답의 품질 변화, 벡터DB에서 가장 가까운 이웃 검색의 성능 등 다양한 요인에 따라 달라질 수 있습니다.</p>
+<p>위 표는 결과를 요약한 것입니다. 실제 수치는 LLM 응답의 품질 변화, 벡터DB에서 가장 가까운 이웃 검색의 성능 등 다양한 요인에 따라 달라질 수 있습니다.</p>
 <p>결론적으로, 아래 그림에서 볼 수 있듯이 품질 점수, RAG 관련성 및 LLM 애플리케이션의 명령어 추종 기능을 평가했습니다. 애플리케이션의 전반적인 품질과 RAG에서 검색된 문서의 평균 관련성을 개선하기 위해 AIMon의 리랭커를 사용했습니다.</p>
