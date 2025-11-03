@@ -29,7 +29,7 @@ getPersistentSegmentInfo(GetPersistentSegmentInfoReq.builder()
 
 A **GetPersistentSegmentInfoResp** object that contains detailed information about the persisted segments in the specified collection, including the number of entities in each of these segments. The object has the following parameters:
 
-- **segmentInfos** (*List\<PersistentSegmentInfo>*) -
+- **segmentInfos** (*List&lt;PersistentSegmentInfo&gt;*) -
 
     A list of segments, each represented by a **PersistentSegmentInfo** object, which has the following fields
 

@@ -11,6 +11,7 @@ public DescribeRoleResp describeRole(DescribeRoleReq request)
 ```java
 describeRole(DescribeRoleReq.builder()
     .roleName(String roleName)
+    .dbName(String dbName)
     .build()
 )
 ```
@@ -20,6 +21,10 @@ describeRole(DescribeRoleReq.builder()
 - `roleName(String roleName)`
 
     The name of the role to describe.
+
+- `dbName(String dbName)`
+
+    The name of the database associated with the role.
 
 **RETURN Type:**
 

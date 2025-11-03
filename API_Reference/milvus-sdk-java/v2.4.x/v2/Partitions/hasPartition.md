@@ -43,7 +43,19 @@ A boolean value indicating whether the specified partition exists.
 ## Example
 
 ```java
-// check is partition "test_partition" exists in collection
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.partition.request.HasPartitionReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Check is partition "test_partition" exists in collection
 HasPartitionReq hasPartitionReq = HasPartitionReq.builder()
         .collectionName("test")
         .partitionName("test_partition")

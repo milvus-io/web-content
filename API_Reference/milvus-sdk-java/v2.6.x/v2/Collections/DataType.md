@@ -48,6 +48,14 @@ This is an enumeration that provides the following constants.
 
     Sets the data type to **JSON**.
 
+- Geometry(24)
+
+    Sets the data type to **Geometry**.
+
+- Timestamptz(26)
+
+    Sets the data type to **Timestamptz**.
+
 - BinaryVector(100)
 
     Sets the data type to **Binary Vector**.
@@ -72,3 +80,6 @@ This is an enumeration that provides the following constants.
 
     Sets the data type to **Int8 Vector**.
 
+- Struct(201)
+
+    Sets the data type to **Struct**, which should be the element type of an **Array** field.

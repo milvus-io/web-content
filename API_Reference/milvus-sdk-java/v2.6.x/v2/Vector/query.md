@@ -19,6 +19,8 @@ query(QueryReq.builder()
     .consistencyLevel(ConsistencyLevel consistencyLevel)
     .offset(long offset)
     .limit(long limit)
+    .ignoreGrowing(boolean ignoreGrowing)
+    .queryParams(Map<String, Object> queryParams)
     .build()
 )
 ```
@@ -53,7 +55,7 @@ query(QueryReq.builder()
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
 
     The consistency level of the target collection.
 
@@ -85,6 +87,22 @@ query(QueryReq.builder()
 
     The sum of this value and `offset` should be less than 16,384. 
 
+- `ignoreGrowing(boolean ignoreGrowing)`
+
+    Whether to ignore growing segments during similarity searches.
+
+- `queryParams(Map<String, Object> queryParams)`
+
+    The parameter settings specific to this operation. Possible values are:
+
+    - **timezone** (String)
+
+        The timezone  of this operation. For example, `America/Chicago`.
+
+    - **time_fields** (String)
+
+        The time format that is concatenated with the information extracted from the Timestamptz field in the output fields, such as `year, month, day`.
+
 **RETURN TYPE:**
 
 *QueryResp*
@@ -95,9 +113,17 @@ A **QueryResp object representing specific query results with the specified outp
 
 **PARAMETERS:**
 
-- queryResults(List\<QueryResp.QueryResult\>)
+- queryResults(List\&lt;QueryResp.QueryResult\&gt;)
 
-A list of QueryResult objects with each QueryResult representing a queried entity.
+    A list of QueryResult objects with each QueryResult representing a queried entity. The members of QueryResult:
+
+    - **entity** (*Map\&lt;String,Object\&gt;*)
+
+        A map that contains key-value pairs of field names and their values.
+
+- **sessionTs** (*long*) -
+
+    Whether the **Eventually** consistency level applies.
 
 <div class="admonition note">
 

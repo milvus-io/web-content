@@ -89,18 +89,31 @@ An **UpsertResp** object that contains information about the number of inserted 
 ## Example
 
 ```java
-// upsert operation
-JsonObject jsonObject = new JsonObject();
+import com.google.gson.JsonObject;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.UpsertReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Upsert operation
+JsonObject row = new JsonObject();
 List<Float> vectorList = new ArrayList<>();
 vectorList.add(2.0f);
 vectorList.add(3.0f);
-jsonObject.add("vector", gson.toJsonTree(vectorList));
-jsonObject.addProperty("id", 0L);
+row.add("vector", gson.toJsonTree(vectorList));
+row.addProperty("id", 0L);
+
 UpsertReq upsertReq = UpsertReq.builder()
         .collectionName("test")
-        .data(Collections.singletonList(jsonObject))
+        .data(Collections.singletonList(row))
         .build();
-
 client.upsert(upsertReq);
 ```
 

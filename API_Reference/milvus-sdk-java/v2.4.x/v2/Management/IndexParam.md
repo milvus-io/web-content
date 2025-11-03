@@ -28,11 +28,11 @@ IndexParam.builder()
 
     The name of the index field generated after this **IndexParam** object has been applied.
 
-- `indexType(IndexParam.IndexType indexType)`
+- `indexType(IndexParam.[IndexType](IndexType.md) indexType)`
 
     The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
 
-- `metricType(IndexParam.MetricType metricType)`
+- `metricType(IndexParam.[MetricType](MetricType.md) metricType)`
 
     The distance metric to use for the index. Possible values are **L2**, **IP**, **COSINE**, **HAMMING**, and **JACCARD**.
 
@@ -57,6 +57,8 @@ An **IndexParam** object.
 ## Example
 
 ```java
+import io.milvus.v2.common.IndexParam;
+
 // define index param for field "vector"
 IndexParam indexParam = IndexParam.builder()
         .metricType(IndexParam.MetricType.L2)

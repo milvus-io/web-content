@@ -10,12 +10,22 @@ public DescribeAliasResp describeAlias(DescribeAliasReq request)
 
 ```java
 describeAlias(DescribeAliasReq.builder()
+    .databaseName(String databaseName)
+    .collection(String collectionName)
     .alias(String alias)
     .build()
 )
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
+
+- `collectionName(String collectionName)`
+
+    The name of the target collection of this operation.
 
 - `alias(String alias)`
 
@@ -55,6 +65,8 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Describe alias
 DescribeAliasReq describeAliasReq = DescribeAliasReq.builder()
+        .databaseName("my_database")
+        .collectionName("my_collection")
         .alias("test_alias")
         .build();
 DescribeAliasResp describeAliasResp = client.describeAlias(describeAliasReq);

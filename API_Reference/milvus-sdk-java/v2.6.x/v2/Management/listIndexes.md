@@ -10,6 +10,7 @@ public List<String> listIndexes(ListIndexesReq request)
 
 ```java
 listIndexes(ListIndexesReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .fieldName(String fieldName)
     .build()
@@ -17,6 +18,10 @@ listIndexes(ListIndexesReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 
@@ -28,7 +33,7 @@ listIndexes(ListIndexesReq.builder()
 
 **RETURNS:**
 
-*List\<String>*
+*List&lt;String&gt;*
 
 **EXCEPTIONS:**
 

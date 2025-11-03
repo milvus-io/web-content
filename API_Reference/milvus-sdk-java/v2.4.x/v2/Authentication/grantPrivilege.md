@@ -61,11 +61,24 @@ grantPrivilege(GrantPrivilegeReq.builder()
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.rbac.request.GrantPrivilegeReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Grant privileges
 GrantPrivilegeReq grantPrivilegeReq = GrantPrivilegeReq.builder()
         .roleName("db_rw")
-        .objectName("")
-        .objectType("")
-        .privilege("")
+        .objectType("User")
+        .objectName("user_1")
+        .privilege("SelectUser")
         .build();
 client.grantPrivilege(grantPrivilegeReq);
 ```

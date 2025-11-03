@@ -11,7 +11,6 @@ public void releaseCollection(ReleaseCollectionReq request)
 ```java
 releaseCollection(ReleaseCollectionReq.builder()
     .collectionName(String collectionName)
-    .async(Boolean async)
     .timeout(Long timeout)
     .build()
 )
@@ -22,12 +21,6 @@ releaseCollection(ReleaseCollectionReq.builder()
 - `collectionName(String collectionName)`
 
     The name of a collection.
-
-- `async(Boolean async)`
-
-    Whether this operation is asynchronous.
-
-    The value defaults to `Boolean.True`, indicating immediate return while the process may still run in the background.
 
 - `timeout(Long timeout)`
 

@@ -11,7 +11,7 @@ public Void refreshLoad(RefreshLoadReq request)
 ```java
 refreshLoad(RefreshLoadReq.builder()
     .collectionName(String collectionName)
-    .async(Boolean async)
+    .sync(Boolean sync)
     .timeout(Long timeout)
     .build()
 )
@@ -23,11 +23,11 @@ refreshLoad(RefreshLoadReq.builder()
 
     The name of a collection.
 
-- `async(Boolean async)`
+- `sync(Boolean sync)`
 
-    Whether this operation is asynchronous.
+    Whether this operation is synchronous.
 
-    The value defaults to `Boolean.True`, indicating immediate return while the process may still run in the background.
+    The value defaults to `Boolean.True`, indicating that the operation will return only after the collection is fully loaded.
 
 - `timeout(Long timeout)`
 

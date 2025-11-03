@@ -9,8 +9,22 @@ public ListAliasResp listAliases()
 ## Request Syntax
 
 ```java
-MilvusClientV2.listAliases()
+MilvusClientV2.listAliases(ListAliasesReq.builder()
+    .databaseName(String databaseName)
+    .collectionName(String collectionName)
+    .build();
+)
 ```
+
+**BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
+
+- `collectionName(String collectionName)`
+
+    The name of the target collection of this operation.
 
 **RETURN TYPE:**
 
@@ -22,7 +36,7 @@ A **ListAliasResp** object containing a list of aliases for the specified collec
 
 **PARAMETERS:**
 
-- **alias** (*List\<String\>*)
+- **alias** (*List\&lt;String\&gt;*)
 
     A list of strings containing the aliases.
 
@@ -54,7 +68,8 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. List aliases
 ListAliasesReq listAliasesReq = ListAliasesReq.builder()
-        .collectionName("test")
+        .databaseName("my_database")
+        .collectionName("my_collection")
         .build();
 ListAliasResp listAliasResp = client.listAliases(listAliasesReq);
 ```

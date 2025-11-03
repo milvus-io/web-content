@@ -31,8 +31,24 @@ MilvusClientV2(ConnectConfig connectConfig);
 ConnectConfig.builder()
     .uri(String uri)
     .token(String token)
-    //.username(String userName)
-    //.password(String password)
+    .username(String userName)
+    .password(String password)
+    .dbName(String dbName)
+    .connectTimeoutMs(long connectTimeoutMs)
+    .keepAliveTimeMs(long keepAliveTimeMs)
+    .keepAliveTimeoutMs(long keepAliveTimeoutMs)
+    .keepAliveWithoutCalls(Boolean keeAliveWithoutCalls)
+    .rpcDeadlineMs(long rpcDeadlineMs)
+    .clientKeyPath(String clientKeyPath)
+    .clientPemPath(String clientPemPath)
+    .caPemPath(String caPemPath)
+    .serverPemPath(String serverPemPath)
+    .serverName(String serverName)
+    .proxyAddress(String proxyAddress)
+    .secure(Boolean secure)
+    .idleTimeoutMs(long idleTimeoutMs)
+    .sslContext(SSLContext sslContext)
+    .clientRequestId(ThreadLocal<String> clientRequestId)
     .build();
 ```
 
@@ -141,6 +157,12 @@ ConnectConfig.builder()
 - `idleTimeoutMs(long idleTimeout)`
 
     The idle timeout for a connection.
+
+- `.clientRequestId(ThreadLocal<String> clientRequestId)`
+
+    The ID of a client request. You can use this parameter to maintain a map of threads, with each thread mapping to a specific request ID. 
+
+    The request ID will be passed to the server, so that you can learn about which client calls this interface from the access logs.
 
 **PUBLIC METHODS:**
 

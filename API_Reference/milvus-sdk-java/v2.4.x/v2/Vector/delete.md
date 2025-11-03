@@ -63,11 +63,24 @@ A **DeleteResp** object contains the number of deleted entities.
 ## Example
 
 ```java
-// delete entities with filter "id > 10"
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.DeleteReq;
+import io.milvus.v2.service.vector.response.DeleteResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Delete entities with filter "id > 10"
 DeleteReq deleteReq = DeleteReq.builder()
         .collectionName("test")
         .filter("id > 10")
         .build();
-client.delete(deleteReq);
+DeleteResp deleteResp = client.delete(deleteReq);
 ```
 

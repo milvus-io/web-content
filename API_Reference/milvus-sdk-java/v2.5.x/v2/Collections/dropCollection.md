@@ -11,7 +11,6 @@ public void dropCollection(DropCollectionReq request)
 ```java
 dropCollection(DropCollectionReq.builder()
     .collectionName(String collectionName)
-    .async(Boolean async)
     .timeout(Long timeout)
     .build()
 )
@@ -22,12 +21,6 @@ dropCollection(DropCollectionReq.builder()
 - `collectionName(String collectionName)`
 
     The name of an existing collection.
-
-- `async(Boolean async)`
-
-    Whether this operation is asynchronous.
-
-    The value defaults to `Boolean.True`, indicating immediate return while the process may still run in the background.
 
 - `timeout(Long timeout)`
 

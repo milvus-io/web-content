@@ -10,12 +10,17 @@ public DescribeCollectionResp describeCollection(DescribeCollectionReq request)
 
 ```java
 describeCollection(DescribeCollectionReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .build()
 )
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 
@@ -45,11 +50,11 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The number of partitions in the current collection.
 
-- **fieldNames** (*List\<String\>*)
+- **fieldNames** (*List\&lt;String\&gt;*)
 
     A list of fields in the current collection.
 
-- **vectorFieldName** (*List\<String\>*)
+- **vectorFieldName** (*List\&lt;String\&gt;*)
 
     The name of the vector field.
 
@@ -59,19 +64,27 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **enableDynamicField** (*Boolean*)
 
-    Whether to use the reserved JSON field **$meta** to save non-schema-defined fields and their values as key-value pairs.
+    Whether to use the reserved JSON field **&#36;meta** to save non-schema-defined fields and their values as key-value pairs.
 
 - **autoID** (*Boolean*)
 
     Whether Milvus automatically generates the primary key for the collection.
 
-- **collectionSchema** (CreateCollectionReq.CollectionSchema)
+- **collectionSchema** (*CreateCollectionReq.CollectionSchema*)
 
     The scheme of the collection.
 
-- **createTime** (*long*)
+- **createTime** (*Long*)
 
     The time when the collection was created.
+
+- **consistencyLevel** (*ConsistencyLevel*) -
+
+    The consistency level of the collection.
+
+- **shardsNum** (*Integer*) -
+
+    The number of shards in the collection.
 
 **EXCEPTIONS:**
 
@@ -82,11 +95,23 @@ A **DescribeCollectionResp** object that contains detailed information about the
 ## Example
 
 ```java
-// get the collection detail
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.DescribeCollectionReq;
+import io.milvus.v2.service.collection.response.DescribeCollectionResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Get the collection detail
 DescribeCollectionReq describeCollectionReq = DescribeCollectionReq.builder()
         .collectionName("test")
         .build();
 DescribeCollectionResp describeCollectionResp = client.describeCollection(describeCollectionReq);
-/*DescribeCollectionResp(collectionName=test, description=test, numOfPartitions=1, fieldNames=[id, vector], vectorFieldName=[vector], primaryFieldName=id, enableDynamicField=false, autoID=false, collectionSchema=CreateCollectionReq.CollectionSchema(fieldSchemaList=[CreateCollectionReq.FieldSchema(name=id, description=, dataType=Int64, maxLength=65535, dimension=null, isPrimaryKey=true, isPartitionKey=false, autoID=false, elementType=null, maxCapacity=null), CreateCollectionReq.FieldSchema(name=vector, description=, dataType=FloatVector, maxLength=65535, dimension=2, isPrimaryKey=false, isPartitionKey=false, autoID=false, elementType=null, maxCapacity=null)]), createTime=0)*/
 
 ```

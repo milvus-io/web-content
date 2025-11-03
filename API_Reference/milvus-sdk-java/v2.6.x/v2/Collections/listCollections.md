@@ -22,9 +22,21 @@ A **ListCollectionsResp** object containing a list of collection names. If there
 
 **PARAMETERS:**
 
-- **collectionNames** (*List\<String\>*)
+- **collectionNames** (*List&lt;String&gt;*)
 
     A list of strings containing the names of all existing collections.
+
+- **collectionInfos** (*List&lt;CollectionInfo&gt;*)
+
+    A list of **CollectionInfo** objects. A **CollectionInfo** object has the following fields:
+
+    - **collectionName** (*String*)
+
+        The name of a collection.
+
+    - **shardNum** (*Integer*)
+
+        The number of shards in the above collection.
 
 **EXCEPTIONS:**
 

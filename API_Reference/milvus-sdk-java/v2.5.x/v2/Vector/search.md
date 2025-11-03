@@ -10,6 +10,7 @@ public SearchResp search(SearchReq request)
 
 ```java
 search(SearchReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .annsField(String annsField)
@@ -34,13 +35,17 @@ search(SearchReq.builder()
 
 **BUILDER METHODS:**
 
+- `databaseName(String databaseName)`
+
+    The name of an existing database.
+
 - `collectionName(String collectionName)`
 
-    The name of an existing collection.
+    The name of an existing collection in the above-specified database.
 
 - `partitionNames(List<String> partitionNames)`
 
-    A list of partition names.
+    A list of partition names in the above-specified collection.
 
 - `annsField(String annsField)`
 
@@ -90,12 +95,12 @@ search(SearchReq.builder()
        </tr>
        <tr>
          <td><p>FloatVec</p></td>
-         <td><p>FloatVec(List\<Float> data) FloatVec(float[] data)</p></td>
+         <td><p>FloatVec(List&lt;Float&gt; data)</p><p>FloatVec(float&#91;&#93; data)</p></td>
          <td><p>For DataType.FloatVector type field.</p></td>
        </tr>
        <tr>
          <td><p>BinaryVec</p></td>
-         <td><p>BinaryVec(ByteBuffer data) BinaryVec(byte[] data)</p></td>
+         <td><p>BinaryVec(ByteBuffer data)</p><p>BinaryVec(byte&#91;&#93; data)</p></td>
          <td><p>For DataType.BinaryVector type field.</p></td>
        </tr>
     </table>
@@ -172,7 +177,7 @@ search(SearchReq.builder()
 
     </div>
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
 
     The consistency level of the target collection.
 
@@ -214,11 +219,49 @@ A **SearchResp object representing specific search results with the specified ou
 
 **PARAMETERS:**
 
-- searchResults(List\<List\<SearchResult\>>)
+- searchResults(List\&lt;List\&lt;SearchResult\&gt;\&gt;)
 
-      A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each List\<SearchResult\> is a topK result of a query vector. Each SearchResult represents an entity hit by the search.
+    A list of *SearchResp*.*SearchResult*, the size of searchResults equals the number of query vectors of the search. Each List\&lt;SearchResult\&gt; is a topK result of a query vector. Each SearchResult represents an entity hit by the search. Member of *SearchResult*:
 
-      Member of SearchResult:
+    - **entity** (*Map\&lt;String, Object\&gt;*)
+
+        A map that stores the specific fields associated with the search result.
+
+    - **score** (*Float*)
+
+        The relevant score of the search result. The score indicates how closely the vector associated with the search result matches the query vector.
+
+        <div class="admonition note">
+
+        <p><b>notes</b></p>
+
+        <p>In Java SDK v2.4.1 or earlier versions, this method is named <code>distance()</code>. Since Java SDK v2.4.2, this method is renamed as <code>score()</code>.</p>
+
+        </div>
+
+    - **id** (Object)
+
+        The ID of the search result, dataType is either string or int64 
+
+        <div class="admonition note">
+
+        <p><b>notes</b></p>
+
+        <p>If the number of returned entities is less than expected, duplicate entities may exist in your collection.</p>
+
+        </div>
+
+    - **primaryKey** (*String*) -
+
+        The name of the primary key.
+
+- **sessionTs** (*long*) -
+
+    Whether the **Eventually** consistency level applies.
+
+- **recalls** (*List&lt;Float&gt;*) -
+
+    A list of recall rates corresponding to the search results that are returned.
 
 **EXCEPTIONS:**
 

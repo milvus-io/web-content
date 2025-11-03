@@ -10,23 +10,19 @@ public DescribeIndexResp describeIndex(DescribeIndexReq request)
 
 ```java
 describeIndex(DescribeIndexReq.builder()
-    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .fieldName(String fieldName)
     .indexName(String indexName)
+    .timestamp(Long timestamp)
     .build()
 )
 ```
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)`
-
-    The name of an existing database.
-
 - `collectionName(String collectionName)`
 
-    The name of an existing collection in the above-specified collection.
+    The name of an existing collection.
 
     Setting this to a non-existing collection results in **MilvusException**.
 
@@ -39,6 +35,10 @@ describeIndex(DescribeIndexReq.builder()
     The name of the index to describe.
 
     Setting this to a non-existing collection results in **MilvusException**.
+
+- `timestamp(Long timestamp)`
+
+    A timestamp, the segments generated before which will be checked before this operation returns. The value defaults to `0L`, indicating that all segments generated till now will be checked.
 
 **RETURN TYPE:** 
 

@@ -51,10 +51,21 @@ A Boolean value that indicates the status of the specified collection or partiti
 ## Example
 
 ```java
-// get load state for collection "test"
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.GetLoadStateReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Get load state for collection "test"
 GetLoadStateReq getLoadStateReq = GetLoadStateReq.builder()
         .collectionName("test")
         .build();
 Boolean resp = client.getLoadState(getLoadStateReq);
-// return true or false
 ```

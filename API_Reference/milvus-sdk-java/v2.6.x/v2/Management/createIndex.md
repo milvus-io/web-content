@@ -12,6 +12,7 @@ public void createIndex(CreateIndexReq request)
 createIndex(CreateIndexReq.builder()
     .collectionName(String collectionName)
     .indexParams(List<IndexParam> indexParams)
+    .sync(Boolean sync)
     .build()
 )
 ```
@@ -22,9 +23,13 @@ createIndex(CreateIndexReq.builder()
 
     The name of an existing collection.
 
-- `indexParams(List<IndexParam> indexParams)`
+- `indexParams(List<[IndexParam](IndexParam.md)> indexParams)`
 
     A list of **IndexParam** objects.
+
+- `sync(Boolean sync)`
+
+    Whether the current operation is synchronous. The default value is `True`.
 
 **RETURNS:**
 

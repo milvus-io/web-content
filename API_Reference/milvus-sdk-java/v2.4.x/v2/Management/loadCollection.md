@@ -20,8 +20,12 @@ public void loadCollection(LoadCollectionReq request)
 loadCollection(LoadCollectionReq.builder()
     .collectionName(String collectionName)
     .numReplicas(Integer numReplicas)
-    .async(Boolean async)
+    .sync(Boolean sync)
     .timeout(Long timeout)
+    .refresh(Boolean refresh)
+    .loadFields(List<String> loadFields)
+    .skipLoadDynamicField(Boolean skipLoadDynamicField)
+    .resourceGroups(List<String> resourceGroups)
     .build()
 )
 ```
@@ -38,17 +42,33 @@ loadCollection(LoadCollectionReq.builder()
 
     The value defaults to **1**, indicating that one replica is to be created upon collection load.
 
-- `async(Boolean async)`
+- `sync(Boolean sync)`
 
-    Whether this operation is asynchronous.
-
-    The value defaults to `Boolean.True`, indicating immediate return while the process may still run in the background.
+    Whether the current operation is synchronous. The value defaults to `True`, indicating that the current operation is synchronous.
 
 - `timeout(Long timeout)`
 
     The timeout duration of the process. The process terminates after the specified duration expires.
 
     The value defaults to `60000L`, indicating the timeout duration is one minute.
+
+- `refresh(Boolean refresh)`
+
+    Whether to refresh after load.
+
+- `loadFields(List<String> loadFields)`
+
+    The names of the fields to load.
+
+    If this parameter is left unspecified, Milvus loads all vector field indexes plus all scalar field data into memory. Setting this parameter makes Milvus load the data of the specified fields into memory, reducing memory usage and improving search performance.
+
+- `skipLoadDynamicField(Boolean skipLoadDynamicField)`
+
+    Setting this to true makes Milvus skip loading the dynamic field, making it unavailable for filtering conditions and output fields for searches and queries.
+
+- `resourceGroups(List<String> resourceGroups)`
+
+    The target resource groups of this operation.
 
 **RETURNS:**
 
@@ -63,7 +83,19 @@ loadCollection(LoadCollectionReq.builder()
 ## Example
 
 ```java
-// load collection "test"
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Load collection "test"
 LoadCollectionReq loadCollectionReq = LoadCollectionReq.builder()
         .collectionName("test")
         .build();

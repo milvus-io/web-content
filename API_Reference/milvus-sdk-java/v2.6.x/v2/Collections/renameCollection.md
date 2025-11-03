@@ -10,6 +10,7 @@ public void renameCollection(RenameCollectionReq request)
 
 ```java
 renameCollection(RenameCollectionReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .newCollectionName(String newCollectionName)
     .build()
@@ -17,6 +18,10 @@ renameCollection(RenameCollectionReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 

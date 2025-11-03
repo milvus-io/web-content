@@ -10,6 +10,7 @@ public GetResp get(GetReq request)
 
 ```java
 get(GetReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionName(String partitionName)
     .ids(List<Object> ids)
@@ -19,6 +20,10 @@ get(GetReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 
@@ -46,11 +51,11 @@ A **GetResp** object representing one or more queried entities.
 
 **PARAMETERS:**
 
-- **getResults** (*List\<QueryResp.QueryResult\>*)
+- **getResults** (*List\&lt;QueryResp.QueryResult\&gt;*)
 
     A list of **QueryResp.QueryResult** objects.
 
-- **fields** (*Map\<String,Object\>*)
+- **fields** (*Map\&lt;String,Object\&gt;*)
 
     A map that contains key-value pairs of field names and their values.
 

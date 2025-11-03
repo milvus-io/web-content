@@ -42,7 +42,7 @@ queryIterator(QueryIteratorReq.builder()
 
 A value to define the number of entities returned per batch.
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
 
     The consistency level of the target collection.
 
@@ -84,7 +84,7 @@ A *QueryIterator* object to iterate data.
 
 **METHODS:**
 
-- List\<QueryResultsWrapper.RowRecord> next()
+- List&lt;QueryResultsWrapper.RowRecord&gt; next()
 
 Return a batch of results.
 

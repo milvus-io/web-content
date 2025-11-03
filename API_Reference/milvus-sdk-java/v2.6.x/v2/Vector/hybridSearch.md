@@ -14,11 +14,16 @@ hybridSearch(HybridSearchReq.builder()
     .databasename(String databaseName)
     .partitionNames(List<String> partitionNames)
     .searchRequests(List<AnnSearchReq> searchRequests)
-    .ranker(BaseRanker ranker)
-    .topK(int topK)
+    .ranker(CreateCollectionReq.Function ranker)
+    .limit(long limit)
     .outFields(List<String> outFields)
+    .offset(long offset)
     .roundDecimal(int roundDecimal)
     .consistencyLevel(ConsistencyLevel consistencyLevel)
+    .groupByFieldName(String fieldName)
+    .groupSize(Integer groupSize)
+    .strictGroupSize(Boolean strictGroupSize)
+    .functionScore(FunctionScore functionScore)
     .build()
 )
 ```
@@ -61,22 +66,22 @@ hybridSearch(HybridSearchReq.builder()
                </tr>
                <tr>
                  <td><p><code>FloatVec</code></p></td>
-                 <td><p><code>FloatVec(List&lt;Float&gt; data)</code></p><p><code>FloatVec(float[] data)</code></p></td>
+                 <td><p><code>FloatVec(List&lt;Float&gt; data)</code></p><p><code>FloatVec(float&#91;&#93; data)</code></p></td>
                  <td><p>For <code>DataType.FloatVector</code> type field.</p></td>
                </tr>
                <tr>
                  <td><p><code>BinaryVec</code></p></td>
-                 <td><p><code>BinaryVec(ByteBuffer data)</code></p><p><code>BinaryVec(byte[] data)</code></p></td>
+                 <td><p><code>BinaryVec(ByteBuffer data)</code></p><p><code>BinaryVec(byte&#91;&#93; data)</code></p></td>
                  <td><p>For <code>DataType.BinaryVector</code> type field.</p></td>
                </tr>
                <tr>
                  <td><p><code>Float16Vec</code></p></td>
-                 <td><p><code>Float16Vec(ByteBuffer data)</code></p><p><code>Float16Vec(byte[] data)</code></p></td>
+                 <td><p><code>Float16Vec(ByteBuffer data)</code></p><p><code>Float16Vec(byte&#91;&#93; data)</code></p></td>
                  <td><p>For <code>DataType.Float16Vector</code> type field.</p></td>
                </tr>
                <tr>
                  <td><p><code>BFloat16Vec</code></p></td>
-                 <td><p><code>BFloat16Vec(ByteBuffer data)</code></p><p><code>BFloat16Vec(byte[] data)</code></p></td>
+                 <td><p><code>BFloat16Vec(ByteBuffer data)</code></p><p><code>BFloat16Vec(byte&#91;&#93; data)</code></p></td>
                  <td><p>For <code>DataType.BFloat16Vector</code> type field.</p></td>
                </tr>
                <tr>
@@ -88,13 +93,35 @@ hybridSearch(HybridSearchReq.builder()
 
     - `params(String)`
 
-        A JSON dictionary format string of search parameters for the request.
+        A JSON dictionary format string of search parameters for the request. Possible values are:
 
-- `ranker(BaseRanker ranker)`
+        - **metric_type** (String)
 
-    The reranking strategy to use for hybrid search. For details, refer to [Weighted Ranker](https://milvus.io/docs/weighted-ranker.md), [RRF Ranker](https://milvus.io/docs/rrf-ranker.md).
+            The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. 
 
-- `topK(int topK)`
+        - **radius** (float)
+
+            Determines the threshold of least similarity. When setting `metric_type` to `L2`, ensure that this value is greater than that of **range_filter**. Otherwise, this value should be lower than that of **range_filter**. 
+
+        - **range_filter** (float)
+
+            Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**. 
+
+        - **timezone** (String)
+
+            The timezone  of this operation.
+
+        - **time_fields** (String)
+
+            The time format that is concatenated with the information extracted from the Timestamptz field in the output fields, such as `year, month, day`.
+
+- `ranker(CreateCollectionReq.Function ranker)`
+
+    The reranking strategy to use for hybrid search. For details, refer to [Weighted Ranker](https://milvus.io/docs/weighted-ranker.md), [RRF Ranker](https://milvus.io/docs/rrf-ranker.md), [Boost Ranker](https://milvus.io/docs/boost-ranker.md), [Decay Ranker](https://milvus.io/docs/decay-ranker-overview.md), and [Model Ranker](https://milvus.io/docs/model-ranker-overview.md).
+
+    This parameter will be deprecated, and you are advised to use a **FunctionScore** instead.
+
+- `limit(long limit)`
 
      The total number of entities to return.
 
@@ -102,13 +129,13 @@ hybridSearch(HybridSearchReq.builder()
 
     A list of field names to include in each entity in return. The value defaults to null. If left unspecified, only the primary field is included.
 
+- `offset(long offset)`
+
+    The number of entities to skip before the search results returns. The sum of `offset` and `limit` should be less than 16,384.
+
 - `roundDecimal(int roundDecimal)`
 
     The number of decimal places to which Milvus rounds the calculated distances. The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
-
-- `offset(long offset)`
-
-    The number of entities to skip in the search results.
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
@@ -126,6 +153,10 @@ hybridSearch(HybridSearchReq.builder()
 
     Controls whether group_size should be strictly enforced. For details, refer to [Grouping Search](https://milvus.io/docs/grouping-search.md#Grouping-Search).
 
+- `functionScore(FunctionScore functionScore)`
+
+    A **FunctionScore** instance that comprises one or multiple **Function** instances. The design purpose is to allow multiple rankers in a search, such as in the [Boost ranker](https://milvus.io/docs/boost-ranker.md).
+
 **RETURN TYPE:**
 
 *SearchResp*
@@ -136,7 +167,7 @@ A **SearchResp** object representing specific search results with the specified 
 
 **PARAMETERS:**
 
-- **searchResults** (*List\<List\<SearchResult\>>*)
+- **searchResults** (*List\&lt;List\&lt;SearchResult\&gt;\&gt;*)
 
     A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each `List<SearchResult>` is a top-K result of a query vector. Each SearchResult represents an entity hit by the search.
 
