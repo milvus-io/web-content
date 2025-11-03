@@ -79,11 +79,67 @@ milvus_client.create_collection(collection_name, schema=schema, consistency_leve
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+
+private static final String COLLECTION_NAME = "geo_collection";
+private static final Integer DIM = 128;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
+        
+CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder()
+        .enableDynamicField(true)
+        .build();
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("embeddings")
+        .dataType(DataType.FloatVector)
+        .dimension(DIM)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("geo")
+        .dataType(DataType.Geometry)
+        .isNullable(true)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("name")
+        .dataType(DataType.VarChar)
+        .maxLength(128)
+        .build());
+        
+CreateCollectionReq requestCreate = CreateCollectionReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .collectionSchema(collectionSchema)
+        .build();
+client.createCollection(requestCreate);
+
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient('http://localhost:19530');
+const schema = [
+  { name: 'id', data_type: DataType.Int64, is_primary_key: true },
+  { name: 'embeddings', data_type: DataType.FloatVector, dim: 8 },
+  // highlight-next-line
+  { name: 'geo', data_type: DataType.Geometry, is_nullable: true },
+  { name: 'name', data_type: DataType.VarChar, max_length: 128 },
+];
+
+await milvusClient.createCollection({
+  collection_name: 'geo_collection',
+  fields: schema,
+  consistency_level: 'Strong',
+});
 ```
 
 ```go
@@ -92,6 +148,7 @@ milvus_client.create_collection(collection_name, schema=schema, consistency_leve
 
 ```bash
 # restful
+
 ```
 
 <div class="alert note">
@@ -140,11 +197,65 @@ print(insert_result)
 ```
 
 ```java
-// java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.service.vector.request.InsertReq;
+
+List<String> geoPoints = Arrays.asList(
+        "POINT(13.399710 52.518010)",
+        "POINT(13.403934 52.522877)",
+        "POINT(13.405088 52.521124)",
+        "POINT(13.408223 52.516876)",
+        "POINT(13.400092 52.521507)",
+        "POINT(13.408529 52.519274)"
+);
+List<String> names = Arrays.asList("Shop A", "Shop B", "Shop C", "Shop D", "Shop E", "Shop F");
+Random ran = new Random();
+Gson gson = new Gson();
+List<JsonObject> rows = new ArrayList<>();
+for (int i = 0; i < geoPoints.size(); i++) {
+    JsonObject row = new JsonObject();
+    row.addProperty("id", i);
+    row.addProperty("geo", geoPoints.get(i));
+    row.addProperty("name", names.get(i));
+    List<Float> vector = new ArrayList<>();
+    for (int d = 0; d < DIM; ++d) {
+        vector.add(ran.nextFloat());
+    }
+    row.add("embeddings", gson.toJsonTree(vector));
+    rows.add(row);
+}
+
+client.insert(InsertReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(rows)
+        .build());
 ```
 
 ```javascript
-// nodejs
+const geo_points = [
+    'POINT(13.399710 52.518010)',
+    'POINT(13.403934 52.522877)',
+    'POINT(13.405088 52.521124)',
+    'POINT(13.408223 52.516876)',
+    'POINT(13.400092 52.521507)',
+    'POINT(13.408529 52.519274)',
+];
+
+const rows = [
+    {"id": 1, "name": "Shop A", "embeddings": [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8], "geo": geo_points[0]},
+    {"id": 2, "name": "Shop B", "embeddings": [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9], "geo": geo_points[1]},
+    {"id": 3, "name": "Shop C", "embeddings": [0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0], "geo": geo_points[2]},
+    {"id": 4, "name": "Shop D", "embeddings": [0.4,0.5,0.6,0.7,0.8,0.9,1.0,0.1], "geo": geo_points[3]},
+    {"id": 5, "name": "Shop E", "embeddings": [0.5,0.6,0.7,0.8,0.9,1.0,0.1,0.2], "geo": geo_points[4]},
+    {"id": 6, "name": "Shop F", "embeddings": [0.6,0.7,0.8,0.9,1.0,0.1,0.2,0.3], "geo": geo_points[5]},
+];
+
+const insert_result = await milvusClient.insert({
+  collection_name: 'geo_collection',
+  data: rows,
+});
+console.log(insert_result);
 ```
 
 ```go
@@ -184,11 +295,39 @@ milvus_client.load_collection(collection_name)
 ```
 
 ```java
-// java
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.index.request.CreateIndexReq;
+
+List<IndexParam> indexParams = new ArrayList<>();
+indexParams.add(IndexParam.builder()
+        .fieldName("embeddings")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.L2)
+        .build());
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .indexParams(indexParams)
+        .build());
 ```
 
 ```javascript
-// nodejs
+
+const index_params = {
+  field_name: "embeddings",
+  index_type: "IVF_FLAT",
+  metric_type: "L2",
+  params: { nlist: 128 },
+};
+
+await milvusClient.createIndex({
+  collection_name: 'geo_collection',
+  index_name: 'embeddings_index',
+  index_params: index_params,
+});
+
+await milvusClient.loadCollection({
+  collection_name: 'geo_collection',
+});
 ```
 
 ```go
@@ -257,11 +396,46 @@ for ret in query_results:
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+
+float topLeftLon = 13.403683f;
+float topLeftLat = 52.520711f;
+float bottomRightLon = 13.455868f;
+float bottomRightLat = 52.495862f;
+String boundingBoxWkt = String.format("POLYGON((%f %f, %f %f, %f %f, %f %f, %f %f))",
+        topLeftLon, topLeftLat, bottomRightLon, topLeftLat, bottomRightLon, bottomRightLat,
+        topLeftLon, bottomRightLat, topLeftLon, topLeftLat);
+
+String filter = String.format("st_within(geo, '%s')", boundingBoxWkt);
+QueryResp queryResp = client.query(QueryReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .filter(filter)
+        .outputFields(Arrays.asList("name", "geo"))
+        .build());
+List<QueryResp.QueryResult> queryResults = queryResp.getQueryResults();
+System.out.println("Query results:");
+for (QueryResp.QueryResult result : queryResults) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```javascript
-// nodejs
+const top_left_lon = 13.403683;
+const top_left_lat = 52.520711;
+const bottom_right_lon = 13.455868;
+const bottom_right_lat = 52.495862;
+const bounding_box_wkt = `POLYGON((${top_left_lon} ${top_left_lat}, ${bottom_right_lon} ${top_left_lat}, ${bottom_right_lon} ${bottom_right_lat}, ${top_left_lon} ${bottom_right_lat}, ${top_left_lon} ${top_left_lat}))`;
+
+const query_results = await milvusClient.query({
+  collection_name: 'geo_collection',
+  // highlight-next-line
+  filter: `st_within(geo, '${bounding_box_wkt}')`,
+  output_fields: ['name', 'geo'],
+});
+for (const ret of query_results.data) {
+    console.log(ret);
+}
 ```
 
 ```go
@@ -301,11 +475,41 @@ for ret in query_results:
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+
+float centerPointLon = 13.403683f;
+float centerPointLat = 52.520711f;
+float radiusMeters = 1000.0f;
+String centralPointWkt = String.format("POINT(%f %f)", centerPointLon, centerPointLat);
+String filter=String.format("st_dwithin(geo, '%s', %f)", centralPointWkt, radiusMeters);
+QueryResp queryResp = client.query(QueryReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .filter(filter)
+        .outputFields(Arrays.asList("name", "geo"))
+        .build());
+List<QueryResp.QueryResult> queryResults = queryResp.getQueryResults();
+System.out.println("Query results:");
+for (QueryResp.QueryResult result : queryResults) {
+    System.out.println(result.getEntity());
+}
 ```
 
 ```javascript
-// nodejs
+const center_point_lon = 13.403683;
+const center_point_lat = 52.520711;
+const radius_meters = 1000.0;
+const central_point_wkt = `POINT(${center_point_lon} ${center_point_lat})`;
+
+const query_results_dwithin = await milvusClient.query({
+  collection_name: 'geo_collection',
+  // highlight-next-line
+  filter: `st_dwithin(geo, '${central_point_wkt}', ${radius_meters})`,
+  output_fields: ['name', 'geo'],
+});
+for (const ret of query_results_dwithin.data) {
+    console.log(ret);
+}
 ```
 
 ```go
@@ -345,11 +549,47 @@ for hits in result:
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+Random ran = new Random();
+List<Float> vector = new ArrayList<>();
+for (int d = 0; d < DIM; ++d) {
+    vector.add(ran.nextFloat());
+}
+String filter=String.format("st_within(geo, '%s')", boundingBoxWkt);
+SearchReq request = SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(new FloatVec(vector)))
+        .limit(3)
+        .filter(filter)
+        .outputFields(Arrays.asList("name", "geo"))
+        .build();
+SearchResp statusR = client.search(request);
+List<List<SearchResp.SearchResult>> searchResults = statusR.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    for (SearchResp.SearchResult result : results) {
+        System.out.printf("ID: %d, Score: %f, %s\n", (long)result.getId(), result.getScore(), result.getEntity().toString());
+    }
+}
 ```
 
 ```javascript
-// nodejs
+const vectors_to_search = [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]];
+const search_results = await milvusClient.search({
+  collection_name: "geo_collection",
+  vectors: vectors_to_search,
+  limit: 3,
+  output_fields: ["name", "geo"],
+  // highlight-next-line
+  filter: `st_within(geo, '${bounding_box_wkt}')`,
+});
+for (const hits of search_results.results) {
+  for (const hit of hits) {
+    console.log(`hit: ${JSON.stringify(hit)}`);
+  }
+}
 ```
 
 ```go
