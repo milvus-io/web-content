@@ -22,7 +22,7 @@ listPrivilegeGroups(ListPrivilegeGroupsReq.builder()
 
 A **ListPrivilegeGroupsResp** object contains the following fields:
 
-- **privilegeGroups** (*List\<PrivilegeGroup>*) -
+- **privilegeGroups** (*List&lt;PrivilegeGroup&gt;*) -
 
     A list of privilege groups, each of which is a **PrivilegeGroup** object.
 
@@ -30,7 +30,7 @@ A **ListPrivilegeGroupsResp** object contains the following fields:
 
         The name of the current privilege group.
 
-    - **privileges** (List\<String>) - 
+    - **privileges** (List&lt;String&gt;) - 
 
         The privileges added into the current privilege group.
 

@@ -10,6 +10,7 @@ public void releasePartitions(ReleasePartitionsReq request)
 
 ```java
 releasePartitions(ReleasePartitionsReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .build()
@@ -17,6 +18,10 @@ releasePartitions(ReleasePartitionsReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the collection belongs.
 
 - `collectionName(String collectionName)`
 

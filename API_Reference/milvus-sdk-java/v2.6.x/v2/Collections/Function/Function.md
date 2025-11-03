@@ -1,6 +1,6 @@
 # Function
 
-A `Function` instance for generating vector embeddings from user-provided raw data in Milvus.
+A `Function` instance for generating vector embeddings from user-provided raw data or configuring rerankers for searches.
 
 ```java
 io.milvus.v2.service.collection.request.CreateCollectionReq.Function
@@ -8,7 +8,7 @@ io.milvus.v2.service.collection.request.CreateCollectionReq.Function
 
 ## Constructor
 
-This constructor initializes a new `Function` instance designed to transform user's raw data into vector embeddings. This is achieved through an automated process that simplifies similarity search operations.
+This constructor initializes a new `Function` instance designed to transform user's raw data into vector embeddings or configure rerankers for searches. This is achieved through an automated process that simplifies similarity search operations.
 
 ```java
 CreateCollectionReq.Function.builder()
@@ -17,6 +17,8 @@ CreateCollectionReq.Function.builder()
     .functionType(FunctionType functionType)
     .inputFieldNames(List<String> inputFieldNames)
     .outputFieldNames(List<String> outputFieldNames)
+    .params(Map<String, String> params)
+    .build()
 ```
 
 **BUILDER METHODS:**
@@ -42,6 +44,10 @@ CreateCollectionReq.Function.builder()
 - `outputFieldNames(List<String> outputFieldNames)`
 
     The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+
+- `params(Map<String, String> params)`
+
+    A set of key-value pairs that configures the function properties.
 
 **RETURN TYPE:**
 

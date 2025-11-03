@@ -10,6 +10,7 @@ public void dropIndex(DropIndexReq request)
 
 ```java
 dropIndex(DropIndexReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .fieldName(String fieldName)
     .indexName(String indexName)
@@ -18,6 +19,10 @@ dropIndex(DropIndexReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 

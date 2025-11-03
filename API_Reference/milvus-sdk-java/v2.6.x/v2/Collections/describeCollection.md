@@ -10,12 +10,17 @@ public DescribeCollectionResp describeCollection(DescribeCollectionReq request)
 
 ```java
 describeCollection(DescribeCollectionReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .build()
 )
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 
@@ -33,9 +38,17 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 **PARAMETERS:**
 
-- **collection_name** (*String*)
+- **collectionName** (*String*)
 
     The name of the current collection.
+
+- **collectionID** (*Long*)
+
+    The ID of the collection.
+
+- **databaseName** (*String*)
+
+    The name of the database to which the current collection belongs.
 
 - **description** (*String*)
 
@@ -45,11 +58,11 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The number of partitions in the current collection.
 
-- **fieldNames** (*List\<String\>*)
+- **fieldNames** (*List\&lt;String\&gt;*)
 
     A list of fields in the current collection.
 
-- **vectorFieldName** (*List\<String\>*)
+- **vectorFieldName** (*List\&lt;String\&gt;*)
 
     The name of the vector field.
 
@@ -59,7 +72,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **enableDynamicField** (*Boolean*)
 
-    Whether to use the reserved JSON field **$meta** to save non-schema-defined fields and their values as key-value pairs.
+    Whether to use the reserved JSON field **&#36;meta** to save non-schema-defined fields and their values as key-value pairs.
 
 - **autoID** (*Boolean*)
 
@@ -84,6 +97,10 @@ A **DescribeCollectionResp** object that contains detailed information about the
 - **shardsNum** (*Integer*) -
 
     The number of shards in the collection.
+
+- **properties** (*Map&lt;String, String&gt;*) -
+
+    The properties of the current collection. 
 
 **EXCEPTIONS:**
 

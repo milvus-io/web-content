@@ -10,12 +10,17 @@ public Boolean hasCollection(HasCollectionReq request)
 
 ```java
 hasCollection(HasCollectionReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .build()
 )
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 

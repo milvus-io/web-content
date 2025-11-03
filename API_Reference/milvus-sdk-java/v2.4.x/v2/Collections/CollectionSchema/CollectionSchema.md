@@ -49,8 +49,12 @@ A **CollectionSchema** object.
 ## Example
 
 ```java
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
 // define a Collection Schema
-CreateCollectionReq.CollectionSchema collectionSchema = client.createSchema();
+CreateCollectionReq.CollectionSchema collectionSchema = client.CreateSchema();
 // add two fileds, id and vector
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());

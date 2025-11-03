@@ -10,6 +10,7 @@ public void releaseCollection(ReleaseCollectionReq request)
 
 ```java
 releaseCollection(ReleaseCollectionReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .async(Boolean async)
     .timeout(Long timeout)
@@ -18,6 +19,10 @@ releaseCollection(ReleaseCollectionReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 

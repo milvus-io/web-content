@@ -22,7 +22,7 @@ createIndex(CreateIndexReq.builder()
 
     The name of an existing collection.
 
-- `indexParams(List<IndexParam> indexParams)`
+- `indexParams(List<[IndexParam](IndexParam.md)> indexParams)`
 
     A list of **IndexParam** objects.
 
@@ -39,7 +39,20 @@ createIndex(CreateIndexReq.builder()
 ## Example
 
 ```java
-// create an index for field "vector"
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.index.request.CreateIndexReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Create an index for the field "vector"
 IndexParam indexParam = IndexParam.builder()
         .metricType(IndexParam.MetricType.L2)
         .indexType(IndexParam.IndexType.AUTOINDEX)

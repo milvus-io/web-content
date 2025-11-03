@@ -31,13 +31,13 @@ alterAlias(AlterAliasReq.builder()
     <p>Below is an example of reassigning the alias of one collection to another:</p>
     <p>Suppose there are two collections: <code>collection_1</code> and <code>collection_2</code>. There is also a collection alias named <code>bob</code>, which was originally assigned to <code>collection_1</code>:</p>
     <ul>
-    <li><p><code>collection_1</code>'s alias = ["bob"]</p></li>
-    <li><p><code>collection_2</code>'s alias = []</p></li>
+    <li><p><code>collection_1</code>'s alias = &#91;"bob"&#93;</p></li>
+    <li><p><code>collection_2</code>'s alias = &#91;&#93;</p></li>
     </ul>
     <p>After calling the <code>alterAlias</code> function with the parameters <code>collection_2</code> and <code>bob</code>:</p>
     <ul>
-    <li><p><code>collection_1</code>'s alias = []</p></li>
-    <li><p><code>collection_2</code>'s alias = ["bob"]</p></li>
+    <li><p><code>collection_1</code>'s alias = &#91;&#93;</p></li>
+    <li><p><code>collection_2</code>'s alias = &#91;"bob"&#93;</p></li>
     </ul>
 
     </div>
@@ -59,7 +59,19 @@ alterAlias(AlterAliasReq.builder()
 ## Example
 
 ```java
-// alter the alias for collection "test"
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.utility.request.AlterAliasReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Alter the alias for collection "test"
 AlterAliasReq alterAliasReq = AlterAliasReq.builder()
         .collectionName("test")
         .alias("test_alias2")

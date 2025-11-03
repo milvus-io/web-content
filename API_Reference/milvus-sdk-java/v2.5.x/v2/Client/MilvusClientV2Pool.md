@@ -6,7 +6,7 @@ A **MilvusClientV2Pool** instance is a connection pool for MilvusClientV2 object
 io.milvus.pool.MilvusClientV2Pool
 ```
 
-**Constructor**
+## Constructor
 
 Constructs a client pool for common use cases.
 
@@ -14,52 +14,57 @@ Constructs a client pool for common use cases.
 MilvusClientV2Pool(PoolConfig poolConfig, ConnectConfig connectConfig);
 ```
 
-**Methods**
+**METHODS:**
 
-- getClient(String key)
+- `getClient(String key)`
 
-Get a client object that is idle from the pool.
-Once the caller holds the client, it will be marked as an active state and cannot be fetched by other callers.
-If the number of clients hits the MaxTotalPerKey value, this method will be blocked for MaxBlockWaitDuration.
-If no idle client is available after MaxBlockWaitDuration, this method will return a null object to the caller.
+    Get a client object that is idle from the pool.
 
-- returnClient(String key, MilvusClient grpcClient)
+    Once the caller holds the client, it will be marked as an active state and cannot be fetched by other callers.
 
-Return a client object. Once a client is returned, it becomes idle state and waits for the next caller.
-The caller should ensure the client is returned. Otherwise, the client will keep in active state and cannot be used by the next caller.
-Throw exceptions if the key doesn't exist or the client does not belong to this key group.
+    - If the number of clients hits the **MaxTotalPerKey** value, this method will be blocked for **MaxBlockWaitDuration**.
 
-- getIdleClientNumber(String key)
+    - If no idle client is available after **MaxBlockWaitDuration**, this method will return a null object to the caller.
 
-Return the number of idle clients of a key group.
+- `returnClient(String key, MilvusClient grpcClient)`
 
-- getActiveClientNumber(String key)
+    Return a client object. Once a client is returned, it becomes idle state and waits for the next caller.
 
-Return the number of active clients of a key group.
+    The caller should ensure the client is returned. Otherwise, the client will keep in active state and cannot be used by the next caller.
 
-- getTotalIdleClientNumber()
+    Throw exceptions if the key doesn't exist or the client does not belong to this key group.
 
-Return the number of idle clients of all key groups.
+- `getIdleClientNumber(String key)`
 
-- getTotalActiveClientNumber()
+    Return the number of idle clients of a key group.
 
-Return the number of active clients of all key groups
+- `getActiveClientNumber(String key)`
 
-- clear(String key)
+    Return the number of active clients of a key group.
 
-Release/disconnect idle clients of a key group.
+- `getTotalIdleClientNumber()`
 
-- clear()
+    Return the number of idle clients of all key groups.
 
-Release/disconnect idle clients of all key groups.
+- `getTotalActiveClientNumber()`
 
-- close()
+    Return the number of active clients of all key groups
 
-Release/disconnect all clients of all key groups, and close the pool.
+- `clear(String key)`
+
+    Release/disconnect idle clients of a key group.
+
+- `clear()`
+
+    Release/disconnect idle clients of all key groups.
+
+- `close()`
+
+    Release/disconnect all clients of all key groups, and close the pool.
 
 ## PoolConfig
 
-PoolConfig allows you to do specific configurations for the pool.
+**PoolConfig** allows you to do specific configurations for the pool.
 
 ```java
 PoolConfig poolConfig = PoolConfig.builder()
@@ -73,49 +78,49 @@ PoolConfig poolConfig = PoolConfig.builder()
 
 **BUILDER METHODS:**
 
-- maxIdlePerKey(int maxIdlePerKey)
+- `maxIdlePerKey(int maxIdlePerKey)`
 
     The maximum number of idle clients for each key. If the number of idle clients exceeds this number, some clients will be automatically closed. The default value is 5.
 
-- minIdlePerKey(int minIdlePerKey)
+- `minIdlePerKey(int minIdlePerKey)`
 
     The minimize number of idle clients for each key. The default value is 0.
 
-- maxTotalPerKey(int maxTotalPerKey)
+- `maxTotalPerKey(int maxTotalPerKey)`
 
     The maximum number of clients for each key, including idle clients and active clients. The default value is 10.
 
-- maxTotal(int maxTotal)
+- `maxTotal(int maxTotal)`
 
     The maximum number of clients in total, including idle clients and active clients. The default value is 50.
 
-- blockWhenExhausted(boolean blockWhenExhausted)
+- `blockWhenExhausted(boolean blockWhenExhausted)`
 
     Block the getClient() method for a duration when the maximum number of clients is hit and all the clients are active. If this flag is false, the getClient() will instantly throw an exception if  the maximum number of clients is hit and all the clients are active. The default value is true.
 
-- maxBlockWaitDuration(Duration maxBlockWaitDuration)
+- `maxBlockWaitDuration(Duration maxBlockWaitDuration)`
 
     Max block duration when the maximum number of clients is hit and all the clients are active. The default value is 3 seconds.
 
-- evictionPollingInterval(Duration evictionPollingInterval)
+- `evictionPollingInterval(Duration evictionPollingInterval)`
 
     Trigger an eviction action to evict expired idle clients for each duration. The default value is 60 seconds.
 
-- minEvictableIdleDuration(Duration minEvictableIdleDuration)
+- `minEvictableIdleDuration(Duration minEvictableIdleDuration)`
 
     An idle client expires after this duration and can be evicted.
 
-- testOnBorrow(boolean testOnBorrow)
+- `testOnBorrow(boolean testOnBorrow)`
 
     If this flag is set to true, the pool will check if the grpc connection of a client is terminated or closed each time the getClient() is called.
 
-- testOnReturn(boolean testOnReturn)
+- `testOnReturn(boolean testOnReturn)`
 
     If this flag is set to true, the pool will check if the grpc connection of a client is terminated or closed each time the returnClient() is called.
 
 ## ConnectConfig
 
-Read the description in the MilvusClientV2 page.
+Read the description on the **[MilvusClientV2](MilvusClientV2.md)** page.
 
 ## Examples
 

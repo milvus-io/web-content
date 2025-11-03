@@ -44,6 +44,20 @@ A **GetCollectionStatsResp** object containing collected statistics on the speci
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.GetCollectionStatsReq;
+import io.milvus.v2.service.collection.response.GetCollectionStatsResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Get collection stats
 GetCollectionStatsReq getCollectionStatsReq = GetCollectionStatsReq.builder()
         .collectionName("test")
         .build();

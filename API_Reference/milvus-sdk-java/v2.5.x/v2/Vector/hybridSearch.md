@@ -15,13 +15,19 @@ hybridSearch(HybridSearchReq.builder()
     .partitionNames(List<String> partitionNames)
     .searchRequests(List<AnnSearchReq> searchRequests)
     .ranker(BaseRanker ranker)
-    .topK(int topK)
+    .limit(long limit)
     .outFields(List<String> outFields)
+    .offset(long offset)
     .roundDecimal(int roundDecimal)
     .consistencyLevel(ConsistencyLevel consistencyLevel)
+    .groupByFieldName(String fieldName)
+    .groupSize(Integer groupSize)
+    .strictGroupSize(Boolean strictGroupSize)
     .build()
 )
 ```
+
+**BUILDER METHODS:**
 
 - `collectionName(String collectionName)`
 
@@ -37,23 +43,92 @@ hybridSearch(HybridSearchReq.builder()
 
 - `searchRequests(List<AnnSearchReq> searchRequests)`
 
-      A list of search requests, where each request is an **AnnSearchReq** object. Each request corresponds to a different vector field and a different set of search parameters.
+    A list of search requests, where each request is an **AnnSearchReq** object. Each request corresponds to a different vector field and a different set of search parameters.
 
-- `topK(int topK)`
+    - `AnnSearchReq`
+
+         A class representing an ANN search request. Its builder methods are as follows:
+
+        - `vectorFieldName(String)`: The vector field to use in the request.
+
+        - `topK(int)`: The maximum number of results to return in the request. When performing a hybrid search with multiple ANN search requests, the top results defined by **topK** from each request will be combined and re-ranked before returning the final search results.
+
+        - `expr(String)`:  The expression to filter the results(Optional).
+
+        - `vectors(List<BaseVec>)`: The query vector to search in the request. **BaseVector** is a base class for abstract vector classes. The following classes are derived from BaseVector. Choose the correct class as input according to DataType of the vector field.
+
+            <table>
+               <tr>
+                 <th><p><strong>Class Name</strong></p></th>
+                 <th><p><strong>Constructors</strong></p></th>
+                 <th><p><strong>Description</strong></p></th>
+               </tr>
+               <tr>
+                 <td><p><code>FloatVec</code></p></td>
+                 <td><p><code>FloatVec(List&lt;Float&gt; data)</code></p><p><code>FloatVec(float&#91;&#93; data)</code></p></td>
+                 <td><p>For <code>DataType.FloatVector</code> type field.</p></td>
+               </tr>
+               <tr>
+                 <td><p><code>BinaryVec</code></p></td>
+                 <td><p><code>BinaryVec(ByteBuffer data)</code></p><p><code>BinaryVec(byte&#91;&#93; data)</code></p></td>
+                 <td><p>For <code>DataType.BinaryVector</code> type field.</p></td>
+               </tr>
+               <tr>
+                 <td><p><code>Float16Vec</code></p></td>
+                 <td><p><code>Float16Vec(ByteBuffer data)</code></p><p><code>Float16Vec(byte&#91;&#93; data)</code></p></td>
+                 <td><p>For <code>DataType.Float16Vector</code> type field.</p></td>
+               </tr>
+               <tr>
+                 <td><p><code>BFloat16Vec</code></p></td>
+                 <td><p><code>BFloat16Vec(ByteBuffer data)</code></p><p><code>BFloat16Vec(byte&#91;&#93; data)</code></p></td>
+                 <td><p>For <code>DataType.BFloat16Vector</code> type field.</p></td>
+               </tr>
+               <tr>
+                 <td><p><code>SparseFloatVec</code></p></td>
+                 <td><p><code>SparseFloatVec(SortedMap&lt;Long, Float&gt; data)</code></p></td>
+                 <td><p>For <code>DataType.SparseFloatVector</code> type field.</p></td>
+               </tr>
+            </table>
+
+    - `params(String)`
+
+        A JSON dictionary format string of search parameters for the request.
+
+- `ranker(BaseRanker ranker)`
+
+    The reranking strategy to use for hybrid search. For details, refer to [Weighted Ranker](https://milvus.io/docs/weighted-ranker.md), [RRF Ranker](https://milvus.io/docs/rrf-ranker.md).
+
+- `limit(long limit)`
 
      The total number of entities to return.
 
 - `outFields(List<String> outFields)`
 
-      A list of field names to include in each entity in return. The value defaults to null. If left unspecified, only the primary field is included.
+    A list of field names to include in each entity in return. The value defaults to null. If left unspecified, only the primary field is included.
+
+- `offset(long offset)`
+
+    The number of entities to skip before the search results returns. The sum of `offset` and `limit` should be less than 16,384.
 
 - `roundDecimal(int roundDecimal)`
 
-      The number of decimal places that Milvus rounds the calculated distances to. The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+    The number of decimal places to which Milvus rounds the calculated distances. The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
 
 - `consistencyLevel(ConsistencyLevel consistencyLevel)`
 
-      The consistency level of the target collection. The value defaults to the one specified when you create the current collection.
+    The consistency level of the target collection. The value defaults to the one specified when you create the current collection.
+
+- `groupByFieldName(String groupByFieldName)`
+
+    Groups search results by a specified field to ensure diversity and avoid returning multiple results from the same group. For details, refer to [Grouping Search](https://milvus.io/docs/grouping-search.md#Grouping-Search).
+
+- `groupSize(Integer groupSize)`
+
+    The target number of entities to return within each group in a grouping search. For details, refer to [Grouping Search](https://milvus.io/docs/grouping-search.md#Grouping-Search).
+
+- `strictGroupSize(Boolean strictGroupSize)`
+
+    Controls whether group_size should be strictly enforced. For details, refer to [Grouping Search](https://milvus.io/docs/grouping-search.md#Grouping-Search).
 
 **RETURN TYPE:**
 
@@ -65,9 +140,9 @@ A **SearchResp** object representing specific search results with the specified 
 
 **PARAMETERS:**
 
-- searchResults(List\<List\<SearchResult\>>)
+- **searchResults** (*List\&lt;List\&lt;SearchResult\&gt;\&gt;*)
 
-      A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each List\<SearchResult\> is a topK result of a query vector. Each SearchResult represents an entity hit by the search.
+    A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each `List<SearchResult>` is a top-K result of a query vector. Each SearchResult represents an entity hit by the search.
 
       Member of SearchResult:
 

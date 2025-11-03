@@ -20,13 +20,13 @@ createResourceGroup(CreateResourceGroupReq.builder()
 
 - `groupName(String collectionName)`
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the target resource group to create.
 
 - `config(ResourceGroupConfig config)`
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The configuration of the target resource group, which is a **ResourceGroupConfig** object that provides the following builder methods:
 

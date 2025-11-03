@@ -10,6 +10,7 @@ public void releasePartitions(ReleasePartitionsReq request)
 
 ```java
 releasePartitions(ReleasePartitionsReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .build()
@@ -17,6 +18,10 @@ releasePartitions(ReleasePartitionsReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the collection belongs.
 
 - `collectionName(String collectionName)`
 
@@ -39,7 +44,19 @@ releasePartitions(ReleasePartitionsReq.builder()
 ## Example
 
 ```java
-// release partition in collection
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.partition.request.ReleasePartitionsReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Release partition in collection
 ReleasePartitionsReq releasePartitionsReq = ReleasePartitionsReq.builder()
         .collectionName("test_partition")
         .partitionNames(Collections.singletonList("test_partition"))

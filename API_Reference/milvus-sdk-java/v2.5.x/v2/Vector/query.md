@@ -10,6 +10,7 @@ public QueryResp query(QueryReq request)
 
 ```java
 query(QueryReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .outputFields(List<String> outputFields)
@@ -18,19 +19,24 @@ query(QueryReq.builder()
     .consistencyLevel(ConsistencyLevel consistencyLevel)
     .offset(long offset)
     .limit(long limit)
+    .ignoreGrowing(boolean ignoreGrowing)
     .build()
 )
 ```
 
 **BUILDER METHODS:**
 
+- `databaseName(String databaseName)`
+
+    The name of an existing database.
+
 - `collectionName(String collectionName)`
 
-    The name of an existing collection.
+    The name of an existing collection in the above-specified database.
 
 - `partitionNames(List<String> partitionNames)`
 
-    A list of partition names.
+    A list of partition names in the above-specified collection.
 
 - `outputFields(List<String> outputFields)`
 
@@ -48,7 +54,7 @@ query(QueryReq.builder()
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
 
     The consistency level of the target collection.
 
@@ -80,6 +86,10 @@ query(QueryReq.builder()
 
     The sum of this value and `offset` should be less than 16,384. 
 
+- `ignoreGrowing(boolean ignoreGrowing)`
+
+    Whether to ignore growing segments during similarity searches.
+
 **RETURN TYPE:**
 
 *QueryResp*
@@ -90,9 +100,17 @@ A **QueryResp object representing specific query results with the specified outp
 
 **PARAMETERS:**
 
-- queryResults(List\<QueryResp.QueryResult\>)
+- queryResults(List\&lt;QueryResp.QueryResult\&gt;)
 
-A list of QueryResult objects with each QueryResult representing a queried entity.
+    A list of QueryResult objects with each QueryResult representing a queried entity. The members of QueryResult:
+
+    - **entity** (*Map\&lt;String,Object\&gt;*)
+
+        A map that contains key-value pairs of field names and their values.
+
+- **sessionTs** (*long*) -
+
+    Whether the **Eventually** consistency level applies.
 
 <div class="admonition note">
 

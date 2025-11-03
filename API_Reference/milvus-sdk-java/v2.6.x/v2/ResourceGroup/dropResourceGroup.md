@@ -19,7 +19,7 @@ dropResourceGroup(DropResourceGroupReq.builder()
 
 - `groupName(String collectionName)`
 
-    **[REQUIRED]**
+    **&#91;REQUIRED&#93;**
 
     The name of the target resource group to drop.
 

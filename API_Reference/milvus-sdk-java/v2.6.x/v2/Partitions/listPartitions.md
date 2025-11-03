@@ -10,6 +10,7 @@ public List<String> listPartitions(ListPartitionsReq request)
 
 ```java
 listPartitions(ListPartitionsReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .build()
 )
@@ -17,13 +18,17 @@ listPartitions(ListPartitionsReq.builder()
 
 **BUILDER METHODS:**
 
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
+
 - `collectionName(String collectionName)`
 
     The name of an existing collection.
 
 **RETURN TYPE:**
 
-*List\<String\>*
+*List\&lt;String\&gt;*
 
 **RETURNS:**
 

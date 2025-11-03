@@ -12,6 +12,11 @@ public void loadPartitions(LoadPartitionsReq request)
 loadPartitions(LoadPartitionsReq.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
+    .numReplicas(Interger numReplicas)
+    .sync(Boolean sync)
+    .timeout(Long timeout)
+    .refresh(Boolean refresh)
+    .loadFields(List<String> loadFields)
     .build()
 )
 ```
@@ -25,6 +30,28 @@ loadPartitions(LoadPartitionsReq.builder()
 - `partitionNames(List<String> partitionNames)`
 
     A list of the names of the partitions to load.
+
+- `numReplicas(Interger numReplicas)`
+
+    The number of replicas to create during the load process.
+
+- `sync(Boolean sync)`
+
+    Whether the current operation is synchronous.
+
+    The value defaults to `Boolean.True`, indicating that the operation returns only after the specified partitions are fully loaded.
+
+- `timeout(Long timeout)`
+
+    The timeout duration for this operation. The value defaults to `60000L`, indicating the operation times out after 1000 hours.
+
+- `refresh(Boolean refresh)`
+
+    Whether to refresh the data after load.
+
+- `loadFields(List<String> loadFields)`
+
+    A name list of the fields to load during the process.
 
 **RETURNS:**
 

@@ -28,11 +28,11 @@ IndexParam.builder()
 
     The name of the index field generated after this **IndexParam** object has been applied.
 
-- `indexType(IndexParam.IndexType indexType)`
+- `indexType(IndexParam.[IndexType](IndexType.md) indexType)`
 
-    The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
+    The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to [Index Explained](https://milvus.io/docs/index-explained.md) and the corresponding doc page of each applicable index type.
 
-- `metricType(IndexParam.MetricType metricType)`
+- `metricType(IndexParam.[MetricType](MetricType.md) metricType)`
 
     The algorithm that is used to measure similarity between vectors. Possible values: `IP`, `L2`, `COSINE`, `HAMMING`, `JACCARD`, `BM25` (used only for full text search). For more information, refer to [Metric Types](https://milvus.io/docs/metric.md).
 

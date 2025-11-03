@@ -10,7 +10,7 @@ public void addCollectionField(AddCollectionFieldReq request)
 
 <p><b>notes</b></p>
 
-<p>If the collection has dynamic field enabled and you add a static field with the same name as an existing dynamic field key, the static field will mask the dynamic field key. The original dynamic values remain accessible via <code>$meta['field_name']</code> syntax.</p>
+<p>If the collection has dynamic field enabled and you add a static field with the same name as an existing dynamic field key, the static field will mask the dynamic field key. The original dynamic values remain accessible via <code>#meta['field_name']</code> syntax.</p>
 
 </div>
 
@@ -37,6 +37,7 @@ addCollectionField(AddCollectionFieldReq.builder()
     .analyzerParams(Map<String, Object> analyzerParams)
     .typeParams(Map<String, String> typeParams)
     .multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)
+    .structFields(List<CreateCollectionReq.FieldSchema> structFields)
     .build()
 )
 ```
@@ -141,7 +142,7 @@ addCollectionField(AddCollectionFieldReq.builder()
 
 - `analyzerParams(Map<String, Object>, analyzerParams)`
 
-    Configures the analyzer for text processing, specifically for `DataType.VarChar` fields. This parameter configures tokenizer and filter settings, particularly for text fields used in [keyword matching](https://milvus.io/docs/keyword-match.md) or [full text search](https://milvus.io/docs/full-text-search.md). Depending on the type of analyzer, it can be configured in either of the following methods:
+    Configures the analyzer for text processing, specifically for `DataType.*VarChar* fields. This parameter configures tokenizer and filter settings, particularly for text fields used in [keyword matching](https://milvus.io/docs/keyword-match.md) or [full text search](https://milvus.io/docs/full-text-search.md). Depending on the type of analyzer, it can be configured in either of the following methods:
 
     - Built-in analyzer
 
@@ -166,7 +167,7 @@ addCollectionField(AddCollectionFieldReq.builder()
 
             Defines the tokenizer type. Possible values: `standard` (default), `whitespace`, `jieba`. For more information, refer to [Standard Tokenizer](https://milvus.io/docs/standard-tokenizer.md), [Whitespace Tokenizer](https://milvus.io/docs/whitespace-tokenizer.md), and [Jieba Tokenizer](https://milvus.io/docs/jieba-tokenizer.md).
 
-        - `filter` (*List\<String>*) -
+        - `filter` (*List<String>*) -
 
             Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
 
@@ -177,6 +178,12 @@ addCollectionField(AddCollectionFieldReq.builder()
 - `multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)`
 
     A multi-language analyzer that allows you to configure multiple analyzers for a text field and store multilingual documents in this text field.
+
+- `structFields(List<CreateCollectionReq.FieldSchema> structFields)`
+
+    A list of fields in the Array of Structs field. 
+
+    This is required if **dataType** of this field is set to **DataType.Array** and **elementType** of this field is set to **DataType.Struct**.
 
 **RETURNS:**
 

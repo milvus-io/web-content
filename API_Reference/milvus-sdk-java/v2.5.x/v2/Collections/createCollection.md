@@ -24,6 +24,8 @@ createCollection(CreateCollectionReq.builder()
     .collectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)
     .indexParams(List<IndexParam> indexParams)
     .numPartitions(int numPartitions)
+    .consistencyLevel(ConsistencyLevel consistencyLevel)
+    .properties(Map<String, String> properties)
     .build()
 )
 ```
@@ -90,11 +92,11 @@ createCollection(CreateCollectionReq.builder()
 
 - `enableDynamicField(boolean enableDynamicField)`
 
-    Whether to use a reserved JSON field named **$meta** to store undefined fields and their values in key-value pairs.
+    Whether to use a reserved JSON field named **&#36;meta** to store undefined fields and their values in key-value pairs.
 
     The value defaults to **True**, indicating that the meta field is used.
 
-    If you create a collection with a schema, configure this parameter using the **[createSchema](createSchema.md)** method.
+    If you create a collection with a schema, configure this parameter using the **[CreateSchema](CreateSchema.md)** method.
 
 - `numShards(int numShards)`
 
@@ -117,7 +119,7 @@ createCollection(CreateCollectionReq.builder()
 
     Leaving it empty indicates this collection will be created with default settings. To set up a collection with a customized schema, you need to create a **CollectionSchema** object and reference it here.
 
-- `indexParams(List<IndexParam> indexParams)`
+- `indexParams(List<[IndexParam](../Management/IndexParam.md)> indexParams)`
 
     The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, create an **IndexParams** object with a list of [IndexParam](../Management/IndexParam.md) objects and reference it here.
 
@@ -126,6 +128,14 @@ createCollection(CreateCollectionReq.builder()
 - `numPartitions(int numPartitions)`
 
     The number of partitions. Used when isPartitionKey is set to true in Field Schema. Default is 64.
+
+- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+
+    The consistency level of the collection. This applies to searches and queries within the collection if the search or query request lacks consistency.
+
+- `properties(Map<String, String> properties)`
+
+    Extra collection properties in a hash map.
 
 **RETURNS:**
 

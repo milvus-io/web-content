@@ -92,7 +92,7 @@ createCollection(CreateCollectionReq.builder()
 
 - `enableDynamicField(boolean enableDynamicField)`
 
-    Whether to use a reserved JSON field named **$meta** to store undefined fields and their values in key-value pairs.
+    Whether to use a reserved JSON field named **&#36;meta** to store undefined fields and their values in key-value pairs.
 
     The value defaults to **True**, indicating that the meta field is used.
 
@@ -119,7 +119,7 @@ createCollection(CreateCollectionReq.builder()
 
     Leaving it empty indicates this collection will be created with default settings. To set up a collection with a customized schema, you need to create a **CollectionSchema** object and reference it here.
 
-- `indexParams(List<IndexParam> indexParams)`
+- `indexParams(List<[IndexParam](../Management/IndexParam.md)> indexParams)`
 
     The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, create an **IndexParams** object with a list of [IndexParam](../Management/IndexParam.md) objects and reference it here.
 

@@ -10,6 +10,7 @@ public void createPartition(CreatePartitionReq request)
 
 ```java
 createPartition(CreatePartitionReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionName(String partitionName)
     .build()
@@ -17,6 +18,10 @@ createPartition(CreatePartitionReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 

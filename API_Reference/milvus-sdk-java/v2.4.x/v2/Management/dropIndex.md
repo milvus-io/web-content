@@ -44,11 +44,23 @@ dropIndex(DropIndexReq.builder()
 ## Example
 
 ```java
-// drop index for field "vector"
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.index.request.DropIndexReq;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Drop index for the field "vector"
 DropIndexReq dropIndexReq = DropIndexReq.builder()
         .collectionName("test")
         .fieldName("vector")
         .build();
-client_v2.dropIndex(dropIndexReq);
+client.dropIndex(dropIndexReq);
 ```
 

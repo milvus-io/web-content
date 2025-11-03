@@ -1,6 +1,6 @@
 # addField()
 
-This operation adds a vector field to the schema of a collection.
+This operation adds a field to the schema of a collection.
 
 ```java
 public void addField(AddFieldReq addFieldReq)
@@ -18,15 +18,15 @@ CollectionSchema.addField(AddFieldReq.builder()
     .isPartitionKey(Boolean isPartitionKey)
     .autoID(Boolean autoID)
     .dimension(int dimension)
-
     .elementType(DataType elementType)
     .maxCapacity(Integer maxCapacity)
     .isNullable(Boolean isNullable)
     .defaultValue(DataType dataType)
     .enableAnalyzer(Boolean enableAnalyzer)
     .enableMatch(Boolean enableMatch)
-    .analyzerParams(Map<String, Object>, analyzerParams)
-
+    .analyzerParams(Map<String, Object> analyzerParams)
+    .typeParams(Map<String, String> typeParams)
+    .multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)
     .build()
 )
 ```
@@ -148,9 +148,17 @@ CollectionSchema.addField(AddFieldReq.builder()
 
             Defines the tokenizer type. Possible values: `standard` (default), `whitespace`, `jieba`. For more information, refer to [Standard Tokenizer](https://milvus.io/docs/standard-tokenizer.md), [Whitespace Tokenizer](https://milvus.io/docs/whitespace-tokenizer.md), and [Jieba Tokenizer](https://milvus.io/docs/jieba-tokenizer.md).
 
-        - `filter` (*List\<String>*) -
+        - `filter` (*List&lt;String&gt;*) -
 
             Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
+
+- `typeParams(Map<String, String> typeParams)`
+
+    The parameters specific to the data type of the current field to add. For example, you can set `maxLength` for a `VarChar` field. Once specified, it overrides the corresponding parameter values specified above.
+
+- `multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)`
+
+    A multi-language analyzer that allows you to configure multiple analyzers for a text field and store multilingual documents in this text field.
 
 **RETURNS:**
 

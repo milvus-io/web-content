@@ -20,7 +20,7 @@ search(SearchReq.builder()
     .offset(long offset)
     .limit(long limit)
     .roundDecimal(int roundDecimal)
-    .searchParams(String searchParams)
+    .searchParams(Map<String,Object> searchParams)
     .guaranteeTimestamp(long guaranteeTimestamp)
     .gracefulTime(long gracefulTime)
     .consistencyLevel(ConsistencyLevel consistencyLevel)
@@ -140,7 +140,7 @@ search(SearchReq.builder()
 
     </div>
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
 
     The consistency level of the target collection.
 
@@ -174,11 +174,41 @@ A **SearchResp object representing specific search results with the specified ou
 
 **PARAMETERS:**
 
-- searchResults(List\<List\<SearchResult\>>)
+- **searchResults**(List\&lt;List\&lt;SearchResult\&gt;\&gt;)
 
-      A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each List\<SearchResult\> is a topK result of a query vector. Each SearchResult represents an entity hit by the search.
+    A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each List\&lt;SearchResult\&gt; is a topK result of a query vector. Each SearchResult represents an entity hit by the search. Members of SearchResult:
 
-      Member of SearchResult:
+    - **entity** (*Map\&lt;String, Object\&gt;*)
+
+        A map that stores the specific fields associated with the search result.
+
+    - **score** (*Float*)
+
+        The relevant score of the search result. The score indicates how closely the vector associated with the search result matches the query vector.
+
+        <div class="admonition note">
+
+        <p><b>notes</b></p>
+
+        <p>In Java SDK v2.4.1 or earlier versions, this method is named <code>distance()</code>. Since Java SDK v2.4.2, this method is renamed as <code>score()</code>.</p>
+
+        </div>
+
+    - **id** (Object)
+
+        The id of the search result, dataType is either string or int64 
+
+        <div class="admonition note">
+
+        <p><b>notes</b></p>
+
+        <p>If the number of returned entities is less than expected, duplicate entities may exist in your collection.</p>
+
+        </div>
+
+- **recalls** (*List&lt;Float&gt;*) -
+
+    A list of recall rates corresponding to the search results that are returned.
 
 **EXCEPTIONS:**
 
@@ -189,6 +219,21 @@ A **SearchResp object representing specific search results with the specified ou
 ## Example
 
 ```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Search
 SearchResp searchR = client.search(SearchReq.builder()
         .collectionName(collectionName)
         .data(Collections.singletonList(new FloatVec(new float[]{1.0f, 2.0f})))

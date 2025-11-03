@@ -46,11 +46,11 @@ A **GetResp** object representing one or more queried entities.
 
 **PARAMETERS:**
 
-- **getResults** (*List\<QueryResp.QueryResult\>*)
+- **getResults** (*List\&lt;QueryResp.QueryResult\&gt;*)
 
     A list of **QueryResp.QueryResult** objects.
 
-- **fields** (*Map\<String,Object\>*)
+- **fields** (*Map\&lt;String,Object\&gt;*)
 
     A map that contains key-value pairs of field names and their values.
 

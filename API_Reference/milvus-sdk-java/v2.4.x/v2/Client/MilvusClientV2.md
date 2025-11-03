@@ -138,11 +138,33 @@ ConnectConfig.builder()
 
     The idle timeout for a connection.
 
+**PUBLIC METHODS:**
+
+- `getHost()`
+
+    Returns the hostname of the currently connected Milvus instance.
+
+- `getPort()`
+
+    Returns the port number at which the currently connected Milvus instance.
+
+- `getAuthorization()`
+
+    Returns the credentials used to set up the current connection.
+
+- `getDbName()`
+
+    Returns the name of the database currently in use.
+
+- `isSecure()`
+
+    Returns whether the current connection is over TLS.
+
 ## Examples
 
 ```java
-import io.milvus.v2.client.ConnectConfig
-import io.milvus.v2.client.MilvusClientV2
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
 
 ConnectConfig connectConfig = ConnectConfig.builder()
         .uri("http://localhost:19530")

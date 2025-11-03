@@ -82,27 +82,27 @@ searchIteratorV2(SearchIteratorReqV2.builder()
        </tr>
        <tr>
          <td><p>FloatVec</p></td>
-         <td><p>FloatVec(List\<Float> data) FloatVec(float[] data)</p></td>
+         <td><p>FloatVec(List&lt;Float&gt; data)</p><p>FloatVec(float&#91;&#93; data)</p></td>
          <td><p>For DataType.FloatVector type field.</p></td>
        </tr>
        <tr>
          <td><p>BinaryVec</p></td>
-         <td><p>BinaryVec(ByteBuffer data) BinaryVec(byte[] data)</p></td>
+         <td><p>BinaryVec(ByteBuffer data)</p><p>BinaryVec(byte&#91;&#93; data)</p></td>
          <td><p>For DataType.BinaryVector type field.</p></td>
        </tr>
        <tr>
          <td><p>Float16Vec</p></td>
-         <td><p>Float16Vec(ByteBuffer data) Float16Vec(byte[] data) Float16Vec(List\<Float> data)</p></td>
+         <td><p>Float16Vec(ByteBuffer data)</p><p>Float16Vec(byte&#91;&#93; data)</p><p>Float16Vec(List&lt;Float&gt; data)</p></td>
          <td><p>For DataType.Float16Vector type field.</p></td>
        </tr>
        <tr>
          <td><p>BFloat16Vec</p></td>
-         <td><p>BFloat16Vec(ByteBuffer data) BFloat16Vec(byte[] data) BFloat16Vec(List\<Float> data)</p></td>
+         <td><p>BFloat16Vec(ByteBuffer data)</p><p>BFloat16Vec(byte&#91;&#93; data)</p><p>BFloat16Vec(List&lt;Float&gt; data)</p></td>
          <td><p>For DataType.BFloat16Vector type field.</p></td>
        </tr>
        <tr>
          <td><p>SparseFloatVec</p></td>
-         <td><p>SparseFloatVec(SortedMap\<Long, Float> data)</p></td>
+         <td><p>SparseFloatVec(SortedMap&lt;Long, Float&gt; data)</p></td>
          <td><p>For DataType.SparseFloatVector type field.</p></td>
        </tr>
     </table>
@@ -115,7 +115,7 @@ How many digits are reserved after the decimal point.
 
 A JSON format string for extra serach parameters.
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
 
     The consistency level of the target collection.
 

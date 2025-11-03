@@ -38,6 +38,21 @@ A **DescribeDatabaseResp** object that contains detailed information about the s
 ## Example
 
 ```java
+import io.milvus.param.Constant;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.database.request.DescribeDatabaseReq;
+import io.milvus.v2.service.database.response.DescribeDatabaseResp;
+
+// 1. Set up a client
+ConnectConfig connectConfig = ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build();
+        
+MilvusClientV2 client = new MilvusClientV2(connectConfig);
+
+// 2. Describe database
 DescribeDatabaseResp descResp = client.describeDatabase(DescribeDatabaseReq.builder()
         .databaseName(databaseName)
         .build());

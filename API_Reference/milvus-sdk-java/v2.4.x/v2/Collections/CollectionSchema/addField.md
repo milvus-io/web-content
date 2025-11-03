@@ -1,6 +1,6 @@
 # addField()
 
-This operation adds a vector field to the schema of a collection.
+This operation adds a field to the schema of a collection.
 
 ```java
 public void addField(AddFieldReq addFieldReq)
@@ -107,6 +107,10 @@ CollectionSchema.addField(AddFieldReq.builder()
 ## Example
 
 ```java
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
 CreateCollectionReq.CollectionSchema collectionSchema = client.createSchema();
 // add two field, id and vector
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());

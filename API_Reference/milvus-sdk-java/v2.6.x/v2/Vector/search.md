@@ -29,6 +29,8 @@ search(SearchReq.builder()
     .groupByFieldName(String fieldName)
     .groupSize(Integer groupSize)
     .strictGroupSize(Boolean strictGroupSize)
+    .ranker(CreateCollectionReq.Function ranker)
+    .functionScore(FunctionScore functionScore)
     .build()
 )
 ```
@@ -56,6 +58,8 @@ search(SearchReq.builder()
     The number of records to return in the search result. This parameter uses the same syntax as the `limit` parameter, so you should only set one of them.
 
     You can use this parameter in combination with `offset` to enable pagination.
+
+    This parameter is to be deprected soon, and you are advised to use `limit` instead.
 
     The sum of this value and `offset` should be less than 16,384. 
 
@@ -95,12 +99,12 @@ search(SearchReq.builder()
        </tr>
        <tr>
          <td><p>FloatVec</p></td>
-         <td><p>FloatVec(List\<Float> data)</p><p>FloatVec(float[] data)</p></td>
+         <td><p>FloatVec(List&lt;Float&gt; data)</p><p>FloatVec(float&#91;&#93; data)</p></td>
          <td><p>For DataType.FloatVector type field.</p></td>
        </tr>
        <tr>
          <td><p>BinaryVec</p></td>
-         <td><p>BinaryVec(ByteBuffer data)</p><p>BinaryVec(byte[] data)</p></td>
+         <td><p>BinaryVec(ByteBuffer data)</p><p>BinaryVec(byte&#91;&#93; data)</p></td>
          <td><p>For DataType.BinaryVector type field.</p></td>
        </tr>
     </table>
@@ -145,7 +149,15 @@ search(SearchReq.builder()
 
     - **range_filter** (float)
 
-        Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
+        Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**. 
+
+    - **timezone** (String)
+
+        The timezone  of this operation.
+
+    - **time_fields** (String)
+
+        The time format that is concatenated with the information extracted from the Timestamptz field in the output fields, such as `year, month, day`.
 
     For details on other applicable search parameters, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
 
@@ -177,7 +189,7 @@ search(SearchReq.builder()
 
     </div>
 
-- `consistencyLevel(ConsistencyLevel consistencyLevel)`
+- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
 
     The consistency level of the target collection.
 
@@ -209,6 +221,16 @@ search(SearchReq.builder()
 
     This Boolean parameter dictates whether `groupSize` should be strictly enforced. When `strictGroupSize=True`, the system will attempt to fill each group with exactly `groupSize` results, as long as sufficient data exists within each group. If there is an insufficient number of entities in a group, it will return only the available entities, ensuring that groups with adequate data meet the specified `groupSize`.
 
+- `ranker(CreateCollectionReq.Function ranker)`
+
+    The reranking strategy to use for hybrid search. For details, refer to [Weighted Ranker](https://milvus.io/docs/weighted-ranker.md), [RRF Ranker](https://milvus.io/docs/rrf-ranker.md), [Boost Ranker](https://milvus.io/docs/boost-ranker.md), [Decay Ranker](https://milvus.io/docs/decay-ranker-overview.md), and [Model Ranker](https://milvus.io/docs/model-ranker-overview.md).
+
+    This parameter is to be deprecated soon, and you are advised to use **FunctionScore** instead.
+
+- `functionScore(FunctionScore functionScore)`
+
+    A **FunctionScore** instance that comprises one or multiple **Function** instances. The design purpose is to allow multiple rankers in a search, such as in the [Boost ranker](https://milvus.io/docs/boost-ranker.md).
+
 **RETURN TYPE:**
 
 *SearchResp*
@@ -219,11 +241,49 @@ A **SearchResp object representing specific search results with the specified ou
 
 **PARAMETERS:**
 
-- searchResults(List\<List\<SearchResult\>>)
+- searchResults(List\&lt;List\&lt;SearchResult\&gt;\&gt;)
 
-      A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each List\<SearchResult\> is a topK result of a query vector. Each SearchResult represents an entity hit by the search.
+    A list of *SearchResp*.*SearchResult*, the size of searchResults equals the number of query vectors of the search. Each List\&lt;SearchResult\&gt; is a topK result of a query vector. Each SearchResult represents an entity hit by the search. Member of *SearchResult*:
 
-      Member of SearchResult:
+    - **entity** (*Map\&lt;String, Object\&gt;*)
+
+        A map that stores the specific fields associated with the search result.
+
+    - **score** (*Float*)
+
+        The relevant score of the search result. The score indicates how closely the vector associated with the search result matches the query vector.
+
+        <div class="admonition note">
+
+        <p><b>notes</b></p>
+
+        <p>In Java SDK v2.4.1 or earlier versions, this method is named <code>distance()</code>. Since Java SDK v2.4.2, this method is renamed as <code>score()</code>.</p>
+
+        </div>
+
+    - **id** (Object)
+
+        The ID of the search result, dataType is either string or int64 
+
+        <div class="admonition note">
+
+        <p><b>notes</b></p>
+
+        <p>If the number of returned entities is less than expected, duplicate entities may exist in your collection.</p>
+
+        </div>
+
+    - **primaryKey** (*String*) -
+
+        The name of the primary key.
+
+- **sessionTs** (*long*) -
+
+    Whether the **Eventually** consistency level applies.
+
+- **recalls** (*List&lt;Float&gt;*) -
+
+    A list of recall rates corresponding to the search results that are returned.
 
 **EXCEPTIONS:**
 

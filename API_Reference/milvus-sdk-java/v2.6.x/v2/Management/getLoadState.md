@@ -10,6 +10,7 @@ public Boolean getLoadState(GetLoadStateReq request)
 
 ```java
 getLoadState(GetLoadStateReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionName(String partitionName)
     .build()
@@ -17,6 +18,10 @@ getLoadState(GetLoadStateReq.builder()
 ```
 
 **BUILDER METHODS:**
+
+- `databaseName(String databaseName)`
+
+    The name of the database to which the target collection belongs.
 
 - `collectionName(String collectionName)`
 

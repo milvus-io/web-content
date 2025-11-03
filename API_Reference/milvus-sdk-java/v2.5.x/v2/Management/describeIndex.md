@@ -13,6 +13,7 @@ describeIndex(DescribeIndexReq.builder()
     .collectionName(String collectionName)
     .fieldName(String fieldName)
     .indexName(String indexName)
+    .timestamp(Long timestamp)
     .build()
 )
 ```
@@ -34,6 +35,10 @@ describeIndex(DescribeIndexReq.builder()
     The name of the index to describe.
 
     Setting this to a non-existing collection results in **MilvusException**.
+
+- `timestamp(Long timestamp)`
+
+    A timestamp, the segments generated before which will be checked before this operation returns. The value defaults to `0L`, indicating that all segments generated till now will be checked.
 
 **RETURN TYPE:** 
 
