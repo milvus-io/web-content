@@ -14,7 +14,7 @@ Release date: October 21, 2025
 
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
 |:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.4          | 2.6.2             | 2.6.1               | 2.6.6            | 2.6.1          |
+| 2.6.4          | 2.6.3             | 2.6.1               | 2.6.6            | 2.6.1          |
 
 We are excited to announce the release of Milvus 2.6.4, featuring a range of powerful new capabilities, performance enhancements, and essential bug fixes. This update introduces important features such as Struct in ARRAY for advanced data modeling. Additionally, we have enabled JSON Shredding by default, further improving query performance and efficiency. Several critical bugs have also been addressed to ensure greater stability and reliability. With this release, Milvus continues to provide a more robust and efficient experience for all users. Below are the key highlights of this release.
 

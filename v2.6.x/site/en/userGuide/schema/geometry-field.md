@@ -19,7 +19,7 @@ Use a GEOMETRY field when you need to combine vector similarity with spatial con
 
 <div class="alert note">
 
-The GEOMETRY field requires PyMilvus 2.7.0rc46 or later. This version is currently only available by building from source. For instructions, see [How to build PyMilvus from source](https://github.com/milvus-io/pymilvus#faq).
+To use the GEOMETRY field, upgrade your SDK to the latest version.
 
 </div>
 
