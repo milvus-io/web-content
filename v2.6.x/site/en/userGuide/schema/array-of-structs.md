@@ -2,6 +2,7 @@
 id: array-of-structs.md
 title: "Array of Structs"
 summary: "An Array of Structs field in an entity stores an ordered set of Struct elements. Each Struct in the Array shares the same pre-defined schema, comprising multiple vectors and scalar fields."
+beta: Milvus 2.6.4+
 ---
 
 # Array of Structs
