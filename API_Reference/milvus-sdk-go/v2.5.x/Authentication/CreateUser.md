@@ -22,7 +22,7 @@ func (c *Client) CreateUser(ctx context.Context, opt CreateUserOption, callOpts 
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>CreateUserOption</code></p></td>
+     <td><p><a href="./v2-Authentication-CreateUser#createuseroption"><code>CreateUserOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

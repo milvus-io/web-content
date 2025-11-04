@@ -22,7 +22,7 @@ func (c *Client) GrantV2(ctx context.Context, option GrantV2Option, callOptions 
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>GrantV2Option</code></p></td>
+     <td><p><a href="./v2-Authentication-GrantV2#newgrantv2option"><code>GrantV2Option</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

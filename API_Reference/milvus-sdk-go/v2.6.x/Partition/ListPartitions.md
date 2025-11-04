@@ -22,7 +22,7 @@ func (c *Client) ListPartitions(ctx context.Context, opt ListPartitionsOption, c
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>ListPartitionsOption</code></p></td>
+     <td><p><a href="./v2-Partition-ListPartitions#listpartitionsoption"><code>ListPartitionsOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

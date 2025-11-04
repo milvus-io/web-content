@@ -1,6 +1,6 @@
 # GrantV2()
 
-This method grants a privilege or a privilege group to a role.
+This method grants a privilege or a privilege group to a role. In Milvus, you can allocate multiple privileges or privilege groups to a role and grant the role to a user so that the user gains the privileges allocated to the role.
 
 ```plaintext
 func (c *Client) GrantV2(ctx context.Context, option GrantV2Option, callOptions ...grpc.CallOption) error
@@ -22,7 +22,7 @@ func (c *Client) GrantV2(ctx context.Context, option GrantV2Option, callOptions 
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>GrantV2Option</code></p></td>
+     <td><p><a href="./v2-Authentication-GrantV2#newgrantv2option"><code>GrantV2Option</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>
@@ -42,7 +42,7 @@ You can use the `NewGrantV2Option()` function to get the concrete implementation
 The signature of the `NewGrantV2Option()` is as follows:
 
 ```go
-func NewGrantV2Option(roleName, privilegeName, dbName, collectionName string) *grantV2Option
+func NewGrantV2Option(roleName, privilegeName, dbName, collectionName string) *grantPrivilegeV2Option
 ```
 
 <table>
@@ -58,12 +58,12 @@ func NewGrantV2Option(roleName, privilegeName, dbName, collectionName string) *g
    </tr>
    <tr>
      <td><p><code>privilegeName</code></p></td>
-     <td><p>Name of the privilege or privilege group to assign. For details, refer to the <strong>Privilege name</strong> column in the table on page Users and Roles.</p></td>
+     <td><p>Name of the privilege or privilege group to assign.</p><p>For details, refer to the <strong>Privilege name</strong> column in the table on page Users and Roles.</p></td>
      <td><p><code>string</code></p></td>
    </tr>
    <tr>
      <td><p><code>dbName</code></p></td>
-     <td><p>Name of the target database.</p></td>
+     <td><p>Name of the target database of this operation</p></td>
      <td><p><code>string</code></p></td>
    </tr>
    <tr>
@@ -84,7 +84,6 @@ Null
 ## Example
 
 ```go
-// TODO 
-// https://milvus.io/api-reference/pymilvus/client/v2.5.x/MilvusClient/Authentication/grant_privilege.md
+
 ```
 

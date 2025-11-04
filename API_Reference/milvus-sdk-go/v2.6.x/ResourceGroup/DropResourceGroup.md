@@ -22,7 +22,7 @@ func (c *Client) DropResourceGroup(ctx context.Context, opt DropResourceGroupOpt
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DropResourceGroupOption</code></p></td>
+     <td><p><a href="./v2-ResourceGroup-DropResourceGroup#dropresourcegroupoption"><code>DropResourceGroupOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

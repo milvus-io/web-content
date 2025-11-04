@@ -13,7 +13,7 @@ Milvus GO SDK is an open-source project and its source code is hosted on [GitHub
 | 2.2.x	| [2.2.7](https://github.com/milvus-io/milvus-sdk-go/tree/v2.2.8)|
 | 2.3.x	| [2.3.2](https://github.com/milvus-io/milvus-sdk-go/tree/v2.3.3)|
 | 2.4.x	| [2.4.0](https://github.com/milvus-io/milvus-sdk-go/tree/v2.4.1)|
-| 2.5.x	| [2.5.1](https://github.com/milvus-io/milvus/tree/client/v2.5.1/client)|
+| 2.5.x	| [2.5.6](https://github.com/milvus-io/milvus/tree/client/v2.5.6/client)|
 
 Note: Milvus and GO SDK are NOT compatible across major versions.
 

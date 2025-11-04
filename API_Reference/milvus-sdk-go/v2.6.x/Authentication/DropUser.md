@@ -22,7 +22,7 @@ func (c *Client) DropUser(ctx context.Context, opt DropUserOption, callOpts ...g
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DropUserOption</code></p></td>
+     <td><p><a href="./v2-Authentication-DropUser#dropuseroption"><code>DropUserOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

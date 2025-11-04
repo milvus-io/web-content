@@ -22,7 +22,7 @@ func (c *Client) CreateDatabase(ctx context.Context, option CreateDatabaseOption
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>CreateDatabaseOption</code></p></td>
+     <td><p><a href="./v2-Database-CreateDatabase#createdatabaseoption"><code>CreateDatabaseOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

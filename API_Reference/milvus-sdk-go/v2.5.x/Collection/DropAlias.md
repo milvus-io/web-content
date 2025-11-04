@@ -22,7 +22,7 @@ func (c *Client) DropAlias(ctx context.Context, option DropAliasOption, callOpti
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DropAliasOption</code></p></td>
+     <td><p><a href="./v2-Collection-DropAlias#dropaliasoption"><code>DropAliasOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

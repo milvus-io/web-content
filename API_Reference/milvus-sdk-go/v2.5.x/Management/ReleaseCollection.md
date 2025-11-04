@@ -22,7 +22,7 @@ func (c *Client) LoadCollection(ctx context.Context, option LoadCollectionOption
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>ReleaseCollectionOption</code></p></td>
+     <td><p><a href="./v2-Management-ReleaseCollection#releasecollectionoption"><code>ReleaseCollectionOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>
@@ -60,7 +60,7 @@ func NewReleaseCollectionOption(collectionName string) *releaseCollectionOption
 
 ## Return
 
-`LoadTask`
+[`LoadTask`](LoadCollection.md#LoadTask)
 
 ## Example
 

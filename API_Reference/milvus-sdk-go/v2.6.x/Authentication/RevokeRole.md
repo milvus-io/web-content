@@ -22,7 +22,7 @@ func (c *Client) RevokeRole(ctx context.Context, opt RevokeRoleOption, callOpts 
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>RevokeRoleOption</code></p></td>
+     <td><p><a href="./v2-Authentication-RevokeRole#revokeroleoption"><code>Revoke&#93;(./v2-Authentication-RevokeRole#revokeroleoption)&#91;RoleOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

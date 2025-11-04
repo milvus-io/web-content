@@ -22,7 +22,7 @@ func (c *Client) CreateCollection(ctx context.Context, option CreateCollectionOp
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>CreateCollectionOption</code></p></td>
+     <td><p><a href="./v2-Collection-CreateCollection#createcollectionoption"><code>CreateCollectionOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>
@@ -73,7 +73,7 @@ You can chain the following methods to append more parameters to the `createColl
 
 - [WithConsistencyLevel](CreateCollection.md#WithConsistencyLevel)
 
-- [WithIndexOptions](CreateCollection.md#WithIndexOptions)
+- [WithNumPartitions](CreateCollection.md#WithNumPartitions)
 
 ### SimpleCreateCollectionOptions
 
@@ -110,6 +110,12 @@ You can chain the following methods to append more parameters to the `createColl
 - [WithVarcharPK](CreateCollection.md#WithVarcharPK)
 
 - [WithIndexOptions](CreateCollection.md#WithIndexOptions)
+
+- [WithMetricType](CreateCollection.md#WithMetricType)
+
+- [WithPKFieldName](CreateCollection.md#WithPKFieldName)
+
+- [WithVectorFieldName](CreateCollection.md#WithVectorFieldName)
 
 ### WithAutoID
 
@@ -169,7 +175,7 @@ func (opt *createCollectionOption) WithDynamicSchema(dynamicSchema bool) *create
    </tr>
    <tr>
      <td><p><code>enableDynamicSchema</code></p></td>
-     <td><p>Whether to enable the dynamic field. </p><p>If set to <code>true</code>, non-schema-defined fields and their values in incoming entities will be saved as key-value pairs in a reserved field of the JSON type named <code>$meta</code>. </p><p>For details, refer to <a href="https://milvus.io/docs/enable-dynamic-field.md">Dynamic Field</a>.</p></td>
+     <td><p>Whether to enable the dynamic field. </p><p>If set to <code>true</code>, non-schema-defined fields and their values in incoming entities will be saved as key-value pairs in a reserved field of the JSON type named <code>#meta</code>. </p><p>For details, refer to <a href="https://milvus.io/docs/enable-dynamic-field.md">Dynamic Field</a>.</p></td>
      <td><p><code>bool</code></p></td>
    </tr>
 </table>
@@ -217,7 +223,7 @@ func (opt *createCollectionOption) WithIndexOptions(indexOpts ...CreateIndexOpti
    <tr>
      <td><p><code>indexOptions</code></p></td>
      <td><p>Index options.</p><p>This parameter applies when creating a collection with a custom schema. Once set, Milvus automatically loads the collection after it is created.</p></td>
-     <td><p><code>[]CreateIndexOption</code></p></td>
+     <td><p><a href="./v2-Management-CreateIndex#createindexoption"><code>...CreateIndexOption</code></a></p></td>
    </tr>
 </table>
 
@@ -238,7 +244,7 @@ func (opt *createCollectionOption) WithProperty(key string, value any) *createCo
    <tr>
      <td><p><code>properties</code></p></td>
      <td><p>Other collection properties.</p></td>
-     <td><p><code>map[string]string</code></p></td>
+     <td><p><code>map&#91;string&#93;string</code></p></td>
    </tr>
 </table>
 
@@ -260,6 +266,90 @@ func (opt *createCollectionOption) WithConsistencyLevel(cl entity.ConsistencyLev
      <td><p><code>consistencyLevel</code></p></td>
      <td><p>Consistency level of the collection.</p><p>For details, refer to <a href="https://milvus.io/docs/consistency.md">Consistency Level</a>.</p></td>
      <td><p><code>entity.ConsistencyLevel</code></p></td>
+   </tr>
+</table>
+
+### WithMetricType
+
+This method appends the settings regarding the metric type parameter to the `createCollectionOption` struct. The signature is as follows:
+
+```go
+func (opt *createCollectionOption) WithMetricType(metricType entity.MetricType) *createCollectionOption
+```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>metricType</code></p></td>
+     <td><p>The metric type used to measure similarities between vector embeddings.</p></td>
+     <td><p><a href="./v2-Collection-CreateCollection#entitymetrictype"><code>entity.MetricType</code></a></p></td>
+   </tr>
+</table>
+
+### WithPKFieldName
+
+This method appends the settings regarding the name of the primary key field to the `createCollectionOption` struct. The signature is as follows:
+
+```go
+func (opt *createCollectionOption) WithPKFieldName(name string) *createCollectionOption
+```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>name</code></p></td>
+     <td><p>The name of the primary key field</p></td>
+     <td><p><code>string</code></p></td>
+   </tr>
+</table>
+
+### WithVectorFieldName
+
+This method appends the settings regarding the name of a vector field to the `createCollectionOption` struct. The signature is as follows:
+
+```go
+func (opt *createCollectionOption) WithVectorFieldName(name string) *createCollectionOption
+```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>name</code></p></td>
+     <td><p>The name of the vector field</p></td>
+     <td><p><code>string</code></p></td>
+   </tr>
+</table>
+
+### WithNumPartitions
+
+This method appends the settings regarding the `numPartitions` to the `createCollectionOption` struct. The signature is as follows:
+
+```go
+func (opt *createCollectionOption) WithNumPartitions(numPartitions int64) *createCollectionOption
+```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>numPartitions</code></p></td>
+     <td><p>The number of partitions to create in the collection.</p><p>This parameter is applicable when you enable the partition key.</p></td>
+     <td><p><code>int64</code></p></td>
    </tr>
 </table>
 
@@ -341,7 +431,7 @@ func (s *entity.Schema) WithDynamicFieldEnabled(dynamicEnabled bool) *entity.Sch
    </tr>
    <tr>
      <td><p><code>dynamicEnabled</code></p></td>
-     <td><p>Whether to enable the dynamic field. </p><p>If set to <code>true</code>, non-schema-defined fields and their values in incoming entities will be saved as key-value pairs in a reserved field of the JSON type named <code>$meta</code>. </p><p>For details, refer to <a href="https://milvus.io/docs/enable-dynamic-field.md">Dynamic Field</a>.</p></td>
+     <td><p>Whether to enable the dynamic field. </p><p>If set to <code>true</code>, non-schema-defined fields and their values in incoming entities will be saved as key-value pairs in a reserved field of the JSON type named <code>#meta</code>. </p><p>For details, refer to <a href="https://milvus.io/docs/enable-dynamic-field.md">Dynamic Field</a>.</p></td>
      <td><p><code>bool</code></p></td>
    </tr>
 </table>
@@ -363,7 +453,7 @@ func (s *entity.Schema) WithField(f *entity.Field) *entity.Schema
    <tr>
      <td><p><code>f</code></p></td>
      <td><p>An <code>entity.Field</code> object.</p></td>
-     <td><p><code>*entity.Field</code></p></td>
+     <td><p><a href="./v2-Collection-CreateCollection#entityfield"><code>*entity.Field</code></a></p></td>
    </tr>
 </table>
 
@@ -384,7 +474,7 @@ func (s *entity.Schema) WithFunction(f *entity.Function) *entity.Schema
    <tr>
      <td><p><code>f</code></p></td>
      <td><p>An <code>entity.Function</code> object.</p></td>
-     <td><p><code>*entity.Function</code></p></td>
+     <td><p><a href="./v2-Collection-CreateCollection#entityfunction"><code>*entity.Function</code></a></p></td>
    </tr>
 </table>
 
@@ -441,6 +531,8 @@ This method creates an empty field schema. You can chain the following methods t
 
 - [WithEnableAnalyzer](CreateCollection.md#entityWithEnableAnalyzer)
 
+- [WithEnableMatch](CreateCollection.md#entityWithEnableMatch)
+
 - [WithIsAutoID](CreateCollection.md#entityWithIsAutoID)
 
 - [WithIsClusteringKey](CreateCollection.md#entityWithIsClusteringKey)
@@ -454,6 +546,8 @@ This method creates an empty field schema. You can chain the following methods t
 - [WithMaxCapacity](CreateCollection.md#entityWithMaxCapacity)
 
 - [WithMaxLength](CreateCollection.md#entityWithMaxLength)
+
+- [WithMultiAnalyzerParams](CreateCollection.md#WithMultiAnalyzerParams)
 
 - [WithName](CreateCollection.md#entityWithName)
 
@@ -478,7 +572,7 @@ func (f *Field) WithAnalyzerParams(params map[string]any) *Field
    <tr>
      <td><p><code>params</code></p></td>
      <td><p>Analyzer parameters of the current field in key-value pairs.</p><p>An <strong>analyzer</strong> is a crucial component that converts raw text into a structured, searchable format. For details, refer to <a href="https://milvus.io/docs/analyzer-overview.md">Analyzer Overview</a>.</p></td>
-     <td><p><code>map[string]any</code></p></td>
+     <td><p><code>map&#91;string&#93;any</code></p></td>
    </tr>
 </table>
 
@@ -498,7 +592,7 @@ func (f *Field) WithDataType(dataType FieldType) *Field
    </tr>
    <tr>
      <td><p><code>dataType</code></p></td>
-     <td><p>Data type of the current field. Possible values are as follows:</p><ul><li><p><code>entity.FieldTypeBool</code></p></li><li><p><code>entity.FieldTypeInt8</code></p></li><li><p><code>entity.FieldTypeInt16</code></p></li><li><p><code>entity.FieldTypeInt32</code></p></li><li><p><code>entity.FieldTypeInt64</code></p></li><li><p><code>entity.FieldTypeFloat</code></p></li><li><p><code>entity.FieldTypeDouble</code></p></li><li><p><code>entity.FieldTypeVarChar</code></p></li><li><p><code>entity.FieldTypeArray</code></p></li><li><p><code>entity.FieldTypeJSON</code></p></li><li><p><code>entity.FieldTypeBinaryVector</code></p></li><li><p><code>entity.FieldTypeFloatVector</code></p></li><li><p><code>entity.FieldTypeFloat16Vector</code></p></li><li><p><code>entity.FieldTypeBFloat16Vector</code></p></li><li><p><code>entity.FieldTypeSparseVector</code></p></li><li><p><code>entity.FieldTypeInt8Vector</code></p></li></ul></td>
+     <td><p>Data type of the current field. Possible values are as follows:</p><ul><li><p><code>entity.FieldTypeBool</code></p></li><li><p><code>entity.FieldTypeInt8</code></p></li><li><p><code>entity.FieldTypeInt16</code></p></li><li><p><code>entity.FieldTypeInt32</code></p></li><li><p><code>entity.FieldTypeInt64</code></p></li><li><p><code>entity.FieldTypeFloat</code></p></li><li><p><code>entity.FieldTypeDouble</code></p></li><li><p><code>entity.FieldTypeVarChar</code></p></li><li><p><code>entity.FieldTypeArray</code></p></li><li><p><code>entity.FieldTypeJSON</code></p></li><li><p><code>entity.FieldTypeGeometry</code></p></li><li><p><code>entity.FieldTypeBinaryVector</code></p></li><li><p><code>entity.FieldTypeFloatVector</code></p></li><li><p><code>entity.FieldTypeFloat16Vector</code></p></li><li><p><code>entity.FieldTypeBFloat16Vector</code></p></li><li><p><code>entity.FieldTypeSparseVector</code></p></li><li><p><code>entity.FieldTypeInt8Vector</code></p></li></ul></td>
      <td><p><code>entity.FieldType</code></p></td>
    </tr>
 </table>
@@ -713,6 +807,27 @@ func (f *Field) WithEnableAnalyzer(enable bool) *Field
    </tr>
 </table>
 
+### entity.WithEnableMatch
+
+This method determines whether to enable text match for the current field. The signature of the method is as follows:
+
+```go
+func (f *Field) WithEnableMatch(enable bool) *Field
+```
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>enable</code></p></td>
+     <td><p>Whether to enable the text match for the current field.</p><p>For details, refer to <a href="https://milvus.io/docs/keyword-match.md">Text Match</a>.</p></td>
+     <td><p><code>bool</code></p></td>
+   </tr>
+</table>
+
 ### entity.WithIsAutoID
 
 This method determines whether the primary key automatically increments. The signature of the method is as follows：
@@ -865,6 +980,29 @@ func (f *Field) WithMaxLength(maxLen int64) *Field
      <td><p><code>maxCap</code></p></td>
      <td><p>Maximum length of a VarChar field.</p><p>This method applies only when you also append the <code>entity.WithDataType</code> method to the field creation request and set the <code>dataType</code> parameter to <code>entity.FieldTypeVarChar</code>.</p></td>
      <td><p><code>int64</code></p></td>
+   </tr>
+</table>
+
+### WithMultiAnalyzerParams
+
+This method sets the parameters for a multi-language analyzer. The signature is as follows:
+
+```go
+func (f *Field) WithMultiAnalyzerParams(params map[string]any) *Field
+```
+
+For details, you can read [Multi-language Analyzer](https://milvus.io/docs/multi-language-analyzers.md).
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+     <th><p>Type</p></th>
+   </tr>
+   <tr>
+     <td><p><code>params</code></p></td>
+     <td><p>The configuration of a multi-language analyzer that automatically matches the language of your text.</p></td>
+     <td><p><code>map&#91;string&#93;any</code></p></td>
    </tr>
 </table>
 
@@ -1060,7 +1198,7 @@ func (f *Function) WithType(funcType FunctionType) *Function
    <tr>
      <td><p><code>funcType</code></p></td>
      <td><p>Type of the current function.</p></td>
-     <td><p><code>FunctionType</code></p></td>
+     <td><p><a href="./v2-Collection-CreateCollection#entityfunctiontype"><code>FunctionType</code></a></p></td>
    </tr>
 </table>
 
@@ -1093,6 +1231,7 @@ const (
         SUBSTRUCTURE   MetricType = "SUBSTRUCTURE"
         SUPERSTRUCTURE MetricType = "SUPERSTRUCTURE"
         BM25           MetricType = "BM25"
+        MHJACCARD      MetricType = "MHJACCARD"
 )
 ```
 

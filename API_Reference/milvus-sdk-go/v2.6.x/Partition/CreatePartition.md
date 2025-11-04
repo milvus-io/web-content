@@ -22,7 +22,7 @@ func (c *Client) CreatePartition(ctx context.Context, opt CreatePartitionOption,
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>CreateAliasOption</code></p></td>
+     <td><p><a href="./v2-Partition-CreatePartition#createpartitionoption"><code>CreateAliasOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

@@ -22,7 +22,7 @@ func (c *Client) LoadPartitions(ctx context.Context, option LoadPartitionsOption
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>LoadPartitionsOption</code></p></td>
+     <td><p><a href="./v2-Management-LoadPartitions#loadpartitionsoption"><code>LoadPartitionsOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>
@@ -65,7 +65,7 @@ func NewLoadPartitionsOption(collectionName string, partitionsNames ...string) *
 
 ## Return
 
-`LoadTask`
+[`LoadTask`](LoadCollection.md#LoadTask)
 
 ## Example
 

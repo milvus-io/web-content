@@ -22,7 +22,7 @@ func (c *Client) DescribeUser(ctx context.Context, opt DescribeUserOption, callO
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DescribeUserOption</code></p></td>
+     <td><p><a href="./v2-Authentication-DescribeUser#describeuseroption"><code>DescribeUserOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>
@@ -75,7 +75,7 @@ type User struct {
 
 ## Return
 
-`*entity.User`
+`*[entity.User`](DescribeUser.md#entityUser)
 
 ## Example
 

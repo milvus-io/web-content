@@ -22,7 +22,7 @@ func (c *Client) DropPrivilegeGroup(ctx context.Context, option DropPrivilegeGro
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DropPrivilegeGroupOption</code></p></td>
+     <td><p><a href="./v2-Authentication-DropPrivilegeGroup#dropprivilegegroupoption"><code>DropPrivilegeGroupOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

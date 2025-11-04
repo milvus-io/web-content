@@ -22,7 +22,7 @@ func (c *Client) ListUsers(ctx context.Context, opt ListUserOption, callOpts ...
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>ListUserOption</code></p></td>
+     <td><p><a href="./v2-Authentication-ListUsers#listuseroption"><code>ListUserOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

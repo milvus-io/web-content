@@ -22,7 +22,7 @@ func (c *Client) HasPartition(ctx context.Context, opt HasPartitionOption, callO
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>HasPartitionOption</code></p></td>
+     <td><p><a href="./v2-Partition-HasPartition#haspartitionoption"><code>HasPartitionOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

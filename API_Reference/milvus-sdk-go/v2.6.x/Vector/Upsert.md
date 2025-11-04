@@ -22,7 +22,7 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>UpsertOption</code></p></td>
+     <td><p><a href="./v2-Vector-Upsert#upsertoption"><code>UpsertOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>
@@ -35,7 +35,7 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 
 This is an interface type. The `columnBasedDataOption` and `rowBasedDataOption` struct types implement this interface type. 
 
-You can use the `NewColumnBasedInsertOption()` or `NewRowBasedInsertOption()` function to get the concrete implementation.
+You can use the [`NewColumnBasedInsertOption()`](Upsert.md#NewColumnBasedInsertOption) or [`NewRowBasedInsertOption()`](Upsert.md#NewRowBasedInsertOption) function to get the concrete implementation.
 
 ### NewRowBasedInsertOption
 
@@ -85,35 +85,37 @@ func NewColumnBasedInsertOption(collName string, columns ...column.Column) *colu
    <tr>
      <td><p><code>columns</code></p></td>
      <td><p>Data organized in columns.</p></td>
-     <td><p><code>...column.Column</code></p></td>
+     <td><p><a href="./v2-Vector-Insert"><code>...column.Column</code></a></p></td>
    </tr>
 </table>
 
 You can chain the following method to get an implementation of the `columnBasedDataOption` struct.
 
-- [WithColumns](Insert.md#WithColumns)
+- [WithColumns](Insert.md)
 
-- [WithBoolColumn](Insert.md#WithBoolColumn)
+- [WithBoolColumn](Insert.md)
 
-- [WithInt8Column](Insert.md#WithInt8Column)
+- [WithInt8Column](Insert.md)
 
-- [WithInt16Column](Insert.md#WithInt16Column)
+- [WithInt16Column](Insert.md)
 
-- [WithInt32Column](Insert.md#WithInt32Column)
+- [WithInt32Column](Insert.md)
 
-- [WithInt64Column](Insert.md#WithInt64Column)
+- [WithInt64Column](Insert.md)
 
-- [WithVarcharColumn](Insert.md#WithVarcharColumn)
+- [WithVarcharColumn](Insert.md)
 
-- [WithFloatVectorColumn](Insert.md#WithFloatVectorColumn)
+- [WithFloatVectorColumn](Insert.md)
 
-- [WithFloat16VectorColumn](Insert.md#WithFloat16VectorColumn)
+- [WithFloat16VectorColumn](Insert.md)
 
-- [WithBFloat16VectorColumn](Insert.md#WithBFloat16VectorColumn)
+- [WithBFloat16VectorColumn](Insert.md)
 
-- [WithBinaryVectorColumn](Insert.md#WithBinaryVectorColumn)
+- [WithBinaryVectorColumn](Insert.md)
 
-- [WithPartition](Insert.md#WithPartition)
+- [WithPartition](Insert.md)
+
+- [WithPartialUpdate](Insert.md)
 
 ## UpsertResult
 
@@ -133,6 +135,7 @@ type UpsertResult struct {
 ## Example
 
 ```plaintext
+// Upsert with full data
 resp, err := cli.Upsert(ctx, milvusclient.NewColumnBasedInsertOption("quick_setup").
     WithInt64Column("id", []int64{1, 2, 3, 4, 5, 6, 7, 8, 9}).
     WithVarcharColumn("color", []string{"pink_8682", "red_7025", "orange_6781", "pink_9298", "red_4794", "yellow_4222", "red_9392", "grey_8510", "white_9381", "purple_4976"}).
@@ -149,8 +152,11 @@ resp, err := cli.Upsert(ctx, milvusclient.NewColumnBasedInsertOption("quick_setu
         {0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608},
     }),
 )
+
 if err != nil {
     // handle err
 }
+
 fmt.Println(resp)
+
 ```

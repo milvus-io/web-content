@@ -22,7 +22,7 @@ func (c *Client) AlterCollectionProperties(ctx context.Context, option AlterColl
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>AlterCollectionFieldPropertiesOption</code></p></td>
+     <td><p><a href="./v2-Collection-AlterCollectionProperties#altercollectionpropertiesoption"><code>AlterCollectionFieldPropertiesOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

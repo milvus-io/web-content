@@ -22,7 +22,7 @@ func (c *Client) GetCollectionStats(ctx context.Context, opt GetCollectionOption
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>GetCollectionOption</code></p></td>
+     <td><p><a href="./v2-Collection-GetCollectionStats#getcollectionoption"><code>GetCollectionOption</code></a></p></td>
    </tr>
 </table>
 

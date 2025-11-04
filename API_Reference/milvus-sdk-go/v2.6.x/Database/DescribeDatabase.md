@@ -22,7 +22,7 @@ func (c *Client) DescribeDatabase(ctx context.Context, option DescribeDatabaseOp
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DescribeDatabaseOption</code></p></td>
+     <td><p><a href="./v2-Database-DescribeDatabase#describedatabaseoption"><code>DescribeDatabaseOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

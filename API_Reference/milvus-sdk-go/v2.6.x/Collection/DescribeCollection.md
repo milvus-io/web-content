@@ -22,7 +22,7 @@ func (c *Client) DescribeCollection(ctx context.Context, option DescribeCollecti
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DescribeCollectionOption</code></p></td>
+     <td><p><a href="./v2-Collection-DescribeCollection#describecollectionoption"><code>DescribeCollectionOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>
@@ -78,11 +78,11 @@ type Collection struct {
 
 ## entity.Schema
 
-For details about this struct type, refer to [entity.Schema](CreateCollection.md#entitySchema).
+For details about this struct type, refer to [entity.Schema](CreateCollection.md).
 
 ## entity.ConsistencyLevel
 
-For details about this enumeration, refer to [entity.ConsistencyLevel](CreateCollection.md#entityConsistencyLevel).
+For details about this enumeration, refer to [entity.ConsistencyLevel](CreateCollection.md).
 
 ## Return
 

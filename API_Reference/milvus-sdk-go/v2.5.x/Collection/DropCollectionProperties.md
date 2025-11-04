@@ -22,7 +22,7 @@ func (c *Client) DropCollectionProperties(ctx context.Context, option DropCollec
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DropCollectionPropertiesOption</code></p></td>
+     <td><p><a href="./v2-Collection-DropCollectionProperties#dropcollectionpropertiesoption"><code>DropCollectionPropertiesOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

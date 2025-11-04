@@ -22,7 +22,7 @@ func (c *Client) GrantRole(ctx context.Context, opt GrantRoleOption, callOpts ..
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>GrantRoleOption</code></p></td>
+     <td><p><a href="./v2-Authentication-GrantRole#grantroleoption"><code>GrantRoleOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

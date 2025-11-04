@@ -33,7 +33,7 @@ func (c *Client) CreateResourceGroup(ctx context.Context, opt CreateResourceGrou
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>CreateResourceGroupOption</code></p></td>
+     <td><p><a href="./v2-ResourceGroup-CreateResourceGroup#createresourcegroupoption"><code>CreateResourceGroupOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

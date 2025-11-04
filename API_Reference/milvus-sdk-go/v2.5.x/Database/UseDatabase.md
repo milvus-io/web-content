@@ -22,7 +22,7 @@ func (c *Client) UseDatabase(ctx context.Context, option UseDatabaseOption) erro
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>UseDatabaseOption</code></p></td>
+     <td><p><a href="./v2-Database-UseDatabase#usedatabaseoption"><code>UseDatabaseOption</code></a></p></td>
    </tr>
 </table>
 
