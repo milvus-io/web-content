@@ -31,7 +31,7 @@ beta: Milvus 2.6.4+
 <li><p>Maps & logistics: “assets <strong>inside</strong> a region” or “routes <strong>intersecting</strong> a path”</p></li>
 </ul>
 <div class="alert note">
-<p>The GEOMETRY field requires PyMilvus 2.7.0rc46 or later. This version is currently only available by building from source. For instructions, see <a href="https://github.com/milvus-io/pymilvus#faq">How to build PyMilvus from source</a>.</p>
+<p>To use the GEOMETRY field, upgrade your SDK to the latest version.</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">What is a GEOMETRY field?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
