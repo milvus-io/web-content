@@ -5,8 +5,9 @@ summary: >-
   An Array of Structs field in an entity stores an ordered set of Struct
   elements. Each Struct in the Array shares the same pre-defined schema,
   comprising multiple vectors and scalar fields.
+beta: Milvus 2.6.4+
 ---
-<h1 id="Array-of-Structs" class="common-anchor-header">Array of Structs<button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
+<h1 id="Array-of-Structs" class="common-anchor-header">Array of Structs<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
