@@ -22,7 +22,7 @@ func (c *Client) LoadCollection(ctx context.Context, option LoadCollectionOption
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>LoadCollectionOption</code></p></td>
+     <td><p><a href="./v2-Management-LoadCollection#loadcollectionoption"><code>LoadCollectionOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>
@@ -72,7 +72,7 @@ func (t *LoadTask) Await(ctx context.Context) error
 
 ## Return
 
-`LoadTask`
+[`LoadTask`](LoadCollection.md#LoadTask)
 
 ## Example
 

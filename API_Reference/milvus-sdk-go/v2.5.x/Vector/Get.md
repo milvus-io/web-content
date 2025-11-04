@@ -22,7 +22,7 @@ func (c *Client) Get(ctx context.Context, option QueryOption, callOptions ...grp
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>QueryOption</code></p></td>
+     <td><p><a href="./v2-Vector-Get#queryoption"><code>QueryOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

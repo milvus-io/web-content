@@ -22,7 +22,7 @@ func (c *Client) AlterAlias(ctx context.Context, option AlterAliasOption, callOp
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>AlterAliasOption</code></p></td>
+     <td><p><a href="./v2-Collection-AlterAlias#alteraliasoption"><code>AlterAliasOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

@@ -22,7 +22,7 @@ func (c *Client) ListIndexes(ctx context.Context, opt ListIndexOption, callOptio
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>ListIndexOption</code></p></td>
+     <td><p><a href="./v2-Management-ListIndexes#listindexoption"><code>ListIndexOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

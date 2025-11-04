@@ -22,7 +22,7 @@ func (c *Client) RevokeV2(ctx context.Context, option RevokeV2Option, callOption
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>RevokeV2Option</code></p></td>
+     <td><p><a href="./v2-Authentication-RevokeV2#revokev2option"><code>RevokeV2Option</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

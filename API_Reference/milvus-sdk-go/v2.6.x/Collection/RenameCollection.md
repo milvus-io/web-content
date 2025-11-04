@@ -22,7 +22,7 @@ func (c *Client) RenameCollection(ctx context.Context, option RenameCollectionOp
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>RenameCollectionOption</code></p></td>
+     <td><p><a href="./v2-Collection-RenameCollection#renamecollectionoption"><code>RenameCollectionOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

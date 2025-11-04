@@ -22,7 +22,7 @@ func (c *Client) ListDatabase(ctx context.Context, option ListDatabaseOption, ca
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>ListDatabaseOption</code></p></td>
+     <td><p><a href="./v2-Database-ListDatabase#listdatabaseoption"><code>ListDatabaseOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

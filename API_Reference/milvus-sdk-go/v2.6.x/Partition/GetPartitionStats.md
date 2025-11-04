@@ -22,7 +22,7 @@ func (c *Client) GetPartitionStats(ctx context.Context, opt GetPartitionStatsOpt
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>GetPartitionStatsOption</code></p></td>
+     <td><p><a href="./v2-Partition-GetPartitionStats#getpartitionstatsoption"><code>GetPartitionStatsOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

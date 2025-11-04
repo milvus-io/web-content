@@ -22,7 +22,7 @@ func (c *Client) DropIndex(ctx context.Context, opt DropIndexOption, callOptions
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DropIndexOption</code></p></td>
+     <td><p><a href="./v2-Management-DropIndex#dropindexoption"><code>DropIndexOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

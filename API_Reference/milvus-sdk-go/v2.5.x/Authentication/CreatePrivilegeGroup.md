@@ -22,7 +22,7 @@ func (c *Client) CreatePrivilegeGroup(ctx context.Context, option CreatePrivileg
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>CreatePrivilegeGroupOption</code></p></td>
+     <td><p><a href="./v2-Authentication-CreatePrivilegeGroup#createprivilegegroupoption"><code>CreatePrivilegeGroupOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

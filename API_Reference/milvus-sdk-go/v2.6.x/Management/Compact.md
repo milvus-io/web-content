@@ -30,7 +30,7 @@ func (c *Client) Compact(ctx context.Context, option CompactOption, callOptions 
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>GetLoadStateOption</code></p></td>
+     <td><p><a href="./v2-Management-Compact#compactoption"><code>GetLoadStateOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

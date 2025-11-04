@@ -22,7 +22,7 @@ func (c *Client) DropDatabaseProperties(ctx context.Context, option DropDatabase
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DropDatabasePropertiesOption</code></p></td>
+     <td><p><a href="./v2-Database-DropDatabaseProperties#dropdatabasepropertiesoption"><code>DropDatabasePropertiesOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

@@ -22,7 +22,7 @@ func (c *Client) DescribeResourceGroup(ctx context.Context, opt DescribeResource
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DescribeResourceGroupOption</code></p></td>
+     <td><p><a href="./v2-ResourceGroup-DescribeResourceGroup#describeresourcegroupoption"><code>DescribeResourceGroupOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

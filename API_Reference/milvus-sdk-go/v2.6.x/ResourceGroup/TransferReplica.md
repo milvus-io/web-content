@@ -22,7 +22,7 @@ func (c *Client) TransferReplica(ctx context.Context, opt TransferReplicaOption,
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>TransferReplicaOption</code></p></td>
+     <td><p><a href="./v2-ResourceGroup-TransferReplica#transferreplicaoption"><code>TransferReplicaOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>

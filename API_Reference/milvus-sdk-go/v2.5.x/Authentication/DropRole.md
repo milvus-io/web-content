@@ -22,7 +22,7 @@ func (c *Client) DropRole(ctx context.Context, opt DropRoleOption, callOpts ...g
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DropRoleOption</code></p></td>
+     <td><p><a href="./v2-Authentication-DropRole#droproleoption"><code>DropRoleOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

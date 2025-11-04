@@ -53,7 +53,7 @@ func NewAddCollectionFieldOption(collectionName string, field *entity.Field) *ad
    <tr>
      <td><p><code>field</code></p></td>
      <td><p>The field to add.</p></td>
-     <td><p><a href="./v2-Collection-CreateCollection"><code>*entity.Field</code></a></p></td>
+     <td><p><a href="./v2-Collection-CreateCollection#entityfield"><code>*entity.Field</code></a></p></td>
    </tr>
 </table>
 

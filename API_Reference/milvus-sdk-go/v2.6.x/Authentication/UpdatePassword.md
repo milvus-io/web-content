@@ -22,7 +22,7 @@ func (c *Client) UpdatePassword(ctx context.Context, opt UpdatePasswordOption, c
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>UpdatePasswordOption</code></p></td>
+     <td><p><a href="./v2-Authentication-UpdatePassword#updatepasswordoption"><code>UpdatePasswordOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

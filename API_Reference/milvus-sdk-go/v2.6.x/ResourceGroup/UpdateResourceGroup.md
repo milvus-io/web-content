@@ -22,7 +22,7 @@ func (c *Client) UpdateResourceGroup(ctx context.Context, opt UpdateResourceGrou
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>UpdateResourceGroupOption</code></p></td>
+     <td><p><a href="./v2-ResourceGroup-UpdateResourceGroup#updateresourcegroupoption"><code>UpdateResourceGroupOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>
@@ -59,7 +59,7 @@ func NewUpdateResourceGroupOption(name string, resourceGroupConfig *entity.Resou
    <tr>
      <td><p><code>resourceGroupConfig</code></p></td>
      <td><p>Configuration of the target resource group.</p></td>
-     <td><p><code>*entity.ResourceGroupConfig</code></p></td>
+     <td><p><a href="./v2-ResourceGroup-DescribeResourceGroup#entityresourcegroupconfig"><code>*entity.ResourceGroupConfig</code></a></p></td>
    </tr>
 </table>
 

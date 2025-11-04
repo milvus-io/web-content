@@ -22,7 +22,7 @@ func (c *Client) ListAliases(ctx context.Context, option ListAliasesOption, call
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>ListAliasesOption</code></p></td>
+     <td><p><a href="./v2-Collection-ListAliases#listaliasesoption"><code>ListAliasesOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

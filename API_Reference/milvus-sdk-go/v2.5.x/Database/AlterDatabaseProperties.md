@@ -22,7 +22,7 @@ func (c *Client) AlterDatabaseProperies(ctx context.Context, option AlterDatabas
    <tr>
      <td><p><code>option</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>AlterDatabasePropertiesOption</code></p></td>
+     <td><p><a href="./v2-Database-AlterDatabaseProperties#alterdatabasepropertiesoption"><code>AlterDatabasePropertiesOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOpts</code></p></td>

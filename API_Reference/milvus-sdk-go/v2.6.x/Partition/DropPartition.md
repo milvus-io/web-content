@@ -22,7 +22,7 @@ func (c *Client) DropPartition(ctx context.Context, opt DropPartitionOption, cal
    <tr>
      <td><p><code>opt</code></p></td>
      <td><p>Optional parameters of the methods.</p></td>
-     <td><p><code>DropAliasOption</code></p></td>
+     <td><p><a href="./v2-Partition-DropPartition#droppartitionoption"><code>DropAliasOption</code></a></p></td>
    </tr>
    <tr>
      <td><p><code>callOptions</code></p></td>
