@@ -2,6 +2,7 @@
 id: best-practices-for-array-of-structs.md
 title: "Data Model Design with an Array of Structs"
 summary: "Modern AI applications, especially in the Internet of Things (IoT) and autonomous driving, typically reason over rich, structured events: a sensor reading with its timestamp and vector embedding, a diagnostic log with an error code and audio snippet, or a trip segment with location, speed, and scene context. These require the database to natively support the ingestion and search of nested data."
+beta: Milvus 2.6.4+
 ---
 
 # Data Model Design with an Array of Structs
@@ -143,6 +144,8 @@ To start, we need to initialize the schema for a caption Struct, a front_cars St
 - Initialize the schema for the Caption Struct.
 
     ```python
+    from pymilvus import MilvusClient, DataType
+    
     client = MilvusClient("http://localhost:19530")
     
     # create the schema for the caption struct
