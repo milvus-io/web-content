@@ -2,14 +2,13 @@
 id: best-practices-for-array-of-structs.md
 title: "Data Model Design with an Array of Structs"
 summary: "Modern AI applications, especially in the Internet of Things (IoT) and autonomous driving, typically reason over rich, structured events: a sensor reading with its timestamp and vector embedding, a diagnostic log with an error code and audio snippet, or a trip segment with location, speed, and scene context. These require the database to natively support the ingestion and search of nested data."
-beta: Milvus 2.6.4+
 ---
 
 # Data Model Design with an Array of Structs
 
 Modern AI applications, especially in the Internet of Things (IoT) and autonomous driving, typically reason over rich, structured events: a sensor reading with its timestamp and vector embedding, a diagnostic log with an error code and audio snippet, or a trip segment with location, speed, and scene context. These require the database to natively support the ingestion and search of nested data. 
 
-Instead of asking the user to convert their atomic structural events into flat data models, Milvus introduces the Array of Structs, where each Struct in the array can hold scalars and vectors, preserving semantic integrity and enabling robust nested filtering and hybrid search.
+Instead of asking the user to convert their atomic structural events into flat data models, Milvus introduces the Array of Structs, where each Struct in the array can hold scalars and vectors, preserving semantic integrity.
 
 ## Why Array of Structs
 
@@ -43,7 +42,7 @@ An excessively high value wastes memory, and you'll need to do some calculations
 
 ### Index vector fields in Structs
 
-Indexing is mandatory for vector fields, including both the vector fields in a collection and those defined in a Struct. For vector fields in a Struct, you should use `EMB_LIST_HNSW` as the index type and `MAX_SIM` as the metric type.
+Indexing is mandatory for vector fields, including both the vector fields in a collection and those defined in a Struct. For vector fields in a Struct, you should use `HNSW` as the index type and `MAX_SIM` series as the metric type.
 
 For details on all applicable limits, refer to [the limits](array-of-structs.md#Limits).
 
@@ -135,19 +134,19 @@ The above diagram illustrates the structure of a video clip, which comprises the
 
 - `traffic_lights` is a JSON body that contains all the traffic light signals identified in the current frame.
 
-- `front_cars` is also a JSON body that contains all the leading cars identified in the current frame.
+- `front_cars` is also an Array of Structs that contains all the leading cars identified in the current frame.
 
 ### Step 2: Initialize the schemas
 
-To start, we need to initialize the schema for a caption Struct and the collection.
+To start, we need to initialize the schema for a caption Struct, a front_cars Struct, and the collection.
 
 - Initialize the schema for the Caption Struct.
 
     ```python
-    from pymilvus import MilvusClient, DataType
+    client = MilvusClient("http://localhost:19530")
     
     # create the schema for the caption struct
-    schema_for_caption = MilvusClient.create_struct_field_schema()
+    schema_for_caption = client.create_struct_field_schema()
     
     schema_for_caption.add_field(
         field_name="frame_id",
@@ -158,6 +157,7 @@ To start, we need to initialize the schema for a caption Struct and the collecti
     schema_for_caption.add_field(
         field_name="plain_caption",
         datatype=DataType.VARCHAR,
+        max_length=1024,
         description="plain description of the ego vehicle's behaviors"
     )
     
@@ -171,6 +171,7 @@ To start, we need to initialize the schema for a caption Struct and the collecti
     schema_for_caption.add_field(
         field_name="rich_caption",
         datatype=DataType.VARCHAR,
+        max_length=1024,
         description="rich description of the ego vehicle's behaviors"
     )
     
@@ -184,6 +185,7 @@ To start, we need to initialize the schema for a caption Struct and the collecti
     schema_for_caption.add_field(
         field_name="risk",
         datatype=DataType.VARCHAR,
+        max_length=1024,
         description="description of the ego vehicle's risks"
     )
     
@@ -194,18 +196,153 @@ To start, we need to initialize the schema for a caption Struct and the collecti
         description="vectors for the description of the ego vehicle's risks"
     )
     
-    ...
+    schema_for_caption.add_field(
+        field_name="risk_correct",
+        datatype=DataType.BOOL,
+        description="whether the risk assessment is correct"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="risk_yes_rate",
+        datatype=DataType.FLOAT,
+        description="probability/confidence of risk being present"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="weather",
+        datatype=DataType.VARCHAR,
+        max_length=50,
+        description="weather condition"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="weather_rate",
+        datatype=DataType.FLOAT,
+        description="probability/confidence of the weather condition"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="road",
+        datatype=DataType.VARCHAR,
+        max_length=50,
+        description="road type"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="road_rate",
+        datatype=DataType.FLOAT,
+        description="probability/confidence of the road type"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="is_tunnel",
+        datatype=DataType.BOOL,
+        description="whether the road is a tunnel"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="is_tunnel_yes_rate",
+        datatype=DataType.FLOAT,
+        description="probability/confidence of the road being a tunnel"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="is_highway",
+        datatype=DataType.BOOL,
+        description="whether the road is a highway"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="is_highway_yes_rate",
+        datatype=DataType.FLOAT,
+        description="probability/confidence of the road being a highway"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="has_pedestrian",
+        datatype=DataType.BOOL,
+        description="whether there is a pedestrian present"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="has_pedestrian_yes_rate",
+        datatype=DataType.FLOAT,
+        description="probability/confidence of pedestrian presence"
+    )
+    
+    schema_for_caption.add_field(
+        field_name="has_carrier_car",
+        datatype=DataType.BOOL,
+        description="whether there is a carrier car present"
+    )
+    ```
+
+- Initialize the schema for the Front Car Struct
+
+    <div class="alert note">
+    
+    Although a front car does not involve vector embeddings, you still need to include it as an array of Struct because the data size exceeds the maximum for a JSON field.
+
+    </div>
+
+    ```python
+    schema_for_front_car = client.create_struct_field_schema()
+    
+    schema_for_front_car.add_field(
+        field_name="frame_id",
+        datatype=DataType.INT64,
+        description="ID of the frame to which the ego vehicle's behavior belongs"
+    )
+    
+    schema_for_front_car.add_field(
+        field_name="has_lead",
+        datatype=DataType.BOOL,
+        description="whether there is a leading vehicle"
+    )
+    
+    schema_for_front_car.add_field(
+        field_name="lead_prob",
+        datatype=DataType.FLOAT,
+        description="probability/confidence of the leading vehicle's presence"
+    )
+    
+    schema_for_front_car.add_field(
+        field_name="lead_x",
+        datatype=DataType.FLOAT,
+        description="x position of the leading vehicle relative to the ego vehicle"
+    )
+    
+    schema_for_front_car.add_field(
+        field_name="lead_y",
+        datatype=DataType.FLOAT,
+        description="y position of the leading vehicle relative to the ego vehicle"
+    )
+    
+    schema_for_front_car.add_field(
+        field_name="lead_speed_kmh",
+        datatype=DataType.FLOAT,
+        description="speed of the leading vehicle in km/h"
+    )
+    
+    schema_for_front_car.add_field(
+        field_name="lead_a",
+        datatype=DataType.FLOAT,
+        description="acceleration of the leading vehicle"
+    )
     ```
 
 - Initialize the schema for the collection
 
     ```python
-    schema = MilvusClient.create_schema()
+    schema = client.create_schema()
     
     schema.add_field(
         field_name="video_id",
         datatype=DataType.VARCHAR,
-        description="primary key"
+        description="primary key",
+        max_length=16,
+        is_primary=True,
+        auto_id=False
     )
     
     schema.add_field(
@@ -216,21 +353,13 @@ To start, we need to initialize the schema for a caption Struct and the collecti
     )
     
     schema.add_field(
-        field_name="states",
-        datatype=DataType.JSON,
-        description="frame-specific state of the ego vehicle in the current video"
-    )
-    
-    # highlight-start
-    schema.add_field(
         field_name="captions",
         datatype=DataType.ARRAY,
         element_type=DataType.STRUCT,
-        struct_schema=struct_for_caption,
+        struct_schema=schema_for_caption,
         max_capacity=600,
         description="captions for the current video"
     )
-    # highlight-end
     
     schema.add_field(
         field_name="traffic_lights",
@@ -240,46 +369,43 @@ To start, we need to initialize the schema for a caption Struct and the collecti
     
     schema.add_field(
         field_name="front_cars",
-        datatype=DataType.JSON,
+        datatype=DataType.ARRAY,
+        element_type=DataType.STRUCT,
+        struct_schema=schema_for_front_car,
+        max_capacity=600,
         description="frame-specific leading cars identified in the current video"
     )
     ```
 
 ### Step 3: Set index parameters
 
-All vector fields must be indexed. To index the vector fields in an element Struct, you need to use `EMB_LIST_HNSW` as the index type and the `MAX_SIM` metric type to measure the similarities between vector embeddings.
+All vector fields must be indexed. To index the vector fields in an element Struct, you need to use `HNSW` as the index type and the `MAX_SIM` series metric type to measure the similarities between embedding lists.
 
 ```python
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 index_params.add_index(
-    field_name="plain_cap_vector",
-    index_type="HNSW",
-    metric_type="MAX_SIM_COSINE",
-    params={
-        "M": 16,
-        "efConstruction": 128
-    }
+    field_name="captions[plain_cap_vector]", 
+    index_type="HNSW", 
+    metric_type="MAX_SIM_COSINE", 
+    index_name="captions_plain_cap_vector_idx", # mandatory for now
+    index_params={"M": 16, "efConstruction": 200}
 )
 
 index_params.add_index(
-    field_name="rich_cap_vector",
-    index_type="HNSW",
-    metric_type="MAX_SIM_COSINE",
-    params={
-        "M": 16,
-        "efConstruction": 128
-    }
+    field_name="captions[rich_cap_vector]", 
+    index_type="HNSW", 
+    metric_type="MAX_SIM_COSINE", 
+    index_name="captions_rich_cap_vector_idx", # mandatory for now
+    index_params={"M": 16, "efConstruction": 200}
 )
 
 index_params.add_index(
-    field_name="risk_vector",
-    index_type="HNSW",
-    metric_type="MAX_SIM_COSINE",
-    params={
-        "M": 16,
-        "efConstruction": 128
-    }
+    field_name="captions[risk_vector]", 
+    index_type="HNSW", 
+    metric_type="MAX_SIM_COSINE", 
+    index_name="captions_risk_vector_idx", # mandatory for now
+    index_params={"M": 16, "efConstruction": 200}
 )
 ```
 
@@ -290,8 +416,6 @@ You are advised to enable JSON shredding for JSON fields to accelerate filtering
 Once the schemas and indexes are ready, you can create the target collection as follows:
 
 ```python
-client = MilvusClient("http://localhost:19530")
-
 client.create_collection(
     collection_name="covla_dataset",
     schema=schema,
@@ -303,74 +427,94 @@ client.create_collection(
 
 Turing Motos organizes the CoVLA dataset in multiple files, including raw video clips (`.mp4`), states (`states.jsonl`), captions (`captions.jsonl`), traffic lights (`traffic_lights.jsonl`), and front cars (`front_cars.jsonl`).
 
-You need to merge the data pieces for each video clip from these files and insert the data. The following is a merged entity for your reference.
+You need to merge the data pieces for each video clip from these files and insert the data. The following is the script to merge the data pieces for a specific video clip.
 
-```json
-{
-    "video_id": "0a0fc7a5db365174",
-    "video_url": "videos/0a0fc7a5db365174.mp4",
-    "states": {
-        "0": {
-            "trajectory": [[0.0, -0.0, 0.0], ...],
-            "extrinsic_matrix": [[-0.016034273081459105, -0.9998714384933313, -8.280132118064406e-05, 0.0], ...],
-            "intrinsic_matrix": [[2648.0, 0.0, 964.0], ...]
-        },
-        "1": {...}
-        ...
-        "599": {...}
-    },
-    "captions": [
-        {
-            "frame_id": 0,
-            "plain_caption": "The ego vehicle is moving at a moderate speed with deceleration and turning right. There are 2 traffic lights;one which displays a red signal, and one which displays a right arrow, and straight arrow signal. Caution is required because the distance between the ego vehicle and the leading car is narrow.",
-            "rich_caption": "The ego vehicle is moving at a moderate speed with deceleration and turning right. There are 2 traffic lights;one which displays a red signal, and one which displays a right arrow, and straight arrow signal. Caution is required because the distance between the ego vehicle and the leading car is narrow. It is cloudy. The car is driving on a wide road. No pedestrians appear to be present. What the driver of ego vehicle should be careful is to maintain a safe distance from the leading car and to be prepared to stop if necessary",
-            "risk": "to maintain a safe distance from the leading car and to be prepared to stop if necessary",
-            "risk_correct": true,
-            "risk_yes_rate": 0.6062515935356961,
-            ...
-        },
-        {
-            "frame_id": 1
-            ...
-        }
-        ...
-        {
-            "frame_id": 599
-            ...
-        }
-    ],
-    "traffic_lights": {
-        "0": [
-            {"0": {"index": 1, "class": "red", "bbox": [485.9914855957031, 294.18536376953125, 574.1666259765625, 360.3130798339844]}}
-            {"1": {"index": 2, "class": "right", "bbox": [487.6523742675781, 294.0285339355469, 574.2948608398438, 359.5504455566406]}}
-            {"2": {"index": 3, "class": "straight", "bbox": [487.6523742675781, 294.0285339355469, 574.2948608398438, 359.5504455566406]}}
-        ],
-        "1": [...],
-        ...
-        "599": [...]
-    },
-    "front_cars": {
-        "0": [
-            {"0": {"has_lead": true, "lead_prob": 0.967777669429779, "lead_x": 5.26953125, "lead_y": 1.07421875, "lead_speed_kmh": 23.6953125, "lead_a": 0.546875}}
-        ],
-        "1": [...]
-        ...
-        "599": [...]
-    }
+```python
+import json
+from openai import OpenAI
+
+openai_client = OpenAI(
+    api_key='YOUR_OPENAI_API_KEY',
+)
+
+video_id = "0a0fc7a5db365174" # represent a single video with 600 frames
+
+# get all front car records in the specified video clip
+entries = []
+front_cars = []
+with open('data/front_car/{}.jsonl'.format(video_id), 'r') as f:
+    for line in f:
+        entries.append(json.loads(line))
+
+for entry in entries:
+    for key, value in entry.items():
+        value['frame_id'] = int(key)
+        front_cars.append(value)
+
+# get all traffic lights identified in the specified video clip
+entries = []
+traffic_lights = []
+frame_id = 0
+with open('data/traffic_lights/{}.jsonl'.format(video_id), 'r') as f:
+    for line in f:
+        entries.append(json.loads(line))
+
+for entry in entries:
+    for key, value in entry.items():
+        if not value or (value['index'] == 1 and key != '0'):
+            frame_id+=1
+
+        if value:
+            value['frame_id'] = frame_id
+            traffic_lights.append(value)
+        else:
+            value_dict = {}
+            value_dict['frame_id'] = frame_id
+            traffic_lights.append(value_dict)
+
+# get all captions generated in the video clip and convert them into vector embeddings
+entries = []
+captions = []
+with open('data/captions/{}.jsonl'.format(video_id), 'r') as f:
+    for line in f:
+        entries.append(json.loads(line))
+
+def get_embedding(text, model="embeddinggemma:latest"):
+    response = openai_client.embeddings.create(input=text, model=model)
+    return response.data[0].embedding
+
+# Add embeddings to each entry
+for entry in entries:
+    # Each entry is a dict with a single key (e.g., '0', '1', ...)
+    for key, value in entry.items():
+        value['frame_id'] = int(key)  # Convert key to integer and assign to frame_id
+
+        if "plain_caption" in value and value["plain_caption"]:
+            value["plain_cap_vector"] = get_embedding(value["plain_caption"])
+        if "rich_caption" in value and value["rich_caption"]:
+            value["rich_cap_vector"] = get_embedding(value["rich_caption"])
+        if "risk" in value and value["risk"]:
+            value["risk_vector"] = get_embedding(value["risk"])
+
+        captions.append(value)
+
+data = {
+    "video_id": video_id,
+    "video_url": "https://your-storage.com/{}".format(video_id),
+    "captions": captions,
+    "traffic_lights": traffic_lights,
+    "front_cars": front_cars
 }
 ```
 
 Once you have processed the data accordingly, you can insert it as follows:
 
 ```python
-data = [
-    {"video_id": "0a0fc7a5db365174", ...}
-    ...
-]
-
 client.insert(
     collection_name="covla_dataset",
-    data=data
+    data=[data]
 )
+
+# {'insert_count': 1, 'ids': ['0a0fc7a5db365174'], 'cost': 0}
 ```
 
