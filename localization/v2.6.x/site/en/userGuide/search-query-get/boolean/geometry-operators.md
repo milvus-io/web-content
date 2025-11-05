@@ -25,7 +25,6 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h1><p>Milvus supports a set of operators for spatial filtering on <code translate="no">GEOMETRY</code> fields, which are essential for managing and analyzing geometric data. These operators allow you to retrieve entities based on the geometric relationships between objects.</p>
 <p>All geometry operators function by taking two geometric arguments: the name of the <code translate="no">GEOMETRY</code> field defined in your collection schema and a target geometry object represented in <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT) format.</p>
-<p>To learn more about <code translate="no">GEOMETRY</code> fields in Milvus, refer to <a href="/docs/geometry-field.md">Geometry Field</a>.</p>
 <h2 id="Use-syntax" class="common-anchor-header">Use syntax<button data-href="#Use-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,6 +52,7 @@ beta: Milvus 2.6.4+
 <li><p><code translate="no">'{wkt}'</code> is the WKT representation of the geometry to query.</p></li>
 <li><p><code translate="no">distance</code> is the threshold specifically for <code translate="no">ST_DWITHIN</code>.</p></li>
 </ul>
+<p>To learn more about <code translate="no">GEOMETRY</code> fields in Milvus, refer to <a href="/docs/geometry-field.md">Geometry Field</a>.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">Supported geometry operators<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

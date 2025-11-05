@@ -364,15 +364,18 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Once these requirements are met, you can use expressions with dedicated geometry operators to filter your collection based on the geometric values.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">Define filter expressions</h4><p>To filter on the <code translate="no">GEOMETRY</code> field, use a geometry-specific operator with the following expression format: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, where:</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">Define filter expressions</h4><p>To filter on a <code translate="no">GEOMETRY</code> field, use a geometry operator in an expression:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> is a supported geometry operator (e.g., <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). For a full list of available operators, refer to <a href="/docs/geometry-operators.md">Geometry Operators</a>.</p></li>
-<li><p><code translate="no">geo_field</code> is the name of the <code translate="no">GEOMETRY</code> field defined in your collection schema.</p></li>
-<li><p><code translate="no">'{wkt}'</code> is the WKT string representing the geometry object you are filtering on.</p></li>
+<li><p>General: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>Distance-based: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>Some operators, such as <code translate="no">ST_DWITHIN</code>, may require additional parameters. For details and usage examples of each operator, refer to <a href="/docs/geometry-operators.md">Geometry Operators</a>.</p>
-</div>
+<p>Where:</p>
+<ul>
+<li><p><code translate="no">operator</code> is one of the supported geometry operators (e.g., <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Operator names must be all uppercase or all lowercase. For a list of supported operators, refer to <a href="/docs/geometry-operators.md#Supported-geometry-operators">Supported geometry operators</a>.</p></li>
+<li><p><code translate="no">geo_field</code> is the name of your <code translate="no">GEOMETRY</code> field.</p></li>
+<li><p><code translate="no">'{wkt}'</code> is the WKT representation of the geometry to query.</p></li>
+<li><p><code translate="no">distance</code> is the threshold specifically for <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
 <p>The following examples demonstrate how to use different geometry-specific operators in a filter expression:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Example 1: Find entities within a rectangular area</h4><div class="multipleCode">
     <a href="#python">Python</a>
