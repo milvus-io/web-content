@@ -344,19 +344,21 @@ Once these requirements are met, you can use expressions with dedicated geometry
 
 #### Define filter expressions
 
-To filter on the `GEOMETRY` field, use a geometry-specific operator with the following expression format: `"{operator}(geo_field,'{wkt}')"`, where:
+To filter on a `GEOMETRY` field, use a geometry operator in an expression:
 
-- `{operator}` is a supported geometry operator (e.g., `ST_CONTAINS`, `ST_INTERSECTS`). For a full list of available operators, refer to [Geometry Operators](geometry-operators.md).
+- General: `{operator}(geo_field, '{wkt}')`
 
-- `geo_field` is the name of the `GEOMETRY` field defined in your collection schema.
+- Distance-based: `ST_DWITHIN(geo_field, '{wkt}', distance)`
 
-- `'{wkt}'` is the WKT string representing the geometry object you are filtering on.
+Where:
 
-<div class="alert note">
+- `operator` is one of the supported geometry operators (e.g., `ST_CONTAINS`, `ST_INTERSECTS`). Operator names must be all uppercase or all lowercase. For a list of supported operators, refer to [Supported geometry operators](geometry-operators.md#Supported-geometry-operators).
 
-Some operators, such as `ST_DWITHIN`, may require additional parameters. For details and usage examples of each operator, refer to [Geometry Operators](geometry-operators.md).
+- `geo_field` is the name of your `GEOMETRY` field.
 
-</div>
+- `'{wkt}'` is the WKT representation of the geometry to query.
+
+- `distance` is the threshold specifically for `ST_DWITHIN`.
 
 The following examples demonstrate how to use different geometry-specific operators in a filter expression:
 

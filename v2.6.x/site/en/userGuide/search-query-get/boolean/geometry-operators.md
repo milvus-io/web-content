@@ -11,8 +11,6 @@ Milvus supports a set of operators for spatial filtering on `GEOMETRY` fields, w
 
 All geometry operators function by taking two geometric arguments: the name of the `GEOMETRY` field defined in your collection schema and a target geometry object represented in [Well-Known Text](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) (WKT) format.
 
-To learn more about `GEOMETRY` fields in Milvus, refer to [Geometry Field](geometry-field.md).
-
 ## Use syntax
 
 To filter on a `GEOMETRY` field, use a geometry operator in an expression:
@@ -30,6 +28,8 @@ Where:
 - `'{wkt}'` is the WKT representation of the geometry to query.
 
 - `distance` is the threshold specifically for `ST_DWITHIN`.
+
+To learn more about `GEOMETRY` fields in Milvus, refer to [Geometry Field](geometry-field.md).
 
 ## Supported geometry operators
 
