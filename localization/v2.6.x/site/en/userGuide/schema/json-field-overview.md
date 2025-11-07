@@ -91,7 +91,7 @@ summary: >-
    <tr>
      <td><p>Schema definition</p></td>
      <td><p>A scalar field that must be explicitly declared in the collection schema with the <code translate="no">DataType.JSON</code> type.</p></td>
-     <td><p>A hidden JSON field (named <code translate="no">#meta</code>) that automatically stores undeclared fields.</p></td>
+     <td><p>A hidden JSON field (named <code translate="no">$meta</code>) that automatically stores undeclared fields.</p></td>
    </tr>
    <tr>
      <td><p>Use case</p></td>
@@ -106,7 +106,7 @@ summary: >-
    <tr>
      <td><p>Querying</p></td>
      <td><p>Query using your field name or target key inside the JSON field: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Query directly using the dynamic field key: <code translate="no">"dynamic_key"</code> or via <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Query directly using the dynamic field key: <code translate="no">"dynamic_key"</code> or via <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Basic operations<button data-href="#Basic-operations" class="anchor-icon" translate="no">
