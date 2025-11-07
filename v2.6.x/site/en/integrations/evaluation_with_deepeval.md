@@ -22,7 +22,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```python
-$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 ```
 
 <div class="alert note">

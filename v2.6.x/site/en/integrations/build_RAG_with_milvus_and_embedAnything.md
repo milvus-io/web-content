@@ -26,7 +26,7 @@ By pairing EmbedAnything with a Milvus adapter, you can generate embeddings from
 
 
 ```shell
-$ pip install -qU pymilvus openai embed_anything
+$ pip install -qU pymilvus milvus-lite openai embed_anything
 ```
 
 <div class="alert note">

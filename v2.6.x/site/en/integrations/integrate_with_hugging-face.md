@@ -23,7 +23,7 @@ You need to make sure all required dependencies are installed:
 
 
 ```python
-$ pip install --upgrade pymilvus transformers datasets torch
+$ pip install --upgrade pymilvus milvus-lite transformers datasets torch
 ```
 
 <div class="alert note">

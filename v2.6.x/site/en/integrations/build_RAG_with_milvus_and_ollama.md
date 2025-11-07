@@ -24,7 +24,7 @@ In this guide, we’ll show you how to leverage Ollama and Milvus to build a RAG
 
 
 ```shell
-$ pip install pymilvus ollama
+$ pip install pymilvus milvus-lite ollama
 ```
 
 <div class="alert note">

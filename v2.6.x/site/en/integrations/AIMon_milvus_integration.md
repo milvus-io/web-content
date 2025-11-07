@@ -35,21 +35,21 @@ LlamaIndex is an open-source data orchestration framework that simplifies buildi
 
 
 ```shell
-$ pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus>=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet
+$ pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus>=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet
 ```
 
 # Pre-requisites
 
 1. Signup for an [AIMon account here](https://docs.aimon.ai/quickstart).
 
-    Add this secret to the Colab Secrets (the "key" symbol on the left panel)
-    If you are in another non-google colab environment, please replace the google colab-related code yourself
+  Add this secret to the Colab Secrets (the "key" symbol on the left panel)
+  > If you are in another non-google colab environment, please replace the google colab-related code yourself
 
-    * AIMON_API_KEY
+
+  * AIMON_API_KEY
 
 2. Signup for an [OpenAI account here](https://platform.openai.com/docs/overview) and add the following key in Colab secrets:
-
-    * OPENAI_API_KEY
+  * OPENAI_API_KEY
 
 
 ### Required API keys
@@ -975,6 +975,25 @@ df_scores.loc[0, "Increase in Retrieval Relevance Score (%)"] = 0
 df_scores
 ```
 
+
+
+
+
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">

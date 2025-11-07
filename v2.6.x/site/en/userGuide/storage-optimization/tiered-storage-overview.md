@@ -9,7 +9,7 @@ beta: Milvus 2.6.4+
 
 In Milvus, the traditional *full-load* mode requires each QueryNode to load all data fields and indexes of a [segment](glossary.md#Segment) at initialization, even data that may never be accessed. This ensures immediate data availability but often leads to wasted resources, including high memory usage, heavy disk activity, and significant I/O overhead, especially when handling large-scale datasets.
 
-*Tiered Storage* addresses this challenge by decoupling data caching from segment loading. Instead of loading all data at once, Milvus introduces a caching layer that distinguishes between hot data (cached locally) and cold data (stored remotely). The QueryNode now loads only lightweight *metadata* initially and dynamically pulls or evicts data on demand. This significantly reduces load time, optimizes local resource utilization, and enables QueryNodes to process datasets that far exceed their physical memory or disk capacity.
+*Tiered Storage* addresses this challenge by decoupling data caching from segment loading. Instead of loading all data at once, Milvus introduces a caching layer that distinguishes between hot data (cached locally) and cold data (stored remotely). The QueryNode now loads only lightweight *metadata* initially and dynamically pulls or evicts field data on demand. This significantly reduces load time, optimizes local resource utilization, and enables QueryNodes to process datasets that far exceed their physical memory or disk capacity.
 
 Consider enabling Tiered Storage in scenarios such as:
 
@@ -47,7 +47,7 @@ The diagram below shows these differences.
 
 Under Tiered Storage, the workflow has these phases:
 
-![Load Workflow](../../../../assets/load-workflow.png)
+![Querynode Load Workflow](../../../../assets/querynode-load-workflow.png)
 
 #### Phase 1: Lazy load
 
@@ -59,17 +59,19 @@ Because field data and index files remain in remote storage until first accessed
 
 **Configuration**
 
-Automatically applied when Tiered Storage is enabled. No other manual setting is required.
+Automatically applied when Tiered Storage is enabled. No manual setting is required.
 
 #### Phase 2: Warm up
 
-To reduce the first-hit latency introduced by [lazy load](tiered-storage-overview.md#Phase-1-Lazy-load), Milvus provides a *Warm Up mechanism.
+To reduce the first-hit latency introduced by [lazy load](tiered-storage-overview.md#Phase-1-Lazy-load), Milvus provides a *Warm Up* mechanism.
 
 Before a segment becomes queryable, Milvus can proactively fetch and cache specific fields or indexes from object storage, ensuring that the first query directly hits cached data instead of triggering on-demand loading.
 
+During warmup, fields will be preloaded at the chunk level, while indexes will be preloaded at the segment level.
+
 **Configuration**
 
-Warm Up settings are defined in the Tiered Storage section of **milvus.yaml**. You can enable or disable preloading for each field or index type and specify the preferred strategy. See [Warm Up](warm-up.md) for configuration examples.
+Warm Up settings are defined in the Tiered Storage section of `milvus.yaml`. You can enable or disable preloading for each field or index type and specify the preferred strategy. See [Warm Up](warm-up.md) for detailed configurations.
 
 #### Phase 3: Partial load
 
@@ -85,7 +87,7 @@ Partial load is automatically applied when Tiered Storage is enabled. No manual 
 
 #### Phase 4: Eviction
 
-To maintain healthy resource usage, Milvus automatically releases unused cached data when thresholds are reached.
+To maintain healthy resource usage, Milvus automatically releases unused cached data when specific thresholds are reached.
 
 Eviction follows a [Least Recently Used (LRU)](https://en.wikipedia.org/wiki/Cache_replacement_policies) policy, ensuring that infrequently accessed data is removed first while active data remains in cache.
 
@@ -94,8 +96,6 @@ Eviction is governed by the following configurable items:
 - **Watermarks**: Define memory or disk thresholds that trigger and stop eviction.
 
 - **Cache TTL**: Removes stale cached data after a defined duration of inactivity.
-
-- **Overcommit ratio**: Allows temporary cache oversubscription before aggressive eviction begins, helping absorb short-term workload spikes.
 
 **Configuration**
 
@@ -147,10 +147,6 @@ queryNode:
       
       # Cache TTL (7 days)
       cacheTtl: 604800
-      
-      # Overcommit Ratios
-      evictableMemoryCacheRatio: 0.3
-      evictableDiskCacheRatio: 0.3
 ```
 
 ### Next steps
@@ -185,6 +181,8 @@ Two common causes:
 
 - QueryNode resources are shared with other workloads, so Tiered Storage cannot correctly assess actual available capacity.
 
+To resolve this, we recommend you allocate dedicated resources for QueryNodes.
+
 ### Why do some queries fail under high concurrency?
 
 If too many queries hit hot data at the same time, QueryNode resource limits may still be exceeded. Some threads may fail due to resource reservation timeouts. Retrying after the load decreases, or allocating more resources, can resolve this.
@@ -195,11 +193,5 @@ Possible causes include:
 
 - Frequent queries to cold data, which must be fetched from storage.
 
-- An overcommit ratio that is too high, leading to frequent eviction.
-
 - Watermarks set too close together, causing frequent synchronous eviction.
-
-### Can Tiered Storage handle unlimited data by overcommitting cache?
-
-No. Overcommit ratios allow QueryNodes to work with more segments than physical memory permits, but excessively high ratios can lead to frequent eviction, cache thrashing, or query failures.
 

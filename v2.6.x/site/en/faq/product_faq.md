@@ -17,9 +17,9 @@ Zilliz, the company behind Milvus, also offers a fully managed cloud version of 
 
 #### Does Milvus support non-x86 architectures?
 
-Milvus cannot be installed or run on non-x86 platforms.
+Yes, Milvus supports both x86 and ARM architectures. ARM64 support is available through multiple deployment options including Docker images, RPM/DEB packages, and Milvus Lite.
 
-Your CPU must support one of the following instruction sets to run Milvus: SSE4.2, AVX, AVX2, AVX512. These are all x86-dedicated SIMD instruction sets.
+For x86 platforms, your CPU should support one of the following instruction sets for optimal performance: SSE4.2, AVX, AVX2, AVX512. For ARM platforms, Milvus can run on ARM64-based processors including Apple M1/M2 chips and other ARM64 systems.
 
 ####  Where does Milvus store data?
 
@@ -119,7 +119,7 @@ Milvus can manage vectors with up to 32,768 dimensions by default. You can incre
 
 #### Does Milvus support Apple M1 CPU?
 
-Current Milvus release does not support Apple M1 CPU directly. After Milvus 2.3, Milvus provides Docker images for the ARM64 architecture.
+Yes, Milvus supports Apple M1/M2 CPUs and other Apple Silicon processors. ARM64 support is available through Docker images, RPM/DEB packages, and Milvus Lite, making it compatible with Apple Silicon chips including M1, M2, and newer processors.
 
 #### What data types does Milvus support on the primary key field?
 

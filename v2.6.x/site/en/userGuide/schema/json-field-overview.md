@@ -58,7 +58,7 @@ The table below summarizes the key differences between a JSON field and the dyna
    <tr>
      <td><p>Schema definition</p></td>
      <td><p>A scalar field that must be explicitly declared in the collection schema with the <code>DataType.JSON</code> type.</p></td>
-     <td><p>A hidden JSON field (named <code>#meta</code>) that automatically stores undeclared fields.</p></td>
+     <td><p>A hidden JSON field (named <code>$meta</code>) that automatically stores undeclared fields.</p></td>
    </tr>
    <tr>
      <td><p>Use case</p></td>
@@ -73,7 +73,7 @@ The table below summarizes the key differences between a JSON field and the dyna
    <tr>
      <td><p>Querying</p></td>
      <td><p>Query using your field name or target key inside the JSON field: <code>metadata["key"]</code>.</p></td>
-     <td><p>Query directly using the dynamic field key: <code>"dynamic_key"</code> or via <code>#meta</code>: <code>#meta["dynamic_key"]</code></p></td>
+     <td><p>Query directly using the dynamic field key: <code>"dynamic_key"</code> or via <code>$meta</code>: <code>$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 

@@ -12,7 +12,7 @@ title: Integrate Milvus with Jina
 This guide demonstrates how to use Jina AI embeddings and Milvus to conduct similarity search and retrieval tasks.
 
 ## Who is Jina AI
-Jina AI, founded in 2020 in Berlin, is a pioneering AI company focused on revolutionizing the future of artificial intelligence through its search foundation. Specializing in multimodal AI, Jina AI aims to empower businesses and developers to harness the power of multimodal data for value creation and cost savings through its integrated suite of components, including embeddings, rerankers, prompt ops, and core infrastructure.
+Jina AI, founded in 2020 in Berlin, is a pioneering AI company focused on revolutionizing the future of artificial intelligence through its search foundation. Specializing in multimodal AI, Jina AI aims to empower businesses and developers to harness the power of multimodal data for value creation and cost savings through its integrated suite of components, including embeddings, rerankers, prompt ops, and core infrastructure.  
 Jina AI's cutting-edge embeddings boast top-tier performance, featuring an 8192 token-length model ideal for comprehensive data representation. Offering multilingual support and seamless integration with leading platforms like OpenAI, these embeddings facilitate cross-lingual applications.
 
 ## Milvus and Jina AI's Embedding
@@ -25,7 +25,7 @@ Before we start, we need to install model library for PyMilvus.
 
 
 ```python
-$ pip install -U pymilvus
+$ pip install -U pymilvus milvus-lite
 $ pip install "pymilvus[model]"
 ```
 

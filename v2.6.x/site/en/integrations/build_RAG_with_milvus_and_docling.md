@@ -25,7 +25,7 @@ To start, install the required dependencies by running the following command:
 
 
 ```shell
-$ pip install --upgrade pymilvus docling openai
+$ pip install --upgrade pymilvus milvus-lite docling openai
 ```
 
 <div class="alert note">

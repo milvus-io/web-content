@@ -26,7 +26,7 @@ To start, install the required dependencies by running the following command:
 
 
 ```shell
-$ pip install -U crawl4ai pymilvus openai requests tqdm
+$ pip install -U crawl4ai pymilvus milvus-lite openai requests tqdm
 ```
 
 > If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).

@@ -514,6 +514,11 @@
                         "token": "IbpqwpTFghdA37bU6dDc5eCUnfh",
                         "type": "board",
                         "alt_text": "load-workflow"
+                    },
+                    {
+                        "token": "SAO6wxDUYhoqqtbRwYecjjFUnIf",
+                        "type": "board",
+                        "alt_text": "querynode-load-workflow"
                     }
                 ]
             }

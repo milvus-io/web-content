@@ -20,7 +20,7 @@ In this tutorial, we’ll show you how to build a Retrieval-Augmented Generation
 
 
 ```python
-! pip install --upgrade pymilvus[model] openai requests tqdm
+! pip install --upgrade pymilvus[model] milvus-lite openai requests tqdm
 ```
 
 > If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).

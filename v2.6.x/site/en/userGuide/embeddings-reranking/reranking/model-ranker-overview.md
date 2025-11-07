@@ -57,56 +57,31 @@ Milvus supports the following model service providers for reranking, each with d
    <tr>
      <td><p>vLLM</p></td>
      <td><p>Complex applications requiring deep semantic understanding and customization</p></td>
-     <td><ul>
-<li><p>Supports various large language models</p></li>
-<li><p>Flexible deployment options</p></li>
-<li><p>Higher computational requirements</p></li>
-<li><p>Greater customization potential</p></li>
-</ul></td>
+     <td><ul><li><p>Supports various large language models</p></li><li><p>Flexible deployment options</p></li><li><p>Higher computational requirements</p></li><li><p>Greater customization potential</p></li></ul></td>
      <td><p>Legal research platform deploying domain-specific models that understand legal terminology and case law relationships</p></td>
    </tr>
    <tr>
      <td><p>TEI</p></td>
      <td><p>Quick implementation with efficient resource usage</p></td>
-     <td><ul>
-<li><p>Lightweight service optimized for text operations</p></li>
-<li><p>Easier deployment with lower resource requirements</p></li>
-<li><p>Pre-optimized reranking models</p></li>
-<li><p>Minimal infrastructure overhead</p></li>
-</ul></td>
+     <td><ul><li><p>Lightweight service optimized for text operations</p></li><li><p>Easier deployment with lower resource requirements</p></li><li><p>Pre-optimized reranking models</p></li><li><p>Minimal infrastructure overhead</p></li></ul></td>
      <td><p>Content management system needing efficient reranking capabilities with standard requirements</p></td>
    </tr>
    <tr>
      <td><p>Cohere</p></td>
      <td><p>Enterprise applications prioritizing reliability and ease of integration</p></td>
-     <td><ul>
-<li><p>Enterprise-grade reliability and scalability</p></li>
-<li><p>Managed service with no infrastructure maintenance</p></li>
-<li><p>Multilingual reranking capabilities</p></li>
-<li><p>Built-in rate limiting and error handling</p></li>
-</ul></td>
+     <td><ul><li><p>Enterprise-grade reliability and scalability</p></li><li><p>Managed service with no infrastructure maintenance</p></li><li><p>Multilingual reranking capabilities</p></li><li><p>Built-in rate limiting and error handling</p></li></ul></td>
      <td><p>E-commerce platform requiring high-availability search with consistent API performance and multilingual product catalogs</p></td>
    </tr>
    <tr>
      <td><p>Voyage AI</p></td>
      <td><p>RAG applications with specific performance and context requirements</p></td>
-     <td><ul>
-<li><p>Models specifically trained for reranking tasks</p></li>
-<li><p>Granular truncation controls for diverse document lengths</p></li>
-<li><p>Optimized inference for production workloads</p></li>
-<li><p>Multiple model variants (rerank-2, rerank-lite, etc.)</p></li>
-</ul></td>
+     <td><ul><li><p>Models specifically trained for reranking tasks</p></li><li><p>Granular truncation controls for diverse document lengths</p></li><li><p>Optimized inference for production workloads</p></li><li><p>Multiple model variants (rerank-2, rerank-lite, etc.)</p></li></ul></td>
      <td><p>Research database with varying document lengths requiring fine-tuned performance control and specialized semantic understanding</p></td>
    </tr>
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>Applications processing long documents with cost-effectiveness priorities</p></td>
-     <td><ul>
-<li><p>Advanced document chunking with configurable overlap</p></li>
-<li><p>Chunk-based scoring (highest-scoring chunk represents document)</p></li>
-<li><p>Support for diverse reranking models</p></li>
-<li><p>Cost-effective with standard and pro model variants</p></li>
-</ul></td>
+     <td><ul><li><p>Advanced document chunking with configurable overlap</p></li><li><p>Chunk-based scoring (highest-scoring chunk represents document)</p></li><li><p>Support for diverse reranking models</p></li><li><p>Cost-effective with standard and pro model variants</p></li></ul></td>
      <td><p>Technical documentation search system processing lengthy manuals and papers that need intelligent segmentation and overlap control</p></td>
    </tr>
 </table>
@@ -137,7 +112,7 @@ Model rankers integrate seamlessly with both standard vector search and hybrid s
 
 ### Create a model ranker
 
-To implement model reranking, first define a Function object with the appropriate configuration. In this example, we uses the TEI as the service provider:
+To implement model reranking, first define a Function object with the appropriate configuration. In this example, we use TEI as the service provider:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -171,7 +146,21 @@ model_ranker = Function(
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.ranker.ModelRanker;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build());
+
+ModelRanker ranker = ModelRanker.builder()
+        .name("semantic_ranker")
+        .inputFieldNames(Collections.singletonList("document"))
+        .provider("tei")
+        .queries(Collections.singletonList("machine learning for time series"))
+        .endpoint("http://model-service:8080")
+        .build();
 ```
 
 ```javascript
@@ -202,22 +191,20 @@ model_ranker = Function(
    <tr>
      <td><p><code>input_field_names</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Name of the text field to use for reranking.
- Must be a <code>VARCHAR</code> type field.</p></td>
+     <td><p>Name of the text field to use for reranking.</p><p>Must be a <code>VARCHAR</code> type field.</p></td>
      <td><p><code>["document"]</code></p></td>
    </tr>
    <tr>
      <td><p><code>function_type</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Specifies the type of function being created.
- Must be set to <code>RERANK</code> for all model rankers.</p></td>
+     <td><p>Specifies the type of function being created.</p><p>Must be set to <code>RERANK</code> for all model rankers.</p></td>
      <td><p><code>FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code>params</code></p></td>
      <td><p>Yes</p></td>
      <td><p>A dictionary containing configuration for the model-based reranking function. The available parameters (keys) vary depending on the service provider.</p></td>
-     <td><p>{…}</p></td>
+     <td><p><code>{...}</code></p></td>
    </tr>
    <tr>
      <td><p><code>params.reranker</code></p></td>
@@ -234,9 +221,8 @@ model_ranker = Function(
    <tr>
      <td><p><code>params.queries</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>List of query strings used by the reranking model to calculate relevance scores.
- The number of query strings must match exactly the number of queries in your search operation (even when using query vectors instead of text), otherwise an error will be reported.</p></td>
-     <td><p><em>["search query"]</em></p></td>
+     <td><p>List of query strings used by the reranking model to calculate relevance scores.</p><p>The number of query strings must match exactly the number of queries in your search operation (even when using query vectors instead of text), otherwise an error will be reported.</p></td>
+     <td><p><code>["search query"]</code></p></td>
    </tr>
    <tr>
      <td><p><code>params.endpoint</code></p></td>
@@ -257,18 +243,18 @@ model_ranker = Function(
 After defining your model ranker, you can apply it during search operations by passing it to the ranker parameter:
 
 <div class="multipleCode">
-    <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
-```bash
+```python
 # Use the model ranker in standard vector search
 results = client.search(
     collection_name,
-    data=["machine learning for time series"], # Number of queries must match that specified in model_ranker.params["queries"] 
+    data=[your_query_vector], # Number of query vectors must match that specified in model_ranker.params["queries"] 
     anns_field="vector_field",
     limit=10,
     output_fields=["document"],  # Include the text field in outputs
@@ -279,7 +265,23 @@ results = client.search(
 ```
 
 ```java
-// java
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+SearchReq searchReq = SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(new EmbeddedText("machine learning for time series")))
+        .annsField("vector_field")
+        .limit(10)
+        .outputFields(Collections.singletonList(document))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .build();
+SearchResp searchResp = client.search(searchReq);
 ```
 
 ```javascript
@@ -311,14 +313,14 @@ from pymilvus import AnnSearchRequest
 
 # Define search requests for different vector fields
 dense_request = AnnSearchRequest(
-    data=["machine learning for time series"],
+    data=[your_query_vector_1], # Replace with your query vector
     anns_field="dense_vector",
     param={},
     limit=20
 )
 
 sparse_request = AnnSearchRequest(
-    data=["machine learning for time series"],
+    data=[your_query_vector_2], # Replace with your query vector
     anns_field="sparse_vector",
     param={},
     limit=20
@@ -336,7 +338,31 @@ hybrid_results = client.hybrid_search(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.AnnSearchReq;
+import io.milvus.v2.service.vector.request.HybridSearchReq;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List<AnnSearchReq> searchRequests = new ArrayList<>();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("dense_vector")
+        .vectors(Collections.singletonList(new FloatVec(embedding)))
+        .limit(10)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("sparse_vector")
+        .vectors(Collections.singletonList(new EmbeddedText("machine learning for time series")))
+        .limit(10)
+        .build());
+
+HybridSearchReq hybridSearchReq = HybridSearchReq.builder()
+                .collectionName(COLLECTION_NAME)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(10)
+                .outputFields(Arrays.asList("title", "venue", "event_date"))
+                .build();
+SearchResp searchResp = client.hybridSearch(hybridSearchReq);
 ```
 
 ```javascript

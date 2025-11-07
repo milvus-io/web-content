@@ -21,7 +21,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```python
-$ pip install "vanna[milvus,openai]"
+$ pip install "vanna[milvus,openai]" milvus-lite
 ```
 
 <div class="alert note">

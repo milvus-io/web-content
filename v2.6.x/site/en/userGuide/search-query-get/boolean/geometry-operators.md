@@ -2,6 +2,7 @@
 id: geometry-operators.md
 title: "Geometry Operators"
 summary: "Milvus supports a set of operators for spatial filtering on GEOMETRY fields, which are essential for managing and analyzing geometric data. These operators allow you to retrieve entities based on the geometric relationships between objects."
+beta: Milvus 2.6.4+
 ---
 
 # Geometry Operators
@@ -9,6 +10,24 @@ summary: "Milvus supports a set of operators for spatial filtering on GEOMETRY f
 Milvus supports a set of operators for spatial filtering on `GEOMETRY` fields, which are essential for managing and analyzing geometric data. These operators allow you to retrieve entities based on the geometric relationships between objects.
 
 All geometry operators function by taking two geometric arguments: the name of the `GEOMETRY` field defined in your collection schema and a target geometry object represented in [Well-Known Text](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) (WKT) format.
+
+## Use syntax
+
+To filter on a `GEOMETRY` field, use a geometry operator in an expression:
+
+- General: `{operator}(geo_field, '{wkt}')`
+
+- Distance-based: `ST_DWITHIN(geo_field, '{wkt}', distance)`
+
+Where:
+
+- `operator` is one of the supported geometry operators (e.g., `ST_CONTAINS`, `ST_INTERSECTS`). Operator names must be all uppercase or all lowercase. For a list of supported operators, refer to [Supported geometry operators](geometry-operators.md#Supported-geometry-operators).
+
+- `geo_field` is the name of your `GEOMETRY` field.
+
+- `'{wkt}'` is the WKT representation of the geometry to query.
+
+- `distance` is the threshold specifically for `ST_DWITHIN`.
 
 To learn more about `GEOMETRY` fields in Milvus, refer to [Geometry Field](geometry-field.md).
 

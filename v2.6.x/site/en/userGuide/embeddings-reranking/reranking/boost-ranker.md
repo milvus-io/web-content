@@ -388,6 +388,14 @@ In this section, you will see examples of how to use Boost Ranker to influence t
 
 Before passing a Boost Ranker as the reranker of a search request, you should properly define the Boost Ranker as a reranking function as follows:
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 from pymilvus import Function, FunctionType
 
@@ -407,6 +415,46 @@ ranker = Function(
 )
 ```
 
+```java
+import io.milvus.v2.service.vector.request.ranker.BoostRanker;
+
+BoostRanker ranker = BoostRanker.builder()
+        .name("boost")
+        .filter("doctype == \"abstract\"")
+        .weight(5.0f)
+        .randomScoreField("id")
+        .randomScoreSeed(126)
+        .build();
+```
+
+```go
+// go
+```
+
+```javascript
+import {FunctionType} from '@zilliz/milvus2-sdk-node';
+
+const ranker = {
+  name: "boost",
+  input_field_names: [],
+  type: FunctionType.RERANK,
+  params: {
+    reranker: "boost",
+    filter: "doctype == 'abstract'",
+    random_score: {
+      seed: 126,
+      field: "id",
+    },
+    weight: 0.5,
+  },
+};
+
+```
+
+```bash
+# restful
+```
+
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -418,12 +466,12 @@ ranker = Function(
      <td><p><code>name</code></p></td>
      <td><p>Yes</p></td>
      <td><p>Unique identifier for this Function</p></td>
-     <td><p><code>"rrf"</code></p></td>
+     <td><p><code>"boost"</code></p></td>
    </tr>
    <tr>
      <td><p><code>input_field_names</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>List of vector fields to apply the function to (must be empty for RRF Ranker)</p></td>
+     <td><p>List of vector fields to apply the function to (must be empty for Boost Ranker)</p></td>
      <td><p><code>[]</code></p></td>
    </tr>
    <tr>
@@ -462,6 +510,14 @@ ranker = Function(
 
 Once the Boost Ranker function is ready, you can reference it in a search request. The following example assumes that you have already created a collection that has the following fields: **id**, **vector**, and **doctype**.
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 from pymilvus import MilvusClient
 
@@ -475,7 +531,8 @@ client = MilvusClient(
 
 # Conduct a similarity search using the created ranker
 client.search(
-    data=[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911],
+    collection_name="my_collection",
+    data=[[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]],
     anns_field="vector",
     params={},
     output_field=["doctype"],
@@ -483,11 +540,74 @@ client.search(
 )
 ```
 
+```java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
+        
+SearchResp searchReq = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(new FloatVec(new float[]{-0.619954f, 0.447943f, -0.174938f, -0.424803f, -0.864845f})))
+        .annsField("vector")
+        .outputFields(Collections.singletonList("doctype"))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .build());
+SearchResp searchResp = client.search(searchReq);
+```
+
+```go
+// go
+```
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+// Connect to the Milvus server
+const client = new MilvusClient({
+  address: 'localhost:19530',
+  token: 'root:Milvus'
+});
+
+// Assume you have a collection set up
+
+// Conduct a similarity search
+const searchResults = await client.search({
+  collection_name: 'my_collection',
+  data: [-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911],
+  anns_field: 'vector',
+  output_fields: ['doctype'],
+  rerank: ranker,
+});
+
+console.log('Search results:', searchResults);
+```
+
+```bash
+# restful
+```
+
 ### Search with multiple Boost Rankers
 
 You can combine multiple Boost Rankers in a single search to influence the search results. To do so, create several Boost Rankers, reference them in a **FunctionScore** instance, and use the **FunctionScore** instance as the ranker in the search request.
 
 The following example shows how to modify the scores of all identified entities by applying a weight between **0.8** and **1.2**. 
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import MilvusClient, Function, FunctionType, FunctionScore
@@ -523,20 +643,112 @@ ranker = FunctionScore(
         fix_weight_ranker, 
         random_weight_ranker
     ],
-    params: {
-        "boost_mode": "Multiply"
+    params={
+        "boost_mode": "Multiply",
         "function_mode": "Sum"
     }
 )
 
 # Conduct a similarity search using the created Function Score
 client.search(
-    data=[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911],
+    collection_name="my_collection",
+    data=[[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]],
     anns_field="vector",
     params={},
     output_field=["doctype"],
     ranker=ranker
 )
+```
+
+```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.Function fixWeightRanker = CreateCollectionReq.Function.builder()
+                 .functionType(FunctionType.RERANK)
+                 .name("boost")
+                 .param("reranker", "boost")
+                 .param("weight", "0.8")
+                 .build();
+                 
+CreateCollectionReq.Function randomWeightRanker = CreateCollectionReq.Function.builder()
+                 .functionType(FunctionType.RERANK)
+                 .name("boost")
+                 .param("reranker", "boost")
+                 .param("weight", "0.4")
+                 .param("random_score", "{\"seed\": 126}")
+                 .build();
+
+Map<String, String> params = new HashMap<>();
+params.put("boost_mode","Multiply");
+params.put("function_mode","Sum");     
+FunctionScore ranker = FunctionScore.builder()
+                 .addFunction(fixWeightRanker)
+                 .addFunction(randomWeightRanker)
+                 .params(params)
+                 .build()
+
+SearchResp searchReq = client.search(SearchReq.builder()
+                 .collectionName("my_collection")
+                 .data(Collections.singletonList(new FloatVec(new float[]{-0.619954f, 0.447943f, -0.174938f, -0.424803f, -0.864845f})))
+                 .annsField("vector")
+                 .outputFields(Collections.singletonList("doctype"))
+                 .addFunction(ranker)
+                 .build());
+SearchResp searchResp = client.search(searchReq);
+```
+
+```go
+// go
+```
+
+```javascript
+import {FunctionType} from '@zilliz/milvus2-sdk-node';
+
+const fix_weight_ranker = {
+  name: "boost",
+  input_field_names: [],
+  type: FunctionType.RERANK,
+  params: {
+    reranker: "boost",
+    weight: 0.8,
+  },
+};
+
+const random_weight_ranker = {
+  name: "boost",
+  input_field_names: [],
+  type: FunctionType.RERANK,
+  params: {
+    reranker: "boost",
+    random_score: {
+      seed: 126,
+    },
+    weight: 0.4,
+  },
+};
+
+const ranker = {
+  functions: [fix_weight_ranker, random_weight_ranker],
+  params: {
+    boost_mode: "Multiply",
+    function_mode: "Sum",
+  },
+};
+
+await client.search({
+  collection_name: "my_collection",
+  data: [[-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911]],
+  anns_field: "vector",
+  params: {},
+  output_field: ["doctype"],
+  ranker: ranker
+});
+
+```
+
+```bash
+# restful
 ```
 
 Specifically, there are two Boost Rankers: one applies a fixed weight to all found entities, while the other assigns a random weight to them. Then, we reference these two rankers in a **FunctionScore**, which also defines how the weights influence the scores of the found entities. 
@@ -559,13 +771,13 @@ The following table lists the parameters required to create a **FunctionScore** 
    <tr>
      <td><p><code>params.boost_mode</code></p></td>
      <td><p>No</p></td>
-     <td><p>Specifies how the specified weights influence the scores of any matching entities.</p><p>Possible values are:</p><ul><li><p><code>Multiple</code></p><p>Indicates that the weighted value is equal to the original score of a matching entity multiplied by the specified weight. </p><p>This is the default value.</p></li><li><p><code>Sum</code></p><p>Indicates that the weighted value is equal to the sum of the original score of a matching entity and the specified weight</p></li></ul></td>
+     <td><p>Specifies how the specified weights influence the scores of any matching entities.</p><p>Possible values are:</p><ul><li><p><code>Multiply</code></p><p>Indicates that the weighted value is equal to the original score of a matching entity multiplied by the specified weight. </p><p>This is the default value.</p></li><li><p><code>Sum</code></p><p>Indicates that the weighted value is equal to the sum of the original score of a matching entity and the specified weight</p></li></ul></td>
      <td><p><code>"Sum"</code></p></td>
    </tr>
    <tr>
      <td><p><code>params.function_mode</code></p></td>
      <td><p>No</p></td>
-     <td><p>Specifies how the weighted values from various Boost Rankers are processed.</p><p>Possible values are:</p><ul><li><p><code>Multiplify</code></p><p>Indicates that the final score of a matching entity is equal to the product of the weighted values from all Boost Rankers.</p><p>This is the default value.</p></li><li><p><code>Sum</code></p><p>Indicates that the final score of a matching entity is equal to the sum of the weighted values from all Boost Rankers.</p></li></ul></td>
+     <td><p>Specifies how the weighted values from various Boost Rankers are processed.</p><p>Possible values are:</p><ul><li><p><code>Multiply</code></p><p>Indicates that the final score of a matching entity is equal to the product of the weighted values from all Boost Rankers.</p><p>This is the default value.</p></li><li><p><code>Sum</code></p><p>Indicates that the final score of a matching entity is equal to the sum of the weighted values from all Boost Rankers.</p></li></ul></td>
      <td><p><code>"Sum"</code></p></td>
    </tr>
 </table>

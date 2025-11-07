@@ -11,7 +11,7 @@ The TEI Ranker leverages the [Text Embedding Inference (TEI)](https://huggingfac
 
 ## Prerequisites
 
-Before implementing vLLM Ranker in Milvus, ensure you have:
+Before implementing TEI Ranker in Milvus, ensure you have:
 
 - A Milvus collection with a `VARCHAR` field containing the text to be reranked
 
@@ -55,7 +55,28 @@ tei_ranker = Function(
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build());
+
+CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
+        .functionType(FunctionType.RERANK)
+        .name("vllm_semantic_ranker")
+        .inputFieldNames(Collections.singletonList(NAME_FIELD))
+        .param("reranker", "model")
+        .param("provider", "tei")
+        .param("queries", "[\"renewable energy developments\"]")
+        .param("endpoint", "http://localhost:8080")
+        .param("max_client_batch_size", "32")
+        .param("truncate", "true")
+        .param("truncation_direction", "Right")
+        .build();
+searchWithRanker(scientists, ranker);
 ```
 
 ```javascript
@@ -120,11 +141,7 @@ The following parameters are specific to the TEI ranker:
    <tr>
      <td><p><code>truncation_direction</code></p></td>
      <td><p>No</p></td>
-     <td><p>Direction to truncate from when input is too long:</p>
-<ul>
-<li><p><code>"Right"</code> (default):  Tokens are removed from the end of the sequence until the maximum supported size is matched.</p></li>
-<li><p><code>"Left"</code>: Tokens are removed from the beginning of the sequence.</p></li>
-</ul></td>
+     <td><p>Direction to truncate from when input is too long:</p><ul><li><p><code>"Right"</code> (default):  Tokens are removed from the end of the sequence until the maximum supported size is matched.</p></li><li><p><code>"Left"</code>: Tokens are removed from the beginning of the sequence.</p></li></ul></td>
      <td><p><code>"Right"</code> or <code>"Left"</code></p></td>
    </tr>
 </table>
@@ -151,7 +168,7 @@ To apply TEI Ranker to a standard vector search:
 # Execute search with vLLM reranking
 results = client.search(
     collection_name="your_collection",
-    data=["AI Research Progress", "What is AI"],  # Search queries
+    data=[your_query_vector],  # Replace with your query vector
     anns_field="dense_vector",                   # Vector field to search
     limit=5,                                     # Number of results to return
     output_fields=["document"],                  # Include text field for reranking
@@ -162,7 +179,23 @@ results = client.search(
 ```
 
 ```java
-// java
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("your_collection")
+        .data(Arrays.asList(new EmbeddedText("AI Research Progress"), new EmbeddedText("What is AI")))
+        .annsField("vector_field")
+        .limit(10)
+        .outputFields(Collections.singletonList("document"))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .build();
+SearchResp searchResp = client.search(searchReq);
 ```
 
 ```javascript
@@ -194,7 +227,7 @@ from pymilvus import AnnSearchRequest
 
 # Configure dense vector search
 dense_search = AnnSearchRequest(
-    data=["AI Research Progress", "What is AI"],
+    data=[your_query_vector_1], # Replace with your query vector
     anns_field="dense_vector",
     param={},
     limit=5
@@ -202,7 +235,7 @@ dense_search = AnnSearchRequest(
 
 # Configure sparse vector search  
 sparse_search = AnnSearchRequest(
-    data=["AI Research Progress", "What is AI"],
+    data=[your_query_vector_2], # Replace with your query vector
     anns_field="sparse_vector", 
     param={},
     limit=5
@@ -220,7 +253,31 @@ hybrid_results = client.hybrid_search(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.AnnSearchReq;
+import io.milvus.v2.service.vector.request.HybridSearchReq;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List<AnnSearchReq> searchRequests = new ArrayList<>();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("dense_vector")
+        .vectors(Arrays.asList(new FloatVec(embedding1), new FloatVec(embedding2)))
+        .limit(5)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("sparse_vector")
+        .data(Arrays.asList(new EmbeddedText("AI Research Progress"), new EmbeddedText("What is AI")))
+        .limit(5)
+        .build());
+
+HybridSearchReq hybridSearchReq = HybridSearchReq.builder()
+                .collectionName("your_collection")
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(5)
+                .outputFields(Collections.singletonList("document"))
+                .build();
+SearchResp searchResp = client.hybridSearch(hybridSearchReq);
 ```
 
 ```javascript

@@ -22,7 +22,7 @@ Install the necessary dependencies:
 
 
 ```python
-$ pip install --upgrade agno pymilvus openai
+$ pip install --upgrade agno pymilvus milvus-lite openai
 ```
 
 <div class="alert note">

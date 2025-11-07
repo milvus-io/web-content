@@ -33,7 +33,7 @@ By the end of this tutorial, you’ll gain a solid understanding of how Milvus a
 
 
 ```shell
-$ pip install dynamiq pymilvus
+$ pip install dynamiq pymilvus milvus-lite
 ```
 
 <div class="alert note">

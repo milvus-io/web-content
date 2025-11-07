@@ -28,7 +28,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```shell
-$ pip install --upgrade pymilvus openai requests tqdm pandas ragas
+$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas ragas
 ```
 
 <div class="alert note">

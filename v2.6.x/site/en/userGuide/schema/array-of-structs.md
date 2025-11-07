@@ -15,14 +15,14 @@ Here's an example of an entity from a collection that contains an Array of Struc
 {
     'id': 0,
     'title': 'Walden',
-    'title_vector': [0.1, 0.2, 0.3, 0.4, 0.5]
+    'title_vector': [0.1, 0.2, 0.3, 0.4, 0.5],
     'author': 'Henry David Thoreau',
     'year_of_publication': 1845,
     // highlight-start
     'chunks': [
         {
             'text': 'When I wrote the following pages, or rather the bulk of them...',
-            'text_vector': [0.3, 0.2, 0.3, 0.2, 0.5]
+            'text_vector': [0.3, 0.2, 0.3, 0.2, 0.5],
             'chapter': 'Economy',
         },
         {
@@ -88,7 +88,7 @@ In the example above, the `chunks` field is an Array of Structs field, and each 
 
     All vector fields in a collection must be indexed. To index a vector field within an Array of Structs field, Milvus uses an embedding list to organize the vector embeddings in each Struct element and indexes the entire embedding list as a whole.
 
-    You can use `HNSW` as the index type and any metric type listed below to build indexes for the embedding lists in an Array of Structs field. 
+    You can use `AUTOINDEX` or `HNSW` as the index type and any metric type listed below to build indexes for the embedding lists in an Array of Structs field. 
 
     <table>
        <tr>
@@ -97,22 +97,15 @@ In the example above, the `chunks` field is an Array of Structs field, and each 
          <th><p>Remarks</p></th>
        </tr>
        <tr>
-         <td rowspan="5"><p><code>HNSW</code></p></td>
+         <td rowspan="3"><p><code>AUTOINDEX</code> (or <code>HNSW</code>)</p></td>
          <td><p><code>MAX_SIM_COSINE</code></p></td>
-         <td rowspan="3"><p>For embedding lists of the following types:</p><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
+         <td rowspan="3"><p>For embedding lists of the following types:</p><ul><li>FLOAT_VECTOR</li></ul></td>
        </tr>
        <tr>
          <td><p><code>MAX_SIM_IP</code></p></td>
        </tr>
        <tr>
          <td><p><code>MAX_SIM_L2</code></p></td>
-       </tr>
-       <tr>
-         <td><p><code>MAX_SIM_HAMMING</code></p></td>
-         <td rowspan="2"><p>For embedding lists of the BINARY_VECTOR type</p></td>
-       </tr>
-       <tr>
-         <td><p><code>MAX_SIM_JACCARD</code></p></td>
        </tr>
     </table>
 
@@ -193,7 +186,63 @@ schema.add_field("chunks", datatype=DataType.ARRAY, element_type=DataType.STRUCT
 ```
 
 ```javascript
-// Node.js
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const milvusClient = new MilvusClient("http://localhost:19530");
+
+const schema = [
+  {
+    name: "id",
+    data_type: DataType.INT64,
+    is_primary_key: true,
+    auto_id: true,
+  },
+  {
+    name: "title",
+    data_type: DataType.VARCHAR,
+    max_length: 512,
+  },
+  {
+    name: "author",
+    data_type: DataType.VARCHAR,
+    max_length: 512,
+  },
+  {
+    name: "year_of_publication",
+    data_type: DataType.INT64,
+  },
+  {
+    name: "title_vector",
+    data_type: DataType.FLOAT_VECTOR,
+    dim: 5,
+  },
+  // highlight-start
+  {
+    name: "chunks",
+    data_type: DataType.ARRAY,
+    element_type: DataType.STRUCT,
+    fields: [
+      {
+        name: "text",
+        data_type: DataType.VARCHAR,
+        max_length: 65535,
+      },
+      {
+        name: "chapter",
+        data_type: DataType.VARCHAR,
+        max_length: 512,
+      },
+      {
+        name: "text_vector",
+        data_type: DataType.FLOAT_VECTOR,
+        dim: 5,
+        mmap_enabled: true,
+      },
+    ],
+    max_capacity: 1000,
+  },
+  // highlight-end
+];
 ```
 
 ```bash
@@ -208,7 +257,7 @@ Indexing is mandatory for all vector fields, including both the vector fields in
 
 The applicable index parameters vary depending on the index type in use. For details on applicable index parameters, refer to [Index Explained](index-explained.md) and the documentation pages specific to your selected index type.
 
-To index an embedding list field, you need to set its index type to `HNSW`, and use `MAX_SIM_COSINE` as the metric type for Milvus to measure the similarities between embedding lists.
+To index an embedding list, you need to set its index type to `AUTOINDEX`  or `HNSW`, and use `MAX_SIM_COSINE` as the metric type for Milvus to measure the similarities between embedding lists.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -225,21 +274,16 @@ index_params = MilvusClient.prepare_index_params()
 # Create an index for the vector field in the collection
 index_params.add_index(
     field_name="title_vector",
-    index_type="IVF_FLAT",
+    index_type="AUTOINDEX",
     metric_type="L2",
-    params={"nlist": 128}
 )
 
 # highlight-start
 # Create an index for the vector field in the element Struct
 index_params.add_index(
     field_name="chunks[text_vector]",
-    index_type="HNSW",
+    index_type="AUTOINDEX",
     metric_type="MAX_SIM_COSINE",
-    params={
-        "M": 16,
-        "efConstruction": 200
-    }
 )
 # highlight-end
 ```
@@ -253,7 +297,25 @@ index_params.add_index(
 ```
 
 ```javascript
-// Node.js
+await milvusClient.createCollection({
+  collection_name: "books",
+  fields: schema,
+});
+
+const indexParams = [
+  {
+    field_name: "title_vector",
+    index_type: "AUTOINDEX",
+    metric_type: "L2",
+  },
+  // highlight-start
+  {
+    field_name: "chunks[text_vector]",
+    index_type: "AUTOINDEX",
+    metric_type: "MAX_SIM_COSINE",
+  },
+  // highlight-end
+];
 ```
 
 ```bash
@@ -273,6 +335,11 @@ Once the schema and index are ready, you can create a collection that includes a
 </div>
 
 ```python
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
 client.create_collection(
     collection_name="my_collection",
     schema=schema,
@@ -289,7 +356,11 @@ client.create_collection(
 ```
 
 ```javascript
-// Node.js
+await milvusClient.createCollection({
+  collection_name: "books",
+  fields: schema,
+  indexes: indexParams,
+});
 ```
 
 ```bash
@@ -311,15 +382,14 @@ After creating the collection, you can insert data that includes Arrays of Struc
 ```python
 # Sample data
 data = {
-    'id': 0,
     'title': 'Walden',
-    'title_vector': [0.1, 0.2, 0.3, 0.4, 0.5]
+    'title_vector': [0.1, 0.2, 0.3, 0.4, 0.5],
     'author': 'Henry David Thoreau',
-    'year-of-publication': 1845,
+    'year_of_publication': 1845,
     'chunks': [
         {
             'text': 'When I wrote the following pages, or rather the bulk of them...',
-            'text_vector': [0.3, 0.2, 0.3, 0.2, 0.5]
+            'text_vector': [0.3, 0.2, 0.3, 0.2, 0.5],
             'chapter': 'Economy',
         },
         {
@@ -346,7 +416,31 @@ client.insert(
 ```
 
 ```javascript
-// Node.js
+  {
+    id: 0,
+    title: "Walden",
+    title_vector: [0.1, 0.2, 0.3, 0.4, 0.5],
+    author: "Henry David Thoreau",
+    "year-of-publication": 1845,
+    chunks: [
+      {
+        text: "When I wrote the following pages, or rather the bulk of them...",
+        text_vector: [0.3, 0.2, 0.3, 0.2, 0.5],
+        chapter: "Economy",
+      },
+      {
+        text: "I would fain say something, not so much concerning the Chinese and...",
+        text_vector: [0.7, 0.4, 0.2, 0.7, 0.8],
+        chapter: "Economy",
+      },
+    ],
+  },
+];
+
+await milvusClient.insert({
+  collection_name: "books",
+  data: data,
+});
 ```
 
 ```bash
@@ -433,6 +527,9 @@ def generate_record(record_id: int) -> Dict[str, Any]:
 
 # Generate 1000 records
 data = [generate_record(i) for i in range(1000)]
+
+# Insert the generated data
+client.insert(collection_name="my_collection", data=data)
 ```
 
 </details>
@@ -441,13 +538,13 @@ data = [generate_record(i) for i in range(1000)]
 
 You can perform vector searches on the vector fields of a collection and in an Array of Structs. 
 
-Specifically, you can directly use the names of the vector fields within Struct elements as the value for the `anns_field` parameter in a search request, and use `EmbeddingList` to organize query vectors neatly.
+Specifically, you should concatenate the name of the Array of Structs field and those of the target vector fields within Struct elements as the value for the `anns_field` parameter in a search request, and use `EmbeddingList` to organize query vectors neatly.
 
 <div class="alert note">
 
-Milvus provides `EmbeddingList` to help you organize query vectors for searches against an embedding list in an Array of Structs more neatly.
+Milvus provides `EmbeddingList` to help you organize query vectors for searches against an embedding list in an Array of Structs more neatly. Each `EmbeddingList` contains at least a vector embedding and expects a number of topK entities in return.
 
-However, `EmbeddingList` can used only in `search()` requests without range search or grouping search parameters, let alone `search_iterator()` requests.
+However, `EmbeddingList` can be used only in `search()` requests without range search or grouping search parameters, let alone `search_iterator()` requests.
 
 </div>
 
@@ -460,7 +557,7 @@ However, `EmbeddingList` can used only in `search()` requests without range sear
 </div>
 
 ```python
-from pymilvus import EmbeddingList
+from pymilvus.client.embedding_list import EmbeddingList
 
 # each query embedding list triggers a single search
 embeddingList1 = EmbeddingList()
@@ -490,7 +587,20 @@ results = client.search(
 ```
 
 ```javascript
-// Node.js
+const embeddingList1 = [[0.2, 0.9, 0.4, -0.3, 0.2]];
+const embeddingList2 = [
+  [-0.2, -0.2, 0.5, 0.6, 0.9],
+  [-0.4, 0.3, 0.5, 0.8, 0.2],
+];
+const results = await milvusClient.search({
+  collection_name: "books",
+  data: embeddingList1,
+  anns_field: "chunks[text_vector]",
+  search_params: { metric_type: "MAX_SIM_COSINE" },
+  limit: 3,
+  output_fields: ["chunks[text]"],
+});
+
 ```
 
 ```bash
@@ -583,7 +693,14 @@ print(results)
 ```
 
 ```javascript
-// Node.js
+const results2 = await milvusClient.search({
+  collection_name: "books",
+  data: [embeddingList1, embeddingList2],
+  anns_field: "chunks[text_vector]",
+  search_params: { metric_type: "MAX_SIM_COSINE" },
+  limit: 3,
+  output_fields: ["chunks[text]"],
+});
 ```
 
 ```bash

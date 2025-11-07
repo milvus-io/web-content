@@ -30,7 +30,7 @@ Let's first load the CAMEL paper from https://arxiv.org/pdf/2303.17760.pdf. This
 
 
 ```python
-$ pip install -U "camel-ai[all]" pymilvus
+$ pip install -U "camel-ai[all]" pymilvus milvus-lite
 ```
 
 <div class="alert note">

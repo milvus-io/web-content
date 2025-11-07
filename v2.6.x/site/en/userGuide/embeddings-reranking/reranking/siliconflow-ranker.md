@@ -70,7 +70,28 @@ siliconflow_ranker = Function(
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build());
+
+CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
+                       .functionType(FunctionType.RERANK)
+                       .name("siliconflow_semantic_ranker")
+                       .inputFieldNames(Collections.singletonList("document"))
+                       .param("reranker", "model")
+                       .param("provider", "siliconflow")
+                       .param("model_name", "BAAI/bge-reranker-v2-m3")
+                       .param("queries", "[\"renewable energy developments\"]")
+                       .param("endpoint", "http://localhost:8080")
+                       .param("max_client_batch_size", "32")
+                       .param("max_chunks_per_doc", "5")
+                       .param("overlap_tokens", "50")
+                       .build();
 ```
 
 ```javascript
@@ -111,8 +132,7 @@ The following parameters are specific to the SiliconFlow ranker:
    <tr>
      <td><p><code>model_name</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>The SiliconFlow reranking model to use from supported models on SiliconFlow platform.
- For a list of rerank models available, refer to <a href="https://docs.siliconflow.cn/en/api-reference/rerank/create-rerank">SiliconFlow documentation</a>.</p></td>
+     <td><p>The SiliconFlow reranking model to use from supported models on SiliconFlow platform.</p><p>For a list of rerank models available, refer to <a href="https://docs.siliconflow.cn/en/api-reference/rerank/create-rerank">SiliconFlow documentation</a>.</p></td>
      <td><p><code>"BAAI/bge-reranker-v2-m3"</code></p></td>
    </tr>
    <tr>
@@ -159,11 +179,19 @@ For general parameters shared across all model rankers (e.g., `provider`, `queri
 
 To apply SiliconFlow Ranker to a standard vector search:
 
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
 ```python
 # Execute search with SiliconFlow reranking
 results = client.search(
     collection_name="your_collection",
-    data=["AI Research Progress", "What is AI"],  # Search queries
+    data=[your_query_vector],  # Replace with your query vector
     anns_field="dense_vector",                   # Vector field to search
     limit=5,                                     # Number of results to return
     output_fields=["document"],                  # Include text field for reranking
@@ -173,16 +201,56 @@ results = client.search(
 )
 ```
 
+```java
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+SearchReq searchReq = SearchReq.builder()
+        .collectionName("your_collection")
+        .data(Arrays.asList(new EmbeddedText("AI Research Progress"), new EmbeddedText("What is AI")))
+        .annsField("vector_field")
+        .limit(10)
+        .outputFields(Collections.singletonList("document"))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .build();
+SearchResp searchResp = client.search(searchReq);
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 ## Apply to hybrid search
 
 SiliconFlow Ranker can also be used with hybrid search to combine dense and sparse retrieval methods:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import AnnSearchRequest
 
 # Configure dense vector search
 dense_search = AnnSearchRequest(
-    data=["AI Research Progress", "What is AI"],
+    data=[your_query_vector_1], # Replace with your query vector
     anns_field="dense_vector",
     param={},
     limit=5
@@ -190,7 +258,7 @@ dense_search = AnnSearchRequest(
 
 # Configure sparse vector search  
 sparse_search = AnnSearchRequest(
-    data=["AI Research Progress", "What is AI"],
+    data=[your_query_vector_2], # Replace with your query vector
     anns_field="sparse_vector", 
     param={},
     limit=5
@@ -205,4 +273,44 @@ hybrid_results = client.hybrid_search(
     limit=5,                                   # Final number of results
     output_fields=["document"]
 )
+```
+
+```java
+import io.milvus.v2.service.vector.request.AnnSearchReq;
+import io.milvus.v2.service.vector.request.HybridSearchReq;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List<AnnSearchReq> searchRequests = new ArrayList<>();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("dense_vector")
+        .vectors(Arrays.asList(new FloatVec(embedding1), new FloatVec(embedding2)))
+        .limit(5)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName("sparse_vector")
+        .data(Arrays.asList(new EmbeddedText("AI Research Progress"), new EmbeddedText("What is AI")))
+        .limit(5)
+        .build());
+
+HybridSearchReq hybridSearchReq = HybridSearchReq.builder()
+                .collectionName("your_collection")
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(5)
+                .outputFields(Collections.singletonList("document"))
+                .build();
+SearchResp searchResp = client.hybridSearch(hybridSearchReq);
+```
+
+```javascript
+// nodejs
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```

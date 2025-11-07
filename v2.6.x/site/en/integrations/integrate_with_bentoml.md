@@ -18,7 +18,7 @@ Milvus Lite is available on PyPI. You can install it via pip for Python 3.8+:
 
 
 ```python
-$ pip install -U pymilvus bentoml
+$ pip install -U pymilvus milvus-lite bentoml
 ```
 
 <div class="alert note">
