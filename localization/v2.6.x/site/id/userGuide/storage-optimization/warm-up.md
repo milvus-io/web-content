@@ -4,8 +4,8 @@ title: PemanasanCompatible with Milvus 2.6.4+
 summary: >-
   Di Milvus, Warm Up melengkapi Tiered Storage dengan mengurangi latensi yang
   terjadi saat data dingin diakses untuk pertama kalinya. Setelah dikonfigurasi,
-  Warm Up melakukan pramuat bidang atau indeks yang dipilih ke dalam cache
-  sebelum segmen dapat dimintai, sehingga memastikan bahwa data yang sering
+  Warm Up melakukan pramuat jenis bidang atau indeks yang dipilih ke dalam cache
+  sebelum segmen dapat di-query, sehingga memastikan bahwa data yang sering
   diakses tersedia segera setelah dimuat.
 beta: Milvus 2.6.4+
 ---
@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Di Milvus, <strong>Pemanasan</strong> melengkapi Penyimpanan Berjenjang dengan mengurangi latensi yang terjadi saat data dingin diakses untuk pertama kalinya. Setelah dikonfigurasi, Pemanasan melakukan pramuat bidang atau indeks yang dipilih ke dalam cache sebelum segmen dapat dimintai, sehingga memastikan bahwa data yang sering diakses tersedia segera setelah dimuat.</p>
+    </button></h1><p>Di Milvus, <strong>Pemanasan</strong> melengkapi Penyimpanan Berjenjang dengan mengurangi latensi yang terjadi saat data dingin diakses untuk pertama kalinya. Setelah dikonfigurasi, Pemanasan akan memuatkan jenis bidang atau indeks yang dipilih ke dalam cache sebelum sebuah segmen dapat di-query, sehingga memastikan bahwa data yang sering diakses akan segera tersedia setelah dimuat.</p>
 <h2 id="Why-warm-up" class="common-anchor-header">Mengapa pemanasan<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +72,7 @@ beta: Milvus 2.6.4+
      <th><p>Skenario umum</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">sync</code> (default)</p></td>
+     <td><p><code translate="no">sync</code></p></td>
      <td><p>Memuat sebelum segmen dapat di-query. Waktu muat sedikit meningkat, tetapi kueri pertama tidak menimbulkan latensi.</p></td>
      <td><p>Gunakan untuk data yang sangat penting bagi kinerja yang harus segera tersedia, seperti indeks skalar frekuensi tinggi atau indeks vektor kunci yang digunakan dalam pencarian.</p></td>
    </tr>
@@ -89,9 +89,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-attr">warmup:</span>
         <span class="hljs-comment"># options: sync, disable.</span>
         <span class="hljs-comment"># Specifies the timing for warming up the Tiered Storage cache.</span>
-        <span class="hljs-comment"># - &quot;sync&quot;: data will be loaded into the cache before a segment is considered loaded.</span>
-        <span class="hljs-comment"># - &quot;disable&quot;: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
-        <span class="hljs-comment"># Defaults to &quot;sync&quot;, except for vector field which defaults to &quot;disable&quot;.</span>
+        <span class="hljs-comment"># - `sync`: data will be loaded into the cache before a segment is considered loaded.</span>
+        <span class="hljs-comment"># - `disable`: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
+        <span class="hljs-comment"># Defaults to `sync`, except for vector field which defaults to `disable`.</span>
         <span class="hljs-attr">scalarField:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">scalarIndex:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">vectorField:</span> <span class="hljs-string">disable</span> <span class="hljs-comment"># cache warmup for vector field raw data is by default disabled.</span>

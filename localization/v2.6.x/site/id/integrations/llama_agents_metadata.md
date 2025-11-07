@@ -145,7 +145,7 @@ title: 'Sistem Multi-agen dengan Mistral AI, Milvus, dan Llama-agen'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus openai python-dotenv</span>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus milvus-lite openai python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus llama-index-readers-file llama-index-llms-ollama llama-index-llms-mistralai llama-index-embeddings-mistralai</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -481,7 +481,7 @@ llm = Ollama(model=<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
       </svg>
     </button></h2><p>Sekarang kita dapat menggunakan Pemfilteran Metadata:</p>
 <ol>
-<li>Pada yang pertama, Agen seharusnya tidak dapat menemukan apa pun dari kueri pengguna karena kueri ini tentang Uber dan kita memfilter pada Dokumen hanya tentang Lyft.</li>
+<li>Pada yang pertama, Agen seharusnya tidak dapat menemukan apa pun dari kueri pengguna karena kueri ini tentang Uber dan kita memfilter Dokumen hanya tentang Lyft.</li>
 <li>Pada contoh kedua, Agen seharusnya dapat menemukan informasi tentang Lyft karena kita hanya akan mencari melalui dokumen tentang Lyft.</li>
 </ol>
 <pre><code translate="no" class="language-python">response = llm.predict_and_call(
@@ -560,7 +560,22 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
         ></path>
       </svg>
     </button></h2><p>Di bawah ini adalah contoh kode yang menunjukkan cara membuat mesin kueri terfilter menggunakan agen untuk mengekstrak filter metadata dari pertanyaan pengguna:</p>
-<h3 id="Explanation" class="common-anchor-header">Penjelasan</h3><ul>
+<h3 id="Explanation" class="common-anchor-header">Penjelasan<button data-href="#Explanation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Prompt Template</strong>: Kelas PromptTemplate digunakan untuk mendefinisikan templat untuk mengekstrak filter metadata dari pertanyaan pengguna. Templat ini menginstruksikan model bahasa untuk mempertimbangkan nama perusahaan, tahun, dan atribut lain yang relevan.</p></li>
 <li><p><strong>LLM</strong>: Mistral Nemo digunakan untuk menghasilkan filter metadata berdasarkan pertanyaan pengguna. Model ini diminta dengan pertanyaan dan templat untuk mengekstrak filter yang relevan.</p></li>
 <li><p><strong>Filter Metadata</strong>: Tanggapan dari LLM diuraikan untuk membuat objek <code translate="no">MetadataFilters</code>. Jika tidak ada filter spesifik yang disebutkan, objek <code translate="no">MetadataFilters</code> kosong akan dikembalikan.</p></li>
@@ -647,15 +662,60 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
         ></path>
       </svg>
     </button></h2><p>Mistral Large adalah model andalan Mistral dengan kemampuan penalaran, pengetahuan, dan pengkodean yang sangat baik. Sangat ideal untuk tugas-tugas kompleks yang membutuhkan kemampuan penalaran yang besar atau sangat terspesialisasi. Model ini memiliki kemampuan pemanggilan fungsi tingkat lanjut, yang persis seperti yang kita butuhkan untuk mengatur berbagai agen kita.</p>
-<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">Mengapa kita membutuhkan Model yang lebih cerdas?</h3><p>Pertanyaan yang dijawab di bawah ini sangat menantang karena membutuhkan orkestrasi berbagai layanan dan agen untuk memberikan respons yang koheren dan akurat. Hal ini melibatkan koordinasi berbagai alat dan agen untuk mengambil dan memproses informasi dari sumber yang berbeda, seperti data keuangan dari berbagai perusahaan.</p>
-<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">Apa yang sulit dari hal itu?</h3><ul>
+<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">Mengapa kita membutuhkan Model yang lebih cerdas?<button data-href="#Why-do-we-need-a-smarter-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pertanyaan yang dijawab di bawah ini sangat menantang karena membutuhkan orkestrasi berbagai layanan dan agen untuk memberikan respons yang koheren dan akurat. Hal ini melibatkan koordinasi berbagai alat dan agen untuk mengambil dan memproses informasi dari sumber yang berbeda, seperti data keuangan dari berbagai perusahaan.</p>
+<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">Apa yang sulit dari hal itu?<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>Kompleksitas: Pertanyaan ini melibatkan banyak agen dan layanan, masing-masing dengan fungsi dan sumber datanya sendiri. Mengkoordinasikan agen-agen ini untuk bekerja sama dengan lancar adalah tugas yang kompleks.</li>
 </ul>
 <ul>
 <li><p>Integrasi Data: Pertanyaan ini membutuhkan pengintegrasian data dari berbagai sumber, yang dapat menjadi tantangan karena adanya variasi format, struktur, dan metadata data.</p></li>
 <li><p>Pemahaman Kontekstual: Pertanyaan mungkin memerlukan pemahaman konteks dan hubungan antara berbagai informasi, yang merupakan tugas yang menuntut kognitif.</p></li>
 </ul>
-<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">Mengapa Mistral Large dapat membantu dalam kasus ini?</h3><p>Mistral Large sangat cocok untuk tugas ini karena kemampuan penalaran dan pemanggilan fungsinya yang canggih. Berikut ini adalah bagaimana hal tersebut membantu:</p>
+<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">Mengapa Mistral Large dapat membantu dalam kasus ini?<button data-href="#Why-would-Mistral-Large-help-in-this-case" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mistral Large sangat cocok untuk tugas ini karena kemampuan penalaran dan pemanggilan fungsinya yang canggih. Berikut ini adalah bagaimana hal tersebut membantu:</p>
 <ul>
 <li><p>Penalaran Tingkat Lanjut: Mistral Large dapat menangani tugas-tugas penalaran yang kompleks, sehingga ideal untuk mengatur banyak agen dan layanan. Mistral Large dapat memahami hubungan antara berbagai informasi dan membuat keputusan yang tepat.</p></li>
 <li><p>Kemampuan Pemanggilan Fungsi: Mistral Large memiliki kemampuan pemanggilan fungsi tingkat lanjut, yang sangat penting untuk mengoordinasikan tindakan berbagai agen. Hal ini memungkinkan integrasi dan orkestrasi yang mulus dari berbagai layanan.</p></li>

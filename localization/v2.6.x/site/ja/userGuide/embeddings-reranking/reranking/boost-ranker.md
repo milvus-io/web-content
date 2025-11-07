@@ -37,7 +37,7 @@ beta: Milvus v2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>クロスエンコーダーモデルやフュージョンアルゴリズムに依存する他のランカーとは異なり、Boost Rankerはオプションのメタデータドリブンルールをランキングプロセスに直接注入します。</p>
+    </button></h2><p>クロスエンコーダーモデルやフュージョンアルゴリズムに依存する他のランカーとは異なり、Boostランカーはオプションのメタデータドリブンルールをランキングプロセスに直接注入します。</p>
 <table>
    <tr>
      <th><p>使用例</p></th>
@@ -46,7 +46,7 @@ beta: Milvus v2.6.2+
    </tr>
    <tr>
      <td><p>ビジネス主導のコンテンツ優先順位付け</p></td>
-     <td><ul><li><p>Eコマースの検索結果でプレミアム商品を強調する</p></li><li><p>ユーザーエンゲージメント指標（閲覧数、「いいね！」数、シェア数など）の高いコンテンツの可視性を高める</p></li><li><p>タイムセンシティブな検索アプリケーションで最近のコンテンツを上位表示する</p></li><li><p>検証済みまたは信頼できるソースからのコンテンツを優先する</p></li><li><p>正確なフレーズまたは関連性の高いキーワードに一致する検索結果を高める</p></li></ul></td>
+     <td><ul><li><p>Eコマースの検索結果でプレミアム商品を強調する</p></li><li><p>ユーザーエンゲージメント指標（閲覧数、「いいね！」数、シェア数など）が高いコンテンツの認知度を高める</p></li><li><p>タイムセンシティブな検索アプリケーションで最近のコンテンツを上位表示する</p></li><li><p>検証済みまたは信頼できるソースからのコンテンツを優先する</p></li><li><p>正確なフレーズまたは関連性の高いキーワードに一致する検索結果を高める</p></li></ul></td>
      <td rowspan="2"><p>インデックスを再構築したり、ベクトル埋め込みモデルを変更したりする必要がなく、オプションのメタデータフィルタをリアルタイムに適用することで、検索結果で特定のアイテムを即座に昇格または降格させることができます。このメカニズムにより、進化するビジネス要件に容易に適応する、柔軟でダイナミックな検索ランキングが可能になります。</p></td>
    </tr>
    <tr>
@@ -442,6 +442,8 @@ beta: Milvus v2.6.2+
         ></path>
       </svg>
     </button></h3><p>検索リクエストのリランカーとしてBoost Rankerを渡す前に、以下のようにBoost Rankerをリランカー関数として適切に定義する必要があります：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 ranker = Function(
@@ -459,6 +461,38 @@ ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BoostRanker;
+
+<span class="hljs-type">BoostRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> BoostRanker.builder()
+        .name(<span class="hljs-string">&quot;boost&quot;</span>)
+        .filter(<span class="hljs-string">&quot;doctype == \&quot;abstract\&quot;&quot;</span>)
+        .weight(<span class="hljs-number">5.0f</span>)
+        .randomScoreField(<span class="hljs-string">&quot;id&quot;</span>)
+        .randomScoreSeed(<span class="hljs-number">126</span>)
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">FunctionType</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+
+<span class="hljs-keyword">const</span> ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;boost&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;boost&quot;</span>,
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;doctype == &#x27;abstract&#x27;&quot;</span>,
+    <span class="hljs-attr">random_score</span>: {
+      <span class="hljs-attr">seed</span>: <span class="hljs-number">126</span>,
+      <span class="hljs-attr">field</span>: <span class="hljs-string">&quot;id&quot;</span>,
+    },
+    <span class="hljs-attr">weight</span>: <span class="hljs-number">0.5</span>,
+  },
+};
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -470,18 +504,18 @@ ranker = Function(
      <td><p><code translate="no">name</code></p></td>
      <td><p>はい</p></td>
      <td><p>このファンクションの一意な識別子</p></td>
-     <td><p><code translate="no">"rrf"</code></p></td>
+     <td><p><code translate="no">"boost"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>はい</p></td>
-     <td><p>関数を適用するベクトルフィールドのリスト（RRF Rankerでは空でなければならない）</p></td>
+     <td><p>関数を適用するベクトルフィールドのリスト（Boost Rankerでは空でなければならない）</p></td>
      <td><p><code translate="no">[]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>はい</p></td>
-     <td><p>呼び出すFunctionのタイプ。<code translate="no">RERANK</code> を使用してリランキング戦略を指定する。</p></td>
+     <td><p>呼び出すFunctionのタイプ。リランキング戦略を指定するには<code translate="no">RERANK</code> 。</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
@@ -499,7 +533,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">params.filter</code></p></td>
      <td><p>No</p></td>
-     <td><p>検索結果のエンティティ間のマッチングに使用するフィルタ式を指定する。<a href="/docs/ja/boolean.md">フィルタリングの説明</a>」で説明した、有効な基本フィルタ式を指定できます。</p><p><strong>注：</strong> <code translate="no">==</code> 、<code translate="no">&gt;</code> 、<code translate="no">&lt;</code> などの基本演算子のみを使用します。<code translate="no">text_match</code> 、<code translate="no">phrase_match</code> などの高度な演算子を使用すると、検索パ フォーマンスが低下します。</p></td>
+     <td><p>検索結果のエンティティ間のマッチングに使用するフィルタ式を指定する。<a href="/docs/ja/boolean.md">フィルタリングの説明</a>」で説明した、有効な基本フィルタ式を指定できます。</p><p><strong>注：</strong> <code translate="no">==</code> 、<code translate="no">&gt;</code> 、<code translate="no">&lt;</code> などの基本的な演算子のみを使用します。<code translate="no">text_match</code> 、<code translate="no">phrase_match</code> などの高度な演算子を使用すると、検索パ フォーマンスが低下します。</p></td>
      <td><p><code translate="no">"doctype == 'abstract'"</code></p></td>
    </tr>
    <tr>
@@ -524,7 +558,9 @@ ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Boost Ranker関数の準備ができたら、検索リクエストで参照することができます。以下の例では、<strong>id</strong>、<strong>vector</strong>、<strong>doctypeという</strong>フィールドを持つコレクションを作成済みであると仮定しています。</p>
+    </button></h3><p>Boost Ranker関数の準備ができたら、検索リクエストで参照することができます。以下の例では、<strong>id</strong>、<strong>vector</strong>、<strong>doctype</strong> というフィールドを持つコレクションを作成済みであると仮定している。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Connect to the Milvus server</span>
@@ -537,14 +573,62 @@ client = MilvusClient(
 
 <span class="hljs-comment"># Conduct a similarity search using the created ranker</span>
 client.search(
-    data=[-<span class="hljs-number">0.619954382375778</span>, <span class="hljs-number">0.4479436794798608</span>, -<span class="hljs-number">0.17493894838751745</span>, -<span class="hljs-number">0.4248030059917294</span>, -<span class="hljs-number">0.8648452746018911</span>],
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=[[-<span class="hljs-number">0.619954382375778</span>, <span class="hljs-number">0.4479436794798608</span>, -<span class="hljs-number">0.17493894838751745</span>, -<span class="hljs-number">0.4248030059917294</span>, -<span class="hljs-number">0.8648452746018911</span>]],
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
     params={},
     output_field=[<span class="hljs-string">&quot;doctype&quot;</span>],
     ranker=ranker
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-multiple-Boost-Rankers" class="common-anchor-header">複数のBoost Rankerを使った検索<button data-href="#Search-with-multiple-Boost-Rankers" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build());
+        
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.619954f</span>, <span class="hljs-number">0.447943f</span>, -<span class="hljs-number">0.174938f</span>, -<span class="hljs-number">0.424803f</span>, -<span class="hljs-number">0.864845f</span>})))
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;doctype&quot;</span>))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .build());
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+
+<span class="hljs-comment">// Connect to the Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;localhost:19530&#x27;</span>,
+  <span class="hljs-attr">token</span>: <span class="hljs-string">&#x27;root:Milvus&#x27;</span>
+});
+
+<span class="hljs-comment">// Assume you have a collection set up</span>
+
+<span class="hljs-comment">// Conduct a similarity search</span>
+<span class="hljs-keyword">const</span> searchResults = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+  <span class="hljs-attr">data</span>: [-<span class="hljs-number">0.619954382375778</span>, <span class="hljs-number">0.4479436794798608</span>, -<span class="hljs-number">0.17493894838751745</span>, -<span class="hljs-number">0.4248030059917294</span>, -<span class="hljs-number">0.8648452746018911</span>],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;vector&#x27;</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;doctype&#x27;</span>],
+  <span class="hljs-attr">rerank</span>: ranker,
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Search results:&#x27;</span>, searchResults);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Search-with-multiple-Boost-Rankers" class="common-anchor-header">複数のBoostランカーを使った検索<button data-href="#Search-with-multiple-Boost-Rankers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -559,8 +643,10 @@ client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>検索結果に影響を与えるために、1つの検索で複数のBoost Rankerを組み合わせることができます。そのためには、複数の Boost Ranker を作成し、<strong>FunctionScore</strong>インスタンスでそれらを参照し、<strong>FunctionScore</strong>インスタンスを検索リクエストのランカーとして使用します。</p>
-<p>次の例では、<strong>0.8</strong>から<strong>1.2</strong> の間の重みを適用して、識別されたすべてのエンティティのスコアを変更する方法を示します。</p>
+    </button></h3><p>検索結果に影響を与えるために、1つの検索で複数のBoost Rankerを組み合わせることができます。そのためには、複数のBoost Rankersを作成し、<strong>FunctionScore</strong>インスタンスでそれらを参照し、検索リクエストで<strong>FunctionScore</strong>インスタンスをランカーとして使用します。</p>
+<p>次の例では、<strong>0.8</strong>から<strong>1.2 の</strong>間の重みを適用して、識別されたすべてのエンティティのスコアを変更する方法を示します。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType, FunctionScore
 
 <span class="hljs-comment"># Create a Boost Ranker with a fixed weight</span>
@@ -594,22 +680,106 @@ ranker = FunctionScore(
         fix_weight_ranker, 
         random_weight_ranker
     ],
-    params: {
-        <span class="hljs-string">&quot;boost_mode&quot;</span>: <span class="hljs-string">&quot;Multiply&quot;</span>
+    params={
+        <span class="hljs-string">&quot;boost_mode&quot;</span>: <span class="hljs-string">&quot;Multiply&quot;</span>,
         <span class="hljs-string">&quot;function_mode&quot;</span>: <span class="hljs-string">&quot;Sum&quot;</span>
     }
 )
 
 <span class="hljs-comment"># Conduct a similarity search using the created Function Score</span>
 client.search(
-    data=[-<span class="hljs-number">0.619954382375778</span>, <span class="hljs-number">0.4479436794798608</span>, -<span class="hljs-number">0.17493894838751745</span>, -<span class="hljs-number">0.4248030059917294</span>, -<span class="hljs-number">0.8648452746018911</span>],
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=[[-<span class="hljs-number">0.619954382375778</span>, <span class="hljs-number">0.4479436794798608</span>, -<span class="hljs-number">0.17493894838751745</span>, -<span class="hljs-number">0.4248030059917294</span>, -<span class="hljs-number">0.8648452746018911</span>]],
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
     params={},
     output_field=[<span class="hljs-string">&quot;doctype&quot;</span>],
     ranker=ranker
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>具体的には、2 つの Boost Ranker があり、1 つは見つかったすべてのエンティティに固定の重みを適用し、もう 1 つはランダムな重みを割り当てます。次に、<strong>FunctionScore</strong> でこれら 2 つのランカーを参照し、重みが検出されたエンティティのスコアにどのように影響するかを定義する。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">fixWeightRanker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+                 .functionType(FunctionType.RERANK)
+                 .name(<span class="hljs-string">&quot;boost&quot;</span>)
+                 .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;boost&quot;</span>)
+                 .param(<span class="hljs-string">&quot;weight&quot;</span>, <span class="hljs-string">&quot;0.8&quot;</span>)
+                 .build();
+                 
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">randomWeightRanker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+                 .functionType(FunctionType.RERANK)
+                 .name(<span class="hljs-string">&quot;boost&quot;</span>)
+                 .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;boost&quot;</span>)
+                 .param(<span class="hljs-string">&quot;weight&quot;</span>, <span class="hljs-string">&quot;0.4&quot;</span>)
+                 .param(<span class="hljs-string">&quot;random_score&quot;</span>, <span class="hljs-string">&quot;{\&quot;seed\&quot;: 126}&quot;</span>)
+                 .build();
+
+Map&lt;String, String&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+params.put(<span class="hljs-string">&quot;boost_mode&quot;</span>,<span class="hljs-string">&quot;Multiply&quot;</span>);
+params.put(<span class="hljs-string">&quot;function_mode&quot;</span>,<span class="hljs-string">&quot;Sum&quot;</span>);     
+<span class="hljs-type">FunctionScore</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> FunctionScore.builder()
+                 .addFunction(fixWeightRanker)
+                 .addFunction(randomWeightRanker)
+                 .params(params)
+                 .build()
+
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+                 .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                 .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{-<span class="hljs-number">0.619954f</span>, <span class="hljs-number">0.447943f</span>, -<span class="hljs-number">0.174938f</span>, -<span class="hljs-number">0.424803f</span>, -<span class="hljs-number">0.864845f</span>})))
+                 .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
+                 .outputFields(Collections.singletonList(<span class="hljs-string">&quot;doctype&quot;</span>))
+                 .addFunction(ranker)
+                 .build());
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">FunctionType</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+
+<span class="hljs-keyword">const</span> fix_weight_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;boost&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;boost&quot;</span>,
+    <span class="hljs-attr">weight</span>: <span class="hljs-number">0.8</span>,
+  },
+};
+
+<span class="hljs-keyword">const</span> random_weight_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;boost&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;boost&quot;</span>,
+    <span class="hljs-attr">random_score</span>: {
+      <span class="hljs-attr">seed</span>: <span class="hljs-number">126</span>,
+    },
+    <span class="hljs-attr">weight</span>: <span class="hljs-number">0.4</span>,
+  },
+};
+
+<span class="hljs-keyword">const</span> ranker = {
+  <span class="hljs-attr">functions</span>: [fix_weight_ranker, random_weight_ranker],
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">boost_mode</span>: <span class="hljs-string">&quot;Multiply&quot;</span>,
+    <span class="hljs-attr">function_mode</span>: <span class="hljs-string">&quot;Sum&quot;</span>,
+  },
+};
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [[-<span class="hljs-number">0.619954382375778</span>, <span class="hljs-number">0.4479436794798608</span>, -<span class="hljs-number">0.17493894838751745</span>, -<span class="hljs-number">0.4248030059917294</span>, -<span class="hljs-number">0.8648452746018911</span>]],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;vector&quot;</span>,
+  <span class="hljs-attr">params</span>: {},
+  <span class="hljs-attr">output_field</span>: [<span class="hljs-string">&quot;doctype&quot;</span>],
+  <span class="hljs-attr">ranker</span>: ranker
+});
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>具体的には、2つのBoostランカーがある。1つは見つかったすべてのエンティティに固定の重みを適用し、もう1つはランダムな重みを割り当てる。そして、これら2つのランカーを<strong>FunctionScoreで</strong>参照し、重みが発見されたエンティティのスコアにどのように影響するかも定義する。</p>
 <p>次の表に、<strong>FunctionScore</strong>インスタンスの作成に必要なパラメータを示します。</p>
 <table>
    <tr>
@@ -627,13 +797,13 @@ client.search(
    <tr>
      <td><p><code translate="no">params.boost_mode</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p>指定された重みが、一致するエンティティのスコアにどのように影響するかを指定します。</p><p>指定可能な値は以下のとおりです：</p><ul><li><p><code translate="no">Multiple</code></p><p>重み付けされた値が、一致するエンティティの元のスコアに指定の重みを乗じた値と等しいことを示します。 </p><p>これが既定値です。</p></li><li><p><code translate="no">Sum</code></p><p>重み付けされた値が、一致するエンティティの元のスコアと指定された重みの合計に等しいことを示します。</p></li></ul></td>
+     <td><p>指定した重みが、一致するエンティティのスコアにどのように影響するかを指定します。</p><p>指定可能な値は以下のとおりです：</p><ul><li><p><code translate="no">Multiply</code></p><p>重み付けされた値が、一致するエンティティの元のスコアに指定の重みを乗じた値と等しいことを示します。 </p><p>これが既定値です。</p></li><li><p><code translate="no">Sum</code></p><p>重み付けされた値が、一致するエンティティの元のスコアと指定された重みの合計に等しいことを示します。</p></li></ul></td>
      <td><p><code translate="no">"Sum"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.function_mode</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p>さまざまなブースト・ランカからの加重値の処理方法を指定します。</p><p>指定可能な値は以下のとおりです：</p><ul><li><p><code translate="no">Multiplify</code></p><p>一致するエンティティの最終スコアが、すべての Boost Rankers からの加重値の積に等しいことを示します。</p><p>これはデフォルト値です。</p></li><li><p><code translate="no">Sum</code></p><p>一致するエンティティの最終スコアが、すべてのブースト・ランカーからの加重値の合計に等しいことを示します。</p></li></ul></td>
+     <td><p>さまざまなブースト・ランカからの加重値の処理方法を指定します。</p><p>指定可能な値は以下のとおりです：</p><ul><li><p><code translate="no">Multiply</code></p><p>一致するエンティティの最終スコアが、すべての Boost Rankers からの加重値の積に等しいことを示します。</p><p>これはデフォルト値です。</p></li><li><p><code translate="no">Sum</code></p><p>一致するエンティティの最終スコアが、すべてのブースト・ランカーからの加重値の合計に等しいことを示します。</p></li></ul></td>
      <td><p><code translate="no">"Sum"</code></p></td>
    </tr>
 </table>

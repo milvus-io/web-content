@@ -62,7 +62,7 @@ summary: >-
 </ul></li>
 <li>Der Nachrichtenspeicher kann nicht geändert werden, während das Milvus-System läuft.</li>
 <li>Es wird nur die Kafka-Version 2.x oder 3.x unterstützt.</li>
-<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Beschränkungen für Nachrichtenwarteschlangen</strong>: Bei einem Upgrade auf Milvus v2.6.3 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</li>
+<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Beschränkungen für Nachrichtenwarteschlangen</strong>: Bei einem Upgrade auf Milvus v2.6.4 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Konfigurieren von RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,7 +107,7 @@ summary: >-
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">Die wichtigsten Konfigurationsoptionen:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Legt RocksMQ explizit als Nachrichtenwarteschlange fest</li>
+<li><code translate="no">msgStreamType</code>: rocksmq: Legt explizit RocksMQ als Nachrichtenwarteschlange fest</li>
 <li><code translate="no">persistence.enabled</code>: Aktiviert persistente Speicherung für RocksMQ-Daten</li>
 <li><code translate="no">persistence.pvcDeletion</code>: Wenn true, wird die PVC gelöscht, wenn die Milvus-Instanz gelöscht wird</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Standard-Kubernetes-PVC-Spezifikation</li>
@@ -187,8 +187,8 @@ summary: >-
 </ol>
 <div class="alert note">
 <p><strong>Zwischen RocksMQ und NATS wählen?</strong></p>
-<p>RockMQ verwendet CGO zur Interaktion mit RocksDB und verwaltet den Speicher selbst, während das in die Milvus-Installation eingebettete reine Go-NATS seine Speicherverwaltung an den Garbage Collector (GC) von Go delegiert.</p>
-<p>In dem Szenario, in dem das Datenpaket kleiner als 64 kb ist, schneidet RocksDB in Bezug auf Speicherverbrauch, CPU-Nutzung und Antwortzeit besser ab. Ist das Datenpaket hingegen größer als 64 KB, so ist NATS bei ausreichendem Speicher und idealer GC-Planung in Bezug auf die Antwortzeit überlegen.</p>
+<p>RockMQ verwendet CGO für die Interaktion mit RocksDB und verwaltet den Speicher selbst, während das in die Milvus-Installation eingebettete reine Go-NATS seine Speicherverwaltung an den Garbage Collector (GC) von Go delegiert.</p>
+<p>In dem Szenario, in dem das Datenpaket kleiner als 64 kb ist, schneidet RocksDB in Bezug auf Speicherverbrauch, CPU-Nutzung und Antwortzeit besser ab. Ist das Datenpaket hingegen größer als 64 kb, so ist NATS bei ausreichendem Speicher und idealer GC-Planung in Bezug auf die Antwortzeit überlegen.</p>
 <p>Derzeit wird empfohlen, NATS nur für Experimente zu verwenden.</p>
 </div>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Pulsar konfigurieren<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">

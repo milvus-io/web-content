@@ -47,7 +47,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <p>Setelah Anda mengupgrade operator Milvus Anda ke versi terbaru, Anda memiliki beberapa pilihan berikut:</p>
 <ul>
 <li>Untuk mengupgrade Milvus dari v2.2.3 atau rilis yang lebih baru ke 2.5.13, Anda dapat <a href="#Conduct-a-rolling-upgrade">melakukan upgrade bergilir.</a></li>
-<li>Untuk mengupgrade Milvus dari rilis minor sebelum v2.2.3 ke 2.5.13, Anda disarankan untuk mengupgrade <a href="#Upgrade-Milvus-by-changing-its-image">Milvus dengan mengubah versi image-nya</a>.</li>
+<li>Untuk mengupgrade Milvus dari rilis minor sebelum v2.2.3 ke 2.5.13, Anda disarankan untuk mengupgrade <a href="#Upgrade-Milvus-by-changing-its-image">Milvus dengan mengubah versi gambarnya.</a></li>
 <li>Untuk memutakhirkan Milvus dari v2.1.x ke 2.5.13, Anda perlu melakukan <a href="#Migrate-the-metadata">migrasi metadata</a> sebelum melakukan pemutakhiran.</li>
 </ul>
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Melakukan pemutakhiran bergilir<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">

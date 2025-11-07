@@ -146,7 +146,7 @@ docker compose up -d
 <li>你可能还想了解如何<ul>
 <li><a href="/docs/zh/v2.5.x/scaleout.md">扩展 Milvus 集群</a></li>
 </ul></li>
-<li>如果你准备在云上部署集群，请学习如何在亚马逊 Eclipse 上部署 Milvus：<ul>
+<li>如果你已经准备好在云上部署集群：<ul>
 <li>了解如何<a href="/docs/zh/v2.5.x/eks.md">使用 Terraform 在亚马逊 EKS 上部署 Milvus</a></li>
 <li>学习如何<a href="/docs/zh/v2.5.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 集群</a></li>
 <li>了解如何<a href="/docs/zh/v2.5.x/azure.md">使用 Kubernetes 在 Microsoft Azure 上部署 Milvus</a></li>

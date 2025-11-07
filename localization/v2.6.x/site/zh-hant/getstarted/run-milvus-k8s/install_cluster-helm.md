@@ -3,7 +3,7 @@ id: install_cluster-helm.md
 label: Helm
 related_key: Kubernetes
 summary: 學習如何在 Kubernetes 上安裝 Milvus 叢集。
-title: 使用 Helm 安裝 Milvus 集群
+title: 使用 Helm 安裝 Milvus Cluster
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">使用 Helm 在 Kubernetes 中執行 Milvus<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>需要獨立部署來代替？</strong></p>
 <p>如果您喜歡以獨立模式 (單一節點) 部署 Milvus 以進行開發或測試，請使用此指令：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.4 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>注意</strong>：單機模式使用 Woodpecker 作為預設訊息佇列，並啟用 Streaming Node 元件。詳情請參閱<a href="/docs/zh-hant/architecture_overview.md">架構概述</a>和<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>。</p>
 </div>
 <p><strong>部署 Milvus 群集：</strong></p>
-<p>以下指令使用 Woodpecker 作為建議的訊息佇列，以 v2.6.3 的最佳化設定部署 Milvus 叢集：</p>
+<p>以下指令使用 Woodpecker 作為建議的訊息佇列，以 v2.6.4 的最佳化設定部署 Milvus 叢集：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.4 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>替代訊息佇列選項：</strong></p>
 <p>如果您偏好使用<strong>Pulsar</strong>(傳統選擇) 而非 Woodpecker：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.4 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,7 +204,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>透過檢查 Pod 狀態來驗證您的部署是否成功：</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>等待所有 Pod 都顯示「Running」狀態。</strong>在 v2.6.3 設定下，您應該會看到類似的 Pod：</p>
+<p><strong>等待所有 Pod 都顯示「Running」狀態。</strong>在 v2.6.4 設定下，您應該會看到類似的 Pod：</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s

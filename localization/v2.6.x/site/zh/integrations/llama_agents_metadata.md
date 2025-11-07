@@ -143,7 +143,7 @@ title: 使用 Mistral AI、Milvus 和 Llama-agents 的多代理系统
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus openai python-dotenv</span>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus milvus-lite openai python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus llama-index-readers-file llama-index-llms-ollama llama-index-llms-mistralai llama-index-embeddings-mistralai</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -558,7 +558,22 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
         ></path>
       </svg>
     </button></h2><p>下面是一个代码示例，演示如何使用 Agents 从用户问题中提取元数据过滤器来创建过滤查询引擎：</p>
-<h3 id="Explanation" class="common-anchor-header">说明</h3><ul>
+<h3 id="Explanation" class="common-anchor-header">说明<button data-href="#Explanation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>提示模板</strong>：PromptTemplate 类用于定义从用户问题中提取元数据过滤器的模板。该模板指示语言模型考虑公司名称、年份和其他相关属性。</p></li>
 <li><p><strong>LLM</strong>: Mistral Nemo 用于根据用户的问题生成元数据过滤器。模型根据问题和模板提示提取相关过滤器。</p></li>
 <li><p><strong>元数据过滤器</strong>：对来自 LLM 的响应进行解析，以创建<code translate="no">MetadataFilters</code> 对象。如果没有提及特定的筛选器，则会返回一个空的<code translate="no">MetadataFilters</code> 对象。</p></li>
@@ -645,15 +660,60 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
         ></path>
       </svg>
     </button></h2><p>Mistral Large 是 Mistral 的旗舰模型，具有非常出色的推理、知识和编码能力。它是需要大型推理能力或高度专业化的复杂任务的理想选择。它具有高级函数调用能力，这正是我们协调不同 Agents 所需要的。</p>
-<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">为什么我们需要更智能的模型？</h3><p>下面要回答的问题特别具有挑战性，因为它需要协调多个服务和代理，以提供一致而准确的响应。这涉及到协调各种工具和 Agents，以检索和处理来自不同来源的信息，例如来自不同公司的财务数据。</p>
-<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">这有什么难的？</h3><ul>
+<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">为什么我们需要更智能的模型？<button data-href="#Why-do-we-need-a-smarter-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面要回答的问题特别具有挑战性，因为它需要协调多个服务和代理，以提供一致、准确的响应。这涉及到协调各种工具和 Agents，以检索和处理来自不同来源的信息，例如来自不同公司的财务数据。</p>
+<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">这有什么难的？<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>复杂性：这个问题涉及多个 Agents 和服务，每个都有自己的功能和数据源。协调这些 Agents 实现无缝协作是一项复杂的任务。</li>
 </ul>
 <ul>
 <li><p>数据整合：由于数据格式、结构和元数据存在差异，要整合来自不同来源的数据具有挑战性。</p></li>
-<li><p>语境理解：问题可能需要理解不同信息之间的上下文和关系，这对认知能力要求很高。</p></li>
+<li><p>语境理解：问题可能需要理解不同信息片段之间的上下文和关系，这是一项要求认知能力的任务。</p></li>
 </ul>
-<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">在这种情况下，Mistral Large 为什么能提供帮助？</h3><p>Mistral Large 具有高级推理和函数调用功能，非常适合这项任务。以下是它的帮助方式：</p>
+<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">在这种情况下，Mistral Large 为什么能提供帮助？<button data-href="#Why-would-Mistral-Large-help-in-this-case" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mistral Large 具有高级推理和函数调用功能，非常适合这项任务。以下是它的帮助方式：</p>
 <ul>
 <li><p>高级推理：Mistral Large 可以处理复杂的推理任务，是协调多个 Agents 和服务的理想选择。它可以理解不同信息之间的关系，并做出明智的决策。</p></li>
 <li><p>函数调用功能：Mistral Large 具有先进的函数调用功能，这对于协调不同 Agents 的行动至关重要。这可以实现各种服务的无缝集成和协调。</p></li>

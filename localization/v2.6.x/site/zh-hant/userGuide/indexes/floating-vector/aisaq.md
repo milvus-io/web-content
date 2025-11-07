@@ -88,7 +88,7 @@ beta: Milvus 2.6.4+
 <p>在此模式下：</p>
 <ul>
 <li><p>每個節點的原始向量、邊緣列表及其鄰居的 PQ 資料都一起儲存在磁碟上。</p></li>
-<li><p>此佈局可確保拜訪節點 (例如<em>向量 0</em>) 仍只需要單次磁碟 I/O。</p></li>
+<li><p>此佈局可確保訪問一個節點 (例如<em>向量 0</em>) 仍只需要單次磁碟 I/O。</p></li>
 <li><p>然而，由於 PQ 資料在多個節點附近被重複儲存，索引檔案的大小會大幅增加，消耗更多的磁碟空間。</p></li>
 </ul>
 <h4 id="AISAQ-scale" class="common-anchor-header">AISAQ-scale</h4><p><strong>AISAQ-scale</strong>著重於<em>減少磁碟空間使用量</em>，同時將所有資料保留在磁碟上。</p>
@@ -143,7 +143,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AISAQ 繼承了 DISKANN 的許多參數。為了避免冗餘，以下只詳細說明 AISAQ 特有的參數。有關共用參數的說明，例如<code translate="no">max_degree</code>,<code translate="no">pq_code_budget_gb_ratio</code>,<code translate="no">search_list_size</code>, 和<code translate="no">beam_width_ratio</code> ，請參閱<a href="/docs/zh-hant/diskann.md#DISKANN-params">DISKANN</a>。</p>
+    </button></h2><p>AISAQ 繼承了 DISKANN 的許多參數。為避免冗餘，以下只詳細說明 AISAQ 特有的參數。有關共用參數的說明，例如<code translate="no">max_degree</code>,<code translate="no">pq_code_budget_gb_ratio</code>,<code translate="no">search_list_size</code>, 和<code translate="no">beam_width_ratio</code> ，請參閱<a href="/docs/zh-hant/diskann.md#DISKANN-params">DISKANN</a>。</p>
 <table>
    <tr>
      <th><p>參數</p></th>
@@ -154,7 +154,7 @@ beta: Milvus 2.6.4+
    <tr>
      <td><p><code translate="no">inline_pq</code></p></td>
      <td><p>每個節點內嵌儲存的 PQ 向量數量。決定儲存配置 (Performance vs. Scale mode)。</p></td>
-     <td><p><strong>類型</strong>：整數</p><p><strong>範圍：</strong>[0，<em>max_degree］</em></p><p><strong>預設值</strong>：<code translate="no">-1</code></p></td>
+     <td><p><strong>類型</strong>：整數</p><p><strong>範圍：</strong>[0、<em>max_degree］</em></p><p><strong>預設值</strong>：<code translate="no">-1</code></p></td>
      <td><p><code translate="no">inline_pq</code> 越接近<em>max_degree</em>，性能往往越好，但索引檔案大小會大幅增加。</p><p>當<code translate="no">inline_pq</code> 接近 0 時，效能會降低，索引大小會變得與 DISKANN 相似。</p><p><strong>注意</strong>：它高度依賴磁碟效能。如果磁碟效能不佳，不建議啟用此選項，因為有限的磁碟頻寬可能會成為瓶頸，降低整體效能。</p></td>
    </tr>
    <tr>
@@ -188,5 +188,5 @@ beta: Milvus 2.6.4+
     </button></h2><ul>
 <li><p>磁碟效能很重要。AISAQ 非常依賴 SSD IOPS；儲存不良會降低 QPS。</p></li>
 <li><p>AISAQ 效能模式 ≈ DISKANN 延遲，但可能需要數倍的磁碟空間。</p></li>
-<li><p>AISAQ 規模模式適合離線搜尋或資料歸檔工作負載，在這些模式下 QPS 不那麼重要。</p></li>
+<li><p>AISAQ 規模模式適合離線搜尋或資料歸檔工作負載，在這些模式下 QPS 的重要性較低。</p></li>
 </ul>

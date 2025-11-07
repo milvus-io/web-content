@@ -2,8 +2,8 @@
 id: integrate_with_bentoml.md
 summary: >-
   Dieser Leitfaden zeigt, wie man ein Open-Source-Einbettungsmodell und ein
-  Großsprachenmodell auf BentoCloud mit der Milvus-Vektordatenbank verwendet, um
-  eine Retrieval Augmented Generation (RAG)-Anwendung zu erstellen.
+  Großsprachenmodell auf BentoCloud mit einer Milvus-Vektordatenbank verwendet,
+  um eine Retrieval Augmented Generation (RAG)-Anwendung zu erstellen.
 title: Retrieval-Augmented Generation (RAG) mit Milvus und BentoML
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">Retrieval-Augmented Generation (RAG) mit Milvus und BentoML<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
@@ -55,10 +55,10 @@ title: Retrieval-Augmented Generation (RAG) mit Milvus und BentoML
         ></path>
       </svg>
     </button></h2><p>Milvus Lite ist auf PyPI verfügbar. Sie können es über pip für Python 3.8+ installieren:</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" oben auf dem Bildschirm und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
 <p>Nachdem Sie sich bei BentoCloud angemeldet haben, können Sie mit den bereitgestellten BentoCloud-Diensten in Deployments interagieren, und der entsprechende END_POINT und die API befinden sich in Playground -&gt; Python. Sie können die Stadtdaten <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">hier</a> herunterladen.</p>
 <h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">Servieren von Einbettungen mit BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
@@ -76,7 +76,7 @@ title: Retrieval-Augmented Generation (RAG) mit Milvus und BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um diesen Endpunkt zu verwenden, importieren Sie <code translate="no">bentoml</code> und richten Sie einen HTTP-Client ein, indem Sie <code translate="no">SyncHTTPClient</code> verwenden, indem Sie den Endpunkt und optional das Token angeben (wenn Sie <code translate="no">Endpoint Authorization</code> auf BentoCloud aktivieren). Alternativ können Sie dasselbe Modell auch über BentoML mit seinem <a href="https://github.com/bentoml/BentoSentenceTransformers">Sentence Transformers Embeddings</a> Repository verwenden.</p>
+    </button></h2><p>Um diesen Endpunkt zu verwenden, importieren Sie <code translate="no">bentoml</code> und richten Sie einen HTTP-Client ein, der <code translate="no">SyncHTTPClient</code> verwendet, indem Sie den Endpunkt und optional das Token angeben (wenn Sie <code translate="no">Endpoint Authorization</code> auf BentoCloud aktivieren). Alternativ können Sie dasselbe Modell auch über BentoML mit seinem <a href="https://github.com/bentoml/BentoSentenceTransformers">Sentence Transformers Embeddings</a> Repository verwenden.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bentoml
 
 BENTO_EMBEDDING_MODEL_END_POINT = <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>

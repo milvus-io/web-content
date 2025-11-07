@@ -298,7 +298,7 @@ results = client.query(
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → Sottrae 2 ore</p></li>
 </ul>
 </div>
-<h4 id="Extract-timestamp-elements" class="common-anchor-header">Estrarre elementi di timestamp</h4><p>È possibile estrarre componenti specifici dai campi <code translate="no">TIMESTAMPTZ</code>, come l'anno, il mese o il giorno, utilizzando il parametro <code translate="no">time_fields</code> nella query o nella ricerca.</p>
+<h4 id="Extract-timestamp-elements" class="common-anchor-header">Estrarre gli elementi del timestamp</h4><p>È possibile estrarre componenti specifici dai campi <code translate="no">TIMESTAMPTZ</code>, come l'anno, il mese o il giorno, utilizzando il parametro <code translate="no">time_fields</code> nella query o nella ricerca.</p>
 <p>L'esempio seguente estrae gli elementi <code translate="no">year</code>, <code translate="no">month</code> e <code translate="no">day</code> da ciascun campo <code translate="no">TIMESTAMPTZ</code> nei risultati della query:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

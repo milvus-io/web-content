@@ -24,7 +24,7 @@ title: OpenAI
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ثم، قم بإنشاء <strong>OpenAIEmbeddingFunction</strong>:</p>
+<p>بعد ذلك، قم بإنشاء <strong>OpenAIEmbeddingFunction</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 openai_ef = model.dense.OpenAIEmbeddingFunction(
@@ -39,10 +39,12 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
 <p>اسم نموذج OpenAI المراد استخدامه للترميز. الخيارات الصالحة هي <strong>text-تضمين النص-3-small،</strong> و <strong>text-تضمين النص-3-large،</strong> و <strong>text-تضمين النص-AD-002</strong> (افتراضي).</p></li>
 <li><p><strong>مفتاح_API</strong><em>(سلسلة</em>)</p>
 <p>مفتاح واجهة برمجة التطبيقات للوصول إلى واجهة برمجة تطبيقات OpenAI.</p></li>
+<li><p><strong>عنوان URL الأساسي</strong><em>(سلسلة</em>)</p>
+<p>عنوان URL الأساسي للوصول إلى OpenAI API. يتم تعيين القيمة افتراضيًا إلى <strong>https://api.openai.com/v1.</strong> ومع ذلك، إذا كنت تقوم بالوصول إلى نقطة نهاية واجهة برمجة تطبيقات متوافقة لموفر نموذج مختلف أو مثيل vLLM محلي، مثل <strong>http://localhost:8080/v1،</strong> يمكنك تحديد عنوان URL هنا.</p></li>
 <li><p><strong>الأبعاد</strong><em>(int</em>)</p>
-<p>عدد الأبعاد التي يجب أن تحتوي عليها التضمينات الناتجة. مدعوم فقط في <strong>تضمين النص-3</strong> والنماذج الأحدث.</p></li>
+<p>عدد الأبعاد التي يجب أن تحتويها التضمينات الناتجة. مدعوم فقط في نموذج <strong>تضمين النص-3</strong> والنماذج الأحدث.</p></li>
 </ul>
-<p>لإنشاء تضمينات للمستندات، استخدم طريقة <strong>تشفير_المستندات()</strong>:</p>
+<p>لإنشاء تضمينات للمستندات، استخدم طريقة <strong>encode_documents()</strong>:</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,

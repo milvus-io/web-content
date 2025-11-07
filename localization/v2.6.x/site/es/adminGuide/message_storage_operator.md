@@ -60,7 +60,7 @@ summary: Aprenda a configurar el almacenamiento de mensajes con Milvus Operator.
 </ul></li>
 <li>El almacenamiento de mensajes no puede cambiarse mientras el sistema Milvus está en funcionamiento.</li>
 <li>Sólo se admite la versión 2.x o 3.x de Kafka.</li>
-<li><strong>Limitaciones de actualización</strong>: <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.3, debe mantener su elección actual de cola de mensajes. No es posible cambiar entre diferentes sistemas de colas de mensajes durante la actualización. El soporte para el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
+<li><strong>Limitaciones de actualización</strong>: <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.4, debe mantener su elección actual de cola de mensajes. No es posible cambiar entre diferentes sistemas de colas de mensajes durante la actualización. El soporte para el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configuración de RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -137,6 +137,7 @@ res = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
         .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
         .topK(<span class="hljs-number">3</span>)
         .build();
 
@@ -518,7 +519,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Supposons que vous ayez créé plusieurs partitions dans une collection et que vous puissiez limiter la portée de la recherche à un nombre spécifique de partitions. Dans ce cas, vous pouvez inclure les noms des partitions cibles dans la requête de recherche afin de restreindre la portée de la recherche aux partitions spécifiées. La réduction du nombre de partitions impliquées dans la recherche améliore les performances de la recherche.</p>
+    </button></h2><p>Supposons que vous ayez créé plusieurs partitions dans une collection et que vous souhaitiez restreindre la portée de la recherche à un nombre spécifique de partitions. Dans ce cas, vous pouvez inclure les noms des partitions cibles dans la requête de recherche afin de restreindre l'étendue de la recherche aux partitions spécifiées. La réduction du nombre de partitions impliquées dans la recherche améliore les performances de la recherche.</p>
 <p>L'extrait de code suivant suppose une partition nommée <strong>PartitionA</strong> dans votre collection.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -834,7 +835,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous remarquerez peut-être que le paramètre <code translate="no">limit</code> utilisé dans les requêtes de recherche détermine le nombre d'entités à inclure dans les résultats de la recherche. Ce paramètre spécifie le nombre maximum d'entités à renvoyer dans une seule recherche, et il est généralement appelé <strong>top-K.</strong></p>
+    </button></h2><p>Vous remarquerez peut-être que le paramètre <code translate="no">limit</code> figurant dans les requêtes de recherche détermine le nombre d'entités à inclure dans les résultats de la recherche. Ce paramètre spécifie le nombre maximum d'entités à renvoyer dans une seule recherche, et il est généralement appelé <strong>top-K.</strong></p>
 <p>Si vous souhaitez effectuer des requêtes paginées, vous pouvez utiliser une boucle pour envoyer plusieurs requêtes de recherche, les paramètres <strong>Limit</strong> et <strong>Offset</strong> étant transmis dans chaque requête. Plus précisément, vous pouvez fixer le paramètre <strong>Limit</strong> au nombre d'entités que vous souhaitez inclure dans les résultats de la requête en cours, et fixer le <strong>paramètre Offset</strong> au nombre total d'entités qui ont déjà été renvoyées.</p>
 <p>Le tableau ci-dessous indique comment définir les paramètres <strong>Limite</strong> et <strong>Offset</strong> pour les requêtes paginées qui renvoient 100 entités à la fois.</p>
 <table>
@@ -954,7 +955,7 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Enhancing-ANN-Search" class="common-anchor-header">Amélioration de la recherche ANN<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
+<h2 id="Enhancing-ANN-Search" class="common-anchor-header">Améliorer la recherche ANN<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -969,7 +970,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX aplatit considérablement la courbe d'apprentissage des recherches ANN. Cependant, les résultats de la recherche ne sont pas toujours corrects au fur et à mesure que le top-K augmente. En réduisant l'étendue de la recherche, en améliorant la pertinence des résultats de recherche et en diversifiant les résultats de recherche, Milvus élabore les améliorations de recherche suivantes.</p>
+    </button></h2><p>AUTOINDEX aplatit considérablement la courbe d'apprentissage des recherches ANN. Cependant, les résultats de la recherche ne sont pas toujours corrects à mesure que le top-K augmente. En réduisant l'étendue de la recherche, en améliorant la pertinence des résultats de la recherche et en diversifiant les résultats de la recherche, Milvus apporte les améliorations suivantes à la recherche.</p>
 <ul>
 <li><p>Recherche filtrée</p>
 <p>Vous pouvez inclure des conditions de filtrage dans une demande de recherche afin que Milvus procède au filtrage des métadonnées avant d'effectuer des recherches ANN, réduisant ainsi l'étendue de la recherche de l'ensemble de la collection aux seules entités correspondant aux conditions de filtrage spécifiées.</p>
@@ -981,15 +982,15 @@ curl --request POST \
 <p>Si les entités renvoyées ont la même valeur dans un champ spécifique, les résultats de la recherche peuvent ne pas représenter la distribution de tous les ancrages vectoriels dans l'espace vectoriel. Pour diversifier les résultats de la recherche, envisagez d'utiliser la recherche par regroupement.</p>
 <p>Pour en savoir plus sur la recherche par regroupement, reportez-vous à la section <a href="/docs/fr/grouping-search.md">Recherche par regroupement</a>,</p></li>
 <li><p>Recherche hybride</p>
-<p>Une collection peut inclure jusqu'à quatre champs vectoriels pour enregistrer les intégrations vectorielles générées à l'aide de différents modèles d'intégration. Vous pouvez ainsi utiliser une recherche hybride pour classer les résultats de la recherche à partir de ces champs vectoriels, ce qui permet d'améliorer le taux de rappel.</p>
+<p>Une collection peut inclure plusieurs champs vectoriels pour enregistrer les intégrations vectorielles générées à l'aide de différents modèles d'intégration. Ce faisant, vous pouvez utiliser une recherche hybride pour classer les résultats de la recherche à partir de ces champs vectoriels, améliorant ainsi le taux de rappel.</p>
 <p>Pour en savoir plus sur la recherche hybride, reportez-vous à la section <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</p></li>
 <li><p>Itérateur de recherche</p>
 <p>Une recherche ANN unique renvoie un maximum de 16 384 entités. Envisagez d'utiliser des itérateurs de recherche si vous avez besoin d'un plus grand nombre d'entités à renvoyer lors d'une recherche unique.</p>
 <p>Pour plus d'informations sur les itérateurs de recherche, voir <a href="/docs/fr/with-iterators.md">Itérateur de recherche</a>.</p></li>
 <li><p>Recherche en texte intégral</p>
-<p>La recherche en texte intégral est une fonctionnalité qui permet de récupérer des documents contenant des termes ou des phrases spécifiques dans des ensembles de données textuelles, puis de classer les résultats en fonction de leur pertinence. Cette fonction permet de dépasser les limites de la recherche sémantique, qui peut négliger des termes précis, et de s'assurer que vous recevez les résultats les plus précis et les plus pertinents en fonction du contexte. En outre, elle simplifie les recherches vectorielles en acceptant les entrées de texte brut, convertissant automatiquement vos données textuelles en encastrements épars sans qu'il soit nécessaire de générer manuellement des encastrements vectoriels.</p>
+<p>La recherche en texte intégral est une fonctionnalité qui permet de récupérer des documents contenant des termes ou des phrases spécifiques dans des ensembles de données textuelles, puis de classer les résultats en fonction de leur pertinence. Cette fonction permet de surmonter les limites de la recherche sémantique, qui peut négliger des termes précis, et de s'assurer que vous recevez les résultats les plus précis et les plus pertinents en fonction du contexte. En outre, elle simplifie les recherches vectorielles en acceptant les entrées de texte brut, convertissant automatiquement vos données textuelles en encastrements épars sans qu'il soit nécessaire de générer manuellement des encastrements vectoriels.</p>
 <p>Pour plus de détails sur la recherche en texte intégral, voir <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p></li>
-<li><p>Correspondance de mots-clés</p>
+<li><p>Correspondance de texte</p>
 <p>La recherche par mot-clé dans Milvus permet d'extraire des documents avec précision sur la base de termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
 <p>Pour plus de détails sur la correspondance des mots-clés, voir <a href="/docs/fr/keyword-match.md">Correspondance des mots-clés</a>.</p></li>
 <li><p>Utiliser la clé de partition</p>
@@ -998,5 +999,7 @@ curl --request POST \
 <li><p>Utiliser mmap</p>
 <p>Pour plus d'informations sur les paramètres mmap, voir <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p></li>
 <li><p>Compaction de la mise en grappe</p>
-<p>Pour plus d'informations sur les compactions de mise en cluster, voir <a href="/docs/fr/clustering-compaction.md">Compaction de mise en cluster</a>.</p></li>
+<p>Pour plus d'informations sur les compactions de clustering, voir <a href="/docs/fr/clustering-compaction.md">Compaction de clustering</a>.</p></li>
+<li><p>Utiliser le reranking</p>
+<p>Pour plus d'informations sur l'utilisation des classificateurs pour améliorer la pertinence des résultats de recherche, voir <a href="/docs/fr/decay-ranker-overview.md">Decay Ranker Overview</a> et <a href="/docs/fr/model-ranker-overview.md">Model Ranker Overview.</a></p></li>
 </ul>

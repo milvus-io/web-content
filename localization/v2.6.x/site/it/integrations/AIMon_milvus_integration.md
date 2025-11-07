@@ -61,9 +61,9 @@ title: >-
         ></path>
       </svg>
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Database vettoriale</em></h4><p>Per questa applicazione utilizzeremo <a href="https://milvus.io/">Milvus</a> per gestire e ricercare dati non strutturati su larga scala, come testi, immagini e video.</p>
-<h4 id="LLM-Framework" class="common-anchor-header"><em>Struttura LLM</em></h4><p>LlamaIndex è un framework open-source per l'orchestrazione dei dati che semplifica la costruzione di applicazioni di modelli linguistici di grandi dimensioni (LLM) facilitando l'integrazione di dati privati con LLM, consentendo applicazioni di IA generativa contestualizzata attraverso una pipeline Retrieval-Augmented Generation (RAG). In questo tutorial utilizzeremo LlamaIndex, poiché offre una buona flessibilità e migliori astrazioni API di livello inferiore.</p>
+<h4 id="LLM-Framework" class="common-anchor-header"><em>Struttura LLM</em></h4><p>LlamaIndex è un framework open-source per l'orchestrazione dei dati che semplifica la costruzione di applicazioni di modelli linguistici di grandi dimensioni (LLM) facilitando l'integrazione di dati privati con LLM, consentendo applicazioni di intelligenza artificiale generativa contestualizzata attraverso una pipeline Retrieval-Augmented Generation (RAG). In questo tutorial utilizzeremo LlamaIndex, poiché offre una buona flessibilità e migliori astrazioni API di livello inferiore.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Valutazione della qualità dell'output di LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> offre modelli di giudizio proprietari per l'allucinazione, i problemi di qualità del contesto, l'aderenza alle istruzioni degli LLM, la qualità del recupero e altri compiti di affidabilità degli LLM. Utilizzeremo AIMon per valutare la qualità dell'applicazione LLM.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">Prerequisiti<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,17 +81,37 @@ title: >-
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>Registrarsi per un <a href="https://docs.aimon.ai/quickstart">account AIMon qui</a>.</p>
-<p>Aggiungere questo segreto ai Colab Secrets (il simbolo della "chiave" sul pannello di sinistra) Se si è in un altro ambiente colab non Google, sostituire il codice relativo al colab di Google da soli</p>
+<li>Registrarsi per un <a href="https://docs.aimon.ai/quickstart">account AIMon qui</a>.</li>
+</ol>
+<p>Aggiungere questo segreto al Colab Secrets (il simbolo della "chiave" sul pannello di sinistra).</p>
+<blockquote>
+<p>Se si è in un altro ambiente di colab non Google, sostituire il codice relativo al colab di Google da soli</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p>Registrate un <a href="https://platform.openai.com/docs/overview">account OpenAI qui</a> e aggiungete la seguente chiave nei segreti di Colab:</p>
+</ul>
+<ol start="2">
+<li>Registrate un <a href="https://platform.openai.com/docs/overview">account OpenAI qui</a> e aggiungete la seguente chiave nei segreti di Colab:</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">Chiavi API richieste</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">Chiavi API richieste<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -246,7 +266,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">Analisi</h3><p>Abbiamo 258 trascrizioni con un totale di circa 1 milione di token in tutte le trascrizioni. Abbiamo una media di 3864 token per trascrizione.</p>
+<h3 id="Analysis" class="common-anchor-header">Analisi<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Abbiamo 258 trascrizioni con un totale di circa 1 milione di token in tutte le trascrizioni. Abbiamo una media di 3864 token per trascrizione.</p>
 <table>
 <thead>
 <tr><th>Metrica</th><th>Valore</th></tr>
@@ -257,7 +292,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>Avg. # Numero di token per trascrizione</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">Query</h3><p>Di seguito sono riportate le 12 query che verranno eseguite sulla trascrizione di cui sopra.</p>
+<h3 id="Queries" class="common-anchor-header">Query<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di seguito sono riportate le 12 query che verranno eseguite sulla trascrizione di cui sopra.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -387,7 +437,7 @@ detect = Detect(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In questo primo semplice approccio, utilizzeremo la distanza di Levenshtein per abbinare un documento a una determinata query. I primi 3 documenti con la migliore corrispondenza saranno inviati al LLM come contesto per la risposta.</p>
+    </button></h1><p>In questo primo approccio semplice, utilizzeremo la distanza di Levenshtein per abbinare un documento a una determinata query. I primi 3 documenti con la migliore corrispondenza saranno inviati al LLM come contesto per la risposta.</p>
 <p><strong>NOTA: L'esecuzione di questa cella richiederà circa 3 minuti.</strong></p>
 <p>Godetevi la vostra bevanda preferita mentre aspettate :)</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> fuzzywuzzy <span class="hljs-keyword">import</span> process
@@ -938,15 +988,27 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>Approccio</th>
       <th>Punteggio di qualità</th>
-      <th>Punteggio di pertinenza del recupero</th>
+      <th>Punteggio di rilevanza del recupero</th>
       <th>Aumento del punteggio di qualità (%)</th>
-      <th>Aumento del punteggio di rilevanza di recupero (%)</th>
+      <th>Aumento del punteggio di rilevanza del recupero (%)</th>
     </tr>
   </thead>
   <tbody>

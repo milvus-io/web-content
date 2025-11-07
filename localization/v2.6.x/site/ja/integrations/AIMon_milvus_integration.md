@@ -34,7 +34,7 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このチュートリアルでは、<a href="https://meetingbank.github.io/">会議バンクのデータセットに関する</a>質問に回答する検索拡張世代（RAG）チャットボットを構築するお手伝いをします。</p>
+    </button></h2><p>このチュートリアルでは、<a href="https://meetingbank.github.io/">会議バンクのデータセットに関する</a>質問に回答する検索支援世代（RAG）チャットボットを構築するお手伝いをします。</p>
 <p>このチュートリアルでは以下のことを学びます：</p>
 <ul>
 <li>会議バンクデータセットに関連するユーザーの質問に答えるLLMアプリケーションを構築する。</li>
@@ -59,7 +59,7 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>ベクトルデータベース</em></h4><p>このアプリケーションでは、<a href="https://milvus.io/">Milvusを</a>使用して、テキスト、画像、動画などの大規模な非構造化データを管理・検索する。</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLMフレームワーク</em></h4><p>LlamaIndexは、オープンソースのデータオーケストレーションフレームワークであり、プライベートデータとLLMの統合を容易にすることで、大規模言語モデル（LLM）アプリケーションの構築を簡素化し、RAG（Retrieval-Augmented Generation）パイプラインを通じて、文脈を考慮した生成AIアプリケーションを可能にする。このチュートリアルではLlamaIndexを使用します。LlamaIndexは柔軟性に優れ、より低レベルのAPIを抽象化できるからです。</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM出力品質の評価</em></h4><p><a href="https://www.aimon.ai">AIMonは</a>、幻覚、文脈品質問題、LLMの命令順守、検索品質、その他のLLMの信頼性タスクに対する独自の判定モデルを提供します。LLMアプリケーションの品質判定にAIMonを使用します。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">前提条件<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,17 +77,37 @@ title: AIMonとmilvusでLLM出願の検索品質を向上させる
         ></path>
       </svg>
     </button></h1><ol>
-<li><p><a href="https://docs.aimon.ai/quickstart">こちらからAIMonアカウントに</a>サインアップしてください。</p>
-<p>このシークレットをColab Secrets（左パネルの「鍵」マーク）に追加してください。 Google以外のColab環境にいる場合は、googleのColab関連コードをご自身で置き換えてください。</p>
+<li><a href="https://docs.aimon.ai/quickstart">こちらからAIMonアカウントに</a>サインアップしてください。</li>
+</ol>
+<p>このシークレットをColab Secrets（左パネルの「鍵」マーク）に追加する。</p>
+<blockquote>
+<p>Google Colab以外の環境にいる場合は、google Colab関連のコードをご自身で置き換えてください。</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p><a href="https://platform.openai.com/docs/overview">こちらからOpenAIのアカウントに</a>サインアップし、Colab secretsに以下のキーを追加してください：</p>
+</ul>
+<ol start="2">
+<li><a href="https://platform.openai.com/docs/overview">こちらからOpenAIのアカウントに</a>サインアップし、Colab secretsに以下のキーを追加してください：</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">必要なAPIキー</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">必要なAPIキー<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -242,7 +262,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">分析</h3><p>258のトランスクリプトがあり、これらのトランスクリプト全体で合計約1Mのトークンがあります。トランスクリプトあたりの平均トークン数は3864です。</p>
+<h3 id="Analysis" class="common-anchor-header">分析<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>258のトランスクリプトがあり、これらのトランスクリプト全体で合計約1Mのトークンがあります。トランスクリプトあたりの平均トークン数は3864です。</p>
 <table>
 <thead>
 <tr><th>メトリック</th><th>値</th></tr>
@@ -253,7 +288,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>平均# トランスクリプトあたりのトークン数</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">クエリー</h3><p>以下は、上記のトランスクリプトに対して実行する12のクエリーです。</p>
+<h3 id="Queries" class="common-anchor-header">クエリー<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下は、上記のトランスクリプトに対して実行する12のクエリーです。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -477,7 +527,7 @@ avg_retrieval_rel_score_bf = statistics.mean(avg_retrieval_rel_scores_bf)
         ></path>
       </svg>
     </button></h1><p>今度は、ベクトルDBを追加することで品質スコアを向上させる。これは、以前のアプローチと比較して、クエリのレイテンシを改善するのにも役立つ。</p>
-<p>注意すべき主なコンポーネントは2つある：インジェストとRAGベースのQ&amp;Aである。インジェストパイプラインは、Meeting Bankデータセットからトランスクリプトを処理し、Milvus Vectorデータベースに格納する。RAG Q&amp;Aパイプラインは、まずベクターストアから関連ドキュメントを取得することで、ユーザクエリを処理する。これらの文書はLLMが回答を生成するための基礎文書として使用される。AIMonを活用して品質スコアを計算し、<a href="https://docs.aimon.ai/detectors/hallucination">幻覚</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指示の順守</a>、<a href="https://docs.aimon.ai/checker-models/context_relevance">文脈の関連</a>性についてアプリケーションを継続的に監視する。これらは、上記の<code translate="no">quality</code> スコアの定義に使用したのと同じ3つのメトリクスです。</p>
+<p>注意すべき主なコンポーネントは2つある：インジェストとRAGベースのQ&amp;Aである。インジェストパイプラインは、Meeting Bankデータセットからトランスクリプトを処理し、Milvus Vectorデータベースに格納する。RAG Q&amp;Aパイプラインは、まずベクターストアから関連ドキュメントを取得することで、ユーザクエリを処理する。これらの文書はLLMが回答を生成するための基礎文書として使用される。AIMonを活用して品質スコアを計算し、<a href="https://docs.aimon.ai/detectors/hallucination">幻覚</a>、<a href="https://docs.aimon.ai/detectors/instruction_adherence">指示の遵守</a>、<a href="https://docs.aimon.ai/checker-models/context_relevance">文脈の関連</a>性についてアプリケーションを継続的に監視する。これらは、上記の<code translate="no">quality</code> スコアの定義に使用したのと同じ3つのメトリクスです。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/aimon-workflow.png" alt="workflow" class="doc-image" id="workflow" />
@@ -786,7 +836,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>次に、AIMonのLlamaIndex<a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">ポストプロセッサの再ランク統合を</a>使用して、AIMonの<a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">ドメイン適応可能な再ランクを</a>追加します。</p>
+    </button></h1><p>次に、AIMonのLlamaIndex<a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">ポストプロセッサの再ランク統合を</a>使用して、AIMonの<a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">ドメイン適応可能な再ランク付けを</a>追加します。</p>
 <p>下図に示すように、再ランク付けは、より高度なクエリ-文書マッチング機能を使用することで、最も関連性の高い文書を上位にバブルアップするのに役立ちます。AIMonのリランカーのユニークな特徴は、ドメインごとにカスタマイズできることです。LLMのプロンプトエンジニアリングと同様に、<code translate="no">task_definition</code> フィールドを使用して、ドメインごとにリランカーのパフォーマンスをカスタマイズすることができます。この最先端のリランカーは、超低レイテンシー（～2kのコンテキストに対して）で動作し、そのパフォーマンスはMTEBリランキングリーダーボードのトップ5にランクインしている。</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
@@ -900,7 +950,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <li>AIMonの低レイテンシーでドメインに適応可能な再ランカーを使い、品質スコアをさらに向上させた。</li>
 <li>また、AIMonのリランカーを追加することで、検索関連性が大幅に向上することも示した。</li>
 </ul>
-<p><strong>品質スコアを</strong>さらに向上させるために、このノートブックに示したさまざまなコンポーネントを試してみることをお勧めする。1つのアイデアは、上記のinstruction_adherence検出器の<code translate="no">instructions</code> フィールドを使用して、独自の品質定義を追加することです。もう1つのアイデアは、<a href="https://docs.aimon.ai/category/checker-models">AIMonのチェッカーモデルの</a>1つを品質メトリック計算の一部として追加することです。</p>
+<p><strong>品質スコアを</strong>さらに向上させるために、このノートブックに示したさまざまなコンポーネントを試してみることをお勧めする。1つのアイデアは、上記のinstruction_adherence検出器の<code translate="no">instructions</code> フィールドを使用して、独自の品質定義を追加することです。もう1つのアイデアは、品質メトリック計算の一部として<a href="https://docs.aimon.ai/category/checker-models">AIMonのチェッカーモデルを</a>もう1つ追加することです。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df_scores = pd.DataFrame(
@@ -934,6 +984,18 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }.<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -941,7 +1003,7 @@ df_scores
       <th>アプローチ</th>
       <th>品質スコア</th>
       <th>検索関連性スコア</th>
-      <th>品質スコアの増加</th>
+      <th>品質スコアの増加(%)</th>
       <th>検索関連度スコアの増加(%)</th>
     </tr>
   </thead>

@@ -93,7 +93,7 @@ summary: >-
    <tr>
      <td><p>Schema-Definition</p></td>
      <td><p>Ein skalares Feld, das explizit im Auflistungsschema mit dem Typ <code translate="no">DataType.JSON</code> deklariert werden muss.</p></td>
-     <td><p>Ein verborgenes JSON-Feld (mit dem Namen <code translate="no">#meta</code>), das nicht deklarierte Felder automatisch speichert.</p></td>
+     <td><p>Ein verborgenes JSON-Feld (mit dem Namen <code translate="no">$meta</code>), das nicht deklarierte Felder automatisch speichert.</p></td>
    </tr>
    <tr>
      <td><p>Anwendungsfall</p></td>
@@ -108,7 +108,7 @@ summary: >-
    <tr>
      <td><p>Abfragen</p></td>
      <td><p>Abfrage über Ihren Feldnamen oder Zielschlüssel innerhalb des JSON-Feldes: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Direkte Abfrage über den dynamischen Feldschlüssel: <code translate="no">"dynamic_key"</code> oder über <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Direkte Abfrage über den dynamischen Feldschlüssel: <code translate="no">"dynamic_key"</code> oder über <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Grundlegende Operationen<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -267,7 +267,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filtering-with-JSON-specific-operators" class="common-anchor-header">Filtern mit JSON-spezifischen Operatoren</h4><p>Milvus bietet auch spezielle Operatoren für die Abfrage von Array-Werten auf bestimmte JSON-Feldschlüssel. Zum Beispiel:</p>
+<h4 id="Filtering-with-JSON-specific-operators" class="common-anchor-header">Filtern mit JSON-spezifischen Operatoren</h4><p>Milvus bietet auch spezielle Operatoren zur Abfrage von Array-Werten für bestimmte JSON-Feldschlüssel. Zum Beispiel:</p>
 <ul>
 <li><p><code translate="no">json_contains(identifier, expr)</code>: Prüft, ob ein bestimmtes Element oder Unter-Array innerhalb eines JSON-Arrays existiert</p></li>
 <li><p><code translate="no">json_contains_all(identifier, expr)</code>: Stellt sicher, dass alle Elemente des angegebenen JSON-Ausdrucks in dem Feld vorhanden sind</p></li>

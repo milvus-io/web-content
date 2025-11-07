@@ -53,9 +53,9 @@ beta: Milvus 2.6.x
 <li><p>Каждый ранжировщик распада может использовать только одно числовое поле.</p></li>
 <li><p><strong>Согласованность единиц времени</strong>: При использовании ранжирования по времени единицы измерения для параметров <code translate="no">origin</code>, <code translate="no">scale</code> и <code translate="no">offset</code> должны соответствовать единицам измерения, используемым в данных вашей коллекции:</p>
 <ul>
-<li>Если в коллекции хранятся временные метки в <strong>секундах</strong>, используйте секунды для всех параметров.</li>
-<li>Если в коллекции хранятся временные метки в <strong>миллисекундах</strong>, используйте миллисекунды для всех параметров</li>
-<li>Если ваша коллекция хранит временные метки в <strong>микросекундах</strong>, используйте микросекунды для всех параметров.</li>
+<li><p>Если в коллекции хранятся временные метки в <strong>секундах</strong>, используйте секунды для всех параметров.</p></li>
+<li><p>Если в коллекции хранятся временные метки в <strong>миллисекундах</strong>, используйте миллисекунды для всех параметров</p></li>
+<li><p>Если ваша коллекция хранит временные метки в <strong>микросекундах</strong>, используйте микросекунды для всех параметров.</p></li>
 </ul></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Как это работает<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -238,31 +238,19 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Гаусс (<code translate="no">gauss</code>)</p></td>
      <td><p>Естественный постепенный спад, который умеренно расширяется</p></td>
-     <td><ul>
-<li><p>Общий поиск, требующий сбалансированных результатов</p></li>
-<li><p>Приложения, в которых пользователи интуитивно чувствуют расстояние</p></li>
-<li><p>Когда умеренное расстояние не должно сильно ухудшать результаты</p></li>
-</ul></td>
+     <td><ul><li><p>Общий поиск, требующий сбалансированных результатов</p></li><li><p>Приложения, в которых пользователи интуитивно чувствуют расстояние</p></li><li><p>Когда умеренное расстояние не должно сильно ухудшать результаты</p></li></ul></td>
      <td><p>При поиске ресторана качественные заведения, расположенные на расстоянии 3 км, остаются доступными для обнаружения, хотя и ранжируются ниже, чем близлежащие варианты</p></td>
    </tr>
    <tr>
      <td><p>Экспоненциальный (<code translate="no">exp</code>)</p></td>
      <td><p>Сначала быстро снижается, но потом сохраняет длинный хвост</p></td>
-     <td><ul>
-<li><p>Новостные ленты, где критична повторяемость</p></li>
-<li><p>Социальные сети, где должен преобладать свежий контент</p></li>
-<li><p>Когда предпочтение отдается близости, но исключительные удаленные материалы должны оставаться видимыми</p></li>
-</ul></td>
+     <td><ul><li><p>Новостные ленты, где критична повторяемость</p></li><li><p>Социальные сети, где должен преобладать свежий контент</p></li><li><p>Когда предпочтение отдается близости, но исключительные удаленные материалы должны оставаться видимыми</p></li></ul></td>
      <td><p>В новостном приложении вчерашние статьи ранжируются гораздо выше, чем материалы недельной давности, но высоко релевантные старые статьи все равно могут появляться</p></td>
    </tr>
    <tr>
      <td><p>Линейный (<code translate="no">linear</code>)</p></td>
      <td><p>Последовательный, предсказуемый спад с четкой границей</p></td>
-     <td><ul>
-<li><p>Приложения с естественными границами</p></li>
-<li><p>Услуги с ограничениями по расстоянию</p></li>
-<li><p>Контент с датами истечения срока действия или четкими пороговыми значениями.</p></li>
-</ul></td>
+     <td><ul><li><p>Приложения с естественными границами</p></li><li><p>Услуги с ограничениями по расстоянию</p></li><li><p>Контент с датами истечения срока действия или четкими пороговыми значениями.</p></li></ul></td>
      <td><p>В системе поиска событий события, выходящие за рамки двухнедельного будущего, просто не отображаются.</p></td>
    </tr>
 </table>
@@ -307,6 +295,8 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h3><p>Чтобы реализовать ранжирование по распаду, сначала определите объект <code translate="no">Function</code> с соответствующей конфигурацией:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
@@ -325,10 +315,50 @@ decay_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
+
+<span class="hljs-keyword">import</span> java.time.ZoneId;
+<span class="hljs-keyword">import</span> java.time.ZonedDateTime;
+
+<span class="hljs-type">ZonedDateTime</span> <span class="hljs-variable">zdt</span> <span class="hljs-operator">=</span> ZonedDateTime.of(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">25</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, ZoneId.systemDefault());
+
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;time_decay&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;timestamp&quot;</span>))
+        .function(<span class="hljs-string">&quot;gauss&quot;</span>)
+        .origin(zdt.toInstant().toEpochMilli())
+        .scale(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .offset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .build();
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">
+<span class="hljs-keyword">import</span> {<span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> decayRanker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;time_decay&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;timestamp&quot;</span>],
+  <span class="hljs-attr">function_type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;decay&quot;</span>,
+    <span class="hljs-attr">function</span>: <span class="hljs-string">&quot;gauss&quot;</span>,
+    <span class="hljs-attr">origin</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).<span class="hljs-title function_">getTime</span>(),
+    <span class="hljs-attr">scale</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+    <span class="hljs-attr">offset</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+    <span class="hljs-attr">decay</span>: <span class="hljs-number">0.5</span>,
+  },
+};
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>Параметр</p></th>
-     <th><p>Требуется?</p></th>
+     <th><p>Требуемый?</p></th>
      <th><p>Описание</p></th>
      <th><p>Значение/пример</p></th>
    </tr>
@@ -341,59 +371,49 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Числовое поле для расчета показателя распада. Определяет, какой атрибут данных будет использоваться для вычисления распада (например, временные метки для распада на основе времени, координаты для распада на основе местоположения). 
- Это должно быть поле в вашей коллекции, содержащее соответствующие числовые значения. Поддерживаются INT8/16/32/64, FLOAT, DOUBLE.</p></td>
+     <td><p>Числовое поле для расчета показателя распада. Определяет, какой атрибут данных будет использоваться для вычисления распада (например, временные метки для распада на основе времени, координаты для распада на основе местоположения). </p><p>Это должно быть поле в вашей коллекции, содержащее соответствующие числовые значения. Поддерживаются INT8/16/32/64, FLOAT, DOUBLE.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Указывает тип создаваемой функции. Должно быть установлено значение <code translate="no">RERANK</code> для всех ранжировщиков распада.</p></td>
+     <td><p>Указывает тип создаваемой функции.</p><p>Должно быть установлено значение <code translate="no">RERANK</code> для всех ранжировщиков распада.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Указывает используемый метод ранжирования. Должно быть установлено значение <code translate="no">"decay"</code>, чтобы включить функцию ранжирования по распаду.</p></td>
+     <td><p>Указывает используемый метод ранжирования.</p><p>Должно быть установлено значение <code translate="no">"decay"</code>, чтобы включить функцию ранжирования по распаду.</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Указывает, какой математический ранжировщик распада следует применить. Определяет форму кривой снижения релевантности. Рекомендации по выбору подходящей функции см. в разделе <a href="/docs/ru/decay-ranker-overview.md#Choose-the-right-decay-ranker">Выбор правильного ранжировщика распада</a>.</p></td>
+     <td><p>Указывает, какой математический ранжировщик распада следует применить. Определяет форму кривой снижения релевантности.</p><p>Рекомендации по выбору <a href="/docs/ru/decay-ranker-overview.md#Choose-the-right-decay-ranker">подходящей</a> функции см. в разделе <a href="/docs/ru/decay-ranker-overview.md#Choose-the-right-decay-ranker">Выбор правильного ранжировщика распада</a>.</p></td>
      <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, или <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Точка отсчета, от которой рассчитывается балл распада. Элементы, находящиеся на этом значении, получают максимальные баллы релевантности. Для распада, основанного на времени, единица измерения времени должна соответствовать данным коллекции.</p></td>
-     <td><ul>
-<li>Для временных меток: текущее время (например, <code translate="no">int(time.time())</code>).</li>
-<li>Для геолокации: текущие координаты пользователя.</li>
-</ul></td>
+     <td><p>Точка отсчета, от которой рассчитывается балл распада. Элементы, находящиеся на этом значении, получают максимальные баллы релевантности.</p><p>Для распада, основанного на времени, единица измерения времени должна соответствовать данным коллекции.</p></td>
+     <td><ul><li><p>Для временных меток: текущее время (например, <code translate="no">int(time.time())</code>).</p></li><li><p>Для геолокации: текущие координаты пользователя.</p></li></ul></td>
    </tr>
    <tr>
-          <td><p><code translate="no">params.scale</code></p></td>
+     <td><p><code translate="no">params.scale</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Расстояние или время, за которое релевантность снижается до значения <code translate="no">decay</code>. Определяет, как быстро снижается релевантность. При использовании временной зависимости единица времени должна соответствовать данным сбора. Большие значения создают более постепенное снижение релевантности, меньшие - более резкое.</p></td>
-     <td><ul>
-<li>Для времени: период в секундах (например, <code translate="no">7 * 24 * 60 * 60</code> в течение 7 дней).</li>
-<li>Для расстояния: метры (например, <code translate="no">5000</code> для 5 км).</li>
-</ul></td>
+     <td><p>Расстояние или время, за которое релевантность снижается до значения <code translate="no">decay</code>. Определяет, как быстро снижается релевантность.</p><p>Для снижения релевантности на основе времени единица измерения времени должна соответствовать данным вашей коллекции.</p><p>Большие значения создают более постепенное снижение релевантности; меньшие значения создают более резкое снижение.</p></td>
+     <td><ul><li><p>Для времени: период в секундах (например, <code translate="no">7 * 24 * 60 * 60</code> в течение 7 дней).</p></li><li><p>Для расстояния: метры (например, <code translate="no">5000</code> для 5 км).</p></li></ul></td>
    </tr>
    <tr>
-          <td><p><code translate="no">params.offset</code></p></td>
+     <td><p><code translate="no">params.offset</code></p></td>
      <td><p>Нет</p></td>
-     <td><p>Создает "зону без распада" вокруг <code translate="no">origin</code>, где предметы сохраняют полную оценку (оценка распада = 1,0). Предметы в этом диапазоне <code translate="no">origin</code> сохраняют максимальную релевантность. Для распада, основанного на времени, единица измерения времени должна соответствовать данным вашей коллекции.</p></td>
-     <td><ul>
-<li>Для времени: период в секундах (например, <code translate="no">24 * 60 * 60</code> за 1 день).</li>
-<li>Для расстояния: метры (например, <code translate="no">500</code> для 500 м).</li>
-</ul></td>
+     <td><p>Создает "зону без распада" вокруг <code translate="no">origin</code>, где предметы сохраняют полную оценку (оценка распада = 1,0).</p><p>Для распада, основанного на времени, единица времени должна соответствовать данным вашей коллекции.</p><p>Предметы в этом диапазоне <code translate="no">origin</code> сохраняют максимальную релевантность.</p></td>
+     <td><ul><li><p>Для времени: период в секундах (например, <code translate="no">24 * 60 * 60</code> за 1 день).</p></li><li><p>Для расстояния: метры (например, <code translate="no">500</code> для 500 м).</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>Нет</p></td>
-     <td><p>Значение балла на расстоянии <code translate="no">scale</code>, контролирует крутизну кривой. Более низкие значения создают более крутые кривые спада; более высокие значения создают более плавные кривые спада. Должно быть между 0 и 1.</p></td>
+     <td><p>Значение балла на расстоянии <code translate="no">scale</code>, контролирует крутизну кривой. Более низкие значения создают более крутые кривые спада; более высокие значения создают более плавные кривые спада.</p><p>Должно быть от 0 до 1.</p></td>
      <td><p><code translate="no">0.5</code> (по умолчанию)</p></td>
    </tr>
 </table>
@@ -412,19 +432,51 @@ decay_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Определив ранжир распада, вы можете применить его в процессе поиска, передав параметр <code translate="no">ranker</code>:</p>
+    </button></h3><p>Определив свой ранжировщик распада, вы можете применить его в процессе поиска, передав параметр <code translate="no">ranker</code>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Применить к гибридному поиску<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;search query&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],
+  <span class="hljs-attr">rerank</span>: ranker,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Применение к гибридному поиску<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -439,19 +491,21 @@ results = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Рангомеры распада также можно применять в гибридных поисковых операциях, которые объединяют несколько векторных полей:</p>
+    </button></h3><p>Ранжировщики распада можно применять и в гибридных поисковых операциях, объединяющих несколько векторных полей:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
 dense_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
 )
 
 sparse_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
@@ -466,4 +520,57 @@ hybrid_results = milvus_client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>При гибридном поиске Milvus сначала находит максимальную оценку сходства из всех векторных полей, а затем применяет к ней коэффициент распада.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding)))
+        .limit(<span class="hljs-number">20</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;search query&quot;</span>)))
+        .limit(<span class="hljs-number">20</span>)
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+                .collectionName(COLLECTION_NAME)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(<span class="hljs-number">10</span>)
+                .outputFields(Arrays.asList(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
+                .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> denseRequest = {
+  <span class="hljs-attr">data</span>: [your_query_vector_1], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+};
+
+<span class="hljs-keyword">const</span> sparseRequest = {
+  <span class="hljs-attr">data</span>: [your_query_vector_2], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+};
+
+<span class="hljs-keyword">const</span> hybridResults = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">hybrid_search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">data</span>: [denseRequest, sparseRequest],
+  <span class="hljs-attr">ranker</span>: decayRanker,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],
+});
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>При гибридном поиске Milvus сначала находит максимальную оценку сходства из всех векторных полей, а затем применяет к этой оценке коэффициент распада.</p>

@@ -25,7 +25,7 @@ beta: Milvus v2.6.2+
         ></path>
       </svg>
     </button></h1><p>Milvus 中的<code translate="no">NGRAM</code> 索引是为了加速对<code translate="no">VARCHAR</code> 字段或<code translate="no">JSON</code> 字段内特定 JSON 路径的<code translate="no">LIKE</code> 查询而建立的。在建立索引之前，Milvus 会将文本分割成固定长度为<em>n</em> 的重叠短子串，称为<em>n-gram</em>。例如，<em>n = 3</em> 时，单词<em>"Milvus "</em>会被拆分成 3 个词组：<em>"Mil"、</em> <em>"ilv"、"</em> <em>lvu "</em>和<em>"vus"。</em>然后，这些 n 个词组被存储在一个倒排索引中，该索引将每个词组映射到出现该词组的文档 ID。在查询时，该索引允许 Milvus 将搜索范围迅速缩小到一小部分候选词，从而大大加快了查询执行速度。</p>
-<p>当你需要快速过滤前缀、后缀、前后缀或通配符时，请使用它：</p>
+<p>当你需要快速过滤前缀、后缀、前后缀或通配符时，可以使用它：</p>
 <ul>
 <li><p><code translate="no">name LIKE &quot;data%&quot;</code></p></li>
 <li><p><code translate="no">title LIKE &quot;%vector%&quot;</code></p></li>
@@ -139,7 +139,7 @@ beta: Milvus v2.6.2+
 <li><p>如果是<code translate="no">L &gt; max_gram</code> ，查询词将被分解为多个重叠克，窗口大小等于<code translate="no">max_gram</code> 。</p></li>
 </ul>
 <p>例如，如果<code translate="no">max_gram</code> 设置为<code translate="no">3</code> ，查询词为<code translate="no">&quot;database&quot;</code> ，长度为<strong>8</strong>，则会被分解为<code translate="no">&quot;dat&quot;</code>,<code translate="no">&quot;ata&quot;</code>,<code translate="no">&quot;tab&quot;</code> 等 3 个克的子串。</p></li>
-<li><p><strong>查找每个语法并进行交集</strong>：Milvus 在倒排索引中查找每个查询语法，然后与得到的文档 ID 列表进行交集，找出一小组候选文档。这些候选文档包含查询的所有语法。</p></li>
+<li><p><strong>查找每个语法并进行交集</strong>：Milvus 在倒排索引中查找每个查询语法，然后与得到的文档 ID 列表进行交集，找出一小组候选文档。这些候选文档包含查询中的所有语法。</p></li>
 <li><p><strong>验证并返回结果：</strong>然后将原始的<code translate="no">LIKE</code> 过滤器作为最后检查只应用于小的候选集，以找到完全匹配的结果。</p></li>
 </ol>
 <h2 id="Create-an-NGRAM-index" class="common-anchor-header">创建 NGRAM 索引<button data-href="#Create-an-NGRAM-index" class="anchor-icon" translate="no">
@@ -249,7 +249,7 @@ client.create_index(
 <li><p>在进行 N-gram 标记化之前，该值会被转换为<code translate="no">VARCHAR</code> 。</p></li>
 <li><p>Milvus 会生成长度为 2 到 4 的子串，并将它们存储在反转索引中。</p></li>
 </ul>
-<p>有关如何索引 JSON 字段的更多信息，请参阅<a href="/docs/zh/use-json-fields.md">JSON 字段</a>。</p>
+<p>有关如何索引 JSON 字段的更多信息，请参阅<a href="/docs/zh/json-indexing.md">JSON 索引</a>。</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">通过 NGRAM 加速查询<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,7 +294,34 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>有关过滤表达式语法的更多信息，请参阅<a href="/docs/zh/basic-operators.md">基本操作符</a>。</p>
-<h2 id="Usage-notes" class="common-anchor-header">使用说明<button data-href="#Usage-notes" class="anchor-icon" translate="no">
+<h2 id="Drop-an-index" class="common-anchor-header">删除索引<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>使用<code translate="no">drop_index()</code> 方法从 Collections 中删除现有索引。</p>
+<div class="alert note">
+<ul>
+<li><p>在<strong>v2.6.3</strong>或更早版本中，删除标量索引前必须释放 Collections。</p></li>
+<li><p>从<strong>v2.6.4</strong>或更高版本开始，一旦不再需要标量索引，就可以直接删除，无需先释放 Collections。</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Usage-notes" class="common-anchor-header">使用注意事项<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -310,8 +337,8 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>字段类型</strong>：支持<code translate="no">VARCHAR</code> 和<code translate="no">JSON</code> 字段。对于 JSON，同时提供<code translate="no">params.json_path</code> 和<code translate="no">params.json_cast_type=&quot;varchar&quot;</code> 。</p></li>
-<li><p><strong>Unicode</strong>：NGRAM 分解以字符为基础，与语言无关，包括空白和标点符号。</p></li>
+<li><p><strong>字段类型</strong>：支持<code translate="no">VARCHAR</code> 和<code translate="no">JSON</code> 字段。对于 JSON，请同时提供<code translate="no">params.json_path</code> 和<code translate="no">params.json_cast_type=&quot;varchar&quot;</code> 。</p></li>
+<li><p><strong>统一字符编码</strong>：NGRAM 分解以字符为基础，与语言无关，包括空白和标点符号。</p></li>
 <li><p><strong>时空权衡</strong>：更宽的克范围<code translate="no">[min_gram, max_gram]</code> 会产生更多的克和更大的索引。如果内存紧张，可考虑使用<code translate="no">mmap</code> 模式处理大型张贴列表。更多信息，请参阅<a href="/docs/zh/mmap.md">使用 mmap</a>。</p></li>
 <li><p><strong>不变性</strong>：<code translate="no">min_gram</code> 和<code translate="no">max_gram</code> 不能就地更改，需要重新构建索引才能调整。</p></li>
 </ul>

@@ -47,7 +47,7 @@ title: Milvus와 Camel을 사용한 검색 증강 생성(RAG)
         ></path>
       </svg>
     </button></h2><p>먼저 https://arxiv.org/pdf/2303.17760.pdf 에서 CAMEL 용지를 로드해 보겠습니다. 이것이 로컬 예제 데이터가 될 것입니다.</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
@@ -164,7 +164,7 @@ vector_retriever = VectorRetriever(
 <p>여러분이 해야 할 일은</p>
 <ul>
 <li>콘텐츠 입력 경로를 설정합니다(로컬 경로 또는 원격 URL일 수 있음).</li>
-<li>Milvus의 원격 URL과 API 키를 설정합니다.</li>
+<li>Milvus의 원격 URL 및 API 키를 설정합니다.</li>
 <li>쿼리 제공</li>
 </ul>
 <p>자동 RAG 파이프라인은 지정된 콘텐츠 입력 경로에 대한 컬렉션을 생성하고, 컬렉션 이름은 콘텐츠 입력 경로 이름에 따라 자동으로 설정되며, 컬렉션이 존재하는 경우 직접 검색을 수행합니다.</p>

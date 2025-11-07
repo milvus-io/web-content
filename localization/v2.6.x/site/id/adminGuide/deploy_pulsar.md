@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus menggunakan Pulsar atau Kafka untuk mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Pulsar adalah sistem penyimpanan pesan default. Topik ini memperkenalkan cara mengonfigurasi penyimpanan pesan dengan Docker Compose atau Helm.</p>
 <p>Anda dapat mengonfigurasi Pulsar dengan <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> atau pada K8 dan mengonfigurasi Kafka pada K8.</p>
 <div class="alert note">
-<p><strong>Keterbatasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v2.6.3, Anda harus mempertahankan pilihan antrean pesan saat ini. Beralih di antara sistem antrean pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</p>
+<p><strong>Keterbatasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v2.6.4, Anda harus mempertahankan pilihan antrean pesan saat ini. Beralih di antara sistem antrean pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Mengonfigurasi Pulsar dengan Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -277,7 +277,7 @@ summary: >-
     </button></h2><p>Milvus mandiri menggunakan RocksMQ sebagai penyimpanan pesan default. Untuk langkah-langkah terperinci tentang cara mengonfigurasi Milvus dengan Helm, lihat <a href="/docs/id/configure-helm.md">Mengonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail tentang item konfigurasi yang berhubungan dengan RocksMQ, lihat Konfigurasi <a href="/docs/id/configure_rocksmq.md">yang berhubungan dengan RocksMQ</a>.</p>
 <ul>
 <li><p>Jika Anda memulai Milvus dengan RocksMQ dan ingin mengubah pengaturannya, Anda dapat menjalankan <code translate="no">helm upgrade -f</code> dengan pengaturan yang telah diubah pada file YAML berikut ini.</p></li>
-<li><p>Jika Anda telah menginstal Milvus mandiri menggunakan Helm dengan penyimpanan pesan selain RocksMQ dan ingin mengubahnya kembali ke RocksMQ, jalankan <code translate="no">helm upgrade -f</code> dengan file YAML berikut setelah Anda mem-flush semua koleksi dan menghentikan Milvus.</p></li>
+<li><p>Jika Anda telah menginstal Milvus mandiri menggunakan Helm dengan penyimpanan pesan selain RocksMQ dan ingin mengubahnya kembali ke RocksMQ, jalankan <code translate="no">helm upgrade -f</code> dengan berkas YAML berikut setelah Anda telah mem-flush semua koleksi dan menghentikan Milvus.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

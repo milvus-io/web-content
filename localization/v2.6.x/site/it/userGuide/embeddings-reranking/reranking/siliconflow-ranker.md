@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>SiliconFlow Ranker sfrutta i modelli completi di reranking <a href="https://www.siliconflow.com/">di SiliconFlow</a> per migliorare la rilevanza della ricerca attraverso il reranking semantico. Offre funzionalità flessibili di chunking dei documenti e supporta un'ampia gamma di modelli di reranking specializzati di vari fornitori.</p>
+    </button></h1><p>SiliconFlow Ranker sfrutta i modelli di reranking completi <a href="https://www.siliconflow.com/">di SiliconFlow</a> per migliorare la rilevanza della ricerca attraverso il reranking semantico. Offre funzionalità flessibili di chunking dei documenti e supporta un'ampia gamma di modelli di reranking specializzati di vari fornitori.</p>
 <p>SiliconFlow Ranker è particolarmente utile per le applicazioni che richiedono:</p>
 <ul>
 <li><p>chunking avanzato dei documenti con sovrapposizione configurabile per la gestione di documenti lunghi</p></li>
@@ -48,7 +48,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Prima di implementare SiliconFlow Ranker in Milvus, assicurarsi di disporre di:</p>
 <ul>
-<li><p>Una raccolta Milvus con un campo <code translate="no">VARCHAR</code> contenente il testo da rerankizzare</p></li>
+<li><p>Una collezione Milvus con un campo <code translate="no">VARCHAR</code> contenente il testo da rerankizzare</p></li>
 <li><p>Una chiave API SiliconFlow valida con accesso ai modelli di reranking. Registrarsi sulla <a href="https://www.siliconflow.com/">piattaforma di SiliconFlow</a> per ottenere le credenziali API. È possibile scegliere tra:</p>
 <ul>
 <li><p>Impostare la variabile d'ambiente <code translate="no">SILICONFLOW_API_KEY</code>, oppure</p></li>
@@ -97,7 +97,28 @@ siliconflow_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+                       .functionType(FunctionType.RERANK)
+                       .name(<span class="hljs-string">&quot;siliconflow_semantic_ranker&quot;</span>)
+                       .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
+                       .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>)
+                       .param(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;siliconflow&quot;</span>)
+                       .param(<span class="hljs-string">&quot;model_name&quot;</span>, <span class="hljs-string">&quot;BAAI/bge-reranker-v2-m3&quot;</span>)
+                       .param(<span class="hljs-string">&quot;queries&quot;</span>, <span class="hljs-string">&quot;[\&quot;renewable energy developments\&quot;]&quot;</span>)
+                       .param(<span class="hljs-string">&quot;endpoint&quot;</span>, <span class="hljs-string">&quot;http://localhost:8080&quot;</span>)
+                       .param(<span class="hljs-string">&quot;max_client_batch_size&quot;</span>, <span class="hljs-string">&quot;32&quot;</span>)
+                       .param(<span class="hljs-string">&quot;max_chunks_per_doc&quot;</span>, <span class="hljs-string">&quot;5&quot;</span>)
+                       .param(<span class="hljs-string">&quot;overlap_tokens&quot;</span>, <span class="hljs-string">&quot;50&quot;</span>)
+                       .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -143,7 +164,7 @@ siliconflow_ranker = Function(
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Il modello di reranking SiliconFlow da utilizzare tra i modelli supportati dalla piattaforma SiliconFlow. Per un elenco dei modelli di reranking disponibili, consultare la <a href="https://docs.siliconflow.cn/en/api-reference/rerank/create-rerank">documentazione SiliconFlow</a>.</p></td>
+     <td><p>Il modello di reranking SiliconFlow da utilizzare tra i modelli supportati dalla piattaforma SiliconFlow.</p><p>Per un elenco dei modelli di reranking disponibili, consultare la <a href="https://docs.siliconflow.cn/en/api-reference/rerank/create-rerank">documentazione di SiliconFlow</a>.</p></td>
      <td><p><code translate="no">"BAAI/bge-reranker-v2-m3"</code></p></td>
    </tr>
    <tr>
@@ -155,7 +176,7 @@ siliconflow_ranker = Function(
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>No</p></td>
-     <td><p>Poiché i servizi modello non possono elaborare tutti i dati in una sola volta, si imposta la dimensione del batch per accedere al servizio modello in più richieste.</p></td>
+     <td><p>Poiché i servizi modello non possono elaborare tutti i dati in una sola volta, si imposta la dimensione del batch per l'accesso al servizio modello in più richieste.</p></td>
      <td><p><code translate="no">128</code> (predefinito)</p></td>
    </tr>
    <tr>
@@ -167,7 +188,7 @@ siliconflow_ranker = Function(
    <tr>
      <td><p><code translate="no">overlap_tokens</code></p></td>
      <td><p>No</p></td>
-     <td><p>Numero di sovrapposizioni di token tra chunk adiacenti quando i documenti sono raggruppati in chunk. Questo assicura la continuità tra i confini dei chunk per una migliore comprensione semantica. Supportato solo da modelli specifici: <code translate="no">BAAI/bge-reranker-v2-m3</code>, <code translate="no">Pro/BAAI/bge-reranker-v2-m3</code>, e <code translate="no">netease-youdao/bce-reranker-base_v1</code>.</p></td>
+     <td><p>Numero di sovrapposizioni di token tra chunk adiacenti quando i documenti sono raggruppati in chunk. Questo garantisce la continuità tra i confini dei chunk per una migliore comprensione semantica. Supportato solo da modelli specifici: <code translate="no">BAAI/bge-reranker-v2-m3</code>, <code translate="no">Pro/BAAI/bge-reranker-v2-m3</code>, e <code translate="no">netease-youdao/bce-reranker-base_v1</code>.</p></td>
      <td><p><code translate="no">50</code></p></td>
    </tr>
    <tr>
@@ -181,7 +202,7 @@ siliconflow_ranker = Function(
 <div class="alert note">
 <p>Per i parametri generali condivisi da tutti i classificatori di modelli (ad esempio, <code translate="no">provider</code>, <code translate="no">queries</code>), fare riferimento a <a href="/docs/it/model-ranker-overview.md#Create-a-model-ranker">Creare un classificatore di modelli</a>.</p>
 </div>
-<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Applicazione alla ricerca vettoriale standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Applicare alla ricerca vettoriale standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -197,16 +218,42 @@ siliconflow_ranker = Function(
         ></path>
       </svg>
     </button></h2><p>Per applicare SiliconFlow Ranker a una ricerca vettoriale standard:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with SiliconFlow reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
-    data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],  <span class="hljs-comment"># Search queries</span>
+    data=[your_query_vector],  <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,                   <span class="hljs-comment"># Vector field to search</span>
     limit=<span class="hljs-number">5</span>,                                     <span class="hljs-comment"># Number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],                  <span class="hljs-comment"># Include text field for reranking</span>
 <span class="highlighted-wrapper-line">    ranker=siliconflow_ranker,                  <span class="hljs-comment"># Apply SiliconFlow reranking</span></span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
+        .data(Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;AI Research Progress&quot;</span>), <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;What is AI&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Apply-to-hybrid-search" class="common-anchor-header">Applicare alla ricerca ibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,11 +271,13 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><p>SiliconFlow Ranker può essere utilizzato anche con la ricerca ibrida per combinare metodi di reperimento densi e radi:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Configure dense vector search</span>
 dense_search = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],
+    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">5</span>
@@ -236,7 +285,7 @@ dense_search = AnnSearchRequest(
 
 <span class="hljs-comment"># Configure sparse vector search  </span>
 sparse_search = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;AI Research Progress&quot;</span>, <span class="hljs-string">&quot;What is AI&quot;</span>],
+    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>, 
     param={},
     limit=<span class="hljs-number">5</span>
@@ -250,4 +299,36 @@ hybrid_results = client.hybrid_search(
     limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span>
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+        .vectors(Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding1), <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding2)))
+        .limit(<span class="hljs-number">5</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .data(Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;AI Research Progress&quot;</span>), <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;What is AI&quot;</span>)))
+        .limit(<span class="hljs-number">5</span>)
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+                .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(<span class="hljs-number">5</span>)
+                .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
+                .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

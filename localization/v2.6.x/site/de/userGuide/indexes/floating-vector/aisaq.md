@@ -87,7 +87,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><p>AISAQ bietet zwei plattenbasierte Speicherstrategien. Der Hauptunterschied besteht darin, wie die PQ-komprimierten Daten gespeichert werden.</p>
-<h4 id="AISAQ-performance" class="common-anchor-header">AISAQ-Leistung</h4><p><strong>AISAQ-Performance</strong> erreicht eine vollständig plattenbasierte Speicherung, indem PQ-Daten vom Speicher auf die Platte verlagert werden, während die IOPS durch Datenkolokation und Redundanz niedrig gehalten werden.</p>
+<h4 id="AISAQ-performance" class="common-anchor-header">AISAQ-Leistung</h4><p><strong>AISAQ-Performance</strong> erreicht eine vollständig plattenbasierte Speicherung, indem PQ-Daten vom Speicher auf die Platte verlagert werden, während die IOPS durch Daten-Colocation und Redundanz niedrig gehalten werden.</p>
 <p>In diesem Modus:</p>
 <ul>
 <li><p>Der Rohvektor eines jeden Knotens, die Kantenliste und die PQ-Daten seiner Nachbarn werden zusammen auf der Festplatte gespeichert.</p></li>

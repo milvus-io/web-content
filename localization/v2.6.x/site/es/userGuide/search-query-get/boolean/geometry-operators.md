@@ -1,13 +1,14 @@
 ---
 id: geometry-operators.md
-title: Operadores geométricos
+title: Operadores geométricosCompatible with Milvus 2.6.4+
 summary: >-
   Milvus admite un conjunto de operadores para el filtrado espacial en campos
   GEOMETRÍA, que son esenciales para gestionar y analizar datos geométricos.
   Estos operadores permiten recuperar entidades basándose en las relaciones
   geométricas entre objetos.
+beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Operators" class="common-anchor-header">Operadores geométricos<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
+<h1 id="Geometry-Operators" class="common-anchor-header">Operadores geométricos<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,6 +25,33 @@ summary: >-
       </svg>
     </button></h1><p>Milvus admite un conjunto de operadores para el filtrado espacial en los campos <code translate="no">GEOMETRY</code>, que son esenciales para gestionar y analizar datos geométricos. Estos operadores permiten recuperar entidades basándose en las relaciones geométricas entre objetos.</p>
 <p>Todos los operadores geométricos funcionan tomando dos argumentos geométricos: el nombre del campo <code translate="no">GEOMETRY</code> definido en el esquema de su colección y un objeto geométrico de destino representado en formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT).</p>
+<h2 id="Use-syntax" class="common-anchor-header">Sintaxis de uso<button data-href="#Use-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Para filtrar un campo <code translate="no">GEOMETRY</code>, utilice un operador geométrico en una expresión:</p>
+<ul>
+<li><p>General: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>Basado en la distancia: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
+</ul>
+<p>Donde</p>
+<ul>
+<li><p><code translate="no">operator</code> es uno de los operadores geométricos admitidos (por ejemplo, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Los nombres de los operadores deben estar en mayúsculas o minúsculas. Para obtener una lista de los operadores admitidos, consulte <a href="/docs/es/geometry-operators.md#Supported-geometry-operators">Operadores de geometría admitidos</a>.</p></li>
+<li><p><code translate="no">geo_field</code> es el nombre del campo <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> es la representación WKT de la geometría a consultar.</p></li>
+<li><p><code translate="no">distance</code> es el umbral específico de <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
 <p>Para obtener más información sobre los campos <code translate="no">GEOMETRY</code> en Milvus, consulte <a href="/docs/es/geometry-field.md">Campo geométrico</a>.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">Operadores de geometría admitidos<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"

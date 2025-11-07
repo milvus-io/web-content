@@ -40,7 +40,7 @@ title: 使用 Mistral AI、Milvus 和 Llama-agents 的多代理系統
 <li><p>1️⃣ Store Data into Milvus：學習將資料儲存到Milvus中，Milvus是為高速相似性搜索和人工智能應用而設計的高效向量資料庫。</p></li>
 <li><p>2️⃣使用llama-index與Mistral模型進行資料查詢：探索如何結合Mistral模型使用llama-index查詢儲存於Milvus的資料。</p></li>
 <li><p>3️⃣建立自動化的資料搜尋與讀取代理：建立能根據使用者查詢自動搜尋與讀取資料的代理。這些自動化代理程式可提供快速、精確的回覆，減少手動搜尋的工作量，進而提升使用者體驗。</p></li>
-<li><p>4️⃣開發基於使用者查詢的元資料篩選代理程式：實施可自動根據使用者查詢產生元資料篩選程式的代理程式，精煉搜尋結果並使其符合上下文，避免混亂並提高所擷取資訊的準確性，即使是複雜的查詢也不例外。</p></li>
+<li><p>4️⃣開發基於使用者查詢的元資料篩選代理程式：實施可自動根據使用者查詢產生元資料篩選程式的代理程式，精煉搜尋結果並將其上下文化，避免混亂並提高擷取資訊的準確性，即使是複雜的查詢也不例外。</p></li>
 <li><p>🔍 摘要 在本筆記簿結束時，您將全面了解如何使用 Milvus、llama-index 搭配 llama-agents 以及 Mistral 模型來建立一個強大且有效率的資料檢索系統。</p></li>
 </ul>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
@@ -143,7 +143,7 @@ title: 使用 Mistral AI、Milvus 和 Llama-agents 的多代理系統
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus openai python-dotenv</span>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus milvus-lite openai python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus llama-index-readers-file llama-index-llms-ollama llama-index-llms-mistralai llama-index-embeddings-mistralai</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -241,7 +241,7 @@ Settings.embed_model = MistralAIEmbedding(model_name=<span class="hljs-string">&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Llama Index 使用 LLM 來回應提示和查詢，並負責撰寫自然語言回應。 我們定義 Mistral Nemo 為預設。Nemo 提供最多 128k tokens 的大型上下文視窗。它的推理能力、世界知識和編碼準確度在同級產品中都是最先進的。</p>
+    </button></h2><p>Llama Index 使用 LLM 來回應提示和查詢，並負責撰寫自然語言回應。 我們定義 Mistral Nemo 為預設。Nemo 提供最多 128k tokens 的大型上下文視窗。它的推理能力、世界知識和編碼精確度都是同級產品中最先進的。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.llms.ollama <span class="hljs-keyword">import</span> Ollama
 
 Settings.llm = Ollama(<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
@@ -558,7 +558,22 @@ Based on the provided context, which pertains to Lyft&#x27;s Risk Factors sectio
         ></path>
       </svg>
     </button></h2><p>以下是一個程式碼範例，示範如何使用代理從使用者的問題中擷取元資料篩選器來建立篩選式查詢引擎：</p>
-<h3 id="Explanation" class="common-anchor-header">說明</h3><ul>
+<h3 id="Explanation" class="common-anchor-header">說明<button data-href="#Explanation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Prompt Template</strong>：PromptTemplate 類用於定義從使用者問題中抽取元資料篩選器的範本。該模板指示語言模型考慮公司名稱、年份和其他相關屬性。</p></li>
 <li><p><strong>LLM</strong>: Mistral Nemo 用來根據使用者的問題產生元資料篩選器。模型會根據問題和範本來擷取相關的篩選條件。</p></li>
 <li><p><strong>元資料篩選器</strong>：LLM 的回應會被解析以建立<code translate="no">MetadataFilters</code> 物件。如果沒有提及特定的篩選條件，則會傳回一個空的<code translate="no">MetadataFilters</code> 物件。</p></li>
@@ -645,15 +660,60 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
         ></path>
       </svg>
     </button></h2><p>Mistral Large 是 Mistral 的旗艦型號，具有非常好的推理、知識和編碼能力。它是需要大型推理能力或高度專業化的複雜任務的理想選擇。它擁有進階的函式呼叫能力，這正是我們需要來協調不同代理的地方。</p>
-<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">為什麼我們需要更聰明的 Model？</h3><p>下面要回答的問題特別具有挑戰性，因為它需要協調多種服務和代理來提供一致且精確的回應。這涉及到協調各種工具和代理來擷取和處理來自不同來源的資訊，例如來自不同公司的財務資料。</p>
-<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">這有什麼難的？</h3><ul>
+<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">為什麼我們需要更聰明的 Model？<button data-href="#Why-do-we-need-a-smarter-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面要回答的問題特別具有挑戰性，因為它需要協調多種服務和代理來提供一致且精確的回應。這涉及到協調各種工具和代理來擷取和處理來自不同來源的資訊，例如來自不同公司的財務資料。</p>
+<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">這有什麼難的？<button data-href="#Whats-so-difficult-about-that" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li>複雜性：這個問題涉及到多個代理和服務，每個代理和服務都有自己的功能和資料來源。協調這些代理，使其無縫合作是一項複雜的任務。</li>
 </ul>
 <ul>
 <li><p>資料整合：這個問題需要整合來自不同來源的資料，由於資料格式、結構和元資料的差異，這可能是一項挑戰。</p></li>
 <li><p>情境瞭解：問題可能需要理解不同資訊之間的上下文和關係，這是一項對認知要求很高的任務。</p></li>
 </ul>
-<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">為什麼 Mistral Large 在這種情況下會有幫助？</h3><p>由於 Mistral Large 具備先進的推理和函式呼叫功能，因此非常適合這項任務。以下是它的幫助方式：</p>
+<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">為什麼 Mistral Large 在這種情況下會有幫助？<button data-href="#Why-would-Mistral-Large-help-in-this-case" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>由於 Mistral Large 具備先進的推理和函式呼叫功能，因此非常適合這項任務。以下是它的幫助方式：</p>
 <ul>
 <li><p>進階推理：Mistral Large 可以處理複雜的推理任務，使其成為協調多個代理和服務的理想選擇。它可以理解不同資訊之間的關係，並做出明智的決策。</p></li>
 <li><p>函式呼叫功能：Mistral Large 具備先進的函式呼叫功能，對於協調不同代理的動作至關重要。這可讓各種服務進行無縫整合與協調。</p></li>

@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在建立商品目錄、內容管理系統或使用者偏好引擎等應用程式時，您通常需要在向量嵌入的同時儲存彈性的元資料。產品屬性因類別而異，使用者偏好隨時間演變，而文件屬性則有複雜的嵌套結構。Milvus 的 JSON 欄位可讓您在不犧牲效能的情況下，儲存和查詢彈性的結構化資料，從而解決這項挑戰。</p>
+    </button></h1><p>在建立商品目錄、內容管理系統或使用者偏好引擎等應用程式時，您通常需要在向量嵌入的同時儲存彈性的元資料。產品屬性因類別而異，使用者偏好隨時間演變，而文件屬性則有複雜的嵌套結構。Milvus 中的 JSON 欄位可讓您在不犧牲效能的情況下，儲存和查詢彈性的結構化資料，從而解決這項挑戰。</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">什麼是 JSON 欄位？<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +87,7 @@ summary: >-
    <tr>
      <td><p>模式定義</p></td>
      <td><p>一個標量欄位，必須在集合模式中以<code translate="no">DataType.JSON</code> 類型明確宣告。</p></td>
-     <td><p>一個隱藏的 JSON 欄位 (命名為<code translate="no">#meta</code>)，可自動儲存未宣告的欄位。</p></td>
+     <td><p>一個隱藏的 JSON 欄位 (命名為<code translate="no">$meta</code>)，可自動儲存未宣告的欄位。</p></td>
    </tr>
    <tr>
      <td><p>使用情況</p></td>
@@ -102,7 +102,7 @@ summary: >-
    <tr>
      <td><p>查詢</p></td>
      <td><p>使用您的欄位名稱或 JSON 欄位內的目標關鍵查詢：<code translate="no">metadata["key"]</code> 。</p></td>
-     <td><p>直接使用動態欄位關鍵查詢：<code translate="no">"dynamic_key"</code> 或透過<code translate="no">#meta</code> ：<code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>直接使用動態欄位關鍵查詢：<code translate="no">"dynamic_key"</code> 或透過<code translate="no">$meta</code> ：<code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">基本操作<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -172,7 +172,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>建立資料集後，在指定的 JSON 欄位中插入包含結構化 JSON 物件的實體。您的資料格式應為字典清單。</p>
+    </button></h3><p>集合建立後，在指定的 JSON 欄位中插入包含結構化 JSON 物件的實體。您的資料格式應為字典清單。</p>
 <pre><code translate="no" class="language-python">entities = [
     {
         <span class="hljs-string">&quot;product_id&quot;</span>: <span class="hljs-number">1</span>,

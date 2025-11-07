@@ -90,7 +90,7 @@ title: Gestire i gruppi di risorse
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.6.2. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
+<p>Tutti gli esempi di codice in questa pagina sono in PyMilvus 2.6.3. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
 </div>
 <ol>
 <li><p>Creare un gruppo di risorse.</p>
@@ -329,7 +329,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>Le repliche di una singola raccolta e i gruppi di risorse hanno una relazione N a N.</li>
-<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti equamente tra le repliche, assicurando che la differenza nel numero di QueryNode di ciascuna replica non superi 1.</li>
+<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti uniformemente tra le repliche, assicurando che la differenza nel numero di QueryNode di ogni replica non superi 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Cosa fare dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

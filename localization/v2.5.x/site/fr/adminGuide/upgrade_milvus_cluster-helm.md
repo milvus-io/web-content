@@ -130,7 +130,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
         ></path>
       </svg>
     </button></h2><p>Depuis Milvus 2.2.3, vous pouvez configurer les coordinateurs Milvus pour qu'ils fonctionnent en mode actif-veille et activer la fonction de mise à niveau continue pour eux, afin que Milvus puisse répondre aux demandes entrantes pendant les mises à niveau des coordinateurs. Dans les versions précédentes, les coordinateurs doivent être supprimés puis créés lors d'une mise à niveau, ce qui peut entraîner certains temps d'arrêt du service.</p>
-<p>Les mises à niveau en continu exigent que les coordinateurs fonctionnent en mode actif-veille. Vous pouvez utiliser <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">le script</a> que nous fournissons pour configurer les coordinateurs afin qu'ils travaillent en mode veille active et lancer la mise à jour continue.</p>
+<p>Les mises à niveau en continu exigent que les coordinateurs fonctionnent en mode actif-veille. Vous pouvez utiliser <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">le script</a> que nous fournissons pour configurer les coordinateurs afin qu'ils travaillent en mode de veille active et lancer la mise à jour continue.</p>
 <p>Basé sur les capacités de mise à jour continue fournies par Kubernetes, le script ci-dessus applique une mise à jour ordonnée des déploiements en fonction de leurs dépendances. En outre, Milvus met en œuvre un mécanisme garantissant que ses composants restent compatibles avec ceux qui en dépendent pendant la mise à niveau, ce qui réduit considérablement les temps d'arrêt potentiels des services.</p>
 <p>Le script s'applique uniquement à la mise à niveau de Milvus installé avec Helm. Le tableau suivant répertorie les drapeaux de commande disponibles dans les scripts.</p>
 <table>
@@ -319,7 +319,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 </ol>
 <h4 id="2-Upgrade-Milvus-from-v21x-to-220" class="common-anchor-header">2. Mise à niveau de Milvus de la version 2.1.x à la version 2.2.0</h4><p>Les commandes suivantes supposent que vous mettez à niveau Milvus de la version 2.1.4 à la version 2.2.0. Modifiez-les pour obtenir les versions qui répondent à vos besoins.</p>
 <ol>
-<li><p>Spécifier le nom de l'instance Milvus, la version source de Milvus et la version cible de Milvus.</p>
+<li><p>Spécifiez le nom de l'instance Milvus, la version source de Milvus et la version cible de Milvus.</p>
 <pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Spécifiez l'espace de noms avec <code translate="no">-n</code> si votre Milvus n'est pas installé dans l'espace de noms K8s par défaut.</p>

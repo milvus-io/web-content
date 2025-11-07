@@ -18,7 +18,7 @@ title: Hinweise zur Veröffentlichung
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Finden Sie heraus, was es Neues in Milvus gibt! Auf dieser Seite werden neue Funktionen, Verbesserungen, bekannte Probleme und Fehlerbehebungen in jeder Version zusammengefasst. In diesem Abschnitt finden Sie die Versionshinweise für jede veröffentlichte Version nach v2.5.0. Wir empfehlen Ihnen, diese Seite regelmäßig zu besuchen, um sich über Updates zu informieren.</p>
+    </button></h1><p>Finden Sie heraus, was es Neues in Milvus gibt! Auf dieser Seite werden neue Funktionen, Verbesserungen, bekannte Probleme und Fehlerbehebungen in jeder Version zusammengefasst. Sie können die Versionshinweise für jede Version nach v2.5.0 in diesem Abschnitt finden. Wir empfehlen Ihnen, diese Seite regelmäßig zu besuchen, um sich über Updates zu informieren.</p>
 <h2 id="v2513" class="common-anchor-header">v2.5.13<button data-href="#v2513" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -561,7 +561,7 @@ title: Hinweise zur Veröffentlichung
       </svg>
     </button></h3><ul>
 <li>Balanciert die Sammlung mit der größten Zeilenzahl zuerst<a href="https://github.com/milvus-io/milvus/pull/40958">(#40958</a>)</li>
-<li>Unterstützung von UTF-8 String-Validierung während des Imports<a href="https://github.com/milvus-io/milvus/pull/40746">(#40746</a>)</li>
+<li>Unterstützt UTF-8 String-Validierung während des Imports<a href="https://github.com/milvus-io/milvus/pull/40746">(#40746</a>)</li>
 <li>Hinzufügen von UTF-8 Validierung für alle VARCHAR Felder<a href="https://github.com/milvus-io/milvus/pull/40993">(#40993</a>)</li>
 <li>Vermeiden Sie eine erneute Abfrage, wenn die hybride Suche nur den PK als Ausgabefeld anfordert<a href="https://github.com/milvus-io/milvus/pull/40906">(#40906</a>)</li>
 <li>Verfeinerung von Array-Ansichten zur Optimierung der Speichernutzung<a href="https://github.com/milvus-io/milvus/pull/40206">(#40206</a>)</li>
@@ -886,7 +886,7 @@ title: Hinweise zur Veröffentlichung
 <li>[2.5] Negative -1 bei der Ausführung von Verdichtungsaufgaben behoben<a href="https://github.com/milvus-io/milvus/pull/39955">(#39955</a>)</li>
 <li>[2.5] Fehler behoben, bei dem ein Segment nie von sealed zu flushing übergehen konnte<a href="https://github.com/milvus-io/milvus/pull/39996">(#39996</a>)</li>
 <li>Übersprungene Erstellung des Primärschlüssel-Index beim Laden des pk-Index<a href="https://github.com/milvus-io/milvus/pull/39922">(#39922</a>)</li>
-<li>[2.5] Übersprungene Text-Index-Erstellung, wenn das Segment nach der Sortierung Null war<a href="https://github.com/milvus-io/milvus/pull/39969">(#39969</a>)</li>
+<li>[2.5] Übersprungene Textindex-Erstellung, wenn das Segment nach der Sortierung Null war<a href="https://github.com/milvus-io/milvus/pull/39969">(#39969</a>)</li>
 <li>[2.5] Fehler bei der Suche nach der frühesten Position behoben<a href="https://github.com/milvus-io/milvus/pull/39966">(#39966</a>)</li>
 <li>Ignorierte wachsende Option, die bei der Hybridsuche verloren ging<a href="https://github.com/milvus-io/milvus/pull/39900">(#39900</a>)</li>
 <li>[2.5] Behoben: altercollection konnte die Konsistenzstufe nicht ändern<a href="https://github.com/milvus-io/milvus/pull/39902">(#39902</a>)</li>
@@ -896,7 +896,7 @@ title: Hinweise zur Veröffentlichung
 <li>[2.5] Überprüfte Sammlungsfreigabe vor Zielprüfungen<a href="https://github.com/milvus-io/milvus/pull/39843">(#39843</a>)</li>
 <li>Fehlverhalten von Rootcoord und begrenzte Ressourcen von CI behoben<a href="https://github.com/milvus-io/milvus/pull/39793">(#39793</a>)</li>
 <li>[2.5] Überprüfung der Größe von Ladefeldern und Schemaspalten entfernt<a href="https://github.com/milvus-io/milvus/pull/39834">(#39834</a>, <a href="https://github.com/milvus-io/milvus/pull/39835">#39835</a>)</li>
-<li>[2.5] Entfernt den mmap.enable-Parameter im type-Parameter beim Erstellen eines Index<a href="https://github.com/milvus-io/milvus/pull/39806">(#39806</a>)</li>
+<li>[2.5] Entfernen des mmap.enable-Parameters im type-Parameter bei der Indexerstellung<a href="https://github.com/milvus-io/milvus/pull/39806">(#39806</a>)</li>
 <li>[2.5] Beim Löschen von Eigenschaften wurde der Indexname nicht übergeben<a href="https://github.com/milvus-io/milvus/pull/39679">(#39679</a>)</li>
 <li>[2.5] Segmente gaben sowohl wachsende als auch versiegelte Ergebnisse zurück<a href="https://github.com/milvus-io/milvus/pull/39789">(#39789</a>)</li>
 <li>[2.5] Problem mit gleichzeitigen Karten behoben<a href="https://github.com/milvus-io/milvus/pull/39776">(#39776</a>)</li>
@@ -907,7 +907,7 @@ title: Hinweise zur Veröffentlichung
 <li>[2.5] Root-Benutzer konnte alle Sammlungen auflisten, auch wenn <code translate="no">common.security.rootShouldBindRole</code> gesetzt war<a href="https://github.com/milvus-io/milvus/pull/39714">(#39714</a>)</li>
 <li>[2.5] Flowgraph-Leck behoben<a href="https://github.com/milvus-io/milvus/pull/39686">(#39686</a>)</li>
 <li>[2.5] Verwendete param item formatter, um setconfig Overlay zu vermeiden<a href="https://github.com/milvus-io/milvus/pull/39636">(#39636</a>)</li>
-<li>[2.5] Metastore-Privilegname mit Privilegname "all" geprüft<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
+<li>[2.5] Metastore-Berechtigungsname mit Berechtigungsname "all" geprüft<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
 <li>[2.5] Ratenbegrenzer für RESTful v1 hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/39555">(#39555</a>)</li>
 <li>[2.5] Hardcodierte Partitionsnummer im RESTful Handler entfernt<a href="https://github.com/milvus-io/milvus/pull/40113">(#40113</a>)</li>
 </ul>
@@ -1163,7 +1163,7 @@ title: Hinweise zur Veröffentlichung
     </button></h3><ul>
 <li>Hinzufügen einer Ressourcengruppen-API für die RESTful-Schnittstelle.<a href="https://github.com/milvus-io/milvus/pull/39092">(#39092</a>)</li>
 <li>Optimierte Abrufleistung durch Nutzung von Bitset SIMD Methoden.<a href="https://github.com/milvus-io/milvus/pull/39041">(#39041</a>)</li>
-<li>Der MVCC-Zeitstempel wurde als Garantiezeitstempel verwendet, wenn er angegeben wurde.<a href="https://github.com/milvus-io/milvus/pull/39019">(#39019</a>)</li>
+<li>Der MVCC-Zeitstempel wird nun als Garantiezeitstempel verwendet, wenn er angegeben ist.<a href="https://github.com/milvus-io/milvus/pull/39019">(#39019</a>)</li>
 <li>Fehlende Lösch-Metriken wurden hinzugefügt.<a href="https://github.com/milvus-io/milvus/pull/38747">(#38747</a>)</li>
 <li>Etcd auf Version v3.5.16 aktualisiert.<a href="https://github.com/milvus-io/milvus/pull/38969">(#38969</a>)</li>
 <li>Neues Go-Paket zur Verwaltung von Protos erstellt.<a href="https://github.com/milvus-io/milvus/pull/39128">(#39128</a>)</li>
@@ -1300,7 +1300,7 @@ title: Hinweise zur Veröffentlichung
 <li>Es wurden Probleme bei der Auflistung von Berechtigungsgruppen und Sammlungen behoben.<a href="https://github.com/milvus-io/milvus/pull/38738">(#38738</a>)</li>
 <li>Der Balancer wurde korrigiert, um eine wiederholte Überlastung des gleichen Abfrageknotens zu vermeiden.<a href="https://github.com/milvus-io/milvus/pull/38724">(#38724</a>)</li>
 <li>Unerwartete Ausgleichsaufgaben, die nach Neustarts von QueryCoord ausgelöst wurden, wurden behoben.<a href="https://github.com/milvus-io/milvus/pull/38725">(#38725</a>)</li>
-<li>Es wurde behoben, dass Aktualisierungen der Ladekonfiguration nicht auf Ladesammlungen angewendet wurden.<a href="https://github.com/milvus-io/milvus/pull/38737">(#38737</a>)</li>
+<li>Es wurde behoben, dass Aktualisierungen der Ladekonfiguration nicht auf ladende Sammlungen angewendet wurden.<a href="https://github.com/milvus-io/milvus/pull/38737">(#38737</a>)</li>
 <li>Null-Lesezähler beim Datenimport behoben.<a href="https://github.com/milvus-io/milvus/pull/38695">(#38695</a>)</li>
 <li>Die Unicode-Dekodierung für JSON-Schlüssel in Ausdrücken wurde korrigiert.<a href="https://github.com/milvus-io/milvus/pull/38653">(#38653</a>)</li>
 <li>Korrigierter Interceptor DB-Name für alterCollectionField in 2.5. <a href="https://github.com/milvus-io/milvus/pull/38663">(#38663</a>)</li>
@@ -1415,6 +1415,6 @@ title: Hinweise zur Veröffentlichung
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">Optimierung des Ausdrucks-Parsing</h4><p>Verbessertes Parsen von Ausdrücken durch Implementierung von Caching für wiederholte Ausdrücke, Aktualisierung von ANTLR und Optimierung der Leistung von <code translate="no">NOT IN</code> Klauseln.</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">Verbesserte DDL-Gleichzeitigkeitsleistung</h4><p>Die Gleichzeitigkeitsleistung von Data Definition Language (DDL)-Operationen wurde optimiert.</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">Angleichung der RESTful-API-Funktionen</h4><p>Angleichung der Funktionen der RESTful-API an andere SDKs zur Gewährleistung der Konsistenz.</p>
-<h4 id="Security--Configuration-Updates" class="common-anchor-header">Aktualisierungen für Sicherheit und Konfiguration</h4><p>Unterstützung von TLS zur Sicherung der Kommunikation zwischen Knoten in komplexeren oder Unternehmensumgebungen. Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/tls.md">Sicherheitskonfiguration</a>.</p>
+<h4 id="Security--Configuration-Updates" class="common-anchor-header">Aktualisierungen für Sicherheit und Konfiguration</h4><p>Unterstützung von TLS zur Sicherung der Kommunikation zwischen Knoten in komplexeren oder Unternehmensumgebungen. Details finden Sie unter <a href="/docs/de/v2.5.x/tls.md">Sicherheitskonfiguration</a>.</p>
 <h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">Leistungsverbesserungen bei der Komprimierung</h4><p>Die maximale Segmentbegrenzung bei der gemischten Komprimierung wurde aufgehoben und kleinere Segmente werden nun zuerst priorisiert, wodurch die Effizienz verbessert und Abfragen bei großen oder fragmentierten Datensätzen beschleunigt werden.</p>
 <h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">Score-basierter Channel-Ausgleich</h4><p>Es wurde eine Richtlinie eingeführt, die die Lasten dynamisch über die Kanäle hinweg ausgleicht und so die Ressourcennutzung und die Gesamtstabilität in groß angelegten Implementierungen verbessert.</p>

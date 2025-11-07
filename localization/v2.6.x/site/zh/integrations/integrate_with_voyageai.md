@@ -36,10 +36,10 @@ summary: 本页讨论向量数据库与 VoyageAI 的 Embeddings API 的集成。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>开始之前，请确保您已准备好 Voyage API 密钥，或从<a href="https://dash.voyageai.com/api-keys">VoyageAI 网站</a>获取一个。</p>
+    </button></h2><p>开始之前，请确保已准备好 Voyage API 密钥，或从<a href="https://dash.voyageai.com/api-keys">VoyageAI 网站</a>获取一个。</p>
 <p>本示例中使用的数据是书名。你可以<a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">在这里</a>下载数据集，并将其放在运行以下代码的同一目录下。</p>
 <p>首先，安装 Milvus 和 Voyage AI 的软件包：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
+<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>。(点击屏幕上方的 "Runtime（运行时）"菜单，从下拉菜单中选择 "Restart session（重新启动会话）"）。</p>

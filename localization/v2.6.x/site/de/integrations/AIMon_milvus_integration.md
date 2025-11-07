@@ -41,7 +41,7 @@ title: Verbessern Sie die Abrufqualität Ihrer LLM-Bewerbung mit AIMon und Milvu
 <ul>
 <li>Eine LLM-Anwendung zu erstellen, die die Anfrage eines Benutzers in Bezug auf den Meetingbank-Datensatz beantwortet.</li>
 <li>Die Qualität Ihrer LLM-Anwendung zu definieren und zu messen.</li>
-<li>die Qualität Ihrer Anwendung mit Hilfe von 2 inkrementellen Ansätzen zu verbessern: eine Vektor-DB mit hybrider Suche und ein hochmoderner Re-Ranker.</li>
+<li>Die Qualität Ihrer Anwendung mit Hilfe von 2 inkrementellen Ansätzen zu verbessern: eine Vektor-DB mit hybrider Suche und ein hochmoderner Re-Ranker.</li>
 </ul>
 <h2 id="Tech-Stack" class="common-anchor-header">Technischer Stapel<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +61,7 @@ title: Verbessern Sie die Abrufqualität Ihrer LLM-Bewerbung mit AIMon und Milvu
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Vektor-Datenbank</em></h4><p>Für diese Anwendung werden wir <a href="https://milvus.io/">Milvus</a> verwenden, um große unstrukturierte Daten wie Texte, Bilder und Videos zu verwalten und zu durchsuchen.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLM-Rahmenwerk</em></h4><p>LlamaIndex ist ein Open-Source-Datenorchestrierungs-Framework, das den Aufbau großer Sprachmodellanwendungen (LLM) vereinfacht, indem es die Integration privater Daten mit LLMs erleichtert und kontextbezogene generative KI-Anwendungen durch eine Retrieval-Augmented Generation (RAG)-Pipeline ermöglicht. Wir werden LlamaIndex für dieses Tutorial verwenden, da es ein hohes Maß an Flexibilität und bessere API-Abstraktionen auf unterer Ebene bietet.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Bewertung der LLM-Ausgabequalität</em></h4><p><a href="https://www.aimon.ai">AIMon</a> bietet proprietäre Beurteilungsmodelle für Halluzinationen, Kontextqualitätsprobleme, Instruktionstreue von LLMs, Retrievalqualität und andere LLM-Zuverlässigkeitsaufgaben. Wir werden AIMon verwenden, um die Qualität der LLM-Anwendung zu beurteilen.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">Vorraussetzungen<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,17 +79,37 @@ title: Verbessern Sie die Abrufqualität Ihrer LLM-Bewerbung mit AIMon und Milvu
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>Melden Sie sich <a href="https://docs.aimon.ai/quickstart">hier</a> für ein <a href="https://docs.aimon.ai/quickstart">AIMon-Konto</a> an.</p>
-<p>Fügen Sie dieses Geheimnis zu den Colab Secrets hinzu (das "Schlüssel"-Symbol auf der linken Seite). Wenn Sie sich in einer anderen Colab-Umgebung befinden, die nicht von Google stammt, ersetzen Sie bitte den Google-Colab-bezogenen Code selbst</p>
+<li>Melden Sie sich <a href="https://docs.aimon.ai/quickstart">hier</a> für ein <a href="https://docs.aimon.ai/quickstart">AIMon-Konto</a> an.</li>
+</ol>
+<p>Fügen Sie dieses Geheimnis zu den Colab Secrets hinzu (das "Schlüssel"-Symbol auf der linken Seite)</p>
+<blockquote>
+<p>Wenn Sie sich in einer anderen Colab-Umgebung befinden, die nicht von Google stammt, ersetzen Sie bitte den Google-Colab-bezogenen Code selbst</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p>Melden Sie sich <a href="https://platform.openai.com/docs/overview">hier</a> für ein <a href="https://platform.openai.com/docs/overview">OpenAI-Konto</a> an und fügen Sie den folgenden Schlüssel in den Colab-Geheimnissen hinzu:</p>
+</ul>
+<ol start="2">
+<li>Melden Sie sich <a href="https://platform.openai.com/docs/overview">hier</a> für ein <a href="https://platform.openai.com/docs/overview">OpenAI-Konto</a> an und fügen Sie den folgenden Schlüssel in den Colab-Geheimnissen hinzu:</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">Erforderliche API-Schlüssel</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">Erforderliche API-Schlüssel<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -167,7 +187,7 @@ oai_client = OpenAI(api_key=openai_key)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Wir werden den <a href="https://meetingbank.github.io/">MeetingBank-Datensatz</a> verwenden, einen Benchmark-Datensatz, der von den Stadträten von 6 großen US-Städten erstellt wurde, um bestehende Datensätze zu ergänzen. Er enthält 1.366 Sitzungen mit mehr als 3.579 Stunden Videomaterial sowie Abschriften, PDF-Dokumente von Sitzungsprotokollen, Tagesordnungen und andere Metadaten.</p>
+    </button></h1><p>Wir werden den <a href="https://meetingbank.github.io/">MeetingBank-Datensatz</a> verwenden, einen Benchmark-Datensatz, der von den Stadträten von 6 großen US-Städten erstellt wurde, um bestehende Datensätze zu ergänzen. Er enthält 1.366 Sitzungen mit über 3.579 Stunden Videomaterial sowie Protokolle, PDF-Dokumente von Sitzungsprotokollen, Tagesordnungen und andere Metadaten.</p>
 <p>Für diese Übung haben wir einen kleineren Datensatz erstellt. Er ist <a href="https://drive.google.com/drive/folders/1v3vJahKtadi_r-8VJAsDd2eaiSRenmsa?usp=drive_link">hier</a> zu finden.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete the dataset folder if it already exists</span>
 
@@ -244,7 +264,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">Analyse</h3><p>Wir haben 258 Transkripte mit insgesamt ca. 1 Mio. Token in all diesen Transkripten. Die durchschnittliche Anzahl der Token pro Niederschrift beträgt 3864.</p>
+<h3 id="Analysis" class="common-anchor-header">Analyse<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir haben 258 Transkripte mit insgesamt ca. 1 Mio. Token in all diesen Transkripten. Die durchschnittliche Anzahl der Token pro Niederschrift beträgt 3864.</p>
 <table>
 <thead>
 <tr><th>Metrik</th><th>Wert</th></tr>
@@ -255,7 +290,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>Avg. # Anzahl Token pro Transkript</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">Abfragen</h3><p>Nachfolgend sind die 12 Abfragen aufgeführt, die wir auf das obige Transkript anwenden werden</p>
+<h3 id="Queries" class="common-anchor-header">Abfragen<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nachfolgend sind die 12 Abfragen aufgeführt, die wir auf das obige Transkript anwenden werden</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -814,7 +864,7 @@ query_engine_with_reranking = RetrieverQueryEngine.from_args(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Lassen wir die Abfragen noch einmal durchlaufen und berechnen die Gesamtqualitätsbewertung neu, um zu sehen, ob es eine Verbesserung gibt.</p>
-<p><strong>Die Neueinstufung von AIMon sollte keine zusätzlichen Latenzzeiten verursachen, da sie die Anzahl der Kontextdokumente reduziert, die an den LLM gesendet werden müssen, um eine Antwort zu generieren, wodurch der Vorgang in Bezug auf Netzwerk-E/A und LLM-Token-Verarbeitungskosten (Geld und Zeit) effizient ist.</strong></p>
+<p><strong>Die Neueinstufung von AIMon sollte keine zusätzlichen Latenzzeiten verursachen, da sie die Anzahl der Kontextdokumente reduziert, die an den LLM gesendet werden müssen, um eine Antwort zu generieren, was den Vorgang in Bezug auf Netzwerk-E/A und LLM-Token-Verarbeitungskosten (Geld und Zeit) effizient macht.</strong></p>
 <p><strong>HINWEIS: Dieser Schritt wird 2 Minuten dauern.</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> time
 
@@ -900,9 +950,9 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <li>Erstellung einer Qualitätsbasis mit Hilfe eines Brute-Force-String-Matching-Ansatzes, um Dokumente einer Abfrage zuzuordnen und diese an einen LLM weiterzuleiten.</li>
 <li>Verbesserung der Basisqualität mithilfe einer Vektor-DB (hier wurde Milvus verwendet)</li>
 <li>Weitere Verbesserung des Qualitätsergebnisses durch den anpassungsfähigen Re-Ranker von AIMon mit niedriger Latenz.</li>
-<li>Wir haben auch gezeigt, wie sich die Suchrelevanz durch den Einsatz von AIMons Re-Ranker deutlich verbessert.</li>
+<li>Wir haben auch gezeigt, wie sich die Suchrelevanz durch den Einsatz des Re-Rankers von AIMon deutlich verbessert.</li>
 </ul>
-<p>Wir möchten Sie ermutigen, mit den verschiedenen in diesem Notizbuch gezeigten Komponenten zu experimentieren, um <strong>die Qualitätsbewertung</strong> weiter <strong>zu verbessern</strong>. Eine Idee ist es, Ihre eigenen Definitionen von Qualität hinzuzufügen, indem Sie das <code translate="no">instructions</code> Feld im instruction_adherence detector oben verwenden. Eine andere Idee ist es, ein weiteres der <a href="https://docs.aimon.ai/category/checker-models">AIMon-Prüfmodelle</a> als Teil der Qualitätsmetrik hinzuzufügen.</p>
+<p>Wir möchten Sie ermutigen, mit den verschiedenen in diesem Notizbuch gezeigten Komponenten zu experimentieren, um <strong>die Qualitätsbewertung</strong> weiter <strong>zu verbessern</strong>. Eine Idee ist es, Ihre eigenen Definitionen von Qualität hinzuzufügen, indem Sie das <code translate="no">instructions</code> Feld im instruction_adherence detector oben verwenden. Eine andere Idee ist, ein weiteres der <a href="https://docs.aimon.ai/category/checker-models">AIMon-Prüfmodelle</a> als Teil der Qualitätsmetrikberechnung hinzuzufügen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df_scores = pd.DataFrame(
@@ -936,15 +986,27 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>Ansatz</th>
-      <th>Bewertung der Qualität</th>
-      <th>Retrieval-Relevanz-Score</th>
+      <th>Qualitätsbewertung</th>
+      <th>Abruf-Relevanz-Score</th>
       <th>Steigerung der Qualitätsbewertung (%)</th>
-      <th>Erhöhung der Retrieval Relevanz (%)</th>
+      <th>Steigerung der Suchrelevanz (%)</th>
     </tr>
   </thead>
   <tbody>

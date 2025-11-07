@@ -45,7 +45,7 @@ title: 使用 Milvus 和 Hugging Face 进行问题解答
 <li><code translate="no">datasets</code>,<code translate="no">transformers</code>: Hugging Face 软件包管理数据并利用模型。</li>
 <li><code translate="no">torch</code>：一个功能强大的库提供高效的张量计算和深度学习工具。</li>
 </ul>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重新启动运行时</strong>。(点击屏幕上方的 "Runtime（运行时）"菜单，从下拉菜单中选择 "Restart session（重新启动会话）"）。</p>

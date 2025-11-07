@@ -2,7 +2,7 @@
 id: aisaq.md
 title: AISAQCompatible with Milvus 2.6.4+
 summary: >-
-  AISAQはディスクベースのベクトルインデックスで、DISKANNを拡張し、RAMの制限を超えることなく億単位のデータセットを扱うことができます。圧縮されたベクトルをメモリ上に保持するDISKANNとは異なり、AISAQは全てのデータをディスク上に保持し、性能とストレージコストのバランスを取るために2つのモードを提供します。
+  AISAQはディスクベースのベクトルインデックスで、DISKANNを拡張し、RAMの制限を超えることなく億単位のデータセットを扱うことができます。圧縮されたベクトルをメモリ上に保持するDISKANNとは異なり、AISAQはすべてのデータをディスク上に保持し、性能とストレージコストのバランスをとるために2つのモードを提供します。
 beta: Milvus 2.6.4+
 ---
 <h1 id="AISAQ" class="common-anchor-header">AISAQ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#AISAQ" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>AISAQはディスクベースのベクトルインデックスで、<a href="/docs/ja/diskann.md">DISKANNを</a>拡張してRAMの制限を超えることなく億単位のデータセットを扱えるようにしたものです。圧縮されたベクトルをメモリ上に保持するDISKANNとは異なり、AISAQはすべてのデータをディスク上に保存し、パフォーマンスとストレージコストのバランスを取るために2つのモードを提供します。</p>
-<p>ベクトルデータセットが大きすぎてRAMに快適に収まらない場合や、クエリパフォーマンスをメモリ要件の削減と引き換えにすることでインフラコストを最適化する必要がある場合にAISAQをご利用ください。</p>
+<p>ベクトルデータセットが大きすぎてRAMに快適に収まらない場合や、クエリパフォーマンスをメモリ要件の削減と引き換えにすることでインフラコストを最適化する必要がある場合に、AISAQをご利用ください。</p>
 <h2 id="How-AISAQ-works" class="common-anchor-header">AISAQの仕組み<button data-href="#How-AISAQ-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

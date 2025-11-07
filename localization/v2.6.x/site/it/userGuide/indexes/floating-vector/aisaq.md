@@ -25,7 +25,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>AISAQ è un indice vettoriale basato su disco che estende <a href="/docs/it/diskann.md">DISKANN</a> per gestire insiemi di dati su scala miliardaria senza superare i limiti della RAM. A differenza di DISKANN, che mantiene i vettori compressi in memoria, AISAQ memorizza tutti i dati su disco, offrendo due modalità per bilanciare le prestazioni e i costi di archiviazione.</p>
-<p>Utilizzate AISAQ quando il vostro set di dati vettoriali è troppo grande per stare comodamente nella RAM, oppure quando dovete ottimizzare i costi dell'infrastruttura scambiando alcune prestazioni delle query con una riduzione dei requisiti di memoria.</p>
+<p>Utilizzate AISAQ quando il vostro set di dati vettoriali è troppo grande per stare comodamente nella RAM, o quando dovete ottimizzare i costi dell'infrastruttura scambiando alcune prestazioni delle query con una riduzione dei requisiti di memoria.</p>
 <h2 id="How-AISAQ-works" class="common-anchor-header">Come funziona AISAQ<button data-href="#How-AISAQ-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +97,7 @@ beta: Milvus 2.6.4+
 <h4 id="AISAQ-scale" class="common-anchor-header">AISAQ-scale</h4><p><strong>AISAQ-scale</strong> si concentra sulla <em>riduzione dello spazio su disco</em>, mantenendo tutti i dati su disco.</p>
 <p>In questa modalità:</p>
 <ul>
-<li><p>I dati PQ vengono memorizzati separatamente su disco, senza ridondanza.</p></li>
+<li><p>I dati PQ sono memorizzati separatamente su disco, senza ridondanza.</p></li>
 <li><p>Questo design riduce al minimo le dimensioni dell'indice, ma comporta un maggior numero di operazioni di I/O durante l'attraversamento del grafo.</p></li>
 <li><p>Per ridurre il sovraccarico di IOPS, AISAQ introduce due ottimizzazioni:</p>
 <ul>

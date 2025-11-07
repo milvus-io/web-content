@@ -60,7 +60,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
 </ul></li>
 <li>Milvus 系统运行时不能更改消息存储。</li>
 <li>仅支持 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级到 Milvus v2.6.3 时，必须保持当前的消息队列选择。不支持在升级过程中在不同的消息队列系统之间切换。未来版本将支持更换消息队列系统。</li>
+<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级到 Milvus v2.6.4 时，必须保持当前的消息队列选择。不支持在升级过程中在不同的消息队列系统之间切换。未来版本将支持更换消息队列系统。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">配置 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,7 +171,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>要将消息存储从 RocksMQ 迁移到 NATS，请执行以下操作：</p>
+<p>将消息存储从 RocksMQ 迁移到 NATS 的步骤如下：</p>
 <ol>
 <li><p>停止所有 DDL 操作符。</p></li>
 <li><p>调用 FlushAll API，然后在 API 调用执行完毕后停止 Milvus。</p></li>
@@ -343,7 +343,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
 <li><code translate="no">external</code>:<code translate="no">true</code> 值表示 Milvus 使用外部 Kafka 服务。</li>
 <li><code translate="no">brokerList</code>:要向其发送消息的代理列表。</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">示例</h4><p>下面的示例配置了外部 Kafka 服务。</p>
+<h4 id="Example" class="common-anchor-header">示例</h4><p>以下示例配置了外部 Kafka 服务。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

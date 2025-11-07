@@ -44,7 +44,7 @@ title: Atualizar o Cluster Milvus com o Gráfico Helm
 <li>Versão do Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Desde a versão 4.2.21 do gráfico Milvus-Helm, introduzimos o gráfico pulsar-v3.x como dependência. Para compatibilidade com versões anteriores, atualize seu helm para a versão v3.14 ou posterior, e certifique-se de adicionar a opção <code translate="no">--reset-then-reuse-values</code> sempre que usar <code translate="no">helm upgrade</code>.</p>
+<p>Desde a versão 4.2.21 do gráfico Milvus-Helm, introduzimos o gráfico pulsar-v3.x como dependência. Para compatibilidade com versões anteriores, atualize seu helm para a versão v3.14 ou posterior e certifique-se de adicionar a opção <code translate="no">--reset-then-reuse-values</code> sempre que usar <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">Verificar a carta do Milvus Helm<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -130,7 +130,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
         ></path>
       </svg>
     </button></h2><p>Desde a versão 2.2.3 do Milvus, é possível configurar os coordenadores do Milvus para funcionarem em modo de espera ativa e ativar a funcionalidade de atualização contínua para os mesmos, de modo a que o Milvus possa responder aos pedidos recebidos durante as actualizações dos coordenadores. Nas versões anteriores, os coordenadores devem ser removidos e depois criados durante uma atualização, o que pode provocar um certo tempo de inatividade do serviço.</p>
-<p>As actualizações contínuas exigem que os coordenadores trabalhem em modo de espera ativa. Pode utilizar <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">o script</a> que fornecemos para configurar os coordenadores para trabalharem em modo de espera ativa e iniciar a atualização contínua.</p>
+<p>As actualizações contínuas requerem que os coordenadores trabalhem em modo de espera ativa. Pode utilizar <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">o script</a> que fornecemos para configurar os coordenadores para trabalharem em modo de espera ativa e iniciar a atualização contínua.</p>
 <p>Com base nos recursos de atualização contínua fornecidos pelo Kubernetes, o script acima impõe uma atualização ordenada das implantações de acordo com suas dependências. Além disso, o Milvus implementa um mecanismo para garantir que os seus componentes permanecem compatíveis com os que dependem deles durante a atualização, reduzindo significativamente o potencial tempo de inatividade do serviço.</p>
 <p>O script aplica-se apenas à atualização do Milvus instalado com o Helm. A tabela a seguir lista os sinalizadores de comando disponíveis nos scripts.</p>
 <table>

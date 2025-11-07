@@ -21,7 +21,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>MilvusのFunctionモジュールを使用すると、外部のエンベッディングサービスプロバイダ（OpenAI、AWS Bedrock、Google Vertex AIなど）を自動的に呼び出すことで、生のテキストデータをベクトルエンベッディングに変換することができます。Milvusは、プロバイダーへのリクエストの送信、エンベッディングの受信、コレクションへの保存をすべて行います。セマンティック検索では、クエリベクトルではなく、生のクエリデータのみを提供する必要があります。Milvusはインジェストに使用したのと同じモデルでクエリベクトルを生成し、保存されたベクターと比較し、最も関連性の高い結果を返します。</p>
+    </button></h1><p>MilvusのFunctionモジュールを使用すると、外部のエンベッディングサービスプロバイダ（OpenAI、AWS Bedrock、Google Vertex AIなど）を自動的に呼び出すことで、生のテキストデータをベクトルエンベッディングに変換することができます。Milvusは、プロバイダーへのリクエストの送信、エンベッディングの受信、そしてコレクションへの保存の全プロセスを処理します。セマンティック検索では、クエリベクトルではなく、生のクエリデータのみを提供する必要があります。Milvusはインジェストに使用したのと同じモデルでクエリベクトルを生成し、保存されたベクターと比較し、最も関連性の高い結果を返します。</p>
 <h2 id="Limits" class="common-anchor-header">制限<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Functionモジュールが埋め込む入力フィールドには必ず値が含まれていなければなりません。</p></li>
+<li><p>Functionモジュールが埋め込む入力フィールドは常に値を含んでいなければなりません。</p></li>
 <li><p>Functionモジュールはコレクションスキーマで明示的に定義されたフィールドのみを処理します。</p></li>
 <li><p>埋め込む入力フィールドは<code translate="no">VARCHAR</code> 型でなければなりません。</p></li>
 <li><p>Functionモジュールは入力フィールドを次のように埋め込むことができる：</p>
@@ -290,6 +290,8 @@ beta: Milvus 2.6.x
 <li><p>スカラー・フィールドに対して関数が生成するベクトル埋め込みを格納するために予約された<strong>ベクトル・フィールド</strong>。</p></li>
 </ul>
 <p>次の例では、テキストデータを格納するためのスカラーフィールド<code translate="no">&quot;document&quot;</code> と、Functionモジュールによって生成される埋め込みデータを格納するためのベクトルフィールド<code translate="no">&quot;dense&quot;</code> を持つスキーマを定義しています。ベクトル次元(<code translate="no">dim</code>)は、選択した埋め込みモデルの出力に合わせて設定することを忘れないでください。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -307,10 +309,18 @@ schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64
 schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">9000</span>)
 
 <span class="hljs-comment"># Add vector field &quot;dense&quot; for storing embeddings.</span>
-<span class="hljs-comment"># IMPORTANT: Set `dim` to match the exact output dimension of the embedding model.</span>
+<span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 <span class="hljs-comment"># For instance, OpenAI&#x27;s text-embedding-3-small model outputs 1536-dimensional vectors.</span>
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">ステップ 2: スキーマへの埋め込み関数の追加<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -327,8 +337,10 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>MilvusのFunctionモジュールは、スカラーフィールドに格納された生データを自動的に埋め込みデータに変換し、明示的に定義されたベクトルフィールドに格納します。</p>
+    </button></h3><p>MilvusのFunctionモジュールは、スカラーフィールドに格納された生データを自動的にエンベッディングに変換し、明示的に定義されたベクトルフィールドに格納します。</p>
 <p>以下の例では、スカラーフィールド<code translate="no">&quot;document&quot;</code> をエンベッディングに変換するFunctionモジュール(<code translate="no">openai_embedding</code>)を追加し、結果のベクトルを先に定義した<code translate="no">&quot;dense&quot;</code> ベクトルフィールドに格納しています。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -348,11 +360,19 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the embedding function to your schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
      <th><p>説明</p></th>
-     <th><p>例 値</p></th>
+     <th><p>値の例</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
@@ -361,7 +381,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>使用する関数のタイプ。テキスト埋め込みでは、値を<code translate="no">FunctionType.TEXTEMBEDDING</code> に設定する。<br><strong>注意:</strong>Milvusはこのパラメータに<code translate="no">FunctionType.BM25</code> (スパース埋め込み変換用)と<code translate="no">FunctionType.RERANK</code> (再ランキング用)を使用できます。詳細は「<a href="/docs/ja/full-text-search.md">全文検索と</a> <a href="/docs/ja/decay-ranker-overview.md">ディケイランカーの概要</a>」を参照。</p></td>
+     <td><p>使用する関数のタイプ。テキスト埋め込みでは、値を<code translate="no">FunctionType.TEXTEMBEDDING</code> に設定する。</p><p><strong>注意</strong>: Milvusはこのパラメータに<code translate="no">FunctionType.BM25</code> (スパース埋め込み変換用)と<code translate="no">FunctionType.RERANK</code> (再ランキング用)を使用できます。詳細は「<a href="/docs/ja/full-text-search.md">全文検索と</a> <a href="/docs/ja/decay-ranker-overview.md">ディケイランカーの概要</a>」を参照。</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -391,18 +411,12 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p><code translate="no">milvus.yaml</code> のトップレベル<code translate="no">credential:</code> セクションで定義されたクレデンシャルのラベル。 </p>
-<ul>
-<li><p>指定された場合、milvusは一致するキーペアまたはAPIトークンを取得し、サーバ側でリクエストに署名します。</p></li>
-<li><p>省略された場合(<code translate="no">None</code>)、Milvusは<code translate="no">milvus.yaml</code> でターゲットモデルプロバイダ用に明示的に設定されたクレデンシャルにフォールバックします。</p></li>
-<li><p>ラベルが不明な場合、または参照されるキーが見つからない場合、呼び出しは失敗します。</p></li>
-</ul></td>
+     <td><p><code translate="no">milvus.yaml</code> のトップレベル<code translate="no">credential:</code> セクションで定義されたクレデンシャルのラベル。 </p><ul><li><p>指定された場合、milvusは一致するキーペアまたはAPIトークンを取得し、サーバ側でリクエストに署名します。</p></li><li><p>省略された場合(<code translate="no">None</code>)、Milvusは<code translate="no">milvus.yaml</code> でターゲットモデルプロバイダ用に明示的に設定されたクレデンシャルにフォールバックします。</p></li><li><p>ラベルが不明な場合、または参照されるキーが見つからない場合、呼び出しは失敗します。</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>出力埋め込みの次元数。OpenAIの第3世代モデルでは、意味情報を大きく失うことなくコストとレイテンシを削減するために、完全なベクトルを短くすることができます。詳細については、<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAIの発表ブログポストを</a>参照してください。<br>
-<strong>注：</strong>ベクトルの次元を短くする場合、スキーマの<code translate="no">add_field</code> メソッドで指定されたベクトルフィールドの<code translate="no">dim</code> 値が、埋め込み関数の最終的な出力次元と一致していることを確認してください。</p></td>
+     <td><p>出力埋め込みの次元数。OpenAI の第 3 世代モデルでは、意味情報を大きく失うことなくコストとレイテンシを削減するために、完全なベクトルを短縮することができます。詳細については、<a href="https://openai.com/blog/new-embedding-models-and-api-updates">OpenAIの発表ブログポストを</a>参照してください。</p><p><strong>注：</strong>ベクトルの次元を短くする場合、スキーマの<code translate="no">add_field</code> メソッドで指定されたベクトルフィールドの<code translate="no">dim</code> 値が、埋め込み関数の最終的な出力次元と一致していることを確認してください。</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -429,7 +443,9 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>必要なフィールドと組み込み関数でスキーマを定義した後、コレクションのインデックスを設定します。このプロセスを簡素化するために、<code translate="no">index_type</code> として<code translate="no">AUTOINDEX</code> を使用します。このオプションにより、Milvusはデータの構造に基づいて最適なインデックスタイプを選択し、設定することができます。</p>
+    </button></h3><p>必要なフィールドと組み込み関数でスキーマを定義した後、コレクションのインデックスを設定します。このプロセスを簡素化するために、<code translate="no">AUTOINDEX</code> を<code translate="no">index_type</code> として使用します。このオプションにより、milvus はデータの構造に基づいて最適なインデックスタイプを選択し、設定することができます。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -440,7 +456,15 @@ index_params.add_index(
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Create-collection" class="common-anchor-header">ステップ 4: コレクションの作成<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-4-Create-collection" class="common-anchor-header">ステップ4：コレクションの作成<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -455,7 +479,9 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>定義したスキーマとインデックスパラメータを使用して、コレクションを作成します。</p>
+    </button></h3><p>定義したスキーマとインデックスパラメータを使用してコレクションを作成します。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -463,7 +489,15 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">ステップ 5: データの挿入<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">ステップ5：データの挿入<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -478,7 +512,9 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクションとインデックスを設定したら、生データを挿入する準備が整いました。このプロセスでは、生のテキストを提供するだけでよい。先に定義したFunctionモジュールが、各テキスト入力に対応するスパースベクトルを自動的に生成します。</p>
+    </button></h3><p>コレクションとインデックスを設定したら、生データを挿入する準備ができた。このプロセスでは、生のテキストを提供するだけでよい。先ほど定義したFunctionモジュールは、各テキスト入力に対応するスパースベクトルを自動的に生成します。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
@@ -486,7 +522,15 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">ステップ6：ベクトル探索の実行<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-6-Perform-vector-search" class="common-anchor-header">ステップ6：ベクトル検索の実行<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -501,7 +545,9 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>データ挿入後、生のクエリテキストを使ってセマンティック検索を実行します。Milvusは自動的にクエリを埋め込みベクトルに変換し、類似性に基づいて関連文書を検索し、トップマッチの結果を返します。</p>
+    </button></h3><p>データ挿入後、生のクエリーテキストを使ってセマンティック検索を実行する。milvusは自動的にクエリを埋め込みベクトルに変換し、類似性に基づいて関連文書を検索し、トップマッチの結果を返します。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -515,6 +561,14 @@ results = client.search(
 
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>検索およびクエリ操作の詳細については、「<a href="/docs/ja/single-vector-search.md">基本的なベクトル検索と</a> <a href="/docs/ja/get-and-scalar-query.md">クエリ</a>」を参照してください。</p>
 <h2 id="FAQ" class="common-anchor-header">よくある質問<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -532,7 +586,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">milvus.yamlと環境変数の違いは何ですか？<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="common-anchor-header">milvus.yamlで認証情報を設定する方法と環境変数で認証情報を設定する方法の違いは何ですか？<button data-href="#Whats-the-difference-between-configuring-credentials-in-milvusyaml-vs-environment-variables" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -605,8 +659,10 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>はい、生テキストの代わりに事前に計算されたクエリベクトルを類似性検索に使用することができます。Functionモジュールは生のテキストクエリを自動的にエンベッディングに変換しますが、検索操作のdataパラメータにベクトルデータを直接指定することもできます。注意：提供するクエリベクトルの次元サイズは、Functionモジュールが生成する埋め込みベクトルの次元サイズと一致している必要があります。</p>
+    </button></h3><p>はい、生テキストの代わりに事前に計算されたクエリベクトルを類似性検索に使用することができます。Function モジュールは生のテキストクエリを自動的にエンベッディングに変換しますが、検索操作の<code translate="no">data</code> パラメータにベクトルデータを直接指定することもできます。<strong>注意</strong>：提供するクエリベクトルの次元サイズは、Functionモジュールが生成する埋め込みベクトルの次元サイズと一致している必要があります。</p>
 <p><strong>例</strong></p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -623,4 +679,12 @@ results = client.search(
     anns_field=<span class="hljs-string">&#x27;dense&#x27;</span>,
     limit=<span class="hljs-number">1</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

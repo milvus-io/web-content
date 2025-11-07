@@ -93,7 +93,7 @@ summary: >-
    <tr>
      <td><p>Definizione dello schema</p></td>
      <td><p>Un campo scalare che deve essere dichiarato esplicitamente nello schema della collezione con il tipo <code translate="no">DataType.JSON</code>.</p></td>
-     <td><p>Un campo JSON nascosto (chiamato <code translate="no">#meta</code>) che memorizza automaticamente i campi non dichiarati.</p></td>
+     <td><p>Un campo JSON nascosto (chiamato <code translate="no">$meta</code>) che memorizza automaticamente i campi non dichiarati.</p></td>
    </tr>
    <tr>
      <td><p>Caso d'uso</p></td>
@@ -108,7 +108,7 @@ summary: >-
    <tr>
      <td><p>Interrogazione</p></td>
      <td><p>Interrogare usando il nome del campo o la chiave di destinazione all'interno del campo JSON: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Interrogare direttamente utilizzando la chiave dinamica del campo: <code translate="no">"dynamic_key"</code> o tramite <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Interrogare direttamente utilizzando la chiave dinamica del campo: <code translate="no">"dynamic_key"</code> o tramite <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Operazioni di base<button data-href="#Basic-operations" class="anchor-icon" translate="no">

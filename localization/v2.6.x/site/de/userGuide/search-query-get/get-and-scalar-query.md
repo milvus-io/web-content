@@ -62,36 +62,15 @@ summary: >-
    </tr>
    <tr>
      <td><p>Obligatorische Parameter</p></td>
-     <td><ul>
-<li>Name der Sammlung</li>
-<li>Primäre Schlüssel</li>
-</ul></td>
-     <td><ul>
-<li>Name der Sammlung</li>
-<li>Ausdrücke zum Filtern</li>
-</ul></td>
-     <td><ul>
-<li><p>Name der Sammlung</p></li>
-<li><p>Ausdrücke für die Filterung</p></li>
-<li><p>Anzahl der Entitäten, die pro Abfrage zurückgegeben werden sollen</p></li>
-</ul></td>
+     <td><ul><li><p>Name der Sammlung</p></li><li><p>Primäre Schlüssel</p></li></ul></td>
+     <td><ul><li><p>Name der Sammlung</p></li><li><p>Ausdrücke zum Filtern</p></li></ul></td>
+     <td><ul><li><p>Name der Sammlung</p></li><li><p>Ausdrücke für die Filterung</p></li><li><p>Anzahl der Entitäten, die pro Abfrage zurückgegeben werden sollen</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Optionale Parameter</p></td>
-     <td><ul>
-<li>Name der Partition</li>
-<li>Ausgabefelder</li>
-</ul></td>
-     <td><ul>
-<li><p>Name des Abschnitts</p></li>
-<li><p>Anzahl der zurückzugebenden Entitäten</p></li>
-<li><p>Ausgabefelder</p></li>
-</ul></td>
-     <td><ul>
-<li><p>Name des Bereiches</p></li>
-<li><p>Anzahl der zurückzugebenden Entitäten insgesamt</p></li>
-<li><p>Ausgabe-Felder</p></li>
-</ul></td>
+     <td><ul><li><p>Name der Partition</p></li><li><p>Ausgabefelder</p></li></ul></td>
+     <td><ul><li><p>Name des Abschnitts</p></li><li><p>Anzahl der zurückzugebenden Entitäten</p></li><li><p>Ausgabefelder</p></li></ul></td>
+     <td><ul><li><p>Name des Bereichs</p></li><li><p>Anzahl der zurückzugebenden Entitäten insgesamt</p></li><li><p>Ausgabe-Felder</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Rückgabe</p></td>
@@ -116,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie Entitäten anhand ihrer Primärschlüssel suchen müssen, können Sie die <strong>Get-Methode</strong> verwenden. Die folgenden Codebeispiele gehen davon aus, dass in Ihrer Sammlung drei Felder mit den Namen <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> vorhanden sind und geben die Entitäten mit den Primärschlüsseln <code translate="no">1</code>, <code translate="no">2</code> und <code translate="no">3</code> zurück.</p>
+    </button></h2><p>Wenn Sie Entitäten anhand ihrer Primärschlüssel suchen müssen, können Sie die <strong>Get-Methode</strong> verwenden. In den folgenden Codebeispielen wird davon ausgegangen, dass in Ihrer Sammlung drei Felder mit den Namen <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> vorhanden sind.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -255,7 +234,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie Entitäten anhand von benutzerdefinierten Filterbedingungen suchen müssen, verwenden Sie die <strong>Query-Methode</strong>. Die folgenden Codebeispiele gehen davon aus, dass es drei Felder mit den Namen <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> gibt, und geben die angegebene Anzahl von Entitäten zurück, die einen <code translate="no">color</code> Wert enthalten, der mit <code translate="no">red</code> beginnt.</p>
+    </button></h2><p>Wenn Sie Entitäten anhand von benutzerdefinierten Filterbedingungen suchen müssen, verwenden Sie die Methode <strong>Query</strong>. Die folgenden Code-Beispiele gehen davon aus, dass es drei Felder mit den Namen <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> gibt, und geben die angegebene Anzahl von Entitäten zurück, die einen <code translate="no">color</code> Wert enthalten, der mit <code translate="no">red</code> beginnt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

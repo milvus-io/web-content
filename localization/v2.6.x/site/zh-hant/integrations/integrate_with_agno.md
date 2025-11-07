@@ -44,7 +44,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>安裝必要的相依性：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
+<pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus milvus-lite openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -189,4 +189,4 @@ agent.print_response(<span class="hljs-string">&quot;How to make Tom Kha Gai&quo
 ┃                                                                                                                                                             ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 </code></pre>
-<p>恭喜您，您已經了解了在 Agno 中使用 Milvus 的基本知識。如果您想了解更多如何使用 Agno，請參考<a href="https://docs.agno.com/introduction">官方文件</a>。</p>
+<p>恭喜您，您已經了解了在 Agno 中使用 Milvus 的基本知識。如果您想了解更多如何使用 Agno，請參考<a href="https://docs.agno.com/introduction">官方說明文件</a>。</p>

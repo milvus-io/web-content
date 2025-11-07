@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Las métricas de similitud se utilizan para medir las similitudes entre vectores. La elección de una métrica de distancia adecuada ayuda a mejorar significativamente la clasificación y el rendimiento de la agrupación.</p>
 <p>Actualmente, Milvus soporta estos tipos de métricas de similitud: Distancia euclidiana (<code translate="no">L2</code>), Producto interior (<code translate="no">IP</code>), Similitud coseno (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, y <code translate="no">BM25</code> (diseñada específicamente para la búsqueda de texto completo en vectores dispersos).</p>
-<p>La siguiente tabla resume la correspondencia entre los distintos tipos de campo y sus correspondientes tipos métricos.</p>
+<p>La siguiente tabla resume la correspondencia entre los distintos tipos de campo y sus correspondientes tipos de métrica.</p>
 <table>
    <tr>
      <th><p>Tipo de campo</p></th>
@@ -117,6 +117,13 @@ summary: >-
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p>Para indexar campos vectoriales en un campo <a href="/docs/es/array-of-structs.md">Array of Structs</a>, debe anteponer <code translate="no">MAX_SIM</code> al conjunto de tipos métricos mencionados anteriormente, basándose en las incrustaciones vectoriales almacenadas en dichos campos. Por ejemplo,</p>
+<ul>
+<li><p>Para un campo vectorial que almacena incrustaciones vectoriales del tipo <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, o <code translate="no">INT8_VECTOR</code>, puede utilizar <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, o <code translate="no">MAX_SIM_L2</code> como tipo métrico.</p></li>
+<li><p>Para un campo vectorial que almacena incrustaciones vectoriales del tipo <code translate="no">BINARY_VECTOR</code>, puede utilizar <code translate="no">MAX_SIM_JACCADR</code> o <code translate="no">MAX_SIM_HAMMING</code> como tipo métrico.</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">Distancia euclídea (L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

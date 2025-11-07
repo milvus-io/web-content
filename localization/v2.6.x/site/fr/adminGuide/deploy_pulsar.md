@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus utilise Pulsar ou Kafka pour gérer les journaux des modifications récentes, produire des journaux de flux et fournir des abonnements aux journaux. Pulsar est le système de stockage de messages par défaut. Cette rubrique explique comment configurer le stockage des messages avec Docker Compose ou Helm.</p>
 <p>Vous pouvez configurer Pulsar avec <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> ou sur K8s et configurer Kafka sur K8s.</p>
 <div class="alert note">
-<p><strong>Limitations de la file d'attente des messages</strong>: Lors de la mise à niveau vers Milvus v2.6.3, vous devez conserver votre choix actuel de file d'attente de messages. Le passage d'un système de file d'attente de messages à un autre pendant la mise à niveau n'est pas pris en charge. La prise en charge du changement de système de file d'attente de messages sera disponible dans les prochaines versions.</p>
+<p><strong>Limitations de la file d'attente des messages</strong>: Lors de la mise à niveau vers Milvus v2.6.4, vous devez conserver votre choix actuel de file d'attente de messages. Le passage d'un système de file d'attente de messages à un autre pendant la mise à niveau n'est pas pris en charge. La prise en charge du changement de système de file d'attente de messages sera disponible dans les prochaines versions.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Configurer Pulsar avec Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -165,7 +165,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ol>
-<li>Configurer la section <code translate="no">externalConfigFiles</code> dans le fichier <code translate="no">values.yaml</code>.</li>
+<li>Configurez la section <code translate="no">externalConfigFiles</code> dans le fichier <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -242,7 +242,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ol>
-<li>Configurez la section <code translate="no">externalConfigFiles</code> dans le fichier <code translate="no">values.yaml</code> si vous souhaitez utiliser Kafka comme système de stockage des messages.</li>
+<li>Configurez la section <code translate="no">externalConfigFiles</code> dans le fichier <code translate="no">values.yaml</code> si vous souhaitez utiliser Kafka comme système de stockage de messages.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

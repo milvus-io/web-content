@@ -1,12 +1,13 @@
 ---
 id: milvus_rag_with_dynamiq.md
 summary: >-
-  In this tutorial, we’ll explore how to seamlessly use Dynamiq with Milvus, the
-  high-performance vector database purpose-built for RAG workflows. Milvus
-  excels at efficient storage, indexing, and retrieval of vector embeddings,
-  making it an indispensable component for AI systems that demand fast and
-  precise contextual data access.
-title: Getting Started with Dynamiq and Milvus
+  En este tutorial, exploraremos cómo utilizar Dynamiq con Milvus, la base de
+  datos vectorial de alto rendimiento diseñada especialmente para flujos de
+  trabajo RAG. Milvus sobresale en el almacenamiento eficiente, indexación y
+  recuperación de incrustaciones vectoriales, por lo que es un componente
+  indispensable para los sistemas de IA que exigen un acceso rápido y preciso a
+  los datos contextuales.
+title: Primeros pasos con Dynamiq y Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -14,7 +15,7 @@ title: Getting Started with Dynamiq and Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Getting-Started-with-Dynamiq-and-Milvus" class="common-anchor-header">Getting Started with Dynamiq and Milvus<button data-href="#Getting-Started-with-Dynamiq-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Getting-Started-with-Dynamiq-and-Milvus" class="common-anchor-header">Primeros pasos con Dynamiq y Milvus<button data-href="#Getting-Started-with-Dynamiq-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -29,15 +30,15 @@ title: Getting Started with Dynamiq and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://www.getdynamiq.ai/">Dynamiq</a> is a powerful Gen AI framework that streamlines the development of AI-powered applications. With robust support for retrieval-augmented generation (RAG) and large language model (LLM) agents, Dynamiq empowers developers to create intelligent, dynamic systems with ease and efficiency.</p>
-<p>In this tutorial, we’ll explore how to seamlessly use Dynamiq with <a href="https://milvus.io/">Milvus</a>, the high-performance vector database purpose-built for RAG workflows. Milvus excels at efficient storage, indexing, and retrieval of vector embeddings, making it an indispensable component for AI systems that demand fast and precise contextual data access.</p>
-<p>This step-by-step guide will cover two core RAG workflows:</p>
+    </button></h1><p><a href="https://www.getdynamiq.ai/">Dynamiq</a> es un potente marco de Gen AI que agiliza el desarrollo de aplicaciones basadas en IA. Gracias a su sólida compatibilidad con la generación aumentada por recuperación (RAG) y los grandes agentes de modelos de lenguaje (LLM), Dynamiq permite a los desarrolladores crear sistemas inteligentes y dinámicos con facilidad y eficacia.</p>
+<p>En este tutorial, exploraremos cómo utilizar Dynamiq sin problemas con <a href="https://milvus.io/">Milvus</a>, la base de datos vectorial de alto rendimiento creada especialmente para flujos de trabajo RAG. Milvus destaca en el almacenamiento, indexación y recuperación eficientes de incrustaciones vectoriales, lo que lo convierte en un componente indispensable para los sistemas de IA que exigen un acceso a datos contextuales rápido y preciso.</p>
+<p>Esta guía paso a paso cubrirá dos flujos de trabajo principales de RAG:</p>
 <ul>
-<li><p><strong>Document Indexing Flow</strong>: Learn how to process input files (e.g., PDFs), transform their content into vector embeddings, and store them in Milvus. Leveraging Milvus’s high-performance indexing capabilities ensures your data is ready for rapid retrieval.</p></li>
-<li><p><strong>Document Retrieval Flow</strong>: Discover how to query Milvus for relevant document embeddings and use them to generate insightful, context-aware responses with Dynamiq’s LLM agents, creating a seamless AI-powered user experience.</p></li>
+<li><p><strong>Flujo de indexación de documentos</strong>: Aprenda a procesar archivos de entrada (por ejemplo, PDF), transformar su contenido en incrustaciones vectoriales y almacenarlos en Milvus. Aprovechar las capacidades de indexación de alto rendimiento de Milvus garantiza que sus datos estén listos para una rápida recuperación.</p></li>
+<li><p><strong>Flujo de recuperación de documentos</strong>: Descubra cómo consultar Milvus para incrustaciones de documentos relevantes y utilizarlos para generar respuestas perspicaces y conscientes del contexto con los agentes LLM de Dynamiq, creando una experiencia de usuario sin fisuras impulsada por la IA.</p></li>
 </ul>
-<p>By the end of this tutorial, you’ll gain a solid understanding of how Milvus and Dynamiq work together to build scalable, context-aware AI systems tailored to your needs.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>Al final de este tutorial, obtendrá una sólida comprensión de cómo Milvus y Dynamiq trabajan juntos para construir sistemas de IA escalables y conscientes del contexto adaptados a sus necesidades.</p>
+<h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,17 +53,47 @@ title: Getting Started with Dynamiq and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Download required libraries</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus</span>
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Descarga de las bibliotecas necesarias<button data-href="#Download-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Si utilizas Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y selecciona "Reiniciar sesión" en el menú desplegable).</p>
 </div>
-<h3 id="Configure-the-LLM-agent" class="common-anchor-header">Configure the LLM agent</h3><p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<h3 id="Configure-the-LLM-agent" class="common-anchor-header">Configurar el agente LLM<button data-href="#Configure-the-LLM-agent" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>En este ejemplo utilizaremos OpenAI como LLM. Deberás preparar la <a href="https://platform.openai.com/docs/quickstart">clave api</a> <code translate="no">OPENAI_API_KEY</code> como variable de entorno.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="RAG---Document-Indexing-Flow" class="common-anchor-header">RAG - Document Indexing Flow<button data-href="#RAG---Document-Indexing-Flow" class="anchor-icon" translate="no">
+<h2 id="RAG---Document-Indexing-Flow" class="common-anchor-header">RAG - Flujo de indexación de documentos<button data-href="#RAG---Document-Indexing-Flow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,9 +108,24 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This tutorial demonstrates a Retrieval-Augmented Generation (RAG) workflow for indexing documents with Milvus as the vector database. The workflow takes input PDF files, processes them into smaller chunks, generates vector embeddings using OpenAI’s embedding model, and stores the embeddings in a Milvus collection for efficient retrieval.</p>
-<p>By the end of this workflow, you will have a scalable and efficient document indexing system that supports future RAG tasks like semantic search and question answering.</p>
-<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Import Required Libraries and Initialize Workflow</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Importing necessary libraries for the workflow</span>
+    </button></h2><p>Este tutorial muestra un flujo de trabajo RAG (Retrieval-Augmented Generation) para indexar documentos con Milvus como base de datos vectorial. El flujo de trabajo toma archivos PDF de entrada, los procesa en trozos más pequeños, genera incrustaciones vectoriales utilizando el modelo de incrustación de OpenAI y almacena las incrustaciones en una colección Milvus para una recuperación eficiente.</p>
+<p>Al final de este flujo de trabajo, tendrá un sistema de indexación de documentos escalable y eficiente que soporta futuras tareas RAG como la búsqueda semántica y la respuesta a preguntas.</p>
+<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Importe las bibliotecas necesarias e inicie el flujo de trabajo<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Importing necessary libraries for the workflow</span>
 <span class="hljs-keyword">from</span> io <span class="hljs-keyword">import</span> BytesIO
 <span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
 <span class="hljs-keyword">from</span> dynamiq.nodes <span class="hljs-keyword">import</span> InputTransformer
@@ -96,12 +142,42 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <span class="hljs-comment"># Initialize the workflow</span>
 rag_wf = Workflow()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-PDF-Converter-Node" class="common-anchor-header">Define PDF Converter Node</h3><pre><code translate="no" class="language-python">converter = PyPDFConverter(document_creation_mode=<span class="hljs-string">&quot;one-doc-per-page&quot;</span>)
+<h3 id="Define-PDF-Converter-Node" class="common-anchor-header">Definir nodo conversor de PDF<button data-href="#Define-PDF-Converter-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">converter = PyPDFConverter(document_creation_mode=<span class="hljs-string">&quot;one-doc-per-page&quot;</span>)
 converter_added = rag_wf.flow.add_nodes(
     converter
 )  <span class="hljs-comment"># Add node to the DAG (Directed Acyclic Graph)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Document-Splitter-Node" class="common-anchor-header">Define Document Splitter Node</h3><pre><code translate="no" class="language-python">document_splitter = DocumentSplitter(
+<h3 id="Define-Document-Splitter-Node" class="common-anchor-header">Definir nodo divisor de documentos<button data-href="#Define-Document-Splitter-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">document_splitter = DocumentSplitter(
     split_by=<span class="hljs-string">&quot;sentence&quot;</span>,  <span class="hljs-comment"># Splits documents into sentences</span>
     split_length=<span class="hljs-number">10</span>,
     split_overlap=<span class="hljs-number">1</span>,
@@ -115,7 +191,22 @@ converter_added = rag_wf.flow.add_nodes(
 )  <span class="hljs-comment"># Set dependency on the PDF converter</span>
 splitter_added = rag_wf.flow.add_nodes(document_splitter)  <span class="hljs-comment"># Add to the DAG</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Embedding-Node" class="common-anchor-header">Define Embedding Node</h3><pre><code translate="no" class="language-python">embedder = OpenAIDocumentEmbedder(
+<h3 id="Define-Embedding-Node" class="common-anchor-header">Definir nodo de incrustación<button data-href="#Define-Embedding-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">embedder = OpenAIDocumentEmbedder(
     connection=OpenAIConnection(api_key=os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>]),
     input_transformer=InputTransformer(
         selector={
@@ -127,7 +218,22 @@ splitter_added = rag_wf.flow.add_nodes(document_splitter)  <span class="hljs-com
 )  <span class="hljs-comment"># Set dependency on the splitter</span>
 document_embedder_added = rag_wf.flow.add_nodes(embedder)  <span class="hljs-comment"># Add to the DAG</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Milvus-Vector-Store-Node" class="common-anchor-header">Define Milvus Vector Store Node</h3><pre><code translate="no" class="language-python">vector_store = (
+<h3 id="Define-Milvus-Vector-Store-Node" class="common-anchor-header">Definir nodo Milvus Vector Store<button data-href="#Define-Milvus-Vector-Store-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">vector_store = (
     MilvusDocumentWriter(
         connection=MilvusConnection(
             deployment_type=MilvusDeploymentType.FILE, uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
@@ -151,37 +257,52 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 2024-11-19 22:14:05 - DEBUG - Successfully created an index on collection: my_milvus_collection
 </code></pre>
 <div class="alert note">
-<p>Milvus offers two deployment types, catering to different use cases:</p>
+<p>Milvus ofrece dos tipos de despliegue, para diferentes casos de uso:</p>
 <ol>
 <li><strong>MilvusDeploymentType.FILE</strong></li>
 </ol>
 <ul>
-<li>Ideal for <strong>local prototyping</strong> or <strong>small-scale data</strong> storage.</li>
-<li>Set the <code translate="no">uri</code> to a local file path (e.g., <code translate="no">./milvus.db</code>) to leverage <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>, which automatically stores all data in the specified file.</li>
-<li>This is a convenient option for <strong>quick setup</strong> and <strong>experimentation</strong>.</li>
+<li>Ideal para <strong>prototipos locales</strong> o almacenamiento de <strong>datos a pequeña escala</strong>.</li>
+<li>Establezca <code translate="no">uri</code> en una ruta de archivo local (por ejemplo, <code translate="no">./milvus.db</code>) para aprovechar <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>, que almacena automáticamente todos los datos en el archivo especificado.</li>
+<li>Esta es una opción conveniente para <strong>una rápida configuración</strong> y <strong>experimentación</strong>.</li>
 </ul>
 <ol start="2">
-<li><strong>MilvusDeploymentType.HOST</strong></li>
+<li><strong>MilvusTipoDespliegue.HOST</strong></li>
 </ol>
 <ul>
-<li><p>Designed for <strong>large-scale data</strong> scenarios, such as managing over a million vectors.</p>
-<p><strong>Self-Hosted Server</strong></p>
+<li><p>Diseñado para escenarios de <strong>datos a gran escala</strong>, como la gestión de más de un millón de vectores.</p>
+<p><strong>Servidor autoalojado</strong></p>
 <ul>
-<li>Deploy a high-performance Milvus server using <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>.</li>
-<li>Configure the server’s address and port as the <code translate="no">uri</code> (e.g., <code translate="no">http://localhost:19530</code>).</li>
-<li>If authentication is enabled:</li>
-<li>Provide <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> as the <code translate="no">token</code>.</li>
-<li>If authentication is disabled:</li>
-<li>Leave the <code translate="no">token</code> unset.</li>
+<li>Despliegue un servidor Milvus de alto rendimiento utilizando <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>.</li>
+<li>Configure la dirección y el puerto del servidor como <code translate="no">uri</code> (por ejemplo, <code translate="no">http://localhost:19530</code>).</li>
+<li>Si la autenticación está habilitada:</li>
+<li>Proporcione <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> como el <code translate="no">token</code>.</li>
+<li>Si la autenticación está deshabilitada:</li>
+<li>Deje <code translate="no">token</code> sin configurar.</li>
 </ul>
-<p><strong>Zilliz Cloud (Managed Service)</strong></p>
+<p><strong>Zilliz Cloud (servicio gestionado)</strong></p>
 <ul>
-<li>For a fully managed, cloud-based Milvus experience, use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</li>
-<li>Set the <code translate="no">uri</code> and <code translate="no">token</code> according to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> provided in the Zilliz Cloud console.</li>
+<li>Para una experiencia Milvus totalmente gestionada y basada en la nube, utilice <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</li>
+<li>Configure <code translate="no">uri</code> y <code translate="no">token</code> de acuerdo con el <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">punto final público y la clave de API</a> proporcionados en la consola de Zilliz Cloud.</li>
 </ul></li>
 </ul>
 </div>
-<h3 id="Define-Input-Data-and-Run-the-Workflow" class="common-anchor-header">Define Input Data and Run the Workflow</h3><pre><code translate="no" class="language-python">file_paths = [<span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>]
+<h3 id="Define-Input-Data-and-Run-the-Workflow" class="common-anchor-header">Defina los datos de entrada y ejecute el flujo de trabajo<button data-href="#Define-Input-Data-and-Run-the-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">file_paths = [<span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>]
 input_data = {
     <span class="hljs-string">&quot;files&quot;</span>: [BytesIO(<span class="hljs-built_in">open</span>(path, <span class="hljs-string">&quot;rb&quot;</span>).read()) <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> file_paths],
     <span class="hljs-string">&quot;metadata&quot;</span>: [{<span class="hljs-string">&quot;filename&quot;</span>: path} <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> file_paths],
@@ -214,9 +335,9 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 2024-11-19 22:14:10 - INFO - Flow b30b48ec-d5d2-4e4c-8e25-d6976c8a9c17: execution succeeded in 1.3s.
 2024-11-19 22:14:10 - INFO - Workflow 87878444-6a3d-43f3-ae32-0127564a959f: execution succeeded in 1.3s.
 </code></pre>
-<p>Through this workflow, we have successfully implemented a document indexing pipeline using Milvus as the vector database and OpenAI’s embedding model for semantic representation. This setup enables fast and accurate vector-based retrieval, forming the foundation for RAG workflows like semantic search, document retrieval, and contextual AI-driven interactions.</p>
-<p>With Milvus’s scalable storage capabilities and Dynamiq’s orchestration, this solution is ready for both prototyping and large-scale production deployments. You can now extend this pipeline to include additional tasks like retrieval-based question answering or AI-driven content generation.</p>
-<h2 id="RAG-Document-Retrieval-Flow" class="common-anchor-header">RAG Document Retrieval Flow<button data-href="#RAG-Document-Retrieval-Flow" class="anchor-icon" translate="no">
+<p>A través de este flujo de trabajo, hemos implementado con éxito una canalización de indexación de documentos utilizando Milvus como base de datos vectorial y el modelo de incrustación de OpenAI para la representación semántica. Esta configuración permite una recuperación rápida y precisa basada en vectores, formando la base para flujos de trabajo RAG como la búsqueda semántica, la recuperación de documentos y las interacciones contextuales impulsadas por IA.</p>
+<p>Con las capacidades de almacenamiento escalable de Milvus y la orquestación de Dynamiq, esta solución está lista tanto para prototipos como para despliegues de producción a gran escala. Ahora puede ampliar esta canalización para incluir tareas adicionales, como la respuesta a preguntas basada en la recuperación o la generación de contenidos impulsada por la IA.</p>
+<h2 id="RAG-Document-Retrieval-Flow" class="common-anchor-header">Flujo de recuperación de documentos RAG<button data-href="#RAG-Document-Retrieval-Flow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,9 +352,24 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this tutorial, we implement a Retrieval-Augmented Generation (RAG) document retrieval workflow. This workflow takes a user query, generates a vector embedding for it, retrieves the most relevant documents from a Milvus vector database, and uses a large language model (LLM) to generate a detailed and context-aware answer based on the retrieved documents.</p>
-<p>By following this workflow, you will create an end-to-end solution for semantic search and question answering, combining the power of vector-based document retrieval with the capabilities of OpenAI’s advanced LLMs. This approach enables efficient and intelligent responses to user queries by leveraging the stored knowledge in your document database.</p>
-<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Import Required Libraries and Initialize Workflow</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
+    </button></h2><p>En este tutorial, implementamos un flujo de trabajo de recuperación de documentos con generación mejorada de recuperación (RAG). Este flujo de trabajo toma una consulta de usuario, genera una incrustación vectorial para ella, recupera los documentos más relevantes de una base de datos vectorial Milvus y utiliza un modelo de lenguaje amplio (LLM) para generar una respuesta detallada y consciente del contexto basada en los documentos recuperados.</p>
+<p>Siguiendo este flujo de trabajo, creará una solución integral para la búsqueda semántica y la respuesta a preguntas, combinando la potencia de la recuperación de documentos basada en vectores con las capacidades de los LLM avanzados de OpenAI. Este enfoque permite respuestas eficientes e inteligentes a las consultas de los usuarios aprovechando el conocimiento almacenado en su base de datos de documentos.</p>
+<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Importe las bibliotecas necesarias e inicialice el flujo de trabajo<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
 <span class="hljs-keyword">from</span> dynamiq.connections <span class="hljs-keyword">import</span> (
     OpenAI <span class="hljs-keyword">as</span> OpenAIConnection,
     Milvus <span class="hljs-keyword">as</span> MilvusConnection,
@@ -247,7 +383,22 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 <span class="hljs-comment"># Initialize the workflow</span>
 retrieval_wf = Workflow()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-OpenAI-Connection-and-Text-Embedder" class="common-anchor-header">Define OpenAI Connection and Text Embedder</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Establish OpenAI connection</span>
+<h3 id="Define-OpenAI-Connection-and-Text-Embedder" class="common-anchor-header">Definir la conexión OpenAI y el incrustador de texto<button data-href="#Define-OpenAI-Connection-and-Text-Embedder" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Establish OpenAI connection</span>
 openai_connection = OpenAIConnection(api_key=os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>])
 
 <span class="hljs-comment"># Define the text embedder node</span>
@@ -259,7 +410,22 @@ embedder = OpenAITextEmbedder(
 <span class="hljs-comment"># Add the embedder node to the workflow</span>
 embedder_added = retrieval_wf.flow.add_nodes(embedder)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Milvus-Document-Retriever" class="common-anchor-header">Define Milvus Document Retriever</h3><pre><code translate="no" class="language-python">document_retriever = (
+<h3 id="Define-Milvus-Document-Retriever" class="common-anchor-header">Definir el recuperador de documentos Milvus<button data-href="#Define-Milvus-Document-Retriever" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">document_retriever = (
     MilvusDocumentRetriever(
         connection=MilvusConnection(
             deployment_type=MilvusDeploymentType.FILE, uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
@@ -280,7 +446,22 @@ milvus_retriever_added = retrieval_wf.flow.add_nodes(document_retriever)
 2024-11-19 22:14:19 - DEBUG - Created new connection using: 98d1132773af4298a894ad5925845fd2
 2024-11-19 22:14:19 - INFO - Collection my_milvus_collection already exists. Skipping creation.
 </code></pre>
-<h3 id="Define-the-Prompt-Template" class="common-anchor-header">Define the Prompt Template</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the prompt template for the LLM</span>
+<h3 id="Define-the-Prompt-Template" class="common-anchor-header">Definir la plantilla de solicitud<button data-href="#Define-the-Prompt-Template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the prompt template for the LLM</span>
 prompt_template = <span class="hljs-string">&quot;&quot;&quot;
 Please answer the question based on the provided context.
 
@@ -295,7 +476,22 @@ Context:
 <span class="hljs-comment"># Create the prompt object</span>
 prompt = Prompt(messages=[Message(content=prompt_template, role=<span class="hljs-string">&quot;user&quot;</span>)])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-the-Answer-Generator" class="common-anchor-header">Define the Answer Generator</h3><pre><code translate="no" class="language-python">answer_generator = (
+<h3 id="Define-the-Answer-Generator" class="common-anchor-header">Definir el generador de respuestas<button data-href="#Define-the-Answer-Generator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">answer_generator = (
     OpenAI(
         connection=openai_connection,
         model=<span class="hljs-string">&quot;gpt-4o&quot;</span>,
@@ -313,7 +509,22 @@ prompt = Prompt(messages=[Message(content=prompt_template, role=<span class="hlj
 <span class="hljs-comment"># Add the answer generator node to the workflow</span>
 answer_generator_added = retrieval_wf.flow.add_nodes(answer_generator)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Run-the-Workflow" class="common-anchor-header">Run the Workflow</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Run the workflow with a sample query</span>
+<h3 id="Run-the-Workflow" class="common-anchor-header">Ejecutar el flujo de trabajo<button data-href="#Run-the-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Run the workflow with a sample query</span>
 sample_query = <span class="hljs-string">&quot;What is the Advanced Search Algorithms in Milvus?&quot;</span>
 
 result = retrieval_wf.run(input_data={<span class="hljs-string">&quot;query&quot;</span>: sample_query})

@@ -39,7 +39,7 @@ summary: 이 페이지에서는 OpenAI의 임베딩 API와 벡터 데이터베�
     </button></h2><p>시작하기 전에 OpenAI API 키가 준비되어 있는지 확인하거나 <a href="https://openai.com/index/openai-api/">OpenAI 웹사이트에서</a> 키를 받으세요.</p>
 <p>이 예제에서 사용된 데이터는 책 제목입니다. <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">여기에서</a> 데이터 세트를 다운로드하여 다음 코드를 실행하는 동일한 디렉터리에 넣을 수 있습니다.</p>
 <p>먼저 Milvus 및 OpenAI용 패키지를 설치합니다:</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus
+<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다. (화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택합니다).</p>

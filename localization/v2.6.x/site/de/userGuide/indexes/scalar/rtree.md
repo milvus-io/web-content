@@ -58,7 +58,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>Erstellen Sie Blattknoten:</strong> Berechnen Sie für jedes Geometrieobjekt sein <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">Minimum Bounding Rectangle</a> (MBR), d. h. das kleinste Rechteck, das das Objekt vollständig enthält, und speichern Sie es als Blattknoten.</p></li>
-<li><p><strong>Gruppieren in größere Boxen:</strong> Fassen Sie nahe gelegene Blattknoten zusammen und umhüllen Sie jede Gruppe mit einem neuen MBR, so dass interne Knoten entstehen. Beispiel: Gruppe <strong>B</strong> enthält <strong>D</strong> und <strong>E</strong>; Gruppe <strong>C</strong> enthält <strong>F</strong> und <strong>G</strong>.</p></li>
+<li><p><strong>Gruppieren in größere Boxen:</strong> Fassen Sie nahe gelegene Blattknoten zusammen und umhüllen Sie jede Gruppe mit einem neuen MBR, indem Sie interne Knoten bilden. Beispiel: Gruppe <strong>B</strong> enthält <strong>D</strong> und <strong>E</strong>; Gruppe <strong>C</strong> enthält <strong>F</strong> und <strong>G</strong>.</p></li>
 <li><p><strong>Fügen Sie den Wurzelknoten hinzu:</strong> Fügen Sie einen Wurzelknoten hinzu, dessen MBR alle internen Gruppen umfasst, so dass eine in der Höhe ausgeglichene Baumstruktur entsteht.</p></li>
 </ol>
 <p>

@@ -57,7 +57,7 @@ title: MilvusとLlamaIndexによる検索拡張生成(RAG)
         ></path>
       </svg>
     </button></h3><p>このページのコードスニペットにはpymilvusとllamaindexの依存関係が必要です。以下のコマンドでインストールできます：</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -188,7 +188,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">enable_sparse (bool)</code>:スパース埋め込みを有効または無効にするブール値のフラグ。デフォルトはFalse。</li>
 <li><code translate="no">sparse_embedding_field (str)</code>:スパース埋め込みフィールドの名前。デフォルトは DEFAULT_SPARSE_EMBEDDING_KEY です。</li>
 <li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>:enable_sparse が True の場合、テキストをスパース埋め込みに変換するためにこのオブジェクトを提供する必要があります。Noneの場合、デフォルトのスパース埋め込み関数(BGEM3SparseEmbeddingFunction)が使用される。</li>
-<li><code translate="no">sparse_index_config (dict, optional)</code>:スパース埋め込みインデックスの構築に使用される設定。デフォルトはNoneです。</li>
+<li><code translate="no">sparse_index_config (dict, optional)</code>:スパース埋め込みインデックスを構築するために使用される設定。デフォルトはNoneです。</li>
 </ul>
 <h4 id="hybrid-ranker" class="common-anchor-header">ハイブリッドランカー</h4><ul>
 <li><p><code translate="no">hybrid_ranker (str)</code>:ハイブリッド検索クエリで使用するランカーのタイプを指定します。現在は["RRFRanker", "WeightedRanker"]のみサポート。デフォルトは "RRFRanker"。</p></li>
@@ -327,7 +327,7 @@ res = query_engine.query(<span class="hljs-string">&quot;What challenges did the
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">The disease posed challenges related to the adverse impact on the business and operations, including reduced demand for Mobility offerings globally, affecting travel behavior and demand. Additionally, the pandemic led to driver supply constraints, impacted by concerns regarding COVID-19, with uncertainties about when supply levels would return to normal. The rise of the Omicron variant further affected travel, resulting in advisories and restrictions that could adversely impact both driver supply and consumer demand for Mobility offerings.
 </code></pre>
-<p>今度はファイル<code translate="no">paul_graham_essay.txt</code> から取得すると、異なる結果が得られます。</p>
+<p>こ こ で フ ァ イ ル<code translate="no">paul_graham_essay.txt</code> か ら 文書を取得す る と 、 別の結果が得 ら れます。</p>
 <pre><code translate="no" class="language-python">filters = MetadataFilters(
     filters=[ExactMatchFilter(key=<span class="hljs-string">&quot;file_name&quot;</span>, value=<span class="hljs-string">&quot;paul_graham_essay.txt&quot;</span>)]
 )

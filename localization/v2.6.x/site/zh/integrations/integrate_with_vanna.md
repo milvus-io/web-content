@@ -38,7 +38,7 @@ title: 用 Vanna 和 Milvus 编写 SQL
         ></path>
       </svg>
     </button></h2><p>在运行本笔记本之前，请确保已安装以下依赖项：</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span>
+<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
@@ -199,7 +199,7 @@ Adding ddl: CREATE TABLE User (
     Email TEXT NOT NULL UNIQUE
 )
 </code></pre>
-<p>除了对 DDL 数据进行训练，我们还可以对数据库的文档和 SQL 查询进行训练。</p>
+<p>除了对 DDL 数据进行训练外，我们还可以对数据库的文档和 SQL 查询进行训练。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add documentation about your business terminology or definitions.</span>
 vn_milvus.train(
     documentation=<span class="hljs-string">&quot;ABC Corp specializes in cutting-edge technology solutions and innovation.&quot;</span>

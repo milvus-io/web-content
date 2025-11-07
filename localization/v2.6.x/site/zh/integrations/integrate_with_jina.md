@@ -36,7 +36,8 @@ title: Milvus 与 Jina 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI 于 2020 年在柏林成立，是一家领先的人工智能公司，致力于通过其搜索基础彻底改变人工智能的未来。Jina AI 专注于多模态人工智能，旨在通过其集成的组件套件（包括 embeddings、Rerankers、prompt ops 和核心基础架构），使企业和开发人员能够利用多模态数据的力量来创造价值和节约成本。 Jina AI 的尖端 embeddings 拥有顶级性能，采用 8192 token 长度模型，是全面数据表示的理想选择。这些 Embeddings 提供多语言支持，并与 OpenAI 等领先平台无缝集成，为跨语言应用提供了便利。</p>
+    </button></h2><p>Jina AI 于 2020 年在柏林成立，是一家领先的人工智能公司，致力于通过其搜索基础彻底改变人工智能的未来。Jina AI 专注于多模态人工智能，旨在通过其集成的组件套件，包括 Embeddings、Rerankers、prompt ops 和核心基础设施，使企业和开发人员能够利用多模态数据的力量创造价值和节约成本。<br>
+Jina AI 的尖端 Embeddings 拥有顶级性能，其 8192 令牌长度模型是全面数据表示的理想选择。这些 Embeddings 提供多语言支持，并与 OpenAI 等领先平台无缝集成，为跨语言应用提供了便利。</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Milvus 和 Jina AI 的嵌入式技术<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,9 +69,9 @@ title: Milvus 与 Jina 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina 嵌入已经集成到 PyMilvus 模型库中。现在，我们将通过代码示例来展示如何实际使用 Jina embeddings。</p>
+    </button></h2><p>Jina 嵌入已经集成到 PyMilvus 模型库中。现在，我们将通过代码示例来演示如何实际使用 Jina embeddings。</p>
 <p>在开始之前，我们需要为 PyMilvus 安装模型库。</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

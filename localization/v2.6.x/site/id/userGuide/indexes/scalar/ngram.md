@@ -99,7 +99,7 @@ Contoh: dengan <code translate="no">[2,4]</code> dan kata <code translate="no">&
 <li><strong>3-gram:</strong> <code translate="no">tex</code>, <code translate="no">ext</code></li>
 <li><strong>4-gram</strong>: <code translate="no">text</code></li>
 </ul></li>
-<li><p>Penguraian N-gram adalah berbasis karakter dan bahasa-agnostik. Sebagai contoh, dalam bahasa Mandarin, <code translate="no">&quot;向量数据库&quot;</code> dengan <code translate="no">min_gram = 2</code> diuraikan menjadi: <code translate="no">&quot;向量&quot;</code>, <code translate="no">&quot;量数&quot;</code>, <code translate="no">&quot;数据&quot;</code>, <code translate="no">&quot;据库&quot;</code>.</p></li>
+<li><p>Penguraian N-gram adalah berbasis karakter dan bahasa-agnostik. Misalnya, dalam bahasa Mandarin, <code translate="no">&quot;向量数据库&quot;</code> dengan <code translate="no">min_gram = 2</code> diuraikan menjadi: <code translate="no">&quot;向量&quot;</code>, <code translate="no">&quot;量数&quot;</code>, <code translate="no">&quot;数据&quot;</code>, <code translate="no">&quot;据库&quot;</code>.</p></li>
 <li><p>Spasi dan tanda baca diperlakukan sebagai karakter selama penguraian.</p></li>
 <li><p>Penguraian mempertahankan huruf besar/kecil, dan pencocokan peka terhadap huruf besar/kecil. Sebagai contoh, <code translate="no">&quot;Database&quot;</code> dan <code translate="no">&quot;database&quot;</code> akan menghasilkan n-gram yang berbeda dan membutuhkan pencocokan huruf yang tepat selama kueri.</p></li>
 </ul>
@@ -253,7 +253,7 @@ client.create_index(
 <li><p>Nilai tersebut di-cast ke <code translate="no">VARCHAR</code> sebelum tokenisasi n-gram.</p></li>
 <li><p>Milvus menghasilkan substring dengan panjang 2 hingga 4 dan menyimpannya dalam indeks terbalik.</p></li>
 </ul>
-<p>Untuk informasi lebih lanjut tentang cara mengindeks bidang JSON, lihat <a href="/docs/id/use-json-fields.md">Bidang JSON</a>.</p>
+<p>Untuk informasi lebih lanjut tentang cara mengindeks bidang JSON, lihat Pengindeksan <a href="/docs/id/json-indexing.md">JSON</a>.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Kueri yang dipercepat oleh NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -298,6 +298,33 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>Untuk informasi lebih lanjut tentang sintaks ekspresi filter, lihat <a href="/docs/id/basic-operators.md">Operator Dasar</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Menghapus indeks<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Gunakan metode <code translate="no">drop_index()</code> untuk menghapus indeks yang ada dari koleksi.</p>
+<div class="alert note">
+<ul>
+<li><p>Pada <strong>v2.6.3</strong> atau yang lebih lama, Anda harus melepaskan koleksi sebelum membuang indeks skalar.</p></li>
+<li><p>Mulai <strong>v2.6.4</strong> atau yang lebih baru, Anda dapat membuang indeks skalar secara langsung setelah tidak lagi diperlukan-tidak perlu melepaskan koleksi terlebih dahulu.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">Catatan penggunaan<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

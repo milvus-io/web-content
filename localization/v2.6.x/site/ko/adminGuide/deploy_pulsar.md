@@ -22,7 +22,7 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
     </button></h1><p>Milvus는 최근 변경 사항의 로그 관리, 스트림 로그 출력, 로그 구독 제공을 위해 Pulsar 또는 Kafka를 사용합니다. 기본 메시지 저장 시스템은 Pulsar입니다. 이 항목에서는 Docker Compose 또는 Helm으로 메시지 저장소를 구성하는 방법을 소개합니다.</p>
 <p><a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> 또는 K8에서 Pulsar를 구성하고 K8에서 Kafka를 구성할 수 있습니다.</p>
 <div class="alert note">
-<p><strong>메시지 큐 제한</strong>: Milvus v2.6.3으로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중 다른 메시지 큐 시스템 간 전환은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한</strong>: Milvus v2.6.4로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중 다른 메시지 큐 시스템 간 전환은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker Compose로 Pulsar 구성하기<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

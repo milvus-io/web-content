@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在构建产品目录、内容管理系统或用户偏好引擎等应用程序时，您通常需要在存储向量 Embeddings 的同时存储灵活的元数据。产品属性因类别而异，用户偏好随时间演变，文档属性具有复杂的嵌套结构。Milvus 中的 JSON 字段解决了这一难题，允许您在不牺牲性能的情况下存储和查询灵活的结构化数据。</p>
+    </button></h1><p>在构建产品目录、内容管理系统或用户偏好引擎等应用程序时，您往往需要在存储向量 Embeddings 的同时存储灵活的元数据。产品属性因类别而异，用户偏好随时间演变，文档属性具有复杂的嵌套结构。Milvus 中的 JSON 字段解决了这一难题，允许您在不牺牲性能的情况下存储和查询灵活的结构化数据。</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">什么是 JSON 字段？<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,7 +88,7 @@ summary: >-
    <tr>
      <td><p>Schema 定义</p></td>
      <td><p>标量字段，必须在 Collections Schema 中以<code translate="no">DataType.JSON</code> 类型明确声明。</p></td>
-     <td><p>一个隐藏的 JSON 字段（名为<code translate="no">#meta</code> ），可自动存储未声明的字段。</p></td>
+     <td><p>一个隐藏的 JSON 字段（名为<code translate="no">$meta</code> ），可自动存储未声明的字段。</p></td>
    </tr>
    <tr>
      <td><p>使用情况</p></td>
@@ -103,7 +103,7 @@ summary: >-
    <tr>
      <td><p>查询</p></td>
      <td><p>使用字段名或 JSON 字段内的目标键进行查询：<code translate="no">metadata["key"]</code> 。</p></td>
-     <td><p>直接使用 Dynamic Field 关键字查询：<code translate="no">"dynamic_key"</code> 或通过<code translate="no">#meta</code> ：<code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>直接使用 Dynamic Field 关键字查询：<code translate="no">"dynamic_key"</code> 或通过<code translate="no">$meta</code> ：<code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">基本操作符<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -340,7 +340,7 @@ res = client.search(
      <td><p>不适用于数字/范围筛选器</p></td>
    </tr>
 </table>
-<p><strong>提示：</strong>您可以将这些方法结合起来--例如，使用 JSON 切碎来加速广泛查询，使用 JSON 索引来处理高频数组键，使用 NGRAM 索引来进行灵活的文本搜索。</p>
+<p><strong>提示：</strong>您可以将这些方法结合起来--例如，使用 JSON 切碎来加速广泛的查询，使用 JSON 索引来处理高频数组键，使用 NGRAM 索引来进行灵活的文本搜索。</p>
 <p>有关实施细节，请参阅</p>
 <ul>
 <li><p><a href="/docs/zh/json-indexing.md">JSON 索引</a></p></li>
@@ -431,7 +431,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 完全按照 JSON 输入中的字符串值进行存储，不进行语义转换。引号不当的字符串可能会在解析过程中导致错误。</p>
+    </button></h3><p>Milvus 完全按照字符串值在 JSON 输入中的显示方式存储字符串值，不进行语义转换。引号不当的字符串可能会在解析过程中导致错误。</p>
 <p><strong>有效字符串示例</strong></p>
 <pre><code translate="no" class="language-plaintext">&quot;a\&quot;b&quot;, &quot;a&#x27;b&quot;, &quot;a\\b&quot;
 <button class="copy-code-btn"></button></code></pre>

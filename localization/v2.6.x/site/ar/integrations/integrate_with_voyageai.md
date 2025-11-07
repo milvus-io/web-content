@@ -41,7 +41,7 @@ summary: >-
     </button></h2><p>قبل أن تبدأ، تأكد من أن لديك مفتاح Voyage API جاهزًا، أو يمكنك الحصول عليه من <a href="https://dash.voyageai.com/api-keys">موقع VoyageAI</a>.</p>
 <p>البيانات المستخدمة في هذا المثال هي عناوين الكتب. يمكنك تنزيل مجموعة البيانات <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">من هنا</a> ووضعها في نفس الدليل حيث تقوم بتشغيل الشيفرة التالية.</p>
 <p>أولاً، قم بتثبيت الحزمة الخاصة بـ Milvus و Voyage AI:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
+<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong>. (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، واختر "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -223,7 +223,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>نحن الآن جاهزون للبحث في الصور. الاستعلام هنا عبارة عن سلسلة، ولكن يمكننا الاستعلام بالصور أيضًا. (راجع الوثائق الخاصة بواجهة برمجة التطبيقات متعددة الوسائط <a href="https://docs.voyageai.com/docs/multimodal-embeddings">هنا</a>). نستخدم matplotlib لإظهار الصور الناتجة.</p>
+<p>نحن الآن جاهزون للبحث في الصور. الاستعلام هنا عبارة عن سلسلة، ولكن يمكننا الاستعلام بالصور أيضًا. (راجع الوثائق الخاصة بواجهة برمجة التطبيقات متعددة الوسائط <a href="https://docs.voyageai.com/docs/multimodal-embeddings">هنا</a>). نستخدم matplotlib لإظهار صور النتائج.</p>
 <pre><code translate="no" class="language-python">queries = [[<span class="hljs-string">&quot;The consequences of a dictator&#x27;s peace&quot;</span>]]
 
 query_vectors = client.multimodal_embed(

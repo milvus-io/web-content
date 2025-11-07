@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>一旦 Milvus Operator pod 運行，您就可以按以下方式部署 Milvus 叢集。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面的指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列（建議使用 v2.6.3）的 Milvus 叢集，以及包括 Streaming Node 在內的所有新架構元件。</p>
+<p>上面的指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列（建議使用 v2.6.4）的 Milvus 叢集，以及包括 Streaming Node 在內的所有新架構元件。</p>
 <p><strong>此部署中的架構重點：</strong></p>
 <ul>
 <li><strong>訊息佇列</strong>：<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>(減少基礎架構維護)</li>
@@ -357,7 +357,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <div class="alert note">
 <ul>
 <li>當您使用預設設定刪除 Milvus 叢集時，etcd、Pulsar 和 MinIO 等相依性不會被刪除。因此，下次安裝相同的 Milvus 叢集實例時，這些依賴將再次被使用。</li>
-<li>若要連同 Milvus 叢集一起刪除依賴項目和持久性磁碟區索賠 (PVC)，請參閱<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定檔</a>。</li>
+<li>若要連同 Milvus 叢集一起刪除依賴項目和持久性磁碟區聲明 (PVC)，請參閱<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定檔</a>。</li>
 </ul>
 </div>
 <h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">解除安裝 Milvus 操作員<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">

@@ -57,7 +57,7 @@ title: Retrieval-Augmented Generation (RAG) con Milvus y LlamaIndex
         ></path>
       </svg>
     </button></h3><p>Los fragmentos de código de esta página requieren las dependencias pymilvus y llamaindex. Puede instalarlas utilizando los siguientes comandos:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -207,7 +207,7 @@ documents = SimpleDirectoryReader(
 </ul>
 <h4 id="others" class="common-anchor-header">otros</h4><ul>
 <li><code translate="no">collection_properties (dict, optional)</code>: Las propiedades de la colección, como TTL (Time-To-Live) y MMAP (memory mapping). Por defecto es Ninguno. Puede incluir:<ul>
-<li>"colección.ttl.segundos" (int): Una vez establecida esta propiedad, los datos de la colección actual caducan en el tiempo especificado. Los datos caducados en la colección se limpiarán y no participarán en las búsquedas o consultas.</li>
+<li>"colección.ttl.segundos" (int): Una vez establecida esta propiedad, los datos de la colección actual caducan en el tiempo especificado. Los datos caducados de la colección se limpiarán y no participarán en las búsquedas o consultas.</li>
 <li>"mmap.enabled" (bool): Si se habilita el almacenamiento en mapa de memoria a nivel de colección.</li>
 </ul></li>
 <li><code translate="no">index_management (IndexManagement)</code>: Especifica la estrategia de gestión de índices a utilizar. Por defecto es "create_if_not_exists".</li>

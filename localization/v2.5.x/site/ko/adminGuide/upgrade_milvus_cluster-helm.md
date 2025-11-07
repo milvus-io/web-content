@@ -44,7 +44,7 @@ title: 헬름 차트로 Milvus 클러스터 업그레이드하기
 <li>쿠버네티스 버전 &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>밀버스-헬름 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속 요소로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가하시기 바랍니다.</p>
+<p>밀버스-헬름 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속 요소로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가해야 한다.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">밀버스 헬름 차트 확인<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -319,7 +319,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 </ol>
 <h4 id="2-Upgrade-Milvus-from-v21x-to-220" class="common-anchor-header">2. Milvus를 v2.1.x에서 2.2.0으로 업그레이드합니다.</h4><p>다음 명령은 Milvus를 v2.1.4에서 2.2.0으로 업그레이드한다고 가정합니다. 필요에 맞는 버전으로 변경하세요.</p>
 <ol>
-<li><p>밀버스 인스턴스 이름, 소스 밀버스 버전, 대상 밀버스 버전을 지정합니다.</p>
+<li><p>Milvus 인스턴스 이름, 소스 Milvus 버전, 대상 Milvus 버전을 지정합니다.</p>
 <pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus가 기본 K8s 네임스페이스에 설치되지 않은 경우 <code translate="no">-n</code> 로 네임스페이스를 지정합니다.</p>

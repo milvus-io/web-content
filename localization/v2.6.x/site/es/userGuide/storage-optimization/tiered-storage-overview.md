@@ -27,7 +27,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>En Milvus, el modo tradicional <em>de carga completa</em> requiere que cada QueryNode cargue todos los campos de datos e índices de un <a href="/docs/es/glossary.md#Segment">segmento</a> en la inicialización, incluso los datos a los que puede que nunca se acceda. Esto garantiza la disponibilidad inmediata de los datos, pero a menudo conduce a un desperdicio de recursos, incluyendo un alto uso de memoria, una gran actividad de disco y una sobrecarga significativa de E/S, especialmente cuando se manejan conjuntos de datos a gran escala.</p>
-<p><em>El almacenamiento por niveles</em> resuelve este problema desvinculando la caché de datos de la carga de segmentos. En lugar de cargar todos los datos a la vez, Milvus introduce una capa de almacenamiento en caché que distingue entre datos calientes (almacenados localmente) y datos fríos (almacenados remotamente). El QueryNode carga ahora sólo <em>metadatos</em> ligeros inicialmente y extrae o desaloja dinámicamente los datos bajo demanda. Esto reduce significativamente el tiempo de carga, optimiza la utilización de los recursos locales y permite a los QueryNodes procesar conjuntos de datos que superan con creces la capacidad de su memoria física o disco.</p>
+<p><em>El almacenamiento por niveles</em> resuelve este problema desvinculando la caché de datos de la carga de segmentos. En lugar de cargar todos los datos a la vez, Milvus introduce una capa de almacenamiento en caché que distingue entre datos calientes (almacenados localmente) y datos fríos (almacenados remotamente). El QueryNode carga ahora sólo <em>metadatos</em> ligeros inicialmente y extrae o desaloja dinámicamente los datos de campo bajo demanda. Esto reduce significativamente el tiempo de carga, optimiza la utilización de los recursos locales y permite a los QueryNodes procesar conjuntos de datos que superan con creces su memoria física o su capacidad de disco.</p>
 <p>Considere la posibilidad de habilitar el almacenamiento por niveles en escenarios como:</p>
 <ul>
 <li><p>Colecciones que superan la memoria disponible o la capacidad NVMe de un único QueryNode.</p></li>
@@ -96,20 +96,21 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>En el almacenamiento por niveles, el flujo de trabajo tiene estas fases:</p>
+    </button></h3><p>Bajo Almacenamiento por niveles, el flujo de trabajo tiene estas fases:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/load-workflow.png" alt="Load Workflow" class="doc-image" id="load-workflow" />
-   </span> <span class="img-wrapper"> <span>Flujo de carga</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-load-workflow.png" alt="Querynode Load Workflow" class="doc-image" id="querynode-load-workflow" />
+   </span> <span class="img-wrapper"> <span>Flujo de trabajo de carga de Querynode</span> </span></p>
 <h4 id="Phase-1-Lazy-load" class="common-anchor-header">Fase 1: Carga perezosa</h4><p>En la inicialización, Milvus realiza una carga lenta, almacenando en caché sólo los metadatos a nivel de segmento, como las definiciones de esquema, la información de índice y las asignaciones de trozos.</p>
 <p>En esta fase no se almacenan en caché datos de campo reales ni archivos de índice. De este modo, las colecciones pueden consultarse casi inmediatamente después de iniciarse, con un consumo mínimo de memoria y disco.</p>
 <p>Dado que los datos de campo y los archivos de índice permanecen en almacenamiento remoto hasta que se accede a ellos por primera vez, la <em>primera consulta</em> puede experimentar una latencia adicional, ya que los datos necesarios deben obtenerse bajo demanda. Para mitigar este efecto en los campos o índices críticos, puede utilizar la estrategia <a href="/docs/es/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up (Calentamiento</a> ) para precargarlos de forma proactiva antes de que el segmento pueda consultarse.</p>
 <p><strong>Configuración</strong></p>
-<p>Se aplica automáticamente cuando el almacenamiento por niveles está activado. No se requiere ninguna otra configuración manual.</p>
-<h4 id="Phase-2-Warm-up" class="common-anchor-header">Fase 2: Calentamiento</h4><p>Para reducir la latencia de primer golpe introducida por <a href="/docs/es/tiered-storage-overview.md#Phase-1-Lazy-load">la carga perezosa</a>, Milvus proporciona un mecanismo de *Calentamiento.</p>
-<p>Antes de que un segmento sea consultable, Milvus puede obtener y almacenar en caché proactivamente campos o índices específicos del almacenamiento de objetos, asegurando que la primera consulta alcance directamente los datos almacenados en caché en lugar de activar la carga bajo demanda.</p>
+<p>Se aplica automáticamente cuando el almacenamiento por niveles está activado. No es necesaria ninguna configuración manual.</p>
+<h4 id="Phase-2-Warm-up" class="common-anchor-header">Fase 2: Calentamiento</h4><p>Para reducir la latencia de primer golpe introducida por <a href="/docs/es/tiered-storage-overview.md#Phase-1-Lazy-load">la carga lenta</a>, Milvus proporciona un mecanismo de <em>Calentamiento</em>.</p>
+<p>Antes de que un segmento sea consultable, Milvus puede recuperar y almacenar en caché de forma proactiva campos o índices específicos del almacenamiento de objetos, asegurando que la primera consulta alcance directamente los datos almacenados en caché en lugar de activar la carga bajo demanda.</p>
+<p>Durante el calentamiento, los campos se precargarán a nivel de trozo, mientras que los índices se precargarán a nivel de segmento.</p>
 <p><strong>Configuración</strong></p>
-<p>La configuración de Warm Up se define en la sección Tiered Storage de <strong>milvus.yaml</strong>. Puede activar o desactivar la precarga para cada campo o tipo de índice y especificar la estrategia preferida. Consulte <a href="/docs/es/warm-up.md">Warm Up</a> para ver ejemplos de configuración.</p>
+<p>La configuración del calentamiento se define en la sección Almacenamiento por niveles de <code translate="no">milvus.yaml</code>. Puede activar o desactivar la precarga para cada tipo de campo o índice y especificar la estrategia preferida. Consulte <a href="/docs/es/warm-up.md">Warm Up</a> para obtener configuraciones detalladas.</p>
 <h4 id="Phase-3-Partial-load" class="common-anchor-header">Fase 3: Carga parcial</h4><p>Una vez que comienzan las consultas o búsquedas, el QueryNode realiza una <em>carga parcial</em>, obteniendo sólo los fragmentos de datos o archivos de índice necesarios del almacenamiento de objetos.</p>
 <ul>
 <li><p><strong>Campos</strong>: Cargados bajo demanda a <strong>nivel de chunk</strong>. Sólo se obtienen los trozos de datos que coinciden con las condiciones de consulta actuales, minimizando el uso de E/S y memoria.</p></li>
@@ -117,16 +118,15 @@ beta: Milvus 2.6.4+
 </ul>
 <p><strong>Configuración</strong></p>
 <p>La carga parcial se aplica automáticamente cuando el almacenamiento por niveles está activado. No es necesaria ninguna configuración manual. Para minimizar la latencia de primer golpe para datos críticos, combínelo con <a href="/docs/es/warm-up.md">Warm Up</a>.</p>
-<h4 id="Phase-4-Eviction" class="common-anchor-header">Fase 4: Desalojo</h4><p>Para mantener un uso saludable de los recursos, Milvus libera automáticamente los datos en caché no utilizados cuando se alcanzan los umbrales.</p>
+<h4 id="Phase-4-Eviction" class="common-anchor-header">Fase 4: Desalojo</h4><p>Para mantener un uso saludable de los recursos, Milvus libera automáticamente los datos en caché no utilizados cuando se alcanzan umbrales específicos.</p>
 <p>El desalojo sigue una política <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">de Uso Menos Reciente (LRU</a> ), asegurando que los datos a los que se accede con poca frecuencia se eliminan primero mientras que los datos activos permanecen en la caché.</p>
 <p>El desalojo se rige por los siguientes elementos configurables:</p>
 <ul>
 <li><p><strong>Marcas de agua</strong>: Define umbrales de memoria o disco que activan y detienen el desalojo.</p></li>
 <li><p><strong>TTL</strong> de la caché: elimina los datos obsoletos de la caché tras un periodo de inactividad definido.</p></li>
-<li><p><strong>Ratio de sobrecompromiso</strong>: Permite la sobresuscripción temporal de la caché antes de que comience el desalojo agresivo, lo que ayuda a absorber los picos de carga de trabajo a corto plazo.</p></li>
 </ul>
 <p><strong>Configuración</strong></p>
-<p>Habilite y ajuste los parámetros de desalojo en <strong>milvus.yaml</strong>. Consulte <a href="/docs/es/eviction.md">Eviction</a> para una configuración detallada.</p>
+<p>Habilite y ajuste los parámetros de desalojo en <strong>milvus.yaml</strong>. Consulte <a href="/docs/es/eviction.md">Evicción</a> para una configuración detallada.</p>
 <h2 id="Getting-started" class="common-anchor-header">Primeros pasos<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -206,10 +206,6 @@ beta: Milvus 2.6.4+
       
       <span class="hljs-comment"># Cache TTL (7 days)</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">604800</span>
-      
-      <span class="hljs-comment"># Overcommit Ratios</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Next-steps" class="common-anchor-header">Pasos siguientes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -315,6 +311,7 @@ beta: Milvus 2.6.4+
 <li><p>El QueryNode fue configurado con muy pocos recursos. Las marcas de agua son relativas a los recursos disponibles, por lo que un aprovisionamiento insuficiente amplifica los errores de cálculo.</p></li>
 <li><p>Los recursos del QueryNode se comparten con otras cargas de trabajo, por lo que el almacenamiento por niveles no puede evaluar correctamente la capacidad real disponible.</p></li>
 </ul>
+<p>Para resolver este problema, le recomendamos que asigne recursos dedicados a los QueryNodes.</p>
 <h3 id="Why-do-some-queries-fail-under-high-concurrency" class="common-anchor-header">¿Por qué fallan algunas consultas cuando hay mucha concurrencia?<button data-href="#Why-do-some-queries-fail-under-high-concurrency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -349,22 +346,5 @@ beta: Milvus 2.6.4+
     </button></h3><p>Las posibles causas son:</p>
 <ul>
 <li><p>Consultas frecuentes a datos fríos, que deben obtenerse del almacenamiento.</p></li>
-<li><p>Un ratio de sobrecompromiso demasiado alto, que provoca desalojos frecuentes.</p></li>
-<li><p>Marcas de agua demasiado próximas entre sí, que provocan frecuentes desalojos sincrónicos.</p></li>
+<li><p>Marcas de agua colocadas demasiado cerca, lo que provoca frecuentes desalojos sincrónicos.</p></li>
 </ul>
-<h3 id="Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="common-anchor-header">¿Puede el almacenamiento por niveles gestionar datos ilimitados sobrecomprometiendo la caché?<button data-href="#Can-Tiered-Storage-handle-unlimited-data-by-overcommitting-cache" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>No. Los ratios de sobrecompromiso permiten a los nodos de consulta trabajar con más segmentos de los que permite la memoria física, pero unos ratios excesivamente altos pueden provocar desalojos frecuentes, colapsos de la caché o fallos en las consultas.</p>

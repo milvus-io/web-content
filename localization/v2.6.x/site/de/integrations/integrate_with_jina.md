@@ -39,7 +39,8 @@ title: Integration von Milvus mit Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI wurde 2020 in Berlin gegründet und ist ein bahnbrechendes KI-Unternehmen, das sich darauf konzentriert, die Zukunft der künstlichen Intelligenz durch seine Suchgrundlage zu revolutionieren. Jina AI ist auf multimodale KI spezialisiert und hat sich zum Ziel gesetzt, Unternehmen und Entwickler in die Lage zu versetzen, die Leistungsfähigkeit multimodaler Daten zur Wertschöpfung und Kosteneinsparung zu nutzen, und zwar durch eine integrierte Suite von Komponenten, einschließlich Embeddings, Rerankers, Prompt Ops und Kerninfrastruktur. Die innovativen Embeddings von Jina AI zeichnen sich durch eine erstklassige Leistung aus und verfügen über ein Modell mit einer Länge von 8192 Token, das ideal für eine umfassende Datendarstellung ist. Durch die Unterstützung mehrerer Sprachen und die nahtlose Integration mit führenden Plattformen wie OpenAI erleichtern diese Einbettungen sprachübergreifende Anwendungen.</p>
+    </button></h2><p>Jina AI wurde 2020 in Berlin gegründet und ist ein bahnbrechendes KI-Unternehmen, das sich darauf konzentriert, die Zukunft der künstlichen Intelligenz durch seine Suchgrundlage zu revolutionieren. Jina AI hat sich auf multimodale KI spezialisiert und möchte Unternehmen und Entwickler in die Lage versetzen, das Potenzial multimodaler Daten für Wertschöpfung und Kosteneinsparungen durch seine integrierte Suite von Komponenten, einschließlich Embeddings, Rerankers, Prompt Ops und Kerninfrastruktur, zu nutzen.<br>
+Die hochmodernen Einbettungen von Jina AI zeichnen sich durch eine erstklassige Leistung aus und verfügen über ein Modell mit 8192 Token-Längen, das ideal für eine umfassende Datendarstellung ist. Durch die Unterstützung mehrerer Sprachen und die nahtlose Integration mit führenden Plattformen wie OpenAI erleichtern diese Einbettungen sprachübergreifende Anwendungen.</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Die Einbettung von Milvus und Jina AI<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +56,7 @@ title: Integration von Milvus mit Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um diese Einbettungen effizient zu speichern und zu durchsuchen, ist eine spezielle, für diesen Zweck entwickelte Infrastruktur erforderlich. Milvus ist eine weithin bekannte, fortschrittliche Open-Source-Vektordatenbank, die in der Lage ist, große Vektordatenmengen zu verarbeiten. Milvus ermöglicht eine schnelle und genaue Vektorsuche (Einbettungen) nach einer Vielzahl von Metriken. Seine Skalierbarkeit ermöglicht den nahtlosen Umgang mit riesigen Mengen an Bilddaten und gewährleistet hochleistungsfähige Suchvorgänge auch bei wachsenden Datensätzen.</p>
+    </button></h2><p>Um diese Einbettungen effizient zu speichern und zu durchsuchen, ist eine spezielle, für diesen Zweck entwickelte Infrastruktur erforderlich. Milvus ist eine weithin bekannte, fortschrittliche Open-Source-Vektordatenbank, die in der Lage ist, große Vektordatenmengen zu verarbeiten. Milvus ermöglicht eine schnelle und genaue Vektorsuche (Einbettungen) nach zahlreichen Metriken. Seine Skalierbarkeit ermöglicht den nahtlosen Umgang mit riesigen Mengen an Bilddaten und gewährleistet hochleistungsfähige Suchvorgänge auch bei wachsenden Datensätzen.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +74,7 @@ title: Integration von Milvus mit Jina
       </svg>
     </button></h2><p>Jina-Einbettungen wurden in die PyMilvus-Modellbibliothek integriert. Nun werden wir anhand von Codebeispielen zeigen, wie Jina-Einbettungen in der Praxis eingesetzt werden.</p>
 <p>Bevor wir beginnen, müssen wir die Modellbibliothek für PyMilvus installieren.</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -153,7 +154,7 @@ dvecs = ef.encode_documents([doc])
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das Code-Embedding-Modell von Jina AI ermöglicht die Suche in Code und Dokumentation. Es unterstützt Englisch und 30 gängige Programmiersprachen, die zur Verbesserung der Code-Navigation, zur Optimierung der Code-Überprüfung und zur automatischen Dokumentationsunterstützung genutzt werden können.</p>
+    </button></h2><p>Das Code-Einbettungsmodell von Jina AI ermöglicht die Suche in Code und Dokumentation. Es unterstützt Englisch und 30 gängige Programmiersprachen, die zur Verbesserung der Code-Navigation, zur Optimierung der Code-Überprüfung und zur automatischen Dokumentationsunterstützung genutzt werden können.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>

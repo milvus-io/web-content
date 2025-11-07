@@ -42,7 +42,7 @@ title: Evaluasi dengan Arize Pheonix
         ></path>
       </svg>
     </button></h2><p>Sebelum menjalankan notebook ini, pastikan Anda telah menginstal dependensi berikut ini:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja terinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
@@ -339,7 +339,22 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <li><strong>Penjelasan QA</strong>: Merinci mengapa suatu jawaban benar atau salah.</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Ikhtisar Penelusuran Phoenix</h3><p>Phoenix menyediakan <strong>penelusuran yang kompatibel dengan OTEL</strong> untuk aplikasi LLM, dengan integrasi untuk kerangka kerja seperti <strong>Langchain</strong>, <strong>LlamaIndex</strong>, dan SDK seperti <strong>OpenAI</strong> dan <strong>Mistral</strong>. Penelusuran menangkap seluruh aliran permintaan, menawarkan wawasan ke dalam:</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Ikhtisar Penelusuran Phoenix<button data-href="#Phoenix-Tracing-Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Phoenix menyediakan <strong>penelusuran yang kompatibel dengan OTEL</strong> untuk aplikasi LLM, dengan integrasi untuk kerangka kerja seperti <strong>Langchain</strong>, <strong>LlamaIndex</strong>, dan SDK seperti <strong>OpenAI</strong> dan <strong>Mistral</strong>. Penelusuran menangkap seluruh aliran permintaan, menawarkan wawasan ke dalam:</p>
 <ul>
 <li><strong>Latensi Aplikasi</strong>: Mengidentifikasi dan mengoptimalkan panggilan LLM yang lambat dan kinerja komponen.</li>
 <li><strong>Penggunaan Token</strong>: Memecah konsumsi token untuk pengoptimalan biaya.</li>
@@ -433,7 +448,7 @@ results_df.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>apa spesifikasi kebutuhan perangkat keras ...</td>
+      <td>apa spesifikasi persyaratan perangkat keras ...</td>
       <td>[Persyaratan Perangkat Keras\n\nSpesifikasi berikut ini adalah spesifikasi ...</td>
       <td>Spesifikasi kebutuhan perangkat keras untuk membangun ...</td>
       <td>Jika Anda ingin membuat Milvus dan menjalankannya dari sumber ...</td>

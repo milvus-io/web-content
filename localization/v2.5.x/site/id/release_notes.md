@@ -18,7 +18,7 @@ title: Catatan Rilis
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug di setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.5.0 di bagian ini. Kami menyarankan agar Anda secara teratur mengunjungi halaman ini untuk mengetahui pembaruan.</p>
+    </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug dalam setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.5.0 di bagian ini. Kami menyarankan agar Anda secara teratur mengunjungi halaman ini untuk mengetahui pembaruan.</p>
 <h2 id="v2513" class="common-anchor-header">v2.5.13<button data-href="#v2513" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -626,7 +626,7 @@ title: Catatan Rilis
 <tr><td>2.5.7</td><td>2.5.6</td><td>2.5.6</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>Kami sangat senang mengumumkan rilis Milvus 2.5.7, yang disorot oleh fitur JSON Path Index yang baru diperkenalkan. Fitur ini memungkinkan Anda untuk membuat indeks terbalik pada kolom dinamis atau JSON untuk meningkatkan kinerja kueri secara signifikan. Bersamaan dengan fungsionalitas baru ini, kami telah melakukan banyak peningkatan dan perbaikan bug untuk keandalan yang lebih baik, penanganan kesalahan yang lebih baik, dan peningkatan kegunaan. Kami mendorong Anda untuk meng-upgrade atau mencobanya, dan seperti biasa, umpan balik Anda sangat kami hargai karena kami terus meningkatkan Milvus!</p>
+<p>Kami sangat senang mengumumkan rilis Milvus 2.5.7, yang disorot oleh fitur JSON Path Index yang baru saja diperkenalkan. Fitur ini memungkinkan Anda untuk membuat indeks terbalik pada kolom dinamis atau JSON untuk meningkatkan kinerja kueri secara signifikan. Bersamaan dengan fungsionalitas baru ini, kami telah melakukan banyak peningkatan dan perbaikan bug untuk keandalan yang lebih baik, penanganan kesalahan yang lebih baik, dan peningkatan kegunaan. Kami mendorong Anda untuk meng-upgrade atau mencobanya, dan seperti biasa, umpan balik Anda sangat kami hargai karena kami terus meningkatkan Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -787,7 +787,7 @@ title: Catatan Rilis
 <li>Peningkatan penanganan kesalahan dan uji unit untuk fungsi <code translate="no">InitMetaCache</code> <a href="https://github.com/milvus-io/milvus/pull/40324">(#40324</a>)</li>
 <li>Menambahkan pemeriksaan parameter duplikat untuk <code translate="no">CreateIndex</code> <a href="https://github.com/milvus-io/milvus/pull/40330">(#40330</a>)</li>
 <li>Menyelesaikan masalah yang mencegah tugas pemadatan ketika ukuran melebihi batas maksimum<a href="https://github.com/milvus-io/milvus/pull/40350">(#40350</a>)</li>
-<li>Memperbaiki konsumsi duplikat dari stream untuk segmen yang tidak terlihat<a href="https://github.com/milvus-io/milvus/pull/40318">(#40318</a>)</li>
+<li>Memperbaiki konsumsi duplikat dari aliran untuk segmen yang tidak terlihat<a href="https://github.com/milvus-io/milvus/pull/40318">(#40318</a>)</li>
 <li>Mengubah variabel CMake untuk beralih ke <code translate="no">knowhere-cuvs</code> <a href="https://github.com/milvus-io/milvus/pull/40289">(#40289</a>)</li>
 <li>Memperbaiki masalah di mana menjatuhkan properti DB melalui RESTful gagal<a href="https://github.com/milvus-io/milvus/pull/40260">(#40260</a>)</li>
 <li>Menggunakan tipe pesan yang berbeda untuk API <code translate="no">OperatePrivilegeV2</code> <a href="https://github.com/milvus-io/milvus/pull/40193">(#40193</a>)</li>
@@ -944,7 +944,7 @@ title: Catatan Rilis
 <li>[2.5] Memeriksa pemadatan L0 hanya dengan saluran yang sama saat menyatakan<a href="https://github.com/milvus-io/milvus/pull/39543">(#39543</a>)</li>
 <li>[2.5] Estimasi memori pemuat segmen yang disesuaikan untuk indeks sementara<a href="https://github.com/milvus-io/milvus/pull/39509">(#39509</a>)</li>
 <li>[2.5] Menggunakan start pos ts untuk segmen segel berdasarkan kebijakan seumur hidup<a href="https://github.com/milvus-io/milvus/pull/39994">(#39994)</a></li>
-<li>Menghapus meta tugas ketika tugas tidak lagi dibutuhkan<a href="https://github.com/milvus-io/milvus/pull/40146">(#40146</a>)</li>
+<li>Menghapus meta tugas ketika tugas tidak lagi diperlukan<a href="https://github.com/milvus-io/milvus/pull/40146">(#40146</a>)</li>
 <li>[2.5] Mempercepat pencatatan objek selama impor binlog<a href="https://github.com/milvus-io/milvus/pull/40048">(#40048</a>)</li>
 <li>Mendukung pembuatan koleksi dengan deskripsi<a href="https://github.com/milvus-io/milvus/pull/40028">(#40028</a>)</li>
 <li>[2.5] Interval batas waktu permintaan indeks yang diekspor dalam konfigurasi<a href="https://github.com/milvus-io/milvus/pull/40118">(#40118</a>)</li>
@@ -989,7 +989,7 @@ title: Catatan Rilis
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Kami sangat senang mengumumkan rilis Milvus 2.5.4, yang memperkenalkan pengoptimalan kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Sorotan yang menonjol dari rilis ini adalah dukungannya untuk 10.000 koleksi dan 1 juta partisi, yang menandai tonggak penting untuk kasus penggunaan multi-penyewa. Versi ini juga mengatasi beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan, dua bug kritis dapat menyebabkan kehilangan data. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
+<p>Kami dengan senang hati mengumumkan rilis Milvus 2.5.4, yang memperkenalkan pengoptimalan kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Sorotan yang menonjol dari rilis ini adalah dukungannya untuk 10.000 koleksi dan 1 juta partisi, yang menandai tonggak penting untuk kasus penggunaan multi-penyewa. Versi ini juga mengatasi beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan, dua bug kritis dapat menyebabkan kehilangan data. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

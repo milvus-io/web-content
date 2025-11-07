@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bidang JSON adalah tipe data yang ditentukan skema (<code translate="no">DataType.JSON</code>) di Milvus yang menyimpan data nilai-kunci terstruktur. Tidak seperti kolom basis data tradisional yang kaku, bidang JSON mengakomodasi objek bersarang, array, dan tipe data campuran sambil menyediakan beberapa opsi pengindeksan untuk kueri cepat.</p>
+    </button></h2><p>Bidang JSON adalah tipe data yang ditentukan skema (<code translate="no">DataType.JSON</code>) di Milvus yang menyimpan data nilai-kunci terstruktur. Tidak seperti kolom basis data tradisional yang kaku, field JSON mengakomodasi objek bersarang, array, dan tipe data campuran sambil menyediakan beberapa opsi pengindeksan untuk kueri cepat.</p>
 <p>Contoh struktur bidang JSON:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> 
@@ -62,7 +62,7 @@ summary: >-
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam contoh ini, <code translate="no">metadata</code> adalah bidang JSON tunggal yang berisi campuran nilai datar (misalnya <code translate="no">category</code>, <code translate="no">in_stock</code>), larik (<code translate="no">tags</code>), dan objek bersarang (<code translate="no">supplier</code>).</p>
+<p>Dalam contoh ini, <code translate="no">metadata</code> adalah bidang JSON tunggal yang berisi campuran nilai datar (misalnya <code translate="no">category</code>, <code translate="no">in_stock</code>), array (<code translate="no">tags</code>), dan objek bersarang (<code translate="no">supplier</code>).</p>
 <div class="alert note">
 <p><strong>Konvensi penamaan:</strong> Gunakan hanya huruf, angka, dan garis bawah pada kunci JSON. Hindari karakter khusus, spasi, atau titik karena dapat menyebabkan masalah penguraian dalam kueri.</p>
 </div>
@@ -92,7 +92,7 @@ summary: >-
    <tr>
      <td><p>Definisi skema</p></td>
      <td><p>Bidang skalar yang harus dideklarasikan secara eksplisit di dalam skema koleksi dengan tipe <code translate="no">DataType.JSON</code>.</p></td>
-     <td><p>Bidang JSON tersembunyi (bernama <code translate="no">#meta</code>) yang secara otomatis menyimpan bidang yang tidak dideklarasikan.</p></td>
+     <td><p>Bidang JSON tersembunyi (bernama <code translate="no">$meta</code>) yang secara otomatis menyimpan bidang yang tidak dideklarasikan.</p></td>
    </tr>
    <tr>
      <td><p>Kasus penggunaan</p></td>
@@ -107,7 +107,7 @@ summary: >-
    <tr>
      <td><p>Kueri</p></td>
      <td><p>Kueri menggunakan nama bidang atau kunci target di dalam bidang JSON: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Kueri secara langsung menggunakan kunci bidang dinamis: <code translate="no">"dynamic_key"</code> atau melalui <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Kueri secara langsung menggunakan kunci bidang dinamis: <code translate="no">"dynamic_key"</code> atau melalui <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Operasi dasar<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -239,7 +239,7 @@ client.load_collection(collection_name=<span class="hljs-string">&quot;product_c
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Setelah persyaratan ini terpenuhi, Anda dapat menggunakan ekspresi di bawah ini untuk memfilter koleksi Anda berdasarkan nilai di dalam bidang JSON. Ekspresi filter ini memanfaatkan sintaksis jalur JSON tertentu dan operator khusus.</p>
-<h4 id="Filtering-with-JSON-path-syntax" class="common-anchor-header">Memfilter dengan sintaks jalur JSON</h4><p>Untuk menanyakan kunci tertentu, gunakan notasi tanda kurung untuk mengakses kunci JSON: <code translate="no">json_field_name[&quot;key&quot;]</code>. Untuk kunci bersarang, rangkai kunci-kunci tersebut menjadi satu: <code translate="no">json_field_name[&quot;key1&quot;][&quot;key2&quot;]</code>.</p>
+<h4 id="Filtering-with-JSON-path-syntax" class="common-anchor-header">Memfilter dengan sintaks jalur JSON</h4><p>Untuk menanyakan kunci tertentu, gunakan notasi kurung untuk mengakses kunci JSON: <code translate="no">json_field_name[&quot;key&quot;]</code>. Untuk kunci bersarang, rangkai kunci-kunci tersebut menjadi satu: <code translate="no">json_field_name[&quot;key1&quot;][&quot;key2&quot;]</code>.</p>
 <p>Untuk memfilter entitas di mana <code translate="no">category</code> adalah <code translate="no">&quot;electronics&quot;</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
@@ -286,7 +286,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk menemukan produk yang memiliki setidaknya satu dari nilai <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;new&quot;</code>, atau <code translate="no">&quot;clearance&quot;</code> di bawah kunci <code translate="no">tags</code>:</p>
+<p>Untuk menemukan produk yang memiliki setidaknya salah satu dari nilai <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;new&quot;</code>, atau <code translate="no">&quot;clearance&quot;</code> di bawah kunci <code translate="no">tags</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains_any(metadata[&quot;tags&quot;], [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 

@@ -38,10 +38,10 @@ title: Vanna 및 Milvus로 SQL 작성
         ></path>
       </svg>
     </button></h2><p>이 노트북을 실행하기 전에 다음 종속성이 설치되어 있는지 확인하세요:</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span>
+<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colab을 사용하는 경우, 방금 설치한 종속성을 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택하세요).</p>
+<p>Google Colab을 사용하는 경우, 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택하세요).</p>
 </div>
 <p>그리고 환경 변수에 <code translate="no">OPENAI_API_KEY</code> 을 설정해야 합니다. <a href="https://platform.openai.com/docs/guides/production-best-practices/api-keys">OpenAI에서</a> API 키를 받을 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -97,7 +97,7 @@ vn_milvus = VannaMilvus(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>여기서는 샘플 데이터가 적은 간단한 예제이므로 <code translate="no">n_results</code> 을 2로 설정하여 가장 유사한 상위 2개 결과를 검색하도록 합니다. 실제로는 더 큰 학습 데이터 세트를 처리할 때는 <code translate="no">n_results</code> 을 더 높은 값으로 설정해야 합니다.</p>
+<p>여기서는 샘플 데이터가 적은 간단한 예제이므로 <code translate="no">n_results</code> 을 2로 설정하여 가장 유사한 상위 2개 결과를 검색하도록 합니다. 실제로는 더 큰 학습 데이터셋을 처리할 때는 <code translate="no">n_results</code> 을 더 높은 값으로 설정해야 합니다.</p>
 <p>여기서는 몇 개의 샘플 데이터가 포함된 몇 개의 테이블이 있는 샘플 SQLite 데이터베이스를 사용하겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> sqlite3
 

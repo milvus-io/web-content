@@ -116,7 +116,7 @@ title: リリースノート
 <li>インポート操作と挿入操作の間で自動 ID が重複する問題を修正した<a href="https://github.com/milvus-io/milvus/pull/42520">(#42520</a>)。</li>
 <li>セグメントの統計情報のインポートタスクが、<code translate="no">import_checker</code> によってのみトリガーされるようにした<a href="https://github.com/milvus-io/milvus/pull/42487">(#42487</a>)。</li>
 <li>Marisaインデックスの<code translate="no">is null</code> に関するバグを修正した<a href="https://github.com/milvus-io/milvus/pull/42421">(#42421</a>)。</li>
-<li>フラッシュされたセグメントに対してのみ統計情報タスクが発生するようにした<a href="https://github.com/milvus-io/milvus/pull/42425">(#42425</a>)。</li>
+<li>フラッシュされたセグメントに対してのみ、統計情報タスクが発生するようにした<a href="https://github.com/milvus-io/milvus/pull/42425">(#42425</a>)。</li>
 <li>セグメント統計の終了時にコンパクションの状態をリセットするようにした<a href="https://github.com/milvus-io/milvus/pull/42005">(#42005</a>)。</li>
 <li>Tantivy バージョンを更新し、ステマーパニックを修正した<a href="https://github.com/milvus-io/milvus/pull/42172">(#42172</a>)。</li>
 <li>新しい暫定インデックスを使用した場合に、ベクトル出力フィールドを取得できない問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/42183">(#42183</a>)。</li>
@@ -168,7 +168,7 @@ title: リリースノート
         ></path>
       </svg>
     </button></h3><ul>
-<li>JSON<code translate="no">contains</code> exprのJSONインデックスサポートを追加<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>)。</li>
+<li>JSON<code translate="no">contains</code> exprにおけるJSONインデックスのサポートを追加しました<a href="https://github.com/milvus-io/milvus/pull/41658">(#41658</a>)。</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">改良点<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -188,7 +188,7 @@ title: リリースノート
     </button></h3><ul>
 <li><code translate="no">DescribeCollection</code> APIが更新タイムスタンプを結果に含めるようになりました<a href="https://github.com/milvus-io/milvus/pull/41600">(#41600</a>)。</li>
 <li><code translate="no">DescribeIndex</code> インターフェースがインデックスのバージョン情報を出力するようになった<a href="https://github.com/milvus-io/milvus/pull/41841">(#41841</a>)。</li>
-<li>より厳格な期限切れコンパクションをサポートし、必ずしも大量の削除を待たずに 削除されたデータを消去できるようになった<a href="https://github.com/milvus-io/milvus/pull/41856">(#41856</a>)。</li>
+<li>より厳格な期限切れコンパクションをサポートし、必ずしも大量の削除を 待たずに削除されたデータを消去できるようになった<a href="https://github.com/milvus-io/milvus/pull/41856">(#41856</a>)。</li>
 <li>CVEに対処するため、依存関係のバージョンをバンプした<a href="https://github.com/milvus-io/milvus/pull/41590">(#41590</a>,<a href="https://github.com/milvus-io/milvus/pull/41878">#41878</a>,<a href="https://github.com/milvus-io/milvus/pull/41742">#41742</a>,<a href="https://github.com/milvus-io/milvus/pull/41697">#41697</a>)。</li>
 <li><code translate="no">DescribeCollection</code> 、<code translate="no">DescribeDatabase</code> タスクの権限チェックを追加した<a href="https://github.com/milvus-io/milvus/pull/41799">(#41799</a>)。</li>
 <li>RESTful APIで、query/get操作の一貫性レベルをサポートした<a href="https://github.com/milvus-io/milvus/pull/41830">(#41830</a>)。</li>
@@ -367,7 +367,7 @@ title: リリースノート
 <tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.10では、検索およびロード性能の向上、メトリックスレポートの強化、メトリックス計算を高速化するためのSVEサポートの拡張が行われています。このリリースでは、安定性と正しさを向上させる複数のバグ修正も含まれています。Milvusをより良いものにするために、皆様からのフィードバックは非常に貴重です！</p>
+<p>Milvus 2.5.10では、検索およびロード性能の向上、メトリックスレポートの強化、メトリックス計算を高速化するSVEサポートの拡張を実現しています。このリリースでは、安定性と正しさを向上させる複数のバグ修正も含まれています。Milvusをより良いものにするために、皆様からのフィードバックは非常に貴重です！</p>
 <h3 id="Improvements" class="common-anchor-header">改良点<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -481,7 +481,7 @@ title: リリースノート
 <li><code translate="no">noexcept</code> の不正な使用によるクラッシュの可能性を修正しました。</li>
 <li>残高の一時停止後に発生する正常な残高の無限ループを修正しました<a href="https://github.com/milvus-io/milvus/pull/41196">(#41196</a>)。</li>
 <li>コレクションがカスタム権限グループに付与されたオブジェクトに対応<a href="https://github.com/milvus-io/milvus/pull/41204">(#41204</a>)</li>
-<li>レプリケートチャンネルのポジションを取得できない問題を修正<a href="https://github.com/milvus-io/milvus/pull/41189">(#41189</a>)</li>
+<li>レプリケートチャネルのポジションを取得できない問題を修正<a href="https://github.com/milvus-io/milvus/pull/41189">(#41189</a>)</li>
 <li>RESTfulのタイムアウトによるスレッドリークの可能性を修正<a href="https://github.com/milvus-io/milvus/pull/41184">(#41184</a>)</li>
 <li>バッチスキップモードにクリアビットマップを追加<a href="https://github.com/milvus-io/milvus/pull/41165">(#41165</a>)</li>
 <li>ローカルモードのリモートストレージでインデックスタイプの削除に失敗する問題を修正した<a href="https://github.com/milvus-io/milvus/pull/41163">(#41163</a>)</li>
@@ -588,7 +588,7 @@ title: リリースノート
         ></path>
       </svg>
     </button></h3><ul>
-<li>NULL可能な入力と成長するmmapデータ型に関するクラッシュを修正した<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)。</li>
+<li>NULL可能な入力や成長するmmapデータ型に関するクラッシュを修正した<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)。</li>
 <li>ビンログIDの重複による削除操作のデータ損失の可能性を修正<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>)、<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
 <li><code translate="no">GetSegmentsIndexStates</code> 、コレクション作成時の挿入によるパニックを回避するため、フィールドインデックスロックを追加した<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)。</li>
 <li>Rocksmqコンシューマ登録における同時実行問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/40885">(#40885</a>)。</li>
@@ -596,7 +596,7 @@ title: リリースノート
 <li><code translate="no">iterative_filter</code> が指定された場合に JSON インデックスを使用すると誤った結果が得られる問題を修正した (<a href="https://github.com/milvus-io/milvus/pull/40946">#40946</a>)。</li>
 <li><code translate="no">exists</code> 操作の優先度を高くした<a href="https://github.com/milvus-io/milvus/pull/40865">(#40865</a>)。</li>
 <li>リデュース中の<code translate="no">WithGroupSize</code> を修正した<a href="https://github.com/milvus-io/milvus/pull/40920">(#40920</a>)。</li>
-<li>セグメントサイズの増加に比例してスロット数を増やすようにした(<a href="https://github.com/milvus-io/milvus/pull/40862">#40862</a>)</li>
+<li>セグメントサイズが大きくなるのに比例してスロット数を増やすようにした(<a href="https://github.com/milvus-io/milvus/pull/40862">#40862</a>)</li>
 <li>エンキュー前にタスクキュー時間を設定するようにした(<a href="https://github.com/milvus-io/milvus/pull/40853">#40853</a>)</li>
 <li>データノードにおけるチャネルの不均衡を修正(<a href="https://github.com/milvus-io/milvus/pull/40854">#40854</a>)</li>
 <li>タスクスロットのデフォルト設定を正しく設定<a href="https://github.com/milvus-io/milvus/pull/40821">(#40821</a>)</li>
@@ -702,7 +702,7 @@ title: リリースノート
 <li><code translate="no">jsonKey</code> statsのガベージクリーンアップロジックを修正し、JSON key statsフィルタを改善した<a href="https://github.com/milvus-io/milvus/pull/40039">(#40039</a>)。</li>
 <li>無効なJSONポインタエラーを捕捉するようにした<a href="https://github.com/milvus-io/milvus/pull/40626">(#40626</a>)</li>
 <li>ポリシーの一覧表示において、RBACスター権限を空で返すようにした<a href="https://github.com/milvus-io/milvus/pull/40557">(#40557</a>)</li>
-<li>QueryNodeにおいて、スキーマにフィールドが存在しない場合のパニックを回避した<a href="https://github.com/milvus-io/milvus/pull/40542">(#40542</a>)</li>
+<li>QueryNodeのスキーマにフィールドが存在しない場合のパニックを回避した<a href="https://github.com/milvus-io/milvus/pull/40542">(#40542</a>)</li>
 <li>検索/問い合わせにおける参照コレクションの問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/40550">(#40550</a>)。</li>
 <li>スパースベクタの空行を処理するようにした<a href="https://github.com/milvus-io/milvus/pull/40586">(#40586</a>)</li>
 <li>コレクション作成時の型/インデックスパラメータの重複チェックを追加<a href="https://github.com/milvus-io/milvus/pull/40465">(#40465</a>)</li>
@@ -818,7 +818,7 @@ title: リリースノート
 <tr><td>2.5.5</td><td>2.5.4</td><td>2.5.5</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.5では、1つのクラスタがサポートできるコレクション数とパーティション数が大幅に改善されました。10Kのコレクションと100KのパーティションでMilvusを実行することが十分に可能になりました。このリリースでは、マッチ統計の欠落や多段クエリにおけるデッドロックの問題など、いくつかの重大なバグにも対処しています。さらに、多くの観測性とセキュリティの強化も含まれています。Milvus 2.5.xを使用している全てのユーザは、できるだけ早くアップグレードすることを強く推奨します。</p>
+<p>Milvus 2.5.5では、1つのクラスタがサポートできるコレクション数とパーティション数が大幅に改善されました。10Kのコレクションと100KのパーティションでMilvusを実行することが十分に可能になりました。このリリースでは、マッチ統計の欠落や多段クエリにおけるデッドロック問題など、いくつかの致命的なバグにも対処しています。さらに、多くの観測性とセキュリティの強化も含まれています。Milvus 2.5.xを使用している全てのユーザは、できるだけ早くアップグレードすることを強く推奨します。</p>
 <h3 id="Dependency-Upgrade" class="common-anchor-header">依存関係のアップグレード<button data-href="#Dependency-Upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -901,7 +901,7 @@ title: リリースノート
 <li>[2.5] セグメンテーションが成長する結果と封印される結果の両方を返すように修正<a href="https://github.com/milvus-io/milvus/pull/39789">(#39789</a>)</li>
 <li>[2.5] 並行マップの問題を修正<a href="https://github.com/milvus-io/milvus/pull/39776">(#39776</a>)</li>
 <li>[2.5] QCタスクテストの競合を解決<a href="https://github.com/milvus-io/milvus/pull/39797">(#39797</a>)</li>
-<li>[2.5] コンパクションまたはGCが発生した場合にコレクションのロードがスタックする問題を修正<a href="https://github.com/milvus-io/milvus/pull/39761">(#39761</a>)</li>
+<li>[2.5] コンパクションやGCが発生した場合にコレクションのロードがスタックする問題を修正<a href="https://github.com/milvus-io/milvus/pull/39761">(#39761</a>)</li>
 <li>(<a href="https://github.com/milvus-io/milvus/pull/39759">#39759</a>) [2.5] 実行タスクのデルタキャッシュリークによって引き起こされる不均等な分布を修正 (<a href="https://github.com/milvus-io/milvus/pull/39759">#39759</a>)</li>
 <li>(<a href="https://github.com/milvus-io/milvus/pull/39763">#39763</a>) [2.5] ロードpkインデックスをスキップした場合に早期にリターンするように修正 (<a href="https://github.com/milvus-io/milvus/pull/39763">#39763</a>)</li>
 <li>[2.5]<code translate="no">common.security.rootShouldBindRole</code> が設定されていても、rootユーザが全てのコレクションを一覧できるように修正 (<a href="https://github.com/milvus-io/milvus/pull/39714">#39714</a>)</li>
@@ -930,7 +930,7 @@ title: リリースノート
 <li>生データを取得するモニターメトリックを追加<a href="https://github.com/milvus-io/milvus/pull/40155">(#40155</a>)</li>
 <li>[2.5] ベクトルのレイテンシを取得するメトリクスを追加し、リクエスト制限のエラーメッセージを改良<a href="https://github.com/milvus-io/milvus/pull/40085">(#40085</a>)</li>
 <li>[2.5] プロキシキューのメトリクスを追加しました<a href="https://github.com/milvus-io/milvus/pull/40071">(#40071</a>)</li>
-<li>より多くのメトリクスデータを公開しました<a href="https://github.com/milvus-io/milvus/pull/39466">(#39466</a>)</li>
+<li>より多くのメトリクスデータを公開しました<a href="https://github.com/milvus-io/milvus/pull/39466">(#39466</a>)。</li>
 <li>[2.5] 解析式のメトリクスを追加しました<a href="https://github.com/milvus-io/milvus/pull/39716">(#39716</a>)</li>
 <li>[2.5] hybridsearchのDSLログフィールドを追加しました<a href="https://github.com/milvus-io/milvus/pull/39598">(#39598</a>)</li>
 <li>[2.5] インデックスが削除された場合、インデックスメトリクスの更新をスキップするように変更<a href="https://github.com/milvus-io/milvus/pull/39572">(#39572</a>)</li>
@@ -1118,7 +1118,7 @@ title: リリースノート
 <tr><td>2.5.3</td><td>2.5.3</td><td>2.5.3</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.3では、全体的な安定性、信頼性、および使いやすさを向上させるために、重要なバグ修正とパフォーマンスの強化が行われました。このバージョンでは、並行処理の改善、データのインデックス作成と検索機能の強化、いくつかの主要コンポーネントの更新を行い、より堅牢なユーザーエクスペリエンスを実現しています。</p>
+<p>Milvus 2.5.3では、全体的な安定性、信頼性、および使いやすさを向上させるために、重要なバグ修正とパフォーマンスの強化が行われました。このバージョンでは、並行処理の改善、データのインデックス作成と検索機能の強化、そしてより堅牢なユーザーエクスペリエンスを実現するための主要コンポーネントのアップデートが行われています。</p>
 <h3 id="Bug-fixes" class="common-anchor-header">バグ修正<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1140,8 +1140,8 @@ title: リリースノート
 <li>クエリリクエストで<code translate="no">expr</code> が空の場合に反復フィルタリングで発生する不具合を修正しました。<a href="https://github.com/milvus-io/milvus/pull/39034">(#39034</a>)</li>
 <li>設定更新中のディスクエラーにより、デフォルトの設定値が使用される問題を修正した。<a href="https://github.com/milvus-io/milvus/pull/39072">(#39072</a>)</li>
 <li>クラスタリングコンパクションによって削除されたデータが失われる可能性があった問題を修正した。<a href="https://github.com/milvus-io/milvus/pull/39133">(#39133</a>)</li>
-<li>成長中のデータセグメントで、テキストマッチクエリが壊れていた問題を修正した。<a href="https://github.com/milvus-io/milvus/pull/39113">(#39113</a>)</li>
-<li>スパースベクトルでインデックスに元データが含まれていない場合に発生する検索失敗を修正した。<a href="https://github.com/milvus-io/milvus/pull/39146">(#39146</a>)</li>
+<li>成長中のデータセグメントにおいて、テキストマッチクエリが壊れていた問題を修正した。<a href="https://github.com/milvus-io/milvus/pull/39113">(#39113</a>)</li>
+<li>スパースベクトルにおいて、インデックスが元のデータを含んでいないために発生する検索失敗を修正しました。<a href="https://github.com/milvus-io/milvus/pull/39146">(#39146</a>)</li>
 <li>クエリとデータロードの同時実行によって発生する可能性のあるカラムフィールドの競合状態を修正しました。<a href="https://github.com/milvus-io/milvus/pull/39152">(#39152</a>)</li>
 <li>nullableまたはdefault_valueフィールドがデータに含まれていない場合に、一括挿入に失敗する問題を修正しました。<a href="https://github.com/milvus-io/milvus/pull/39111">(#39111</a>)</li>
 </ul>

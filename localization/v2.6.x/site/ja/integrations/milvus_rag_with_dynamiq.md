@@ -26,7 +26,7 @@ title: DynamiqとMilvusをはじめよう
         ></path>
       </svg>
     </button></h1><p><a href="https://www.getdynamiq.ai/">Dynamiqは</a>、AIを搭載したアプリケーションの開発を効率化する強力なGen AIフレームワークです。検索拡張世代（RAG）と大規模言語モデル（LLM）エージェントを強力にサポートするDynamiqは、開発者が簡単かつ効率的にインテリジェントで動的なシステムを作成できるようにします。</p>
-<p>このチュートリアルでは、RAGワークフローのために作られた高性能ベクトルデータベースである<a href="https://milvus.io/">Milvusと</a>Dynamiqをシームレスに使用する方法を探ります。Milvusは、ベクトル埋め込みデータの効率的な保存、インデックス付け、検索に優れており、高速かつ正確なコンテキストデータへのアクセスを必要とするAIシステムに不可欠なコンポーネントとなっています。</p>
+<p>このチュートリアルでは、RAGワークフローのために作られた高性能ベクトルデータベースである<a href="https://milvus.io/">Milvusと</a>Dynamiqをシームレスに使用する方法を探ります。Milvusは、ベクトル埋め込みデータの効率的な保存、インデックス付け、検索に優れており、高速かつ正確なコンテキストデータへのアクセスを必要とするAIシステムにとって不可欠なコンポーネントとなっています。</p>
 <p>このステップバイステップガイドでは、2つのコアなRAGワークフローをカバーします：</p>
 <ul>
 <li><p><strong>ドキュメントインデキシングフロー</strong>：入力ファイル（PDFなど）を処理し、その内容をベクトル埋め込みデータに変換し、Milvusに格納する方法を学びます。Milvusの高性能なインデックス作成機能を活用することで、データを迅速に検索できる状態にします。</p></li>
@@ -48,12 +48,42 @@ title: DynamiqとMilvusをはじめよう
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">必要なライブラリのダウンロード</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus</span>
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">必要なライブラリのダウンロード<button data-href="#Download-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があります（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
-<h3 id="Configure-the-LLM-agent" class="common-anchor-header">LLMエージェントの設定</h3><p>この例では、LLMとしてOpenAIを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意してください。</p>
+<h3 id="Configure-the-LLM-agent" class="common-anchor-header">LLMエージェントの設定<button data-href="#Configure-the-LLM-agent" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>この例では、LLMとしてOpenAIを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -73,9 +103,24 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このチュートリアルでは、Milvusをベクターデータベースとして文書をインデックス化するRAG（Retrieval-Augmented Generation）ワークフローを示します。このワークフローは、入力されたPDFファイルを受け取り、より小さなチャンクに処理し、OpenAIの埋め込みモデルを使用してベクトル埋め込みを生成し、効率的な検索のために埋め込みをMilvusコレクションに格納します。</p>
+    </button></h2><p>このチュートリアルでは、Milvusをベクターデータベースとして文書をインデックス化するRAG（Retrieval-Augmented Generation）ワークフローを示します。このワークフローは、入力されたPDFファイルを受け取り、より小さな塊に処理し、OpenAIの埋め込みモデルを使用してベクトル埋め込みを生成し、効率的な検索のために埋め込みをMilvusコレクションに保存します。</p>
 <p>このワークフローが終了する頃には、セマンティック検索や質問応答のような将来のRAGタスクをサポートするスケーラブルで効率的なドキュメントインデキシングシステムを手に入れることができます。</p>
-<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">必要なライブラリのインポートとワークフローの初期化</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Importing necessary libraries for the workflow</span>
+<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">必要なライブラリのインポートとワークフローの初期化<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Importing necessary libraries for the workflow</span>
 <span class="hljs-keyword">from</span> io <span class="hljs-keyword">import</span> BytesIO
 <span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
 <span class="hljs-keyword">from</span> dynamiq.nodes <span class="hljs-keyword">import</span> InputTransformer
@@ -92,12 +137,42 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 <span class="hljs-comment"># Initialize the workflow</span>
 rag_wf = Workflow()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-PDF-Converter-Node" class="common-anchor-header">PDFコンバータノードの定義</h3><pre><code translate="no" class="language-python">converter = PyPDFConverter(document_creation_mode=<span class="hljs-string">&quot;one-doc-per-page&quot;</span>)
+<h3 id="Define-PDF-Converter-Node" class="common-anchor-header">PDFコンバータノードの定義<button data-href="#Define-PDF-Converter-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">converter = PyPDFConverter(document_creation_mode=<span class="hljs-string">&quot;one-doc-per-page&quot;</span>)
 converter_added = rag_wf.flow.add_nodes(
     converter
 )  <span class="hljs-comment"># Add node to the DAG (Directed Acyclic Graph)</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Document-Splitter-Node" class="common-anchor-header">ドキュメント分割ノードの定義</h3><pre><code translate="no" class="language-python">document_splitter = DocumentSplitter(
+<h3 id="Define-Document-Splitter-Node" class="common-anchor-header">ドキュメント分割ノードの定義<button data-href="#Define-Document-Splitter-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">document_splitter = DocumentSplitter(
     split_by=<span class="hljs-string">&quot;sentence&quot;</span>,  <span class="hljs-comment"># Splits documents into sentences</span>
     split_length=<span class="hljs-number">10</span>,
     split_overlap=<span class="hljs-number">1</span>,
@@ -111,7 +186,22 @@ converter_added = rag_wf.flow.add_nodes(
 )  <span class="hljs-comment"># Set dependency on the PDF converter</span>
 splitter_added = rag_wf.flow.add_nodes(document_splitter)  <span class="hljs-comment"># Add to the DAG</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Embedding-Node" class="common-anchor-header">埋め込みノードの定義</h3><pre><code translate="no" class="language-python">embedder = OpenAIDocumentEmbedder(
+<h3 id="Define-Embedding-Node" class="common-anchor-header">埋め込みノードの定義<button data-href="#Define-Embedding-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">embedder = OpenAIDocumentEmbedder(
     connection=OpenAIConnection(api_key=os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>]),
     input_transformer=InputTransformer(
         selector={
@@ -123,7 +213,22 @@ splitter_added = rag_wf.flow.add_nodes(document_splitter)  <span class="hljs-com
 )  <span class="hljs-comment"># Set dependency on the splitter</span>
 document_embedder_added = rag_wf.flow.add_nodes(embedder)  <span class="hljs-comment"># Add to the DAG</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Milvus-Vector-Store-Node" class="common-anchor-header">Milvusベクターストアノードの定義</h3><pre><code translate="no" class="language-python">vector_store = (
+<h3 id="Define-Milvus-Vector-Store-Node" class="common-anchor-header">Milvusベクターストアノードの定義<button data-href="#Define-Milvus-Vector-Store-Node" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">vector_store = (
     MilvusDocumentWriter(
         connection=MilvusConnection(
             deployment_type=MilvusDeploymentType.FILE, uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
@@ -177,7 +282,22 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 </ul></li>
 </ul>
 </div>
-<h3 id="Define-Input-Data-and-Run-the-Workflow" class="common-anchor-header">入力データの定義とワークフローの実行</h3><pre><code translate="no" class="language-python">file_paths = [<span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>]
+<h3 id="Define-Input-Data-and-Run-the-Workflow" class="common-anchor-header">入力データの定義とワークフローの実行<button data-href="#Define-Input-Data-and-Run-the-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">file_paths = [<span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>]
 input_data = {
     <span class="hljs-string">&quot;files&quot;</span>: [BytesIO(<span class="hljs-built_in">open</span>(path, <span class="hljs-string">&quot;rb&quot;</span>).read()) <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> file_paths],
     <span class="hljs-string">&quot;metadata&quot;</span>: [{<span class="hljs-string">&quot;filename&quot;</span>: path} <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> file_paths],
@@ -229,7 +349,22 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
       </svg>
     </button></h2><p>このチュートリアルでは、RAG（Retrieval-Augmented Generation）文書検索ワークフローを実装します。このワークフローでは、ユーザークエリを受け取り、それに対するベクトル埋め込みを生成し、Milvusベクトルデータベースから最も関連性の高い文書を検索し、大規模言語モデル（LLM）を使用して、検索された文書に基づいて詳細かつコンテキストを考慮した回答を生成します。</p>
 <p>このワークフローに従うことで、ベクトルベースの文書検索のパワーとOpenAIの高度なLLMの機能を組み合わせた、意味検索と質問応答のためのエンドツーエンドのソリューションを作成することができます。このアプローチは、ドキュメントデータベースに保存された知識を活用することで、ユーザーからの問い合わせに対して効率的でインテリジェントな応答を可能にします。</p>
-<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">必要なライブラリのインポートとワークフローの初期化</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
+<h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">必要なライブラリのインポートとワークフローの初期化<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dynamiq <span class="hljs-keyword">import</span> Workflow
 <span class="hljs-keyword">from</span> dynamiq.connections <span class="hljs-keyword">import</span> (
     OpenAI <span class="hljs-keyword">as</span> OpenAIConnection,
     Milvus <span class="hljs-keyword">as</span> MilvusConnection,
@@ -243,7 +378,22 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 <span class="hljs-comment"># Initialize the workflow</span>
 retrieval_wf = Workflow()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-OpenAI-Connection-and-Text-Embedder" class="common-anchor-header">OpenAI接続とテキストエンベッダーの定義</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Establish OpenAI connection</span>
+<h3 id="Define-OpenAI-Connection-and-Text-Embedder" class="common-anchor-header">OpenAI接続とテキストエンベッダーの定義<button data-href="#Define-OpenAI-Connection-and-Text-Embedder" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Establish OpenAI connection</span>
 openai_connection = OpenAIConnection(api_key=os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>])
 
 <span class="hljs-comment"># Define the text embedder node</span>
@@ -255,7 +405,22 @@ embedder = OpenAITextEmbedder(
 <span class="hljs-comment"># Add the embedder node to the workflow</span>
 embedder_added = retrieval_wf.flow.add_nodes(embedder)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Milvus-Document-Retriever" class="common-anchor-header">Milvusドキュメントレトリバーの定義</h3><pre><code translate="no" class="language-python">document_retriever = (
+<h3 id="Define-Milvus-Document-Retriever" class="common-anchor-header">Milvusドキュメントレトリバーの定義<button data-href="#Define-Milvus-Document-Retriever" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">document_retriever = (
     MilvusDocumentRetriever(
         connection=MilvusConnection(
             deployment_type=MilvusDeploymentType.FILE, uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
@@ -276,7 +441,22 @@ milvus_retriever_added = retrieval_wf.flow.add_nodes(document_retriever)
 2024-11-19 22:14:19 - DEBUG - Created new connection using: 98d1132773af4298a894ad5925845fd2
 2024-11-19 22:14:19 - INFO - Collection my_milvus_collection already exists. Skipping creation.
 </code></pre>
-<h3 id="Define-the-Prompt-Template" class="common-anchor-header">プロンプトテンプレートの定義</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the prompt template for the LLM</span>
+<h3 id="Define-the-Prompt-Template" class="common-anchor-header">プロンプトテンプレートの定義<button data-href="#Define-the-Prompt-Template" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the prompt template for the LLM</span>
 prompt_template = <span class="hljs-string">&quot;&quot;&quot;
 Please answer the question based on the provided context.
 
@@ -291,7 +471,22 @@ Context:
 <span class="hljs-comment"># Create the prompt object</span>
 prompt = Prompt(messages=[Message(content=prompt_template, role=<span class="hljs-string">&quot;user&quot;</span>)])
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-the-Answer-Generator" class="common-anchor-header">回答ジェネレータの定義</h3><pre><code translate="no" class="language-python">answer_generator = (
+<h3 id="Define-the-Answer-Generator" class="common-anchor-header">回答ジェネレータの定義<button data-href="#Define-the-Answer-Generator" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">answer_generator = (
     OpenAI(
         connection=openai_connection,
         model=<span class="hljs-string">&quot;gpt-4o&quot;</span>,
@@ -309,7 +504,22 @@ prompt = Prompt(messages=[Message(content=prompt_template, role=<span class="hlj
 <span class="hljs-comment"># Add the answer generator node to the workflow</span>
 answer_generator_added = retrieval_wf.flow.add_nodes(answer_generator)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Run-the-Workflow" class="common-anchor-header">ワークフローの実行</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Run the workflow with a sample query</span>
+<h3 id="Run-the-Workflow" class="common-anchor-header">ワークフローの実行<button data-href="#Run-the-Workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Run the workflow with a sample query</span>
 sample_query = <span class="hljs-string">&quot;What is the Advanced Search Algorithms in Milvus?&quot;</span>
 
 result = retrieval_wf.run(input_data={<span class="hljs-string">&quot;query&quot;</span>: sample_query})

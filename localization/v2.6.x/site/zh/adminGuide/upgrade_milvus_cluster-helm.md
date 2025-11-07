@@ -23,7 +23,7 @@ title: 使用 Helm 图表升级 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介绍如何使用 Helm Chart 将 Milvus 集群从 v2.5.x 升级到 v2.6.3。</p>
+    </button></h1><p>本指南介绍如何使用 Helm Chart 将 Milvus 集群从 v2.5.x 升级到 v2.6.4。</p>
 <h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: 使用 Helm 图表升级 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v263" class="common-anchor-header">版本 2.6.3 的新功能<button data-href="#Whats-new-in-v263" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v264" class="common-anchor-header">版本 2.6.4 的新功能<button data-href="#Whats-new-in-v264" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,7 +54,7 @@ title: 使用 Helm 图表升级 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>从 Milvus 2.5.x 升级到 2.6.3 涉及重大架构变化：</p>
+    </button></h3><p>从 Milvus 2.5.x 升级到 2.6.4 涉及重大架构变化：</p>
 <ul>
 <li><strong>协调器合并</strong>：传统的独立协调器 (<code translate="no">dataCoord</code>,<code translate="no">queryCoord</code>,<code translate="no">indexCoord</code>) 已合并为单一的协调器。<code translate="no">mixCoord</code></li>
 <li><strong>新组件</strong>：引入流节点，增强数据处理能力</li>
@@ -84,11 +84,11 @@ title: 使用 Helm 图表升级 Milvus 集群
 </ul>
 <p><strong>兼容性要求：</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 与 v2.6.3<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
+<li>Milvus v2.6.0-rc1 与 v2.6.4<strong>不兼容</strong>。不支持从候选版本直接升级。</li>
 <li>如果您当前正在运行 v2.6.0-rc1，并需要保留数据，请参考<a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">本社区指南</a>以获取迁移帮助。</li>
-<li>在升级到 v2.6.3 之前，您<strong>必须</strong>升级到 v2.5.16 或更高版本，并启用<code translate="no">mixCoordinator</code> 。</li>
+<li>在升级到 v2.6.4 之前，您<strong>必须</strong>升级到 v2.5.16 或更高版本，并启用<code translate="no">mixCoordinator</code> 。</li>
 </ul>
-<p><strong>消息队列限制</strong>：升级到 Milvus v2.6.3 时，您必须保持当前的消息队列选择。不支持在升级过程中在不同的消息队列系统之间切换。未来版本将支持更换消息队列系统。</p>
+<p><strong>消息队列限制</strong>：升级到 Milvus v2.6.4 时，您必须保持当前的消息队列选择。不支持在升级过程中在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <div class="alert note">
 自 Milvus Helm 图表 4.2.21 版起，我们引入了 pulsar-v3.x 图表作为依赖。为了向后兼容，请将 Helm 升级到 v3.14 或更高版本，并确保在使用<code translate="no">helm upgrade</code> 时添加<code translate="no">--reset-then-reuse-values</code> 选项。</div>
 <h2 id="Upgrade-process" class="common-anchor-header">升级过程<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
@@ -172,7 +172,7 @@ helm repo update zilliztech
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v263" class="common-anchor-header">步骤 3：升级到 v2.6.3<button data-href="#Step-3-Upgrade-to-v263" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v264" class="common-anchor-header">步骤 3：升级到 v2.6.4<button data-href="#Step-3-Upgrade-to-v264" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,9 +187,9 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在<code translate="no">mixCoordinator</code> 上成功运行 v2.5.16 后，升级到 v2.6.3：</p>
+    </button></h3><p>在<code translate="no">mixCoordinator</code> 上成功运行 v2.5.16 后，升级到 v2.6.4：</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.3&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.4&quot;</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span> \
   --reset-then-reuse-values \

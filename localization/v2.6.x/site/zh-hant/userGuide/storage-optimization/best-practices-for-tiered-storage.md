@@ -212,7 +212,7 @@ beta: Milvus 2.6.4+
 <li><p><strong>將離線配置</strong>套用於分析或歸檔資料集</p></li>
 <li><p>針對每種工作負載類型獨立調整 evictableMemoryCacheRatio、cacheTtl 和 watermark 比率</p></li>
 </ul>
-<p><strong>理由</strong></p>
+<p><strong>理據</strong></p>
 <p>結合組態可精細控制資源分配。</p>
 <p>關鍵資料集可維持低延遲保證，而次級資料集則可處理更多區段和資料量。</p>
 <h2 id="Additional-tuning-tips" class="common-anchor-header">其他調整提示<button data-href="#Additional-tuning-tips" class="anchor-icon" translate="no">

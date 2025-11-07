@@ -45,11 +45,41 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Jaccard-similarity" class="common-anchor-header">Сходство по Жаккарду</h3><p>Сходство Жаккара измеряет степень совпадения двух множеств A и B, формально определяемую как:</p>
+    </button></h2><h3 id="Jaccard-similarity" class="common-anchor-header">Сходство по Жаккарду<button data-href="#Jaccard-similarity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Сходство Жаккара измеряет степень совпадения двух множеств A и B, формально определяемую как:</p>
 <p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>J</mi><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∩</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow><mrow><mi mathvariant="normal">∣</mi><mi>A</mi><mo>∪</mo><mi>B</mi><mi mathvariant="normal">∣</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">J(A, B) = \frac{|A \cap B|}{|A \cup B|}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∣</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>Где его значение варьируется от 0 (полностью несовпадающие) до 1 (идентичные).</p>
 <p>Однако точное вычисление сходства Жаккара между всеми парами документов в больших наборах данных требует больших затрат времени и памяти - O<strong>(n²</strong> ), если <strong>n</strong> велико. Это делает его невыполнимым для таких случаев, как очистка учебных корпусов LLM или анализ документов в веб-масштабе.</p>
-<h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">Подписи MinHash: Приблизительное сходство по Жаккарду</h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> - это вероятностная техника, которая предлагает эффективный способ оценки сходства по Жаккарду. Она работает путем преобразования каждого набора в компактный <strong>вектор сигнатур</strong>, сохраняющий достаточно информации для эффективной аппроксимации сходства наборов.</p>
+<h3 id="MinHash-signatures-Approximate-Jaccard-similarity" class="common-anchor-header">Подписи MinHash: Приблизительное сходство по Жаккарду<button data-href="#MinHash-signatures-Approximate-Jaccard-similarity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> - это вероятностная техника, которая предлагает эффективный способ оценки сходства по Жаккарду. Она работает путем преобразования каждого набора в компактный <strong>вектор сигнатур</strong>, сохраняющий достаточно информации для эффективной аппроксимации сходства наборов.</p>
 <p><strong>Основная идея</strong>:</p>
 <p>Чем более похожи два набора, тем больше вероятность того, что их сигнатуры MinHash будут совпадать в одних и тех же позициях. Это свойство позволяет MinHash аппроксимировать сходство по Жаккарду между наборами.</p>
 <p>Это свойство позволяет MinHash <strong>аппроксимировать сходство по Жаккарду</strong> между наборами без необходимости прямого сравнения полных наборов.</p>
@@ -67,7 +97,22 @@ summary: >-
 <div class="alert note">
 <p>Количество используемых хэш-функций определяет размерность подписи MinHash. Более высокая размерность обеспечивает более высокую точность аппроксимации, но при этом требует больших затрат на хранение и вычисления.</p>
 </div>
-<h3 id="LSH-for-MinHash" class="common-anchor-header">LSH для MinHash</h3><p>Хотя подписи MinHash значительно снижают затраты на вычисление точного сходства по Жаккарду между документами, исчерпывающее сравнение каждой пары векторов подписей все еще неэффективно в масштабе.</p>
+<h3 id="LSH-for-MinHash" class="common-anchor-header">LSH для MinHash<button data-href="#LSH-for-MinHash" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Хотя подписи MinHash значительно снижают затраты на вычисление точного сходства по Жаккарду между документами, исчерпывающее сравнение каждой пары векторов подписей все еще неэффективно в масштабе.</p>
 <p>Для решения этой проблемы используется <a href="https://zilliz.com/learn/Local-Sensitivity-Hashing-A-Comprehensive-Guide">LSH</a>. LSH обеспечивает быстрый приблизительный поиск сходства, гарантируя, что похожие элементы с высокой вероятностью попадут в одно и то же "ведро", что избавляет от необходимости сравнивать каждую пару напрямую.</p>
 <p>Процесс включает в себя:</p>
 <ol>
@@ -85,10 +130,9 @@ summary: >-
 <ul>
 <li><p>Вероятность того, что они идентичны в одной строке (хэш-позиции), равна <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> s.</p></li>
 <li><p>Вероятность того, что они совпадают во всех <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">rr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span> r строках диапазона, равна <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">srs^r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span></span></span></span> s <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span></p></li>
-<li><p>Вероятность того, что они совпадают <strong>хотя бы</strong> в <strong>одной полосе</strong>, равна :</p></li>
+<li><p>Вероятность того, что они совпадают <strong>хотя бы</strong> в <strong>одной полосе</strong>, равна <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>1-</mo><mo stretchy="false">(</mo><msup><mi>1-sr</mi></msup><msup><mo stretchy="false">)</mo><mi>b1</mi></msup></mrow><annotation encoding="application/x-tex">- (1 - s^r)^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span></span></span></span> 1 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">(1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0991em;vertical-align:-0.25em;"></span> s</span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> r</span></span></span></span></span></span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> b</p></li>
 </ul>
-<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>1</mn><mo>−</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>s</mi><mi>r</mi></msup><msup><mo stretchy="false">)</mo><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">1 - (1 - s^r)^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1491em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p>Подробнее см. в разделе <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">Локально-чувствительное хеширование</a>.</p>
+<p>Подробнее см. в разделе <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">Локально-чувствительное хэширование</a>.</p>
 </div>
 <p>Рассмотрим три документа со 128-мерными подписями MinHash:</p>
 <p>
@@ -108,7 +152,22 @@ summary: >-
 <div class="alert note">
 <p>Количество полос контролируется параметром <code translate="no">mh_lsh_band</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/minhash-lsh.md#Index-building-params">Параметры построения индексов</a>.</p>
 </div>
-<h3 id="MHJACCARD-Comparing-MinHash-signatures-in-Milvus" class="common-anchor-header">MHJACCARD: Сравнение подписей MinHash в Milvus</h3><p>Подписи MinHash аппроксимируют сходство по Жаккарду между наборами, используя двоичные векторы фиксированной длины. Однако, поскольку эти сигнатуры не сохраняют исходные наборы, стандартные метрики, такие как <code translate="no">JACCARD</code>, <code translate="no">L2</code> или <code translate="no">COSINE</code>, не могут быть напрямую применены для их сравнения.</p>
+<h3 id="MHJACCARD-Comparing-MinHash-signatures" class="common-anchor-header">MHJACCARD: Сравнение подписей MinHash<button data-href="#MHJACCARD-Comparing-MinHash-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Подписи MinHash аппроксимируют сходство Жаккара между наборами с помощью двоичных векторов фиксированной длины. Однако, поскольку эти сигнатуры не сохраняют исходные наборы, стандартные метрики, такие как <code translate="no">JACCARD</code>, <code translate="no">L2</code> или <code translate="no">COSINE</code>, не могут быть напрямую применены для их сравнения.</p>
 <p>Чтобы решить эту проблему, Milvus вводит специализированный тип метрики, называемый <code translate="no">MHJACCARD</code>, разработанный специально для сравнения подписей MinHash.</p>
 <p>При использовании MinHash в Milvus:</p>
 <ul>
@@ -117,7 +176,32 @@ summary: >-
 <li><p>Значение <code translate="no">metric_type</code> должно быть установлено в <code translate="no">MHJACCARD</code></p></li>
 </ul>
 <p>Использование других метрик будет либо недействительным, либо даст неверные результаты.</p>
-<p>Для получения дополнительной информации об этом типе метрики обратитесь к <a href="/docs/ru/metric.md#MHJACCARD">MHJACCARD</a>.</p>
+<p>Дополнительные сведения об этом типе метрики см. в разделе <a href="/docs/ru/metric.md#MHJACCARD">MHJACCARD</a>.</p>
+<h3 id="Deduplication-workflow" class="common-anchor-header">Рабочий процесс дедупликации<button data-href="#Deduplication-workflow" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Процесс дедупликации на основе MinHash LSH позволяет Milvus эффективно выявлять и отфильтровывать почти дублирующиеся текстовые или структурированные записи перед их вставкой в коллекцию.</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/deduplication-workflow.png" alt="Deduplication Workflow" width="600"></p>
+<ol>
+<li><p><strong>Разбивка и предварительная обработка</strong>: Разделение входящих текстовых или структурированных данных (например, записей, полей) на фрагменты; нормализация текста (удаление строчных букв, знаков препинания) и удаление стоп-слов по мере необходимости.</p></li>
+<li><p><strong>Построение характеристик</strong>: Построение набора маркеров, используемых для MinHash (например, шинглов из текста; конкатенированных маркеров полей для структурированных данных).</p></li>
+<li><p><strong>Генерация сигнатур MinHash</strong>: Вычисление сигнатур MinHash для каждого фрагмента или записи.</p></li>
+<li><p><strong>Преобразование двоичного вектора</strong>: Преобразование сигнатуры в двоичный вектор, совместимый с Milvus.</p></li>
+<li><p><strong>Поиск перед вставкой</strong>: Использование индекса MinHash LSH для поиска в целевой коллекции близких дубликатов входящего элемента.</p></li>
+<li><p><strong>Вставить и сохранить</strong>: Вставляйте в коллекцию только уникальные элементы. Они становятся доступными для поиска при последующих проверках вычитания.</p></li>
+</ol>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,44 +217,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Перед использованием MinHash LSH в Milvus необходимо сначала сгенерировать <strong>сигнатуры MinHash</strong>. Эти компактные двоичные сигнатуры аппроксимируют сходство Жаккара между множествами и необходимы для поиска в Milvus на основе <code translate="no">MHJACCARD</code>.</p>
-<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Выбор метода генерации сигнатур MinHash</h3><p>В зависимости от объема работы вы можете выбрать:</p>
-<ul>
-<li><p>Использовать <code translate="no">datasketch</code> из Python для простоты (рекомендуется для прототипирования).</p></li>
-<li><p>Использовать распределенные инструменты (например, Spark, Ray) для работы с большими массивами данных</p></li>
-<li><p>Реализовать пользовательскую логику (NumPy, C++ и т. д.), если критически важна настройка производительности.</p></li>
-</ul>
-<p>В этом руководстве мы используем <code translate="no">datasketch</code> для простоты и совместимости с форматом ввода Milvus.</p>
-<h3 id="Install-required-libraries" class="common-anchor-header">Установите необходимые библиотеки</h3><p>Установите необходимые пакеты для этого примера:</p>
-<pre><code translate="no" class="language-bash">pip install pymilvus datasketch numpy
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Generate-MinHash-signatures" class="common-anchor-header">Генерация сигнатур MinHash</h3><p>Мы сгенерируем 256-мерные подписи MinHash, каждое хэш-значение которых представлено в виде 64-битного целого числа. Это соответствует ожидаемому векторному формату для <code translate="no">MINHASH_LSH</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasketch <span class="hljs-keyword">import</span> MinHash
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-
-MINHASH_DIM = <span class="hljs-number">256</span>
-HASH_BIT_WIDTH = <span class="hljs-number">64</span>
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_minhash_signature</span>(<span class="hljs-params">text, num_perm=MINHASH_DIM</span>) -&gt; <span class="hljs-built_in">bytes</span>:
-    m = MinHash(num_perm=num_perm)
-    <span class="hljs-keyword">for</span> token <span class="hljs-keyword">in</span> text.lower().split():
-        m.update(token.encode(<span class="hljs-string">&quot;utf8&quot;</span>))
-    <span class="hljs-keyword">return</span> m.hashvalues.astype(<span class="hljs-string">&#x27;&gt;u8&#x27;</span>).tobytes()  <span class="hljs-comment"># Returns 2048 bytes</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Каждая подпись имеет размер 256 × 64 бита = 2048 байт. Эта байтовая строка может быть непосредственно вставлена в поле Milvus <code translate="no">BINARY_VECTOR</code>. Для получения дополнительной информации о двоичных векторах, используемых в Milvus, обратитесь к разделу <a href="/docs/ru/binary-vector.md">Двоичный вектор</a>.</p>
-<h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(Необязательно) Подготовка необработанных наборов токенов (для уточненного поиска)</h3><p>По умолчанию Milvus использует только сигнатуры MinHash и индекс LSH для поиска приблизительных соседей. Это быстро, но может давать ложные срабатывания или пропускать близкие совпадения.</p>
-<p>Если вам нужно <strong>точное сходство по Жаккарду</strong>, Milvus поддерживает уточненный поиск, который использует исходные наборы токенов. Чтобы включить эту функцию:</p>
-<ul>
-<li><p>Храните наборы маркеров в отдельном поле <code translate="no">VARCHAR</code>.</p></li>
-<li><p>Установите <code translate="no">&quot;with_raw_data&quot;: True</code> при <a href="/docs/ru/minhash-lsh.md#Build-index-parameters-and-create-collection">построении параметров индекса</a>.</p></li>
-<li><p>И включите <code translate="no">&quot;mh_search_with_jaccard&quot;: True</code> при <a href="/docs/ru/minhash-lsh.md#Perform-similarity-search">выполнении поиска по сходству</a>.</p></li>
-</ul>
-<p><strong>Пример извлечения наборов токенов</strong>:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">extract_token_set</span>(<span class="hljs-params">text: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:
-    tokens = <span class="hljs-built_in">set</span>(text.lower().split())
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot; &quot;</span>.join(tokens)
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-MinHash-LSH-in-Milvus" class="common-anchor-header">Использование MinHash LSH в Milvus<button data-href="#Use-MinHash-LSH-in-Milvus" class="anchor-icon" translate="no">
+    </button></h2><p>Перед использованием MinHash LSH в Milvus необходимо сначала сгенерировать <strong>сигнатуры MinHash</strong>. Эти компактные двоичные сигнатуры аппроксимируют сходство Жаккара между наборами и необходимы для поиска в Milvus на основе <code translate="no">MHJACCARD</code>.</p>
+<h3 id="Choose-a-method-to-generate-MinHash-signatures" class="common-anchor-header">Выбор метода генерации сигнатур MinHash<button data-href="#Choose-a-method-to-generate-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -185,18 +233,156 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Когда векторы MinHash и исходные наборы токенов готовы, вы можете хранить, индексировать и искать их в Milvus с помощью <code translate="no">MINHASH_LSH</code>.</p>
-<h3 id="Connect-to-Milvus" class="common-anchor-header">Подключение к Milvus</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+    </button></h3><p>В зависимости от объема работы вы можете выбрать:</p>
+<ul>
+<li><p>Использовать Python's <a href="https://ekzhu.github.io/datasketch/"><code translate="no">datasketch</code></a> для простоты (рекомендуется для создания прототипов)</p></li>
+<li><p>Использовать распределенные инструменты (например, Spark, Ray) для работы с большими массивами данных</p></li>
+<li><p>Реализовать пользовательскую логику (NumPy, C++ и т. д.), если важна настройка производительности.</p></li>
+</ul>
+<p>В этом руководстве мы используем <code translate="no">datasketch</code> для простоты и совместимости с входным форматом Milvus.</p>
+<h3 id="Install-required-libraries" class="common-anchor-header">Установите необходимые библиотеки<button data-href="#Install-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Установите необходимые пакеты для этого примера:</p>
+<pre><code translate="no" class="language-bash">pip install pymilvus datasketch numpy
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Generate-MinHash-signatures" class="common-anchor-header">Генерация сигнатур MinHash<button data-href="#Generate-MinHash-signatures" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Мы сгенерируем 256-мерные подписи MinHash, каждое хэш-значение которых представлено в виде 64-битного целого числа. Это соответствует ожидаемому векторному формату для <code translate="no">MINHASH_LSH</code>.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasketch <span class="hljs-keyword">import</span> MinHash
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+MINHASH_DIM = <span class="hljs-number">256</span>
+HASH_BIT_WIDTH = <span class="hljs-number">64</span>
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_minhash_signature</span>(<span class="hljs-params">text, num_perm=MINHASH_DIM</span>) -&gt; <span class="hljs-built_in">bytes</span>:
+    m = MinHash(num_perm=num_perm)
+    <span class="hljs-keyword">for</span> token <span class="hljs-keyword">in</span> text.lower().split():
+        m.update(token.encode(<span class="hljs-string">&quot;utf8&quot;</span>))
+    <span class="hljs-keyword">return</span> m.hashvalues.astype(<span class="hljs-string">&#x27;&gt;u8&#x27;</span>).tobytes()  <span class="hljs-comment"># Returns 2048 bytes</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Каждая подпись имеет размер 256 × 64 бита = 2048 байт. Эта байтовая строка может быть непосредственно вставлена в поле <code translate="no">BINARY_VECTOR</code>. Для получения дополнительной информации о двоичных векторах, используемых в Milvus, обратитесь к разделу <a href="/docs/ru/binary-vector.md">Двоичный вектор</a>.</p>
+<h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(Необязательно) Подготовка необработанных наборов токенов (для уточненного поиска)<button data-href="#Optional-Prepare-raw-token-sets-for-refined-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>По умолчанию Milvus использует только сигнатуры MinHash и индекс LSH для поиска приблизительных соседей. Это быстро, но может давать ложные срабатывания или пропускать близкие совпадения.</p>
+<p>Если вам нужно <strong>точное сходство по Жаккарду</strong>, Milvus поддерживает уточненный поиск, который использует исходные наборы токенов. Чтобы включить эту функцию:</p>
+<ul>
+<li><p>Храните наборы маркеров в отдельном поле <code translate="no">VARCHAR</code>.</p></li>
+<li><p>Установите <code translate="no">&quot;with_raw_data&quot;: True</code> при <a href="/docs/ru/minhash-lsh.md#Build-index-parameters-and-create-collection">построении параметров индекса</a>.</p></li>
+<li><p>И включите <code translate="no">&quot;mh_search_with_jaccard&quot;: True</code> при <a href="/docs/ru/minhash-lsh.md#Perform-similarity-search">выполнении поиска по сходству</a>.</p></li>
+</ul>
+<p><strong>Пример извлечения набора токенов</strong>:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">extract_token_set</span>(<span class="hljs-params">text: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:
+    tokens = <span class="hljs-built_in">set</span>(text.lower().split())
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot; &quot;</span>.join(tokens)
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Use-MinHash-LSH" class="common-anchor-header">Использование MinHash LSH<button data-href="#Use-MinHash-LSH" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>После того как векторы MinHash и исходные наборы токенов готовы, вы можете хранить, индексировать и искать их с помощью Milvus с <code translate="no">MINHASH_LSH</code>.</p>
+<h3 id="Connect-to-your-cluster" class="common-anchor-header">Подключитесь к вашему кластеру<button data-href="#Connect-to-your-cluster" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)  <span class="hljs-comment"># Update if your URI is different</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-collection-schema" class="common-anchor-header">Определите схему коллекции</h3><p>Определите схему с:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Define-collection-schema" class="common-anchor-header">Определите схему коллекции<button data-href="#Define-collection-schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Определите схему с:</p>
 <ul>
 <li><p>Первичный ключ</p></li>
-<li><p>Поле <code translate="no">BINARY_VECTOR</code> для подписей MinHash</p></li>
+<li><p>Поле <code translate="no">BINARY_VECTOR</code> для сигнатур MinHash</p></li>
 <li><p>Поле <code translate="no">VARCHAR</code> для исходного набора токенов (если включен уточненный поиск)</p></li>
 <li><p>Опционально, поле <code translate="no">document</code> для оригинального текста.</p></li>
 </ul>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
 
 VECTOR_DIM = MINHASH_DIM * HASH_BIT_WIDTH  <span class="hljs-comment"># 256 × 64 = 8192 bits</span>
@@ -207,7 +393,32 @@ schema.add_field(<span class="hljs-string">&quot;minhash_signature&quot;</span>,
 schema.add_field(<span class="hljs-string">&quot;token_set&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>)  <span class="hljs-comment"># required for refinement</span>
 schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-index-parameters-and-create-collection" class="common-anchor-header">Построение параметров индекса и создание коллекции</h3><p>Постройте индекс <code translate="no">MINHASH_LSH</code> с включенным уточнением Жаккарда:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Build-index-parameters-and-create-collection" class="common-anchor-header">Построение параметров индекса и создание коллекции<button data-href="#Build-index-parameters-and-create-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Построение индекса <code translate="no">MINHASH_LSH</code> с включенным уточнением Жаккарда:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;minhash_signature&quot;</span>,
@@ -222,13 +433,38 @@ index_params.add_index(
 
 client.create_collection(<span class="hljs-string">&quot;minhash_demo&quot;</span>, schema=schema, index_params=index_params)
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительные сведения о параметрах построения индекса см. в разделе <a href="/docs/ru/minhash-lsh.md#Index-building-params">Параметры построения индекса</a>.</p>
-<h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>Для каждого документа подготовьте:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Дополнительную информацию о параметрах построения индекса см. в разделе <a href="/docs/ru/minhash-lsh.md#Index-building-params">Параметры построения индекса</a>.</p>
+<h3 id="Insert-data" class="common-anchor-header">Вставка данных<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Для каждого документа подготовьте:</p>
 <ul>
 <li><p>Двоичную подпись MinHash</p></li>
-<li><p>Сериализованную строку набора маркеров</p></li>
+<li><p>Сериализованную строку набора токенов</p></li>
 <li><p>(Опционально) оригинальный текст</p></li>
 </ul>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">documents = [
     <span class="hljs-string">&quot;machine learning algorithms process data automatically&quot;</span>,
     <span class="hljs-string">&quot;deep learning uses neural networks to model patterns&quot;</span>
@@ -248,16 +484,51 @@ insert_data = []
 client.insert(<span class="hljs-string">&quot;minhash_demo&quot;</span>, insert_data)
 client.flush(<span class="hljs-string">&quot;minhash_demo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Выполните поиск по сходству</h3><p>Milvus поддерживает два режима поиска сходства с использованием MinHash LSH:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Выполните поиск по сходству<button data-href="#Perform-similarity-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus поддерживает два режима поиска сходства с использованием MinHash LSH:</p>
 <ul>
 <li><p><strong>Приближенный поиск</strong> - использует только сигнатуры MinHash и LSH для получения быстрых, но вероятностных результатов.</p></li>
-<li><p><strong>Уточненный поиск</strong> - повторное вычисление сходства по Жаккарду с использованием исходных наборов лексем для повышения точности.</p></li>
+<li><p><strong>Уточненный поиск</strong> - повторное вычисление сходства по Жаккарду с использованием исходных наборов токенов для повышения точности.</p></li>
 </ul>
 <h4 id="51-Prepare-the-query" class="common-anchor-header">5.1 Подготовка запроса</h4><p>Чтобы выполнить поиск по сходству, создайте подпись MinHash для документа запроса. Эта подпись должна соответствовать той же размерности и формату кодировки, которые использовались при вставке данных.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;neural networks model patterns in data&quot;</span>
 query_sig = generate_minhash_signature(query_text)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="52-Approximate-search-LSH-only" class="common-anchor-header">5.2 Приближенный поиск (только для LSH)</h4><p>Это быстрый и масштабируемый метод, но он может пропускать близкие совпадения или давать ложные срабатывания:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="52-Approximate-search-LSH-only" class="common-anchor-header">5.2 Приближенный поиск (только для LSH)</h4><p>Быстрый и масштабируемый, но может пропускать близкие совпадения или давать ложные срабатывания:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">search_params={</span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;MHJACCARD&quot;</span>, </span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;params&quot;</span>: {}</span>
@@ -270,14 +541,24 @@ approx_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(approx_results[<span class="hljs-number">0</span>]):
     sim = <span class="hljs-number">1</span> - hit[<span class="hljs-string">&#x27;distance&#x27;</span>]
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Similarity: <span class="hljs-subst">{sim:<span class="hljs-number">.3</span>f}</span> | <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;document&#x27;</span>]}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="53-Refined-search-recommended-for-accuracy" class="common-anchor-header">5.3 Уточненный поиск (рекомендуется для повышения точности):</h4><p>Этот способ обеспечивает точное сравнение по Жаккарду, используя исходные наборы токенов, хранящиеся в Milvus. Он немного медленнее, но рекомендуется для задач, чувствительных к качеству:</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="53-Refined-search-recommended-for-accuracy" class="common-anchor-header">5.3 Уточненный поиск (рекомендуется для повышения точности):</h4><p>Этот способ обеспечивает точное сравнение по Жаккарду, используя оригинальные наборы токенов, хранящиеся в Milvus. Он немного медленнее, но рекомендуется для задач, чувствительных к качеству:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="highlighted-comment-line">search_params = {</span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;MHJACCARD&quot;</span>,</span>
 <span class="highlighted-comment-line">    <span class="hljs-string">&quot;params&quot;</span>: {</span>
@@ -293,12 +574,20 @@ refined_results = client.search(
 <span class="highlighted-wrapper-line">    search_params=search_params,</span>
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;document&quot;</span>],
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 
 <span class="hljs-keyword">for</span> i, hit <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(refined_results[<span class="hljs-number">0</span>]):
     sim = <span class="hljs-number">1</span> - hit[<span class="hljs-string">&#x27;distance&#x27;</span>]
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Similarity: <span class="hljs-subst">{sim:<span class="hljs-number">.3</span>f}</span> | <span class="hljs-subst">{hit[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;document&#x27;</span>]}</span>&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-params" class="common-anchor-header">Параметры индекса<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -316,7 +605,22 @@ refined_results = client.search(
         ></path>
       </svg>
     </button></h2><p>В этом разделе представлен обзор параметров, используемых для построения индекса и выполнения поиска по нему.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/minhash-lsh.md#Build-index-parameters-and-create-collection">построении индекса</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/minhash-lsh.md#Build-index-parameters-and-create-collection">построении индекса</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>
@@ -355,7 +659,22 @@ refined_results = client.search(
      <td><p>Используйте <code translate="no">0.01</code>, чтобы сбалансировать использование памяти и точность. Меньшие значения (<code translate="no">0.001</code>) уменьшают количество ложных срабатываний, но увеличивают объем памяти. Более высокие значения (<code translate="no">0.05</code>) экономят память, но могут снизить точность.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/minhash-lsh.md#Perform-similarity-search">поиске по индексу</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/minhash-lsh.md#Perform-similarity-search">поиске по индексу</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>

@@ -41,7 +41,7 @@ title: Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus
 <ul>
 <li>Membangun aplikasi LLM yang menjawab pertanyaan pengguna yang terkait dengan dataset bank rapat.</li>
 <li>Mendefinisikan dan mengukur kualitas aplikasi LLM Anda.</li>
-<li>Meningkatkan kualitas aplikasi Anda menggunakan 2 pendekatan tambahan: DB vektor menggunakan pencarian hybrid dan perangking ulang yang canggih.</li>
+<li>Meningkatkan kualitas aplikasi Anda menggunakan 2 pendekatan tambahan: DB vektor menggunakan pencarian hybrid dan perangkingan ulang yang canggih.</li>
 </ul>
 <h2 id="Tech-Stack" class="common-anchor-header">Tumpukan Teknologi<button data-href="#Tech-Stack" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +61,7 @@ title: Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Basis Data Vektor</em></h4><p>Untuk aplikasi ini, kita akan menggunakan <a href="https://milvus.io/">Milvus</a> untuk mengelola dan mencari data tak terstruktur berskala besar, seperti teks, gambar, dan video.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>Kerangka Kerja LLM</em></h4><p>LlamaIndex adalah kerangka kerja orkestrasi data sumber terbuka yang menyederhanakan pembuatan aplikasi model bahasa besar (LLM) dengan memfasilitasi integrasi data pribadi dengan LLM, memungkinkan aplikasi AI generatif yang ditambah konteks melalui pipeline Retrieval-Augmented Generation (RAG). Kami akan menggunakan LlamaIndex untuk tutorial ini karena menawarkan fleksibilitas yang baik dan abstraksi API tingkat rendah yang lebih baik.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Evaluasi Kualitas Keluaran LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> menawarkan model Hakim eksklusif untuk masalah Halusinasi, Kualitas Konteks, Kepatuhan Instruksi LLM, Kualitas Pengambilan, dan tugas-tugas keandalan LLM lainnya. Kami akan menggunakan AIMon untuk menilai kualitas aplikasi LLM.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">Prasyarat<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,17 +79,37 @@ title: Tingkatkan kualitas pencarian Aplikasi LLM Anda dengan AIMon dan Milvus
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>Daftar <a href="https://docs.aimon.ai/quickstart">akun AIMon di sini</a>.</p>
-<p>Tambahkan rahasia ini ke Rahasia Colab (simbol "kunci" di panel kiri) Jika Anda berada di lingkungan colab non-google lainnya, harap ganti sendiri kode terkait google colab</p>
+<li>Daftar <a href="https://docs.aimon.ai/quickstart">akun AIMon di sini</a>.</li>
+</ol>
+<p>Tambahkan rahasia ini ke Rahasia Colab (simbol "kunci" di panel kiri)</p>
+<blockquote>
+<p>Jika Anda berada di lingkungan colab non-google lainnya, harap ganti sendiri kode terkait google colab</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p>Daftar <a href="https://platform.openai.com/docs/overview">akun OpenAI di sini</a> dan tambahkan kunci berikut ini di rahasia Colab:</p>
+</ul>
+<ol start="2">
+<li>Daftar <a href="https://platform.openai.com/docs/overview">akun OpenAI di sini</a> dan tambahkan kunci berikut ini di rahasia Colab:</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">Kunci API yang diperlukan</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">Kunci API yang diperlukan<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -244,7 +264,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">Analisis</h3><p>Kami memiliki 258 transkrip dengan total sekitar 1 juta token di semua transkrip ini. Kami memiliki rata-rata 3864 jumlah token per transkrip.</p>
+<h3 id="Analysis" class="common-anchor-header">Analisis<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kami memiliki 258 transkrip dengan total sekitar 1 juta token di semua transkrip ini. Kami memiliki rata-rata 3864 jumlah token per transkrip.</p>
 <table>
 <thead>
 <tr><th>Metrik</th><th>Nilai</th></tr>
@@ -255,7 +290,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>Rata-rata # Jumlah token per transkrip</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">Kueri</h3><p>Di bawah ini adalah 12 kueri yang akan kami jalankan pada transkrip di atas</p>
+<h3 id="Queries" class="common-anchor-header">Kueri<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di bawah ini adalah 12 kueri yang akan kami jalankan pada transkrip di atas</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -936,6 +986,18 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">

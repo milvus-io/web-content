@@ -108,7 +108,7 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>La latencia de la consulta es crítica (por ejemplo, recomendación en tiempo real o clasificación de búsquedas)</p></li>
 <li><p>Se accede con frecuencia a los índices vectoriales centrales y a los filtros escalares.</p></li>
-<li><p>El rendimiento constante es más importante que la velocidad de arranque</p></li>
+<li><p>El rendimiento constante importa más que la velocidad de arranque</p></li>
 </ul>
 <p><strong>Configuración recomendada</strong></p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>

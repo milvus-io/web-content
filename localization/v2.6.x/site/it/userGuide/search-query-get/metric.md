@@ -2,8 +2,8 @@
 id: metric.md
 title: Tipi di metriche
 summary: >-
-  Le metriche di somiglianza vengono utilizzate per misurare le somiglianze tra
-  i vettori. La scelta di una metrica di distanza appropriata aiuta a migliorare
+  Le metriche di somiglianza sono utilizzate per misurare le somiglianze tra i
+  vettori. La scelta di una metrica di distanza appropriata aiuta a migliorare
   significativamente le prestazioni di classificazione e clustering.
 ---
 <h1 id="Metric-Types" class="common-anchor-header">Tipi di metriche<button data-href="#Metric-Types" class="anchor-icon" translate="no">
@@ -117,6 +117,13 @@ summary: >-
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p>Per indicizzare i campi vettoriali in un campo <a href="/docs/it/array-of-structs.md">Array of Structs</a>, occorre aggiungere il prefisso <code translate="no">MAX_SIM</code> all'insieme dei tipi di metrica menzionati sopra, in base alle incorporazioni vettoriali memorizzate in tali campi. Ad esempio,</p>
+<ul>
+<li><p>Per un campo vettoriale che memorizza incorporazioni vettoriali del tipo <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, o <code translate="no">INT8_VECTOR</code>, si può usare <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, o <code translate="no">MAX_SIM_L2</code> come tipo metrico.</p></li>
+<li><p>Per un campo vettoriale che memorizza incorporazioni vettoriali del tipo <code translate="no">BINARY_VECTOR</code>, si può usare <code translate="no">MAX_SIM_JACCADR</code> o <code translate="no">MAX_SIM_HAMMING</code> come tipo metrico.</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">Distanza euclidea (L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,7 +139,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Essenzialmente, la distanza euclidea misura la lunghezza di un segmento che collega 2 punti.</p>
+    </button></h2><p>In sostanza, la distanza euclidea misura la lunghezza di un segmento che collega due punti.</p>
 <p>La formula della distanza euclidea è la seguente:</p>
 <p>
   
@@ -244,7 +251,7 @@ summary: >-
 <p>Questo approccio è significativamente più veloce del calcolo della somiglianza di Jaccard esatta ed è particolarmente utile in scenari su larga scala o ad alta dimensionalità.</p>
 <p><strong>Tipo di vettore applicabile</strong></p>
 <ul>
-<li><code translate="no">BINARY_VECTOR</code>dove ogni vettore memorizza una firma MinHash. Ogni elemento corrisponde al valore minimo di hash secondo una delle funzioni hash indipendenti applicate all'insieme originale.</li>
+<li><code translate="no">BINARY_VECTOR</code>in cui ogni vettore memorizza una firma MinHash. Ogni elemento corrisponde al valore minimo di hash secondo una delle funzioni hash indipendenti applicate all'insieme originale.</li>
 </ul>
 <p><strong>Definizione di distanza</strong></p>
 <p>MHJACCARD misura il numero di posizioni corrispondenti in due firme MinHash. Più alto è il rapporto di corrispondenza, più simili sono gli insiemi sottostanti.</p>

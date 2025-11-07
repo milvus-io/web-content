@@ -27,7 +27,7 @@ title: Retrieval-Augmented Generation (RAG) с помощью Milvus и Haystack
         ></path>
       </svg>
     </button></h1><p>В этом руководстве показано, как построить систему Retrieval-Augmented Generation (RAG) с помощью Haystack и Milvus.</p>
-<p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает релевантные документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
+<p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает соответствующие документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
 <p><a href="https://haystack.deepset.ai/">Haystack</a> - это Python-фреймворк с открытым исходным кодом от deepset для создания пользовательских приложений с большими языковыми моделями (LLM). <a href="https://milvus.io/">Milvus</a> - самая продвинутая в мире векторная база данных с открытым исходным кодом, созданная для работы с приложениями поиска сходства встраивания и искусственного интеллекта.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ title: Retrieval-Augmented Generation (RAG) с помощью Milvus и Haystack
         ></path>
       </svg>
     </button></h2><p>Перед запуском этого блокнота убедитесь, что у вас установлены следующие зависимости:</p>
-<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
+<pre><code translate="no" class="language-python">! pip install --upgrade --quiet pymilvus milvus-lite milvus-haystack markdown-it-py mdit_plain
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей может потребоваться <strong>перезапуск среды выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
@@ -70,7 +70,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Мы используем онлайн-контент о <a href="https://www.gutenberg.org/cache/epub/7785/pg7785.txt">Леонардо да Винчи</a> в качестве хранилища частных знаний для нашего RAG-конвейера, который является хорошим источником данных для простого RAG-конвейера.</p>
+    </button></h2><p>В качестве хранилища частных знаний для нашего RAG-конвейера мы используем онлайн-контент о <a href="https://www.gutenberg.org/cache/epub/7785/pg7785.txt">Леонардо да Винчи</a>, который является хорошим источником данных для простого RAG-конвейера.</p>
 <p>Загрузите его и сохраните в локальном текстовом файле.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> urllib.request

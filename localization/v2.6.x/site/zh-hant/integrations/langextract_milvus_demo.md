@@ -25,7 +25,7 @@ title: LangExtract + Milvus 整合
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>本指南示範如何使用<a href="https://github.com/google/langextract">LangExtract</a>與<a href="https://milvus.io/">Milvus</a>建立智慧型文件處理與檢索系統。</p>
-<p>LangExtract 是一個 Python 函式庫，它使用大型語言模型 (Large Language Models, LLMs) 來從非結構化的文字文件中抽取結構化的資訊，並提供精確的來源基礎。該系統結合了 LangExtract 的萃取能力與 Milvus 的向量儲存，可同時進行語意相似性搜尋與精確的元資料篩選。</p>
+<p>LangExtract 是一個 Python 函式庫，它使用大型語言模型 (Large Language Models, LLMs) 來從非結構化的文字文件中萃取結構化的資訊，並提供精確的來源基礎。該系統結合了 LangExtract 的萃取能力與 Milvus 的向量儲存，可同時進行語意相似性搜尋與精確的元資料篩選。</p>
 <p>這種整合對於內容管理、語義搜尋、知識發現，以及根據萃取的文件屬性建立推薦系統特別有價值。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ title: LangExtract + Milvus 整合
         ></path>
       </svg>
     </button></h2><p>在執行本筆記本之前，請確定您已安裝下列相依性：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus langextract google-genai requests tqdm pandas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite langextract google-genai requests tqdm pandas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -372,7 +372,7 @@ extraction_results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>現在我們需要處理萃取結果，並為每個文件產生向量內嵌。我們也會將擷取的屬性扁平化成獨立的欄位，讓它們在 Milvus 中容易搜尋。</p>
+    </button></h2><p>現在我們需要處理萃取結果，並為每個文件產生向量嵌入。我們也會將擷取的屬性扁平化成獨立的欄位，讓它們在 Milvus 中容易搜尋。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n3. Processing extraction results and generating vectors...&quot;</span>)
 
 processed_data = []

@@ -1,13 +1,14 @@
 ---
 id: geometry-operators.md
-title: Operadores geométricos
+title: Operadores geométricosCompatible with Milvus 2.6.4+
 summary: >-
   O Milvus suporta um conjunto de operadores para filtragem espacial nos campos
   GEOMETRY, essenciais para a gestão e análise de dados geométricos. Estes
   operadores permitem recuperar entidades com base nas relações geométricas
   entre objectos.
+beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Operators" class="common-anchor-header">Operadores geométricos<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
+<h1 id="Geometry-Operators" class="common-anchor-header">Operadores geométricos<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +24,34 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>O Milvus suporta um conjunto de operadores para filtragem espacial nos campos <code translate="no">GEOMETRY</code>, essenciais para a gestão e análise de dados geométricos. Estes operadores permitem recuperar entidades com base nas relações geométricas entre objectos.</p>
-<p>Todos os operadores geométricos funcionam com dois argumentos geométricos: o nome do campo <code translate="no">GEOMETRY</code> definido no seu esquema de coleção e um objeto geométrico de destino representado no formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT).</p>
+<p>Todos os operadores de geometria funcionam com dois argumentos geométricos: o nome do campo <code translate="no">GEOMETRY</code> definido no esquema da coleção e um objeto geométrico de destino representado no formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT).</p>
+<h2 id="Use-syntax" class="common-anchor-header">Sintaxe de utilização<button data-href="#Use-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Para filtrar num campo <code translate="no">GEOMETRY</code>, utilize um operador de geometria numa expressão:</p>
+<ul>
+<li><p>Geral: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>Baseado em distância: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
+</ul>
+<p>Onde:</p>
+<ul>
+<li><p><code translate="no">operator</code> é um dos operadores de geometria suportados (por exemplo, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Os nomes dos operadores devem estar todos em maiúsculas ou minúsculas. Para obter uma lista dos operadores suportados, consulte <a href="/docs/pt/geometry-operators.md#Supported-geometry-operators">Operadores de geometria suportados</a>.</p></li>
+<li><p><code translate="no">geo_field</code> é o nome do seu campo <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> é a representação WKT da geometria a consultar.</p></li>
+<li><p><code translate="no">distance</code> é o limiar específico para <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
 <p>Para saber mais sobre os campos <code translate="no">GEOMETRY</code> no Milvus, consulte <a href="/docs/pt/geometry-field.md">Campo Geométrico</a>.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">Operadores de geometria suportados<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,9 +68,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A tabela seguinte apresenta uma lista dos operadores de geometria disponíveis no Milvus.</p>
+    </button></h2><p>A tabela seguinte apresenta os operadores geométricos disponíveis no Milvus.</p>
 <div class="alert note">
-<p>Os nomes dos operadores devem ser <strong>todos em maiúsculas</strong> ou <strong>em minúsculas</strong>. Não misture casos dentro do mesmo nome de operador.</p>
+<p>Os nomes dos operadores devem ser <strong>todos em maiúsculas</strong> ou <strong>em minúsculas</strong>. Não misture maiúsculas e minúsculas no mesmo nome de operador.</p>
 </div>
 <table>
    <tr>
@@ -52,7 +80,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_EQUALS(A, B)</code> / <code translate="no">st_equals(A, B)</code></p></td>
-     <td><p>Devolve VERDADEIRO se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão.</p></td>
+     <td><p>Devolve TRUE se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão.</p></td>
      <td><p>Duas geometrias (A e B) são exatamente iguais no espaço?</p></td>
    </tr>
    <tr>
@@ -72,7 +100,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_OVERLAPS(A, B)</code> / <code translate="no">st_overlaps(A, B)</code></p></td>
-     <td><p>Devolve VERDADEIRO se as geometrias A e B tiverem a mesma dimensão, se sobrepuserem parcialmente e nenhuma contiver totalmente a outra.</p></td>
+     <td><p>Devolve VERDADEIRO se as geometrias A e B tiverem a mesma dimensão, se sobrepuserem parcialmente e nenhuma delas contiver totalmente a outra.</p></td>
      <td><p>Duas parcelas de terreno (A e B) sobrepõem-se?</p></td>
    </tr>
    <tr>
@@ -108,7 +136,7 @@ summary: >-
       </svg>
     </button></h2><p>O operador <code translate="no">ST_EQUALS</code> devolve TRUE se duas geometrias forem espacialmente idênticas, o que significa que têm o mesmo conjunto de pontos e dimensão. Isto é útil para verificar se dois objectos geométricos armazenados representam exatamente a mesma localização e forma.</p>
 <p><strong>Exemplo</strong></p>
-<p>Suponha que pretende verificar se uma geometria armazenada (como um ponto ou um polígono) é exatamente igual a uma geometria de destino. Por exemplo, é possível comparar um ponto armazenado com um ponto de interesse específico.</p>
+<p>Suponha que pretende verificar se uma geometria armazenada (como um ponto ou polígono) é exatamente igual a uma geometria de destino. Por exemplo, é possível comparar um ponto armazenado com um ponto de interesse específico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to check if a geometry matches a specific point</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_EQUALS(geo_field, &#x27;POINT(10 20)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -132,6 +132,7 @@ res = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
         .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
         .topK(<span class="hljs-number">3</span>)
         .build();
 
@@ -513,7 +514,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>假設您在一個集合中建立了多個分區，您可以將搜尋範圍縮小到特定數量的分區。在這種情況下，您可以在搜尋請求中包含目標分割區名稱，以將搜尋範圍限制在指定的分割區內。減少搜尋所涉及的磁碟分割數目可改善搜尋效能。</p>
+    </button></h2><p>假設您在一個集合中建立了多個分割區，而您可以將搜尋範圍縮小到特定數量的分割區。在這種情況下，您可以在搜尋請求中包含目標磁碟分割名稱，以將搜尋範圍限制在指定的磁碟分割內。減少搜尋所涉及的磁碟分割數目可改善搜尋效能。</p>
 <p>以下程式碼片段假設您的集合中有一個名為<strong>PartitionA</strong>的分割區。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -829,7 +830,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可能會注意到，搜尋請求中的<code translate="no">limit</code> 這個參數會決定搜尋結果中包含的實體數目。此參數指定在單次搜尋中返回的最大實體數目，通常稱為<strong>top-K。</strong></p>
+    </button></h2><p>您可能會注意到，搜尋要求中攜帶的參數<code translate="no">limit</code> 會決定搜尋結果中包含的實體數目。此參數指定在單次搜尋中返回的最大實體數目，通常稱為<strong>top-K。</strong></p>
 <p>如果您希望執行分頁查詢，可以使用循環傳送多個 Search 請求，並在每個查詢請求中載入<strong>Limit</strong>和<strong>Offset</strong>參數。具體來說，您可以將<strong>Limit</strong>參數設定為您想要包含在目前查詢結果中的 Entities 數量，並將<strong>Offset</strong>設定為已經返回的 Entities 總數。</p>
 <p>下表概述了在一次返回 100 個實體時，如何為分頁查詢設定<strong>Limit</strong>和<strong>Offset</strong>參數。</p>
 <table>
@@ -964,7 +965,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX 大幅降低 ANN 搜尋的學習曲線。然而，隨著 top-K 的增加，搜尋結果不一定總是正確的。藉由縮小搜尋範圍、改善搜尋結果的相關性，以及使搜尋結果更多元化，Milvus 進行了以下的搜尋強化。</p>
+    </button></h2><p>AUTOINDEX 可大幅拉平 ANN 搜尋的學習曲線。然而，隨著 top-K 的增加，搜尋結果不一定總是正確的。藉由縮小搜尋範圍、改善搜尋結果的相關性，以及使搜尋結果更多元化，Milvus 進行了以下的搜尋強化。</p>
 <ul>
 <li><p>過濾搜尋</p>
 <p>您可以在搜尋請求中加入過濾條件，讓 Milvus 在進行 ANN 搜尋之前先進行元資料過濾，將搜尋範圍從整個集合縮小到只有符合指定過濾條件的實體。</p>
@@ -976,15 +977,15 @@ curl --request POST \
 <p>如果返回的實體在特定欄位中持有相同的值，搜尋結果可能無法代表向量空間中所有向量內嵌的分佈。若要分散搜尋結果，請考慮使用群組搜尋。</p>
 <p>關於群組搜尋的更多資訊，請參閱<a href="/docs/zh-hant/grouping-search.md">群組搜尋</a>、</p></li>
 <li><p>混合搜尋</p>
-<p>一個集合最多可包含四個向量場，以儲存使用不同嵌入模型產生的向量嵌入。如此一來，您就可以使用混合搜尋來重新排序這些向量欄位的搜尋結果，從而提高召回率。</p>
-<p>有關混合搜尋的更多資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>。</p></li>
+<p>一個集合可以包含多個向量場，以儲存使用不同嵌入模型產生的向量嵌入。如此一來，您就可以使用混合搜尋來重新排序這些向量欄位的搜尋結果，從而提高召回率。</p>
+<p>有關混合搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>。</p></li>
 <li><p>搜尋迭代器</p>
 <p>單一 ANN 搜尋最多會返回 16,384 個實體。如果您需要在單一搜尋中返回更多實體，請考慮使用搜尋迭接器。</p>
 <p>有關搜尋迭接器的詳細資訊，請參閱搜尋迭<a href="/docs/zh-hant/with-iterators.md">接器</a>。</p></li>
 <li><p>全文本搜尋</p>
 <p>全文檢索是一種在文字資料集中擷取包含特定詞彙或短語的文件，然後根據相關性排列結果的功能。此功能克服了語意搜尋可能會忽略精確詞彙的限制，確保您收到最精確且與上下文最相關的結果。此外，它還可以透過接受原始文字輸入來簡化向量搜尋，自動將您的文字資料轉換為稀疏嵌入，而不需要手動產生向量嵌入。</p>
 <p>有關全文檢索的詳細資訊，請參閱全文<a href="/docs/zh-hant/full-text-search.md">檢索</a>。</p></li>
-<li><p>關鍵字匹配</p>
+<li><p>文字匹配</p>
 <p>Milvus 中的關鍵字匹配功能可根據特定詞彙進行精確的文件檢索。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細查詢結果，允許在符合標量條件的向量內進行相似性搜尋。</p>
 <p>有關關鍵字匹配的詳細資訊，請參閱<a href="/docs/zh-hant/keyword-match.md">關鍵字匹配</a>。</p></li>
 <li><p>使用分割鍵</p>
@@ -994,4 +995,6 @@ curl --request POST \
 <p>有關 mmap 設定的詳細資訊，請參閱<a href="/docs/zh-hant/mmap.md">使用 mmap</a>。</p></li>
 <li><p>叢集壓縮</p>
 <p>有關群集壓縮的詳細資訊，請參閱<a href="/docs/zh-hant/clustering-compaction.md">群集</a>壓縮。</p></li>
+<li><p>使用排名器</p>
+<p>有關使用排名器增強搜尋結果相關性的詳細資訊，請參閱<a href="/docs/zh-hant/decay-ranker-overview.md">Decay Ranker Overview</a>和<a href="/docs/zh-hant/model-ranker-overview.md">Model Ranker Overview</a>。</p></li>
 </ul>

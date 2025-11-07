@@ -23,7 +23,7 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南介绍如何使用 Milvus Operator 升级 Milvus Standalone。</p>
+    </button></h1><p>本指南描述如何使用 Milvus Operator 升级您的 Milvus Standalone。</p>
 <h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">升级 Milvus 操作符<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -101,7 +101,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingDowngrade</span>
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:&lt;some-older-version&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然后将配置保存为 YAML 文件（例如<code translate="no">milvusupgrade.yaml</code> ），并将此配置文件修补到 Milvus 实例中，具体方法如下：</p>
+<p>然后将配置保存为 YAML 文件（例如<code translate="no">milvusupgrade.yaml</code> ），并将此配置文件修补到 Milvus 实例中，如下所示：</p>
 <pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">通过更改映像升级 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">

@@ -145,7 +145,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作</td><td><code translate="no">update</code></td><td>假</td></tr>
 </tbody>
 </table>
-<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.5.13。</p>
+<p>當您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.5.13。</p>
 <pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.13 -w &#x27;milvusdb/milvus:v2.5.13&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

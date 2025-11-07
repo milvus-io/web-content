@@ -47,7 +47,7 @@ summary: >-
 <ol>
 <li><p><strong>Partitionierung</strong>: Teilt den Datensatz in Cluster auf. Diese Methode engt den Suchraum ein, indem sie sich nur auf relevante Datenuntergruppen konzentriert, anstatt den gesamten Datensatz zu scannen, was Zeit und Verarbeitungsressourcen spart. ScaNN verwendet häufig Clustering-Algorithmen, wie z. B. <a href="https://zilliz.com/blog/k-means-clustering">k-means</a>, zur Identifizierung von Clustern, wodurch die Ähnlichkeitssuche effizienter durchgeführt werden kann.</p></li>
 <li><p><strong>Quantisierung</strong>: ScaNN wendet nach der Partitionierung einen Quantisierungsprozess an, der als <a href="https://arxiv.org/abs/1908.10396">anisotrope Vektorquantisierung</a> bekannt ist. Die herkömmliche Quantisierung konzentriert sich auf die Minimierung des Gesamtabstands zwischen Original- und komprimierten Vektoren, was für Aufgaben wie die <a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">Maximum Inner Product Search (MIPS)</a>, bei der die Ähnlichkeit durch das innere Produkt der Vektoren und nicht durch den direkten Abstand bestimmt wird, nicht ideal ist. Bei der anisotropen Quantisierung werden stattdessen vorrangig die parallelen Komponenten zwischen den Vektoren beibehalten, d. h. die Teile, die für die Berechnung genauer innerer Produkte am wichtigsten sind. Dieser Ansatz ermöglicht es ScaNN, eine hohe MIPS-Genauigkeit beizubehalten, indem komprimierte Vektoren sorgfältig an der Abfrage ausgerichtet werden, was schnellere und präzisere Ähnlichkeitssuchen ermöglicht.</p></li>
-<li><p><strong>Neueinstufung</strong>: Die Re-Ranking-Phase ist der letzte Schritt, in dem ScaNN die Suchergebnisse aus den Partitionierungs- und Quantisierungsphasen fein abstimmt. Diese Neueinstufung wendet präzise innere Produktberechnungen auf die Top-Kandidatenvektoren an und stellt sicher, dass die Endergebnisse äußerst genau sind. Die Neueinstufung ist von entscheidender Bedeutung für schnelle Empfehlungsmaschinen oder Bildsuchanwendungen, bei denen die anfängliche Filterung und das Clustering als grobe Schicht dienen und die letzte Stufe sicherstellt, dass dem Benutzer nur die relevantesten Ergebnisse angezeigt werden.</p></li>
+<li><p><strong>Neueinstufung</strong>: Die Re-Ranking-Phase ist der letzte Schritt, in dem ScaNN die Suchergebnisse aus den Partitionierungs- und Quantisierungsphasen fein abstimmt. Diese Neueinstufung wendet präzise innere Produktberechnungen auf die Top-Kandidatenvektoren an, um sicherzustellen, dass die Endergebnisse äußerst genau sind. Die Neueinstufung ist von entscheidender Bedeutung für schnelle Empfehlungsmaschinen oder Bildsuchanwendungen, bei denen die anfängliche Filterung und das Clustering als grobe Schicht dienen und die letzte Stufe sicherstellt, dass dem Benutzer nur die relevantesten Ergebnisse angezeigt werden.</p></li>
 </ol>
 <p>Die Leistung von <code translate="no">SCANN</code> wird durch zwei Schlüsselparameter gesteuert, mit denen Sie das Gleichgewicht zwischen Geschwindigkeit und Genauigkeit feinabstimmen können:</p>
 <ul>
@@ -96,7 +96,7 @@ index_params.add_index(
 </ul>
 <p>Weitere Informationen zu den für den <code translate="no">SCANN</code> Index verfügbaren Parametern finden Sie unter <a href="/docs/de/scann.md#Index-building-params">Indexerstellungsparameter</a>.</p></li>
 </ul>
-<p>Sobald die Index-Parameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Index-Parameter in der Methode <code translate="no">create_collection</code> übergeben. Einzelheiten finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
+<p>Sobald die Index-Parameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Index-Parameter in der Methode <code translate="no">create_collection</code> übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Suche im Index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -151,24 +151,58 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/scann.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/scann.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
      <th><p>Beschreibung</p></th>
      <th><p>Wertebereich</p></th>
-     <th><p>Tuning Vorschlag</p></th>
+     <th><p>Tuning-Vorschlag</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nlist</code></p></td>
+     <td><p>Anzahl der Cluster-Einheiten</p></td>
+     <td><p>[1, 65536]</p></td>
+     <td><p>Eine höhere <em>nlist</em> erhöht die Effizienz des Pruning und beschleunigt in der Regel die grobe Suche, aber die Partitionen können zu klein werden, was die Wiederauffindbarkeit verringern kann; eine niedrigere <em>nlist</em> scannt größere Cluster, was die Wiederauffindbarkeit verbessert, aber die Suche verlangsamt.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">with_raw_data</code></p></td>
-     <td><p>Ob die ursprünglichen Vektordaten neben der quantisierten Darstellung gespeichert werden sollen. Wenn diese Option aktiviert ist, ermöglicht sie genauere Ähnlichkeitsberechnungen während der Neuordnungsphase, indem sie die ursprünglichen Vektoren anstelle der quantisierten Näherungen verwendet.</p></td>
-     <td><p><strong>Typ</strong>: Boolean <strong>Bereich</strong>: <code translate="no">true</code>, <code translate="no">false</code></p>
-<p><strong>Standardwert</strong>: <code translate="no">true</code></p></td>
-     <td><p>Setzen Sie diesen Wert auf <code translate="no">true</code>, um <strong>eine höhere Suchgenauigkeit</strong> zu erzielen und wenn der Speicherplatz keine große Rolle spielt. Die ursprünglichen Vektordaten ermöglichen präzisere Ähnlichkeitsberechnungen während der Neueinstufung. Setzen Sie den Wert auf <code translate="no">false</code>, um <strong>den Speicheraufwand</strong> und die Speichernutzung <strong>zu reduzieren</strong>, insbesondere bei großen Datensätzen. Dies kann jedoch zu einer etwas geringeren Suchgenauigkeit führen, da in der Phase der Neueinordnung quantisierte Vektoren verwendet werden.</p>
-<p><strong>Empfohlen</strong>: Verwenden Sie <code translate="no">true</code> für Produktionsanwendungen, bei denen die Genauigkeit entscheidend ist.</p></td>
+     <td><p>Ob die ursprünglichen Vektordaten neben der quantisierten Darstellung gespeichert werden sollen. Wenn diese Option aktiviert ist, ermöglicht sie genauere Ähnlichkeitsberechnungen während der Re-Ranking-Phase, da die ursprünglichen Vektoren anstelle der quantisierten Approximationen verwendet werden.</p></td>
+     <td><p><strong>Typ</strong>: Boolean</p><p><strong>Bereich</strong>: <code translate="no">true</code>, <code translate="no">false</code></p><p><strong>Standardwert</strong>: <code translate="no">true</code></p></td>
+     <td><p>Setzen Sie diesen Wert auf <code translate="no">true</code>, um <strong>eine höhere Suchgenauigkeit</strong> zu erzielen und wenn der Speicherplatz keine große Rolle spielt. Die ursprünglichen Vektordaten ermöglichen präzisere Ähnlichkeitsberechnungen bei der Neueinstufung.</p><p>Setzen Sie den Wert auf <code translate="no">false</code>, um <strong>den Speicheraufwand</strong> und die Speichernutzung <strong>zu reduzieren</strong>, insbesondere bei großen Datensätzen. Dies kann jedoch zu einer etwas geringeren Suchgenauigkeit führen, da in der Phase der Neueinordnung quantisierte Vektoren verwendet werden.</p><p><strong>Empfohlen</strong>: Verwenden Sie <code translate="no">true</code> für Produktionsanwendungen, bei denen die Genauigkeit entscheidend ist.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/scann.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/scann.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -179,10 +213,7 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>Steuert die Anzahl der Kandidatenvektoren, die während der Re-Ranking-Phase verfeinert werden. Dieser Parameter legt fest, wie viele Top-Kandidaten aus der anfänglichen Partitionierungs- und Quantisierungsphase durch genauere Ähnlichkeitsberechnungen neu bewertet werden.</p></td>
-     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Standardwert</strong>: Keine</p></td>
-     <td><p>Eine größere <code translate="no">reorder_k</code> führt im Allgemeinen zu einer <strong>höheren Suchgenauigkeit</strong>, da in der letzten Verfeinerungsphase mehr Kandidaten berücksichtigt werden. Allerdings <strong>erhöht sich</strong> dadurch auch <strong>die Suchzeit</strong> aufgrund zusätzlicher Berechnungen. <code translate="no">reorder_k</code> sollte erhöht werden, wenn eine hohe Wiederauffindbarkeit entscheidend ist und die Suchgeschwindigkeit weniger wichtig ist. Ein guter Ausgangspunkt ist das 2-5fache der gewünschten <code translate="no">limit</code> (TopK-Ergebnisse, die zurückgegeben werden).</p>
-<p>Ziehen Sie in Erwägung, <code translate="no">reorder_k</code> zu verringern, um schnelleren Suchen den Vorrang zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.</p>
-<p>In den meisten Fällen empfehlen wir Ihnen, einen Wert innerhalb dieses Bereichs festzulegen:<em>[limit</em>, <em>limit</em> * 5].</p></td>
+     <td><p><strong>Typ</strong>: Integer</p><p><strong>Bereich</strong>: [1, <em>int_max</em>]</p><p><strong>Standardwert</strong>: Keine</p></td>
+     <td><p>Eine größere <code translate="no">reorder_k</code> führt im Allgemeinen zu einer <strong>höheren Suchgenauigkeit</strong>, da in der letzten Verfeinerungsphase mehr Kandidaten berücksichtigt werden. Allerdings <strong>erhöht sich</strong> dadurch auch <strong>die Suchzeit</strong> aufgrund der zusätzlichen Berechnungen.</p><p>Erwägen Sie eine Erhöhung von <code translate="no">reorder_k</code>, wenn eine hohe Wiederfindungsrate entscheidend ist und die Suchgeschwindigkeit weniger wichtig ist. Ein guter Ausgangspunkt ist das 2-5fache der gewünschten <code translate="no">limit</code> (TopK-Ergebnisse, die zurückgegeben werden).</p><p>Ziehen Sie in Erwägung, <code translate="no">reorder_k</code> zu verringern, um schnelleren Suchen den Vorrang zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.</p><p>In den meisten Fällen empfehlen wir Ihnen, einen Wert innerhalb dieses Bereichs festzulegen:<em>[limit</em>, <em>limit</em> * 5].</p></td>
    </tr>
 </table>

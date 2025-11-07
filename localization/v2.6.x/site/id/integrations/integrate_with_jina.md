@@ -38,7 +38,8 @@ title: Mengintegrasikan Milvus dengan Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI, yang didirikan pada tahun 2020 di Berlin, adalah perusahaan AI perintis yang berfokus pada revolusi masa depan kecerdasan buatan melalui fondasi pencariannya. Mengkhususkan diri dalam AI multimodal, Jina AI bertujuan untuk memberdayakan bisnis dan pengembang untuk memanfaatkan kekuatan data multimodal untuk penciptaan nilai dan penghematan biaya melalui rangkaian komponen terintegrasi, termasuk penyematan, pemeringkatan, operasi cepat, dan infrastruktur inti. Penyematan Jina AI yang canggih membanggakan kinerja tingkat atas, yang menampilkan model dengan panjang token 8192 yang ideal untuk representasi data yang komprehensif. Menawarkan dukungan multibahasa dan integrasi tanpa batas dengan platform terkemuka seperti OpenAI, penyematan ini memfasilitasi aplikasi lintas bahasa.</p>
+    </button></h2><p>Jina AI, yang didirikan pada tahun 2020 di Berlin, adalah perusahaan AI perintis yang berfokus pada revolusi masa depan kecerdasan buatan melalui fondasi pencariannya. Mengkhususkan diri dalam AI multimodal, Jina AI bertujuan untuk memberdayakan bisnis dan pengembang dalam memanfaatkan kekuatan data multimodal untuk penciptaan nilai dan penghematan biaya melalui rangkaian komponen terintegrasi, termasuk penyematan, pemeringkatan, operasi cepat, dan infrastruktur inti.<br>
+Penyematan mutakhir Jina AI membanggakan kinerja tingkat atas, menampilkan model panjang token 8192 yang ideal untuk representasi data yang komprehensif. Menawarkan dukungan multibahasa dan integrasi tanpa batas dengan platform terkemuka seperti OpenAI, penyematan ini memfasilitasi aplikasi lintas bahasa.</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Penyematan Milvus dan Jina AI<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ title: Mengintegrasikan Milvus dengan Jina
       </svg>
     </button></h2><p>Penyematan Jina telah diintegrasikan ke dalam pustaka model PyMilvus. Sekarang, kami akan mendemonstrasikan contoh kode untuk menunjukkan cara menggunakan embedding Jina.</p>
 <p>Sebelum kita mulai, kita perlu menginstal pustaka model untuk PyMilvus.</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -125,7 +126,7 @@ dvecs = ef.encode_documents([doc])  <span class="hljs-comment"># This method use
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Model dwibahasa Jina AI meningkatkan platform multibahasa, dukungan global, dan penemuan konten lintas bahasa. Dirancang untuk terjemahan bahasa Jerman-Inggris dan bahasa Mandarin-Inggris, model ini mendorong pemahaman di antara kelompok bahasa yang beragam, sehingga menyederhanakan interaksi lintas bahasa.</p>
+    </button></h2><p>Model dwibahasa Jina AI meningkatkan platform multibahasa, dukungan global, dan penemuan konten lintas bahasa. Dirancang untuk terjemahan bahasa Jerman-Inggris dan bahasa Mandarin-Inggris, model ini mendorong pemahaman di antara kelompok linguistik yang beragam, sehingga menyederhanakan interaksi lintas bahasa.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>

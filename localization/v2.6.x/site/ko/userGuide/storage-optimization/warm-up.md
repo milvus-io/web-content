@@ -3,8 +3,8 @@ id: warm-up.md
 title: 워밍업Compatible with Milvus 2.6.4+
 summary: >-
   Milvus에서 웜업은 콜드 데이터에 처음 액세스할 때 발생하는 첫 번째 히트 지연 시간을 완화하여 계층형 스토리지를 보완합니다. 일단
-  구성되면, 웜업은 세그먼트가 쿼리 가능해지기 전에 선택한 필드나 인덱스를 캐시에 미리 로드하여 자주 액세스하는 데이터를 로드 직후에 사용할
-  수 있도록 합니다.
+  구성되면, 웜업은 세그먼트가 쿼리 가능해지기 전에 선택한 유형의 필드 또는 인덱스를 캐시에 미리 로드하여 자주 액세스하는 데이터를 로드
+  직후에 사용할 수 있도록 합니다.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Warm-Up" class="common-anchor-header">워밍업<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Warm-Up" class="anchor-icon" translate="no">
@@ -22,7 +22,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus에서 <strong>웜업은</strong> 콜드 데이터에 처음 액세스할 때 발생하는 첫 번째 히트 지연 시간을 완화하여 계층형 스토리지를 보완합니다. 일단 구성되면, 워밍업은 세그먼트가 쿼리 가능해지기 전에 선택한 필드 또는 인덱스를 캐시에 미리 로드하여 자주 액세스하는 데이터를 로드 후 즉시 사용할 수 있도록 합니다.</p>
+    </button></h1><p>Milvus에서 <strong>웜업은</strong> 콜드 데이터에 처음 액세스할 때 발생하는 첫 번째 히트 지연 시간을 완화하여 계층형 스토리지를 보완합니다. 일단 구성되면, 워밍업은 세그먼트가 쿼리 가능해지기 전에 선택한 유형의 필드 또는 인덱스를 캐시에 미리 로드하여 자주 액세스하는 데이터를 로드 후 즉시 사용할 수 있도록 합니다.</p>
 <h2 id="Why-warm-up" class="common-anchor-header">워밍업이 필요한 이유<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,8 +70,8 @@ beta: Milvus 2.6.4+
      <th><p>일반적인 시나리오</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">sync</code> (기본값)</p></td>
-     <td><p>세그먼트가 쿼리 가능 상태가 되기 전에 미리 로드합니다. 로드 시간은 약간 증가하지만 첫 번째 쿼리에는 지연 시간이 발생하지 않습니다.</p></td>
+     <td><p><code translate="no">sync</code></p></td>
+     <td><p>세그먼트를 쿼리할 수 있게 되기 전에 미리 로드합니다. 로드 시간은 약간 증가하지만 첫 번째 쿼리에는 지연 시간이 발생하지 않습니다.</p></td>
      <td><p>검색에 사용되는 고빈도 스칼라 인덱스나 주요 벡터 인덱스와 같이 즉시 사용 가능해야 하는 성능에 중요한 데이터에 사용합니다.</p></td>
    </tr>
    <tr>
@@ -87,9 +87,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-attr">warmup:</span>
         <span class="hljs-comment"># options: sync, disable.</span>
         <span class="hljs-comment"># Specifies the timing for warming up the Tiered Storage cache.</span>
-        <span class="hljs-comment"># - &quot;sync&quot;: data will be loaded into the cache before a segment is considered loaded.</span>
-        <span class="hljs-comment"># - &quot;disable&quot;: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
-        <span class="hljs-comment"># Defaults to &quot;sync&quot;, except for vector field which defaults to &quot;disable&quot;.</span>
+        <span class="hljs-comment"># - `sync`: data will be loaded into the cache before a segment is considered loaded.</span>
+        <span class="hljs-comment"># - `disable`: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
+        <span class="hljs-comment"># Defaults to `sync`, except for vector field which defaults to `disable`.</span>
         <span class="hljs-attr">scalarField:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">scalarIndex:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">vectorField:</span> <span class="hljs-string">disable</span> <span class="hljs-comment"># cache warmup for vector field raw data is by default disabled.</span>

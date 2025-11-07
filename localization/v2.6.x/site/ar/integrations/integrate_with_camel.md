@@ -49,7 +49,7 @@ title: التوليد المعزّز للاسترجاع (RAG) باستخدام �
         ></path>
       </svg>
     </button></h2><p>لنقم أولاً بتحميل ورقة CAMEL من https://arxiv.org/pdf/2303.17760.pdf. سيكون هذا مثالنا المحلي للبيانات.</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -105,7 +105,7 @@ storage_instance = MilvusStorage(
 <ul>
 <li>يعد استخدام ملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، حيث أن URI اتصال Milvus هو الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام uri الخادم، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كعنوان url الخاص بك.</li>
-<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المُدارة بالكامل لـ Milvus، فقم بضبط uri الاتصال والرمز المميز، اللذين يتوافقان مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
+<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، فقم بضبط uri الاتصال والرمز المميز، اللذين يتوافقان مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>
 </div>
 <p>قم باستيراد وتعيين مثيل المسترد:</p>
@@ -126,7 +126,7 @@ vector_retriever = VectorRetriever(
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
 <p>يمكننا الآن استرداد المعلومات من مخزن المتجهات عن طريق إعطاء استعلام. بشكل افتراضي، سيعيد لك المحتوى النصي من أعلى 1 قطعة ذات أعلى درجة تشابه في جيب التمام (Cosine)، ويجب أن تكون درجة التشابه أعلى من 0.75 لضمان أن المحتوى المسترجع ذو صلة بالاستعلام. يمكنك أيضًا تغيير القيمة <code translate="no">top_k</code>.</p>
-<p>تتضمن قائمة السلسلة التي تم إرجاعها</p>
+<p>تتضمن قائمة السلسلة التي تم إرجاعها:</p>
 <ul>
 <li>درجة التشابه</li>
 <li>مسار المحتوى</li>
@@ -285,7 +285,7 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>سنوضح في هذا القسم كيفية الجمع بين <code translate="no">RETRIEVAL_FUNCS</code> مع <code translate="no">RolePlaying</code> من خلال تطبيق <code translate="no">Function Calling</code>.</p>
+    </button></h2><p>سنوضح في هذا القسم كيفية دمج <code translate="no">RETRIEVAL_FUNCS</code> مع <code translate="no">RolePlaying</code> من خلال تطبيق <code translate="no">Function Calling</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> colorama <span class="hljs-keyword">import</span> Fore
 

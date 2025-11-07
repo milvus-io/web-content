@@ -41,7 +41,7 @@ title: Avaliação com Arize Pheonix
         ></path>
       </svg>
     </button></h2><p>Antes de executar este notebook, certifique-se de ter as seguintes dependências instaladas:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -298,7 +298,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     <tr>
       <th>1</th>
       <td>Qual é a linguagem de programação usada para escrever...</td>
-      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos de Mil...</td>
+      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos do Mil...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
     </tr>
@@ -331,14 +331,29 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <ul>
 <li><p><strong>Avaliação de alucinação</strong>: Determina se o conteúdo é factual ou alucinatório (informação não fundamentada no contexto), garantindo a integridade dos dados.</p>
 <ul>
-<li><strong>Explicação da alucinação</strong>: Explica porque é que uma resposta é factual ou não.</li>
+<li><strong>Explicação</strong> da<strong>alucinação</strong>: Explica porque é que uma resposta é factual ou não.</li>
 </ul></li>
 <li><p><strong>Avaliação de QA</strong>: Avalia a exatidão das respostas do modelo às consultas de entrada.</p>
 <ul>
 <li><strong>Explicação de QA</strong>: Detalha por que uma resposta está correta ou incorreta.</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Visão geral do Phoenix Tracing</h3><p>O Phoenix fornece <strong>rastreamento compatível com OTEL</strong> para aplicativos LLM, com integrações para estruturas como <strong>Langchain</strong>, <strong>LlamaIndex</strong> e SDKs como <strong>OpenAI</strong> e <strong>Mistral</strong>. O rastreamento captura todo o fluxo de solicitações, oferecendo insights sobre:</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Visão geral do Phoenix Tracing<button data-href="#Phoenix-Tracing-Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O Phoenix fornece <strong>rastreamento compatível com OTEL</strong> para aplicativos LLM, com integrações para estruturas como <strong>Langchain</strong>, <strong>LlamaIndex</strong> e SDKs como <strong>OpenAI</strong> e <strong>Mistral</strong>. O rastreamento captura todo o fluxo de solicitações, oferecendo insights sobre:</p>
 <ul>
 <li><strong>Latência do aplicativo</strong>: Identificar e otimizar invocações LLM lentas e desempenho de componentes.</li>
 <li><strong>Uso de token</strong>: Divida o consumo de token para otimização de custos.</li>

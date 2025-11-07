@@ -212,7 +212,7 @@ beta: Milvus 2.6.4+
 </ul>
 <p><strong>理由</strong></p>
 <p>结合配置可对资源分配进行细粒度控制。</p>
-<p>关键收集可保持低延迟保证，而辅助收集则可处理更多网段和数据量。</p>
+<p>关键收集可保持低延迟保证，而辅助收集则可处理更多的数据段和数据量。</p>
 <h2 id="Additional-tuning-tips" class="common-anchor-header">其他调整技巧<button data-href="#Additional-tuning-tips" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

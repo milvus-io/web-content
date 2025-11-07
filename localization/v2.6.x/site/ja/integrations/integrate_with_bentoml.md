@@ -1,7 +1,7 @@
 ---
 id: integrate_with_bentoml.md
 summary: >-
-  このガイドでは、MilvusベクトルデータベースとBentoCloud上でオープンソースの埋め込みモデルと大規模言語モデルを使用して、RAG（Retrieval
+  このガイドでは、MilvusベクトルデータベースとBentoCloud上でオープンソースのエンベッディングモデルと大規模言語モデルを使用して、RAG（Retrieval
   Augmented Generation）アプリケーションを構築する方法を紹介します。
 title: MilvusとBentoMLによる検索支援型生成(RAG)
 ---
@@ -54,7 +54,7 @@ title: MilvusとBentoMLによる検索支援型生成(RAG)
         ></path>
       </svg>
     </button></h2><p>Milvus LiteはPyPIから入手可能です。Python 3.8+ではpip経由でインストールできます：</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -190,7 +190,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot
 <p><code translate="no">MilvusClient</code> の引数については、次のとおりです：</p>
 <ul>
 <li><code translate="no">uri</code> の引数をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>

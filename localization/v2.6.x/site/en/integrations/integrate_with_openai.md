@@ -39,7 +39,7 @@ summary: This page discusses vector database integration with OpenAI's embedding
     </button></h2><p>Before you start, make sure you have the OpenAI API key ready, or you get one from the <a href="https://openai.com/index/openai-api/">OpenAI website</a>.</p>
 <p>The data used in this example are book titles. You can download the dataset <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">here</a> and put it in the same directory where you run the following code.</p>
 <p>First, install the package for Milvus and OpenAI:</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus
+<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>

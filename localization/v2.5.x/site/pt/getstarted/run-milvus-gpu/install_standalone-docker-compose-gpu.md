@@ -41,7 +41,7 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
 <li><a href="/docs/pt/v2.5.x/prerequisite-gpu.md">Verifique os requisitos de hardware e software</a> antes da instalação.</li>
 </ul>
 <div class="alert note">
-<p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e fornecer-lhe-emos o apoio necessário.</p>
+<p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos fornecer-lhe o suporte necessário.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar o Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +79,7 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
 <button class="copy-code-btn"></button></code></pre>
 <p>É necessário fazer algumas alterações nas variáveis de ambiente do serviço autónomo no ficheiro YAML, como se segue:</p>
 <ul>
-<li>Para atribuir um dispositivo GPU específico ao Milvus, localize o campo <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> na definição do serviço <code translate="no">standalone</code> e substitua o seu valor pelo ID da GPU pretendida. É possível utilizar a ferramenta <code translate="no">nvidia-smi</code>, incluída nos controladores de visualização da GPU NVIDIA, para determinar a ID de um dispositivo GPU. O Milvus suporta múltiplos dispositivos GPU.</li>
+<li>Para atribuir um dispositivo GPU específico ao Milvus, localize o campo <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> na definição do serviço <code translate="no">standalone</code> e substitua o seu valor pelo ID da GPU pretendida. Pode utilizar a ferramenta <code translate="no">nvidia-smi</code>, incluída nos controladores de visualização da GPU NVIDIA, para determinar a ID de um dispositivo GPU. O Milvus suporta múltiplos dispositivos GPU.</li>
 </ul>
 <p>Atribuir um único dispositivo GPU ao Milvus:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>

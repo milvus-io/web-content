@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>После того как капсула Milvus Operator запущена, вы можете развернуть кластер Milvus следующим образом.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Команда выше развертывает кластер Milvus с <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии 2.6.3) и всеми новыми архитектурными компонентами, включая Streaming Node.</p>
+<p>Команда выше развертывает кластер Milvus с <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии 2.6.4) и всеми новыми архитектурными компонентами, включая Streaming Node.</p>
 <p><strong>Основные элементы архитектуры в этом развертывании:</strong></p>
 <ul>
 <li><strong>Очередь сообщений</strong>: <a href="/docs/ru/use-woodpecker.md">Используется Woodpecker</a> (сокращает обслуживание инфраструктуры).</li>

@@ -4,9 +4,9 @@ title: NGRAMCompatible with Milvus v2.6.2+
 summary: >-
   Milvus의 NGRAM 인덱스는 VARCHAR 필드 또는 JSON 필드 내의 특정 JSON 경로에 대한 LIKE 쿼리를 가속화하기 위해
   구축되었습니다. 인덱스를 구축하기 전에 Milvus는 텍스트를 n-gram이라고 하는 고정된 길이 n의 짧고 겹치는 하위 문자열로
-  분할합니다. 예를 들어, n = 3이면 "Milvus"라는 단어는 3그램으로 분할됩니다: "Mil", "ilv", "lvu", "vus".
-  그런 다음 이러한 n-그램은 각 그램을 해당 그램이 나타나는 문서 ID에 매핑하는 반전 인덱스에 저장됩니다. 쿼리 시 이 인덱스를 통해
-  Milvus는 검색 범위를 작은 후보 집합으로 빠르게 좁힐 수 있으므로 쿼리 실행 속도가 훨씬 빨라집니다.
+  분할합니다. 예를 들어, n = 3인 경우 "Milvus"라는 단어는 3그램으로 분할됩니다: "Mil", "ilv", "lvu",
+  "vus". 그런 다음 이러한 n-그램은 각 그램을 해당 그램이 나타나는 문서 ID에 매핑하는 반전 인덱스에 저장됩니다. 쿼리 시 이
+  인덱스를 통해 Milvus는 검색 범위를 작은 후보 집합으로 빠르게 좁힐 수 있으므로 쿼리 실행 속도가 훨씬 빨라집니다.
 beta: Milvus v2.6.2+
 ---
 <h1 id="NGRAM" class="common-anchor-header">NGRAM<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#NGRAM" class="anchor-icon" translate="no">
@@ -24,7 +24,7 @@ beta: Milvus v2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus의 <code translate="no">NGRAM</code> 인덱스는 <code translate="no">VARCHAR</code> 필드 또는 <code translate="no">JSON</code> 필드 내의 특정 JSON 경로에 대한 <code translate="no">LIKE</code> 쿼리를 가속화하기 위해 구축되었습니다. 인덱스를 구축하기 전에 Milvus는 텍스트를 <em>n-그램이라고</em> 하는 고정된 길이 <em>n의</em> 짧고 겹치는 하위 문자열로 분할합니다. 예를 들어, <em>n = 3인</em> 경우 <em>"Milvus</em> "라는 단어는 3그램으로 분할됩니다: <em>"Mil",</em> <em>"ilv",</em> <em>"lvu</em>", <em>"vus"</em>. 그런 다음 이러한 n-그램은 각 그램을 해당 그램이 나타나는 문서 ID에 매핑하는 반전 인덱스에 저장됩니다. 쿼리 시 이 인덱스를 통해 Milvus는 검색 범위를 작은 후보 집합으로 빠르게 좁힐 수 있으므로 쿼리 실행 속도가 훨씬 빨라집니다.</p>
+    </button></h1><p>Milvus의 <code translate="no">NGRAM</code> 인덱스는 <code translate="no">VARCHAR</code> 필드 또는 <code translate="no">JSON</code> 필드 내의 특정 JSON 경로에 대한 <code translate="no">LIKE</code> 쿼리를 가속화하기 위해 구축되었습니다. 인덱스를 구축하기 전에 Milvus는 텍스트를 <em>n-그램이라고</em> 하는 고정된 길이 <em>n의</em> 짧고 겹치는 하위 문자열로 분할합니다. 예를 들어, <em>n = 3이면</em> <em>"Milvus</em> "라는 단어는 3그램으로 분할됩니다: <em>"Mil",</em> <em>"ilv",</em> <em>"lvu</em>", <em>"vus"</em>. 그런 다음 이러한 n-그램은 각 그램을 해당 그램이 나타나는 문서 ID에 매핑하는 반전 인덱스에 저장됩니다. 쿼리 시 이 인덱스를 통해 Milvus는 검색 범위를 작은 후보 집합으로 빠르게 좁힐 수 있으므로 쿼리 실행 속도가 훨씬 빨라집니다.</p>
 <p>다음과 같이 빠른 접두사, 접미사, 접미사 또는 와일드카드 필터링이 필요할 때 이 색인을 사용하세요:</p>
 <ul>
 <li><p><code translate="no">name LIKE &quot;data%&quot;</code></p></li>
@@ -249,7 +249,7 @@ client.create_index(
 <li><p>이 값은 n-gram 토큰화 전에 <code translate="no">VARCHAR</code> 로 캐스팅됩니다.</p></li>
 <li><p>Milvus는 길이 2~4의 하위 문자열을 생성하고 이를 반전된 인덱스에 저장합니다.</p></li>
 </ul>
-<p>JSON 필드를 색인하는 방법에 대한 자세한 내용은 <a href="/docs/ko/use-json-fields.md">JSON 필드를</a> 참조하세요.</p>
+<p>JSON 필드를 색인하는 방법에 대한 자세한 내용은 <a href="/docs/ko/json-indexing.md">JSON 색인하기를</a> 참조하세요.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">NGRAM으로 가속화된 쿼리<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,6 +294,33 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>필터 표현식 구문에 대한 자세한 내용은 <a href="/docs/ko/basic-operators.md">기본 연산자를</a> 참조하세요.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">색인 삭제<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>컬렉션에서 기존 인덱스를 제거하려면 <code translate="no">drop_index()</code> 메서드를 사용합니다.</p>
+<div class="alert note">
+<ul>
+<li><p><strong>v2.6.3</strong> 이전 버전에서는 스칼라 인덱스를 삭제하기 전에 컬렉션을 해제해야 합니다.</p></li>
+<li><p><strong>v2.6.4</strong> 이상에서는 더 이상 필요하지 않은 경우 컬렉션을 먼저 해제할 필요 없이 바로 스칼라 인덱스를 삭제할 수 있습니다.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">사용 참고 사항<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

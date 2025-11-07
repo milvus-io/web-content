@@ -228,7 +228,7 @@ client.load_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Consulta con filtrado de fecha y hora</h4><p>Utilice operadores aritméticos como <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. Para obtener una lista completa de los operadores aritméticos disponibles en Milvus, consulte <a href="/docs/es/basic-operators.md#Arithmetic-Operators">Operadores aritméticos</a>.</p>
-<p>El siguiente ejemplo filtra entidades con marcas de tiempo (<code translate="no">tsz</code>) que no son iguales a <strong>2025-01-03T00:00:00+08:00</strong>:</p>
+<p>El ejemplo siguiente filtra entidades con marcas de tiempo (<code translate="no">tsz</code>) que no son iguales a <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
    <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>

@@ -114,6 +114,13 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p>若要在<a href="/docs/zh-hant/array-of-structs.md">Array of Structs 欄位</a>中索引向量欄位，您應該根據這些欄位中儲存的向量內嵌，將<code translate="no">MAX_SIM</code> 前綴為上述的度量類型集。舉例來說</p>
+<ul>
+<li><p>對於儲存<code translate="no">FLOAT_VECTOR</code>,<code translate="no">FLOAT16_VECTOR</code>,<code translate="no">BFLOAT16_VECTOR</code>, 或<code translate="no">INT8_VECTOR</code> 類型向量內嵌的向量欄位，您可以使用<code translate="no">MAX_SIM_COSINE</code>,<code translate="no">MAX_SIM_IP</code>, 或<code translate="no">MAX_SIM_L2</code> 作為公制類型。</p></li>
+<li><p>對於儲存<code translate="no">BINARY_VECTOR</code> 類型向量內嵌的向量領域，您可以使用<code translate="no">MAX_SIM_JACCADR</code> 或<code translate="no">MAX_SIM_HAMMING</code> 作為度量類型。</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">歐氏距離 (L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -129,7 +136,7 @@ summary: 相似度量用來衡量向量之間的相似性。選擇適當的距�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>基本上，歐氏距離量度的是連接 2 點的一段長度。</p>
+    </button></h2><p>基本上，歐氏距離量度的是連接 2 個點的線段長度。</p>
 <p>歐氏距離的公式如下：</p>
 <p>
   

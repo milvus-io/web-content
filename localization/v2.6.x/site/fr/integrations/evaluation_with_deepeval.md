@@ -41,7 +41,7 @@ title: Évaluation avec DeepEval
         ></path>
       </svg>
     </button></h2><p>Avant d'exécuter ce notebook, assurez-vous que les dépendances suivantes sont installées :</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
@@ -395,7 +395,7 @@ Evaluating 3 test case(s) in parallel: |██████████|100% (3/3
     </button></h2><p>Pour évaluer la qualité des résultats générés dans les grands modèles de langage (LLM), il est important de se concentrer sur deux aspects clés :</p>
 <ol>
 <li><p>La<strong>pertinence</strong>: Évaluer si l'invite guide efficacement le LLM pour générer des réponses utiles et appropriées au contexte.</p></li>
-<li><p><strong>Fidélité</strong>: Mesurer l'exactitude des résultats, en s'assurant que le modèle produit des informations correctes sur le plan factuel et exemptes d'hallucinations ou de contradictions. Le contenu généré doit correspondre aux informations factuelles fournies dans le contexte de recherche.</p></li>
+<li><p><strong>Fidélité</strong>: Mesurer l'exactitude des résultats, en s'assurant que le modèle produit des informations correctes sur le plan factuel et exemptes d'hallucinations ou de contradictions. Le contenu généré doit s'aligner sur les informations factuelles fournies dans le contexte de recherche.</p></li>
 </ol>
 <p>L'ensemble de ces facteurs garantit que les résultats sont à la fois pertinents et fiables.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> deepeval.metrics <span class="hljs-keyword">import</span> AnswerRelevancyMetric, FaithfulnessMetric

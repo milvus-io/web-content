@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Una volta che il pod Milvus Operator è in esecuzione, è possibile distribuire un cluster Milvus come segue.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Il comando precedente distribuisce un cluster Milvus con <strong>Woodpecker</strong> come coda di messaggi (consigliato per la versione 2.6.3) e tutti i nuovi componenti architettonici, compreso lo Streaming Node.</p>
+<p>Il comando precedente distribuisce un cluster Milvus con <strong>Woodpecker</strong> come coda di messaggi (consigliato per la versione 2.6.4) e tutti i nuovi componenti architettonici, compreso lo Streaming Node.</p>
 <p><strong>I punti salienti dell'architettura in questa distribuzione:</strong></p>
 <ul>
 <li><strong>Coda dei messaggi</strong>: <a href="/docs/it/use-woodpecker.md">Utilizza Woodpecker</a> (riduce la manutenzione dell'infrastruttura).</li>

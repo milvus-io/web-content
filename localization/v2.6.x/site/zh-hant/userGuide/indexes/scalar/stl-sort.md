@@ -70,7 +70,7 @@ summary: >-
 </ul></li>
 <li><p><strong>加速查詢</strong></p>
 <ul>
-<li><p>在查詢時，Milvus 在排序陣列上使用<strong>二元搜尋</strong><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">(std::lower_bound</a>和<a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) 。</p></li>
+<li><p>在查詢時，Milvus 在排序陣列上使用<strong>二元搜尋</strong><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">(std::lower_bound</a>和<a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper</a><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">_bound</a>)。</p></li>
 <li><p>對於相等值，Milvus 可以快速找到所有匹配值。</p></li>
 <li><p>對於範圍，Milvus 會定位開始和結束位置，並傳回其間的所有值。</p></li>
 <li><p>匹配的實體 ID 會傳送到查詢執行器，以進行最終結果的組合。</p></li>

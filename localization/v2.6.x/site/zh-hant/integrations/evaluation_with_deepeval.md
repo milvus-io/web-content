@@ -39,7 +39,7 @@ title: 使用 DeepEval 進行評估
         ></path>
       </svg>
     </button></h2><p>在執行本筆記本之前，請確定您已安裝下列依賴項目：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時</strong>（點擊螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>

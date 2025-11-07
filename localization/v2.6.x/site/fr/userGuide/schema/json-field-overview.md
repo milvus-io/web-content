@@ -93,7 +93,7 @@ summary: >-
    <tr>
      <td><p>Définition du schéma</p></td>
      <td><p>Champ scalaire qui doit être explicitement déclaré dans le schéma de la collection avec le type <code translate="no">DataType.JSON</code>.</p></td>
-     <td><p>Un champ JSON caché (nommé <code translate="no">#meta</code>) qui stocke automatiquement les champs non déclarés.</p></td>
+     <td><p>Un champ JSON caché (nommé <code translate="no">$meta</code>) qui stocke automatiquement les champs non déclarés.</p></td>
    </tr>
    <tr>
      <td><p>Cas d'utilisation</p></td>
@@ -108,7 +108,7 @@ summary: >-
    <tr>
      <td><p>Interrogation</p></td>
      <td><p>Interrogation à l'aide du nom du champ ou de la clé cible à l'intérieur du champ JSON : <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Interrogation directe à l'aide de la clé de champ dynamique : <code translate="no">"dynamic_key"</code> ou via <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Interrogation directe à l'aide de la clé de champ dynamique : <code translate="no">"dynamic_key"</code> ou via <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Opérations de base<button data-href="#Basic-operations" class="anchor-icon" translate="no">

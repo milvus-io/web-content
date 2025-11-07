@@ -36,10 +36,10 @@ title: Utilizzare Milvus come negozio di vettori
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È necessario installare <code translate="no">langchain-milvus</code> con <code translate="no">pip install -qU langchain-milvus</code> per utilizzare questa integrazione.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU  langchain_milvus</span>
+    </button></h2><p>È necessario installare <code translate="no">langchain-milvus</code> e altre dipendenze necessarie.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU langchain-milvus milvus-lite langchain-openai</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'ultima versione di pymilvus viene fornita con un database vettoriale locale Milvus Lite, buono per la prototipazione. Se si dispone di dati su larga scala, come più di un milione di documenti, si consiglia di impostare un server Milvus più performante su <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker o kubernetes</a>.</p>
+<p>L'ultima versione di pymilvus viene fornita con un database vettoriale locale Milvus Lite, buono per la prototipazione. Se si dispone di una grande quantità di dati, come più di un milione di documenti, si consiglia di configurare un server Milvus più performante su <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker o kubernetes</a>.</p>
 <h2 id="Initialization" class="common-anchor-header">Inizializzazione<button data-href="#Initialization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +70,22 @@ vector_store = Milvus(
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">Compartimentare i dati con le Collezioni Milvus</h3><p>È possibile archiviare documenti diversi e non correlati in raccolte diverse all'interno della stessa istanza Milvus per mantenere il contesto.</p>
+<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">Compartimentare i dati con le Collezioni Milvus<button data-href="#Compartmentalize-the-data-with-Milvus-Collections" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile archiviare documenti diversi e non correlati in raccolte diverse all'interno della stessa istanza Milvus per mantenere il contesto.</p>
 <p>Ecco come si può creare una nuova raccolta vettoriale di documenti:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
@@ -104,7 +119,22 @@ vector_store_saved = Milvus.from_documents(
         ></path>
       </svg>
     </button></h2><p>Una volta creato l'archivio vettoriale, possiamo interagire con esso aggiungendo e cancellando diversi elementi.</p>
-<h3 id="Add-items-to-vector-store" class="common-anchor-header">Aggiungere elementi al negozio vettoriale</h3><p>Possiamo aggiungere elementi al nostro archivio vettoriale utilizzando la funzione <code translate="no">add_documents</code>.</p>
+<h3 id="Add-items-to-vector-store" class="common-anchor-header">Aggiungere elementi al negozio vettoriale<button data-href="#Add-items-to-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Possiamo aggiungere elementi al nostro archivio vettoriale utilizzando la funzione <code translate="no">add_documents</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> uuid <span class="hljs-keyword">import</span> uuid4
 
 <span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
@@ -175,20 +205,35 @@ uuids = [<span class="hljs-built_in">str</span>(uuid4()) <span class="hljs-keywo
 
 vector_store.add_documents(documents=documents, ids=uuids)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">['b0248595-2a41-4f6b-9c25-3a24c1278bb3',
- 'fa642726-5329-4495-a072-187e948dd71f',
- '9905001c-a4a3-455e-ab94-72d0ed11b476',
- 'eacc7256-d7fa-4036-b1f7-83d7a4bee0c5',
- '7508f7ff-c0c9-49ea-8189-634f8a0244d8',
- '2e179609-3ff7-4c6a-9e05-08978903fe26',
- 'fab1f2ac-43e1-45f9-b81b-fc5d334c6508',
- '1206d237-ee3a-484f-baf2-b5ac38eeb314',
- 'd43cbf9a-a772-4c40-993b-9439065fec01',
- '25e667bb-6f09-4574-a368-661069301906']
+<pre><code translate="no">['31915e2d-55fd-4bfb-ae08-d441252b8e08',
+ 'dbf6560a-1487-4a6e-8797-245d57874f5b',
+ 'e991a253-5f37-46ae-850a-82a660e33013',
+ '2818c051-5a1a-44cb-9deb-aaaac709f616',
+ '91c7ef07-26d1-4319-b48c-9261df9ce8d7',
+ 'fb258085-6400-4cd7-aa92-fc5e32ca243e',
+ 'ffea9a9f-460d-4d8d-ba07-c45e9cfa1e33',
+ 'eb149e29-239a-4e2c-9f99-751cb7207abf',
+ '119d4a42-fd6b-433d-842b-1e0be5df81e5',
+ '5b099eb0-98fe-40a3-b13a-300c10250960']
 </code></pre>
-<h3 id="Delete-items-from-vector-store" class="common-anchor-header">Eliminare elementi dal negozio vettoriale</h3><pre><code translate="no" class="language-python">vector_store.delete(ids=[uuids[-<span class="hljs-number">1</span>]])
+<h3 id="Delete-items-from-vector-store" class="common-anchor-header">Eliminare elementi dal negozio vettoriale<button data-href="#Delete-items-from-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python">vector_store.delete(ids=[uuids[-<span class="hljs-number">1</span>]])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">(insert count: 0, delete count: 1, upsert count: 0, timestamp: 0, success count: 0, err count: 0, cost: 0)
+<pre><code translate="no">True
 </code></pre>
 <h2 id="Query-vector-store" class="common-anchor-header">Interrogare il negozio vettoriale<button data-href="#Query-vector-store" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -206,7 +251,22 @@ vector_store.add_documents(documents=documents, ids=uuids)
         ></path>
       </svg>
     </button></h2><p>Una volta creato l'archivio vettoriale e aggiunti i documenti pertinenti, è probabile che si desideri interrogarlo durante l'esecuzione della catena o dell'agente.</p>
-<h3 id="Query-directly" class="common-anchor-header">Interrogazione diretta</h3><h4 id="Similarity-search" class="common-anchor-header">Ricerca per similarità</h4><p>L'esecuzione di una semplice ricerca di similarità con filtro sui metadati può essere eseguita come segue:</p>
+<h3 id="Query-directly" class="common-anchor-header">Interrogazione diretta<button data-href="#Query-directly" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Similarity-search" class="common-anchor-header">Ricerca per similarità</h4><p>L'esecuzione di una semplice ricerca di similarità con filtro sui metadati può essere eseguita come segue:</p>
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search(
     <span class="hljs-string">&quot;LangChain provides abstractions to make working with LLMs easy&quot;</span>,
     k=<span class="hljs-number">2</span>,
@@ -216,24 +276,49 @@ vector_store.add_documents(documents=documents, ids=uuids)
 <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">* Building an exciting new project with LangChain - come check it out! [{'pk': '9905001c-a4a3-455e-ab94-72d0ed11b476', 'source': 'tweet'}]
-* LangGraph is the best framework for building stateful, agentic applications! [{'pk': '1206d237-ee3a-484f-baf2-b5ac38eeb314', 'source': 'tweet'}]
+<pre><code translate="no">WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1761298048.354308 7886403 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+
+
+* Building an exciting new project with LangChain - come check it out! [{'source': 'tweet', 'pk': 'e991a253-5f37-46ae-850a-82a660e33013'}]
+* LangGraph is the best framework for building stateful, agentic applications! [{'source': 'tweet', 'pk': 'eb149e29-239a-4e2c-9f99-751cb7207abf'}]
 </code></pre>
-<h4 id="Similarity-search-with-score" class="common-anchor-header">Ricerca per similarità con punteggio</h4><p>È possibile effettuare la ricerca anche con il punteggio:</p>
+<h4 id="Similarity-search-with-score" class="common-anchor-header">Ricerca per similarità con punteggio</h4><p>È anche possibile effettuare una ricerca con punteggio:</p>
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search_with_score(
     <span class="hljs-string">&quot;Will it be hot tomorrow?&quot;</span>, k=<span class="hljs-number">1</span>, expr=<span class="hljs-string">&#x27;source == &quot;news&quot;&#x27;</span>
 )
 <span class="hljs-keyword">for</span> res, score <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* [SIM=<span class="hljs-subst">{score:3f}</span>] <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">* [SIM=21192.628906] bar [{'pk': '2', 'source': 'https://example.com'}]
+<pre><code translate="no">* [SIM=0.893776] The weather forecast for tomorrow is cloudy and overcast, with a high of 62 degrees. [{'source': 'news', 'pk': 'dbf6560a-1487-4a6e-8797-245d57874f5b'}]
 </code></pre>
 <p>Per un elenco completo di tutte le opzioni di ricerca disponibili quando si utilizza l'archivio vettoriale <code translate="no">Milvus</code>, è possibile visitare il <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">riferimento API</a>.</p>
-<h3 id="Query-by-turning-into-retriever" class="common-anchor-header">Interrogazione tramite trasformazione in retriever</h3><p>È anche possibile trasformare l'archivio vettoriale in un retriever per facilitarne l'uso nelle catene.</p>
+<h3 id="Query-by-turning-into-retriever" class="common-anchor-header">Interrogazione tramite trasformazione in retriever<button data-href="#Query-by-turning-into-retriever" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È anche possibile trasformare l'archivio vettoriale in un retriever per facilitarne l'uso nelle catene.</p>
 <pre><code translate="no" class="language-python">retriever = vector_store.as_retriever(search_type=<span class="hljs-string">&quot;mmr&quot;</span>, search_kwargs={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">1</span>})
-retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a crime&quot;</span>, <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>})
+retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a crime&quot;</span>, expr=<span class="hljs-string">&#x27;source == &quot;news&quot;&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">[Document(metadata={'pk': 'eacc7256-d7fa-4036-b1f7-83d7a4bee0c5', 'source': 'news'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
+<pre><code translate="no">I0000 00:00:1761298049.275354 7886403 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+
+
+
+
+
+[Document(metadata={'source': 'news', 'pk': '2818c051-5a1a-44cb-9deb-aaaac709f616'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
 </code></pre>
 <h2 id="Usage-for-Retrieval-Augmented-Generation" class="common-anchor-header">Uso per la generazione aumentata dal recupero<button data-href="#Usage-for-Retrieval-Augmented-Generation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -251,7 +336,22 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
         ></path>
       </svg>
     </button></h2><p>Per sapere come utilizzare questo archivio vettoriale per la generazione aumentata dal recupero (RAG), consultate questa guida <a href="https://milvus.io/docs/integrate_with_langchain.md">RAG</a>.</p>
-<h3 id="Per-User-Retrieval" class="common-anchor-header">Recupero per utente</h3><p>Quando si costruisce un'applicazione di recupero, spesso si deve pensare a più utenti. Ciò significa che si possono memorizzare dati non solo per un utente, ma per molti utenti diversi, che non devono essere in grado di vedere i dati degli altri.</p>
+<h3 id="Per-User-Retrieval" class="common-anchor-header">Recupero per utente<button data-href="#Per-User-Retrieval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si costruisce un'applicazione di recupero, spesso si deve pensare a più utenti. Ciò significa che si possono memorizzare dati non solo per un utente, ma per molti utenti diversi, che non devono essere in grado di vedere i dati degli altri.</p>
 <p>Milvus consiglia di utilizzare <a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key</a> per implementare la multi-tenancy; ecco un esempio.</p>
 <blockquote>
 <p>La funzione della chiave di partizione non è ora disponibile in Milvus Lite; se si desidera utilizzarla, è necessario avviare il server Milvus da <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker o kubernetes</a>.</p>
@@ -265,6 +365,7 @@ docs = [
 vectorstore = Milvus.from_documents(
     docs,
     embeddings,
+    collection_name=<span class="hljs-string">&quot;partitioned_collection&quot;</span>,  <span class="hljs-comment"># Use a different collection name</span>
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
     <span class="hljs-comment"># drop_old=True,</span>
     partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>,  <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
@@ -280,14 +381,14 @@ vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quo
     <span class="hljs-string">&quot;where did i work?&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">[Document(page_content='i worked at facebook', metadata={'namespace': 'ankush'})]
+<pre><code translate="no">[Document(metadata={'namespace': 'ankush', 'pk': 460829372217788296}, page_content='i worked at facebook')]
 </code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># This will only get documents for Harrison</span>
 vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quot;</span>: <span class="hljs-string">&#x27;namespace == &quot;harrison&quot;&#x27;</span>}).invoke(
     <span class="hljs-string">&quot;where did i work?&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">[Document(page_content='i worked at kensho', metadata={'namespace': 'harrison'})]
+<pre><code translate="no">[Document(metadata={'namespace': 'harrison', 'pk': 460829372217788295}, page_content='i worked at kensho')]
 </code></pre>
 <h2 id="API-reference" class="common-anchor-header">Riferimento API<button data-href="#API-reference" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -304,4 +405,4 @@ vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per una documentazione dettagliata di tutte le funzioni e le configurazioni di __ModuleName__VectorStore, consultare il riferimento API: https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html</p>
+    </button></h2><p>Per una documentazione dettagliata, consultare il riferimento API: https://reference.langchain.com/python/integrations/langchain_milvus/</p>

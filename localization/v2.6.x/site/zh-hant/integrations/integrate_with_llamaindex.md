@@ -21,7 +21,7 @@ title: 使用 Milvus 和 LlamaIndex 的檢索增強世代 (RAG)
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南展示了如何使用 LlamaIndex 和 Milvus 建立一個檢索-增強生成 (RAG) 系統。</p>
-<p>RAG 系統結合了檢索系統與產生模型，可根據給定的提示產生新的文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
+<p>RAG 系統結合了檢索系統與生成模型，可根據給定的提示生成新的文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a>是一個簡單、靈活的資料框架，可將自訂資料來源連接至大型語言模型 (LLM)。<a href="https://milvus.io/">Milvus</a>是世界上最先進的開放原始碼向量資料庫，是為了強化嵌入式相似性搜尋與 AI 應用程式而建立的。</p>
 <p>在本筆記簿中，我們將展示使用 MilvusVectorStore 的快速示範。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
@@ -55,14 +55,14 @@ title: 使用 Milvus 和 LlamaIndex 的檢索增強世代 (RAG)
         ></path>
       </svg>
     </button></h3><p>本頁面的程式碼片段需要 pymilvus 和 llamaindex 的相依性。您可以使用下列指令安裝它們：</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時間</strong>。(按一下螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時間</strong>。(按一下螢幕上方的「Runtime」功能表，然後從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <h3 id="Setup-OpenAI" class="common-anchor-header">設定 OpenAI<button data-href="#Setup-OpenAI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -183,13 +183,13 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">similarity_metric (str, optional)</code>:用於密集嵌入的相似度指標，目前支援 IP、COSINE 和 L2。</li>
 </ul>
 <h4 id="sparse-field" class="common-anchor-header">稀疏欄位</h4><ul>
-<li><code translate="no">enable_sparse (bool)</code>:啟用或停用 sparse embedding 的布林標記。預設為 False。</li>
+<li><code translate="no">enable_sparse (bool)</code>:用來啟用或停用 sparse embedding 的布林標記。預設為 False。</li>
 <li><code translate="no">sparse_embedding_field (str)</code>:sparse embedding 欄位的名稱，預設為 DEFAULT_SPARSE_EMBEDDING_KEY。</li>
 <li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>:如果 enable_sparse 為 True，則應該提供此物件來轉換文字為稀疏嵌入。若為 None，則採用預設的稀疏嵌入函數 (BGEM3SparseEmbeddingFunction)。</li>
 <li><code translate="no">sparse_index_config (dict, optional)</code>:用來建立稀疏嵌入索引的設定。預設為 None。</li>
 </ul>
 <h4 id="hybrid-ranker" class="common-anchor-header">混合排序器</h4><ul>
-<li><p><code translate="no">hybrid_ranker (str)</code>:指定混合搜尋查詢使用的排名器類型。目前只支援 ["RRFRanker", "WeightedRanker"]。預設為 "RRFRanker"。</p></li>
+<li><p><code translate="no">hybrid_ranker (str)</code>:指定用於混合搜尋查詢的排名器類型。目前只支援 ["RRFRanker", "WeightedRanker"]。預設為 "RRFRanker"。</p></li>
 <li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>:混合排名器的設定參數。此字典的結構取決於所使用的特定排名器：</p>
 <ul>
 <li>對於 "RRFRanker"，它應該包括<ul>

@@ -1,13 +1,14 @@
 ---
 id: geometry-operators.md
-title: Operatori geometrici
+title: Operatori geometriciCompatible with Milvus 2.6.4+
 summary: >-
   Milvus supporta una serie di operatori per il filtraggio spaziale sui campi
   GEOMETRIA, essenziali per la gestione e l'analisi dei dati geometrici. Questi
   operatori consentono di recuperare le entità in base alle relazioni
   geometriche tra gli oggetti.
+beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Operators" class="common-anchor-header">Operatori geometrici<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
+<h1 id="Geometry-Operators" class="common-anchor-header">Operatori geometrici<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,6 +25,33 @@ summary: >-
       </svg>
     </button></h1><p>Milvus supporta una serie di operatori per il filtraggio spaziale sui campi di <code translate="no">GEOMETRY</code>, essenziali per la gestione e l'analisi dei dati geometrici. Questi operatori consentono di recuperare le entità in base alle relazioni geometriche tra gli oggetti.</p>
 <p>Tutti gli operatori geometrici funzionano con due argomenti geometrici: il nome del campo <code translate="no">GEOMETRY</code> definito nello schema della collezione e un oggetto geometrico di destinazione rappresentato in formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT).</p>
+<h2 id="Use-syntax" class="common-anchor-header">Sintassi d'uso<button data-href="#Use-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Per filtrare su un campo <code translate="no">GEOMETRY</code>, utilizzare un operatore geometrico in un'espressione:</p>
+<ul>
+<li><p>Generale: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>Basato sulla distanza: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
+</ul>
+<p>Dove:</p>
+<ul>
+<li><p><code translate="no">operator</code> è uno degli operatori geometrici supportati (ad esempio, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). I nomi degli operatori devono essere tutti maiuscoli o tutti minuscoli. Per un elenco degli operatori supportati, consultare la sezione <a href="/docs/it/geometry-operators.md#Supported-geometry-operators">Operatori geometrici supportati</a>.</p></li>
+<li><p><code translate="no">geo_field</code> è il nome del campo <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> è la rappresentazione WKT della geometria da interrogare.</p></li>
+<li><p><code translate="no">distance</code> è la soglia specifica per <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
 <p>Per saperne di più sui campi <code translate="no">GEOMETRY</code> in Milvus, consultare <a href="/docs/it/geometry-field.md">Campo geometrico</a>.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">Operatori geometrici supportati<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -256,7 +284,7 @@ summary: >-
       </svg>
     </button></h2><p>L'operatore <code translate="no">ST_DWITHIN</code> restituisce <code translate="no">TRUE</code> se la distanza tra la geometria A e la geometria B è minore o uguale a un valore specificato (in metri). Attualmente, la geometria B deve essere un punto.</p>
 <p><strong>Esempio</strong></p>
-<p>Si supponga di avere una collezione di negozi e di voler trovare tutti i negozi entro 5.000 metri dalla posizione di un cliente specifico.</p>
+<p>Si supponga di avere un insieme di sedi di negozi e di voler trovare tutti i negozi entro 5.000 metri dalla sede di un cliente specifico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Find all stores within 5000 meters of the point (120 30)</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_DWITHIN(geo_field, &#x27;POINT(120 30)&#x27;, 5000)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

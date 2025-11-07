@@ -57,7 +57,7 @@ title: Génération améliorée par récupération (RAG) avec Milvus et LlamaInd
         ></path>
       </svg>
     </button></h3><p>Les extraits de code de cette page nécessitent les dépendances pymilvus et llamaindex. Vous pouvez les installer à l'aide des commandes suivantes :</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>

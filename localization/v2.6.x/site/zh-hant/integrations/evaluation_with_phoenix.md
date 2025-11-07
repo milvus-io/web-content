@@ -38,11 +38,11 @@ title: 使用 Arize Pheonix 進行評估
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在執行本筆記本之前，請確認您已安裝下列依賴項目：</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
+    </button></h2><p>在執行本筆記本之前，請確認您已安裝下列相依性：</p>
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <p>在本範例中，我們將使用 OpenAI 作為 LLM。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -336,7 +336,22 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <li><strong>QA 說明</strong>：詳細說明答案正確或不正確的原因。</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Phoenix 追蹤概述</h3><p>Phoenix 為 LLM 應用程式提供<strong>OTEL 相容的追蹤</strong>功能，並與<strong>Langchain</strong>、<strong>LlamaIndex</strong> 等框架以及<strong>OpenAI</strong>和<strong>Mistral</strong> 等 SDK 整合。追蹤功能可捕捉整個請求流，提供以下洞察力：</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Phoenix 追蹤概述<button data-href="#Phoenix-Tracing-Overview" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Phoenix 為 LLM 應用程式提供<strong>OTEL 相容的追蹤</strong>功能，並與<strong>Langchain</strong>、<strong>LlamaIndex</strong> 等框架以及<strong>OpenAI</strong>和<strong>Mistral</strong> 等 SDK 整合。追蹤功能可捕捉整個請求流，提供以下洞察力：</p>
 <ul>
 <li><strong>應用程式延遲</strong>：識別並優化緩慢的 LLM 調用和元件效能。</li>
 <li><strong>令牌使用情況</strong>：分解令牌消耗，以優化成本。</li>
@@ -463,7 +478,7 @@ results_df.head()
       <td>[Code coverage\n\nBefore submitting your pull ...</td>
       <td>[Code coverage\n/nBefore submitting your pull ...</td>
       <td>事實</td>
-      <td>參考文獻規定，在執行程式碼覆蓋之前，您應該...</td>
+      <td>參考文獻中規定，在 runni...</td>
       <td>正確</td>
       <td>要確定答案是否正確，我們需要...</td>
     </tr>

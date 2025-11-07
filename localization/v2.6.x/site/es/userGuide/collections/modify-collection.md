@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puedes renombrar una colección de la siguiente manera.</p>
+    </button></h2><p>Puede cambiar el nombre de una colección de la siguiente manera.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -167,7 +167,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>El mapeo de memoria (Mmap) permite el acceso directo en memoria a grandes archivos en disco, permitiendo a Milvus almacenar índices y datos tanto en memoria como en discos duros. Este enfoque ayuda a optimizar la política de colocación de datos basada en la frecuencia de acceso, ampliando la capacidad de almacenamiento de las colecciones sin afectar al rendimiento de la búsqueda.</p><p>Para más detalles, consulte <a href="/docs/es/mmap.md">Utilizar mmap</a>.</p></td>
+     <td><p>El mapeo de memoria (Mmap) permite el acceso directo en memoria a grandes archivos en disco, permitiendo a Milvus almacenar índices y datos tanto en memoria como en discos duros. Este enfoque ayuda a optimizar la política de colocación de datos en función de la frecuencia de acceso, ampliando la capacidad de almacenamiento de las colecciones sin afectar al rendimiento de la búsqueda.</p><p>Para más detalles, consulte <a href="/docs/es/mmap.md">Utilizar mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
@@ -180,10 +180,6 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>Si se permite que una colección acepte valores de clave primaria proporcionados por el usuario cuando se ha habilitado AutoID para la colección.</p><ul><li><p>Cuando se establece en <strong>"true"</strong>: Las inserciones, upserts e importaciones masivas utilizan la clave primaria proporcionada por el usuario si está presente; de lo contrario, los valores de clave primaria se autogeneran.</p></li><li><p>Si se establece en <strong>"false"</strong>: Los valores de clave primaria proporcionados por el usuario se rechazan o ignoran y los valores de clave primaria siempre se autogeneran. El valor predeterminado es <strong>"false"</strong>.</p></li></ul></td>
-   </tr>
-   <tr>
-     <td></td>
-     <td></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Ejemplo 1: Establecer TTL de colección<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">

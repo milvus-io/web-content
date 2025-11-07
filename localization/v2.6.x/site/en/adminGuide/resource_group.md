@@ -90,7 +90,7 @@ title: Manage Resource Groups
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>All code samples on this page are in PyMilvus 2.6.2. Upgrade your PyMilvus installation before running them.</p>
+<p>All code samples on this page are in PyMilvus 2.6.3. Upgrade your PyMilvus installation before running them.</p>
 </div>
 <ol>
 <li><p>Create a resource group.</p>

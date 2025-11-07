@@ -954,7 +954,7 @@ title: ملاحظات الإصدار
 <li>دعم إرجاع الخصائص القابلة للتكوين عند وصف الفهرس<a href="https://github.com/milvus-io/milvus/pull/40043">(#40043</a>)</li>
 <li>تحسين أداء التعبير لنقاط معينة<a href="https://github.com/milvus-io/milvus/pull/39938">(#39938</a>)</li>
 <li>[2.5] تحسين تنسيق نتائج getQueryNodeDistribution<a href="https://github.com/milvus-io/milvus/pull/39926">(#39926</a>)</li>
-<li>[cp25] تمكين ملاحظة تضخيم الكتابة<a href="https://github.com/milvus-io/milvus/pull/39743">(#39743</a>)</li>
+<li>[cp25] تمكين مراقبة تضخيم الكتابة<a href="https://github.com/milvus-io/milvus/pull/39743">(#39743</a>)</li>
 <li>[2.5] إرجاع أعلى k من النتائج عند البحث في RESTful v2<a href="https://github.com/milvus-io/milvus/pull/39839">(#39839</a>)</li>
 <li>[2.5] [GoSDK] تمت إضافة سكر نحوي مُمكّن<a href="https://github.com/milvus-io/milvus/pull/39853">(#39853</a>)</li>
 <li>[2.5] [2.5] دعم الفهرس المؤقت أنواع مختلفة من الفهارس والمزيد من أنواع البيانات (FP16/BF16)<a href="https://github.com/milvus-io/milvus/pull/39180">(#39180</a>)</li>
@@ -1037,7 +1037,7 @@ title: ملاحظات الإصدار
 <li>إزالة مرشحات بلوم غير الضرورية في QueryNode وDataNode لتقليل استخدام الذاكرة<a href="https://github.com/milvus-io/milvus/pull/38913">(#38913</a>)</li>
 <li>تسريع تحميل البيانات عن طريق تسريع إنشاء المهام وجدولتها وتنفيذها في QueryCoord<a href="https://github.com/milvus-io/milvus/pull/38905">(#38905</a>)</li>
 <li>تقليل التأمين في DataCoord لتسريع عمليات التحميل والإدراج<a href="https://github.com/milvus-io/milvus/pull/38904">(#38904</a>)</li>
-<li>إضافة أسماء الحقول الأساسية في <code translate="no">SearchResult</code> و <code translate="no">QueryResults</code> <a href="https://github.com/milvus-io/milvus/pull/39222">(#39222</a>)</li>
+<li>إضافة أسماء حقول أساسية في <code translate="no">SearchResult</code> و <code translate="no">QueryResults</code> <a href="https://github.com/milvus-io/milvus/pull/39222">(#39222</a>)</li>
 <li>استخدام كل من حجم مدونة البيانات وحجم الفهرس كمعيار لتخفيض حصة القرص<a href="https://github.com/milvus-io/milvus/pull/38844">(#38844</a>)</li>
 <li>تحسين استخدام الذاكرة للبحث عن النص الكامل في البحث عن النص الكامل في المكان المعروف/#1011</li>
 <li>إضافة التحكم في الإصدار للفهارس العددية<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>

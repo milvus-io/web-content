@@ -145,7 +145,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作方法</td><td><code translate="no">update</code></td><td>偽</td></tr>
 </tbody>
 </table>
-<p>Milvusインスタンスのすべてのデプロイが正常な状態であることを確認したら、以下のコマンドを実行してください。以下のコマンドを実行することで、Milvusインスタンスを2.5.13にアップグレードすることができます。</p>
+<p>Milvusインスタンスのすべてのデプロイメントが正常な状態であることを確認したら、以下のコマンドを実行してMilvusインスタンスを2.5.13にアップグレードします。以下のコマンドを実行することで、Milvusインスタンスを2.5.13にアップグレードすることができます。</p>
 <pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.13 -w &#x27;milvusdb/milvus:v2.5.13&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -153,7 +153,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <li>このスクリプトは<strong>RocksMQと共に</strong>インストールされたMilvusインスタンスには<strong>適用されません</strong>。</li>
 <li>スクリプトはデプロイのアップグレード順序をハードコードしており、変更することはできません。</li>
 <li>このスクリプトでは、<code translate="no">kubectl patch</code> を使用してデプロイメントを更新し、<code translate="no">kubectl rollout status</code> を使用してデプロイメントの状態を監視します。</li>
-<li>スクリプトは<code translate="no">kubectl patch</code> を使用して、デプロイメントの<code translate="no">app.kubernetes.io/version</code> ラベルをコマンドの<code translate="no">-t</code> フラグの後に指定されたものに更新します。</li>
+<li>スクリプトは<code translate="no">kubectl patch</code> を使ってデプロイメントの<code translate="no">app.kubernetes.io/version</code> ラベルをコマンドの<code translate="no">-t</code> フラグの後に指定されたものに更新します。</li>
 </ol>
 </div>
 </div>
@@ -208,7 +208,7 @@ helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=4.1.24
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">$ helm list</code> を実行し、Milvusアプリのバージョンを確認します。<code translate="no">APP VERSION</code> 、2.1.4であることがわかります。</p>
+    </button></h3><p><code translate="no">$ helm list</code> を実行し、Milvusアプリのバージョンを確認します。<code translate="no">APP VERSION</code> は 2.1.4 です。</p>
 <pre><code translate="no">NAME                NAMESPACE   REVISION    UPDATED                                 STATUS      CHART           APP VERSION     
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span>          <span class="hljs-keyword">default</span>     <span class="hljs-number">1</span>           <span class="hljs-number">2022</span><span class="hljs-number">-11</span><span class="hljs-number">-21</span> <span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">25.51539</span> <span class="hljs-operator">+</span><span class="hljs-number">0800</span> CST     deployed    milvus<span class="hljs-number">-3.2</span><span class="hljs-number">.18</span>   <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -267,7 +267,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus2.2の大きな変更点はセグメントインデックスのメタデータ構造です。そのため、Milvusをv2.1.xからv2.2.0にアップグレードする際には、Helmを使用してメタデータを移行する必要があります。以下は、メタデータを安全に移行するための<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">スクリプトです</a>。</p>
+    </button></h3><p>Milvus2.2での大きな変更点はセグメントインデックスのメタデータ構造です。そのため、Milvusをv2.1.xからv2.2.0にアップグレードする際には、Helmを使用してメタデータを移行する必要があります。以下は、メタデータを安全に移行するための<a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">スクリプトです</a>。</p>
 <p>このスクリプトはK8sクラスタにインストールされたMilvusにのみ適用されます。処理中にエラーが発生した場合は、まずロールバック操作で以前のバージョンにロールバックしてください。</p>
 <p>以下の表はメタマイグレーションで実行できる操作の一覧です。</p>
 <table>
@@ -281,7 +281,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <tr><td><code translate="no">t</code></td><td>インストール先のMilvusのバージョン。</td><td><code translate="no">None</code></td><td>真</td></tr>
 <tr><td><code translate="no">r</code></td><td>Milvusメタのルートパス。</td><td><code translate="no">by-dev</code></td><td>偽</td></tr>
 <tr><td><code translate="no">w</code></td><td>Milvusの新しい画像タグ。</td><td><code translate="no">milvusdb/milvus:v2.2.0</code></td><td>False</td></tr>
-<tr><td><code translate="no">m</code></td><td>metaマイグレーションイメージタグ。</td><td><code translate="no">milvusdb/meta-migration:v2.2.0</code></td><td>False</td></tr>
+<tr><td><code translate="no">m</code></td><td>metaマイグレーションイメージタグ。</td><td><code translate="no">milvusdb/meta-migration:v2.2.0</code></td><td>誤</td></tr>
 <tr><td><code translate="no">o</code></td><td>メタマイグレーション操作</td><td><code translate="no">migrate</code></td><td>誤</td></tr>
 <tr><td><code translate="no">d</code></td><td>マイグレーション完了後にマイグレーションポッドを削除するかどうか。</td><td><code translate="no">false</code></td><td>False</td></tr>
 <tr><td><code translate="no">c</code></td><td>メタ・マイグレーションpvcのストレージ・クラス。</td><td><code translate="no">default storage class</code></td><td>False</td></tr>

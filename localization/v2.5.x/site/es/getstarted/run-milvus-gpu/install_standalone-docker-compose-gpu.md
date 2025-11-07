@@ -41,7 +41,7 @@ title: Ejecutar Milvus con soporte GPU usando Docker Compose
 <li><a href="/docs/es/v2.5.x/prerequisite-gpu.md">Compruebe los requisitos de hardware y software</a> antes de la instalación.</li>
 </ul>
 <div class="alert note">
-<p>Si encuentra algún problema al arrancar la imagen, contacte con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con detalles sobre el problema, y le proporcionaremos el soporte necesario.</p>
+<p>Si encuentra algún problema al arrancar la imagen, póngase en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con detalles sobre el problema, y le proporcionaremos el soporte necesario.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

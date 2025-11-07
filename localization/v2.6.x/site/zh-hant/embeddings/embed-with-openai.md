@@ -19,7 +19,7 @@ title: OpenAI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 透過<strong>OpenAIEmbeddingFunction</strong>類與 OpenAI 的模型整合。這個類別提供了使用預先訓練的 OpenAI 模型來編碼文件和查詢的方法，並將嵌入返回為與 Milvus 索引相容的密集向量。若要使用此功能，請在<a href="https://openai.com/api/">OpenAI</a>平台上建立帳號，從<a href="https://openai.com/api/">OpenAI</a>取得 API 金鑰。</p>
+    </button></h1><p>Milvus 透過<strong>OpenAIEmbeddingFunction</strong>類與 OpenAI 的模型整合。這個類別提供使用預先訓練的 OpenAI 模型來編碼文件和查詢的方法，並將內嵌回傳成與 Milvus 索引相容的密集向量。若要使用此功能，請在<a href="https://openai.com/api/">OpenAI</a>平台上建立帳號，從<a href="https://openai.com/api/">OpenAI</a>取得 API 金鑰。</p>
 <p>要使用此功能，請安裝必要的相依性：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -39,8 +39,10 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
 <p>用於編碼的 OpenAI 模型名稱。有效選項為<strong>text-embedding-3-small</strong>、<strong>text-</strong> <strong>embedding-</strong> <strong>3-large</strong> 及<strong>text-embedding-ada-002</strong>（預設）。</p></li>
 <li><p><strong>api_key</strong><em>(字串</em>)</p>
 <p>存取 OpenAI API 的 API 金鑰。</p></li>
+<li><p><strong>base_url</strong><em>(字串</em>)</p>
+<p>存取 OpenAI API 的基本 URL。該值預設為<strong>https://api.openai.com/v1。</strong>不過，如果您要存取不同模型提供者的相容 API 端點或本機 vLLM 範例，例如<strong>http://localhost:8080/v1，</strong>您可以在此指定 URL。</p></li>
 <li><p><strong>dimensions</strong><em>(int</em>)</p>
-<p>輸出的嵌入結果應該有的尺寸數。僅在<strong>text-embedding-3</strong>及更新的模型中支援。</p></li>
+<p>結果輸出嵌入應該有的尺寸數。僅在<strong>text-embedding-3</strong>及更新版本的模型中支援。</p></li>
 </ul>
 <p>若要為文件建立嵌入式資料，請使用<strong>encode_documents()</strong>方法：</p>
 <pre><code translate="no" class="language-python">docs = [

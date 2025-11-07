@@ -59,36 +59,15 @@ summary: 除 ANN 搜索外，Milvus 还支持通过查询进行元数据过滤�
    </tr>
    <tr>
      <td><p>必填参数</p></td>
-     <td><ul>
-<li>Collections 名称</li>
-<li>主键</li>
-</ul></td>
-     <td><ul>
-<li>Collections 名称</li>
-<li>过滤表达式</li>
-</ul></td>
-     <td><ul>
-<li><p>Collections 名称</p></li>
-<li><p>过滤表达式</p></li>
-<li><p>每次查询返回的实体数量</p></li>
-</ul></td>
+     <td><ul><li><p>Collections 名称</p></li><li><p>主键</p></li></ul></td>
+     <td><ul><li><p>Collections 名称</p></li><li><p>过滤表达式</p></li></ul></td>
+     <td><ul><li><p>Collections 名称</p></li><li><p>过滤表达式</p></li><li><p>每次查询返回的实体数量</p></li></ul></td>
    </tr>
    <tr>
      <td><p>可选参数</p></td>
-     <td><ul>
-<li>分区名称</li>
-<li>输出字段</li>
-</ul></td>
-     <td><ul>
-<li><p>分区名称</p></li>
-<li><p>要返回的实体数量</p></li>
-<li><p>输出字段</p></li>
-</ul></td>
-     <td><ul>
-<li><p>分区名称</p></li>
-<li><p>要返回的实体总数</p></li>
-<li><p>输出字段</p></li>
-</ul></td>
+     <td><ul><li><p>分区名称</p></li><li><p>输出字段</p></li></ul></td>
+     <td><ul><li><p>分区名称</p></li><li><p>要返回的实体数量</p></li><li><p>输出字段</p></li></ul></td>
+     <td><ul><li><p>分区名称</p></li><li><p>要返回的实体总数</p></li><li><p>输出字段</p></li></ul></td>
    </tr>
    <tr>
      <td><p>返回值</p></td>
@@ -113,7 +92,7 @@ summary: 除 ANN 搜索外，Milvus 还支持通过查询进行元数据过滤�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当需要通过主键查找实体时，可以使用<strong>Get</strong>方法。以下代码示例假定集合中有三个名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> 的字段，并返回主键为<code translate="no">1</code> 、<code translate="no">2</code> 和<code translate="no">3</code> 的实体。</p>
+    </button></h2><p>当需要通过主键查找实体时，可以使用<strong>Get</strong>方法。以下代码示例假定在 Collections 中有三个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> 。</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -127,7 +106,7 @@ summary: 除 ANN 搜索外，Milvus 还支持通过查询进行元数据过滤�
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>您可以按如下方式通过 ID 获取实体。</p>
+<p>您可以通过它们的 ID 获取实体，如下所示。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -252,7 +231,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当您需要通过自定义过滤条件查找实体时，请使用<strong>查询方法</strong>。以下代码示例假定有三个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> ，并返回从<code translate="no">red</code> 开始持有<code translate="no">color</code> 值的实体的指定数目。</p>
+    </button></h2><p>当您需要通过自定义过滤条件查找实体时，请使用<strong>Query</strong>方法。以下代码示例假定有三个字段，分别名为<code translate="no">id</code> 、<code translate="no">vector</code> 和<code translate="no">color</code> ，并返回从<code translate="no">red</code> 开始持有<code translate="no">color</code> 值的实体的指定数目。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

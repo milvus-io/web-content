@@ -2,7 +2,7 @@
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
 summary: >-
-  RTREE 索引是一種以樹狀結構為基礎的資料結構，可加速在 Milvus 中對 GEOMETRY 欄位的查詢。如果您的資料集以已知文字 (WKT)
+  RTREE 索引是一種以樹狀結構為基礎的資料結構，可加速在 Milvus 中對 GEOMETRY 欄位的查詢。如果您的資料庫以已知文字 (WKT)
   格式儲存幾何物件，例如點、線或多邊形，而且您想要加速空間篩選，RTREE 是理想的選擇。
 beta: Milvus 2.6.4+
 ---

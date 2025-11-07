@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>在管理员模式下右击并选择<strong>以管理员身份运行</strong>，打开 Docker Desktop。</p></li>
 <li><p>在 PowerShell 或 Windows 命令提示符中运行以下命令，为 Milvus Standalone 下载 Docker Compose 配置文件并启动 Milvus。</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -200,7 +200,7 @@ Creating milvus-standalone ... done​
 </code></pre>
 <p>根据网络连接情况，下载用于安装 Milvus 的映像可能需要一段时间。名为<strong>milvus-</strong> <strong>standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器启动后，你可以看到</p>
 <ul>
-<li><p><strong>milvus-etcd</strong>容器不向主机暴露任何端口，并将其数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</p></li>
+<li><p><strong>milvus-etcd</strong>容器不会向主机暴露任何端口，并将其数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</p></li>
 <li><p><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地为端口<strong>9090</strong>和<strong>9091</strong>提供服务，并将其数据映射到当前文件夹中的<strong>volumes/minio</strong>。</p></li>
 <li><p><strong>milvus-standalone</strong>容器使用默认设置为本地<strong>19530</strong>端口提供服务，并将其数据映射到当前文件夹中的<strong>volumes/milvus</strong>。</p></li>
 </ul></li>
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>下载 Milvus 配置文件。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.3/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>启动 Milvus。</p>

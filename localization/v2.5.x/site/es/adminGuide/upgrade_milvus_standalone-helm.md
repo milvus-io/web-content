@@ -44,7 +44,7 @@ title: Actualizar Milvus Standalone con cartas Helm
 <li>Versión de Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Desde la versión 4.2.21 de Milvus-Helm chart, hemos introducido pulsar-v3.x chart como dependencia. Por compatibilidad con versiones anteriores, actualice su helm a la versión 3.14 o posterior, y asegúrese de añadir la opción <code translate="no">--reset-then-reuse-values</code> siempre que utilice <code translate="no">helm upgrade</code>.</p>
+<p>Desde la versión 4.2.21 de Milvus-Helm chart, hemos introducido pulsar-v3.x chart como dependencia. Por compatibilidad con versiones anteriores, actualice su helm a v3.14 o una versión posterior, y asegúrese de añadir la opción <code translate="no">--reset-then-reuse-values</code> siempre que utilice <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">Comprobar la versión de Milvus<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"

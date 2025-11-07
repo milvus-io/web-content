@@ -27,7 +27,7 @@ title: Integração LangExtract + Milvus
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>Este guia demonstra como utilizar <a href="https://github.com/google/langextract">o LangExtract</a> com o <a href="https://milvus.io/">Milvus</a> para criar um sistema inteligente de processamento e recuperação de documentos.</p>
-<p>O LangExtract é uma biblioteca Python que utiliza Modelos de Linguagem Grandes (LLMs) para extrair informações estruturadas de documentos de texto não estruturados com uma fundamentação precisa da fonte. O sistema combina as capacidades de extração do LangExtract com o armazenamento vetorial do Milvus para permitir a pesquisa por semelhança semântica e a filtragem precisa de metadados.</p>
+<p>O LangExtract é uma biblioteca Python que utiliza Modelos de Linguagem Grandes (LLMs) para extrair informações estruturadas de documentos de texto não estruturados com uma fundamentação precisa da fonte. O sistema combina as capacidades de extração do LangExtract com o armazenamento vetorial do Milvus para permitir a pesquisa de semelhanças semânticas e a filtragem precisa de metadados.</p>
 <p>Esta integração é particularmente valiosa para a gestão de conteúdos, pesquisa semântica, descoberta de conhecimentos e construção de sistemas de recomendação baseados em atributos de documentos extraídos.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ title: Integração LangExtract + Milvus
         ></path>
       </svg>
     </button></h2><p>Antes de executar este bloco de notas, certifique-se de que tem as seguintes dependências instaladas:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus langextract google-genai requests tqdm pandas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite langextract google-genai requests tqdm pandas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -374,7 +374,7 @@ extraction_results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Agora, precisamos de processar os resultados da extração e gerar embeddings vectoriais para cada documento. Também vamos achatar os atributos extraídos em campos separados para torná-los facilmente pesquisáveis no Milvus.</p>
+    </button></h2><p>Agora precisamos de processar os resultados da extração e gerar embeddings vectoriais para cada documento. Também vamos achatar os atributos extraídos em campos separados para torná-los facilmente pesquisáveis no Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n3. Processing extraction results and generating vectors...&quot;</span>)
 
 processed_data = []

@@ -1,10 +1,11 @@
 ---
 id: geometry-operators.md
-title: ジオメトリ演算子
+title: ジオメトリ演算子Compatible with Milvus 2.6.4+
 summary: >-
   MilvusはGEOMETRYフィールドの空間フィルタリングのための一連の演算子をサポートしており、これは幾何学的データの管理と分析に不可欠です。これらの演算子により、オブジェクト間の幾何学的関係に基づいてエンティティを検索することができます。
+beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Operators" class="common-anchor-header">ジオメトリ演算子<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
+<h1 id="Geometry-Operators" class="common-anchor-header">ジオメトリ演算子<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +22,34 @@ summary: >-
       </svg>
     </button></h1><p>Milvusは、ジオメトリデータの管理や分析に不可欠な、<code translate="no">GEOMETRY</code> フィールドに対する空間フィルタリングのための演算子群をサポートしています。これらの演算子により、オブジェクト間の幾何学的関係に基づいてエンティティを検索することができます。</p>
 <p>すべてのジオメトリ演算子は、コレクションスキーマで定義された<code translate="no">GEOMETRY</code> フィールド名と、WKT（<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a>）形式で表現されたターゲットジオメトリオブジェクトの 2 つのジオメトリ引数を取ることで機能します。</p>
-<p>Milvus の<code translate="no">GEOMETRY</code> フィールドの詳細については、<a href="/docs/ja/geometry-field.md">ジオメトリ フィールドを</a>参照してください。</p>
+<h2 id="Use-syntax" class="common-anchor-header">構文の使用<button data-href="#Use-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">GEOMETRY</code> フィールドでフィルタするには、式の中でジオメトリ演算子を使用します：</p>
+<ul>
+<li><p>一般：<code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>距離ベース：<code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
+</ul>
+<p>ここで</p>
+<ul>
+<li><p><code translate="no">operator</code> は、サポートされているジオメトリ演算子のいずれかです（例：<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code> ）。演算子名はすべて大文字またはすべて小文字にする必要があります。サポートされている演算子のリストについては、「<a href="/docs/ja/geometry-operators.md#Supported-geometry-operators">サポートされているジオメトリ演算子</a>」を参照してください。</p></li>
+<li><p><code translate="no">geo_field</code> は<code translate="no">GEOMETRY</code> フィールドの名前です。</p></li>
+<li><p><code translate="no">'{wkt}'</code> は、クエリするジオメトリの WKT 表現です。</p></li>
+<li><p><code translate="no">distance</code> は、<code translate="no">ST_DWITHIN</code> 用の閾値です。</p></li>
+</ul>
+<p>Milvus の<code translate="no">GEOMETRY</code> フィールドについては、<a href="/docs/ja/geometry-field.md">ジオメトリ フィールドを</a>参照してください。</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">サポートされているジオメトリ演算子<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,9 +65,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下の表は、Milvus で使用できるジオメトリ演算子の一覧です。</p>
+    </button></h2><p>以下の表は Milvus で使用できるジオメトリ演算子の一覧です。</p>
 <div class="alert note">
-<p>演算子名は<strong>すべて大文字</strong>または<strong>すべて小文字に</strong>する必要があります。同じオペレータ名内で大文字と小文字を混在させないでください。</p>
+<p>演算子名は<strong>すべて大文字</strong>または<strong>すべて小文字に</strong>する必要があります。同じ演算子名に大文字と小文字を混在させないでください。</p>
 </div>
 <table>
    <tr>
@@ -49,7 +77,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_EQUALS(A, B)</code> /<code translate="no">st_equals(A, B)</code></p></td>
-     <td><p>2つのジオメトリが空間的に同一である場合、つまり点の集合と次元が同じである場合に TRUE を返します。</p></td>
+     <td><p>2つのジオメトリが空間的に同一である場合に TRUE を返します。</p></td>
      <td><p>2つの形状（AとB）は空間的に全く同じか？</p></td>
    </tr>
    <tr>
@@ -64,7 +92,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_INTERSECTS(A, B)</code> /<code translate="no">st_intersects(A, B)</code></p></td>
-     <td><p>ジオメトリAとBが少なくとも1つの共通点を持つ場合にTRUEを返す。これは最も一般的で広く使われている空間クエリです。</p></td>
+     <td><p>ジオメトリAとBが少なくとも1つの共通点を持つ場合にTRUEを返す。これは最も一般的で広く使われている空間クエリである。</p></td>
      <td><p>検索エリア(A)は店舗ロケーション(B)のいずれかと交差するか？</p></td>
    </tr>
    <tr>
@@ -229,9 +257,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ST_WITHIN</code> 演算子は、1 番目のジオメトリが 2 番目のジオメトリの内部または境界に完全に含まれる場合、<code translate="no">TRUE</code> を返します。これは<code translate="no">ST_CONTAINS</code> の逆数です。</p>
+    </button></h2><p><code translate="no">ST_WITHIN</code> 演算子は、1 番目のジオメトリが 2 番目のジオメトリの内部または境界に完全に含まれる場合、<code translate="no">TRUE</code> を返します。これは<code translate="no">ST_CONTAINS</code> の逆数である。</p>
 <p><strong>例</strong></p>
-<p>指定された大きな公園領域内にある小さな住宅地をすべて検索したい。</p>
+<p>指定された大きな公園区域内にある小さな住宅地をすべて検索したい。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that are completely within a larger polygon.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_WITHIN(geo_field, &#x27;POLYGON((110 38, 115 38, 115 42, 110 42, 110 38))&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

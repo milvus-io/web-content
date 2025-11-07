@@ -47,7 +47,7 @@ title: 使用 Milvus 和 Camel 的检索增强生成 (RAG) 系统
         ></path>
       </svg>
     </button></h2><p>让我们首先从 https://arxiv.org/pdf/2303.17760.pdf 加载 Camel 文件。这将是我们的本地示例数据。</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重新启动运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重新启动会话"）。</p>
@@ -164,7 +164,7 @@ vector_retriever = VectorRetriever(
 <p>您需要做的是</p>
 <ul>
 <li>设置内容输入路径，可以是本地路径或远程网址</li>
-<li>为 Milvus 设置远程网址和 api 密钥</li>
+<li>为 Milvus 设置远程 url 和 api 密钥</li>
 <li>提供查询</li>
 </ul>
 <p>自动 RAG 管道将为给定的内容输入路径创建 Collections，Collection 名称将根据内容输入路径名称自动设置，如果该 Collections 存在，它将直接进行检索。</p>

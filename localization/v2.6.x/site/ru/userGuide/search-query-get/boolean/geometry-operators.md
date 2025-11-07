@@ -1,13 +1,14 @@
 ---
 id: geometry-operators.md
-title: Операторы геометрии
+title: Операторы геометрииCompatible with Milvus 2.6.4+
 summary: >-
   Milvus поддерживает набор операторов для пространственной фильтрации по полям
   GEOMETRY, которые необходимы для управления и анализа геометрических данных.
   Эти операторы позволяют извлекать сущности на основе геометрических связей
   между объектами.
+beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Operators" class="common-anchor-header">Операторы геометрии<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
+<h1 id="Geometry-Operators" class="common-anchor-header">Операторы геометрии<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +24,35 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvus поддерживает набор операторов для пространственной фильтрации по полям <code translate="no">GEOMETRY</code>, которые необходимы для управления и анализа геометрических данных. Эти операторы позволяют извлекать сущности на основе геометрических отношений между объектами.</p>
-<p>Все операторы геометрии принимают два геометрических аргумента: имя поля <code translate="no">GEOMETRY</code>, определенного в схеме коллекции, и целевой геометрический объект, представленный в формате <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT).</p>
-<p>Чтобы узнать больше о полях <code translate="no">GEOMETRY</code> в Milvus, обратитесь к разделу <a href="/docs/ru/geometry-field.md">Геометрическое поле</a>.</p>
+<p>Все операторы геометрии принимают два геометрических аргумента: имя поля <code translate="no">GEOMETRY</code>, определенное в схеме вашей коллекции, и целевой геометрический объект, представленный в формате <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> (WKT).</p>
+<h2 id="Use-syntax" class="common-anchor-header">Синтаксис использования<button data-href="#Use-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Для фильтрации по полю <code translate="no">GEOMETRY</code> используйте геометрический оператор в выражении:</p>
+<ul>
+<li><p>Общие: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>На основе расстояния: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
+</ul>
+<p>Где:</p>
+<ul>
+<li><p><code translate="no">operator</code> один из поддерживаемых геометрических операторов (например, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Имена операторов должны быть полностью прописными или полностью строчными. Список поддерживаемых операторов см. в разделе <a href="/docs/ru/geometry-operators.md#Supported-geometry-operators">Поддерживаемые операторы геометрии</a>.</p></li>
+<li><p><code translate="no">geo_field</code> это имя вашего поля <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> WKT-представление геометрии для запроса.</p></li>
+<li><p><code translate="no">distance</code> порог специально для <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
+<p>Чтобы узнать больше о полях <code translate="no">GEOMETRY</code> в Milvus, обратитесь к разделу <a href="/docs/ru/geometry-field.md">Поле геометрии</a>.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">Поддерживаемые операторы геометрии<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +85,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">ST_CONTAINS(A, B)</code> / <code translate="no">st_contains(A, B)</code></p></td>
-     <td><p>Возвращает TRUE, если геометрия A полностью содержит геометрию B, а их внутренности имеют хотя бы одну общую точку.</p></td>
+     <td><p>Возвращает TRUE, если геометрия A полностью содержит геометрию B, причем их внутренности имеют хотя бы одну общую точку.</p></td>
      <td><p>Содержит ли городская черта (A) определенный парк (B)?</p></td>
    </tr>
    <tr>
@@ -171,7 +199,7 @@ summary: >-
       </svg>
     </button></h2><p>Оператор <code translate="no">ST_INTERSECTS</code> возвращает значение <code translate="no">TRUE</code>, если две геометрии имеют общую точку на границах или внутренностях. Это оператор общего назначения для обнаружения любой формы пространственного перекрытия.</p>
 <p><strong>Пример</strong></p>
-<p>Если у вас есть коллекция дорог и вы хотите найти все дороги, которые пересекают или касаются определенной линии, представляющей предполагаемую новую дорогу, вы можете использовать <code translate="no">ST_INTERSECTS</code>.</p>
+<p>Если у вас есть коллекция дорог, и вы хотите найти все дороги, которые пересекают или касаются определенной строки, представляющей предлагаемую новую дорогу, вы можете использовать <code translate="no">ST_INTERSECTS</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that intersect with a specific line string.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_INTERSECTS(geo_field, &#x27;LINESTRING (1 1, 2 2)&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

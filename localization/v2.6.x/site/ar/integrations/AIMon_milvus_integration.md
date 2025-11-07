@@ -61,7 +61,7 @@ title: تحسين جودة استرجاع تطبيق LLM الخاص بك مع AI
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>قاعدة بيانات المتجهات</em></h4><p>بالنسبة لهذا التطبيق، سنستخدم <a href="https://milvus.io/">Milvus</a> لإدارة البيانات غير المنظمة واسعة النطاق والبحث فيها، مثل النصوص والصور ومقاطع الفيديو.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>إطار عمل LLM</em></h4><p>LlamaIndex هو إطار عمل لتنسيق البيانات مفتوح المصدر يعمل على تبسيط بناء تطبيقات النماذج اللغوية الكبيرة (LLM) من خلال تسهيل تكامل البيانات الخاصة مع النماذج اللغوية الكبيرة، مما يتيح تطبيقات الذكاء الاصطناعي التوليدي المعزز بالسياق من خلال خط أنابيب الاسترجاع والتوليد المعزز (RAG). سوف نستخدم LlamaIndex في هذا البرنامج التعليمي لأنه يوفر قدرًا جيدًا من المرونة وتجريدات أفضل لواجهة برمجة التطبيقات ذات المستوى الأدنى.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>تقييم جودة مخرجات LLM</em></h4><p>يقدم<a href="https://www.aimon.ai">AIMon</a> نماذج حكم خاصة للهلوسة، ومشكلات جودة السياق، والالتزام بتعليمات LLM، وجودة الاسترجاع وغيرها من مهام موثوقية LLM. سنستخدم AIMon للحكم على جودة تطبيق LLM.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">المتطلبات المسبقة<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,17 +79,37 @@ title: تحسين جودة استرجاع تطبيق LLM الخاص بك مع AI
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>سجل للحصول على <a href="https://docs.aimon.ai/quickstart">حساب AIMon هنا</a>.</p>
-<p>أضف هذا السر إلى أسرار كولاب (رمز "المفتاح" على اللوحة اليسرى) إذا كنت في بيئة كولاب أخرى غير جوجل، يرجى استبدال الرمز المتعلق بـ google colab بنفسك</p>
+<li>سجل للحصول على <a href="https://docs.aimon.ai/quickstart">حساب AIMon هنا</a>.</li>
+</ol>
+<p>أضف هذا السر إلى أسرار كولاب (رمز "المفتاح" على اللوحة اليسرى)</p>
+<blockquote>
+<p>إذا كنت في بيئة كولاب أخرى غير جوجل، يُرجى استبدال الرمز المتعلق بـ google colab بنفسك</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p>قم بالتسجيل للحصول على <a href="https://platform.openai.com/docs/overview">حساب OpenAI هنا</a> وأضف المفتاح التالي في أسرار كولاب:</p>
+</ul>
+<ol start="2">
+<li>قم بالتسجيل للحصول على <a href="https://platform.openai.com/docs/overview">حساب OpenAI هنا</a> وأضف المفتاح التالي في أسرار كولاب:</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">مفاتيح واجهة برمجة التطبيقات المطلوبة</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">مفاتيح واجهة برمجة التطبيقات المطلوبة<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -244,7 +264,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">التحليل</h3><p>لدينا 258 نصًا بإجمالي حوالي 1 مليون رمز في جميع هذه النصوص. لدينا في المتوسط 3864 عددًا من الرموز لكل نص.</p>
+<h3 id="Analysis" class="common-anchor-header">التحليل<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لدينا 258 نصًا بإجمالي حوالي 1 مليون رمز في جميع هذه النصوص. لدينا في المتوسط 3864 عددًا من الرموز لكل نص.</p>
 <table>
 <thead>
 <tr><th>المقياس</th><th>القيمة</th></tr>
@@ -255,7 +290,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>المتوسط # عدد الرموز في كل نسخة</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">الاستعلامات</h3><p>فيما يلي الاستعلامات ال 12 التي سنجريها على النص أعلاه</p>
+<h3 id="Queries" class="common-anchor-header">الاستعلامات<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>فيما يلي الاستعلامات ال 12 التي سنجريها على النص أعلاه</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -788,7 +838,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>سنقوم الآن بإضافة <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">أداة إعادة الترتيب القابلة للتكيف مع المجال</a> من AIMon باستخدام <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">تكامل إعادة الترتيب اللاحق للمعالج</a> LlamaIndex من AIMon.</p>
+    </button></h1><p>سنقوم الآن بإضافة <a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">أداة إعادة الترتيب القابلة للتكيف مع المجال</a> من AIMon باستخدام <a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">تكامل إعادة الترتيب اللاحق</a> لـ LlamaIndex الخاص بـ AIMon.</p>
 <p>كما هو موضح في الشكل أدناه، تساعد إعادة الترتيب في رفع المستندات الأكثر صلة إلى الأعلى باستخدام وظيفة مطابقة الاستعلام - المستند الأكثر تقدمًا. الميزة الفريدة في أداة إعادة الترتيب في AIMon هي القدرة على تخصيصها حسب المجال. على غرار الطريقة التي تطالب بها هندسة LLM، يمكنك تخصيص أداء إعادة الترتيب لكل مجال باستخدام حقل <code translate="no">task_definition</code>. تعمل أداة إعادة الترتيب المتطورة هذه بزمن انتقال منخفض للغاية دون الثانية (لسياق يبلغ حوالي 2 ألف)، ويُصنَّف أداؤها ضمن أفضل 5 في لوحة المتصدرين في إعادة ترتيب MTEB.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
@@ -936,6 +986,18 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody t tr tr th:only-of-type { محاذاة رأسية: الوسط؛ }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -974,5 +1036,5 @@ df_scores
     </tr>
   </tbody>
 </table>
-<p>يلخص الجدول أعلاه نتائجنا. ستختلف أرقامك الفعلية اعتمادًا على عوامل مختلفة مثل الاختلافات في جودة استجابات LLM، وأداء البحث عن أقرب جار في VectorDB وما إلى ذلك.</p>
+<p>يلخص الجدول أعلاه نتائجنا. ستختلف أرقامك الفعلية اعتمادًا على عوامل مختلفة مثل الاختلافات في جودة استجابات LLM، وأداء البحث الأقرب جار في VectorDB وما إلى ذلك.</p>
 <p>في الختام، كما هو موضح في الشكل أدناه، قمنا بتقييم درجة الجودة، ومدى ملاءمة RAG وإمكانات اتباع التعليمات في تطبيق LLM. استخدمنا أداة إعادة تصنيف AIMon لتحسين الجودة الإجمالية للتطبيق ومتوسط ملاءمة المستندات المسترجعة من RAG الخاص بك.</p>

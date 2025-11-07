@@ -145,7 +145,34 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Подробную информацию об индексировании полей JSON, включая поддерживаемые пути, типы данных и ограничения, см. в разделе <a href="/docs/ru/use-json-fields.md">Поле JSON</a>.</p>
+<p>Подробную информацию об индексировании полей JSON, включая поддерживаемые пути, типы данных и ограничения, см. в разделе <a href="/docs/ru/json-indexing.md">Индексирование JSON</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Удаление индекса<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Используйте метод <code translate="no">drop_index()</code>, чтобы удалить существующий индекс из коллекции.</p>
+<div class="alert note">
+<ul>
+<li><p>В <strong>версии 2.6.3</strong> и более ранних вы должны освободить коллекцию перед удалением скалярного индекса.</p></li>
+<li><p>Начиная с <strong>версии 2.6.4</strong> и выше, вы можете удалять скалярный индекс напрямую, как только в нем отпадет необходимость - не нужно сначала освобождать коллекцию.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;category_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Best-practices" class="common-anchor-header">Лучшие практики<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +190,7 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p><strong>Создавайте индексы после загрузки данных</strong>: Создавайте индексы в коллекциях, которые уже содержат данные, для повышения производительности.</p></li>
-<li><p><strong>Используйте описательные имена индексов</strong>: Выбирайте имена, которые четко указывают на поле и его назначение</p></li>
+<li><p><strong>Используйте описательные имена индексов</strong>: Выбирайте имена, которые четко указывают на поле и цель</p></li>
 <li><p><strong>Контролируйте производительность индексов</strong>: Проверьте производительность запросов до и после создания индексов.</p></li>
 <li><p><strong>Учитывайте шаблоны запросов</strong>: Создавайте индексы для полей, по которым вы часто фильтруете</p></li>
 </ul>
@@ -184,5 +211,5 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>Узнайте о <a href="/docs/ru/index-explained.md">других типах индексов</a></p></li>
-<li><p>Смотрите раздел <a href="/docs/ru/use-json-fields.md#Index-values-inside-the-JSON-field">Индексирование полей JSON</a>, чтобы узнать о расширенных сценариях индексирования JSON</p></li>
+<li><p>Смотрите раздел <a href="/docs/ru/json-indexing.md">Индексирование JSON</a>, чтобы узнать о расширенных сценариях индексирования JSON</p></li>
 </ul>

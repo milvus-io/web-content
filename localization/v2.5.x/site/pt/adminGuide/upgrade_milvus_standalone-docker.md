@@ -127,6 +127,6 @@ docker compose up -d
 <li>Se estiver pronto para implantar seu cluster em nuvens:<ul>
 <li>Saiba como <a href="/docs/pt/v2.5.x/eks.md">implantar o Milvus no Amazon EKS com o Terraform</a></li>
 <li>Saiba como implantar <a href="/docs/pt/v2.5.x/gcp.md">o Milvus Cluster no GCP com Kubernetes</a></li>
-<li>Saiba como implantar <a href="/docs/pt/v2.5.x/azure.md">o Milvus no Microsoft Azure com o Kubernetes</a></li>
+<li>Saiba como <a href="/docs/pt/v2.5.x/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul></li>
 </ul>

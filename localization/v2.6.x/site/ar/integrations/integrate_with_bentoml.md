@@ -55,7 +55,7 @@ title: التوليد المعزز للاسترجاع (RAG) مع Milvus و Bento
         ></path>
       </svg>
     </button></h2><p>يتوفر Milvus Lite على PyPI. يمكنك تثبيته عبر pip لبايثون 3.8+:</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -76,7 +76,7 @@ title: التوليد المعزز للاسترجاع (RAG) مع Milvus و Bento
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام نقطة النهاية هذه، قم باستيراد <code translate="no">bentoml</code> وقم بإعداد عميل HTTP باستخدام <code translate="no">SyncHTTPClient</code> من خلال تحديد نقطة النهاية واختيارياً الرمز المميز (إذا قمت بتشغيل <code translate="no">Endpoint Authorization</code> على BentoCloud). بدلاً من ذلك، يمكنك استخدام نفس النموذج الذي يتم تقديمه من خلال BentoML باستخدام مستودع <a href="https://github.com/bentoml/BentoSentenceTransformers">تضمينات محولات الجمل</a>.</p>
+    </button></h2><p>لاستخدام نقطة النهاية هذه، قم باستيراد <code translate="no">bentoml</code> وقم بإعداد عميل HTTP باستخدام <code translate="no">SyncHTTPClient</code> عن طريق تحديد نقطة النهاية واختيارياً الرمز المميز (إذا قمت بتشغيل <code translate="no">Endpoint Authorization</code> على BentoCloud). بدلاً من ذلك، يمكنك استخدام نفس النموذج الذي يتم تقديمه من خلال BentoML باستخدام مستودع <a href="https://github.com/bentoml/BentoSentenceTransformers">تضمينات محولات الجمل</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bentoml
 
 BENTO_EMBEDDING_MODEL_END_POINT = <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>
@@ -178,7 +178,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إعداد التضمينات والبيانات الخاصة بنا، يمكننا إدراج المتجهات مع البيانات الوصفية في Milvus Lite للبحث عن المتجهات لاحقًا. الخطوة الأولى في هذا القسم هي بدء تشغيل عميل عن طريق الاتصال بـ Milvus Lite. نقوم ببساطة باستيراد الوحدة النمطية <code translate="no">MilvusClient</code> وتهيئة عميل Milvus Lite الذي يتصل بقاعدة بيانات متجهات Milvus Lite. يأتي حجم البعد من حجم نموذج التضمين، على سبيل المثال نموذج محول الجملة <code translate="no">all-MiniLM-L6-v2</code> ينتج متجهات ذات أبعاد 384.</p>
+    </button></h2><p>بعد إعداد التضمينات والبيانات الخاصة بنا، يمكننا إدراج المتجهات مع البيانات الوصفية في Milvus Lite للبحث عن المتجهات لاحقًا. الخطوة الأولى في هذا القسم هي بدء تشغيل عميل من خلال الاتصال بـ Milvus Lite. نقوم ببساطة باستيراد الوحدة النمطية <code translate="no">MilvusClient</code> وتهيئة عميل Milvus Lite الذي يتصل بقاعدة بيانات متجهات Milvus Lite. يأتي حجم البعد من حجم نموذج التضمين، على سبيل المثال نموذج محول الجملة <code translate="no">all-MiniLM-L6-v2</code> ينتج متجهات ذات أبعاد 384.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>

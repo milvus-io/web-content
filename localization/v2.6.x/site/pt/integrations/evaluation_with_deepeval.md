@@ -41,7 +41,7 @@ title: Avaliação com DeepEval
         ></path>
       </svg>
     </button></h2><p>Antes de executar este notebook, certifique-se de ter as seguintes dependências instaladas:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -395,7 +395,7 @@ Evaluating 3 test case(s) in parallel: |██████████|100% (3/3
     </button></h2><p>Para avaliar a qualidade dos resultados gerados em modelos de linguagem grandes (LLMs), é importante focar em dois aspectos principais:</p>
 <ol>
 <li><p><strong>Relevância</strong>: Avaliar se o prompt orienta efetivamente o LLM para gerar respostas úteis e contextualmente apropriadas.</p></li>
-<li><p><strong>Fidelidade</strong>: Medir a exatidão do resultado, assegurando que o modelo produz informação factualmente correta e livre de alucinações ou contradições. O conteúdo gerado deve estar de acordo com a informação factual fornecida no contexto da recuperação.</p></li>
+<li><p><strong>Fidelidade</strong>: Medir a precisão do resultado, assegurando que o modelo produz informação factualmente correta e livre de alucinações ou contradições. O conteúdo gerado deve estar de acordo com a informação factual fornecida no contexto da recuperação.</p></li>
 </ol>
 <p>Estes factores, em conjunto, garantem que os resultados são relevantes e fiáveis.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> deepeval.metrics <span class="hljs-keyword">import</span> AnswerRelevancyMetric, FaithfulnessMetric
@@ -424,7 +424,7 @@ result = evaluate(
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">Você está executando a <span style="color: #6a00ff; text-decoration-color: #6a00ff">métrica de relevância</span> de <span style="color: #6a00ff; text-decoration-color: #6a00ff">resposta</span> mais recente do DeepEval! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">usando gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict=False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">Você está executando a mais recente <span style="color: #6a00ff; text-decoration-color: #6a00ff">métrica de fidelidade</span> do DeepEval! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">usando gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict=False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">Você está executando a mais recente <span style="color: #6a00ff; text-decoration-color: #6a00ff">métrica</span> de <span style="color: #6a00ff; text-decoration-color: #6a00ff">fidelidade</span> do DeepEval! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">usando gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict=False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
 <pre><code translate="no">Event loop is already running. Applying nest_asyncio patch to allow async execution...
 
 

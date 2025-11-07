@@ -140,7 +140,7 @@ Creating milvus-standalone ... done
 <li>Der <strong>milvus-standalone-Container</strong> bedient lokal die Ports <strong>19530</strong> mit den Standardeinstellungen und ordnet seine Daten den <strong>Volumes/milvus</strong> im aktuellen Ordner zu.</li>
 </ul></li>
 </ul>
-<p>Mit folgendem Befehl können Sie überprüfen, ob die Container funktionieren und laufen:</p>
+<p>Mit folgendem Befehl können Sie überprüfen, ob die Container laufen und in Betrieb sind:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
@@ -227,9 +227,9 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Prüfen Sie <a href="/docs/de/v2.5.x/quickstart.md">Quickstart</a>, um zu sehen, was Milvus alles kann.</p></li>
+<li><p>Prüfen Sie <a href="/docs/de/v2.5.x/quickstart.md">Quickstart</a>, um zu sehen, was Milvus kann.</p></li>
 <li><p>Prüfen Sie <a href="/docs/de/v2.5.x/milvus-webui.md">Milvus WebUI</a>, um mehr über die Milvus-Instanz zu erfahren.</p></li>
-<li><p>Lernen Sie die Grundfunktionen von Milvus kennen:</p>
+<li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/v2.5.x/manage_databases.md">Datenbanken verwalten</a></li>
 <li><a href="/docs/de/v2.5.x/manage-collections.md">Sammlungen verwalten</a></li>

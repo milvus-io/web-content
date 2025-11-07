@@ -2,15 +2,14 @@
 id: embedding-function-overview.md
 title: نظرة عامة على وظيفة التضمينCompatible with Milvus 2.6.x
 summary: >-
-  The Function module in Milvus allows you to transform raw text data into
-  vector embeddings by automatically calling external embedding service
-  providers (like OpenAI, AWS Bedrock, Google Vertex AI, etc.). With the
-  Function module, you no longer need to manually interface with embedding
-  APIs—Milvus handles the entire process of sending requests to providers,
-  receiving embeddings, and storing them in your collections. For semantic
-  search, you need to provide only raw query data, not a query vector. Milvus
-  generates the query vector with the same model you used for ingestion,
-  compares it to the stored vectors, and returns the most relevant results.
+  تسمح لك وحدة الوظيفة في Milvus بتحويل البيانات النصية الخام إلى تضمينات متجهة
+  من خلال الاتصال تلقائيًا بموفري خدمة التضمين الخارجيين (مثل OpenAI وAWS
+  Bedrock وGoogle Vertex AI، إلخ). باستخدام الوحدة النمطية Function، لم تعد
+  بحاجة إلى التفاعل يدويًا مع واجهات برمجة تطبيقات التضمين - حيث تتولى ميلفوس
+  العملية الكاملة لإرسال الطلبات إلى مقدمي الخدمات، واستلام التضمينات، وتخزينها
+  في مجموعاتك. للبحث الدلالي، تحتاج إلى توفير بيانات استعلام أولية فقط، وليس
+  متجه استعلام. ينشئ Milvus متجه الاستعلام بنفس النموذج الذي استخدمته في
+  الاستيعاب، ويقارنه بالمتجهات المخزنة، ويعيد النتائج الأكثر صلة.
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">نظرة عامة على وظيفة التضمين<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
@@ -297,6 +296,8 @@ beta: Milvus 2.6.x
 <li><p><strong>حقل متجه</strong> محجوز لتخزين التضمينات المتجهة التي ستقوم الدالة بإنشائها للحقل القياسي.</p></li>
 </ul>
 <p>يحدد المثال التالي مخططًا يحتوي على حقل قياسي واحد <code translate="no">&quot;document&quot;</code> لتخزين البيانات النصية وحقل متجه واحد <code translate="no">&quot;dense&quot;</code> لتخزين التضمينات التي سيتم إنشاؤها بواسطة الوحدة النمطية للدالة. تذكر تعيين البعد المتجه (<code translate="no">dim</code>) لمطابقة مخرجات نموذج التضمين الذي اخترته.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
@@ -314,10 +315,18 @@ schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64
 schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">9000</span>)
 
 <span class="hljs-comment"># Add vector field &quot;dense&quot; for storing embeddings.</span>
-<span class="hljs-comment"># IMPORTANT: Set `dim` to match the exact output dimension of the embedding model.</span>
+<span class="hljs-comment"># IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
 <span class="hljs-comment"># For instance, OpenAI&#x27;s text-embedding-3-small model outputs 1536-dimensional vectors.</span>
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">الخطوة 2: إضافة دالة التضمين إلى المخطط<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -334,8 +343,10 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل متجه محدد بشكل صريح.</p>
-<p>يضيف المثال أدناه وحدة الدالة النمطية (<code translate="no">openai_embedding</code>) التي تحول الحقل القياسي <code translate="no">&quot;document&quot;</code> إلى تضمينات، وتخزين المتجهات الناتجة في الحقل المتجه <code translate="no">&quot;dense&quot;</code> المحدد مسبقًا.</p>
+    </button></h3><p>تقوم الوحدة النمطية الدالة في ميلفوس تلقائيًا بتحويل البيانات الأولية المخزنة في حقل قياسي إلى تضمينات وتخزينها في حقل المتجه المحدد صراحةً.</p>
+<p>يضيف المثال أدناه وحدة الدالة النمطية (<code translate="no">openai_embedding</code>) التي تحول الحقل القياسي <code translate="no">&quot;document&quot;</code> إلى تضمينات، وتخزين المتجهات الناتجة في حقل المتجه <code translate="no">&quot;dense&quot;</code> المحدد مسبقًا.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define embedding function (example: OpenAI provider)</span>
 text_embedding_function = Function(
     name=<span class="hljs-string">&quot;openai_embedding&quot;</span>,                  <span class="hljs-comment"># Unique identifier for this embedding function</span>
@@ -355,11 +366,19 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the embedding function to your schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>المعلمة</p></th>
      <th><p>الوصف</p></th>
-     <th><p>قيمة المثال</p></th>
+     <th><p>مثال القيمة</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
@@ -368,7 +387,7 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>نوع الدالة المستخدمة. لتضمين النص، اضبط القيمة على <code translate="no">FunctionType.TEXTEMBEDDING</code>.<br><strong>ملاحظة:</strong> يقبل Milvus <code translate="no">FunctionType.BM25</code> (لتحويل التضمين المتناثر) و <code translate="no">FunctionType.RERANK</code> (لإعادة الترتيب) لهذه المعلمة. ارجع إلى <a href="/docs/ar/decay-ranker-overview.md">نظرة عامة</a> على <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a> وتناقص <a href="/docs/ar/decay-ranker-overview.md">التصنيف</a> للحصول على التفاصيل.</p></td>
+     <td><p>نوع الدالة المستخدمة. لتضمين النص، اضبط القيمة على <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>ملاحظة</strong>: يقبل Milvus <code translate="no">FunctionType.BM25</code> (لتحويل التضمين المتناثر) و <code translate="no">FunctionType.RERANK</code> (لإعادة الترتيب) لهذه المعلمة. ارجع إلى <a href="/docs/ar/decay-ranker-overview.md">نظرة عامة</a> على <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a> وتناقص <a href="/docs/ar/decay-ranker-overview.md">التصنيف</a> للحصول على التفاصيل.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
@@ -398,18 +417,12 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>تسمية بيانات الاعتماد المحددة في قسم المستوى الأعلى <code translate="no">credential:</code> من <code translate="no">milvus.yaml</code>. </p>
-<ul>
-<li><p>عند توفيره، يسترد Milvus زوج المفاتيح المطابق أو رمز واجهة برمجة التطبيقات المطابق ويوقع الطلب من جانب الخادم.</p></li>
-<li><p>عند حذفها (<code translate="no">None</code>)، يعود ميلفوس إلى بيانات الاعتماد التي تم تكوينها صراحةً لمزود النموذج الهدف في <code translate="no">milvus.yaml</code>.</p></li>
-<li><p>إذا كانت التسمية غير معروفة أو كان المفتاح المشار إليه مفقودًا، يفشل الاستدعاء.</p></li>
-</ul></td>
+     <td><p>تسمية بيانات الاعتماد المحددة في قسم المستوى الأعلى <code translate="no">credential:</code> من <code translate="no">milvus.yaml</code>. </p><ul><li><p>عند توفيره، يسترد Milvus زوج المفاتيح المطابق أو رمز واجهة برمجة التطبيقات المطابق ويوقع الطلب من جانب الخادم.</p></li><li><p>عند حذفها (<code translate="no">None</code>)، يعود ميلفوس إلى بيانات الاعتماد التي تم تكوينها صراحةً لمزود النموذج الهدف في <code translate="no">milvus.yaml</code>.</p></li><li><p>إذا كانت التسمية غير معروفة أو كان المفتاح المشار إليه مفقودًا، يفشل الاستدعاء.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>عدد الأبعاد لتضمينات الإخراج. بالنسبة لنماذج الجيل الثالث من OpenAI، يمكنك اختصار المتجه الكامل لتقليل التكلفة والكمون دون خسارة كبيرة في المعلومات الدلالية. لمزيد من المعلومات، راجع <a href="https://openai.com/blog/new-embedding-models-and-api-updates">منشور مدونة إعلان OpenAI</a>.<br>
- <strong>ملاحظة:</strong> إذا قمت بتقصير بُعد المتجه، تأكد من أن القيمة <code translate="no">dim</code> المحددة في طريقة <code translate="no">add_field</code> الخاصة بالمخطط لحقل المتجه تطابق بُعد الإخراج النهائي لدالة التضمين الخاصة بك.</p></td>
+     <td><p>عدد الأبعاد لتضمينات الإخراج. بالنسبة لنماذج الجيل الثالث من OpenAI، يمكنك اختصار المتجه الكامل لتقليل التكلفة والكمون دون خسارة كبيرة في المعلومات الدلالية. لمزيد من المعلومات، راجع <a href="https://openai.com/blog/new-embedding-models-and-api-updates">منشور مدونة إعلان OpenAI</a>.</p><p><strong>ملاحظة:</strong> إذا قمت بتقصير بُعد المتجه، تأكد من أن القيمة <code translate="no">dim</code> المحددة في طريقة <code translate="no">add_field</code> الخاصة بالمخطط لحقل المتجه تطابق بُعد الإخراج النهائي لدالة التضمين الخاصة بك.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -437,6 +450,8 @@ schema.add_function(text_embedding_function)
         ></path>
       </svg>
     </button></h3><p>بعد تحديد المخطط مع الحقول الضرورية والدالة المدمجة، قم بإعداد الفهرس لمجموعتك. لتبسيط هذه العملية، استخدم <code translate="no">AUTOINDEX</code> كـ <code translate="no">index_type</code> ، وهو خيار يسمح لـ Milvus باختيار وتكوين نوع الفهرس الأنسب بناءً على بنية بياناتك.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -446,6 +461,14 @@ index_params.add_index(
     index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Create-collection" class="common-anchor-header">الخطوة 4: إنشاء مجموعة<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -463,6 +486,8 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h3><p>الآن قم بإنشاء المجموعة باستخدام المخطط ومعلمات الفهرس المحددة.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيس</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create collection named &quot;demo&quot;</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -470,7 +495,15 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-5-Insert-data" class="common-anchor-header">الخطوة 5: إدراج البيانات<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-5-Insert-data" class="common-anchor-header">الخطوة 5: أدخل البيانات<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -485,13 +518,23 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بعد إعداد المجموعة والفهرس الخاص بك، تكون جاهزًا لإدراج بياناتك الأولية. في هذه العملية، تحتاج فقط إلى توفير النص الخام. تقوم وحدة الدالة التي حددناها سابقًا بإنشاء المتجه المتناثر المقابل تلقائيًا لكل إدخال نصي.</p>
+    </button></h3><p>بعد إعداد المجموعة والفهرس الخاص بك، أنت جاهز لإدراج بياناتك الأولية. في هذه العملية، تحتاج فقط إلى توفير النص الخام. تقوم وحدة الدالة التي حددناها سابقًا بإنشاء المتجه المتناثر المقابل تلقائيًا لكل إدخال نصي.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample documents</span>
 client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Milvus simplifies semantic search through embeddings.&#x27;</span>},
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Vector embeddings convert text into searchable numeric data.&#x27;</span>},
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-6-Perform-vector-search" class="common-anchor-header">الخطوة 6: إجراء بحث المتجه<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -508,7 +551,9 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بعد إدراج البيانات، قم بإجراء بحث دلالي باستخدام نص الاستعلام الخام. يقوم Milvus تلقائيًا بتحويل استعلامك إلى متجه تضمين تلقائيًا، ويسترجع المستندات ذات الصلة بناءً على التشابه، ويعيد النتائج الأكثر مطابقة.</p>
+    </button></h3><p>بعد إدخال البيانات، قم بإجراء بحث دلالي باستخدام نص الاستعلام الخام. يقوم Milvus تلقائيًا بتحويل استعلامك إلى متجه تضمين تلقائيًا، ويسترجع المستندات ذات الصلة بناءً على التشابه، ويعيد النتائج الأكثر مطابقة.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Perform semantic search</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -523,7 +568,15 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول عمليات البحث والاستعلام، راجع <a href="/docs/ar/single-vector-search.md">البحث المتجه الأساسي</a> <a href="/docs/ar/get-and-scalar-query.md">والاستعلام</a>.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>لمزيد من المعلومات حول عمليات البحث والاستعلام، راجع <a href="/docs/ar/single-vector-search.md">البحث</a> <a href="/docs/ar/get-and-scalar-query.md">والاستعلام</a> <a href="/docs/ar/single-vector-search.md">المتجه الأساسي</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -554,7 +607,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تعمل كلتا الطريقتين، ولكن استخدام <code translate="no">milvus.yaml</code> هو النهج الموصى به لأنه يوفر إدارة مركزية لبيانات الاعتماد وتسمية متسقة لبيانات الاعتماد عبر جميع الموفرين. عند استخدام متغيرات البيئة، تختلف أسماء المتغيرات اعتمادًا على موفر خدمة التضمين، لذا راجع الصفحة المخصصة لكل موفر لفهم أسماء متغيرات البيئة المحددة المطلوبة (على سبيل المثال، <a href="/docs/ar/openai.md">OpenAI</a> أو <a href="/docs/ar/azure-openai.md">Azure OpenAI</a>).</p>
+    </button></h3><p>تعمل كلتا الطريقتين، لكن استخدام <code translate="no">milvus.yaml</code> هو النهج الموصى به لأنه يوفر إدارة مركزية لبيانات الاعتماد وتسمية متسقة لبيانات الاعتماد عبر جميع الموفرين. عند استخدام متغيرات البيئة، تختلف أسماء المتغيرات اعتمادًا على موفر خدمة التضمين، لذا راجع الصفحة المخصصة لكل موفر لفهم أسماء متغيرات البيئة المحددة المطلوبة (على سبيل المثال، <a href="/docs/ar/openai.md">OpenAI</a> أو <a href="/docs/ar/azure-openai.md">Azure OpenAI</a>).</p>
 <h3 id="What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="common-anchor-header">ماذا يحدث إذا لم أحدد معلمة بيانات الاعتماد في تعريف الدالة؟<button data-href="#What-happens-if-I-dont-specify-a-credential-parameter-in-the-function-definition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -612,8 +665,10 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>نعم، يمكنك استخدام متجهات الاستعلام المحسوبة مسبقًا بدلاً من النص الخام للبحث عن التشابه. بينما تقوم الوحدة النمطية "الدالة" تلقائيًا بتحويل الاستعلامات النصية الأولية إلى استعلامات نصية أولية إلى متجهات، يمكنك أيضًا توفير بيانات المتجهات مباشرةً إلى معلمة البيانات في عملية البحث الخاصة بك. ملاحظة: يجب أن يكون حجم أبعاد متجه الاستعلام الذي تم توفيره متوافقًا مع حجم أبعاد المتجهات المضمنة التي تم إنشاؤها بواسطة الوحدة النمطية Function.</p>
+    </button></h3><p>نعم، يمكنك استخدام متجهات الاستعلام المحسوبة مسبقًا بدلاً من النص الخام للبحث عن التشابه. بينما تقوم الوحدة النمطية Function بتحويل الاستعلامات النصية الأولية تلقائيًا إلى استعلامات نصية خام إلى متجهات، يمكنك أيضًا توفير بيانات المتجهات مباشرةً إلى المعلمة <code translate="no">data</code> في عملية البحث الخاصة بك. <strong>ملاحظة</strong>: يجب أن يكون حجم أبعاد متجه الاستعلام المقدم متوافقًا مع حجم أبعاد المتجهات المضمنة التي تم إنشاؤها بواسطة الوحدة النمطية Function.</p>
 <p><strong>مثال</strong>:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using raw text (Function module converts automatically)</span>
 results = client.search(
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, 
@@ -630,4 +685,12 @@ results = client.search(
     anns_field=<span class="hljs-string">&#x27;dense&#x27;</span>,
     limit=<span class="hljs-number">1</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -51,35 +51,38 @@ beta: Milvus 2.6.4+
      <th><p>Desalojo asíncrono</p></th>
    </tr>
    <tr>
-     <td><p>Desalojo</p></td>
-     <td><p>Durante la consulta o búsqueda, cuando el uso de memoria/disco supera los límites internos.</p></td>
-     <td><p>El subproceso en segundo plano comprueba periódicamente el uso y desencadena el desalojo cuando se supera la marca de agua.</p></td>
+     <td><p>Disparador</p></td>
+     <td><p>Se produce durante la consulta o búsqueda cuando el uso de memoria o disco supera los límites internos.</p></td>
+     <td><p>Activado por un subproceso en segundo plano cuando el uso supera la marca de agua alta o cuando los datos almacenados en caché alcanzan su tiempo de vida (TTL).</p></td>
    </tr>
    <tr>
      <td><p>Comportamiento</p></td>
-     <td><p>La ejecución de la consulta se detiene mientras se recupera la caché. El desalojo continúa hasta que el uso cae por debajo de la marca de agua baja.</p></td>
-     <td><p>Se ejecuta continuamente en segundo plano; elimina datos cuando el uso supera la marca de agua alta hasta que cae por debajo de la marca de agua baja. Las consultas no se bloquean.</p></td>
+     <td><p>Las operaciones de consulta o búsqueda se detienen temporalmente mientras el QueryNode recupera espacio en la caché. El desalojo continúa hasta que el uso cae por debajo de la marca de agua baja o se produce un tiempo de espera. Si se alcanza el tiempo de espera y no se pueden recuperar datos suficientes, la consulta o búsqueda puede fallar.</p></td>
+     <td><p>Se ejecuta periódicamente en segundo plano, desalojando proactivamente los datos almacenados en caché cuando el uso supera la marca de agua alta o cuando los datos caducan en función del TTL. El desalojo continúa hasta que el uso cae por debajo de la marca de agua baja. Las consultas no se bloquean.</p></td>
    </tr>
    <tr>
      <td><p>Lo mejor para</p></td>
-     <td><p>Cargas de trabajo que pueden tolerar breves picos de latencia o cuando el desalojo asíncrono no puede recuperar espacio con suficiente rapidez.</p></td>
-     <td><p>Cargas de trabajo sensibles a la latencia que requieren un rendimiento fluido. Ideal para la gestión proactiva de recursos.</p></td>
+     <td><p>Cargas de trabajo que pueden tolerar breves picos de latencia o pausas temporales durante picos de uso. Útil cuando el desalojo asíncrono no puede recuperar espacio con suficiente rapidez.</p></td>
+     <td><p>Cargas de trabajo sensibles a la latencia que requieren un rendimiento de consulta suave y predecible. Ideal para la gestión proactiva de recursos.</p></td>
    </tr>
    <tr>
      <td><p>Precauciones</p></td>
-     <td><p>Añade latencia a las consultas en curso. Puede provocar tiempos de espera si no hay suficientes datos recuperables.</p></td>
-     <td><p>Requiere marcas de agua correctamente ajustadas. Ligera sobrecarga de recursos en segundo plano.</p></td>
+     <td><p>Puede provocar breves retrasos en las consultas o tiempos de espera si no se dispone de suficientes datos desalojables.</p></td>
+     <td><p>Requiere un ajuste adecuado de las marcas de agua altas/bajas y de los TTL. Ligera sobrecarga del subproceso en segundo plano.</p></td>
    </tr>
    <tr>
      <td><p>Configuración</p></td>
      <td><p>Activado a través de <code translate="no">evictionEnabled: true</code></p></td>
-     <td><p>Activado a través de <code translate="no">backgroundEvictionEnabled: true</code> (requiere <code translate="no">evictionEnabled: true</code>)</p></td>
+     <td><p>Habilitado a través de <code translate="no">backgroundEvictionEnabled: true</code> (requiere <code translate="no">evictionEnabled: true</code> al mismo tiempo)</p></td>
    </tr>
 </table>
 <p><strong>Configuración recomendada</strong>:</p>
-<p>Habilitar ambos modos para un equilibrio óptimo. El desalojo asíncrono gestiona el uso de la caché de forma proactiva, mientras que el desalojo sincronizado actúa como un recurso de seguridad cuando los recursos están casi agotados.</p>
+<ul>
+<li><p>Ambos modos de desalojo pueden habilitarse juntos para un equilibrio óptimo, siempre que su carga de trabajo se beneficie del almacenamiento por niveles y pueda tolerar la latencia de obtención relacionada con el desalojo.</p></li>
+<li><p>Para pruebas de rendimiento o escenarios de latencia crítica, considere deshabilitar el desalojo por completo para evitar la sobrecarga de búsqueda en la red después del desalojo.</p></li>
+</ul>
 <div class="alert note">
-<p>Para los campos e índices evicables, la unidad de evicción coincide con la granularidad de carga: los campos escalares/vectoriales se eviccionan por trozo y los índices escalares/vectoriales se eviccionan por segmento.</p>
+<p>Para los campos e índices desalojables, la unidad de desalojo coincide con la granularidad de carga: los campos escalares/vectoriales se desalojan por trozo y los índices escalares/vectoriales se desalojan por segmento.</p>
 </div>
 <h2 id="Enable-eviction" class="common-anchor-header">Activar la evicción<button data-href="#Enable-eviction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -143,7 +146,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Las marcas de agua definen cuándo comienza y termina el desalojo de la caché, tanto para la memoria como para el disco. Cada tipo de recurso tiene dos umbrales:</p>
 <ul>
-<li><p><strong>Marca de agua alta</strong>: El desalojo asíncrono comienza cuando el uso supera este valor.</p></li>
+<li><p><strong>Marca de agua alta</strong>: El desalojo comienza cuando el uso supera este valor.</p></li>
 <li><p><strong>Marca de agua baja</strong>: El desalojo continúa hasta que el uso cae por debajo de este valor.</p></li>
 </ul>
 <div class="alert note">
@@ -195,7 +198,7 @@ beta: Milvus 2.6.4+
      <td><p>float</p></td>
      <td><p>(0.0, 1.0]</p></td>
      <td><p>Nivel de uso de disco donde comienza la evicción asíncrona.</p></td>
-     <td><p>Empieza en <code translate="no">0.8</code>. Mantenga una distancia razonable desde la marca de agua baja (por ejemplo, 0,05-0,10) para evitar disparos frecuentes.</p></td>
+     <td><p>Empieza en <code translate="no">0.8</code>. Mantenga un intervalo razonable desde la marca de agua baja (por ejemplo, 0,05-0,10) para evitar disparos frecuentes.</p></td>
    </tr>
 </table>
 <p><strong>Mejores prácticas</strong>:</p>
@@ -248,62 +251,3 @@ beta: Milvus 2.6.4+
      <td><p>Utilice un TTL corto (horas) para datos muy dinámicos; utilice un TTL largo (días) para conjuntos de datos estables. Establezca 0 para desactivar la caducidad basada en el tiempo.</p></td>
    </tr>
 </table>
-<h2 id="Configure-overcommit-ratio" class="common-anchor-header">Configurar el ratio de sobrecompromiso<button data-href="#Configure-overcommit-ratio" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Los ratios de sobrecompromiso definen qué parte de la caché se reserva como desalojable, permitiendo a los QueryNodes exceder temporalmente la capacidad normal antes de que se intensifique el desalojo.</p>
-<div class="alert note">
-<p>Esta configuración sólo tiene efecto cuando <a href="/docs/es/eviction.md#Enable-eviction">la evicción está habilitada</a>.</p>
-</div>
-<p><strong>Ejemplo YAML</strong>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">segcore:</span>
-    <span class="hljs-attr">tieredStorage:</span>
-      <span class="hljs-attr">evictionEnabled:</span> <span class="hljs-literal">true</span>
-      <span class="hljs-comment"># Evictable Memory Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of physical memory is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-comment"># Evictable Disk Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of disk capacity is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
-<button class="copy-code-btn"></button></code></pre>
-<table>
-   <tr>
-     <th><p>Parámetro</p></th>
-     <th><p>Tipo</p></th>
-     <th><p>Rango</p></th>
-     <th><p>Descripción</p></th>
-     <th><p>Caso de uso recomendado</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableMemoryCacheRatio</code></p></td>
-     <td><p>float</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Porción de memoria caché asignada a datos evicables.</p></td>
-     <td><p>Comienza en <code translate="no">0.3</code>. Aumentar (0.5-0.7) para una menor frecuencia de desalojo; disminuir (0.1-0.2) para una mayor capacidad del segmento.</p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableDiskCacheRatio</code></p></td>
-     <td><p>float</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Porción de la caché de disco asignada a datos desalojables.</p></td>
-     <td><p>Utilizar proporciones similares a la memoria a menos que la E/S de disco se convierta en un cuello de botella.</p></td>
-   </tr>
-</table>
-<p><strong>Comportamiento límite</strong>:</p>
-<ul>
-<li><p><code translate="no">1.0</code>: Toda la caché es evicable - la evicción raramente se dispara, pero caben menos segmentos por QueryNode.</p></li>
-<li><p><code translate="no">0.0</code>: Sin caché desalojable - el desalojo se produce con frecuencia; caben más segmentos, pero la latencia puede aumentar.</p></li>
-</ul>

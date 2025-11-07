@@ -59,7 +59,7 @@ title: 利用 AIMon 和 Milvus 提高法律硕士申请的检索质量
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>向量数据库</em></h4><p>在此应用中，我们将使用<a href="https://milvus.io/">Milvus</a>管理和搜索大规模非结构化数据，如文本、图像和视频。</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLM 框架</em></h4><p>LlamaIndex 是一个开源数据协调框架，通过促进私有数据与 LLMs 的整合，简化了大型语言模型（LLM）应用的构建，通过检索-增强生成（RAG）管道实现了上下文增强生成式人工智能应用。我们将在本教程中使用 LlamaIndex，因为它具有很高的灵活性和更好的低级应用程序接口抽象。</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM 输出质量评估</em></h4><p><a href="https://www.aimon.ai">AIMon</a>为幻觉、上下文质量问题、LLMs 的指令遵从性、检索质量和其他 LLM 可靠性任务提供了专有的 Judge 模型。我们将使用 AIMon 来判断 LLM 应用程序的质量。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">前提条件<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,17 +77,37 @@ title: 利用 AIMon 和 Milvus 提高法律硕士申请的检索质量
         ></path>
       </svg>
     </button></h1><ol>
-<li><p><a href="https://docs.aimon.ai/quickstart">在此处</a>注册<a href="https://docs.aimon.ai/quickstart">AIMon 账户</a>。</p>
-<p>将此密文添加到 Colab Secrets（左侧面板上的 "key "符号）中。 如果您使用的是其他非谷歌 colab 环境，请自行替换谷歌 colab 相关代码</p>
+<li><a href="https://docs.aimon.ai/quickstart">在此</a>注册<a href="https://docs.aimon.ai/quickstart">AIMon 账户</a>。</li>
+</ol>
+<p>将此秘密添加到 Colab Secrets（左侧面板上的 "key "符号）</p>
+<blockquote>
+<p>如果您在其他非谷歌 Colab 环境中，请自行替换谷歌 Colab 相关代码</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p><a href="https://platform.openai.com/docs/overview">在此处</a>注册<a href="https://platform.openai.com/docs/overview">OpenAI 账户</a>，并在 Colab secrets 中添加以下密钥：</p>
+</ul>
+<ol start="2">
+<li><a href="https://platform.openai.com/docs/overview">在此处</a>注册<a href="https://platform.openai.com/docs/overview">OpenAI 账户</a>，并在 Colab secrets 中添加以下密钥：</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">所需 API 密钥</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">所需 API 密钥<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -242,7 +262,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">分析</h3><p>我们有 258 份记录誊本，所有这些记录誊本共有约 100 万个标记。每份记录誊本平均有 3864 个标记。</p>
+<h3 id="Analysis" class="common-anchor-header">分析<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我们有 258 份记录誊本，所有这些记录誊本共有约 100 万个标记。每份记录誊本平均有 3864 个标记。</p>
 <table>
 <thead>
 <tr><th>指标</th><th>数值</th></tr>
@@ -253,7 +288,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>平均值# 每份记录誊本的标记数</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">查询</h3><p>以下是我们将在上述记录誊本上运行的 12 个查询</p>
+<h3 id="Queries" class="common-anchor-header">查询<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下是我们将在上述记录誊本上运行的 12 个查询</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -385,7 +435,7 @@ detect = Detect(
       </svg>
     </button></h1><p>在第一种简单的方法中，我们将使用列文士坦距离（Levenshtein Distance）将文档与给定的查询进行匹配。匹配度最高的前 3 个文档将被发送到 LLM，作为回答问题的上下文。</p>
 <p><strong>注意：该单元的执行时间约为 3 分钟。</strong></p>
-<p>等待期间，请享用您最喜欢的饮料:)</p>
+<p>请在等待时享用您最喜欢的饮料:)</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> fuzzywuzzy <span class="hljs-keyword">import</span> process
 <span class="hljs-keyword">import</span> time
 
@@ -787,7 +837,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
         ></path>
       </svg>
     </button></h1><p>现在，我们将使用 AIMon 的 LlamaIndex<a href="https://docs.llamaindex.ai/en/latest/examples/node_postprocessor/AIMonRerank/">后处理器重排序集成</a>添加 AIMon 的<a href="https://docs.aimon.ai/retrieval#domain-adaptable-re-ranking">域适应性重排序器</a>。</p>
-<p>如下图所示，Rerankers 通过使用更先进的查询-文档匹配功能，帮助将最相关的文档挤到最前面。AIMon 重新排序器的独特之处在于可以根据领域进行定制。与 LLM 的提示工程类似，您可以使用<code translate="no">task_definition</code> 字段自定义每个域的 Reranker 性能。这种最先进的 Reranker 可以超低的亚秒级延迟运行（对于 ~2k 上下文），其性能在 MTEB Reranking 排行榜上名列前五。</p>
+<p>如下图所示，Rerankers 通过使用更先进的查询-文档匹配功能，帮助将最相关的文档挤到最前面。AIMon 重新排序器的独特之处在于可以根据领域进行定制。与 LLM 的提示工程类似，您可以使用<code translate="no">task_definition</code> 字段自定义每个域的 Reranker 性能。这种最先进的 Reranker 能以超低的亚秒级延迟（对于约 2k 上下文）运行，其性能在 MTEB Reranking 排行榜上名列前五。</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/devvratbhardwaj/images/refs/heads/main/AIMon_Reranker.svg" alt="Diagram depicting working of AIMon reranker"/></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Setup AIMon&#x27;s reranker</span>
 
@@ -934,6 +984,18 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">

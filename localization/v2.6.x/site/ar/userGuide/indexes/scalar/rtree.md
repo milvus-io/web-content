@@ -57,7 +57,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>إنشاء العقد الورقية:</strong> لكل كائن هندسي، قم بحساب <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">الحد الأدنى للمستطيل المحيط</a> به (MBR)، وهو أصغر مستطيل يحتوي على الكائن بالكامل، وقم بتخزينه كعقدة ورقة.</p></li>
-<li><p><strong>جمِّع في مربعات أكبر:</strong> قم بتجميع العقد الورقية القريبة معًا ولف كل مجموعة مع MBR جديد، لتكوين عقد داخلية. على سبيل المثال، تحتوي المجموعة <strong>B</strong> على <strong>D</strong> <strong>وE؛</strong> وتحتوي المجموعة <strong>C</strong> على <strong>F</strong> <strong>وG</strong>.</p></li>
+<li><p><strong>جمِّع في مربعات أكبر:</strong> قم بتجميع العقد الورقية القريبة معًا ولف كل مجموعة مع MBR جديدة، لتكوين عقد داخلية. على سبيل المثال، تحتوي المجموعة <strong>B</strong> على <strong>D</strong> <strong>وE؛</strong> وتحتوي المجموعة <strong>C</strong> على <strong>F</strong> <strong>وG</strong>.</p></li>
 <li><p><strong>أضف عقدة الجذر:</strong> أضف عقدة جذر تغطي MBR جميع المجموعات الداخلية، مما ينتج عنه بنية شجرة متوازنة الارتفاع.</p></li>
 </ol>
 <p>

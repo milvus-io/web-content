@@ -42,7 +42,7 @@ summary: >-
     </button></h2><p>ANN 和 k-Nearest Neighbors (kNN) 搜索是向量相似性搜索的常用方法。在 kNN 搜索中，必须将向量空间中的所有向量与搜索请求中携带的查询向量进行比较，然后找出最相似的向量，这既耗时又耗费资源。</p>
 <p>与 kNN 搜索不同，ANN 搜索算法要求提供一个<strong>索引</strong>文件，记录向量 Embeddings 的排序顺序。当收到搜索请求时，可以使用索引文件作为参考，快速找到可能包含与查询向量最相似的向量嵌入的子组。然后，你可以使用指定的<strong>度量类型</strong>来测量查询向量与子组中的向量之间的相似度，根据与查询向量的相似度对组成员进行排序，并找出<strong>前 K 个</strong>组成员。</p>
 <p>ANN 搜索依赖于预建索引，搜索吞吐量、内存使用量和搜索正确性可能会因选择的索引类型而不同。您需要在搜索性能和正确性之间取得平衡。</p>
-<p>为了减少学习曲线，Milvus 提供了<strong>AUTOINDEX</strong>。通过<strong>AUTOINDEX</strong>，Milvus 可以在建立索引的同时分析 Collections 中的数据分布，并根据分析结果设置最优化的索引参数，从而在搜索性能和正确性之间取得平衡。</p>
+<p>为了降低学习曲线，Milvus 提供了<strong>AUTOINDEX</strong>。通过<strong>AUTOINDEX</strong>，Milvus 可以在建立索引的同时分析 Collections 中的数据分布，并根据分析结果设置最优化的索引参数，从而在搜索性能和正确性之间取得平衡。</p>
 <p>在本节中，你将找到有关以下主题的详细信息：</p>
 <ul>
 <li><p><a href="/docs/zh/single-vector-search.md#Single-Vector-Search">单向量搜索</a></p></li>
@@ -131,6 +131,7 @@ res = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
         .data(Collections.singletonList(queryVector))
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)
         .topK(<span class="hljs-number">3</span>)
         .build();
 
@@ -497,7 +498,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="ANN-Search-in-Partition" class="common-anchor-header">分区中的 ANN 搜索<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
+<h2 id="ANN-Search-in-Partition" class="common-anchor-header">在分区中进行 ANN 搜索<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -512,8 +513,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>假设您在 Collections 中创建了多个分区，您可以将搜索范围缩小到特定数量的分区。在这种情况下，您可以在搜索请求中包含目标分区名称，将搜索范围限制在指定的分区内。减少搜索所涉及的分区数量可以提高搜索性能。</p>
-<p>下面的代码片段假定在你的 Collections 中有一个名为<strong>PartitionA</strong>的分区。</p>
+    </button></h2><p>假设您在一个 Collections 中创建了多个分区，您可以将搜索范围缩小到特定数量的分区。在这种情况下，您可以在搜索请求中包含目标分区名称，将搜索范围限制在指定的分区内。减少搜索所涉及的分区数量可以提高搜索性能。</p>
+<p>下面的代码片段假定 Collections 中有一个名为<strong>PartitionA</strong>的分区。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -666,7 +667,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在搜索结果中，Milvus 默认包含包含 top-K 向量嵌入的实体的主字段值和相似性距离/分数。您可以在搜索请求中包含目标字段（包括向量和标量字段）的名称作为输出字段，以使搜索结果携带这些实体中其他字段的值。</p>
+    </button></h2><p>在搜索结果中，Milvus 默认会包含包含 TOP-K 向量嵌入的实体的主字段值和相似度距离/分数。您可以在搜索请求中包含目标字段（包括向量和标量字段）的名称作为输出字段，使搜索结果携带这些实体中其他字段的值。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -828,7 +829,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可能会注意到，搜索请求中携带的参数<code translate="no">limit</code> 决定了搜索结果中包含的实体数量。该参数指定了单次搜索中返回实体的最大数量，通常称为<strong>top-K。</strong></p>
+    </button></h2><p>您可能会注意到，搜索请求中包含的参数<code translate="no">limit</code> 决定了搜索结果中包含的实体数量。该参数指定了单次搜索中返回实体的最大数量，通常称为<strong>top-K。</strong></p>
 <p>如果希望执行分页查询，可以使用循环来发送多个搜索请求，每个查询请求中都包含<strong>Limit</strong>和<strong>Offset</strong>参数。具体来说，可以将 "<strong>限制 "</strong>参数设置为希望包含在当前查询结果中的实体数量，将 "<strong>偏移</strong>"参数设置为已经返回的实体总数。</p>
 <p>下表概述了在一次返回 100 个 "实体 "时，如何为分页查询设置 "<strong>限制</strong>"和<strong>"偏移</strong>"参数。</p>
 <table>
@@ -963,7 +964,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX 极大地平滑了 ANN 搜索的学习曲线。但是，随着 top-K 的增加，搜索结果可能并不总是正确的。通过缩小搜索范围、提高搜索结果的相关性和搜索结果的多样化，Milvus 实现了以下搜索增强功能。</p>
+    </button></h2><p>AUTOINDEX 可大大拉平 ANN 搜索的学习曲线。但是，随着 Top-K 的增加，搜索结果不一定总是正确的。通过缩小搜索范围、提高搜索结果相关性和搜索结果多样化，Milvus 实现了以下搜索增强功能。</p>
 <ul>
 <li><p>过滤搜索</p>
 <p>您可以在搜索请求中包含过滤条件，这样 Milvus 就会在进行 ANN 搜索前进行元数据过滤，将搜索范围从整个 Collections 缩小到只搜索符合指定过滤条件的实体。</p>
@@ -975,16 +976,16 @@ curl --request POST \
 <p>如果返回的实体在特定字段中持有相同的值，搜索结果可能无法代表向量空间中所有向量嵌入的分布情况。要使搜索结果多样化，可以考虑使用分组搜索。</p>
 <p>有关分组搜索的更多信息，请参阅<a href="/docs/zh/grouping-search.md">分组搜索</a>、</p></li>
 <li><p>混合搜索</p>
-<p>一个 Collections 最多可以包含四个向量场，以保存使用不同嵌入模型生成的向量嵌入。通过这种方式，可以使用混合搜索对这些向量场的搜索结果进行 Rerankers，从而提高召回率。</p>
+<p>一个 Collections 可以包含多个向量场，以保存使用不同嵌入模型生成的向量嵌入。通过这种方式，可以使用混合搜索对这些向量场的搜索结果进行 Rerankers，从而提高召回率。</p>
 <p>有关混合搜索的更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p></li>
 <li><p>搜索迭代器</p>
 <p>单个 ANN 搜索最多可返回 16,384 个实体。如果需要在单次搜索中返回更多实体，请考虑使用搜索迭代器。</p>
 <p>有关搜索迭代器的详细信息，请参阅搜索<a href="/docs/zh/with-iterators.md">迭代器</a>。</p></li>
 <li><p>全文搜索</p>
 <p>全文搜索是一种在文本数据集中检索包含特定术语或短语的文档，然后根据相关性对结果进行排序的功能。该功能克服了语义搜索的局限性（语义搜索可能会忽略精确的术语），确保您获得最准确且与上下文最相关的结果。此外，它还能接受原始文本输入，自动将文本数据转换为稀疏嵌入，无需手动生成向量嵌入，从而简化了向量搜索。</p>
-<p>有关全文搜索的详细信息，请参阅全文<a href="/docs/zh/full-text-search.md">搜索</a>。</p></li>
-<li><p>关键词匹配</p>
-<p>Milvus 的关键词匹配功能可根据特定术语精确检索文档。该功能主要用于满足特定条件的过滤搜索，并可结合标量过滤来完善查询结果，允许在符合标量标准的向量内进行相似性搜索。</p>
+<p>有关全文搜索的详细信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p></li>
+<li><p>文本匹配</p>
+<p>Milvus 中的关键词匹配功能可根据特定术语精确检索文档。该功能主要用于满足特定条件的过滤搜索，并可结合标量过滤来完善查询结果，允许在符合标量标准的向量内进行相似性搜索。</p>
 <p>有关关键字匹配的详细信息，请参阅<a href="/docs/zh/keyword-match.md">关键字匹配</a>。</p></li>
 <li><p>使用 Partition Key</p>
 <p>在元数据过滤中涉及多个标量字段并使用相当复杂的过滤条件可能会影响搜索效率。一旦将一个标量字段设置为分区关键字，并在搜索请求中使用涉及分区关键字的过滤条件，就可以帮助将搜索范围限制在与指定分区关键字值相对应的分区内。</p>
@@ -993,4 +994,6 @@ curl --request POST \
 <p>有关 mmap 设置的详情，请参阅<a href="/docs/zh/mmap.md">使用 mmap</a>。</p></li>
 <li><p>聚类压缩</p>
 <p>有关聚类压缩的详情，请参阅<a href="/docs/zh/clustering-compaction.md">聚类</a>压缩。</p></li>
+<li><p>使用 Reranking</p>
+<p>有关使用排名器增强搜索结果相关性的详情，请参阅<a href="/docs/zh/decay-ranker-overview.md">衰减排名器概述</a>和<a href="/docs/zh/model-ranker-overview.md">模型排名器概述</a>。</p></li>
 </ul>

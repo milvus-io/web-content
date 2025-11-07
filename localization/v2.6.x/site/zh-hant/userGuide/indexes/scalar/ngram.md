@@ -4,8 +4,8 @@ title: NGRAMCompatible with Milvus v2.6.2+
 summary: >-
   Milvus 中的 NGRAM 索引是為了加速 VARCHAR 欄位或 JSON 欄位中特定 JSON 路徑的 LIKE
   查詢而建立的。在建立索引之前，Milvus 會將文字分割成固定長度 n 的重疊子串，稱為 n-gram。例如，當 n = 3
-  時，單字「Milvus」會被分割成 3 個字元："Mil"、"ilv"、"lvu 「和 」vus"。這些 n
-  個字元被儲存在一個反向索引中，該索引會將每個字元對應到其出現的文件 ID。在查詢時，此索引允許 Milvus
+  時，單字「Milvus」會被分割成 3 個字元："Mil"、"ilv"、"lvu 「和 」vus"。這些 n-grams
+  會儲存在一個反向索引中，該索引會將每個 gram 對應到其出現的文件 ID。在查詢時，此索引允許 Milvus
   快速將搜尋範圍縮小到一小組候選項，從而大大加快了查詢的執行速度。
 beta: Milvus v2.6.2+
 ---
@@ -249,7 +249,7 @@ client.create_index(
 <li><p>在 n-gram 標記化之前，該值會被轉換為<code translate="no">VARCHAR</code> 。</p></li>
 <li><p>Milvus 會產生長度為 2 到 4 的子串，並將它們儲存在反向索引中。</p></li>
 </ul>
-<p>有關如何索引 JSON 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/use-json-fields.md">JSON 欄位</a>。</p>
+<p>有關如何索引 JSON 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/json-indexing.md">JSON 索引</a>。</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">由 NGRAM 加速的查詢<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -293,7 +293,34 @@ client.create_index(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_field[&quot;body&quot;] LIKE &quot;%database%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>有關篩選表達式語法的詳細資訊，請參閱<a href="/docs/zh-hant/basic-operators.md">基本運算符</a>號。</p>
+<p>有關篩選表達式語法的更多資訊，請參閱<a href="/docs/zh-hant/basic-operators.md">基本運算符</a>號。</p>
+<h2 id="Drop-an-index" class="common-anchor-header">刪除索引<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>使用<code translate="no">drop_index()</code> 方法從集合中移除現有索引。</p>
+<div class="alert note">
+<ul>
+<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須在刪除標量索引之前釋放集合。</p></li>
+<li><p>從<strong>v2.6.4</strong>或更高版本開始，一旦不再需要標量索引，您可以直接丟棄它，而不需要先釋放集合。</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">使用注意事項<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,7 +365,7 @@ client.create_index(
 <li><p>將<code translate="no">max_gram</code> 設定在有意義子串的典型長度附近；較大的<code translate="no">max_gram</code> 可以改善過濾，但會增加空間。</p></li>
 </ul></li>
 <li><p><strong>避免低選擇性克</strong></p>
-<p>高度重複的模式 (例如<code translate="no">&quot;aaaaaa&quot;</code>)過濾能力較弱，可能產生有限的效益。</p></li>
+<p>高度重複的模式 (例如：<code translate="no">&quot;aaaaaa&quot;</code>)，過濾效果較弱，可能產生有限的效益。</p></li>
 <li><p><strong>一致地標準化</strong></p>
-<p>如果您的使用情況需要，請將相同的規範化套用在擷取的文字與查詢字面意義上 (例如：小寫、修剪)。</p></li>
+<p>如果您的使用情況需要，請將相同的規範化套用在擷取的文字與查詢字面意義上 (例如：降低大小寫、修剪)。</p></li>
 </ul>

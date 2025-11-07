@@ -5,10 +5,10 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: تعرف على كيفية ترقية ميلفوس المستقل مع مخطط هيلم.
-title: ترقية Milvus Standalone مع مخطط Milvus Helm
+title: ترقية Milvus Standalone مع مخطط Helm البياني
 ---
 <div class="tab-wrapper"><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-operator.md" class=''>مشغل</a><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-helm.md" class='active '>MilvusHelmDocker</a><a href="/docs/ar/v2.5.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
-<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">ترقية Milvus Standalone مع مخطط Milvus Helm<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">ترقية Milvus Standalone مع مخطط Helm البياني<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ title: ترقية Milvus Standalone مع مخطط Milvus Helm
       </svg>
     </button></h2><ul>
 <li>إصدار Helm &gt;= 3.14.0</li>
-<li>نسخة Kubernetes &gt;= 1.20.0</li>
+<li>إصدار Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
 <p>منذ الإصدار 4.2.21 من مخطط Milvus-Helm، قدمنا مخطط pulsar-v3.x كإصدار تبعي. للتوافق مع الإصدارات السابقة، يرجى ترقية الدفة إلى الإصدار 3.14 أو إصدار أحدث، وتأكد من إضافة الخيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.</p>
@@ -131,7 +131,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>منذ الإصدار Milvus 2.2.3، يمكنك تكوين منسقي Milvus للعمل في وضع الاستعداد النشط وتمكين ميزة الترقية المتجددة لهم، بحيث يمكن لـ Milvus الاستجابة للطلبات الواردة أثناء ترقيات المنسق. في الإصدارات السابقة، يجب إزالة المنسقين ثم إنشاؤهم أثناء الترقية، مما قد يؤدي إلى تعطل معين للخدمة.</p>
 <p>تتطلب الترقيات المتجددة أن يعمل المنسقون في وضع الاستعداد النشط. يمكنك استخدام <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">البرنامج النصي</a> الذي نقدمه لتهيئة المنسقين للعمل في وضع الاستعداد النشط وبدء الترقية المتجددة.</p>
-<p>استنادًا إلى إمكانيات التحديث المتجدد التي توفرها Kubernetes، يفرض البرنامج النصي أعلاه تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
+<p>استنادًا إلى إمكانيات التحديث المتداول التي يوفرها Kubernetes، يفرض البرنامج النصي أعلاه تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
 <p>ينطبق البرنامج النصي فقط على ترقية Milvus المثبتة مع Helm. يسرد الجدول التالي علامات الأوامر المتوفرة في البرامج النصية.</p>
 <table>
 <thead>

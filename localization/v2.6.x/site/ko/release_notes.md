@@ -19,6 +19,127 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 알아보세요! 이 페이지에는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항이 요약되어 있습니다. 이 섹션에서 v2.6.0 이후 출시된 각 버전에 대한 릴리스 노트를 확인할 수 있습니다. 이 페이지를 정기적으로 방문하여 업데이트에 대해 알아보는 것이 좋습니다.</p>
+<h2 id="v264" class="common-anchor-header">v2.6.4<button data-href="#v264" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>릴리스 날짜: 2025년 10월 21일</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Milvus 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>다양하고 강력한 새 기능, 성능 향상, 필수 버그 수정이 포함된 Milvus 2.6.4의 출시를 발표하게 되어 기쁘게 생각합니다. 이번 업데이트에서는 고급 데이터 모델링을 위한 배열 구조체와 같은 중요한 기능이 도입되었습니다. 또한, 기본적으로 JSON 파쇄를 활성화하여 쿼리 성능과 효율성을 더욱 개선했습니다. 안정성과 신뢰성을 높이기 위해 몇 가지 중요한 버그도 해결되었습니다. 이번 릴리스를 통해 Milvus는 모든 사용자에게 더욱 강력하고 효율적인 환경을 지속적으로 제공할 것입니다. 다음은 이번 릴리스의 주요 특징입니다.</p>
+<h3 id="Features" class="common-anchor-header">주요 특징<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>배열의 구조체: Milvus는 새로운 데이터 유형인 구조체를 도입하여 사용자가 단일 엔터티 내에서 여러 관련 필드를 구성하고 관리할 수 있도록 했습니다. 현재 Struct는 DataType.ARRAY 아래의 요소로만 사용할 수 있으며, 각 행에 여러 벡터가 포함된 벡터 배열과 같은 기능을 통해 복잡한 데이터 모델링 및 검색에 새로운 가능성을 열어줍니다.<a href="https://github.com/milvus-io/milvus/pull/42148">(#42148</a>)</li>
+<li>DashScope에서 Qwen GTE-rerank-v2 모델 지원<a href="https://github.com/milvus-io/milvus/pull/44660">(#44660</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">개선 사항<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>이미지 빌더가 포함된<strong>Go 버전 1.24.6으로 업그레이드</strong><a href="https://github.com/milvus-io/milvus/pull/44763">(#44763</a>)</li>
+<li>기본 JSON 파쇄 활성화<a href="https://github.com/milvus-io/milvus/pull/44811">(#44811</a>)</li>
+<li>쿼리 노드 로드 실패를 방지하기 위해 로드된 빈로그 크기에 대한 디스크 할당량 추가<a href="https://github.com/milvus-io/milvus/pull/44932">(#44932</a>).</li>
+<li>MemVectorIndex에서 구조체 배열에 대한 mmap 지원 활성화<a href="https://github.com/milvus-io/milvus/pull/44832">(#44832</a>).</li>
+<li>TextMatchIndex에 대한 캐싱 레이어 관리 추가<a href="https://github.com/milvus-io/milvus/pull/44768">(#44768</a>).</li>
+<li>비트맵 역방향 조회 성능 최적화 (<a href="https://github.com/milvus-io/milvus/pull/44838">#44838</a>)</li>
+<li>Knowhere 버전 업데이트<a href="https://github.com/milvus-io/milvus/pull/44707">(#44707</a> <a href="https://github.com/milvus-io/milvus/pull/44765">#44765</a>)</li>
+<li>세그먼트 로드 중 논리적 사용량 검사 제거<a href="https://github.com/milvus-io/milvus/pull/44770">(#44770</a>)</li>
+<li>템플릿 값 길이 정보에 대한 액세스 로그 필드 추가<a href="https://github.com/milvus-io/milvus/pull/44783">(#44783</a>)</li>
+<li>인덱스 빌드 중 현재 인덱스 유형 덮어쓰기 허용<a href="https://github.com/milvus-io/milvus/pull/44754">(#44754</a>).</li>
+<li>벡터 인덱스에 대한 로드 매개변수 추가<a href="https://github.com/milvus-io/milvus/pull/44749">(#44749</a>)</li>
+<li>통합된 압축 실행기 작업 상태 관리<a href="https://github.com/milvus-io/milvus/pull/44722">(#44722</a>)</li>
+<li>쿼리코드에서 작업 스케줄러에 대한 정제된 로그 추가<a href="https://github.com/milvus-io/milvus/pull/44725">(#44725</a>).</li>
+<li>accesslog.$consistency_level이 실제 사용된 값을 나타내도록 보장 (<a href="https://github.com/milvus-io/milvus/pull/44711">#44711</a>).</li>
+<li>데이터코드에서 중복 채널 관리자 제거<a href="https://github.com/milvus-io/milvus/pull/44679">(#44679</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>빌드 도커파일에서 GCC를 제거하여 CVE 수정<a href="https://github.com/milvus-io/milvus/pull/44882">(#44882</a>).</li>
+<li>점수가 같을 때 결정론적 검색 결과 순서를 보장<a href="https://github.com/milvus-io/milvus/pull/44884">(#44884</a>).</li>
+<li>재랭커가 필드 데이터를 사용하지 않은 경우 요청 전에 재랭크<a href="https://github.com/milvus-io/milvus/pull/44943">(#44943</a>).</li>
+<li>CreateArrowFileSystem이 예외를 던질 때 약속 이행을 보장<a href="https://github.com/milvus-io/milvus/pull/44976">(#44976</a>).</li>
+<li>디스크 암호화 구성 누락 수정<a href="https://github.com/milvus-io/milvus/pull/44839">(#44839</a>)</li>
+<li>잔액 검사기 비활성화로 인해 잔액 중지 문제가 발생하는 문제 수정<a href="https://github.com/milvus-io/milvus/pull/44836">(#44836</a>).</li>
+<li>"같지 않음"에 "없음"이 포함되지 않는 문제 수정<a href="https://github.com/milvus-io/milvus/pull/44960">(#44960</a>)</li>
+<li>CreateArrowScalarFromDefaultValue에서 JSON 기본값을 지원<a href="https://github.com/milvus-io/milvus/pull/44952">(#44952</a>).</li>
+<li>디버그 로그에서 줄 바꿈을 피하기 위해 짧은 디버그 문자열 사용<a href="https://github.com/milvus-io/milvus/pull/44929">(#44929</a>).</li>
+<li>JSON 플랫 인덱스에 대한 exists 표현식 수정<a href="https://github.com/milvus-io/milvus/pull/44951">(#44951</a>)</li>
+<li>통합 JSON 존재 경로 의미론<a href="https://github.com/milvus-io/milvus/pull/44926">(#44926</a>)</li>
+<li>빈 내부 삽입 메시지로 인한 패닉 수정<a href="https://github.com/milvus-io/milvus/pull/44906">(#44906</a>)</li>
+<li>업데이트된 AI/SAQ 매개변수<a href="https://github.com/milvus-io/milvus/pull/44862">(#44862</a>)</li>
+<li>자동 인덱스 비활성화 시 중복 제거 제한 제거<a href="https://github.com/milvus-io/milvus/pull/44824">(#44824</a>)</li>
+<li>DataCoord 메트릭에서 동시 재설정/추가 작업 방지<a href="https://github.com/milvus-io/milvus/pull/44815">(#44815</a>)</li>
+<li>JSON_contains(경로, int)의 버그 수정<a href="https://github.com/milvus-io/milvus/pull/44818">(#44818</a>)</li>
+<li>JSON 처리 중 캐싱 레이어에서 퇴거 방지<a href="https://github.com/milvus-io/milvus/pull/44813">(#44813</a>)</li>
+<li>exp 필터를 건너뛰면 잘못된 결과가 나오는 문제 수정<a href="https://github.com/milvus-io/milvus/pull/44779">(#44779</a>)</li>
+<li>쿼리 노드가 레이블과 스트리밍 노드 목록이 있는 SQN인지 확인<a href="https://github.com/milvus-io/milvus/pull/44793">(#44793</a>).</li>
+<li>부스트가 정렬되지 않은 결과를 반환하는 BM25 수정<a href="https://github.com/milvus-io/milvus/pull/44759">(#44759</a>)</li>
+<li>자동 ID를 사용한 대량 가져오기 수정<a href="https://github.com/milvus-io/milvus/pull/44694">(#44694</a>)</li>
+<li>인덱스를 로드할 때 FileManagerContext를 통해 파일 시스템 전달<a href="https://github.com/milvus-io/milvus/pull/44734">(#44734</a>)</li>
+<li>"결국" 사용 및 실행 중 및 완료 상태 모두에 표시되는 작업 ID 수정<a href="https://github.com/milvus-io/milvus/pull/44715">(#44715</a>)</li>
+<li>타임틱이 이보다 작은 DML을 필터링하지 않도록 잘못된 시작 시간 틱 제거<a href="https://github.com/milvus-io/milvus/pull/44692">(#44692</a>).</li>
+<li>AWS 자격 증명 공급자를 싱글톤으로 만들기<a href="https://github.com/milvus-io/milvus/pull/44705">(#44705</a>).</li>
+<li>숫자가 포함된 JSON 경로에 대한 파쇄 비활성화<a href="https://github.com/milvus-io/milvus/pull/44808">(#44808</a>)</li>
+<li>TestUnaryRangeJsonNullable에 대한 유효한 단위 테스트 수정<a href="https://github.com/milvus-io/milvus/pull/44990">(#44990</a>).</li>
+<li>단위 테스트 수정 및 파일 시스템 폴백 로직 제거<a href="https://github.com/milvus-io/milvus/pull/44686">(#44686</a>)</li>
+</ul>
 <h2 id="v263" class="common-anchor-header">v2.6.3<button data-href="#v263" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,10 +155,10 @@ title: 릴리스 노트
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>릴리스 날짜: 2025년 10월 11일</p>
+    </button></h2><p>릴리스 날짜 10월 11, 2025</p>
 <table>
 <thead>
-<tr><th style="text-align:left">Milvus 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>
+<tr><th style="text-align:left">밀버스 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.1</td></tr>

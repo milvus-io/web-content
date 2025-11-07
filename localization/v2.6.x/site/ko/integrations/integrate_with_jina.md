@@ -36,7 +36,8 @@ title: Milvus와 Jina 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>2020년 베를린에서 설립된 Jina AI는 검색 기반을 통해 인공 지능의 미래를 혁신하는 데 주력하는 선구적인 AI 회사입니다. 멀티모달 AI를 전문으로 하는 Jina AI는 임베딩, 리랭커, 프롬프트 운영, 핵심 인프라를 포함한 통합 구성 요소 제품군을 통해 기업과 개발자가 멀티모달 데이터의 힘을 활용하여 가치를 창출하고 비용을 절감할 수 있도록 지원하는 것을 목표로 합니다. Jina AI의 최첨단 임베딩은 포괄적인 데이터 표현에 이상적인 8192 토큰 길이 모델을 갖춘 최고 수준의 성능을 자랑합니다. 다국어 지원과 OpenAI와 같은 선도적인 플랫폼과의 원활한 통합을 제공하는 이 임베딩은 다국어 애플리케이션을 용이하게 합니다.</p>
+    </button></h2><p>2020년 베를린에서 설립된 Jina AI는 검색 기반을 통해 인공 지능의 미래를 혁신하는 데 주력하는 선구적인 AI 회사입니다. 멀티모달 AI를 전문으로 하는 Jina AI는 임베딩, 리랭커, 프롬프트 운영, 핵심 인프라를 포함한 통합 구성 요소 제품군을 통해 기업과 개발자가 멀티모달 데이터의 힘을 활용하여 가치를 창출하고 비용을 절감할 수 있도록 지원하는 것을 목표로 합니다.<br>
+Jina AI의 최첨단 임베딩은 포괄적인 데이터 표현에 이상적인 8192 토큰 길이 모델을 특징으로 하는 최고 수준의 성능을 자랑합니다. 다국어 지원과 OpenAI와 같은 선도적인 플랫폼과의 원활한 통합을 제공하는 이 임베딩은 다국어 애플리케이션을 용이하게 합니다.</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Milvus와 Jina AI의 임베딩<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +71,7 @@ title: Milvus와 Jina 통합
       </svg>
     </button></h2><p>Jina 임베딩은 PyMilvus 모델 라이브러리에 통합되었습니다. 이제 코드 예제를 통해 Jina 임베딩을 실제로 사용하는 방법을 보여드리겠습니다.</p>
 <p>시작하기 전에 PyMilvus용 모델 라이브러리를 설치해야 합니다.</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

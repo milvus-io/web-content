@@ -85,7 +85,7 @@ title: 版本说明
 <li>将 CAGRA GPU 图像设为默认图像<a href="https://github.com/milvus-io/milvus/pull/42193">（#42193</a>）。</li>
 <li><code translate="no">DescribeIndex</code> RESTful API 现在支持返回索引参数<a href="https://github.com/milvus-io/milvus/pull/42080">（#42080</a>）。</li>
 <li>启用按 Collections 字段运行分析器，以避免频繁创建和销毁分析器<a href="https://github.com/milvus-io/milvus/pull/42119">（#42119</a>）。</li>
-<li>添加了对在单个触发器中平衡多个 Collections 的支持<a href="https://github.com/milvus-io/milvus/pull/42134">（#42134</a>）。</li>
+<li>新增了对在单个触发器中平衡多个 Collections 的支持<a href="https://github.com/milvus-io/milvus/pull/42134">（#42134</a>）。</li>
 <li>在识别缓慢查询时，现在会考虑<code translate="no">nq</code> （查询次数）（<a href="https://github.com/milvus-io/milvus/pull/42125">#42125</a>）。</li>
 <li>服务器端现在可自动填写不存在的空字段<a href="https://github.com/milvus-io/milvus/pull/42120">（#42120</a>）。</li>
 <li>新增了使用 TTL 过滤过期数据的支持<a href="https://github.com/milvus-io/milvus/pull/41960">（#41960</a>、<a href="https://github.com/milvus-io/milvus/pull/42121">#42121</a>、<a href="https://github.com/milvus-io/milvus/pull/42103">#42103</a>）。</li>
@@ -336,7 +336,7 @@ title: 版本说明
 <li>修正了批量插入使用函数运行程序的输入字段列表而非 Schema 的字段列表的问题<a href="https://github.com/milvus-io/milvus/pull/41561">（#41561</a>）。</li>
 <li>修正了当<code translate="no">avgdl</code> （平均文档长度）为 NaN 时出现的 BM25 搜索失败问题<a href="https://github.com/milvus-io/milvus/pull/41503">（#41503</a>）。</li>
 <li>修正了查询节点指标中不准确的标签<a href="https://github.com/milvus-io/milvus/pull/41422">（#41422</a>）。</li>
-<li>修正了一个问题，即如果数据包含空地图，JSON 统计索引创建可能会失败<a href="https://github.com/milvus-io/milvus/pull/41506">（#41506</a>）。</li>
+<li>修正了一个问题，即如果数据包含空映射，JSON 统计索引创建可能会失败<a href="https://github.com/milvus-io/milvus/pull/41506">（#41506</a>）。</li>
 <li>修正了<code translate="no">AlterCollection</code> API，以正确保存修改时间戳<a href="https://github.com/milvus-io/milvus/pull/41469">（#41469</a>）。</li>
 <li>修正了<code translate="no">ConjunctExpr</code> 下 JSON 统计中的间歇性过滤错误，并改进了任务槽计算逻辑，以加快 JSON 统计的构建<a href="https://github.com/milvus-io/milvus/pull/41458">(#41458</a>)。</li>
 <li>修正了 BM25 统计计算中的 IDF 甲骨文泄漏问题<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>)。</li>
@@ -367,7 +367,7 @@ title: 版本说明
 <tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.10 提高了搜索和加载性能，增强了度量报告功能，并扩大了对加速度量计算的 SVE 支持。该版本还包含多个错误修复，提高了稳定性和正确性。我们鼓励您升级或试用，您的反馈对我们改进 Milvus 非常宝贵！</p>
+<p>Milvus 2.5.10 提高了搜索和加载性能，增强了度量报告功能，并扩大了对加速度量计算的 SVE 支持。该版本还包含多个错误修复，提高了稳定性和正确性。我们鼓励您升级或试用--您的反馈对我们改进 Milvus 非常宝贵！</p>
 <h3 id="Improvements" class="common-anchor-header">改进<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -589,8 +589,8 @@ title: 版本说明
       </svg>
     </button></h3><ul>
 <li>修正了涉及可归零输入和不断增长的 mmap 数据类型的崩溃<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
-<li>修正了删除操作中因重复的 binlog ID 而导致的潜在数据丢失<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>)、<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
-<li>为<code translate="no">GetSegmentsIndexStates</code> 添加了字段索引锁，以避免在创建 Collections 时插入时可能出现的恐慌<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
+<li>修正了删除操作中因重复的 binlog ID 而可能造成的数据丢失<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>)、<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
+<li>为<code translate="no">GetSegmentsIndexStates</code> 添加了字段索引锁，以避免在创建 Collections 时插入可能造成的恐慌<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
 <li>修复了 Rocksmq 消费者注册中的并发问题<a href="https://github.com/milvus-io/milvus/pull/40885">(#40885</a>)</li>
 <li>为分段加载检索所有子 delta 日志<a href="https://github.com/milvus-io/milvus/pull/40957">(#40957</a>)</li>
 <li>修复了在指定<code translate="no">iterative_filter</code> 时使用 JSON 索引导致的错误结果<a href="https://github.com/milvus-io/milvus/pull/40946">(#40946</a>)</li>
@@ -935,7 +935,7 @@ title: 版本说明
 <li>[2.5] 为混合搜索添加了 DSL 日志字段<a href="https://github.com/milvus-io/milvus/pull/39598">(#39598</a>)</li>
 <li>[2.5] 如果索引被删除，则跳过更新索引指标<a href="https://github.com/milvus-io/milvus/pull/39572">(#39572</a>)</li>
 <li>[2.5] 如果组件停止进度超时，则转储 pprof 信息<a href="https://github.com/milvus-io/milvus/pull/39760">(#39760</a>)</li>
-<li>[2.5] 添加了管理 API，以检查 querycoord 平衡状态<a href="https://github.com/milvus-io/milvus/pull/39909">(#39909</a>)</li>
+<li>[2.5] 添加了管理 API 以检查 querycoord 平衡状态<a href="https://github.com/milvus-io/milvus/pull/39909">(#39909</a>)</li>
 </ul>
 <h4 id="StatsCompactionIndex-Task-Scheduler-Optimization" class="common-anchor-header">统计/压缩/索引任务调度器优化</h4><ul>
 <li>改进索引任务调度策略<a href="https://github.com/milvus-io/milvus/pull/40104">(#40104</a>)</li>
@@ -1006,7 +1006,7 @@ title: 版本说明
         ></path>
       </svg>
     </button></h3><ul>
-<li>支持 PartitionKey 隔离，以提高使用多个分区 Key 时的性能<a href="https://github.com/milvus-io/milvus/pull/39245">（#39245</a>）。更多信息，请参阅<a href="/docs/zh/v2.5.x/use-partition-key.md">使用分区密钥</a>。</li>
+<li>支持 PartitionKey 隔离，以提高使用多个分区 Key 时的性能<a href="https://github.com/milvus-io/milvus/pull/39245">（#39245</a>）。有关详细信息，请参阅<a href="/docs/zh/v2.5.x/use-partition-key.md">使用分区密钥</a>。</li>
 <li>稀疏索引现在支持 DAAT MaxScore<a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>。有关详细信息，请参阅<a href="/docs/zh/v2.5.x/sparse_vector.md">稀疏向量</a>。</li>
 <li>在表达式中添加对<code translate="no">is_null</code> 的支持<a href="https://github.com/milvus-io/milvus/pull/38931">(#38931</a>)</li>
 <li>可自定义根权限<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
@@ -1358,12 +1358,12 @@ title: 版本说明
 <p>位图索引传统上对低Cardinality字段很有效，这些字段的不同值数量不多--例如，包含性别信息的列只有两个可能的值：男性和女性。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/v2.5.x/bitmap.md">位图索引</a>。</p>
 <h4 id="Nullable--Default-Value" class="common-anchor-header">可归零和默认值</h4><p>Milvus 现在支持为主键字段以外的标量字段设置可归零属性和默认值。对于标记为<code translate="no">nullable=True</code> 的标量字段，用户可以在插入数据时省略该字段；系统会将其视为空值或默认值（如果已设置），而不会出错。</p>
-<p>默认值和可归零属性为 Milvus 提供了更大的灵活性。用户在创建 Collections 时，可以对具有不确定值的字段利用这一功能。它还简化了从其他数据库系统到 Milvus 的数据迁移，允许处理包含空值的数据集，同时保留原始默认值设置。</p>
+<p>默认值和可归零属性为 Milvus 提供了更大的灵活性。用户在创建 Collections 时，可以利用这一功能来处理具有不确定值的字段。它还简化了从其他数据库系统到 Milvus 的数据迁移，允许处理包含空值的数据集，同时保留原始默认值设置。</p>
 <p>有关详情，请参阅 "<a href="/docs/zh/v2.5.x/nullable-and-default.md">可空值和默认值</a>"。</p>
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">基于 Faiss 的 HNSW SQ/PQ/PRQ</h4><p>通过与 Faiss 社区的密切合作，Faiss 中的 HNSW 算法在功能和性能方面都有了显著的改进。出于稳定性和可维护性的考虑，Milvus 2.5 正式将对 HNSW 的支持从 hnswlib 迁移到 Faiss。</p>
 <p>基于 Faiss，Milvus 2.5 支持 HNSW 上的多种量化方法，以满足不同场景的需求：SQ（标量量化器）、PQ（乘积量化器）和 PRQ（乘积残差量化器）。SQ 和 PQ 比较常见；SQ 提供了良好的查询性能和构建速度，而 PQ 在相同压缩比的情况下提供了更好的召回率。许多向量数据库通常使用二进制量化，这是 SQ 量化的一种简单形式。</p>
 <p>PRQ 是 PQ 和 AQ（加法量化器）的融合。与 PQ 相比，PRQ 需要更长的构建时间，但却能提供更好的召回率，尤其是在高压缩率的情况下，二进制压缩的召回率更高。</p>
-<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">聚类压缩（测试版）</h4><p>Milvus 2.5 引入了聚类压缩（Clustering Compaction）功能，以加快搜索速度并降低大型 Collections 的成本。通过指定一个标量字段作为聚类关键字，数据会按范围重新分配，以优化存储和检索。该功能的作用类似于全局索引，可使 Milvus 在基于聚类元数据的查询过程中有效地剪裁数据，从而在应用标量过滤器时提高搜索性能。</p>
+<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">聚类压缩（测试版）</h4><p>Milvus 2.5 引入了聚类压缩（Clustering Compaction）功能，以加快搜索速度并降低大型 Collections 的成本。通过指定一个标量字段作为聚类关键字，数据会按范围重新分配，以优化存储和检索。该功能的作用类似于全局索引，可让 Milvus 在基于聚类元数据的查询过程中有效地剪裁数据，从而在应用标量过滤器时提高搜索性能。</p>
 <p>有关详情，请参阅<a href="/docs/zh/v2.5.x/clustering-compaction.md">聚类压缩</a>。</p>
 <h3 id="Other-Features" class="common-anchor-header">其他功能<button data-href="#Other-Features" class="anchor-icon" translate="no">
       <svg translate="no"

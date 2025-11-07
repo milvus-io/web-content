@@ -23,7 +23,7 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LlamaInd
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>В этом руководстве показано, как построить систему Retrieval-Augmented Generation (RAG) с помощью LlamaIndex и Milvus.</p>
-<p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает релевантные документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
+<p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает соответствующие документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a> - это простой и гибкий фреймворк для подключения пользовательских источников данных к большим языковым моделям (LLM). <a href="https://milvus.io/">Milvus</a> - самая продвинутая в мире база векторных данных с открытым исходным кодом, созданная для поиска сходства встраивания и приложений искусственного интеллекта.</p>
 <p>В этом блокноте мы покажем быструю демонстрацию использования MilvusVectorStore.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
@@ -57,7 +57,7 @@ title: Система Retrieval-Augmented Generation (RAG) с Milvus и LlamaInd
         ></path>
       </svg>
     </button></h3><p>Сниппеты кода на этой странице требуют наличия зависимостей pymilvus и llamaindex. Вы можете установить их с помощью следующих команд:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>

@@ -41,7 +41,7 @@ summary: >-
     </button></h2><p>Avant de commencer, assurez-vous que vous disposez de la clé API de Voyage, ou que vous en obtenez une sur le <a href="https://dash.voyageai.com/api-keys">site Web de VoyageAI</a>.</p>
 <p>Les données utilisées dans cet exemple sont des titres de livres. Vous pouvez télécharger l'ensemble de données <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">ici</a> et le placer dans le même répertoire que celui où vous exécutez le code suivant.</p>
 <p>Tout d'abord, installez le paquetage pour Milvus et Voyage AI :</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
+<pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le moteur d'exécution</strong>. (Cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>

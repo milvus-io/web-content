@@ -41,7 +41,7 @@ title: Auswertung mit DeepEval
         ></path>
       </svg>
     </button></h2><p>Vergewissern Sie sich, dass Sie die folgenden Abhängigkeiten installiert haben, bevor Sie dieses Notizbuch ausführen:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
@@ -376,7 +376,7 @@ result = evaluate(
 Evaluating 3 test case(s) in parallel: |██████████|100% (3/3) [Time Taken: 00:11,  3.91s/test case]
 </code></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #05f58d; text-decoration-color: #05f58d">✓</span> Tests beendet 🎉! Führen Sie <span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span> aus, um die Evaluierungsergebnisse von Confident AI zu sehen. 
-‼️ HINWEIS: Sie können stattdessen auch Auswertungen zu ALLEN deepeval-Metriken direkt auf Confident AI durchführen.</pre>
+‼️ HINWEIS: Sie können stattdessen auch Auswertungen zu ALLEN deepeval-Metriken direkt auf Confident AI ausführen.</pre>
 <h2 id="Evaluating-Generation" class="common-anchor-header">Evaluierung der Generierung<button data-href="#Evaluating-Generation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

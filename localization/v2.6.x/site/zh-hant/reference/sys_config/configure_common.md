@@ -304,7 +304,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        請在嵌入式 Milvus 中調整：local，可用值為 [local、remote、opendal]，minio 值已被淘汰，請使用 remote 來取代      </td>
+      <td>        請在內嵌的 Milvus 中調整：local，可用值為 [local、remote、opendal]，值 minio 已經被淘汰，請使用 remote 代替      </td>
       <td>遠端</td>
     </tr>
   </tbody>
@@ -513,7 +513,7 @@ summary: 學習如何為 Milvus 設定共用。
   <tbody>
     <tr>
       <td>        群集層級讀寫權限      </td>
-      <td>資料庫列表,選擇所有權,選擇使用者,描述資源群組,資源群組列表,權限群組清單,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+      <td>資料庫清單,選擇所有權,選擇使用者,描述資源群組,資源群組清單,權限群組清單,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups...</td>
     </tr>
   </tbody>
 </table>
@@ -1066,7 +1066,7 @@ summary: 學習如何為 Milvus 設定共用。
   </thead>
   <tbody>
     <tr>
-      <td>        將 pk 應用於 bloom filter 時的批次大小      </td>
+      <td>        將 pk 應用於 Bloom filter 時的批次大小      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -1242,6 +1242,40 @@ summary: 學習如何為 Milvus 設定共用。
     <tr>
       <td>        等待任務完成並釋放池中資源的最長時間      </td>
       <td>60</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonclusterID" class="common-anchor-header"><code translate="no">common.clusterID</code><button data-href="#commonclusterID" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.clusterID">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>群集的唯一識別碼，用於自動識別碼的產生，以確保在多個 Milvus 群集中的全局唯一性。</li>      
+        <li>有效值：[0、1、2、3、4、5、6、7] (最多支援 8 個群集)</li>      
+        <li>每個群集必須有唯一的 clusterID，以防止執行多個群集時 AutoID 重疊。</li>      
+        <li>此 ID 嵌入在 64 位 AutoID 結構中，作為 cluster_id 段的一部分。</li>      
+        <li>如需詳細資訊，請參閱<a href="/docs/zh-hant/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">Primary Field &amp; AutoID</a>。</li>      </td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>

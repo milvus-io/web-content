@@ -47,7 +47,7 @@ title: 使用 Milvus 和 Camel 的檢索-擴充世代 (RAG)
         ></path>
       </svg>
     </button></h2><p>讓我們先從 https://arxiv.org/pdf/2303.17760.pdf 載入 CAMEL 文件。這將是我們的本地範例資料。</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的依賴項目，您可能需要<strong>重新啟動運行時</strong>（按一下螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -123,7 +123,7 @@ vector_retriever = VectorRetriever(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>現在我們可以透過查詢從向量儲存中擷取資訊。預設情況下，它會擷取 Cosine 類似度分數最高的前 1 個小塊中的文字內容，而類似度分數應高於 0.75，以確保擷取的內容與查詢相關。您也可以變更<code translate="no">top_k</code> 值。</p>
+<p>現在我們可以透過查詢從向量儲存中擷取資訊。預設情況下，它會從 Cosine 類似度分數最高的前 1 個分塊中擷取文字內容，而類似度分數應高於 0.75，以確保擷取的內容與查詢相關。您也可以變更<code translate="no">top_k</code> 值。</p>
 <p>傳回的字串清單包括</p>
 <ul>
 <li>相似度得分</li>
@@ -283,7 +283,7 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本節中，我們將展示如何透過應用<code translate="no">Function Calling</code> 來結合<code translate="no">RETRIEVAL_FUNCS</code> 與<code translate="no">RolePlaying</code> 。</p>
+    </button></h2><p>在本節中，我們將展示如何應用<code translate="no">Function Calling</code> 來結合<code translate="no">RETRIEVAL_FUNCS</code> 與<code translate="no">RolePlaying</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> colorama <span class="hljs-keyword">import</span> Fore
 

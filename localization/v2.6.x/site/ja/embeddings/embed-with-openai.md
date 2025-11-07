@@ -1,7 +1,7 @@
 ---
 id: embed-with-openai.md
 order: 2
-summary: MilvusはOpenAIEmbeddingFunctionクラスを介してOpenAIのモデルと統合します。
+summary: MilvusはOpenAIEmbeddingFunctionクラスを介してOpenAIのモデルと統合されます。
 title: OpenAI
 ---
 <h1 id="OpenAI" class="common-anchor-header">OpenAI<button data-href="#OpenAI" class="anchor-icon" translate="no">
@@ -39,8 +39,10 @@ openai_ef = model.dense.OpenAIEmbeddingFunction(
 <p>エンコーディングに使用するOpenAIモデルの名前。有効なオプションは<strong>text-embedding-3-small</strong>,<strong>text-embedding-3-large</strong>,<strong>text-embedding-ada-002</strong>(default) です。</p></li>
 <li><p><strong>api_key</strong><em>(文字列</em>)</p>
 <p>OpenAI API にアクセスするための API キー。</p></li>
+<li><p><strong>base_url</strong><em>(string</em>)</p>
+<p>OpenAI API にアクセスするためのベース URL。デフォルトは<strong>https://api.openai.com/v1 です。</strong>ただし、別のモデルプロバイダやローカルの vLLM インスタンス (<strong>http://localhost:8080/v1</strong> など) の互換性のある API エンドポイントにアクセスする場合は、ここで URL を指定できます。</p></li>
 <li><p><strong>dimensions</strong><em>(int</em>)</p>
-<p>出力される埋め込みデータの次元数。<strong>text-embedding-3</strong>以降のモデルでのみサポートされます。</p></li>
+<p>結果の出力埋め込みが持つべき次元数。<strong>text-embedding-3</strong>以降のモデルでのみサポートされています。</p></li>
 </ul>
 <p>ドキュメントの埋め込みを作成するには、<strong>encode_documents()</strong>メソッドを使います：</p>
 <pre><code translate="no" class="language-python">docs = [

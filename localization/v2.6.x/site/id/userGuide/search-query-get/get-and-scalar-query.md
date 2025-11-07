@@ -4,7 +4,7 @@ title: Kueri
 summary: >-
   Selain pencarian ANN, Milvus juga mendukung pemfilteran metadata melalui
   kueri. Halaman ini memperkenalkan cara menggunakan Query, Get, dan
-  QueryIterator untuk melakukan penyaringan metadata.
+  QueryIterators untuk melakukan penyaringan metadata.
 ---
 <h1 id="Query" class="common-anchor-header">Kueri<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,36 +62,15 @@ summary: >-
    </tr>
    <tr>
      <td><p>Parameter wajib</p></td>
-     <td><ul>
-<li>Nama koleksi</li>
-<li>Kunci primer</li>
-</ul></td>
-     <td><ul>
-<li>Nama koleksi</li>
-<li>Memfilter ekspresi</li>
-</ul></td>
-     <td><ul>
-<li><p>Nama koleksi</p></li>
-<li><p>Ekspresi pemfilteran</p></li>
-<li><p>Jumlah entitas yang akan dikembalikan per kueri</p></li>
-</ul></td>
+     <td><ul><li><p>Nama koleksi</p></li><li><p>Kunci primer</p></li></ul></td>
+     <td><ul><li><p>Nama koleksi</p></li><li><p>Memfilter ekspresi</p></li></ul></td>
+     <td><ul><li><p>Nama koleksi</p></li><li><p>Ekspresi pemfilteran</p></li><li><p>Jumlah entitas yang akan dikembalikan per kueri</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Parameter opsional</p></td>
-     <td><ul>
-<li>Nama partisi</li>
-<li>Bidang keluaran</li>
-</ul></td>
-     <td><ul>
-<li><p>Nama partisi</p></li>
-<li><p>Jumlah entitas yang akan dikembalikan</p></li>
-<li><p>Bidang keluaran</p></li>
-</ul></td>
-     <td><ul>
-<li><p>Nama partisi</p></li>
-<li><p>Jumlah entitas yang akan dikembalikan secara total</p></li>
-<li><p>Bidang keluaran</p></li>
-</ul></td>
+     <td><ul><li><p>Nama partisi</p></li><li><p>Bidang keluaran</p></li></ul></td>
+     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan</p></li><li><p>Bidang keluaran</p></li></ul></td>
+     <td><ul><li><p>Nama partisi</p></li><li><p>Jumlah entitas yang akan dikembalikan secara total</p></li><li><p>Bidang keluaran</p></li></ul></td>
    </tr>
    <tr>
      <td><p>Pengembalian</p></td>
@@ -116,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Saat Anda perlu mencari entitas berdasarkan kunci utamanya, Anda dapat menggunakan metode <strong>Get</strong>. Contoh kode berikut ini mengasumsikan bahwa ada tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> dalam koleksi Anda dan mengembalikan entitas dengan kunci utama <code translate="no">1</code>, <code translate="no">2</code>, dan <code translate="no">3</code>.</p>
+    </button></h2><p>Saat Anda perlu mencari entitas berdasarkan kunci utamanya, Anda dapat menggunakan metode <strong>Get</strong>. Contoh kode berikut ini mengasumsikan bahwa ada tiga bidang bernama <code translate="no">id</code>, <code translate="no">vector</code>, dan <code translate="no">color</code> dalam koleksi Anda.</p>
 <pre><code translate="no" class="language-python">[
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},
@@ -130,7 +109,7 @@ summary: >-
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.5718280481994695</span>, <span class="hljs-number">0.24070317428066512</span>, -<span class="hljs-number">0.3737913482606834</span>, -<span class="hljs-number">0.06726932177492717</span>, -<span class="hljs-number">0.6980531615588608</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;purple_4976&quot;</span>},
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda bisa mendapatkan entitas berdasarkan ID-nya sebagai berikut.</p>
+<p>Anda bisa mendapatkan entitas dengan ID mereka sebagai berikut.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -240,7 +219,7 @@ curl --request POST \
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query" class="common-anchor-header">Gunakan Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
+<h2 id="Use-Query" class="common-anchor-header">Menggunakan Query<button data-href="#Use-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

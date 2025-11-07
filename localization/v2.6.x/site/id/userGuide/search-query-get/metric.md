@@ -117,6 +117,13 @@ summary: >-
      <td><p>[0, ∞)</p></td>
    </tr>
 </table>
+<div class="alert note">
+<p>Untuk mengindeks bidang vektor dalam bidang <a href="/docs/id/array-of-structs.md">Array of Structs</a>, Anda harus mengawali <code translate="no">MAX_SIM</code> dengan kumpulan jenis metrik yang disebutkan di atas, berdasarkan sematan vektor yang tersimpan dalam bidang tersebut. Sebagai contoh,</p>
+<ul>
+<li><p>Untuk bidang vektor yang menyimpan sematan vektor tipe <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, atau <code translate="no">INT8_VECTOR</code>, Anda dapat menggunakan <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, atau <code translate="no">MAX_SIM_L2</code> sebagai tipe metrik.</p></li>
+<li><p>Untuk bidang vektor yang menyimpan sematan vektor tipe <code translate="no">BINARY_VECTOR</code>, Anda dapat menggunakan <code translate="no">MAX_SIM_JACCADR</code> atau <code translate="no">MAX_SIM_HAMMING</code> sebagai tipe metrik.</p></li>
+</ul>
+</div>
 <h2 id="Euclidean-distance-L2" class="common-anchor-header">Jarak Euclidean (L2)<button data-href="#Euclidean-distance-L2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -240,7 +247,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) adalah jenis metrik yang digunakan untuk pencarian kemiripan yang efisien dan mendekati pada kumpulan besar - seperti kumpulan kata dokumen, kumpulan tag pengguna, atau kumpulan k-mer genom. Alih-alih membandingkan set mentah secara langsung, MHJACCARD membandingkan <strong>tanda tangan MinHash</strong>, yang merupakan representasi ringkas yang dirancang untuk memperkirakan kemiripan Jaccard secara efisien.</p>
+    </button></h2><p><strong>MinHash Jaccard</strong> (<code translate="no">MHJACCARD</code>) adalah jenis metrik yang digunakan untuk pencarian kemiripan yang efisien dan mendekati pada set yang besar-seperti set kata dokumen, set tag pengguna, atau set k-mer genom. Alih-alih membandingkan set mentah secara langsung, MHJACCARD membandingkan <strong>tanda tangan MinHash</strong>, yang merupakan representasi ringkas yang dirancang untuk memperkirakan kemiripan Jaccard secara efisien.</p>
 <p>Pendekatan ini secara signifikan lebih cepat daripada menghitung kemiripan Jaccard yang tepat dan sangat berguna dalam skenario berskala besar atau berdimensi tinggi.</p>
 <p><strong>Jenis vektor yang berlaku</strong></p>
 <ul>

@@ -24,9 +24,9 @@ title: Aggiornamento di Milvus Standalone con Docker Compose
         ></path>
       </svg>
     </button></h1><p>Questo argomento descrive come aggiornare Milvus utilizzando Docker Compose.</p>
-<p>In casi normali, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus cambiando l'immagine</a>. Tuttavia, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a> prima di qualsiasi aggiornamento dalla v2.1.x alla v2.5.13.</p>
+<p>In casi normali, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus cambiando l'immagine</a>. Tuttavia, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a> prima di effettuare l'aggiornamento dalla versione v2.1.x alla versione v2.5.13.</p>
 <div class="alter note">
-<p>A causa di problemi di sicurezza, Milvus aggiorna il proprio MinIO a RELEASE.2023-03-20T20-16-18Z con il rilascio della v2.2.5. Prima di qualsiasi aggiornamento da versioni precedenti di Milvus Standalone installate con Docker Compose, è necessario creare un deployment MinIO a singolo nodo e singola unità e migrare le impostazioni e i contenuti di MinIO esistenti nel nuovo deployment. Per i dettagli, fate riferimento a <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">questa guida</a>.</p>
+<p>A causa di problemi di sicurezza, Milvus aggiorna il proprio MinIO a RELEASE.2023-03-20T20-16-18Z con il rilascio della v2.2.5. Prima di qualsiasi aggiornamento da versioni precedenti di Milvus Standalone installate con Docker Compose, è necessario creare un deployment MinIO a singolo nodo e singola unità e migrare le impostazioni e i contenuti di MinIO esistenti al nuovo deployment. Per i dettagli, fate riferimento a <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">questa guida</a>.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Aggiornare Milvus cambiando l'immagine<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,7 +56,7 @@ title: Aggiornamento di Milvus Standalone con Docker Compose
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Migrate-the-metadata" class="common-anchor-header">Migrazione dei metadati<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
+<h2 id="Migrate-the-metadata" class="common-anchor-header">Migrare i metadati<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

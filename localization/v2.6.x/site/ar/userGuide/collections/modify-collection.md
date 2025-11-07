@@ -181,10 +181,6 @@ curl --request POST \
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>ما إذا كان سيتم السماح للمجموعة بقبول قيم المفتاح الأساسي المقدمة من المستخدم عند تمكين المعرف التلقائي للمجموعة.</p><ul><li><p>عند التعيين إلى <strong>"صواب"</strong>: تستخدم عمليات الإدراج وعمليات إعادة الإدراج والواردات المجمعة المفتاح الأساسي المقدم من المستخدم إذا كان موجودًا؛ وإلا يتم إنشاء قيم المفتاح الأساسي تلقائيًا.</p></li><li><p>عند التعيين إلى <strong>"خطأ"</strong>: يتم رفض أو تجاهل قيم المفاتيح الأساسية التي يوفرها المستخدم ويتم دائمًا إنشاء قيم المفاتيح الأساسية تلقائيًا. الافتراضي هو <strong>"خطأ"</strong>.</p></li></ul></td>
    </tr>
-   <tr>
-     <td></td>
-     <td></td>
-   </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">مثال 1: تعيين TTL للمجموعة<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"

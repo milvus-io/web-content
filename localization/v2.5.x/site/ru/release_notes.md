@@ -339,7 +339,7 @@ title: Информация о выпуске
 <li>Исправлена проблема, при которой создание индекса JSON-статистики могло завершиться неудачей, если данные содержали пустую карту<a href="https://github.com/milvus-io/milvus/pull/41506">(#41506</a>).</li>
 <li>Исправлен API <code translate="no">AlterCollection</code> для корректного сохранения временной метки модификации<a href="https://github.com/milvus-io/milvus/pull/41469">(#41469</a>).</li>
 <li>Исправлена периодическая ошибка фильтрации в JSON-статистике под <code translate="no">ConjunctExpr</code> и улучшена логика расчета слотов задач для ускорения создания JSON-статистики<a href="https://github.com/milvus-io/milvus/pull/41458">(#41458</a>).</li>
-<li>Исправлена утечка оракула IDF при расчете статистики BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
+<li>Исправлена утечка IDF-оракула при расчете статистики BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
 <li>Обеспечена проверка предварительно созданных тем в первую очередь при проверке номера шарда<a href="https://github.com/milvus-io/milvus/pull/41421">(#41421</a>).</li>
 <li>Исправлено ошибочное сообщение о тупике, возникающее в модульных тестах<a href="https://github.com/milvus-io/milvus/pull/41377">(#41377</a>).</li>
 </ul>

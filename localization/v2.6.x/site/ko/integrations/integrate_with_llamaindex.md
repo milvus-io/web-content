@@ -55,7 +55,7 @@ title: Milvus 및 LlamaIndex를 사용한 검색 증강 생성(RAG)
         ></path>
       </svg>
     </button></h3><p>이 페이지의 코드 스니펫에는 pymilvus 및 llamaindex 종속성이 필요합니다. 다음 명령을 사용하여 설치할 수 있습니다:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -209,7 +209,7 @@ documents = SimpleDirectoryReader(
 <li>"mmap.enabled"(bool): 컬렉션 수준에서 메모리 맵 저장소를 활성화할지 여부입니다.</li>
 </ul></li>
 <li><code translate="no">index_management (IndexManagement)</code>: 사용할 인덱스 관리 전략을 지정합니다. 기본값은 "create_if_not_exists"입니다.</li>
-<li><code translate="no">batch_size (int)</code>: 밀버스에 데이터를 삽입할 때 한 번에 처리하는 문서 수를 설정합니다. 기본값은 DEFAULT_BATCH_SIZE입니다.</li>
+<li><code translate="no">batch_size (int)</code>: 밀버스에 데이터를 삽입할 때 한 번에 처리할 문서 수를 설정합니다. 기본값은 DEFAULT_BATCH_SIZE입니다.</li>
 <li><code translate="no">consistency_level (str, optional)</code>: 새로 생성된 컬렉션에 사용할 일관성 수준입니다. 기본값은 "세션"입니다.</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>

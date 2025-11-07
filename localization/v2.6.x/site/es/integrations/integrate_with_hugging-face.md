@@ -47,7 +47,7 @@ title: Respuesta a preguntas con Milvus y Hugging Face
 <li><code translate="no">datasets</code> <code translate="no">transformers</code>: los paquetes Hugging Face gestionan datos y utilizan modelos.</li>
 <li><code translate="no">torch</code>: una potente biblioteca proporciona herramientas eficientes de cálculo tensorial y aprendizaje profundo.</li>
 </ul>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus transformers datasets torch
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite transformers datasets torch
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si utiliza Google Colab, para habilitar las dependencias que acaba de instalar, es posible que tenga que <strong>reiniciar el tiempo de ejecución</strong>. (Haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y selecciona "Reiniciar sesión" en el menú desplegable).</p>

@@ -27,7 +27,7 @@ title: LangExtract + Milvus-Integration
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>Dieser Leitfaden zeigt, wie man <a href="https://github.com/google/langextract">LangExtract</a> mit <a href="https://milvus.io/">Milvus</a> verwendet, um ein intelligentes Dokumentenverarbeitungs- und Retrievalsystem aufzubauen.</p>
-<p>LangExtract ist eine Python-Bibliothek, die Large Language Models (LLMs) verwendet, um strukturierte Informationen aus unstrukturierten Textdokumenten mit genauer Quellenangabe zu extrahieren. Das System kombiniert die Extraktionsfähigkeiten von LangExtract mit der Vektorspeicherung von Milvus, um sowohl die semantische Ähnlichkeitssuche als auch die präzise Filterung von Metadaten zu ermöglichen.</p>
+<p>LangExtract ist eine Python-Bibliothek, die Large Language Models (LLMs) verwendet, um strukturierte Informationen aus unstrukturierten Textdokumenten mit präziser Quellenangabe zu extrahieren. Das System kombiniert die Extraktionsfähigkeiten von LangExtract mit der Vektorspeicherung von Milvus, um sowohl die semantische Ähnlichkeitssuche als auch die präzise Filterung von Metadaten zu ermöglichen.</p>
 <p>Diese Integration ist besonders wertvoll für Content Management, semantische Suche, Knowledge Discovery und den Aufbau von Empfehlungssystemen auf der Grundlage extrahierter Dokumentattribute.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ title: LangExtract + Milvus-Integration
         ></path>
       </svg>
     </button></h2><p>Vergewissern Sie sich, dass Sie die folgenden Abhängigkeiten installiert haben, bevor Sie dieses Notizbuch ausführen:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus langextract google-genai requests tqdm pandas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite langextract google-genai requests tqdm pandas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
@@ -374,7 +374,7 @@ extraction_results = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nun müssen wir die Extraktionsergebnisse verarbeiten und Vektoreinbettungen für jedes Dokument erzeugen. Außerdem werden wir die extrahierten Attribute in separate Felder umwandeln, um sie in Milvus leicht durchsuchbar zu machen.</p>
+    </button></h2><p>Nun müssen wir die Extraktionsergebnisse verarbeiten und Vektoreinbettungen für jedes Dokument erzeugen. Außerdem werden wir die extrahierten Attribute in separate Felder umwandeln, damit sie in Milvus leicht durchsuchbar sind.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n3. Processing extraction results and generating vectors...&quot;</span>)
 
 processed_data = []
@@ -495,7 +495,7 @@ Insert result: {'insert_count': 10, 'ids': ['doc_f8797155', 'doc_78c7e586', 'doc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Einer der Hauptvorteile der Kombination von LangExtract mit Milvus ist die Möglichkeit, präzise Filterungen auf der Grundlage der extrahierten Metadaten durchzuführen. Lassen Sie uns dies anhand einiger Filterausdrucksuchen demonstrieren.</p>
+    </button></h2><p>Einer der Hauptvorteile der Kombination von LangExtract mit Milvus ist die Möglichkeit, eine präzise Filterung auf der Grundlage der extrahierten Metadaten durchzuführen. Lassen Sie uns dies anhand einiger Filterausdrucksuchen demonstrieren.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n=== Filter Expression Search Examples ===&quot;</span>)
 
 <span class="hljs-comment"># Load collection into memory for querying</span>

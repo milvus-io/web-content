@@ -21,8 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Welcome to the Milvus Roadmap! Join us on our continuous journey to enhance and evolve Milvus. We are thrilled to share our accomplishments, future plans, and our vision for what lies ahead. Our roadmap is more than a list of upcoming features—it reflects our commitment to innovation and our dedication to working with the community. We invite you to delve into our roadmap, provide your feedback, and help shape the future of Milvus!</p>
-<h2 id="Roadmap" class="common-anchor-header">Roadmap<button data-href="#Roadmap" class="anchor-icon" translate="no">
+    </button></h1><h2 id="🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="common-anchor-header">🌌 Toward the Next-Gen Multimodal Database and Data Lake<button data-href="#🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,49 +36,181 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table>
-    <thead>
-        <tr>
-            <th>Category</th>
-            <th>Milvus 2.5.x (Achieved in recent releases)</th>
-            <th>Next Release - Milvus 2.6 (Middle of CY25)</th>
-            <th>Future Roadmap - Milvus 3.0 (Within 1 year)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>AI-Driven Unstructured Data Processing</strong><br/><i>Strengthening the ability to process and analyze unstructured data using AI models and advanced technologies</i></td>
-            <td><strong>Full Text Search</strong><br/><i>Support full text search with Sparse-BM25. The new API accepts text as input and automatically generates sparse vector inside Milvus</i><br/><br/><strong>Sparse Vector (GA)</strong><br/><i>Support efficient storage and indexing method for sparse vector</i><br/></td>
-            <td><strong>Data-In and Data-Out</strong><br/><i>Support major model services to ingest original text</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Support model-based rerankers and user-defined scoring function</i><br/><br/><strong>Iterative Search</strong><br/><i>Revise query vector based on user labeling</i></td>
-            <td><strong>Support Tensors</strong><br/><i>Support list of vectors, typical usage like Colbert, Copali and Video representation</i><br/><br/><strong>Support More Data Types</strong><br/><i>e.g. Datetime, Map, GIS</i></td>
-        </tr>
-        <tr>
-            <td><strong>Search Quality & Performance</strong><br/><i>Deliver accurate, relevant, and fast results by optimizing architecture, algorithms and APIs</i></td>
-            <td><strong>Text Match Function</strong><br/><i>Quickly filter keywords/tokens in text/varchar</i><br/><br/><strong>Grouping Search Enhancement</strong><br/><i>Introduce group_size and add group by support in hybrid search</i><br/><br/><strong>Bitmap Index & Inverted Index</strong><br/><i>Accelerate filtering on tags</i></td>
-            <td><strong>Advanced Match</strong><br/><i>e.g. phrase_match, multi_match </i><br/><br/><strong>Analyzer Enhancement</strong><br/><i>Enhance Analyzer with expanded tokenizer support and improved observability</i><br/><br/><strong>JSON Filtering</strong><br/><i>Optimize JSON indexing and parsing for faster processing</i></td>
-            <td><strong>Sorting Capability</strong><br/><i>Sort by scalar fields during execution</i><br/><br/><strong>Support Data Clustering</strong><br/><i>Data co-locality</i></td>
-        </tr>
-        <tr>
-            <td><strong>Rich Functionality & Management</strong><br/><i>Developer-friendly and robust data management features</i></td>
-            <td><strong>Support csv files in data import</strong><br/><i>Bulkinsert supports csv format</i><br/><br/><strong>Support Null and Default Value</strong><br/><i>Null and Default types make importing data from other DBMS easier</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Visual management tools for DBAs</i></td>
-            <td><strong>Schema Change</strong><br/><i>e.g. Add/delete field, modify varchar length</i><br/><br/><strong>Aggregations</strong><br/><i>Scalar field aggregations, e.g. count,distinct value, min,max</i><br/><br/><strong>Support UDF</strong><br/><i>User-defined function</i></td>
-            <td><strong>Bulk Update</strong><br/><i>Support bulk updates to a specific field's value</i><br/><br/><strong>Primary Key Deduplication</strong><br/><i>By using the global pk index</i><br/><br/><strong>Data Versioning & Restore</strong><br/><i>Support data versioning by snapshot</i></td>
-        </tr>
-        <tr>
-            <td><strong>Cost Efficiency & Architecture</strong><br/><i>State-of-the-art systems with stability, cost-effectiveness, and streamlined deployment.</i></td>
-            <td><strong>Memory Optimization</strong><br/><i>Reduce OOM and load enhancement</i><br/><br/><strong>Clustering Compaction</strong><br/><i>Data re-distribution based on configuration to accelerate read performance</i><br/><br/><strong>Storage Format V2 (Beta)</strong><br/><i>Universal formats design and foundation for disk-based data access</i></td>
-            <td><strong>Tiered Storage</strong><br/><i>Support hot and cold storage for cost optimization</i><br/><br/><strong>Stream Node</strong><br/><i>Process streaming data and simplify incremental write flow</i><br/><br/><strong>MixCoord</strong><br/><i>Merge Coord logics into one</i></td>
-            <td><strong>Vector Lake</strong><br/><i>Cost-effective offline solution, spark connector and integrate with iceberg</i><br/><br/><strong>Logstore Component</strong><br/><i>Reduce dependencies on external components like pulsar</i><br/><br/><strong>Data Evict Policy</strong><br/><i>Users can define their own evict policy</i></td>
-        </tr>
-    </tbody>
-</table>
+    </button></h2><p><strong>Milvus Product Roadmap</strong></p>
+<p>Welcome to the Milvus Roadmap!</p>
+<p>We are ushering Milvus into a new era — the next-generation multimodal database — spanning <strong>structured to unstructured data</strong>, <strong>real-time retrieval to offline analytics</strong>, and <strong>single-cluster performance to a global data lake architecture</strong>.</p>
+<p>This roadmap outlines the core objectives for <strong>Milvus v2.6 (in progress)</strong>, <strong>Milvus v3.0 (targeted for late 2026)</strong>, and <strong>Milvus v3.1 (long-term development)</strong>, along with the evolution plan for <strong>Vector Lake (data lake / Loon)</strong>.</p>
+<h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (In Progress)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>Timeline: Mid-2025 – End of 2025</strong></p>
+<p>Focus: <strong>Upgrading the data model</strong>, <strong>refactoring the streaming architecture</strong>, <strong>building hot/cold tiering capabilities</strong>, and launching the <strong>Vector Lake Prototype (v0.1)</strong>.</p>
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Key Highlights<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="🔹-Data-Model-Upgrade" class="common-anchor-header">🔹 <strong>Data Model Upgrade</strong></h4><ul>
+<li><p>Introduce a unified <strong>Tensor / StructList</strong> data type to support multi-vector embedding structures, enabling compatibility with <em>ColBERT</em>, <em>CoLQwen</em>, <em>video</em>, and <em>multimodal vectors</em>.</p></li>
+<li><p>Add <strong>Geo Data</strong> support, including points, regions, and spatial indexing (based on <em>libspatial</em>), to expand use cases in LBS and GIS.</p></li>
+<li><p>Support for <strong>Timestamp with Timezone</strong> data type.</p></li>
+</ul>
+<h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹 <strong>StreamNode Architecture Refactor</strong></h4><ul>
+<li><p>Rewrite the streaming ingestion pipeline to optimize incremental writes and real-time computation.</p></li>
+<li><p>Significantly improve concurrency performance and stability, laying the foundation for unified real-time and offline processing.</p></li>
+<li><p>Introduce a new message queue engine: <strong>Woodpecker</strong>.</p></li>
+</ul>
+<h4 id="🔹-HotCold-Tiering--Storage-Architecture-StorageV2" class="common-anchor-header">🔹 <strong>Hot/Cold Tiering & Storage Architecture (StorageV2)</strong></h4><ul>
+<li><p>Support dual storage formats: <strong>Parquet</strong> and <strong>Vortex</strong>, enhancing concurrency and memory efficiency.</p></li>
+<li><p>Implement tiered storage with automatic hot/cold data separation and intelligent scheduling.</p></li>
+</ul>
+<h4 id="🔹-Vector-Lake-Prototype-v01" class="common-anchor-header">🔹 <strong>Vector Lake Prototype (v0.1)</strong></h4><ul>
+<li><p>Integrate with <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> via FFI, enabling offline schema evolution and KNN queries.</p></li>
+<li><p>Provide multimodal data visualization and a Spark ETL demo, establishing the foundational data lake architecture.</p></li>
+</ul>
+<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (Targeted for Late 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>Timeline: Late 2025 – Early 2026</strong></p>
+<p>Focus: Comprehensive enhancements to <strong>search experience</strong>, <strong>schema flexibility</strong>, and <strong>unstructured data support</strong>, along with the release of <strong>Vector Lake (v0.2)</strong>.</p>
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Key Highlights<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="🔹-Search-Experience-Overhaul" class="common-anchor-header">🔹 <strong>Search Experience Overhaul</strong></h4><ul>
+<li><p>Introduce <strong>More Like This (MLT)</strong> similarity search with support for searches with position or negative examples.</p></li>
+<li><p>Add semantic search capabilities such as <strong>highlighting</strong> and <strong>boosting</strong>.</p></li>
+<li><p>Support <strong>custom dictionaries</strong> and <strong>synonym tables</strong>, enabling lexical and semantic rule definitions at the Analyzer layer.</p></li>
+<li><p>Introduce <strong>aggregation</strong> capabilities for queries.</p></li>
+</ul>
+<h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>Multi-Tenancy & Resource Management</strong></h4><ul>
+<li><p>Enable multi-tenant deletion, statistics, and hot/cold tiering.</p></li>
+<li><p>Improve resource isolation and scheduling strategies to support millions of tables in a single cluster.</p></li>
+</ul>
+<h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header">🔹 <strong>Schema & Primary Key Enhancements</strong></h4><ul>
+<li><p>Implement <strong>Global Primary Key Deduplication (Global PK Dedup)</strong> to guarantee data consistency and uniqueness.</p></li>
+<li><p>Support <strong>flexible schema management</strong> (adding/dropping columns, backup fill).</p></li>
+<li><p>Allow <strong>NULL values</strong> in vector fields.</p></li>
+</ul>
+<h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹 <strong>Expanded Unstructured Data Types (BLOB / Text)</strong></h4><ul>
+<li><p>Introduce the <strong>BLOB type</strong>, which provides native storage and referencing for binary data such as files, images, and videos.</p></li>
+<li><p>Introduce <strong>TEXT type</strong>, which provides enhanced full-text and content-based search capabilities.</p></li>
+</ul>
+<h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>Enterprise-Grade Capabilities</strong></h4><ul>
+<li><p>Support <strong>Snapshot-based backup and recovery</strong>.</p></li>
+<li><p>Provide <strong>end-to-end tracing</strong> and <strong>audit logging</strong>.</p></li>
+<li><p>Implement <strong>Active-Standby High Availability (HA)</strong> across multi-cluster deployments.</p></li>
+</ul>
+<h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
+<li><p>Support <strong>TEXT / BLOB storage</strong> and <strong>multi-version snapshot management</strong>.</p></li>
+<li><p>Integrate Spark for offline indexing, clustering, deduplication, and dimensionality reduction tasks.</p></li>
+<li><p>Deliver <strong>ChatPDF cold-query and offline benchmark demos</strong>.</p></li>
+</ul>
+<h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">🪐 Milvus v3.1 (Long-Term Vision)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><strong>Timeline: Mid-2026</strong></p>
+<p>Focus: <strong>User-defined functions (UDF)</strong>, <strong>distributed computing integration</strong>, <strong>scalar query optimization</strong>, <strong>dynamic sharding</strong>, and the official release of <strong>Vector Lake (v1.0)</strong>.</p>
+<h3 id="🎯-Key-Highlights" class="common-anchor-header">🎯 Key Highlights<button data-href="#🎯-Key-Highlights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="🔹-UDF--Distributed-Computing-Ecosystem" class="common-anchor-header">🔹 <strong>UDF & Distributed Computing Ecosystem</strong></h4><ul>
+<li><p>Support <strong>User-Defined Functions (UDFs)</strong>, allowing developers to inject custom logic into retrieval and computation workflows.</p></li>
+<li><p>Deep integration with <strong>Ray Dataset / Daft</strong> for distributed UDF execution and multimodal data processing.</p></li>
+</ul>
+<h4 id="🔹-Scalar-Query--Local-Format-Evolution" class="common-anchor-header">🔹 <strong>Scalar Query & Local Format Evolution</strong></h4><ul>
+<li><p>Optimize filtering and aggregation performance for scalar fields.</p></li>
+<li><p>Enhance expression evaluation and index-accelerated execution.</p></li>
+<li><p>Support <strong>in-place updates</strong> for local file formats.</p></li>
+</ul>
+<h4 id="🔹-Advanced-Search-Capabilities" class="common-anchor-header">🔹 <strong>Advanced Search Capabilities</strong></h4><ul>
+<li><p>Add the following features: <strong>RankBy</strong>, <strong>OrderBy</strong>, <strong>Facet</strong>, and <strong>Fuzzy match</strong> queries.</p></li>
+<li><p>Enhance text retrieval with support for:</p>
 <ul>
-<li>Our roadmap is typically structured into three parts: the most recent release, the next upcoming release, and a mid-to-long term vision within the next year.</li>
-<li>As we progress, we continually learn and occasionally adjust our focus, adding or removing items as needed.</li>
-<li>These plans are indicative and subject to change, and may vary based on subscription services.</li>
-<li>We steadfastly adhere to our roadmap, with our <a href="/docs/release_notes.md">release notes</a> serving as a reference.</li>
+<li><p><code translate="no">match_phrase_prefix</code></p></li>
+<li><p><code translate="no">Completion Suggester</code></p></li>
+<li><p><code translate="no">Term Suggester</code></p></li>
+<li><p><code translate="no">Phrase Suggester</code></p></li>
+</ul></li>
 </ul>
-<h2 id="How-to-contribute" class="common-anchor-header">How to contribute<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
+<h4 id="🔹-Dynamic-Sharding--Scalability" class="common-anchor-header">🔹 <strong>Dynamic Sharding & Scalability</strong></h4><ul>
+<li><p>Enable <strong>automatic shard splitting</strong> and <strong>load balancing</strong> for seamless scaling.</p></li>
+<li><p>Improve <strong>global index building</strong> and ensure <strong>distributed search performance</strong>.</p></li>
+</ul>
+<h4 id="🔹-Vector-Lake-V10" class="common-anchor-header">🔹 <strong>Vector Lake V1.0</strong></h4><ul>
+<li><p>Deep integration with <strong>Ray / Daft / PyTorch</strong> to support distributed UDFs and Context Engineering use cases.</p></li>
+<li><p>Provide <strong>RAG (Retrieval-Augmented Generation) demos</strong> <strong>and import from Iceberg tables</strong>.</p></li>
+</ul>
+<h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Co-Building the Future of Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,61 +225,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>As an open-source project, Milvus thrives on community contributions. Here’s how you can be a part of our journey.</p>
-<h3 id="Share-feedback" class="common-anchor-header">Share feedback<button data-href="#Share-feedback" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ul>
-<li><p>Issue reporting: Encounter a bug or have a suggestion? Open an issue on our <a href="https://github.com/milvus-io/milvus/issues">GitHub page</a>.</p></li>
-<li><p>Feature suggestions: Have ideas for new features or improvements? Join the conversation in <a href="https://github.com/milvus-io/milvus/discussions/40263">our active discussion thread</a>.</p></li>
+    </button></h2><p>Milvus is an open-source project driven by a global community of developers.</p>
+<p>We warmly invite all community members to help shape the next-generation multimodal database:</p>
+<ul>
+<li><p>💬 <strong>Share feedback</strong>: Propose new features or optimization ideas</p></li>
+<li><p>🐛 <strong>Report issues</strong>: File bugs via GitHub Issues</p></li>
+<li><p>🔧 <strong>Contribute code</strong>: Submit PRs and help build core features</p>
+<ul>
+<li><p><strong>Pull requests</strong>: Contribute directly to our <a href="https://github.com/milvus-io/milvus/pulls">codebase</a>. Whether it’s fixing bugs, adding features, or improving documentation, your contributions are welcome.</p></li>
+<li><p><strong>Development guide</strong>: Check our <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Contributor’s Guide</a> for guidelines on code contributions.</p></li>
+</ul></li>
+<li><p>⭐ <strong>Spread the word</strong>: Share best practices and success stories</p></li>
 </ul>
-<h3 id="Code-contributions" class="common-anchor-header">Code contributions<button data-href="#Code-contributions" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ul>
-<li><p>Pull requests: Contribute directly to our <a href="https://github.com/milvus-io/milvus/pulls">codebase</a>. Whether it’s fixing bugs, adding features, or improving documentation, your contributions are welcome.</p></li>
-<li><p>Development guide: Check our <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Contributor’s Guide</a> for guidelines on code contributions.</p></li>
-</ul>
-<h3 id="Spread-the-word" class="common-anchor-header">Spread the word<button data-href="#Spread-the-word" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ul>
-<li><p>Social sharing: Love Milvus? Share your use cases and experiences on social media and tech blogs.</p></li>
-<li><p>Star us on GitHub: Show your support by starring our <a href="https://github.com/milvus-io/milvus">GitHub repository</a>.</p></li>
-</ul>
+<p>👉 <strong>GitHub:</strong> <a href="https://github.com/milvus-io/milvus">milvus-io/milvus</a></p>

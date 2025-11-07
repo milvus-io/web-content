@@ -45,7 +45,7 @@ summary: >-
 <li><p><strong>Filtrare il contenuto del testo</strong>: Eseguire ricerche efficienti sui campi <code translate="no">VARCHAR</code> </p></li>
 <li><p><strong>Interrogare i valori dei campi JSON</strong>: Filtrare su chiavi specifiche all'interno di strutture JSON</p></li>
 </ul>
-<p><strong>Vantaggi in termini di prestazioni</strong>: gli indici INVERTED possono ridurre i tempi di interrogazione da secondi a millisecondi su grandi insiemi di dati, eliminando la necessità di eseguire scansioni dell'intero insieme.</p>
+<p><strong>Vantaggi in termini di prestazioni</strong>: gli indici INVERTED possono ridurre il tempo di interrogazione da secondi a millisecondi su grandi insiemi di dati, eliminando la necessità di eseguire scansioni dell'intero insieme.</p>
 <h2 id="How-INVERTED-indexes-work" class="common-anchor-header">Come funzionano gli indici INVERTED<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un <strong>indice INVERTED</strong> in Milvus mappa ogni valore univoco del campo (termine) all'insieme degli ID dei documenti in cui si trova quel valore. Questa struttura consente una rapida ricerca di campi con valori ripetuti o categorici.</p>
+    </button></h2><p>Un <strong>indice INVERTED</strong> in Milvus mappa ogni valore univoco del campo (termine) all'insieme degli ID dei documenti in cui si trova quel valore. Questa struttura consente di effettuare ricerche rapide per campi con valori ripetuti o categorici.</p>
 <p>Come mostrato nel diagramma, il processo funziona in due fasi:</p>
 <ol>
 <li><p><strong>Mappatura in avanti (ID → Termine):</strong> Ogni ID del documento punta al valore del campo che contiene.</p></li>
@@ -146,8 +146,35 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Per informazioni dettagliate sull'indicizzazione dei campi JSON, compresi i percorsi supportati, i tipi di dati e le limitazioni, consultare <a href="/docs/it/use-json-fields.md">Campo JSON</a>.</p>
-<h2 id="Best-practices" class="common-anchor-header">Migliori pratiche<button data-href="#Best-practices" class="anchor-icon" translate="no">
+<p>Per informazioni dettagliate sull'indicizzazione dei campi JSON, compresi i percorsi supportati, i tipi di dati e le limitazioni, consultare <a href="/docs/it/json-indexing.md">Indicizzazione JSON</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Eliminare un indice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Usare il metodo <code translate="no">drop_index()</code> per rimuovere un indice esistente da una collezione.</p>
+<div class="alert note">
+<ul>
+<li><p>Nella <strong>versione 2.6.3</strong> o precedente, è necessario rilasciare la collezione prima di eliminare un indice scalare.</p></li>
+<li><p>Dalla versione <strong>2.6.4</strong> o successiva, è possibile eliminare direttamente un indice scalare quando non è più necessario, senza dover prima rilasciare l'insieme.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;category_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Best-practices" class="common-anchor-header">Le migliori pratiche<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -163,7 +190,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Creare gli indici dopo il caricamento dei dati</strong>: Creare indici su collezioni che contengono già dati per ottenere migliori prestazioni.</p></li>
+<li><p><strong>Creare gli indici dopo il caricamento dei dati</strong>: Creare indici su raccolte che contengono già dati per ottenere prestazioni migliori.</p></li>
 <li><p><strong>Utilizzare nomi di indici descrittivi</strong>: Scegliere nomi che indichino chiaramente il campo e lo scopo</p></li>
 <li><p><strong>Monitorare le prestazioni degli indici</strong>: Verificare le prestazioni delle query prima e dopo la creazione degli indici.</p></li>
 <li><p><strong>Considerare i modelli di query</strong>: Creare indici sui campi per i quali si filtra frequentemente</p></li>
@@ -185,5 +212,5 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p>Conoscere <a href="/docs/it/index-explained.md">altri tipi di indici</a></p></li>
-<li><p>Vedere <a href="/docs/it/use-json-fields.md#Index-values-inside-the-JSON-field">indicizzazione dei campi JSON</a> per scenari avanzati di indicizzazione JSON</p></li>
+<li><p>Vedere <a href="/docs/it/json-indexing.md">Indicizzazione JSON</a> per scenari avanzati di indicizzazione JSON</p></li>
 </ul>

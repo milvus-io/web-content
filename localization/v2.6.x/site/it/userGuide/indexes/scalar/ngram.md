@@ -59,7 +59,7 @@ beta: Milvus v2.6.2+
 <li><p><strong>Costruire l'indice</strong>: Generare n-grammi per ogni documento e costruire un indice invertito durante l'ingest.</p></li>
 <li><p><strong>Accelerazione delle query</strong>: Utilizzare l'indice per filtrare un piccolo insieme di candidati, quindi verificare le corrispondenze esatte.</p></li>
 </ol>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">Fase 1: costruire l'indice<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+<h3 id="Phase-1-Build-the-index" class="common-anchor-header">Fase 1: costruzione dell'indice<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -141,7 +141,7 @@ Esempio: con <code translate="no">[2,4]</code> e la parola <code translate="no">
 <ul>
 <li><p>Se <code translate="no">L &lt; min_gram</code>, l'indice non può essere usato e la query torna a una scansione completa.</p></li>
 <li><p>Se <code translate="no">min_gram ≤ L ≤ max_gram</code>, l'intero termine della query viene trattato come un singolo n-gramma e non sono necessarie ulteriori scomposizioni.</p></li>
-<li><p>Se <code translate="no">L &gt; max_gram</code>, il termine della query viene scomposto in grammi sovrapposti utilizzando una finestra di dimensioni pari a <code translate="no">max_gram</code>.</p></li>
+<li><p>Se <code translate="no">L &gt; max_gram</code>, il termine della query viene scomposto in n-grammi sovrapposti utilizzando una finestra di dimensioni pari a <code translate="no">max_gram</code>.</p></li>
 </ul>
 <p>Ad esempio, se <code translate="no">max_gram</code> è impostato su <code translate="no">3</code> e il termine di query è <code translate="no">&quot;database&quot;</code>, che ha una lunghezza di <strong>8</strong>, viene scomposto in sottostringhe di 3 grami come <code translate="no">&quot;dat&quot;</code>, <code translate="no">&quot;ata&quot;</code>, <code translate="no">&quot;tab&quot;</code>, e così via.</p></li>
 <li><p><strong>Ricerca di ogni grammo e intersezione</strong>: Milvus cerca ogni grammo della query nell'indice invertito e poi interseca gli elenchi di ID documento risultanti per trovare un piccolo insieme di documenti candidati. Questi candidati contengono tutti i grammi della query.</p></li>
@@ -254,7 +254,7 @@ client.create_index(
 <li><p>Il valore viene trasformato in <code translate="no">VARCHAR</code> prima della tokenizzazione n-gram.</p></li>
 <li><p>Milvus genera sottostringhe di lunghezza compresa tra 2 e 4 e le memorizza nell'indice invertito.</p></li>
 </ul>
-<p>Per ulteriori informazioni su come indicizzare un campo JSON, consultare <a href="/docs/it/use-json-fields.md">Campo JSON</a>.</p>
+<p>Per ulteriori informazioni su come indicizzare un campo JSON, consultare <a href="/docs/it/json-indexing.md">Indicizzazione JSON</a>.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Query accelerate da NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -299,6 +299,33 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>Per ulteriori informazioni sulla sintassi delle espressioni di filtro, consultare gli <a href="/docs/it/basic-operators.md">Operatori di base</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Eliminare un indice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Usare il metodo <code translate="no">drop_index()</code> per rimuovere un indice esistente da un insieme.</p>
+<div class="alert note">
+<ul>
+<li><p>Nella <strong>versione 2.6.3</strong> o precedente, è necessario rilasciare l'insieme prima di eliminare un indice scalare.</p></li>
+<li><p>Dalla versione <strong>2.6.4</strong> o successiva, è possibile eliminare direttamente un indice scalare quando non è più necessario, senza dover prima rilasciare l'insieme.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">Note d'uso<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -315,7 +342,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Tipi di campo</strong>: Supportato sui campi <code translate="no">VARCHAR</code> e <code translate="no">JSON</code>. Per JSON, fornire sia <code translate="no">params.json_path</code> che <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
+<li><p><strong>Tipi di campo</strong>: Supportato dai campi <code translate="no">VARCHAR</code> e <code translate="no">JSON</code>. Per JSON, fornire sia <code translate="no">params.json_path</code> che <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
 <li><p><strong>Unicode</strong>: La decomposizione NGRAM è basata sui caratteri, è indipendente dalla lingua e include gli spazi bianchi e la punteggiatura.</p></li>
 <li><p><strong>Trade-off spazio-tempo</strong>: intervalli di grammi più ampi <code translate="no">[min_gram, max_gram]</code> producono più grammi e indici più grandi. Se la memoria è limitata, considerare la modalità <code translate="no">mmap</code> per elenchi di posting di grandi dimensioni. Per ulteriori informazioni, fare riferimento a <a href="/docs/it/mmap.md">Utilizzare mmap</a>.</p></li>
 <li><p><strong>Immutabilità</strong>: <code translate="no">min_gram</code> e <code translate="no">max_gram</code> non possono essere modificati sul posto; per modificarli, ricostruire l'indice.</p></li>

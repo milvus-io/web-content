@@ -31,7 +31,7 @@ title: Erste Schritte mit Mem0 und Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://mem0.ai/">Mem0</a> ist eine intelligente Speicherebene für KI-Anwendungen, die personalisierte und effiziente Interaktionen ermöglicht, indem sie Benutzerpräferenzen speichert und sich im Laufe der Zeit kontinuierlich anpasst. Mem0 ist ideal für Chatbots und KI-gesteuerte Tools und schafft nahtlose, kontextbezogene Erlebnisse.</p>
+<p><a href="https://mem0.ai/">Mem0</a> ist eine intelligente Speicherschicht für KI-Anwendungen, die personalisierte und effiziente Interaktionen ermöglicht, indem sie Benutzerpräferenzen speichert und sich kontinuierlich anpasst. Mem0 ist ideal für Chatbots und KI-gesteuerte Tools und schafft nahtlose, kontextbezogene Erlebnisse.</p>
 <p>In diesem Tutorial werden wir die grundlegenden Mem0-Speicherverwaltungsvorgänge - Hinzufügen, Abrufen, Aktualisieren, Suchen, Löschen und Verfolgen des Speicherverlaufs - unter Verwendung von <a href="https://milvus.io/">Milvus</a>, einer leistungsstarken Open-Source-Vektordatenbank, die eine effiziente Speicherung und Abfrage ermöglicht, behandeln. Diese praktische Einführung führt Sie durch die grundlegenden Speicheroperationen und hilft Ihnen, personalisierte KI-Interaktionen mit Mem0 und Milvus zu erstellen.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,12 +48,42 @@ title: Erste Schritte mit Mem0 und Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Download der erforderlichen Bibliotheken</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus</span>
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Download der erforderlichen Bibliotheken<button data-href="#Download-required-libraries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mem0ai pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Laufzeit" am oberen Bildschirmrand und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
 </blockquote>
-<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Mem0 mit Milvus konfigurieren</h3><p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">Api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
+<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Mem0 mit Milvus konfigurieren<button data-href="#Configure-Mem0-with-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">Api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -100,7 +130,22 @@ m = Memory.from_config(config)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">Hinzufügen eines Speichers</h3><p>Die Funktion <code translate="no">add</code> speichert unstrukturierten Text in Milvus als Speicher und verknüpft ihn mit einem bestimmten Benutzer und optionalen Metadaten.</p>
+    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">Hinzufügen eines Speichers<button data-href="#Adding-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Funktion <code translate="no">add</code> speichert unstrukturierten Text in Milvus als Speicher und verknüpft ihn mit einem bestimmten Benutzer und optionalen Metadaten.</p>
 <p>Hier fügen wir Alices Erinnerung "Ich arbeite an der Verbesserung meiner Tennisfähigkeiten" zusammen mit relevanten Metadaten für den Kontext zu Milvus hinzu.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a memory to user: Working on improving tennis skills</span>
 res = m.add(
@@ -116,7 +161,22 @@ res
    'event': 'ADD'}],
  'relations': []}
 </code></pre>
-<h3 id="Update-a-Memory" class="common-anchor-header">Aktualisieren einer Erinnerung</h3><p>Wir können den Rückgabewert der Funktion <code translate="no">add</code> verwenden, um die Speicher-ID abzurufen, so dass wir diesen Speicher mit neuen Informationen über <code translate="no">update</code> aktualisieren können.</p>
+<h3 id="Update-a-Memory" class="common-anchor-header">Aktualisieren einer Erinnerung<button data-href="#Update-a-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir können den Rückgabewert der Funktion <code translate="no">add</code> verwenden, um die Speicher-ID abzurufen, so dass wir diesen Speicher mit neuen Informationen über <code translate="no">update</code> aktualisieren können.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get memory_id</span>
 memory_id = res[<span class="hljs-string">&quot;results&quot;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>]
 
@@ -125,7 +185,22 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'message': 'Memory updated successfully!'}
 </code></pre>
-<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Alle Speicher für einen Benutzer abrufen</h3><p>Mit der Funktion <code translate="no">get_all</code> können wir alle eingefügten Speicher anzeigen oder nach <code translate="no">user_id</code> in Milvus filtern.</p>
+<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Alle Speicher für einen Benutzer abrufen<button data-href="#Get-All-Memory-For-a-User" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mit der Funktion <code translate="no">get_all</code> können wir alle eingefügten Speicher anzeigen oder nach <code translate="no">user_id</code> in Milvus filtern.</p>
 <p>Wie wir sehen, hat sich die Erinnerung von "Ich arbeite daran, meine Tennisfähigkeiten zu verbessern" in "Ich spiele am Wochenende gerne Tennis" geändert.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
@@ -138,7 +213,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': '2024-11-01T19:33:47.619857-07:00',
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="View-Memory-Update-History" class="common-anchor-header">Verlauf der Speicheraktualisierung anzeigen</h3><p>Wir können uns auch den Verlauf der Speicheraktualisierung ansehen, indem wir mit der Funktion <code translate="no">history</code> angeben, an welcher memory_id wir interessiert sind.</p>
+<h3 id="View-Memory-Update-History" class="common-anchor-header">Verlauf der Speicheraktualisierung anzeigen<button data-href="#View-Memory-Update-History" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir können uns auch den Verlauf der Speicheraktualisierung ansehen, indem wir mit der Funktion <code translate="no">history</code> angeben, an welcher memory_id wir interessiert sind.</p>
 <pre><code translate="no" class="language-python">m.history(memory_id=memory_id)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'id': '71ed3cec-5d9a-4fa6-a009-59802450c0b9',
@@ -156,7 +246,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
   'created_at': '2024-11-01T19:33:44.116920-07:00',
   'updated_at': '2024-11-01T19:33:47.619857-07:00'}]
 </code></pre>
-<h3 id="Search-Memory" class="common-anchor-header">Speicher suchen</h3><p>Mit der Funktion <code translate="no">search</code> können wir nach dem für den Benutzer relevantesten Speicherplatz suchen.</p>
+<h3 id="Search-Memory" class="common-anchor-header">Speicher suchen<button data-href="#Search-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Mit der Funktion <code translate="no">search</code> können wir nach dem für den Benutzer relevantesten Speicherplatz suchen.</p>
 <p>Beginnen wir mit dem Hinzufügen eines weiteren Speichers für Alice.</p>
 <pre><code translate="no" class="language-python">new_mem = m.add(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
@@ -202,7 +307,22 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': None,
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="Delete-Memory" class="common-anchor-header">Speicher löschen</h3><p>Wir können auch <code translate="no">delete</code> einen Speicher löschen, indem wir die entsprechende <code translate="no">memory_id</code> angeben.</p>
+<h3 id="Delete-Memory" class="common-anchor-header">Speicher löschen<button data-href="#Delete-Memory" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir können auch <code translate="no">delete</code> einen Speicher löschen, indem wir die entsprechende <code translate="no">memory_id</code> angeben.</p>
 <p>Wir löschen den Speicher "Spielt am Wochenende gerne Tennis", da sein <code translate="no">memory_id</code> bereits abgerufen wurde, und rufen <code translate="no">get_all</code> auf, um zu überprüfen, ob die Löschung erfolgreich war.</p>
 <pre><code translate="no" class="language-python">m.delete(memory_id=memory_id)
 

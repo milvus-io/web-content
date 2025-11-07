@@ -51,33 +51,36 @@ beta: Milvus 2.6.4+
      <th><p>Evacuazione asincrona</p></th>
    </tr>
    <tr>
-     <td><p>Attivazione</p></td>
-     <td><p>Durante l'interrogazione o la ricerca, quando l'utilizzo della memoria o del disco supera i limiti interni.</p></td>
-     <td><p>Il thread in background controlla periodicamente l'utilizzo e attiva lo sfratto quando viene superata una soglia elevata.</p></td>
+     <td><p>Innesco</p></td>
+     <td><p>Si verifica durante l'interrogazione o la ricerca quando l'utilizzo della memoria o del disco supera i limiti interni.</p></td>
+     <td><p>Viene attivato da un thread in background quando l'utilizzo supera la soglia massima o quando i dati nella cache raggiungono il loro time-to-live (TTL).</p></td>
    </tr>
    <tr>
      <td><p>Comportamento</p></td>
-     <td><p>L'esecuzione della query si ferma mentre la cache viene recuperata. Lo svuotamento continua finché l'utilizzo non scende sotto la soglia minima.</p></td>
-     <td><p>Esegue continuamente in background; rimuove i dati quando l'utilizzo supera l'high watermark finché non scende sotto il low watermark. Le query non vengono bloccate.</p></td>
+     <td><p>Le operazioni di query o di ricerca si fermano temporaneamente mentre il QueryNode recupera lo spazio nella cache. Lo sfratto continua finché l'utilizzo non scende al di sotto della soglia minima o finché non si verifica un timeout. Se il timeout viene raggiunto e non è possibile recuperare dati sufficienti, la query o la ricerca possono fallire.</p></td>
+     <td><p>Esegue periodicamente in background, eliminando proattivamente i dati della cache quando l'utilizzo supera la soglia massima o quando i dati scadono in base al TTL. Lo svuotamento continua finché l'utilizzo non scende al di sotto della soglia minima. Le query non vengono bloccate.</p></td>
    </tr>
    <tr>
      <td><p>Ideale per</p></td>
-     <td><p>Carichi di lavoro che possono tollerare brevi picchi di latenza o quando lo svuotamento asincrono non può recuperare spazio abbastanza velocemente.</p></td>
-     <td><p>Carichi di lavoro sensibili alla latenza che richiedono prestazioni uniformi. Ideale per la gestione proattiva delle risorse.</p></td>
+     <td><p>Carichi di lavoro che possono tollerare brevi picchi di latenza o pause temporanee durante i picchi di utilizzo. Utile quando lo svuotamento asincrono non può recuperare spazio abbastanza velocemente.</p></td>
+     <td><p>Carichi di lavoro sensibili alla latenza che richiedono prestazioni di query uniformi e prevedibili. Ideale per la gestione proattiva delle risorse.</p></td>
    </tr>
    <tr>
      <td><p>Attenzione</p></td>
-     <td><p>Aggiunge latenza alle query in corso. Può causare timeout se i dati recuperabili sono insufficienti.</p></td>
-     <td><p>Richiede filigrane adeguatamente sintonizzate. Leggero overhead delle risorse in background.</p></td>
+     <td><p>Può causare brevi ritardi o timeout delle query se non sono disponibili dati evitabili sufficienti.</p></td>
+     <td><p>Richiede filigrane alte/basse e impostazioni TTL adeguatamente regolate. Leggero overhead del thread in background.</p></td>
    </tr>
    <tr>
      <td><p>Configurazione</p></td>
      <td><p>Abilitato tramite <code translate="no">evictionEnabled: true</code></p></td>
-     <td><p>Abilitato tramite <code translate="no">backgroundEvictionEnabled: true</code> (richiede <code translate="no">evictionEnabled: true</code>)</p></td>
+     <td><p>Abilitato tramite <code translate="no">backgroundEvictionEnabled: true</code> (richiede <code translate="no">evictionEnabled: true</code> allo stesso tempo)</p></td>
    </tr>
 </table>
 <p><strong>Configurazione consigliata</strong>:</p>
-<p>Abilitare entrambe le modalità per un equilibrio ottimale. L'eviction async gestisce l'uso della cache in modo proattivo, mentre l'eviction sync agisce come ripiego di sicurezza quando le risorse sono quasi esaurite.</p>
+<ul>
+<li><p>Entrambe le modalità di eviction possono essere attivate insieme per ottenere un equilibrio ottimale, a condizione che il carico di lavoro tragga vantaggio dall'archiviazione a livelli e possa tollerare la latenza di recupero legata all'eviction.</p></li>
+<li><p>Per i test delle prestazioni o per gli scenari critici per la latenza, si consiglia di disabilitare completamente l'eviction per evitare l'overhead del fetch di rete dopo l'eviction.</p></li>
+</ul>
 <div class="alert note">
 <p>Per i campi e gli indici evitabili, l'unità di eviction corrisponde alla granularità del caricamento: i campi scalari/vettoriali sono evitati per chunk e gli indici scalari/vettoriali sono evitati per segmento.</p>
 </div>
@@ -143,7 +146,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h2><p>Le soglie definiscono l'inizio e la fine dell'evasione della cache sia per la memoria che per il disco. Ogni tipo di risorsa ha due soglie:</p>
 <ul>
-<li><p><strong>Filigrana alta</strong>: L'evasione asincrona inizia quando l'utilizzo supera questo valore.</p></li>
+<li><p><strong>Filigrana alta</strong>: L'evasione inizia quando l'utilizzo supera questo valore.</p></li>
 <li><p><strong>Filigrana bassa</strong>: L'evasione continua finché l'uso non scende al di sotto di questo valore.</p></li>
 </ul>
 <div class="alert note">
@@ -218,7 +221,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Il Time-to-Live (TTL) della cache</strong> rimuove automaticamente i dati presenti nella cache dopo una determinata durata, anche se non vengono raggiunte le soglie delle risorse. Funziona insieme a LRU eviction per evitare che i dati stantii occupino la cache a tempo indeterminato.</p>
+    </button></h2><p><strong>Il Time-to-Live (TTL) della cache</strong> rimuove automaticamente i dati presenti nella cache dopo una determinata durata, anche se non vengono raggiunte le soglie delle risorse. Funziona insieme a LRU eviction per evitare che i dati stantii occupino indefinitamente la cache.</p>
 <div class="alert note">
 <p>Cache TTL richiede <code translate="no">backgroundEvictionEnabled: true</code>, poiché viene eseguito sullo stesso thread in background.</p>
 </div>
@@ -248,62 +251,3 @@ beta: Milvus 2.6.4+
      <td><p>Utilizzare un TTL breve (ore) per i dati altamente dinamici; utilizzare un TTL lungo (giorni) per i set di dati stabili. Impostare 0 per disabilitare la scadenza basata sul tempo.</p></td>
    </tr>
 </table>
-<h2 id="Configure-overcommit-ratio" class="common-anchor-header">Configurazione del rapporto di overcommit<button data-href="#Configure-overcommit-ratio" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>I rapporti di overcommit definiscono la quantità di cache riservata come evitabile, consentendo ai QueryNode di superare temporaneamente la capacità normale prima che l'evasione si intensifichi.</p>
-<div class="alert note">
-<p>Questa configurazione ha effetto solo quando <a href="/docs/it/eviction.md#Enable-eviction">l'eviction è abilitata</a>.</p>
-</div>
-<p><strong>Esempio YAML</strong>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
-  <span class="hljs-attr">segcore:</span>
-    <span class="hljs-attr">tieredStorage:</span>
-      <span class="hljs-attr">evictionEnabled:</span> <span class="hljs-literal">true</span>
-      <span class="hljs-comment"># Evictable Memory Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of physical memory is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableMemoryCacheRatio:</span> <span class="hljs-number">0.3</span>
-      <span class="hljs-comment"># Evictable Disk Cache Ratio: 30%</span>
-      <span class="hljs-comment"># (30% of disk capacity is reserved for storing evictable data)</span>
-      <span class="hljs-attr">evictableDiskCacheRatio:</span> <span class="hljs-number">0.3</span>
-<button class="copy-code-btn"></button></code></pre>
-<table>
-   <tr>
-     <th><p>Parametro</p></th>
-     <th><p>Tipo</p></th>
-     <th><p>Intervallo</p></th>
-     <th><p>Descrizione</p></th>
-     <th><p>Caso d'uso consigliato</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableMemoryCacheRatio</code></p></td>
-     <td><p>Galleggiante</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Porzione di memoria cache allocata per i dati evitabili.</p></td>
-     <td><p>Inizia da <code translate="no">0.3</code>. Aumentare (0,5-0,7) per una minore frequenza di evacuazione; diminuire (0,1-0,2) per una maggiore capacità del segmento.</p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">evictableDiskCacheRatio</code></p></td>
-     <td><p>fluttuante</p></td>
-     <td><p>[0.0, 1.0]</p></td>
-     <td><p>Porzione della cache del disco allocata per i dati evitabili.</p></td>
-     <td><p>Usare rapporti simili a quelli della memoria, a meno che l'I/O del disco non diventi un collo di bottiglia.</p></td>
-   </tr>
-</table>
-<p><strong>Comportamento limite</strong>:</p>
-<ul>
-<li><p><code translate="no">1.0</code>: Tutta la cache è evitabile - l'evitamento si attiva di rado, ma un numero inferiore di segmenti è adatto a ogni QueryNode.</p></li>
-<li><p><code translate="no">0.0</code>: Nessuna cache evitabile - lo svuotamento avviene frequentemente; si inseriscono più segmenti, ma la latenza può aumentare.</p></li>
-</ul>

@@ -99,6 +99,37 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">params</code>: Opsi konfigurasi tambahan untuk pencarian pada indeks. Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">GPU_CAGRA</code>, lihat Parameter <a href="/docs/id/gpu-cagra.md#Index-specific-search-params">pencarian khusus indeks</a>.</li>
 </ul>
+<h2 id="Enable-CPU-search-at-load-time--Milvus-264+" class="common-anchor-header">Mengaktifkan pencarian CPU pada saat pemuatan<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Enable-CPU-search-at-load-time--Milvus-264+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Untuk mengaktifkan pencarian CPU secara dinamis pada saat pemuatan, edit konfigurasi berikut ini di <code translate="no">milvus.yaml</code>:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
+<span class="hljs-attr">knowhere:</span>
+  <span class="hljs-attr">GPU_CAGRA:</span>
+    <span class="hljs-attr">load:</span> 
+      <span class="hljs-attr">adapt_for_cpu:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Perilaku</strong></p>
+<ul>
+<li><p>Ketika <code translate="no">load.adapt_for_cpu</code> diatur ke <code translate="no">true</code>, Milvus mengubah indeks <strong>GPU_CAGRA</strong> menjadi format yang dapat dieksekusi CPU (seperti HNSW) selama pemuatan.</p></li>
+<li><p>Operasi pencarian selanjutnya dieksekusi di CPU, meskipun indeks tersebut pada awalnya dibuat untuk GPU.</p></li>
+<li><p>Jika dihilangkan atau salah, indeks tetap berada di GPU dan pencarian dijalankan di GPU.</p></li>
+</ul>
+<div class="alert note">
+<p>Gunakan adaptasi CPU waktu muat di lingkungan hibrida atau lingkungan yang sensitif terhadap biaya di mana sumber daya GPU dicadangkan untuk pembuatan indeks, namun pencarian dijalankan di CPU.</p>
+</div>
 <h2 id="Index-params" class="common-anchor-header">Parameter indeks<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,7 +146,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembuatan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,25 +180,17 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">build_algo</code></p></td>
-     <td><p>Memilih algoritma pembuatan graf sebelum pemangkasan. Nilai yang mungkin:</p>
-<ul>
-<li><p><code translate="no">IVF_PQ</code>: Menawarkan kualitas yang lebih tinggi tetapi waktu pembuatan lebih lambat.</p></li>
-<li><p><code translate="no">NN_DESCENT</code>: Memberikan pembuatan yang lebih cepat dengan potensi pemanggilan yang lebih rendah.</p></li>
-</ul></td>
+     <td><p>Memilih algoritma pembuatan graf sebelum pemangkasan. Nilai yang mungkin:</p><ul><li><p><code translate="no">IVF_PQ</code>: Menawarkan kualitas yang lebih tinggi tetapi waktu pembuatan lebih lambat.</p></li><li><p><code translate="no">NN_DESCENT</code>: Memberikan pembuatan yang lebih cepat dengan potensi pemanggilan yang lebih rendah.</p></li></ul></td>
      <td><p><code translate="no">IVF_PQ</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">cache_dataset_on_device</code></p></td>
-     <td><p>Memutuskan apakah akan menyimpan dataset asli dalam memori GPU. Nilai yang mungkin:</p>
-<ul>
-<li><p><code translate="no">"true"</code>: Menyimpan dataset asli untuk meningkatkan daya ingat dengan menyempurnakan hasil pencarian.</p></li>
-<li><p><code translate="no">"false"</code>: Tidak menyimpan set data asli untuk menghemat memori GPU.</p></li>
-</ul></td>
+     <td><p>Memutuskan apakah akan menyimpan dataset asli dalam memori GPU. Nilai yang mungkin:</p><ul><li><p><code translate="no">"true"</code>: Menyimpan dataset asli untuk meningkatkan daya ingat dengan menyempurnakan hasil pencarian.</p></li><li><p><code translate="no">"false"</code>: Tidak menyimpan set data asli untuk menghemat memori GPU.</p></li></ul></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">adapt_for_cpu</code></p></td>
-     <td><p>Memutuskan apakah akan menggunakan GPU untuk pembuatan indeks dan CPU untuk pencarian. Mengatur parameter ini ke <code translate="no">"true"</code> memerlukan kehadiran parameter <code translate="no">ef</code> dalam permintaan pencarian.</p></td>
+     <td><p>Memutuskan apakah akan menggunakan GPU untuk pembuatan indeks dan CPU untuk pencarian.</p><p>Mengatur parameter ini ke <code translate="no">"true"</code> memerlukan kehadiran parameter <code translate="no">ef</code> dalam permintaan pencarian.</p></td>
      <td><p><code translate="no">"false"</code></p></td>
    </tr>
 </table>
@@ -215,7 +238,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Menentukan pertukaran waktu/akurasi kueri. Nilai <code translate="no">ef</code> yang lebih tinggi akan menghasilkan pencarian yang lebih akurat namun lebih lambat. Parameter ini wajib diisi jika Anda mengatur <code translate="no">adapt_for_cpu</code> ke <code translate="no">true</code> ketika Anda membangun indeks.</p></td>
+     <td><p>Menentukan pertukaran waktu/akurasi kueri. Nilai <code translate="no">ef</code> yang lebih tinggi akan menghasilkan pencarian yang lebih akurat tetapi lebih lambat.</p><p>Parameter ini wajib diisi jika Anda mengatur <code translate="no">adapt_for_cpu</code> ke <code translate="no">true</code> ketika Anda membangun indeks.</p></td>
      <td><p><code translate="no">[top_k, int_max]</code></p></td>
    </tr>
 </table>

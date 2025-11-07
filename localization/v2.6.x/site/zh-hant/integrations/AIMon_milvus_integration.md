@@ -58,8 +58,8 @@ title: 使用 AIMon 和 Milvus 改善您的 LLM 申請的檢索品質
       </svg>
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>向量資料庫</em></h4><p>在此應用程式中，我們將使用<a href="https://milvus.io/">Milvus</a>來管理和搜尋大型非結構化資料，例如文字、影像和視訊。</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLM 架構</em></h4><p>LlamaIndex 是一個開放原始碼的資料協調框架，可簡化大型語言模型 (LLM) 應用程式的建立，方法是促進私人資料與 LLM 的整合，透過檢索-增強生成 (RAG) 管道實現情境增強的生成式 AI 應用程式。由於 LlamaIndex 具備良好的靈活性和更佳的低階 API 抽象，因此我們將在本教學中使用 LlamaIndex。</p>
-<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM 輸出品質評估</em></h4><p><a href="https://www.aimon.ai">AIMon</a>提供專屬的判斷模型，用來判斷幻覺、上下文品質問題、LLM 的 Instruction Adherence、Retrieval Quality 及其他 LLM 可靠性任務。我們將使用 AIMon 來判斷 LLM 應用程式的品質。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>LLM 輸出品質評估</em></h4><p><a href="https://www.aimon.ai">AIMon</a>提供專屬的判斷模型，用於判斷幻覺、上下文品質問題、LLM 的 Instruction Adherence、Retrieval Quality 及其他 LLM 可靠性任務。我們將使用 AIMon 來判斷 LLM 應用程式的品質。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">先決條件<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,17 +77,37 @@ title: 使用 AIMon 和 Milvus 改善您的 LLM 申請的檢索品質
         ></path>
       </svg>
     </button></h1><ol>
-<li><p><a href="https://docs.aimon.ai/quickstart">在這裡</a>註冊<a href="https://docs.aimon.ai/quickstart">AIMon 帳戶</a>。</p>
-<p>將此秘密加入 Colab Secrets (左側面板上的「key」符號) 如果您在其他非 google colab 環境，請自行取代 google colab 相關的代碼</p>
+<li><a href="https://docs.aimon.ai/quickstart">在這裡</a>註冊<a href="https://docs.aimon.ai/quickstart">AIMon 帳戶</a>。</li>
+</ol>
+<p>將此秘密加入 Colab Secrets (左側面板上的「key」符號)</p>
+<blockquote>
+<p>如果您在其他非 google colab 環境，請自行取代 google colab 相關的密碼</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p><a href="https://platform.openai.com/docs/overview">在這裡</a>註冊<a href="https://platform.openai.com/docs/overview">OpenAI 帳戶</a>，並在 Colab secrets 中加入以下 key：</p>
+</ul>
+<ol start="2">
+<li><a href="https://platform.openai.com/docs/overview">在這裡</a>註冊<a href="https://platform.openai.com/docs/overview">OpenAI 帳戶</a>，並在 Colab secrets 中加入以下 key：</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">所需的 API 金鑰</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">所需的 API 金鑰<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -242,7 +262,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">分析結果</h3><p>我們有 258 份謄本，所有這些謄本中總共有約 1M 的標記。每份記錄謄本平均有 3864 個標記。</p>
+<h3 id="Analysis" class="common-anchor-header">分析結果<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我們有 258 份謄本，所有這些謄本中總共有約 1M 的標記。每份記錄謄本平均有 3864 個標記。</p>
 <table>
 <thead>
 <tr><th>指標</th><th>數值</th></tr>
@@ -253,7 +288,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>平均值# 每份謄本的標記數</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">查詢</h3><p>以下是我們將在上述謄本上執行的 12 個查詢</p>
+<h3 id="Queries" class="common-anchor-header">查詢<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下是我們將在上述謄本上執行的 12 個查詢</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -900,7 +950,7 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <li>使用 AIMon 的低延遲、可適應領域的重新排序器，進一步改善品質分數。</li>
 <li>我們也展示了加入 AIMon 的 re-reranker 後，檢索相關性如何顯著改善。</li>
 </ul>
-<p>我們鼓勵您嘗試使用本筆記中所顯示的不同元件，以進一步<strong>提高品質分數</strong>。其中一個想法是使用上述 instruction_adherence 偵測器中的<code translate="no">instructions</code> 欄位，加入您自己的品質定義。另一個想法是加入另一個<a href="https://docs.aimon.ai/category/checker-models">AIMon 檢查器模型</a>作為品質公制計算的一部分。</p>
+<p>我們鼓勵您嘗試使用本筆記中所顯示的不同元件，以進一步<strong>提高品質分數</strong>。其中一個想法是使用上述 instruction_adherence 偵測器中的<code translate="no">instructions</code> 欄位，加入您自己的品質定義。另一個想法是加入另一個<a href="https://docs.aimon.ai/category/checker-models">AIMon 的檢測器模型</a>，作為品質度量計算的一部分。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df_scores = pd.DataFrame(
@@ -934,6 +984,18 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -973,4 +1035,4 @@ df_scores
   </tbody>
 </table>
 <p>上表總結了我們的結果。您的實際數字會因各種因素而異，例如 LLM 回應品質的變化、VectorDB 中最近鄰搜索的效能等。</p>
-<p>總而言之，如下圖所示，我們評估了您的 LLM 應用程式的品質分數、RAG 相關性和指令遵循能力。我們使用 AIMon 的 re-reranker 來改善應用程式的整體品質，以及從您的 RAG 擷取文件的平均相關性。</p>
+<p>總之，如下圖所示，我們評估了您的 LLM 應用程式的品質分數、RAG 相關性和指令遵循能力。我們使用 AIMon 的 re-reranker 來改善應用程式的整體品質，以及從您的 RAG 擷取文件的平均相關性。</p>

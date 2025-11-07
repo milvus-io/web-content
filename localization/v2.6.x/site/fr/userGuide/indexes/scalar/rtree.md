@@ -58,7 +58,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><ol>
 <li><p><strong>Créer des nœuds feuilles :</strong> Pour chaque objet géométrique, calculez son <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">rectangle minimal de délimitation</a> (MBR), qui est le plus petit rectangle contenant entièrement l'objet, et stockez-le en tant que nœud feuille.</p></li>
-<li><p><strong>Regrouper en boîtes plus grandes :</strong> Regroupez les nœuds feuilles proches et entourez chaque groupe d'un nouveau MBR, en formant des nœuds internes. Par exemple, le groupe <strong>B</strong> contient <strong>D</strong> et <strong>E</strong>; le groupe <strong>C</strong> contient <strong>F</strong> et <strong>G.</strong></p></li>
+<li><p><strong>Regrouper en boîtes plus grandes :</strong> Regroupez les nœuds feuilles proches et enveloppez chaque groupe avec un nouveau MBR, en formant des nœuds internes. Par exemple, le groupe <strong>B</strong> contient <strong>D</strong> et <strong>E</strong>; le groupe <strong>C</strong> contient <strong>F</strong> et <strong>G.</strong></p></li>
 <li><p><strong>Ajoutez le nœud racine :</strong> Ajoutez un nœud racine dont le RBM couvre tous les groupes internes, ce qui permet d'obtenir une structure arborescente équilibrée en hauteur.</p></li>
 </ol>
 <p>

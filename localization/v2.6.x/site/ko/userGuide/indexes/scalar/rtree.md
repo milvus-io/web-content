@@ -61,7 +61,7 @@ beta: Milvus 2.6.4+
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/how-retree-works.png" alt="How Retree Works" class="doc-image" id="how-retree-works" />
-   </span> <span class="img-wrapper"> <span>Retree 작동 방식</span> </span></p>
+   </span> <span class="img-wrapper"> <span>리트리 작동 방식</span> </span></p>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">2단계: 쿼리 가속화<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

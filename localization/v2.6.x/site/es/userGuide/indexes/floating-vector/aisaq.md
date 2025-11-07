@@ -158,7 +158,7 @@ beta: Milvus 2.6.4+
      <td><p><code translate="no">inline_pq</code></p></td>
      <td><p>Número de vectores PQ almacenados en línea por nodo. Determina la disposición del almacenamiento (modo Rendimiento frente a modo Escala).</p></td>
      <td><p><strong>Tipo</strong>: Entero</p><p><strong>Rango</strong>: [0, <em>max_grado</em>]</p><p><strong>Valor por defecto</strong>: <code translate="no">-1</code></p></td>
-     <td><p>Cuanto más se acerca <code translate="no">inline_pq</code> a <em>max_degree</em>, mejor suele ser el rendimiento, pero el tamaño del archivo de índice aumenta considerablemente.</p><p>Cuando <code translate="no">inline_pq</code> se acerca a 0, el rendimiento disminuye y el tamaño del índice pasa a ser similar al de DISKANN.</p><p><strong>Nota</strong>: Depende en gran medida del rendimiento del disco. Si el rendimiento del disco es bajo, no es aconsejable activar esta opción, ya que el ancho de banda limitado del disco puede convertirse en un cuello de botella y degradar el rendimiento general.</p></td>
+     <td><p>Cuanto más se acerca <code translate="no">inline_pq</code> a <em>max_degree</em>, mejor suele ser el rendimiento, pero el tamaño del archivo de índice aumenta considerablemente.</p><p>Cuando <code translate="no">inline_pq</code> se acerca a 0, el rendimiento disminuye, y el tamaño del índice pasa a ser similar al de DISKANN.</p><p><strong>Nota</strong>: Depende en gran medida del rendimiento del disco. Si el rendimiento del disco es bajo, no es aconsejable activar esta opción, ya que el ancho de banda limitado del disco puede convertirse en un cuello de botella y degradar el rendimiento general.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">rearrange</code></p></td>

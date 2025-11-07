@@ -93,7 +93,7 @@ summary: >-
    <tr>
      <td><p>Definición de esquema</p></td>
      <td><p>Un campo escalar que debe declararse explícitamente en el esquema de la colección con el tipo <code translate="no">DataType.JSON</code>.</p></td>
-     <td><p>Un campo JSON oculto (denominado <code translate="no">#meta</code>) que almacena automáticamente los campos no declarados.</p></td>
+     <td><p>Un campo JSON oculto (denominado <code translate="no">$meta</code>) que almacena automáticamente los campos no declarados.</p></td>
    </tr>
    <tr>
      <td><p>Caso de uso</p></td>
@@ -108,7 +108,7 @@ summary: >-
    <tr>
      <td><p>Consulta</p></td>
      <td><p>Consulta utilizando el nombre del campo o la clave de destino dentro del campo JSON: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Consulta directa utilizando la clave dinámica del campo: <code translate="no">"dynamic_key"</code> o a través de <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Consulta directa utilizando la clave dinámica del campo: <code translate="no">"dynamic_key"</code> o a través de <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Operaciones básicas<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -334,7 +334,7 @@ res = client.search(
    </tr>
    <tr>
      <td><p>Trituración JSON</p></td>
-     <td><p>Aceleración general de muchas claves, flexible para consultas variadas</p></td>
+     <td><p>Aceleración general en muchas claves, flexible para consultas variadas</p></td>
      <td><p>No (no acelera valores dentro de matrices)</p></td>
      <td><p>Configuración de almacenamiento adicional, las matrices siguen necesitando un índice por clave</p></td>
    </tr>
@@ -383,7 +383,7 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>Sí. Cada campo JSON está limitado a 65.536 bytes.</p>
-<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">¿Admite un campo JSON un valor por defecto?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
+<h3 id="Does-a-JSON-field-support-setting-a-default-value" class="common-anchor-header">¿Soporta un campo JSON establecer un valor por defecto?<button data-href="#Does-a-JSON-field-support-setting-a-default-value" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -27,7 +27,7 @@ title: Integración de LangExtract + Milvus
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>Esta guía demuestra cómo utilizar <a href="https://github.com/google/langextract">LangExtract</a> con <a href="https://milvus.io/">Milvus</a> para construir un sistema inteligente de procesamiento y recuperación de documentos.</p>
-<p>LangExtract es una biblioteca de Python que utiliza modelos lingüísticos amplios (LLM) para extraer información estructurada de documentos de texto no estructurados con una base de origen precisa. El sistema combina las capacidades de extracción de LangExtract con el almacenamiento vectorial de Milvus para permitir tanto la búsqueda por similitud semántica como el filtrado preciso de metadatos.</p>
+<p>LangExtract es una biblioteca Python que utiliza modelos lingüísticos amplios (LLM) para extraer información estructurada de documentos de texto no estructurados con una base de origen precisa. El sistema combina las capacidades de extracción de LangExtract con el almacenamiento vectorial de Milvus para permitir tanto la búsqueda por similitud semántica como el filtrado preciso de metadatos.</p>
 <p>Esta integración es especialmente valiosa para la gestión de contenidos, la búsqueda semántica, el descubrimiento de conocimientos y la creación de sistemas de recomendación basados en los atributos de los documentos extraídos.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,10 +45,10 @@ title: Integración de LangExtract + Milvus
         ></path>
       </svg>
     </button></h2><p>Antes de ejecutar este cuaderno, asegúrate de tener instaladas las siguientes dependencias:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus langextract google-genai requests tqdm pandas</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite langextract google-genai requests tqdm pandas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Si utilizas Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y selecciona "Reiniciar sesión" en el menú desplegable).</p>
+<p>Si utilizas Google Colab, para activar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y selecciona "Reiniciar sesión" en el menú desplegable).</p>
 </div>
 <p>En este ejemplo utilizaremos Gemini como LLM. Deberá preparar la <a href="https://aistudio.google.com/app/apikey">clave api</a> <code translate="no">GEMINI_API_KEY</code> como variable de entorno.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -279,7 +279,7 @@ prompt = textwrap.dedent(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para mejorar la calidad y la coherencia de las extracciones, proporcionaremos a LangExtract algunos ejemplos. Estos ejemplos muestran el formato esperado y ayudan al modelo a comprender nuestros requisitos de extracción.</p>
+    </button></h2><p>Para mejorar la calidad y coherencia de las extracciones, proporcionaremos a LangExtract algunos ejemplos. Estos ejemplos muestran el formato esperado y ayudan al modelo a comprender nuestros requisitos de extracción.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Provide examples to guide the model - n-shot examples for movie descriptions</span>
 <span class="hljs-comment"># Unify attribute keys to ensure consistency in extraction results</span>
 examples = [

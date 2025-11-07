@@ -61,7 +61,7 @@ title: Melhorar a qualidade de recuperação da sua candidatura LLM com AIMon e 
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Base de dados vetorial</em></h4><p>Para esta aplicação, utilizaremos <a href="https://milvus.io/">o Milvus</a> para gerir e pesquisar dados não estruturados em grande escala, como texto, imagens e vídeos.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>Estrutura LLM</em></h4><p>O LlamaIndex é uma estrutura de orquestração de dados de código aberto que simplifica a criação de aplicações de modelos de linguagem de grande dimensão (LLM), facilitando a integração de dados privados com LLMs, permitindo aplicações de IA generativa aumentadas pelo contexto através de um pipeline de Geração Aumentada por Recuperação (RAG). Utilizaremos o LlamaIndex para este tutorial, uma vez que oferece uma boa quantidade de flexibilidade e melhores abstracções de API de nível inferior.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Avaliação da qualidade de saída do LLM</em></h4><p><a href="https://www.aimon.ai">O AIMon</a> oferece modelos de avaliação proprietários para alucinação, questões de qualidade de contexto, aderência de LLMs a instruções, qualidade de recuperação e outras tarefas de fiabilidade de LLMs. Utilizaremos o AIMon para avaliar a qualidade da aplicação LLM.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">Pré-requisitos<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,17 +79,37 @@ title: Melhorar a qualidade de recuperação da sua candidatura LLM com AIMon e 
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>Registar uma <a href="https://docs.aimon.ai/quickstart">conta AIMon aqui</a>.</p>
+<li>Registar uma <a href="https://docs.aimon.ai/quickstart">conta AIMon aqui</a>.</li>
+</ol>
+<p>Adicionar este segredo aos Segredos do Colab (o símbolo de "chave" no painel da esquerda)</p>
+<blockquote>
 <p>Se estiver noutro ambiente que não seja o do Google Colab, substitua você mesmo o código relacionado com o Google Colab</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p>Registe-se numa <a href="https://platform.openai.com/docs/overview">conta OpenAI aqui</a> e adicione a seguinte chave nos segredos do Colab:</p>
+</ul>
+<ol start="2">
+<li>Registe-se numa <a href="https://platform.openai.com/docs/overview">conta OpenAI aqui</a> e adicione a seguinte chave nos segredos do Colab:</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">Chaves API necessárias</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">Chaves API necessárias<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -244,7 +264,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">Análise</h3><p>Temos 258 transcrições com um total de cerca de 1 milhão de tokens em todas estas transcrições. Temos uma média de 3864 tokens por transcrição.</p>
+<h3 id="Analysis" class="common-anchor-header">Análise<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Temos 258 transcrições com um total de cerca de 1 milhão de tokens em todas estas transcrições. Temos uma média de 3864 tokens por transcrição.</p>
 <table>
 <thead>
 <tr><th>Métrica</th><th>Valor</th></tr>
@@ -255,7 +290,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>Média. # Número de tokens por transcrição</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">Consultas</h3><p>Abaixo estão as 12 consultas que iremos executar na transcrição acima</p>
+<h3 id="Queries" class="common-anchor-header">Consultas<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Abaixo estão as 12 consultas que iremos executar na transcrição acima</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -772,7 +822,7 @@ avg_retrieval_rel_score_vdb = statistics.mean(avg_retrieval_rel_scores_vdb)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Repare que o índice de qualidade global de todas as consultas melhorou depois de utilizar um sistema de GQ baseado em RAG.</p>
+    </button></h2><p>Repare que o índice de qualidade global de todas as consultas melhorou depois de utilizar um sistema de controlo de qualidade baseado em RAG.</p>
 <h1 id="3-Add-Re-ranking-to-your-retrieval" class="common-anchor-header">3. Adicionar a reclassificação à sua recuperação<button data-href="#3-Add-Re-ranking-to-your-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -897,12 +947,12 @@ avg_retrieval_rel_score_rr = statistics.mean(avg_retrieval_rel_scores_rr)
 <p>Em suma, conforme mostrado na figura abaixo, demonstramos o seguinte:</p>
 <ul>
 <li>Cálculo de uma pontuação de qualidade utilizando uma combinação ponderada de 3 métricas de qualidade diferentes: pontuação de alucinação, pontuação de adesão à instrução e pontuação de relevância da recuperação.</li>
-<li>Estabelecimento de uma linha de base de qualidade utilizando uma abordagem de correspondência de cadeias de caracteres de força bruta para fazer corresponder documentos a uma consulta e passá-la para um LLM.</li>
+<li>Estabelecemos uma linha de base de qualidade utilizando uma abordagem de correspondência de cadeias de caracteres de força bruta para fazer corresponder documentos a uma consulta e passá-la para um LLM.</li>
 <li>Melhorou a qualidade da linha de base utilizando uma base de dados vetorial (neste caso, utilizámos o Milvus)</li>
 <li>Melhorámos ainda mais a pontuação de qualidade utilizando o re-ranker de baixa latência e adaptável ao domínio da AIMon.</li>
 <li>Também mostrámos como a relevância da recuperação melhora significativamente com a adição do re-ranker da AIMon.</li>
 </ul>
-<p>Encorajamo-lo a experimentar os diferentes componentes mostrados neste bloco de notas para <strong>aumentar</strong> ainda mais <strong>a pontuação de qualidade</strong>. Uma ideia é adicionar as suas próprias definições de qualidade utilizando o campo <code translate="no">instructions</code> no detetor instruction_adherence acima. Outra ideia é adicionar outro <a href="https://docs.aimon.ai/category/checker-models">modelo de verificador do AIMon</a> como parte do cálculo da métrica de qualidade.</p>
+<p>Encorajamo-lo a experimentar os diferentes componentes mostrados neste bloco de notas para <strong>aumentar</strong> ainda mais <strong>o índice de qualidade</strong>. Uma ideia é adicionar as suas próprias definições de qualidade utilizando o campo <code translate="no">instructions</code> no detetor instruction_adherence acima. Outra ideia é adicionar outro dos <a href="https://docs.aimon.ai/category/checker-models">modelos de verificação do AIMon</a> como parte do cálculo da métrica de qualidade.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 df_scores = pd.DataFrame(
@@ -936,6 +986,18 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {alinhamento vertical: meio; }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -943,8 +1005,8 @@ df_scores
       <th>Abordagem</th>
       <th>Pontuação de qualidade</th>
       <th>Pontuação de relevância da recuperação</th>
-      <th>Aumento da pontuação de qualidade (%)</th>
-      <th>Aumento da pontuação de relevância da recuperação (%)</th>
+      <th>Aumento do índice de qualidade (%)</th>
+      <th>Aumento da pontuação da relevância da recuperação (%)</th>
     </tr>
   </thead>
   <tbody>

@@ -1,8 +1,8 @@
 ---
 id: integrate_with_jina.md
 summary: >-
-  Questa guida illustra come utilizzare gli embeddings di Jina e Milvus per
-  svolgere attività di ricerca e recupero di similarità.
+  Questa guida mostra come utilizzare gli embeddings di Jina e Milvus per
+  condurre attività di ricerca e recupero di similarità.
 title: Integrare Milvus con Jina
 ---
 <h1 id="Integrate-Milvus-with-Jina-AI" class="common-anchor-header">Integrare Milvus con Jina AI<button data-href="#Integrate-Milvus-with-Jina-AI" class="anchor-icon" translate="no">
@@ -38,7 +38,8 @@ title: Integrare Milvus con Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI, fondata nel 2020 a Berlino, è un'azienda pionieristica di intelligenza artificiale che mira a rivoluzionare il futuro dell'intelligenza artificiale attraverso la sua base di ricerca. Specializzata nell'intelligenza artificiale multimodale, Jina AI mira a consentire alle aziende e agli sviluppatori di sfruttare la potenza dei dati multimodali per la creazione di valore e la riduzione dei costi attraverso la sua suite integrata di componenti, tra cui embedding, reranker, prompt ops e infrastruttura di base. Gli embedding all'avanguardia di Jina AI vantano prestazioni di alto livello, con un modello di lunghezza di 8192 token ideale per la rappresentazione completa dei dati. Grazie al supporto multilingue e alla perfetta integrazione con piattaforme leader come OpenAI, questi embeddings facilitano le applicazioni multilingue.</p>
+    </button></h2><p>Jina AI, fondata nel 2020 a Berlino, è un'azienda pionieristica di intelligenza artificiale che mira a rivoluzionare il futuro dell'intelligenza artificiale attraverso la sua base di ricerca. Specializzata nell'intelligenza artificiale multimodale, Jina AI mira a consentire alle aziende e agli sviluppatori di sfruttare la potenza dei dati multimodali per la creazione di valore e la riduzione dei costi attraverso la sua suite integrata di componenti, tra cui embedding, reranker, prompt ops e infrastruttura di base.<br>
+Gli embeddings all'avanguardia di Jina AI vantano prestazioni di alto livello, con un modello di lunghezza di 8192 token ideale per una rappresentazione completa dei dati. Grazie al supporto multilingue e alla perfetta integrazione con piattaforme leader come OpenAI, questi embedding facilitano le applicazioni multilingue.</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Embedding di Milvus e Jina AI<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ title: Integrare Milvus con Jina
       </svg>
     </button></h2><p>Le incorporazioni Jina sono state integrate nella libreria di modelli PyMilvus. Ora mostreremo degli esempi di codice per mostrare come utilizzare gli embeddings Jina in azione.</p>
 <p>Prima di iniziare, è necessario installare la libreria di modelli per PyMilvus.</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

@@ -92,7 +92,7 @@ summary: >-
    <tr>
      <td><p>Определение схемы</p></td>
      <td><p>Скалярное поле, которое должно быть явно объявлено в схеме коллекции с типом <code translate="no">DataType.JSON</code>.</p></td>
-     <td><p>Скрытое JSON-поле (с именем <code translate="no">#meta</code>), которое автоматически сохраняет необъявленные поля.</p></td>
+     <td><p>Скрытое JSON-поле (с именем <code translate="no">$meta</code>), которое автоматически сохраняет необъявленные поля.</p></td>
    </tr>
    <tr>
      <td><p>Случай использования</p></td>
@@ -107,7 +107,7 @@ summary: >-
    <tr>
      <td><p>Запрос</p></td>
      <td><p>Запрос с использованием имени поля или целевого ключа внутри JSON-поля: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Запрос напрямую с использованием динамического ключа поля: <code translate="no">"dynamic_key"</code> или через <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Запрос напрямую с использованием динамического ключа поля: <code translate="no">"dynamic_key"</code> или через <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Основные операции<button data-href="#Basic-operations" class="anchor-icon" translate="no">

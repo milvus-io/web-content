@@ -78,7 +78,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
     <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.13</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記の設定ファイルでは、<code translate="no">spec.components.enableRollingUpdate</code> を<code translate="no">true</code> に設定し、<code translate="no">spec.components.image</code> を任意の Milvus バージョンに設定します。</p>
+<p>上記の設定ファイルでは、<code translate="no">spec.components.enableRollingUpdate</code> を<code translate="no">true</code> に設定し、<code translate="no">spec.components.image</code> を希望の Milvus バージョンに設定します。</p>
 <p>デフォルトでは、Milvusはコーディネーターのローリングアップグレードを順番に実行し、コーディネーターのポッドイメージを次々に置き換えていきます。アップグレード時間を短縮するには、<code translate="no">spec.components.imageUpdateMode</code> を<code translate="no">all</code> に設定し、Milvus がすべてのポッドイメージを同時に置き換えるようにします。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

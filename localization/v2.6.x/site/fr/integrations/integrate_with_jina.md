@@ -38,7 +38,8 @@ title: Intégrer Milvus à Jina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jina AI, fondée en 2020 à Berlin, est une entreprise pionnière en matière d'IA qui vise à révolutionner l'avenir de l'intelligence artificielle grâce à sa fondation de recherche. Spécialisée dans l'IA multimodale, Jina AI vise à permettre aux entreprises et aux développeurs d'exploiter la puissance des données multimodales pour créer de la valeur et réduire les coûts grâce à sa suite intégrée de composants, notamment les embeddings, les rerankers, les prompt ops et l'infrastructure de base. Les embeddings de pointe de Jina AI se targuent d'une performance de premier plan, avec un modèle de longueur de jeton de 8192 idéal pour une représentation complète des données. Offrant une prise en charge multilingue et une intégration transparente avec des plateformes de premier plan telles qu'OpenAI, ces embeddings facilitent les applications multilingues.</p>
+    </button></h2><p>Jina AI, fondée en 2020 à Berlin, est une entreprise pionnière en matière d'IA qui vise à révolutionner l'avenir de l'intelligence artificielle grâce à sa fondation de recherche. Spécialisée dans l'IA multimodale, Jina AI vise à permettre aux entreprises et aux développeurs d'exploiter la puissance des données multimodales pour créer de la valeur et réduire les coûts grâce à sa suite intégrée de composants, notamment les embeddings, les rerankers, les prompt ops et l'infrastructure de base.<br>
+Les embeddings de pointe de Jina AI se targuent d'une performance de premier plan, avec un modèle de longueur de jeton 8192 idéal pour une représentation complète des données. Offrant une prise en charge multilingue et une intégration transparente avec des plateformes de premier plan telles qu'OpenAI, ces embeddings facilitent les applications multilingues.</p>
 <h2 id="Milvus-and-Jina-AIs-Embedding" class="common-anchor-header">Intégration de Milvus et de Jina AI<button data-href="#Milvus-and-Jina-AIs-Embedding" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ title: Intégrer Milvus à Jina
       </svg>
     </button></h2><p>Les embeddings de Jina ont été intégrés dans la bibliothèque de modèles de PyMilvus. Nous allons maintenant présenter des exemples de code pour montrer comment utiliser les embeddings de Jina en action.</p>
 <p>Avant de commencer, nous devons installer la bibliothèque de modèles pour PyMilvus.</p>
-<pre><code translate="no" class="language-python">$ pip install -U pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U pymilvus milvus-lite
 $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

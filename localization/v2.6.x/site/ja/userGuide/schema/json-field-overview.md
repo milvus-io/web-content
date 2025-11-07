@@ -86,7 +86,7 @@ summary: >-
    <tr>
      <td><p>スキーマ定義</p></td>
      <td><p>コレクション・スキーマで、<code translate="no">DataType.JSON</code> 型で明示的に宣言する必要があるスカラー・フィールド。</p></td>
-     <td><p>宣言されていないフィールドを自動的に格納する非表示の JSON フィールド（<code translate="no">#meta</code> ）。</p></td>
+     <td><p>宣言されていないフィールドを自動的に格納する非表示の JSON フィールド（<code translate="no">$meta</code> ）。</p></td>
    </tr>
    <tr>
      <td><p>使用例</p></td>
@@ -101,7 +101,7 @@ summary: >-
    <tr>
      <td><p>クエリ</p></td>
      <td><p>JSONフィールド内のフィールド名またはターゲット・キーを使用してクエリ：<code translate="no">metadata["key"]</code> 。</p></td>
-     <td><p>ダイナミック・フィールドのキーを使って直接クエリーする：<code translate="no">"dynamic_key"</code> または<code translate="no">#meta</code> を経由して：<code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>ダイナミック・フィールド・キーを使って直接クエリする：<code translate="no">"dynamic_key"</code> または<code translate="no">$meta</code> 経由：<code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">基本的な操作<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -392,7 +392,7 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>JSONフィールドはデフォルト値をサポートしていません。ただし、フィールドの定義時に<code translate="no">nullable=True</code> を設定して、空の入力を許可することはできます。</p>
-<p>詳細は「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
+<p>詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSONフィールド・キーの命名規則はありますか？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

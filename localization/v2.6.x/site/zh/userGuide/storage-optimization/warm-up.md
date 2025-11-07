@@ -3,7 +3,7 @@ id: warm-up.md
 title: 预热Compatible with Milvus 2.6.4+
 summary: >-
   在 Milvus 中，"预热
-  "功能与分层存储功能相辅相成，可减轻首次访问冷数据时出现的首次访问延迟。配置完成后，预热功能会在段可查询前将选定字段或索引预加载到缓存中，确保加载后可立即使用频繁访问的数据。
+  "功能与分层存储功能相辅相成，可减轻首次访问冷数据时出现的首次访问延迟。配置完成后，预热功能会在段可查询之前将选定类型的字段或索引预加载到缓存中，确保频繁访问的数据在加载后立即可用。
 beta: Milvus 2.6.4+
 ---
 <h1 id="Warm-Up" class="common-anchor-header">预热<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Warm-Up" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，"<strong>预热</strong>"是对分层存储的补充，它可减轻首次访问冷数据时出现的首次访问延迟。配置完成后，预热功能会在段可查询前将选定字段或索引预加载到缓存中，确保加载后可立即使用频繁访问的数据。</p>
+    </button></h1><p>在 Milvus 中，"<strong>预热</strong>"是对分层存储的补充，它可减轻首次访问冷数据时出现的首次访问延迟。配置完成后，预热功能会在段可查询之前将选定类型的字段或索引预加载到缓存中，确保频繁访问的数据在加载后立即可用。</p>
 <h2 id="Why-warm-up" class="common-anchor-header">为什么要预热<button data-href="#Why-warm-up" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,8 +69,8 @@ beta: Milvus 2.6.4+
      <th><p>典型情况</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">sync</code> 默认</p></td>
-     <td><p>在网段可查询前进行预加载。加载时间略有增加，但首次查询不会产生延迟。</p></td>
+     <td><p><code translate="no">sync</code></p></td>
+     <td><p>在段可查询前进行预加载。加载时间略有增加，但首次查询不会产生延迟。</p></td>
      <td><p>用于必须立即可用的性能关键型数据，如搜索中使用的高频标量索引或关键向量索引。</p></td>
    </tr>
    <tr>
@@ -86,9 +86,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-attr">warmup:</span>
         <span class="hljs-comment"># options: sync, disable.</span>
         <span class="hljs-comment"># Specifies the timing for warming up the Tiered Storage cache.</span>
-        <span class="hljs-comment"># - &quot;sync&quot;: data will be loaded into the cache before a segment is considered loaded.</span>
-        <span class="hljs-comment"># - &quot;disable&quot;: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
-        <span class="hljs-comment"># Defaults to &quot;sync&quot;, except for vector field which defaults to &quot;disable&quot;.</span>
+        <span class="hljs-comment"># - `sync`: data will be loaded into the cache before a segment is considered loaded.</span>
+        <span class="hljs-comment"># - `disable`: data will not be proactively loaded into the cache, and loaded only if needed by search/query tasks.</span>
+        <span class="hljs-comment"># Defaults to `sync`, except for vector field which defaults to `disable`.</span>
         <span class="hljs-attr">scalarField:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">scalarIndex:</span> <span class="hljs-string">sync</span>
         <span class="hljs-attr">vectorField:</span> <span class="hljs-string">disable</span> <span class="hljs-comment"># cache warmup for vector field raw data is by default disabled.</span>

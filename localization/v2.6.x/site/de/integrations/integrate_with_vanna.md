@@ -40,7 +40,7 @@ title: SQL schreiben mit Vanna und Milvus
         ></path>
       </svg>
     </button></h2><p>Vergewissern Sie sich, dass Sie die folgenden Abhängigkeiten installiert haben, bevor Sie dieses Notizbuch ausführen:</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span>
+<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
@@ -166,7 +166,7 @@ vn_milvus.connect_to_sqlite(sqlite_path)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wir können das Modell mit den DDL-Daten der SQLite-Datenbank trainieren. Wir erhalten die DDL-Daten und füttern damit die Funktion <code translate="no">train</code>.</p>
+    </button></h2><p>Wir können das Modell mit den DDL-Daten der SQLite-Datenbank trainieren. Wir holen uns die DDL-Daten und füttern damit die Funktion <code translate="no">train</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># If there exists training data, we should remove it before training.</span>
 existing_training_data = vn_milvus.get_training_data()
 <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(existing_training_data) &gt; <span class="hljs-number">0</span>:
@@ -325,7 +325,7 @@ LLM Response: SELECT Phone FROM Customer WHERE Name = 'John Doe'
   </tbody>
 </table>
 </div>
-<p>Hier ist eine komplexere Frage. Die Informationen über den Namen des Fertigungsunternehmens befinden sich in den Dokumentdaten, bei denen es sich um Hintergrundinformationen handelt. Die generierte SQL-Abfrage ruft die Kundeninformationen auf der Grundlage des spezifischen Namens des Fertigungsunternehmens ab.</p>
+<p>Hier ist eine komplexere Frage. Die Informationen über den Namen der Herstellerfirma befinden sich in den Dokumentdaten, bei denen es sich um Hintergrundinformationen handelt. Die generierte SQL-Abfrage ruft die Kundeninformationen auf der Grundlage des spezifischen Namens des Fertigungsunternehmens ab.</p>
 <pre><code translate="no" class="language-python">sql = vn_milvus.generate_sql(<span class="hljs-string">&quot;which customer works for a manufacturing corporation?&quot;</span>)
 vn_milvus.run_sql(sql)
 <button class="copy-code-btn"></button></code></pre>

@@ -2,7 +2,7 @@
 id: ngram.md
 title: NGRAMCompatible with Milvus v2.6.2+
 summary: >-
-  تم بناء فهرس NGRAM في Milvus لتسريع استعلامات LIKE على حقول VARCHAR أو مسارات
+  تم إنشاء فهرس NGRAM في Milvus لتسريع استعلامات LIKE على حقول VARCHAR أو مسارات
   JSON محددة داخل حقول JSON. قبل بناء الفهرس، يقسّم ميلفوس النص إلى سلاسل فرعية
   قصيرة ومتداخلة بطول ثابت n، والمعروفة باسم n-غرامات. على سبيل المثال، إذا كان
   n = 3، تُقسّم كلمة "Milvus" إلى 3 جرامات: "Mil" و"ilv" و"lvu" و"vus". ثم
@@ -252,7 +252,7 @@ client.create_index(
 <li><p>يتم تحويل القيمة إلى <code translate="no">VARCHAR</code> قبل ترميز n-gram.</p></li>
 <li><p>يُنشئ ميلفوس سلاسل فرعية بطول 2 إلى 4 ويخزنها في الفهرس المقلوب.</p></li>
 </ul>
-<p>لمزيد من المعلومات حول كيفية فهرسة حقل JSON، راجع <a href="/docs/ar/use-json-fields.md">حقل JSON</a>.</p>
+<p>لمزيد من المعلومات حول كيفية فهرسة حقل JSON، راجع <a href="/docs/ar/json-indexing.md">فهرسة JSON</a>.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">تسريع الاستعلامات بواسطة NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -297,6 +297,33 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>لمزيد من المعلومات حول بناء جملة تعبيرات التصفية، راجع <a href="/docs/ar/basic-operators.md">المعاملات الأساسية</a>.</p>
+<h2 id="Drop-an-index" class="common-anchor-header">إسقاط فهرس<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>استخدم الأسلوب <code translate="no">drop_index()</code> لإزالة فهرس موجود من مجموعة.</p>
+<div class="alert note">
+<ul>
+<li><p>في الإصدار <strong>2.6.3</strong> أو الإصدار الأقدم، يجب عليك تحرير المجموعة قبل إسقاط فهرس قياسي.</p></li>
+<li><p>اعتبارًا من الإصدار <strong>2.6.4</strong> أو الإصدار الأحدث، يمكنك إسقاط فهرس قياسي مباشرةً بمجرد عدم الحاجة إليه - لا حاجة لتحرير المجموعة أولاً.</p></li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;ngram_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">ملاحظات الاستخدام<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

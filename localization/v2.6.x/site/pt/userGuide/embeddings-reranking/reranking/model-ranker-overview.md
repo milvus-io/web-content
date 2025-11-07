@@ -107,56 +107,31 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>vLLM</p></td>
      <td><p>Aplicações complexas que exigem compreensão semântica profunda e personalização</p></td>
-     <td><ul>
-<li><p>Oferece suporte a vários modelos de linguagem grandes</p></li>
-<li><p>Opções de implantação flexíveis</p></li>
-<li><p>Requisitos computacionais mais altos</p></li>
-<li><p>Maior potencial de personalização</p></li>
-</ul></td>
+     <td><ul><li><p>Oferece suporte a vários modelos de linguagem grandes</p></li><li><p>Opções de implantação flexíveis</p></li><li><p>Requisitos computacionais mais altos</p></li><li><p>Maior potencial de personalização</p></li></ul></td>
      <td><p>Plataforma de investigação jurídica que implementa modelos específicos do domínio que compreendem a terminologia jurídica e as relações jurisprudenciais</p></td>
    </tr>
    <tr>
      <td><p>TEI</p></td>
      <td><p>Implementação rápida com utilização eficiente de recursos</p></td>
-     <td><ul>
-<li><p>Serviço leve optimizado para operações de texto</p></li>
-<li><p>Implementação mais fácil com menores requisitos de recursos</p></li>
-<li><p>Modelos de classificação pré-otimizados</p></li>
-<li><p>Despesas mínimas de infraestrutura</p></li>
-</ul></td>
+     <td><ul><li><p>Serviço leve optimizado para operações de texto</p></li><li><p>Implementação mais fácil com menores requisitos de recursos</p></li><li><p>Modelos de classificação pré-otimizados</p></li><li><p>Despesas mínimas de infraestrutura</p></li></ul></td>
      <td><p>Sistema de gestão de conteúdos que necessita de capacidades de reanálise eficientes com requisitos padrão</p></td>
    </tr>
    <tr>
      <td><p>Coesão</p></td>
      <td><p>Aplicações empresariais que dão prioridade à fiabilidade e à facilidade de integração</p></td>
-     <td><ul>
-<li><p>Fiabilidade e escalabilidade de nível empresarial</p></li>
-<li><p>Serviço gerido sem manutenção da infraestrutura</p></li>
-<li><p>Recursos de reanálise em vários idiomas</p></li>
-<li><p>Limitação de taxa e tratamento de erros incorporados</p></li>
-</ul></td>
+     <td><ul><li><p>Fiabilidade e escalabilidade de nível empresarial</p></li><li><p>Serviço gerido sem manutenção da infraestrutura</p></li><li><p>Recursos de reanálise em vários idiomas</p></li><li><p>Limitação de taxa e tratamento de erros incorporados</p></li></ul></td>
      <td><p>Plataforma de comércio eletrónico que requer pesquisa de alta disponibilidade com desempenho consistente da API e catálogos de produtos multilingues</p></td>
    </tr>
    <tr>
      <td><p>IA do Voyage</p></td>
      <td><p>Aplicações RAG com requisitos específicos de desempenho e contexto</p></td>
-     <td><ul>
-<li><p>Modelos especificamente treinados para tarefas de reranking</p></li>
-<li><p>Controlos de truncagem granular para diversos comprimentos de documentos</p></li>
-<li><p>Inferência optimizada para cargas de trabalho de produção</p></li>
-<li><p>Múltiplas variantes de modelos (rerank-2, rerank-lite, etc.)</p></li>
-</ul></td>
+     <td><ul><li><p>Modelos especificamente treinados para tarefas de reranking</p></li><li><p>Controlos de truncagem granular para diversos comprimentos de documentos</p></li><li><p>Inferência optimizada para cargas de trabalho de produção</p></li><li><p>Múltiplas variantes de modelos (rerank-2, rerank-lite, etc.)</p></li></ul></td>
      <td><p>Base de dados de investigação com diferentes comprimentos de documentos que requerem um controlo de desempenho afinado e uma compreensão semântica especializada</p></td>
    </tr>
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>Aplicações que processam documentos longos com prioridades de rentabilidade</p></td>
-     <td><ul>
-<li><p>Classificação avançada de documentos em pedaços com sobreposição configurável</p></li>
-<li><p>Pontuação baseada em pedaços (o pedaço com maior pontuação representa o documento)</p></li>
-<li><p>Suporte para diversos modelos de reranking</p></li>
-<li><p>Rentável com variantes de modelo padrão e profissional</p></li>
-</ul></td>
+     <td><ul><li><p>Classificação avançada de documentos em pedaços com sobreposição configurável</p></li><li><p>Pontuação baseada em pedaços (o pedaço com maior pontuação representa o documento)</p></li><li><p>Suporte para diversos modelos de reranking</p></li><li><p>Rentável com variantes de modelo padrão e profissional</p></li></ul></td>
      <td><p>Sistema de pesquisa de documentação técnica que processa manuais e documentos extensos que necessitam de segmentação inteligente e controlo de sobreposição</p></td>
    </tr>
 </table>
@@ -205,7 +180,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para implementar a reclassificação de modelos, comece por definir um objeto Function com a configuração adequada. Neste exemplo, usamos o TEI como provedor de serviços:</p>
+    </button></h3><p>Para implementar a reclassificação de modelos, comece por definir um objeto Function com a configuração adequada. Neste exemplo, usamos o TEI como o provedor de serviços:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
@@ -229,7 +204,21 @@ model_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.ModelRanker;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+<span class="hljs-type">ModelRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> ModelRanker.builder()
+        .name(<span class="hljs-string">&quot;semantic_ranker&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
+        .provider(<span class="hljs-string">&quot;tei&quot;</span>)
+        .queries(Collections.singletonList(<span class="hljs-string">&quot;machine learning for time series&quot;</span>))
+        .endpoint(<span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -253,25 +242,25 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Nome do campo de texto a utilizar para a reclassificação. Deve ser um campo do tipo <code translate="no">VARCHAR</code>.</p></td>
+     <td><p>Nome do campo de texto a utilizar para a reclassificação.</p><p>Deve ser um campo do tipo <code translate="no">VARCHAR</code>.</p></td>
      <td><p><code translate="no">["document"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Especifica o tipo de função que está a ser criada. Deve ser definido como <code translate="no">RERANK</code> para todos os classificadores de modelos.</p></td>
+     <td><p>Especifica o tipo de função que está a ser criada.</p><p>Deve ser definido como <code translate="no">RERANK</code> para todos os classificadores de modelos.</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Um dicionário que contém a configuração para a função de reordenação baseada em modelos. Os parâmetros disponíveis (chaves) variam consoante o fornecedor de serviços.</p></td>
-     <td><p>{...}</p></td>
+     <td><p>Um dicionário que contém a configuração da função de reclassificação baseada em modelos. Os parâmetros disponíveis (chaves) variam consoante o fornecedor de serviços.</p></td>
+     <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>Deve ser definido para <code translate="no">"model"</code> para ativar a reclassificação de modelos.</p></td>
+     <td><p>Tem de ser definido para <code translate="no">"model"</code> para ativar a reclassificação de modelos.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
@@ -283,8 +272,8 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Sim</p></td>
-     <td><p>O número de cadeias de consulta deve corresponder exatamente ao número de consultas na sua operação de pesquisa (mesmo quando utiliza vectores de consulta em vez de texto), caso contrário será comunicado um erro.</p></td>
-     <td><p><em>["consulta de pesquisa"]</em></p></td>
+     <td><p>Lista de cadeias de caracteres de consulta utilizadas pelo modelo de reclassificação para calcular as pontuações de relevância.</p><p>O número de cadeias de consulta deve corresponder exatamente ao número de consultas na sua operação de pesquisa (mesmo quando utiliza vectores de consulta em vez de texto), caso contrário será comunicado um erro.</p></td>
+     <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.endpoint</code></p></td>
@@ -314,21 +303,37 @@ model_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Depois de definir seu classificador de modelo, é possível aplicá-lo durante as operações de pesquisa, passando-o para o parâmetro classificador:</p>
+    </button></h3><p>Depois de definir seu classificador de modelo, é possível aplicá-lo durante as operações de pesquisa passando-o para o parâmetro classificador:</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
-    data=[<span class="hljs-string">&quot;machine learning for time series&quot;</span>], <span class="hljs-comment"># Number of queries must match that specified in model_ranker.params[&quot;queries&quot;] </span>
+    data=[your_query_vector], <span class="hljs-comment"># Number of query vectors must match that specified in model_ranker.params[&quot;queries&quot;] </span>
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
-    <span class="hljs-built_in">limit</span>=10,
+    limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .outputFields(Collections.singletonList(document))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .consistencyLevel(ConsistencyLevel.BOUNDED)
+        .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -358,14 +363,14 @@ results = client.search(
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
 dense_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;machine learning for time series&quot;</span>],
+    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
 )
 
 sparse_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;machine learning for time series&quot;</span>],
+    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
@@ -380,7 +385,31 @@ hybrid_results = client.hybrid_search(
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding)))
+        .limit(<span class="hljs-number">10</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
+        .limit(<span class="hljs-number">10</span>)
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+                .collectionName(COLLECTION_NAME)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(<span class="hljs-number">10</span>)
+                .outputFields(Arrays.asList(<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>))
+                .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>

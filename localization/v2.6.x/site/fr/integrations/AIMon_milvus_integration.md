@@ -38,7 +38,7 @@ title: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans ce tutoriel, nous vous aiderons à construire un chatbot de génération augmentée de recherche (RAG) qui répond aux questions sur un <a href="https://meetingbank.github.io/">ensemble de données de banques de réunions</a>.</p>
+    </button></h2><p>Dans ce tutoriel, nous vous aiderons à construire un chatbot RAG (retrieval-augmented generation) qui répond à des questions sur un <a href="https://meetingbank.github.io/">ensemble de données d'une banque de réunions</a>.</p>
 <p>Dans ce tutoriel, vous apprendrez à :</p>
 <ul>
 <li>Construire une application LLM qui répond à la requête d'un utilisateur liée à l'ensemble de données de la banque de réunions.</li>
@@ -63,7 +63,7 @@ title: >-
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Base de données vectorielle</em></h4><p>Pour cette application, nous utiliserons <a href="https://milvus.io/">Milvus</a> pour gérer et rechercher des données non structurées à grande échelle, telles que du texte, des images et des vidéos.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>Cadre LLM</em></h4><p>LlamaIndex est un cadre d'orchestration de données open-source qui simplifie la construction d'applications de grands modèles de langage (LLM) en facilitant l'intégration de données privées avec les LLM, permettant des applications d'IA générative augmentée par le contexte grâce à un pipeline de récupération et de génération augmentée (RAG). Nous utiliserons LlamaIndex pour ce tutoriel car il offre une bonne quantité de flexibilité et de meilleures abstractions API de bas niveau.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Évaluation de la qualité de sortie du LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> offre des modèles de jugement propriétaires pour l'hallucination, les problèmes de qualité du contexte, l'adhésion aux instructions des LLM, la qualité de la récupération et d'autres tâches de fiabilité des LLM. Nous utiliserons AIMon pour évaluer la qualité de l'application LLM.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">Conditions préalables<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,17 +81,37 @@ title: >-
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>Créez un <a href="https://docs.aimon.ai/quickstart">compte AIMon ici</a>.</p>
-<p>Ajoutez ce secret aux Colab Secrets (le symbole "key" sur le panneau de gauche) Si vous êtes dans un environnement colab non-google, veuillez remplacer le code lié à google colab vous-même.</p>
+<li>Créez un <a href="https://docs.aimon.ai/quickstart">compte AIMon ici</a>.</li>
+</ol>
+<p>Ajoutez ce secret au Colab Secrets (le symbole "clé" sur le panneau de gauche).</p>
+<blockquote>
+<p>Si vous êtes dans un autre environnement que google colab, veuillez remplacer vous-même le code lié à google colab</p>
+</blockquote>
 <ul>
 <li>CLÉ AIMON_API</li>
-</ul></li>
-<li><p>Ouvrez un <a href="https://platform.openai.com/docs/overview">compte OpenAI ici</a> et ajoutez la clé suivante dans les secrets de Colab :</p>
+</ul>
+<ol start="2">
+<li>Ouvrez un <a href="https://platform.openai.com/docs/overview">compte OpenAI ici</a> et ajoutez la clé suivante dans les secrets de Colab :</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">Clés API requises</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">Clés API requises<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -246,7 +266,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">Analyse</h3><p>Nous disposons de 258 transcriptions avec un total d'environ 1 million de tokens pour l'ensemble de ces transcriptions. Nous avons une moyenne de 3864 tokens par transcription.</p>
+<h3 id="Analysis" class="common-anchor-header">Analyse<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous disposons de 258 transcriptions avec un total d'environ 1 million de tokens pour l'ensemble de ces transcriptions. Nous avons une moyenne de 3864 tokens par transcription.</p>
 <table>
 <thead>
 <tr><th>Métrique</th><th>Valeur</th></tr>
@@ -257,7 +292,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>Nombre moyen d'éléments par transcription # Nombre de jetons par transcription</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">Requêtes</h3><p>Voici les 12 requêtes que nous exécuterons sur la transcription ci-dessus</p>
+<h3 id="Queries" class="common-anchor-header">Requêtes<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voici les 12 requêtes que nous exécuterons sur la transcription ci-dessus</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -938,6 +988,18 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align : middle ; }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -945,8 +1007,8 @@ df_scores
       <th>Approche</th>
       <th>Score de qualité</th>
       <th>Score de pertinence de la recherche</th>
-      <th>Augmentation de la note de qualité (%)</th>
-      <th>Augmentation de la note de pertinence (%)</th>
+      <th>Augmentation du score de qualité (%)</th>
+      <th>Augmentation de la note de pertinence de la recherche (%)</th>
     </tr>
   </thead>
   <tbody>

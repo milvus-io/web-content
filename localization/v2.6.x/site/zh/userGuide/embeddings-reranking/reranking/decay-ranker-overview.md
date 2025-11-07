@@ -49,9 +49,9 @@ beta: Milvus 2.6.x
 <li><p>每个衰减排序器只能使用一个数字字段。</p></li>
 <li><p><strong>时间单位一致性</strong>：使用基于时间的衰减排名时，<code translate="no">origin</code> 、<code translate="no">scale</code> 和<code translate="no">offset</code> 参数的单位必须与您的 Collections 数据中使用的单位一致：</p>
 <ul>
-<li>如果您的 Collections 以<strong>秒</strong>为单位存储时间戳，则所有参数都使用秒为单位</li>
-<li>如果您的 Collections 以<strong>毫秒</strong>为单位存储时间戳，则所有参数均使用毫秒。</li>
-<li>如果您的 Collections 以<strong>微秒</strong>为单位存储时间戳，则所有参数都使用微秒</li>
+<li><p>如果您的 Collections 以<strong>秒</strong>为单位存储时间戳，则所有参数都使用秒为单位</p></li>
+<li><p>如果您的 Collections 以<strong>毫秒</strong>为单位存储时间戳，则所有参数均使用毫秒。</p></li>
+<li><p>如果您的 Collections 以<strong>微秒</strong>为单位存储时间戳，则所有参数均使用微秒。</p></li>
 </ul></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">工作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -110,7 +110,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>接下来，Milvus 根据数值字段值（如时间戳或距离），使用您选择的衰减排名器计算衰减分数：</p>
 <ul>
-<li><p>每个衰减排名器将原始数值转化为 0-1 之间的归一化相关性分数。</p></li>
+<li><p>每个衰减排名器都会将原始数值转化为 0-1 之间的归一化相关性分数。</p></li>
 <li><p>衰减分数表示一个项目与理想点的 "距离 "相关程度</p></li>
 </ul>
 <p>具体计算公式因衰减排名器类型而异。有关如何计算衰减分数的详情，请参阅<a href="/docs/zh/gaussian-decay.md#Formula">高斯衰减</a>、<a href="/docs/zh/exponential-decay.md#Formula">指数衰减</a>和<a href="/docs/zh/linear-decay.md#Formula">线性衰减的</a>专门页面。</p>
@@ -129,7 +129,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>最后，Milvus 将归一化的相似度得分和衰减得分结合起来，得出最终的排名得分：</p>
+    </button></h3><p>最后，Milvus 将归一化的相似度得分和衰减得分结合起来，得出最终排名得分：</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>在混合搜索（结合多个向量场）的情况下，Milvus 取搜索请求中最大的归一化相似度得分：</p>
@@ -234,31 +234,19 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>高斯 (<code translate="no">gauss</code>)</p></td>
      <td><p>自然的渐进式下降，延伸适度</p></td>
-     <td><ul>
-<li><p>需要均衡结果的一般搜索</p></li>
-<li><p>用户对距离有直观感觉的应用</p></li>
-<li><p>当距离适中时，结果不应受到严重影响</p></li>
-</ul></td>
+     <td><ul><li><p>需要平衡结果的一般搜索</p></li><li><p>用户对距离有直观感觉的应用</p></li><li><p>当距离适中时，结果不应受到严重影响</p></li></ul></td>
      <td><p>在餐厅搜索中，3 公里以外的优质餐厅仍然可以被发现，尽管排名低于附近的选择</p></td>
    </tr>
    <tr>
      <td><p>指数 (<code translate="no">exp</code>)</p></td>
      <td><p>起初迅速减少，但保持长尾效应</p></td>
-     <td><ul>
-<li><p>新闻馈送，时效性至关重要</p></li>
-<li><p>社交媒体，新鲜内容应占主导地位</p></li>
-<li><p>当强烈偏好近距离内容，但特殊的远距离内容应保持可见时</p></li>
-</ul></td>
+     <td><ul><li><p>新闻馈送，时效性至关重要</p></li><li><p>社交媒体，新鲜内容应占主导地位</p></li><li><p>当强烈偏好近距离但特殊的远距离项目应保持可见时</p></li></ul></td>
      <td><p>在新闻应用程序中，昨天的新闻比一周前的内容排名要高得多，但高度相关的旧文章仍会出现</p></td>
    </tr>
    <tr>
      <td><p>线性 (<code translate="no">linear</code>)</p></td>
      <td><p>持续、可预测的下降，有明确的分界线</p></td>
-     <td><ul>
-<li><p>有自然边界的应用</p></li>
-<li><p>有距离限制的服务</p></li>
-<li><p>有过期日期或明确阈值的内容</p></li>
-</ul></td>
+     <td><ul><li><p>有自然边界的应用</p></li><li><p>有距离限制的服务</p></li><li><p>有过期日期或明确阈值的内容</p></li></ul></td>
      <td><p>在事件查找器中，超过两周未来窗口的事件根本不会出现</p></td>
    </tr>
 </table>
@@ -302,7 +290,9 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要实施衰减排名，首先要定义一个具有适当配置的<code translate="no">Function</code> 对象：</p>
+    </button></h3><p>要实现衰减排名，首先要定义一个具有适当配置的<code translate="no">Function</code> 对象：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a decay function for timestamp-based decay</span>
@@ -321,6 +311,46 @@ decay_ranker = Function(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
+
+<span class="hljs-keyword">import</span> java.time.ZoneId;
+<span class="hljs-keyword">import</span> java.time.ZonedDateTime;
+
+<span class="hljs-type">ZonedDateTime</span> <span class="hljs-variable">zdt</span> <span class="hljs-operator">=</span> ZonedDateTime.of(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">25</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, ZoneId.systemDefault());
+
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+        .name(<span class="hljs-string">&quot;time_decay&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;timestamp&quot;</span>))
+        .function(<span class="hljs-string">&quot;gauss&quot;</span>)
+        .origin(zdt.toInstant().toEpochMilli())
+        .scale(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .offset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .decay(<span class="hljs-number">0.5</span>)
+        .build();
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">
+<span class="hljs-keyword">import</span> {<span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> decayRanker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;time_decay&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;timestamp&quot;</span>],
+  <span class="hljs-attr">function_type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;decay&quot;</span>,
+    <span class="hljs-attr">function</span>: <span class="hljs-string">&quot;gauss&quot;</span>,
+    <span class="hljs-attr">origin</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).<span class="hljs-title function_">getTime</span>(),
+    <span class="hljs-attr">scale</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+    <span class="hljs-attr">offset</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
+    <span class="hljs-attr">decay</span>: <span class="hljs-number">0.5</span>,
+  },
+};
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>参数</p></th>
@@ -337,59 +367,49 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>是</p></td>
-     <td><p>用于计算衰减分数的数字字段。确定用于计算衰减的数据属性（例如，基于时间的衰减使用时间戳，基于位置的衰减使用坐标）。 
- 必须是 Collections 中包含相关数值的字段。支持 INT8/16/32/64、FLOAT、DOUBLE。</p></td>
+     <td><p>用于计算衰减分数的数字字段。确定用于计算衰减的数据属性（例如，基于时间的衰减使用时间戳，基于位置的衰减使用坐标）。 </p><p>必须是 Collections 中包含相关数值的字段。支持 INT8/16/32/64、FLOAT、DOUBLE。</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>是</p></td>
-     <td><p>指定正在创建的函数类型。对于所有衰减排序器，必须设置为<code translate="no">RERANK</code> 。</p></td>
+     <td><p>指定创建的函数类型。</p><p>对于所有衰减排名器，必须设置为<code translate="no">RERANK</code> 。</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>是</p></td>
-     <td><p>指定要使用的 Reranker 排名方法。必须设置为<code translate="no">"decay"</code> 才能启用衰减排名功能。</p></td>
+     <td><p>指定要使用的 Reranker 方法。</p><p>必须设置为<code translate="no">"decay"</code> 才能启用衰减排名功能。</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>是</p></td>
-     <td><p>指定要应用的数学衰减排名器。确定相关性下降的曲线形状。 请参阅 "<a href="/docs/zh/decay-ranker-overview.md#Choose-the-right-decay-ranker">选择合适的衰减排名器</a>"部分，了解如何选择合适的函数。</p></td>
+     <td><p>指定要应用的数学衰减排名器。确定相关性下降的曲线形状。</p><p>请参阅 "<a href="/docs/zh/decay-ranker-overview.md#Choose-the-right-decay-ranker">选择合适的衰减排序器</a>"部分，了解如何选择合适的函数。</p></td>
      <td><p><code translate="no">"gauss"</code>,<code translate="no">"exp"</code>, 或<code translate="no">"linear"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>是</p></td>
-     <td><p>计算衰减分数的参考点。处于此值的项目会获得最大相关性分数。对于基于时间的衰减，时间单位必须与您的 Collections 数据相匹配。</p></td>
-     <td><ul>
-<li>对于时间戳：当前时间（如<code translate="no">int(time.time())</code>)</li>
-<li>对于地理位置：用户当前坐标</li>
-</ul></td>
+     <td><p>计算衰减分数的参考点。处于此值的项目会获得最大相关性分数。</p><p>对于基于时间的衰减，时间单位必须与您的 Collections 数据相匹配。</p></td>
+     <td><ul><li><p>对于时间戳：当前时间（如<code translate="no">int(time.time())</code>)</p></li><li><p>对于地理位置：用户当前坐标</p></li></ul></td>
    </tr>
    <tr>
-          <td><p><code translate="no">params.scale</code></p></td>
+     <td><p><code translate="no">params.scale</code></p></td>
      <td><p>是</p></td>
-     <td><p>相关性下降到<code translate="no">decay</code> 值的距离或时间。控制相关性下降的速度。对于基于时间的衰减，时间单位必须与收集的数据相匹配。 数值越大，相关性下降的速度越慢；数值越小，相关性下降的速度越快。</p></td>
-     <td><ul>
-<li>对于时间：以秒为单位的周期（例如，<code translate="no">7 * 24 * 60 * 60</code> 为 7 天）</li>
-<li>距离：米（例如，<code translate="no">5000</code> 表示 5 公里）</li>
-</ul></td>
+     <td><p>相关性下降到<code translate="no">decay</code> 值的距离或时间。控制相关性下降的速度。</p><p>对于基于时间的衰减，时间单位必须与您的 Collections 数据相匹配。</p><p>数值越大，相关性下降越慢；数值越小，相关性下降越快。</p></td>
+     <td><ul><li><p>对于时间：以秒为单位的周期（例如，<code translate="no">7 * 24 * 60 * 60</code> 为 7 天）</p></li><li><p>距离：米（例如，<code translate="no">5000</code> 表示 5 公里）</p></li></ul></td>
    </tr>
    <tr>
-          <td><p><code translate="no">params.offset</code></p></td>
+     <td><p><code translate="no">params.offset</code></p></td>
      <td><p>无</p></td>
-     <td><p>在<code translate="no">origin</code> 周围创建一个 "无衰减区域"，在此区域内，项目将保持满分（衰减分数 = 1.0）。在<code translate="no">origin</code> 范围内的项目将保持最大相关性。对于基于时间的衰减，时间单位必须与您的 Collections 数据相匹配。</p></td>
-     <td><ul>
-<li>时间：以秒为单位的时间段（例如，<code translate="no">24 * 60 * 60</code> 为 1 天）</li>
-<li>对于距离：米（例如，<code translate="no">500</code> 表示 500 米）</li>
-</ul></td>
+     <td><p>在<code translate="no">origin</code> 周围创建一个 "无衰减区"，在该区域内，项目保持满分（衰减分数 = 1.0）。</p><p>对于基于时间的衰减，时间单位必须与您的 Collections 数据一致。</p><p>在<code translate="no">origin</code> 这个范围内的项目将保持最大相关性。</p></td>
+     <td><ul><li><p>时间：以秒为单位的时间段（例如，<code translate="no">24 * 60 * 60</code> 为 1 天）</p></li><li><p>对于距离：米（例如，<code translate="no">500</code> 表示 500 米）</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>无</p></td>
-     <td><p><code translate="no">scale</code> 距离上的分数值，控制曲线陡度。必须在 0 和 1 之间。</p></td>
+     <td><p><code translate="no">scale</code> 距离上的分数值，控制曲线陡度。数值越小，下降曲线越陡峭；数值越大，下降曲线越平缓。</p><p>必须介于 0 和 1 之间。</p></td>
      <td><p><code translate="no">0.5</code> (默认值）</p></td>
    </tr>
 </table>
@@ -408,17 +428,49 @@ decay_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>定义衰减排序器后，可以通过将其传递给<code translate="no">ranker</code> 参数，在搜索操作过程中应用它：</p>
+    </button></h3><p>定义衰减排序器后，您可以通过将其传递给<code translate="no">ranker</code> 参数，在搜索操作过程中应用它：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the decay function in standard vector search</span>
 results = milvus_client.search(
     collection_name,
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],  <span class="hljs-comment"># Include the decay field in outputs to see values</span>
 <span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Apply the decay ranker here</span></span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;search query&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .limit(<span class="hljs-number">10</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
+        .functionScore(FunctionScore.builder()
+                .addFunction(ranker)
+                .build())
+        .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],
+  <span class="hljs-attr">rerank</span>: ranker,
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">应用于混合搜索<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -435,19 +487,21 @@ results = milvus_client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>衰减排序器也可以应用于结合多个向量场的混合搜索操作符：</p>
+    </button></h3><p>衰减排序器还可以应用于结合多个向量场的混合搜索操作：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Define search requests for different vector fields</span>
 dense_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
 )
 
 sparse_request = AnnSearchRequest(
-    data=[<span class="hljs-string">&quot;search query&quot;</span>],
+    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
     anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
     param={},
     limit=<span class="hljs-number">20</span>
@@ -461,5 +515,58 @@ hybrid_results = milvus_client.hybrid_search(
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>]
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+        
+List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding)))
+        .limit(<span class="hljs-number">20</span>)
+        .build());
+searchRequests.add(AnnSearchReq.builder()
+        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;search query&quot;</span>)))
+        .limit(<span class="hljs-number">20</span>)
+        .build());
+
+<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
+                .collectionName(COLLECTION_NAME)
+                .searchRequests(searchRequests)
+                .ranker(ranker)
+                .limit(<span class="hljs-number">10</span>)
+                .outputFields(Arrays.asList(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
+                .build();
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> denseRequest = {
+  <span class="hljs-attr">data</span>: [your_query_vector_1], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+};
+
+<span class="hljs-keyword">const</span> sparseRequest = {
+  <span class="hljs-attr">data</span>: [your_query_vector_2], <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
+  <span class="hljs-attr">param</span>: {},
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
+};
+
+<span class="hljs-keyword">const</span> hybridResults = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">hybrid_search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">data</span>: [denseRequest, sparseRequest],
+  <span class="hljs-attr">ranker</span>: decayRanker,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],
+});
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在混合搜索中，Milvus 首先从所有向量场中找出最大相似度得分，然后将衰减因子应用于该得分。</p>

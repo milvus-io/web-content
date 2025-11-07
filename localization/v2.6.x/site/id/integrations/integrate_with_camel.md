@@ -49,7 +49,7 @@ title: Retrieval-Augmented Generation (RAG) dengan Milvus dan Camel
         ></path>
       </svg>
     </button></h2><p>Pertama-tama, mari kita muat kertas CAMEL dari https://arxiv.org/pdf/2303.17760.pdf. Ini akan menjadi data contoh lokal kita.</p>
-<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
+<pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (Klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
@@ -125,7 +125,7 @@ vector_retriever = VectorRetriever(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>Sekarang kita dapat mengambil informasi dari penyimpanan vektor dengan memberikan query. Secara default, ini akan mengembalikan konten teks dari 1 chunk teratas dengan nilai kemiripan Cosine tertinggi, dan nilai kemiripan harus lebih tinggi dari 0,75 untuk memastikan konten yang diambil relevan dengan kueri. Anda juga dapat mengubah nilai <code translate="no">top_k</code>.</p>
+<p>Sekarang kita dapat mengambil informasi dari penyimpanan vektor dengan memberikan query. Secara default, ini akan mengembalikan konten teks dari 1 chunk teratas dengan nilai kemiripan Cosine tertinggi, dan nilai kemiripan harus lebih tinggi dari 0.75 untuk memastikan konten yang diambil relevan dengan kueri. Anda juga dapat mengubah nilai <code translate="no">top_k</code>.</p>
 <p>Daftar string yang dikembalikan meliputi:</p>
 <ul>
 <li>skor kemiripan</li>

@@ -42,7 +42,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>スキャン</span> </span></p>
 <ol>
 <li><p><strong>パーティショニング</strong>：データセットをクラスタに分割する。この方法では、データセット全体をスキャンする代わりに、関連するデータのサブセットのみに焦点を当てることで検索空間を狭め、時間と処理リソースを節約する。ScaNN は多くの場合、<a href="https://zilliz.com/blog/k-means-clustering">k-means</a> などのクラスタリング・アルゴリズムを使用してクラスターを特定するため、類似検索をより効率的に実行できる。</p></li>
-<li><p><strong>量子化</strong>：ScaNN はパーティショニング後に<a href="https://arxiv.org/abs/1908.10396">異方性ベクトル量子化として</a>知られる量子化プロセスを適用する。従来の量子化は、元のベクトルと圧縮されたベクトル間の全体的な距離を最小化することに重点を置いているが、これは<a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">最大内積探索（MIPS）の</a>ような、類似性が直接的な距離ではなくベクトルの内積によって決定されるタスクには理想的ではない。異方性量子化では、代わりにベクトル間の平行成分、つまり正確な内積を計算するために最も重要な部分の保存を優先します。このアプローチにより、ScaNNは圧縮されたベクトルをクエリと注意深く整列させることで高いMIPS精度を維持し、より高速で正確な類似性検索を可能にしている。</p></li>
+<li><p><strong>量子化</strong>：ScaNN はパーティショニング後に<a href="https://arxiv.org/abs/1908.10396">異方性ベクトル量子化として</a>知られる量子化プロセスを適用する。従来の量子化は、元のベクトルと圧縮されたベクトル間の全体的な距離を最小化することに重点を置いているが、これは<a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">最大内積探索（MIPS）の</a>ような、類似性が直接的な距離ではなくベクトルの内積によって決定されるタスクには理想的ではない。異方的量子化では、代わりにベクトル間の平行成分、つまり正確な内積を計算するために最も重要な部分の保存を優先します。このアプローチにより、ScaNNは圧縮されたベクトルをクエリと注意深く整列させることで高いMIPS精度を維持し、より高速で正確な類似性検索を可能にしている。</p></li>
 <li><p><strong>再ランク付け</strong>：再順位付け段階は最終段階で、ScaNN は分割および量子化段階からの検索結果を微調整する。この再順位付けでは、上位の候補ベクトルに対して正確な内積計算が適用され、最終結果が高精度になるようにします。再順位付けは、最初のフィルタリングとクラスタリングが粗い層として機能し、最終段階で最も関連性の高い結果のみがユーザーに返されるようにする、高速推薦エンジンや画像検索アプリケーションにおいて極めて重要である。</p></li>
 </ol>
 <p><code translate="no">SCANN</code> の性能は、速度と精度のバランスを微調整できる2つの重要なパラメータによって制御されます：</p>
@@ -147,24 +147,58 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行するために使用されるパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>次の表は、<code translate="no">params</code> で<a href="/docs/ja/scann.md#Build-index">インデックスを構築</a>する際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下の表に、<code translate="no">params</code> で<a href="/docs/ja/scann.md#Build-index">インデックスを構築</a>する際に設定できるパラメータを列挙します。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
      <th><p>説明</p></th>
      <th><p>値の範囲</p></th>
-     <th><p>調整案</p></th>
+     <th><p>チューニングの提案</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nlist</code></p></td>
+     <td><p>クラスタ・ユニット数</p></td>
+     <td><p>[1, 65536]</p></td>
+     <td><p><em>nlistを</em>大きくすると、枝刈りの効率が上がり、一般的に粗い探索が速くなりますが、パーティションが小さくなりすぎてリコールが低下する可能性があります；<em>nlistを</em>小さくすると、より大きなクラスタをスキャンし、リコールは向上しますが、探索が遅くなります。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">with_raw_data</code></p></td>
-     <td><p>元のベクトルデータを量子化表現と一緒に保存するかどうか。有効にすると、再順位付けの段階で、量子化された近似値ではなく元のベクトルを使用することで、より正確な類似度計算が可能になる。</p></td>
-     <td><p><strong>タイプ</strong>Boolean<strong>Range</strong>：<code translate="no">true</code>,<code translate="no">false</code></p>
-<p><strong>デフォルト値</strong>：<code translate="no">true</code></p></td>
-     <td><p><strong>より高い検索精度を</strong>得るため、また記憶容量が重要でない場合は、<code translate="no">true</code> に設定する。オリジナルのベクトル・データにより、再ランキング時により正確な類似度計算が可能になる。特に大規模なデータセットの場合、<strong>ストレージ・オーバーヘッドと</strong>メモリ使用<strong>量を削減する</strong>ために、<code translate="no">false</code> に設定する。ただし、再ランキング段階では量子化されたベクトルを使用するため、検索精度が若干低下する可能性があります。</p>
-<p><strong>推奨</strong>：精度が重要なプロダクション・アプリケーションには<code translate="no">true</code> を使用する。</p></td>
+     <td><p>元のベクトルデータを量子化された表現と一緒に保存するかどうか。有効にすると、再順位付けの段階で、量子化された近似ベクトルではなく元のベクトルを使用することで、より正確な類似度計算が可能になる。</p></td>
+     <td><p><strong>型</strong>：ブール値</p><p><strong>範囲</strong>：<code translate="no">true</code>,<code translate="no">false</code></p><p><strong>デフォルト値</strong>：<code translate="no">true</code></p></td>
+     <td><p><strong>より高い検索精度を</strong>得るため、またストレージ容量が重要でない場合は、<code translate="no">true</code> に設定する。オリジナルのベクトル・データにより、再ランキング時に、より正確な類似度計算が可能になる。</p><p><code translate="no">false</code> に設定すると、特に大きなデータセットの場合、<strong>ストレージのオーバーヘッドと</strong>メモリ使用<strong>量が削減される</strong>。ただし、再ランキング段階では量子化されたベクトルが使用されるため、検索精度が若干低下する可能性があります。</p><p><strong>推奨</strong>：精度が重要なプロダクション・アプリケーションには<code translate="no">true</code> を使用する。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>以下の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/scann.md#Search-on-index">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/scann.md#Search-on-index">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -175,10 +209,7 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>再順位付け段階で絞り込まれる候補ベクトルの数を制御する。このパラメータは、最初のパーティショニングと量子化段階からの上位候補が、より正確な類似度計算を使用して再評価される数を決定します。</p></td>
-     <td><p><strong>タイプ</strong>整数<strong>Range</strong>：[1,<em>int_max］</em></p>
-<p><strong>デフォルト値</strong>なし</p></td>
-     <td><p><code translate="no">reorder_k</code> を大きくすると、最終的な絞り込み段階でより多くの候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なる。しかし、これはまた、追加の計算のために<strong>検索時間を増加さ</strong>せます。 高いリコールを達成することが重要であり、検索速度があまり気にならない場合は、<code translate="no">reorder_k</code> を増やすことを検討してください。<code translate="no">limit</code> (TopK results to return)の2-5倍から始めるのがよいでしょう。</p>
-<p>特に、精度が多少低下しても構わないようなシナリオでは、より高速な検索を優先するため、<code translate="no">reorder_k</code> を減らすことを検討してください。</p>
-<p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[<em>limit</em>,<em>limit</em>* 5]。</p></td>
+     <td><p><strong>タイプ</strong>整数</p><p><strong>範囲</strong>: [1, int_max]：[1,<em>int_max］</em></p><p><strong>デフォルト値</strong>：なし</p></td>
+     <td><p><code translate="no">reorder_k</code> を大きくすると、最終的な絞り込み段階でより多くの候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なる。しかし、これはまた、追加の計算のために<strong>検索時間を増加させます</strong>。</p><p>高い想起率を達成することが重要で、検索速度があまり気にならない場合は、<code translate="no">reorder_k</code> を増やすことを検討してください。<code translate="no">limit</code> (TopK results to return)の2-5倍から始めるのがよいでしょう。</p><p>特に、精度が多少低下しても構わないようなシナリオでは、より高速な検索を優先するため、<code translate="no">reorder_k</code> を減らすことを検討してください。</p><p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[<em>limit</em>,<em>limit</em>* 5]。</p></td>
    </tr>
 </table>

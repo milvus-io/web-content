@@ -39,7 +39,7 @@ summary: このページでは、OpenAIのエンベッディングAPIを使っ�
     </button></h2><p>始める前に、OpenAIのAPIキーを用意するか、<a href="https://openai.com/index/openai-api/">OpenAIのウェブサイトから</a>取得してください。</p>
 <p>この例で使用するデータは本のタイトルです。データセットは<a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">ここから</a>ダウンロードでき、以下のコードを実行するのと同じディレクトリに置くことができる。</p>
 <p>まず、MilvusとOpenAIのパッケージをインストールする：</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus
+<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合は、インストールした依存関係を有効にするために、<strong>ランタイムを再起動する</strong>必要があるかもしれません。(画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択する）。</p>

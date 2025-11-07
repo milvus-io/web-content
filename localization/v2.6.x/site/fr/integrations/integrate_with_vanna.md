@@ -40,7 +40,7 @@ title: Ecrire du SQL avec Vanna et Milvus
         ></path>
       </svg>
     </button></h2><p>Avant d'exécuter ce notebook, assurez-vous que les dépendances suivantes sont installées :</p>
-<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span>
+<pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;vanna[milvus,openai]&quot;</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (Cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
@@ -280,7 +280,7 @@ training_data
       <th>1</th>
       <td>9f9df1b8-ae62-4823-ad28-d7e0f2d1f4c0-doc</td>
       <td>Aucun</td>
-      <td>ABC Corp se spécialise dans les technologies de pointe...</td>
+      <td>ABC Corp est spécialisée dans les technologies de pointe...</td>
     </tr>
   </tbody>
 </table>

@@ -41,7 +41,7 @@ summary: >-
     </button></h2><p>Prima di iniziare, assicuratevi di avere pronta la chiave API di OpenAI o di ottenerne una dal <a href="https://openai.com/index/openai-api/">sito web</a> di <a href="https://openai.com/index/openai-api/">OpenAI</a>.</p>
 <p>I dati utilizzati in questo esempio sono i titoli dei libri. È possibile scaricare il set di dati <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">qui</a> e metterlo nella stessa directory in cui si esegue il codice seguente.</p>
 <p>Per prima cosa, installare il pacchetto per Milvus e OpenAI:</p>
-<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus
+<pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate, potrebbe essere necessario <strong>riavviare il runtime</strong>. (Fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Riavvia sessione" dal menu a discesa).</p>

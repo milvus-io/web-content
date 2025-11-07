@@ -481,4 +481,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>在没有索引的情况下，对<code translate="no">TIMESTAMPTZ</code> 字段的查询默认会对所有行执行全扫描，这在大型数据集中可能会比较慢。要加速时间戳查询，请在<code translate="no">TIMESTAMPTZ</code> 字段上创建<code translate="no">STL_SORT</code> 索引。</p>
-<p>有关详细信息，请参阅<a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT</a>。</p>
+<p>有关详情，请参阅<a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT</a>。</p>

@@ -23,7 +23,7 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e LlamaIndex
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/llamaindex/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Questa guida mostra come costruire un sistema di Retrieval-Augmented Generation (RAG) utilizzando LlamaIndex e Milvus.</p>
-<p>Il sistema RAG combina un sistema di recupero con un modello generativo per generare nuovo testo in base a un prompt dato. Il sistema recupera prima i documenti rilevanti da un corpus utilizzando Milvus e poi utilizza un modello generativo per generare nuovo testo sulla base dei documenti recuperati.</p>
+<p>Il sistema RAG combina un sistema di recupero con un modello generativo per generare nuovo testo sulla base di un prompt dato. Il sistema recupera prima i documenti rilevanti da un corpus utilizzando Milvus e poi utilizza un modello generativo per generare nuovo testo sulla base dei documenti recuperati.</p>
 <p><a href="https://www.llamaindex.ai/">LlamaIndex</a> è un framework di dati semplice e flessibile per collegare fonti di dati personalizzate a grandi modelli linguistici (LLM). <a href="https://milvus.io/">Milvus</a> è il database vettoriale open-source più avanzato al mondo, costruito per alimentare le applicazioni di ricerca di similarità e di intelligenza artificiale.</p>
 <p>In questo quaderno mostreremo una rapida dimostrazione dell'uso di MilvusVectorStore.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
@@ -57,14 +57,14 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e LlamaIndex
         ></path>
       </svg>
     </button></h3><p>Gli snippet di codice di questa pagina richiedono le dipendenze pymilvus e llamaindex. È possibile installarle utilizzando i seguenti comandi:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span> milvus-lite
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong>. (Fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Riavvia sessione" dal menu a discesa).</p>
+<p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong>. (Fare clic sul menu "Runtime" nella parte superiore dello schermo e selezionare "Restart session" dal menu a discesa).</p>
 </div>
 <h3 id="Setup-OpenAI" class="common-anchor-header">Configurazione di OpenAI<button data-href="#Setup-OpenAI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -167,7 +167,7 @@ documents = SimpleDirectoryReader(
 <h4 id="basic-args" class="common-anchor-header">argomenti di base</h4><ul>
 <li><code translate="no">uri (str, optional)</code>: L'URI a cui connettersi, sotto forma di "https://address:port" per il servizio Milvus o Zilliz Cloud, o "path/to/local/milvus.db" per il Milvus locale lite. Il valore predefinito è "./milvus_llamaindex.db".</li>
 <li><code translate="no">token (str, optional)</code>: Il token per l'accesso. Vuoto se non si usa rbac, se si usa rbac sarà molto probabilmente "username:password".</li>
-<li><code translate="no">collection_name (str, optional)</code>: Il nome della raccolta in cui verranno memorizzati i dati. Il valore predefinito è "llamalection".</li>
+<li><code translate="no">collection_name (str, optional)</code>: Il nome della raccolta in cui saranno memorizzati i dati. Il valore predefinito è "llamalection".</li>
 <li><code translate="no">overwrite (bool, optional)</code>: Sovrascrivere o meno la raccolta esistente con lo stesso nome. L'impostazione predefinita è False.</li>
 </ul>
 <h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">campi scalari, compresi id doc e testo</h4><ul>
@@ -181,7 +181,7 @@ documents = SimpleDirectoryReader(
 <li><code translate="no">dim (int, optional)</code>: La dimensione dei vettori di incorporamento per la collezione. Richiesto quando si crea una nuova collezione con enable_sparse è False.</li>
 <li><code translate="no">embedding_field (str, optional)</code>: Il nome del campo di incorporamento denso per l'insieme, predefinito a DEFAULT_EMBEDDING_KEY.</li>
 <li><code translate="no">index_config (dict, optional)</code>: La configurazione usata per costruire l'indice di incorporamento denso. Per impostazione predefinita, Nessuno.</li>
-<li><code translate="no">search_config (dict, optional)</code>: Configurazione utilizzata per la ricerca nell'indice denso di Milvus. Si noti che deve essere compatibile con il tipo di indice specificato da <code translate="no">index_config</code>. Il valore predefinito è Nessuno.</li>
+<li><code translate="no">search_config (dict, optional)</code>: Configurazione utilizzata per la ricerca nell'indice denso di Milvus. Si noti che deve essere compatibile con il tipo di indice specificato da <code translate="no">index_config</code>. Valore predefinito: Nessuno.</li>
 <li><code translate="no">similarity_metric (str, optional)</code>: La metrica di somiglianza da utilizzare per l'incorporazione densa; attualmente supporta IP, COSINE e L2.</li>
 </ul>
 <h4 id="sparse-field" class="common-anchor-header">campo sparse</h4><ul>

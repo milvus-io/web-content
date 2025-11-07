@@ -63,7 +63,7 @@ title: >-
     </button></h2><h4 id="Vector-Database" class="common-anchor-header"><em>Векторная база данных</em></h4><p>Для этого приложения мы будем использовать <a href="https://milvus.io/">Milvus</a> для управления и поиска больших неструктурированных данных, таких как текст, изображения и видео.</p>
 <h4 id="LLM-Framework" class="common-anchor-header"><em>LLM Framework</em></h4><p>LlamaIndex - это фреймворк для оркестровки данных с открытым исходным кодом, который упрощает создание приложений с большими языковыми моделями (LLM), облегчая интеграцию частных данных с LLM, что позволяет создавать приложения для генеративного ИИ с контекстным дополнением с помощью конвейера Retrieval-Augmented Generation (RAG). Мы будем использовать LlamaIndex в этом учебном пособии, поскольку он предлагает хорошую гибкость и лучшие абстракции API нижнего уровня.</p>
 <h4 id="LLM-Output-Quality-Evaluation" class="common-anchor-header"><em>Оценка качества вывода LLM</em></h4><p><a href="https://www.aimon.ai">AIMon</a> предлагает собственные модели судейства для оценки галлюцинаций, качества контекста, соблюдения инструкций LLM, качества извлечения и других задач надежности LLM. Мы будем использовать AIMon для оценки качества LLM-приложения.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip3 install -U gdown requests aimon llama-index-core llama-index-vector-stores-milvus pymilvus&gt;=2.4.2 milvus-lite llama-index-postprocessor-aimon-rerank llama-index-embeddings-openai llama-index-llms-openai datasets fuzzywuzzy --quiet</span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Pre-requisites" class="common-anchor-header">Предварительные условия<button data-href="#Pre-requisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,17 +81,37 @@ title: >-
         ></path>
       </svg>
     </button></h1><ol>
-<li><p>Зарегистрируйтесь на <a href="https://docs.aimon.ai/quickstart">AIMon здесь</a>.</p>
-<p>Добавьте этот секрет в Секреты Colab (символ "ключ" на левой панели) Если вы работаете в другой среде, не связанной с Google Colab, пожалуйста, замените код, связанный с Google Colab, самостоятельно</p>
+<li>Зарегистрируйтесь на <a href="https://docs.aimon.ai/quickstart">AIMon здесь</a>.</li>
+</ol>
+<p>Добавьте этот секрет в Секреты Колаба (символ "ключ" на левой панели).</p>
+<blockquote>
+<p>Если вы работаете в другой среде, не связанной с Google Colab, пожалуйста, замените код, связанный с Google Colab, самостоятельно</p>
+</blockquote>
 <ul>
 <li>AIMON_API_KEY</li>
-</ul></li>
-<li><p>Зарегистрируйте <a href="https://platform.openai.com/docs/overview">аккаунт OpenAI здесь</a> и добавьте следующий ключ в секреты Colab:</p>
+</ul>
+<ol start="2">
+<li>Зарегистрируйте <a href="https://platform.openai.com/docs/overview">аккаунт OpenAI здесь</a> и добавьте следующий ключ в секреты Colab:</li>
+</ol>
 <ul>
 <li>OPENAI_API_KEY</li>
-</ul></li>
-</ol>
-<h3 id="Required-API-keys" class="common-anchor-header">Необходимые ключи API</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
+</ul>
+<h3 id="Required-API-keys" class="common-anchor-header">Необходимые ключи API<button data-href="#Required-API-keys" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Check if the secrets are accessible</span>
 <span class="hljs-keyword">from</span> google.colab <span class="hljs-keyword">import</span> userdata
@@ -246,7 +266,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">3864.124031007752
 </code></pre>
-<h3 id="Analysis" class="common-anchor-header">Анализ</h3><p>У нас есть 258 стенограмм с общим количеством лексем около 1 млн во всех стенограммах. В среднем на одну стенограмму приходится 3864 лексемы.</p>
+<h3 id="Analysis" class="common-anchor-header">Анализ<button data-href="#Analysis" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>У нас есть 258 стенограмм с общим количеством лексем около 1 млн во всех стенограммах. В среднем на одну стенограмму приходится 3864 лексемы.</p>
 <table>
 <thead>
 <tr><th>Метрика</th><th>Значение</th></tr>
@@ -257,7 +292,22 @@ statistics.mean(<span class="hljs-built_in">len</span>(example[<span class="hljs
 <tr><td>Среднее значение. # Количество лексем на транскрипт</td><td>3864</td></tr>
 </tbody>
 </table>
-<h3 id="Queries" class="common-anchor-header">Запросы</h3><p>Ниже приведены 12 запросов, которые мы выполним на транскрипте выше</p>
+<h3 id="Queries" class="common-anchor-header">Запросы<button data-href="#Queries" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ниже приведены 12 запросов, которые мы выполним на транскрипте выше</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 queries_df = pd.read_csv(<span class="hljs-string">&quot;/content/score_metrics_relevant_examples_2.csv&quot;</span>)
@@ -938,13 +988,25 @@ df_scores.loc[<span class="hljs-number">0</span>, <span class="hljs-string">&quo
 
 df_scores
 <button class="copy-code-btn"></button></code></pre>
+  <div id="df-c43e3124-8331-40e6-97e4-b2d026a0ed70" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }<pre><code translate="no">.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>Подход</th>
-      <th>Оценка качества</th>
-      <th>Оценка релевантности при извлечении</th>
+      <th>Балл качества</th>
+      <th>Балл релевантности поиска</th>
       <th>Увеличение показателя качества (%)</th>
       <th>Увеличение показателя релевантности поиска (%)</th>
     </tr>
@@ -977,4 +1039,4 @@ df_scores
   </tbody>
 </table>
 <p>В таблице выше приведены наши результаты. Реальные цифры будут зависеть от различных факторов, таких как вариации качества ответов LLM, производительность поиска ближайших соседей в VectorDB и т. д.</p>
-<p>В заключение, как показано на рисунке ниже, мы оценили качество, релевантность RAG и возможности вашего приложения LLM по выполнению инструкций. Мы использовали реранкер AIMon для улучшения общего качества приложения и средней релевантности документов, полученных из RAG.</p>
+<p>В заключение, как показано на рисунке ниже, мы оценили качество, релевантность RAG и возможности вашего приложения LLM по выполнению инструкций. Мы использовали реранжировщик AIMon для улучшения общего качества приложения и средней релевантности документов, полученных из RAG.</p>

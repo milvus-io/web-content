@@ -23,7 +23,7 @@ title: Evaluación con DeepEval
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_deepeval.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_deepeval.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Esta guía muestra cómo utilizar <a href="https://docs.confident-ai.com/">DeepEval</a> para evaluar un sistema de generación mejorada por recuperación (RAG) basado en <a href="https://milvus.io/">Milvus</a>.</p>
-<p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar texto nuevo basado en una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
+<p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar nuevo texto basado en una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
 <p>DeepEval es un marco de trabajo que le ayuda a evaluar sus procesos GAR. Existen herramientas y marcos de trabajo que ayudan a construir estos pipelines, pero evaluarlos y cuantificar su rendimiento puede ser difícil. Aquí es donde entra DeepEval.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ title: Evaluación con DeepEval
         ></path>
       </svg>
     </button></h2><p>Antes de ejecutar este cuaderno, asegúrate de tener instaladas las siguientes dependencias:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
+<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si estás utilizando Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla, y selecciona "Reiniciar sesión" en el menú desplegable).</p>
@@ -299,7 +299,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
       <th>1</th>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
       <td>[CMake &amp; Conan\nLa biblioteca de algoritmos de Mil...</td>
-      <td>El lenguaje de programación utilizado para escribir Knowher...</td>
+      <td>¿Cuál es el lenguaje de programación utilizado...</td>
       <td>¿Cuál es el lenguaje de programación utilizado...</td>
     </tr>
     <tr>
