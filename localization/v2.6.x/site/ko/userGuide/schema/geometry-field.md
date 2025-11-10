@@ -29,7 +29,7 @@ beta: Milvus 2.6.4+
 <li><p>지도 및 물류: "한 지역 <strong>내의</strong> 자산" 또는 "경로와 <strong>교차하는</strong> 경로"</p></li>
 </ul>
 <div class="alert note">
-<p>지오메트리 필드에는 PyMilvus 2.7.0rc46 이상이 필요합니다. 이 버전은 현재 소스에서 빌드해야만 사용할 수 있습니다. 자세한 내용은 <a href="https://github.com/milvus-io/pymilvus#faq">소스에서 PyMilvus를 빌드하는 방법을</a> 참조하세요.</p>
+<p>지오메트리 필드를 사용하려면 SDK를 최신 버전으로 업그레이드하세요.</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">지오메트리 필드란 무엇인가요?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +46,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>지오메트리 필드는 기하학적 데이터를 저장하는 Milvus의 스키마 정의 데이터 유형(<code translate="no">DataType.GEOMETRY</code>)입니다. 기하학 필드로 작업할 때는 데이터 삽입과 쿼리 모두에 사용되는 사람이 읽을 수 있는 표현인 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT(잘 알려진 텍스트)</a> 형식을 사용하여 데이터와 상호 작용합니다. 내부적으로 Milvus는 효율적인 저장 및 처리를 위해 WKT를 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">잘 알려진 바이너리(WKB)</a> 로 변환하지만, 사용자가 직접 WKB를 처리할 필요는 없습니다.</p>
+    </button></h2><p>지오메트리 필드는 기하학적 데이터를 저장하는 Milvus의 스키마 정의 데이터 유형(<code translate="no">DataType.GEOMETRY</code>)입니다. 기하학 필드로 작업할 때는 데이터 삽입과 쿼리 모두에 사용되는 사람이 읽을 수 있는 표현인 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">잘 알려진 텍스트(WKT)</a> 형식을 사용하여 데이터와 상호 작용합니다. 내부적으로 Milvus는 효율적인 저장 및 처리를 위해 WKT를 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">잘 알려진 바이너리(WKB)</a> 로 변환하지만, 사용자가 직접 WKB를 처리할 필요는 없습니다.</p>
 <p><code translate="no">GEOMETRY</code> 데이터 유형은 다음과 같은 기하학적 객체를 지원합니다:</p>
 <ul>
 <li><p><strong>포인트</strong>: <code translate="no">POINT (x y)</code>; 예: <code translate="no">POINT (13.403683 52.520711)</code>, 여기서 <code translate="no">x</code> = 경도, <code translate="no">y</code> = 위도</p></li>
@@ -347,17 +347,20 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>이러한 요구 사항이 충족되면 전용 기하학 연산자가 포함된 표현식을 사용하여 기하학 값을 기반으로 컬렉션을 필터링할 수 있습니다.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">필터 표현식 정의하기</h4><p><code translate="no">GEOMETRY</code> 필드를 필터링하려면 다음 표현식 형식의 지오메트리 전용 연산자를 사용합니다: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code> 여기서</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">필터 표현식 정의하기</h4><p><code translate="no">GEOMETRY</code> 필드를 필터링하려면 표현식에 기하 도형 연산자를 사용합니다:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> 는 지원되는 도형 연산자입니다(예: <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). 사용 가능한 연산자의 전체 목록은 도형 <a href="/docs/ko/geometry-operators.md">연산자를</a> 참조하십시오.</p></li>
-<li><p><code translate="no">geo_field</code> 컬렉션 스키마에 정의된 <code translate="no">GEOMETRY</code> 필드의 이름입니다.</p></li>
-<li><p><code translate="no">'{wkt}'</code> 는 필터링하려는 지오메트리 객체를 나타내는 WKT 문자열입니다.</p></li>
+<li><p>일반: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>거리 기반: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p><code translate="no">ST_DWITHIN</code> 와 같은 일부 연산자에는 추가 매개 변수가 필요할 수 있습니다. 각 연산자에 대한 자세한 내용과 사용 예는 <a href="/docs/ko/geometry-operators.md">지오메트리 연산자를</a> 참조하십시오.</p>
-</div>
-<p>다음 예에서는 필터 표현식에서 다양한 도형 관련 연산자를 사용하는 방법을 보여줍니다:</p>
-<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">예 1: 직사각형 영역 내에서 엔티티 찾기</h4><div class="multipleCode">
+<p>Where:</p>
+<ul>
+<li><p><code translate="no">operator</code> 는 지원되는 기하 도형 연산자 중 하나입니다(예: <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). 연산자 이름은 모두 대문자 또는 모두 소문자여야 합니다. 지원되는 연산자 목록은 <a href="/docs/ko/geometry-operators.md#Supported-geometry-operators">지원되는 지오메트리 연산자를</a> 참조하십시오.</p></li>
+<li><p><code translate="no">geo_field</code> 는 <code translate="no">GEOMETRY</code> 필드의 이름입니다.</p></li>
+<li><p><code translate="no">'{wkt}'</code> 는 쿼리할 지오메트리의 WKT 표현입니다.</p></li>
+<li><p><code translate="no">distance</code> 는 <code translate="no">ST_DWITHIN</code> 에 대한 임계값입니다.</p></li>
+</ul>
+<p>다음 예에서는 필터 표현식에서 다양한 도형 관련 연산자를 사용하는 방법을 보여 줍니다:</p>
+<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">예제 1: 예 1: 직사각형 영역 내의 엔티티 찾기</h4><div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 bottom_right_lon, bottom_right_lat = <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>

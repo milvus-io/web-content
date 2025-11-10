@@ -1,9 +1,10 @@
 ---
 id: geometry-operators.md
-title: 几何操作符
+title: 几何操作符Compatible with Milvus 2.6.4+
 summary: Milvus 支持对几何字段进行空间过滤的一系列操作符，这些操作符对于管理和分析几何数据至关重要。通过这些操作符，可以根据对象之间的几何关系检索实体。
+beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Operators" class="common-anchor-header">几何操作符<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
+<h1 id="Geometry-Operators" class="common-anchor-header">几何操作符<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +20,34 @@ summary: Milvus 支持对几何字段进行空间过滤的一系列操作符，�
         ></path>
       </svg>
     </button></h1><p>Milvus 支持对<code translate="no">GEOMETRY</code> 字段进行空间过滤的一系列操作符，这对于管理和分析几何数据至关重要。这些操作符允许您根据对象之间的几何关系检索实体。</p>
-<p>所有几何操作符都需要两个几何参数：Collection schema 中定义的<code translate="no">GEOMETRY</code> <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">字段名</a>和以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a>(WKT) 格式表示的目标几何对象。</p>
+<p>所有几何操作符都通过接收两个几何参数来操作：<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Collection</a>schema 中定义的<code translate="no">GEOMETRY</code> <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">字段名</a>和以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a>(WKT) 格式表示的目标几何对象。</p>
+<h2 id="Use-syntax" class="common-anchor-header">使用语法<button data-href="#Use-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>要对<code translate="no">GEOMETRY</code> 字段进行筛选，请在表达式中使用几何操作符：</p>
+<ul>
+<li><p>一般：<code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>基于距离：<code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
+</ul>
+<p>其中</p>
+<ul>
+<li><p><code translate="no">operator</code> 是支持的几何操作符之一（如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code> ）。操作符名称必须全部大写或小写。有关支持的操作符列表，请参阅<a href="/docs/zh/geometry-operators.md#Supported-geometry-operators">支持的几何图形操作符</a>。</p></li>
+<li><p><code translate="no">geo_field</code> 是<code translate="no">GEOMETRY</code> 字段的名称。</p></li>
+<li><p><code translate="no">'{wkt}'</code> 是要查询的几何体的 WKT 表示形式。</p></li>
+<li><p><code translate="no">distance</code> 是专门用于<code translate="no">ST_DWITHIN</code> 的阈值。</p></li>
+</ul>
 <p>要了解有关 Milvus 中<code translate="no">GEOMETRY</code> 字段的更多信息，请参阅<a href="/docs/zh/geometry-field.md">几何字段</a>。</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">支持的几何操作符<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -125,7 +153,7 @@ summary: Milvus 支持对几何字段进行空间过滤的一系列操作符，�
       </svg>
     </button></h2><p>如果第一个几何体完全包含第二个几何体，则<code translate="no">ST_CONTAINS</code> 操作符返回 TRUE。这对于查找多边形中的点或较大多边形中的较小多边形非常有用。</p>
 <p><strong>示例</strong></p>
-<p>假设您有一个城市区域 Collections，并希望找到一个特定的兴趣点（如餐馆），该兴趣点位于给定区域的边界内。</p>
+<p>想象一下，您有一个城市区域 Collections，并希望找到一个特定的兴趣点（如餐馆），该兴趣点位于给定区域的边界内。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries completely within a specific polygon.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_CONTAINS(geo_field, &#x27;POLYGON ((0 0, 10 0, 10 10, 0 10, 0 0))&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

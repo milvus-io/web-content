@@ -26,13 +26,13 @@ beta: Milvus 2.6.4+
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
     &#x27;title&#x27;<span class="hljs-punctuation">:</span> &#x27;Walden&#x27;<span class="hljs-punctuation">,</span>
-    &#x27;title_vector&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.5</span><span class="hljs-punctuation">]</span>
+    &#x27;title_vector&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.5</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
     &#x27;author&#x27;<span class="hljs-punctuation">:</span> &#x27;Henry David Thoreau&#x27;<span class="hljs-punctuation">,</span>
     &#x27;year_of_publication&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">1845</span><span class="hljs-punctuation">,</span>
 <span class="highlighted-comment-line">    &#x27;chunks&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span></span>
 <span class="highlighted-comment-line">        <span class="hljs-punctuation">{</span></span>
 <span class="highlighted-comment-line">            &#x27;text&#x27;<span class="hljs-punctuation">:</span> &#x27;When I wrote the following pages<span class="hljs-punctuation">,</span> or rather the bulk of them...&#x27;<span class="hljs-punctuation">,</span></span>
-<span class="highlighted-comment-line">            &#x27;text_vector&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.5</span><span class="hljs-punctuation">]</span></span>
+<span class="highlighted-comment-line">            &#x27;text_vector&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.5</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></span>
 <span class="highlighted-comment-line">            &#x27;chapter&#x27;<span class="hljs-punctuation">:</span> &#x27;Economy&#x27;<span class="hljs-punctuation">,</span></span>
 <span class="highlighted-comment-line">        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></span>
 <span class="highlighted-comment-line">        <span class="hljs-punctuation">{</span></span>
@@ -97,8 +97,8 @@ beta: Milvus 2.6.4+
 <li><p><strong>함수</strong></p>
 <p>함수를 사용하여 구조체 내의 스칼라 필드에서 벡터 필드를 파생할 수 없습니다.</p></li>
 <li><p><strong>인덱스 유형 및 메트릭 유형</strong></p>
-<p>컬렉션의 모든 벡터 필드는 색인화되어야 합니다. 구조체 배열 필드 내의 벡터 필드를 색인하기 위해 Milvus는 임베딩 목록을 사용하여 각 구조체 요소의 벡터 임베딩을 구성하고 전체 임베딩 목록을 전체적으로 색인합니다.</p>
-<p>인덱스 유형으로 <code translate="no">HNSW</code> 및 아래 나열된 메트릭 유형을 사용하여 구조체 배열 필드에 있는 임베딩 목록에 대한 인덱스를 작성할 수 있습니다.</p>
+<p>컬렉션의 모든 벡터 필드는 색인화되어야 합니다. 구조체 배열 필드 내의 벡터 필드를 인덱싱하기 위해 Milvus는 임베딩 목록을 사용하여 각 구조체 요소의 벡터 임베딩을 구성하고 전체 임베딩 목록을 전체적으로 인덱싱합니다.</p>
+<p><code translate="no">AUTOINDEX</code> 또는 <code translate="no">HNSW</code> 을 인덱스 유형으로 사용하고 아래 나열된 메트릭 유형을 사용하여 구조체 배열 필드에 있는 임베딩 목록에 대한 인덱스를 만들 수 있습니다.</p>
 <p><table>
 <tr>
 <th><p>인덱스 유형</p></th>
@@ -106,22 +106,15 @@ beta: Milvus 2.6.4+
 <th><p>설명</p></th>
 </tr>
 <tr>
-<td rowspan="5"><p><code translate="no">HNSW</code></p></td>
+<td rowspan="3"><p><code translate="no">AUTOINDEX</code> (또는 <code translate="no">HNSW</code>)</p></td>
 <td><p><code translate="no">MAX_SIM_COSINE</code></p></td>
-<td rowspan="3"><p>다음 유형의 임베딩 목록에 사용됩니다:</p><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BFLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
+<td rowspan="3"><p>다음 유형의 임베딩 목록의 경우:</p><ul><li>FLOAT_VECTOR</li></ul></td>
 </tr>
 <tr>
 <td><p><code translate="no">MAX_SIM_IP</code></p></td>
 </tr>
 <tr>
 <td><p><code translate="no">MAX_SIM_L2</code></p></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_HAMMING</code></p></td>
-<td rowspan="2"><p>바이너리_벡터 타입의 임베딩 리스트의 경우</p></td>
-</tr>
-<tr>
-<td><p><code translate="no">MAX_SIM_JACCARD</code></p></td>
 </tr>
 </table></p>
 <p>구조체 배열 필드의 스칼라 필드는 인덱스를 지원하지 않습니다.</p></li>
@@ -190,7 +183,61 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
+
+<span class="hljs-keyword">const</span> schema = [
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">INT64</span>,
+    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">auto_id</span>: <span class="hljs-literal">true</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;title&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;author&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;year_of_publication&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">INT64</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;title_vector&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FLOAT_VECTOR</span>,
+    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>,
+  },
+<span class="highlighted-comment-line">  {</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;chunks&quot;</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">ARRAY</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">element_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">STRUCT</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">fields</span>: [</span>
+<span class="highlighted-comment-line">      {</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">max_length</span>: <span class="hljs-number">65535</span>,</span>
+<span class="highlighted-comment-line">      },</span>
+<span class="highlighted-comment-line">      {</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;chapter&quot;</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,</span>
+<span class="highlighted-comment-line">      },</span>
+<span class="highlighted-comment-line">      {</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_vector&quot;</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FLOAT_VECTOR</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>,</span>
+<span class="highlighted-comment-line">        <span class="hljs-attr">mmap_enabled</span>: <span class="hljs-literal">true</span>,</span>
+<span class="highlighted-comment-line">      },</span>
+<span class="highlighted-comment-line">    ],</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">max_capacity</span>: <span class="hljs-number">1000</span>,</span>
+<span class="highlighted-comment-line">  },</span>
+];
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -212,7 +259,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
       </svg>
     </button></h2><p>컬렉션의 벡터 필드와 Struct 요소에 정의된 벡터 필드를 포함한 모든 벡터 필드에 대해 인덱싱은 필수입니다.</p>
 <p>적용 가능한 인덱스 매개변수는 사용 중인 인덱스 유형에 따라 다릅니다. 적용 가능한 인덱스 매개변수에 대한 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명</a> 및 선택한 인덱스 유형에 해당하는 문서 페이지를 참조하세요.</p>
-<p>임베딩 목록 필드를 인덱싱하려면 해당 인덱스 유형을 <code translate="no">HNSW</code> 로 설정하고 Milvus의 메트릭 유형으로 <code translate="no">MAX_SIM_COSINE</code> 을 사용하여 임베딩 목록 간의 유사성을 측정해야 합니다.</p>
+<p>임베딩 목록을 색인하려면 해당 인덱스 유형을 <code translate="no">AUTOINDEX</code> 또는 <code translate="no">HNSW</code> 로 설정하고, 임베딩 목록 간의 유사성을 측정하기 위한 Milvus의 메트릭 유형으로 <code translate="no">MAX_SIM_COSINE</code> 을 사용해야 합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
@@ -221,27 +268,38 @@ index_params = MilvusClient.prepare_index_params()
 <span class="hljs-comment"># Create an index for the vector field in the collection</span>
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;title_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
-    params={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span>}
 )
 
 <span class="highlighted-comment-line"><span class="hljs-comment"># Create an index for the vector field in the element Struct</span></span>
 <span class="highlighted-comment-line">index_params.add_index(</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,</span>
-<span class="highlighted-comment-line">    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,</span>
+<span class="highlighted-comment-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,</span>
 <span class="highlighted-comment-line">    metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>,</span>
-<span class="highlighted-comment-line">    params={</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span></span>
-<span class="highlighted-comment-line">    }</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+  <span class="hljs-attr">fields</span>: schema,
+});
+
+<span class="hljs-keyword">const</span> indexParams = [
+  {
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;title_vector&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;L2&quot;</span>,
+  },
+<span class="highlighted-comment-line">  {</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,</span>
+<span class="highlighted-comment-line">    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>,</span>
+<span class="highlighted-comment-line">  },</span>
+];
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -263,7 +321,12 @@ index_params.add_index(
     </button></h2><p>스키마와 인덱스가 준비되면 구조체 배열 필드를 포함하는 컬렉션을 만들 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.create_collection(
+<pre><code translate="no" class="language-python">client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
@@ -273,7 +336,11 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+  <span class="hljs-attr">fields</span>: schema,
+  <span class="hljs-attr">indexes</span>: indexParams,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -297,15 +364,14 @@ index_params.add_index(
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample data</span>
 data = {
-    <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;Walden&#x27;</span>,
-    <span class="hljs-string">&#x27;title_vector&#x27;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]
+    <span class="hljs-string">&#x27;title_vector&#x27;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>],
     <span class="hljs-string">&#x27;author&#x27;</span>: <span class="hljs-string">&#x27;Henry David Thoreau&#x27;</span>,
-    <span class="hljs-string">&#x27;year-of-publication&#x27;</span>: <span class="hljs-number">1845</span>,
+    <span class="hljs-string">&#x27;year_of_publication&#x27;</span>: <span class="hljs-number">1845</span>,
     <span class="hljs-string">&#x27;chunks&#x27;</span>: [
         {
             <span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;When I wrote the following pages, or rather the bulk of them...&#x27;</span>,
-            <span class="hljs-string">&#x27;text_vector&#x27;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span>]
+            <span class="hljs-string">&#x27;text_vector&#x27;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span>],
             <span class="hljs-string">&#x27;chapter&#x27;</span>: <span class="hljs-string">&#x27;Economy&#x27;</span>,
         },
         {
@@ -326,7 +392,31 @@ client.insert(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Node.js</span>
+<pre><code translate="no" class="language-javascript">  {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Walden&quot;</span>,
+    <span class="hljs-attr">title_vector</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>],
+    <span class="hljs-attr">author</span>: <span class="hljs-string">&quot;Henry David Thoreau&quot;</span>,
+    <span class="hljs-string">&quot;year-of-publication&quot;</span>: <span class="hljs-number">1845</span>,
+    <span class="hljs-attr">chunks</span>: [
+      {
+        <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;When I wrote the following pages, or rather the bulk of them...&quot;</span>,
+        <span class="hljs-attr">text_vector</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span>],
+        <span class="hljs-attr">chapter</span>: <span class="hljs-string">&quot;Economy&quot;</span>,
+      },
+      {
+        <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;I would fain say something, not so much concerning the Chinese and...&quot;</span>,
+        <span class="hljs-attr">text_vector</span>: [<span class="hljs-number">0.7</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>],
+        <span class="hljs-attr">chapter</span>: <span class="hljs-string">&quot;Economy&quot;</span>,
+      },
+    ],
+  },
+];
+
+<span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">insert</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+  <span class="hljs-attr">data</span>: data,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -407,6 +497,9 @@ TEXT_SNIPPETS = [
 
 <span class="hljs-comment"># Generate 1000 records</span>
 data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>)]
+
+<span class="hljs-comment"># Insert the generated data</span>
+client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <h2 id="Vector-search-against-an-Array-of-Structs-field" class="common-anchor-header">구조체 배열 필드에 대한 벡터 검색<button data-href="#Vector-search-against-an-Array-of-Structs-field" class="anchor-icon" translate="no">
@@ -425,14 +518,14 @@ data = [generate_record(i) <span class="hljs-keyword">for</span> i <span class="
         ></path>
       </svg>
     </button></h2><p>컬렉션의 벡터 필드와 구조체 배열에서 벡터 검색을 수행할 수 있습니다.</p>
-<p>특히 검색 요청의 <code translate="no">anns_field</code> 매개변수 값으로 Struct 요소 내의 벡터 필드 이름을 직접 사용할 수 있으며, <code translate="no">EmbeddingList</code> 을 사용하여 쿼리 벡터를 깔끔하게 정리할 수 있습니다.</p>
+<p>구체적으로, 검색 요청의 <code translate="no">anns_field</code> 매개변수 값으로 구조체 배열 필드 이름과 구조체 요소 내의 대상 벡터 필드 이름을 연결하고 <code translate="no">EmbeddingList</code> 을 사용하여 쿼리 벡터를 깔끔하게 정리해야 합니다.</p>
 <div class="alert note">
-<p>밀버스는 구조체 배열의 임베딩 목록에 대한 검색 쿼리 벡터를 보다 깔끔하게 구성할 수 있도록 <code translate="no">EmbeddingList</code> 을 제공합니다.</p>
-<p>단, <code translate="no">EmbeddingList</code> 은 <code translate="no">search_iterator()</code> 요청은 물론 범위 검색이나 검색 매개변수 그룹화 없이 <code translate="no">search()</code> 요청에만 사용할 수 있습니다.</p>
+<p>Milvus는 구조체 배열의 임베딩 목록에 대한 검색 쿼리 벡터를 보다 깔끔하게 정리할 수 있도록 <code translate="no">EmbeddingList</code> 을 제공합니다. 각 <code translate="no">EmbeddingList</code> 은 최소한 벡터 임베딩을 포함하며, 그 대가로 여러 개의 topK 엔티티를 기대합니다.</p>
+<p>그러나 <code translate="no">EmbeddingList</code> 은 범위 검색이나 그룹화 검색 매개변수 없이 <code translate="no">search()</code> 요청에만 사용할 수 있으며 <code translate="no">search_iterator()</code> 요청에는 사용할 수 없습니다.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> EmbeddingList
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.embedding_list <span class="hljs-keyword">import</span> EmbeddingList
 
 <span class="hljs-comment"># each query embedding list triggers a single search</span>
 embeddingList1 = EmbeddingList()
@@ -456,7 +549,20 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> embeddingList1 = [[<span class="hljs-number">0.2</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">0.4</span>, -<span class="hljs-number">0.3</span>, <span class="hljs-number">0.2</span>]];
+<span class="hljs-keyword">const</span> embeddingList2 = [
+  [-<span class="hljs-number">0.2</span>, -<span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.9</span>],
+  [-<span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.2</span>],
+];
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+  <span class="hljs-attr">data</span>: embeddingList1,
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,
+  <span class="hljs-attr">search_params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span> },
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;chunks[text]&quot;</span>],
+});
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -525,11 +631,18 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results2 = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+  <span class="hljs-attr">data</span>: [embeddingList1, embeddingList2],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;chunks[text_vector]&quot;</span>,
+  <span class="hljs-attr">search_params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span> },
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;chunks[text]&quot;</span>],
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>출력은 각 임베딩 목록에 대해 가장 유사한 3개 엔티티의 목록입니다.</p>
+<p>출력은 각 임베딩 목록에 대해 가장 유사한 세 개의 엔티티 목록입니다.</p>
 <p><details></p>
 <p><summary>출력</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># [</span>

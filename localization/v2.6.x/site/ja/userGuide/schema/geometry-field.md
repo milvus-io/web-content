@@ -25,10 +25,10 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>ロケーションベースサービス（LBS）："この街<strong>区内で</strong>類似のPOIを見つける"</p></li>
 <li><p>マルチモーダル検索：「この地点から<strong>1km以内の</strong>類似写真を検索する。</p></li>
-<li><p>地図と物流："地域<strong>内の</strong>資産 "や "<strong>経路と交差する</strong>ルート"</p></li>
+<li><p>地図と物流："地域<strong>内の</strong>資産 "または "パスに<strong>交差する</strong>ルート"</p></li>
 </ul>
 <div class="alert note">
-<p>GEOMETRYフィールドにはPyMilvus 2.7.0rc46以降が必要です。このバージョンは現在ソースからビルドすることでのみ利用可能です。手順については<a href="https://github.com/milvus-io/pymilvus#faq">PyMilvus をソースからビルドする方法</a> を参照してください。</p>
+<p>GEOMETRYフィールドを使用するには、SDKを最新バージョンにアップグレードしてください。</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">GEOMETRYフィールドとは何ですか？<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GEOMETRYフィールドとは、Milvusのスキーマ定義データタイプ(<code translate="no">DataType.GEOMETRY</code>)の一つで、幾何データを格納するフィールドです。ジオメトリ フィールドを扱う際には、<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>フォーマットを使用してデータを扱います。Milvusは内部的にWKTを<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">WKB(Well-Known Binary)</a>に変換して効率的な保存と処理を行っていますが、WKBを直接扱う必要はありません。</p>
+    </button></h2><p>GEOMETRYフィールドとは、Milvusのスキーマ定義データタイプ(<code translate="no">DataType.GEOMETRY</code>)の一つで、ジオメトリデータを格納するフィールドです。ジオメトリ フィールドを扱う場合、データの挿入とクエリの両方に使用される人間が読める表現である<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>フォーマットを使用してデータを操作します。Milvusは内部的にWKTを<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">WKB(Well-Known Binary)</a>に変換して効率的な保存と処理を行っていますが、WKBを直接扱う必要はありません。</p>
 <p><code translate="no">GEOMETRY</code> データ型は以下の幾何学オブジェクトをサポートしています：</p>
 <ul>
 <li><p><strong>POINT</strong>:<code translate="no">POINT (x y)</code>; たとえば、<code translate="no">POINT (13.403683 52.520711)</code> （<code translate="no">x</code> = 経度、<code translate="no">y</code> = 緯度）。</p></li>
@@ -346,17 +346,20 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>これらの要件が満たされたら、専用のジオメトリ演算子を持つ式を使用して、ジオメトリ値に基づいてコレクションをフィルタリングできます。</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">フィルタ式の定義</h4><p><code translate="no">GEOMETRY</code> フィールドでフィルタリングするには、以下の式形式でジオメトリ専用の演算子を使用します：<code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>ここで</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">フィルタ式の定義</h4><p><code translate="no">GEOMETRY</code> フィールドでフィルタするには、式の中でジオメトリ演算子を使用します：</p>
 <ul>
-<li><p><code translate="no">{operator}</code> はサポートされているジオメトリ演算子（例：<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code> ）。使用可能な演算子の一覧は、「<a href="/docs/ja/geometry-operators.md">ジオメトリ演算子</a>」を参照。</p></li>
-<li><p><code translate="no">geo_field</code> は、コレクションスキーマで定義されている<code translate="no">GEOMETRY</code> フィールド名です。</p></li>
-<li><p><code translate="no">'{wkt}'</code> は、フィルタするジオメトリオブジェクトを表す WKT 文字列です。</p></li>
+<li><p>一般：<code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>距離ベース：<code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p><code translate="no">ST_DWITHIN</code> など、一部の演算子には追加のパラメータが必要な場合があります。各演算子の詳細と使用例については、<a href="/docs/ja/geometry-operators.md">ジオメトリ演算</a>子を参照してください。</p>
-</div>
-<p>以下の例では、さまざまなジオメトリ固有の演算子をフィルタ式で使用する方法を示します：</p>
-<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">例 1：例 1：矩形領域内のエンティティを検索する</h4><div class="multipleCode">
+<p>ここで</p>
+<ul>
+<li><p><code translate="no">operator</code> は、サポートされているジオメトリ演算子の 1 つです（例：<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code> ）。演算子名はすべて大文字またはすべて小文字にする必要があります。サポートされている演算子のリストについては、「<a href="/docs/ja/geometry-operators.md#Supported-geometry-operators">サポートされているジオメトリ演算子</a>」を参照してください。</p></li>
+<li><p><code translate="no">geo_field</code> は<code translate="no">GEOMETRY</code> フィールドの名前です。</p></li>
+<li><p><code translate="no">'{wkt}'</code> は、クエリするジオメトリの WKT 表現です。</p></li>
+<li><p><code translate="no">distance</code> は、<code translate="no">ST_DWITHIN</code> 用の閾値です。</p></li>
+</ul>
+<p>以下の例では、ジオメトリ固有の演算子をフィルタ式で使用する方法を示します：</p>
+<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">例 1：矩形領域内のエンティティを検索する</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 bottom_right_lon, bottom_right_lat = <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>

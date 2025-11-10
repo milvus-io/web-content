@@ -90,7 +90,7 @@ title: Gestire i gruppi di risorse
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.6.2. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
+<p>Tutti gli esempi di codice in questa pagina sono in PyMilvus 2.6.3. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
 </div>
 <ol>
 <li><p>Creare un gruppo di risorse.</p>
@@ -160,7 +160,7 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 <span class="hljs-comment"># After a while, succeeded in moving 1 node(s) from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Caricare collezioni e partizioni in un gruppo di risorse.</p>
-<p>Una volta che ci sono nodi di query in un gruppo di risorse, è possibile caricare collezioni in questo gruppo di risorse. Il seguente snippet presuppone che esista già una raccolta chiamata <code translate="no">demo</code>.</p>
+<p>Una volta che ci sono nodi di query in un gruppo di risorse, è possibile caricare collezioni in questo gruppo di risorse. Il seguente snippet presuppone che esista già una raccolta denominata <code translate="no">demo</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
 
 collection_name = <span class="hljs-string">&quot;demo&quot;</span>

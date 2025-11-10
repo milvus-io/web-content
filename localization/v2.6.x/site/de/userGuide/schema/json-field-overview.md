@@ -93,7 +93,7 @@ summary: >-
    <tr>
      <td><p>Schema-Definition</p></td>
      <td><p>Ein skalares Feld, das explizit im Auflistungsschema mit dem Typ <code translate="no">DataType.JSON</code> deklariert werden muss.</p></td>
-     <td><p>Ein verborgenes JSON-Feld (mit dem Namen <code translate="no">#meta</code>), das nicht deklarierte Felder automatisch speichert.</p></td>
+     <td><p>Ein verstecktes JSON-Feld (mit dem Namen <code translate="no">$meta</code>), das nicht deklarierte Felder automatisch speichert.</p></td>
    </tr>
    <tr>
      <td><p>Anwendungsfall</p></td>
@@ -108,7 +108,7 @@ summary: >-
    <tr>
      <td><p>Abfragen</p></td>
      <td><p>Abfrage über Ihren Feldnamen oder Zielschlüssel innerhalb des JSON-Feldes: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Direkte Abfrage über den dynamischen Feldschlüssel: <code translate="no">"dynamic_key"</code> oder über <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Direkte Abfrage über den dynamischen Feldschlüssel: <code translate="no">"dynamic_key"</code> oder über <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Grundlegende Operationen<button data-href="#Basic-operations" class="anchor-icon" translate="no">

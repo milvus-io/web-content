@@ -29,10 +29,10 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>Serviço de base de localização (LBS): "encontrar POIs semelhantes <strong>dentro</strong> deste quarteirão"</p></li>
 <li><p>Pesquisa multimodal: "encontrar fotografias semelhantes <strong>num</strong> raio <strong>de 1 km</strong> deste ponto"</p></li>
-<li><p>Mapas e logística: "bens <strong>dentro de</strong> uma região" ou "rotas <strong>que intersectam</strong> um caminho"</p></li>
+<li><p>Mapas e logística: "activos <strong>dentro de</strong> uma região" ou "rotas <strong>que intersectam</strong> um caminho"</p></li>
 </ul>
 <div class="alert note">
-<p>O campo GEOMETRY requer o PyMilvus 2.7.0rc46 ou posterior. Atualmente, esta versão só está disponível através da compilação a partir da fonte. Para obter instruções, consulte <a href="https://github.com/milvus-io/pymilvus#faq">Como compilar o PyMilvus a partir do código fonte</a>.</p>
+<p>Para utilizar o campo GEOMETRY, actualize o seu SDK para a versão mais recente.</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">O que é um campo GEOMETRY?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um campo GEOMETRY é um tipo de dados definido pelo esquema (<code translate="no">DataType.GEOMETRY</code>) no Milvus que armazena dados geométricos. Ao trabalhar com campos geométricos, interage com os dados utilizando o formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, uma representação legível por humanos utilizada tanto para inserir dados como para efetuar consultas. Internamente, o Milvus converte WKT em <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB)</a> para um armazenamento e processamento eficientes, mas não é necessário manipular WKB diretamente.</p>
+    </button></h2><p>Um campo GEOMETRY é um tipo de dados definido pelo esquema (<code translate="no">DataType.GEOMETRY</code>) no Milvus que armazena dados geométricos. Quando se trabalha com campos geométricos, interage-se com os dados utilizando o formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, uma representação legível por humanos utilizada tanto para a inserção de dados como para a consulta. Internamente, o Milvus converte WKT em <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB)</a> para um armazenamento e processamento eficientes, mas não é necessário manipular WKB diretamente.</p>
 <p>O tipo de dados <code translate="no">GEOMETRY</code> suporta os seguintes objectos geométricos:</p>
 <ul>
 <li><p><strong>POINT</strong>: <code translate="no">POINT (x y)</code>; por exemplo, <code translate="no">POINT (13.403683 52.520711)</code> onde <code translate="no">x</code> = longitude e <code translate="no">y</code> = latitude</p></li>
@@ -350,16 +350,19 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Uma vez cumpridos estes requisitos, pode utilizar expressões com operadores de geometria dedicados para filtrar a sua coleção com base nos valores geométricos.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">Definir expressões de filtro</h4><p>Para filtrar no campo <code translate="no">GEOMETRY</code>, utilize um operador específico de geometria com o seguinte formato de expressão: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, onde:</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">Definir expressões de filtro</h4><p>Para filtrar num campo <code translate="no">GEOMETRY</code>, utilize um operador de geometria numa expressão:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> é um operador de geometria suportado (por exemplo, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Para obter uma lista completa dos operadores disponíveis, consulte <a href="/docs/pt/geometry-operators.md">Operadores de geometria</a>.</p></li>
-<li><p><code translate="no">geo_field</code> é o nome do campo <code translate="no">GEOMETRY</code> definido no seu esquema de coleção.</p></li>
-<li><p><code translate="no">'{wkt}'</code> é a cadeia WKT que representa o objeto de geometria que está a filtrar.</p></li>
+<li><p>Geral: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>Baseado em distância: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>Alguns operadores, como <code translate="no">ST_DWITHIN</code>, podem exigir parâmetros adicionais. Para obter detalhes e exemplos de utilização de cada operador, consulte <a href="/docs/pt/geometry-operators.md">Operadores de geometria</a>.</p>
-</div>
-<p>Os exemplos seguintes demonstram como utilizar diferentes operadores específicos de geometria numa expressão de filtro:</p>
+<p>Onde:</p>
+<ul>
+<li><p><code translate="no">operator</code> é um dos operadores de geometria suportados (por exemplo, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Os nomes dos operadores devem estar todos em maiúsculas ou minúsculas. Para obter uma lista dos operadores suportados, consulte <a href="/docs/pt/geometry-operators.md#Supported-geometry-operators">Operadores de geometria suportados</a>.</p></li>
+<li><p><code translate="no">geo_field</code> é o nome do seu campo <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> é a representação WKT da geometria a consultar.</p></li>
+<li><p><code translate="no">distance</code> é o limiar específico para <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
+<p>Os exemplos seguintes demonstram como utilizar diferentes operadores específicos da geometria numa expressão de filtro:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Exemplo 1: Encontrar entidades dentro de uma área retangular</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>

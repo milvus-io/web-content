@@ -40,7 +40,7 @@ title: Notas de lançamento
 <tr><th style="text-align:left">Versão do Milvus</th><th style="text-align:left">Versão do SDK do Python</th><th style="text-align:left">Versão do SDK do Node.js</th><th style="text-align:left">Versão do SDK Java</th><th style="text-align:left">Versão do SDK Go</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
 <p>Temos o prazer de anunciar o lançamento do Milvus 2.6.4, que apresenta uma série de novas capacidades poderosas, melhorias de desempenho e correcções de erros essenciais. Esta atualização apresenta recursos importantes, como o Struct in ARRAY para modelagem avançada de dados. Além disso, ativamos o JSON Shredding por padrão, melhorando ainda mais o desempenho e a eficiência da consulta. Vários erros críticos também foram corrigidos para garantir maior estabilidade e fiabilidade. Com esta versão, o Milvus continua a proporcionar uma experiência mais robusta e eficiente a todos os utilizadores. Abaixo estão os principais destaques desta versão.</p>
@@ -247,7 +247,7 @@ title: Notas de lançamento
 <li>Removida a inicialização redundante dos componentes de armazenamento V2. <a href="https://github.com/milvus-io/milvus/pull/44597">#44597</a>)</li>
 <li>Corrigido o bloqueio da tarefa de compactação devido à saída do ciclo do executor.<a href="https://github.com/milvus-io/milvus/pull/44543">(#44543</a>)</li>
 <li>Reembolsado o uso de recursos carregados no destruidor <code translate="no">insert/deleterecord</code>.<a href="https://github.com/milvus-io/milvus/pull/44555">(#44555</a>)</li>
-<li>Corrigido um problema onde o replicador não podia parar e melhorado o validador de configuração de replicação.<a href="https://github.com/milvus-io/milvus/pull/44531">(#44531</a>)</li>
+<li>Corrigido um problema em que o replicador não podia parar e melhorado o validador de configuração de replicação.<a href="https://github.com/milvus-io/milvus/pull/44531">(#44531</a>)</li>
 <li>Definido <code translate="no">mmap_file_raii_</code> para <code translate="no">nullptr</code> quando o mmap está desativado.<a href="https://github.com/milvus-io/milvus/pull/44516">(#44516</a>)</li>
 <li>Fez com que o <code translate="no">diskfilemanager</code> utilizasse o sistema de ficheiros do contexto.<a href="https://github.com/milvus-io/milvus/pull/44535">(#44535</a>)</li>
 <li>Anfitrião virtual forçado para OSS e COS no armazenamento V2.<a href="https://github.com/milvus-io/milvus/pull/44484">(#44484</a>)</li>
@@ -300,11 +300,11 @@ title: Notas de lançamento
     </button></h3><ul>
 <li>Adicionado suporte a JSON Shredding para acelerar a filtragem dinâmica de campos. Para obter detalhes, consulte <a href="/docs/pt/json-shredding.md">Fragmentação de JSON</a>.</li>
 <li>Adicionado suporte para NGRAM Index para acelerar a operação semelhante. Para obter detalhes, consulte <a href="/docs/pt/ngram.md">NGRAM</a>.</li>
-<li>Adicionado suporte para actualizações parciais de campos com a API upsert. Para obter detalhes, consulte <a href="/docs/pt/upsert-entities.md">Upsert Entities</a>.</li>
+<li>Adicionado suporte para actualizações de campos parciais com a API upsert. Para obter detalhes, consulte <a href="/docs/pt/upsert-entities.md">Upsert Entities</a>.</li>
 <li>Adicionado suporte para a função Boost. Para obter detalhes, consulte <a href="/docs/pt/boost-ranker.md">Boost Ranker</a>.</li>
 <li>Adicionado suporte para campos de grupo por JSON e campos dinâmicos<a href="https://github.com/milvus-io/milvus/pull/43203">(#43203</a>)</li>
 <li>Adicionado suporte para ativar o esquema dinâmico em colecções existentes<a href="https://github.com/milvus-io/milvus/pull/44151">(#44151</a>)</li>
-<li>Adicionado suporte para eliminar índices sem libertar colecções<a href="https://github.com/milvus-io/milvus/pull/42941">(#42941</a>)</li>
+<li>Adicionado suporte para a eliminação de índices sem libertar colecções<a href="https://github.com/milvus-io/milvus/pull/42941">(#42941</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Melhorias<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -322,12 +322,12 @@ title: Notas de lançamento
         ></path>
       </svg>
     </button></h3><ul>
-<li>[StorageV2] Alterado o tamanho do ficheiro de registo para o tamanho comprimido<a href="https://github.com/milvus-io/milvus/pull/44402">(#44402</a>)</li>
+<li>[StorageV2] Alterado o tamanho do ficheiro de registo para tamanho comprimido<a href="https://github.com/milvus-io/milvus/pull/44402">(#44402</a>)</li>
 <li>[StorageV2] Adicionados campos filhos na informação de carregamento<a href="https://github.com/milvus-io/milvus/pull/44384">(#44384</a>)</li>
 <li>[StorageV2] Adicionado suporte para incluir chaves de partição e clustering no grupo de sistemas<a href="https://github.com/milvus-io/milvus/pull/44372">(#44372</a>)</li>
 <li>Removido o tempo limite para tarefas de compactação<a href="https://github.com/milvus-io/milvus/pull/44277">(#44277</a>)</li>
 <li>[StorageV2] Construção activada com o Azure<a href="https://github.com/milvus-io/milvus/pull/44177">(#44177</a>)</li>
-<li>[StorageV2] Utilizada a informação do grupo para estimar a utilização da lógica<a href="https://github.com/milvus-io/milvus/pull/44356">(#44356</a>)</li>
+<li>[StorageV2] Utilizada informação de grupo para estimar a utilização da lógica<a href="https://github.com/milvus-io/milvus/pull/44356">(#44356</a>)</li>
 <li>[StorageV2] Utilizada informação de divisão de grupo para estimar a utilização<a href="https://github.com/milvus-io/milvus/pull/44338">(#44338</a>)</li>
 <li>[StorageV2] Resultados de grupos de colunas guardados na compactação<a href="https://github.com/milvus-io/milvus/pull/44327">(#44327</a>)</li>
 <li>[StorageV2] Adicionadas configurações para a política de divisão baseada no tamanho<a href="https://github.com/milvus-io/milvus/pull/44301">(#44301</a>)</li>
@@ -491,12 +491,12 @@ title: Notas de lançamento
 <li>Melhora a segurança escondendo itens sensíveis do ponto final RESTful get_configs<a href="https://github.com/milvus-io/milvus/pull/44057">(#44057</a>)</li>
 <li>Assegura que os uploads de objectos para o pica-pau são idempotentes durante as tentativas de timeout<a href="https://github.com/milvus-io/milvus/pull/43947">(#43947</a>)</li>
 <li>Não permite a importação de elementos nulos em campos de array de ficheiros Parquet<a href="https://github.com/milvus-io/milvus/pull/43964">(#43964</a>)</li>
-<li>Corrige um erro em que a cache proxy não era invalidada após a criação de um alias de coleção<a href="https://github.com/milvus-io/milvus/pull/43854">(#43854</a>)</li>
-<li>Melhora o mecanismo de descoberta de serviço interno para nós de streaming<a href="https://github.com/milvus-io/milvus/pull/44033">(#44033</a>)</li>
+<li>Corrige um erro onde a cache proxy não era invalidada após a criação de um alias de coleção<a href="https://github.com/milvus-io/milvus/pull/43854">(#43854</a>)</li>
+<li>Melhora o mecanismo interno de descoberta de serviços para nós de streaming<a href="https://github.com/milvus-io/milvus/pull/44033">(#44033</a>)</li>
 <li>Corrige a lógica do grupo de recursos para filtrar corretamente os nós de transmissão<a href="https://github.com/milvus-io/milvus/pull/43984">(#43984</a>)</li>
 <li>Adiciona a etiqueta databaseName às métricas para evitar conflitos de nomes em ambientes com várias bases de dados<a href="https://github.com/milvus-io/milvus/pull/43808">(#43808</a>)</li>
 <li>Corrige um erro lógico no manuseamento do estado da tarefa interna<a href="https://github.com/milvus-io/milvus/pull/43777">(#43777</a>)</li>
-<li>Optimiza o tempo de inicialização das métricas internas para evitar potenciais pânicos<a href="https://github.com/milvus-io/milvus/pull/43773">(#43773</a>)</li>
+<li>Optimiza o tempo de inicialização das métricas internas para evitar potenciais panes<a href="https://github.com/milvus-io/milvus/pull/43773">(#43773</a>)</li>
 <li>Corrige uma potencial falha rara no servidor HTTP interno<a href="https://github.com/milvus-io/milvus/pull/43799">(#43799</a>)</li>
 </ul>
 <h2 id="v260" class="common-anchor-header">v2.6.0<button data-href="#v260" class="anchor-icon" translate="no">
@@ -661,7 +661,7 @@ title: Notas de lançamento
 <h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Entrada de dados, saída de dados com funções de incorporação</h4><p>O Milvus 2.6 introduz uma capacidade "Data-in, Data-Out" que simplifica o desenvolvimento de aplicações de IA através da integração direta com modelos de incorporação de terceiros (por exemplo, da OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Os utilizadores podem agora inserir e consultar dados de texto em bruto, e o Milvus chamará automaticamente o serviço de modelo especificado para converter o texto em vectores em tempo real. Isto elimina a necessidade de um pipeline de conversão de vectores separado.</p>
 <p>Para obter mais informações, consulte <a href="/docs/pt/embedding-function-overview.md">Visão geral da função de incorporação</a>.</p>
 <h4 id="Phrase-Match" class="common-anchor-header">Correspondência de frases</h4><p>A Correspondência de Frases é uma funcionalidade de pesquisa de texto que devolve resultados apenas quando a sequência exacta de palavras numa consulta aparece consecutivamente e na ordem correta num documento.</p>
-<p><strong>Principais caraterísticas</strong>:</p>
+<p><strong>Caraterísticas principais</strong>:</p>
 <ul>
 <li>Sensível à ordem: As palavras devem aparecer na mesma ordem que na consulta.</li>
 <li>Correspondência consecutiva: As palavras têm de aparecer uma ao lado da outra, exceto se for utilizado um valor de inclinação.</li>
@@ -671,7 +671,7 @@ title: Notas de lançamento
 <h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">Índice LSH MinHash (Beta)</h4><p>Para atender à necessidade de desduplicação de dados no treinamento de modelos, o Milvus 2.6 adiciona suporte para índices MINHASH_LSH. Esse recurso fornece um método computacionalmente eficiente e escalável para estimar a similaridade Jaccard entre documentos para identificar quase duplicatas. Os utilizadores podem gerar assinaturas MinHash para os seus documentos de texto durante o pré-processamento e utilizar o índice MINHASH_LSH no Milvus para encontrar eficazmente conteúdos semelhantes em conjuntos de dados de grande escala, melhorando a limpeza dos dados e a qualidade do modelo.</p>
 <h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">Funções de decaimento com reconhecimento de tempo</h4><p>O Milvus 2.6 introduz funções de decaimento sensíveis ao tempo para lidar com cenários em que o valor da informação muda com o tempo. Durante a reclassificação de resultados, os utilizadores podem aplicar funções de decaimento exponencial, gaussiano ou linear com base num campo de carimbo de data/hora para ajustar a pontuação de relevância de um documento. Isto garante que o conteúdo mais recente pode ser priorizado, o que é fundamental para aplicações como feeds de notícias, comércio eletrónico e a memória de um agente de IA.</p>
 <p>Para obter mais informações, consulte <a href="/docs/pt/decay-ranker-overview.md">Visão geral do Decay Ranker</a>.</p>
-<h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">Adicionar campo para evolução do esquema online</h4><p>Para fornecer maior flexibilidade de esquema, Milvus 2.6 agora suporta a adição de um novo campo escalar a um esquema de coleção existente online. Isso evita a necessidade de criar uma nova coleção e realizar uma migração de dados quando os requisitos da aplicação mudam.</p>
+<h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">Adicionar campo para evolução do esquema online</h4><p>Para fornecer maior flexibilidade de esquema, o Milvus 2.6 agora suporta a adição de um novo campo escalar a um esquema de coleção existente online. Isso evita a necessidade de criar uma nova coleção e realizar uma migração de dados quando os requisitos da aplicação mudam.</p>
 <p>Para obter mais informações, consulte <a href="/docs/pt/add-fields-to-an-existing-collection.md">Adicionar campos a uma coleção existente</a>.</p>
 <h4 id="INT8-Vector-Support" class="common-anchor-header">Suporte ao vetor INT8</h4><p>Em resposta ao uso crescente de modelos quantizados que produzem embeddings inteiros de 8 bits, o Milvus 2.6 adiciona suporte nativo a tipos de dados para vetores INT8. Isto permite aos utilizadores ingerir estes vectores diretamente sem descodificação, poupando computação, largura de banda de rede e custos de armazenamento. Esse recurso é inicialmente suportado para índices da família HNSW.</p>
 <p>Para obter mais informações, consulte <a href="/docs/pt/dense-vector.md">Vetor denso</a>.</p>

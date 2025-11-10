@@ -4,9 +4,9 @@ title: Поле геометрииCompatible with Milvus 2.6.4+
 summary: >-
   При создании таких приложений, как географические информационные системы
   (ГИС), картографические инструменты или сервисы, основанные на определении
-  местоположения, вам часто требуется хранить и запрашивать геометрические
-  данные. Тип данных GEOMETRY в Milvus решает эту задачу, предоставляя
-  собственный способ хранения и запроса гибких геометрических данных.
+  местоположения, вам часто нужно хранить и запрашивать геометрические данные.
+  Тип данных GEOMETRY в Milvus решает эту задачу, предоставляя собственный
+  способ хранения и запроса гибких геометрических данных.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Geometry-Field" class="common-anchor-header">Поле геометрии<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Field" class="anchor-icon" translate="no">
@@ -29,12 +29,12 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>Location-Base Service (LBS): "найти похожие POI <strong>в пределах</strong> этого городского квартала".</p></li>
 <li><p>Мультимодальный поиск: "найти похожие фотографии <strong>в радиусе 1 км</strong> от этой точки".</p></li>
-<li><p>Карты и логистика: "активы <strong>внутри</strong> региона" или "маршруты <strong>, пересекающие</strong> путь".</p></li>
+<li><p>Карты и логистика: "активы <strong>внутри</strong> региона" или "маршруты <strong>, пересекающиеся</strong> с путем".</p></li>
 </ul>
 <div class="alert note">
-<p>Для работы поля GEOMETRY требуется PyMilvus 2.7.0rc46 или более поздняя версия. В настоящее время эта версия доступна только при сборке из исходников. Инструкции смотрите в разделе <a href="https://github.com/milvus-io/pymilvus#faq">Как собрать PyMilvus из исходников</a>.</p>
+<p>Чтобы использовать поле GEOMETRY, обновите SDK до последней версии.</p>
 </div>
-<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Что такое поле GEOMETRY?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Что такое поле ГЕОМЕТРИЯ?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -350,17 +350,20 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>После выполнения этих требований вы можете использовать выражения со специальными геометрическими операторами для фильтрации коллекции на основе геометрических значений.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">Определение выражений фильтрации</h4><p>Для фильтрации по полю <code translate="no">GEOMETRY</code> используйте оператор, специфичный для геометрии, со следующим форматом выражения: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, где:</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">Определение выражений фильтрации</h4><p>Для фильтрации по полю <code translate="no">GEOMETRY</code> используйте геометрический оператор в выражении:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> это поддерживаемый геометрический оператор (например, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Полный список доступных операторов см. в разделе <a href="/docs/ru/geometry-operators.md">Операторы геометрии</a>.</p></li>
-<li><p><code translate="no">geo_field</code> это имя поля <code translate="no">GEOMETRY</code>, определенного в схеме вашей коллекции.</p></li>
-<li><p><code translate="no">'{wkt}'</code> WKT-строка, представляющая объект геометрии, по которому выполняется фильтрация.</p></li>
+<li><p>Общие: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>На основе расстояния: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>Некоторые операторы, например <code translate="no">ST_DWITHIN</code>, могут требовать дополнительных параметров. Подробности и примеры использования каждого оператора см. в разделе <a href="/docs/ru/geometry-operators.md">Операторы геометрии</a>.</p>
-</div>
-<p>В следующих примерах показано, как использовать различные операторы геометрии в выражении фильтрации:</p>
-<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Пример 1: Поиск сущностей в прямоугольной области</h4><div class="multipleCode">
+<p>Где:</p>
+<ul>
+<li><p><code translate="no">operator</code> один из поддерживаемых геометрических операторов (например, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Имена операторов должны быть полностью прописными или полностью строчными. Список поддерживаемых операторов см. в разделе <a href="/docs/ru/geometry-operators.md#Supported-geometry-operators">Поддерживаемые операторы геометрии</a>.</p></li>
+<li><p><code translate="no">geo_field</code> это имя вашего поля <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> WKT-представление геометрии для запроса.</p></li>
+<li><p><code translate="no">distance</code> порог, специально предназначенный для <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
+<p>В следующих примерах показано, как использовать различные операторы геометрии в выражении фильтра:</p>
+<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Пример 1: Поиск сущностей в пределах прямоугольной области</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 bottom_right_lon, bottom_right_lat = <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>

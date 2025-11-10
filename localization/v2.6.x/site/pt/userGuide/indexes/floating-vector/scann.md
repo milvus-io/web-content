@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Alimentado pela biblioteca <a href="https://github.com/google-research/google-research/blob/master/scann%2FREADME.md">ScaNN</a> da Google, o índice <code translate="no">SCANN</code> em Milvus foi concebido para enfrentar os desafios da pesquisa de semelhança de vectores em escala, atingindo um equilíbrio entre velocidade e precisão, mesmo em grandes conjuntos de dados que tradicionalmente colocariam desafios à maioria dos algoritmos de pesquisa.</p>
+    </button></h1><p>Alimentado pela biblioteca <a href="https://github.com/google-research/google-research/blob/master/scann%2FREADME.md">ScaNN</a> da Google, o índice <code translate="no">SCANN</code> em Milvus foi concebido para enfrentar os desafios da pesquisa de semelhança de vectores em escala, alcançando um equilíbrio entre velocidade e precisão, mesmo em grandes conjuntos de dados que tradicionalmente colocariam desafios à maioria dos algoritmos de pesquisa.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,7 @@ summary: >-
 <ol>
 <li><p><strong>Particionamento</strong>: Divide o conjunto de dados em clusters. Este método limita o espaço de pesquisa, concentrando-se apenas em subconjuntos de dados relevantes, em vez de analisar todo o conjunto de dados, poupando tempo e recursos de processamento. O ScaNN utiliza frequentemente algoritmos de agrupamento, como o <a href="https://zilliz.com/blog/k-means-clustering">k-means</a>, para identificar clusters, o que lhe permite efetuar pesquisas de semelhança de forma mais eficiente.</p></li>
 <li><p><strong>Quantização</strong>: O ScaNN aplica um processo de quantização conhecido como <a href="https://arxiv.org/abs/1908.10396">quantização vetorial anisotrópica</a> após o particionamento. A quantização tradicional concentra-se na minimização da distância geral entre os vectores originais e comprimidos, o que não é ideal para tarefas como a <a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">Maximum Inner Product Search (MIPS)</a>, em que a semelhança é determinada pelo produto interno dos vectores e não pela distância direta. Em vez disso, a quantização anisotrópica prioriza a preservação de componentes paralelos entre vetores, ou as partes mais importantes para o cálculo de produtos internos precisos. Esta abordagem permite que o ScaNN mantenha uma elevada precisão MIPS, alinhando cuidadosamente os vectores comprimidos com a consulta, permitindo pesquisas de semelhança mais rápidas e precisas.</p></li>
-<li><p><strong>Re-ranking</strong>: A fase de reclassificação é a etapa final, na qual o ScaNN ajusta os resultados de pesquisa dos estágios de particionamento e quantização. Essa reclassificação aplica cálculos precisos de produto interno aos principais vetores candidatos, garantindo que os resultados finais sejam altamente precisos. A reclassificação é crucial em motores de recomendação de alta velocidade ou em aplicações de pesquisa de imagens em que a filtragem e o agrupamento iniciais servem como uma camada grosseira e a fase final garante que apenas os resultados mais relevantes são devolvidos ao utilizador.</p></li>
+<li><p><strong>Re-ranking</strong>: A fase de reclassificação é a etapa final, onde o ScaNN ajusta os resultados da pesquisa dos estágios de particionamento e quantização. Essa reclassificação aplica cálculos precisos de produto interno aos principais vetores candidatos, garantindo que os resultados finais sejam altamente precisos. A reclassificação é crucial em motores de recomendação de alta velocidade ou em aplicações de pesquisa de imagens em que a filtragem e o agrupamento iniciais servem como uma camada grosseira e a fase final garante que apenas os resultados mais relevantes são devolvidos ao utilizador.</p></li>
 </ol>
 <p>O desempenho do <code translate="no">SCANN</code> é controlado por dois parâmetros-chave que lhe permitem afinar o equilíbrio entre velocidade e precisão:</p>
 <ul>
@@ -92,7 +92,7 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: O método utilizado para calcular a distância entre vectores. Os valores suportados incluem <code translate="no">COSINE</code>, <code translate="no">L2</code>, e <code translate="no">IP</code>. Para obter detalhes, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p></li>
 <li><p><code translate="no">params</code>: Opções de configuração adicionais para criar o índice.</p>
 <ul>
-<li><code translate="no">with_raw_data</code>: Se os dados do vetor original devem ser armazenados juntamente com a representação quantizada.</li>
+<li><code translate="no">with_raw_data</code>: Se devem ser armazenados os dados do vetor original juntamente com a representação quantizada.</li>
 </ul>
 <p>Para saber mais sobre os parâmetros de construção disponíveis para o índice <code translate="no">SCANN</code>, consulte <a href="/docs/pt/scann.md#Index-building-params">Parâmetros de construção do índice</a>.</p></li>
 </ul>
@@ -112,7 +112,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ser criado e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
@@ -151,7 +151,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para criar um índice e efetuar pesquisas no índice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/scann.md#Build-index">construir um índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção do índice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/scann.md#Build-index">construir um índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>
@@ -160,15 +175,34 @@ res = MilvusClient.search(
      <th><p>Sugestão de ajuste</p></th>
    </tr>
    <tr>
+     <td><p><code translate="no">nlist</code></p></td>
+     <td><p>Número de unidades de cluster</p></td>
+     <td><p>[1, 65536]</p></td>
+     <td><p>Uma <em>nlist</em> mais alta aumenta a eficiência da poda e normalmente acelera a pesquisa grosseira, mas as partições podem ficar demasiado pequenas, o que pode reduzir a recuperação; uma <em>nlist</em> mais baixa pesquisa clusters maiores, melhorando a recuperação mas tornando a pesquisa mais lenta.</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">with_raw_data</code></p></td>
-     <td><p>Se os dados do vetor original devem ser armazenados juntamente com a representação quantizada. Quando ativado, isto permite cálculos de semelhança mais precisos durante a fase de reclassificação, utilizando os vectores originais em vez de aproximações quantizadas.</p></td>
-     <td><p><strong>Tipo</strong>: Boolean <strong>Intervalo</strong>: <code translate="no">true</code>, <code translate="no">false</code></p>
-<p><strong>Valor padrão</strong>: <code translate="no">true</code></p></td>
-     <td><p>Definido para <code translate="no">true</code> para uma <strong>maior precisão de pesquisa</strong> e quando o espaço de armazenamento não é uma preocupação principal. Os dados vectoriais originais permitem cálculos de semelhança mais precisos durante a reclassificação. Defina para <code translate="no">false</code> para <strong>reduzir a sobrecarga de armazenamento</strong> e a utilização de memória, especialmente para grandes conjuntos de dados. No entanto, isto pode resultar numa precisão de pesquisa ligeiramente inferior, uma vez que a fase de reclassificação irá utilizar vectores quantizados.</p>
-<p><strong>Recomendado</strong>: Use <code translate="no">true</code> para aplicações de produção onde a precisão é crítica.</p></td>
+     <td><p>Se deve armazenar os dados do vetor original juntamente com a representação quantizada. Quando ativado, isto permite cálculos de similaridade mais precisos durante a fase de reclassificação, utilizando os vectores originais em vez de aproximações quantizadas.</p></td>
+     <td><p><strong>Tipo</strong>: Booleano</p><p><strong>Intervalo</strong>: <code translate="no">true</code>, <code translate="no">false</code></p><p><strong>Valor predefinido</strong>: <code translate="no">true</code></p></td>
+     <td><p>Definido para <code translate="no">true</code> para uma <strong>maior precisão de pesquisa</strong> e quando o espaço de armazenamento não é uma preocupação principal. Os dados vectoriais originais permitem cálculos de semelhança mais precisos durante a reclassificação.</p><p>Defina para <code translate="no">false</code> para <strong>reduzir a sobrecarga de armazenamento</strong> e a utilização de memória, especialmente para grandes conjuntos de dados. No entanto, isto pode resultar numa precisão de pesquisa ligeiramente inferior, uma vez que a fase de reclassificação irá utilizar vectores quantizados.</p><p><strong>Recomendado</strong>: Use <code translate="no">true</code> para aplicações de produção em que a precisão é crítica.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/scann.md#Search-on-index">pesquisar no índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela a seguir lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/scann.md#Search-on-index">pesquisar no índice</a>.</p>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>
@@ -179,10 +213,7 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>Controla o número de vectores candidatos que são refinados durante a fase de reclassificação. Este parâmetro determina quantos candidatos de topo das fases iniciais de partição e quantização são reavaliados utilizando cálculos de semelhança mais precisos.</p></td>
-     <td><p><strong>Tipo</strong>: Integer <strong>Range</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Valor por defeito</strong>: Nenhum</p></td>
-     <td><p>Um <code translate="no">reorder_k</code> maior geralmente leva a uma <strong>maior precisão de pesquisa</strong>, pois mais candidatos são considerados durante a fase de refinamento final. No entanto, isto também <strong>aumenta o tempo de pesquisa</strong> devido à computação adicional. Considere aumentar <code translate="no">reorder_k</code> quando a obtenção de uma elevada recuperação é crítica e a velocidade de pesquisa é menos preocupante. Um bom ponto de partida é 2-5x o <code translate="no">limit</code> desejado (TopK resultados a retornar).</p>
-<p>Considere diminuir <code translate="no">reorder_k</code> para dar prioridade a pesquisas mais rápidas, especialmente em cenários em que uma ligeira redução na precisão é aceitável.</p>
-<p>Na maioria dos casos, recomendamos que você defina um valor dentro deste intervalo:<em>[limite</em>, <em>limite</em> * 5].</p></td>
+     <td><p><strong>Tipo</strong>: Inteiro</p><p><strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Valor predefinido</strong>: Nenhum</p></td>
+     <td><p>Um <code translate="no">reorder_k</code> maior conduz geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais candidatos durante a fase de refinamento final. No entanto, isto também <strong>aumenta o tempo de pesquisa</strong> devido a computação adicional.</p><p>Considere o aumento de <code translate="no">reorder_k</code> quando a obtenção de uma alta recuperação é crítica e a velocidade de pesquisa é menos preocupante. Um bom ponto de partida é 2-5x o <code translate="no">limit</code> desejado (TopK resultados a retornar).</p><p>Considere diminuir <code translate="no">reorder_k</code> para dar prioridade a pesquisas mais rápidas, especialmente em cenários em que uma ligeira redução na precisão é aceitável.</p><p>Na maioria dos casos, recomendamos que você defina um valor dentro deste intervalo:<em>[limite</em>, <em>limite</em> * 5].</p></td>
    </tr>
 </table>

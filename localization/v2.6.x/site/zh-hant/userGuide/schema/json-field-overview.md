@@ -3,7 +3,7 @@ id: json-field-overview.md
 title: JSON 欄位概述
 summary: >-
   在建立商品目錄、內容管理系統或使用者偏好引擎等應用程式時，您通常需要在向量嵌入的同時儲存彈性的元資料。產品屬性因類別而異，使用者偏好隨時間演變，而文件屬性則有複雜的嵌套結構。Milvus
-  中的 JSON 欄位可讓您在不犧牲效能的情況下儲存和查詢彈性的結構化資料，從而解決這項挑戰。
+  中的 JSON 欄位可讓您在不犧牲效能的情況下，儲存和查詢彈性的結構化資料，從而解決這項挑戰。
 ---
 <h1 id="JSON-Field-Overview" class="common-anchor-header">JSON 欄位概述<button data-href="#JSON-Field-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -87,7 +87,7 @@ summary: >-
    <tr>
      <td><p>模式定義</p></td>
      <td><p>一個標量欄位，必須在集合模式中以<code translate="no">DataType.JSON</code> 類型明確宣告。</p></td>
-     <td><p>一個隱藏的 JSON 欄位 (命名為<code translate="no">#meta</code>)，可自動儲存未宣告的欄位。</p></td>
+     <td><p>一個隱藏的 JSON 欄位 (命名為<code translate="no">$meta</code>)，可自動儲存未宣告的欄位。</p></td>
    </tr>
    <tr>
      <td><p>使用情況</p></td>
@@ -102,7 +102,7 @@ summary: >-
    <tr>
      <td><p>查詢</p></td>
      <td><p>使用您的欄位名稱或 JSON 欄位內的目標關鍵查詢：<code translate="no">metadata["key"]</code> 。</p></td>
-     <td><p>直接使用動態欄位關鍵查詢：<code translate="no">"dynamic_key"</code> 或透過<code translate="no">#meta</code> ：<code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>直接使用動態欄位關鍵查詢：<code translate="no">"dynamic_key"</code> 或透過<code translate="no">$meta</code> ：<code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">基本操作<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -411,7 +411,7 @@ res = client.search(
       </svg>
     </button></h3><p>有，以確保與查詢和索引的相容性：</p>
 <ul>
-<li><p>在 JSON 鍵中只能使用字母、數字和底線。</p></li>
+<li><p>在 JSON 鍵中只使用字母、數字和底線。</p></li>
 <li><p>避免使用特殊字符、空格或點 (<code translate="no">.</code>,<code translate="no">/</code>, 等等)。</p></li>
 <li><p>不相容的鍵可能會在篩選表達式中造成解析問題。</p></li>
 </ul>

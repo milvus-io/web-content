@@ -26,12 +26,12 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>位置服务（LBS）："查找该城市街区<strong>内的</strong>相似 POI</p></li>
 <li><p>多种模式搜索："检索该点<strong>1km 范围内的</strong>相似照片</p></li>
-<li><p>地图与物流："区域<strong>内的</strong>资产 "或 "<strong>与</strong>路径<strong>相交的</strong>路线</p></li>
+<li><p>地图与物流："区域<strong>内的</strong>资产 "或 "<strong>与</strong>路径<strong>相交的</strong>路线"</p></li>
 </ul>
 <div class="alert note">
-<p>GEOMETRY 字段需要 PyMilvus 2.7.0rc46 或更高版本。该版本目前只能从源代码构建。有关说明，请参阅<a href="https://github.com/milvus-io/pymilvus#faq">如何从源代码构建 PyMilvus</a>。</p>
+<p>要使用 GEOMETRY 字段，请将 SDK 升级到最新版本。</p>
 </div>
-<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">什么是 GEOMETRY 字段？<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">什么是 "地理坐标 "字段？<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,7 +46,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GEOMETRY 字段是 Milvus 中一种 Schema 定义的数据类型 (<code translate="no">DataType.GEOMETRY</code>) ，用于存储几何数据。在处理几何字段时，你可以使用<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text（WKT）</a>格式与数据交互，这是一种人类可读的表示法，用于插入数据和查询。在内部，Milvus 将 WKT 转换为<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">已知二进制 (WKB)</a>，以实现高效存储和处理，但您不需要直接处理 WKB。</p>
+    </button></h2><p>GEOMETRY 字段是 Milvus 中一种 Schema 定义的数据类型 (<code translate="no">DataType.GEOMETRY</code>) ，用于存储几何数据。在处理几何字段时，您可以使用 "<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">已知文本"（WKT）</a>格式与数据交互，这是一种用于插入数据和查询的人类可读表示法。在内部，Milvus 会将 WKT 转换为<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">已知二进制 (WKB)</a>，以提高存储和处理效率，但您不需要直接处理 WKB。</p>
 <p><code translate="no">GEOMETRY</code> 数据类型支持以下几何对象：</p>
 <ul>
 <li><p><strong>点</strong>：<code translate="no">POINT (x y)</code> ；例如，<code translate="no">POINT (13.403683 52.520711)</code> ，其中<code translate="no">x</code> = 经度，<code translate="no">y</code> = 纬度</p></li>
@@ -347,16 +347,19 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>满足这些要求后，您就可以使用带有专用几何操作符的表达式，根据几何值对集合进行过滤。</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">定义过滤表达式</h4><p>要对<code translate="no">GEOMETRY</code> 字段进行筛选，请使用具有以下表达式格式的几何专用操作符：<code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>其中</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">定义过滤表达式</h4><p>要在<code translate="no">GEOMETRY</code> 字段上进行筛选，请在表达式中使用几何操作符：</p>
 <ul>
-<li><p><code translate="no">{operator}</code> 是支持的几何操作符（如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code> ）。有关可用操作符的完整列表，请参阅<a href="/docs/zh/geometry-operators.md">几何操作符</a>。</p></li>
-<li><p><code translate="no">geo_field</code> 是在 Collections Schema 中定义的<code translate="no">GEOMETRY</code> 字段的名称。</p></li>
-<li><p><code translate="no">'{wkt}'</code> 是 WKT 字符串，代表您要筛选的几何对象。</p></li>
+<li><p>一般：<code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>基于距离：<code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>某些操作符（如<code translate="no">ST_DWITHIN</code> ）可能需要附加参数。有关各操作符的详细信息和使用示例，请参阅<a href="/docs/zh/geometry-operators.md">几何操作符</a>。</p>
-</div>
-<p>以下示例演示了如何在筛选表达式中使用不同的特定几何图形操作符：</p>
+<p>其中</p>
+<ul>
+<li><p><code translate="no">operator</code> 是支持的几何操作符之一（如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code> ）。操作符名称必须全部大写或小写。有关支持的操作符列表，请参阅<a href="/docs/zh/geometry-operators.md#Supported-geometry-operators">支持的几何图形操作符</a>。</p></li>
+<li><p><code translate="no">geo_field</code> 是<code translate="no">GEOMETRY</code> 字段的名称。</p></li>
+<li><p><code translate="no">'{wkt}'</code> 是要查询的几何体的 WKT 表示形式。</p></li>
+<li><p><code translate="no">distance</code> 是专门用于<code translate="no">ST_DWITHIN</code> 的阈值。</p></li>
+</ul>
+<p>以下示例演示了如何在筛选表达式中使用不同的几何图形专用操作符：</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">示例 1：查找矩形区域内的实体</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>

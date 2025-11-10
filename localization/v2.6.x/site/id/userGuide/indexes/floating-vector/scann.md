@@ -151,7 +151,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/scann.md#Build-index">membangun indeks.</a></p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/scann.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -160,15 +175,34 @@ res = MilvusClient.search(
      <th><p>Saran Penyetelan</p></th>
    </tr>
    <tr>
+     <td><p><code translate="no">nlist</code></p></td>
+     <td><p>Jumlah unit cluster</p></td>
+     <td><p>[1, 65536]</p></td>
+     <td><p><em>Nlist</em> yang lebih tinggi meningkatkan efisiensi pemangkasan dan biasanya mempercepat pencarian kasar, tetapi partisi dapat menjadi terlalu kecil, yang dapat mengurangi penarikan; <em>nlist</em> yang lebih rendah memindai cluster yang lebih besar, meningkatkan penarikan tetapi memperlambat pencarian.</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">with_raw_data</code></p></td>
-     <td><p>Apakah akan menyimpan data vektor asli bersama dengan representasi yang dikuantisasi. Jika diaktifkan, hal ini memungkinkan penghitungan kemiripan yang lebih akurat selama fase pemeringkatan ulang dengan menggunakan vektor asli, bukan perkiraan yang dikuantisasi.</p></td>
-     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Boolean: <code translate="no">true</code>, <code translate="no">false</code></p>
-<p><strong>Nilai default</strong>: <code translate="no">true</code></p></td>
-     <td><p>Setel ke <code translate="no">true</code> untuk <strong>akurasi pencarian yang lebih tinggi</strong> dan ketika ruang penyimpanan tidak menjadi perhatian utama. Data vektor asli memungkinkan penghitungan kemiripan yang lebih tepat selama pemeringkatan ulang. Setel ke <code translate="no">false</code> untuk <strong>mengurangi overhead penyimpanan</strong> dan penggunaan memori, terutama untuk set data yang besar. Namun, hal ini dapat menghasilkan akurasi pencarian yang sedikit lebih rendah karena fase pemeringkatan ulang akan menggunakan vektor yang dikuantisasi.</p>
-<p><strong>Direkomendasikan</strong>: Gunakan <code translate="no">true</code> untuk aplikasi produksi yang memerlukan akurasi tinggi.</p></td>
+     <td><p>Apakah akan menyimpan data vektor asli bersama dengan representasi terkuantisasi. Jika diaktifkan, ini memungkinkan penghitungan kemiripan yang lebih akurat selama fase pemeringkatan ulang dengan menggunakan vektor asli, bukan perkiraan terkuantisasi.</p></td>
+     <td><p><strong>Jenis</strong>: Boolean</p><p><strong>Rentang</strong> <code translate="no">true</code>, <code translate="no">false</code></p><p><strong>Nilai default</strong>: <code translate="no">true</code></p></td>
+     <td><p>Setel ke <code translate="no">true</code> untuk <strong>akurasi pencarian yang lebih tinggi</strong> dan ketika ruang penyimpanan tidak menjadi perhatian utama. Data vektor asli memungkinkan penghitungan kemiripan yang lebih tepat selama pemeringkatan ulang.</p><p>Atur ke <code translate="no">false</code> untuk <strong>mengurangi biaya penyimpanan</strong> dan penggunaan memori, terutama untuk set data yang besar. Namun, hal ini dapat menghasilkan akurasi pencarian yang sedikit lebih rendah karena fase pemeringkatan ulang akan menggunakan vektor yang dikuantisasi.</p><p><strong>Direkomendasikan</strong>: Gunakan <code translate="no">true</code> untuk aplikasi produksi yang memerlukan akurasi tinggi.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat melakukan <a href="/docs/id/scann.md#Search-on-index">pencarian pada indeks</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat melakukan <a href="/docs/id/scann.md#Search-on-index">pencarian pada indeks</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -179,10 +213,7 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>Mengontrol jumlah vektor kandidat yang disempurnakan selama tahap pemeringkatan ulang. Parameter ini menentukan berapa banyak kandidat teratas dari tahap pemartisian dan kuantisasi awal yang dievaluasi ulang menggunakan perhitungan kemiripan yang lebih tepat.</p></td>
-     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Bilangan Bulat: [1, <em>int_max</em>]</p>
-<p><strong>Nilai default</strong>: Tidak ada</p></td>
-     <td><p><code translate="no">reorder_k</code> yang lebih besar umumnya menghasilkan <strong>akurasi pencarian yang lebih tinggi</strong> karena lebih banyak kandidat yang dipertimbangkan selama fase penyempurnaan akhir. Namun, hal ini juga <strong>meningkatkan waktu pencarian</strong> karena adanya komputasi tambahan. Pertimbangkan untuk meningkatkan <code translate="no">reorder_k</code> ketika mencapai recall yang tinggi sangat penting dan kecepatan pencarian tidak terlalu menjadi perhatian. Titik awal yang baik adalah 2-5x dari <code translate="no">limit</code> yang Anda inginkan (hasil TopK yang akan dikembalikan).</p>
-<p>Pertimbangkan untuk mengurangi <code translate="no">reorder_k</code> untuk memprioritaskan pencarian yang lebih cepat, terutama dalam skenario di mana sedikit penurunan akurasi dapat diterima.</p>
-<p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini:<em>[batas</em>, <em>batas</em> * 5].</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [1, <em>int_max</em>]</p><p><strong>Nilai default</strong>: Tidak ada</p></td>
+     <td><p><code translate="no">reorder_k</code> yang lebih besar umumnya menghasilkan <strong>akurasi pencarian yang lebih tinggi</strong> karena lebih banyak kandidat yang dipertimbangkan selama fase penyempurnaan akhir. Namun, hal ini juga <strong>meningkatkan waktu pencarian</strong> karena adanya komputasi tambahan.</p><p>Pertimbangkan untuk meningkatkan <code translate="no">reorder_k</code> ketika mencapai recall yang tinggi sangat penting dan kecepatan pencarian tidak terlalu menjadi perhatian. Titik awal yang baik adalah 2-5x dari <code translate="no">limit</code> yang Anda inginkan (hasil TopK yang akan dikembalikan).</p><p>Pertimbangkan untuk mengurangi <code translate="no">reorder_k</code> untuk memprioritaskan pencarian yang lebih cepat, terutama dalam skenario di mana sedikit penurunan akurasi dapat diterima.</p><p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini:<em>[batas</em>, <em>batas</em> * 5].</p></td>
    </tr>
 </table>

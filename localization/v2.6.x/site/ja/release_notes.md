@@ -40,10 +40,10 @@ title: リリースノート
 <tr><th style="text-align:left">Milvusバージョン</th><th style="text-align:left">Python SDKバージョン</th><th style="text-align:left">Node.js SDKバージョン</th><th style="text-align:left">Java SDKバージョン</th><th style="text-align:left">Go SDKバージョン</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>Milvus2.6.4がリリースされ、強力な新機能、パフォーマンスの向上、重要なバグ修正が行われました。このアップデートでは、高度なデータモデリングのための ARRAY の構造化などの重要な機能が導入されました。さらに、JSON Shredding がデフォルトで有効になり、クエリのパフォーマンスと効率がさらに向上しました。また、より高い安定性と信頼性を確保するため、いくつかの重要なバグに対処しました。本リリースにより、Milvusは全てのユーザーに、より強固で効率的なエクスペリエンスを提供し続けます。以下は本リリースの主なハイライトです。</p>
+<p>Milvus2.6.4がリリースされ、強力な新機能、パフォーマンスの向上、重要なバグの修正が行われました。このアップデートでは、高度なデータモデリングのための ARRAY の構造化などの重要な機能が導入されました。さらに、JSON Shredding がデフォルトで有効になり、クエリのパフォーマンスと効率がさらに向上しました。また、より高い安定性と信頼性を確保するために、いくつかの重要なバグに対処しました。本リリースにより、Milvusは全てのユーザーに、より強固で効率的なエクスペリエンスを提供し続けます。以下は本リリースの主なハイライトです。</p>
 <h3 id="Features" class="common-anchor-header">機能<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ title: リリースノート
         ></path>
       </svg>
     </button></h3><ul>
-<li>Milvusは新しいデータ型であるStructを導入し、1つのエンティティ内で複数の関連フィールドを整理・管理できるようになりました。現在、StructはDataType.ARRAY配下の要素としてのみ使用可能ですが、各行が複数のベクトルを含むArray of Vectorのような機能を実現し、複雑なデータモデリングや検索に新たな可能性をもたらします。<a href="https://github.com/milvus-io/milvus/pull/42148">(#42148</a>)</li>
+<li>Milvusは新しいデータ型であるStructを導入し、1つのエンティティ内で複数の関連フィールドを整理、管理できるようになりました。現在、StructはDataType.ARRAY配下の要素としてのみ使用可能ですが、各行が複数のベクトルを含むArray of Vectorのような機能を実現し、複雑なデータモデリングや検索に新たな可能性をもたらします。<a href="https://github.com/milvus-io/milvus/pull/42148">(#42148</a>)</li>
 <li>DashScopeでQwen GTE-rerank-v2モデルをサポートしました<a href="https://github.com/milvus-io/milvus/pull/44660">(#44660</a>)。</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">改良点<button data-href="#Improvements" class="anchor-icon" translate="no">
@@ -86,7 +86,7 @@ title: リリースノート
 <li>TextMatchIndexのキャッシュ層管理を追加しました<a href="https://github.com/milvus-io/milvus/pull/44768">(#44768</a>)。</li>
 <li>ビットマップの逆引き性能を最適化 (<a href="https://github.com/milvus-io/milvus/pull/44838">#44838</a>)</li>
 <li>Knowhereのバージョンを更新<a href="https://github.com/milvus-io/milvus/pull/44707">(#44707</a> <a href="https://github.com/milvus-io/milvus/pull/44765">#44765</a>)</li>
-<li>セグメントロード時の論理使用量チェックを削除した<a href="https://github.com/milvus-io/milvus/pull/44770">(#44770</a>)。</li>
+<li>セグメントロード時の論理使用量チェックを削除した<a href="https://github.com/milvus-io/milvus/pull/44770">(#44770</a>)</li>
 <li>テンプレート値の長さ情報のアクセスログフィールドを追加<a href="https://github.com/milvus-io/milvus/pull/44783">(#44783</a>)</li>
 <li>インデックス構築時に現在のインデックスタイプを上書きできるようにした(<a href="https://github.com/milvus-io/milvus/pull/44754">#44754</a>)</li>
 <li>ベクトルインデックスのロードパラメータを追加した<a href="https://github.com/milvus-io/milvus/pull/44749">(#44749</a>)</li>
@@ -119,7 +119,7 @@ title: リリースノート
 <li>残高チェッカーを停止すると残高が停止する問題を修正<a href="https://github.com/milvus-io/milvus/pull/44836">(#44836</a>)</li>
 <li>not equal "に "none "が含まれない問題を修正<a href="https://github.com/milvus-io/milvus/pull/44960">(#44960</a>)。</li>
 <li>CreateArrowScalarFromDefaultValue で JSON デフォルト値をサポート<a href="https://github.com/milvus-io/milvus/pull/44952">(#44952</a>)。</li>
-<li>デバッグログの改行を避けるために短いデバッグ文字列を使用するようにした<a href="https://github.com/milvus-io/milvus/pull/44929">(#44929</a>)。</li>
+<li>短いデバッグ文字列を使用することで、デバッグログの改行を回避<a href="https://github.com/milvus-io/milvus/pull/44929">(#44929</a>)</li>
 <li>JSONフラットインデックスのexists式を修正した<a href="https://github.com/milvus-io/milvus/pull/44951">(#44951</a>)。</li>
 <li>JSONのexistsパスのセマンティクスを統一した<a href="https://github.com/milvus-io/milvus/pull/44926">(#44926</a>)。</li>
 <li>空の内部挿入メッセージによるパニックを修正<a href="https://github.com/milvus-io/milvus/pull/44906">(#44906</a>)</li>
@@ -300,7 +300,7 @@ title: リリースノート
     </button></h3><ul>
 <li>JSON Shreddingのサポートを追加し、動的なフィールドフィルタリングを高速化。詳細については、<a href="/docs/ja/json-shredding.md">JSON Shreddingを</a>参照してください。</li>
 <li>NGRAM Indexのサポートを追加し、Like操作を高速化しました。詳細については、<a href="/docs/ja/ngram.md">NGRAMを</a>参照してください。</li>
-<li>upsert APIによる部分的なフィールド更新のサポートを追加しました。詳細は<a href="/docs/ja/upsert-entities.md">Upsert Entitiesを</a>参照してください。</li>
+<li>upsert APIによる部分的なフィールド更新のサポートを追加しました。詳細は<a href="/docs/ja/upsert-entities.md">アップサート・エンティティを</a>参照してください。</li>
 <li>Boost Functionのサポートを追加しました。詳細は<a href="/docs/ja/boost-ranker.md">Boost Rankerを</a>参照。</li>
 <li>JSONフィールドおよび動的フィールドによるグループ化に対応しました<a href="https://github.com/milvus-io/milvus/pull/43203">。</a></li>
 <li>既存のコレクションで動的スキーマを有効にするサポートを追加しました<a href="https://github.com/milvus-io/milvus/pull/44151">(#44151</a>)。</li>
@@ -323,7 +323,7 @@ title: リリースノート
       </svg>
     </button></h3><ul>
 <li>[StorageV2] ログファイルのサイズを圧縮サイズに変更した<a href="https://github.com/milvus-io/milvus/pull/44402">(#44402</a>)</li>
-<li>[StorageV2] ロード情報に子フィールドを追加した<a href="https://github.com/milvus-io/milvus/pull/44384">(#44384</a>)</li>
+<li>[StorageV2] ロード情報に子フィールドを追加した(<a href="https://github.com/milvus-io/milvus/pull/44384">#44384</a>)</li>
 <li>[StorageV2] パーティションとクラスタリングキーをシステムグループに含めるようにした<a href="https://github.com/milvus-io/milvus/pull/44372">(#44372</a>)</li>
 <li>コンパクションタスクのタイムアウトを削除<a href="https://github.com/milvus-io/milvus/pull/44277">(#44277</a>)</li>
 <li>[StorageV2] Azureとのビルドを可能にした(<a href="https://github.com/milvus-io/milvus/pull/44177">#44177</a>)</li>
@@ -339,7 +339,7 @@ title: リリースノート
 <li>KVパラメータを印刷する際のアクセスログフォーマットを最適化した<a href="https://github.com/milvus-io/milvus/pull/43742">(#43742</a>)</li>
 <li>ダンプスナップショットのバッチサイズを変更する設定を追加<a href="https://github.com/milvus-io/milvus/pull/44215">(#44215</a>)</li>
 <li>コンパクションタスクのクリーンアップ間隔を短縮<a href="https://github.com/milvus-io/milvus/pull/44207">(#44207</a>)</li>
-<li>複数フィールドをサポートするマージソートを強化した<a href="https://github.com/milvus-io/milvus/pull/44191">(#44191</a>)<a href="https://github.com/milvus-io/milvus/pull/43994">(#43994</a>)</li>
+<li>複数フィールドをサポートするようにマージソートを強化した<a href="https://github.com/milvus-io/milvus/pull/44191">(#44191</a>)<a href="https://github.com/milvus-io/milvus/pull/43994">(#43994</a>)</li>
 <li>階層化インデックスの負荷リソースの見積もりを追加した<a href="https://github.com/milvus-io/milvus/pull/44171">(#44171</a>)</li>
 <li>重複排除の場合の自動インデックス設定を追加した(<a href="https://github.com/milvus-io/milvus/pull/44186">#44186</a>)</li>
 <li>名前にカスタム文字を許可する設定を追加した(<a href="https://github.com/milvus-io/milvus/pull/44063">#44063</a>)</li>
@@ -373,7 +373,7 @@ title: リリースノート
 <li>PK比較式のMVCCチェックをスキップするようにした<a href="https://github.com/milvus-io/milvus/pull/44353">(#44353</a>)</li>
 <li>統計情報のjson_containsのバグを修正した<a href="https://github.com/milvus-io/milvus/pull/44325">(#44325</a>)</li>
 <li>クエリノードとストリーミングノードの初期化ファイルシステムのチェックを追加した<a href="https://github.com/milvus-io/milvus/pull/44360">(#44360</a>)。</li>
-<li>セグメントをガベージコレクションした場合に、コンパクション対象が空になる問題を修正した<a href="https://github.com/milvus-io/milvus/pull/44270">(#44270</a>)。</li>
+<li>セグメントをガベージコレクションした場合に、コンパクション対象が空だった問題を修正<a href="https://github.com/milvus-io/milvus/pull/44270">(#44270</a>)</li>
 <li>タイムスタンプインデックスの初期化時の競合状態を修正した(<a href="https://github.com/milvus-io/milvus/pull/44317">#44317</a>)</li>
 <li>パニックを回避するため、arraydataがnilかどうかをチェックするようにした<a href="https://github.com/milvus-io/milvus/pull/44332">(#44332</a>)。</li>
 <li>ネストされたオブジェクトに対するJSON統計のビルドバグを修正<a href="https://github.com/milvus-io/milvus/pull/44303">(#44303</a>)</li>
@@ -388,7 +388,7 @@ title: リリースノート
 <li>空でない検索結果からメトリックタイプを推測するようにした(<a href="https://github.com/milvus-io/milvus/pull/44222">#44222</a>)</li>
 <li>複数セグメントの書き込みが1セグメントしか書き込まれない問題を修正<a href="https://github.com/milvus-io/milvus/pull/44256">(#44256</a>)</li>
 <li>マージソートが範囲外だった問題を修正<a href="https://github.com/milvus-io/milvus/pull/44230">(#44230</a>)</li>
-<li>BM25関数を実行する前にUTF-8チェックを追加<a href="https://github.com/milvus-io/milvus/pull/44220">(#44220</a>)</li>
+<li>BM25関数実行前のUTF-8チェックを追加<a href="https://github.com/milvus-io/milvus/pull/44220">(#44220</a>)</li>
 <li>古いセッションが存在する場合に再試行するようにした(<a href="https://github.com/milvus-io/milvus/pull/44208">#44208</a>)</li>
 <li>データノードのOOMを防ぐためにKafkaバッファサイズの制限を追加した<a href="https://github.com/milvus-io/milvus/pull/44106">(#44106</a>)</li>
 <li>ロックガード範囲の拡張によるパニックを修正した(<a href="https://github.com/milvus-io/milvus/pull/44130">#44130</a>)</li>
@@ -420,7 +420,7 @@ title: リリースノート
 <tr><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.6.1のリリースを発表できることを嬉しく思います！このバージョンは、以前のリリースにおける主要なアーキテクチャの進歩の上に構築され、運用の安定性、パフォーマンス、運用の堅牢性に焦点を当てた重要な機能拡張を提供します。このリリースでは、コミュニティからの重要なフィードバックに対応し、大規模な展開に対応するシステムを強化しています。より安定した、よりパフォーマンスの高い、より信頼性の高いシステムの恩恵を受けるために、すべてのユーザにアップグレードを強くお勧めします。</p>
+<p>Milvus 2.6.1のリリースを発表できることを嬉しく思います！このバージョンは、以前のリリースにおける主要なアーキテクチャの進歩の上に構築され、運用の安定性、パフォーマンス、運用の堅牢性に焦点を当てた重要な機能拡張を提供します。このリリースでは、コミュニティからの主要なフィードバックに対応し、大規模な展開に対応するシステムを強化しています。より安定した、よりパフォーマンスの高い、より信頼性の高いシステムの恩恵を受けるために、すべてのユーザにアップグレードを強くお勧めします。</p>
 <h3 id="Improvements" class="common-anchor-header">改良点<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -481,7 +481,7 @@ title: リリースノート
 <li>Parquetファイルのインポート時にOOM（Out-Of-Memory）が発生する可能性があった問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/43756">(#43756</a>)。</li>
 <li>スタンバイノードのリース期限が切れた場合に復旧できない問題を修正しました<a href="https://github.com/milvus-io/milvus/pull/44112">(#44112</a>)。</li>
 <li>コンパクションの再試行状態を正しく処理するようになりました<a href="https://github.com/milvus-io/milvus/pull/44119">(#44119</a>)。</li>
-<li>連続読み込み要求とインデックス読み込みの間でデッドロックが発生する可能性があった問題を修正<a href="https://github.com/milvus-io/milvus/pull/43937">(#43937</a>)</li>
+<li>継続的な読み込み要求とインデックスの読み込みの間にデッドロックが発生する可能性があった問題を修正した<a href="https://github.com/milvus-io/milvus/pull/43937">(#43937</a>)</li>
 <li>高い同時実行環境でデータ削除が失敗する可能性があった不具合を修正<a href="https://github.com/milvus-io/milvus/pull/43831">(#43831</a>)</li>
 <li>テキストおよびJSONインデックスのロード時に競合状態が発生する可能性があった問題を修正<a href="https://github.com/milvus-io/milvus/pull/43811">(#43811</a>)</li>
 <li>QueryCoordの再起動後に発生する可能性のあるノードステータスの不整合を修正しました<a href="https://github.com/milvus-io/milvus/pull/43941">(#43941</a>)。</li>
@@ -492,7 +492,7 @@ title: リリースノート
 <li>woodpeckerのオブジェクトアップロードがタイムアウト再試行中に冪等であるようにした<a href="https://github.com/milvus-io/milvus/pull/43947">(#43947</a>)</li>
 <li>Parquet ファイルからの配列フィールドの NULL 要素のインポートを禁止した<a href="https://github.com/milvus-io/milvus/pull/43964">(#43964</a>)。</li>
 <li>コレクションエイリアスを作成した後にプロキシキャッシュが無効にならない不具合を修正した<a href="https://github.com/milvus-io/milvus/pull/43854">(#43854</a>)</li>
-<li>ストリーミングノードの内部サービス検出メカニズムを改善しました<a href="https://github.com/milvus-io/milvus/pull/44033">(#44033</a>)。</li>
+<li>ストリーミングノードの内部サービス発見メカニズムを改善しました<a href="https://github.com/milvus-io/milvus/pull/44033">(#44033</a>)</li>
 <li>リソースグループのロジックを修正し、ストリーミングノードを正しくフィルタリングできるようにした<a href="https://github.com/milvus-io/milvus/pull/43984">(#43984</a>)</li>
 <li>マルチデータベース環境における命名の衝突を防ぐために、メトリクスにdatabaseNameラベルを追加した(<a href="https://github.com/milvus-io/milvus/pull/43808">#43808</a>)</li>
 <li>内部タスクの状態処理におけるロジックエラーを修正した(<a href="https://github.com/milvus-io/milvus/pull/43777">#43777</a>)</li>
@@ -544,8 +544,8 @@ title: リリースノート
       </svg>
     </button></h3><h4 id="Optimized-storage-format-v2" class="common-anchor-header">最適化されたストレージフォーマット v2</h4><p>Milvus2.6では、スカラーとベクトルが混在するデータストレージ、特に非構造化データのポイントルックアップの課題に対応するため、ストレージフォーマットV2を導入しました。この新しい適応型カラム型ストレージフォーマットは "狭いカラムのマージ＋広いカラムの独立 "レイアウト戦略を採用し、ベクターデータベースにおけるポイント検索や小ロットの検索を処理する際のパフォーマンスボトルネックを根本的に解決します。</p>
 <p>新しいフォーマットは、I/O増幅を伴わない効率的なランダムアクセスをサポートし、従来採用されていたバニラParquetフォーマットと比較して最大100倍の性能向上を達成しており、分析処理と正確なベクトル検索の両方を必要とするAIワークロードに最適です。さらに、一般的なワークロードではファイル数を最大98%削減できます。主要なコンパクションにかかるメモリ消費量は300%削減され、I/O操作は読み込みで最大80%、書き込みで600%以上最適化される。</p>
-<h4 id="JSON-flat-index-beta" class="common-anchor-header">JSONフラットインデックス（ベータ）</h4><p>Milvus 2.6では、非常に動的なJSONスキーマを扱うためにJSONフラットインデックスが導入されました。特定のパスとその期待される型を事前に宣言する必要があるJSONパスインデックスとは異なり、JSONフラットインデックスは、与えられたパスの下にあるすべての入れ子構造を自動的に検出し、インデックスを作成します。JSON フィールドのインデックスを作成するとき、JSON Flat Index はサブツリー全体を再帰的に平坦化し、深さや型に関係なく、遭遇するすべてのパスと値のペアに対して転置インデックスエントリを作成します。 この自動的な平坦化により、JSON Flat Index は、新しいフィールドが警告なしに現れるような進化するスキーマに最適です。例えば、"metadata "フィールドにインデックスを作成した場合、"metadata.version2.features.experimental "のような新しいネストされたフィールドが入力データに現れると、新しいインデックス設定を必要とすることなく、システムが自動的に処理します。</p>
-<h3 id="Core-260-features-recall" class="common-anchor-header">コア2.6.0の機能のリコール<button data-href="#Core-260-features-recall" class="anchor-icon" translate="no">
+<h4 id="JSON-flat-index-beta" class="common-anchor-header">JSONフラットインデックス（ベータ）</h4><p>Milvus 2.6では、非常に動的なJSONスキーマを扱うためにJSONフラットインデックスが導入されました。特定のパスとその期待される型を事前に宣言する必要があるJSONパスインデックスとは異なり、JSONフラットインデックスは、与えられたパスの下にあるすべての入れ子構造を自動的に検出し、インデックスを作成します。JSON フィールドのインデックスを作成するとき、JSON Flat Index はサブツリー全体を再帰的に平坦化し、深さや型に関係なく、遭遇するすべてのパスと値のペアに対して転置インデックス エントリを作成します。 この自動平坦化により、JSON Flat Index は、新しいフィールドが警告なしに現れるような進化するスキーマに最適です。例えば、"metadata "フィールドにインデックスを作成した場合、"metadata.version2.features.experimental "のような新しいネストされたフィールドが入力データに現れると、新しいインデックス設定を必要とすることなく、システムが自動的に処理します。</p>
+<h3 id="Core-260-features-recall" class="common-anchor-header">コア2.6.0の機能リコール<button data-href="#Core-260-features-recall" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -625,7 +625,7 @@ title: リリースノート
         ></path>
       </svg>
     </button></h3><p>2.6以降、Milvusはパフォーマンス、スケーラビリティ、使いやすさの向上を目的とした大幅なアーキテクチャの変更を導入しています。詳細については、<a href="/docs/ja/architecture_overview.md">Milvusアーキテクチャの</a>概要をご参照ください。</p>
-<h4 id="Streaming-Node-GA" class="common-anchor-header">ストリーミングノード (GA)</h4><p>以前のバージョンでは、ストリーミングデータはProxyによってWALに書き込まれ、QueryNodeとDataNodeによって読み込まれていました。このアーキテクチャでは、書き込み側でコンセンサスを得るのが難しく、読み込み側では複雑なロジックが必要でした。さらに、クエリデリゲータはQueryNodeにあり、スケーラビリティを妨げていました。Milvus 2.5.0ではストリーミングノードが導入され、バージョン2.6.0ではGAとなった。このコンポーネントは現在、すべてのシャードレベルのWALリード/ライトオペレーションを担当し、クエリデリゲータとしても機能し、前述の問題を解決し、新たな最適化を可能にします。</p>
+<h4 id="Streaming-Node-GA" class="common-anchor-header">ストリーミングノード (GA)</h4><p>以前のバージョンでは、ストリーミングデータはProxyによってWALに書き込まれ、QueryNodeとDataNodeによって読み込まれていました。このアーキテクチャでは、書き込み側でコンセンサスを得ることが難しく、読み込み側では複雑なロジックが必要でした。さらに、クエリデリゲータはQueryNodeにあり、スケーラビリティを妨げていました。Milvus 2.5.0ではストリーミングノードが導入され、バージョン2.6.0ではGAとなった。このコンポーネントは現在、すべてのシャードレベルのWALリード/ライトオペレーションを担当し、クエリデリゲータとしても機能し、前述の問題を解決し、新たな最適化を可能にします。</p>
 <p><strong>重要なアップグレードのお知らせ</strong>Streaming Nodeは重要なアーキテクチャの変更であるため、以前のバージョンからMilvus 2.6.0-rc1への直接のアップグレードはサポートされていません。</p>
 <h4 id="Woodpecker-Native-WAL" class="common-anchor-header">WoodpeckerネイティブWAL</h4><p>Milvusはこれまで、WALをKafkaやPulsarのような外部システムに依存していました。これらのシステムは機能的ではありましたが、特に小規模から中規模のデプロイメントにおいては、運用の複雑さとリソースのオーバーヘッドが大きくなっていました。Milvus 2.6では、これらは専用に構築されたクラウドネイティブなWALシステムであるWoodpeckerに置き換えられました。Woodpeckerはオブジェクトストレージ用に設計されており、ローカルとオブジェクトストレージベースのゼロディスクモードの両方をサポートし、パフォーマンスとスケーラビリティを向上させながらオペレーションを簡素化します。</p>
 <h4 id="DataNode-and-IndexNode-Merge" class="common-anchor-header">データノードとインデックスノードの統合</h4><p>Milvus 2.6では、コンパクション、バルクインポート、統計収集、インデックス構築などのタスクが統一されたスケジューラによって管理されるようになりました。これまでDataNodeが担当していたデータ永続化機能はStreaming Nodeに移されました。デプロイとメンテナンスを簡素化するため、IndexNodeとDataNodeは単一のDataNodeコンポーネントに統合されました。この統合されたノードがこれらの重要なタスクをすべて実行し、運用の複雑さを軽減し、リソースの利用を最適化します。</p>
@@ -645,12 +645,12 @@ title: リリースノート
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="RaBitQ-1-bit-Quantization" class="common-anchor-header">RaBitQ 1ビット量子化</h4><p>大規模なデータセットを扱うために、1ビット量子化はリソースの利用率と検索性能を向上させる効果的な手法です。しかし、従来の手法は想起に悪影響を与える可能性があります。Milvus 2.6では、元の研究著者との協力により、1ビット圧縮のリソースと性能の利点を提供しながら、高い検索精度を維持する1ビット量子化ソリューションであるRaBitQを導入しています。</p>
+    </button></h3><h4 id="RaBitQ-1-bit-Quantization" class="common-anchor-header">RaBitQ 1ビット量子化</h4><p>大規模なデータセットを扱うために、1ビット量子化はリソースの利用率と検索性能を向上させる効果的な手法です。しかし、従来の手法は想起に悪影響を与える可能性があります。Milvus 2.6では、元の研究著者との協力により、1ビット圧縮のリソースと性能の利点を提供しながら、高い検索精度を維持する1ビット量子化ソリューション、RaBitQを導入しています。</p>
 <p>詳細は<a href="/docs/ja/ivf-rabitq.md">IVF_RABITQを</a>参照。</p>
 <h4 id="JSON-Capability-Enhancement" class="common-anchor-header">JSON機能の強化</h4><p>Milvus 2.6では、JSONデータ型のサポートが強化され、以下の点が改善されました：</p>
 <ul>
 <li><strong>パフォーマンス</strong>：JSONパスインデックスが正式にサポートされ、JSONオブジェクト内の特定のパス(例:<code translate="no">meta.user.location</code>)に対して転置インデックスを作成できるようになりました。これにより、オブジェクトのフルスキャンが回避され、複雑なフィルタを使用したクエリの待ち時間が改善されます。</li>
-<li><strong>機能性</strong>：より複雑なフィルタリングロジックをサポートするために、このリリースでは、<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_EXISTS</code> 、<code translate="no">IS NULL</code> 、<code translate="no">CAST</code> 関数のサポートが追加されました。 先を見据えて、JSONのサポートに関する作業は続いています。今後の正式リリースでは、<strong>JSONシュレッダーや</strong> <strong>JSON FLATインデックスなど</strong>、より強力な機能を搭載し、高度にネストされたJSONデータのパフォーマンスを劇的に改善するよう設計されています。</li>
+<li><strong>機能性</strong>：より複雑なフィルタリングロジックをサポートするために、このリリースでは、<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_EXISTS</code> 、<code translate="no">IS NULL</code> 、<code translate="no">CAST</code> 関数のサポートが追加されました。 先を見据えて、JSONのサポートに関する作業は続いています。今後の正式リリースでは、<strong>JSONシュレッダーや</strong> <strong>JSON FLATインデックスなど</strong>、さらに強力な機能を搭載し、高度にネスト化されたJSONデータのパフォーマンスを劇的に改善するよう設計されています。</li>
 </ul>
 <h4 id="AnalyzerTokenizer-Function-Enhancement" class="common-anchor-header">アナライザ/トーケナイザ機能の強化</h4><p>このリリースでは、アナライザーとトーケナイザーのいくつかの更新により、テキスト処理機能が大幅に強化されました：</p>
 <ul>

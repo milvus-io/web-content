@@ -40,7 +40,7 @@ title: 版本说明
 <tr><th style="text-align:left">Milvus 版本</th><th style="text-align:left">Python SDK 版本</th><th style="text-align:left">Node.js SDK 版本</th><th style="text-align:left">Java SDK 版本</th><th style="text-align:left">Go SDK 版本</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
 <p>我们很高兴地宣布 Milvus 2.6.4 版本发布，该版本具有一系列强大的新功能、性能增强和重要的错误修复。本次更新引入了一些重要功能，如用于高级数据模型的 ARRAY 中的 Struct。此外，我们默认启用了 JSON Shredding，进一步提高了查询性能和效率。我们还解决了几个关键错误，以确保更高的稳定性和可靠性。通过此次发布，Milvus 将继续为所有用户提供更强大、更高效的体验。以下是该版本的主要亮点。</p>
@@ -79,7 +79,7 @@ title: 版本说明
         ></path>
       </svg>
     </button></h3><ul>
-<li>使用图像生成器<strong>将 Go 版本升级到 1.24.6</strong><a href="https://github.com/milvus-io/milvus/pull/44763">(#44763</a>)</li>
+<li><strong>将 Go 版本升级至 1.24.6</strong>，并增加了图像生成器<a href="https://github.com/milvus-io/milvus/pull/44763">(#44763</a>)</li>
 <li>启用默认的 JSON 碎纸<a href="https://github.com/milvus-io/milvus/pull/44811">（#44811）</a></li>
 <li>为加载的 binlog 大小添加了磁盘配额，以防止查询节点加载失败<a href="https://github.com/milvus-io/milvus/pull/44932">（#44932）</a></li>
 <li>在 MemVectorIndex 中为结构数组启用了 mmap 支持<a href="https://github.com/milvus-io/milvus/pull/44832">（#44832）</a></li>
@@ -281,7 +281,7 @@ title: 版本说明
 <tr><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>我们很高兴地宣布 Milvus 2.6.2 正式发布！本次更新引入了强大的新功能、显著的性能提升和关键修复，使系统更加稳定，更适合生产。其亮点包括通过 upsert 实现部分字段更新、通过 JSON Shredding 加速动态字段过滤、通过 NGram 索引实现更快的 LIKE 查询，以及在现有 Collections 上实现更灵活的 Schema 演进。该版本基于社区反馈，为实际部署奠定了更坚实的基础，我们鼓励所有用户升级以利用这些改进。</p>
+<p>我们很高兴地宣布 Milvus 2.6.2 正式发布！本次更新引入了强大的新功能、显著的性能提升和关键修复，使系统更加稳定，更适合生产。该版本的亮点包括：使用 upsert 进行部分字段更新、使用 JSON Shredding 加速动态字段过滤、使用 NGram 索引实现更快的 LIKE 查询，以及在现有 Collections 上实现更灵活的 Schema 演进。该版本基于社区反馈，为实际部署奠定了更坚实的基础，我们鼓励所有用户升级以利用这些改进。</p>
 <h3 id="Features" class="common-anchor-header">新增功能<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -523,7 +523,7 @@ title: 版本说明
 <tr><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.6.0 正式发布！在<a href="#v260-rc1">2.6.0-rc1</a> 所奠定的架构基础上，这个生产就绪的版本解决了大量稳定性和性能问题，同时引入了强大的新功能，包括存储格式 V2、高级 JSON 处理和增强的搜索功能。根据 RC 阶段的社区反馈，Milvus 2.6.0 进行了大量的错误修复和优化，可供您探索和采用。</p>
+<p>Milvus 2.6.0 正式发布！在<a href="#v260-rc1">2.6.0-rc1</a> 所奠定的架构基础上，这个生产就绪的版本解决了大量稳定性和性能问题，同时引入了强大的新功能，包括存储格式 V2、高级 JSON 处理和增强的搜索功能。在 RC 阶段，Milvus 2.6.0 根据社区反馈进行了大量的错误修复和优化，您可以随时探索和采用。</p>
 <div class="alert warning">
 <p>由于架构变化，不支持从 2.6.0 之前的版本直接升级。请遵循我们的<a href="/docs/zh/upgrade_milvus_cluster-operator.md">升级指南</a>。</p>
 </div>
@@ -669,7 +669,7 @@ title: 版本说明
 </ul>
 <p>更多信息，请参阅<a href="/docs/zh/phrase-match.md">短语匹配</a>。</p>
 <h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">最小哈希 LSH 索引（测试版）</h4><p>为满足模型训练中重复数据删除的需求，Milvus 2.6 增加了对 MINHASH_LSH 索引的支持。该功能提供了一种计算效率高、可扩展的方法，用于估算文档之间的 Jaccard 相似性，以识别近似重复的文档。用户可以在预处理过程中为文本文档生成 MinHash 签名，并在 Milvus 中使用 MINHASH_LSH 索引高效地查找大规模数据集中的相似内容，从而提高数据清理和模型质量。</p>
-<h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">时间感知衰减函数</h4><p>Milvus 2.6 引入了时间感知衰减函数，以解决信息价值随时间变化的情况。在结果重新排序过程中，用户可以根据时间戳字段应用指数、高斯或线性衰减函数来调整文档的相关性得分。这可以确保优先处理较新的内容，这对新闻源、电子商务和人工智能 Agents 的记忆等应用至关重要。</p>
+<h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">时间感知衰减函数</h4><p>Milvus 2.6 引入了时间感知衰减函数，以解决信息价值随时间变化的情况。在结果重新排序过程中，用户可以根据时间戳字段应用指数、高斯或线性衰减函数来调整文档的相关性得分。这可以确保优先处理较新的内容，这对于新闻提要、电子商务和人工智能 Agents 内存等应用至关重要。</p>
 <p>如需了解更多信息，请参阅 "<a href="/docs/zh/decay-ranker-overview.md">衰减排名器概述</a>"。</p>
 <h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">为在线 Schema 演进添加字段</h4><p>为了提供更大的模式灵活性，Milvus 2.6 现在支持向现有 Collections 的模式在线添加新的标量字段。这就避免了在应用需求发生变化时创建新 Collections 和执行破坏性数据迁移的需要。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>

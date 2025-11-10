@@ -93,7 +93,7 @@ summary: >-
    <tr>
      <td><p>Definizione dello schema</p></td>
      <td><p>Un campo scalare che deve essere dichiarato esplicitamente nello schema della collezione con il tipo <code translate="no">DataType.JSON</code>.</p></td>
-     <td><p>Un campo JSON nascosto (chiamato <code translate="no">#meta</code>) che memorizza automaticamente i campi non dichiarati.</p></td>
+     <td><p>Un campo JSON nascosto (chiamato <code translate="no">$meta</code>) che memorizza automaticamente i campi non dichiarati.</p></td>
    </tr>
    <tr>
      <td><p>Caso d'uso</p></td>
@@ -108,7 +108,7 @@ summary: >-
    <tr>
      <td><p>Interrogazione</p></td>
      <td><p>Interrogare utilizzando il nome del campo o la chiave di destinazione all'interno del campo JSON: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Interrogare direttamente utilizzando la chiave dinamica del campo: <code translate="no">"dynamic_key"</code> o tramite <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Interrogare direttamente utilizzando la chiave dinamica del campo: <code translate="no">"dynamic_key"</code> o tramite <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Operazioni di base<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -345,7 +345,7 @@ res = client.search(
      <td><p>Non per i filtri numerici/di intervallo</p></td>
    </tr>
 </table>
-<p><strong>Suggerimento:</strong> È possibile combinare questi approcci, ad esempio utilizzare la triturazione JSON per accelerare le query, l'indicizzazione JSON per le chiavi degli array ad alta frequenza e l'indicizzazione NGRAM per la ricerca flessibile nel testo.</p>
+<p><strong>Suggerimento:</strong> è possibile combinare questi approcci, ad esempio utilizzare la triturazione JSON per accelerare le query, l'indicizzazione JSON per le chiavi degli array ad alta frequenza e l'indicizzazione NGRAM per la ricerca flessibile nel testo.</p>
 <p>Per i dettagli sull'implementazione, consultare:</p>
 <ul>
 <li><p><a href="/docs/it/json-indexing.md">Indicizzazione JSON</a></p></li>

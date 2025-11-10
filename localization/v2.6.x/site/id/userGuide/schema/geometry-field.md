@@ -32,7 +32,7 @@ beta: Milvus 2.6.4+
 <li><p>Peta &amp; logistik: "aset <strong>di dalam</strong> suatu wilayah" atau "rute yang <strong>berpotongan</strong> dengan jalur"</p></li>
 </ul>
 <div class="alert note">
-<p>Bidang GEOMETRI membutuhkan PyMilvus 2.7.0rc46 atau yang lebih baru. Versi ini saat ini hanya tersedia dengan membangun dari sumbernya. Untuk instruksi, lihat <a href="https://github.com/milvus-io/pymilvus#faq">Cara membangun PyMilvus dari sumbernya</a>.</p>
+<p>Untuk menggunakan bidang GEOMETRI, tingkatkan SDK Anda ke versi terbaru.</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Apa yang dimaksud dengan bidang GEOMETRI?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bidang GEOMETRI adalah sebuah tipe data yang didefinisikan skema (<code translate="no">DataType.GEOMETRY</code>) di Milvus yang menyimpan data geometri. Ketika bekerja dengan field geometri, Anda berinteraksi dengan data menggunakan format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT</a> ), representasi yang dapat dibaca oleh manusia yang digunakan untuk memasukkan data dan melakukan kueri. Secara internal, Milvus mengubah WKT menjadi <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB</a> ) untuk penyimpanan dan pemrosesan yang efisien, tetapi Anda tidak perlu menangani WKB secara langsung.</p>
+    </button></h2><p>Bidang GEOMETRI adalah tipe data yang ditentukan skema (<code translate="no">DataType.GEOMETRY</code>) di Milvus yang menyimpan data geometri. Ketika bekerja dengan bidang geometri, Anda berinteraksi dengan data menggunakan format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT</a> ), representasi yang dapat dibaca oleh manusia yang digunakan untuk menyisipkan data dan melakukan kueri. Secara internal, Milvus mengubah WKT menjadi <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB</a> ) untuk penyimpanan dan pemrosesan yang efisien, tetapi Anda tidak perlu menangani WKB secara langsung.</p>
 <p>Tipe data <code translate="no">GEOMETRY</code> mendukung objek-objek geometris berikut ini:</p>
 <ul>
 <li><p><strong>TITIK</strong>: <code translate="no">POINT (x y)</code>; misalnya, <code translate="no">POINT (13.403683 52.520711)</code> di mana <code translate="no">x</code> = bujur dan <code translate="no">y</code> = lintang</p></li>
@@ -350,15 +350,18 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Setelah persyaratan ini terpenuhi, Anda dapat menggunakan ekspresi dengan operator geometri khusus untuk memfilter koleksi Anda berdasarkan nilai geometri.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">Menentukan ekspresi penyaringan</h4><p>Untuk memfilter pada bidang <code translate="no">GEOMETRY</code>, gunakan operator khusus geometri dengan format ekspresi berikut: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, di mana:</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">Menentukan ekspresi penyaringan</h4><p>Untuk memfilter pada bidang <code translate="no">GEOMETRY</code>, gunakan operator geometri dalam ekspresi:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> adalah operator geometri yang didukung (misalnya, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Untuk daftar lengkap operator yang tersedia, lihat <a href="/docs/id/geometry-operators.md">Operator Geometri</a>.</p></li>
-<li><p><code translate="no">geo_field</code> adalah nama bidang <code translate="no">GEOMETRY</code> yang didefinisikan dalam skema koleksi Anda.</p></li>
-<li><p><code translate="no">'{wkt}'</code> adalah string WKT yang mewakili objek geometri yang Anda filter.</p></li>
+<li><p>Umum: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>Berbasis jarak: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>Beberapa operator, seperti <code translate="no">ST_DWITHIN</code>, mungkin memerlukan parameter tambahan. Untuk detail dan contoh penggunaan setiap operator, lihat <a href="/docs/id/geometry-operators.md">Operator Geometri</a>.</p>
-</div>
+<p>Di mana</p>
+<ul>
+<li><p><code translate="no">operator</code> adalah salah satu operator geometri yang didukung (misalnya, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Nama operator harus menggunakan huruf besar atau huruf kecil. Untuk daftar operator yang didukung, lihat <a href="/docs/id/geometry-operators.md#Supported-geometry-operators">Operator geometri yang didukung</a>.</p></li>
+<li><p><code translate="no">geo_field</code> adalah nama bidang <code translate="no">GEOMETRY</code> Anda.</p></li>
+<li><p><code translate="no">'{wkt}'</code> adalah representasi WKT dari geometri yang akan ditanyakan.</p></li>
+<li><p><code translate="no">distance</code> adalah ambang batas khusus untuk <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
 <p>Contoh berikut ini menunjukkan cara menggunakan operator khusus geometri yang berbeda dalam ekspresi filter:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Contoh 1: Menemukan entitas dalam area persegi panjang</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

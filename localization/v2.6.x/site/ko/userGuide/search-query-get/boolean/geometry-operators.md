@@ -1,11 +1,12 @@
 ---
 id: geometry-operators.md
-title: 기하학 연산자
+title: 기하학 연산자Compatible with Milvus 2.6.4+
 summary: >-
   Milvus는 기하학적 데이터를 관리하고 분석하는 데 필수적인 기하학 필드에 대한 공간 필터링용 연산자 세트를 지원합니다. 이러한 연산자를
   사용하면 개체 간의 기하학적 관계를 기반으로 엔티티를 검색할 수 있습니다.
+beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Operators" class="common-anchor-header">기하학 연산자<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
+<h1 id="Geometry-Operators" class="common-anchor-header">기하학 연산자<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +22,35 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvus는 기하학적 데이터를 관리하고 분석하는 데 필수적인 <code translate="no">GEOMETRY</code> 필드에서 공간 필터링을 위한 연산자 집합을 지원합니다. 이러한 연산자를 사용하면 개체 간의 기하학적 관계를 기반으로 엔티티를 검색할 수 있습니다.</p>
-<p>모든 기하 도형 연산자는 컬렉션 스키마에 정의된 <code translate="no">GEOMETRY</code> 필드의 이름과 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">잘 알려진 텍스트</a> (WKT) 형식으로 표현된 대상 기하 도형 개체라는 두 가지 기하 도형 인수를 받아 작동합니다.</p>
-<p>Milvus의 <code translate="no">GEOMETRY</code> 필드에 대해 자세히 알아보려면 <a href="/docs/ko/geometry-field.md">지오메트리 필드를</a> 참조하세요.</p>
+<p>모든 기하 도형 연산자는 컬렉션 스키마에 정의된 <code translate="no">GEOMETRY</code> 필드의 이름과 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">잘 알려진 텍스트</a> (WKT) 형식으로 표현된 대상 기하 도형 객체라는 두 가지 기하 도형 인수를 받아 작동합니다.</p>
+<h2 id="Use-syntax" class="common-anchor-header">구문 사용<button data-href="#Use-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">GEOMETRY</code> 필드를 필터링하려면 표현식에 기하 도형 연산자를 사용합니다:</p>
+<ul>
+<li><p>일반: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>거리 기반: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
+</ul>
+<p>Where:</p>
+<ul>
+<li><p><code translate="no">operator</code> 는 지원되는 기하 도형 연산자 중 하나입니다(예: <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). 연산자 이름은 모두 대문자 또는 모두 소문자여야 합니다. 지원되는 연산자 목록은 <a href="/docs/ko/geometry-operators.md#Supported-geometry-operators">지원되는 지오메트리 연산자를</a> 참조하십시오.</p></li>
+<li><p><code translate="no">geo_field</code> 는 <code translate="no">GEOMETRY</code> 필드의 이름입니다.</p></li>
+<li><p><code translate="no">'{wkt}'</code> 는 쿼리할 지오메트리의 WKT 표현입니다.</p></li>
+<li><p><code translate="no">distance</code> 는 <code translate="no">ST_DWITHIN</code> 에 대한 임계값입니다.</p></li>
+</ul>
+<p>Milvus의 <code translate="no">GEOMETRY</code> 필드에 대한 자세한 내용은 <a href="/docs/ko/geometry-field.md">지오메트리 필드를</a> 참조하십시오.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">지원되는 지오메트리 연산자<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

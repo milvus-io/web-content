@@ -40,7 +40,7 @@ title: Catatan Rilis
 <tr><th style="text-align:left">Versi Milvus</th><th style="text-align:left">Versi Python SDK</th><th style="text-align:left">Versi SDK Node.js</th><th style="text-align:left">Versi SDK Java</th><th style="text-align:left">Versi Go SDK</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
 <p>Kami dengan bangga mengumumkan peluncuran Milvus 2.6.4, yang menampilkan berbagai kemampuan baru yang kuat, peningkatan kinerja, dan perbaikan bug yang penting. Pembaruan ini memperkenalkan fitur-fitur penting seperti Struct dalam ARRAY untuk pemodelan data tingkat lanjut. Selain itu, kami telah mengaktifkan JSON Shredding secara default, yang selanjutnya meningkatkan kinerja dan efisiensi kueri. Beberapa bug kritis juga telah diatasi untuk memastikan stabilitas dan keandalan yang lebih baik. Dengan rilis ini, Milvus terus memberikan pengalaman yang lebih kuat dan efisien untuk semua pengguna. Di bawah ini adalah sorotan utama dari rilis ini.</p>
@@ -322,7 +322,7 @@ title: Catatan Rilis
         ></path>
       </svg>
     </button></h3><ul>
-<li>[StorageV2] Mengubah ukuran file log menjadi ukuran terkompresi<a href="https://github.com/milvus-io/milvus/pull/44402">(#44402</a>)</li>
+<li>[StorageV2] Mengubah ukuran file log ke ukuran terkompresi<a href="https://github.com/milvus-io/milvus/pull/44402">(#44402</a>)</li>
 <li>[StorageV2] Menambahkan bidang anak dalam info pemuatan<a href="https://github.com/milvus-io/milvus/pull/44384">(#44384</a>)</li>
 <li>[StorageV2] Menambahkan dukungan untuk menyertakan kunci partisi dan pengelompokan dalam grup sistem<a href="https://github.com/milvus-io/milvus/pull/44372">(#44372</a>)</li>
 <li>Menghapus batas waktu untuk tugas pemadatan<a href="https://github.com/milvus-io/milvus/pull/44277">(#44277</a>)</li>
@@ -391,7 +391,7 @@ title: Catatan Rilis
 <li>Menambahkan pemeriksaan UTF-8 sebelum menjalankan fungsi BM25<a href="https://github.com/milvus-io/milvus/pull/44220">(#44220</a>)</li>
 <li>Mencoba ulang sesi lama jika ada<a href="https://github.com/milvus-io/milvus/pull/44208">(#44208</a>)</li>
 <li>Menambahkan batas ukuran buffer Kafka untuk mencegah OOM datanode<a href="https://github.com/milvus-io/milvus/pull/44106">(#44106</a>)</li>
-<li>Memperbaiki kepanikan dengan memperluas jangkauan penjagaan kunci<a href="https://github.com/milvus-io/milvus/pull/44130">(#44130</a>)</li>
+<li>Memperbaiki kepanikan dengan memperluas jangkauan pengamanan kunci<a href="https://github.com/milvus-io/milvus/pull/44130">(#44130</a>)</li>
 <li>Memperbaiki segmen yang sedang tumbuh agar tidak memerah pada perubahan skema<a href="https://github.com/milvus-io/milvus/pull/44412">(#44412</a>)</li>
 <li>[StorageV2] Menangani kesalahan IO<a href="https://github.com/milvus-io/milvus/pull/44255">(#44255</a>)</li>
 <li>Mencegah kepanikan jika jalur indeks Tantivy tidak ada<a href="https://github.com/milvus-io/milvus/pull/44135">(#44135</a>)</li>

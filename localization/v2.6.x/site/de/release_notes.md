@@ -18,7 +18,7 @@ title: Hinweise zur Veröffentlichung
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Finden Sie heraus, was es Neues in Milvus gibt! Auf dieser Seite werden neue Funktionen, Verbesserungen, bekannte Probleme und Fehlerbehebungen in jeder Version zusammengefasst. Sie können die Versionshinweise für jede Version nach v2.6.0 in diesem Abschnitt finden. Wir empfehlen Ihnen, diese Seite regelmäßig zu besuchen, um sich über Updates zu informieren.</p>
+    </button></h1><p>Finden Sie heraus, was es Neues in Milvus gibt! Auf dieser Seite werden neue Funktionen, Verbesserungen, bekannte Probleme und Fehlerbehebungen in jeder Version zusammengefasst. In diesem Abschnitt finden Sie die Versionshinweise für jede veröffentlichte Version nach v2.6.0. Wir empfehlen Ihnen, diese Seite regelmäßig zu besuchen, um sich über Updates zu informieren.</p>
 <h2 id="v264" class="common-anchor-header">v2.6.4<button data-href="#v264" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,10 +37,10 @@ title: Hinweise zur Veröffentlichung
     </button></h2><p>Veröffentlichungsdatum: Oktober 21, 2025</p>
 <table>
 <thead>
-<tr><th style="text-align:left">Milvus-Version</th><th style="text-align:left">Python SDK Version</th><th style="text-align:left">Node.js SDK-Version</th><th style="text-align:left">Java SDK Version</th><th style="text-align:left">Go SDK Version</th></tr>
+<tr><th style="text-align:left">Milvus-Version</th><th style="text-align:left">Python SDK Version</th><th style="text-align:left">Node.js SDK-Version</th><th style="text-align:left">Java SDK-Version</th><th style="text-align:left">Go SDK Version</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
 <p>Wir freuen uns, die Veröffentlichung von Milvus 2.6.4 ankündigen zu können, die eine Reihe von leistungsstarken neuen Funktionen, Leistungsverbesserungen und wichtigen Fehlerkorrekturen enthält. Mit diesem Update werden wichtige Funktionen wie Struct in ARRAY für die erweiterte Datenmodellierung eingeführt. Außerdem haben wir JSON Shredding standardmäßig aktiviert, was die Abfrageleistung und -effizienz weiter verbessert. Außerdem wurden mehrere kritische Fehler behoben, um mehr Stabilität und Zuverlässigkeit zu gewährleisten. Mit dieser Version bietet Milvus weiterhin eine robustere und effizientere Erfahrung für alle Benutzer. Nachfolgend finden Sie die wichtigsten Highlights dieser Version.</p>
@@ -133,7 +133,7 @@ title: Hinweise zur Veröffentlichung
 <li>Korrigierter BM25 mit Boost, der ungeordnete Ergebnisse zurückgibt<a href="https://github.com/milvus-io/milvus/pull/44759">(#44759</a>)</li>
 <li>Behoben: Massenimport mit Auto-ID<a href="https://github.com/milvus-io/milvus/pull/44694">(#44694</a>)</li>
 <li>Übergabe des Dateisystems via FileManagerContext beim Laden des Index<a href="https://github.com/milvus-io/milvus/pull/44734">(#44734</a>)</li>
-<li>Verwendete "eventually" und korrigierte die Aufgaben-ID, die sowohl im Ausführungs- als auch im Abschluss-Status erscheint<a href="https://github.com/milvus-io/milvus/pull/44715">(#44715</a>)</li>
+<li>Verwendet "eventually" und korrigierte die Aufgaben-ID, die sowohl im Ausführungs- als auch im Abschluss-Status erscheint<a href="https://github.com/milvus-io/milvus/pull/44715">(#44715</a>)</li>
 <li>Entfernte den falschen Startzeit-Tick, um das Filtern von DMLs zu vermeiden, deren Timeticks kleiner als dieser sind<a href="https://github.com/milvus-io/milvus/pull/44692">(#44692</a>)</li>
 <li>AWS Credential Provider wurde zu einem Singleton gemacht<a href="https://github.com/milvus-io/milvus/pull/44705">(#44705</a>)</li>
 <li>Deaktiviert Schreddern für JSON-Pfade, die Ziffern enthalten<a href="https://github.com/milvus-io/milvus/pull/44808">(#44808</a>)</li>
@@ -222,7 +222,7 @@ title: Hinweise zur Veröffentlichung
 <li>Konfigurationsoptionen für die Stapelverarbeitung in den Metadaten hinzugefügt. <a href="https://github.com/milvus-io/milvus/pull/44645">(#44645</a>)</li>
 <li>Fehlermeldungen enthalten jetzt den Datenbanknamen zur besseren Übersichtlichkeit.<a href="https://github.com/milvus-io/milvus/pull/44618">(#44618</a>)</li>
 <li>Der Tracer-Test wurde zur besseren Modularisierung in das Repository <code translate="no">milvus-common</code> verschoben.<a href="https://github.com/milvus-io/milvus/pull/44605">(#44605</a>)</li>
-<li>Die C API Unit Test Dateien wurden zur besseren Organisation in das <code translate="no">src</code> Verzeichnis verschoben.<a href="https://github.com/milvus-io/milvus/pull/44458">(#44458</a>)</li>
+<li>Die C-API-Unit-Testdateien wurden zur besseren Organisation in das Verzeichnis <code translate="no">src</code> ausgelagert.<a href="https://github.com/milvus-io/milvus/pull/44458">(#44458</a>)</li>
 <li>Go SDK erlaubt nun das Einfügen von Primärschlüsseldaten, wenn <code translate="no">autoid</code> aktiviert ist.<a href="https://github.com/milvus-io/milvus/pull/44561">(#44561</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Fehlerbehebungen<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
@@ -327,7 +327,7 @@ title: Hinweise zur Veröffentlichung
 <li>[StorageV2] Unterstützung für die Aufnahme von Partitions- und Clustering-Schlüsseln in die Systemgruppe hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/44372">(#44372</a>)</li>
 <li>Timeout für Verdichtungsaufgaben entfernt<a href="https://github.com/milvus-io/milvus/pull/44277">(#44277</a>)</li>
 <li>[StorageV2] Ermöglicht die Erstellung mit Azure<a href="https://github.com/milvus-io/milvus/pull/44177">(#44177</a>)</li>
-<li>[StorageV2] Verwendete Gruppen-Infos zur Abschätzung der Logik-Nutzung<a href="https://github.com/milvus-io/milvus/pull/44356">(#44356</a>)</li>
+<li>[StorageV2] Verwendete Gruppen-Infos zur Abschätzung der Logiknutzung<a href="https://github.com/milvus-io/milvus/pull/44356">(#44356</a>)</li>
 <li>[StorageV2] Verwendete Gruppen-Split-Infos zur Abschätzung der Nutzung<a href="https://github.com/milvus-io/milvus/pull/44338">(#44338</a>)</li>
 <li>[StorageV2] Gespeicherte Spaltengruppen-Ergebnisse in der Verdichtung<a href="https://github.com/milvus-io/milvus/pull/44327">(#44327</a>)</li>
 <li>[StorageV2] Konfigurationen für größenbasierte Aufteilungsrichtlinien hinzugefügt<a href="https://github.com/milvus-io/milvus/pull/44301">(#44301</a>)</li>
@@ -368,7 +368,7 @@ title: Hinweise zur Veröffentlichung
 <li>[StorageV2] Azure wurde standardmäßig aktiviert<a href="https://github.com/milvus-io/milvus/pull/44377">(#44377</a>)</li>
 <li>Korrigierter Upload-Pfad von L0-Verdichtungen unter Pooling-Datanodes<a href="https://github.com/milvus-io/milvus/pull/44374">(#44374</a>)</li>
 <li>Unzulässige Umbenennung, wenn Datenbank-Verschlüsselung aktiviert ist<a href="https://github.com/milvus-io/milvus/pull/44225">(#44225</a>)</li>
-<li>Löschung der Eigenschaft dynamicfield.enable wurde nicht zugelassen<a href="https://github.com/milvus-io/milvus/pull/44335">(#44335</a>)</li>
+<li>Unzulässiges Löschen der Eigenschaft dynamicfield.enable<a href="https://github.com/milvus-io/milvus/pull/44335">(#44335</a>)</li>
 <li>Markierte Aufgaben als fehlgeschlagen, wenn die vorher zugewiesene ID ungültig ist<a href="https://github.com/milvus-io/milvus/pull/44350">(#44350</a>)</li>
 <li>Übersprungene MVCC Prüfungen bei PK Vergleichsausdrücken<a href="https://github.com/milvus-io/milvus/pull/44353">(#44353</a>)</li>
 <li>Korrigierter json_contains Bug für Stats<a href="https://github.com/milvus-io/milvus/pull/44325">(#44325</a>)</li>
@@ -650,7 +650,7 @@ title: Hinweise zur Veröffentlichung
 <h4 id="JSON-Capability-Enhancement" class="common-anchor-header">Erweiterung der JSON-Fähigkeit</h4><p>Milvus 2.6 erweitert seine Unterstützung für den JSON-Datentyp mit den folgenden Verbesserungen:</p>
 <ul>
 <li><strong>Leistung</strong>: JSON Path Indexing wird nun offiziell unterstützt und ermöglicht die Erstellung von invertierten Indizes auf bestimmten Pfaden innerhalb von JSON-Objekten (z.B. <code translate="no">meta.user.location</code>). Dadurch werden vollständige Objekt-Scans vermieden und die Latenzzeit von Abfragen mit komplexen Filtern verbessert.</li>
-<li><strong>Funktionsweise</strong>: Um komplexere Filterlogik zu unterstützen, bietet diese Version Unterstützung für die Funktionen <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_EXISTS</code>, <code translate="no">IS NULL</code> und <code translate="no">CAST</code>. Unsere Arbeit an der JSON-Unterstützung geht weiter. Wir freuen uns, Ihnen mitteilen zu können, dass die kommenden offiziellen Versionen noch leistungsfähigere Funktionen bieten werden, wie z. B. <strong>JSON Shredding</strong> und einen <strong>JSON FLAT Index</strong>, der die Leistung bei stark verschachtelten JSON-Daten erheblich verbessern soll.</li>
+<li><strong>Funktionsweise</strong>: Um eine komplexere Filterlogik zu unterstützen, bietet diese Version Unterstützung für die Funktionen <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_EXISTS</code>, <code translate="no">IS NULL</code> und <code translate="no">CAST</code>. Unsere Arbeit an der JSON-Unterstützung geht weiter. Wir freuen uns, Ihnen mitteilen zu können, dass die kommenden offiziellen Versionen noch leistungsfähigere Funktionen bieten werden, wie z. B. <strong>JSON Shredding</strong> und einen <strong>JSON FLAT Index</strong>, der die Leistung bei stark verschachtelten JSON-Daten erheblich verbessern soll.</li>
 </ul>
 <h4 id="AnalyzerTokenizer-Function-Enhancement" class="common-anchor-header">Analyzer/Tokenizer Funktionserweiterung</h4><p>In dieser Version werden die Textverarbeitungsfunktionen durch mehrere Aktualisierungen des Analyzers und Tokenizers erheblich verbessert:</p>
 <ul>
@@ -660,7 +660,7 @@ title: Hinweise zur Veröffentlichung
 </ul>
 <h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Dateneingabe, Datenausgabe mit Einbettungsfunktionen</h4><p>Milvus 2.6 führt eine "Data-in, Data-Out"-Funktion ein, die die Entwicklung von KI-Anwendungen durch die direkte Integration von Einbettungsmodellen von Drittanbietern (z. B. von OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face) vereinfacht. Milvus ruft dann automatisch den angegebenen Modelldienst auf, um den Text in Echtzeit in Vektoren umzuwandeln. Damit entfällt die Notwendigkeit einer separaten Vektor-Konvertierungs-Pipeline.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/embedding-function-overview.md">Übersicht über die Einbettungsfunktion</a>.</p>
-<h4 id="Phrase-Match" class="common-anchor-header">Phrasenabgleich</h4><p>Phrase Match ist eine Textsuchfunktion, die nur dann Ergebnisse liefert, wenn die exakte Abfolge von Wörtern in einer Abfrage aufeinanderfolgend und in der richtigen Reihenfolge in einem Dokument vorkommt.</p>
+<h4 id="Phrase-Match" class="common-anchor-header">Phrasenabgleich</h4><p>Phrase Match ist eine Textsuchfunktion, die nur dann Ergebnisse liefert, wenn die exakte Abfolge von Wörtern in einer Abfrage nacheinander und in der richtigen Reihenfolge in einem Dokument vorkommt.</p>
 <p><strong>Hauptmerkmale</strong>:</p>
 <ul>
 <li>Ordnungsabhängig: Die Wörter müssen in der gleichen Reihenfolge wie in der Abfrage erscheinen.</li>
@@ -668,8 +668,8 @@ title: Hinweise zur Veröffentlichung
 <li>Slop (optional): Ein einstellbarer Parameter, der eine geringe Anzahl von Zwischenwörtern zulässt, um eine unscharfe Phrasenübereinstimmung zu ermöglichen.</li>
 </ul>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/phrase-match.md">Phrase Match</a>.</p>
-<h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">MinHash LSH-Index (Beta)</h4><p>Um den Bedarf an Datendeduplizierung beim Modelltraining zu decken, bietet Milvus 2.6 Unterstützung für MINHASH_LSH-Indizes. Diese Funktion bietet eine rechnerisch effiziente und skalierbare Methode zur Schätzung der Jaccard-Ähnlichkeit zwischen Dokumenten, um Beinahe-Duplikate zu identifizieren. Benutzer können während der Vorverarbeitung MinHash-Signaturen für ihre Textdokumente erzeugen und den MINHASH_LSH-Index in Milvus verwenden, um ähnliche Inhalte in großen Datensätzen effizient zu finden und so die Datenbereinigung und Modellqualität zu verbessern.</p>
-<h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">Zeitabhängige Abklingfunktionen</h4><p>Milvus 2.6 führt zeitabhängige Abklingfunktionen ein, um Szenarien zu berücksichtigen, in denen sich der Informationswert im Laufe der Zeit ändert. Während der Neueinstufung von Ergebnissen können Benutzer exponentielle, Gauß'sche oder lineare Abklingfunktionen basierend auf einem Zeitstempelfeld anwenden, um die Relevanzbewertung eines Dokuments anzupassen. Dadurch wird sichergestellt, dass aktuellere Inhalte priorisiert werden können, was für Anwendungen wie Newsfeeds, E-Commerce und das Gedächtnis eines KI-Agenten entscheidend ist.</p>
+<h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">MinHash LSH-Index (Beta)</h4><p>Um den Bedarf an Datendeduplizierung beim Modelltraining zu decken, bietet Milvus 2.6 Unterstützung für MINHASH_LSH-Indizes. Diese Funktion bietet eine rechnerisch effiziente und skalierbare Methode zur Schätzung der Jaccard-Ähnlichkeit zwischen Dokumenten, um Fast-Duplikate zu identifizieren. Benutzer können während der Vorverarbeitung MinHash-Signaturen für ihre Textdokumente erzeugen und den MINHASH_LSH-Index in Milvus verwenden, um ähnliche Inhalte in großen Datensätzen effizient zu finden und so die Datenbereinigung und Modellqualität zu verbessern.</p>
+<h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">Zeitabhängige Abklingfunktionen</h4><p>Milvus 2.6 führt zeitabhängige Abklingfunktionen ein, um Szenarien zu berücksichtigen, in denen sich der Informationswert im Laufe der Zeit ändert. Bei der Neueinstufung von Ergebnissen können Benutzer exponentielle, Gaußsche oder lineare Abklingfunktionen auf der Grundlage eines Zeitstempelfeldes anwenden, um die Relevanzbewertung eines Dokuments anzupassen. Dadurch wird sichergestellt, dass aktuellere Inhalte priorisiert werden können, was für Anwendungen wie Newsfeeds, E-Commerce und das Gedächtnis eines KI-Agenten entscheidend ist.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/decay-ranker-overview.md">Decay Ranker Übersicht</a>.</p>
 <h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">Feld für Online-Schema-Evolution hinzufügen</h4><p>Um eine größere Schema-Flexibilität zu bieten, unterstützt Milvus 2.6 jetzt das Hinzufügen eines neuen skalaren Feldes zum Schema einer bestehenden Sammlung online. Dadurch wird die Notwendigkeit vermieden, eine neue Sammlung zu erstellen und eine störende Datenmigration durchzuführen, wenn sich die Anwendungsanforderungen ändern.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/add-fields-to-an-existing-collection.md">Felder zu einer bestehenden Sammlung hinzufügen</a>.</p>

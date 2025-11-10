@@ -1,11 +1,12 @@
 ---
 id: geometry-operators.md
-title: 幾何運算符號
+title: 幾何運算符號Compatible with Milvus 2.6.4+
 summary: >-
   Milvus 支援一系列運算符號，用於在 GEOMETRY
   欄位上進行空間篩選，這些運算符號對於管理和分析幾何資料非常重要。這些運算符允許您根據物件之間的幾何關係檢索實體。
+beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Operators" class="common-anchor-header">幾何運算符號<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
+<h1 id="Geometry-Operators" class="common-anchor-header">幾何運算符號<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +22,35 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvus 支援一組運算元，用於<code translate="no">GEOMETRY</code> 欄位的空間篩選，對於管理和分析幾何資料非常重要。這些運算符允許您根據物件之間的幾何關係檢索實體。</p>
-<p>所有幾何運算符號都使用兩個幾何參數：在您的集合模式中定義的<code translate="no">GEOMETRY</code> 欄位名稱，以及以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a>(WKT) 格式表示的目標幾何物件。</p>
-<p>要了解更多關於 Milvus 中<code translate="no">GEOMETRY</code> 欄位的資訊，請參考幾何<a href="/docs/zh-hant/geometry-field.md">欄位</a>。</p>
+<p>所有幾何運算符號的功能都是由兩個幾何參數組成：在您的集合模式中定義的<code translate="no">GEOMETRY</code> 欄位名稱，以及以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a>(WKT) 格式表示的目標幾何物件。</p>
+<h2 id="Use-syntax" class="common-anchor-header">使用語法<button data-href="#Use-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>若要對<code translate="no">GEOMETRY</code> 欄位進行篩選，請在表達式中使用幾何運算符：</p>
+<ul>
+<li><p>一般：<code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>基於距離：<code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
+</ul>
+<p>其中：</p>
+<ul>
+<li><p><code translate="no">operator</code> 是支援的幾何運算符號之一 (例如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code>)。運算符號名稱必須全大楷或全小楷。如需支援的運算符號清單，請參閱<a href="/docs/zh-hant/geometry-operators.md#Supported-geometry-operators">支援的幾何運算符號</a>。</p></li>
+<li><p><code translate="no">geo_field</code> 是<code translate="no">GEOMETRY</code> 欄位的名稱。</p></li>
+<li><p><code translate="no">'{wkt}'</code> 是要查詢的幾何的 WKT 表示。</p></li>
+<li><p><code translate="no">distance</code> 是專為<code translate="no">ST_DWITHIN</code> 設定的臨界值。</p></li>
+</ul>
+<p>要瞭解更多關於 Milvus 中<code translate="no">GEOMETRY</code> 欄位的資訊，請參閱<a href="/docs/zh-hant/geometry-field.md">幾何</a>欄位。</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">支援的幾何運算符號<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +68,7 @@ summary: >-
       </svg>
     </button></h2><p>下表列出 Milvus 中可用的幾何運算符號。</p>
 <div class="alert note">
-<p>操作符名稱必須<strong>全大楷</strong> <strong>或全小楷</strong>。請勿在同一操作符名稱中混合大小寫。</p>
+<p>操作符名稱必須<strong>全大楷</strong> <strong>或全小楷</strong>。請勿在相同的操作符名稱中混合大小寫。</p>
 </div>
 <table>
    <tr>

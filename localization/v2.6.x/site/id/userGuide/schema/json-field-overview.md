@@ -92,7 +92,7 @@ summary: >-
    <tr>
      <td><p>Definisi skema</p></td>
      <td><p>Bidang skalar yang harus dideklarasikan secara eksplisit di dalam skema koleksi dengan tipe <code translate="no">DataType.JSON</code>.</p></td>
-     <td><p>Bidang JSON tersembunyi (bernama <code translate="no">#meta</code>) yang secara otomatis menyimpan bidang yang tidak dideklarasikan.</p></td>
+     <td><p>Bidang JSON tersembunyi (bernama <code translate="no">$meta</code>) yang secara otomatis menyimpan bidang yang tidak dideklarasikan.</p></td>
    </tr>
    <tr>
      <td><p>Kasus penggunaan</p></td>
@@ -107,7 +107,7 @@ summary: >-
    <tr>
      <td><p>Kueri</p></td>
      <td><p>Kueri menggunakan nama bidang atau kunci target di dalam bidang JSON: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Kueri secara langsung menggunakan kunci bidang dinamis: <code translate="no">"dynamic_key"</code> atau melalui <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Kueri secara langsung menggunakan kunci bidang dinamis: <code translate="no">"dynamic_key"</code> atau melalui <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Operasi dasar<button data-href="#Basic-operations" class="anchor-icon" translate="no">

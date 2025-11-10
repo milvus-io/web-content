@@ -29,10 +29,10 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p>Location-Base Service (LBS): "Finde ähnliche POIs <strong>innerhalb</strong> dieses Stadtblocks".</p></li>
 <li><p>Multimodale Suche: "ähnliche Fotos <strong>im Umkreis von 1 km</strong> von diesem Punkt abrufen"</p></li>
-<li><p>Karten und Logistik: "Anlagen <strong>innerhalb</strong> einer Region" oder "Routen <strong>, die</strong> einen Weg <strong>schneiden</strong> "</p></li>
+<li><p>Karten und Logistik: "Anlagen <strong>innerhalb</strong> einer Region" oder "Routen <strong>, die</strong> einen Weg <strong>kreuzen</strong> "</p></li>
 </ul>
 <div class="alert note">
-<p>Das GEOMETRY-Feld erfordert PyMilvus 2.7.0rc46 oder höher. Diese Version ist derzeit nur verfügbar, wenn sie aus dem Quellcode erstellt wird. Anweisungen finden Sie unter <a href="https://github.com/milvus-io/pymilvus#faq">Wie man PyMilvus aus dem Quellcode erstellt</a>.</p>
+<p>Um das GEOMETRY-Feld zu verwenden, aktualisieren Sie Ihr SDK auf die neueste Version.</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Was ist ein GEOMETRY-Feld?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -350,15 +350,18 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Sobald diese Voraussetzungen erfüllt sind, können Sie Ausdrücke mit speziellen Geometrieoperatoren verwenden, um Ihre Sammlung auf der Grundlage der geometrischen Werte zu filtern.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">Definieren von Filterausdrücken</h4><p>Um nach dem Feld <code translate="no">GEOMETRY</code> zu filtern, verwenden Sie einen geometriespezifischen Operator mit dem folgenden Ausdrucksformat: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, wobei:</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">Definieren von Filterausdrücken</h4><p>Um nach einem <code translate="no">GEOMETRY</code> Feld zu filtern, verwenden Sie einen Geometrieoperator in einem Ausdruck:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> ein unterstützter Geometrieoperator ist (z. B. <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Eine vollständige Liste der verfügbaren Operatoren finden Sie unter <a href="/docs/de/geometry-operators.md">Geometrie-Operatoren</a>.</p></li>
-<li><p><code translate="no">geo_field</code> ist der Name des Feldes <code translate="no">GEOMETRY</code>, das in Ihrem Sammlungsschema definiert ist.</p></li>
-<li><p><code translate="no">'{wkt}'</code> ist die WKT-Zeichenkette, die das Geometrieobjekt darstellt, nach dem Sie filtern.</p></li>
+<li><p>Allgemein: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>Abstandsbezogen: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>Einige Operatoren, wie z. B. <code translate="no">ST_DWITHIN</code>, können zusätzliche Parameter erfordern. Einzelheiten und Verwendungsbeispiele für jeden Operator finden Sie unter <a href="/docs/de/geometry-operators.md">Geometrieoperatoren</a>.</p>
-</div>
+<p>Wobei:</p>
+<ul>
+<li><p><code translate="no">operator</code> einer der unterstützten Geometrieoperatoren ist (z. B. <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Operatornamen müssen in Groß- oder Kleinbuchstaben geschrieben werden. Eine Liste der unterstützten Operatoren finden Sie unter <a href="/docs/de/geometry-operators.md#Supported-geometry-operators">Unterstützte Geometrieoperatoren</a>.</p></li>
+<li><p><code translate="no">geo_field</code> ist der Name Ihres <code translate="no">GEOMETRY</code> Feldes.</p></li>
+<li><p><code translate="no">'{wkt}'</code> ist die WKT-Darstellung der abzufragenden Geometrie.</p></li>
+<li><p><code translate="no">distance</code> ist der Schwellenwert speziell für <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
 <p>Die folgenden Beispiele zeigen, wie verschiedene geometriespezifische Operatoren in einem Filterausdruck verwendet werden können:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Beispiel 1: Finden von Objekten innerhalb eines rechteckigen Bereichs</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -572,7 +575,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="common-anchor-header">Kann ich geometrische Daten in einen dynamischen Feldschlüssel einfügen, wenn ich die dynamische Feldfunktion für meine Sammlung aktiviert habe?<button data-href="#If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h2><h3 id="If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="common-anchor-header">Wenn ich die Funktion für dynamische Felder für meine Sammlung aktiviert habe, kann ich dann geometrische Daten in einen dynamischen Feldschlüssel einfügen?<button data-href="#If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

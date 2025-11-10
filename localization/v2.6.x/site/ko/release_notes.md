@@ -40,10 +40,10 @@ title: 릴리스 노트
 <tr><th style="text-align:left">Milvus 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>다양하고 강력한 새 기능, 성능 향상, 필수적인 버그 수정이 포함된 Milvus 2.6.4를 출시하게 되어 기쁘게 생각합니다. 이번 업데이트에서는 고급 데이터 모델링을 위한 배열 구조체와 같은 중요한 기능이 도입되었습니다. 또한, 기본적으로 JSON 파쇄를 활성화하여 쿼리 성능과 효율성을 더욱 개선했습니다. 안정성과 신뢰성을 높이기 위해 몇 가지 중요한 버그도 해결되었습니다. 이번 릴리스를 통해 Milvus는 모든 사용자에게 더욱 강력하고 효율적인 환경을 지속적으로 제공할 것입니다. 다음은 이번 릴리스의 주요 특징입니다.</p>
+<p>다양하고 강력한 새 기능, 성능 향상, 필수 버그 수정이 포함된 Milvus 2.6.4의 출시를 발표하게 되어 기쁘게 생각합니다. 이번 업데이트에서는 고급 데이터 모델링을 위한 배열 구조체와 같은 중요한 기능이 도입되었습니다. 또한, 기본적으로 JSON 파쇄를 활성화하여 쿼리 성능과 효율성을 더욱 개선했습니다. 안정성과 신뢰성을 높이기 위해 몇 가지 중요한 버그도 해결되었습니다. 이번 릴리스를 통해 Milvus는 모든 사용자에게 더욱 강력하고 효율적인 환경을 지속적으로 제공할 것입니다. 다음은 이번 릴리스의 주요 특징입니다.</p>
 <h3 id="Features" class="common-anchor-header">주요 특징<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -281,7 +281,7 @@ title: 릴리스 노트
 <tr><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.6.2의 출시를 발표하게 되어 기쁩니다! 이번 업데이트에는 강력한 새 기능, 대폭적인 성능 향상, 중요한 수정 사항이 포함되어 있어 시스템을 더욱 안정적이고 프로덕션에 바로 사용할 수 있습니다. 주요 기능으로는 업서트를 통한 부분 필드 업데이트, 동적 필드 필터링을 가속화하기 위한 JSON 파쇄, 더 빠른 좋아요 쿼리를 위한 NGram 인덱싱, 기존 컬렉션의 보다 유연한 스키마 진화 등이 있습니다. 커뮤니티 피드백을 바탕으로 구축된 이번 릴리스는 실제 배포를 위한 더욱 강력한 기반을 제공하며, 모든 사용자가 이러한 개선 사항을 활용할 수 있도록 업그레이드할 것을 권장합니다.</p>
+<p>Milvus 2.6.2의 출시를 발표하게 되어 기쁩니다! 이번 업데이트에는 강력한 새 기능, 대폭적인 성능 향상, 중요한 수정 사항이 포함되어 있어 시스템을 더욱 안정적이고 프로덕션에 바로 사용할 수 있습니다. 주요 기능으로는 업서트를 통한 부분 필드 업데이트, 동적 필드 필터링을 가속화하기 위한 JSON 파쇄, 더 빠른 좋아요 쿼리를 위한 NGram 인덱싱, 기존 컬렉션의 보다 유연한 스키마 진화 등이 있습니다. 커뮤니티 피드백을 바탕으로 구축된 이번 릴리스는 실제 배포를 위한 더욱 강력한 기반을 제공하며, 모든 사용자가 이러한 개선 사항을 활용할 수 있도록 업그레이드하는 것이 좋습니다.</p>
 <h3 id="Features" class="common-anchor-header">주요 기능<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

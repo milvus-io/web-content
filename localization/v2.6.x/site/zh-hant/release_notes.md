@@ -18,7 +18,7 @@ title: 發佈筆記
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>瞭解 Milvus 的新功能！本頁總結了每個版本的新功能、改進、已知問題和錯誤修正。您可以在本節中找到 v2.6.0 以後每個版本的發行說明。我們建議您定期造訪本頁面以瞭解更新資訊。</p>
+    </button></h1><p>瞭解 Milvus 的新功能！本頁總結了每個版本的新功能、改進、已知問題和錯誤修正。您可以在本節中找到 v2.6.0 以後每個版本的發行說明。我們建議您定期造訪此頁面以瞭解更新資訊。</p>
 <h2 id="v264" class="common-anchor-header">v2.6.4<button data-href="#v264" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ title: 發佈筆記
 <tr><th style="text-align:left">Milvus 版本</th><th style="text-align:left">Python SDK 版本</th><th style="text-align:left">Node.js SDK 版本</th><th style="text-align:left">Java SDK 版本</th><th style="text-align:left">Go SDK 版本</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
 <p>我們很高興地宣佈 Milvus 2.6.4 正式發行，它擁有一系列強大的新功能、效能增強以及重要的錯誤修正。此更新介紹了一些重要的功能，例如用於進階資料建模的 ARRAY 中的 Struct。此外，我們在預設情況下啟用 JSON Shredding，進一步提升查詢效能與效率。我們也解決了幾個重要的錯誤，以確保更高的穩定性和可靠性。透過此版本，Milvus 將繼續為所有使用者提供更強大且更有效率的體驗。以下是此版本的主要重點。</p>
@@ -93,7 +93,7 @@ title: 發佈筆記
 <li>統一壓縮執行器的任務狀態管理<a href="https://github.com/milvus-io/milvus/pull/44722">(#44722</a>)</li>
 <li>為 QueryCoord 中的任務調度程序新增精煉日誌<a href="https://github.com/milvus-io/milvus/pull/44725">(#44725</a>)</li>
 <li>確保 accesslog.$consistency_level 代表實際使用的值 (<a href="https://github.com/milvus-io/milvus/pull/44711">#44711</a>)</li>
-<li>移除 datacoord 中多餘的通道管理員<a href="https://github.com/milvus-io/milvus/pull/44679">(#44679</a>)</li>
+<li>從 datacoord 移除多餘的通道管理員<a href="https://github.com/milvus-io/milvus/pull/44679">(#44679</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">修正錯誤<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -121,7 +121,7 @@ title: 發佈筆記
 <li>在 CreateArrowScalarFromDefaultValue 中支援 JSON 預設值<a href="https://github.com/milvus-io/milvus/pull/44952">(#44952</a>)</li>
 <li>使用短偵錯字串以避免在偵錯日誌中換行<a href="https://github.com/milvus-io/milvus/pull/44929">(#44929</a>)</li>
 <li>修正了 JSON 平面索引的 exists 表達式<a href="https://github.com/milvus-io/milvus/pull/44951">(#44951</a>)</li>
-<li>統一了 JSON exists 路徑語義<a href="https://github.com/milvus-io/milvus/pull/44926">(#44926</a>)</li>
+<li>統一了JSON exists路徑語義<a href="https://github.com/milvus-io/milvus/pull/44926">(#44926</a>)</li>
 <li>修正了空的內部插入訊息所導致的恐慌<a href="https://github.com/milvus-io/milvus/pull/44906">(#44906</a>)</li>
 <li>更新了 AI/SAQ 參數<a href="https://github.com/milvus-io/milvus/pull/44862">(#44862</a>)</li>
 <li>移除停用自動索引時重複資料刪除的限制<a href="https://github.com/milvus-io/milvus/pull/44824">(#44824</a>)</li>
@@ -208,7 +208,7 @@ title: 發佈筆記
 <li>在啄木鳥中新增了對 Azure Blob Storage 的支援。<a href="https://github.com/milvus-io/milvus/pull/44592">(#44592</a>)</li>
 <li>在 Woodpecker 片段壓縮之後立即清除小檔案。<a href="https://github.com/milvus-io/milvus/pull/44473">(#44473</a>)</li>
 <li>啟用提升查詢的隨機得分功能。<a href="https://github.com/milvus-io/milvus/pull/44214">(#44214</a>)</li>
-<li>新增自動索引中<code translate="no">int8</code> 向量類型的配置選項。<a href="https://github.com/milvus-io/milvus/pull/44554">(#44554</a>)</li>
+<li>在自動索引中為<code translate="no">int8</code> 向量類型新增配置選項。<a href="https://github.com/milvus-io/milvus/pull/44554">(#44554</a>)</li>
 <li>新增控制混合搜尋重新查詢政策的參數項目。<a href="https://github.com/milvus-io/milvus/pull/44466">(#44466</a>)</li>
 <li>新增控制插入函式輸出欄位的支援。<a href="https://github.com/milvus-io/milvus/pull/44162">(#44162</a>)</li>
 <li>衰減函數現在支援可設定的分數合併，以獲得更好的效能。<a href="https://github.com/milvus-io/milvus/pull/44066">(#44066</a>)</li>
@@ -281,7 +281,7 @@ title: 發佈筆記
 <tr><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>我們很高興地宣布 Milvus 2.6.2 正式發行！此次更新引入了強大的新功能、顯著的性能增強以及關鍵修復，使系統更穩定，更適合生產。新功能包括使用 upsert 進行部分欄位更新、使用 JSON Shredding 加速動態欄位篩選、使用 NGram 索引加快 LIKE 查詢速度，以及在現有資料集中進行更靈活的模式演進。此版本以社群回饋為基礎，為實際部署提供更強大的基礎，我們鼓勵所有使用者升級以利用這些改進。</p>
+<p>我們很高興地宣布 Milvus 2.6.2 正式發行！此次更新引入了強大的新功能、顯著的性能增強以及關鍵修復，使系統更加穩定、更適合生產。新功能包括使用 upsert 進行部分欄位更新、使用 JSON Shredding 加速動態欄位篩選、使用 NGram 索引加快 LIKE 查詢速度，以及在現有資料集中進行更靈活的模式演進。此版本以社群回饋為基礎，為實際部署提供更強大的基礎，我們鼓勵所有使用者升級以利用這些改進。</p>
 <h3 id="Features" class="common-anchor-header">功能特色<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -650,7 +650,7 @@ title: 發佈筆記
 <h4 id="JSON-Capability-Enhancement" class="common-anchor-header">JSON 能力增強</h4><p>Milvus 2.6 透過下列改進增強了對 JSON 資料類型的支援：</p>
 <ul>
 <li><strong>效能</strong>：現在正式支援 JSON 路徑索引，允許在 JSON 物件 (例如<code translate="no">meta.user.location</code>) 內的特定路徑上建立反向索引。這可避免完整物件掃描，並改善複雜篩選條件查詢的延遲時間。</li>
-<li><strong>功能性</strong>：為了支援更複雜的篩選邏輯，此版本新增了對<code translate="no">JSON_CONTAINS</code>,<code translate="no">JSON_EXISTS</code>,<code translate="no">IS NULL</code>, 以及<code translate="no">CAST</code> 函式的支援。 展望未來，我們在 JSON 支援方面的工作仍在繼續。我們很高興地預告，即將推出的正式版本將具備更強大的功能，例如<strong>JSON 切碎</strong>和<strong>JSON FLAT 索引</strong>，旨在大幅改善高度嵌套 JSON 資料的效能。</li>
+<li><strong>功能性</strong>：為了支援更複雜的篩選邏輯，此版本新增了對<code translate="no">JSON_CONTAINS</code>,<code translate="no">JSON_EXISTS</code>,<code translate="no">IS NULL</code>, 以及<code translate="no">CAST</code> 函式的支援。 展望未來，我們在 JSON 支援方面的工作仍在繼續。我們很高興地預告，即將推出的正式版本將具備更強大的功能，例如<strong>JSON 切碎</strong>和<strong>JSON FLAT 索引</strong>，旨在大幅改善高度嵌套的 JSON 資料的效能。</li>
 </ul>
 <h4 id="AnalyzerTokenizer-Function-Enhancement" class="common-anchor-header">Analyzer/Tokenizer 功能增強</h4><p>此版本透過對 Analyzer 和 Tokenizer 的多項更新，大幅增強了文字處理功能：</p>
 <ul>

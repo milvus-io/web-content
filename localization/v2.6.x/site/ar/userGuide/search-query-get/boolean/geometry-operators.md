@@ -1,12 +1,13 @@
 ---
 id: geometry-operators.md
-title: مشغلات الهندسة
+title: مشغلات الهندسةCompatible with Milvus 2.6.4+
 summary: >-
   يدعم Milvus مجموعة من عوامل التشغيل للتصفية المكانية على حقول GEOMETRY، والتي
   تعتبر ضرورية لإدارة البيانات الهندسية وتحليلها. تسمح لك هذه العوامل باسترداد
   الكيانات بناءً على العلاقات الهندسية بين الكائنات.
+beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Operators" class="common-anchor-header">مشغلات الهندسة<button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
+<h1 id="Geometry-Operators" class="common-anchor-header">مشغلات الهندسة<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +23,34 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>يدعم ميلفوس مجموعة من المشغلات للتصفية المكانية على <code translate="no">GEOMETRY</code> الحقول، وهي ضرورية لإدارة وتحليل البيانات الهندسية. تسمح لك هذه المشغلات باسترداد الكيانات بناءً على العلاقات الهندسية بين الكائنات.</p>
-<p>يعمل جميع مشغلي الهندسة من خلال أخذ وسيطتين هندسيتين: اسم الحقل <code translate="no">GEOMETRY</code> المحدد في مخطط مجموعتك وكائن هندسي مستهدف ممثل بتنسيق <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">نص معروف</a> (WKT).</p>
+<p>تعمل جميع مشغّلات الهندسة من خلال أخذ وسيطتين هندسيتين: اسم الحقل <code translate="no">GEOMETRY</code> المحدد في مخطط مجموعتك وكائن هندسي مستهدف ممثل بتنسيق <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">نص معروف</a> (WKT).</p>
+<h2 id="Use-syntax" class="common-anchor-header">استخدام الصيغة<button data-href="#Use-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>للتصفية على حقل <code translate="no">GEOMETRY</code> ، استخدم مشغل هندسي في تعبير:</p>
+<ul>
+<li><p>عام: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>قائم على المسافة: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
+</ul>
+<p>حيث:</p>
+<ul>
+<li><p><code translate="no">operator</code> هو أحد العوامل الهندسية المدعومة (على سبيل المثال، <code translate="no">ST_CONTAINS</code> ، <code translate="no">ST_INTERSECTS</code>). يجب أن تكون أسماء المشغلات بأحرف كبيرة أو بأحرف صغيرة. للحصول على قائمة بالمشغلات المدعومة، راجع <a href="/docs/ar/geometry-operators.md#Supported-geometry-operators">مشغلات الهندسة المدعومة</a>.</p></li>
+<li><p><code translate="no">geo_field</code> هو اسم الحقل <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> هو تمثيل WKT للهندسة المراد الاستعلام عنها.</p></li>
+<li><p><code translate="no">distance</code> هو الحد الخاص بـ <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
 <p>لمعرفة المزيد عن <code translate="no">GEOMETRY</code> الحقول في ميلفوس، راجع <a href="/docs/ar/geometry-field.md">حقل الهندسة</a>.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">مشغلات الهندسة المدعومة<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يسرد الجدول التالي قائمة بالعوامل الهندسية المتوفرة في Milvus.</p>
+    </button></h2><p>يسرد الجدول التالي قائمة بعوامل الهندسة المتوفرة في ميلفوس.</p>
 <div class="alert note">
 <p>يجب أن تكون أسماء المشغلات <strong>كلها كبيرة</strong> أو <strong>كلها صغيرة</strong>. لا تخلط الحالات داخل نفس اسم المشغل.</p>
 </div>
@@ -168,7 +196,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقوم المشغّل <code translate="no">ST_INTERSECTS</code> بإرجاع <code translate="no">TRUE</code> إذا كان هناك أي نقطة مشتركة بين شكلين هندسيين في حدودهما أو داخلهما. هذا هو مشغل للأغراض العامة للكشف عن أي شكل من أشكال التداخل المكاني.</p>
+    </button></h2><p>يقوم المشغّل <code translate="no">ST_INTERSECTS</code> بإرجاع <code translate="no">TRUE</code> إذا كان هناك أي نقطة مشتركة بين أي شكلين هندسيين في حدودهما أو داخلهما. هذا هو مشغل للأغراض العامة للكشف عن أي شكل من أشكال التداخل المكاني.</p>
 <p><strong>مثال</strong></p>
 <p>إذا كان لديك مجموعة من الطرق وترغب في العثور على جميع الطرق التي تتقاطع أو تلامس سلسلة خطية محددة تمثل طريقًا جديدًا مقترحًا، يمكنك استخدام <code translate="no">ST_INTERSECTS</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that intersect with a specific line string.</span>

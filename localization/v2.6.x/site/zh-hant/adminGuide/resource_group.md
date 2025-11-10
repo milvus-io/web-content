@@ -90,7 +90,7 @@ title: 管理資源群組
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本頁面的所有程式碼範例都在 PyMilvus 2.6.2 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
+<p>本頁面的所有程式碼範例都在 PyMilvus 2.6.3 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
 </div>
 <ol>
 <li><p>建立資源群組</p>
@@ -181,7 +181,7 @@ partition = <span class="hljs-string">&quot;Novels&quot;</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
 <p>請注意，<code translate="no">_resource_groups</code> 是一個可選參數，不指定它會讓 Milvus 將複製本載入預設資源群組中的查詢節點。</p>
-<p>若要讓 Milus 在單獨的資源群組中載入集合的每個複製本，請確保資源群組的數量等於複製本的數量。</p></li>
+<p>若要 Milus 在單獨的資源群組中載入集合的每個複製本，請確保資源群組的數量等於複製本的數量。</p></li>
 <li><p>在資源群組之間轉移副本。</p>
 <p>Milvus 使用<a href="/docs/zh-hant/replica.md">副本</a>实现分布在多个查询节点上的<a href="/docs/zh-hant/glossary.md#Segment">段</a>之间的负载平衡。您可以按以下方式將資料集中的某些複製品從一個資源群組移到另一個資源群組：</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>

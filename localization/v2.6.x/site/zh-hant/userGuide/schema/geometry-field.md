@@ -29,7 +29,7 @@ beta: Milvus 2.6.4+
 <li><p>地圖與物流：「區域<strong>內的</strong>資產 」或<strong>「與</strong>路徑<strong>相交的</strong>路線」</p></li>
 </ul>
 <div class="alert note">
-<p>GEOMETRY 欄位需要 PyMilvus 2.7.0rc46 或更新版本。這個版本目前只能從原始碼建立。有關說明，請參閱<a href="https://github.com/milvus-io/pymilvus#faq">如何從原始碼建立 PyMilvus</a>。</p>
+<p>若要使用 GEOMETRY 欄位，請將您的 SDK 升級至最新版本。</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">什麼是 GEOMETRY 欄位？<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +46,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GEOMETRY 欄位是 Milvus 中一個模式定義的資料類型 (<code translate="no">DataType.GEOMETRY</code>) ，用來儲存幾何資料。當處理幾何欄位時，您使用<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>格式與資料互動，這是一種人類可讀的表示法，用於插入資料和查詢。在內部，Milvus 會將 WKT 轉換為<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB)</a>，以提高儲存和處理效率，但您不需要直接處理 WKB。</p>
+    </button></h2><p>在 Milvus 中，GEOMETRY 欄位是一種模式定義的資料類型 (<code translate="no">DataType.GEOMETRY</code>) ，用來儲存幾何資料。當處理幾何欄位時，您使用<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>格式與資料互動，這是一種人類可讀的表示法，用於插入資料和查詢。在內部，Milvus 會將 WKT 轉換為<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB)</a>，以提高儲存和處理效率，但您不需要直接處理 WKB。</p>
 <p><code translate="no">GEOMETRY</code> 資料類型支援下列幾何物件：</p>
 <ul>
 <li><p><strong>POINT</strong>:<code translate="no">POINT (x y)</code>; 例如，<code translate="no">POINT (13.403683 52.520711)</code> ，其中<code translate="no">x</code> = 經度，<code translate="no">y</code> = 緯度</p></li>
@@ -347,16 +347,19 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>一旦滿足這些要求，您就可以使用具有專用幾何運算符號的表達式，根據幾何值篩選集合。</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">定義篩選表達式</h4><p>若要對<code translate="no">GEOMETRY</code> 欄位進行篩選，請使用具備下列表達式格式的幾何專用運算符：<code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>其中：</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">定義篩選表達式</h4><p>若要對<code translate="no">GEOMETRY</code> 欄位進行篩選，請在表達式中使用幾何運算符：</p>
 <ul>
-<li><p><code translate="no">{operator}</code> 是支援的幾何運算符號 (例如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code>)。如需可用運算符的完整清單，請參閱<a href="/docs/zh-hant/geometry-operators.md">幾何運算符</a>。</p></li>
-<li><p><code translate="no">geo_field</code> 是在集合模式中定義的<code translate="no">GEOMETRY</code> 欄位的名稱。</p></li>
-<li><p><code translate="no">'{wkt}'</code> 是 WKT 字串，代表您要篩選的幾何物件。</p></li>
+<li><p>一般：<code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>基於距離：<code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>某些運算符號，例如<code translate="no">ST_DWITHIN</code> ，可能需要額外的參數。有關各運算符的詳細資訊和使用範例，請參閱<a href="/docs/zh-hant/geometry-operators.md">幾何運算符</a>。</p>
-</div>
-<p>以下範例示範如何在篩選表達式中使用不同的特定幾何運算符：</p>
+<p>其中：</p>
+<ul>
+<li><p><code translate="no">operator</code> 是支援的幾何運算符號之一 (例如<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_INTERSECTS</code>)。運算符號名稱必須全大楷或全小楷。如需支援的運算符號清單，請參閱<a href="/docs/zh-hant/geometry-operators.md#Supported-geometry-operators">支援的幾何運算符號</a>。</p></li>
+<li><p><code translate="no">geo_field</code> 是<code translate="no">GEOMETRY</code> 欄位的名稱。</p></li>
+<li><p><code translate="no">'{wkt}'</code> 是要查詢的幾何的 WKT 表示。</p></li>
+<li><p><code translate="no">distance</code> 是專為<code translate="no">ST_DWITHIN</code> 設定的臨界值。</p></li>
+</ul>
+<p>以下範例示範如何在篩選表達式中使用不同的特定幾何運算符號：</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">範例 1：尋找矩形區域內的實體</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>

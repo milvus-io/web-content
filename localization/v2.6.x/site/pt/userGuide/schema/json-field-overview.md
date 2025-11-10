@@ -42,7 +42,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um campo JSON é um tipo de dados definido pelo esquema (<code translate="no">DataType.JSON</code>) no Milvus que armazena dados estruturados de valor-chave. Ao contrário das colunas rígidas tradicionais de bases de dados, os campos JSON acomodam objectos aninhados, arrays e tipos de dados mistos, ao mesmo tempo que fornecem várias opções de indexação para consultas rápidas.</p>
+    </button></h2><p>Um campo JSON é um tipo de dados definido pelo esquema (<code translate="no">DataType.JSON</code>) em Milvus que armazena dados estruturados de valor-chave. Ao contrário das colunas rígidas tradicionais de bases de dados, os campos JSON acomodam objectos aninhados, arrays e tipos de dados mistos, ao mesmo tempo que fornecem várias opções de indexação para consultas rápidas.</p>
 <p>Exemplo de estrutura de campo JSON:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> 
@@ -93,7 +93,7 @@ summary: >-
    <tr>
      <td><p>Definição de esquema</p></td>
      <td><p>Um campo escalar que deve ser explicitamente declarado no esquema da coleção com o tipo <code translate="no">DataType.JSON</code>.</p></td>
-     <td><p>Um campo JSON oculto (denominado <code translate="no">#meta</code>) que armazena automaticamente os campos não declarados.</p></td>
+     <td><p>Um campo JSON oculto (denominado <code translate="no">$meta</code>) que armazena automaticamente os campos não declarados.</p></td>
    </tr>
    <tr>
      <td><p>Caso de utilização</p></td>
@@ -108,7 +108,7 @@ summary: >-
    <tr>
      <td><p>Consulta</p></td>
      <td><p>Consulta utilizando o nome do campo ou a chave de destino dentro do campo JSON: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Consulta direta utilizando a chave de campo dinâmica: <code translate="no">"dynamic_key"</code> ou através de <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Consulta direta utilizando a chave de campo dinâmica: <code translate="no">"dynamic_key"</code> ou através de <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Operações básicas<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -240,7 +240,7 @@ client.load_collection(collection_name=<span class="hljs-string">&quot;product_c
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Uma vez cumpridos estes requisitos, pode utilizar as expressões abaixo para filtrar a sua coleção com base nos valores do campo JSON. Essas expressões de filtro utilizam a sintaxe de caminho JSON específica e operadores dedicados.</p>
-<h4 id="Filtering-with-JSON-path-syntax" class="common-anchor-header">Filtragem com sintaxe de caminho JSON</h4><p>Para consultar uma chave específica, utilize a notação de parênteses para aceder a chaves JSON: <code translate="no">json_field_name[&quot;key&quot;]</code>. Para chaves aninhadas, encadeie-as: <code translate="no">json_field_name[&quot;key1&quot;][&quot;key2&quot;]</code>.</p>
+<h4 id="Filtering-with-JSON-path-syntax" class="common-anchor-header">Filtragem com sintaxe de caminho JSON</h4><p>Para consultar uma chave específica, utilize a notação entre parênteses para aceder a chaves JSON: <code translate="no">json_field_name[&quot;key&quot;]</code>. Para chaves aninhadas, encadeie-as: <code translate="no">json_field_name[&quot;key1&quot;][&quot;key2&quot;]</code>.</p>
 <p>Para filtrar entidades em que <code translate="no">category</code> é <code translate="no">&quot;electronics&quot;</code>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define filter expression</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
@@ -302,7 +302,7 @@ res = client.search(
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter mais informações sobre operadores específicos de JSON, consulte <a href="/docs/pt/json-operators.md">Operadores JSON</a>.</p>
-<h2 id="Next-Accelerate-JSON-queries" class="common-anchor-header">Próximo: Acelerar as consultas JSON<button data-href="#Next-Accelerate-JSON-queries" class="anchor-icon" translate="no">
+<h2 id="Next-Accelerate-JSON-queries" class="common-anchor-header">Próximo: Acelerar consultas JSON<button data-href="#Next-Accelerate-JSON-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -436,7 +436,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus armazena valores de string exatamente como eles aparecem na entrada JSON - sem transformação semântica. As cadeias de caracteres com aspas inadequadas podem resultar em erros durante a análise.</p>
+    </button></h3><p>Milvus armazena valores de string exatamente como aparecem na entrada JSON - sem transformação semântica. As cadeias de caracteres com aspas inadequadas podem resultar em erros durante a análise.</p>
 <p><strong>Exemplos de strings válidas</strong>:</p>
 <pre><code translate="no" class="language-plaintext">&quot;a\&quot;b&quot;, &quot;a&#x27;b&quot;, &quot;a\\b&quot;
 <button class="copy-code-btn"></button></code></pre>

@@ -31,7 +31,7 @@ beta: Milvus 2.6.4+
 <li><p>الخرائط واللوجستيات: "الأصول <strong>داخل</strong> منطقة ما" أو "الطرق <strong>التي تتقاطع</strong> مع مسار ما"</p></li>
 </ul>
 <div class="alert note">
-<p>يتطلّب حقل GEOMETRY PyMilvus 2.7.0rc46 أو إصدار أحدث. هذا الإصدار متاح حاليًا فقط عن طريق البناء من المصدر. للحصول على التعليمات، راجع <a href="https://github.com/milvus-io/pymilvus#faq">كيفية بناء PyMilvus من المصدر</a>.</p>
+<p>لاستخدام حقل GEOMETRY، قم بترقية SDK إلى أحدث إصدار.</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">ما هو حقل GEOMETRY؟<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,10 +48,10 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>حقل GEOMETRY هو نوع بيانات محدد من قبل المخطط (<code translate="no">DataType.GEOMETRY</code>) في ميلفوس يقوم بتخزين البيانات الهندسية. عند العمل مع حقول الهندسة، فإنك تتفاعل مع البيانات باستخدام تنسيق <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">النص المعروف (WKT)</a> ، وهو تمثيل مقروء بشري يستخدم لإدراج البيانات والاستعلام عنها. داخليًا، تقوم Milvus بتحويل WKT إلى <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">ثنائي معروف (WKB)</a> للتخزين والمعالجة الفعالة، ولكنك لا تحتاج إلى التعامل مع WKB مباشرة.</p>
+    </button></h2><p>حقل GEOMETRY هو نوع بيانات معرّف من قبل المخطط (<code translate="no">DataType.GEOMETRY</code>) في ميلفوس يخزن البيانات الهندسية. عند العمل مع حقول الهندسة، فإنك تتفاعل مع البيانات باستخدام تنسيق <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">النص المعروف (WKT)</a> ، وهو تمثيل مقروء بشري يستخدم لإدراج البيانات والاستعلام عنها. داخليًا، تقوم Milvus بتحويل WKT إلى <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">ثنائي معروف (WKB)</a> للتخزين والمعالجة الفعالة، ولكنك لا تحتاج إلى التعامل مع WKB مباشرة.</p>
 <p>يدعم نوع البيانات <code translate="no">GEOMETRY</code> الكائنات الهندسية التالية:</p>
 <ul>
-<li><p><strong>النقطة</strong>: <code translate="no">POINT (x y)</code> ؛ على سبيل المثال، <code translate="no">POINT (13.403683 52.520711)</code> حيث <code translate="no">x</code> = خط الطول و <code translate="no">y</code> = خط العرض</p></li>
+<li><p><strong>نقطة</strong>: <code translate="no">POINT (x y)</code> ؛ على سبيل المثال، <code translate="no">POINT (13.403683 52.520711)</code> حيث <code translate="no">x</code> = خط الطول و <code translate="no">y</code> = خط العرض</p></li>
 <li><p><strong>LINESTRING</strong>: <code translate="no">LINESTRING (x1 y1, x2 y2, …)</code> ؛ على سبيل المثال, <code translate="no">LINESTRING (13.40 52.52, 13.41 52.51)</code></p></li>
 <li><p><strong>POLYGON</strong>: <code translate="no">POLYGON ((x1 y1, x2 y2, x3 y3, x1 y1))</code> ؛ على سبيل المثال, <code translate="no">POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))</code></p></li>
 <li><p><strong>MULTIPOINT</strong>: <code translate="no">MULTIPOINT ((x1 y1), (x2 y2), …)</code> ؛ على سبيل المثال, <code translate="no">MULTIPOINT ((10 40), (40 30), (20 20), (30 10))</code></p></li>
@@ -349,16 +349,19 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>بمجرد استيفاء هذه المتطلبات، يمكنك استخدام التعبيرات مع مشغلات هندسية مخصصة لتصفية مجموعتك بناءً على القيم الهندسية.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">تحديد تعبيرات التصفية</h4><p>للتصفية على الحقل <code translate="no">GEOMETRY</code> ، استخدم مشغّلًا مخصصًا للهندسة بصيغة التعبير التالية: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code> ، حيث:</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">تحديد تعبيرات التصفية</h4><p>للتصفية على حقل <code translate="no">GEOMETRY</code> ، استخدم مشغّل هندسي في تعبير:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> هو مشغل هندسي مدعوم (على سبيل المثال، <code translate="no">ST_CONTAINS</code> ، <code translate="no">ST_INTERSECTS</code>). للحصول على قائمة كاملة بالمشغلات المتاحة، راجع <a href="/docs/ar/geometry-operators.md">مشغلات الهندسة</a>.</p></li>
-<li><p><code translate="no">geo_field</code> هو اسم الحقل <code translate="no">GEOMETRY</code> المحدد في مخطط مجموعتك.</p></li>
-<li><p><code translate="no">'{wkt}'</code> هو سلسلة WKT التي تمثل الكائن الهندسي الذي تقوم بالتصفية عليه.</p></li>
+<li><p>عام: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>قائم على المسافة: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>قد تتطلب بعض المشغلات، مثل <code translate="no">ST_DWITHIN</code> ، معلمات إضافية. للاطلاع على التفاصيل وأمثلة الاستخدام لكل مشغل، ارجع إلى <a href="/docs/ar/geometry-operators.md">مشغلات الهندسة</a>.</p>
-</div>
-<p>توضّح الأمثلة التالية كيفية استخدام مشغّلات مختلفة خاصة بالهندسة في تعبير تصفية:</p>
+<p>حيث:</p>
+<ul>
+<li><p><code translate="no">operator</code> هو أحد العوامل الهندسية المدعومة (على سبيل المثال، <code translate="no">ST_CONTAINS</code> ، <code translate="no">ST_INTERSECTS</code>). يجب أن تكون أسماء المشغلات بأحرف كبيرة أو بأحرف صغيرة. للحصول على قائمة بالمشغلات المدعومة، راجع <a href="/docs/ar/geometry-operators.md#Supported-geometry-operators">مشغلات الهندسة المدعومة</a>.</p></li>
+<li><p><code translate="no">geo_field</code> هو اسم الحقل <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> هو تمثيل WKT للهندسة المراد الاستعلام عنها.</p></li>
+<li><p><code translate="no">distance</code> هو الحد الخاص بـ <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
+<p>توضّح الأمثلة التالية كيفية استخدام عوامل تشغيل مختلفة خاصة بالهندسة في تعبير مرشح:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">مثال 1: البحث عن كيانات داخل منطقة مستطيلة</h4><div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>

@@ -86,7 +86,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">SCANN</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详细信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详情，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
 <li><p><code translate="no">params</code>:用于建立索引的附加配置选项。</p>
 <ul>
 <li><code translate="no">with_raw_data</code>:是否在存储量化表示的同时存储原始向量数据。</li>
@@ -148,7 +148,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本节概述了用于建立索引和在索引上执行搜索的参数。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立参数</h3><p>下表列出了<a href="/docs/zh/scann.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立参数<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/scann.md#Build-index">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th><p>参数</p></th>
@@ -157,15 +172,34 @@ res = MilvusClient.search(
      <th><p>调整建议</p></th>
    </tr>
    <tr>
+     <td><p><code translate="no">nlist</code></p></td>
+     <td><p>群组单位数</p></td>
+     <td><p>[1, 65536]</p></td>
+     <td><p>较高的<em>nlist</em>会提高剪枝效率，通常会加快粗搜索速度，但分区可能会变小，从而降低召回率；较低的<em>nlist</em>会扫描较大的簇，提高召回率，但会减慢搜索速度。</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">with_raw_data</code></p></td>
-     <td><p>是否在存储量化表示的同时存储原始向量数据。启用后，可以在重新排序阶段使用原始向量而不是量化近似值来进行更精确的相似性计算。</p></td>
-     <td><p><strong>类型</strong>：布尔布尔<strong>范围</strong> <code translate="no">true</code>,<code translate="no">false</code></p>
-<p><strong>默认值</strong>：<code translate="no">true</code></p></td>
-     <td><p>设置为<code translate="no">true</code> 以获得<strong>更高的搜索精度</strong>，并且存储空间不是主要考虑因素。原始向量数据可在重新排序时进行更精确的相似性计算。 设置为<code translate="no">false</code> 可<strong>减少存储开销</strong>和内存使用，尤其是对于大型数据集。不过，由于重新排序阶段将使用量化向量，这可能会导致搜索精度略微降低。</p>
-<p><strong>建议</strong>使用：对于准确性要求较高的生产应用，请使用<code translate="no">true</code> 。</p></td>
+     <td><p>是否在量化表示的同时存储原始向量数据。启用后，在重新排序阶段，可以使用原始向量而不是量化近似值来进行更精确的相似性计算。</p></td>
+     <td><p><strong>类型</strong>：布尔布尔</p><p><strong>范围</strong> <code translate="no">true</code>,<code translate="no">false</code></p><p><strong>默认值</strong>：<code translate="no">true</code></p></td>
+     <td><p>设置为<code translate="no">true</code> 以获得<strong>更高的搜索精度</strong>，并且存储空间不是首要考虑因素。原始向量数据可在重新排序时进行更精确的相似性计算。</p><p>设置为<code translate="no">false</code> 可<strong>减少存储开销</strong>和内存使用，尤其是对于大型数据集。不过，由于重新排序阶段将使用量化向量，这可能会导致搜索精度略微降低。</p><p><strong>建议</strong>使用：对于准确性要求较高的生产应用，请使用<code translate="no">true</code> 。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定索引搜索参数</h3><p>下表列出了<a href="/docs/zh/scann.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定索引搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/scann.md#Search-on-index">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th><p>参数</p></th>
@@ -176,10 +210,7 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>控制在重新排序阶段精炼的候选向量数量。该参数决定了使用更精确的相似性计算方法重新评估初始分区和量化阶段的前几名候选向量的数量。</p></td>
-     <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[1，<em>int_max］</em></p>
-<p><strong>默认值</strong>：无</p></td>
-     <td><p><code translate="no">reorder_k</code> 越大，<strong>搜索准确率</strong>越高，因为在最后细化阶段会考虑更多候选项。如果实现高召回率至关重要，而<strong>搜索</strong>速度则不那么重要，则可以考虑增加<code translate="no">reorder_k</code> 。一个好的起点是 2-5 倍于所需的<code translate="no">limit</code> （返回的前 K 个结果）。</p>
-<p>考虑降低<code translate="no">reorder_k</code> 以优先加快搜索速度，尤其是在可以接受准确率略有下降的情况下。</p>
-<p>在大多数情况下，我们建议您在此范围内设置一个值：[<em>limit</em>,<em>limit</em>* 5]。</p></td>
+     <td><p><strong>类型</strong>：整数</p><p><strong>范围</strong>： [1, int_max[1，<em>int_max］</em></p><p><strong>默认值</strong>：无无</p></td>
+     <td><p><code translate="no">reorder_k</code> 越大，<strong>搜索精度越高</strong>，因为在最后的细化阶段会考虑更多的候选项。不过，这也会因为额外的计算而<strong>增加搜索时间</strong>。</p><p>如果实现高召回率至关重要，而搜索速度又不是那么重要，那么可以考虑提高<code translate="no">reorder_k</code> 。一个好的起点是 2-5 倍于所需的<code translate="no">limit</code> （返回的前 K 个结果）。</p><p>考虑降低<code translate="no">reorder_k</code> 以优先加快搜索速度，尤其是在可以接受准确率略有下降的情况下。</p><p>在大多数情况下，我们建议您在此范围内设置一个值：[<em>limit</em>,<em>limit</em>* 5]。</p></td>
    </tr>
 </table>

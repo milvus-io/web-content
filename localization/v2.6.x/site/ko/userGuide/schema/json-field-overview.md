@@ -89,7 +89,7 @@ summary: >-
    <tr>
      <td><p>스키마 정의</p></td>
      <td><p>컬렉션 스키마에서 <code translate="no">DataType.JSON</code> 유형으로 명시적으로 선언해야 하는 스칼라 필드입니다.</p></td>
-     <td><p>선언되지 않은 필드를 자동으로 저장하는 숨겨진 JSON 필드(이름: <code translate="no">#meta</code>)입니다.</p></td>
+     <td><p>선언되지 않은 필드를 자동으로 저장하는 숨겨진 JSON 필드(이름: <code translate="no">$meta</code>)입니다.</p></td>
    </tr>
    <tr>
      <td><p>사용 사례</p></td>
@@ -104,7 +104,7 @@ summary: >-
    <tr>
      <td><p>쿼리</p></td>
      <td><p>JSON 필드 내에서 필드 이름 또는 대상 키를 사용하여 쿼리: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>동적 필드 키를 사용하여 직접 쿼리: <code translate="no">"dynamic_key"</code> 또는 <code translate="no">#meta</code> 을 통해 쿼리합니다: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>동적 필드 키를 사용하여 직접 쿼리: <code translate="no">"dynamic_key"</code> 또는 <code translate="no">$meta</code> 을 통해 쿼리합니다: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">기본 작업<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -122,7 +122,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON 필드를 사용하기 위한 기본적인 워크플로에는 스키마에서 필드를 정의하고, 데이터를 삽입한 다음 특정 필터 표현식을 사용하여 데이터를 쿼리하는 작업이 포함됩니다.</p>
+    </button></h2><p>JSON 필드를 사용하기 위한 기본적인 워크플로에는 스키마에서 필드를 정의하고, 데이터를 삽입한 다음, 특정 필터 표현식을 사용하여 데이터를 쿼리하는 것이 포함됩니다.</p>
 <h3 id="Define-a-JSON-field" class="common-anchor-header">JSON 필드 정의하기<button data-href="#Define-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

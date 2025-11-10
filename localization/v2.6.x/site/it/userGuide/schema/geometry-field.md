@@ -32,7 +32,7 @@ beta: Milvus 2.6.4+
 <li><p>Mappe e logistica: "beni <strong>all'interno di</strong> una regione" o "percorsi <strong>che intersecano</strong> un percorso".</p></li>
 </ul>
 <div class="alert note">
-<p>Il campo GEOMETRIA richiede PyMilvus 2.7.0rc46 o successivo. Questa versione è attualmente disponibile solo tramite compilazione dai sorgenti. Per le istruzioni, vedere <a href="https://github.com/milvus-io/pymilvus#faq">Come creare PyMilvus dai sorgenti</a>.</p>
+<p>Per utilizzare il campo GEOMETRIA, aggiornare l'SDK alla versione più recente.</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Che cos'è un campo GEOMETRIA?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -350,15 +350,18 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Una volta soddisfatti questi requisiti, è possibile utilizzare espressioni con operatori geometrici dedicati per filtrare l'insieme in base ai valori geometrici.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">Definire le espressioni di filtro</h4><p>Per filtrare sul campo <code translate="no">GEOMETRY</code>, utilizzare un operatore specifico per la geometria con il seguente formato di espressione: <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, dove:</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">Definire le espressioni di filtro</h4><p>Per filtrare su un campo <code translate="no">GEOMETRY</code>, utilizzare un operatore geometrico in un'espressione:</p>
 <ul>
-<li><p><code translate="no">{operator}</code> è un operatore geometrico supportato (ad esempio, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Per un elenco completo degli operatori disponibili, consultare <a href="/docs/it/geometry-operators.md">Operatori geometrici</a>.</p></li>
-<li><p><code translate="no">geo_field</code> è il nome del campo <code translate="no">GEOMETRY</code> definito nello schema della raccolta.</p></li>
-<li><p><code translate="no">'{wkt}'</code> è la stringa WKT che rappresenta l'oggetto geometrico su cui si sta filtrando.</p></li>
+<li><p>Generale: <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>Basato sulla distanza: <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>Alcuni operatori, come <code translate="no">ST_DWITHIN</code>, possono richiedere parametri aggiuntivi. Per i dettagli e gli esempi di utilizzo di ciascun operatore, fare riferimento a <a href="/docs/it/geometry-operators.md">Operatori geometrici</a>.</p>
-</div>
+<p>Dove:</p>
+<ul>
+<li><p><code translate="no">operator</code> è uno degli operatori geometrici supportati (ad esempio, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). I nomi degli operatori devono essere tutti maiuscoli o tutti minuscoli. Per un elenco degli operatori supportati, consultare la sezione <a href="/docs/it/geometry-operators.md#Supported-geometry-operators">Operatori geometrici supportati</a>.</p></li>
+<li><p><code translate="no">geo_field</code> è il nome del campo <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> è la rappresentazione WKT della geometria da interrogare.</p></li>
+<li><p><code translate="no">distance</code> è la soglia specifica per <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
 <p>Gli esempi seguenti mostrano come utilizzare diversi operatori specifici per la geometria in un'espressione di filtro:</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Esempio 1: Trovare entità all'interno di un'area rettangolare</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

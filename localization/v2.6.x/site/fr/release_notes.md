@@ -40,10 +40,10 @@ title: Notes de mise à jour
 <tr><th style="text-align:left">Version Milvus</th><th style="text-align:left">Version SDK Python</th><th style="text-align:left">Version SDK Node.js</th><th style="text-align:left">Version SDK Java</th><th style="text-align:left">Version du SDK Go</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>Nous sommes heureux d'annoncer la sortie de Milvus 2.6.4, qui présente une série de nouvelles fonctionnalités puissantes, d'améliorations des performances et de corrections de bogues essentielles. Cette mise à jour introduit des fonctionnalités importantes telles que Struct in ARRAY pour une modélisation avancée des données. En outre, nous avons activé le déchiquetage JSON par défaut, ce qui améliore encore les performances et l'efficacité des requêtes. Plusieurs bogues critiques ont également été corrigés afin d'assurer une plus grande stabilité et fiabilité. Avec cette version, Milvus continue d'offrir une expérience plus robuste et plus efficace à tous les utilisateurs. Vous trouverez ci-dessous les principales caractéristiques de cette version.</p>
+<p>Nous sommes ravis d'annoncer la sortie de Milvus 2.6.4, qui présente une série de nouvelles fonctionnalités puissantes, d'améliorations des performances et de corrections de bogues essentielles. Cette mise à jour introduit des fonctionnalités importantes telles que Struct in ARRAY pour une modélisation avancée des données. En outre, nous avons activé le déchiquetage JSON par défaut, ce qui améliore encore les performances et l'efficacité des requêtes. Plusieurs bogues critiques ont également été corrigés afin d'assurer une plus grande stabilité et fiabilité. Avec cette version, Milvus continue d'offrir une expérience plus robuste et plus efficace à tous les utilisateurs. Vous trouverez ci-dessous les principales caractéristiques de cette version.</p>
 <h3 id="Features" class="common-anchor-header">Fonctionnalités<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ title: Notes de mise à jour
 <li>Déplacement des fichiers de tests unitaires de l'API C vers le répertoire <code translate="no">src</code> pour une meilleure organisation.<a href="https://github.com/milvus-io/milvus/pull/44458">(#44458</a>)</li>
 <li>Go SDK permet maintenant aux utilisateurs d'insérer des données de clé primaire si <code translate="no">autoid</code> est activé.<a href="https://github.com/milvus-io/milvus/pull/44561">(#44561</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Corrections de bugs<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+<h3 id="Bug-fixes" class="common-anchor-header">Corrections de bogues<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -658,7 +658,7 @@ title: Notes de mise à jour
 <li>Le <a href="/docs/fr/lindera-tokenizer.md">tokenizer Lindera</a> est intégré pour une meilleure prise en charge des langues asiatiques telles que le japonais et le coréen.</li>
 <li>La sélection du tokenizer au niveau de la ligne est désormais prise en charge, le <a href="/docs/fr/icu-tokenizer.md">tokenizer</a> polyvalent <a href="/docs/fr/icu-tokenizer.md">ICU</a> étant disponible comme solution de repli pour les scénarios multilingues.</li>
 </ul>
-<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Données entrantes, données sortantes avec les fonctions d'intégration</h4><p>Milvus 2.6 introduit une fonction "Entrée et sortie de données" qui simplifie le développement d'applications d'IA en s'intégrant directement aux modèles d'intégration tiers (par exemple, OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Les utilisateurs peuvent désormais insérer et interroger des données textuelles brutes, et Milvus appellera automatiquement le service de modèle spécifié pour convertir le texte en vecteurs en temps réel. Il n'est donc plus nécessaire de disposer d'un pipeline de conversion vectorielle distinct.</p>
+<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Entrée et sortie des données avec les fonctions d'intégration</h4><p>Milvus 2.6 introduit une fonction "Entrée et sortie de données" qui simplifie le développement d'applications d'IA en s'intégrant directement aux modèles d'intégration tiers (par exemple, OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Les utilisateurs peuvent désormais insérer et interroger des données textuelles brutes, et Milvus appellera automatiquement le service de modèle spécifié pour convertir le texte en vecteurs en temps réel. Il n'est donc plus nécessaire de disposer d'un pipeline de conversion vectorielle distinct.</p>
 <p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/embedding-function-overview.md">Vue d'ensemble de la fonction d'intégration</a>.</p>
 <h4 id="Phrase-Match" class="common-anchor-header">Correspondance de phrases</h4><p>La correspondance de phrases est une fonction de recherche de texte qui renvoie des résultats uniquement lorsque la séquence exacte de mots d'une requête apparaît consécutivement et dans le bon ordre dans un document.</p>
 <p><strong>Caractéristiques principales</strong>:</p>

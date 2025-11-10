@@ -92,7 +92,7 @@ summary: >-
    <tr>
      <td><p>Определение схемы</p></td>
      <td><p>Скалярное поле, которое должно быть явно объявлено в схеме коллекции с типом <code translate="no">DataType.JSON</code>.</p></td>
-     <td><p>Скрытое JSON-поле (с именем <code translate="no">#meta</code>), которое автоматически сохраняет необъявленные поля.</p></td>
+     <td><p>Скрытое JSON-поле (с именем <code translate="no">$meta</code>), которое автоматически сохраняет необъявленные поля.</p></td>
    </tr>
    <tr>
      <td><p>Случай использования</p></td>
@@ -107,7 +107,7 @@ summary: >-
    <tr>
      <td><p>Запрос</p></td>
      <td><p>Запрос с использованием имени поля или целевого ключа внутри JSON-поля: <code translate="no">metadata["key"]</code>.</p></td>
-     <td><p>Запрос напрямую с использованием динамического ключа поля: <code translate="no">"dynamic_key"</code> или через <code translate="no">#meta</code>: <code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>Запрос напрямую с использованием динамического ключа поля: <code translate="no">"dynamic_key"</code> или через <code translate="no">$meta</code>: <code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">Основные операции<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -177,7 +177,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После создания коллекции вставьте сущности, содержащие структурированные JSON-объекты, в указанное вами JSON-поле. Данные должны быть оформлены в виде списка словарей.</p>
+    </button></h3><p>После создания коллекции вставьте сущности, содержащие структурированные JSON-объекты, в указанное JSON-поле. Данные должны быть оформлены в виде списка словарей.</p>
 <pre><code translate="no" class="language-python">entities = [
     {
         <span class="hljs-string">&quot;product_id&quot;</span>: <span class="hljs-number">1</span>,

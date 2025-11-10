@@ -148,7 +148,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 인덱스 구축 및 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/scann.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/scann.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>파라미터</p></th>
@@ -157,15 +172,34 @@ res = MilvusClient.search(
      <th><p>조정 제안</p></th>
    </tr>
    <tr>
+     <td><p><code translate="no">nlist</code></p></td>
+     <td><p>클러스터 단위 수</p></td>
+     <td><p>[1, 65536]</p></td>
+     <td><p><em>nlist가</em> 높을수록 가지 치기 효율이 높아지고 일반적으로 거친 검색 속도가 빨라지지만 파티션이 너무 작아져 회상률이 떨어질 수 있으며, <em>nlist가</em> 낮을수록 더 큰 클러스터를 스캔하여 회상률이 향상되지만 검색 속도가 느려질 수 있습니다.</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">with_raw_data</code></p></td>
-     <td><p>양자화된 표현과 함께 원본 벡터 데이터를 저장할지 여부입니다. 활성화하면 양자화된 근사치 대신 원본 벡터를 사용하여 순위 재지정 단계에서 보다 정확한 유사도 계산을 수행할 수 있습니다.</p></td>
-     <td><p><strong>유형</strong>: 부울 <strong>범위</strong>: <code translate="no">true</code>, <code translate="no">false</code></p>
-<p><strong>기본값입니다</strong>: <code translate="no">true</code></p></td>
-     <td><p><strong>검색 정확도를 높이고</strong> 저장 공간이 크게 문제가 되지 않는 경우 <code translate="no">true</code> 로 설정합니다. 원본 벡터 데이터를 사용하면 순위를 재조정하는 동안 보다 정확한 유사도 계산이 가능합니다. <code translate="no">false</code> 으로 설정하면 특히 대규모 데이터 세트의 경우 <strong>스토리지 오버헤드와</strong> 메모리 사용량을 <strong>줄일</strong> 수 있습니다. 그러나 순위 재지정 단계에서 양자화된 벡터를 사용하므로 검색 정확도가 약간 낮아질 수 있습니다.</p>
-<p><strong>권장</strong>: 정확도가 중요한 프로덕션 애플리케이션에서는 <code translate="no">true</code> 을 사용하세요.</p></td>
+     <td><p>양자화된 표현과 함께 원본 벡터 데이터를 저장할지 여부입니다. 활성화하면 양자화된 근사치 대신 원본 벡터를 사용하여 순위 재지정 단계에서 보다 정확한 유사도 계산을 할 수 있습니다.</p></td>
+     <td><p><strong>유형</strong>: 부울</p><p><strong>범위</strong> <code translate="no">true</code>, <code translate="no">false</code></p><p><strong>기본값입니다</strong>: <code translate="no">true</code></p></td>
+     <td><p><strong>검색 정확도를 높이고</strong> 저장 공간이 크게 중요하지 않은 경우 <code translate="no">true</code> 로 설정합니다. 원본 벡터 데이터를 사용하면 순위를 재조정하는 동안 보다 정확한 유사도 계산이 가능합니다.</p><p>특히 대규모 데이터 세트의 경우 <strong>스토리지 오버헤드와</strong> 메모리 사용량을 <strong>줄이려면</strong> <code translate="no">false</code> 으로 설정합니다. 그러나 순위 재지정 단계에서 양자화된 벡터를 사용하므로 검색 정확도가 약간 낮아질 수 있습니다.</p><p><strong>권장</strong>: 정확도가 중요한 프로덕션 애플리케이션에서는 <code translate="no">true</code> 을 사용하세요.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">색인별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/scann.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">색인별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/scann.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>파라미터</p></th>
@@ -176,10 +210,7 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>순위 재조정 단계에서 정제되는 후보 벡터의 수를 제어합니다. 이 매개변수는 초기 파티셔닝 및 양자화 단계에서 보다 정밀한 유사도 계산을 사용하여 재평가할 상위 후보 벡터의 수를 결정합니다.</p></td>
-     <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, <em>int_max</em>]</p>
-<p><strong>기본값</strong>: None</p></td>
-     <td><p><code translate="no">reorder_k</code> 이 클수록 일반적으로 최종 정제 단계에서 더 많은 후보를 고려하므로 <strong>검색 정확도가 높아</strong> 집니다. 그러나 추가 계산으로 인해 <strong>검색 시간도 늘어</strong> 납니다. 높은 리콜률을 달성하는 것이 중요하고 검색 속도가 덜 중요한 경우에는 <code translate="no">reorder_k</code> 을 늘리는 것이 좋습니다. 원하는 <code translate="no">limit</code> (반환할 TopK 결과)의 2~5배가 좋은 시작점입니다.</p>
-<p>특히 약간의 정확도 저하를 감수할 수 있는 시나리오에서는 <code translate="no">reorder_k</code> 을 줄여 더 빠른 검색을 우선시하는 것을 고려하세요.</p>
-<p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다:<em>[제한</em>, <em>제한</em> * 5].</p></td>
+     <td><p><strong>유형</strong>: 정수</p><p><strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: None</p></td>
+     <td><p><code translate="no">reorder_k</code> 이 클수록 일반적으로 최종 구체화 단계에서 더 많은 후보를 고려하므로 <strong>검색 정확도가 높아집니다</strong>. 그러나 추가 계산으로 인해 <strong>검색 시간도 늘어납니다</strong>.</p><p>높은 회상률을 달성하는 것이 중요하고 검색 속도는 크게 신경 쓰지 않는 경우 <code translate="no">reorder_k</code> 을 늘리는 것을 고려하세요. 원하는 <code translate="no">limit</code> (반환할 TopK 결과)의 2~5배가 좋은 시작점입니다.</p><p>특히 약간의 정확도 저하를 감수할 수 있는 시나리오에서는 <code translate="no">reorder_k</code> 을 줄여 더 빠른 검색을 우선시하는 것을 고려하세요.</p><p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다:<em>[제한</em>, <em>제한</em> * 5].</p></td>
    </tr>
 </table>

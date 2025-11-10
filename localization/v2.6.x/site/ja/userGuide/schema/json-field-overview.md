@@ -2,7 +2,7 @@
 id: json-field-overview.md
 title: JSONフィールドの概要
 summary: >-
-  商品カタログ、コンテンツ管理システム、ユーザー嗜好エンジンのようなアプリケーションを構築する場合、多くの場合、ベクトル埋め込みと一緒に柔軟なメタデータを保存する必要があります。商品の属性はカテゴリによって異なり、ユーザの嗜好は時間とともに変化し、ドキュメントのプロパティは複雑な入れ子構造を持っています。MilvusのJSONフィールドは、パフォーマンスを犠牲にすることなく、柔軟な構造化データの保存とクエリを可能にすることで、この課題を解決します。
+  商品カタログ、コンテンツ管理システム、ユーザー嗜好エンジンのようなアプリケーションを構築する場合、多くの場合、ベクトル埋め込みと一緒に柔軟なメタデータを保存する必要があります。商品の属性はカテゴリーによって異なり、ユーザーの嗜好は時間とともに変化し、ドキュメントのプロパティは複雑な入れ子構造を持っています。MilvusのJSONフィールドは、パフォーマンスを犠牲にすることなく、柔軟な構造化データの保存とクエリを可能にすることで、この課題を解決します。
 ---
 <h1 id="JSON-Field-Overview" class="common-anchor-header">JSONフィールドの概要<button data-href="#JSON-Field-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ summary: >-
    <tr>
      <td><p>スキーマ定義</p></td>
      <td><p>コレクション・スキーマで、<code translate="no">DataType.JSON</code> 型で明示的に宣言する必要があるスカラー・フィールド。</p></td>
-     <td><p>宣言されていないフィールドを自動的に格納する非表示の JSON フィールド（<code translate="no">#meta</code> ）。</p></td>
+     <td><p>宣言されていないフィールドを自動的に格納する非表示の JSON フィールド（<code translate="no">$meta</code> ）。</p></td>
    </tr>
    <tr>
      <td><p>使用例</p></td>
@@ -101,7 +101,7 @@ summary: >-
    <tr>
      <td><p>クエリ</p></td>
      <td><p>JSONフィールド内のフィールド名またはターゲット・キーを使用してクエリ：<code translate="no">metadata["key"]</code> 。</p></td>
-     <td><p>ダイナミック・フィールドのキーを使って直接クエリーする：<code translate="no">"dynamic_key"</code> または<code translate="no">#meta</code> を経由して：<code translate="no">#meta["dynamic_key"]</code></p></td>
+     <td><p>ダイナミック・フィールドのキーを使って直接クエリーする：<code translate="no">"dynamic_key"</code> または<code translate="no">$meta</code> を経由して：<code translate="no">$meta["dynamic_key"]</code></p></td>
    </tr>
 </table>
 <h2 id="Basic-operations" class="common-anchor-header">基本的な操作<button data-href="#Basic-operations" class="anchor-icon" translate="no">
@@ -119,7 +119,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSONフィールドを使用するための基本的なワークフローは、スキーマでJSONフィールドを定義し、データを挿入し、特定のフィルター式を使用してデータをクエリすることです。</p>
+    </button></h2><p>JSONフィールドを使用する基本的なワークフローは、スキーマでフィールドを定義し、データを挿入し、特定のフィルター式を使用してデータをクエリすることです。</p>
 <h3 id="Define-a-JSON-field" class="common-anchor-header">JSONフィールドの定義<button data-href="#Define-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -310,7 +310,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>デフォルトでは、高速化されていないJSONフィールドに対するクエリは、すべての行のフル スキャンを実行します。JSONクエリを高速化するために、Milvusは高度なインデックス機能とストレージ最適化機能を提供しています。</p>
+    </button></h2><p>デフォルトでは、高速化されていないJSONフィールドに対するクエリは、すべての行のフルスキャンを実行します。JSONクエリを高速化するために、Milvusは高度なインデックス機能とストレージ最適化機能を提供しています。</p>
 <p>以下の表は、それらの違いと最適な使用シナリオをまとめたものです：</p>
 <table>
    <tr>
@@ -392,7 +392,7 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>JSONフィールドはデフォルト値をサポートしていません。ただし、フィールドの定義時に<code translate="no">nullable=True</code> を設定して、空の入力を許可することはできます。</p>
-<p>詳細は「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
+<p>詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSONフィールド・キーの命名規則はありますか？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -429,7 +429,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvusは文字列値をJSON入力と同じように保存します。文字列が不適切に引用符で囲まれていると、パース時にエラーが発生する可能性があります。</p>
+    </button></h3><p>Milvusは、JSON入力に表示されたとおりに、セマンティック変換なしで文字列値を保存します。文字列が不適切に引用符で囲まれていると、パース時にエラーが発生する可能性があります。</p>
 <p><strong>有効な文字列の例</strong></p>
 <pre><code translate="no" class="language-plaintext">&quot;a\&quot;b&quot;, &quot;a&#x27;b&quot;, &quot;a\\b&quot;
 <button class="copy-code-btn"></button></code></pre>

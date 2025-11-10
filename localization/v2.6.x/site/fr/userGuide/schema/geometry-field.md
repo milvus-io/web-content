@@ -28,12 +28,12 @@ beta: Milvus 2.6.4+
     </button></h1><p>Lors de la création d'applications telles que les systèmes d'information géographique (SIG), les outils de cartographie ou les services basés sur la localisation, il est souvent nécessaire de stocker et d'interroger des données géométriques. Le type de données <code translate="no">GEOMETRY</code> de Milvus résout ce problème en fournissant un moyen natif de stocker et d'interroger des données géométriques flexibles.</p>
 <p>Utilisez un champ GEOMETRY lorsque vous devez combiner la similarité vectorielle avec des contraintes spatiales, par exemple :</p>
 <ul>
-<li><p>Service de localisation (LBS) : "trouver des points d'intérêt similaires <strong>dans</strong> ce pâté de maisons".</p></li>
+<li><p>Service de localisation (LBS) : "trouver des points d'intérêt similaires à <strong>l'intérieur de</strong> ce pâté de maisons".</p></li>
 <li><p>Recherche multimodale : recherche multimodale : "trouver des photos similaires <strong>dans un rayon de 1 km</strong> autour de ce point".</p></li>
 <li><p>Cartes et logistique : "actifs <strong>à l'intérieur d'</strong> une région" ou "itinéraires <strong>croisant</strong> un chemin".</p></li>
 </ul>
 <div class="alert note">
-<p>Le champ GEOMETRY nécessite PyMilvus 2.7.0rc46 ou une version ultérieure. Cette version n'est actuellement disponible qu'en construisant à partir des sources. Pour les instructions, voir <a href="https://github.com/milvus-io/pymilvus#faq">Comment construire PyMilvus à partir des sources</a>.</p>
+<p>Pour utiliser le champ GEOMETRY, mettez à jour votre SDK avec la dernière version.</p>
 </div>
 <h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Qu'est-ce qu'un champ GEOMETRIE ?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,7 +50,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un champ GEOMETRY est un type de données défini par le schéma (<code translate="no">DataType.GEOMETRY</code>) dans Milvus qui stocke des données géométriques. Lorsque vous travaillez avec des champs géométriques, vous interagissez avec les données à l'aide du format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, une représentation lisible par l'homme utilisée à la fois pour l'insertion de données et l'interrogation. En interne, Milvus convertit WKT en <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB</a> ) pour un stockage et un traitement efficaces, mais vous n'avez pas besoin de gérer WKB directement.</p>
+    </button></h2><p>Un champ GEOMETRIE est un type de données défini par le schéma (<code translate="no">DataType.GEOMETRY</code>) dans Milvus qui stocke des données géométriques. Lorsque vous travaillez avec des champs géométriques, vous interagissez avec les données à l'aide du format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, une représentation lisible par l'homme utilisée à la fois pour l'insertion de données et l'interrogation. En interne, Milvus convertit WKT en <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB</a> ) pour un stockage et un traitement efficaces, mais vous n'avez pas besoin de gérer WKB directement.</p>
 <p>Le type de données <code translate="no">GEOMETRY</code> prend en charge les objets géométriques suivants :</p>
 <ul>
 <li><p><strong>POINT</strong>: <code translate="no">POINT (x y)</code>; par exemple, <code translate="no">POINT (13.403683 52.520711)</code> où <code translate="no">x</code> = longitude et <code translate="no">y</code> = latitude</p></li>
@@ -351,16 +351,19 @@ client.createIndex(CreateIndexReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Une fois ces conditions remplies, vous pouvez utiliser des expressions avec des opérateurs géométriques dédiés pour filtrer votre collection sur la base des valeurs géométriques.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">Définition des expressions de filtrage</h4><p>Pour filtrer sur le champ <code translate="no">GEOMETRY</code>, utilisez un opérateur spécifique à la géométrie avec le format d'expression suivant : <code translate="no">&quot;{operator}(geo_field,'{wkt}')&quot;</code>, où :</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">Définir les expressions de filtrage</h4><p>Pour filtrer sur un champ <code translate="no">GEOMETRY</code>, utilisez un opérateur géométrique dans une expression :</p>
 <ul>
-<li><p><code translate="no">{operator}</code> est un opérateur géométrique pris en charge (par exemple, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Pour obtenir la liste complète des opérateurs disponibles, reportez-vous à la section <a href="/docs/fr/geometry-operators.md">Opérateurs géométriques</a>.</p></li>
-<li><p><code translate="no">geo_field</code> est le nom du champ <code translate="no">GEOMETRY</code> défini dans le schéma de votre collection.</p></li>
-<li><p><code translate="no">'{wkt}'</code> est la chaîne WKT représentant l'objet géométrique sur lequel vous effectuez le filtrage.</p></li>
+<li><p>Général : <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
+<li><p>Basé sur la distance : <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
-<div class="alert note">
-<p>Certains opérateurs, tels que <code translate="no">ST_DWITHIN</code>, peuvent nécessiter des paramètres supplémentaires. Pour plus de détails et d'exemples d'utilisation de chaque opérateur, reportez-vous à <a href="/docs/fr/geometry-operators.md">Opérateurs de géométrie</a>.</p>
-</div>
-<p>Les exemples suivants montrent comment utiliser différents opérateurs spécifiques à la géométrie dans une expression de filtrage :</p>
+<p>Où :</p>
+<ul>
+<li><p><code translate="no">operator</code> est l'un des opérateurs géométriques pris en charge (par exemple, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Les noms des opérateurs doivent être en majuscules ou en minuscules. Pour obtenir la liste des opérateurs pris en charge, reportez-vous à la section <a href="/docs/fr/geometry-operators.md#Supported-geometry-operators">Opérateurs géométriques pris en charge</a>.</p></li>
+<li><p><code translate="no">geo_field</code> est le nom de votre champ <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">'{wkt}'</code> est la représentation WKT de la géométrie à interroger.</p></li>
+<li><p><code translate="no">distance</code> est le seuil spécifique à <code translate="no">ST_DWITHIN</code>.</p></li>
+</ul>
+<p>Les exemples suivants montrent comment utiliser différents opérateurs spécifiques à la géométrie dans une expression de filtre :</p>
 <h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Exemple 1 : Trouver des entités à l'intérieur d'une zone rectangulaire</h4><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>

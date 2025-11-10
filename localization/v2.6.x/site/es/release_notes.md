@@ -40,7 +40,7 @@ title: Notas de la versión
 <tr><th style="text-align:left">Versión de Milvus</th><th style="text-align:left">Versión del SDK de Python</th><th style="text-align:left">Versión del SDK de Node.js</th><th style="text-align:left">Versión del SDK de Java</th><th style="text-align:left">Versión del SDK de Go</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
 <p>Nos complace anunciar el lanzamiento de Milvus 2.6.4, que presenta una serie de nuevas y potentes funciones, mejoras de rendimiento y correcciones de errores esenciales. Esta actualización introduce funciones importantes como Struct en ARRAY para el modelado avanzado de datos. Además, hemos activado JSON Shredding por defecto, mejorando aún más el rendimiento y la eficiencia de las consultas. También se han corregido varios errores críticos para garantizar una mayor estabilidad y fiabilidad. Con esta versión, Milvus sigue proporcionando una experiencia más sólida y eficiente a todos los usuarios. A continuación se presentan los aspectos más destacados de esta versión.</p>
@@ -344,7 +344,7 @@ title: Notas de la versión
 <li>Añadida configuración de autoíndice para el caso de deduplicación<a href="https://github.com/milvus-io/milvus/pull/44186">(#44186</a>)</li>
 <li>Añadida configuración para permitir caracteres personalizados en los nombres (<a href="https://github.com/milvus-io/milvus/pull/44063">#44063</a>)</li>
 <li>Añadido soporte para cchannel para servicio de streaming<a href="https://github.com/milvus-io/milvus/pull/44143">(#44143</a>)</li>
-<li>Añadido mutex y comprobación de rango para proteger los borrados concurrentes<a href="https://github.com/milvus-io/milvus/pull/44128">(#44128</a>)</li>
+<li>Añadido mutex y comprobación de rango para proteger borrados concurrentes<a href="https://github.com/milvus-io/milvus/pull/44128">(#44128</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Corrección de errores<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -379,7 +379,7 @@ title: Notas de la versión
 <li>Corregido error al construir estadísticas JSON para objetos anidados<a href="https://github.com/milvus-io/milvus/pull/44303">(#44303</a>)</li>
 <li>Evitado reescritura mmap por múltiples campos JSON<a href="https://github.com/milvus-io/milvus/pull/44299">(#44299</a>)</li>
 <li>Formatos de datos válidos unificados<a href="https://github.com/milvus-io/milvus/pull/44296">(#44296</a>)</li>
-<li>Ocultación de credenciales de proveedores de incrustación/reanclaje en la interfaz web<a href="https://github.com/milvus-io/milvus/pull/44275">(#44275</a>)</li>
+<li>Ocultadas las credenciales de los proveedores de embedding/reranking en la web UI<a href="https://github.com/milvus-io/milvus/pull/44275">(#44275</a>)</li>
 <li>Corregida ruta de statslog bajo pooling datanodes<a href="https://github.com/milvus-io/milvus/pull/44288">(#44288</a>)</li>
 <li>Corregida ruta de oráculo IDF<a href="https://github.com/milvus-io/milvus/pull/44266">(#44266</a>)</li>
 <li>Utilizado punto de control de instantánea de recuperación si ningún vchannel se está recuperando<a href="https://github.com/milvus-io/milvus/pull/44246">(#44246</a>)</li>
@@ -420,7 +420,7 @@ title: Notas de la versión
 <tr><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>Nos complace anunciar el lanzamiento de Milvus 2.6.1. Esta versión se basa en los principales avances arquitectónicos de las versiones anteriores, ofreciendo mejoras críticas centradas en la estabilidad de la producción, el rendimiento y la robustez operativa. Esta versión responde a los principales comentarios de la comunidad y refuerza el sistema para despliegues a gran escala. Recomendamos encarecidamente a todos los usuarios que actualicen para beneficiarse de un sistema más estable, fiable y con mayor rendimiento.</p>
+<p>Nos complace anunciar el lanzamiento de Milvus 2.6.1. Esta versión se basa en los principales avances arquitectónicos de versiones anteriores, ofreciendo mejoras críticas centradas en la estabilidad de la producción, el rendimiento y la robustez operativa. Esta versión responde a los principales comentarios de la comunidad y refuerza el sistema para despliegues a gran escala. Recomendamos encarecidamente a todos los usuarios que actualicen para beneficiarse de un sistema más estable, fiable y con mayor rendimiento.</p>
 <h3 id="Improvements" class="common-anchor-header">Mejoras<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -459,7 +459,7 @@ title: Notas de la versión
 <li>Admite actualizaciones dinámicas de intervalo para componentes de teletipo<a href="https://github.com/milvus-io/milvus/pull/43865">(#43865</a>)</li>
 <li>Mejora la autodetección de los conjuntos de instrucciones ARM SVE para operaciones de conjuntos de bits<a href="https://github.com/milvus-io/milvus/pull/43833">(#43833</a>)</li>
 <li>Mejora el mensaje de error cuando falla una coincidencia de texto o frase<a href="https://github.com/milvus-io/milvus/pull/43366">(#43366</a>)</li>
-<li>Se mejora el mensaje de error cuando no coinciden las dimensiones de los vectores<a href="https://github.com/milvus-io/milvus/pull/43835">(#43835</a>)</li>
+<li>Se mejora el mensaje de error cuando no coinciden las dimensiones del vector<a href="https://github.com/milvus-io/milvus/pull/43835">(#43835</a>)</li>
 <li>Se mejora el informe de errores para los tiempos de espera de adición cuando el almacén de objetos no está disponible<a href="https://github.com/milvus-io/milvus/pull/43926">(#43926</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Corrección de errores<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
@@ -605,7 +605,7 @@ title: Notas de la versión
 <tr><td style="text-align:center">2.6.0-rc1</td><td style="text-align:center">2.6.0b0</td><td style="text-align:center">2.6.0-rc1</td><td style="text-align:center">2.6.0</td><td style="text-align:center">2.6.0-rc.1</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.6.0-rc1 presenta una arquitectura simplificada y nativa de la nube diseñada para mejorar la eficiencia operativa, la utilización de recursos y el coste total de propiedad reduciendo la complejidad de la implantación. Esta versión añade nuevas funcionalidades centradas en el rendimiento, la búsqueda y el desarrollo. Entre las funciones clave se incluyen la cuantificación de alta precisión de 1 bit (RaBitQ) y una capa de caché dinámica para mejorar el rendimiento, la detección de casi duplicados con MinHash y la concordancia precisa de frases para la búsqueda avanzada, así como funciones de incrustación automatizadas con modificación de esquemas en línea para mejorar la experiencia del desarrollador.</p>
+<p>Milvus 2.6.0-rc1 introduce una arquitectura simplificada y nativa de la nube diseñada para mejorar la eficiencia operativa, la utilización de recursos y el coste total de propiedad reduciendo la complejidad de la implantación. Esta versión añade nuevas funcionalidades centradas en el rendimiento, la búsqueda y el desarrollo. Entre las funciones clave se incluyen la cuantificación de alta precisión de 1 bit (RaBitQ) y una capa de caché dinámica para mejorar el rendimiento, la detección de casi duplicados con MinHash y la concordancia precisa de frases para la búsqueda avanzada, así como funciones de incrustación automatizadas con modificación de esquemas en línea para mejorar la experiencia del desarrollador.</p>
 <div class="alert note">
 <p>Esta es una versión preliminar de Milvus 2.6.0. Para probar las últimas funciones, instale esta versión como una nueva implementación. No se admite la actualización de Milvus v2.5.x o anterior a 2.6.0-rc1.</p>
 </div>
@@ -645,7 +645,7 @@ title: Notas de la versión
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="RaBitQ-1-bit-Quantization" class="common-anchor-header">Cuantificación de 1 bit RaBitQ</h4><p>Para manejar conjuntos de datos a gran escala, la cuantización de 1 bit es una técnica eficaz para mejorar la utilización de los recursos y el rendimiento de la búsqueda. Sin embargo, los métodos tradicionales pueden afectar negativamente a la recuperación. En colaboración con los autores de la investigación original, Milvus 2.6 presenta RaBitQ, una solución de cuantificación de 1 bit que mantiene una alta precisión de recuperación al tiempo que ofrece las ventajas de recursos y rendimiento de la compresión de 1 bit.</p>
+    </button></h3><h4 id="RaBitQ-1-bit-Quantization" class="common-anchor-header">Cuantificación de 1 bit RaBitQ</h4><p>Para manejar conjuntos de datos a gran escala, la cuantización de 1 bit es una técnica eficaz para mejorar la utilización de los recursos y el rendimiento de la búsqueda. Sin embargo, los métodos tradicionales pueden afectar negativamente a la recuperación. En colaboración con los autores de la investigación original, Milvus 2.6 presenta RaBitQ, una solución de cuantización de 1 bit que mantiene una alta precisión de recuperación al tiempo que ofrece las ventajas de recursos y rendimiento de la compresión de 1 bit.</p>
 <p>Para más información, consulte <a href="/docs/es/ivf-rabitq.md">IVF_RABITQ</a>.</p>
 <h4 id="JSON-Capability-Enhancement" class="common-anchor-header">Mejora de la capacidad JSON</h4><p>Milvus 2.6 mejora su compatibilidad con el tipo de datos JSON con las siguientes mejoras:</p>
 <ul>
@@ -658,7 +658,7 @@ title: Notas de la versión
 <li>Se ha integrado el <a href="/docs/es/lindera-tokenizer.md">tokenizador Lindera</a> para mejorar la compatibilidad con idiomas asiáticos como el japonés y el coreano.</li>
 <li>Ahora es posible seleccionar el tokenizador a nivel de fila, con el <a href="/docs/es/icu-tokenizer.md">tokenizador ICU</a> de uso general disponible como alternativa para situaciones multilingües.</li>
 </ul>
-<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Entrada y salida de datos con funciones de incrustación</h4><p>Milvus 2.6 introduce la capacidad "Data-in, Data-Out" que simplifica el desarrollo de aplicaciones de IA al integrarse directamente con modelos de incrustación de terceros (por ejemplo, de OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Ahora los usuarios pueden insertar y consultar datos de texto sin procesar, y Milvus llamará automáticamente al servicio de modelo especificado para convertir el texto en vectores en tiempo real. Esto elimina la necesidad de un proceso de conversión vectorial independiente.</p>
+<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Entrada y salida de datos con funciones de incrustación</h4><p>Milvus 2.6 introduce una función "Data-in, Data-Out" que simplifica el desarrollo de aplicaciones de IA al integrarse directamente con modelos de incrustación de terceros (por ejemplo, de OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Ahora los usuarios pueden insertar y consultar datos de texto sin procesar, y Milvus llamará automáticamente al servicio de modelo especificado para convertir el texto en vectores en tiempo real. Esto elimina la necesidad de un proceso de conversión vectorial independiente.</p>
 <p>Para más información, consulte <a href="/docs/es/embedding-function-overview.md">Visión general de la función de incrustación</a>.</p>
 <h4 id="Phrase-Match" class="common-anchor-header">Coincidencia de frases</h4><p>La concordancia de frases es una función de búsqueda de texto que sólo devuelve resultados cuando la secuencia exacta de palabras de una consulta aparece de forma consecutiva y en el orden correcto dentro de un documento.</p>
 <p><strong>Características principales</strong>:</p>
