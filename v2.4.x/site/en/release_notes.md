@@ -7,6 +7,40 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.24
+
+Release date: November 11, 2025
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.24         | 2.4.15             | 2.4.11           | 2.4.11              |
+
+We announce the release of Milvus 2.4.24, which addresses a **critical security vulnerability** [CVE-2025-64513](https://github.com/milvus-io/milvus/security/advisories/GHSA-mhjq-8c7m-3f7p) and we strongly encourage **all Milvus 2.4.x users to upgrade to 2.4.24** as soon as possible. This update also includes several other improvements and fixes.
+
+### Features
+
+- Supported deny DDL according to database property ([#40785](https://github.com/milvus-io/milvus/pull/40785))
+- Added DDL rate type and related quota configurations ([#40654](https://github.com/milvus-io/milvus/pull/40654))
+
+### Improvements
+
+- Skipped check source id ([#45391](https://github.com/milvus-io/milvus/pull/45391))
+- Improved sparse query nnz metric ([#40715](https://github.com/milvus-io/milvus/pull/40715))
+- Made segment prune config refreshable ([#40633](https://github.com/milvus-io/milvus/pull/40633))
+- Removed unnecessary collection and partition label from the metrics ([#40594](https://github.com/milvus-io/milvus/pull/40594))
+- Improved import error msgs ([#40598](https://github.com/milvus-io/milvus/pull/40598))
+
+### Bug fixes
+
+- Got all children deltalogs for segment to load ([#40964](https://github.com/milvus-io/milvus/pull/40964))
+- L0 brings its own start pos when syncing ([#40899](https://github.com/milvus-io/milvus/pull/40899))
+- Fixed compare move_cursor bug ([#40990](https://github.com/milvus-io/milvus/pull/40990))
+- Fixed exception when do arith expr when using index ([#40800](https://github.com/milvus-io/milvus/pull/40800))
+- Did not delete the centroids file when sampling fails instead wait gc ([#40703](https://github.com/milvus-io/milvus/pull/40703))
+- RBAC star privilege return empty when listing policy ([#40556](https://github.com/milvus-io/milvus/pull/40556))
+- Fixed parsing import endts ([#40334](https://github.com/milvus-io/milvus/pull/40334))
+- Improved error handling and unit tests for initmetacache function ([#40329](https://github.com/milvus-io/milvus/pull/40329))
+
 ## v2.4.23
 
 Release Date: February 28, 2025
