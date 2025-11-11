@@ -8,6 +8,33 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.5
+
+Release date: November 11, 2025
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.6.5          | 2.6.3             | 2.6.4               | 2.6.7            | 2.6.1          |
+
+We are excited to announce the release of Milvus 2.6.5, which addresses a **critical security vulnerability** [CVE-2025-64513](https://github.com/milvus-io/milvus/security/advisories/GHSA-mhjq-8c7m-3f7p) and upgraded to Go 1.24.9. We strongly encourage **all Milvus 2.6.x users to upgrade to 2.6.5** as soon as possible. This update also includes several other improvements and bug fixes, and provides the users a more robust and efficient experience.
+
+### Improvements
+
+- Updated builder image tag upgrading go1.24.9 ([#45398](https://github.com/milvus-io/milvus/pull/45398))
+- Skipped check source id ([#45379](https://github.com/milvus-io/milvus/pull/45379))
+
+### Bug fixes
+
+- Group value is nil ([#45421](https://github.com/milvus-io/milvus/pull/45421))
+- Initialized timestamp range in composite binlog writer  ([#45402](https://github.com/milvus-io/milvus/pull/45402))
+- Handled empty fieldsdata in reduce/rerank for requery scenario  ([#45389](https://github.com/milvus-io/milvus/pull/45389))
+- Added null check for packed_writer_ in jsonstatsparquetwrite… ([#45376](https://github.com/milvus-io/milvus/pull/45376))
+- Skipped building text index for newly added columns ([#45358](https://github.com/milvus-io/milvus/pull/45358))
+- Accidentally ignored sealed segments in l0 compaction ([#45351](https://github.com/milvus-io/milvus/pull/45351))
+- Moved finishload before text index creation to ensure raw data availability ([#45336](https://github.com/milvus-io/milvus/pull/45336))
+- Supported json default value in compaction ([#45332](https://github.com/milvus-io/milvus/pull/45332))
+- Updated milvus-storage to fix duplicate aws sdk initialization  ([#45075](https://github.com/milvus-io/milvus/pull/45075))
+
 ## v2.6.4
 
 Release date: October 21, 2025
