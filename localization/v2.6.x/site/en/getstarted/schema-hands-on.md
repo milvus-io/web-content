@@ -138,8 +138,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vector fields store embeddings for unstructured data types such as text, images, and audio. These embeddings may be dense, sparse, or binary, depending on the data type and the retrieval method utilized. Typically, dense vectors are used for semantic search, while sparse vectors are better suited for full-text or lexical matching. Binary vectors are useful when storage and computational resources are limited. A collection may contain several vector fields to enable multi-modal or hybrid retrieval strategies. For a detailed guide on this topic, please refer to the <a href="/docs/v2.6.x/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
-<p>Milvus supports the vector data types: <code translate="no">FLOAT_VECTOR</code> for <a href="/docs/v2.6.x/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> for <a href="/docs/v2.6.x/sparse_vector.md">Sparse Vector</a>, and <code translate="no">BINARY_VECTOR</code> for <a href="/docs/v2.6.x/binary-vector.md">Binary Vector</a></p>
+    </button></h3><p>Vector fields store embeddings for unstructured data types such as text, images, and audio. These embeddings may be dense, sparse, or binary, depending on the data type and the retrieval method utilized. Typically, dense vectors are used for semantic search, while sparse vectors are better suited for full-text or lexical matching. Binary vectors are useful when storage and computational resources are limited. A collection may contain several vector fields to enable multi-modal or hybrid retrieval strategies. For a detailed guide on this topic, please refer to the <a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
+<p>Milvus supports the vector data types: <code translate="no">FLOAT_VECTOR</code> for <a href="/docs/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> for <a href="/docs/sparse_vector.md">Sparse Vector</a>, and <code translate="no">BINARY_VECTOR</code> for <a href="/docs/binary-vector.md">Binary Vector</a></p>
 <h3 id="Scalar-Field" class="common-anchor-header">Scalar Field<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +189,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>A primary key field is a fundamental component of a schema, as it uniquely identifies each entity within a collection. Defining a primary key is mandatory. It shall be scalar field of integer or string type and marked as <code translate="no">is_primary=True</code>. Optionally, you can enable <code translate="no">auto_id</code> for the primary key, which is automatically assigned integer numbers that monolithically grow as more data is ingested into the collection.</p>
-<p>For further details, refer to <a href="/docs/v2.6.x/primary-field.md">Primary Field & AutoID</a>.</p>
+<p>For further details, refer to <a href="/docs/primary-field.md">Primary Field & AutoID</a>.</p>
 <h3 id="Partitioning" class="common-anchor-header">Partitioning<button data-href="#Partitioning" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -206,7 +206,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>To speed up the search, you can optionally turn on partitioning. By designating a specific scalar field for partitioning and specifying filtering criteria based on this field during searches, the search scope can be effectively limited to only the relevant partitions. This method significantly enhances the efficiency of retrieval operations by reducing the search domain.</p>
-<p>For further details, refer to <a href="/docs/v2.6.x/use-partition-key.md">Use Partition Key</a>.</p>
+<p>For further details, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p>
 <h3 id="Analyzer" class="common-anchor-header">Analyzer<button data-href="#Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -223,7 +223,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>An analyzer is an essential tool for processing and transforming text data. Its main function is to convert raw text into tokens and to structure them for indexing and retrieval. It does that by tokenizing the string, dropping the stop words, and stemming the individual words into tokens.</p>
-<p>For further details, refer to <a href="/docs/v2.6.x/analyzer-overview.md">Analyzer Overview</a>.</p>
+<p>For further details, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p>
 <h3 id="Function" class="common-anchor-header">Function<button data-href="#Function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -240,7 +240,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Milvus allows you to define built-in functions as part of the schema to automatically derive certain fields. For instance, you can add a built-in BM25 function that generates a sparse vector from a <code translate="no">VARCHAR</code> field to support full-text search. These function-derived fields streamline preprocessing and ensure that the collection remains self-contained and query-ready.</p>
-<p>For further details, refer to <a href="/docs/v2.6.x/full-text-search.md">Full Text Search</a>.</p>
+<p>For further details, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">A Real World Example<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -270,7 +270,7 @@ summary: >-
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
      <td><p>auto-generated with enabled <code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/v2.6.x/get-and-scalar-query.md">Query using Get</a></p></td>
+     <td><p><a href="/docs/get-and-scalar-query.md">Query using Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -279,7 +279,7 @@ summary: >-
    <tr>
      <td><p>title (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>article title</p></td>
-     <td><p><a href="/docs/v2.6.x/keyword-match.md">Text Match</a></p></td>
+     <td><p><a href="/docs/keyword-match.md">Text Match</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -288,7 +288,7 @@ summary: >-
    <tr>
      <td><p>timestamp (<code translate="no">INT32</code>)</p></td>
      <td><p>publish date</p></td>
-     <td><p><a href="/docs/v2.6.x/use-partition-key.md">Filter by Partition Key</a></p></td>
+     <td><p><a href="/docs/use-partition-key.md">Filter by Partition Key</a></p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
@@ -297,7 +297,7 @@ summary: >-
    <tr>
      <td><p>text (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>raw text of the article</p></td>
-     <td><p><a href="/docs/v2.6.x/multi-vector-search.md">Multi-Vector Hybrid Search</a></p></td>
+     <td><p><a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
@@ -306,7 +306,7 @@ summary: >-
    <tr>
      <td><p>text_dense_vector (<code translate="no">FLOAT_VECTOR</code>)</p></td>
      <td><p>dense vector generated by a text embedding model</p></td>
-     <td><p><a href="/docs/v2.6.x/single-vector-search.md">Basic Vector Search</a></p></td>
+     <td><p><a href="/docs/single-vector-search.md">Basic Vector Search</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -315,14 +315,14 @@ summary: >-
    <tr>
      <td><p>text_sparse_vector (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
      <td><p>sparse vector auto-generated by a built-in BM25 function</p></td>
-     <td><p><a href="/docs/v2.6.x/full-text-search.md">Full Text Search</a></p></td>
+     <td><p><a href="/docs/full-text-search.md">Full Text Search</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>output</p></td>
    </tr>
 </table>
-<p>For more information on schemas and detailed guidance on adding various types of fields, please refer to <a href="/docs/v2.6.x/schema.md">Schema Explained</a>.</p>
+<p>For more information on schemas and detailed guidance on adding various types of fields, please refer to <a href="/docs/schema.md">Schema Explained</a>.</p>
 <h3 id="Initialize-schema" class="common-anchor-header">Initialize schema<button data-href="#Initialize-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -661,6 +661,6 @@ schema.WithFunction(function)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/v2.6.x/create-collection.md">Create Collection</a></p></li>
-<li><p><a href="/docs/v2.6.x/alter-collection-field.md">Alter Collection Field</a></p></li>
+<li><p><a href="/docs/create-collection.md">Create Collection</a></p></li>
+<li><p><a href="/docs/alter-collection-field.md">Alter Collection Field</a></p></li>
 </ul>

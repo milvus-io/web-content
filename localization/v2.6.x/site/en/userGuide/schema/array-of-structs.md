@@ -120,7 +120,7 @@ beta: Milvus 2.6.4+
 </table></p>
 <p>The scalar fields in the Array of Structs field do not support indexes.</p></li>
 <li><p><strong>Upsert data</strong></p>
-<p>Structs do not support upsert in merge mode. However, you can still perform upserts in override mode to update data in Structs. For details about the differences between upsert in merge mode and override mode, refer to <a href="/docs/v2.6.x/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
+<p>Structs do not support upsert in merge mode. However, you can still perform upserts in override mode to update data in Structs. For details about the differences between upsert in merge mode and override mode, refer to <a href="/docs/upsert-entities.md#Overview">Upsert Entities</a>.</p></li>
 <li><p><strong>Scalar filtering</strong></p>
 <p>You cannot use an Array of Structs or any fields within its Struct element in filtering expressions within searches and queries.</p></li>
 </ul>
@@ -264,7 +264,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</
         ></path>
       </svg>
     </button></h2><p>Indexing is mandatory for all vector fields, including both the vector fields in the collection and those defined in the element Struct.</p>
-<p>The applicable index parameters vary depending on the index type in use. For details on applicable index parameters, refer to <a href="/docs/v2.6.x/index-explained.md">Index Explained</a> and the documentation pages specific to your selected index type.</p>
+<p>The applicable index parameters vary depending on the index type in use. For details on applicable index parameters, refer to <a href="/docs/index-explained.md">Index Explained</a> and the documentation pages specific to your selected index type.</p>
 <p>To index an embedding list, you need to set its index type to <code translate="no">AUTOINDEX</code>  or <code translate="no">HNSW</code>, and use <code translate="no">MAX_SIM_COSINE</code> as the metric type for Milvus to measure the similarities between embedding lists.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -767,4 +767,4 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The development of a native Array of Structs data type represents a major advancement in Milvus’s capability to handle complex data structures. To better understand its use cases and maximize this new feature, you are encouraged to read <a href="/docs/v2.6.x/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a>.</p>
+    </button></h2><p>The development of a native Array of Structs data type represents a major advancement in Milvus’s capability to handle complex data structures. To better understand its use cases and maximize this new feature, you are encouraged to read <a href="/docs/best-practices-for-array-of-structs.md">Schema Design Using an Array of Structs</a>.</p>
