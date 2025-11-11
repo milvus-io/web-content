@@ -8,6 +8,40 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.21
+
+Release date: November 11, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.21          | 2.5.17            | 2.5.13              | 2.5.14           |
+
+We are excited to announce the release of Milvus 2.5.21, which addresses a **critical security vulnerability** [CVE-2025-64513](https://github.com/milvus-io/milvus/security/advisories/GHSA-mhjq-8c7m-3f7p) and we strongly encourage **all Milvus 2.5.x users to upgrade to 2.5.21** as soon as possible. This update also includes several other improvements and fixes, such as allowing nullable fields as BM25 function input field, and several performance enhancements.
+
+### Improvements
+
+- Supported use nullable field as bm25 function input field  ([#45118](https://github.com/milvus-io/milvus/pull/45118))
+- Optimized the performance of bitmap reverse lookup  ([#44958](https://github.com/milvus-io/milvus/pull/44958))
+- Implemented rewatch mechanism for etcd failure scenarios  ([#43920](https://github.com/milvus-io/milvus/pull/43920))
+- Introduced sparse filter in query  ([#44790](https://github.com/milvus-io/milvus/pull/44790))
+- Added accesslog field for template value length info  ([#44791](https://github.com/milvus-io/milvus/pull/44791))
+
+### Bug fixes
+
+- Avoided potential race conditions when updating the executor ([#45231](https://github.com/milvus-io/milvus/pull/45231))
+- Skipped create tmp dir for growing r-tree index ([#45258](https://github.com/milvus-io/milvus/pull/45258))
+- Fixed sort stats task failed when segment is compacting ([#45185](https://github.com/milvus-io/milvus/pull/45185))
+- Supported skip load json stats when disabled ([#45098](https://github.com/milvus-io/milvus/pull/45098))
+- Prevented data race in querycoord collection notifier update  ([#45052](https://github.com/milvus-io/milvus/pull/45052))
+- Handled empty fieldsdata in reduce/rerank for requery scenario ([#44919](https://github.com/milvus-io/milvus/pull/44919))
+- Fixed bug for gis function to filter geometry ([#44968](https://github.com/milvus-io/milvus/pull/44968))
+- Fixed the geometry return point(0 0) when growing mmap is enabled ([#44891](https://github.com/milvus-io/milvus/pull/44891))
+- Removed the limit of deduplicate case when disable autoindex ([#44782](https://github.com/milvus-io/milvus/pull/44782))
+- Ensured deterministic search result ordering when scores are equal  ([#44885](https://github.com/milvus-io/milvus/pull/44885))
+- Fixed deactivate balance checker also stops stopping balance ([#44835](https://github.com/milvus-io/milvus/pull/44835))
+- Dropped segment in excluded segment use wrong excluded ts ([#44771](https://github.com/milvus-io/milvus/pull/44771))
+- Avoided concurrent reset/add operations on datacoord metrics  ([#44817](https://github.com/milvus-io/milvus/pull/44817))
+
 ## v2.5.19
 
 Release date: October 22, 2025
