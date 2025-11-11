@@ -19,6 +19,83 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2521" class="common-anchor-header">v2.5.21<button data-href="#v2521" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: November 11, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.21</td><td>2.5.17</td><td>2.5.13</td><td>2.5.14</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus 2.5.21, which addresses a <strong>critical security vulnerability</strong> <a href="https://github.com/milvus-io/milvus/security/advisories/GHSA-mhjq-8c7m-3f7p">CVE-2025-64513</a> and we strongly encourage <strong>all Milvus 2.5.x users to upgrade to 2.5.21</strong> as soon as possible. This update also includes several other improvements and fixes, such as allowing nullable fields as BM25 function input field, and several performance enhancements.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Supported use nullable field as bm25 function input field  (<a href="https://github.com/milvus-io/milvus/pull/45118">#45118</a>)</li>
+<li>Optimized the performance of bitmap reverse lookup  (<a href="https://github.com/milvus-io/milvus/pull/44958">#44958</a>)</li>
+<li>Implemented rewatch mechanism for etcd failure scenarios  (<a href="https://github.com/milvus-io/milvus/pull/43920">#43920</a>)</li>
+<li>Introduced sparse filter in query  (<a href="https://github.com/milvus-io/milvus/pull/44790">#44790</a>)</li>
+<li>Added accesslog field for template value length info  (<a href="https://github.com/milvus-io/milvus/pull/44791">#44791</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Avoided potential race conditions when updating the executor (<a href="https://github.com/milvus-io/milvus/pull/45231">#45231</a>)</li>
+<li>Skipped create tmp dir for growing r-tree index (<a href="https://github.com/milvus-io/milvus/pull/45258">#45258</a>)</li>
+<li>Fixed sort stats task failed when segment is compacting (<a href="https://github.com/milvus-io/milvus/pull/45185">#45185</a>)</li>
+<li>Supported skip load json stats when disabled (<a href="https://github.com/milvus-io/milvus/pull/45098">#45098</a>)</li>
+<li>Prevented data race in querycoord collection notifier update  (<a href="https://github.com/milvus-io/milvus/pull/45052">#45052</a>)</li>
+<li>Handled empty fieldsdata in reduce/rerank for requery scenario (<a href="https://github.com/milvus-io/milvus/pull/44919">#44919</a>)</li>
+<li>Fixed bug for gis function to filter geometry (<a href="https://github.com/milvus-io/milvus/pull/44968">#44968</a>)</li>
+<li>Fixed the geometry return point(0 0) when growing mmap is enabled (<a href="https://github.com/milvus-io/milvus/pull/44891">#44891</a>)</li>
+<li>Removed the limit of deduplicate case when disable autoindex (<a href="https://github.com/milvus-io/milvus/pull/44782">#44782</a>)</li>
+<li>Ensured deterministic search result ordering when scores are equal  (<a href="https://github.com/milvus-io/milvus/pull/44885">#44885</a>)</li>
+<li>Fixed deactivate balance checker also stops stopping balance (<a href="https://github.com/milvus-io/milvus/pull/44835">#44835</a>)</li>
+<li>Dropped segment in excluded segment use wrong excluded ts (<a href="https://github.com/milvus-io/milvus/pull/44771">#44771</a>)</li>
+<li>Avoided concurrent reset/add operations on datacoord metrics  (<a href="https://github.com/milvus-io/milvus/pull/44817">#44817</a>)</li>
+</ul>
 <h2 id="v2519" class="common-anchor-header">v2.5.19<button data-href="#v2519" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
