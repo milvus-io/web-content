@@ -23,7 +23,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>AISAQ is a disk-based vector index that extends <a href="/docs/diskann.md">DISKANN</a> to handle billion-scale datasets without exceeding RAM limits. Unlike DISKANN, which keeps compressed vectors in memory, AISAQ stores all data on disk—offering two modes to balance performance and storage costs.</p>
+    </button></h1><p>AISAQ is a disk-based vector index that extends <a href="/docs/v2.6.x/diskann.md">DISKANN</a> to handle billion-scale datasets without exceeding RAM limits. Unlike DISKANN, which keeps compressed vectors in memory, AISAQ stores all data on disk—offering two modes to balance performance and storage costs.</p>
 <p>Use AISAQ when your vector dataset is too large to fit comfortably in RAM, or when you need to optimize infrastructure costs by trading some query performance for reduced memory requirements.</p>
 <h2 id="How-AISAQ-works" class="common-anchor-header">How AISAQ works<button data-href="#How-AISAQ-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -71,7 +71,7 @@ beta: Milvus 2.6.4+
 <li><p>The PQ data in memory is used for approximate distance filtering to guide the next traversal.</p></li>
 </ul>
 <p>Because the PQ data is already cached in DRAM, each node visit requires only one disk I/O, achieving high query speed with moderate memory usage.</p>
-<p>For a detailed explanation of these components and parameters, refer to <a href="/docs/diskann.md">DISKANN</a>.</p>
+<p>For a detailed explanation of these components and parameters, refer to <a href="/docs/v2.6.x/diskann.md">DISKANN</a>.</p>
 <h3 id="AISAQ-modes" class="common-anchor-header">AISAQ modes<button data-href="#AISAQ-modes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -147,7 +147,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AISAQ inherits many parameters from DISKANN. To avoid redundancy, only AISAQ-specific parameters are detailed below. For descriptions of shared parameters such as <code translate="no">max_degree</code>, <code translate="no">pq_code_budget_gb_ratio</code>, <code translate="no">search_list_size</code>, and <code translate="no">beam_width_ratio</code>, refer to <a href="/docs/diskann.md#DISKANN-params">DISKANN</a>.</p>
+    </button></h2><p>AISAQ inherits many parameters from DISKANN. To avoid redundancy, only AISAQ-specific parameters are detailed below. For descriptions of shared parameters such as <code translate="no">max_degree</code>, <code translate="no">pq_code_budget_gb_ratio</code>, <code translate="no">search_list_size</code>, and <code translate="no">beam_width_ratio</code>, refer to <a href="/docs/v2.6.x/diskann.md#DISKANN-params">DISKANN</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>

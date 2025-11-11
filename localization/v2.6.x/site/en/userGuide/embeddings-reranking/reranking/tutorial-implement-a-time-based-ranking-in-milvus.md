@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Exponential</strong> (<code translate="no">exp</code>): Creates a sharper initial drop-off for strongly emphasizing recent content</p></li>
 <li><p><strong>Linear</strong> (<code translate="no">linear</code>): A straight-line decay that is predictable and easy to understand</p></li>
 </ul>
-<p>Each ranker has different characteristics that make them suitable for various use cases. For more information, refer to <a href="/docs/decay-ranker-overview.md">Decay Ranker Overview</a>.</p>
+<p>Each ranker has different characteristics that make them suitable for various use cases. For more information, refer to <a href="/docs/v2.6.x/decay-ranker-overview.md">Decay Ranker Overview</a>.</p>
 <h2 id="Build-a-time-aware-search-system" class="common-anchor-header">Build a time-aware search system<button data-href="#Build-a-time-aware-search-system" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -148,7 +148,7 @@ bm25_function = Function(
 )
 schema.add_function(bm25_function)
 <button class="copy-code-btn"></button></code></pre>
-<p>For details on how to use Milvus embedding functions, refer to <a href="/docs/embedding-function-overview.md">Embedding Function Overview</a>.</p>
+<p>For details on how to use Milvus embedding functions, refer to <a href="/docs/v2.6.x/embedding-function-overview.md">Embedding Function Overview</a>.</p>
 <h2 id="Step-3-Configure-index-parameters" class="common-anchor-header">Step 3: Configure index parameters<button data-href="#Step-3-Configure-index-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
