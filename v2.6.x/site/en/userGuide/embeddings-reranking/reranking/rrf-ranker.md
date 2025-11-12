@@ -251,11 +251,12 @@ ranker = Function(
 import io.milvus.common.clientenum.FunctionType;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
-                .functionType(FunctionType.RERANK)
-                .param("strategy", "rrf")
-                .param("params", "{\"k\": 100}")
-                .build();
+CreateCollectionReq.Function rerank = CreateCollectionReq.Function.builder()
+        .name("rrf")
+        .functionType(FunctionType.RERANK)
+        .param("reranker", "rrf")
+        .param("k", "100")
+        .build();
 ```
 
 ```javascript
