@@ -245,8 +245,9 @@ import io.milvus.v2.service.collection.request.CreateCollectionReq;
 CreateCollectionReq.Function rerank = CreateCollectionReq.Function.builder()
                 .name("weight")
                 .functionType(FunctionType.RERANK)
-                .param("strategy", "weighted")
-                .param("params", "{\"weights\": [0.1, 0.6], \"norm_score\": true}")
+                .param("reranker", "weighted")
+                .param("weights", "[0.1, 0.9]")
+                .param("norm_score", "true")
                 .build();
 ```
 
