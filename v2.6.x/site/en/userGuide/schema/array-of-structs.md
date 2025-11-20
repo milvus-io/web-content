@@ -178,7 +178,62 @@ schema.add_field("chunks", datatype=DataType.ARRAY, element_type=DataType.STRUCT
 ```
 
 ```java
-// java
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder()
+        .build();
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .autoID(true)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("title")
+        .dataType(DataType.VarChar)
+        .maxLength(512)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("author")
+        .dataType(DataType.VarChar)
+        .maxLength(512)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("year_of_publication")
+        .dataType(DataType.Int64)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("title_vector")
+        .dataType(DataType.FloatVector)
+        .dimension(5)
+        .build());
+
+Map<String, String> params = new HashMap<>();
+params.put("mmap_enabled", "true");
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("chunks")
+        .dataType(DataType.Array)
+        .elementType(DataType.Struct)
+        .maxCapacity(1000)
+        .addStructField(AddFieldReq.builder()
+                .fieldName("text")
+                .dataType(DataType.VarChar)
+                .maxLength(65535)
+                .build())
+        .addStructField(AddFieldReq.builder()
+                .fieldName("chapter")
+                .dataType(DataType.VarChar)
+                .maxLength(512)
+                .build())
+        .addStructField(AddFieldReq.builder()
+                .fieldName("text_vector")
+                .dataType(DataType.FloatVector)
+                .dimension(VECTOR_DIM)
+                .typeParams(params)
+                .build())
+        .build());
 ```
 
 ```go
@@ -247,6 +302,64 @@ const schema = [
 
 ```bash
 # restful
+SCHEMA='{
+  "autoID": true,
+  "fields": [
+    {
+      "fieldName": "id",
+      "dataType": "Int64",
+      "isPrimary": true
+    },
+    {
+      "fieldName": "title",
+      "dataType": "VarChar",
+      "elementTypeParams": { "max_length": "512" }
+    },
+    {
+      "fieldName": "author",
+      "dataType": "VarChar",
+      "elementTypeParams": { "max_length": "512" }
+    },
+    {
+      "fieldName": "year_of_publication",
+      "dataType": "Int64"
+    },
+    {
+      "fieldName": "title_vector",
+      "dataType": "FloatVector",
+      "elementTypeParams": { "dim": "5" }
+    }
+  ],
+  "structArrayFields": [
+    {
+      "name": "chunks",
+      "description": "Array of document chunks with text and vectors",
+      "elementTypeParams":{
+         "max_capacity": 1000
+      },
+      "fields": [
+        {
+          "fieldName": "text",
+          "dataType": "VarChar",
+          "elementTypeParams": { "max_length": "65535" }
+        },
+        {
+          "fieldName": "chapter",
+          "dataType": "VarChar",
+          "elementTypeParams": { "max_length": "512" }
+        },
+        {
+          "fieldName": "text_vector",
+          "dataType": "FloatVector",
+          "elementTypeParams": {
+            "dim": "5",
+            "mmap_enabled": "true"
+          }
+        }
+      ]
+    }
+  ]
+}'
 ```
 
 The highlighted lines in the above code example illustrate the procedure to include an Array of Structs in a collection schema.
@@ -289,7 +402,19 @@ index_params.add_index(
 ```
 
 ```java
-// java
+import io.milvus.v2.common.IndexParam;
+
+List<IndexParam> indexParams = new ArrayList<>();
+indexParams.add(IndexParam.builder()
+        .fieldName("title_vector")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.L2)
+        .build());
+indexParams.add(IndexParam.builder()
+        .fieldName("chunks[text_vector]")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.MAX_SIM_COSINE)
+        .build());
 ```
 
 ```go
@@ -320,6 +445,20 @@ const indexParams = [
 
 ```bash
 # restful
+INDEX_PARAMS='[
+  {
+    "fieldName": "title_vector",
+    "indexName": "title_vector_index",
+    "indexType": "AUTOINDEX",
+    "metricType": "L2"
+  },
+  {
+    "fieldName": "chunks[text_vector]",
+    "indexName": "chunks_text_vector_index",
+    "indexType": "AUTOINDEX",
+    "metricType": "MAX_SIM_COSINE"
+  }
+]'
 ```
 
 ## Create a collection
@@ -348,7 +487,21 @@ client.create_collection(
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
+
+CreateCollectionReq requestCreate = CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(collectionSchema)
+        .indexParams(indexParams)
+        .build();
+client.createCollection(requestCreate);
 ```
 
 ```go
@@ -365,6 +518,14 @@ await milvusClient.createCollection({
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/collections/create" \
+  -H "Content-Type: application/json" \
+  -d "{
+    \"collectionName\": \"my_collection\",
+    \"description\": \"A collection for storing book information with struct array chunks\",
+    \"schema\": $SCHEMA,
+    \"indexParams\": $INDEX_PARAMS
+  }"
 ```
 
 ## Insert data
@@ -408,7 +569,38 @@ client.insert(
 ```
 
 ```java
-// java
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.response.InsertResp;
+
+Gson gson = new Gson();
+JsonObject row = new JsonObject();
+row.addProperty("title", "Walden");
+row.add("title_vector", gson.toJsonTree(Arrays.asList(0.1f, 0.2f, 0.3f, 0.4f, 0.5f)));
+row.addProperty("author", "Henry David Thoreau");
+row.addProperty("year_of_publication", 1845);
+
+JsonArray structArr = new JsonArray();
+JsonObject struct1 = new JsonObject();
+struct1.addProperty("text", "When I wrote the following pages, or rather the bulk of them...");
+struct1.add("text_vector", gson.toJsonTree(Arrays.asList(0.3f, 0.2f, 0.3f, 0.2f, 0.5f)));
+struct1.addProperty("chapter", "Economy");
+structArr.add(struct1);
+JsonObject struct2 = new JsonObject();
+struct2.addProperty("text", "I would fain say something, not so much concerning the Chinese and...");
+struct2.add("text_vector", gson.toJsonTree(Arrays.asList(0.7f, 0.4f, 0.2f, 0.7f, 0.8f)));
+struct2.addProperty("chapter", "Economy");
+structArr.add(struct2);
+
+row.add("chunks", structArr);
+
+InsertResp insertResp = client.insert(InsertReq.builder()
+        .collectionName("my_collection")
+        .data(Collections.singletonList(row))
+        .build());
 ```
 
 ```go
@@ -445,6 +637,31 @@ await milvusClient.insert({
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/insert" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "collectionName": "my_collection",
+    "data": [
+      {
+        "title": "Walden",
+        "title_vector": [0.1, 0.2, 0.3, 0.4, 0.5],
+        "author": "Henry David Thoreau",
+        "year_of_publication": 1845,
+        "chunks": [
+          {
+            "text": "When I wrote the following pages, or rather the bulk of them...",
+            "text_vector": [0.3, 0.2, 0.3, 0.2, 0.5],
+            "chapter": "Economy"
+          },
+          {
+            "text": "I would fain say something, not so much concerning the Chinese and...",
+            "text_vector": [0.7, 0.4, 0.2, 0.7, 0.8],
+            "chapter": "Economy"
+          }
+        ]
+      }
+    ]
+  }'
 ```
 
 <details>
@@ -579,7 +796,26 @@ results = client.search(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.vector.request.data.EmbeddingList;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+
+EmbeddingList embeddingList1 = new EmbeddingList();
+embeddingList1.add(new FloatVec(new float[]{0.2f, 0.9f, 0.4f, -0.3f, 0.2f}));
+
+EmbeddingList embeddingList2 = new EmbeddingList();
+embeddingList2.add(new FloatVec(new float[]{-0.2f, -0.2f, 0.5f, 0.6f, 0.9f}));
+embeddingList2.add(new FloatVec(new float[]{-0.4f, 0.3f, 0.5f, 0.8f, 0.2f}));
+
+Map<String, Object> params = new HashMap<>();
+params.put("metric_type", "MAX_SIM_COSINE");
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .annsField("chunks[text_vector]")
+        .data(Collections.singletonList(embeddingList1))
+        .searchParams(params)
+        .limit(3)
+        .outputFields(Collections.singletonList("chunks[text]"))
+        .build());
 ```
 
 ```go
@@ -605,6 +841,18 @@ const results = await milvusClient.search({
 
 ```bash
 # restful
+embeddingList1='[[0.2,0.9,0.4,-0.3,0.2]]'
+embeddingList2='[[-0.2,-0.2,0.5,0.6,0.9],[-0.4,0.3,0.5,0.8,0.2]]'
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -d "{
+    \"collectionName\": \"my_collection\",
+    \"data\": [$embeddingList1],
+    \"annsField\": \"chunks[text_vector]\",
+    \"searchParams\": {\"metric_type\": \"MAX_SIM_COSINE\"},
+    \"limit\": 3,
+    \"outputFields\": [\"chunks[text]\"]
+  }"
 ```
 
 The above search request uses `chunks[text_vector]` to refer to the `text_vector` field in Struct elements. You can use this syntax to set the `anns_field` and `output_fields` parameters. 
@@ -685,7 +933,25 @@ print(results)
 ```
 
 ```java
-// java
+Map<String, Object> params = new HashMap<>();
+params.put("metric_type", "MAX_SIM_COSINE");
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("my_collection")
+        .annsField("chunks[text_vector]")
+        .data(Arrays.asList(embeddingList1, embeddingList2))
+        .searchParams(params)
+        .limit(3)
+        .outputFields(Collections.singletonList("chunks[text]"))
+        .build());
+        
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (int i = 0; i < searchResults.size(); i++) {
+    System.out.println("Results of No." + i + " embedding list");
+    List<SearchResp.SearchResult> results = searchResults.get(i);
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 ```
 
 ```go
@@ -705,6 +971,16 @@ const results2 = await milvusClient.search({
 
 ```bash
 # restful
+curl -X POST "http://localhost:19530/v2/vectordb/entities/search" \
+  -H "Content-Type: application/json" \
+  -d "{
+    \"collectionName\": \"my_collection\",
+    \"data\": [$embeddingList1, $embeddingList2],
+    \"annsField\": \"chunks[text_vector]\",
+    \"searchParams\": {\"metric_type\": \"MAX_SIM_COSINE\"},
+    \"limit\": 3,
+    \"outputFields\": [\"chunks[text]\"]
+  }"
 ```
 
 The output would be a list of the three most similar entities for each embedding list.

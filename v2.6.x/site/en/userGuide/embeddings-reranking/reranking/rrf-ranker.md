@@ -131,43 +131,43 @@ This example demonstrates a Hybrid Search (topK=5) on sparse-dense vectors and i
          <td><p>101</p></td>
          <td><p>1</p></td>
          <td><p>2</p></td>
-         <td><p>1/(60+1)+1/(60+2) = 0.01639</p></td>
+         <td><p>1/(60+1)+1/(60+2) = 0.03252247</p></td>
        </tr>
        <tr>
          <td><p>198</p></td>
          <td><p>4</p></td>
          <td><p>1</p></td>
-         <td><p>1/(60+4)+1/(60+1) = 0.01593</p></td>
+         <td><p>1/(60+4)+1/(60+1) = 0.03201844</p></td>
        </tr>
        <tr>
          <td><p>175</p></td>
          <td><p>5</p></td>
          <td><p>4</p></td>
-         <td><p>1/(60+5)+1/(60+4) = 0.01554</p></td>
+         <td><p>1/(60+5)+1/(60+4) = 0.03100962</p></td>
        </tr>
        <tr>
          <td><p>203</p></td>
          <td><p>2</p></td>
          <td><p>N/A</p></td>
-         <td><p>1/(60+2) = 0.01613</p></td>
+         <td><p>1/(60+2) = 0.01612903</p></td>
        </tr>
        <tr>
          <td><p>150</p></td>
          <td><p>3</p></td>
          <td><p>N/A</p></td>
-         <td><p>1/(60+3) = 0.01587</p></td>
+         <td><p>1/(60+3) = 0.01587302</p></td>
        </tr>
        <tr>
          <td><p>110</p></td>
          <td><p>N/A</p></td>
          <td><p>3</p></td>
-         <td><p>1/(60+3) = 0.01587</p></td>
+         <td><p>1/(60+3) = 0.01587302</p></td>
        </tr>
        <tr>
          <td><p>250</p></td>
          <td><p>N/A</p></td>
          <td><p>5</p></td>
-         <td><p>1/(60+5) = 0.01554</p></td>
+         <td><p>1/(60+5) = 0.01538462</p></td>
        </tr>
     </table>
 
@@ -182,27 +182,32 @@ This example demonstrates a Hybrid Search (topK=5) on sparse-dense vectors and i
        <tr>
          <td><p>1</p></td>
          <td><p>101</p></td>
-         <td><p>0.01639</p></td>
+         <td><p>0.03252247</p></td>
        </tr>
        <tr>
          <td><p>2</p></td>
-         <td><p>203</p></td>
-         <td><p>0.01613</p></td>
+         <td><p>198</p></td>
+         <td><p>0.03201844</p></td>
        </tr>
        <tr>
          <td><p>3</p></td>
-         <td><p>198</p></td>
-         <td><p>0.01593</p></td>
+         <td><p>175</p></td>
+         <td><p>0.03100962</p></td>
        </tr>
        <tr>
          <td><p>4</p></td>
+         <td><p>203</p></td>
+         <td><p>0.01612903</p></td>
+       </tr>
+       <tr>
+         <td><p>5</p></td>
          <td><p>150</p></td>
-         <td><p>0.01587</p></td>
+         <td><p>0.01587302</p></td>
        </tr>
        <tr>
          <td><p>5</p></td>
          <td><p>110</p></td>
-         <td><p>0.01587</p></td>
+         <td><p>0.01587302</p></td>
        </tr>
     </table>
 
@@ -246,11 +251,12 @@ ranker = Function(
 import io.milvus.common.clientenum.FunctionType;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-CreateCollectionReq.Function rr = CreateCollectionReq.Function.builder()
-                .functionType(FunctionType.RERANK)
-                .param("strategy", "rrf")
-                .param("params", "{\"k\": 100}")
-                .build();
+CreateCollectionReq.Function rerank = CreateCollectionReq.Function.builder()
+        .name("rrf")
+        .functionType(FunctionType.RERANK)
+        .param("reranker", "rrf")
+        .param("k", "100")
+        .build();
 ```
 
 ```javascript
