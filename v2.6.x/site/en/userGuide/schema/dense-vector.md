@@ -1,80 +1,119 @@
 ---
 id: dense-vector.md
 title: "Dense Vector"
-summary: "Dense vectors are numerical data representations widely used in machine learning and data analysis. They consist of arrays with real numbers, where most or all elements are non-zero. Compared to sparse vectors, dense vectors contain more information at the same dimensional level, as each dimension holds meaningful values. This representation can effectively capture complex patterns and relationships, making data easier to analyze and process in high-dimensional spaces. Dense vectors typically have a fixed number of dimensions, ranging from a few dozen to several hundred or even thousands, depending on the specific application and requirements."
+summary: "Dense vectors (often called embeddings) are the core technology that enables modern semantic search. While traditional search engines look for matching keywords, dense vectors allow you to search by meaning."
 ---
 
 # Dense Vector
 
-Dense vectors are numerical data representations widely used in machine learning and data analysis. They consist of arrays with real numbers, where most or all elements are non-zero. Compared to sparse vectors, dense vectors contain more information at the same dimensional level, as each dimension holds meaningful values. This representation can effectively capture complex patterns and relationships, making data easier to analyze and process in high-dimensional spaces. Dense vectors typically have a fixed number of dimensions, ranging from a few dozen to several hundred or even thousands, depending on the specific application and requirements.
+Dense vectors (often called embeddings) are the core technology that enables modern semantic search. While traditional search engines look for matching keywords, dense vectors allow you to search by meaning.
 
-Dense vectors are mainly used in scenarios that require understanding the semantics of data, such as semantic search and recommendation systems. In semantic search, dense vectors help capture the underlying connections between queries and documents, improving the relevance of search results. In recommendation systems, they aid in identifying similarities between users and items, offering more personalized suggestions.
+Consider a user searching for **"laptop for programming"**:
 
-## Overview
+- **Traditional keyword search:** Looks for exact matches. It might miss a result labeled *"workstation for software engineers"* because the words strictly don't match.
+- **Dense vector search:** Understands context. It identifies documents about *"developer workstations"*, *"coding"*, or *"high-performance hardware"* as semantically similar, even if the words differ.
 
-Dense vectors are typically represented as arrays of floating-point numbers with a fixed length, such as `[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]`. The dimensionality of these vectors usually ranges from hundreds to thousands, such as 128, 256, 768, or 1024. Each dimension captures specific semantic features of an object, making it applicable to various scenarios through similarity calculations.
+Machine learning models (such as BERT, OpenAI embeddings, or image encoders) can convert your raw data into dense vectors:
 
-![Dense Vector](../../../../assets/dense-vector.png)
+- **Input (text):** *"Milvus is a vector database"*
+- **Model processing:** → neural network layers
+- **Output (vector):** [0.23, -0.15, 0.67, 0.12, ..., 0.45] (for example, 768 numbers)
 
-The image above illustrates the representation of dense vectors in a 2D space. Although dense vectors in real-world applications often have much higher dimensions, this 2D illustration effectively conveys several key concepts:
+Each number is a learned feature, and together they capture the semantic meaning of the input. Dense vectors are called *dense* because:
 
-- **Multidimensional Representation:** Each point represents a conceptual object (like **Milvus**, **vector database**, **retrieval system**, etc.), with its position determined by the values of its dimensions.
+- Every dimension has a value (almost no zeros).
+- All vectors have the same fixed length (for example, 768 or 1536 dimensions).
+- They provide a compact representation of high-level meaning that Milvus can index and search efficiently.
 
-- **Semantic Relationships:** The distances between points reflect the semantic similarity between concepts. Closer points indicate concepts that are more semantically related.
+## Understand and choose dense vector formats
 
-- **Clustering Effect:** Related concepts (such as **Milvus**, **vector database**, and **retrieval system**) are positioned close to each other in space, forming a semantic cluster.
+Milvus supports these data formats for dense vectors: [FP32](https://en.wikipedia.org/wiki/Single-precision_floating-point_format), [BF16](https://en.wikipedia.org/wiki/Bfloat16_floating-point_format), [FP16](https://en.wikipedia.org/wiki/Half-precision_floating-point_format), and INT8. Each maps to different Milvus vector field types:
 
-Below is an example of a real dense vector representing the text `"Milvus is an efficient vector database"`:
+- `FLOAT_VECTOR` (FP32)
+- `FLOAT16_VECTOR` (FP16)
+- `BFLOAT16_VECTOR` (BF16)
+- `INT8_VECTOR` (INT8)
 
-```json
-[
-    -0.013052909,
-    0.020387933,
-    -0.007869,
-    -0.11111383,
-    -0.030188112,
-    -0.0053388323,
-    0.0010654867,
-    0.072027855,
-    // ... more dimensions
-]
+All four are standard data types in modern ML frameworks. They use different bit layouts to represent numbers, which leads to different trade-offs in precision, numeric range, and memory usage.
 
-```
+### How the formats differ
 
-Dense vectors can be generated using various [embedding](https://en.wikipedia.org/wiki/Embedding) models, such as CNN models (like [ResNet](https://pytorch.org/hub/pytorch_vision_resnet/), [VGG](https://pytorch.org/vision/stable/models/vgg.html)) for images and language models (like [BERT](https://en.wikipedia.org/wiki/BERT_(language_model)), [Word2Vec](https://en.wikipedia.org/wiki/Word2vec)) for text. These models transform raw data into points in high-dimensional space, capturing the semantic features of the data. Additionally, Milvus offers convenient methods to help users generate and process dense vectors, as detailed in Embeddings.
+The illustration below shows how each format allocates bits.
 
-Once data is vectorized, it can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.
+<img src="../../../../assets/dense-vector-formats.png" alt="Dense vector formats" width="700"/>
 
-![Use Dense Vector](../../../../assets/use-dense-vector.png)
+From this layout:
 
-<div class="alert note">
+- **FP32** (single-precision float)
+    - Uses 32 bits: **1 sign + 8 exponent + 23 fraction**.
+    - Provides a wide numeric range and high precision, and is the traditional default for deep learning.
+- **FP16** (half-precision float)
+    - Uses 16 bits: **1 sign + 5 exponent + 10 fraction**.
+    - Cuts memory and bandwidth in half compared to **FP32**, with a narrower range and slightly lower precision. Widely used for faster training and inference on GPUs.
+- **BF16** (bfloat16)
+    - Uses 16 bits: **1 sign + 8 exponent + 7 fraction**.
+    - Shares the same exponent width as **FP32**, so it has a similar dynamic range but fewer fraction bits. This keeps the range of FP32 while reducing precision and memory usage. It’s now native on many AI accelerators (TPUs, modern NVIDIA GPUs, Intel CPUs).
+- **INT8 (8-bit signed integer)**
+    - Uses 8 bits: **1 sign + 7 value bits**, representing integers in the range **−128 to +127** (or 0–255 if unsigned).
+    - There is no exponent or fraction. INT8 is typically used after quantization to dramatically reduce memory and speed up inference.
 
-Besides dense vectors, Milvus also supports sparse vectors and binary vectors. Sparse vectors are suitable for precise matches based on specific terms, such as keyword search and term matching, while binary vectors are commonly used for efficiently handling binarized data, such as image pattern matching and certain hashing applications. For more information, refer to [Binary Vector](binary-vector.md) and [Sparse Vector](sparse_vector.md).
+### Choose the right dense vector format
+
+When choosing a format, consider:
+
+- **Model output type** – what your embedding model naturally produces
+- **Accuracy requirements** – how much quality drop you can tolerate
+- **Resource constraints** – memory, storage, and throughput
+
+| **Format** | **Milvus Type** | **Description** | **When to Choose** |
+| --- | --- | --- | --- |
+| **FP32** | `FLOAT_VECTOR` | 32-bit standard float. Highest precision and widest dynamic range; most stable similarity scores. | Model outputs float32, accuracy is critical, and memory is not a major constraint. |
+| **FP16** | `FLOAT16_VECTOR` | 16-bit half float. ~50% memory/storage of FP32; good precision but smaller numeric range. | GPU-accelerated inference, need 50% memory savings, and can tolerate slight quality loss. |
+| **BF16** | `BFLOAT16_VECTOR` | 16-bit half float with FP32-like exponent. Same range as FP32, fewer fraction bits → lower precision. | PyTorch/TPU/modern GPU workflows where BF16 is native, and you want FP32-like range with smaller size. |
+| **INT8** | `INT8_VECTOR` | 8-bit quantized integers. Smallest footprint; lowest precision; no exponent/fraction. | 100M+ vectors, strict memory or cost budget, and you already have an INT8 quantization pipeline. |
+
+**Note**:
+
+- **No automatic conversion**: Milvus strictly enforces data type matching. If a field is defined as `FLOAT16_VECTOR`, you **cannot** insert FP32 vectors into it.
+- **INT8 requires external quantization**: Milvus stores INT8 vectors exactly as provided. To use `INT8_VECTOR`, you must quantize your embeddings (for example, post-training quantization or vector quantization) before insertion.
+
+## Basic operations
+
+Working with dense vectors in Milvus typically follows the same pattern:
+
+1. Define a dense vector field in the collection schema.
+2. Insert vector data (in the chosen numeric format).
+3. Create an index on the dense vector field.
+4. Load the collection into memory and run semantic search on the vectors.
+5. Define a dense vector field
+
+Vector fields in Milvus store the embeddings used for similarity search. When defining one:
+
+- Select the correct dense vector type (`FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, or `INT8_VECTOR`).
+- Set `dim` to match the vector dimensionality of your model.
+- Ensure the type exactly matches the insertion/search data you will use later.
+
+<div class="filter">
+
+<a href="#fp32">FP32</a>
+
+<a href="#fp16">FP16</a>
+
+<a href="#bf16">BF16</a>
+
+<a href="#int8">INT8</a>
 
 </div>
 
-## Use dense vectors
-
-### Add vector field
-
-To use dense vectors in Milvus, first define a vector field for storing dense vectors when creating a collection. This process includes:
-
-1. Setting `datatype` to a supported dense vector data type. For supported dense vector data types, see Data Types.
-
-1. Specifying the dimensions of the dense vector using the `dim` parameter.
-
-In the example below, we add a vector field named `dense_vector` to store dense vectors. The field's data type is `FLOAT_VECTOR`, with a dimension of `4`.
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+<div class="fp32">
 
 ```python
 from pymilvus import MilvusClient, DataType
+import random
+
+COLLECTION_NAME = "demo_fp32"
+DIM = 6
+NUM_ENTITIES = 1000
 
 client = MilvusClient(uri="http://localhost:19530")
 
@@ -83,151 +122,218 @@ schema = client.create_schema(
     enable_dynamic_fields=True,
 )
 
-schema.add_field(field_name="pk", datatype=DataType.VARCHAR, is_primary=True, max_length=100)
-schema.add_field(field_name="dense_vector", datatype=DataType.FLOAT_VECTOR, dim=4)
-```
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+# highlight-next-line
+schema.add_field(field_name="dense_vector", datatype=DataType.FLOAT_VECTOR, dim=DIM)
 
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-
-import io.milvus.v2.common.DataType;
-import io.milvus.v2.service.collection.request.AddFieldReq;
-import io.milvus.v2.service.collection.request.CreateCollectionReq;
-
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .build());
-
-CreateCollectionReq.CollectionSchema schema = client.createSchema();
-schema.setEnableDynamicField(true);
-schema.addField(AddFieldReq.builder()
-        .fieldName("pk")
-        .dataType(DataType.VarChar)
-        .isPrimaryKey(true)
-        .autoID(true)
-        .maxLength(100)
-        .build());
-
-schema.addField(AddFieldReq.builder()
-        .fieldName("dense_vector")
-        .dataType(DataType.FloatVector)
-        .dimension(4)
-        .build());
-```
-
-```javascript
-import { DataType } from "@zilliz/milvus2-sdk-node";
-
-schema.push({
-  name: "dense_vector",
-  data_type: DataType.FloatVector,
-  dim: 4,
-});
-
-```
-
-```go
-import (
-    "context"
-    "fmt"
-
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+client.create_collection(
+    collection_name=COLLECTION_NAME,
+    schema=schema,
 )
 
-ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
-
-milvusAddr := "localhost:19530"
-client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-defer client.Close(ctx)
-
-schema := entity.NewSchema()
-schema.WithField(entity.NewField().
-    WithName("pk").
-    WithDataType(entity.FieldTypeVarChar).
-    WithIsPrimaryKey(true).
-    WithIsAutoID(true).
-    WithMaxLength(100),
-).WithField(entity.NewField().
-    WithName("dense_vector").
-    WithDataType(entity.FieldTypeFloatVector).
-    WithDim(4),
-)
 ```
 
-```bash
-export primaryField='{
-    "fieldName": "pk",
-    "dataType": "VarChar",
-    "isPrimary": true,
-    "elementTypeParams": {
-        "max_length": 100
-    }
-}'
-
-export vectorField='{
-    "fieldName": "dense_vector",
-    "dataType": "FloatVector",
-    "elementTypeParams": {
-        "dim": 4
-    }
-}'
-
-export schema="{
-    \"autoID\": true,
-    \"fields\": [
-        $primaryField,
-        $vectorField
-    ]
-}"
-```
-
-**Supported data types for dense vector fields**:
-
-<table>
-   <tr>
-     <th><p>Data Type</p></th>
-     <th><p>Description</p></th>
-   </tr>
-   <tr>
-     <td><p><code>FLOAT_VECTOR</code></p></td>
-     <td><p>Stores 32-bit floating-point numbers, commonly used for representing real numbers in scientific computations and machine learning. Ideal for scenarios requiring high precision, such as distinguishing similar vectors.</p></td>
-   </tr>
-   <tr>
-     <td><p><code>FLOAT16_VECTOR</code></p></td>
-     <td><p>Stores 16-bit half-precision floating-point numbers, used for deep learning and GPU computations. It saves storage space in scenarios where precision is less critical, such as in the low-precision recall phase of recommendation systems.</p></td>
-   </tr>
-   <tr>
-     <td><p><code>BFLOAT16_VECTOR</code></p></td>
-     <td><p>Stores 16-bit Brain Floating Point (bfloat16) numbers, offering the same range of exponents as Float32 but with reduced precision. Suitable for scenarios that need to process large volumes of vectors quickly, such as large-scale image retrieval.</p></td>
-   </tr>
-   <tr>
-     <td><p><code>INT8_VECTOR</code></p></td>
-     <td><p>Stores vectors whose individual elements in each dimension are 8-bit integers (int8), with each element ranging from –128 to 127. Designed for quantized deep learning models (e.g., ResNet, EfficientNet), INT8_VECTOR reduces model size and speeds up inference with minimal precision loss.<br><strong>Note</strong>: This vector type is supported only for HNSW indexes.</p></td>
-   </tr>
-</table>
-
-### Set index params for vector field
-
-To accelerate semantic searches, an index must be created for the vector field. Indexing can significantly improve the retrieval efficiency of large-scale vector data.
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
 </div>
+
+<div class="fp16">
+
+```python
+from pymilvus import MilvusClient, DataType
+import numpy as np
+import random
+
+COLLECTION_NAME = "demo_fp16"
+DIM = 6
+NUM_ENTITIES = 1000
+
+client = MilvusClient(uri="http://localhost:19530")
+
+schema = client.create_schema(
+    auto_id=True,
+    enable_dynamic_fields=True,
+)
+
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+# highlight-next-line
+schema.add_field(field_name="dense_vector", datatype=DataType.FLOAT16_VECTOR, dim=DIM)
+
+client.create_collection(
+    collection_name=COLLECTION_NAME,
+    schema=schema,
+)
+
+```
+
+</div>
+
+<div class="bf16">
+
+```python
+from pymilvus import MilvusClient, DataType
+import numpy as np
+import ml_dtypes
+import random
+
+COLLECTION_NAME = "demo_bf16"
+DIM = 6
+NUM_ENTITIES = 1000
+
+client = MilvusClient(uri="http://localhost:19530")
+
+schema = client.create_schema(
+    auto_id=True,
+    enable_dynamic_fields=True,
+)
+
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+# highlight-next-line
+schema.add_field(field_name="dense_vector", datatype=DataType.BFLOAT16_VECTOR, dim=DIM)
+
+client.create_collection(
+    collection_name=COLLECTION_NAME,
+    schema=schema,
+)
+
+```
+
+</div>
+
+<div class="int8">
+
+```python
+from pymilvus import MilvusClient, DataType
+import numpy as np
+import random
+
+COLLECTION_NAME = "demo_int8"
+DIM = 6
+NUM_ENTITIES = 1000
+
+client = MilvusClient(uri="http://localhost:19530")
+
+schema = client.create_schema(
+    auto_id=True,
+    enable_dynamic_fields=True,
+)
+
+schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
+# highlight-next-line
+schema.add_field(field_name="dense_vector", datatype=DataType.INT8_VECTOR, dim=DIM)
+
+client.create_collection(
+    collection_name=COLLECTION_NAME,
+    schema=schema,
+)
+
+```
+
+</div>
+
+1. Insert vector data
+
+After creating the collection, insert your vector data into the vector field.
+
+Milvus expects the vectors to:
+
+- Use the same data type as defined in the schema.
+- Have the same dimensionality (`dim`).
+
+Below are examples of how to generate and insert sample data for each format.
+
+<div class="filter">
+
+<a href="#fp32">FP32</a>
+
+<a href="#fp16">FP16</a>
+
+<a href="#bf16">BF16</a>
+
+<a href="#int8">INT8</a>
+
+</div>
+
+<div class="fp32">
+
+```python
+# Generate random sample data
+sample_data = [
+    {"dense_vector": [random.uniform(0, 10) for _ in range(DIM)]}
+    for _ in range(NUM_ENTITIES)
+]
+
+res = client.insert(collection_name=COLLECTION_NAME, data=sample_data)
+print(f"Inserted {res['insert_count']} entities")
+
+# Expected output:
+# Inserted 1000 entities
+
+```
+
+</div>
+
+<div class="fp16">
+
+```python
+# Generate random sample data with float16 precision
+sample_data = [
+    {"dense_vector": np.array([random.uniform(0, 10) for _ in range(DIM)], dtype=np.float16)}
+    for _ in range(NUM_ENTITIES)
+]
+
+res = client.insert(collection_name=COLLECTION_NAME, data=sample_data)
+print(f"Inserted {res['insert_count']} entities")
+
+# Expected output:
+# Inserted 1000 entities
+
+```
+
+</div>
+
+<div class="bf16">
+
+```python
+# Generate random sample data with bfloat16 precision
+sample_data = [
+    {"dense_vector": np.array([random.uniform(0, 10) for _ in range(DIM)], dtype=ml_dtypes.bfloat16)}
+    for _ in range(NUM_ENTITIES)
+]
+
+res = client.insert(collection_name=COLLECTION_NAME, data=sample_data)
+print(f"Inserted {res['insert_count']} entities")
+
+# Expected output:
+# Inserted 1000 entities
+
+```
+
+</div>
+
+<div class="int8">
+
+```python
+# Generate random sample data with int8 values (range: -128 to 127)
+# Note: In practice, these should be generated by your quantization workflow
+sample_data = [
+    {"dense_vector": np.array([random.randint(-128, 127) for _ in range(DIM)], dtype=np.int8)}
+    for _ in range(NUM_ENTITIES)
+]
+
+res = client.insert(collection_name=COLLECTION_NAME, data=sample_data)
+print(f"Inserted {res['insert_count']} entities")
+
+# Expected output:
+# Inserted 1000 entities
+
+```
+
+</div>
+
+1. Create index on dense vector field
+
+To accelerate semantic search, it is mandatory to create a vector index before searches.
+
+In this example, we use **AUTOINDEX**, which lets Milvus automatically choose optimal index parameters based on your collection and workload.
 
 ```python
 index_params = client.prepare_index_params()
@@ -235,327 +341,218 @@ index_params = client.prepare_index_params()
 index_params.add_index(
     field_name="dense_vector",
     index_name="dense_vector_index",
+    # highlight-next-line
     index_type="AUTOINDEX",
-    metric_type="IP"
+    metric_type="COSINE"
 )
+
+client.create_index(
+    collection_name=COLLECTION_NAME,
+    index_params=index_params,
+)
+
 ```
 
-```java
-import io.milvus.v2.common.IndexParam;
-import java.util.*;
+<include target="milvus">
 
-List<IndexParam> indexes = new ArrayList<>();
+Notes
 
-indexes.add(IndexParam.builder()
-        .fieldName("dense_vector")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-```
+- `INT8_VECTOR` currently supports only the **HNSW** index.
+- Alternatively, you can also set a custom index type. For a list of index types available for dense vectors, refer to [Index Explained](index-explained.md).
 
-```javascript
-import { MetricType, IndexType } from "@zilliz/milvus2-sdk-node";
+</include>
 
-const indexParams = {
-    index_name: 'dense_vector_index',
-    field_name: 'dense_vector',
-    metric_type: MetricType.IP,
-    index_type: IndexType.AUTOINDEX
-};
-```
+1. Semantic search on dense vectors
 
-```go
-idx := index.NewAutoIndex(index.MetricType(entity.IP))
-indexOption := milvusclient.NewCreateIndexOption("my_collection", "dense_vector", idx)
-```
-
-```bash
-export indexParams='[
-        {
-            "fieldName": "dense_vector",
-            "metricType": "IP",
-            "indexName": "dense_vector_index",
-            "indexType": "AUTOINDEX"
-        }
-    ]'
-```
-
-In the example above, an index named `dense_vector_index` is created for the `dense_vector` field using the `AUTOINDEX` index type. The `metric_type` is set to `IP`, indicating that inner product will be used as the distance metric.
-
-Milvus provides various index types for a better vector search experience. AUTOINDEX is a special index type designed to smooth the learning curve of vector search. There are a lot of index types available for you to choose from. For details, refer to xxx.
-
-Milvus supports other metric types. For more information, refer to [Metric Types](metric.md).
-
-### Create collection
-
-Once the dense vector and index param settings are complete, you can create a collection containing dense vectors. The example below uses the `create_collection` method to create a collection named `my_collection`.
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+Before performing vector searches, load your collection:
 
 ```python
-client.create_collection(
-    collection_name="my_collection",
-    schema=schema,
-    index_params=index_params
-)
-```
+client.load_collection(collection_name=COLLECTION_NAME)
+print(client.get_load_state(collection_name=COLLECTION_NAME))
 
-```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .build());
-
-CreateCollectionReq requestCreate = CreateCollectionReq.builder()
-        .collectionName("my_collection")
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
-client.createCollection(requestCreate);
-```
-
-```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";
-
-const client = new MilvusClient({
-    address: 'http://localhost:19530'
-});
-
-await client.createCollection({
-    collection_name: 'my_collection',
-    schema: schema,
-    index_params: indexParams
-});
+# Expected output:
+# {'state': <LoadState: Loaded>}
 
 ```
 
-```go
-err = client.CreateCollection(ctx,
-    milvusclient.NewCreateCollectionOption("my_collection", schema).
-        WithIndexOptions(indexOption))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
-```
+Then, run a vector search using a query vector of the same type and dimension as your stored vectors.
 
-```bash
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d "{
-    \"collectionName\": \"my_collection\",
-    \"schema\": $schema,
-    \"indexParams\": $indexParams
-}"
-```
+<div class="filter">
 
-### Insert data
+<a href="#fp32">FP32</a>
 
-After creating the collection, use the `insert` method to add data containing dense vectors. Ensure that the dimensionality of the dense vectors being inserted matches the `dim` value defined when adding the dense vector field.
+<a href="#fp16">FP16</a>
 
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
+<a href="#bf16">BF16</a>
+
+<a href="#int8">INT8</a>
+
 </div>
 
-```python
-data = [
-    {"dense_vector": [0.1, 0.2, 0.3, 0.7]},
-    {"dense_vector": [0.2, 0.3, 0.4, 0.8]},
-]
-
-client.insert(
-    collection_name="my_collection",
-    data=data
-)
-```
-
-```java
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import io.milvus.v2.service.vector.request.InsertReq;
-import io.milvus.v2.service.vector.response.InsertResp;
-
-List<JsonObject> rows = new ArrayList<>();
-Gson gson = new Gson();
-rows.add(gson.fromJson("{\"dense_vector\": [0.1, 0.2, 0.3, 0.4]}", JsonObject.class));
-rows.add(gson.fromJson("{\"dense_vector\": [0.2, 0.3, 0.4, 0.5]}", JsonObject.class));
-
-InsertResp insertR = client.insert(InsertReq.builder()
-        .collectionName("my_collection")
-        .data(rows)
-        .build());
-```
-
-```javascript
-const data = [
-  { dense_vector: [0.1, 0.2, 0.3, 0.7] },
-  { dense_vector: [0.2, 0.3, 0.4, 0.8] },
-];
-
-client.insert({
-  collection_name: "my_collection",
-  data: data,
-});
-```
-
-```go
-_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
-    WithFloatVectorColumn("dense_vector", 4, [][]float32{
-        {0.1, 0.2, 0.3, 0.7},
-        {0.2, 0.3, 0.4, 0.8},
-    }),
-)
-if err != nil {
-    fmt.Println(err.Error())
-    // handle err
-}
-```
-
-```bash
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "data": [
-        {"dense_vector": [0.1, 0.2, 0.3, 0.4]},
-        {"dense_vector": [0.2, 0.3, 0.4, 0.5]}        
-    ],
-    "collectionName": "my_collection"
-}'
-
-## {"code":0,"cost":0,"data":{"insertCount":2,"insertIds":["453577185629572531","453577185629572532"]}}
-```
-
-### Perform similarity search
-
-Semantic search based on dense vectors is one of the core features of Milvus, allowing you to quickly find data that is most similar to a query vector based on the distance between vectors. To perform a similarity search, prepare the query vector and search parameters, then call the `search` method.
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
+<div class="fp32">
 
 ```python
-search_params = {
-    "params": {"nprobe": 10}
-}
+# Generate a random query vector
+query_vector = [random.uniform(0, 10) for _ in range(DIM)]
 
-query_vector = [0.1, 0.2, 0.3, 0.7]
-
-res = client.search(
-    collection_name="my_collection",
+results = client.search(
+    collection_name=COLLECTION_NAME,
     data=[query_vector],
     anns_field="dense_vector",
-    search_params=search_params,
     limit=5,
-    output_fields=["pk"]
+    output_fields=["id", "dense_vector"],
 )
 
-print(res)
+print("Search results:")
+for hits in results:
+    for hit in hits:
+        print(f"  ID: {hit['id']}, Distance: {hit['distance']:.4f}, Vector: {hit['entity']['dense_vector']}")
 
-# Output
-# data: ["[{'id': '453718927992172271', 'distance': 0.7599999904632568, 'entity': {'pk': '453718927992172271'}}, {'id': '453718927992172270', 'distance': 0.6299999952316284, 'entity': {'pk': '453718927992172270'}}]"]
+# Expected output:
+# Query vector: [0.04829983311732566, 7.242046533136467, 4.749595032784661, 6.538280898507523, 2.927369010676787, 7.130210349120606]
+
+# Search results:
+#   ID: 462276891999427419, Distance: 0.9863, Vector: [0.717526912689209, 9.375789642333984, 5.504298210144043, 5.678950786590576, 4.515065670013428, 9.119729042053223]
+#   ID: 462276891999428167, Distance: 0.9858, Vector: [0.3835741877555847, 6.094085693359375, 3.7625980377197266, 3.6146297454833984, 1.652050495147705, 4.706247329711914]
+#   ID: 462276891999427800, Distance: 0.9810, Vector: [2.6610236167907715, 8.234763145446777, 5.404249668121338, 6.806085586547852, 2.198822259902954, 8.617210388183594]
+#   ID: 462276891999428070, Distance: 0.9767, Vector: [0.7160412669181824, 7.404406547546387, 7.226160526275635, 6.292483806610107, 1.1760412454605103, 7.476434230804443]
+#   ID: 462276891999427972, Distance: 0.9763, Vector: [0.7996429204940796, 7.207499027252197, 4.7528157234191895, 8.581534385681152, 3.2311313152313232, 5.160025119781494]
+
 ```
 
-```java
-import io.milvus.v2.service.vector.request.data.FloatVec;
+</div>
 
-Map<String,Object> searchParams = new HashMap<>();
-searchParams.put("nprobe",10);
+<div class="fp16">
 
-FloatVec queryVector = new FloatVec(new float[]{0.1f, 0.3f, 0.3f, 0.4f});
+```python
+# Generate a random query vector
+query_vector = np.array([random.uniform(0, 10) for _ in range(DIM)], dtype=np.float16)
+print(f"\nQuery vector: {query_vector}\n")
 
-SearchResp searchR = client.search(SearchReq.builder()
-        .collectionName("my_collection")
-        .data(Collections.singletonList(queryVector))
-        .annsField("dense_vector")
-        .searchParams(searchParams)
-        .topK(5)
-        .outputFields(Collections.singletonList("pk"))
-        .build());
-        
-System.out.println(searchR.getSearchResults());
+results = client.search(
+    collection_name=COLLECTION_NAME,
+    data=[query_vector],
+    anns_field="dense_vector",
+    limit=5,
+    output_fields=["id", "dense_vector"],
+)
 
-// Output
-//
-// [[SearchResp.SearchResult(entity={pk=453444327741536779}, score=0.65, id=453444327741536779), SearchResp.SearchResult(entity={pk=453444327741536778}, score=0.65, id=453444327741536778)]]
+print("Search results:")
+for hits in results:
+    for hit in hits:
+        print(f"  ID: {hit['id']}, Distance: {hit['distance']:.4f}, Vector: {hit['entity']['dense_vector']}")
+
+# Expected output:
+# Query vector: [4.133  0.1598 7.348  3.623  2.727  6.88  ]
+
+# Search results:
+#   ID: 462276891999429161, Distance: 0.9921, Vector: b'\xbeD\x874\xabH\x9eEhC0G'
+#   ID: 462276891999428326, Distance: 0.9874, Vector: b'\xb9D\x9a=\xd4H\xa2F[D<H'
+#   ID: 462276891999428783, Distance: 0.9824, Vector: b'<F\xeb:\x8dG\xacE7A.G'
+#   ID: 462276891999428366, Distance: 0.9819, Vector: b'\x15E\xe3?\xecG\xf5D"@\xd2H'
+#   ID: 462276891999428808, Distance: 0.9795, Vector: b'RE\xf8>HH\x17Fe>\xe8H'
+
 ```
 
-```javascript
-query_vector = [0.1, 0.2, 0.3, 0.7];
+</div>
 
-client.search({
-    collection_name: 'my_collection',
-    data: query_vector,
-    limit: 5,
-    output_fields: ['pk'],
-    params: {
-        nprobe: 10
-    }
-});
+<div class="bf16">
+
+```python
+# Generate a random query vector
+query_vector = np.array([random.uniform(0, 10) for _ in range(DIM)], dtype=ml_dtypes.bfloat16)
+print(f"\nQuery vector: {query_vector}\n")
+
+results = client.search(
+    collection_name=COLLECTION_NAME,
+    data=[query_vector],
+    anns_field="dense_vector",
+    limit=5,
+    output_fields=["id", "dense_vector"],
+)
+
+print("Search results:")
+for hits in results:
+    for hit in hits:
+        # Convert bytes back to numpy bfloat16 array for display
+        vector_bytes = hit['entity']['dense_vector']
+        vector_array = np.frombuffer(vector_bytes, dtype=ml_dtypes.bfloat16)
+        print(f"  ID: {hit['id']}, Distance: {hit['distance']:.4f}, Vector: {vector_array}")
+
+# Expected output:
+# Query vector: [2.85938 9 0.761719 8 9 10]
+
+# Search results:
+#   ID: 462276891999429941, Distance: 0.9969, Vector: [1.78125 8 0.121582 6.78125 7.46875 9.5]
+#   ID: 462276891999429646, Distance: 0.9903, Vector: [2.51562 8.5625 0.0224609 7.625 6.875 7.03125]
+#   ID: 462276891999429243, Distance: 0.9888, Vector: [0.253906 7.78125 1.17188 7.15625 8.125 8.1875]
+#   ID: 462276891999429439, Distance: 0.9833, Vector: [3.78125 6.4375 1.96875 4.9375 7.59375 8.4375]
+#   ID: 462276891999429986, Distance: 0.9825, Vector: [1.64062 5.0625 0.0130615 7.15625 8.4375 7.84375]
+
 ```
 
-```go
-queryVector := []float32{0.1, 0.2, 0.3, 0.7}
+</div>
 
-annParam := index.NewCustomAnnParam()
-annParam.WithExtraParam("nprobe", 10)
-resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    "my_collection", // collectionName
-    5,                     // limit
-    []entity.Vector{entity.FloatVector(queryVector)},
-).WithANNSField("dense_vector").
-    WithOutputFields("pk").
-    WithAnnParam(annParam))
-if err != nil {
-    fmt.Println(err.Error())
-    // handle error
-}
+<div class="int8">
 
-for _, resultSet := range resultSets {
-    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
-    fmt.Println("Scores: ", resultSet.Scores)
-    fmt.Println("Pks: ", resultSet.GetColumn("pk").FieldData().GetScalars())
-}
+```python
+# Generate a random query vector (int8 range: -128 to 127)
+query_vector = np.array([random.randint(-128, 127) for _ in range(DIM)], dtype=np.int8)
+print(f"\nQuery vector: {query_vector}\n")
+
+results = client.search(
+    collection_name=COLLECTION_NAME,
+    data=[query_vector],
+    anns_field="dense_vector",
+    limit=5,
+    output_fields=["id", "dense_vector"],
+)
+
+print("Search results:")
+for hits in results:
+    for hit in hits:
+        # Convert bytes back to numpy int8 array for display
+        vector_bytes = hit['entity']['dense_vector']
+        vector_array = np.frombuffer(vector_bytes, dtype=np.int8)
+        print(f"  ID: {hit['id']}, Distance: {hit['distance']:.4f}, Vector: {vector_array}")
+
+# Expected output:
+# Query vector: [-72 -76 -35 -44  33 103]
+
+# Search results:
+#   ID: 462276891999430363, Distance: 0.9280, Vector: [-118  -84  -14   -6   86  126]
+#   ID: 462276891999430447, Distance: 0.9222, Vector: [-101  -83  -37  -85  -31  125]
+#   ID: 462276891999430628, Distance: 0.9210, Vector: [-47 -61 -33 -99  40  89]
+#   ID: 462276891999430902, Distance: 0.9181, Vector: [-107  -71  -69 -105   62   80]
+#   ID: 462276891999431014, Distance: 0.9179, Vector: [-109 -117  -79  -42   96   79]
+
 ```
 
-```bash
-curl --request POST \
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
---header "Authorization: Bearer ${TOKEN}" \
---header "Content-Type: application/json" \
--d '{
-    "collectionName": "my_collection",
-    "data": [
-        [0.1, 0.2, 0.3, 0.7]
-    ],
-    "annsField": "dense_vector",
-    "limit": 5,
-    "searchParams":{
-        "params":{"nprobe":10}
-    },
-    "outputFields": ["pk"]
-}'
+</div>
 
-## {"code":0,"cost":0,"data":[{"distance":0.55,"id":"453577185629572532","pk":"453577185629572532"},{"distance":0.42,"id":"453577185629572531","pk":"453577185629572531"}]}
-```
+## Next steps
 
-For more information on similarity search parameters, refer to [Basic ANN Search](single-vector-search.md).
+Once you can store and search dense vectors, you can:
+
+- **Combine vector and scalar filters**
+    
+    Add filter conditions on other fields along with vector similarity. For details, refer to [Filtered Search](filtered-search.md).
+    
+- **Run hybrid search**
+    
+    Combine multiple vector fields (for example, text + image embeddings) or mix sparse and dense vectors. See [Multi-Vector Hybrid Search](multi-vector-search.md) for details.
+    
+
+## FAQ
+
+### Can a collection have multiple dense vector fields with different types?
+
+Yes. Each vector field can have its own type (`FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, or `INT8_VECTOR`) and dimension. Define each field explicitly in the schema.
+
+### Can I modify the vector type after collection creation?
+
+No. Field data types are immutable. To change the vector type, create a new field or a new collection and migrate data.
+
+### Does Milvus handle FP32 → FP16 or FP16 → INT8 conversion automatically?
+
+No. Milvus stores vectors as-is. Perform any datatype conversions or quantization in your application code or preprocessing pipeline before insertion.
