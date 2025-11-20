@@ -160,19 +160,33 @@ summary: >-
 <li>Insert vector data (in the chosen numeric format).</li>
 <li>Create an index on the dense vector field.</li>
 <li>Load the collection into memory and run semantic search on the vectors.</li>
-<li>Define a dense vector field</li>
 </ol>
-<p>Vector fields in Milvus store the embeddings used for similarity search. When defining one:</p>
+<h3 id="1-Define-a-dense-vector-field" class="common-anchor-header">1. Define a dense vector field<button data-href="#1-Define-a-dense-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vector fields in Milvus store the embeddings used for similarity search. When defining one:</p>
 <ul>
 <li>Select the correct dense vector type (<code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, or <code translate="no">INT8_VECTOR</code>).</li>
 <li>Set <code translate="no">dim</code> to match the vector dimensionality of your model.</li>
 <li>Ensure the type exactly matches the insertion/search data you will use later.</li>
 </ul>
 <div class="filter">
-<p><a href="#fp32">FP32</a></p>
-<p><a href="#fp16">FP16</a></p>
-<p><a href="#bf16">BF16</a></p>
-<p><a href="#int8">INT8</a></p>
+    <a href="#fp32">FP32</a>
+    <a href="#fp16">FP16</a>
+    <a href="#bf16">BF16</a>
+    <a href="#int8">INT8</a>
 </div>
 <div class="filter-fp32">
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -278,10 +292,22 @@ client.create_collection(
 
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<ol>
-<li>Insert vector data</li>
-</ol>
-<p>After creating the collection, insert your vector data into the vector field.</p>
+<h3 id="2-Insert-vector-data" class="common-anchor-header">2. Insert vector data<button data-href="#2-Insert-vector-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>After creating the collection, insert your vector data into the vector field.</p>
 <p>Milvus expects the vectors to:</p>
 <ul>
 <li>Use the same data type as defined in the schema.</li>
@@ -289,10 +315,10 @@ client.create_collection(
 </ul>
 <p>Below are examples of how to generate and insert sample data for each format.</p>
 <div class="filter">
-<p><a href="#fp32">FP32</a></p>
-<p><a href="#fp16">FP16</a></p>
-<p><a href="#bf16">BF16</a></p>
-<p><a href="#int8">INT8</a></p>
+    <a href="#fp32">FP32</a>
+    <a href="#fp16">FP16</a>
+    <a href="#bf16">BF16</a>
+    <a href="#int8">INT8</a>
 </div>
 <div class="filter-fp32">
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Generate random sample data</span>
@@ -355,10 +381,22 @@ res = client.insert(collection_name=COLLECTION_NAME, data=sample_data)
 
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<ol>
-<li>Create index on dense vector field</li>
-</ol>
-<p>To accelerate semantic search, it is mandatory to create a vector index before searches.</p>
+<h3 id="3-Create-index-on-dense-vector-field" class="common-anchor-header">3. Create index on dense vector field<button data-href="#3-Create-index-on-dense-vector-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>To accelerate semantic search, it is mandatory to create a vector index before searches.</p>
 <p>In this example, we use <strong>AUTOINDEX</strong>, which lets Milvus automatically choose optimal index parameters based on your collection and workload.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
@@ -381,10 +419,22 @@ client.create_index(
 <li>Alternatively, you can also set a custom index type. For a list of index types available for dense vectors, refer to <a href="/docs/index-explained.md">Index Explained</a>.</li>
 </ul>
 </div>
-<ol>
-<li>Semantic search on dense vectors</li>
-</ol>
-<p>Before performing vector searches, load your collection:</p>
+<h3 id="4-Semantic-search-on-dense-vectors" class="common-anchor-header">4. Semantic search on dense vectors<button data-href="#4-Semantic-search-on-dense-vectors" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Before performing vector searches, load your collection:</p>
 <pre><code translate="no" class="language-python">client.load_collection(collection_name=COLLECTION_NAME)
 <span class="hljs-built_in">print</span>(client.get_load_state(collection_name=COLLECTION_NAME))
 
@@ -394,10 +444,10 @@ client.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Then, run a vector search using a query vector of the same type and dimension as your stored vectors.</p>
 <div class="filter">
-<p><a href="#fp32">FP32</a></p>
-<p><a href="#fp16">FP16</a></p>
-<p><a href="#bf16">BF16</a></p>
-<p><a href="#int8">INT8</a></p>
+    <a href="#fp32">FP32</a>
+    <a href="#fp16">FP16</a>
+    <a href="#bf16">BF16</a>
+    <a href="#int8">INT8</a>
 </div>
 <div class="filter-fp32">
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Generate a random query vector</span>
