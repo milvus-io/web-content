@@ -85,7 +85,8 @@ Working with dense vectors in Milvus typically follows the same pattern:
 2. Insert vector data (in the chosen numeric format).
 3. Create an index on the dense vector field.
 4. Load the collection into memory and run semantic search on the vectors.
-5. Define a dense vector field
+
+### 1. Define a dense vector field
 
 Vector fields in Milvus store the embeddings used for similarity search. When defining one:
 
@@ -94,15 +95,10 @@ Vector fields in Milvus store the embeddings used for similarity search. When de
 - Ensure the type exactly matches the insertion/search data you will use later.
 
 <div class="filter">
-
-<a href="#fp32">FP32</a>
-
-<a href="#fp16">FP16</a>
-
-<a href="#bf16">BF16</a>
-
-<a href="#int8">INT8</a>
-
+    <a href="#fp32">FP32</a>
+    <a href="#fp16">FP16</a>
+    <a href="#bf16">BF16</a>
+    <a href="#int8">INT8</a>
 </div>
 
 <div class="filter-fp32">
@@ -229,7 +225,7 @@ client.create_collection(
 
 </div>
 
-1. Insert vector data
+### 2. Insert vector data
 
 After creating the collection, insert your vector data into the vector field.
 
@@ -241,15 +237,10 @@ Milvus expects the vectors to:
 Below are examples of how to generate and insert sample data for each format.
 
 <div class="filter">
-
-<a href="#fp32">FP32</a>
-
-<a href="#fp16">FP16</a>
-
-<a href="#bf16">BF16</a>
-
-<a href="#int8">INT8</a>
-
+    <a href="#fp32">FP32</a>
+    <a href="#fp16">FP16</a>
+    <a href="#bf16">BF16</a>
+    <a href="#int8">INT8</a>
 </div>
 
 <div class="filter-fp32">
@@ -329,7 +320,7 @@ print(f"Inserted {res['insert_count']} entities")
 
 </div>
 
-1. Create index on dense vector field
+### 3. Create index on dense vector field
 
 To accelerate semantic search, it is mandatory to create a vector index before searches.
 
@@ -360,7 +351,7 @@ client.create_index(
 
 </div>
 
-1. Semantic search on dense vectors
+### 4. Semantic search on dense vectors
 
 Before performing vector searches, load your collection:
 
@@ -376,15 +367,10 @@ print(client.get_load_state(collection_name=COLLECTION_NAME))
 Then, run a vector search using a query vector of the same type and dimension as your stored vectors.
 
 <div class="filter">
-
-<a href="#fp32">FP32</a>
-
-<a href="#fp16">FP16</a>
-
-<a href="#bf16">BF16</a>
-
-<a href="#int8">INT8</a>
-
+    <a href="#fp32">FP32</a>
+    <a href="#fp16">FP16</a>
+    <a href="#bf16">BF16</a>
+    <a href="#int8">INT8</a>
 </div>
 
 <div class="filter-fp32">
