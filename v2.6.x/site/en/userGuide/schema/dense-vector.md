@@ -105,7 +105,7 @@ Vector fields in Milvus store the embeddings used for similarity search. When de
 
 </div>
 
-<div class="fp32">
+<div class="filter-fp32">
 
 ```python
 from pymilvus import MilvusClient, DataType
@@ -135,7 +135,7 @@ client.create_collection(
 
 </div>
 
-<div class="fp16">
+<div class="filter-fp16">
 
 ```python
 from pymilvus import MilvusClient, DataType
@@ -166,7 +166,7 @@ client.create_collection(
 
 </div>
 
-<div class="bf16">
+<div class="filter-bf16">
 
 ```python
 from pymilvus import MilvusClient, DataType
@@ -198,7 +198,7 @@ client.create_collection(
 
 </div>
 
-<div class="int8">
+<div class="filter-int8">
 
 ```python
 from pymilvus import MilvusClient, DataType
@@ -252,7 +252,7 @@ Below are examples of how to generate and insert sample data for each format.
 
 </div>
 
-<div class="fp32">
+<div class="filter-fp32">
 
 ```python
 # Generate random sample data
@@ -271,7 +271,7 @@ print(f"Inserted {res['insert_count']} entities")
 
 </div>
 
-<div class="fp16">
+<div class="filter-fp16">
 
 ```python
 # Generate random sample data with float16 precision
@@ -290,7 +290,7 @@ print(f"Inserted {res['insert_count']} entities")
 
 </div>
 
-<div class="bf16">
+<div class="filter-bf16">
 
 ```python
 # Generate random sample data with bfloat16 precision
@@ -309,7 +309,7 @@ print(f"Inserted {res['insert_count']} entities")
 
 </div>
 
-<div class="int8">
+<div class="filter-int8">
 
 ```python
 # Generate random sample data with int8 values (range: -128 to 127)
@@ -353,14 +353,12 @@ client.create_index(
 
 ```
 
-<include target="milvus">
-
-Notes
+<div class="alert note">
 
 - `INT8_VECTOR` currently supports only the **HNSW** index.
 - Alternatively, you can also set a custom index type. For a list of index types available for dense vectors, refer to [Index Explained](index-explained.md).
 
-</include>
+</div>
 
 1. Semantic search on dense vectors
 
@@ -389,7 +387,7 @@ Then, run a vector search using a query vector of the same type and dimension as
 
 </div>
 
-<div class="fp32">
+<div class="filter-fp32">
 
 ```python
 # Generate a random query vector
@@ -422,7 +420,7 @@ for hits in results:
 
 </div>
 
-<div class="fp16">
+<div class="filter-fp16">
 
 ```python
 # Generate a random query vector
@@ -456,7 +454,7 @@ for hits in results:
 
 </div>
 
-<div class="bf16">
+<div class="filter-bf16">
 
 ```python
 # Generate a random query vector
@@ -493,7 +491,7 @@ for hits in results:
 
 </div>
 
-<div class="int8">
+<div class="filter-int8">
 
 ```python
 # Generate a random query vector (int8 range: -128 to 127)
