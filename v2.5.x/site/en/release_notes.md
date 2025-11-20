@@ -8,6 +8,21 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.22
+
+Release date: November 19, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.22          | 2.5.17            | 2.5.13              | 2.5.14           |
+
+We are excited to announce the release of Milvus 2.5.22, which addresses a potential data loss issue under certain circumstances and we encourage all Milvus version 2.5.x users to upgrade to 2.5.22. This update also includes several other improvements and fixes.
+
+### Bug fixes
+
+- Fixed target segment marked dropped for save stats result twice ([#45480](https://github.com/milvus-io/milvus/pull/45480))
+- Fixed filter geometry for growing with mmap ([#45466](https://github.com/milvus-io/milvus/pull/45466))
+
 ## v2.5.21
 
 Release date: November 11, 2025
