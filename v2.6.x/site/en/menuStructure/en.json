@@ -468,6 +468,12 @@
             "children": []
           },
           {
+            "label": "TIMESTAMPTZ Field",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "Dynamic Field",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -864,6 +870,12 @@
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
                 "children": []
               }
             ]

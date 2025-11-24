@@ -999,3 +999,24 @@ The following is the output:
 
 With the `limit=2` parameter specified for the Hybrid Search, Milvus will rerank the six results obtained from the three searches. Ultimately, they will return only the top two most similar results.
 
+## Advanced usage
+
+### Temporarily set a timezone for a hybrid search
+
+If your collection has a `TIMESTAMPTZ` field, you can temporarily override the database or collection default timezone for a single operation by setting the `timezone` parameter in the hybrid search call. This controls how `TIMESTAMPTZ` values are displayed and compared during the operation.
+
+The value of `timezone` must be a valid [IANA time zone identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (for example, **Asia/Shanghai**, **America/Chicago**, or **UTC**). For details on how to use a `TIMESTAMPTZ` field, refer to [TIMESTAMPTZ Field](timestamptz-field.md).
+
+The example below shows how to temporarily set a timezone for a hybrid search operation:
+
+```python
+res = client.hybrid_search(
+    collection_name="my_collection",
+    reqs=reqs,
+    ranker=ranker,
+    limit=2,
+    # highlight-next-line
+    timezone="America/Havana",
+)
+```
+

@@ -519,6 +519,11 @@
                         "token": "SAO6wxDUYhoqqtbRwYecjjFUnIf",
                         "type": "board",
                         "alt_text": "querynode-load-workflow"
+                    },
+                    {
+                        "token": "Oe7EwkvLDhT9p6b1o3tcFYMlnI9",
+                        "type": "board",
+                        "alt_text": "resource-hierachy"
                     }
                 ]
             }

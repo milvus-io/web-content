@@ -88,13 +88,13 @@ The final phase leverages the optimized storage layout to intelligently select t
 
 ## Enable JSON shredding
 
-To activate the feature, set `common.enabledJSONKeyStats` to `true` in your `milvus.yaml` configuration file. New data will automatically trigger the shredding process.
+To activate the feature, set `common.enabledJSONShredding` to `true` in your `milvus.yaml` configuration file. New data will automatically trigger the shredding process.
 
 ```yaml
 # milvus.yaml
 ...
 common:
-  enabledJSONKeyStats: true # Indicates whether to enable JSON key stats build and load processes
+  enabledJSONShredding: true # Indicates whether to enable JSON key stats build and load processes
 ...
 ```
 
@@ -112,34 +112,34 @@ For most users, once JSON shredding is enabled, the default settings for other p
      <th><p>Tuning Advice</p></th>
    </tr>
    <tr>
-     <td><p><code>common.enabledJSONKeyStats</code></p></td>
+     <td><p><code>common.enabledJSONShredding</code></p></td>
      <td><p>Controls whether the JSON shredding build and load processes are enabled.</p></td>
      <td><p>false</p></td>
      <td><p>Must be set to <strong>true</strong> to activate the feature.</p></td>
    </tr>
    <tr>
-     <td><p><code>common.usingJsonStatsForQuery</code></p></td>
+     <td><p><code>common.usingjsonShreddingForQuery</code></p></td>
      <td><p>Controls whether Milvus uses shredded data for acceleration.</p></td>
      <td><p>true</p></td>
      <td><p>Set to <strong>false</strong> as a recovery measure if queries fail, reverting to the original query path.</p></td>
    </tr>
    <tr>
-     <td><p><code>queryNode.mmap.jsonStats</code></p></td>
+     <td><p><code>queryNode.mmap.jsonShredding</code></p></td>
      <td><p>Determines whether Milvus uses mmap when loading shredding data.</p><p>For details, refer to <a href="mmap.md">Use mmap</a>.</p></td>
      <td><p>true</p></td>
      <td><p>This setting is generally optimized for performance. Only adjust it if you have specific memory management needs or constraints on your system.</p></td>
    </tr>
    <tr>
-     <td><p><code>dataCoord.jsonStatsMaxShreddingColumns</code></p></td>
+     <td><p><code>dataCoord.jsonShreddingMaxColumns</code></p></td>
      <td><p>The maximum number of JSON keys that will be stored in shredded columns. </p><p>If the number of frequently appearing keys exceeds this limit, Milvus will prioritize the most frequent ones for shredding, and the remaining keys will be stored in the shared column.</p></td>
      <td><p>1024</p></td>
      <td><p>This is sufficient for most scenarios. For JSON with thousands of frequently appearing keys, you may need to increase this, but monitor storage usage.</p></td>
    </tr>
    <tr>
-     <td><p><code>dataCoord.jsonStatsShreddingRatioThreshold</code></p></td>
+     <td><p><code>dataCoord.jsonShreddingRatioThreshold</code></p></td>
      <td><p>The minimum occurrence ratio a JSON key must have to be considered for shredding into a shredded column.</p><p>A key is considered frequently appearing if its ratio is above this threshold.</p></td>
      <td><p>0.3</p></td>
-     <td><p><strong>Increase</strong> (e.g., to 0.5) if the number of keys that meet the shredding criteria exceeds the <code>dataCoord.jsonStatsMaxShreddingColumns</code> limit. This makes the threshold stricter, reducing the number of keys that qualify for shredding.</p><p><strong>Decrease</strong> (e.g., to 0.1) if you want to shred more keys that appear less frequently than the default 30% threshold.</p></td>
+     <td><p><strong>Increase</strong> (e.g., to 0.5) if the number of keys that meet the shredding criteria exceeds the <code>dataCoord.jsonShreddingMaxColumns</code> limit. This makes the threshold stricter, reducing the number of keys that qualify for shredding.</p><p><strong>Decrease</strong> (e.g., to 0.1) if you want to shred more keys that appear less frequently than the default 30% threshold.</p></td>
    </tr>
 </table>
 
@@ -231,13 +231,15 @@ This test focused on querying sparse, nested keys that fall into the "shared" ca
 
     1. Next, verify that the data has been loaded by running `show loaded-json-stats` on the query node. The output will display details about the loaded shredded data for each query node.
 
+- **What if I encounter an error?**
+
+    If the build or load process fails, you can quickly disable the feature by setting `common.enabledJSONShredding=false`. To clear any remaining tasks, use the `remove stats-task <task_id>` command in [Birdwatcher](birdwatcher_usage_guides.md). If a query fails, set `common.usingjsonShreddingForQuery=false` to revert to the original query path, bypassing the shredded data.
+
 - **How do I select between JSON shredding and JSON indexing?**
 
     - **JSON shredding** is ideal for keys that appear frequently in your documents, especially for complex JSON structures. It combines the benefits of columnar storage and inverted indexing, making it well-suited for read-heavy scenarios where you query many different keys. However, it is not recommended for very small JSON documents as the performance gain is minimal. The smaller the proportion of the key's value to the total size of the JSON document, the better the performance optimization from shredding.
 
     - **JSON indexing** is better for targeted optimization of specific key-based queries and has lower storage overhead. It's suitable for simpler JSON structures. Note that JSON shredding does not cover queries on keys inside arrays, so you need a JSON index to accelerate those.
 
-- **What if I encounter an error?**
-
-    If the build or load process fails, you can quickly disable the feature by setting `common.enabledJSONKeyStats=false`. To clear any remaining tasks, use the `remove stats-task <task_id>` command in [Birdwatcher](birdwatcher_usage_guides.md). If a query fails, set `common.usingJsonStatsForQuery=false` to revert to the original query path, bypassing the shredded data.
+    For details, refer to [JSON Field Overview](json-field-overview.md#Next-Accelerate-JSON-queries).
 
