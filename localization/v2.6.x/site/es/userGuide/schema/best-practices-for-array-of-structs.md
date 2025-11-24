@@ -50,7 +50,7 @@ beta: Milvus 2.6.4+
 <ul>
 <li><p><strong>Datos jerárquicos</strong>: Entidades padre con múltiples registros hijo, como un libro con muchos trozos de texto, o un vídeo con muchos fotogramas anotados.</p></li>
 <li><p><strong>Incrustaciones multimodales</strong>: Cada Estructura puede contener múltiples vectores, como incrustaciones de texto más incrustaciones de imagen, junto con metadatos.</p></li>
-<li><p><strong>Datos temporales o secuenciales</strong>: Los Structs en un campo Array representan de forma natural series temporales o eventos paso a paso.</p></li>
+<li><p><strong>Datos temporales o secuenciales</strong>: Los Structs de un campo Array representan de forma natural series temporales o eventos paso a paso.</p></li>
 </ul>
 <p>A diferencia de las soluciones tradicionales que almacenan blobs JSON o dividen los datos en múltiples colecciones, la matriz de estructuras proporciona una aplicación nativa del esquema, indexación de vectores y almacenamiento eficiente dentro de Milvus.</p>
 <h2 id="Schema-design-guidelines" class="common-anchor-header">Directrices de diseño de esquemas<button data-href="#Schema-design-guidelines" class="anchor-icon" translate="no">
@@ -68,7 +68,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Además de todas las directrices discutidas en <a href="/docs/es/schema-hands-on.md">Diseño del Modelo de Datos para la Búsqueda</a>, también debe considerar las siguientes cosas antes de empezar a utilizar una Matriz de Structs en el diseño de su modelo de datos.</p>
+    </button></h2><p>Además de todas las directrices discutidas en <a href="/docs/es/schema-hands-on.md">Diseño del Modelo de Datos para la Búsqueda</a>, también debe considerar las siguientes cosas antes de empezar a utilizar una Matriz de Structs en su diseño del modelo de datos.</p>
 <h3 id="Define-the-Struct-schema" class="common-anchor-header">Definir el esquema Struct<button data-href="#Define-the-Struct-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,7 +118,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La indexación es obligatoria para los campos vectoriales, incluyendo tanto los campos vectoriales de una colección como los definidos en una Struct. Para los campos vectoriales en un Struct, debe utilizar <code translate="no">HNSW</code> como tipo de índice y <code translate="no">MAX_SIM</code> series como tipo métrico.</p>
+    </button></h3><p>La indexación es obligatoria para los campos vectoriales, incluyendo tanto los campos vectoriales de una colección como los definidos en una Struct. Para los campos vectoriales de una Struct, debe utilizar <code translate="no">AUTOINDEX</code> o <code translate="no">HNSW</code> como tipo de índice y la serie <code translate="no">MAX_SIM</code> como tipo de métrica.</p>
 <p>Para más detalles sobre todos los límites aplicables, consulte <a href="/docs/es/array-of-structs.md#Limits">los límites</a>.</p>
 <h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Un ejemplo real: Modelado del conjunto de datos CoVLA para la conducción autónoma<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,9 +239,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>Para empezar, necesitamos inicializar el esquema para un Struct caption, un Struct front_cars, y la colección.</p>
 <ul>
 <li><p>Inicializar el esquema de la estructura Caption.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -481,12 +479,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Todos los campos vectoriales deben estar indexados. Para indexar los campos vectoriales en un elemento Struct, debe utilizar <code translate="no">HNSW</code> como tipo de índice y el tipo de métrica de serie <code translate="no">MAX_SIM</code> para medir las similitudes entre las listas de incrustación.</p>
+    </button></h3><p>Todos los campos vectoriales deben estar indexados. Para indexar los campos vectoriales en un elemento Struct, debe utilizar <code translate="no">AUTOINDEX</code> o <code translate="no">HNSW</code> como tipo de índice y el tipo de métrica de la serie <code translate="no">MAX_SIM</code> para medir las similitudes entre las listas de incrustación.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -494,7 +492,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -502,7 +500,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}

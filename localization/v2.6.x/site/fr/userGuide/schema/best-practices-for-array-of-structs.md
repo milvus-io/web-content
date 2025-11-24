@@ -4,13 +4,12 @@ title: >-
   Conception d'un modèle de données avec un tableau de structuresCompatible with
   Milvus 2.6.4+
 summary: >-
-  Les applications modernes d'IA, en particulier dans l'Internet des objets
-  (IoT) et la conduite autonome, raisonnent généralement sur des événements
-  riches et structurés : une lecture de capteur avec son horodatage et son
-  intégration vectorielle, un journal de diagnostic avec un code d'erreur et un
-  extrait audio, ou un segment de voyage avec l'emplacement, la vitesse et le
-  contexte de la scène. La base de données doit donc prendre en charge de
-  manière native l'ingestion et la recherche de données imbriquées.
+  Modern AI applications, especially in the Internet of Things (IoT) and
+  autonomous driving, typically reason over rich, structured events: a sensor
+  reading with its timestamp and vector embedding, a diagnostic log with an
+  error code and audio snippet, or a trip segment with location, speed, and
+  scene context. These require the database to natively support the ingestion
+  and search of nested data.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Data-Model-Design-with-an-Array-of-Structs" class="common-anchor-header">Conception d'un modèle de données avec un tableau de structures<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Data-Model-Design-with-an-Array-of-Structs" class="anchor-icon" translate="no">
@@ -118,7 +117,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>L'indexation est obligatoire pour les champs vectoriels, y compris les champs vectoriels d'une collection et ceux définis dans une structure. Pour les champs vectoriels d'une structure, vous devez utiliser <code translate="no">HNSW</code> comme type d'index et <code translate="no">MAX_SIM</code> series comme type de métrique.</p>
+    </button></h3><p>L'indexation est obligatoire pour les champs vectoriels, y compris les champs vectoriels d'une collection et ceux définis dans une structure. Pour les champs vectoriels d'une structure, vous devez utiliser <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code> comme type d'index et la série <code translate="no">MAX_SIM</code> comme type de métrique.</p>
 <p>Pour plus de détails sur toutes les limites applicables, reportez-vous aux <a href="/docs/fr/array-of-structs.md#Limits">limites</a>.</p>
 <h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Un exemple concret : Modélisation de l'ensemble de données CoVLA pour la conduite autonome<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,9 +238,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>Pour commencer, nous devons initialiser les schémas d'une structure de légende, d'une structure de voitures de tête et de la collection.</p>
 <ul>
 <li><p>Initialiser le schéma de la structure Caption.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -481,12 +478,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tous les champs vectoriels doivent être indexés. Pour indexer les champs vectoriels dans un élément Struct, vous devez utiliser <code translate="no">HNSW</code> comme type d'index et le type de métrique de la série <code translate="no">MAX_SIM</code> pour mesurer les similitudes entre les listes d'inclusion.</p>
+    </button></h3><p>Tous les champs vectoriels doivent être indexés. Pour indexer les champs vectoriels dans un élément Struct, vous devez utiliser <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code> comme type d'index et le type de métrique de la série <code translate="no">MAX_SIM</code> pour mesurer les similitudes entre les listes d'inclusion.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -494,7 +491,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -502,7 +499,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}

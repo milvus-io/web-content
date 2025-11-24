@@ -468,6 +468,12 @@
             "children": []
           },
           {
+            "label": "Champ TIMESTAMPTZ",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "Champ dynamique",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -797,7 +803,7 @@
             ]
           },
           {
-            "label": "Index vectoriels binaires",
+            "label": "Binary Vector Indexes",
             "id": "binary-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -864,6 +870,12 @@
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1135,7 +1147,7 @@
                 "children": []
               },
               {
-                "label": "Rang de décomposition",
+                "label": "Classeur de décroissance",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1874,38 +1886,6 @@
         ]
       },
       {
-        "label": "Milvus CDC",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Vue d'ensemble",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Déployer le serveur CDC",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Gérer les tâches du CDC",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Contrôle",
-            "id": "cdc-monitoring.md",
-            "order": 3,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "CLI Milvus",
         "id": "cli",
         "order": 4,
@@ -2425,7 +2405,7 @@
             "children": []
           },
           {
-            "label": "PhraseTransformateurs",
+            "label": "SentenceTransformers",
             "id": "integrate_with_sentencetransformers.md",
             "order": 4,
             "children": []
@@ -2614,7 +2594,7 @@
             "children": []
           },
           {
-            "label": "Festin",
+            "label": "Feast",
             "id": "build_RAG_with_milvus_and_feast.md",
             "order": 9,
             "children": []
@@ -2769,7 +2749,7 @@
         "children": []
       },
       {
-        "label": "Recherche texte-image avec Milvus",
+        "label": "Text-to-Image Search with Milvus",
         "id": "text_image_search.md",
         "order": 16,
         "children": []

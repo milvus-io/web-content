@@ -151,11 +151,11 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要激活该功能，请在<code translate="no">milvus.yaml</code> 配置文件中将<code translate="no">common.enabledJSONKeyStats</code> 设置为<code translate="no">true</code> 。新数据将自动触发粉碎过程。</p>
+    </button></h2><p>要激活该功能，请在<code translate="no">milvus.yaml</code> 配置文件中将<code translate="no">common.enabledJSONShredding</code> 设置为<code translate="no">true</code> 。新数据将自动触发粉碎过程。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">enabledJSONKeyStats:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
+  <span class="hljs-attr">enabledJSONShredding:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>一旦启用，Milvus 将在摄取时开始分析和重组 JSON 数据，而无需任何进一步的人工干预。</p>
@@ -183,34 +183,34 @@ beta: Milvus 2.6.2+
      <th><p>调整建议</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">common.enabledJSONKeyStats</code></p></td>
+     <td><p><code translate="no">common.enabledJSONShredding</code></p></td>
      <td><p>控制是否启用 JSON 切碎构建和加载流程。</p></td>
      <td><p>假</p></td>
      <td><p>必须设为<strong>true</strong>才能激活该功能。</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">common.usingJsonStatsForQuery</code></p></td>
+     <td><p><code translate="no">common.usingjsonShreddingForQuery</code></p></td>
      <td><p>控制 Milvus 是否使用粉碎数据进行加速。</p></td>
      <td><p>为真</p></td>
      <td><p>设为<strong>false</strong>，作为查询失败时的恢复措施，恢复到原始查询路径。</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
+     <td><p><code translate="no">queryNode.mmap.jsonShredding</code></p></td>
      <td><p>决定 Milvus 在加载粉碎数据时是否使用 mmap。</p><p>有关详情，请参阅<a href="/docs/zh/mmap.md">使用 mmap</a>。</p></td>
      <td><p>真</p></td>
      <td><p>此设置通常为性能优化。只有在系统有特定内存管理需求或限制的情况下才会调整它。</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingMaxColumns</code></p></td>
      <td><p>将存储在粉碎列中的 JSON 键的最大数量。 </p><p>如果频繁出现的键的数量超过此限制，Milvus 将优先对最频繁出现的键进行粉碎，其余键将存储在共享列中。</p></td>
      <td><p>1024</p></td>
      <td><p>这足以满足大多数情况的需要。对于有数千个频繁出现密钥的 JSON，可能需要增加这一限制，但要监控存储空间的使用情况。</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsShreddingRatioThreshold</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingRatioThreshold</code></p></td>
      <td><p>要将一个 JSON 密钥粉碎到粉碎列中，该密钥必须具备的最小出现率。</p><p>如果一个密钥的出现比率高于此阈值，则该密钥被视为频繁出现。</p></td>
      <td><p>0.3</p></td>
-     <td><p>如果符合粉碎标准的密钥数量超过<code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code> 限制，则<strong>增加</strong>（例如增加到 0.5）。这将使阈值更加严格，减少符合粉碎条件的钥匙数量。</p><p>如果你想粉碎更多出现频率低于默认 30% 阈值的密钥，则<strong>将阈值降低</strong>（例如<strong>降低</strong>到 0.1）。</p></td>
+     <td><p>如果符合粉碎标准的密钥数量超过<code translate="no">dataCoord.jsonShreddingMaxColumns</code> 限制，则<strong>增加</strong>（例如增加到 0.5）。这将使阈值更加严格，减少符合粉碎条件的钥匙数量。</p><p>如果你想粉碎更多出现频率低于默认 30% 阈值的密钥，则<strong>将阈值降低</strong>（例如<strong>降低</strong>到 0.1）。</p></td>
    </tr>
 </table>
 <h2 id="Performance-benchmarks" class="common-anchor-header">性能基准<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
@@ -371,13 +371,14 @@ beta: Milvus 2.6.2+
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/birdwatcher-output.png" alt="Birdwatcher Output" class="doc-image" id="birdwatcher-output" />
    </span> <span class="img-wrapper"> <span>Birdwatcher 输出</span> </span></p></li>
-<li><p>接下来，在查询节点上运行<code translate="no">show loaded-json-stats</code> 验证数据是否已加载。输出将显示每个查询节点已加载的碎纸数据的详细信息。</p></li>
+<li><p>接下来，在查询节点上运行<code translate="no">show loaded-json-stats</code> 验证数据是否已加载。输出将显示每个查询节点已加载碎纸数据的详细信息。</p></li>
 </ol></li>
+<li><p><strong>如果遇到错误怎么办？</strong></p>
+<p>如果构建或加载过程失败，可以通过设置<code translate="no">common.enabledJSONShredding=false</code> 快速禁用该功能。要清除任何剩余任务，请使用<a href="/docs/zh/birdwatcher_usage_guides.md">Birdwatcher</a> 中的<code translate="no">remove stats-task &lt;task_id&gt;</code> 命令。如果查询失败，可设置<code translate="no">common.usingjsonShreddingForQuery=false</code> 恢复到原始查询路径，绕过粉碎数据。</p></li>
 <li><p><strong>如何在 JSON 切碎和 JSON 索引之间进行选择？</strong></p>
 <ul>
 <li><p><strong>JSON 切碎</strong>非常适合文档中频繁出现的键，尤其是复杂的 JSON 结构。它结合了列式存储和反转索引的优点，非常适合查询许多不同键的重读取场景。不过，对于非常小的 JSON 文档，不建议使用这种方法，因为性能提升微乎其微。键值占 JSON 文档总大小的比例越小，粉碎带来的性能优化效果就越好。</p></li>
 <li><p><strong>JSON 索引</strong>更适合对基于特定键值的查询进行有针对性的优化，而且存储开销更低。它适用于较简单的 JSON 结构。请注意，JSON 切碎不包括对数组内部键的查询，因此需要 JSON 索引来加速这些查询。</p></li>
-</ul></li>
-<li><p><strong>如果遇到错误怎么办？</strong></p>
-<p>如果构建或加载过程失败，可以通过设置<code translate="no">common.enabledJSONKeyStats=false</code> 快速禁用该功能。要清除任何剩余任务，请使用<a href="/docs/zh/birdwatcher_usage_guides.md">Birdwatcher</a> 中的<code translate="no">remove stats-task &lt;task_id&gt;</code> 命令。如果查询失败，可通过设置<code translate="no">common.usingJsonStatsForQuery=false</code> 恢复到原始查询路径，绕过粉碎数据。</p></li>
+</ul>
+<p>有关详情，请参阅<a href="/docs/zh/json-field-overview.md#Next-Accelerate-JSON-queries">JSON 字段概述</a>。</p></li>
 </ul>

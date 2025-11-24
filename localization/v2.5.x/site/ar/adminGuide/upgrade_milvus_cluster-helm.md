@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك اختيار مسار الترقية لميلفوس الخاص بك على النحو التالي:</p>
-<div style="display: none;">- [إجراء ترقية متجددة] (#إجراء ترقية متجددة) من الإصدار 2.2.3 والإصدارات الأحدث إلى الإصدار 2.5.19.</div>
+<div style="display: none;">- [إجراء ترقية متجددة] (#إجراء ترقية متجددة) من الإصدار 2.2.3 والإصدارات الأحدث إلى الإصدار 2.5.23.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">ترقية Milvus باستخدام Helm</a> للترقية من إصدار ثانوي قبل الإصدار 2.2.3 إلى الإصدار 2.5.19.</p></li>
-<li><p><a href="#Migrate-the-metadata">قم بترحيل البيانات الوصفية</a> قبل الترقية من الإصدار 2.1.x من Milvus إلى الإصدار 2.5.19.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">ترقية Milvus باستخدام Helm</a> للترقية من إصدار ثانوي قبل الإصدار 2.2.3 إلى الإصدار 2.5.23.</p></li>
+<li><p><a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل الترقية من الإصدار 2.1.x من Milvus إلى الإصدار 2.5.23.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">إجراء ترقية متجددة<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>التشغيل</td><td><code translate="no">update</code></td><td>خطأ</td></tr>
 </tbody>
 </table>
-<p>بمجرد التأكد من أن جميع عمليات النشر في مثيل Milvus الخاص بك في حالتها الطبيعية. يمكنك تشغيل الأمر التالي لترقية مثيل Milvus إلى 2.5.19.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.19 -w &#x27;milvusdb/milvus:v2.5.19&#x27;
+<p>بمجرد التأكد من أن جميع عمليات النشر في مثيل Milvus الخاص بك في حالتها الطبيعية. يمكنك تشغيل الأمر التالي لترقية مثيل Milvus إلى 2.5.23.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.23 -w &#x27;milvusdb/milvus:v2.5.23&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -322,10 +322,10 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><p>حدد اسم مثيل Milvus وإصدار Milvus المصدر وإصدار Milvus الهدف.</p>
 <pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>حدد مساحة الاسم مع <code translate="no">-n</code> إذا لم يكن Milvus الخاص بك مثبتًا في مساحة اسم K8s الافتراضية.</p>
+<li><p>حدد مساحة الاسم مع <code translate="no">-n</code> إذا لم يكن Milvus الخاص بك مثبتًا في مساحة الاسم الافتراضية K8s.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>حدد المسار الجذر مع <code translate="no">-r</code> إذا كان Milvus الخاص بك مثبتًا مع المخصص <code translate="no">rootpath</code>.</p>
+<li><p>حدد مسار الجذر مع <code translate="no">-r</code> إذا كان Milvus الخاص بك مثبتًا مع المخصص <code translate="no">rootpath</code>.</p>
 <pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.2</span>.<span class="hljs-number">0</span> -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>حدد علامة الصورة مع <code translate="no">-w</code> إذا كان Milvus الخاص بك مثبتًا مع مخصص <code translate="no">image</code>.</p>

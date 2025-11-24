@@ -115,7 +115,7 @@ beta: Milvus 2.6.2+
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/json-shredding-flow.png" alt="Json Shredding Flow" class="doc-image" id="json-shredding-flow" />
    </span> <span class="img-wrapper"> <span>Поток измельчения Json</span> </span></p>
 <ul>
-<li><p><strong>Измельченные столбцы</strong>: Для <strong>типизированных</strong> и <strong>динамических</strong> <strong>ключей</strong> данные записываются в специальные колонки. Такое столбцовое хранение позволяет быстро выполнять прямое сканирование при запросах, поскольку Milvus может считывать только необходимые данные для данного ключа, не обрабатывая весь документ.</p></li>
+<li><p><strong>Измельченные столбцы</strong>: Для <strong>типизированных</strong> и <strong>динамических</strong> <strong>ключей</strong> данные записываются в специальные колонки. Такое колоночное хранение позволяет быстро выполнять прямое сканирование при запросах, поскольку Milvus может считывать только необходимые данные для данного ключа, не обрабатывая весь документ.</p></li>
 <li><p><strong>Общий столбец</strong>: Все <strong>общие ключи</strong> хранятся вместе в одном компактном двоичном JSON-столбце. По этому столбцу строится <strong>инвертированный индекс</strong> общих ключей. Этот индекс имеет решающее значение для ускорения запросов по низкочастотным ключам, позволяя Milvus быстро подрезать данные, эффективно сужая пространство поиска только до тех строк, которые содержат указанный ключ.</p></li>
 </ul>
 <h3 id="Phase-3-Query-execution" class="common-anchor-header">Этап 3: Выполнение запросов<button data-href="#Phase-3-Query-execution" class="anchor-icon" translate="no">
@@ -153,11 +153,11 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы активировать эту функцию, установите <code translate="no">common.enabledJSONKeyStats</code> на <code translate="no">true</code> в конфигурационном файле <code translate="no">milvus.yaml</code>. Новые данные будут автоматически запускать процесс уничтожения.</p>
+    </button></h2><p>Чтобы активировать эту функцию, установите <code translate="no">common.enabledJSONShredding</code> на <code translate="no">true</code> в конфигурационном файле <code translate="no">milvus.yaml</code>. Новые данные будут автоматически запускать процесс уничтожения.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">enabledJSONKeyStats:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
+  <span class="hljs-attr">enabledJSONShredding:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>После включения этой функции Milvus начнет анализировать и реструктурировать ваши JSON-данные при их поступлении без какого-либо дополнительного ручного вмешательства.</p>
@@ -185,34 +185,34 @@ beta: Milvus 2.6.2+
      <th><p>Совет по настройке</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">common.enabledJSONKeyStats</code></p></td>
+     <td><p><code translate="no">common.enabledJSONShredding</code></p></td>
      <td><p>Контролирует, включены ли процессы сборки и загрузки JSON-измельчения.</p></td>
      <td><p>false</p></td>
      <td><p>Должно быть установлено значение <strong>true</strong>, чтобы активировать функцию.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">common.usingJsonStatsForQuery</code></p></td>
+     <td><p><code translate="no">common.usingjsonShreddingForQuery</code></p></td>
      <td><p>Контролирует, использует ли Milvus измельченные данные для ускорения.</p></td>
      <td><p>true</p></td>
      <td><p>Устанавливает значение <strong>false</strong> в качестве меры восстановления при неудачных запросах, возвращаясь к исходному пути запроса.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
+     <td><p><code translate="no">queryNode.mmap.jsonShredding</code></p></td>
      <td><p>Определяет, использует ли Milvus mmap при загрузке измельченных данных.</p><p>Подробности см. в разделе <a href="/docs/ru/mmap.md">Использовать mmap</a>.</p></td>
      <td><p>true</p></td>
      <td><p>Эта настройка обычно оптимизирована для производительности. Настраивайте его только в том случае, если у вас есть особые потребности в управлении памятью или ограничения в вашей системе.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingMaxColumns</code></p></td>
      <td><p>Максимальное количество JSON-ключей, которые будут храниться в измельченных столбцах. </p><p>Если количество часто встречающихся ключей превысит этот предел, Milvus будет отдавать предпочтение наиболее частым ключам для измельчения, а остальные ключи будут храниться в общей колонке.</p></td>
      <td><p>1024</p></td>
      <td><p>Этого достаточно для большинства сценариев. Для JSON с тысячами часто встречающихся ключей может потребоваться увеличить это значение, но следите за использованием хранилища.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsShreddingRatioThreshold</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingRatioThreshold</code></p></td>
      <td><p>Минимальный коэффициент встречаемости ключа JSON, чтобы его можно было рассматривать для измельчения в столбец shredded.</p><p>Ключ считается часто появляющимся, если его отношение превышает этот порог.</p></td>
      <td><p>0.3</p></td>
-     <td><p><strong>Увеличивается</strong> (например, до 0,5), если количество ключей, удовлетворяющих критериям измельчения, превышает лимит <code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code>. Это делает порог более строгим, уменьшая количество ключей, удовлетворяющих критериям уничтожения.</p><p><strong>Уменьшите значение</strong> (например, до 0,1), если вы хотите уничтожить больше ключей, которые появляются реже, чем стандартный порог 30 %.</p></td>
+     <td><p><strong>Увеличивается</strong> (например, до 0,5), если количество ключей, удовлетворяющих критериям измельчения, превышает лимит <code translate="no">dataCoord.jsonShreddingMaxColumns</code>. Это делает порог более строгим, уменьшая количество ключей, удовлетворяющих критериям уничтожения.</p><p><strong>Уменьшите значение</strong> (например, до 0,1), если вы хотите уничтожить больше ключей, которые появляются реже, чем стандартный порог 30 %.</p></td>
    </tr>
 </table>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Контрольные показатели производительности<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
@@ -375,11 +375,12 @@ beta: Milvus 2.6.2+
    </span> <span class="img-wrapper"> <span>Выходные данные Birdwatcher</span> </span></p></li>
 <li><p>Далее проверьте, что данные были загружены, выполнив команду <code translate="no">show loaded-json-stats</code> на узле запроса. На выходе вы увидите подробную информацию о загруженных измельченных данных для каждого узла запроса.</p></li>
 </ol></li>
+<li><p><strong>Что делать, если возникла ошибка?</strong></p>
+<p>Если процесс сборки или загрузки завершился неудачно, вы можете быстро отключить функцию, установив <code translate="no">common.enabledJSONShredding=false</code>. Чтобы снять все оставшиеся задачи, используйте команду <code translate="no">remove stats-task &lt;task_id&gt;</code> в <a href="/docs/ru/birdwatcher_usage_guides.md">Birdwatcher</a>. Если запрос завершился неудачно, установите <code translate="no">common.usingjsonShreddingForQuery=false</code>, чтобы вернуться к исходному пути запроса, минуя измельченные данные.</p></li>
 <li><p><strong>Как выбрать между измельчением JSON и индексированием JSON?</strong></p>
 <ul>
 <li><p><strong>Измельчение JSON</strong> идеально подходит для ключей, которые часто встречаются в ваших документах, особенно для сложных структур JSON. Оно сочетает в себе преимущества столбцового хранения и инвертированного индексирования, что делает его хорошо подходящим для сценариев с интенсивным чтением, когда вы запрашиваете множество различных ключей. Однако его не рекомендуется использовать для очень маленьких JSON-документов, так как выигрыш в производительности будет минимальным. Чем меньше доля значения ключа в общем размере JSON-документа, тем лучше оптимизация производительности при измельчении.</p></li>
 <li><p><strong>Индексирование JSON</strong> лучше подходит для целенаправленной оптимизации конкретных запросов на основе ключей и имеет меньшие накладные расходы на хранение. Она подходит для более простых структур JSON. Обратите внимание, что измельчение JSON не распространяется на запросы к ключам внутри массивов, поэтому для их ускорения вам понадобится JSON-индекс.</p></li>
-</ul></li>
-<li><p><strong>Что делать, если я столкнулся с ошибкой?</strong></p>
-<p>Если процесс сборки или загрузки завершился неудачно, вы можете быстро отключить эту функцию, установив <code translate="no">common.enabledJSONKeyStats=false</code>. Чтобы снять все оставшиеся задачи, используйте команду <code translate="no">remove stats-task &lt;task_id&gt;</code> в <a href="/docs/ru/birdwatcher_usage_guides.md">Birdwatcher</a>. Если запрос завершился неудачно, установите <code translate="no">common.usingJsonStatsForQuery=false</code>, чтобы вернуться к исходному пути запроса, минуя измельченные данные.</p></li>
+</ul>
+<p>Подробнее см. в разделе <a href="/docs/ru/json-field-overview.md#Next-Accelerate-JSON-queries">Обзор полей JSON</a>.</p></li>
 </ul>

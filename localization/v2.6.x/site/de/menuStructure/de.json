@@ -44,7 +44,7 @@
     ]
   },
   {
-    "label": "Los geht's",
+    "label": "Get Started",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
@@ -468,6 +468,12 @@
             "children": []
           },
           {
+            "label": "TIMESTAMPTZ-Feld",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "Dynamisches Feld",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -797,7 +803,7 @@
             ]
           },
           {
-            "label": "Binäre Vektorindizes",
+            "label": "Binary Vector Indexes",
             "id": "binary-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -864,6 +870,12 @@
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1874,38 +1886,6 @@
         ]
       },
       {
-        "label": "Milvus CDC",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Übersicht",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "CDC-Server bereitstellen",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Verwalten von CDC-Aufgaben",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Überwachung",
-            "id": "cdc-monitoring.md",
-            "order": 3,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "Milvus CLI",
         "id": "cli",
         "order": 4,
@@ -2197,7 +2177,7 @@
                 "children": []
               },
               {
-                "label": "Milvus Async-API",
+                "label": "Milvus Async API",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2518,7 +2498,7 @@
         ]
       },
       {
-        "label": "Wissenstechnik",
+        "label": "Knowledge Engineering",
         "id": "knowledge-engineering",
         "order": 5,
         "children": [

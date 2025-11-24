@@ -80,9 +80,9 @@ summary: >-
     </button></h2><p>WeightedRanker 策略的主要工作流程如下：</p>
 <ol>
 <li><p><strong>收集搜尋分數</strong>：收集向量搜尋每條路徑的結果和分數 (score_1, score_2)。</p></li>
-<li><p><strong>Score Normalization（分數規範化</strong>）：每次搜尋可能會使用不同的相似度指標，造成不同的分數分佈。例如，使用 Inner Product (IP) 作為相似度類型可能會產生 [-∞,+∞] 的分數範圍，而使用 Euclidean distance (L2) 則會產生 [0,+∞] 的分數範圍。由於不同搜尋的分數範圍各異，無法直接比較，因此有必要將每條搜尋路徑的分數歸一化。一般而言，<code translate="no">arctan</code> 函數會將分數轉換成 [0, 1] 之間的範圍 (score_1_normalized, score_2_normalized)。分數越接近 1 表示相似度越高。</p></li>
+<li><p><strong>Score Normalization（分數規範化</strong>）：每次搜尋可能會使用不同的相似度指標，造成不同的分數分佈。例如，使用 Inner Product (IP) 作為相似度類型可能會產生 [-∞,+∞] 的分數範圍，而使用 Euclidean distance (L2) 則會產生 [0,+∞] 的分數範圍。由於不同搜尋的分數範圍各異，無法直接比較，因此有必要將各搜尋路徑的分數歸一化。一般而言，<code translate="no">arctan</code> 函數會將分數轉換成 [0, 1] 之間的範圍 (score_1_normalized, score_2_normalized)。分數越接近 1 表示相似度越高。</p></li>
 <li><p><strong>指定權重</strong>：根據分配給不同向量領域的重要性，將權重 (<strong>wi</strong>) 分配給歸一化的分數 (score_1_normalized, score_2_normalized)。每條路徑的權重範圍應該在 [0,1] 之間。所得的加權分數為 score_1_weighted 及 score_2_weighted。</p></li>
-<li><p><strong>合併分數</strong>：將加權得分 (score_1_weighted, score_2_weighted) 由高到低排序，產生最後的得分集 (score_final)。</p></li>
+<li><p><strong>合併分數</strong>：將加權分數 (score_1_weighted, score_2_weighted) 由高到低排序，產生最後的一組分數 (score_final)。</p></li>
 </ol>
 <p>
   
@@ -277,7 +277,7 @@ summary: >-
       </svg>
     </button></h3><p>例如，假設混合搜尋中有兩個基本 ANN 搜尋請求：文字搜尋和圖像搜尋。如果文字搜尋被視為更重要，就應該給予較大的權重。</p>
 <div class="alert note">
-<p>Milvus 2.6.x 及以後的版本可讓您直接透過<code translate="no">Function</code> API 設定重排策略。如果您使用的是較早的版本（v2.6.0 之前），請參閱<a href="https://milvus.io/docs/v2.5.x/reranking.md#Usage-of-WeightedRanker">Reranking</a>文件以取得設定指示。</p>
+<p>Milvus 2.6.x 及以後的版本可讓您直接透過<code translate="no">Function</code> API 配置重排策略。如果您使用的是較早的版本（v2.6.0 之前），請參閱<a href="https://milvus.io/docs/v2.5.x/reranking.md#Usage-of-WeightedRanker">Reranking</a>文件以取得設定指示。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -300,8 +300,9 @@ rerank = Function(
 CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
                 .name(<span class="hljs-string">&quot;weight&quot;</span>)
                 .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;weights\&quot;: [0.1, 0.6], \&quot;norm_score\&quot;: true}&quot;</span>)
+                .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
+                .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.1, 0.9]&quot;</span>)
+                .param(<span class="hljs-string">&quot;norm_score&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
                 .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;

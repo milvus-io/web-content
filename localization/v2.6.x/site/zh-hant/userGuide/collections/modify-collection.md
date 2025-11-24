@@ -179,8 +179,12 @@ curl --request POST \
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>當已為集合啟用 AutoID 時，是否允許集合接受使用者提供的主索引鍵值。</p><ul><li><p>當設定為<strong>"true "</strong>時：如果存在，插入、上插入和大量導入會使用使用者提供的主索引鍵；否則，主索引鍵值會自動產生。</p></li><li><p>設定為<strong>"false "</strong>時：使用者提供的主索引鍵值會被拒絕或忽略，主索引鍵值永遠是自動產生的。預設為<strong>"false"</strong>。</p></li></ul></td>
    </tr>
+   <tr>
+     <td><p><code translate="no">timezone</code></p></td>
+     <td><p>在處理時間敏感的作業時，指定此集合的預設時區，尤其是<code translate="no">TIMESTAMPTZ</code> 欄位。時間戳在內部以 UTC 儲存，Milvus 會根據此設定轉換值來顯示和比較。如果設定，集合時區會取代資料庫的預設時區；查詢的時區參數可以暫時取代這兩個參數。該值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></td>
+   </tr>
 </table>
-<h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">範例 1：設定集合 TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">範例 1：設定收集 TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -437,7 +441,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">allow_insert_auto_id</code> 屬性允許啟用 AutoID 的集合在插入、上移和大量匯入時接受使用者提供的主索引鍵值。當設定為<strong>"true "</strong>時<strong>，</strong>Milvus 使用使用者提供的主索引鍵值，否則它會自動產生。預設為<strong>"false"。</strong></p>
+    </button></h3><p><code translate="no">allow_insert_auto_id</code> 屬性允許啟用 AutoID 的集合在插入、上移和大量匯入時接受使用者提供的主索引鍵值。當設定為<strong>"true "</strong>時<strong>，</strong>Milvus<strong>會</strong>使用使用者提供的主索引鍵值，否則會自動產生。預設為<strong>"false"。</strong></p>
 <p>下面的範例顯示如何啟用<code translate="no">allow_insert_auto_id</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -478,6 +482,60 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
       &quot;allow_insert_auto_id&quot;: &quot;true&quot;
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-6-Set-collection-time-zone" class="common-anchor-header">範例 6：設定集合時區<button data-href="#Example-6-Set-collection-time-zone" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以使用<code translate="no">timezone</code> 屬性為您的集合設定預設時區。這會決定在資料集中的所有作業，包括資料插入、查詢和結果呈現，如何詮釋和顯示與時間相關的資料。</p>
+<p><code translate="no">timezone</code> 的值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>，例如<code translate="no">Asia/Shanghai</code>,<code translate="no">America/Chicago</code>, 或<code translate="no">UTC</code> 。使用無效或非標準的值會在修改集合屬性時導致錯誤。</p>
+<p>以下範例顯示如何設定集合時區為<strong>亞洲/上海</strong>：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;timezone&quot;</span>: <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>);
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(common.CollectionDefaultTimezone, <span class="hljs-literal">true</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+      &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

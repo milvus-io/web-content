@@ -7,8 +7,8 @@ summary: >-
   Современные приложения ИИ, особенно в сфере Интернета вещей (IoT) и
   автономного вождения, обычно оперируют структурированными событиями:
   показаниями датчиков с временной меткой и векторным вложением, диагностическим
-  журналом с кодом ошибки и аудиофрагментом или фрагментом поездки с
-  местоположением, скоростью и контекстом сцены. Все это требует от базы данных
+  журналом с кодом ошибки и аудиофрагментом или фрагментом поездки с указанием
+  местоположения, скорости и контекста сцены. Все это требует от базы данных
   встроенной поддержки приема и поиска вложенных данных.
 beta: Milvus 2.6.4+
 ---
@@ -27,7 +27,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Современные приложения искусственного интеллекта, особенно в сфере Интернета вещей (IoT) и автономного вождения, обычно оперируют богатыми структурированными событиями: показаниями датчиков с временной меткой и векторным вложением, диагностическим журналом с кодом ошибки и аудиофрагментом или сегментом поездки с указанием местоположения, скорости и контекста сцены. Все это требует от базы данных встроенной поддержки приема и поиска вложенных данных.</p>
+    </button></h1><p>Современные приложения искусственного интеллекта, особенно в сфере Интернета вещей (IoT) и автономного вождения, обычно работают с богатыми структурированными событиями: показания датчика с временной меткой и векторным вложением, диагностический журнал с кодом ошибки и аудиофрагментом или фрагмент поездки с местоположением, скоростью и контекстом сцены. Все это требует от базы данных встроенной поддержки приема и поиска вложенных данных.</p>
 <p>Вместо того чтобы просить пользователя преобразовывать атомарные структурные события в плоские модели данных, Milvus представляет массив структур, где каждая структура в массиве может содержать скаляры и векторы, сохраняя семантическую целостность.</p>
 <h2 id="Why-Array-of-Structs" class="common-anchor-header">Почему именно массив структур<button data-href="#Why-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -117,8 +117,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Индексация обязательна для векторных полей, включая как векторные поля в коллекции, так и поля, определенные в структурах. Для векторных полей в структурах в качестве типа индекса следует использовать <code translate="no">HNSW</code>, а в качестве типа метрики - серию <code translate="no">MAX_SIM</code>.</p>
-<p>Подробные сведения обо всех применимых ограничениях см. в разделе <a href="/docs/ru/array-of-structs.md#Limits">Ограничения</a>.</p>
+    </button></h3><p>Индексация обязательна для векторных полей, включая как векторные поля в коллекции, так и поля, определенные в структурах. Для векторных полей в структурах в качестве типа индекса следует использовать <code translate="no">AUTOINDEX</code> или <code translate="no">HNSW</code>, а в качестве типа метрики - серию <code translate="no">MAX_SIM</code>.</p>
+<p>Подробные сведения о всех применимых ограничениях см. в разделе <a href="/docs/ru/array-of-structs.md#Limits">Ограничения</a>.</p>
 <h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Пример из реального мира: Моделирование набора данных CoVLA для автономного вождения<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -238,9 +238,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>Для начала нам нужно инициализировать схему для caption Struct, front_cars Struct и коллекции.</p>
 <ul>
 <li><p>Инициализируйте схему для структуры Caption.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -480,12 +478,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Все векторные поля должны быть проиндексированы. Для индексации векторных полей в элементе Struct необходимо использовать <code translate="no">HNSW</code> в качестве типа индекса и метрический тип серии <code translate="no">MAX_SIM</code> для измерения сходства между списками вложений.</p>
+    </button></h3><p>Все векторные поля должны быть проиндексированы. Чтобы проиндексировать векторные поля в элементе Struct, необходимо использовать <code translate="no">AUTOINDEX</code> или <code translate="no">HNSW</code> в качестве типа индекса и метрический тип серии <code translate="no">MAX_SIM</code> для измерения сходства между списками встраивания.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -493,7 +491,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -501,13 +499,13 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Рекомендуется включить измельчение JSON для JSON-полей, чтобы ускорить фильтрацию в этих полях.</p>
+<p>Рекомендуется включить измельчение JSON для полей JSON, чтобы ускорить фильтрацию в этих полях.</p>
 <h3 id="Step-4-Create-a-collection" class="common-anchor-header">Шаг 4: Создание коллекции<button data-href="#Step-4-Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

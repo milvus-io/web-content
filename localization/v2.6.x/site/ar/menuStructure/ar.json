@@ -468,6 +468,12 @@
             "children": []
           },
           {
+            "label": "حقل تيمستامبتز",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "المجال الديناميكي",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -551,7 +557,7 @@
                     "children": []
                   },
                   {
-                    "label": "معرّف اللغة",
+                    "label": "Language Identifier",
                     "id": "language-identifier.md",
                     "order": 5,
                     "children": []
@@ -864,6 +870,12 @@
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1869,38 +1881,6 @@
             "label": "أدلة الاستخدام",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "ميلفوس CDC",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "لمحة عامة",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "نشر خادم CDC",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "إدارة مهام مركز مكافحة الأمراض والوقاية منها",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "الرصد",
-            "id": "cdc-monitoring.md",
-            "order": 3,
             "children": []
           }
         ]

@@ -954,6 +954,43 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Establecer temporalmente una zona horaria para una búsqueda<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Si su colección tiene un campo <code translate="no">TIMESTAMPTZ</code>, puede anular temporalmente la zona horaria predeterminada de la base de datos o de la colección para una sola operación estableciendo el parámetro <code translate="no">timezone</code> en la llamada de búsqueda. Esto controla cómo se muestran y comparan los valores de <code translate="no">TIMESTAMPTZ</code> durante la operación.</p>
+<p>El valor de <code translate="no">timezone</code> debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria IANA</a> válido (por ejemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Para obtener más información sobre cómo utilizar un campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/es/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
+<p>El siguiente ejemplo muestra cómo establecer temporalmente una zona horaria para una operación de búsqueda:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    data=[query_vector],
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Enhancing-ANN-Search" class="common-anchor-header">Mejora de la búsqueda RNA<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -990,10 +1027,10 @@ curl --request POST \
 <p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados en función de su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que puede pasar por alto términos precisos, garantizando que usted reciba los resultados más precisos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar la entrada de texto sin formato, convirtiendo automáticamente sus datos de texto en incrustaciones dispersas sin necesidad de generar manualmente incrustaciones vectoriales.</p>
 <p>Para obtener más información sobre la búsqueda de texto completo, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p></li>
 <li><p>Coincidencia de texto</p>
-<p>La concordancia de palabras clave en Milvus permite una recuperación precisa de documentos basada en términos específicos. Esta función se utiliza principalmente para la búsqueda filtrada para satisfacer condiciones específicas y puede incorporar el filtrado escalar para refinar los resultados de la consulta, permitiendo búsquedas de similitud dentro de los vectores que cumplen los criterios escalares.</p>
+<p>La concordancia de palabras clave en Milvus permite una recuperación precisa de documentos basada en términos específicos. Esta función se utiliza principalmente para la búsqueda filtrada para satisfacer condiciones específicas y puede incorporar el filtrado escalar para refinar los resultados de la consulta, permitiendo búsquedas de similitud dentro de vectores que cumplen criterios escalares.</p>
 <p>Para obtener más información sobre la concordancia de palabras clave, consulte <a href="/docs/es/keyword-match.md">Concordancia de palabras clave</a>.</p></li>
 <li><p>Utilizar clave de partición</p>
-<p>Involucrar varios campos escalares en el filtrado de metadatos y utilizar una condición de filtrado bastante complicada puede afectar a la eficacia de la búsqueda. Una vez que se establece un campo escalar como clave de partición y se utiliza una condición de filtrado que implica la clave de partición en la petición de búsqueda, puede ayudar a restringir el ámbito de búsqueda dentro de las particiones correspondientes a los valores de clave de partición especificados.</p>
+<p>Involucrar varios campos escalares en el filtrado de metadatos y utilizar una condición de filtrado bastante complicada puede afectar a la eficacia de la búsqueda. Una vez establecido un campo escalar como clave de partición y utilizada una condición de filtrado que incluya la clave de partición en la petición de búsqueda, puede ayudar a restringir el ámbito de búsqueda dentro de las particiones correspondientes a los valores de clave de partición especificados.</p>
 <p>Para más detalles sobre la clave de partición, consulte <a href="/docs/es/use-partition-key.md">Utilizar clave de partición</a>.</p></li>
 <li><p>Utilizar mmap</p>
 <p>Para más información sobre la configuración mmap, consulte <a href="/docs/es/mmap.md">Utilizar mmap</a>.</p></li>

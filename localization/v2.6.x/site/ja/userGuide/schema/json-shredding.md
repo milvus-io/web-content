@@ -71,7 +71,7 @@ beta: Milvus 2.6.2+
    </tr>
    <tr>
      <td><p>動的なキー</p></td>
-     <td><p>頻繁に現れるがデータ型がまちまちなキー（例えば、文字列のときもあれば整数のときもある）。</p></td>
+     <td><p>頻繁に出現するが、データ型がまちまちなキー（例えば、文字列のときもあれば整数のときもある）。</p></td>
    </tr>
    <tr>
      <td><p>共有キー</p></td>
@@ -112,7 +112,7 @@ beta: Milvus 2.6.2+
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/json-shredding-flow.png" alt="Json Shredding Flow" class="doc-image" id="json-shredding-flow" />
    </span> <span class="img-wrapper"> <span>Jsonシュレッダーフロー</span> </span></p>
 <ul>
-<li><p><strong>細断されたカラム</strong>：<strong>型付き</strong> <strong>キーと</strong> <strong>動的</strong> <strong>キーの</strong>場合、データは専用のカラムに書き込まれる。このカラム型ストレージにより、Milvusはドキュメント全体を処理することなく、指定されたキーの必要なデータのみを読み出すことができるため、クエリ時に高速でダイレクトなスキャンが可能となる。</p></li>
+<li><p><strong>細断されたカラム</strong>：<strong>型付き</strong> <strong>キーと</strong> <strong>動的</strong> <strong>キーの</strong>場合、データは専用のカラムに書き込まれる。このカラム型ストレージにより、Milvusはドキュメント全体を処理することなく、指定されたキーに必要なデータのみを読み出すことができるため、クエリ時に高速でダイレクトなスキャンが可能となる。</p></li>
 <li><p><strong>共有カラム</strong>：すべての<strong>共有キーは</strong>単一のコンパクトなバイナリJSONカラムにまとめて格納される。このカラムには共有キーの<strong>転置インデックスが</strong>構築される。このインデックスは、Milvusがデータを迅速に刈り込み、検索空間を指定されたキーを含む行のみに効果的に絞り込むことで、頻度の低いキーのクエリを高速化する上で極めて重要である。</p></li>
 </ul>
 <h3 id="Phase-3-Query-execution" class="common-anchor-header">フェーズ 3：クエリの実行<button data-href="#Phase-3-Query-execution" class="anchor-icon" translate="no">
@@ -150,11 +150,11 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>この機能を有効にするには、<code translate="no">milvus.yaml</code> 設定ファイルで<code translate="no">common.enabledJSONKeyStats</code> を<code translate="no">true</code> に設定します。新しいデータは自動的にシュレッダー処理のトリガーとなります。</p>
+    </button></h2><p>この機能を有効にするには、<code translate="no">milvus.yaml</code> 設定ファイルで<code translate="no">common.enabledJSONShredding</code> を<code translate="no">true</code> に設定します。新しいデータは自動的にシュレッダー処理のトリガーとなります。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">enabledJSONKeyStats:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
+  <span class="hljs-attr">enabledJSONShredding:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>この機能を有効にすると、MilvusはJSONデータの解析と再構築を開始します。</p>
@@ -182,34 +182,34 @@ beta: Milvus 2.6.2+
      <th><p>チューニング・アドバイス</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">common.enabledJSONKeyStats</code></p></td>
+     <td><p><code translate="no">common.enabledJSONShredding</code></p></td>
      <td><p>JSON 破砕のビルドとロードのプロセスを有効にするかどうかを制御します。</p></td>
      <td><p>false</p></td>
      <td><p>機能を有効にするには<strong>trueに</strong>設定する必要があります。</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">common.usingJsonStatsForQuery</code></p></td>
+     <td><p><code translate="no">common.usingjsonShreddingForQuery</code></p></td>
      <td><p>Milvusが高速化のためにシュレッダーされたデータを使用するかどうかを制御します。</p></td>
      <td><p>true</p></td>
-     <td><p>クエリが失敗した場合のリカバリ手段として<strong>falseに</strong>設定し、元のクエリパスに戻します。</p></td>
+     <td><p>クエリが失敗した場合、元のクエリパスに戻すリカバリ手段として<strong>falseに</strong>設定します。</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
+     <td><p><code translate="no">queryNode.mmap.jsonShredding</code></p></td>
      <td><p>Milvusが細断データをロードする際にmmapを使用するかどうかを決定します。</p><p>詳細については、<a href="/docs/ja/mmap.md">mmapを使用するを</a>参照してください。</p></td>
      <td><p>真</p></td>
      <td><p>この設定は一般的にパフォーマンスに最適化されています。特定のメモリ管理が必要であったり、システムに制約がある場合にのみ調整してください。</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingMaxColumns</code></p></td>
      <td><p>細断カラムに格納されるJSONキーの最大数。 </p><p>頻繁に出現するキーの数がこの上限を超えた場合、Milvusは最も頻繁に出現するキーを優先的にシュレッダーにかけ、残りのキーは共有カラムに保存されます。</p></td>
      <td><p>1024</p></td>
      <td><p>ほとんどのシナリオではこれで十分です。数千のキーが頻繁に出現するJSONの場合、これを増やす必要があるかもしれませんが、ストレージの使用状況を監視してください。</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsShreddingRatioThreshold</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingRatioThreshold</code></p></td>
      <td><p>JSONキーが細断カラムへの細断を考慮されるために必要な最小出現率。</p><p>キーは、その比率がこのしきい値を超えている場合、頻繁に出現するとみなされる。</p></td>
      <td><p>0.3</p></td>
-     <td><p>細断基準を満たすキーの数が<code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code> の制限を超えた場合に<strong>増加させる</strong>（例えば0.5に）。これにより、閾値が厳しくなり、シュレッダーの対象となる鍵の数が減る。</p><p>デフォルトのしきい値30%より出現頻度の低い鍵をより多く細断する場合は、 0.1に<strong>減らす</strong>。</p></td>
+     <td><p>細断基準を満たすキーの数が<code translate="no">dataCoord.jsonShreddingMaxColumns</code> の制限を超えた場合に<strong>増加させる</strong>（例えば0.5に）。これにより、閾値が厳しくなり、シュレッダーの対象となる鍵の数が減る。</p><p>デフォルトのしきい値30%より出現頻度の低い鍵をより多く細断する場合は、 0.1に<strong>減らす</strong>。</p></td>
    </tr>
 </table>
 <h2 id="Performance-benchmarks" class="common-anchor-header">性能ベンチマーク<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
@@ -372,11 +372,12 @@ beta: Milvus 2.6.2+
    </span> <span class="img-wrapper"> <span>Birdwatcherの出力</span> </span></p></li>
 <li><p>次に、クエリーノードで<code translate="no">show loaded-json-stats</code> を実行して、データがロードされたことを確認します。出力には、各クエリーノードについてロードされた細断データの詳細が表示されます。</p></li>
 </ol></li>
-<li><p><strong>JSONシュレッダーとJSONインデックスのどちらを選択すればよいですか？</strong></p>
+<li><p><strong>エラーが発生したら？</strong></p>
+<p>ビルドまたはロード・プロセスが失敗した場合、<code translate="no">common.enabledJSONShredding=false</code> を設定することで、この機能をすぐに無効にすることができます。残っているタスクを消去するには、<a href="/docs/ja/birdwatcher_usage_guides.md">Birdwatcherの</a> <code translate="no">remove stats-task &lt;task_id&gt;</code> コマンドを使用します。クエリが失敗した場合、<code translate="no">common.usingjsonShreddingForQuery=false</code> を設定すると、シュレッダーされたデータをバイパスして、元のクエリパスに戻ります。</p></li>
+<li><p><strong>JSONシュレッダーとJSONインデックスの選択方法は？</strong></p>
 <ul>
-<li><p><strong>JSONシュレッダーは</strong>、ドキュメントに頻繁に現れるキー、特に複雑なJSON構造に最適です。JSONシュレッダーは、カラム型ストレージと転置インデックスの利点を兼ね備えているため、多くの異なるキーにクエリを発行するような、読み取り負荷の高いシナリオに適しています。しかし、非常に小さなJSONドキュメントに対しては、パフォーマンス向上がわずかであるため、推奨されない。JSONドキュメントの総サイズに占めるキーの値の割合が小さいほど、シュレッダーによるパフォーマンスの最適化は向上する。</p></li>
+<li><p><strong>JSONシュレッダーは</strong>、ドキュメントに頻繁に現れるキー、特に複雑なJSON構造に最適です。JSONシュレッダーは、カラム型ストレージと転置インデックスの利点を兼ね備えているため、多くの異なるキーをクエリするような、読み取り負荷の高いシナリオに適しています。しかし、非常に小さなJSONドキュメントに対しては、パフォーマンス向上がわずかであるため、推奨されない。JSONドキュメントの総サイズに占めるキーの値の割合が小さいほど、シュレッダーによるパフォーマンスの最適化は向上する。</p></li>
 <li><p><strong>JSONインデクシングは</strong>、特定のキーベースのクエリの最適化に適しており、ストレージのオーバーヘッドも低くなります。より単純なJSON構造に適しています。JSONシュレッダーは、配列内のキーに対するクエリには対応していないため、これらのクエリを高速化するにはJSONインデックスが必要であることに注意してください。</p></li>
-</ul></li>
-<li><p><strong>エラーが発生した場合はどうなりますか？</strong></p>
-<p>ビルドやロードのプロセスが失敗した場合、<code translate="no">common.enabledJSONKeyStats=false</code> を設定することで、この機能をすぐに無効にすることができます。残っているタスクを消去するには、<a href="/docs/ja/birdwatcher_usage_guides.md">Birdwatcherの</a> <code translate="no">remove stats-task &lt;task_id&gt;</code> コマンドを使ってください。クエリーが失敗した場合、<code translate="no">common.usingJsonStatsForQuery=false</code> を設定すると、細断されたデータをバイパスして、元のクエリーパスに戻ります。</p></li>
+</ul>
+<p>詳細については、「<a href="/docs/ja/json-field-overview.md#Next-Accelerate-JSON-queries">JSONフィールドの概要</a>」を参照してください。</p></li>
 </ul>

@@ -57,7 +57,7 @@ summary: >-
    <tr>
      <td><p>Suche nach Medieninhalten</p></td>
      <td><p>Videosuche mit visuellen Merkmalen und Audiotranskripten</p></td>
-     <td><p>Gewichtet die Wichtigkeit von visuellen Inhalten gegenüber gesprochenen Dialogen je nach Anfrageabsicht</p></td>
+     <td><p>Gewichtet die Wichtigkeit von visuellen Inhalten gegenüber gesprochenen Dialogen je nach Suchabsicht</p></td>
    </tr>
    <tr>
      <td><p>Abrufen von Dokumenten</p></td>
@@ -84,7 +84,7 @@ summary: >-
     </button></h2><p>Der Hauptarbeitsablauf der WeightedRanker-Strategie ist wie folgt:</p>
 <ol>
 <li><p><strong>Sammeln von Suchergebnissen</strong>: Sammeln der Ergebnisse und Scores von jedem Pfad der Vektorsuche (score_1, score_2).</p></li>
-<li><p><strong>Normalisierung der Ergebnisse</strong>: Jede Suche kann unterschiedliche Ähnlichkeitsmetriken verwenden, was zu unterschiedlichen Punkteverteilungen führt. Beispielsweise kann die Verwendung des Inneren Produkts (IP) als Ähnlichkeitstyp zu Ergebnissen im Bereich von [-∞,+∞] führen, während die Verwendung des Euklidischen Abstands (L2) zu Ergebnissen im Bereich von [0,+∞] führt. Da die Wertebereiche der verschiedenen Suchvorgänge unterschiedlich sind und nicht direkt miteinander verglichen werden können, müssen die Werte der einzelnen Suchpfade normalisiert werden. In der Regel wird die Funktion <code translate="no">arctan</code> angewendet, um die Punktzahlen in einen Bereich zwischen [0, 1] zu transformieren (Punktzahl_1_normalisiert, Punktzahl_2_normalisiert). Werte, die näher bei 1 liegen, weisen auf eine höhere Ähnlichkeit hin.</p></li>
+<li><p><strong>Normalisierung der Ergebnisse</strong>: Jede Suche kann unterschiedliche Ähnlichkeitsmetriken verwenden, was zu unterschiedlichen Punkteverteilungen führt. Beispielsweise kann die Verwendung des Inneren Produkts (IP) als Ähnlichkeitstyp zu Ergebnissen im Bereich [-∞,+∞] führen, während die Verwendung des Euklidischen Abstands (L2) zu Ergebnissen im Bereich [0,+∞] führt. Da die Wertebereiche der verschiedenen Suchvorgänge unterschiedlich sind und nicht direkt miteinander verglichen werden können, müssen die Werte der einzelnen Suchpfade normalisiert werden. In der Regel wird die Funktion <code translate="no">arctan</code> angewendet, um die Punktzahlen in einen Bereich zwischen [0, 1] umzuwandeln (score_1_normalisiert, score_2_normalisiert). Werte, die näher bei 1 liegen, zeigen eine höhere Ähnlichkeit an.</p></li>
 <li><p><strong>Gewichte zuweisen</strong>: Auf der Grundlage der Bedeutung, die den verschiedenen Vektorfeldern zugewiesen wird, werden den normalisierten Scores (score_1_normalisiert, score_2_normalisiert) Gewichte<strong>(wi</strong>) zugewiesen. Die Gewichte der einzelnen Pfade sollten zwischen [0,1] liegen. Die resultierenden gewichteten Scores sind score_1_weighted und score_2_weighted.</p></li>
 <li><p><strong>Scores zusammenführen</strong>: Die gewichteten Punktzahlen (score_1_weighted, score_2_weighted) werden vom höchsten zum niedrigsten Wert geordnet, um einen endgültigen Satz von Punktzahlen (score_final) zu erhalten.</p></li>
 </ol>
@@ -304,8 +304,9 @@ rerank = Function(
 CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
                 .name(<span class="hljs-string">&quot;weight&quot;</span>)
                 .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;weights\&quot;: [0.1, 0.6], \&quot;norm_score\&quot;: true}&quot;</span>)
+                .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
+                .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.1, 0.9]&quot;</span>)
+                .param(<span class="hljs-string">&quot;norm_score&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
                 .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;

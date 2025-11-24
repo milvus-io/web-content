@@ -3,8 +3,9 @@ id: stl-sort.md
 title: STL_SORT
 summary: >-
   L'index STL_SORT est un type d'index spécifiquement conçu pour améliorer les
-  performances des requêtes sur les champs numériques (INT8, INT16, etc.) ou les
-  champs TIMESTAMPTZ dans Milvus en organisant les données dans un ordre trié.
+  performances des requêtes sur les champs numériques (INT8, INT16, etc.), les
+  champs VARCHAR ou les champs TIMESTAMPTZ dans Milvus en organisant les données
+  dans un ordre trié.
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'index <code translate="no">STL_SORT</code> est un type d'index spécialement conçu pour améliorer les performances des requêtes sur les champs numériques (INT8, INT16, etc.) ou les champs <code translate="no">TIMESTAMPTZ</code> dans Milvus en organisant les données dans un ordre trié.</p>
+    </button></h1><p>L'index <code translate="no">STL_SORT</code> est un type d'index spécialement conçu pour améliorer les performances des requêtes sur les champs numériques (INT8, INT16, etc.), les champs <code translate="no">VARCHAR</code> ou les champs <code translate="no">TIMESTAMPTZ</code> dans Milvus en organisant les données dans un ordre trié.</p>
 <p>Utilisez l'index <code translate="no">STL_SORT</code> si vous exécutez fréquemment des requêtes avec :</p>
 <ul>
 <li><p>Filtrage par comparaison avec les opérateurs <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, et <code translate="no">&lt;=</code> </p></li>
@@ -44,7 +45,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Champs numériques (par exemple, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). Pour plus d'informations, reportez-vous à la section Champs <a href="/docs/fr/number.md">booléens et numériques</a>.</p></li>
-<li><p><code translate="no">TIMESTAMPTZ</code> Champs de type TIMESTE. Pour plus d'informations, reportez-vous au <a href="/docs/fr/timestamptz-field.md">champ TIMESTAMPTZ</a>.</p></li>
+<li><p><code translate="no">VARCHAR</code> Les champs de type "String". Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/string.md">Champ de type chaîne de caractères</a>.</p></li>
+<li><p><code translate="no">TIMESTAMPTZ</code> champs. Pour plus d'informations, reportez-vous au <a href="/docs/fr/timestamptz-field.md">champ TIMESTAMPTZ</a>.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Fonctionnement<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,6 +120,29 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-an-index" class="common-anchor-header">Supprimer un index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilisez la méthode <code translate="no">drop_index()</code> pour supprimer un index existant d'une collection.</p>
+<div class="alert note">
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;tsz_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;tsz_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">Notes d'utilisation<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,7 +159,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Types de champs :</strong> Fonctionne avec les champs numériques et <code translate="no">TIMESTAMPTZ</code>. Pour plus d'informations sur les types de données, consultez les rubriques <a href="/docs/fr/number.md">Boolean &amp; Number</a> et <a href="/docs/fr/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
+<li><p><strong>Types de champs :</strong> Fonctionne avec les champs numériques et <code translate="no">TIMESTAMPTZ</code>. Pour plus d'informations sur les types de données, reportez-vous aux rubriques <a href="/docs/fr/number.md">Boolean &amp; Number et</a> <a href="/docs/fr/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
 <li><p><strong>Paramètres :</strong> Aucun paramètre d'index n'est nécessaire.</p></li>
 <li><p><strong>Mmap non pris en charge :</strong> Le mode "Memory-mapped" n'est pas disponible pour <code translate="no">STL_SORT</code>.</p></li>
 </ul>

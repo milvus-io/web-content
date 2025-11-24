@@ -179,7 +179,11 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
-     <td><p>Разрешать ли коллекции принимать значения первичного ключа, предоставленные пользователем, если для коллекции включена функция AutoID.</p><ul><li><p>Если установлено значение <strong>"true"</strong>: При вставках, апсетах и массовом импорте используется предоставленный пользователем первичный ключ, если он присутствует; в противном случае значения первичного ключа генерируются автоматически.</p></li><li><p>Если установлено значение <strong>"false"</strong>: Предоставленные пользователем значения первичного ключа отклоняются или игнорируются, а значения первичного ключа всегда генерируются автоматически. По умолчанию установлено <strong> значение "false"</strong>.</p></li></ul></td>
+     <td><p>Разрешать ли коллекции принимать значения первичного ключа, предоставленные пользователем, если для коллекции включена функция AutoID.</p><ul><li><p>Если установлено значение <strong>"true"</strong>: При вставках, апсетах и массовом импорте используется предоставленный пользователем первичный ключ, если он присутствует; в противном случае значения первичного ключа генерируются автоматически.</p></li><li><p>Если установлено значение <strong>"false"</strong>: Предоставленные пользователем значения первичного ключа отклоняются или игнорируются, а значения первичного ключа всегда генерируются автоматически. По умолчанию установлено значение <strong>"false"</strong>.</p></li></ul></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">timezone</code></p></td>
+     <td><p>Указывает часовой пояс по умолчанию для этой коллекции при работе с чувствительными ко времени операциями, особенно с полями <code translate="no">TIMESTAMPTZ</code>. Временные метки хранятся внутри коллекции в UTC, и Milvus преобразует значения для отображения и сравнения в соответствии с этой настройкой. Если установлено, временная зона коллекции переопределяет временную зону базы данных по умолчанию; параметр временной зоны запроса может временно переопределять оба параметра. Значение должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Азия/Шанхай</strong>, <strong>Америка/Чикаго</strong> или <strong>UTC</strong>). Подробнее о том, как использовать поле <code translate="no">TIMESTAMPTZ</code>, см. в разделе <a href="/docs/ru/timestamptz-field.md">Поле TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Пример 1: Установка TTL коллекции<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
@@ -483,6 +487,60 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-6-Set-collection-time-zone" class="common-anchor-header">Пример 6: Установка часового пояса коллекции<button data-href="#Example-6-Set-collection-time-zone" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Вы можете установить часовой пояс по умолчанию для вашей коллекции с помощью свойства <code translate="no">timezone</code>. Это определяет, как интерпретируются и отображаются данные, связанные со временем, во всех операциях внутри коллекции, включая вставку данных, запрос и представление результатов.</p>
+<p>Значение <code translate="no">timezone</code> должно быть действительным <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a>, например <code translate="no">Asia/Shanghai</code>, <code translate="no">America/Chicago</code> или <code translate="no">UTC</code>. Использование недопустимого или нестандартного значения приведет к ошибке при изменении свойства коллекции.</p>
+<p>В примере ниже показано, как установить часовой пояс коллекции на <strong>Asia/Shanghai</strong>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;timezone&quot;</span>: <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>);
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(common.CollectionDefaultTimezone, <span class="hljs-literal">true</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+      &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-Collection-Properties" class="common-anchor-header">Сброс свойств коллекции<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -498,7 +556,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы также можете сбросить свойство коллекции, отбросив его, как показано ниже.</p>
+    </button></h2><p>Вы также можете сбросить свойство коллекции, отбросив его следующим образом.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(

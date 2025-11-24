@@ -468,6 +468,12 @@
             "children": []
           },
           {
+            "label": "TIMESTAMPTZフィールド",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "ダイナミック・フィールド",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -864,6 +870,12 @@
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1874,38 +1886,6 @@
         ]
       },
       {
-        "label": "Milvus CDC",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "概要",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "CDCサーバーの展開",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "CDCタスクの管理",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "モニタリング",
-            "id": "cdc-monitoring.md",
-            "order": 3,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "Milvus CLI",
         "id": "cli",
         "order": 4,
@@ -2186,7 +2166,7 @@
             ]
           },
           {
-            "label": "ラマインデックス",
+            "label": "LlamaIndex",
             "id": "llamaindex",
             "order": 1,
             "children": [
@@ -2679,7 +2659,7 @@
         "children": []
       },
       {
-        "label": "MilvusでRAGを構築する",
+        "label": "Build RAG with Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -2792,7 +2772,7 @@
             "children": []
           },
           {
-            "label": "推薦システム",
+            "label": "レコメンダー・システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

@@ -1,15 +1,15 @@
 ---
 id: timestamptz-field.md
-title: Campo TIMESTAMPTZCompatible with Milvus 2.6.4+
+title: Campo TIMESTAMPTZCompatible with Milvus 2.6.6+
 summary: >-
   As aplicações que controlam o tempo entre regiões, como os sistemas de
   comércio eletrónico, as ferramentas de colaboração ou o registo distribuído,
   necessitam de um tratamento preciso dos carimbos de data/hora com os fusos
   horários. O tipo de dados TIMESTAMPTZ em Milvus fornece esta capacidade ao
   armazenar carimbos de data/hora com o seu fuso horário associado.
-beta: Milvus 2.6.4+
+beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">Campo TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">Campo TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,10 +40,10 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um campo <code translate="no">TIMESTAMPTZ</code> é um tipo de dados definido pelo esquema (<code translate="no">DataType.TIMESTAMPTZ</code>) em Milvus que armazena carimbos de data/hora com fusos horários explícitos:</p>
+    </button></h2><p>Um campo <code translate="no">TIMESTAMPTZ</code> é um tipo de dados definido por um esquema (<code translate="no">DataType.TIMESTAMPTZ</code>) em Milvus que processa a entrada sensível ao fuso horário e armazena todos os pontos temporais internamente como hora absoluta UTC:</p>
 <ul>
 <li><p><strong>Formato de entrada aceite</strong>: Cadeias de caracteres <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> com um desvio de fuso horário (por exemplo, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> representa 11:59:59 PM em UTC+08:00).</p></li>
-<li><p><strong>Armazenamento interno</strong>: Todos os valores de <code translate="no">TIMESTAMPTZ</code> são normalizados e armazenados no <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Tempo Universal Coordenado</a> (UTC).</p></li>
+<li><p><strong>Armazenamento interno</strong>: Todos os valores de <code translate="no">TIMESTAMPTZ</code> são normalizados e armazenados em <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Tempo Universal Coordenado</a> (UTC).</p></li>
 <li><p><strong>Comparação e filtragem</strong>: Todas as operações de filtragem e ordenação são realizadas em UTC, garantindo resultados consistentes e previsíveis em diferentes fusos horários.</p></li>
 </ul>
 <div class="alert note">
@@ -298,80 +298,6 @@ results = client.query(
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → Subtrai 2 horas</p></li>
 </ul>
 </div>
-<h4 id="Extract-timestamp-elements" class="common-anchor-header">Extrair elementos de carimbo de data/hora</h4><p>Pode extrair componentes específicos dos campos <code translate="no">TIMESTAMPTZ</code>, como o ano, o mês ou o dia, utilizando o parâmetro <code translate="no">time_fields</code> na sua consulta ou pesquisa.</p>
-<p>O exemplo abaixo extrai os elementos <code translate="no">year</code>, <code translate="no">month</code> e <code translate="no">day</code> de cada campo <code translate="no">TIMESTAMPTZ</code> nos resultados da consulta:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">results = client.query(
-    collection_name,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-<span class="highlighted-wrapper-line">    time_fields=<span class="hljs-string">&quot;year, month, day&quot;</span>,</span>
-    limit=<span class="hljs-number">2</span>,
-)
-
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
-
-<span class="hljs-comment"># Expected output:</span>
-<span class="hljs-comment"># Query result:  data: [&quot;{&#x27;id&#x27;: 1, &#x27;tsz&#x27;: [2024, 12, 31]}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;tsz&#x27;: [2025, 1, 1]}&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Elementos suportados para extração</strong></p>
-<table>
-   <tr>
-     <th><p>Elemento</p></th>
-     <th><p>Descrição</p></th>
-     <th><p>Exemplo de saída</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">year</code></p></td>
-     <td><p>Componente do ano</p></td>
-     <td><p><code translate="no">2025</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">month</code></p></td>
-     <td><p>Número do mês</p></td>
-     <td><p><code translate="no">1</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">day</code></p></td>
-     <td><p>Dia do mês</p></td>
-     <td><p><code translate="no">3</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">hour</code></p></td>
-     <td><p>Hora (0-23)</p></td>
-     <td><p><code translate="no">14</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">minute</code></p></td>
-     <td><p>Minuto</p></td>
-     <td><p><code translate="no">30</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">second</code></p></td>
-     <td><p>Segundo</p></td>
-     <td><p><code translate="no">5</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">microsecond</code></p></td>
-     <td><p>Microssegundo</p></td>
-     <td><p><code translate="no">123456</code></p></td>
-   </tr>
-</table>
-<div class="alert note">
-<ul>
-<li><p>O parâmetro <code translate="no">time_fields</code> é uma cadeia de caracteres separada por vírgulas (por exemplo, <code translate="no">&quot;year, month, day&quot;</code>).</p></li>
-<li><p>O resultado é devolvido como uma matriz de componentes extraídos (por exemplo, <code translate="no">[2024, 12, 31]</code>).</p></li>
-</ul>
-</div>
 <h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Pesquisa com filtragem de carimbo de data/hora</h4><p>Você pode combinar a filtragem <code translate="no">TIMESTAMPTZ</code> com a pesquisa de similaridade de vetor para restringir os resultados por tempo e similaridade.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -443,13 +369,13 @@ res = client.search(
    </tr>
    <tr>
      <td><p>Base de dados</p></td>
-     <td><p><code translate="no">database.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>Predefinição para todas as colecções na base de dados</p></td>
      <td><p>Mais baixa</p></td>
    </tr>
    <tr>
      <td><p>Coleção</p></td>
-     <td><p><code translate="no">collection.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>Substitui a definição de fuso horário predefinida na base de dados para essa coleção</p></td>
      <td><p>Média</p></td>
    </tr>
@@ -460,7 +386,7 @@ res = client.search(
      <td><p>Mais alto</p></td>
    </tr>
 </table>
-<p>Para obter instruções passo a passo e exemplos de código, consulte as páginas dedicadas:</p>
+<p>Para obter instruções passo-a-passo e exemplos de código, consulte as páginas dedicadas:</p>
 <ul>
 <li><p><a href="/docs/pt/modify-collection.md#Example-6-Set-collection-time-zone">Modificar coleção</a></p></li>
 <li><p><a href="/docs/pt/manage_databases.md#Manage-database-properties">Base de dados</a></p></li>
@@ -484,4 +410,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>Por predefinição, as consultas nos campos <code translate="no">TIMESTAMPTZ</code> sem um índice efectuam uma pesquisa completa de todas as linhas, o que pode ser lento em grandes conjuntos de dados. Para acelerar as consultas de carimbo de data/hora, crie um índice <code translate="no">STL_SORT</code> no seu campo <code translate="no">TIMESTAMPTZ</code>.</p>
-<p>Para obter detalhes, consulte <a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT</a>.</p>
+<p>Para obter detalhes, consulte <a href="/docs/pt/stl-sort.md">STL_SORT</a>.</p>

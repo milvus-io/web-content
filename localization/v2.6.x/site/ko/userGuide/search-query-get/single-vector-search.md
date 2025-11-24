@@ -950,6 +950,43 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">검색을 위한 임시 시간대 설정하기<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>컬렉션에 <code translate="no">TIMESTAMPTZ</code> 필드가 있는 경우 검색 호출에서 <code translate="no">timezone</code> 매개변수를 설정하여 단일 작업에 대해 데이터베이스 또는 컬렉션 기본 표준 시간대를 일시적으로 재정의할 수 있습니다. 이렇게 하면 작업 중에 <code translate="no">TIMESTAMPTZ</code> 값이 표시되고 비교되는 방식이 제어됩니다.</p>
+<p><code translate="no">timezone</code> 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자</a> (예: <strong>아시아/상하이</strong>, <strong>미국/시카고</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p>
+<p>아래 예는 검색 작업을 위해 임시로 시간대를 설정하는 방법을 보여줍니다:</p>
+<div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    data=[query_vector],
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Enhancing-ANN-Search" class="common-anchor-header">ANN 검색 향상<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -965,7 +1002,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>자동 인덱스는 ANN 검색의 학습 곡선을 상당히 평탄화합니다. 그러나 상위-K가 증가함에 따라 검색 결과가 항상 정확하지 않을 수 있습니다. 검색 범위를 줄이고, 검색 결과 관련성을 개선하고, 검색 결과를 다양화함으로써 Milvus는 다음과 같은 검색 개선 작업을 수행합니다.</p>
+    </button></h2><p>자동 인덱스는 ANN 검색의 학습 곡선을 상당히 평탄화합니다. 그러나 상위-K가 증가할수록 검색 결과가 항상 정확하지 않을 수 있습니다. 검색 범위를 줄이고, 검색 결과 관련성을 개선하고, 검색 결과를 다양화함으로써 Milvus는 다음과 같은 검색 개선 작업을 수행합니다.</p>
 <ul>
 <li><p>필터링 검색</p>
 <p>검색 요청에 필터링 조건을 포함하면 Milvus가 ANN 검색을 수행하기 전에 메타데이터 필터링을 수행하여 검색 범위를 전체 컬렉션에서 지정된 필터링 조건과 일치하는 엔티티로만 축소할 수 있습니다.</p>
@@ -983,7 +1020,7 @@ curl --request POST \
 <p>단일 ANN 검색은 최대 16,384개의 엔티티를 반환합니다. 한 번의 검색으로 더 많은 엔티티를 반환해야 하는 경우 검색 반복기를 사용하는 것이 좋습니다.</p>
 <p>검색 반복기에 대한 자세한 내용은 <a href="/docs/ko/with-iterators.md">검색 반복기를</a> 참조하세요.</p></li>
 <li><p>전체 텍스트 검색</p>
-<p>전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용어나 구문이 포함된 문서를 검색한 다음 관련성에 따라 결과의 순위를 매기는 기능입니다. 이 기능은 정확한 용어를 간과할 수 있는 시맨틱 검색의 한계를 극복하여 가장 정확하고 문맥에 맞는 결과를 얻을 수 있도록 해줍니다. 또한, 원시 텍스트 입력을 받아 벡터 임베딩을 수동으로 생성할 필요 없이 텍스트 데이터를 스파스 임베딩으로 자동 변환하여 벡터 검색을 간소화합니다.</p>
+<p>전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용어나 구문이 포함된 문서를 검색한 다음 관련성에 따라 결과의 순위를 매기는 기능입니다. 이 기능은 정확한 용어를 간과할 수 있는 시맨틱 검색의 한계를 극복하여 가장 정확하고 문맥에 맞는 결과를 얻을 수 있도록 해줍니다. 또한, 원시 텍스트 입력을 받아 벡터 임베딩을 수동으로 생성할 필요 없이 텍스트 데이터를 스파스 임베딩으로 자동 변환함으로써 벡터 검색을 간소화합니다.</p>
 <p>전체 텍스트 검색에 대한 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
 <li><p>텍스트 검색</p>
 <p>Milvus의 키워드 검색은 특정 용어를 기반으로 정확한 문서 검색을 가능하게 합니다. 이 기능은 주로 특정 조건을 충족하는 필터링 검색에 사용되며, 스칼라 필터링을 통합하여 쿼리 결과를 구체화함으로써 스칼라 기준을 충족하는 벡터 내에서 유사성 검색을 할 수 있습니다.</p>

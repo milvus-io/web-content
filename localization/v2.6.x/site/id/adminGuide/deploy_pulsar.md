@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus menggunakan Pulsar atau Kafka untuk mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Pulsar adalah sistem penyimpanan pesan default. Topik ini memperkenalkan cara mengonfigurasi penyimpanan pesan dengan Docker Compose atau Helm.</p>
 <p>Anda dapat mengonfigurasi Pulsar dengan <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> atau pada K8 dan mengonfigurasi Kafka pada K8.</p>
 <div class="alert note">
-<p><strong>Keterbatasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v2.6.4, Anda harus mempertahankan pilihan antrean pesan saat ini. Beralih di antara sistem antrean pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v2.6.6, Anda harus mempertahankan pilihan antrean pesan saat ini. Beralih di antara sistem antrean pesan yang berbeda selama peningkatan tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Mengonfigurasi Pulsar dengan Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

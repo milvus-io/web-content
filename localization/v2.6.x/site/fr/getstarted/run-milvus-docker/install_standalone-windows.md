@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Ouvrez Docker Desktop en mode administrateur en cliquant avec le bouton droit de la souris et en sélectionnant <strong>Exécuter en tant qu'administrateur</strong>.</p></li>
 <li><p>Exécuter les commandes suivantes dans PowerShell ou Windows Command Prompt pour télécharger le fichier de configuration Docker Compose pour Milvus Standalone et démarrer Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Télécharger le fichier de configuration de Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Démarrer Milvus.</p>
@@ -277,7 +277,7 @@ Creating milvus-standalone ... done​
     </button></h3><p>Une fois que vous avez installé Docker Desktop dans Windows, vous pouvez rencontrer l'erreur <code translate="no">Docker Engine stopped</code> si votre ordinateur n'est pas configuré correctement. Dans ce cas, vous devrez peut-être effectuer les vérifications suivantes.</p>
 <ol>
 <li><p>Vérifiez si la virtualisation est activée.</p>
-<p>Vous pouvez vérifier si la virtualisation est activée en consultant l'onglet <strong>Performance</strong> dans le <strong>Gestionnaire des tâches</strong>.</p>
+<p>Vous pouvez vérifier si la virtualisation est activée en consultant l'onglet <strong>Performance</strong> du <strong>Gestionnaire des tâches</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
@@ -340,7 +340,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Sélectionnez les distributions WSL 2 dans les paramètres de Docker Desktop.</span> </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Comment puis-je traiter les erreurs liées au volume qui s'affichent au démarrage de Milvus et qui se lisent <code translate="no">Read config failed</code>?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Comment puis-je traiter les erreurs liées au volume qui s'affichent lors du démarrage de Milvus et qui se lisent <code translate="no">Read config failed</code>?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -359,7 +359,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Erreur d'échec de lecture de la configuration au démarrage de Milvus</span> </span></p>
-<p>Pour traiter l'erreur qui s'affiche au démarrage de Milvus sous la forme "Read config failed", vous devez vérifier si le volume monté dans le conteneur Milvus est correct. Si le volume est correctement monté dans le conteneur, vous pouvez utiliser la commande <code translate="no">docker exec</code> pour accéder au conteneur et répertorier le dossier <strong>/milvus/configs</strong> comme suit.</p>
+<p>Pour traiter l'erreur "Read config failed" qui s'affiche au démarrage de Milvus, vous devez vérifier si le volume monté dans le conteneur Milvus est correct. Si le volume est correctement monté dans le conteneur, vous pouvez utiliser la commande <code translate="no">docker exec</code> pour accéder au conteneur et répertorier le dossier <strong>/milvus/configs</strong> comme suit.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />

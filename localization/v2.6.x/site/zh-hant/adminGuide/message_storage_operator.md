@@ -56,11 +56,11 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 <li>一個 Milvus 實例只支援一個訊息儲存空間。然而，我們仍然向後相容為一個實例設定多個訊息儲存空間。優先順序如下：<ul>
 <li>獨立模式：  RocksMQ (預設) &gt; Pulsar &gt; Kafka</li>
 <li>群集模式：Pulsar (預設) &gt; Kafka</li>
-<li>為了向下相容性，2.3 中引入的 Nats 不參與這些優先順序規則。</li>
+<li>為了向下相容性，2.3 引入的 Nats 不參與這些優先順序規則。</li>
 </ul></li>
 <li>當 Milvus 系統在執行時，訊息儲存是無法改變的。</li>
 <li>僅支援 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.4時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
+<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.6時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

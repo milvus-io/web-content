@@ -28,7 +28,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As aplicações modernas de IA, especialmente na Internet das Coisas (IoT) e na condução autónoma, normalmente raciocinam sobre eventos ricos e estruturados: uma leitura de sensor com o seu carimbo de data/hora e incorporação de vetor, um registo de diagnóstico com um código de erro e um trecho de áudio, ou um segmento de viagem com localização, velocidade e contexto de cena. Estes exigem que a base de dados suporte nativamente a ingestão e a pesquisa de dados aninhados.</p>
+    </button></h1><p>As aplicações modernas de IA, especialmente na Internet das Coisas (IoT) e na condução autónoma, normalmente raciocinam sobre eventos ricos e estruturados: uma leitura de sensor com o seu carimbo de data/hora e incorporação de vetor, um registo de diagnóstico com um código de erro e um trecho de áudio, ou um segmento de viagem com localização, velocidade e contexto de cena. Isto exige que a base de dados suporte nativamente a ingestão e a pesquisa de dados aninhados.</p>
 <p>Em vez de pedir ao utilizador que converta os seus eventos estruturais atómicos em modelos de dados planos, Milvus introduz a matriz de estruturas, em que cada estrutura da matriz pode conter escalares e vectores, preservando a integridade semântica.</p>
 <h2 id="Why-Array-of-Structs" class="common-anchor-header">Porquê uma matriz de estruturas<button data-href="#Why-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,7 +118,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A indexação é obrigatória para campos vectoriais, incluindo os campos vectoriais de uma coleção e os definidos num Struct. Para campos de vetor num Struct, deve utilizar <code translate="no">HNSW</code> como o tipo de índice e <code translate="no">MAX_SIM</code> series como o tipo de métrica.</p>
+    </button></h3><p>A indexação é obrigatória para campos vectoriais, incluindo os campos vectoriais de uma coleção e os definidos num Struct. Para campos vectoriais num Struct, deve utilizar <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code> como o tipo de índice e <code translate="no">MAX_SIM</code> series como o tipo de métrica.</p>
 <p>Para obter detalhes sobre todos os limites aplicáveis, consulte <a href="/docs/pt/array-of-structs.md#Limits">os limites</a>.</p>
 <h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Um exemplo do mundo real: Modelação do conjunto de dados CoVLA para condução autónoma<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,7 +157,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O conjunto de dados CoVLA é um conjunto de dados de condução multimodal em grande escala que inclui 10.000 clips de vídeo, totalizando mais de 80 horas de filmagens. Amostras de fotogramas a uma taxa de 20 Hz e anotação de cada fotograma com legendas detalhadas em linguagem natural, juntamente com informações sobre o estado do veículo e as coordenadas dos objectos detectados.</p>
+    </button></h3><p>O conjunto de dados CoVLA é um conjunto de dados de condução multimodal em grande escala que inclui 10.000 clips de vídeo, totalizando mais de 80 horas de filmagens. Amostras de fotogramas a uma taxa de 20 Hz e anotações de cada fotograma com legendas detalhadas em linguagem natural, juntamente com informações sobre o estado do veículo e as coordenadas dos objectos detectados.</p>
 <p>A estrutura do conjunto de dados é a seguinte:</p>
 <pre><code translate="no" class="language-python">├── video_1                                       (VIDEO) <span class="hljs-comment"># video.mp4</span>
 │   ├── video_id                                  (INT)
@@ -200,7 +200,7 @@ beta: Milvus 2.6.4+
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
 <p>Pode constatar que a estrutura do conjunto de dados CoVLA é altamente hierárquica, dividindo os dados recolhidos em vários ficheiros <code translate="no">.jsonl</code>, juntamente com os clips de vídeo no formato <code translate="no">.mp4</code>.</p>
-<p>No Milvus, é possível utilizar um campo JSON ou um campo Array-of-Structs para criar estruturas aninhadas num esquema de coleção. Quando as incorporações de vectores fazem parte do formato aninhado, apenas é suportado um campo Array-of-Structs. No entanto, um campo Struct dentro de uma matriz não pode conter outras estruturas aninhadas. Para armazenar o conjunto de dados CoVLA mantendo as relações essenciais, é necessário remover a hierarquia desnecessária e aplanar os dados para que se ajustem ao esquema da coleção Milvus.</p>
+<p>Em Milvus, é possível utilizar um campo JSON ou um campo Array-of-Structs para criar estruturas aninhadas num esquema de coleção. Quando as incorporações de vectores fazem parte do formato aninhado, apenas é suportado um campo Array-of-Structs. No entanto, um campo Struct dentro de uma matriz não pode conter outras estruturas aninhadas. Para armazenar o conjunto de dados CoVLA mantendo as relações essenciais, é necessário remover a hierarquia desnecessária e aplanar os dados para que se ajustem ao esquema da coleção Milvus.</p>
 <p>O diagrama abaixo ilustra como podemos modelar este conjunto de dados utilizando o esquema ilustrado no esquema seguinte:</p>
 <p>
   
@@ -239,9 +239,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>Para começar, precisamos de inicializar o esquema para uma Caption Struct, uma Front_cars Struct e a coleção.</p>
 <ul>
 <li><p>Inicializar o esquema para a Caption Struct.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -481,12 +479,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Todos os campos de vetor devem ser indexados. Para indexar os campos de vetor num elemento Struct, é necessário utilizar <code translate="no">HNSW</code> como tipo de índice e o tipo de métrica da série <code translate="no">MAX_SIM</code> para medir as semelhanças entre as listas de incorporação.</p>
+    </button></h3><p>Todos os campos de vetor devem ser indexados. Para indexar os campos vectoriais num elemento Struct, é necessário utilizar <code translate="no">AUTOINDEX</code> ou <code translate="no">HNSW</code> como tipo de índice e o tipo de métrica da série <code translate="no">MAX_SIM</code> para medir as semelhanças entre as listas de incorporação.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -494,7 +492,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -502,7 +500,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}

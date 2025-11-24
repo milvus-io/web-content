@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusのアップグレードパスは以下のように選択できます：</p>
-<div style="display: none;">- Milvus v2.2.3およびそれ以降のリリースからv2.5.19への[ローリングアップグレード](#conduct-a-rolling-upgrade)。</div>
+<div style="display: none;">- Milvus v2.2.3およびそれ以降のリリースからv2.5.23への[ローリングアップグレード](#conduct-a-rolling-upgrade)。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.5.19へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
-<li><p>Milvus v2.1.xからv2.5.19へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.5.23へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
+<li><p>Milvus v2.1.xからv2.5.23へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">ローリングアップグレードの実施<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,12 +145,12 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作方法</td><td><code translate="no">update</code></td><td>偽</td></tr>
 </tbody>
 </table>
-<p>Milvusインスタンスのすべてのデプロイが正常な状態であることを確認したら、以下のコマンドを実行してください。以下のコマンドを実行することで、Milvusインスタンスを2.5.19にアップグレードすることができます。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.19 -w &#x27;milvusdb/milvus:v2.5.19&#x27;
+<p>Milvusインスタンスのすべてのデプロイメントが正常な状態であることを確認したら、以下のコマンドを実行してMilvusインスタンスを2.5.23にアップグレードします。以下のコマンドを実行することで、Milvusインスタンスを2.5.23にアップグレードすることができます。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.23 -w &#x27;milvusdb/milvus:v2.5.23&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
-<li>このスクリプトはデプロイのアップグレード順序をハードコードしており、変更することはできません。</li>
+<li>スクリプトはデプロイのアップグレード順序をハードコードしており、変更することはできません。</li>
 <li>このスクリプトでは、<code translate="no">kubectl patch</code> を使用してデプロイメントを更新し、<code translate="no">kubectl rollout status</code> を使用してステータスを監視します。</li>
 <li>スクリプトは<code translate="no">kubectl patch</code> を使って、デプロイメントの<code translate="no">app.kubernetes.io/version</code> ラベルを、コマンドの<code translate="no">-t</code> フラグの後に指定したラベルに更新します。</li>
 </ol>

@@ -1,11 +1,11 @@
 ---
 id: timestamptz-field.md
-title: TIMESTAMPTZフィールドCompatible with Milvus 2.6.4+
+title: TIMESTAMPTZフィールドCompatible with Milvus 2.6.6+
 summary: >-
   電子商取引システム、コラボレーションツール、分散ロギングなど、地域を越えて時間を追跡するアプリケーションでは、タイムゾーンを伴うタイムスタンプの正確な取り扱いが必要です。MilvusのTIMESTAMPTZデータ型はタイムスタンプとタイムゾーンを関連付けて保存することにより、この機能を提供します。
-beta: Milvus 2.6.4+
+beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">TIMESTAMPTZフィールド<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">TIMESTAMPTZフィールド<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,10 +36,10 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TIMESTAMPTZ</code> フィールドはMilvusのスキーマ定義データ型(<code translate="no">DataType.TIMESTAMPTZ</code>)で、タイムスタンプをタイムゾーンと共に格納します：</p>
+    </button></h2><p><code translate="no">TIMESTAMPTZ</code> フィールドはMilvusのスキーマ定義データ型(<code translate="no">DataType.TIMESTAMPTZ</code>)であり、タイムゾーンを考慮した入力を処理し、内部的に全てのタイムポイントをUTC絶対時間として格納します：</p>
 <ul>
-<li><p><strong>入力フォーマット</strong>入力フォーマット:<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>文字列にタイムゾーンのオフセット (例えば、<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> は UTC+08:00 の 11:59:59 PM を表す)。</p></li>
-<li><p><strong>内部ストレージ</strong>：すべての<code translate="no">TIMESTAMPTZ</code> 値は正規化され、<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">協定世界時</a>（UTC）で保存されます。</p></li>
+<li><p><strong>入力フォーマット</strong>：入力フォーマット:<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>文字列にタイムゾーンのオフセット (例えば、<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> は UTC+08:00 の 11:59:59 PM を表す)。</p></li>
+<li><p><strong>内部ストレージ</strong>：<code translate="no">TIMESTAMPTZ</code> の値はすべて正規化され、<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">協定世界時</a>（UTC）に保存されます。</p></li>
 <li><p><strong>比較とフィルタリング</strong>：すべてのフィルタリングと順序付け操作はUTCで実行され、異なるタイムゾーン間で一貫性のある予測可能な結果を保証します。</p></li>
 </ul>
 <div class="alert note">
@@ -294,81 +294,7 @@ results = client.query(
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → 2時間を引く</p></li>
 </ul>
 </div>
-<h4 id="Extract-timestamp-elements" class="common-anchor-header">タイムスタンプ要素の抽出</h4><p>クエリや検索で<code translate="no">time_fields</code> パラメータを使用すると、<code translate="no">TIMESTAMPTZ</code> フィールドから特定の要素（年、月、日など）を抽出できます。</p>
-<p>以下の例では、クエリ結果の各<code translate="no">TIMESTAMPTZ</code> フィールドから、<code translate="no">year</code> 、<code translate="no">month</code> 、<code translate="no">day</code> の要素を抽出しています：</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">results = client.query(
-    collection_name,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-<span class="highlighted-wrapper-line">    time_fields=<span class="hljs-string">&quot;year, month, day&quot;</span>,</span>
-    limit=<span class="hljs-number">2</span>,
-)
-
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
-
-<span class="hljs-comment"># Expected output:</span>
-<span class="hljs-comment"># Query result:  data: [&quot;{&#x27;id&#x27;: 1, &#x27;tsz&#x27;: [2024, 12, 31]}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;tsz&#x27;: [2025, 1, 1]}&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>抽出可能な要素</strong></p>
-<table>
-   <tr>
-     <th><p>要素</p></th>
-     <th><p>説明</p></th>
-     <th><p>出力例</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">year</code></p></td>
-     <td><p>年構成要素</p></td>
-     <td><p><code translate="no">2025</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">month</code></p></td>
-     <td><p>月番号</p></td>
-     <td><p><code translate="no">1</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">day</code></p></td>
-     <td><p>月の日</p></td>
-     <td><p><code translate="no">3</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">hour</code></p></td>
-     <td><p>時 (0-23)</p></td>
-     <td><p><code translate="no">14</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">minute</code></p></td>
-     <td><p>分</p></td>
-     <td><p><code translate="no">30</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">second</code></p></td>
-     <td><p>秒</p></td>
-     <td><p><code translate="no">5</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">microsecond</code></p></td>
-     <td><p>マイクロ秒</p></td>
-     <td><p><code translate="no">123456</code></p></td>
-   </tr>
-</table>
-<div class="alert note">
-<ul>
-<li><p>パラメータ<code translate="no">time_fields</code> は、カンマ区切りの文字列（たとえば、<code translate="no">&quot;year, month, day&quot;</code> ）。</p></li>
-<li><p>結果は、抽出されたコンポーネントの配列として返されます（例：<code translate="no">[2024, 12, 31]</code> ）。</p></li>
-</ul>
-</div>
-<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">タイムスタンプフィルタリングによる検索</h4><p><code translate="no">TIMESTAMPTZ</code> フィルタリングとベクトル類似度検索を組み合わせて、時間と類似度の両方で結果を絞り込むことができます。</p>
+<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">タイムスタンプ・フィルタリングによる検索</h4><p><code translate="no">TIMESTAMPTZ</code> フィルタリングとベクトル類似度検索を組み合わせて、時間と類似度の両方で結果を絞り込むことができます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define a time-based filter expression</span>
@@ -396,7 +322,7 @@ res = client.search(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>コレクションに2つ以上のベクトルフィールドがある場合、タイムスタンプフィルタリングとハイブリッド検索を実行できます。詳細については、<a href="/docs/ja/multi-vector-search.md">Multi-Vector Hybrid Searchを</a>参照してください。</p>
+<p>コレクションに2つ以上のベクトル・フィールドがある場合、タイムスタンプ・フィルタリングとのハイブリッド検索操作を実行できる。詳細については、<a href="/docs/ja/multi-vector-search.md">Multi-Vector Hybrid Searchを</a>参照してください。</p>
 </div>
 <h2 id="Advanced-usage" class="common-anchor-header">高度な使用法<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -429,7 +355,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">TIMESTAMPTZ</code> フィールドのタイムゾーンは、<strong>データベース</strong>、<strong>コレクション</strong>、<strong>クエリ/検索</strong>レベルで管理できます。</p>
+    </button></h3><p><strong>データベース</strong>、<strong>コレクション</strong>、<strong>クエリ/検索</strong>レベルで、<code translate="no">TIMESTAMPTZ</code> フィールドのタイムゾーンを管理できます。</p>
 <table>
    <tr>
      <th><p>レベル</p></th>
@@ -439,13 +365,13 @@ res = client.search(
    </tr>
    <tr>
      <td><p>データベース</p></td>
-     <td><p><code translate="no">database.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>データベース内のすべてのコレクションのデフォルト</p></td>
      <td><p>最も低い</p></td>
    </tr>
    <tr>
      <td><p>コレクション</p></td>
-     <td><p><code translate="no">collection.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>そのコレクションのデータベースのデフォルトのタイムゾーン設定を上書きします。</p></td>
      <td><p>ミディアム</p></td>
    </tr>
@@ -480,4 +406,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>デフォルトでは、インデックスのない<code translate="no">TIMESTAMPTZ</code> フィールドに対するクエリは、すべての行のフルスキャンを実行します。タイムスタンプ・クエリを高速化するには、<code translate="no">TIMESTAMPTZ</code> フィールドに<code translate="no">STL_SORT</code> インデックスを作成します。</p>
-<p>詳細は<a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORTを</a>参照。</p>
+<p>詳細は<a href="/docs/ja/stl-sort.md">STL_SORTを</a>参照。</p>

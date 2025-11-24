@@ -154,11 +154,11 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour activer cette fonctionnalité, définissez <code translate="no">common.enabledJSONKeyStats</code> comme <code translate="no">true</code> dans votre fichier de configuration <code translate="no">milvus.yaml</code>. Les nouvelles données déclencheront automatiquement le processus de déchiquetage.</p>
+    </button></h2><p>Pour activer cette fonctionnalité, définissez <code translate="no">common.enabledJSONShredding</code> comme <code translate="no">true</code> dans votre fichier de configuration <code translate="no">milvus.yaml</code>. Les nouvelles données déclencheront automatiquement le processus de déchiquetage.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">enabledJSONKeyStats:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
+  <span class="hljs-attr">enabledJSONShredding:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Une fois activé, Milvus commencera à analyser et à restructurer vos données JSON dès leur ingestion, sans autre intervention manuelle.</p>
@@ -186,34 +186,34 @@ beta: Milvus 2.6.2+
      <th><p>Conseils de réglage</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">common.enabledJSONKeyStats</code></p></td>
+     <td><p><code translate="no">common.enabledJSONShredding</code></p></td>
      <td><p>Contrôle si les processus de construction et de chargement du déchiquetage JSON sont activés.</p></td>
      <td><p>faux</p></td>
      <td><p>Doit être défini sur <strong>true</strong> pour activer la fonctionnalité.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">common.usingJsonStatsForQuery</code></p></td>
+     <td><p><code translate="no">common.usingjsonShreddingForQuery</code></p></td>
      <td><p>Contrôle si Milvus utilise des données déchiquetées pour l'accélération.</p></td>
      <td><p>true</p></td>
      <td><p>Défini sur <strong>false</strong> comme mesure de récupération en cas d'échec des requêtes, pour revenir au chemin de requête d'origine.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
+     <td><p><code translate="no">queryNode.mmap.jsonShredding</code></p></td>
      <td><p>Détermine si Milvus utilise mmap lors du chargement des données déchiquetées.</p><p>Pour plus de détails, voir <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p></td>
      <td><p>true (vrai)</p></td>
      <td><p>Ce paramètre est généralement optimisé pour les performances. Ne l'ajustez que si vous avez des besoins ou des contraintes spécifiques en matière de gestion de la mémoire sur votre système.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingMaxColumns</code></p></td>
      <td><p>Nombre maximal de clés JSON qui seront stockées dans les colonnes déchiquetées. </p><p>Si le nombre de clés apparaissant fréquemment dépasse cette limite, Milvus donnera la priorité aux clés les plus fréquentes pour le déchiquetage, et les clés restantes seront stockées dans la colonne partagée.</p></td>
      <td><p>1024</p></td>
      <td><p>Cette limite est suffisante pour la plupart des scénarios. Pour les JSON comportant des milliers de clés fréquentes, il peut être nécessaire d'augmenter cette limite, mais surveillez l'utilisation de l'espace de stockage.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsShreddingRatioThreshold</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingRatioThreshold</code></p></td>
      <td><p>Le taux d'occurrence minimum qu'une clé JSON doit avoir pour être considérée comme déchiquetée dans une colonne déchiquetée.</p><p>Une clé est considérée comme apparaissant fréquemment si son ratio est supérieur à ce seuil.</p></td>
      <td><p>0.3</p></td>
-     <td><p><strong>Augmenter</strong> (par exemple, à 0,5) si le nombre de clés répondant aux critères de destruction dépasse la limite de <code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code>. Le seuil est alors plus strict, ce qui réduit le nombre de clés pouvant être déchiquetées.</p><p><strong>Diminuez le</strong> seuil (par exemple, à 0,1) si vous souhaitez détruire davantage de clés qui apparaissent moins fréquemment que le seuil par défaut de 30 %.</p></td>
+     <td><p><strong>Augmenter</strong> (par exemple, à 0,5) si le nombre de clés répondant aux critères de destruction dépasse la limite de <code translate="no">dataCoord.jsonShreddingMaxColumns</code>. Le seuil est alors plus strict, ce qui réduit le nombre de clés pouvant être déchiquetées.</p><p><strong>Diminuez le</strong> seuil (par exemple, à 0,1) si vous souhaitez détruire davantage de clés qui apparaissent moins fréquemment que le seuil par défaut de 30 %.</p></td>
    </tr>
 </table>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Critères de performance<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
@@ -376,11 +376,12 @@ beta: Milvus 2.6.2+
    </span> <span class="img-wrapper"> <span>Sortie de Birdwatcher</span> </span></p></li>
 <li><p>Ensuite, vérifiez que les données ont été chargées en exécutant <code translate="no">show loaded-json-stats</code> sur le nœud de requête. La sortie affichera des détails sur les données déchiquetées chargées pour chaque nœud de requête.</p></li>
 </ol></li>
-<li><p><strong>Comment choisir entre le déchiquetage JSON et l'indexation JSON ?</strong></p>
+<li><p><strong>Que faire en cas d'erreur ?</strong></p>
+<p>Si le processus de construction ou de chargement échoue, vous pouvez rapidement désactiver la fonctionnalité en configurant <code translate="no">common.enabledJSONShredding=false</code>. Pour effacer toutes les tâches restantes, utilisez la commande <code translate="no">remove stats-task &lt;task_id&gt;</code> dans <a href="/docs/fr/birdwatcher_usage_guides.md">Birdwatcher</a>. Si une requête échoue, paramétrez <code translate="no">common.usingjsonShreddingForQuery=false</code> pour revenir au chemin de requête original, en contournant les données déchiquetées.</p></li>
+<li><p><strong>Comment choisir entre le déchiquetage et l'indexation JSON ?</strong></p>
 <ul>
 <li><p>Le<strong>déchiquetage JSON</strong> est idéal pour les clés qui apparaissent fréquemment dans vos documents, en particulier pour les structures JSON complexes. Il combine les avantages du stockage en colonnes et de l'indexation inversée, ce qui le rend bien adapté aux scénarios de lecture intensive dans lesquels vous interrogez de nombreuses clés différentes. Cependant, il n'est pas recommandé pour les très petits documents JSON, car le gain de performance est minime. Plus la proportion de la valeur de la clé par rapport à la taille totale du document JSON est faible, plus le déchiquetage permet d'optimiser les performances.</p></li>
 <li><p>L'<strong>indexation JSON</strong> est plus adaptée à l'optimisation ciblée de requêtes spécifiques basées sur des clés et présente des frais généraux de stockage moins élevés. Il convient aux structures JSON les plus simples. Notez que le déchiquetage JSON ne couvre pas les requêtes sur les clés à l'intérieur des tableaux, vous avez donc besoin d'un index JSON pour accélérer ces requêtes.</p></li>
-</ul></li>
-<li><p><strong>Que faire en cas d'erreur ?</strong></p>
-<p>Si le processus de construction ou de chargement échoue, vous pouvez rapidement désactiver la fonctionnalité en définissant <code translate="no">common.enabledJSONKeyStats=false</code>. Pour effacer toutes les tâches restantes, utilisez la commande <code translate="no">remove stats-task &lt;task_id&gt;</code> dans <a href="/docs/fr/birdwatcher_usage_guides.md">Birdwatcher</a>. Si une requête échoue, paramétrez <code translate="no">common.usingJsonStatsForQuery=false</code> pour revenir au chemin de requête original, en contournant les données déchiquetées.</p></li>
+</ul>
+<p>Pour plus de détails, reportez-vous à la section <a href="/docs/fr/json-field-overview.md#Next-Accelerate-JSON-queries">Vue d'ensemble des champs JSON</a>.</p></li>
 </ul>

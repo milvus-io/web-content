@@ -63,7 +63,7 @@ title: 在 Docker 中執行 Milvus (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.4 的新功能：</strong></p>
+<p><strong>v2.6.6 的新增功能：</strong></p>
 <ul>
 <li><strong>串流節點</strong>：增強資料處理能力</li>
 <li><strong>Woodpecker MQ</strong>：改進的訊息佇列，降低維護開銷，詳情請參閱<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a></li>

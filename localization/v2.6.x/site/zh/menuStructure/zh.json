@@ -468,6 +468,12 @@
             "children": []
           },
           {
+            "label": "TIMESTAMPTZ 字段",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "Dynamic Field",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -865,6 +871,12 @@
                 "id": "rtree.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1173,7 +1185,7 @@
                 ]
               },
               {
-                "label": "模型排名器",
+                "label": "Model Ranker",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -1874,38 +1886,6 @@
         ]
       },
       {
-        "label": "Milvus CDC",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "概述",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "部署 CDC 服务器",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "管理 CDC 任务",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "监测",
-            "id": "cdc-monitoring.md",
-            "order": 3,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "Milvus CLI",
         "id": "cli",
         "order": 4,
@@ -2172,7 +2152,7 @@
                 "children": []
               },
               {
-                "label": "异步搜索",
+                "label": "Asynchronous Search",
                 "id": "langchain_milvus_async.md",
                 "order": 5,
                 "children": []
@@ -2254,7 +2234,7 @@
             ]
           },
           {
-            "label": "Kotaemon",
+            "label": "小太右卫门",
             "id": "kotaemon_with_milvus.md",
             "order": 5,
             "children": []

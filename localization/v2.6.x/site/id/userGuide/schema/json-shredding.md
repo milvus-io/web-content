@@ -119,7 +119,7 @@ beta: Milvus 2.6.2+
 <li><p><strong>Kolom-kolom</strong> yang<strong>diparut</strong>: Untuk <strong>kunci</strong> <strong>yang diketik</strong> dan <strong>dinamis</strong>, data ditulis ke kolom khusus. Penyimpanan kolom ini memungkinkan pemindaian yang cepat dan langsung selama kueri, karena Milvus hanya dapat membaca data yang diperlukan untuk kunci yang diberikan tanpa memproses seluruh dokumen.</p></li>
 <li><p><strong>Kolom bersama</strong>: Semua <strong>kunci</strong> bersama disimpan bersama dalam satu kolom JSON biner yang ringkas. <strong>Indeks terbalik</strong> kunci bersama dibangun di atas kolom ini. Indeks ini sangat penting untuk mempercepat kueri pada kunci-kunci berfrekuensi rendah dengan memungkinkan Milvus memangkas data dengan cepat, yang secara efektif mempersempit ruang pencarian menjadi hanya baris-baris yang berisi kunci yang ditentukan.</p></li>
 </ul>
-<h3 id="Phase-3-Query-execution" class="common-anchor-header">Tahap 3: Eksekusi kueri<button data-href="#Phase-3-Query-execution" class="anchor-icon" translate="no">
+<h3 id="Phase-3-Query-execution" class="common-anchor-header">Fase 3: Eksekusi kueri<button data-href="#Phase-3-Query-execution" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -154,11 +154,11 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk mengaktifkan fitur ini, setel <code translate="no">common.enabledJSONKeyStats</code> ke <code translate="no">true</code> di file konfigurasi <code translate="no">milvus.yaml</code> Anda. Data baru akan secara otomatis memicu proses penghancuran.</p>
+    </button></h2><p>Untuk mengaktifkan fitur ini, setel <code translate="no">common.enabledJSONShredding</code> ke <code translate="no">true</code> di file konfigurasi <code translate="no">milvus.yaml</code> Anda. Data baru akan secara otomatis memicu proses penghancuran.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">enabledJSONKeyStats:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
+  <span class="hljs-attr">enabledJSONShredding:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Setelah diaktifkan, Milvus akan mulai menganalisis dan merestrukturisasi data JSON Anda saat dikonsumsi tanpa intervensi manual lebih lanjut.</p>
@@ -186,34 +186,34 @@ beta: Milvus 2.6.2+
      <th><p>Saran Penyetelan</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">common.enabledJSONKeyStats</code></p></td>
+     <td><p><code translate="no">common.enabledJSONShredding</code></p></td>
      <td><p>Mengontrol apakah proses pembuatan dan pemuatan penghancuran JSON diaktifkan.</p></td>
      <td><p>false</p></td>
      <td><p>Harus disetel ke <strong>true</strong> untuk mengaktifkan fitur ini.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">common.usingJsonStatsForQuery</code></p></td>
+     <td><p><code translate="no">common.usingjsonShreddingForQuery</code></p></td>
      <td><p>Mengontrol apakah Milvus menggunakan data yang diparut untuk akselerasi.</p></td>
      <td><p>true</p></td>
      <td><p>Diatur ke <strong>false</strong> sebagai langkah pemulihan jika kueri gagal, kembali ke jalur kueri asli.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
+     <td><p><code translate="no">queryNode.mmap.jsonShredding</code></p></td>
      <td><p>Menentukan apakah Milvus menggunakan mmap saat memuat data yang diparut.</p><p>Untuk detailnya, lihat <a href="/docs/id/mmap.md">Gunakan mmap</a>.</p></td>
      <td><p>true</p></td>
      <td><p>Pengaturan ini umumnya dioptimalkan untuk kinerja. Hanya sesuaikan jika Anda memiliki kebutuhan atau batasan manajemen memori tertentu pada sistem Anda.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingMaxColumns</code></p></td>
      <td><p>Jumlah maksimum kunci JSON yang akan disimpan dalam kolom cacahan. </p><p>Jika jumlah kunci yang sering muncul melebihi batas ini, Milvus akan memprioritaskan kunci yang paling sering muncul untuk dihancurkan, dan kunci yang tersisa akan disimpan di kolom bersama.</p></td>
      <td><p>1024</p></td>
      <td><p>Ini cukup untuk sebagian besar skenario. Untuk JSON dengan ribuan kunci yang sering muncul, Anda mungkin perlu meningkatkannya, tetapi tetap pantau penggunaan penyimpanan.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsShreddingRatioThreshold</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingRatioThreshold</code></p></td>
      <td><p>Rasio kemunculan minimum yang harus dimiliki oleh kunci JSON harus dipertimbangkan untuk dicacah menjadi kolom cacahan.</p><p>Sebuah kunci dianggap sering muncul jika rasionya di atas ambang batas ini.</p></td>
      <td><p>0.3</p></td>
-     <td><p><strong>Naikkan</strong> (misalnya, menjadi 0,5) jika jumlah kunci yang memenuhi kriteria penghancuran melebihi batas <code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code>. Hal ini membuat ambang batas menjadi lebih ketat, mengurangi jumlah kunci yang memenuhi syarat untuk penghancuran.</p><p><strong>Kurangi</strong> (misalnya, menjadi 0,1) jika Anda ingin menghancurkan lebih banyak kunci yang lebih jarang muncul daripada ambang batas default 30%.</p></td>
+     <td><p><strong>Naikkan</strong> (misalnya, menjadi 0,5) jika jumlah kunci yang memenuhi kriteria penghancuran melebihi batas <code translate="no">dataCoord.jsonShreddingMaxColumns</code>. Hal ini membuat ambang batas menjadi lebih ketat, mengurangi jumlah kunci yang memenuhi syarat untuk penghancuran.</p><p><strong>Kurangi</strong> (misalnya, menjadi 0,1) jika Anda ingin menghancurkan lebih banyak kunci yang lebih jarang muncul daripada ambang batas default 30%.</p></td>
    </tr>
 </table>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Tolok ukur kinerja<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
@@ -376,11 +376,12 @@ beta: Milvus 2.6.2+
    </span> <span class="img-wrapper"> <span>Keluaran Birdwatcher</span> </span></p></li>
 <li><p>Selanjutnya, verifikasi bahwa data telah dimuat dengan menjalankan <code translate="no">show loaded-json-stats</code> pada node kueri. Keluaran akan menampilkan rincian tentang data yang telah dimuat untuk setiap node kueri.</p></li>
 </ol></li>
+<li><p><strong>Bagaimana jika saya menemukan kesalahan?</strong></p>
+<p>Jika proses build atau pemuatan gagal, Anda dapat dengan cepat menonaktifkan fitur tersebut dengan mengatur <code translate="no">common.enabledJSONShredding=false</code>. Untuk menghapus tugas yang tersisa, gunakan perintah <code translate="no">remove stats-task &lt;task_id&gt;</code> di <a href="/docs/id/birdwatcher_usage_guides.md">Birdwatcher</a>. Jika kueri gagal, atur <code translate="no">common.usingjsonShreddingForQuery=false</code> untuk kembali ke jalur kueri asli, melewati data yang diparut.</p></li>
 <li><p><strong>Bagaimana cara memilih antara penghancuran JSON dan pengindeksan JSON?</strong></p>
 <ul>
 <li><p><strong>Penghancuran JSON</strong> ideal untuk kunci yang sering muncul dalam dokumen Anda, terutama untuk struktur JSON yang kompleks. Proses ini menggabungkan manfaat penyimpanan kolumnar dan pengindeksan terbalik, sehingga sangat cocok untuk skenario pembacaan yang berat di mana Anda melakukan kueri terhadap banyak kunci yang berbeda. Namun, ini tidak disarankan untuk dokumen JSON yang sangat kecil karena peningkatan kinerjanya minimal. Semakin kecil proporsi nilai kunci terhadap ukuran total dokumen JSON, semakin baik pengoptimalan kinerja dari penghancuran.</p></li>
 <li><p><strong>Pengindeksan JSON</strong> lebih baik untuk pengoptimalan yang ditargetkan untuk kueri berbasis kunci tertentu dan memiliki overhead penyimpanan yang lebih rendah. Ini cocok untuk struktur JSON yang lebih sederhana. Perhatikan bahwa penghancuran JSON tidak mencakup kueri pada kunci di dalam larik, jadi Anda memerlukan indeks JSON untuk mempercepatnya.</p></li>
-</ul></li>
-<li><p><strong>Bagaimana jika saya mengalami kesalahan?</strong></p>
-<p>Jika proses pembuatan atau pemuatan gagal, Anda dapat dengan cepat menonaktifkan fitur ini dengan menyetel <code translate="no">common.enabledJSONKeyStats=false</code>. Untuk menghapus tugas yang tersisa, gunakan perintah <code translate="no">remove stats-task &lt;task_id&gt;</code> di <a href="/docs/id/birdwatcher_usage_guides.md">Birdwatcher</a>. Jika kueri gagal, setel <code translate="no">common.usingJsonStatsForQuery=false</code> untuk kembali ke jalur kueri asli, melewati data yang diparut.</p></li>
+</ul>
+<p>Untuk detailnya, lihat <a href="/docs/id/json-field-overview.md#Next-Accelerate-JSON-queries">Ikhtisar Bidang JSON</a>.</p></li>
 </ul>

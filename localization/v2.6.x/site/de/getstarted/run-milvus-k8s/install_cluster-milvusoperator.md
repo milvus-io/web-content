@@ -175,8 +175,8 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Sobald der Milvus Operator-Pod läuft, können Sie einen Milvus-Cluster wie folgt einrichten.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v2.6.4) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
-<p><strong>Highlights der Architektur in diesem Einsatz:</strong></p>
+<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v2.6.6) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
+<p><strong>Architektur-Highlights in diesem Einsatz:</strong></p>
 <ul>
 <li><strong>Nachrichten-Warteschlange</strong>: <a href="/docs/de/use-woodpecker.md">Verwendung von Woodpecker</a> (reduziert die Wartung der Infrastruktur)</li>
 <li><strong>Streaming-Knoten</strong>: Aktiviert für erweiterte Datenverarbeitung</li>
@@ -185,7 +185,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 <p>Um diese Einstellungen anzupassen, empfehlen wir Ihnen, das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Konfigurationen basierend auf Ihrer tatsächlichen Datengröße anzupassen und dann die entsprechende YAML-Datei herunterzuladen. Weitere Informationen zu den Konfigurationsparametern finden Sie in der <a href="https://milvus.io/docs/system_configuration.md">Milvus System Configurations Checklist</a>.</p>
 <div class="alert note">
 <ul>
-<li>Der Versionsname sollte nur Buchstaben, Zahlen und Bindestriche enthalten. Punkte sind im Versionsnamen nicht erlaubt.</li>
+<li>Der Release-Name sollte nur Buchstaben, Zahlen und Bindestriche enthalten. Punkte sind im Versionsnamen nicht erlaubt.</li>
 <li>Sie können eine Milvus-Instanz auch im Standalone-Modus bereitstellen, bei dem alle Komponenten in einem einzigen Pod enthalten sind. Dazu ändern Sie die URL der Konfigurationsdatei im obigen Befehl in <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>

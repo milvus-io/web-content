@@ -92,7 +92,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per la ricerca ibrida multivettoriale, è necessario definire più campi vettoriali all'interno di uno schema di raccolta. Per i dettagli sui limiti del numero di campi vettoriali consentiti in una collezione, vedere <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Limiti di Zilliz Cloud</a>.  Tuttavia, se necessario, è possibile regolare l'opzione <a href="/docs/it/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> per includere fino a 10 campi vettoriali in una raccolta, se necessario.</p>
+    </button></h3><p>Per la ricerca ibrida multivettoriale, è necessario definire più campi vettoriali all'interno di uno schema di raccolta. Per i dettagli sui limiti del numero di campi vettoriali consentiti in una raccolta, vedere <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Limiti di Zilliz Cloud</a>.  Tuttavia, se necessario, è possibile regolare l'opzione <a href="/docs/it/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> per includere fino a 10 campi vettoriali in una raccolta, se necessario.</p>
 <p>Questo esempio incorpora i seguenti campi nello schema:</p>
 <ul>
 <li><p><code translate="no">id</code>: Serve come chiave primaria per memorizzare gli ID del testo. Questo campo è di tipo dati <code translate="no">INT64</code>.</p></li>
@@ -351,9 +351,9 @@ schema.WithField(entity.NewField().
       </svg>
     </button></h3><p>Dopo aver definito lo schema della collezione, il passo successivo è configurare gli indici vettoriali e specificare le metriche di similarità. Nell'esempio dato:</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>: viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con metrica <code translate="no">IP</code> per il campo vettoriale denso di testo.</p></li>
+<li><p><code translate="no">text_dense_index</code>: per il campo vettoriale denso di testo viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con metrica <code translate="no">IP</code>.</p></li>
 <li><p><code translate="no">text_sparse_index</code>: un indice di tipo<code translate="no">SPARSE_INVERTED_INDEX</code>con metrica <code translate="no">BM25</code> viene utilizzato per il campo vettoriale di testo rado.</p></li>
-<li><p><code translate="no">image_dense_index</code>: per il campo vettoriale denso dell'immagine viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con metrica <code translate="no">IP</code>.</p></li>
+<li><p><code translate="no">image_dense_index</code>: per il campo vettoriale denso di immagini viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con metrica <code translate="no">IP</code>.</p></li>
 </ul>
 <p>È possibile scegliere altri tipi di indice, a seconda delle esigenze e dei tipi di dati. Per ulteriori informazioni sui tipi di indice supportati, consultare la documentazione sui <a href="/docs/it/index-vector-fields.md">tipi di indice disponibili</a>.</p>
 <div class="multipleCode">
@@ -545,11 +545,11 @@ curl --request POST \
 <ul>
 <li><p><code translate="no">id</code>: un numero intero che rappresenta l'ID del prodotto</p></li>
 <li><p><code translate="no">text</code>: una stringa contenente la descrizione del prodotto</p></li>
-<li><p><code translate="no">text_dense</code>: un elenco di 768 valori in virgola mobile che rappresentano l'inclusione densa della descrizione testuale</p></li>
+<li><p><code translate="no">text_dense</code>: un elenco di 768 valori in virgola mobile che rappresentano l'incorporazione densa della descrizione testuale</p></li>
 <li><p><code translate="no">image_dense</code>: un elenco di 512 valori in virgola mobile che rappresentano l'incorporazione densa dell'immagine del prodotto.</p></li>
 </ul>
 <p>Si possono usare gli stessi modelli o modelli diversi per generare le incorporazioni dense per ogni campo. In questo esempio, le due incorporazioni dense hanno dimensioni diverse, il che suggerisce che sono state generate da modelli diversi. Quando si definisce ogni ricerca in un secondo momento, assicurarsi di utilizzare il modello corrispondente per generare l'incorporamento appropriato della query.</p>
-<p>Poiché questo esempio utilizza la funzione BM25 integrata per generare embedding sparsi dal campo di testo, non è necessario fornire manualmente vettori sparsi. Tuttavia, se si sceglie di non utilizzare BM25, è necessario precompilare e fornire autonomamente gli embedding sparsi.</p>
+<p>Poiché questo esempio utilizza la funzione incorporata BM25 per generare embedding sparsi dal campo di testo, non è necessario fornire manualmente vettori sparsi. Tuttavia, se si sceglie di non utilizzare BM25, è necessario precompilare e fornire autonomamente gli embedding sparsi.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
@@ -1006,3 +1006,44 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>Con il parametro <code translate="no">limit=2</code> specificato per la ricerca ibrida, Milvus classifica i sei risultati ottenuti dalle tre ricerche. Alla fine verranno restituiti solo i primi due risultati più simili.</p>
+<h2 id="Advanced-usage" class="common-anchor-header">Utilizzo avanzato<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Impostazione temporanea di un fuso orario per una ricerca ibrida<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se la vostra collezione ha un campo <code translate="no">TIMESTAMPTZ</code>, potete temporaneamente sovrascrivere il fuso orario predefinito del database o della collezione per una singola operazione impostando il parametro <code translate="no">timezone</code> nella chiamata di ricerca ibrida. Questo parametro controlla il modo in cui i valori di <code translate="no">TIMESTAMPTZ</code> vengono visualizzati e confrontati durante l'operazione.</p>
+<p>Il valore di <code translate="no">timezone</code> deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Per informazioni dettagliate sull'utilizzo del campo <code translate="no">TIMESTAMPTZ</code>, consultare la sezione <a href="/docs/it/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
+<p>L'esempio seguente mostra come impostare temporaneamente un fuso orario per un'operazione di ricerca ibrida:</p>
+<pre><code translate="no" class="language-python">res = client.hybrid_search(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    reqs=reqs,
+    ranker=ranker,
+    limit=<span class="hljs-number">2</span>,
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>

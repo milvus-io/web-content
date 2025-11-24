@@ -90,7 +90,7 @@ title: 管理資源群組
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本頁面的所有程式碼範例都在 PyMilvus 2.5.16 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
+<p>本頁面的所有程式碼範例都在 PyMilvus 2.5.17 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
 </div>
 <ol>
 <li><p>建立資源群組</p>
@@ -268,7 +268,7 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>使用上面的範例程式碼，我們建立一個名為<strong>__pending_nodes</strong>的資源群組，以存放額外的 QueryNodes。我們也建立兩個使用者特定的資源群組，分別命名為<strong>rg1</strong>和<strong>rg2</strong>。此外，我們確保其他資源群組優先從<strong>__pending_nodes</strong> 恢復遺失或多餘的 QueryNodes。</p></li>
+<p>使用上面的範例程式碼，我們建立一個名為<strong>__pending_nodes</strong>的資源群組，以存放額外的 QueryNodes。我們也建立兩個使用者特定的資源群組，分別命名為<strong>rg1</strong>和<strong>rg2</strong>。此外，我們確保另一個資源群組優先從<strong>__pending_nodes</strong> 恢復遺失或多餘的 QueryNodes。</p></li>
 <li><p>叢集縮放</p>
 <p>假設我們有以下的縮放功能：</p>
 <pre><code translate="no" class="language-python">

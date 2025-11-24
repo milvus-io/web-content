@@ -468,6 +468,12 @@
             "children": []
           },
           {
+            "label": "TIMESTAMPTZ 欄位",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "動態領域",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -864,6 +870,12 @@
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1869,38 +1881,6 @@
             "label": "使用指南",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Milvus CDC",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "概述",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "部署 CDC 伺服器",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "管理 CDC 任務",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "監控",
-            "id": "cdc-monitoring.md",
-            "order": 3,
             "children": []
           }
         ]

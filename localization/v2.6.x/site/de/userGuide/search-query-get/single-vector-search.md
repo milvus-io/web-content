@@ -44,10 +44,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die ANN- und die k-Nächste-Nachbarn-Suche (kNN) sind die üblichen Methoden bei Vektorähnlichkeitssuchen. Bei der kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem in der Suchanfrage enthaltenen Abfragevektor vergleichen, bevor Sie die ähnlichsten herausfinden, was zeit- und ressourcenaufwändig ist.</p>
+    </button></h2><p>Die ANN- und die k-Nächste-Nachbarn-Suche (kNN) sind die üblichen Methoden bei Vektorähnlichkeitssuchen. Bei der kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem in der Suchanfrage enthaltenen Abfragevektor vergleichen, bevor Sie die ähnlichsten Vektoren ermitteln können, was zeit- und ressourcenaufwändig ist.</p>
 <p>Im Gegensatz zur kNN-Suche wird bei einem ANN-Suchalgorithmus eine <strong>Indexdatei</strong> angefordert, die die sortierte Reihenfolge der Vektoreinbettungen aufzeichnet. Wenn eine Suchanfrage eingeht, können Sie die Indexdatei als Referenz verwenden, um schnell eine Untergruppe zu finden, die wahrscheinlich die Vektoreinbettungen enthält, die dem Abfragevektor am ähnlichsten sind. Dann können Sie den angegebenen <strong>metrischen Typ</strong> verwenden, um die Ähnlichkeit zwischen dem Abfragevektor und den Vektoren in der Untergruppe zu messen, die Gruppenmitglieder auf der Grundlage der Ähnlichkeit mit dem Abfragevektor zu sortieren und die <strong>Top-K-Gruppenmitglieder</strong> zu ermitteln.</p>
 <p>ANN-Suchen hängen von vorgefertigten Indizes ab, und der Suchdurchsatz, die Speichernutzung und die Korrektheit der Suche können je nach den gewählten Indextypen variieren. Sie müssen ein Gleichgewicht zwischen Suchleistung und Korrektheit finden.</p>
-<p>Um die Lernkurve zu reduzieren, bietet Milvus <strong>AUTOINDEX</strong>. Mit <strong>AUTOINDEX</strong> kann Milvus die Datenverteilung innerhalb Ihrer Sammlung analysieren, während der Index aufgebaut wird, und stellt auf der Grundlage der Analyse die optimalsten Indexparameter ein, um ein Gleichgewicht zwischen Suchleistung und Korrektheit herzustellen.</p>
+<p>Um die Lernkurve zu reduzieren, bietet Milvus <strong>AUTOINDEX</strong>. Mit <strong>AUTOINDEX</strong> kann Milvus die Datenverteilung innerhalb Ihrer Sammlung analysieren, während der Index aufgebaut wird, und stellt die optimalsten Indexparameter auf der Grundlage der Analyse ein, um ein Gleichgewicht zwischen Suchleistung und Korrektheit herzustellen.</p>
 <p>In diesem Abschnitt finden Sie detaillierte Informationen zu den folgenden Themen:</p>
 <ul>
 <li><p><a href="/docs/de/single-vector-search.md#Single-Vector-Search">Ein-Vektor-Suche</a></p></li>
@@ -275,7 +275,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>Ein größerer Wert weist auf eine höhere Ähnlichkeit hin.</p></td>
+     <td><p>Ein größerer Wert deutet auf eine höhere Ähnlichkeit hin.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
@@ -954,6 +954,43 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Vorübergehend eine Zeitzone für eine Suche festlegen<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Wenn Ihre Sammlung ein Feld <code translate="no">TIMESTAMPTZ</code> hat, können Sie die Standardzeitzone der Datenbank oder Sammlung für einen einzelnen Vorgang vorübergehend außer Kraft setzen, indem Sie den Parameter <code translate="no">timezone</code> im Suchaufruf setzen. Dies steuert, wie <code translate="no">TIMESTAMPTZ</code> Werte während des Vorgangs angezeigt und verglichen werden.</p>
+<p>Der Wert von <code translate="no">timezone</code> muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p>
+<p>Das folgende Beispiel zeigt, wie eine Zeitzone für einen Suchvorgang vorübergehend festgelegt wird:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    data=[query_vector],
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Enhancing-ANN-Search" class="common-anchor-header">Verbessern der ANN-Suche<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -991,7 +1028,7 @@ curl --request POST \
 <p>Einzelheiten zur Volltextsuche finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
 <li><p>Text-Abgleich</p>
 <p>Der Schlüsselwortabgleich in Milvus ermöglicht das präzise Auffinden von Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche nach bestimmten Bedingungen verwendet und kann eine skalare Filterung zur Verfeinerung der Abfrageergebnisse beinhalten, die eine Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
-<p>Einzelheiten zur Schlüsselwortsuche finden Sie unter <a href="/docs/de/keyword-match.md">Schlüsselwortsuche</a>.</p></li>
+<p>Weitere Informationen zur Schlüsselwortsuche finden Sie unter <a href="/docs/de/keyword-match.md">Schlüsselwortsuche</a>.</p></li>
 <li><p>Partitionsschlüssel verwenden</p>
 <p>Die Einbeziehung mehrerer skalarer Felder in die Metadatenfilterung und die Verwendung einer recht komplizierten Filterbedingung können die Sucheffizienz beeinträchtigen. Wenn Sie ein skalares Feld als Partitionsschlüssel festlegen und eine Filterbedingung verwenden, die den Partitionsschlüssel in der Suchanfrage einbezieht, kann dies dazu beitragen, den Suchbereich auf die Partitionen zu beschränken, die den angegebenen Partitionsschlüsselwerten entsprechen.</p>
 <p>Einzelheiten zum Partitionsschlüssel finden Sie unter <a href="/docs/de/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p></li>

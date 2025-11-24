@@ -116,14 +116,29 @@ helm upgrade my-release zilliztech/milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de instalar o Helm chart, você pode iniciar o Milvus no Kubernetes. Nesta secção, iremos guiá-lo através dos passos para iniciar o Milvus com suporte para GPU.</p>
+    </button></h2><p>Depois de instalar o Helm chart, você pode iniciar o Milvus no Kubernetes. Nesta secção, vamos guiá-lo através dos passos para iniciar o Milvus com suporte para GPU.</p>
 <p>Você deve iniciar o Milvus com o Helm especificando o nome da versão, o gráfico e os parâmetros que você espera alterar. Neste guia, usamos <code translate="no">my-release</code> como o nome da versão. Para utilizar um nome de versão diferente, substitua <code translate="no">my-release</code> nos seguintes comandos pelo nome que está a utilizar.</p>
 <p>O Milvus permite-lhe atribuir um ou mais dispositivos GPU ao Milvus.</p>
-<h3 id="1-Assign-a-single-GPU-device" class="common-anchor-header">1. Atribuir um único dispositivo GPU</h3><p>O Milvus com suporte para GPU permite-lhe atribuir um ou mais dispositivos GPU.</p>
+<h3 id="1-Assign-a-single-GPU-device" class="common-anchor-header">1. Atribuir um único dispositivo GPU<button data-href="#1-Assign-a-single-GPU-device" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O Milvus com suporte para GPU permite-lhe atribuir um ou mais dispositivos GPU.</p>
 <ul>
 <li><p>Grupo Milvus</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;1&quot;
@@ -152,11 +167,26 @@ EOF</span>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2. Atribuir vários dispositivos GPU</h3><p>Para além de um único dispositivo GPU, também é possível atribuir vários dispositivos GPU ao Milvus.</p>
+<h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2. Atribuir vários dispositivos GPU<button data-href="#2-Assign-multiple-GPU-devices" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para além de um único dispositivo GPU, também é possível atribuir vários dispositivos GPU ao Milvus.</p>
 <ul>
-<li><p>Aglomerado de Milvus</p>
+<li><p>Grupo de Milvus</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;2&quot;
@@ -170,9 +200,9 @@ queryNode:
       nvidia.com/gpu: &quot;2&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Na configuração acima, o indexNode e o queryNode partilham duas GPUs. Para atribuir GPUs diferentes ao indexNode e ao queryNode, pode modificar a configuração em conformidade, definindo <code translate="no">extraEnv</code> no ficheiro de configuração da seguinte forma:</p>
+<p>Na configuração acima, há quatro CPUs disponíveis, e cada dataNode e queryNode usa duas GPUs. Para atribuir GPUs diferentes ao dataNode e ao queryNode, é possível modificar a configuração de acordo definindo <code translate="no">extraEnv</code> no arquivo de configuração da seguinte forma:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;1&quot;
@@ -198,14 +228,14 @@ EOF</span>
     <ul>
       <li>O nome da versão deve conter apenas letras, números e traços. Os pontos não são permitidos no nome da versão.</li>
       <li>A linha de comando predefinida instala a versão de cluster do Milvus durante a instalação do Milvus com o Helm. São necessárias outras definições durante a instalação do Milvus autónomo.</li>
-      <li>De acordo com o <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">guia de migração de APIs obsoletas do Kuberenetes</a>, a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget não é mais servida a partir da v1.25. Sugere-se que migre manifestos e clientes API para usar a versão API <b>policy/v1</b>. <br/>Como solução alternativa para os utilizadores que ainda usam a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget nos Kubernetes v1.25 e posteriores, pode executar o seguinte comando para instalar o Milvus:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+      <li>De acordo com o <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">guia de migração de APIs obsoletas do Kuberenetes</a>, a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget não é mais servida a partir da v1.25. Sugere-se que migre manifestos e clientes API para usar a versão API <b>policy/v1</b>. <br/>Como solução alternativa para os utilizadores que ainda usam a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget no Kuberenetes v1.25 e posterior, pode executar o seguinte comando para instalar o Milvus:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
       <li>Consulte <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> e <a href="https://helm.sh/docs/">Helm</a> para obter mais informações.</li>
     </ul>
   </div>
 </li>
 <li><p>Milvus autónomo</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;2&quot;
@@ -219,9 +249,9 @@ queryNode:
       nvidia.com/gpu: &quot;2&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Na configuração acima, o indexNode e o queryNode compartilham duas GPUs. Para atribuir GPUs diferentes ao indexNode e ao queryNode, pode modificar a configuração em conformidade, definindo extraEnv no ficheiro de configuração da seguinte forma:</p>
+<p>Na configuração acima, há quatro CPUs disponíveis, e cada dataNode e queryNode usa duas GPUs. Para atribuir GPUs diferentes ao dataNode e ao queryNode, é possível modificar a configuração de acordo, definindo extraEnv no arquivo de configuração da seguinte forma:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
-indexNode:
+dataNode:
   resources:
     requests:
       nvidia.com/gpu: &quot;1&quot;
@@ -244,35 +274,53 @@ EOF</span>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="2-Check-Milvus-status" class="common-anchor-header">2. Verificar o status do Milvus</h3><p>Execute o seguinte comando para verificar o status do Milvus:</p>
+<h3 id="2-Check-Milvus-status" class="common-anchor-header">2. Verificar o status do Milvus<button data-href="#2-Check-Milvus-status" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Execute o seguinte comando para verificar o status do Milvus:</p>
 <pre><code translate="no" class="language-bash">$ kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>Após o início do Milvus, a coluna <code translate="no">READY</code> exibe <code translate="no">1/1</code> para todos os pods.</p>
 <ul>
 <li><p>Cluster do Milvus</p>
 <pre><code translate="no" class="language-shell">NAME                                             READY  STATUS   RESTARTS  AGE
-my-release-etcd-0                                1/1    Running   0        3m23s
-my-release-etcd-1                                1/1    Running   0        3m23s
-my-release-etcd-2                                1/1    Running   0        3m23s
-my-release-milvus-datacoord-6fd4bd885c-gkzwx     1/1    Running   0        3m23s
-my-release-milvus-datanode-68cb87dcbd-4khpm      1/1    Running   0        3m23s
-my-release-milvus-indexcoord-5bfcf6bdd8-nmh5l    1/1    Running   0        3m23s
-my-release-milvus-indexnode-5c5f7b5bd9-l8hjg     1/1    Running   0        3m24s
-my-release-milvus-proxy-6bd7f5587-ds2xv          1/1    Running   0        3m24s
-my-release-milvus-querycoord-579cd79455-xht5n    1/1    Running   0        3m24s
-my-release-milvus-querynode-5cd8fff495-k6gtg     1/1    Running   0        3m24s
-my-release-milvus-rootcoord-7fb9488465-dmbbj     1/1    Running   0        3m23s
-my-release-minio-0                               1/1    Running   0        3m23s
-my-release-minio-1                               1/1    Running   0        3m23s
-my-release-minio-2                               1/1    Running   0        3m23s
-my-release-minio-3                               1/1    Running   0        3m23s
-my-release-pulsar-autorecovery-86f5dbdf77-lchpc  1/1    Running   0        3m24s
-my-release-pulsar-bookkeeper-0                   1/1    Running   0        3m23s
-my-release-pulsar-bookkeeper-1                   1/1    Running   0        98s
-my-release-pulsar-broker-556ff89d4c-2m29m        1/1    Running   0        3m23s
-my-release-pulsar-proxy-6fbd75db75-nhg4v         1/1    Running   0        3m23s
-my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
-my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
+my-release-etcd-0                                  1/1     Running     0             3m24s
+my-release-etcd-1                                  1/1     Running     0             3m24s
+my-release-etcd-2                                  1/1     Running     0             3m24s
+my-release-milvus-datanode-698dbf7d77-rjkkq        1/1     Running     0             3m24s
+my-release-milvus-mixcoord-856d666559-rpj8z        1/1     Running     0             3m24s
+my-release-milvus-proxy-7f7cf47689-pzltw           1/1     Running     0             3m24s
+my-release-milvus-querynode-7fb6d5b5f8-92phj       1/1     Running     0             3m24s
+my-release-milvus-streamingnode-5867bfbcbf-cg9xx   1/1     Running     0             3m24s
+my-release-minio-0                                 1/1     Running     0             3m24s
+my-release-minio-1                                 1/1     Running     0             3m24s
+my-release-minio-2                                 1/1     Running     0             3m24s
+my-release-minio-3                                 1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-0                       1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-1                       1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-2                       1/1     Running     0             3m24s
+my-release-pulsarv3-bookie-init-p8hcq              0/1     Completed   0             3m24s
+my-release-pulsarv3-broker-0                       1/1     Running     0             3m24s
+my-release-pulsarv3-broker-1                       1/1     Running     0             3m24s
+my-release-pulsarv3-proxy-0                        1/1     Running     0             3m24s
+my-release-pulsarv3-proxy-1                        1/1     Running     0             3m24s
+my-release-pulsarv3-pulsar-init-8kjsj              0/1     Completed   0             3m24s
+my-release-pulsarv3-recovery-0                     1/1     Running     0             3m24s
+my-release-pulsarv3-zookeeper-0                    1/1     Running     0             3m24s
+my-release-pulsarv3-zookeeper-1                    1/1     Running     0             3m24s
+my-release-pulsarv3-zookeeper-2                    1/1     Running     0             3m24s
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus autônomo</p>
 <pre><code translate="no" class="language-shell">NAME                                               READY   STATUS      RESTARTS   AGE
@@ -281,7 +329,22 @@ my-release-milvus-standalone-54c4f88cb9-f84pf      1/1     Running     0        
 my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0          30s
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Encaminhar uma porta local para o Milvus</h3><p>Verifique em qual porta local o servidor Milvus está escutando. Substitua o nome do pod pelo seu próprio nome.</p>
+<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Encaminhar uma porta local para o Milvus<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Verifique em qual porta local o servidor Milvus está escutando. Substitua o nome do pod pelo seu próprio nome.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
 19530

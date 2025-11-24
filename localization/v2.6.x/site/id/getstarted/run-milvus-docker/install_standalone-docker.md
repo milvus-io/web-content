@@ -63,7 +63,7 @@ title: Menjalankan Milvus di Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v2.6.4:</strong></p>
+<p><strong>Apa yang baru di v2.6.6:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
 <li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan pengurangan biaya pemeliharaan, lihat <a href="/docs/id/use-woodpecker.md">Gunakan Woodpecker</a> untuk detailnya</li>
@@ -71,7 +71,7 @@ title: Menjalankan Milvus di Docker (Linux)
 </ul>
 <p>Selalu unduh skrip terbaru untuk memastikan Anda mendapatkan konfigurasi dan peningkatan arsitektur terbaru.</p>
 <p>Jika Anda ingin menggunakan <a href="https://milvus.io/docs/milvus_backup_overview.md">Cadangan</a> dalam mode penerapan mandiri, disarankan untuk menggunakan metode penerapan <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
-<p>Jika Anda mengalami masalah dalam menarik citra, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail tentang masalahnya, dan kami akan memberikan dukungan yang diperlukan.</p>
+<p>Jika Anda mengalami masalah dalam menarik citra, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail tentang masalahnya, dan kami akan menyediakan dukungan yang diperlukan.</p>
 </div>
 <p>Setelah menjalankan skrip instalasi:</p>
 <ul>

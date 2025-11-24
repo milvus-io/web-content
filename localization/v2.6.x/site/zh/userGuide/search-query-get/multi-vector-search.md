@@ -2,7 +2,7 @@
 id: multi-vector-search.md
 title: 多向量混合搜索
 summary: >-
-  在许多应用中，可以通过标题和描述等丰富的信息集或文本、图像和音频等多种模式来搜索对象。例如，如果文本或图像符合搜索查询的语义，就可以搜索包含一段文本和一幅图像的推文。混合搜索将这些不同领域的搜索结合在一起，从而增强了搜索体验。Milvus
+  在许多应用中，可以通过标题和描述等丰富的信息集或文本、图像和音频等多种模式来搜索对象。例如，如果文本或图片与搜索查询的语义相符，就可以搜索包含一段文本和一张图片的推文。混合搜索将这些不同领域的搜索结合在一起，从而增强了搜索体验。Milvus
   允许在多个向量场上进行搜索，同时进行多个近似近邻（ANN）搜索，从而支持这种搜索。如果您想同时搜索文本和图像、描述同一对象的多个文本字段，或同时搜索密集向量和稀疏向量以提高搜索质量，多向量混合搜索就特别有用。
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">多向量混合搜索<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
@@ -997,3 +997,44 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>在为混合搜索指定<code translate="no">limit=2</code> 参数后，Milvus 将对三次搜索得到的六个结果进行 Rerankers 排序。最终，它们将只返回最相似的前两个结果。</p>
+<h2 id="Advanced-usage" class="common-anchor-header">高级用法<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">为混合搜索临时设置时区<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果您的 Collections 有<code translate="no">TIMESTAMPTZ</code> 字段，您可以通过在混合搜索调用中设置<code translate="no">timezone</code> 参数，为单次操作临时覆盖数据库或 Collections 的默认时区。这可以控制在操作过程中如何显示和比较<code translate="no">TIMESTAMPTZ</code> 值。</p>
+<p><code translate="no">timezone</code> 的值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如，<strong>亚洲/上海</strong>、<strong>美国/芝加哥</strong>或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p>
+<p>下面的示例展示了如何为混合搜索操作临时设置时区：</p>
+<pre><code translate="no" class="language-python">res = client.hybrid_search(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    reqs=reqs,
+    ranker=ranker,
+    limit=<span class="hljs-number">2</span>,
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>

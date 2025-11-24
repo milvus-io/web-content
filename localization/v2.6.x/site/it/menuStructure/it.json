@@ -468,6 +468,12 @@
             "children": []
           },
           {
+            "label": "Campo TIMESTAMPTZ",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "Campo dinamico",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -600,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Fermarsi",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -864,6 +870,12 @@
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1165,7 +1177,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tutorial: Implementare una classifica basata sul tempo in Milvus",
+                    "label": "Tutorial: Implementare la classificazione basata sul tempo in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1874,38 +1886,6 @@
         ]
       },
       {
-        "label": "CDC Milvus",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Panoramica",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Distribuzione del server CDC",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Gestire le attività del CDC",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Monitoraggio",
-            "id": "cdc-monitoring.md",
-            "order": 3,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "Milvus CLI",
         "id": "cli",
         "order": 4,
@@ -2260,7 +2240,7 @@
             "children": []
           },
           {
-            "label": "Dificare",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []

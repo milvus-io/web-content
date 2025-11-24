@@ -2,7 +2,7 @@
 id: weighted-ranker.md
 title: 加权排名器
 summary: >-
-  加权排名器通过为每个搜索路径分配不同的重要性权重，智能地组合来自多个搜索路径的结果并确定其优先级。与技艺高超的厨师平衡多种配料以制作完美菜肴的方式类似，加权排名器也会平衡不同的搜索结果，以提供最相关的综合结果。这种方法非常适合在多个向量领域或模式中进行搜索，因为某些领域对最终排名的贡献应该比其他领域更大。
+  加权排名器通过为每个搜索路径分配不同的重要性权重，智能地组合来自多个搜索路径的结果并确定优先级。与技艺高超的厨师平衡多种配料以制作完美菜肴的方式类似，加权排名器也会平衡不同的搜索结果，以提供最相关的综合结果。这种方法非常适合在多个向量场或模式中进行搜索，其中某些领域对最终排名的贡献应比其他领域更大。
 ---
 <h1 id="Weighted-Ranker" class="common-anchor-header">加权排名器<button data-href="#Weighted-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -297,8 +297,9 @@ rerank = Function(
 CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
                 .name(<span class="hljs-string">&quot;weight&quot;</span>)
                 .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;weights\&quot;: [0.1, 0.6], \&quot;norm_score\&quot;: true}&quot;</span>)
+                .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
+                .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.1, 0.9]&quot;</span>)
+                .param(<span class="hljs-string">&quot;norm_score&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
                 .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;

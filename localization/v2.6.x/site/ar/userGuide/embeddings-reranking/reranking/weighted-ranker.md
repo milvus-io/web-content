@@ -82,9 +82,9 @@ summary: >-
     </button></h2><p>سير العمل الرئيسي لإستراتيجية المُصنِّف الموزون على النحو التالي:</p>
 <ol>
 <li><p><strong>جمع نتائج البحث</strong>: جمع النتائج والنتائج من كل مسار بحث متجه (النتيجة_1، النتيجة_2).</p></li>
-<li><p><strong>تطبيع النتيجة</strong>: قد يستخدم كل بحث مقاييس تشابه مختلفة، مما ينتج عنه توزيعات درجات متنوعة. على سبيل المثال، يمكن أن يؤدي استخدام الضرب الداخلي (IP) كنوع تشابه إلى درجات تتراوح بين [- ∞، + ∞]، بينما يؤدي استخدام المسافة الإقليدية (L2) إلى درجات تتراوح بين [0، + ∞]. نظرًا لأن نطاقات الدرجات من عمليات البحث المختلفة تختلف ولا يمكن مقارنتها مباشرة، فمن الضروري تطبيع الدرجات من كل مسار بحث. عادة، يتم تطبيق دالة <code translate="no">arctan</code> لتحويل الدرجات إلى نطاق بين [0، 1] (الدرجة_1_مطبعة، الدرجة_2_مطبع). تشير الدرجات الأقرب إلى 1 إلى تشابه أعلى.</p></li>
-<li><p><strong>تعيين الأوزان</strong>: بناءً على الأهمية المعطاة لمجالات المتجهات المختلفة، يتم تخصيص أوزان<strong>(wi</strong>) للدرجات المعيارية (الدرجة_1_المعيارية، الدرجة_2_المعيارية). يجب أن تتراوح أوزان كل مسار بين [0،1]. الدرجات المرجحة الناتجة هي الدرجة_1_ المرجحة والدرجة_2_ المرجحة.</p></li>
-<li><p><strong>دمج الدرجات</strong>: يتم ترتيب الدرجات الموزونة (الدرجة_1_ المرجحة والدرجة_2_ المرجحة) من الأعلى إلى الأقل لإنتاج مجموعة نهائية من الدرجات (الدرجة_النهائية).</p></li>
+<li><p><strong>تطبيع النتيجة</strong>: قد يستخدم كل بحث مقاييس تشابه مختلفة، مما ينتج عنه توزيعات درجات متنوعة. على سبيل المثال، يمكن أن يؤدي استخدام الضرب الداخلي (IP) كنوع تشابه إلى درجات تتراوح بين [- ∞، + ∞]، بينما يؤدي استخدام المسافة الإقليدية (L2) إلى درجات تتراوح بين [0، + ∞]. نظرًا لأن نطاقات الدرجات من عمليات البحث المختلفة تختلف ولا يمكن مقارنتها مباشرة، فمن الضروري تطبيع الدرجات من كل مسار بحث. عادة، يتم تطبيق الدالة <code translate="no">arctan</code> لتحويل الدرجات إلى نطاق بين [0، 1] (الدرجة_1_مطبعة، الدرجة_2_مطبع). تشير الدرجات الأقرب إلى 1 إلى تشابه أعلى.</p></li>
+<li><p><strong>تعيين الأوزان</strong>: استنادًا إلى الأهمية المعينة لحقول المتجهات المختلفة، يتم تخصيص الأوزان<strong>(wi</strong>) للدرجات المعيارية (الدرجة_1_المعيارية، الدرجة_2_المعيارية). يجب أن تتراوح أوزان كل مسار بين [0،1]. الدرجات المرجحة الناتجة هي الدرجة_1_ المرجحة والدرجة_2_ المرجحة.</p></li>
+<li><p><strong>دمج الدرجات</strong>: يتم ترتيب الدرجات الموزونة (الدرجة_1_ المرجحة والدرجة_2_ المرجحة) من الأعلى إلى الأقل لإنتاج مجموعة نهائية من الدرجات (الدرجة_ النهائية).</p></li>
 </ol>
 <p>
   
@@ -302,8 +302,9 @@ rerank = Function(
 CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
                 .name(<span class="hljs-string">&quot;weight&quot;</span>)
                 .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;weights\&quot;: [0.1, 0.6], \&quot;norm_score\&quot;: true}&quot;</span>)
+                .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
+                .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.1, 0.9]&quot;</span>)
+                .param(<span class="hljs-string">&quot;norm_score&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
                 .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;

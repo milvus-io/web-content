@@ -48,7 +48,7 @@ summary: >-
     </button></h2><p>La recherche ANN et la recherche k-Nearest Neighbors (kNN) sont les méthodes habituelles dans les recherches de similarité vectorielle. Dans une recherche kNN, vous devez comparer tous les vecteurs d'un espace vectoriel avec le vecteur de la requête indiqué dans la demande de recherche avant de déterminer les vecteurs les plus similaires, ce qui prend beaucoup de temps et de ressources.</p>
 <p>Contrairement aux recherches kNN, un algorithme de recherche ANN demande un fichier d'<strong>index</strong> qui enregistre l'ordre trié des intégrations vectorielles. Lorsqu'une demande de recherche arrive, vous pouvez utiliser le fichier d'index comme référence pour localiser rapidement un sous-groupe contenant probablement les intégrations vectorielles les plus similaires au vecteur de la requête. Ensuite, vous pouvez utiliser le <strong>type de métrique</strong> spécifié pour mesurer la similarité entre le vecteur de la requête et ceux du sous-groupe, trier les membres du groupe sur la base de la similarité avec le vecteur de la requête, et déterminer les <strong>K premiers</strong> membres du groupe.</p>
 <p>Les recherches ANN dépendent d'index préconstruits, et le débit de recherche, l'utilisation de la mémoire et l'exactitude de la recherche peuvent varier en fonction des types d'index que vous choisissez. Vous devez trouver un équilibre entre les performances et l'exactitude de la recherche.</p>
-<p>Pour réduire la courbe d'apprentissage, Milvus propose <strong>AUTOINDEX</strong>. Avec <strong>AUTOINDEX</strong>, Milvus peut analyser la distribution des données dans votre collection pendant la construction de l'index et définit les paramètres d'index les plus optimisés en fonction de l'analyse pour trouver un équilibre entre les performances de recherche et l'exactitude.</p>
+<p>Pour réduire la courbe d'apprentissage, Milvus propose <strong>AUTOINDEX</strong>. Avec <strong>AUTOINDEX</strong>, Milvus peut analyser la distribution des données dans votre collection pendant la construction de l'index et définit les paramètres d'index les plus optimisés en fonction de l'analyse afin de trouver un équilibre entre les performances de recherche et l'exactitude.</p>
 <p>Dans cette section, vous trouverez des informations détaillées sur les sujets suivants :</p>
 <ul>
 <li><p><a href="/docs/fr/single-vector-search.md#Single-Vector-Search">Recherche à vecteur unique</a></p></li>
@@ -955,6 +955,43 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Définir temporairement un fuseau horaire pour une recherche<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Si votre collection possède un champ <code translate="no">TIMESTAMPTZ</code>, vous pouvez temporairement remplacer le fuseau horaire par défaut de la base de données ou de la collection pour une seule opération en définissant le paramètre <code translate="no">timezone</code> dans l'appel à la recherche. Ce paramètre contrôle la manière dont les valeurs de <code translate="no">TIMESTAMPTZ</code> sont affichées et comparées au cours de l'opération.</p>
+<p>La valeur de <code translate="no">timezone</code> doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide (par exemple, <strong>Asie/Shanghai</strong>, <strong>Amérique/Chicago</strong> ou <strong>UTC</strong>). Pour plus d'informations sur l'utilisation du champ <code translate="no">TIMESTAMPTZ</code>, reportez-vous à la rubrique <a href="/docs/fr/timestamptz-field.md">Champ TIMESTAMPTZ</a>.</p>
+<p>L'exemple ci-dessous montre comment définir temporairement un fuseau horaire pour une opération de recherche :</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    data=[query_vector],
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Enhancing-ANN-Search" class="common-anchor-header">Améliorer la recherche ANN<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -992,7 +1029,7 @@ curl --request POST \
 <p>Pour plus de détails sur la recherche en texte intégral, voir <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p></li>
 <li><p>Correspondance de texte</p>
 <p>La recherche par mot-clé dans Milvus permet d'extraire des documents avec précision sur la base de termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
-<p>Pour plus de détails sur la correspondance des mots-clés, voir <a href="/docs/fr/keyword-match.md">Correspondance des mots-clés</a>.</p></li>
+<p>Pour plus d'informations sur la correspondance des mots-clés, reportez-vous à la section <a href="/docs/fr/keyword-match.md">Correspondance des mots-clés</a>.</p></li>
 <li><p>Utiliser la clé de partition</p>
 <p>L'implication de plusieurs champs scalaires dans le filtrage des métadonnées et l'utilisation d'une condition de filtrage assez compliquée peuvent affecter l'efficacité de la recherche. Une fois que vous avez défini un champ scalaire comme clé de partition et que vous utilisez une condition de filtrage impliquant la clé de partition dans la requête de recherche, cela peut aider à restreindre l'étendue de la recherche dans les partitions correspondant aux valeurs de clé de partition spécifiées.</p>
 <p>Pour plus d'informations sur la clé de partition, reportez-vous à la section <a href="/docs/fr/use-partition-key.md">Utiliser la clé de partition</a>.</p></li>

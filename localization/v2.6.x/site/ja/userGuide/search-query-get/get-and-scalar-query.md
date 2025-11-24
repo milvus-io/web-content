@@ -725,3 +725,40 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-query" class="common-anchor-header">クエリにタイムゾーンを一時的に設定する<button data-href="#Temporarily-set-a-timezone-for-a-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>コレクションに<code translate="no">TIMESTAMPTZ</code> フィールドがある場合、クエリコールで<code translate="no">timezone</code> パラメータを設定することで、1 回の操作でデータベースまたはコレクションのデフォルトタイムゾーンを一時的にオーバーライドできます。これは、操作中に<code translate="no">TIMESTAMPTZ</code> の値がどのように表示され、比較されるかを制御します。</p>
+<p><code translate="no">timezone</code> の値は、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>UTCなど</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、「<a href="/docs/ja/timestamptz-field.md">TIMESTAMPTZフィールド</a>」を参照のこと。</p>
+<p>以下の例では、クエリ操作にタイムゾーンを一時的に設定する方法を示します：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
+results = client.query(
+    collection_name,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>, <span class="hljs-string">&quot;vec&quot;</span>],
+    limit=<span class="hljs-number">2</span>,
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>

@@ -179,6 +179,10 @@ curl --request POST \
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>컬렉션에 대해 AutoID가 활성화된 경우 컬렉션에서 사용자가 제공한 기본 키 값을 허용할지 여부입니다.</p><ul><li><p><strong>"true"</strong>로 설정하면: 삽입, 업서트 및 대량 가져오기는 사용자가 제공한 기본 키가 있는 경우 해당 기본 키를 사용하며, 그렇지 않으면 기본 키 값이 자동으로 생성됩니다.</p></li><li><p><strong>"false"</strong>로 설정된 경우: 사용자가 제공한 기본 키 값이 거부되거나 무시되며 기본 키 값은 항상 자동 생성됩니다. 기본값은 <strong>"false"</strong>입니다.</p></li></ul></td>
    </tr>
+   <tr>
+     <td><p><code translate="no">timezone</code></p></td>
+     <td><p>시간에 민감한 작업, 특히 <code translate="no">TIMESTAMPTZ</code> 필드를 처리할 때 이 컬렉션의 기본 시간대를 지정합니다. 타임스탬프는 내부적으로 UTC로 저장되며, Milvus는 이 설정에 따라 표시 및 비교를 위해 값을 변환합니다. 설정된 경우 컬렉션 표준 시간대가 데이터베이스의 기본 표준 시간대를 재정의하며, 쿼리의 표준 시간대 매개변수는 일시적으로 두 표준 시간대를 모두 재정의할 수 있습니다. 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자</a> (예: <strong>아시아/상하이</strong>, <strong>미국/시카고</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p></td>
+   </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">예 1: 컬렉션 TTL 설정<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -246,7 +250,7 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Enable-mmap" class="common-anchor-header">예 2: mmap 사용<button data-href="#Example-2-Enable-mmap" class="anchor-icon" translate="no">
+<h3 id="Example-2-Enable-mmap" class="common-anchor-header">예 2: mmap 활성화<button data-href="#Example-2-Enable-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -478,6 +482,60 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
       &quot;allow_insert_auto_id&quot;: &quot;true&quot;
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-6-Set-collection-time-zone" class="common-anchor-header">예 6: 수집 시간대 설정<button data-href="#Example-6-Set-collection-time-zone" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">timezone</code> 속성을 사용하여 컬렉션의 기본 시간대를 설정할 수 있습니다. 이는 데이터 삽입, 쿼리, 결과 표시 등 컬렉션 내의 모든 작업에서 시간 관련 데이터가 해석되고 표시되는 방식을 결정합니다.</p>
+<p><code translate="no">timezone</code> 값은 <code translate="no">Asia/Shanghai</code>, <code translate="no">America/Chicago</code> 또는 <code translate="no">UTC</code> 과 같은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자이어야</a> 합니다. 유효하지 않거나 비표준 값을 사용하면 컬렉션 속성을 수정할 때 오류가 발생합니다.</p>
+<p>아래 예는 수집 시간대를 <strong>아시아/상하이로</strong> 설정하는 방법을 보여줍니다:</p>
+<div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;timezone&quot;</span>: <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>);
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(common.CollectionDefaultTimezone, <span class="hljs-literal">true</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+      &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

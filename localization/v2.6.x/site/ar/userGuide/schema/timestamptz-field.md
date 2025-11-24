@@ -1,14 +1,14 @@
 ---
 id: timestamptz-field.md
-title: حقل TIMESTAMPTZCompatible with Milvus 2.6.4+
+title: حقل TIMESTAMPTZCompatible with Milvus 2.6.6+
 summary: >-
   تحتاج التطبيقات التي تتعقب الوقت عبر المناطق، مثل أنظمة التجارة الإلكترونية أو
   أدوات التعاون أو التسجيل الموزع، إلى معالجة دقيقة للطوابع الزمنية مع المناطق
   الزمنية. يوفر نوع بيانات TIMESTAMPTZ في Milvus هذه الإمكانية من خلال تخزين
   الطوابع الزمنية مع المنطقة الزمنية المرتبطة بها.
-beta: Milvus 2.6.4+
+beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">حقل TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">حقل TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,10 +39,10 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>الحقل <code translate="no">TIMESTAMPTZ</code> هو نوع بيانات معرّف من قبل المخطط (<code translate="no">DataType.TIMESTAMPTZ</code>) في Milvus يخزن الطوابع الزمنية مع المناطق الزمنية الصريحة:</p>
+    </button></h2><p>الحقل <code translate="no">TIMESTAMPTZ</code> هو نوع بيانات معرّف من قبل المخطط (<code translate="no">DataType.TIMESTAMPTZ</code>) في Milvus يعالج المدخلات المدخلة مع المناطق الزمنية ويخزن جميع النقاط الزمنية داخلياً كتوقيت مطلق بالتوقيت العالمي المنسق UTC:</p>
 <ul>
 <li><p><strong>تنسيق الإدخال المقبول</strong>: سلاسل <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> مع إزاحة المنطقة الزمنية (على سبيل المثال، <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> يمثل 11:59:59 مساءً بالتوقيت العالمي المنسق +08:00).</p></li>
-<li><p><strong>التخزين الداخلي</strong>: يتم تطبيع جميع قيم <code translate="no">TIMESTAMPTZ</code> وتخزينها <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">بالتوقيت العالمي المنسق</a> (UTC).</p></li>
+<li><p><strong>التخزين الداخلي</strong>: يتم تطبيع جميع القيم <code translate="no">TIMESTAMPTZ</code> وتخزينها <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">بالتوقيت العالمي المنسق</a> (UTC).</p></li>
 <li><p><strong>المقارنة والتصفية</strong>: يتم تنفيذ جميع عمليات التصفية والترتيب بالتوقيت العالمي المنسق، مما يضمن نتائج متسقة ويمكن التنبؤ بها عبر المناطق الزمنية المختلفة.</p></li>
 </ul>
 <div class="alert note">
@@ -256,7 +256,7 @@ results = client.query(
 <ul>
 <li><p><code translate="no">tsz</code> هو اسم الحقل <code translate="no">TIMESTAMPTZ</code> المحدد في المخطط.</p></li>
 <li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> هو الطابع الزمني الحرفي بتنسيق <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601،</a> بما في ذلك إزاحة المنطقة الزمنية.</p></li>
-<li><p><code translate="no">!=</code> يقارن قيمة الحقل مع تلك الحرفية. تشمل العمليات المدعومة الأخرى <code translate="no">==</code> و <code translate="no">&lt;</code> و <code translate="no">&lt;=</code> و <code translate="no">&gt;</code> و <code translate="no">&gt;=</code>.</p></li>
+<li><p><code translate="no">!=</code> يقارن قيمة الحقل مع تلك الحرفية. تتضمن العمليات المدعومة الأخرى <code translate="no">==</code> و <code translate="no">&lt;</code> و <code translate="no">&lt;=</code> و <code translate="no">&gt;</code> و <code translate="no">&gt;=</code>.</p></li>
 </ul>
 <h4 id="Interval-operations" class="common-anchor-header">عمليات الفاصل الزمني</h4><p>يمكنك إجراء عمليات حسابية على حقول <code translate="no">TIMESTAMPTZ</code> باستخدام قيم <strong>InterVAL</strong> <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">بتنسيق المدة الزمنية ISO 8601</a>. يتيح لك ذلك إضافة أو طرح مدد، مثل الأيام أو الساعات أو الدقائق، من الطابع الزمني عند تصفية البيانات.</p>
 <p>على سبيل المثال، يقوم الاستعلام التالي بتصفية الكيانات التي <strong>لا يساوي</strong> الطابع الزمني (<code translate="no">tsz</code>) زائد صفر يوم <strong>2025-01-03T00:00:00:00+08:00</strong>:</p>
@@ -297,81 +297,7 @@ results = client.query(
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → يطرح 2 ساعة</p></li>
 </ul>
 </div>
-<h4 id="Extract-timestamp-elements" class="common-anchor-header">استخراج عناصر الطابع الزمني</h4><p>يمكنك استخراج مكونات محددة من حقول <code translate="no">TIMESTAMPTZ</code> ، مثل السنة أو الشهر أو اليوم، باستخدام المعلمة <code translate="no">time_fields</code> في الاستعلام أو البحث.</p>
-<p>يستخرج المثال أدناه عناصر <code translate="no">year</code> و <code translate="no">month</code> و <code translate="no">day</code> من كل حقل <code translate="no">TIMESTAMPTZ</code> في نتائج الاستعلام:</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">results = client.query(
-    collection_name,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-<span class="highlighted-wrapper-line">    time_fields=<span class="hljs-string">&quot;year, month, day&quot;</span>,</span>
-    limit=<span class="hljs-number">2</span>,
-)
-
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
-
-<span class="hljs-comment"># Expected output:</span>
-<span class="hljs-comment"># Query result:  data: [&quot;{&#x27;id&#x27;: 1, &#x27;tsz&#x27;: [2024, 12, 31]}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;tsz&#x27;: [2025, 1, 1]}&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>العناصر المدعومة للاستخراج</strong></p>
-<table>
-   <tr>
-     <th><p>العنصر</p></th>
-     <th><p>الوصف</p></th>
-     <th><p>مثال على الإخراج</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">year</code></p></td>
-     <td><p>عنصر السنة</p></td>
-     <td><p><code translate="no">2025</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">month</code></p></td>
-     <td><p>رقم الشهر</p></td>
-     <td><p><code translate="no">1</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">day</code></p></td>
-     <td><p>يوم من الشهر</p></td>
-     <td><p><code translate="no">3</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">hour</code></p></td>
-     <td><p>الساعة (0-23)</p></td>
-     <td><p><code translate="no">14</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">minute</code></p></td>
-     <td><p>الدقيقة</p></td>
-     <td><p><code translate="no">30</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">second</code></p></td>
-     <td><p>الثانية</p></td>
-     <td><p><code translate="no">5</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">microsecond</code></p></td>
-     <td><p>ميكروثانية</p></td>
-     <td><p><code translate="no">123456</code></p></td>
-   </tr>
-</table>
-<div class="alert note">
-<ul>
-<li><p>المعلمة <code translate="no">time_fields</code> هي سلسلة مفصولة بفاصلة (على سبيل المثال، <code translate="no">&quot;year, month, day&quot;</code>).</p></li>
-<li><p>يتم إرجاع النتيجة كمصفوفة من المكونات المستخرجة (على سبيل المثال، <code translate="no">[2024, 12, 31]</code>).</p></li>
-</ul>
-</div>
-<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">البحث باستخدام تصفية الطابع الزمني</h4><p>يمكنك الجمع بين تصفية <code translate="no">TIMESTAMPTZ</code> مع البحث عن التشابه المتجه لتضييق النتائج حسب الوقت والتشابه.</p>
+<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">البحث باستخدام تصفية الطابع الزمني</h4><p>يمكنك الجمع بين التصفية <code translate="no">TIMESTAMPTZ</code> مع البحث عن التشابه المتجه لتضييق النتائج حسب الوقت والتشابه.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define a time-based filter expression</span>
@@ -442,13 +368,13 @@ res = client.search(
    </tr>
    <tr>
      <td><p>قاعدة البيانات</p></td>
-     <td><p><code translate="no">database.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>افتراضي لجميع المجموعات في قاعدة البيانات</p></td>
      <td><p>الأقل</p></td>
    </tr>
    <tr>
      <td><p>مجموعة</p></td>
-     <td><p><code translate="no">collection.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>تجاوز إعداد المنطقة الزمنية الافتراضية لقاعدة البيانات لتلك المجموعة</p></td>
      <td><p>متوسط</p></td>
    </tr>
@@ -456,7 +382,7 @@ res = client.search(
      <td><p>استعلام/بحث/بحث مختلط</p></td>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>تجاوزات مؤقتة لعملية واحدة محددة</p></td>
-     <td><p>الأعلى</p></td>
+     <td><p>أعلى</p></td>
    </tr>
 </table>
 <p>للاطلاع على التعليمات خطوة بخطوة ونماذج التعليمات البرمجية، راجع الصفحات المخصصة:</p>
@@ -483,4 +409,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>بشكل افتراضي، ستؤدي الاستعلامات على حقول <code translate="no">TIMESTAMPTZ</code> بدون فهرس إلى إجراء مسح كامل لجميع الصفوف، الأمر الذي قد يكون بطيئًا على مجموعات البيانات الكبيرة. لتسريع استعلامات الطابع الزمني، قم بإنشاء فهرس <code translate="no">STL_SORT</code> على الحقل <code translate="no">TIMESTAMPTZ</code>.</p>
-<p>لمزيد من التفاصيل، راجع <a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT</a>.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/stl-sort.md">STL_SORT</a>.</p>

@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "문자열 필드",
+            "label": "String Field",
             "id": "string.md",
             "order": 5,
             "children": []
@@ -465,6 +465,12 @@
             "label": "지오메트리 필드",
             "id": "geometry-field.md",
             "order": 10,
+            "children": []
+          },
+          {
+            "label": "타임스탬프 필드",
+            "id": "timestamptz-field.md",
+            "order": 11,
             "children": []
           },
           {
@@ -865,6 +871,12 @@
                 "id": "rtree.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1117,7 +1129,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "가중치 랭커",
+                "label": "Weighted Ranker",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1874,38 +1886,6 @@
         ]
       },
       {
-        "label": "밀버스 CDC",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "개요",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "CDC 서버 배포",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "CDC 작업 관리",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "모니터링",
-            "id": "cdc-monitoring.md",
-            "order": 3,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "Milvus CLI",
         "id": "cli",
         "order": 4,
@@ -2209,7 +2189,7 @@
                 "children": []
               },
               {
-                "label": "하이브리드 검색",
+                "label": "Hybrid Search",
                 "id": "llamaindex_milvus_hybrid_search.md",
                 "order": 3,
                 "children": []
@@ -2486,7 +2466,7 @@
             "children": []
           },
           {
-            "label": "실리콘 플로우",
+            "label": "SiliconFlow",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
@@ -2733,7 +2713,7 @@
         "children": []
       },
       {
-        "label": "다중 모달 검색에 ColPali 사용",
+        "label": "Use ColPali for Multi-Modal Retrieval",
         "id": "use_ColPali_with_milvus.md",
         "order": 10,
         "children": []
@@ -2781,7 +2761,7 @@
         "children": []
       },
       {
-        "label": "자세히 알아보기",
+        "label": "Explore More",
         "id": "explore-more",
         "order": 99,
         "children": [
@@ -2838,7 +2818,7 @@
     "order": 9,
     "children": [
       {
-        "label": "성능 FAQ",
+        "label": "Performance FAQs",
         "id": "performance_faq.md",
         "order": 0,
         "children": []

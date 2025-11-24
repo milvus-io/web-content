@@ -1,12 +1,12 @@
 ---
 id: timestamptz-field.md
-title: 타임스탬프 필드Compatible with Milvus 2.6.4+
+title: 타임스탬프 필드Compatible with Milvus 2.6.6+
 summary: >-
   전자상거래 시스템, 협업 도구, 분산 로깅 등 여러 지역에 걸쳐 시간을 추적하는 애플리케이션은 시간대가 포함된 타임스탬프를 정밀하게 처리해야
   합니다. Milvus의 타임스탬프 데이터 유형은 타임스탬프를 관련 시간대와 함께 저장하여 이러한 기능을 제공합니다.
-beta: Milvus 2.6.4+
+beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">타임스탬프 필드<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">타임스탬프 필드<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,9 +37,9 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TIMESTAMPTZ</code> 필드는 명시적인 표준 시간대와 함께 타임스탬프를 저장하는 Milvus의 스키마 정의 데이터 유형(<code translate="no">DataType.TIMESTAMPTZ</code>)입니다:</p>
+    </button></h2><p><code translate="no">TIMESTAMPTZ</code> 필드는 시간대 인식 입력을 처리하고 모든 시점을 내부적으로 UTC 절대 시간으로 저장하는 Milvus의 스키마 정의 데이터 유형(<code translate="no">DataType.TIMESTAMPTZ</code>)입니다:</p>
 <ul>
-<li><p><strong>허용되는 입력 형식입니다</strong>: 시간대 오프셋이 있는 <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> 문자열(예: <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 은 UTC+08:00 기준 11:59:59 PM을 나타냄).</p></li>
+<li><p><strong>허용되는 입력 형식입니다</strong>: 표준 시간대 오프셋이 있는 <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> 문자열(예: <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 은 UTC+08:00 기준 11:59:59 PM을 나타냄).</p></li>
 <li><p><strong>내부 저장소</strong>: 모든 <code translate="no">TIMESTAMPTZ</code> 값은 정규화되어 <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">협정 세계시</a> (UTC)로 저장됩니다.</p></li>
 <li><p><strong>비교 및 필터링</strong>: 모든 필터링 및 순서 지정 작업은 UTC로 수행되므로 서로 다른 시간대에 걸쳐 일관되고 예측 가능한 결과를 보장합니다.</p></li>
 </ul>
@@ -295,80 +295,6 @@ results = client.query(
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → 2시간 빼기</p></li>
 </ul>
 </div>
-<h4 id="Extract-timestamp-elements" class="common-anchor-header">타임스탬프 요소 추출</h4><p>쿼리 또는 검색에서 <code translate="no">time_fields</code> 매개변수를 사용하여 <code translate="no">TIMESTAMPTZ</code> 필드에서 연도, 월 또는 일과 같은 특정 구성 요소를 추출할 수 있습니다.</p>
-<p>아래 예는 쿼리 결과의 각 <code translate="no">TIMESTAMPTZ</code> 필드에서 <code translate="no">year</code>, <code translate="no">month</code>, <code translate="no">day</code> 요소를 추출합니다:</p>
-<div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">results = client.query(
-    collection_name,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-<span class="highlighted-wrapper-line">    time_fields=<span class="hljs-string">&quot;year, month, day&quot;</span>,</span>
-    limit=<span class="hljs-number">2</span>,
-)
-
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
-
-<span class="hljs-comment"># Expected output:</span>
-<span class="hljs-comment"># Query result:  data: [&quot;{&#x27;id&#x27;: 1, &#x27;tsz&#x27;: [2024, 12, 31]}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;tsz&#x27;: [2025, 1, 1]}&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>추출에 지원되는 요소</strong></p>
-<table>
-   <tr>
-     <th><p>요소</p></th>
-     <th><p>설명</p></th>
-     <th><p>출력 예시</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">year</code></p></td>
-     <td><p>연도 구성 요소</p></td>
-     <td><p><code translate="no">2025</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">month</code></p></td>
-     <td><p>월 번호</p></td>
-     <td><p><code translate="no">1</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">day</code></p></td>
-     <td><p>월의 요일</p></td>
-     <td><p><code translate="no">3</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">hour</code></p></td>
-     <td><p>시(0-23)</p></td>
-     <td><p><code translate="no">14</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">minute</code></p></td>
-     <td><p>분</p></td>
-     <td><p><code translate="no">30</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">second</code></p></td>
-     <td><p>초</p></td>
-     <td><p><code translate="no">5</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">microsecond</code></p></td>
-     <td><p>마이크로초</p></td>
-     <td><p><code translate="no">123456</code></p></td>
-   </tr>
-</table>
-<div class="alert note">
-<ul>
-<li><p>매개변수 <code translate="no">time_fields</code> 는 쉼표로 구분된 문자열입니다(예: <code translate="no">&quot;year, month, day&quot;</code>).</p></li>
-<li><p>결과는 추출된 구성 요소의 배열로 반환됩니다(예: <code translate="no">[2024, 12, 31]</code>).</p></li>
-</ul>
-</div>
 <h4 id="Search-with-timestamp-filtering" class="common-anchor-header">타임스탬프 필터링으로 검색하기</h4><p><code translate="no">TIMESTAMPTZ</code> 필터링과 벡터 유사도 검색을 결합하여 시간과 유사도 모두에 따라 결과 범위를 좁힐 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -440,13 +366,13 @@ res = client.search(
    </tr>
    <tr>
      <td><p>데이터베이스</p></td>
-     <td><p><code translate="no">database.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>데이터베이스의 모든 컬렉션에 대한 기본값</p></td>
      <td><p>최저</p></td>
    </tr>
    <tr>
      <td><p>컬렉션</p></td>
-     <td><p><code translate="no">collection.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>해당 컬렉션의 데이터베이스 기본 표준 시간대 설정을 재정의합니다.</p></td>
      <td><p>중간</p></td>
    </tr>
@@ -481,4 +407,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>기본적으로 인덱스가 없는 <code translate="no">TIMESTAMPTZ</code> 필드에 대한 쿼리는 모든 행에 대한 전체 스캔을 수행하므로 대규모 데이터 세트에서는 속도가 느려질 수 있습니다. 타임스탬프 쿼리를 가속화하려면 <code translate="no">TIMESTAMPTZ</code> 필드에 <code translate="no">STL_SORT</code> 인덱스를 생성하세요.</p>
-<p>자세한 내용은 <a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT를</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/stl-sort.md">STL_SORT를</a> 참조하세요.</p>

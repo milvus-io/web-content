@@ -36,7 +36,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Fluxo de trabalho de pesquisa híbrida</span> </span></p>
 <p>A pesquisa híbrida multi-vetorial integra diferentes métodos de pesquisa ou abrange embeddings de várias modalidades:</p>
 <ul>
-<li><p><strong>Pesquisa de vectores esparsos e densos</strong>: <a href="/docs/pt/dense-vector.md">Os vectores densos</a> são excelentes para capturar relações semânticas, enquanto <a href="/docs/pt/sparse_vector.md">os vectores esparsos</a> são altamente eficazes para uma correspondência precisa de palavras-chave. A pesquisa híbrida combina estas abordagens para proporcionar uma compreensão concetual ampla e a relevância exacta do termo, melhorando assim os resultados da pesquisa. Ao aproveitar os pontos fortes de cada método, a pesquisa híbrida supera as limitações das abordagens individuais, oferecendo um melhor desempenho para consultas complexas. Aqui está <a href="/docs/pt/full_text_search_with_milvus.md">um guia</a> mais detalhado sobre a recuperação híbrida que combina a pesquisa semântica com a pesquisa de texto integral.</p></li>
+<li><p><strong>Pesquisa de vectores esparsos e densos</strong>: <a href="/docs/pt/dense-vector.md">Os vectores densos</a> são excelentes para captar relações semânticas, enquanto <a href="/docs/pt/sparse_vector.md">os vectores esparsos</a> são altamente eficazes para uma correspondência precisa de palavras-chave. A pesquisa híbrida combina estas abordagens para proporcionar uma compreensão concetual ampla e a relevância exacta do termo, melhorando assim os resultados da pesquisa. Ao aproveitar os pontos fortes de cada método, a pesquisa híbrida supera as limitações das abordagens individuais, oferecendo um melhor desempenho para consultas complexas. Aqui está <a href="/docs/pt/full_text_search_with_milvus.md">um guia</a> mais pormenorizado sobre a recuperação híbrida que combina a pesquisa semântica com a pesquisa de texto integral.</p></li>
 <li><p><strong>Pesquisa vetorial multimodal</strong>: A pesquisa vetorial multimodal é uma técnica poderosa que permite pesquisar em vários tipos de dados, incluindo texto, imagens, áudio e outros. A principal vantagem desta abordagem é a sua capacidade de unificar diferentes modalidades numa experiência de pesquisa perfeita e coesa. Por exemplo, na pesquisa de produtos, um utilizador pode introduzir uma consulta de texto para encontrar produtos descritos com texto e imagens. Ao combinar estas modalidades através de um método de pesquisa híbrido, pode aumentar a precisão da pesquisa ou enriquecer os resultados da pesquisa.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Exemplo<button data-href="#Example" class="anchor-icon" translate="no">
@@ -355,7 +355,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">text_sparse_index</code>: um índice do tipo<code translate="no">SPARSE_INVERTED_INDEX</code>com o tipo de métrica <code translate="no">BM25</code> é utilizado para o campo de vetor esparso de texto.</p></li>
 <li><p><code translate="no">image_dense_index</code>Um índice do tipo <code translate="no">AUTOINDEX</code> com o tipo métrico <code translate="no">IP</code> é criado para o campo vetorial denso de imagem.</p></li>
 </ul>
-<p>Pode escolher outros tipos de índice, conforme necessário, para melhor se adequar às suas necessidades e tipos de dados. Para mais informações sobre os tipos de índice suportados, consulte a documentação sobre os <a href="/docs/pt/index-vector-fields.md">tipos de índice disponíveis</a>.</p>
+<p>Pode escolher outros tipos de índice, conforme necessário, para melhor se adaptar às suas necessidades e tipos de dados. Para mais informações sobre os tipos de índice suportados, consulte a documentação sobre os <a href="/docs/pt/index-vector-fields.md">tipos de índice disponíveis</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
@@ -679,7 +679,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Etapa 1: criar várias instâncias de AnnSearchRequest<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Etapa 1: Criar várias instâncias de AnnSearchRequest<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1006,3 +1006,44 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>Com o parâmetro <code translate="no">limit=2</code> especificado para a Pesquisa híbrida, o Milvus ranqueará os seis resultados obtidos nas três pesquisas. Por fim, eles retornarão apenas os dois primeiros resultados mais semelhantes.</p>
+<h2 id="Advanced-usage" class="common-anchor-header">Utilização avançada<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Definir temporariamente um fuso horário para uma pesquisa híbrida<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se a sua coleção tiver um campo <code translate="no">TIMESTAMPTZ</code>, pode substituir temporariamente o fuso horário predefinido da base de dados ou da coleção para uma única operação, definindo o parâmetro <code translate="no">timezone</code> na chamada de pesquisa híbrida. Este parâmetro controla a forma como os valores de <code translate="no">TIMESTAMPTZ</code> são apresentados e comparados durante a operação.</p>
+<p>O valor de <code translate="no">timezone</code> deve ser um <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de fuso horário IANA</a> válido (por exemplo, <strong>Ásia/Shanghai</strong>, <strong>América/Chicago</strong> ou <strong>UTC</strong>). Para mais informações sobre como utilizar um campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/pt/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
+<p>O exemplo abaixo mostra como definir temporariamente um fuso horário para uma operação de pesquisa híbrida:</p>
+<pre><code translate="no" class="language-python">res = client.hybrid_search(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    reqs=reqs,
+    ranker=ranker,
+    limit=<span class="hljs-number">2</span>,
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>

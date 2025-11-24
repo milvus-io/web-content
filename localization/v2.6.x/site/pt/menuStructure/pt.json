@@ -468,6 +468,12 @@
             "children": []
           },
           {
+            "label": "Campo TIMESTAMPTZ",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "Campo dinâmico",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -865,6 +871,12 @@
                 "id": "rtree.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1073,7 +1085,7 @@
                 "children": []
               },
               {
-                "label": "Cama de pedra",
+                "label": "Bedrock",
                 "id": "bedrock.md",
                 "order": 4,
                 "children": []
@@ -1159,7 +1171,7 @@
                     "children": []
                   },
                   {
-                    "label": "Decaimento linear",
+                    "label": "Linear Decay",
                     "id": "linear-decay.md",
                     "order": 3,
                     "children": []
@@ -1521,7 +1533,7 @@
             ]
           },
           {
-            "label": "Utilizar Pulsar com Milvus",
+            "label": "Use Pulsar with Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1580,7 +1592,7 @@
         "order": 7,
         "children": [
           {
-            "label": "Atualizar o Cluster Milvus",
+            "label": "Upgrade Milvus Cluster",
             "id": "upgrade_milvus_cluster-operator.md",
             "order": 0,
             "children": []
@@ -1638,7 +1650,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Criar um alerta",
+                "label": "Create an Alert",
                 "id": "alert.md",
                 "order": 0,
                 "children": []
@@ -1869,38 +1881,6 @@
             "label": "Guias de utilização",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "CDC de Milvus",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Visão geral",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Implantar o servidor CDC",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Gerir tarefas CDC",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Controlo",
-            "id": "cdc-monitoring.md",
-            "order": 3,
             "children": []
           }
         ]
@@ -2584,7 +2564,7 @@
             "children": []
           },
           {
-            "label": "Mascarador de PII",
+            "label": "PII Masker",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -2804,7 +2784,7 @@
             "children": []
           },
           {
-            "label": "Pesquisa de similaridade de áudio",
+            "label": "Audio Similarity Search",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
@@ -2832,7 +2812,7 @@
     ]
   },
   {
-    "label": "FAQs",
+    "label": "Perguntas frequentes",
     "id": "faq",
     "isMenu": true,
     "order": 9,

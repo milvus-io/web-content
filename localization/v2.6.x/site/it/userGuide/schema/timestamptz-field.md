@@ -1,15 +1,15 @@
 ---
 id: timestamptz-field.md
-title: Campo TIMESTAMPTZCompatible with Milvus 2.6.4+
+title: Campo TIMESTAMPTZCompatible with Milvus 2.6.6+
 summary: >-
   Le applicazioni che tengono traccia dell'ora da una regione all'altra, come i
   sistemi di e-commerce, gli strumenti di collaborazione o la registrazione
   distribuita, hanno bisogno di una gestione precisa dei timestamp con i fusi
   orari. Il tipo di dati TIMESTAMPTZ di Milvus offre questa possibilità,
   memorizzando i timestamp con il fuso orario associato.
-beta: Milvus 2.6.4+
+beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">Campo TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">Campo TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,7 +40,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un campo <code translate="no">TIMESTAMPTZ</code> è un tipo di dati definito dallo schema (<code translate="no">DataType.TIMESTAMPTZ</code>) in Milvus che memorizza timestamp con fusi orari espliciti:</p>
+    </button></h2><p>Un campo <code translate="no">TIMESTAMPTZ</code> è un tipo di dati definito dallo schema (<code translate="no">DataType.TIMESTAMPTZ</code>) di Milvus che elabora l'input consapevole del fuso orario e memorizza internamente tutti i punti temporali come ora assoluta UTC:</p>
 <ul>
 <li><p><strong>Formato di input accettato</strong>: Stringhe <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> con un offset di fuso orario (ad esempio, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> rappresenta le 11:59:59 PM in UTC+08:00).</p></li>
 <li><p><strong>Memorizzazione interna</strong>: Tutti i valori di <code translate="no">TIMESTAMPTZ</code> sono normalizzati e memorizzati in <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">tempo universale coordinato</a> (UTC).</p></li>
@@ -298,81 +298,7 @@ results = client.query(
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → Sottrae 2 ore</p></li>
 </ul>
 </div>
-<h4 id="Extract-timestamp-elements" class="common-anchor-header">Estrarre elementi di timestamp</h4><p>È possibile estrarre componenti specifici dai campi <code translate="no">TIMESTAMPTZ</code>, come l'anno, il mese o il giorno, utilizzando il parametro <code translate="no">time_fields</code> nella query o nella ricerca.</p>
-<p>L'esempio seguente estrae gli elementi <code translate="no">year</code>, <code translate="no">month</code> e <code translate="no">day</code> da ciascun campo <code translate="no">TIMESTAMPTZ</code> nei risultati della query:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">results = client.query(
-    collection_name,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-<span class="highlighted-wrapper-line">    time_fields=<span class="hljs-string">&quot;year, month, day&quot;</span>,</span>
-    limit=<span class="hljs-number">2</span>,
-)
-
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
-
-<span class="hljs-comment"># Expected output:</span>
-<span class="hljs-comment"># Query result:  data: [&quot;{&#x27;id&#x27;: 1, &#x27;tsz&#x27;: [2024, 12, 31]}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;tsz&#x27;: [2025, 1, 1]}&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Elementi supportati per l'estrazione</strong></p>
-<table>
-   <tr>
-     <th><p>Elemento</p></th>
-     <th><p>Descrizione</p></th>
-     <th><p>Esempio di output</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">year</code></p></td>
-     <td><p>Componente dell'anno</p></td>
-     <td><p><code translate="no">2025</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">month</code></p></td>
-     <td><p>Numero del mese</p></td>
-     <td><p><code translate="no">1</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">day</code></p></td>
-     <td><p>Giorno del mese</p></td>
-     <td><p><code translate="no">3</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">hour</code></p></td>
-     <td><p>Ora (0-23)</p></td>
-     <td><p><code translate="no">14</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">minute</code></p></td>
-     <td><p>Minuti</p></td>
-     <td><p><code translate="no">30</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">second</code></p></td>
-     <td><p>Secondo</p></td>
-     <td><p><code translate="no">5</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">microsecond</code></p></td>
-     <td><p>Microsecondo</p></td>
-     <td><p><code translate="no">123456</code></p></td>
-   </tr>
-</table>
-<div class="alert note">
-<ul>
-<li><p>Il parametro <code translate="no">time_fields</code> è una stringa separata da virgole (ad esempio, <code translate="no">&quot;year, month, day&quot;</code>).</p></li>
-<li><p>Il risultato viene restituito come un array di componenti estratti (ad esempio, <code translate="no">[2024, 12, 31]</code>).</p></li>
-</ul>
-</div>
-<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Ricerca con filtraggio del timestamp</h4><p>È possibile combinare il filtraggio di <code translate="no">TIMESTAMPTZ</code> con la ricerca di similarità vettoriale per restringere i risultati sia in base al tempo che alla similarità.</p>
+<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Ricerca con filtro temporale</h4><p>È possibile combinare il filtro <code translate="no">TIMESTAMPTZ</code> con la ricerca per similarità vettoriale per restringere i risultati sia in base al tempo che alla similarità.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define a time-based filter expression</span>
@@ -443,13 +369,13 @@ res = client.search(
    </tr>
    <tr>
      <td><p>Database</p></td>
-     <td><p><code translate="no">database.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>Predefinito per tutte le raccolte del database</p></td>
      <td><p>Più basso</p></td>
    </tr>
    <tr>
-     <td><p>Raccolta</p></td>
-     <td><p><code translate="no">collection.timezone</code></p></td>
+     <td><p>Collezione</p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>Sovrascrive l'impostazione predefinita del fuso orario del database per quella raccolta</p></td>
      <td><p>Media</p></td>
    </tr>
@@ -484,4 +410,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>Per impostazione predefinita, le query sui campi <code translate="no">TIMESTAMPTZ</code> senza indice eseguono una scansione completa di tutte le righe, che può essere lenta su grandi insiemi di dati. Per accelerare le query sui timestamp, creare un indice <code translate="no">STL_SORT</code> sul campo <code translate="no">TIMESTAMPTZ</code>.</p>
-<p>Per i dettagli, consultare <a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT</a>.</p>
+<p>Per i dettagli, consultare <a href="/docs/it/stl-sort.md">STL_SORT</a>.</p>

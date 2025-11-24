@@ -95,7 +95,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>每个数组字段都有一个属性，用于指定每个实体的数组字段可容纳的最大元素数。根据用例的上限来设置。例如，每个文档有 1000 个文本块，或每个驾驶场景有 100 个操作。</p>
 <p>过高的值会浪费内存，因此需要进行一些计算来确定 Array 字段中 Struct 的最大数量。</p>
-<h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">在 Struct 中索引向量字段<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
+<h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">在 Structs 中索引向量字段<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,9 +110,9 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>对于向量场，包括 Collections 中的向量场和 Struct 中定义的向量场，都必须进行索引。对于 Struct 中的向量字段，应使用<code translate="no">HNSW</code> 作为索引类型，使用<code translate="no">MAX_SIM</code> 系列作为度量类型。</p>
+    </button></h3><p>对于向量场，包括 Collections 中的向量场和 Struct 中定义的向量场，都必须进行索引。对于 Struct 中的向量字段，应使用<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> 作为索引类型，并使用<code translate="no">MAX_SIM</code> 系列作为度量类型。</p>
 <p>有关所有适用限制的详细信息，请参阅<a href="/docs/zh/array-of-structs.md#Limits">限制</a>。</p>
-<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">实际示例为自动驾驶建立 CoVLA 数据集模型<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
+<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">真实世界示例为自动驾驶建立 CoVLA 数据集模型<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -127,7 +127,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>由<a href="https://tur.ing/posts/s1QUA1uh">图灵汽车公司</a>推出并在 2025 年计算机视觉应用冬季会议（WACV）上接受的综合视觉-语言-动作（CoVLA）数据集为自动驾驶中的视觉-语言-动作（VLA）模型的训练和评估提供了丰富的基础。每个数据点（通常是视频片段）不仅包含原始视觉输入，还包含描述以下内容的结构化字幕：</p>
+    </button></h2><p>综合视觉-语言-动作（CoVLA）数据集由<a href="https://tur.ing/posts/s1QUA1uh">图灵汽车公司</a>推出，并在 2025 年计算机视觉应用冬季会议（WACV）上被接受，它为训练和评估自动驾驶中的视觉-语言-动作（VLA）模型提供了丰富的基础。每个数据点（通常是视频片段）不仅包含原始视觉输入，还包含描述以下内容的结构化字幕：</p>
 <ul>
 <li><p><strong>自我车辆的行为</strong>（例如，"向左并线，同时避让迎面而来的车辆"）、</p></li>
 <li><p><strong>检测到</strong>的存在<strong>对象</strong>（如前方车辆、行人、交通信号灯），以及</p></li>
@@ -231,9 +231,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>首先，我们需要初始化标题 Struct、front_cars Struct 和 Collections 的模式。</p>
 <ul>
 <li><p>初始化标题结构（Caption Struct）的模式。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -473,12 +471,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>所有向量字段都必须有索引。要对元素 Struct 中的向量字段进行索引，需要使用<code translate="no">HNSW</code> 作为索引类型，并使用<code translate="no">MAX_SIM</code> 系列度量类型来衡量嵌入列表之间的相似性。</p>
+    </button></h3><p>所有向量字段都必须有索引。要索引元素 Struct 中的向量字段，需要使用<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> 作为索引类型，并使用<code translate="no">MAX_SIM</code> 系列度量类型来衡量嵌入列表之间的相似性。</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -486,7 +484,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -494,13 +492,13 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>建议启用 JSON 字段的 JSON 切碎功能，以加快这些字段内的过滤速度。</p>
+<p>建议启用 JSON 字段的 JSON 切碎功能，以加快这些字段的过滤速度。</p>
 <h3 id="Step-4-Create-a-collection" class="common-anchor-header">第 4 步：创建 Collections<button data-href="#Step-4-Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

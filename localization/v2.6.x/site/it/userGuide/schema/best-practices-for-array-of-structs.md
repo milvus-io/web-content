@@ -52,7 +52,7 @@ beta: Milvus 2.6.4+
 <li><p><strong>Incorporazione multimodale</strong>: Ogni struttura può contenere più vettori, come l'incorporazione di testo e l'incorporazione di immagini, oltre ai metadati.</p></li>
 <li><p><strong>Dati temporali o sequenziali</strong>: Le strutture in un campo Array rappresentano naturalmente serie temporali o eventi graduali.</p></li>
 </ul>
-<p>A differenza delle soluzioni tradizionali, che memorizzano blob JSON o dividono i dati in più raccolte, l'array di strutture offre l'applicazione nativa dello schema, l'indicizzazione dei vettori e l'archiviazione efficiente all'interno di Milvus.</p>
+<p>A differenza delle soluzioni tradizionali che memorizzano blob JSON o dividono i dati in più raccolte, l'Array di strutture offre l'applicazione nativa dello schema, l'indicizzazione dei vettori e l'archiviazione efficiente all'interno di Milvus.</p>
 <h2 id="Schema-design-guidelines" class="common-anchor-header">Linee guida per la progettazione degli schemi<button data-href="#Schema-design-guidelines" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,9 +118,9 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>L'indicizzazione è obbligatoria per i campi vettoriali, compresi quelli di una collezione e quelli definiti in una struttura. Per i campi vettoriali in una struttura, si deve usare <code translate="no">HNSW</code> come tipo di indice e <code translate="no">MAX_SIM</code> serie come tipo di metrica.</p>
+    </button></h3><p>L'indicizzazione è obbligatoria per i campi vettoriali, compresi quelli di una collezione e quelli definiti in una struttura. Per i campi vettoriali in una struttura, si deve usare <code translate="no">AUTOINDEX</code> o <code translate="no">HNSW</code> come tipo di indice e la serie <code translate="no">MAX_SIM</code> come tipo di metrica.</p>
 <p>Per i dettagli su tutti i limiti applicabili, fare riferimento ai <a href="/docs/it/array-of-structs.md#Limits">limiti</a>.</p>
-<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Un esempio reale: Modellazione del set di dati CoVLA per la guida autonoma<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
+<h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Un esempio reale: Modellare il set di dati CoVLA per la guida autonoma<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -239,9 +239,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>Per iniziare, occorre inizializzare gli schemi per una struttura Caption, una struttura Front_cars e la collezione.</p>
 <ul>
 <li><p>Inizializzare lo schema per la struttura Caption.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -481,12 +479,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tutti i campi vettoriali devono essere indicizzati. Per indicizzare i campi vettoriali in un elemento Struct, è necessario utilizzare <code translate="no">HNSW</code> come tipo di indice e il tipo di metrica della serie <code translate="no">MAX_SIM</code> per misurare le somiglianze tra gli elenchi di incorporazioni.</p>
+    </button></h3><p>Tutti i campi vettoriali devono essere indicizzati. Per indicizzare i campi vettoriali in un elemento Struct, è necessario utilizzare <code translate="no">AUTOINDEX</code> o <code translate="no">HNSW</code> come tipo di indice e il tipo di metrica della serie <code translate="no">MAX_SIM</code> per misurare le somiglianze tra gli elenchi di incorporazioni.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -494,7 +492,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -502,13 +500,13 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Si consiglia di abilitare la triturazione JSON per i campi JSON, per accelerare il filtraggio all'interno di questi campi.</p>
+<p>Si consiglia di abilitare il JSON shredding per i campi JSON, per accelerare il filtraggio all'interno di questi campi.</p>
 <h3 id="Step-4-Create-a-collection" class="common-anchor-header">Passo 4: Creare una raccolta<button data-href="#Step-4-Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -547,7 +545,7 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h3><p>Turing Motos organizza il set di dati CoVLA in più file, tra cui i video grezzi (<code translate="no">.mp4</code>), gli stati (<code translate="no">states.jsonl</code>), le didascalie (<code translate="no">captions.jsonl</code>), i semafori (<code translate="no">traffic_lights.jsonl</code>) e le auto frontali (<code translate="no">front_cars.jsonl</code>).</p>
-<p>È necessario unire i dati per ciascun video clip da questi file e inserire i dati. Di seguito è riportato lo script per unire i dati di uno specifico videoclip.</p>
+<p>È necessario unire i dati di ciascun video clip da questi file e inserire i dati. Di seguito è riportato lo script per unire i dati di uno specifico videoclip.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 

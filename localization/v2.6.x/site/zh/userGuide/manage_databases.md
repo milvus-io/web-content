@@ -279,8 +279,28 @@ curl --request POST \
      <td><p>布尔</p></td>
      <td><p>是否强制指定的数据库拒绝读取操作。</p></td>
    </tr>
+   <tr>
+     <td><p><code translate="no">timezone</code></p></td>
+     <td><p>字符串</p></td>
+     <td><p>指定应用于数据库内时间敏感操作的默认时区，尤其是<code translate="no">TIMESTAMPTZ</code> 字段。除非设置了集合级时区，否则集合将继承数据库时区。查询级时区参数可暂时覆盖数据库和 Collections 的默认时区。其值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如，<strong>亚洲/上海</strong>、<strong>美国/芝加哥</strong>或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p></td>
+   </tr>
 </table>
-<h3 id="Alter-database-properties" class="common-anchor-header">更改数据库属性</h3><p>您可以通过以下方式更改现有数据库的属性。下面的示例限制了可以在数据库中创建的 Collections 数量。</p>
+<h3 id="Alter-database-properties" class="common-anchor-header">更改数据库属性<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以按以下方式更改现有数据库的属性。下面的示例限制了您可以在数据库中创建的 Collections 数量。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
@@ -320,7 +340,22 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-database-properties" class="common-anchor-header">删除数据库属性</h3><p>您还可以通过如下方式删除数据库属性来重置该属性。下面的示例删除了可以在数据库中创建的 Collection 数量限制。</p>
+<h3 id="Drop-database-properties" class="common-anchor-header">删除数据库属性<button data-href="#Drop-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您还可以通过如下方式删除数据库属性来重置该属性。下面的示例删除了可以在数据库中创建的 Collection 数量限制。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
@@ -464,5 +499,35 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">如何管理数据库的权限？</h3><p>Milvus 使用基于角色的访问控制（RBAC）来管理权限。您可以创建具有特定权限的角色，并将其分配给用户，从而控制他们对不同数据库的访问。有关详细信息，请参阅<a href="/docs/zh/rbac.md">RBAC 文档</a>。</p>
-<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">数据库有配额限制吗？</h3><p>是的，Milvus 允许您为数据库设置配额限制，如收藏的最大数量。有关限制的全面列表，请参阅<a href="/docs/zh/limitations.md">Milvus 限制文档</a>。</p>
+    </button></h2><h3 id="How-do-I-manage-permissions-for-a-database" class="common-anchor-header">如何管理数据库的权限？<button data-href="#How-do-I-manage-permissions-for-a-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 使用基于角色的访问控制（RBAC）来管理权限。您可以创建具有特定权限的角色，并将其分配给用户，从而控制他们对不同数据库的访问。有关详细信息，请参阅<a href="/docs/zh/rbac.md">RBAC 文档</a>。</p>
+<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">数据库有配额限制吗？<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>是的，Milvus 允许您为数据库设置配额限制，如收藏的最大数量。有关限制的全面列表，请参阅<a href="/docs/zh/limitations.md">Milvus 限制文档</a>。</p>

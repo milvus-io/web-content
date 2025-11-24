@@ -44,7 +44,7 @@ title: Actualizar Milvus Standalone con cartas Helm
 <li>Versión de Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Desde la versión 4.2.21 de Milvus-Helm chart, hemos introducido pulsar-v3.x chart como dependencia. Por compatibilidad con versiones anteriores, actualice su helm a la versión 3.14 o posterior, y asegúrese de añadir la opción <code translate="no">--reset-then-reuse-values</code> siempre que utilice <code translate="no">helm upgrade</code>.</p>
+<p>Desde la versión 4.2.21 de Milvus-Helm chart, hemos introducido pulsar-v3.x chart como dependencia. Por compatibilidad con versiones anteriores, actualice su helm a v3.14 o una versión posterior, y asegúrese de añadir la opción <code translate="no">--reset-then-reuse-values</code> siempre que utilice <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">Comprobar la versión de Milvus<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Puede elegir la ruta de actualización para su Milvus de la siguiente manera:</p>
-<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.5.19.</div>
+<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.5.23.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.5.19.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.5.19.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.5.23.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.5.23.</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar una actualización continua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operación</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Una vez que se haya asegurado de que todos los despliegues en su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.5.19.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.19 -w &#x27;milvusdb/milvus:v2.5.19&#x27;
+<p>Una vez que se haya asegurado de que todos los despliegues en su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.5.23.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.23 -w &#x27;milvusdb/milvus:v2.5.23&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -157,7 +157,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 </ol>
 </div>
 </div>
-<h2 id="Upgrade-Milvus-using-Helm" class="common-anchor-header">Actualizar Milvus utilizando Helm<button data-href="#Upgrade-Milvus-using-Helm" class="anchor-icon" translate="no">
+<h2 id="Upgrade-Milvus-using-Helm" class="common-anchor-header">Actualizar Milvus usando Helm<button data-href="#Upgrade-Milvus-using-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -295,25 +295,25 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li>Migre los metadatos de Milvus.</li>
 <li>Inicie los componentes de Milvus con una nueva imagen.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2519" class="common-anchor-header">2. Actualizar Milvus de v2.1.x a 2.5.19</h4><p>Los siguientes comandos asumen que usted actualiza Milvus de v2.1.4 a 2.5.19. Cámbielos por las versiones que se ajusten a sus necesidades.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-2523" class="common-anchor-header">2. Actualizar Milvus de v2.1.x a 2.5.23</h4><p>Los siguientes comandos asumen que usted actualiza Milvus de v2.1.4 a 2.5.23. Cámbielos por las versiones que se ajusten a sus necesidades.</p>
 <ol>
 <li><p>Especifique el nombre de la instancia de Milvus, la versión de Milvus de origen y la versión de Milvus de destino.</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.19
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.23
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique el espacio de nombres con <code translate="no">-n</code> si su Milvus no está instalado en el espacio de nombres predeterminado de K8s.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique la ruta raíz con <code translate="no">-r</code> si su Milvus está instalado con la costumbre <code translate="no">rootpath</code>.</p>
-<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">19</span> -<span class="hljs-attribute">r</span> by-dev
+<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">23</span> -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique la etiqueta de imagen con <code translate="no">-w</code> si su Milvus está instalado con la personalizada <code translate="no">image</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19 -r by-dev -w milvusdb/milvus:v2.5.19
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23 -r by-dev -w milvusdb/milvus:v2.5.23
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Establezca <code translate="no">-d true</code> si desea eliminar automáticamente el pod de migración una vez finalizada la migración.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19 -w milvusdb/milvus:v2.5.19 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23 -w milvusdb/milvus:v2.5.23 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Retroceda y migre de nuevo si la migración falla.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.19 -r by-dev -o migrate -w milvusdb/milvus:v2.5.19
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23 -r by-dev -o migrate -w milvusdb/milvus:v2.5.23
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

@@ -2,9 +2,10 @@
 id: stl-sort.md
 title: STL_SORT
 summary: >-
-  L'indice STL_SORT è un tipo di indice progettato specificamente per migliorare
-  le prestazioni delle query sui campi numerici (INT8, INT16, ecc.) o sui campi
-  TIMESTAMPTZ di Milvus, organizzando i dati in un ordine ordinato.
+  L'indice STL_SORT è un tipo di indice specificamente progettato per migliorare
+  le prestazioni delle query su campi numerici (INT8, INT16, ecc.), campi
+  VARCHAR o campi TIMESTAMPTZ all'interno di Milvus, organizzando i dati in un
+  ordine ordinato.
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'indice <code translate="no">STL_SORT</code> è un tipo di indice progettato specificamente per migliorare le prestazioni delle query sui campi numerici (INT8, INT16, ecc.) o sui campi <code translate="no">TIMESTAMPTZ</code> all'interno di Milvus, organizzando i dati in un ordine ordinato.</p>
+    </button></h1><p>L'indice <code translate="no">STL_SORT</code> è un tipo di indice progettato specificamente per migliorare le prestazioni delle query sui campi numerici (INT8, INT16, ecc.), sui campi <code translate="no">VARCHAR</code> o sui campi <code translate="no">TIMESTAMPTZ</code> all'interno di Milvus, organizzando i dati in un ordine ordinato.</p>
 <p>Utilizzare l'indice <code translate="no">STL_SORT</code> se si eseguono frequentemente query con:</p>
 <ul>
 <li><p>Filtro di confronto con gli operatori <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code> e <code translate="no">&lt;=</code> </p></li>
@@ -44,6 +45,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Campi numerici (ad esempio, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). Per maggiori dettagli, consultare la sezione <a href="/docs/it/number.md">Campi booleani e numerici</a>.</p></li>
+<li><p><code translate="no">VARCHAR</code> campi. Per maggiori dettagli, vedere <a href="/docs/it/string.md">Campo stringa</a>.</p></li>
 <li><p><code translate="no">TIMESTAMPTZ</code> campi. Per maggiori dettagli, vedere <a href="/docs/it/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Come funziona<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -63,7 +65,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus implementa <code translate="no">STL_SORT</code> in due fasi:</p>
 <ol>
-<li><p><strong>Costruire l'indice</strong></p>
+<li><p><strong>Creazione dell'indice</strong></p>
 <ul>
 <li><p>Durante l'ingestione, Milvus raccoglie tutti i valori del campo indicizzato.</p></li>
 <li><p>I valori vengono ordinati in ordine crescente utilizzando <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort</a> dell'STL C++.</p></li>
@@ -118,6 +120,29 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-an-index" class="common-anchor-header">Eliminare un indice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Usare il metodo <code translate="no">drop_index()</code> per rimuovere un indice esistente da un insieme.</p>
+<div class="alert note">
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;tsz_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;tsz_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">Note d'uso<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,7 +159,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Tipi di campo:</strong> Funziona con campi numerici e <code translate="no">TIMESTAMPTZ</code>. Per ulteriori informazioni sui tipi di dati, consultare <a href="/docs/it/number.md">Boolean &amp; Number</a> e <a href="/docs/it/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
+<li><p><strong>Tipi di campo:</strong> Funziona con i campi numerici e <code translate="no">TIMESTAMPTZ</code>. Per ulteriori informazioni sui tipi di dati, consultare <a href="/docs/it/number.md">Boolean &amp; Number</a> e <a href="/docs/it/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
 <li><p><strong>Parametri:</strong> Non sono necessari parametri di indice.</p></li>
 <li><p><strong>Mmap non supportata:</strong> La modalità memory-mapped non è disponibile per <code translate="no">STL_SORT</code>.</p></li>
 </ul>
