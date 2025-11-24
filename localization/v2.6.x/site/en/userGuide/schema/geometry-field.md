@@ -179,7 +179,7 @@ client.createCollection(requestCreate);
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>In this example, the <code translate="no">GEOMETRY</code> field defined in the collection schema allows null values with <code translate="no">nullable=True</code>. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
+<p>In this example, the <code translate="no">GEOMETRY</code> field defined in the collection schema allows null values with <code translate="no">nullable=True</code>. For details, refer to <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a>.</p>
 </div>
 <h3 id="Step-2-Insert-data" class="common-anchor-header">Step 2: Insert data<button data-href="#Step-2-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -371,7 +371,7 @@ client.createIndex(CreateIndexReq.builder()
 </ul>
 <p>Where:</p>
 <ul>
-<li><p><code translate="no">operator</code> is one of the supported geometry operators (e.g., <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Operator names must be all uppercase or all lowercase. For a list of supported operators, refer to <a href="/docs/geometry-operators.md#Supported-geometry-operators">Supported geometry operators</a>.</p></li>
+<li><p><code translate="no">operator</code> is one of the supported geometry operators (e.g., <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Operator names must be all uppercase or all lowercase. For a list of supported operators, refer to <a href="/docs/v2.6.x/geometry-operators.md#Supported-geometry-operators">Supported geometry operators</a>.</p></li>
 <li><p><code translate="no">geo_field</code> is the name of your <code translate="no">GEOMETRY</code> field.</p></li>
 <li><p><code translate="no">'{wkt}'</code> is the WKT representation of the geometry to query.</p></li>
 <li><p><code translate="no">distance</code> is the threshold specifically for <code translate="no">ST_DWITHIN</code>.</p></li>
@@ -588,7 +588,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
         ></path>
       </svg>
     </button></h2><p>By default, queries on <code translate="no">GEOMETRY</code> fields without an index will perform a full scan of all rows, which can be slow on large datasets. To accelerate geometric queries, create an <code translate="no">RTREE</code> index on your GEOMETRY field.</p>
-<p>For details, refer to <a href="/docs/rtree.md">RTREE</a>.</p>
+<p>For details, refer to <a href="/docs/v2.6.x/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -651,4 +651,4 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Yes, the GEOMETRY field supports the <code translate="no">nullable</code> attribute and a default value in WKT format. For more information, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
+    </button></h3><p>Yes, the GEOMETRY field supports the <code translate="no">nullable</code> attribute and a default value in WKT format. For more information, refer to <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a>.</p>
