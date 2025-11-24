@@ -38,7 +38,7 @@ title: Run Milvus in Docker (Linux)
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Install Docker</a>.</li>
-<li><a href="/docs/v2.6.x/prerequisite-docker.md">Check the requirements for hardware and software</a> prior to your installation.</li>
+<li><a href="/docs/prerequisite-docker.md">Check the requirements for hardware and software</a> prior to your installation.</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">Install Milvus in Docker<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,10 +63,10 @@ title: Run Milvus in Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>What’s new in v2.6.5:</strong></p>
+<p><strong>What’s new in v2.6.6:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Enhanced data processing capabilities</li>
-<li><strong>Woodpecker MQ</strong>: Improved message queue with reduced maintenance overhead, see <a href="/docs/v2.6.x/use-woodpecker.md">Use Woodpecker</a> for detail</li>
+<li><strong>Woodpecker MQ</strong>: Improved message queue with reduced maintenance overhead, see <a href="/docs/use-woodpecker.md">Use Woodpecker</a> for detail</li>
 <li><strong>Optimized Architecture</strong>: Consolidated components for better performance</li>
 </ul>
 <p>Always download the latest script to ensure you get the most recent configurations and architecture improvements.</p>
@@ -80,7 +80,7 @@ title: Run Milvus in Docker (Linux)
 <li>To change the default Milvus configuration, add your settings to the <strong>user.yaml</strong> file in the current folder and then restart the service.</li>
 <li>The Milvus data volume is mapped to <strong>volumes/milvus</strong> in the current folder.</li>
 </ul>
-<p>You can access Milvus WebUI at <code translate="no">http://127.0.0.1:9091/webui/</code> to learn more about the your Milvus instance. For details, refer to <a href="/docs/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>You can access Milvus WebUI at <code translate="no">http://127.0.0.1:9091/webui/</code> to learn more about the your Milvus instance. For details, refer to <a href="/docs/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Update Milvus configurations<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +106,7 @@ EOF
 <p>Then restart the service as follows:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For applicable configuration items, refer to <a href="/docs/v2.6.x/system_configuration.md">System Configuration</a>.</p>
+<p>For applicable configuration items, refer to <a href="/docs/system_configuration.md">System Configuration</a>.</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">Upgrade Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,27 +175,27 @@ EOF
       </svg>
     </button></h2><p>Having installed Milvus in Docker, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/v2.6.x/quickstart.md">Quickstart</a> to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/quickstart.md">Quickstart</a> to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/v2.6.x/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/v2.6.x/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/v2.6.x/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/v2.6.x/insert-update-delete.md">Insert, Upsert & Delete</a></li>
-<li><a href="/docs/v2.6.x/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/v2.6.x/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
+<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
+<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
+<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
+<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
+<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>
-<li><p><a href="/docs/v2.6.x/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/v2.6.x/scaleout.md">Scale your Milvus cluster</a>.</p></li>
+<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
+<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
 <li><p>Deploy your Milvu cluster on clouds:</p>
 <ul>
-<li><a href="/docs/v2.6.x/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/v2.6.x/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/v2.6.x/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/v2.6.x/milvus-webui.md">Milvus WebUI</a>, an intuitive web interface for Milvus observability and management.</p></li>
-<li><p>Explore <a href="/docs/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
-<li><p>Explore <a href="/docs/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
+<li><p>Explore <a href="/docs/milvus-webui.md">Milvus WebUI</a>, an intuitive web interface for Milvus observability and management.</p></li>
+<li><p>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
+<li><p>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, an open-source GUI tool for intuitive Milvus management.</p></li>
-<li><p><a href="/docs/v2.6.x/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

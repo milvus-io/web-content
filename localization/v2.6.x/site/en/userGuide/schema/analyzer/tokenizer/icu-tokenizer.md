@@ -25,7 +25,7 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h1><p>The <code translate="no">icu</code> tokenizer is built on the <a href="http://site.icu-project.org/">Internationalization Components of Unicode</a> (ICU) open‑source project, which provides key tools for software internationalization. By using ICU’s word‑break algorithm, the tokenizer can accurately split text into words across the majority of the world’s languages.</p>
 <div class="alert note">
-<p>The <code translate="no">icu</code> tokenizer preserves punctuation marks and spaces as separate tokens in the output. For example, <code translate="no">&quot;Привет! Как дела?&quot;</code> becomes <code translate="no">[&quot;Привет&quot;, &quot;!&quot;, &quot; &quot;, &quot;Как&quot;, &quot; &quot;, &quot;дела&quot;, &quot;?&quot;]</code>. To remove these standalone punctuation tokens, use the <a href="/docs/v2.6.x/removepunct-filter.md"><code translate="no">removepunct</code></a> filter.</p>
+<p>The <code translate="no">icu</code> tokenizer preserves punctuation marks and spaces as separate tokens in the output. For example, <code translate="no">&quot;Привет! Как дела?&quot;</code> becomes <code translate="no">[&quot;Привет&quot;, &quot;!&quot;, &quot; &quot;, &quot;Как&quot;, &quot; &quot;, &quot;дела&quot;, &quot;?&quot;]</code>. To remove these standalone punctuation tokens, use the <a href="/docs/removepunct-filter.md"><code translate="no">removepunct</code></a> filter.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">Configuration<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">icu</code> tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the <code translate="no">icu</code> tokenizer and <a href="/docs/v2.6.x/removepunct-filter.md">remove punct filter</a>:</p>
+<p>The <code translate="no">icu</code> tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the <code translate="no">icu</code> tokenizer and <a href="/docs/removepunct-filter.md">remove punct filter</a>:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -86,7 +86,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/v2.6.x/analyzer-overview.md#Example-use">Example use</a>.</p>
+<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

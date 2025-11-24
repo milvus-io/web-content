@@ -26,7 +26,7 @@ summary: >-
       </svg>
     </button></h1><p>Based on an index file recording the sorted order of vector embeddings, the Approximate Nearest Neighbor (ANN) search locates a subset of vector embeddings based on the query vector carried in a received search request, compares the query vector with those in the subgroup, and returns the most similar results. With ANN search, Milvus provides an efficient search experience. This page helps you to learn how to conduct basic ANN searches.</p>
 <div class="alert note">
-<p>If you dynamically add new fields after the collection has been created, searches that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/v2.6.x/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+<p>If you dynamically add new fields after the collection has been created, searches that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,14 +49,14 @@ summary: >-
 <p>To reduce the learning curve, Milvus provides <strong>AUTOINDEX</strong>. With <strong>AUTOINDEX</strong>, Milvus can analyze the data distribution within your collection while building the index and sets the most optimized index parameters based on the analysis to strike a balance between search performance and correctness.</p>
 <p>In this section, you will find detailed information about the following topics:</p>
 <ul>
-<li><p><a href="/docs/v2.6.x/single-vector-search.md#Single-Vector-Search">Single-vector search</a></p></li>
-<li><p><a href="/docs/v2.6.x/single-vector-search.md#Bulk-Vector-Search">Bulk-vector search</a></p></li>
-<li><p><a href="/docs/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">ANN search in partition</a></p></li>
-<li><p><a href="/docs/v2.6.x/single-vector-search.md#Use-Output-Fields">Use output fields</a></p></li>
-<li><p><a href="/docs/v2.6.x/single-vector-search.md#Use-Limit-and-Offset">Use limit and offset</a></p></li>
-<li><p><a href="/docs/v2.6.x/single-vector-search.md#Use-Level">Use level</a></p></li>
-<li><p><a href="/docs/v2.6.x/single-vector-search.md#Get-Recall-Rate">Get Recall Rate</a></p></li>
-<li><p><a href="/docs/v2.6.x/single-vector-search.md#Enhancing-ANN-Search">Enhancing ANN search</a></p></li>
+<li><p><a href="/docs/single-vector-search.md#Single-Vector-Search">Single-vector search</a></p></li>
+<li><p><a href="/docs/single-vector-search.md#Bulk-Vector-Search">Bulk-vector search</a></p></li>
+<li><p><a href="/docs/single-vector-search.md#ANN-Search-in-Partition">ANN search in partition</a></p></li>
+<li><p><a href="/docs/single-vector-search.md#Use-Output-Fields">Use output fields</a></p></li>
+<li><p><a href="/docs/single-vector-search.md#Use-Limit-and-Offset">Use limit and offset</a></p></li>
+<li><p><a href="/docs/single-vector-search.md#Use-Level">Use level</a></p></li>
+<li><p><a href="/docs/single-vector-search.md#Get-Recall-Rate">Get Recall Rate</a></p></li>
+<li><p><a href="/docs/single-vector-search.md#Enhancing-ANN-Search">Enhancing ANN search</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">Single-Vector Search<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -978,6 +978,48 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Temporarily set a timezone for a search<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>If your collection has a <code translate="no">TIMESTAMPTZ</code> field, you can temporarily override the database or collection default timezone for a single operation by setting the <code translate="no">timezone</code> parameter in the search call. This controls how <code translate="no">TIMESTAMPTZ</code> values are displayed and compared during the operation.</p>
+<p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p>
+<p>The example below shows how to temporarily set a timezone for a search operation:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    data=[query_vector],
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Enhancing-ANN-Search" class="common-anchor-header">Enhancing ANN Search<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -997,32 +1039,32 @@ curl --request POST \
 <ul>
 <li><p>Filtered Search</p>
 <p>You can include filtering conditions in a search request so that Milvus conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.</p>
-<p>For more about metadata filtering and filtering conditions, refer to <a href="/docs/v2.6.x/filtered-search.md">Filtered Search</a>, <a href="/docs/v2.6.x/boolean.md">Filtering Explained</a>, and related topics.</p></li>
+<p>For more about metadata filtering and filtering conditions, refer to <a href="/docs/filtered-search.md">Filtered Search</a>, <a href="/docs/boolean.md">Filtering Explained</a>, and related topics.</p></li>
 <li><p>Range Search</p>
 <p>You can improve search result relevancy by restricting the distance or score of the returned entities within a specific range. In Milvus, a range search involves drawing two concentric circles with the vector embedding most similar to the query vector as the center. The search request specifies the radius of both circles, and Milvus returns all vector embeddings that fall within the outer circle but not the inner circle.</p>
-<p>For more about range search, refer to <a href="/docs/v2.6.x/range-search.md">Range Search</a>.</p></li>
+<p>For more about range search, refer to <a href="/docs/range-search.md">Range Search</a>.</p></li>
 <li><p>Grouping Search</p>
 <p>If the returned entities hold the same value in a specific field, the search results may not represent the distribution of all vector embeddings in the vector space. To diversify the search results, consider using the grouping search.</p>
-<p>For more about grouping search, refer to <a href="/docs/v2.6.x/grouping-search.md">Grouping Search</a>,</p></li>
+<p>For more about grouping search, refer to <a href="/docs/grouping-search.md">Grouping Search</a>,</p></li>
 <li><p>Hybrid Search</p>
 <p>A collection can include multiple vector fields to save the vector embeddings generated using different embedding models. By doing so, you can use a hybrid search to rerank the search results from these vector fields, improving the recall rate.</p>
-<p>For more about hybrid search, refer to <a href="/docs/v2.6.x/multi-vector-search.md">Hybrid Search</a>.</p></li>
+<p>For more about hybrid search, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p></li>
 <li><p>Search Iterator</p>
 <p>A single ANN search returns a maximum of 16,384 entities. Consider using search iterators if you need more entities to return in a single search.</p>
-<p>For details on search iterators, refer to <a href="/docs/v2.6.x/with-iterators.md">Search Iterator</a>.</p></li>
+<p>For details on search iterators, refer to <a href="/docs/with-iterators.md">Search Iterator</a>.</p></li>
 <li><p>Full-Text Search</p>
 <p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.</p>
-<p>For details on full-text search, refer to <a href="/docs/v2.6.x/full-text-search.md">Full Text Search</a>.</p></li>
+<p>For details on full-text search, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
 <li><p>Text Match</p>
 <p>Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.</p>
-<p>For details on keyword match, refer to <a href="/docs/v2.6.x/keyword-match.md">Keyword Match</a>.</p></li>
+<p>For details on keyword match, refer to <a href="/docs/keyword-match.md">Keyword Match</a>.</p></li>
 <li><p>Use Partition Key</p>
 <p>Involving multiple scalar fields in metadata filtering and using a rather complicated filtering condition may affect search efficiency. Once you set a scalar field as the partition key and use a filtering condition involving the partition key in the search request, it can help restrict the search scope within the partitions corresponding to the specified partition key values.</p>
-<p>For details on the partition key, refer to <a href="/docs/v2.6.x/use-partition-key.md">Use Partition Key</a>.</p></li>
+<p>For details on the partition key, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p></li>
 <li><p>Use mmap</p>
-<p>For details on mmap-settings, refer to <a href="/docs/v2.6.x/mmap.md">Use mmap</a>.</p></li>
+<p>For details on mmap-settings, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></li>
 <li><p>Clustering Compaction</p>
-<p>For details on clustering compactions, refer to <a href="/docs/v2.6.x/clustering-compaction.md">Clustering Compaction</a>.</p></li>
+<p>For details on clustering compactions, refer to <a href="/docs/clustering-compaction.md">Clustering Compaction</a>.</p></li>
 <li><p>Use reranking</p>
-<p>For details on using rankers to enhance search result relevance, refer to <a href="/docs/v2.6.x/decay-ranker-overview.md">Decay Ranker Overview</a> and <a href="/docs/v2.6.x/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
+<p>For details on using rankers to enhance search result relevance, refer to <a href="/docs/decay-ranker-overview.md">Decay Ranker Overview</a> and <a href="/docs/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
 </ul>

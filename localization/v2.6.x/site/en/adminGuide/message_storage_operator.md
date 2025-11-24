@@ -61,7 +61,7 @@ summary: Learn how to configure message storage with Milvus Operator.
 </ul></li>
 <li>The message storage cannot be changed while the Milvus system is running.</li>
 <li>Only Kafka 2.x or 3.x verison is supported.</li>
-<li><strong>Upgrade limitations</strong>: <strong>Message Queue limitations</strong>: When upgrading to Milvus v2.6.5, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.</li>
+<li><strong>Upgrade limitations</strong>: <strong>Message Queue limitations</strong>: When upgrading to Milvus v2.6.6, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configure RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -428,6 +428,6 @@ Fields used to configure an external Pulsar service include:</p>
       </svg>
     </button></h2><p>Learn how to configure other Milvus dependencies with Milvus Operator:</p>
 <ul>
-<li><a href="/docs/v2.6.x/object_storage_operator.md">Configure Object Storage with Milvus Operator</a></li>
-<li><a href="/docs/v2.6.x/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
+<li><a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a></li>
+<li><a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
 </ul>

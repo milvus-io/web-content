@@ -168,23 +168,27 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>If the data of a collection needs to be deleted after a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes all entities from the collection. </p><p>The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.</p><p>For details, refer to <a href="/docs/v2.6.x/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
+     <td><p>If the data of a collection needs to be deleted after a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes all entities from the collection. </p><p>The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.</p><p>For details, refer to <a href="/docs/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize data placement policy based on access frequency, expanding storage capacity for collections without impacting search performance.</p><p>For details, refer to <a href="/docs/v2.6.x/mmap.md">Use mmap</a>.</p></td>
+     <td><p>Memory mapping (Mmap) enables direct memory access to large files on disk, allowing Milvus to store indexes and data in both memory and hard drives. This approach helps optimize data placement policy based on access frequency, expanding storage capacity for collections without impacting search performance.</p><p>For details, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>With Partition Key Isolation enabled, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance.</p><p>For details, refer to <a href="/docs/v2.6.x/use-partition-key.md#Use-Partition-Key-Isolation">Use Partition Key Isolation</a>.</p></td>
+     <td><p>With Partition Key Isolation enabled, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance.</p><p>For details, refer to <a href="/docs/use-partition-key.md#Use-Partition-Key-Isolation">Use Partition Key Isolation</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
-     <td><p>Enables the dynamic field for collections that were created without enabling it. Once enabled, you can insert entities with fields not defined in the original schema. For details, refer to <a href="/docs/v2.6.x/enable-dynamic-field.md">Dynamic Field</a>.</p></td>
+     <td><p>Enables the dynamic field for collections that were created without enabling it. Once enabled, you can insert entities with fields not defined in the original schema. For details, refer to <a href="/docs/enable-dynamic-field.md">Dynamic Field</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
      <td><p>Whether to allow a collection to accept user-provided primary key values when AutoID has been enabled for the collection.</p><ul><li><p>When set to <strong>"true"</strong>: Inserts, upserts, and bulk imports use the user-provided primary key if present; otherwise, primary key values are auto-generated.</p></li><li><p>When set to <strong>"false"</strong>: User-provided primary key values are rejected or ignored and primary key values are always auto-generated. The default is <strong>"false"</strong>.</p></li></ul></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">timezone</code></p></td>
+     <td><p>Specifies the default timezone for this collection when handling time-sensitive operations, especially <code translate="no">TIMESTAMPTZ</code> fields. Timestamps are stored internally in UTC, and Milvus converts values for display and comparison according to this setting. If set, the collection timezone overrides the database’s default timezone; a query’s timezone parameter can temporarily override both. The value must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Example 1: Set collection TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
@@ -510,6 +514,65 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
       &quot;allow_insert_auto_id&quot;: &quot;true&quot;
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-6-Set-collection-time-zone" class="common-anchor-header">Example 6: Set collection time zone<button data-href="#Example-6-Set-collection-time-zone" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>You can set a default time zone for your collection using the <code translate="no">timezone</code> property. This determines how time-related data is interpreted and displayed for all operations within the collection, including data insertion, querying, and results presentation.</p>
+<p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a>, such as <code translate="no">Asia/Shanghai</code>, <code translate="no">America/Chicago</code>, or <code translate="no">UTC</code>. Using an invalid or non-standard value will result in an error when modifying the collection property.</p>
+<p>The example below shows how to set the collection time zone to <strong>Asia/Shanghai</strong>:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;timezone&quot;</span>: <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>);
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(common.CollectionDefaultTimezone, <span class="hljs-literal">true</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+      &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

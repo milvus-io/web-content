@@ -157,7 +157,7 @@ summary: >-
   </span>
 </p>
 <div class="alert note">
-<p>The number of bands is controlled by the <code translate="no">mh_lsh_band</code> parameter. For more information, refer to <a href="/docs/v2.6.x/minhash-lsh.md#Index-building-params">Index building params</a>.</p>
+<p>The number of bands is controlled by the <code translate="no">mh_lsh_band</code> parameter. For more information, refer to <a href="/docs/minhash-lsh.md#Index-building-params">Index building params</a>.</p>
 </div>
 <h3 id="MHJACCARD-Comparing-MinHash-signatures" class="common-anchor-header">MHJACCARD: Comparing MinHash signatures<button data-href="#MHJACCARD-Comparing-MinHash-signatures" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -183,7 +183,7 @@ summary: >-
 <li><p>The <code translate="no">metric_type</code> must be set to <code translate="no">MHJACCARD</code></p></li>
 </ul>
 <p>Using other metrics will either be invalid or yield incorrect results.</p>
-<p>For more information about this metric type, refer to <a href="/docs/v2.6.x/metric.md#MHJACCARD">MHJACCARD</a>.</p>
+<p>For more information about this metric type, refer to <a href="/docs/metric.md#MHJACCARD">MHJACCARD</a>.</p>
 <h3 id="Deduplication-workflow" class="common-anchor-header">Deduplication workflow<button data-href="#Deduplication-workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -293,7 +293,7 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
         m.update(token.encode(<span class="hljs-string">&quot;utf8&quot;</span>))
     <span class="hljs-keyword">return</span> m.hashvalues.astype(<span class="hljs-string">&#x27;&gt;u8&#x27;</span>).tobytes()  <span class="hljs-comment"># Returns 2048 bytes</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Each signature is 256 × 64 bits = 2048 bytes. This byte string can be directly inserted into a <code translate="no">BINARY_VECTOR</code> field. For more information on binary vectors used in Milvus, refer to <a href="/docs/v2.6.x/binary-vector.md">Binary Vector</a>.</p>
+<p>Each signature is 256 × 64 bits = 2048 bytes. This byte string can be directly inserted into a <code translate="no">BINARY_VECTOR</code> field. For more information on binary vectors used in Milvus, refer to <a href="/docs/binary-vector.md">Binary Vector</a>.</p>
 <h3 id="Optional-Prepare-raw-token-sets-for-refined-search" class="common-anchor-header">(Optional) Prepare raw token sets (for refined search)<button data-href="#Optional-Prepare-raw-token-sets-for-refined-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -313,8 +313,8 @@ HASH_BIT_WIDTH = <span class="hljs-number">64</span>
 <p>If you want <strong>accurate Jaccard similarity</strong>, Milvus supports refined search that uses original token sets. To enable it:</p>
 <ul>
 <li><p>Store token sets as a separate <code translate="no">VARCHAR</code> field</p></li>
-<li><p>Set <code translate="no">&quot;with_raw_data&quot;: True</code> when <a href="/docs/v2.6.x/minhash-lsh.md#Build-index-parameters-and-create-collection">building index parameters</a></p></li>
-<li><p>And enable <code translate="no">&quot;mh_search_with_jaccard&quot;: True</code> when <a href="/docs/v2.6.x/minhash-lsh.md#Perform-similarity-search">performing similarity search</a></p></li>
+<li><p>Set <code translate="no">&quot;with_raw_data&quot;: True</code> when <a href="/docs/minhash-lsh.md#Build-index-parameters-and-create-collection">building index parameters</a></p></li>
+<li><p>And enable <code translate="no">&quot;mh_search_with_jaccard&quot;: True</code> when <a href="/docs/minhash-lsh.md#Perform-similarity-search">performing similarity search</a></p></li>
 </ul>
 <p><strong>Token set extraction example</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">extract_token_set</span>(<span class="hljs-params">text: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:
@@ -463,7 +463,7 @@ client.create_collection(<span class="hljs-string">&quot;minhash_demo&quot;</spa
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on index building parameters, refer to <a href="/docs/v2.6.x/minhash-lsh.md#Index-building-params">Index building params</a>.</p>
+<p>For more information on index building parameters, refer to <a href="/docs/minhash-lsh.md#Index-building-params">Index building params</a>.</p>
 <h3 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -662,7 +662,7 @@ refined_results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/v2.6.x/minhash-lsh.md#Build-index-parameters-and-create-collection">building an index</a>.</p>
+    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/minhash-lsh.md#Build-index-parameters-and-create-collection">building an index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -716,7 +716,7 @@ refined_results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/v2.6.x/minhash-lsh.md#Perform-similarity-search">searching on the index</a>.</p>
+    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/minhash-lsh.md#Perform-similarity-search">searching on the index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>

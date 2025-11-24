@@ -6,9 +6,9 @@ summary: >-
   collaboration tools, or distributed logging, need precise handling of
   timestamps with time zones. The TIMESTAMPTZ data type in Milvus provides this
   capability by storing timestamps with their associated time zone.
-beta: Milvus 2.6.4+
+beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">TIMESTAMPTZ Field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">TIMESTAMPTZ Field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,7 +39,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A <code translate="no">TIMESTAMPTZ</code> field is a schema-defined data type (<code translate="no">DataType.TIMESTAMPTZ</code>) in Milvus that stores timestamps with explicit time zones:</p>
+    </button></h2><p>A <code translate="no">TIMESTAMPTZ</code> field is a schema-defined data type (<code translate="no">DataType.TIMESTAMPTZ</code>) in Milvus that processes time zone-aware input and stores all time points internally as UTC absolute time:</p>
 <ul>
 <li><p><strong>Accepted input format</strong>: <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> strings with a time-zone offset (for example, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> represents 11:59:59 PM in UTC+08:00).</p></li>
 <li><p><strong>Internal storage</strong>: All <code translate="no">TIMESTAMPTZ</code> values are normalized and stored in <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time</a> (UTC).</p></li>
@@ -50,7 +50,7 @@ beta: Milvus 2.6.4+
 <li><p>You can set <code translate="no">nullable=True</code> for <code translate="no">TIMESTAMPTZ</code> fields to allow missing values.</p></li>
 <li><p>You can specify a default timestamp value using the <code translate="no">default_value</code> attribute in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.</p></li>
 </ul>
-<p>See <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a> for details.</p>
+<p>See <a href="/docs/nullable-and-default.md">Nullable & Default</a> for details.</p>
 </div>
 <h2 id="Basic-operations" class="common-anchor-header">Basic operations<button data-href="#Basic-operations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -240,7 +240,7 @@ client.load_collection(collection_name)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Query with timestamp filtering</h4><p>Use arithmetic operators like <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. For a full list of arithmetic operators available in Milvus, refer to <a href="/docs/v2.6.x/basic-operators.md#Arithmetic-Operators">Arithmetic Operators</a>.</p>
+<h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Query with timestamp filtering</h4><p>Use arithmetic operators like <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. For a full list of arithmetic operators available in Milvus, refer to <a href="/docs/basic-operators.md#Arithmetic-Operators">Arithmetic Operators</a>.</p>
 <p>The example below filters entities with timestamps (<code translate="no">tsz</code>) that are not equal to <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
     <a href="#bash">cURL</a>
@@ -322,85 +322,6 @@ results = client.query(
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → Subtracts 2 hours</p></li>
 </ul>
 </div>
-<h4 id="Extract-timestamp-elements" class="common-anchor-header">Extract timestamp elements</h4><p>You can extract specific components from <code translate="no">TIMESTAMPTZ</code> fields, such as the year, month, or day, by using the <code translate="no">time_fields</code> parameter in your query or search.</p>
-<p>The example below extracts the <code translate="no">year</code>, <code translate="no">month</code>, and <code translate="no">day</code> elements from each <code translate="no">TIMESTAMPTZ</code> field in the query results:</p>
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
-<pre><code translate="no" class="language-python">results = client.query(
-    collection_name,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-<span class="highlighted-wrapper-line">    time_fields=<span class="hljs-string">&quot;year, month, day&quot;</span>,</span>
-    limit=<span class="hljs-number">2</span>,
-)
-
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
-
-<span class="hljs-comment"># Expected output:</span>
-<span class="hljs-comment"># Query result:  data: [&quot;{&#x27;id&#x27;: 1, &#x27;tsz&#x27;: [2024, 12, 31]}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;tsz&#x27;: [2025, 1, 1]}&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Supported elements for extraction</strong></p>
-<table>
-   <tr>
-     <th><p>Element</p></th>
-     <th><p>Description</p></th>
-     <th><p>Example output</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">year</code></p></td>
-     <td><p>Year component</p></td>
-     <td><p><code translate="no">2025</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">month</code></p></td>
-     <td><p>Month number</p></td>
-     <td><p><code translate="no">1</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">day</code></p></td>
-     <td><p>Day of month</p></td>
-     <td><p><code translate="no">3</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">hour</code></p></td>
-     <td><p>Hour (0–23)</p></td>
-     <td><p><code translate="no">14</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">minute</code></p></td>
-     <td><p>Minute</p></td>
-     <td><p><code translate="no">30</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">second</code></p></td>
-     <td><p>Second</p></td>
-     <td><p><code translate="no">5</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">microsecond</code></p></td>
-     <td><p>Microsecond</p></td>
-     <td><p><code translate="no">123456</code></p></td>
-   </tr>
-</table>
-<div class="alert note">
-<ul>
-<li><p>The parameter <code translate="no">time_fields</code> is a comma-separated string (for example, <code translate="no">&quot;year, month, day&quot;</code>).</p></li>
-<li><p>The result is returned as an array of extracted components (for example, <code translate="no">[2024, 12, 31]</code>).</p></li>
-</ul>
-</div>
 <h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Search with timestamp filtering</h4><p>You can combine <code translate="no">TIMESTAMPTZ</code> filtering with vector similarity search to narrow results by both time and similarity.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -434,7 +355,7 @@ res = client.search(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If your collection has two or more vector fields, you can perform hybrid search operations with timestamp filtering. For details, refer to <a href="/docs/v2.6.x/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
+<p>If your collection has two or more vector fields, you can perform hybrid search operations with timestamp filtering. For details, refer to <a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
 </div>
 <h2 id="Advanced-usage" class="common-anchor-header">Advanced usage<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -477,13 +398,13 @@ res = client.search(
    </tr>
    <tr>
      <td><p>Database</p></td>
-     <td><p><code translate="no">database.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>Default for all collections in the database</p></td>
      <td><p>Lowest</p></td>
    </tr>
    <tr>
      <td><p>Collection</p></td>
-     <td><p><code translate="no">collection.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>Overrides the database default time zone setting for that collection</p></td>
      <td><p>Medium</p></td>
    </tr>
@@ -496,11 +417,11 @@ res = client.search(
 </table>
 <p>For step-by-step instructions and code samples, refer to the dedicated pages:</p>
 <ul>
-<li><p><a href="/docs/v2.6.x/modify-collection.md#Example-6-Set-collection-time-zone">Modify Collection</a></p></li>
-<li><p><a href="/docs/v2.6.x/manage_databases.md#Manage-database-properties">Database</a></p></li>
-<li><p><a href="/docs/v2.6.x/get-and-scalar-query.md#Temporarily-set-a-timezone-for-a-query">Query</a></p></li>
-<li><p><a href="/docs/v2.6.x/single-vector-search.md#Temporarily-set-a-timezone-for-a-search">Basic Vector Search</a></p></li>
-<li><p><a href="/docs/v2.6.x/multi-vector-search.md">Multi-Vector Hybrid Search</a></p></li>
+<li><p><a href="/docs/modify-collection.md#Example-6-Set-collection-time-zone">Modify Collection</a></p></li>
+<li><p><a href="/docs/manage_databases.md#Manage-database-properties">Database</a></p></li>
+<li><p><a href="/docs/get-and-scalar-query.md#Temporarily-set-a-timezone-for-a-query">Query</a></p></li>
+<li><p><a href="/docs/single-vector-search.md#Temporarily-set-a-timezone-for-a-search">Basic Vector Search</a></p></li>
+<li><p><a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a></p></li>
 </ul>
 <h3 id="Accelerate-queries" class="common-anchor-header">Accelerate queries<button data-href="#Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -518,4 +439,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>By default, queries on <code translate="no">TIMESTAMPTZ</code> fields without an index will perform a full scan of all rows, which can be slow on large datasets. To accelerate timestamp queries, create an <code translate="no">STL_SORT</code> index on your <code translate="no">TIMESTAMPTZ</code> field.</p>
-<p>For details, refer to <a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT</a>.</p>
+<p>For details, refer to <a href="/docs/stl-sort.md">STL_SORT</a>.</p>

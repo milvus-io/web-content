@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.</p>
 <div class="alert note">
-<p>If you dynamically add new fields after the collection has been created, queries that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/v2.6.x/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+<p>If you dynamically add new fields after the collection has been created, queries that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -642,7 +642,7 @@ curl --request POST \
       </svg>
     </button></h2><p>To extract a representative subset of data from your collection for data exploration or development testing, use the <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> expression, where the <code translate="no">sampling_factor</code> is a float between 0 and 1 representing the percentage of data to sample.</p>
 <div class="alert note">
-<p>For detailed usage, advanced examples, and best practices, refer to <a href="/docs/v2.6.x/random-sampling.md">Random Sampling</a>.</p>
+<p>For detailed usage, advanced examples, and best practices, refer to <a href="/docs/random-sampling.md">Random Sampling</a>.</p>
 </div>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -749,6 +749,48 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-query" class="common-anchor-header">Temporarily set a timezone for a query<button data-href="#Temporarily-set-a-timezone-for-a-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>If your collection has a <code translate="no">TIMESTAMPTZ</code> field, you can temporarily override the database or collection default timezone for a single operation by setting the <code translate="no">timezone</code> parameter in the query call. This controls how <code translate="no">TIMESTAMPTZ</code> values are displayed and compared during the operation.</p>
+<p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p>
+<p>The example below shows how to temporarily set a timezone for a query operation:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query data and display the tsz field converted to &quot;America/Havana&quot;</span>
+results = client.query(
+    collection_name,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>, <span class="hljs-string">&quot;vec&quot;</span>],
+    limit=<span class="hljs-number">2</span>,
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
