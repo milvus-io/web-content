@@ -5,6 +5,7 @@ summary: >-
   يحدد المخطط بنية بيانات المجموعة. قبل إنشاء مجموعة، تحتاج إلى وضع تصميم
   لمخططها. تساعدك هذه الصفحة على فهم مخطط المجموعة وتصميم مثال للمخطط بنفسك.
 ---
+
 <h1 id="Schema-Explained" class="common-anchor-header">شرح المخطط<button data-href="#Schema-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +45,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
    </span> <span class="img-wrapper"> <span>تشريح تصميم المخطط</span> </span></p>
 <p>يتضمن تصميم نموذج البيانات لنظام البحث تحليل احتياجات العمل وتجريد المعلومات في نموذج بيانات معبر عن المخطط. على سبيل المثال، يجب "فهرسة" البحث عن جزء من النص عن طريق تحويل السلسلة الحرفية إلى متجه من خلال "التضمين" وتمكين البحث المتجه. بالإضافة إلى هذا الشرط الأساسي، قد يكون من الضروري تخزين خصائص أخرى مثل الطابع الزمني للنشر والمؤلف. تسمح هذه البيانات الوصفية بتنقيح عمليات البحث الدلالية من خلال التصفية، وإرجاع النصوص المنشورة بعد تاريخ محدد أو من قبل مؤلف معين فقط. يمكنك أيضًا استرداد هذه المقاييس مع النص الرئيسي لعرض نتيجة البحث في التطبيق. يجب تعيين مُعرِّف فريد لكل منها لتنظيم هذه الأجزاء النصية، معبراً عنه كعدد صحيح أو سلسلة. هذه العناصر ضرورية لتحقيق منطق بحث متطور.</p>
-<p>راجع <a href="/docs/ar/v2.6.x/schema-hands-on.md">التدريب العملي على تصميم المخطط</a> لمعرفة كيفية إنشاء مخطط جيد التصميم.</p>
+<p>راجع <a href="/docs/ar/schema-hands-on.md">التدريب العملي على تصميم المخطط</a> لمعرفة كيفية إنشاء مخطط جيد التصميم.</p>
 <h2 id="Create-Schema" class="common-anchor-header">إنشاء مخطط<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,6 +68,7 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
@@ -109,15 +111,16 @@ schema := entity.NewSchema()
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; 
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 
 schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
-        .dataType(DataType.Int64)
-<span class="highlighted-comment-line">        .isPrimaryKey(<span class="hljs-literal">true</span>)</span>
-<span class="highlighted-comment-line">        .autoID(<span class="hljs-literal">false</span>)</span>
-        .build());
+.fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
+.dataType(DataType.Int64)
+<span class="highlighted-comment-line"> .isPrimaryKey(<span class="hljs-literal">true</span>)</span>
+<span class="highlighted-comment-line"> .autoID(<span class="hljs-literal">false</span>)</span>
+.build());
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
@@ -146,7 +149,7 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p>عند إضافة حقل، يمكنك توضيح الحقل صراحةً كحقل أساسي عن طريق تعيين الخاصية <code translate="no">is_primary</code> إلى <code translate="no">True</code>. يقبل الحقل الأساسي قيم <strong>Int64</strong> افتراضيًا. في هذه الحالة، يجب أن تكون قيمة الحقل الأساسي أعدادًا صحيحة مشابهة لـ <code translate="no">12345</code>. إذا اخترت استخدام قيم <strong>VarChar</strong> في الحقل الأساسي، فيجب أن تكون القيمة سلاسل مشابهة لـ <code translate="no">my_entity_1234</code>.</p>
 <p>يمكنك أيضًا تعيين خصائص <code translate="no">autoId</code> على <code translate="no">True</code> لجعل Zilliz Cloud يخصص قيم الحقل الأساسي تلقائيًا عند إدراج البيانات.</p>
-<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/primary-field.md">الحقل الأساسي والمعرف التلقائي</a>.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/primary-field.md">الحقل الأساسي والمعرف التلقائي</a>.</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">إضافة حقول متجهة<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -197,13 +200,14 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-    \&quot;autoID\&quot;: false,
-    \&quot;fields\&quot;: [
-        <span class="hljs-variable">$primaryField</span>,
-        <span class="hljs-variable">$vectorField</span>
-    ]
+\&quot;autoID\&quot;: false,
+\&quot;fields\&quot;: [
+<span class="hljs-variable">$primaryField</span>,
+<span class="hljs-variable">$vectorField</span>
+]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>تشير المعلمة <code translate="no">dim</code> في مقتطفات التعليمات البرمجية أعلاه إلى بُعدية التضمينات المتجهة التي سيتم الاحتفاظ بها في الحقل المتجه. تشير القيمة <code translate="no">FLOAT_VECTOR</code> إلى أن الحقل المتجه يحمل قائمة من الأرقام العائمة 32 بت، والتي تستخدم عادةً لتمثيل مضادات الجذر، بالإضافة إلى ذلك، تدعم Zilliz Cloud أيضًا الأنواع التالية من تضمينات المتجهات:</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
@@ -233,7 +237,7 @@ schema.addField(AddFieldReq.builder()
         ></path>
       </svg>
     </button></h2><p>في الحالات الشائعة، يمكنك استخدام الحقول القياسية لتخزين البيانات الوصفية للتضمينات المتجهة المخزنة في ميلفوس، وإجراء عمليات بحث الشبكة الآلية مع تصفية البيانات الوصفية لتحسين صحة نتائج البحث. تدعم Zilliz Cloud العديد من أنواع الحقول القياسية، بما في ذلك <strong>VarChar</strong> و <strong>Boolean</strong> و <strong>Int</strong> و <strong>Float</strong> و <strong>Double</strong> و <strong>Array</strong> و <strong>JSON</strong>.</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">إضافة حقول سلسلة</h3><p>في ميلفوس، يمكنك استخدام حقول VarChar لتخزين السلاسل. لمعرفة المزيد عن حقل VarChar، راجع <a href="/docs/ar/v2.6.x/string.md">حقل السلسلة</a>.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">إضافة حقول سلسلة</h3><p>في ميلفوس، يمكنك استخدام حقول VarChar لتخزين السلاسل. لمعرفة المزيد عن حقل VarChar، راجع <a href="/docs/ar/string.md">حقل السلسلة</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -268,15 +272,16 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-    \&quot;autoID\&quot;: false,
-    \&quot;fields\&quot;: [
-        <span class="hljs-variable">$primaryField</span>,
-        <span class="hljs-variable">$vectorField</span>,
-        <span class="hljs-variable">$varCharField</span>
-    ]
+\&quot;autoID\&quot;: false,
+\&quot;fields\&quot;: [
+<span class="hljs-variable">$primaryField</span>,
+<span class="hljs-variable">$vectorField</span>,
+<span class="hljs-variable">$varCharField</span>
+]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Number-Fields" class="common-anchor-header">إضافة حقول الأرقام</h3><p>أنواع الأرقام التي يدعمها ميلفوس هي <code translate="no">Int8</code> و <code translate="no">Int16</code> و و <code translate="no">Int32</code> و <code translate="no">Int64</code> و <code translate="no">Float</code> و <code translate="no">Double</code>. لمعرفة المزيد عن حقول الأرقام، راجع <a href="/docs/ar/v2.6.x/number.md">حقل الأرقام</a>.</p>
+
+<h3 id="Add-Number-Fields" class="common-anchor-header">إضافة حقول الأرقام</h3><p>أنواع الأرقام التي يدعمها ميلفوس هي <code translate="no">Int8</code> و <code translate="no">Int16</code> و و <code translate="no">Int32</code> و <code translate="no">Int64</code> و <code translate="no">Float</code> و <code translate="no">Double</code>. لمعرفة المزيد عن حقول الأرقام، راجع <a href="/docs/ar/number.md">حقل الأرقام</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -304,15 +309,16 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-    \&quot;autoID\&quot;: false,
-    \&quot;fields\&quot;: [
-        <span class="hljs-variable">$primaryField</span>,
-        <span class="hljs-variable">$vectorField</span>,
-        <span class="hljs-variable">$varCharField</span>,
-        <span class="hljs-variable">$int64Field</span>
-    ]
+\&quot;autoID\&quot;: false,
+\&quot;fields\&quot;: [
+<span class="hljs-variable">$primaryField</span>,
+<span class="hljs-variable">$vectorField</span>,
+<span class="hljs-variable">$varCharField</span>,
+<span class="hljs-variable">$int64Field</span>
+]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Add-Boolean-Fields" class="common-anchor-header">إضافة حقول منطقية</h3><p>يدعم ميلفوس الحقول المنطقية. توضح مقتطفات التعليمات البرمجية التالية كيفية إضافة حقل منطقي.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -341,17 +347,18 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-    \&quot;autoID\&quot;: false,
-    \&quot;fields\&quot;: [
-        <span class="hljs-variable">$primaryField</span>,
-        <span class="hljs-variable">$vectorField</span>,
-        <span class="hljs-variable">$varCharField</span>,
-        <span class="hljs-variable">$int64Field</span>,
-        <span class="hljs-variable">$boolField</span>
-    ]
+\&quot;autoID\&quot;: false,
+\&quot;fields\&quot;: [
+<span class="hljs-variable">$primaryField</span>,
+<span class="hljs-variable">$vectorField</span>,
+<span class="hljs-variable">$varCharField</span>,
+<span class="hljs-variable">$int64Field</span>,
+<span class="hljs-variable">$boolField</span>
+]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-JSON-fields" class="common-anchor-header">إضافة حقول JSON</h3><p>عادةً ما يخزن حقل JSON بيانات JSON نصف مهيكلة. للمزيد عن حقول JSON، راجع <a href="/docs/ar/v2.6.x/use-json-fields.md">حقل JSON</a>.</p>
+
+<h3 id="Add-JSON-fields" class="common-anchor-header">إضافة حقول JSON</h3><p>عادةً ما يخزن حقل JSON بيانات JSON نصف مهيكلة. للمزيد عن حقول JSON، راجع <a href="/docs/ar/use-json-fields.md">حقل JSON</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيس</a> <a href="#go">جو</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -379,18 +386,19 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-    \&quot;autoID\&quot;: false,
-    \&quot;fields\&quot;: [
-        <span class="hljs-variable">$primaryField</span>,
-        <span class="hljs-variable">$vectorField</span>,
-        <span class="hljs-variable">$varCharField</span>,
-        <span class="hljs-variable">$int64Field</span>,
-        <span class="hljs-variable">$boolField</span>,
-        <span class="hljs-variable">$jsonField</span>
-    ]
+\&quot;autoID\&quot;: false,
+\&quot;fields\&quot;: [
+<span class="hljs-variable">$primaryField</span>,
+<span class="hljs-variable">$vectorField</span>,
+<span class="hljs-variable">$varCharField</span>,
+<span class="hljs-variable">$int64Field</span>,
+<span class="hljs-variable">$boolField</span>,
+<span class="hljs-variable">$jsonField</span>
+]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields" class="common-anchor-header">إضافة حقول مصفوفة</h3><p>يخزن حقل المصفوفة قائمة من العناصر. يجب أن تكون أنواع البيانات لجميع العناصر في حقل المصفوفة متشابهة. للمزيد عن حقول المصفوفة، راجع <a href="/docs/ar/v2.6.x/array_data_type.md">حقل المصفوفة</a>.</p>
+
+<h3 id="Add-Array-Fields" class="common-anchor-header">إضافة حقول مصفوفة</h3><p>يخزن حقل المصفوفة قائمة من العناصر. يجب أن تكون أنواع البيانات لجميع العناصر في حقل المصفوفة متشابهة. للمزيد عن حقول المصفوفة، راجع <a href="/docs/ar/array_data_type.md">حقل المصفوفة</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -434,15 +442,15 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-    \&quot;autoID\&quot;: false,
-    \&quot;fields\&quot;: [
-        <span class="hljs-variable">$primaryField</span>,
-        <span class="hljs-variable">$vectorField</span>,
-        <span class="hljs-variable">$varCharField</span>,
-        <span class="hljs-variable">$int64Field</span>,
-        <span class="hljs-variable">$boolField</span>,
-        <span class="hljs-variable">$jsonField</span>,
-        <span class="hljs-variable">$arrayField</span>
-    ]
+\&quot;autoID\&quot;: false,
+\&quot;fields\&quot;: [
+<span class="hljs-variable">$primaryField</span>,
+<span class="hljs-variable">$vectorField</span>,
+<span class="hljs-variable">$varCharField</span>,
+<span class="hljs-variable">$int64Field</span>,
+<span class="hljs-variable">$boolField</span>,
+<span class="hljs-variable">$jsonField</span>,
+<span class="hljs-variable">$arrayField</span>
+]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -2,6 +2,7 @@
 id: glossary.md
 title: 用語解説
 ---
+
 <h1 id="Terminology" class="common-anchor-header">用語解説<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +81,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ja/v2.6.x/birdwatcher_overview.md">Birdwatcherは</a>etcdに接続するMilvus用のデバッグツールで、Milvusサーバの状態を監視し、リアルタイムに調整を行うことができます。また、etcdファイルのバックアップにも対応しており、開発者のトラブルシューティングを支援します。</p>
+    </button></h2><p><a href="/docs/ja/birdwatcher_overview.md">Birdwatcherは</a>etcdに接続するMilvus用のデバッグツールで、Milvusサーバの状態を監視し、リアルタイムに調整を行うことができます。また、etcdファイルのバックアップにも対応しており、開発者のトラブルシューティングを支援します。</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">バルクライター<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,7 +145,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは、ストリーミングサービスアーキテクチャの一部として、<a href="#pchannel">PCチャネルと</a> <a href="#vchannel">Vチャネルの</a>2種類のチャネルを利用している。各PCChannelは<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerが</a>管理するWALストリームに対応し、各VChannelはコレクション内のシャードに対応します。ストリーミングサービスはこれらのチャネルを管理し、データの一貫性と障害回復を保証します。</p>
+    </button></h2><p>Milvusは、ストリーミングサービスアーキテクチャの一部として、<a href="#pchannel">PCチャネルと</a> <a href="#vchannel">Vチャネルの</a>2種類のチャネルを利用している。各PCChannelは<a href="/docs/ja/woodpecker_architecture.md">Woodpeckerが</a>管理するWALストリームに対応し、各VChannelはコレクション内のシャードに対応します。ストリーミングサービスはこれらのチャネルを管理し、データの一貫性と障害回復を保証します。</p>
 <h2 id="Collection" class="common-anchor-header">コレクション<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +161,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、コレクションはリレーショナルデータベース管理システム（RDBMS）におけるテーブルに相当します。コレクションはエンティティの保存と管理に使用される主要な論理オブジェクトです。詳細については、「<a href="/docs/ja/v2.6.x/manage-collections.md">コレクションの管理</a>」を参照してください。</p>
+    </button></h2><p>Milvusでは、コレクションはリレーショナルデータベース管理システム（RDBMS）におけるテーブルに相当します。コレクションはエンティティの保存と管理に使用される主要な論理オブジェクトです。詳細については、「<a href="/docs/ja/manage-collections.md">コレクションの管理</a>」を参照してください。</p>
 <h2 id="Dependency" class="common-anchor-header">依存関係<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +193,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>動的スキーマを使用すると、既存のスキーマを変更することなく、新しいフィールドを持つエンティティをコレクションに挿入できます。これは、コレクションの完全なスキーマを知らなくてもデータを挿入でき、まだ定義されていないフィールドを含めることができることを意味します。コレクションを作成するときにダイナミック・フィールドを有効にすることで、このスキーマ・フリー機能を有効にできます。詳細は、<a href="/docs/ja/v2.6.x/enable-dynamic-field.md">Enable Dynamic Fieldを</a>参照してください。</p>
+    </button></h2><p>動的スキーマを使用すると、既存のスキーマを変更することなく、新しいフィールドを持つエンティティをコレクションに挿入できます。これは、コレクションの完全なスキーマを知らなくてもデータを挿入でき、まだ定義されていないフィールドを含めることができることを意味します。コレクションを作成するときにダイナミック・フィールドを有効にすることで、このスキーマ・フリー機能を有効にできます。詳細は、<a href="/docs/ja/enable-dynamic-field.md">Enable Dynamic Fieldを</a>参照してください。</p>
 <h2 id="Embeddings" class="common-anchor-header">埋め込み<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +226,7 @@ title: 用語解説
         ></path>
       </svg>
     </button></h2><p>エンティティは実世界のオブジェクトを表すフィールド群で構成されます。Milvusの各エンティティは一意な主キーで表されます。</p>
-<p>主キーはカスタマイズできます。手動で設定しない場合、Milvus は自動的に主キーをエンティティに割り当てます。主キーをカスタマイズする場合、Milvusは今のところ主キーの重複排除をサポートしていないことに注意してください。そのため、同じコレクション内に重複した主キーが存在する可能性があります。詳細については、<a href="/docs/ja/v2.6.x/insert-update-delete.md#Insert-entities">エンティティの挿入を</a>参照してください。</p>
+<p>主キーはカスタマイズできます。手動で設定しない場合、Milvus は自動的に主キーをエンティティに割り当てます。主キーをカスタマイズする場合、Milvusは今のところ主キーの重複排除をサポートしていないことに注意してください。そのため、同じコレクション内に重複した主キーが存在する可能性があります。詳細については、<a href="/docs/ja/insert-update-delete.md#Insert-entities">エンティティの挿入を</a>参照してください。</p>
 <h2 id="Field" class="common-anchor-header">フィールド<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,7 +274,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フィルタリング検索はスカラーフィルタをベクトル検索に適用し、特定の条件に基づいて検索結果を絞り込むことができます。詳細については、<a href="/docs/ja/v2.6.x/single-vector-search.md#Filtered-search">フィルタリング検索</a>を参照してください。</p>
+    </button></h2><p>フィルタリング検索はスカラーフィルタをベクトル検索に適用し、特定の条件に基づいて検索結果を絞り込むことができます。詳細については、<a href="/docs/ja/single-vector-search.md#Filtered-search">フィルタリング検索</a>を参照してください。</p>
 <h2 id="Hybrid-search" class="common-anchor-header">ハイブリッド検索<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +290,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">ハイブリッド検索は</a>Milvus 2.4.0から搭載されたAPIです。複数のベクトルフィールドを検索し、融合させることができます。ベクトル検索とスカラーフィールドのフィルタリングを組み合わせた検索を「フィルタリング検索」と呼びます。詳細は<a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索を</a>参照。</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">ハイブリッド検索は</a>Milvus 2.4.0から搭載されたAPIです。複数のベクトルフィールドを検索し、融合させることができます。ベクトル検索とスカラーフィールドのフィルタリングを組み合わせた検索を「フィルタリング検索」と呼びます。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>参照。</p>
 <h2 id="Index" class="common-anchor-header">インデックス<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -391,7 +392,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MemoryBufferは、Woodpeckerの軽量なデプロイメントモードで、一時的にメモリにバッファリングし、定期的にクラウドオブジェクトストレージにフラッシュします。このモードは、パフォーマンスよりもシンプルさを優先する小規模なデプロイメントやプロダクション環境でのバッチ負荷の高いワークロードに最適です。詳細については、<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>参照してください。</p>
+    </button></h2><p>MemoryBufferは、Woodpeckerの軽量なデプロイメントモードで、一時的にメモリにバッファリングし、定期的にクラウドオブジェクトストレージにフラッシュします。このモードは、パフォーマンスよりもシンプルさを優先する小規模なデプロイメントやプロダクション環境でのバッチ負荷の高いワークロードに最適です。詳細については、<a href="/docs/ja/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>参照してください。</p>
 <h2 id="Mmap" class="common-anchor-header">マップ<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -519,7 +520,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは2.4.0以降、1つのコレクションで複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
+    </button></h2><p>Milvusは2.4.0以降、1つのコレクションで複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
 <h2 id="Partition" class="common-anchor-header">パーティション<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -567,7 +568,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannelは物理チャネルを意味します。各PChannelは、Woodpeckerが管理するWALストリームに対応しています。デフォルトでは、Milvusクラスタの起動時に、データの挿入、削除、更新を記録するログを格納するためにPChannelのグループが割り当てられます。詳細については、<a href="/docs/ja/v2.6.x/streaming_service.md">ストリーミングサービスを</a>参照してください。</p>
+    </button></h2><p>PChannelは物理チャネルを意味します。各PChannelは、Woodpeckerが管理するWALストリームに対応しています。デフォルトでは、Milvusクラスタの起動時に、データの挿入、削除、更新を記録するログを格納するためにPChannelのグループが割り当てられます。詳細については、<a href="/docs/ja/streaming_service.md">ストリーミングサービスを</a>参照してください。</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -615,7 +616,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>QuorumBufferは、リアルタイム応答性と強力な耐障害性の両方を必要とする、レイテンシに敏感で、高頻度の読み書きワークロードのために設計されたWoodpeckerの展開モードです。クォーラムバッファは、3つのレプリカによる高速書き込みバッファとして機能し、強力な一貫性と高可用性を保証します。詳細については、<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>ご参照ください。</p>
+    </button></h2><p>QuorumBufferは、リアルタイム応答性と強力な耐障害性の両方を必要とする、レイテンシに敏感で、高頻度の読み書きワークロードのために設計されたWoodpeckerの展開モードです。クォーラムバッファは、3つのレプリカによる高速書き込みバッファとして機能し、強力な一貫性と高可用性を保証します。詳細については、<a href="/docs/ja/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>ご参照ください。</p>
 <h2 id="Range-search" class="common-anchor-header">範囲検索<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -745,7 +746,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ストリーミングサービスは、Milvus内部ストリーミングシステムモジュールのコンセプトであり、Write-Ahead Log (WAL)を中心に構築され、様々なストリーミング関連機能をサポートします。これには、ストリーミングデータの取り込み/サブスクリプション、クラスタ状態の障害回復、ストリーミングデータの履歴データへの変換、データクエリの増加などが含まれます。このサービスは、Streaming Coordinator、Streaming Node Cluster、Streaming Clientコンポーネントで構成されます。詳細は<a href="/docs/ja/v2.6.x/streaming_service.md">ストリーミング・サービスを</a>参照。</p>
+    </button></h2><p>ストリーミングサービスは、Milvus内部ストリーミングシステムモジュールのコンセプトであり、Write-Ahead Log (WAL)を中心に構築され、様々なストリーミング関連機能をサポートします。これには、ストリーミングデータの取り込み/サブスクリプション、クラスタ状態の障害回復、ストリーミングデータの履歴データへの変換、データクエリの増加などが含まれます。このサービスは、Streaming Coordinator、Streaming Node Cluster、Streaming Clientコンポーネントで構成されます。詳細は<a href="/docs/ja/streaming_service.md">ストリーミング・サービスを</a>参照。</p>
 <h2 id="Unstructured-data" class="common-anchor-header">非構造化データ<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -777,7 +778,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VChannelは仮想チャネルの略。各VChannelはコレクション内のシャードを表す。各コレクションには、データの挿入、削除、更新を記録するためのVChannelのグループが割り当てられる。VChannelは論理的に分離されているが、ストリーミング・サービスを通じて物理的にリソースを共有している。詳細については、<a href="/docs/ja/v2.6.x/streaming_service.md">ストリーミング・サービスを</a>参照してください。</p>
+    </button></h2><p>VChannelは仮想チャネルの略。各VChannelはコレクション内のシャードを表す。各コレクションには、データの挿入、削除、更新を記録するためのVChannelのグループが割り当てられる。VChannelは論理的に分離されているが、ストリーミング・サービスを通じて物理的にリソースを共有している。詳細については、<a href="/docs/ja/streaming_service.md">ストリーミング・サービスを</a>参照してください。</p>
 <h2 id="Vector" class="common-anchor-header">ベクター<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -809,7 +810,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>WAL (Write-Ahead Log) ストレージは分散システムにおけるデータの耐久性と一貫性の基礎です。変更がコミットされる前に、その変更はまずログに記録されます。MilvusはWALストレージシステムとしてWoodpeckerを使用しており、MemoryBufferモードとQuorumBufferモードの両方をサポートしています。詳細は<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>ご参照ください。</p>
+    </button></h2><p>WAL (Write-Ahead Log) ストレージは分散システムにおけるデータの耐久性と一貫性の基礎です。変更がコミットされる前に、その変更はまずログに記録されます。MilvusはWALストレージシステムとしてWoodpeckerを使用しており、MemoryBufferモードとQuorumBufferモードの両方をサポートしています。詳細は<a href="/docs/ja/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>ご参照ください。</p>
 <h2 id="Woodpecker" class="common-anchor-header">ウッドペッカー<button data-href="#Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -825,7 +826,7 @@ title: 用語解説
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>WoodpeckerはMilvus 2.6のクラウド・ネイティブなWALシステムで、KafkaとPulsarに取って代わるものです。ゼロディスクアーキテクチャと2つのデプロイモード（MemoryBufferとQuorumBuffer）により、オブジェクトストレージ上で高スループット、低運用オーバーヘッド、シームレスなスケーラビリティを実現します。詳細は<a href="/docs/ja/v2.6.x/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>ご参照ください。</p>
+    </button></h2><p>WoodpeckerはMilvus 2.6のクラウド・ネイティブなWALシステムで、KafkaとPulsarに取って代わるものです。ゼロディスクアーキテクチャと2つのデプロイモード（MemoryBufferとQuorumBuffer）により、オブジェクトストレージ上で高スループット、低運用オーバーヘッド、シームレスなスケーラビリティを実現します。詳細は<a href="/docs/ja/woodpecker_architecture.md">Woodpeckerアーキテクチャを</a>ご参照ください。</p>
 <h2 id="Zilliz-Cloud" class="common-anchor-header">Zillizクラウド<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

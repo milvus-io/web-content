@@ -6,6 +6,7 @@ summary: >-
   AIとMilvusを組み合わせて、テキスト埋め込みを効率的に生成する方法を説明します。
 beta: Milvus 2.6.x
 ---
+
 <h1 id="Vertex-AI" class="common-anchor-header">バーテックスAI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Vertex-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -116,7 +117,7 @@ beta: Milvus 2.6.x
  <a href="#docker">Docker Compose</a> <a href="#helm">Helm</a></div>
 <div class="filter-docker">
 <div class="alert note">
-<p>Milvusの設定ファイル<strong>（docker-compose.yaml</strong>）を入手するには、<a href="/docs/ja/v2.6.x/configure-docker.md#Download-an-installation-file">インストールファイルのダウンロードを</a>参照してください。</p>
+<p>Milvusの設定ファイル<strong>（docker-compose.yaml</strong>）を入手するには、<a href="/docs/ja/configure-docker.md#Download-an-installation-file">インストールファイルのダウンロードを</a>参照してください。</p>
 </div>
 <ol>
 <li><p><strong>キーをコンテナにマウントする。</strong></p>
@@ -149,7 +150,7 @@ beta: Milvus 2.6.x
 </div>
 <div class="filter-helm">
 <div class="alert note">
-<p>Milvus設定ファイル<strong>（values.yaml</strong>）を取得するには、<a href="/docs/ja/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">設定ファイルによるMilvusの設定を</a>参照してください。</p>
+<p>Milvus設定ファイル<strong>（values.yaml</strong>）を取得するには、<a href="/docs/ja/configure-helm.md#Configure-Milvus-via-configuration-file">設定ファイルによるMilvusの設定を</a>参照してください。</p>
 </div>
 <ol>
 <li><p><strong>Kubernetesシークレットの作成</strong></p>
@@ -201,6 +202,7 @@ beta: Milvus 2.6.x
 
 <span class="hljs-comment"># Repeat same configuration for dataNode, etc.</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul></li>
 <li><p><strong>Helmの設定を適用する</strong></p>
 <p>更新した設定をクラスタにデプロイします：</p>
@@ -244,6 +246,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">ステップ 2: スキーマへの埋め込み関数の追加</h3><p>MilvusのFunctionモジュールは、スカラーフィールドに格納された生データを自動的に埋め込みデータに変換し、明示的に定義されたベクトルフィールドに格納します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
@@ -265,6 +268,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p><strong>パラメータ</strong></p></th>
@@ -324,4 +328,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>埋め込み関数を設定した後、インデックス設定、データ挿入例、セマンティック検索操作に関する追加ガイダンスについては、<a href="/docs/ja/v2.6.x/embeddings.md">関数の概要を</a>参照してください。</p>
+    </button></h2><p>埋め込み関数を設定した後、インデックス設定、データ挿入例、セマンティック検索操作に関する追加ガイダンスについては、<a href="/docs/ja/embeddings.md">関数の概要を</a>参照してください。</p>

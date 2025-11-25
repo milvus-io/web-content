@@ -1,6 +1,7 @@
 ---
 id: home.md
 ---
+
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 مرحبًا بك في مستندات ميلفوس!</h1></p>
@@ -33,13 +34,13 @@ id: home.md
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/ar/v2.6.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.6.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ar/v2.6.x/install_standalone-docker.md"> <p class="link-btn">تثبيت ميلفوس</p> </a><p>تعرف على كيفية تثبيت Milvus باستخدام Docker Compose أو على Kubernetes.</p>
+   <a href="/docs/ar/install_standalone-docker.md"> <img translate="no" src="/docs/v2.6.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/ar/install_standalone-docker.md"> <p class="link-btn">تثبيت ميلفوس</p> </a><p>تعرف على كيفية تثبيت Milvus باستخدام Docker Compose أو على Kubernetes.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/ar/v2.6.x/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ar/v2.6.x/quickstart.md"> <p class="link-btn">البدء السريع</p> </a><p>تعرف على كيفية تشغيل Milvus بسرعة باستخدام نموذج التعليمات البرمجية.</p>
+   <a href="/docs/ar/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/ar/quickstart.md"> <p class="link-btn">البدء السريع</p> </a><p>تعرف على كيفية تشغيل Milvus بسرعة باستخدام نموذج التعليمات البرمجية.</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +68,31 @@ id: home.md
 <div class="recomment-item">
   <p>استخدام</p>
 <ul>
-<li><a href="/docs/ar/v2.6.x/manage-collections.md">إدارة المجموعات</a></li>
-<li><a href="/docs/ar/v2.6.x/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
-<li><a href="/docs/ar/v2.6.x/single-vector-search.md">البحث في متجه واحد</a></li>
-<li><a href="/docs/ar/v2.6.x/multi-vector-search.md">البحث الهجين</a></li>
-<li><a href="/docs/ar/v2.6.x/get-and-scalar-query.md">الحصول على واستعلام عددي</a></li>
+<li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
+<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
+<li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
+<li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
+<li><a href="/docs/ar/get-and-scalar-query.md">الحصول على واستعلام عددي</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>النشر</p>
 <ul>
-<li><a href="/docs/ar/v2.6.x/configure-docker.md">تكوين ميلفوس</a></li>
-<li><a href="/docs/ar/v2.6.x/deploy_s3.md">إدارة التبعيات</a></li>
-<li><a href="/docs/ar/v2.6.x/eks.md">النشر على السحابة</a></li>
-<li><a href="/docs/ar/v2.6.x/scaleout.md">توسيع نطاق مجموعة Milvus العنقودية</a></li>
-<li><a href="/docs/ar/v2.6.x/monitor_overview.md">المراقبة والتنبيه</a></li>
+<li><a href="/docs/ar/configure-docker.md">تكوين ميلفوس</a></li>
+<li><a href="/docs/ar/deploy_s3.md">إدارة التبعيات</a></li>
+<li><a href="/docs/ar/eks.md">النشر على السحابة</a></li>
+<li><a href="/docs/ar/scaleout.md">توسيع نطاق مجموعة Milvus العنقودية</a></li>
+<li><a href="/docs/ar/monitor_overview.md">المراقبة والتنبيه</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>تعلم</p>
 <ul>
-<li><a href="/docs/ar/v2.6.x/system_configuration.md">تكوين النظام</a></li>
-<li><a href="/docs/ar/v2.6.x/architecture_overview.md">نظرة عامة على البنية</a></li>
-<li><a href="/docs/ar/v2.6.x/index-explained.md">شرح الفهرس</a></li>
-<li><a href="/docs/ar/v2.6.x/metric.md">مقاييس التشابه</a></li>
-<li><a href="/docs/ar/v2.6.x/glossary.md">مسرد المصطلحات</a></li>
+<li><a href="/docs/ar/system_configuration.md">تكوين النظام</a></li>
+<li><a href="/docs/ar/architecture_overview.md">نظرة عامة على البنية</a></li>
+<li><a href="/docs/ar/index-explained.md">شرح الفهرس</a></li>
+<li><a href="/docs/ar/metric.md">مقاييس التشابه</a></li>
+<li><a href="/docs/ar/glossary.md">مسرد المصطلحات</a></li>
 </ul>
 </div>
 </div>
@@ -113,10 +114,10 @@ id: home.md
       </svg>
     </button></h2><p><em>يونيو 2025 - إصدار ميلفوس 2.6.0</em></p>
 <ul>
-<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/v2.6.x/embedding-function-overview.md">استخدام دالة التضمين</a>.</li>
-<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/v2.6.x/decay-ranker-overview.md">استخدام مصنف الاضمحلال</a>.</li>
-<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/v2.6.x/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</li>
-<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/v2.6.x/phrase-match.md">إجراء مطابقة العبارات</a>.</li>
-<li>تمت إضافة وصف <a href="/docs/ar/v2.6.x/ivf-rabitq.md">لفهرس IVF_RABITQ</a>.</li>
+<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/embedding-function-overview.md">استخدام دالة التضمين</a>.</li>
+<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/decay-ranker-overview.md">استخدام مصنف الاضمحلال</a>.</li>
+<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/add-fields-to-an-existing-collection.md">إضافة حقول إلى مجموعة موجودة</a>.</li>
+<li>تمت إضافة إرشادات حول كيفية <a href="/docs/ar/phrase-match.md">إجراء مطابقة العبارات</a>.</li>
+<li>تمت إضافة وصف <a href="/docs/ar/ivf-rabitq.md">لفهرس IVF_RABITQ</a>.</li>
 </ul>
 </div>

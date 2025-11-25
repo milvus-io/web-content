@@ -1,6 +1,7 @@
 ---
 id: home.md
 ---
+
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 Bem-vindo ao Milvus Docs!</h1></p>
@@ -33,13 +34,13 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/pt/v2.6.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.6.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/pt/v2.6.x/install_standalone-docker.md"> <p class="link-btn">Instalar o Milvus</p> </a><p>Saiba como instalar o Milvus usando o Docker Compose ou no Kubernetes.</p>
+   <a href="/docs/pt/install_standalone-docker.md"> <img translate="no" src="/docs/v2.6.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/pt/install_standalone-docker.md"> <p class="link-btn">Instalar o Milvus</p> </a><p>Saiba como instalar o Milvus usando o Docker Compose ou no Kubernetes.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/pt/v2.6.x/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/pt/v2.6.x/quickstart.md"> <p class="link-btn">Início rápido</p> </a><p>Saiba como executar rapidamente o Milvus com código de exemplo.</p>
+   <a href="/docs/pt/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/pt/quickstart.md"> <p class="link-btn">Início rápido</p> </a><p>Saiba como executar rapidamente o Milvus com código de exemplo.</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +68,31 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
 <div class="recomment-item">
   <p>Utilizar</p>
 <ul>
-<li><a href="/docs/pt/v2.6.x/manage-collections.md">Gerir colecções</a></li>
-<li><a href="/docs/pt/v2.6.x/insert-update-delete.md">Inserir, Upsert e Excluir</a></li>
-<li><a href="/docs/pt/v2.6.x/single-vector-search.md">Pesquisa de vetor único</a></li>
-<li><a href="/docs/pt/v2.6.x/multi-vector-search.md">Pesquisa híbrida</a></li>
-<li><a href="/docs/pt/v2.6.x/get-and-scalar-query.md">Obter e consulta escalar</a></li>
+<li><a href="/docs/pt/manage-collections.md">Gerir colecções</a></li>
+<li><a href="/docs/pt/insert-update-delete.md">Inserir, Upsert e Excluir</a></li>
+<li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
+<li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
+<li><a href="/docs/pt/get-and-scalar-query.md">Obter e consulta escalar</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Implementar</p>
 <ul>
-<li><a href="/docs/pt/v2.6.x/configure-docker.md">Configurar o Milvus</a></li>
-<li><a href="/docs/pt/v2.6.x/deploy_s3.md">Gerenciar dependências</a></li>
-<li><a href="/docs/pt/v2.6.x/eks.md">Implementar em nuvens</a></li>
-<li><a href="/docs/pt/v2.6.x/scaleout.md">Escalar um cluster Milvus</a></li>
-<li><a href="/docs/pt/v2.6.x/monitor_overview.md">Monitorizar e alertar</a></li>
+<li><a href="/docs/pt/configure-docker.md">Configurar o Milvus</a></li>
+<li><a href="/docs/pt/deploy_s3.md">Gerenciar dependências</a></li>
+<li><a href="/docs/pt/eks.md">Implementar em nuvens</a></li>
+<li><a href="/docs/pt/scaleout.md">Escalar um cluster Milvus</a></li>
+<li><a href="/docs/pt/monitor_overview.md">Monitorizar e alertar</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Aprender</p>
 <ul>
-<li><a href="/docs/pt/v2.6.x/system_configuration.md">Configuração do sistema</a></li>
-<li><a href="/docs/pt/v2.6.x/architecture_overview.md">Visão geral da arquitetura</a></li>
-<li><a href="/docs/pt/v2.6.x/index-explained.md">Índice explicado</a></li>
-<li><a href="/docs/pt/v2.6.x/metric.md">Métricas de similaridade</a></li>
-<li><a href="/docs/pt/v2.6.x/glossary.md">Glossário</a></li>
+<li><a href="/docs/pt/system_configuration.md">Configuração do sistema</a></li>
+<li><a href="/docs/pt/architecture_overview.md">Visão geral da arquitetura</a></li>
+<li><a href="/docs/pt/index-explained.md">Índice explicado</a></li>
+<li><a href="/docs/pt/metric.md">Métricas de similaridade</a></li>
+<li><a href="/docs/pt/glossary.md">Glossário</a></li>
 </ul>
 </div>
 </div>
@@ -113,10 +114,10 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
       </svg>
     </button></h2><p><em>junho 2025 - Lançamento do Milvus 2.6.0</em></p>
 <ul>
-<li>Adicionada orientação sobre como <a href="/docs/pt/v2.6.x/embedding-function-overview.md">usar a função de incorporação</a>.</li>
-<li>Adicionada orientação sobre como <a href="/docs/pt/v2.6.x/decay-ranker-overview.md">usar o classificador de decaimento</a>.</li>
-<li>Adicionada orientação sobre como <a href="/docs/pt/v2.6.x/add-fields-to-an-existing-collection.md">adicionar campos a uma coleção existente</a>.</li>
-<li>Adicionada orientação sobre como <a href="/docs/pt/v2.6.x/phrase-match.md">efetuar a correspondência de frases</a>.</li>
-<li>Adicionadas descrições do <a href="/docs/pt/v2.6.x/ivf-rabitq.md">índice IVF_RABITQ</a>.</li>
+<li>Adicionada orientação sobre como <a href="/docs/pt/embedding-function-overview.md">usar a função de incorporação</a>.</li>
+<li>Adicionada orientação sobre como <a href="/docs/pt/decay-ranker-overview.md">usar o classificador de decaimento</a>.</li>
+<li>Adicionada orientação sobre como <a href="/docs/pt/add-fields-to-an-existing-collection.md">adicionar campos a uma coleção existente</a>.</li>
+<li>Adicionada orientação sobre como <a href="/docs/pt/phrase-match.md">efetuar a correspondência de frases</a>.</li>
+<li>Adicionadas descrições do <a href="/docs/pt/ivf-rabitq.md">índice IVF_RABITQ</a>.</li>
 </ul>
 </div>

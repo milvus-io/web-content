@@ -1,6 +1,7 @@
 ---
 id: home.md
 ---
+
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 Milvus 문서에 오신 것을 환영합니다!</h1></p>
@@ -33,13 +34,13 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/ko/v2.6.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.6.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ko/v2.6.x/install_standalone-docker.md"> <p class="link-btn">Milvus 설치하기</p> </a><p>도커 컴포즈 또는 쿠버네티스를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
+   <a href="/docs/ko/install_standalone-docker.md"> <img translate="no" src="/docs/v2.6.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/ko/install_standalone-docker.md"> <p class="link-btn">Milvus 설치하기</p> </a><p>도커 컴포즈 또는 쿠버네티스를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/ko/v2.6.x/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ko/v2.6.x/quickstart.md"> <p class="link-btn">빠른 시작</p> </a><p>샘플 코드를 사용하여 Milvus를 빠르게 실행하는 방법을 알아보세요.</p>
+   <a href="/docs/ko/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/ko/quickstart.md"> <p class="link-btn">빠른 시작</p> </a><p>샘플 코드를 사용하여 Milvus를 빠르게 실행하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +68,31 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <div class="recomment-item">
   <p>사용</p>
 <ul>
-<li><a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/v2.6.x/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
-<li><a href="/docs/ko/v2.6.x/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색</a></li>
-<li><a href="/docs/ko/v2.6.x/get-and-scalar-query.md">가져오기 및 스칼라 쿼리</a></li>
+<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
+<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/get-and-scalar-query.md">가져오기 및 스칼라 쿼리</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>배포</p>
 <ul>
-<li><a href="/docs/ko/v2.6.x/configure-docker.md">Milvus 구성</a></li>
-<li><a href="/docs/ko/v2.6.x/deploy_s3.md">종속성 관리</a></li>
-<li><a href="/docs/ko/v2.6.x/eks.md">클라우드에 배포</a></li>
-<li><a href="/docs/ko/v2.6.x/scaleout.md">Milvus 클러스터 확장</a></li>
-<li><a href="/docs/ko/v2.6.x/monitor_overview.md">모니터링 및 알림</a></li>
+<li><a href="/docs/ko/configure-docker.md">Milvus 구성</a></li>
+<li><a href="/docs/ko/deploy_s3.md">종속성 관리</a></li>
+<li><a href="/docs/ko/eks.md">클라우드에 배포</a></li>
+<li><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장</a></li>
+<li><a href="/docs/ko/monitor_overview.md">모니터링 및 알림</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Learn</p>
 <ul>
-<li><a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성</a></li>
-<li><a href="/docs/ko/v2.6.x/architecture_overview.md">아키텍처 개요</a></li>
-<li><a href="/docs/ko/v2.6.x/index-explained.md">인덱스 설명</a></li>
-<li><a href="/docs/ko/v2.6.x/metric.md">유사성 메트릭</a></li>
-<li><a href="/docs/ko/v2.6.x/glossary.md">용어집</a></li>
+<li><a href="/docs/ko/system_configuration.md">시스템 구성</a></li>
+<li><a href="/docs/ko/architecture_overview.md">아키텍처 개요</a></li>
+<li><a href="/docs/ko/index-explained.md">인덱스 설명</a></li>
+<li><a href="/docs/ko/metric.md">유사성 메트릭</a></li>
+<li><a href="/docs/ko/glossary.md">용어집</a></li>
 </ul>
 </div>
 </div>
@@ -113,10 +114,10 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
       </svg>
     </button></h2><p><em>2025년 6월 - Milvus 2.6.0 릴리스</em></p>
 <ul>
-<li><a href="/docs/ko/v2.6.x/embedding-function-overview.md">임베딩 기능 사용</a> 방법에 대한 안내가 추가되었습니다.</li>
-<li><a href="/docs/ko/v2.6.x/decay-ranker-overview.md">감쇠 순위 사용</a> 방법에 대한 안내를 추가했습니다.</li>
-<li><a href="/docs/ko/v2.6.x/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드를 추가하는</a> 방법에 대한 안내를 추가했습니다.</li>
-<li><a href="/docs/ko/v2.6.x/phrase-match.md">구문 일</a>치를 <a href="/docs/ko/v2.6.x/phrase-match.md">수행하는</a> 방법에 대한 안내를 추가했습니다.</li>
-<li><a href="/docs/ko/v2.6.x/ivf-rabitq.md">IVF_RABITQ 인덱스에</a> 대한 설명이 추가되었습니다.</li>
+<li><a href="/docs/ko/embedding-function-overview.md">임베딩 기능 사용</a> 방법에 대한 안내가 추가되었습니다.</li>
+<li><a href="/docs/ko/decay-ranker-overview.md">감쇠 순위 사용</a> 방법에 대한 안내를 추가했습니다.</li>
+<li><a href="/docs/ko/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드를 추가하는</a> 방법에 대한 안내를 추가했습니다.</li>
+<li><a href="/docs/ko/phrase-match.md">구문 일</a>치를 <a href="/docs/ko/phrase-match.md">수행하는</a> 방법에 대한 안내를 추가했습니다.</li>
+<li><a href="/docs/ko/ivf-rabitq.md">IVF_RABITQ 인덱스에</a> 대한 설명이 추가되었습니다.</li>
 </ul>
 </div>
