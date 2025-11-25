@@ -6,6 +6,7 @@ summary: >-
   Milvus 结合使用，实现高效的文本嵌入生成。
 beta: Milvus 2.6.x
 ---
+
 <h1 id="Vertex-AI" class="common-anchor-header">顶点人工智能<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Vertex-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -116,7 +117,7 @@ beta: Milvus 2.6.x
  <a href="#docker">Docker Compose</a>Helm</div>
 <div class="filter-docker">
 <div class="alert note">
-<p>要获取 Milvus 配置文件<strong>（docker-compose.yaml</strong>），请参阅<a href="/docs/zh/v2.6.x/configure-docker.md#Download-an-installation-file">下载安装文件</a>。</p>
+<p>要获取 Milvus 配置文件<strong>（docker-compose.yaml</strong>），请参阅<a href="/docs/zh/configure-docker.md#Download-an-installation-file">下载安装文件</a>。</p>
 </div>
 <ol>
 <li><p><strong>将密钥挂载到容器中</strong></p>
@@ -149,7 +150,7 @@ beta: Milvus 2.6.x
 </div>
 <div class="filter-helm">
 <div class="alert note">
-<p>要获取你的 Milvus 配置文件<strong>（values.yaml</strong>），请参阅<a href="/docs/zh/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">通过配置文件配置 Milvus</a>。</p>
+<p>要获取你的 Milvus 配置文件<strong>（values.yaml</strong>），请参阅<a href="/docs/zh/configure-helm.md#Configure-Milvus-via-configuration-file">通过配置文件配置 Milvus</a>。</p>
 </div>
 <ol>
 <li><p><strong>创建 Kubernetes 密钥</strong></p>
@@ -201,6 +202,7 @@ beta: Milvus 2.6.x
 
 <span class="hljs-comment"># Repeat same configuration for dataNode, etc.</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul></li>
 <li><p><strong>应用 Helm 配置</strong></p>
 <p>将更新的配置部署到群集：</p>
@@ -244,6 +246,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">步骤 2：向 Schema 添加嵌入函数</h3><p>Milvus 中的函数模块会自动将标量字段中存储的原始数据转换为嵌入数据，并将其存储到明确定义的向量字段中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
@@ -265,6 +268,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p><strong>参数</strong></p></th>
@@ -324,4 +328,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>配置完 Embeddings 功能后，请参阅功能<a href="/docs/zh/v2.6.x/embeddings.md">概述</a>，了解有关索引配置、数据插入示例和语义搜索操作的其他指导。</p>
+    </button></h2><p>配置完 Embeddings 功能后，请参阅功能<a href="/docs/zh/embeddings.md">概述</a>，了解有关索引配置、数据插入示例和语义搜索操作的其他指导。</p>
