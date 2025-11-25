@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "Benchmarks",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "Comparison",
         "id": "comparison.md",
         "order": 5,
