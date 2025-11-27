@@ -146,7 +146,12 @@ Here's how you can define a collection schema that includes an Array of Structs:
 ```python
 from pymilvus import MilvusClient, DataType
 
-schema = MilvusClient.create_schema()
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+schema = client.create_schema()
 
 # add the primary field to the collection
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True, auto_id=True)
@@ -161,7 +166,7 @@ schema.add_field(field_name="title_vector", datatype=DataType.FLOAT_VECTOR, dim=
 
 # highlight-start
 # Create a struct schema
-struct_schema = MilvusClient.create_struct_field_schema()
+struct_schema = client.create_struct_field_schema()
 
 # add a scalar field to the struct
 struct_schema.add_field("text", DataType.VARCHAR, max_length=65535)
@@ -382,7 +387,7 @@ To index an embedding list, you need to set its index type to `AUTOINDEX`  or `H
 
 ```python
 # Create index parameters
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 # Create an index for the vector field in the collection
 index_params.add_index(
@@ -474,11 +479,6 @@ Once the schema and index are ready, you can create a collection that includes a
 </div>
 
 ```python
-client = MilvusClient(
-    uri="http://localhost:19530",
-    token="root:Milvus"
-)
-
 client.create_collection(
     collection_name="my_collection",
     schema=schema,
