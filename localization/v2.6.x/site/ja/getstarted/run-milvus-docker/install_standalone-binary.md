@@ -57,11 +57,11 @@ title: RPM/DEBパッケージによるMilvusスタンドアロンのインスト
       </svg>
     </button></h2><p>RPM/DEBパッケージは、<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.6">Milvus Releases</a>ページから、お使いのシステムアーキテクチャに合わせてダウンロードすることができます。</p>
 <ul>
-<li>x86_64/amd64の場合、<strong>milvus_2.6.0-1_amd64.deb</strong>または<strong>milvus_2.6.0-1_amd64.rpm</strong>パッケージをダウンロードしてください。</li>
-<li>ARM64の場合は、<strong>milvus_2.6.0-1_arm64.deb</strong>または<strong>milvus_2.6.0-1_arm64.rpm</strong>パッケージをダウンロードしてください。</li>
+<li>x86_64/amd64の場合、<strong>milvus_2.6.6-1_amd64.deb</strong>または<strong>milvus_2.6.6-1_amd64.rpm</strong>パッケージをダウンロードしてください。</li>
+<li>ARM64の場合は、<strong>milvus_2.6.6-1_arm64.deb</strong>または<strong>milvus_2.6.6-1_arm64.rpm</strong>パッケージをダウンロードしてください。</li>
 </ul>
 <p>以下のコマンドは、x86_64/amd64マシン上でMilvus Standaloneを実行することを想定しています。</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus_2.6.0-1_amd64.rpm -O milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">RPM/DEBパッケージのインストール<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,11 +80,11 @@ title: RPM/DEBパッケージによるMilvusスタンドアロンのインスト
       </svg>
     </button></h2><p>RPM/DEBパッケージをインストールするには、お使いのシステムのパッケージマネージャを使用します。</p>
 <p>RPM ベースのシステム（CentOS、Fedora、RHEL など）の場合、<code translate="no">yum</code> コマンドを使用してパッケージをインストールします。</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.6-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>DEBベースのシステム（UbuntuやDebianなど）の場合、<code translate="no">apt</code> コマンドを使用してパッケージをインストールしてください。</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.6-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Milvus Standaloneの起動<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">

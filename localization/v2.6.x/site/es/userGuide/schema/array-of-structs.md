@@ -92,7 +92,7 @@ beta: Milvus 2.6.4+
 <td><p><code translate="no">BOOLEAN</code></p></td>
 </tr>
 </table></p>
-<p>El número de campos vectoriales, tanto a nivel de colección como en los Structs combinados, no debe ser mayor o igual a 10.</p></li>
+<p>El número de campos vectoriales, tanto a nivel de colección como en los Structs combinados, no debe ser superior o igual a 10.</p></li>
 <li><p><strong>Valores nulos y por defecto</strong></p>
 <p>Un campo Array of Structs no es anulable y no acepta ningún valor por defecto.</p></li>
 <li><p><strong>Función</strong></p>
@@ -152,7 +152,12 @@ beta: Milvus 2.6.4+
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-schema = MilvusClient.create_schema()
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+schema = client.create_schema()
 
 <span class="hljs-comment"># add the primary field to the collection</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
@@ -166,7 +171,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;year_of_publication&
 schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 <span class="highlighted-comment-line"><span class="hljs-comment"># Create a struct schema</span></span>
-<span class="highlighted-comment-line">struct_schema = MilvusClient.create_struct_field_schema()</span>
+<span class="highlighted-comment-line">struct_schema = client.create_struct_field_schema()</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># add a scalar field to the struct</span></span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
@@ -377,7 +382,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Create an index for the vector field in the collection</span>
 index_params.add_index(
@@ -461,12 +466,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
     </button></h2><p>Una vez que el esquema y el índice están listos, puedes crear una colección que incluya un campo Array of Structs.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-)
-
-client.create_collection(
+<pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
@@ -738,7 +738,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
     </button></h2><p>Puedes realizar búsquedas vectoriales en los campos vectoriales de una colección y en un Array of Structs.</p>
 <p>Concretamente, debe concatenar el nombre del campo Array of Structs y los de los campos vectoriales de destino dentro de los elementos Struct como valor para el parámetro <code translate="no">anns_field</code> en una petición de búsqueda, y utilizar <code translate="no">EmbeddingList</code> para organizar ordenadamente los vectores de consulta.</p>
 <div class="alert note">
-<p>Milvus proporciona <code translate="no">EmbeddingList</code> para ayudarle a organizar los vectores de consulta para las búsquedas en una lista de incrustación en una matriz de Structs de forma más ordenada. Cada <code translate="no">EmbeddingList</code> contiene al menos un vector de incrustación y espera un número de entidades topK a cambio.</p>
+<p>Milvus proporciona <code translate="no">EmbeddingList</code> para ayudarle a organizar los vectores de consulta para búsquedas en una lista de incrustación en una matriz de Structs de forma más ordenada. Cada <code translate="no">EmbeddingList</code> contiene al menos un vector de incrustación y espera un número de entidades topK a cambio.</p>
 <p>Sin embargo, <code translate="no">EmbeddingList</code> sólo puede utilizarse en peticiones <code translate="no">search()</code> sin parámetros de búsqueda por rango o agrupación, y mucho menos en peticiones <code translate="no">search_iterator()</code>.</p>
 </div>
 <div class="multipleCode">
@@ -861,7 +861,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>También puedes incluir múltiples listas de incrustación en el parámetro <code translate="no">data</code> para recuperar los resultados de la búsqueda para cada una de estas listas de incrustación.</p>
+<p>También puedes incluir múltiples listas de incrustación en el parámetro <code translate="no">data</code> para recuperar los resultados de búsqueda de cada una de estas listas de incrustación.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># a search with multiple embedding lists</span>

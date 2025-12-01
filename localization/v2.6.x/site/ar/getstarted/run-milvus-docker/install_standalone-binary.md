@@ -3,9 +3,9 @@ id: install_standalone-binary.md
 label: RPM/DEB Package
 related_key: RPM/DEB Package
 summary: تعرف على كيفية تثبيت Milvus المستقل مع حزمة RPM/DEB المبنية مسبقاً.
-title: تثبيت Milvus Standalone مع حزمة RPM/DEB
+title: تثبيت برنامج Milvus Standalone مع حزمة RPM/DEB
 ---
-<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">تثبيت Milvus Standalone مع حزمة RPM/DEB<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">تثبيت برنامج Milvus Standalone مع حزمة RPM/DEB<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,11 +57,11 @@ title: تثبيت Milvus Standalone مع حزمة RPM/DEB
       </svg>
     </button></h2><p>يمكنك تنزيل حزمة RPM/DEB وفقاً لبنية نظامك من <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.6">صفحة إصدارات Milvus</a>.</p>
 <ul>
-<li>بالنسبة ل x86_64/amd64، قم بتنزيل حزمة <strong>milvus_2.6.0-1_amd64.deb</strong> أو حزمة <strong>milvus_2.6.0-1_amd64.rpm.</strong> </li>
-<li>بالنسبة ل ARM64، قم بتنزيل حزمة <strong>milvus_2.6.0.0-1_arm64.deb</strong> أو حزمة <strong>milvus_2.6.0-1_arm64.rpm.</strong> </li>
+<li>بالنسبة ل x86_64/amd64، قم بتنزيل حزمة <strong>milvus_2.6.6-1_amd64.deb</strong> أو حزمة <strong>milvus_2.6-1_amd64.rpm.</strong> </li>
+<li>بالنسبة ل ARM64، قم بتنزيل حزمة <strong>milvus_2.6.6-1_arm64.deb</strong> أو حزمة <strong>milvus_2.6-1_arm64.rpm.</strong> </li>
 </ul>
 <p>يفترض الأمر التالي أنك ستقوم بتشغيل Milvus Standalone على جهاز x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus_2.6.0-1_amd64.rpm -O milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">تثبيت حزمة RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,11 +80,11 @@ title: تثبيت Milvus Standalone مع حزمة RPM/DEB
       </svg>
     </button></h2><p>لتثبيت حزمة RPM/DEB، يمكنك استخدام مدير الحزم الخاص بنظامك.</p>
 <p>بالنسبة للأنظمة المستندة إلى RPM (مثل CentOS وFedora وRHEL)، استخدم الأمر <code translate="no">yum</code> لتثبيت الحزمة.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.6-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>بالنسبة للأنظمة المستندة إلى DEB (مثل Ubuntu و Debian)، استخدم الأمر <code translate="no">apt</code> لتثبيت الحزمة.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.6-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">ابدأ تشغيل ميلفوس Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -213,5 +213,5 @@ dpkg -l | grep milvus
 <li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

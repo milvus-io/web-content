@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "ベンチマーク",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "比較",
         "id": "comparison.md",
         "order": 5,
@@ -285,7 +279,7 @@
         "children": []
       },
       {
-        "label": "インメモリーレプリカ",
+        "label": "インメモリ・レプリカ",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -419,7 +413,7 @@
             "children": []
           },
           {
-            "label": "数字フィールド",
+            "label": "番号フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -652,7 +646,7 @@
             ]
           },
           {
-            "label": "コレクション・フィールドの変更",
+            "label": "コレクションフィールドの変更",
             "id": "alter-collection-field.md",
             "order": 15,
             "children": []
@@ -1029,7 +1023,7 @@
             "children": []
           },
           {
-            "label": "Elasticsearchからmilvusへのクエリ",
+            "label": "Elasticsearchクエリからmilvusへ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 10,
             "children": []
@@ -2014,7 +2008,7 @@
                 "children": []
               },
               {
-                "label": "インストラクター",
+                "label": "講師",
                 "id": "embed-with-instructor.md",
                 "order": 9,
                 "children": []
@@ -2166,7 +2160,7 @@
             ]
           },
           {
-            "label": "LlamaIndex",
+            "label": "ラマインデックス",
             "id": "llamaindex",
             "order": 1,
             "children": [
@@ -2659,7 +2653,7 @@
         "children": []
       },
       {
-        "label": "Build RAG with Milvus",
+        "label": "MilvusでRAGを構築する",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -2749,7 +2743,7 @@
         "children": []
       },
       {
-        "label": "milvusによるテキストから画像への検索",
+        "label": "Milvusによるテキストから画像への検索",
         "id": "text_image_search.md",
         "order": 16,
         "children": []
@@ -2772,7 +2766,7 @@
             "children": []
           },
           {
-            "label": "レコメンダー・システム",
+            "label": "推薦システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

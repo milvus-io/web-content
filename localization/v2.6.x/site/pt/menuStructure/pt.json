@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "Referências",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "Comparação",
         "id": "comparison.md",
         "order": 5,
@@ -1085,7 +1079,7 @@
                 "children": []
               },
               {
-                "label": "Bedrock",
+                "label": "Cama de pedra",
                 "id": "bedrock.md",
                 "order": 4,
                 "children": []
@@ -1171,7 +1165,7 @@
                     "children": []
                   },
                   {
-                    "label": "Linear Decay",
+                    "label": "Decaimento linear",
                     "id": "linear-decay.md",
                     "order": 3,
                     "children": []
@@ -1533,7 +1527,7 @@
             ]
           },
           {
-            "label": "Use Pulsar with Milvus",
+            "label": "Utilizar Pulsar com Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1592,7 +1586,7 @@
         "order": 7,
         "children": [
           {
-            "label": "Upgrade Milvus Cluster",
+            "label": "Atualizar o Cluster Milvus",
             "id": "upgrade_milvus_cluster-operator.md",
             "order": 0,
             "children": []
@@ -1650,7 +1644,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Create an Alert",
+                "label": "Criar um alerta",
                 "id": "alert.md",
                 "order": 0,
                 "children": []
@@ -2564,7 +2558,7 @@
             "children": []
           },
           {
-            "label": "PII Masker",
+            "label": "Mascarador de PII",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -2784,7 +2778,7 @@
             "children": []
           },
           {
-            "label": "Audio Similarity Search",
+            "label": "Pesquisa de similaridade de áudio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

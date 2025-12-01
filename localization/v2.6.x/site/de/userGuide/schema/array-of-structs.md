@@ -152,7 +152,12 @@ beta: Milvus 2.6.4+
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-schema = MilvusClient.create_schema()
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+schema = client.create_schema()
 
 <span class="hljs-comment"># add the primary field to the collection</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
@@ -166,7 +171,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;year_of_publication&
 schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 <span class="highlighted-comment-line"><span class="hljs-comment"># Create a struct schema</span></span>
-<span class="highlighted-comment-line">struct_schema = MilvusClient.create_struct_field_schema()</span>
+<span class="highlighted-comment-line">struct_schema = client.create_struct_field_schema()</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># add a scalar field to the struct</span></span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
@@ -377,7 +382,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Create an index for the vector field in the collection</span>
 index_params.add_index(
@@ -461,12 +466,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
     </button></h2><p>Sobald das Schema und der Index fertig sind, können Sie eine Sammlung erstellen, die ein Feld Array of Structs enthält.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-)
-
-client.create_collection(
+<pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
@@ -639,7 +639,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><details></p>
-<p><summary>Benötigen Sie mehr Daten?</summary></p>
+<p><summary>Brauchen Sie mehr Daten?</summary></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>, <span class="hljs-type">Dict</span>, <span class="hljs-type">Any</span>

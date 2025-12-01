@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "벤치마크",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "비교",
         "id": "comparison.md",
         "order": 5,
@@ -413,7 +407,7 @@
             "children": []
           },
           {
-            "label": "String Field",
+            "label": "문자열 필드",
             "id": "string.md",
             "order": 5,
             "children": []
@@ -1129,7 +1123,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Weighted Ranker",
+                "label": "가중치 랭커",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -2189,7 +2183,7 @@
                 "children": []
               },
               {
-                "label": "Hybrid Search",
+                "label": "하이브리드 검색",
                 "id": "llamaindex_milvus_hybrid_search.md",
                 "order": 3,
                 "children": []
@@ -2466,7 +2460,7 @@
             "children": []
           },
           {
-            "label": "SiliconFlow",
+            "label": "실리콘 플로우",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
@@ -2713,7 +2707,7 @@
         "children": []
       },
       {
-        "label": "Use ColPali for Multi-Modal Retrieval",
+        "label": "다중 모달 검색에 ColPali 사용",
         "id": "use_ColPali_with_milvus.md",
         "order": 10,
         "children": []
@@ -2761,7 +2755,7 @@
         "children": []
       },
       {
-        "label": "Explore More",
+        "label": "자세히 알아보기",
         "id": "explore-more",
         "order": 99,
         "children": [
@@ -2818,7 +2812,7 @@
     "order": 9,
     "children": [
       {
-        "label": "Performance FAQs",
+        "label": "성능 FAQ",
         "id": "performance_faq.md",
         "order": 0,
         "children": []

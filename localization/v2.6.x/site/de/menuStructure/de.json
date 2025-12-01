@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "Benchmarks",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "Vergleich",
         "id": "comparison.md",
         "order": 5,
@@ -44,7 +38,7 @@
     ]
   },
   {
-    "label": "Get Started",
+    "label": "Los geht's",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
@@ -803,7 +797,7 @@
             ]
           },
           {
-            "label": "Binary Vector Indexes",
+            "label": "Binäre Vektorindizes",
             "id": "binary-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -1719,7 +1713,7 @@
             "children": []
           },
           {
-            "label": "RBAC aktivieren",
+            "label": "RBAC einschalten",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -2177,7 +2171,7 @@
                 "children": []
               },
               {
-                "label": "Milvus Async API",
+                "label": "Milvus Async-API",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2498,7 +2492,7 @@
         ]
       },
       {
-        "label": "Knowledge Engineering",
+        "label": "Wissenstechnik",
         "id": "knowledge-engineering",
         "order": 5,
         "children": [

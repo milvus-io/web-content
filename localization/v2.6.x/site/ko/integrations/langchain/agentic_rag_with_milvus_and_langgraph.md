@@ -27,8 +27,12 @@ title: Milvus와 LangGraph를 사용한 에이전트 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 LangGraph와 Milvus를 사용해 고급 검색 증강 생성(RAG) 시스템을 구축하는 방법을 설명합니다. 단순히 검색하고 생성하는 기존의 RAG 시스템과 달리 에이전트 RAG 시스템은 정보를 언제 검색할지, 관련 없는 문서를 어떻게 처리할지, 더 나은 결과를 위해 쿼리를 언제 다시 작성할지에 대해 지능적인 결정을 내릴 수 있습니다.</p>
-<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph는</a> 상태 저장, 멀티 액터 애플리케이션을 구축하기 위한 라이브러리로, LangChain을 기반으로 구축되었습니다. <a href="https://milvus.io/">Milvus는</a> 세계에서 가장 진보된 오픈 소스 벡터 데이터베이스로, 임베딩 유사도 검색 및 AI 애플리케이션을 강화하기 위해 구축되었습니다.</p>
+    </button></h1><p>이 가이드에서는 LangGraph와 Milvus를 사용해 고급 검색 증강 생성(RAG) 시스템을 구축하는 방법을 설명합니다. 단순히 검색하고 생성하는 기존의 RAG 시스템과 달리, 에이전트 RAG 시스템은 정보를 검색할 시기, 관련 없는 문서를 처리하는 방법, 더 나은 결과를 위해 쿼리를 다시 작성할 시점에 대해 지능적인 결정을 내릴 수 있습니다.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
+   </span> <span class="img-wrapper"> <span>LangGraph와 Milvus를 사용한 에이전트 RAG 시스템의 아키텍처</span> </span></p>
+<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph는</a> 상태 저장, 멀티 액터 애플리케이션을 구축하기 위한 라이브러리로, LangChain 위에 구축됩니다. <a href="https://milvus.io/">Milvus는</a> 세계에서 가장 진보된 오픈 소스 벡터 데이터베이스로, 임베딩 유사도 검색 및 AI 애플리케이션을 강화하기 위해 구축되었습니다.</p>
 <p>이 튜토리얼에서는 이를 수행할 수 있는 에이전트 RAG 시스템을 구축해 보겠습니다:</p>
 <ul>
 <li>문서를 검색할지 아니면 간단한 쿼리에 직접 응답할지 결정하기</li>

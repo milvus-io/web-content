@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "المعايير",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "المقارنة",
         "id": "comparison.md",
         "order": 5,
@@ -557,7 +551,7 @@
                     "children": []
                   },
                   {
-                    "label": "Language Identifier",
+                    "label": "معرّف اللغة",
                     "id": "language-identifier.md",
                     "order": 5,
                     "children": []
@@ -1115,7 +1109,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه TEI",
+                "label": "عناق الوجه المعانق TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -1978,7 +1972,7 @@
                 "children": []
               },
               {
-                "label": "محولات الجمل",
+                "label": "Sentence Transformers",
                 "id": "embed-with-sentence-transform.md",
                 "order": 2,
                 "children": []

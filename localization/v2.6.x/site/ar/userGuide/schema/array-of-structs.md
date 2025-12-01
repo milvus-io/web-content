@@ -2,9 +2,8 @@
 id: array-of-structs.md
 title: صفيف الهياكلCompatible with Milvus 2.6.4+
 summary: >-
-  يخزن حقل مصفوفة الهياكل في كيان ما مجموعة مرتبة من عناصر الهياكل. تشترك كل
-  بنية في المصفوفة في نفس المخطط المحدد مسبقًا، وتتألف من عدة متجهات وحقول
-  قياسية.
+  يخزن حقل صفيف الهياكل في كيان ما مجموعة مرتبة من عناصر الهياكل. تشترك كل بنية
+  في المصفوفة في نفس المخطط المحدد مسبقًا، وتتألف من عدة متجهات وحقول قياسية.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Array-of-Structs" class="common-anchor-header">صفيف الهياكل<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Array-of-Structs" class="anchor-icon" translate="no">
@@ -152,7 +151,12 @@ beta: Milvus 2.6.4+
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-schema = MilvusClient.create_schema()
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+schema = client.create_schema()
 
 <span class="hljs-comment"># add the primary field to the collection</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
@@ -166,7 +170,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;year_of_publication&
 schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 <span class="highlighted-comment-line"><span class="hljs-comment"># Create a struct schema</span></span>
-<span class="highlighted-comment-line">struct_schema = MilvusClient.create_struct_field_schema()</span>
+<span class="highlighted-comment-line">struct_schema = client.create_struct_field_schema()</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># add a scalar field to the struct</span></span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
@@ -377,7 +381,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Create an index for the vector field in the collection</span>
 index_params.add_index(
@@ -461,12 +465,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
     </button></h2><p>بمجرد أن يصبح المخطط والفهرس جاهزين، يمكنك إنشاء مجموعة تتضمن حقل مصفوفة من الهياكل.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جافا جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-)
-
-client.create_collection(
+<pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params

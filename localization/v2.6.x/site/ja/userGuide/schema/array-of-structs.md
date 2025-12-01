@@ -142,7 +142,7 @@ beta: Milvus 2.6.4+
 <ol>
 <li><p>コレクションスキーマにArrayフィールドとしてフィールドを追加する際に、フィールドのデータ型を<code translate="no">DataType.ARRAY</code> 。</p></li>
 <li><p>フィールドの<code translate="no">element_type</code> 属性を<code translate="no">DataType.STRUCT</code> に設定して、フィールドを Struct の Array にします。</p></li>
-<li><p>Struct スキーマを作成し、必要なフィールドを含めます。次に、フィールドの<code translate="no">struct_schema</code> 属性で Struct スキーマを参照します。</p></li>
+<li><p>Struct スキーマを作成し、必須フィールドを含めます。次に、フィールドの<code translate="no">struct_schema</code> 属性で Struct スキーマを参照します。</p></li>
 <li><p>フィールドの<code translate="no">max_capacity</code> 属性を適切な値に設定し、各エンティティがこのフィールドに含めることができる Struct の最大数を指定します。</p></li>
 <li><p><strong>(オプション</strong>）Struct 要素内の任意のフィールドに<code translate="no">mmap.enabled</code> を設定して、Struct 内のホットデータとコールドデータのバランスを取ることができます。</p></li>
 </ol>
@@ -151,7 +151,12 @@ beta: Milvus 2.6.4+
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-schema = MilvusClient.create_schema()
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+schema = client.create_schema()
 
 <span class="hljs-comment"># add the primary field to the collection</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
@@ -165,7 +170,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;year_of_publication&
 schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 <span class="highlighted-comment-line"><span class="hljs-comment"># Create a struct schema</span></span>
-<span class="highlighted-comment-line">struct_schema = MilvusClient.create_struct_field_schema()</span>
+<span class="highlighted-comment-line">struct_schema = client.create_struct_field_schema()</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># add a scalar field to the struct</span></span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
@@ -376,7 +381,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Create an index for the vector field in the collection</span>
 index_params.add_index(
@@ -460,12 +465,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
     </button></h2><p>スキーマとインデックスの準備ができたら、Array of Structs フィールドを含むコレクションを作成できます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-)
-
-client.create_collection(
+<pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
@@ -737,7 +737,7 @@ client.insert(collection_name=<span class="hljs-string">&quot;my_collection&quot
     </button></h2><p>コレクションとArray of Structsのベクトルフィールドに対してベクトル検索を行うことができます。</p>
 <p>具体的には、検索リクエストの<code translate="no">anns_field</code> パラメータの値として、Array of Structs フィールドの名前と Struct 要素内の対象ベクトルフィールドの名前を連結し、<code translate="no">EmbeddingList</code> を使用してクエリベクトルを整然と整理する必要があります。</p>
 <div class="alert note">
-<p>Milvusは、Array of Structs内のエンベッディングリストに対する検索用のクエリベクタをよりきれいに整理するために、<code translate="no">EmbeddingList</code> 。各<code translate="no">EmbeddingList</code> は、少なくともベクトル埋め込みを含み、topKエンティティの数を返します。</p>
+<p>Milvusは、Array of Structs内のエンベッディングリストに対する検索のクエリベクトルをよりきれいに整理するために、<code translate="no">EmbeddingList</code> 。各<code translate="no">EmbeddingList</code> は、少なくともベクトル埋め込みを含み、topKエンティティの数を返します。</p>
 <p>しかし、<code translate="no">EmbeddingList</code> は、<code translate="no">search_iterator()</code> リクエストはおろか、範囲検索やグループ化検索パラメーターのない<code translate="no">search()</code> リクエストでしか使えない。</p>
 </div>
 <div class="multipleCode">

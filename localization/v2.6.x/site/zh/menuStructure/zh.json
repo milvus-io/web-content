@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "基准",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "比较",
         "id": "comparison.md",
         "order": 5,
@@ -1185,7 +1179,7 @@
                 ]
               },
               {
-                "label": "Model Ranker",
+                "label": "模型排名器",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -2152,7 +2146,7 @@
                 "children": []
               },
               {
-                "label": "Asynchronous Search",
+                "label": "异步搜索",
                 "id": "langchain_milvus_async.md",
                 "order": 5,
                 "children": []

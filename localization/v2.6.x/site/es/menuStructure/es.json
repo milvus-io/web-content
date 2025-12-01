@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "Puntos de referencia",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "Comparación",
         "id": "comparison.md",
         "order": 5,
@@ -2558,7 +2552,7 @@
             "children": []
           },
           {
-            "label": "No estructurado",
+            "label": "Sin estructurar",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []

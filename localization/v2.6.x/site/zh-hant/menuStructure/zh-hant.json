@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "基準",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "比較",
         "id": "comparison.md",
         "order": 5,
@@ -328,7 +322,7 @@
             "children": []
           },
           {
-            "label": "檢視館藏",
+            "label": "檢視收藏集",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -1097,7 +1091,7 @@
                 "children": []
               },
               {
-                "label": "航程 AI",
+                "label": "Voyage AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1443,7 +1437,7 @@
             "children": []
           },
           {
-            "label": "飛行中",
+            "label": "在飛行中",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
@@ -2338,7 +2332,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格舞曲",
+            "label": "拉格",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []

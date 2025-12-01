@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "Tolok ukur",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "Perbandingan",
         "id": "comparison.md",
         "order": 5,
@@ -436,7 +430,7 @@
                 "children": []
               },
               {
-                "label": "JSON Indexing",
+                "label": "Pengindeksan JSON",
                 "id": "json-indexing.md",
                 "order": 1,
                 "children": []

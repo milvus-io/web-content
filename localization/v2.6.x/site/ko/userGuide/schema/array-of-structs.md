@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>엔티티의 구조체 배열 필드는 정렬된 구조체 요소 집합을 저장합니다. 배열의 각 Struct는 여러 벡터와 스칼라 필드로 구성된 동일한 사전 정의 스키마를 공유합니다.</p>
+    </button></h1><p>엔티티의 구조체 배열 필드는 정렬된 구조체 요소 집합을 저장합니다. 배열의 각 구조체는 여러 벡터와 스칼라 필드로 구성된 동일한 사전 정의된 스키마를 공유합니다.</p>
 <p>다음은 Struct의 배열 필드를 포함하는 컬렉션의 엔티티 예시입니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     &#x27;id&#x27;<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
@@ -98,7 +98,7 @@ beta: Milvus 2.6.4+
 <p>함수를 사용하여 구조체 내의 스칼라 필드에서 벡터 필드를 파생할 수 없습니다.</p></li>
 <li><p><strong>인덱스 유형 및 메트릭 유형</strong></p>
 <p>컬렉션의 모든 벡터 필드는 색인화되어야 합니다. 구조체 배열 필드 내의 벡터 필드를 인덱싱하기 위해 Milvus는 임베딩 목록을 사용하여 각 구조체 요소의 벡터 임베딩을 구성하고 전체 임베딩 목록을 전체적으로 인덱싱합니다.</p>
-<p><code translate="no">AUTOINDEX</code> 또는 <code translate="no">HNSW</code> 을 인덱스 유형으로 사용하고 아래 나열된 메트릭 유형을 사용하여 구조체 배열 필드에 있는 임베딩 목록에 대한 인덱스를 작성할 수 있습니다.</p>
+<p><code translate="no">AUTOINDEX</code> 또는 <code translate="no">HNSW</code> 을 인덱스 유형으로 사용하고 아래 나열된 메트릭 유형을 사용하여 구조체 배열 필드에 있는 임베딩 목록에 대한 인덱스를 만들 수 있습니다.</p>
 <p><table>
 <tr>
 <th><p>인덱스 유형</p></th>
@@ -151,7 +151,12 @@ beta: Milvus 2.6.4+
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-schema = MilvusClient.create_schema()
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+schema = client.create_schema()
 
 <span class="hljs-comment"># add the primary field to the collection</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
@@ -165,7 +170,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;year_of_publication&
 schema.add_field(field_name=<span class="hljs-string">&quot;title_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 
 <span class="highlighted-comment-line"><span class="hljs-comment"># Create a struct schema</span></span>
-<span class="highlighted-comment-line">struct_schema = MilvusClient.create_struct_field_schema()</span>
+<span class="highlighted-comment-line">struct_schema = client.create_struct_field_schema()</span>
 <span class="highlighted-comment-line"></span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># add a scalar field to the struct</span></span>
 <span class="highlighted-comment-line">struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)</span>
@@ -376,7 +381,7 @@ SCHEMA=<span class="hljs-string">&#x27;{
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create index parameters</span>
-index_params = MilvusClient.prepare_index_params()
+index_params = client.prepare_index_params()
 
 <span class="hljs-comment"># Create an index for the vector field in the collection</span>
 index_params.add_index(
@@ -460,12 +465,7 @@ INDEX_PARAMS=<span class="hljs-string">&#x27;[
     </button></h2><p>스키마와 인덱스가 준비되면 구조체 배열 필드를 포함하는 컬렉션을 만들 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-)
-
-client.create_collection(
+<pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params

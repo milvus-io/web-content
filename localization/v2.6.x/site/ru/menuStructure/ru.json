@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "Бенчмарки",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "Сравнение",
         "id": "comparison.md",
         "order": 5,
@@ -130,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -150,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -1091,7 +1085,7 @@
                 "children": []
               },
               {
-                "label": "Vertex AI",
+                "label": "Вертексный искусственный интеллект",
                 "id": "vertex-ai.md",
                 "order": 5,
                 "children": []
@@ -1185,7 +1179,7 @@
                 ]
               },
               {
-                "label": "Model Ranker",
+                "label": "Рейтинг моделей",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -1239,7 +1233,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Use mmap",
+            "label": "Используйте mmap",
             "id": "mmap.md",
             "order": 0,
             "children": []
@@ -1269,7 +1263,7 @@
                 "children": []
               },
               {
-                "label": "Eviction",
+                "label": "Выселение",
                 "id": "eviction.md",
                 "order": 2,
                 "children": []
@@ -1804,7 +1798,7 @@
         "children": []
       },
       {
-        "label": "Резервное копирование Милвуса",
+        "label": "Резервное копирование Milvus",
         "id": "milvus_backup",
         "order": 1,
         "children": [
