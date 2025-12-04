@@ -23,7 +23,7 @@ title: Upgrade Milvus Standalone with Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide describes how to upgrade your Milvus standalone deployment from v2.5.x to v2.6.6 using Helm Chart.</p>
+    </button></h1><p>This guide describes how to upgrade your Milvus standalone deployment from v2.5.x to v2.6.7 using Helm Chart.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: Upgrade Milvus Standalone with Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v266" class="common-anchor-header">What’s new in v2.6.6<button data-href="#Whats-new-in-v266" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v267" class="common-anchor-header">What’s new in v2.6.7<button data-href="#Whats-new-in-v267" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,7 +54,7 @@ title: Upgrade Milvus Standalone with Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Upgrading from Milvus 2.5.x to 2.6.6 involves significant architectural changes:</p>
+    </button></h3><p>Upgrading from Milvus 2.5.x to 2.6.7 involves significant architectural changes:</p>
 <ul>
 <li><strong>Coordinator consolidation</strong>: Legacy separate coordinators (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) have been consolidated into a single <code translate="no">mixCoord</code></li>
 <li><strong>New components</strong>: Introduction of Streaming Node for enhanced data processing</li>
@@ -84,11 +84,11 @@ title: Upgrade Milvus Standalone with Helm Chart
 </ul>
 <p><strong>Compatibility requirements:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 is <strong>not compatible</strong> with v2.6.6. Direct upgrades from release candidates are not supported.</li>
+<li>Milvus v2.6.0-rc1 is <strong>not compatible</strong> with v2.6.7. Direct upgrades from release candidates are not supported.</li>
 <li>If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">this community guide</a> for migration assistance.</li>
-<li>You <strong>must</strong> upgrade to v2.5.16 or later before upgrading to v2.6.6.</li>
+<li>You <strong>must</strong> upgrade to v2.5.16 or later before upgrading to v2.6.7.</li>
 </ul>
-<p><strong>Message Queue limitations</strong>: When upgrading to Milvus v2.6.6, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.</p>
+<p><strong>Message Queue limitations</strong>: When upgrading to Milvus v2.6.7, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.</p>
 <div class="alert note">
 Since Milvus Helm chart version 4.2.21, we introduced pulsar-v3.x chart as dependency. For backward compatibility, please upgrade your Helm to v3.14 or later version, and be sure to add the <code translate="no">--reset-then-reuse-values</code> option whenever you use <code translate="no">helm upgrade</code>.
 </div>
@@ -161,7 +161,7 @@ The Milvus Helm Charts repo at <code translate="no">https://milvus-io.github.io/
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Upgrade-to-v266" class="common-anchor-header">Step 3: Upgrade to v2.6.6<button data-href="#Step-3-Upgrade-to-v266" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-to-v267" class="common-anchor-header">Step 3: Upgrade to v2.6.7<button data-href="#Step-3-Upgrade-to-v267" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,9 +176,9 @@ kubectl get pods
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Once v2.5.16 is running successfully, upgrade to v2.6.6:</p>
+    </button></h3><p>Once v2.5.16 is running successfully, upgrade to v2.6.7:</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.6&quot;</span> \
+  --<span class="hljs-built_in">set</span> image.all.tag=<span class="hljs-string">&quot;v2.6.7&quot;</span> \
   --reset-then-reuse-values \
   --version=5.0.0
 <button class="copy-code-btn"></button></code></pre>
