@@ -80,7 +80,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A common point of confusion is the difference between a JSON field and the <a href="/docs/enable-dynamic-field.md">dynamic field</a>. While both are related to JSON, they serve different purposes.</p>
+    </button></h2><p>A common point of confusion is the difference between a JSON field and the <a href="/docs/v2.6.x/enable-dynamic-field.md">dynamic field</a>. While both are related to JSON, they serve different purposes.</p>
 <p>The table below summarizes the key differences between a JSON field and the dynamic field:</p>
 <table>
    <tr>
@@ -159,7 +159,7 @@ client.create_collection(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>In this example, the JSON field defined in the collection schema allows null values with <code translate="no">nullable=True</code>. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
+<p>In this example, the JSON field defined in the collection schema allows null values with <code translate="no">nullable=True</code>. For details, refer to <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a>.</p>
 </div>
 <h3 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -299,7 +299,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information about JSON-specific operators, refer to <a href="/docs/json-operators.md">JSON Operators</a>.</p>
+<p>For more information about JSON-specific operators, refer to <a href="/docs/v2.6.x/json-operators.md">JSON Operators</a>.</p>
 <h2 id="Next-Accelerate-JSON-queries" class="common-anchor-header">Next: Accelerate JSON queries<button data-href="#Next-Accelerate-JSON-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -346,9 +346,9 @@ res = client.search(
 <p><strong>Tip:</strong> You can combine these approaches—for example, use JSON shredding for broad query acceleration, JSON indexing for high-frequency array keys, and NGRAM indexing for flexible text search.</p>
 <p>For implementation details, refer to:</p>
 <ul>
-<li><p><a href="/docs/json-indexing.md">JSON Indexing</a></p></li>
-<li><p><a href="/docs/json-shredding.md">JSON Shredding</a></p></li>
-<li><p><a href="/docs/ngram.md">NGRAM</a></p></li>
+<li><p><a href="/docs/v2.6.x/json-indexing.md">JSON Indexing</a></p></li>
+<li><p><a href="/docs/v2.6.x/json-shredding.md">JSON Shredding</a></p></li>
+<li><p><a href="/docs/v2.6.x/ngram.md">NGRAM</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -397,7 +397,7 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>No, JSON fields do not support default values. However, you can set <code translate="no">nullable=True</code> when defining the field to allow empty entries.</p>
-<p>Refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a> for details.</p>
+<p>Refer to <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a> for details.</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Are there any naming conventions for JSON field keys?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -543,7 +543,7 @@ ranker = Function(
    <tr>
      <td><p><code translate="no">params.filter</code></p></td>
      <td><p>No</p></td>
-     <td><p>Specifies the filter expression that will be used to match entities among search result entities. It can be any valid basic filter expression mentioned in <a href="/docs/boolean.md">Filtering Explained</a>.</p><p><strong>Note</strong>: Only use basic operators, such as <code translate="no">==</code>, <code translate="no">&gt;</code>, or <code translate="no">&lt;</code>. Using advanced operators, such as <code translate="no">text_match</code> or <code translate="no">phrase_match</code>, will degrade search performance.</p></td>
+     <td><p>Specifies the filter expression that will be used to match entities among search result entities. It can be any valid basic filter expression mentioned in <a href="/docs/v2.6.x/boolean.md">Filtering Explained</a>.</p><p><strong>Note</strong>: Only use basic operators, such as <code translate="no">==</code>, <code translate="no">&gt;</code>, or <code translate="no">&lt;</code>. Using advanced operators, such as <code translate="no">text_match</code> or <code translate="no">phrase_match</code>, will degrade search performance.</p></td>
      <td><p><code translate="no">"doctype == 'abstract'"</code></p></td>
    </tr>
    <tr>
