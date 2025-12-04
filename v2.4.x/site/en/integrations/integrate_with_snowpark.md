@@ -26,7 +26,7 @@ snowsql -a ${instance_name} -u ${user_name}
 
 The rule of `${instance_name}` is `${org_name}-${acct_name}`. The relevant information can be obtained by logging in to [app.snowflake.com](http://app.snowflake.com/sn) and checking the personal account information.
 
-![Snowflake account information](../../../assets/snowflake-01.png)
+![Snowflake account information](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-01.png)
 
 ### 2. Configure Role and privileges
 
@@ -185,7 +185,7 @@ DESCRIBE COMPUTE POOL MILVUS_COMPUTE_POOL;
 DESCRIBE COMPUTE POOL JUPYTER_COMPUTE_POOL;
 ```
 
-![Compute pool status](../../../assets/snowflake-02.png)
+![Compute pool status](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-02.png)
 
 - Upload spec files
 
@@ -237,7 +237,7 @@ SHOW SERVICES;
 
 If you encounter problems starting the service, you can view service information through `CALL SYSTEM$GET_SERVICE_STATUS('milvus');`.
 
-![Service status](../../../assets/snowflake-03.png)
+![Service status](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-03.png)
 
 More information can be obtained through `CALL SYSTEM$GET_SERVICE_LOGS('milvus', '0', 'milvus', 10);`.
 
@@ -259,11 +259,11 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 
 Record the `ingress_url` part of the information, then open the browser and enter the `ingress_url`, use the milvus_user account to log in to the website.
 
-![Obtain the ingress URL](../../../assets/snowflake-04.png)
+![Obtain the ingress URL](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-04.png)
 
 Opening the notebook through the `ingress_url`, double-click the `TestMilvus.ipynb` file on the page to try out Milvus. Select the first part of the code block, and click the **Run** button to start establishing the connection and initializing the embedding function.
 
-![Run TestMilvus.ipynb in the notebook](../../../assets/snowflake-05.png)
+![Run TestMilvus.ipynb in the notebook](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-05.png)
 
 After establishing the connection, continue to click **RUN**. The code will turn a piece of text into vector data after embedding processing, and then insert it into Milvus.
 
@@ -277,7 +277,7 @@ docs = [
 
 Then use a text as a query: "Who started AI research?", perform the query after embedding processing, and finally obtain and display the most relevant results.
 
-![Obtain and display the most relevant results](../../../assets/snowflake-06.png)
+![Obtain and display the most relevant results](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-06.png)
 
 For more information on the usage of the Milvus client, you can refer to the [Milvus Doc](quickstart.md) section.
 

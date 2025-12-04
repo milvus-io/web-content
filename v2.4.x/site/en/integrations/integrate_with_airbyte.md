@@ -58,17 +58,17 @@ The Milvus connector does three things:
 Let’s go with a chunk size of 1000 tokens and text fields of body, title, description, and subject, as these will be present in the data we will receive from Zendesk.
 
 - **Embedding** - Using Machine Learning models transforms the text chunks produced by the processing part into vector embeddings that you can then search for semantic similarity. To create the embeddings, you must supply the OpenAI API key. Airbyte will send each chunk to OpenAI and add the resulting vector to the entities loaded into your Milvus cluster.
-- **Indexing** - Once you have vectorized the chunks, you can load them into the database. To do so, insert the information you got when setting up your cluster and collection in Milvus cluster. <div><img src="../../../assets/airbyte_with_milvus_1.png" width="40%"/></div> Clicking “Test and save” will check whether everything is lined up correctly (valid credentials, collection exists and has the same vector dimensionality as the configured embedding, etc.)
+- **Indexing** - Once you have vectorized the chunks, you can load them into the database. To do so, insert the information you got when setting up your cluster and collection in Milvus cluster. <div><img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_1.png" width="40%"/></div> Clicking “Test and save” will check whether everything is lined up correctly (valid credentials, collection exists and has the same vector dimensionality as the configured embedding, etc.)
 
 ### Set up stream sync flow
-The last step before data is ready to flow is selecting which “streams” to sync. A stream is a collection of records in the source. As Zendesk supports a large number of streams that are not relevant to our use case, let’s only select “tickets” and “articles” and disable all others to save bandwidth and make sure only the relevant information will show up in searches:<div><img src="../../../assets/airbyte_with_milvus_2.png" width="40%"/></div> You can select which fields to extract from the source by clicking the stream name. The “Incremental | Append + Deduped” sync mode means that subsequent connection runs keep Zendesk and Milvus in sync while transferring minimal data (only the articles and tickets that have changed since the last run).
+The last step before data is ready to flow is selecting which “streams” to sync. A stream is a collection of records in the source. As Zendesk supports a large number of streams that are not relevant to our use case, let’s only select “tickets” and “articles” and disable all others to save bandwidth and make sure only the relevant information will show up in searches:<div><img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_2.png" width="40%"/></div> You can select which fields to extract from the source by clicking the stream name. The “Incremental | Append + Deduped” sync mode means that subsequent connection runs keep Zendesk and Milvus in sync while transferring minimal data (only the articles and tickets that have changed since the last run).
 
 As soon as the connection is set up, Airbyte will start syncing data. It can take a few minutes to appear in your Milvus collection.
 
 If you select a replication frequency, Airbyte will run regularly to keep your Milvus collection up to date with changes to Zendesk articles and newly created issues.
 
 ### Check flow
-You can check in the Milvus cluster UI how the data is structured in the collection by navigating to the playground and executing a “Query Data” query with a filter set to “_ab_stream == \”tickets\””.<div><img src="../../../assets/airbyte_with_milvus_3.png" width="40%"/></div> As you can see in the Result view, each record coming from Zendesk is stored as separate entities in Milvus with all the specified metadata. The text chunk the embedding is based on is shown as the “text” property — this is the text that got embedded using OpenAI and will be what we will search on.
+You can check in the Milvus cluster UI how the data is structured in the collection by navigating to the playground and executing a “Query Data” query with a filter set to “_ab_stream == \”tickets\””.<div><img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_3.png" width="40%"/></div> As you can see in the Result view, each record coming from Zendesk is stored as separate entities in Milvus with all the specified metadata. The text chunk the embedding is based on is shown as the “text” property — this is the text that got embedded using OpenAI and will be what we will search on.
 
 ## Build Streamlit app querying the collection
 Our data is ready — now we need to build the application to use it. In this case, the application will be a simple support form for users to submit support cases. When the user hits submit, we will do two things:
@@ -101,7 +101,7 @@ To run your application, use Streamlit run:
 ```shell
 streamlit run basic_support_form.py
 ```
-This will render a basic form:<div><img src="../../../assets/airbyte_with_milvus_4.png" width="40%"/></div>The code for this example can also be found on [GitHub](https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py).
+This will render a basic form:<div><img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_4.png" width="40%"/></div>The code for this example can also be found on [GitHub](https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py).
 
 ### Set up backend query service
 Next, let’s check for existing open tickets that might be relevant. To do this, we embed the text the user entered using OpenAI, then did a similarity search on our collection, filtering for still open tickets. If there is one with a very low distance between the supplied ticket and the existing ticket, let the user know and don’t submit:
@@ -153,7 +153,7 @@ export OPENAI_API_KEY=sk-...
 
 streamlit run app.py
 ```
-When trying to submit a ticket that exists already, this is how the result will look:<div><img src="../../../assets/airbyte_with_milvus_5.png" width="40%"/></div> The code for this example can also be found on [GitHub](https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py).
+When trying to submit a ticket that exists already, this is how the result will look:<div><img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_5.png" width="40%"/></div> The code for this example can also be found on [GitHub](https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py).
 
 ### Show more relevant information
 As you can see in the green debug output hidden in the final version, two tickets matched our search (in status new, from the current organization, and close to the embedding vector). However, the first (relevant) ranked higher than the second (irrelevant in this situation), which is reflected in the lower distance value. This relationship is captured in the embedding vectors without directly matching words, like in a regular full-text search.
@@ -176,7 +176,7 @@ To do this, we are going to do a second search after the ticket gets submitted t
                         st.write(f"* [{hit.entity.get('title')}]({hit.entity.get('html_url')})")
 
 ```
-If there is no open support ticket with a high similarity score, the new ticket gets submitted and relevant knowledge articles are shown below:<div><img src="../../../assets/airbyte_with_milvus_6.png" width="40%"/></div> The code for this example can also be found on [Github](https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py).
+If there is no open support ticket with a high similarity score, the new ticket gets submitted and relevant knowledge articles are shown below:<div><img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_6.png" width="40%"/></div> The code for this example can also be found on [Github](https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py).
 
 ## Conclusion
 While the UI shown here is not an actual support form but an example to illustrate the use case, the combination of Airbyte and Milvus is a very powerful one — it makes it easy to load text from a wide variety of sources (from databases like Postgres over APIs like Zendesk or GitHub over to completely custom sources built using Airbyte's SDK or visual connector builder) and index it in embedded form in Milvus, a powerful vector search engine being able to scale to huge amounts of data.

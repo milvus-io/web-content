@@ -17,8 +17,8 @@ Setting `nprobe` is specific to the dataset and scenario, and involves a trade-o
 
 The following charts are results from a test running on the sift50m dataset and IVF_SQ8 index, which compares recall and query performance of different `nlist`/`nprobe` pairs.
 
-![Accuracy test](../../../assets/accuracy_nlist_nprobe.png "Accuracy test.")
-![Performance test](../../../assets/performance_nlist_nprobe.png "Performance test.")
+![Accuracy test](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accuracy_nlist_nprobe.png)
+![Performance test](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/performance_nlist_nprobe.png)
 
 #### Why do queries sometimes take longer on smaller datasets?
 

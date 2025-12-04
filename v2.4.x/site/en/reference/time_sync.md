@@ -58,7 +58,7 @@ The TSO service is provided by the root coordinator in Milvus. Clients can alloc
 
 A TSO timestamp is a type of `uint64` value that is made up of a physical part and a logical part. The figure below demonstrates the format of a timestamp.
 
-![TSO_Timestamp](../../../assets/TSO_Timestamp.png "TSO timestamp.").
+![TSO_Timestamp](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png).
 
 
 As illustrated, the 46 bits at the beginning is the physical part, namely the UTC time in milliseconds. The last 18 bits is the logical part.
@@ -77,19 +77,19 @@ Each insert message (`InsertMsg`) is assigned a timestamp before being sent to t
   <code>MsgStream</code> is a wrapper of the message queue, which is Pulsar by default in Milvus 2.0.
 </div>
 
-![timesync_proxy_insert_msg](../../../assets/timesync_proxy_insert_msg.png "An example of inserting data from multiple proxies to MsgStreams.")
+![timesync_proxy_insert_msg](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png)
 
 One general principle is that in the `MsgStream`, the timestamps of the`InsertMsgs` from the same proxy must be incremental. However, there is no such rule for those of the `InsertMsgs` from different proxies.
 
 The following figure is an example of `InsertMsgs` in a `MsgStream`. The snippet contains five `InsertMsgs`, three of which are from `Proxy1` and the rest from `Proxy2`.
 
-![msgstream](../../../assets/msgstream.png "An example of a MsgStream with five InsertMsgs.")
+![msgstream](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png)
 
 The timestamps of the three `InsertMsgs` from `Proxy1` are incremental, and so are the two `InsertMsgs` from `Proxy2`. However, there is no particular order among `Proxy1` and `Proxy2` `InsertMsgs` .
 
 One possible scenario is that when reading a message with timestamp `110` from `Proxy2`, Milvus finds that the message with timestamp `80` from `Proxy1` is still in the `MsgStream`. Therefore, Milvus introduces a time synchronization system, timetick, to ensure that when reading a message from `MsgStream`, all messages with smaller timestamp values must be consumed. 
 
-![time_synchronization](../../../assets/time_synchronization.png "The time synchronization system in Milvus.")
+![time_synchronization](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png)
 
 As shown in the figure above,
 
@@ -101,7 +101,7 @@ As shown in the figure above,
 
 The following figure is an example of the `Msgstream` with a timetick inserted.
 
-![timetick](../../../assets/timetick.png "Msgstream with a timetick inserted.")
+![timetick](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png)
 
 `MsgStream` processes the messages in batches according to the time tick to ensure that the output messages meet the requirements of timestamp. 
 

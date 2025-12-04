@@ -32,7 +32,7 @@ If the `Guarantee_timestamp` is not configured, Milvus automatically takes the p
 
 To save you the trouble of understanding the [TSO](https://github.com/milvus-io/milvus/blob/master/docs/design_docs/20211214-milvus_hybrid_ts.md) inside Milvus, as a user, you do not have to directly configure the `Guarantee_timestamp` parameter. You only need to choose the [consistency level](https://milvus.io/docs/v2.1.x/consistency.md), and Milvus automatically handles the `Guarantee_timestamp` parameter for you. Each consistency level corresponds to a certain `Guarantee_timestamp` value.
 
-![Guarantee_Timestamp](../../../assets/Guarantee_Timestamp.png "An illustration of guarantee timestamp.").
+![Guarantee_Timestamp](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Guarantee_Timestamp.png).
 
 #### Example 
 
@@ -52,7 +52,7 @@ In Milvus, you need to load the data before conducting a search or query. Theref
 
 When there is an incoming search or query request, a query node compares the values of `Service_timestamp` and `Guarantee_timestamp`. There are mainly two scenarios.
 
-![Service_Timestamp](../../../assets/Service_Timestamp.png "Comparing the values of guarantee timestamp and service timestamp.").
+![Service_Timestamp](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Service_Timestamp.png).
 
 #### Scenario 1: `Service_timestamp` >= `Guarantee_timestamp`
 
@@ -68,7 +68,7 @@ Technically speaking, `Graceful_time` is not a timestamp, but rather a time peri
 
 When there is an incoming search or query request,  there can be two scenarios.
 
-![Graceful_Time](../../../assets/Graceful_Time.png "Comparing the values of service timestamp, graceful time, and guarantee timestamp.").
+![Graceful_Time](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Graceful_Time.png).
 
 #### Scenario 1: `Service_timestamp`  +  `Graceful_time` >= `Guarantee_timestamp`
 

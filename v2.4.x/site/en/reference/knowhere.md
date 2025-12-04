@@ -16,7 +16,7 @@ Knowhere is the core vector execution engine of Milvus, which incorporates sever
 
 The figure below illustrates the position of Knowhere in the Milvus architecture.
 
-![Knowhere](../../../assets/knowhere_architecture.png "Knowhere in the Milvus architecture.")
+![Knowhere](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png)
 
 The bottom-most layer is the system hardware. Above this sit the third-party index libraries. At the top layer, Knowhere interacts with the index node and query node via CGO, which allows Go packages to call C code.
 
@@ -62,7 +62,7 @@ However, in Knowhere, data for training and for searching are the same. Knowhere
 
 `DataObj` is the base class of all data structures in Knowhere. `Size()` is the only virtual method in `DataObj`. The Index class inherits from `DataObj` with a field named "size_". The Index class also has two virtual methods - `Serialize()` and `Load()`. The `VecIndex` class derived from `Index` is the virtual base class for all vector indexes. `VecIndex` provides methods including `Train()`, `Query()`, `GetStatistics()`, and `ClearStatistics()`.
 
-![base class](../../../assets/Knowhere_base_classes.png "Knowhere base classes.")
+![base class](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png)
 
 Some other index types are listed on the right in the figure above.
 
@@ -74,7 +74,7 @@ Some other index types are listed on the right in the figure above.
 
 #### `IDMAP`: brute-force search
 
-![IDMAP](../../../assets/IDMAP.png "IDMAP code structure.")
+![IDMAP](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png)
 
 Technically speaking, `IDMAP` is not an index, but rather used for brute-force search. When vectors are inserted into the database, neither data training nor index building is required. Searches will be conducted directly on the inserted vector data.
 
@@ -82,7 +82,7 @@ However, for code consistency, `IDMAP` also inherits from the `VecIndex` class w
 
 #### IVF indices
 
-![IVF](../../../assets/IVF.png "Code structure of IVF indices.")
+![IVF](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png)
 
 The IVF (inverted file) indices are the most frequently used. The `IVF` class is derived from `VecIndex` and `FaissBaseIndex`, and further extends to `IVFSQ` and `IVFPQ`. `GPUIVF` is derived from `GPUIndex` and `IVF`. Then `GPUIVF` further extends to `GPUIVFSQ` and `GPUIVFPQ`.
 
@@ -92,7 +92,7 @@ The base class structure for binary indices is relatively simpler. `BinaryIDMAP`
 
 #### Third-party indices
 
-![third-party indices](../../../assets/third_party_index.png "Code structure of other third-party indices.")
+![third-party indices](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png)
 
 Currently, only two types of third-party indices are supported apart from Faiss: tree-based index `Annoy`, and graph-based index `HNSW`. These two common and frequently used third-party indices are both derived from `VecIndex`.
 

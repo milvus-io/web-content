@@ -29,16 +29,16 @@ Download and import Milvus dashboard from the JSON file.
 wget https://raw.githubusercontent.com/milvus-io/milvus/2.2.0/deployments/monitor/grafana/milvus-dashboard.json
 ```
 
-![Download_and_import](../../../../assets/import_dashboard.png "Download and import dashboard.")
+![Download_and_import](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/import_dashboard.png)
 
 ### 2. View metrics
 
 Select the Milvus instance you want to monitor. Then you can see the Milvus components panel.
 
 
-![Select_instance](../../../../assets/grafana_select.png "Select an instance.")
+![Select_instance](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_select.png)
 
-![Grafana_panel](../../../../assets/grafana_panel.png "Milvus components panel.")
+![Grafana_panel](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_panel.png)
 
 
 ## What's next

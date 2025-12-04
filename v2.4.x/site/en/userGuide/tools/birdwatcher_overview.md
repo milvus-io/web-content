@@ -16,7 +16,7 @@ Birdwatcher is a debugging tool for Milvus. Using it to connect to etcd, you can
 
 ## Architecture
 
-![Birdwatcher architecture](../../../../assets/birdwatcher_overview.png)
+![Birdwatcher architecture](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/birdwatcher_overview.png)
 
 ## Latest release
 

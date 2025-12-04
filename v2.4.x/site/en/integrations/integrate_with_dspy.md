@@ -20,7 +20,7 @@ DSPy, introduced by the Stanford NLP Group, stands as a groundbreaking programma
 ## Modules
 There are numerous components that contribute to constructing an LLM pipeline. Here, we'll describe some key components to provide a high-level understanding of how DSPy operates.
 
-![DSPy Modules](../../../assets/dspy-01.png)
+![DSPy Modules](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png)
 
 Signature: Signatures in DSPy serve as declarative specifications, outlining the input/output behavior of modules, guiding the language model in task execution.
 Module: DSPy modules serve as fundamental components for programs leveraging language models (LMs). They abstract various prompting techniques, such as chain of thought or ReAct, and are adaptable to handle any DSPy Signature. With learnable parameters and the ability to process inputs and produce outputs, these modules can be combined to form larger programs, drawing inspiration from NN modules in PyTorch but tailored for LM applications.

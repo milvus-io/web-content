@@ -197,7 +197,7 @@ display(concatenated_image)
 
 
     
-![Results](../../../assets/results.png)
+![Results](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results.png)
     
 
 

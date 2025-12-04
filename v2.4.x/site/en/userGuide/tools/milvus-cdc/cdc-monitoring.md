@@ -15,7 +15,7 @@ To get started, import the [cdc-grafana.json](https://github.com/zilliztech/milv
 
 __CDC Grafana Dashboard Overview__:
 
-![milvus-cdc-dashboard](../../../../../assets/milvus-cdc-dashboard.png)
+![milvus-cdc-dashboard](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-dashboard.png)
 
 __Key Metrics Explained:__
 

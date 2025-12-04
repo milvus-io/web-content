@@ -137,7 +137,7 @@ The test uses the open-source dataset SIFT (128 dimensions) from [ANN-Benchmarks
 | 2.1.0  | 6904  | 59            | 28            | 0      |
 | 2.2.0  | 10248 | 63            | 24            | 0      |
 
-![Cluster search performance](../../../assets/cluster_search_performance_210_vs_220.png)
+![Cluster search performance](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cluster_search_performance_210_vs_220.png)
 
 #### Standalone
 
@@ -163,7 +163,7 @@ The test uses the open-source dataset SIFT (128 dimensions) from [ANN-Benchmarks
 | 2.1.0  | 4287 | 104           | 76            | 0      |
 | 2.2.0  | 7522 | 127           | 79            | 0      |
 
-![Standalone search performance](../../../assets/standalone_search_performance_210_vs_220.png)
+![Standalone search performance](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/standalone_search_performance_210_vs_220.png)
 
 ### Milvus 2.2.0 Scale-up
 
@@ -193,7 +193,7 @@ Expand the CPU cores in one Querynode to check the capability to scale up.
 | 16        | 600               | 14135 | 85            | 42            | 0      |
 | 32        | 600               | 20281 | 63            | 28            | 0      |
 
-![Search performance by Querynode CPU cores](../../../assets/search_performance_by_querynode_cpu_cores.png)
+![Search performance by Querynode CPU cores](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/search_performance_by_querynode_cpu_cores.png)
 
 ### Milvus 2.2.0 Scale-out
 
@@ -227,7 +227,7 @@ Note: the number of Querynodes equals the `replica_number` when loading the coll
 | 4        | 800               | 19281 | 109           | 40            | 0      |
 | 8        | 1200              | 30655 | 93            | 38            | 0      |
 
-![Search performance by Querynode replicas](../../../assets/search_performance_by_querynode_replicas.png)
+![Search performance by Querynode replicas](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/search_performance_by_querynode_replicas.png)
 
 ## What's next
 

@@ -11,7 +11,7 @@ This topic provides an overview of Role-Based Access Control (RBAC) in Milvus, d
 
 The following figure illustrates the relationship between objects, privileges, roles, and users.
 
-![users_and_roles](../../../assets/users_and_roles.png "The relationship between object, privilege, role and user.")
+![users_and_roles](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users_and_roles.png)
 
 ## Key concepts
 

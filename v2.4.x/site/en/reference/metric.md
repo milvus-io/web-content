@@ -81,7 +81,7 @@ Essentially, Euclidean distance measures the length of a segment that connects 2
 
 The formula for Euclidean distance is as follows:
 
-![euclidean](../../../assets/euclidean_metric.png "Euclidean distance.")
+![euclidean](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean_metric.png)
 
 where **a** = (a<sub>0</sub>, a<sub>1</sub>,..., a<sub>n-1</sub>) and **b** = (b<sub>0</sub>, b<sub>0</sub>,..., b<sub>n-1</sub>) are two points in n-dimensional Euclidean space
 
@@ -95,7 +95,7 @@ Milvus only caculates the value before applying square root when Euclidean dista
 
 The IP distance between two vector embeddings are defined as follows: 
 
-![ip](../../../assets/IP_formula.png "Inner product.")
+![ip](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP_formula.png)
 
 IP is more useful if you need to compare non-normalized data or when you care about magnitude and angle.
 
@@ -107,11 +107,11 @@ IP is more useful if you need to compare non-normalized data or when you care ab
 
 Suppose X' is normalized from embedding X: 
 
-![normalize](../../../assets/normalize_formula.png "Normalize.")
+![normalize](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize_formula.png)
 
 The correlation between the two embeddings is as follows:
 
-![normalization](../../../assets/normalization_formula.png "Normalization.")
+![normalization](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalization_formula.png)
 
 ### Cosine Similarity
 
@@ -119,7 +119,7 @@ Cosine similarity uses the cosine of the angle between two sets of vectors to me
 
 To calculate the cosine similarity between two sets of vectors **A = (a<sub>0</sub>, a<sub>1</sub>,..., a<sub>n-1</sub>)** and **B = (b<sub>0</sub>, b<sub>1</sub>,..., b<sub>n-1</sub>)**, use the following formula:
 
-![cosine_similarity](../../../assets/cosine_similarity.png "Cosine Similarity")
+![cosine_similarity](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine_similarity.png)
 
 The cosine similarity is always in the interval **[-1, 1]**. For example, two proportional vectors have a cosine similarity of **1**, two orthogonal vectors have a similarity of **0**, and two opposite vectors have a similarity of **-1**. The larger the cosine, the smaller the angle between two vectors, indicating that these two vectors are more similar to each other.
 
@@ -129,11 +129,11 @@ By subtracting their cosine similarity from 1, you can get the cosine distance b
 
 Jaccard similarity coefficient measures the similarity between two sample sets and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.
 
-![Jaccard similarity coefficient](../../../assets/jaccard_coeff.png "Jaccard similarity coefficient.")
+![Jaccard similarity coefficient](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_coeff.png)
 
 Jaccard distance measures the dissimilarity between data sets and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to the Tanimoto coefficient.
 
-![Jaccard distance](../../../assets/jaccard_dist.png "Jaccard distance.")
+![Jaccard distance](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png)
 
 ### Hamming distance
 
@@ -151,7 +151,7 @@ Structural similarity is used to determine whether two chemical formulae are sim
 
 To determine whether A is a superstructure of B, use the following formula:
 
-![superstructure](../../../assets/superstructure.png "Superstructure")
+![superstructure](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/superstructure.png)
 
 Where:
 
@@ -162,7 +162,7 @@ Once it returns `0`, **A** is not a superstructure of **B**. Otherwise, the resu
 
 To determine whether A is a substructure of B, use the following formula:
 
-![substructure](../../../assets/substructure.png "subsctructure")
+![substructure](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/substructure.png)
 
 Where:
 

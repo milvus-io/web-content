@@ -14,15 +14,15 @@ You can specify a number of shards for each collection in Milvus, each shard cor
 
 Validation of DML requests is moved forward to the proxy because Milvus does not have complicated transactions. The proxy requests a timestamp for each insert/delete request from the TSO (Timestamp Oracle), which is the timing module that colocates with the root coordinator. With the older timestamp being overwritten by the newer one, timestamps are used to determine the sequence of data requests being processed. The proxy retrieves information in batches from data coord including entities' segments and primary keys to increase overall throughput and avoid overburdening the central node. 
 
-![Channels 1](../../../../assets/channels_1.jpg "Each shard corresponds to a vchannel.")
+![Channels 1](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.jpg)
 
 Both DML (data manipulation language) operations and DDL (data definition language) operations are written to the log sequence, but DDL operations are only assigned one channel because of their low frequency of occurrence. 
 
-![Channels 2](../../../../assets/channels_2.jpg "Log broker nodes.")
+![Channels 2](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_2.jpg)
 
 *Vchannels* are maintained in the underlying log broker nodes. Each channel is physically indivisible and available for any but only one node. When data ingestion rate reaches a bottleneck, consider two things: whether the log broker node is overloaded and needs to be scaled; and, whether there are sufficient shards to ensure load balancing for each node. 
 
-![Write log sequence](../../../../assets/write_log_sequence.jpg "The process of writing log sequence.")
+![Write log sequence](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/write_log_sequence.jpg)
 
 The above diagram encapsulates four components involved in the process of writing log sequence: the proxy, log broker, data node, and object storage. The process involves four tasks: validation of DML requests, publication-subscription of the log sequence, conversion from a streaming log to log snapshots, and persistence of log snapshots. The four tasks are decoupled from each other to make sure each task is handled by its corresponding node type. Nodes of the same type are made equal and can be scaled elastically and independently to accommodate various data loads, massive and highly fluctuating streaming data in particular.
 
@@ -30,7 +30,7 @@ The above diagram encapsulates four components involved in the process of writin
 
 Index building is performed by index nodes. To avoid frequent index building for data updates, a collection in Milvus is divided further into segments, each with its own index.
 
-![Index building](../../../../assets/index_building.jpg "Index building in Milvus.")
+![Index building](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.jpg)
 
 Milvus supports building indices for each vector field, scalar field and primary field. Both the input and output of index building engage with object storage: The index node loads the log snapshots to index from a segment (which is in object storage) to memory, deserializes the corresponding data and metadata to build index, serializes the index when index building completes, and writes it back to object storage.
 
@@ -44,13 +44,13 @@ Milvus also supports scalar filtering and primary field query. It has inbuilt in
 
 The term "data query" refers to the process of searching a specified collection for *k* number of vectors nearest to a target vector or for *all* vectors within a specified distance range to the vector. Vectors are returned together with their corresponding primary key and fields. 
 
-![Data query](../../../../assets/data_query.jpg "Data query in Milvus.")
+![Data query](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg)
 
 A collection in Milvus is split into multiple segments, and the query nodes load indices by segment. When a search request arrives, it is broadcast to all query nodes for a concurrent search. Each node then prunes the local segments, searches for vectors meeting the criteria, and reduces and returns the search results. 
 
 Query nodes are independent from each other in a data query. Each node is responsible only for two tasks: Loading or releasing segments following the instructions from query coord; conducting a search within the local segments. And the proxy is responsible for reducing search results from each query node and returning the final results to the client.
 
-![Handoff](../../../../assets/handoff.jpg "Handoff in Milvus.")
+![Handoff](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.jpg)
 
 There are two types of segments, growing segments (for incremental data), and sealed segments (for historical data). Query nodes subscribe to vchannel to receive recent updates (incremental data) as growing segments. When a growing segment reaches a predefined threshold, data coord seals it and index building begins. Then a *handoff* operation initiated by query coord turns incremental data to historical data. Query coord will distribute sealed segments evenly among all query nodes according to memory usage, CPU overhead, and segment number.
 

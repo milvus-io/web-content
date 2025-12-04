@@ -11,7 +11,7 @@ Milvus supports various GPU index types to accelerate search performance and eff
 
 It's important to note that using a GPU index may not necessarily reduce latency compared to using a CPU index. If you want to fully maximize throughput, you will need extremely high request pressure or a large number of query vectors.
 
-![performance](../../../assets/gpu_index.png)
+![performance](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png)
 
 Milvus' GPU support is contributed by Nvidia [RAPIDS](https://rapids.ai/) team. The following are the GPU index types currently supported by Milvus.
 

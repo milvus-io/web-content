@@ -37,7 +37,7 @@ With Milvus Lite, you can start building an AI application with vector similarit
 - Laptops
 - Edge Devices
 
-![image.png](../../../assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png)
+![image.png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png)
 
 ## llama-agents
 
@@ -52,7 +52,7 @@ LlamaIndex  is a data framework for your LLM application. It provides tools like
 - Engines provide natural language access to your data.
 - Agents are LLM-powered knowledge workers augmented by tools, from simple helper functions to API integrations and more.
 
-![image.png](../../../assets/7bd73318-7929-4675-8998-c2e9ef091906.png)
+![image.png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png)
 
 ## Mistral AI
 

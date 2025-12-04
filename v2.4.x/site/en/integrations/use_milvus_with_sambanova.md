@@ -59,7 +59,7 @@ $ streamlit run streamlit/app.py --browser.gatherUsageStats false
 After that, you see the user interface in your browser:
 `http://localhost:8501/`
 
-![](../../../assets/sambanava_ui.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sambanava_ui.png)
 
 After set your SambaNova API key in the UI, you can play around with the UI and ask questions about your documents.
 

@@ -15,7 +15,7 @@ Introducing knowledge graphs (KGs) into the RAG system offers a new solution. KG
 
 In this notebook, we introduce a simple yet powerful approach to greatly improve the performance of this scenario. It is a simple RAG paradigm with multi-way retrieval and then reranking, but it implements Graph RAG logically, and achieves state-of-the-art performance in handling multi-hop questions. Let's see how it is implemented.
 
-![](../../../assets/graph_rag_with_milvus_1.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png)
 
 ## Prerequisites
 
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 ### Expand Subgraph
 
 We use the retrieved entities and relations to expand the subgraph and obtain the candidate relationships, and then merge them from the two ways. Here is a flow chart of the subgraph expansion process:
-![](../../../assets/graph_rag_with_milvus_2.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png)
 
 Here we construct an adjacency matrix and use matrix multiplication to calculate the adjacency mapping information within a few degrees. In this way, we can quickly obtain information of any degree of expansion.
 

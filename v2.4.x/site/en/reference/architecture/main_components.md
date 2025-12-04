@@ -18,7 +18,7 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 
 - **Object Storage:** The storage engine, which is responsible for data persistence for Milvus.
 
-![Standalone_architecture](../../../../assets/standalone_architecture.jpg "Milvus standalone architecture.")
+![Standalone_architecture](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/standalone_architecture.jpg)
 
 ## Milvus cluster
 
@@ -40,7 +40,7 @@ There are two modes for running Milvus: Standalone and Cluster. These two modes 
 - **Object Storage:**  Responsible for data persistence of large files in the cluster, such as index and binary log files, e.g. S3
 - **Log Broker:** Manages logs of recent mutation operations, outputs streaming log, and provides log publish-subscribe services, e.g. Pulsar.
 
-![Distributed_architecture](../../../../assets/distributed_architecture.jpg "Milvus cluster architecture.")
+![Distributed_architecture](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/distributed_architecture.jpg)
 
 ## What's next
 

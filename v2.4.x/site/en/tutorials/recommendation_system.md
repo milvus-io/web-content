@@ -23,4 +23,4 @@ In this tutorial, you will learn how to build a movie recommender system that ca
 
 </br>
 
-![recommender_system](../../../assets/recommendation_system.png "Workflow of a recommender system.")
+![recommender_system](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recommendation_system.png)

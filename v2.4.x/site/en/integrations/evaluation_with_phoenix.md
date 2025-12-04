@@ -351,7 +351,7 @@ OpenAIInstrumentor().instrument()
     📖 For more information on how to use Phoenix, check out https://docs.arize.com/phoenix
 
 
-![Alt Text](../../../assets/phoenix01.png)
+![Alt Text](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phoenix01.png)
 
 
 ```python

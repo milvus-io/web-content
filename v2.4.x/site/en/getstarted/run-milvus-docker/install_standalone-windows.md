@@ -188,7 +188,7 @@ Once you install Docker Desktop in Windows, you may encounter the `Docker Engine
 
     You can check whether virtualization is enabled by looking at the **Performance** tab in the **Task Manager**.​
 
-    ![Virtualization in Task Manager](../../../../assets/task-manager.png)
+    ![Virtualization in Task Manager](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png)
 
     If virtualization is disabled, you may need to check the BIOS settings of your motherboard firmware. The way to enable virtualization in BIOS settings varies with motherboard vendors. For the ASUS motherboard, for example, you can refer to [this article](https://www.asus.com/support/faq/1043786/) on enabling virtualization.​
 
@@ -231,7 +231,7 @@ Once you install Docker Desktop in Windows, you may encounter the `Docker Engine
 
     Ensure that you have started Docker Desktop in administrator mode. To do so, right-click on **Docker Desktop** and choose **Run as administrator**.​
 
-    ![Start Docker Desktop as Administrator](../../../../assets/docker-desktop.png)
+    ![Start Docker Desktop as Administrator](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png)
 
 ### How can I deal with WSL-related issues while deploying Milvus?​
 
@@ -239,19 +239,19 @@ If you have encountered WSL-related issues while running Milvus from WSL 2, you 
 
 1. Ensure that "Use the WSL 2 based engine" is checked in **Settings** > **General**. ​
 
-    ![Use the WSL 2 based engine in Docker Desktop Settings](../../../../assets/docker-desktop-wsl-01.png)
+    ![Use the WSL 2 based engine in Docker Desktop Settings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png)
 
 2. Select from your installed WSL 2 distributions which you want to enable Docker integration on by going to: **Settings** > **Resources** > **WSL Integration**.​
 
-    ![Select WSL 2 distributions in Docker Desktop Settings](../../../../assets/docker-desktop-wsl-02.png)
+    ![Select WSL 2 distributions in Docker Desktop Settings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png)
 
 ### How can I deal with the volume-related errors prompted during Milvus startup that reads `Read config failed`?​
 
-![Read config failed error prompt in Milvus startup](../../../../assets/milvus-read-config-fails-01.png)
+![Read config failed error prompt in Milvus startup](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png)
 
 To deal with the error prompted during Milvus startup that reads "Read config failed," you need to check whether the volume mounted into the Milvus container is correct. If the volume is correctly mounted into the container, you can use the `docker exec` command to go into the container and list the **/milvus/configs** folder as follows:​
 
-![List Milvus config files](../../../../assets/milvus-read-config-fails-02.png)
+![List Milvus config files](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png)
 
 ​
 

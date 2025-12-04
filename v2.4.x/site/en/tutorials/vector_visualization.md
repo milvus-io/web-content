@@ -430,7 +430,7 @@ plt.show()
 
 
     
-![png](../../../assets/vector_visualization_33_0.png)
+![png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png)
     
 
 

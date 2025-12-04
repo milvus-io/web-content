@@ -71,7 +71,7 @@ Then navigate to http://localhost:5173/.
 
 You can play around with the UI and ask questions about your documents.
 
-![alt text](../../../assets/doscgpt_ui.png)
+![alt text](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/doscgpt_ui.png)
 
 If you want to stop the services, run:
 ```shell

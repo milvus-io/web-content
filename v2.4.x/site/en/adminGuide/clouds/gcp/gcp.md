@@ -9,7 +9,7 @@ summary: Learn how to deploy a Milvus cluster on GKE.
 
 Milvus is a cloud-native vector database and can be deployed on various cloud environments. This guide walks you through every detail about setting up Milvus on Google Cloud Platform (GCP).
 
-![Deploy a Milvus cluster on GCP](../../../../../assets/gcp-networking.png)
+![Deploy a Milvus cluster on GCP](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gcp-networking.png)
 
 ## Before you start
 
@@ -135,7 +135,7 @@ gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testi
 ```
 - Generate User Access Key and Secret Key, you should go to your project’s storage page. In the left sidebar of the dashboard, click Google Cloud Storage and then Settings. Select the INTEROPERABILITY tab. If you haven't enabled it already, click on Interoperable Access. Then click CREATE A KEY button to create.
 
-![GCP Access keys for your user account](../../../../../assets/access_key.jpg)
+![GCP Access keys for your user account](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/access_key.jpg)
 
 - Add values.yaml
 ```yaml

@@ -23,7 +23,7 @@ The following explains the differences of the four consistency levels supported 
 
 Strong is the highest and the most strict level of consistency. It ensures that users can read the latest version of data. 
 
-![Strong consistency](../../../assets/Consistency_Strong.png "An illustration of strong consistency.")
+![Strong consistency](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png)
 
 According to the PACELC theorem, if the consistency level is set to strong, the latency will increase. Therefore, we recommend choosing strong consistency during functional testings to ensure the accuracy of the test results. Strong consistency is also best suited for applications that have strict demand for data consistency at the cost of search speed. An example can be an online financial system dealing with order payments and billing.
 
@@ -31,7 +31,7 @@ According to the PACELC theorem, if the consistency level is set to strong, the 
 
 Bounded staleness, as its name suggests, allows data inconsistency during a certain period of time. However, generally, the data are always globally consistent out of that period of time.
 
-![Bounded staleness consistency](../../../assets/Consistency_Bounded.png "An illustration of bounded staleness consistency.")
+![Bounded staleness consistency](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png)
 
 Bounded staleness is suitable for scenarios that need to control search latency and can accept sporadic data invisibility. For instance, in recommender systems like video recommendation engines, data invisibility sometimes has small impact on the overall recall rate, but can significantly boost the performance of the recommender system. 
 
@@ -39,7 +39,7 @@ Bounded staleness is suitable for scenarios that need to control search latency 
 
 Session ensures that all data writes can be immediately perceived in reads during the same session. In other words, when you write data via one client, the newly inserted data instantaneously become searchable. 
 
-![Session consistency](../../../assets/Consistency_Session.png "An illustration of session consistency.")
+![Session consistency](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Session.png)
 
 We recommend choosing session as the consistency level for those scenarios where the demand for data consistency in the same session is high. An example can be deleting the data of a book entry from the library system, and after confirmation of the deletion and refreshing the page (a different session), the book should no longer be visible in the search results.
 
@@ -47,7 +47,7 @@ We recommend choosing session as the consistency level for those scenarios where
 
 There is no guaranteed order of reads and writes, and replicas eventually converge to the same state given that no further write operations are done. Under the consistency of "eventually", replicas start working on read requests with the latest updated values. Eventually consistent is the weakest level among the four. 
 
-![Eventual consistency](../../../assets/Consistency_Eventual.png "An illustration of eventually consistent.")
+![Eventual consistency](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Eventual.png)
 
 However, according to the PACELC theorem, search latency can be tremendously shortened upon sacrificing consistency. Therefore, eventually consistent is best suited for scenarios that do not have a high demand for data consistency but require blazing-fast search performance. An example can be retrieving reviews and ratings of Amazon products with the level of eventually consistent. 
 

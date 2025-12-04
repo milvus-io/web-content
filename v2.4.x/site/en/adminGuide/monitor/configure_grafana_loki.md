@@ -136,7 +136,7 @@ Once Grafana is running, you need to add Loki as a data source to query logs.
 3. On the page that appears, choose __Loki__ as the data source type. You can enter __loki__ in the search bar to find the data source.
 4. In the Loki data source settings, specify the __Name__ and __URL__, and then click __Save & test__.
 
-![DataSource](../../../../assets/datasource.jpg "The data source config.")
+![DataSource](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg)
 
 ### 3. Query Milvus Logs
 
@@ -146,4 +146,4 @@ After adding Loki as a data source, query Milvus logs in Grafana:
 2. In the upper-left corner of the page, choose the loki data source.
 3. Use __Label browser__ to select labels and query logs.
 
-![Query](../../../../assets/milvuslog.jpg "Query Milvus logs in Grafana.")
+![Query](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg)

@@ -12,7 +12,7 @@ Milvus enables hybrid search capabilities using the [hybrid_search()](https://mi
 
 The following figure illustrates the execution of a hybrid search in Milvus and highlights the role of reranking in the process.
 
-<img src="../../../assets/multi-vector-rerank.png" alt="reranking_process" width="300"/>
+<img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/>
 
 Reranking in hybrid search is a crucial step that consolidates results from several vector fields, ensuring the final output is relevant and accurately prioritized. Currently, Milvus offers these reranking strategies:
 
@@ -29,7 +29,7 @@ WeightedRanker’s basic process is as follows:
 - **Collect Scores During Retrieval**: Gather results and their scores from different vector retrieval routes.
 - **Score Normalization**: Normalize the scores from each route to a [0,1] range, where values closer to 1 indicate higher relevance. This normalization is crucial due to score distributions varying with different metric types. For instance, the distance for IP ranges from [-∞,+∞], while the distance for L2 ranges from [0,+∞]. Milvus employs the `arctan` function, transforming values to the [0,1] range to provide a standardized basis for different metric types.
 
-    <img src="../../../assets/arctan.png" alt="arctan-function" width="300"/>
+    <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/arctan.png" alt="arctan-function" width="300"/>
 
 - **Weight Allocation**: Assign a weight `w𝑖` to each vector retrieval route. Users specify the weights, which reflect the data source's reliability, accuracy, or other pertinent metrics. Each weight ranges from [0,1].
 - **Score Fusion**: Calculate a weighted average of the normalized scores to derive the final score. The results are then ranked based on these highest to lowest scores to generate the final sorted results.

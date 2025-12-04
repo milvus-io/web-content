@@ -13,7 +13,7 @@ This page discusses something you should consider before you start bulk-insertin
 
 The target collection requires mapping the source data to its schema. The diagram below shows how acceptable source data is mapped to the schema of a target collection.
 
-![Map data to schema](../../../../assets/map-data-to-schema.png)
+![Map data to schema](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png)
 
 You should carefully examine your data and design the schema of the target collection accordingly.
 

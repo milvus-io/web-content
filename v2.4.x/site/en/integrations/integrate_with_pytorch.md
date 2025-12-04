@@ -247,4 +247,4 @@ plt.savefig('search_result.png')
 
 The search result image should be similar to the following:
 
-![Image search output](../../../assets/integrate_with_pytorch.png)
+![Image search output](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/integrate_with_pytorch.png)

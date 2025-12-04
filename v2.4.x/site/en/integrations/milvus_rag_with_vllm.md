@@ -22,13 +22,13 @@ Large Language Models ([LLMs](https://zilliz.com/glossary/large-language-models-
 
 According to the paper "[Efficient Memory Management for Large Language Model Serving with PagedAttention](https://arxiv.org/abs/2309.06180)," the KV cache uses around 30% of GPU memory, leading to potential memory issues. The KV cache is stored in contiguous memory, but changing size can cause memory fragmentation, which is inefficient for computation.
 
-![](../../../assets/vllm_1.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_1.png)
 
 *Image 1. KV cache memory management in existing systems (2023 Paged Attention  [paper](https://arxiv.org/pdf/2309.06180))*
 
 By using virtual memory for the KV cache, vLLM only allocates physical GPU memory as needed, eliminating memory fragmentation and avoiding pre-allocation. In tests, vLLM outperformed [HuggingFace Transformers](https://huggingface.co/docs/transformers/main_classes/text_generation) (HF) and [Text Generation Inference](https://github.com/huggingface/text-generation-inference) (TGI), achieving up to 24x higher throughput than HF and 3.5x higher than TGI on NVIDIA A10G and A100 GPUs.
 
-![](../../../assets/vllm_2.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_2.png)
 
 *Image 2. Serving throughput when each request asks for three parallel output completions. vLLM achieves 8.5x—15x higher throughput than HF and 3.3x—3.5x higher throughput than TGI (2023 [vLLM blog](https://blog.vllm.ai/2023/06/20/vllm.html)).*
 

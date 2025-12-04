@@ -17,7 +17,7 @@ Unstructured data, such as text, images, and audio, varies in format and carries
 
 Milvus offers robust data modeling capabilities, enabling you to organize your unstructured or multi-modal data into structured collections. It supports a wide range of data types for different attribute modeling, including common numerical and character types, various vector types, arrays, sets, and JSON, saving you from the effort of maintaining multiple database systems.
 
-![Untructured data, embeddings, and Milvus](../../../assets/unstructured-data-embedding-and-milvus.png)
+![Untructured data, embeddings, and Milvus](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/unstructured-data-embedding-and-milvus.png)
 
 Milvus offers three deployment modes, covering a wide range of data scales—from local prototyping in Jupyter Notebooks to massive Kubernetes clusters managing tens of billions of vectors:
 
@@ -43,7 +43,7 @@ In 2022, Milvus supported billion-scale vectors, and in 2023, it scaled up to te
 
 Milvus's cloud-native and highly decoupled system architecture ensures that the system can continuously expand as data grows:
 
-![Highly decoupled system architecture of Milvus](../../../assets/highly-decoupled-architecture.png)
+![Highly decoupled system architecture of Milvus](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/highly-decoupled-architecture.png)
 
 Milvus itself is fully stateless so it can be easily scaled with the help of Kubernetes or public clouds. In addition, Milvus components are well decoupled, with the three most critical tasks—search, data insertion, and indexing/compaction—designed as easily parallelized processes, with complex logic separated out. This ensures that the corresponding query node, data node, and index node can scale both up and out independently, optimizing performance and cost efficiency.
 

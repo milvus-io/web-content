@@ -215,6 +215,6 @@ fig = px.scatter(
 fig.show()
 ```
 
-![image](../../../assets/hdbscan_clustering_with_milvus.png)
+![image](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png)
 
 Here, we demonstrate that the data is well clustered, and you can hover over the points to check the text they represent. With this notebook, we hope you learn how to use HDBSCAN to cluster embeddings with Milvus efficiently, which can also be applied to other types of data. Combined with large language models, this approach allows for deeper analysis of your data at a large scale.

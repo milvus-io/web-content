@@ -17,7 +17,7 @@ Before start using Milvus Backup, ensure that
 
 ## Architecture
 
-![Milvus Backup architecture](../../../../assets/milvus_backup_architecture.png)
+![Milvus Backup architecture](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png)
 
 Milvus Backup facilitates backup and restore of metadata, segments, and data across Milvus instances. It provides northbound interfaces, such as CLI, API, and gRPC-based Go module, for flexible manipulation of the backup and restore processes.
 

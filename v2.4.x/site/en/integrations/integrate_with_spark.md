@@ -445,7 +445,7 @@ If you are using Zilliz Cloud (the managed Milvus service), you can leverage its
 
     You can install a library in different ways. This screenshot shows uploading a jar from local to the cluster. For more information, see [Cluster Libraries](https://docs.databricks.com/en/libraries/cluster-libraries.html) in the Databricks documentation.
 
-    ![Install Databricks Library](../../../assets/install-databricks-library.png)
+    ![Install Databricks Library](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/install-databricks-library.png)
 
 2. Create an S3 bucket and configure it as an external storage location for you Databricks cluster. 
 

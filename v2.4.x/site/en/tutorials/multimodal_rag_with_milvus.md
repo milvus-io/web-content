@@ -351,7 +351,7 @@ show_combined_image.show()
 
 
     
-![Create a panoramic view](../../../assets/multimodal_rag_with_milvus_22_0.png)
+![Create a panoramic view](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_22_0.png)
     
 
 
@@ -456,7 +456,7 @@ best_img.show()
 
 
     
-![The best result](../../../assets/multimodal_rag_with_milvus_28_1.png)
+![The best result](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_28_1.png)
     
 
 

@@ -12,7 +12,7 @@ As shown in the [Milvus architecture](architecture_overview.md), Milvus consists
 
 In the 2.2.3 release, Milvus implements high availability for coordinators to make them work in the active-standby mode, mitigating possible single points of failure (SPoFs) that can result in service unavailability.
 
-![Coordinator HA](../../../assets/coordinator_ha.png)
+![Coordinator HA](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png)
 
 The figure above illustrates how coordinators work in the active-standby mode. When a pair of coordinators start, they register with etcd using their server ID and compete for the active role. The coordinator who succeeds in leasing the active role from the etcd will start serving, and the other coordinator in the pair will remain on standby, watching the active role and ready to serve if the active coordinator dies. 
 
