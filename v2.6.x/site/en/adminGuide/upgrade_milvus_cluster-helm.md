@@ -12,13 +12,13 @@ title: Upgrade Milvus Cluster with Helm Chart
 
 # Upgrade Milvus Cluster with Helm Chart
 
-This guide describes how to upgrade your Milvus cluster from v2.5.x to v2.6.6 using Helm Chart.
+This guide describes how to upgrade your Milvus cluster from v2.5.x to v2.6.7 using Helm Chart.
 
 ## Before you start
 
-### What's new in v2.6.6
+### What's new in v2.6.7
 
-Upgrading from Milvus 2.5.x to 2.6.6 involves significant architectural changes:
+Upgrading from Milvus 2.5.x to 2.6.7 involves significant architectural changes:
 
 - **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
 - **New components**: Introduction of Streaming Node for enhanced data processing
@@ -34,11 +34,11 @@ This upgrade process ensures proper migration to the new architecture. For more 
 - Milvus cluster deployed via Helm Chart
 
 **Compatibility requirements:**
-- Milvus v2.6.0-rc1 is **not compatible** with v2.6.6. Direct upgrades from release candidates are not supported.
+- Milvus v2.6.0-rc1 is **not compatible** with v2.6.7. Direct upgrades from release candidates are not supported.
 - If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
-- You **must** upgrade to v2.5.16 or later with `mixCoordinator` enabled before upgrading to v2.6.6.
+- You **must** upgrade to v2.5.16 or later with `mixCoordinator` enabled before upgrading to v2.6.7.
 
-**Message Queue limitations**: When upgrading to Milvus v2.6.6, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+**Message Queue limitations**: When upgrading to Milvus v2.6.7, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
 
 <div class="alert note">
@@ -110,13 +110,13 @@ Wait for the upgrade to complete:
 kubectl get pods
 ```
 
-### Step 3: Upgrade to v2.6.6
+### Step 3: Upgrade to v2.6.7
 
-Once v2.5.16 is running successfully with `mixCoordinator`, upgrade to v2.6.6:
+Once v2.5.16 is running successfully with `mixCoordinator`, upgrade to v2.6.7:
 
 ```bash
 helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag="v2.6.6" \
+  --set image.all.tag="v2.6.7" \
   --set streaming.enabled=true \
   --set indexNode.enabled=false \
   --reset-then-reuse-values \

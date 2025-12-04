@@ -8,6 +8,54 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.7
+
+Release date: December 4, 2025
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.6.7          | 2.6.4             | 2.6.5               | 2.6.10            | 2.6.1          |
+
+Milvus 2.6.7 is a critical stabilization update for the 2.6.x series. This release focuses on hardening the system against distributed failures and optimizing resource utilization under high load. With significant improvements in I/O handling, memory management, and Kubernetes integration, we strongly recommend all production users upgrade to this version to ensure greater reliability and smoother operation at scale.
+
+### Features
+
+- Added `/livez` endpoint to support Kubernetes native liveness probes, improving container orchestration stability ([#45481](https://github.com/milvus-io/milvus/pull/45481)).
+- Added support for **GroupBy** operations on `TIMESTAMPZ` fields, enhancing time-series analytics capabilities ([#45763](https://github.com/milvus-io/milvus/pull/45763))
+- Supported `mmap` for JSON shredding's shared key indices to reduce RAM footprint ([#45861](https://github.com/milvus-io/milvus/pull/45861))
+
+### Improvements
+
+- Supported DML request forwarding in the Proxy to improve write availability and routing resilience ([#45922](https://github.com/milvus-io/milvus/pull/45922)).
+- Upgrade etcd to v3.5.23 to address consensus stability and performance regressions ([#45953](https://github.com/milvus-io/milvus/pull/45953)).
+- Added robust error handling for Etcd server crashes to prevent cascading component failures ([#45633](https://github.com/milvus-io/milvus/pull/45633)).
+- Reduced Etcd load by removing expensive watchers for simple session liveness checks ([#45974](https://github.com/milvus-io/milvus/pull/45974)).
+- Enhanced the WAL retention strategy to better balance disk usage with data recovery safety ([#45784](https://github.com/milvus-io/milvus/pull/45784)).
+- Supported asynchronous write syncing for logs to prevent disk I/O blocking from affecting the main execution path ([#45806](https://github.com/milvus-io/milvus/pull/45806)).
+- Enforced Buffered I/O usage for high-priority load tasks to optimize OS page cache utilization and throughput ([#45958](https://github.com/milvus-io/milvus/pull/45958)).
+- Optimized `mmap` strategy to map group chunks in a single system call, reducing kernel overhead during segment loading ([#45893](https://github.com/milvus-io/milvus/pull/45893)).
+- Improved the accuracy of memory estimation for JSON shredding to prevent OOM kills or under-utilization ([#45876](https://github.com/milvus-io/milvus/pull/45876)).
+- Refined segment load estimation to account for both eviction and warmup states ([#45891](https://github.com/milvus-io/milvus/pull/45891)).
+- Added granular cancellation checks in query operators to allow faster termination of aborted or timed-out queries ([#45894](https://github.com/milvus-io/milvus/pull/45894)).
+- Removed redundant resource type checks in file resource configuration ([#45727](https://github.com/milvus-io/milvus/pull/45727)).
+
+### Bug fixes
+
+- Interleaved Go and C++ logs into a unified stream to provide a correct chronological view for debugging ([#46005](https://github.com/milvus-io/milvus/pull/46005)).
+- Resolved a race condition where `LastConfirmedMessageID` could be incorrect under high concurrency writes ([#45874](https://github.com/milvus-io/milvus/pull/45874)).
+- Fixed a calculation error in aggregating `allsearchcount` from multiple search results ([#45904](https://github.com/milvus-io/milvus/pull/45904)).
+- Fixed Term expressions to correctly handle string containment logic within JSON arrays ([#45956](https://github.com/milvus-io/milvus/pull/45956)).
+- Replaced `json.doc()` with `json.dom_doc()` in `JSONContainsExpr` to fix parsing behaviors and improve performance ([#45786](https://github.com/milvus-io/milvus/pull/45786)).
+- Fixed a panic in Standby MixCoord components during the shutdown sequence ([#45898](https://github.com/milvus-io/milvus/pull/45898)).
+- Fixed the leader checker to ensure segment distribution is correctly synchronized to Read-Only nodes ([#45991](https://github.com/milvus-io/milvus/pull/45991)).
+- Ensured `HandleNodeUp` is triggered during node re-watching to maintain correct load balancing topology ([#45963](https://github.com/milvus-io/milvus/pull/45963)).
+- Implemented fallback to remote WAL storage if local WAL storage becomes unavailable ([#45754](https://github.com/milvus-io/milvus/pull/45754)).
+- Added `EmptySessionWatcher` to prevent panics when running in IndexNode binding mode ([#45912](https://github.com/milvus-io/milvus/pull/45912)).
+- Ensured memory state consistency when recovering broadcast tasks from protocol buffers ([#45788](https://github.com/milvus-io/milvus/pull/45788)).
+- Addressed thread-safety issues in SegCore collection schema updates ([#45618](https://github.com/milvus-io/milvus/pull/45618)).
+- Enforced Access Control (RBAC) checks for `ListImport` and `GetImportProgress` APIs ([#45862](https://github.com/milvus-io/milvus/pull/45862)).
+- Fixed a bug where BulkImport would fail if the input contained an empty struct list ([#45692](https://github.com/milvus-io/milvus/pull/45692)).
+
 ## v2.6.6
 
 Release date: November 21, 2025
