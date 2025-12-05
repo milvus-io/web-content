@@ -61,7 +61,7 @@ title: Release Notes
       </svg>
     </button></h3><ul>
 <li>Added <code translate="no">/livez</code> endpoint to support Kubernetes native liveness probes, improving container orchestration stability (<a href="https://github.com/milvus-io/milvus/pull/45481">#45481</a>).</li>
-<li>Added support for <strong>GroupBy</strong> operations on <code translate="no">TIMESTAMPZ</code> fields, enhancing time-series analytics capabilities (<a href="https://github.com/milvus-io/milvus/pull/45763">#45763</a>)</li>
+<li>Added support for <strong>GroupBy</strong> operations on <code translate="no">TIMESTAMPTZ</code> fields, enhancing time-series analytics capabilities (<a href="https://github.com/milvus-io/milvus/pull/45763">#45763</a>)</li>
 <li>Supported <code translate="no">mmap</code> for JSON shredding’s shared key indices to reduce RAM footprint (<a href="https://github.com/milvus-io/milvus/pull/45861">#45861</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
