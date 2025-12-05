@@ -25,7 +25,7 @@ title: MilvusによるグラフRAG
 <p>本ノートブックでは、このシナリオの性能を大幅に向上させるシンプルかつ強力なアプローチを紹介する。これは、多方向検索とその後の再ランク付けという単純なRAGパラダイムであるが、グラフRAGを論理的に実装し、マルチホップ問題の処理において最先端の性能を達成している。どのように実装されるか見てみましょう。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 )[0]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">サブグラフの展開</h3><p>検索されたエンティティと関係を使って部分グラフを展開し、関係候補を取得します。以下は、部分グラフの展開処理のフローチャートである：  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

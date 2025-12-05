@@ -78,7 +78,7 @@ title: 비트셋
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
    </span> <span class="img-wrapper"> <span>DML 이벤트 순서</span> </span></p>
 <h3 id="Case-one" class="common-anchor-header">사례 1</h3><p>이 경우 사용자가 <code translate="no">time_travel</code> 를 150 으로 설정하면 사용자가 <code translate="no">ts = 150</code> 을 만족하는 데이터에 대한 쿼리를 수행한다는 의미입니다. 비트셋 생성 프로세스는 그림 1에 설명되어 있습니다.</p>
 <p>초기 필터링 단계에서 <code translate="no">filter_bitset</code> 은 <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code> 이며, 엔티티 [1, 3, 5, 7]은 유효한 필터링 결과이므로 <code translate="no">1</code> 로 표시됩니다.</p>
@@ -88,7 +88,7 @@ title: 비트셋
 <p>이제 시간 여행 및 속성 필터링 후에 <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> 과 <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 두 개의 비트셋이 생겼습니다.  이 두 비트셋을 <code translate="no">OR</code> 이진 논리 연산자와 결합합니다. 결과_비트셋의 최종 값은 <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> 이며, 이는 다음 검색 또는 쿼리 단계에서 엔티티 1과 3만 계산됨을 의미합니다.</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
    <span>그림 1. 시간 여행 = 150으로 검색하기</span>. </span></p>
 <h3 id="Case-two" class="common-anchor-header">사례 2</h3><p>이 경우 사용자는 <code translate="no">time_travel</code> 을 250으로 설정합니다. 비트셋 생성 과정은 그림 2에 설명되어 있습니다.</p>
 <p>사례 1과 마찬가지로 초기 <code translate="no">filter_bitset</code> 는 <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code> 입니다.</p>
@@ -97,7 +97,7 @@ title: 비트셋
 <p>이제 시간 여행 및 속성 필터링 뒤에 <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 과 <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 두 개의 비트셋이 있습니다. 이 두 비트셋을 <code translate="no">OR</code> 이진 논리 연산자와 결합합니다. 결과_비트셋은 <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 입니다. 즉, 다음 검색 또는 쿼리 단계에서는 [1, 3, 5, 7] 엔티트만 계산됩니다.</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
    <span>그림 2. 시간 여행 = 250으로 검색하기</span>. </span></p>
 <h3 id="Case-three" class="common-anchor-header">사례 3</h3><p>이 경우 사용자는 <code translate="no">time_travel</code> 를 350으로 설정합니다. 비트셋 생성 과정은 그림 3에 설명되어 있습니다.</p>
 <p>이전 사례와 마찬가지로 초기 <code translate="no">filter_bitset</code> 는 <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 입니다.</p>
@@ -106,7 +106,7 @@ title: 비트셋
 <p>이제 시간 여행 및 속성 필터링 후 두 개의 비트셋이 있습니다: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 과 <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code> .  이 두 비트셋을 <code translate="no">OR</code> 이진 논리 연산자와 결합합니다. 최종 <code translate="no">result_bitset</code> 은 <code translate="no">[0, 1, 0, 1, 0, 1, 1, 1]</code> 입니다. 즉, 다음 검색 또는 쿼리 단계에서는 엔티티 [1, 3, 5]만 계산됩니다.</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
    <span>그림 3. 시간 여행 = 350으로 검색하기</span>. </span></p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -42,13 +42,13 @@ summary: >-
     </button></h2><p>Milvus хранит входящие сущности в сегментах коллекции и уплотняет сегмент, когда он переполнен. Если это происходит, создается новый сегмент для размещения дополнительных сущностей. В результате сущности произвольно распределяются по сегментам. Такое распределение требует от Milvus поиска в нескольких сегментах ближайших соседей для заданного вектора запроса.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Уплотнение без кластеризации</span> </span></p>
 <p>Если Milvus может распределить сущности между сегментами на основе значений в определенном поле, область поиска может быть ограничена в пределах одного сегмента, что повышает производительность поиска.</p>
 <p><strong>Clustering Compaction</strong> - это функция в Milvus, которая перераспределяет сущности между сегментами в коллекции на основе значений в скалярном поле. Чтобы включить эту функцию, сначала нужно выбрать скалярное поле в качестве <strong>ключа кластеризации</strong>. Это позволит Milvus перераспределять сущности в сегмент, если значения их ключа кластеризации попадают в определенный диапазон. Когда вы запускаете уплотнение кластеризации, Milvus генерирует/обновляет глобальный индекс <strong>PartitionStats</strong>, который записывает отношения сопоставления между сегментами и значениями ключей кластеризации.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>При кластерном уплотнении</span> </span></p>
 <p>Используя <strong>PartitionStats</strong> в качестве ссылки, Milvus может отсеивать нерелевантные данные при получении запроса на поиск/запрос, содержащего значение ключа кластеризации, и ограничивать область поиска сегментами, сопоставленными с этим значением, тем самым повышая производительность поиска. Подробнее об улучшении производительности см. в разделе "Бенчмарк-тесты".</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Использование уплотнения кластеров<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">

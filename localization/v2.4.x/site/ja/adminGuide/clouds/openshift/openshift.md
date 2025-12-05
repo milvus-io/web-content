@@ -65,12 +65,12 @@ summary: MilvusクラスタをOpenShift上にデプロイする方法をご紹�
 <li><p>openshiftコンソールで、<strong>Workloads</strong>&gt;<strong>Podsに</strong>移動します。プロジェクト<strong>cert-manager</strong> を選択します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
    </span> <span class="img-wrapper"> <span>cert-manager-1</span> </span></p></li>
 <li><p>すべてのポッドが準備できていることを確認します。例えば、下の画像はまだポッドが起動していることを示唆しています。これらのポッドがすべて準備できるまで待ちます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
    </span> <span class="img-wrapper"> <span>cert-manager-2</span> </span></p></li>
 </ol></li>
 </ol>

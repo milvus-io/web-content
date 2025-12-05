@@ -136,7 +136,7 @@ title: Milvus를 사용한 지식 테이블
     </button></h2><p>프론트엔드는 <code translate="no">http://localhost:3000</code> 에서, 백엔드는 <code translate="no">http://localhost:8000</code> 에서 액세스할 수 있습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/knowlege_table.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowlege_table.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

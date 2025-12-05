@@ -25,7 +25,7 @@ title: 'Utilizadores, privilégios e funções'
 <p>A figura a seguir ilustra a relação entre objetos, privilégios, funções e usuários.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
    </span> <span class="img-wrapper"> <span>utilizadores_e_papéis</span> </span></p>
 <h2 id="Key-concepts" class="common-anchor-header">Conceitos-chave<button data-href="#Key-concepts" class="anchor-icon" translate="no">
       <svg translate="no"

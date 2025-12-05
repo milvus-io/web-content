@@ -78,7 +78,7 @@ title: Bitset
 </ul>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
     <span>Order of DML events</span>
   </span>
 </p>
@@ -90,7 +90,7 @@ title: Bitset
 <p>Now we have two bitsets after Time Travel and attribute filtering: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> and <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.  Combine these two bitsets with the <code translate="no">OR</code> binary logic operator. The ultimate value of result_bitset is <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code>, meaning only entities 1 and 3 will be computed in the following search or query stage.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
     <span>Figure 1. Search with Time Travel = 150.</span>
   </span>
 </p>
@@ -101,7 +101,7 @@ title: Bitset
 <p>Now we have two bitsets after Time Travel and attribute filtering: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> and <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>. Combine these two bitsets with the <code translate="no">OR</code> binary logic operator. The result_bitset is <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>. That is to say, only entites [1, 3, 5, 7] will be computed in the following search or query stage.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
     <span>Figure 2. Search with Time Travel = 250.</span>
   </span>
 </p>
@@ -112,7 +112,7 @@ title: Bitset
 <p>Now we have two bitsets after Time Travel and attribute filtering: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> and <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>.  Combine these two bitsets with the <code translate="no">OR</code> binary logic operator. The ultimate <code translate="no">result_bitset</code> is <code translate="no">[0, 1, 0, 1, 0, 1, 1, 1]</code>. That is to say, only entities [1, 3, 5] will be computed in the following search or query stage.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
     <span>Figure 3. Search with Time Travel = 350.</span>
   </span>
 </p>

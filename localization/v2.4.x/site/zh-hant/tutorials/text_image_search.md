@@ -35,5 +35,5 @@ title: 文字轉圖像搜尋引擎
 <p>在本教程中，您將學習如何建立文字到圖像的搜尋引擎。本教學使用 CLIP 模型來擷取影像的特徵，並將其轉換成向量。然後將這些影像向量儲存在 Milvus 向量資料庫中。當使用者輸入查詢文字時，這些文字也會使用相同的 ML 模型 CLIP 轉換成嵌入向量。之後，Milvus 會執行向量相似性搜尋，以擷取與輸入文字向量最相似的影像向量。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
    </span> <span class="img-wrapper"> <span>文字圖像搜尋</span> </span></p>

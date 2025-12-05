@@ -76,32 +76,32 @@ summary: تعرف على كيفية إنشاء تنبيه لخدمات Milvus ف
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. إضافة استعلام جديد</h3><p>لإضافة تنبيه لاستخدام الذاكرة لمكونات ميلفوس، قم بتحرير لوحة الذاكرة. ثم، أضف استعلامًا جديدًا بالمقياس: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>تنبيه_مقياس</span> </span></p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2. احفظ لوحة التحكم</h3><p>احفظ لوحة التحكم، وانتظر بضع دقائق لرؤية التنبيه.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
    </span> <span class="img-wrapper"> <span>لوحة_التنبيه</span> </span></p>
 <p>لا يدعم استعلام تنبيه Grafana متغيرات القالب. لذلك، يجب إضافة استعلام ثانٍ بدون أي متغيرات قالب في التسميات. يتم تسمية الاستعلام الثاني باسم "A" افتراضيًا. يمكنك إعادة تسميته بالنقر على القائمة المنسدلة.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>تنبيه_استعلام</span> </span></p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3. إضافة إشعارات التنبيه</h3><p>لتلقي إشعارات التنبيه، أضف &quot;قناة تنبيه&quot;. ثم، حدد القناة في الحقل &quot;إرسال إلى&quot;.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
    </span> <span class="img-wrapper"> <span>تنبيه_التنبيه</span> </span></p>
 <p>إذا تم إنشاء التنبيه وتشغيله بنجاح، ستتلقى الإشعار كما هو موضح في لقطة الشاشة أدناه.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>رسالة_التنبيه</span> </span></p>
 <p>لحذف تنبيه، انتقل إلى لوحة "تنبيه" وانقر على زر الحذف.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
    </span> <span class="img-wrapper"> <span>حذف_تنبيه</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

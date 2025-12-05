@@ -31,5 +31,5 @@ title: 重复数据删除
 <p>在本教程中，您将学习如何构建一个重复数据删除系统。本教程使用 ResNet-50 模型提取图像的特征，并将其转换为向量。然后将这些图像向量存储到 Milvus 向量数据库中，同时也在 Milvus 中进行向量相似性搜索。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>图像重复复制工作流程</span> </span></p>

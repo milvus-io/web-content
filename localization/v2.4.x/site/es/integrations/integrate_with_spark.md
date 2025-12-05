@@ -452,7 +452,7 @@ object TransformDemo <span class="hljs-keyword">extends</span> <span class="hljs
 <p>Puedes instalar una librería de diferentes maneras. Esta captura de pantalla muestra la carga de un jar desde local al clúster. Para obtener más información, consulta <a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">Bibliotecas de clúster</a> en la documentación de Databricks.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
    </span> <span class="img-wrapper"> <span>Instalar la biblioteca de Databricks</span> </span></p></li>
 <li><p>Crea un bucket S3 y configúralo como ubicación de almacenamiento externo para tu clúster Databricks.</p>
 <p>Bulkinsert requiere que los datos se almacenen en un bucket temporal para que Zilliz Cloud pueda importar los datos en un lote. Puedes crear un bucket S3 y configurarlo como ubicación externa de databricks. Consulta <a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">Ubicaciones</a> externas para más detalles.</p></li>

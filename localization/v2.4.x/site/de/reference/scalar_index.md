@@ -39,7 +39,7 @@ title: Skalarer Index
 <p>Wenn Milvus eine Suchanfrage mit einem solchen booleschen Ausdruck erhält, parst es den booleschen Ausdruck in einen abstrakten Syntaxbaum (AST), um einen physischen Plan für die Attributfilterung zu erstellen. Milvus wendet dann den physischen Plan in jedem Segment an, um ein <a href="/docs/de/v2.4.x/bitset.md">Bitset</a> als Filterergebnis zu erzeugen, und schließt das Ergebnis als Vektorsuchparameter ein, um den Suchbereich einzugrenzen. In diesem Fall hängt die Geschwindigkeit der Vektorsuche stark von der Geschwindigkeit der Attributfilterung ab.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>Attributfilterung in einem Segment</span> </span></p>
 <p>Die Skalarfeld-Indizierung ist eine Möglichkeit, die Geschwindigkeit der Attributfilterung zu gewährleisten, indem skalare Feldwerte auf eine bestimmte Weise sortiert werden, um den Informationsabruf zu beschleunigen.</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">Algorithmen zur Indizierung skalarer Felder<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ title: Skalarer Index
 <p>Ein invertierter Index hat zwei Hauptkomponenten: ein Begriffswörterbuch und eine invertierte Liste. Das Begriffswörterbuch enthält alle tokenisierten Wörter in alphabetischer Reihenfolge, während die invertierte Liste die Liste der Dokumente enthält, in denen jedes Wort vorkommt. Mit diesem Aufbau sind Punkt- und Bereichsabfragen viel schneller und effizienter als Brute-Force-Suchen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
    </span> <span class="img-wrapper"> <span>Diagramm des invertierten Index</span> </span></p>
 <p>Die Vorteile der Verwendung eines invertierten Indexes zeigen sich besonders bei den folgenden Operationen:</p>
 <ul>

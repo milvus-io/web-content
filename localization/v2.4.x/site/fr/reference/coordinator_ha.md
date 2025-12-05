@@ -39,7 +39,7 @@ title: Coordinateur HA
     </button></h2><p>Dans la version 2.2.3, Milvus met en œuvre la haute disponibilité pour les coordinateurs afin qu'ils fonctionnent en mode actif-standby, en atténuant les éventuels points de défaillance uniques (SPoF) qui peuvent entraîner l'indisponibilité du service.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>Coordinateur HA</span> </span></p>
 <p>La figure ci-dessus illustre le fonctionnement des coordinateurs en mode actif-veille. Lorsqu'une paire de coordinateurs démarre, ils s'enregistrent auprès d'etcd en utilisant leur ID de serveur et sont en compétition pour le rôle actif. Le coordinateur qui réussit à louer le rôle actif auprès de l'etcd commencera à servir, et l'autre coordinateur de la paire restera en veille, surveillant le rôle actif et prêt à servir si le coordinateur actif meurt.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">Activer le coordinateur HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">

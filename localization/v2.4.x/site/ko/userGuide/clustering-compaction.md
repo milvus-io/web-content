@@ -40,13 +40,13 @@ summary: >-
     </button></h2><p>Milvus는 들어오는 엔티티를 컬렉션 내의 세그먼트에 저장하고 세그먼트가 가득 차면 세그먼트를 봉인합니다. 이 경우 추가 엔티티를 수용하기 위해 새 세그먼트가 생성됩니다. 결과적으로 엔티티는 세그먼트 간에 임의로 분산됩니다. 이러한 분포로 인해 Milvus는 주어진 쿼리 벡터에 가장 가까운 이웃을 찾기 위해 여러 세그먼트를 검색해야 합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>클러스터링 없이 압축</span> </span></p>
 <p>Milvus가 특정 필드의 값을 기반으로 세그먼트 간에 엔티티를 분산할 수 있다면 검색 범위를 한 세그먼트 내에서 제한할 수 있으므로 검색 성능이 향상됩니다.</p>
 <p><strong>클러스터링</strong> 압축은 스칼라 필드의 값을 기반으로 컬렉션의 세그먼트 간에 엔티티를 재분배하는 Milvus의 기능입니다. 이 기능을 사용하려면 먼저 <strong>클러스터링 키로</strong> 스칼라 필드를 선택해야 합니다. 이렇게 하면 클러스터링 키 값이 특정 범위에 속할 때 Milvus가 엔티티를 세그먼트에 재분배할 수 있습니다. 클러스터링 압축을 트리거하면 Milvus는 세그먼트와 클러스터링 키 값 간의 매핑 관계를 기록하는 <strong>PartitionStats라는</strong> 글로벌 인덱스를 생성/업데이트합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>클러스터링 압축 사용</span> </span></p>
 <p>Milvus는 <strong>PartitionStats를</strong> 참조로 사용하여 클러스터링 키 값이 포함된 검색/쿼리 요청을 수신하면 관련 없는 데이터를 정리하고 해당 값에 매핑되는 세그먼트 내에서 검색 범위를 제한하여 검색 성능을 개선할 수 있습니다. 성능 향상에 대한 자세한 내용은 벤치마크 테스트를 참조하세요.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">클러스터링 압축 사용<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">

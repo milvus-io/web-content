@@ -61,7 +61,7 @@ title: Gambaran Umum CDC
     </button></h2><p>Milvus-CDC mengadopsi arsitektur dengan dua komponen utama - server HTTP yang mengelola tugas dan metadata, dan <strong>corelib</strong> yang menyinkronkan eksekusi tugas dengan pembaca yang memperoleh data dari instance Milvus sumber dan penulis yang mengirimkan data yang telah diproses ke instance Milvus target.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>arsitektur milvus-cdc</span> </span></p>
 <p>Dalam diagram sebelumnya,</p>
 <ul>
@@ -92,7 +92,7 @@ title: Gambaran Umum CDC
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-alur kerja</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

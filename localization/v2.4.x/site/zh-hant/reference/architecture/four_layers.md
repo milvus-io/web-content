@@ -100,7 +100,7 @@ title: 儲存/計算分解
 <p>Milvus 遵循「日誌即資料」的原則，因此 Milvus 不會維護實體資料表，而是透過日誌持久化和快照日誌來保證資料的可靠性。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>日誌機制</span> </span></p>
 <p>日誌中介是 Milvus 的骨幹。由於其天生的 pub-sub 機制，它負責資料的持久性和讀寫分解。上圖顯示了該機制的簡化描述，系統分為兩個角色，日誌經紀人（負責維護日誌順序）和日誌訂閱者。前者記錄所有改變收集狀態的作業；後者訂閱日誌序列以更新本機資料，並以唯讀副本的形式提供服務。pub-sub 機制也為系統在變更資料擷取 (CDC) 和全球分散部署方面的擴充能力預留了空間。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">

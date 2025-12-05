@@ -68,7 +68,7 @@ title: '미스트랄 AI, 밀버스 및 라마 에이전트가 포함된 멀티 �
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="llama-agents" class="common-anchor-header">llama-agents<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ title: '미스트랄 AI, 밀버스 및 라마 에이전트가 포함된 멀티 �
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
    </span> <span class="img-wrapper"> <span>image.png</span> </span></p>
 <h2 id="Mistral-AI" class="common-anchor-header">미스트랄 AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"

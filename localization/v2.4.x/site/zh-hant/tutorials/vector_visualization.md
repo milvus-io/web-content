@@ -426,7 +426,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>圖</span> </span></p>
 <p>我們可以看到，查詢向量與檢索向量很接近。雖然擷取的向量不在以查詢向量為中心、半徑固定的標準圓內，但我們可以看到它們在 2D 平面上仍然非常接近查詢向量。</p>
 <p>使用降維技術可以促進對向量的理解和疑難排解。希望您能透過本教學對向量有更深入的了解。</p>

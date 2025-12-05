@@ -37,7 +37,7 @@ title: Reranking
         ></path>
       </svg>
     </button></h2><p>A figura seguinte ilustra a execução de uma pesquisa híbrida em Milvus e destaca o papel do reranking no processo.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
 <p>O reranking na pesquisa híbrida é um passo crucial que consolida os resultados de vários campos vectoriais, assegurando que o resultado final é relevante e priorizado com precisão. Atualmente, o Milvus oferece estas estratégias de classificação:</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>: Esta abordagem funde os resultados através do cálculo de uma média ponderada das pontuações (ou distâncias vectoriais) de diferentes pesquisas vectoriais. Atribui pesos com base na importância de cada campo de vetor.</p></li>
@@ -63,7 +63,7 @@ title: Reranking
 <ul>
 <li><p><strong>Recolher pontuações durante a recuperação</strong>: Recolhe os resultados e as suas pontuações de diferentes rotas de recuperação de vectores.</p></li>
 <li><p><strong>Normalização da pontuação</strong>: Normalizar as pontuações de cada rota para um intervalo de [0,1], onde valores mais próximos de 1 indicam maior relevância. Essa normalização é crucial devido às distribuições de pontuação que variam com diferentes tipos de métricas. Por exemplo, a distância para IP varia de [-∞,+∞], enquanto a distância para L2 varia de [0,+∞]. Milvus emprega a função <code translate="no">arctan</code>, transformando os valores para o intervalo [0,1] para fornecer uma base padronizada para diferentes tipos de métricas.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
 <li><p><strong>Atribuição de pesos</strong>: Atribui um peso <code translate="no">w𝑖</code> a cada rota de recuperação de vectores. Os utilizadores especificam os pesos, que reflectem a fiabilidade, precisão ou outras métricas pertinentes da fonte de dados. Cada peso varia entre [0,1].</p></li>
 <li><p><strong>Fusão de pontuação</strong>: Calcula uma média ponderada das pontuações normalizadas para obter a pontuação final. Os resultados são então classificados com base nas pontuações mais altas e mais baixas para gerar os resultados finais ordenados.</p></li>
 </ul>

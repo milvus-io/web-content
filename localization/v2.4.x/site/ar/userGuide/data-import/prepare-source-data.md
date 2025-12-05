@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>تتطلب المجموعة المستهدفة تعيين بيانات المصدر إلى مخططها. يوضح الرسم البياني أدناه كيفية تعيين بيانات المصدر المقبولة إلى مخطط المجموعة المستهدفة.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>تعيين البيانات إلى المخطط</span> </span></p>
 <p>يجب عليك فحص بياناتك بعناية وتصميم مخطط المجموعة الهدف وفقًا لذلك.</p>
 <p>بأخذ بيانات JSON في الرسم البياني أعلاه كمثال، هناك كيانان في قائمة الصفوف، كل صف يحتوي على ستة حقول. يتضمن مخطط المجموعة بشكل انتقائي أربعة حقول: <strong>المعرف،</strong> <strong>والمتجه،</strong> <strong>والمقدار_1،</strong> <strong>والمقدار_2</strong>.</p>

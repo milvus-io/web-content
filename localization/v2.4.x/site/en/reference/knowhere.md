@@ -53,7 +53,7 @@ title: Knowhere
     </button></h2><p>The figure below illustrates the position of Knowhere in the Milvus architecture.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
     <span>Knowhere</span>
   </span>
 </p>
@@ -103,7 +103,7 @@ title: Knowhere
 <h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>: base class</h4><p><code translate="no">DataObj</code> is the base class of all data structures in Knowhere. <code translate="no">Size()</code> is the only virtual method in <code translate="no">DataObj</code>. The Index class inherits from <code translate="no">DataObj</code> with a field named "size_". The Index class also has two virtual methods - <code translate="no">Serialize()</code> and <code translate="no">Load()</code>. The <code translate="no">VecIndex</code> class derived from <code translate="no">Index</code> is the virtual base class for all vector indexes. <code translate="no">VecIndex</code> provides methods including <code translate="no">Train()</code>, <code translate="no">Query()</code>, <code translate="no">GetStatistics()</code>, and <code translate="no">ClearStatistics()</code>.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
     <span>base class</span>
   </span>
 </p>
@@ -115,7 +115,7 @@ title: Knowhere
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>: brute-force search</h4><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
     <span>IDMAP</span>
   </span>
 </p>
@@ -123,7 +123,7 @@ title: Knowhere
 <p>However, for code consistency, <code translate="no">IDMAP</code> also inherits from the <code translate="no">VecIndex</code> class with all its virtual interfaces. The usage of <code translate="no">IDMAP</code> is the same as other indices.</p>
 <h4 id="IVF-indices" class="common-anchor-header">IVF indices</h4><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
     <span>IVF</span>
   </span>
 </p>
@@ -132,7 +132,7 @@ title: Knowhere
 <p>The base class structure for binary indices is relatively simpler. <code translate="no">BinaryIDMAP</code> and <code translate="no">BinaryIVF</code> are derived from <code translate="no">FaissBaseBinaryIndex</code> and <code translate="no">VecIndex</code>.</p>
 <h4 id="Third-party-indices" class="common-anchor-header">Third-party indices</h4><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
     <span>third-party indices</span>
   </span>
 </p>

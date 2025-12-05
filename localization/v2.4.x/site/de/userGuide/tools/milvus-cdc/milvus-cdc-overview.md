@@ -61,7 +61,7 @@ title: CDC-Übersicht
     </button></h2><p>Milvus-CDC verwendet eine Architektur mit zwei Hauptkomponenten - einem HTTP-Server, der Aufgaben und Metadaten verwaltet, und einer <strong>Corelib</strong>, die die Aufgabenausführung mit einem Reader, der Daten von der Milvus-Quellinstanz erhält, und einem Writer, der verarbeitete Daten an die Milvus-Zielinstanz sendet, synchronisiert.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-architektur</span> </span></p>
 <p>Im vorstehenden Diagramm,</p>
 <ul>
@@ -92,7 +92,7 @@ title: CDC-Übersicht
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-workflow</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">Begrenzungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -25,7 +25,7 @@ title: 'Users, Privileges, and Roles'
 <p>The following figure illustrates the relationship between objects, privileges, roles, and users.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
     <span>users_and_roles</span>
   </span>
 </p>

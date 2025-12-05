@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>Die Zielsammlung erfordert eine Zuordnung der Quelldaten zu ihrem Schema. Das folgende Diagramm zeigt, wie akzeptable Quelldaten auf das Schema einer Zielsammlung abgebildet werden.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>Zuordnen von Daten zum Schema</span> </span></p>
 <p>Sie sollten Ihre Daten sorgfältig prüfen und das Schema der Zielsammlung entsprechend gestalten.</p>
 <p>Nehmen wir die JSON-Daten im obigen Diagramm als Beispiel: Es gibt zwei Entitäten in der Zeilenliste, wobei jede Zeile sechs Felder hat. Das Schema der Sammlung enthält selektiv vier: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong> und <strong>scalar_2</strong>.</p>

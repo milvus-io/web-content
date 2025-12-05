@@ -107,7 +107,7 @@ title: Panoramica delle opzioni di impiego di Milvus
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
    </span> <span class="img-wrapper"> <span>Selezionare l'opzione di distribuzione per il proprio caso d'uso</span> </span></p>
 <h2 id="Comparison-on-functionalities" class="common-anchor-header">Confronto sulle funzionalità<button data-href="#Comparison-on-functionalities" class="anchor-icon" translate="no">
       <svg translate="no"

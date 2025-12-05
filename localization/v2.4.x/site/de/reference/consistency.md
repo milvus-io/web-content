@@ -56,25 +56,25 @@ title: Konsistenz
 <h3 id="Strong" class="common-anchor-header">Stark</h3><p>Strong ist die höchste und strengste Konsistenzstufe. Sie stellt sicher, dass die Benutzer die neueste Version der Daten lesen können.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
    </span> <span class="img-wrapper"> <span>Starke Konsistenz</span> </span></p>
 <p>Das PACELC-Theorem besagt, dass sich die Latenzzeit erhöht, wenn die Konsistenzstufe auf Strong eingestellt wird. Daher empfehlen wir, bei Funktionstests starke Konsistenz zu wählen, um die Genauigkeit der Testergebnisse zu gewährleisten. Starke Konsistenz eignet sich auch am besten für Anwendungen, die strenge Anforderungen an die Datenkonsistenz auf Kosten der Suchgeschwindigkeit stellen. Ein Beispiel hierfür ist ein Online-Finanzsystem, das sich mit der Bezahlung von Bestellungen und der Rechnungsstellung befasst.</p>
 <h3 id="Bounded-staleness" class="common-anchor-header">Begrenzte Unbeständigkeit</h3><p>Bounded Staleness lässt, wie der Name schon sagt, Dateninkonsistenz während eines bestimmten Zeitraums zu. In der Regel sind die Daten jedoch außerhalb dieses Zeitraums immer global konsistent.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
    </span> <span class="img-wrapper"> <span>Konsistenz von Bounded Staleness</span> </span></p>
 <p>Bounded Staleness eignet sich für Szenarien, in denen die Suchlatenz kontrolliert werden muss und sporadische Unsichtbarkeit der Daten akzeptiert werden kann. In Empfehlungssystemen wie Videoempfehlungsmaschinen hat die Unsichtbarkeit von Daten manchmal nur geringe Auswirkungen auf die Gesamtauffindungsrate, kann aber die Leistung des Empfehlungssystems erheblich steigern.</p>
 <h3 id="Session" class="common-anchor-header">Sitzung</h3><p>Session stellt sicher, dass alle Daten, die geschrieben werden, sofort in der gleichen Sitzung gelesen werden können. Mit anderen Worten: Wenn Sie Daten über einen Client schreiben, werden die neu eingefügten Daten sofort durchsuchbar.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
    </span> <span class="img-wrapper"> <span>Session-Konsistenz</span> </span></p>
 <p>Wir empfehlen die Wahl von Session als Konsistenzebene für Szenarien, in denen die Anforderung an die Datenkonsistenz in derselben Session hoch ist. Ein Beispiel ist das Löschen der Daten eines Bucheintrags aus dem Bibliothekssystem. Nach der Bestätigung der Löschung und dem Auffrischen der Seite (einer anderen Sitzung) sollte das Buch nicht mehr in den Suchergebnissen erscheinen.</p>
 <h3 id="Eventually" class="common-anchor-header">Eventuell</h3><p>Es gibt keine garantierte Reihenfolge der Lese- und Schreibvorgänge, und die Replikate konvergieren schließlich zum gleichen Zustand, wenn keine weiteren Schreibvorgänge durchgeführt werden. Bei der Konsistenzstufe &quot;eventually&quot; beginnen die Replikate bei Leseanforderungen mit den zuletzt aktualisierten Werten zu arbeiten. Eventuell konsistent ist die schwächste der vier Stufen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
    </span> <span class="img-wrapper"> <span>Eventuelle Konsistenz</span> </span></p>
 <p>Nach dem PACELC-Theorem kann die Suchlatenz jedoch enorm verkürzt werden, wenn die Konsistenz geopfert wird. Daher eignet sich die Stufe "Eventuell konsistent" am besten für Szenarien, die keine hohen Anforderungen an die Datenkonsistenz stellen, aber eine blitzschnelle Suchleistung erfordern. Ein Beispiel hierfür ist das Abrufen von Rezensionen und Bewertungen von Amazon-Produkten mit der Stufe "eventually consistent".</p>
 <h2 id="Guarantee-timestamp" class="common-anchor-header">Garantierter Zeitstempel<button data-href="#Guarantee-timestamp" class="anchor-icon" translate="no">

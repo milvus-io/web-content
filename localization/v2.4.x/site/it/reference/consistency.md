@@ -56,25 +56,25 @@ title: Coerenza
 <h3 id="Strong" class="common-anchor-header">Forte</h3><p>Strong è il livello di coerenza più alto e più rigoroso. Garantisce che gli utenti possano leggere la versione più recente dei dati.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
    </span> <span class="img-wrapper"> <span>Consistenza forte</span> </span></p>
 <p>Secondo il teorema PACELC, se il livello di coerenza è impostato su forte, la latenza aumenterà. Pertanto, si consiglia di scegliere una consistenza forte durante i test funzionali per garantire l'accuratezza dei risultati dei test. La consistenza forte è anche la più adatta per le applicazioni che richiedono una stretta consistenza dei dati a scapito della velocità di ricerca. Un esempio può essere un sistema finanziario online che si occupa di pagamenti e fatturazione degli ordini.</p>
 <h3 id="Bounded-staleness" class="common-anchor-header">Stalliezza limitata</h3><p>La staleness limitata, come suggerisce il nome, consente l'incoerenza dei dati durante un certo periodo di tempo. Tuttavia, in genere, i dati sono sempre globalmente coerenti al di fuori di quel periodo di tempo.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
    </span> <span class="img-wrapper"> <span>Consistenza della staleness limitata</span> </span></p>
 <p>La staleness limitata è adatta a scenari che devono controllare la latenza di ricerca e possono accettare l'invisibilità sporadica dei dati. Ad esempio, nei sistemi di raccomandazione come i motori di raccomandazione video, l'invisibilità dei dati ha talvolta un impatto minimo sul tasso di richiamo complessivo, ma può aumentare significativamente le prestazioni del sistema di raccomandazione.</p>
 <h3 id="Session" class="common-anchor-header">Sessione</h3><p>La sessione garantisce che tutti i dati scritti possano essere immediatamente percepiti in lettura durante la stessa sessione. In altre parole, quando si scrivono dati tramite un client, i nuovi dati inseriti diventano istantaneamente ricercabili.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
    </span> <span class="img-wrapper"> <span>Consistenza di sessione</span> </span></p>
 <p>Si consiglia di scegliere la sessione come livello di coerenza per gli scenari in cui la richiesta di coerenza dei dati nella stessa sessione è elevata. Un esempio può essere la cancellazione dei dati di una voce di libro dal sistema bibliotecario; dopo la conferma della cancellazione e l'aggiornamento della pagina (una sessione diversa), il libro non dovrebbe più essere visibile nei risultati della ricerca.</p>
 <h3 id="Eventually" class="common-anchor-header">Eventualmente</h3><p>Non esiste un ordine garantito di lettura e scrittura, e le repliche alla fine convergono allo stesso stato se non vengono effettuate altre operazioni di scrittura. Con la consistenza &quot;eventually&quot;, le repliche iniziano a lavorare sulle richieste di lettura con gli ultimi valori aggiornati. Eventualmente coerente è il livello più debole tra i quattro.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
    </span> <span class="img-wrapper"> <span>Consistenza eventuale</span> </span></p>
 <p>Tuttavia, secondo il teorema PACELC, la latenza di ricerca può essere enormemente ridotta sacrificando la coerenza. Pertanto, il livello eventually consistent è il più adatto per gli scenari che non richiedono un'elevata coerenza dei dati, ma che richiedono prestazioni di ricerca rapidissime. Un esempio può essere il recupero di recensioni e valutazioni di prodotti Amazon con il livello eventually consistent.</p>
 <h2 id="Guarantee-timestamp" class="common-anchor-header">Garantire il timestamp<button data-href="#Guarantee-timestamp" class="anchor-icon" translate="no">

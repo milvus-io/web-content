@@ -37,7 +37,7 @@ title: In-Memory-Replikation
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
    </span> <span class="img-wrapper"> <span>Replica_Availiability</span> </span></p>
 <p>Mit In-Memory-Replikaten kann Milvus das gleiche Segment auf mehrere Abfrageknoten laden. Wenn ein Abfrageknoten ausgefallen ist oder mit einer aktuellen Suchanfrage beschäftigt ist, kann das System neue Anfragen an einen inaktiven Abfrageknoten senden, der eine Replikation desselben Segments besitzt.</p>
 <h3 id="Performance" class="common-anchor-header">Leistung</h3><p>Mit In-Memory-Replikationen können Sie zusätzliche CPU- und Speicherressourcen nutzen. Dies ist sehr nützlich, wenn Sie einen relativ kleinen Datensatz haben, aber den Lesedurchsatz mit zusätzlichen Hardwareressourcen erhöhen möchten. Die Gesamt-QPS (Abfrage pro Sekunde) und der Durchsatz können erheblich verbessert werden.</p>
@@ -60,7 +60,7 @@ title: In-Memory-Replikation
     </button></h2><p>In-Memory-Replikate sind als Replikatgruppen organisiert. Jede Replikatgruppe enthält <a href="https://milvus.io/docs/v2.1.x/glossary.md#Sharding">Shard-Replikate</a>. Jedes Shard-Replikat hat ein Streaming-Replikat und ein historisches Replikat, die den wachsenden und versiegelten <a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">Segmenten</a> im Shard entsprechen (d. h. DML-Kanal).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
    </span> <span class="img-wrapper"> <span>Ein Beispiel für die Funktionsweise der In-Memory-Replikation</span> </span></p>
 <h3 id="Replica-group" class="common-anchor-header">Replikatgruppe</h3><p>Eine Replikatgruppe besteht aus mehreren <a href="https://milvus.io/docs/v2.1.x/four_layers.md#Query-node">Abfrageknoten</a>, die für die Verarbeitung historischer Daten und Replikate zuständig sind.</p>
 <h3 id="Shard-replica" class="common-anchor-header">Shard-Replikat</h3><p>Ein Shard-Replikat besteht aus einem Streaming-Replikat und einem historischen Replikat, die beide zu demselben <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Shard">Shard</a> gehören. Die Anzahl der Shard-Replikate in einer Replikatgruppe wird durch die Anzahl der Shards in einer bestimmten Sammlung bestimmt.</p>

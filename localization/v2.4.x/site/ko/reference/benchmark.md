@@ -201,7 +201,7 @@ title: Milvus 2.2 벤치마크 테스트 보고서
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cluster_search_performance_210_vs_220.png" alt="Cluster search performance" class="doc-image" id="cluster-search-performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cluster_search_performance_210_vs_220.png" alt="Cluster search performance" class="doc-image" id="cluster-search-performance" />
    </span> <span class="img-wrapper"> <span>클러스터 검색 성능</span> </span></p>
 <h4 id="Standalone" class="common-anchor-header">독립형</h4><p><details>
 <summary><b>서버 구성(독립형)</b></summary><code translate="no">yaml standalone: replicas: 1 resources: limits: cpu: &quot;12.0&quot; memory: 16Gi requests: cpu: &quot;12.0&quot; memory: 16Gi</code></details></p>
@@ -217,7 +217,7 @@ title: Milvus 2.2 벤치마크 테스트 보고서
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/standalone_search_performance_210_vs_220.png" alt="Standalone search performance" class="doc-image" id="standalone-search-performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/standalone_search_performance_210_vs_220.png" alt="Standalone search performance" class="doc-image" id="standalone-search-performance" />
    </span> <span class="img-wrapper"> <span>독립형 검색 성능</span> </span></p>
 <h3 id="Milvus-220-Scale-up" class="common-anchor-header">Milvus 2.2.0 스케일업</h3><p>하나의 쿼리노드에서 CPU 코어를 확장하여 확장 기능을 확인합니다.</p>
 <p><details>
@@ -236,7 +236,7 @@ title: Milvus 2.2 벤치마크 테스트 보고서
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/search_performance_by_querynode_cpu_cores.png" alt="Search performance by Querynode CPU cores" class="doc-image" id="search-performance-by-querynode-cpu-cores" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/search_performance_by_querynode_cpu_cores.png" alt="Search performance by Querynode CPU cores" class="doc-image" id="search-performance-by-querynode-cpu-cores" />
    </span> <span class="img-wrapper"> <span>쿼리노드 CPU 코어별 검색 성능</span> </span></p>
 <h3 id="Milvus-220-Scale-out" class="common-anchor-header">Milvus 2.2.0 스케일 아웃</h3><p>더 많은 쿼리노드로 더 많은 복제본을 확장하여 스케일아웃 기능을 확인합니다.</p>
 <div class="alert note">
@@ -257,7 +257,7 @@ title: Milvus 2.2 벤치마크 테스트 보고서
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/search_performance_by_querynode_replicas.png" alt="Search performance by Querynode replicas" class="doc-image" id="search-performance-by-querynode-replicas" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/search_performance_by_querynode_replicas.png" alt="Search performance by Querynode replicas" class="doc-image" id="search-performance-by-querynode-replicas" />
    </span> <span class="img-wrapper"> <span>쿼리노드 복제본별 검색 성능</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

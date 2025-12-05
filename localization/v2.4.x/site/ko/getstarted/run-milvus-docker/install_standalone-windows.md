@@ -203,7 +203,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 <p>가상화가 활성화되어 있는지 여부는 <strong>작업 관리자의</strong> <strong>성능</strong> 탭에서 확인할 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
    </span> <span class="img-wrapper"> <span>작업 관리자의 가상화</span> </span></p>
 <p>가상화가 비활성화되어 있는 경우 마더보드 펌웨어의 BIOS 설정을 확인해야 할 수 있습니다. BIOS 설정에서 가상화를 활성화하는 방법은 마더보드 공급업체에 따라 다릅니다. 예를 들어 ASUS 마더보드의 경우 가상화 활성화에 관한 <a href="https://www.asus.com/support/faq/1043786/">이 도움말 문서를</a> 참조하세요.</p>
 <p>그런 다음 컴퓨터를 다시 시작하고 Hyper-V를 사용하도록 설정해야 합니다. 자세한 내용은 이 <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft 문서를</a> 참조하세요.</p></li>
@@ -232,7 +232,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <p>관리자 모드에서 Docker Desktop을 시작했는지 확인합니다. 그러려면 <strong>Docker Desktop을</strong> 마우스 오른쪽 버튼으로 클릭하고 <strong>관리자 권한으로 실행을</strong> 선택합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
    </span> <span class="img-wrapper"> <span>관리자 권한으로 Docker Desktop 시작</span> </span></p></li>
 </ol>
 <h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">Milvus를 배포하는 동안 WSL 관련 문제가 발생하면 어떻게 처리할 수 있나요?</h3><p>WSL 2에서 Milvus를 실행하는 동안 WSL 관련 문제가 발생한 경우, 다음과 같이 WSL 2 기반 엔진을 사용하도록 Docker Desktop을 구성했는지 확인해야 할 수 있습니다.</p>
@@ -240,21 +240,21 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <li><p><strong>설정</strong> &gt; <strong>일반에서</strong>"WSL 2 기반 엔진 사용"이 선택되어 있는지 확인합니다. </p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Docker Desktop 설정에서 WSL 2 기반 엔진 사용</span> </span></p></li>
 <li><p>설치된 WSL 2 배포판 중에서 Docker 통합을 사용 설정하려는 배포판을 선택합니다: <strong>설정</strong> &gt; <strong>리소스</strong> &gt; <strong>WSL 통합으로</strong> 이동합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Docker Desktop 설정에서 WSL 2 배포를 선택합니다</span> </span>.</p></li>
 </ol>
 <h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header"><code translate="no">Read config failed</code>Milvus 시작 시 다음과 같은 볼륨 관련 오류 메시지가 표시되는 경우 어떻게 처리할 수 있나요?</h3><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Milvus 시작 시 구성 실패 오류 프롬프트 읽기</span> </span></p>
 <p>Milvus 시작 중 "읽기 구성 실패"라는 메시지가 표시되는 오류를 해결하려면 Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트된 경우 <code translate="no">docker exec</code> 명령어를 사용하여 컨테이너로 이동하여 다음과 같이 <strong>/milvus/configs</strong> 폴더를 나열할 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>Milvus 설정 파일 나열</span> </span></p>
 <p></p>

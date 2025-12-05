@@ -100,7 +100,7 @@ title: Disaggregation von Speicherung und Datenverarbeitung
 <p>Milvus folgt dem "Log as Data"-Prinzip, d.h. Milvus unterhält keine physische Tabelle, sondern garantiert die Zuverlässigkeit der Daten durch Logging-Persistenz und Snapshot-Logs.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>Log_Mechanismus</span> </span></p>
 <p>Der Log-Broker ist das Rückgrat von Milvus. Er ist für die Persistenz der Daten und die Disaggregation von Lese- und Schreibzugriffen zuständig, dank seines eingebauten Pub-Sub-Mechanismus. Die obige Abbildung zeigt eine vereinfachte Darstellung des Mechanismus, bei dem das System in zwei Rollen unterteilt ist, den Log-Broker (zur Aufrechterhaltung der Log-Sequenz) und den Log-Subscriber. Ersterer zeichnet alle Operationen auf, die den Zustand der Sammlungen verändern; letzterer abonniert die Log-Sequenz, um die lokalen Daten zu aktualisieren, und bietet Dienste in Form von Nur-Lese-Kopien an. Der Pub-Sub-Mechanismus bietet auch Raum für die Erweiterbarkeit des Systems im Hinblick auf die Erfassung von Änderungsdaten (CDC) und die globale Verteilung.</p>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">

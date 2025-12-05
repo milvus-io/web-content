@@ -76,7 +76,7 @@ title: Metriche di somiglianza
 <p>La formula della distanza euclidea è la seguente:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
    </span> <span class="img-wrapper"> <span>euclidea</span> </span></p>
 <p>dove <strong>a</strong> = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>) e <strong>b</strong> = (<sub>b0</sub>, <sub>b0</sub>,..., <sub>bn-1</sub>) sono due punti nello spazio euclideo n-dimensionale.</p>
 <p>È la metrica di distanza più utilizzata ed è molto utile quando i dati sono continui.</p>
@@ -85,7 +85,7 @@ Milvus calcola il valore prima di applicare la radice quadrata solo quando la di
 <h3 id="Inner-product-IP" class="common-anchor-header">Prodotto interno (IP)</h3><p>La distanza IP tra due incorporazioni vettoriali è definita come segue:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>ip</span> </span></p>
 <p>L'IP è più utile se si devono confrontare dati non normalizzati o se si tiene conto della magnitudine e dell'angolo.</p>
 <div class="alert note">
@@ -94,30 +94,30 @@ Milvus calcola il valore prima di applicare la radice quadrata solo quando la di
 <p>Supponiamo che X' sia normalizzato dall'incorporamento X:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
    </span> <span class="img-wrapper"> <span>normalizzare</span> </span></p>
 <p>La correlazione tra le due incorporazioni è la seguente:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>normalizzazione</span> </span></p>
 <h3 id="Cosine-Similarity" class="common-anchor-header">Somiglianza coseno</h3><p>La somiglianza coseno utilizza il coseno dell'angolo tra due insiemi di vettori per misurare la loro somiglianza. Si può pensare ai due insiemi di vettori come a due segmenti di linea che partono dalla stessa origine ([0,0,...]) ma puntano in direzioni diverse.</p>
 <p>Per calcolare la somiglianza del coseno tra due insiemi di vettori <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> e <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong>, utilizzare la seguente formula:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
    </span> <span class="img-wrapper"> <span>coseno_similarità</span> </span></p>
 <p>La somiglianza del coseno è sempre nell'intervallo <strong>[-1, 1]</strong>. Ad esempio, due vettori proporzionali hanno una somiglianza di coseno pari a <strong>1</strong>, due vettori ortogonali hanno una somiglianza pari a <strong>0</strong> e due vettori opposti hanno una somiglianza pari a <strong>-1</strong>. Più grande è il coseno, minore è l'angolo tra due vettori, il che indica che questi due vettori sono più simili tra loro.</p>
 <p>Sottraendo la somiglianza del coseno da 1, si ottiene la distanza del coseno tra due vettori.</p>
 <h3 id="Jaccard-distance" class="common-anchor-header">Distanza di Jaccard</h3><p>Il coefficiente di somiglianza di Jaccard misura la somiglianza tra due insiemi di campioni ed è definito come la cardinalità dell'intersezione degli insiemi definiti divisa per la cardinalità dell'unione degli stessi. Può essere applicato solo a insiemi di campioni finiti.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
    </span> <span class="img-wrapper"> <span>Coefficiente di somiglianza di Jaccard</span> </span></p>
 <p>La distanza di Jaccard misura la dissimilarità tra gli insiemi di dati e si ottiene sottraendo il coefficiente di somiglianza di Jaccard da 1. Per le variabili binarie, la distanza di Jaccard è equivalente al coefficiente di Tanimoto.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>Distanza di Jaccard</span> </span></p>
 <h3 id="Hamming-distance" class="common-anchor-header">Distanza di Hamming</h3><p>La distanza di Hamming misura le stringhe di dati binari. La distanza tra due stringhe di uguale lunghezza è il numero di posizioni di bit in cui i bit sono diversi.</p>
 <p>Ad esempio, supponiamo che esistano due stringhe, 1101 1001 e 1001 1101.</p>
@@ -127,7 +127,7 @@ Milvus calcola il valore prima di applicare la radice quadrata solo quando la di
 <p>Per determinare se A è una sovrastruttura di B, utilizzare la seguente formula:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
    </span> <span class="img-wrapper"> <span>sovrastruttura</span> </span></p>
 <p>Dove:</p>
 <ul>
@@ -138,7 +138,7 @@ Milvus calcola il valore prima di applicare la radice quadrata solo quando la di
 <p>Per determinare se A è una sottostruttura di B, utilizzare la seguente formula:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
    </span> <span class="img-wrapper"> <span>sottostruttura</span> </span></p>
 <p>Dove:</p>
 <ul>

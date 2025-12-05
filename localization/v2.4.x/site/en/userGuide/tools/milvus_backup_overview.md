@@ -56,7 +56,7 @@ title: Milvus Backup
       </svg>
     </button></h2><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
     <span>Milvus Backup architecture</span>
   </span>
 </p>

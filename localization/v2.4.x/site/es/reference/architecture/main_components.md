@@ -42,7 +42,7 @@ title: Componentes principales
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/standalone_architecture.jpg" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/standalone_architecture.jpg" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />
    </span> <span class="img-wrapper"> <span>Arquitectura_estándar</span> </span></p>
 <h2 id="Milvus-cluster" class="common-anchor-header">Clúster Milvus<button data-href="#Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ title: Componentes principales
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/distributed_architecture.jpg" alt="Distributed_architecture" class="doc-image" id="distributed_architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/distributed_architecture.jpg" alt="Distributed_architecture" class="doc-image" id="distributed_architecture" />
    </span> <span class="img-wrapper"> <span>Arquitectura_distribuida</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">Próximos pasos<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

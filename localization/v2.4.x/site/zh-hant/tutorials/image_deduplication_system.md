@@ -31,5 +31,5 @@ title: 影像重複刪除
 <p>在本教程中，您將學習如何建立影像重複刪除系統。本教程使用 ResNet-50 模型來擷取影像的特徵，並將其轉換成向量。然後，這些影像向量會儲存在 Milvus 向量資料庫中，同時也會在 Milvus 中進行向量相似性搜尋。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>複製影像工作流程</span> </span></p>

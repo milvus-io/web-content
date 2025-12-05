@@ -426,7 +426,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>見ての通り、クエリーベクトルは検索されたベクトルに近い。検索されたベクトルは、クエリを中心とした一定の半径を持つ標準的な円の中には入っていませんが、それでも2D平面上ではクエリベクトルに非常に近いことがわかります。</p>
 <p>次元削減技術を使うことで、ベクトルの理解やトラブルシューティングを容易にすることができます。このチュートリアルを通して、ベクトルについての理解が深まることを願っています。</p>

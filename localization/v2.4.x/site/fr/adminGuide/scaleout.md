@@ -46,11 +46,11 @@ title: Échelle d'un amas de Milvus
 <h3 id="Scaling-out" class="common-anchor-header">Mise à l'échelle</h3><p>La mise à l'échelle consiste à augmenter le nombre de nœuds dans un cluster. Contrairement à la mise à l'échelle, la mise à l'échelle n'exige pas que vous allouiez davantage de ressources à un nœud de la grappe. Au contraire, la mise à l'échelle étend la grappe horizontalement en ajoutant des nœuds supplémentaires.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>Scaleout</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Mise à l'échelle</span> </span></p>
 <p>Selon l'<a href="/docs/fr/v2.4.x/architecture_overview.md">architecture Milvus</a>, les nœuds de travail sans état comprennent le nœud de requête, le nœud de données, le nœud d'index et le proxy. Par conséquent, vous pouvez étendre ce type de nœuds en fonction des besoins de votre entreprise et des scénarios d'application. La mise à l'échelle du cluster Milvus peut se faire manuellement ou automatiquement.</p>
 <p>En règle générale, vous devrez redimensionner le cluster Milvus que vous avez créé s'il est surutilisé. Vous trouverez ci-dessous quelques situations typiques dans lesquelles vous pouvez avoir besoin d'une mise à l'échelle du cluster Milvus :</p>

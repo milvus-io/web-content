@@ -39,13 +39,13 @@ summary: >-
     </button></h2><p>Milvusは入力されたエンティティをコレクション内のセグメントに格納し、セグメントが一杯になるとそのセグメントを封印します。この場合、追加のエンティティを収容するために新しいセグメントが作成されます。その結果、エンティティはセグメント間で任意に分散される。この分散によって、Milvus は複数のセグメントを検索して、与えられたクエリベクトルに最も近いものを見つける必要がある。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>クラスタリングなしの場合</span> </span></p>
 <p>Milvus が特定のフィールドの値に基づいてエンティティをセグメント間に分散させることができれば、検索範囲をセグメント内に制限することができ、検索性能が向上します。</p>
 <p><strong>クラスタリングコンパクションは</strong>Milvusの機能で、スカラーフィールドの値に基づいてコレクション内のセグメント間でエンティティを再分配します。この機能を有効にするには、まず<strong>クラスタリングキーとして</strong>スカラーフィールドを選択する必要があります。これにより、Milvusはクラスタリングキーの値が特定の範囲内にあるエンティティをセグメントに再分配することができます。クラスタリングコンパクションをトリガーすると、Milvusは<strong>PartitionStatsと</strong>呼ばれるグローバルインデックスを生成/更新し、セグメントとクラスタリングキー値のマッピング関係を記録します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>クラスタリングコンパクションの場合</span> </span></p>
 <p><strong>PartitionStatsを</strong>参照することで、Milvusはクラスタリングキー値を持つ検索/クエリリクエストを受信した際に無関係なデータを削除し、その値にマッピングされるセグメント内で検索範囲を制限することができ、検索パフォーマンスを向上させることができます。性能向上の詳細については、ベンチマークテストを参照してください。</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">クラスタリング・コンパクションの使用<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">

@@ -31,5 +31,5 @@ title: Deduplikasi Gambar
 <p>Dalam tutorial ini, Anda akan belajar cara membangun sistem deduplikasi gambar. Tutorial ini menggunakan model ResNet-50 untuk mengekstrak fitur gambar dan mengubahnya menjadi vektor. Kemudian vektor-vektor gambar ini disimpan dalam basis data vektor Milvus dan pencarian kemiripan vektor juga dilakukan di Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>Alur kerja image_deduplikasi</span> </span></p>

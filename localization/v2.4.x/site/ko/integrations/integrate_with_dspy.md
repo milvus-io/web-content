@@ -74,7 +74,7 @@ title: Milvus와 DSPy 통합
     </button></h2><p>LLM 파이프라인을 구성하는 데 기여하는 수많은 구성 요소가 있습니다. 여기에서는 DSPy의 작동 방식을 개략적으로 이해할 수 있도록 몇 가지 주요 구성 요소에 대해 설명합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>DSPy 모듈</span> </span></p>
 <p>시그니처: DSPy의 시그니처는 모듈의 입출력 동작을 설명하는 선언적 사양으로, 작업 실행에서 언어 모델을 안내하는 역할을 합니다. 모듈: DSPy 모듈은 언어 모델(LM)을 활용하는 프로그램의 기본 구성 요소 역할을 합니다. 모듈은 연쇄 사고 또는 ReAct와 같은 다양한 프롬프트 기법을 추상화하며 모든 DSPy 서명을 처리할 수 있도록 조정할 수 있습니다. 학습 가능한 매개변수와 입력을 처리하고 출력을 생성하는 기능을 갖춘 이러한 모듈을 결합하여 더 큰 프로그램을 구성할 수 있으며, PyTorch의 NN 모듈에서 영감을 얻었지만 LM 애플리케이션에 맞게 조정되었습니다. 옵티마이저: DSPy의 최적화 도구는 프롬프트 및 LLM 가중치와 같은 DSPy 프로그램의 파라미터를 미세 조정하여 정확도와 같은 지정된 메트릭을 최대화하여 프로그램 효율성을 향상시킵니다.</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">왜 밀버스가 필요한가?<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">

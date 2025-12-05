@@ -43,7 +43,7 @@ title: Как повысить производительность конвей
     </button></h2><p>На схеме ниже показан самый простой стандартный конвейер RAG. Сначала фрагменты документов загружаются в векторное хранилище (например, в <a href="https://zilliz.com/cloud">облако</a> <a href="https://milvus.io/docs">Milvus</a> или <a href="https://zilliz.com/cloud">Zilliz</a>). Затем из векторного хранилища извлекается Top-K наиболее релевантных фрагментов, связанных с запросом. Эти релевантные фрагменты затем вводятся в контекстную подсказку <a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM</a>, и, наконец, LLM возвращает окончательный ответ.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -90,7 +90,7 @@ title: Как повысить производительность конвей
 <h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">Создание гипотетических вопросов</h3><p>Создание гипотетических вопросов подразумевает использование LLM для генерации множества вопросов, которые пользователи могут задать по поводу содержимого каждого блока документов. Прежде чем реальный запрос пользователя дойдет до LLM, векторное хранилище извлекает наиболее релевантные гипотетические вопросы, связанные с реальным запросом, вместе с соответствующими фрагментами документов и направляет их в LLM.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -98,7 +98,7 @@ title: Как повысить производительность конвей
 <h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (Hypothetical Document Embeddings)</h3><p>HyDE расшифровывается как Hypothetical Document Embeddings. Он использует LLM для создания &quot;<strong><em>гипотетического документа</em></strong>&quot; или <strong><em>фальшивого</em></strong> ответа в ответ на запрос пользователя, лишенного контекстной информации. Затем этот фальшивый ответ преобразуется в векторные вкрапления и используется для запроса наиболее релевантных фрагментов документов в векторной базе данных. Затем векторная база данных извлекает Top-K наиболее релевантных фрагментов документов и передает их в LLM и исходный запрос пользователя для создания окончательного ответа.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -113,7 +113,7 @@ title: Как повысить производительность конвей
 <p>Получив эти подзапросы, мы отправляем их в векторную базу данных после преобразования в векторные вкрапления. Затем векторная база данных находит фрагменты документов Top-K, наиболее релевантные каждому подзапросу. Наконец, LLM использует эту информацию для генерации лучшего ответа.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -125,7 +125,7 @@ title: Как повысить производительность конвей
 <p><strong><em>Stepback Question: "Каков предельный размер набора данных, с которым может работать Milvus?".</em></strong></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -149,7 +149,7 @@ title: Как повысить производительность конвей
 <h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Автоматическое объединение фрагментов документов</h3><p>При построении индекса мы можем использовать два уровня детализации: дочерние и соответствующие им родительские блоки. Сначала мы ищем дочерние блоки на более тонком уровне детализации. Затем мы применяем стратегию слияния: если определенное количество, <strong><em>n</em></strong>, дочерних чанков из первых <strong><em>k</em></strong> дочерних чанков принадлежат одному и тому же родительскому чанку, мы предоставляем этот родительский чанк в LLM в качестве контекстной информации.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -157,7 +157,7 @@ title: Как повысить производительность конвей
 <h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">Построение иерархических индексов</h3><p>При создании индексов для документов мы можем создать двухуровневый индекс: один для резюме документов, другой - для их фрагментов. Процесс векторного поиска состоит из двух этапов: сначала мы фильтруем релевантные документы на основе резюме, а затем извлекаем соответствующие фрагменты документов исключительно из этих релевантных документов.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -166,7 +166,7 @@ title: Как повысить производительность конвей
 <p>К распространенным алгоритмам дополнительного поиска относятся методы, основанные на лексической частоте, например <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a>, или большие модели, использующие разреженные вкрапления, например <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. Алгоритмы повторного ранжирования включают RRF или более сложные модели, такие как <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, которые напоминают BERT-подобные архитектуры.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -190,7 +190,7 @@ title: Как повысить производительность конвей
 <h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Поиск в окне предложения</h3><p>В базовой системе RAG фрагмент документа, передаваемый LLM, представляет собой более крупное окно, охватывающее извлеченный фрагмент вставки. Это гарантирует, что информация, предоставляемая LLM, включает в себя более широкий спектр контекстных деталей, минимизируя потерю информации. Техника Sentence Window Retrieval позволяет отделить фрагмент документа, используемый для поиска вкраплений, от фрагмента, предоставляемого LLM.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -198,7 +198,7 @@ title: Как повысить производительность конвей
 <h3 id="Meta-data-Filtering" class="common-anchor-header">Фильтрация метаданных</h3><p>Чтобы обеспечить более точные ответы, мы можем уточнить полученные документы, отфильтровав метаданные, такие как время и категория, перед передачей их в LLM. Например, если получены финансовые отчеты за несколько лет, фильтрация по нужному году позволит уточнить информацию в соответствии с конкретными требованиями. Этот метод эффективен в ситуациях с обширными данными и подробными метаданными, например при поиске контента в библиотечных фондах.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -221,7 +221,7 @@ title: Как повысить производительность конвей
 <h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">Сжатие запроса LLM</h3><p>Шумовая информация в извлеченных фрагментах документов может существенно повлиять на точность окончательного ответа RAG. Ограниченное окно подсказки в LLM также является препятствием для получения более точных ответов. Чтобы решить эту проблему, мы можем сжать нерелевантные детали, подчеркнуть ключевые абзацы и уменьшить общую длину контекста в найденных фрагментах документов.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -230,7 +230,7 @@ title: Как повысить производительность конвей
 <p>Основываясь на этом наблюдении, мы можем изменить порядок извлечения фрагментов, чтобы улучшить качество ответа: при извлечении нескольких фрагментов знаний фрагменты с относительно низким уровнем доверия размещаются в середине, а фрагменты с относительно высоким уровнем доверия - на обоих концах.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -255,7 +255,7 @@ title: Как повысить производительность конвей
 <p>Для проверки можно использовать эффективные методы, такие как модели Natural Language Inference (NLI), или дополнительные инструменты, например поиск в Интернете.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -263,13 +263,13 @@ title: Как повысить производительность конвей
 <h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">Маршрутизация запросов с помощью агента</h3><p>Иногда нам не нужно использовать систему RAG для ответа на простые вопросы, так как это может привести к еще большему непониманию и выводам на основе недостоверной информации. В таких случаях мы можем использовать агента в качестве маршрутизатора на этапе запроса. Этот агент оценивает, должен ли запрос пройти через конвейер RAG. Если да, то запускается последующий конвейер RAG; в противном случае LLM обращается к запросу напрямую.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

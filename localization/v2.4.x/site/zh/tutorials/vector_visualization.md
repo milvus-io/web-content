@@ -426,7 +426,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>图</span> </span></p>
 <p>我们可以看到，查询向量与检索向量很接近。虽然检索到的向量并不在以查询为中心、半径固定的标准圆内，但我们可以看到，它们在二维平面上仍然非常接近查询向量。</p>
 <p>使用降维技术可以促进对向量的理解和故障排除。希望你能通过本教程更好地理解向量。</p>

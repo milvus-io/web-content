@@ -59,7 +59,7 @@ title: CDC 概览
     </button></h2><p>Milvus CDC 采用的架构包含两个主要组件--管理任务和元数据的 HTTP 服务器，以及与任务执行同步的<strong>corelib</strong>，前者负责从源 Milvus 实例获取数据，后者负责将处理后的数据发送到目标 Milvus 实例。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>Milvus CDC 架构</span> </span></p>
 <p>在上图中</p>
 <ul>
@@ -90,7 +90,7 @@ title: CDC 概览
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>Milvus CDC 工作流</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -80,7 +80,7 @@ title: Milvus 迁移概述
     </button></h2><p><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>的架构设计具有战略意义，可促进高效的数据流、解析和写入过程，实现跨各种数据源的强大迁移能力。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
    </span> <span class="img-wrapper"> <span>Milvus-迁移架构</span> </span></p>
 <p>在上图中</p>
 <ul>

@@ -58,7 +58,7 @@ title: Sauvegarde Milvus
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Architecture de Milvus Backup</span> </span></p>
 <p>Milvus Backup facilite la sauvegarde et la restauration des métadonnées, des segments et des données dans les instances Milvus. Il fournit des interfaces vers le nord, telles que la CLI, l'API et le module Go basé sur gRPC, pour une manipulation souple des processus de sauvegarde et de restauration.</p>
 <p>Milvus Backup lit les métadonnées et les segments de la collection à partir de l'instance Milvus source pour créer une sauvegarde. Il copie ensuite les données de collecte à partir du chemin racine de l'instance Milvus source et enregistre les données copiées dans le chemin racine de la sauvegarde.</p>

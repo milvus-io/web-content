@@ -37,7 +37,7 @@ title: 인메모리 복제본
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
    </span> <span class="img-wrapper"> <span>Replica_Availability</span> </span></p>
 <p>인메모리 복제본을 사용하면 Milvus는 여러 쿼리 노드에서 동일한 세그먼트를 로드할 수 있습니다. 한 쿼리 노드가 실패했거나 현재 검색 요청으로 사용 중일 때 다른 쿼리 노드가 도착하면 시스템은 동일한 세그먼트의 복제본이 있는 유휴 쿼리 노드로 새 요청을 보낼 수 있습니다.</p>
 <h3 id="Performance" class="common-anchor-header">성능</h3><p>인메모리 복제본을 사용하면 추가 CPU 및 메모리 리소스를 활용할 수 있습니다. 데이터 세트가 비교적 작지만 추가 하드웨어 리소스로 읽기 처리량을 늘리고자 하는 경우에 매우 유용합니다. 전반적인 QPS(초당 쿼리 수)와 처리량이 크게 향상될 수 있습니다.</p>
@@ -60,7 +60,7 @@ title: 인메모리 복제본
     </button></h2><p>인메모리 복제본은 복제본 그룹으로 구성됩니다. 각 복제본 그룹에는 <a href="https://milvus.io/docs/v2.1.x/glossary.md#Sharding">샤드</a> 복제본이 포함됩니다. 각 샤드 복제본에는 스트리밍 복제본과 샤드에서 성장 및 봉인된 <a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">세그먼트</a> (즉, DML 채널)에 해당하는 기록 복제본이 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
    </span> <span class="img-wrapper"> <span>인메모리 복제본의 작동 방식에 대한 그림</span> </span></p>
 <h3 id="Replica-group" class="common-anchor-header">복제본 그룹</h3><p>복제본 그룹은 기록 데이터 및 복제본 처리를 담당하는 여러 <a href="https://milvus.io/docs/v2.1.x/four_layers.md#Query-node">쿼리 노드로</a> 구성됩니다.</p>
 <h3 id="Shard-replica" class="common-anchor-header">샤드 복제본</h3><p>샤드 복제본은 스트리밍 복제본과 기록 복제본으로 구성되며, 둘 다 동일한 <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Shard">샤드에</a> 속합니다. 복제본 그룹의 샤드 복제본 수는 지정된 컬렉션의 샤드 수에 따라 결정됩니다.</p>

@@ -76,32 +76,32 @@ summary: Découvrez comment créer une alerte pour les services Milvus dans Graf
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Ajouter une nouvelle requête</h3><p>Pour ajouter une alerte sur l'utilisation de la mémoire des composants Milvus, modifiez le panneau Mémoire. Ensuite, ajoutez une nouvelle requête avec la métrique : <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>Alert_metric</span> </span></p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Sauvegarder le tableau de bord</h3><p>Sauvegarder le tableau de bord et attendre quelques minutes pour voir apparaître l'alerte.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
    </span> <span class="img-wrapper"> <span>Tableau de bord_alerte</span> </span></p>
 <p>La requête d'alerte de Grafana ne prend pas en charge les variables de modèle. Par conséquent, vous devez ajouter une deuxième requête sans aucune variable de modèle dans les étiquettes. La deuxième requête est nommée "A" par défaut. Vous pouvez la renommer en cliquant sur le menu déroulant.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>Requête_alerte</span> </span></p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Ajouter des notifications d'alerte</h3><p>Pour recevoir des notifications d'alerte, ajoutez un &quot;canal de notification&quot;. Ensuite, spécifiez le canal dans le champ &quot;Envoyer à&quot;.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
    </span> <span class="img-wrapper"> <span>Alerte_notification</span> </span></p>
 <p>Si l'alerte est créée et déclenchée avec succès, vous recevrez une notification comme indiqué dans la capture d'écran ci-dessous.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>Message de notification</span> </span></p>
 <p>Pour supprimer une alerte, allez dans le panneau "Alerte" et cliquez sur le bouton "Supprimer".</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
    </span> <span class="img-wrapper"> <span>Supprimer l'alerte</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

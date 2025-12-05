@@ -203,7 +203,7 @@ Creating milvus-standalone ... done​
 <p>You can check whether virtualization is enabled by looking at the <strong>Performance</strong> tab in the <strong>Task Manager</strong>.​</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
     <span>Virtualization in Task Manager</span>
   </span>
 </p>
@@ -234,7 +234,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <p>Ensure that you have started Docker Desktop in administrator mode. To do so, right-click on <strong>Docker Desktop</strong> and choose <strong>Run as administrator</strong>.​</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
     <span>Start Docker Desktop as Administrator</span>
   </span>
 </p></li>
@@ -244,28 +244,28 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><p>Ensure that “Use the WSL 2 based engine” is checked in <strong>Settings</strong> > <strong>General</strong>. ​</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
     <span>Use the WSL 2 based engine in Docker Desktop Settings</span>
   </span>
 </p></li>
 <li><p>Select from your installed WSL 2 distributions which you want to enable Docker integration on by going to: <strong>Settings</strong> > <strong>Resources</strong> > <strong>WSL Integration</strong>.​</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
     <span>Select WSL 2 distributions in Docker Desktop Settings</span>
   </span>
 </p></li>
 </ol>
 <h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">How can I deal with the volume-related errors prompted during Milvus startup that reads <code translate="no">Read config failed</code>?​</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
     <span>Read config failed error prompt in Milvus startup</span>
   </span>
 </p>
 <p>To deal with the error prompted during Milvus startup that reads “Read config failed,” you need to check whether the volume mounted into the Milvus container is correct. If the volume is correctly mounted into the container, you can use the <code translate="no">docker exec</code> command to go into the container and list the <strong>/milvus/configs</strong> folder as follows:​</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
     <span>List Milvus config files</span>
   </span>
 </p>

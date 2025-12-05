@@ -25,7 +25,7 @@ title: Visão geral da arquitetura do Milvus
 <p>O Milvus adopta uma arquitetura de armazenamento partilhado com desagregação do armazenamento e da computação e escalabilidade horizontal para os seus nós de computação. Seguindo o princípio da desagregação do plano de dados e do plano de controlo, o Milvus é composto por <a href="/docs/pt/v2.4.x/four_layers.md">quatro camadas</a>: camada de acesso, serviço coordenador, nó de trabalho e armazenamento. Estas camadas são mutuamente independentes quando se trata de escalonamento ou de recuperação de desastres.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
    </span> <span class="img-wrapper"> <span>Diagrama de arquitetura</span> </span></p>
 <p>De acordo com a figura, as interfaces podem ser classificadas nas seguintes categorias:</p>
 <ul>

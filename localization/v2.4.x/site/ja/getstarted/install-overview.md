@@ -105,7 +105,7 @@ title: Milvus導入オプションの概要
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
    </span> <span class="img-wrapper"> <span>ユースケースに合わせて導入オプションを選択してください。</span> </span></p>
 <h2 id="Comparison-on-functionalities" class="common-anchor-header">機能比較<button data-href="#Comparison-on-functionalities" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -76,32 +76,32 @@ summary: GrafanaでMilvusサービスのアラートを作成する方法をご�
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1.新しいクエリを追加する</h3><p>Milvusコンポーネントのメモリ使用量のアラートを追加するには、Memoryパネルを編集します。次に、メトリックで新しいクエリを追加します：<code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>アラートメトリック</span> </span></p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2.ダッシュボードを保存する</h3><p>ダッシュボードを保存し、アラートが表示されるまで数分待ちます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
    </span> <span class="img-wrapper"> <span>アラート_ダッシュボード</span> </span></p>
 <p>Grafana アラートクエリはテンプレート変数をサポートしていません。そのため、ラベルにテンプレート変数を含まない2つ目のクエリを追加する必要があります。2つ目のクエリはデフォルトで「A」という名前になっています。ドロップダウンをクリックして名前を変更できます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>Alert_query</span> </span></p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3.アラート通知の追加</h3><p>アラート通知を受信するには、&quot;通知チャンネル &quot;を追加します。次に、&quot;Send to &quot;フィールドでチャンネルを指定します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
    </span> <span class="img-wrapper"> <span>アラート通知</span> </span></p>
 <p>アラートが正常に作成され、トリガーされると、以下のスクリーンショットのような通知が届きます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>通知_メッセージ</span> </span></p>
 <p>アラートを削除するには、"Alert "パネルに移動し、削除ボタンをクリックします。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
    </span> <span class="img-wrapper"> <span>アラートの削除</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

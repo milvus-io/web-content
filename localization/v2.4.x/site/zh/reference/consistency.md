@@ -56,25 +56,25 @@ title: 一致性
 <h3 id="Strong" class="common-anchor-header">强</h3><p>强是最高、最严格的一致性级别。它确保用户可以读取最新版本的数据。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
    </span> <span class="img-wrapper"> <span>强一致性</span> </span></p>
 <p>根据 PACELC 定理，如果将一致性级别设置为强，延迟会增加。因此，我们建议在功能测试时选择强一致性，以确保测试结果的准确性。强一致性也最适合那些以牺牲搜索速度为代价、对数据一致性有严格要求的应用。处理订单付款和账单的在线财务系统就是一个例子。</p>
 <h3 id="Bounded-staleness" class="common-anchor-header">有界滞后</h3><p>有界僵化，顾名思义，允许数据在一定时间内不一致。不过，一般来说，在这段时间之外，数据始终是全局一致的。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
    </span> <span class="img-wrapper"> <span>有界滞后一致性</span> </span></p>
 <p>有界滞后性适用于需要控制搜索延迟并能接受零星数据不可见的情况。例如，在视频推荐引擎等推荐系统中，数据不可见有时对总体召回率影响较小，但却能显著提升推荐系统的性能。</p>
 <h3 id="Session" class="common-anchor-header">会话</h3><p>会话确保所有数据写入都能在同一会话中立即被读取。换句话说，当你通过一个客户端写入数据时，新插入的数据可立即被搜索到。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
    </span> <span class="img-wrapper"> <span>会话一致性</span> </span></p>
 <p>我们建议在对同一会话中数据一致性要求较高的情况下选择会话作为一致性级别。例如，从图书馆系统中删除图书条目的数据，在确认删除并刷新页面（不同的会话）后，搜索结果中将不再显示该图书。</p>
 <h3 id="Eventually" class="common-anchor-header">最终</h3><p>读取和写入的顺序没有保证，如果不再进行写入操作，副本最终会趋同于相同的状态。在 &quot;最终 &quot;一致性下，副本会使用最新更新的值开始处理读取请求。最终一致性是四种一致性中最弱的一种。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
    </span> <span class="img-wrapper"> <span>最终一致性</span> </span></p>
 <p>然而，根据 PACELC 定理，牺牲一致性可以大大缩短搜索延迟。因此，最终一致性最适用于对数据一致性要求不高但需要极快搜索性能的情况。举个例子，使用最终一致级别检索亚马逊产品的评论和评分。</p>
 <h2 id="Guarantee-timestamp" class="common-anchor-header">保证时间戳<button data-href="#Guarantee-timestamp" class="anchor-icon" translate="no">

@@ -35,7 +35,7 @@ title: 重新排名
         ></path>
       </svg>
     </button></h2><p>下图展示了在 Milvus 中执行混合搜索的过程，并强调了重排在此过程中的作用。</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
 <p>混合搜索中的重新排序是一个关键步骤，它可以整合来自多个向量场的结果，确保最终输出结果具有相关性，并能准确排出优先级。目前，Milvus 提供以下重新排序策略：</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>:这种方法通过计算来自不同向量搜索的得分（或向量距离）的加权平均值来合并结果。它根据每个向量场的重要性分配权重。</p></li>
@@ -61,7 +61,7 @@ title: 重新排名
 <ul>
 <li><p><strong>在检索过程中收集分数</strong>：收集来自不同向量检索路径的结果及其分数。</p></li>
 <li><p><strong>分数归一化</strong>：将每条路径的得分归一化为 [0,1] 范围，其中接近 1 的值表示相关性更高。这种归一化非常重要，因为分数分布会随不同的度量类型而变化。例如，IP 的距离范围为 [-∞,+∞]，而 L2 的距离范围为 [0,+∞]。Milvus 采用<code translate="no">arctan</code> 函数，将数值转换为 [0,1] 范围，为不同度量类型提供标准化基础。</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
 <li><p><strong>权重分配</strong>：为每个向量检索路径分配一个权重<code translate="no">w𝑖</code> 。用户指定的权重反映了数据源的可靠性、准确性或其他相关指标。每个权重的范围为 [0,1]。</p></li>
 <li><p><strong>分数融合</strong>：计算归一化分数的加权平均值，得出最终分数。然后根据这些从高到低的分数对结果进行排序，生成最终的排序结果。</p></li>
 </ul>

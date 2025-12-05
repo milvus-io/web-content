@@ -35,5 +35,5 @@ title: 텍스트-이미지 검색 엔진
 <p>이 튜토리얼에서는 텍스트-이미지 검색 엔진을 구축하는 방법을 배웁니다. 이 튜토리얼에서는 CLIP 모델을 사용해 이미지의 특징을 추출하고 이를 벡터로 변환합니다. 그런 다음 이 이미지 벡터는 Milvus 벡터 데이터베이스에 저장됩니다. 사용자가 쿼리 텍스트를 입력하면 이 텍스트도 동일한 머신러닝 모델 CLIP을 사용하여 임베딩 벡터로 변환됩니다. 그 후 Milvus에서 벡터 유사도 검색을 수행하여 입력된 텍스트 벡터와 가장 유사한 이미지 벡터를 검색합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
    </span> <span class="img-wrapper"> <span>텍스트_이미지_검색</span> </span></p>

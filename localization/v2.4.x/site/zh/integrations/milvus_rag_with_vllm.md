@@ -42,7 +42,7 @@ title: 使用 Milvus、vLLM 和 Llama 3.1 构建 RAG
 <p>根据论文<a href="https://arxiv.org/abs/2309.06180">&quot;Efficient Memory Management for Large Language Model Serving with PagedAttention&quot;</a>，KV 缓存<a href="https://arxiv.org/abs/2309.06180">使用</a>了大约 30% 的 GPU 内存，导致潜在的内存问题。KV 缓存存储在连续的内存中，但改变大小会导致内存碎片，从而降低计算效率。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/vllm_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -50,7 +50,7 @@ title: 使用 Milvus、vLLM 和 Llama 3.1 构建 RAG
 <p>通过为 KV 缓存使用虚拟内存，vLLM 只在需要时分配 GPU 物理内存，从而消除了内存碎片并避免了预分配。在测试中，vLLM 的表现优于<a href="https://huggingface.co/docs/transformers/main_classes/text_generation">HuggingFace Transformers</a>（HF）和<a href="https://github.com/huggingface/text-generation-inference">文本生成推理</a>（TGI），在英伟达 A10G 和 A100 GPU 上，vLLM 的吞吐量比 HF 高出 24 倍，比 TGI 高出 3.5 倍。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/vllm_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

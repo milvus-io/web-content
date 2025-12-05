@@ -428,7 +428,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>Come si può notare, il vettore di interrogazione è vicino ai vettori recuperati. Sebbene i vettori recuperati non rientrino in un cerchio standard con raggio fisso centrato sull'interrogazione, possiamo notare che sono comunque molto vicini al vettore dell'interrogazione sul piano 2D.</p>
 <p>L'uso di tecniche di riduzione della dimensionalità può facilitare la comprensione dei vettori e la risoluzione dei problemi. Spero che questa esercitazione vi permetta di comprendere meglio i vettori.</p>

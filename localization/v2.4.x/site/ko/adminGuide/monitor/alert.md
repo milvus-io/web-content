@@ -76,32 +76,32 @@ summary: Grafana에서 Milvus 서비스에 대한 알림을 만드는 방법을 
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. 새 쿼리 추가하기</h3><p>Milvus 구성 요소의 메모리 사용량에 대한 알림을 추가하려면 메모리 패널을 편집합니다. 그런 다음 메트릭을 사용하여 새 쿼리를 추가합니다: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>Alert_metric</span> </span></p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2. 대시보드 저장</h3><p>대시보드를 저장하고 몇 분 동안 기다렸다가 알림을 확인합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
    </span> <span class="img-wrapper"> <span>Alert_dashboard</span> </span></p>
 <p>Grafana 알림 쿼리는 템플릿 변수를 지원하지 않습니다. 따라서 레이블에 템플릿 변수가 없는 두 번째 쿼리를 추가해야 합니다. 두 번째 쿼리의 이름은 기본적으로 "A"로 지정됩니다. 드롭다운을 클릭하여 이름을 바꿀 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>Alert_query</span> </span></p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3. 알림 알림 추가하기</h3><p>알림 알림을 받으려면 &quot;알림 채널&quot;을 추가합니다. 그런 다음 '받는 사람' 필드에 채널을 지정합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
    </span> <span class="img-wrapper"> <span>알림_알림</span> </span></p>
 <p>알림이 성공적으로 생성되고 트리거되면 아래 스크린샷과 같이 알림을 받게 됩니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>알림_메시지</span> </span></p>
 <p>알림을 삭제하려면 '알림' 패널로 이동하여 삭제 버튼을 클릭합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
    </span> <span class="img-wrapper"> <span>삭제_알리미</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -42,13 +42,13 @@ summary: >-
     </button></h2><p>Milvus almacena las entidades entrantes en segmentos dentro de una colección y sella un segmento cuando está lleno. Si esto ocurre, se crea un nuevo segmento para acomodar entidades adicionales. Como resultado, las entidades se distribuyen arbitrariamente entre los segmentos. Esta distribución requiere que Milvus busque en múltiples segmentos para encontrar los vecinos más cercanos a un vector de consulta dado.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Compactación sin agrupación</span> </span></p>
 <p>Si Milvus puede distribuir entidades entre segmentos basándose en los valores de un campo específico, el alcance de la búsqueda puede restringirse dentro de un segmento, mejorando así el rendimiento de la búsqueda.</p>
 <p>La<strong>compactación por agrupamiento</strong> es una función de Milvus que redistribuye las entidades entre los segmentos de una colección basándose en los valores de un campo escalar. Para activar esta función, primero debe seleccionar un campo escalar como <strong>clave de agrupación</strong>. Esto permite a Milvus redistribuir entidades en un segmento cuando sus valores de clave de agrupación caen dentro de un rango específico. Cuando usted activa una compactación de clustering, Milvus genera/actualiza un índice global llamado <strong>PartitionStats</strong>, que registra la relación de mapeo entre segmentos y valores de clave de clustering.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Con la compactación de clustering</span> </span></p>
 <p>Utilizando <strong>PartitionStats</strong> como referencia, Milvus puede eliminar datos irrelevantes al recibir una solicitud de búsqueda/consulta que contenga un valor de clave de agrupación y restringir el ámbito de búsqueda dentro de los segmentos que corresponden al valor, mejorando así el rendimiento de la búsqueda. Para obtener más información sobre la mejora del rendimiento, consulte Pruebas comparativas.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Utilizar la compactación de clústeres<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">

@@ -39,7 +39,7 @@ title: スカラーインデックス
 <p>Milvusはこのようなブーリアン式を含む検索要求を受け取ると、ブーリアン式を抽象構文木(AST)に解析し、属性フィルタリングのための物理計画を生成します。そして、Milvusは各セグメントで物理計画を適用して、フィルタリング結果として<a href="/docs/ja/v2.4.x/bitset.md">ビットセットを</a>生成し、その結果をベクトル検索パラメータとして含めることで、検索範囲を絞り込む。この場合、ベクトル検索の速度は属性フィルタリングの速度に大きく依存する。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>セグメント内の属性フィルタリング</span> </span></p>
 <p>スカラーフィールドインデックスは、スカラーフィールドの値を特定の方法で並べ替えることで、属性フィルタリングの速度を確保し、情報検索を高速化する方法である。</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">スカラー・フィールド・インデックスのアルゴリズム<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ title: スカラーインデックス
 <p>転置インデックスには、用語辞書と転置リストという2つの主要な構成要素があります。用語辞書にはアルファベット順に並べられたトークン化されたすべての単語が含まれ、転置リストには各単語が出現する文書のリストが含まれる。このセットアップにより、ポイント・クエリや範囲クエリは、総当たり検索よりもはるかに高速で効率的になります。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
    </span> <span class="img-wrapper"> <span>転置インデックス図</span> </span></p>
 <p>転置インデックスを使用する利点は、特に以下の操作において明らかである：</p>
 <ul>

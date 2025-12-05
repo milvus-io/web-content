@@ -76,7 +76,7 @@ title: Integrar Milvus com DSPy
     </button></h2><p>Existem inúmeros componentes que contribuem para a construção de um pipeline LLM. Aqui, descreveremos alguns componentes-chave para fornecer uma compreensão de alto nível de como o DSPy opera.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>Módulos DSPy</span> </span></p>
 <p>Assinatura: As assinaturas em DSPy servem como especificações declarativas, delineando o comportamento de entrada/saída dos módulos, orientando o modelo de linguagem na execução de tarefas. Módulo: Os módulos DSPy servem como componentes fundamentais para programas que utilizam modelos de linguagem (LMs). Abstraem várias técnicas de estímulo, como a cadeia de pensamento ou o ReAct, e são adaptáveis para lidar com qualquer assinatura DSPy. Com parâmetros que podem ser aprendidos e a capacidade de processar entradas e produzir saídas, esses módulos podem ser combinados para formar programas maiores, inspirando-se nos módulos NN do PyTorch, mas adaptados para aplicações LM. Otimizador: Os optimizadores em DSPy afinam os parâmetros dos programas DSPy, tais como prompts e pesos LLM, para maximizar as métricas especificadas como a precisão, melhorando a eficiência do programa.</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">Porquê Milvus em DSPy<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">

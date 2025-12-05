@@ -53,7 +53,7 @@ title: Knowhere
     </button></h2><p>下図は、MilvusアーキテクチャにおけるKnowhereの位置を示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
 <p>一番下の層はシステム・ハードウェアです。その上にサードパーティのインデックス・ライブラリが配置されています。一番上のレイヤでは、KnowhereはCGOを介してインデックスノードやクエリノードとやり取りします。</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Knowhereの利点<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
@@ -101,7 +101,7 @@ title: Knowhere
 <h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>基底クラス</h4><p><code translate="no">DataObj</code> <code translate="no">Size()</code> は の唯一の仮想メソッドです。Indexクラスは 、&quot;size_&quot;というフィールドを継承しています。また、Index クラスには と の 2 つの仮想メソッドがあります。 から派生した クラスは、すべてのベクトル・インデックスの仮想基底クラスです。 は、 、 、 、 などのメソッドを提供します。<code translate="no">DataObj</code> <code translate="no">DataObj</code> <code translate="no">Serialize()</code> <code translate="no">Load()</code> <code translate="no">Index</code> <code translate="no">VecIndex</code> <code translate="no">VecIndex</code> <code translate="no">Train()</code> <code translate="no">Query()</code> <code translate="no">GetStatistics()</code> <code translate="no">ClearStatistics()</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
    </span> <span class="img-wrapper"> <span>基底クラス</span> </span></p>
 <p>その他のインデックス・タイプを上図の右側にいくつか示します。</p>
 <ul>
@@ -111,20 +111,20 @@ title: Knowhere
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>ブルートフォース検索</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
 <p>厳密に言えば、<code translate="no">IDMAP</code> はインデックスではなく、ブルートフォース検索に使用されます。ベクトルがデータベースに挿入される際、データ学習もインデックス構築も必要ない。検索は挿入されたベクトル・データに対して直接行われる。</p>
 <p>しかし、コードの一貫性を保つために、<code translate="no">IDMAP</code> は<code translate="no">VecIndex</code> クラスを継承し、その仮想インターフェースもすべて継承している。<code translate="no">IDMAP</code> の使い方は他のインデックスと同じである。</p>
 <h4 id="IVF-indices" class="common-anchor-header">IVFインデックス</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
 <p>IVF（転置ファイル）インデックスは最も頻繁に使用される。<code translate="no">IVF</code> クラスは<code translate="no">VecIndex</code> と<code translate="no">FaissBaseIndex</code> から派生し、さらに<code translate="no">IVFSQ</code> と<code translate="no">IVFPQ</code> へと拡張される。<code translate="no">GPUIVF</code> は<code translate="no">GPUIndex</code> と<code translate="no">IVF</code> から派生する。そして<code translate="no">GPUIVF</code> はさらに<code translate="no">GPUIVFSQ</code> と<code translate="no">GPUIVFPQ</code> に拡張される。</p>
 <p><code translate="no">IVFSQHybrid</code> は、独自に開発したハイブリッド・インデックスである。粗い量子化器はGPUで実行され、バケット内の検索はCPUで実行される。このタイプのインデックスは、GPUの計算能力を活用することで、CPUとGPU間のメモリコピーの発生を減らすことができる。 は、 と同じ想起率を持つが、より優れた性能を持つ。<code translate="no">IVFSQHybrid</code> <code translate="no">GPUIVFSQ</code> </p>
 <p><code translate="no">BinaryIDMAP</code> と<code translate="no">BinaryIVF</code> は<code translate="no">FaissBaseBinaryIndex</code> と<code translate="no">VecIndex</code> から派生したものである。</p>
 <h4 id="Third-party-indices" class="common-anchor-header">サードパーティ・インデックス</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>サード・パーティ・インデックス</span> </span></p>
 <p>現在、Faiss以外のサードパーティ・インデックスとしてサポートされているのは、ツリーベース・インデックス<code translate="no">Annoy</code> とグラフベース・インデックス<code translate="no">HNSW</code> の2種類のみである。これら 2 つの一般的で頻繁に使用されるサードパーティ・インデックスは、いずれも<code translate="no">VecIndex</code> から派生したものである。</p>
 <h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Knowhere へのインデックスの追加<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">

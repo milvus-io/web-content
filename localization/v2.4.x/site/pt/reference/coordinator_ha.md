@@ -39,7 +39,7 @@ title: Coordenador HA
     </button></h2><p>Na versão 2.2.3, o Milvus implementa alta disponibilidade para os coordenadores, fazendo com que eles trabalhem no modo ativo-em espera, mitigando possíveis pontos únicos de falha (SPoFs) que podem resultar em indisponibilidade do serviço.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>Coordenador HA</span> </span></p>
 <p>A figura acima ilustra a forma como os coordenadores funcionam no modo de espera ativa. Quando um par de coordenadores é iniciado, eles se registram no etcd usando seu ID de servidor e competem pela função ativa. O coordenador que conseguir alugar a função ativa do etcd começará a servir, e o outro coordenador do par permanecerá em espera, observando a função ativa e pronto a servir se o coordenador ativo morrer.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">Habilitar o coordenador HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">

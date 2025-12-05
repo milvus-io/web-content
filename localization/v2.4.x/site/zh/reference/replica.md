@@ -37,7 +37,7 @@ title: 内存内复制
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
    </span> <span class="img-wrapper"> <span>副本可用性</span> </span></p>
 <p>利用内存中副本，Milvus 可以在多个查询节点上加载相同的数据段。如果一个查询节点出现故障或忙于处理当前的搜索请求，当另一个查询节点到达时，系统可将新请求发送到拥有相同段复制的空闲查询节点。</p>
 <h3 id="Performance" class="common-anchor-header">性能</h3><p>内存中复制允许您利用额外的 CPU 和内存资源。如果你的数据集相对较小，但又想利用额外的硬件资源提高读取吞吐量，这将非常有用。整体 QPS（每秒查询次数）和吞吐量都能显著提高。</p>
@@ -60,7 +60,7 @@ title: 内存内复制
     </button></h2><p>内存复制以复制组的形式组织。每个副本组都包含<a href="https://milvus.io/docs/v2.1.x/glossary.md#Sharding">分片</a>副本。每个分片副本都有一个流副本和一个历史副本，分别对应于分片（即 DML 通道）中不断增长和封存的<a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">分段</a>。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
    </span> <span class="img-wrapper"> <span>内存复制工作原理示例</span> </span></p>
 <h3 id="Replica-group" class="common-anchor-header">副本组</h3><p>副本组由多个<a href="https://milvus.io/docs/v2.1.x/four_layers.md#Query-node">查询节点</a>组成，负责处理历史数据和副本。</p>
 <h3 id="Shard-replica" class="common-anchor-header">分片副本</h3><p>分片副本由流式副本和历史副本组成，二者属于同一个<a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Shard">分片</a>。副本组中碎片副本的数量由指定 Collections 中碎片的数量决定。</p>

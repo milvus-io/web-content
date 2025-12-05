@@ -24,6 +24,6 @@ summary: >-
     </button></h1><p>Milvus è il database vettoriale leader tra gli utenti aziendali e vanta l'approvazione di aziende importanti come Nvidia, Roblox, AT&amp;T e altre ancora. Di seguito è riportato un elenco di aziende che hanno integrato con successo Milvus nelle loro applicazioni.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
    </span> <span class="img-wrapper"> <span>Adottatori di Milvus</span> </span></p>
 <p>Visitate la <a href="https://milvus.io/use-cases">pagina dei casi d'uso di Milvus</a> per scoprire come i leader del settore utilizzano Milvus per potenziare le loro applicazioni AI e accelerare la crescita aziendale.</p>

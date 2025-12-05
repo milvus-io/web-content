@@ -40,7 +40,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
     </button></h2><p>下図は最も単純なバニラRAGパイプラインを示している。まず、ドキュメントチャンクがベクターストア（<a href="https://milvus.io/docs">Milvusや</a> <a href="https://zilliz.com/cloud">Zilliz cloudなど</a>）にロードされます。次に、ベクターストアはクエリに関連するTop-Kのチャンクを検索する。これらの関連チャンクは<a href="https://zilliz.com/glossary/large-language-models-(llms)">LLMの</a>コンテキストプロンプトに注入され、最終的にLLMは最終的な回答を返す。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -87,7 +87,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">仮定の質問の作成</h3><p>仮定の質問を作成するには、LLMを利用して、各文書チャンク内のコンテンツについてユーザーが質問する可能性のある複数の質問を生成します。ユーザーの実際のクエリがLLMに到達する前に、ベクトルストアは実際のクエリに関連する最も関連性の高い仮定の質問を、対応するドキュメントチャンクとともに取得し、LLMに転送します。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -95,7 +95,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (仮説的文書埋め込み)</h3><p>HyDEはHypothetical Document Embeddingsの略。LLMを活用し、文脈情報のないユーザーからの問い合わせに対して、「<strong><em>仮説文書</em></strong>」または<strong><em>偽の</em></strong>回答を作成します。この偽の回答はベクトル埋め込みに変換され、ベクトルデータベース内の最も関連性の高い文書チャンクにクエリーされる。その後、ベクトルデータベースはトップKの最も関連性の高いドキュメントチャンクを検索し、LLMと元のユーザークエリに送信し、最終的な回答を生成する。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -110,7 +110,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <p>これらのサブクエリができたら、それらをすべてベクトル埋め込みに変換してベクトルデータベースに送る。そしてベクトル・データベースは、各サブクエリに最も関連性の高いTop-Kの文書チャンクを見つける。最後に、LLMはこの情報を使ってより良い回答を生成する。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -122,7 +122,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <p><strong><em>ステップバック質問"Milvusが扱えるデータセットサイズの上限は？"</em></strong></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -146,7 +146,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">文書チャンクを自動的にマージする</h3><p>インデックスを構築する際、子チャンクとそれに対応する親チャンクという2つの粒度レベルを採用することができます。まず、より細かいレベルで子チャンクを検索する。最初の<strong><em>k個の</em></strong>子チャンクから特定の数<strong><em>n</em></strong>個の子チャンクが同じ親チャンクに属する場合、この親チャンクを文脈情報としてLLMに提供する。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -154,7 +154,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">階層インデックスの構築</h3><p>文書に対するインデックスを作成する場合、文書の要約に対するインデックスと、文書のチャンクに対するインデックスの2つのレベルのインデックスを作成することができる。ベクトル検索プロセスは2つの段階からなる。まず、要約に基づいて関連文書をフィルタリングし、その後、これらの関連文書の中だけで対応する文書チャンクを検索する。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -163,7 +163,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <p>一般的な補助検索アルゴリズムには、<a href="https://milvus.io/docs/embed-with-bm25.md">BM25の</a>ような語彙頻度ベースの手法や、<a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Spladeの</a>ようなスパース埋め込みを利用した大きなモデルがある。再順位付けアルゴリズムには、RRFや、BERTのようなアーキテクチャに似た<a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoderの</a>ような、より洗練されたモデルがある。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -187,7 +187,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <h3 id="Sentence-Window-Retrieval" class="common-anchor-header">センテンスウィンドウの検索</h3><p>基本的なRAGシステムでは、LLMに与えられる文書チャンクは、検索された埋め込みチャンクを包含する大きなウィンドウである。これにより、LLMに提供される情報には、より広い範囲の文脈の詳細が含まれるようになり、情報損失が最小限に抑えられる。センテンスウィンドウ検索技術は、埋め込み検索に使われる文書チャンクと、LLMに提供されるチャンクを切り離す。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -195,7 +195,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <h3 id="Meta-data-Filtering" class="common-anchor-header">メタデータのフィルタリング</h3><p>より正確な回答を得るために、LLMに渡す前に、時間やカテゴリーなどのメタデータをフィルタリングすることで、検索された文書を絞り込むことができる。例えば、複数年にわたる財務報告書が検索された場合、希望する年に基づいてフィルタリングすることで、特定の要件を満たすように情報を絞り込むことができます。この方法は、図書館コレクションのコンテンツ検索など、広範なデータと詳細なメタデータがある状況で効果的です。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -218,7 +218,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">LLMプロンプトの圧縮</h3><p>検索された文書チャンク内のノイズ情報は、RAGの最終的な回答の精度に大きな影響を与える可能性がある。LLMの限られたプロンプトウィンドウもまた、より正確な回答のためのハードルとなる。この課題に対処するために、私たちは無関係な詳細を圧縮し、重要な段落を強調し、検索された文書塊の全体的な文脈の長さを短くすることができる。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -227,7 +227,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <p>この観察に基づき、回答品質を向上させるために、検索されるチャンクの順序を調整することができる。複数の知識チャンクを検索する場合、相対的に信頼度の低いチャンクは中央に、相対的に信頼度の高いチャンクは両端に配置される。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -252,7 +252,7 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <p>自然言語推論(NLI)モデルのような効率的なリフレクション手法や、検証のためのインターネット検索のような追加ツールを使ってリフレクションを行うことができる。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -260,13 +260,13 @@ title: RAGパイプラインのパフォーマンスを向上させる方法
 <h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">エージェントによるクエリルーティング</h3><p>単純な質問に答えるためにRAGシステムを使うことは、誤解を招いたり、誤解を招くような情報から推論されたりする可能性があるため、使う必要がないこともある。そのような場合、問い合わせの段階でエージェントをルーターとして使用することができます。このエージェントは、クエリがRAGパイプラインを通過する必要があるかどうかを評価する。そうでなければ、LLMが直接問い合わせに対応する。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

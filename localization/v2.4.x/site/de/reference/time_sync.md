@@ -89,7 +89,7 @@ summary: Erfahren Sie mehr über das Zeitsynchronisationssystem in Milvus.
 <p>Ein TSO-Zeitstempel ist ein Wert des Typs <code translate="no">uint64</code>, der sich aus einem physischen und einem logischen Teil zusammensetzt. Die folgende Abbildung veranschaulicht das Format eines Zeitstempels.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
    </span> <span class="img-wrapper"> <span>TSO_Zeitstempel</span>. </span></p>
 <p>Wie dargestellt, sind die 46 Bits am Anfang der physische Teil, nämlich die UTC-Zeit in Millisekunden. Die letzten 18 Bits sind der logische Teil.</p>
 <h2 id="Time-synchronization-system-timetick" class="common-anchor-header">Zeitsynchronisationssystem (Timetick)<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
@@ -114,19 +114,19 @@ summary: Erfahren Sie mehr über das Zeitsynchronisationssystem in Milvus.
   <code translate="no">MsgStream</code> ist ein Wrapper der Nachrichtenwarteschlange, die in Milvus 2.0 standardmäßig Pulsar ist.</div>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
 <p>Ein allgemeiner Grundsatz besagt, dass die Zeitstempel der<code translate="no">InsertMsgs</code> aus demselben Proxy inkrementell sein müssen ( <code translate="no">MsgStream</code>). Für die Zeitstempel der <code translate="no">InsertMsgs</code> von verschiedenen Proxys gibt es jedoch keine solche Regel.</p>
 <p>Die folgende Abbildung ist ein Beispiel für <code translate="no">InsertMsgs</code> in einem <code translate="no">MsgStream</code>. Das Snippet enthält fünf <code translate="no">InsertMsgs</code>, von denen drei von <code translate="no">Proxy1</code> und die übrigen von <code translate="no">Proxy2</code> stammen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
 <p>Die Zeitstempel der drei <code translate="no">InsertMsgs</code> von <code translate="no">Proxy1</code> sind inkrementell, ebenso wie die der beiden <code translate="no">InsertMsgs</code> von <code translate="no">Proxy2</code>. Es gibt jedoch keine bestimmte Reihenfolge zwischen <code translate="no">Proxy1</code> und <code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> .</p>
 <p>Ein mögliches Szenario ist, dass Milvus beim Lesen einer Nachricht mit dem Zeitstempel <code translate="no">110</code> von <code translate="no">Proxy2</code> feststellt, dass sich die Nachricht mit dem Zeitstempel <code translate="no">80</code> von <code translate="no">Proxy1</code> noch im <code translate="no">MsgStream</code> befindet. Daher führt Milvus ein Zeitsynchronisationssystem, timetick, ein, um sicherzustellen, dass beim Lesen einer Nachricht von <code translate="no">MsgStream</code> alle Nachrichten mit kleineren Zeitstempelwerten konsumiert werden müssen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>time_synchronisation</span> </span></p>
 <p>Wie in der Abbildung oben dargestellt,</p>
 <ul>
@@ -137,7 +137,7 @@ summary: Erfahren Sie mehr über das Zeitsynchronisationssystem in Milvus.
 <p>Die folgende Abbildung ist ein Beispiel für die <code translate="no">Msgstream</code> mit einem eingefügten Zeitstempel.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>Zeitstempel</span> </span></p>
 <p><code translate="no">MsgStream</code> verarbeitet die Nachrichten in Stapeln entsprechend dem Zeitstempel, um sicherzustellen, dass die ausgegebenen Nachrichten den Anforderungen des Zeitstempels entsprechen.</p>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">

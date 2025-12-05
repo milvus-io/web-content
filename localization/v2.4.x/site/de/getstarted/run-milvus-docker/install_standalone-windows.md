@@ -205,7 +205,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 <p>Sie können überprüfen, ob die Virtualisierung aktiviert ist, indem Sie die Registerkarte <strong>Leistung</strong> im <strong>Task-Manager</strong> aufrufen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
    </span> <span class="img-wrapper"> <span>Virtualisierung im Task-Manager</span> </span></p>
 <p>Wenn die Virtualisierung deaktiviert ist, müssen Sie möglicherweise die BIOS-Einstellungen der Firmware Ihres Motherboards überprüfen. Die Art und Weise, wie Sie die Virtualisierung in den BIOS-Einstellungen aktivieren können, variiert je nach Motherboard-Hersteller. Für die ASUS-Hauptplatine können Sie zum Beispiel <a href="https://www.asus.com/support/faq/1043786/">diesen Artikel</a> zur Aktivierung der Virtualisierung lesen.</p>
 <p>Anschließend müssen Sie Ihren Computer neu starten und Hyper-V aktivieren. Weitere Informationen finden Sie in diesem <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft-Artikel</a>.</p></li>
@@ -234,7 +234,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <p>Stellen Sie sicher, dass Sie Docker Desktop im Administratormodus gestartet haben. Klicken Sie dazu mit der rechten Maustaste auf <strong>Docker Desktop</strong> und wählen Sie <strong>Als Administrator ausführen</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
    </span> <span class="img-wrapper"> <span>Docker Desktop als Administrator starten</span> </span></p></li>
 </ol>
 <h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">Wie kann ich mit WSL-bezogenen Problemen bei der Bereitstellung von Milvus umgehen?</h3><p>Wenn bei der Ausführung von Milvus von WSL 2 aus WSL-bezogene Probleme auftreten, müssen Sie möglicherweise überprüfen, ob Sie Docker Desktop wie folgt für die Verwendung der WSL 2-basierten Engine konfiguriert haben.</p>
@@ -242,21 +242,21 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <li><p>Stellen Sie sicher, dass unter <strong>Einstellungen</strong> &gt; <strong>Allgemein</strong> die Option "WSL 2-basierte Engine verwenden" aktiviert ist. </p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Verwenden der WSL 2-basierten Engine in den Docker Desktop-Einstellungen</span> </span></p></li>
 <li><p>Wählen Sie aus Ihren installierten WSL 2-Distributionen diejenige aus, für die Sie die Docker-Integration aktivieren möchten, indem Sie zu: <strong>Einstellungen</strong> &gt; <strong>Ressourcen</strong> &gt; <strong>WSL-Integration</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Wählen Sie WSL 2-Distributionen in den Docker-Desktop-Einstellungen aus</span> </span>.</p></li>
 </ol>
 <h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Wie kann ich mit den volumenbezogenen Fehlern umgehen, die während des Starts von Milvus angezeigt werden, das <code translate="no">Read config failed</code> liest?</h3><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Fehlermeldung "Read config failed" beim Starten von Milvus</span> </span></p>
 <p>Um die Fehlermeldung beim Starten von Milvus "Read config failed" zu beheben, müssen Sie überprüfen, ob das in den Milvus-Container eingebundene Volume korrekt ist. Wenn das Volume korrekt in den Container eingebunden ist, können Sie den Befehl <code translate="no">docker exec</code> verwenden, um in den Container zu gehen und den Ordner <strong>/milvus/configs</strong> wie folgt aufzulisten.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>Milvus-Konfigurationsdateien auflisten</span> </span></p>
 <p></p>

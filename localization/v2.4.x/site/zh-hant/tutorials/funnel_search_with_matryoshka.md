@@ -24,7 +24,7 @@ title: 使用 Matryoshka 嵌入式進行漏斗搜尋
 <p>傳統上，我們會在建立索引之前先應用量化或降維方法來降低儲存需求。例如，我們可以使用積量化 (Product Quantization, PQ) 降低精確度，或使用主成分分析 (Principal Component Analysis, PCA) 降低維數，以節省儲存空間。這些方法會分析整個向量集，找出更精簡的向量集，以維持向量之間的語意關係。</p>
 <p>這些標準方法雖然有效，但只減少一次精確度或維度，而且是在單一尺度上。但如果我們可以同時維持多層的細節，就像金字塔般越來越精確的表達方式，那又會如何呢？</p>
 <p>進入 Matryoshka 嵌入式。以俄羅斯嵌套娃娃命名 (見插圖)，這些聰明的結構將多層表徵嵌入單一向量中。與傳統的後處理方法不同，Matryoshka 內嵌會在初始訓練過程中學習這種多尺度結構。其結果非常顯著：完整的嵌入不僅能捕捉輸入的語意，而且每個嵌套的子集前綴（前半部分、前四分之一等）都能提供連貫的表達，即使不那麼詳細。</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.4.x/assets/funnel-search.png' width='100%'></div>
+<div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
 <p>在本筆記簿中，我們將探討如何使用 Matryoshka 內嵌與 Milvus 來進行語意搜尋。我們說明一種稱為「漏斗搜尋」（funnel search）的演算法，它可以讓我們在嵌入維度的一小部分子集上執行相似性搜尋，而不會大幅降低召回率。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
@@ -562,7 +562,7 @@ Leopard in the Snow
         ></path>
       </svg>
     </button></h2><p>以下是不同方法的搜尋結果比較：</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.4.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-the-shining.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 我們展示了如何使用 Matryoshka 嵌入與 Milvus 來執行更有效率的語意搜尋演算法，稱為「漏斗搜尋」。我們也探討了演算法中重排序 (reranking) 與剪枝 (pruning) 步驟的重要性，以及當初始候選名單過小時的失敗模式。最後，我們討論了在形成子嵌套時，維度的順序是如何重要的 - 它必須與模型被訓練的方式相同。或者說，正因為模型是以某種方式訓練出來的，嵌入的前綴才會有意義。現在您知道如何實作 Matryoshka 嵌入和漏斗搜尋，以降低語意搜尋的儲存成本，而不會犧牲太多的檢索效能！

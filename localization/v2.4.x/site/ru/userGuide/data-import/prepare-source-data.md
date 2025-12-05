@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>Целевая коллекция требует сопоставления исходных данных с ее схемой. На диаграмме ниже показано, как приемлемые исходные данные сопоставляются со схемой целевой коллекции.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>Сопоставление данных со схемой</span> </span></p>
 <p>Вам следует внимательно изучить свои данные и в соответствии с ними разработать схему целевой коллекции.</p>
 <p>Если взять в качестве примера данные JSON на диаграмме выше, то в списке строк есть две сущности, каждая строка имеет шесть полей. Схема коллекции выборочно включает четыре: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong> и <strong>scalar_2</strong>.</p>

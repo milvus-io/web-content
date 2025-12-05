@@ -268,6 +268,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>图像</span> </span></p>
 <p>在这里，我们展示了数据的良好聚类，你可以将鼠标悬停在点上查看它们所代表的文本。通过本笔记本，我们希望您能学会如何使用 HDBSCAN 对 Milvus 的嵌入数据进行高效聚类，这也可以应用于其他类型的数据。结合大型语言模型，这种方法可以对您的数据进行大规模的深入分析。</p>

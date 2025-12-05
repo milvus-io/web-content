@@ -23,7 +23,7 @@ title: Milvusアーキテクチャの概要
 <p>Milvusは、ストレージとコンピューティングの分離とコンピューティングノードの水平スケーラビリティを特徴とする共有ストレージアーキテクチャを採用しています。データプレーンとコントロールプレーンの分離という原則に従い、Milvusはアクセスレイヤー、コーディネータサービス、ワーカーノード、ストレージという<a href="/docs/ja/v2.4.x/four_layers.md">4つのレイヤーで</a>構成されている。これらのレイヤーは、スケーリングやディザスタリカバリに関しては相互に独立している。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
    </span> <span class="img-wrapper"> <span>アーキテクチャ図</span> </span></p>
 <p>図によると、インターフェースは以下のカテゴリーに分類できる：</p>
 <ul>

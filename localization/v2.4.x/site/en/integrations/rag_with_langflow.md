@@ -63,21 +63,21 @@ title: Building a RAG System Using Langflow with Milvus
 <p>Then a dashboard will pop up as shown below:
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" />
     <span>langflow</span>
   </span>
 </p>
 <p>We want to create a <strong>Vector Store</strong> project, so we first need to click the <strong>New Project</strong> button. A panel would pop up, and we choose the <strong>Vector Store RAG</strong> option:
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" />
     <span>panel</span>
   </span>
 </p>
 <p>Once the Vector Store Rag project is successfully created, the default vector store is AstraDB, whereas we want to use Milvus. So we need to replace these two astraDB module with Milvus in order to use Milvus as vector store.
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" />
     <span>astraDB</span>
   </span>
 </p>
@@ -89,7 +89,7 @@ title: Building a RAG System Using Langflow with Milvus
 </ol>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
     <span>Milvus Structure demo</span>
   </span>
 </p>
@@ -100,7 +100,7 @@ title: Building a RAG System Using Langflow with Milvus
 </ol>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
     <span>why milvus</span>
   </span>
 </p>

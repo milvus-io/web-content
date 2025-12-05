@@ -272,6 +272,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>imagen</span> </span></p>
 <p>Aquí, demostramos que los datos están bien agrupados, y se puede pasar el ratón sobre los puntos para comprobar el texto que representan. Con este cuaderno, esperamos que aprenda a utilizar HDBSCAN para agrupar incrustaciones con Milvus de forma eficiente, lo que también puede aplicarse a otros tipos de datos. Combinado con grandes modelos lingüísticos, este enfoque permite un análisis más profundo de sus datos a gran escala.</p>

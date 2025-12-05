@@ -39,7 +39,7 @@ title: 标量索引
 <p>当 Milvus 收到带有这种布尔表达式的搜索请求时，它会将布尔表达式解析为抽象语法树（AST），以生成用于属性筛选的物理计划。然后，Milvus 在每个分段中应用物理计划，生成一个<a href="/docs/zh/v2.4.x/bitset.md">比特集</a>作为过滤结果，并将结果作为向量搜索参数，以缩小搜索范围。在这种情况下，向量搜索的速度在很大程度上依赖于属性过滤的速度。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>分段属性过滤</span> </span></p>
 <p>标量字段索引是一种确保属性过滤速度的方法，它以特定方式对标量字段值进行排序，以加快信息检索速度。</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">标量字段索引算法<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ title: 标量索引
 <p>倒排索引有两个主要部分：术语字典和倒排列表。术语词典包括按字母顺序排列的所有标记词，而倒排列表则包含每个词出现的文档列表。这种设置使得点查询和范围查询比暴力搜索更快、更有效。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
    </span> <span class="img-wrapper"> <span>倒排索引图</span> </span></p>
 <p>使用倒排索引的优势在以下操作中尤为明显：</p>
 <ul>

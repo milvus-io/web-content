@@ -36,13 +36,13 @@ title: Question Answering System
 <p></br></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/qa_chatbot.png" alt="QA_Chatbot" class="doc-image" id="qa_chatbot" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/qa_chatbot.png" alt="QA_Chatbot" class="doc-image" id="qa_chatbot" />
     <span>QA_Chatbot</span>
   </span>
 </p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/qa_chatbot_demo.png" alt="QA_chatbot_demo" class="doc-image" id="qa_chatbot_demo" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/qa_chatbot_demo.png" alt="QA_chatbot_demo" class="doc-image" id="qa_chatbot_demo" />
     <span>QA_chatbot_demo</span>
   </span>
 </p>

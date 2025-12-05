@@ -74,7 +74,7 @@ title: Milvus 与 DSPy 集成
     </button></h2><p>构建 LLM 管道需要许多组件。在此，我们将介绍一些关键组件，以提供对 DSPy 操作符的高层次理解。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>DSPy 模块</span> </span></p>
 <p>签名：DSPy 中的签名作为声明性规范，概述了模块的输入/输出行为，在任务执行中指导语言模型。 模块：DSPy 模块是利用语言模型（LM）的程序的基本组件。它们抽象了各种提示技术，如思维链或 ReAct，并可用于处理任何 DSPy Signature。凭借可学习的参数以及处理输入和产生输出的能力，这些模块可以组合成更大的程序，其灵感来源于 PyTorch 中的 NN 模块，但专为 LM 应用量身定制。 优化器：DSPy 中的优化器可对 DSPy 程序的参数（如提示和 LLM 权重）进行微调，以最大限度地提高指定指标（如准确性），从而提高程序效率。</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">为什么在 DSPy 中使用 Milvus<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">

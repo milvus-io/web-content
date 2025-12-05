@@ -58,7 +58,7 @@ title: Резервное копирование Milvus
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Архитектура Milvus Backup</span> </span></p>
 <p>Milvus Backup обеспечивает резервное копирование и восстановление метаданных, сегментов и данных между экземплярами Milvus. Он предоставляет северные интерфейсы, такие как CLI, API и модуль Go на базе gRPC, для гибкого управления процессами резервного копирования и восстановления.</p>
 <p>Milvus Backup считывает метаданные и сегменты коллекции из исходного экземпляра Milvus для создания резервной копии. Затем он копирует данные коллекции из корневого пути исходного экземпляра Milvus и сохраняет скопированные данные в корневом пути резервной копии.</p>

@@ -25,7 +25,7 @@ title: الرسم البياني RAG مع ميلفوس
 <p>في هذا الدفتر، نقدم في هذا الدفتر نهجًا بسيطًا ولكنه قوي لتحسين أداء هذا السيناريو بشكل كبير. وهو عبارة عن نموذج RAG بسيط مع استرجاع متعدد الاتجاهات ثم إعادة ترتيبها، ولكنه يطبق RAG Graph RAG منطقيًا، ويحقق أداءً متطورًا في التعامل مع الأسئلة متعددة القفزات. دعونا نرى كيف يتم تنفيذه.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 )[0]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">توسيع الرسم البياني الفرعي</h3><p>نحن نستخدم الكيانات والعلاقات المسترجعة لتوسيع المخطط الفرعي والحصول على العلاقات المرشحة، ثم دمجها من الطريقتين. فيما يلي مخطط انسيابي لعملية توسيع المخطط الفرعي:  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

@@ -37,7 +37,7 @@ title: Reranking
         ></path>
       </svg>
     </button></h2><p>La figure suivante illustre l'exécution d'une recherche hybride dans Milvus et met en évidence le rôle du reclassement dans le processus.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
 <p>Le reclassement dans la recherche hybride est une étape cruciale qui consolide les résultats provenant de plusieurs champs vectoriels, garantissant que le résultat final est pertinent et correctement hiérarchisé. Actuellement, Milvus propose les stratégies de reclassement suivantes :</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>: Cette approche fusionne les résultats en calculant une moyenne pondérée des scores (ou distances vectorielles) de différentes recherches vectorielles. Elle attribue des pondérations en fonction de l'importance de chaque champ vectoriel.</p></li>
@@ -63,7 +63,7 @@ title: Reranking
 <ul>
 <li><p><strong>Collecte des scores au cours de la recherche</strong>: Rassembler les résultats et leurs scores à partir de différents itinéraires de recherche vectorielle.</p></li>
 <li><p><strong>Normalisation des scores</strong>: Normaliser les scores de chaque itinéraire dans une fourchette [0,1], où les valeurs proches de 1 indiquent une plus grande pertinence. Cette normalisation est cruciale car la distribution des scores varie en fonction des différents types de métriques. Par exemple, la distance pour IP est comprise entre [-∞,+∞], tandis que la distance pour L2 est comprise entre [0,+∞]. Milvus utilise la fonction <code translate="no">arctan</code>, transformant les valeurs dans l'intervalle [0,1] afin de fournir une base normalisée pour les différents types de métriques.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
 <li><p><strong>Attribution de poids</strong>: Attribuer un poids <code translate="no">w𝑖</code> à chaque itinéraire de recherche vectorielle. Les utilisateurs spécifient les poids, qui reflètent la fiabilité, la précision ou d'autres mesures pertinentes de la source de données. Chaque poids est compris entre [0,1].</p></li>
 <li><p><strong>Fusion des scores</strong>: Calculer une moyenne pondérée des scores normalisés pour obtenir le score final. Les résultats sont ensuite classés en fonction de ces notes, de la plus élevée à la plus basse, afin de générer les résultats finaux triés.</p></li>
 </ul>

@@ -41,7 +41,7 @@ summary: >-
 <p>Milvusは堅牢なデータモデリング機能を備えており、非構造化データやマルチモーダルデータを構造化されたコレクションに整理することができます。Milvusは、一般的な数値型や文字型、様々なベクトル型、配列、集合、JSONなど、様々な属性モデリングに対応したデータ型を幅広くサポートしており、複数のデータベースシステムを管理する手間を省くことができます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>非構造化データ、エンベッディング、Milvus</span> </span></p>
 <p>Milvusは3つのデプロイメントモードを提供し、Jupyter Notebooksでのローカルプロトタイピングから数百億のベクトルを管理する大規模なKubernetesクラスタまで、幅広いデータスケールをカバーします：</p>
 <ul>
@@ -88,7 +88,7 @@ summary: >-
 <p>Milvusのクラウドネイティブで高度に分離されたシステムアーキテクチャは、データの成長に合わせてシステムを継続的に拡張できることを保証します：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Milvusの高度に分離されたシステム・アーキテクチャ</span> </span></p>
 <p>Milvus自体は完全にステートレスであるため、Kubernetesやパブリッククラウドの助けを借りて容易に拡張することができる。また、Milvusのコンポーネントは高度に分離されており、最も重要な3つのタスクである検索、データ挿入、インデックス作成/コンパクションは、複雑なロジックを分離し、並列化しやすいプロセスとして設計されている。これにより、対応するクエリー・ノード、データ・ノード、インデックス・ノードがそれぞれ独立してスケールアップ、スケールアウトできるようになり、パフォーマンスとコスト効率が最適化されます。</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvusがサポートする検索の種類<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">

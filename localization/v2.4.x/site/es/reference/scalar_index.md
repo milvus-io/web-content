@@ -39,7 +39,7 @@ title: Índice escalar
 <p>Cuando Milvus recibe una solicitud de búsqueda con una expresión booleana de este tipo, analiza la expresión booleana en un árbol de sintaxis abstracta (AST) para generar un plan físico para el filtrado de atributos. A continuación, Milvus aplica el plan físico en cada segmento para generar un <a href="/docs/es/v2.4.x/bitset.md">conjunto de bits</a> como resultado del filtrado e incluye el resultado como parámetro de búsqueda vectorial para acotar el ámbito de búsqueda. En este caso, la velocidad de las búsquedas vectoriales depende en gran medida de la velocidad del filtrado de atributos.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>Filtrado de atributos en un segmento</span> </span></p>
 <p>La indexación de campos escalares es una forma de garantizar la velocidad del filtrado por atributos ordenando los valores de los campos escalares de una forma determinada para acelerar la recuperación de la información.</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">Algoritmos de indexación de campos escalares<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ title: Índice escalar
 <p>Un índice invertido tiene dos componentes principales: un diccionario de términos y una lista invertida. El diccionario de términos incluye todas las palabras tokenizadas ordenadas alfabéticamente, mientras que la lista invertida contiene la lista de documentos donde aparece cada palabra. Esta configuración hace que las consultas puntuales y por rango sean mucho más rápidas y eficaces que las búsquedas por fuerza bruta.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
    </span> <span class="img-wrapper"> <span>Diagrama del índice invertido</span> </span></p>
 <p>Las ventajas de utilizar un índice invertido son especialmente evidentes en las siguientes operaciones:</p>
 <ul>

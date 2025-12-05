@@ -58,7 +58,7 @@ title: Milvus-Sicherung
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Aufbau von Milvus Backup</span> </span></p>
 <p>Milvus Backup ermöglicht die Sicherung und Wiederherstellung von Metadaten, Segmenten und Daten über Milvus-Instanzen hinweg. Es bietet Northbound-Schnittstellen, wie CLI, API und gRPC-basiertes Go-Modul, für eine flexible Manipulation der Sicherungs- und Wiederherstellungsprozesse.</p>
 <p>Milvus Backup liest Sammlungsmetadaten und -segmente aus der Milvus-Quellinstanz, um ein Backup zu erstellen. Dann kopiert es Sammlungsdaten aus dem Stammverzeichnis der Milvus-Quellinstanz und speichert die kopierten Daten im Stammverzeichnis der Sicherung.</p>

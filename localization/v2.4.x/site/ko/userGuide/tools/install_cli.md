@@ -96,5 +96,5 @@ title: Milvus_CLI 설치
 <p><a href="https://github.com/zilliztech/milvus_cli/releases">GitHub에서</a>.exe 파일을 다운로드하고 실행하여 Milvus_CLI를 설치합니다. 성공하면 다음 그림과 같이 <code translate="no">milvus_cli-&lt;version&gt;.exe</code> 가 나타납니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
    </span> <span class="img-wrapper"> <span>Milvus_CLI</span> </span></p>

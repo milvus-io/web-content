@@ -56,7 +56,7 @@ title: Milvus 백업
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Milvus 백업 아키텍처</span> </span></p>
 <p>Milvus Backup은 Milvus 인스턴스 전반에서 메타데이터, 세그먼트 및 데이터의 백업과 복원을 용이하게 합니다. 백업 및 복원 프로세스의 유연한 조작을 위해 CLI, API 및 gRPC 기반 Go 모듈과 같은 노스바운드 인터페이스를 제공합니다.</p>
 <p>Milvus Backup은 소스 Milvus 인스턴스에서 컬렉션 메타데이터와 세그먼트를 읽어 백업을 생성합니다. 그런 다음 소스 Milvus 인스턴스의 루트 경로에서 컬렉션 데이터를 복사하고 복사된 데이터를 백업 루트 경로에 저장합니다.</p>

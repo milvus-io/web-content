@@ -428,7 +428,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>بنج</span> </span></p>
 <p>كما نرى، متجه الاستعلام قريب من المتجهات المسترجعة. على الرغم من أن المتجهات المسترجعة ليست ضمن دائرة قياسية ذات نصف قطر ثابت مركزها الاستعلام، يمكننا أن نرى أنها لا تزال قريبة جدًا من متجه الاستعلام على المستوى ثنائي الأبعاد.</p>
 <p>يمكن أن يسهّل استخدام تقنيات تقليل الأبعاد فهم المتجهات واستكشاف الأخطاء وإصلاحها. آمل أن تتمكن من الحصول على فهم أفضل للمتجهات من خلال هذا البرنامج التعليمي.</p>

@@ -25,7 +25,7 @@ title: Graph RAG mit Milvus
 <p>In diesem Notizbuch stellen wir einen einfachen, aber leistungsfähigen Ansatz vor, um die Leistung dieses Szenarios erheblich zu verbessern. Es handelt sich um ein einfaches RAG-Paradigma mit mehrseitigem Retrieval und anschließendem Reranking, das jedoch Graph RAG logisch implementiert und bei der Behandlung von Multi-Hop-Fragen eine Spitzenleistung erzielt. Schauen wir uns an, wie es implementiert ist.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 )[0]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">Erweitern des Untergraphen</h3><p>Wir verwenden die abgerufenen Entitäten und Beziehungen, um den Teilgraphen zu erweitern und die Kandidatenbeziehungen zu erhalten, und führen sie dann auf beiden Wegen zusammen. Hier ist ein Flussdiagramm des Prozesses der Teilgraphenerweiterung:  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

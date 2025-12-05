@@ -457,7 +457,7 @@ object TransformDemo extends App {
 <p>You can install a library in different ways. This screenshot shows uploading a jar from local to the cluster. For more information, see <a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">Cluster Libraries</a> in the Databricks documentation.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
     <span>Install Databricks Library</span>
   </span>
 </p></li>

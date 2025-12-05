@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>A coleção de destino requer o mapeamento dos dados de origem para o seu esquema. O diagrama abaixo mostra como os dados de origem aceitáveis são mapeados para o esquema de uma coleção de destino.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>Mapear dados para o esquema</span> </span></p>
 <p>Deve examinar cuidadosamente os seus dados e conceber o esquema da coleção de destino em conformidade.</p>
 <p>Tomando como exemplo os dados JSON no diagrama acima, existem duas entidades na lista de linhas, cada linha com seis campos. O esquema da coleção inclui seletivamente quatro: <strong>id</strong>, <strong>vetor</strong>, <strong>scalar_1</strong> e <strong>scalar_2</strong>.</p>

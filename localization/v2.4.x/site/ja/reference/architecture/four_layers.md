@@ -100,7 +100,7 @@ title: ストレージ／コンピューティングの分離
 <p>Milvusは「データとしてのログ」の原則に従っているため、Milvusは物理テーブルを保持せず、ログの永続性とスナップショットログによってデータの信頼性を保証している。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>ログメカニズム</span> </span></p>
 <p>ログブローカーはMilvusのバックボーンである。生来のpub-subメカニズムにより、データの永続化と読み書き分解を担っています。上の図は、ログブローカー（ログシーケンスの維持）とログサブスクライバーの2つの役割にシステムが分割されているメカニズムを簡略化して示しています。後者は、ローカルデータを更新するためにログシーケンスを購読し、読み取り専用コピーの形でサービスを提供する。pub-subメカニズムは、変更データキャプチャ（CDC）とグローバルに分散された展開という点で、システムを拡張する余地もある。</p>
 <h2 id="Whats-next" class="common-anchor-header">次のページ<button data-href="#Whats-next" class="anchor-icon" translate="no">

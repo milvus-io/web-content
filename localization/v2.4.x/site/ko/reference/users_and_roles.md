@@ -23,7 +23,7 @@ title: '사용자, 권한 및 역할'
 <p>다음 그림은 개체, 권한, 역할 및 사용자 간의 관계를 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
    </span> <span class="img-wrapper"> <span>USERS_AND_ROOLS</span> </span></p>
 <h2 id="Key-concepts" class="common-anchor-header">주요 개념<button data-href="#Key-concepts" class="anchor-icon" translate="no">
       <svg translate="no"

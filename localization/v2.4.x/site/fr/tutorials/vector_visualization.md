@@ -428,7 +428,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>Comme nous pouvons le voir, le vecteur de la requête est proche des vecteurs retrouvés. Bien que les vecteurs retrouvés ne se situent pas à l'intérieur d'un cercle standard de rayon fixe centré sur la requête, nous pouvons voir qu'ils sont toujours très proches du vecteur de la requête sur le plan 2D.</p>
 <p>L'utilisation de techniques de réduction de la dimensionnalité peut faciliter la compréhension des vecteurs et la résolution des problèmes. Nous espérons que ce tutoriel vous permettra de mieux comprendre les vecteurs.</p>

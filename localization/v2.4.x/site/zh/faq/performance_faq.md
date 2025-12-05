@@ -24,8 +24,8 @@ title: 性能常见问题
 <p>下图是在 sift50m 数据集和 IVF_SQ8 索引上运行的测试结果，其中比较了不同<code translate="no">nlist</code>/<code translate="no">nprobe</code> 对的召回率和查询性能。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
-   </span> <span class="img-wrapper"> <span>准确性测试</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>性能测试</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
+   </span> <span class="img-wrapper"> <span>准确性测试</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>性能测试</span> </span></p>
 <h4 id="Why-do-queries-sometimes-take-longer-on-smaller-datasets" class="common-anchor-header">为什么在较小的数据集上查询有时需要更长的时间？</h4><p>查询操作是在分段上进行的。索引可减少查询数据段所需的时间。如果一个数据段没有索引，Milvus 就会对原始数据进行暴力搜索，从而大大增加查询时间。</p>
 <p>因此，在小数据集（Collection）上查询通常需要更长的时间，因为它没有建立索引。这是因为数据段的大小还没有达到<code translate="no">rootCoord.minSegmentSizeToEnableindex</code> 设置的建立索引阈值。调用<code translate="no">create_index()</code> 可强制 Milvus 为已达到阈值但尚未自动建立索引的数据段建立索引，从而显著提高查询性能。</p>
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">哪些因素会影响 CPU 占用率？</h4><p>当 Milvus 正在建立索引或运行查询时，CPU 使用率会增加。一般来说，除了使用 Annoy（在单线程上运行）外，索引构建都是 CPU 密集型工作。</p>

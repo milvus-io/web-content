@@ -96,5 +96,5 @@ title: تثبيت Milvus_CLI
 <p>قم بتنزيل ملف .exe من <a href="https://github.com/zilliztech/milvus_cli/releases">GitHub</a> وقم بتشغيله لتثبيت Milvus_CLI. في حالة نجاحه، يظهر <code translate="no">milvus_cli-&lt;version&gt;.exe</code> كما هو موضح في الشكل التالي.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
    </span> <span class="img-wrapper"> <span>Milvus_CLI</span> </span></p>

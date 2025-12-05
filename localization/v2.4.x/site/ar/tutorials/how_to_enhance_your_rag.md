@@ -42,7 +42,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
     </button></h2><p>يوضح الرسم البياني أدناه خط أنابيب RAG الأكثر بساطة. أولاً، يتم تحميل أجزاء المستند في مخزن متجه (مثل <a href="https://milvus.io/docs">Milvus</a> أو <a href="https://zilliz.com/cloud">Zilliz cloud</a>). بعد ذلك، يسترجع مخزن المتجهات الأجزاء الأكثر صلة بالاستعلام من أعلى K. ثم يتم حقن هذه الأجزاء ذات الصلة في موجه سياق <a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM،</a> وأخيرًا، يقوم LLM بإرجاع الإجابة النهائية.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -89,7 +89,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">إنشاء أسئلة افتراضية</h3><p>ينطوي إنشاء أسئلة افتراضية على استخدام LLM لتوليد أسئلة متعددة قد يطرحها المستخدمون حول المحتوى الموجود في كل جزء من المستند. قبل أن يصل استعلام المستخدم الفعلي إلى LLM، يسترجع مخزن المتجهات الأسئلة الافتراضية الأكثر صلة بالاستعلام الحقيقي، إلى جانب أجزاء المستندات المقابلة لها، ويعيد توجيهها إلى LLM.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -97,7 +97,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (تضمينات المستندات الافتراضية)</h3><p>يرمز HyDE إلى تضمينات المستندات الافتراضية. وهي تستفيد من LLM لصياغة &quot;مستند<strong><em>افتراضي</em></strong>&quot; أو إجابة <strong><em>وهمية</em></strong> استجابةً لاستعلام المستخدم الخالي من المعلومات السياقية. يتم بعد ذلك تحويل هذه الإجابة الوهمية إلى تضمينات متجهة واستخدامها للاستعلام عن أجزاء المستند الأكثر صلة داخل قاعدة بيانات متجهة. بعد ذلك، تسترجع قاعدة البيانات المتجهة أجزاء المستندات الأكثر صلة من أعلى K وتنقلها إلى LLM واستعلام المستخدم الأصلي لتوليد الإجابة النهائية.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -112,7 +112,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <p>بمجرد أن نحصل على هذه الاستعلامات الفرعية، نرسلها جميعًا إلى قاعدة بيانات المتجهات بعد تحويلها إلى تضمينات متجهة. ثم تعثر قاعدة بيانات المتجهات على أجزاء المستندات الأكثر صلة بكل استعلام فرعي. أخيرًا، يستخدم LLM هذه المعلومات لتوليد إجابة أفضل.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -124,7 +124,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <p><strong><em>سؤال الاسترجاع: "ما هو الحد الأقصى لحجم مجموعة البيانات التي يمكن لـ Milvus التعامل معها؟</em></strong></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -148,7 +148,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">دمج أجزاء المستند تلقائيًا</h3><p>عند إنشاء فهرس، يمكننا استخدام مستويين من التفصيل: القطع الفرعية والقطع الأصلية المقابلة لها. في البداية، نبحث عن القطع الفرعية على مستوى أدق من التفاصيل. بعد ذلك، نطبق استراتيجية الدمج: إذا كان عدد محدد، <strong><em>n،</em></strong> من القطع الفرعية من أول <strong><em>k</em></strong> من القطع الفرعية ينتمي إلى نفس القطعة الأصل، فإننا نقدم هذه القطعة الأصل إلى LLM كمعلومات سياقية.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -156,7 +156,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">إنشاء مؤشرات هرمية</h3><p>عند إنشاء فهارس للمستندات، يمكننا إنشاء فهرس من مستويين: فهرس لملخصات المستندات وآخر لقطع المستندات. تتألف عملية البحث المتجه من مرحلتين: في البداية، نقوم بتصفية المستندات ذات الصلة بناءً على الملخص، وبعد ذلك، نسترجع أجزاء المستندات المقابلة حصريًا ضمن هذه المستندات ذات الصلة.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -165,7 +165,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <p>تتضمن خوارزميات الاسترجاع التكميلية الشائعة أساليب قائمة على التردد المعجمي مثل <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a> أو النماذج الكبيرة التي تستخدم التضمينات المتفرقة مثل <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. وتتضمن خوارزميات إعادة الترتيب خوارزميات إعادة الترتيب RRF أو نماذج أكثر تعقيدًا مثل <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder،</a> والتي تشبه البنى الشبيهة بـ BERT.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -189,7 +189,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <h3 id="Sentence-Window-Retrieval" class="common-anchor-header">استرجاع نافذة الجملة</h3><p>في نظام RAG الأساسي، يكون جزء المستند المُعطى إلى LLM عبارة عن نافذة أكبر تشمل جزء التضمين المسترجع. وهذا يضمن أن تتضمن المعلومات المقدمة إلى آلة استرجاع المستندات LLM نطاقًا أوسع من التفاصيل السياقية، مما يقلل من فقدان المعلومات. تعمل تقنية استرجاع نافذة الجملة على فصل جزء المستند المستخدم في استرجاع التضمين عن الجزء المقدم إلى آلية إدارة التعلم.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -197,7 +197,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <h3 id="Meta-data-Filtering" class="common-anchor-header">تصفية البيانات الوصفية</h3><p>لضمان الحصول على إجابات أكثر دقة، يمكننا تنقيح المستندات المسترجعة عن طريق تصفية البيانات الوصفية مثل الوقت والفئة قبل تمريرها إلى LLM. على سبيل المثال، إذا تم استرجاع التقارير المالية التي تغطي سنوات متعددة، فإن التصفية بناءً على السنة المطلوبة ستعمل على تنقيح المعلومات لتلبية متطلبات محددة. تثبت هذه الطريقة فعاليتها في الحالات التي تحتوي على بيانات شاملة وبيانات وصفية مفصلة، مثل استرجاع المحتوى في مجموعات المكتبات.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -220,7 +220,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">ضغط موجه LLM</h3><p>يمكن أن تؤثر معلومات التشويش داخل أجزاء المستندات المسترجعة بشكل كبير على دقة الإجابة النهائية لـ RAG. كما تمثل نافذة المطالبة المحدودة في LLMs أيضًا عقبة أمام الحصول على إجابات أكثر دقة. ولمعالجة هذا التحدي، يمكننا ضغط التفاصيل غير ذات الصلة، والتأكيد على الفقرات الرئيسية، وتقليل طول السياق الكلي لقطع المستندات المسترجعة.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -229,7 +229,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <p>استنادًا إلى هذه الملاحظة، يمكننا تعديل ترتيب الأجزاء المسترجعة لتحسين جودة الإجابة: عند استرجاع أجزاء معرفية متعددة، يتم وضع الأجزاء ذات الثقة المنخفضة نسبيًا في الوسط، ويتم وضع الأجزاء ذات الثقة العالية نسبيًا في الطرفين.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -254,7 +254,7 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <p>يمكننا إجراء الانعكاس باستخدام طرق انعكاس فعالة مثل نماذج الاستدلال على اللغة الطبيعية (NLI) أو أدوات إضافية مثل عمليات البحث على الإنترنت للتحقق.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -262,13 +262,13 @@ title: كيفية تحسين أداء خط أنابيب RAG الخاص بك
 <h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">توجيه الاستعلام مع وكيل</h3><p>في بعض الأحيان، لا نضطر إلى استخدام نظام RAG للإجابة على الأسئلة البسيطة لأنه قد يؤدي إلى مزيد من سوء الفهم والاستدلال من المعلومات المضللة. في مثل هذه الحالات، يمكننا استخدام وكيل كموجه في مرحلة الاستعلام. يقوم هذا الوكيل بتقييم ما إذا كان الاستعلام يحتاج إلى المرور عبر خط أنابيب RAG. إذا كان الأمر كذلك، يتم البدء في خط أنابيب RAG اللاحق؛ وإلا فإن LLM يعالج الاستعلام مباشرةً.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

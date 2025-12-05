@@ -33,7 +33,7 @@ title: Gunakan ColPali untuk Pengambilan Multi-Modal dengan Milvus
 <p>Model pengambilan modern biasanya menggunakan satu penyematan untuk merepresentasikan teks atau gambar. Akan tetapi, ColBERT adalah model neural yang menggunakan daftar penyematan untuk setiap contoh data dan menggunakan operasi "MaxSim" untuk menghitung kemiripan antara dua teks. Selain data tekstual, gambar, tabel, dan diagram juga mengandung informasi yang kaya, yang sering diabaikan dalam pencarian informasi berbasis teks.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

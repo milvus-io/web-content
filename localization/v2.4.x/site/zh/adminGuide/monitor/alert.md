@@ -76,32 +76,32 @@ summary: 了解如何在 Grafana 中为 Milvus 服务创建警报。
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1.添加新查询</h3><p>要为 Milvus 组件的内存使用情况添加警报，请编辑内存面板。然后，添加一个带有度量的新查询：<code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>Alert_metric</span> </span></p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2.保存仪表盘</h3><p>保存仪表盘，等待几分钟就能看到警报。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
    </span> <span class="img-wrapper"> <span>警报仪表盘</span> </span></p>
 <p>Grafana 警报查询不支持模板变量。因此，应添加第二个查询，标签中不包含任何模板变量。第二个查询默认命名为 "A"。您可以点击下拉菜单重新命名。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>警报查询</span> </span></p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3.添加警报通知</h3><p>要接收警报通知，请添加一个 &quot;通知通道&quot;。然后在 &quot;发送至 &quot;字段中指定通道。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
    </span> <span class="img-wrapper"> <span>警报通知</span> </span></p>
 <p>如果警报成功创建并触发，您将收到如下截图所示的通知。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>通知信息</span> </span></p>
 <p>要删除警报，请进入 "警报 "面板并点击删除按钮。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
    </span> <span class="img-wrapper"> <span>删除警报</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -26,13 +26,13 @@ title: Performance FAQ
 <p>The following charts are results from a test running on the sift50m dataset and IVF_SQ8 index, which compares recall and query performance of different <code translate="no">nlist</code>/<code translate="no">nprobe</code> pairs.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
     <span>Accuracy test</span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" />
     <span>Performance test</span>
   </span>
 </p>

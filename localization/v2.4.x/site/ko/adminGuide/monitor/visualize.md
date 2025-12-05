@@ -62,16 +62,16 @@ summary: Grafana에서 Milvus 메트릭을 시각화하는 방법을 알아보�
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" />
    </span> <span class="img-wrapper"> <span>다운로드_및_임포트</span> </span></p>
 <h3 id="2-View-metrics" class="common-anchor-header">2. 메트릭 보기</h3><p>모니터링하려는 Milvus 인스턴스를 선택합니다. 그러면 Milvus 구성 요소 패널을 볼 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" />
    </span> <span class="img-wrapper"> <span>Select_instance</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" />
    </span> <span class="img-wrapper"> <span>그라파나_패널</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

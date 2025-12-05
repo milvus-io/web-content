@@ -78,7 +78,7 @@ title: Bitset
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
    </span> <span class="img-wrapper"> <span>Ordem dos eventos DML</span> </span></p>
 <h3 id="Case-one" class="common-anchor-header">Caso um</h3><p>Neste caso, um utilizador define <code translate="no">time_travel</code> como 150, o que significa que o utilizador efectua uma consulta sobre dados que satisfazem <code translate="no">ts = 150</code>. O processo de geração do conjunto de bits é ilustrado na Figura 1.</p>
 <p>Durante a fase inicial de filtragem, o <code translate="no">filter_bitset</code> deve ser <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>, em que as entidades [1, 3, 5, 7] são marcadas como <code translate="no">1</code> porque são resultados de filtragem válidos.</p>
@@ -88,7 +88,7 @@ title: Bitset
 <p>Agora temos dois conjuntos de bits após a viagem no tempo e a filtragem de atributos: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> e <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> .  Combine estes dois conjuntos de bits com o operador lógico binário <code translate="no">OR</code>. O valor final de result_bitset é <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code>, o que significa que apenas as entidades 1 e 3 serão computadas na fase seguinte de pesquisa ou consulta.</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
    <span>Figura 1. Pesquisa com viagem no tempo = 150</span>. </span></p>
 <h3 id="Case-two" class="common-anchor-header">Caso dois</h3><p>Neste caso, o utilizador define <code translate="no">time_travel</code> como 250. O processo de geração do conjunto de bits é ilustrado na Figura 2.</p>
 <p>Tal como no caso um, o <code translate="no">filter_bitset</code> inicial é <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>.</p>
@@ -97,7 +97,7 @@ title: Bitset
 <p>Agora temos dois conjuntos de bits após a Viagem no Tempo e a filtragem de atributos: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> e <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> . Combine esses dois conjuntos de bits com o operador lógico binário <code translate="no">OR</code>. O conjunto de bits resultante é <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>. Ou seja, apenas as entidades [1, 3, 5, 7] serão computadas na fase de pesquisa ou consulta seguinte.</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
    <span>Figura 2. Pesquisa com Viagem no Tempo = 250</span>. </span></p>
 <h3 id="Case-three" class="common-anchor-header">Caso três</h3><p>Neste caso, o utilizador define <code translate="no">time_travel</code> como 350. O processo de geração do conjunto de bits é ilustrado na Figura 3.</p>
 <p>Tal como nos casos anteriores, o <code translate="no">filter_bitset</code> inicial é <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>.</p>
@@ -106,7 +106,7 @@ title: Bitset
 <p>Agora temos dois conjuntos de bits após a viagem no tempo e a filtragem de atributos: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> e <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code> .  Combine estes dois conjuntos de bits com o operador lógico binário <code translate="no">OR</code>. O último <code translate="no">result_bitset</code> é <code translate="no">[0, 1, 0, 1, 0, 1, 1, 1]</code>. Ou seja, apenas as entidades [1, 3, 5] serão computadas na fase de pesquisa ou consulta seguinte.</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
    <span>Figura 3. Pesquisa com Viagem no Tempo = 350</span>. </span></p>
 <h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

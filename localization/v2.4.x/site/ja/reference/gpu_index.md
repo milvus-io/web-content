@@ -23,7 +23,7 @@ title: GPUインデックス
 <p>GPUインデックスを使用すると、CPUインデックスを使用した場合と比較して、必ずしもレイテンシが減少するとは限らないことに注意することが重要です。スループットを完全に最大化したいのであれば、極めて高いリクエスト・プレッシャーか、大量のクエリ・ベクターが必要になります。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>パフォーマンス</span> </span></p>
 <p>MilvusのGPUサポートはNvidia<a href="https://rapids.ai/">RAPIDS</a>チームによって提供されています。以下は現在MilvusがサポートしているGPUインデックスタイプです。</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">

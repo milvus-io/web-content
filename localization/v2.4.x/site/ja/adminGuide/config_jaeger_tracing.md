@@ -138,9 +138,9 @@ jaeger-query   &lt;none&gt;   *       <span class="hljs-number">192.168</span><s
 <p>以下のスクリーンショットは、Jaeger UIでMilvusの検索操作時と負荷収集操作時のトレースを表示したものです：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
    </span> <span class="img-wrapper"> <span>トレース検索リクエスト</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
    </span> <span class="img-wrapper"> <span>トレース負荷収集リクエスト</span> </span></p>

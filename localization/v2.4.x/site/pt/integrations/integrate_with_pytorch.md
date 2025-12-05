@@ -293,5 +293,5 @@ plt.savefig(<span class="hljs-string">&#x27;search_result.png&#x27;</span>)
 <p>A imagem do resultado da pesquisa deve ser semelhante à seguinte:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/integrate_with_pytorch.png" alt="Image search output" class="doc-image" id="image-search-output" />
    </span> <span class="img-wrapper"> <span>Resultado da pesquisa de imagens</span> </span></p>

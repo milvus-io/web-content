@@ -138,9 +138,9 @@ jaeger-query   &lt;none&gt;   *       <span class="hljs-number">192.168</span><s
 <p>下面的截图显示了 Jaeger UI，其中有 Milvus 在搜索操作和加载 Collections 操作符期间的痕迹：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
    </span> <span class="img-wrapper"> <span>跟踪搜索请求</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
    </span> <span class="img-wrapper"> <span>跟踪负载收集请求</span> </span></p>

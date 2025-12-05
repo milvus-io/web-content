@@ -37,7 +37,7 @@ title: Neueinstufung
         ></path>
       </svg>
     </button></h2><p>Die folgende Abbildung veranschaulicht die Ausführung einer hybriden Suche in Milvus und verdeutlicht die Rolle des Rerankings in diesem Prozess.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
 <p>Das Reranking in der hybriden Suche ist ein entscheidender Schritt, der die Ergebnisse aus mehreren Vektorfeldern konsolidiert und so sicherstellt, dass die endgültige Ausgabe relevant und genau priorisiert ist. Gegenwärtig bietet Milvus die folgenden Strategien für das Reranking:</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>: Bei diesem Ansatz werden die Ergebnisse zusammengeführt, indem ein gewichteter Durchschnitt der Punktzahlen (oder Vektorabstände) aus verschiedenen Vektorsuchen berechnet wird. Die Gewichtung erfolgt auf der Grundlage der Bedeutung der einzelnen Vektorfelder.</p></li>
@@ -63,7 +63,7 @@ title: Neueinstufung
 <ul>
 <li><p><strong>Sammeln von Bewertungen während des Retrievals</strong>: Sammeln von Ergebnissen und deren Punktzahlen aus verschiedenen Vektorabfragen.</p></li>
 <li><p><strong>Normalisierung der Punktzahl</strong>: Normalisierung der Punktzahlen von jeder Route auf einen Bereich von [0,1], wobei Werte, die näher an 1 liegen, eine höhere Relevanz anzeigen. Diese Normalisierung ist von entscheidender Bedeutung, da die Punkteverteilungen je nach Art der Metrik variieren. Zum Beispiel reicht der Abstand für IP von [-∞,+∞], während der Abstand für L2 von [0,+∞] reicht. Milvus verwendet die Funktion <code translate="no">arctan</code>, die Werte in den Bereich [0,1] transformiert, um eine standardisierte Basis für verschiedene Metrik-Typen zu schaffen.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
 <li><p><strong>Gewichtszuweisung</strong>: Weisen Sie jedem Vektorabrufweg ein Gewicht <code translate="no">w𝑖</code> zu. Die Benutzer legen die Gewichte fest, die die Zuverlässigkeit, Genauigkeit oder andere relevante Metriken der Datenquelle widerspiegeln. Jede Gewichtung reicht von [0,1].</p></li>
 <li><p><strong>Punkte-Fusion</strong>: Berechnet einen gewichteten Durchschnitt der normalisierten Ergebnisse, um das endgültige Ergebnis zu ermitteln. Die Ergebnisse werden dann auf der Grundlage dieser höchsten bis niedrigsten Punktzahl geordnet, um die endgültigen sortierten Ergebnisse zu erhalten.</p></li>
 </ul>

@@ -65,12 +65,12 @@ summary: OpenShift에서 Milvus 클러스터를 배포하는 방법을 알아보
 <li><p>OpenShift 콘솔에서 <strong>워크로드</strong> &gt; <strong>파드로</strong> 이동합니다. 프로젝트 <strong>cert-manager를</strong> 선택합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
    </span> <span class="img-wrapper"> <span>cert-manager-1</span> </span></p></li>
 <li><p>모든 파드가 준비되었는지 확인합니다. 예를 들어, 아래 이미지는 파드가 아직 시작 중임을 나타냅니다. 모든 파드가 준비될 때까지 기다립니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
    </span> <span class="img-wrapper"> <span>cert-manager-2</span> </span></p></li>
 </ol></li>
 </ol>

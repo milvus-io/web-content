@@ -78,7 +78,7 @@ title: 比特集
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
    </span> <span class="img-wrapper"> <span>DML 事件的顺序</span> </span></p>
 <h3 id="Case-one" class="common-anchor-header">情况一</h3><p>在这种情况下，用户将<code translate="no">time_travel</code> 设置为 150，这意味着用户对满足<code translate="no">ts = 150</code> 的数据进行查询。比特集生成过程如图 1 所示。</p>
 <p>在初始过滤阶段，<code translate="no">filter_bitset</code> 应该是<code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code> ，其中实体 [1, 3, 5, 7] 被标记为<code translate="no">1</code> ，因为它们是有效的过滤结果。</p>
@@ -88,7 +88,7 @@ title: 比特集
 <p>现在，经过时间旅行和属性过滤后，我们有两个比特集：<code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> 和<code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 。  将这两个比特集与<code translate="no">OR</code> 二进制逻辑运算符相结合。result_bitset 的最终值是<code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> ，这意味着在接下来的搜索或查询阶段将只计算实体 1 和 3。</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
    <span>图 1.时间旅行 = 150 时的搜索</span>。 </span></p>
 <h3 id="Case-two" class="common-anchor-header">案例二</h3><p>在这种情况下，用户将<code translate="no">time_travel</code> 设置为 250。比特集生成过程如图 2 所示。</p>
 <p>与情况一一样，初始<code translate="no">filter_bitset</code> 是<code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code> 。</p>
@@ -97,7 +97,7 @@ title: 比特集
 <p>现在，经过时间旅行和属性过滤后，我们有两个比特集：<code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 和<code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 。使用<code translate="no">OR</code> 二进制逻辑运算符将这两个比特集合并。结果_比特集是<code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 。也就是说，在接下来的搜索或查询阶段，将只计算实体 [1, 3, 5, 7]。</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
    <span>图 2.时间旅行 = 250 时的搜索</span> </span></p>
 <h3 id="Case-three" class="common-anchor-header">情况三</h3><p>在这种情况下，用户将<code translate="no">time_travel</code> 设置为 350。比特集生成过程如图 3 所示。</p>
 <p>与前面的情况一样，初始<code translate="no">filter_bitset</code> 是<code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 。</p>
@@ -106,7 +106,7 @@ title: 比特集
 <p>现在，经过时间旅行和属性过滤后，我们有两个比特集：<code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 和<code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code> 。  将这两个比特集与<code translate="no">OR</code> 二进制逻辑运算符相结合。最终的<code translate="no">result_bitset</code> 是<code translate="no">[0, 1, 0, 1, 0, 1, 1, 1]</code> 。也就是说，在接下来的搜索或查询阶段，将只计算实体 [1, 3, 5]。</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
    <span>图 3.时间旅行 = 350 的搜索</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

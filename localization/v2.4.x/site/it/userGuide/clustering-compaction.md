@@ -42,13 +42,13 @@ summary: >-
     </button></h2><p>Milvus memorizza le entità in arrivo in segmenti all'interno di una raccolta e chiude un segmento quando è pieno. In tal caso, viene creato un nuovo segmento per accogliere altre entità. Di conseguenza, le entità sono distribuite arbitrariamente tra i segmenti. Questa distribuzione richiede che Milvus cerchi in più segmenti per trovare i vicini più vicini a un determinato vettore di query.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Senza clustering Compattazione</span> </span></p>
 <p>Se Milvus può distribuire le entità tra i segmenti in base ai valori di un campo specifico, l'ambito di ricerca può essere limitato all'interno di un segmento, migliorando così le prestazioni di ricerca.</p>
 <p>La<strong>compattazione dei cluster</strong> è una funzione di Milvus che ridistribuisce le entità tra i segmenti di una raccolta in base ai valori di un campo scalare. Per attivare questa funzione, è necessario selezionare un campo scalare come <strong>chiave di raggruppamento</strong>. Questo permette a Milvus di ridistribuire le entità in un segmento quando i valori della chiave di clustering rientrano in un intervallo specifico. Quando si attiva una compattazione del clustering, Milvus genera/aggiorna un indice globale chiamato <strong>PartitionStats</strong>, che registra la relazione di mappatura tra i segmenti e i valori delle chiavi di clustering.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Con la compattazione del clustering</span> </span></p>
 <p>Utilizzando <strong>PartitionStats</strong> come riferimento, Milvus può sfrondare i dati irrilevanti quando riceve una richiesta di ricerca/query che contiene un valore di chiave di clustering e restringe l'ambito di ricerca all'interno dei segmenti che corrispondono al valore, migliorando così le prestazioni della ricerca. Per maggiori dettagli sul miglioramento delle prestazioni, consultare i test di benchmark.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Utilizzare la compattazione del clustering<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">

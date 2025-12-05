@@ -44,7 +44,7 @@ summary: >-
 <p>Milvus предлагает надежные возможности моделирования данных, позволяющие организовать неструктурированные или мультимодальные данные в структурированные коллекции. Он поддерживает широкий спектр типов данных для моделирования различных атрибутов, включая распространенные числовые и символьные типы, различные векторные типы, массивы, наборы и JSON, избавляя вас от необходимости поддерживать несколько систем баз данных.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>Неструктурированные данные, вкрапления и Milvus</span> </span></p>
 <p>Milvus предлагает три режима развертывания, охватывающие широкий диапазон масштабов данных - от локального прототипирования в Jupyter Notebooks до массивных кластеров Kubernetes, управляющих десятками миллиардов векторов:</p>
 <ul>
@@ -91,7 +91,7 @@ summary: >-
 <p>Облачная нативная архитектура Milvus с высокой степенью развязки обеспечивает непрерывное расширение системы по мере роста данных:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Архитектура системы Milvus с высокой степенью разделения</span> </span></p>
 <p>Сама система Milvus полностью статична, поэтому ее можно легко масштабировать с помощью Kubernetes или публичных облаков. Кроме того, компоненты Milvus хорошо развязаны, а три наиболее важные задачи - поиск, вставка данных и индексирование/уплотнение - спроектированы как легко распараллеливаемые процессы с разделенной сложной логикой. Это гарантирует, что соответствующий узел запроса, узел данных и узел индекса могут масштабироваться как вверх, так и вниз независимо друг от друга, оптимизируя производительность и экономическую эффективность.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Типы поиска, поддерживаемые Milvus<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">

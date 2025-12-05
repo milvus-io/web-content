@@ -158,7 +158,7 @@ kubectl --namespace monitoring port-forward $POD_NAME <span class="hljs-number">
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
    </span> <span class="img-wrapper"> <span>데이터 소스</span> </span></p>
 <h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3. Milvus 로그 쿼리</h3><p>Loki를 데이터 소스로 추가한 후, Grafana에서 Milvus 로그를 쿼리합니다:</p>
 <ol>
@@ -168,5 +168,5 @@ kubectl --namespace monitoring port-forward $POD_NAME <span class="hljs-number">
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
    </span> <span class="img-wrapper"> <span>쿼리</span> </span></p>

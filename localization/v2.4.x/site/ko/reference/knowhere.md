@@ -53,7 +53,7 @@ title: Knowhere
     </button></h2><p>아래 그림은 Milvus 아키텍처에서 Knowhere의 위치를 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
 <p>가장 아래쪽 계층은 시스템 하드웨어입니다. 그 위에는 타사 인덱스 라이브러리가 있습니다. 최상위 계층에서 Knowhere는 CGO를 통해 인덱스 노드 및 쿼리 노드와 상호 작용하며, 이를 통해 Go 패키지는 C 코드를 호출할 수 있습니다.</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Knowhere의 장점<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
@@ -101,7 +101,7 @@ title: Knowhere
 <h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>베이스 클래스</h4><p><code translate="no">DataObj</code> 는 Knowhere의 모든 데이터 구조의 베이스 클래스입니다. <code translate="no">Size()</code> 는 <code translate="no">DataObj</code> 에서 유일한 가상 메서드입니다. Index 클래스는 <code translate="no">DataObj</code> 에서 &quot;size_&quot;라는 필드를 상속합니다. Index 클래스에는 <code translate="no">Serialize()</code> 와 <code translate="no">Load()</code> 라는 두 개의 가상 메서드도 있습니다. <code translate="no">Index</code> 에서 파생된 <code translate="no">VecIndex</code> 클래스는 모든 벡터 인덱스의 가상 베이스 클래스입니다. <code translate="no">VecIndex</code> 는 <code translate="no">Train()</code>, <code translate="no">Query()</code>, <code translate="no">GetStatistics()</code>, <code translate="no">ClearStatistics()</code> 등의 메서드를 제공합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
    </span> <span class="img-wrapper"> <span>베이스 클래스</span> </span></p>
 <p>위 그림의 오른쪽에 몇 가지 다른 인덱스 유형이 나열되어 있습니다.</p>
 <ul>
@@ -111,20 +111,20 @@ title: Knowhere
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>무차별 대입 검색</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
 <p>엄밀히 말하면 <code translate="no">IDMAP</code> 은 인덱스가 아니라 무차별 대입 검색에 사용됩니다. 벡터가 데이터베이스에 삽입되면 데이터 학습이나 인덱스 구축이 필요하지 않습니다. 검색은 삽입된 벡터 데이터에 대해 직접 수행됩니다.</p>
 <p>그러나 코드 일관성을 위해 <code translate="no">IDMAP</code> 역시 모든 가상 인터페이스가 포함된 <code translate="no">VecIndex</code> 클래스를 상속합니다. <code translate="no">IDMAP</code> 의 사용법은 다른 인덱스와 동일합니다.</p>
 <h4 id="IVF-indices" class="common-anchor-header">IVF 인덱스</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
 <p>IVF(반전 파일) 인덱스는 가장 자주 사용됩니다. <code translate="no">IVF</code> 클래스는 <code translate="no">VecIndex</code> 및 <code translate="no">FaissBaseIndex</code> 에서 파생되고 <code translate="no">IVFSQ</code> 및 <code translate="no">IVFPQ</code> 로 확장됩니다. <code translate="no">GPUIVF</code> 는 <code translate="no">GPUIndex</code> 및 <code translate="no">IVF</code> 에서 파생됩니다. 그리고 <code translate="no">GPUIVF</code> 은 <code translate="no">GPUIVFSQ</code> 과 <code translate="no">GPUIVFPQ</code> 으로 더 확장됩니다.</p>
 <p><code translate="no">IVFSQHybrid</code> 는 자체 개발한 하이브리드 인덱스입니다. CPU에서 버킷을 검색하는 동안 GPU에서 거친 양자화기가 실행됩니다. 이러한 유형의 인덱스는 GPU의 연산 능력을 활용하여 CPU와 GPU 간의 메모리 복사 발생을 줄일 수 있습니다. <code translate="no">IVFSQHybrid</code> 은 <code translate="no">GPUIVFSQ</code> 과 동일한 리콜률을 가지지만 더 나은 성능을 제공합니다.</p>
 <p>바이너리 인덱스의 베이스 클래스 구조는 상대적으로 더 간단합니다. <code translate="no">BinaryIDMAP</code> 와 <code translate="no">BinaryIVF</code> 는 <code translate="no">FaissBaseBinaryIndex</code> 와 <code translate="no">VecIndex</code> 에서 파생됩니다.</p>
 <h4 id="Third-party-indices" class="common-anchor-header">서드파티 인덱스</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>서드파티 인덱스</span> </span></p>
 <p>현재 Faiss를 제외한 두 가지 유형의 타사 인덱스만 지원됩니다: 트리 기반 인덱스 <code translate="no">Annoy</code> 와 그래프 기반 인덱스 <code translate="no">HNSW</code>. 이 두 가지 일반적이고 자주 사용되는 타사 인덱스는 모두 <code translate="no">VecIndex</code> 에서 파생됩니다.</p>
 <h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Knowhere에 인덱스 추가하기<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">

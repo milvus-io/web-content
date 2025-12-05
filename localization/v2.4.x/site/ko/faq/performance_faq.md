@@ -24,8 +24,8 @@ title: 성능 FAQ
 <p>다음 차트는 서로 다른 <code translate="no">nlist</code>/<code translate="no">nprobe</code> 쌍의 리콜 및 쿼리 성능을 비교하는 sift50m 데이터 세트와 IVF_SQ8 인덱스에서 실행한 테스트의 결과입니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
-   </span> <span class="img-wrapper"> <span>정확도 테스트</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>성능 테스트</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
+   </span> <span class="img-wrapper"> <span>정확도 테스트</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>성능 테스트</span> </span></p>
 <h4 id="Why-do-queries-sometimes-take-longer-on-smaller-datasets" class="common-anchor-header">작은 데이터 세트에서 쿼리 시간이 더 오래 걸리는 이유는 무엇인가요?</h4><p>쿼리 작업은 세그먼트에서 수행됩니다. 인덱스는 세그먼트를 쿼리하는 데 걸리는 시간을 줄여줍니다. 세그먼트가 인덱싱되지 않은 경우, Milvus는 원시 데이터에 대한 무차별 검색을 사용하므로 쿼리 시간이 크게 늘어납니다.</p>
 <p>따라서 일반적으로 인덱스를 구축하지 않았기 때문에 작은 데이터 세트(컬렉션)에 대한 쿼리 시간이 더 오래 걸립니다. 이는 세그먼트의 크기가 <code translate="no">rootCoord.minSegmentSizeToEnableindex</code> 에서 설정한 인덱스 구축 임계값에 도달하지 않았기 때문입니다. <code translate="no">create_index()</code> 을 호출하여 임계값에 도달했지만 아직 자동으로 색인되지 않은 세그먼트를 강제로 색인하면 쿼리 성능이 크게 향상됩니다.</p>
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">CPU 사용량에 영향을 미치는 요인은 무엇인가요?</h4><p>Milvus가 인덱스를 구축하거나 쿼리를 실행할 때 CPU 사용량이 증가합니다. 일반적으로 인덱스 구축은 단일 스레드에서 실행되는 Annoy를 사용하는 경우를 제외하고는 CPU 집약적입니다.</p>

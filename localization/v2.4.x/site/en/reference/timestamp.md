@@ -64,7 +64,7 @@ summary: >-
 <p>To save you the trouble of understanding the <a href="https://github.com/milvus-io/milvus/blob/master/docs/design_docs/20211214-milvus_hybrid_ts.md">TSO</a> inside Milvus, as a user, you do not have to directly configure the <code translate="no">Guarantee_timestamp</code> parameter. You only need to choose the <a href="https://milvus.io/docs/v2.1.x/consistency.md">consistency level</a>, and Milvus automatically handles the <code translate="no">Guarantee_timestamp</code> parameter for you. Each consistency level corresponds to a certain <code translate="no">Guarantee_timestamp</code> value.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/Guarantee_Timestamp.png" alt="Guarantee_Timestamp" class="doc-image" id="guarantee_timestamp" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Guarantee_Timestamp.png" alt="Guarantee_Timestamp" class="doc-image" id="guarantee_timestamp" />
     <span>Guarantee_Timestamp</span>
   </span>
 .</p>
@@ -79,7 +79,7 @@ summary: >-
 <p>When there is an incoming search or query request, a query node compares the values of <code translate="no">Service_timestamp</code> and <code translate="no">Guarantee_timestamp</code>. There are mainly two scenarios.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/Service_Timestamp.png" alt="Service_Timestamp" class="doc-image" id="service_timestamp" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Service_Timestamp.png" alt="Service_Timestamp" class="doc-image" id="service_timestamp" />
     <span>Service_Timestamp</span>
   </span>
 .</p>
@@ -89,7 +89,7 @@ summary: >-
 <p>When there is an incoming search or query request,  there can be two scenarios.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/Graceful_Time.png" alt="Graceful_Time" class="doc-image" id="graceful_time" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Graceful_Time.png" alt="Graceful_Time" class="doc-image" id="graceful_time" />
     <span>Graceful_Time</span>
   </span>
 .</p>

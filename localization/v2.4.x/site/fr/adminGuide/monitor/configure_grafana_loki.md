@@ -160,7 +160,7 @@ kubectl --namespace monitoring port-forward $POD_NAME <span class="hljs-number">
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
    </span> <span class="img-wrapper"> <span>Source de données</span> </span></p>
 <h3 id="3-Query-Milvus-Logs" class="common-anchor-header">3. Interroger les journaux Milvus</h3><p>Après avoir ajouté Loki comme source de données, interrogez les journaux Milvus dans Grafana :</p>
 <ol>
@@ -170,5 +170,5 @@ kubectl --namespace monitoring port-forward $POD_NAME <span class="hljs-number">
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
    </span> <span class="img-wrapper"> <span>Interroger</span> </span></p>

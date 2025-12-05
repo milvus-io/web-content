@@ -35,7 +35,7 @@ title: 再ランキング
         ></path>
       </svg>
     </button></h2><p>以下の図はMilvusにおけるハイブリッド検索の実行を示しており、そのプロセスにおけるリランキングの役割を強調しています。</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
 <p>ハイブリッド検索における再ランク付けは、複数のベクトルフィールドからの結果を統合し、最終的な出力が関連性があり、正確に優先順位付けされていることを保証する重要なステップです。現在、Milvusは以下の再ランク付け戦略を提供しています：</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>:このアプローチは、異なるベクトル検索からのスコア（またはベクトル距離）の加重平均を計算することによって結果を統合します。各ベクトルフィールドの重要性に基づいて重み付けを行います。</p></li>
@@ -61,7 +61,7 @@ title: 再ランキング
 <ul>
 <li><p><strong>検索時にスコアを収集する</strong>：異なるベクトル検索ルートから検索結果とそのスコアを収集する。</p></li>
 <li><p><strong>スコアの正規化</strong>：各ルートからのスコアを[0,1]の範囲に正規化する。スコアの分布はメトリックの種類によって異なるため、この正規化は非常に重要である。例えば、IPの距離は[-∞,+∞]、L2の距離は[0,+∞]です。Milvusは<code translate="no">arctan</code> 関数を採用し、値を[0,1]の範囲に変換することで、異なるメトリックタイプに対して標準化された基準を提供します。</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
 <li><p><strong>重みの割り当て</strong>：各ベクトル検索ルートに重み（<code translate="no">w𝑖</code> ）を割り当てる。ユーザーは、データ・ソースの信頼性、精度、またはその他の適切なメトリックを反映する重みを指定します。各重みの範囲は [0,1] です。</p></li>
 <li><p><strong>スコア・フュージョン</strong>：正規化されたスコアの加重平均を計算し、最終的なスコアを導き出します。次に、この最高スコアから最低スコアに基づいて結果をランク付けし、最終的なソート結果を生成する。</p></li>
 </ul>

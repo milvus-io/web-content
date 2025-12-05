@@ -23,7 +23,7 @@ title: GPU 인덱스
 <p>GPU 인덱스를 사용한다고 해서 CPU 인덱스를 사용하는 것보다 지연 시간이 반드시 단축되는 것은 아니라는 점에 유의하세요. 처리량을 완전히 최대화하려면 요청 압력이 매우 높거나 쿼리 벡터의 수가 많아야 합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>성능</span> </span></p>
 <p>Milvus의 GPU 지원은 Nvidia <a href="https://rapids.ai/">RAPIDS</a> 팀에 의해 제공되고 있습니다. 현재 Milvus에서 지원하는 GPU 인덱스 유형은 다음과 같습니다.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">

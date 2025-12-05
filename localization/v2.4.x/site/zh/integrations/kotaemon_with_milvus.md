@@ -73,14 +73,14 @@ pip install -e <span class="hljs-string">&quot;libs/ktem&quot;</span>
       </svg>
     </button></h2><h3 id="1-Add-your-AI-models" class="common-anchor-header">1.添加人工智能模型</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>在<code translate="no">Resources</code> 选项卡中，您可以添加和设置您的 LLMs 和 Embeddings 模型。您可以添加多个模型，并将它们设置为活动或非活动。您只需提供至少一个。您也可以提供多个模型，以便在它们之间切换。</p>
 <h3 id="2-Upload-your-documents" class="common-anchor-header">2.上传文件</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -88,7 +88,7 @@ pip install -e <span class="hljs-string">&quot;libs/ktem&quot;</span>
 <p>默认情况下，所有应用程序数据都存储在<code translate="no">./ktem_app_data</code> 文件夹中。Milvus 数据库数据存储在<code translate="no">./ktem_app_data/user_data/vectorstore</code> 中。你可以备份或复制该文件夹，以便将安装转移到新机器上。</p>
 <h3 id="3-Chat-with-your-documents" class="common-anchor-header">3.与文件聊天</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

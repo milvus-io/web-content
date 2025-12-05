@@ -100,7 +100,7 @@ title: Désagrégation stockage/informatique
 <p>Milvus suit le principe du "log as data", c'est-à-dire que Milvus ne maintient pas de table physique mais garantit la fiabilité des données grâce à la persistance de la journalisation et aux journaux instantanés.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>Mécanisme de journalisation</span> </span></p>
 <p>Le log broker est l'épine dorsale de Milvus. Il est responsable de la persistance des données et de la désagrégation en lecture-écriture, grâce à son mécanisme inné pub-sub. L'illustration ci-dessus montre une représentation simplifiée du mécanisme, où le système est divisé en deux rôles, le courtier en journaux (pour maintenir la séquence de journaux) et l'abonné aux journaux. Le premier enregistre toutes les opérations qui modifient l'état des collections ; le second s'abonne à la séquence de journaux pour mettre à jour les données locales et fournit des services sous la forme de copies en lecture seule. Le mécanisme pub-sub permet également d'étendre le système en termes de capture des données de changement (CDC) et de déploiement distribué à l'échelle mondiale.</p>
 <h2 id="Whats-next" class="common-anchor-header">À suivre<button data-href="#Whats-next" class="anchor-icon" translate="no">

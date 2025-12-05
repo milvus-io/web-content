@@ -38,17 +38,17 @@ title: Tratamiento de datos
 <p>La validación de las solicitudes DML se traslada al proxy porque Milvus no tiene transacciones complicadas. El proxy solicita una marca de tiempo para cada solicitud de inserción/borrado al TSO (Timestamp Oracle), que es el módulo de tiempo que se coloca con el coordinador raíz. Las marcas de tiempo se utilizan para determinar la secuencia de las solicitudes de datos que se procesan, ya que la marca de tiempo más antigua se sobrescribe con la más reciente. El proxy recupera la información por lotes desde el coordinador de datos, incluidos los segmentos de las entidades y las claves primarias, para aumentar el rendimiento global y evitar sobrecargar el nodo central.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Canales 1</span> </span></p>
 <p>Tanto las operaciones DML (lenguaje de manipulación de datos) como las operaciones DDL (lenguaje de definición de datos) se escriben en la secuencia de registro, pero a las operaciones DDL sólo se les asigna un canal debido a su baja frecuencia de aparición.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
    </span> <span class="img-wrapper"> <span>Canales 2</span> </span></p>
 <p><em>Los vcanales</em> se mantienen en los nodos del corredor de registro subyacente. Cada canal es físicamente indivisible y está disponible para cualquier nodo, pero sólo para uno. Cuando la tasa de ingestión de datos alcanza un cuello de botella, hay que tener en cuenta dos cosas: si el nodo log broker está sobrecargado y necesita ser escalado; y, si hay suficientes shards para asegurar el equilibrio de carga para cada nodo.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
    </span> <span class="img-wrapper"> <span>Secuencia de registro de escritura</span> </span></p>
 <p>El diagrama anterior resume los cuatro componentes que intervienen en el proceso de escritura de la secuencia de registros: el proxy, el corredor de registros, el nodo de datos y el almacenamiento de objetos. El proceso implica cuatro tareas: validación de las solicitudes DML, publicación-suscripción de la secuencia de registro, conversión de un registro de flujo a instantáneas de registro y persistencia de las instantáneas de registro. Las cuatro tareas están desacopladas entre sí para garantizar que cada una de ellas sea gestionada por su tipo de nodo correspondiente. Los nodos del mismo tipo son iguales y pueden escalarse de forma elástica e independiente para adaptarse a distintas cargas de datos, en particular a datos de flujo masivo y muy fluctuantes.</p>
 <h2 id="Index-building" class="common-anchor-header">Creación de índices<button data-href="#Index-building" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ title: Tratamiento de datos
     </button></h2><p>La creación de índices la realizan los nodos de índices. Para evitar la creación frecuente de índices para las actualizaciones de datos, una colección en Milvus se divide en segmentos, cada uno con su propio índice.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Creación de índices</span> </span></p>
 <p>Milvus permite crear índices para cada campo vectorial, campo escalar y campo primario. Tanto la entrada como la salida de la creación de índices se relacionan con el almacenamiento de objetos: El nodo de índice carga las instantáneas de registro a indexar desde un segmento (que está en el almacenamiento de objetos) a la memoria, deserializa los datos y metadatos correspondientes para construir el índice, serializa el índice cuando se completa la construcción del índice y lo escribe de nuevo en el almacenamiento de objetos.</p>
 <p>La creación de índices implica principalmente operaciones vectoriales y matriciales y, por lo tanto, requiere un uso intensivo de los recursos informáticos y de memoria. Los vectores no pueden indexarse de forma eficiente con los índices tradicionales basados en árboles debido a su naturaleza altamente dimensional, pero pueden indexarse con técnicas especialmente diseñadas para esta tarea, como los índices basados en clústeres o grafos. Independientemente de su tipo, la construcción de un índice implica cálculos iterativos masivos para vectores a gran escala, como K-means o graph traversal.</p>
@@ -93,13 +93,13 @@ title: Tratamiento de datos
     </button></h2><p>El término "consulta de datos" se refiere al proceso de buscar en una colección especificada el número <em>k</em> de vectores más cercanos a un vector objetivo o <em>todos los</em> vectores dentro de un rango de distancia especificado al vector. Los vectores se devuelven junto con su clave primaria y sus campos correspondientes.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Consulta de datos</span> </span></p>
 <p>Una colección en Milvus se divide en múltiples segmentos, y los nodos de consulta cargan índices por segmento. Cuando llega una solicitud de búsqueda, se transmite a todos los nodos de consulta para realizar una búsqueda simultánea. A continuación, cada nodo poda los segmentos locales, busca los vectores que cumplen los criterios y reduce y devuelve los resultados de la búsqueda.</p>
 <p>Los nodos de consulta son independientes entre sí en una consulta de datos. Cada nodo es responsable únicamente de dos tareas: Cargar o liberar segmentos siguiendo las instrucciones de la coordenada de consulta; realizar una búsqueda dentro de los segmentos locales. Y el proxy es responsable de reducir los resultados de búsqueda de cada nodo de consulta y devolver los resultados finales al cliente.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>Traspaso</span> </span></p>
 <p>Existen dos tipos de segmentos: segmentos crecientes (para datos incrementales) y segmentos sellados (para datos históricos). Los nodos de consulta se suscriben a vchannel para recibir actualizaciones recientes (datos incrementales) como segmentos crecientes. Cuando un segmento creciente alcanza un umbral predefinido, el coordinador de datos lo sella y comienza la construcción del índice. A continuación, una operación de <em>transferencia</em> iniciada por el coordinador de consultas convierte los datos incrementales en datos históricos. El coordinador de consultas distribuirá los segmentos sellados de forma uniforme entre todos los nodos de consulta en función del uso de memoria, la sobrecarga de la CPU y el número de segmentos.</p>
 <h2 id="Whats-next" class="common-anchor-header">A continuación<button data-href="#Whats-next" class="anchor-icon" translate="no">

@@ -22,7 +22,7 @@ summary: GKE에 Milvus 클러스터를 배포하는 방법을 알아보세요.
     </button></h1><p>Milvus는 클라우드 네이티브 벡터 데이터베이스로서 다양한 클라우드 환경에 배포할 수 있습니다. 이 가이드에서는 Google Cloud Platform(GCP)에서 Milvus를 설정하는 방법에 대해 자세히 설명합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
    </span> <span class="img-wrapper"> <span>GCP에 Milvus 클러스터 배포하기</span> </span></p>
 <h2 id="Before-you-start" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -183,7 +183,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
    </span> <span class="img-wrapper"> <span>사용자 계정의 GCP 액세스 키</span> </span></p>
 <ul>
 <li>values.yaml 추가</li>

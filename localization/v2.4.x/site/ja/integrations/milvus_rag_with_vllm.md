@@ -42,7 +42,7 @@ title: Milvus、vLLM、Llama 3.1によるRAGの構築
 <p>論文「<a href="https://arxiv.org/abs/2309.06180">Efficient Memory Management for Large Language Model Serving with PagedAttention</a>」によると、KVキャッシュはGPUメモリの約30%を使用しており、潜在的なメモリ問題につながっている。KVキャッシュは連続したメモリに格納されますが、サイズが変わるとメモリの断片化が起こり、計算効率が悪くなります。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/vllm_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -50,7 +50,7 @@ title: Milvus、vLLM、Llama 3.1によるRAGの構築
 <p>KVキャッシュに仮想メモリを使用することで、vLLMは必要に応じて物理GPUメモリのみを割り当て、メモリの断片化を排除し、事前割り当てを回避します。テストでは、vLLMは<a href="https://huggingface.co/docs/transformers/main_classes/text_generation">HuggingFace Transformers</a>（HF）および<a href="https://github.com/huggingface/text-generation-inference">Text Generation Inference</a>（TGI）を上回り、NVIDIA A10GおよびA100 GPU上でHFより最大24倍、TGIより最大3.5倍高いスループットを達成しました。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/vllm_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

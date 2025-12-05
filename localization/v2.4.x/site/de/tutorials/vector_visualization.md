@@ -428,7 +428,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>Wie wir sehen können, liegt der Abfragevektor nahe bei den gefundenen Vektoren. Obwohl die abgerufenen Vektoren nicht innerhalb eines Standardkreises mit festem Radius liegen, der auf die Abfrage zentriert ist, können wir sehen, dass sie dem Abfragevektor auf der 2D-Ebene immer noch sehr nahe sind.</p>
 <p>Der Einsatz von Techniken zur Dimensionalitätsreduktion kann das Verständnis von Vektoren und die Fehlerbehebung erleichtern. Ich hoffe, dass Sie durch dieses Tutorial ein besseres Verständnis von Vektoren erlangen können.</p>

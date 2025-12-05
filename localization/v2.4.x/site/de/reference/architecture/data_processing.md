@@ -38,17 +38,17 @@ title: Datenverarbeitung
 <p>Die Validierung von DML-Anfragen wird auf den Proxy verlagert, da Milvus keine komplizierten Transaktionen hat. Der Proxy fordert für jede Einfüge-/Löschanforderung einen Zeitstempel vom TSO (Timestamp Oracle) an, dem Zeitmodul, das mit dem Stammkoordinator zusammenarbeitet. Da der ältere Zeitstempel durch den neueren überschrieben wird, werden die Zeitstempel verwendet, um die Reihenfolge der zu verarbeitenden Datenanforderungen zu bestimmen. Der Proxy ruft Informationen in Stapeln von der Datenkoordination ab, einschließlich der Segmente und Primärschlüssel der Entitäten, um den Gesamtdurchsatz zu erhöhen und eine Überlastung des zentralen Knotens zu vermeiden.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Kanäle 1</span> </span></p>
 <p>Sowohl DML (Data Manipulation Language)-Operationen als auch DDL (Data Definition Language)-Operationen werden in die Protokollsequenz geschrieben, aber DDL-Operationen werden aufgrund ihrer geringen Häufigkeit nur einem Kanal zugeordnet.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
    </span> <span class="img-wrapper"> <span>Kanäle 2</span> </span></p>
 <p><em>V-Kanäle</em> werden in den zugrunde liegenden Log-Broker-Knoten verwaltet. Jeder Kanal ist physisch unteilbar und nur für einen einzigen Knoten verfügbar. Wenn die Dateneingangsrate einen Engpass erreicht, sind zwei Dinge zu beachten: ob der Log-Broker-Knoten überlastet ist und skaliert werden muss, und ob genügend Shards vorhanden sind, um einen Lastausgleich für jeden Knoten zu gewährleisten.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
    </span> <span class="img-wrapper"> <span>Log-Sequenz schreiben</span> </span></p>
 <p>Das obige Diagramm zeigt vier Komponenten, die am Prozess des Schreibens von Protokollsequenzen beteiligt sind: Proxy, Log Broker, Datenknoten und Objektspeicher. Der Prozess umfasst vier Aufgaben: Validierung von DML-Anforderungen, Veröffentlichung und Abonnement der Protokollsequenz, Konvertierung von einem Streaming-Protokoll in Protokoll-Snapshots und Persistenz der Protokoll-Snapshots. Die vier Aufgaben sind voneinander entkoppelt, um sicherzustellen, dass jede Aufgabe von dem entsprechenden Knotentyp bearbeitet wird. Knoten desselben Typs sind gleichberechtigt und können elastisch und unabhängig skaliert werden, um verschiedene Datenlasten, insbesondere massive und stark schwankende Streaming-Daten, zu bewältigen.</p>
 <h2 id="Index-building" class="common-anchor-header">Indexaufbau<button data-href="#Index-building" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ title: Datenverarbeitung
     </button></h2><p>Der Indexaufbau wird von Indexknoten durchgeführt. Um häufige Indexerstellung bei Datenaktualisierungen zu vermeiden, wird eine Sammlung in Milvus weiter in Segmente unterteilt, die jeweils einen eigenen Index haben.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Indexerstellung</span> </span></p>
 <p>Milvus unterstützt den Aufbau von Indizes für jedes Vektorfeld, Skalarfeld und Primärfeld. Sowohl die Eingabe als auch die Ausgabe der Indexerstellung greifen auf die Objektspeicherung zu: Der Indexknoten lädt die zu indizierenden Protokoll-Snapshots aus einem Segment (das sich im Objektspeicher befindet) in den Speicher, deserialisiert die entsprechenden Daten und Metadaten für den Indexaufbau, serialisiert den Index nach Abschluss des Indexaufbaus und schreibt ihn zurück in den Objektspeicher.</p>
 <p>Der Indexaufbau umfasst hauptsächlich Vektor- und Matrixoperationen und ist daher rechen- und speicherintensiv. Vektoren können aufgrund ihrer hochdimensionalen Beschaffenheit nicht effizient mit herkömmlichen baumbasierten Indizes indiziert werden, wohl aber mit speziell für diese Aufgabe entwickelten Techniken wie cluster- oder graphbasierten Indizes. Unabhängig von der Art der Indizierung erfordert der Aufbau eines Index massive iterative Berechnungen für große Vektoren, wie z. B. K-means oder Graphentraversal.</p>
@@ -93,13 +93,13 @@ title: Datenverarbeitung
     </button></h2><p>Der Begriff "Datenabfrage" bezieht sich auf das Durchsuchen einer bestimmten Sammlung nach <em>k</em> Vektoren, die einem Zielvektor am nächsten liegen, oder nach <em>allen</em> Vektoren innerhalb eines bestimmten Abstands zum Vektor. Die Vektoren werden zusammen mit dem entsprechenden Primärschlüssel und den Feldern zurückgegeben.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Datenabfrage</span> </span></p>
 <p>Eine Sammlung in Milvus ist in mehrere Segmente unterteilt, und die Abfrageknoten laden Indizes nach Segment. Wenn eine Suchanfrage eintrifft, wird sie an alle Abfrageknoten gesendet, um eine gleichzeitige Suche durchzuführen. Jeder Knoten durchforstet dann die lokalen Segmente, sucht nach Vektoren, die den Kriterien entsprechen, und reduziert die Suchergebnisse und gibt sie zurück.</p>
 <p>Die Abfrageknoten sind bei einer Datenabfrage unabhängig voneinander. Jeder Knoten ist nur für zwei Aufgaben zuständig: Laden oder Freigeben von Segmenten gemäß den Anweisungen des Abfragekoordinators und Durchführen einer Suche innerhalb der lokalen Segmente. Und der Proxy ist für die Reduzierung der Suchergebnisse von jedem Abfrageknoten und die Rückgabe der Endergebnisse an den Client verantwortlich.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>Weiterleitung</span> </span></p>
 <p>Es gibt zwei Arten von Segmenten: wachsende Segmente (für inkrementelle Daten) und geschlossene Segmente (für historische Daten). Abfrageknoten abonnieren den vchannel, um aktuelle Aktualisierungen (inkrementelle Daten) als wachsende Segmente zu erhalten. Wenn ein wachsendes Segment einen vordefinierten Schwellenwert erreicht, wird es von der Datenkoordination versiegelt und der Indexaufbau beginnt. Anschließend werden die inkrementellen Daten durch eine vom Abfragekoordinator initiierte <em>Übergabeoperation</em> in historische Daten umgewandelt. Die Abfragekoordination verteilt die versiegelten Segmente gleichmäßig auf alle Abfrageknoten entsprechend der Speichernutzung, dem CPU-Overhead und der Segmentanzahl.</p>
 <h2 id="Whats-next" class="common-anchor-header">Der nächste Schritt<button data-href="#Whats-next" class="anchor-icon" translate="no">

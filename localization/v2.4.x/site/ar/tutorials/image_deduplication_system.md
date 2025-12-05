@@ -31,5 +31,5 @@ title: إلغاء تكرار الصور
 <p>في هذا البرنامج التعليمي، ستتعلم في هذا البرنامج التعليمي كيفية إنشاء نظام إلغاء تكرار الصور. يستخدم هذا البرنامج التعليمي نموذج ResNet-50 لاستخراج ميزات الصور وتحويلها إلى متجهات. ثم يتم تخزين متجهات الصور هذه في قاعدة بيانات متجهات Milvus ويتم إجراء بحث عن تشابه المتجهات في Milvus أيضًا.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>سير عمل_تكرار_الصور</span> </span></p>

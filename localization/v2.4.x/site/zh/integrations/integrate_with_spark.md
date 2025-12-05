@@ -456,7 +456,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span cl
 <p>您可以通过不同方式安装库。本截图显示的是从本地向集群上传 jar 文件。更多信息，请参阅 Databricks 文档中的<a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">集群库</a>。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
    </span> <span class="img-wrapper"> <span>安装 Databricks 库</span> </span></p></li>
 <li><p>创建一个 S3 bucket，并将其配置为 Databricks 集群的外部存储位置。</p>
 <p>Bulkinsert 要求将数据存储在临时存储桶中，以便 Zilliz Cloud 能批量导入数据。您可以创建一个 S3 存储桶，并将其配置为 Databricks 的外部位置。详情请参阅<a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">外部位置</a>。</p></li>

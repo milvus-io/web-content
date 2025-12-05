@@ -74,7 +74,7 @@ title: 相似度量
 <p>欧氏距离的计算公式如下：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
    </span> <span class="img-wrapper"> <span>欧几里得</span> </span></p>
 <p>其中<strong>a</strong>= (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>) 和<strong>b</strong>= (<sub>b0</sub>,<sub>b0</sub>,...,<sub>bn-1</sub>) 是 n 维欧几里得空间中的两点。</p>
 <p>这是最常用的距离度量，在数据连续时非常有用。</p>
@@ -83,7 +83,7 @@ title: 相似度量
 <h3 id="Inner-product-IP" class="common-anchor-header">内积（IP）</h3><p>两个向量 Embeddings 之间的 IP 距离定义如下：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span><span class="img-wrapper"><span>IP</span> </span></p>
 <p>如果需要比较非标准化数据，或者需要考虑幅度和角度，IP 会更有用。</p>
 <div class="alert note">
@@ -92,30 +92,30 @@ title: 相似度量
 <p>假设 X' 是由嵌入 X 归一化而来：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
    </span> <span class="img-wrapper"> <span>归一化</span> </span></p>
 <p>两个嵌入式之间的相关性如下：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>归一化</span> </span></p>
 <h3 id="Cosine-Similarity" class="common-anchor-header">余弦相似性</h3><p>余弦相似度使用两组向量之间角度的余弦来衡量它们的相似程度。你可以把两组向量看成是从同一个原点（[0,0,...]）出发但指向不同方向的两条线段。</p>
 <p>要计算两组向量<strong>A = (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>)</strong>和<strong>B = (<sub>b0</sub>,<sub>b1</sub>,...,<sub>bn-1</sub>)</strong> 之间的余弦相似度，请使用下面的公式：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
    </span> <span class="img-wrapper"> <span>余弦相似度</span> </span></p>
 <p>余弦相似度始终位于区间<strong>[-1, 1]</strong>。例如，两个正比向量的余弦相似度为<strong>1</strong>，两个正交向量的余弦相似度为<strong>0</strong>，两个相反向量的余弦相似度为<strong>-1</strong>。余弦越大，两个向量之间的夹角越小，说明这两个向量之间的相似度越高。</p>
 <p>用 1 减去它们的余弦相似度，就可以得到两个向量之间的余弦距离。</p>
 <h3 id="Jaccard-distance" class="common-anchor-header">雅卡德距离</h3><p>Jaccard 相似性系数衡量两个样本集之间的相似性，其定义为定义集的交集的卡方除以它们的联合的卡方。它只能应用于有限样本集。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
    </span> <span class="img-wrapper"> <span>杰卡德相似系数</span> </span></p>
 <p>雅卡距离测量数据集之间的不相似性，通过从 1 减去雅卡相似系数得出。对于二元变量，雅卡距离等同于塔尼莫托系数。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>雅卡距离</span> </span></p>
 <h3 id="Hamming-distance" class="common-anchor-header">汉明距离</h3><p>汉明距离测量二进制数据字符串。两个长度相等的字符串之间的距离是比特不同的比特位置数。</p>
 <p>例如，假设有两个字符串：1101 1001 和 1001 1101。</p>
@@ -125,7 +125,7 @@ title: 相似度量
 <p>要确定 A 是否是 B 的上结构，请使用下式：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
    </span> <span class="img-wrapper"> <span>上层建筑</span> </span></p>
 <p>其中</p>
 <ul>
@@ -136,7 +136,7 @@ title: 相似度量
 <p>要确定 A 是否是 B 的子结构，请使用下面的公式：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
    </span> <span class="img-wrapper"> <span>子结构</span> </span></p>
 <p>其中</p>
 <ul>

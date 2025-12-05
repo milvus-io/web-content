@@ -37,7 +37,7 @@ title: 协调员 HA
     </button></h2><p>在 2.2.3 版中，Milvus 为协调器实现了高可用性，使其在主动-备用模式下工作，减少了可能导致服务不可用的单点故障（SpoF）。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>协调器 HA</span> </span></p>
 <p>上图说明了协调器如何在主动-备用模式下工作。当一对协调器启动时，它们会使用自己的服务器 ID 向 etcd 注册，并竞争主动角色。成功从 etcd 租用主动角色的协调器将开始提供服务，而这对协调器中的另一个协调器将保持待机状态，监视主动角色，并随时准备在主动协调器死亡时提供服务。</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">启用协调器 HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">

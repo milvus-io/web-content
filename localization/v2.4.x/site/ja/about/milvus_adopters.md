@@ -23,6 +23,6 @@ summary: 本番アプリケーションにMilvusを採用した企業につい�
     </button></h1><p>Milvusは、Nvidia、Roblox、AT&amp;Tなどの著名な企業から支持を得ており、企業ユーザーの間でベクターデータベースのリーディングカンパニーとしての地位を確立しています。以下は、Milvusのアプリケーションへの統合に成功した企業のリストです。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
    </span> <span class="img-wrapper"> <span>Milvus採用企業</span> </span></p>
 <p><a href="https://milvus.io/use-cases">Milvusの使用事例ページでは</a>、業界リーダーがどのようにMilvusを活用してAIアプリケーションをパワーアップし、ビジネスの成長を加速させているかをご覧いただけます。</p>

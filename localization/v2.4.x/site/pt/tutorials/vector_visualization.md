@@ -428,7 +428,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>Como podemos ver, o vetor de pesquisa está próximo dos vectores obtidos. Embora os vectores recuperados não estejam dentro de um círculo padrão com um raio fixo centrado na consulta, podemos ver que ainda estão muito próximos do vetor de consulta no plano 2D.</p>
 <p>A utilização de técnicas de redução da dimensionalidade pode facilitar a compreensão dos vectores e a resolução de problemas. Esperamos que possa compreender melhor os vectores através deste tutorial.</p>

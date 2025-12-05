@@ -76,32 +76,32 @@ summary: Pelajari cara membuat peringatan untuk layanan Milvus di Grafana.
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Menambahkan kueri baru</h3><p>Untuk menambahkan peringatan untuk penggunaan memori komponen Milvus, edit panel Memori. Kemudian, tambahkan kueri baru dengan metrik: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>Alert_metric</span> </span></p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Menyimpan dasbor</h3><p>Simpan dasbor, dan tunggu beberapa menit untuk melihat peringatan.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
    </span> <span class="img-wrapper"> <span>Alert_dashboard</span> </span></p>
 <p>Kueri peringatan Grafana tidak mendukung variabel template. Oleh karena itu, Anda harus menambahkan kueri kedua tanpa variabel template dalam label. Kueri kedua diberi nama "A" secara default. Anda dapat mengganti namanya dengan mengklik dropdown.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>Alert_query</span> </span></p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Menambahkan notifikasi peringatan</h3><p>Untuk menerima notifikasi peringatan, tambahkan &quot;saluran notifikasi&quot;. Kemudian, tentukan saluran di bidang &quot;Kirim ke&quot;.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
    </span> <span class="img-wrapper"> <span>Alert_notification</span> </span></p>
 <p>Jika peringatan berhasil dibuat dan dipicu, Anda akan menerima notifikasi seperti yang ditunjukkan pada gambar di bawah ini.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>Pesan_pemberitahuan</span> </span></p>
 <p>Untuk menghapus peringatan, buka panel "Peringatan" dan klik tombol hapus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
    </span> <span class="img-wrapper"> <span>Hapus_peringatan</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

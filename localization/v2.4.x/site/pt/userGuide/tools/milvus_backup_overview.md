@@ -58,7 +58,7 @@ title: Cópia de segurança do Milvus
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Arquitetura do Milvus Backup</span> </span></p>
 <p>O Milvus Backup facilita a cópia de segurança e o restauro de metadados, segmentos e dados nas instâncias do Milvus. Fornece interfaces norte, tais como CLI, API e módulo Go baseado em gRPC, para uma manipulação flexível dos processos de cópia de segurança e restauro.</p>
 <p>O Milvus Backup lê os metadados e segmentos da coleção a partir da instância de origem do Milvus para criar uma cópia de segurança. Em seguida, copia os dados da coleção do caminho raiz da instância Milvus de origem e guarda os dados copiados no caminho raiz da cópia de segurança.</p>

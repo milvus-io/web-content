@@ -35,7 +35,7 @@ title: Text to Image Search Engine
 <p>In this tutorial, you will learn how to build a text-to-image search engine. This tutorial uses the CLIP model to extract features of images and convert them into vectors. Then these image vectors are stored in the Milvus vector database. When users input query texts, these texts are also converted into embedding vectors using the same ML model CLIP. Subsequently, a vector similarity search is performed in Milvus to retrieve the most similar image vectors to the input text vector.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
     <span>Text_image_search</span>
   </span>
 </p>

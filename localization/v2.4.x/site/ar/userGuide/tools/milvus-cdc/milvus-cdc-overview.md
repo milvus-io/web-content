@@ -61,7 +61,7 @@ title: نظرة عامة على مركز مكافحة الأمراض والوق�
     </button></h2><p>تتبنى Milvus-CCDC بنية مع مكونين رئيسيين - خادم HTTP الذي يدير المهام والبيانات الوصفية، و <strong>Corelib</strong> الذي يزامن تنفيذ المهام مع قارئ يحصل على البيانات من مثيل Milvus المصدر وكاتب يرسل البيانات المعالجة إلى مثيل Milvus الهدف.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>معمارية ميلفوس-سي دي سي-مركز البيانات</span> </span></p>
 <p>في الرسم البياني السابق</p>
 <ul>
@@ -92,7 +92,7 @@ title: نظرة عامة على مركز مكافحة الأمراض والوق�
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>سير عمل ميلفوس-سي دي سي</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

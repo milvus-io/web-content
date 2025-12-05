@@ -272,6 +272,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>gambar</span> </span></p>
 <p>Di sini, kami mendemonstrasikan bahwa data dikelompokkan dengan baik, dan Anda dapat mengarahkan kursor ke titik-titik tersebut untuk memeriksa teks yang diwakilinya. Dengan buku catatan ini, kami harap Anda dapat mempelajari cara menggunakan HDBSCAN untuk mengelompokkan embedding dengan Milvus secara efisien, yang juga dapat diterapkan pada jenis data lainnya. Dikombinasikan dengan model bahasa yang besar, pendekatan ini memungkinkan analisis yang lebih dalam pada data Anda dalam skala besar.</p>

@@ -32,5 +32,5 @@ title: Klassifizierung von DNA-Sequenzen
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dna.png" alt="dna" class="doc-image" id="dna" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dna.png" alt="dna" class="doc-image" id="dna" />
    </span> <span class="img-wrapper"> <span>dna</span> </span></p>

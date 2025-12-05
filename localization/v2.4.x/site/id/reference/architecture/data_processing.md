@@ -38,17 +38,17 @@ title: Pengolahan Data
 <p>Validasi permintaan DML diteruskan ke proksi karena Milvus tidak memiliki transaksi yang rumit. Proksi meminta stempel waktu untuk setiap permintaan sisipkan/hapus dari TSO (Timestamp Oracle), yang merupakan modul waktu yang berada di bawah koordinator root. Dengan stempel waktu yang lebih lama ditimpa oleh stempel waktu yang lebih baru, stempel waktu digunakan untuk menentukan urutan permintaan data yang sedang diproses. Proxy mengambil informasi dalam batch dari koordinator data termasuk segmen entitas dan kunci utama untuk meningkatkan throughput secara keseluruhan dan menghindari pembebanan yang berlebihan pada simpul pusat.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Saluran 1</span> </span></p>
 <p>Operasi DML (bahasa manipulasi data) dan operasi DDL (bahasa definisi data) ditulis ke urutan log, tetapi operasi DDL hanya diberi satu saluran karena frekuensi kemunculannya yang rendah.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
    </span> <span class="img-wrapper"> <span>Saluran 2</span> </span></p>
 <p><em>Vchannels</em> dipertahankan di node broker log yang mendasarinya. Setiap saluran secara fisik tidak dapat dibagi dan tersedia untuk semua tetapi hanya satu node. Ketika tingkat konsumsi data mencapai hambatan, pertimbangkan dua hal: apakah node log broker kelebihan beban dan perlu diskalakan; dan, apakah ada pecahan yang cukup untuk memastikan penyeimbangan beban untuk setiap node.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
    </span> <span class="img-wrapper"> <span>Menulis urutan log</span> </span></p>
 <p>Diagram di atas merangkum empat komponen yang terlibat dalam proses penulisan urutan log: proksi, log broker, simpul data, dan penyimpanan objek. Proses ini melibatkan empat tugas: validasi permintaan DML, publikasi-langganan urutan log, konversi dari log streaming ke snapshot log, dan persistensi snapshot log. Keempat tugas tersebut dipisahkan satu sama lain untuk memastikan setiap tugas ditangani oleh jenis node yang sesuai. Node dengan tipe yang sama dibuat sama dan dapat diskalakan secara elastis dan independen untuk mengakomodasi berbagai beban data, khususnya data streaming yang sangat besar dan sangat berfluktuasi.</p>
 <h2 id="Index-building" class="common-anchor-header">Pembuatan indeks<button data-href="#Index-building" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ title: Pengolahan Data
     </button></h2><p>Pembangunan indeks dilakukan oleh node indeks. Untuk menghindari pembangunan indeks yang sering untuk pembaruan data, koleksi di Milvus dibagi lebih lanjut menjadi beberapa segmen, masing-masing dengan indeksnya sendiri.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Pembuatan indeks</span> </span></p>
 <p>Milvus mendukung pembuatan indeks untuk setiap bidang vektor, bidang skalar, dan bidang primer. Baik input dan output dari pembangunan indeks berhubungan dengan penyimpanan objek: Node indeks memuat snapshot log untuk diindeks dari sebuah segmen (yang ada di penyimpanan objek) ke memori, mendeserialisasi data dan metadata yang sesuai untuk membangun indeks, menserialisasi indeks ketika pembangunan indeks selesai, dan menuliskannya kembali ke penyimpanan objek.</p>
 <p>Pembuatan indeks terutama melibatkan operasi vektor dan matriks dan karenanya bersifat komputasi dan memori intensif. Vektor tidak dapat diindeks secara efisien dengan indeks berbasis pohon tradisional karena sifatnya yang berdimensi tinggi, tetapi dapat diindeks dengan teknik yang dirancang khusus untuk tugas ini, seperti indeks berbasis kluster atau grafik. Apa pun jenisnya, membangun indeks melibatkan perhitungan berulang yang sangat besar untuk vektor berskala besar, seperti K-means atau penelusuran grafik.</p>
@@ -93,13 +93,13 @@ title: Pengolahan Data
     </button></h2><p>Istilah "kueri data" mengacu pada proses pencarian koleksi tertentu untuk <em>k</em> jumlah vektor yang terdekat dengan vektor target atau untuk <em>semua</em> vektor dalam rentang jarak tertentu ke vektor. Vektor dikembalikan bersama dengan kunci utama dan bidang yang sesuai.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Permintaan data</span> </span></p>
 <p>Koleksi di Milvus dibagi menjadi beberapa segmen, dan simpul kueri memuat indeks per segmen. Ketika permintaan pencarian tiba, permintaan tersebut disiarkan ke semua node kueri untuk pencarian bersamaan. Setiap node kemudian memangkas segmen lokal, mencari vektor yang memenuhi kriteria, dan mengurangi dan mengembalikan hasil pencarian.</p>
 <p>Node kueri tidak bergantung satu sama lain dalam kueri data. Setiap node hanya bertanggung jawab untuk dua tugas: Memuat atau melepaskan segmen mengikuti instruksi dari query coord; melakukan pencarian di dalam segmen lokal. Dan proxy bertanggung jawab untuk mengurangi hasil pencarian dari setiap node kueri dan mengembalikan hasil akhir ke klien.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>Handoff</span> </span></p>
 <p>Ada dua jenis segmen, segmen yang terus bertambah (untuk data tambahan), dan segmen tertutup (untuk data historis). Node kueri berlangganan ke vchannel untuk menerima pembaruan terbaru (data tambahan) sebagai segmen yang berkembang. Ketika segmen yang berkembang mencapai ambang batas yang telah ditentukan, koordinat data menyegelnya dan pembangunan indeks dimulai. Kemudian operasi <em>handoff</em> yang diprakarsai oleh query coord mengubah data tambahan menjadi data historis. Query coord akan mendistribusikan segmen yang disegel secara merata di antara semua node kueri sesuai dengan penggunaan memori, overhead CPU, dan nomor segmen.</p>
 <h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">

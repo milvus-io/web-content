@@ -23,7 +23,7 @@ title: Milvus 아키텍처 개요
 <p>Milvus는 컴퓨팅 노드에 스토리지 및 컴퓨팅 분리와 수평적 확장성을 갖춘 공유 스토리지 아키텍처를 채택하고 있습니다. 데이터 플레인과 제어 플레인 분리 원칙에 따라 Milvus는 액세스 레이어, 코디네이터 서비스, 워커 노드, 스토리지의 <a href="/docs/ko/v2.4.x/four_layers.md">네 가지 레이어로</a> 구성됩니다. 이러한 계층은 확장 또는 재해 복구와 관련하여 상호 독립적입니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
    </span> <span class="img-wrapper"> <span>아키텍처_도표</span> </span></p>
 <p>그림에 따르면 인터페이스는 다음과 같은 카테고리로 분류할 수 있습니다:</p>
 <ul>

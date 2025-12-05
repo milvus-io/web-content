@@ -38,17 +38,17 @@ title: 数据处理
 <p>由于 Milvus 没有复杂的事务，因此 DML 请求的验证工作转到了代理。代理会向 TSO（时间戳 Oracle）请求每个插入/删除请求的时间戳，TSO 是与根协调器共用的计时模块。旧的时间戳会被新的时间戳覆盖，时间戳用于确定正在处理的数据请求的顺序。代理从数据协调器分批检索信息，包括实体的分段和主键，以提高总体吞吐量，避免中央节点负担过重。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>通道 1</span> </span></p>
 <p>DML（数据操作语言）操作和 DDL（数据定义语言）操作都会写入日志序列，但 DDL 操作由于出现频率较低，因此只分配一个通道。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
    </span> <span class="img-wrapper"> <span>通道 2</span> </span></p>
 <p><em>V 通道</em>保存在底层日志代理节点中。每个通道在物理上不可分割，可用于任何一个节点。当数据摄取率达到瓶颈时，要考虑两点：日志代理节点是否超载，是否需要扩展；是否有足够的分片来确保每个节点的负载平衡。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
    </span> <span class="img-wrapper"> <span>写日志顺序</span> </span></p>
 <p>上图封装了写入日志序列过程中涉及的四个组件：代理、日志代理、数据节点和对象存储。该流程涉及四项任务：DML 请求的验证、日志序列的发布-订阅、从流日志到日志快照的转换以及日志快照的持久化。这四项任务相互解耦，以确保每项任务都由相应的节点类型来处理。同一类型的节点是平等的，可以灵活、独立地扩展，以适应各种数据负载，尤其是海量和高度波动的流数据。</p>
 <h2 id="Index-building" class="common-anchor-header">索引构建<button data-href="#Index-building" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ title: 数据处理
     </button></h2><p>索引建立由索引节点执行。为避免数据更新时频繁建立索引，Milvus 将一个 Collections 进一步划分为若干区段，每个区段都有自己的索引。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>建立索引</span> </span></p>
 <p>Milvus 支持为每个向量场、标量场和主场建立索引。索引构建的输入和输出都与对象存储有关：索引节点将需要索引的日志快照从段落（位于对象存储中）加载到内存，反序列化相应的数据和元数据以建立索引，索引建立完成后序列化索引，并将其写回对象存储。</p>
 <p>索引构建主要涉及向量和矩阵操作，因此是计算和内存密集型操作。向量由于其高维特性，无法使用传统的基于树的索引高效地建立索引，但可以使用专门为此任务设计的技术建立索引，如基于集群或图形的索引。无论其类型如何，建立索引都涉及大规模向量的大量迭代计算，如 K-means 或图遍历。</p>
@@ -93,13 +93,13 @@ title: 数据处理
     </button></h2><p>术语 "数据查询 "指的是在指定的 Collections 中搜索距离目标向量最近的<em>k 个</em>向量，或搜索与向量在指定距离范围内的<em>所有</em>向量的过程。向量会连同其相应的主键和字段一起返回。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>数据查询</span> </span></p>
 <p>Milvus 中的 Collections 被分割成多个分段，查询节点按分段加载索引。当搜索请求到达时，它会广播给所有查询节点进行并发搜索。然后，每个节点都会修剪本地段，搜索符合条件的向量，并还原和返回搜索结果。</p>
 <p>在数据查询中，查询节点是相互独立的。每个节点只负责两项任务：根据查询协调器的指令加载或释放数据段；在本地数据段内进行搜索。而代理负责减少每个查询节点的搜索结果，并将最终结果返回给客户端。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>分段</span> </span></p>
 <p>分段有两种，一种是增长分段（用于增量数据），另一种是封存分段（用于历史数据）。查询节点向 vchannel 订阅最新更新（增量数据），作为增长段。当增长数据段达到预定义阈值时，数据协调器就会将其封存，并开始建立索引。然后，由查询协调器启动<em>移交</em>操作符，将增量数据转为历史数据。查询协调器将根据内存使用情况、CPU 开销和段落数量，在所有查询节点之间平均分配封存的段落。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">

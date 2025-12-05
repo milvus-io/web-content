@@ -43,7 +43,7 @@ summary: >-
 <p>يوفر Milvus إمكانات قوية لنمذجة البيانات، مما يتيح لك تنظيم بياناتك غير المنظمة أو متعددة الوسائط في مجموعات منظمة. وهو يدعم مجموعة واسعة من أنواع البيانات لنمذجة السمات المختلفة، بما في ذلك الأنواع العددية والحرفية الشائعة، وأنواع المتجهات المختلفة، والمصفوفات، والمجموعات، وJSON، مما يوفر عليك جهد الحفاظ على أنظمة قواعد بيانات متعددة.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>البيانات غير المهيكلة، والتضمينات، و Milvus</span> </span></p>
 <p>يوفر Milvus ثلاثة أوضاع للنشر، تغطي مجموعة واسعة من مقاييس البيانات - من النماذج الأولية المحلية في دفاتر Jupyter Notebooks إلى مجموعات Kubernetes الضخمة التي تدير عشرات المليارات من المتجهات:</p>
 <ul>
@@ -90,7 +90,7 @@ summary: >-
 <p>تضمن بنية نظام ميلفوس السحابية الأصلية والمنفصلة للغاية أن النظام يمكن أن يتوسع باستمرار مع نمو البيانات:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>بنية النظام المنفصلة للغاية في ميلفوس</span> </span></p>
 <p>إن Milvus نفسه عديم الحالة بالكامل، لذا يمكن توسيعه بسهولة بمساعدة Kubernetes أو السحابة العامة. بالإضافة إلى ذلك، تم فصل مكونات Milvus بشكل جيد، حيث تم تصميم المهام الثلاث الأكثر أهمية - البحث، وإدخال البيانات، والفهرسة/التجميع - كعمليات متوازية بسهولة، مع فصل المنطق المعقد. يضمن ذلك إمكانية توسيع نطاق عقدة الاستعلام وعقدة البيانات وعقدة الفهرس المقابلة لها بشكل مستقل، مما يحسّن الأداء وكفاءة التكلفة.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">أنواع عمليات البحث التي تدعمها ميلفوس<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">

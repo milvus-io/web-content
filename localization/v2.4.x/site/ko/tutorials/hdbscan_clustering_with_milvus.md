@@ -269,6 +269,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>이미지</span> </span></p>
 <p>여기에서는 데이터가 잘 클러스터링되어 있음을 보여드리며, 포인트 위로 마우스를 가져가서 포인트가 나타내는 텍스트를 확인할 수 있습니다. 이 노트북을 통해 Milvus로 임베딩을 효율적으로 클러스터링하는 방법을 배우고 다른 유형의 데이터에도 적용할 수 있기를 바랍니다. 대규모 언어 모델과 결합하여 이 접근 방식을 사용하면 대규모로 데이터를 심층적으로 분석할 수 있습니다.</p>

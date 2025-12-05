@@ -31,5 +31,5 @@ title: Déduplication d'images
 <p>Dans ce tutoriel, vous apprendrez à construire un système de déduplication d'images. Ce tutoriel utilise le modèle ResNet-50 pour extraire les caractéristiques des images et les convertir en vecteurs. Ces vecteurs d'images sont ensuite stockés dans la base de données vectorielle Milvus et une recherche de similarité vectorielle est également effectuée dans Milvus.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>Flux de travail pour la déduplication d'images</span> </span></p>

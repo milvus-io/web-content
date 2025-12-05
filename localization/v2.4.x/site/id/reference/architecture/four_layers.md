@@ -100,7 +100,7 @@ title: Pemilahan Penyimpanan/Komputasi
 <p>Milvus mengikuti prinsip "log sebagai data", sehingga Milvus tidak memelihara tabel fisik tetapi menjamin keandalan data melalui persistensi pencatatan dan snapshot log.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>Mekanisme log</span> </span></p>
 <p>Log broker adalah tulang punggung Milvus. Ia bertanggung jawab atas persistensi data dan pemilahan baca-tulis, berkat mekanisme pub-sub bawaannya. Ilustrasi di atas menunjukkan penggambaran mekanisme yang disederhanakan, di mana sistem dibagi menjadi dua peran, log broker (untuk menjaga urutan log) dan log subscriber. Yang pertama mencatat semua operasi yang mengubah status koleksi; yang kedua berlangganan urutan log untuk memperbarui data lokal dan menyediakan layanan dalam bentuk salinan hanya-baca. Mekanisme pub-sub juga menyediakan ruang untuk perluasan sistem dalam hal pengambilan data perubahan (CDC) dan penyebaran yang didistribusikan secara global.</p>
 <h2 id="Whats-next" class="common-anchor-header">Selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">

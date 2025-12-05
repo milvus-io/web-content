@@ -134,7 +134,7 @@ title: Use Milvus in DocsGPT
 <p>You can play around with the UI and ask questions about your documents.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
     <span>alt text</span>
   </span>
 </p>

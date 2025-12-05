@@ -41,13 +41,13 @@ summary: >-
     </button></h2><p>يقوم Milvus بتخزين الكيانات الواردة في مقاطع داخل مجموعة ويغلق المقطع عندما يمتلئ. إذا حدث ذلك، يتم إنشاء مقطع جديد لاستيعاب كيانات إضافية. ونتيجة لذلك، يتم توزيع الكيانات بشكل اعتباطي عبر المقاطع. يتطلب هذا التوزيع من Milvus البحث في مقاطع متعددة للعثور على أقرب الجيران إلى متجه استعلام معين.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>بدون ضغط التجميع</span> </span></p>
 <p>إذا كان بإمكان Milvus توزيع الكيانات بين المقاطع بناءً على القيم الموجودة في حقل معين، يمكن تقييد نطاق البحث داخل مقطع واحد، وبالتالي تحسين أداء البحث.</p>
 <p>إن<strong>ضغط التجميع</strong> هو ميزة في Milvus تقوم بإعادة توزيع الكيانات بين المقاطع في مجموعة استنادًا إلى القيم الموجودة في حقل قياسي. لتمكين هذه الميزة، تحتاج أولاً إلى تحديد حقل قياسي <strong>كمفتاح ت</strong>جميع. يسمح ذلك ل Milvus بإعادة توزيع الكيانات في مقطع عندما تقع قيم مفتاح التجميع الخاصة بها ضمن نطاق محدد. عندما تقوم بتشغيل ضغط التجميع، يقوم Milvus بإنشاء/تحديث فهرس عام يسمى <strong>PartitionStats،</strong> والذي يسجل علاقة التعيين بين المقاطع وقيم مفاتيح التجميع.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>مع ضغط التجميع</span> </span></p>
 <p>باستخدام <strong>PartitionStats</strong> كمرجع، يمكن لـ Milvus تشذيب البيانات غير ذات الصلة عند تلقي طلب بحث/استعلام يحمل قيمة مفتاح تجميع وتقييد نطاق البحث داخل المقاطع التي تم تعيينها إلى القيمة، وبالتالي تحسين أداء البحث. للحصول على تفاصيل حول تحسين الأداء، راجع الاختبارات المعيارية.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">استخدام ضغط التجميع<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">

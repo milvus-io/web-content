@@ -35,5 +35,5 @@ title: Поисковая система "текст в изображение
 <p>В этом уроке вы узнаете, как создать поисковую систему "текст-изображение". В этом учебнике используется модель CLIP для извлечения характеристик изображений и преобразования их в векторы. Затем эти векторы изображений хранятся в векторной базе данных Milvus. Когда пользователи вводят тексты запросов, эти тексты также преобразуются в векторы вложений с помощью той же ML-модели CLIP. Затем в Milvus выполняется поиск векторного сходства для извлечения наиболее похожих векторов изображений на вектор входного текста.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
    </span> <span class="img-wrapper"> <span>Поиск_изображения_текста</span> </span></p>

@@ -33,17 +33,17 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/ko/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   <a href="/docs/ko/v2.4.x/install_standalone-docker.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_install.svg" alt="icon" />
    </a> <a href="/docs/ko/v2.4.x/install_standalone-docker.md"> <p class="link-btn">Milvus 설치하기</p> </a><p>도커 컴포즈 또는 쿠버네티스를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/ko/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   <a href="/docs/ko/v2.4.x/quickstart.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_quick_start.svg" alt="icon" />
    </a> <a href="/docs/ko/v2.4.x/quickstart.md"> <p class="link-btn">빠른 시작</p> </a><p>샘플 코드를 사용하여 Milvus를 빠르게 실행하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/bootcamp"> <img translate="no" src="/docs/v2.4.x/assets/home_bootcamp.svg" alt="icon" />
+   <a href="/bootcamp"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">부트캠프</p> </a><p>
   Milvus로 벡터 유사도 검색 애플리케이션을 구축하는 방법을 알아보세요.  </p>
 </div>

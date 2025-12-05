@@ -127,7 +127,7 @@ pip install -r requirements.txt
 <p>Después de eso, verá la interfaz de usuario en su navegador:<code translate="no">http://localhost:8501/</code></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/sambanava_ui.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

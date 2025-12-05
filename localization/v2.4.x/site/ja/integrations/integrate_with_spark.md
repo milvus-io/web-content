@@ -456,7 +456,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span cl
 <p>ライブラリのインストール方法は様々です。このスクリーンショットは、ローカルからクラスタにjarをアップロードしています。詳細については、Databricksドキュメントの<a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">Cluster Librariesを</a>参照してください。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
    </span> <span class="img-wrapper"> <span>Databricksライブラリのインストール</span> </span></p></li>
 <li><p>S3バケットを作成し、Databricksクラスタの外部ストレージとして設定します。</p>
 <p>Bulkinsertは、Zilliz Cloudが一括でデータをインポートできるように、一時的なバケットにデータを保存する必要があります。S3バケットを作成し、Databricksの外部ロケーションとして設定することができます。詳細は<a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">外部ロケーションを</a>参照してください。</p></li>

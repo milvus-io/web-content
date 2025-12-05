@@ -22,7 +22,7 @@ summary: Imparare a distribuire un cluster Milvus su GKE.
     </button></h1><p>Milvus è un database vettoriale cloud-native e può essere distribuito su vari ambienti cloud. Questa guida illustra tutti i dettagli della configurazione di Milvus su Google Cloud Platform (GCP).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gcp-networking.png" alt="Deploy a Milvus cluster on GCP" class="doc-image" id="deploy-a-milvus-cluster-on-gcp" />
    </span> <span class="img-wrapper"> <span>Distribuzione di un cluster Milvus su GCP</span> </span></p>
 <h2 id="Before-you-start" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -183,7 +183,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/access_key.jpg" alt="GCP Access keys for your user account" class="doc-image" id="gcp-access-keys-for-your-user-account" />
    </span> <span class="img-wrapper"> <span>Chiavi di accesso GCP per l'account utente</span> </span></p>
 <ul>
 <li>Aggiungere values.yaml</li>

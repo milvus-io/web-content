@@ -74,7 +74,7 @@ title: 類似性メトリクス
 <p>ユークリッド距離の公式は以下の通り：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
    </span> <span class="img-wrapper"> <span>ユークリッド距離</span> </span></p>
 <p>ここで<strong>a</strong>= (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>)と<strong>b</strong>= (<sub>b0</sub>,<sub>b0</sub>,...,<sub>bn</sub>-1)はn次元ユークリッド空間の2点である。</p>
 <p>これは最もよく使われる距離尺度で、データが連続的な場合に非常に便利である。</p>
@@ -83,7 +83,7 @@ Milvusはユークリッド距離が距離メトリックとして選択され�
 <h3 id="Inner-product-IP" class="common-anchor-header">内積 (IP)</h3><p>2つのベクトル埋め込み間のIP距離は次のように定義されます：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>IP</span> </span></p>
 <p>IPは、正規化されていないデータを比較する場合や、大きさや角度を気にする場合に便利です。</p>
 <div class="alert note">
@@ -92,30 +92,30 @@ Milvusはユークリッド距離が距離メトリックとして選択され�
 <p>X'が埋め込みXから正規化されたとします：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
    </span> <span class="img-wrapper"> <span>正規化</span> </span></p>
 <p>2つの埋め込み間の相関は次のようになります：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>正規化</span> </span></p>
 <h3 id="Cosine-Similarity" class="common-anchor-header">コサイン類似度</h3><p>コサイン類似度は、2組のベクトル間の角度の余弦を用いて、それらの類似度を測定します。2組のベクトルは、同じ原点（[0,0,...]）から出発し、異なる方向を向いている2つの線分と考えることができます。</p>
 <p>2組のベクトル<strong>A = (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>)</strong>と<strong>B = (<sub>b0</sub>,<sub>b1</sub>,...,<sub>bn</sub>-1)</strong>の余弦類似度を計算するには、次の式を使います：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
    </span> <span class="img-wrapper"> <span>cosine_similarity</span> </span></p>
 <p>余弦類似度は常に区間<strong>[-1, 1]</strong>にある。例えば、2つの比例ベクトルは余弦類似度が<strong>1</strong>、2つの直交ベクトルは類似度が<strong>0</strong>、2つの反対ベクトルは類似度が<strong>-1</strong>です。余弦が大きければ大きいほど、2つのベクトル間の角度が小さくなり、これらの2つのベクトルが互いに似ていることを示します。</p>
 <p>コサイン類似度を1から引くことで、2つのベクトル間のコサイン距離が得られます。</p>
 <h3 id="Jaccard-distance" class="common-anchor-header">ジャカード距離</h3><p>ジャカード類似度係数は、2つの標本集合間の類似度を測定し、定義された集合の交点のカーディナリティをそれらの和のカーディナリティで割ったものとして定義される。有限の標本集合にのみ適用できる。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
    </span> <span class="img-wrapper"> <span>ジャカード類似度係数</span> </span></p>
 <p>Jaccard距離はデータ集合間の非類似度を測定し，Jaccard類似度係数を1から引くことで得られる．</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>ジャカード距離</span> </span></p>
 <h3 id="Hamming-distance" class="common-anchor-header">ハミング距離</h3><p>ハミング距離は2値データの文字列を測定する。同じ長さの2つの文字列間の距離は、ビットが異なるビット位置の数である。</p>
 <p>例えば、1101 1001 と 1001 1101 という2つの文字列があるとする。</p>
@@ -125,7 +125,7 @@ Milvusはユークリッド距離が距離メトリックとして選択され�
 <p>AがBの上部構造であるかどうかを判定するには、次式を使用する：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
    </span> <span class="img-wrapper"> <span>上部構造</span> </span></p>
 <p>ここで</p>
 <ul>
@@ -136,7 +136,7 @@ Milvusはユークリッド距離が距離メトリックとして選択され�
 <p>AがBの部分構造であるかどうかを判定するには、以下の式を使用する：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
    </span> <span class="img-wrapper"> <span>部分構造</span> </span></p>
 <p>ここで</p>
 <ul>

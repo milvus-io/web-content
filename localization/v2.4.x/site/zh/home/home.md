@@ -33,17 +33,17 @@ id: home.md
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/zh/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   <a href="/docs/zh/v2.4.x/install_standalone-docker.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_install.svg" alt="icon" />
    </a> <a href="/docs/zh/v2.4.x/install_standalone-docker.md"> <p class="link-btn">安装 Milvus</p> </a><p>了解如何使用Docker Compose或Kubernetes安装Milvus。</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/zh/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   <a href="/docs/zh/v2.4.x/quickstart.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_quick_start.svg" alt="icon" />
    </a> <a href="/docs/zh/v2.4.x/quickstart.md"> <p class="link-btn">快速启动</p> </a><p>了解如何使用示例代码快速运行 Milvus。</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/bootcamp"> <img translate="no" src="/docs/v2.4.x/assets/home_bootcamp.svg" alt="icon" />
+   <a href="/bootcamp"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">Bootcamp</p> </a><p>
   学习如何使用 Milvus 构建向量相似性搜索应用程序。  </p>
 </div>

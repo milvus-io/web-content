@@ -74,7 +74,7 @@ title: MilvusとDSPyの連携
     </button></h2><p>LLMパイプラインを構築するために貢献するコンポーネントは数多くあります。ここでは、DSPyがどのように動作するかを高レベルで理解するために、いくつかの主要なコンポーネントについて説明します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>DSPyモジュール</span> </span></p>
 <p>シグネチャ：DSPyのシグネチャは宣言的な仕様として機能し、モジュールの入出力動作の概要を示し、タスク実行における言語モデルの指針となる。 モジュール：DSPyのモジュールは、言語モデル（LM）を活用したプログラムの基本コンポーネントとして機能します。連鎖思考やReActのような様々なプロンプト技術を抽象化し、あらゆるDSPyシグネチャを扱うことができます。学習可能なパラメータと、入力を処理して出力を生成する機能を持つこれらのモジュールは、PyTorchのNNモジュールからインスピレーションを受けつつも、LMアプリケーション向けに調整された、より大きなプログラムを形成するために組み合わせることができます。 オプティマイザ：DSPyのオプティマイザは、プロンプトやLLMの重みなど、DSPyプログラムのパラメータを微調整し、精度などの指定されたメトリクスを最大化することで、プログラムの効率を高めます。</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">DSPyでmilvusを使う理由<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">

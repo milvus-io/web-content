@@ -79,7 +79,7 @@ title: Similarity Metrics
 <p>The formula for Euclidean distance is as follows:</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
     <span>euclidean</span>
   </span>
 </p>
@@ -91,7 +91,7 @@ Milvus only caculates the value before applying square root when Euclidean dista
 <h3 id="Inner-product-IP" class="common-anchor-header">Inner product (IP)</h3><p>The IP distance between two vector embeddings are defined as follows:</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
     <span>ip</span>
   </span>
 </p>
@@ -102,14 +102,14 @@ Milvus only caculates the value before applying square root when Euclidean dista
 <p>Suppose X’ is normalized from embedding X:</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
     <span>normalize</span>
   </span>
 </p>
 <p>The correlation between the two embeddings is as follows:</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
     <span>normalization</span>
   </span>
 </p>
@@ -117,7 +117,7 @@ Milvus only caculates the value before applying square root when Euclidean dista
 <p>To calculate the cosine similarity between two sets of vectors <strong>A = (a<sub>0</sub>, a<sub>1</sub>,…, a<sub>n-1</sub>)</strong> and <strong>B = (b<sub>0</sub>, b<sub>1</sub>,…, b<sub>n-1</sub>)</strong>, use the following formula:</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
     <span>cosine_similarity</span>
   </span>
 </p>
@@ -126,14 +126,14 @@ Milvus only caculates the value before applying square root when Euclidean dista
 <h3 id="Jaccard-distance" class="common-anchor-header">Jaccard distance</h3><p>Jaccard similarity coefficient measures the similarity between two sample sets and is defined as the cardinality of the intersection of the defined sets divided by the cardinality of the union of them. It can only be applied to finite sample sets.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
     <span>Jaccard similarity coefficient</span>
   </span>
 </p>
 <p>Jaccard distance measures the dissimilarity between data sets and is obtained by subtracting the Jaccard similarity coefficient from 1. For binary variables, Jaccard distance is equivalent to the Tanimoto coefficient.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
     <span>Jaccard distance</span>
   </span>
 </p>
@@ -145,7 +145,7 @@ Milvus only caculates the value before applying square root when Euclidean dista
 <p>To determine whether A is a superstructure of B, use the following formula:</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
     <span>superstructure</span>
   </span>
 </p>
@@ -158,7 +158,7 @@ Milvus only caculates the value before applying square root when Euclidean dista
 <p>To determine whether A is a substructure of B, use the following formula:</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
     <span>substructure</span>
   </span>
 </p>

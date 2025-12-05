@@ -33,7 +33,7 @@ title: ColPali für multimodales Retrieval mit Milvus verwenden
 <p>Moderne Retrieval-Modelle verwenden in der Regel eine einzige Einbettung, um Text oder Bilder darzustellen. ColBERT ist jedoch ein neuronales Modell, das eine Liste von Einbettungen für jede Dateninstanz verwendet und eine "MaxSim"-Operation zur Berechnung der Ähnlichkeit zwischen zwei Texten einsetzt. Neben Textdaten enthalten auch Abbildungen, Tabellen und Diagramme reichhaltige Informationen, die beim textbasierten Information Retrieval oft unberücksichtigt bleiben.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

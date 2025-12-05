@@ -61,7 +61,7 @@ title: CDC Overview
     </button></h2><p>Milvus-CDC adopts an architecture with two main components - an HTTP server that manages tasks and metadata, and <strong>corelib</strong> that synchronizes task execution with a reader that obtains data from the source Milvus instance and a writer that sends processed data to the target Milvus instance.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
     <span>milvus-cdc-architecture</span>
   </span>
 </p>
@@ -94,7 +94,7 @@ title: CDC Overview
 </ol>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
     <span>milvus-cdc-workflow</span>
   </span>
 </p>

@@ -62,16 +62,16 @@ summary: GrafanaでMilvusのメトリクスを可視化する方法を学びま�
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" />
    </span> <span class="img-wrapper"> <span>ダウンロードとインポート</span> </span></p>
 <h3 id="2-View-metrics" class="common-anchor-header">2.メトリクスの表示</h3><p>監視したいMilvusインスタンスを選択します。Milvusコンポーネントパネルが表示されます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" />
    </span> <span class="img-wrapper"> <span>インスタンスを選択</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" />
    </span> <span class="img-wrapper"> <span>Grafana_パネル</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">次は何をするのか<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

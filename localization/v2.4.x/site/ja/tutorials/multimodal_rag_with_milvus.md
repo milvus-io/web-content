@@ -330,7 +330,7 @@ show_combined_image.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
    </span> <span class="img-wrapper"> <span>パノラマビューの作成</span> </span></p>
 <p><strong>2.再ランク付けと説明</strong></p>
 <p>合成された画像を、適切なプロンプトとともにマルチモーダルLLMサービスに送信し、検索された結果を説明付きでランク付けします。GPT-4oをLLMとして有効にするには、<a href="https://platform.openai.com/docs/quickstart">OpenAIのAPI Keyを</a>用意する必要があります。</p>
@@ -419,6 +419,6 @@ best_img.show()
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
    </span> <span class="img-wrapper"> <span>ベスト結果</span> </span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">クイックデプロイ</h3><p>このチュートリアルでオンラインデモを開始する方法については、<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">サンプルアプリケーションを</a>参照してください。</p>

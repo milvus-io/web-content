@@ -138,9 +138,9 @@ jaeger-query   &lt;none&gt;   *       <span class="hljs-number">192.168</span><s
 <p>다음 스크린샷은 검색 작업 및 로드 수집 작업 중 Milvus의 흔적이 있는 Jaeger UI를 보여줍니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
    </span> <span class="img-wrapper"> <span>추적 검색 요청</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
    </span> <span class="img-wrapper"> <span>로드 수집 요청 추적</span> </span></p>

@@ -330,7 +330,7 @@ show_combined_image.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
    </span> <span class="img-wrapper"> <span>Membuat tampilan panorama</span> </span></p>
 <p><strong>2. Beri peringkat ulang dan jelaskan</strong></p>
 <p>Kami akan mengirimkan gambar gabungan ke layanan LLM multimodal bersama dengan petunjuk yang tepat untuk memberi peringkat hasil yang diambil dengan penjelasan. Untuk mengaktifkan GPT-4o sebagai LLM, Anda harus menyiapkan <a href="https://platform.openai.com/docs/quickstart">OpenAI API Key</a>.</p>
@@ -419,6 +419,6 @@ best_img.show()
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
    </span> <span class="img-wrapper"> <span>Hasil terbaik</span> </span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">Penerapan Cepat</h3><p>Untuk mempelajari tentang cara memulai demo online dengan tutorial ini, silakan lihat <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">contoh aplikasi</a>.</p>

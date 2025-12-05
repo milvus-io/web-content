@@ -44,7 +44,7 @@ summary: >-
 <p>Milvus offre de solides capacités de modélisation des données, ce qui vous permet d'organiser vos données non structurées ou multimodales en collections structurées. Il prend en charge un large éventail de types de données pour différentes modélisations d'attributs, notamment les types numériques et de caractères courants, divers types de vecteurs, des tableaux, des ensembles et JSON, ce qui vous évite d'avoir à gérer plusieurs systèmes de base de données.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>Données non structurées, embeddings et Milvus</span> </span></p>
 <p>Milvus propose trois modes de déploiement, couvrant un large éventail d'échelles de données, du prototypage local dans les blocs-notes Jupyter aux clusters Kubernetes massifs gérant des dizaines de milliards de vecteurs :</p>
 <ul>
@@ -91,7 +91,7 @@ summary: >-
 <p>L'architecture de système hautement découplée et native pour l'informatique en nuage de Milvus garantit que le système peut s'étendre continuellement au fur et à mesure que les données augmentent :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Architecture système hautement découplée de Milvus</span> </span></p>
 <p>Milvus lui-même est entièrement sans état, de sorte qu'il peut être facilement mis à l'échelle à l'aide de Kubernetes ou de clouds publics. En outre, les composants de Milvus sont bien découplés, les trois tâches les plus critiques - recherche, insertion de données et indexation/compactage - étant conçues comme des processus facilement parallélisables, avec une logique complexe séparée. Cela garantit que le nœud de requête, le nœud de données et le nœud d'index correspondants peuvent évoluer de manière indépendante, optimisant ainsi les performances et la rentabilité.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Types de recherches prises en charge par Milvus<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">

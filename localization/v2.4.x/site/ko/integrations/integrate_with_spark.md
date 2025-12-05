@@ -452,7 +452,7 @@ object TransformDemo <span class="hljs-keyword">extends</span> <span class="hljs
 <p>다양한 방법으로 라이브러리를 설치할 수 있습니다. 이 스크린샷은 로컬에서 클러스터로 jar를 업로드하는 방법을 보여줍니다. 자세한 내용은 Databricks 설명서에서 <a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">클러스터 라이브러리를</a> 참조하세요.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
    </span> <span class="img-wrapper"> <span>데이터브릭스 라이브러리 설치</span> </span></p></li>
 <li><p>S3 버킷을 생성하고 이를 Databricks 클러스터의 외부 저장 위치로 구성합니다.</p>
 <p>불킨서트는 데이터를 임시 버킷에 저장해야 질리즈 클라우드에서 일괄적으로 데이터를 가져올 수 있습니다. S3 버킷을 생성하여 데이터브릭의 외부 위치로 설정할 수 있습니다. 자세한 내용은 <a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">외부 위치를</a> 참고하세요.</p></li>

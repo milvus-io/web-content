@@ -59,7 +59,7 @@ title: CDC 總覽
     </button></h2><p>Milvus-CDC 採用的架構包含兩個主要元件 - 管理任務與元資料的 HTTP 伺服器，以及同步任務執行的<strong>corelib</strong>，後者是從來源 Milvus 實體取得資料的閱讀器，而寫入器則是將處理後的資料傳送至目標 Milvus 實體。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>milvus-cdc 架構</span> </span></p>
 <p>在上圖中</p>
 <ul>
@@ -90,7 +90,7 @@ title: CDC 總覽
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>Milvus-cdc-workflow</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

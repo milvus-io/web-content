@@ -59,7 +59,7 @@ title: CDC 개요
     </button></h2><p>Milvus-CDC는 작업과 메타데이터를 관리하는 HTTP 서버와 소스 Milvus 인스턴스에서 데이터를 가져오는 리더와 처리된 데이터를 대상 Milvus 인스턴스로 전송하는 라이터로 작업 실행을 동기화하는 <strong>코어리브의</strong> 두 가지 주요 구성 요소로 구성된 아키텍처를 채택하고 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>MILVUS-CDC-아키텍처</span> </span></p>
 <p>앞의 다이어그램에서</p>
 <ul>
@@ -90,7 +90,7 @@ title: CDC 개요
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>MILVUS-CDC-워크플로우</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

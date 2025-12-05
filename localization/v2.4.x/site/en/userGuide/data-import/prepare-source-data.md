@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>The target collection requires mapping the source data to its schema. The diagram below shows how acceptable source data is mapped to the schema of a target collection.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
     <span>Map data to schema</span>
   </span>
 </p>
