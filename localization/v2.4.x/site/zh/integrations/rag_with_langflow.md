@@ -58,9 +58,9 @@ title: 使用 Langflow 和 Milvus 构建 RAG 系统
     </button></h2><p>安装所有依赖项后，请输入以下命令启动 Langflow 面板：</p>
 <pre><code translate="no" class="language-shell">$ python -m langflow run
 <button class="copy-code-btn"></button></code></pre>
-<p>然后会弹出一个仪表盘，如下所示：<span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" /><span>langflow</span> </span></p>
-<p>我们要创建一个<strong>Vector Store</strong>项目，所以首先要点击<strong>新建项目</strong>按钮。这时会弹出一个面板，我们选择<strong>向量存储 RAG</strong>选项：<span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" /><span>panel</span> </span></p>
-<p>Vector Store Rag 项目创建成功后，默认的向量存储是 AstraDB，而我们想使用 Milvus。因此，我们需要用 Milvus 替换这两个 astraDB 模块，以便使用 Milvus 作为向量存储。<span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" />astraDB </span></p>
+<p>然后会弹出一个仪表盘，如下所示：<span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" /><span>langflow</span> </span></p>
+<p>我们要创建一个<strong>Vector Store</strong>项目，所以首先要点击<strong>新建项目</strong>按钮。这时会弹出一个面板，我们选择<strong>向量存储 RAG</strong>选项：<span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" /><span>panel</span> </span></p>
+<p>Vector Store Rag 项目创建成功后，默认的向量存储是 AstraDB，而我们想使用 Milvus。因此，我们需要用 Milvus 替换这两个 astraDB 模块，以便使用 Milvus 作为向量存储。<span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" />astraDB </span></p>
 <h3 id="Steps-to-replace-astraDB-with-Milvus" class="common-anchor-header">用 Milvus 替换 astraDB 的步骤：</h3><ol>
 <li>删除现有的向量存储卡。点击上图中标红的两张 AstraDB 卡，按<strong>退格</strong>键删除它们。</li>
 <li>点击侧边栏中的<strong>Vector Store</strong>选项，选择 Milvus 并将其拖入画布。这样做两次，因为我们需要 2 个 Milvus 卡，一个用于存储文件处理工作流，一个用于搜索工作流。</li>
@@ -69,7 +69,7 @@ title: 使用 Langflow 和 Milvus 构建 RAG 系统
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
    </span> <span class="img-wrapper"> <span>Milvus 结构演示</span> </span></p>
 <h3 id="Embed-knowledge-into-the-RAG-system" class="common-anchor-header">将知识嵌入 RAG 系统</h3><ol>
 <li>通过左下角的文件模块上传文件作为 LLM 的知识库。这里我们上传了一个包含 Milvus 简介的文件</li>
@@ -78,5 +78,5 @@ title: 使用 Langflow 和 Milvus 构建 RAG 系统
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
    </span> <span class="img-wrapper"> <span>为什么选择 Milvus？</span> </span></p>

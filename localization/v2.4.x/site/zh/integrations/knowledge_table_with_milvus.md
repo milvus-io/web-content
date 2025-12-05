@@ -136,7 +136,7 @@ title: 使用 Milvus 的知识表
     </button></h2><p>前台可从<code translate="no">http://localhost:3000</code> 访问，后台可从<code translate="no">http://localhost:8000</code> 访问。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/knowlege_table.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowlege_table.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

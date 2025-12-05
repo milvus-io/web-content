@@ -330,7 +330,7 @@ show_combined_image.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
    </span> <span class="img-wrapper"> <span>파노라마 보기 만들기</span> </span></p>
 <p><strong>2. 재랭크 및 설명</strong></p>
 <p>결합된 이미지를 적절한 프롬프트와 함께 멀티모달 LLM 서비스로 전송하여 검색된 결과에 대한 설명과 함께 순위를 매깁니다. GPT-4o를 LLM으로 사용하려면 <a href="https://platform.openai.com/docs/quickstart">OpenAI API 키를</a> 준비해야 합니다.</p>
@@ -419,6 +419,6 @@ best_img.show()
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
    </span> <span class="img-wrapper"> <span>최상의 결과</span> </span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">빠른 배포</h3><p>이 튜토리얼로 온라인 데모를 시작하는 방법에 대해 알아보려면 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">예제 애플리케이션을</a> 참조하세요.</p>

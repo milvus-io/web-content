@@ -76,7 +76,7 @@ title: Ähnlichkeitsmetriken
 <p>Die Formel für den euklidischen Abstand lautet wie folgt:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
    </span> <span class="img-wrapper"> <span>euklidisch</span> </span></p>
 <p>wobei <strong>a</strong> = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>) und <strong>b</strong> = (<sub>b0</sub>, <sub>b0</sub>,..., <sub>bn-1</sub>) zwei Punkte im n-dimensionalen euklidischen Raum sind</p>
 <p>Es ist die am häufigsten verwendete Abstandsmetrik und ist sehr nützlich, wenn die Daten kontinuierlich sind.</p>
@@ -85,7 +85,7 @@ Milvus berechnet den Wert vor der Anwendung der Quadratwurzel nur dann, wenn der
 <h3 id="Inner-product-IP" class="common-anchor-header">Inneres Produkt (IP)</h3><p>Der IP-Abstand zwischen zwei Vektoreinbettungen ist wie folgt definiert:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>ip</span> </span></p>
 <p>IP ist nützlicher, wenn Sie nicht-normalisierte Daten vergleichen müssen oder wenn Sie sich für den Betrag und den Winkel interessieren.</p>
 <div class="alert note">
@@ -94,30 +94,30 @@ Milvus berechnet den Wert vor der Anwendung der Quadratwurzel nur dann, wenn der
 <p>Angenommen, X' ist von der Einbettung X normalisiert:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
    </span> <span class="img-wrapper"> <span>normalisieren</span>. </span></p>
 <p>Die Korrelation zwischen den beiden Einbettungen ist wie folgt:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>Normalisierung</span> </span></p>
 <h3 id="Cosine-Similarity" class="common-anchor-header">Kosinus-Ähnlichkeit</h3><p>Bei der Cosinus-Ähnlichkeit wird der Kosinus des Winkels zwischen zwei Vektorsätzen verwendet, um zu messen, wie ähnlich sie sich sind. Man kann sich die beiden Vektorsätze als zwei Liniensegmente vorstellen, die vom gleichen Ursprung ([0,0,...]) ausgehen, aber in unterschiedliche Richtungen zeigen.</p>
 <p>Um die Cosinus-Ähnlichkeit zwischen zwei Mengen von Vektoren <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> und <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> zu berechnen, verwenden Sie die folgende Formel:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
    </span> <span class="img-wrapper"> <span>Cosinus_Ähnlichkeit</span> </span></p>
 <p>Die Kosinusähnlichkeit liegt immer im Intervall <strong>[-1, 1]</strong>. Zwei proportionale Vektoren haben beispielsweise eine Cosinus-Ähnlichkeit von <strong>1</strong>, zwei orthogonale Vektoren haben eine Ähnlichkeit von <strong>0</strong> und zwei entgegengesetzte Vektoren haben eine Ähnlichkeit von <strong>-1</strong>. Je größer der Cosinus, desto kleiner der Winkel zwischen zwei Vektoren, was bedeutet, dass diese beiden Vektoren einander ähnlicher sind.</p>
 <p>Wenn man die Kosinusähnlichkeit von 1 subtrahiert, erhält man den Kosinusabstand zwischen zwei Vektoren.</p>
 <h3 id="Jaccard-distance" class="common-anchor-header">Jaccard-Abstand</h3><p>Der Jaccard-Ähnlichkeitskoeffizient misst die Ähnlichkeit zwischen zwei Stichprobenmengen und ist definiert als die Kardinalität der Schnittmenge der definierten Mengen geteilt durch die Kardinalität der Vereinigung dieser Mengen. Er kann nur auf endliche Stichprobenmengen angewendet werden.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
    </span> <span class="img-wrapper"> <span>Jaccard-Ähnlichkeitskoeffizient</span> </span></p>
 <p>Die Jaccard-Distanz misst die Unähnlichkeit zwischen Datensätzen und wird ermittelt, indem der Jaccard-Ähnlichkeitskoeffizient von 1 subtrahiert wird. Für binäre Variablen entspricht die Jaccard-Distanz dem Tanimoto-Koeffizienten.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>Jaccard-Abstand</span> </span></p>
 <h3 id="Hamming-distance" class="common-anchor-header">Hamming-Abstand</h3><p>Die Hamming-Distanz misst binäre Datenstrings. Der Abstand zwischen zwei Zeichenfolgen gleicher Länge ist die Anzahl der Bitpositionen, an denen die Bits unterschiedlich sind.</p>
 <p>Nehmen wir zum Beispiel an, es gibt zwei Zeichenketten, 1101 1001 und 1001 1101.</p>
@@ -127,7 +127,7 @@ Milvus berechnet den Wert vor der Anwendung der Quadratwurzel nur dann, wenn der
 <p>Um festzustellen, ob A ein Überbau von B ist, verwendet man die folgende Formel:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
    </span> <span class="img-wrapper"> <span>Überbau</span> </span></p>
 <p>Wobei:</p>
 <ul>
@@ -138,7 +138,7 @@ Milvus berechnet den Wert vor der Anwendung der Quadratwurzel nur dann, wenn der
 <p>Um festzustellen, ob A eine Unterstruktur von B ist, verwenden Sie die folgende Formel:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
    </span> <span class="img-wrapper"> <span>Unterstruktur</span> </span></p>
 <p>Wobei:</p>
 <ul>

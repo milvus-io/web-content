@@ -24,8 +24,8 @@ title: パフォーマンスFAQ
 <p>以下のグラフは、sift50mデータセットとIVF_SQ8インデックスで実行したテストの結果です。<code translate="no">nlist</code>/<code translate="no">nprobe</code> の異なるペアのリコールとクエリのパフォーマンスを比較しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
-   </span> <span class="img-wrapper"> <span>精度テスト</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>パフォーマンステスト</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
+   </span> <span class="img-wrapper"> <span>精度テスト</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>パフォーマンステスト</span> </span></p>
 <h4 id="Why-do-queries-sometimes-take-longer-on-smaller-datasets" class="common-anchor-header">なぜ小さいデータセットではクエリに時間がかかるのか？</h4><p>クエリー操作はセグメントに対して行われる。インデックスがあると、セグメントへのクエリにかかる時間が短縮される。セグメントがインデックス化されていない場合、Milvusは生データに対して総当り検索を行うため、クエリ時間が大幅に増加します。</p>
 <p>そのため、インデックスが作成されていない小さなデータセット（コレクション）に対するクエリには通常時間がかかる。これはセグメントのサイズが<code translate="no">rootCoord.minSegmentSizeToEnableindex</code> で設定されたインデックス構築のしきい値に達していないためである。<code translate="no">create_index()</code> を呼び出すと、Milvusは閾値に達しているがまだ自動的にインデックスが作成されていないセグメントに強制的にインデックスを作成し、クエリのパフォーマンスを大幅に向上させることができます。</p>
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">CPU使用率に影響を与える要因は何ですか?</h4><p>Milvusがインデックスを構築したり、クエリを実行したりすると、CPU使用率が増加します。一般的に、インデックス構築はシングルスレッドで実行されるAnnoyを使用する場合を除き、CPUを集中的に使用します。</p>

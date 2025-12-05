@@ -24,7 +24,7 @@ title: モニタリング
 <p><strong>CDC Grafanaダッシュボードの概要</strong>：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-dashboard.png" alt="milvus-cdc-dashboard" class="doc-image" id="milvus-cdc-dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-dashboard.png" alt="milvus-cdc-dashboard" class="doc-image" id="milvus-cdc-dashboard" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-dashboard</span> </span></p>
 <p><strong>キーメトリクスの説明</strong></p>
 <ul>

@@ -45,7 +45,7 @@ title: 'Costruire RAG con Milvus, vLLM e Llama 3.1'
 <p>Secondo il documento &quot;<a href="https://arxiv.org/abs/2309.06180">Efficient Memory Management for Large Language Model Serving with PagedAttention</a>&quot;, la cache KV utilizza circa il 30% della memoria della GPU, causando potenziali problemi di memoria. La cache KV è archiviata in memoria contigua, ma la modifica delle dimensioni può causare la frammentazione della memoria, che è inefficiente per la computazione.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/vllm_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -53,7 +53,7 @@ title: 'Costruire RAG con Milvus, vLLM e Llama 3.1'
 <p>Utilizzando la memoria virtuale per la cache KV, vLLM alloca la memoria fisica della GPU solo quando necessario, eliminando la frammentazione della memoria ed evitando la pre-allocazione. Nei test, vLLM ha superato <a href="https://huggingface.co/docs/transformers/main_classes/text_generation">HuggingFace Transformers (HF</a> ) e <a href="https://github.com/huggingface/text-generation-inference">Text Generation Inference</a> (TGI), ottenendo un throughput fino a 24 volte superiore rispetto a HF e 3,5 volte superiore rispetto a TGI sulle GPU NVIDIA A10G e A100.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/vllm_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

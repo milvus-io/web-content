@@ -25,7 +25,7 @@ title: График RAG с помощью Milvus
 <p>В этой тетради мы представляем простой, но мощный подход, позволяющий значительно улучшить производительность этого сценария. Это простая парадигма RAG с многоходовым поиском и последующим ранжированием, но она логически реализует Graph RAG и достигает современной производительности при обработке многоходовых вопросов. Давайте посмотрим, как это реализовано.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 )[0]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">Расширение подграфа</h3><p>Мы используем извлеченные сущности и отношения для расширения подграфа и получения отношений-кандидатов, а затем объединяем их двумя способами. Ниже приведена блок-схема процесса расширения подграфа:  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

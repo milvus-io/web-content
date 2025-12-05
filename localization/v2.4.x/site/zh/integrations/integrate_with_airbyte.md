@@ -111,12 +111,12 @@ title: Airbyte：开源数据移动基础架构
 <p>让我们使用 1000 个标记的分块大小，以及正文、标题、描述和主题等文本字段，因为这些将出现在我们从 Zendesk 收到的数据中。</p>
 <ul>
 <li><strong>嵌入</strong>--使用机器学习模型将处理部分生成的文本块转换为向量嵌入，然后就可以搜索语义相似性了。要创建嵌入，您必须提供 OpenAI API 密钥。Airbyte 会将每个文本块发送到 OpenAI，并将生成的向量添加到加载到 Milvus 集群的实体中。</li>
-<li><strong>索引</strong>--一旦完成了块的向量化，就可以将其加载到数据库中。为此，请插入在 Milvus 集群中设置集群和集合时获得的信息。 <div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_1.png" width="40%"/></div>点击 "测试并保存 "将检查一切是否正确（有效凭证、集合存在且与配置的嵌入具有相同的向量维度等）。</li>
+<li><strong>索引</strong>--一旦完成了块的向量化，就可以将其加载到数据库中。为此，请插入在 Milvus 集群中设置集群和集合时获得的信息。 <div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_1.png" width="40%"/></div>点击 "测试并保存 "将检查一切是否正确（有效凭证、集合存在且与配置的嵌入具有相同的向量维度等）。</li>
 </ul>
-<h3 id="Set-up-stream-sync-flow" class="common-anchor-header">设置流同步流程</h3><p>数据流准备就绪前的最后一步是选择要同步的 "流"。数据流是源中记录的集合。由于 Zendesk 支持大量与我们的用例无关的流，因此我们只选择 "票单 "和 "文章"，禁用所有其他流，以节省带宽，并确保只有相关信息才会显示在搜索中：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_2.png" width="40%"/></div>您可以通过单击流名称来选择要从源中提取的字段。增量|追加+删减 "同步模式意味着后续连接运行将保持 Zendesk 和 Milvus 同步，同时传输最少的数据（仅传输自上次运行以来发生变化的文章和票单）。</p>
+<h3 id="Set-up-stream-sync-flow" class="common-anchor-header">设置流同步流程</h3><p>数据流准备就绪前的最后一步是选择要同步的 "流"。数据流是源中记录的集合。由于 Zendesk 支持大量与我们的用例无关的流，因此我们只选择 "票单 "和 "文章"，禁用所有其他流，以节省带宽，并确保只有相关信息才会显示在搜索中：<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_2.png" width="40%"/></div>您可以通过单击流名称来选择要从源中提取的字段。增量|追加+删减 "同步模式意味着后续连接运行将保持 Zendesk 和 Milvus 同步，同时传输最少的数据（仅传输自上次运行以来发生变化的文章和票单）。</p>
 <p>连接建立后，Airbyte 将立即开始同步数据。它可能需要几分钟才能出现在你的 Milvus 收集中。</p>
 <p>如果您选择了复制频率，Airbyte 将定期运行，使您的 Milvus 收集与 Zendesk 文章和新创建问题的更改保持同步。</p>
-<h3 id="Check-flow" class="common-anchor-header">检查流程</h3><p>你可以在 Milvus 集群用户界面中检查数据在集合中的结构，方法是导航到 playground 并执行 "Query Data"（查询数据）查询，并将过滤器设置为"_ab_stream == \"ticket/""。<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_3.png" width="40%"/></div>在结果视图中可以看到，来自 Zendesk 的每条记录都作为独立实体存储在 Milvus 中，并带有所有指定的元数据。嵌入所基于的文本块显示为 "text "属性--这是使用 OpenAI 嵌入的文本，也是我们要搜索的内容。</p>
+<h3 id="Check-flow" class="common-anchor-header">检查流程</h3><p>你可以在 Milvus 集群用户界面中检查数据在集合中的结构，方法是导航到 playground 并执行 "Query Data"（查询数据）查询，并将过滤器设置为"_ab_stream == \"ticket/""。<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_3.png" width="40%"/></div>在结果视图中可以看到，来自 Zendesk 的每条记录都作为独立实体存储在 Milvus 中，并带有所有指定的元数据。嵌入所基于的文本块显示为 "text "属性--这是使用 OpenAI 嵌入的文本，也是我们要搜索的内容。</p>
 <h2 id="Build-Streamlit-app-querying-the-collection" class="common-anchor-header">构建查询集合的 Streamlit 应用程序<button data-href="#Build-Streamlit-app-querying-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -159,7 +159,7 @@ text_val = st.text_area(<span class="hljs-string">&quot;Describe your problem&qu
 <p>使用 Streamlit run 运行应用程序：</p>
 <pre><code translate="no" class="language-shell">streamlit run basic_support_form.py
 <button class="copy-code-btn"></button></code></pre>
-<p>这将渲染一个基本表单：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_4.png" width="40%"/></div>本示例的代码也可在<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py">GitHub</a> 上找到。</p>
+<p>这将渲染一个基本表单：<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_4.png" width="40%"/></div>本示例的代码也可在<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py">GitHub</a> 上找到。</p>
 <h3 id="Set-up-backend-query-service" class="common-anchor-header">设置后台查询服务</h3><p>接下来，让我们检查现有的可能相关的未结票单。为此，我们使用 OpenAI 嵌入用户输入的文本，然后在我们的集合中进行相似性搜索，筛选仍未结案的票据。如果所提供的票单与现有票单之间的距离非常小，就会让用户知道，并且不会提交：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
 <span class="hljs-keyword">import</span> os
@@ -210,7 +210,7 @@ text_val = st.text_area(<span class="hljs-string">&quot;Describe your problem?&q
 streamlit run app.<span class="hljs-property">py</span>
 <button class="copy-code-btn"></button></code></pre>
 
-<p>当尝试提交已存在的票单时，结果将是这样的：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_5.png" width="40%"/></div>本示例的代码也可以在<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py">GitHub</a> 上找到。</p>
+<p>当尝试提交已存在的票单时，结果将是这样的：<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_5.png" width="40%"/></div>本示例的代码也可以在<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py">GitHub</a> 上找到。</p>
 <h3 id="Show-more-relevant-information" class="common-anchor-header">显示更多相关信息</h3><p>从隐藏在最终版本中的绿色调试输出中可以看到，有两张票单符合我们的搜索条件（状态为新票、来自当前组织且靠近嵌入向量）。但是，第一张（相关）的排名高于第二张（在这种情况下不相关），这反映在较低的距离值上。这种关系在嵌入向量中得到了体现，而不像常规全文搜索那样直接匹配单词。</p>
 <p>最后，让我们在提交票单后显示有用的信息，为用户提供尽可能多的相关信息。</p>
 <p>为此，我们将在提交票单后进行第二次搜索，获取匹配度最高的知识库文章：</p>
@@ -229,7 +229,7 @@ streamlit run app.<span class="hljs-property">py</span>
 
 <button class="copy-code-btn"></button></code></pre>
 
-<p>如果没有相似度较高的开放支持票单，则提交新票单，相关知识文章将显示在下方：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_6.png" width="40%"/></div>此示例的代码也可在<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py">Github</a> 上找到。</p>
+<p>如果没有相似度较高的开放支持票单，则提交新票单，相关知识文章将显示在下方：<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_6.png" width="40%"/></div>此示例的代码也可在<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py">Github</a> 上找到。</p>
 <h2 id="Conclusion" class="common-anchor-header">结论<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

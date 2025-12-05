@@ -26,7 +26,7 @@ title: Milvus Architektur Überblick
 <p>Milvus verwendet eine Shared-Storage-Architektur mit Disaggregation von Speicher und Rechenleistung und horizontaler Skalierbarkeit für seine Rechenknoten. Nach dem Prinzip der Disaggregation von Daten- und Steuerungsebene besteht Milvus aus <a href="/docs/de/v2.4.x/four_layers.md">vier Schichten</a>: Zugriffsschicht, Koordinatordienst, Arbeitsknoten und Speicher. Diese Schichten sind voneinander unabhängig, wenn es um Skalierung oder Notfallwiederherstellung geht.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
    </span> <span class="img-wrapper"> <span>Architektur_Diagramm</span> </span></p>
 <p>Gemäß der Abbildung können die Schnittstellen in die folgenden Kategorien eingeteilt werden:</p>
 <ul>

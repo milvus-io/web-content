@@ -89,7 +89,7 @@ summary: 了解 Milvus 的时间同步系统。
 <p>TSO 时间戳是一种<code translate="no">uint64</code> 值，由物理部分和逻辑部分组成。下图展示了时间戳的格式。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
    </span> <span class="img-wrapper"> <span>TSO_Timestamp</span>. </span></p>
 <p>如图所示，开头的 46 位是物理部分，即以毫秒为单位的 UTC 时间。最后 18 位是逻辑部分。</p>
 <h2 id="Time-synchronization-system-timetick" class="common-anchor-header">时间同步系统（timetick）<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
@@ -114,19 +114,19 @@ summary: 了解 Milvus 的时间同步系统。
   <code translate="no">MsgStream</code> Timesync_proxy_ins 是消息队列的封装器，在 Milvus 2.0 中默认为 Pulsar。</div>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
 <p>一般原则是，在<code translate="no">MsgStream</code> 中，来自同一代理的<code translate="no">InsertMsgs</code> 的时间戳必须是递增的。但是，来自不同代理的<code translate="no">InsertMsgs</code> 的时间戳却没有这样的规则。</p>
 <p>下图是<code translate="no">InsertMsgs</code> 在<code translate="no">MsgStream</code> 中的示例。该代码段包含五个<code translate="no">InsertMsgs</code> ，其中三个来自<code translate="no">Proxy1</code> ，其余来自<code translate="no">Proxy2</code> 。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
 <p>来自<code translate="no">Proxy1</code> 的三个<code translate="no">InsertMsgs</code> 的时间戳是递增的，来自<code translate="no">Proxy2</code> 的两个<code translate="no">InsertMsgs</code> 的时间戳也是递增的。但是，<code translate="no">Proxy1</code> 和<code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> 之间没有特定的顺序。</p>
 <p><code translate="no">Proxy1</code> 一种可能的情况是，当从<code translate="no">Proxy2</code> 读取时间戳为<code translate="no">110</code> 的信息时，Milvus 发现时间戳为<code translate="no">80</code> 的信息仍在<code translate="no">MsgStream</code> 中。因此，Milvus 引入了时间同步系统 timetick，以确保从<code translate="no">MsgStream</code> 读取信息时，必须消耗掉所有时间戳值较小的信息。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>时间同步</span> </span></p>
 <p>如上图所示、</p>
 <ul>
@@ -137,7 +137,7 @@ summary: 了解 Milvus 的时间同步系统。
 <p>下图是<code translate="no">Msgstream</code> 插入时间刻度的示例。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>时间戳</span> </span></p>
 <p><code translate="no">MsgStream</code> 根据时间刻度分批处理报文，以确保输出的报文符合时间戳的要求。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">

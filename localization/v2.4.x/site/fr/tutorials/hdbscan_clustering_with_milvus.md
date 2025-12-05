@@ -272,6 +272,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>Image</span> </span></p>
 <p>Ici, nous démontrons que les données sont bien regroupées, et vous pouvez survoler les points pour vérifier le texte qu'ils représentent. Avec ce carnet, nous espérons que vous apprendrez à utiliser HDBSCAN pour regrouper efficacement des embeddings avec Milvus, ce qui peut également être appliqué à d'autres types de données. Combinée à de grands modèles de langage, cette approche permet une analyse plus approfondie de vos données à grande échelle.</p>

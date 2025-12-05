@@ -25,7 +25,7 @@ title: Milvus를 사용한 그래프 RAG
 <p>이 노트북에서는 이 시나리오의 성능을 크게 향상시킬 수 있는 간단하면서도 강력한 접근 방식을 소개합니다. 이 방법은 다방향 검색 후 재순위를 매기는 단순한 RAG 패러다임이지만 그래프 RAG를 논리적으로 구현하고 멀티홉 질문을 처리하는 데 있어 최첨단 성능을 달성합니다. 어떻게 구현되는지 살펴보겠습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 )[0]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">하위 그래프 확장</h3><p>검색된 엔티티와 관계를 사용하여 하위 그래프를 확장하고 후보 관계를 얻은 다음 두 가지 방법에서 병합합니다. 다음은 하위 그래프 확장 프로세스의 순서도입니다:  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

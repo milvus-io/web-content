@@ -56,7 +56,7 @@ title: Consistency
 <h3 id="Strong" class="common-anchor-header">Strong</h3><p>Strong is the highest and the most strict level of consistency. It ensures that users can read the latest version of data.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
     <span>Strong consistency</span>
   </span>
 </p>
@@ -64,7 +64,7 @@ title: Consistency
 <h3 id="Bounded-staleness" class="common-anchor-header">Bounded staleness</h3><p>Bounded staleness, as its name suggests, allows data inconsistency during a certain period of time. However, generally, the data are always globally consistent out of that period of time.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
     <span>Bounded staleness consistency</span>
   </span>
 </p>
@@ -72,7 +72,7 @@ title: Consistency
 <h3 id="Session" class="common-anchor-header">Session</h3><p>Session ensures that all data writes can be immediately perceived in reads during the same session. In other words, when you write data via one client, the newly inserted data instantaneously become searchable.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
     <span>Session consistency</span>
   </span>
 </p>
@@ -80,7 +80,7 @@ title: Consistency
 <h3 id="Eventually" class="common-anchor-header">Eventually</h3><p>There is no guaranteed order of reads and writes, and replicas eventually converge to the same state given that no further write operations are done. Under the consistency of "eventually", replicas start working on read requests with the latest updated values. Eventually consistent is the weakest level among the four.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
     <span>Eventual consistency</span>
   </span>
 </p>

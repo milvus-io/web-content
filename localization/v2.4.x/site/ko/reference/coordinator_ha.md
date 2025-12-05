@@ -37,7 +37,7 @@ title: 코디네이터 HA
     </button></h2><p>2.2.3 릴리스에서 Milvus는 코디네이터가 활성-대기 모드에서 작동하도록 고가용성을 구현하여 서비스 불가를 초래할 수 있는 단일 장애 지점(SPoF)을 완화합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>코디네이터 HA</span> </span></p>
 <p>위 그림은 활성-대기 모드에서 코디네이터가 작동하는 방식을 보여줍니다. 한 쌍의 코디네이터가 시작되면 서버 ID를 사용하여 etcd에 등록하고 활성 역할을 놓고 경쟁합니다. etcd로부터 활성 역할을 임대하는 데 성공한 코디네이터가 서비스를 시작하고, 쌍의 다른 코디네이터는 대기 상태로 남아 활성 역할을 지켜보다가 활성 코디네이터가 죽으면 서비스를 제공할 준비를 합니다.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">코디네이터 HA 사용<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">

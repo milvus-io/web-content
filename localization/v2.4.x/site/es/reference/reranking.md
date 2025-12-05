@@ -37,7 +37,7 @@ title: Nueva clasificación
         ></path>
       </svg>
     </button></h2><p>La siguiente figura ilustra la ejecución de una búsqueda híbrida en Milvus y destaca el papel de la reordenación en el proceso.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
 <p>La reordenación en la búsqueda híbrida es un paso crucial que consolida los resultados de varios campos vectoriales, garantizando que el resultado final sea relevante y esté correctamente priorizado. Actualmente, Milvus ofrece estas estrategias de reordenación:</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>: Este enfoque fusiona resultados calculando una media ponderada de puntuaciones (o distancias vectoriales) de diferentes búsquedas vectoriales. Asigna pesos en función de la importancia de cada campo vectorial.</p></li>
@@ -63,7 +63,7 @@ title: Nueva clasificación
 <ul>
 <li><p><strong>Recopilar puntuaciones durante la recuperación</strong>: Recoge los resultados y sus puntuaciones de diferentes rutas de recuperación de vectores.</p></li>
 <li><p><strong>Normalización de puntuaciones</strong>: Normalizar las puntuaciones de cada ruta a un rango [0,1], donde los valores más cercanos a 1 indican mayor relevancia. Esta normalización es crucial debido a que las distribuciones de las puntuaciones varían según los distintos tipos de métricas. Por ejemplo, la distancia para IP oscila entre [-∞,+∞], mientras que la distancia para L2 oscila entre [0,+∞]. Milvus emplea la función <code translate="no">arctan</code>, transformando los valores al rango [0,1] para proporcionar una base estandarizada para los diferentes tipos de métrica.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
 <li><p><strong>Asignación de pesos</strong>: Asigna un peso <code translate="no">w𝑖</code> a cada ruta de recuperación de vectores. Los usuarios especifican las ponderaciones, que reflejan la fiabilidad, precisión u otras métricas pertinentes de la fuente de datos. Cada peso oscila entre [0,1].</p></li>
 <li><p><strong>Fusión de puntuaciones</strong>: Calcula una media ponderada de las puntuaciones normalizadas para obtener la puntuación final. A continuación, se ordenan los resultados en función de estas puntuaciones de mayor a menor para generar los resultados finales ordenados.</p></li>
 </ul>

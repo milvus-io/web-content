@@ -140,9 +140,9 @@ jaeger-query   &lt;none&gt;   *       <span class="hljs-number">192.168</span><s
 <p>La capture d'écran suivante montre l'interface utilisateur Jaeger avec les traces de Milvus pendant une opération de recherche et une opération de collecte de charge :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
    </span> <span class="img-wrapper"> <span>Demande de recherche de traces</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
    </span> <span class="img-wrapper"> <span>Trace de la demande de collecte de charge</span> </span></p>

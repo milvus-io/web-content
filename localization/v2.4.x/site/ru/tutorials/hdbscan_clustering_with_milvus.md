@@ -271,6 +271,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>изображение</span> </span></p>
 <p>Здесь мы демонстрируем, что данные хорошо кластеризованы, и вы можете навести курсор на точки, чтобы проверить текст, который они представляют. Мы надеемся, что с помощью этого блокнота вы узнаете, как эффективно использовать HDBSCAN для кластеризации вкраплений с помощью Milvus, что также может быть применено к другим типам данных. В сочетании с большими языковыми моделями этот подход позволяет проводить более глубокий анализ данных в больших масштабах.</p>

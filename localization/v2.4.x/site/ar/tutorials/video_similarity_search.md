@@ -36,5 +36,5 @@ title: بحث تشابه الفيديو
 <p><br/></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/video_search.png" alt="video_search" class="doc-image" id="video_search" />
-   </span> <span class="img-wrapper"> <span>Video_search</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/video_search_demo.gif" alt="video_search_demo" class="doc-image" id="video_search_demo" /><span>فيديو_بحث_فيديو_بحث_عرضي</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/video_search.png" alt="video_search" class="doc-image" id="video_search" />
+   </span> <span class="img-wrapper"> <span>Video_search</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/video_search_demo.gif" alt="video_search_demo" class="doc-image" id="video_search_demo" /><span>فيديو_بحث_فيديو_بحث_عرضي</span> </span></p>

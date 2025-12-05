@@ -37,7 +37,7 @@ title: Reranking
         ></path>
       </svg>
     </button></h2><p>La figura seguente illustra l'esecuzione di una ricerca ibrida in Milvus ed evidenzia il ruolo del reranking nel processo.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
 <p>Il reranking nella ricerca ibrida è una fase cruciale che consolida i risultati di diversi campi vettoriali, assicurando che l'output finale sia pertinente e accuratamente prioritario. Attualmente, Milvus offre queste strategie di reranking:</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>: Questo approccio unisce i risultati calcolando una media ponderata dei punteggi (o distanze vettoriali) di diverse ricerche vettoriali. Assegna i pesi in base alla rilevanza di ciascun campo vettoriale.</p></li>
@@ -63,7 +63,7 @@ title: Reranking
 <ul>
 <li><p><strong>Raccogliere i punteggi durante il recupero</strong>: Raccoglie i risultati e i loro punteggi da diversi percorsi di recupero vettoriale.</p></li>
 <li><p><strong>Normalizzazione dei punteggi</strong>: Normalizza i punteggi di ogni percorso in un intervallo [0,1], dove i valori più vicini a 1 indicano una maggiore rilevanza. Questa normalizzazione è fondamentale perché le distribuzioni dei punteggi variano in base ai diversi tipi di metrica. Ad esempio, la distanza per IP varia da [-∞,+∞], mentre la distanza per L2 varia da [0,+∞]. Milvus utilizza la funzione <code translate="no">arctan</code>, trasformando i valori nell'intervallo [0,1] per fornire una base standardizzata per i diversi tipi di metrica.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
 <li><p><strong>Allocazione dei pesi</strong>: Assegna un peso <code translate="no">w𝑖</code> a ogni percorso di recupero vettoriale. Gli utenti specificano i pesi, che riflettono l'affidabilità, l'accuratezza o altre metriche pertinenti della fonte di dati. Ogni peso varia da [0,1].</p></li>
 <li><p><strong>Fusione del punteggio</strong>: Calcola una media ponderata dei punteggi normalizzati per ottenere il punteggio finale. I risultati vengono quindi classificati in base a questi punteggi, dal più alto al più basso, per generare i risultati finali ordinati.</p></li>
 </ul>

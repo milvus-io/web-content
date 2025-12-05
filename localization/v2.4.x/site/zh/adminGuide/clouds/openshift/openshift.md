@@ -65,12 +65,12 @@ summary: 了解如何在 OpenShift 上部署 Milvus 集群。
 <li><p>在 openshift 控制台中，导航至<strong>Workloads</strong>&gt;<strong>Pods</strong>。选择项目<strong>cert-manager</strong>。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
    </span> <span class="img-wrapper"> <span>cert-manager-1</span> </span></p></li>
 <li><p>确保所有 pod 已准备就绪。例如，下图显示 pod 仍在启动中。请等待所有 pod 准备就绪。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
    </span> <span class="img-wrapper"> <span>证书管理器-2</span> </span></p></li>
 </ol></li>
 </ol>

@@ -100,7 +100,7 @@ title: Desagregación de almacenamiento/informática
 <p>Milvus sigue el principio de "registro como datos", por lo que Milvus no mantiene una tabla física sino que garantiza la fiabilidad de los datos mediante la persistencia del registro y los registros de instantáneas.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>Mecanismo_de_registro</span> </span></p>
 <p>El log broker es la columna vertebral de Milvus. Es responsable de la persistencia de los datos y de la desagregación de lectura-escritura, gracias a su mecanismo innato pub-sub. La ilustración anterior muestra una representación simplificada del mecanismo, en la que el sistema se divide en dos funciones, el corredor de registros (para mantener la secuencia de registros) y el suscriptor de registros. El primero registra todas las operaciones que cambian los estados de las colecciones; el segundo se suscribe a la secuencia de registros para actualizar los datos locales y proporciona servicios en forma de copias de sólo lectura. El mecanismo pub-sub también permite ampliar el sistema en términos de captura de datos de cambios (CDC) y despliegue distribuido globalmente.</p>
 <h2 id="Whats-next" class="common-anchor-header">Más información<button data-href="#Whats-next" class="anchor-icon" translate="no">

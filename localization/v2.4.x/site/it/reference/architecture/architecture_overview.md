@@ -25,7 +25,7 @@ title: Panoramica dell'architettura di Milvus
 <p>Milvus adotta un'architettura di storage condiviso che prevede la disaggregazione dello storage e dell'elaborazione e la scalabilità orizzontale dei nodi di elaborazione. Seguendo il principio della disaggregazione del piano dati e del piano di controllo, Milvus comprende <a href="/docs/it/v2.4.x/four_layers.md">quattro livelli</a>: livello di accesso, servizio di coordinamento, nodo lavoratore e storage. Questi livelli sono indipendenti l'uno dall'altro per quanto riguarda la scalabilità o il disaster recovery.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
    </span> <span class="img-wrapper"> <span>Diagramma_di_architettura</span> </span></p>
 <p>Secondo la figura, le interfacce possono essere classificate nelle seguenti categorie:</p>
 <ul>

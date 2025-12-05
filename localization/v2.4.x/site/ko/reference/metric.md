@@ -74,7 +74,7 @@ title: 유사성 메트릭
 <p>유클리드 거리의 공식은 다음과 같습니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
    </span> <span class="img-wrapper"> <span>유클리드</span> </span></p>
 <p>여기서 <strong>a</strong> = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)과 <strong>b</strong> = (<sub>b0</sub>, <sub>b0</sub>,..., <sub>bn-1</sub>)은 n차원 유클리드 공간에서 두 점입니다.</p>
 <p>가장 일반적으로 사용되는 거리 측정법으로 데이터가 연속적인 경우 매우 유용합니다.</p>
@@ -83,7 +83,7 @@ title: 유사성 메트릭
 <h3 id="Inner-product-IP" class="common-anchor-header">내부 곱(IP)</h3><p>두 벡터 임베딩 사이의 IP 거리는 다음과 같이 정의됩니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>IP</span> </span></p>
 <p>IP는 정규화되지 않은 데이터를 비교해야 하거나 크기와 각도를 고려해야 할 때 더 유용합니다.</p>
 <div class="alert note">
@@ -92,30 +92,30 @@ title: 유사성 메트릭
 <p>X'가 임베딩 X에서 정규화되었다고 가정해 보겠습니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
    </span> <span class="img-wrapper"> <span>normalize</span> </span></p>
 <p>두 임베딩 간의 상관관계는 다음과 같습니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>정규화</span> </span></p>
 <h3 id="Cosine-Similarity" class="common-anchor-header">코사인 유사도</h3><p>코사인 유사도는 두 벡터 세트 사이의 각도의 코사인을 사용하여 얼마나 유사한지 측정합니다. 두 벡터 세트는 같은 원점([0,0,...])에서 시작하지만 서로 다른 방향을 가리키는 두 개의 선분으로 생각할 수 있습니다.</p>
 <p>두 벡터 집합 <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> 와 <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub></strong>) 사이의 코사인 유사도를 계산하려면 다음 공식을 사용합니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
    </span> <span class="img-wrapper"> <span>코사인_유사도</span> </span></p>
 <p>코사인 유사도는 항상 <strong>[-1, 1]</strong> 간격에 있습니다. 예를 들어 두 개의 비례 벡터의 코사인 유사도는 <strong>1</strong>, 두 개의 직교 벡터의 유사도는 <strong>0</strong>, 두 개의 반대 벡터의 유사도는 <strong>-1입니다</strong>. 코사인이 클수록 두 벡터 사이의 각도가 작아져 이 두 벡터가 서로 더 유사하다는 것을 나타냅니다.</p>
 <p>코사인 유사도를 1에서 빼면 두 벡터 사이의 코사인 거리를 구할 수 있습니다.</p>
 <h3 id="Jaccard-distance" class="common-anchor-header">자카드 거리</h3><p>자카드 유사도 계수는 두 샘플 세트 간의 유사도를 측정하며, 정의된 세트의 교집합의 카디널리티를 두 세트의 합집합의 카디널리티로 나눈 값으로 정의됩니다. 유한한 샘플 세트에만 적용할 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
    </span> <span class="img-wrapper"> <span>Jaccard 유사도 계수</span> </span></p>
 <p>Jaccard 거리는 데이터 세트 간의 유사성을 측정하며 1에서 Jaccard 유사성 계수를 빼면 구할 수 있습니다. 이진 변수의 경우 Jaccard 거리는 타니모토 계수와 동일합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>자카드 거리</span> </span></p>
 <h3 id="Hamming-distance" class="common-anchor-header">해밍 거리</h3><p>해밍 거리는 이진 데이터 문자열을 측정합니다. 길이가 같은 두 문자열 사이의 거리는 비트가 서로 다른 비트 위치의 수입니다.</p>
 <p>예를 들어 1101 1001과 1001 1101이라는 두 문자열이 있다고 가정해 보겠습니다.</p>
@@ -125,7 +125,7 @@ title: 유사성 메트릭
 <p>A가 B의 상부 구조인지 확인하려면 다음 공식을 사용하세요:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
    </span> <span class="img-wrapper"> <span>상부 구조</span> </span></p>
 <p>여기서</p>
 <ul>
@@ -136,7 +136,7 @@ title: 유사성 메트릭
 <p>A가 B의 하부 구조인지 확인하려면 다음 공식을 사용합니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
    </span> <span class="img-wrapper"> <span>하부 구조</span> </span></p>
 <p>여기서:</p>
 <ul>

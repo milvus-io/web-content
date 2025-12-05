@@ -44,7 +44,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
     </button></h2><p>El siguiente diagrama muestra el proceso RAG estándar más sencillo. En primer lugar, los trozos de documentos se cargan en un almacén de vectores (como <a href="https://milvus.io/docs">Milvus</a> o <a href="https://zilliz.com/cloud">Zilliz Cloud</a>). A continuación, el almacén de vectores recupera los K trozos más relevantes relacionados con la consulta. A continuación, estos fragmentos relevantes se inyectan en la consulta contextual <a href="https://zilliz.com/glossary/large-language-models-(llms)">del LLM</a> y, por último, el LLM devuelve la respuesta final.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -91,7 +91,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">Creación de preguntas hipotéticas</h3><p>La creación de preguntas hipotéticas implica la utilización de un LLM para generar múltiples preguntas que los usuarios podrían formular sobre el contenido de cada fragmento de documento. Antes de que la consulta real del usuario llegue al LLM, el almacén de vectores recupera las preguntas hipotéticas más relevantes relacionadas con la consulta real, junto con sus trozos de documentos correspondientes, y las reenvía al LLM.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -99,7 +99,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (incrustación de documentos hipotéticos)</h3><p>HyDE son las siglas de Hypothetical Document Embeddings. Aprovecha un LLM para elaborar un &quot;<strong><em>documento hipotético</em></strong>&quot; o una respuesta <strong><em>falsa</em></strong> en respuesta a una consulta del usuario desprovista de información contextual. A continuación, esta respuesta falsa se convierte en incrustaciones vectoriales y se emplea para consultar los trozos de documentos más relevantes dentro de una base de datos vectorial. Posteriormente, la base de datos vectorial recupera los K trozos de documentos más relevantes y los transmite al LLM y a la consulta original del usuario para generar la respuesta final.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -114,7 +114,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <p>Una vez que tenemos estas subconsultas, las enviamos todas a la base de datos vectorial después de convertirlas en incrustaciones vectoriales. A continuación, la base de datos vectorial encuentra los trozos de documentos Top-K más relevantes para cada subconsulta. Por último, el LLM utiliza esta información para generar una respuesta mejor.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -126,7 +126,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <p><strong><em>Pregunta paso a paso: "¿Cuál es el límite de tamaño del conjunto de datos que puede manejar Milvus?".</em></strong></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -150,7 +150,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Fusión automática de fragmentos de documentos</h3><p>Al construir un índice, podemos emplear dos niveles de granularidad: los fragmentos hijos y sus correspondientes fragmentos padres. Inicialmente, buscamos los fragmentos hijos a un nivel de detalle más fino. A continuación, aplicamos una estrategia de fusión: si un número determinado, <strong><em>n</em></strong>, de trozos hijos de los primeros <strong><em>k</em></strong> trozos hijos pertenecen al mismo trozo padre, proporcionamos este trozo padre al LLM como información contextual.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -158,7 +158,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">Construcción de índices jerárquicos</h3><p>Al crear índices para documentos, podemos establecer un índice de dos niveles: uno para los resúmenes de documentos y otro para los trozos de documentos. El proceso de búsqueda vectorial consta de dos etapas: inicialmente, filtramos los documentos relevantes basándonos en el resumen y, posteriormente, recuperamos los trozos de documentos correspondientes exclusivamente dentro de estos documentos relevantes.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -167,7 +167,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <p>Entre los algoritmos de recuperación complementaria más habituales se encuentran los basados en frecuencias léxicas, como <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a>, o los grandes modelos que utilizan incrustaciones dispersas, como <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. Los algoritmos de reordenación incluyen RRF o modelos más sofisticados como <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, que se asemeja a arquitecturas tipo BERT.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -191,7 +191,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Recuperación de la ventana de frases</h3><p>En un sistema GAR básico, el fragmento de documento que se entrega al LLM es una ventana más grande que abarca el fragmento de incrustación recuperado. Esto garantiza que la información proporcionada al LLM incluya una gama más amplia de detalles contextuales, minimizando la pérdida de información. La técnica Sentence Window Retrieval desvincula el fragmento de documento utilizado para la recuperación de la incrustación del fragmento proporcionado al LLM.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -199,7 +199,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <h3 id="Meta-data-Filtering" class="common-anchor-header">Filtrado de metadatos</h3><p>Para garantizar respuestas más precisas, podemos refinar los documentos recuperados filtrando metadatos como la hora y la categoría antes de pasarlos al LLM. Por ejemplo, si se recuperan informes financieros que abarcan varios años, el filtrado basado en el año deseado refinará la información para satisfacer requisitos específicos. Este método resulta eficaz en situaciones con datos extensos y metadatos detallados, como la recuperación de contenidos en colecciones de bibliotecas.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -222,7 +222,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">Compresión del mensaje LLM</h3><p>La información de ruido en los fragmentos de documentos recuperados puede afectar significativamente a la precisión de la respuesta final de RAG. Además, la limitada ventana de consulta de los LLM supone un obstáculo para obtener respuestas más precisas. Para hacer frente a este reto, podemos comprimir los detalles irrelevantes, enfatizar los párrafos clave y reducir la longitud total del contexto de los fragmentos de documentos recuperados.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -231,7 +231,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <p>Basándonos en esta observación, podemos ajustar el orden de los fragmentos recuperados para mejorar la calidad de la respuesta: cuando se recuperan múltiples fragmentos de conocimiento, los fragmentos con una confianza relativamente baja se colocan en el centro, y los fragmentos con una confianza relativamente alta se sitúan en ambos extremos.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -256,7 +256,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <p>Podemos llevar a cabo la reflexión utilizando métodos de reflexión eficaces como los modelos de Inferencia del Lenguaje Natural (NLI) o herramientas adicionales como las búsquedas en Internet para la verificación.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -264,13 +264,13 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">Enrutamiento de consultas con un agente</h3><p>A veces, no necesitamos utilizar un sistema RAG para responder a preguntas sencillas, ya que podría dar lugar a más malentendidos e inferencias a partir de información engañosa. En tales casos, podemos utilizar un agente como enrutador en la fase de consulta. Este agente evalúa si es necesario que la consulta pase por la canalización RAG. En caso afirmativo, se inicia el subsiguiente proceso RAG; de lo contrario, el LLM responde directamente a la consulta.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

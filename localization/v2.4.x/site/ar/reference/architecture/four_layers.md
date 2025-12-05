@@ -100,7 +100,7 @@ title: فصل التخزين/الحوسبة
 <p>يتبع ميلفوس مبدأ "السجل كبيانات"، لذلك لا يحتفظ ميلفوس بجدول فعلي ولكنه يضمن موثوقية البيانات من خلال استمرار السجل وسجلات اللقطات.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>آلية_السجل</span> </span></p>
 <p>وسيط السجل هو العمود الفقري لميلفوس. وهو مسؤول عن ثبات البيانات وتجزئة القراءة والكتابة، وذلك بفضل آلية pub-sub الفطرية. يُظهر الرسم التوضيحي أعلاه تصويرًا مبسطًا للآلية، حيث ينقسم النظام إلى دورين، وسيط السجل (للحفاظ على تسلسل السجل) ومشترك السجل. يقوم الأول بتسجيل جميع العمليات التي تغير حالات التجميع؛ ويشترك الثاني في تسلسل السجل لتحديث البيانات المحلية ويقدم خدمات على شكل نسخ للقراءة فقط. تتيح آلية pub-sub أيضًا إمكانية توسيع النظام من حيث التقاط بيانات التغيير (CDC) والنشر الموزع عالميًا.</p>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">

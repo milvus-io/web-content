@@ -23,7 +23,7 @@ title: GPU-Index
 <p>Es ist wichtig zu beachten, dass die Verwendung eines GPU-Index nicht unbedingt die Latenzzeit im Vergleich zu einem CPU-Index reduziert. Wenn Sie den Durchsatz vollständig maximieren möchten, benötigen Sie einen extrem hohen Anfragedruck oder eine große Anzahl von Abfragevektoren.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>Leistung</span> </span></p>
 <p>Die GPU-Unterstützung von Milvus wird vom Nvidia <a href="https://rapids.ai/">RAPIDS-Team</a> beigesteuert. Im Folgenden sind die GPU-Indextypen aufgeführt, die derzeit von Milvus unterstützt werden.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">

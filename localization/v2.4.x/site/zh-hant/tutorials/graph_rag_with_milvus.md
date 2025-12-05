@@ -25,7 +25,7 @@ title: 使用 Milvus 的圖形 RAG
 <p>在本筆記中，我們將介紹一種簡單但功能強大的方法，以大幅改善此情況的效能。它是一個簡單的 RAG 范例，先進行多向擷取，然後再重新排序，但它在邏輯上實現了 Graph RAG，並在處理多跳問題時達到最先進的效能。讓我們來看看它是如何實作的。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 )[0]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">展開子圖</h3><p>我們使用擷取到的實體和關係來展開子圖，並取得候選關係，然後從兩種方式合併它們。以下是子圖擴展過程的流程圖：  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

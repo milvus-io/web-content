@@ -24,7 +24,7 @@ title: 使用 Matryoshka 嵌入进行漏斗搜索
 <p>传统方法是在建立索引前应用量化或降维方法来降低存储需求。例如，我们可以使用乘积量化（PQ）降低精度，或使用主成分分析（PCA）降低维数，从而节省存储空间。这些方法会对整个向量集进行分析，以找到一个能保持向量间语义关系的更紧凑的向量集。</p>
 <p>这些标准方法虽然有效，但只能在单一尺度上降低一次精度或维度。但是，如果我们能同时保持多层细节，就像一个精确度越来越高的表征金字塔呢？</p>
 <p>这就是 Matryoshka Embeddings。这些巧妙的结构以俄罗斯嵌套娃娃命名（见插图），将多级表示嵌入到单个向量中。与传统的后处理方法不同，Matryoshka 嵌入在初始训练过程中就能学习这种多尺度结构。结果非常显著：不仅完整的 Embeddings 能够捕捉输入语义，而且每个嵌套的子集前缀（前半部分、前四分之一等）都提供了一个连贯的、即使不那么详细的表示。</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.4.x/assets/funnel-search.png' width='100%'></div>
+<div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
 <p>在本笔记本中，我们将研究如何将 Matryoshka 嵌入与 Milvus 一起用于语义搜索。我们展示了一种名为 "漏斗搜索 "的算法，它允许我们在嵌入维度的一小部分子集上执行相似性搜索，而不会导致召回率急剧下降。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
@@ -562,7 +562,7 @@ Leopard in the Snow
         ></path>
       </svg>
     </button></h2><p>下面是各种方法的搜索结果对比：</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.4.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-the-shining.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 我们展示了如何使用 Matryoshka 嵌入和 Milvus 来执行一种更高效的语义搜索算法，即 "漏斗搜索"。我们还探讨了该算法的 Rerankers 和剪枝步骤的重要性，以及当初始候选列表太小时的失败模式。最后，我们讨论了在形成子嵌入时，维度的顺序是如何重要的--它必须与模型训练时的顺序一致。或者说，只有因为模型是以某种方式训练的，嵌入的前缀才有意义。现在你知道如何实现 Matryoshka 嵌入和漏斗搜索，以降低语义搜索的存储成本，同时又不会牺牲太多检索性能了吧！

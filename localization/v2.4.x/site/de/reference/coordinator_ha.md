@@ -39,7 +39,7 @@ title: Koordinator HA
     </button></h2><p>In der Version 2.2.3 implementiert Milvus Hochverfügbarkeit für Koordinatoren, um sie im Aktiv-Standby-Modus arbeiten zu lassen und so mögliche Single Points of Failure (SPoFs) zu entschärfen, die zur Nichtverfügbarkeit von Diensten führen können.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>Koordinator HA</span> </span></p>
 <p>Die obige Abbildung veranschaulicht, wie Koordinatoren im Active-Standby-Modus arbeiten. Wenn ein Koordinatorenpaar startet, registrieren sie sich mit ihrer Server-ID bei etcd und konkurrieren um die aktive Rolle. Der Koordinator, dem es gelingt, die aktive Rolle vom etcd zu leasen, beginnt mit dem Dienst, während der andere Koordinator des Paares in Bereitschaft bleibt, die aktive Rolle überwacht und bereit ist, den Dienst zu übernehmen, wenn der aktive Koordinator ausfällt.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">Aktivieren von Koordinator-HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">

@@ -43,7 +43,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
     </button></h2><p>Das folgende Diagramm zeigt die einfachste Vanilla-RAG-Pipeline. Zunächst werden Dokumentenstücke in einen Vektorspeicher (wie <a href="https://milvus.io/docs">Milvus</a> oder <a href="https://zilliz.com/cloud">Zilliz Cloud</a>) geladen. Dann ruft der Vektorspeicher die Top-K der relevantesten Chunks in Bezug auf die Anfrage ab. Diese relevanten Chunks werden dann in die Kontextabfrage des <a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM</a> eingefügt, und schließlich liefert der LLM die endgültige Antwort.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -90,7 +90,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">Hypothetische Fragen erstellen</h3><p>Bei der Erstellung von hypothetischen Fragen wird ein LLM verwendet, um mehrere Fragen zu generieren, die Benutzer zum Inhalt der einzelnen Dokumentabschnitte stellen könnten. Bevor die eigentliche Anfrage des Benutzers den LLM erreicht, ruft der Vektorspeicher die relevantesten hypothetischen Fragen, die sich auf die eigentliche Anfrage beziehen, zusammen mit den dazugehörigen Dokumentabschnitten ab und leitet sie an den LLM weiter.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -98,7 +98,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (Hypothetische Dokumenteneinbettungen)</h3><p>HyDE steht für Hypothetical Document Embeddings (hypothetische Dokumenteneinbettungen). Es nutzt ein LLM, um ein &quot;<strong><em>hypothetisches Dokument</em></strong>&quot; oder eine <strong><em>gefälschte</em></strong> Antwort als Antwort auf eine Benutzeranfrage ohne Kontextinformationen zu erstellen. Diese gefälschte Antwort wird dann in Vektoreinbettungen umgewandelt und zur Abfrage der relevantesten Dokumentenabschnitte in einer Vektordatenbank verwendet. Anschließend ruft die Vektordatenbank die Top-K der relevantesten Dokumentabschnitte ab und überträgt sie an das LLM und die ursprüngliche Benutzeranfrage, um die endgültige Antwort zu generieren.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -113,7 +113,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <p>Sobald wir diese Unterabfragen haben, senden wir sie alle an die Vektordatenbank, nachdem wir sie in Vektoreinbettungen konvertiert haben. Die Vektordatenbank findet dann die Top-K-Dokumentenstücke, die für jede Unterabfrage am relevantesten sind. Schließlich verwendet der LLM diese Informationen, um eine bessere Antwort zu generieren.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -125,7 +125,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <p><strong><em>Stepback-Frage: "Wie groß darf der Datensatz sein, den Milvus verarbeiten kann?"</em></strong></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -149,7 +149,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Automatisches Zusammenführen von Dokumentenstücken (Chunks)</h3><p>Beim Aufbau eines Indexes können wir zwei Granularitätsebenen verwenden: Child Chunks und ihre entsprechenden Parent Chunks. Zunächst suchen wir nach Child Chunks auf einer feineren Detailebene. Dann wenden wir eine Merging-Strategie an: Wenn eine bestimmte Anzahl <strong><em>n</em></strong> von Child Chunks aus den ersten <strong><em>k</em></strong> Child Chunks zu demselben Parent Chunk gehört, stellen wir diesen Parent Chunk dem LLM als Kontextinformation zur Verfügung.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -157,7 +157,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">Hierarchische Indizes konstruieren</h3><p>Bei der Erstellung von Indizes für Dokumente können wir einen zweistufigen Index erstellen: einen für Dokumentenzusammenfassungen und einen für Dokumentenkomplexe. Die Vektorsuche erfolgt in zwei Schritten: Zunächst werden die relevanten Dokumente auf der Grundlage der Zusammenfassung gefiltert, und anschließend werden die entsprechenden Dokumentabschnitte ausschließlich in diesen relevanten Dokumenten gefunden.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -166,7 +166,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <p>Zu den üblichen ergänzenden Retrieval-Algorithmen gehören lexikalische frequenzbasierte Methoden wie <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a> oder große Modelle, die spärliche Einbettungen wie <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a> verwenden. Zu den Re-Ranking-Algorithmen gehören RRF oder komplexere Modelle wie <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, die BERT-ähnlichen Architekturen ähneln.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -190,7 +190,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Satzfenster-Retrieval</h3><p>In einem grundlegenden RAG-System ist das dem LLM übergebene Dokumentstück ein größeres Fenster, das das abgerufene Einbettungsstück umfasst. Dadurch wird sichergestellt, dass die dem LLM zur Verfügung gestellten Informationen ein breiteres Spektrum an kontextuellen Details umfassen und der Informationsverlust minimiert wird. Die Technik des Sentence Window Retrieval entkoppelt den für das Embedding Retrieval verwendeten Dokumentenchunk von dem dem LLM zur Verfügung gestellten Chunk.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -198,7 +198,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <h3 id="Meta-data-Filtering" class="common-anchor-header">Metadaten-Filterung</h3><p>Um präzisere Antworten zu gewährleisten, können wir die abgerufenen Dokumente verfeinern, indem wir Metadaten wie Zeit und Kategorie filtern, bevor wir sie an den LLM weitergeben. Wenn beispielsweise Finanzberichte aus mehreren Jahren abgerufen werden, können die Informationen durch Filtern nach dem gewünschten Jahr so verfeinert werden, dass sie den spezifischen Anforderungen entsprechen. Diese Methode erweist sich als effektiv in Situationen mit umfangreichen Daten und detaillierten Metadaten, wie z. B. bei der Abfrage von Inhalten in Bibliothekssammlungen.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -221,7 +221,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">Komprimierung der LLM-Eingabeaufforderung</h3><p>Die Rauschinformationen in den abgerufenen Dokumentenstücken können die Genauigkeit der endgültigen Antwort von RAG erheblich beeinflussen. Das begrenzte Eingabefenster in LLMs stellt ebenfalls eine Hürde für genauere Antworten dar. Um diese Herausforderung zu bewältigen, können wir irrelevante Details komprimieren, wichtige Absätze hervorheben und die Gesamtlänge des Kontexts der abgerufenen Dokumentenabschnitte reduzieren.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -230,7 +230,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <p>Auf der Grundlage dieser Beobachtung können wir die Reihenfolge der abgerufenen Chunks anpassen, um die Qualität der Antworten zu verbessern: Beim Abrufen mehrerer Wissens-Chunks werden Chunks mit relativ geringem Vertrauen in der Mitte platziert, während Chunks mit relativ hohem Vertrauen an den beiden Enden angeordnet werden.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -255,7 +255,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <p>Diese Reflexion kann mit effizienten Reflexionsmethoden wie Natural Language Inference (NLI)-Modellen oder zusätzlichen Tools wie Internetsuchen zur Überprüfung durchgeführt werden.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -263,13 +263,13 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 <h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">Abfrage-Routing mit einem Agenten</h3><p>Manchmal ist es nicht notwendig, ein RAG-System zur Beantwortung einfacher Fragen zu verwenden, da dies zu mehr Missverständnissen und Rückschlüssen aus irreführenden Informationen führen könnte. In solchen Fällen können wir einen Agenten als Router in der Abfragephase einsetzen. Dieser Agent beurteilt, ob die Anfrage die RAG-Pipeline durchlaufen muss. Ist dies der Fall, wird die nachfolgende RAG-Pipeline eingeleitet; andernfalls wird die Anfrage direkt vom LLM bearbeitet.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

@@ -100,7 +100,7 @@ title: 存储/计算分解
 <p>Milvus 遵循 "日志即数据 "原则，因此 Milvus 不维护物理表，而是通过日志持久化和快照日志来保证数据的可靠性。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>日志机制</span> </span></p>
 <p>日志代理是 Milvus 的支柱。它负责数据持久性和读写分解，这要归功于其与生俱来的发布-子机制。上图是对该机制的简化描述，其中系统分为两个角色：日志代理（负责维护日志序列）和日志订阅者。前者记录所有改变 Collections 状态的操作；后者订阅日志序列以更新本地数据，并以只读副本的形式提供服务。在变更数据捕获（CDC）和全局分布式部署方面，pub-sub 机制也为系统的可扩展性留出了空间。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">

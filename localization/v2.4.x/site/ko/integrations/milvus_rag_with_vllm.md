@@ -43,7 +43,7 @@ title: 'Milvus, vLLM, Llama 3.1로 RAG 구축하기'
 <p>&quot;<a href="https://arxiv.org/abs/2309.06180">페이지어텐션으로 대규모 언어 모델 서비스를 위한 효율적인 메모리 관리</a>&quot; 백서에 따르면 KV 캐시는 GPU 메모리의 약 30%를 사용하므로 잠재적인 메모리 문제를 일으킬 수 있습니다. KV 캐시는 인접 메모리에 저장되지만 크기가 변경되면 메모리 조각화가 발생하여 계산에 비효율적일 수 있습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/vllm_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -51,7 +51,7 @@ title: 'Milvus, vLLM, Llama 3.1로 RAG 구축하기'
 <p>KV 캐시에 가상 메모리를 사용하는 vLLM은 필요에 따라 물리적 GPU 메모리만 할당하므로 메모리 조각화를 제거하고 사전 할당을 피할 수 있습니다. 테스트 결과, vLLM은 NVIDIA A10G 및 A100 GPU에서 <a href="https://huggingface.co/docs/transformers/main_classes/text_generation">허깅페이스 트랜스포머</a> (HF) 및 <a href="https://github.com/huggingface/text-generation-inference">텍스트 생성 추론</a> (TGI)보다 뛰어난 성능을 발휘하여 HF보다 최대 24배, TGI보다 3.5배 더 높은 처리량을 달성했습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/vllm_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vllm_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

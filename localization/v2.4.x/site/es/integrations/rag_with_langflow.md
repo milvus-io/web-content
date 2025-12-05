@@ -60,9 +60,9 @@ title: Construir un sistema RAG usando Langflow con Milvus
     </button></h2><p>Una vez que todas las dependencias estén instaladas, inicie un dashboard Langflow escribiendo el siguiente comando:</p>
 <pre><code translate="no" class="language-shell">$ python -m langflow run
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación, un tablero de instrumentos aparecerá como se muestra a continuación: <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" /><span>langflow</span> </span></p>
-<p>Queremos crear un proyecto <strong>Vector Store</strong>, así que primero tenemos que hacer clic en el botón <strong>Nuevo Proyecto</strong>. Aparecerá un panel y elegiremos la opción <strong>Vector Store RAG</strong>: <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" /><span>panel</span> </span></p>
-<p>Una vez creado con éxito el proyecto Vector Store Rag, el almacén vectorial por defecto es AstraDB, mientras que nosotros queremos utilizar Milvus. Así que necesitamos reemplazar estos dos módulos astraDB con Milvus para usar Milvus como almacén de vectores. <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" /><span>astraDB</span> </span></p>
+<p>A continuación, un tablero de instrumentos aparecerá como se muestra a continuación: <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" /><span>langflow</span> </span></p>
+<p>Queremos crear un proyecto <strong>Vector Store</strong>, así que primero tenemos que hacer clic en el botón <strong>Nuevo Proyecto</strong>. Aparecerá un panel y elegiremos la opción <strong>Vector Store RAG</strong>: <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" /><span>panel</span> </span></p>
+<p>Una vez creado con éxito el proyecto Vector Store Rag, el almacén vectorial por defecto es AstraDB, mientras que nosotros queremos utilizar Milvus. Así que necesitamos reemplazar estos dos módulos astraDB con Milvus para usar Milvus como almacén de vectores. <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" /><span>astraDB</span> </span></p>
 <h3 id="Steps-to-replace-astraDB-with-Milvus" class="common-anchor-header">Pasos para reemplazar astraDB con Milvus:</h3><ol>
 <li>Elimine las tarjetas existentes de Vector Store. Haga clic en dos tarjetas AstraDB marcadas en rojo en la imagen anterior, y pulse <strong>retroceso</strong> para eliminarlas.</li>
 <li>Haga clic en la opción <strong>Vector</strong> Store de la barra lateral, elija Milvus y arrástrelo al lienzo. Haga esto dos veces ya que necesitamos 2 tarjetas Milvus, una para almacenar el flujo de trabajo de procesamiento de archivos y otra para el flujo de trabajo de búsqueda.</li>
@@ -71,7 +71,7 @@ title: Construir un sistema RAG usando Langflow con Milvus
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
    </span> <span class="img-wrapper"> <span>Demostración de la estructura de Milvus</span> </span></p>
 <h3 id="Embed-knowledge-into-the-RAG-system" class="common-anchor-header">Incrustar conocimientos en el sistema GAR</h3><ol>
 <li>Sube un archivo como base de conocimiento de LLM a través del módulo de archivos en la parte inferior izquierda. Aquí subimos un archivo que contiene una breve introducción a Milvus</li>
@@ -80,5 +80,5 @@ title: Construir un sistema RAG usando Langflow con Milvus
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
    </span> <span class="img-wrapper"> <span>por qué milvus</span> </span></p>

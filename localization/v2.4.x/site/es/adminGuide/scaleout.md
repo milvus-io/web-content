@@ -44,11 +44,11 @@ title: Escalar un clúster Milvus
 <h3 id="Scaling-out" class="common-anchor-header">Ampliación</h3><p>La ampliación horizontal consiste en aumentar el número de nodos de un clúster. A diferencia del escalado ascendente, el escalado descendente no requiere asignar más recursos a un nodo del clúster. En su lugar, el escalado expande el clúster horizontalmente añadiendo más nodos.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>Ampliación</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Ampliación</span> </span></p>
 <p>De acuerdo con la <a href="/docs/es/v2.4.x/architecture_overview.md">arquitectura Milvus</a>, los nodos trabajadores sin estado incluyen el nodo de consulta, el nodo de datos, el nodo de índice y el proxy. Por lo tanto, puede ampliar este tipo de nodos para adaptarlos a sus necesidades empresariales y escenarios de aplicación. Puede escalar el cluster Milvus manual o automáticamente.</p>
 <p>Generalmente, necesitará escalar el cluster Milvus que ha creado si está sobreutilizado. A continuación se detallan algunas situaciones típicas en las que puede necesitar escalar el cluster Milvus:</p>

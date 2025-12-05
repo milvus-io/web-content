@@ -32,5 +32,5 @@ title: بحث تشابه الصوت
 <p><br/></p>
 <p>
  <span class="img-wrapper"> <span> 
-   </span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/audio_search.png" alt="Audio_search" class="doc-image" id="audio_search" /></span> <span class="img-wrapper"> <span>
-    بح</span>ث_صوتي <img translate="no" src="/docs/v2.4.x/assets/audio_search_demo.png" alt="Audio_search_demo" class="doc-image" id="audio_search_demo" />بحث_صوتي <span>بحث_صوتي_عرضي</span> </span></p>
+   </span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/audio_search.png" alt="Audio_search" class="doc-image" id="audio_search" /></span> <span class="img-wrapper"> <span>
+    بح</span>ث_صوتي <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/audio_search_demo.png" alt="Audio_search_demo" class="doc-image" id="audio_search_demo" />بحث_صوتي <span>بحث_صوتي_عرضي</span> </span></p>

@@ -65,12 +65,12 @@ summary: Découvrez comment déployer un cluster Milvus sur OpenShift.
 <li><p>Dans votre console openshift, naviguez vers <strong>Workloads</strong> &gt; <strong>Pods</strong>. Sélectionnez le projet <strong>cert-manager</strong>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
    </span> <span class="img-wrapper"> <span>cert-manager-1</span> </span></p></li>
 <li><p>Assurez-vous que tous les pods sont prêts. Par exemple, l'image ci-dessous suggère que les pods sont encore en train de démarrer. Attendez que tous ces modules soient prêts.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-2.png" alt="cert-manager-2" class="doc-image" id="cert-manager-2" />
    </span> <span class="img-wrapper"> <span>cert-manager-2</span> </span></p></li>
 </ol></li>
 </ol>

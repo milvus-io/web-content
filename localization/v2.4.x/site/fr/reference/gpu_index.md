@@ -23,7 +23,7 @@ title: Index GPU
 <p>Il est important de noter que l'utilisation d'un index GPU ne réduit pas nécessairement la latence par rapport à l'utilisation d'un index CPU. Si vous voulez maximiser le débit, vous devez avoir une pression de requête extrêmement élevée ou un grand nombre de vecteurs de requête.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>Performances</span> </span></p>
 <p>La prise en charge GPU de Milvus est assurée par l'équipe Nvidia <a href="https://rapids.ai/">RAPIDS</a>. Les types d'index GPU actuellement pris en charge par Milvus sont les suivants.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">

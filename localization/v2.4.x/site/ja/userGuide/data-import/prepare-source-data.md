@@ -38,7 +38,7 @@ summary: このページでは、データをコレクションに一括挿入�
     </button></h2><p>ターゲット・コレクションでは、ソース・データをそのスキーマにマッピングする必要があります。下図は、許容可能なソース・データをターゲット・コレクションのスキーマにマッピングする方法を示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>データをスキーマにマップする</span> </span></p>
 <p>データを慎重に調べ、それに応じてターゲット・コレクションのスキーマを設計する必要があります。</p>
 <p>上図の JSON データを例にとると、行リストには 2 つのエンティティがあり、各行には 6 つのフィールドがあります。コレクションのスキーマには、<strong>id</strong>、<strong>vector</strong>、<strong>scalar_1</strong>、<strong>scalar_2の</strong>4つが選択的に含まれます。</p>

@@ -38,13 +38,13 @@ summary: 聚類壓縮的目的是在大型資料集中提高搜尋效能並降�
     </button></h2><p>Milvus 將傳入的實體儲存於集合中的區段，並在區段已滿時封閉該區段。如果發生這種情況，就會創建一個新的區段來容納額外的實體。因此，實體會任意地分佈在區段中。這種分佈方式需要 Milvus 搜尋多個區段，以找出與指定查詢向量最近的鄰居。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>無聚類壓縮</span> </span></p>
 <p>如果 Milvus 可以根據特定欄位中的值，將實體分佈在區段中，搜尋範圍就可以限制在一個區段內，進而改善搜尋效能。</p>
 <p><strong>聚類壓縮 (Clustering Compaction</strong>) 是 Milvus 的一項功能，可根據標量欄位中的值，在集合中的段之間重新分配實體。要啟用此功能，您首先需要選擇標量欄位作為<strong>聚類關鍵</strong>。這可讓 Milvus 在實體的聚類關鍵值在特定範圍內時，將實體重新分配到段中。當您觸發聚類壓縮時，Milvus 會產生/更新稱為<strong>PartitionStats</strong> 的全局索引，它會記錄段與聚類關鍵值之間的映射關係。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>使用聚類壓縮</span> </span></p>
 <p>使用<strong>PartitionStats</strong>作為參考，Milvus 可以在接收到帶有聚類關鍵值的搜尋/查詢請求時，修剪不相關的資料，並將搜尋範圍限制在與關鍵值對應的區段內，從而改善搜尋效能。有關效能改善的詳細資訊，請參閱基準測試。</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">使用聚類壓縮<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">

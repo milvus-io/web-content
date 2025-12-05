@@ -37,7 +37,7 @@ title: Reranking
         ></path>
       </svg>
     </button></h2><p>The following figure illustrates the execution of a hybrid search in Milvus and highlights the role of reranking in the process.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
 <p>Reranking in hybrid search is a crucial step that consolidates results from several vector fields, ensuring the final output is relevant and accurately prioritized. Currently, Milvus offers these reranking strategies:</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>: This approach merges results by calculating a weighted average of scores (or vector distances) from different vector searches. It assigns weights based on the significance of each vector field.</p></li>
@@ -63,7 +63,7 @@ title: Reranking
 <ul>
 <li><p><strong>Collect Scores During Retrieval</strong>: Gather results and their scores from different vector retrieval routes.</p></li>
 <li><p><strong>Score Normalization</strong>: Normalize the scores from each route to a [0,1] range, where values closer to 1 indicate higher relevance. This normalization is crucial due to score distributions varying with different metric types. For instance, the distance for IP ranges from [-∞,+∞], while the distance for L2 ranges from [0,+∞]. Milvus employs the <code translate="no">arctan</code> function, transforming values to the [0,1] range to provide a standardized basis for different metric types.</p>
-<p><img translate="no" src="/docs/v2.4.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
+<p><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
 <li><p><strong>Weight Allocation</strong>: Assign a weight <code translate="no">w𝑖</code> to each vector retrieval route. Users specify the weights, which reflect the data source’s reliability, accuracy, or other pertinent metrics. Each weight ranges from [0,1].</p></li>
 <li><p><strong>Score Fusion</strong>: Calculate a weighted average of the normalized scores to derive the final score. The results are then ranked based on these highest to lowest scores to generate the final sorted results.</p></li>
 </ul>

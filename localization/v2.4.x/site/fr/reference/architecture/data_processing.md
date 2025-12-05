@@ -38,17 +38,17 @@ title: Traitement des données
 <p>La validation des demandes DML est transférée au proxy car Milvus n'a pas de transactions compliquées. Le proxy demande un horodatage pour chaque demande d'insertion/suppression au TSO (Timestamp Oracle), qui est le module d'horodatage hébergé par le coordinateur racine. L'ancien horodatage étant remplacé par le nouveau, les horodatages sont utilisés pour déterminer la séquence des demandes de données en cours de traitement. Le proxy récupère les informations par lots à partir de la coordonnée des données, y compris les segments des entités et les clés primaires, afin d'augmenter le débit global et d'éviter de surcharger le nœud central.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Canaux 1</span> </span></p>
 <p>Les opérations DML (langage de manipulation de données) et DDL (langage de définition de données) sont toutes deux écrites dans la séquence d'enregistrement, mais les opérations DDL ne se voient attribuer qu'un seul canal en raison de leur faible fréquence d'apparition.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
    </span> <span class="img-wrapper"> <span>Canaux 2</span> </span></p>
 <p>Les<em>canaux</em> sont gérés dans les nœuds sous-jacents du courtier en journaux. Chaque canal est physiquement indivisible et disponible pour n'importe quel nœud, mais un seul. Lorsque le taux d'ingestion des données atteint un goulot d'étranglement, il convient de se demander si le nœud du courtier en journaux est surchargé et doit être redimensionné, et s'il y a suffisamment d'unités de stockage pour assurer l'équilibrage de la charge pour chaque nœud.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
    </span> <span class="img-wrapper"> <span>Séquence d'écriture du journal</span> </span></p>
 <p>Le diagramme ci-dessus présente les quatre composants impliqués dans le processus d'écriture d'une séquence de journaux : le proxy, le courtier en journaux, le nœud de données et le stockage d'objets. Le processus comprend quatre tâches : la validation des demandes DML, la publication et l'abonnement de la séquence de journaux, la conversion d'un journal en continu en instantanés de journaux et la persistance des instantanés de journaux. Les quatre tâches sont découplées les unes des autres afin de s'assurer que chaque tâche est traitée par le type de nœud correspondant. Les nœuds de même type sont mis sur un pied d'égalité et peuvent être dimensionnés de manière élastique et indépendante pour s'adapter à différentes charges de données, en particulier les données en continu massives et très fluctuantes.</p>
 <h2 id="Index-building" class="common-anchor-header">Construction d'index<button data-href="#Index-building" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ title: Traitement des données
     </button></h2><p>La construction d'index est effectuée par les nœuds d'index. Pour éviter la création fréquente d'index lors des mises à jour de données, une collection dans Milvus est divisée en segments, chacun ayant son propre index.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Construction d'index</span> </span></p>
 <p>Milvus prend en charge la construction d'index pour chaque champ vectoriel, champ scalaire et champ primaire. L'entrée et la sortie de la construction d'index sont toutes deux liées au stockage d'objets : Le nœud d'indexation charge les instantanés de journal à indexer à partir d'un segment (qui se trouve dans le stockage d'objets) dans la mémoire, désérialise les données et métadonnées correspondantes pour construire l'index, sérialise l'index lorsque la construction de l'index est terminée, et le réécrit dans le stockage d'objets.</p>
 <p>La construction d'un index implique principalement des opérations sur les vecteurs et les matrices et est donc gourmande en calcul et en mémoire. Les vecteurs ne peuvent pas être indexés efficacement avec les index arborescents traditionnels en raison de leur nature hautement dimensionnelle, mais peuvent l'être avec des techniques spécialement conçues pour cette tâche, telles que les index basés sur les grappes ou les graphes. Quel que soit son type, la construction d'un index implique des calculs itératifs massifs pour les vecteurs à grande échelle, tels que les K-moyennes ou la traversée de graphe.</p>
@@ -93,13 +93,13 @@ title: Traitement des données
     </button></h2><p>Le terme "interrogation de données" désigne le processus de recherche, dans une collection donnée, du nombre <em>k</em> de vecteurs les plus proches d'un vecteur cible ou de <em>tous les</em> vecteurs situés dans une plage de distance donnée par rapport au vecteur. Les vecteurs sont renvoyés avec leur clé primaire et les champs correspondants.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Requête de données</span> </span></p>
 <p>Dans Milvus, une collection est divisée en plusieurs segments et les nœuds d'interrogation chargent les index par segment. Lorsqu'une demande de recherche arrive, elle est diffusée à tous les nœuds d'interrogation pour une recherche simultanée. Chaque nœud élague alors les segments locaux, recherche les vecteurs répondant aux critères, réduit et renvoie les résultats de la recherche.</p>
 <p>Les nœuds d'interrogation sont indépendants les uns des autres dans une requête de données. Chaque nœud n'est responsable que de deux tâches : charger ou libérer des segments en suivant les instructions de la coordonnatrice de la requête ; effectuer une recherche dans les segments locaux. Le proxy est chargé de réduire les résultats de recherche de chaque nœud de requête et de renvoyer les résultats finaux au client.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>Transfert</span> </span></p>
 <p>Il existe deux types de segments : les segments croissants (pour les données incrémentielles) et les segments scellés (pour les données historiques). Les nœuds d'interrogation s'abonnent à vchannel pour recevoir les mises à jour récentes (données incrémentielles) sous forme de segments croissants. Lorsqu'un segment croissant atteint un seuil prédéfini, la coordination des données le scelle et la construction de l'index commence. Ensuite, une opération de <em>transfert</em> initiée par la coordonnatrice des requêtes transforme les données incrémentielles en données historiques. La coordination des requêtes répartit les segments scellés de manière égale entre tous les nœuds de requêtes en fonction de l'utilisation de la mémoire, de la surcharge de l'unité centrale et du nombre de segments.</p>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">

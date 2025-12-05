@@ -23,7 +23,7 @@ title: GPU 索引
 <p>值得注意的是，与使用 CPU 索引相比，使用 GPU 索引并不一定能减少延迟。如果想完全最大化吞吐量，则需要极高的请求压力或大量的查询向量。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>性能</span> </span></p>
 <p>Milvus 的 GPU 支持由 Nvidia<a href="https://rapids.ai/">RAPIDS</a>团队贡献。以下是 Milvus 目前支持的 GPU 索引类型。</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">

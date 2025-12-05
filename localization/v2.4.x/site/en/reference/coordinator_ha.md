@@ -39,7 +39,7 @@ title: Coordinator HA
     </button></h2><p>In the 2.2.3 release, Milvus implements high availability for coordinators to make them work in the active-standby mode, mitigating possible single points of failure (SPoFs) that can result in service unavailability.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
     <span>Coordinator HA</span>
   </span>
 </p>

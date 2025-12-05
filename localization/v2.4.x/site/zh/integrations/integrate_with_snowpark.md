@@ -57,7 +57,7 @@ title: Milvus 关于雪场集装箱服务
 <p><code translate="no">${instance_name}</code> 的规则是<code translate="no">${org_name}-${acct_name}</code> 。登录<a href="http://app.snowflake.com/sn">app.snowflake.com</a>，查看个人账户信息，即可获取相关信息。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
    </span> <span class="img-wrapper"> <span>雪花账户信息</span> </span></p>
 <h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2.配置角色和权限</h3><p>配置 OAUTH 集成。</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-variable constant_">USE</span> <span class="hljs-variable constant_">ROLE</span> <span class="hljs-variable constant_">ACCOUNTADMIN</span>;
@@ -174,7 +174,7 @@ DESCRIBE COMPUTE POOL JUPYTER_COMPUTE_POOL;
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
    </span> <span class="img-wrapper"> <span>计算池状态</span> </span></p>
 <ul>
 <li>上传规范文件</li>
@@ -219,7 +219,7 @@ CREATE SERVICE JUPYTER
 <p>如果在启动服务时遇到问题，可通过<code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code> 查看服务信息。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
    </span> <span class="img-wrapper"> <span>服务状态</span> </span></p>
 <p>可通过<code translate="no">CALL SYSTEM$GET_SERVICE_LOGS('milvus', '0', 'milvus', 10);</code> 获取更多信息。</p>
 <h2 id="Use-Notebook" class="common-anchor-header">使用笔记本<button data-href="#Use-Notebook" class="anchor-icon" translate="no">
@@ -248,12 +248,12 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 <p>记录<code translate="no">ingress_url</code> 部分信息，然后打开浏览器并输入<code translate="no">ingress_url</code> ，使用 milvus_user 账户登录网站。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
    </span> <span class="img-wrapper"> <span>获取入口 URL</span> </span></p>
 <p>通过<code translate="no">ingress_url</code> 打开笔记本，双击页面上的<code translate="no">TestMilvus.ipynb</code> 文件试用 Milvus。选择代码块的第一部分，点击<strong>运行</strong>按钮开始建立连接并初始化嵌入函数。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
    </span> <span class="img-wrapper"> <span>在笔记本中运行 TestMilvus.ipynb</span> </span></p>
 <p>建立连接后，继续点击<strong>运行</strong>。代码会将一段文本经过嵌入处理后变成向量数据，然后插入到 Milvus 中。</p>
 <pre><code translate="no" class="language-python">docs = [
@@ -265,7 +265,7 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 <p>然后使用一段文本作为查询：&quot;谁开始了人工智能研究？&quot;，执行嵌入处理后的查询，最后获取并显示最相关的结果。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
    </span> <span class="img-wrapper"> <span>获取并显示最相关的结果</span> </span></p>
 <p>有关 Milvus 客户端使用的更多信息，请参阅<a href="/docs/zh/v2.4.x/quickstart.md">Milvus 文档</a>部分。</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7.清理<button data-href="#7-Clean-up" class="anchor-icon" translate="no">

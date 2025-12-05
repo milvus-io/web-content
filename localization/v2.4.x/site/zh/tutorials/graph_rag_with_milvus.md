@@ -25,7 +25,7 @@ title: 用 Milvus 绘制 RAG 图
 <p>在本笔记本中，我们介绍了一种简单但功能强大的方法，可大大提高该场景的性能。它是一种简单的 RAG 范式，先进行多向检索，然后重新排序，但它从逻辑上实现了 Graph RAG，并在处理多跳问题时达到了最先进的性能。让我们看看它是如何实现的。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 )[0]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">扩展子图</h3><p>我们使用检索到的实体和关系来展开子图并获得候选关系，然后通过两种方式将它们合并。下面是子图扩展过程的流程图：  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

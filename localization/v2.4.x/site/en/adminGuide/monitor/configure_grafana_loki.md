@@ -160,7 +160,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg" alt="DataSource" class="doc-image" id="datasource" />
     <span>DataSource</span>
   </span>
 </p>
@@ -172,7 +172,7 @@ kubectl --namespace monitoring port-forward $POD_NAME 3000
 </ol>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg" alt="Query" class="doc-image" id="query" />
     <span>Query</span>
   </span>
 </p>

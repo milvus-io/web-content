@@ -38,7 +38,7 @@ summary: 本頁討論您在開始大量插入資料到您的資料集中之前�
     </button></h2><p>目標集合需要將源資料對應到其模式。下圖顯示可接受的來源資料如何映射到目標集合的模式。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>將資料對應到模式</span> </span></p>
 <p>您應該仔細檢查您的資料，並據此設計目標資料集的模式。</p>
 <p>以上圖中的 JSON 資料為例，行清單中有兩個實體，每一行有六個欄位。集合模式選擇性地包含四個：<strong>id</strong>、<strong>向量</strong>、<strong>標量_1</strong> 和<strong>標量_2</strong>。</p>

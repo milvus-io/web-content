@@ -44,11 +44,11 @@ title: Milvus 클러스터 확장
 <h3 id="Scaling-out" class="common-anchor-header">스케일 아웃</h3><p>스케일 아웃은 클러스터의 노드 수를 늘리는 것을 말합니다. 스케일업과 달리 스케일아웃은 클러스터의 한 노드에 더 많은 리소스를 할당할 필요가 없습니다. 대신, 스케일 아웃은 노드를 더 추가하여 클러스터를 수평적으로 확장합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>스케일아웃</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>스케일업</span> </span></p>
 <p><a href="/docs/ko/v2.4.x/architecture_overview.md">Milvus 아키텍처에</a> 따르면 상태 비저장 워커 노드에는 쿼리 노드, 데이터 노드, 인덱스 노드 및 프록시가 포함됩니다. 따라서 이러한 유형의 노드를 비즈니스 요구와 애플리케이션 시나리오에 맞게 스케일아웃할 수 있습니다. Milvus 클러스터는 수동 또는 자동으로 스케일아웃할 수 있습니다.</p>
 <p>일반적으로 Milvus 클러스터가 과도하게 사용되는 경우 생성한 클러스터를 스케일아웃해야 합니다. 다음은 Milvus 클러스터를 스케일아웃해야 할 수 있는 몇 가지 일반적인 상황입니다:</p>

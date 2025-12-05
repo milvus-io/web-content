@@ -81,7 +81,7 @@ title: Milvus移住の概要
     </button></h2><p><a href="https://github.com/zilliztech/milvus-migration">Milvus-migrationの</a>アーキテクチャは、効率的なデータストリーミング、解析、書き込み処理を促進するように戦略的に設計されており、様々なデータソース間で堅牢なマイグレーション機能を実現します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
    </span> <span class="img-wrapper"> <span>Milvusマイグレーションアーキテクチャ</span> </span></p>
 <p>先の図では</p>
 <ul>

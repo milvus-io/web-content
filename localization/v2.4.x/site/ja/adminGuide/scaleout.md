@@ -44,11 +44,11 @@ title: Milvusクラスターをスケールする
 <h3 id="Scaling-out" class="common-anchor-header">スケールアウト</h3><p>スケールアウトとは、クラスタ内のノード数を増やすことを指します。スケールアップとは異なり、スケールアウトではクラスタ内の1つのノードにより多くのリソースを割り当てる必要はありません。その代わりに、スケールアウトではノードを追加することでクラスタを水平方向に拡張します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>スケールアウト</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>スケールアップ</span> </span></p>
 <p><a href="/docs/ja/v2.4.x/architecture_overview.md">Milvusアーキテクチャに</a>よると、ステートレスワーカーノードにはクエリノード、データノード、インデックスノード、プロキシが含まれます。そのため、ビジネスニーズやアプリケーションシナリオに合わせてこれらのタイプのノードをスケールアウトすることができます。Milvusクラスタは手動または自動でスケールアウトすることができます。</p>
 <p>一般的に、作成したMilvusクラスタが過剰に使用されている場合はスケールアウトする必要があります。以下はMilvusクラスタのスケールアウトが必要となる典型的な状況です：</p>

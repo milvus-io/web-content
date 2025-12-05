@@ -270,6 +270,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>الصورة</span> </span></p>
 <p>نوضح هنا أن البيانات متجمعة بشكل جيد، ويمكنك التمرير فوق النقاط للتحقق من النص الذي تمثله. من خلال هذا الدفتر، نأمل أن تتعلم كيفية استخدام HDBSCAN لتجميع التضمينات باستخدام Milvus بكفاءة، والتي يمكن تطبيقها أيضًا على أنواع أخرى من البيانات. يسمح هذا النهج، إلى جانب نماذج اللغة الكبيرة، بتحليل أعمق لبياناتك على نطاق واسع.</p>

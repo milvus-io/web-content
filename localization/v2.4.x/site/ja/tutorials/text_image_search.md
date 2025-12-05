@@ -35,5 +35,5 @@ title: テキストから画像への検索エンジン
 <p>このチュートリアルでは、テキストから画像への検索エンジンを構築する方法を学びます。このチュートリアルでは、CLIP モデルを使って画像の特徴を抽出し、それをベクトルに変換します。そして、これらの画像ベクトルはmilvusベクトルデータベースに格納されます。ユーザがクエリテキストを入力すると、これらのテキストも同じMLモデルCLIPを用いて埋め込みベクトルに変換される。その後、Milvusでベクトル類似度検索が実行され、入力テキストベクトルと最も類似した画像ベクトルが検索される。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
    </span> <span class="img-wrapper"> <span>テキスト画像検索</span> </span></p>

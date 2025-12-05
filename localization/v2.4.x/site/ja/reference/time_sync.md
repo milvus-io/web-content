@@ -89,7 +89,7 @@ summary: Milvusの時間同期システムについて学ぶ。
 <p>TSOタイムスタンプは物理的な部分と論理的な部分で構成される<code translate="no">uint64</code> 。下図はタイムスタンプのフォーマットを示している。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
    </span> <span class="img-wrapper"> <span>TSO_Timestamp</span>。 </span></p>
 <p>図示されているように、先頭の46ビットは物理的な部分、すなわちミリ秒単位のUTC時間である。最後の18ビットは論理部分である。</p>
 <h2 id="Time-synchronization-system-timetick" class="common-anchor-header">時刻同期システム（timetick）<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
@@ -114,19 +114,19 @@ summary: Milvusの時間同期システムについて学ぶ。
   <code translate="no">MsgStream</code> はメッセージ・キューのラッパーであり、Milvus 2.0ではデフォルトでPulsarとなっている。</div>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
 <p>一般的な原則の1つは、<code translate="no">MsgStream</code> 、同じプロキシからの<code translate="no">InsertMsgs</code> のタイムスタンプはインクリメンタルでなければならないということである。しかし、異なるプロキシからの<code translate="no">InsertMsgs</code> のタイムスタンプにはそのようなルールはない。</p>
 <p>以下の図は、<code translate="no">MsgStream</code> の中の<code translate="no">InsertMsgs</code> の例である。このスニペットには5つの<code translate="no">InsertMsgs</code> が含まれ、そのうちの3つは<code translate="no">Proxy1</code> からのもので、残りは<code translate="no">Proxy2</code> からのものである。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
 <p><code translate="no">Proxy1</code> からの3つの<code translate="no">InsertMsgs</code> のタイムスタンプはインクリメンタルであり、<code translate="no">Proxy2</code> からの2つの<code translate="no">InsertMsgs</code> もインクリメンタルである。しかし、<code translate="no">Proxy1</code> と<code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> の間には特定の順序はない。</p>
 <p>考えられるシナリオとしては、<code translate="no">Proxy2</code> からのタイムスタンプ<code translate="no">110</code> のメッセージを読むときに、<code translate="no">Proxy1</code> からのタイムスタンプ<code translate="no">80</code> のメッセージがまだ<code translate="no">MsgStream</code> の中にあることをMilvusが発見することです。したがって、Milvusは、<code translate="no">MsgStream</code> からのメッセージを読むときに、タイムスタンプ値の小さいメッセージはすべて消費されなければならないことを保証するために、timetickという時間同期システムを導入しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>時間同期</span> </span></p>
 <p>上の図に示すように</p>
 <ul>
@@ -137,7 +137,7 @@ summary: Milvusの時間同期システムについて学ぶ。
 <p>以下の図は、タイムティックが挿入された<code translate="no">Msgstream</code> の例である。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>タイムティック</span> </span></p>
 <p><code translate="no">MsgStream</code> は、出力メッセージがタイムスタンプの要件を満たすように、タイムティックに従ってバッチでメッセージを処理します。</p>
 <h2 id="Whats-next" class="common-anchor-header">次のページ<button data-href="#Whats-next" class="anchor-icon" translate="no">

@@ -35,13 +35,13 @@ title: Text Search Engine
 <p><br/></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/text_search_engine.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
     <span>text_search_engine</span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/text_search_engine_demo.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine_demo.png" alt="text_search_engine" class="doc-image" id="text_search_engine" />
     <span>text_search_engine</span>
   </span>
 </p>

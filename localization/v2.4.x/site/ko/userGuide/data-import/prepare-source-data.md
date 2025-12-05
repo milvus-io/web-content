@@ -38,7 +38,7 @@ summary: 이 페이지에서는 컬렉션에 데이터를 대량으로 삽입하
     </button></h2><p>대상 컬렉션을 사용하려면 소스 데이터를 해당 스키마에 매핑해야 합니다. 아래 다이어그램은 허용되는 소스 데이터를 대상 컬렉션의 스키마에 매핑하는 방법을 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>데이터를 스키마에 매핑</span> </span></p>
 <p>데이터를 면밀히 검토하고 그에 따라 대상 컬렉션의 스키마를 설계해야 합니다.</p>
 <p>위 다이어그램의 JSON 데이터를 예로 들어보면 행 목록에 두 개의 엔티티가 있고 각 행에는 6개의 필드가 있습니다. 컬렉션 스키마는 <strong>id</strong>, <strong>벡터</strong>, <strong>scalar_1</strong>, <strong>scalar_2의</strong> 네 가지를 선택적으로 포함합니다.</p>

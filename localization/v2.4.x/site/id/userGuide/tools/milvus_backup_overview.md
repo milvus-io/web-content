@@ -58,7 +58,7 @@ title: Cadangan Milvus
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Arsitektur Milvus Backup</span> </span></p>
 <p>Milvus Backup memfasilitasi pencadangan dan pemulihan metadata, segmen, dan data di seluruh instance Milvus. Ini menyediakan antarmuka northbound, seperti CLI, API, dan modul Go berbasis gRPC, untuk manipulasi proses pencadangan dan pemulihan yang fleksibel.</p>
 <p>Milvus Backup membaca metadata koleksi dan segmen dari instance Milvus sumber untuk membuat cadangan. Kemudian menyalin data koleksi dari jalur root instance Milvus sumber dan menyimpan data yang disalin ke dalam jalur root cadangan.</p>

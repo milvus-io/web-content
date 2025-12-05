@@ -242,7 +242,7 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/results.png" alt="Results" class="doc-image" id="results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results.png" alt="Results" class="doc-image" id="results" />
    </span> <span class="img-wrapper"> <span>结果</span> </span></p>
 <p>我们可以看到，大部分图片都与搜索图片属于同一类别，即阿富汗猎犬。这说明我们找到了与搜索图片相似的图片。</p>
 <h2 id="Quick-Deploy" class="common-anchor-header">快速部署<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">

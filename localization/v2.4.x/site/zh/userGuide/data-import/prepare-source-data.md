@@ -38,7 +38,7 @@ summary: 本页讨论了在开始批量将数据插入 Collections 之前应该�
     </button></h2><p>目标 Collections 需要将源数据映射到其 Schema。下图显示了如何将可接受的源数据映射到目标 Collections 的模式。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>将数据映射到 Schema</span> </span></p>
 <p>您应仔细检查数据，并据此设计目标 Collections 的模式。</p>
 <p>以上图中的 JSON 数据为例，行列表中有两个实体，每个行有六个字段。Collections 模式选择性地包括四个：<strong>ID</strong>、<strong>向量</strong>、<strong>标量_1</strong> 和<strong>标量_2</strong>。</p>

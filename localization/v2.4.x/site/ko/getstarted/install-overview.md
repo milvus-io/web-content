@@ -105,7 +105,7 @@ title: Milvus 배포 옵션 개요
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" />
    </span> <span class="img-wrapper"> <span>사용 사례에 맞는 배포 옵션 선택</span> </span></p>
 <h2 id="Comparison-on-functionalities" class="common-anchor-header">기능 비교<button data-href="#Comparison-on-functionalities" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -25,7 +25,7 @@ title: Grafik RAG dengan Milvus
 <p>Dalam buku catatan ini, kami memperkenalkan sebuah pendekatan yang sederhana namun kuat untuk meningkatkan performa dari skenario ini. Ini adalah paradigma RAG sederhana dengan pengambilan multi-arah dan kemudian melakukan pemeringkatan ulang, tetapi mengimplementasikan Graph RAG secara logis, dan mencapai kinerja yang canggih dalam menangani pertanyaan-pertanyaan multi-hop. Mari kita lihat bagaimana implementasinya.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 )[0]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">Memperluas Subgraf</h3><p>Kita menggunakan entitas dan relasi yang diambil untuk memperluas subgraf dan mendapatkan relasi kandidat, lalu menggabungkannya dari dua cara. Berikut adalah diagram alir dari proses perluasan subgraf:  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

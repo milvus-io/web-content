@@ -42,7 +42,7 @@ summary: Learn how to deploy monitoring services for a Milvus cluster using Prom
 <p>The following image illustrates Prometheus workflow.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/prometheus_architecture.png" alt="Prometheus_architecture" class="doc-image" id="prometheus_architecture" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/prometheus_architecture.png" alt="Prometheus_architecture" class="doc-image" id="prometheus_architecture" />
     <span>Prometheus_architecture</span>
   </span>
 </p>

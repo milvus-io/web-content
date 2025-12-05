@@ -111,12 +111,12 @@ title: 'Airbyte: 오픈 소스 데이터 이동 인프라'
 <p>본문, 제목, 설명 및 제목의 텍스트 필드와 청크 크기를 1000토큰으로 설정하여 Zendesk에서 받게 될 데이터에 포함되도록 해 보겠습니다.</p>
 <ul>
 <li><strong>임베딩</strong> - 머신 러닝 모델을 사용하면 처리 파트에서 생성된 텍스트 청크가 벡터 임베딩으로 변환되어 의미적 유사성을 검색할 수 있습니다. 임베딩을 만들려면 OpenAI API 키를 제공해야 합니다. 에어바이트는 각 청크를 OpenAI로 전송하고 결과 벡터를 Milvus 클러스터에 로드된 엔티티에 추가합니다.</li>
-<li><strong>인덱싱</strong> - 청크를 벡터화했으면 데이터베이스에 로드할 수 있습니다. 이렇게 하려면 클러스터 및 컬렉션을 설정할 때 얻은 정보를 Milvus 클러스터에 삽입합니다. <div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_1.png" width="40%"/></div> "테스트 및 저장"을 클릭하면 모든 것이 올바르게 정렬되었는지 확인합니다(유효한 자격 증명, 컬렉션이 존재하며 구성된 임베딩과 동일한 벡터 차원을 갖는지 등).</li>
+<li><strong>인덱싱</strong> - 청크를 벡터화했으면 데이터베이스에 로드할 수 있습니다. 이렇게 하려면 클러스터 및 컬렉션을 설정할 때 얻은 정보를 Milvus 클러스터에 삽입합니다. <div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_1.png" width="40%"/></div> "테스트 및 저장"을 클릭하면 모든 것이 올바르게 정렬되었는지 확인합니다(유효한 자격 증명, 컬렉션이 존재하며 구성된 임베딩과 동일한 벡터 차원을 갖는지 등).</li>
 </ul>
-<h3 id="Set-up-stream-sync-flow" class="common-anchor-header">스트림 동기화 흐름 설정</h3><p>데이터 흐름이 준비되기 전 마지막 단계는 동기화할 '스트림'을 선택하는 것입니다. 스트림은 소스에 있는 레코드의 모음입니다. Zendesk는 사용 사례와 관련이 없는 많은 수의 스트림을 지원하므로 대역폭을 절약하고 관련 정보만 검색에 표시되도록 하기 위해 "티켓"과 "문서"만 선택하고 다른 모든 스트림을 비활성화해 보겠습니다:<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_2.png" width="40%"/></div> 스트림 이름을 클릭하여 소스에서 추출할 필드를 선택할 수 있습니다. "증분 + 추가 + 중복 제거" 동기화 모드는 후속 연결 실행 시 최소한의 데이터(마지막 실행 이후 변경된 문서 및 티켓만)만 전송하면서 Zendesk와 Milvus를 동기화 상태로 유지한다는 의미입니다.</p>
+<h3 id="Set-up-stream-sync-flow" class="common-anchor-header">스트림 동기화 흐름 설정</h3><p>데이터 흐름이 준비되기 전 마지막 단계는 동기화할 '스트림'을 선택하는 것입니다. 스트림은 소스에 있는 레코드의 모음입니다. Zendesk는 사용 사례와 관련이 없는 많은 수의 스트림을 지원하므로 대역폭을 절약하고 관련 정보만 검색에 표시되도록 하기 위해 "티켓"과 "문서"만 선택하고 다른 모든 스트림을 비활성화해 보겠습니다:<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_2.png" width="40%"/></div> 스트림 이름을 클릭하여 소스에서 추출할 필드를 선택할 수 있습니다. "증분 + 추가 + 중복 제거" 동기화 모드는 후속 연결 실행 시 최소한의 데이터(마지막 실행 이후 변경된 문서 및 티켓만)만 전송하면서 Zendesk와 Milvus를 동기화 상태로 유지한다는 의미입니다.</p>
 <p>연결이 설정되는 즉시 Airbyte가 데이터 동기화를 시작합니다. Milvus 컬렉션에 표시되기까지 몇 분 정도 걸릴 수 있습니다.</p>
 <p>복제 빈도를 선택하면 Airbyte가 정기적으로 실행되어 Zendesk 문서의 변경 사항 및 새로 만들어진 이슈로 Milvus 컬렉션을 최신 상태로 유지합니다.</p>
-<h3 id="Check-flow" class="common-anchor-header">흐름 확인</h3><p>Milvus 클러스터 UI에서 플레이그라운드로 이동하여 "_ab_stream == \"tickets\""로 설정된 필터로 "데이터 쿼리" 쿼리를 실행하여 컬렉션의 데이터 구조가 어떻게 구성되어 있는지 확인할 수 있습니다.<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_3.png" width="40%"/></div> 결과 보기에서 볼 수 있듯이 Zendesk에서 오는 각 레코드는 지정된 모든 메타데이터와 함께 Milvus에 별도의 엔티티로 저장됩니다. 임베딩의 기반이 되는 텍스트 청크는 "text" 속성으로 표시되며, 이는 OpenAI를 사용하여 임베딩된 텍스트이며 우리가 검색할 텍스트가 될 것입니다.</p>
+<h3 id="Check-flow" class="common-anchor-header">흐름 확인</h3><p>Milvus 클러스터 UI에서 플레이그라운드로 이동하여 "_ab_stream == \"tickets\""로 설정된 필터로 "데이터 쿼리" 쿼리를 실행하여 컬렉션의 데이터 구조가 어떻게 구성되어 있는지 확인할 수 있습니다.<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_3.png" width="40%"/></div> 결과 보기에서 볼 수 있듯이 Zendesk에서 오는 각 레코드는 지정된 모든 메타데이터와 함께 Milvus에 별도의 엔티티로 저장됩니다. 임베딩의 기반이 되는 텍스트 청크는 "text" 속성으로 표시되며, 이는 OpenAI를 사용하여 임베딩된 텍스트이며 우리가 검색할 텍스트가 될 것입니다.</p>
 <h2 id="Build-Streamlit-app-querying-the-collection" class="common-anchor-header">컬렉션을 쿼리하는 Streamlit 앱 빌드<button data-href="#Build-Streamlit-app-querying-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +157,7 @@ title: 'Airbyte: 오픈 소스 데이터 이동 인프라'
 <p>애플리케이션을 실행하려면 Streamlit 실행을 사용합니다:</p>
 <pre><code translate="no" class="language-shell">streamlit run basic_support_form.py
 <button class="copy-code-btn"></button></code></pre>
-<p>그러면 기본 양식이 렌더링됩니다:<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_4.png" width="40%"/></div>이 예제의 코드는 <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py">GitHub에서도</a> 찾을 수 있습니다.</p>
+<p>그러면 기본 양식이 렌더링됩니다:<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_4.png" width="40%"/></div>이 예제의 코드는 <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py">GitHub에서도</a> 찾을 수 있습니다.</p>
 <h3 id="Set-up-backend-query-service" class="common-anchor-header">백엔드 쿼리 서비스 설정</h3><p>다음으로 관련성이 있을 수 있는 기존 미해결 티켓이 있는지 확인해 보겠습니다. 이를 위해 사용자가 OpenAI를 사용하여 입력한 텍스트를 임베드한 다음 컬렉션에서 유사성 검색을 수행하여 아직 미해결 티켓을 필터링합니다. 제공된 티켓과 기존 티켓 사이의 거리가 매우 짧은 티켓이 있으면 사용자에게 알리고 제출하지 않습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
 <span class="hljs-keyword">import</span> os
@@ -206,7 +206,7 @@ title: 'Airbyte: 오픈 소스 데이터 이동 인프라'
 
 streamlit run app.<span class="hljs-property">py</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이미 존재하는 티켓을 제출하려고 하면 다음과 같은 결과가 표시됩니다:<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_5.png" width="40%"/></div> 이 예제의 코드는 <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py">GitHub에서도</a> 찾을 수 있습니다.</p>
+<p>이미 존재하는 티켓을 제출하려고 하면 다음과 같은 결과가 표시됩니다:<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_5.png" width="40%"/></div> 이 예제의 코드는 <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py">GitHub에서도</a> 찾을 수 있습니다.</p>
 <h3 id="Show-more-relevant-information" class="common-anchor-header">더 많은 관련 정보 보기</h3><p>최종 버전에 숨겨진 녹색 디버그 출력에서 볼 수 있듯이 검색 결과와 일치하는 티켓이 두 개(신규 상태, 현재 조직에서, 임베딩 벡터에 가까운 상태) 있었습니다. 하지만 첫 번째(관련성 있는) 티켓이 두 번째(이 상황에서는 관련성 없는) 티켓보다 순위가 더 높았으며, 이는 낮은 거리 값에 반영되어 있습니다. 이러한 관계는 일반 전체 텍스트 검색에서처럼 직접 일치하는 단어 없이 임베딩 벡터에 포착됩니다.</p>
 <p>마지막으로 티켓이 제출된 후에 유용한 정보를 표시하여 사용자에게 가능한 한 많은 관련 정보를 미리 제공하겠습니다.</p>
 <p>이를 위해 티켓이 제출된 후 두 번째 검색을 수행하여 가장 일치하는 지식창고 문서를 가져옵니다:</p>
@@ -224,7 +224,7 @@ streamlit run app.<span class="hljs-property">py</span>
                         st.write(<span class="hljs-string">f&quot;* [<span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;title&#x27;</span>)}</span>](<span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;html_url&#x27;</span>)}</span>)&quot;</span>)
 
 <button class="copy-code-btn"></button></code></pre>
-<p>유사성 점수가 높은 미해결 지원 티켓이 없는 경우에는 새 티켓이 제출되고 관련 지식창고 문서가 아래에 표시됩니다:<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_6.png" width="40%"/></div> 이 예제의 코드는 <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py">Github에서도</a> 찾을 수 있습니다.</p>
+<p>유사성 점수가 높은 미해결 지원 티켓이 없는 경우에는 새 티켓이 제출되고 관련 지식창고 문서가 아래에 표시됩니다:<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_6.png" width="40%"/></div> 이 예제의 코드는 <a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py">Github에서도</a> 찾을 수 있습니다.</p>
 <h2 id="Conclusion" class="common-anchor-header">결론<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

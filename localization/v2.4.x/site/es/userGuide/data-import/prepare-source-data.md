@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>La colección de destino requiere la asignación de los datos de origen a su esquema. El siguiente diagrama muestra cómo se asignan los datos de origen aceptables al esquema de una colección de destino.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>Asignación de datos al esquema</span> </span></p>
 <p>Debe examinar cuidadosamente sus datos y diseñar el esquema de la colección de destino en consecuencia.</p>
 <p>Tomando como ejemplo los datos JSON del diagrama anterior, hay dos entidades en la lista de filas y cada fila tiene seis campos. El esquema de la colección incluye selectivamente cuatro: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong> y <strong>scalar_2</strong>.</p>

@@ -364,7 +364,7 @@ OpenAIInstrumentor().instrument()
 </code></pre>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/phoenix01.png" alt="Alt Text" class="doc-image" id="alt-text" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phoenix01.png" alt="Alt Text" class="doc-image" id="alt-text" />
     <span>Alt Text</span>
   </span>
 </p>

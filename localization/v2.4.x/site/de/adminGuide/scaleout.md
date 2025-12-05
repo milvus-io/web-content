@@ -46,11 +46,11 @@ title: Skalieren eines Milvus-Clusters
 <h3 id="Scaling-out" class="common-anchor-header">Skalierung nach außen</h3><p>Unter Skalierung nach außen versteht man die Erhöhung der Anzahl der Knoten in einem Cluster. Anders als bei der Skalierung nach oben müssen Sie bei der Skalierung nach außen nicht einem Knoten im Cluster mehr Ressourcen zuweisen. Stattdessen wird der Cluster durch das Hinzufügen weiterer Knoten horizontal erweitert.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>Scaleout</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Hochskalieren</span> </span></p>
 <p>Gemäß der <a href="/docs/de/v2.4.x/architecture_overview.md">Milvus-Architektur</a> umfassen die zustandslosen Arbeitsknoten Abfrageknoten, Datenknoten, Indexknoten und Proxy. Daher können Sie diese Art von Knoten entsprechend Ihren Geschäftsanforderungen und Anwendungsszenarien ausbauen. Sie können den Milvus-Cluster entweder manuell oder automatisch skalieren.</p>
 <p>Im Allgemeinen müssen Sie den Milvus-Cluster, den Sie erstellt haben, skalieren, wenn er übermäßig ausgelastet ist. Nachfolgend sind einige typische Situationen aufgeführt, in denen Sie den Milvus-Cluster ausbauen müssen:</p>

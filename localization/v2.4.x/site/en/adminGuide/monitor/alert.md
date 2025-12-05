@@ -76,42 +76,42 @@ summary: Learn how to create an alert for Milvus services in Grafana.
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Add a new query</h3><p>To add an alert for the memory usage of Milvus components, edit the Memory panel. Then, add a new query with the metric: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
     <span>Alert_metric</span>
   </span>
 </p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Save the dashboard</h3><p>Save the dashboard, and wait for a few minutes to see the alert.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
     <span>Alert_dashboard</span>
   </span>
 </p>
 <p>Grafana alert query does not support template variables. Therefore, you should add a second query without any template variables in the labels. The second query is named as “A” by default. You can rename it by clicking on the dropdown.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
     <span>Alert_query</span>
   </span>
 </p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Add alert notifications</h3><p>To receive alert notifications, add a "notification channel". Then, specify the channel in the field "Send to".</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
     <span>Alert_notification</span>
   </span>
 </p>
 <p>If the alert is successfully created and triggered, you will receive the notification as shown in the screenshot below.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
     <span>Notification_message</span>
   </span>
 </p>
 <p>To delete an alert, go to the “Alert” panel and click the delete button.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
     <span>Delete_alert</span>
   </span>
 </p>

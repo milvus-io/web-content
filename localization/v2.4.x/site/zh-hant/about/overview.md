@@ -42,7 +42,7 @@ summary: >-
 <p>Milvus 提供強大的資料建模功能，讓您能夠將非結構化資料或多模式資料組織成結構化的集合。它支援各種不同屬性建模的資料類型，包括常見的數值和字元類型、各種向量類型、陣列、集合和 JSON，讓您省去維護多個資料庫系統的麻煩。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>非結構化資料、嵌入與 Milvus</span> </span></p>
 <p>Milvus 提供三種部署模式，涵蓋廣泛的資料規模 - 從 Jupyter Notebooks 中的本機原型，到管理數百億向量的大型 Kubernetes 集群：</p>
 <ul>
@@ -89,7 +89,7 @@ summary: >-
 <p>Milvus 的雲原生與高度解耦的系統架構，可確保系統能隨著資料成長而持續擴充：</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Milvus 高度解耦的系統架構</span> </span></p>
 <p>Milvus 本身是完全無狀態的，因此可借助 Kubernetes 或公有雲輕鬆擴展。此外，Milvus 各個元件都有很好的解耦功能，其中最重要的三個任務 - 搜尋、資料插入和索引/壓縮 - 都被設計成容易並行化的流程，並將複雜的邏輯分離出來。這可確保相對應的查詢節點、資料節點和索引節點都能獨立擴充，以最佳化效能和成本效益。</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvus 支援的搜尋類型<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">

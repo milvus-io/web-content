@@ -31,5 +31,5 @@ title: Bild-Deduplizierung
 <p>In diesem Tutorial lernen Sie, wie man ein Bild-Deduplizierungssystem aufbaut. In diesem Tutorial wird das ResNet-50-Modell verwendet, um Merkmale von Bildern zu extrahieren und sie in Vektoren umzuwandeln. Anschließend werden diese Bildvektoren in der Milvus-Vektordatenbank gespeichert und eine Vektorähnlichkeitssuche wird ebenfalls in Milvus durchgeführt.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>Bildduplizierung_Workflow</span> </span></p>

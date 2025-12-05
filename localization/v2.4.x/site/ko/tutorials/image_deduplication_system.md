@@ -31,5 +31,5 @@ title: 이미지 중복 제거
 <p>이 튜토리얼에서는 이미지 중복 제거 시스템을 구축하는 방법을 배웁니다. 이 튜토리얼에서는 ResNet-50 모델을 사용하여 이미지의 특징을 추출하고 이를 벡터로 변환합니다. 그런 다음 이러한 이미지 벡터를 Milvus 벡터 데이터베이스에 저장하고 Milvus에서도 벡터 유사도 검색을 수행합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>이미지_중복제거_워크플로</span> </span></p>

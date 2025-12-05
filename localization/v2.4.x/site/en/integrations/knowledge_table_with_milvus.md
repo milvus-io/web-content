@@ -137,7 +137,7 @@ title: Knowledge Table with Milvus
     </button></h2><p>The frontend can be accessed at <code translate="no">http://localhost:3000</code>, and the backend can be accessed at <code translate="no">http://localhost:8000</code>.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/knowlege_table.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowlege_table.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

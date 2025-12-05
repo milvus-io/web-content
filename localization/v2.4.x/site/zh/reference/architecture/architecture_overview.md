@@ -23,7 +23,7 @@ title: Milvus 架构概述
 <p>Milvus 采用共享存储架构，其计算节点具有存储和计算分解及横向扩展能力。按照数据平面和控制平面分解的原则，Milvus 由<a href="/docs/zh/v2.4.x/four_layers.md">四层</a>组成：访问层、协调器服务、工作节点和存储。这些层在扩展或灾难恢复时相互独立。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
    </span> <span class="img-wrapper"> <span>架构图</span> </span></p>
 <p>根据该图，接口可分为以下几类：</p>
 <ul>

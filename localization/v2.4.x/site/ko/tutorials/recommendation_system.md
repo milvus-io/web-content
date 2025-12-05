@@ -32,5 +32,5 @@ title: 추천 시스템
 <p></br></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/recommendation_system.png" alt="recommender_system" class="doc-image" id="recommender_system" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/recommendation_system.png" alt="recommender_system" class="doc-image" id="recommender_system" />
    </span> <span class="img-wrapper"> <span>추천자_시스템</span> </span></p>

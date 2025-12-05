@@ -37,7 +37,7 @@ title: Réplica na Memória
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
    </span> <span class="img-wrapper"> <span>Replica_Availiability</span> </span></p>
 <p>Com réplicas na memória, Milvus pode carregar o mesmo segmento em múltiplos nós de consulta. Se um nó de consulta falhar ou estiver ocupado com um pedido de pesquisa atual quando outro chegar, o sistema pode enviar novos pedidos para um nó de consulta inativo que tenha uma réplica do mesmo segmento.</p>
 <h3 id="Performance" class="common-anchor-header">Desempenho</h3><p>As réplicas na memória permitem-lhe tirar partido de recursos extra de CPU e memória. É muito útil se você tiver um conjunto de dados relativamente pequeno, mas quiser aumentar a taxa de transferência de leitura com recursos extras de hardware. O QPS (consulta por segundo) e a taxa de transferência gerais podem ser significativamente melhorados.</p>
@@ -60,7 +60,7 @@ title: Réplica na Memória
     </button></h2><p>As réplicas na memória são organizadas como grupos de réplicas. Cada grupo de réplicas contém réplicas <a href="https://milvus.io/docs/v2.1.x/glossary.md#Sharding">de fragmento</a>. Cada réplica de fragmento tem uma réplica de fluxo contínuo e uma réplica histórica que correspondem aos <a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">segmentos</a> crescentes e selados no fragmento (ou seja, canal DML).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
    </span> <span class="img-wrapper"> <span>Uma ilustração de como funciona a réplica na memória</span> </span></p>
 <h3 id="Replica-group" class="common-anchor-header">Grupo de réplicas</h3><p>Um grupo de réplicas consiste em vários <a href="https://milvus.io/docs/v2.1.x/four_layers.md#Query-node">nós de consulta</a> que são responsáveis pelo tratamento de dados históricos e réplicas.</p>
 <h3 id="Shard-replica" class="common-anchor-header">Réplica de fragmento</h3><p>Uma réplica de fragmento é composta por uma réplica de fluxo contínuo e uma réplica histórica, ambas pertencentes ao mesmo <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Shard">fragmento</a>. O número de réplicas de fragmentos num grupo de réplicas é determinado pelo número de fragmentos numa coleção especificada.</p>

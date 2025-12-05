@@ -60,9 +60,9 @@ title: LangflowとMilvusを使用したRAGシステムの構築
     </button></h2><p>すべての依存関係がインストールされたら、次のコマンドを入力してLangflowダッシュボードを起動します：</p>
 <pre><code translate="no" class="language-shell">$ python -m langflow run
 <button class="copy-code-btn"></button></code></pre>
-<p>すると、以下のようにダッシュボードがポップアップします：<span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" /><span>langflow</span> </span></p>
-<p><strong>Vector Store</strong>プロジェクトを作成したいので、まず<strong>New Project</strong>ボタンをクリックします。パネルがポップアップするので、<strong>Vector Store RAG</strong>オプションを選択する：<span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" /><span>panel</span> </span></p>
-<p>Vector Store Ragプロジェクトが正常に作成されたら、デフォルトのベクターストアはAstraDBである。そこで、Milvusをベクターストアとして使用するために、これら2つのastraDBモジュールをMilvusに置き換える必要があります。<span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" />astraDB </span></p>
+<p>すると、以下のようにダッシュボードがポップアップします：<span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_start.png" alt="langflow" class="doc-image" id="langflow" /><span>langflow</span> </span></p>
+<p><strong>Vector Store</strong>プロジェクトを作成したいので、まず<strong>New Project</strong>ボタンをクリックします。パネルがポップアップするので、<strong>Vector Store RAG</strong>オプションを選択する：<span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_dashboard_new_project.png" alt="panel" class="doc-image" id="panel" /><span>panel</span> </span></p>
+<p>Vector Store Ragプロジェクトが正常に作成されたら、デフォルトのベクターストアはAstraDBである。そこで、Milvusをベクターストアとして使用するために、これら2つのastraDBモジュールをMilvusに置き換える必要があります。<span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_default_structure.png" alt="astraDB" class="doc-image" id="astradb" />astraDB </span></p>
 <h3 id="Steps-to-replace-astraDB-with-Milvus" class="common-anchor-header">astraDBをMilvusに置き換える手順：</h3><ol>
 <li>ベクターストアの既存のカードを削除する。上の画像で赤く表示されている2つのAstraDBカードをクリックし、<strong>バックスペースを押して</strong>削除します。</li>
 <li>サイドバーの<strong>Vector Store</strong>オプションをクリックし、Milvusを選択してキャンバスにドラッグする。ファイル処理ワークフロー用と検索ワークフロー用の2枚のMilvusカードが必要なので、これを2回行う。</li>
@@ -71,7 +71,7 @@ title: LangflowとMilvusを使用したRAGシステムの構築
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_milvus_structure.png" alt="Milvus Structure demo" class="doc-image" id="milvus-structure-demo" />
    </span> <span class="img-wrapper"> <span>Milvusの構造デモ</span> </span></p>
 <h3 id="Embed-knowledge-into-the-RAG-system" class="common-anchor-header">RAGシステムに知識を埋め込む</h3><ol>
 <li>左下のファイルモジュールからLLMのナレッジベースとしてファイルをアップロードします。ここではMilvusの簡単な紹介を含むファイルをアップロードしました。</li>
@@ -80,5 +80,5 @@ title: LangflowとMilvusを使用したRAGシステムの構築
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/langflow_why_milvus.png" alt="why milvus" class="doc-image" id="why-milvus" />
    </span> <span class="img-wrapper"> <span>なぜmilvusなのか？</span> </span></p>

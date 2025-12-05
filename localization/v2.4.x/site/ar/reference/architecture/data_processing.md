@@ -38,17 +38,17 @@ title: معالجة البيانات
 <p>يتم نقل التحقق من صحة طلبات DML إلى الوكيل لأن ميلفوس ليس لديه معاملات معقدة. يطلب الوكيل طابعًا زمنيًا لكل طلب إدراج/حذف من TSO (أوراكل الطابع الزمني)، وهو وحدة التوقيت التي تتشارك مع المنسق الجذر. يتم استخدام الطوابع الزمنية لتحديد تسلسل طلبات البيانات التي تتم معالجتها مع استبدال الطابع الزمني الأقدم بالأحدث. يقوم الوكيل باسترداد المعلومات على دفعات من منسق البيانات بما في ذلك قطاعات الكيانات والمفاتيح الأساسية لزيادة الإنتاجية الإجمالية وتجنب إثقال كاهل العقدة المركزية.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>القنوات 1</span> </span></p>
 <p>تتم كتابة كل من عمليات DML (لغة معالجة البيانات) وعمليات DDL (لغة تعريف البيانات) في تسلسل السجل، ولكن يتم تعيين قناة واحدة فقط لعمليات DDL بسبب انخفاض تكرار حدوثها.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
    </span> <span class="img-wrapper"> <span>القنوات 2</span> </span></p>
 <p>يتم الاحتفاظ بقنوات<em>Vchannels</em> في عقد وسيط السجل الأساسية. كل قناة غير قابلة للتجزئة فعليًا ومتاحة لأي عقدة ولكن لعقدة واحدة فقط. عندما يصل معدل استيعاب البيانات إلى عنق الزجاجة، ضع في اعتبارك أمرين: ما إذا كانت عقدة وسيط السجل مثقلة وتحتاج إلى توسيع نطاقها؛ وما إذا كانت هناك أجزاء كافية لضمان موازنة التحميل لكل عقدة.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
    </span> <span class="img-wrapper"> <span>تسلسل كتابة السجل</span> </span></p>
 <p>يغلف الرسم البياني أعلاه أربعة مكونات متضمنة في عملية كتابة تسلسل السجل: الوكيل، وسيط السجل، عقدة البيانات، وعقدة البيانات، وتخزين الكائنات. وتتضمن العملية أربع مهام: التحقق من صحة طلبات DML، ونشر-اشتراك تسلسل السجل، والتحويل من سجل متدفق إلى لقطات السجل، واستمرار لقطات السجل. يتم فصل المهام الأربع عن بعضها البعض للتأكد من أن كل مهمة يتم التعامل معها من قبل نوع العقدة المقابلة لها. يتم جعل العقد من نفس النوع متساوية ويمكن تحجيمها بشكل مرن ومستقل لاستيعاب أحمال البيانات المختلفة، والبيانات المتدفقة الضخمة والمتقلبة للغاية على وجه الخصوص.</p>
 <h2 id="Index-building" class="common-anchor-header">بناء الفهرس<button data-href="#Index-building" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ title: معالجة البيانات
     </button></h2><p>يتم بناء الفهرس بواسطة عقد الفهرس. لتجنب بناء الفهرس بشكل متكرر لتحديثات البيانات، يتم تقسيم المجموعة في Milvus إلى أجزاء أخرى، لكل منها فهرسها الخاص.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>بناء الفهرس</span> </span></p>
 <p>يدعم Milvus بناء مؤشرات لكل حقل متجه وحقل قياسي وحقل أساسي. يتفاعل كل من مدخلات ومخرجات بناء الفهرس مع تخزين الكائنات: تقوم عقدة الفهرس بتحميل لقطات السجل للفهرسة من مقطع (موجود في وحدة تخزين الكائنات) إلى الذاكرة، ثم تقوم بإلغاء تسلسل البيانات والبيانات الوصفية المقابلة لبناء الفهرس، ثم تقوم بتسلسل الفهرس عند اكتمال بناء الفهرس، ثم تقوم بكتابته مرة أخرى إلى وحدة تخزين الكائنات.</p>
 <p>يتضمن بناء الفهرس بشكل أساسي عمليات متجهية ومصفوفة، وبالتالي فهو يتطلب حوسبة وذاكرة مكثفة. لا يمكن فهرسة المتجهات بكفاءة باستخدام الفهارس التقليدية القائمة على الأشجار بسبب طبيعتها عالية الأبعاد، ولكن يمكن فهرستها بتقنيات مصممة خصيصًا لهذه المهمة، مثل الفهارس القائمة على المجموعات أو الرسم البياني. وبغض النظر عن نوعها، يتضمن بناء الفهرس عمليات حسابية تكرارية ضخمة للمتجهات واسعة النطاق، مثل K-means أو اجتياز الرسم البياني.</p>
@@ -93,13 +93,13 @@ title: معالجة البيانات
     </button></h2><p>يشير مصطلح "الاستعلام عن البيانات" إلى عملية البحث في مجموعة محددة عن عدد <em>k</em> من المتجهات الأقرب إلى متجه مستهدف أو عن <em>جميع</em> المتجهات ضمن نطاق مسافة محددة إلى المتجه. يتم إرجاع المتجهات مع المفتاح الأساسي والحقول المقابلة لها.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>استعلام البيانات</span> </span></p>
 <p>تنقسم المجموعة في ميلفوس إلى قطاعات متعددة، وتقوم عقد الاستعلام بتحميل المؤشرات حسب القطاع. عند وصول طلب بحث، يتم بثه إلى جميع عقد الاستعلام لإجراء بحث متزامن. ثم تقوم كل عقدة بعد ذلك بتشذيب المقاطع المحلية والبحث عن المتجهات التي تفي بالمعايير، ثم تقلل نتائج البحث وتعيدها.</p>
 <p>تكون عقد الاستعلام مستقلة عن بعضها البعض في استعلام البيانات. كل عقدة مسؤولة عن مهمتين فقط: تحميل أو تحرير المقاطع باتباع التعليمات من منسق الاستعلام؛ وإجراء بحث داخل المقاطع المحلية. والوكيل مسؤول عن تقليل نتائج البحث من كل عقدة استعلام وإرجاع النتائج النهائية إلى العميل.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>المناولة</span> </span></p>
 <p>هناك نوعان من المقاطع، المقاطع المتزايدة (للبيانات الإضافية)، والمقاطع المغلقة (للبيانات التاريخية). تشترك عُقد الاستعلام في قناة vchannel لتلقي التحديثات الأخيرة (البيانات التزايدية) كمقاطع متزايدة. عندما يصل المقطع المتنامي إلى عتبة محددة مسبقًا، يقوم منسق البيانات بإغلاقه ويبدأ بناء الفهرس. ثم تقوم عملية <em>تسليم</em> تبدأ من قبل منسق الاستعلام بتحويل البيانات المتزايدة إلى بيانات تاريخية. سيقوم منسق الاستعلام بتوزيع المقاطع المختومة بالتساوي بين جميع عقد الاستعلام وفقًا لاستخدام الذاكرة والنفقات الزائدة لوحدة المعالجة المركزية وعدد المقاطع.</p>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">

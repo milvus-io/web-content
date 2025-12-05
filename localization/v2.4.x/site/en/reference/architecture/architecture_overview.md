@@ -25,7 +25,7 @@ title: Milvus Architecture Overview
 <p>Milvus adopts a shared-storage architecture featuring storage and computing disaggregation and horizontal scalability for its computing nodes. Following the principle of data plane and control plane disaggregation, Milvus comprises <a href="/docs/v2.4.x/four_layers.md">four layers</a>: access layer, coordinator service, worker node, and storage. These layers are mutually independent when it comes to scaling or disaster recovery.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
     <span>Architecture_diagram</span>
   </span>
 </p>

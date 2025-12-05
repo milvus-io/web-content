@@ -203,7 +203,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 <p>你可以查看<strong>任务管理器</strong>中的 "<strong>性能</strong>"选项卡，检查是否启用了虚拟化。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
    </span> <span class="img-wrapper"> <span>任务管理器中的虚拟化</span> </span></p>
 <p>如果虚拟化被禁用，则可能需要检查主板固件的 BIOS 设置。在 BIOS 设置中启用虚拟化的方法因主板供应商而异。以华硕主板为例，你可以参考<a href="https://www.asus.com/support/faq/1043786/">这篇文章</a>来启用虚拟化。</p>
 <p>然后，你需要重启电脑并启用 Hyper-V。有关详情，请参阅这篇<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">微软文章</a>。</p></li>
@@ -232,7 +232,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <p>确保已在管理员模式下启动 Docker Desktop。为此，右键单击<strong>Docker Desktop</strong>并选择<strong>以管理员身份运行</strong>。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
    </span> <span class="img-wrapper"> <span>以管理员身份启动 Docker Desktop</span> </span></p></li>
 </ol>
 <h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">在部署 Milvus 时，如何处理与 WSL 相关的问题？</h3><p>如果你在从 WSL 2 运行 Milvus 时遇到 WSL 相关问题，你可能需要检查是否已将 Docker Desktop 配置为使用基于 WSL 2 的引擎，方法如下。</p>
@@ -240,21 +240,21 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <li><p>确保在 "<strong>设置</strong>"&gt;"<strong>常规</strong>"中勾选了 "使用基于 WSL 2 的引擎"。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>在 Docker Desktop 设置中使用基于 WSL 2 的引擎</span> </span></p></li>
 <li><p>从已安装的 WSL 2 发行版中选择要启用 Docker 集成的发行版：<strong>设置</strong>&gt;<strong>资源</strong>&gt;<strong>WSL 集成</strong>。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>在 Docker 桌面设置中选择 WSL 2 发行版</span> </span></p></li>
 </ol>
 <h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">如何处理 Milvus 启动过程中读取<code translate="no">Read config failed</code> 时提示的卷相关错误？</h3><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Milvus 启动过程中读取配置失败的错误提示</span> </span></p>
 <p>要处理 Milvus 启动过程中提示 "读取配置失败 "的错误，你需要检查挂载到 Milvus 容器中的卷是否正确。如果卷已正确挂载到容器中，你可以使用<code translate="no">docker exec</code> 命令进入容器并列出<strong>/milvus/configs</strong>文件夹，如下所示。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>列出 Milvus 配置文件</span> </span></p>
 <p></p>

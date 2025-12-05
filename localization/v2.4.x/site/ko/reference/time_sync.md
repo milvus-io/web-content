@@ -89,7 +89,7 @@ summary: Milvus의 시간 동기화 시스템에 대해 알아보세요.
 <p>TSO 타임스탬프는 물리적 부분과 논리적 부분으로 구성된 <code translate="no">uint64</code> 값의 한 유형입니다. 아래 그림은 타임스탬프의 형식을 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
    </span> <span class="img-wrapper"> <span>TSO_타임스탬프</span>. </span></p>
 <p>그림에서 보듯이 처음의 46비트는 물리적 부분, 즉 UTC 시간(밀리초)입니다. 마지막 18비트는 논리적 부분입니다.</p>
 <h2 id="Time-synchronization-system-timetick" class="common-anchor-header">시간 동기화 시스템(타임틱)<button data-href="#Time-synchronization-system-timetick" class="anchor-icon" translate="no">
@@ -114,19 +114,19 @@ summary: Milvus의 시간 동기화 시스템에 대해 알아보세요.
   <code translate="no">MsgStream</code> 는 메시지 대기열의 래퍼로, Milvus 2.0에서는 기본적으로 Pulsar입니다.</div>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
 <p>한 가지 일반적인 원칙은 <code translate="no">MsgStream</code> 에서 동일한 프록시에서<code translate="no">InsertMsgs</code> 의 타임스탬프는 증분형이어야 한다는 것입니다. 그러나 다른 프록시의 <code translate="no">InsertMsgs</code> 에는 이러한 규칙이 없습니다.</p>
 <p>다음 그림은 <code translate="no">MsgStream</code> 의 <code translate="no">InsertMsgs</code> 의 예입니다. 이 스니펫에는 5개의 <code translate="no">InsertMsgs</code> 이 포함되어 있으며, 이 중 3개는 <code translate="no">Proxy1</code> 에서, 나머지는 <code translate="no">Proxy2</code> 에서 가져온 것입니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
 <p><code translate="no">Proxy1</code> 의 <code translate="no">InsertMsgs</code> 세 개의 타임스탬프는 증분형이며 <code translate="no">Proxy2</code> 의 <code translate="no">InsertMsgs</code> 두 개도 마찬가지입니다. 그러나 <code translate="no">Proxy1</code> 와 <code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> 사이에는 특별한 순서가 없습니다.</p>
 <p>한 가지 가능한 시나리오는 <code translate="no">Proxy2</code> 에서 타임스탬프가 <code translate="no">110</code> 인 메시지를 읽을 때 <code translate="no">Proxy1</code> 에서 타임스탬프가 <code translate="no">80</code> 인 메시지가 아직 <code translate="no">MsgStream</code> 에 있는 것을 발견하는 것입니다. 따라서 Milvus는 시간 동기화 시스템인 timetick을 도입하여 <code translate="no">MsgStream</code> 에서 메시지를 읽을 때 타임스탬프 값이 작은 메시지를 모두 소비해야 합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>time_synchronization</span> </span></p>
 <p>위 그림과 같이,</p>
 <ul>
@@ -137,7 +137,7 @@ summary: Milvus의 시간 동기화 시스템에 대해 알아보세요.
 <p>다음 그림은 타임틱이 삽입된 <code translate="no">Msgstream</code> 의 예시입니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>timetick</span> </span></p>
 <p><code translate="no">MsgStream</code> 은 타임틱에 따라 메시지를 일괄 처리하여 출력 메시지가 타임스탬프의 요구 사항을 충족하는지 확인합니다.</p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">

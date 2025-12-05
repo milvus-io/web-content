@@ -37,7 +37,7 @@ title: インメモリレプリカ
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_availability.jpg" alt="Replica_Availiability" class="doc-image" id="replica_availiability" />
    </span> <span class="img-wrapper"> <span>レプリカの可用性</span> </span></p>
 <p>インメモリレプリカでは、Milvusは複数のクエリノードに同じセグメントをロードすることができます。あるクエリノードに障害が発生したり、現在の検索リクエストでビジー状態になっているときに別のクエリノードが到着した場合、システムは同じセグメントのレプリカを持つアイドル状態のクエリノードに新しいリクエストを送信することができます。</p>
 <h3 id="Performance" class="common-anchor-header">パフォーマンス</h3><p>インメモリーレプリカは、余分なCPUとメモリーリソースを活用することができます。データセットが比較的小さいが、余分なハードウェアリソースで読み取りスループットを向上させたい場合に非常に便利です。全体的なQPS（クエリー/秒）とスループットを大幅に向上させることができます。</p>
@@ -60,7 +60,7 @@ title: インメモリレプリカ
     </button></h2><p>インメモリーレプリカはレプリカグループとして構成される。各レプリカグループには<a href="https://milvus.io/docs/v2.1.x/glossary.md#Sharding">シャードレプリカが</a>含まれる。各シャードレプリカは、シャード内の成長<a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">セグメントと</a>封印<a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">セグメント</a>（つまりDMLチャネル）に対応するストリーミングレプリカとヒストリカルレプリカを持つ。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
    </span> <span class="img-wrapper"> <span>インメモリ・レプリカの動作の例</span> </span></p>
 <h3 id="Replica-group" class="common-anchor-header">レプリカグループ</h3><p>レプリカグループは、履歴データとレプリカの処理を担当する複数の<a href="https://milvus.io/docs/v2.1.x/four_layers.md#Query-node">クエリノードで</a>構成されます。</p>
 <h3 id="Shard-replica" class="common-anchor-header">シャード・レプリカ</h3><p>シャードレプリカは、同じ<a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Shard">シャードに</a>属するストリーミングレプリカとヒストリカルレプリカから構成されます。レプリカグループ内のシャードレプリカの数は、指定されたコレクション内のシャードの数によって決まります。</p>

@@ -43,7 +43,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
     </button></h2><p>Diagram di bawah ini menunjukkan pipeline RAG vanila yang paling mudah. Pertama, potongan dokumen dimuat ke dalam penyimpanan vektor (seperti <a href="https://milvus.io/docs">Milvus</a> atau <a href="https://zilliz.com/cloud">Zilliz cloud</a>). Kemudian, penyimpanan vektor mengambil potongan Top-K yang paling relevan yang terkait dengan kueri. Potongan-potongan yang relevan ini kemudian disuntikkan ke dalam prompt konteks <a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM</a>, dan akhirnya, LLM mengembalikan jawaban akhir.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -90,7 +90,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">Membuat Pertanyaan Hipotetis</h3><p>Membuat pertanyaan hipotetis melibatkan penggunaan LLM untuk menghasilkan beberapa pertanyaan yang mungkin ditanyakan pengguna tentang konten di dalam setiap bagian dokumen. Sebelum kueri pengguna yang sebenarnya mencapai LLM, penyimpanan vektor mengambil pertanyaan hipotetis yang paling relevan yang terkait dengan kueri yang sebenarnya, bersama dengan potongan dokumen yang sesuai, dan meneruskannya ke LLM.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -98,7 +98,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (Penyematan Dokumen Hipotetis)</h3><p>HyDE adalah singkatan dari Hypothetical Document Embeddings. Ini memanfaatkan LLM untuk membuat &quot;<strong><em>Hypothetical Document</em></strong>&quot; atau jawaban <strong><em>palsu</em></strong> dalam menanggapi pertanyaan pengguna tanpa informasi kontekstual. Jawaban palsu ini kemudian diubah menjadi vektor embeddings dan digunakan untuk menanyakan potongan dokumen yang paling relevan dalam basis data vektor. Selanjutnya, basis data vektor mengambil potongan dokumen Top-K yang paling relevan dan mengirimkannya ke LLM dan kueri pengguna asli untuk menghasilkan jawaban akhir.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -113,7 +113,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <p>Setelah kami memiliki sub-kueri ini, kami mengirim semuanya ke basis data vektor setelah mengubahnya menjadi sematan vektor. Basis data vektor kemudian menemukan potongan dokumen Top-K yang paling relevan dengan setiap sub-kueri. Terakhir, LLM menggunakan informasi ini untuk menghasilkan jawaban yang lebih baik.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -125,7 +125,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <p><strong><em>Pertanyaan Mundur: "Berapa batas ukuran dataset yang dapat ditangani oleh Milvus?"</em></strong></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -149,7 +149,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Menggabungkan Potongan Dokumen Secara Otomatis</h3><p>Saat membuat indeks, kita dapat menggunakan dua tingkat perincian: potongan anak dan potongan induknya. Awalnya, kita mencari potongan anak pada tingkat detail yang lebih halus. Kemudian, kami menerapkan strategi penggabungan: jika sejumlah tertentu, <strong><em>n</em></strong>, potongan anak dari <strong><em>k</em></strong> potongan anak pertama termasuk dalam potongan induk yang sama, kami memberikan potongan induk ini ke LLM sebagai informasi kontekstual.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -157,7 +157,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">Membangun Indeks Hirarkis</h3><p>Ketika membuat indeks untuk dokumen, kita dapat membuat indeks dua tingkat: satu untuk ringkasan dokumen dan satu lagi untuk potongan dokumen. Proses pencarian vektor terdiri dari dua tahap: pertama, kami menyaring dokumen yang relevan berdasarkan ringkasan, dan selanjutnya, kami mengambil potongan dokumen yang sesuai secara eksklusif di dalam dokumen-dokumen yang relevan ini.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -166,7 +166,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <p>Algoritme pencarian tambahan yang umum termasuk metode berbasis frekuensi leksikal seperti <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a> atau model besar yang menggunakan sematan jarang seperti <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. Algoritme pemeringkatan ulang termasuk RRF atau model yang lebih canggih seperti <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, yang menyerupai arsitektur seperti BERT.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -190,7 +190,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Pengambilan Jendela Kalimat</h3><p>Dalam sistem RAG dasar, potongan dokumen yang diberikan kepada LLM adalah jendela yang lebih besar yang mencakup potongan sematan yang diambil. Hal ini memastikan bahwa informasi yang diberikan kepada LLM mencakup detail kontekstual yang lebih luas, sehingga meminimalkan kehilangan informasi. Teknik Pengambilan Jendela Kalimat memisahkan potongan dokumen yang digunakan untuk pengambilan sematan dari potongan yang diberikan ke LLM.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -198,7 +198,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <h3 id="Meta-data-Filtering" class="common-anchor-header">Pemfilteran Meta-data</h3><p>Untuk memastikan jawaban yang lebih tepat, kita dapat menyaring dokumen yang diambil dengan menyaring metadata seperti waktu dan kategori sebelum meneruskannya ke LLM. Misalnya, jika laporan keuangan yang mencakup beberapa tahun diambil, pemfilteran berdasarkan tahun yang diinginkan akan menyaring informasi untuk memenuhi persyaratan tertentu. Metode ini terbukti efektif dalam situasi dengan data yang luas dan metadata yang terperinci, seperti pengambilan konten dalam koleksi perpustakaan.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -221,7 +221,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">Mengompresi prompt LLM</h3><p>Informasi noise dalam potongan dokumen yang diambil dapat secara signifikan memengaruhi keakuratan jawaban akhir RAG. Jendela prompt yang terbatas dalam LLM juga menghadirkan rintangan untuk mendapatkan jawaban yang lebih akurat. Untuk mengatasi tantangan ini, kita dapat memampatkan detail yang tidak relevan, menekankan paragraf kunci, dan mengurangi panjang konteks keseluruhan potongan dokumen yang diambil.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -230,7 +230,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <p>Berdasarkan pengamatan ini, kita dapat menyesuaikan urutan potongan yang diambil untuk meningkatkan kualitas jawaban: ketika mengambil beberapa potongan pengetahuan, potongan dengan kepercayaan yang relatif rendah ditempatkan di tengah, dan potongan dengan kepercayaan yang relatif tinggi diposisikan di kedua ujungnya.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -255,7 +255,7 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <p>Kita dapat melakukan refleksi dengan menggunakan metode refleksi yang efisien seperti model Natural Language Inference (NLI) atau alat tambahan seperti pencarian di internet untuk verifikasi.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -263,13 +263,13 @@ title: Cara Meningkatkan Kinerja Pipeline RAG Anda
 <h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">Perutean Kueri dengan Agen</h3><p>Terkadang, kita tidak perlu menggunakan sistem RAG untuk menjawab pertanyaan sederhana karena dapat mengakibatkan lebih banyak kesalahpahaman dan kesimpulan dari informasi yang menyesatkan. Dalam kasus seperti itu, kita dapat menggunakan agen sebagai perute pada tahap kueri. Agen ini menilai apakah kueri perlu melalui jalur RAG. Jika ya, pipa RAG berikutnya dimulai; jika tidak, LLM secara langsung menangani kueri tersebut.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

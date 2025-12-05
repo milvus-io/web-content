@@ -42,7 +42,7 @@ summary: >-
 <p>Milvus는 강력한 데이터 모델링 기능을 제공하여 비정형 또는 멀티모달 데이터를 정형화된 컬렉션으로 구성할 수 있습니다. 일반적인 숫자 및 문자 유형, 다양한 벡터 유형, 배열, 집합, JSON 등 다양한 속성 모델링을 위한 광범위한 데이터 유형을 지원하므로 여러 데이터베이스 시스템을 유지 관리하는 수고를 덜어줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>비정형 데이터, 임베딩 및 Milvus</span> </span></p>
 <p>Milvus는 세 가지 배포 모드를 제공하며, Jupyter Notebook의 로컬 프로토타이핑부터 수백억 개의 벡터를 관리하는 대규모 Kubernetes 클러스터에 이르기까지 다양한 데이터 규모를 지원합니다:</p>
 <ul>
@@ -89,7 +89,7 @@ summary: >-
 <p>밀버스의 클라우드 네이티브 고도로 분리된 시스템 아키텍처는 데이터 증가에 따라 시스템을 지속적으로 확장할 수 있도록 보장합니다:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>밀버스의 고도로 분리된 시스템 아키텍처</span> </span></p>
 <p>Milvus 자체는 완전히 상태 비저장형이므로 Kubernetes 또는 퍼블릭 클라우드를 통해 쉽게 확장할 수 있습니다. 또한 Milvus 구성 요소는 검색, 데이터 삽입, 인덱싱/압축이라는 가장 중요한 세 가지 작업을 쉽게 병렬화된 프로세스로 설계하고 복잡한 로직을 분리하는 등 잘 분리되어 있습니다. 따라서 해당 쿼리 노드, 데이터 노드, 인덱스 노드가 독립적으로 확장 및 축소할 수 있어 성능과 비용 효율성을 최적화할 수 있습니다.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvus가 지원하는 검색 유형<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">

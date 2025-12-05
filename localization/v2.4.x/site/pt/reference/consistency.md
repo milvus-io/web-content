@@ -56,25 +56,25 @@ title: Consistência
 <h3 id="Strong" class="common-anchor-header">Forte</h3><p>Strong é o nível de consistência mais elevado e mais rigoroso. Garante que os utilizadores podem ler a versão mais recente dos dados.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
    </span> <span class="img-wrapper"> <span>Consistência forte</span> </span></p>
 <p>De acordo com o teorema PACELC, se o nível de consistência for definido como forte, a latência aumentará. Por conseguinte, recomendamos que escolha uma consistência forte durante os testes funcionais para garantir a exatidão dos resultados dos testes. A consistência forte também é mais adequada para aplicações que exigem rigorosamente a consistência dos dados à custa da velocidade de pesquisa. Um exemplo pode ser um sistema financeiro em linha que lida com pagamentos de encomendas e faturação.</p>
 <h3 id="Bounded-staleness" class="common-anchor-header">Estabilidade limitada</h3><p>A obsolescência limitada, como o próprio nome sugere, permite a inconsistência dos dados durante um determinado período de tempo. No entanto, geralmente, os dados são sempre globalmente consistentes fora desse período de tempo.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
    </span> <span class="img-wrapper"> <span>Consistência da estanquidade limitada</span> </span></p>
 <p>A consistência limitada é adequada para cenários que necessitam de controlar a latência da pesquisa e podem aceitar a invisibilidade esporádica dos dados. Por exemplo, nos sistemas de recomendação, como os motores de recomendação de vídeo, a invisibilidade dos dados tem, por vezes, um pequeno impacto na taxa de recuperação global, mas pode aumentar significativamente o desempenho do sistema de recomendação.</p>
 <h3 id="Session" class="common-anchor-header">Sessão</h3><p>A sessão garante que todas as escritas de dados podem ser imediatamente percepcionadas em leituras durante a mesma sessão. Por outras palavras, quando se escrevem dados através de um cliente, os dados recém-inseridos tornam-se instantaneamente pesquisáveis.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
    </span> <span class="img-wrapper"> <span>Consistência da sessão</span> </span></p>
 <p>Recomendamos que escolha a sessão como nível de consistência para os cenários em que a exigência de consistência dos dados na mesma sessão é elevada. Um exemplo pode ser a eliminação dos dados de uma entrada de livro do sistema da biblioteca e, após confirmação da eliminação e atualização da página (uma sessão diferente), o livro já não deve estar visível nos resultados da pesquisa.</p>
 <h3 id="Eventually" class="common-anchor-header">Eventualmente</h3><p>Não existe uma ordem garantida de leituras e escritas, e as réplicas acabam por convergir para o mesmo estado, uma vez que não são efectuadas mais operações de escrita. Sob a consistência de &quot;eventualmente&quot;, as réplicas começam a trabalhar nos pedidos de leitura com os valores actualizados mais recentes. Eventualmente consistente é o nível mais fraco entre os quatro.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
    </span> <span class="img-wrapper"> <span>Consistência eventual</span> </span></p>
 <p>No entanto, de acordo com o teorema PACELC, a latência da pesquisa pode ser tremendamente reduzida com o sacrifício da consistência. Por conseguinte, a consistência eventual é mais adequada para cenários que não exigem muita consistência dos dados, mas requerem um desempenho de pesquisa extremamente rápido. Um exemplo pode ser a recuperação de críticas e classificações de produtos da Amazon com o nível de eventualmente consistente.</p>
 <h2 id="Guarantee-timestamp" class="common-anchor-header">Carimbo de data/hora de garantia<button data-href="#Guarantee-timestamp" class="anchor-icon" translate="no">

@@ -242,7 +242,7 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/results.png" alt="Results" class="doc-image" id="results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results.png" alt="Results" class="doc-image" id="results" />
    </span> <span class="img-wrapper"> <span>結果</span> </span></p>
 <p>ほとんどの画像が検索画像と同じカテゴリー（アフガンハウンド）の画像であることがわかる。つまり、検索画像と類似した画像が見つかったということです。</p>
 <h2 id="Quick-Deploy" class="common-anchor-header">クイックデプロイ<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">

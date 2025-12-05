@@ -33,17 +33,17 @@ Milvusドキュメントへようこそ！</h1></p>
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/ja/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   <a href="/docs/ja/v2.4.x/install_standalone-docker.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_install.svg" alt="icon" />
    </a> <a href="/docs/ja/v2.4.x/install_standalone-docker.md"> <p class="link-btn">Milvusのインストール</p> </a><p>Docker ComposeまたはKubernetesを使ってMilvusをインストールする方法をご紹介します。</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/ja/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   <a href="/docs/ja/v2.4.x/quickstart.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_quick_start.svg" alt="icon" />
    </a> <a href="/docs/ja/v2.4.x/quickstart.md"> <p class="link-btn">クイックスタート</p> </a><p>サンプルコードを使ってMilvusを素早く実行する方法をご紹介します。</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/bootcamp"> <img translate="no" src="/docs/v2.4.x/assets/home_bootcamp.svg" alt="icon" />
+   <a href="/bootcamp"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">ブートキャンプ</p> </a><p>
   Milvusでベクトル類似検索アプリケーションを構築する方法を学びます。  </p>
 </div>

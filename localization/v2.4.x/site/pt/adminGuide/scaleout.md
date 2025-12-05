@@ -46,11 +46,11 @@ title: Dimensionar um aglomerado de Milvus
 <h3 id="Scaling-out" class="common-anchor-header">Dimensionamento para fora</h3><p>O escalonamento para fora refere-se ao aumento do número de nós em um cluster. Ao contrário do aumento de escala, o aumento de escala não requer a alocação de mais recursos para um nó no cluster. Em vez disso, o aumento de escala expande o cluster horizontalmente, adicionando mais nós.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>Aumento de escala</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Aumento de escala</span> </span></p>
 <p>De acordo com a <a href="/docs/pt/v2.4.x/architecture_overview.md">arquitetura Milvus</a>, os nós de trabalho sem estado incluem o nó de consulta, o nó de dados, o nó de índice e o proxy. Portanto, é possível escalar esses tipos de nós para atender às suas necessidades de negócios e cenários de aplicativos. Pode escalar o cluster Milvus manualmente ou automaticamente.</p>
 <p>Geralmente, será necessário expandir o cluster Milvus criado se ele estiver sendo usado em excesso. Abaixo estão algumas situações típicas em que pode ser necessário dimensionar o cluster do Milvus:</p>

@@ -39,7 +39,7 @@ title: Coordinador HA
     </button></h2><p>En la versión 2.2.3, Milvus implementa la alta disponibilidad de los coordinadores para que funcionen en modo activo-standby, mitigando los posibles puntos únicos de fallo (SPoF) que pueden provocar la indisponibilidad del servicio.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>Alta disponibilidad de los coordinadores</span> </span></p>
 <p>La figura anterior ilustra cómo funcionan los coordinadores en el modo activo-espera. Cuando se inicia un par de coordinadores, se registran en etcd utilizando su ID de servidor y compiten por el rol activo. El coordinador que consiga alquilar el rol activo al etcd empezará a servir, y el otro coordinador de la pareja permanecerá en espera, vigilando el rol activo y listo para servir si el coordinador activo muere.</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">Habilitar HA de coordinador<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">

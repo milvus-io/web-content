@@ -31,5 +31,5 @@ title: Дедупликация изображений
 <p>В этом учебном пособии вы узнаете, как построить систему дедупликации изображений. В этом учебнике используется модель ResNet-50 для извлечения характеристик изображений и преобразования их в векторы. Затем эти векторы изображений сохраняются в векторной базе данных Milvus, и в ней же выполняется поиск векторного сходства.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>Процесс_дедупликации_изображений</span> </span></p>

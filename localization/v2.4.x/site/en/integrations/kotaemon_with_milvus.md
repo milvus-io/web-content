@@ -75,14 +75,14 @@ pip install -e &quot;libs/ktem&quot;
       </svg>
     </button></h2><h3 id="1-Add-your-AI-models" class="common-anchor-header">1. Add your AI models</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>In the <code translate="no">Resources</code> tab, you can add and set your LLMs and embedding models. You can add multiple models and set them as active or inactive. You only need to provide at least one. You can also provide multiple models to allow switching between them.</p>
 <h3 id="2-Upload-your-documents" class="common-anchor-header">2. Upload your documents</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -91,7 +91,7 @@ Navigate to the <code translate="no">File Index</code> tab, and you can upload a
 <p>By default, all application data are stored in <code translate="no">./ktem_app_data</code> folder. The Milvus database data is stored in <code translate="no">./ktem_app_data/user_data/vectorstore</code>. You can back up or copy this folder to move your installation to a new machine.</p>
 <h3 id="3-Chat-with-your-documents" class="common-anchor-header">3. Chat with your documents</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

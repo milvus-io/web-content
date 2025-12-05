@@ -75,14 +75,14 @@ pip install -e <span class="hljs-string">&quot;libs/ktem&quot;</span>
       </svg>
     </button></h2><h3 id="1-Add-your-AI-models" class="common-anchor-header">1. Añade tus modelos de IA</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>En la pestaña <code translate="no">Resources</code>, puedes añadir y configurar tus LLMs y modelos de incrustación. Puedes añadir varios modelos y configurarlos como activos o inactivos. Sólo necesitas proporcionar al menos uno. También puede proporcionar varios modelos para permitir el cambio entre ellos.</p>
 <h3 id="2-Upload-your-documents" class="common-anchor-header">2. Cargue sus documentos</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -90,7 +90,7 @@ pip install -e <span class="hljs-string">&quot;libs/ktem&quot;</span>
 <p>Por defecto, todos los datos de la aplicación se almacenan en la carpeta <code translate="no">./ktem_app_data</code>. Los datos de la base de datos de Milvus se almacenan en <code translate="no">./ktem_app_data/user_data/vectorstore</code>. Puede hacer una copia de seguridad o copiar esta carpeta para mover su instalación a una nueva máquina.</p>
 <h3 id="3-Chat-with-your-documents" class="common-anchor-header">3. Chatee con sus documentos</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

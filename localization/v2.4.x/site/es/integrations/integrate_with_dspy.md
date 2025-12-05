@@ -76,7 +76,7 @@ title: Integrar Milvus con DSPy
     </button></h2><p>Existen numerosos componentes que contribuyen a construir un canal LLM. A continuación, describiremos algunos componentes clave para proporcionar una comprensión de alto nivel del funcionamiento de DSPy.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>Módulos DSPy</span> </span></p>
 <p>Firma: Las firmas en DSPy sirven como especificaciones declarativas, delineando el comportamiento de entrada/salida de los módulos, guiando el modelo de lenguaje en la ejecución de tareas. Módulo: Los módulos DSPy sirven como componentes fundamentales para los programas que aprovechan los modelos de lenguaje (LM). Abstraen diversas técnicas de instrucción, como la cadena de pensamiento o ReAct, y son adaptables para manejar cualquier firma DSPy. Con parámetros aprendibles y la capacidad de procesar entradas y producir salidas, estos módulos pueden combinarse para formar programas más amplios, inspirándose en los módulos NN de PyTorch pero adaptados a las aplicaciones LM. Optimizador: Los optimizadores en DSPy ajustan los parámetros de los programas DSPy, como las indicaciones y los pesos LLM, para maximizar las métricas especificadas como la precisión, mejorando la eficiencia del programa.</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">Por qué Milvus en DSPy<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">

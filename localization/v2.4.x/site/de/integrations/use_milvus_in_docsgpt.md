@@ -134,7 +134,7 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
 <p>Sie können mit der Benutzeroberfläche herumspielen und Fragen zu Ihren Dokumenten stellen.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>Alt-Text</span> </span></p>
 <p>Wenn Sie die Dienste stoppen wollen, führen Sie aus:</p>
 <pre><code translate="no" class="language-shell">$ docker compose down

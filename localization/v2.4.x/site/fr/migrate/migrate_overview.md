@@ -83,7 +83,7 @@ title: Aperçu de la migration de Milvus
     </button></h2><p>L'architecture de <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> est stratégiquement conçue pour faciliter les processus efficaces de streaming, d'analyse et d'écriture des données, ce qui permet des capacités de migration robustes dans diverses sources de données.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
    </span> <span class="img-wrapper"> <span>Architecture de Milvus-migration</span> </span></p>
 <p>Dans la figure précédente :</p>
 <ul>

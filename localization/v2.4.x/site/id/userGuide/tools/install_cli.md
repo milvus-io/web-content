@@ -96,5 +96,5 @@ title: Menginstal Milvus_CLI
 <p>Unduh file .exe dari <a href="https://github.com/zilliztech/milvus_cli/releases">GitHub</a> dan jalankan untuk menginstal Milvus_CLI. Jika berhasil, <code translate="no">milvus_cli-&lt;version&gt;.exe</code> akan muncul seperti yang ditunjukkan pada gambar berikut.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
    </span> <span class="img-wrapper"> <span>Milvus_CLI</span> </span></p>

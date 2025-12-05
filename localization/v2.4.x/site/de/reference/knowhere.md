@@ -53,7 +53,7 @@ title: Knowhere
     </button></h2><p>Die folgende Abbildung zeigt die Position von Knowhere in der Milvus-Architektur.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
 <p>Die unterste Schicht ist die Systemhardware. Darüber befinden sich die Indexbibliotheken von Drittanbietern. Auf der obersten Schicht interagiert Knowhere mit dem Indexknoten und dem Abfrageknoten über CGO, das es Go-Paketen ermöglicht, C-Code aufzurufen.</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Knowhere Vorteile<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
@@ -101,7 +101,7 @@ title: Knowhere
 <h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>Basis: Basisklasse</h4><p><code translate="no">DataObj</code> ist die Basisklasse für alle Datenstrukturen in Knowhere. <code translate="no">Size()</code> ist die einzige virtuelle Methode in <code translate="no">DataObj</code>. Die Klasse Index erbt von <code translate="no">DataObj</code> mit einem Feld namens &quot;size_&quot;. Die Index-Klasse hat auch zwei virtuelle Methoden - <code translate="no">Serialize()</code> und <code translate="no">Load()</code>. Die Klasse <code translate="no">VecIndex</code>, die von <code translate="no">Index</code> abgeleitet ist, ist die virtuelle Basisklasse für alle Vektorindizes. <code translate="no">VecIndex</code> bietet Methoden wie <code translate="no">Train()</code>, <code translate="no">Query()</code>, <code translate="no">GetStatistics()</code> und <code translate="no">ClearStatistics()</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
    </span> <span class="img-wrapper"> <span>Basisklasse</span> </span></p>
 <p>Einige andere Indextypen sind in der obigen Abbildung rechts aufgeführt.</p>
 <ul>
@@ -111,20 +111,20 @@ title: Knowhere
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>: Brute-Force-Suche</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
 <p>Technisch gesehen handelt es sich bei <code translate="no">IDMAP</code> nicht um einen Index, sondern um eine Brute-Force-Suche. Wenn Vektoren in die Datenbank eingefügt werden, ist weder ein Datentraining noch ein Indexaufbau erforderlich. Die Suche wird direkt auf den eingefügten Vektordaten durchgeführt.</p>
 <p>Aus Gründen der Code-Konsistenz erbt <code translate="no">IDMAP</code> jedoch auch von der Klasse <code translate="no">VecIndex</code> mit all ihren virtuellen Schnittstellen. Die Verwendung von <code translate="no">IDMAP</code> ist die gleiche wie bei den anderen Indizes.</p>
 <h4 id="IVF-indices" class="common-anchor-header">IVF-Indizes</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
 <p>Die IVF-Indizes (inverted file) sind die am häufigsten verwendeten Indizes. Die Klasse <code translate="no">IVF</code> wird von <code translate="no">VecIndex</code> und <code translate="no">FaissBaseIndex</code> abgeleitet und erweitert sich zu <code translate="no">IVFSQ</code> und <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> wird von <code translate="no">GPUIndex</code> und <code translate="no">IVF</code> abgeleitet. Dann erweitert sich <code translate="no">GPUIVF</code> weiter zu <code translate="no">GPUIVFSQ</code> und <code translate="no">GPUIVFPQ</code>.</p>
 <p><code translate="no">IVFSQHybrid</code> ist ein selbst entwickelter hybrider Index. Ein grober Quantisierer wird auf der GPU ausgeführt, während die Suche im Bucket auf der CPU stattfindet. Diese Art von Index kann das Auftreten von Speicherkopien zwischen CPU und GPU reduzieren, indem die Rechenleistung der GPU genutzt wird. <code translate="no">IVFSQHybrid</code> hat die gleiche Auffindungsrate wie <code translate="no">GPUIVFSQ</code>, bietet aber eine bessere Leistung.</p>
 <p>Die Basisklassenstruktur für binäre Indizes ist relativ einfach. <code translate="no">BinaryIDMAP</code> und <code translate="no">BinaryIVF</code> sind von <code translate="no">FaissBaseBinaryIndex</code> und <code translate="no">VecIndex</code> abgeleitet.</p>
 <h4 id="Third-party-indices" class="common-anchor-header">Indizes von Drittanbietern</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>Drittanbieter-Indizes</span> </span></p>
 <p>Derzeit werden neben Faiss nur zwei Arten von Indizes von Drittanbietern unterstützt: der baumbasierte Index <code translate="no">Annoy</code> und der graphbasierte Index <code translate="no">HNSW</code>. Diese beiden gebräuchlichen und häufig verwendeten Indizes von Drittanbietern sind beide von <code translate="no">VecIndex</code> abgeleitet.</p>
 <h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Hinzufügen von Indizes zu Knowhere<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">

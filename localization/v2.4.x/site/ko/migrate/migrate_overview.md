@@ -80,7 +80,7 @@ title: Milvus 마이그레이션 개요
     </button></h2><p><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration의</a> 아키텍처는 효율적인 데이터 스트리밍, 파싱 및 쓰기 프로세스를 용이하게 하도록 전략적으로 설계되어 다양한 데이터 소스에서 강력한 마이그레이션 기능을 지원합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
    </span> <span class="img-wrapper"> <span>Milvus 마이그레이션 아키텍처</span> </span></p>
 <p>앞의 그림에서:</p>
 <ul>

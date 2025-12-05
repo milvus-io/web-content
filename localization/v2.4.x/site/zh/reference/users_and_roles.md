@@ -23,7 +23,7 @@ title: 用户、权限和角色
 <p>下图说明了对象、权限、角色和用户之间的关系。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
    </span> <span class="img-wrapper"> <span>用户和角色</span> </span></p>
 <h2 id="Key-concepts" class="common-anchor-header">关键概念<button data-href="#Key-concepts" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -76,7 +76,7 @@ title: Integrate Milvus with DSPy
     </button></h2><p>There are numerous components that contribute to constructing an LLM pipeline. Here, we’ll describe some key components to provide a high-level understanding of how DSPy operates.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
     <span>DSPy Modules</span>
   </span>
 </p>

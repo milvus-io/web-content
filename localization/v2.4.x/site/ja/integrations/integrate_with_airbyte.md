@@ -109,12 +109,12 @@ title: エアバイトオープンソースのデータ移動基盤
 <p>チャンクサイズを1000トークン、テキストフィールドをbody、title、description、subjectとします。</p>
 <ul>
 <li><strong>埋め込み</strong>- 機械学習モデルを使用して、処理部分によって生成されたテキストチャンクをベクトル埋め込みに変換します。埋め込みを作成するには、OpenAIのAPIキーを提供する必要があります。Airbyteは各チャンクをOpenAIに送信し、結果のベクトルをMilvusクラスタにロードされたエンティティに追加します。</li>
-<li><strong>インデックス作成</strong>- チャンクをベクトル化したら、データベースにロードします。これを行うには、Milvusクラスタにクラスタとコレクションをセットアップするときに得た情報を挿入します。 <div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_1.png" width="40%"/></div>Test and save "をクリックすると、すべてが正しく並んでいるかチェックされる（有効な認証情報、コレクションが存在し、設定されたエンベッディングと同じベクトル次元を持っているなど）。</li>
+<li><strong>インデックス作成</strong>- チャンクをベクトル化したら、データベースにロードします。これを行うには、Milvusクラスタにクラスタとコレクションをセットアップするときに得た情報を挿入します。 <div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_1.png" width="40%"/></div>Test and save "をクリックすると、すべてが正しく並んでいるかチェックされる（有効な認証情報、コレクションが存在し、設定されたエンベッディングと同じベクトル次元を持っているなど）。</li>
 </ul>
-<h3 id="Set-up-stream-sync-flow" class="common-anchor-header">ストリーム同期フローの設定</h3><p>データがフローできるようになる前の最後のステップは、同期する "ストリーム "を選択することである。ストリームとは、ソース内のレコードの集まりです。Zendesk は、今回のユースケースには関係のない多数のストリームをサポートしているので、帯域幅を節約し、関連する情報だけが検索に表示されるようにするために、「チケット」と「記事」だけを選択し、他はすべて無効にしましょう：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_2.png" width="40%"/></div>ストリーム名をクリックすると、ソースから抽出するフィールドを選択できます。Incremental｜Append＋Deduped "同期モードは、ZendeskとMilvusが最小限のデータ（前回の実行以降に変更された記事とチケットのみ）を転送しながら同期を保つことを意味します。</p>
+<h3 id="Set-up-stream-sync-flow" class="common-anchor-header">ストリーム同期フローの設定</h3><p>データがフローできるようになる前の最後のステップは、同期する "ストリーム "を選択することである。ストリームとは、ソース内のレコードの集まりです。Zendesk は、今回のユースケースには関係のない多数のストリームをサポートしているので、帯域幅を節約し、関連する情報だけが検索に表示されるようにするために、「チケット」と「記事」だけを選択し、他はすべて無効にしましょう：<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_2.png" width="40%"/></div>ストリーム名をクリックすると、ソースから抽出するフィールドを選択できます。Incremental｜Append＋Deduped "同期モードは、ZendeskとMilvusが最小限のデータ（前回の実行以降に変更された記事とチケットのみ）を転送しながら同期を保つことを意味します。</p>
 <p>接続が設定されるとすぐに、Airbyteはデータの同期を開始します。Milvusコレクションに表示されるまで数分かかることがあります。</p>
 <p>レプリケーションの頻度を選択した場合、Airbyteは定期的に実行され、Zendeskアーティクルの変更や新しく作成されたチケットをMilvusコレクションに反映します。</p>
-<h3 id="Check-flow" class="common-anchor-header">チェックフロー</h3><p>MilvusクラスタUIで、プレイグラウンドに移動し、"_ab_stream == \"にフィルタを設定した "Query Data "クエリを実行することで、コレクション内のデータがどのような構造になっているかを確認することができます。<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_3.png" width="40%"/></div>結果ビューを見るとわかるように、Zendeskから送られてきた各レコードは、指定されたすべてのメタデータとともにMilvusに個別のエンティティとして保存されています。埋め込んだテキストチャンクは、"text" プロパティとして表示されます。</p>
+<h3 id="Check-flow" class="common-anchor-header">チェックフロー</h3><p>MilvusクラスタUIで、プレイグラウンドに移動し、"_ab_stream == \"にフィルタを設定した "Query Data "クエリを実行することで、コレクション内のデータがどのような構造になっているかを確認することができます。<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_3.png" width="40%"/></div>結果ビューを見るとわかるように、Zendeskから送られてきた各レコードは、指定されたすべてのメタデータとともにMilvusに個別のエンティティとして保存されています。埋め込んだテキストチャンクは、"text" プロパティとして表示されます。</p>
 <h2 id="Build-Streamlit-app-querying-the-collection" class="common-anchor-header">コレクションをクエリするStreamlitアプリのビルド<button data-href="#Build-Streamlit-app-querying-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,7 +155,7 @@ title: エアバイトオープンソースのデータ移動基盤
 <p>アプリケーションを実行するには、Streamlit runを使います：</p>
 <pre><code translate="no" class="language-shell">streamlit run basic_support_form.py
 <button class="copy-code-btn"></button></code></pre>
-<p>これで基本フォームがレンダリングされます：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_4.png" width="40%"/></div>この例のコードは<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py">GitHubにも</a>あります。</p>
+<p>これで基本フォームがレンダリングされます：<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_4.png" width="40%"/></div>この例のコードは<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/1_basic_support_form.py">GitHubにも</a>あります。</p>
 <h3 id="Set-up-backend-query-service" class="common-anchor-header">バックエンドクエリーサービスのセットアップ</h3><p>次に、関連しそうな既存のオープンチケットをチェックしてみましょう。これを行うために、OpenAI を使ってユーザが入力したテキストを埋め込み、コレクションで類似検索を行い、まだ開いているチケットをフィルタリングします。もし、入力されたチケットと既存のチケットの間の距離が非常に低いものがあれば、ユーザに知らせ、送信しないようにします：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
 <span class="hljs-keyword">import</span> os
@@ -204,7 +204,7 @@ title: エアバイトオープンソースのデータ移動基盤
 
 streamlit run app.<span class="hljs-property">py</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>すでに存在するチケットを送信しようとすると、このようになります：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_5.png" width="40%"/></div>この例のコードは<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py">GitHub</a> にもあります。</p>
+<p>すでに存在するチケットを送信しようとすると、このようになります：<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_5.png" width="40%"/></div>この例のコードは<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py">GitHub</a> にもあります。</p>
 <h3 id="Show-more-relevant-information" class="common-anchor-header">より多くの関連情報を表示する</h3><p>最終バージョンに隠された緑色のデバッグ出力でわかるように、2つのチケットが私たちの検索にマッチしました（ステータスが新規で、現在の組織からで、埋め込みベクトルに近い）。しかし、最初のチケット(関連)は2番目のチケット(この状況では無関係)よりも上位にランクされ、それは低い距離値に反映されています。この関係は、通常の全文検索のように、単語を直接マッチングさせることなく、埋め込みベクトルに取り込まれる。</p>
 <p>最後に、チケットの提出後に役立つ情報を表示して、ユーザにできるだけ多くの関連情報を前もって与えましょう。</p>
 <p>そのために、チケットが送信された後に2回目の検索を行い、上位にマッチするナレッジベースの記事を取得します：</p>
@@ -222,7 +222,7 @@ streamlit run app.<span class="hljs-property">py</span>
                         st.write(<span class="hljs-string">f&quot;* [<span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;title&#x27;</span>)}</span>](<span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;html_url&#x27;</span>)}</span>)&quot;</span>)
 
 <button class="copy-code-btn"></button></code></pre>
-<p>高い類似度スコアを持つオープンサポートチケットがない場合、新しいチケットが送信され、関連するナレッジ記事が下に表示されます：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_6.png" width="40%"/></div>この例のコードは<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py">Github</a> にもあります。</p>
+<p>高い類似度スコアを持つオープンサポートチケットがない場合、新しいチケットが送信され、関連するナレッジ記事が下に表示されます：<div><img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/airbyte_with_milvus_6.png" width="40%"/></div>この例のコードは<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py">Github</a> にもあります。</p>
 <h2 id="Conclusion" class="common-anchor-header">結論<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

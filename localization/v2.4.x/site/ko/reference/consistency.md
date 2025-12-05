@@ -56,25 +56,25 @@ title: 일관성
 <h3 id="Strong" class="common-anchor-header">강함</h3><p>강함은 가장 높고 엄격한 일관성 수준입니다. 사용자가 최신 버전의 데이터를 읽을 수 있도록 보장합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
    </span> <span class="img-wrapper"> <span>강력한 일관성</span> </span></p>
 <p>PACELC 정리에 따르면 일관성 수준을 강으로 설정하면 지연 시간이 증가합니다. 따라서 테스트 결과의 정확성을 보장하기 위해 기능 테스트 중에 강력한 일관성을 선택하는 것이 좋습니다. 강력한 일관성은 검색 속도를 희생하는 대신 데이터 일관성에 대한 엄격한 요구가 있는 애플리케이션에도 가장 적합합니다. 주문 결제 및 청구를 처리하는 온라인 금융 시스템을 예로 들 수 있습니다.</p>
 <h3 id="Bounded-staleness" class="common-anchor-header">바운드 스탤런트</h3><p>이름에서 알 수 있듯이 경계부실성은 특정 기간 동안 데이터 불일치를 허용합니다. 그러나 일반적으로 데이터는 해당 기간 외에는 항상 전 세계적으로 일관성을 유지합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
    </span> <span class="img-wrapper"> <span>바운딩된 유효기간 일관성</span> </span></p>
 <p>제한적 유효성 검사는 검색 지연 시간을 제어해야 하고 산발적인 데이터 비가시성을 허용할 수 있는 시나리오에 적합합니다. 예를 들어 동영상 추천 엔진과 같은 추천 시스템에서 데이터 비가시성은 전체 리콜률에 미치는 영향은 미미하지만 추천 시스템의 성능을 크게 향상시킬 수 있습니다.</p>
 <h3 id="Session" class="common-anchor-header">세션</h3><p>세션은 모든 데이터 쓰기가 동일한 세션 동안 읽기에서 즉시 인식될 수 있도록 합니다. 즉, 하나의 클라이언트를 통해 데이터를 쓰면 새로 삽입된 데이터를 즉시 검색할 수 있게 됩니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
    </span> <span class="img-wrapper"> <span>세션 일관성</span> </span></p>
 <p>동일한 세션에서 데이터 일관성에 대한 요구가 높은 시나리오에서는 일관성 수준으로 세션을 선택하는 것이 좋습니다. 예를 들어 라이브러리 시스템에서 도서 항목의 데이터를 삭제하고 삭제를 확인한 후 페이지를 새로고침(다른 세션)하면 해당 도서가 더 이상 검색 결과에 표시되지 않아야 합니다.</p>
 <h3 id="Eventually" class="common-anchor-header">결국</h3><p>읽기 및 쓰기 순서는 보장되지 않으며, 더 이상의 쓰기 작업이 수행되지 않으면 복제본은 결국 동일한 상태로 수렴합니다. &quot;결국&quot; 일관성에서는 복제본이 최신 업데이트된 값으로 읽기 요청에 대해 작업을 시작합니다. 최종 일관성은 네 가지 수준 중 가장 약한 수준입니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
    </span> <span class="img-wrapper"> <span>최종 일관성</span> </span></p>
 <p>그러나 PACELC 정리에 따르면 일관성을 희생하면 검색 지연 시간을 엄청나게 단축할 수 있습니다. 따라서 최종 일관성은 데이터 일관성에 대한 요구가 높지 않지만 매우 빠른 검색 성능이 필요한 시나리오에 가장 적합합니다. 예를 들어 Amazon 제품의 리뷰 및 평점을 궁극적으로 일관된 수준으로 검색하는 경우를 들 수 있습니다.</p>
 <h2 id="Guarantee-timestamp" class="common-anchor-header">타임스탬프 보장<button data-href="#Guarantee-timestamp" class="anchor-icon" translate="no">

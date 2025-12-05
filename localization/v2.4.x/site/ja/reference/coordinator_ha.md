@@ -38,7 +38,7 @@ title: コーディネーター HA
     </button></h2><p>2.2.3リリースでは、Milvusはコーディネータに高可用性を実装し、アクティブ-スタンバイモードで動作するようにすることで、サービスが利用できなくなる可能性のある単一障害点(SPoF)を軽減します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
    </span> <span class="img-wrapper"> <span>コーディネーターの高可用性</span> </span></p>
 <p>上図は、コーディネータがアクティブ・スタンバイ・モードでどのように動作するかを示しています。コーディネーターのペアが開始すると、サーバーIDを使用してetcdに登録し、アクティブな役割を争います。etcdからアクティブな役割をリースすることに成功したコーディネータがサービスを開始し、ペアのもう一方のコーディネータはスタンバイ状態のままアクティブな役割を監視し、アクティブなコーディネータが死亡した場合にサービスを提供できるようにします。</p>
 <h2 id="Enable-coordinator-HA" class="common-anchor-header">コーディネーターのHAを有効にする<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">

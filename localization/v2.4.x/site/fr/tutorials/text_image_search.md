@@ -35,5 +35,5 @@ title: Moteur de recherche texte-image
 <p>Dans ce tutoriel, vous apprendrez à construire un moteur de recherche texte-image. Ce tutoriel utilise le modèle CLIP pour extraire les caractéristiques des images et les convertir en vecteurs. Ces vecteurs d'images sont ensuite stockés dans la base de données vectorielles Milvus. Lorsque les utilisateurs saisissent des textes d'interrogation, ces textes sont également convertis en vecteurs d'intégration à l'aide du même modèle ML CLIP. Ensuite, une recherche de similarité vectorielle est effectuée dans Milvus pour récupérer les vecteurs d'images les plus similaires au vecteur de texte d'entrée.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
    </span> <span class="img-wrapper"> <span>Recherche_image_texte</span> </span></p>

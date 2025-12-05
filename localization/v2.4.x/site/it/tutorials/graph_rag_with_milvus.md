@@ -25,7 +25,7 @@ title: Grafico RAG con Milvus
 <p>In questo quaderno, introduciamo un approccio semplice ma potente per migliorare notevolmente le prestazioni di questo scenario. Si tratta di un semplice paradigma RAG con recupero a più vie e successivo reranking, ma implementa il Graph RAG in modo logico e raggiunge prestazioni all'avanguardia nella gestione di domande multi-hop. Vediamo come viene implementato.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -302,7 +302,7 @@ relation_search_res = milvus_client.search(
 )[0]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">Espandere il sottografo</h3><p>Utilizziamo le entità e le relazioni recuperate per espandere il sottografo e ottenere le relazioni candidate, per poi unirle nei due modi. Ecco un diagramma di flusso del processo di espansione del sottografo:  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

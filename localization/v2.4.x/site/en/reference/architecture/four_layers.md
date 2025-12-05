@@ -100,7 +100,7 @@ title: Storage/Computing Disaggregation
 <p>Milvus follows the “log as data” principle, so Milvus does not maintain a physical table but guarantees data reliability through logging persistence and snapshot logs.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
     <span>Log_mechanism</span>
   </span>
 </p>

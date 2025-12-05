@@ -23,7 +23,7 @@ title: Índice GPU
 <p>É importante observar que o uso de um índice de GPU pode não reduzir necessariamente a latência em comparação com o uso de um índice de CPU. Se você quiser maximizar totalmente a taxa de transferência, precisará de uma pressão de solicitação extremamente alta ou de um grande número de vetores de consulta.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
    </span> <span class="img-wrapper"> <span>desempenho</span> </span></p>
 <p>O suporte GPU do Milvus é contribuído pela equipa Nvidia <a href="https://rapids.ai/">RAPIDS</a>. A seguir estão os tipos de índices GPU atualmente suportados pelo Milvus.</p>
 <h2 id="GPUCAGRA" class="common-anchor-header">GPU_CAGRA<button data-href="#GPUCAGRA" class="anchor-icon" translate="no">

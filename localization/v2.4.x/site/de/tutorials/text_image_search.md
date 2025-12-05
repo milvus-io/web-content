@@ -35,5 +35,5 @@ title: Text zu Bild Suchmaschine
 <p>In diesem Lernprogramm lernen Sie, wie man eine Text-Bild-Suchmaschine erstellt. In diesem Tutorial wird das CLIP-Modell verwendet, um Merkmale von Bildern zu extrahieren und sie in Vektoren umzuwandeln. Diese Bildvektoren werden dann in der Milvus-Vektordatenbank gespeichert. Wenn Benutzer Abfragetexte eingeben, werden diese Texte ebenfalls mit demselben ML-Modell CLIP in Einbettungsvektoren umgewandelt. Anschließend wird in Milvus eine Vektorähnlichkeitssuche durchgeführt, um die ähnlichsten Bildvektoren zum eingegebenen Textvektor zu finden.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
    </span> <span class="img-wrapper"> <span>Text_Bild_Suche</span> </span></p>

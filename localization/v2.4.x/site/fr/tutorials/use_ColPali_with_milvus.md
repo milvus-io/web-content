@@ -32,7 +32,7 @@ title: Utiliser ColPali pour la recherche multimodale avec Milvus
 <p>Les modèles de recherche modernes utilisent généralement un seul ancrage pour représenter le texte ou les images. ColBERT, en revanche, est un modèle neuronal qui utilise une liste d'enchâssements pour chaque instance de données et emploie une opération "MaxSim" pour calculer la similarité entre deux textes. Au-delà des données textuelles, les figures, les tableaux et les diagrammes contiennent également des informations riches, qui sont souvent ignorées dans la recherche d'informations basée sur le texte.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

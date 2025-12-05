@@ -26,7 +26,7 @@ title: Présentation de l'architecture de Milvus
 <p>Milvus adopte une architecture de stockage partagé qui présente une désagrégation du stockage et du calcul et une évolutivité horizontale pour ses nœuds de calcul. Suivant le principe de la désagrégation du plan de données et du plan de contrôle, Milvus comprend <a href="/docs/fr/v2.4.x/four_layers.md">quatre couches</a>: la couche d'accès, le service de coordination, le nœud de travail et le stockage. Ces couches sont mutuellement indépendantes en ce qui concerne la mise à l'échelle ou la reprise après sinistre.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
    </span> <span class="img-wrapper"> <span>Schéma de l'architecture</span> </span></p>
 <p>Selon la figure, les interfaces peuvent être classées dans les catégories suivantes :</p>
 <ul>

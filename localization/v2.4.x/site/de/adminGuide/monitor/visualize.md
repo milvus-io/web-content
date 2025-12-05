@@ -62,16 +62,16 @@ summary: 'Erfahren Sie, wie Sie Milvus-Metriken in Grafana visualisieren können
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" />
    </span> <span class="img-wrapper"> <span>Herunterladen_und_Importieren</span> </span></p>
 <h3 id="2-View-metrics" class="common-anchor-header">2. Metriken anzeigen</h3><p>Wählen Sie die Milvus-Instanz aus, die Sie überwachen möchten. Dann sehen Sie das Milvus-Komponenten-Panel.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" />
    </span> <span class="img-wrapper"> <span>Instanz auswählen</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" />
    </span> <span class="img-wrapper"> <span>Grafana_Bedienfeld</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als nächstes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

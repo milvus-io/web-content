@@ -100,7 +100,7 @@ title: Desagregação Armazenamento/Computação
 <p>O Milvus segue o princípio do "registo como dados", pelo que não mantém uma tabela física, mas garante a fiabilidade dos dados através da persistência do registo e de registos instantâneos.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>Mecanismo de registo</span> </span></p>
 <p>O corretor de registos é a espinha dorsal do Milvus. É responsável pela persistência dos dados e pela desagregação da leitura-escrita, graças ao seu mecanismo inato de pub-sub. A ilustração acima mostra uma representação simplificada do mecanismo, em que o sistema está dividido em duas funções, o corretor de registos (para manter a sequência de registos) e o assinante de registos. O primeiro regista todas as operações que alteram os estados da coleção; o segundo subscreve a sequência de registos para atualizar os dados locais e fornece serviços sob a forma de cópias só de leitura. O mecanismo pub-sub também abre espaço para a extensibilidade do sistema em termos de captura de dados de alteração (CDC) e implementação globalmente distribuída.</p>
 <h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">

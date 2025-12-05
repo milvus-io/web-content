@@ -57,25 +57,25 @@ title: 一貫性
 <h3 id="Strong" class="common-anchor-header">強力</h3><p>Strongは最も高く、最も厳格な一貫性レベルです。ユーザが最新バージョンのデータを読めることを保証します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
    </span> <span class="img-wrapper"> <span>強力な一貫性</span> </span></p>
 <p>PACELCの定理によると、一貫性レベルをstrongに設定すると、レイテンシが増加します。したがって、テスト結果の正確性を保証するために、機能テストでは強い一貫性を選択することを推奨します。強い一貫性は、検索速度を犠牲にしてもデータの一貫性を厳しく要求するアプリケーションにも最適です。例えば、注文の支払いや請求に対応するオンライン金融システムなどです。</p>
 <h3 id="Bounded-staleness" class="common-anchor-header">境界的陳腐性</h3><p>Bounded stalenessは、その名が示すように、ある一定期間のデータの一貫性のなさを許容する。しかし一般的に、その期間外ではデータは常にグローバルに一貫している。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
    </span> <span class="img-wrapper"> <span>バウンデッド・スタルネスの一貫性</span> </span></p>
 <p>Bounded stalenessは、検索レイテンシを制御する必要があり、散発的なデータの不可視性を許容できるシナリオに適している。例えば、ビデオ推薦エンジンのような推薦システムにおいて、データの不可視性は全体的な想起率への影響は小さいが、推薦システムの性能を大幅に向上させることがある。</p>
 <h3 id="Session" class="common-anchor-header">セッション</h3><p>セッションは、すべてのデータの書き込みが同じセッション中の読み込みで即座に認識できることを保証します。言い換えれば、あるクライアントを介してデータを書き込むと、新しく挿入されたデータは即座に検索可能になります。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
    </span> <span class="img-wrapper"> <span>セッション一貫性</span> </span></p>
 <p>同一セッション内でのデータの一貫性に対する要求が高いシナリオでは、一貫性レベルとしてセッションを選択することをお勧めします。例えば、図書館システムから本のエントリーのデータを削除し、削除を確認してページを更新（別のセッション）すると、その本は検索結果に表示されなくなります。</p>
 <h3 id="Eventually" class="common-anchor-header">結局</h3><p>読み込みと書き込みの順序は保証されておらず、それ以上書き込み操作が行われなければ、レプリカは最終的に同じ状態に収束します。最終的に &quot;の一貫性の下では、レプリカは最新の更新された値で読み取り要求の処理を開始します。最終的一貫性は、4つの中で最も弱いレベルである。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
    </span> <span class="img-wrapper"> <span>最終的一貫性</span> </span></p>
 <p>しかし、PACELCの定理によれば、一貫性を犠牲にすることで、検索レイテンシを驚異的に短縮することができる。従って、最終的一貫性は、データの一貫性はあまり要求されないが、高速な検索性能が要求されるシナリオに最適である。例えば、Amazonの商品のレビューや評価を、最終的に一貫性のあるレベルで検索することができます。</p>
 <h2 id="Guarantee-timestamp" class="common-anchor-header">タイムスタンプの保証<button data-href="#Guarantee-timestamp" class="anchor-icon" translate="no">

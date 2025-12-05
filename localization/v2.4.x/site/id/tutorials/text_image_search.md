@@ -35,5 +35,5 @@ title: Mesin Pencari Teks ke Gambar
 <p>Dalam tutorial ini, Anda akan belajar cara membuat mesin pencari teks-ke-gambar. Tutorial ini menggunakan model CLIP untuk mengekstrak fitur gambar dan mengubahnya menjadi vektor. Kemudian vektor gambar ini disimpan dalam basis data vektor Milvus. Ketika pengguna memasukkan teks kueri, teks-teks ini juga dikonversi menjadi vektor penyisipan menggunakan model ML CLIP yang sama. Selanjutnya, pencarian kemiripan vektor dilakukan di Milvus untuk mengambil vektor gambar yang paling mirip dengan vektor teks masukan.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
    </span> <span class="img-wrapper"> <span>Pencarian teks_gambar</span> </span></p>

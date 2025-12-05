@@ -431,7 +431,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
     <span>png</span>
   </span>
 </p>

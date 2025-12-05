@@ -26,7 +26,7 @@ title: Visión general de la arquitectura de Milvus
 <p>Milvus adopta una arquitectura de almacenamiento compartido que presenta desagregación de almacenamiento y computación y escalabilidad horizontal para sus nodos de computación. Siguiendo el principio de desagregación del plano de datos y el plano de control, Milvus consta de <a href="/docs/es/v2.4.x/four_layers.md">cuatro capas</a>: capa de acceso, servicio coordinador, nodo trabajador y almacenamiento. Estas capas son mutuamente independientes cuando se trata de escalado o recuperación ante desastres.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
    </span> <span class="img-wrapper"> <span>Diagrama_de_arquitectura</span> </span></p>
 <p>Según la figura, las interfaces pueden clasificarse en las siguientes categorías:</p>
 <ul>

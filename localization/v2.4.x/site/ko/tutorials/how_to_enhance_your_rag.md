@@ -41,7 +41,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
     </button></h2><p>아래 다이어그램은 가장 간단한 바닐라 RAG 파이프라인을 보여줍니다. 먼저, 문서 청크가 벡터 저장소(예: <a href="https://milvus.io/docs">Milvus</a> 또는 <a href="https://zilliz.com/cloud">Zilliz 클라우드</a>)에 로드됩니다. 그런 다음, 벡터 저장소는 쿼리와 관련된 가장 연관성이 높은 상위 K개의 청크를 검색합니다. 그런 다음 이러한 관련 청크가 <a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM의</a> 컨텍스트 프롬프트에 주입되고 마지막으로 LLM이 최종 답변을 반환합니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -88,7 +88,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">가상 질문 만들기</h3><p>가상 질문을 만들려면 LLM을 활용하여 사용자가 각 문서 청크 내의 콘텐츠에 대해 물어볼 수 있는 여러 질문을 생성해야 합니다. 사용자의 실제 쿼리가 LLM에 도달하기 전에 벡터 스토어는 해당 문서 청크와 함께 실제 쿼리와 가장 관련성이 높은 가상 질문을 검색하여 LLM으로 전달합니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -96,7 +96,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE(가상 문서 임베딩)</h3><p>HyDE는 가상 문서 임베딩의 약자입니다. 이는 문맥 정보가 없는 사용자 쿼리에 대한 응답으로 '<strong><em>가상의 문서</em></strong>' 또는 <strong><em>가짜</em></strong> 답변을 만들기 위해 LLM을 활용합니다. 그런 다음 이 가짜 답변은 벡터 임베딩으로 변환되어 벡터 데이터베이스 내에서 가장 관련성이 높은 문서 청크를 쿼리하는 데 사용됩니다. 그 후, 벡터 데이터베이스는 가장 관련성이 높은 상위 K개의 문서 청크를 검색하여 LLM과 원래 사용자 쿼리로 전송하여 최종 답변을 생성합니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -111,7 +111,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <p>이러한 하위 쿼리가 있으면 벡터 임베딩으로 변환한 후 모두 벡터 데이터베이스로 보냅니다. 그러면 벡터 데이터베이스는 각 하위 쿼리와 가장 연관성이 높은 상위 K 문서 청크를 찾습니다. 마지막으로 LLM은 이 정보를 사용해 더 나은 답변을 생성합니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -123,7 +123,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <p><strong><em>스텝백 질문: "Milvus가 처리할 수 있는 데이터 세트 크기 제한은 얼마인가요?"</em></strong></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -147,7 +147,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">문서 청크 자동 병합</h3><p>색인을 만들 때 자식 청크와 그에 해당하는 부모 청크의 두 가지 세분화 수준을 사용할 수 있습니다. 처음에는 더 세밀한 수준에서 하위 청크를 검색합니다. 그런 다음 병합 전략을 적용합니다. 처음 <strong><em>k개의</em></strong> 자식 청크 중 특정 개수인 <strong><em>n개의</em></strong> 자식 청크가 동일한 상위 청크에 속하는 경우, 이 상위 청크를 컨텍스트 정보로 LLM에 제공합니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -155,7 +155,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">계층적 인덱스 구축</h3><p>문서에 대한 인덱스를 만들 때, 문서 요약과 문서 청크에 대한 두 가지 수준의 인덱스를 만들 수 있습니다. 벡터 검색 프로세스는 두 단계로 구성됩니다. 처음에는 요약을 기반으로 관련 문서를 필터링하고, 이후에는 이러한 관련 문서 내에서만 해당 문서 청크를 검색합니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -164,7 +164,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <p>일반적인 보완 검색 알고리즘에는 <a href="https://milvus.io/docs/embed-with-bm25.md">BM25와</a> 같은 어휘 빈도 기반 방법이나 <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade와</a> 같은 희소 임베딩을 활용하는 빅 모델이 포함됩니다. 순위 재지정 알고리즘에는 RRF 또는 BERT와 유사한 아키텍처인 <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder와</a> 같은 보다 정교한 모델이 포함됩니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -188,7 +188,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <h3 id="Sentence-Window-Retrieval" class="common-anchor-header">문장 창 검색</h3><p>기본 RAG 시스템에서 LLM에 제공되는 문서 청크는 검색된 임베딩 청크를 포괄하는 더 큰 창입니다. 이렇게 하면 LLM에 제공되는 정보가 더 넓은 범위의 문맥적 세부 정보를 포함하도록 보장하여 정보 손실을 최소화할 수 있습니다. 문장 창 검색 기술은 임베딩 검색에 사용되는 문서 청크를 LLM에 제공되는 청크에서 분리합니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -196,7 +196,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <h3 id="Meta-data-Filtering" class="common-anchor-header">메타 데이터 필터링</h3><p>보다 정확한 답변을 얻기 위해 검색된 문서를 LLM으로 전달하기 전에 시간 및 카테고리와 같은 메타데이터를 필터링하여 검색된 문서를 구체화할 수 있습니다. 예를 들어, 여러 해에 걸친 재무 보고서를 검색하는 경우 원하는 연도를 기준으로 필터링하면 특정 요구 사항을 충족하도록 정보를 세분화할 수 있습니다. 이 방법은 도서관 컬렉션의 콘텐츠 검색과 같이 광범위한 데이터와 상세한 메타데이터가 있는 상황에서 효과적입니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -219,7 +219,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">LLM 프롬프트 압축</h3><p>검색된 문서 청크 내의 노이즈 정보는 RAG의 최종 답변의 정확도에 상당한 영향을 미칠 수 있습니다. 또한 LLM의 제한된 프롬프트 창은 보다 정확한 답변을 얻기 위한 장애물입니다. 이 문제를 해결하기 위해 관련 없는 세부 정보를 압축하고, 핵심 단락을 강조하며, 검색된 문서 청크의 전체 문맥 길이를 줄일 수 있습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -228,7 +228,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <p>이러한 관찰을 바탕으로 여러 지식 청크를 검색할 때 상대적으로 신뢰도가 낮은 청크는 중간에, 상대적으로 신뢰도가 높은 청크는 양 끝에 배치하는 등 검색된 청크의 순서를 조정하여 답변 품질을 개선할 수 있습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -253,7 +253,7 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <p>자연어 추론(NLI) 모델이나 검증을 위한 인터넷 검색과 같은 추가 도구와 같은 효율적인 반영 방법을 사용하여 반영을 수행할 수 있습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -261,13 +261,13 @@ title: RAG 파이프라인의 성능을 향상시키는 방법
 <h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">에이전트를 통한 쿼리 라우팅</h3><p>때로는 잘못된 정보로 인해 더 많은 오해와 추론이 발생할 수 있으므로 간단한 질문에 답하기 위해 RAG 시스템을 사용할 필요가 없는 경우도 있습니다. 이러한 경우에는 쿼리 단계에서 에이전트를 라우터로 사용할 수 있습니다. 이 에이전트는 쿼리가 RAG 파이프라인을 거쳐야 하는지 여부를 평가합니다. 필요한 경우 후속 RAG 파이프라인이 시작되고, 그렇지 않은 경우 LLM이 쿼리를 직접 처리합니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

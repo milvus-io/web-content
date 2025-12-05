@@ -268,6 +268,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>イメージ</span> </span></p>
 <p>ここでは、データがうまくクラスタ化されていることを示し、点の上にカーソルを置くと、それらが表すテキストを確認することができます。このノートブックで、HDBSCANを使ってMilvusで埋め込みデータを効率的にクラスタリングする方法を学んでいただければと思います。大規模な言語モデルと組み合わせることで、大規模なデータ分析が可能になります。</p>

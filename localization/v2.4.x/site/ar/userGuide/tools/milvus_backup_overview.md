@@ -56,7 +56,7 @@ title: ميلفوس النسخ الاحتياطي
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>بنية ميلفوس للنسخ الاحتياطي</span> </span></p>
 <p>تسهّل Milvus Backup النسخ الاحتياطي واستعادة البيانات الوصفية والمقاطع والبيانات عبر مثيلات Milvus. ويوفر واجهات متجهة للشمال، مثل واجهة برمجة التطبيقات وواجهة برمجة التطبيقات ووحدة Go المستندة إلى gRPC، من أجل معالجة مرنة لعمليات النسخ الاحتياطي والاستعادة.</p>
 <p>يقرأ Milvus Backup البيانات الوصفية للمجموعة والمقاطع من مثيل Milvus المصدر لإنشاء نسخة احتياطية. ثم يقوم بنسخ بيانات المجموعة من المسار الجذر لمثيل Milvus المصدر ويحفظ البيانات المنسوخة في المسار الجذر للنسخ الاحتياطي.</p>

@@ -38,17 +38,17 @@ title: Elaborazione dati
 <p>La convalida delle richieste DML viene spostata al proxy, perché Milvus non ha transazioni complicate. Il proxy richiede un timestamp per ogni richiesta di inserimento/cancellazione al TSO (Timestamp Oracle), che è il modulo di temporizzazione che si collega al coordinatore principale. Poiché il timestamp più vecchio viene sovrascritto da quello più recente, i timestamp vengono utilizzati per determinare la sequenza delle richieste di dati in corso di elaborazione. Il proxy recupera le informazioni in batch dai coordinamenti dei dati, compresi i segmenti delle entità e le chiavi primarie, per aumentare il throughput complessivo ed evitare di sovraccaricare il nodo centrale.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
    </span> <span class="img-wrapper"> <span>Canali 1</span> </span></p>
 <p>Sia le operazioni DML (data manipulation language) che le operazioni DDL (data definition language) vengono scritte nella sequenza di log, ma alle operazioni DDL viene assegnato un solo canale a causa della loro bassa frequenza.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
    </span> <span class="img-wrapper"> <span>Canali 2</span> </span></p>
 <p>I<em>canali</em> sono mantenuti nei nodi di log broker sottostanti. Ogni canale è fisicamente indivisibile e disponibile per un solo nodo. Quando la velocità di ingestione dei dati raggiunge un collo di bottiglia, bisogna considerare due cose: se il nodo log broker è sovraccarico e deve essere scalato; e se ci sono shard sufficienti per garantire il bilanciamento del carico per ogni nodo.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
    </span> <span class="img-wrapper"> <span>Sequenza di scrittura dei log</span> </span></p>
 <p>Il diagramma precedente racchiude i quattro componenti coinvolti nel processo di scrittura della sequenza di log: il proxy, il log broker, il nodo dati e lo storage degli oggetti. Il processo prevede quattro attività: la convalida delle richieste DML, la pubblicazione-sottoscrizione della sequenza di log, la conversione da un log in streaming a snapshot di log e la persistenza degli snapshot di log. I quattro compiti sono disaccoppiati l'uno dall'altro per assicurarsi che ogni compito sia gestito dal tipo di nodo corrispondente. I nodi dello stesso tipo sono resi uguali e possono essere scalati in modo elastico e indipendente per adattarsi a vari carichi di dati, in particolare a dati in streaming massicci e altamente fluttuanti.</p>
 <h2 id="Index-building" class="common-anchor-header">Costruzione dell'indice<button data-href="#Index-building" class="anchor-icon" translate="no">
@@ -69,7 +69,7 @@ title: Elaborazione dati
     </button></h2><p>La costruzione dell'indice viene eseguita dai nodi indice. Per evitare la creazione frequente di indici per gli aggiornamenti dei dati, una raccolta in Milvus è ulteriormente suddivisa in segmenti, ciascuno con il proprio indice.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
    </span> <span class="img-wrapper"> <span>Costruzione dell'indice</span> </span></p>
 <p>Milvus supporta la costruzione di indici per ogni campo vettoriale, scalare e primario. Sia l'input che l'output della costruzione dell'indice sono collegati alla memorizzazione degli oggetti: Il nodo indice carica le istantanee del registro da indicizzare da un segmento (che si trova nella memoria degli oggetti) alla memoria, deserializza i dati e i metadati corrispondenti per costruire l'indice, serializza l'indice al termine della costruzione e lo scrive nuovamente nella memoria degli oggetti.</p>
 <p>La costruzione dell'indice coinvolge principalmente operazioni vettoriali e matriciali e quindi richiede molto calcolo e memoria. I vettori non possono essere indicizzati in modo efficiente con i tradizionali indici ad albero, a causa della loro natura altamente dimensionale, ma possono essere indicizzati con tecniche appositamente studiate per questo compito, come gli indici a cluster o a grafo. Indipendentemente dal tipo, la costruzione di un indice comporta calcoli iterativi massicci per vettori di grandi dimensioni, come K-means o l'attraversamento di grafi.</p>
@@ -93,13 +93,13 @@ title: Elaborazione dati
     </button></h2><p>Il termine "interrogazione dei dati" si riferisce al processo di ricerca in una collezione specifica del numero <em>k</em> di vettori più vicini a un vettore di destinazione o di <em>tutti i</em> vettori entro un intervallo di distanza specificato dal vettore. I vettori vengono restituiti insieme alla loro chiave primaria e ai campi corrispondenti.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
    </span> <span class="img-wrapper"> <span>Interrogazione dei dati</span> </span></p>
 <p>Una collezione in Milvus è suddivisa in più segmenti e i nodi di interrogazione caricano gli indici per segmento. Quando arriva una richiesta di ricerca, questa viene trasmessa a tutti i nodi di interrogazione per una ricerca simultanea. Ciascun nodo esegue una selezione dei segmenti locali, cerca i vettori che soddisfano i criteri e riduce e restituisce i risultati della ricerca.</p>
 <p>I nodi di interrogazione sono indipendenti l'uno dall'altro in una ricerca di dati. Ogni nodo è responsabile solo di due compiti: caricare o rilasciare i segmenti seguendo le istruzioni della query coord; effettuare una ricerca all'interno dei segmenti locali. Il proxy è responsabile della riduzione dei risultati della ricerca da ciascun nodo di query e della restituzione dei risultati finali al client.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
    </span> <span class="img-wrapper"> <span>Trasferimento</span> </span></p>
 <p>Esistono due tipi di segmenti: i segmenti in crescita (per i dati incrementali) e i segmenti chiusi (per i dati storici). I nodi di interrogazione si iscrivono a vchannel per ricevere gli aggiornamenti recenti (dati incrementali) come segmenti in crescita. Quando un segmento in crescita raggiunge una soglia predefinita, il data coord lo sigilla e inizia la costruzione dell'indice. Successivamente, un'operazione <em>di handoff</em> avviata dal coord. della query trasforma i dati incrementali in dati storici. Query coord distribuisce i segmenti sigillati in modo uniforme tra tutti i nodi di query in base all'utilizzo della memoria, al sovraccarico della CPU e al numero di segmenti.</p>
 <h2 id="Whats-next" class="common-anchor-header">Il prossimo passo<button data-href="#Whats-next" class="anchor-icon" translate="no">

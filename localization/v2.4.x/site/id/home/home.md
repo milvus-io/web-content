@@ -33,17 +33,17 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/id/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   <a href="/docs/id/v2.4.x/install_standalone-docker.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_install.svg" alt="icon" />
    </a> <a href="/docs/id/v2.4.x/install_standalone-docker.md"> <p class="link-btn">Instal Milvus</p> </a><p>Pelajari cara menginstal Milvus menggunakan Docker Compose atau Kubernetes.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/id/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   <a href="/docs/id/v2.4.x/quickstart.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_quick_start.svg" alt="icon" />
    </a> <a href="/docs/id/v2.4.x/quickstart.md"> <p class="link-btn">Mulai Cepat</p> </a><p>Pelajari cara menjalankan Milvus dengan cepat dengan kode sampel.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/bootcamp"> <img translate="no" src="/docs/v2.4.x/assets/home_bootcamp.svg" alt="icon" />
+   <a href="/bootcamp"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">Bootcamp</p> </a><p>
   Pelajari cara membuat aplikasi pencarian kemiripan vektor dengan Milvus.  </p>
 </div>

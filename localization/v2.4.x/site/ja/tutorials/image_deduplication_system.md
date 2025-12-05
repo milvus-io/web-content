@@ -31,5 +31,5 @@ title: 画像の重複排除
 <p>このチュートリアルでは、画像重複排除システムの構築方法を学びます。このチュートリアルでは、ResNet-50 モデルを使って画像の特徴を抽出し、それをベクトルに変換します。そして、これらの画像ベクトルをMilvusベクトルデータベースに格納し、Milvusでベクトルの類似検索も行います。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png" alt="Image_deduplication_workflow" class="doc-image" id="image_deduplication_workflow" />
    </span> <span class="img-wrapper"> <span>画像複製ワークフロー</span> </span></p>

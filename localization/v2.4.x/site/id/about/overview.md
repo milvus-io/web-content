@@ -44,7 +44,7 @@ summary: >-
 <p>Milvus menawarkan kemampuan pemodelan data yang kuat, memungkinkan Anda untuk mengatur data yang tidak terstruktur atau multi-modal ke dalam koleksi yang terstruktur. Milvus mendukung berbagai tipe data untuk pemodelan atribut yang berbeda, termasuk tipe numerik dan karakter yang umum, berbagai tipe vektor, larik, set, dan JSON, sehingga Anda tidak perlu repot mengelola banyak sistem basis data.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>Data tidak terstruktur, penyematan, dan Milvus</span> </span></p>
 <p>Milvus menawarkan tiga mode penerapan, yang mencakup berbagai skala data-dari pembuatan prototipe lokal di Jupyter Notebooks hingga cluster Kubernetes besar yang mengelola puluhan miliar vektor:</p>
 <ul>
@@ -91,7 +91,7 @@ summary: >-
 <p>Arsitektur sistem Milvus yang cloud-native dan sangat terpisah memastikan bahwa sistem dapat terus berkembang seiring dengan pertumbuhan data:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Arsitektur sistem yang sangat terpisah dari Milvus</span> </span></p>
 <p>Milvus sendiri sepenuhnya tidak memiliki status sehingga dapat dengan mudah diskalakan dengan bantuan Kubernetes atau cloud publik. Selain itu, komponen-komponen Milvus dipisahkan dengan baik, dengan tiga tugas yang paling penting-pencarian, penyisipan data, dan pengindeksan/pemadatan-dirancang sebagai proses yang mudah diparalelkan, dengan logika yang rumit yang dipisahkan. Hal ini memastikan bahwa simpul kueri, simpul data, dan simpul indeks yang sesuai dapat menskalakan naik dan turun secara independen, mengoptimalkan kinerja dan efisiensi biaya.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Jenis Pencarian yang Didukung oleh Milvus<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">

@@ -33,17 +33,17 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/fr/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   <a href="/docs/fr/v2.4.x/install_standalone-docker.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_install.svg" alt="icon" />
    </a> <a href="/docs/fr/v2.4.x/install_standalone-docker.md"> <p class="link-btn">Installer Milvus</p> </a><p>Apprenez à installer Milvus à l'aide de Docker Compose ou sur Kubernetes.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/fr/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   <a href="/docs/fr/v2.4.x/quickstart.md"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_quick_start.svg" alt="icon" />
    </a> <a href="/docs/fr/v2.4.x/quickstart.md"> <p class="link-btn">Démarrage rapide</p> </a><p>Découvrez comment exécuter rapidement Milvus à l'aide d'un exemple de code.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/bootcamp"> <img translate="no" src="/docs/v2.4.x/assets/home_bootcamp.svg" alt="icon" />
+   <a href="/bootcamp"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">Bootcamp</p> </a><p>
   Apprenez à construire des applications de recherche de similarités vectorielles avec Milvus.  </p>
 </div>

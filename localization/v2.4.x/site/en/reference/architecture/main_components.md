@@ -42,7 +42,7 @@ title: Main Components
 </ul>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/standalone_architecture.jpg" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/standalone_architecture.jpg" alt="Standalone_architecture" class="doc-image" id="standalone_architecture" />
     <span>Standalone_architecture</span>
   </span>
 </p>
@@ -78,7 +78,7 @@ title: Main Components
 </ul>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/distributed_architecture.jpg" alt="Distributed_architecture" class="doc-image" id="distributed_architecture" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/distributed_architecture.jpg" alt="Distributed_architecture" class="doc-image" id="distributed_architecture" />
     <span>Distributed_architecture</span>
   </span>
 </p>

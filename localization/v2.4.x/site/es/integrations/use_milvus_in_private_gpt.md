@@ -162,7 +162,7 @@ $ ollama pull nomic-embed-text
 <p>La interfaz de usuario estará disponible en <code translate="no">http://0.0.0.0:8001</code>.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/private_gpt_ui.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/private_gpt_ui.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

@@ -160,7 +160,7 @@ $ ollama pull nomic-embed-text
 <p>UI는 <code translate="no">http://0.0.0.0:8001</code> 에서 사용할 수 있습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/private_gpt_ui.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/private_gpt_ui.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

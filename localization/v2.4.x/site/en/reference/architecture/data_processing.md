@@ -38,21 +38,21 @@ title: Data Processing
 <p>Validation of DML requests is moved forward to the proxy because Milvus does not have complicated transactions. The proxy requests a timestamp for each insert/delete request from the TSO (Timestamp Oracle), which is the timing module that colocates with the root coordinator. With the older timestamp being overwritten by the newer one, timestamps are used to determine the sequence of data requests being processed. The proxy retrieves information in batches from data coord including entities’ segments and primary keys to increase overall throughput and avoid overburdening the central node.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
     <span>Channels 1</span>
   </span>
 </p>
 <p>Both DML (data manipulation language) operations and DDL (data definition language) operations are written to the log sequence, but DDL operations are only assigned one channel because of their low frequency of occurrence.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
     <span>Channels 2</span>
   </span>
 </p>
 <p><em>Vchannels</em> are maintained in the underlying log broker nodes. Each channel is physically indivisible and available for any but only one node. When data ingestion rate reaches a bottleneck, consider two things: whether the log broker node is overloaded and needs to be scaled; and, whether there are sufficient shards to ensure load balancing for each node.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
     <span>Write log sequence</span>
   </span>
 </p>
@@ -75,7 +75,7 @@ title: Data Processing
     </button></h2><p>Index building is performed by index nodes. To avoid frequent index building for data updates, a collection in Milvus is divided further into segments, each with its own index.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
     <span>Index building</span>
   </span>
 </p>
@@ -101,7 +101,7 @@ title: Data Processing
     </button></h2><p>The term “data query” refers to the process of searching a specified collection for <em>k</em> number of vectors nearest to a target vector or for <em>all</em> vectors within a specified distance range to the vector. Vectors are returned together with their corresponding primary key and fields.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
     <span>Data query</span>
   </span>
 </p>
@@ -109,7 +109,7 @@ title: Data Processing
 <p>Query nodes are independent from each other in a data query. Each node is responsible only for two tasks: Loading or releasing segments following the instructions from query coord; conducting a search within the local segments. And the proxy is responsible for reducing search results from each query node and returning the final results to the client.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
     <span>Handoff</span>
   </span>
 </p>

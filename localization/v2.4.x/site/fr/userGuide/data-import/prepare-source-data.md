@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p>La collection cible nécessite la mise en correspondance des données sources avec son schéma. Le diagramme ci-dessous montre comment des données sources acceptables sont mises en correspondance avec le schéma d'une collection cible.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>Mettre en correspondance les données et le schéma</span> </span></p>
 <p>Vous devez examiner attentivement vos données et concevoir le schéma de la collection cible en conséquence.</p>
 <p>Si l'on prend comme exemple les données JSON du diagramme ci-dessus, il y a deux entités dans la liste des lignes, chaque ligne ayant six champs. Le schéma de la collection en inclut sélectivement quatre : <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong>, et <strong>scalar_2</strong>.</p>

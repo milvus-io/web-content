@@ -46,11 +46,11 @@ title: Scalare un cluster Milvus
 <h3 id="Scaling-out" class="common-anchor-header">Ridimensionamento</h3><p>Lo scaling out si riferisce all'aumento del numero di nodi in un cluster. A differenza dello scaling up, lo scaling out non richiede l'allocazione di più risorse a un nodo del cluster. Invece, lo scaling out espande il cluster orizzontalmente aggiungendo altri nodi.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>Scalare</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Scalare</span> </span></p>
 <p>Secondo l'<a href="/docs/it/v2.4.x/architecture_overview.md">architettura Milvus</a>, i nodi worker stateless includono il nodo di interrogazione, il nodo dati, il nodo indice e il proxy. Pertanto, è possibile scalare questo tipo di nodi in base alle esigenze aziendali e agli scenari applicativi. È possibile ridimensionare il cluster Milvus manualmente o automaticamente.</p>
 <p>In genere, è necessario ridimensionare il cluster Milvus creato se è sovrautilizzato. Di seguito sono riportate alcune situazioni tipiche in cui potrebbe essere necessario ridimensionare il cluster Milvus:</p>

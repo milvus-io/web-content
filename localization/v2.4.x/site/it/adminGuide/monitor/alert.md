@@ -76,32 +76,32 @@ summary: Scoprite come creare un avviso per i servizi Milvus in Grafana.
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Aggiungere una nuova query</h3><p>Per aggiungere un avviso sull'utilizzo della memoria dei componenti Milvus, modificare il pannello Memoria. Quindi, aggiungere una nuova query con la metrica: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_metric.png" alt="Alert_metric" class="doc-image" id="alert_metric" />
    </span> <span class="img-wrapper"> <span>Metrica_avviso</span> </span></p>
 <h3 id="2-Save-the-dashboard" class="common-anchor-header">2. Salvare il dashboard</h3><p>Salvare la dashboard e attendere qualche minuto per visualizzare l'avviso.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_dashboard.png" alt="Alert_dashboard" class="doc-image" id="alert_dashboard" />
    </span> <span class="img-wrapper"> <span>Cruscotto_avviso</span> </span></p>
 <p>La query di avviso di Grafana non supporta le variabili template. Pertanto, è necessario aggiungere una seconda query senza variabili template nelle etichette. La seconda query è denominata "A" per impostazione predefinita. È possibile rinominarla facendo clic sul menu a tendina.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png" alt="Alert_query" class="doc-image" id="alert_query" />
    </span> <span class="img-wrapper"> <span>Query_di_avviso</span> </span></p>
 <h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Aggiungere le notifiche di avviso</h3><p>Per ricevere le notifiche di avviso, aggiungere un &quot;canale di notifica&quot;. Quindi, specificare il canale nel campo &quot;Invia a&quot;.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />
    </span> <span class="img-wrapper"> <span>Notifica_avviso</span> </span></p>
 <p>Se l'avviso viene creato e attivato con successo, si riceverà una notifica come mostrato nella schermata seguente.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/notification_message.png" alt="Notification_message" class="doc-image" id="notification_message" />
    </span> <span class="img-wrapper"> <span>Messaggio_di_notifica</span> </span></p>
 <p>Per eliminare un avviso, accedere al pannello "Avviso" e fare clic sul pulsante Elimina.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/delete_alert.png" alt="Delete_alert" class="doc-image" id="delete_alert" />
    </span> <span class="img-wrapper"> <span>Elimina_avviso</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">Cosa fare dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

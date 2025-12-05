@@ -75,14 +75,14 @@ pip install -e <span class="hljs-string">&quot;libs/ktem&quot;</span>
       </svg>
     </button></h2><h3 id="1-Add-your-AI-models" class="common-anchor-header">1. Ajoutez vos modèles d'IA</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>Dans l'onglet <code translate="no">Resources</code>, vous pouvez ajouter et définir vos LLM et vos modèles d'intégration. Vous pouvez ajouter plusieurs modèles et les définir comme actifs ou inactifs. Il vous suffit d'en fournir au moins un. Vous pouvez également fournir plusieurs modèles pour pouvoir passer de l'un à l'autre.</p>
 <h3 id="2-Upload-your-documents" class="common-anchor-header">2. Téléchargez vos documents</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -90,7 +90,7 @@ pip install -e <span class="hljs-string">&quot;libs/ktem&quot;</span>
 <p>Par défaut, toutes les données de l'application sont stockées dans le dossier <code translate="no">./ktem_app_data</code>. Les données de la base de données Milvus sont stockées dans le dossier <code translate="no">./ktem_app_data/user_data/vectorstore</code>. Vous pouvez sauvegarder ou copier ce dossier pour déplacer votre installation sur une nouvelle machine.</p>
 <h3 id="3-Chat-with-your-documents" class="common-anchor-header">3. Chat avec vos documents</h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

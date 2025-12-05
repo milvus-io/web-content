@@ -24,8 +24,8 @@ title: 效能常見問題
 <p>以下圖表是在 sift50m 資料集和 IVF_SQ8 索引上執行測試的結果，其中比較了不同<code translate="no">nlist</code>/<code translate="no">nprobe</code> 對的召回率和查詢效能。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
-   </span> <span class="img-wrapper"> <span>精確度測試</span> </span> <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>效能測試</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/accuracy_nlist_nprobe.png" alt="Accuracy test" class="doc-image" id="accuracy-test" />
+   </span> <span class="img-wrapper"> <span>精確度測試</span> </span> <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/performance_nlist_nprobe.png" alt="Performance test" class="doc-image" id="performance-test" /><span>效能測試</span> </span></p>
 <h4 id="Why-do-queries-sometimes-take-longer-on-smaller-datasets" class="common-anchor-header">為什麼有時候在較小的資料集上查詢需要較長的時間？</h4><p>查詢作業是在區段上進行的。索引可減少查詢資料段所需的時間。如果資料段沒有索引，Milvus 就會對原始資料進行暴力搜尋，大大增加查詢時間。</p>
 <p>因此，在小型資料集（集合）上查詢通常需要較長的時間，因為它尚未建立索引。這是因為其區段的大小尚未達到<code translate="no">rootCoord.minSegmentSizeToEnableindex</code> 所設定的索引建立臨界值。呼叫<code translate="no">create_index()</code> ，強制 Milvus 為已達到臨界值但尚未自動建立索引的區段建立索引，可大幅改善查詢效能。</p>
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">哪些因素影響 CPU 使用量？</h4><p>當 Milvus 建立索引或執行查詢時，CPU 使用量會增加。一般而言，除了使用 Annoy（在單一線程上執行）外，索引建立都是 CPU 密集型的。</p>

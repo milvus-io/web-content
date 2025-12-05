@@ -57,7 +57,7 @@ title: Birdwatcher
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/birdwatcher_overview.png" alt="Birdwatcher architecture" class="doc-image" id="birdwatcher-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/birdwatcher_overview.png" alt="Birdwatcher architecture" class="doc-image" id="birdwatcher-architecture" />
    </span> <span class="img-wrapper"> <span>Architettura Birdwatcher</span> </span></p>
 <h2 id="Latest-release" class="common-anchor-header">Ultima versione<button data-href="#Latest-release" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -29,7 +29,7 @@ title: 使用 ColPali 與 Milvus 進行多模式檢索
 <p>現代的檢索模型通常使用單一的嵌入來表示文字或影像。然而，ColBERT 是一種神經模型，它利用每個資料實例的嵌入清單，並採用「MaxSim」運算來計算兩個文字之間的相似度。除了文字資料之外，圖形、表格和圖表也包含豐富的資訊，這些資訊在以文字為基礎的資訊檢索中往往被忽略。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

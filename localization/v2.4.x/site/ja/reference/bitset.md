@@ -78,7 +78,7 @@ title: ビットセット
 </ul>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
    </span> <span class="img-wrapper"> <span>DMLイベントの順序</span> </span></p>
 <h3 id="Case-one" class="common-anchor-header">ケース1</h3><p>この場合、ユーザは<code translate="no">time_travel</code> を 150 に設定する。これは、<code translate="no">ts = 150</code> を満たすデータに対してクエリを実行することを意味する。ビットセット生成プロセスを図1に示す。</p>
 <p>最初のフィルタリング段階では、<code translate="no">filter_bitset</code> は<code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code> であるべきである。ここで、エンティティ [1、3、5、7] は有効なフィルタリング結果であるため、<code translate="no">1</code> としてマークされる。</p>
@@ -88,7 +88,7 @@ title: ビットセット
 <p>これで、Time Travelと属性フィルタリング後の2つのビットセットができあがった:<code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> と<code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 。  この2つのビットセットを<code translate="no">OR</code> 二項論理演算子で結合する。result_bitsetの最終的な値は<code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> 。つまり、次の検索またはクエリの段階では、エンティティ1と3のみが計算されます。</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
    <span>図1.タイムトラベル=150での検索</span>。 </span></p>
 <h3 id="Case-two" class="common-anchor-header">ケース2</h3><p>この場合、ユーザは<code translate="no">time_travel</code> を 250 に設定する。ビットセット生成プロセスを図2に示す。</p>
 <p>ケース1と同様に、最初の<code translate="no">filter_bitset</code> は<code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code> である。</p>
@@ -97,7 +97,7 @@ title: ビットセット
 <p>これで、Time Travelと属性フィルタリング後の2つのビットセットができあがった:<code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> と<code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 。この2つのビットセットを<code translate="no">OR</code> 二項論理演算子で結合する。結果_ビットセットは<code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 。つまり、エンタイト[1,3,5,7]だけが、次の検索またはクエリーの段階で計算される。</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
    <span>図2.時間旅行 = 250 での検索</span>。 </span></p>
 <h3 id="Case-three" class="common-anchor-header">ケース3</h3><p>この場合、ユーザーは<code translate="no">time_travel</code> を 350 と設定する。ビットセット生成プロセスを図3に示す。</p>
 <p>前のケースと同様に、最初の<code translate="no">filter_bitset</code> は<code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> である。</p>
@@ -106,7 +106,7 @@ title: ビットセット
 <p>タイムトラベルと属性フィルタリングの結果、<code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 、<code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code> 。  この2つのビットセットを<code translate="no">OR</code> 二項論理演算子で結合する。究極の<code translate="no">result_bitset</code> は<code translate="no">[0, 1, 0, 1, 0, 1, 1, 1]</code> 。つまり、エンティティ[1, 3, 5]だけが、次の検索またはクエリの段階で計算される。</p>
 <p>
  <span class="img-wrapper">
-   <img translate="no" src="/docs/v2.4.x/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
    <span>図3.タイムトラベル=350での検索</span>。 </span></p>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

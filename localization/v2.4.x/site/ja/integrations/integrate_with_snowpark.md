@@ -57,7 +57,7 @@ title: スノーパークのコンテナサービスについて
 <p><code translate="no">${instance_name}</code> のルールは<code translate="no">${org_name}-${acct_name}</code> です。関連情報は、<a href="http://app.snowflake.com/sn">app.snowflake.com</a>にログインし、個人アカウント情報を確認することで取得できます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
    </span> <span class="img-wrapper"> <span>スノーフレークのアカウント情報</span> </span></p>
 <h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2.役割と権限の設定</h3><p>OAUTH 連携を設定する。</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-variable constant_">USE</span> <span class="hljs-variable constant_">ROLE</span> <span class="hljs-variable constant_">ACCOUNTADMIN</span>;
@@ -174,7 +174,7 @@ DESCRIBE COMPUTE POOL JUPYTER_COMPUTE_POOL;
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
    </span> <span class="img-wrapper"> <span>コンピュートプールのステータス</span> </span></p>
 <ul>
 <li>specファイルのアップロード</li>
@@ -219,7 +219,7 @@ CREATE SERVICE JUPYTER
 <p>サービスの開始時に問題が発生した場合は、<code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code> からサービス情報を参照できます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
    </span> <span class="img-wrapper"> <span>サービスのステータス</span> </span></p>
 <p>詳しい情報は、<code translate="no">CALL SYSTEM$GET_SERVICE_LOGS('milvus', '0', 'milvus', 10);</code> から入手できます。</p>
 <h2 id="Use-Notebook" class="common-anchor-header">ノートブックの使用<button data-href="#Use-Notebook" class="anchor-icon" translate="no">
@@ -248,12 +248,12 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 <p><code translate="no">ingress_url</code> の部分を記録し、ブラウザを開き、<code translate="no">ingress_url</code> を入力し、milvus_user アカウントを使用してウェブサイトにログインします。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
    </span> <span class="img-wrapper"> <span>イングレスURLの取得</span> </span></p>
 <p><code translate="no">ingress_url</code> からノートブックを開き、ページ上の<code translate="no">TestMilvus.ipynb</code> ファイルをダブルクリックして、Milvus を試してみる。コードブロックの最初の部分を選択し、[<strong>実行]</strong>ボタンをクリックして、接続の確立と埋め込み関数の初期化を開始します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
    </span> <span class="img-wrapper"> <span>ノートブックでTestMilvus.ipynbを実行する</span> </span>。</p>
 <p>接続を確立したら、引き続き<strong>RUNを</strong>クリックします。エンベッディング処理後、テキストがベクトルデータに変換され、Milvusに挿入されます。</p>
 <pre><code translate="no" class="language-python">docs = [
@@ -265,7 +265,7 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 <p>次に、テキストをクエリとして使用します。&quot;Who started AI research?&quot;、埋め込み処理後にクエリを実行し、最後に最も関連性の高い結果を取得して表示します。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
    </span> <span class="img-wrapper"> <span>最も関連性の高い結果を取得・表示</span> </span></p>
 <p>Milvusクライアントの使い方については、<a href="/docs/ja/v2.4.x/quickstart.md">Milvus Docを</a>ご参照ください。</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7.クリーンアップ<button data-href="#7-Clean-up" class="anchor-icon" translate="no">

@@ -40,7 +40,7 @@ title: 如何增強 RAG 管道的效能
     </button></h2><p>下圖顯示了最直接的 RAG 流水線。首先，文件塊會載入向量儲存庫 (例如<a href="https://milvus.io/docs">Milvus</a>或<a href="https://zilliz.com/cloud">Zilliz cloud</a>)。接著，向量儲存庫擷取與查詢最相關的 Top-K 文檔區。這些相關的文件塊會被注入到<a href="https://zilliz.com/glossary/large-language-models-(llms)">LLM</a> 的上下文提示中，最後由 LLM 傳回最終的答案。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/vanilla_rag.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -87,7 +87,7 @@ title: 如何增強 RAG 管道的效能
 <h3 id="Creating-Hypothetical-Questions" class="common-anchor-header">建立假設問題</h3><p>製作假設性問題是利用 LLM 來產生使用者可能針對每個文件區塊中的內容提出的多個問題。在使用者的實際查詢傳送至 LLM 之前，向量儲存器會擷取與實際查詢最相關的假設問題，以及其相對應的文件區塊，並將它們轉送至 LLM。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hypothetical_question.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -95,7 +95,7 @@ title: 如何增強 RAG 管道的效能
 <h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (假設性文件嵌入)</h3><p>HyDE 是 Hypothetical Document Embeddings 的縮寫。它利用 LLM 來製作「<strong><em>假設</em></strong>文件」或<strong><em>虛假</em></strong>答案，以回應沒有上下文資訊的使用者查詢。此假答案隨後會轉換成向量嵌入，並用於查詢向量資料庫中最相關的文件塊。之後，向量資料庫會擷取 Top-K 最相關的文件塊，並將它們傳送給 LLM 和原始使用者查詢，以產生最終答案。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -110,7 +110,7 @@ title: 如何增強 RAG 管道的效能
 <p>有了這些子查詢之後，我們將它們全部轉換成向量嵌入之後傳送給向量資料庫。向量資料庫會找出與每個子查詢最相關的 Top-K 文件塊。最後，LLM 會使用這些資訊來產生更好的答案。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -122,7 +122,7 @@ title: 如何增強 RAG 管道的效能
 <p><strong><em>回溯問題：「Milvus 可以處理的資料集大小限制是多少？」</em></strong></p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/stepback.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -146,7 +146,7 @@ title: 如何增強 RAG 管道的效能
 <h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">自動合併文件塊</h3><p>在建立索引時，我們可以使用兩個粒度層級：子文件塊及其對應的父文件塊。一開始，我們以較細的細節層級搜尋子資料塊。接著，我們會使用合併策略：如果前<strong><em>k 個子</em></strong>資料塊中有特定數量（<strong><em>n</em></strong>）的子資料塊屬於相同的父資料塊，我們就會將此父資料塊提供給 LLM 作為上下文資訊。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -154,7 +154,7 @@ title: 如何增強 RAG 管道的效能
 <h3 id="Constructing-Hierarchical-Indices" class="common-anchor-header">建構分層索引</h3><p>為文件建立索引時，我們可以建立兩層索引：一層是文件摘要索引，另一層是文件片段索引。向量搜尋過程分為兩個階段：首先，我們根據摘要篩選相關的文件，接著，我們在這些相關文件中檢索相對應的文件塊。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hierarchical_index.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -163,7 +163,7 @@ title: 如何增強 RAG 管道的效能
 <p>常見的補充檢索演算法包括以詞彙頻率為基礎的方法 (如<a href="https://milvus.io/docs/embed-with-bm25.md">BM25)</a>或利用稀疏嵌入 (sparse embeddings) 的大型模型 (如<a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>)。重新排序演算法包括 RRF 或更複雜的模型，如<a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>，類似 BERT 架構。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -187,7 +187,7 @@ title: 如何增強 RAG 管道的效能
 <h3 id="Sentence-Window-Retrieval" class="common-anchor-header">句子視窗檢索</h3><p>在基本的 RAG 系統中，提供給 LLM 的文件塊是一個包含擷取嵌入塊的較大視窗。這可確保提供給 LLM 的資訊包含更廣泛的上下文細節，以減少資訊遺失。句子視窗擷取技術將嵌入擷取所使用的文件區塊與提供給 LLM 的區塊分離。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -195,7 +195,7 @@ title: 如何增強 RAG 管道的效能
 <h3 id="Meta-data-Filtering" class="common-anchor-header">元資料篩選</h3><p>為了確保更精確的答案，我們可以在將擷取的文件傳送給 LLM 之前，先過濾時間和類別等元資料，以精簡擷取的文件。舉例來說，如果要擷取跨越多年的財務報告，則根據所需年份進行篩選，即可精簡資訊以符合特定需求。這種方法在有大量資料和詳細元資料的情況下非常有效，例如圖書館館藏的內容檢索。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/metadata_filtering.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -218,7 +218,7 @@ title: 如何增強 RAG 管道的效能
 <h3 id="Compressing-the-LLM-prompt" class="common-anchor-header">壓縮 LLM 提示</h3><p>檢索到的文件塊中的雜訊資訊會對 RAG 最終答案的準確性造成重大影響。LLM 中有限的提示視窗也對更精確的答案造成障礙。為了解決這個難題，我們可以壓縮不相關的細節、強調關鍵段落，並減少擷取文件塊的整體上下文長度。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/compress_prompt.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -227,7 +227,7 @@ title: 如何增強 RAG 管道的效能
 <p>基於這個觀察，我們可以調整擷取知識區塊的順序來改善答案品質：當擷取多個知識區塊時，置信度相對較低的知識區塊會被放在中間，而置信度相對較高的知識區塊會被放在兩端。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/adjust_order.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -252,7 +252,7 @@ title: 如何增強 RAG 管道的效能
 <p>我們可以使用有效率的反省方法來進行反省，例如自然語言推論 (NLI) 模型或其他工具，例如網際網路搜尋來進行驗證。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/self_reflection.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -260,13 +260,13 @@ title: 如何增強 RAG 管道的效能
 <h3 id="Query-Routing-with-an-Agent" class="common-anchor-header">使用代理進行查詢路由</h3><p>有時候，我們不一定要使用 RAG 系統來回答簡單的問題，因為這可能會造成更多的誤解和誤導資訊的推論。在這種情況下，我們可以在查詢階段使用代理作為路由器。這個代理會評估查詢是否需要經過 RAG 管道。如果需要，則啟動後續的 RAG 管道；否則，LLM 直接處理查詢。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 
 
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/advanced_rag/query_routing_with_sub_query.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

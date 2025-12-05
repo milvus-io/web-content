@@ -58,7 +58,7 @@ title: Milvus Backup
       </svg>
     </button></h2><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Architettura di Milvus Backup</span> </span></p>
 <p>Milvus Backup facilita il backup e il ripristino di metadati, segmenti e dati tra le istanze Milvus. Fornisce interfacce northbound, come CLI, API e modulo Go basato su gRPC, per una manipolazione flessibile dei processi di backup e ripristino.</p>
 <p>Milvus Backup legge i metadati e i segmenti della collezione dall'istanza Milvus di origine per creare un backup. Quindi copia i dati della raccolta dal percorso principale dell'istanza Milvus di origine e salva i dati copiati nel percorso principale del backup.</p>

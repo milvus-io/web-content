@@ -39,7 +39,7 @@ title: 스칼라 인덱스
 <p>이러한 부울 식이 포함된 검색 요청을 받으면 Milvus는 부울 식을 추상 구문 트리(AST)로 구문 분석하여 속성 필터링을 위한 물리적 계획을 생성합니다. 그런 다음 Milvus는 각 세그먼트에 물리적 계획을 적용하여 필터링 결과인 <a href="/docs/ko/v2.4.x/bitset.md">비트셋을</a> 생성하고 그 결과를 벡터 검색 매개변수로 포함시켜 검색 범위를 좁힙니다. 이 경우 벡터 검색의 속도는 속성 필터링의 속도에 크게 좌우됩니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>세그먼트의 속성 필터링</span> </span></p>
 <p>스칼라 필드 인덱싱은 정보 검색을 가속화하기 위해 스칼라 필드 값을 특정 방식으로 정렬하여 속성 필터링 속도를 보장하는 방법입니다.</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">스칼라 필드 인덱싱 알고리즘<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ title: 스칼라 인덱스
 <p>반전 색인에는 용어 사전과 반전 목록이라는 두 가지 주요 구성 요소가 있습니다. 용어 사전에는 토큰화된 모든 단어가 알파벳순으로 정렬되어 있고, 반전 목록에는 각 단어가 나타나는 문서 목록이 포함되어 있습니다. 이 설정은 무차별 대입 검색보다 포인트 쿼리와 범위 쿼리를 훨씬 더 빠르고 효율적으로 만듭니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
    </span> <span class="img-wrapper"> <span>반전 색인 다이어그램</span> </span></p>
 <p>반전 인덱스 사용의 장점은 다음 작업에서 특히 두드러집니다:</p>
 <ul>

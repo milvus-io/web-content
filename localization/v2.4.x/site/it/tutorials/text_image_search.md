@@ -35,5 +35,5 @@ title: Motore di ricerca da testo a immagine
 <p>In questa esercitazione imparerete a costruire un motore di ricerca da testo a immagine. Questa esercitazione utilizza il modello CLIP per estrarre le caratteristiche delle immagini e convertirle in vettori. Questi vettori di immagini vengono poi memorizzati nel database vettoriale Milvus. Quando gli utenti inseriscono dei testi di richiesta, anche questi vengono convertiti in vettori di incorporamento utilizzando lo stesso modello ML CLIP. Successivamente, viene eseguita una ricerca di similarità vettoriale in Milvus per recuperare i vettori immagine più simili al vettore testo in ingresso.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
    </span> <span class="img-wrapper"> <span>Ricerca_testo_immagine</span> </span></p>

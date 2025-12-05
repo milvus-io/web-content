@@ -39,7 +39,7 @@ title: Index scalaire
 <p>Lorsque Milvus reçoit une demande de recherche avec une telle expression booléenne, il analyse l'expression booléenne dans un arbre syntaxique abstrait (AST) afin de générer un plan physique pour le filtrage des attributs. Milvus applique ensuite le plan physique dans chaque segment pour générer un <a href="/docs/fr/v2.4.x/bitset.md">jeu de bits</a> comme résultat du filtrage et inclut le résultat comme paramètre de recherche vectorielle pour réduire la portée de la recherche. Dans ce cas, la vitesse des recherches vectorielles dépend fortement de la vitesse du filtrage d'attributs.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>Filtrage d'attributs dans un segment</span> </span></p>
 <p>L'indexation des champs scalaires est un moyen d'assurer la rapidité du filtrage des attributs en triant les valeurs des champs scalaires d'une manière particulière afin d'accélérer la recherche d'informations.</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">Algorithmes d'indexation des champs scalaires<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ title: Index scalaire
 <p>Un index inversé se compose de deux éléments principaux : un dictionnaire de termes et une liste inversée. Le dictionnaire de termes comprend tous les mots tokenisés triés par ordre alphabétique, tandis que la liste inversée contient la liste des documents dans lesquels chaque mot apparaît. Cette configuration rend les requêtes ponctuelles et les requêtes par plage beaucoup plus rapides et efficaces que les recherches par force brute.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
    </span> <span class="img-wrapper"> <span>Schéma de l'index inversé</span> </span></p>
 <p>Les avantages de l'utilisation d'un index inversé sont particulièrement évidents dans les opérations suivantes :</p>
 <ul>

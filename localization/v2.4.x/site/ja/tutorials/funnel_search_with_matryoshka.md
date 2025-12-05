@@ -23,7 +23,7 @@ title: マトリョーシカ埋め込みによる漏斗探索
 <p>従来は、インデックスを構築する直前に量子化や次元削減を行うことで、ストレージの容量を削減していました。例えば、積量子化(PQ)を使って精度を下げたり、主成分分析(PCA)を使って次元数を下げることで、ストレージを節約することができます。これらの方法はベクトル集合全体を分析し、ベクトル間の意味的関係を維持したまま、よりコンパクトなものを見つける。</p>
 <p>効果的ではあるが、これらの標準的なアプローチは精度や次元数を一度だけ、しかも単一のスケールで削減する。しかし、複数の詳細なレイヤーを同時に維持し、ピラミッドのように精度を高めていくことができるとしたらどうだろう？</p>
 <p>マトリョーシカ埋め込みが登場する。ロシアの入れ子人形にちなんで名付けられたこの巧妙な構造は（図を参照）、1つのベクトル内に複数のスケールの表現を埋め込む。従来の後処理手法とは異なり、マトリョーシカ埋め込みは最初の学習過程でこのマルチスケール構造を学習する。その結果は驚くべきもので、完全な埋め込みが入力セマンティクスを捉えるだけでなく、入れ子になった各サブセットの接頭辞（前半、4分の1など）が、詳細ではないものの、首尾一貫した表現を提供します。</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.4.x/assets/funnel-search.png' width='100%'></div>
+<div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
 <p>このノートブックでは、Milvusを使ったマトリョーシカ埋め込みを意味検索に使う方法を検討する。ファネル検索」と呼ばれるアルゴリズムにより、埋め込み次元の小さなサブセットで類似検索を行うことができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
@@ -561,7 +561,7 @@ Leopard in the Snow
         ></path>
       </svg>
     </button></h2><p>以下は、メソッド間の検索結果の比較である：</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.4.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-the-shining.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 我々はMilvusとマトリョーシカ埋め込みを用いて、"漏斗探索 "と呼ばれるより効率的な意味検索アルゴリズムを実行する方法を示した。また、アルゴリズムの再ランク付けと枝刈りステップの重要性と、初期候補リストが小さすぎる場合の失敗モードについても探求した。最後に、サブエンベッディングを形成する際に、次元の順序がいかに重要であるかを議論した。というか、モデルが特定の方法で学習されたからこそ、エンベッディングの接頭辞が意味を持つのです。これで、検索性能をあまり犠牲にすることなく、意味検索のストレージコストを削減するために、マトリョーシカ埋め込みとファネル検索を実装する方法がわかりました！

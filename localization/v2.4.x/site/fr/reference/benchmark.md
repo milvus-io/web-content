@@ -201,7 +201,7 @@ title: Rapport du test d'évaluation comparative de Milvus 2.2
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cluster_search_performance_210_vs_220.png" alt="Cluster search performance" class="doc-image" id="cluster-search-performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cluster_search_performance_210_vs_220.png" alt="Cluster search performance" class="doc-image" id="cluster-search-performance" />
    </span> <span class="img-wrapper"> <span>Performances de la recherche en grappe</span> </span></p>
 <h4 id="Standalone" class="common-anchor-header">Autonome</h4><p><details>
 <summary><b>Configurations de serveurs (autonomes)</b></summary><code translate="no">yaml standalone: replicas: 1 resources: limits: cpu: &quot;12.0&quot; memory: 16Gi requests: cpu: &quot;12.0&quot; memory: 16Gi</code></details></p>
@@ -217,7 +217,7 @@ title: Rapport du test d'évaluation comparative de Milvus 2.2
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/standalone_search_performance_210_vs_220.png" alt="Standalone search performance" class="doc-image" id="standalone-search-performance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/standalone_search_performance_210_vs_220.png" alt="Standalone search performance" class="doc-image" id="standalone-search-performance" />
    </span> <span class="img-wrapper"> <span>Performances de la recherche autonome</span> </span></p>
 <h3 id="Milvus-220-Scale-up" class="common-anchor-header">Milvus 2.2.0 Mise à l'échelle</h3><p>Augmenter les cœurs de CPU dans un Querynode pour vérifier la capacité de montée en charge.</p>
 <p><details>
@@ -236,7 +236,7 @@ title: Rapport du test d'évaluation comparative de Milvus 2.2
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/search_performance_by_querynode_cpu_cores.png" alt="Search performance by Querynode CPU cores" class="doc-image" id="search-performance-by-querynode-cpu-cores" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/search_performance_by_querynode_cpu_cores.png" alt="Search performance by Querynode CPU cores" class="doc-image" id="search-performance-by-querynode-cpu-cores" />
    </span> <span class="img-wrapper"> <span>Performances de recherche par cœur d'unité centrale Querynode</span> </span></p>
 <h3 id="Milvus-220-Scale-out" class="common-anchor-header">Milvus 2.2.0 Scale-out</h3><p>Développez plus de répliques avec plus de Querynodes pour vérifier la capacité de mise à l'échelle.</p>
 <div class="alert note">
@@ -257,7 +257,7 @@ title: Rapport du test d'évaluation comparative de Milvus 2.2
 </table>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/search_performance_by_querynode_replicas.png" alt="Search performance by Querynode replicas" class="doc-image" id="search-performance-by-querynode-replicas" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/search_performance_by_querynode_replicas.png" alt="Search performance by Querynode replicas" class="doc-image" id="search-performance-by-querynode-replicas" />
    </span> <span class="img-wrapper"> <span>Performances de recherche par réplicas Querynode</span> </span></p>
 <h2 id="Whats-next" class="common-anchor-header">Prochaine étape<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -35,5 +35,5 @@ title: محرك بحث النص إلى صورة
 <p>ستتعلم في هذا البرنامج التعليمي كيفية إنشاء محرك بحث من نص إلى صورة. يستخدم هذا البرنامج التعليمي نموذج CLIP لاستخراج ميزات الصور وتحويلها إلى متجهات. ثم يتم تخزين متجهات الصور هذه في قاعدة بيانات متجهات ميلفوس. عندما يقوم المستخدمون بإدخال نصوص الاستعلام، يتم تحويل هذه النصوص أيضًا إلى متجهات تضمين باستخدام نفس نموذج CLIP الخاص بتحويل الصور إلى صور. بعد ذلك، يتم إجراء بحث عن تشابه المتجهات في Milvus لاسترداد متجهات الصور الأكثر تشابهًا مع متجه النص المدخل.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />
    </span> <span class="img-wrapper"> <span>بحث_الصورة_النصية</span> </span></p>

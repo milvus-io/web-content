@@ -242,7 +242,7 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/results.png" alt="Results" class="doc-image" id="results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results.png" alt="Results" class="doc-image" id="results" />
    </span> <span class="img-wrapper"> <span>결과</span> </span></p>
 <p>대부분의 이미지가 검색 이미지인 아프간 하운드와 같은 카테고리에 속하는 것을 볼 수 있습니다. 이는 검색 이미지와 유사한 이미지를 찾았음을 의미합니다.</p>
 <h2 id="Quick-Deploy" class="common-anchor-header">빠른 배포<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">

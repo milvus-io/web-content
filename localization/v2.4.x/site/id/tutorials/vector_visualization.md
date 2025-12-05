@@ -428,7 +428,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>Seperti yang dapat kita lihat, vektor kueri dekat dengan vektor yang diambil. Meskipun vektor yang diambil tidak berada dalam lingkaran standar dengan radius tetap yang berpusat pada kueri, kita dapat melihat bahwa vektor-vektor tersebut masih sangat dekat dengan vektor kueri pada bidang 2D.</p>
 <p>Menggunakan teknik reduksi dimensi dapat memfasilitasi pemahaman vektor dan pemecahan masalah. Semoga Anda dapat memperoleh pemahaman yang lebih baik tentang vektor melalui tutorial ini.</p>

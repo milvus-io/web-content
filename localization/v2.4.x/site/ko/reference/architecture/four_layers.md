@@ -100,7 +100,7 @@ title: 스토리지/컴퓨팅 분리
 <p>Milvus는 "데이터로서의 로그" 원칙을 따르기 때문에 물리적 테이블을 유지하지 않고 로깅 지속성 및 스냅샷 로그를 통해 데이터 안정성을 보장합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>Log_mechanism</span> </span></p>
 <p>로그 브로커는 Milvus의 백본입니다. 고유한 게시-서브 메커니즘을 통해 데이터 지속성과 읽기-쓰기 분리를 담당합니다. 위의 그림은 시스템이 로그 브로커(로그 시퀀스 유지)와 로그 구독자의 두 가지 역할로 나뉘는 메커니즘을 단순화한 그림입니다. 전자는 수집 상태를 변경하는 모든 작업을 기록하고, 후자는 로그 시퀀스에 가입하여 로컬 데이터를 업데이트하고 읽기 전용 사본 형태로 서비스를 제공합니다. 게시-구독 메커니즘은 또한 변경 데이터 캡처(CDC) 및 전 세계에 분산된 배포 측면에서 시스템 확장성을 위한 공간을 제공합니다.</p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">

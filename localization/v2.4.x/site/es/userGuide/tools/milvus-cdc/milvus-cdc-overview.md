@@ -61,7 +61,7 @@ title: Panorama de los CDC
     </button></h2><p>Milvus-CDC adopta una arquitectura con dos componentes principales - un servidor HTTP que gestiona tareas y metadatos, y <strong>corelib</strong> que sincroniza la ejecución de tareas con un lector que obtiene datos de la instancia Milvus de origen y un escritor que envía datos procesados a la instancia Milvus de destino.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png" alt="milvus-cdc-architecture" class="doc-image" id="milvus-cdc-architecture" />
    </span> <span class="img-wrapper"> <span>arquitectura milvus-cdc</span> </span></p>
 <p>En el diagrama anterior,</p>
 <ul>
@@ -92,7 +92,7 @@ title: Panorama de los CDC
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png" alt="milvus-cdc-workflow" class="doc-image" id="milvus-cdc-workflow" />
    </span> <span class="img-wrapper"> <span>milvus-cdc-workflow</span> </span></p>
 <h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

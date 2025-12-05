@@ -38,13 +38,13 @@ summary: 聚类压缩旨在提高搜索性能，降低大型 Collections 的成�
     </button></h2><p>Milvus 将输入的实体存储在 Collections 中的分段中，并在分段已满时将其封存。如果出现这种情况，就会创建一个新的段来容纳更多的实体。因此，实体会任意地分布在不同的段中。这种分布要求 Milvus 搜索多个分段，以找到与给定查询向量最近的邻居。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>无聚类压缩</span> </span></p>
 <p>如果 Milvus 可以根据特定字段中的值将实体分布在不同的段中，那么搜索范围就可以限制在一个段内，从而提高搜索性能。</p>
 <p><strong>聚类压缩（Clustering Compaction</strong>）是 Milvus 的一项功能，它能根据标量字段中的值在 Collections 中的段之间重新分配实体。要启用此功能，首先需要选择一个标量字段作为<strong>聚类键</strong>。这样，当实体的聚类键值在特定范围内时，Milvus 就能将实体重新分配到段中。当你触发聚类压缩时，Milvus 会生成/更新一个名为<strong>PartitionStats</strong> 的全局索引，它记录了段和聚类键值之间的映射关系。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>使用聚类压缩</span> </span></p>
 <p><strong>PartitionStats</strong>作为参考，Milvus 可以在收到带有聚类键值的搜索/查询请求时，剪切不相关的数据，并将搜索范围限制在与键值映射的段内，从而提高搜索性能。有关性能改进的详细信息，请参阅基准测试。</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">使用聚类压缩<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">

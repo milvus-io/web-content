@@ -426,7 +426,7 @@ plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>보시다시피 쿼리 벡터는 검색된 벡터에 가깝습니다. 검색된 벡터가 쿼리를 중심으로 반경이 고정된 표준 원 안에 있지는 않지만 2D 평면에서 쿼리 벡터에 매우 가깝다는 것을 알 수 있습니다.</p>
 <p>차원 축소 기법을 사용하면 벡터에 대한 이해와 문제 해결을 용이하게 할 수 있습니다. 이 튜토리얼을 통해 벡터에 대해 더 잘 이해할 수 있기를 바랍니다.</p>

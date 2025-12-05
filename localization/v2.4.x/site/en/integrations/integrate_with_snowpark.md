@@ -59,7 +59,7 @@ title: Milvus on Snowpark Container Services
 <p>The rule of <code translate="no">${instance_name}</code> is <code translate="no">${org_name}-${acct_name}</code>. The relevant information can be obtained by logging in to <a href="http://app.snowflake.com/sn">app.snowflake.com</a> and checking the personal account information.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
     <span>Snowflake account information</span>
   </span>
 </p>
@@ -178,7 +178,7 @@ docker push ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/
 <button class="copy-code-btn"></button></code></pre>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
     <span>Compute pool status</span>
   </span>
 </p>
@@ -225,7 +225,7 @@ USE SCHEMA PUBLIC;
 <p>If you encounter problems starting the service, you can view service information through <code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code>.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
     <span>Service status</span>
   </span>
 </p>
@@ -256,14 +256,14 @@ USE SCHEMA PUBLIC;
 <p>Record the <code translate="no">ingress_url</code> part of the information, then open the browser and enter the <code translate="no">ingress_url</code>, use the milvus_user account to log in to the website.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
     <span>Obtain the ingress URL</span>
   </span>
 </p>
 <p>Opening the notebook through the <code translate="no">ingress_url</code>, double-click the <code translate="no">TestMilvus.ipynb</code> file on the page to try out Milvus. Select the first part of the code block, and click the <strong>Run</strong> button to start establishing the connection and initializing the embedding function.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
     <span>Run TestMilvus.ipynb in the notebook</span>
   </span>
 </p>
@@ -277,7 +277,7 @@ USE SCHEMA PUBLIC;
 <p>Then use a text as a query: "Who started AI research?", perform the query after embedding processing, and finally obtain and display the most relevant results.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
     <span>Obtain and display the most relevant results</span>
   </span>
 </p>

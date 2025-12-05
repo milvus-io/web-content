@@ -100,7 +100,7 @@ title: Disaggregazione storage/computing
 <p>Milvus segue il principio "log as data", quindi Milvus non mantiene una tabella fisica ma garantisce l'affidabilità dei dati attraverso la persistenza dei log e gli snapshot dei log.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
    </span> <span class="img-wrapper"> <span>Meccanismo di log</span> </span></p>
 <p>Il log broker è la spina dorsale di Milvus. È responsabile della persistenza dei dati e della disaggregazione in lettura e scrittura, grazie al suo meccanismo innato pub-sub. L'illustrazione precedente mostra una rappresentazione semplificata del meccanismo, in cui il sistema è diviso in due ruoli, il log broker (per mantenere la sequenza dei log) e il log subscriber. Il primo registra tutte le operazioni che modificano gli stati della collezione; il secondo sottoscrive la sequenza di log per aggiornare i dati locali e fornisce servizi sotto forma di copie in sola lettura. Il meccanismo pub-sub lascia spazio anche all'estendibilità del sistema in termini di acquisizione dei dati di modifica (CDC) e di distribuzione distribuita a livello globale.</p>
 <h2 id="Whats-next" class="common-anchor-header">Cosa c'è dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">

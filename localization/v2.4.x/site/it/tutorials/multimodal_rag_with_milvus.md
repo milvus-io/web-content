@@ -330,7 +330,7 @@ show_combined_image.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
    </span> <span class="img-wrapper"> <span>Creare una vista panoramica</span> </span></p>
 <p><strong>2. Riclassificazione e spiegazione</strong></p>
 <p>Invieremo l'immagine combinata al servizio LLM multimodale insieme a richieste appropriate per classificare i risultati recuperati con una spiegazione. Per abilitare GPT-4o come LLM, è necessario preparare la <a href="https://platform.openai.com/docs/quickstart">chiave API OpenAI</a>.</p>
@@ -419,6 +419,6 @@ best_img.show()
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
    </span> <span class="img-wrapper"> <span>Il risultato migliore</span> </span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">Distribuzione rapida</h3><p>Per sapere come avviare una demo online con questo tutorial, consultare l <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">'applicazione di esempio</a>.</p>

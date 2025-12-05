@@ -96,5 +96,5 @@ title: Instalar Milvus_CLI
 <p>Descargue un archivo .exe de <a href="https://github.com/zilliztech/milvus_cli/releases">GitHub</a> y ejecútelo para instalar Milvus_CLI. Si tiene éxito, aparecerá <code translate="no">milvus_cli-&lt;version&gt;.exe</code> como se muestra en la siguiente figura.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
    </span> <span class="img-wrapper"> <span>Milvus_CLI</span> </span></p>

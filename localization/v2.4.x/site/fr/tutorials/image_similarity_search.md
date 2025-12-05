@@ -242,7 +242,7 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/results.png" alt="Results" class="doc-image" id="results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results.png" alt="Results" class="doc-image" id="results" />
    </span> <span class="img-wrapper"> <span>Résultats</span> </span></p>
 <p>Nous pouvons constater que la plupart des images appartiennent à la même catégorie que l'image recherchée, à savoir le chien de chasse afghan. Cela signifie que nous avons trouvé des images similaires à l'image recherchée.</p>
 <h2 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">

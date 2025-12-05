@@ -24,7 +24,7 @@ title: 마트료시카 임베딩을 사용한 퍼널 검색
 <p>전통적으로, 인덱스 구축 직전에 양자화 또는 차원 축소 방법을 적용하면 저장 공간 요구 사항을 줄일 수 있습니다. 예를 들어, 제품 정량화(PQ)를 사용해 정밀도를 낮추거나 주성분 분석(PCA)을 사용해 차원 수를 줄임으로써 저장 공간을 절약할 수 있습니다. 이러한 방법은 전체 벡터 집합을 분석하여 벡터 간의 의미 관계를 유지하는 더 간결한 벡터 집합을 찾습니다.</p>
 <p>이러한 표준 접근 방식은 효과적이기는 하지만 정밀도나 차원을 단 한 번만 감소시킵니다. 하지만 점점 더 정밀하게 표현되는 피라미드처럼 여러 계층의 디테일을 동시에 유지할 수 있다면 어떨까요?</p>
 <p>마트료시카 임베딩을 소개합니다. 러시아 중첩 인형(그림 참조)에서 이름을 따온 이 기발한 구조는 단일 벡터 내에 여러 스케일의 표현을 임베딩합니다. 기존의 후처리 방법과 달리, 마트료시카 임베딩은 초기 학습 과정에서 이 다중 스케일 구조를 학습합니다. 그 결과는 놀랍습니다. 전체 임베딩이 입력 의미를 포착할 뿐만 아니라 중첩된 각 하위 집합 접두사(전반부, 1/4 등)가 덜 상세하더라도 일관성 있는 표현을 제공합니다.</p>
-<div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.4.x/assets/funnel-search.png' width='100%'></div>
+<div style='margin: auto; width: 50%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/funnel-search.png' width='100%'></div>
 <p>이 노트에서는 의미 검색을 위해 Milvus와 함께 Matryoshka 임베딩을 사용하는 방법을 살펴봅니다. "깔때기 검색"이라는 알고리즘을 통해 임베딩 차원의 작은 하위 집합에 대한 유사성 검색을 수행하여 회상률을 급격히 떨어뜨리지 않고도 검색을 수행할 수 있는 방법을 설명합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
@@ -562,7 +562,7 @@ Leopard in the Snow
         ></path>
       </svg>
     </button></h2><p>다음은 여러 방법의 검색 결과를 비교한 것입니다:</p>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
-<div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.4.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
-<div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-the-shining.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
+<div style='margin: auto; width: 100%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-ferris-buellers-day-off.png' width='100%'></div>
+<div style='margin: auto; width: 80%;'><img translate="no" src='https://milvus-docs.s3.us-west-2.amazonaws.com/assets/results-the-shining.png' width='100%'></div>
 "퍼널 검색"이라는 보다 효율적인 시맨틱 검색 알고리즘을 수행하기 위해 Milvus와 함께 Matryoshka 임베딩을 사용하는 방법을 보여드렸습니다. 또한 알고리즘의 순위 재지정 및 가지치기 단계의 중요성과 초기 후보 목록이 너무 작을 때의 실패 모드에 대해서도 살펴봤습니다. 마지막으로, 하위 임베딩을 구성할 때 차원 순서가 얼마나 중요한지, 즉 모델이 학습된 것과 같은 방식이어야 하는지에 대해 논의했습니다. 또는 오히려 모델이 특정 방식으로 학습되었기 때문에 임베딩의 접두사가 의미가 있는 것입니다. 이제 검색 성능을 크게 저하시키지 않으면서도 시맨틱 검색의 저장 비용을 줄이기 위해 Matryoshka 임베딩과 퍼널 검색을 구현하는 방법을 알게 되었습니다!

@@ -39,7 +39,7 @@ title: Índice escalar
 <p>Quando o Milvus recebe um pedido de pesquisa com uma expressão booleana deste tipo, analisa a expressão booleana numa árvore de sintaxe abstrata (AST) para gerar um plano físico para filtragem de atributos. O Milvus aplica então o plano físico em cada segmento para gerar um <a href="/docs/pt/v2.4.x/bitset.md">conjunto de bits</a> como resultado da filtragem e inclui o resultado como parâmetro de pesquisa vetorial para limitar o âmbito da pesquisa. Neste caso, a velocidade das pesquisas vectoriais depende fortemente da velocidade da filtragem de atributos.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>Filtragem de atributos num segmento</span> </span></p>
 <p>A indexação de campos escalares é uma forma de garantir a velocidade da filtragem de atributos, ordenando os valores dos campos escalares de uma forma específica para acelerar a recuperação de informação.</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">Algoritmos de indexação de campos escalares<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
@@ -79,7 +79,7 @@ title: Índice escalar
 <p>Um índice invertido tem dois componentes principais: um dicionário de termos e uma lista invertida. O dicionário de termos inclui todas as palavras tokenizadas ordenadas alfabeticamente, enquanto a lista invertida contém a lista de documentos onde cada palavra aparece. Esta configuração torna as consultas por pontos e por intervalos muito mais rápidas e eficientes do que as pesquisas de força bruta.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
    </span> <span class="img-wrapper"> <span>Diagrama de índice invertido</span> </span></p>
 <p>As vantagens da utilização de um índice invertido são particularmente evidentes nas seguintes operações:</p>
 <ul>

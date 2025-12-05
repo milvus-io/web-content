@@ -42,13 +42,13 @@ summary: >-
     </button></h2><p>Milvus menyimpan entitas yang masuk dalam segmen di dalam koleksi dan menutup segmen jika sudah penuh. Jika hal ini terjadi, sebuah segmen baru dibuat untuk mengakomodasi entitas tambahan. Akibatnya, entitas didistribusikan secara acak di seluruh segmen. Distribusi ini mengharuskan Milvus untuk mencari beberapa segmen untuk menemukan tetangga terdekat dengan vektor kueri yang diberikan.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Tanpa Pemadatan Pengelompokan</span> </span></p>
 <p>Jika Milvus dapat mendistribusikan entitas di antara segmen berdasarkan nilai di bidang tertentu, cakupan pencarian dapat dibatasi dalam satu segmen, sehingga meningkatkan kinerja pencarian.</p>
 <p><strong>Pemadatan Clustering</strong> adalah fitur di Milvus yang mendistribusikan kembali entitas di antara segmen dalam koleksi berdasarkan nilai dalam bidang skalar. Untuk mengaktifkan fitur ini, pertama-tama Anda harus memilih sebuah bidang skalar sebagai <strong>kunci pengelompokan</strong>. Hal ini memungkinkan Milvus untuk mendistribusikan ulang entitas ke dalam segmen ketika nilai kunci pengelompokannya berada dalam rentang tertentu. Ketika Anda memicu pemadatan pengelompokan, Milvus membuat/memperbaharui indeks global yang disebut <strong>PartitionStats</strong>, yang mencatat hubungan pemetaan antara segmen dan nilai kunci pengelompokan.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Dengan Pemadatan Pengelompokan</span> </span></p>
 <p>Dengan menggunakan <strong>PartitionStats</strong> sebagai referensi, Milvus dapat memangkas data yang tidak relevan setelah menerima permintaan pencarian/kueri yang membawa nilai kunci pengelompokan dan membatasi cakupan pencarian dalam pemetaan segmen ke nilai tersebut, sehingga meningkatkan kinerja pencarian. Untuk detail tentang peningkatan kinerja, lihat Tes tolok ukur.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Gunakan Pemadatan Pengelompokan<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">

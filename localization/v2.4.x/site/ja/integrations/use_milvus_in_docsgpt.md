@@ -132,7 +132,7 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
 <p>UIで遊んだり、文書について質問することができます。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>オルトテキスト</span> </span></p>
 <p>サービスを停止したい場合は、実行します：</p>
 <pre><code translate="no" class="language-shell">$ docker compose down

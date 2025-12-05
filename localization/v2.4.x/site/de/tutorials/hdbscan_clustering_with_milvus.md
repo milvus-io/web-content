@@ -272,6 +272,6 @@ fig.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>Bild</span> </span></p>
 <p>Hier zeigen wir, dass die Daten gut geclustert sind, und Sie können den Mauszeiger über die Punkte bewegen, um den Text zu sehen, den sie darstellen. Wir hoffen, dass Sie mit diesem Notizbuch lernen, wie Sie HDBSCAN zum effizienten Clustern von Einbettungen mit Milvus verwenden können. In Kombination mit großen Sprachmodellen ermöglicht dieser Ansatz eine tiefere Analyse Ihrer Daten in großem Maßstab.</p>

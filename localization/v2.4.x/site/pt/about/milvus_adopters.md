@@ -22,6 +22,6 @@ summary: Conheça as empresas que adoptaram o Milvus em aplicações de produç�
     </button></h1><p>A Milvus é a base de dados vetorial líder entre os utilizadores empresariais, contando com o apoio de empresas importantes como a Nvidia, Roblox, AT&amp;T, entre outras. Abaixo encontra-se uma lista de empresas que integraram com sucesso o Milvus nas suas aplicações.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
    </span> <span class="img-wrapper"> <span>Adoptantes de Milvus</span> </span></p>
 <p>Visite <a href="https://milvus.io/use-cases">a</a> nossa <a href="https://milvus.io/use-cases">página de casos de utilização do Milvus</a> para descobrir como os líderes da indústria utilizam o Milvus para potenciar as suas aplicações de IA e acelerar o crescimento do negócio.</p>

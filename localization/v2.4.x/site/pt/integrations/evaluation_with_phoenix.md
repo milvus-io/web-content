@@ -360,7 +360,7 @@ OpenAIInstrumentor().instrument()
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/phoenix01.png" alt="Alt Text" class="doc-image" id="alt-text" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phoenix01.png" alt="Alt Text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>Texto alternativo</span> </span></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> nest_asyncio
 

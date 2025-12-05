@@ -56,25 +56,25 @@ title: Cohérence
 <h3 id="Strong" class="common-anchor-header">Fort</h3><p>Strong est le niveau de cohérence le plus élevé et le plus strict. Il garantit que les utilisateurs peuvent lire la dernière version des données.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
    </span> <span class="img-wrapper"> <span>Cohérence forte</span> </span></p>
 <p>Selon le théorème PACELC, si le niveau de cohérence est défini comme fort, la latence augmentera. Il est donc recommandé de choisir une cohérence forte lors des tests fonctionnels afin de garantir l'exactitude des résultats des tests. La cohérence forte est également la mieux adaptée aux applications qui exigent une cohérence stricte des données au détriment de la vitesse de recherche. Un exemple peut être un système financier en ligne traitant les paiements de commandes et la facturation.</p>
 <h3 id="Bounded-staleness" class="common-anchor-header">Stabilité limitée (bounded staleness)</h3><p>L'obsolescence limitée, comme son nom l'indique, autorise l'incohérence des données pendant une certaine période. Toutefois, en règle générale, les données sont toujours globalement cohérentes en dehors de cette période.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
    </span> <span class="img-wrapper"> <span>Cohérence de l'impasse limitée</span> </span></p>
 <p>L'obsolescence limitée convient aux scénarios qui doivent contrôler la latence de la recherche et qui peuvent accepter une invisibilité sporadique des données. Par exemple, dans les systèmes de recommandation tels que les moteurs de recommandation vidéo, l'invisibilité des données a parfois un faible impact sur le taux de rappel global, mais peut considérablement améliorer les performances du système de recommandation.</p>
 <h3 id="Session" class="common-anchor-header">Session</h3><p>La session garantit que toutes les données écrites peuvent être immédiatement perçues en lecture au cours de la même session. En d'autres termes, lorsque vous écrivez des données via un client, les données nouvellement insérées deviennent instantanément consultables.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Session.png" alt="Session consistency" class="doc-image" id="session-consistency" />
    </span> <span class="img-wrapper"> <span>Cohérence de la session</span> </span></p>
 <p>Nous recommandons de choisir la session comme niveau de cohérence pour les scénarios dans lesquels la demande de cohérence des données dans la même session est élevée. Un exemple peut être la suppression des données d'une entrée de livre dans le système de la bibliothèque, et après confirmation de la suppression et rafraîchissement de la page (une session différente), le livre ne devrait plus être visible dans les résultats de la recherche.</p>
 <h3 id="Eventually" class="common-anchor-header">Éventuellement</h3><p>Il n'y a pas d'ordre garanti pour les lectures et les écritures, et les répliques finissent par converger vers le même état si aucune autre opération d'écriture n'est effectuée. Dans le cas d'une cohérence &quot;éventuelle&quot;, les répliques commencent à travailler sur les requêtes de lecture avec les dernières valeurs mises à jour. Le niveau de cohérence "éventuellement" est le plus faible des quatre.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />
    </span> <span class="img-wrapper"> <span>Cohérence éventuelle</span> </span></p>
 <p>Cependant, selon le théorème PACELC, la latence de recherche peut être considérablement réduite en sacrifiant la cohérence. C'est pourquoi le niveau de cohérence éventuelle est le mieux adapté aux scénarios qui n'exigent pas une grande cohérence des données, mais qui requièrent des performances de recherche ultra-rapides. Un exemple peut être la recherche d'avis et d'évaluations de produits Amazon avec le niveau "eventually consistent".</p>
 <h2 id="Guarantee-timestamp" class="common-anchor-header">Garantie de l'horodatage<button data-href="#Guarantee-timestamp" class="anchor-icon" translate="no">

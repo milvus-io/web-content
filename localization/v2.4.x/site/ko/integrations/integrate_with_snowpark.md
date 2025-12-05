@@ -57,7 +57,7 @@ title: 스노우파크 컨테이너 서비스 밀버스
 <p><code translate="no">${instance_name}</code> 의 규칙은 <code translate="no">${org_name}-${acct_name}</code> 입니다. 관련 정보는 <a href="http://app.snowflake.com/sn">app.snowflake.com에</a> 로그인하여 개인 계정 정보를 확인하면 얻을 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
    </span> <span class="img-wrapper"> <span>스노우플레이크 계정 정보</span> </span></p>
 <h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2. 역할 및 권한 구성하기</h3><p>OAUTH 연동을 구성합니다.</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-variable constant_">USE</span> <span class="hljs-variable constant_">ROLE</span> <span class="hljs-variable constant_">ACCOUNTADMIN</span>;
@@ -174,7 +174,7 @@ DESCRIBE COMPUTE POOL JUPYTER_COMPUTE_POOL;
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
    </span> <span class="img-wrapper"> <span>컴퓨팅 풀 상태</span> </span></p>
 <ul>
 <li>사양 파일 업로드</li>
@@ -219,7 +219,7 @@ CREATE SERVICE JUPYTER
 <p>서비스 시작 시 문제가 발생하면 <code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code> 를 통해 서비스 정보를 확인할 수 있습니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
    </span> <span class="img-wrapper"> <span>서비스 상태</span> </span></p>
 <p>자세한 정보는 <code translate="no">CALL SYSTEM$GET_SERVICE_LOGS('milvus', '0', 'milvus', 10);</code> 을 통해 확인할 수 있습니다.</p>
 <h2 id="Use-Notebook" class="common-anchor-header">노트북 사용<button data-href="#Use-Notebook" class="anchor-icon" translate="no">
@@ -248,12 +248,12 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 <p><code translate="no">ingress_url</code> 부분을 기록한 다음 브라우저를 열고 <code translate="no">ingress_url</code>, milvus_user 계정을 사용하여 웹사이트에 로그인합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
    </span> <span class="img-wrapper"> <span>로그인 URL 얻기</span> </span></p>
 <p><code translate="no">ingress_url</code> 을 통해 노트북을 열고 페이지에서 <code translate="no">TestMilvus.ipynb</code> 파일을 두 번 클릭하여 Milvus를 사용해 봅니다. 코드 블록의 첫 번째 부분을 선택하고 <strong>실행</strong> 버튼을 클릭하여 연결 설정 및 임베딩 기능 초기화를 시작합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
    </span> <span class="img-wrapper"> <span>노트북에서 TestMilvus.ipynb 실행하기</span> </span></p>
 <p>연결을 설정한 후 계속 <strong>실행을</strong> 클릭합니다. 이 코드는 임베딩 처리 후 텍스트를 벡터 데이터로 변환한 다음 Milvus에 삽입합니다.</p>
 <pre><code translate="no" class="language-python">docs = [
@@ -265,7 +265,7 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 <p>그런 다음 &quot;누가 AI 연구를 시작했나요?&quot;와 같은 텍스트를 쿼리로 사용하고 임베딩 처리 후 쿼리를 수행하여 가장 관련성이 높은 결과를 가져와 표시합니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
    </span> <span class="img-wrapper"> <span>가장 연관성이 높은 결과 얻기 및 표시</span> </span></p>
 <p>Milvus 클라이언트 사용법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/quickstart.md">Milvus 문서</a> 섹션을 참조하세요.</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7. 정리하기<button data-href="#7-Clean-up" class="anchor-icon" translate="no">

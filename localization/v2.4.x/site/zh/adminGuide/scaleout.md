@@ -44,11 +44,11 @@ title: 缩放 Milvus 星团
 <h3 id="Scaling-out" class="common-anchor-header">向外扩展</h3><p>向外扩展是指增加群集中的节点数量。与向上扩展不同，向外扩展不需要为群集中的一个节点分配更多资源。相反，向外扩展是通过添加更多节点来横向扩展群集。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_out.jpg" alt="Scaleout" class="doc-image" id="scaleout" />
    </span> <span class="img-wrapper"> <span>扩展</span> </span></p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>扩展</span> </span></p>
 <p>根据<a href="/docs/zh/v2.4.x/architecture_overview.md">Milvus 架构</a>，无状态工作节点包括查询节点、数据节点、索引节点和代理。因此，你可以根据业务需求和应用场景来扩展这些类型的节点。你可以手动或自动扩展 Milvus 集群。</p>
 <p>一般来说，如果您创建的 Milvus 集群使用率过高，您就需要对其进行缩减。以下是一些可能需要缩减 Milvus 群集的典型情况：</p>

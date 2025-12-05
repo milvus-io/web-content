@@ -76,7 +76,7 @@ title: Métriques de similarité
 <p>La formule de la distance euclidienne est la suivante :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
    </span> <span class="img-wrapper"> <span>euclidienne</span> </span></p>
 <p>où <strong>a</strong> = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>) et <strong>b</strong> = (<sub>b0</sub>, <sub>b0</sub>,..., <sub>bn-1</sub>) sont deux points dans un espace euclidien à n dimensions.</p>
 <p>Il s'agit de la mesure de distance la plus couramment utilisée et elle est très utile lorsque les données sont continues.</p>
@@ -85,7 +85,7 @@ Milvus calcule uniquement la valeur avant d'appliquer la racine carrée lorsque 
 <h3 id="Inner-product-IP" class="common-anchor-header">Produit intérieur (PI)</h3><p>La distance IP entre deux intégrations vectorielles est définie comme suit :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>IP</span> </span></p>
 <p>Le produit intérieur est plus utile si vous devez comparer des données non normalisées ou si vous vous intéressez à la magnitude et à l'angle.</p>
 <div class="alert note">
@@ -94,30 +94,30 @@ Milvus calcule uniquement la valeur avant d'appliquer la racine carrée lorsque 
 <p>Supposons que X' soit normalisé à partir de l'intégration X :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalize_formula.png" alt="normalize" class="doc-image" id="normalize" />
    </span> <span class="img-wrapper"> <span>normaliser</span> </span></p>
 <p>La corrélation entre les deux embeddings est la suivante :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>normalisation</span> </span></p>
 <h3 id="Cosine-Similarity" class="common-anchor-header">Similitude en cosinus</h3><p>La similarité en cosinus utilise le cosinus de l'angle entre deux ensembles de vecteurs pour mesurer leur degré de similarité. Vous pouvez considérer les deux ensembles de vecteurs comme deux segments de ligne qui partent de la même origine ([0,0,...]) mais qui pointent dans des directions différentes.</p>
 <p>Pour calculer la similitude en cosinus entre deux ensembles de vecteurs <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> et <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong>, utilisez la formule suivante :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
    </span> <span class="img-wrapper"> <span>cosinus_similarité</span> </span></p>
 <p>La similarité en cosinus est toujours comprise dans l'intervalle <strong>[-1, 1]</strong>. Par exemple, deux vecteurs proportionnels ont un cosinus de <strong>1</strong>, deux vecteurs orthogonaux ont un cosinus de <strong>0</strong> et deux vecteurs opposés ont un cosinus de <strong>-1</strong>. Plus le cosinus est grand, plus l'angle entre deux vecteurs est petit, ce qui indique que ces deux vecteurs sont plus semblables l'un à l'autre.</p>
 <p>En soustrayant leur cosinus de 1, on obtient la distance en cosinus entre deux vecteurs.</p>
 <h3 id="Jaccard-distance" class="common-anchor-header">Distance de Jaccard</h3><p>Le coefficient de similarité de Jaccard mesure la similarité entre deux ensembles d'échantillons et est défini comme la cardinalité de l'intersection des ensembles définis divisée par la cardinalité de leur union. Il ne peut être appliqué qu'à des ensembles d'échantillons finis.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
    </span> <span class="img-wrapper"> <span>Coefficient de similarité de Jaccard</span> </span></p>
 <p>La distance de Jaccard mesure la dissimilarité entre des ensembles de données et est obtenue en soustrayant le coefficient de similitude de Jaccard de 1. Pour les variables binaires, la distance de Jaccard est équivalente au coefficient de Tanimoto.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>Distance de Jaccard</span> </span></p>
 <h3 id="Hamming-distance" class="common-anchor-header">Distance de Hamming</h3><p>La distance de Hamming mesure les chaînes de données binaires. La distance entre deux chaînes de même longueur est le nombre de positions de bits auxquelles les bits sont différents.</p>
 <p>Par exemple, supposons qu'il y ait deux chaînes, 1101 1001 et 1001 1101.</p>
@@ -127,7 +127,7 @@ Milvus calcule uniquement la valeur avant d'appliquer la racine carrée lorsque 
 <p>Pour déterminer si A est une superstructure de B, utilisez la formule suivante :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/superstructure.png" alt="superstructure" class="doc-image" id="superstructure" />
    </span> <span class="img-wrapper"> <span>superstructure</span> </span></p>
 <p>Où :</p>
 <ul>
@@ -138,7 +138,7 @@ Milvus calcule uniquement la valeur avant d'appliquer la racine carrée lorsque 
 <p>Pour déterminer si A est une sous-structure de B, utilisez la formule suivante :</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/substructure.png" alt="substructure" class="doc-image" id="substructure" />
    </span> <span class="img-wrapper"> <span>sous-structure</span> </span></p>
 <p>Où : A est la représentation binaire d'une sous-structure de B :</p>
 <ul>

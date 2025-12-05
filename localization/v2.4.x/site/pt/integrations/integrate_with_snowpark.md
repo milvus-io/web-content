@@ -59,7 +59,7 @@ title: Milvus sobre os serviços de contentores do Snowpark
 <p>A regra de <code translate="no">${instance_name}</code> é <code translate="no">${org_name}-${acct_name}</code>. As informações pertinentes podem ser obtidas iniciando sessão em <a href="http://app.snowflake.com/sn">app.snowflake.com</a> e verificando as informações da conta pessoal.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-01.png" alt="Snowflake account information" class="doc-image" id="snowflake-account-information" />
    </span> <span class="img-wrapper"> <span>Informações da conta Snowflake</span> </span></p>
 <h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2. Configurar a função e os privilégios</h3><p>Configurar a integração OAUTH.</p>
 <pre><code translate="no" class="language-sql"><span class="hljs-variable constant_">USE</span> <span class="hljs-variable constant_">ROLE</span> <span class="hljs-variable constant_">ACCOUNTADMIN</span>;
@@ -176,7 +176,7 @@ DESCRIBE COMPUTE POOL JUPYTER_COMPUTE_POOL;
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-02.png" alt="Compute pool status" class="doc-image" id="compute-pool-status" />
    </span> <span class="img-wrapper"> <span>Status do pool de computação</span> </span></p>
 <ul>
 <li>Carregar ficheiros de especificações</li>
@@ -221,7 +221,7 @@ CREATE SERVICE JUPYTER
 <p>Se tiver problemas ao iniciar o serviço, pode ver as informações do serviço em <code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code>.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-03.png" alt="Service status" class="doc-image" id="service-status" />
    </span> <span class="img-wrapper"> <span>Estado do serviço</span> </span></p>
 <p>Mais informações podem ser obtidas em <code translate="no">CALL SYSTEM$GET_SERVICE_LOGS('milvus', '0', 'milvus', 10);</code>.</p>
 <h2 id="Use-Notebook" class="common-anchor-header">Utilizar o Notebook<button data-href="#Use-Notebook" class="anchor-icon" translate="no">
@@ -250,12 +250,12 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 <p>Registar a parte <code translate="no">ingress_url</code> da informação, depois abrir o browser e entrar em <code translate="no">ingress_url</code>, utilizar a conta milvus_user para iniciar sessão no sítio Web.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-04.png" alt="Obtain the ingress URL" class="doc-image" id="obtain-the-ingress-url" />
    </span> <span class="img-wrapper"> <span>Obter o URL de entrada</span> </span></p>
 <p>Abrir o bloco de notas através do <code translate="no">ingress_url</code>, fazer duplo clique no ficheiro <code translate="no">TestMilvus.ipynb</code> na página para experimentar o Milvus. Selecione a primeira parte do bloco de código e clique no botão <strong>Executar</strong> para começar a estabelecer a ligação e a inicializar a função de incorporação.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-05.png" alt="Run TestMilvus.ipynb in the notebook" class="doc-image" id="run-testmilvus.ipynb-in-the-notebook" />
    </span> <span class="img-wrapper"> <span>Executar TestMilvus.ipynb no bloco de notas</span> </span></p>
 <p>Depois de estabelecer a ligação, continue a clicar em <strong>EXECUTAR</strong>. O código transformará um pedaço de texto em dados vectoriais após o processamento da incorporação e, em seguida, inseri-lo-á no Milvus.</p>
 <pre><code translate="no" class="language-python">docs = [
@@ -267,7 +267,7 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 <p>Em seguida, utilize um texto como consulta: &quot;Quem iniciou a investigação em IA?&quot;, efectue a consulta após o processamento de incorporação e, finalmente, obtenha e apresente os resultados mais relevantes.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
+   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
    </span> <span class="img-wrapper"> <span>Obter e apresentar os resultados mais relevantes</span> </span></p>
 <p>Para mais informações sobre a utilização do cliente Milvus, consulte a secção <a href="/docs/pt/v2.4.x/quickstart.md">Milvus Doc</a>.</p>
 <h2 id="7-Clean-up" class="common-anchor-header">7. Limpar<button data-href="#7-Clean-up" class="anchor-icon" translate="no">
