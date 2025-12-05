@@ -21,7 +21,7 @@ Milvus 2.6.7 is a critical stabilization update for the 2.6.x series. This relea
 ### Features
 
 - Added `/livez` endpoint to support Kubernetes native liveness probes, improving container orchestration stability ([#45481](https://github.com/milvus-io/milvus/pull/45481)).
-- Added support for **GroupBy** operations on `TIMESTAMPZ` fields, enhancing time-series analytics capabilities ([#45763](https://github.com/milvus-io/milvus/pull/45763))
+- Added support for **GroupBy** operations on `TIMESTAMPTZ` fields, enhancing time-series analytics capabilities ([#45763](https://github.com/milvus-io/milvus/pull/45763))
 - Supported `mmap` for JSON shredding's shared key indices to reduce RAM footprint ([#45861](https://github.com/milvus-io/milvus/pull/45861))
 
 ### Improvements
