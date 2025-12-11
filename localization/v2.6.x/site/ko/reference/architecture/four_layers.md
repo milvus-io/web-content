@@ -3,6 +3,7 @@ id: four_layers.md
 summary: Milvus의 스토리지/컴퓨팅 세분화 구조.
 title: 스토리지/컴퓨팅 분리
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">스토리지/컴퓨팅 분리<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,5 +119,5 @@ title: 스토리지/컴퓨팅 분리
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus 아키텍처에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/main_components.md">주요 구성 요소를</a> 읽어보세요.</li>
+<li>Milvus 아키텍처에 대한 자세한 내용은 <a href="/docs/ko/main_components.md">주요 구성 요소를</a> 읽어보세요.</li>
 </ul>

@@ -30,8 +30,12 @@ title: RAG agêntico com Milvus e LangGraph
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia demonstra como construir um sistema avançado de Geração Aumentada de Recuperação (RAG) usando LangGraph e Milvus. Ao contrário dos sistemas RAG tradicionais que simplesmente recuperam e geram, os sistemas RAG agênticos podem tomar decisões inteligentes sobre quando recuperar informações, como tratar documentos irrelevantes e quando reescrever consultas para obter melhores resultados.</p>
-<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> é uma biblioteca para construir aplicações com estado e multi-ator com LLMs, construída sobre a LangChain. <a href="https://milvus.io/">Milvus</a> é a base de dados vetorial open-source mais avançada do mundo, construída para potenciar a pesquisa de similaridade de incorporação e aplicações de IA.</p>
+    </button></h1><p>Este guia demonstra como construir um sistema avançado de Geração Aumentada de Recuperação (RAG) usando LangGraph e Milvus. Ao contrário dos sistemas RAG tradicionais que se limitam a recuperar e gerar, os sistemas RAG agênticos podem tomar decisões inteligentes sobre quando recuperar informações, como tratar documentos irrelevantes e quando reescrever consultas para obter melhores resultados.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
+   </span> <span class="img-wrapper"> <span>Arquitetura de um sistema RAG agêntico utilizando LangGraph e Milvus</span> </span></p>
+<p><a href="https://langchain-ai.github.io/langgraph/">A LangGraph</a> é uma biblioteca para a construção de aplicações com estado e multi-ator com LLMs, construída sobre a LangChain. <a href="https://milvus.io/">Milvus</a> é a base de dados vetorial open-source mais avançada do mundo, construída para potenciar a pesquisa de similaridade de incorporação e aplicações de IA.</p>
 <p>Neste tutorial, vamos construir um sistema RAG agêntico que pode:</p>
 <ul>
 <li>Decidir se deve recuperar documentos ou responder diretamente a consultas simples</li>
@@ -175,7 +179,7 @@ Prompt is a sequence of prefix tokens that increase the probability of getting  
 <ul>
 <li>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo,<code translate="no">./milvus_agentic_rag.db</code>, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
 <li>Se tiver uma grande escala de dados, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Nesta configuração, utilize o uri do servidor, por exemplo,<code translate="no">http://localhost:19530</code>, como o seu <code translate="no">uri</code>.</li>
-<li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
+<li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os endereços <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>
 </blockquote>
 <h2 id="Build-the-agentic-RAG-graph" class="common-anchor-header">Construir o gráfico RAG agêntico<button data-href="#Build-the-agentic-RAG-graph" class="anchor-icon" translate="no">
@@ -517,7 +521,7 @@ display(Image(graph.get_graph().draw_mermaid_png()))
         ></path>
       </svg>
     </button></h2><p>Agora vamos testar o nosso sistema RAG autêntico com diferentes tipos de consultas.</p>
-<h3 id="Test-1-Simple-greeting-no-retrieval-needed" class="common-anchor-header">Teste 1: Saudação simples (sem necessidade de recuperação)<button data-href="#Test-1-Simple-greeting-no-retrieval-needed" class="anchor-icon" translate="no">
+<h3 id="Test-1-Simple-greeting-no-retrieval-needed" class="common-anchor-header">Teste 1: saudação simples (sem necessidade de recuperação)<button data-href="#Test-1-Simple-greeting-no-retrieval-needed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

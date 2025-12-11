@@ -7,8 +7,8 @@ summary: >-
   векторных путей поиска на основе их рейтинговых позиций, а не сырых оценок
   сходства. Подобно спортивному турниру, в котором учитывается рейтинг игроков,
   а не их индивидуальная статистика, RRF Ranker объединяет результаты поиска на
-  основе того, насколько высоко каждый элемент занимает позиции в разных путях
-  поиска, создавая справедливый и сбалансированный итоговый рейтинг.
+  основе того, насколько высоко каждый элемент занимает позиции в различных
+  путях поиска, создавая справедливый и сбалансированный итоговый рейтинг.
 ---
 <h1 id="RRF-Ranker" class="common-anchor-header">RRF Ranker<button data-href="#RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -179,43 +179,43 @@ summary: >-
 <td><p>101</p></td>
 <td><p>1</p></td>
 <td><p>2</p></td>
-<td><p>1/(60+1)+1/(60+2) = 0.01639</p></td>
+<td><p>1/(60+1)+1/(60+2) = 0.03252247</p></td>
 </tr>
 <tr>
 <td><p>198</p></td>
 <td><p>4</p></td>
 <td><p>1</p></td>
-<td><p>1/(60+4)+1/(60+1) = 0.01593</p></td>
+<td><p>1/(60+4)+1/(60+1) = 0.03201844</p></td>
 </tr>
 <tr>
 <td><p>175</p></td>
 <td><p>5</p></td>
 <td><p>4</p></td>
-<td><p>1/(60+5)+1/(60+4) = 0.01554</p></td>
+<td><p>1/(60+5)+1/(60+4) = 0.03100962</p></td>
 </tr>
 <tr>
 <td><p>203</p></td>
 <td><p>2</p></td>
-<td><p>Н/А</p></td>
-<td><p>1/(60+2) = 0.01613</p></td>
+<td><p>N/A</p></td>
+<td><p>1/(60+2) = 0.01612903</p></td>
 </tr>
 <tr>
 <td><p>150</p></td>
 <td><p>3</p></td>
 <td><p>N/A</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>110</p></td>
 <td><p>N/A</p></td>
 <td><p>3</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>250</p></td>
 <td><p>N/A</p></td>
 <td><p>5</p></td>
-<td><p>1/(60+5) = 0.01554</p></td>
+<td><p>1/(60+5) = 0.01538462</p></td>
 </tr>
 </table></p></li>
 <li><p>Окончательные результаты после повторного ранжирования（topK=5)：</p>
@@ -228,27 +228,32 @@ summary: >-
 <tr>
 <td><p>1</p></td>
 <td><p>101</p></td>
-<td><p>0.01639</p></td>
+<td><p>0.03252247</p></td>
 </tr>
 <tr>
 <td><p>2</p></td>
-<td><p>203</p></td>
-<td><p>0.01613</p></td>
+<td><p>198</p></td>
+<td><p>0.03201844</p></td>
 </tr>
 <tr>
 <td><p>3</p></td>
-<td><p>198</p></td>
-<td><p>0.01593</p></td>
+<td><p>175</p></td>
+<td><p>0.03100962</p></td>
 </tr>
 <tr>
 <td><p>4</p></td>
+<td><p>203</p></td>
+<td><p>0.01612903</p></td>
+</tr>
+<tr>
+<td><p>5</p></td>
 <td><p>150</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 <tr>
 <td><p>5</p></td>
 <td><p>110</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -304,11 +309,12 @@ ranker = Function(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rr</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;k\&quot;: 100}&quot;</span>)
-                .build();
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 

@@ -1,12 +1,12 @@
 ---
 id: stl-sort.md
 title: "STL_SORT"
-summary: "The STL_SORT index is an index type specifically designed to enhance query performance on numeric fields (INT8, INT16, etc.) or TIMESTAMPTZ fields within Milvus by organizing the data in a sorted order."
+summary: "The STL_SORT index is an index type specifically designed to enhance query performance on numeric fields (INT8, INT16, etc.), VARCHAR fields, or TIMESTAMPTZ fields within Milvus by organizing the data in a sorted order."
 ---
 
 # STL_SORT
 
-The `STL_SORT` index is an index type specifically designed to enhance query performance on numeric fields (INT8, INT16, etc.) or `TIMESTAMPTZ` fields within Milvus by organizing the data in a sorted order.
+The `STL_SORT` index is an index type specifically designed to enhance query performance on numeric fields (INT8, INT16, etc.), `VARCHAR` fields, or `TIMESTAMPTZ` fields within Milvus by organizing the data in a sorted order.
 
 Use the `STL_SORT` index if you frequently run queries with:
 
@@ -17,6 +17,8 @@ Use the `STL_SORT` index if you frequently run queries with:
 ## Supported data types
 
 - Numeric fields (e.g., `INT8`, `INT16`, `INT32`, `INT64`, `FLOAT`, `DOUBLE`). For details, refer to [Boolean & Number](number.md).
+
+- `VARCHAR` fields. For details, refer to [String Field](string.md).
 
 - `TIMESTAMPTZ` fields. For details, refer to [TIMESTAMPTZ Field](timestamptz-field.md).
 
@@ -74,6 +76,21 @@ index_params.add_index(
 client.create_index(
     collection_name="tsz_demo",
     index_params=index_params
+)
+```
+
+## Drop an index
+
+Use the `drop_index()` method to remove an existing index from a collection.
+
+<div class="alert note">
+
+</div>
+
+```python
+client.drop_index(
+    collection_name="tsz_demo",   # Name of the collection
+    index_name="tsz_index" # Name of the index to drop
 )
 ```
 

@@ -139,7 +139,7 @@ summary: >-
 <td><p>5</p></td>
 </tr>
 </table></p></li>
-<li><p>نتائج بحث الشبكة العصبية الاصطناعية على متجهات كثيفة من النصوص （topK=5)：</p>
+<li><p>نتائج بحث الشبكة العصبية الاصطناعية على متجهات كثيفة من النصوص （topK = 5)：</p>
 <p><table>
 <tr>
 <th><p><strong>المعرف</strong></p></th>
@@ -178,46 +178,46 @@ summary: >-
 <td><p>101</p></td>
 <td><p>1</p></td>
 <td><p>2</p></td>
-<td><p>1/(60+1)+1/(60+2) = 0.01639</p></td>
+<td><p>1/(60+1)+1/(60+2) = 0.03252247</p></td>
 </tr>
 <tr>
 <td><p>198</p></td>
 <td><p>4</p></td>
 <td><p>1</p></td>
-<td><p>1/(60+4)+1/(60+1) = 0.01593</p></td>
+<td><p>1/(60+4)+1/(60+1) = 0.03201844</p></td>
 </tr>
 <tr>
 <td><p>175</p></td>
 <td><p>5</p></td>
 <td><p>4</p></td>
-<td><p>1/(60+5)+1/(60+4) = 0.01554</p></td>
+<td><p>1/(60+5)+1/(60+4) = 0.03100962</p></td>
 </tr>
 <tr>
 <td><p>203</p></td>
 <td><p>2</p></td>
 <td><p>غير متاح</p></td>
-<td><p>1/(60+2) = 0.01613</p></td>
+<td><p>1/(60+2) = 0.01612903</p></td>
 </tr>
 <tr>
 <td><p>150</p></td>
 <td><p>3</p></td>
 <td><p>غير متاح</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>110</p></td>
 <td><p>غير متاح</p></td>
 <td><p>3</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>250</p></td>
 <td><p>غير متاح</p></td>
 <td><p>5</p></td>
-<td><p>1/(60+5) = 0.01554</p></td>
+<td><p>1/(60+5) = 0.01538462</p></td>
 </tr>
 </table></p></li>
-<li><p>النتائج النهائية بعد إعادة الترتيب （توبك=5)：النتائج النهائية بعد إعادة الترتيب</p>
+<li><p>النتائج النهائية بعد إعادة الترتيب （توب ك = 5)： النتائج النهائية بعد إعادة الترتيب</p>
 <p><table>
 <tr>
 <th><p><strong>الرتبة</strong></p></th>
@@ -227,31 +227,36 @@ summary: >-
 <tr>
 <td><p>1</p></td>
 <td><p>101</p></td>
-<td><p>0.01639</p></td>
+<td><p>0.03252247</p></td>
 </tr>
 <tr>
 <td><p>2</p></td>
-<td><p>203</p></td>
-<td><p>0.01613</p></td>
+<td><p>198</p></td>
+<td><p>0.03201844</p></td>
 </tr>
 <tr>
 <td><p>3</p></td>
-<td><p>198</p></td>
-<td><p>0.01593</p></td>
+<td><p>175</p></td>
+<td><p>0.03100962</p></td>
 </tr>
 <tr>
 <td><p>4</p></td>
+<td><p>203</p></td>
+<td><p>0.01612903</p></td>
+</tr>
+<tr>
+<td><p>5</p></td>
 <td><p>150</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 <tr>
 <td><p>5</p></td>
 <td><p>110</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 </table></p></li>
 </ul>
-<h2 id="Usage-of-RRF-Ranker" class="common-anchor-header">استخدام مصنف RRRF<button data-href="#Usage-of-RRF-Ranker" class="anchor-icon" translate="no">
+<h2 id="Usage-of-RRF-Ranker" class="common-anchor-header">استخدام مصنف RRF<button data-href="#Usage-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -266,7 +271,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>عند استخدام إستراتيجية إعادة الترتيب RRF، تحتاج إلى تكوين المعلمة <code translate="no">k</code>. وهي معلمة تنعيم يمكن أن تغير بشكل فعال الأوزان النسبية للبحث في النص الكامل مقابل البحث المتجه. القيمة الافتراضية لهذه المعلمة هي 60، ويمكن ضبطها ضمن نطاق (0، 16384). يجب أن تكون القيمة أرقام فاصلة عائمة. القيمة الموصى بها هي بين [10، 100]. في حين أن <code translate="no">k=60</code> هو خيار شائع، إلا أن القيمة المثلى <code translate="no">k</code> يمكن أن تختلف بناءً على تطبيقاتك ومجموعات البيانات الخاصة بك. نوصي باختبار هذه المعلمة وتعديلها بناءً على حالة الاستخدام الخاصة بك لتحقيق أفضل أداء.</p>
+    </button></h2><p>عند استخدام استراتيجية إعادة ترتيب RRF، تحتاج إلى تكوين المعلمة <code translate="no">k</code>. وهي معلمة تنعيم يمكن أن تغير بشكل فعال الأوزان النسبية للبحث عن النص الكامل مقابل البحث المتجه. القيمة الافتراضية لهذه المعلمة هي 60، ويمكن ضبطها ضمن نطاق (0، 16384). يجب أن تكون القيمة أرقام فاصلة عائمة. القيمة الموصى بها هي بين [10، 100]. في حين أن <code translate="no">k=60</code> هو خيار شائع، إلا أن القيمة المثلى <code translate="no">k</code> يمكن أن تختلف بناءً على تطبيقاتك ومجموعات البيانات الخاصة بك. نوصي باختبار هذه المعلمة وتعديلها بناءً على حالة الاستخدام الخاصة بك لتحقيق أفضل أداء.</p>
 <h3 id="Create-an-RRF-Ranker" class="common-anchor-header">إنشاء مصنف RRRF<button data-href="#Create-an-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -303,11 +308,12 @@ ranker = Function(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rr</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;k\&quot;: 100}&quot;</span>)
-                .build();
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -349,7 +355,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>نوع الدالة المراد استدعاؤها؛ استخدم <code translate="no">RERANK</code> لتحديد استراتيجية إعادة الترتيب</p></td>
+     <td><p>نوع الدالة المطلوب استدعاؤها؛ استخدم <code translate="no">RERANK</code> لتحديد استراتيجية إعادة الترتيب</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
@@ -361,7 +367,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">params.k</code></p></td>
      <td><p>لا</p></td>
-     <td><p>معلمة التنعيم التي تتحكم في تأثير رتب المستندات؛ يقلل ارتفاع <code translate="no">k</code> من الحساسية للرتب العليا. النطاق: (0، 16384)؛ الافتراضي: <code translate="no">60</code>.</p><p>للحصول على التفاصيل، راجع <a href="/docs/ar/rrf-ranker.md#Mechanism-of-RRF-Ranker">آلية RRRF Ranker</a>.</p></td>
+     <td><p>معلمة التنعيم التي تتحكم في تأثير رتب المستندات؛ يقلل ارتفاع <code translate="no">k</code> من الحساسية تجاه الرتب العليا. النطاق: (0، 16384)؛ الافتراضي: <code translate="no">60</code>.</p><p>للحصول على التفاصيل، راجع <a href="/docs/ar/rrf-ranker.md#Mechanism-of-RRF-Ranker">آلية RRRF Ranker</a>.</p></td>
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>

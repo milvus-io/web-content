@@ -1,12 +1,12 @@
 ---
 id: timestamptz-field.md
-title: TIMESTAMPTZ 領域Compatible with Milvus 2.6.4+
+title: TIMESTAMPTZ 領域Compatible with Milvus 2.6.6+
 summary: >-
   跨區域追蹤時間的應用程式，例如電子商務系統、協作工具或分散式日誌，需要精確地處理帶有時區的時間戳。Milvus 中的 TIMESTAMPTZ
   資料類型透過儲存帶有相關時區的時間戳來提供此功能。
-beta: Milvus 2.6.4+
+beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">TIMESTAMPTZ 領域<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">TIMESTAMPTZ 領域<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,9 +37,9 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">TIMESTAMPTZ</code> 欄位是 Milvus 中一個模式定義的資料類型 (<code translate="no">DataType.TIMESTAMPTZ</code>)，用來儲存具有明確時區的時間戳記：</p>
+    </button></h2><p><code translate="no">TIMESTAMPTZ</code> 欄位是 Milvus 中一個模式定義的資料類型 (<code translate="no">DataType.TIMESTAMPTZ</code>) ，它處理時區感應輸入，並在內部將所有時間點儲存為 UTC 絕對時間：</p>
 <ul>
-<li><p><strong>接受的輸入格式</strong>：帶有時區偏移的<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>字串（例如，<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 表示 UTC+08:00 中的 11:59:59）。</p></li>
+<li><p><strong>接受的輸入格式</strong>：帶有時區偏移的<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>字串（例如，<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 代表 UTC+08:00 中的 11:59:59）。</p></li>
 <li><p><strong>內部儲存</strong>：所有<code translate="no">TIMESTAMPTZ</code> 值均以統<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">一時間 (Coordinated Universal Time</a>, UTC) 標準化和儲存。</p></li>
 <li><p><strong>比較與篩選</strong>：所有篩選和排序作業都以 UTC 執行，確保不同時區的結果一致且可預測。</p></li>
 </ul>
@@ -253,7 +253,7 @@ results = client.query(
 <p>在上面的範例中</p>
 <ul>
 <li><p><code translate="no">tsz</code> 是模式中定義的<code translate="no">TIMESTAMPTZ</code> 欄位名稱。</p></li>
-<li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> 是<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>格式的時間戳文字，包括時區偏移。</p></li>
+<li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> 是<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>格式的時間戳文字，包括其時區偏移。</p></li>
 <li><p><code translate="no">!=</code> 將字段值與字面意義比較。其他支援的操作符包括<code translate="no">==</code>,<code translate="no">&lt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;</code>, 和<code translate="no">&gt;=</code> 。</p></li>
 </ul>
 <h4 id="Interval-operations" class="common-anchor-header">間隔運算</h4><p>您可以使用<a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">ISO 8601 長度格式</a>中的<strong>INTERVAL</strong>值對<code translate="no">TIMESTAMPTZ</code> 欄位執行算術運算。這可讓您在篩選資料時，從時間戳記中加入或減去持續時間，例如天、小時或分鐘。</p>
@@ -295,81 +295,7 @@ results = client.query(
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → 減去 2 小時</p></li>
 </ul>
 </div>
-<h4 id="Extract-timestamp-elements" class="common-anchor-header">擷取時間戳記元件</h4><p>您可以在查詢或搜尋中使用<code translate="no">time_fields</code> 參數，從<code translate="no">TIMESTAMPTZ</code> 欄位中抽取特定元件，例如年、月或日。</p>
-<p>以下範例會從查詢結果中的每個<code translate="no">TIMESTAMPTZ</code> 欄位抽取<code translate="no">year</code> 、<code translate="no">month</code> 及<code translate="no">day</code> 元件：</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">results = client.query(
-    collection_name,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-<span class="highlighted-wrapper-line">    time_fields=<span class="hljs-string">&quot;year, month, day&quot;</span>,</span>
-    limit=<span class="hljs-number">2</span>,
-)
-
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
-
-<span class="hljs-comment"># Expected output:</span>
-<span class="hljs-comment"># Query result:  data: [&quot;{&#x27;id&#x27;: 1, &#x27;tsz&#x27;: [2024, 12, 31]}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;tsz&#x27;: [2025, 1, 1]}&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>支援抽取的元素</strong></p>
-<table>
-   <tr>
-     <th><p>元素</p></th>
-     <th><p>說明</p></th>
-     <th><p>輸出範例</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">year</code></p></td>
-     <td><p>年份元件</p></td>
-     <td><p><code translate="no">2025</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">month</code></p></td>
-     <td><p>月份編號</p></td>
-     <td><p><code translate="no">1</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">day</code></p></td>
-     <td><p>月日</p></td>
-     <td><p><code translate="no">3</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">hour</code></p></td>
-     <td><p>小時 (0-23)</p></td>
-     <td><p><code translate="no">14</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">minute</code></p></td>
-     <td><p>分鐘</p></td>
-     <td><p><code translate="no">30</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">second</code></p></td>
-     <td><p>秒</p></td>
-     <td><p><code translate="no">5</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">microsecond</code></p></td>
-     <td><p>微秒</p></td>
-     <td><p><code translate="no">123456</code></p></td>
-   </tr>
-</table>
-<div class="alert note">
-<ul>
-<li><p>參數<code translate="no">time_fields</code> 是以逗號分隔的字串 (例如<code translate="no">&quot;year, month, day&quot;</code>)。</p></li>
-<li><p>結果會以擷取元件的陣列形式傳回 (例如：<code translate="no">[2024, 12, 31]</code>)。</p></li>
-</ul>
-</div>
-<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">使用時間戳過濾搜尋</h4><p>您可以結合<code translate="no">TIMESTAMPTZ</code> 過濾與向量相似性搜尋，以時間與相似性來縮窄搜尋結果。</p>
+<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">使用時間戳過濾搜尋</h4><p>您可以將<code translate="no">TIMESTAMPTZ</code> 過濾與向量相似性搜尋結合，以時間和相似性兩種方式縮小搜尋結果的範圍。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define a time-based filter expression</span>
@@ -440,13 +366,13 @@ res = client.search(
    </tr>
    <tr>
      <td><p>資料庫</p></td>
-     <td><p><code translate="no">database.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>資料庫中所有收藏集的預設值</p></td>
      <td><p>最低</p></td>
    </tr>
    <tr>
      <td><p>收藏集</p></td>
-     <td><p><code translate="no">collection.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>覆寫該收藏集的資料庫預設時區設定</p></td>
      <td><p>中</p></td>
    </tr>
@@ -481,4 +407,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>預設情況下，在沒有索引的<code translate="no">TIMESTAMPTZ</code> 欄位上進行查詢時，會對所有行執行完整掃描，這在大型資料集上可能會很慢。若要加速時間戳查詢，請在<code translate="no">TIMESTAMPTZ</code> 欄位上建立<code translate="no">STL_SORT</code> 索引。</p>
-<p>詳情請參閱<a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT</a>。</p>
+<p>詳情請參閱<a href="/docs/zh-hant/stl-sort.md">STL_SORT</a>。</p>

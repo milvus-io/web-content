@@ -90,11 +90,11 @@ title: Gestire i gruppi di risorse
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.5.16. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
+<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.5.17. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
 </div>
 <ol>
 <li><p>Creare un gruppo di risorse.</p>
-<p>Per creare un gruppo di risorse, eseguire quanto segue dopo essersi connessi a un'istanza di Milvus. Il seguente snippet presuppone che <code translate="no">default</code> sia l'alias della connessione a Milvus.</p>
+<p>Per creare un gruppo di risorse, eseguite quanto segue dopo esservi connessi a un'istanza di Milvus. Il seguente snippet presuppone che <code translate="no">default</code> sia l'alias della connessione a Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>
@@ -328,8 +328,8 @@ scale_to(<span class="hljs-number">4</span>)
         ></path>
       </svg>
     </button></h2><ul>
-<li>Le repliche di una singola raccolta e i gruppi di risorse hanno una relazione N a N.</li>
-<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti uniformemente tra le repliche, assicurando che la differenza nel numero di QueryNode di ogni replica non superi 1.</li>
+<li>Le repliche di una singola collezione e i gruppi di risorse hanno una relazione N a N.</li>
+<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti uniformemente tra le repliche, assicurando che la differenza nel numero di QueryNode di ciascuna replica non superi 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Cosa fare dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

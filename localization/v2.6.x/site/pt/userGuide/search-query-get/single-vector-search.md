@@ -74,8 +74,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nas pesquisas ANN, uma pesquisa de vetor único refere-se a uma pesquisa que envolve apenas um vetor de consulta. Com base no índice pré-construído e no tipo de métrica transportada no pedido de pesquisa, o Milvus irá encontrar os top-K vectores mais semelhantes ao vetor de consulta.</p>
-<p>Nesta secção, aprenderá a realizar uma pesquisa de um único vetor. O pedido de pesquisa carrega um único vetor de consulta e pede ao Milvus para usar o Inner Product (IP) para calcular a similaridade entre os vetores de consulta e os vetores na coleção e retorna os três mais semelhantes.</p>
+    </button></h2><p>Nas pesquisas ANN, uma pesquisa de vetor único refere-se a uma pesquisa que envolve apenas um vetor de consulta. Com base no índice pré-construído e no tipo de métrica transportado no pedido de pesquisa, o Milvus irá encontrar os top-K vectores mais semelhantes ao vetor de consulta.</p>
+<p>Nesta secção, aprenderá a realizar uma pesquisa de vetor único. O pedido de pesquisa carrega um único vetor de consulta e pede ao Milvus para usar o Inner Product (IP) para calcular a similaridade entre os vetores de consulta e os vetores na coleção e retorna os três mais semelhantes.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -270,7 +270,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
-     <td><p>Um valor maior indica uma maior similaridade.</p></td>
+     <td><p>Um valor maior indica uma maior semelhança.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
@@ -864,7 +864,7 @@ curl --request POST \
      <td><p>100 x (n-1)</p></td>
    </tr>
 </table>
-<p>Note-se que a soma de <code translate="no">limit</code> e <code translate="no">offset</code> numa única pesquisa ANN deve ser inferior a 16.384.</p>
+<p>Note que a soma de <code translate="no">limit</code> e <code translate="no">offset</code> numa única pesquisa ANN deve ser inferior a 16.384.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -954,6 +954,43 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">Definir temporariamente um fuso horário para uma pesquisa<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Se a sua coleção tiver um campo <code translate="no">TIMESTAMPTZ</code>, pode substituir temporariamente o fuso horário predefinido da base de dados ou da coleção para uma única operação, definindo o parâmetro <code translate="no">timezone</code> na chamada de pesquisa. Este parâmetro controla a forma como os valores de <code translate="no">TIMESTAMPTZ</code> são apresentados e comparados durante a operação.</p>
+<p>O valor de <code translate="no">timezone</code> deve ser um <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de fuso horário IANA</a> válido (por exemplo, <strong>Ásia/Shanghai</strong>, <strong>América/Chicago</strong> ou <strong>UTC</strong>). Para mais informações sobre como utilizar um campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/pt/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
+<p>O exemplo abaixo mostra como definir temporariamente um fuso horário para uma operação de pesquisa:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    data=[query_vector],
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Enhancing-ANN-Search" class="common-anchor-header">Melhorar a pesquisa ANN<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -990,7 +1027,7 @@ curl --request POST \
 <p>A pesquisa de texto completo é um recurso que recupera documentos que contêm termos ou frases específicos em conjuntos de dados de texto e, em seguida, classifica os resultados com base na relevância. Esta funcionalidade ultrapassa as limitações da pesquisa semântica, que pode ignorar termos precisos, garantindo que recebe os resultados mais exactos e contextualmente relevantes. Além disso, simplifica as pesquisas vectoriais ao aceitar a entrada de texto em bruto, convertendo automaticamente os seus dados de texto em embeddings esparsos sem a necessidade de gerar manualmente embeddings vectoriais.</p>
 <p>Para obter detalhes sobre a pesquisa de texto integral, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a>.</p></li>
 <li><p>Correspondência de texto</p>
-<p>A correspondência de palavras-chave em Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisa filtrada para satisfazer condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas de semelhança dentro de vectores que satisfaçam critérios escalares.</p>
+<p>A correspondência de palavras-chave no Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisa filtrada para satisfazer condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas de semelhança dentro de vectores que satisfaçam critérios escalares.</p>
 <p>Para obter detalhes sobre a correspondência de palavras-chave, consulte <a href="/docs/pt/keyword-match.md">Correspondência de palavras-chave</a>.</p></li>
 <li><p>Usar chave de partição</p>
 <p>O envolvimento de vários campos escalares na filtragem de metadados e a utilização de uma condição de filtragem bastante complicada pode afetar a eficiência da pesquisa. Depois de definir um campo escalar como chave de partição e utilizar uma condição de filtragem que envolva a chave de partição no pedido de pesquisa, pode ajudar a restringir o âmbito da pesquisa dentro das partições correspondentes aos valores de chave de partição especificados.</p>
@@ -1000,5 +1037,5 @@ curl --request POST \
 <li><p>Compactação de clustering</p>
 <p>Para obter detalhes sobre compactações de clustering, consulte <a href="/docs/pt/clustering-compaction.md">Compactação de clustering</a>.</p></li>
 <li><p>Usar reranking</p>
-<p>Para obter detalhes sobre o uso de classificadores para aumentar a relevância dos resultados de pesquisa, consulte <a href="/docs/pt/decay-ranker-overview.md">Visão geral do classificador de decaimento</a> e <a href="/docs/pt/model-ranker-overview.md">Visão geral do classificador de modelo</a>.</p></li>
+<p>Para obter detalhes sobre o uso de classificadores para melhorar a relevância dos resultados de pesquisa, consulte <a href="/docs/pt/decay-ranker-overview.md">Visão geral do classificador de decaimento</a> e <a href="/docs/pt/model-ranker-overview.md">Visão geral do classificador de modelo</a>.</p></li>
 </ul>

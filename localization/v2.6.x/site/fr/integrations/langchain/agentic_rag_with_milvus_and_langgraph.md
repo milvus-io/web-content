@@ -31,8 +31,12 @@ title: RAG agentique avec Milvus et LangGraph
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ce guide montre comment construire un système RAG (Retrieval-Augmented Generation) avancé en utilisant LangGraph et Milvus. Contrairement aux systèmes RAG traditionnels qui se contentent de récupérer et de générer, les systèmes RAG agentiques peuvent prendre des décisions intelligentes sur le moment où il faut récupérer l'information, sur la manière de traiter les documents non pertinents et sur le moment où il faut réécrire les requêtes pour obtenir de meilleurs résultats.</p>
-<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> est une bibliothèque permettant de construire des applications multi-acteurs avec des LLM, construite au-dessus de LangChain. <a href="https://milvus.io/">Milvus</a> est la base de données vectorielles open-source la plus avancée au monde, conçue pour alimenter les applications de recherche de similarité et d'intelligence artificielle.</p>
+    </button></h1><p>Ce guide montre comment construire un système RAG (Retrieval-Augmented Generation) avancé en utilisant LangGraph et Milvus. Contrairement aux systèmes RAG traditionnels qui se contentent de récupérer et de générer, les systèmes RAG agentiques peuvent prendre des décisions intelligentes sur le moment où il convient de récupérer des informations, sur la manière de traiter les documents non pertinents et sur le moment où il convient de réécrire les requêtes pour obtenir de meilleurs résultats.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
+   </span> <span class="img-wrapper"> <span>Architecture d'un système de RAG agentique utilisant LangGraph et Milvus</span> </span></p>
+<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> est une bibliothèque permettant de construire des applications multi-acteurs avec des LLM, construite au-dessus de LangChain. <a href="https://milvus.io/">Milvus</a> est la base de données vectorielles open-source la plus avancée au monde, construite pour alimenter les applications de recherche de similarité et d'IA.</p>
 <p>Dans ce tutoriel, nous allons construire un système RAG agentique qui peut :</p>
 <ul>
 <li>Décider de récupérer des documents ou de répondre directement à des requêtes simples</li>

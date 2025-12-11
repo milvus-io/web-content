@@ -1,15 +1,15 @@
 ---
 id: timestamptz-field.md
-title: Bidang TIMESTAMPTZCompatible with Milvus 2.6.4+
+title: Bidang TIMESTAMPTZCompatible with Milvus 2.6.6+
 summary: >-
   Aplikasi yang melacak waktu di seluruh wilayah, seperti sistem e-commerce,
   alat kolaborasi, atau pencatatan terdistribusi, membutuhkan penanganan stempel
   waktu dengan zona waktu yang tepat. Tipe data TIMESTAMPTZ di Milvus
   menyediakan kemampuan ini dengan menyimpan stempel waktu dengan zona waktu
   terkait.
-beta: Milvus 2.6.4+
+beta: Milvus 2.6.6+
 ---
-<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">Bidang TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
+<h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">Bidang TIMESTAMPTZ<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Aplikasi yang melacak waktu di seluruh wilayah, seperti sistem e-commerce, alat kolaborasi, atau pencatatan terdistribusi, membutuhkan penanganan stempel waktu yang tepat dengan zona waktu. Tipe data <code translate="no">TIMESTAMPTZ</code> di Milvus menyediakan kemampuan ini dengan menyimpan stempel waktu dengan zona waktu terkait.</p>
+    </button></h1><p>Aplikasi yang melacak waktu di seluruh wilayah, seperti sistem e-commerce, alat kolaborasi, atau penebangan terdistribusi, membutuhkan penanganan stempel waktu yang tepat dengan zona waktu. Tipe data <code translate="no">TIMESTAMPTZ</code> di Milvus menyediakan kemampuan ini dengan menyimpan stempel waktu dengan zona waktu terkait.</p>
 <h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">Apa yang dimaksud dengan bidang TIMESTAMPTZ?<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bidang <code translate="no">TIMESTAMPTZ</code> adalah tipe data yang ditentukan skema (<code translate="no">DataType.TIMESTAMPTZ</code>) di Milvus yang menyimpan stempel waktu dengan zona waktu eksplisit:</p>
+    </button></h2><p>Bidang <code translate="no">TIMESTAMPTZ</code> adalah tipe data yang ditentukan skema (<code translate="no">DataType.TIMESTAMPTZ</code>) di Milvus yang memproses input yang sadar zona waktu dan menyimpan semua titik waktu secara internal sebagai waktu absolut UTC:</p>
 <ul>
 <li><p><strong>Format masukan yang diterima</strong>: String <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> dengan offset zona waktu (misalnya, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> mewakili pukul 11:59:59 PM di UTC+08:00).</p></li>
 <li><p><strong>Penyimpanan internal</strong>: Semua nilai <code translate="no">TIMESTAMPTZ</code> dinormalisasi dan disimpan dalam <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Waktu Universal Terkoordinasi</a> (UTC).</p></li>
@@ -298,81 +298,7 @@ results = client.query(
 <li><p><code translate="no">tsz - INTERVAL 'PT2H'</code> → Mengurangi 2 jam</p></li>
 </ul>
 </div>
-<h4 id="Extract-timestamp-elements" class="common-anchor-header">Mengekstrak elemen stempel waktu</h4><p>Anda dapat mengekstrak komponen tertentu dari bidang <code translate="no">TIMESTAMPTZ</code>, seperti tahun, bulan, atau hari, dengan menggunakan parameter <code translate="no">time_fields</code> dalam kueri atau pencarian Anda.</p>
-<p>Contoh di bawah ini mengekstrak elemen <code translate="no">year</code>, <code translate="no">month</code>, dan <code translate="no">day</code> dari setiap bidang <code translate="no">TIMESTAMPTZ</code> dalam hasil kueri:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">results = client.query(
-    collection_name,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;id &lt;= 10&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-<span class="highlighted-wrapper-line">    time_fields=<span class="hljs-string">&quot;year, month, day&quot;</span>,</span>
-    limit=<span class="hljs-number">2</span>,
-)
-
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
-
-<span class="hljs-comment"># Expected output:</span>
-<span class="hljs-comment"># Query result:  data: [&quot;{&#x27;id&#x27;: 1, &#x27;tsz&#x27;: [2024, 12, 31]}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;tsz&#x27;: [2025, 1, 1]}&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Elemen yang didukung untuk ekstraksi</strong></p>
-<table>
-   <tr>
-     <th><p>Elemen</p></th>
-     <th><p>Deskripsi</p></th>
-     <th><p>Contoh keluaran</p></th>
-   </tr>
-   <tr>
-     <td><p><code translate="no">year</code></p></td>
-     <td><p>Komponen tahun</p></td>
-     <td><p><code translate="no">2025</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">month</code></p></td>
-     <td><p>Nomor bulan</p></td>
-     <td><p><code translate="no">1</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">day</code></p></td>
-     <td><p>Hari dalam bulan</p></td>
-     <td><p><code translate="no">3</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">hour</code></p></td>
-     <td><p>Jam (0-23)</p></td>
-     <td><p><code translate="no">14</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">minute</code></p></td>
-     <td><p>Menit</p></td>
-     <td><p><code translate="no">30</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">second</code></p></td>
-     <td><p>Detik</p></td>
-     <td><p><code translate="no">5</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">microsecond</code></p></td>
-     <td><p>Mikrodetik</p></td>
-     <td><p><code translate="no">123456</code></p></td>
-   </tr>
-</table>
-<div class="alert note">
-<ul>
-<li><p>Parameter <code translate="no">time_fields</code> adalah string yang dipisahkan dengan koma (misalnya, <code translate="no">&quot;year, month, day&quot;</code>).</p></li>
-<li><p>Hasilnya dikembalikan sebagai larik komponen yang diekstrak (misalnya, <code translate="no">[2024, 12, 31]</code>).</p></li>
-</ul>
-</div>
-<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Pencarian dengan pemfilteran stempel waktu</h4><p>Anda dapat menggabungkan pemfilteran <code translate="no">TIMESTAMPTZ</code> dengan pencarian kemiripan vektor untuk mempersempit hasil berdasarkan waktu dan kemiripan.</p>
+<h4 id="Search-with-timestamp-filtering" class="common-anchor-header">Mencari dengan pemfilteran stempel waktu</h4><p>Anda dapat menggabungkan pemfilteran <code translate="no">TIMESTAMPTZ</code> dengan pencarian kemiripan vektor untuk mempersempit hasil berdasarkan waktu dan kemiripan.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define a time-based filter expression</span>
@@ -443,13 +369,13 @@ res = client.search(
    </tr>
    <tr>
      <td><p>Basis data</p></td>
-     <td><p><code translate="no">database.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>Default untuk semua koleksi dalam basis data</p></td>
      <td><p>Terendah</p></td>
    </tr>
    <tr>
      <td><p>Koleksi</p></td>
-     <td><p><code translate="no">collection.timezone</code></p></td>
+     <td><p><code translate="no">timezone</code></p></td>
      <td><p>Mengganti pengaturan zona waktu default basis data untuk koleksi tersebut</p></td>
      <td><p>Sedang</p></td>
    </tr>
@@ -484,4 +410,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>Secara default, kueri pada bidang <code translate="no">TIMESTAMPTZ</code> tanpa indeks akan melakukan pemindaian penuh terhadap semua baris, yang dapat berjalan lambat pada kumpulan data yang besar. Untuk mempercepat kueri stempel waktu, buat indeks <code translate="no">STL_SORT</code> pada bidang <code translate="no">TIMESTAMPTZ</code> Anda.</p>
-<p>Untuk detailnya, lihat <a href="https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf">STL_SORT</a>.</p>
+<p>Untuk detailnya, lihat <a href="/docs/id/stl-sort.md">STL_SORT</a>.</p>

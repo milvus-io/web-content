@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Reciprocal Rank Fusion (RRF) Ranker é uma estratégia de reranking para a pesquisa híbrida Milvus que equilibra os resultados de vários caminhos de pesquisa vetorial com base nas suas posições de classificação em vez das suas pontuações de semelhança brutas. Tal como um torneio desportivo que considera as classificações dos jogadores em vez das estatísticas individuais, o RRF Ranker combina resultados de pesquisa com base na classificação de cada item em diferentes caminhos de pesquisa, criando uma classificação final justa e equilibrada.</p>
+    </button></h1><p>O Reciprocal Rank Fusion (RRF) Ranker é uma estratégia de reranking para a pesquisa híbrida Milvus que equilibra os resultados de vários caminhos de pesquisa vetorial com base nas suas posições de classificação em vez das suas pontuações de semelhança brutas. Como um torneio desportivo que considera as classificações dos jogadores em vez das estatísticas individuais, o RRF Ranker combina os resultados da pesquisa com base na classificação de cada item em diferentes caminhos de pesquisa, criando uma classificação final justa e equilibrada.</p>
 <h2 id="When-to-use-RRF-Ranker" class="common-anchor-header">Quando usar o RRF Ranker<button data-href="#When-to-use-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +89,7 @@ summary: >-
     </button></h2><p>O fluxo de trabalho principal da estratégia do RRFRanker é o seguinte:</p>
 <ol>
 <li><p><strong>Recolher os rankings de pesquisa</strong>: Recolhe as classificações dos resultados de cada caminho da pesquisa vetorial (rank_1, rank_2).</p></li>
-<li><p><strong>Fundir classificações</strong>: Converte as classificações de cada caminho (rank_rrf_1, rank_rrf_2) de acordo com uma fórmula.</p>
+<li><p><strong>Fundir classificações</strong>: Converter as classificações de cada caminho (rank_rrf_1, rank_rrf_2) de acordo com uma fórmula.</p>
 <p>A fórmula de cálculo envolve <em>N</em>, que representa o número de recuperações. <em>ranki</em><em>(d</em>) é a posição de classificação do documento <em>d</em> gerada pelo <em>i(th)</em> retriever. <em>k</em> é um parâmetro de suavização normalmente definido como 60.</p></li>
 <li><p><strong>Agregação de classificações</strong>: Classifica novamente os resultados da pesquisa com base nas classificações combinadas para produzir os resultados finais.</p></li>
 </ol>
@@ -168,7 +168,7 @@ summary: >-
 <td><p>5</p></td>
 </tr>
 </table></p></li>
-<li><p>Utilize a FRR para reordenar as classificações dos dois conjuntos de resultados de pesquisa. Suponha que o parâmetro de suavização <code translate="no">k</code> está definido para 60.</p>
+<li><p>Utilize a FRR para reorganizar as classificações dos dois conjuntos de resultados de pesquisa. Suponha que o parâmetro de suavização <code translate="no">k</code> está definido para 60.</p>
 <p><table>
 <tr>
 <th><p><strong>ID</strong></p></th>
@@ -180,46 +180,46 @@ summary: >-
 <td><p>101</p></td>
 <td><p>1</p></td>
 <td><p>2</p></td>
-<td><p>1/(60+1)+1/(60+2) = 0.01639</p></td>
+<td><p>1/(60+1)+1/(60+2) = 0.03252247</p></td>
 </tr>
 <tr>
 <td><p>198</p></td>
 <td><p>4</p></td>
 <td><p>1</p></td>
-<td><p>1/(60+4)+1/(60+1) = 0.01593</p></td>
+<td><p>1/(60+4)+1/(60+1) = 0.03201844</p></td>
 </tr>
 <tr>
 <td><p>175</p></td>
 <td><p>5</p></td>
 <td><p>4</p></td>
-<td><p>1/(60+5)+1/(60+4) = 0.01554</p></td>
+<td><p>1/(60+5)+1/(60+4) = 0.03100962</p></td>
 </tr>
 <tr>
 <td><p>203</p></td>
 <td><p>2</p></td>
 <td><p>N/A</p></td>
-<td><p>1/(60+2) = 0.01613</p></td>
+<td><p>1/(60+2) = 0.01612903</p></td>
 </tr>
 <tr>
 <td><p>150</p></td>
 <td><p>3</p></td>
 <td><p>N/A</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>110</p></td>
 <td><p>N/A</p></td>
 <td><p>3</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>250</p></td>
 <td><p>N/A</p></td>
 <td><p>5</p></td>
-<td><p>1/(60+5) = 0.01554</p></td>
+<td><p>1/(60+5) = 0.01538462</p></td>
 </tr>
 </table></p></li>
-<li><p>Os resultados finais após a nova classificação（topK=5)：</p>
+<li><p>Os resultados finais após a reclassificação（topK=5)：</p>
 <p><table>
 <tr>
 <th><p><strong>Classificação</strong></p></th>
@@ -229,27 +229,32 @@ summary: >-
 <tr>
 <td><p>1</p></td>
 <td><p>101</p></td>
-<td><p>0.01639</p></td>
+<td><p>0.03252247</p></td>
 </tr>
 <tr>
 <td><p>2</p></td>
-<td><p>203</p></td>
-<td><p>0.01613</p></td>
+<td><p>198</p></td>
+<td><p>0.03201844</p></td>
 </tr>
 <tr>
 <td><p>3</p></td>
-<td><p>198</p></td>
-<td><p>0.01593</p></td>
+<td><p>175</p></td>
+<td><p>0.03100962</p></td>
 </tr>
 <tr>
 <td><p>4</p></td>
+<td><p>203</p></td>
+<td><p>0.01612903</p></td>
+</tr>
+<tr>
+<td><p>5</p></td>
 <td><p>150</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 <tr>
 <td><p>5</p></td>
 <td><p>110</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -268,7 +273,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ao utilizar a estratégia de classificação RRF, é necessário configurar o parâmetro <code translate="no">k</code>. Trata-se de um parâmetro de suavização que pode alterar efetivamente os pesos relativos da pesquisa de texto integral em relação à pesquisa vetorial. O valor padrão deste parâmetro é 60, e pode ser ajustado dentro de um intervalo de (0, 16384). O valor deve ser um número de ponto flutuante. O valor recomendado é entre [10, 100]. Embora <code translate="no">k=60</code> seja uma escolha comum, o valor ideal de <code translate="no">k</code> pode variar dependendo das suas aplicações e conjuntos de dados específicos. Recomendamos testar e ajustar esse parâmetro com base no seu caso de uso específico para obter o melhor desempenho.</p>
+    </button></h2><p>Ao usar a estratégia de reranking RRF, é necessário configurar o parâmetro <code translate="no">k</code>. Trata-se de um parâmetro de suavização que pode alterar eficazmente os pesos relativos da pesquisa de texto completo em relação à pesquisa de vectores. O valor padrão deste parâmetro é 60, e pode ser ajustado dentro de um intervalo de (0, 16384). O valor deve ser um número de ponto flutuante. O valor recomendado é entre [10, 100]. Embora <code translate="no">k=60</code> seja uma escolha comum, o valor ideal de <code translate="no">k</code> pode variar dependendo das suas aplicações e conjuntos de dados específicos. Recomendamos testar e ajustar esse parâmetro com base no seu caso de uso específico para obter o melhor desempenho.</p>
 <h3 id="Create-an-RRF-Ranker" class="common-anchor-header">Criar um classificador RRF<button data-href="#Create-an-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -305,11 +310,12 @@ ranker = Function(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rr</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;k\&quot;: 100}&quot;</span>)
-                .build();
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 

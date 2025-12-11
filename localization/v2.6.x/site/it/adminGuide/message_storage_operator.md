@@ -60,7 +60,7 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
 </ul></li>
 <li>L'archiviazione dei messaggi non può essere modificata mentre il sistema Milvus è in funzione.</li>
 <li>È supportata solo la versione di Kafka 2.x o 3.x.</li>
-<li><strong>Limitazioni dell'aggiornamento</strong>: <strong>Limitazioni della coda di messaggi</strong>: Quando si effettua l'aggiornamento a Milvus v2.6.4, è necessario mantenere l'attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi all'altro durante l'aggiornamento non è supportato. Il supporto per il cambio di sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
+<li><strong>Limitazioni dell'aggiornamento</strong>: <strong>Limitazioni della coda di messaggi</strong>: Quando si effettua l'aggiornamento a Milvus v2.6.6, è necessario mantenere l'attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi all'altro durante l'aggiornamento non è supportato. Il supporto per il cambio di sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurare RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,7 +185,7 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
 </ol>
 <div class="alert note">
 <p><strong>Scegliere tra RocksMQ e NATS?</strong></p>
-<p>RockMQ usa CGO per interagire con RocksDB e gestisce la memoria da solo, mentre il NATS puro di Go incorporato nell'installazione Milvus delega la gestione della memoria al garbage collector (GC) di Go.</p>
+<p>RockMQ usa CGO per interagire con RocksDB e gestisce la memoria da solo, mentre il NATS puro di Go incorporato nell'installazione di Milvus delega la gestione della memoria al garbage collector (GC) di Go.</p>
 <p>Nello scenario in cui il pacchetto di dati è più piccolo di 64 kb, RocksDB ha prestazioni migliori in termini di utilizzo della memoria, della CPU e del tempo di risposta. D'altra parte, se il pacchetto di dati è superiore a 64 kb, NATS eccelle in termini di tempo di risposta con una memoria sufficiente e una pianificazione GC ideale.</p>
 <p>Attualmente, si consiglia di utilizzare NATS solo per gli esperimenti.</p>
 </div>

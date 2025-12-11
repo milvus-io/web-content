@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>RRF（Reciprocal Rank Fusion）Rankerは、Milvusハイブリッド検索のための再ランキング戦略で、複数のベクトル検索パスの結果を、生の類似度スコアではなく、ランキング順位に基づいてバランスさせます。スポーツのトーナメントが個々の統計ではなく選手のランキングを考慮するように、RRF Rankerは異なる検索パスにおける各項目のランキングの高さに基づいて検索結果を組み合わせ、公平でバランスの取れた最終ランキングを作成します。</p>
+    </button></h1><p>RRF（Reciprocal Rank Fusion）Rankerは、Milvusハイブリッド検索のための再順位付け戦略で、複数のベクトル検索パスからの結果を、生の類似度スコアではなく、順位に基づいてバランスさせます。スポーツのトーナメントが個々の統計ではなく選手のランキングを考慮するように、RRF Rankerは異なる検索パスにおける各項目のランキングの高さに基づいて検索結果を組み合わせ、公平でバランスの取れた最終ランキングを作成します。</p>
 <h2 id="When-to-use-RRF-Ranker" class="common-anchor-header">RRF Rankerの使用時期<button data-href="#When-to-use-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,43 +175,43 @@ summary: >-
 <td><p>101</p></td>
 <td><p>1</p></td>
 <td><p>2</p></td>
-<td><p>1/(60+1)+1/(60+2) = 0.01639</p></td>
+<td><p>1/(60+1)+1/(60+2) = 0.03252247</p></td>
 </tr>
 <tr>
 <td><p>198</p></td>
 <td><p>4</p></td>
 <td><p>1</p></td>
-<td><p>1/(60+4)+1/(60+1) = 0.01593</p></td>
+<td><p>1/(60+4)+1/(60+1) = 0.03201844</p></td>
 </tr>
 <tr>
 <td><p>175</p></td>
 <td><p>5</p></td>
 <td><p>4</p></td>
-<td><p>1/(60+5)+1/(60+4) = 0.01554</p></td>
+<td><p>1/(60+5)+1/(60+4) = 0.03100962</p></td>
 </tr>
 <tr>
 <td><p>203</p></td>
 <td><p>2</p></td>
 <td><p>該当なし</p></td>
-<td><p>1/(60+2) = 0.01613</p></td>
+<td><p>1/(60+2) = 0.01612903</p></td>
 </tr>
 <tr>
 <td><p>150</p></td>
 <td><p>3</p></td>
 <td><p>N/A</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>110</p></td>
 <td><p>該当なし</p></td>
 <td><p>3</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>250</p></td>
 <td><p>該当なし</p></td>
 <td><p>5</p></td>
-<td><p>1/(60+5) = 0.01554</p></td>
+<td><p>1/(60+5) = 0.01538462</p></td>
 </tr>
 </table></p></li>
 <li><p>再ランク付け後の最終結果（topK=5)：順位</p>
@@ -224,27 +224,32 @@ summary: >-
 <tr>
 <td><p>1</p></td>
 <td><p>101</p></td>
-<td><p>0.01639</p></td>
+<td><p>0.03252247</p></td>
 </tr>
 <tr>
 <td><p>2</p></td>
-<td><p>203</p></td>
-<td><p>0.01613</p></td>
+<td><p>198</p></td>
+<td><p>0.03201844</p></td>
 </tr>
 <tr>
 <td><p>3</p></td>
-<td><p>198</p></td>
-<td><p>0.01593</p></td>
+<td><p>175</p></td>
+<td><p>0.03100962</p></td>
 </tr>
 <tr>
 <td><p>4</p></td>
+<td><p>203</p></td>
+<td><p>0.01612903</p></td>
+</tr>
+<tr>
+<td><p>5</p></td>
 <td><p>150</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 <tr>
 <td><p>5</p></td>
 <td><p>110</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -263,7 +268,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RRFリランキング戦略を使用する場合、パラメータ<code translate="no">k</code> を設定する必要がある。これはスムージング・パラメーターで、全文検索とベクトル検索の相対的な重みを効果的に変えることができる。このパラメータのデフォルト値は60で、(0, 16384)の範囲で調整することができる。値は浮動小数点数でなければならない。推奨値は[10, 100]の間である。<code translate="no">k=60</code> は一般的な選択ですが、最適な<code translate="no">k</code> の値は、特定のアプリケーションやデータセットによって異なります。最高のパフォーマンスを達成するために、特定のユースケースに基づいてこのパラメータをテストし、調整することをお勧めします。</p>
+    </button></h2><p>RRFリランキング戦略を使用する場合、パラメータ<code translate="no">k</code> を設定する必要がある。これはスムージング・パラメータで、全文検索とベクトル検索の相対的な重みを効果的に変えることができる。このパラメータのデフォルト値は60で、(0, 16384)の範囲で調整することができる。値は浮動小数点数でなければならない。推奨値は[10, 100]の間である。<code translate="no">k=60</code> は一般的な選択ですが、最適な<code translate="no">k</code> の値は、特定のアプリケーションやデータセットによって異なります。最高のパフォーマンスを達成するために、特定のユースケースに基づいてこのパラメータをテストし、調整することをお勧めします。</p>
 <h3 id="Create-an-RRF-Ranker" class="common-anchor-header">RRF ランカーの作成<button data-href="#Create-an-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -300,11 +305,12 @@ ranker = Function(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rr</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;k\&quot;: 100}&quot;</span>)
-                .build();
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -358,7 +364,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">params.k</code></p></td>
      <td><p>いいえ</p></td>
-     <td><p>文書ランクの影響を制御するスムージングパラメータ。<code translate="no">k</code> が高いほど上位ランクの感度を下げる。範囲: (0, 16384); デフォルト:<code translate="no">60</code> 。</p><p>詳細は<a href="/docs/ja/rrf-ranker.md#Mechanism-of-RRF-Ranker">RRF Rankerの仕組みを</a>参照。</p></td>
+     <td><p>文書ランクの影響を制御するスムージングパラメータ。<code translate="no">k</code> が高いほど上位ランクの感度を下げる。範囲: (0, 16384); デフォルト:<code translate="no">60</code> 。</p><p>詳細は<a href="/docs/ja/rrf-ranker.md#Mechanism-of-RRF-Ranker">RRF Rankerの</a>メカニズムを参照。</p></td>
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>

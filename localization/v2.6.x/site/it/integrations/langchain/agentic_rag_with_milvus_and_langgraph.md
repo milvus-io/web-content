@@ -3,7 +3,7 @@ id: agentic_rag_with_milvus_and_langgraph.md
 summary: >-
   Questa guida mostra come costruire un sistema avanzato di Retrieval-Augmented
   Generation (RAG) utilizzando LangGraph e Milvus. A differenza dei sistemi RAG
-  tradizionali, che si limitano a recuperare e generare, i sistemi RAG agici
+  tradizionali, che si limitano a recuperare e generare, i sistemi RAG agenziali
   possono prendere decisioni intelligenti su quando recuperare le informazioni,
   come gestire i documenti irrilevanti e quando riscrivere le query per ottenere
   risultati migliori.
@@ -30,8 +30,12 @@ title: RAG agenziale con Milvus e LangGraph
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questa guida mostra come costruire un sistema avanzato di Retrieval-Augmented Generation (RAG) utilizzando LangGraph e Milvus. A differenza dei sistemi RAG tradizionali che si limitano a recuperare e generare, i sistemi RAG agici possono prendere decisioni intelligenti su quando recuperare le informazioni, come gestire i documenti irrilevanti e quando riscrivere le query per ottenere risultati migliori.</p>
-<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> è una libreria per la costruzione di applicazioni stateful e multi-attore con LLM, costruita sulla base di LangChain. <a href="https://milvus.io/">Milvus</a> è il database vettoriale open-source più avanzato al mondo, costruito per alimentare la ricerca di similarità e le applicazioni di intelligenza artificiale.</p>
+    </button></h1><p>Questa guida mostra come costruire un sistema avanzato di Retrieval-Augmented Generation (RAG) utilizzando LangGraph e Milvus. A differenza dei sistemi RAG tradizionali, che si limitano a recuperare e generare, i sistemi RAG agici possono prendere decisioni intelligenti su quando recuperare le informazioni, come gestire i documenti irrilevanti e quando riscrivere le query per ottenere risultati migliori.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
+   </span> <span class="img-wrapper"> <span>Architettura di un sistema RAG agenziale che utilizza LangGraph e Milvus</span> </span></p>
+<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> è una libreria per la costruzione di applicazioni stateful e multi-attore con LLM, costruita sopra LangChain. <a href="https://milvus.io/">Milvus</a> è il database vettoriale open-source più avanzato al mondo, costruito per alimentare la ricerca di similarità e le applicazioni di intelligenza artificiale.</p>
 <p>In questo tutorial, costruiremo un sistema agenziale RAG in grado di:</p>
 <ul>
 <li>decidere se recuperare documenti o rispondere direttamente a semplici query</li>
@@ -682,4 +686,4 @@ content='To defend against potential risks in AI systems, we can employ human re
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questo tutorial abbiamo costruito un sistema RAG agenziale utilizzando LangGraph e Milvus, in grado di decidere in modo intelligente quando recuperare le informazioni, valutare la rilevanza dei documenti e riscrivere le query per ottenere risultati migliori. Questo approccio offre vantaggi significativi rispetto ai sistemi RAG tradizionali, tra cui una migliore esperienza dell'utente grazie all'instradamento intelligente, risposte di qualità superiore grazie alla classificazione dei documenti e un migliore recupero grazie alla riscrittura delle query. È possibile estendere ulteriormente questo sistema aggiungendo una logica di classificazione più sofisticata, implementando strategie di recupero multiple o incorporando strumenti e fonti di dati aggiuntivi.</p>
+    </button></h2><p>In questo tutorial abbiamo costruito un sistema RAG agenziale utilizzando LangGraph e Milvus, in grado di decidere in modo intelligente quando recuperare le informazioni, valutare la rilevanza dei documenti e riscrivere le query per ottenere risultati migliori. Questo approccio offre vantaggi significativi rispetto ai sistemi RAG tradizionali, tra cui una migliore esperienza dell'utente grazie all'instradamento intelligente, risposte di qualità superiore grazie alla valutazione dei documenti e un migliore recupero grazie alla riscrittura delle query. È possibile estendere ulteriormente questo sistema aggiungendo una logica di classificazione più sofisticata, implementando strategie di recupero multiple o incorporando strumenti e fonti di dati aggiuntivi.</p>

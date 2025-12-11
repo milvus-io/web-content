@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以為您的 Milvus 選擇升級路徑，如下所示：</p>
-<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.5.19。</div>
+<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.5.23。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.5.19。</p></li>
-<li><p>在從 Milvus v2.1.x 升級到 v2.5.19 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.5.23。</p></li>
+<li><p>在從 Milvus v2.1.x 升級到 v2.5.23 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">進行滾動升級<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作</td><td><code translate="no">update</code></td><td>假</td></tr>
 </tbody>
 </table>
-<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.5.19。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.19 -w &#x27;milvusdb/milvus:v2.5.19&#x27;
+<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.5.23。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.23 -w &#x27;milvusdb/milvus:v2.5.23&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

@@ -137,7 +137,7 @@ beta: Milvus 2.6.2+
     </button></h3><p>A fase final aproveita o layout de armazenamento otimizado para selecionar de forma inteligente o caminho mais rápido para cada predicado de consulta.</p>
 <ul>
 <li><p><strong>Caminho rápido</strong>: As consultas em chaves digitadas/dinâmicas (por exemplo, <code translate="no">json['a'] &lt; 100</code>) acedem diretamente a colunas dedicadas</p></li>
-<li><p><strong>Caminho optimizado</strong>: As consultas sobre chaves partilhadas (por exemplo, <code translate="no">json['e'] = 'rare'</code>) utilizam o índice invertido para localizar rapidamente os documentos relevantes</p></li>
+<li><p><strong>Caminho optimizado</strong>: As consultas em chaves partilhadas (por exemplo, <code translate="no">json['e'] = 'rare'</code>) utilizam o índice invertido para localizar rapidamente os documentos relevantes</p></li>
 </ul>
 <h2 id="Enable-JSON-shredding" class="common-anchor-header">Ativar a fragmentação JSON<button data-href="#Enable-JSON-shredding" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -154,11 +154,11 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para ativar a funcionalidade, defina <code translate="no">common.enabledJSONKeyStats</code> como <code translate="no">true</code> no seu ficheiro de configuração <code translate="no">milvus.yaml</code>. Os novos dados accionam automaticamente o processo de trituração.</p>
+    </button></h2><p>Para ativar a funcionalidade, defina <code translate="no">common.enabledJSONShredding</code> para <code translate="no">true</code> no seu ficheiro de configuração <code translate="no">milvus.yaml</code>. Os novos dados accionam automaticamente o processo de trituração.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">common:</span>
-  <span class="hljs-attr">enabledJSONKeyStats:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
+  <span class="hljs-attr">enabledJSONShredding:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Indicates whether to enable JSON key stats build and load processes</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Uma vez ativado, o Milvus começará a analisar e a reestruturar os seus dados JSON após a ingestão, sem qualquer outra intervenção manual.</p>
@@ -177,7 +177,7 @@ beta: Milvus 2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para a maioria dos usuários, uma vez que a fragmentação JSON é ativada, as configurações padrão para outros parâmetros são suficientes. No entanto, é possível ajustar o comportamento da fragmentação JSON usando esses parâmetros em <code translate="no">milvus.yaml</code>.</p>
+    </button></h2><p>Para a maioria dos usuários, uma vez que a fragmentação JSON é ativada, as configurações padrão para outros parâmetros são suficientes. No entanto, é possível ajustar o comportamento da fragmentação de JSON usando esses parâmetros em <code translate="no">milvus.yaml</code>.</p>
 <table>
    <tr>
      <th><p>Parâmetro Nome</p></th>
@@ -186,34 +186,34 @@ beta: Milvus 2.6.2+
      <th><p>Aconselhamento de afinação</p></th>
    </tr>
    <tr>
-     <td><p><code translate="no">common.enabledJSONKeyStats</code></p></td>
+     <td><p><code translate="no">common.enabledJSONShredding</code></p></td>
      <td><p>Controla se os processos de compilação e carregamento de fragmentação JSON estão activados.</p></td>
      <td><p>falso</p></td>
      <td><p>Deve ser definido como <strong>true</strong> para ativar o recurso.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">common.usingJsonStatsForQuery</code></p></td>
+     <td><p><code translate="no">common.usingjsonShreddingForQuery</code></p></td>
      <td><p>Controla se o Milvus usa dados fragmentados para aceleração.</p></td>
      <td><p>true</p></td>
      <td><p>Definido como <strong>false</strong> como uma medida de recuperação se as consultas falharem, revertendo para o caminho de consulta original.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">queryNode.mmap.jsonStats</code></p></td>
+     <td><p><code translate="no">queryNode.mmap.jsonShredding</code></p></td>
      <td><p>Determina se o Milvus usa mmap ao carregar dados fragmentados.</p><p>Para obter detalhes, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p></td>
      <td><p>true</p></td>
      <td><p>Esta configuração é geralmente otimizada para desempenho. Ajuste-a apenas se tiver necessidades específicas de gestão de memória ou restrições no seu sistema.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingMaxColumns</code></p></td>
      <td><p>O número máximo de chaves JSON que serão armazenadas em colunas fragmentadas. </p><p>Se o número de chaves que aparecem frequentemente exceder este limite, o Milvus dará prioridade às mais frequentes para serem destruídas, e as restantes chaves serão armazenadas na coluna partilhada.</p></td>
      <td><p>1024</p></td>
      <td><p>Isto é suficiente para a maioria dos cenários. Para JSON com milhares de chaves que aparecem frequentemente, pode ser necessário aumentar este valor, mas monitorize a utilização do armazenamento.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">dataCoord.jsonStatsShreddingRatioThreshold</code></p></td>
+     <td><p><code translate="no">dataCoord.jsonShreddingRatioThreshold</code></p></td>
      <td><p>O rácio mínimo de ocorrência que uma chave JSON deve ter para ser considerada para fragmentação numa coluna fragmentada.</p><p>Uma chave é considerada como aparecendo frequentemente se o seu rácio for superior a este limite.</p></td>
      <td><p>0.3</p></td>
-     <td><p><strong>Aumenta</strong> (por exemplo, para 0,5) se o número de chaves que cumprem os critérios de fragmentação exceder o limite <code translate="no">dataCoord.jsonStatsMaxShreddingColumns</code>. Isto torna o limite mais rigoroso, reduzindo o número de chaves que se qualificam para destruição.</p><p><strong>Diminua</strong> (por exemplo, para 0,1) se pretender destruir mais chaves que aparecem com menos frequência do que o limite predefinido de 30%.</p></td>
+     <td><p><strong>Aumenta</strong> (por exemplo, para 0,5) se o número de chaves que cumprem os critérios de fragmentação exceder o limite <code translate="no">dataCoord.jsonShreddingMaxColumns</code>. Isto torna o limite mais rigoroso, reduzindo o número de chaves que se qualificam para destruição.</p><p><strong>Diminua</strong> (por exemplo, para 0,1) se pretender destruir mais chaves que aparecem com menos frequência do que o limite predefinido de 30%.</p></td>
    </tr>
 </table>
 <h2 id="Performance-benchmarks" class="common-anchor-header">Referências de desempenho<button data-href="#Performance-benchmarks" class="anchor-icon" translate="no">
@@ -348,7 +348,7 @@ beta: Milvus 2.6.2+
       </svg>
     </button></h3><ul>
 <li><p><strong>As consultas chave partilhadas</strong> apresentam as melhorias mais significativas (até 89x mais rápidas)</p></li>
-<li><p><strong>As consultas de chave tipada</strong> fornecem ganhos de desempenho consistentes de 15-30x</p></li>
+<li><p><strong>As consultas de chave digitada</strong> fornecem ganhos de desempenho consistentes de 15-30x</p></li>
 <li><p><strong>Todos os tipos de consulta</strong> beneficiam do JSON Shredding sem regressões de desempenho</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">PERGUNTAS FREQUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -376,11 +376,12 @@ beta: Milvus 2.6.2+
    </span> <span class="img-wrapper"> <span>Saída do Birdwatcher</span> </span></p></li>
 <li><p>Em seguida, verifique se os dados foram carregados executando <code translate="no">show loaded-json-stats</code> no nó de consulta. A saída exibirá detalhes sobre os dados fragmentados carregados para cada nó de consulta.</p></li>
 </ol></li>
-<li><p><strong>Como selecciono entre a fragmentação JSON e a indexação JSON?</strong></p>
-<ul>
-<li><p><strong>A fragmentação JSON</strong> é ideal para chaves que aparecem frequentemente nos seus documentos, especialmente para estruturas JSON complexas. Ele combina os benefícios do armazenamento em colunas e da indexação invertida, tornando-o adequado para cenários de leitura intensa em que você consulta muitas chaves diferentes. No entanto, não é recomendado para documentos JSON muito pequenos, pois o ganho de desempenho é mínimo. Quanto menor for a proporção do valor da chave em relação ao tamanho total do documento JSON, melhor será a otimização do desempenho da fragmentação.</p></li>
-<li><p><strong>A indexação JSON</strong> é melhor para a otimização direcionada de consultas específicas baseadas em chaves e tem uma sobrecarga de armazenamento inferior. É adequada para estruturas JSON mais simples. Observe que a fragmentação de JSON não cobre consultas em chaves dentro de matrizes, portanto, é necessário um índice JSON para acelerar essas consultas.</p></li>
-</ul></li>
 <li><p><strong>E se eu encontrar um erro?</strong></p>
-<p>Se o processo de compilação ou carregamento falhar, você pode desativar rapidamente o recurso definindo <code translate="no">common.enabledJSONKeyStats=false</code>. Para limpar quaisquer tarefas restantes, use o comando <code translate="no">remove stats-task &lt;task_id&gt;</code> no <a href="/docs/pt/birdwatcher_usage_guides.md">Birdwatcher</a>. Se uma consulta falhar, defina <code translate="no">common.usingJsonStatsForQuery=false</code> para reverter para o caminho original da consulta, ignorando os dados fragmentados.</p></li>
+<p>Se o processo de compilação ou carregamento falhar, você pode desativar rapidamente o recurso definindo <code translate="no">common.enabledJSONShredding=false</code>. Para limpar quaisquer tarefas restantes, use o comando <code translate="no">remove stats-task &lt;task_id&gt;</code> no <a href="/docs/pt/birdwatcher_usage_guides.md">Birdwatcher</a>. Se uma consulta falhar, defina <code translate="no">common.usingjsonShreddingForQuery=false</code> para reverter para o caminho original da consulta, ignorando os dados fragmentados.</p></li>
+<li><p><strong>Como é que selecciono entre a fragmentação JSON e a indexação JSON?</strong></p>
+<ul>
+<li><p><strong>A fragmentação JSON</strong> é ideal para chaves que aparecem frequentemente nos seus documentos, especialmente para estruturas JSON complexas. Combina as vantagens do armazenamento colunar e da indexação invertida, o que a torna adequada para cenários de leitura intensiva em que consulta muitas chaves diferentes. No entanto, não é recomendado para documentos JSON muito pequenos, pois o ganho de desempenho é mínimo. Quanto menor for a proporção do valor da chave em relação ao tamanho total do documento JSON, melhor será a otimização do desempenho da fragmentação.</p></li>
+<li><p><strong>A indexação JSON</strong> é melhor para a otimização direcionada de consultas específicas baseadas em chaves e tem uma sobrecarga de armazenamento inferior. É adequada para estruturas JSON mais simples. Observe que a fragmentação JSON não cobre consultas em chaves dentro de matrizes, portanto, é necessário um índice JSON para acelerar essas consultas.</p></li>
+</ul>
+<p>Para obter detalhes, consulte <a href="/docs/pt/json-field-overview.md#Next-Accelerate-JSON-queries">Visão geral do campo JSON</a>.</p></li>
 </ul>

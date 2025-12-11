@@ -2,8 +2,8 @@
 id: stl-sort.md
 title: STL_SORT
 summary: >-
-  STL_SORT 索引是一種專門設計的索引類型，用來提高 Milvus 中數字欄位 (INT8、INT16 等) 或 TIMESTAMPTZ
-  欄位的查詢效能，方法是以排序順序組織資料。
+  STL_SORT 索引是一種專門設計的索引類型，藉由以排序順序組織資料，以增強 Milvus 中數字欄位 (INT8、INT16 等)、VARCHAR
+  欄位或 TIMESTAMPTZ 欄位的查詢效能。
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">STL_SORT</code> 索引是一種索引類型，專門設計用來提高數值欄位 (INT8、INT16 等) 或 Milvus 內<code translate="no">TIMESTAMPTZ</code> 欄位的查詢效能，方法是將資料以排序順序組織。</p>
+    </button></h1><p><code translate="no">STL_SORT</code> 索引是一種專門設計的索引類型，用於通過按排序順序組織資料來增強 Milvus 中數字欄位（INT8、INT16 等）、<code translate="no">VARCHAR</code> 欄位或<code translate="no">TIMESTAMPTZ</code> 欄位的查詢性能。</p>
 <p>如果您經常以下列方式執行查詢，請使用<code translate="no">STL_SORT</code> 索引：</p>
 <ul>
 <li><p>使用<code translate="no">==</code>,<code translate="no">!=</code>,<code translate="no">&gt;</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;=</code>, 和<code translate="no">&lt;=</code> 運算符進行比較篩選</p></li>
@@ -43,7 +43,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>數值欄位 (例如<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>)。如需詳細資訊，請參閱<a href="/docs/zh-hant/number.md">Boolean &amp; Number</a>。</p></li>
-<li><p><code translate="no">TIMESTAMPTZ</code> 欄位。詳情請參閱<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></li>
+<li><p><code translate="no">VARCHAR</code> 欄位。如需詳細資訊，請參閱<a href="/docs/zh-hant/string.md">字串欄位</a>。</p></li>
+<li><p><code translate="no">TIMESTAMPTZ</code> 字段。詳細資訊，請參閱<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">如何運作<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +71,7 @@ summary: >-
 </ul></li>
 <li><p><strong>加速查詢</strong></p>
 <ul>
-<li><p>在查詢時，Milvus 在排序陣列上使用<strong>二元搜尋</strong><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">(std::lower_bound</a>和<a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper</a><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">_bound</a>)。</p></li>
+<li><p>在查詢時，Milvus 在排序陣列上使用<strong>二元搜尋</strong><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">(std::lower_bound</a>和<a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) 。</p></li>
 <li><p>對於相等值，Milvus 可以快速找到所有匹配值。</p></li>
 <li><p>對於範圍，Milvus 會定位開始和結束位置，並傳回其間的所有值。</p></li>
 <li><p>匹配的實體 ID 會傳送到查詢執行器，以進行最終結果的組合。</p></li>
@@ -115,6 +116,29 @@ index_params = client.prepare_index_params()
 client.create_index(
     collection_name=<span class="hljs-string">&quot;tsz_demo&quot;</span>,
     index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-an-index" class="common-anchor-header">刪除索引<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>使用<code translate="no">drop_index()</code> 方法從集合中移除現有的索引。</p>
+<div class="alert note">
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;tsz_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;tsz_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">使用注意事項<button data-href="#Usage-notes" class="anchor-icon" translate="no">

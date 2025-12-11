@@ -1,6 +1,6 @@
 ---
 id: best-practices-for-array-of-structs.md
-title: تصميم نموذج بيانات مع مجموعة من الهياكلCompatible with Milvus 2.6.4+
+title: تصميم نموذج البيانات مع مجموعة من الهياكلCompatible with Milvus 2.6.4+
 summary: >-
   تطبيقات الذكاء الاصطناعي الحديثة، خاصةً في إنترنت الأشياء (IoT) والقيادة
   الذاتية، عادةً ما تستند إلى أحداث غنية ومنظمة: قراءة مستشعر مع طابعها الزمني
@@ -9,7 +9,7 @@ summary: >-
   المتداخلة والبحث فيها.
 beta: Milvus 2.6.4+
 ---
-<h1 id="Data-Model-Design-with-an-Array-of-Structs" class="common-anchor-header">تصميم نموذج بيانات مع مجموعة من الهياكل<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Data-Model-Design-with-an-Array-of-Structs" class="anchor-icon" translate="no">
+<h1 id="Data-Model-Design-with-an-Array-of-Structs" class="common-anchor-header">تصميم نموذج البيانات مع مجموعة من الهياكل<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Data-Model-Design-with-an-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,7 +80,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قبل إضافة حقل المصفوفة إلى مجموعتك، حدد مخطط الهيكل الداخلي. يجب أن يكون كل حقل في البنية مكتوبًا بشكل صريح، سواءً كان مكتوبًا بشكل واضح، أو قياسيًا<strong>(VARCHAR،</strong> <strong>INT،</strong> <strong>BOOLEAN،</strong> إلخ) أو متجهًا<strong>(FLOAT_VECTOR</strong>).</p>
+    </button></h3><p>قبل إضافة حقل المصفوفة إلى مجموعتك، حدد مخطط الهيكل الداخلي. يجب أن يكون كل حقل في البنية مكتوبًا بشكل صريح، سواءً كان مكتوبًا بشكل صريح، أو قياسيًا<strong>(VARCHAR،</strong> <strong>INT،</strong> <strong>BOOLEAN،</strong> إلخ) أو متجهًا<strong>(FLOAT_VECTOR</strong>).</p>
 <p>يُنصح بالحفاظ على مخطط الهيكل بسيطًا من خلال تضمين الحقول التي ستستخدمها للاسترجاع أو العرض فقط. تجنب الانتفاخ بالبيانات الوصفية غير المستخدمة.</p>
 <h3 id="Set-the-max-capacity-thoughtfully" class="common-anchor-header">عيّن السعة القصوى بعناية<button data-href="#Set-the-max-capacity-thoughtfully" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -114,8 +114,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تعتبر الفهرسة إلزامية للحقول المتجهة، بما في ذلك كل من الحقول المتجهة في مجموعة وتلك المحددة في بنية. بالنسبة لحقول المتجهات في هيكل، يجب استخدام <code translate="no">HNSW</code> كنوع الفهرس و <code translate="no">MAX_SIM</code> سلسلة كنوع القياس.</p>
-<p>للحصول على تفاصيل حول جميع الحدود المطبقة، راجع <a href="/docs/ar/array-of-structs.md#Limits">الحدود</a>.</p>
+    </button></h3><p>تعد الفهرسة إلزامية للحقول المتجهة، بما في ذلك كل من الحقول المتجهة في مجموعة وتلك المحددة في بنية. بالنسبة للحقول المتجهة في هيكل، يجب استخدام <code translate="no">AUTOINDEX</code> أو <code translate="no">HNSW</code> كنوع الفهرس و <code translate="no">MAX_SIM</code> سلسلة كنوع القياس.</p>
+<p>للحصول على تفاصيل حول جميع الحدود القابلة للتطبيق، راجع <a href="/docs/ar/array-of-structs.md#Limits">الحدود</a>.</p>
 <h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">مثال واقعي: نمذجة مجموعة بيانات CoVLA للقيادة الذاتية<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -195,7 +195,7 @@ beta: Milvus 2.6.4+
 ├── ...
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك أن تجد أن بنية مجموعة بيانات CoVLA هرمية إلى حد كبير، حيث تقسم البيانات المجمعة إلى ملفات متعددة <code translate="no">.jsonl</code> ، إلى جانب مقاطع الفيديو بتنسيق <code translate="no">.mp4</code>.</p>
+<p>يمكنك أن تجد أن بنية مجموعة بيانات CoVLA هرمية للغاية، حيث تقسم البيانات المجمعة إلى عدة ملفات <code translate="no">.jsonl</code> ، إلى جانب مقاطع الفيديو بتنسيق <code translate="no">.mp4</code>.</p>
 <p>في Milvus، يمكنك استخدام حقل JSON أو حقل Array-of-Structs لإنشاء بنيات متداخلة داخل مخطط المجموعة. عندما تكون التضمينات المتجهة جزءًا من التنسيق المتداخل، يتم دعم حقل صفيف من البنى فقط. ومع ذلك، لا يمكن أن تحتوي بنية داخل مصفوفة في حد ذاتها على هياكل متداخلة أخرى. لتخزين مجموعة بيانات CoVLA مع الاحتفاظ بالعلاقات الأساسية، تحتاج إلى إزالة التسلسل الهرمي غير الضروري وتسوية البيانات بحيث تناسب مخطط مجموعة Milvus.</p>
 <p>يوضح الرسم البياني أدناه كيف يمكننا نمذجة مجموعة البيانات هذه باستخدام المخطط الموضح في المخطط التالي:</p>
 <p>
@@ -235,9 +235,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>للبدء، نحتاج إلى تهيئة المخطط الخاص بهيكل التسمية التوضيحية، وهيكل السيارات الأمامية، والمجموعة.</p>
 <ul>
 <li><p>تهيئة المخطط لهيكل التسمية التوضيحية.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -477,12 +475,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يجب فهرسة جميع الحقول المتجهة. لفهرسة حقول المتجهات في بنية عنصر، تحتاج إلى استخدام <code translate="no">HNSW</code> كنوع الفهرس ونوع مقياس السلسلة <code translate="no">MAX_SIM</code> لقياس التشابه بين قوائم التضمين.</p>
+    </button></h3><p>يجب فهرسة جميع الحقول المتجهة. لفهرسة حقول المتجهات في بنية عنصر، تحتاج إلى استخدام <code translate="no">AUTOINDEX</code> أو <code translate="no">HNSW</code> كنوع الفهرس ونوع مقياس السلسلة <code translate="no">MAX_SIM</code> لقياس أوجه التشابه بين قوائم التضمين.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -490,7 +488,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -498,7 +496,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}

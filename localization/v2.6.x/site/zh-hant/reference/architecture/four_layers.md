@@ -3,6 +3,7 @@ id: four_layers.md
 summary: Milvus 中的儲存/計算分解結構。
 title: 儲存/計算分解
 ---
+
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">儲存/計算分解<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,5 +119,5 @@ title: 儲存/計算分解
         ></path>
       </svg>
     </button></h2><ul>
-<li>閱讀「<a href="/docs/zh-hant/v2.6.x/main_components.md">主要元件</a>」，瞭解 Milvus 架構的更多詳細資訊。</li>
+<li>閱讀「<a href="/docs/zh-hant/main_components.md">主要元件</a>」，瞭解 Milvus 架構的更多詳細資訊。</li>
 </ul>

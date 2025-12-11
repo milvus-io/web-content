@@ -2,7 +2,7 @@
 id: timestamptz-field.md
 title: "TIMESTAMPTZ Field"
 summary: "Applications that track time across regions, such as e-commerce systems, collaboration tools, or distributed logging, need precise handling of timestamps with time zones. The TIMESTAMPTZ data type in Milvus provides this capability by storing timestamps with their associated time zone."
-beta: Milvus 2.6.4+
+beta: Milvus 2.6.6+
 ---
 
 # TIMESTAMPTZ Field
@@ -11,7 +11,7 @@ Applications that track time across regions, such as e-commerce systems, collabo
 
 ## What is a TIMESTAMPTZ field?
 
-A `TIMESTAMPTZ` field is a schema-defined data type (`DataType.TIMESTAMPTZ`) in Milvus that stores timestamps with explicit time zones:
+A `TIMESTAMPTZ` field is a schema-defined data type (`DataType.TIMESTAMPTZ`) in Milvus that processes time zone-aware input and stores all time points internally as UTC absolute time:
 
 - **Accepted input format**: [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) strings with a time-zone offset (for example, `"2025-05-01T23:59:59+08:00"` represents 11:59:59 PM in UTC+08:00).
 
@@ -330,105 +330,6 @@ You can use `INTERVAL` arithmetic directly in filter expressions, such as:
 
 </div>
 
-#### Extract timestamp elements
-
-You can extract specific components from `TIMESTAMPTZ` fields, such as the year, month, or day, by using the `time_fields` parameter in your query or search.
-
-The example below extracts the `year`, `month`, and `day` elements from each `TIMESTAMPTZ` field in the query results:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-results = client.query(
-    collection_name,
-    filter="id <= 10",
-    output_fields=["id", "tsz"],
-    # highlight-next-line
-    time_fields="year, month, day",
-    limit=2,
-)
-
-print("Query result: ", results)
-
-# Expected output:
-# Query result:  data: ["{'id': 1, 'tsz': [2024, 12, 31]}", "{'id': 2, 'tsz': [2025, 1, 1]}"]
-```
-
-```java
-// java
-```
-
-```javascript
-// nodejs
-```
-
-```go
-// go
-```
-
-```bash
-# restful
-```
-
-**Supported elements for extraction**
-
-<table>
-   <tr>
-     <th><p>Element</p></th>
-     <th><p>Description</p></th>
-     <th><p>Example output</p></th>
-   </tr>
-   <tr>
-     <td><p><code>year</code></p></td>
-     <td><p>Year component</p></td>
-     <td><p><code>2025</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>month</code></p></td>
-     <td><p>Month number</p></td>
-     <td><p><code>1</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>day</code></p></td>
-     <td><p>Day of month</p></td>
-     <td><p><code>3</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>hour</code></p></td>
-     <td><p>Hour (0–23)</p></td>
-     <td><p><code>14</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>minute</code></p></td>
-     <td><p>Minute</p></td>
-     <td><p><code>30</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>second</code></p></td>
-     <td><p>Second</p></td>
-     <td><p><code>5</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>microsecond</code></p></td>
-     <td><p>Microsecond</p></td>
-     <td><p><code>123456</code></p></td>
-   </tr>
-</table>
-
-<div class="alert note">
-
-- The parameter `time_fields` is a comma-separated string (for example, `"year, month, day"`).
-
-- The result is returned as an array of extracted components (for example, `[2024, 12, 31]`).
-
-</div>
-
 #### Search with timestamp filtering
 
 You can combine `TIMESTAMPTZ` filtering with vector similarity search to narrow results by both time and similarity.
@@ -499,13 +400,13 @@ You can control the time zone for `TIMESTAMPTZ` fields at the **database**, **co
    </tr>
    <tr>
      <td><p>Database</p></td>
-     <td><p><code>database.timezone</code></p></td>
+     <td><p><code>timezone</code></p></td>
      <td><p>Default for all collections in the database</p></td>
      <td><p>Lowest</p></td>
    </tr>
    <tr>
      <td><p>Collection</p></td>
-     <td><p><code>collection.timezone</code></p></td>
+     <td><p><code>timezone</code></p></td>
      <td><p>Overrides the database default time zone setting for that collection</p></td>
      <td><p>Medium</p></td>
    </tr>
@@ -533,4 +434,4 @@ For step-by-step instructions and code samples, refer to the dedicated pages:
 
 By default, queries on `TIMESTAMPTZ` fields without an index will perform a full scan of all rows, which can be slow on large datasets. To accelerate timestamp queries, create an `STL_SORT` index on your `TIMESTAMPTZ` field.
 
-For details, refer to [STL_SORT](https://zilliverse.feishu.cn/wiki/YBYmwvx68iMKFRknytJccwk0nPf).
+For details, refer to [STL_SORT](stl-sort.md).

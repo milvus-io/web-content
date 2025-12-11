@@ -127,7 +127,7 @@ Once you have installed Docker Desktop on Microsoft Windows, you can access the 
 
     ```powershell
     # Download the configuration file and rename it as docker-compose.yml​
-    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.5/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.7/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
     ​
     # Start Milvus​
     C:\>docker compose up -d​
@@ -163,7 +163,7 @@ The procedure is similar to using Docker Compose to install Milvus in Linux syst
 2. Download the Milvus configuration file.​
 
     ```shell
-    $ wget https://github.com/milvus-io/milvus/releases/download/v2.6.5/milvus-standalone-docker-compose.yml -O docker-compose.yml​
+    $ wget https://github.com/milvus-io/milvus/releases/download/v2.6.7/milvus-standalone-docker-compose.yml -O docker-compose.yml​
 
     ```
 

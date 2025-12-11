@@ -40,7 +40,7 @@ beta: Milvus 2.6.4+
     </button></h2><p>自律走行からマルチモーダル検索に至るまで、現代のAIアプリケーションは、ネスト化された異種データにますます依存しています。従来のフラットなデータモデルでは、<strong>「1つのドキュメントに多数の注釈が付けられたチャンク</strong>」や<strong>「1つの運転シーンに複数の観察された操作</strong>」といった複雑な関係を表現するのに苦労する。そこでMilvusのArray of Structsデータ型が威力を発揮します。</p>
 <p>Array of Structsでは、構造化された要素の順序付きセットを格納することができ、各Structはスカラーフィールドとベクトル埋め込みを独自に組み合わせて格納します。そのため、以下のような用途に最適です：</p>
 <ul>
-<li><p><strong>階層的なデータ</strong>：階層型データ：複数の子レコードを持つ親エンティティ。例えば、多くのテキストチャンクを持つ書籍や、多くのアノテーションフレームを持つ動画など。</p></li>
+<li><p><strong>階層データ</strong>：階層的データ：複数の子レコードを持つ親エンティティ。例えば、多くのテキストチャンクを持つ書籍や、多くのアノテーションフレームを持つ動画など。</p></li>
 <li><p><strong>マルチモーダル埋め込み</strong>：各構造体は、メタデータとともに、テキスト埋め込みと画像埋め込みなど、複数のベクトルを保持できる。</p></li>
 <li><p><strong>時系列データまたはシーケンシャルデータ</strong>：ArrayフィールドのStructは、時系列またはステップバイステップのイベントを自然に表現します。</p></li>
 </ul>
@@ -78,7 +78,7 @@ beta: Milvus 2.6.4+
       </svg>
     </button></h3><p>コレクションに Array フィールドを追加する前に、内部の Struct スキーマを定義します。構造体の各フィールドは、スカラー<strong>（VARCHAR</strong>、<strong>INT</strong>、<strong>BOOLEAN</strong> など）またはベクトル<strong>（FLOAT_VECTOR</strong>）で明示的に型付けする必要があります。</p>
 <p>Struct スキーマには、検索や表示に使用するフィールドのみを含めるようにして、無駄のないスキーマを維持することをお勧めします。未使用のメタデータで肥大化しないようにしましょう。</p>
-<h3 id="Set-the-max-capacity-thoughtfully" class="common-anchor-header">最大容量は慎重に設定しましょう<button data-href="#Set-the-max-capacity-thoughtfully" class="anchor-icon" translate="no">
+<h3 id="Set-the-max-capacity-thoughtfully" class="common-anchor-header">最大容量は慎重に設定する<button data-href="#Set-the-max-capacity-thoughtfully" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +94,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><p>各Arrayフィールドには、各エンティティに対してArrayフィールドが保持できる要素の最大数を指定する属性があります。これは、ユースケースの上限に基づいて設定します。たとえば、ドキュメントごとに1,000個のテキストチャンクがあるとか、運転シーンごとに100個のマニューバーがあるとします。</p>
-<p>値が高すぎるとメモリを浪費するため、Array フィールドの Structs の最大数を決定するための計算が必要になります。</p>
+<p>値が高すぎるとメモリを浪費するので、Array フィールドの Structs の最大数を決定するための計算が必要になります。</p>
 <h3 id="Index-vector-fields-in-Structs" class="common-anchor-header">ベクトルフィールドのインデックス<button data-href="#Index-vector-fields-in-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,7 +110,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクション内のベクトルフィールドとStructで定義されたベクトルフィールドの両方を含め、ベクトルフィールドのインデックス付けは必須です。Struct 内のベクトル・フィールドでは、インデックス・タイプに<code translate="no">HNSW</code> を、メトリック・タイプに<code translate="no">MAX_SIM</code> series を使用する必要があります。</p>
+    </button></h3><p>コレクション内のベクトルフィールドと Struct 内で定義されたベクトルフィールドの両方を含め、ベクトルフィールドにはインデクシングが必須です。Struct 内のベクトル・フィールドでは、<code translate="no">AUTOINDEX</code> または<code translate="no">HNSW</code> をインデックス・タイプとして、<code translate="no">MAX_SIM</code> 系列をメトリック・タイプとして使用する必要があります。</p>
 <p>適用可能なすべてのリミットの詳細については、<a href="/docs/ja/array-of-structs.md#Limits">リミットを</a>参照してください。</p>
 <h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">実際の例自律走行のためのCoVLAデータセットのモデリング<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -231,9 +231,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>手始めに、caption Struct、front_cars Struct、コレクションのスキーマを初期化する必要がある。</p>
 <ul>
 <li><p>Caption Struct のスキーマを初期化する。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -473,12 +471,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>すべてのベクトルフィールドにインデックスを付ける必要があります。要素 Struct 内のベクトルフィールドにインデックスを付けるには、<code translate="no">HNSW</code> をインデックスタイプとして使用し、<code translate="no">MAX_SIM</code> 系列メトリックタイプを使用して埋め込みリスト間の類似度を測定する必要があります。</p>
+    </button></h3><p>すべてのベクトルフィールドにインデックスを付ける必要があります。要素 Struct 内のベクトルフィールドにインデックスを付けるには、インデックスタイプとして<code translate="no">AUTOINDEX</code> または<code translate="no">HNSW</code> を使用し、埋め込みリスト間の類似度を測定するために<code translate="no">MAX_SIM</code> 系のメトリックタイプを使用する必要があります。</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -486,7 +484,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -494,7 +492,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}

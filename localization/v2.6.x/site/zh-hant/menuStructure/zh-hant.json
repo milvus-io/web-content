@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "基準",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "比較",
         "id": "comparison.md",
         "order": 5,
@@ -328,7 +322,7 @@
             "children": []
           },
           {
-            "label": "檢視館藏",
+            "label": "檢視收藏集",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -465,6 +459,12 @@
             "label": "幾何領域",
             "id": "geometry-field.md",
             "order": 10,
+            "children": []
+          },
+          {
+            "label": "TIMESTAMPTZ 欄位",
+            "id": "timestamptz-field.md",
+            "order": 11,
             "children": []
           },
           {
@@ -865,6 +865,12 @@
                 "id": "rtree.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1085,7 +1091,7 @@
                 "children": []
               },
               {
-                "label": "航程 AI",
+                "label": "Voyage AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1431,7 +1437,7 @@
             "children": []
           },
           {
-            "label": "飛行中",
+            "label": "在飛行中",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
@@ -1869,38 +1875,6 @@
             "label": "使用指南",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Milvus CDC",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "概述",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "部署 CDC 伺服器",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "管理 CDC 任務",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "監控",
-            "id": "cdc-monitoring.md",
-            "order": 3,
             "children": []
           }
         ]
@@ -2358,7 +2332,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格舞曲",
+            "label": "拉格",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []

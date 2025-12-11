@@ -2,6 +2,7 @@
 id: glossary.md
 title: 용어
 ---
+
 <h1 id="Terminology" class="common-anchor-header">용어<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +81,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ko/v2.6.x/birdwatcher_overview.md">Birdwatcher는</a> Milvus용 디버깅 도구로, etcd에 연결하여 Milvus 서버의 상태를 모니터링하고 실시간으로 조정할 수 있습니다. 또한 etcd 파일 백업을 지원하여 개발자의 문제 해결을 돕습니다.</p>
+    </button></h2><p><a href="/docs/ko/birdwatcher_overview.md">Birdwatcher는</a> Milvus용 디버깅 도구로, etcd에 연결하여 Milvus 서버의 상태를 모니터링하고 실시간으로 조정할 수 있습니다. 또한 etcd 파일 백업을 지원하여 개발자의 문제 해결을 돕습니다.</p>
 <h2 id="Bulk-Writer" class="common-anchor-header">벌크 라이터<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,7 +145,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 스트리밍 서비스 아키텍처의 일부로 <a href="#pchannel">PC채널과</a> <a href="#vchannel">V채널이라는</a> 두 가지 유형의 채널을 활용합니다. 각 PC채널은 <a href="/docs/ko/v2.6.x/woodpecker_architecture.md">우드페커가</a> 관리하는 WAL 스트림에 해당하며, 각 V채널은 컬렉션의 샤드에 해당합니다. 스트리밍 서비스는 이러한 채널을 관리하여 데이터 일관성과 장애 복구를 보장합니다.</p>
+    </button></h2><p>Milvus는 스트리밍 서비스 아키텍처의 일부로 <a href="#pchannel">PC채널과</a> <a href="#vchannel">V채널이라는</a> 두 가지 유형의 채널을 활용합니다. 각 PC채널은 <a href="/docs/ko/woodpecker_architecture.md">우드페커가</a> 관리하는 WAL 스트림에 해당하며, 각 V채널은 컬렉션의 샤드에 해당합니다. 스트리밍 서비스는 이러한 채널을 관리하여 데이터 일관성과 장애 복구를 보장합니다.</p>
 <h2 id="Collection" class="common-anchor-header">컬렉션<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +161,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 컬렉션은 관계형 데이터베이스 관리 시스템(RDBMS)의 테이블에 해당합니다. 컬렉션은 엔티티를 저장하고 관리하는 데 사용되는 주요 논리적 객체입니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/manage-collections.md">컬렉션 관리를</a> 참조하세요.</p>
+    </button></h2><p>Milvus에서 컬렉션은 관계형 데이터베이스 관리 시스템(RDBMS)의 테이블에 해당합니다. 컬렉션은 엔티티를 저장하고 관리하는 데 사용되는 주요 논리적 객체입니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md">컬렉션 관리를</a> 참조하세요.</p>
 <h2 id="Dependency" class="common-anchor-header">종속성<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +193,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>동적 스키마를 사용하면 기존 스키마를 수정하지 않고도 새 필드가 있는 엔티티를 컬렉션에 삽입할 수 있습니다. 즉, 컬렉션의 전체 스키마를 몰라도 데이터를 삽입할 수 있으며 아직 정의되지 않은 필드를 포함할 수 있습니다. 컬렉션을 만들 때 동적 필드를 활성화하여 이 스키마 없는 기능을 활성화할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/enable-dynamic-field.md">동적 필드 활성화를</a> 참조하세요.</p>
+    </button></h2><p>동적 스키마를 사용하면 기존 스키마를 수정하지 않고도 새 필드가 있는 엔티티를 컬렉션에 삽입할 수 있습니다. 즉, 컬렉션의 전체 스키마를 몰라도 데이터를 삽입할 수 있으며 아직 정의되지 않은 필드를 포함할 수 있습니다. 컬렉션을 만들 때 동적 필드를 활성화하여 이 스키마 없는 기능을 활성화할 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드 활성화를</a> 참조하세요.</p>
 <h2 id="Embeddings" class="common-anchor-header">임베딩<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +226,7 @@ title: 용어
         ></path>
       </svg>
     </button></h2><p>엔티티는 실제 객체를 나타내는 필드 그룹으로 구성됩니다. Milvus의 각 엔티티는 고유한 기본 키로 표시됩니다.</p>
-<p>기본 키를 사용자 지정할 수 있습니다. 수동으로 구성하지 않으면 Milvus가 자동으로 기본 키를 엔티티에 할당합니다. 기본 키를 사용자 지정하도록 선택하는 경우 현재 Milvus는 기본 키 중복 제거를 지원하지 않는다는 점에 유의하세요. 따라서 동일한 컬렉션에 중복된 기본 키가 있을 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/insert-update-delete.md#Insert-entities">엔티티 삽입을</a> 참조하세요.</p>
+<p>기본 키를 사용자 지정할 수 있습니다. 수동으로 구성하지 않으면 Milvus가 자동으로 기본 키를 엔티티에 할당합니다. 기본 키를 사용자 지정하도록 선택하는 경우 현재 Milvus는 기본 키 중복 제거를 지원하지 않는다는 점에 유의하세요. 따라서 동일한 컬렉션에 중복된 기본 키가 있을 수 있습니다. 자세한 내용은 <a href="/docs/ko/insert-update-delete.md#Insert-entities">엔티티 삽입을</a> 참조하세요.</p>
 <h2 id="Field" class="common-anchor-header">필드<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,7 +274,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>필터링된 검색은 벡터 검색에 스칼라 필터를 적용하여 특정 기준에 따라 검색 결과를 세분화할 수 있도록 합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/single-vector-search.md#Filtered-search">필터링된 검색을</a> 참조하세요.</p>
+    </button></h2><p>필터링된 검색은 벡터 검색에 스칼라 필터를 적용하여 특정 기준에 따라 검색 결과를 세분화할 수 있도록 합니다. 자세한 내용은 <a href="/docs/ko/single-vector-search.md#Filtered-search">필터링된 검색을</a> 참조하세요.</p>
 <h2 id="Hybrid-search" class="common-anchor-header">하이브리드 검색<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +290,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">하이브리드 검색</a> 은 Milvus 2.4.0부터 하이브리드 검색을 위한 API입니다. 여러 벡터 필드를 검색하고 이를 융합할 수 있습니다. 스칼라 필드 필터링과 결합된 벡터 검색의 경우 "필터링된 검색"이라고 합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">하이브리드 검색</a> 은 Milvus 2.4.0부터 하이브리드 검색을 위한 API입니다. 여러 벡터 필드를 검색하고 이를 융합할 수 있습니다. 스칼라 필드 필터링과 결합된 벡터 검색의 경우 "필터링된 검색"이라고 합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
 <h2 id="Index" class="common-anchor-header">색인<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -391,7 +392,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MemoryBuffer는 메모리에 들어오는 쓰기를 일시적으로 버퍼링하고 주기적으로 클라우드 오브젝트 스토리지로 플러시하는 Woodpecker의 경량 배포 모드입니다. 이 모드는 성능보다 단순성을 우선시하는 소규모 배포 또는 프로덕션 환경의 일괄 처리량이 많은 워크로드에 가장 적합합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
+    </button></h2><p>MemoryBuffer는 메모리에 들어오는 쓰기를 일시적으로 버퍼링하고 주기적으로 클라우드 오브젝트 스토리지로 플러시하는 Woodpecker의 경량 배포 모드입니다. 이 모드는 성능보다 단순성을 우선시하는 소규모 배포 또는 프로덕션 환경의 일괄 처리량이 많은 워크로드에 가장 적합합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
 <h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -519,7 +520,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 2.4.0부터 하나의 컬렉션에 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
+    </button></h2><p>Milvus는 2.4.0부터 하나의 컬렉션에 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
 <h2 id="Partition" class="common-anchor-header">파티션<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -567,7 +568,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PC채널은 물리적 채널을 의미합니다. 각 PChannel은 우드페커에서 관리하는 WAL 스트림에 해당합니다. 기본적으로 Milvus 클러스터가 시작될 때 데이터 삽입, 삭제 및 업데이트를 기록하는 로그를 저장하기 위해 PC채널 그룹이 할당됩니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
+    </button></h2><p>PC채널은 물리적 채널을 의미합니다. 각 PChannel은 우드페커에서 관리하는 WAL 스트림에 해당합니다. 기본적으로 Milvus 클러스터가 시작될 때 데이터 삽입, 삭제 및 업데이트를 기록하는 로그를 저장하기 위해 PC채널 그룹이 할당됩니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -615,7 +616,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>쿼럼버퍼는 실시간 응답성과 강력한 내결함성이 모두 필요한 지연 시간에 민감하고 빈도가 높은 읽기/쓰기 워크로드를 위해 설계된 Woodpecker의 배포 모드입니다. 3개의 복제본 쿼럼 쓰기를 통해 고속 쓰기 버퍼로 작동하여 강력한 일관성과 고가용성을 보장합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
+    </button></h2><p>쿼럼버퍼는 실시간 응답성과 강력한 내결함성이 모두 필요한 지연 시간에 민감하고 빈도가 높은 읽기/쓰기 워크로드를 위해 설계된 Woodpecker의 배포 모드입니다. 3개의 복제본 쿼럼 쓰기를 통해 고속 쓰기 버퍼로 작동하여 강력한 일관성과 고가용성을 보장합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
 <h2 id="Range-search" class="common-anchor-header">범위 검색<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -745,7 +746,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>스트리밍 서비스는 다양한 스트리밍 관련 기능을 지원하기 위해 WAL(Write-Ahead Log)을 중심으로 구축된 Milvus 내부 스트리밍 시스템 모듈의 개념입니다. 여기에는 스트리밍 데이터 수집/구독, 클러스터 상태의 장애 복구, 스트리밍 데이터를 히스토리 데이터로 변환, 데이터 쿼리 증가 등이 포함됩니다. 이 서비스는 스트리밍 코디네이터, 스트리밍 노드 클러스터, 스트리밍 클라이언트 구성 요소로 구성되어 있습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
+    </button></h2><p>스트리밍 서비스는 다양한 스트리밍 관련 기능을 지원하기 위해 WAL(Write-Ahead Log)을 중심으로 구축된 Milvus 내부 스트리밍 시스템 모듈의 개념입니다. 여기에는 스트리밍 데이터 수집/구독, 클러스터 상태의 장애 복구, 스트리밍 데이터를 히스토리 데이터로 변환, 데이터 쿼리 증가 등이 포함됩니다. 이 서비스는 스트리밍 코디네이터, 스트리밍 노드 클러스터, 스트리밍 클라이언트 구성 요소로 구성되어 있습니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
 <h2 id="Unstructured-data" class="common-anchor-header">비정형 데이터<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -777,7 +778,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VChannel은 가상 채널을 의미합니다. 각 V채널은 컬렉션의 샤드를 나타냅니다. 각 컬렉션에는 데이터 삽입, 삭제, 업데이트를 기록하기 위한 V채널 그룹이 할당됩니다. V채널은 논리적으로 분리되어 있지만 스트리밍 서비스를 통해 물리적으로 리소스를 공유합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
+    </button></h2><p>VChannel은 가상 채널을 의미합니다. 각 V채널은 컬렉션의 샤드를 나타냅니다. 각 컬렉션에는 데이터 삽입, 삭제, 업데이트를 기록하기 위한 V채널 그룹이 할당됩니다. V채널은 논리적으로 분리되어 있지만 스트리밍 서비스를 통해 물리적으로 리소스를 공유합니다. 자세한 내용은 <a href="/docs/ko/streaming_service.md">스트리밍 서비스를</a> 참조하세요.</p>
 <h2 id="Vector" class="common-anchor-header">벡터<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -809,7 +810,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>WAL(Write-Ahead Log) 스토리지는 분산 시스템에서 데이터 내구성과 일관성을 위한 기초입니다. 변경 사항이 커밋되기 전에 먼저 로그에 기록되므로 장애 발생 시 중단된 지점에서 정확히 복구할 수 있습니다. Milvus는 메모리버퍼와 쿼럼버퍼 모드를 모두 지원하는 Woodpecker를 WAL 스토리지 시스템으로 사용합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/woodpecker_architecture.md">우드페커 아키텍처를</a> 참조하세요.</p>
+    </button></h2><p>WAL(Write-Ahead Log) 스토리지는 분산 시스템에서 데이터 내구성과 일관성을 위한 기초입니다. 변경 사항이 커밋되기 전에 먼저 로그에 기록되므로 장애 발생 시 중단된 지점에서 정확히 복구할 수 있습니다. Milvus는 메모리버퍼와 쿼럼버퍼 모드를 모두 지원하는 Woodpecker를 WAL 스토리지 시스템으로 사용합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">우드페커 아키텍처를</a> 참조하세요.</p>
 <h2 id="Woodpecker" class="common-anchor-header">우드페커<button data-href="#Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -825,7 +826,7 @@ title: 용어
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>우드페커는 Milvus 2.6의 클라우드 네이티브 WAL 시스템으로, 카프카와 펄서를 대체합니다. 제로 디스크 아키텍처와 두 가지 배포 모드(MemoryBuffer와 쿼럼버퍼)를 통해 높은 처리량, 낮은 운영 오버헤드, 오브젝트 스토리지에 대한 원활한 확장성을 제공합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
+    </button></h2><p>우드페커는 Milvus 2.6의 클라우드 네이티브 WAL 시스템으로, 카프카와 펄서를 대체합니다. 제로 디스크 아키텍처와 두 가지 배포 모드(MemoryBuffer와 쿼럼버퍼)를 통해 높은 처리량, 낮은 운영 오버헤드, 오브젝트 스토리지에 대한 원활한 확장성을 제공합니다. 자세한 내용은 <a href="/docs/ko/woodpecker_architecture.md">딱따구리 아키텍처를</a> 참조하세요.</p>
 <h2 id="Zilliz-Cloud" class="common-anchor-header">질리즈 클라우드<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

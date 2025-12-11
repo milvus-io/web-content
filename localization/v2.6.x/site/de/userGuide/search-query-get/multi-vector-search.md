@@ -37,7 +37,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Arbeitsablauf der hybriden Suche</span> </span></p>
 <p>Die Multi-Vektor-Hybridsuche integriert verschiedene Suchmethoden oder überspannt Einbettungen aus verschiedenen Modalitäten:</p>
 <ul>
-<li><p><strong>Sparse-Dense Vector Search</strong>: <a href="/docs/de/dense-vector.md">Dense Vectors</a> eignen sich hervorragend für die Erfassung semantischer Beziehungen, während <a href="/docs/de/sparse_vector.md">Sparse Vectors</a> sehr effektiv für den präzisen Abgleich von Schlüsselwörtern sind. Die hybride Suche kombiniert diese Ansätze, um sowohl ein breites konzeptionelles Verständnis als auch eine exakte Begriffsrelevanz zu gewährleisten und so die Suchergebnisse zu verbessern. Durch die Nutzung der Stärken der einzelnen Methoden überwindet die hybride Suche die Einschränkungen der einzelnen Ansätze und bietet eine bessere Leistung bei komplexen Abfragen. Hier finden Sie einen detaillierten <a href="/docs/de/full_text_search_with_milvus.md">Leitfaden</a> zur hybriden Suche, die die semantische Suche mit der Volltextsuche kombiniert.</p></li>
+<li><p><strong>Sparse-Dense Vector Search</strong>: <a href="/docs/de/dense-vector.md">Dense Vectors</a> eignen sich hervorragend für die Erfassung semantischer Beziehungen, während <a href="/docs/de/sparse_vector.md">Sparse Vectors</a> sehr effektiv für den präzisen Abgleich von Schlüsselwörtern sind. Die hybride Suche kombiniert diese Ansätze, um sowohl ein umfassendes konzeptionelles Verständnis als auch eine exakte Begriffsrelevanz zu gewährleisten und so die Suchergebnisse zu verbessern. Durch die Nutzung der Stärken der einzelnen Methoden überwindet die hybride Suche die Einschränkungen der einzelnen Ansätze und bietet eine bessere Leistung bei komplexen Suchanfragen. Hier finden Sie einen detaillierten <a href="/docs/de/full_text_search_with_milvus.md">Leitfaden</a> zur hybriden Suche, die die semantische Suche mit der Volltextsuche kombiniert.</p></li>
 <li><p><strong>Multimodale Vektorsuche</strong>: Die multimodale Vektorsuche ist eine leistungsstarke Technik, mit der Sie verschiedene Datentypen durchsuchen können, darunter Text, Bilder, Audio und andere. Der Hauptvorteil dieses Ansatzes ist die Fähigkeit, verschiedene Modalitäten zu einer nahtlosen und kohärenten Sucherfahrung zu vereinen. Bei der Produktsuche kann ein Benutzer beispielsweise eine Textabfrage eingeben, um Produkte zu finden, die sowohl mit Text als auch mit Bildern beschrieben sind. Durch die Kombination dieser Modalitäten mittels einer hybriden Suchmethode können Sie die Suchgenauigkeit verbessern oder die Suchergebnisse anreichern.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Beispiel<button data-href="#Example" class="anchor-icon" translate="no">
@@ -1006,4 +1006,45 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Die Ausgabe sieht folgendermaßen aus:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit dem Parameter <code translate="no">limit=2</code>, der für die hybride Suche angegeben wurde, ordnet Milvus die sechs Ergebnisse aus den drei Suchvorgängen neu an. Letztendlich werden nur die beiden ähnlichsten Ergebnisse zurückgegeben.</p>
+<p>Mit dem Parameter <code translate="no">limit=2</code>, der für die Hybrid Search angegeben wurde, ordnet Milvus die sechs Ergebnisse aus den drei Suchvorgängen neu an. Letztendlich werden nur die beiden ähnlichsten Ergebnisse zurückgegeben.</p>
+<h2 id="Advanced-usage" class="common-anchor-header">Erweiterte Verwendung<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Vorübergehend eine Zeitzone für eine hybride Suche festlegen<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wenn Ihre Sammlung ein Feld <code translate="no">TIMESTAMPTZ</code> hat, können Sie die Standardzeitzone der Datenbank oder Sammlung für einen einzelnen Vorgang vorübergehend außer Kraft setzen, indem Sie den Parameter <code translate="no">timezone</code> im Aufruf der Hybridsuche setzen. Dies steuert, wie <code translate="no">TIMESTAMPTZ</code> Werte während des Vorgangs angezeigt und verglichen werden.</p>
+<p>Der Wert von <code translate="no">timezone</code> muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p>
+<p>Das folgende Beispiel zeigt, wie eine Zeitzone für einen hybriden Suchvorgang vorübergehend festgelegt wird:</p>
+<pre><code translate="no" class="language-python">res = client.hybrid_search(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    reqs=reqs,
+    ranker=ranker,
+    limit=<span class="hljs-number">2</span>,
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>

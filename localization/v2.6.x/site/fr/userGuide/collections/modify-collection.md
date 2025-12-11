@@ -179,10 +179,14 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
-     <td><p>Permet ou non à une collection d'accepter des valeurs de clé primaire fournies par l'utilisateur lorsque l'option AutoID a été activée pour la collection.</p><ul><li><p>Lorsque la valeur est <strong>"true"</strong>: Les insertions, les insertions ultérieures et les importations en bloc utilisent la clé primaire fournie par l'utilisateur si elle est présente ; sinon, les valeurs de clé primaire sont générées automatiquement.</p></li><li><p>Si la valeur est <strong>"false" (faux)</strong>, les valeurs de clé primaire fournies par l'utilisateur sont générées automatiquement : Les valeurs de clé primaire fournies par l'utilisateur sont rejetées ou ignorées et les valeurs de clé primaire sont toujours générées automatiquement. La valeur par défaut est <strong>"false"</strong>.</p></li></ul></td>
+     <td><p>Permet à une collection d'accepter des valeurs de clé primaire fournies par l'utilisateur lorsque l'option AutoID a été activée pour la collection.</p><ul><li><p>Lorsque la valeur est <strong>"true"</strong>: Les insertions, les insertions ultérieures et les importations en bloc utilisent la clé primaire fournie par l'utilisateur si elle est présente ; sinon, les valeurs de clé primaire sont générées automatiquement.</p></li><li><p>Si la valeur est <strong>"false" (faux)</strong>, les valeurs de clé primaire fournies par l'utilisateur sont générées automatiquement : Les valeurs de clé primaire fournies par l'utilisateur sont rejetées ou ignorées et les valeurs de clé primaire sont toujours générées automatiquement. La valeur par défaut est <strong>"false"</strong>.</p></li></ul></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">timezone</code></p></td>
+     <td><p>Spécifie le fuseau horaire par défaut pour cette collection lors de la manipulation d'opérations sensibles au temps, en particulier les champs <code translate="no">TIMESTAMPTZ</code>. Les horodatages sont stockés en interne en UTC et Milvus convertit les valeurs pour l'affichage et la comparaison en fonction de ce paramètre. S'il est défini, le fuseau horaire de la collection remplace le fuseau horaire par défaut de la base de données ; le paramètre de fuseau horaire d'une requête peut temporairement remplacer les deux. La valeur doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide (par exemple, <strong>Asie/Shanghai</strong>, <strong>Amérique/Chicago</strong> ou <strong>UTC</strong>). Pour plus d'informations sur l'utilisation du champ <code translate="no">TIMESTAMPTZ</code>, reportez-vous à la rubrique <a href="/docs/fr/timestamptz-field.md">Champ TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
-<h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Exemple 1 : Définir le TTL d'une collection<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Exemple 1 : définir le TTL d'une collection<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -483,7 +487,61 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-Collection-Properties" class="common-anchor-header">Abandonner les propriétés d'une collection<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+<h3 id="Example-6-Set-collection-time-zone" class="common-anchor-header">Exemple 6 : Définir le fuseau horaire de la collecte<button data-href="#Example-6-Set-collection-time-zone" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous pouvez définir un fuseau horaire par défaut pour votre collection à l'aide de la propriété <code translate="no">timezone</code>. Celle-ci détermine la manière dont les données temporelles sont interprétées et affichées pour toutes les opérations au sein de la collection, y compris l'insertion de données, l'interrogation et la présentation des résultats.</p>
+<p>La valeur de <code translate="no">timezone</code> doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide, tel que <code translate="no">Asia/Shanghai</code>, <code translate="no">America/Chicago</code> ou <code translate="no">UTC</code>. L'utilisation d'une valeur non valide ou non standard entraînera une erreur lors de la modification de la propriété de la collection.</p>
+<p>L'exemple ci-dessous montre comment définir le fuseau horaire de la collection sur <strong>Asia/Shanghai</strong>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;timezone&quot;</span>: <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>);
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(common.CollectionDefaultTimezone, <span class="hljs-literal">true</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+      &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-Collection-Properties" class="common-anchor-header">Abandonner des propriétés de collection<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

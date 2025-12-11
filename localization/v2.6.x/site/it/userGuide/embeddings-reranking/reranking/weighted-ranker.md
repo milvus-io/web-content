@@ -281,7 +281,7 @@ summary: >-
       </svg>
     </button></h3><p>Ad esempio, supponiamo che in una ricerca ibrida vi siano due richieste di ricerca ANN di base: ricerca di testo e ricerca di immagini. Se la ricerca di testo è considerata più importante, ad essa dovrebbe essere assegnato un peso maggiore.</p>
 <div class="alert note">
-<p>Milvus 2.6.x e successive permettono di configurare le strategie di reranking direttamente tramite l'API <code translate="no">Function</code>. Se si utilizza una versione precedente (prima della v2.6.0), consultare la documentazione sul <a href="https://milvus.io/docs/v2.5.x/reranking.md#Usage-of-WeightedRanker">reranking</a> per le istruzioni di configurazione.</p>
+<p>Milvus 2.6.x e successive consentono di configurare le strategie di reranking direttamente tramite l'API <code translate="no">Function</code>. Se si utilizza una versione precedente (prima della v2.6.0), consultare la documentazione sul <a href="https://milvus.io/docs/v2.5.x/reranking.md#Usage-of-WeightedRanker">reranking</a> per le istruzioni di configurazione.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -304,8 +304,9 @@ rerank = Function(
 CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
                 .name(<span class="hljs-string">&quot;weight&quot;</span>)
                 .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;weights\&quot;: [0.1, 0.6], \&quot;norm_score\&quot;: true}&quot;</span>)
+                .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
+                .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.1, 0.9]&quot;</span>)
+                .param(<span class="hljs-string">&quot;norm_score&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
                 .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
@@ -347,7 +348,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Sì</p></td>
-     <td><p>Il tipo di Funzione da invocare; usare <code translate="no">RERANK</code> per specificare una strategia di reranking</p></td>
+     <td><p>Il tipo di Funzione da invocare; utilizzare <code translate="no">RERANK</code> per specificare una strategia di reranking</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>

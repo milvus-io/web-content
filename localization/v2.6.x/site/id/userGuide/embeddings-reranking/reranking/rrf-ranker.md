@@ -179,43 +179,43 @@ summary: >-
 <td><p>101</p></td>
 <td><p>1</p></td>
 <td><p>2</p></td>
-<td><p>1/(60+1)+1/(60+2) = 0.01639</p></td>
+<td><p>1/(60+1)+1/(60+2) = 0.03252247</p></td>
 </tr>
 <tr>
 <td><p>198</p></td>
 <td><p>4</p></td>
 <td><p>1</p></td>
-<td><p>1/(60+4)+1/(60+1) = 0.01593</p></td>
+<td><p>1/(60+4)+1/(60+1) = 0.03201844</p></td>
 </tr>
 <tr>
 <td><p>175</p></td>
 <td><p>5</p></td>
 <td><p>4</p></td>
-<td><p>1/(60+5)+1/(60+4) = 0.01554</p></td>
+<td><p>1/(60+5)+1/(60+4) = 0.03100962</p></td>
 </tr>
 <tr>
 <td><p>203</p></td>
 <td><p>2</p></td>
 <td><p>N/A</p></td>
-<td><p>1/(60+2) = 0.01613</p></td>
+<td><p>1/(60+2) = 0.01612903</p></td>
 </tr>
 <tr>
 <td><p>150</p></td>
 <td><p>3</p></td>
 <td><p>N/A</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>110</p></td>
 <td><p>N/A</p></td>
 <td><p>3</p></td>
-<td><p>1/(60+3) = 0.01587</p></td>
+<td><p>1/(60+3) = 0.01587302</p></td>
 </tr>
 <tr>
 <td><p>250</p></td>
 <td><p>N/A</p></td>
 <td><p>5</p></td>
-<td><p>1/(60+5) = 0.01554</p></td>
+<td><p>1/(60+5) = 0.01538462</p></td>
 </tr>
 </table></p></li>
 <li><p>Hasil akhir setelah pemeringkatan ulang (topK = 5):: Hasil akhir</p>
@@ -228,27 +228,32 @@ summary: >-
 <tr>
 <td><p>1</p></td>
 <td><p>101</p></td>
-<td><p>0.01639</p></td>
+<td><p>0.03252247</p></td>
 </tr>
 <tr>
 <td><p>2</p></td>
-<td><p>203</p></td>
-<td><p>0.01613</p></td>
+<td><p>198</p></td>
+<td><p>0.03201844</p></td>
 </tr>
 <tr>
 <td><p>3</p></td>
-<td><p>198</p></td>
-<td><p>0.01593</p></td>
+<td><p>175</p></td>
+<td><p>0.03100962</p></td>
 </tr>
 <tr>
 <td><p>4</p></td>
+<td><p>203</p></td>
+<td><p>0.01612903</p></td>
+</tr>
+<tr>
+<td><p>5</p></td>
 <td><p>150</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 <tr>
 <td><p>5</p></td>
 <td><p>110</p></td>
-<td><p>0.01587</p></td>
+<td><p>0.01587302</p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -267,7 +272,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Saat menggunakan strategi pemeringkatan ulang RRF, Anda perlu mengonfigurasi parameter <code translate="no">k</code>. Ini adalah parameter perataan yang secara efektif dapat mengubah bobot relatif pencarian teks lengkap versus pencarian vektor. Nilai default dari parameter ini adalah 60, dan dapat disesuaikan dalam kisaran (0, 16384). Nilainya harus berupa angka floating-point. Nilai yang disarankan adalah antara [10, 100]. Meskipun <code translate="no">k=60</code> adalah pilihan umum, nilai <code translate="no">k</code> yang optimal dapat bervariasi tergantung pada aplikasi dan kumpulan data spesifik Anda. Kami merekomendasikan untuk menguji dan menyesuaikan parameter ini berdasarkan kasus penggunaan spesifik Anda untuk mencapai kinerja terbaik.</p>
+    </button></h2><p>Saat menggunakan strategi pemeringkatan RRF, Anda perlu mengonfigurasi parameter <code translate="no">k</code>. Ini adalah parameter perataan yang secara efektif dapat mengubah bobot relatif pencarian teks lengkap versus pencarian vektor. Nilai default dari parameter ini adalah 60, dan dapat disesuaikan dalam kisaran (0, 16384). Nilainya harus berupa angka floating-point. Nilai yang disarankan adalah antara [10, 100]. Meskipun <code translate="no">k=60</code> adalah pilihan umum, nilai <code translate="no">k</code> yang optimal dapat bervariasi tergantung pada aplikasi dan kumpulan data spesifik Anda. Kami merekomendasikan untuk menguji dan menyesuaikan parameter ini berdasarkan kasus penggunaan spesifik Anda untuk mencapai kinerja terbaik.</p>
 <h3 id="Create-an-RRF-Ranker" class="common-anchor-header">Membuat Pemeringkat RRF<button data-href="#Create-an-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -304,11 +309,12 @@ ranker = Function(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rr</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
-                .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;k\&quot;: 100}&quot;</span>)
-                .build();
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -362,7 +368,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">params.k</code></p></td>
      <td><p>Tidak</p></td>
-     <td><p>Parameter penghalusan yang mengontrol dampak peringkat dokumen; <code translate="no">k</code> yang lebih tinggi mengurangi sensitivitas terhadap peringkat teratas. Rentang: (0, 16384); default: <code translate="no">60</code>.</p><p>Untuk detailnya, lihat <a href="/docs/id/rrf-ranker.md#Mechanism-of-RRF-Ranker">Mekanisme Pemeringkatan RRF</a>.</p></td>
+     <td><p>Parameter penghalusan yang mengontrol dampak peringkat dokumen; <code translate="no">k</code> yang lebih tinggi mengurangi sensitivitas terhadap peringkat teratas. Rentang: (0, 16384); default: <code translate="no">60</code>.</p><p>Untuk detailnya, lihat <a href="/docs/id/rrf-ranker.md#Mechanism-of-RRF-Ranker">Mekanisme Pemeringkat RRF</a>.</p></td>
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>

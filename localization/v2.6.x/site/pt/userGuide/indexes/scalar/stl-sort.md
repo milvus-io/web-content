@@ -3,8 +3,9 @@ id: stl-sort.md
 title: STL_SORT
 summary: >-
   O índice STL_SORT é um tipo de índice especificamente concebido para melhorar
-  o desempenho das consultas em campos numéricos (INT8, INT16, etc.) ou campos
-  TIMESTAMPTZ no Milvus, organizando os dados numa ordem ordenada.
+  o desempenho das consultas em campos numéricos (INT8, INT16, etc.), campos
+  VARCHAR ou campos TIMESTAMPTZ no Milvus, organizando os dados numa ordem
+  ordenada.
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O índice <code translate="no">STL_SORT</code> é um tipo de índice especificamente concebido para melhorar o desempenho das consultas em campos numéricos (INT8, INT16, etc.) ou em campos <code translate="no">TIMESTAMPTZ</code> no Milvus, organizando os dados por ordem de classificação.</p>
+    </button></h1><p>O índice <code translate="no">STL_SORT</code> é um tipo de índice especificamente concebido para melhorar o desempenho das consultas em campos numéricos (INT8, INT16, etc.), campos <code translate="no">VARCHAR</code> ou campos <code translate="no">TIMESTAMPTZ</code> no Milvus, organizando os dados numa ordem ordenada.</p>
 <p>Utilize o índice <code translate="no">STL_SORT</code> se executar frequentemente consultas com:</p>
 <ul>
 <li><p>Filtragem de comparação com os operadores <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, e <code translate="no">&lt;=</code> </p></li>
@@ -44,7 +45,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Campos numéricos (por exemplo, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). Para mais pormenores, consulte <a href="/docs/pt/number.md">Boolean &amp; Number</a>.</p></li>
-<li><p><code translate="no">TIMESTAMPTZ</code> campos de tempo. Para mais pormenores, consulte <a href="/docs/pt/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></li>
+<li><p><code translate="no">VARCHAR</code> Campos de cadeia de caracteres. Para mais pormenores, consulte <a href="/docs/pt/string.md">String Field</a>.</p></li>
+<li><p><code translate="no">TIMESTAMPTZ</code> fields. Para mais pormenores, consulte <a href="/docs/pt/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">Como funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -116,6 +118,29 @@ index_params = client.prepare_index_params()
 client.create_index(
     collection_name=<span class="hljs-string">&quot;tsz_demo&quot;</span>,
     index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-an-index" class="common-anchor-header">Eliminar um índice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Utilize o método <code translate="no">drop_index()</code> para remover um índice existente de uma coleção.</p>
+<div class="alert note">
+</div>
+<pre><code translate="no" class="language-python">client.drop_index(
+    collection_name=<span class="hljs-string">&quot;tsz_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
+    index_name=<span class="hljs-string">&quot;tsz_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">Notas de utilização<button data-href="#Usage-notes" class="anchor-icon" translate="no">

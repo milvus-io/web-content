@@ -8,6 +8,7 @@ summary: >-
   de texte.
 beta: Milvus 2.6.x
 ---
+
 <h1 id="Vertex-AI" class="common-anchor-header">Vertex AI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Vertex-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,7 +119,7 @@ beta: Milvus 2.6.x
  <a href="#docker">Docker Compose</a> <a href="#helm">Helm</a></div>
 <div class="filter-docker">
 <div class="alert note">
-<p>Pour obtenir votre fichier de configuration Milvus<strong>(docker-compose.yaml</strong>), reportez-vous à la section <a href="/docs/fr/v2.6.x/configure-docker.md#Download-an-installation-file">Télécharger un fichier d'installation</a>.</p>
+<p>Pour obtenir votre fichier de configuration Milvus<strong>(docker-compose.yaml</strong>), reportez-vous à la section <a href="/docs/fr/configure-docker.md#Download-an-installation-file">Télécharger un fichier d'installation</a>.</p>
 </div>
 <ol>
 <li><p><strong>Montez votre clé dans le conteneur</strong></p>
@@ -151,7 +152,7 @@ beta: Milvus 2.6.x
 </div>
 <div class="filter-helm">
 <div class="alert note">
-<p>Pour obtenir votre fichier de configuration Milvus<strong>(values.yaml</strong>), reportez-vous à <a href="/docs/fr/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configurer Milvus via un fichier de configuration</a>.</p>
+<p>Pour obtenir votre fichier de configuration Milvus<strong>(values.yaml</strong>), reportez-vous à <a href="/docs/fr/configure-helm.md#Configure-Milvus-via-configuration-file">Configurer Milvus via un fichier de configuration</a>.</p>
 </div>
 <ol>
 <li><p><strong>Créer un secret Kubernetes</strong></p>
@@ -203,6 +204,7 @@ beta: Milvus 2.6.x
 
 <span class="hljs-comment"># Repeat same configuration for dataNode, etc.</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul></li>
 <li><p><strong>Appliquer la configuration Helm</strong></p>
 <p>Déployez la configuration mise à jour dans votre cluster :</p>
@@ -246,6 +248,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Étape 2 : Ajouter la fonction d'intégration au schéma</h3><p>Le module Function de Milvus convertit automatiquement les données brutes stockées dans un champ scalaire en embeddings et les stocke dans le champ vectoriel explicitement défini.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
@@ -267,6 +270,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p><strong>Paramètre</strong></p></th>
@@ -326,4 +330,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Après avoir configuré la fonction d'intégration, reportez-vous à la <a href="/docs/fr/v2.6.x/embeddings.md">vue d'ensemble de la fonction</a> pour obtenir des conseils supplémentaires sur la configuration de l'index, des exemples d'insertion de données et des opérations de recherche sémantique.</p>
+    </button></h2><p>Après avoir configuré la fonction d'intégration, reportez-vous à la <a href="/docs/fr/embeddings.md">vue d'ensemble de la fonction</a> pour obtenir des conseils supplémentaires sur la configuration de l'index, des exemples d'insertion de données et des opérations de recherche sémantique.</p>

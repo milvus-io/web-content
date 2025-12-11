@@ -81,7 +81,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O fluxo de trabalho principal da estratégia do WeightedRanker é o seguinte:</p>
+    </button></h2><p>O principal fluxo de trabalho da estratégia do WeightedRanker é o seguinte:</p>
 <ol>
 <li><p><strong>Recolher resultados de pesquisa</strong>: Reúne os resultados e as pontuações de cada caminho de pesquisa vetorial (pontuação_1, pontuação_2).</p></li>
 <li><p><strong>Normalização da pontuação</strong>: Cada pesquisa pode usar métricas de similaridade diferentes, resultando em distribuições de pontuação variadas. Por exemplo, o uso do produto interno (IP) como um tipo de similaridade pode resultar em pontuações que variam de [-∞,+∞], enquanto o uso da distância euclidiana (L2) resulta em pontuações que variam de [0,+∞]. Como os intervalos de pontuação de diferentes pesquisas variam e não podem ser diretamente comparados, é necessário normalizar as pontuações de cada caminho de pesquisa. Normalmente, a função <code translate="no">arctan</code> é aplicada para transformar as pontuações num intervalo entre [0, 1] (pontuação_1_normalizada, pontuação_2_normalizada). As pontuações mais próximas de 1 indicam maior similaridade.</p></li>
@@ -107,7 +107,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Este exemplo demonstra uma Pesquisa Híbrida multimodal (topK=5) que envolve imagens e texto e ilustra a forma como a estratégia WeightedRanker classifica os resultados de duas pesquisas ANN.</p>
+    </button></h2><p>Este exemplo demonstra uma Pesquisa Híbrida multimodal (topK=5) que envolve imagens e texto e ilustra como a estratégia WeightedRanker classifica os resultados de duas pesquisas ANN.</p>
 <ul>
 <li><p>Resultados da pesquisa ANN em imagens （topK=5)：</p>
 <p><table>
@@ -304,8 +304,9 @@ rerank = Function(
 CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
                 .name(<span class="hljs-string">&quot;weight&quot;</span>)
                 .functionType(FunctionType.RERANK)
-                .param(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
-                .param(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;weights\&quot;: [0.1, 0.6], \&quot;norm_score\&quot;: true}&quot;</span>)
+                .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;weighted&quot;</span>)
+                .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.1, 0.9]&quot;</span>)
+                .param(<span class="hljs-string">&quot;norm_score&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
                 .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
@@ -384,7 +385,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O Weighted Ranker foi concebido especificamente para operações de pesquisa híbrida que combinam vários campos vectoriais. Ao executar a pesquisa híbrida, deve especificar os pesos para cada caminho de pesquisa:</p>
+    </button></h3><p>O Weighted Ranker foi concebido especificamente para operações de pesquisa híbrida que combinam vários campos vectoriais. Ao realizar uma pesquisa híbrida, deve especificar os pesos para cada caminho de pesquisa:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, AnnSearchRequest

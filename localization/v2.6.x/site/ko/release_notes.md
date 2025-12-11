@@ -19,6 +19,267 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 알아보세요! 이 페이지에는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항이 요약되어 있습니다. 이 섹션에서 v2.6.0 이후 출시된 각 버전에 대한 릴리스 노트를 확인할 수 있습니다. 이 페이지를 정기적으로 방문하여 업데이트에 대해 알아보는 것이 좋습니다.</p>
+<h2 id="v266" class="common-anchor-header">v2.6.6<button data-href="#v266" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>릴리스 날짜: 2025년 11월 21일</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Milvus 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.8</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>다양하고 강력한 새 기능, 성능 향상, 필수적인 버그 수정이 포함된 Milvus 2.6.6의 출시를 발표하게 되어 기쁩니다. 이번 업데이트에서는 지리공간 및 타임스탬프 데이터 유형, 채점을 위한 부스트 랭커 등 중요한 기능이 도입되었습니다. 이번 릴리스에는 중요한 스칼라 필터링 성능 개선 사항도 다수 포함되어 있습니다. 안정성과 신뢰성을 높이기 위해 몇 가지 중요한 버그도 해결되었습니다. 이번 릴리스를 통해 Milvus는 모든 사용자에게 더욱 강력하고 효율적인 환경을 지속적으로 제공할 것입니다. 다음은 이번 릴리스의 주요 특징입니다.</p>
+<ul>
+<li>지리공간 데이터 유형: Milvus는 <code translate="no">POINT</code>, <code translate="no">LINESTRING</code>, <code translate="no">POLYGON</code> 과 같은 OGC 호환 기하학적 객체를 나타내는 <code translate="no">Geometry</code> 데이터 유형에 대한 지원을 도입합니다. 이 유형은 여러 공간 관계 연산자(st_contains, st_intersects, st_within, st_dwithin, ...)를 지원하며 공간 필터링과 쿼리 실행을 가속화하기 위해 <code translate="no">RTREE</code> 공간 인덱스를 제공합니다. 이를 통해 LBS, 매핑 및 기타 공간 워크로드에 대한 지리공간 도형의 효율적인 저장과 쿼리가 가능합니다.</li>
+<li>타임스탬츠 데이터 유형: Milvus는 모든 시간대 데이터에 대한 시간대 인식 기능을 제공하는 타임스탬프 데이터 유형을 도입했습니다. 이 기능은 사용자가 데이터베이스 및 컬렉션의 시간대 속성을 사용하여 기본 시간 컨텍스트를 정의할 수 있게 함으로써 글로벌 배포 전반에서 일관된 데이터 관리를 가능하게 합니다. 결정적으로, 이 필드는 시간 범위 쿼리에 대한 표현식 기반 필터링을 완벽하게 지원하며, 검색 작업(쿼리 및 검색)은 타임존 매개변수를 지원하여 출력 시 타임스탬프를 필요한 로컬 형식으로 즉각적으로 변환할 수 있습니다.</li>
+<li>부스트 랭커: 부스트 랭커는 벡터 거리를 기반으로 계산된 의미적 유사성에만 의존하는 대신, Milvus가 함수 내에서 선택적 필터링 조건을 사용해 검색 결과 후보 중에서 일치하는 항목을 찾고 지정된 가중치를 적용해 일치하는 항목의 점수를 높여 최종 결과에서 일치하는 항목의 순위를 높이거나 낮출 수 있도록 지원합니다.</li>
+<li>STL_SORT 인덱스는 이제 VARCHAR 및 TIMESTAMPTZ 데이터 유형을 지원합니다.</li>
+<li>이제 기존 컬렉션의 동적 필드를 변경하여 활성화할 수 있습니다.</li>
+<li>cve-2025-63811을 수정했습니다.</li>
+</ul>
+<h3 id="Features" class="common-anchor-header">기능<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>새 구성 추가 및 동적 업데이트 구성 활성화<a href="https://github.com/milvus-io/milvus/pull/45363">(#45363</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">개선 사항<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>cve-2025-63811 수정<a href="https://github.com/milvus-io/milvus/pull/45658">(#45658</a>)</li>
+<li>쿼리 노드 로그에서 대규모 세그먼트 ID 배열 제거<a href="https://github.com/milvus-io/milvus/pull/45720">(#45720</a>)</li>
+<li>expr이 모든 루프에서 입력 값을 복사하는 여러 위치를 업데이트<a href="https://github.com/milvus-io/milvus/pull/45712">(#45712</a>).</li>
+<li>용어 expr 성능 최적화<a href="https://github.com/milvus-io/milvus/pull/45671">(#45671</a>)</li>
+<li>인덱싱되지 않은 봉인된 세그먼트에 대한 벡터 청크 프리페치<a href="https://github.com/milvus-io/milvus/pull/45666">(#45666</a>).</li>
+<li>Expr: 청크를 한 번만 프리페치<a href="https://github.com/milvus-io/milvus/pull/45555">(#45555</a>)</li>
+<li>지오메트리 및 타임스탬츠 유형에 널러블 지원 추가<a href="https://github.com/milvus-io/milvus/pull/45522">(#45522</a>)</li>
+<li>세션 TTL을 10초에서 30초로 늘렸습니다<a href="https://github.com/milvus-io/milvus/pull/45517">(#45517</a>).</li>
+<li>ddl 프레임워크에 더 많은 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/45559">(#45559</a>)</li>
+<li>최대 연결 구성 버전 업데이트<a href="https://github.com/milvus-io/milvus/pull/45547">(#45547</a>)</li>
+<li>소스 ID 확인 생략<a href="https://github.com/milvus-io/milvus/pull/45519">(#45519</a>)</li>
+<li>원격 스토리지에 대한 max_connection 구성 지원<a href="https://github.com/milvus-io/milvus/pull/45364">(#45364</a>)</li>
+<li>삽입 레코드 pk2 오프셋을 지울 때 널 포인터 검사를 추가하여 패닉 방지<a href="https://github.com/milvus-io/milvus/pull/45442">(#45442</a>).</li>
+<li>계층형 저장소 시나리오에서 스칼라 필드 가져오기 최적화 수행<a href="https://github.com/milvus-io/milvus/pull/45361">(#45361</a>).</li>
+<li>분석기 매개변수 오타 수정<a href="https://github.com/milvus-io/milvus/pull/45434">(#45434</a>)</li>
+<li>세그먼트 인덱스 생성 중 index_type 재정의<a href="https://github.com/milvus-io/milvus/pull/45417">(#45417</a>).</li>
+<li>업데이트 복제 구성에 대한 rbac 지원 추가<a href="https://github.com/milvus-io/milvus/pull/45236">(#45236</a>).</li>
+<li>go 버전을 1.24.9로 범프<a href="https://github.com/milvus-io/milvus/pull/45369">(#45369</a>).</li>
+<li>기본 구성에 대해 jsonshredding 비활성화<a href="https://github.com/milvus-io/milvus/pull/45349">(#45349</a>).</li>
+<li>버퍼링 및 직접 I/O 모두에 대해 정렬된 버퍼를 통합<a href="https://github.com/milvus-io/milvus/pull/45325">(#45325</a>).</li>
+<li>jsonstats 관련 사용자 구성 매개변수의 이름 변경<a href="https://github.com/milvus-io/milvus/pull/45252">(#45252</a>).</li>
+<li>knowhere 스레드 풀 구성을 새로 고칠 수 있게 함<a href="https://github.com/milvus-io/milvus/pull/45191">(#45191</a>).</li>
+<li>새로운 ddl 프레임워크 및 cdc 3의 체리픽 패치<a href="https://github.com/milvus-io/milvus/pull/45280">(#45280</a>)</li>
+<li>새 컬렉션 생성 시 스키마 버전 설정<a href="https://github.com/milvus-io/milvus/pull/45269">(#45269</a>)</li>
+<li>bulkinsert에 jsonl/ndjson 파일 지원<a href="https://github.com/milvus-io/milvus/pull/44717">(#44717</a>)</li>
+<li>복제 스트림 클라이언트가 완료될 때까지 기다림<a href="https://github.com/milvus-io/milvus/pull/45260">(#45260</a>)</li>
+<li>지오메트리 캐시를 선택적 구성으로 설정<a href="https://github.com/milvus-io/milvus/pull/45196">(#45196</a>)</li>
+<li>새로운 ddl 프레임워크 및 cdc 2의 체리픽 패치<a href="https://github.com/milvus-io/milvus/pull/45241">(#45241</a>)</li>
+<li>기본적으로 cdc를 시작하지 않음<a href="https://github.com/milvus-io/milvus/pull/45217">(#45217</a>)</li>
+<li>새로운 ddl 프레임워크 및 cdc의 체리픽 패치<a href="https://github.com/milvus-io/milvus/pull/45025">(#45025</a>)</li>
+<li>최대 벡터 필드 수 제한 제거<a href="https://github.com/milvus-io/milvus/pull/45156">(#45156</a>)</li>
+<li>가져오기 작업의 생성 시간 표시<a href="https://github.com/milvus-io/milvus/pull/45059">(#45059</a>)</li>
+<li>범위 쿼리에 대한 scalarindexsort 비트맵 초기화 최적화<a href="https://github.com/milvus-io/milvus/pull/45087">(#45087</a>)</li>
+<li>stl_sort가 varchar를 지원하도록 활성화<a href="https://github.com/milvus-io/milvus/pull/45050">(#45050</a>).</li>
+<li>샤드 클라이언트 로직을 전용 패키지로 추출<a href="https://github.com/milvus-io/milvus/pull/45031">(#45031</a>).</li>
+<li>권한 캐시를 별도의 패키지로 추출하여 권한 관리 리팩터링<a href="https://github.com/milvus-io/milvus/pull/45002">(#45002</a>).</li>
+<li>fillfielddata에서 json 기본값 지원<a href="https://github.com/milvus-io/milvus/pull/45470">(#45470</a>).</li>
+<li>컬렉션 수정 중 활성화된 동적 필드 및 스키마 변환 업데이트<a href="https://github.com/milvus-io/milvus/pull/45616">(#45616</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>타임스탬프를 사용한 부분 업데이트 패닉 수정<a href="https://github.com/milvus-io/milvus/pull/45741">(#45741</a>)</li>
+<li>밀버스 ddl 업그레이드에 2.6.6 사용<a href="https://github.com/milvus-io/milvus/pull/45739">(#45739</a>)</li>
+<li>캐시 만료에 최신 타임스탬프 사용<a href="https://github.com/milvus-io/milvus/pull/45699">(#45699</a>)</li>
+<li>초기화 실패 시 스트리밍 노드 종료<a href="https://github.com/milvus-io/milvus/pull/45732">(#45732</a>)</li>
+<li>경쟁 조건 교착 상태를 피하기 위해 tbb concurrent_map emplace를 보호했습니다<a href="https://github.com/milvus-io/milvus/pull/45682">(#45682</a>).</li>
+<li>스트리밍 코드는 종료되었지만 쿼리 코드는 여전히 작동할 때 패닉을 방지<a href="https://github.com/milvus-io/milvus/pull/45696">(#45696</a>).</li>
+<li>워커에 작업이 없을 때 작업 초기화 설정<a href="https://github.com/milvus-io/milvus/pull/45676">(#45676</a>)</li>
+<li>준비 실패 시 런 컴포넌트에서 교착 상태 방지<a href="https://github.com/milvus-io/milvus/pull/45647">(#45647</a>)</li>
+<li>ack 브로드캐스트의 채널을 이중으로 닫을 때 패닉 방지<a href="https://github.com/milvus-io/milvus/pull/45662">(#45662</a>)</li>
+<li>추가 필드 중 기본값 백필 수정<a href="https://github.com/milvus-io/milvus/pull/45644">(#45644</a>)</li>
+<li>채널의 할당 이력을 압축하여 할당 복구 정보의 크기를 줄였습니다<a href="https://github.com/milvus-io/milvus/pull/45607">(#45607</a>).</li>
+<li>추가된 필드에 대한 압축 중 기본값을 올바르게 처리<a href="https://github.com/milvus-io/milvus/pull/45619">(#45619</a>).</li>
+<li>드롭인덱스에서 필드명 유효성 검사 제거<a href="https://github.com/milvus-io/milvus/pull/45462">(#45462</a>)</li>
+<li>세그먼트가 정상적이지 않은 경우 압축 작업 무시<a href="https://github.com/milvus-io/milvus/pull/45535">(#45535</a>)</li>
+<li>변경 수집을 브로드캐스트하기 전에 스키마 속성 설정<a href="https://github.com/milvus-io/milvus/pull/45529">(#45529</a>)</li>
+<li>키가 유효하지 않은 경우 데이터베이스 이벤트 저장<a href="https://github.com/milvus-io/milvus/pull/45530">(#45530</a>)</li>
+<li>구조체 필드에 대한 대량 가져오기 버그 수정<a href="https://github.com/milvus-io/milvus/pull/45536">(#45536</a>)</li>
+<li>하이브리드 인덱스에 대한 원시 데이터 가져오기 실패<a href="https://github.com/milvus-io/milvus/pull/45408">(#45408</a>)</li>
+<li>쿼리 완료 전에 수집이 해제되지 않도록 수집을 조기에 유지<a href="https://github.com/milvus-io/milvus/pull/45415">(#45415</a>).</li>
+<li>ddl에 올바른 리소스 키 잠금 사용 및 전송 복제본에서 새 ddl 사용<a href="https://github.com/milvus-io/milvus/pull/45509">(#45509</a>)</li>
+<li>업그레이드 후 인덱스 호환성 수정<a href="https://github.com/milvus-io/milvus/pull/45374">(#45374</a>)</li>
+<li>채널 사용 불가 오류 수정 및 수집 차단 해제<a href="https://github.com/milvus-io/milvus/pull/45429">(#45429</a>)</li>
+<li>파티션 삭제 시 수집 메타 제거<a href="https://github.com/milvus-io/milvus/pull/45497">(#45497</a>)</li>
+<li>통계 결과 저장 시 대상 세그먼트가 삭제된 것으로 두 번 표시되던 문제 수정<a href="https://github.com/milvus-io/milvus/pull/45479">(#45479</a>)</li>
+<li>수집 정보의 타임틱이 잘못 업데이트됨<a href="https://github.com/milvus-io/milvus/pull/45471">(#45471</a>)</li>
+<li>아이아나 시간대 ID 인식을 위한 tzdata 종속성 추가<a href="https://github.com/milvus-io/milvus/pull/45495">(#45495</a>)</li>
+<li>대량 검색을 위한 재랭크 함수에서 필드 데이터 오프셋 계산 수정<a href="https://github.com/milvus-io/milvus/pull/45482">(#45482</a>)</li>
+<li>mmap으로 성장하는 필터 지오메트리 수정<a href="https://github.com/milvus-io/milvus/pull/45465">(#45465</a>)</li>
+<li>넥스트필드ID가 구조체를 고려하지 않음<a href="https://github.com/milvus-io/milvus/pull/45438">(#45438</a>)</li>
+<li>그룹 값이 nil<a href="https://github.com/milvus-io/milvus/pull/45419">(#45419</a>)</li>
+<li>압축 시 슬라이스된 화살표 배열에 대한 정확한 크기 추정 제공<a href="https://github.com/milvus-io/milvus/pull/45352">(#45352</a>)</li>
+<li>리플리케이트 스트림 클라이언트에서 데이터 경쟁 수정<a href="https://github.com/milvus-io/milvus/pull/45347">(#45347</a>)</li>
+<li>새로 추가된 열에 대한 텍스트 인덱스 생략<a href="https://github.com/milvus-io/milvus/pull/45317">(#45317</a>)</li>
+<li>l0 압축에서 실수로 봉인된 세그먼트 무시<a href="https://github.com/milvus-io/milvus/pull/45341">(#45341</a>)</li>
+<li>원시 데이터 가용성을 보장하기 위해 텍스트 인덱스 생성 전에 마무리 로드를 이동<a href="https://github.com/milvus-io/milvus/pull/45335">(#45335</a>).</li>
+<li>json 경로가 null인 경우 json_shredding을 사용하지 않음<a href="https://github.com/milvus-io/milvus/pull/45311">(#45311</a>).</li>
+<li>타임스탬프와 관련된 체리픽 수정<a href="https://github.com/milvus-io/milvus/pull/45321">(#45321</a>)</li>
+<li>디스크 사용량 가져오기 오류로 인한 로드 세그먼트 실패 수정<a href="https://github.com/milvus-io/milvus/pull/45300">(#45300</a>)</li>
+<li>압축 시 json 기본값 지원<a href="https://github.com/milvus-io/milvus/pull/45331">(#45331</a>)</li>
+<li>증가하는 세그먼트의 지오메트리 인덱스에 대한 올바른 배치 크기 계산<a href="https://github.com/milvus-io/milvus/pull/45261">(#45261</a>)</li>
+<li>ddl 프레임워크 버그 패치 적용<a href="https://github.com/milvus-io/milvus/pull/45292">(#45292</a>)</li>
+<li>구조체에 대한 mmap 설정으로 변경 수집 실패 수정<a href="https://github.com/milvus-io/milvus/pull/45240">(#45240</a>)</li>
+<li>복합 빈로그 작성기에서 타임스탬프 범위 초기화<a href="https://github.com/milvus-io/milvus/pull/45283">(#45283</a>)</li>
+<li>r-tree 인덱스 증가를 위한 tmp dir 생성을 건너뛰었습니다<a href="https://github.com/milvus-io/milvus/pull/45257">(#45257</a>).</li>
+<li>실행기를 업데이트할 때 잠재적인 경쟁 조건을 피함<a href="https://github.com/milvus-io/milvus/pull/45232">(#45232</a>).</li>
+<li>인덱스 이름에 "[" 및 "]" 허용<a href="https://github.com/milvus-io/milvus/pull/45194">(#45194</a>).</li>
+<li>비어있지만 null json이 아닌 경우 json을 파쇄하는 버그 수정<a href="https://github.com/milvus-io/milvus/pull/45214">(#45214</a>).</li>
+<li>추가 작업은 RPC가 아닌 지갑 자체에서만 취소할 수 있도록 수정<a href="https://github.com/milvus-io/milvus/pull/45079">(#45079</a>).</li>
+<li>ak/sk에서 wp gcp 클라우드 스토리지 액세스 문제 해결<a href="https://github.com/milvus-io/milvus/pull/45144">(#45144</a>)</li>
+<li>널 지오메트리 데이터 가져오기 수정<a href="https://github.com/milvus-io/milvus/pull/45162">(#45162</a>)</li>
+<li>jsonstatsparquetwriter::close()에서 packed_writer_에 대한 null 검사 추가<a href="https://github.com/milvus-io/milvus/pull/45176">(#45176</a>).</li>
+<li>임베딩 목록에서 엠비 리스트 메타를 매핑하지 못함<a href="https://github.com/milvus-io/milvus/pull/45126">(#45126</a>).</li>
+<li>컬렉션에 세그먼트가 없을 때 쿼리 노드 명사 메트릭 업데이트<a href="https://github.com/milvus-io/milvus/pull/45160">(#45160</a>)</li>
+<li>잘못된 utf-8 문자열을 가져올 때 재시도 방지<a href="https://github.com/milvus-io/milvus/pull/45068">(#45068</a>).</li>
+<li>쿼리 시나리오에 대한 축소/재랭크에서 빈 필드 데이터 처리<a href="https://github.com/milvus-io/milvus/pull/45137">(#45137</a>).</li>
+<li>cdc를 정상적으로 중지할 때 발생하는 패닉 수정<a href="https://github.com/milvus-io/milvus/pull/45095">(#45095</a>)</li>
+<li>인증 토큰 오염, oss/cos 지원, 중복 동기화 오류 로그 수정<a href="https://github.com/milvus-io/milvus/pull/45106">(#45106</a>)</li>
+<li>로드 시간 초과를 방지하기 위해 문자열 인덱스 정렬에서 모든 null 데이터를 처리<a href="https://github.com/milvus-io/milvus/pull/45104">(#45104</a>).</li>
+<li>요청에서 이전 버전 jsonstats 빌드 비활성화<a href="https://github.com/milvus-io/milvus/pull/45102">(#45102</a>).</li>
+<li>지오메트리 데이터 가져오기 버그 수정<a href="https://github.com/milvus-io/milvus/pull/45090">(#45090</a>)</li>
+<li>구조체에서 마루 임포트 버그 수정<a href="https://github.com/milvus-io/milvus/pull/45071">(#45071</a>).</li>
+<li>호환성을 보장하기 위해 인덱스노드서버에 getmetrics를 다시 추가<a href="https://github.com/milvus-io/milvus/pull/45074">(#45074</a>).</li>
+<li>구조체 하위 필드에 대한 변경 수집 실패 수정<a href="https://github.com/milvus-io/milvus/pull/45042">(#45042</a>).</li>
+<li>구조체에 대해 수집 수준 mmap이 적용되지 않는 문제 수정<a href="https://github.com/milvus-io/milvus/pull/44997">(#44997</a>)</li>
+<li>쿼리코드 수집 알림 업데이트에서 데이터 경합 방지<a href="https://github.com/milvus-io/milvus/pull/45051">(#45051</a>)</li>
+<li>저장소 계층에서 json 필드 기본값 처리<a href="https://github.com/milvus-io/milvus/pull/45009">(#45009</a>)</li>
+<li>다른 스레드에 의해 반복이 지워지지 않도록 재확인<a href="https://github.com/milvus-io/milvus/pull/45015">(#45015</a>).</li>
+<li>지오메트리를 필터링하는 gis 함수의 버그 수정<a href="https://github.com/milvus-io/milvus/pull/44967">(#44967</a>)</li>
+</ul>
+<h2 id="v265" class="common-anchor-header">v2.6.5<button data-href="#v265" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>릴리스 날짜: 2025년 11월 11일</p>
+<table>
+<thead>
+<tr><th style="text-align:left">밀버스 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.7</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p><strong>중요한 보안 취약점인</strong> <a href="https://github.com/milvus-io/milvus/security/advisories/GHSA-mhjq-8c7m-3f7p">CVE-2025-64513을</a> 해결하고 Go 1.24.9로 업그레이드된 Milvus 2.6.5의 출시를 발표하게 되어 기쁘게 생각합니다. <strong>모든 Milvus 2.6.x 사용자는</strong> 가능한 한 빨리 <strong>2.6.5로 업그레이드할</strong> 것을 강력히 권장합니다. 이 업데이트에는 몇 가지 다른 개선 사항과 버그 수정도 포함되어 있으며, 사용자에게 더욱 강력하고 효율적인 경험을 제공합니다.</p>
+<h3 id="Improvements" class="common-anchor-header">개선 사항<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>go1.24.9로 업그레이드하는 빌더 이미지 태그 업데이트<a href="https://github.com/milvus-io/milvus/pull/45398">(#45398</a>)</li>
+<li>소스 ID 확인 건너뛰기<a href="https://github.com/milvus-io/milvus/pull/45379">(#45379</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>그룹 값이 nil<a href="https://github.com/milvus-io/milvus/pull/45421">(#45421</a>)</li>
+<li>복합 빈로그 작성기에서 초기화된 타임스탬프 범위(<a href="https://github.com/milvus-io/milvus/pull/45402">#45402</a>)</li>
+<li>쿼리 시나리오에 대한 축소/재랭크에서 빈 필드 데이터 처리 (<a href="https://github.com/milvus-io/milvus/pull/45389">#45389</a>)</li>
+<li>jsonstatsparquetwrite...에서 packed_writer_에 대한 null 검사 추가<a href="https://github.com/milvus-io/milvus/pull/45376">(#45376</a>).</li>
+<li>새로 추가된 열에 대한 텍스트 인덱스 빌드 건너뛰기<a href="https://github.com/milvus-io/milvus/pull/45358">(#45358</a>)</li>
+<li>l0 압축에서 실수로 봉인된 세그먼트 무시<a href="https://github.com/milvus-io/milvus/pull/45351">(#45351</a>)</li>
+<li>원시 데이터 가용성을 보장하기 위해 텍스트 인덱스 생성 전에 마무리 로드를 이동<a href="https://github.com/milvus-io/milvus/pull/45336">(#45336</a>).</li>
+<li>압축에서 json 기본값 지원<a href="https://github.com/milvus-io/milvus/pull/45332">(#45332</a>)</li>
+<li>중복된 aws sdk 초기화를 수정하기 위해 milvus-storage 업데이트(<a href="https://github.com/milvus-io/milvus/pull/45075">#45075</a>).</li>
+</ul>
 <h2 id="v264" class="common-anchor-header">v2.6.4<button data-href="#v264" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +295,7 @@ title: 릴리스 노트
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>릴리스 날짜: 2025년 10월 21일</p>
+    </button></h2><p>릴리스 날짜 10월 21, 2025</p>
 <table>
 <thead>
 <tr><th style="text-align:left">Milvus 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>

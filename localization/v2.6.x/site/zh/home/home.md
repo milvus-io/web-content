@@ -1,6 +1,7 @@
 ---
 id: home.md
 ---
+
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 欢迎来到 Milvus 文档！</h1></p>
@@ -33,13 +34,13 @@ id: home.md
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/zh/v2.6.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.6.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/zh/v2.6.x/install_standalone-docker.md"> <p class="link-btn">安装 Milvus</p> </a><p>了解如何使用 Docker Compose 或 Kubernetes 安装 Milvus。</p>
+   <a href="/docs/zh/install_standalone-docker.md"> <img translate="no" src="/docs/v2.6.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/zh/install_standalone-docker.md"> <p class="link-btn">安装 Milvus</p> </a><p>了解如何使用 Docker Compose 或 Kubernetes 安装 Milvus。</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/zh/v2.6.x/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/zh/v2.6.x/quickstart.md"> <p class="link-btn">快速启动</p> </a><p>了解如何使用示例代码快速运行 Milvus。</p>
+   <a href="/docs/zh/quickstart.md"> <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/zh/quickstart.md"> <p class="link-btn">快速启动</p> </a><p>了解如何使用示例代码快速运行 Milvus。</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +68,31 @@ id: home.md
 <div class="recomment-item">
   <p>使用</p>
 <ul>
-<li><a href="/docs/zh/v2.6.x/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/v2.6.x/insert-update-delete.md">插入、增加和删除</a></li>
-<li><a href="/docs/zh/v2.6.x/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/v2.6.x/multi-vector-search.md">混合搜索</a></li>
-<li><a href="/docs/zh/v2.6.x/get-and-scalar-query.md">获取和标量查询</a></li>
+<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/insert-update-delete.md">插入、增加和删除</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/get-and-scalar-query.md">获取和标量查询</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>部署</p>
 <ul>
-<li><a href="/docs/zh/v2.6.x/configure-docker.md">配置 Milvus</a></li>
-<li><a href="/docs/zh/v2.6.x/deploy_s3.md">管理依赖关系</a></li>
-<li><a href="/docs/zh/v2.6.x/eks.md">在云上部署</a></li>
-<li><a href="/docs/zh/v2.6.x/scaleout.md">扩展 Milvus 集群</a></li>
-<li><a href="/docs/zh/v2.6.x/monitor_overview.md">监控和警报</a></li>
+<li><a href="/docs/zh/configure-docker.md">配置 Milvus</a></li>
+<li><a href="/docs/zh/deploy_s3.md">管理依赖关系</a></li>
+<li><a href="/docs/zh/eks.md">在云上部署</a></li>
+<li><a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a></li>
+<li><a href="/docs/zh/monitor_overview.md">监控和警报</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>学习</p>
 <ul>
-<li><a href="/docs/zh/v2.6.x/system_configuration.md">系统配置</a></li>
-<li><a href="/docs/zh/v2.6.x/architecture_overview.md">架构概述</a></li>
-<li><a href="/docs/zh/v2.6.x/index-explained.md">索引解释</a></li>
-<li><a href="/docs/zh/v2.6.x/metric.md">相似度指标</a></li>
-<li><a href="/docs/zh/v2.6.x/glossary.md">术语表</a></li>
+<li><a href="/docs/zh/system_configuration.md">系统配置</a></li>
+<li><a href="/docs/zh/architecture_overview.md">架构概述</a></li>
+<li><a href="/docs/zh/index-explained.md">索引解释</a></li>
+<li><a href="/docs/zh/metric.md">相似度指标</a></li>
+<li><a href="/docs/zh/glossary.md">术语表</a></li>
 </ul>
 </div>
 </div>
@@ -113,10 +114,10 @@ id: home.md
       </svg>
     </button></h2><p><em>2025 年 6 月 - Milvus 2.6.0 发布</em></p>
 <ul>
-<li>添加了如何<a href="/docs/zh/v2.6.x/embedding-function-overview.md">使用 Embdings 函数</a>的指导。</li>
-<li>添加了如何<a href="/docs/zh/v2.6.x/decay-ranker-overview.md">使用衰减排名器的</a>指导。</li>
-<li>添加了如何<a href="/docs/zh/v2.6.x/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段的</a>指导。</li>
-<li>已添加如何<a href="/docs/zh/v2.6.x/phrase-match.md">执行短语匹配的</a>指导。</li>
-<li>添加了<a href="/docs/zh/v2.6.x/ivf-rabitq.md">IVF_RABITQ 索引</a>的说明。</li>
+<li>添加了如何<a href="/docs/zh/embedding-function-overview.md">使用 Embdings 函数</a>的指导。</li>
+<li>添加了如何<a href="/docs/zh/decay-ranker-overview.md">使用衰减排名器的</a>指导。</li>
+<li>添加了如何<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段的</a>指导。</li>
+<li>已添加如何<a href="/docs/zh/phrase-match.md">执行短语匹配的</a>指导。</li>
+<li>添加了<a href="/docs/zh/ivf-rabitq.md">IVF_RABITQ 索引</a>的说明。</li>
 </ul>
 </div>

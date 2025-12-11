@@ -296,7 +296,7 @@ Then, you can create a collection using the above-created schema. Upon receiving
 
 ### Index-specific mmap settings
 
-To configure index-specific mmap, you need to include the `mmap.enable` property in the index parameters when you add the index. You can enable mmap on this specific index by setting the property to `true`.
+To configure index-specific mmap, you need to include the `mmap.enabled` property in the index parameters when you add the index. You can enable mmap on this specific index by setting the property to `true`.
 
 The following example demonstrates how to configure index-specific mmap when you add an index.
 

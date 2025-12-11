@@ -30,10 +30,14 @@ title: التوليد المعزز للاسترجاع باستخدام Milvus و
         ></path>
       </svg>
     </button></h1><p>يوضّح هذا الدليل كيفية بناء نظام توليد الاسترجاع المعزز المتقدم (RAG) باستخدام LangGraph وMilvus. على عكس أنظمة RAG التقليدية التي تقوم ببساطة بالاسترجاع والتوليد، يمكن لأنظمة RAG الوكيلة اتخاذ قرارات ذكية حول وقت استرجاع المعلومات وكيفية التعامل مع المستندات غير ذات الصلة ومتى يتم إعادة كتابة الاستعلامات للحصول على نتائج أفضل.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
+   </span> <span class="img-wrapper"> <span>هيكلية نظام RAG العميل باستخدام LangGraph وMilvus</span> </span></p>
 <p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a> هي مكتبة لبناء تطبيقات متعددة العوامل ومتعددة الحالات مع LLMs، مبنية على رأس LangChain. <a href="https://milvus.io/">Milvus</a> هي قاعدة بيانات المتجهات الأكثر تقدمًا في العالم مفتوحة المصدر، وهي مصممة لتشغيل تطبيقات البحث عن التشابه المضمنة وتطبيقات الذكاء الاصطناعي.</p>
 <p>في هذا البرنامج التعليمي، سنقوم ببناء نظام RAG عميل يمكنه:</p>
 <ul>
-<li>اتخاذ قرار بشأن استرجاع المستندات أو الاستجابة مباشرةً للاستعلامات البسيطة</li>
+<li>اتخاذ قرار بشأن استرداد المستندات أو الاستجابة مباشرةً للاستعلامات البسيطة</li>
 <li>تصنيف المستندات المسترجعة لمعرفة مدى ملاءمتها</li>
 <li>إعادة كتابة الأسئلة عندما لا تكون المستندات المسترجعة ذات صلة بالموضوع</li>
 <li>توليد إجابات عالية الجودة بناءً على السياق ذي الصلة</li>

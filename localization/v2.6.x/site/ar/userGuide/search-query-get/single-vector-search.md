@@ -43,8 +43,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يعد بحث ANN وبحث k-Nearest Neighbours (kNN) هما الطريقتان المعتادتان في عمليات البحث عن التشابه المتجه. في بحث kNN، يجب مقارنة جميع المتجهات في فضاء المتجهات مع متجه الاستعلام المحمول في طلب البحث قبل معرفة أكثرها تشابهًا، وهو ما يستغرق وقتًا طويلاً ويستهلك الكثير من الموارد.</p>
-<p>على عكس عمليات بحث kNN، تطلب خوارزمية بحث الشبكة العصبية الاصطناعية ملف <strong>فهرس</strong> يسجل الترتيب المصنف لتضمينات المتجهات. عند ورود طلب بحث، يمكنك استخدام ملف الفهرس كمرجع لتحديد موقع مجموعة فرعية تحتوي على الأرجح على تضمينات متجهات أكثر تشابهًا مع متجه الاستعلام بسرعة. وبعد ذلك، يمكنك استخدام <strong>نوع المقياس</strong> المحدد لقياس التشابه بين متجه الاستعلام وتلك الموجودة في المجموعة الفرعية، وفرز أعضاء المجموعة بناءً على التشابه مع متجه الاستعلام، ومعرفة أعضاء المجموعة <strong>الأعلى K.</strong> </p>
+    </button></h2><p>يعد بحث ANN وبحث k-Nearest Neighbours (kNN) هما الطريقتان المعتادتان في عمليات البحث عن التشابه المتجه. في بحث kNN، يجب مقارنة جميع المتجهات في فضاء المتجه مع متجه الاستعلام المحمول في طلب البحث قبل معرفة أكثرها تشابهًا، وهو ما يستغرق وقتًا طويلاً ويستهلك الكثير من الموارد.</p>
+<p>على عكس عمليات بحث kNN، تطلب خوارزمية بحث الشبكة العصبية الاصطناعية ملف <strong>فهرس</strong> يسجل الترتيب المصنف لتضمينات المتجهات. عند ورود طلب بحث، يمكنك استخدام ملف الفهرس كمرجع لتحديد موقع مجموعة فرعية تحتوي على الأرجح على تضمينات متجهات أكثر تشابهًا مع متجه الاستعلام بسرعة. بعد ذلك، يمكنك استخدام <strong>نوع المقياس</strong> المحدد لقياس التشابه بين متجه الاستعلام وتلك الموجودة في المجموعة الفرعية، وفرز أعضاء المجموعة بناءً على التشابه مع متجه الاستعلام، ومعرفة أعضاء المجموعة <strong>الأعلى K.</strong> </p>
 <p>تعتمد عمليات بحث ANN على فهارس مبنية مسبقًا، وقد يختلف إنتاجية البحث واستخدام الذاكرة وصحة البحث باختلاف أنواع الفهارس التي تختارها. تحتاج إلى الموازنة بين أداء البحث وصحة البحث.</p>
 <p>ولتقليل منحنى التعلم، يوفر Milvus <strong>الفهرس التلقائي</strong>. باستخدام <strong>AUTOINDEX،</strong> يمكن لـ Milvus تحليل توزيع البيانات داخل مجموعتك أثناء إنشاء الفهرس وتعيين معلمات الفهرس الأكثر تحسينًا بناءً على التحليل لتحقيق التوازن بين أداء البحث وصحته.</p>
 <p>ستجد في هذا القسم معلومات مفصلة حول المواضيع التالية:</p>
@@ -953,6 +953,43 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">تعيين منطقة زمنية مؤقتة للبحث بشكل مؤقت<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>إذا كانت مجموعتك تحتوي على حقل <code translate="no">TIMESTAMPTZ</code> ، يمكنك تجاوز المنطقة الزمنية الافتراضية لقاعدة البيانات أو المجموعة مؤقتًا لعملية واحدة عن طريق تعيين المعلمة <code translate="no">timezone</code> في استدعاء البحث. يتحكم هذا في كيفية عرض قيم <code translate="no">TIMESTAMPTZ</code> ومقارنتها أثناء العملية.</p>
+<p>يجب أن تكون قيمة <code translate="no">timezone</code> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحة لـ <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA</a> (على سبيل المثال، <strong>آسيا/شنغهاي،</strong> <strong>أمريكا/شيكاغو،</strong> أو <strong>UTC</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p>
+<p>يوضح المثال أدناه كيفية تعيين منطقة زمنية مؤقتًا لعملية بحث:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    data=[query_vector],
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Enhancing-ANN-Search" class="common-anchor-header">تعزيز البحث في الشبكة العصبية الاصطناعية<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -968,7 +1005,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يعمل برنامج AUTOINDEX على تسطيح منحنى التعلّم لعمليات بحث الشبكة العصبية الاصطناعية إلى حد كبير. ومع ذلك، قد لا تكون نتائج البحث صحيحة دائمًا مع زيادة أعلى K. من خلال تقليل نطاق البحث، وتحسين ملاءمة نتائج البحث، وتنويع نتائج البحث، يعمل ميلفوس على تحسينات البحث التالية.</p>
+    </button></h2><p>يعمل نظام AUTOINDEX على تسطيح منحنى التعلّم لعمليات بحث الشبكة العصبية الاصطناعية إلى حد كبير. ومع ذلك، قد لا تكون نتائج البحث صحيحة دائمًا مع زيادة أعلى K. من خلال تقليل نطاق البحث، وتحسين ملاءمة نتائج البحث، وتنويع نتائج البحث، يعمل ميلفوس على تحسينات البحث التالية.</p>
 <ul>
 <li><p>البحث المصفى</p>
 <p>يمكنك تضمين شروط التصفية في طلب البحث بحيث يقوم ميلفوس بإجراء تصفية للبيانات الوصفية قبل إجراء عمليات بحث ANN، مما يقلل نطاق البحث من المجموعة بأكملها إلى الكيانات المطابقة لشروط التصفية المحددة فقط.</p>

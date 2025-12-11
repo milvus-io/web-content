@@ -30,12 +30,6 @@
         "children": []
       },
       {
-        "label": "Critères de référence",
-        "id": "benchmark.md",
-        "order": 4,
-        "children": []
-      },
-      {
         "label": "Comparaison",
         "id": "comparison.md",
         "order": 5,
@@ -468,6 +462,12 @@
             "children": []
           },
           {
+            "label": "Champ TIMESTAMPTZ",
+            "id": "timestamptz-field.md",
+            "order": 11,
+            "children": []
+          },
+          {
             "label": "Champ dynamique",
             "id": "enable-dynamic-field.md",
             "order": 12,
@@ -864,6 +864,12 @@
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 3,
+                "children": []
+              },
+              {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1869,38 +1875,6 @@
             "label": "Guides d'utilisation",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Milvus CDC",
-        "id": "milvus_cdc",
-        "order": 3,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Vue d'ensemble",
-            "id": "milvus-cdc-overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Déployer le serveur CDC",
-            "id": "deploy-cdc-server.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Gérer les tâches du CDC",
-            "id": "manage-cdc-tasks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Contrôle",
-            "id": "cdc-monitoring.md",
-            "order": 3,
             "children": []
           }
         ]

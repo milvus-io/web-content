@@ -179,10 +179,14 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
-     <td><p>Si se permite que una colección acepte valores de clave primaria proporcionados por el usuario cuando se ha habilitado AutoID para la colección.</p><ul><li><p>Cuando se establece en <strong>"true"</strong>: Las inserciones, upserts e importaciones masivas utilizan la clave primaria proporcionada por el usuario si está presente; de lo contrario, los valores de clave primaria se autogeneran.</p></li><li><p>Si se establece en <strong>"false"</strong>: Los valores de clave primaria proporcionados por el usuario se rechazan o ignoran y los valores de clave primaria siempre se autogeneran. El valor predeterminado es <strong>"false"</strong>.</p></li></ul></td>
+     <td><p>Si se permite que una colección acepte valores de clave primaria proporcionados por el usuario cuando se ha habilitado AutoID para la colección.</p><ul><li><p>Cuando se establece en <strong>"true"</strong>: Las inserciones, upserts e importaciones masivas utilizan la clave primaria proporcionada por el usuario si está presente; de lo contrario, los valores de clave primaria se autogeneran.</p></li><li><p>Si se establece en <strong>"false"</strong>: Los valores de clave primaria proporcionados por el usuario se rechazan o ignoran y los valores de clave primaria siempre se autogeneran. El valor por defecto es <strong>"false"</strong>.</p></li></ul></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">timezone</code></p></td>
+     <td><p>Especifica la zona horaria por defecto para esta colección cuando se manejan operaciones sensibles al tiempo, especialmente los campos <code translate="no">TIMESTAMPTZ</code>. Las marcas de tiempo se almacenan internamente en UTC, y Milvus convierte los valores para su visualización y comparación de acuerdo con esta configuración. Si se establece, la zona horaria de la colección anula la zona horaria predeterminada de la base de datos; el parámetro de zona horaria de una consulta puede anular temporalmente ambas. El valor debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria IANA</a> válido (por ejemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Para obtener más información sobre cómo utilizar un campo <code translate="no">TIMESTAMPTZ</code>, consulte <a href="/docs/es/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p></td>
    </tr>
 </table>
-<h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Ejemplo 1: Establecer TTL de colección<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Ejemplo 1: Establecer TTL de recogida<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -480,6 +484,60 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
       &quot;allow_insert_auto_id&quot;: &quot;true&quot;
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-6-Set-collection-time-zone" class="common-anchor-header">Ejemplo 6: Establecer la zona horaria de la colección<button data-href="#Example-6-Set-collection-time-zone" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Puede establecer una zona horaria por defecto para su colección utilizando la propiedad <code translate="no">timezone</code>. Esto determina cómo se interpretan y muestran los datos relacionados con la hora para todas las operaciones dentro de la colección, incluyendo la inserción de datos, la consulta y la presentación de resultados.</p>
+<p>El valor de <code translate="no">timezone</code> debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria IANA</a> válido, como <code translate="no">Asia/Shanghai</code>, <code translate="no">America/Chicago</code> o <code translate="no">UTC</code>. Si se utiliza un valor no válido o no estándar, se producirá un error al modificar la propiedad de la colección.</p>
+<p>El siguiente ejemplo muestra cómo establecer la zona horaria de la colección en <strong>Asia/Shanghai</strong>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;timezone&quot;</span>: <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;timezone&quot;</span>, <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>);
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(common.CollectionDefaultTimezone, <span class="hljs-literal">true</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+      &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

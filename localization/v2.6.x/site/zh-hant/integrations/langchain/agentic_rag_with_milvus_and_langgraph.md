@@ -27,8 +27,12 @@ title: 使用 Milvus 和 LangGraph 的代理 RAG
         ></path>
       </svg>
     </button></h1><p>本指南演示了如何使用 LangGraph 和 Milvus 建立一個先進的檢索-增強生成（RAG）系統。有別於傳統 RAG 系統簡單的擷取與產生，代理式 RAG 系統可以智慧地決定何時擷取資訊、如何處理不相關的文件，以及何時重寫查詢以獲得更好的結果。</p>
-<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a>是一個建構在 LangChain 之上的函式庫，用來建構有狀態、多代理的 LLM 應用程式。<a href="https://milvus.io/">Milvus</a>是世界上最先進的開放原始碼向量資料庫，用於嵌入相似性搜尋和人工智能應用程式。</p>
-<p>在本教程中，我們將建構一個代理 RAG 系統，它可以</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
+   </span> <span class="img-wrapper"> <span>使用 LangGraph 和 Milvus 的代理 RAG 系統架構</span> </span></p>
+<p><a href="https://langchain-ai.github.io/langgraph/">LangGraph</a>是一個建構在 LangChain 之上的函式庫，用來使用 LLMs 建構有狀態、多角色的應用程式。<a href="https://milvus.io/">Milvus</a>是世界上最先進的開放原始碼向量資料庫，用來支援嵌入式相似性搜尋與 AI 應用程式。</p>
+<p>在本教程中，我們將建立一個代理 RAG 系統，它可以</p>
 <ul>
 <li>決定是否擷取文件或直接回應簡單的查詢</li>
 <li>對擷取的文件進行相關性分級</li>

@@ -6,6 +6,7 @@ summary: >-
   위해 Milvus와 함께 구글 클라우드 버텍스 AI를 사용하는 방법을 설명합니다.
 beta: Milvus 2.6.x
 ---
+
 <h1 id="Vertex-AI" class="common-anchor-header">버텍스 AI<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Vertex-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -116,7 +117,7 @@ beta: Milvus 2.6.x
  <a href="#docker">도커 컴포즈</a> <a href="#helm">헬름</a></div>
 <div class="filter-docker">
 <div class="alert note">
-<p>Milvus 구성 파일<strong>(docker-compose.yaml</strong>)을 얻으려면 <a href="/docs/ko/v2.6.x/configure-docker.md#Download-an-installation-file">설치 파일 다운로드를</a> 참조하세요.</p>
+<p>Milvus 구성 파일<strong>(docker-compose.yaml</strong>)을 얻으려면 <a href="/docs/ko/configure-docker.md#Download-an-installation-file">설치 파일 다운로드를</a> 참조하세요.</p>
 </div>
 <ol>
 <li><p><strong>컨테이너에 키 마운트</strong></p>
@@ -149,7 +150,7 @@ beta: Milvus 2.6.x
 </div>
 <div class="filter-helm">
 <div class="alert note">
-<p>Milvus 구성 파일<strong>(values.yaml</strong>)을 얻으려면 <a href="/docs/ko/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">구성 파일을 통해 Milvus 구성을</a> 참조하세요.</p>
+<p>Milvus 구성 파일<strong>(values.yaml</strong>)을 얻으려면 <a href="/docs/ko/configure-helm.md#Configure-Milvus-via-configuration-file">구성 파일을 통해 Milvus 구성을</a> 참조하세요.</p>
 </div>
 <ol>
 <li><p><strong>쿠버네티스 시크릿 생성</strong></p>
@@ -201,6 +202,7 @@ beta: Milvus 2.6.x
 
 <span class="hljs-comment"># Repeat same configuration for dataNode, etc.</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul></li>
 <li><p><strong>헬름 구성 적용</strong></p>
 <p>업데이트된 구성을 클러스터에 배포한다:</p>
@@ -244,6 +246,7 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># IMPORTANT: Set dim to match the output dimension of the model and parameters</span>
 schema.add_field(<span class="hljs-string">&quot;dense_vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>) <span class="hljs-comment"># Store embedding vectors (example dimension)</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">2단계: 스키마에 임베딩 함수 추가하기</h3><p>Milvus의 함수 모듈은 스칼라 필드에 저장된 원시 데이터를 임베딩으로 자동 변환하여 명시적으로 정의된 벡터 필드에 저장합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Define Vertex AI embedding function</span>
 text_embedding_function = Function(
@@ -265,6 +268,7 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the configured embedding function to your existing collection schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
+
 <table>
    <tr>
      <th><p><strong>파라미터</strong></p></th>
@@ -324,4 +328,4 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>임베딩 함수를 구성한 후 <a href="/docs/ko/v2.6.x/embeddings.md">함수 개요에서</a> 인덱스 구성, 데이터 삽입 예제 및 시맨틱 검색 작업에 대한 추가 지침을 참조하세요.</p>
+    </button></h2><p>임베딩 함수를 구성한 후 <a href="/docs/ko/embeddings.md">함수 개요에서</a> 인덱스 구성, 데이터 삽입 예제 및 시맨틱 검색 작업에 대한 추가 지침을 참조하세요.</p>

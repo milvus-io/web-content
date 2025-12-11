@@ -55,13 +55,13 @@ title: 使用 RPM/DEB 软件包安装 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>你可以从<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.4">Milvus Releases 页面</a>根据你的系统架构下载 RPM/DEB 包。</p>
+    </button></h2><p>你可以从<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.6">Milvus Releases 页面</a>根据你的系统架构下载 RPM/DEB 包。</p>
 <ul>
-<li>对于 x86_64/amd64，下载<strong>milvus_2.6.0-1_amd64.deb</strong>或<strong>milvus_2.6.0-1_amd64.rpm</strong>软件包。</li>
-<li>对于 ARM64，请下载<strong>milvus_2.6.0-1_arm64.deb</strong>或<strong>milvus_2.6.0-1_arm64.rpm 软件包</strong>。</li>
+<li>对于 x86_64/amd64，下载<strong>milvus_2.6.6-1_amd64.deb</strong>或<strong>milvus_2.6.6-1_amd64.rpm</strong>软件包。</li>
+<li>对于 ARM64，请下载<strong>milvus_2.6.6-1_arm64.deb</strong>或<strong>milvus_2.6.6-1_arm64.rpm 软件包</strong>。</li>
 </ul>
 <p>以下命令假定你将在 x86_64/amd64 机器上运行 Milvus Standalone。</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus_2.6.0-1_amd64.rpm -O milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">安装 RPM/DEB 软件包<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,11 +80,11 @@ title: 使用 RPM/DEB 软件包安装 Milvus 单机版
       </svg>
     </button></h2><p>要安装 RPM/DEB 软件包，可以使用系统的软件包管理器。</p>
 <p>对于基于 RPM 的系统（如 CentOS、Fedora 和 RHEL），使用<code translate="no">yum</code> 命令安装软件包。</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.0-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.6-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>对于基于 DEB 的系统（如 Ubuntu 和 Debian），使用<code translate="no">apt</code> 命令安装软件包。</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.0-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.6-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">启动 Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">

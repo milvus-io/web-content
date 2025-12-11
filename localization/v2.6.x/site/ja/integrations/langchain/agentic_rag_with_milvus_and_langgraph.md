@@ -26,13 +26,17 @@ title: MilvusとLangGraphによるエージェント型RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このガイドでは、LangGraphとMilvusを使った高度なRAG（Retrieval-Augmented Generation）システムの構築方法を紹介します。単に情報を検索し生成する従来のRAGシステムとは異なり、エージェント型RAGシステムは、情報を検索するタイミング、無関係な文書をどのように扱うか、より良い結果を得るためにクエリを書き換えるタイミングについて、インテリジェントな判断を行うことができます。</p>
-<p><a href="https://langchain-ai.github.io/langgraph/">LangGraphは</a>、LangChainの上に構築された、LLMによるステートフルなマルチアクターアプリケーションを構築するためのライブラリです。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクトルデータベースで、埋め込み類似検索やAIアプリケーションのために構築されています。</p>
+    </button></h1><p>このガイドでは、LangGraphとMilvusを使った高度なRAG（Retrieval-Augmented Generation）システムの構築方法を紹介します。単に検索と生成を行う従来のRAGシステムとは異なり、エージェント型RAGシステムは、いつ情報を取得するか、無関係な文書をどのように扱うか、より良い結果を得るためにいつクエリを書き換えるかをインテリジェントに決定することができます。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/agentic_rag_with_langgraph_architecture.png" alt="Architecture of an agentic RAG system using LangGraph and Milvus" class="doc-image" id="architecture-of-an-agentic-rag-system-using-langgraph-and-milvus" />
+   </span> <span class="img-wrapper"> <span>LangGraphとmilvusを用いたエージェント型RAGシステムのアーキテクチャ</span> </span></p>
+<p><a href="https://langchain-ai.github.io/langgraph/">LangGraphは</a>、LangChainの上に構築された、LLMによるステートフルなマルチアクターアプリケーションを構築するためのライブラリである。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクトルデータベースで、埋め込み類似検索やAIアプリケーションのために構築されています。</p>
 <p>このチュートリアルでは、以下のようなエージェント型RAGシステムを構築します：</p>
 <ul>
 <li>文書を検索するか、単純なクエリに直接応答するかを決定する。</li>
 <li>検索されたドキュメントの関連性を評価する</li>
-<li>検索された文書が適切でない場合、質問を書き換える。</li>
+<li>検索されたドキュメントが適切でない場合、質問を書き換える。</li>
 <li>関連する文脈に基づき、質の高い回答を生成する</li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">

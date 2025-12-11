@@ -38,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ANN および k-Nearest Neighbors (kNN) 検索は、ベクトル類似性検索の通常の手法です。kNN 検索では、ベクトル空間内のすべてのベクトルを、検索リクエストに含まれるクエリベクトルと比較してから、最も類似したベクトルを特定する必要があります。</p>
+    </button></h2><p>ANN および k-Nearest Neighbors (kNN) 検索は、ベクトル類似性検索の通常の手法です。kNN検索では、ベクトル空間内のすべてのベクトルを検索要求で運ばれたクエリ・ベクトルと比較してから、最も似ているものを見つけ出す必要があり、時間とリソースを消費します。</p>
 <p>kNN検索とは異なり、ANN検索アルゴリズムは、ベクトルの埋め込み順をソートした<strong>インデックス</strong>ファイルを要求します。検索要求が来たとき、インデックスファイルを参照として使用することで、クエリ・ベクトルに最も類似したベクトル埋め込みを含むサブグループを素早く見つけることができます。次に、指定された<strong>メトリックタイプを</strong>使用して、クエリベクトルとサブグループ内の類似度を測定し、クエリベクトルとの類似度に基づいてグループメンバーをソートし、<strong>上位K個の</strong>グループメンバーを割り出すことができます。</p>
 <p>ANN検索は事前に構築されたインデックスに依存しており、検索スループット、メモリ使用量、検索の正しさは、選択したインデックスタイプによって異なる可能性があります。検索の性能と正しさのバランスをとる必要がある。</p>
 <p>Milvusは学習曲線を減らすために、<strong>AUTOINDEXを</strong>提供しています。<strong>AUTOINDEXを</strong>使用すると、Milvusはインデックスを構築する際にコレクション内のデータ分布を分析し、その分析に基づいて最も最適化されたインデックスパラメータを設定し、検索性能と正しさのバランスを取ることができます。</p>
@@ -298,7 +298,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>同様に、検索リクエストに複数のクエリーベクトルを含めることができます。milvusはクエリベクトルに対してANN検索を並行して行い、2組の結果を返します。</p>
+    </button></h2><p>同様に、検索リクエストに複数のクエリベクトルを含めることができます。milvusはクエリベクトルに対してANN検索を並行して行い、2組の結果を返します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
@@ -666,7 +666,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusの検索結果には、デフォルトでトップKベクトル埋め込みを含むエンティティのプライマリフィールド値と類似距離/スコアが含まれます。ベクトルフィールドとスカラーフィールドの両方を含む対象フィールドの名前を出力フィールドとして検索リクエストに含めることで、検索結果にこれらのエンティティの他のフィールドの値を持たせることができます。</p>
+    </button></h2><p>Milvusの検索結果には、デフォルトでトップKベクトル埋め込みを含むエンティティのプライマリフィールド値と類似距離/スコアが含まれます。ベクトルフィールドとスカラーフィールドの両方を含む対象フィールドの名前を出力フィールドとして検索リクエストに含めることで、検索結果にこれらのエンティティ内の他のフィールドの値を持たせることができます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -948,6 +948,43 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">検索にタイムゾーンを一時的に設定する<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>コレクションに<code translate="no">TIMESTAMPTZ</code> フィールドがある場合、検索コールで<code translate="no">timezone</code> パラメータを設定することで、1回の操作でデータベースまたはコレクションのデフォルトタイムゾーンを一時的にオーバーライドできます。これは、操作中に<code translate="no">TIMESTAMPTZ</code> の値がどのように表示され、比較されるかを制御します。</p>
+<p><code translate="no">timezone</code> 、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>UTCなど</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、「<a href="/docs/ja/timestamptz-field.md">TIMESTAMPTZフィールド</a>」を参照のこと。</p>
+<p>以下の例では、検索操作でタイムゾーンを一時的に設定する方法を示している：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    data=[query_vector],
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
+<span class="highlighted-wrapper-line">    timezone=<span class="hljs-string">&quot;America/Havana&quot;</span>,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Enhancing-ANN-Search" class="common-anchor-header">ANN検索の強化<button data-href="#Enhancing-ANN-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -987,7 +1024,7 @@ curl --request POST \
 <p>Milvusのキーワードマッチは、特定の用語に基づいた正確な文書検索を可能にします。この機能は、主に特定の条件を満たすフィルタリング検索に使用され、スカラーフィルタリングを組み込んでクエリ結果を絞り込むことができるため、スカラー条件を満たすベクトル内の類似検索が可能です。</p>
 <p>キーワードマッチの詳細については、<a href="/docs/ja/keyword-match.md">キーワードマッチを</a>参照してください。</p></li>
 <li><p>パーティション・キーの使用</p>
-<p>複数のスカラー・フィールドをメタデータ・フィルタリングに関与させ、かなり複雑なフィルタリング条件を使用すると、検索効率に影響することがあります。スカラー・フィールドをパーティション・キーに設定し、検索リクエストでパーティション・キーを含むフィルタリング条件を使用すると、指定したパーティション・キーの値に対応するパーティション内に検索範囲を制限することができます。</p>
+<p>複数のスカラー・フィールドをメタデータ・フィルタリングに関与させ、かなり複雑なフィルタリング条件を使用すると、検索効率に影響することがあります。スカラー・フィールドをパーティション・キーに設定し、検索リクエストでパーティション・キーを含むフィルタリング条件を使用すると、指定されたパーティション・キーの値に対応するパーティション内に検索範囲を制限することができます。</p>
 <p>パーティション・キーの詳細については、「<a href="/docs/ja/use-partition-key.md">パーティション・キーの使用</a>」を参照してください。</p></li>
 <li><p>mmapを使用する</p>
 <p>mmap-settingsの詳細については、「<a href="/docs/ja/mmap.md">mmapを使用する</a>」を参照してください。</p></li>

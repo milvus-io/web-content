@@ -90,7 +90,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <ul>
 <li><p>名为<strong>Milvus-standalone</strong>的 docker 容器已在<strong>19530</strong> 端口启动。</p></li>
 <li><p>嵌入式 etcd 与 Milvus 安装在同一个容器中，服务端口为<strong>2379</strong>。其配置文件被映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</p></li>
-<li><p>Milvus 数据卷被映射到当前文件夹中的<strong>volumes/milvus</strong>。</p></li>
+<li><p>Milvus 数据卷映射到当前文件夹中的<strong>volumes/milvus</strong>。</p></li>
 </ul>
 <p>可以使用以下命令管理 Milvus 容器和存储的数据。</p>
 <pre><code translate="no" class="language-powershell"># Stop Milvus​
@@ -187,9 +187,9 @@ Delete successfully.​
       </svg>
     </button></h3><ol>
 <li><p>在管理员模式下右击并选择<strong>以管理员身份运行</strong>，打开 Docker Desktop。</p></li>
-<li><p>在 PowerShell 或 Windows Command Prompt 中运行以下命令，为 Milvus Standalone 下载 Docker Compose 配置文件并启动 Milvus。</p>
+<li><p>在 PowerShell 或 Windows 命令提示符中运行以下命令，为 Milvus Standalone 下载 Docker Compose 配置文件并启动 Milvus。</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>下载 Milvus 配置文件。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.4/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>启动 Milvus。</p>

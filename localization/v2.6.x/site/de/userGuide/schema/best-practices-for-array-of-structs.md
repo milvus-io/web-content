@@ -44,7 +44,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Moderne KI-Anwendungen, vom autonomen Fahren bis zur multimodalen Suche, stützen sich zunehmend auf verschachtelte, heterogene Daten. Herkömmliche flache Datenmodelle haben Schwierigkeiten, komplexe Beziehungen wie<strong>"ein Dokument mit vielen annotierten Chunks</strong>" oder<strong>"eine Fahrszene mit mehreren beobachteten Manövern</strong>" darzustellen. Hier kommt der Datentyp Array of Structs in Milvus ins Spiel.</p>
+    </button></h2><p>Moderne KI-Anwendungen, vom autonomen Fahren bis zur multimodalen Suche, stützen sich zunehmend auf verschachtelte, heterogene Daten. Herkömmliche flache Datenmodelle haben Schwierigkeiten, komplexe Beziehungen wie<strong>"ein Dokument mit vielen kommentierten Chunks</strong>" oder<strong>"eine Fahrszene mit mehreren beobachteten Manövern</strong>" darzustellen. Hier kommt der Datentyp Array of Structs in Milvus ins Spiel.</p>
 <p>Ein Array of Structs ermöglicht es Ihnen, eine geordnete Menge strukturierter Elemente zu speichern, wobei jede Struct ihre eigene Kombination aus skalaren Feldern und Vektoreinbettungen enthält. Dies macht ihn ideal für:</p>
 <ul>
 <li><p><strong>Hierarchische Daten</strong>: Übergeordnete Entitäten mit mehreren untergeordneten Datensätzen, z. B. ein Buch mit vielen Textabschnitten oder ein Video mit vielen kommentierten Einzelbildern.</p></li>
@@ -117,7 +117,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die Indizierung ist für Vektorfelder obligatorisch, und zwar sowohl für die Vektorfelder in einer Sammlung als auch für die in einer Struktur definierten Felder. Für Vektorfelder in einer Struktur sollten Sie <code translate="no">HNSW</code> als Index-Typ und <code translate="no">MAX_SIM</code> series als metrischen Typ verwenden.</p>
+    </button></h3><p>Die Indizierung ist für Vektorfelder obligatorisch, und zwar sowohl für die Vektorfelder in einer Sammlung als auch für die in einer Struktur definierten Felder. Für Vektorfelder in einer Struktur sollten Sie <code translate="no">AUTOINDEX</code> oder <code translate="no">HNSW</code> als Index-Typ und <code translate="no">MAX_SIM</code> series als metrischen Typ verwenden.</p>
 <p>Einzelheiten zu allen anwendbaren Grenzwerten finden Sie in <a href="/docs/de/array-of-structs.md#Limits">den Grenzwerten</a>.</p>
 <h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">Ein Beispiel aus der Praxis: Modellierung des CoVLA-Datensatzes für autonomes Fahren<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -156,7 +156,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der CoVLA-Datensatz ist ein umfangreicher, multimodaler Fahrdatensatz, der 10.000 Videoclips mit insgesamt über 80 Stunden Material umfasst. Die Bilder werden mit einer Rate von 20 Hz abgetastet und jedes Bild wird mit detaillierten Beschriftungen in natürlicher Sprache sowie mit Informationen über den Fahrzeugzustand und die Koordinaten der erkannten Objekte versehen.</p>
+    </button></h3><p>Der CoVLA-Datensatz ist ein großer, multimodaler Fahrdatensatz, der 10.000 Videoclips mit insgesamt über 80 Stunden Filmmaterial umfasst. Die Bilder werden mit einer Rate von 20 Hz abgetastet und jedes Bild wird mit detaillierten Beschriftungen in natürlicher Sprache sowie mit Informationen über den Fahrzeugzustand und die Koordinaten der erkannten Objekte versehen.</p>
 <p>Die Struktur des Datensatzes ist wie folgt:</p>
 <pre><code translate="no" class="language-python">├── video_1                                       (VIDEO) <span class="hljs-comment"># video.mp4</span>
 │   ├── video_id                                  (INT)
@@ -238,9 +238,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>Zu Beginn müssen wir das Schema für eine Caption Struct, eine Front_cars Struct und die Collection initialisieren.</p>
 <ul>
 <li><p>Initialisieren Sie das Schema für die Caption Struct.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -480,12 +478,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Alle Vektorfelder müssen indiziert werden. Um die Vektorfelder in einem Element Struct zu indizieren, müssen Sie <code translate="no">HNSW</code> als Index-Typ und den <code translate="no">MAX_SIM</code> series metric-Typ verwenden, um die Ähnlichkeiten zwischen Einbettungslisten zu messen.</p>
+    </button></h3><p>Alle Vektorfelder müssen indiziert werden. Um die Vektorfelder in einem Element Struct zu indizieren, müssen Sie <code translate="no">AUTOINDEX</code> oder <code translate="no">HNSW</code> als Indextyp und den Metrik-Typ <code translate="no">MAX_SIM</code> series verwenden, um die Ähnlichkeiten zwischen Einbettungslisten zu messen.</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -493,7 +491,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -501,7 +499,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}

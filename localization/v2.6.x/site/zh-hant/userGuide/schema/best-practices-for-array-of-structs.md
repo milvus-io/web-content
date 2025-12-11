@@ -22,7 +22,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>現代的人工智能應用程式，尤其是在物聯網 (IoT) 和自動駕駛領域，通常會推理豐富且結構化的事件：包含時間戳記和向量嵌入的感測器讀數、包含錯誤代碼和音訊片段的診斷記錄，或是包含位置、速度和場景情境的行程片段。這些都需要資料庫原生支援嵌套資料的擷取與搜尋。</p>
-<p>Milvus 並沒有要求使用者將原子結構事件轉換為平面資料模型，而是引進了結構陣列 (Array of Structs)，陣列中的每個結構都可以持有標量和向量，並保留語意完整性。</p>
+<p>Milvus 並沒有要求使用者將原子結構事件轉換成平面資料模型，而是引進了結構陣列 (Array of Structs)，陣列中的每個結構都可以持有標量和向量，並保留語意完整性。</p>
 <h2 id="Why-Array-of-Structs" class="common-anchor-header">為什麼要使用結構陣列<button data-href="#Why-Array-of-Structs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,7 +111,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>對於向量欄位，包括集合中的向量欄位和 Struct 中定義的向量欄位，索引是必須的。對於 Struct 中的向量欄位，您應該使用<code translate="no">HNSW</code> 作為索引類型，並使用<code translate="no">MAX_SIM</code> series 作為度量類型。</p>
+    </button></h3><p>對於向量欄位，包括集合中的向量欄位和 Struct 中定義的向量欄位，索引是必須的。對於 Struct 中的向量欄位，您應該使用<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> 作為索引類型，並使用<code translate="no">MAX_SIM</code> 系列作為度量類型。</p>
 <p>有關所有適用限制的詳細資訊，請參閱<a href="/docs/zh-hant/array-of-structs.md#Limits">限制</a>。</p>
 <h2 id="A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="common-anchor-header">一個真實世界的範例：為自動駕駛建立 CoVLA 資料集模型<button data-href="#A-real-world-example-Modeling-the-CoVLA-dataset-for-autonomous-driving" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -128,7 +128,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>由<a href="https://tur.ing/posts/s1QUA1uh">圖靈汽車公司</a>推出並在 2025 年電腦視覺應用冬季會議 (Winter Conference on Applications of Computer Vision, WACV) 上接受的綜合視覺-語言-動作 (Comprehensive Vision-Language-Action, CoVLA) 資料集，為訓練和評估自動駕駛中的視覺-語言-動作 (Vision-Language-Action, VLA) 模型提供了豐富的基礎。每個資料點（通常是視訊片段）不僅包含原始視覺輸入，還包含描述下列內容的結構化字幕：</p>
+    </button></h2><p>由<a href="https://tur.ing/posts/s1QUA1uh">Turing Motors</a>介紹並在 2025 年電腦視覺應用冬季會議 (Winter Conference on Applications of Computer Vision, WACV) 上接受的全面視覺-語言-動作 (Comprehensive Vision-Language-Action, CoVLA) 資料集，為訓練和評估自動駕駛中的視覺-語言-動作 (Vision-Language-Action, VLA) 模型提供了豐富的基礎。每個資料點（通常是視訊片段）不僅包含原始視覺輸入，還包含描述下列內容的結構化字幕：</p>
 <ul>
 <li><p><strong>自我車輛的行為</strong>(例如：「向左並線，同時讓開迎面駛來的車輛」)、</p></li>
 <li><p><strong>偵測到的</strong>存在<strong>物件</strong>(例如：前方車輛、行人、交通燈)，以及</p></li>
@@ -232,9 +232,7 @@ beta: Milvus 2.6.4+
     </button></h3><p>首先，我們需要初始化標題 Struct、front_cars Struct 和集合的模式。</p>
 <ul>
 <li><p>初始化 Caption Struct 的模式。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
-
-client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># create the schema for the caption struct</span>
 schema_for_caption = client.create_struct_field_schema()
@@ -474,12 +472,12 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>所有向量欄位都必須建立索引。要索引元素 Struct 中的向量欄位，您需要使用<code translate="no">HNSW</code> 作為索引類型，並使用<code translate="no">MAX_SIM</code> 系列度量類型來衡量嵌入清單之間的相似性。</p>
+    </button></h3><p>所有向量欄位都必須建立索引。要索引元素 Struct 中的向量欄位，您需要使用<code translate="no">AUTOINDEX</code> 或<code translate="no">HNSW</code> 作為索引類型，並使用<code translate="no">MAX_SIM</code> 系列度量類型來衡量嵌入清單之間的相似性。</p>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[plain_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_plain_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -487,7 +485,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[rich_cap_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_rich_cap_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
@@ -495,7 +493,7 @@ index_params.add_index(
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;captions[risk_vector]&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, 
     metric_type=<span class="hljs-string">&quot;MAX_SIM_COSINE&quot;</span>, 
     index_name=<span class="hljs-string">&quot;captions_risk_vector_idx&quot;</span>, <span class="hljs-comment"># mandatory for now</span>
     index_params={<span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>, <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>}
