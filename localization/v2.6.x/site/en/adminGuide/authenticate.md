@@ -67,7 +67,7 @@ title: Authenticate User Access
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>To enable authentication, set <code translate="no">spec.common.security.authorizationEnabled</code> to <code translate="no">true</code> in the <code translate="no">Milvus</code> CRD. For more information on Milvus CRD, refer to <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configure Milvus with Milvus Operator</a>.</p>
+<p>To enable authentication, set <code translate="no">spec.config.common.security.authorizationEnabled</code> to <code translate="no">true</code> in the <code translate="no">Milvus</code> CRD. For more information on Milvus CRD, refer to <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configure Milvus with Milvus Operator</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

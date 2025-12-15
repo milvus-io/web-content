@@ -140,11 +140,11 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
 <li><p>Run the following command to edit the MIlvus custom resource. The following command assumes that the custom resource is named <code translate="no">my-release</code>.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Edit the <code translate="no">spec.components.disableMetrics</code> field to <code translate="no">false</code>.</p>
+<li><p>Edit the <code translate="no">spec.components.disableMetric</code> field to <code translate="no">false</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+    <span class="hljs-attr">disableMetric:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Save and exit the editor.</p></li>
