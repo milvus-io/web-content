@@ -55,13 +55,13 @@ title: تثبيت برنامج Milvus Standalone مع حزمة RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك تنزيل حزمة RPM/DEB وفقاً لبنية نظامك من <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.6">صفحة إصدارات Milvus</a>.</p>
+    </button></h2><p>يمكنك تنزيل حزمة RPM/DEB وفقاً لبنية نظامك من <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.7">صفحة إصدارات Milvus</a>.</p>
 <ul>
 <li>بالنسبة ل x86_64/amd64، قم بتنزيل حزمة <strong>milvus_2.6.6-1_amd64.deb</strong> أو حزمة <strong>milvus_2.6-1_amd64.rpm.</strong> </li>
 <li>بالنسبة ل ARM64، قم بتنزيل حزمة <strong>milvus_2.6.6-1_arm64.deb</strong> أو حزمة <strong>milvus_2.6-1_arm64.rpm.</strong> </li>
 </ul>
 <p>يفترض الأمر التالي أنك ستقوم بتشغيل Milvus Standalone على جهاز x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.7/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">تثبيت حزمة RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -213,5 +213,5 @@ dpkg -l | grep milvus
 <li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

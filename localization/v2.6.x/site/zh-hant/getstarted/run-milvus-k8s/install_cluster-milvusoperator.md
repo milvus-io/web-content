@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>一旦 Milvus Operator pod 運行，您就可以按以下方式部署 Milvus 叢集。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面的指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列（建議使用 v2.6.6）的 Milvus 叢集，以及所有新的架構元件，包括 Streaming Node。</p>
+<p>上面的指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列（建議使用 v2.6.7）的 Milvus 叢集，以及包括 Streaming Node 在內的所有新架構元件。</p>
 <p><strong>此部署中的架構重點：</strong></p>
 <ul>
 <li><strong>訊息佇列</strong>：<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>(減少基礎架構維護)</li>

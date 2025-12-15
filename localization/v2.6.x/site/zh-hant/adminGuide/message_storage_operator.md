@@ -19,7 +19,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 使用 RocksMQ、Pulsar 或 Kafka 來管理最近變更的日誌、輸出串流日誌，以及提供日誌訂閱。本主題介紹如何在使用 Milvus Operator 安裝 Milvus 時，設定訊息儲存的依賴性。如需詳細資訊，請參閱 Milvus Operator 套件庫中的<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configure Message Storage with Milvus Operator</a>。</p>
+    </button></h1><p>Milvus 使用 RocksMQ、Pulsar 或 Kafka 來管理最近變更的日誌、輸出串流日誌，以及提供日誌訂閱。本主題介紹如何在使用 Milvus Operator 安裝 Milvus 時，設定訊息儲存的依賴性。如需詳細資訊，請參閱 Milvus Operator 資源庫中的<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configure Message Storage with Milvus Operator</a>。</p>
 <p>本主題假設您已部署 Milvus Operator。</p>
 <div class="alert note">請參閱<a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">部署 Milvus Operator</a>以取得更多資訊。 </div>
 <p>您需要指定使用 Milvus Operator 啟動 Milvus 叢集的設定檔。</p>
@@ -56,11 +56,11 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 <li>一個 Milvus 實例只支援一個訊息儲存空間。然而，我們仍然向後相容為一個實例設定多個訊息儲存空間。優先順序如下：<ul>
 <li>獨立模式：  RocksMQ (預設) &gt; Pulsar &gt; Kafka</li>
 <li>群集模式：Pulsar (預設) &gt; Kafka</li>
-<li>為了向下相容性，2.3 引入的 Nats 不參與這些優先順序規則。</li>
+<li>為了向下相容性，2.3 中引入的 Nats 不參與這些優先順序規則。</li>
 </ul></li>
 <li>當 Milvus 系統在執行時，訊息儲存是無法改變的。</li>
 <li>僅支援 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.6時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
+<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.7時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -66,7 +66,7 @@ title: Benutzerzugriff authentifizieren
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>Um die Authentifizierung zu aktivieren, setzen Sie <code translate="no">spec.common.security.authorizationEnabled</code> in der CRD von <code translate="no">Milvus</code> auf <code translate="no">true</code>. Weitere Informationen zu Milvus CRD finden Sie unter <a href="https://milvus.io/docs/configure_operator.md?tab=component">Konfigurieren von Milvus mit Milvus Operator</a>.</p>
+<p>Um die Authentifizierung zu aktivieren, setzen Sie <code translate="no">spec.config.common.security.authorizationEnabled</code> in der CRD von <code translate="no">Milvus</code> auf <code translate="no">true</code>. Weitere Informationen zu Milvus CRD finden Sie unter <a href="https://milvus.io/docs/configure_operator.md?tab=component">Konfigurieren von Milvus mit Milvus Operator</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

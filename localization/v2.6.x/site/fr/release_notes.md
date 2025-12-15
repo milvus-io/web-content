@@ -19,6 +19,111 @@ title: Notes de mise à jour
         ></path>
       </svg>
     </button></h1><p>Découvrez les nouveautés de Milvus ! Cette page résume les nouvelles fonctionnalités, les améliorations, les problèmes connus et les corrections de bogues de chaque version. Vous trouverez dans cette section les notes de version pour chaque version publiée après la v2.6.0. Nous vous conseillons de consulter régulièrement cette page pour prendre connaissance des mises à jour.</p>
+<h2 id="v267" class="common-anchor-header">v2.6.7<button data-href="#v267" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Date de publication : 4 décembre 2025</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Version de Milvus</th><th style="text-align:left">Version SDK Python</th><th style="text-align:left">Version SDK Node.js</th><th style="text-align:left">Version SDK Java</th><th style="text-align:left">Version du SDK Go</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.7</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.10</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.6.7 est une mise à jour de stabilisation critique pour la série 2.6.x. Cette version se concentre sur le renforcement du système contre les défaillances distribuées et sur l'optimisation de l'utilisation des ressources en cas de charge élevée. Avec des améliorations significatives dans le traitement des E/S, la gestion de la mémoire et l'intégration de Kubernetes, nous recommandons vivement à tous les utilisateurs de production de passer à cette version pour garantir une plus grande fiabilité et un fonctionnement plus fluide à l'échelle.</p>
+<h3 id="Features" class="common-anchor-header">Fonctionnalités<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Ajout d'un point de terminaison <code translate="no">/livez</code> pour prendre en charge les sondes natives de liveness de Kubernetes, ce qui améliore la stabilité de l'orchestration des conteneurs<a href="https://github.com/milvus-io/milvus/pull/45481">(#45481</a>).</li>
+<li>Ajout de la prise en charge des opérations <strong>GroupBy</strong> sur les champs <code translate="no">TIMESTAMPTZ</code>, améliorant les capacités d'analyse des séries temporelles<a href="https://github.com/milvus-io/milvus/pull/45763">(#45763</a>).</li>
+<li>Prise en charge de <code translate="no">mmap</code> pour les indices de clés partagées du déchiquetage JSON afin de réduire l'empreinte RAM<a href="https://github.com/milvus-io/milvus/pull/45861">(#45861</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Améliorations<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Prise en charge du transfert des requêtes DML dans le Proxy pour améliorer la disponibilité en écriture et la résilience du routage<a href="https://github.com/milvus-io/milvus/pull/45922">(#45922</a>).</li>
+<li>Mise à jour d'etcd vers la version 3.5.23 pour résoudre les problèmes de stabilité et de performance<a href="https://github.com/milvus-io/milvus/pull/45953">(#45953</a>).</li>
+<li>Ajout d'une gestion d'erreur robuste pour les crashs du serveur Etcd afin de prévenir les défaillances en cascade des composants<a href="https://github.com/milvus-io/milvus/pull/45633">(#45633</a>).</li>
+<li>Réduction de la charge de Etcd en supprimant les observateurs coûteux pour les vérifications simples de la vivacité des sessions<a href="https://github.com/milvus-io/milvus/pull/45974">(#45974</a>).</li>
+<li>Amélioration de la stratégie de rétention WAL pour mieux équilibrer l'utilisation du disque avec la sécurité de récupération des données<a href="https://github.com/milvus-io/milvus/pull/45784">(#45784</a>).</li>
+<li>Prise en charge de la synchronisation d'écriture asynchrone pour les journaux afin d'éviter que le blocage des E/S disque n'affecte le chemin d'exécution principal<a href="https://github.com/milvus-io/milvus/pull/45806">(#45806</a>).</li>
+<li>Utilisation forcée des E/S tamponnées pour les tâches de charge à haute priorité afin d'optimiser l'utilisation du cache de page du système d'exploitation et le débit<a href="https://github.com/milvus-io/milvus/pull/45958">(#45958</a>).</li>
+<li>Optimisation de la stratégie <code translate="no">mmap</code> pour mapper des groupes de morceaux en un seul appel système, réduisant la surcharge du noyau pendant le chargement des segments<a href="https://github.com/milvus-io/milvus/pull/45893">(#45893</a>).</li>
+<li>Amélioration de la précision de l'estimation de la mémoire pour le déchiquetage JSON afin d'éviter les OOM kills ou la sous-utilisation<a href="https://github.com/milvus-io/milvus/pull/45876">(#45876</a>).</li>
+<li>Amélioration de l'estimation du chargement des segments pour prendre en compte les états d'éviction et d'échauffement<a href="https://github.com/milvus-io/milvus/pull/45891">(#45891</a>).</li>
+<li>Ajout de contrôles d'annulation granulaires dans les opérateurs de requête pour permettre une terminaison plus rapide des requêtes interrompues ou temporisées<a href="https://github.com/milvus-io/milvus/pull/45894">(#45894</a>).</li>
+<li>Suppression des vérifications redondantes du type de ressource dans la configuration des ressources de fichiers<a href="https://github.com/milvus-io/milvus/pull/45727">(#45727</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correction de bogues<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Interleaved Go et C++ logs into a unified stream to provide a correct chronological view for debugging<a href="https://github.com/milvus-io/milvus/pull/46005">(#46005</a>).</li>
+<li>Résolution d'une condition de course où <code translate="no">LastConfirmedMessageID</code> pouvait être incorrect en cas d'écritures très concurrentielles<a href="https://github.com/milvus-io/milvus/pull/45874">(#45874</a>).</li>
+<li>Correction d'une erreur de calcul dans l'agrégation de <code translate="no">allsearchcount</code> à partir de plusieurs résultats de recherche<a href="https://github.com/milvus-io/milvus/pull/45904">(#45904</a>).</li>
+<li>Correction des expressions Term pour gérer correctement la logique de confinement des chaînes dans les tableaux JSON<a href="https://github.com/milvus-io/milvus/pull/45956">(#45956</a>).</li>
+<li>Remplacement de <code translate="no">json.doc()</code> par <code translate="no">json.dom_doc()</code> dans <code translate="no">JSONContainsExpr</code> pour corriger les comportements d'analyse et améliorer les performances<a href="https://github.com/milvus-io/milvus/pull/45786">(#45786</a>).</li>
+<li>Correction d'une panique dans les composants MixCoord en attente pendant la séquence d'arrêt<a href="https://github.com/milvus-io/milvus/pull/45898">(#45898</a>).</li>
+<li>Correction du vérificateur de leader pour s'assurer que la distribution des segments est correctement synchronisée avec les nœuds en lecture seule<a href="https://github.com/milvus-io/milvus/pull/45991">(#45991</a>).</li>
+<li>Assurer que <code translate="no">HandleNodeUp</code> est déclenché pendant la réobservation des nœuds pour maintenir une topologie d'équilibrage de charge correcte<a href="https://github.com/milvus-io/milvus/pull/45963">(#45963</a>).</li>
+<li>Implémentation du repli vers le stockage WAL distant si le stockage WAL local devient indisponible<a href="https://github.com/milvus-io/milvus/pull/45754">(#45754</a>).</li>
+<li>Ajout de <code translate="no">EmptySessionWatcher</code> pour éviter les paniques lors de l'exécution en mode de liaison IndexNode<a href="https://github.com/milvus-io/milvus/pull/45912">(#45912</a>).</li>
+<li>Garantie de la cohérence de l'état de la mémoire lors de la récupération des tâches de diffusion à partir des tampons de protocole<a href="https://github.com/milvus-io/milvus/pull/45788">(#45788</a>).</li>
+<li>Résolution des problèmes de sécurité des threads dans les mises à jour du schéma de collection SegCore<a href="https://github.com/milvus-io/milvus/pull/45618">(#45618</a>).</li>
+<li>Renforcement des contrôles d'accès (RBAC) pour <code translate="no">ListImport</code> et <code translate="no">GetImportProgress</code> APIs<a href="https://github.com/milvus-io/milvus/pull/45862">(#45862</a>).</li>
+<li>Correction d'un bogue où BulkImport échouait si l'entrée contenait une liste de structures vide<a href="https://github.com/milvus-io/milvus/pull/45692">(#45692</a>).</li>
+</ul>
 <h2 id="v266" class="common-anchor-header">v2.6.6<button data-href="#v266" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +139,7 @@ title: Notes de mise à jour
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Date de publication : 21 novembre 2025</p>
+    </button></h2><p>Date de publication : November 21, 2025</p>
 <table>
 <thead>
 <tr><th style="text-align:left">Version Milvus</th><th style="text-align:left">Version SDK Python</th><th style="text-align:left">Version SDK Node.js</th><th style="text-align:left">Version SDK Java</th><th style="text-align:left">Version du SDK Go</th></tr>
@@ -784,7 +889,7 @@ title: Notes de mise à jour
 <tr><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.6.0 est officiellement publié ! S'appuyant sur les fondations architecturales posées dans la version <a href="#v260-rc1">2.6.0-rc1</a>, cette version prête pour la production résout de nombreux problèmes de stabilité et de performances tout en introduisant de nouvelles fonctionnalités puissantes, notamment le format de stockage V2, le traitement JSON avancé et des fonctions de recherche améliorées. Avec de nombreuses corrections de bogues et optimisations basées sur les commentaires de la communauté au cours de la phase RC, Milvus 2.6.0 est prêt pour que vous l'exploriez et l'adoptiez.</p>
+<p>Milvus 2.6.0 est officiellement publié ! S'appuyant sur les fondations architecturales posées dans la version <a href="#v260-rc1">2.6.0-rc1</a>, cette version prête pour la production résout de nombreux problèmes de stabilité et de performance tout en introduisant de nouvelles fonctionnalités puissantes, notamment le format de stockage V2, le traitement JSON avancé et des fonctions de recherche améliorées. Avec de nombreuses corrections de bogues et optimisations basées sur les commentaires de la communauté au cours de la phase RC, Milvus 2.6.0 est prêt pour que vous l'exploriez et l'adoptiez.</p>
 <div class="alert warning">
 <p>La mise à niveau directe à partir des versions antérieures à la version 2.6.0 n'est pas prise en charge en raison des modifications architecturales. Veuillez suivre notre <a href="/docs/fr/upgrade_milvus_cluster-operator.md">guide de mise à jour</a>.</p>
 </div>
@@ -866,7 +971,7 @@ title: Notes de mise à jour
 <tr><td style="text-align:center">2.6.0-rc1</td><td style="text-align:center">2.6.0b0</td><td style="text-align:center">2.6.0-rc1</td><td style="text-align:center">2.6.0</td><td style="text-align:center">2.6.0-rc.1</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.6.0-rc1 présente une architecture simplifiée, native dans le nuage, conçue pour améliorer l'efficacité opérationnelle, l'utilisation des ressources et le coût total de possession en réduisant la complexité du déploiement. Cette version ajoute de nouvelles fonctionnalités axées sur les performances, la recherche et le développement. Les principales fonctionnalités comprennent la quantification 1 bit haute précision (RaBitQ) et une couche de cache dynamique pour des gains de performance, la détection de quasi-doublons avec MinHash et la correspondance précise des phrases pour une recherche avancée, et des fonctions d'intégration automatisées avec modification du schéma en ligne pour améliorer l'expérience du développeur.</p>
+<p>Milvus 2.6.0-rc1 présente une architecture simplifiée, native dans le nuage, conçue pour améliorer l'efficacité opérationnelle, l'utilisation des ressources et le coût total de possession en réduisant la complexité du déploiement. Cette version ajoute de nouvelles fonctionnalités axées sur les performances, la recherche et le développement. Les principales caractéristiques comprennent la quantification 1 bit haute précision (RaBitQ) et une couche de cache dynamique pour des gains de performance, la détection de quasi-doublons avec MinHash et la correspondance précise des phrases pour une recherche avancée, et des fonctions d'intégration automatisées avec modification du schéma en ligne pour améliorer l'expérience du développeur.</p>
 <div class="alert note">
 <p>Il s'agit d'une version préliminaire de Milvus 2.6.0. Pour essayer les dernières fonctionnalités, installez cette version dans le cadre d'un nouveau déploiement. La mise à niveau de Milvus v2.5.x ou antérieure vers 2.6.0-rc1 n'est pas prise en charge.</p>
 </div>
@@ -919,7 +1024,7 @@ title: Notes de mise à jour
 <li>Le <a href="/docs/fr/lindera-tokenizer.md">tokenizer Lindera</a> est intégré pour une meilleure prise en charge des langues asiatiques telles que le japonais et le coréen.</li>
 <li>La sélection du tokenizer au niveau de la ligne est désormais prise en charge, le <a href="/docs/fr/icu-tokenizer.md">tokenizer</a> polyvalent <a href="/docs/fr/icu-tokenizer.md">ICU</a> étant disponible comme solution de repli pour les scénarios multilingues.</li>
 </ul>
-<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Données entrantes, données sortantes avec les fonctions d'intégration</h4><p>Milvus 2.6 introduit une fonction "Entrée et sortie de données" qui simplifie le développement d'applications d'IA en s'intégrant directement aux modèles d'intégration tiers (par exemple, OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Les utilisateurs peuvent désormais insérer et interroger des données textuelles brutes, et Milvus appellera automatiquement le service de modèle spécifié pour convertir le texte en vecteurs en temps réel. Il n'est donc plus nécessaire de disposer d'un pipeline de conversion vectorielle distinct.</p>
+<h4 id="Data-in-Data-Out-with-Embedding-Functions" class="common-anchor-header">Entrée et sortie des données avec les fonctions d'intégration</h4><p>Milvus 2.6 introduit une fonction "Entrée et sortie de données" qui simplifie le développement d'applications d'IA en s'intégrant directement aux modèles d'intégration tiers (par exemple, OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Les utilisateurs peuvent désormais insérer et interroger des données textuelles brutes, et Milvus appellera automatiquement le service de modèle spécifié pour convertir le texte en vecteurs en temps réel. Il n'est donc plus nécessaire de disposer d'un pipeline de conversion vectorielle distinct.</p>
 <p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/embedding-function-overview.md">Vue d'ensemble de la fonction d'intégration</a>.</p>
 <h4 id="Phrase-Match" class="common-anchor-header">Correspondance de phrases</h4><p>La correspondance de phrases est une fonction de recherche de texte qui renvoie des résultats uniquement lorsque la séquence exacte de mots d'une requête apparaît consécutivement et dans le bon ordre dans un document.</p>
 <p><strong>Caractéristiques principales</strong>:</p>

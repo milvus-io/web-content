@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus menggunakan Pulsar atau Kafka untuk mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Pulsar adalah sistem penyimpanan pesan default. Topik ini memperkenalkan cara mengonfigurasi penyimpanan pesan dengan Docker Compose atau Helm.</p>
 <p>Anda dapat mengonfigurasi Pulsar dengan <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> atau pada K8 dan mengonfigurasi Kafka pada K8.</p>
 <div class="alert note">
-<p><strong>Batasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v2.6.6, Anda harus mempertahankan pilihan antrean pesan saat ini. Beralih di antara sistem antrean pesan yang berbeda selama peningkatan tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</p>
+<p><strong>Keterbatasan Antrian Pesan</strong>: Saat meningkatkan ke Milvus v2.6.7, Anda harus mempertahankan pilihan antrean pesan saat ini. Beralih di antara sistem antrean pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Mengonfigurasi Pulsar dengan Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -313,7 +313,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS adalah alternatif penyimpanan pesan eksperimental untuk RocksMQ. Untuk langkah rinci tentang bagaimana mengkonfigurasi Milvus dengan Helm, lihat <a href="/docs/id/configure-helm.md">Mengkonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail tentang item konfigurasi yang berhubungan dengan RocksMQ, lihat Konfigurasi <a href="/docs/id/configure_natsmq.md">yang berhubungan dengan NATS</a>.</p>
+    </button></h2><p>NATS adalah alternatif penyimpanan pesan eksperimental untuk RocksMQ. Untuk langkah-langkah rinci tentang bagaimana mengkonfigurasi Milvus dengan Helm, lihat <a href="/docs/id/configure-helm.md">Mengkonfigurasi Milvus dengan Grafik Helm</a>. Untuk detail tentang item konfigurasi yang berhubungan dengan RocksMQ, lihat Konfigurasi <a href="/docs/id/configure_natsmq.md">yang berhubungan dengan NATS</a>.</p>
 <ul>
 <li><p>Jika Anda memulai Milvus dengan NATS dan ingin mengubah pengaturannya, Anda dapat menjalankan <code translate="no">helm upgrade -f</code> dengan pengaturan yang telah diubah pada file YAML berikut ini.</p></li>
 <li><p>Jika Anda telah menginstal Milvus mandiri dengan penyimpanan pesan selain NATS dan ingin mengubahnya menjadi NATS, jalankan <code translate="no">helm upgrade -f</code> dengan berkas YAML berikut setelah Anda mem-flush semua koleksi dan menghentikan Milvus.</p></li>
@@ -355,7 +355,7 @@ summary: >-
           maxMsgs: 
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Memilih antara RockMQ dan NATS?</strong></p>
+<p><strong>Memilih antara RocksMQ dan NATS?</strong></p>
 <p>RockMQ menggunakan CGO untuk berinteraksi dengan RocksDB dan mengelola memori dengan sendirinya, sementara NATS murni-GO yang tertanam dalam instalasi Milvus mendelegasikan pengelolaan memorinya ke pengumpul sampah Go (GC).</p>
 <p>Dalam skenario di mana paket data lebih kecil dari 64 kb, RocksDB mengungguli dalam hal penggunaan memori, penggunaan CPU, dan waktu respons. Di sisi lain, jika paket data lebih besar dari 64 kb, NATS unggul dalam hal waktu respons dengan memori yang cukup dan penjadwalan GC yang ideal.</p>
 <p>Saat ini, Anda disarankan untuk menggunakan NATS hanya untuk eksperimen.</p>

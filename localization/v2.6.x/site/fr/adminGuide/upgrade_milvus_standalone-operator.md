@@ -23,7 +23,7 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ce guide décrit comment mettre à niveau votre déploiement Milvus autonome de la version 2.5.x à la version 2.6.6 à l'aide de Milvus Operator.</p>
+    </button></h1><p>Ce guide décrit comment mettre à niveau votre déploiement Milvus autonome de la version 2.5.x à la version 2.6.7 à l'aide de Milvus Operator.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v266" class="common-anchor-header">Nouveautés de la version 2.6.6<button data-href="#Whats-new-in-v266" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v267" class="common-anchor-header">Nouveautés de la version 2.6.7<button data-href="#Whats-new-in-v267" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,10 +54,10 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La mise à niveau de Milvus 2.5.x vers 2.6.6 implique des changements architecturaux importants :</p>
+    </button></h3><p>La mise à niveau de Milvus 2.5.x vers 2.6.7 implique des changements architecturaux importants :</p>
 <ul>
 <li><strong>Consolidation des coordinateurs</strong>: Les anciens coordinateurs séparés (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) ont été consolidés en un seul. <code translate="no">mixCoord</code></li>
-<li><strong>Nouveaux composants</strong>: Introduction d'un nœud de diffusion en continu pour un meilleur traitement des données</li>
+<li><strong>Nouveaux composants</strong>: Introduction d'un nœud de streaming pour un meilleur traitement des données</li>
 <li><strong>Suppression de composants</strong>: <code translate="no">indexNode</code> supprimé et consolidé</li>
 </ul>
 <p>Ce processus de mise à niveau garantit une migration correcte vers la nouvelle architecture. Pour plus d'informations sur les modifications de l'architecture, voir l'<a href="/docs/fr/architecture_overview.md">aperçu de l'architecture Milvus</a>.</p>
@@ -84,11 +84,11 @@ title: Mise à niveau de Milvus Standalone avec Milvus Operator
 </ul>
 <p><strong>Exigences de compatibilité :</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>n'</strong> est <strong>pas compatible</strong> avec v2.6.6. Les mises à niveau directes à partir des versions candidates ne sont pas prises en charge.</li>
+<li>Milvus v2.6.0-rc1 <strong>n'est pas compatible</strong> avec v2.6.7. Les mises à niveau directes à partir des versions candidates ne sont pas prises en charge.</li>
 <li>Si vous utilisez actuellement la version 2.6.0-rc1 et que vous devez préserver vos données, veuillez vous référer à <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">ce guide de la communauté</a> pour obtenir de l'aide à la migration.</li>
-<li>Vous <strong>devez</strong> effectuer une mise à niveau vers la version 2.5.16 ou une version ultérieure avant d'effectuer une mise à niveau vers la version 2.6.6.</li>
+<li>Vous <strong>devez</strong> passer à la version 2.5.16 ou à une version ultérieure avant de passer à la version 2.6.7.</li>
 </ul>
-<p><strong>Limitations de la file d'attente des messages</strong>: Lors de la mise à niveau vers Milvus v2.6.6, vous devez conserver votre choix actuel de file d'attente de messages. Le passage d'un système de file d'attente de messages à un autre pendant la mise à niveau n'est pas pris en charge. La prise en charge du changement de système de file d'attente de messages sera disponible dans les prochaines versions.</p>
+<p><strong>Limitations de la file d'attente des messages</strong>: Lors de la mise à niveau vers Milvus v2.6.7, vous devez conserver votre choix actuel de file d'attente de messages. Le passage d'un système de file d'attente de messages à un autre pendant la mise à niveau n'est pas pris en charge. La prise en charge du changement de système de file d'attente de messages sera disponible dans les prochaines versions.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Processus de mise à niveau<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,7 +161,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="22-Upgrade-to-v266" class="common-anchor-header">2.2 Mise à niveau vers la version 2.6.6</h4><p>Une fois que la version 2.5.16 fonctionne correctement, passez à la version 2.6.6 :</p>
+<h4 id="22-Upgrade-to-v267" class="common-anchor-header">2.2 Mise à niveau vers la version 2.6.7</h4><p>Une fois que la version 2.5.16 fonctionne correctement, passez à la version 2.6.7 :</p>
 <p>Mettez à jour votre fichier de configuration (<code translate="no">milvusupgrade.yaml</code> dans cet exemple) :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -169,7 +169,7 @@ kubectl get pods
   <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.6</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.7</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Appliquer la mise à niveau finale :</p>
 <pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge

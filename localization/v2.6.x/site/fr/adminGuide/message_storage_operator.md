@@ -53,14 +53,14 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
 </table>
 <p>Il existe également d'autres limitations pour la spécification du stockage des messages :</p>
 <ul>
-<li>Un seul stockage de messages pour une instance Milvus est pris en charge. Toutefois, il existe toujours une compatibilité ascendante avec les stockages de messages multiples définis pour une instance. La priorité est la suivante<ul>
+<li>Un seul stockage de messages pour une instance Milvus est pris en charge. Cependant, il existe toujours une compatibilité ascendante avec les stockages de messages multiples définis pour une instance. La priorité est la suivante<ul>
 <li>mode autonome :  RocksMQ (par défaut) &gt; Pulsar &gt; Kafka</li>
 <li>mode cluster : Pulsar (par défaut) &gt; Kafka</li>
 <li>Les nats introduits dans la version 2.3 ne participent pas à ces règles de priorité pour des raisons de compatibilité ascendante.</li>
 </ul></li>
 <li>Le stockage des messages ne peut pas être modifié lorsque le système Milvus est en cours d'exécution.</li>
 <li>Seule la version 2.x ou 3.x de Kafka est prise en charge.</li>
-<li><strong>Limitations de la mise à niveau</strong>: <strong>Limitations de la file d'attente des messages</strong>: Lors de la mise à niveau vers Milvus v2.6.6, vous devez conserver votre choix actuel de file d'attente de messages. Le passage d'un système de file d'attente de messages à un autre pendant la mise à niveau n'est pas pris en charge. La prise en charge du changement de système de file d'attente de messages sera disponible dans les prochaines versions.</li>
+<li><strong>Limitations de la mise à niveau</strong>: <strong>Limitations de la file d'attente des messages</strong>: Lors de la mise à niveau vers Milvus v2.6.7, vous devez conserver votre choix actuel de file d'attente de messages. Le passage d'un système de file d'attente de messages à un autre pendant la mise à niveau n'est pas pris en charge. La prise en charge du changement de système de file d'attente de messages sera disponible dans les prochaines versions.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurer RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

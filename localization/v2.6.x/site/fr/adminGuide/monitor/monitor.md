@@ -93,11 +93,41 @@ Le rôle de cluster prometheus-k8s par défaut ne peut pas capturer les métriqu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Access-the-dashboards" class="common-anchor-header">1. Accéder aux tableaux de bord</h3><p>Transférer le service Prometheus vers le port <code translate="no">9090</code>, et le service Grafana vers le port <code translate="no">3000</code>.</p>
+    </button></h2><h3 id="1-Access-the-dashboards" class="common-anchor-header">1. Accéder aux tableaux de bord<button data-href="#1-Access-the-dashboards" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Transférer le service Prometheus vers le port <code translate="no">9090</code>, et le service Grafana vers le port <code translate="no">3000</code>.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/prometheus-k8s 9090</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. Activer ServiceMonitor</h3><p>Le ServiceMonitor n'est pas activé par défaut pour Milvus Helm. Après avoir installé l'opérateur Prometheus dans le cluster Kubernetes, vous pouvez l'activer en ajoutant le paramètre <code translate="no">metrics.serviceMonitor.enabled=true</code>.</p>
+<h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. Activer ServiceMonitor<button data-href="#2-Enable-ServiceMonitor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le ServiceMonitor n'est pas activé par défaut pour Milvus Helm. Après avoir installé l'opérateur Prometheus dans le cluster Kubernetes, vous pouvez l'activer en ajoutant le paramètre <code translate="no">metrics.serviceMonitor.enabled=true</code>.</p>
 <h4 id="With-Helm" class="common-anchor-header">Avec Helm</h4><p>Vous pouvez activer le ServiceMonitor en définissant le paramètre <code translate="no">metrics.serviceMonitor.enabled=true</code> comme suit si vous avez installé la carte Milvus Helm.</p>
 <pre><code translate="no">```
 $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
@@ -109,11 +139,11 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
 <li><p>Exécutez la commande suivante pour modifier la ressource personnalisée Milvus. La commande suivante suppose que la ressource personnalisée est nommée <code translate="no">my-release</code>.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Modifier le champ <code translate="no">spec.components.disableMetrics</code> en <code translate="no">false</code>.</p>
+<li><p>Modifier le champ <code translate="no">spec.components.disableMetric</code> en <code translate="no">false</code>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+    <span class="hljs-attr">disableMetric:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Enregistrez et quittez l'éditeur.</p></li>
@@ -122,7 +152,22 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <p>Le champ <code translate="no">status.components.metrics.serviceMonitor.enabled</code> doit être <code translate="no">true</code>.</p>
-<h3 id="3-Check-the-metrics" class="common-anchor-header">3. Vérifier les métriques</h3><p>Après avoir activé le ServiceMonitor, vous pouvez accéder au tableau de bord Prometheus à l'adresse <code translate="no">http://localhost:9090/</code>.</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3. Vérifier les métriques<button data-href="#3-Check-the-metrics" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Après avoir activé le ServiceMonitor, vous pouvez accéder au tableau de bord Prometheus à l'adresse <code translate="no">http://localhost:9090/</code>.</p>
 <p>Cliquez sur l'onglet <code translate="no">Status</code> puis sur <code translate="no">Targets</code>. Vous devriez voir les cibles des composants Milvus.</p>
 <p>
   
@@ -133,7 +178,22 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
    </span> <span class="img-wrapper"> <span>Prometheus_graph</span> </span></p>
-<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. Vérifier le ServiceMonitor</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. Vérifier le ServiceMonitor<button data-href="#4-Check-the-ServiceMonitor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s

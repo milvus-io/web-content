@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>一旦运行了 Milvus Operator pod，就可以按如下方式部署 Milvus 群集。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面的命令部署的是以<strong>Woodpecker</strong>作为消息队列（推荐用于 v2.6.6）和包括流节点在内的所有新架构组件的 Milvus 群集。</p>
+<p>上述命令部署的是以<strong>Woodpecker</strong>作为消息队列（推荐用于 v2.6.7）和包括流节点在内的所有新架构组件的 Milvus 群集。</p>
 <p><strong>此部署中的架构要点：</strong></p>
 <ul>
 <li><strong>消息队列</strong>：<a href="/docs/zh/use-woodpecker.md">使用 Woodpecker</a>（减少基础设施维护）</li>

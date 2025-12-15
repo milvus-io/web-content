@@ -6,7 +6,6 @@ summary: >-
   能同時在記憶體和硬碟中儲存索引和資料。這種方法有助於根據存取頻率優化資料放置政策，在不嚴重影響搜尋效能的情況下，擴大資料集的儲存容量。本頁可協助您瞭解
   Milvus 如何使用 mmap 來實現快速高效的資料儲存和檢索。
 ---
-
 <h1 id="Use-mmap" class="common-anchor-header">使用 mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +62,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus 在全局、欄位、索引和集合層級提供分層的 mmap 設定，其中索引和欄位層級優先於集合層級，而集合層級優先於全局層級。</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">全局 mmap 設定</h3><p>集群層級設定是全局設定，具有最低的優先順序。Milvus 在<code translate="no">milvus.yaml</code> 中提供了幾個 mmap 相關的設定。這些設定將適用於群集中的所有集合。</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">全局 mmap 設定<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>集群層級設定是全局設定，具有最低的優先順序。Milvus 在<code translate="no">milvus.yaml</code> 中提供了幾個 mmap 相關的設定。這些設定將適用於群集中的所有集合。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -98,7 +112,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorIndex</code></p></td>
-     <td><p>指定是否將所有向量欄位索引映射到記憶體。將此設定為<code translate="no">true</code> 會使 Milvus 在收到針對此集合的載入請求時，將集合的向量欄位索引映射到記憶體中，而不是完全載入它們。</p><p>目前，只支援使用下列索引類型的向量欄位：</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>sparse_inverted_index</p></li><li><p>SPARSE_WAND</p></li></ul></td>
+     <td><p>指定是否將所有向量欄位索引映射到記憶體。將此設定為<code translate="no">true</code> 會使 Milvus 在接收到針對此集合的載入請求時，將集合的向量欄位索引映射到記憶體中，而不是完全載入它們。</p><p>目前，只支援使用下列索引類型的向量欄位：</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>sparse_inverted_index</p></li><li><p>SPARSE_WAND</p></li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
@@ -109,7 +123,22 @@ summary: >-
 </table>
 <p>要將上述設定套用到您的 Milvus 叢集，請依照<a href="/docs/zh-hant/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configure Milvus with Helm</a>和<a href="/docs/zh-hant/v2.5.x/configure_operator.md">Configure Milvus with Milvus Operators</a> 的步驟。</p>
 <p>有時候，全局 mmap 設定在面對特定使用個案時並不具彈性。若要對特定的集合或其索引套用其他設定，請考慮針對集合、欄位或索引設定特定的 mmap。您需要釋放並載入一個集合，然後對 mmap 設定的變更才會生效。</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">特定欄位的 mmap 設定</h3><p>要設定欄位特定的 mmap，您需要在新增欄位時加入<code translate="no">mmap_enabled</code> 參數。您可以透過將此參數設定為<code translate="no">True</code> 來啟用此特定欄位的 mmap。</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">特定欄位的 mmap 設定<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要設定欄位特定的 mmap，您需要在新增欄位時加入<code translate="no">mmap_enabled</code> 參數。您可以透過將此參數設定為<code translate="no">True</code> 來啟用此特定欄位的 mmap。</p>
 <p>以下範例示範如何在新增欄位時，設定特定於欄位的 mmap。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -119,8 +148,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -131,21 +160,20 @@ schema = MilvusClient.create_schema()
 
 <span class="hljs-comment"># Add a scalar field and enable mmap</span>
 schema.add_field(
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-datatype=DataType.INT64,
-is_primary=<span class="hljs-literal">True</span>,
-mmap_enabled=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>,
+    mmap_enabled=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Alter mmap settings on a specific field</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_collection_field(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -300,7 +328,22 @@ curl --request POST \
 <p>請考慮為儲存大量資料的欄位啟用 mmap。標量欄位和向量欄位都支援。</p>
 </div>
 <p>然後，您可以使用上述建立的模式建立一個集合。當收到載入集合的請求時，Milvus 使用記憶體映射將<strong>doc_chunk</strong>欄位的原始資料載入記憶體。</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">特定索引的 mmap 設定</h3><p>要配置特定於索引的 mmap，你需要在新增索引時，在索引參數中包含<code translate="no">mmap.enable</code> 屬性。你可以透過設定屬性為<code translate="no">true</code> 來啟用這個特定索引的 mmap。</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">特定索引的 mmap 設定<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要設定特定於索引的 mmap，你需要在新增索引時，在索引參數中包含<code translate="no">mmap.enabled</code> 屬性。你可以透過設定屬性為<code translate="no">true</code> 來啟用這個特定索引的 mmap。</p>
 <p>下面的示例演示了如何在添加索引時配置特定於索引的 mmap。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -315,21 +358,19 @@ index_params = MilvusClient.prepare_index_params()
 
 <span class="hljs-comment"># Create index on the varchar field with mmap settings</span>
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;title&quot;</span>,
-index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
+    field_name=<span class="hljs-string">&quot;title&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+<span class="highlighted-wrapper-line">    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }</span>
 )
 
 <span class="hljs-comment"># Change mmap settings for an index</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_index_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-index_name=<span class="hljs-string">&quot;title&quot;</span>,
-properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_name=<span class="hljs-string">&quot;title&quot;</span>,
+    properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -405,7 +446,22 @@ curl --request POST \
 <p>這適用於向量和標量欄位的索引。</p>
 </div>
 <p>然後您可以在一個集合中引用索引參數。當收到載入集合的請求時，Milvus 會將<strong>標題</strong>欄位的索引記憶體映射到記憶體中。</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">特定於集合的 mmap 設定</h3><p>要設定整個集合的 mmap 策略，您需要在建立集合的請求中包含<code translate="no">mmap.enabled</code> 屬性。您可以透過將此屬性設定為<code translate="no">true</code> 來啟用集合的 mmap。</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">特定於集合的 mmap 設定<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要設定整個集合的 mmap 策略，您需要在建立集合的請求中包含<code translate="no">mmap.enabled</code> 屬性。您可以透過將此屬性設定為<code translate="no">true</code> 來啟用集合的 mmap。</p>
 <p>下面的示例演示了如何在創建名為<strong>my_collection</strong>的集合時啟用 mmap。當收到載入集合的請求時，Milvus 會將所有欄位的原始資料映射到記憶體中。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -452,16 +508,15 @@ client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</s
 <span class="hljs-comment"># Ensure that the collection has already been released </span>
 <span class="hljs-comment"># and run the following</span>
 client.alter_collection_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-properties={
-<span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
-}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={
+        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
+    }
 )
 
 <span class="hljs-comment"># Load the collection to make the above change take effect</span>
 client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">client.releaseCollection(ReleaseCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build());

@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>需要独立部署？</strong></p>
 <p>如果你更喜欢以独立模式（单节点）部署 Milvus 以进行开发或测试，请使用此命令：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.6 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.7 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>注意</strong>：独立模式使用 Woodpecker 作为默认消息队列，并启用流节点组件。有关详情，请参阅<a href="/docs/zh/architecture_overview.md">架构概述</a>和<a href="/docs/zh/use-woodpecker.md">使用 Woodpecker</a>。</p>
 </div>
 <p><strong>部署 Milvus 集群：</strong></p>
-<p>以下命令使用 Woodpecker 作为推荐的消息队列，以针对 v2.6.6 的优化设置部署 Milvus 群集：</p>
+<p>以下命令使用 Woodpecker 作为推荐的消息队列，以针对 v2.6.7 的优化设置部署 Milvus 群集：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.6 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.7 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>其他消息队列选项：</strong></p>
 <p>如果你更喜欢使用<strong>Pulsar</strong>（传统选择）而不是 Woodpecker：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.6 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.7 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,7 +204,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>通过检查 pod 状态验证部署是否成功：</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>等待所有 pod 显示 "正在运行 "状态。</strong>在 v2.6.6 配置下，您应该能看到类似以下的 pod：</p>
+<p><strong>等待所有 pod 显示 "正在运行 "状态。</strong>在 v2.6.7 配置下，您应该能看到类似以下的 pod：</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -268,7 +268,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>独立部署</strong>：如果使用独立模式，服务名称保持不变</li>
 </ul>
 </div>
-<p>使用 Milvus 时<strong>保持打开此终端</strong>。现在可以使用任何 Milvus SDK 连接到 Milvus，网址是<code translate="no">localhost:27017</code> 。</p>
+<p>使用 Milvus 时<strong>保持打开此终端</strong>。现在，您可以使用任何 Milvus SDK 连接到 Milvus，网址是<code translate="no">localhost:27017</code> 。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

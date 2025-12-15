@@ -117,7 +117,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -129,7 +129,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Derajat maksimum grafik Vamana. <br/> Nilai yang lebih besar menawarkan tingkat penarikan yang lebih tinggi tetapi meningkatkan ukuran dan waktu untuk membangun indeks.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Ukuran daftar kandidat. <br/> Nilai yang lebih besar meningkatkan waktu yang dihabiskan untuk membangun indeks tetapi menawarkan tingkat penarikan yang lebih tinggi. <br/> Tetapkan ke nilai yang lebih kecil dari <code translate="no">MaxDegree</code> kecuali jika Anda perlu mengurangi waktu pembuatan indeks.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Batas ukuran pada kode PQ. <br/> Nilai yang lebih besar menawarkan tingkat pemanggilan yang lebih tinggi tetapi meningkatkan penggunaan memori.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>Batas ukuran pada kode PQ. <br/> Nilai yang lebih besar menawarkan tingkat pemanggilan yang lebih tinggi tetapi meningkatkan penggunaan memori.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Rasio nomor simpul yang di-cache terhadap data mentah. <br/> Nilai yang lebih besar meningkatkan kinerja pembuatan indeks dengan peningkatan penggunaan memori.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Rasio antara jumlah maksimum permintaan IO per iterasi pencarian dan nomor CPU.</td><td>[1, max(128 / nomor CPU, 16)]</td><td>4.0</td></tr>
 </tbody>

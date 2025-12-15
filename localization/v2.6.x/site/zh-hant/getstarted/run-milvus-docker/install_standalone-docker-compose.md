@@ -57,7 +57,7 @@ title: 使用 Docker Compose 執行 Milvus (Linux)
       </svg>
     </button></h2><p>Milvus 在 Milvus 套件庫中提供 Docker Compose 配置檔案。要使用 Docker Compose 安裝 Milvus，只要執行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.6/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.7/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.6 的新功能：</strong></p>
+<p><strong>v2.6.7 的新功能：</strong></p>
 <ul>
 <li><strong>增強的架構</strong>：具有新的 Streaming 節點和最佳化的元件。</li>
 <li><strong>更新的相依性</strong>：包含最新的 MinIO 和 etcd 版本</li>
-<li><strong>改進的組態</strong>：最佳化設定以獲得更佳效能</li>
+<li><strong>改進的設定</strong>：最佳化設定以獲得更佳效能</li>
 </ul>
-<p>請務必下載最新的 Docker Compose 配置，以確保與 v2.6.6 功能相容。</p>
+<p>請務必下載最新的 Docker Compose 配置，以確保與 v2.6.7 功能相容。</p>
 <ul>
 <li><p>如果您執行上述指令失敗，請檢查您的系統是否已安裝 Docker Compose V1。如果是這種情況，建議您根據<a href="https://docs.docker.com/compose/">本頁面</a>的注意事項遷移至 Docker Compose V2。</p></li>
 <li><p>如果您在拉取映像時遇到任何問題，請與我們聯絡<a href="mailto:community@zilliz.com">community@zilliz.com</a>，並提供問題的詳細資訊，我們會為您提供必要的支援。</p></li>

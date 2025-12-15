@@ -42,7 +42,7 @@ beta: Milvus 2.6.6+
       </svg>
     </button></h2><p>Bidang <code translate="no">TIMESTAMPTZ</code> adalah tipe data yang ditentukan skema (<code translate="no">DataType.TIMESTAMPTZ</code>) di Milvus yang memproses input yang sadar zona waktu dan menyimpan semua titik waktu secara internal sebagai waktu absolut UTC:</p>
 <ul>
-<li><p><strong>Format masukan yang diterima</strong>: String <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> dengan offset zona waktu (misalnya, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> mewakili pukul 11:59:59 PM di UTC+08:00).</p></li>
+<li><p><strong>Format masukan yang diterima</strong>: String <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> dengan offset zona waktu (misalnya, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> menunjukkan pukul 11:59:59 malam pada tanggal 1 Mei 2025 (UTC+08:00)).</p></li>
 <li><p><strong>Penyimpanan internal</strong>: Semua nilai <code translate="no">TIMESTAMPTZ</code> dinormalisasi dan disimpan dalam <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Waktu Universal Terkoordinasi</a> (UTC).</p></li>
 <li><p><strong>Perbandingan dan penyaringan</strong>: Semua operasi pemfilteran dan pemesanan dilakukan dalam UTC, untuk memastikan hasil yang konsisten dan dapat diprediksi di berbagai zona waktu.</p></li>
 </ul>
@@ -229,15 +229,15 @@ client.load_collection(collection_name)
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Kueri dengan pemfilteran stempel waktu</h4><p>Gunakan operator aritmatika seperti <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. Untuk daftar lengkap operator aritmatika yang tersedia di Milvus, lihat <a href="/docs/id/basic-operators.md#Arithmetic-Operators">Operator Aritmatika</a>.</p>
 <p>Contoh di bawah ini memfilter entitas dengan stempel waktu (<code translate="no">tsz</code>) yang tidak sama dengan <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
-<span class="highlighted-wrapper-line"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
+<span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
     collection_name=collection_name,
-    filter=<span class="hljs-built_in">expr</span>,
+    <span class="hljs-built_in">filter</span>=expr,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-    <span class="hljs-built_in">limit</span>=10
+    limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
@@ -253,7 +253,7 @@ results = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada contoh di atas,</p>
+<p>Dalam contoh di atas,</p>
 <ul>
 <li><p><code translate="no">tsz</code> adalah nama bidang <code translate="no">TIMESTAMPTZ</code> yang didefinisikan dalam skema.</p></li>
 <li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> adalah literal stempel waktu dalam format <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>, termasuk offset zona waktu.</p></li>

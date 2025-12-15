@@ -19,6 +19,111 @@ title: 版本说明
         ></path>
       </svg>
     </button></h1><p>了解 Milvus 的新功能！本页总结了每个版本的新功能、改进、已知问题和错误修复。您可以在本部分找到 v2.6.0 之后每个版本的发布说明。我们建议您定期访问此页面以了解更新信息。</p>
+<h2 id="v267" class="common-anchor-header">v2.6.7<button data-href="#v267" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>发布日期：2025 年 12 月 4 日</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Milvus 版本</th><th style="text-align:left">Python SDK 版本</th><th style="text-align:left">Node.js SDK 版本</th><th style="text-align:left">Java SDK 版本</th><th style="text-align:left">Go SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.7</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.10</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.6.7 是 2.6.x 系列的重要稳定更新。该版本主要针对分布式故障加固系统，并优化高负载下的资源利用率。由于在 I/O 处理、内存管理和 Kubernetes 集成方面有了重大改进，我们强烈建议所有生产用户升级到该版本，以确保在大规模运行时具有更高的可靠性和更流畅的操作符。</p>
+<h3 id="Features" class="common-anchor-header">新增功能<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>添加了<code translate="no">/livez</code> 端点，以支持 Kubernetes 本机有效性探针，从而提高容器协调的稳定性<a href="https://github.com/milvus-io/milvus/pull/45481">（#45481</a>）。</li>
+<li>添加了对<code translate="no">TIMESTAMPTZ</code> 字段的<strong>GroupBy</strong>操作符的支持，从而增强了时间序列分析功能<a href="https://github.com/milvus-io/milvus/pull/45763">（#45763）</a></li>
+<li>支持<code translate="no">mmap</code> 用于 JSON 切碎的共享键索引，以减少 RAM 占用<a href="https://github.com/milvus-io/milvus/pull/45861">（#45861）</a></li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">改进<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>在代理中支持 DML 请求转发，以提高写入可用性和路由弹性<a href="https://github.com/milvus-io/milvus/pull/45922">（#45922</a>）。</li>
+<li>将 etcd 升级至 v3.5.23，以解决共识稳定性和性能回归问题<a href="https://github.com/milvus-io/milvus/pull/45953">（#45953</a>）。</li>
+<li>为 Etcd 服务器崩溃添加了稳健的错误处理，以防止级联组件故障<a href="https://github.com/milvus-io/milvus/pull/45633">（#45633</a>）。</li>
+<li>通过移除用于简单会话有效性检查的昂贵监视器，减少了 Etcd 负载<a href="https://github.com/milvus-io/milvus/pull/45974">（#45974</a>）。</li>
+<li>增强了 WAL 保留策略，以更好地平衡磁盘使用和数据恢复安全<a href="https://github.com/milvus-io/milvus/pull/45784">（#45784</a>）。</li>
+<li>支持日志的异步同步写入，防止磁盘 I/O 阻塞影响主执行路径<a href="https://github.com/milvus-io/milvus/pull/45806">（#45806</a>）。</li>
+<li>强制高优先级负载任务使用缓冲 I/O，以优化操作系统页面缓存利用率和吞吐量<a href="https://github.com/milvus-io/milvus/pull/45958">（#45958</a>）。</li>
+<li>优化了<code translate="no">mmap</code> 策略，以便在单个系统调用中映射组块，从而减少段加载过程中的内核开销<a href="https://github.com/milvus-io/milvus/pull/45893">（#45893</a>）。</li>
+<li>提高了 JSON 切碎的内存估算精度，以防止 OOM kills 或利用不足<a href="https://github.com/milvus-io/milvus/pull/45876">（#45876</a>）。</li>
+<li>改进了段加载估算，以考虑到驱逐和预热状态<a href="https://github.com/milvus-io/milvus/pull/45891">（#45891</a>）。</li>
+<li>在查询操作符中添加了细粒度取消检查，以便更快地终止中止或超时的查询<a href="https://github.com/milvus-io/milvus/pull/45894">（#45894</a>）。</li>
+<li>删除了文件资源配置中多余的资源类型检查<a href="https://github.com/milvus-io/milvus/pull/45727">（#45727</a>）。</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">错误修复<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>将 Go 和 C++ 日志交错成统一流，以便为调试提供正确的时间顺序视图<a href="https://github.com/milvus-io/milvus/pull/46005">（#46005</a>）。</li>
+<li>解决了<code translate="no">LastConfirmedMessageID</code> 在高并发写入时可能出现错误的竞赛条件问题<a href="https://github.com/milvus-io/milvus/pull/45874">（#45874</a>）。</li>
+<li>修正了从多个搜索结果中汇总<code translate="no">allsearchcount</code> 时的计算错误<a href="https://github.com/milvus-io/milvus/pull/45904">（#45904</a>）。</li>
+<li>修正了术语表达式，以正确处理 JSON 数组中的字符串包含逻辑<a href="https://github.com/milvus-io/milvus/pull/45956">（#45956</a>）。</li>
+<li>在<code translate="no">JSONContainsExpr</code> 中将<code translate="no">json.doc()</code> 替换为<code translate="no">json.dom_doc()</code> ，以修复解析行为并提高性能<a href="https://github.com/milvus-io/milvus/pull/45786">（#45786</a>）。</li>
+<li>修正了待机 MixCoord 组件在关闭序列中出现的恐慌<a href="https://github.com/milvus-io/milvus/pull/45898">(#45898</a>)。</li>
+<li>修正了领导者检查器，以确保段分布正确同步到只读节点<a href="https://github.com/milvus-io/milvus/pull/45991">（#45991</a>）。</li>
+<li>确保在节点重新观察期间触发<code translate="no">HandleNodeUp</code> ，以保持正确的负载平衡拓扑<a href="https://github.com/milvus-io/milvus/pull/45963">（#45963</a>）。</li>
+<li>在本地 WAL 存储不可用的情况下，实现了对远程 WAL 存储的回退<a href="https://github.com/milvus-io/milvus/pull/45754">（#45754</a>）。</li>
+<li>添加了<code translate="no">EmptySessionWatcher</code> ，以防止在 IndexNode 绑定模式下运行时出现恐慌<a href="https://github.com/milvus-io/milvus/pull/45912">（#45912</a>）。</li>
+<li>确保从协议缓冲区恢复广播任务时的内存状态一致性<a href="https://github.com/milvus-io/milvus/pull/45788">（#45788</a>）。</li>
+<li>解决了 SegCore Collections Schema 更新中的线程安全问题<a href="https://github.com/milvus-io/milvus/pull/45618">（#45618</a>）。</li>
+<li>对<code translate="no">ListImport</code> 和<code translate="no">GetImportProgress</code> API 执行访问控制（RBAC）检查<a href="https://github.com/milvus-io/milvus/pull/45862">（#45862</a>）。</li>
+<li>修正了一个 Bug，即如果输入包含一个空结构列表，BulkImport 将失败<a href="https://github.com/milvus-io/milvus/pull/45692">（#45692</a>）。</li>
+</ul>
 <h2 id="v266" class="common-anchor-header">v2.6.6<button data-href="#v266" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +152,7 @@ title: 版本说明
 <ul>
 <li>地理空间数据类型：Milvus 引入了对<code translate="no">Geometry</code> 数据类型的支持，代表符合 OGC 标准的几何对象，如<code translate="no">POINT</code>,<code translate="no">LINESTRING</code>, 和<code translate="no">POLYGON</code> 。该类型支持多种空间关系操作符（st_contains、st_intersects、st_within、st_dwithin......），并提供<code translate="no">RTREE</code> 空间索引，以加速空间过滤和查询执行。这样就能为 LBS、制图和其他空间工作负载高效地存储和查询地理空间形状。</li>
 <li>Timestamptz 数据类型：Milvus 引入了 TIMESTAMPTZ 数据类型，为所有时间数据提供时区感知。该功能允许用户使用数据库和 Collections 上的时区属性定义默认时间上下文，从而在全球部署中实现一致的数据管理。最重要的是，该字段完全支持基于表达式的时间范围查询过滤，检索操作（查询和搜索）支持时区参数，以便在输出时将时间戳即时、即时地转换为所需的本地格式。</li>
-<li>提升排名器：Boost Ranker 允许 Milvus 在函数中使用可选的过滤条件来查找搜索结果候选项中的匹配项，并通过应用指定的权重来提高这些匹配项的得分，从而帮助提升或降低匹配实体在最终结果中的排名，而不是仅仅依赖基于向量距离计算的语义相似性。</li>
+<li>提升排名器：Boost Ranker 不再仅仅依赖基于向量距离计算的语义相似性，而是允许 Milvus 在函数中使用可选的过滤条件来查找搜索结果候选项中的匹配项，并通过应用指定的权重来提高这些匹配项的得分，从而帮助提升或降低匹配实体在最终结果中的排名。</li>
 <li>STL_SORT 索引现在支持 VARCHAR 和 TIMESTAMPTZ 数据类型。</li>
 <li>现在可以通过更改现有 Collections 启用动态字段。</li>
 <li>修正了 cve-2025-63811。</li>
@@ -144,7 +249,7 @@ title: 版本说明
 <li>修复了 timestamptz 的部分更新恐慌<a href="https://github.com/milvus-io/milvus/pull/45741">(#45741</a>)</li>
 <li>使用 2.6.6 升级 Milvus ddl<a href="https://github.com/milvus-io/milvus/pull/45739">(#45739</a>)</li>
 <li>使用最新的时间戳来过期缓存<a href="https://github.com/milvus-io/milvus/pull/45699">（#45699）</a></li>
-<li>让流节点在初始化失败时退出<a href="https://github.com/milvus-io/milvus/pull/45732">（#45732）</a></li>
+<li>使流节点在初始化失败时退出<a href="https://github.com/milvus-io/milvus/pull/45732">（#45732）</a></li>
 <li>保护 tbb concurrent_map emplace 以避免竞赛条件死锁<a href="https://github.com/milvus-io/milvus/pull/45682">（＃45682）</a></li>
 <li>当流协调关闭但 Query coord 仍在工作时，防止出现恐慌<a href="https://github.com/milvus-io/milvus/pull/45696">(#45696</a>)</li>
 <li>在工作者没有任务时设置任务初始值<a href="https://github.com/milvus-io/milvus/pull/45676">（＃45676）</a></li>
@@ -513,7 +618,7 @@ title: 版本说明
 <li>使<code translate="no">diskfilemanager</code> 从上下文中使用文件系统。<a href="https://github.com/milvus-io/milvus/pull/44535">(#44535</a>)</li>
 <li>在存储 V2 中为 OSS 和 COS 强制虚拟主机。<a href="https://github.com/milvus-io/milvus/pull/44484">(#44484</a>)</li>
 <li>当<code translate="no">extrainfo</code> 不是<code translate="no">nil</code> 时，设置<code translate="no">report_value</code> 的默认值，以实现兼容性。<a href="https://github.com/milvus-io/milvus/pull/44529">(#44529</a>)</li>
-<li>删除 rootcoord 中的 Collections 后，清理了 Collection 指标。<a href="https://github.com/milvus-io/milvus/pull/44511">(#44511</a>)</li>
+<li>删除 rootcoord 中的 Collections 后，清理了 Collections 指标。<a href="https://github.com/milvus-io/milvus/pull/44511">(#44511</a>)</li>
 <li>修复了因字段<code translate="no">mmap.enable</code> 属性重复而导致的段加载失败。<a href="https://github.com/milvus-io/milvus/pull/44465">(#44465</a>)</li>
 <li>修正了动态副本的加载配置解析错误。<a href="https://github.com/milvus-io/milvus/pull/44430">(#44430</a>)</li>
 <li>在 Go SDK 中处理了动态列的行到列输入。<a href="https://github.com/milvus-io/milvus/pull/44626">(#44626</a>)</li>
@@ -653,9 +758,9 @@ title: 版本说明
 <li>重试已存在的旧会话<a href="https://github.com/milvus-io/milvus/pull/44208">（#44208）</a></li>
 <li>添加了 Kafka 缓冲区大小限制，以防止数据节点 OOM<a href="https://github.com/milvus-io/milvus/pull/44106">(#44106</a>)</li>
 <li>通过扩展锁保护范围修复了恐慌<a href="https://github.com/milvus-io/milvus/pull/44130">（#44130）</a></li>
-<li>修复了在 Schema 更改时未刷新增长的数据段的问题<a href="https://github.com/milvus-io/milvus/pull/44412">（#44412）</a></li>
+<li>修复了在 Schema 更改时未刷新不断增长的数据段的问题<a href="https://github.com/milvus-io/milvus/pull/44412">（#44412）</a></li>
 <li>[StorageV2]处理 IO 错误<a href="https://github.com/milvus-io/milvus/pull/44255">(#44255</a>)</li>
-<li>防止在 Tantivy 索引路径不存在时出现恐慌<a href="https://github.com/milvus-io/milvus/pull/44135">(#44135</a>)</li>
+<li>防止在 Tantivy 索引路径不存在时发生恐慌<a href="https://github.com/milvus-io/milvus/pull/44135">(#44135</a>)</li>
 </ul>
 <h2 id="v261" class="common-anchor-header">v2.6.1<button data-href="#v261" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -805,7 +910,7 @@ title: 版本说明
       </svg>
     </button></h3><h4 id="Optimized-storage-format-v2" class="common-anchor-header">优化存储格式 v2</h4><p>为应对标量和向量数据混合存储的挑战，特别是非结构化数据的点查找，Milvus 2.6 引入了存储格式 V2。这种新的自适应列式存储格式采用了 "窄列合并+宽列独立 "的布局策略，从根本上解决了向量数据库中处理点查找和小批量检索时的性能瓶颈。</p>
 <p>新格式现在支持无 I/O 放大的高效随机存取，与之前采用的 vanilla Parquet 格式相比，性能最多可提升 100 倍，非常适合同时需要分析处理和精确向量检索的人工智能工作负载。此外，它还能将典型工作负载的文件数量减少高达 98%。主要压缩的内存消耗减少了 300%，I/O 操作的读取优化高达 80%，写入优化超过 600%。</p>
-<h4 id="JSON-flat-index-beta" class="common-anchor-header">JSON 扁平索引（测试版）</h4><p>Milvus 2.6 引入了 JSON 扁平索引，以处理高度动态的 JSON Schema。JSON 路径索引需要预先声明特定路径及其预期类型，而 JSON 扁平索引则不同，它会自动发现并索引给定路径下的所有嵌套结构。在索引一个 JSON 字段时，它会递归扁平化整个子树，为遇到的每一个路径-值对创建反转索引条目，而不管其深度或类型如何。 这种自动扁平化功能使 JSON Flat Index 非常适合不断发展的 Schema，因为在这种情况下，新字段的出现会毫无征兆。例如，如果你为 "元数据 "字段建立索引，系统会自动处理传入数据中出现的 "metadata.version2.features.experimental "等新嵌套字段，而不需要新的索引配置。</p>
+<h4 id="JSON-flat-index-beta" class="common-anchor-header">JSON 扁平索引（测试版）</h4><p>Milvus 2.6 引入了 JSON 扁平索引，以处理高度动态的 JSON Schema。JSON 路径索引需要预先声明特定路径及其预期类型，而 JSON 扁平索引则不同，它会自动发现并索引给定路径下的所有嵌套结构。在为一个 JSON 字段建立索引时，它会递归地对整个子树进行扁平化处理，为遇到的每一个路径-值对创建反转索引条目，而不管其深度或类型如何。 这种自动扁平化处理使 JSON Flat Index 非常适合不断演化的 Schema，因为在这种情况下，新字段的出现会毫无征兆。例如，如果你为 "元数据 "字段建立索引，系统会自动处理传入数据中出现的 "metadata.version2.features.experimental "等新嵌套字段，而不需要新的索引配置。</p>
 <h3 id="Core-260-features-recall" class="common-anchor-header">核心 2.6.0 功能回顾<button data-href="#Core-260-features-recall" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -926,11 +1031,11 @@ title: 版本说明
 <ul>
 <li>顺序敏感：单词必须以与查询中相同的顺序出现。</li>
 <li>连续匹配：除非使用了斜率值，否则单词必须紧挨着出现。</li>
-<li>斜率（可选）：这是一个可调整的参数，允许少量的词语间隔，从而实现模糊短语匹配。</li>
+<li>斜率（可选）：这是一个可调整的参数，允许少量间隔词，从而实现模糊短语匹配。</li>
 </ul>
 <p>更多信息，请参阅<a href="/docs/zh/phrase-match.md">短语匹配</a>。</p>
 <h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">最小哈希 LSH 索引（测试版）</h4><p>为满足模型训练中重复数据删除的需求，Milvus 2.6 增加了对 MINHASH_LSH 索引的支持。该功能提供了一种计算效率高、可扩展的方法，用于估算文档之间的 Jaccard 相似性，以识别近似重复的文档。用户可以在预处理过程中为文本文档生成 MinHash 签名，并在 Milvus 中使用 MINHASH_LSH 索引高效地查找大规模数据集中的相似内容，从而提高数据清理和模型质量。</p>
-<h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">时间感知衰减函数</h4><p>Milvus 2.6 引入了时间感知衰减函数，以解决信息价值随时间变化的情况。在结果重新排序过程中，用户可以根据时间戳字段应用指数、高斯或线性衰减函数来调整文档的相关性得分。这可以确保优先处理较新的内容，这对于新闻提要、电子商务和人工智能 Agents 内存等应用至关重要。</p>
+<h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">时间感知衰减函数</h4><p>Milvus 2.6 引入了时间感知衰减函数，以解决信息价值随时间变化的情况。在结果重新排序过程中，用户可以根据时间戳字段应用指数、高斯或线性衰减函数来调整文档的相关性得分。这可以确保优先处理较新的内容，这对新闻源、电子商务和人工智能 Agents 的记忆等应用至关重要。</p>
 <p>如需了解更多信息，请参阅 "<a href="/docs/zh/decay-ranker-overview.md">衰减排名器概述</a>"。</p>
 <h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">为在线 Schema 演进添加字段</h4><p>为了提供更大的模式灵活性，Milvus 2.6 现在支持向现有 Collections 的模式在线添加新的标量字段。这就避免了在应用需求发生变化时创建新 Collections 和执行破坏性数据迁移的需要。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有 Collections 添加字段</a>。</p>

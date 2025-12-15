@@ -92,7 +92,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Plage de valeurs</th><th>Valeur par défaut</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">search_list</code></td><td>Taille de la liste des candidats ; une taille plus importante permet d'obtenir un taux de rappel plus élevé, mais avec des performances dégradées.</td><td>[topk, int32_max]</td><td>16</td></tr>
+<tr><td><code translate="no">search_list</code></td><td>Taille de la liste des candidats. Une taille plus importante permet d'obtenir un taux de rappel plus élevé, mais avec des performances dégradées.</td><td>[topk, int32_max]</td><td>16</td></tr>
 </tbody>
 </table>
 </li>
@@ -117,7 +117,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -129,7 +129,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Degré maximal du graphe de Vamana. <br/> Une valeur plus élevée permet d'obtenir un taux de rappel plus important, mais augmente la taille de l'index et le temps nécessaire à sa construction.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Taille de la liste des candidats. <br/> Une valeur plus élevée augmente le temps consacré à la construction de l'index mais offre un taux de rappel plus élevé. <br/> Fixez-la à une valeur inférieure à <code translate="no">MaxDegree</code>, sauf si vous avez besoin de réduire le temps de construction de l'index.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Limite de taille du code PQ. <br/> Une valeur plus élevée offre un taux de rappel plus important mais augmente l'utilisation de la mémoire.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>Limite de taille du code PQ. <br/> Une valeur plus élevée offre un taux de rappel plus important mais augmente l'utilisation de la mémoire.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Rapport entre les numéros de nœuds mis en cache et les données brutes. <br/> Une valeur plus élevée améliore la performance de la construction de l'index mais augmente l'utilisation de la mémoire.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Rapport entre le nombre maximum de requêtes IO par itération de recherche et le nombre de CPU.</td><td>[1, max(128 / nombre de CPU, 16)]</td><td>4.0</td></tr>
 </tbody>

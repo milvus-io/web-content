@@ -64,7 +64,7 @@ title: 認證用戶訪問
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>要啟用認證，請在<code translate="no">Milvus</code> CRD 中設定<code translate="no">spec.common.security.authorizationEnabled</code> 為<code translate="no">true</code> 。關於 Milvus CRD 的更多資訊，請參考<a href="https://milvus.io/docs/configure_operator.md?tab=component">使用 Milvus Operator 配置 Milvus</a>。</p>
+<p>要啟用認證，請在<code translate="no">Milvus</code> CRD 中設定<code translate="no">spec.config.common.security.authorizationEnabled</code> 為<code translate="no">true</code> 。關於 Milvus CRD 的更多資訊，請參考<a href="https://milvus.io/docs/configure_operator.md?tab=component">使用 Milvus Operator 配置 Milvus</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -247,7 +247,7 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><ol>
-<li>使用者名稱不得為空，且長度不得超過 32 個字元。必須以字母開頭，且只包含下劃線、字母或數字。</li>
+<li>使用者名稱不可為空，長度不可超過 32 個字元。必須以字母開頭，且只包含下劃線、字母或數字。</li>
 <li>密碼必須至少有 6 個字元，長度不得超過 256 個字元。</li>
 </ol>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">

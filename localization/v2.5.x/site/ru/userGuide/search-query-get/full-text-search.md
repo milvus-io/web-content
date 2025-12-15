@@ -29,9 +29,9 @@ summary: >-
     </button></h1><p>Полнотекстовый поиск - это функция поиска документов, содержащих определенные термины или фразы в текстовых массивах данных, с последующим ранжированием результатов по релевантности. Эта функция позволяет преодолеть ограничения семантического поиска, который может упускать из виду точные термины, обеспечивая получение наиболее точных и контекстуально релевантных результатов. Кроме того, она упрощает векторный поиск, принимая исходный текст, автоматически преобразуя текстовые данные в разреженные вкрапления без необходимости вручную генерировать векторные вкрапления.</p>
 <p>Эта функция, использующая алгоритм BM25 для оценки релевантности, особенно ценна в сценариях поиска с расширенной генерацией (RAG), где приоритет отдается документам, которые точно соответствуют определенным поисковым терминам.</p>
 <div class="alert note">
-<p>Интегрируя полнотекстовый поиск с плотным векторным поиском на основе семантики, вы можете повысить точность и релевантность результатов поиска. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.5.x/multi-vector-search.md">Гибридный поиск</a>.</p>
+<p>Интегрируя полнотекстовый поиск с плотным векторным поиском на основе семантики, вы можете повысить точность и релевантность результатов поиска. Дополнительную информацию см. в разделе <a href="/docs/ru/v2.5.x/multi-vector-search.md">Гибридный поиск</a>.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="BM25-implementation" class="common-anchor-header">Реализация BM25<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,13 +46,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Полнотекстовый поиск упрощает процесс поиска по тексту, устраняя необходимость ручного встраивания. Эта функция работает по следующей схеме:</p>
+    </button></h2><p>Milvus обеспечивает полнотекстовый поиск на основе алгоритма релевантности BM25 - широко распространенной функции оценки в информационно-поисковых системах. Milvus интегрирует его в рабочий процесс поиска, чтобы предоставлять точные текстовые результаты, ранжированные по релевантности.</p>
+<p>Полнотекстовый поиск в Milvus осуществляется по следующей схеме:</p>
 <ol>
-<li><p><strong>Ввод текста</strong>: Вы вставляете необработанные текстовые документы или предоставляете текст запроса без необходимости ручного встраивания.</p></li>
-<li><p><strong>Анализ текста</strong>: Milvus использует <a href="/docs/ru/v2.5.x/analyzer-overview.md">анализатор</a>, чтобы разделить входной текст на отдельные термины, пригодные для поиска.</p></li>
-<li><p><strong>Обработка функции</strong>: Встроенная функция получает токенизированные термины и преобразует их в разреженные векторные представления.</p></li>
-<li><p><strong>Хранение коллекций</strong>: Milvus хранит эти разреженные вкрапления в коллекции для эффективного поиска.</p></li>
-<li><p><strong>BM25 scoring</strong>: Во время поиска Milvus применяет алгоритм BM25 для подсчета баллов для сохраненных документов и ранжирует совпавшие результаты на основе релевантности тексту запроса.</p></li>
+<li><p><strong>Ввод исходного текста</strong>: Вы вставляете текстовые документы или задаете запрос, используя обычный текст, без использования моделей встраивания.</p></li>
+<li><p><strong>Анализ текста</strong>: Milvus использует <a href="/docs/ru/v2.5.x/analyzer-overview.md">анализатор</a> для преобразования текста в содержательные термины, которые можно индексировать и искать.</p></li>
+<li><p><strong>Обработка функций BM25</strong>: Встроенная функция преобразует эти термины в разреженные векторные представления, оптимизированные для скоринга BM25.</p></li>
+<li><p><strong>Хранилище коллекций</strong>: Milvus сохраняет полученные разреженные вкрапления в коллекции для быстрого поиска и ранжирования.</p></li>
+<li><p><strong>Оценка релевантности BM25</strong>: Во время поиска Milvus применяет функцию оценки релевантности BM25 для расчета релевантности документов и возвращает ранжированные результаты, которые наилучшим образом соответствуют условиям запроса.</p></li>
 </ol>
 <p>
   
@@ -60,11 +61,11 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Полнотекстовый поиск</span> </span></p>
 <p>Чтобы использовать полнотекстовый поиск, выполните следующие основные действия:</p>
 <ol>
-<li><p><a href="/docs/ru/v2.5.x/full-text-search.md#Create-a-collection-for-full-text-search">Создайте коллекцию</a>: Создайте коллекцию с необходимыми полями и определите функцию для преобразования необработанного текста в разреженные вкрапления.</p></li>
-<li><p><a href="/docs/ru/v2.5.x/full-text-search.md#Insert-text-data">Вставить данные</a>: Вставьте необработанные текстовые документы в коллекцию.</p></li>
-<li><p><a href="/docs/ru/v2.5.x/full-text-search.md#Perform-full-text-search">Выполните поиск</a>: Используйте тексты запросов для поиска по коллекции и получения релевантных результатов.</p></li>
+<li><p><a href="/docs/ru/v2.5.x/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Создайте коллекцию</a>: Задайте необходимые поля и определите функцию BM25, которая преобразует необработанный текст в разреженные вкрапления.</p></li>
+<li><p><a href="/docs/ru/v2.5.x/full-text-search.md#Insert-text-data">Вставьте данные</a>: Добавьте в коллекцию документы с необработанным текстом.</p></li>
+<li><p><a href="/docs/ru/v2.5.x/full-text-search.md#Perform-full-text-search">Выполните поиск</a>: Используйте текст запроса на естественном языке для получения ранжированных результатов, основанных на релевантности BM25.</p></li>
 </ol>
-<h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">Создание коллекции для полнотекстового поиска<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">Создание коллекции для полнотекстового поиска BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,13 +80,28 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы включить полнотекстовый поиск, создайте коллекцию с определенной схемой. Эта схема должна включать три необходимых поля:</p>
+    </button></h2><p>Чтобы включить полнотекстовый поиск на базе BM25, необходимо подготовить коллекцию с необходимыми полями, определить функцию BM25 для генерации разреженных векторов, настроить индекс, а затем создать коллекцию.</p>
+<h3 id="Define-schema-fields" class="common-anchor-header">Определение полей схемы<button data-href="#Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Схема вашей коллекции должна включать как минимум три обязательных поля:</p>
 <ul>
-<li><p>Основное поле, которое уникально идентифицирует каждую сущность в коллекции.</p></li>
-<li><p>Поле <code translate="no">VARCHAR</code>, в котором хранятся необработанные текстовые документы, с атрибутом <code translate="no">enable_analyzer</code>, установленным на <code translate="no">True</code>. Это позволяет Milvus преобразовывать текст в определенные термины для функциональной обработки.</p></li>
-<li><p>Поле <code translate="no">SPARSE_FLOAT_VECTOR</code> зарезервировано для хранения разреженных вкраплений, которые Milvus будет автоматически генерировать для поля <code translate="no">VARCHAR</code>.</p></li>
+<li><p><strong>Первичное поле</strong>: Уникально идентифицирует каждую сущность в коллекции.</p></li>
+<li><p><strong>Текстовое поле</strong> (<code translate="no">VARCHAR</code>): Хранит необработанные текстовые документы. Необходимо установить значение <code translate="no">enable_analyzer=True</code>, чтобы Milvus мог обрабатывать текст для ранжирования релевантности BM25. По умолчанию Milvus использует <a href="/docs/ru/v2.5.x/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ru/v2.5.x/standard-analyzer.md"> анализатор</a> для анализа текста. Чтобы настроить другой анализатор, обратитесь к разделу <a href="/docs/ru/v2.5.x/analyzer-overview.md">Обзор анализаторов</a>.</p></li>
+<li><p><strong>Разреженное векторное поле</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Хранит разреженные вкрапления, автоматически генерируемые функцией BM25.</p></li>
 </ul>
-<h3 id="Define-the-collection-schema" class="common-anchor-header">Определите схему коллекции</h3><p>Сначала создайте схему и добавьте необходимые поля:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
@@ -97,9 +113,9 @@ client = MilvusClient(
 
 schema = client.create_schema()
 
-schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
+schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>) <span class="hljs-comment"># Primary field</span>
+<span class="highlighted-comment-line">schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>) <span class="hljs-comment"># Text field</span></span>
+<span class="highlighted-comment-line">schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR) <span class="hljs-comment"># Sparse vector field; no dim required for sparse vectors</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
@@ -213,20 +229,36 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В этой конфигурации,</p>
+<p>В предыдущей конфигурации,</p>
 <ul>
 <li><p><code translate="no">id</code>: служит первичным ключом и автоматически генерируется с помощью <code translate="no">auto_id=True</code>.</p></li>
-<li><p><code translate="no">text</code>: хранит ваши необработанные текстовые данные для операций полнотекстового поиска. Тип данных должен быть <code translate="no">VARCHAR</code>, так как <code translate="no">VARCHAR</code> - это строковый тип данных Milvus для хранения текста. Установите <code translate="no">enable_analyzer=True</code>, чтобы разрешить Milvus токенизировать текст. По умолчанию Milvus использует<a href="/docs/ru/v2.5.x/standard-analyzer.md"> анализатор</a> <code translate="no">standard</code><a href="/docs/ru/v2.5.x/standard-analyzer.md"></a> для анализа текста. Чтобы настроить другой анализатор, обратитесь к разделу <a href="/docs/ru/v2.5.x/analyzer-overview.md">Обзор анализаторов</a>.</p></li>
+<li><p><code translate="no">text</code>: хранит ваши необработанные текстовые данные для операций полнотекстового поиска. Тип данных должен быть <code translate="no">VARCHAR</code>, так как <code translate="no">VARCHAR</code> - это строковый тип данных Milvus для хранения текста.</p></li>
 <li><p><code translate="no">sparse</code>: векторное поле, зарезервированное для хранения внутренних разреженных вкраплений для операций полнотекстового поиска. Тип данных должен быть <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
-<p>Теперь определите функцию, которая будет преобразовывать ваш текст в разреженные векторные представления, а затем добавьте ее в схему:</p>
+<h3 id="Define-the-BM25-function" class="common-anchor-header">Определение функции BM25<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Функция BM25 преобразует токенизированный текст в разреженные векторы, которые поддерживают скоринг BM25.</p>
+<p>Определите функцию и добавьте ее в свою схему:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
     input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
     output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>], <span class="hljs-comment"># Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings</span>
-    function_type=FunctionType.BM25, <span class="hljs-comment"># Set to `BM25`</span>
+<span class="highlighted-wrapper-line">    function_type=FunctionType.BM25, <span class="hljs-comment"># Set to `BM25`</span></span>
 )
 
 schema.add_function(bm25_function)
@@ -301,7 +333,7 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>Имя функции. Эта функция преобразует ваш необработанный текст из поля <code translate="no">text</code> в векторы с возможностью поиска, которые будут храниться в поле <code translate="no">sparse</code>.</p></td>
+     <td><p>Имя функции. Эта функция преобразует необработанный текст из поля <code translate="no">text</code> в BM25-совместимые разреженные векторы, которые будут храниться в поле <code translate="no">sparse</code>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
@@ -313,13 +345,28 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Тип используемой функции. Установите значение <code translate="no">FunctionType.BM25</code>.</p></td>
+     <td><p>Тип используемой функции. Должно быть <code translate="no">FunctionType.BM25</code>.</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Для коллекций с несколькими полями <code translate="no">VARCHAR</code>, требующими преобразования текста в разреженный вектор, добавьте в схему коллекции отдельные функции, обеспечив каждой функции уникальное имя и значение <code translate="no">output_field_names</code>.</p>
+<p>Если несколько полей <code translate="no">VARCHAR</code> требуют обработки BM25, определите <strong>одну функцию BM25 для каждого поля</strong>, с уникальным именем и выходным полем.</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">Настройка индекса</h3><p>Определив схему с необходимыми полями и встроенной функцией, настройте индекс для коллекции. Чтобы упростить этот процесс, используйте <code translate="no">AUTOINDEX</code> в качестве <code translate="no">index_type</code>, опция, которая позволяет Milvus выбрать и настроить наиболее подходящий тип индекса, основываясь на структуре ваших данных.</p>
+<h3 id="Configure-the-index" class="common-anchor-header">Настройка индекса<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После определения схемы с необходимыми полями и встроенной функцией настройте индекс для вашей коллекции.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -410,7 +457,7 @@ indexes.add(IndexParam.builder()
      <td><p>Алгоритм, используемый для построения и запроса индекса. Допустимые значения:</p>
 <ul>
 <li><p><code translate="no">"DAAT_MAXSCORE"</code> (по умолчанию): Оптимизированная обработка запросов Document-at-a-Time (DAAT) с использованием алгоритма MaxScore. MaxScore обеспечивает лучшую производительность при больших значениях <em>k</em> или запросах с большим количеством терминов, пропуская термины и документы, которые, вероятно, будут иметь минимальное влияние. Это достигается путем разделения терминов на существенные и несущественные группы на основе их максимальных баллов влияния, фокусируясь на терминах, которые могут внести вклад в результаты top-k.</p></li>
-<li><p><code translate="no">"DAAT_WAND"</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньше документов, попавших в запрос, за счет использования максимальных баллов влияния для пропуска неконкурентных документов, но при этом имеет более высокие накладные расходы на каждый запрос. Это делает WAND более эффективным для запросов с небольшими значениями <em>k</em> или коротких запросов, где пропуск документов более целесообразен.</p></li>
+<li><p><code translate="no">"DAAT_WAND"</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньше документов, попавших в запрос, за счет использования максимальных баллов влияния для пропуска неконкурентных документов, но при этом имеет более высокие накладные расходы в расчете на одно попадание. Это делает WAND более эффективным для запросов с небольшими значениями <em>k</em> или коротких запросов, где пропуск документов более целесообразен.</p></li>
 <li><p><code translate="no">"TAAT_NAIVE"</code>: Обработка запросов с использованием базового термина (TAAT). Хотя он медленнее, чем <code translate="no">DAAT_MAXSCORE</code> и <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> обладает уникальным преимуществом. В отличие от алгоритмов DAAT, использующих кэшированные оценки максимального влияния, которые остаются статичными независимо от изменений параметра глобальной коллекции (avgdl), <code translate="no">TAAT_NAIVE</code> динамически адаптируется к таким изменениям.</p></li>
 </ul></td>
    </tr>
@@ -423,7 +470,22 @@ indexes.add(IndexParam.builder()
      <td><p>Управляет степенью нормализации длины документа. Обычно используются значения от 0 до 1, по умолчанию около 0,75. Значение 1 означает отсутствие нормализации длины, а значение 0 - полную нормализацию.</p></td>
    </tr>
 </table>
-<h3 id="Create-the-collection" class="common-anchor-header">Создание коллекции</h3><p>Теперь создайте коллекцию, используя заданные параметры схемы и индекса.</p>
+<h3 id="Create-the-collection" class="common-anchor-header">Создание коллекции<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Теперь создайте коллекцию, используя заданные параметры схемы и индекса.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -676,7 +738,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">Могу ли я вывести или получить доступ к разреженным векторам, сгенерированным функцией BM25, при полнотекстовом поиске?</h3><p>Нет, разреженные векторы, сгенерированные функцией BM25, не могут быть напрямую доступны или выведены в полнотекстовом поиске. Вот подробности:</p>
+    </button></h2><h3 id="Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="common-anchor-header">Могу ли я вывести или получить доступ к разреженным векторам, сгенерированным функцией BM25, при полнотекстовом поиске?<button data-href="#Can-I-output-or-access-the-sparse-vectors-generated-by-the-BM25-function-in-full-text-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Нет, разреженные векторы, сгенерированные функцией BM25, не могут быть напрямую доступны или выведены в полнотекстовом поиске. Вот подробности:</p>
 <ul>
 <li><p>Функция BM25 генерирует разреженные векторы для ранжирования и поиска.</p></li>
 <li><p>Эти векторы хранятся в разреженном поле, но не могут быть включены в <code translate="no">output_fields</code></p></li>
@@ -703,7 +780,22 @@ client.search(
     search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Зачем мне определять разреженное векторное поле, если я не могу получить к нему доступ?</h3><p>Разреженное векторное поле служит внутренним поисковым индексом, подобно индексам баз данных, с которыми пользователи напрямую не взаимодействуют.</p>
+<h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Зачем мне определять разреженное векторное поле, если я не могу получить к нему доступ?<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Разреженное векторное поле служит внутренним поисковым индексом, подобно индексам баз данных, с которыми пользователи не взаимодействуют напрямую.</p>
 <p><strong>Обоснование дизайна</strong>:</p>
 <ul>
 <li><p>Разделение забот: Вы работаете с текстом (ввод/вывод), Milvus обрабатывает векторы (внутренняя обработка).</p></li>

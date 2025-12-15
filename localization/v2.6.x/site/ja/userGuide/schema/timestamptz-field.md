@@ -21,7 +21,7 @@ beta: Milvus 2.6.6+
         ></path>
       </svg>
     </button></h1><p>電子商取引システム、コラボレーションツール、分散ロギングなど、地域をまたいで時間を追跡するアプリケーションでは、タイムゾーンを持つタイムスタンプを正確に扱う必要があります。Milvusの<code translate="no">TIMESTAMPTZ</code> データ型は、タイムスタンプを関連するタイムゾーンと共に保存することにより、この機能を提供します。</p>
-<h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">TIMESTAMPTZフィールドとは？<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">TIMESTAMPTZフィールドとは何ですか？<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +38,7 @@ beta: Milvus 2.6.6+
       </svg>
     </button></h2><p><code translate="no">TIMESTAMPTZ</code> フィールドはMilvusのスキーマ定義データ型(<code translate="no">DataType.TIMESTAMPTZ</code>)であり、タイムゾーンを考慮した入力を処理し、内部的に全てのタイムポイントをUTC絶対時間として格納します：</p>
 <ul>
-<li><p><strong>入力フォーマット</strong>：入力フォーマット:<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>文字列にタイムゾーンのオフセット (例えば、<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> は UTC+08:00 の 11:59:59 PM を表す)。</p></li>
+<li><p><strong>入力フォーマット</strong>：入力フォーマット:<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>文字列にタイムゾーンのオフセット (例えば、<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> は 2025 年 5 月 1 日 (UTC+08:00) の午後 11 時 59 分 59 秒を表します)。</p></li>
 <li><p><strong>内部ストレージ</strong>：<code translate="no">TIMESTAMPTZ</code> の値はすべて正規化され、<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">協定世界時</a>（UTC）に保存されます。</p></li>
 <li><p><strong>比較とフィルタリング</strong>：すべてのフィルタリングと順序付け操作はUTCで実行され、異なるタイムゾーン間で一貫性のある予測可能な結果を保証します。</p></li>
 </ul>
@@ -223,17 +223,17 @@ client.load_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">タイムスタンプ・フィルタリングによるクエリー</h4><p><code translate="no">==</code>,<code translate="no">!=</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;=</code> のような算術演算子を使用する。Milvusで使用できる算術演算子の一覧は<a href="/docs/ja/basic-operators.md#Arithmetic-Operators">算術演算子を</a>参照してください。</p>
-<p>以下の例では、タイムスタンプ (<code translate="no">tsz</code>) が<strong>2025-01-03T00:00:00+08:00</strong> と等しくないエンティティをフィルタリングしています：</p>
+<p>以下の例では、タイムスタンプ(<code translate="no">tsz</code>)が<strong>2025-01-03T00:00:00+08:00と</strong>等しくないエンティティをフィルタリングしています：</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
-<span class="highlighted-wrapper-line"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
+<span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
     collection_name=collection_name,
-    filter=<span class="hljs-built_in">expr</span>,
+    <span class="hljs-built_in">filter</span>=expr,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-    <span class="hljs-built_in">limit</span>=10
+    limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
@@ -355,7 +355,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>データベース</strong>、<strong>コレクション</strong>、<strong>クエリ/検索</strong>レベルで、<code translate="no">TIMESTAMPTZ</code> フィールドのタイムゾーンを管理できます。</p>
+    </button></h3><p><code translate="no">TIMESTAMPTZ</code> フィールドのタイムゾーンは、<strong>データベース</strong>、<strong>コレクション</strong>、<strong>クエリ/検索</strong>レベルで管理できます。</p>
 <table>
    <tr>
      <th><p>レベル</p></th>

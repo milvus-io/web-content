@@ -21,7 +21,7 @@ title: مصادقة وصول المستخدم
     </button></h1><p>يشرح هذا الدليل كيفية إدارة مصادقة المستخدم في Milvus، بما في ذلك تمكين المصادقة والاتصال كمستخدم وتعديل بيانات اعتماد المستخدم.</p>
 <div class="alert note">
 <ul>
-<li><p>TLS ومصادقة المستخدم هما نهجان مختلفان للأمان. إذا قمت بتمكين كل من مصادقة المستخدم و TLS في نظام Milvus الخاص بك، يجب عليك توفير اسم مستخدم وكلمة مرور ومسارات ملفات الشهادات. للحصول على معلومات حول كيفية تمكين TLS، راجع <a href="/docs/ar/tls.md">التشفير في النقل</a>.</p></li>
+<li><p>TLS ومصادقة المستخدم هما نهجان مختلفان للأمان. إذا قمت بتمكين كل من مصادقة المستخدم ومصادقة TLS في نظام Milvus الخاص بك، يجب عليك توفير اسم مستخدم وكلمة مرور ومسارات ملفات الشهادات. للحصول على معلومات حول كيفية تمكين TLS، راجع <a href="/docs/ar/tls.md">التشفير في النقل</a>.</p></li>
 <li><p>تستخدم مقتطفات التعليمات البرمجية في هذه الصفحة <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> الجديد (Python) للتفاعل مع Milvus. سيتم إصدار MilvusClient SDKs الجديدة للغات الأخرى في التحديثات المستقبلية.</p></li>
 </ul>
 </div>
@@ -64,7 +64,7 @@ title: مصادقة وصول المستخدم
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>لتمكين المصادقة، قم بتعيين <code translate="no">spec.common.security.authorizationEnabled</code> إلى <code translate="no">true</code> في ملف <code translate="no">Milvus</code> CRD. للمزيد من المعلومات حول قرص مالفوس CRD، راجع <a href="https://milvus.io/docs/configure_operator.md?tab=component">تكوين</a> ملف Milvus <a href="https://milvus.io/docs/configure_operator.md?tab=component">مع مشغل Milvus</a>.</p>
+<p>لتمكين المصادقة، قم بتعيين <code translate="no">spec.config.common.security.authorizationEnabled</code> إلى <code translate="no">true</code> في ملف <code translate="no">Milvus</code> CRD. للمزيد من المعلومات حول قرص مالفوس CRD، راجع <a href="https://milvus.io/docs/configure_operator.md?tab=component">تكوين</a> ملف Milvus <a href="https://milvus.io/docs/configure_operator.md?tab=component">مع مشغل Milvus</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -183,7 +183,7 @@ client.update_password(
     new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول تحديث كلمات مرور المستخدم، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
+<p>للمزيد من المعلومات حول تحديث كلمات مرور المستخدم، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
 <p>إذا نسيت كلمة المرور القديمة، يوفر ميلفوس عنصر تهيئة يسمح لك بتعيين مستخدمين معينين كمستخدمين خارقين. هذا يلغي الحاجة إلى كلمة المرور القديمة عند إعادة تعيين كلمة المرور.</p>
 <p>بشكل افتراضي، يكون الحقل <code translate="no">common.security.superUsers</code> في ملف تكوين ملف Milvus فارغًا، مما يعني أنه يجب على جميع المستخدمين تقديم كلمة المرور القديمة عند إعادة تعيين كلمة المرور الخاصة بهم. ومع ذلك، يمكنك تعيين مستخدمين محددين كمستخدمين متميزين لا يحتاجون إلى تقديم كلمة المرور القديمة. في المقتطف أدناه، تم تعيين <code translate="no">root</code> و <code translate="no">foo</code> كمستخدمين متميزين.</p>
 <p>يجب عليك إضافة عنصر التكوين أدناه في ملف تكوين ميلفوس الذي يحكم تشغيل مثيل ميلفوس الخاص بك.</p>
@@ -247,7 +247,7 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><ol>
-<li>يجب ألا يكون اسم المستخدم فارغًا، ويجب ألا يتجاوز طوله 32 حرفًا. يجب أن يبدأ بحرف، وأن يحتوي فقط على أحرف سفلية أو أحرف أو أرقام.</li>
+<li>يجب ألا يكون اسم المستخدم فارغًا، ويجب ألا يتجاوز طوله 32 حرفًا. يجب أن يبدأ بحرف، ويجب أن يحتوي فقط على أحرف سفلية أو أحرف أو أرقام.</li>
 <li>يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل ويجب ألا يتجاوز طولها 256 حرفاً.</li>
 </ol>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">

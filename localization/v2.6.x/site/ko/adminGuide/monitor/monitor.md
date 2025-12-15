@@ -91,11 +91,41 @@ summary: Prometheus를 사용하여 Milvus 클러스터에 대한 모니터링 �
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Access-the-dashboards" class="common-anchor-header">1. 대시보드에 액세스합니다.</h3><p>Prometheus 서비스를 포트 <code translate="no">9090</code> 로, Grafana 서비스를 포트 <code translate="no">3000</code> 로 전달합니다.</p>
+    </button></h2><h3 id="1-Access-the-dashboards" class="common-anchor-header">1. 대시보드에 액세스합니다.<button data-href="#1-Access-the-dashboards" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prometheus 서비스를 포트 <code translate="no">9090</code> 로, Grafana 서비스를 포트 <code translate="no">3000</code> 로 전달합니다.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/prometheus-k8s 9090</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. ServiceMonitor 활성화</h3><p>서비스 모니터는 기본적으로 밀버스 헬름에 대해 활성화되어 있지 않습니다. 쿠버네티스 클러스터에 프로메테우스 오퍼레이터를 설치한 후, 파라미터 <code translate="no">metrics.serviceMonitor.enabled=true</code> 를 추가하여 활성화할 수 있다.</p>
+<h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. ServiceMonitor 활성화<button data-href="#2-Enable-ServiceMonitor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>서비스 모니터는 기본적으로 밀버스 헬름에 대해 활성화되어 있지 않습니다. 쿠버네티스 클러스터에 프로메테우스 오퍼레이터를 설치한 후, 파라미터 <code translate="no">metrics.serviceMonitor.enabled=true</code> 를 추가하여 활성화할 수 있다.</p>
 <h4 id="With-Helm" class="common-anchor-header">헬름 사용</h4><p>밀버스 헬름 차트를 설치한 경우 다음과 같이 <code translate="no">metrics.serviceMonitor.enabled=true</code> 파라미터를 설정하여 서비스 모니터를 활성화할 수 있습니다.</p>
 <pre><code translate="no">```
 $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
@@ -107,11 +137,11 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
 <li><p>다음 명령어를 실행하여 Milvus 사용자 정의 리소스를 편집합니다. 다음 명령은 사용자 정의 리소스의 이름이 <code translate="no">my-release</code> 이라고 가정합니다.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><code translate="no">spec.components.disableMetrics</code> 필드를 <code translate="no">false</code> 으로 편집합니다.</p>
+<li><p><code translate="no">spec.components.disableMetric</code> 필드를 <code translate="no">false</code> 으로 편집합니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+    <span class="hljs-attr">disableMetric:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>편집기를 저장하고 종료합니다.</p></li>
@@ -120,7 +150,22 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <p><code translate="no">status.components.metrics.serviceMonitor.enabled</code> 필드는 <code translate="no">true</code> 이어야 합니다.</p>
-<h3 id="3-Check-the-metrics" class="common-anchor-header">3. 메트릭 확인</h3><p>ServiceMonitor를 활성화한 후 Prometheus 대시보드( <code translate="no">http://localhost:9090/</code>)에 액세스할 수 있습니다.</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3. 메트릭 확인<button data-href="#3-Check-the-metrics" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ServiceMonitor를 활성화한 후 Prometheus 대시보드( <code translate="no">http://localhost:9090/</code>)에 액세스할 수 있습니다.</p>
 <p><code translate="no">Status</code> 탭을 클릭한 다음 <code translate="no">Targets</code> 을 클릭합니다. Milvus 컴포넌트의 타겟이 표시되어야 합니다.</p>
 <p>
   
@@ -131,7 +176,22 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
    </span> <span class="img-wrapper"> <span>Prometheus_graph</span> </span></p>
-<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. 서비스 모니터 확인</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4. 서비스 모니터 확인<button data-href="#4-Check-the-ServiceMonitor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s

@@ -10,7 +10,6 @@ summary: >-
   понять, как Milvus использует mmap для обеспечения быстрого и эффективного
   хранения и извлечения данных.
 ---
-
 <h1 id="Use-mmap" class="common-anchor-header">Использование mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,7 +66,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus предоставляет иерархические настройки mmap на глобальном, полевом, индексном и коллекционном уровнях, где индексный и полевой уровни имеют приоритет над коллекционным, а коллекционный - над глобальным.</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">Глобальные настройки mmap</h3><p>Настройка на уровне кластера является глобальной и имеет наименьший приоритет. Milvus предоставляет несколько настроек, связанных с mmap, в разделе <code translate="no">milvus.yaml</code>. Эти настройки будут применяться ко всем коллекциям в кластере.</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">Глобальные настройки mmap<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Настройка на уровне кластера является глобальной и имеет наименьший приоритет. Milvus предоставляет несколько настроек, связанных с mmap, в разделе <code translate="no">milvus.yaml</code>. Эти настройки будут применяться ко всем коллекциям в кластере.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -113,7 +127,22 @@ summary: >-
 </table>
 <p>Чтобы применить вышеуказанные настройки к вашему кластеру Milvus, выполните действия, описанные в разделах <a href="/docs/ru/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">"Настройка Milvus с помощью Helm"</a> и <a href="/docs/ru/v2.5.x/configure_operator.md">"Настройка Milvus с помощью Milvus Operators</a>".</p>
 <p>Иногда глобальные настройки mmap не являются гибкими при решении конкретных задач. Чтобы применить альтернативные настройки к конкретной коллекции или ее индексам, рассмотрите возможность настройки mmap для коллекции, поля или индекса. Чтобы изменения настроек mmap вступили в силу, необходимо выпустить и загрузить коллекцию.</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного поля</h3><p>Чтобы настроить mmap для конкретного поля, необходимо включить параметр <code translate="no">mmap_enabled</code> при добавлении поля. Вы можете включить mmap для этого конкретного поля, установив для этого параметра значение <code translate="no">True</code>.</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного поля<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы настроить mmap для конкретного поля, необходимо включить параметр <code translate="no">mmap_enabled</code> при добавлении поля. Вы можете включить mmap для этого конкретного поля, установив для этого параметра значение <code translate="no">True</code>.</p>
 <p>В следующем примере показано, как настроить mmap для конкретного поля при добавлении поля.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -123,8 +152,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -135,21 +164,20 @@ schema = MilvusClient.create_schema()
 
 <span class="hljs-comment"># Add a scalar field and enable mmap</span>
 schema.add_field(
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-datatype=DataType.INT64,
-is_primary=<span class="hljs-literal">True</span>,
-mmap_enabled=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>,
+    mmap_enabled=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Alter mmap settings on a specific field</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_collection_field(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -304,7 +332,22 @@ curl --request POST \
 <p>Рассмотрите возможность включения mmap для полей, в которых хранятся данные большого объема. Поддерживаются как скалярные, так и векторные поля.</p>
 </div>
 <p>Затем вы можете создать коллекцию, используя созданную выше схему. При получении запроса на загрузку коллекции Milvus использует memory-map для размещения в памяти исходных данных поля <strong>doc_chunk</strong>.</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного индекса</h3><p>Чтобы настроить mmap для конкретного индекса, необходимо включить свойство <code translate="no">mmap.enable</code> в параметры индекса при добавлении индекса. Вы можете включить mmap для этого конкретного индекса, установив для свойства значение <code translate="no">true</code>.</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретного индекса<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы настроить mmap для конкретного индекса, необходимо включить свойство <code translate="no">mmap.enabled</code> в параметры индекса при добавлении индекса. Вы можете включить mmap для этого конкретного индекса, установив для свойства значение <code translate="no">true</code>.</p>
 <p>В следующем примере показано, как настроить mmap для конкретного индекса при добавлении индекса.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -319,21 +362,19 @@ index_params = MilvusClient.prepare_index_params()
 
 <span class="hljs-comment"># Create index on the varchar field with mmap settings</span>
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;title&quot;</span>,
-index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
+    field_name=<span class="hljs-string">&quot;title&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+<span class="highlighted-wrapper-line">    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }</span>
 )
 
 <span class="hljs-comment"># Change mmap settings for an index</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_index_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-index_name=<span class="hljs-string">&quot;title&quot;</span>,
-properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_name=<span class="hljs-string">&quot;title&quot;</span>,
+    properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -409,7 +450,22 @@ curl --request POST \
 <p>Это относится к индексам как векторных, так и скалярных полей.</p>
 </div>
 <p>Затем вы можете ссылаться на параметры индекса в коллекции. При получении запроса на загрузку коллекции Milvus заносит в память индекс поля <strong>title</strong>.</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретной коллекции</h3><p>Чтобы настроить стратегию mmap для всей коллекции, необходимо включить свойство <code translate="no">mmap.enabled</code> в запрос на создание коллекции. Вы можете включить mmap для коллекции, установив для этого свойства значение <code translate="no">true</code>.</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Настройки mmap для конкретной коллекции<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы настроить стратегию mmap для всей коллекции, необходимо включить свойство <code translate="no">mmap.enabled</code> в запрос на создание коллекции. Вы можете включить mmap для коллекции, установив для этого свойства значение <code translate="no">true</code>.</p>
 <p>Следующий пример демонстрирует, как включить mmap в коллекции с именем <strong>my_collection</strong> при ее создании. Получив запрос на загрузку коллекции, Milvus отображает в памяти исходные данные всех полей.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -456,16 +512,15 @@ client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</s
 <span class="hljs-comment"># Ensure that the collection has already been released </span>
 <span class="hljs-comment"># and run the following</span>
 client.alter_collection_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-properties={
-<span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
-}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={
+        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
+    }
 )
 
 <span class="hljs-comment"># Load the collection to make the above change take effect</span>
 client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">client.releaseCollection(ReleaseCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build());

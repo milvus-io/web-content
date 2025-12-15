@@ -2,16 +2,15 @@
 id: mmap.md
 title: Utiliser mmap
 summary: >-
-  Le mappage de la mémoire (Mmap) permet d'accéder directement à la mémoire des
+  Le mappage de la mémoire (Mmap) permet un accès direct de la mémoire aux
   fichiers volumineux sur disque, ce qui permet à Milvus de stocker des index et
   des données à la fois dans la mémoire et sur les disques durs. Cette approche
   permet d'optimiser la politique de placement des données en fonction de la
   fréquence d'accès, en augmentant la capacité de stockage des collections sans
   affecter de manière significative les performances de recherche. Cette page
   vous aide à comprendre comment Milvus utilise mmap pour permettre un stockage
-  et une récupération rapides et efficaces des données.
+  et une récupération des données rapides et efficaces.
 ---
-
 <h1 id="Use-mmap" class="common-anchor-header">Utiliser mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,9 +47,9 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
    </span> <span class="img-wrapper"> <span>Mmap illustré</span> </span></p>
-<p>Milvus est un système de base de données gourmand en mémoire et la taille de la mémoire disponible détermine la capacité d'une collection. Le chargement en mémoire des champs contenant un grand volume de données est impossible si la taille des données dépasse la capacité de la mémoire, ce qui est le cas habituel des applications pilotées par l'IA.</p>
-<p>Pour résoudre ces problèmes, Milvus introduit mmap pour équilibrer le chargement des données chaudes et froides dans les collections. Comme le montre la figure de droite ci-dessus, vous pouvez configurer Milvus pour qu'il mette en correspondance les données brutes de certains champs avec la mémoire au lieu de les charger entièrement dans la mémoire. De cette manière, vous pouvez accéder directement aux champs en mémoire sans vous soucier des problèmes de mémoire et étendre la capacité de la collection.</p>
-<p>En comparant les procédures de placement des données dans les figures de gauche et de droite, vous pouvez constater que l'utilisation de la mémoire est beaucoup plus importante dans la figure de gauche que dans celle de droite. Lorsque la fonction mmap est activée, les données qui auraient dû être chargées en mémoire sont transférées sur le disque dur et mises en cache dans la mémoire cache du système d'exploitation, ce qui réduit l'empreinte mémoire. Toutefois, les échecs de mise en cache peuvent entraîner une dégradation des performances. Pour plus de détails, voir <a href="https://en.wikipedia.org/wiki/Mmap">cet article</a>.</p>
+<p>Milvus est un système de base de données à forte intensité de mémoire et la taille de la mémoire disponible détermine la capacité d'une collection. Le chargement en mémoire des champs contenant un grand volume de données est impossible si la taille des données dépasse la capacité de la mémoire, ce qui est le cas habituel des applications pilotées par l'IA.</p>
+<p>Pour résoudre ces problèmes, Milvus introduit mmap pour équilibrer le chargement des données chaudes et froides dans les collections. Comme le montre la figure de droite ci-dessus, vous pouvez configurer Milvus pour qu'il mette en correspondance les données brutes de certains champs avec la mémoire au lieu de les charger entièrement dans la mémoire. De cette manière, vous pouvez obtenir un accès direct aux champs en mémoire sans vous soucier des problèmes de mémoire et étendre la capacité de la collection.</p>
+<p>En comparant les procédures de placement des données dans les figures de gauche et de droite, vous pouvez constater que l'utilisation de la mémoire est beaucoup plus importante dans la figure de gauche que dans celle de droite. Lorsque la fonction mmap est activée, les données qui auraient dû être chargées en mémoire sont transférées sur le disque dur et mises en cache dans la mémoire cache du système d'exploitation, ce qui réduit l'encombrement de la mémoire. Toutefois, les échecs de mise en cache peuvent entraîner une dégradation des performances. Pour plus de détails, voir <a href="https://en.wikipedia.org/wiki/Mmap">cet article</a>.</p>
 <p>Lorsque vous configurez mmap sur Milvus, vous devez toujours respecter un principe : Toujours garder les données et les index fréquemment accédés entièrement chargés dans la mémoire et utiliser mmap pour les champs restants.</p>
 <h2 id="Use-mmap-in-Milvus" class="common-anchor-header">Utilisation de mmap dans Milvus<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +67,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus fournit des paramètres mmap hiérarchiques aux niveaux global, du champ, de l'index et de la collection, les niveaux de l'index et du champ étant prioritaires sur le niveau de la collection, et le niveau de la collection sur le niveau global.</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">Paramètres mmap globaux</h3><p>Le paramètre de niveau cluster est le paramètre global et a la priorité la plus faible. Milvus fournit plusieurs paramètres liés au mmap à l'adresse <code translate="no">milvus.yaml</code>. Ces paramètres s'appliquent à toutes les collections de la grappe.</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">Paramètres mmap globaux<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le paramètre de niveau cluster est le paramètre global et a la priorité la plus faible. Milvus fournit plusieurs paramètres liés au mmap à l'adresse <code translate="no">milvus.yaml</code>. Ces paramètres s'appliquent à toutes les collections de la grappe.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -88,7 +102,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarField</code></p></td>
-     <td><p>Spécifie s'il faut mapper les données brutes de tous les champs scalaires dans la mémoire. En définissant ce paramètre sur <code translate="no">true</code>, Milvus mappe les données brutes des champs scalaires d'une collection dans la mémoire au lieu de les charger complètement lors de la réception d'une requête de chargement de cette collection.</p></td>
+     <td><p>Spécifie si les données brutes de tous les champs scalaires doivent être mappées dans la mémoire. En définissant ce paramètre sur <code translate="no">true</code>, Milvus mappe les données brutes des champs scalaires d'une collection dans la mémoire au lieu de les charger complètement lors de la réception d'une requête de chargement de cette collection.</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
@@ -114,7 +128,22 @@ summary: >-
 </table>
 <p>Pour appliquer les paramètres ci-dessus à votre cluster Milvus, veuillez suivre les étapes des sections <a href="/docs/fr/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">Configurer Milvus avec Helm</a> et <a href="/docs/fr/v2.5.x/configure_operator.md">Configurer Milvus avec Milvus Operators</a>.</p>
 <p>Parfois, les paramètres mmap globaux ne sont pas flexibles face à des cas d'utilisation particuliers. Pour appliquer d'autres paramètres à une collection spécifique ou à ses index, envisagez de configurer mmap spécifiquement pour une collection, un champ ou un index. Vous devez libérer et charger une collection avant que les modifications apportées aux paramètres mmap ne prennent effet.</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à un champ</h3><p>Pour configurer l'espace mmap spécifique à un champ, vous devez inclure le paramètre <code translate="no">mmap_enabled</code> lorsque vous ajoutez un champ. Vous pouvez activer la fonction mmap pour ce champ spécifique en attribuant à ce paramètre la valeur <code translate="no">True</code>.</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à un champ<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour configurer l'espace mmap spécifique à un champ, vous devez inclure le paramètre <code translate="no">mmap_enabled</code> lorsque vous ajoutez un champ. Vous pouvez activer la fonction mmap pour ce champ spécifique en attribuant à ce paramètre la valeur <code translate="no">True</code>.</p>
 <p>L'exemple suivant montre comment configurer le mmap spécifique à un champ lors de l'ajout d'un champ.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -124,8 +153,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -136,21 +165,20 @@ schema = MilvusClient.create_schema()
 
 <span class="hljs-comment"># Add a scalar field and enable mmap</span>
 schema.add_field(
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-datatype=DataType.INT64,
-is_primary=<span class="hljs-literal">True</span>,
-mmap_enabled=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>,
+    mmap_enabled=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Alter mmap settings on a specific field</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_collection_field(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -305,7 +333,22 @@ curl --request POST \
 <p>Pensez à activer mmap pour les champs qui stockent de gros volumes de données. Les champs scalaires et vectoriels sont pris en charge.</p>
 </div>
 <p>Vous pouvez ensuite créer une collection à l'aide du schéma créé ci-dessus. Lors de la réception d'une demande de chargement de la collection, Milvus utilise la mise en correspondance des données brutes du champ <strong>doc_chunk</strong> dans la mémoire.</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à l'index</h3><p>Pour configurer le mmap spécifique à un index, vous devez inclure la propriété <code translate="no">mmap.enable</code> dans les paramètres de l'index lorsque vous ajoutez l'index. Vous pouvez activer la fonction mmap sur cet index spécifique en définissant la propriété <code translate="no">true</code>.</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à l'index<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour configurer le mmap spécifique à un index, vous devez inclure la propriété <code translate="no">mmap.enabled</code> dans les paramètres de l'index lorsque vous ajoutez l'index. Vous pouvez activer la fonction mmap sur cet index spécifique en définissant la propriété <code translate="no">true</code>.</p>
 <p>L'exemple suivant montre comment configurer mmap spécifique à l'index lorsque vous ajoutez un index.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -320,21 +363,19 @@ index_params = MilvusClient.prepare_index_params()
 
 <span class="hljs-comment"># Create index on the varchar field with mmap settings</span>
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;title&quot;</span>,
-index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
+    field_name=<span class="hljs-string">&quot;title&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+<span class="highlighted-wrapper-line">    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }</span>
 )
 
 <span class="hljs-comment"># Change mmap settings for an index</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_index_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-index_name=<span class="hljs-string">&quot;title&quot;</span>,
-properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_name=<span class="hljs-string">&quot;title&quot;</span>,
+    properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -410,7 +451,22 @@ curl --request POST \
 <p>Cela s'applique aux index des champs vectoriels et scalaires.</p>
 </div>
 <p>Vous pouvez ensuite référencer les paramètres d'index dans une collection. Lors de la réception d'une demande de chargement de la collection, Milvus met en correspondance l'index du champ <strong>titre</strong> dans la mémoire.</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à une collection</h3><p>Pour configurer une stratégie mmap à l'échelle de la collection, vous devez inclure la propriété <code translate="no">mmap.enabled</code> dans la demande de création d'une collection. Vous pouvez activer la fonction mmap pour une collection en définissant cette propriété sur <code translate="no">true</code>.</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Paramètres mmap spécifiques à une collection<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour configurer une stratégie mmap à l'échelle de la collection, vous devez inclure la propriété <code translate="no">mmap.enabled</code> dans la demande de création d'une collection. Vous pouvez activer la fonction mmap pour une collection en définissant cette propriété sur <code translate="no">true</code>.</p>
 <p>L'exemple suivant montre comment activer mmap dans une collection nommée <strong>my_collection</strong> lors de sa création. Lors de la réception d'une demande de chargement de la collection, Milvus met en correspondance les données brutes de tous les champs dans la mémoire.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -457,16 +513,15 @@ client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</s
 <span class="hljs-comment"># Ensure that the collection has already been released </span>
 <span class="hljs-comment"># and run the following</span>
 client.alter_collection_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-properties={
-<span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
-}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={
+        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
+    }
 )
 
 <span class="hljs-comment"># Load the collection to make the above change take effect</span>
 client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">client.releaseCollection(ReleaseCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build());

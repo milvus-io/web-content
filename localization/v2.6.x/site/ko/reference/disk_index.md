@@ -115,7 +115,7 @@ title: 온디스크 인덱스
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -127,7 +127,7 @@ title: 온디스크 인덱스
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Vamana 그래프의 최대 정도. <br/> 값이 클수록 리콜률이 높아지지만 인덱스의 크기와 구축 시간이 늘어납니다.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>후보 목록의 크기. <br/> 값이 클수록 인덱스 구축에 소요되는 시간은 증가하지만, 리콜률은 높아집니다. <br/> 인덱스 구축 시간을 줄여야 하는 경우가 아니라면 <code translate="no">MaxDegree</code> 보다 작은 값으로 설정하세요.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>PQ 코드의 크기 제한입니다. <br/> 값이 클수록 리콜률이 높아지지만 메모리 사용량이 증가합니다.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>PQ 코드의 크기 제한입니다. <br/> 값이 클수록 리콜률이 높아지지만 메모리 사용량이 증가합니다.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>원시 데이터에 대한 캐시된 노드 번호의 비율입니다. <br/> 값이 클수록 메모리 사용량이 증가하여 인덱스 구축 성능이 향상됩니다.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>검색 반복당 최대 IO 요청 수와 CPU 수 사이의 비율입니다.</td><td>[1, 최대(128 / CPU 수, 16)]</td><td>4.0</td></tr>
 </tbody>

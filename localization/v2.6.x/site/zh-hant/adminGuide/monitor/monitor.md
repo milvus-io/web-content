@@ -38,7 +38,7 @@ summary: 學習如何使用 Prometheus 為 Milvus 集群部署監控服務。
     </button></h2><p>度量指標是提供系統運行狀態資訊的指標。例如，透過度量指標，您可以瞭解 Milvus 的資料節點消耗了多少記憶體或 CPU 資源。瞭解 Milvus 叢集中各元件的效能和狀態，可以讓您充分掌握資訊，從而做出更好的決策，並更及時地調整資源分配。</p>
 <p>一般而言，度量指標會儲存於時間序列資料庫（TSDB），例如<a href="https://prometheus.io/">Prometheus</a>，並記錄有時間戳記的度量指標。在監控 Milvus 服務的情況下，您可以使用 Prometheus 從出口商設定的端點抽取資料。然後，Prometheus 在<code translate="no">http://&lt;component-host&gt;:9091/metrics</code> 匯出每個 Milvus 元件的度量指標。</p>
 <p>但是，您可能會為一個元件設置多個副本，這使得 Prometheus 的手動設定變得過於複雜。因此，您可以使用 Kubernetes 的擴充套件<a href="https://github.com/prometheus-operator/prometheus-operator">Prometheus Operator</a>，自動且有效地管理 Prometheus 監控實體。使用 Prometheus Operator 可省去手動新增度量目標和服務提供者的麻煩。</p>
-<p>ServiceMonitor 自訂資源定義 (CRD) 可讓您宣告性地定義如何監控動態服務集。它還允許使用標籤選擇使用所需的組態來監控哪些服務。使用 Prometheus Operator，您可以引入慣例，指定如何暴露度量。新服務可以按照您設定的慣例自動發現，而無需手動重新配置。</p>
+<p>ServiceMonitor 自訂資源定義 (CRD) 可讓您宣告性地定義如何監控動態服務集。它還允許使用標籤選擇使用所需的組態來監控哪些服務。使用 Prometheus Operator，您可以引入慣例，指定如何暴露度量。新服務可以按照您設定的慣例自動發現，而不需要手動重新配置。</p>
 <p>下圖說明 Prometheus 工作流程。</p>
 <p>
   
@@ -91,11 +91,41 @@ summary: 學習如何使用 Prometheus 為 Milvus 集群部署監控服務。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Access-the-dashboards" class="common-anchor-header">1.存取儀表板</h3><p>將 Prometheus 服務轉發至<code translate="no">9090</code> 連接埠，並將 Grafana 服務轉發至<code translate="no">3000</code> 連接埠。</p>
+    </button></h2><h3 id="1-Access-the-dashboards" class="common-anchor-header">1.存取儀表板<button data-href="#1-Access-the-dashboards" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>將 Prometheus 服務轉發至<code translate="no">9090</code> 連接埠，並將 Grafana 服務轉發至<code translate="no">3000</code> 連接埠。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/prometheus-k8s 9090</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2.啟用 ServiceMonitor</h3><p>Milvus Helm 預設未啟用 ServiceMonitor。在 Kubernetes 群集中安裝 Prometheus Operator 之後，您可以透過新增參數<code translate="no">metrics.serviceMonitor.enabled=true</code> 來啟用它。</p>
+<h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2.啟用 ServiceMonitor<button data-href="#2-Enable-ServiceMonitor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Helm 預設未啟用 ServiceMonitor。在 Kubernetes 群集中安裝 Prometheus Operator 之後，您可以透過新增參數<code translate="no">metrics.serviceMonitor.enabled=true</code> 來啟用它。</p>
 <h4 id="With-Helm" class="common-anchor-header">使用 Helm</h4><p>如果您已經安裝 Milvus Helm 圖表，您可以透過設定參數<code translate="no">metrics.serviceMonitor.enabled=true</code> 來啟用 ServiceMonitor，如下所示。</p>
 <pre><code translate="no">```
 $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
@@ -107,11 +137,11 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
 <li><p>執行下列指令編輯 Milvus 自訂資源。以下命令假設自訂資源的名稱為<code translate="no">my-release</code> 。</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>編輯<code translate="no">spec.components.disableMetrics</code> 欄位為<code translate="no">false</code> 。</p>
+<li><p>編輯<code translate="no">spec.components.disableMetric</code> 欄位為<code translate="no">false</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">disableMetrics:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
+    <span class="hljs-attr">disableMetric:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to true to disable metrics</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>保存並退出編輯器。</p></li>
@@ -120,7 +150,22 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <p><code translate="no">status.components.metrics.serviceMonitor.enabled</code> 欄位應為<code translate="no">true</code> 。</p>
-<h3 id="3-Check-the-metrics" class="common-anchor-header">3.檢查指標</h3><p>啟用 ServiceMonitor 後，您可以存取 Prometheus 面板，網址是<code translate="no">http://localhost:9090/</code> 。</p>
+<h3 id="3-Check-the-metrics" class="common-anchor-header">3.檢查指標<button data-href="#3-Check-the-metrics" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>啟用 ServiceMonitor 後，您可以存取 Prometheus 面板，網址是<code translate="no">http://localhost:9090/</code> 。</p>
 <p>按一下<code translate="no">Status</code> 索引標籤，然後按一下<code translate="no">Targets</code> 。您應該可以看到 Milvus 元件的目標。</p>
 <p>
   
@@ -131,7 +176,22 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
    </span> <span class="img-wrapper"> <span>Prometheus_graph</span> </span></p>
-<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4.檢查 ServiceMonitor</h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+<h3 id="4-Check-the-ServiceMonitor" class="common-anchor-header">4.檢查 ServiceMonitor<button data-href="#4-Check-the-ServiceMonitor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
 <span class="hljs-keyword">my</span>-release-milvus              54s

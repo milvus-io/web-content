@@ -24,7 +24,7 @@ beta: Milvus 2.6.6+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Приложениям, которые отслеживают время в разных регионах, например, системам электронной коммерции, инструментам совместной работы или распределенному протоколированию, требуется точная обработка временных меток с учетом часовых поясов. Тип данных <code translate="no">TIMESTAMPTZ</code> в Milvus предоставляет такую возможность, сохраняя временные метки с привязкой к часовому поясу.</p>
+    </button></h1><p>Приложениям, которые отслеживают время в разных регионах, например, системам электронной коммерции, инструментам совместной работы или распределенному протоколированию, необходима точная обработка временных меток с учетом часовых поясов. Тип данных <code translate="no">TIMESTAMPTZ</code> в Milvus предоставляет такую возможность, сохраняя временные метки с привязкой к часовому поясу.</p>
 <h2 id="What-is-a-TIMESTAMPTZ-field" class="common-anchor-header">Что такое поле TIMESTAMPTZ?<button data-href="#What-is-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ beta: Milvus 2.6.6+
       </svg>
     </button></h2><p>Поле <code translate="no">TIMESTAMPTZ</code> - это определяемый схемой тип данных (<code translate="no">DataType.TIMESTAMPTZ</code>) в Milvus, который обрабатывает входные данные с учетом часовых поясов и хранит все временные точки в виде абсолютного времени UTC:</p>
 <ul>
-<li><p><strong>Принимаемый формат ввода</strong>: Строки <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> со смещением часового пояса (например, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> представляет 11:59:59 PM в UTC+08:00).</p></li>
+<li><p><strong>Принимаемый формат ввода</strong>: Строки <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> со смещением часового пояса (например, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> обозначает 11:59:59 PM 1 мая 2025 года (UTC+08:00)).</p></li>
 <li><p><strong>Внутреннее хранение</strong>: Все значения <code translate="no">TIMESTAMPTZ</code> нормализуются и хранятся в <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">универсальном координированном времени</a> (UTC).</p></li>
 <li><p><strong>Сравнение и фильтрация</strong>: Все операции фильтрации и упорядочивания выполняются в UTC, что обеспечивает последовательные и предсказуемые результаты в разных часовых поясах.</p></li>
 </ul>
@@ -227,17 +227,17 @@ client.load_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Запрос с фильтрацией по меткам времени</h4><p>Используйте арифметические операторы, такие как <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. Полный список арифметических операторов, доступных в Milvus, приведен в разделе <a href="/docs/ru/basic-operators.md#Arithmetic-Operators">Арифметические операторы</a>.</p>
-<p>В приведенном ниже примере фильтруются сущности с временными метками (<code translate="no">tsz</code>), не равными <strong>2025-01-03T00:00:00+08:00</strong>:</p>
+<p>В примере ниже фильтруются сущности с временными метками (<code translate="no">tsz</code>), которые не равны <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
-<span class="highlighted-wrapper-line"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
+<span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
     collection_name=collection_name,
-    filter=<span class="hljs-built_in">expr</span>,
+    <span class="hljs-built_in">filter</span>=expr,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-    <span class="hljs-built_in">limit</span>=10
+    limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
@@ -409,5 +409,5 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>По умолчанию запросы к полям <code translate="no">TIMESTAMPTZ</code> без индекса выполняют полное сканирование всех строк, что может быть медленным для больших наборов данных. Чтобы ускорить запросы к временным меткам, создайте индекс <code translate="no">STL_SORT</code> для поля <code translate="no">TIMESTAMPTZ</code>.</p>
+    </button></h3><p>По умолчанию запросы к полям <code translate="no">TIMESTAMPTZ</code> без индекса выполняют полное сканирование всех строк, что может быть медленным при работе с большими массивами данных. Чтобы ускорить запросы к временным меткам, создайте индекс <code translate="no">STL_SORT</code> для поля <code translate="no">TIMESTAMPTZ</code>.</p>
 <p>Подробности см. в разделе <a href="/docs/ru/stl-sort.md">STL_SORT</a>.</p>
