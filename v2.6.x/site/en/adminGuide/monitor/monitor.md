@@ -86,13 +86,13 @@ You can enable the ServiceMonitor as follows if you have installed Milvus using 
     $ kubectl edit milvus my-release
     ```
 
-2. Edit the `spec.components.disableMetrics` field to `false`.
+2. Edit the `spec.components.disableMetric` field to `false`.
 
     ```yaml
     ...
     spec:
       components:
-        disableMetrics: false # set to true to disable metrics
+        disableMetric: false # set to true to disable metrics
     ...
     ```
 
