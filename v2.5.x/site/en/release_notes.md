@@ -8,6 +8,33 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.24
+
+Release date: December 23, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.24          | 2.5.18            | 2.5.13              | 2.5.14           |
+
+We are excited to announce Milvus 2.5.24. This release prioritizes system security and stability, featuring critical updates to dependencies to address high-severity vulnerabilities. Additionally, it resolves significant correctness issues in Hybrid Search and JSON query processing, ensuring reliable performance under complex workloads. We strongly recommend all users upgrade to this version.
+
+### Improvements
+
+- Upgraded Go version to 1.24.11 to address security vulnerabilities ([#46114](https://github.com/milvus-io/milvus/pull/46114)).
+- Upgraded [golang.org/x/crypto](https://pkg.go.dev/golang.org/x/crypto) dependency to fix CVE vulnerabilities ([#46112](https://github.com/milvus-io/milvus/pull/46112)).
+- Optimized the loading performance of BM25 statistics for sparse vector search ([#45780](https://github.com/milvus-io/milvus/pull/45780)).
+- Refined logic to exclude stopping nodes from resource groups, improving cluster load balancing stability ([#45982](https://github.com/milvus-io/milvus/pull/45982)).
+
+### Bug fixes
+
+- Improved startup logic to fail fast if critical components are not ready, aiding in troubleshooting ([#46115](https://github.com/milvus-io/milvus/pull/46115)).
+- Fixed a data scanning issue where the cursor was not correctly updated after skipping data chunks ([#46078](https://github.com/milvus-io/milvus/pull/46078)).
+- Fixed undefined behavior that could occur when dumping database snapshots ([#45613](https://github.com/milvus-io/milvus/pull/45613)).
+- Fixed an issue where default values for geometry fields were not correctly set via the RESTful API ([#46065](https://github.com/milvus-io/milvus/pull/46065)).
+- Fixed an issue where the total search count was incorrectly returned as zero during hybrid searches ([#45843](https://github.com/milvus-io/milvus/pull/45843)).
+- Fixed a logic error where QueryCoord ignored stopping nodes during watcher events ([#45964](https://github.com/milvus-io/milvus/pull/45964)).
+- Fixed a potential QueryNode crash caused by memory handling in JSON contains expressions ([#45785](https://github.com/milvus-io/milvus/pull/45785)).
+
 ## v2.5.23
 
 Release date: November 20, 2025
