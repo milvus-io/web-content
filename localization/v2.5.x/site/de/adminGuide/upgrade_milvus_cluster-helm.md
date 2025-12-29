@@ -46,7 +46,7 @@ title: Milvus-Cluster mit Helm-Diagramm aufrüsten
 <div class="alert note">
 <p>Seit Milvus-Helm Chart Version 4.2.21 haben wir pulsar-v3.x Chart als Abhängigkeit eingeführt. Um die Abwärtskompatibilität zu gewährleisten, aktualisieren Sie bitte Ihren Helm auf v3.14 oder eine neuere Version und fügen Sie die Option <code translate="no">--reset-then-reuse-values</code> hinzu, wenn Sie <code translate="no">helm upgrade</code> verwenden.</p>
 </div>
-<h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">Überprüfen der Milvus Helm-Karte<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
+<h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">Prüfen der Milvus Helm-Karte<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie können den Upgrade-Pfad für Ihren Milvus wie folgt wählen:</p>
-<div style="display: none;">- [Führen Sie ein rollendes Upgrade durch](#conduct-a-rolling-upgrade) von Milvus v2.2.3 und späteren Versionen auf v2.5.23.</div>
+<div style="display: none;">- [Führen Sie ein rollendes Upgrade durch](#conduct-a-rolling-upgrade) von Milvus v2.2.3 und späteren Versionen auf v2.5.24.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Führen Sie ein Upgrade von Milvus mit Helm</a> für ein Upgrade von einer Nebenversion vor v2.2.3 auf v2.5.23 durch.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrieren Sie die Metadaten</a> vor dem Upgrade von Milvus v2.1.x auf v2.5.23.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Führen Sie ein Upgrade von Milvus mit Helm</a> für ein Upgrade von einer Nebenversion vor v2.2.3 auf v2.5.24<a href="#Upgrade-Milvus-using-Helm">durch</a>.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrieren Sie die Metadaten</a> vor dem Upgrade von Milvus v2.1.x auf v2.5.24.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Durchführen eines rollenden Upgrades<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -131,7 +131,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>Seit Milvus 2.2.3 können Sie Milvus-Koordinatoren so konfigurieren, dass sie im Aktiv-Standby-Modus arbeiten, und die Funktion "Rolling Upgrade" für sie aktivieren, so dass Milvus auf eingehende Anfragen während der Koordinator-Upgrades reagieren kann. In früheren Versionen müssen die Koordinatoren während eines Upgrades entfernt und neu erstellt werden, was zu einer gewissen Ausfallzeit des Dienstes führen kann.</p>
 <p>Rolling Upgrades erfordern, dass die Koordinatoren im Aktiv-Standby-Modus arbeiten. Sie können <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">das</a> von uns bereitgestellte <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">Skript</a> verwenden, um die Koordinatoren so zu konfigurieren, dass sie im aktiven Standby-Modus arbeiten, und das Rolling Upgrade starten.</p>
-<p>Auf der Grundlage der von Kubernetes bereitgestellten rollenden Aktualisierungsfunktionen erzwingt das oben genannte Skript eine geordnete Aktualisierung der Bereitstellungen entsprechend ihrer Abhängigkeiten. Darüber hinaus implementiert Milvus einen Mechanismus, der sicherstellt, dass seine Komponenten während des Upgrades mit den von ihnen abhängigen Komponenten kompatibel bleiben, wodurch mögliche Ausfallzeiten des Dienstes erheblich reduziert werden.</p>
+<p>Auf der Grundlage der von Kubernetes bereitgestellten rollenden Aktualisierungsfunktionen erzwingt das oben genannte Skript eine geordnete Aktualisierung der Bereitstellungen entsprechend ihrer Abhängigkeiten. Darüber hinaus implementiert Milvus einen Mechanismus, der sicherstellt, dass seine Komponenten während des Upgrades mit den von ihnen abhängigen Komponenten kompatibel bleiben, wodurch potenzielle Service-Ausfallzeiten erheblich reduziert werden.</p>
 <p>Das Skript gilt nur für das Upgrade von Milvus, das mit Helm installiert wurde. In der folgenden Tabelle sind die in den Skripten verfügbaren Befehlsflags aufgeführt.</p>
 <table>
 <thead>
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Vorgang</td><td><code translate="no">update</code></td><td>Falsch</td></tr>
 </tbody>
 </table>
-<p>Sobald Sie sichergestellt haben, dass sich alle Einsätze in Ihrer Milvus-Instanz in ihrem normalen Status befinden, können Sie den folgenden Befehl ausführen. Sie können den folgenden Befehl ausführen, um die Milvus-Instanz auf 2.5.23 zu aktualisieren.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.23 -w &#x27;milvusdb/milvus:v2.5.23&#x27;
+<p>Sobald Sie sichergestellt haben, dass sich alle Einsätze in Ihrer Milvus-Instanz in ihrem normalen Status befinden, können Sie den folgenden Befehl ausführen. Sie können den folgenden Befehl ausführen, um die Milvus-Instanz auf 2.5.24 zu aktualisieren.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.24 -w &#x27;milvusdb/milvus:v2.5.24&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

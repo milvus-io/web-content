@@ -90,7 +90,7 @@ title: 리소스 그룹 관리
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>이 페이지의 모든 코드 샘플은 PyMilvus 2.5.17 버전입니다. 실행하기 전에 PyMilvus 설치를 업그레이드하세요.</p>
+<p>이 페이지의 모든 코드 샘플은 PyMilvus 2.5.18 버전입니다. 실행하기 전에 PyMilvus 설치를 업그레이드하세요.</p>
 </div>
 <ol>
 <li><p>리소스 그룹을 생성합니다.</p>

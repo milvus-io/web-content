@@ -44,7 +44,7 @@ title: Обновление кластера Milvus с помощью диагр
 <li>Версия Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Начиная с версии Milvus-Helm chart 4.2.21, мы добавили в качестве зависимости график pulsar-v3.x. Для обратной совместимости, пожалуйста, обновите ваш helm до версии 3.14 или более поздней, и не забудьте добавить опцию <code translate="no">--reset-then-reuse-values</code> при каждом использовании <code translate="no">helm upgrade</code>.</p>
+<p>Начиная с версии Milvus-Helm chart 4.2.21, мы ввели зависимость от графика pulsar-v3.x. Для обратной совместимости, пожалуйста, обновите ваш helm до версии 3.14 или более поздней, и не забудьте добавить опцию <code translate="no">--reset-then-reuse-values</code> при каждом использовании <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">Проверка диаграммы Milvus Helm<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы можете выбрать путь обновления для своего Milvus следующим образом:</p>
-<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.5.23.</div>
+<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.5.24.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.5.23.</p></li>
-<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.5.23.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.5.24.</p></li>
+<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.5.24.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Проведение скользящего обновления<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Операция</td><td><code translate="no">update</code></td><td>Ложь</td></tr>
 </tbody>
 </table>
-<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.5.23.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.23 -w &#x27;milvusdb/milvus:v2.5.23&#x27;
+<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.5.24.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.24 -w &#x27;milvusdb/milvus:v2.5.24&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -207,7 +207,7 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Запустите <code translate="no">$ helm list</code>, чтобы проверить версию приложения Milvus. Вы можете видеть, что <code translate="no">APP VERSION</code> - это 2.1.4.</p>
+    </button></h3><p>Запустите <code translate="no">$ helm list</code>, чтобы проверить версию приложения Milvus. Видно, что на <code translate="no">APP VERSION</code> установлена версия 2.1.4.</p>
 <pre><code translate="no">NAME                NAMESPACE   REVISION    UPDATED                                 STATUS      CHART           APP VERSION    
 <span class="hljs-keyword">new</span><span class="hljs-operator">-</span><span class="hljs-keyword">release</span>         <span class="hljs-keyword">default</span>     <span class="hljs-number">1</span>           <span class="hljs-number">2022</span><span class="hljs-number">-11</span><span class="hljs-number">-21</span> <span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">25.51539</span> <span class="hljs-operator">+</span><span class="hljs-number">0800</span> CST     deployed    milvus<span class="hljs-number">-3.2</span><span class="hljs-number">.18</span>   <span class="hljs-number">2.1</span><span class="hljs-number">.4</span> 
 <button class="copy-code-btn"></button></code></pre>
@@ -334,7 +334,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><p>Установите <code translate="no">-d true</code>, если вы хотите автоматически удалить миграционную капсулу после завершения миграции.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -w milvusdb/milvus:v2.2.0 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Откатитесь и выполните миграцию заново, если миграция не удалась.</p>
+<li><p>Откатитесь и выполните миграцию снова, если миграция не удалась.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o rollback -w milvusdb/milvus:v2.1.4
 ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o migrate -w milvusdb/milvus:v2.2.0
 <button class="copy-code-btn"></button></code></pre></li>

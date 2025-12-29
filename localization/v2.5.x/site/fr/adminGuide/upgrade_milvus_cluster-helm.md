@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez choisir le chemin de mise à niveau pour votre Milvus comme suit :</p>
-<div style="display: none;">- [Effectuer une mise à niveau continue](#conduct-a-rolling-upgrade) de Milvus v2.2.3 et versions ultérieures vers v2.5.23.</div>
+<div style="display: none;">- [Effectuer une mise à niveau continue](#conduct-a-rolling-upgrade) de Milvus v2.2.3 et versions ultérieures vers v2.5.24.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Mettre à niveau Milvus à l'aide de Helm</a> pour une mise à niveau d'une version mineure antérieure à v2.2.3 vers v2.5.23.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrer les métadonnées</a> avant la mise à niveau de Milvus v2.1.x vers v2.5.23.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Mettre à niveau Milvus à l'aide de Helm</a> pour une mise à niveau d'une version mineure antérieure à v2.2.3 vers v2.5.24.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrer les métadonnées</a> avant la mise à niveau de Milvus v2.1.x vers v2.5.24.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Effectuer une mise à niveau continue<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Fonctionnement</td><td><code translate="no">update</code></td><td>Faux</td></tr>
 </tbody>
 </table>
-<p>Une fois que vous vous êtes assuré que tous les déploiements de votre instance Milvus sont dans leur état normal. Vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers la version 2.5.23.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.23 -w &#x27;milvusdb/milvus:v2.5.23&#x27;
+<p>Une fois que vous vous êtes assuré que tous les déploiements de votre instance Milvus sont dans leur état normal, vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers la version 2.5.24. Vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers la version 2.5.24.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.24 -w &#x27;milvusdb/milvus:v2.5.24&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -290,7 +290,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h3><p>Un changement majeur dans Milvus 2.2 est la structure des métadonnées des index de segments. Par conséquent, vous devez utiliser Helm pour migrer les métadonnées lors de la mise à niveau de Milvus de la version 2.1.x à la version 2.2.0. Voici un <a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">script</a> qui vous permettra de migrer vos métadonnées en toute sécurité.</p>
-<p>Ce script ne s'applique qu'à Milvus installé sur un cluster K8s. Revenez d'abord à la version précédente à l'aide de l'opération de retour en arrière si une erreur se produit pendant le processus.</p>
+<p>Ce script ne s'applique qu'à Milvus installé sur un cluster K8s. Revenez d'abord à la version précédente à l'aide de l'opération de retour en arrière si une erreur se produit au cours du processus.</p>
 <p>Le tableau suivant répertorie les opérations que vous pouvez effectuer pour la migration des métadonnées.</p>
 <table>
 <thead>
@@ -319,7 +319,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 </ol>
 <h4 id="2-Upgrade-Milvus-from-v21x-to-220" class="common-anchor-header">2. Mise à niveau de Milvus de la version 2.1.x à la version 2.2.0</h4><p>Les commandes suivantes supposent que vous mettez à niveau Milvus de la version 2.1.4 à la version 2.2.0. Modifiez-les pour obtenir les versions qui répondent à vos besoins.</p>
 <ol>
-<li><p>Spécifiez le nom de l'instance Milvus, la version source de Milvus et la version cible de Milvus.</p>
+<li><p>Spécifier le nom de l'instance Milvus, la version source de Milvus et la version cible de Milvus.</p>
 <pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Spécifiez l'espace de noms avec <code translate="no">-n</code> si votre Milvus n'est pas installé dans l'espace de noms K8s par défaut.</p>

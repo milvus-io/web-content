@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat memilih jalur upgrade untuk Milvus Anda sebagai berikut:</p>
-<div style="display: none;">- [Lakukan peningkatan bergilir] (#melakukan-peningkatan bergilir) dari Milvus v2.2.3 dan rilis yang lebih baru ke v2.5.23.</div>
+<div style="display: none;">- [Lakukan peningkatan bergilir] (#melakukan-peningkatan bergilir) dari Milvus v2.2.3 dan rilis yang lebih baru ke v2.5.24.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Tingkatkan Milvus menggunakan Helm</a> untuk peningkatan dari rilis minor sebelum v2.2.3 ke v2.5.23.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrasi metadata</a> sebelum peningkatan dari Milvus v2.1.x ke v2.5.23.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Tingkatkan Milvus menggunakan Helm</a> untuk peningkatan dari rilis minor sebelum v2.2.3 ke v2.5.24.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrasi metadata</a> sebelum peningkatan dari Milvus v2.1.x ke v2.5.24.</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Melakukan pemutakhiran bergilir<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operasi</td><td><code translate="no">update</code></td><td>Salah</td></tr>
 </tbody>
 </table>
-<p>Setelah Anda memastikan bahwa semua deployment dalam instans Milvus Anda berada dalam status normal. Anda dapat menjalankan perintah berikut untuk memutakhirkan instans Milvus ke 2.5.23.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.23 -w &#x27;milvusdb/milvus:v2.5.23&#x27;
+<p>Setelah Anda memastikan bahwa semua deployment dalam instans Milvus Anda berada dalam status normal. Anda dapat menjalankan perintah berikut untuk meng-upgrade instans Milvus ke 2.5.24.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.24 -w &#x27;milvusdb/milvus:v2.5.24&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -295,25 +295,25 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li>Migrasi metadata Milvus.</li>
 <li>Memulai komponen Milvus dengan image baru.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2523" class="common-anchor-header">2. Memutakhirkan Milvus dari v2.1.x ke 2.5.23</h4><p>Perintah berikut ini mengasumsikan bahwa Anda memutakhirkan Milvus dari v2.1.4 ke 2.5.23. Ubahlah ke versi yang sesuai dengan kebutuhan Anda.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-2524" class="common-anchor-header">2. Memutakhirkan Milvus dari v2.1.x ke 2.5.24</h4><p>Perintah berikut ini mengasumsikan bahwa Anda memutakhirkan Milvus dari v2.1.4 ke 2.5.24. Ubahlah ke versi yang sesuai dengan kebutuhan Anda.</p>
 <ol>
 <li><p>Tentukan nama instans Milvus, versi Milvus sumber, dan versi Milvus target.</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.23
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.24
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tentukan namespace dengan <code translate="no">-n</code> jika Milvus Anda tidak terinstal pada namespace default K8s.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.24
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tentukan jalur root dengan <code translate="no">-r</code> jika Milvus Anda terinstalasi dengan <code translate="no">rootpath</code>.</p>
-<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">23</span> -<span class="hljs-attribute">r</span> by-dev
+<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">24</span> -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tentukan tag gambar dengan <code translate="no">-w</code> jika Milvus Anda terinstalasi dengan <code translate="no">image</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23 -r by-dev -w milvusdb/milvus:v2.5.23
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.24 -r by-dev -w milvusdb/milvus:v2.5.24
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Tetapkan <code translate="no">-d true</code> jika Anda ingin menghapus pod migrasi secara otomatis setelah migrasi selesai.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23 -w milvusdb/milvus:v2.5.23 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.24 -w milvusdb/milvus:v2.5.24 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Kembalikan dan migrasi lagi jika migrasi gagal.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.23 -r by-dev -o migrate -w milvusdb/milvus:v2.5.23
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.24 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.24 -r by-dev -o migrate -w milvusdb/milvus:v2.5.24
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
