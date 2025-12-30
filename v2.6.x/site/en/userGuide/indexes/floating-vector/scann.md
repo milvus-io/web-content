@@ -72,6 +72,7 @@ Once the index is built and entities are inserted, you can perform similarity se
 search_params = {
     "params": {
         "reorder_k": 10, # Number of candidates to refine
+        "nprobe": 8 # Number of clusters to search
     }
 }
 
@@ -89,6 +90,7 @@ In this configuration:
 - `params`: Additional configuration options for searching on the index.
 
     - `reorder_k`: Number of candidates to refine during the re-ranking phase.
+    - `nprobe`: Number of clusters to search for.
 
     To learn more search parameters available for the `SCANN` index, refer to [Index-specific search params](scann.md#Index-specific-search-params).
 
@@ -137,6 +139,12 @@ The following table lists the parameters that can be configured in `search_param
      <td><p>Controls the number of candidate vectors that are refined during the re-ranking phase. This parameter determines how many top candidates from the initial partitioning and quantization stages are re-evaluated using more precise similarity calculations.</p></td>
      <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Default value</strong>: None</p></td>
      <td><p>A larger <code>reorder_k</code> generally leads to <strong>higher search accuracy</strong> as more candidates are considered during the final refinement phase. However, this also <strong>increases search time</strong> due to additional computation.</p><p>Consider increasing <code>reorder_k</code> when achieving high recall is critical and search speed is less of a concern. A good starting point is 2-5x your desired <code>limit</code> (TopK results to return).</p><p>Consider decreasing <code>reorder_k</code> to prioritize faster searches, especially in scenarios where a slight reduction in accuracy is acceptable.</p><p>In most cases, we recommend you set a value within this range: [<em>limit</em>, <em>limit</em> * 5].</p></td>
+   </tr>
+   <tr>
+     <td><p><code>nprobe</code></p></td>
+     <td><p>The number of clusters to search for candidates.</p></td>
+     <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [1, <em>nlist</em>]</p><p><strong>Default value</strong>: <code>8</code></p></td>
+     <td><p>Higher values allow more clusters to be searched, improving recall by expanding the search scope but at the cost of increased query latency.</p><p>Set <code>nprobe</code> proportionally to <code>nlist</code> to balance speed and accuracy.</p><p>In most cases, we recommend you set a value within this range: [1, nlist].</p></td>
    </tr>
 </table>
 
