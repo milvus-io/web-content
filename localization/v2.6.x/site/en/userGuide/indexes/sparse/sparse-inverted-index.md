@@ -5,7 +5,7 @@ summary: >-
   The SPARSE_INVERTED_INDEX index is an index type used by Milvus to efficiently
   store and search sparse vectors. This index type leverages the principles of
   inverted indexing to create a highly efficient search structure for sparse
-  data. For more information, refer to INVERTED.
+  data.
 ---
 <h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,12 +86,7 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><p>Once the index is built and entities are inserted, you can perform similarity searches on the index.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
-search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters</span>
-}
-
-<span class="hljs-comment"># Prepare the query vector</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare the query vector</span>
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 
 res = MilvusClient.search(
@@ -99,17 +94,9 @@ res = MilvusClient.search(
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
     data=query_vector,  <span class="hljs-comment"># Query vector</span>
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>In this configuration:</p>
-<ul>
-<li><p><code translate="no">params</code>: Additional configuration options for searching on the index.</p>
-<ul>
-<li><code translate="no">drop_ratio_search</code>: Fine-tunes search performance by specifying what proportion of small vector values to ignore during the search process. For example, with <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, the smallest 20% of values in the query vector will be ignored during the search.</li>
-</ul>
-<p>To learn more search parameters available for the <code translate="no">SPARSE_INVERTED_INDEX</code> index, refer to <a href="/docs/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">Index-specific search params</a>.</p></li>
-</ul>
+<p>To learn more search parameters available for the <code translate="no">SPARSE_INVERTED_INDEX</code> index, refer to <a href="/docs/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">Index-specific search params</a>.</p>
 <h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,9 +140,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">inverted_index_algo</code></p></td>
      <td><p>The algorithm used for building and querying the index. It determines how the index processes queries.</p></td>
      <td><p><code translate="no">"DAAT_MAXSCORE"</code> (default), <code translate="no">"DAAT_WAND"</code>, <code translate="no">"TAAT_NAIVE"</code></p></td>
-     <td><p>Use <code translate="no">"DAAT_MAXSCORE"</code> for scenarios with high k values or queries with many terms, which can benefit from skipping non-competitive documents. 
- Choose <code translate="no">"DAAT_WAND"</code> for queries with small k values or short queries to leverage more efficient skipping.</p>
-<p>Use <code translate="no">"TAAT_NAIVE"</code> if dynamic adjustment to collection changes (e.g., avgdl) is required.</p></td>
+     <td><p>Use <code translate="no">"DAAT_MAXSCORE"</code> for scenarios with high k values or queries with many terms, which can benefit from skipping non-competitive documents. </p><p>Choose <code translate="no">"DAAT_WAND"</code> for queries with small k values or short queries to leverage more efficient skipping.</p><p>Use <code translate="no">"TAAT_NAIVE"</code> if dynamic adjustment to collection changes (e.g., avgdl) is required.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">Index-specific search params<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -185,6 +170,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">drop_ratio_search</code></p></td>
      <td><p>The proportion of the smallest values to ignore during search, helping to reduce noise.</p></td>
      <td><p>Fraction between 0.0 and 1.0 (e.g., 0.2 ignores the smallest 20% of values)</p></td>
-     <td><p>Tune this parameter based on the sparsity and noise level of your query vectors. For example, setting it to 0.2 can help focus on more significant values during the search, potentially improving accuracy.</p></td>
+     <td><p>Tune this parameter based on the sparsity and noise level of your query vectors.</p><p>This parameter controls the proportion of low-magnitude values dropped during search. Increasing this value (for example, to <code translate="no">0.2</code>) can reduce noise and focus the search on more significant components, which may improve precision and efficiency. However, dropping more values can also reduce recall by excluding potentially relevant signals. Choose a value that balances recall and accuracy for your workload.</p></td>
    </tr>
 </table>
