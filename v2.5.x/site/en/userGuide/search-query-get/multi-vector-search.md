@@ -686,7 +686,6 @@ request_1 = AnnSearchRequest(**search_param_1)
 search_param_2 = {
     "data": [query_text],
     "anns_field": "text_sparse",
-    "param": {"drop_ratio_search": 0.2},
     "limit": 2
 }
 request_2 = AnnSearchRequest(**search_param_2)
@@ -728,7 +727,6 @@ searchRequests.add(AnnSearchReq.builder()
 searchRequests.add(AnnSearchReq.builder()
         .vectorFieldName("text_sparse")
         .vectors(queryTexts)
-        .params("{\"drop_ratio_search\": 0.2}")
         .topK(2)
         .build());
 searchRequests.add(AnnSearchReq.builder()
@@ -771,7 +769,6 @@ const search_param_1 = {
 const search_param_2 = {
     "data": query_text, 
     "anns_field": "text_sparse", 
-    "param": {"drop_ratio_search": 0.2},
     "limit": 2
 }
 
@@ -794,7 +791,6 @@ export req='[
     {
         "data": ["white headphones, quiet and comfortable"],
         "annsField": "text_sparse",
-        "params": {"drop_ratio_search": 0.2},
         "limit": 2
     },
     {
