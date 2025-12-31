@@ -1,7 +1,7 @@
 ---
 id: sparse-inverted-index.md
 title: "SPARSE_INVERTED_INDEX"
-summary: "The SPARSE_INVERTED_INDEX index is an index type used by Milvus to efficiently store and search sparse vectors. This index type leverages the principles of inverted indexing to create a highly efficient search structure for sparse data. For more information, refer to INVERTED."
+summary: "The SPARSE_INVERTED_INDEX index is an index type used by Milvus to efficiently store and search sparse vectors. This index type leverages the principles of inverted indexing to create a highly efficient search structure for sparse data."
 ---
 
 # SPARSE_INVERTED_INDEX
@@ -56,11 +56,6 @@ Once the index parameters are configured, you can create the index by using the 
 Once the index is built and entities are inserted, you can perform similarity searches on the index.
 
 ```python
-# Prepare search parameters
-search_params = {
-    "params": {"drop_ratio_search": 0.2},  # Additional optional search parameters
-}
-
 # Prepare the query vector
 query_vector = [{1: 0.2, 50: 0.4, 1000: 0.7}]
 
@@ -69,17 +64,10 @@ res = MilvusClient.search(
     anns_field="vector_field",  # Vector field name
     data=query_vector,  # Query vector
     limit=3,  # TopK results to return
-    search_params=search_params
 )
 ```
 
-In this configuration:
-
-- `params`: Additional configuration options for searching on the index.
-
-    - `drop_ratio_search`: Fine-tunes search performance by specifying what proportion of small vector values to ignore during the search process. For example, with `{"drop_ratio_search": 0.2}`, the smallest 20% of values in the query vector will be ignored during the search.
-
-    To learn more search parameters available for the `SPARSE_INVERTED_INDEX` index, refer to [Index-specific search params](ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg).
+To learn more search parameters available for the `SPARSE_INVERTED_INDEX` index, refer to [Index-specific search params](ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg).
 
 ## Index params
 
@@ -100,9 +88,7 @@ The following table lists the parameters that can be configured in `params` when
      <td><p><code>inverted_index_algo</code></p></td>
      <td><p>The algorithm used for building and querying the index. It determines how the index processes queries.</p></td>
      <td><p><code>"DAAT_MAXSCORE"</code> (default), <code>"DAAT_WAND"</code>, <code>"TAAT_NAIVE"</code></p></td>
-     <td><p>Use <code>"DAAT_MAXSCORE"</code> for scenarios with high k values or queries with many terms, which can benefit from skipping non-competitive documents. 
- Choose <code>"DAAT_WAND"</code> for queries with small k values or short queries to leverage more efficient skipping.</p>
-<p>Use <code>"TAAT_NAIVE"</code> if dynamic adjustment to collection changes (e.g., avgdl) is required.</p></td>
+     <td><p>Use <code>"DAAT_MAXSCORE"</code> for scenarios with high k values or queries with many terms, which can benefit from skipping non-competitive documents. </p><p>Choose <code>"DAAT_WAND"</code> for queries with small k values or short queries to leverage more efficient skipping.</p><p>Use <code>"TAAT_NAIVE"</code> if dynamic adjustment to collection changes (e.g., avgdl) is required.</p></td>
    </tr>
 </table>
 
@@ -121,7 +107,7 @@ The following table lists the parameters that can be configured in `search_param
      <td><p><code>drop_ratio_search</code></p></td>
      <td><p>The proportion of the smallest values to ignore during search, helping to reduce noise.</p></td>
      <td><p>Fraction between 0.0 and 1.0 (e.g., 0.2 ignores the smallest 20% of values)</p></td>
-     <td><p>Tune this parameter based on the sparsity and noise level of your query vectors. For example, setting it to 0.2 can help focus on more significant values during the search, potentially improving accuracy.</p></td>
+     <td><p>Tune this parameter based on the sparsity and noise level of your query vectors.</p><p>This parameter controls the proportion of low-magnitude values dropped during search. Increasing this value (for example, to <code>0.2</code>) can reduce noise and focus the search on more significant components, which may improve precision and efficiency. However, dropping more values can also reduce recall by excluding potentially relevant signals. Choose a value that balances recall and accuracy for your workload.</p></td>
    </tr>
 </table>
 

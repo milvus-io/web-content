@@ -601,11 +601,7 @@ Once you've inserted data into your collection, you can perform full text search
 </div>
 
 ```python
-search_params = {
-    'params': {'drop_ratio_search': 0.2},
-}
-
-client.search(
+res = client.search(
     collection_name='my_collection', 
     # highlight-start
     data=['whats the focus of information retrieval?'],
@@ -613,8 +609,9 @@ client.search(
     output_fields=['text'], # Fields to return in search results; sparse field cannot be output
     # highlight-end
     limit=3,
-    search_params=search_params
 )
+
+print(res)
 ```
 
 ```java
@@ -623,7 +620,7 @@ import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import io.milvus.v2.service.vector.response.SearchResp;
 
 Map<String,Object> searchParams = new HashMap<>();
-searchParams.put("drop_ratio_search", 0.2);
+
 SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("my_collection")
         .data(Collections.singletonList(new EmbeddedText("whats the focus of information retrieval?")))
@@ -636,7 +633,6 @@ SearchResp searchResp = client.search(SearchReq.builder()
 
 ```go
 annSearchParams := index.NewCustomAnnParam()
-annSearchParams.WithExtraParam("drop_ratio_search", 0.2)
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     "my_collection", // collectionName
     3,               // limit
@@ -664,7 +660,6 @@ await client.search(
     anns_field: 'sparse',
     output_fields: ['text'],
     limit: 3,
-    params: {'drop_ratio_search': 0.2},
 )
 ```
 
@@ -684,9 +679,7 @@ curl --request POST \
         "text"
     ],
     "searchParams":{
-        "params":{
-            "drop_ratio_search":0.2
-        }
+        "params":{}
     }
 }'
 ```
