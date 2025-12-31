@@ -615,7 +615,6 @@ search_params_sparse = {
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>}
     }
 }
 
@@ -631,7 +630,7 @@ res = client.hybrid_search(
 <p>This example demonstrates a hybrid search in Milvus that combines:</p>
 <ol>
 <li><p><strong>Dense vector search</strong>: Using the inner product (IP) metric with <code translate="no">nprobe</code> set to 10 for approximate nearest neighbor (ANN) search on the <code translate="no">vector</code> field.</p></li>
-<li><p><strong>Sparse vector search</strong>: Using the BM25 similarity metric with a <code translate="no">drop_ratio_search</code> parameter of 0.2 on the <code translate="no">text_sparse</code> field.</p></li>
+<li><p><strong>Sparse vector search</strong>: Using the BM25 similarity metric on the <code translate="no">text_sparse</code> field.</p></li>
 </ol>
 <p>The results from these searches are executed separately, combined, and reranked using the Reciprocal Rank Fusion (RRF) ranker. The hybrid search returns the top 10 entities from the reranked list.</p>
 <p>Unlike Elasticsearch’s RRF ranking, which merges results from standard text-based queries and kNN searches, Milvus combines results from sparse and dense vector searches, providing a unique hybrid search capability optimized for multimodal data.</p>
