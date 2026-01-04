@@ -2720,8 +2720,9 @@
       },
       {
         "label": "Use ColBERT and ColPali with Milvus",
-        "id": "search-with-embedding-lists.md",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {
