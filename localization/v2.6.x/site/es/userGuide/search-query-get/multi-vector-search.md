@@ -36,8 +36,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Flujo de trabajo de la búsqueda híbrida</span> </span></p>
 <p>La búsqueda híbrida multivectorial integra diferentes métodos de búsqueda o abarca incrustaciones de varias modalidades:</p>
 <ul>
-<li><p><strong>Búsqueda</strong> de<strong>vectores dispersos-densos</strong>: Los <a href="/docs/es/dense-vector.md">vectores densos</a> son excelentes para captar las relaciones semánticas, mientras que <a href="/docs/es/sparse_vector.md">los vectores</a> dispersos son muy eficaces para la concordancia precisa de palabras clave. La búsqueda híbrida combina estos enfoques para proporcionar tanto una amplia comprensión conceptual como la relevancia exacta de los términos, mejorando así los resultados de las búsquedas. Al aprovechar los puntos fuertes de cada método, la búsqueda híbrida supera las limitaciones de los enfoques individuales y ofrece un mejor rendimiento para consultas complejas. Aquí encontrará una <a href="/docs/es/full_text_search_with_milvus.md">guía</a> más detallada sobre la recuperación híbrida que combina la búsqueda semántica con la búsqueda de texto completo.</p></li>
-<li><p><strong>Búsqueda vectorial multimodal</strong>: La búsqueda vectorial multimodal es una potente técnica que permite buscar en varios tipos de datos, como texto, imágenes, audio y otros. La principal ventaja de este enfoque es su capacidad para unificar distintas modalidades en una experiencia de búsqueda fluida y cohesionada. Por ejemplo, en la búsqueda de productos, un usuario puede introducir una consulta de texto para encontrar productos descritos con texto e imágenes. Combinando estas modalidades mediante un método de búsqueda híbrido, se puede mejorar la precisión de la búsqueda o enriquecer los resultados de la misma.</p></li>
+<li><p><strong>Búsqueda</strong> de<strong>vectores dispersos-densos</strong>: Los <a href="/docs/es/dense-vector.md">vectores densos</a> son excelentes para captar las relaciones semánticas, mientras que <a href="/docs/es/sparse_vector.md">los vectores</a> dispersos son muy eficaces para la concordancia precisa de palabras clave. La búsqueda híbrida combina estos enfoques para proporcionar tanto una amplia comprensión conceptual como la relevancia exacta de los términos, mejorando así los resultados de la búsqueda. Al aprovechar los puntos fuertes de cada método, la búsqueda híbrida supera las limitaciones de los enfoques individuales y ofrece un mejor rendimiento para consultas complejas. Aquí encontrará una <a href="/docs/es/full_text_search_with_milvus.md">guía</a> más detallada sobre la recuperación híbrida que combina la búsqueda semántica con la búsqueda de texto completo.</p></li>
+<li><p><strong>Búsqueda vectorial multimodal</strong>: La búsqueda vectorial multimodal es una potente técnica que permite buscar en varios tipos de datos, como texto, imágenes, audio y otros. La principal ventaja de este enfoque es su capacidad para unificar diferentes modalidades en una experiencia de búsqueda fluida y cohesionada. Por ejemplo, en la búsqueda de productos, un usuario puede introducir una consulta de texto para encontrar productos descritos con texto e imágenes. Al combinar estas modalidades mediante un método de búsqueda híbrido, se puede mejorar la precisión de la búsqueda o enriquecer los resultados de la misma.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Ejemplo<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -726,7 +726,6 @@ request_1 = AnnSearchRequest(**search_param_1)
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_text],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 request_2 = AnnSearchRequest(**search_param_2)
@@ -766,7 +765,6 @@ searchRequests.add(AnnSearchReq.builder()
 searchRequests.add(AnnSearchReq.builder()
         .vectorFieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
         .vectors(queryTexts)
-        .params(<span class="hljs-string">&quot;{\&quot;drop_ratio_search\&quot;: 0.2}&quot;</span>)
         .topK(<span class="hljs-number">2</span>)
         .build());
 searchRequests.add(AnnSearchReq.builder()
@@ -805,7 +803,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <span class="hljs-keyword">const</span> search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_text, 
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 
@@ -826,7 +823,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     {
         &quot;data&quot;: [&quot;white headphones, quiet and comfortable&quot;],
         &quot;annsField&quot;: &quot;text_sparse&quot;,
-        &quot;params&quot;: {&quot;drop_ratio_search&quot;: 0.2},
         &quot;limit&quot;: 2
     },
     {
@@ -853,7 +849,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para fusionar y reordenar los conjuntos de resultados de búsqueda de RNA, es esencial seleccionar una estrategia de reordenación adecuada. Milvus ofrece varios tipos de estrategias de reordenación. Para obtener más información sobre estos mecanismos de reordenación, consulte <a href="/docs/es/weighted-ranker.md">Weighted Ranker</a> o <a href="/docs/es/rrf-ranker.md">RRF Ranker</a>.</p>
+    </button></h3><p>Para combinar y jerarquizar los conjuntos de resultados de búsqueda de RNA, es esencial seleccionar una estrategia de jerarquización adecuada. Milvus ofrece varios tipos de estrategias de reordenación. Para obtener más información sobre estos mecanismos de reordenación, consulte <a href="/docs/es/weighted-ranker.md">Weighted Ranker</a> o <a href="/docs/es/rrf-ranker.md">RRF Ranker</a>.</p>
 <p>En este ejemplo, dado que no hay un énfasis particular en consultas de búsqueda específicas, procederemos con la estrategia RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

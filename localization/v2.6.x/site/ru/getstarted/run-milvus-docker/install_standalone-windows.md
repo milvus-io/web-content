@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Откройте Docker Desktop в режиме администратора, щелкнув правой кнопкой мыши и выбрав пункт <strong>"Запуск от имени администратора"</strong>.</p></li>
 <li><p>Выполните следующие команды в PowerShell или Windows Command Prompt, чтобы загрузить файл конфигурации Docker Compose для Milvus Standalone и запустить Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.7/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.8/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Загрузите файл конфигурации Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.7/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.8/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Запустите Milvus.</p>
@@ -277,7 +277,7 @@ Creating milvus-standalone ... done​
     </button></h3><p>После установки Docker Desktop в Windows вы можете столкнуться с ошибкой <code translate="no">Docker Engine stopped</code>, если ваш компьютер не настроен должным образом. В этом случае вам может потребоваться выполнить следующие проверки.</p>
 <ol>
 <li><p>Проверьте, включена ли виртуализация.</p>
-<p>Проверить, включена ли виртуализация, можно на вкладке <strong>"Производительность</strong> " в <strong>диспетчере задач</strong>.</p>
+<p>Проверить, включена ли виртуализация, можно на вкладке <strong>"Производительность"</strong> в <strong>диспетчере задач</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
@@ -292,7 +292,7 @@ The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
 <li><p>Проверьте, правильно ли установлена WSL.</p>
-<p>Для установки или обновления команды WSL 2 можно выполнить следующую команду.</p>
+<p>Можно выполнить следующую команду для установки или обновления команды WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​

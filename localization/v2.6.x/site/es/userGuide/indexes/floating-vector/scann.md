@@ -46,8 +46,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Exploración</span> </span></p>
 <ol>
 <li><p><strong>Partición</strong>: Divide el conjunto de datos en clusters. Este método reduce el espacio de búsqueda centrándose sólo en los subconjuntos de datos relevantes en lugar de escanear todo el conjunto de datos, lo que ahorra tiempo y recursos de procesamiento. ScaNN suele utilizar algoritmos de agrupación, como <a href="https://zilliz.com/blog/k-means-clustering">k-means</a>, para identificar los clusters, lo que le permite realizar búsquedas de similitud de forma más eficiente.</p></li>
-<li><p><strong>Cuantización</strong>: ScaNN aplica un proceso de cuantificación conocido como <a href="https://arxiv.org/abs/1908.10396">cuantificación vectorial anisotrópica</a> tras la partición. La cuantización tradicional se centra en minimizar la distancia total entre los vectores originales y los comprimidos, lo que no es ideal para tareas como <a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">la búsqueda del producto interior máximo (MIPS)</a>, en la que la similitud viene determinada por el producto interior de los vectores en lugar de por la distancia directa. En su lugar, la cuantización anisotrópica da prioridad a preservar los componentes paralelos entre vectores, o las partes más importantes para calcular productos internos precisos. Este enfoque permite a ScaNN mantener una alta precisión MIPS alineando cuidadosamente los vectores comprimidos con la consulta, lo que permite búsquedas de similitud más rápidas y precisas.</p></li>
-<li><p><strong>Reclasificación</strong>: La fase de reordenación es el paso final, en el que ScaNN ajusta los resultados de las etapas de partición y cuantificación. Este reordenamiento aplica cálculos precisos del producto interno a los vectores candidatos más importantes, garantizando que los resultados finales sean muy precisos. El reordenamiento es crucial en los motores de recomendación de alta velocidad o en las aplicaciones de búsqueda de imágenes, donde el filtrado y la agrupación iniciales sirven como capa gruesa, y la etapa final garantiza que sólo se devuelvan al usuario los resultados más relevantes.</p></li>
+<li><p><strong>Cuantización</strong>: ScaNN aplica un proceso de cuantificación conocido como <a href="https://arxiv.org/abs/1908.10396">cuantificación vectorial anisotrópica</a> tras la partición. La cuantización tradicional se centra en minimizar la distancia total entre los vectores originales y los comprimidos, lo que no es ideal para tareas como <a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">la búsqueda del producto interior máximo (MIPS)</a>, en la que la similitud viene determinada por el producto interior de los vectores en lugar de por la distancia directa. En su lugar, la cuantización anisotrópica da prioridad a preservar los componentes paralelos entre vectores, o las partes más importantes para calcular productos internos precisos. Este enfoque permite a ScaNN mantener una alta precisión MIPS alineando cuidadosamente los vectores comprimidos con la consulta, lo que permite realizar búsquedas de similitud más rápidas y precisas.</p></li>
+<li><p><strong>Reclasificación</strong>: La fase de reordenación es el paso final, en el que ScaNN ajusta los resultados de las etapas de partición y cuantificación. Este reordenamiento aplica cálculos precisos del producto interno a los vectores candidatos más importantes, lo que garantiza que los resultados finales sean muy precisos. El reordenamiento es crucial en los motores de recomendación de alta velocidad o en las aplicaciones de búsqueda de imágenes, donde el filtrado y la agrupación iniciales sirven como capa gruesa, y la etapa final garantiza que sólo se devuelvan al usuario los resultados más relevantes.</p></li>
 </ol>
 <p>El rendimiento de <code translate="no">SCANN</code> se controla mediante dos parámetros clave que permiten afinar el equilibrio entre velocidad y precisión:</p>
 <ul>
@@ -116,6 +116,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span> <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
@@ -132,6 +133,7 @@ res = MilvusClient.search(
 <li><p><code translate="no">params</code>: Opciones de configuración adicionales para la búsqueda en el índice.</p>
 <ul>
 <li><code translate="no">reorder_k</code>: Número de candidatos a refinar durante la fase de reordenación.</li>
+<li><code translate="no">nprobe</code>: Número de clusters a buscar.</li>
 </ul>
 <p>Para conocer más parámetros de búsqueda disponibles para el índice <code translate="no">SCANN</code>, consulte <a href="/docs/es/scann.md#Index-specific-search-params">Parámetros de búsqueda específicos del índice</a>.</p></li>
 </ul>
@@ -150,7 +152,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En esta sección se ofrece una descripción general de los parámetros utilizados para crear un índice y realizar búsquedas en él.</p>
+    </button></h2><p>Esta sección proporciona una visión general de los parámetros utilizados para construir un índice y realizar búsquedas en el índice.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -215,5 +217,11 @@ res = MilvusClient.search(
      <td><p>Controla el número de vectores candidatos que se refinan durante la fase de reordenación. Este parámetro determina cuántos candidatos principales de las etapas iniciales de partición y cuantificación se reevalúan utilizando cálculos de similitud más precisos.</p></td>
      <td><p><strong>Tipo</strong>: Entero</p><p><strong>Rango</strong>: [1, <em>int_max</em>]</p><p><strong>Valor por defecto</strong>: Ninguno</p></td>
      <td><p>Un valor mayor de <code translate="no">reorder_k</code> suele <strong>aumentar la precisión de la búsqueda</strong>, ya que se tienen en cuenta más candidatos durante la fase final de refinamiento. Sin embargo, esto también <strong>aumenta el tiempo de búsqueda</strong> debido al cálculo adicional.</p><p>Considere la posibilidad de aumentar <code translate="no">reorder_k</code> cuando sea fundamental lograr una alta recuperación y la velocidad de búsqueda sea menos importante. Un buen punto de partida es de 2 a 5 veces el <code translate="no">limit</code> deseado (TopK resultados a devolver).</p><p>Considere la posibilidad de reducir <code translate="no">reorder_k</code> para dar prioridad a las búsquedas más rápidas, especialmente en situaciones en las que es aceptable una ligera reducción de la precisión.</p><p>En la mayoría de los casos, le recomendamos que establezca un valor dentro de este rango:<em>[límite</em>, <em>límite</em> * 5].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>El número de clusters para buscar candidatos.</p></td>
+     <td><p><strong>Tipo</strong>: Entero</p><p><strong>Rango</strong>: [1, <em>nlist</em>]</p><p><strong>Valor por defecto</strong>: <code translate="no">8</code></p></td>
+     <td><p>Los valores más altos permiten buscar en más grupos, lo que mejora la recuperación al ampliar el alcance de la búsqueda, pero a costa de aumentar la latencia de la consulta.</p><p>Establezca <code translate="no">nprobe</code> proporcionalmente a <code translate="no">nlist</code> para equilibrar velocidad y precisión.</p><p>En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [1, nlist].</p></td>
    </tr>
 </table>

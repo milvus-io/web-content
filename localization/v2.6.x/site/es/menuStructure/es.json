@@ -1017,27 +1017,33 @@
             "children": []
           },
           {
+            "label": "Resaltador de texto",
+            "id": "text-highlighter.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Coincidencia de frases",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Consultas de Elasticsearch a Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Iteradores de búsqueda",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -1449,7 +1455,7 @@
             "children": []
           },
           {
-            "label": "Configurar la caché de trozos",
+            "label": "Configurar Chunk Cache",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1678,7 +1684,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []

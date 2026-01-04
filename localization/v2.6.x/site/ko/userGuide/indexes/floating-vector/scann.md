@@ -113,6 +113,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span> <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
@@ -129,10 +130,11 @@ res = MilvusClient.search(
 <li><p><code translate="no">params</code>: 색인에서 검색을 위한 추가 구성 옵션.</p>
 <ul>
 <li><code translate="no">reorder_k</code>: 순위 재조정 단계에서 구체화할 후보의 수입니다.</li>
+<li><code translate="no">nprobe</code>: 검색할 클러스터 수입니다.</li>
 </ul>
 <p><code translate="no">SCANN</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/scann.md#Index-specific-search-params">인덱스별 검색 매개변수를</a> 참조하세요.</p></li>
 </ul>
-<h2 id="Index-params" class="common-anchor-header">색인 매개변수<button data-href="#Index-params" class="anchor-icon" translate="no">
+<h2 id="Index-params" class="common-anchor-header">인덱스 매개변수<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,7 +149,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 인덱스 구축 및 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
+    </button></h2><p>이 섹션에서는 인덱스를 구축하고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
 <h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -210,7 +212,13 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>순위 재조정 단계에서 정제되는 후보 벡터의 수를 제어합니다. 이 매개변수는 초기 파티셔닝 및 양자화 단계에서 보다 정밀한 유사도 계산을 사용하여 재평가할 상위 후보 벡터의 수를 결정합니다.</p></td>
-     <td><p><strong>유형</strong>: 정수</p><p><strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: None</p></td>
-     <td><p><code translate="no">reorder_k</code> 이 클수록 일반적으로 최종 구체화 단계에서 더 많은 후보를 고려하므로 <strong>검색 정확도가 높아집니다</strong>. 그러나 추가 계산으로 인해 <strong>검색 시간도 늘어납니다</strong>.</p><p>높은 회상률을 달성하는 것이 중요하고 검색 속도는 크게 신경 쓰지 않는 경우 <code translate="no">reorder_k</code> 을 늘리는 것을 고려하세요. 원하는 <code translate="no">limit</code> (반환할 TopK 결과)의 2~5배가 좋은 시작점입니다.</p><p>특히 약간의 정확도 저하를 감수할 수 있는 시나리오에서는 <code translate="no">reorder_k</code> 을 줄여 더 빠른 검색을 우선시하는 것을 고려하세요.</p><p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다:<em>[제한</em>, <em>제한</em> * 5].</p></td>
+     <td><p><strong>유형</strong>: 유형: 정수</p><p><strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: None</p></td>
+     <td><p><code translate="no">reorder_k</code> 이 클수록 일반적으로 최종 구체화 단계에서 더 많은 후보를 고려하므로 <strong>검색 정확도가 높아집니다</strong>. 그러나 추가 계산으로 인해 <strong>검색 시간도 늘어납니다</strong>.</p><p>높은 회상률을 달성하는 것이 중요하고 검색 속도는 크게 신경 쓰지 않는 경우에는 <code translate="no">reorder_k</code> 을 늘리는 것을 고려하세요. 원하는 <code translate="no">limit</code> (반환할 TopK 결과)의 2~5배가 좋은 시작점입니다.</p><p>특히 약간의 정확도 저하를 감수할 수 있는 시나리오에서는 <code translate="no">reorder_k</code> 을 줄여 더 빠른 검색을 우선시하는 것을 고려하세요.</p><p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다:<em>[제한</em>, <em>제한</em> * 5].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>후보를 검색할 클러스터 수입니다.</p></td>
+     <td><p><strong>유형</strong>: 유형: 정수</p><p><strong>범위</strong>: [1, <em>nlist</em>]</p><p><strong>기본값입니다</strong>: <code translate="no">8</code></p></td>
+     <td><p>값이 클수록 더 많은 클러스터를 검색할 수 있으므로 검색 범위가 확장되어 검색 회수율이 향상되지만 쿼리 대기 시간이 늘어납니다.</p><p>속도와 정확도의 균형을 맞추려면 <code translate="no">nprobe</code> 을 <code translate="no">nlist</code> 에 비례하여 설정합니다.</p><p>대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [1, nlist].</p></td>
    </tr>
 </table>

@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "番号フィールド",
+            "label": "数字フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -646,7 +646,7 @@
             ]
           },
           {
-            "label": "コレクションフィールドの変更",
+            "label": "コレクション・フィールドの変更",
             "id": "alter-collection-field.md",
             "order": 15,
             "children": []
@@ -1017,27 +1017,33 @@
             "children": []
           },
           {
-            "label": "フレーズ一致",
-            "id": "phrase-match.md",
+            "label": "テキスト蛍光ペン",
+            "id": "text-highlighter.md",
             "order": 9,
             "children": []
           },
           {
-            "label": "Elasticsearchクエリからmilvusへ",
-            "id": "elasticsearch-queries-to-milvus.md",
+            "label": "フレーズ一致",
+            "id": "phrase-match.md",
             "order": 10,
+            "children": []
+          },
+          {
+            "label": "Elasticsearchからmilvusへのクエリ",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 11,
             "children": []
           },
           {
             "label": "検索イテレータ",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "パーティション・キーの使用",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -2008,7 +2014,7 @@
                 "children": []
               },
               {
-                "label": "講師",
+                "label": "インストラクター",
                 "id": "embed-with-instructor.md",
                 "order": 9,
                 "children": []
@@ -2743,7 +2749,7 @@
         "children": []
       },
       {
-        "label": "Milvusによるテキストから画像への検索",
+        "label": "milvusによるテキストから画像への検索",
         "id": "text_image_search.md",
         "order": 16,
         "children": []

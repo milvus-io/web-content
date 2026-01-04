@@ -350,7 +350,7 @@ schema.WithFunction(function)
    </tr>
 </table>
 <div class="alert note">
-<p>Si varios campos <code translate="no">VARCHAR</code> requieren un tratamiento BM25, defina <strong>una función BM25 por campo</strong>, cada uno con un nombre y un campo de salida únicos.</p>
+<p>Si varios campos <code translate="no">VARCHAR</code> requieren un tratamiento BM25, defina <strong>una función BM25 por campo</strong>, cada una con un nombre y un campo de salida únicos.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">Configurar el índice<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -615,43 +615,32 @@ client.insert(InsertReq.builder()
     </button></h2><p>Una vez que haya insertado datos en su colección, puede realizar búsquedas de texto completo utilizando consultas de texto sin procesar. Milvus convierte automáticamente su consulta en un vector disperso y clasifica los resultados de búsqueda coincidentes utilizando el algoritmo BM25, y luego devuelve los resultados topK (<code translate="no">limit</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">search_params = {
-    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
-}
-
-client.search(
+<pre><code translate="no" class="language-python">client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],</span>
 <span class="highlighted-comment-line">    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,</span>
 <span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>], <span class="hljs-comment"># Fields to return in search results; sparse field cannot be output</span></span>
     limit=<span class="hljs-number">3</span>,
-    search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
-Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.put(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)))
         .annsField(<span class="hljs-string">&quot;sparse&quot;</span>)
         .topK(<span class="hljs-number">3</span>)
-        .searchParams(searchParams)
         .outputFields(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">annSearchParams := index.NewCustomAnnParam()
-annSearchParams.WithExtraParam(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>)
-resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+<pre><code translate="no" class="language-go">resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
     <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.Text(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)},
 ).WithConsistencyLevel(entity.ClStrong).
     WithANNSField(<span class="hljs-string">&quot;sparse&quot;</span>).
-    WithAnnParam(annSearchParams).
     WithOutputFields(<span class="hljs-string">&quot;text&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -670,7 +659,6 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
-    <span class="hljs-attr">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -687,11 +675,6 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     &quot;outputFields&quot;: [
         &quot;text&quot;
     ],
-    &quot;searchParams&quot;:{
-        &quot;params&quot;:{
-            &quot;drop_ratio_search&quot;:0.2
-        }
-    }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
@@ -704,12 +687,8 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
      <td><p>Diccionario que contiene los parámetros de búsqueda.</p></td>
    </tr>
    <tr>
-     <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proporción de términos de baja importancia que deben ignorarse durante la búsqueda. Para más detalles, consulte <a href="/docs/es/v2.5.x/sparse_vector.md">Vector disperso</a>.</p></td>
-   </tr>
-   <tr>
      <td><p><code translate="no">data</code></p></td>
-     <td><p>Texto de consulta en lenguaje natural. Milvus convierte automáticamente su consulta de texto en vectores dispersos utilizando la función BM25 - <strong>no</strong> proporcione vectores precalculados.</p></td>
+     <td><p>Texto de consulta sin procesar en lenguaje natural. Milvus convierte automáticamente su consulta de texto en vectores dispersos utilizando la función BM25 - <strong>no</strong> proporcione vectores precalculados.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">anns_field</code></p></td>

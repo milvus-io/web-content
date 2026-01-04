@@ -116,6 +116,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span> <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
@@ -132,6 +133,7 @@ res = MilvusClient.search(
 <li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk pencarian pada indeks.</p>
 <ul>
 <li><code translate="no">reorder_k</code>: Jumlah kandidat yang akan disaring selama fase pemeringkatan ulang.</li>
+<li><code translate="no">nprobe</code>: Jumlah kluster yang akan dicari.</li>
 </ul>
 <p>Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">SCANN</code>, lihat Parameter <a href="/docs/id/scann.md#Index-specific-search-params">pencarian khusus indeks</a>.</p></li>
 </ul>
@@ -215,5 +217,11 @@ res = MilvusClient.search(
      <td><p>Mengontrol jumlah vektor kandidat yang disempurnakan selama tahap pemeringkatan ulang. Parameter ini menentukan berapa banyak kandidat teratas dari tahap pemartisian dan kuantisasi awal yang dievaluasi ulang menggunakan perhitungan kemiripan yang lebih tepat.</p></td>
      <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [1, <em>int_max</em>]</p><p><strong>Nilai default</strong>: Tidak ada</p></td>
      <td><p><code translate="no">reorder_k</code> yang lebih besar umumnya menghasilkan <strong>akurasi pencarian yang lebih tinggi</strong> karena lebih banyak kandidat yang dipertimbangkan selama fase penyempurnaan akhir. Namun, hal ini juga <strong>meningkatkan waktu pencarian</strong> karena adanya komputasi tambahan.</p><p>Pertimbangkan untuk meningkatkan <code translate="no">reorder_k</code> ketika mencapai recall yang tinggi sangat penting dan kecepatan pencarian tidak terlalu menjadi perhatian. Titik awal yang baik adalah 2-5x dari <code translate="no">limit</code> yang Anda inginkan (hasil TopK yang akan dikembalikan).</p><p>Pertimbangkan untuk mengurangi <code translate="no">reorder_k</code> untuk memprioritaskan pencarian yang lebih cepat, terutama dalam skenario di mana sedikit penurunan akurasi dapat diterima.</p><p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini:<em>[batas</em>, <em>batas</em> * 5].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>Jumlah cluster untuk mencari kandidat.</p></td>
+     <td><p><strong>Jenis</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [1, <em>nlist</em>]</p><p><strong>Nilai default</strong>: <code translate="no">8</code></p></td>
+     <td><p>Nilai yang lebih tinggi memungkinkan lebih banyak klaster untuk dicari, meningkatkan daya ingat dengan memperluas cakupan pencarian, tetapi dengan biaya peningkatan latensi kueri.</p><p>Tetapkan <code translate="no">nprobe</code> secara proporsional dengan <code translate="no">nlist</code> untuk menyeimbangkan kecepatan dan akurasi.</p><p>Pada kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam kisaran ini: [1, nlist].</p></td>
    </tr>
 </table>

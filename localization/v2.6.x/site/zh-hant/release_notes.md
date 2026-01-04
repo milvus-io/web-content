@@ -19,6 +19,147 @@ title: 發佈筆記
         ></path>
       </svg>
     </button></h1><p>瞭解 Milvus 的新功能！本頁總結了每個版本的新功能、改進、已知問題和錯誤修正。您可以在本節中找到 v2.6.0 以後每個版本的發行說明。我們建議您定期造訪此頁面以瞭解更新資訊。</p>
+<h2 id="v268" class="common-anchor-header">v2.6.8<button data-href="#v268" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>發行日期：2026 年 1 月 4 日</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Milvus 版本</th><th style="text-align:left">Python SDK 版本</th><th style="text-align:left">Node.js SDK 版本</th><th style="text-align:left">Java SDK 版本</th><th style="text-align:left">Go SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.8</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.11</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>我們很高興地宣布 Milvus 2.6.8 正式發行！這個版本引入了搜尋結果高亮功能，大大提升了檢索體驗。在引擎蓋下，我們優化了查詢處理、資源調度和快取機制，以提供卓越的效能和穩定性。此外，此版本還處理了與資料安全性、儲存處理和並發性相關的重要錯誤。我們強烈建議所有使用者升級至此版本，以獲得更有效率、更可靠的生產環境。</p>
+<h3 id="Features" class="common-anchor-header">功能特色<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>支援使用螢光筆搜尋。如需詳細資訊，請參閱<a href="/docs/zh-hant/text-highlighter.md">文字螢光筆</a>。 <a href="https://github.com/milvus-io/milvus/pull/46052">(#46052</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">改進<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>將查詢優化邏輯移至代理，以改善效能<a href="https://github.com/milvus-io/milvus/pull/46549">(#46549</a>)</li>
+<li>使用 STL 排序優化<code translate="no">LIKE</code> 運算符性能<a href="https://github.com/milvus-io/milvus/pull/46535">(#46535</a>)</li>
+<li>支援同時執行多欄位的文字索引工作<a href="https://github.com/milvus-io/milvus/pull/46306">(#46306</a>)</li>
+<li>支援在集合層級暫停 GC<a href="https://github.com/milvus-io/milvus/pull/46201">(#46201</a>)</li>
+<li>針對查詢節點實施懲罰政策，以處理資源耗盡問題<a href="https://github.com/milvus-io/milvus/pull/46086">(#46086</a>)</li>
+<li>透過將多個行群映射至單一快取單元，優化資料快取<a href="https://github.com/milvus-io/milvus/pull/46542">(#46542</a>)</li>
+<li>降低 QuotaCenter 的 CPU 使用率<a href="https://github.com/milvus-io/milvus/pull/46615">(#46615</a>)</li>
+<li>改善<code translate="no">TIMESTAMPTZ</code> 資料比較效能<a href="https://github.com/milvus-io/milvus/pull/46655">(#46655</a>)</li>
+<li>支援以空 JSON 物件作為預設值的 nullable 動態欄位<a href="https://github.com/milvus-io/milvus/pull/46445">(#46445</a>)</li>
+<li>僅變更集合屬性時，防止不必要的段封閉<a href="https://github.com/milvus-io/milvus/pull/46489">(#46489</a>)</li>
+<li>在 RESTful v2 代理中支援 DML 和 DQL 轉發<a href="https://github.com/milvus-io/milvus/pull/46021">(#46021</a>,<a href="https://github.com/milvus-io/milvus/pull/46037">#46037</a>)</li>
+<li>新增在速率限制錯誤時重試物件儲存讀取的機制<a href="https://github.com/milvus-io/milvus/pull/46464">(#46464</a>)</li>
+<li>增強了 Proxy 和 RootCoord 元表的日誌記錄<a href="https://github.com/milvus-io/milvus/pull/46701">(#46701</a>)</li>
+<li>新增嵌入模型和模式欄位類型的驗證<a href="https://github.com/milvus-io/milvus/pull/46422">(#46422</a>)</li>
+<li>引入了延遲收集丟棄作業的容忍期限<a href="https://github.com/milvus-io/milvus/pull/46252">(#46252</a>)</li>
+<li>透過根據欄位大小和類型估計時隙，改善索引任務排程<a href="https://github.com/milvus-io/milvus/pull/46276">(#46276</a>,<a href="https://github.com/milvus-io/milvus/pull/45851">#45851</a>)</li>
+<li>在存取不支援條件寫入的物件儲存空間時，新增寫入路徑的回退機制<a href="https://github.com/milvus-io/milvus/pull/46022">(#46022</a>)</li>
+<li>優化了 IDF 甲骨文同步邏輯<a href="https://github.com/milvus-io/milvus/pull/46079">(#46079</a>)</li>
+<li>將 RootCoord 預設連接埠變更為非短暫連接埠<a href="https://github.com/milvus-io/milvus/pull/46268">(#46268</a>)</li>
+<li>新增監控 Jemalloc 快取記憶體的指標<a href="https://github.com/milvus-io/milvus/pull/45973">(#45973</a>)</li>
+<li>當叢集配額改變時，改善了磁碟配額指標的準確性<a href="https://github.com/milvus-io/milvus/pull/46304">(#46304</a>)</li>
+<li>改善標量表達式的追蹤可觀察性<a href="https://github.com/milvus-io/milvus/pull/45823">(#45823</a>)</li>
+<li>拒絕 upsert 批次請求中的重複主索引鍵<a href="https://github.com/milvus-io/milvus/pull/46035">(#46035</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">錯誤修正<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>修正了 RBAC ETCD 前綴匹配，以防止潛在的資料洩漏<a href="https://github.com/milvus-io/milvus/pull/46708">(#46708</a>)</li>
+<li>修正了本地存儲模式下錯誤的根路徑處理<a href="https://github.com/milvus-io/milvus/pull/46693">(#46693</a>)</li>
+<li>修正了 JSON 欄位中<code translate="no">int64</code>/<code translate="no">float</code> 混合類型的處理<a href="https://github.com/milvus-io/milvus/pull/46682">(#46682</a>)</li>
+<li>修正群集升級時文字日誌載入失敗的問題<a href="https://github.com/milvus-io/milvus/pull/46698">(#46698</a>)</li>
+<li>防止在原始資料清理過程中刪除其他欄位<a href="https://github.com/milvus-io/milvus/pull/46689">(#46689</a>)</li>
+<li>修正了使用多個分析器高亮時的失敗<a href="https://github.com/milvus-io/milvus/pull/46664">(#46664</a>)</li>
+<li>確保在作業系統退出時會刷新日誌<a href="https://github.com/milvus-io/milvus/pull/46609">(#46609</a>)</li>
+<li>當丟棄集合時，修正了超出 ETCD RPC 大小限制的錯誤<a href="https://github.com/milvus-io/milvus/pull/46645">(#46645</a>)</li>
+<li>修正伺服器閒置時的複製滯後問題<a href="https://github.com/milvus-io/milvus/pull/46612">(#46612</a>)</li>
+<li>修正了<code translate="no">TIMESTAMPTZ</code> 預設值無效的驗證問題<a href="https://github.com/milvus-io/milvus/pull/46556">(#46556</a>)</li>
+<li>修正了還原壓縮任務，以確保正確清理<a href="https://github.com/milvus-io/milvus/pull/46578">(#46578</a>)</li>
+<li>統一唯讀節點處理，避免平衡通道任務卡住<a href="https://github.com/milvus-io/milvus/pull/46513">(#46513</a>)</li>
+<li>防止多欄列群的欄位資料丟失<a href="https://github.com/milvus-io/milvus/pull/46425">(#46425</a>)</li>
+<li>重新觀看 ETCD 時，移除過期的代理用戶端<a href="https://github.com/milvus-io/milvus/pull/46490">(#46490</a>)</li>
+<li>修正分塊迭代器合併順序<a href="https://github.com/milvus-io/milvus/pull/46462">(#46462</a>)</li>
+<li>防止透過停用自動提交來建立 Kafka 消費者群組<a href="https://github.com/milvus-io/milvus/pull/46509">(#46509</a>)</li>
+<li>禁止熱重新載入分層儲存參數<a href="https://github.com/milvus-io/milvus/pull/46438">(#46438</a>)</li>
+<li>啟用二進位向量的搜尋迭代器<a href="https://github.com/milvus-io/milvus/pull/46334">(#46334</a>)</li>
+<li>修正儲存初始化時的競賽條件<a href="https://github.com/milvus-io/milvus/pull/46338">(#46338</a>)</li>
+<li>修正了高亮查詢對非BM25搜尋無效的問題<a href="https://github.com/milvus-io/milvus/pull/46295">(#46295</a>)</li>
+<li>修正了 JSON 垃圾收集過程中的堆疊溢出<a href="https://github.com/milvus-io/milvus/pull/46318">(#46318</a>)</li>
+<li>確保在寫入 binlog 時進行重試<a href="https://github.com/milvus-io/milvus/pull/46310">(#46310</a>)</li>
+<li>修正了 JSON 欄位的索引使用檢查<a href="https://github.com/milvus-io/milvus/pull/46281">(#46281</a>)</li>
+<li>擴充時，當副本缺乏節點時，防止目標更新阻塞<a href="https://github.com/milvus-io/milvus/pull/46291">(#46291</a>)</li>
+<li>限制<code translate="no">char_group</code> tokenizer 只支援單字節分隔符<a href="https://github.com/milvus-io/milvus/pull/46196">(#46196</a>)</li>
+<li>如果查詢路徑包含數字，跳過 JSON 路徑索引的使用<a href="https://github.com/milvus-io/milvus/pull/46247">(#46247</a>)</li>
+<li>修正了 MinIO 中根路徑為 "." 時的路徑串接錯誤<a href="https://github.com/milvus-io/milvus/pull/46221">(#46221</a>)</li>
+<li>透過修正複製滯後度量計算，修正了假陽性的健康檢查<a href="https://github.com/milvus-io/milvus/pull/46122">(#46122</a>)</li>
+<li>透過<code translate="no">TIMESTAMPTZ</code> 修正 RESTful v2 解析與模式預設<a href="https://github.com/milvus-io/milvus/pull/46239">(#46239</a>)</li>
+<li>修正使用輸出幾何欄位搜尋空結果時的恐慌<a href="https://github.com/milvus-io/milvus/pull/46231">(#46231</a>)</li>
+<li>新增欄位資料對齊驗證，以防止部分更新時發生恐慌<a href="https://github.com/milvus-io/milvus/pull/46180">(#46180</a>)</li>
+<li>修正 RESTful v2 中的資料庫遺失問題<a href="https://github.com/milvus-io/milvus/pull/46172">(#46172</a>)</li>
+<li>修正了 gRPC 用戶端會話中不正確的上下文使用<a href="https://github.com/milvus-io/milvus/pull/46184">(#46184</a>)</li>
+<li>修正了 RESTful v2 在升級時授權轉送不正確的問題<a href="https://github.com/milvus-io/milvus/pull/46140">(#46140</a>)</li>
+<li>修正了錯誤的結構還原邏輯<a href="https://github.com/milvus-io/milvus/pull/46151">(#46151</a>)</li>
+<li>修正搜尋結果為空時，螢光筆回傳錯誤的問題<a href="https://github.com/milvus-io/milvus/pull/46111">(#46111</a>)</li>
+<li>修正了欄位載入原始資料的邏輯<a href="https://github.com/milvus-io/milvus/pull/46155">(#46155</a>)</li>
+<li>修正了跳過索引中的大塊後游標移動的問題<a href="https://github.com/milvus-io/milvus/pull/46055">(#46055</a>)</li>
+<li>修正<code translate="no">TIMESTAMPTZ</code> 標量索引輸出的循環邏輯<a href="https://github.com/milvus-io/milvus/pull/46110">(#46110</a>)</li>
+<li>修正透過 RESTful API 設定幾何欄位預設值的問題<a href="https://github.com/milvus-io/milvus/pull/46064">(#46064</a>)</li>
+<li>如果任何元件在啟動時尚未就緒，則實作快速失敗<a href="https://github.com/milvus-io/milvus/pull/46070">(#46070</a>)</li>
+</ul>
 <h2 id="v267" class="common-anchor-header">v2.6.7<button data-href="#v267" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -148,7 +289,7 @@ title: 發佈筆記
 <tr><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.8</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>我們非常興奮地宣布 Milvus 2.6.6 正式發行，它擁有一系列強大的新功能、效能增強以及重要的錯誤修正。此更新介紹了一些重要的功能，例如 Geospatial 和 Timestampz 資料類型、Boost ranker for rescoring 等。此版本也有許多重要的標量篩選效能改善。幾個重要的錯誤也已解決，以確保更高的穩定性和可靠性。透過此版本，Milvus 繼續為所有使用者提供更強大、更有效率的體驗。以下是此版本的主要重點。</p>
+<p>我們很高興地宣佈 Milvus 2.6.6 正式發行，它擁有一系列強大的新功能、效能增強以及重要的錯誤修正。此更新介紹了一些重要的功能，例如 Geospatial 和 Timestampz 資料類型、Boost ranker for rescoring 等。此版本也有許多重要的標量篩選效能改善。幾個重要的錯誤也已解決，以確保更高的穩定性和可靠性。透過此版本，Milvus 繼續為所有使用者提供更強大、更有效率的體驗。以下是此版本的主要重點。</p>
 <ul>
 <li>地理空間資料類型：Milvus 引入對<code translate="no">Geometry</code> 資料類型的支援，代表符合 OGC 標準的幾何物件，例如<code translate="no">POINT</code>,<code translate="no">LINESTRING</code>, 以及<code translate="no">POLYGON</code> 。此類型支援多種空間關係運算符號 (st_contains, st_intersects, st_within, st_dwithin, ...)，並提供<code translate="no">RTREE</code> 空間索引，以加速空間篩選和查詢執行。這使得 LBS、繪圖和其他空間工作負載的地理空間圖形的儲存和查詢變得有效率。</li>
 <li>Timestamptz 資料類型：Milvus 引入 TIMESTAMPTZ 資料類型，為所有時間資料提供時區感知。此功能允許使用者使用資料庫和資料集的時區屬性定義預設時間上下文，從而在全球部署中實現一致的資料管理。最重要的是，該欄位完全支援時間範圍查詢的表達式篩選，而且擷取作業（查詢和搜尋）支援時區參數，以便在輸出時立即將時間戳轉換為所需的本機格式。</li>
@@ -530,7 +671,7 @@ title: 發佈筆記
 <tr><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>我們很高興地宣布推出 Milvus 2.6.3，它引入了各種令人振奮的新功能、改進和關鍵錯誤修復。該版本增強了系統性能，擴展了功能，並修復了關鍵問題，為所有用戶提供了更穩定的體驗。以下是此版本的重點內容：</p>
+<p>我們很高興地宣布推出 Milvus 2.6.3，它引入了各種令人興奮的新功能、改進和關鍵錯誤修復。該版本增強了系統性能，擴展了功能，並修復了關鍵問題，為所有用戶提供了更穩定的體驗。以下是此版本的重點內容：</p>
 <h3 id="New-Features" class="common-anchor-header">新功能<button data-href="#New-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -647,7 +788,7 @@ title: 發佈筆記
 <tr><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>我們很高興地宣布 Milvus 2.6.2 正式發行！此次更新引入了強大的新功能、顯著的性能增強以及關鍵修復，使系統更加穩定、更適合生產。新功能包括使用 upsert 進行部分欄位更新、使用 JSON Shredding 加速動態欄位篩選、使用 NGram 索引加快 LIKE 查詢速度，以及在現有資料集中進行更靈活的模式演進。此版本以社群回饋為基礎，為實際部署提供更強大的基礎，我們鼓勵所有使用者升級以利用這些改進。</p>
+<p>我們很高興地宣布 Milvus 2.6.2 正式發行！此次更新引入了強大的新功能、顯著的性能增強以及關鍵修復，使系統更穩定，更適合生產。新功能包括使用 upsert 進行部分欄位更新、使用 JSON Shredding 加速動態欄位篩選、使用 NGram 索引加快 LIKE 查詢速度，以及在現有資料集中進行更靈活的模式演進。此版本以社群回饋為基礎，為實際部署提供更強大的基礎，我們鼓勵所有使用者升級以利用這些改進。</p>
 <h3 id="Features" class="common-anchor-header">功能特色<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -852,7 +993,7 @@ title: 發佈筆記
 <li>修正了載入文字和 JSON 索引時的潛在競爭條件<a href="https://github.com/milvus-io/milvus/pull/43811">(#43811</a>)</li>
 <li>修正在重新啟動 QueryCoord 後可能發生的節點狀態不一致問題<a href="https://github.com/milvus-io/milvus/pull/43941">(#43941</a>)</li>
 <li>確保「髒」的 QueryNode 在重新啟動後會被正確清理<a href="https://github.com/milvus-io/milvus/pull/43909">(#43909</a>)</li>
-<li>修正了一個問題，在該問題中，對於具有非空有效載荷的請求，重試狀態未被正確處理<a href="https://github.com/milvus-io/milvus/pull/44068">(#44068</a>)</li>
+<li>修正了一個問題，在此問題中，對於具有非空有效載荷的請求，重試狀態未被正確處理<a href="https://github.com/milvus-io/milvus/pull/44068">(#44068</a>)</li>
 <li>修正 bulk writer v2 未使用正確 bucket 名稱的問題<a href="https://github.com/milvus-io/milvus/pull/44083">(#44083</a>)</li>
 <li>從 RESTful get_configs 端點隱藏敏感項目，以加強安全性<a href="https://github.com/milvus-io/milvus/pull/44057">(#44057</a>)</li>
 <li>確保 woodpecker 的物件上傳在超時重試期間是等效的<a href="https://github.com/milvus-io/milvus/pull/43947">(#43947</a>)</li>
@@ -1011,7 +1152,7 @@ title: 發佈筆記
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="RaBitQ-1-bit-Quantization" class="common-anchor-header">RaBitQ 1 位元量化</h4><p>為了處理大型資料集，1 位元量化是改善資源利用率和搜尋效能的有效技術。然而，傳統方法會對召回率造成負面影響。Milvus 2.6 與原研究作者合作推出了 RaBitQ，這是一種 1 位元量化解決方案，可維持高召回準確度，同時提供 1 位元壓縮的資源與效能優勢。</p>
+    </button></h3><h4 id="RaBitQ-1-bit-Quantization" class="common-anchor-header">RaBitQ 1 位元量化</h4><p>為了處理大型資料集，1 位元量化是改善資源利用率和搜尋效能的有效技術。然而，傳統方法可能會對召回率造成負面影響。Milvus 2.6 與原研究作者合作推出了 RaBitQ，這是一種 1 位元量化解決方案，可維持高召回準確度，同時提供 1 位元壓縮的資源與效能優勢。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-rabitq.md">IVF_RABITQ</a>。</p>
 <h4 id="JSON-Capability-Enhancement" class="common-anchor-header">JSON 能力增強</h4><p>Milvus 2.6 透過下列改進增強了對 JSON 資料類型的支援：</p>
 <ul>
@@ -1031,7 +1172,7 @@ title: 發佈筆記
 <ul>
 <li>順序敏感：詞彙出現的順序必須與查詢的順序相同。</li>
 <li>連續匹配：除非使用了 slop 值，否則字詞必須緊挨著出現。</li>
-<li>Slop (選用)：一個可調整的參數，允許少量的詞彙間隔，以實現模糊短語匹配。</li>
+<li>slop (選用)：一個可調整的參數，允許少量的詞彙間隔，以實現模糊短語匹配。</li>
 </ul>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/phrase-match.md">短語匹配</a>。</p>
 <h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">MinHash LSH 索引 (Beta)</h4><p>為解決模型訓練中重複資料刪除的需求，Milvus 2.6 新增 MINHASH_LSH 索引的支援。此功能提供了一種計算效率高且可擴充的方法，用來估計文件之間的 Jaccard 相似性，以辨識近乎重複的文件。使用者可以在預處理時為文字文件產生 MinHash 簽章，並在 Milvus 中使用 MINHASH_LSH 索引來有效率地在大型資料集中尋找相似的內容，改善資料清理與模型品質。</p>

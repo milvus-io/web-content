@@ -1017,27 +1017,33 @@
             "children": []
           },
           {
+            "label": "텍스트 형광펜",
+            "id": "text-highlighter.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "구문 검색",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Milvus에 대한 Elasticsearch 쿼리",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "검색 이터레이터",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "파티션 키 사용",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -2460,7 +2466,7 @@
             "children": []
           },
           {
-            "label": "실리콘 플로우",
+            "label": "SiliconFlow",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []

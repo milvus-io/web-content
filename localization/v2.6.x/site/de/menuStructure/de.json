@@ -1017,27 +1017,33 @@
             "children": []
           },
           {
+            "label": "Textmarker",
+            "id": "text-highlighter.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Phrase Match",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Elasticsearch-Abfragen an Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Iteratoren suchen",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "Partitionsschlüssel verwenden",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -1713,7 +1719,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac",
             "order": 1,
             "isMenu": true,

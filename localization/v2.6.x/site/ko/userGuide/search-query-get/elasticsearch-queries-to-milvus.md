@@ -118,7 +118,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Elasticsearch에서 전체 텍스트 쿼리를 사용하면 이메일 본문과 같이 분석된 텍스트 필드를 검색할 수 있습니다. 쿼리 문자열은 색인 중에 필드에 적용된 것과 동일한 분석기를 사용하여 처리됩니다.</p>
-<h3 id="Match-query" class="common-anchor-header">일치 쿼리</h3><p>Elasticsearch에서 일치 쿼리는 제공된 텍스트, 숫자, 날짜 또는 부울 값과 일치하는 문서를 반환합니다. 제공된 텍스트는 일치하기 전에 분석됩니다.</p>
+<h3 id="Match-query" class="common-anchor-header">일치 쿼리<button data-href="#Match-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch에서 일치 쿼리는 제공된 텍스트, 숫자, 날짜 또는 부울 값과 일치하는 문서를 반환합니다. 제공된 텍스트는 일치하기 전에 분석됩니다.</p>
 <p>다음은 일치 쿼리를 사용한 Elasticsearch 검색 요청의 예시입니다.</p>
 <pre><code translate="no" class="language-bash">resp = client.search(
     query={
@@ -157,7 +172,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Elasticsearch에서 용어 수준 쿼리는 날짜 범위, IP 주소, 가격 또는 제품 ID와 같은 구조화된 데이터의 정확한 값을 기반으로 문서를 찾는 데 사용됩니다. 이 섹션에서는 Milvus에서 일부 Elasticsearch 용어 수준 쿼리의 가능한 등가물에 대해 간략하게 설명합니다. 이 섹션의 모든 예제는 Milvus의 기능에 맞게 필터 컨텍스트 내에서 작동하도록 조정되었습니다.</p>
-<h3 id="IDs" class="common-anchor-header">ID</h3><p>Elasticsearch에서는 다음과 같이 필터 컨텍스트에서 ID를 기준으로 문서를 찾을 수 있습니다:</p>
+<h3 id="IDs" class="common-anchor-header">ID<button data-href="#IDs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch에서는 다음과 같이 필터 컨텍스트에서 ID를 기준으로 문서를 찾을 수 있습니다:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -189,8 +219,23 @@ res = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">이 페이지에서</a> Elasticsearch 예제를 찾을 수 있습니다. Milvus의 쿼리 및 get 요청과 필터 표현식에 대한 자세한 내용은 <a href="/docs/ko/get-and-scalar-query.md">쿼리</a> 및 <a href="/docs/ko/filtering">필터링을</a> 참조하세요.</p>
-<h3 id="Prefix-query" class="common-anchor-header">접두사 쿼리</h3><p>Elasticsearch에서는 다음과 같이 필터 컨텍스트에서 제공된 필드에 특정 접두사가 포함된 문서를 찾을 수 있습니다:</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">이 페이지에서</a> Elasticsearch 예제를 찾을 수 있습니다. Milvus의 쿼리 및 가져오기 요청과 필터 표현식에 대한 자세한 내용은 <a href="/docs/ko/get-and-scalar-query.md">쿼리</a> 및 <a href="/docs/ko/filtering">필터링을</a> 참조하세요.</p>
+<h3 id="Prefix-query" class="common-anchor-header">접두사 쿼리<button data-href="#Prefix-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch에서는 다음과 같이 필터 컨텍스트에서 제공된 필드에 특정 접두사가 포함된 문서를 찾을 수 있습니다:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -214,7 +259,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html">이 페이지에서</a> Elasticsearch 예제를 찾을 수 있습니다. Milvus의 <code translate="no">like</code> 연산자에 대한 자세한 내용은<a href="/docs/ko/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> 패턴 매칭에</a><code translate="no">LIKE</code><a href="/docs/ko/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"></a> <a href="/docs/ko/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching">사용하기를 </a> 참조하세요.</p>
-<h3 id="Range-query" class="common-anchor-header">범위 쿼리</h3><p>Elasticsearch에서는 다음과 같이 제공된 범위 내의 용어가 포함된 문서를 찾을 수 있습니다:</p>
+<h3 id="Range-query" class="common-anchor-header">범위 쿼리<button data-href="#Range-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch에서는 다음과 같이 제공된 범위 내의 용어가 포함된 문서를 찾을 수 있습니다:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -239,7 +299,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">이 페이지에서</a> Elasticsearch 예제를 찾을 수 있습니다. Milvus의 비교 연산자에 대한 자세한 내용은 <a href="/docs/ko/basic-operators.md#Comparison-operators">비교 연산자를</a> 참조하세요.</p>
-<h3 id="Term-query" class="common-anchor-header">용어 쿼리</h3><p>Elasticsearch에서는 다음과 같이 제공된 필드에 <strong>정확한</strong> 용어가 포함된 문서를 찾을 수 있습니다:</p>
+<h3 id="Term-query" class="common-anchor-header">용어 쿼리<button data-href="#Term-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch에서는 다음과 같이 제공된 필드에 <strong>정확한</strong> 용어가 포함된 문서를 찾을 수 있습니다:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -271,7 +346,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">이 페이지에서</a> Elasticsearch 예제를 찾을 수 있습니다. Milvus의 비교 연산자에 대한 자세한 내용은 <a href="/docs/ko/basic-operators.md#Comparison-operators">비교 연산자를</a> 참조하세요.</p>
-<h3 id="Terms-query" class="common-anchor-header">용어 쿼리</h3><p>Elasticsearch에서는 다음과 같이 제공된 필드에 하나 이상의 <strong>정확한</strong> 용어가 포함된 문서를 찾을 수 있습니다:</p>
+<h3 id="Terms-query" class="common-anchor-header">용어 쿼리<button data-href="#Terms-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch에서는 다음과 같이 제공된 필드에 하나 이상의 <strong>정확한</strong> 용어가 포함된 문서를 찾을 수 있습니다:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -304,7 +394,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html">이 페이지에서</a> Elasticsearch 예제를 찾을 수 있습니다. Milvus의 범위 연산자에 대한 자세한 내용은 <a href="/docs/ko/basic-operators.md#Range-operators">범위 연산자를</a> 참조하세요.</p>
-<h3 id="Wildcard-query" class="common-anchor-header">와일드카드 쿼리</h3><p>Elasticsearch에서는 다음과 같이 와일드카드 패턴과 일치하는 용어가 포함된 문서를 찾을 수 있습니다:</p>
+<h3 id="Wildcard-query" class="common-anchor-header">와일드카드 쿼리<button data-href="#Wildcard-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch에서는 다음과 같이 와일드카드 패턴과 일치하는 용어가 포함된 문서를 찾을 수 있습니다:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -389,7 +494,22 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Elasticsearch에서 벡터 쿼리는 시맨틱 검색을 효율적으로 수행하기 위해 벡터 필드에서 작동하는 특수 쿼리입니다.</p>
-<h3 id="Knn-query" class="common-anchor-header">Knn 쿼리</h3><p>Elasticsearch는 대략적인 kNN 쿼리와 정확한 무차별 대입 kNN 쿼리를 모두 지원합니다. 다음과 같이 유사도 메트릭으로 측정된 쿼리 벡터에 가장 가까운 <em>k개의</em> 벡터를 찾을 수 있습니다:</p>
+<h3 id="Knn-query" class="common-anchor-header">Knn 쿼리<button data-href="#Knn-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch는 대략적인 kNN 쿼리와 정확한 무차별 대입 kNN 쿼리를 모두 지원합니다. 다음과 같이 유사도 메트릭으로 측정된 쿼리 벡터에 가장 가까운 <em>k개의</em> 벡터를 찾을 수 있습니다:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     index=<span class="hljs-string">&quot;my-image-index&quot;</span>,
     size=<span class="hljs-number">3</span>,
@@ -417,7 +537,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-knn-query.html">이 페이지에서</a> Elasticsearch 예제를 확인할 수 있습니다. Milvus의 ANN 검색에 대한 자세한 내용은 <a href="/docs/ko/single-vector-search.md">기본 ANN 검색을</a> 참조하세요.</p>
-<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">상호 순위 융합</h3><p>Elasticsearch는 서로 다른 정확도 지표를 가진 여러 결과 세트를 하나의 순위가 매겨진 결과 세트로 결합하기 위해 상호 순위 퓨전(RRF)을 제공합니다.</p>
+<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">상호 순위 융합<button data-href="#Reciprocal-Rank-Fusion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch는 서로 다른 정확도 지표를 가진 여러 결과 세트를 하나의 순위가 매겨진 결과 세트로 결합하기 위해 상호 순위 퓨전(RRF)을 제공합니다.</p>
 <p>다음 예는 검색 정확도를 개선하기 위해 기존의 용어 기반 검색과 k-NN(k-근접 이웃) 벡터 검색을 결합하는 방법을 보여줍니다:</p>
 <pre><code translate="no" class="language-python">client.search(
     index=<span class="hljs-string">&quot;my_index&quot;</span>,
@@ -464,7 +599,7 @@ res = client.query(
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}, 
+        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     },
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">100</span>
 }
@@ -476,7 +611,6 @@ search_params_sparse = {
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>}
     }
 }
 
@@ -492,7 +626,7 @@ res = client.hybrid_search(
 <p>이 예는 Milvus의 하이브리드 검색을 결합한 것입니다:</p>
 <ol>
 <li><p><strong>고밀도 벡터 검색</strong>: <code translate="no">vector</code> 필드에 대한 근사 근사 이웃(ANN) 검색을 위해 <code translate="no">nprobe</code> 을 10으로 설정하여 내부 곱(IP) 메트릭을 사용합니다.</p></li>
-<li><p><strong>희소 벡터 검색</strong>: <code translate="no">text_sparse</code> 필드에서 <code translate="no">drop_ratio_search</code> 매개변수를 0.2로 설정한 BM25 유사성 메트릭 사용.</p></li>
+<li><p><strong>희소 벡터 검색</strong>: <code translate="no">text_sparse</code> 필드에서 BM25 유사성 메트릭을 사용합니다.</p></li>
 </ol>
 <p>이러한 검색의 결과는 개별적으로 실행되고, 결합되며, 상호 순위 융합(RRF) 순위 매기기를 사용하여 다시 순위가 매겨집니다. 하이브리드 검색은 순위가 재조정된 목록에서 상위 10개 엔티티를 반환합니다.</p>
 <p>표준 텍스트 기반 쿼리와 kNN 검색의 결과를 병합하는 Elasticsearch의 RRF 순위와는 달리, Milvus는 스파스 및 고밀도 벡터 검색의 결과를 결합하여 멀티모달 데이터에 최적화된 고유한 하이브리드 검색 기능을 제공합니다.</p>

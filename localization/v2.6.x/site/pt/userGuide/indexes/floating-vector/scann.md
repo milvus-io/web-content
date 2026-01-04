@@ -46,7 +46,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Scann</span> </span></p>
 <ol>
 <li><p><strong>Particionamento</strong>: Divide o conjunto de dados em clusters. Este método limita o espaço de pesquisa, concentrando-se apenas em subconjuntos de dados relevantes, em vez de analisar todo o conjunto de dados, poupando tempo e recursos de processamento. O ScaNN utiliza frequentemente algoritmos de agrupamento, como o <a href="https://zilliz.com/blog/k-means-clustering">k-means</a>, para identificar clusters, o que lhe permite efetuar pesquisas de semelhança de forma mais eficiente.</p></li>
-<li><p><strong>Quantização</strong>: O ScaNN aplica um processo de quantização conhecido como <a href="https://arxiv.org/abs/1908.10396">quantização vetorial anisotrópica</a> após o particionamento. A quantização tradicional concentra-se na minimização da distância geral entre os vectores originais e comprimidos, o que não é ideal para tarefas como a <a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">Maximum Inner Product Search (MIPS)</a>, em que a semelhança é determinada pelo produto interno dos vectores e não pela distância direta. Em vez disso, a quantização anisotrópica prioriza a preservação de componentes paralelos entre vetores, ou as partes mais importantes para o cálculo de produtos internos precisos. Esta abordagem permite que o ScaNN mantenha uma elevada precisão MIPS, alinhando cuidadosamente os vectores comprimidos com a consulta, permitindo pesquisas de semelhança mais rápidas e precisas.</p></li>
+<li><p><strong>Quantização</strong>: O ScaNN aplica um processo de quantização conhecido como <a href="https://arxiv.org/abs/1908.10396">quantização de vetor anisotrópico</a> após o particionamento. A quantização tradicional concentra-se na minimização da distância geral entre os vectores originais e comprimidos, o que não é ideal para tarefas como a <a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">Maximum Inner Product Search (MIPS)</a>, em que a semelhança é determinada pelo produto interno dos vectores e não pela distância direta. Em vez disso, a quantização anisotrópica prioriza a preservação de componentes paralelos entre vetores, ou as partes mais importantes para o cálculo de produtos internos precisos. Esta abordagem permite que o ScaNN mantenha uma elevada precisão MIPS, alinhando cuidadosamente os vectores comprimidos com a consulta, permitindo pesquisas de semelhança mais rápidas e precisas.</p></li>
 <li><p><strong>Re-ranking</strong>: A fase de reclassificação é a etapa final, onde o ScaNN ajusta os resultados da pesquisa dos estágios de particionamento e quantização. Essa reclassificação aplica cálculos precisos de produto interno aos principais vetores candidatos, garantindo que os resultados finais sejam altamente precisos. A reclassificação é crucial em motores de recomendação de alta velocidade ou em aplicações de pesquisa de imagens em que a filtragem e o agrupamento iniciais servem como uma camada grosseira e a fase final garante que apenas os resultados mais relevantes são devolvidos ao utilizador.</p></li>
 </ol>
 <p>O desempenho do <code translate="no">SCANN</code> é controlado por dois parâmetros-chave que lhe permitem afinar o equilíbrio entre velocidade e precisão:</p>
@@ -116,6 +116,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span> <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
@@ -132,6 +133,7 @@ res = MilvusClient.search(
 <li><p><code translate="no">params</code>: Opções de configuração adicionais para pesquisar no índice.</p>
 <ul>
 <li><code translate="no">reorder_k</code>: Número de candidatos a serem refinados durante a fase de reclassificação.</li>
+<li><code translate="no">nprobe</code>: Número de clusters a pesquisar.</li>
 </ul>
 <p>Para saber mais sobre os parâmetros de pesquisa disponíveis para o índice <code translate="no">SCANN</code>, consulte <a href="/docs/pt/scann.md#Index-specific-search-params">Parâmetros de pesquisa específicos do índice</a>.</p></li>
 </ul>
@@ -215,5 +217,11 @@ res = MilvusClient.search(
      <td><p>Controla o número de vectores candidatos que são refinados durante a fase de reclassificação. Este parâmetro determina quantos candidatos de topo das fases iniciais de partição e quantização são reavaliados utilizando cálculos de semelhança mais precisos.</p></td>
      <td><p><strong>Tipo</strong>: Inteiro</p><p><strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Valor predefinido</strong>: Nenhum</p></td>
      <td><p>Um <code translate="no">reorder_k</code> maior conduz geralmente a uma <strong>maior precisão de pesquisa</strong>, uma vez que são considerados mais candidatos durante a fase de refinamento final. No entanto, isto também <strong>aumenta o tempo de pesquisa</strong> devido a computação adicional.</p><p>Considere o aumento de <code translate="no">reorder_k</code> quando a obtenção de uma alta recuperação é crítica e a velocidade de pesquisa é menos preocupante. Um bom ponto de partida é 2-5x o <code translate="no">limit</code> desejado (TopK resultados a retornar).</p><p>Considere diminuir <code translate="no">reorder_k</code> para dar prioridade a pesquisas mais rápidas, especialmente em cenários em que uma ligeira redução na precisão é aceitável.</p><p>Na maioria dos casos, recomendamos que você defina um valor dentro deste intervalo:<em>[limite</em>, <em>limite</em> * 5].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>O número de clusters para pesquisar candidatos.</p></td>
+     <td><p><strong>Tipo</strong>: Integer</p><p><strong>Range</strong>: [1, <em>nlist</em>]</p><p><strong>Valor predefinido</strong>: <code translate="no">8</code></p></td>
+     <td><p>Valores mais altos permitem que mais clusters sejam pesquisados, melhorando a recuperação ao expandir o escopo da pesquisa, mas ao custo de maior latência de consulta.</p><p>Defina <code translate="no">nprobe</code> proporcionalmente a <code translate="no">nlist</code> para equilibrar velocidade e precisão.</p><p>Na maioria dos casos, recomendamos que você defina um valor dentro deste intervalo: [1, nlist].</p></td>
    </tr>
 </table>

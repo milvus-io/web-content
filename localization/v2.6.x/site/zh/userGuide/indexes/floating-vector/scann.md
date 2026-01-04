@@ -113,6 +113,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span> <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
@@ -129,6 +130,7 @@ res = MilvusClient.search(
 <li><p><code translate="no">params</code>:在索引上搜索的其他配置选项。</p>
 <ul>
 <li><code translate="no">reorder_k</code>:在重新排序阶段要细化的候选实体数量。</li>
+<li><code translate="no">nprobe</code>:要搜索的簇数。</li>
 </ul>
 <p>要了解<code translate="no">SCANN</code> 索引可用的更多搜索<a href="/docs/zh/scann.md#Index-specific-search-params">参数</a>，请参阅<a href="/docs/zh/scann.md#Index-specific-search-params">特定于索引的搜索参数</a>。</p></li>
 </ul>
@@ -211,6 +213,12 @@ res = MilvusClient.search(
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>控制在重新排序阶段精炼的候选向量数量。该参数决定了使用更精确的相似性计算方法重新评估初始分区和量化阶段的前几名候选向量的数量。</p></td>
      <td><p><strong>类型</strong>：整数</p><p><strong>范围</strong>： [1, int_max[1，<em>int_max］</em></p><p><strong>默认值</strong>：无无</p></td>
-     <td><p><code translate="no">reorder_k</code> 越大，<strong>搜索精度越高</strong>，因为在最后的细化阶段会考虑更多的候选项。不过，这也会因为额外的计算而<strong>增加搜索时间</strong>。</p><p>如果实现高召回率至关重要，而搜索速度又不是那么重要，那么可以考虑提高<code translate="no">reorder_k</code> 。一个好的起点是 2-5 倍于所需的<code translate="no">limit</code> （返回的前 K 个结果）。</p><p>考虑降低<code translate="no">reorder_k</code> 以优先加快搜索速度，尤其是在可以接受准确率略有下降的情况下。</p><p>在大多数情况下，我们建议您在此范围内设置一个值：[<em>limit</em>,<em>limit</em>* 5]。</p></td>
+     <td><p><code translate="no">reorder_k</code> 越大，<strong>搜索精度越高</strong>，因为在最后的细化阶段会考虑更多的候选项。不过，这也会因为额外的计算而<strong>增加搜索时间</strong>。</p><p>如果实现高召回率至关重要，而搜索速度又不是那么重要，那么可以考虑提高<code translate="no">reorder_k</code> 。一个好的起点是 2-5 倍于所需的<code translate="no">limit</code> （返回的前 K 个结果）。</p><p>考虑降低<code translate="no">reorder_k</code> 以优先加快搜索速度，尤其是在可以接受准确率略有下降的情况下。</p><p>在大多数情况下，我们建议您在此范围内设置一个值：<em>[limit</em>，<em>limit</em>* 5]。</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>搜索候选集群的数量。</p></td>
+     <td><p><strong>类型</strong>：整数</p><p><strong>范围</strong>： [1, nlist[1，<em>nlist］</em></p><p><strong>默认值</strong>：<code translate="no">8</code></p></td>
+     <td><p>较高的值允许搜索更多的群集，通过扩大搜索范围提高召回率，但代价是增加查询延迟。</p><p>设置<code translate="no">nprobe</code> 与<code translate="no">nlist</code> 成比例，以平衡速度和准确性。</p><p>在大多数情况下，我们建议您在此范围内设置值：[1，nlist]。</p></td>
    </tr>
 </table>

@@ -1017,27 +1017,33 @@
             "children": []
           },
           {
+            "label": "文本高亮显示",
+            "id": "text-highlighter.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "短语匹配",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "将 Elasticsearch 查询转至 Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "搜索迭代器",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "使用 Partition Key",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -1798,7 +1804,7 @@
         "children": []
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [

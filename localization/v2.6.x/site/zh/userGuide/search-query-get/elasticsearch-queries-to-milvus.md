@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>基于 Apache Lucene 构建的 Elasticsearch 是领先的开源搜索引擎。然而，它在现代人工智能应用中面临着各种挑战，包括更新成本高、实时性差、分片管理效率低、非云原生设计以及资源需求过高。作为云原生向量数据库，Milvus 通过解耦存储和计算、高效的高维数据索引以及与现代基础设施的无缝集成，克服了这些问题。它为人工智能工作负载提供了卓越的性能和可扩展性。</p>
+    </button></h1><p>基于 Apache Lucene 构建的 Elasticsearch 是领先的开源搜索引擎。然而，它在现代人工智能应用中面临着各种挑战，包括更新成本高、实时性差、碎片管理效率低、非云原生设计以及资源需求过高。作为云原生向量数据库，Milvus 通过解耦存储和计算、高效的高维数据索引以及与现代基础设施的无缝集成，克服了这些问题。它为人工智能工作负载提供了卓越的性能和可扩展性。</p>
 <p>本文旨在帮助您将代码库从 Elasticsearch 迁移到 Milvus，并提供中间转换查询的各种示例。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -117,7 +117,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在 Elasticsearch 中，全文查询使您能够搜索分析过的文本字段，如电子邮件正文。查询字符串将使用索引过程中应用于字段的相同分析器进行处理。</p>
-<h3 id="Match-query" class="common-anchor-header">匹配查询</h3><p>在 Elasticsearch 中，匹配查询会返回与所提供的文本、数字、日期或布尔值相匹配的文档。在匹配之前会对所提供的文本进行分析。</p>
+<h3 id="Match-query" class="common-anchor-header">匹配查询<button data-href="#Match-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在 Elasticsearch 中，匹配查询会返回与所提供的文本、数字、日期或布尔值相匹配的文档。在匹配之前会对所提供的文本进行分析。</p>
 <p>下面是一个使用匹配查询的 Elasticsearch 搜索请求示例。</p>
 <pre><code translate="no" class="language-bash">resp = client.search(
     query={
@@ -156,7 +171,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在 Elasticsearch 中，术语级查询用于根据结构化数据中的精确值查找文档，如日期范围、IP 地址、价格或产品 ID。本节概述了一些 Elasticsearch 术语级查询在 Milvus 中的可能等价形式。为了与 Milvus 的功能保持一致，本节中的所有示例都在过滤器上下文中进行了操作符调整。</p>
-<h3 id="IDs" class="common-anchor-header">ID</h3><p>在 Elasticsearch 中，你可以在过滤器上下文中根据 ID 查找文件，如下所示：</p>
+<h3 id="IDs" class="common-anchor-header">ID<button data-href="#IDs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在 Elasticsearch 中，你可以在过滤器上下文中根据 ID 查找文件，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -189,7 +219,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">本页</a>找到 Elasticsearch 示例。有关查询和获取请求以及 Milvus 中过滤器表达式的详细信息，请参阅<a href="/docs/zh/get-and-scalar-query.md">查询</a>和<a href="/docs/zh/filtering">过滤</a>。</p>
-<h3 id="Prefix-query" class="common-anchor-header">前缀查询</h3><p>在 Elasticsearch 中，你可以在过滤器上下文中查找在所提供字段中包含特定前缀的文档，如下所示：</p>
+<h3 id="Prefix-query" class="common-anchor-header">前缀查询<button data-href="#Prefix-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在 Elasticsearch 中，你可以在过滤器上下文中查找在所提供字段中包含特定前缀的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -213,7 +258,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中<code translate="no">like</code> 操作符的详细信息，请参阅<a href="/docs/zh/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching">使用 </a><code translate="no">LIKE</code><a href="/docs/zh/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> 进行模式匹配</a>。</p>
-<h3 id="Range-query" class="common-anchor-header">范围查询</h3><p>在 Elasticsearch 中，您可以查找包含所提供范围内术语的文档，如下所示：</p>
+<h3 id="Range-query" class="common-anchor-header">范围查询<button data-href="#Range-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在 Elasticsearch 中，您可以查找包含所提供范围内术语的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -238,7 +298,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中比较操作符的详细信息，请参阅<a href="/docs/zh/basic-operators.md#Comparison-operators">比较操作符</a>。</p>
-<h3 id="Term-query" class="common-anchor-header">术语查询</h3><p>在 Elasticsearch 中，你可以查找在所提供字段中包含<strong>精确</strong>术语的文档，如下所示：</p>
+<h3 id="Term-query" class="common-anchor-header">术语查询<button data-href="#Term-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在 Elasticsearch 中，你可以查找在所提供字段中包含<strong>精确</strong>术语的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -270,7 +345,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中比较操作符的详细信息，请参阅<a href="/docs/zh/basic-operators.md#Comparison-operators">比较操作符</a>。</p>
-<h3 id="Terms-query" class="common-anchor-header">术语查询</h3><p>在 Elasticsearch 中，你可以查找在所提供字段中包含一个或多个<strong>精确</strong>术语的文档，如下所示：</p>
+<h3 id="Terms-query" class="common-anchor-header">术语查询<button data-href="#Terms-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在 Elasticsearch 中，你可以查找在所提供字段中包含一个或多个<strong>精确</strong>术语的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -303,7 +393,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中范围操作符的详细信息，请参阅<a href="/docs/zh/basic-operators.md#Range-operators">范围操作符</a>。</p>
-<h3 id="Wildcard-query" class="common-anchor-header">通配符查询</h3><p>在 Elasticsearch 中，你可以查找包含与通配符模式匹配的术语的文档，如下所示：</p>
+<h3 id="Wildcard-query" class="common-anchor-header">通配符查询<button data-href="#Wildcard-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在 Elasticsearch 中，你可以查找包含与通配符模式匹配的术语的文档，如下所示：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -388,7 +493,22 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>在 Elasticsearch 中，向量查询是对向量字段进行处理以有效执行语义搜索的专门查询。</p>
-<h3 id="Knn-query" class="common-anchor-header">Knn 查询</h3><p>Elasticsearch 支持近似 kNN 查询和精确、强制 kNN 查询。你可以用这两种方式找到与查询向量最近的<em>k 个</em>向量，以相似度指标来衡量，具体如下：</p>
+<h3 id="Knn-query" class="common-anchor-header">Knn 查询<button data-href="#Knn-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch 支持近似 kNN 查询和精确、强制 kNN 查询。你可以用这两种方式找到与查询向量最近的<em>k 个</em>向量，以相似度指标来衡量，具体如下：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     index=<span class="hljs-string">&quot;my-image-index&quot;</span>,
     size=<span class="hljs-number">3</span>,
@@ -416,7 +536,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-knn-query.html">本页</a>找到 Elasticsearch 示例。有关 Milvus 中 ANN 搜索的详细信息，请阅读<a href="/docs/zh/single-vector-search.md">基本 ANN 搜索</a>。</p>
-<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">互惠排名融合</h3><p>Elasticsearch 提供互惠排名融合 (RRF)，可将具有不同相关性指标的多个结果集合并为一个排名结果集。</p>
+<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">互惠排名融合<button data-href="#Reciprocal-Rank-Fusion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch 提供互惠排名融合 (RRF)，可将具有不同相关性指标的多个结果集合并为一个排名结果集。</p>
 <p>下面的示例演示了如何将传统的基于术语的搜索与 k-nearest neighbors (kNN) 向量搜索相结合，以提高搜索相关性：</p>
 <pre><code translate="no" class="language-python">client.search(
     index=<span class="hljs-string">&quot;my_index&quot;</span>,
@@ -463,7 +598,7 @@ res = client.query(
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}, 
+        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     },
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">100</span>
 }
@@ -475,7 +610,6 @@ search_params_sparse = {
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>}
     }
 }
 
@@ -491,10 +625,10 @@ res = client.hybrid_search(
 <p>该示例演示了 Milvus 中的混合搜索，它结合了以下内容：</p>
 <ol>
 <li><p><strong>密集向量搜索</strong>：使用内积（IP）度量，将<code translate="no">nprobe</code> 设置为 10，在<code translate="no">vector</code> 字段上进行近似近邻（ANN）搜索。</p></li>
-<li><p><strong>稀疏向量搜索</strong>：在<code translate="no">text_sparse</code> 字段上使用 BM25 相似度指标，<code translate="no">drop_ratio_search</code> 参数为 0.2。</p></li>
+<li><p><strong>稀疏向量搜索</strong>：在<code translate="no">text_sparse</code> 字段上使用 BM25 相似度指标。</p></li>
 </ol>
-<p>这些搜索的结果分别执行、合并，并使用互易排名融合（RRF）排序器重新排序。混合搜索会从重新排序的列表中返回前 10 个实体。</p>
-<p>与 Elasticsearch 的 RRF 排序不同，Milvus 将基于文本的标准查询和 kNN 搜索的结果合并在一起，提供了一种独特的混合搜索能力，针对多模态数据进行了优化。</p>
+<p>这些搜索的结果分别执行、合并，并使用 Riprocal Rank Fusion (RRF) 排序器重新排序。混合搜索会从重新排序的列表中返回前 10 个实体。</p>
+<p>与 Elasticsearch 的 RRF 排序器（它将标准文本查询和 kNN 搜索的结果合并在一起）不同，Milvus 将稀疏向量搜索和密集向量搜索的结果合并在一起，提供了一种针对多模态数据优化的独特混合搜索能力。</p>
 <h2 id="Recap" class="common-anchor-header">回顾<button data-href="#Recap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -510,4 +644,4 @@ res = client.hybrid_search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在这篇文章中，我们介绍了典型 Elasticsearch 查询到 Milvus 对应查询的转换，包括术语级查询、布尔查询、全文查询和向量查询。如果您对其他 Elasticsearch 查询的转换有进一步的问题，请随时联系我们。</p>
+    </button></h2><p>在本文中，我们介绍了将典型 Elasticsearch 查询转换为 Milvus 对应查询的方法，包括术语级查询、布尔查询、全文查询和向量查询。如果您对其他 Elasticsearch 查询的转换有进一步的问题，请随时联系我们。</p>

@@ -2,7 +2,7 @@
 id: sparse-inverted-index.md
 title: sparse_inverted_index
 summary: >-
-  SPARSE_INVERTED_INDEXインデックスはMilvusがスパースベクトルを効率的に格納・検索するために使用するインデックスタイプです。このインデックス型は逆インデックスの原理を利用し、スパースデータに対して非常に効率的な検索構造を作成します。詳細についてはINVERTEDを参照してください。
+  SPARSE_INVERTED_INDEXインデックスはMilvusがスパースベクトルを効率的に格納・検索するために使用するインデックスタイプです。このインデックス型は逆インデックスの原理を利用し、スパースデータのための非常に効率的な検索構造を作成します。
 ---
 <h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">sparse_inverted_index<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,13 +82,8 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックス上で類似検索を実行できます。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
-search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters</span>
-}
-
-<span class="hljs-comment"># Prepare the query vector</span>
+    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックスで類似検索を実行できます。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare the query vector</span>
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 
 res = MilvusClient.search(
@@ -96,18 +91,10 @@ res = MilvusClient.search(
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
     data=query_vector,  <span class="hljs-comment"># Query vector</span>
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>この構成では</p>
-<ul>
-<li><p><code translate="no">params</code>:インデックスで検索するための追加構成オプション。</p>
-<ul>
-<li><code translate="no">drop_ratio_search</code>:検索処理中に無視する小さなベクトル値の割合を指定することで、検索パフォーマンスを微調整します。例えば、<code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> の場合、クエリ・ベクトルの値のうち最小の20%は検索中に無視されます。</li>
-</ul>
-<p><code translate="no">SPARSE_INVERTED_INDEX</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">インデックス固有の検索パラメータを</a>参照してください。</p></li>
-</ul>
-<h2 id="Index-params" class="common-anchor-header">インデックスのパラメータ<button data-href="#Index-params" class="anchor-icon" translate="no">
+<p><code translate="no">SPARSE_INVERTED_INDEX</code> インデックスで使用できる検索パラメータについては、「<a href="/docs/ja/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">インデックス固有の検索パラメータ</a>」を参照してください。</p>
+<h2 id="Index-params" class="common-anchor-header">インデックスパラメータ<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,8 +109,23 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行するために使用されるパラメータの概要を示します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/sparse-inverted-index.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
+    </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行するために使用されるパラ メータの概要を説明します。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/sparse-inverted-index.md#Build-index">インデックスを構築</a>する際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -134,13 +136,26 @@ res = MilvusClient.search(
    <tr>
      <td><p><code translate="no">inverted_index_algo</code></p></td>
      <td><p>インデックスの構築とクエリに使用されるアルゴリズム。インデックスがどのようにクエリを処理するかを決定します。</p></td>
-     <td><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト), 、<code translate="no">"DAAT_WAND"</code> <code translate="no">"TAAT_NAIVE"</code></p></td>
-     <td><p>高いk値を持つシナリオや多くの用語を持つクエリには<code translate="no">"DAAT_MAXSCORE"</code> 、競合しない文書をスキップすることで利益を得ることができます。 
- k 値が小さいクエリや短いクエリでは<code translate="no">"DAAT_WAND"</code> を選択し、より効率的なスキップを活用します。</p>
-<p>コレクションの変更（avgdlなど）に対する動的な調整が必要な場合は、<code translate="no">"TAAT_NAIVE"</code> 。</p></td>
+     <td><p><code translate="no">"DAAT_MAXSCORE"</code> (デフォルト),<code translate="no">"DAAT_WAND"</code> 、<code translate="no">"TAAT_NAIVE"</code></p></td>
+     <td><p>高いk値を持つシナリオや多くの用語を持つクエリには<code translate="no">"DAAT_MAXSCORE"</code> 、競合しない文書をスキップすることで利益を得ることができます。 </p><p>k 値が小さいクエリや短いクエリでは<code translate="no">"DAAT_WAND"</code> を選択し、より効率的なスキップを活用します。</p><p>コレクションの変更（avgdlなど）に対する動的な調整が必要な場合は、<code translate="no">"TAAT_NAIVE"</code> 。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/sparse-inverted-index.md#Search-on-index">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次の表は、<code translate="no">search_params.params</code> で<a href="/docs/ja/sparse-inverted-index.md#Search-on-index">インデックス検索</a>時に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -152,6 +167,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">drop_ratio_search</code></p></td>
      <td><p>検索時に無視する最小値の割合。</p></td>
      <td><p>0.0から1.0の間の割合（例えば、0.2は最小値の20%を無視します）。</p></td>
-     <td><p>このパラメータは、クエリベクトルのスパース性とノイズレベルに基づいて調整します。例えば、0.2 に設定することで、より重要な値にフォーカスして検索を行うことができ、精度が向上する可能性があります。</p></td>
+     <td><p>クエリベクトルのスパース性とノイズレベルに基づいて、このパラメータを調整します。</p><p>このパラメータは、検索中に取りこぼされる小さい値の割合を制御します。この値を大きくすると（例えば、<code translate="no">0.2</code> ）、ノイズが減少し、より重要な成分に検索が集中するため、精度と効率が向上します。しかし、より多くの値を削除すると、潜在的に関連性のあるシグナルを除外することになり、リコールが低下する可能性もあります。作業負荷に応じて、リコールと精度のバランスが取れた値を選択してください。</p></td>
    </tr>
 </table>

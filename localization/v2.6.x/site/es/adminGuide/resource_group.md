@@ -90,7 +90,7 @@ title: Gestionar grupos de recursos
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Todos los ejemplos de código de esta página están en PyMilvus 2.6.4. Actualiza tu instalación de PyMilvus antes de ejecutarlos.</p>
+<p>Todos los ejemplos de código de esta página están en PyMilvus 2.6.6. Actualiza tu instalación de PyMilvus antes de ejecutarlos.</p>
 </div>
 <ol>
 <li><p>Crear un grupo de recursos.</p>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p>Tenga en cuenta que <code translate="no">_resource_groups</code> es un parámetro opcional, y dejándolo sin especificar Milvus cargará las réplicas en los nodos de consulta en el grupo de recursos por defecto.</p>
 <p>Para que Milus cargue cada réplica de una colección en un grupo de recursos separado, asegúrese de que el número de grupos de recursos es igual al número de réplicas.</p></li>
 <li><p>Transferir réplicas entre grupos de recursos.</p>
-<p>Milvus utiliza <a href="/docs/es/replica.md">réplicas</a> para equilibrar la carga entre <a href="/docs/es/glossary.md#Segment">segmentos</a> distribuidos en varios nodos de consulta. Puede mover ciertas réplicas de una colección de un grupo de recursos a otro de la siguiente manera:</p>
+<p>Milvus utiliza <a href="/docs/es/replica.md">réplicas</a> para lograr el equilibrio de carga entre <a href="/docs/es/glossary.md#Segment">segmentos</a> distribuidos en varios nodos de consulta. Puede mover ciertas réplicas de una colección de un grupo de recursos a otro de la siguiente manera:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>

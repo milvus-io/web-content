@@ -5,8 +5,7 @@ summary: >-
   Индекс SPARSE_INVERTED_INDEX - это тип индекса, используемый Milvus для
   эффективного хранения и поиска разреженных векторов. Этот тип индекса
   использует принципы инвертированного индексирования для создания
-  высокоэффективной структуры поиска для разреженных данных. Для получения
-  дополнительной информации обратитесь к разделу INVERTED.
+  высокоэффективной структуры поиска для разреженных данных.
 ---
 <h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,13 +85,8 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После того как индекс создан и сущности вставлены, можно выполнять поиск по сходству в индексе.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
-search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters</span>
-}
-
-<span class="hljs-comment"># Prepare the query vector</span>
+    </button></h2><p>После создания индекса и вставки сущностей можно выполнять поиск по сходству в индексе.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare the query vector</span>
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 
 res = MilvusClient.search(
@@ -100,17 +94,9 @@ res = MilvusClient.search(
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
     data=query_vector,  <span class="hljs-comment"># Query vector</span>
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>В этой конфигурации:</p>
-<ul>
-<li><p><code translate="no">params</code>: Дополнительные параметры конфигурации для поиска по индексу.</p>
-<ul>
-<li><code translate="no">drop_ratio_search</code>: Уточнение производительности поиска путем указания того, какую долю малых значений вектора игнорировать в процессе поиска. Например, при использовании <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> наименьшие 20 % значений в векторе запроса будут игнорироваться в процессе поиска.</li>
-</ul>
-<p>Чтобы узнать больше параметров поиска, доступных для индекса <code translate="no">SPARSE_INVERTED_INDEX</code>, обратитесь к разделу <a href="/docs/ru/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">Параметры поиска для конкретного индекса</a>.</p></li>
-</ul>
+<p>Чтобы узнать о параметрах поиска, доступных для индекса <code translate="no">SPARSE_INVERTED_INDEX</code>, обратитесь к разделу <a href="/docs/ru/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">Параметры поиска по индексу</a>.</p>
 <h2 id="Index-params" class="common-anchor-header">Параметры индекса<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,8 +112,23 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В этом разделе представлен обзор параметров, используемых для построения индекса и выполнения поиска по нему.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/sparse-inverted-index.md#Build-index">построении индекса</a>.</p>
+    </button></h2><p>В этом разделе представлен обзор параметров, используемых для построения индекса и выполнения поиска по индексу.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/sparse-inverted-index.md#Build-index">построении индекса</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>
@@ -139,12 +140,25 @@ res = MilvusClient.search(
      <td><p><code translate="no">inverted_index_algo</code></p></td>
      <td><p>Алгоритм, используемый при построении индекса и запросов к нему. Он определяет, как индекс обрабатывает запросы.</p></td>
      <td><p><code translate="no">"DAAT_MAXSCORE"</code> (по умолчанию), <code translate="no">"DAAT_WAND"</code>, <code translate="no">"TAAT_NAIVE"</code></p></td>
-     <td><p>Используйте <code translate="no">"DAAT_MAXSCORE"</code> для сценариев с большими значениями k или запросов с большим количеством терминов, которые могут выиграть от пропуска неконкурентных документов. 
- Выберите <code translate="no">"DAAT_WAND"</code> для запросов с небольшими значениями k или коротких запросов, чтобы использовать более эффективный пропуск документов.</p>
-<p>Используйте <code translate="no">"TAAT_NAIVE"</code>, если требуется динамическая подстройка к изменениям коллекции (например, avgdl).</p></td>
+     <td><p>Используйте <code translate="no">"DAAT_MAXSCORE"</code> для сценариев с большими значениями k или запросов с большим количеством терминов, которые могут выиграть от пропуска неконкурентных документов. </p><p>Выберите <code translate="no">"DAAT_WAND"</code> для запросов с небольшими значениями k или коротких запросов, чтобы использовать более эффективный пропуск документов.</p><p>Используйте <code translate="no">"TAAT_NAIVE"</code>, если требуется динамическая подстройка к изменениям коллекции (например, avgdl).</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Специфические для индекса параметры поиска</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/sparse-inverted-index.md#Search-on-index">поиске по индексу</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Специфические для индекса параметры поиска<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/sparse-inverted-index.md#Search-on-index">поиске по индексу</a>.</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>
@@ -156,6 +170,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">drop_ratio_search</code></p></td>
      <td><p>Доля наименьших значений, которые следует игнорировать при поиске, что помогает уменьшить шум.</p></td>
      <td><p>Фракция от 0,0 до 1,0 (например, 0,2 игнорирует 20 % наименьших значений).</p></td>
-     <td><p>Настройте этот параметр в зависимости от разреженности и уровня шума векторов запроса. Например, установка значения 0,2 поможет сфокусироваться на более значимых значениях во время поиска, что потенциально повысит точность.</p></td>
+     <td><p>Настройте этот параметр в зависимости от разреженности и уровня шума векторов запроса.</p><p>Этот параметр управляет долей значений малой величины, отбрасываемых при поиске. Увеличение этого значения (например, до <code translate="no">0.2</code>) может уменьшить шум и сфокусировать поиск на более значимых компонентах, что может повысить точность и эффективность. Однако отбрасывание большего количества значений может также снизить запоминаемость за счет исключения потенциально значимых сигналов. Выберите значение, которое сбалансирует запоминание и точность для вашей рабочей нагрузки.</p></td>
    </tr>
 </table>

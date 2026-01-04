@@ -3,8 +3,7 @@ id: sparse-inverted-index.md
 title: SPARSE_INVERTED_INDEX
 summary: >-
   SPARSE_INVERTED_INDEX 인덱스는 밀버스에서 스파스 벡터를 효율적으로 저장하고 검색하기 위해 사용하는 인덱스 유형입니다. 이
-  인덱스 유형은 반전 인덱싱의 원리를 활용하여 희소 데이터를 위한 매우 효율적인 검색 구조를 만듭니다. 자세한 내용은 INVERTED를
-  참조하세요.
+  인덱스 유형은 역 인덱싱의 원리를 활용하여 희소 데이터에 대한 매우 효율적인 검색 구조를 만듭니다.
 ---
 <h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -53,7 +52,7 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>이 구성에서는</p>
 <ul>
-<li><p><code translate="no">index_type</code>: 구축할 인덱스의 유형입니다. 이 예에서는 값을 <code translate="no">SPARSE_INVERTED_INDEX</code> 로 설정합니다.</p></li>
+<li><p><code translate="no">index_type</code>: 구축할 인덱스 유형입니다. 이 예에서는 값을 <code translate="no">SPARSE_INVERTED_INDEX</code> 로 설정합니다.</p></li>
 <li><p><code translate="no">metric_type</code>: 스파스 벡터 간의 유사성을 계산하는 데 사용되는 메트릭입니다. 유효한 값:</p>
 <ul>
 <li><p><code translate="no">IP</code> (내적 곱): 도트 곱을 사용하여 유사도를 측정합니다.</p></li>
@@ -84,13 +83,8 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>인덱스가 구축되고 엔티티가 삽입되면 인덱스에서 유사도 검색을 수행할 수 있습니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
-search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters</span>
-}
-
-<span class="hljs-comment"># Prepare the query vector</span>
+    </button></h2><p>인덱스가 생성되고 엔티티가 삽입되면 인덱스에서 유사도 검색을 수행할 수 있습니다.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare the query vector</span>
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 
 res = MilvusClient.search(
@@ -98,17 +92,9 @@ res = MilvusClient.search(
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
     data=query_vector,  <span class="hljs-comment"># Query vector</span>
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 구성에서는</p>
-<ul>
-<li><p><code translate="no">params</code>: 색인에서 검색을 위한 추가 구성 옵션.</p>
-<ul>
-<li><code translate="no">drop_ratio_search</code>: 검색 과정에서 무시할 작은 벡터 값의 비율을 지정하여 검색 성능을 미세 조정할 수 있습니다. 예를 들어 <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> 을 사용하면 검색 중에 쿼리 벡터에서 가장 작은 20%의 값이 무시됩니다.</li>
-</ul>
-<p><code translate="no">SPARSE_INVERTED_INDEX</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">인덱스별 검색 매개변수를</a> 참조하세요.</p></li>
-</ul>
+<p><code translate="no">SPARSE_INVERTED_INDEX</code> 인덱스에 사용할 수 있는 검색 매개변수에 대해 자세히 알아보려면 <a href="/docs/ko/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">인덱스별 검색 매개</a>변수를 참조하세요.</p>
 <h2 id="Index-params" class="common-anchor-header">인덱스 매개변수<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,8 +110,23 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 인덱스를 작성하고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/sparse-inverted-index.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+    </button></h2><p>이 섹션에서는 인덱스를 구축하고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/sparse-inverted-index.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>파라미터</p></th>
@@ -137,12 +138,25 @@ res = MilvusClient.search(
      <td><p><code translate="no">inverted_index_algo</code></p></td>
      <td><p>인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 인덱스가 쿼리를 처리하는 방법을 결정합니다.</p></td>
      <td><p><code translate="no">"DAAT_MAXSCORE"</code> (기본값), <code translate="no">"DAAT_WAND"</code>, <code translate="no">"TAAT_NAIVE"</code></p></td>
-     <td><p>k 값이 크거나 용어가 많은 쿼리의 경우 <code translate="no">"DAAT_MAXSCORE"</code> 를 사용하여 비경쟁 문서를 건너뛰면 이점을 얻을 수 있습니다. 
- k 값이 작거나 쿼리가 짧은 경우 보다 효율적인 건너뛰기를 활용하려면 <code translate="no">"DAAT_WAND"</code> 을 선택하세요.</p>
-<p>컬렉션 변경 사항(예: 평균값)에 대한 동적 조정이 필요한 경우 <code translate="no">"TAAT_NAIVE"</code> 을 사용하세요.</p></td>
+     <td><p>k 값이 크거나 용어가 많은 쿼리의 경우 <code translate="no">"DAAT_MAXSCORE"</code> 를 사용하여 비경쟁 문서를 건너뛰면 이점을 얻을 수 있습니다. </p><p>k 값이 작거나 쿼리가 짧은 경우 보다 효율적인 건너뛰기를 활용하려면 <code translate="no">"DAAT_WAND"</code> 을 선택하세요.</p><p>컬렉션 변경 사항(예: 평균값)에 대한 동적 조정이 필요한 경우 <code translate="no">"TAAT_NAIVE"</code> 을 사용하세요.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/sparse-inverted-index.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/sparse-inverted-index.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th><p>매개변수</p></th>
@@ -154,6 +168,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">drop_ratio_search</code></p></td>
      <td><p>검색 시 무시할 가장 작은 값의 비율로, 노이즈를 줄이는 데 도움이 됩니다.</p></td>
      <td><p>0.0에서 1.0 사이의 분수(예: 0.2는 가장 작은 20%의 값을 무시합니다.)</p></td>
-     <td><p>쿼리 벡터의 희소성과 노이즈 수준에 따라 이 매개변수를 조정합니다. 예를 들어 0.2로 설정하면 검색 중에 더 중요한 값에 집중할 수 있어 정확도가 향상될 수 있습니다.</p></td>
+     <td><p>쿼리 벡터의 희소성과 노이즈 수준에 따라 이 매개변수를 조정합니다.</p><p>이 매개변수는 검색 중에 삭제되는 크기가 작은 값의 비율을 제어합니다. 이 값을 증가시키면(예를 들어 <code translate="no">0.2</code>) 노이즈를 줄이고 더 중요한 구성 요소에 검색을 집중할 수 있어 정확도와 효율성이 향상될 수 있습니다. 그러나 더 많은 값을 삭제하면 관련성이 있을 수 있는 신호가 제외되어 정확도가 떨어질 수도 있습니다. 워크로드에 맞게 정확도와 정확도의 균형을 맞추는 값을 선택하세요.</p></td>
    </tr>
 </table>

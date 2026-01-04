@@ -68,7 +68,7 @@
             "children": []
           },
           {
-            "label": "تشغيل ميلفوس ستاندالون",
+            "label": "تشغيل ميلفوس مستقل",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -1017,27 +1017,33 @@
             "children": []
           },
           {
+            "label": "أداة تمييز النص",
+            "id": "text-highlighter.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "تطابق العبارات",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "استعلامات البحث المرن إلى ميلفوس",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "مكرر البحث",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 12,
             "children": []
           },
           {
             "label": "استخدام مفتاح التقسيم",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -1972,7 +1978,7 @@
                 "children": []
               },
               {
-                "label": "Sentence Transformers",
+                "label": "محولات الجمل",
                 "id": "embed-with-sentence-transform.md",
                 "order": 2,
                 "children": []

@@ -6,11 +6,11 @@ summary: >-
   مثل العنوان والوصف، أو بطرائق متعددة مثل النص والصور والصوت. على سبيل المثال،
   يتم البحث عن تغريدة تحتوي على نص وصورة إذا كان النص أو الصورة يتطابقان مع
   دلالات استعلام البحث. يعزز البحث الهجين تجربة البحث من خلال الجمع بين عمليات
-  البحث عبر هذه المجالات المتنوعة. يدعم Milvus ذلك من خلال السماح بالبحث في حقول
-  متجهات متعددة، وإجراء العديد من عمليات البحث في أقرب جار تقريبي (ANN) في وقت
-  واحد. يعد البحث الهجين متعدد المتجهات مفيدًا بشكل خاص إذا كنت ترغب في البحث في
-  كل من النصوص والصور، أو في حقول نصية متعددة تصف نفس الكائن، أو في متجهات كثيفة
-  ومتناثرة لتحسين جودة البحث.
+  البحث عبر هذه المجالات المتنوعة. يدعم Milvus هذا الأمر من خلال السماح بالبحث
+  في حقول متجهات متعددة، وإجراء العديد من عمليات البحث في أقرب جار تقريبي (ANN)
+  في وقت واحد. يعد البحث الهجين متعدد المتجهات مفيدًا بشكل خاص إذا كنت ترغب في
+  البحث في كل من النصوص والصور، أو في حقول نصية متعددة تصف نفس الكائن، أو في
+  متجهات كثيفة ومتناثرة لتحسين جودة البحث.
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">البحث الهجين متعدد النواقل<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -27,7 +27,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في العديد من التطبيقات، يمكن البحث عن كائن ما من خلال مجموعة غنية من المعلومات مثل العنوان والوصف، أو بطرائق متعددة مثل النص والصور والصوت. على سبيل المثال، يتم البحث عن تغريدة تحتوي على نص وصورة إذا كان النص أو الصورة يتطابقان مع دلالات استعلام البحث. يعزز البحث الهجين تجربة البحث من خلال الجمع بين عمليات البحث عبر هذه المجالات المتنوعة. يدعم Milvus هذا الأمر من خلال السماح بالبحث في حقول متجهات متعددة، وإجراء العديد من عمليات البحث في أقرب جار تقريبي (ANN) في وقت واحد. يعد البحث الهجين متعدد المتجهات مفيدًا بشكل خاص إذا كنت ترغب في البحث في كل من النصوص والصور، أو في حقول نصية متعددة تصف نفس الكائن، أو في متجهات كثيفة ومتناثرة لتحسين جودة البحث.</p>
+    </button></h1><p>في العديد من التطبيقات، يمكن البحث عن كائن ما من خلال مجموعة غنية من المعلومات مثل العنوان والوصف، أو بطرائق متعددة مثل النص والصور والصوت. على سبيل المثال، يتم البحث عن تغريدة تحتوي على نص وصورة إذا كان النص أو الصورة يتطابقان مع دلالات استعلام البحث. يعزز البحث الهجين تجربة البحث من خلال الجمع بين عمليات البحث عبر هذه المجالات المتنوعة. يدعم Milvus ذلك من خلال السماح بالبحث في حقول متجهات متعددة، وإجراء العديد من عمليات البحث في أقرب جار تقريبي (ANN) في وقت واحد. يعد البحث المختلط متعدد المتجهات مفيدًا بشكل خاص إذا كنت ترغب في البحث في كل من النصوص والصور، أو في حقول نصية متعددة تصف نفس الشيء، أو في متجهات كثيفة ومتناثرة لتحسين جودة البحث.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
@@ -704,7 +704,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
 <li><p><code translate="no">image_dense</code>للبحث متعدد الوسائط من نص إلى صورة، لاسترداد صور المنتجات ذات الصلة بناءً على المحتوى الدلالي للاستعلام.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
@@ -724,7 +724,6 @@ request_1 = AnnSearchRequest(**search_param_1)
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_text],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 request_2 = AnnSearchRequest(**search_param_2)
@@ -764,7 +763,6 @@ searchRequests.add(AnnSearchReq.builder()
 searchRequests.add(AnnSearchReq.builder()
         .vectorFieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
         .vectors(queryTexts)
-        .params(<span class="hljs-string">&quot;{\&quot;drop_ratio_search\&quot;: 0.2}&quot;</span>)
         .topK(<span class="hljs-number">2</span>)
         .build());
 searchRequests.add(AnnSearchReq.builder()
@@ -803,7 +801,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <span class="hljs-keyword">const</span> search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_text, 
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 
@@ -824,7 +821,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     {
         &quot;data&quot;: [&quot;white headphones, quiet and comfortable&quot;],
         &quot;annsField&quot;: &quot;text_sparse&quot;,
-        &quot;params&quot;: {&quot;drop_ratio_search&quot;: 0.2},
         &quot;limit&quot;: 2
     },
     {
@@ -836,7 +832,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>بالنظر إلى أن المعلمة <code translate="no">limit</code> مضبوطة على 2، فإن كل <code translate="no">AnnSearchRequest</code> يُرجع نتيجتي بحث. في هذا المثال، يتم إنشاء 3 مثيلات <code translate="no">AnnSearchRequest</code> ، مما ينتج عنه إجمالي 6 نتائج بحث.</p>
-<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">الخطوة 2: تكوين استراتيجية إعادة الترتيب<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">الخطوة 2: تكوين إستراتيجية إعادة الترتيب<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -22,7 +22,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
     </button></h1><p>Milvusは、最近の変更のログ管理、ストリームログの出力、ログ購読の提供にPulsarまたはKafkaを使用します。Pulsarはデフォルトのメッセージ・ストレージ・システムです。このトピックでは、Docker ComposeまたはHelmを使用してメッセージ・ストレージを設定する方法を紹介します。</p>
 <p><a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>またはK8s上でPulsarを構成し、K8s上でKafkaを構成することができます。</p>
 <div class="alert note">
-<p><strong>メッセージ・キューの制限</strong>Milvus v2.6.7にアップグレードする場合、現在選択しているメッセージ・キューを維持する必要があります。アップグレード中の異なるメッセージキューシステム間の切り替えはサポートされていません。メッセージ・キュー・システムの変更は、将来のバージョンでサポートされる予定です。</p>
+<p><strong>メッセージ・キューの制限</strong>Milvus v2.6.8にアップグレードする場合、現在選択しているメッセージ・キューを維持する必要があります。アップグレード中の異なるメッセージキューシステム間の切り替えはサポートされていません。メッセージ・キュー・システムの変更は、将来のバージョンでサポートされる予定です。</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker ComposeでPulsarを構成する<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -223,7 +223,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
         ></path>
       </svg>
     </button></h2><p>K8s上のMilvusクラスタでは、Milvusの起動と同じコマンドでKafkaを設定することができます。また、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使用してKafkaを設定することもできます。</p>
-<p>Helmを使用したMilvusの設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helmチャートを使用したMilvusの設定</a>」を参照してください。Pulsar関連の設定項目の詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
+<p>Helmを使用したMilvusの設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helm Chartsを使用したMilvusの設定</a>」を参照してください。Pulsar関連の設定項目の詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar関連の設定を</a>参照してください。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAMLファイルの使用<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -354,7 +354,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p><strong>RocksMQとNATSのどちらを選択しますか？</strong></p>
-<p>RockMQはRocksDBとのやりとりにCGOを使用し、それ自身でメモリを管理しますが、Milvusインストールに組み込まれている純粋なGO NATSはメモリ管理をGoのガベージコレクタ(GC)に委譲します。</p>
+<p>RockMQはRocksDBとのやりとりにCGOを使用し、それ自身でメモリを管理しますが、Milvusのインストールに組み込まれている純粋なGO NATSはメモリ管理をGoのガベージコレクタ(GC)に委譲します。</p>
 <p>データパケットが64kbより小さい場合、RocksDBはメモリ使用量、CPU使用量、レスポンスタイムの点で優れている。一方、データ・パケットが64kbより大きい場合は、十分なメモリと理想的なGCスケジューリングがあれば、NATSの方が応答時間の点で優れている。</p>
 <p>現在のところ、NATSは実験にのみ使用することをお勧めします。</p>
 </div>

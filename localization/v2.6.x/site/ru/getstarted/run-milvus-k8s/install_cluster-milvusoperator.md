@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>После завершения процесса установки вы увидите вывод, аналогичный следующему.</p>
+<p>По окончании процесса установки вы увидите вывод, аналогичный приведенному ниже.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>После того как капсула Milvus Operator запущена, вы можете развернуть кластер Milvus следующим образом.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Команда выше развертывает кластер Milvus с <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии 2.6.7) и всеми новыми архитектурными компонентами, включая Streaming Node.</p>
+<p>Команда выше развертывает кластер Milvus с <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии 2.6.8) и всеми новыми архитектурными компонентами, включая Streaming Node.</p>
 <p><strong>Основные элементы архитектуры в этом развертывании:</strong></p>
 <ul>
 <li><strong>Очередь сообщений</strong>: <a href="/docs/ru/use-woodpecker.md">Используется Woodpecker</a> (сокращает обслуживание инфраструктуры).</li>
