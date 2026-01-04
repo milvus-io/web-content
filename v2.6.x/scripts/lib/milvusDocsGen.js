@@ -4,7 +4,6 @@ const fetch = require('node-fetch')
 const fs = require('fs')
 const path = require('path');
 const inquirer = require('inquirer');
-const Jimp = require("jimp");
 
 class MilvusDocsGen extends larkDocWriter {
     constructor(base, sourceType, menuStructure, imageDir, alt_texts) {
@@ -168,7 +167,8 @@ class MilvusDocsGen extends larkDocWriter {
         const code_block_groups = this.__locate_all_code_block_groups(blocks);
         const first_code_block_in_groups = code_block_groups.map(group => group[0]);
 
-        let lang = code.style.language ? this.code_langs[code['style']['language']] : 'plaintext'
+        let lang = code.style.language ? this.code_langs[code['style']['language']] : 'plaintext';
+        if (lang === 'C++') return ''; // to be removed when C++ is supported
         let elements = (await Promise.all(code['elements'].map( async x => {
             return await this.__text_run(x, code['elements'], true)
         }))).join('').split('\n')
@@ -209,6 +209,7 @@ class MilvusDocsGen extends larkDocWriter {
         } 
 
         return current_group.map(id => this.__retrieve_block_by_id(id).code.style.language)
+            .filter(lang => lang !== 9) // to be removed when C++ is supported
             .map(lang => {
                 lang = this.code_langs[lang] || 'plaintext';
                 return `    <a href="#${lang.replace(/\s+/g, '').toLowerCase()}">${get_label(lang)}</a>`
@@ -338,21 +339,14 @@ class MilvusDocsGen extends larkDocWriter {
 
         if (confirm) {
             const result = await this.downloader.__downloadBoardPreview(board.token)
-            const writeStream = fs.createWriteStream(file_path);
-            result.body.pipe(writeStream);
-
-            writeStream.on('finish', async () => {
-                try {
-                    const image = await Jimp.read(file_path);
-                    this.__crop_image_border(image)
-                    image.write(file_path);
-                } catch (error) {
-                    console.log(error)
-                    console.log("-------------- A retry is needed -----------------");
-                    console.log("Sleeping for 5 seconds")
-                    await new Promise(resolve => setTimeout(resolve, 5000));
-                    this.__board(board, indent)                             
-                }
+            var buffers = [];
+            result.body.on('data', (chunk) => {
+                buffers.push(chunk);
+            });
+            result.body.on('end', async () => {
+                const buffer = Buffer.concat(buffers);
+                const trimmedBuffer = await this.__trim_white_borders(buffer);
+                fs.writeFileSync(file_path, trimmedBuffer);
             });  
         }              
 

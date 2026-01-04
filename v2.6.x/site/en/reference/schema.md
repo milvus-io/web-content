@@ -10,11 +10,11 @@ A schema defines the data structure of a collection. Before creating a collectio
 
 ## Overview
 
-On Zilliz Cloud, a collection schema assembles a table in a relational database, which defines how Zilliz Cloud organizes data in the collection. 
+On Milvus, a collection schema assembles a table in a relational database, which defines how Milvus organizes data in the collection. 
 
 A well-designed schema is essential as it abstracts the data model and decides if you can achieve the business objectives through a search. Furthermore, since every row of data inserted into the collection must follow the schema, it helps maintain data consistency and long-term quality. From a technical perspective, a well-defined schema leads to well-organized column data storage and a cleaner index structure, boosting search performance.
 
-A collection schema has a primary key, a maximum of four vector fields, and several scalar fields. The following diagram illustrates how to map an article to a list of schema fields.
+A collection schema has a primary key, at least one vector field, and several scalar fields. The following diagram illustrates how to map an article to a list of schema fields.
 
 ![Schema Design Anatomy](../../../assets/schema-design-anatomy.png)
 
@@ -139,13 +139,19 @@ export schema='{
 
 When adding a field, you can explicitly clarify the field as the primary field by setting its `is_primary` property to `True`. A primary field accepts **Int64** values by default. In this case, the primary field value should be integers similar to `12345`. If you choose to use **VarChar** values in the primary field, the value should be strings similar to `my_entity_1234`.
 
-You can also set the `autoId` properties to `True` to make Zilliz Cloud automatically allocate primary field values upon data insertions.
+You can also set the `autoId` properties to `True` to make Milvus automatically allocate primary field values upon data insertions.
+
+<div class="alert note">
+
+You are advised to rely on `autoId` in all cases unless manually setting primary keys is beneficial.
+
+</div>
 
 For details, refer to [Primary Field & AutoId](primary-field.md).
 
 ## Add Vector Fields
 
-Vector fields accept various sparse and dense vector embeddings. On Zilliz Cloud, you can add four vector fields to a collection. The following code snippets demonstrate how to add a vector field.
+Vector fields accept various sparse and dense vector embeddings. On Milvus, you can add four vector fields to a collection. The following code snippets demonstrate how to add a vector field.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -208,7 +214,7 @@ export schema="{
 }"
 ```
 
-The `dim` paramter in the above code snippets indicates the dimensionality of the vector embeddings to be held in the vector field. The `FLOAT_VECTOR` value indicates that the vector field holds a list of 32-bit floating numbers, which are usually used to represent antilogarithms.In addition to that, Zilliz Cloud also supports the following types of vector embeddings:
+The `dim` paramter in the above code snippets indicates the dimensionality of the vector embeddings to be held in the vector field. The `FLOAT_VECTOR` value indicates that the vector field holds a list of 32-bit floating numbers, which are usually used to represent antilogarithms.In addition to that, Milvus also supports the following types of vector embeddings:
 
 - `FLOAT16_VECTOR`
 
@@ -218,7 +224,7 @@ The `dim` paramter in the above code snippets indicates the dimensionality of th
 
     A vector field of this type holds a list of 16-bit floating-point numbers that have reduced precision but the same exponent range as Float32. This type of data is commonly used in deep learning scenarios, as it reduces memory usage without significantly impacting accuracy.
 
-- `- INT8_VECTOR`
+- `INT8_VECTOR`
 
     A vector field of this type stores vectors composed of 8-bit signed integers (int8), with each component ranging from –128 to 127. Tailored for quantized deep learning architectures—such as ResNet and EfficientNet—it substantially shrinks model size and boosts inference speed, all while incurring only minimal precision loss. **Note**: This vector type is supported only for HNSW indexes.
 
@@ -232,7 +238,7 @@ The `dim` paramter in the above code snippets indicates the dimensionality of th
 
 ## Add Scalar Fields
 
-In common cases, you can use scalar fields to store the metadata of the vector embeddings stored in Milvus, and conduct ANN searches with metadata filtering to improve the correctness of the search results. Zilliz Cloud supports multiple scalar field types, including **VarChar**, **Boolean**, **Int**, **Float**, **Double**, **Array**, and **JSON**.
+In common cases, you can use scalar fields to store the metadata of the vector embeddings stored in Milvus, and conduct ANN searches with metadata filtering to improve the correctness of the search results. Milvus supports multiple scalar field types, including **VarChar**, **Boolean**, **Int**, **Float**, and **Double**.
 
 ### Add String Fields
 
@@ -412,9 +418,13 @@ export schema="{
 }"
 ```
 
+## Add Composite Fields
+
+In Milvus, a composite field is a field that can be divided into smaller sub-fields, such as the keys in a JSON field or the indices in an Array field.
+
 ### Add JSON fields
 
-A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to [JSON Field](use-json-fields.md).
+A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to [JSON Field](json-field).
 
 <div class="multipleCode">
     <a href="#python">Python</a>

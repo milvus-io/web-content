@@ -2,7 +2,6 @@
 id: ngram.md
 title: "NGRAM"
 summary: "The NGRAM index in Milvus is built to accelerate LIKE queries on VARCHAR fields or specific JSON paths within JSON fields. Before building the index, Milvus splits text into short, overlapping substrings of a fixed length n, known as n-grams. For example, with n = 3, the word \"Milvus\" is split into 3-grams: \"Mil\", \"ilv\", \"lvu\", and \"vus\". These n-grams are then stored in an inverted index that maps each gram to the document IDs in which it appears. At query time, this index allows Milvus to quickly narrow the search to a small set of candidates, resulting in much faster query execution."
-beta: Milvus v2.6.2+
 ---
 
 # NGRAM
@@ -43,23 +42,29 @@ During data ingestion, Milvus builds the NGRAM index by performing two main step
 
     For example, with `min_gram=2` and `max_gram=3`, the string `"AI database"` is broken down as follows:
 
+![Build Ngram Index](../../../../../assets/build-ngram-index.png)
+
     - **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
+
     - **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
 
-    ![Build Ngram Index](../../../../../assets/build-ngram-index.png)
-
-    > **Note**  
-    > - For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive).  
-    >   Example: with `[2,4]` and the word `"text"`, Milvus generates:  
-    >   - **2-grams:** `te`, `ex`, `xt`  
-    >   - **3-grams:** `tex`, `ext`  
-    >   - **4-grams:** `text`  
-    >
-    > - N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `"向量数据库"` with `min_gram = 2` is decomposed into: `"向量"`, `"量数"`, `"数据"`, `"据库"`.  
-    >
-    > - Spaces and punctuation are treated as characters during decomposition.  
-    >
-    > - Decomposition preserves original case, and matching is case-sensitive. For example, `"Database"` and `"database"` will generate different n-grams and require exact case matching during queries.
+    <div class="alert note">
+    
+    - For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive). For example, with `[2,4]` and the word `"text"`, Milvus generates:
+    
+    - **2-grams:** `te`, `ex`, `xt`
+    
+    - **3-grams:** `tex`, `ext`
+    
+    - **4-grams:** `text`
+    
+    - N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `"向量数据库"` with `min_gram = 2` is decomposed into: `"向量"`, `"量数"`, `"数据"`, `"据库"`.
+    
+    - Spaces and punctuation are treated as characters during decomposition.
+    
+    - Decomposition preserves original case, and matching is case-sensitive. For example, `"Database"` and `"database"` will generate different n-grams and require exact case matching during queries.
+    
+    </div>
 
 1. **Build an inverted index**: An **inverted index** is created that maps each generated n-gram to a list of the document IDs containing it.
 
@@ -67,12 +72,11 @@ During data ingestion, Milvus builds the NGRAM index by performing two main step
 
 ![Build Ngram Index 2](../../../../../assets/build-ngram-index-2.png)
 
-
-<div class="alert note">
+    <div class="alert note">
     
-A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](mmap.md).
+    A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
 
-</div>
+    </div>
 
 ### Phase 2: Accelerate queries
 
@@ -235,10 +239,6 @@ Use the `drop_index()` method to remove an existing index from a collection.
 
 <div class="alert note">
 
-- In **v2.6.3** or earlier, you must release the collection before dropping a scalar index.
-
-- From **v2.6.4** or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.
-
 </div>
 
 ```python
@@ -254,7 +254,7 @@ client.drop_index(
 
 - **Unicode**: NGRAM decomposition is character-based and language-agnostic and includes whitespace and punctuation.
 
-- **Space–time trade-off**: Wider gram ranges `[min_gram, max_gram]` produce more grams and larger indexes. If memory is tight, consider `mmap` mode for large posting lists. For more information, refer to [Use mmap](mmap.md).
+- **Space–time trade-off**: Wider gram ranges `[min_gram, max_gram]` produce more grams and larger indexes. If memory is tight, consider `mmap` mode for large posting lists. For more information, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
 
 - **Immutability**: `min_gram` and `max_gram` cannot be changed in place—rebuild the index to adjust them.
 

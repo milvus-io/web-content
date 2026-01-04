@@ -1,11 +1,12 @@
 const utils = require('./larkUtils.js')
 const tokenFetcher = require('./larkTokenFetcher.js')
-const fs = require('node:fs')
 const https = require('node:https')
 const fetch = require('node-fetch')
 const Bottleneck = require('bottleneck')
 const process = require('node:process')
-const { method } = require('lodash')
+const crypto = require('node:crypto')
+const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
+
 require('dotenv/config')
 
 class larkImageDownloader {
@@ -18,74 +19,48 @@ class larkImageDownloader {
             maxConcurrent: 1,
             minTime: 52,
         });
+        this.s3 = new S3Client({
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+            region: process.env.AWS_REGION,
+        })
     }    
 
-    async downloadImages() {
-        const images = this.images.instances;
-        const image_keys = this.images.instance_keys;
-
-        const throttled_downloader = this.limiter.wrap(this.__downloadImage)
-
-        const image_promises = images.map((image) => {
-            return throttled_downloader(image.token)
-        })
-
-        try {
-            const results = await Promise.all(image_promises)
-            results.forEach((result, index) => {
-                const writer = fs.createWriteStream(`${this.target_path}/${images[index].token}.png`)
-                result.body.pipe(writer)
-            })
-            images.forEach((image, index) => {
-                eval(`this.docs${image_keys[index]}.path = '${this.target_path}/${image.token}.png'`)
-            })
-        } 
-        catch (error) {
-            console.log(error)
+    async __uploadToS3(buffer, key) {
+        const get_params = {
+            Bucket: process.env.AWS_BUCKET,
+            Key: key,
         }
 
-        return this.docs
-    }
-
-    async downloadIframes() {
-        const iframe_keys = this.iframes.instance_keys;
-        const iframes = this.iframes.instances.filter((iframe) => iframe.component.iframe_type === 8).map((iframe) => {
-            const url = new URL(decodeURIComponent(iframe.component.url))
-            const key = url.pathname.split('/')[2]
-            const node = url.searchParams.get('node-id').split('-').join(":")
-
-            return {key, node}
-        })
-
-        const throttled_fetcher = this.limiter.wrap(this.__fetchCaption)
-        const throttled_downloader = this.limiter.wrap(this.__downloadIframe)
-
-        const caption_promises = iframes.map((iframe) => {
-            return throttled_fetcher(iframe.key, iframe.node)
-        })
-
-        const image_promises = iframes.map((iframe) => {
-            return throttled_downloader(iframe.key, iframe.node)
-        })
-
-        try {
-            let captions = await Promise.all(caption_promises)
-            captions = captions.map((caption, index) => {
-                return caption.nodes[iframes[index].node].document.name
-            })
-            
-            let images = await Promise.all(image_promises)
-            images = images.map((image, index) => {
-                const writer = fs.createWriteStream(`${this.target_path}/${captions[index]}.png`)
-                image.body.pipe(writer)
-                eval(`this.docs${iframe_keys[index]}.caption = '${captions[index]}'`)
-                eval(`this.docs${iframe_keys[index]}.path = '${this.target_path}/${captions[index]}.png'`)
-            })
-        } catch (error) {
-            console.log(error)
+        const put_params = {
+            ...get_params,
+            Body: buffer,
+            ContentType: 'image/png',
+            ACL: 'public-read',
+            Metadata: {
+                hash: crypto.createHash('md5').update(buffer).digest('hex'),
+            }
         }
 
-        return this.docs
+        try {
+            const getObjectCommand = new GetObjectCommand(get_params);
+            const response = await this.s3.send(getObjectCommand);
+            if (response.Metadata.hash === crypto.createHash('md5').update(buffer).digest('hex')) {
+                console.log(`Image already exists in S3: ${key}`);
+                return
+            }
+
+            const putObjectCommand = new PutObjectCommand(put_params);
+            await this.s3.send(putObjectCommand);
+            console.log(`Successfully uploaded image to ${key}`);
+        } catch (err) {
+            if (err.Code === 'NoSuchKey') {
+                const putObjectCommand = new PutObjectCommand(put_params);
+                await this.s3.send(putObjectCommand);
+            } else {
+                console.error("Error uploading image:", err);
+            }
+        }
     }
 
     async __downloadImage(image_token) {
@@ -135,6 +110,12 @@ class larkImageDownloader {
         }
 
         const res = await fetch(`https://api.figma.com/v1/files/${key}/nodes?ids=${node}`, req)
+
+        if (res.status === 429) {
+            await this.__wait(60000)
+            return await this.__fetchCaption(key, node)
+        }
+
         return res.json()
     }
 
@@ -158,7 +139,20 @@ class larkImageDownloader {
             agent: new https.Agent({ keepAlive: true, maxSockets: 10 })
         })
 
+        if (res.status === 429) {
+            await this.__wait(60000) 
+            return await this.__fetchCaption(key, node)
+        }
+
         return res
+    }
+
+    async __wait(duration) {
+        return new Promise((resolve, _) => {
+            setTimeout(() => {
+                resolve()
+            }, duration)
+        })
     }
 
 }

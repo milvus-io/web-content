@@ -65,7 +65,9 @@ Milvus supports two modes for assigning primary key values.
 
 <div class="alert note">
 
-If you are unsure which mode to choose, [start with AutoID](primary-field.md#Quickstart-Use-AutoID) for simpler ingestion and guaranteed uniqueness.
+- If you are unsure which mode to choose, [start with AutoID](primary-field.md#Quickstart-Use-AutoID) for simpler ingestion and guaranteed uniqueness.
+
+- You are advised to rely on `autoId` in all cases unless manually setting primary keys is beneficial.
 
 </div>
 
@@ -113,7 +115,44 @@ client.create_collection(collection_name="demo_autoid", schema=schema)
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build());
+        
+CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder()
+        .build();
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .autoID(true)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("embedding")
+        .dataType(DataType.FloatVector)
+        .dimension(4)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("category")
+        .dataType(DataType.VarChar)
+        .maxLength(1000)
+        .build());
+
+client.dropCollection(DropCollectionReq.builder()
+        .collectionName("demo_autoid")
+        .build());
+
+CreateCollectionReq requestCreate = CreateCollectionReq.builder()
+        .collectionName("demo_autoid")
+        .collectionSchema(collectionSchema)
+        .build();
+client.createCollection(requestCreate);
 ```
 
 ```javascript
@@ -160,6 +199,40 @@ await client.createCollection({
 
 ```bash
 # restful
+export SCHEMA='{
+    "autoID": true,
+    "fields": [
+        {
+            "fieldName": "id",
+            "dataType": "Int64",
+            "isPrimary": true,
+            "elementTypeParams": {}
+        },
+        {
+            "fieldName": "embedding",
+            "dataType": "FloatVector",
+            "isPrimary": false,
+            "elementTypeParams": {
+                "dim": "4"
+            }
+        },
+        {
+            "fieldName": "category",
+            "dataType": "VarChar",
+            "isPrimary": false,
+            "elementTypeParams": {
+                "max_length": "1000"
+            }
+        }
+    ]
+}'
+
+curl -X POST 'http://localhost:19530/v2/vectordb/collections/create' \
+-H 'Content-Type: application/json' \
+-d "{
+    \"collectionName\": \"demo_autoid\",
+    \"schema\": $SCHEMA
+}"
 ```
 
 ### Step 2: Insert Data
@@ -188,7 +261,27 @@ print("Generated IDs:", res.get("ids"))
 ```
 
 ```java
-// java
+import com.google.gson.*;
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.response.InsertResp;
+
+List<JsonObject> rows = new ArrayList<>();
+Gson gson = new Gson();
+JsonObject row1 = new JsonObject();
+row1.add("embedding", gson.toJsonTree(new float[]{0.1f, 0.2f, 0.3f, 0.4f}));
+row1.addProperty("category", "book");
+rows.add(row1);
+
+JsonObject row2 = new JsonObject();
+row2.add("embedding", gson.toJsonTree(new float[]{0.2f, 0.3f, 0.4f, 0.5f}));
+row2.addProperty("category", "toy");
+rows.add(row2);
+
+InsertResp insertR = client.insert(InsertReq.builder()
+        .collectionName("demo_autoid")
+        .data(rows)
+        .build());
+System.out.printf("Generated IDs: %s\n", insertR.getPrimaryKeys());
 ```
 
 ```javascript
@@ -211,6 +304,23 @@ console.log(res);
 
 ```bash
 # restful
+export INSERT_DATA='[
+    {
+        "embedding": [0.1, 0.2, 0.3, 0.4],
+        "category": "book"
+    },
+    {
+        "embedding": [0.2, 0.3, 0.4, 0.5],
+        "category": "toy"
+    }
+]'
+
+curl -X POST 'http://localhost:19530/v2/vectordb/entities/insert' \
+-H 'Content-Type: application/json' \
+-d "{
+    \"collectionName\": \"demo_autoid\",
+    \"data\": $INSERT_DATA
+}"
 ```
 
 <div class="alert note">
@@ -262,7 +372,45 @@ client.create_collection(collection_name="demo_manual_ids", schema=schema)
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build());
+        
+CreateCollectionReq.CollectionSchema collectionSchema = CreateCollectionReq.CollectionSchema.builder()
+        .build();
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("product_id")
+        .dataType(DataType.VarChar)
+        .isPrimaryKey(true)
+        .autoID(false)
+        .maxLength(100)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("embedding")
+        .dataType(DataType.FloatVector)
+        .dimension(4)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName("category")
+        .dataType(DataType.VarChar)
+        .maxLength(1000)
+        .build());
+
+client.dropCollection(DropCollectionReq.builder()
+        .collectionName("demo_manual_ids")
+        .build());
+
+CreateCollectionReq requestCreate = CreateCollectionReq.builder()
+        .collectionName("demo_manual_ids")
+        .collectionSchema(collectionSchema)
+        .build();
+client.createCollection(requestCreate);
 ```
 
 ```javascript
@@ -307,6 +455,42 @@ const res = await client.createCollection({
 
 ```bash
 # restful
+export SCHEMA='{
+    "autoID": false,
+    "fields": [
+        {
+            "fieldName": "product_id",
+            "dataType": "VarChar",
+            "isPrimary": true,
+            "elementTypeParams": {
+                "max_length": "100"
+            }
+        },
+        {
+            "fieldName": "embedding",
+            "dataType": "FloatVector",
+            "isPrimary": false,
+            "elementTypeParams": {
+                "dim": "4"
+            }
+        },
+        {
+            "fieldName": "category",
+            "dataType": "VarChar",
+            "isPrimary": false,
+            "elementTypeParams": {
+                "max_length": "1000"
+            }
+        }
+    ]
+}'
+
+curl -X POST 'http://localhost:19530/v2/vectordb/collections/create' \
+-H 'Content-Type: application/json' \
+-d "{
+    \"collectionName\": \"demo_manual_ids\",
+    \"schema\": $SCHEMA
+}"
 ```
 
 ### Step 2: Insert data with your IDs
@@ -336,7 +520,29 @@ print("Generated IDs:", res.get("ids"))
 ```
 
 ```java
-// java
+import com.google.gson.*;
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.response.InsertResp;
+
+List<JsonObject> rows = new ArrayList<>();
+Gson gson = new Gson();
+JsonObject row1 = new JsonObject();
+row1.addProperty("product_id", "PROD-001");
+row1.add("embedding", gson.toJsonTree(new float[]{0.1f, 0.2f, 0.3f, 0.4f}));
+row1.addProperty("category", "book");
+rows.add(row1);
+
+JsonObject row2 = new JsonObject();
+row2.addProperty("product_id", "PROD-002");
+row2.add("embedding", gson.toJsonTree(new float[]{0.2f, 0.3f, 0.4f, 0.5f}));
+row2.addProperty("category", "toy");
+rows.add(row2);
+
+InsertResp insertR = client.insert(InsertReq.builder()
+        .collectionName("demo_manual_ids")
+        .data(rows)
+        .build());
+System.out.printf("Generated IDs: %s\n", insertR.getPrimaryKeys());
 ```
 
 ```javascript
@@ -360,6 +566,26 @@ console.log(insert);
 
 ```bash
 # restful
+export INSERT_DATA='[
+    {
+        "product_id": "PROD-001",
+        "embedding": [0.1, 0.2, 0.3, 0.4],
+        "category": "book"
+    },
+    {
+        "product_id": "PROD-002",
+        "embedding": [0.2, 0.3, 0.4, 0.5],
+        "category": "toy"
+    }
+]'
+
+# 插入数据
+curl -X POST 'http://localhost:19530/v2/vectordb/entities/insert' \
+-H 'Content-Type: application/json' \
+-d "{
+    \"collectionName\": \"demo_manual_ids\",
+    \"data\": $INSERT_DATA
+}"
 ```
 
 Your responsibilities:
