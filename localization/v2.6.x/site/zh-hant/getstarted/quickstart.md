@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>現在我們可以用向量來表示搜尋查詢的文字，並在 Milvus 上進行向量相似性搜尋，從而進行語意搜尋。</p>
-<h3 id="Vector-search" class="common-anchor-header">向量搜尋</h3><p>Milvus 可同時接受一個或多個向量搜尋請求。query_vectors 變數的值是一個向量清單，其中每個向量是一個浮點數的陣列。</p>
+<h3 id="Vector-search" class="common-anchor-header">向量搜尋<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 可同時接受一個或多個向量搜尋請求。query_vectors 變數的值是一個向量清單，其中每個向量是一個浮點數的陣列。</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -301,7 +316,22 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>預設情況下，標量欄位不會被索引。如果您需要在大型資料集中執行 metadata 過濾搜尋，您可以考慮使用固定模式，同時開啟<a href="https://milvus.io/docs/scalar_index.md">索引</a>以改善搜尋效能。</p>
 <p>除了向量搜尋外，您也可以執行其他類型的搜尋：</p>
-<h3 id="Query" class="common-anchor-header">查詢</h3><p>查詢()是擷取所有符合條件的實體的操作，例如<a href="https://milvus.io/docs/boolean.md">篩選表達式</a>或符合某些 id。</p>
+<h3 id="Query" class="common-anchor-header">查詢<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>查詢()是擷取所有符合條件的實體的操作，例如<a href="https://milvus.io/docs/boolean.md">篩選表達式</a>或符合某些 id。</p>
 <p>例如，擷取標量欄位具有特定值的所有實體：</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -407,3 +437,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <button class="copy-code-btn"></button></code></pre>
 <p>要從 Milvus Lite 遷移資料到部署在 Docker 或 Kubernetes 上的 Milvus，請參考<a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">從 Milvus Lite 遷移資料</a>。</p>
 <p>Milvus 提供 REST 和 gRPC API，以及<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a>、C# 和<a href="https://milvus.io/docs/install-node.md">Node.js</a> 等語言的用戶端程式庫。</p>
+<p>在模式設計方面，Milvus 支援彈性的模式設計，您可以定義欄位及其資料類型，包括向量欄位。您也可以為每個欄位定義索引類型和參數。如需詳細資訊，請參閱<a href="https://milvus.io/docs/schema-hands-on.md">搜尋的資料模式設計</a>。</p>

@@ -6,7 +6,6 @@ summary: >-
   colección, es necesario diseñar su esquema. Esta página le ayudará a entender
   el esquema de una colección y a diseñar un esquema de ejemplo por su cuenta.
 ---
-
 <h1 id="Schema-Explained" class="common-anchor-header">Explicación del esquema<button data-href="#Schema-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,9 +37,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En Zilliz Cloud, un esquema de colección ensambla una tabla en una base de datos relacional, que define cómo Zilliz Cloud organiza los datos en la colección.</p>
-<p>Un esquema bien diseñado es esencial, ya que abstrae el modelo de datos y decide si se pueden alcanzar los objetivos de negocio a través de una búsqueda. Además, dado que cada fila de datos insertada en la colección debe seguir el esquema, ayuda a mantener la coherencia de los datos y la calidad a largo plazo. Desde un punto de vista técnico, un esquema bien definido conduce a un almacenamiento de datos de columnas bien organizado y a una estructura de índices más limpia, lo que aumenta el rendimiento de las búsquedas.</p>
-<p>Un esquema de colección tiene una clave primaria, un máximo de cuatro campos vectoriales y varios campos escalares. El siguiente diagrama ilustra cómo asignar un artículo a una lista de campos de esquema.</p>
+    </button></h2><p>En Milvus, un esquema de colección ensambla una tabla en una base de datos relacional, que define cómo Milvus organiza los datos en la colección.</p>
+<p>Un esquema bien diseñado es esencial, ya que abstrae el modelo de datos y decide si se pueden alcanzar los objetivos empresariales mediante una búsqueda. Además, puesto que cada fila de datos insertada en la colección debe seguir el esquema, ayuda a mantener la coherencia de los datos y la calidad a largo plazo. Desde un punto de vista técnico, un esquema bien definido conduce a un almacenamiento de datos de columnas bien organizado y a una estructura de índices más limpia, lo que aumenta el rendimiento de las búsquedas.</p>
+<p>Un esquema de colección tiene una clave primaria, al menos un campo vectorial y varios campos escalares. El siguiente diagrama ilustra cómo asignar un artículo a una lista de campos de esquema.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
@@ -69,7 +68,6 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
@@ -112,16 +110,15 @@ schema := entity.NewSchema()
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; 
 
 schema.addField(AddFieldReq.builder()
-.fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
-.dataType(DataType.Int64)
-<span class="highlighted-comment-line"> .isPrimaryKey(<span class="hljs-literal">true</span>)</span>
-<span class="highlighted-comment-line"> .autoID(<span class="hljs-literal">false</span>)</span>
-.build());
+        .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
+        .dataType(DataType.Int64)
+<span class="highlighted-comment-line">        .isPrimaryKey(<span class="hljs-literal">true</span>)</span>
+<span class="highlighted-comment-line">        .autoID(<span class="hljs-literal">false</span>)</span>
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
@@ -149,7 +146,10 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Al añadir un campo, puede aclarar explícitamente el campo como campo primario estableciendo su propiedad <code translate="no">is_primary</code> a <code translate="no">True</code>. Un campo primario acepta valores <strong>Int64</strong> por defecto. En este caso, el valor del campo primario debe ser entero, similar a <code translate="no">12345</code>. Si elige utilizar valores <strong>VarChar</strong> en el campo primario, el valor debe ser cadena, similar a <code translate="no">my_entity_1234</code>.</p>
-<p>También puede establecer las propiedades <code translate="no">autoId</code> a <code translate="no">True</code> para hacer que Zilliz Cloud asigne automáticamente valores de campo primario al insertar datos.</p>
+<p>También puede establecer las propiedades <code translate="no">autoId</code> en <code translate="no">True</code> para que Milvus asigne automáticamente valores de campo primario al insertar datos.</p>
+<div class="alert note">
+<p>Se aconseja confiar en <code translate="no">autoId</code> en todos los casos, a menos que la configuración manual de claves primarias sea beneficiosa.</p>
+</div>
 <p>Para más detalles, consulte <a href="/docs/es/primary-field.md">Primary Field &amp; AutoId</a>.</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">Añadir campos vectoriales<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,7 +166,7 @@ schema.addField(AddFieldReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Los campos vectoriales aceptan varias incrustaciones de vectores dispersos y densos. En Zilliz Cloud, puede añadir cuatro campos vectoriales a una colección. Los siguientes fragmentos de código muestran cómo añadir un campo vectorial.</p>
+    </button></h2><p>Los campos vectoriales aceptan varias incrustaciones de vectores dispersos y densos. En Milvus, puede añadir cuatro campos vectoriales a una colección. Los siguientes fragmentos de código muestran cómo añadir un campo vectorial.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -201,22 +201,21 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<p>El parámetro <code translate="no">dim</code> en los fragmentos de código anteriores indica la dimensionalidad de las incrustaciones vectoriales que se incluirán en el campo vectorial. El valor <code translate="no">FLOAT_VECTOR</code> indica que el campo vectorial contiene una lista de números flotantes de 32 bits, que normalmente se usan para representar antilogaritmos. Además, Zilliz Cloud también soporta los siguientes tipos de incrustaciones vectoriales:</p>
+<p>El parámetro <code translate="no">dim</code> en los fragmentos de código anteriores indica la dimensionalidad de las incrustaciones vectoriales que se incluirán en el campo vectorial. El valor <code translate="no">FLOAT_VECTOR</code> indica que el campo vectorial contiene una lista de números flotantes de 32 bits, que normalmente se utilizan para representar antilogaritmos. Además, Milvus también soporta los siguientes tipos de incrustaciones vectoriales:</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
-<p>Un campo vectorial de este tipo contiene una lista de números flotantes de media precisión de 16 bits y suele aplicarse a escenarios de aprendizaje profundo con restricciones de memoria o ancho de banda o de computación basada en GPU.</p></li>
+<p>Un campo vectorial de este tipo contiene una lista de números flotantes de media precisión de 16 bits y suele aplicarse a escenarios de aprendizaje profundo o computación basada en GPU con restricciones de memoria o ancho de banda.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>Un campo vectorial de este tipo contiene una lista de números en coma flotante de 16 bits que tienen una precisión reducida pero el mismo rango de exponentes que Float32. Este tipo de datos se utiliza habitualmente en escenarios de aprendizaje profundo, ya que reduce el uso de memoria sin afectar significativamente a la precisión.</p></li>
-<li><p><code translate="no">- INT8_VECTOR</code></p>
-<p>Un campo vectorial de este tipo almacena vectores compuestos por números enteros con signo de 8 bits (int8), con cada componente en un rango de -128 a 127. Adaptado para arquitecturas de aprendizaje profundo cuantizado -como ResNet y EfficientNet-, reduce sustancialmente el tamaño del modelo y aumenta la velocidad de inferencia, al tiempo que incurre en una pérdida de precisión mínima. <strong>Nota</strong>: Este tipo de vector sólo se admite para índices HNSW.</p></li>
+<li><p><code translate="no">INT8_VECTOR</code></p>
+<p>Un campo vectorial de este tipo almacena vectores compuestos por números enteros con signo de 8 bits (int8), con cada componente entre -128 y 127. Adaptado para arquitecturas de aprendizaje profundo cuantizadas -como ResNet y EfficientNet- reduce sustancialmente el tamaño del modelo y aumenta la velocidad de inferencia, al tiempo que incurre en una pérdida de precisión mínima. <strong>Nota</strong>: Este tipo de vector sólo se admite para índices HNSW.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>Un campo vectorial de este tipo contiene una lista de 0s y 1s. Sirven como características compactas para representar datos en escenarios de procesamiento de imágenes y recuperación de información.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
@@ -237,8 +236,23 @@ schema.addField(AddFieldReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En casos comunes, puede utilizar campos escalares para almacenar los metadatos de las incrustaciones vectoriales almacenadas en Milvus, y realizar búsquedas RNA con filtrado de metadatos para mejorar la corrección de los resultados de la búsqueda. Zilliz Cloud soporta múltiples tipos de campos escalares, incluyendo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong> y <strong>JSON</strong>.</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">Añadir campos de cadena</h3><p>En Milvus, puede utilizar campos VarChar para almacenar cadenas. Para más información sobre el campo VarChar, consulte <a href="/docs/es/string.md">Campo String</a>.</p>
+    </button></h2><p>En casos comunes, puede utilizar campos escalares para almacenar los metadatos de las incrustaciones vectoriales almacenadas en Milvus, y realizar búsquedas RNA con filtrado de metadatos para mejorar la corrección de los resultados de la búsqueda. Milvus soporta múltiples tipos de campos escalares, incluyendo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong> y <strong>Double</strong>.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">Añadir campos de cadena<button data-href="#Add-String-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>En Milvus, puede utilizar campos VarChar para almacenar cadenas. Para más información sobre el campo VarChar, consulte <a href="/docs/es/string.md">Campo String</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -273,16 +287,30 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Add-Number-Fields" class="common-anchor-header">Añadir Campos Numéricos</h3><p>Los tipos de números que Milvus soporta son <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, y <code translate="no">Double</code>. Para más información sobre los campos numéricos, consulte <a href="/docs/es/number.md">Campo numérico</a>.</p>
+<h3 id="Add-Number-Fields" class="common-anchor-header">Añadir Campos Numéricos<button data-href="#Add-Number-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Los tipos de números que Milvus soporta son <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, y <code translate="no">Double</code>. Para más información sobre los campos numéricos, consulte <a href="/docs/es/number.md">Campo numérico</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -310,17 +338,31 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Add-Boolean-Fields" class="common-anchor-header">Añadir campos booleanos</h3><p>Milvus soporta campos booleanos. Los siguientes fragmentos de código muestran cómo añadir un campo booleano.</p>
+<h3 id="Add-Boolean-Fields" class="common-anchor-header">Añadir campos booleanos<button data-href="#Add-Boolean-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus soporta campos booleanos. Los siguientes fragmentos de código muestran cómo añadir un campo booleano.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -348,18 +390,48 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>,
-<span class="hljs-variable">$boolField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Add-JSON-fields" class="common-anchor-header">Añadir campos JSON</h3><p>Un campo JSON normalmente almacena datos JSON semiestructurados. Para más información sobre los campos JSON, consulta <a href="/docs/es/use-json-fields.md">Campo JSON</a>.</p>
+<h2 id="Add-Composite-Fields" class="common-anchor-header">Añadir campos compuestos<button data-href="#Add-Composite-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>En Milvus, un campo compuesto es un campo que puede dividirse en subcampos más pequeños, como las claves en un campo JSON o los índices en un campo Array.</p>
+<h3 id="Add-JSON-fields" class="common-anchor-header">Añadir campos JSON<button data-href="#Add-JSON-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Un campo JSON suele almacenar datos JSON semiestructurados. Para más información sobre los campos JSON, consulta <a href="/docs/es/json-field">Campo</a> JSON.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -387,19 +459,33 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>,
-<span class="hljs-variable">$boolField</span>,
-<span class="hljs-variable">$jsonField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Add-Array-Fields" class="common-anchor-header">Añadir campos array</h3><p>Un campo array almacena una lista de elementos. Los tipos de datos de todos los elementos de un campo array deben ser los mismos. Para más información sobre los campos array, consulta <a href="/docs/es/array_data_type.md">Campo Array</a>.</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">Añadir campos array<button data-href="#Add-Array-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Un campo array almacena una lista de elementos. Los tipos de datos de todos los elementos de un campo array deben ser los mismos. Para más información sobre los campos array, consulta <a href="/docs/es/array_data_type.md">Campo Array</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -443,15 +529,15 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>,
-<span class="hljs-variable">$boolField</span>,
-<span class="hljs-variable">$jsonField</span>,
-<span class="hljs-variable">$arrayField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>,
+        <span class="hljs-variable">$arrayField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

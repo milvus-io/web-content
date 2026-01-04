@@ -1029,6 +1029,12 @@
             "children": []
           },
           {
+            "label": "Pesquisar com listas de incorporação",
+            "id": "search-with-embedding-lists.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Consultas Elasticsearch para Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 11,
@@ -2713,9 +2719,10 @@
         "children": []
       },
       {
-        "label": "Utilizar ColPali para recuperação multimodal",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "Utilizar ColBERT e ColPali com Milvus",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

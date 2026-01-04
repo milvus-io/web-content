@@ -68,7 +68,7 @@
             "children": []
           },
           {
-            "label": "تشغيل ميلفوس مستقل",
+            "label": "تشغيل ميلفوس ستاندالون",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -1029,6 +1029,12 @@
             "children": []
           },
           {
+            "label": "البحث باستخدام قوائم التضمين",
+            "id": "search-with-embedding-lists.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "استعلامات البحث المرن إلى ميلفوس",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 11,
@@ -1115,7 +1121,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه المعانق TEI",
+                "label": "عناق الوجه TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -2713,9 +2719,10 @@
         "children": []
       },
       {
-        "label": "استخدام كولبالي للاسترجاع متعدد الوسائط",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "استخدام كولبرت وكولبالي مع ميلفوس",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

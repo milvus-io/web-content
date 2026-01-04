@@ -1029,6 +1029,12 @@
             "children": []
           },
           {
+            "label": "Búsqueda con listas incrustadas",
+            "id": "search-with-embedding-lists.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Consultas de Elasticsearch a Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 11,
@@ -1455,7 +1461,7 @@
             "children": []
           },
           {
-            "label": "Configurar Chunk Cache",
+            "label": "Configurar la caché de trozos",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -2713,9 +2719,10 @@
         "children": []
       },
       {
-        "label": "Utilice ColPali para la recuperación multimodal",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "Utilizar ColBERT y ColPali con Milvus",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

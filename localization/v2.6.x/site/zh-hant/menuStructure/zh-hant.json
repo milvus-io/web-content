@@ -322,7 +322,7 @@
             "children": []
           },
           {
-            "label": "檢視館藏",
+            "label": "檢視收藏集",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -1029,6 +1029,12 @@
             "children": []
           },
           {
+            "label": "使用內嵌清單搜尋",
+            "id": "search-with-embedding-lists.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Elasticsearch 查詢至 Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 11,
@@ -1097,7 +1103,7 @@
                 "children": []
               },
               {
-                "label": "Voyage AI",
+                "label": "航程 AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1443,7 +1449,7 @@
             "children": []
           },
           {
-            "label": "在飛行中",
+            "label": "飛行中",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
@@ -2338,7 +2344,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格舞曲",
+            "label": "拉格",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []
@@ -2713,9 +2719,10 @@
         "children": []
       },
       {
-        "label": "使用 ColPali 進行多模式檢索",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "與 Milvus 搭配使用 ColBERT 和 ColPali",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

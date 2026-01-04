@@ -1029,6 +1029,12 @@
             "children": []
           },
           {
+            "label": "Cari dengan Daftar Penyematan",
+            "id": "search-with-embedding-lists.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Kueri Elasticsearch ke Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 11,
@@ -2713,9 +2719,10 @@
         "children": []
       },
       {
-        "label": "Gunakan ColPali untuk Pengambilan Multi-Modal",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "Gunakan ColBERT dan ColPali dengan Milvus",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

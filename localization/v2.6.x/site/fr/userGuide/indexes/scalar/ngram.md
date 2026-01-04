@@ -1,6 +1,6 @@
 ---
 id: ngram.md
-title: NGRAMCompatible with Milvus v2.6.2+
+title: NGRAM
 summary: >-
   L'index NGRAM de Milvus est conçu pour accélérer les requêtes LIKE sur les
   champs VARCHAR ou les chemins JSON spécifiques dans les champs JSON. Avant de
@@ -12,9 +12,8 @@ summary: >-
   apparaît. Au moment de la requête, cet index permet à Milvus de restreindre
   rapidement la recherche à un petit ensemble de candidats, ce qui accélère
   considérablement l'exécution de la requête.
-beta: Milvus v2.6.2+
 ---
-<h1 id="NGRAM" class="common-anchor-header">NGRAM<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#NGRAM" class="anchor-icon" translate="no">
+<h1 id="NGRAM" class="common-anchor-header">NGRAM<button data-href="#NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,40 +80,48 @@ beta: Milvus v2.6.2+
 <li><p><code translate="no">min_gram</code>: Le n-gramme le plus court à générer. Cela définit également la longueur minimale de la sous-chaîne de la requête qui peut bénéficier de l'index.</p></li>
 <li><p><code translate="no">max_gram</code>: Le n-gramme le plus long à générer. Au moment de la requête, il est également utilisé comme taille maximale de la fenêtre lors de la division de longues chaînes de requête.</p></li>
 </ul>
-<p>Par exemple, avec <code translate="no">min_gram=2</code> et <code translate="no">max_gram=3</code>, la chaîne <code translate="no">&quot;AI database&quot;</code> est décomposée comme suit :</p>
-<ul>
-<li><strong>2-grammes :</strong> <code translate="no">AI</code>, <code translate="no">I_</code>, <code translate="no">_d</code>, <code translate="no">da</code>, <code translate="no">at</code>, ...</li>
-<li><strong>3-grammes :</strong> <code translate="no">AI_</code>, <code translate="no">I_d</code>, <code translate="no">_da</code>, <code translate="no">dat</code>, <code translate="no">ata</code>, ...</li>
-</ul>
+<p>Par exemple, avec <code translate="no">min_gram=2</code> et <code translate="no">max_gram=3</code>, la chaîne <code translate="no">&quot;AI database&quot;</code> est décomposée comme suit :</p></li>
+</ol>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" />
-   </span> <span class="img-wrapper"> <span>Construire l'index des ngrammes</span> </span></p>
-<blockquote>
-<p><strong>Note</strong></p>
-<ul>
-<li><p>Pour un intervalle <code translate="no">[min_gram, max_gram]</code>, Milvus génère tous les n-grammes pour chaque longueur comprise entre les deux valeurs (incluses).<br>
-Exemple : avec <code translate="no">[2,4]</code> et le mot <code translate="no">&quot;text&quot;</code>, Milvus génère :</p>
-<ul>
-<li><strong>2-grammes :</strong> <code translate="no">te</code>, <code translate="no">ex</code>, <code translate="no">xt</code></li>
-<li><strong>3-grammes :</strong> <code translate="no">tex</code>, <code translate="no">ext</code></li>
-<li><strong>4-grammes</strong>: <code translate="no">text</code></li>
-</ul></li>
-<li><p>La décomposition en N-grammes est basée sur les caractères et ne dépend pas de la langue. Par exemple, en chinois, <code translate="no">&quot;向量数据库&quot;</code> avec <code translate="no">min_gram = 2</code> est décomposé en : <code translate="no">&quot;向量&quot;</code>, <code translate="no">&quot;量数&quot;</code>, <code translate="no">&quot;数据&quot;</code>, <code translate="no">&quot;据库&quot;</code>.</p></li>
-<li><p>Les espaces et la ponctuation sont traités comme des caractères lors de la décomposition.</p></li>
-<li><p>La décomposition préserve la casse originale et la correspondance est sensible à la casse. Par exemple, <code translate="no">&quot;Database&quot;</code> et <code translate="no">&quot;database&quot;</code> généreront des n-grammes différents et nécessiteront une correspondance exacte entre les majuscules et les minuscules lors des requêtes.</p></li>
-</ul>
-</blockquote></li>
-<li><p><strong>Créer un index inversé</strong>: Un <strong>index inversé</strong> est créé pour faire correspondre chaque n-gramme généré à une liste d'identifiants de documents qui le contiennent.</p>
-<p>Par exemple, si le 2-gramme <code translate="no">&quot;AI&quot;</code> apparaît dans des documents avec les ID 1, 5, 6, 8 et 9, l'index enregistre <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code>. Cet index est ensuite utilisé au moment de la requête pour restreindre rapidement le champ de recherche.</p></li>
+   </span> <span class="img-wrapper"> <span>Construire un index de ngrammes</span> </span></p>
+<pre><code translate="no">- **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
+
+- **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
+
+&lt;div class=&quot;alert note&quot;&gt;
+
+- For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive). For example, with `[2,4]` and the word `&quot;text&quot;`, Milvus generates:
+
+- **2-grams:** `te`, `ex`, `xt`
+
+- **3-grams:** `tex`, `ext`
+
+- **4-grams:** `text`
+
+- N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `&quot;向量数据库&quot;` with `min_gram = 2` is decomposed into: `&quot;向量&quot;`, `&quot;量数&quot;`, `&quot;数据&quot;`, `&quot;据库&quot;`.
+
+- Spaces and punctuation are treated as characters during decomposition.
+
+- Decomposition preserves original case, and matching is case-sensitive. For example, `&quot;Database&quot;` and `&quot;database&quot;` will generate different n-grams and require exact case matching during queries.
+
+&lt;/div&gt;
+</code></pre>
+<ol>
+<li><p><strong>Construire un index inversé</strong>: Un <strong>index inversé</strong> est créé pour faire correspondre chaque n-gramme généré à une liste d'ID de documents le contenant.</p>
+<p>Par exemple, si le 2-gramme <code translate="no">&quot;AI&quot;</code> apparaît dans des documents portant les ID 1, 5, 6, 8 et 9, l'index enregistre <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code>. Cet index est ensuite utilisé au moment de la requête pour restreindre rapidement le champ de recherche.</p></li>
 </ol>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" />
    </span> <span class="img-wrapper"> <span>Création de l'index de ngrammes 2</span> </span></p>
-<div class="alert note">
-<p>Une plage plus large de <code translate="no">[min_gram, max_gram]</code> crée plus de grammes et de plus grandes listes de correspondance. Si la mémoire est limitée, envisagez le mode mmap pour les listes d'écritures très volumineuses. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p>
-</div>
+<pre><code translate="no">&lt;div class=&quot;alert note&quot;&gt;
+
+A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
+
+&lt;/div&gt;
+</code></pre>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Phase 2 : Accélérer les requêtes<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -316,10 +323,6 @@ client.create_index(
       </svg>
     </button></h2><p>Utilisez la méthode <code translate="no">drop_index()</code> pour supprimer un index existant d'une collection.</p>
 <div class="alert note">
-<ul>
-<li><p>Dans la <strong>version 2.6.3</strong> ou antérieure, vous devez libérer la collection avant de supprimer un index scalaire.</p></li>
-<li><p>À partir de la <strong>version 2.6.4</strong>, vous pouvez supprimer un index scalaire directement lorsqu'il n'est plus nécessaire, sans avoir à libérer la collection au préalable.</p></li>
-</ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(
     collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
@@ -344,7 +347,7 @@ client.create_index(
     </button></h2><ul>
 <li><p><strong>Types de champs</strong>: Pris en charge pour les champs <code translate="no">VARCHAR</code> et <code translate="no">JSON</code>. Pour JSON, fournir à la fois <code translate="no">params.json_path</code> et <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
 <li><p><strong>Unicode</strong>: La décomposition du NGRAM est basée sur les caractères et indépendante de la langue, et inclut les espaces blancs et la ponctuation.</p></li>
-<li><p><strong>Compromis espace-temps</strong>: des plages de grammes plus larges <code translate="no">[min_gram, max_gram]</code> produisent plus de grammes et des index plus volumineux. Si la mémoire est limitée, envisagez le mode <code translate="no">mmap</code> pour les listes d'écritures volumineuses. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap.</a></p></li>
+<li><p><strong>Compromis espace-temps</strong>: des plages de grammes plus larges <code translate="no">[min_gram, max_gram]</code> produisent plus de grammes et des index plus volumineux. Si la mémoire est limitée, envisagez le mode <code translate="no">mmap</code> pour les listes d'écritures volumineuses. Pour plus d'informations, reportez-vous à la section <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Utiliser mmap.</a></p></li>
 <li><p><strong>Immuabilité</strong>: <code translate="no">min_gram</code> et <code translate="no">max_gram</code> ne peuvent pas être modifiés sur place - il faut reconstruire l'index pour les ajuster.</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">Meilleures pratiques<button data-href="#Best-practices" class="anchor-icon" translate="no">

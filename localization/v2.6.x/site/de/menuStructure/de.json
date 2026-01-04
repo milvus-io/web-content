@@ -1029,6 +1029,12 @@
             "children": []
           },
           {
+            "label": "Suche mit eingebetteten Listen",
+            "id": "search-with-embedding-lists.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Elasticsearch-Abfragen an Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 11,
@@ -2713,9 +2719,10 @@
         "children": []
       },
       {
-        "label": "ColPali für multimodalen Abruf verwenden",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "Verwendung von ColBERT und ColPali mit Milvus",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

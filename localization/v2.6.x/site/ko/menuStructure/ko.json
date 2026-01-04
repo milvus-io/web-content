@@ -1029,6 +1029,12 @@
             "children": []
           },
           {
+            "label": "임베딩 목록으로 검색",
+            "id": "search-with-embedding-lists.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Milvus에 대한 Elasticsearch 쿼리",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 11,
@@ -2466,7 +2472,7 @@
             "children": []
           },
           {
-            "label": "SiliconFlow",
+            "label": "실리콘 플로우",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
@@ -2713,9 +2719,10 @@
         "children": []
       },
       {
-        "label": "다중 모달 검색에 ColPali 사용",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "밀버스와 함께 콜버트 및 콜팔리 사용",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

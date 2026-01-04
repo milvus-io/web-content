@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "数字フィールド",
+            "label": "番号フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -1029,7 +1029,13 @@
             "children": []
           },
           {
-            "label": "Elasticsearchからmilvusへのクエリ",
+            "label": "埋め込みリストを使った検索",
+            "id": "search-with-embedding-lists.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Elasticsearchクエリからmilvusへ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 11,
             "children": []
@@ -2713,9 +2719,10 @@
         "children": []
       },
       {
-        "label": "マルチモーダル検索にColPaliを使用する",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "MilvusでColBERTとColPaliを使う",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

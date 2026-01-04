@@ -701,7 +701,7 @@
     "v2.6.x/site/en/getstarted/install_SDKs/install-node.md": "2025-06-12T06:05:55.040Z",
     "v2.6.x/site/en/getstarted/install_SDKs/install-pymilvus.md": "2026-01-04T09:42:53.396Z",
     "v2.6.x/site/en/getstarted/milvus_lite.md": "2025-10-20T08:35:20.024Z",
-    "v2.6.x/site/en/getstarted/quickstart.md": "2025-06-12T06:06:00.326Z",
+    "v2.6.x/site/en/getstarted/quickstart.md": "2026-01-04T12:12:19.010Z",
     "v2.6.x/site/en/getstarted/run-milvus-docker/install_standalone-docker-compose.md": "2026-01-04T09:43:12.325Z",
     "v2.6.x/site/en/getstarted/run-milvus-docker/install_standalone-docker.md": "2026-01-04T09:43:21.040Z",
     "v2.6.x/site/en/getstarted/run-milvus-docker/install_standalone-windows.md": "2026-01-04T09:43:36.718Z",
@@ -805,7 +805,7 @@
     "v2.6.x/site/en/reference/multi_tenancy.md": "2025-06-12T06:09:49.694Z",
     "v2.6.x/site/en/reference/replica.md": "2025-06-12T06:09:52.803Z",
     "v2.6.x/site/en/reference/scalar_index.md": "2025-06-12T06:09:55.562Z",
-    "v2.6.x/site/en/reference/schema.md": "2025-06-23T08:41:54.755Z",
+    "v2.6.x/site/en/reference/schema.md": "2026-01-04T12:12:33.342Z",
     "v2.6.x/site/en/reference/sys_config/configure_common.md": "2025-10-22T03:15:38.972Z",
     "v2.6.x/site/en/reference/sys_config/configure_datacoord.md": "2025-06-12T06:10:05.530Z",
     "v2.6.x/site/en/reference/sys_config/configure_datanode.md": "2025-06-12T06:10:08.401Z",
@@ -958,7 +958,7 @@
     "v2.6.x/site/en/userGuide/schema/enable-dynamic-field.md": "2025-07-11T03:19:54.311Z",
     "v2.6.x/site/en/userGuide/schema/nullable-and-default.md": "2025-08-18T08:46:22.275Z",
     "v2.6.x/site/en/userGuide/schema/number.md": "2025-06-12T06:13:54.125Z",
-    "v2.6.x/site/en/userGuide/schema/primary-field.md": "2025-10-22T03:20:07.383Z",
+    "v2.6.x/site/en/userGuide/schema/primary-field.md": "2026-01-04T12:13:06.603Z",
     "v2.6.x/site/en/userGuide/schema/schema.md": "2025-06-12T06:13:56.723Z",
     "v2.6.x/site/en/userGuide/schema/sparse_vector.md": "2025-09-15T08:34:44.714Z",
     "v2.6.x/site/en/userGuide/schema/string.md": "2025-09-19T13:20:59.355Z",
@@ -1002,7 +1002,7 @@
     "v2.6.x/site/en/userGuide/tools/milvus-cdc/manage-cdc-tasks.md": "2025-06-12T06:15:04.254Z",
     "v2.6.x/site/en/userGuide/tools/milvus-cdc/milvus-cdc-overview.md": "2025-06-12T06:15:05.639Z",
     "v2.6.x/site/en/userGuide/tools/milvus-webui.md": "2025-06-12T06:15:07.664Z",
-    "v2.6.x/site/en/menuStructure/en.json": "2026-01-04T10:04:14.068Z",
+    "v2.6.x/site/en/menuStructure/en.json": "2026-01-04T12:28:47.929Z",
     "v2.6.x/site/en/reference/architecture/streaming_service.md": "2025-06-23T08:40:52.156Z",
     "v2.6.x/site/en/adminGuide/scale-standalone.md": "2025-07-02T07:32:10.597Z",
     "v2.6.x/site/en/integrations/langchain/langchain_milvus_async.md": "2025-07-14T08:50:28.212Z",
@@ -1017,7 +1017,7 @@
     "v2.6.x/site/en/userGuide/embeddings-reranking/reranking/siliconflow-ranker.md": "2025-10-27T08:38:35.904Z",
     "v2.6.x/site/en/userGuide/embeddings-reranking/reranking/voyage-ai-ranker.md": "2025-10-27T08:39:16.138Z",
     "v2.6.x/site/en/userGuide/embeddings-reranking/reranking/boost-ranker.md": "2025-11-03T08:37:23.132Z",
-    "v2.6.x/site/en/userGuide/indexes/scalar/ngram.md": "2025-10-22T03:18:27.995Z",
+    "v2.6.x/site/en/userGuide/indexes/scalar/ngram.md": "2026-01-04T12:12:48.695Z",
     "v2.6.x/site/en/userGuide/schema/analyzer/choose-the-right-analyzer-for-your-use-case.md": "2025-09-19T13:19:30.726Z",
     "v2.6.x/site/en/userGuide/schema/analyzer/tokenizer/language-identifier.md": "2025-09-19T13:19:47.812Z",
     "v2.6.x/site/en/userGuide/schema/json-field-overview.md": "2025-11-10T08:40:22.172Z",
@@ -1038,6 +1038,7 @@
     "v2.6.x/site/en/userGuide/storage-optimization/tiered-storage-overview.md": "2025-10-27T08:40:06.985Z",
     "v2.6.x/site/en/userGuide/storage-optimization/warm-up.md": "2025-10-27T08:40:19.631Z",
     "v2.6.x/site/en/integrations/langchain/agentic_rag_with_milvus_and_langgraph.md": "2025-12-01T08:40:53.670Z",
-    "v2.6.x/site/en/userGuide/search-query-get/text-highlighter.md": "2026-01-04T09:47:58.903Z"
+    "v2.6.x/site/en/userGuide/search-query-get/text-highlighter.md": "2026-01-04T09:47:58.903Z",
+    "v2.6.x/site/en/userGuide/search-query-get/search-with-embedding-lists.md": "2026-01-04T12:13:42.720Z"
   }
 }

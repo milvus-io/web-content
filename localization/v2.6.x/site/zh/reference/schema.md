@@ -5,7 +5,6 @@ summary: >-
   Schema 定义了 Collections 的数据结构。在创建 Collections 之前，你需要设计好它的 Schema。本页将帮助你理解
   Collections Schema，并自行设计一个示例 Schema。
 ---
-
 <h1 id="Schema-Explained" class="common-anchor-header">模式解释<button data-href="#Schema-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,9 +36,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Zilliz Cloud 上，Collection Schema 是关系数据库中一个表的组合，它定义了 Zilliz Cloud 如何组织 Collection 中的数据。</p>
-<p>设计良好的 Schema 至关重要，因为它抽象了数据模型，并决定能否通过搜索实现业务目标。此外，由于插入 Collections 的每一行数据都必须遵循 Schema，因此有助于保持数据的一致性和长期质量。从技术角度看，定义明确的 Schema 会带来组织良好的列数据存储和更简洁的索引结构，从而提升搜索性能。</p>
-<p>一个 Collection Schema 有一个主键、最多四个向量字段和几个标量字段。下图说明了如何将文章映射到模式字段列表。</p>
+    </button></h2><p>在 Milvus 上，Collection Schema 是关系数据库中一个表的组合，它定义了 Milvus 如何组织 Collection 中的数据。</p>
+<p>设计良好的 Schema 至关重要，因为它抽象了数据模型，并决定能否通过搜索实现业务目标。此外，由于插入 Collections 的每一行数据都必须遵循 Schema，因此有助于保持数据的一致性和长期质量。从技术角度来看，定义明确的 Schema 会带来组织良好的列数据存储和更简洁的索引结构，从而提升搜索性能。</p>
+<p>Collections Schema 有一个主键、至少一个向量字段和几个标量字段。下图说明了如何将文章映射到模式字段列表。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
@@ -68,7 +67,6 @@ summary: >-
 
 schema = MilvusClient.create_schema()
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
@@ -111,16 +109,15 @@ schema := entity.NewSchema()
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; 
 
 schema.addField(AddFieldReq.builder()
-.fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
-.dataType(DataType.Int64)
-<span class="highlighted-comment-line"> .isPrimaryKey(<span class="hljs-literal">true</span>)</span>
-<span class="highlighted-comment-line"> .autoID(<span class="hljs-literal">false</span>)</span>
-.build());
+        .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
+        .dataType(DataType.Int64)
+<span class="highlighted-comment-line">        .isPrimaryKey(<span class="hljs-literal">true</span>)</span>
+<span class="highlighted-comment-line">        .autoID(<span class="hljs-literal">false</span>)</span>
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
@@ -148,8 +145,11 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>添加字段时，可以通过将<code translate="no">is_primary</code> 属性设置为<code translate="no">True</code> 来明确说明该字段是主字段。主字段默认接受<strong>Int64</strong>值。在这种情况下，主字段值应为整数，类似于<code translate="no">12345</code> 。如果选择在主字段中使用<strong>VarChar</strong>值，则其值应为字符串，类似于<code translate="no">my_entity_1234</code> 。</p>
-<p>您也可以将<code translate="no">autoId</code> 属性设置为<code translate="no">True</code> ，使 Zilliz Cloud 在插入数据时自动分配主字段值。</p>
-<p>有关详情，请参阅<a href="/docs/zh/primary-field.md">主字段和自动 ID</a>。</p>
+<p>您也可以将<code translate="no">autoId</code> 属性设置为<code translate="no">True</code> ，使 Milvus 在插入数据时自动分配主字段值。</p>
+<div class="alert note">
+<p>建议您在所有情况下都使用<code translate="no">autoId</code> ，除非手动设置主键是有益的。</p>
+</div>
+<p>详情请参阅 "<a href="/docs/zh/primary-field.md">主字段和自动 ID</a>"。</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">添加向量字段<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +165,7 @@ schema.addField(AddFieldReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>向量字段接受各种稀疏和密集向量嵌入。在 Zilliz Cloud 上，您可以向 Collections 添加四个向量字段。以下代码片段演示了如何添加向量字段。</p>
+    </button></h2><p>向量字段接受各种稀疏和密集向量嵌入。在 Milvus 上，你可以向一个 Collections 添加四个向量字段。以下代码片段演示了如何添加向量字段。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -200,22 +200,21 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<p>上述代码片段中的<code translate="no">dim</code> 参数表示向量字段中要保存的向量嵌入的维数。<code translate="no">FLOAT_VECTOR</code> 值表示向量字段持有 32 位浮点数列表，通常用于表示反比例。除此之外，Zilliz Cloud 还支持以下类型的向量嵌入：</p>
+<p>上述代码片段中的<code translate="no">dim</code> 参数表示向量字段中要保存的向量嵌入的维数。<code translate="no">FLOAT_VECTOR</code> 值表示该向量场持有 32 位浮点数列表，通常用于表示反比例。除此之外，Milvus 还支持以下类型的向量嵌入：</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>这种类型的向量场保存一个 16 位半精度浮点数列表，通常适用于内存或带宽受限的深度学习或基于 GPU 的计算场景。</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>这种类型的向量字段保存 16 位浮点数列表，精度有所降低，但指数范围与 Float32 相同。这种类型的数据常用于深度学习场景，因为它能在不明显影响精度的情况下减少内存使用量。</p></li>
-<li><p><code translate="no">- INT8_VECTOR</code></p>
-<p>这种类型的向量字段存储由 8 位有符号整数（int8）组成的向量，每个分量的范围为-128 到 127。它专为量化深度学习架构（如 ResNet 和 EfficientNet）量身定制，可大幅缩小模型大小，提高推理速度，同时只造成极小的精度损失。<strong>注</strong>：该向量类型仅支持 HNSW 索引。</p></li>
+<li><p><code translate="no">INT8_VECTOR</code></p>
+<p>这种类型的向量字段存储由 8 位有符号整数（int8）组成的向量，每个分量的范围为-128 到 127。它专为量化深度学习架构（如 ResNet 和 EfficientNet）量身定做，可大幅缩小模型大小，提高推理速度，同时只造成极小的精度损失。<strong>注</strong>：该向量类型仅支持 HNSW 索引。</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>这种类型的向量场保存着一个 0 和 1 的列表。在图像处理和信息检索场景中，它们是表示数据的紧凑特征。</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
@@ -236,8 +235,23 @@ schema.addField(AddFieldReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在常见情况下，您可以使用标量字段来存储存储在 Milvus 中的向量嵌入的元数据，并通过元数据过滤进行 ANN 搜索，以提高搜索结果的正确性。Zilliz Cloud 支持多种标量字段类型，包括<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、<strong>Float</strong>、<strong>Double</strong>、<strong>Array</strong> 和<strong>JSON</strong>。</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">添加字符串字段</h3><p>在 Milvus 中，您可以使用 VarChar 字段来存储字符串。有关 VarChar 字段的更多信息，请参阅<a href="/docs/zh/string.md">字符串字段</a>。</p>
+    </button></h2><p>在常见情况下，可以使用标量字段来存储 Milvus 中存储的向量嵌入的元数据，并通过元数据过滤进行 ANN 搜索，以提高搜索结果的正确性。Milvus 支持多种标量字段类型，包括<strong>VarChar</strong>、<strong>Boolean</strong>、<strong>Int</strong>、<strong>Float</strong> 和<strong>Double</strong>。</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">添加字符串字段<button data-href="#Add-String-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在 Milvus 中，你可以使用 VarChar 字段来存储字符串。有关 VarChar 字段的更多信息，请参阅<a href="/docs/zh/string.md">字符串字段</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -272,16 +286,30 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Add-Number-Fields" class="common-anchor-header">添加数字字段</h3><p>Milvus 支持的数字类型有<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code> 和<code translate="no">Double</code> 。有关数字字段的更多信息，请参阅<a href="/docs/zh/number.md">数字</a>字段。</p>
+<h3 id="Add-Number-Fields" class="common-anchor-header">添加数字字段<button data-href="#Add-Number-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 支持的数字类型有<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code> 和<code translate="no">Double</code> 。有关数字字段的更多信息，请参阅<a href="/docs/zh/number.md">数字</a>字段。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -309,17 +337,31 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Add-Boolean-Fields" class="common-anchor-header">添加布尔字段</h3><p>Milvus 支持布尔字段。以下代码片段演示了如何添加布尔字段。</p>
+<h3 id="Add-Boolean-Fields" class="common-anchor-header">添加布尔字段<button data-href="#Add-Boolean-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 支持布尔字段。以下代码片段演示了如何添加布尔字段。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -347,18 +389,48 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>,
-<span class="hljs-variable">$boolField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Add-JSON-fields" class="common-anchor-header">添加 JSON 字段</h3><p>JSON 字段通常存储半结构化的 JSON 数据。有关 JSON 字段的更多信息，请参阅<a href="/docs/zh/use-json-fields.md">JSON 字段</a>。</p>
+<h2 id="Add-Composite-Fields" class="common-anchor-header">添加复合字段<button data-href="#Add-Composite-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>在 Milvus 中，复合字段是指可以划分为更小的子字段的字段，例如 JSON 字段中的键或数组字段中的索引。</p>
+<h3 id="Add-JSON-fields" class="common-anchor-header">添加 JSON 字段<button data-href="#Add-JSON-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>JSON 字段通常存储半结构化的 JSON 数据。有关 JSON 字段的更多信息，请参阅<a href="/docs/zh/json-field">JSON 字段</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -386,19 +458,33 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>,
-<span class="hljs-variable">$boolField</span>,
-<span class="hljs-variable">$jsonField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Add-Array-Fields" class="common-anchor-header">添加数组字段</h3><p>数组字段存储元素列表。数组字段中所有元素的数据类型应相同。有关数组字段的更多信息，请参阅<a href="/docs/zh/array_data_type.md">数组</a>字段。</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">添加数组字段<button data-href="#Add-Array-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>数组字段存储元素列表。数组字段中所有元素的数据类型应相同。有关数组字段的更多信息，请参阅<a href="/docs/zh/array_data_type.md">数组</a>字段。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -442,15 +528,15 @@ schema.addField(AddFieldReq.builder()
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
-\&quot;autoID\&quot;: false,
-\&quot;fields\&quot;: [
-<span class="hljs-variable">$primaryField</span>,
-<span class="hljs-variable">$vectorField</span>,
-<span class="hljs-variable">$varCharField</span>,
-<span class="hljs-variable">$int64Field</span>,
-<span class="hljs-variable">$boolField</span>,
-<span class="hljs-variable">$jsonField</span>,
-<span class="hljs-variable">$arrayField</span>
-]
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>,
+        <span class="hljs-variable">$arrayField</span>
+    ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

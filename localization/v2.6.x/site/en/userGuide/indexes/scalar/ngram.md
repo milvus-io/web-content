@@ -10,9 +10,8 @@ summary: >-
   inverted index that maps each gram to the document IDs in which it appears. At
   query time, this index allows Milvus to quickly narrow the search to a small
   set of candidates, resulting in much faster query execution.
-beta: Milvus v2.6.2+
 ---
-<h1 id="NGRAM" class="common-anchor-header">NGRAM<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#NGRAM" class="anchor-icon" translate="no">
+<h1 id="NGRAM" class="common-anchor-header">NGRAM<button data-href="#NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,32 +78,37 @@ beta: Milvus v2.6.2+
 <li><p><code translate="no">min_gram</code>: The shortest n-gram to generate. This also defines the minimum query substring length that can benefit from the index.</p></li>
 <li><p><code translate="no">max_gram</code>: The longest n-gram to generate. At query time, it is also used as the maximum window size when splitting long query strings.</p></li>
 </ul>
-<p>For example, with <code translate="no">min_gram=2</code> and <code translate="no">max_gram=3</code>, the string <code translate="no">&quot;AI database&quot;</code> is broken down as follows:</p>
-<ul>
-<li><strong>2-grams:</strong> <code translate="no">AI</code>, <code translate="no">I_</code>, <code translate="no">_d</code>, <code translate="no">da</code>, <code translate="no">at</code>, …</li>
-<li><strong>3-grams:</strong> <code translate="no">AI_</code>, <code translate="no">I_d</code>, <code translate="no">_da</code>, <code translate="no">dat</code>, <code translate="no">ata</code>, …</li>
-</ul>
+<p>For example, with <code translate="no">min_gram=2</code> and <code translate="no">max_gram=3</code>, the string <code translate="no">&quot;AI database&quot;</code> is broken down as follows:</p></li>
+</ol>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" />
     <span>Build Ngram Index</span>
   </span>
 </p>
-<blockquote>
-<p><strong>Note</strong></p>
-<ul>
-<li><p>For a range <code translate="no">[min_gram, max_gram]</code>, Milvus generates all n-grams for every length between the two values (inclusive).<br>
-Example: with <code translate="no">[2,4]</code> and the word <code translate="no">&quot;text&quot;</code>, Milvus generates:</p>
-<ul>
-<li><strong>2-grams:</strong> <code translate="no">te</code>, <code translate="no">ex</code>, <code translate="no">xt</code></li>
-<li><strong>3-grams:</strong> <code translate="no">tex</code>, <code translate="no">ext</code></li>
-<li><strong>4-grams:</strong> <code translate="no">text</code></li>
-</ul></li>
-<li><p>N-gram decomposition is character-based and language-agnostic. For example, in Chinese, <code translate="no">&quot;向量数据库&quot;</code> with <code translate="no">min_gram = 2</code> is decomposed into: <code translate="no">&quot;向量&quot;</code>, <code translate="no">&quot;量数&quot;</code>, <code translate="no">&quot;数据&quot;</code>, <code translate="no">&quot;据库&quot;</code>.</p></li>
-<li><p>Spaces and punctuation are treated as characters during decomposition.</p></li>
-<li><p>Decomposition preserves original case, and matching is case-sensitive. For example, <code translate="no">&quot;Database&quot;</code> and <code translate="no">&quot;database&quot;</code> will generate different n-grams and require exact case matching during queries.</p></li>
-</ul>
-</blockquote></li>
+<pre><code translate="no">- **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
+
+- **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
+
+&lt;div class=&quot;alert note&quot;&gt;
+
+- For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive). For example, with `[2,4]` and the word `&quot;text&quot;`, Milvus generates:
+
+- **2-grams:** `te`, `ex`, `xt`
+
+- **3-grams:** `tex`, `ext`
+
+- **4-grams:** `text`
+
+- N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `&quot;向量数据库&quot;` with `min_gram = 2` is decomposed into: `&quot;向量&quot;`, `&quot;量数&quot;`, `&quot;数据&quot;`, `&quot;据库&quot;`.
+
+- Spaces and punctuation are treated as characters during decomposition.
+
+- Decomposition preserves original case, and matching is case-sensitive. For example, `&quot;Database&quot;` and `&quot;database&quot;` will generate different n-grams and require exact case matching during queries.
+
+&lt;/div&gt;
+</code></pre>
+<ol>
 <li><p><strong>Build an inverted index</strong>: An <strong>inverted index</strong> is created that maps each generated n-gram to a list of the document IDs containing it.</p>
 <p>For instance, if the 2-gram <code translate="no">&quot;AI&quot;</code> appears in documents with IDs 1, 5, 6, 8, and 9, the index records <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code>. This index is then used at query time to quickly narrow the search scope.</p></li>
 </ol>
@@ -114,9 +118,12 @@ Example: with <code translate="no">[2,4]</code> and the word <code translate="no
     <span>Build Ngram Index 2</span>
   </span>
 </p>
-<div class="alert note">
-<p>A wider <code translate="no">[min_gram, max_gram]</code> range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to <a href="/docs/mmap.md">Use mmap</a>.</p>
-</div>
+<pre><code translate="no">&lt;div class=&quot;alert note&quot;&gt;
+
+A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
+
+&lt;/div&gt;
+</code></pre>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Phase 2: Accelerate queries<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -321,10 +328,6 @@ client.create_index(
       </svg>
     </button></h2><p>Use the <code translate="no">drop_index()</code> method to remove an existing index from a collection.</p>
 <div class="alert note">
-<ul>
-<li><p>In <strong>v2.6.3</strong> or earlier, you must release the collection before dropping a scalar index.</p></li>
-<li><p>From <strong>v2.6.4</strong> or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.</p></li>
-</ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(
     collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
@@ -349,7 +352,7 @@ client.create_index(
     </button></h2><ul>
 <li><p><strong>Field types</strong>: Supported on <code translate="no">VARCHAR</code> and <code translate="no">JSON</code> fields. For JSON, provide both <code translate="no">params.json_path</code> and <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
 <li><p><strong>Unicode</strong>: NGRAM decomposition is character-based and language-agnostic and includes whitespace and punctuation.</p></li>
-<li><p><strong>Space–time trade-off</strong>: Wider gram ranges <code translate="no">[min_gram, max_gram]</code> produce more grams and larger indexes. If memory is tight, consider <code translate="no">mmap</code> mode for large posting lists. For more information, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></li>
+<li><p><strong>Space–time trade-off</strong>: Wider gram ranges <code translate="no">[min_gram, max_gram]</code> produce more grams and larger indexes. If memory is tight, consider <code translate="no">mmap</code> mode for large posting lists. For more information, refer to <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Use mmap</a>.</p></li>
 <li><p><strong>Immutability</strong>: <code translate="no">min_gram</code> and <code translate="no">max_gram</code> cannot be changed in place—rebuild the index to adjust them.</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">Best practices<button data-href="#Best-practices" class="anchor-icon" translate="no">
