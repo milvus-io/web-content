@@ -58,21 +58,13 @@ There are several special notes you should consider before using the merge featu
 
     - If you upsert with `partial_update` enabled, the default behavior is to **merge**. It means that the value of the dynamic field will merge with all non-schema-defined fields included in the request and their values.
 
-        For example, if the data included in the request is `{"author": "John", "year": 2020, "tags": ["fiction"]}`, the key-value pairs in the dynamic field of the target entity will become `{"author": "Jane", "year": 2020, "tags": ["fiction"], "genre": "fantasy"}` after the upsert.
+        For example, if the data included in the request is `{"author": "John", "year": 2020, "tags": ["fiction"]}`, the key-value pairs in the dynamic field of the target entity will become `{"author": "John", "year": 2020, "tags": ["fiction"], "genre": "fantasy"}` after the upsert.
 
 - **Upsert a JSON field.**
 
     Suppose that the example collection has a schema-defined JSON field named `extras`, and the key-value pairs in this JSON field of an entity are similar to `{"author": "John", "year": 2020, "tags": ["fiction"]}`.
 
-    When you upsert the `extras` field of an entity with modified JSON data, note that:
-
-    - If you upsert with `partial_update` disabled, the default behavior is to **override**. It means the value of the JSON field included in the request will override the original value of the target entity's JSON field. 
-
-        For example, if the data included in the request is `{extras: {"author": "Jane", "genre": "fantasy"}}`, the key-value pairs in the `extras` field of the target entity will be updated to `{"author": "Jane", "genre": "fantasy"}`.
-
-    - If you upsert with `partial_update` enabled, the default behavior is to **merge**. It means the value of the JSON field included in the request will merge with the original value of the target entity's JSON field.
-
-        For example, if the data included in the request is `{extras: {"author": "Jane", "genre": "fantasy"}}`, the key-value pairs in the `extras` field of the target entity will become `{"author": "Jane", "year": 2020, "tags": ["fiction"], "genre": "fantasy"}` after the udpate.
+    When you upsert the `extras` field of an entity with modified JSON data, note that the JSON field is treated as a whole, and you cannot update individual keys selectively. In other words, the JSON field **DOES NOT** support upsert in **merge** mode.
 
 ### Limits & Restrictions
 
