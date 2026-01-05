@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der <strong>GPU_IVF_PQ-Index</strong> baut auf dem <strong>IVF_PQ-Konzept</strong> auf, indem er Inverted File Clustering mit Product Quantization (PQ) kombiniert, das hochdimensionale Vektoren in kleinere Unterräume zerlegt und diese für eine effiziente Ähnlichkeitssuche quantisiert. GPU_IVF_PQ wurde ausschließlich für GPU-Umgebungen entwickelt und nutzt die Parallelverarbeitung, um Berechnungen zu beschleunigen und große Vektordaten effektiv zu verarbeiten. Weitere Informationen zu den grundlegenden Konzepten finden Sie unter <a href="/docs/de/ivf-pq.md">IVF_PQ</a>.</p>
+    </button></h1><p>Der <strong>GPU_IVF_PQ-Index</strong> baut auf dem <strong>IVF_PQ-Konzept</strong> auf, indem er Inverted File Clustering mit Product Quantization (PQ) kombiniert, das hochdimensionale Vektoren in kleinere Unterräume aufteilt und diese für eine effiziente Ähnlichkeitssuche quantisiert. GPU_IVF_PQ wurde ausschließlich für GPU-Umgebungen entwickelt und nutzt die Parallelverarbeitung, um Berechnungen zu beschleunigen und große Vektordaten effektiv zu verarbeiten. Weitere Informationen zu den grundlegenden Konzepten finden Sie unter <a href="/docs/de/ivf-pq.md">IVF_PQ</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,7 +122,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/gpu-ivf-pq.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/gpu-ivf-pq.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th></th>
@@ -150,8 +165,8 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>Die Anzahl der Bits, die verwendet werden, um den Index des Schwerpunkts jedes Untervektors in komprimierter Form darzustellen. Sie bestimmt direkt die Größe jedes Codebuchs. Jedes Codebuch enthält $2^{\textit{nbits}}$ Zentroide. Wenn <code translate="no">nbits</code> beispielsweise auf 8 gesetzt ist, wird jeder Untervektor durch einen 8-Bit-Index des Schwerpunkts dargestellt. Dies ermöglicht $2^8$ (256) mögliche Zentroide im Codebuch für diesen Untervektor.</p></td>
-     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 64]</p>
+     <td><p>Die Anzahl der Bits, die verwendet werden, um den Index des Schwerpunkts jedes Untervektors in komprimierter Form darzustellen. Sie bestimmt direkt die Größe jedes Codebuchs. Jedes Codebuch enthält <sup>2nbits</sup> Zentroide. Wenn zum Beispiel <code translate="no">nbits</code> auf 8 eingestellt ist, wird jeder Untervektor durch einen 8-Bit-Schwerpunktindex dargestellt. Dies ermöglicht<sup>28</sup> (256) mögliche Schwerpunkte im Codebuch für diesen Teilvektor.</p></td>
+     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 24]</p>
 <p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
      <td><p>Ein höherer Wert von <code translate="no">nbits</code> ermöglicht größere Codebücher, was zu genaueren Darstellungen der ursprünglichen Vektoren führen kann. Allerdings bedeutet dies auch, dass mehr Bits zum Speichern jedes Index verwendet werden, was zu einer geringeren Komprimierung führt. In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [1, 16].</p></td>
    </tr>
@@ -168,7 +183,22 @@ res = MilvusClient.search(
      <td><p>Die Einstellung <code translate="no">"true"</code> verbessert die Wiederauffindbarkeit durch Verfeinerung der Suchergebnisse, verbraucht aber mehr GPU-Speicher. Die Einstellung <code translate="no">"false"</code> spart GPU-Speicher.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/gpu-ivf-pq.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/gpu-ivf-pq.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th></th>

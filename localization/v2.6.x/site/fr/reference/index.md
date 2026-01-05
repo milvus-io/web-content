@@ -60,15 +60,60 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <div class="filter">
  <a href="#floating">Encastrements en virgule flottante</a> <a href="#binary">Encastrements binaires</a> <a href="#sparse">Encastrements épars</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indices pour les intégrations en virgule flottante</h3><p>Pour les encastrements en virgule flottante à 128 dimensions (vecteurs), l'espace de stockage qu'ils occupent est de 128 * la taille de la virgule flottante = 512 octets. Les <a href="/docs/fr/metric.md">mesures de distance</a> utilisées pour les enregistrements en virgule flottante sont la distance euclidienne (<code translate="no">L2</code>) et le produit intérieur (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indices pour les intégrations en virgule flottante<button data-href="#Indexes-for-floating-point-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour les encastrements en virgule flottante à 128 dimensions (vecteurs), l'espace de stockage qu'ils occupent est de 128 * la taille de la virgule flottante = 512 octets. Les <a href="/docs/fr/metric.md">mesures de distance</a> utilisées pour les enregistrements en virgule flottante sont la distance euclidienne (<code translate="no">L2</code>) et le produit intérieur (<code translate="no">IP</code>).</p>
 <p>Ces types d'index comprennent <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, et <code translate="no">SCANN</code> pour les recherches ANN basées sur l'unité centrale.</p>
 </div>
 <div class="filter-binary">
-<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Index pour les encastrements binaires</h3><p>Pour les encastrements binaires à 128 dimensions, l'espace de stockage qu'ils occupent est de 128 / 8 = 16 octets. Les mesures de distance utilisées pour les encastrements binaires sont <code translate="no">JACCARD</code> et <code translate="no">HAMMING</code>.</p>
+<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Index pour les encastrements binaires<button data-href="#Indexes-for-binary-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour les encastrements binaires à 128 dimensions, l'espace de stockage qu'ils occupent est de 128 / 8 = 16 octets. Les mesures de distance utilisées pour les encastrements binaires sont <code translate="no">JACCARD</code> et <code translate="no">HAMMING</code>.</p>
 <p>Ce type d'index comprend <code translate="no">BIN_FLAT</code> et <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Index pour les encastrements épars</h3><p>Les index pour les encastrements épars ne prennent en charge que les métriques <code translate="no">IP</code> et <code translate="no">BM25</code> (pour la recherche en texte intégral).</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Index pour les encastrements épars<button data-href="#Indexes-for-sparse-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Les index pour les encastrements épars ne prennent en charge que les métriques <code translate="no">IP</code> et <code translate="no">BM25</code> (pour la recherche en texte intégral).</p>
 <p>Type d'index pris en charge pour les encastrements épars : <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
 <p>À partir de la version 2.5.4 de Milvus, <code translate="no">SPARSE_WAND</code> est obsolète. Il est recommandé d'utiliser <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> par souci d'équivalence tout en maintenant la compatibilité. Pour plus d'informations, reportez-vous à <a href="/docs/fr/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
@@ -238,7 +283,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Pour les applications de recherche de similarités vectorielles qui exigent une précision parfaite et dépendent d'ensembles de données relativement petits (à l'échelle du million), l'index FLAT est un bon choix. FLAT ne compresse pas les vecteurs et est le seul index qui peut garantir des résultats de recherche exacts. Les résultats de FLAT peuvent également servir de point de comparaison pour les résultats produits par d'autres index dont le taux de rappel est inférieur à 100 %.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT<button data-href="#FLAT" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour les applications de recherche de similarités vectorielles qui exigent une précision parfaite et dépendent d'ensembles de données relativement petits (à l'échelle du million), l'index FLAT est un bon choix. FLAT ne compresse pas les vecteurs et est le seul index qui peut garantir des résultats de recherche exacts. Les résultats de FLAT peuvent également servir de point de comparaison pour les résultats produits par d'autres index dont le taux de rappel est inférieur à 100 %.</p>
 <p>FLAT est précis parce qu'il adopte une approche exhaustive de la recherche, ce qui signifie que pour chaque requête, l'entrée cible est comparée à tous les vecteurs d'un ensemble de données. Cela fait de FLAT l'index le plus lent de notre liste, et il est mal adapté à l'interrogation de données vectorielles massives. Aucun paramètre n'est requis pour l'index FLAT dans Milvus, et son utilisation ne nécessite pas de construction d'index supplémentaire.</p>
 <ul>
 <li><p>Paramètres de recherche</p>
@@ -252,7 +312,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT divise les données vectorielles en <code translate="no">nlist</code> unités de grappes, puis compare les distances entre le vecteur d'entrée cible et le centre de chaque grappe. En fonction du nombre de grappes que le système est configuré pour interroger (<code translate="no">nprobe</code>), les résultats de la recherche de similarité sont renvoyés sur la base des comparaisons entre l'entrée cible et les vecteurs dans la ou les grappes les plus similaires uniquement - ce qui réduit considérablement le temps d'interrogation.</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT<button data-href="#IVFFLAT" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF_FLAT divise les données vectorielles en <code translate="no">nlist</code> unités de grappes, puis compare les distances entre le vecteur d'entrée cible et le centre de chaque grappe. En fonction du nombre de grappes que le système est configuré pour interroger (<code translate="no">nprobe</code>), les résultats de la recherche de similarité sont renvoyés sur la base des comparaisons entre l'entrée cible et les vecteurs dans la ou les grappes les plus similaires uniquement - ce qui réduit considérablement le temps d'interrogation.</p>
 <p>En ajustant <code translate="no">nprobe</code>, un équilibre idéal entre la précision et la vitesse peut être trouvé pour un scénario donné. Les résultats du <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">test de performance IVF_FLAT</a> montrent que le temps d'interrogation augmente fortement à mesure que le nombre de vecteurs d'entrée cibles (<code translate="no">nq</code>) et le nombre de grappes à rechercher (<code translate="no">nprobe</code>) augmentent.</p>
 <p>IVF_FLAT est l'index IVF le plus basique, et les données encodées stockées dans chaque unité sont cohérentes avec les données originales.</p>
 <ul>
@@ -290,7 +365,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT n'effectue aucune compression, de sorte que les fichiers d'index qu'il produit sont à peu près de la même taille que les données vectorielles brutes non indexées d'origine. Par exemple, si l'ensemble de données SIFT 1B d'origine pèse 476 Go, les fichiers d'index IVF_FLAT seront légèrement plus petits (~470 Go). Le chargement de tous les fichiers d'index en mémoire consommera 470 Go d'espace de stockage.</p>
+<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8<button data-href="#IVFSQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF_FLAT n'effectue aucune compression, de sorte que les fichiers d'index qu'il produit sont à peu près de la même taille que les données vectorielles brutes non indexées d'origine. Par exemple, si l'ensemble de données SIFT 1B d'origine pèse 476 Go, les fichiers d'index IVF_FLAT seront légèrement plus petits (~470 Go). Le chargement de tous les fichiers d'index en mémoire consommera 470 Go d'espace de stockage.</p>
 <p>Lorsque les ressources disque, CPU ou mémoire GPU sont limitées, IVF_SQ8 est une meilleure option qu'IVF_FLAT. Ce type d'index peut convertir chaque FLOAT (4 octets) en UINT8 (1 octet) en effectuant une quantification scalaire (SQ). Cela permet de réduire la consommation de mémoire du disque, du CPU et du GPU de 70 à 75 %. Pour l'ensemble de données 1B SIFT, les fichiers d'index IVF_SQ8 ne nécessitent que 140 Go de stockage.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
@@ -327,7 +417,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace de faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace à faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
 <p>IVF_PQ effectue le regroupement de l'index IVF avant de quantifier le produit des vecteurs. Son fichier d'index est encore plus petit que IVF_SQ8, mais il entraîne également une perte de précision lors de la recherche de vecteurs.</p>
 <div class="alert note">
 <p>Les paramètres de construction de l'index et les paramètres de recherche varient en fonction de la distribution Milvus. Sélectionnez d'abord votre distribution Milvus.</p>
@@ -341,7 +446,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tbody>
 <tr><td><code translate="no">nlist</code></td><td>Nombre d'unités de cluster</td><td>[1, 65536]</td></tr>
 <tr><td><code translate="no">m</code></td><td>Nombre de facteurs de quantification du produit</td><td><code translate="no">dim mod m == 0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Facultatif] Nombre de bits dans lesquels chaque vecteur de faible dimension est stocké.</td><td>[1, 64] (8 par défaut)</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[Facultatif] Nombre de bits dans lesquels chaque vecteur de faible dimension est stocké.</td><td>[1, 24] (8 par défaut)</td></tr>
 </tbody>
 </table>
 </li>
@@ -369,7 +474,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul></li>
 </ul>
-<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN (Scalable Nearest Neighbors) est similaire à IVF_PQ en termes de regroupement de vecteurs et de quantification de produits. Ce qui les différencie, ce sont les détails de la mise en œuvre de la quantification du produit et l'utilisation de SIMD (Single-Instruction / Multi-data) pour un calcul efficace.</p>
+<h3 id="SCANN" class="common-anchor-header">SCANN<button data-href="#SCANN" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ScaNN (Scalable Nearest Neighbors) est similaire à IVF_PQ en termes de regroupement de vecteurs et de quantification de produits. Ce qui les différencie, ce sont les détails de la mise en œuvre de la quantification du produit et l'utilisation de SIMD (Single-Instruction / Multi-data) pour un calcul efficace.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
 <table>
@@ -410,7 +530,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) est un algorithme d'indexation basé sur les graphes. Il construit une structure de navigation multicouche pour une image selon certaines règles. Dans cette structure, les couches supérieures sont plus clairsemées et les distances entre les nœuds sont plus grandes ; les couches inférieures sont plus denses et les distances entre les nœuds sont plus étroites. La recherche commence par la couche la plus haute, trouve le nœud le plus proche de la cible dans cette couche, puis passe à la couche suivante pour commencer une nouvelle recherche. Après plusieurs itérations, elle peut rapidement s'approcher de la position de la cible.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW (Hierarchical Navigable Small World Graph) est un algorithme d'indexation basé sur les graphes. Il construit une structure de navigation multicouche pour une image selon certaines règles. Dans cette structure, les couches supérieures sont plus clairsemées et les distances entre les nœuds sont plus grandes ; les couches inférieures sont plus denses et les distances entre les nœuds sont plus étroites. La recherche commence par la couche la plus haute, trouve le nœud le plus proche de la cible dans cette couche, puis passe à la couche suivante pour commencer une nouvelle recherche. Après plusieurs itérations, elle peut rapidement s'approcher de la position de la cible.</p>
 <p>Afin d'améliorer les performances, HNSW limite le degré maximal des nœuds de chaque couche du graphe à <code translate="no">M</code>. En outre, vous pouvez utiliser <code translate="no">efConstruction</code> (lors de la construction de l'index) ou <code translate="no">ef</code> (lors de la recherche des cibles) pour spécifier une plage de recherche.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
@@ -435,7 +570,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La quantification scalaire (SQ) est une technique utilisée pour diviser les données en virgule flottante en un ensemble fini de valeurs basées sur leur magnitude. Par exemple, <strong>SQ6</strong> représente la quantification en (2^6 = 64) valeurs discrètes, où chaque nombre à virgule flottante est codé sur 6 bits. De même, <strong>SQ8</strong> quantifie les données en (2^8 = 256) valeurs discrètes, chaque nombre à virgule flottante étant représenté par 8 bits. Cette quantification réduit l'empreinte mémoire tout en préservant la structure essentielle des données pour un traitement efficace.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ<button data-href="#HNSWSQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La quantification scalaire (SQ) est une technique utilisée pour diviser des données en virgule flottante en un ensemble fini de valeurs basées sur leur magnitude. Par exemple, <strong>SQ6</strong> représente la quantification en (2^6 = 64) valeurs discrètes, où chaque nombre à virgule flottante est codé sur 6 bits. De même, <strong>SQ8</strong> quantifie les données en (2^8 = 256) valeurs discrètes, chaque nombre à virgule flottante étant représenté par 8 bits. Cette quantification réduit l'empreinte mémoire tout en préservant la structure essentielle des données pour un traitement efficace.</p>
 <p>Combiné à SQ, HNSW_SQ offre un compromis contrôlable entre la taille de l'index et la précision, tout en maintenant des performances élevées en termes de nombre de requêtes par seconde (QPS). Par rapport à la méthode HNSW standard, il en résulte une augmentation modeste du temps de construction de l'index.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
@@ -458,13 +608,28 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Plage de valeurs</th><th>Valeur par défaut</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Paramètre contrôlant le compromis temps de recherche/précision. Une valeur plus élevée ( <code translate="no">ef</code> ) permet une recherche plus précise mais plus lente.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Aucun</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Paramètre contrôlant le compromis temps de recherche/précision. Une valeur plus élevée ( <code translate="no">ef</code> ) permet une recherche plus précise mais plus lente.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Aucune</td></tr>
 <tr><td><code translate="no">refine_k</code></td><td>Le facteur d'agrandissement de refine par rapport à <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>L'idée de base de PQ est de diviser le vecteur en <code translate="no">m</code> sous-vecteurs, dont chacun trouvera <em>2^{nbits}</em> centroïdes sur la base de kmeans, et chaque sous-vecteur sélectionnera le centroïde le plus proche comme son sous-vecteur approximatif. Nous enregistrons ensuite tous les centriodes, de sorte que chaque sous-vecteur peut être codé sous la forme <code translate="no">nbits</code>, et un vecteur flottant de longueur <code translate="no">dim</code> peut être codé sous la forme de <em>m ⋅ nbits</em> bits.</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ<button data-href="#HNSWPQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'idée de base de PQ est de diviser le vecteur en <code translate="no">m</code> sous-vecteurs, dont chacun trouvera <em>2^{nbits}</em> centroïdes sur la base de kmeans, et chaque sous-vecteur sélectionnera le centroïde le plus proche comme son sous-vecteur approximatif. Nous enregistrons ensuite tous les centriodes, de sorte que chaque sous-vecteur peut être codé sous la forme <code translate="no">nbits</code>, et un vecteur flottant de longueur <code translate="no">dim</code> peut être codé sous la forme de <em>m ⋅ nbits</em> bits.</p>
 <p>Combiné avec PQ, HNSW_PQ offre un compromis contrôlable entre la taille de l'index et la précision, mais il a une valeur QPS plus faible et un taux de rappel plus élevé que HNSW_SQ pour le même taux de compression. Par rapport à HNSW_SQ, la construction de l'index prend plus de temps.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
@@ -494,7 +659,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </table>
 </li>
 </ul>
-<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ est similaire à PQ et divise également le vecteur en groupes <code translate="no">m</code>. Chaque sous-vecteur sera codé comme <code translate="no">nbits</code>. Après avoir effectué une quantification pq, il calcule le résidu entre le vecteur et le vecteur quantifié pq, et applique la quantification pq au vecteur résiduel. Un total de <code translate="no">nrq</code> quantifications pq complètes sera effectué, de sorte qu'un vecteur flottant de longueur <code translate="no">dim</code> sera codé comme <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ<button data-href="#HNSWPRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PRQ est similaire à PQ et divise également le vecteur en groupes <code translate="no">m</code>. Chaque sous-vecteur sera codé comme <code translate="no">nbits</code>. Après avoir effectué une quantification pq, il calcule le résidu entre le vecteur et le vecteur quantifié pq, et applique une quantification pq au vecteur résiduel. Un total de <code translate="no">nrq</code> quantifications pq complètes sera effectué, de sorte qu'un vecteur flottant de longueur <code translate="no">dim</code> sera codé comme <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
 <p>Combiné à un quantificateur résiduel de produit (PRQ), le HNSW_PRQ offre un compromis contrôlable encore plus élevé entre la taille de l'index et la précision. Il a une valeur QPS presque équivalente et un taux de rappel plus élevé que HNSW_PQ pour le même taux de compression. Par rapport à HNSW_PQ, le temps de construction de l'index peut être multiplié par plusieurs fois.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
@@ -527,7 +707,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </ul>
 </div>
 <div class="filter-binary">
-<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>Cet indice est exactement le même que FLAT, sauf qu'il ne peut être utilisé que pour les encastrements binaires.</p>
+<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT<button data-href="#BINFLAT" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Cet indice est exactement le même que FLAT, sauf qu'il ne peut être utilisé que pour les encastrements binaires.</p>
 <p>Pour les applications de recherche de similarité vectorielle qui exigent une précision parfaite et dépendent d'ensembles de données relativement petits (à l'échelle du million), l'indice BIN_FLAT est un bon choix. BIN_FLAT ne compresse pas les vecteurs et est le seul index qui peut garantir des résultats de recherche exacts. Les résultats de BIN_FLAT peuvent également être utilisés comme point de comparaison pour les résultats produits par d'autres index dont le taux de rappel est inférieur à 100 %.</p>
 <p>BIN_FLAT est précis parce qu'il adopte une approche exhaustive de la recherche, ce qui signifie que pour chaque requête, l'entrée cible est comparée aux vecteurs d'un ensemble de données. Cela fait de BIN_FLAT l'index le plus lent de notre liste, et il est mal adapté à l'interrogation de données vectorielles massives. Il n'y a pas de paramètres pour l'index BIN_FLAT dans Milvus, et son utilisation ne nécessite pas d'apprentissage des données ni de stockage supplémentaire.</p>
 <ul>
@@ -542,7 +737,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </table>
 </li>
 </ul>
-<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>Cet index est exactement le même que IVF_FLAT, sauf qu'il ne peut être utilisé que pour les encastrements binaires.</p>
+<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT<button data-href="#BINIVFFLAT" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Cet index est exactement le même que IVF_FLAT, sauf qu'il ne peut être utilisé que pour les encastrements binaires.</p>
 <p>BIN_IVF_FLAT divise les données vectorielles en <code translate="no">nlist</code> unités de grappes, puis compare les distances entre le vecteur d'entrée cible et le centre de chaque grappe. En fonction du nombre de grappes que le système est configuré pour interroger (<code translate="no">nprobe</code>), les résultats de la recherche de similarité sont renvoyés sur la base des comparaisons entre l'entrée cible et les vecteurs dans la ou les grappes les plus similaires uniquement - ce qui réduit considérablement le temps d'interrogation.</p>
 <p>En ajustant <code translate="no">nprobe</code>, un équilibre idéal entre la précision et la vitesse peut être trouvé pour un scénario donné. Le temps d'interrogation augmente fortement à mesure que le nombre de vecteurs d'entrée cibles (<code translate="no">nq</code>) et le nombre de grappes à rechercher (<code translate="no">nprobe</code>) augmentent.</p>
 <p>BIN_IVF_FLAT est l'index BIN_IVF le plus basique, et les données encodées stockées dans chaque unité sont cohérentes avec les données originales.</p>
@@ -583,7 +793,22 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </ul>
 </div>
 <div class="filter-sparse">
-<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">INDEX_INVERSÉ_SPARSE</h3><p>Chaque dimension conserve une liste de vecteurs dont la valeur n'est pas nulle à cette dimension. Pendant la recherche, Milvus parcourt chaque dimension du vecteur de la requête et calcule les scores des vecteurs qui ont des valeurs non nulles dans ces dimensions.</p>
+<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">INDEX_INVERSÉ_SPARSE<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Chaque dimension conserve une liste de vecteurs dont la valeur n'est pas nulle à cette dimension. Pendant la recherche, Milvus parcourt chaque dimension du vecteur de la requête et calcule les scores des vecteurs qui ont des valeurs non nulles dans ces dimensions.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
 <table>
@@ -606,7 +831,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Plage de valeurs</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>La proportion de petites valeurs vectorielles qui sont exclues pendant le processus de recherche. Cette option permet d'affiner le processus de recherche en spécifiant le ratio des plus petites valeurs du vecteur de la requête à ignorer. Elle permet d'équilibrer la précision de la recherche et les performances. Plus la valeur définie pour <code translate="no">drop_ratio_search</code> est petite, moins ces petites valeurs contribuent au résultat final. En ignorant certaines petites valeurs, il est possible d'améliorer les performances de la recherche avec un impact minimal sur la précision.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>La proportion de petites valeurs vectorielles qui sont exclues pendant le processus de recherche. Cette option permet d'affiner le processus de recherche en spécifiant le ratio des plus petites valeurs du vecteur de la requête à ignorer. Elle permet d'équilibrer la précision de la recherche et les performances. Plus la valeur définie pour <code translate="no">drop_ratio_search</code> est petite, moins ces petites valeurs contribuent au résultat final. En ignorant certaines petites valeurs, les performances de la recherche peuvent être améliorées avec un impact minimal sur la précision.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

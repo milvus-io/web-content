@@ -60,7 +60,7 @@ index_params.add_index(
 <ul>
 <li><code translate="no">m</code>:ベクトルを分割するサブベクトルの数。</li>
 </ul>
-<p><code translate="no">GPU_IVF_PQ</code> インデックスで使用可能な構築パラメータについては、<a href="/docs/ja/gpu-ivf-pq.md#Index-building-params">インデックス構築パラメータを</a>参照してください。</p></li>
+<p><code translate="no">GPU_IVF_PQ</code> インデックスで使用可能な構築パラメータの詳細については、<a href="/docs/ja/gpu-ivf-pq.md#Index-building-params">インデックス構築パラメータを</a>参照してください。</p></li>
 </ul>
 <p>インデックス・パラメータを構成したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドでインデックス・パラメータを渡してインデックスを作成できます。詳細は、<a href="/docs/ja/create-collection.md">コレクションの作成</a> を参照してください。</p>
 <h2 id="Search-on-index" class="common-anchor-header">インデックスでの検索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -117,7 +117,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行する際に使用するパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/gpu-ivf-pq.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/gpu-ivf-pq.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
@@ -145,8 +160,8 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>各サブベクトルの重心インデックスを圧縮形式で表現するためのビット数。各コードブックは $2^{textit{nbits}}$ 個のセントロイドを含む。例えば、<code translate="no">nbits</code> を8に設定すると、各サブベクトルは8ビットのセントロイドのインデックスで表現される。これにより、そのサブベクトルのコードブックには$2^8$ (256)個のセントロイドが存在することになる。</p></td>
-     <td><p><strong>タイプ</strong>整数<strong>：</strong>[1, 64]</p>
+     <td><p>各サブベクトルの重心インデックスを圧縮形式で表現するためのビット数。各コードブックは2<sup>n</sup>ビットのセントロイドを含む。例えば、<code translate="no">nbits</code> が 8 に設定された場合、各サブベクトルは 8 ビットのセントロイドのインデックスで表現される。これにより、そのサブベクタのコードブックには<sup>28個</sup>(256個)のセントロイドの可能性がある。</p></td>
+     <td><p><strong>タイプ</strong>整数<strong>：</strong>[1, 24]</p>
 <p><strong>デフォルト値</strong>：<code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> の値を大きくすると、コードブックが大きくなり、元のベクトルをより正確に表現できる可能性がある。ほとんどの場合、この範囲内の値を設定することを推奨します：[1, 16].</p></td>
    </tr>
@@ -163,7 +178,22 @@ res = MilvusClient.search(
      <td><p><code translate="no">"true"</code> に設定すると、検索結果を絞り込むことで再現性を高めるが、より多くのGPUメモリを使用する。<code translate="no">"false"</code> に設定するとGPUメモリを節約します。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメーター</h3><p>次の表は、<a href="/docs/ja/gpu-ivf-pq.md#Search-on-index">インデックスで検索する</a>ときに<code translate="no">search_params.params</code> で設定できるパラメーターの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメーター<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次の表は、<a href="/docs/ja/gpu-ivf-pq.md#Search-on-index">インデックスで検索する</a>ときに<code translate="no">search_params.params</code> で設定できるパラメー タの一覧です。</p>
 <table>
    <tr>
      <th></th>

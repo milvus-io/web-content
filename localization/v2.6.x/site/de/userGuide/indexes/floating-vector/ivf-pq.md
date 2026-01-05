@@ -40,7 +40,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>IVF_PQ</strong> steht für <strong>Inverted File with Product Quantization (Invertierte Datei mit Produktquantisierung</strong>), ein hybrider Ansatz, der Indizierung und Komprimierung für effiziente Vektorsuche und -abfrage kombiniert. Dabei werden zwei Kernkomponenten genutzt: <strong>Invertierte Datei (IVF)</strong> und <strong>Produktquantisierung (PQ)</strong>.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF ist wie die Erstellung eines Index in einem Buch. Anstatt jede Seite (oder in unserem Fall jeden Vektor) zu durchsuchen, suchen Sie nach bestimmten Schlüsselwörtern (Clustern) im Index, um die relevanten Seiten (Vektoren) schnell zu finden. In unserem Szenario werden die Vektoren in Clustern gruppiert, und der Algorithmus sucht in einigen wenigen Clustern, die nahe am Abfragevektor liegen.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF ist wie die Erstellung eines Index in einem Buch. Anstatt jede Seite (oder in unserem Fall jeden Vektor) zu durchsuchen, suchen Sie nach bestimmten Schlüsselwörtern (Clustern) im Index, um die relevanten Seiten (Vektoren) schnell zu finden. In unserem Szenario werden die Vektoren in Clustern gruppiert, und der Algorithmus sucht in einigen Clustern, die dem Abfragevektor nahe kommen.</p>
 <p>Und so funktioniert's:</p>
 <ol>
 <li><p><strong>Clustering:</strong> Ihr Vektordatensatz wird mithilfe eines Clustering-Algorithmus wie k-means in eine bestimmte Anzahl von Clustern unterteilt. Jeder Cluster hat einen Zentroid (einen repräsentativen Vektor für den Cluster).</p></li>
@@ -49,7 +64,22 @@ summary: >-
 <li><p><strong>Suche:</strong> Bei der Suche nach den nächsten Nachbarn vergleicht der Suchalgorithmus Ihren Abfragevektor mit den Clusterschwerpunkten und wählt den/die vielversprechendsten Cluster aus. Die Suche wird dann auf die Vektoren innerhalb dieser ausgewählten Cluster eingegrenzt.</p></li>
 </ol>
 <p>Weitere Informationen zu den technischen Details finden Sie unter <a href="/docs/de/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p>Die<strong>Produktquantisierung (PQ)</strong> ist eine Komprimierungsmethode für hochdimensionale Vektoren, die den Speicherbedarf erheblich reduziert und gleichzeitig schnelle Ähnlichkeitssuchoperationen ermöglicht.</p>
+<h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die<strong>Produktquantisierung (PQ)</strong> ist eine Komprimierungsmethode für hochdimensionale Vektoren, die den Speicherbedarf erheblich reduziert und gleichzeitig schnelle Ähnlichkeitssuchoperationen ermöglicht.</p>
 <p>Der PQ-Prozess umfasst die folgenden Hauptschritte:</p>
 <p>
   
@@ -57,13 +87,13 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
 <ol>
 <li><p><strong>Dekomposition der Dimensionen</strong>: Der Algorithmus beginnt mit der Zerlegung jedes hochdimensionalen Vektors in <code translate="no">m</code> gleich große Untervektoren. Durch diese Zerlegung wird der ursprünglich D-dimensionale Raum in <code translate="no">m</code> disjunkte Unterräume transformiert, wobei jeder Unterraum <em>D/m</em> Dimensionen enthält. Der Parameter <code translate="no">m</code> steuert die Granularität der Zerlegung und beeinflusst direkt die Kompressionsrate.</p></li>
-<li><p><strong>Erzeugung eines Unterraum-Codebuchs</strong>: Innerhalb jedes Unterraums wendet der Algorithmus das <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means-Clustering</a> an, um eine Reihe repräsentativer Vektoren (Zentroide) zu lernen. Diese Zentroide bilden zusammen ein Codebuch für diesen Unterraum. Die Anzahl der Zentroide in jedem Codebuch wird durch den Parameter <code translate="no">nbits</code> bestimmt, wobei jedes Codebuch <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits Zentroide enthält. Wenn beispielsweise</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code> verwendet wird, enthält jedes Codebuch 256 Zentroide. Jedem Zentroid wird ein eindeutiger Index mit <code translate="no">nbits</code> Bits zugewiesen.</p></li>
+<li><p><strong>Erzeugung eines Unterraum-Codebuchs</strong>: In jedem Unterraum wendet der Algorithmus das <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means-Clustering</a> an, um einen Satz repräsentativer Vektoren (Zentroide) zu lernen. Diese Zentroide bilden zusammen ein Codebuch für diesen Unterraum. Die Anzahl der Zentroide in jedem Codebuch wird durch den Parameter <code translate="no">nbits</code> bestimmt, wobei jedes Codebuch <sup>2nbits</sup> Zentroide enthält. Wenn beispielsweise <code translate="no">nbits = 8</code> verwendet wird, enthält jedes Codebuch 256 Zentroide. Jedem Zentroid wird ein eindeutiger Index mit <code translate="no">nbits</code> Bits zugewiesen.</p></li>
 <li><p><strong>Vektorquantisierung</strong>: Für jeden Untervektor des ursprünglichen Vektors identifiziert PQ den nächstgelegenen Schwerpunkt innerhalb des entsprechenden Unterraums unter Verwendung eines bestimmten metrischen Typs. Durch diesen Prozess wird jeder Untervektor effektiv auf den nächstgelegenen repräsentativen Vektor im Codebuch abgebildet. Anstatt die vollständigen Koordinaten des Untervektors zu speichern, wird nur der Index des übereinstimmenden Schwerpunkts beibehalten.</p></li>
 <li><p><strong>Komprimierte Darstellung</strong>: Die endgültige komprimierte Darstellung besteht aus <code translate="no">m</code> Indizes, einem aus jedem Unterraum, die zusammen als <strong>PQ-Codes</strong> bezeichnet werden. Diese Kodierung reduziert den Speicherbedarf von <em>D × 32</em> Bits (unter der Annahme von 32-Bit-Gleitkommazahlen) auf <em>m</em> × <em>n Bits</em>, wodurch eine erhebliche Komprimierung erreicht wird, während die Fähigkeit zur Annäherung der Vektorabstände erhalten bleibt.</p></li>
 </ol>
 <p>Weitere Einzelheiten zur Parametereinstellung und -optimierung finden Sie unter <a href="/docs/de/ivf-pq.md#Index-params">Indexparameter</a>.</p>
 <div class="alert note">
-<p>Betrachten wir einen Vektor mit <em>D = 128</em> Dimensionen unter Verwendung von 32-Bit-Gleitkommazahlen. Mit den PQ-Parametern <em>m = 64</em> (Untervektoren) und <em>nbits = 8</em> (also <em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>= 256</em> Zentroide pro Unterraum) können wir die Speicheranforderungen vergleichen:</p>
+<p>Betrachten wir einen Vektor mit <em>D = 128</em> Dimensionen unter Verwendung von 32-Bit-Gleitkommazahlen. Mit den PQ-Parametern <em>m = 64</em> (Untervektoren) und <em>nbits = 8</em> (also <em>k =</em><sup>28</sup> <em>= 256</em> Zentroide pro Unterraum) können wir die Speicheranforderungen vergleichen:</p>
 <ul>
 <li><p>Originalvektor: 128 Dimensionen × 32 Bits = 4.096 Bits</p></li>
 <li><p>PQ-komprimierter Vektor: 64 Untervektoren × 8 Bits = 512 Bits</p></li>
@@ -76,8 +106,8 @@ summary: >-
 <li><p><strong>Vorverarbeitung der Abfrage</strong></p>
 <ul>
 <li><p>Der Abfragevektor wird in <code translate="no">m</code> Untervektoren zerlegt, die der ursprünglichen PQ-Zerlegungsstruktur entsprechen.</p></li>
-<li><p>Für jeden Untervektor der Abfrage und sein entsprechendes Codebuch (das <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits Zentren enthält) werden die Abstände zu allen Zentren berechnet und gespeichert.</span></span></span></span></span></span></span></span></span> </p></li>
-<li><p>Dies erzeugt <code translate="no">m</code> Nachschlagetabellen, wobei jede Tabelle <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits Abstände enthält.</span></span></span></span></span></span></span></span></span> </p></li>
+<li><p>Für jeden Untervektor der Abfrage und sein entsprechendes Codebuch (das <sup>2nbits-Zentren</sup> enthält) werden die Abstände zu allen Zentren berechnet und gespeichert.</p></li>
+<li><p>Dies erzeugt <code translate="no">m</code> Nachschlagetabellen, wobei jede Tabelle <sup>2nbits</sup> Abstände enthält.</p></li>
 </ul></li>
 <li><p><strong>Annäherung der Abstände</strong></p>
 <p>Für jeden Datenbankvektor, der durch PQ-Codes dargestellt wird, wird sein ungefährer Abstand zum Abfragevektor wie folgt berechnet:</p>
@@ -90,12 +120,27 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
    </span> <span class="img-wrapper"> <span>Ivf Pq 2</span> </span></p>
-<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>Der Index <strong>IVF_PQ</strong> kombiniert die Stärken von <strong>IVF</strong> und <strong>PQ</strong>, um die Suche zu beschleunigen. Das Verfahren funktioniert in zwei Schritten:</p>
+<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ<button data-href="#IVF-+-PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Der Index <strong>IVF_PQ</strong> kombiniert die Stärken von <strong>IVF</strong> und <strong>PQ</strong>, um die Suche zu beschleunigen. Das Verfahren funktioniert in zwei Schritten:</p>
 <ol>
 <li><p><strong>Grobfilterung mit IVF</strong>: IVF unterteilt den Vektorraum in Cluster, wodurch der Suchumfang reduziert wird. Anstatt den gesamten Datensatz auszuwerten, konzentriert sich der Algorithmus nur auf die Cluster, die dem Abfragevektor am nächsten liegen.</p></li>
 <li><p><strong>Feinkörniger Vergleich mit PQ</strong>: Innerhalb der ausgewählten Cluster verwendet PQ komprimierte und quantisierte Vektordarstellungen, um ungefähre Abstände schnell zu berechnen.</p></li>
 </ol>
-<p>Die Leistung des <strong>IVF_PQ-Index</strong> wird erheblich von den Parametern beeinflusst, die sowohl den IVF- als auch den PQ-Algorithmus steuern. Die Abstimmung dieser Parameter ist entscheidend, um optimale Ergebnisse für einen bestimmten Datensatz und eine bestimmte Anwendung zu erzielen. Ausführlichere Informationen zu diesen Parametern und deren Einstellung finden Sie unter <a href="/docs/de/ivf-pq.md#Index-params">Indexparameter</a>.</p>
+<p>Die Leistung des <strong>IVF_PQ-Index</strong> wird erheblich von den Parametern beeinflusst, die sowohl den IVF- als auch den PQ-Algorithmus steuern. Die Abstimmung dieser Parameter ist entscheidend, um optimale Ergebnisse für einen bestimmten Datensatz und eine bestimmte Anwendung zu erzielen. Ausführlichere Informationen zu diesen Parametern und zu ihrer Einstellung finden Sie unter <a href="/docs/de/ivf-pq.md#Index-params">Indexparameter</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +237,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/ivf-pq.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/ivf-pq.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th></th>
@@ -217,12 +277,27 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>Die Anzahl der Bits, die verwendet werden, um den Index des Schwerpunkts jedes Untervektors in komprimierter Form darzustellen. Sie bestimmt direkt die Größe der einzelnen Codebücher. Jedes Codebuch enthält $2^{\textit{nbits}}$ Zentroide. Wenn <code translate="no">nbits</code> beispielsweise auf 8 gesetzt ist, wird jeder Untervektor durch einen 8-Bit-Index des Schwerpunkts dargestellt. Dies ermöglicht $2^8$ (256) mögliche Zentroide im Codebuch für diesen Untervektor.</p></td>
-     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 64]</p><p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
+     <td><p>Die Anzahl der Bits, die verwendet werden, um den Index des Schwerpunkts jedes Untervektors in komprimierter Form darzustellen. Sie bestimmt direkt die Größe der einzelnen Codebücher. Jedes Codebuch enthält <sup>2nbits</sup> Zentroide. Wenn zum Beispiel <code translate="no">nbits</code> auf 8 eingestellt ist, wird jeder Untervektor durch einen 8-Bit-Schwerpunktindex dargestellt. Dies ermöglicht<sup>28</sup> (256) mögliche Schwerpunkte im Codebuch für diesen Teilvektor.</p></td>
+     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 24]</p><p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
      <td><p>Ein höherer Wert von <code translate="no">nbits</code> ermöglicht größere Codebücher, was zu genaueren Darstellungen der ursprünglichen Vektoren führen kann. Allerdings bedeutet dies auch, dass mehr Bits zum Speichern jedes Index verwendet werden, was zu einer geringeren Komprimierung führt. In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/ivf-pq.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/ivf-pq.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th></th>

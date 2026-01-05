@@ -41,9 +41,39 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_SQ menggabungkan dua teknik pengindeksan: <strong>HNSW</strong> untuk navigasi berbasis grafik yang cepat dan <strong>SQ</strong> untuk kompresi vektor yang efisien.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW membangun grafik multi-layer di mana setiap node berhubungan dengan sebuah vektor dalam kumpulan data. Dalam grafik ini, node terhubung berdasarkan kesamaan mereka, memungkinkan penjelajahan yang cepat melalui ruang data. Struktur hirarkis memungkinkan algoritme pencarian untuk mempersempit kandidat tetangga, sehingga secara signifikan mempercepat proses pencarian dalam ruang dimensi tinggi.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW membangun grafik multi-layer di mana setiap node berhubungan dengan sebuah vektor dalam kumpulan data. Dalam grafik ini, node terhubung berdasarkan kesamaan mereka, memungkinkan penjelajahan yang cepat melalui ruang data. Struktur hirarkis memungkinkan algoritme pencarian untuk mempersempit kandidat tetangga, sehingga secara signifikan mempercepat proses pencarian dalam ruang dimensi tinggi.</p>
 <p>Untuk informasi lebih lanjut, lihat <a href="/docs/id/hnsw.md">HNSW</a>.</p>
-<h3 id="SQ" class="common-anchor-header">SQ</h3><p>SQ adalah metode untuk mengompresi vektor dengan merepresentasikannya dengan bit yang lebih sedikit. Sebagai contoh:</p>
+<h3 id="SQ" class="common-anchor-header">SQ<button data-href="#SQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>SQ adalah metode untuk mengompresi vektor dengan merepresentasikannya dengan bit yang lebih sedikit. Sebagai contoh:</p>
 <ul>
 <li><p><strong>SQ8</strong> menggunakan 8 bit, memetakan nilai ke dalam 256 level.  Untuk informasi lebih lanjut, lihat <a href="/docs/id/ivf-sq8.md#SQ8">IVF_SQ8</a>.</p></li>
 <li><p><strong>SQ6</strong> menggunakan 6 bit untuk merepresentasikan setiap nilai floating-point, sehingga menghasilkan 64 level diskrit.</p></li>
@@ -53,7 +83,52 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw-sq.png" alt="Hnsw Sq" class="doc-image" id="hnsw-sq" />
    </span> <span class="img-wrapper"> <span>Hnsw Sq</span> </span></p>
 <p>Pengurangan presisi ini secara dramatis mengurangi jejak memori dan mempercepat komputasi sambil tetap mempertahankan struktur data yang penting.</p>
-<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ menggabungkan kekuatan HNSW dan SQ untuk memungkinkan pencarian tetangga terdekat yang efisien. Berikut cara kerja prosesnya:</p>
+<h3 id="SQ4U--Milvus-268+" class="common-anchor-header">SQ4U<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.8+</span><button data-href="#SQ4U--Milvus-268+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk skenario yang menuntut kecepatan kueri yang ekstrem dan penggunaan memori yang minimal, Milvus memperkenalkan <code translate="no">SQ4U</code>, sebuah Kuantisasi Skalar Seragam 4-bit. Ini adalah bentuk kuantisasi skalar yang agresif yang memampatkan nilai floating-point setiap dimensi menjadi bilangan bulat tak bertanda <strong>4-bit</strong>.</p>
+<p>"U" dalam SQ4U adalah singkatan dari Uniform. Tidak seperti Kuantisasi Skalar yang tidak seragam, yang biasanya menghitung nilai minimum dan maksimum secara independen untuk setiap dimensi (Kuantisasi Per-Dimensi), SQ4U menerapkan strategi Kuantisasi <strong>Seragam Global</strong>:</p>
+<ol>
+<li><p><strong>Statistik Global</strong>: Sistem menghitung <strong>satu</strong> nilai minimum <code translate="no">vmin</code> dan <strong>satu</strong> rentang nilai <code translate="no">vdiff</code> yang berlaku untuk <strong>semua dimensi</strong> vektor (atau seluruh segmen vektor).</p></li>
+<li><p><strong>Pemetaan Seragam</strong>: Rentang nilai global dibagi menjadi 16 interval yang sama. Setiap nilai floating-point dalam vektor, terlepas dari dimensi mana yang dimilikinya, dipetakan ke bilangan bulat 4-bit (0-15) menggunakan parameter bersama ini.</p></li>
+</ol>
+<p><strong>Keunggulan Kinerja:</strong></p>
+<ul>
+<li><p><strong>Rasio Kompresi 8x:</strong> Mengurangi ukuran sebesar 8x dibandingkan dengan <code translate="no">FP32</code> dan 2x dibandingkan dengan <code translate="no">SQ8</code>, secara signifikan menurunkan tekanan bandwidth memori - yang sering kali menjadi hambatan dalam pencarian vektor.</p></li>
+<li><p><strong>Optimalisasi SIMD:</strong> Struktur yang ringkas memungkinkan CPU modern (AVX2/AVX-512) untuk memproses lebih banyak dimensi per siklus. Yang terpenting, penggunaan parameter global menghilangkan kebutuhan untuk memuat nilai skala/offset yang berbeda-beda selama penghitungan jarak, sehingga menjaga pipeline instruksi tetap penuh.</p></li>
+<li><p><strong>Efisiensi Cache:</strong> Ukuran vektor yang lebih kecil berarti lebih banyak data yang masuk ke dalam cache CPU, mengurangi latensi yang disebabkan oleh akses memori.</p></li>
+</ul>
+<div class="alert note">
+<p>Karena pembagian parameter globalnya, SQ4U berkinerja paling baik pada data yang dinormalisasi atau kumpulan data dengan distribusi nilai yang konsisten di seluruh dimensi.</p>
+</div>
+<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ<button data-href="#HNSW-+-SQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW_SQ menggabungkan kekuatan HNSW dan SQ untuk memungkinkan pencarian tetangga terdekat yang efisien. Berikut cara kerja prosesnya:</p>
 <ol>
 <li><p><strong>Kompresi Data:</strong> SQ mengompresi vektor menggunakan <code translate="no">sq_type</code> (misalnya, SQ6 atau SQ8), yang mengurangi penggunaan memori. Kompresi ini dapat menurunkan presisi, tetapi memungkinkan sistem untuk menangani kumpulan data yang lebih besar.</p></li>
 <li><p><strong>Konstruksi Grafik:</strong> Vektor-vektor yang dikompresi digunakan untuk membangun grafik HNSW. Karena data dikompresi, grafik yang dihasilkan lebih kecil dan lebih cepat untuk dicari.</p></li>
@@ -159,7 +234,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembuatan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">membangun indeks.</a></p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembuatan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">membangun indeks.</a></p>
 <table>
    <tr>
      <th></th>
@@ -171,55 +261,55 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Jumlah maksimum koneksi (atau sisi) yang dapat dimiliki setiap simpul dalam graf, termasuk sisi keluar dan masuk. Parameter ini secara langsung memengaruhi konstruksi indeks dan pencarian.</p></td>
-     <td><p><strong>Tipe</strong>: Bilangan bulat <strong>Rentang</strong>: [2, 2048]</p>
-<p><strong>Nilai default</strong>: <code translate="no">30</code> (hingga 30 sisi keluar dan 30 sisi masuk per simpul)</p></td>
-     <td><p><code translate="no">M</code> yang lebih besar umumnya menghasilkan <strong>akurasi yang lebih tinggi</strong> tetapi <strong>meningkatkan overhead memori</strong> dan <strong>memperlambat pembangunan indeks dan pencarian</strong>. Pertimbangkan untuk meningkatkan <code translate="no">M</code> untuk set data dengan dimensi tinggi atau ketika pemanggilan yang tinggi sangat penting.</p>
-<p>Pertimbangkan untuk mengurangi <code translate="no">M</code> ketika penggunaan memori dan kecepatan pencarian menjadi perhatian utama.</p>
-<p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [5, 100].</p></td>
+     <td><p>Jumlah maksimum koneksi (atau sisi) yang dapat dimiliki oleh setiap simpul dalam graf, termasuk sisi keluar dan masuk.</p><p>Parameter ini secara langsung mempengaruhi konstruksi indeks dan pencarian.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [2, 2048]</p><p><strong>Nilai default</strong>: <code translate="no">30</code> (hingga 30 sisi keluar dan 30 sisi masuk per simpul)</p></td>
+     <td><p><code translate="no">M</code> yang lebih besar umumnya menghasilkan <strong>akurasi yang lebih tinggi</strong> tetapi <strong>meningkatkan overhead memori</strong> dan <strong>memperlambat pembuatan indeks dan pencarian</strong>.</p><p>Pertimbangkan untuk meningkatkan <code translate="no">M</code> untuk dataset dengan dimensi tinggi atau ketika pemanggilan yang tinggi sangat penting.</p><p>Pertimbangkan untuk mengurangi <code translate="no">M</code> ketika penggunaan memori dan kecepatan pencarian menjadi perhatian utama.</p><p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>Jumlah kandidat tetangga yang dipertimbangkan untuk koneksi selama konstruksi indeks. Kumpulan kandidat yang lebih besar dievaluasi untuk setiap elemen baru, tetapi jumlah maksimum koneksi yang benar-benar dibuat masih dibatasi oleh <code translate="no">M</code>.</p></td>
-     <td><p><strong>Tipe</strong>: Bilangan bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Nilai default</strong>: <code translate="no">360</code></p></td>
-     <td><p>Nilai <code translate="no">efConstruction</code> yang lebih tinggi biasanya menghasilkan <strong>indeks yang lebih akurat</strong>, karena lebih banyak koneksi potensial yang dieksplorasi. Namun, hal ini juga menyebabkan <strong>waktu pengindeksan yang lebih lama dan peningkatan penggunaan memori</strong> selama konstruksi. Pertimbangkan untuk meningkatkan <code translate="no">efConstruction</code> untuk meningkatkan akurasi, terutama dalam skenario di mana waktu pengindeksan tidak terlalu penting.</p>
-<p>Pertimbangkan untuk mengurangi <code translate="no">efConstruction</code> untuk mempercepat konstruksi indeks ketika keterbatasan sumber daya menjadi perhatian.</p>
-<p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [50, 500].</p></td>
+     <td><p>Jumlah kandidat tetangga yang dipertimbangkan untuk koneksi selama konstruksi indeks.</p><p>Kumpulan kandidat yang lebih besar dievaluasi untuk setiap elemen baru, tetapi jumlah maksimum koneksi yang benar-benar dibuat masih dibatasi oleh <code translate="no">M</code>.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [1, <em>int_max</em>]</p><p><strong>Nilai default</strong>: <code translate="no">360</code></p></td>
+     <td><p><code translate="no">efConstruction</code> yang lebih tinggi biasanya menghasilkan <strong>indeks yang lebih akurat</strong>, karena lebih banyak koneksi potensial yang dieksplorasi. Namun, hal ini juga menyebabkan <strong>waktu pengindeksan yang lebih lama dan penggunaan memori yang lebih besar</strong> selama konstruksi.</p><p>Pertimbangkan untuk meningkatkan <code translate="no">efConstruction</code> untuk meningkatkan akurasi, terutama dalam skenario di mana waktu pengindeksan tidak terlalu penting.</p><p>Pertimbangkan untuk mengurangi <code translate="no">efConstruction</code> untuk mempercepat konstruksi indeks ketika keterbatasan sumber daya menjadi perhatian.</p><p>Dalam kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam kisaran ini: [50, 500].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>Menentukan metode kuantisasi skalar untuk mengompresi vektor. Setiap opsi menawarkan keseimbangan yang berbeda antara kompresi dan akurasi:</p>
-<ul>
-<li><p><code translate="no">SQ6</code>: Mengkodekan vektor menggunakan bilangan bulat 6-bit.</p></li>
-<li><p><code translate="no">SQ8</code>: Mengkodekan vektor menggunakan bilangan bulat 8-bit.</p></li>
-<li><p><code translate="no">BF16</code>: Menggunakan format Bfloat16.</p></li>
-<li><p><code translate="no">FP16</code>: Menggunakan format floating-point 16-bit standar.</p></li>
-</ul></td>
-     <td><p><strong>Jenis</strong> <strong>Rentang</strong> String: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p>
-<p><strong>Nilai default</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>Pilihan <code translate="no">sq_type</code> tergantung pada kebutuhan aplikasi tertentu. Jika efisiensi memori merupakan perhatian utama, <code translate="no">SQ6</code> atau <code translate="no">SQ8</code> mungkin cocok. Di sisi lain, jika akurasi adalah yang terpenting, <code translate="no">BF16</code> atau <code translate="no">FP16</code> dapat menjadi pilihan.</p></td>
+     <td><p>Menentukan metode kuantisasi skalar untuk mengompresi vektor. Setiap opsi menawarkan keseimbangan yang berbeda antara kompresi dan akurasi:</p><ul><li><p><code translate="no">SQ4U</code>: Mengkodekan vektor menggunakan kuantisasi seragam 4-bit. Mode ini menawarkan kecepatan dan kompresi tertinggi.</p></li><li><p><code translate="no">SQ6</code>: Mengkodekan vektor menggunakan bilangan bulat 6-bit.</p></li><li><p><code translate="no">SQ8</code>: Mengkodekan vektor menggunakan bilangan bulat 8-bit.</p></li><li><p><code translate="no">BF16</code>: Menggunakan format Bfloat16.</p></li><li><p><code translate="no">FP16</code>: Menggunakan format floating-point 16-bit standar.</p></li></ul></td>
+     <td><p><strong>Jenis</strong> String</p><p><strong>Rentang</strong>: [ <code translate="no">SQ4U</code>, <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p><p><strong>Nilai default</strong>: <code translate="no">SQ8</code></p></td>
+     <td><p>Pilihan <code translate="no">sq_type</code> tergantung pada kebutuhan aplikasi tertentu. <code translate="no">SQ4U</code> dipilih untuk kecepatan maksimum dan efisiensi memori. <code translate="no">SQ6</code> atau <code translate="no">SQ8</code> mungkin cocok untuk kinerja yang seimbang. Di sisi lain, jika akurasi adalah yang terpenting, <code translate="no">BF16</code> atau <code translate="no">FP16</code> bisa lebih disukai.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
      <td><p>Bendera boolean yang mengontrol apakah langkah penyempurnaan diterapkan selama pencarian. Refinement melibatkan pemeringkatan ulang hasil awal dengan menghitung jarak yang tepat antara vektor kueri dan kandidat.</p></td>
-     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Boolean: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
-<p><strong>Nilai default</strong>: <code translate="no">false</code></p></td>
-     <td><p>Setel ke <code translate="no">true</code> jika akurasi tinggi sangat penting dan Anda dapat mentolerir waktu pencarian yang sedikit lebih lambat. Gunakan <code translate="no">false</code> jika kecepatan adalah prioritas dan kompromi kecil dalam akurasi dapat diterima.</p></td>
+     <td><p><strong>Tipe</strong> Boolean</p><p><strong>Rentang</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p><p><strong>Nilai default</strong>: <code translate="no">false</code></p></td>
+     <td><p>Tetapkan ke <code translate="no">true</code> jika akurasi tinggi sangat penting dan Anda dapat mentolerir waktu pencarian yang sedikit lebih lambat. Gunakan <code translate="no">false</code> jika kecepatan adalah prioritas dan kompromi kecil dalam akurasi dapat diterima.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>Menentukan ketepatan data yang digunakan untuk perbaikan. Ketepatan ini harus lebih tinggi daripada vektor yang dikompresi (seperti yang ditetapkan oleh <code translate="no">sq_type</code>), yang mempengaruhi akurasi vektor yang diperingkat ulang dan jejak memorinya.</p></td>
-     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> String:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
-<p><strong>Nilai default</strong>: Tidak ada</p></td>
+     <td><p>Menentukan ketepatan data yang digunakan untuk penyempurnaan.</p><p>Ketepatan ini harus lebih tinggi daripada vektor yang dikompresi (seperti yang ditetapkan oleh <code translate="no">sq_type</code>), yang memengaruhi akurasi vektor yang diperingkat ulang dan jejak memorinya.</p></td>
+     <td><p><strong>Jenis</strong> String</p><p><strong>Rentang</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p><p><strong>Nilai default</strong>: Tidak ada</p></td>
      <td><p>Gunakan <code translate="no">FP32</code> untuk presisi maksimum dengan biaya memori yang lebih tinggi, atau <code translate="no">SQ6</code>/<code translate="no">SQ8</code> untuk kompresi yang lebih baik. <code translate="no">BF16</code> dan <code translate="no">FP16</code> menawarkan alternatif yang seimbang.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat <a href="/docs/id/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">mencari di indeks</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat <a href="/docs/id/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">mencari di indeks</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -231,20 +321,15 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Mengontrol luasnya pencarian selama pencarian tetangga terdekat. Parameter ini menentukan berapa banyak node yang dikunjungi dan dievaluasi sebagai tetangga terdekat yang potensial. 
- Parameter ini hanya memengaruhi proses pencarian dan berlaku secara eksklusif pada lapisan bawah grafik.</p></td>
-     <td><p><strong>Tipe</strong>: Bilangan bulat <strong>Rentang</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Nilai default</strong>: <em>batas</em> (tetangga terdekat TopK yang akan dikembalikan)</p></td>
-     <td><p><code translate="no">ef</code> yang lebih besar umumnya menghasilkan <strong>akurasi pencarian yang lebih tinggi</strong> karena lebih banyak tetangga potensial yang dipertimbangkan. Namun, hal ini juga <strong>meningkatkan waktu pencarian</strong>. Pertimbangkan untuk meningkatkan <code translate="no">ef</code> ketika mencapai recall yang tinggi sangat penting dan kecepatan pencarian tidak terlalu menjadi perhatian.</p>
-<p>Pertimbangkan untuk mengurangi <code translate="no">ef</code> untuk memprioritaskan pencarian yang lebih cepat, terutama dalam skenario di mana sedikit penurunan akurasi dapat diterima.</p>
-<p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [K, 10K].</p></td>
+     <td><p>Mengontrol luasnya pencarian selama pencarian tetangga terdekat. Parameter ini menentukan berapa banyak node yang dikunjungi dan dievaluasi sebagai tetangga terdekat yang potensial. </p><p>Parameter ini hanya memengaruhi proses pencarian dan berlaku secara eksklusif pada lapisan bawah grafik.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [1, <em>int_max</em>]</p><p><strong>Nilai default</strong>: <em>batas</em> (tetangga terdekat TopK yang akan dikembalikan)</p></td>
+     <td><p><code translate="no">ef</code> yang lebih besar umumnya menghasilkan <strong>akurasi pencarian yang lebih tinggi</strong> karena lebih banyak tetangga potensial yang dipertimbangkan. Akan tetapi, hal ini juga <strong>meningkatkan waktu pencarian</strong>.</p><p>Pertimbangkan untuk meningkatkan <code translate="no">ef</code> ketika mencapai recall yang tinggi sangat penting dan kecepatan pencarian tidak terlalu menjadi perhatian.</p><p>Pertimbangkan untuk mengurangi <code translate="no">ef</code> untuk memprioritaskan pencarian yang lebih cepat, terutama dalam skenario di mana sedikit penurunan akurasi dapat diterima.</p><p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [K, 10K].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>Faktor pembesaran yang mengontrol berapa banyak kandidat tambahan yang diperiksa selama tahap penyempurnaan, relatif terhadap K hasil teratas yang diminta.</p></td>
-     <td><p><strong>Tipe</strong> <strong>Rentang</strong> Float: [1, <em>float_max</em>)</p>
-<p><strong>Nilai default</strong>: 1</p></td>
-     <td><p>Nilai yang lebih tinggi dari <code translate="no">refine_k</code> dapat meningkatkan recall dan akurasi, tetapi juga akan meningkatkan waktu pencarian dan penggunaan sumber daya. Nilai 1 berarti proses penyempurnaan hanya mempertimbangkan hasil K teratas awal.</p></td>
+     <td><p><strong>Tipe</strong> Mengambang</p><p><strong>Rentang</strong>: [1, <em>float_max</em>)</p><p><strong>Nilai default</strong>: 1</p></td>
+     <td><p>Nilai yang lebih tinggi dari <code translate="no">refine_k</code> dapat meningkatkan penarikan dan akurasi tetapi juga akan meningkatkan waktu pencarian dan penggunaan sumber daya. Nilai 1 berarti proses penyempurnaan hanya mempertimbangkan hasil K teratas awal.</p></td>
    </tr>
 </table>

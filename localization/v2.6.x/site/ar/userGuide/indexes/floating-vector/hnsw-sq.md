@@ -3,10 +3,10 @@ id: hnsw-sq.md
 title: HNSW_SQ
 summary: >-
   يجمع فهرس HNSW_SQ بين الرسوم البيانية للعالم الصغير القابل للتنقل الهرمي
-  (HNSW) مع الفهرسة الكمية العددية (SQ)، مما يخلق طريقة فهرسة متجهة متقدمة توفر
-  مفاضلة بين الحجم والدقة يمكن التحكم فيها. بالمقارنة مع HNSW القياسي، يحافظ هذا
-  النوع من الفهرس على سرعة معالجة استعلامات عالية مع زيادة طفيفة في وقت إنشاء
-  الفهرس.
+  (HNSW) مع الفهرسة الكمية العددية (SQ)، مما يؤدي إلى إنشاء طريقة فهرسة متجهة
+  متقدمة توفر مفاضلة بين الحجم والدقة يمكن التحكم فيها. بالمقارنة مع HNSW
+  القياسي، يحافظ هذا النوع من الفهرس على سرعة معالجة استعلامات عالية مع زيادة
+  طفيفة في وقت إنشاء الفهرس.
 ---
 <h1 id="HNSWSQ" class="common-anchor-header">HNSW_SQ<button data-href="#HNSWSQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,9 +40,39 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>يجمع HNSW_SQ بين تقنيتي فهرسة: <strong>HNSW</strong> للتنقل السريع القائم على الرسم البياني <strong>وSQ</strong> لضغط المتجهات بكفاءة.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>ينشئ HNSW رسمًا بيانيًا متعدد الطبقات حيث تتوافق كل عقدة مع متجه في مجموعة البيانات. في هذا الرسم البياني، ترتبط العُقد في هذا الرسم البياني بناءً على تشابهها، مما يتيح التنقل السريع عبر فضاء البيانات. يسمح الهيكل الهرمي لخوارزمية البحث بتضييق نطاق الجيران المرشحين، مما يسرّع عملية البحث بشكل كبير في المساحات عالية الأبعاد.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ينشئ HNSW رسمًا بيانيًا متعدد الطبقات حيث تتوافق كل عقدة مع متجه في مجموعة البيانات. في هذا الرسم البياني، ترتبط العُقد في هذا الرسم البياني بناءً على تشابهها، مما يتيح التنقل السريع عبر فضاء البيانات. يسمح الهيكل الهرمي لخوارزمية البحث بتضييق نطاق الجيران المرشحين، مما يسرّع عملية البحث بشكل كبير في المساحات عالية الأبعاد.</p>
 <p>لمزيد من المعلومات، راجع <a href="/docs/ar/hnsw.md">HNSW</a>.</p>
-<h3 id="SQ" class="common-anchor-header">SQ</h3><p>SQ هي طريقة لضغط المتجهات من خلال تمثيلها بعدد أقل من البتات. على سبيل المثال</p>
+<h3 id="SQ" class="common-anchor-header">SQ<button data-href="#SQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>SQ هي طريقة لضغط المتجهات من خلال تمثيلها بعدد أقل من البتات. على سبيل المثال</p>
 <ul>
 <li><p>تستخدم<strong>SQ8 8</strong> بت، وتعيين القيم إلى 256 مستوى.  لمزيد من المعلومات، راجع <a href="/docs/ar/ivf-sq8.md#SQ8">IVF_SQ8</a>.</p></li>
 <li><p>يستخدم<strong>SQ6 6</strong> بت لتمثيل كل قيمة من الفاصلة العائمة، مما ينتج عنه 64 مستوى منفصل.</p></li>
@@ -52,7 +82,52 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw-sq.png" alt="Hnsw Sq" class="doc-image" id="hnsw-sq" />
    </span> <span class="img-wrapper"> <span>Hnsw Sq</span> </span></p>
 <p>يقلل هذا التخفيض في الدقة بشكل كبير من بصمة الذاكرة ويسرّع من عملية الحساب مع الاحتفاظ بالبنية الأساسية للبيانات.</p>
-<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>يجمع HNSW_SQ بين نقاط القوة في HNSW وSQ لتمكين البحث التقريبي الفعال لأقرب جار. إليك كيفية عمل العملية</p>
+<h3 id="SQ4U--Milvus-268+" class="common-anchor-header">SQ4U<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.8+</span><button data-href="#SQ4U--Milvus-268+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بالنسبة للسيناريوهات التي تتطلب سرعة استعلام قصوى وأقل استخدام للذاكرة، تقدم Milvus <code translate="no">SQ4U</code> ، وهو عبارة عن تكميم كمي موحد ذو 4 بت. هذا هو شكل قوي من أشكال التكميم الكمي القياسي الذي يضغط قيمة كل بُعد من الفاصلة العائمة في عدد صحيح غير موقع <strong>4 بت</strong>.</p>
+<p>يرمز حرف "U" في SQ4U إلى "موحد". على عكس التكميم الكمي غير المنتظم، الذي عادةً ما يحسب القيم الدنيا والقصوى بشكل مستقل لكل بُعد (التكميم الكمي لكل بُعد)، يفرض SQ4U استراتيجية <strong>التكميم الكمي الموحد العالمي</strong>:</p>
+<ol>
+<li><p><strong>الإحصائيات العالمية</strong>: يقوم النظام بحساب قيمة دنيا <strong>واحدة</strong> <code translate="no">vmin</code> ونطاق قيمة <strong>واحدة</strong> <code translate="no">vdiff</code> التي تنطبق على <strong>جميع أبعاد</strong> المتجه (أو مقطع المتجه بأكمله).</p></li>
+<li><p><strong>التعيين الموحد</strong>: ينقسم نطاق القيمة العالمية إلى 16 فترة متساوية. يتم تعيين كل قيمة ذات فاصلة عائمة في المتجه، بغض النظر عن البعد الذي تنتمي إليه، إلى عدد صحيح من 4 بت (0-15) باستخدام هذه المعلمات المشتركة.</p></li>
+</ol>
+<p><strong>مزايا الأداء:</strong></p>
+<ul>
+<li><p><strong>نسبة ضغط 8 أضعاف:</strong> يقلل من الحجم بمقدار 8 أضعاف مقارنةً بـ <code translate="no">FP32</code> و2 ضعف مقارنةً بـ <code translate="no">SQ8</code> ، مما يقلل بشكل كبير من ضغط النطاق الترددي للذاكرة - وهو ما يمثل في الغالب عنق الزجاجة في البحث عن المتجهات.</p></li>
+<li><p><strong>تحسين SIMD:</strong> تسمح البنية المدمجة لوحدات المعالجة المركزية الحديثة (AVX2/AVX-512) بمعالجة المزيد من الأبعاد في كل دورة. والأهم من ذلك أن استخدام المعلمات العامة يلغي الحاجة إلى تحميل قيم متفاوتة للمقياس/المقياس المتغير أثناء حساب المسافة، مما يحافظ على خط أنابيب التعليمات مشبعًا بالكامل.</p></li>
+<li><p><strong>كفاءة ذاكرة التخزين المؤقت:</strong> تعني أحجام المتجهات الأصغر حجمًا استيعاب المزيد من البيانات في ذاكرة التخزين المؤقت لوحدة المعالجة المركزية، مما يقلل من زمن الوصول إلى الذاكرة.</p></li>
+</ul>
+<div class="alert note">
+<p>ونظرًا لمشاركة المعلمات العالمية، يعمل SQ4U بشكل أفضل على البيانات العادية أو مجموعات البيانات ذات توزيعات القيم المتسقة عبر الأبعاد.</p>
+</div>
+<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ<button data-href="#HNSW-+-SQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يجمع HNSW_SQ بين نقاط القوة في HNSW وSQ لتمكين البحث التقريبي الفعال عن أقرب جار. إليك كيفية عمل العملية</p>
 <ol>
 <li><p><strong>ضغط البيانات:</strong> يضغط SQ المتجهات باستخدام <code translate="no">sq_type</code> (على سبيل المثال، SQ6 أو SQ8)، مما يقلل من استخدام الذاكرة. قد يقلل هذا الضغط من الدقة، لكنه يسمح للنظام بالتعامل مع مجموعات بيانات أكبر.</p></li>
 <li><p><strong>بناء الرسم البياني:</strong> تُستخدم المتجهات المضغوطة لبناء رسم بياني HNSW. نظرًا لأن البيانات مضغوطة، يكون الرسم البياني الناتج أصغر حجمًا وأسرع في البحث.</p></li>
@@ -80,7 +155,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لإنشاء فهرس <code translate="no">HNSW_SQ</code> على حقل متجه في ميلفوس، استخدم الطريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> ومعلمات إضافية للفهرس.</p>
+    </button></h2><p>لإنشاء فهرس <code translate="no">HNSW_SQ</code> على حقل متجه في ميلفوس، استخدم طريقة <code translate="no">add_index()</code> ، مع تحديد <code translate="no">index_type</code> و <code translate="no">metric_type</code> ومعلمات إضافية للفهرس.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -157,8 +232,23 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
-<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">إنشاء فهرس</a>.</p>
+    </button></h2><p>يقدم هذا القسم نظرة عامة على المعلمات المستخدمة لبناء الفهرس وإجراء عمليات البحث على الفهرس.</p>
+<h3 id="Index-building-params" class="common-anchor-header">معلمات بناء الفهرس<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">params</code> عند <a href="/docs/ar/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">إنشاء فهرس</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -170,55 +260,55 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>الحد الأقصى لعدد الوصلات （أو الحواف) التي يمكن أن تحتويها كل عقدة في الرسم البياني، بما في ذلك الحواف الصادرة والواردة. تؤثر هذه المعلمة بشكل مباشر على كل من بناء الفهرس والبحث.</p></td>
-     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [2, 2048]</p>
-<p><strong>القيمة الافتراضية</strong>: <code translate="no">30</code> (حتى 30 حافة صادرة و30 حافة واردة لكل عقدة)</p></td>
-     <td><p>يؤدي وجود <code translate="no">M</code> أكبر بشكل عام إلى <strong>دقة أعلى</strong> ولكنه <strong>يزيد من عبء الذاكرة</strong> ويبطئ <strong>بناء الفهرس والبحث</strong>. ضع في اعتبارك زيادة <code translate="no">M</code> لمجموعات البيانات ذات الأبعاد العالية أو عندما يكون الاستدعاء العالي أمرًا بالغ الأهمية.</p>
-<p>ضع في اعتبارك تقليل <code translate="no">M</code> عندما يكون استخدام الذاكرة وسرعة البحث من الاهتمامات الأساسية.</p>
-<p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [5, 100].</p></td>
+     <td><p>الحد الأقصى لعدد الوصلات （أو الحواف) التي يمكن أن تحتويها كل عقدة في الرسم البياني، بما في ذلك الحواف الصادرة والواردة.</p><p>تؤثر هذه المعلمة بشكل مباشر على كل من بناء الفهرس والبحث.</p></td>
+     <td><p><strong>النوع</strong>: عدد صحيح</p><p><strong>المدى</strong>: [2, 2048]</p><p><strong>القيمة الافتراضية</strong>: <code translate="no">30</code> (حتى 30 حافة صادرة و30 حافة واردة لكل عقدة)</p></td>
+     <td><p>يؤدي وجود <code translate="no">M</code> أكبر بشكل عام إلى <strong>دقة أعلى</strong> ولكنه <strong>يزيد من عبء الذاكرة</strong> ويبطئ <strong>بناء الفهرس والبحث</strong>.</p><p>ضع في اعتبارك زيادة <code translate="no">M</code> لمجموعات البيانات ذات الأبعاد العالية أو عندما يكون الاستدعاء العالي أمرًا بالغ الأهمية.</p><p>ضع في اعتبارك تقليل <code translate="no">M</code> عندما يكون استخدام الذاكرة وسرعة البحث من الاهتمامات الأساسية.</p><p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>عدد الجيران المرشحين الذين تم أخذهم في الاعتبار للاتصال أثناء إنشاء الفهرس. يتم تقييم مجموعة أكبر من المرشحين لكل عنصر جديد، ولكن يظل الحد الأقصى لعدد الاتصالات التي تم إنشاؤها بالفعل محدودًا بـ <code translate="no">M</code>.</p></td>
-     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1، <em>int_max</em>]</p>
-<p><strong>القيمة الافتراضية</strong>: <code translate="no">360</code></p></td>
-     <td><p>يؤدي ارتفاع <code translate="no">efConstruction</code> عادةً إلى <strong>فهرس أكثر دقة،</strong> حيث يتم استكشاف المزيد من الاتصالات المحتملة. ومع ذلك، يؤدي هذا أيضًا إلى <strong>إطالة وقت الفهرسة وزيادة استخدام الذاكرة</strong> أثناء الإنشاء. ضع في اعتبارك زيادة <code translate="no">efConstruction</code> لتحسين الدقة، خاصة في السيناريوهات التي يكون فيها وقت الفهرسة أقل أهمية.</p>
-<p>فكر في تقليل <code translate="no">efConstruction</code> لتسريع بناء الفهرس عندما تكون قيود الموارد مصدر قلق.</p>
-<p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [50, 500].</p></td>
+     <td><p>عدد الجيران المرشحين الذين تم أخذهم في الاعتبار أثناء إنشاء الفهرس.</p><p>يتم تقييم مجموعة أكبر من المرشحين لكل عنصر جديد، ولكن لا يزال الحد الأقصى لعدد الاتصالات التي تم إنشاؤها بالفعل محدودًا بـ <code translate="no">M</code>.</p></td>
+     <td><p><strong>النوع</strong>: عدد صحيح</p><p><strong>المدى</strong>: [1، <em>int_max</em>]</p><p><strong>القيمة الافتراضية</strong>: <code translate="no">360</code></p></td>
+     <td><p>يؤدي ارتفاع <code translate="no">efConstruction</code> عادةً إلى <strong>فهرس أكثر دقة،</strong> حيث يتم استكشاف المزيد من الاتصالات المحتملة. ومع ذلك، يؤدي هذا أيضًا إلى <strong>وقت فهرسة أطول وزيادة استخدام الذاكرة</strong> أثناء الإنشاء.</p><p>ضع في اعتبارك زيادة <code translate="no">efConstruction</code> لتحسين الدقة، خاصة في السيناريوهات التي يكون فيها وقت الفهرسة أقل أهمية.</p><p>فكر في تقليل <code translate="no">efConstruction</code> لتسريع بناء الفهرس عندما تكون قيود الموارد مصدر قلق.</p><p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [50, 500].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>يحدد طريقة التكميم القياسي لضغط المتجهات. يوفر كل خيار توازنًا مختلفًا بين الضغط والدقة:</p>
-<ul>
-<li><p><code translate="no">SQ6</code>: يشفر المتجهات باستخدام أعداد صحيحة 6 بت.</p></li>
-<li><p><code translate="no">SQ8</code>: ترميز المتجهات باستخدام أعداد صحيحة 8 بت.</p></li>
-<li><p><code translate="no">BF16</code>: يستخدم تنسيق Bfloat16.</p></li>
-<li><p><code translate="no">FP16</code>: يستخدم تنسيق الفاصلة العائمة القياسي 16 بت.</p></li>
-</ul></td>
-     <td><p><strong>النوع</strong>: <strong>نطاق</strong> السلسلة: [ <code translate="no">SQ6</code> ، <code translate="no">SQ8</code> ، ، <code translate="no">BF16</code> ، <code translate="no">FP16</code> ]</p>
-<p><strong>القيمة الافتراضية</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>يعتمد اختيار <code translate="no">sq_type</code> على احتياجات التطبيق المحدد. إذا كانت كفاءة الذاكرة هي الشاغل الأساسي، فقد يكون <code translate="no">SQ6</code> أو <code translate="no">SQ8</code> مناسبًا. من ناحية أخرى، إذا كانت الدقة أمرًا بالغ الأهمية، فقد يكون <code translate="no">BF16</code> أو <code translate="no">FP16</code> هو المفضل.</p></td>
+     <td><p>يحدد طريقة التكميم القياسي لضغط المتجهات. يوفر كل خيار توازنًا مختلفًا بين الضغط والدقة:</p><ul><li><p><code translate="no">SQ4U</code>: يشفر المتجهات باستخدام تكميم موحد 4 بت. يوفر هذا الوضع أعلى سرعة وضغط.</p></li><li><p><code translate="no">SQ6</code>: ترميز المتجهات باستخدام أعداد صحيحة 6 بت.</p></li><li><p><code translate="no">SQ8</code>: تشفير المتجهات باستخدام أعداد صحيحة 8 بت.</p></li><li><p><code translate="no">BF16</code>: يستخدم تنسيق Bfloat16.</p></li><li><p><code translate="no">FP16</code>: يستخدم تنسيق الفاصلة العائمة القياسي 16 بت.</p></li></ul></td>
+     <td><p><strong>النوع</strong>: سلسلة</p><p><strong>النطاق</strong>: [ <code translate="no">SQ4U</code>, <code translate="no">SQ6</code>, , <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p><p><strong>القيمة الافتراضية</strong>: <code translate="no">SQ8</code></p></td>
+     <td><p>يعتمد اختيار <code translate="no">sq_type</code> على احتياجات التطبيق المحدد. <code translate="no">SQ4U</code> يتم اختيار لتحقيق أقصى سرعة وكفاءة للذاكرة. <code translate="no">SQ6</code> أو <code translate="no">SQ8</code> قد يكون مناسبًا للأداء المتوازن. من ناحية أخرى، إذا كانت الدقة أمرًا بالغ الأهمية، يمكن تفضيل <code translate="no">BF16</code> أو <code translate="no">FP16</code>.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>علامة منطقية تتحكم فيما إذا كان يتم تطبيق خطوة تنقيح أثناء البحث. يتضمن التنقيح إعادة ترتيب النتائج الأولية عن طريق حساب المسافات الدقيقة بين متجه الاستعلام والمرشحين.</p></td>
-     <td><p><strong>النوع</strong>: <strong>نطاق</strong> منطقي: [<code translate="no">true</code> ، <code translate="no">false</code>]</p>
-<p><strong>القيمة الافتراضية</strong>: <code translate="no">false</code></p></td>
+     <td><p>علامة منطقية تتحكم فيما إذا كان يتم تطبيق خطوة تنقية أثناء البحث. يتضمن التنقيح إعادة ترتيب النتائج الأولية عن طريق حساب المسافات الدقيقة بين متجه الاستعلام والمرشحين.</p></td>
+     <td><p><strong>النوع</strong>: منطقية</p><p><strong>النطاق</strong>: [<code translate="no">true</code> ، <code translate="no">false</code>]</p><p><strong>القيمة الافتراضية</strong>: <code translate="no">false</code></p></td>
      <td><p>اضبط على <code translate="no">true</code> إذا كانت الدقة العالية ضرورية ويمكنك تحمل أوقات بحث أبطأ قليلاً. استخدم <code translate="no">false</code> إذا كانت السرعة أولوية وكان التنازل البسيط في الدقة مقبولاً.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>تحدد دقة البيانات المستخدمة في التنقيح. يجب أن تكون هذه الدقة أعلى من دقة المتجهات المضغوطة (كما تم تعيينها بواسطة <code translate="no">sq_type</code>)، مما يؤثر على دقة المتجهات المعاد تصنيفها وعلى بصمة الذاكرة الخاصة بها.</p></td>
-     <td><p><strong>النوع</strong>: سلسلة <strong>النطاق</strong>: [ <code translate="no">SQ6</code> ، <code translate="no">SQ8</code> ، ، <code translate="no">BF16</code> ، <code translate="no">FP16</code> ، <code translate="no">FP32</code> ]</p>
-<p><strong>القيمة الافتراضية</strong>: لا يوجد</p></td>
+     <td><p>يحدد دقة البيانات المستخدمة في التنقيح.</p><p>يجب أن تكون هذه الدقة أعلى من دقة المتجهات المضغوطة (كما تم تعيينها بواسطة <code translate="no">sq_type</code>)، مما يؤثر على دقة المتجهات المعاد تصنيفها وعلى بصمة الذاكرة الخاصة بها.</p></td>
+     <td><p><strong>النوع</strong>: سلسلة</p><p><strong>النطاق</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, , <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p><p><strong>القيمة الافتراضية</strong>: لا يوجد</p></td>
      <td><p>استخدم <code translate="no">FP32</code> للحصول على أقصى قدر من الدقة بتكلفة ذاكرة أعلى، أو <code translate="no">SQ6</code>/<code translate="no">SQ8</code> للحصول على ضغط أفضل. <code translate="no">BF16</code> و <code translate="no">FP16</code> يقدمان بديلاً متوازنًا.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس</h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">البحث في الفهرس</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">بارامترات البحث الخاصة بالفهرس<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يسرد الجدول التالي المعلمات التي يمكن تكوينها في <code translate="no">search_params.params</code> عند <a href="/docs/ar/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">البحث في الفهرس</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -230,20 +320,15 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>يتحكم في اتساع نطاق البحث أثناء استرجاع أقرب جار. وهي تحدد عدد العقد التي تتم زيارتها وتقييمها كأقرب جيران محتملين. 
- تؤثر هذه المعلمة على عملية البحث فقط وتطبق حصرياً على الطبقة السفلية من الرسم البياني.</p></td>
-     <td><p><strong>النوع</strong>: عدد صحيح <strong>المدى</strong>: [1، <em>int_max</em>]</p>
-<p><strong>القيمة الافتراضية</strong>: <em>الحد</em> (أقرب عدد من الجيران الأقرب إلى أقرب جيران للإرجاع)</p></td>
-     <td><p>يؤدي وجود <code translate="no">ef</code> أكبر بشكل عام إلى <strong>دقة بحث أعلى</strong> حيث يتم النظر في المزيد من الجيران المحتملين. ومع ذلك، يؤدي ذلك أيضًا <strong>إلى زيادة وقت البحث</strong>. ضع في اعتبارك زيادة <code translate="no">ef</code> عندما يكون تحقيق استرجاع عالٍ أمرًا بالغ الأهمية وتكون سرعة البحث أقل أهمية.</p>
-<p>ضع في اعتبارك تقليل <code translate="no">ef</code> لإعطاء الأولوية لعمليات البحث الأسرع، خاصةً في السيناريوهات التي يكون فيها الانخفاض الطفيف في الدقة مقبولاً.</p>
-<p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [ك، 10 آلاف].</p></td>
+     <td><p>يتحكم في اتساع نطاق البحث أثناء استرجاع أقرب جار. وهي تحدد عدد العقد التي تتم زيارتها وتقييمها كأقرب جيران محتملين. </p><p>تؤثر هذه المعلمة على عملية البحث فقط وتطبق حصرياً على الطبقة السفلية من الرسم البياني.</p></td>
+     <td><p><strong>النوع</strong>: عدد صحيح</p><p><strong>المدى</strong>: [1، <em>int_max</em>]</p><p><strong>القيمة الافتراضية</strong>: <em>الحد</em> (أقرب عدد من الجيران الأقرب للإرجاع)</p></td>
+     <td><p>يؤدي وجود <code translate="no">ef</code> أكبر بشكل عام إلى <strong>دقة بحث أعلى</strong> حيث يتم النظر في المزيد من الجيران المحتملين. ومع ذلك، يؤدي ذلك أيضًا <strong>إلى زيادة وقت البحث</strong>.</p><p>ضع في اعتبارك زيادة <code translate="no">ef</code> عندما يكون تحقيق الاستدعاء العالي أمرًا بالغ الأهمية وتكون سرعة البحث أقل أهمية.</p><p>ضع في اعتبارك تقليل <code translate="no">ef</code> لإعطاء الأولوية لعمليات البحث الأسرع، خاصةً في السيناريوهات التي يكون فيها الانخفاض الطفيف في الدقة مقبولاً.</p><p>في معظم الحالات، نوصي بتعيين قيمة ضمن هذا النطاق: [ك، 10 آلاف].</p></td>
    </tr>
    <tr>
      <td><p>س كيو</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>عامل التكبير الذي يتحكم في عدد المرشحين الإضافيين الذين يتم فحصهم أثناء مرحلة التنقيح، بالنسبة لأعلى النتائج K المطلوبة.</p></td>
-     <td><p><strong>النوع</strong>: عائم <strong>المدى</strong>: [1, <em>float_max</em>)</p>
-<p><strong>القيمة الافتراضية</strong>: 1</p></td>
-     <td><p>يمكن أن تؤدي القيم الأعلى لـ <code translate="no">refine_k</code> إلى تحسين الاستدعاء والدقة ولكنها ستزيد أيضًا من وقت البحث واستخدام الموارد. تعني القيمة 1 أن عملية التنقيح تأخذ في الاعتبار أفضل النتائج الأولية K فقط.</p></td>
+     <td><p><strong>النوع</strong>: عائم</p><p><strong>المدى</strong>: [1, <em>float_max</em>)</p><p><strong>القيمة الافتراضية</strong>: 1</p></td>
+     <td><p>يمكن أن تؤدي القيم الأعلى ل <code translate="no">refine_k</code> إلى تحسين الاستدعاء والدقة ولكنها ستزيد أيضًا من وقت البحث واستخدام الموارد. تعني القيمة 1 أن عملية التنقيح تأخذ في الاعتبار أفضل النتائج الأولية K فقط.</p></td>
    </tr>
 </table>

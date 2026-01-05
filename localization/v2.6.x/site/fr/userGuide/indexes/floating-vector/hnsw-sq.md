@@ -41,9 +41,39 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_SQ combine deux techniques d'indexation : <strong>HNSW</strong> pour une navigation rapide dans les graphes et <strong>SQ</strong> pour une compression vectorielle efficace.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW construit un graphe multicouche où chaque nœud correspond à un vecteur de l'ensemble de données. Dans ce graphe, les nœuds sont connectés en fonction de leur similarité, ce qui permet de parcourir rapidement l'espace de données. La structure hiérarchique permet à l'algorithme de recherche de réduire le nombre de voisins candidats, ce qui accélère considérablement le processus de recherche dans les espaces à haute dimension.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW construit un graphe multicouche où chaque nœud correspond à un vecteur de l'ensemble de données. Dans ce graphe, les nœuds sont connectés en fonction de leur similarité, ce qui permet de parcourir rapidement l'espace de données. La structure hiérarchique permet à l'algorithme de recherche de réduire le nombre de voisins candidats, ce qui accélère considérablement le processus de recherche dans les espaces à haute dimension.</p>
 <p>Pour plus d'informations, voir <a href="/docs/fr/hnsw.md">HNSW</a>.</p>
-<h3 id="SQ" class="common-anchor-header">SQ</h3><p>Le SQ est une méthode de compression des vecteurs qui consiste à les représenter avec moins de bits. Par exemple :</p>
+<h3 id="SQ" class="common-anchor-header">SQ<button data-href="#SQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le SQ est une méthode de compression des vecteurs qui consiste à les représenter avec moins de bits. Par exemple :</p>
 <ul>
 <li><p><strong>SQ8</strong> utilise 8 bits, cartographiant les valeurs en 256 niveaux.  Pour plus d'informations, voir <a href="/docs/fr/ivf-sq8.md#SQ8">IVF_SQ8</a>.</p></li>
 <li><p><strong>SQ6</strong> utilise 6 bits pour représenter chaque valeur en virgule flottante, ce qui donne 64 niveaux discrets.</p></li>
@@ -53,7 +83,52 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw-sq.png" alt="Hnsw Sq" class="doc-image" id="hnsw-sq" />
    </span> <span class="img-wrapper"> <span>Hnsw Sq</span> </span></p>
 <p>Cette réduction de la précision diminue considérablement l'empreinte mémoire et accélère le calcul tout en conservant la structure essentielle des données.</p>
-<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ combine les forces de HNSW et de SQ pour permettre une recherche approximative efficace du plus proche voisin. Voici comment fonctionne le processus :</p>
+<h3 id="SQ4U--Milvus-268+" class="common-anchor-header">SQ4U<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.8+</span><button data-href="#SQ4U--Milvus-268+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour les scénarios exigeant une vitesse d'interrogation extrême et une utilisation minimale de la mémoire, Milvus introduit <code translate="no">SQ4U</code>, une quantification scalaire uniforme de 4 bits. Il s'agit d'une forme agressive de quantification scalaire qui comprime la valeur en virgule flottante de chaque dimension en un entier non signé de <strong>4 bits</strong>.</p>
+<p>Le "U" de SQ4U signifie Uniforme. Contrairement à la quantification scalaire non uniforme, qui calcule généralement les valeurs minimales et maximales indépendamment pour chaque dimension (quantification par dimension), SQ4U applique une stratégie de <strong>quantification uniforme globale</strong>:</p>
+<ol>
+<li><p><strong>Statistiques globales</strong>: Le système calcule une <strong>seule</strong> valeur minimale <code translate="no">vmin</code> et une <strong>seule</strong> plage de valeurs <code translate="no">vdiff</code> qui s'applique à <strong>toutes les dimensions</strong> du vecteur (ou au segment entier du vecteur).</p></li>
+<li><p><strong>Cartographie uniforme</strong>: La plage de valeurs globale est divisée en 16 intervalles égaux. Chaque valeur à virgule flottante du vecteur, quelle que soit la dimension à laquelle elle appartient, est mappée sur un entier de 4 bits (0-15) à l'aide de ces paramètres partagés.</p></li>
+</ol>
+<p><strong>Avantages en termes de performances :</strong></p>
+<ul>
+<li><p><strong>Taux de compression 8x :</strong> La taille est divisée par 8 par rapport à <code translate="no">FP32</code> et par 2 par rapport à <code translate="no">SQ8</code>, ce qui réduit considérablement la pression exercée sur la bande passante de la mémoire, qui est souvent le goulot d'étranglement de la recherche vectorielle.</p></li>
+<li><p><strong>Optimisation SIMD :</strong> La structure compacte permet aux unités centrales modernes (AVX2/AVX-512) de traiter plus de dimensions par cycle. L'utilisation de paramètres globaux élimine la nécessité de charger des valeurs d'échelle/de décalage variables pendant le calcul de la distance, ce qui permet de maintenir le pipeline d'instructions entièrement saturé.</p></li>
+<li><p><strong>Efficacité de la mémoire cache :</strong> Des vecteurs de plus petite taille signifient que plus de données sont stockées dans le cache de l'unité centrale, ce qui réduit la latence causée par l'accès à la mémoire.</p></li>
+</ul>
+<div class="alert note">
+<p>En raison du partage global des paramètres, SQ4U donne les meilleurs résultats sur des données normalisées ou des ensembles de données dont la distribution des valeurs est cohérente d'une dimension à l'autre.</p>
+</div>
+<h3 id="HNSW-+-SQ" class="common-anchor-header">SNPD + SQ<button data-href="#HNSW-+-SQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW_SQ combine les forces de HNSW et de SQ pour permettre une recherche efficace du plus proche voisin. Voici comment fonctionne le processus :</p>
 <ol>
 <li><p><strong>Compression des données :</strong> SQ compresse les vecteurs à l'aide de <code translate="no">sq_type</code> (par exemple, SQ6 ou SQ8), ce qui réduit l'utilisation de la mémoire. Cette compression peut réduire la précision, mais elle permet au système de traiter des ensembles de données plus importants.</p></li>
 <li><p><strong>Construction du graphique :</strong> Les vecteurs compressés sont utilisés pour construire un graphe HNSW. Comme les données sont compressées, le graphe résultant est plus petit et plus rapide à rechercher.</p></li>
@@ -159,7 +234,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Cette section présente une vue d'ensemble des paramètres utilisés pour construire un index et effectuer des recherches dans l'index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">création d'un index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">création d'un index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -171,55 +261,55 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Nombre maximal de connexions （ou d'arêtes) que chaque nœud peut avoir dans le graphe, y compris les arêtes sortantes et entrantes. Ce paramètre affecte directement la construction de l'index et la recherche.</p></td>
-     <td><p><strong>Type</strong>: Integer (nombre entier) <strong>Plage</strong>: [2, 2048]</p>
-<p><strong>Valeur par défaut</strong>: <code translate="no">30</code> (jusqu'à 30 arêtes sortantes et 30 arêtes entrantes par nœud)</p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">M</code> entraîne généralement une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données de grande dimensionnalité ou lorsqu'un rappel élevé est crucial.</p>
-<p>Pensez à diminuer <code translate="no">M</code> lorsque l'utilisation de la mémoire et la vitesse de recherche sont des préoccupations majeures.</p>
-<p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [5, 100].</p></td>
+     <td><p>Nombre maximal de connexions （ou d'arêtes) que chaque nœud peut avoir dans le graphe, y compris les arêtes sortantes et entrantes.</p><p>Ce paramètre affecte directement la construction de l'index et la recherche.</p></td>
+     <td><p><strong>Type</strong>: Entier</p><p><strong>Plage de valeurs</strong>: [2, 2048]</p><p><strong>Valeur par défaut</strong>: <code translate="no">30</code> (jusqu'à 30 arêtes sortantes et 30 arêtes entrantes par nœud)</p></td>
+     <td><p>Une valeur plus élevée de <code translate="no">M</code> conduit généralement à une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>.</p><p>Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données à haute dimensionnalité ou lorsqu'un rappel élevé est crucial.</p><p>Pensez à diminuer <code translate="no">M</code> lorsque l'utilisation de la mémoire et la vitesse de recherche sont des préoccupations majeures.</p><p>Dans la plupart des cas, nous vous recommandons de fixer une valeur comprise dans cette fourchette : [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>Un plus grand nombre de candidats est évalué pour chaque nouvel élément, mais le nombre maximum de connexions réellement établies est toujours limité par <code translate="no">M</code>.</p></td>
-     <td><p><strong>Type</strong>: Integer (nombre entier) <strong>Plage</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Valeur par défaut</strong>: <code translate="no">360</code></p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">efConstruction</code> se traduit généralement par un <strong>index plus précis</strong>, étant donné que davantage de connexions potentielles sont explorées. Cependant, cela entraîne également un <strong>allongement du temps d'indexation et une utilisation accrue de la mémoire</strong> lors de la construction. Envisagez d'augmenter <code translate="no">efConstruction</code> pour améliorer la précision, en particulier dans les scénarios où le temps d'indexation est moins critique.</p>
-<p>Pensez à diminuer <code translate="no">efConstruction</code> pour accélérer la construction de l'index lorsque les ressources sont limitées.</p>
-<p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [50, 500].</p></td>
+     <td><p>Nombre de voisins candidats pris en compte pour la connexion lors de la construction de l'index.</p><p>Un plus grand nombre de candidats est évalué pour chaque nouvel élément, mais le nombre maximum de connexions réellement établies est toujours limité par <code translate="no">M</code>.</p></td>
+     <td><p><strong>Type</strong>: Entier</p><p><strong>Plage de valeurs</strong>: [1, <em>int_max</em>]</p><p><strong>Valeur par défaut</strong>: <code translate="no">360</code></p></td>
+     <td><p>Une valeur plus élevée ( <code translate="no">efConstruction</code> ) permet généralement d'obtenir un <strong>index plus précis</strong>, car un plus grand nombre de connexions potentielles sont explorées. Cependant, cela entraîne également un <strong>allongement du temps d'indexation et une augmentation de l'utilisation de la mémoire</strong> pendant la construction.</p><p>Envisagez d'augmenter <code translate="no">efConstruction</code> pour améliorer la précision, en particulier dans les scénarios où le temps d'indexation est moins critique.</p><p>Pensez à diminuer <code translate="no">efConstruction</code> pour accélérer la construction de l'index lorsque les ressources sont limitées.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [50, 500].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>Spécifie la méthode de quantification scalaire pour la compression des vecteurs. Chaque option offre un équilibre différent entre la compression et la précision :</p>
-<ul>
-<li><p><code translate="no">SQ6</code>: Encode les vecteurs à l'aide d'entiers de 6 bits.</p></li>
-<li><p><code translate="no">SQ8</code>: Encode les vecteurs à l'aide d'entiers de 8 bits.</p></li>
-<li><p><code translate="no">BF16</code>: Utilise le format Bfloat16.</p></li>
-<li><p><code translate="no">FP16</code>: Utilise le format standard à virgule flottante de 16 bits.</p></li>
-</ul></td>
-     <td><p><strong>Type</strong>: Chaîne <strong>Plage</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p>
-<p><strong>Valeur par défaut</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>Le choix de <code translate="no">sq_type</code> dépend des besoins spécifiques de l'application. Si l'efficacité de la mémoire est une préoccupation majeure, <code translate="no">SQ6</code> ou <code translate="no">SQ8</code> peuvent convenir. En revanche, si la précision est primordiale, <code translate="no">BF16</code> ou <code translate="no">FP16</code> pourraient être préférés.</p></td>
+     <td><p>Spécifie la méthode de quantification scalaire pour la compression des vecteurs. Chaque option offre un équilibre différent entre la compression et la précision :</p><ul><li><p><code translate="no">SQ4U</code>: Encode les vecteurs à l'aide d'une quantification uniforme sur 4 bits. Ce mode offre la vitesse et la compression les plus élevées.</p></li><li><p><code translate="no">SQ6</code>: Encode les vecteurs à l'aide d'entiers de 6 bits.</p></li><li><p><code translate="no">SQ8</code>: Encode les vecteurs en utilisant des entiers de 8 bits.</p></li><li><p><code translate="no">BF16</code>: Utilise le format Bfloat16.</p></li><li><p><code translate="no">FP16</code>: Utilise le format standard à virgule flottante de 16 bits.</p></li></ul></td>
+     <td><p><strong>Type</strong>: Chaîne</p><p><strong>Plage</strong>: [ <code translate="no">SQ4U</code>, <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p><p><strong>Valeur par défaut</strong>: <code translate="no">SQ8</code></p></td>
+     <td><p>Le choix de <code translate="no">sq_type</code> dépend des besoins spécifiques de l'application. <code translate="no">SQ4U</code> est choisi pour une vitesse maximale et une efficacité de la mémoire. <code translate="no">SQ6</code> ou <code translate="no">SQ8</code> peuvent convenir pour des performances équilibrées. En revanche, si la précision est primordiale, <code translate="no">BF16</code> ou <code translate="no">FP16</code> peuvent être préférés.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>Indicateur booléen permettant de contrôler si une étape d'affinage est appliquée pendant la recherche. L'affinage consiste à reclasser les résultats initiaux en calculant les distances exactes entre le vecteur de la requête et les candidats.</p></td>
-     <td><p><strong>Type</strong>: Booléen <strong>Portée</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
-<p><strong>Valeur par défaut</strong>: <code translate="no">false</code></p></td>
-     <td><p>Définissez <code translate="no">true</code> si une grande précision est essentielle et que vous pouvez tolérer des temps de recherche légèrement plus lents. Utiliser <code translate="no">false</code> si la rapidité est une priorité et qu'un compromis mineur sur la précision est acceptable.</p></td>
+     <td><p>Indicateur booléen qui contrôle si une étape d'affinage est appliquée pendant la recherche. L'affinage consiste à reclasser les résultats initiaux en calculant les distances exactes entre le vecteur de la requête et les candidats.</p></td>
+     <td><p><strong>Type</strong>: Booléen</p><p><strong>Portée</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p><p><strong>Valeur par défaut</strong>: <code translate="no">false</code></p></td>
+     <td><p>Définissez <code translate="no">true</code> si une grande précision est essentielle et que vous pouvez tolérer des temps de recherche légèrement plus lents. Utilisez <code translate="no">false</code> si la vitesse est une priorité et qu'un compromis mineur au niveau de la précision est acceptable.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>Cette précision doit être supérieure à celle des vecteurs compressés (définie par <code translate="no">sq_type</code>), ce qui affecte à la fois la précision des vecteurs reclassés et leur encombrement en mémoire.</p></td>
-     <td><p><strong>Type</strong>: <strong>Plage</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
-<p><strong>Valeur par défaut</strong>: Aucune</p></td>
-     <td><p>Utilisez <code translate="no">FP32</code> pour une précision maximale à un coût mémoire plus élevé, ou <code translate="no">SQ6</code>/<code translate="no">SQ8</code> pour une meilleure compression. <code translate="no">BF16</code> et <code translate="no">FP16</code> offrent une alternative équilibrée.</p></td>
+     <td><p>Détermine la précision des données utilisées pour l'affinage.</p><p>Cette précision doit être supérieure à celle des vecteurs compressés (définie par <code translate="no">sq_type</code>), ce qui affecte à la fois la précision des vecteurs reclassés et leur encombrement en mémoire.</p></td>
+     <td><p><strong>Type</strong>: Chaîne</p><p><strong>Portée</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p><p><strong>Valeur par défaut</strong>: Aucune</p></td>
+     <td><p>Utilisez <code translate="no">FP32</code> pour une précision maximale avec un coût mémoire plus élevé, ou <code translate="no">SQ6</code>/<code translate="no">SQ8</code> pour une meilleure compression. <code translate="no">BF16</code> et <code translate="no">FP16</code> offrent une alternative équilibrée.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">recherche dans l'index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">recherche dans l'index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -231,20 +321,15 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Contrôle l'étendue de la recherche lors de l'extraction des plus proches voisins. Il détermine le nombre de nœuds visités et évalués en tant que plus proches voisins potentiels. 
- Ce paramètre n'affecte que le processus de recherche et s'applique exclusivement à la couche inférieure du graphe.</p></td>
-     <td><p><strong>Type</strong>: Entier <strong>Portée</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Valeur par défaut</strong>: <em>limit</em> (TopK plus proches voisins à retourner)</p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">ef</code> permet généralement d'<strong>améliorer la précision de la recherche</strong>, car davantage de voisins potentiels sont pris en compte. Envisagez d'augmenter <code translate="no">ef</code> lorsqu'il est essentiel d'obtenir un rappel élevé et que la vitesse de recherche n'est pas une préoccupation majeure.</p>
-<p>Pensez à diminuer <code translate="no">ef</code> pour privilégier les recherches plus rapides, en particulier dans les scénarios où une légère réduction de la précision est acceptable.</p>
-<p>Dans la plupart des cas, nous vous recommandons de fixer une valeur comprise dans cette fourchette : [K, 10K].</p></td>
+     <td><p>Contrôle l'étendue de la recherche lors de l'extraction des plus proches voisins. Il détermine le nombre de nœuds visités et évalués en tant que plus proches voisins potentiels. </p><p>Ce paramètre n'affecte que le processus de recherche et s'applique exclusivement à la couche inférieure du graphe.</p></td>
+     <td><p><strong>Type</strong>: Entier</p><p><strong>Plage de valeurs</strong>: [1, <em>int_max</em>]</p><p><strong>Valeur par défaut</strong>: <em>limit</em> (TopK plus proches voisins à retourner)</p></td>
+     <td><p>Une valeur plus élevée de <code translate="no">ef</code> permet généralement d'<strong>améliorer la précision de la recherche</strong>, car un plus grand nombre de voisins potentiels sont pris en compte. Cependant, cela <strong>augmente</strong> également <strong>le temps de recherche</strong>.</p><p>Envisagez d'augmenter <code translate="no">ef</code> lorsqu'il est essentiel d'obtenir un rappel élevé et que la vitesse de recherche est moins importante.</p><p>Pensez à diminuer <code translate="no">ef</code> pour privilégier les recherches plus rapides, en particulier dans les scénarios où une légère réduction de la précision est acceptable.</p><p>Dans la plupart des cas, nous vous recommandons de fixer une valeur comprise dans cette fourchette : [K, 10K].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>Facteur d'agrandissement qui contrôle le nombre de candidats supplémentaires examinés au cours de l'étape d'affinage, par rapport aux K premiers résultats demandés.</p></td>
-     <td><p><strong>Type</strong>: Flottant <strong>Plage</strong>: [1, <em>float_max</em>)</p>
-<p><strong>Valeur par défaut</strong>: 1</p></td>
-     <td><p>Des valeurs élevées de <code translate="no">refine_k</code> peuvent améliorer le rappel et la précision, mais augmentent également le temps de recherche et l'utilisation des ressources. Une valeur de 1 signifie que le processus d'affinement ne prend en compte que les K premiers résultats.</p></td>
+     <td><p><strong>Type</strong>: Flottant</p><p><strong>Plage de valeurs</strong>: [1, <em>float_max</em>)</p><p><strong>Valeur par défaut</strong>: 1</p></td>
+     <td><p>Des valeurs plus élevées de <code translate="no">refine_k</code> peuvent améliorer le rappel et la précision, mais augmentent également le temps de recherche et l'utilisation des ressources. Une valeur de 1 signifie que le processus d'affinement ne prend en compte que les K premiers résultats.</p></td>
    </tr>
 </table>

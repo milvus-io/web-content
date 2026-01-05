@@ -104,23 +104,17 @@ summary: upsert 操作提供了在集合中插入或更新實體的便捷方法�
 <li><p>若要保留<code translate="no">issue</code> 欄位的原始值，您需要啟用<code translate="no">partial_update</code> 並省略<code translate="no">issue</code> 欄位，或在<code translate="no">upsert</code> 請求中包含<code translate="no">issue</code> 欄位及其原始值。</p></li>
 </ul></li>
 <li><p><strong>在動態欄位中倒插鍵</strong>。</p>
-<p>假設您在範例集合中啟用了動態鍵，而實體的動態欄位中的鍵值對與<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 相似。</p>
+<p>假設您在範例集合中啟用了動態鍵，且實體的動態欄位中的鍵值對與<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 相似。</p>
 <p>當您向上插入實體的鍵，例如<code translate="no">author</code>,<code translate="no">year</code>, 或<code translate="no">tags</code>, 或新增其他鍵時，請注意：</p>
 <ul>
 <li><p>如果您在<code translate="no">partial_update</code> 禁用的情況下 upsert，預設行為是<strong>覆蓋</strong>。這表示動態欄位的值將被所有包含在請求中的非結構描述定義的欄位及其值覆蓋。</p>
 <p>例如，如果請求中包含的資料是<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> ，則目標實體的動態欄位中的鍵值對將更新為該資料。</p></li>
 <li><p>如果啟用<code translate="no">partial_update</code> 的 upsert，預設行為是<strong>合併</strong>。這表示動態欄位的值會與所有包含在請求中的非結構描述定義的欄位及其值合併。</p>
-<p>例如，如果請求中包含的資料是<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ，則在 upsert 之後，目標實體的動態欄位中的鍵值對會變成<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
+<p>例如，如果請求中包含的資料是<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ，則在 upsert 之後，目標實體的動態欄位中的鍵值對會變成<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
 </ul></li>
 <li><p><strong>倒插一個 JSON 欄位。</strong></p>
 <p>假設範例集合有一個模式定義的 JSON 欄位，名稱為<code translate="no">extras</code> ，且此實體的 JSON 欄位中的關鍵值對與<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 相似。</p>
-<p>當您使用修改過的 JSON 資料倒插實體的<code translate="no">extras</code> 欄位時，請注意：</p>
-<ul>
-<li><p>如果您在<code translate="no">partial_update</code> 禁用的情況下 upsert，預設行為是<strong>覆蓋</strong>。這表示包含在請求中的 JSON 欄位值將覆寫目標實體 JSON 欄位的原始值。</p>
-<p>例如，如果請求中包含的資料是<code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> ，則目標實體<code translate="no">extras</code> 欄位中的鍵值對將更新為<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
-<li><p>如果啟用<code translate="no">partial_update</code> 的 upsert，預設行為是<strong>合併</strong>。這表示包含在請求中的 JSON 欄位的值將與目標實體的 JSON 欄位的原始值合併。</p>
-<p>例如，如果請求中包含的資料是<code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> ，則在 udpate 之後，目標實體<code translate="no">extras</code> 欄位中的鍵值對將變成<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 。</p></li>
-</ul></li>
+<p>當您使用修改過的 JSON 資料倒插實體的<code translate="no">extras</code> 欄位時，請注意 JSON 欄位會被視為一個整體，您無法選擇性地更新個別鍵。換句話說，JSON 欄位在<strong>合併</strong>模式下<strong>不</strong>支援倒插。</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">限制與約束<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

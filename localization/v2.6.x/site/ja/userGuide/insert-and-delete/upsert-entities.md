@@ -34,7 +34,7 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">upsert</code> を使用して、新しいエンティティを挿入するか、既存のエンティティを更新することができます。主キーが見つからない場合は、挿入操作が発生します。そうでない場合は、更新操作が実行されます。</p>
+    </button></h2><p><code translate="no">upsert</code> を使用して、新しいエンティティを挿入するか、既存のエンティティを更新することができます。主キーが見つからない場合は、挿入操作が発生します。そうでなければ、更新操作が実行されます。</p>
 <p>Milvusのupsertは<strong>override</strong>または<strong>merge</strong>モードで動作します。</p>
 <h3 id="Upsert-in-override-mode" class="common-anchor-header">オーバーライドモードでのupsert<button data-href="#Upsert-in-override-mode" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -95,7 +95,7 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>マージ機能を使用する前に考慮すべき特別な注意事項がいくつかあります。以下のケースは、<code translate="no">title</code> および<code translate="no">issue</code> という 2 つのスカラ・フィールドと、<code translate="no">id</code> というプライマリ・キー、<code translate="no">vector</code> というベクトル・フィールドを持つコレクションがあると仮定します。</p>
+    </button></h3><p>マージ機能を使用する前に考慮すべき特別な注意事項がいくつかあります。以下のケースは、<code translate="no">title</code> および<code translate="no">issue</code> という 2 つのスカラ・フィールドと、<code translate="no">id</code> というプライマリ・キー、<code translate="no">vector</code> というベクトル・フィールドを持つコレクションがあると仮定しています。</p>
 <ul>
 <li><p><code translate="no">nullable</code> <strong>が有効になって</strong><strong>いるフィールドをアップサートします</strong> <strong>。</strong></p>
 <p><code translate="no">issue</code> フィールドは NULL にすることができるとします。これらのフィールドをアップサートする場合、以下の点に注意してください：</p>
@@ -110,17 +110,11 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
 <li><p><code translate="no">partial_update</code> を無効にしてアップサートを行った場合、デフォルトの動作は<strong>オーバーライドに</strong>なります。これは、ダイナミック・フィールドの値が、要求に含まれるすべての非スキーマ定義 フィールドとその値によってオーバーライドされることを意味します。</p>
 <p>例えば、要求に含まれるデータが<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> の場合、ターゲット・エンティティのダイナミック・フィールドのキーと値のペアはその値に更新されます。</p></li>
 <li><p><code translate="no">partial_update</code> を有効にしてアップサートする場合、デフォルトの動作は<strong>マージ</strong>です。これは、ダイナミック・フィールドの値が、要求に含まれるすべての非スキーマ定義フィールドとその値にマージされることを意味します。</p>
-<p>例えば、要求に含まれるデータが<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> の場合、ターゲット・エンティティのダイナミック・フィールドのキーと値のペアは、アップサート後に<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> になります。</p></li>
+<p>例えば、要求に含まれるデータが<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> の場合、ターゲット・エンティティのダイナミック・フィールドのキーと値のペアは、アップサート後に<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> になります。</p></li>
 </ul></li>
 <li><p><strong>JSONフィールドのアップサート</strong></p>
 <p>サンプル・コレクションに<code translate="no">extras</code> というスキーマ定義の JSON フィールドがあり、エンティティのこの JSON フィールドのキー・バリュー・ペアが<code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> と類似しているとします。</p>
-<p>変更されたJSONデータでエンティティの<code translate="no">extras</code> フィールドをupsertする場合、以下の点に注意してください：</p>
-<ul>
-<li><p><code translate="no">partial_update</code> が無効な状態でアップサートすると、デフォルトの動作は<strong>オーバーライドに</strong>なります。これは、要求に含まれる JSON フィールドの値が、ターゲット・エンティティの JSON フィールドの元の値をオーバーライドすることを意味します。</p>
-<p>たとえば、要求に含まれるデータが<code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> の場合、ターゲット・エンティティの<code translate="no">extras</code> フィールドのキーと値のペアは<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> に更新されます。</p></li>
-<li><p><code translate="no">partial_update</code> を有効にしてアップサートを行った場合、デフォルトの動作は<strong>マージ</strong>です。これは、要求に含まれるJSONフィールドの値が、ターゲット・エンティティの JSONフィールドの元の値とマージされることを意味する。</p>
-<p>たとえば、要求に含まれるデータが<code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> の場合、ターゲット・エンティティの<code translate="no">extras</code> フィールドのキーと値のペアは、udpate 後に<code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> になります。</p></li>
-</ul></li>
+<p>変更されたJSONデータでエンティティの<code translate="no">extras</code> フィールドをアップサートする場合、JSONフィールドは全体として扱われ、個々のキーを選択的に更新することはできないことに注意してください。言い換えると、JSON フィールドは<strong>マージ・</strong>モードでのアップサートに対応して<strong>いません</strong>。</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">制限と制約<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,10 +131,10 @@ summary: upsert 操作は、コレクション内のエンティティを挿入�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>上記の内容に基づいて、従うべきいくつかの制限と制約がある：</p>
+    </button></h3><p>上記の内容に基づき、いくつかの制限と制約があります：</p>
 <ul>
-<li><p><code translate="no">upsert</code> リクエストは、常にターゲットエンティティの主キーを含まなければならない。</p></li>
-<li><p>ターゲット・コレクションがロードされ、クエリが可能でなければならない。</p></li>
+<li><p><code translate="no">upsert</code> リクエストには、常にターゲットエンティティの主キーを含める必要があります。</p></li>
+<li><p>ターゲット・コレクションがロードされ、クエリが可能である必要があります。</p></li>
 <li><p>要求で指定されたすべてのフィールドがターゲット・コレクションのスキーマに存在すること。</p></li>
 <li><p>要求で指定されたすべてのフィールドの値が、スキーマで定義されたデータ型に一致する必要があります。</p></li>
 <li><p>関数を使用して他のフィールドから派生したフィールドについては、Milvusは再計算を可能にするため、アップサート中に派生フィールドを削除します。</p></li>

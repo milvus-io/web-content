@@ -37,9 +37,39 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_SQ 结合了两种索引技术：<strong>HNSW</strong>用于基于图的快速导航，<strong>SQ</strong>用于高效的向量压缩。</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在这个图中，节点根据其相似性进行连接，从而实现数据空间的快速遍历。分层结构允许搜索算法缩小候选邻域的范围，从而大大加快了高维空间的搜索过程。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW 构建了一个多层图，其中每个节点都对应数据集中的一个向量。在这个图中，节点根据其相似性进行连接，从而实现数据空间的快速遍历。分层结构允许搜索算法缩小候选邻域的范围，从而大大加快了高维空间的搜索过程。</p>
 <p>更多信息，请参阅<a href="/docs/zh/hnsw.md">HNSW</a>。</p>
-<h3 id="SQ" class="common-anchor-header">SQ</h3><p>SQ 是一种用较少比特表示向量的压缩方法。例如</p>
+<h3 id="SQ" class="common-anchor-header">SQ<button data-href="#SQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>SQ 是一种用较少比特表示向量的压缩方法。例如</p>
 <ul>
 <li><p><strong>SQ8</strong>使用 8 位，将数值映射为 256 个级别。  更多信息，请参阅<a href="/docs/zh/ivf-sq8.md#SQ8">IVF_SQ8</a>。</p></li>
 <li><p><strong>SQ6</strong>使用 6 位来表示每个浮点数值，从而产生 64 个离散级。</p></li>
@@ -48,10 +78,55 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hnsw-sq.png" alt="Hnsw Sq" class="doc-image" id="hnsw-sq" />
    </span> <span class="img-wrapper"> <span>Hnsw Sq</span> </span></p>
-<p>SQ6 使用 6 位来表示每个浮点数值，从而产生 64 个离散级。这种精度的降低极大地减少了内存占用，加快了计算速度，同时保留了数据的基本结构。</p>
-<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ</h3><p>HNSW_SQ 结合了 HNSW 和 SQ 的优势，实现了高效的近似近邻搜索。以下是该过程的工作原理：</p>
+<p>这种精度的降低大大减少了内存占用，加快了计算速度，同时保留了数据的基本结构。</p>
+<h3 id="SQ4U--Milvus-268+" class="common-anchor-header">SQ4U<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.8+</span><button data-href="#SQ4U--Milvus-268+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>针对要求极高查询速度和最小内存占用的应用场景，Milvus 推出了<code translate="no">SQ4U</code> ，一种 4 位统一标量量化。这是一种积极的标量量化形式，可将每个维度的浮点数值压缩为<strong>4 位</strong>无符号整数。</p>
+<p>SQ4U 中的 "U "代表 Uniform（统一）。非统一标量量化通常会为每个维度独立计算最小值和最大值（按维度量化），而 SQ4U 则不同，它执行的是<strong>全局统一量化</strong>策略：</p>
 <ol>
-<li><p><strong>数据压缩：</strong>SQ 使用<code translate="no">sq_type</code> （例如 SQ6 或 SQ8）对向量进行压缩，从而减少内存使用量。这种压缩可能会降低精度，但却能让系统处理更大的数据集。</p></li>
+<li><p><strong>全局统计</strong>：系统计算适用于向量<strong>所有维度</strong>（或整个向量段）的<strong>单一</strong>最小值<code translate="no">vmin</code> 和<strong>单一</strong>值范围<code translate="no">vdiff</code> 。</p></li>
+<li><p><strong>统一映射</strong>：全局值范围分为 16 个相等的区间。向量中的每个浮点数值，无论属于哪个维度，都使用这些共享参数映射为 4 位整数（0-15）。</p></li>
+</ol>
+<p><strong>性能优势</strong></p>
+<ul>
+<li><p><strong>8 倍压缩比：</strong>与<code translate="no">FP32</code> 相比，压缩率提高了 8 倍，与<code translate="no">SQ8</code> 相比，压缩率提高了 2 倍，大大降低了内存带宽压力--内存带宽往往是向量搜索的瓶颈。</p></li>
+<li><p><strong>SIMD 优化：</strong>紧凑的结构允许现代 CPU（AVX2/AVX-512）在每个周期内处理更多的维数。最重要的是，全局参数的使用消除了在距离计算过程中加载不同标度/偏移值的需要，使指令流水线保持完全饱和。</p></li>
+<li><p><strong>高速缓存效率：</strong>较小的向量尺寸意味着更多的数据可以放入 CPU 高速缓存，从而减少内存访问造成的延迟。</p></li>
+</ul>
+<div class="alert note">
+<p>由于全局参数共享，SQ4U 在规范化数据或各维度值分布一致的数据集上表现最佳。</p>
+</div>
+<h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ<button data-href="#HNSW-+-SQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW_SQ 结合了 HNSW 和 SQ 的优势，实现了高效的近似近邻搜索。以下是该过程的工作原理：</p>
+<ol>
+<li><p><strong>数据压缩：</strong>SQ 使用<code translate="no">sq_type</code> （例如 SQ6 或 SQ8）压缩向量，从而减少内存使用量。这种压缩可能会降低精度，但却能让系统处理更大的数据集。</p></li>
 <li><p><strong>图形构建：</strong>压缩向量用于构建 HNSW 图形。由于数据经过压缩，生成的图更小，搜索速度更快。</p></li>
 <li><p><strong>候选检索：</strong>当提供查询向量时，算法会使用压缩数据从 HNSW 图中快速识别出候选邻域池。</p></li>
 <li><p><strong>(可选）结果完善：</strong>可根据以下参数对初始候选结果进行改进，以提高准确性：</p>
@@ -100,7 +175,7 @@ index_params.add_index(
 <p>在此配置中</p>
 <ul>
 <li><p><code translate="no">index_type</code>:要建立的索引类型。在本例中，将值设为<code translate="no">HNSW_SQ</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详细信息，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
+<li><p><code translate="no">metric_type</code>:用于计算向量间距离的方法。支持的值包括<code translate="no">COSINE</code>,<code translate="no">L2</code>, 和<code translate="no">IP</code> 。有关详情，请参阅<a href="/docs/zh/metric.md">公制类型</a>。</p></li>
 <li><p><code translate="no">params</code>:用于构建索引的附加配置选项。详情请参阅<a href="/docs/zh/hnsw-sq.md#Index-building-params">索引构建参数</a>。</p></li>
 </ul>
 <p>配置好索引参数后，可直接使用<code translate="no">create_index()</code> 方法或在<code translate="no">create_collection</code> 方法中传递索引参数来创建索引。详情请参阅<a href="/docs/zh/create-collection.md">创建 Collections</a>。</p>
@@ -155,7 +230,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本节概述了用于建立索引和在索引上执行搜索的参数。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立参数</h3><p>下表列出了<a href="/docs/zh/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立参数<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">建立索引</a>时可在<code translate="no">params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th></th>
@@ -167,55 +257,55 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>图中每个节点可拥有的最大连接数（或边），包括出站边和入站边。 该参数直接影响索引构建和搜索。</p></td>
-     <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[2, 2048]</p>
-<p><strong>默认值</strong>：<code translate="no">30</code> （每个节点最多有 30 条出边和 30 条入边）</p></td>
-     <td><p>较大的<code translate="no">M</code> 通常会<strong>提高准确率</strong>，但会<strong>增加内存开销</strong>，并<strong>减慢索引构建和搜索速度</strong>。对于高维度数据集或高召回率至关重要时，可考虑增加<code translate="no">M</code> 。</p>
-<p>当内存使用和搜索速度是首要考虑因素时，可考虑降低<code translate="no">M</code> 。</p>
-<p>在大多数情况下，我们建议您在此范围内设置一个值：[5, 100].</p></td>
+     <td><p>图中每个节点可拥有的最大连接数（或边），包括出站边和入站边。</p><p>该参数直接影响索引构建和搜索。</p></td>
+     <td><p><strong>类型</strong>：整数</p><p><strong>范围</strong>： [2, 2048[2, 2048]</p><p><strong>默认值</strong>：<code translate="no">30</code> （每个节点最多 30 条出边和 30 条入边）</p></td>
+     <td><p>较大的<code translate="no">M</code> 通常会<strong>提高准确率</strong>，但会<strong>增加内存开销</strong>，并<strong>减慢索引构建和搜索速度</strong>。</p><p>对于高维度数据集或高召回率至关重要时，可考虑提高<code translate="no">M</code> 。</p><p>当内存使用和搜索速度是首要考虑因素时，可考虑降低<code translate="no">M</code> 。</p><p>在大多数情况下，我们建议您在此范围内设置一个值：[5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>索引构建过程中考虑连接的候选邻居数量。 每个新元素都会评估更多的候选邻居，但实际建立的最大连接数仍受<code translate="no">M</code> 限制。</p></td>
-     <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[1，<em>int_max］</em></p>
-<p><strong>默认值</strong>：<code translate="no">360</code></p></td>
-     <td><p><code translate="no">efConstruction</code> 越高，<strong>索引</strong>越<strong>准确</strong>，因为会探索更多潜在连接。考虑增加<code translate="no">efConstruction</code> 以提高准确性<strong>，</strong>尤其是在索引时间不太重要的情况下。</p>
-<p>在资源紧张的情况下，可考虑降低<code translate="no">efConstruction</code> ，以加快索引构建速度。</p>
-<p>在大多数情况下，我们建议在此范围内设置一个值：[50, 500].</p></td>
+     <td><p>索引构建过程中考虑连接的候选邻居数量。</p><p>每个新元素都会评估一个更大的候选池，但实际建立的最大连接数仍受<code translate="no">M</code> 限制。</p></td>
+     <td><p><strong>类型</strong>：整数</p><p><strong>范围</strong>： [1, int_max[1，<em>int_max］</em></p><p><strong>默认值</strong>：<code translate="no">360</code></p></td>
+     <td><p><code translate="no">efConstruction</code> 越高，<strong>索引</strong>越<strong>准确</strong>，因为会探索更多潜在连接。不过，这也会导致建立<strong>索引的时间延长和内存使用量增加</strong>。</p><p>考虑增加<code translate="no">efConstruction</code> 以提高准确性，尤其是在索引时间不太重要的情况下。</p><p>在资源紧张的情况下，可考虑降低<code translate="no">efConstruction</code> ，以加快索引构建速度。</p><p>在大多数情况下，我们建议在此范围内设置一个值：[50, 500].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>指定用于压缩向量的标量量化方法。每个选项都在压缩和准确性之间提供了不同的平衡：</p>
-<ul>
-<li><p><code translate="no">SQ6</code>:使用 6 位整数编码向量。</p></li>
-<li><p><code translate="no">SQ8</code>:使用 8 位整数编码向量。</p></li>
-<li><p><code translate="no">BF16</code>:使用 Bfloat16 格式。</p></li>
-<li><p><code translate="no">FP16</code>:使用标准的 16 位浮点格式。</p></li>
-</ul></td>
-     <td><p><strong>类型</strong>： 字符串字符串<strong>范围</strong>：[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> ]</p>
-<p><strong>默认值</strong>：<code translate="no">SQ8</code></p></td>
-     <td><p><code translate="no">sq_type</code> 的选择取决于具体应用的需求。如果内存效率是首要考虑因素，<code translate="no">SQ6</code> 或<code translate="no">SQ8</code> 可能比较合适。另一方面，如果精度是最重要的，<code translate="no">BF16</code> 或<code translate="no">FP16</code> 可能是首选。</p></td>
+     <td><p>指定用于压缩向量的标量量化方法。每个选项都在压缩和准确性之间提供了不同的平衡：</p><ul><li><p><code translate="no">SQ4U</code>:使用 4 位均匀量化对向量进行编码。该模式提供最高的速度和压缩率。</p></li><li><p><code translate="no">SQ6</code>:使用 6 位整数编码向量。</p></li><li><p><code translate="no">SQ8</code>:使用 8 位整数编码向量。</p></li><li><p><code translate="no">BF16</code>:使用 Bfloat16 格式。</p></li><li><p><code translate="no">FP16</code>:使用标准 16 位浮点格式。</p></li></ul></td>
+     <td><p><strong>类型</strong>：字符串</p><p><strong>范围</strong>[<code translate="no">SQ4U</code>,<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> ]</p><p><strong>默认值</strong>：<code translate="no">SQ8</code></p></td>
+     <td><p>选择<code translate="no">sq_type</code> 取决于具体应用的需求。选择<code translate="no">SQ4U</code> 是为了最大限度地提高速度和内存效率。<code translate="no">SQ6</code> 或<code translate="no">SQ8</code> 可能适合平衡性能。另一方面，如果精度是最重要的，<code translate="no">BF16</code> 或<code translate="no">FP16</code> 可能是首选。</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>布尔标志，用于控制搜索过程中是否应用细化步骤。细化是指通过计算查询向量与候选向量之间的精确距离，对初始结果进行重新排序。</p></td>
-     <td><p><strong>类型</strong>：布尔布尔<strong>范围</strong>：[<code translate="no">true</code>,<code translate="no">false</code>]</p>
-<p><strong>默认值</strong>：<code translate="no">false</code></p></td>
+     <td><p>布尔标志，用于控制搜索过程中是否应用细化步骤。细化包括通过计算查询向量和候选向量之间的精确距离对初始结果进行重新排序。</p></td>
+     <td><p><strong>类型</strong>：布尔布尔</p><p><strong>范围</strong>[<code translate="no">true</code>,<code translate="no">false</code>]</p><p><strong>默认值</strong>：<code translate="no">false</code></p></td>
      <td><p>如果需要高精确度，并且可以忍受稍慢的搜索时间，则设置为<code translate="no">true</code> 。如果速度是首要考虑因素，并且可以接受在精确度上稍有妥协，则使用<code translate="no">false</code> 。</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>确定用于细化的数据的精度。 该精度必须高于压缩向量的精度（由<code translate="no">sq_type</code> 设置），这会影响重新排序向量的精度及其内存占用。</p></td>
-     <td><p><strong>类型</strong>： 字符串字符串<strong>范围</strong>：[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code>,<code translate="no">FP32</code> ]</p>
-<p><strong>默认值</strong>：无</p></td>
-     <td><p><code translate="no">FP32</code> <code translate="no">SQ6</code><code translate="no">SQ8</code> <code translate="no">BF16</code> 和 提供了一个平衡的替代方案。<code translate="no">FP16</code> </p></td>
+     <td><p>决定用于细化的数据精度。</p><p>该精度必须高于压缩向量的精度（由<code translate="no">sq_type</code> 设置），这会影响重新排序向量的精度及其内存占用。</p></td>
+     <td><p><strong>类型</strong>： 字符串字符串</p><p><strong>范围</strong>:[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code>,<code translate="no">FP32</code> ]</p><p><strong>默认值</strong>：无</p></td>
+     <td><p>使用<code translate="no">FP32</code> 可获得最高精度，但内存成本较高；使用<code translate="no">SQ6</code>/<code translate="no">SQ8</code> 可获得更好的压缩效果。<code translate="no">BF16</code> 和<code translate="no">FP16</code> 提供了一个平衡的替代方案。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了<a href="/docs/zh/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh/hnsw-sq.md#share-DeFldzMQQoc2W4x2YiIcYUbqnne">在索引上搜索</a>时可在<code translate="no">search_params.params</code> 中配置的参数。</p>
 <table>
    <tr>
      <th></th>
@@ -227,20 +317,15 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>控制近邻检索时的搜索范围。它决定访问多少节点并将其评估为潜在近邻。 
- 该参数只影响搜索过程，并且只适用于图形的底层。</p></td>
-     <td><p><strong>类型</strong>： 整数整数<strong>范围</strong>：[1，<em>int_max］</em></p>
-<p><strong>默认值</strong>：<em>limit</em>（返回的前 K 个近邻）</p></td>
-     <td><p><code translate="no">ef</code> 越大，通常<strong>搜索精度越高</strong>，因为会考虑更多的潜在近邻。当实现高召回率至关重要，而<strong>搜索</strong>速度则不那么重要时，可考虑增加<code translate="no">ef</code> 。</p>
-<p>考虑降低<code translate="no">ef</code> 以优先提高搜索速度，尤其是在可以接受稍微降低准确率的情况下。</p>
-<p>在大多数情况下，我们建议您在此范围内设置一个值：[K，10K]。</p></td>
+     <td><p>控制近邻检索时的搜索范围。它决定访问多少节点并将其评估为潜在近邻。 </p><p>该参数只影响搜索过程，并且只适用于图形的底层。</p></td>
+     <td><p><strong>类型</strong>：整数</p><p><strong>范围</strong>： [1, int_max[1，<em>int_max］</em></p><p><strong>默认值</strong>：<em>limit</em>（返回的前 K 个近邻）</p></td>
+     <td><p><code translate="no">ef</code> 越大，<strong>搜索精度越高</strong>，因为会考虑更多的潜在近邻。不过，这也会<strong>增加搜索时间</strong>。</p><p>如果实现高召回率至关重要，而搜索速度则不那么重要，则可考虑提高<code translate="no">ef</code> 。</p><p>考虑降低<code translate="no">ef</code> 以优先提高搜索速度，尤其是在可以接受稍微降低准确率的情况下。</p><p>在大多数情况下，我们建议您在此范围内设置一个值：[K，10K]。</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>放大系数，用于控制相对于请求的前 K 个结果，在细化阶段检查多少额外的候选结果。</p></td>
-     <td><p><strong>类型</strong>：浮动<strong>范围</strong>：[1,<em>float_max</em>)</p>
-<p><strong>默认值</strong>：1</p></td>
-     <td><p><code translate="no">refine_k</code> 的较高值可以提高召回率和准确率，但也会增加搜索时间和资源占用。值为 1 意味着细化过程只考虑最初的前 K 个结果。</p></td>
+     <td><p><strong>类型</strong>：浮点数</p><p><strong>范围</strong>： [1, float_max[1,<em>float_max</em>)</p><p><strong>默认值</strong>：1</p></td>
+     <td><p><code translate="no">refine_k</code> 的较高值可提高召回率和准确率，但也会增加搜索时间和资源占用。值为 1 意味着细化过程只考虑最初的前 K 个结果。</p></td>
    </tr>
 </table>

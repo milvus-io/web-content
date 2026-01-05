@@ -39,9 +39,39 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PRQ 結合了兩種索引技術：<strong>HSNW</strong>用於基於圖表的快速導覽，而<strong>PRQ</strong>則用於有效率的向量壓縮。</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW 會建構一個多層圖表，其中每個節點對應資料集中的向量。在這個圖形中，節點是根據其相似性連接起來的，因此可以快速遍歷資料空間。層級結構可讓搜尋演算法縮小候選鄰近點的範圍，大幅加速高維空間的搜尋過程。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW 會建構一個多層圖表，其中每個節點對應資料集中的向量。在這個圖形中，節點是根據其相似性連接起來的，因此可以快速遍歷資料空間。層級結構可讓搜尋演算法縮小候選鄰近點的範圍，大幅加速高維空間的搜尋過程。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/hnsw.md">HNSW</a>。</p>
-<h3 id="PRQ" class="common-anchor-header">PRQ</h3><p>PRQ 是一種多階段向量壓縮方法，結合了兩種互補的技術：PQ 和 RQ。PRQ 首先將高維向量分割成較小的子向量 (透過 PQ)，然後將任何剩餘的差異量化 (透過 RQ)，如此一來，PRQ 就能達到精簡又精確的原始資料表示。</p>
+<h3 id="PRQ" class="common-anchor-header">PRQ<button data-href="#PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PRQ 是一種多階段向量壓縮方法，結合了兩種互補的技術：PQ 和 RQ。PRQ 首先將高維向量分割成較小的子向量 (透過 PQ)，然後將任何剩餘的差異量化 (透過 RQ)，以達到精簡又精確的原始資料表示。</p>
 <p>下圖顯示其運作方式。</p>
 <p>
   
@@ -49,14 +79,29 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Hnsw Prq</span> </span></p>
 <ol>
 <li><p><strong>乘積量化 (PQ)</strong></p>
-<p>在此階段中，原始向量會被分割成較小的子向量，而每個子向量會被映射到學習到的編碼簿中最接近的中心點。這種映射方式可大幅減少資料大小，但由於每個子向量都是由單一中心點近似而成，因此會產生一些四捨五入的誤差。如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-pq.md#PQ">IVF_PQ</a>。</p></li>
+<p>在此階段中，原始向量會被分割成較小的子向量，而每個子向量會被映射到學習到的編碼簿中最接近的中心點。此對應方式可大幅減少資料大小，但由於每個子向量都是由單一中心點近似而成，因此會產生一些四捨五入的誤差。如需詳細資訊，請參閱<a href="/docs/zh-hant/ivf-pq.md#PQ">IVF_PQ</a>。</p></li>
 <li><p><strong>殘餘量化 (RQ)</strong></p>
 <p>在 PQ 階段之後，RQ 會使用額外的編碼本量化殘餘值 - 原始向量與其 PQ 近似值之間的差異。由於殘餘量通常小得多，因此可以更精確地編碼，而不會大量增加儲存空間。</p>
-<p>參數<code translate="no">nrq</code> 決定此殘餘值被反覆量化的次數，讓您可以微調壓縮效率與精確度之間的平衡。</p></li>
+<p>參數<code translate="no">nrq</code> 決定此殘餘值的反覆量化次數，讓您可以微調壓縮效率與精確度之間的平衡。</p></li>
 <li><p><strong>最終壓縮表示</strong></p>
 <p>當 RQ 完成量化殘餘值後，PQ 和 RQ 的整數編碼會合併為單一的壓縮索引。透過捕捉單獨 PQ 可能會遺漏的精細細節，RQ 可在不大幅增加儲存空間的情況下提升精確度。PQ 和 RQ 之間的協同作用就是 PRQ 的定義。</p></li>
 </ol>
-<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ</h3><p>透過結合 HNSW 與 PRQ，<strong>HNSW_PRQ</strong>保留 HNSW 基於圖表的快速搜尋，同時利用 PRQ 的多階段壓縮。工作流程如下</p>
+<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ<button data-href="#HNSW-+-PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>透過結合 HNSW 與 PRQ，<strong>HNSW_PRQ</strong>保留 HNSW 基於圖表的快速搜尋，同時利用 PRQ 的多階段壓縮。工作流程如下</p>
 <ol>
 <li><p><strong>資料壓縮：</strong>首先透過 PQ 將每個向量轉換為粗略的表示，然後透過 RQ 對殘餘進行量化，以進一步精細化。結果是一組代表每個向量的精簡編碼。</p></li>
 <li><p><strong>圖形建構：</strong>壓縮向量（包括 PQ 和 RQ 編碼）是建立 HNSW 圖形的基礎。由於資料是以精簡的形式儲存，因此圖形所需的記憶體較少，並可加快瀏覽速度。</p></li>
@@ -65,7 +110,7 @@ summary: >-
 <ul>
 <li><p><code translate="no">refine</code>:控制是否啟動此精煉步驟。當設定為<code translate="no">true</code> 時，系統會使用更高精度或未壓縮的表示來重新計算距離。</p></li>
 <li><p><code translate="no">refine_type</code>:指定精煉過程中使用的資料精確度等級（例如 SQ6、SQ8、BF16）。更高精度的選擇，例如<code translate="no">FP32</code> ，可以產生更精確的結果，但需要更多的記憶體。這必須比原始壓縮資料集的精確度高出<code translate="no">sq_type</code> 。</p></li>
-<li><p><code translate="no">refine_k</code>:作為放大係數。例如，如果您的 top<em>k</em>是 100，而<code translate="no">refine_k</code> 是 2，系統會重新排序前 200 名候選人，並傳回最佳的 100 名，以提高整體精確度。</p></li>
+<li><p><code translate="no">refine_k</code>:作為放大係數。舉例來說，如果您的 top<em>k</em>是 100，而<code translate="no">refine_k</code> 是 2，系統會重新排序前 200 名候選人，並傳回最佳的 100 名，以提高整體精確度。</p></li>
 </ul></li>
 </ol>
 <p>如需參數及有效值的完整清單，請參閱<a href="/docs/zh-hant/hnsw-prq.md#Index-params">索引參數</a>。</p>
@@ -164,7 +209,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>本節概述用於建立索引和在索引上執行搜尋的參數。</p>
-<h3 id="Index-building-params" class="common-anchor-header">索引建立參數</h3><p>下表列出了<a href="/docs/zh-hant/hnsw-prq.md#Build-index">建立索引</a>時可在<code translate="no">params</code> 中設定的參數。</p>
+<h3 id="Index-building-params" class="common-anchor-header">索引建立參數<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出了<a href="/docs/zh-hant/hnsw-prq.md#Build-index">建立索引</a>時可以在<code translate="no">params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th></th>
@@ -179,7 +239,7 @@ res = MilvusClient.search(
      <td><p>每個節點在圖表中可擁有的最大連線（或邊緣）數量，包括傳出和傳入的邊緣。 此參數直接影響索引建立和搜尋。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[2, 2048]</p>
 <p><strong>預設值</strong>：<code translate="no">30</code> (每個節點最多可有 30 條出站邊和 30 條入站邊)</p></td>
-     <td><p>較大的<code translate="no">M</code> 通常會帶來<strong>較高的精確度</strong>，<strong>但會增加記憶體開銷</strong>，<strong>並減慢索引建立和搜尋的</strong>速度。對於高維度的資料集或高召回率非常重要時，請考慮增加<code translate="no">M</code> 。</p>
+     <td><p>較大的<code translate="no">M</code> 通常會帶來<strong>較高的精確度</strong>，<strong>但會增加記憶體開銷</strong>，<strong>並減慢索引建置和搜尋的</strong>速度。對於高維度的資料集或高召回率非常重要時，請考慮增加<code translate="no">M</code> 。</p>
 <p>如果記憶體佔用量和搜尋速度是主要考量，則考慮降低<code translate="no">M</code> 。</p>
 <p>在大多數情況下，我們建議您設定此範圍內的值：[5, 100].</p></td>
    </tr>
@@ -205,8 +265,8 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>用來以壓縮形式表示每個子向量中心點索引的位元數。每個編碼本將包含 $2^{textit{nbits}}$ 的中心點。例如，如果<code translate="no">nbits</code> 設定為 8，則每個子向量將由 8 位元的 centroid 索引表示。如此一來，該子向量的編碼簿中就有 2^8$ (256) 個可能的中心點。</p></td>
-     <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 64]</p>
+     <td><p>用來以壓縮形式表示每個子向量中心點索引的位元數。每個編碼本將包含<sup>2</sup>位元的中心點。例如，如果<code translate="no">nbits</code> 設定為 8，每個子向量將以 8 位元的中心點索引來表示。這樣，該子向量的編碼簿中就有<sup>28</sup>(256) 個可能的中心點。</p></td>
+     <td><p><strong>類型</strong>：整<strong>數</strong>整數<strong>範圍</strong>：[1, 24]</p>
 <p><strong>預設值</strong>：<code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼本，可能會導致原始向量的表示更精確。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
    </tr>
@@ -232,10 +292,25 @@ res = MilvusClient.search(
      <td><p>決定精煉過程中使用的資料精確度。 此精確度必須高於壓縮向量的精確度（由<code translate="no">m</code> 和<code translate="no">nbits</code> 參數設定）。</p></td>
      <td><p><strong>類型</strong>：字串<strong>範圍</strong>:[<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code>,<code translate="no">FP32</code> ]。</p>
 <p><strong>預設值</strong>：無</p></td>
-     <td><p>使用<code translate="no">FP32</code> 可在較高記憶體成本下獲得最高精確度，使用<code translate="no">SQ6</code>/<code translate="no">SQ8</code> 則可獲得更好的壓縮效果。<code translate="no">BF16</code> 和<code translate="no">FP16</code> 提供一個平衡的替代方案。</p></td>
+     <td><p>使用<code translate="no">FP32</code> 可在較高記憶體成本下獲得最高精確度，使用<code translate="no">SQ6</code>/<code translate="no">SQ8</code> 則可獲得更好的壓縮效果。<code translate="no">BF16</code> 和<code translate="no">FP16</code> 提供了一個平衡的替代方案。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數</h3><p>下表列出<a href="/docs/zh-hant/hnsw-prq.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下表列出<a href="/docs/zh-hant/hnsw-prq.md#Search-on-index">在索引上搜尋時</a>，可在<code translate="no">search_params.params</code> 中設定的參數。</p>
 <table>
    <tr>
      <th></th>
