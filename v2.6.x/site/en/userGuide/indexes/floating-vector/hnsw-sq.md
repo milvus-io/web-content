@@ -30,7 +30,7 @@ SQ is a method for compressing vectors by representing them with fewer bits. For
 
 This reduction in precision dramatically decreases the memory footprint and speeds up the computation while retaining the essential structure of the data.
 
-### SQ4U
+### SQ4U | Milvus 2.6.8+
 
 For scenarios demanding extreme query speed and minimal memory usage, Milvus introduces `SQ4U` , a 4-bit Uniform Scalar Quantization. This is an aggressive form of scalar quantization that compresses each dimension's floating-point value into a **4-bit** unsigned integer.
 
