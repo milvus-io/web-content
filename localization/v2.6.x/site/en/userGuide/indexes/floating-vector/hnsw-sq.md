@@ -84,7 +84,7 @@ summary: >-
   </span>
 </p>
 <p>This reduction in precision dramatically decreases the memory footprint and speeds up the computation while retaining the essential structure of the data.</p>
-<h3 id="SQ4U" class="common-anchor-header">SQ4U<button data-href="#SQ4U" class="anchor-icon" translate="no">
+<h3 id="SQ4U--Milvus-268+" class="common-anchor-header">SQ4U<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.8+</span><button data-href="#SQ4U--Milvus-268+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
