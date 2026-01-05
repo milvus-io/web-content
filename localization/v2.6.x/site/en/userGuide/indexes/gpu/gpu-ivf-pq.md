@@ -172,7 +172,7 @@ res = MilvusClient.search(
      <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook.
  Each codebook will contain $2^{\textit{nbits}}$ centroids. For example, if <code translate="no">nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for $2^8$ (256) possible centroids in the codebook for that sub-vector.</p></td>
      <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, 64]</p>
+ <strong>Range</strong>: [1, 24]</p>
 <p><strong>Default value</strong>: <code translate="no">8</code></p></td>
      <td><p>A higher <code translate="no">nbits</code> value allows for larger codebooks, potentially leading to more accurate representations of the original vectors. However, it also means using more bits to store each index, resulting in less compression.
  In most cases, we recommend you set a value within this range: [1, 16].</p></td>

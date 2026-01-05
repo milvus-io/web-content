@@ -84,6 +84,36 @@ summary: >-
   </span>
 </p>
 <p>This reduction in precision dramatically decreases the memory footprint and speeds up the computation while retaining the essential structure of the data.</p>
+<h3 id="SQ4U" class="common-anchor-header">SQ4U<button data-href="#SQ4U" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>For scenarios demanding extreme query speed and minimal memory usage, Milvus introduces <code translate="no">SQ4U</code> , a 4-bit Uniform Scalar Quantization. This is an aggressive form of scalar quantization that compresses each dimension’s floating-point value into a <strong>4-bit</strong> unsigned integer.</p>
+<p>The “U” in SQ4U stands for Uniform. Unlike non-uniform Scalar Quantization, which typically calculates minimum and maximum values independently for each dimension (Per-Dimension Quantization), SQ4U enforces a <strong>Global Uniform Quantization</strong> strategy:</p>
+<ol>
+<li><p><strong>Global Statistics</strong>: The system calculates a <strong>single</strong> minimum value <code translate="no">vmin</code> and a <strong>single</strong> value range <code translate="no">vdiff</code> that applies to <strong>all dimensions</strong> of the vector (or the entire vector segment).</p></li>
+<li><p><strong>Uniform Mapping</strong>: The global value range is divided into 16 equal intervals. Every floating-point value in the vector, regardless of which dimension it belongs to, is mapped to a 4-bit integer (0–15) using these shared parameters.</p></li>
+</ol>
+<p><strong>Performance Advantages:</strong></p>
+<ul>
+<li><p><strong>8x Compression Ratio:</strong> Reduces size by 8x compared to <code translate="no">FP32</code> and 2x compared to <code translate="no">SQ8</code>, significantly lowering memory bandwidth pressure—often the bottleneck in vector search.</p></li>
+<li><p><strong>SIMD Optimization:</strong> The compact structure allows modern CPUs (AVX2/AVX-512) to process more dimensions per cycle. Crucially, the use of global parameters eliminates the need to load varying scale/offset values during distance calculation, keeping the instruction pipeline fully saturated.</p></li>
+<li><p><strong>Cache Efficiency:</strong> Smaller vector sizes mean more data fits into the CPU cache, reducing latency caused by memory access.</p></li>
+</ul>
+<div class="alert note">
+<p>Due to its global parameter sharing, SQ4U performs best on normalized data or datasets with consistent value distributions across dimensions.</p>
+</div>
 <h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ<button data-href="#HNSW-+-SQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,61 +262,36 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Maximum number of connections （or edges) each node can have in the graph, including both outgoing and incoming edges.
- This parameter directly affects both index construction and search.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [2, 2048]</p>
-<p><strong>Default value</strong>: <code translate="no">30</code> (up to 30 outgoing and 30 incoming edges per node)</p></td>
-     <td><p>A larger <code translate="no">M</code> generally leads to <strong>higher accuracy</strong> but <strong>increases memory overhead</strong> and <strong>slows down both index building and search</strong>.
- Consider increasing <code translate="no">M</code> for datasets with high dimensionality or when high recall is crucial.</p>
-<p>Consider decreasing <code translate="no">M</code> when memory usage and search speed are primary concerns.</p>
-<p>In most cases, we recommend you set a value within this range: [5, 100].</p></td>
+     <td><p>Maximum number of connections （or edges) each node can have in the graph, including both outgoing and incoming edges.</p><p>This parameter directly affects both index construction and search.</p></td>
+     <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [2, 2048]</p><p><strong>Default value</strong>: <code translate="no">30</code> (up to 30 outgoing and 30 incoming edges per node)</p></td>
+     <td><p>A larger <code translate="no">M</code> generally leads to <strong>higher accuracy</strong> but <strong>increases memory overhead</strong> and <strong>slows down both index building and search</strong>.</p><p>Consider increasing <code translate="no">M</code> for datasets with high dimensionality or when high recall is crucial.</p><p>Consider decreasing <code translate="no">M</code> when memory usage and search speed are primary concerns.</p><p>In most cases, we recommend you set a value within this range: [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>Number of candidate neighbors considered for connection during index construction.
- A larger pool of candidates is evaluated for each new element, but the maximum number of connections actually established is still limited by <code translate="no">M</code>.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Default value</strong>: <code translate="no">360</code></p></td>
-     <td><p>A higher <code translate="no">efConstruction</code> typically results in a <strong>more accurate index</strong>, as more potential connections are explored. However, this also leads to <strong>longer indexing time and increased memory usage</strong> during construction.
- Consider increasing <code translate="no">efConstruction</code> for improved accuracy, especially in scenarios where indexing time is less critical.</p>
-<p>Consider decreasing <code translate="no">efConstruction</code> to speed up index construction when resource constraints are a concern.</p>
-<p>In most cases, we recommend you set a value within this range: [50, 500].</p></td>
+     <td><p>Number of candidate neighbors considered for connection during index construction.</p><p>A larger pool of candidates is evaluated for each new element, but the maximum number of connections actually established is still limited by <code translate="no">M</code>.</p></td>
+     <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Default value</strong>: <code translate="no">360</code></p></td>
+     <td><p>A higher <code translate="no">efConstruction</code> typically results in a <strong>more accurate index</strong>, as more potential connections are explored. However, this also leads to <strong>longer indexing time and increased memory usage</strong> during construction.</p><p>Consider increasing <code translate="no">efConstruction</code> for improved accuracy, especially in scenarios where indexing time is less critical.</p><p>Consider decreasing <code translate="no">efConstruction</code> to speed up index construction when resource constraints are a concern.</p><p>In most cases, we recommend you set a value within this range: [50, 500].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>Specifies the scalar quantization method for compressing vectors. Each option offers a different balance between compression and accuracy:</p>
-<ul>
-<li><p><code translate="no">SQ6</code>: Encodes vectors using 6-bit integers.</p></li>
-<li><p><code translate="no">SQ8</code>: Encodes vectors using 8-bit integers.</p></li>
-<li><p><code translate="no">BF16</code>: Uses the Bfloat16 format.</p></li>
-<li><p><code translate="no">FP16</code>: Uses the standard 16-bit floating-point format.</p></li>
-</ul></td>
-     <td><p><strong>Type</strong>: String
- <strong>Range</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p>
-<p><strong>Default value</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>The choice of <code translate="no">sq_type</code> depends on the specific application's needs. If memory efficiency is a primary concern, <code translate="no">SQ6</code> or <code translate="no">SQ8</code> might be suitable. On the other hand, if accuracy is paramount, <code translate="no">BF16</code> or <code translate="no">FP16</code> could be preferred.</p></td>
+     <td><p>Specifies the scalar quantization method for compressing vectors. Each option offers a different balance between compression and accuracy:</p><ul><li><p><code translate="no">SQ4U</code>: Encodes vectors using 4-bit uniform quantization. This mode offers the highest speed and compression.</p></li><li><p><code translate="no">SQ6</code>: Encodes vectors using 6-bit integers.</p></li><li><p><code translate="no">SQ8</code>: Encodes vectors using 8-bit integers.</p></li><li><p><code translate="no">BF16</code>: Uses the Bfloat16 format.</p></li><li><p><code translate="no">FP16</code>: Uses the standard 16-bit floating-point format.</p></li></ul></td>
+     <td><p><strong>Type</strong>: String</p><p><strong>Range</strong>: [ <code translate="no">SQ4U</code>, <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p><p><strong>Default value</strong>: <code translate="no">SQ8</code></p></td>
+     <td><p>The choice of <code translate="no">sq_type</code> depends on the specific application's needs. <code translate="no">SQ4U</code> is chosen  for maximum speed and memory efficiency. <code translate="no">SQ6</code> or <code translate="no">SQ8</code> might be suitable for balanced performance. On the other hand, if accuracy is paramount, <code translate="no">BF16</code> or <code translate="no">FP16</code> could be preferred.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
      <td><p>A boolean flag that controls whether a refinement step is applied during search. Refinement involves reranking the initial results by computing exact distances between the query vector and candidates.</p></td>
-     <td><p><strong>Type</strong>: Boolean
- <strong>Range</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
-<p><strong>Default value</strong>: <code translate="no">false</code></p></td>
+     <td><p><strong>Type</strong>: Boolean</p><p><strong>Range</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p><p><strong>Default value</strong>: <code translate="no">false</code></p></td>
      <td><p>Set to <code translate="no">true</code> if high accuracy is essential and you can tolerate slightly slower search times. Use <code translate="no">false</code> if speed is a priority and a minor compromise in accuracy is acceptable.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>Determines the precision of the data used for refinement.
- This precision must be higher than that of the compressed vectors (as set by <code translate="no">sq_type</code>), affecting both the accuracy of the re-ranked vectors and their memory footprint.</p></td>
-     <td><p><strong>Type</strong>: String
- <strong>Range</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p>
-<p><strong>Default value</strong>: None</p></td>
+     <td><p>Determines the precision of the data used for refinement.</p><p>This precision must be higher than that of the compressed vectors (as set by <code translate="no">sq_type</code>), affecting both the accuracy of the re-ranked vectors and their memory footprint.</p></td>
+     <td><p><strong>Type</strong>: String</p><p><strong>Range</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p><p><strong>Default value</strong>: None</p></td>
      <td><p>Use <code translate="no">FP32</code> for maximum precision at a higher memory cost, or <code translate="no">SQ6</code>/<code translate="no">SQ8</code> for better compression. <code translate="no">BF16</code> and <code translate="no">FP16</code> offer a balanced alternative.</p></td>
    </tr>
 </table>
@@ -317,23 +322,15 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
-     <td><p>Controls the breadth of search during nearest neighbor retrieval. It determines how many nodes are visited and evaluated as potential nearest neighbors. 
- This parameter affects only the search process and applies exclusively to the bottom layer of the graph.</p></td>
-     <td><p><strong>Type</strong>: Integer
- <strong>Range</strong>: [1, <em>int_max</em>]</p>
-<p><strong>Default value</strong>: <em>limit</em> (TopK nearest neighbors to return)</p></td>
-     <td><p>A larger <code translate="no">ef</code> generally leads to <strong>higher search accuracy</strong> as more potential neighbors are considered. However, this also <strong>increases search time</strong>.
- Consider increasing <code translate="no">ef</code> when achieving high recall is critical and search speed is less of a concern.</p>
-<p>Consider decreasing <code translate="no">ef</code> to prioritize faster searches, especially in scenarios where a slight reduction in accuracy is acceptable.</p>
-<p>In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
+     <td><p>Controls the breadth of search during nearest neighbor retrieval. It determines how many nodes are visited and evaluated as potential nearest neighbors. </p><p>This parameter affects only the search process and applies exclusively to the bottom layer of the graph.</p></td>
+     <td><p><strong>Type</strong>: Integer</p><p><strong>Range</strong>: [1, <em>int_max</em>]</p><p><strong>Default value</strong>: <em>limit</em> (TopK nearest neighbors to return)</p></td>
+     <td><p>A larger <code translate="no">ef</code> generally leads to <strong>higher search accuracy</strong> as more potential neighbors are considered. However, this also <strong>increases search time</strong>.</p><p>Consider increasing <code translate="no">ef</code> when achieving high recall is critical and search speed is less of a concern.</p><p>Consider decreasing <code translate="no">ef</code> to prioritize faster searches, especially in scenarios where a slight reduction in accuracy is acceptable.</p><p>In most cases, we recommend you set a value within this range: [K, 10K].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>The magnification factor that controls how many extra candidates are examined during the refinement stage, relative to the requested top K results.</p></td>
-     <td><p><strong>Type</strong>: Float
- <strong>Range</strong>: [1, <em>float_max</em>)</p>
-<p><strong>Default value</strong>: 1</p></td>
+     <td><p><strong>Type</strong>: Float</p><p><strong>Range</strong>: [1, <em>float_max</em>)</p><p><strong>Default value</strong>: 1</p></td>
      <td><p>Higher values of <code translate="no">refine_k</code> can improve recall and accuracy but will also increase search time and resource usage. A value of 1 means the refinement process considers only the initial top K results.</p></td>
    </tr>
 </table>

@@ -450,7 +450,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tbody>
 <tr><td><code translate="no">nlist</code></td><td>Number of cluster units</td><td>[1, 65536]</td></tr>
 <tr><td><code translate="no">m</code></td><td>Number of factors of product quantization</td><td><code translate="no">dim mod m == 0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Optional] Number of bits in which each low-dimensional vector is stored.</td><td>[1, 64] (8 by default)</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[Optional] Number of bits in which each low-dimensional vector is stored.</td><td>[1, 24] (8 by default)</td></tr>
 </tbody>
 </table>
 </li>
