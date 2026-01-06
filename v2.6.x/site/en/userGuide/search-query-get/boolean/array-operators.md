@@ -18,13 +18,13 @@ All elements within an array must be the same type, and nested structures within
 
 The ARRAY operators allow for fine-grained querying of array fields in Milvus. These operators are:
 
-- `ARRAY_CONTAINS(identifier, expr)`: checks if a specific element exists in an array field.
+- [`ARRAY_CONTAINS(identifier, expr)`](array-operators.md#ARRAYCONTAINS): checks if a specific element exists in an array field.
 
-- `ARRAY_CONTAINS_ALL(identifier, expr)`: ensures that all elements of the specified list are present in the array field.
+- [`ARRAY_CONTAINS_ALL(identifier, expr)`](array-operators.md#ARRAYCONTAINSALL): ensures that all elements of the specified list are present in the array field.
 
-- `ARRAY_CONTAINS_ANY(identifier, expr)`: checks if any of the elements from the specified list are present in the array field.
+- [`ARRAY_CONTAINS_ANY(identifier, expr)`](array-operators.md#ARRAYCONTAINSANY): checks if any of the elements from the specified list are present in the array field.
 
-- `ARRAY_LENGTH(identifier, expr)`: allows you to filter entities based on the number of elements in an array field.
+- [`ARRAY_LENGTH(identifier)`](array-operators.md#ARRAYLENGTH): returns the number of elements in an array field and can be combined with comparison operators for filtering.
 
 ## ARRAY_CONTAINS
 
@@ -70,11 +70,11 @@ This will return all entities where the `history_temperatures` array contains at
 
 ## ARRAY_LENGTH
 
-The `ARRAY_LENGTH` operator allows you to filter entities based on the number of elements in an array field. This is useful when you need to find entities with arrays of a certain length.
+The `ARRAY_LENGTH` returns the length (number of elements) of an array field. It accepts exactly one parameter: the array field identifier.
 
 **Example**
 
-If you want to find all entities where the `history_temperatures` array has fewer than 10 elements, you can use:
+To find all entities where the `history_temperatures` array has fewer than 10 elements:
 
 ```python
 filter = 'ARRAY_LENGTH(history_temperatures) < 10'

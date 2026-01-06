@@ -592,6 +592,12 @@ curl --request POST \
 
 Once you've inserted data into your collection, you can perform full text searches using raw text queries. Milvus automatically converts your query into a sparse vector and ranks the matched search results using the BM25 algorithm, and then returns the topK (`limit`) results.
 
+<div class="alert note">
+
+You can highlight the matched terms in search results by configuring a text highlighter. See [Text Highlighter](text-highlighter.md) for details.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
