@@ -633,6 +633,9 @@ client.insert(InsertReq.builder()
         ></path>
       </svg>
     </button></h2><p>Once you’ve inserted data into your collection, you can perform full text searches using raw text queries. Milvus automatically converts your query into a sparse vector and ranks the matched search results using the BM25 algorithm, and then returns the topK (<code translate="no">limit</code>) results.</p>
+<div class="alert note">
+<p>You can highlight the matched terms in search results by configuring a text highlighter. See <a href="/docs/text-highlighter.md">Text Highlighter</a> for details.</p>
+</div>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
