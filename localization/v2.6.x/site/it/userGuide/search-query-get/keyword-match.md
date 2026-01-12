@@ -6,7 +6,7 @@ summary: >-
   in base a termini specifici. Questa funzione è utilizzata principalmente per
   la ricerca filtrata per soddisfare condizioni specifiche e può incorporare un
   filtro scalare per affinare i risultati della query, consentendo ricerche di
-  similarità all'interno di vettori che soddisfano criteri scalari.
+  somiglianza all'interno di vettori che soddisfano criteri scalari.
 ---
 <h1 id="Text-Match" class="common-anchor-header">Corrispondenza del testo<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
    </span> <span class="img-wrapper"> <span>Corrispondenza di parole chiave</span> </span></p>
-<h2 id="Enable-text-match" class="common-anchor-header">Abilitazione della corrispondenza testuale<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
+<h2 id="Enable-text-match" class="common-anchor-header">Abilitazione della corrispondenza di testo<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,8 +67,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La corrispondenza testuale funziona sul tipo di campo <code translate="no">VARCHAR</code>, che è essenzialmente il tipo di dati stringa di Milvus. Per abilitare la corrispondenza al testo, impostare sia <code translate="no">enable_analyzer</code> che <code translate="no">enable_match</code> su <code translate="no">True</code> e poi configurare facoltativamente un <a href="/docs/it/analyzer-overview.md">analizzatore</a> per l'analisi del testo quando si definisce lo schema della raccolta.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code></h3><p>Per abilitare la corrispondenza al testo per un campo specifico <code translate="no">VARCHAR</code>, impostare entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> quando si definisce lo schema del campo. Ciò indica a Milvus di tokenizzare il testo e di creare un indice invertito per il campo specificato, consentendo corrispondenze di testo rapide ed efficienti.</p>
+    </button></h2><p>La corrispondenza testuale funziona sul tipo di campo <a href="/docs/it/string.md"><code translate="no">VARCHAR</code></a> che è essenzialmente il tipo di dati stringa di Milvus. Per abilitare la corrispondenza con il testo, impostare sia <code translate="no">enable_analyzer</code> che <code translate="no">enable_match</code> su <code translate="no">True</code> e configurare facoltativamente un <a href="/docs/it/analyzer-overview.md">analizzatore</a> per l'analisi del testo quando si definisce lo schema della raccolta.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per abilitare la corrispondenza al testo per un campo specifico <code translate="no">VARCHAR</code>, impostare entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> quando si definisce lo schema del campo. Ciò indica a Milvus di tokenizzare il testo e di creare un indice invertito per il campo specificato, consentendo corrispondenze di testo rapide ed efficienti.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -187,7 +202,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opzionale: Configurare un analizzatore</h3><p>Le prestazioni e l'accuratezza della corrispondenza delle parole chiave dipendono dall'analizzatore selezionato. Diversi analizzatori sono adatti a varie lingue e strutture di testo, quindi la scelta di quello giusto può avere un impatto significativo sui risultati della ricerca per il vostro caso d'uso specifico.</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opzionale: Configurare un analizzatore<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le prestazioni e l'accuratezza della corrispondenza delle parole chiave dipendono dall'analizzatore selezionato. Diversi analizzatori sono adatti a varie lingue e strutture di testo, quindi la scelta di quello giusto può avere un impatto significativo sui risultati della ricerca per il vostro caso d'uso specifico.</p>
 <p>Per impostazione predefinita, Milvus utilizza l'analizzatore <code translate="no">standard</code>, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Non sono necessari parametri aggiuntivi per applicare questa impostazione predefinita. Per ulteriori informazioni, consultare <a href="/docs/it/standard-analyzer.md">Standard</a>.</p>
 <p>Nei casi in cui sia necessario un analizzatore diverso, è possibile configurarne uno utilizzando il parametro <code translate="no">analyzer_params</code>. Ad esempio, per applicare l'analizzatore <code translate="no">english</code> per l'elaborazione del testo inglese:</p>
 <div class="multipleCode">
@@ -291,8 +321,23 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta abilitata la corrispondenza con il testo per un campo VARCHAR nello schema della raccolta, è possibile eseguire corrispondenze con il testo utilizzando l'espressione <code translate="no">TEXT_MATCH</code>.</p>
-<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">Sintassi dell'espressione TEXT_MATCH</h3><p>L'espressione <code translate="no">TEXT_MATCH</code> viene usata per specificare il campo e i termini da cercare. La sua sintassi è la seguente:</p>
+    </button></h2><p>Una volta abilitata la corrispondenza del testo per un campo VARCHAR nello schema della raccolta, è possibile eseguire corrispondenze di testo usando l'espressione <code translate="no">TEXT_MATCH</code>.</p>
+<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">Sintassi dell'espressione TEXT_MATCH<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'espressione <code translate="no">TEXT_MATCH</code> viene usata per specificare il campo e i termini da cercare. La sua sintassi è la seguente:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -341,8 +386,26 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Search-with-text-match" class="common-anchor-header">Ricerca con corrispondenza di testo</h3><p>La corrispondenza del testo può essere utilizzata in combinazione con la ricerca per similarità vettoriale per restringere l'ambito di ricerca e migliorare le prestazioni della ricerca. Filtrando la raccolta con la corrispondenza del testo prima della ricerca per similarità vettoriale, è possibile ridurre il numero di documenti da ricercare, con conseguenti tempi di interrogazione più rapidi.</p>
-<p>In questo esempio, l'espressione <code translate="no">filter</code> filtra i risultati della ricerca per includere solo i documenti che corrispondono al termine specificato <code translate="no">keyword1</code> o <code translate="no">keyword2</code>. La ricerca di similarità vettoriale viene quindi eseguita su questo sottoinsieme filtrato di documenti.</p>
+<h3 id="Search-with-text-match" class="common-anchor-header">Ricerca con corrispondenza di testo<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La corrispondenza del testo può essere utilizzata in combinazione con la ricerca per similarità vettoriale per restringere l'ambito di ricerca e migliorare le prestazioni della ricerca. Filtrando la raccolta con la corrispondenza del testo prima della ricerca per similarità vettoriale, è possibile ridurre il numero di documenti da ricercare, con conseguenti tempi di interrogazione più rapidi.</p>
+<p>In questo esempio, l'espressione <code translate="no">filter</code> filtra i risultati della ricerca per includere solo i documenti che corrispondono al termine specificato <code translate="no">keyword1</code> o <code translate="no">keyword2</code>. La ricerca di similarità vettoriale viene quindi eseguita su questo sottoinsieme di documenti filtrati.</p>
+<div class="alert note">
+<p>È possibile evidenziare i termini corrispondenti nei risultati della ricerca configurando un evidenziatore di testo. Per maggiori dettagli, vedere <a href="/docs/it/text-highlighter.md">Evidenziatore di testo</a>.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`</span>
@@ -353,7 +416,7 @@ result = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
     anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
     data=[query_vector], <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,</span>
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
     limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
@@ -365,7 +428,7 @@ result = client.search(
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .annsField(<span class="hljs-string">&quot;embeddings&quot;</span>)
         .data(Collections.singletonList(queryVector)))
-        .filter(filter)
+<span class="highlighted-wrapper-line">        .filter(filter)</span>
         .topK(<span class="hljs-number">10</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>))
         .build());
@@ -392,7 +455,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// Your collection name</span>
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment">// Vector field name</span>
     <span class="hljs-attr">data</span>: [query_vector], <span class="hljs-comment">// Query vector</span>
-    <span class="hljs-attr">filter</span>: filter,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: filter,</span>
     <span class="hljs-attr">params</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>, <span class="hljs-comment">// Max. number of results to return</span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment">//Fields to return</span>
@@ -421,7 +484,22 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;text&quot;,&quot;id&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-with-text-match" class="common-anchor-header">Query con corrispondenza di testo</h3><p>La corrispondenza testuale può essere utilizzata anche per il filtraggio scalare nelle operazioni di query. Specificando un'espressione <code translate="no">TEXT_MATCH</code> nel parametro <code translate="no">expr</code> del metodo <code translate="no">query()</code>, è possibile recuperare i documenti che corrispondono ai termini indicati.</p>
+<h3 id="Query-with-text-match" class="common-anchor-header">Query con corrispondenza di testo<button data-href="#Query-with-text-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La corrispondenza del testo può essere utilizzata anche per il filtraggio scalare nelle operazioni di query. Specificando un'espressione <code translate="no">TEXT_MATCH</code> nel parametro <code translate="no">expr</code> del metodo <code translate="no">query()</code>, è possibile recuperare i documenti che corrispondono ai termini indicati.</p>
 <p>L'esempio seguente recupera i documenti in cui il campo <code translate="no">text</code> contiene entrambi i termini <code translate="no">keyword1</code> e <code translate="no">keyword2</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -430,7 +508,7 @@ curl --request POST \
 
 result = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, </span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -438,7 +516,7 @@ result = client.query(
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .filter(filter)
+<span class="highlighted-wrapper-line">        .filter(filter)</span>
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>))
         .build()
 );
@@ -458,7 +536,7 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
 
 <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">filter</span>: filter, 
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: filter, </span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -494,7 +572,7 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p>L'abilitazione della corrispondenza dei termini per un campo attiva la creazione di un indice invertito, che consuma risorse di archiviazione. Considerare l'impatto sullo storage quando si decide di abilitare questa funzione, poiché varia in base alla dimensione del testo, ai token unici e all'analizzatore utilizzato.</p></li>
-<li><p>Una volta definito un analizzatore nello schema, le sue impostazioni diventano permanenti per quella raccolta. Se si decide che un analizzatore diverso è più adatto alle proprie esigenze, si può pensare di abbandonare l'insieme esistente e crearne uno nuovo con la configurazione dell'analizzatore desiderata.</p></li>
+<li><p>Una volta definito un analizzatore nello schema, le sue impostazioni diventano permanenti per quella raccolta. Se si decide che un analizzatore diverso è più adatto alle proprie esigenze, si può pensare di eliminare l'insieme esistente e crearne uno nuovo con la configurazione dell'analizzatore desiderata.</p></li>
 <li><p>Regole di escape nelle espressioni di <code translate="no">filter</code>:</p>
 <ul>
 <li><p>I caratteri racchiusi tra doppi apici o apici singoli all'interno delle espressioni vengono interpretati come costanti di stringa. Se la costante di stringa include caratteri di escape, i caratteri di escape devono essere rappresentati con una sequenza di escape. Ad esempio, utilizzare <code translate="no">\\</code> per rappresentare <code translate="no">\</code>, <code translate="no">\\t</code> per rappresentare una tabulazione <code translate="no">\t</code> e <code translate="no">\\n</code> per rappresentare una newline.</p></li>

@@ -52,7 +52,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
    </span> <span class="img-wrapper"> <span>Подбор ключевых слов</span> </span></p>
-<h2 id="Enable-text-match" class="common-anchor-header">Включить текстовое соответствие<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
+<h2 id="Enable-text-match" class="common-anchor-header">Включение текстового соответствия<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,8 +67,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Текстовое совпадение работает с типом поля <code translate="no">VARCHAR</code>, который по сути является строковым типом данных в Milvus. Чтобы включить текстовое соответствие, установите оба поля <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> в значение <code translate="no">True</code>, а затем при определении схемы коллекции настройте <a href="/docs/ru/analyzer-overview.md">анализатор</a> для текстового анализа.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Установите <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code></h3><p>Чтобы включить текстовое соответствие для определенного поля <code translate="no">VARCHAR</code>, при определении схемы поля установите параметры <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> в значение <code translate="no">True</code>. Это дает Milvus указание токенизировать текст и создать инвертированный индекс для указанного поля, обеспечивая быстрое и эффективное текстовое соответствие.</p>
+    </button></h2><p>Текстовое совпадение работает по <a href="/docs/ru/string.md"><code translate="no">VARCHAR</code></a> тип поля, который по сути является строковым типом данных в Milvus. Чтобы включить текстовое соответствие, установите <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> на <code translate="no">True</code>, а затем при определении схемы коллекции настройте <a href="/docs/ru/analyzer-overview.md">анализатор</a> для текстового анализа.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Установите <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы включить текстовое соответствие для определенного поля <code translate="no">VARCHAR</code>, при определении схемы поля установите параметры <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> в значение <code translate="no">True</code>. Это дает Milvus указание токенизировать текст и создать инвертированный индекс для указанного поля, обеспечивая быстрое и эффективное текстовое соответствие.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -187,7 +202,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Необязательно: Настройте анализатор</h3><p>Производительность и точность подбора ключевых слов зависят от выбранного анализатора. Различные анализаторы адаптированы к различным языкам и структурам текста, поэтому выбор правильного анализатора может существенно повлиять на результаты поиска для конкретного случая использования.</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Необязательно: Настройте анализатор<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Производительность и точность подбора ключевых слов зависят от выбранного анализатора. Различные анализаторы адаптированы к различным языкам и структурам текста, поэтому выбор правильного анализатора может существенно повлиять на результаты поиска для конкретного случая использования.</p>
 <p>По умолчанию в Milvus используется анализатор <code translate="no">standard</code>, который выполняет токенизацию текста на основе пробелов и знаков препинания, удаляет лексемы длиной более 40 символов и преобразует текст в строчные буквы. Для применения этой настройки по умолчанию не требуется никаких дополнительных параметров. Дополнительные сведения см. в разделе <a href="/docs/ru/standard-analyzer.md">Стандартный</a>.</p>
 <p>В случаях, когда требуется другой анализатор, его можно настроить с помощью параметра <code translate="no">analyzer_params</code>. Например, чтобы применить анализатор <code translate="no">english</code> для обработки английского текста:</p>
 <div class="multipleCode">
@@ -292,7 +322,22 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>После того как вы включили текстовое соответствие для поля VARCHAR в схеме коллекции, вы можете выполнять текстовое соответствие с помощью выражения <code translate="no">TEXT_MATCH</code>.</p>
-<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">Синтаксис выражения TEXT_MATCH</h3><p>Выражение <code translate="no">TEXT_MATCH</code> используется для указания поля и условий для поиска. Его синтаксис выглядит следующим образом:</p>
+<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">Синтаксис выражения TEXT_MATCH<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Выражение <code translate="no">TEXT_MATCH</code> используется для указания поля и условий для поиска. Его синтаксис выглядит следующим образом:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -341,8 +386,26 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Search-with-text-match" class="common-anchor-header">Поиск с помощью текстового соответствия</h3><p>Текстовое совпадение можно использовать в сочетании с поиском по векторному сходству, чтобы сузить область поиска и повысить его производительность. Фильтрация коллекции с помощью текстового соответствия перед векторным поиском по сходству позволяет сократить количество документов, в которых необходимо выполнить поиск, что приводит к сокращению времени выполнения запроса.</p>
-<p>В этом примере выражение <code translate="no">filter</code> фильтрует результаты поиска, чтобы включить только документы, соответствующие указанному термину <code translate="no">keyword1</code> или <code translate="no">keyword2</code>. Затем векторный поиск сходства выполняется для этого отфильтрованного подмножества документов.</p>
+<h3 id="Search-with-text-match" class="common-anchor-header">Поиск с помощью текстового соответствия<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Текстовое совпадение можно использовать в сочетании с поиском по векторному сходству, чтобы сузить область поиска и повысить его производительность. Фильтрация коллекции с помощью текстового соответствия перед векторным поиском по сходству позволяет сократить количество документов, в которых необходимо выполнить поиск, что приводит к сокращению времени выполнения запроса.</p>
+<p>В этом примере выражение <code translate="no">filter</code> фильтрует результаты поиска, чтобы включить только документы, соответствующие указанному термину <code translate="no">keyword1</code> или <code translate="no">keyword2</code>. Затем векторный поиск по сходству выполняется в этом отфильтрованном подмножестве документов.</p>
+<div class="alert note">
+<p>Вы можете выделить совпадающие термины в результатах поиска, настроив текстовый маркер. Подробности см. в разделе <a href="/docs/ru/text-highlighter.md">"Выделитель текста"</a>.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`</span>
@@ -353,7 +416,7 @@ result = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
     anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
     data=[query_vector], <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,</span>
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
     limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
@@ -365,7 +428,7 @@ result = client.search(
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .annsField(<span class="hljs-string">&quot;embeddings&quot;</span>)
         .data(Collections.singletonList(queryVector)))
-        .filter(filter)
+<span class="highlighted-wrapper-line">        .filter(filter)</span>
         .topK(<span class="hljs-number">10</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>))
         .build());
@@ -392,7 +455,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// Your collection name</span>
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment">// Vector field name</span>
     <span class="hljs-attr">data</span>: [query_vector], <span class="hljs-comment">// Query vector</span>
-    <span class="hljs-attr">filter</span>: filter,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: filter,</span>
     <span class="hljs-attr">params</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>, <span class="hljs-comment">// Max. number of results to return</span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment">//Fields to return</span>
@@ -421,7 +484,22 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;text&quot;,&quot;id&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-with-text-match" class="common-anchor-header">Запрос с текстовым совпадением</h3><p>Текстовое соответствие также можно использовать для скалярной фильтрации в запросах. Указав выражение <code translate="no">TEXT_MATCH</code> в параметре <code translate="no">expr</code> метода <code translate="no">query()</code>, вы можете получить документы, соответствующие заданным условиям.</p>
+<h3 id="Query-with-text-match" class="common-anchor-header">Запрос с текстовым совпадением<button data-href="#Query-with-text-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Текстовое соответствие также можно использовать для скалярной фильтрации в запросах. Указав выражение <code translate="no">TEXT_MATCH</code> в параметре <code translate="no">expr</code> метода <code translate="no">query()</code>, вы можете получить документы, соответствующие заданным условиям.</p>
 <p>В приведенном ниже примере извлекаются документы, в которых поле <code translate="no">text</code> содержит термины <code translate="no">keyword1</code> и <code translate="no">keyword2</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -430,7 +508,7 @@ curl --request POST \
 
 result = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, </span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -438,7 +516,7 @@ result = client.query(
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .filter(filter)
+<span class="highlighted-wrapper-line">        .filter(filter)</span>
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>))
         .build()
 );
@@ -458,7 +536,7 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
 
 <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">filter</span>: filter, 
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: filter, </span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -497,7 +575,7 @@ curl --request POST \
 <li><p>После определения анализатора в схеме его настройки становятся постоянными для данной коллекции. Если вы решите, что другой анализатор будет лучше соответствовать вашим потребностям, вы можете удалить существующую коллекцию и создать новую с нужной конфигурацией анализатора.</p></li>
 <li><p>Правила экранирования в выражениях <code translate="no">filter</code>:</p>
 <ul>
-<li><p>Символы, заключенные в двойные или одинарные кавычки в выражениях, интерпретируются как строковые константы. Если строковая константа включает в себя управляющие символы, то они должны быть представлены с помощью управляющей последовательности. Например, используйте <code translate="no">\\</code> для обозначения <code translate="no">\</code>, <code translate="no">\\t</code> для обозначения табуляции <code translate="no">\t</code>, и <code translate="no">\\n</code> для обозначения новой строки.</p></li>
+<li><p>Символы, заключенные в двойные или одинарные кавычки в выражениях, интерпретируются как строковые константы. Если строковая константа включает в себя экранирующие символы, то они должны быть представлены с помощью экранирующей последовательности. Например, используйте <code translate="no">\\</code> для обозначения <code translate="no">\</code>, <code translate="no">\\t</code> для обозначения табуляции <code translate="no">\t</code>, и <code translate="no">\\n</code> для обозначения новой строки.</p></li>
 <li><p>Если строковая константа заключена в одинарные кавычки, то одинарная кавычка внутри константы должна быть представлена как <code translate="no">\\'</code>, а двойная кавычка может быть представлена как <code translate="no">&quot;</code> или <code translate="no">\\&quot;</code>. Пример: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Если строковая константа заключена в двойные кавычки, то двойная кавычка внутри константы должна быть представлена как <code translate="no">\\&quot;</code>, а одинарная кавычка может быть представлена как <code translate="no">'</code> или <code translate="no">\\'</code>. Пример: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>

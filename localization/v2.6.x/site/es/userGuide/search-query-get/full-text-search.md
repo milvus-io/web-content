@@ -350,7 +350,7 @@ schema.WithFunction(function)
    </tr>
 </table>
 <div class="alert note">
-<p>Si varios campos <code translate="no">VARCHAR</code> requieren un tratamiento BM25, defina <strong>una función BM25 por campo</strong>, cada uno con un nombre y un campo de salida únicos.</p>
+<p>Si varios campos <code translate="no">VARCHAR</code> requieren un tratamiento BM25, defina <strong>una función BM25 por campo</strong>, cada una con un nombre y un campo de salida únicos.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">Configurar el índice<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -608,6 +608,9 @@ client.insert(InsertReq.builder()
         ></path>
       </svg>
     </button></h2><p>Una vez que haya insertado datos en su colección, puede realizar búsquedas de texto completo utilizando consultas de texto sin procesar. Milvus convierte automáticamente su consulta en un vector disperso y clasifica los resultados de búsqueda coincidentes utilizando el algoritmo BM25, y luego devuelve los resultados topK (<code translate="no">limit</code>).</p>
+<div class="alert note">
+<p>Puede resaltar los términos coincidentes en los resultados de la búsqueda configurando un resaltador de texto. Consulte <a href="/docs/es/text-highlighter.md">Resaltador de texto</a> para obtener más información.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -693,7 +696,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Proporción de términos de baja importancia que deben ignorarse durante la búsqueda. Para más detalles, consulte <a href="/docs/es/sparse_vector.md">Vector disperso</a>.</p></td>
+     <td><p>Proporción de términos de baja importancia que se ignoran durante la búsqueda. Para más detalles, consulte <a href="/docs/es/sparse_vector.md">Vector disperso</a>.</p></td>
    </tr>
    <tr>
      <td></td>

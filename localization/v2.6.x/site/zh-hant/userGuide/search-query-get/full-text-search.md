@@ -599,7 +599,10 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將資料插入資料庫後，您就可以使用原始文字查詢來執行全文檢索。Milvus 會自動將您的查詢轉換成稀疏向量，並使用 BM25 演算法對匹配的搜尋結果進行排序，然後傳回 topK (<code translate="no">limit</code>) 結果。</p>
+    </button></h2><p>將資料插入資料庫後，您就可以使用原始文字查詢來執行全文檢索。Milvus 會自動將您的查詢轉換成稀疏向量，並使用 BM25 演算法將配對的搜尋結果排序，然後傳回 topK (<code translate="no">limit</code>) 結果。</p>
+<div class="alert note">
+<p>您可以透過設定文字高亮器來高亮搜尋結果中的匹配詞彙。詳情請參閱<a href="/docs/zh-hant/text-highlighter.md">文字高亮程式</a>。</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -685,7 +688,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>搜尋時要忽略的低重要性詞彙比例。詳情請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p></td>
+     <td><p>搜尋時要忽略的低重要性字詞比例。詳情請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p></td>
    </tr>
    <tr>
      <td></td>
@@ -741,7 +744,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     </button></h3><p>不可以，BM25 函式產生的稀疏向量無法直接在全文檢索中存取或輸出。以下是詳細資訊：</p>
 <ul>
 <li><p>BM25 函式會在內部產生稀疏向量，用於排序和檢索</p></li>
-<li><p>這些向量會儲存在稀疏欄位中，但不能包含在<code translate="no">output_fields</code></p></li>
+<li><p>這些向量會儲存在稀疏字段中，但無法包含在<code translate="no">output_fields</code></p></li>
 <li><p>您只能輸出原始文字欄位和元資料 (如<code translate="no">id</code>,<code translate="no">text</code>)</p></li>
 </ul>
 <p>範例：</p>

@@ -99,7 +99,7 @@ summary: >-
     </button></h3><p>Lo schema della raccolta deve includere almeno tre campi obbligatori:</p>
 <ul>
 <li><p><strong>Campo primario</strong>: Identifica in modo univoco ogni entità della raccolta.</p></li>
-<li><p><strong>Campo testo</strong> (<code translate="no">VARCHAR</code>): Memorizza i documenti di testo grezzo. Deve essere impostato <code translate="no">enable_analyzer=True</code> in modo che Milvus possa elaborare il testo per la classificazione di rilevanza BM25. Per impostazione predefinita, Milvus utilizza l'analizzatore <a href="/docs/it/standard-analyzer.md"><code translate="no">standard</code></a> per l'<a href="/docs/it/standard-analyzer.md"> analisi</a> del testo. Per configurare un analizzatore diverso, fare riferimento a <a href="/docs/it/analyzer-overview.md">Panoramica dell'analizzatore</a>.</p></li>
+<li><p><strong>Campo testo</strong> (<code translate="no">VARCHAR</code>): Memorizza documenti di testo grezzo. Deve essere impostato <code translate="no">enable_analyzer=True</code> in modo che Milvus possa elaborare il testo per la classificazione di rilevanza BM25. Per impostazione predefinita, Milvus utilizza l'analizzatore <a href="/docs/it/standard-analyzer.md"><code translate="no">standard</code></a> per l'<a href="/docs/it/standard-analyzer.md"> analisi</a> del testo. Per configurare un analizzatore diverso, fare riferimento a <a href="/docs/it/analyzer-overview.md">Panoramica dell'analizzatore</a>.</p></li>
 <li><p><strong>Campo vettoriale sparso</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Memorizza le incorporazioni rade generate automaticamente dalla funzione BM25.</p></li>
 </ul>
 <div class="multipleCode">
@@ -454,7 +454,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>L'algoritmo usato per costruire e interrogare l'indice. Valori validi:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinito): Elaborazione ottimizzata delle query Document-at-a-Time (DAAT) con l'algoritmo MaxScore. MaxScore fornisce prestazioni migliori per valori elevati di <em>k</em> o per query con molti termini, saltando termini e documenti che potrebbero avere un impatto minimo. Questo risultato si ottiene suddividendo i termini in gruppi essenziali e non essenziali in base ai punteggi di impatto massimo, concentrandosi sui termini che possono contribuire ai risultati top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Elaborazione ottimizzata delle query DAAT con l'algoritmo WAND. WAND valuta un minor numero di documenti trovati, sfruttando i punteggi di impatto massimo per saltare i documenti non competitivi, ma ha un overhead più elevato per ogni singolo colpo. Questo rende WAND più efficiente per le query con valori <em>k</em> piccoli o per le query brevi, dove il salto è più fattibile.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Elaborazione di query Basic Term-at-a-Time (TAAT). Pur essendo più lento rispetto a <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offre un vantaggio unico. A differenza degli algoritmi DAAT, che utilizzano punteggi di impatto massimo memorizzati nella cache che rimangono statici indipendentemente dalle modifiche al parametro di raccolta globale (avgdl), <code translate="no">TAAT_NAIVE</code> si adatta dinamicamente a tali modifiche.</p></li></ul></td>
+     <td><p>L'algoritmo usato per costruire e interrogare l'indice. Valori validi:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (predefinito): Elaborazione ottimizzata delle query Document-at-a-Time (DAAT) con l'algoritmo MaxScore. MaxScore fornisce prestazioni migliori per valori elevati di <em>k</em> o per query con molti termini, saltando termini e documenti che potrebbero avere un impatto minimo. Questo risultato si ottiene suddividendo i termini in gruppi essenziali e non essenziali in base ai punteggi di impatto massimo, concentrandosi sui termini che possono contribuire ai risultati top-k.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Elaborazione ottimizzata delle query DAAT con l'algoritmo WAND. WAND valuta un minor numero di documenti trovati, sfruttando i punteggi di impatto massimo per saltare i documenti non competitivi, ma ha un overhead più elevato per ogni singolo colpo. Questo rende WAND più efficiente per le query con valori <em>k</em> piccoli o per le query brevi, dove il salto è più fattibile.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Elaborazione di query Basic Term-at-a-Time (TAAT). Pur essendo più lento rispetto a <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offre un vantaggio unico. A differenza degli algoritmi DAAT, che utilizzano punteggi di impatto massimo memorizzati nella cache che rimangono statici indipendentemente dalle modifiche del parametro di raccolta globale (avgdl), <code translate="no">TAAT_NAIVE</code> si adatta dinamicamente a tali modifiche.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -607,6 +607,9 @@ client.insert(InsertReq.builder()
         ></path>
       </svg>
     </button></h2><p>Una volta inseriti i dati nella raccolta, è possibile eseguire ricerche full text utilizzando query di testo grezzo. Milvus converte automaticamente la query in un vettore sparse e classifica i risultati della ricerca utilizzando l'algoritmo BM25, per poi restituire i risultati topK (<code translate="no">limit</code>).</p>
+<div class="alert note">
+<p>È possibile evidenziare i termini corrispondenti nei risultati della ricerca configurando un evidenziatore di testo. Per maggiori informazioni, vedere <a href="/docs/it/text-highlighter.md">Evidenziatore di testo</a>.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -791,7 +794,7 @@ client.search(
 <p><strong>Motivazione del progetto</strong>:</p>
 <ul>
 <li><p>Separazione delle preoccupazioni: L'utente lavora con il testo (input/output), Milvus gestisce i vettori (elaborazione interna).</p></li>
-<li><p>Prestazioni: I vettori sparsi precalcolati consentono di classificare velocemente BM25 durante le interrogazioni.</p></li>
+<li><p>Prestazioni: I vettori sparsi precalcolati permettono di classificare velocemente BM25 durante le interrogazioni.</p></li>
 <li><p>Esperienza utente: Astrazione di complesse operazioni vettoriali dietro una semplice interfaccia testuale.</p></li>
 </ul>
 <p><strong>Se avete bisogno di accedere ai vettori</strong>:</p>

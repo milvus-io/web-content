@@ -62,7 +62,7 @@ summary: >-
 <p>Untuk menggunakan pencarian teks lengkap, ikuti langkah-langkah utama berikut ini:</p>
 <ol>
 <li><p><a href="/docs/id/full-text-search.md#Create-a-collection-for-BM25-full-text-search">Buat koleksi</a>: Siapkan bidang yang diperlukan dan tentukan fungsi BM25 yang mengubah teks mentah menjadi sematan jarang.</p></li>
-<li><p><a href="/docs/id/full-text-search.md#Insert-text-data">Menyisipkan data</a>: Memasukkan dokumen teks mentah Anda ke dalam koleksi.</p></li>
+<li><p><a href="/docs/id/full-text-search.md#Insert-text-data">Memasukkan data</a>: Memasukkan dokumen teks mentah Anda ke dalam koleksi.</p></li>
 <li><p><a href="/docs/id/full-text-search.md#Perform-full-text-search">Melakukan pencarian</a>: Gunakan teks kueri bahasa alami untuk mengambil hasil peringkat berdasarkan relevansi BM25.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">Membuat koleksi untuk pencarian teks lengkap BM25<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
@@ -607,6 +607,9 @@ client.insert(InsertReq.builder()
         ></path>
       </svg>
     </button></h2><p>Setelah Anda memasukkan data ke dalam koleksi Anda, Anda dapat melakukan pencarian teks lengkap menggunakan kueri teks mentah. Milvus secara otomatis mengubah kueri Anda menjadi vektor yang jarang dan mengurutkan hasil pencarian yang cocok menggunakan algoritme BM25, lalu mengembalikan hasil topK (<code translate="no">limit</code>).</p>
+<div class="alert note">
+<p>Anda dapat menyorot istilah yang cocok dalam hasil pencarian dengan mengonfigurasi penyorot teks. Lihat Penyorot <a href="/docs/id/text-highlighter.md">Teks</a> untuk detailnya.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -745,7 +748,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tidak, vektor jarang yang dihasilkan oleh fungsi BM25 tidak dapat diakses atau dikeluarkan secara langsung dalam pencarian teks lengkap. Berikut ini rinciannya:</p>
+    </button></h3><p>Tidak, vektor jarang yang dihasilkan oleh fungsi BM25 tidak dapat diakses atau dikeluarkan secara langsung dalam pencarian teks lengkap. Berikut ini detailnya:</p>
 <ul>
 <li><p>Fungsi BM25 menghasilkan vektor jarang secara internal untuk pemeringkatan dan pengambilan</p></li>
 <li><p>Vektor-vektor ini disimpan di bidang jarang tetapi tidak dapat dimasukkan ke dalam <code translate="no">output_fields</code></p></li>

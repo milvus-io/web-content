@@ -41,10 +41,10 @@ summary: >-
       </svg>
     </button></h2><p>تسمح مشغلات ARRAY بالاستعلام الدقيق لحقول المصفوفات في ميلفوس. هذه المعاملات هي:</p>
 <ul>
-<li><p><code translate="no">ARRAY_CONTAINS(identifier, expr)</code>: التحقق من وجود عنصر معين في حقل مصفوفة.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code>: يضمن وجود جميع عناصر القائمة المحددة في حقل المصفوفة.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code>: يتحقق من وجود أي عنصر من القائمة المحددة في حقل المصفوفة.</p></li>
-<li><p><code translate="no">ARRAY_LENGTH(identifier, expr)</code>: يسمح لك بتصفية الكيانات بناءً على عدد العناصر في حقل مصفوفة.</p></li>
+<li><p><a href="/docs/ar/array-operators.md#ARRAYCONTAINS"><code translate="no">ARRAY_CONTAINS(identifier, expr)</code></a>: التحقق من وجود عنصر معين في حقل مصفوفة.</p></li>
+<li><p><a href="/docs/ar/array-operators.md#ARRAYCONTAINSALL"><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code></a>: يضمن وجود جميع عناصر القائمة المحددة في حقل المصفوفة.</p></li>
+<li><p><a href="/docs/ar/array-operators.md#ARRAYCONTAINSANY"><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code></a>: يتحقق من وجود أي عنصر من القائمة المحددة في حقل المصفوفة.</p></li>
+<li><p><a href="/docs/ar/array-operators.md#ARRAYLENGTH"><code translate="no">ARRAY_LENGTH(identifier)</code></a>: تُرجع عدد العناصر في حقل مصفوفة ويمكن دمجها مع عوامل المقارنة للتصفية.</p></li>
 </ul>
 <h2 id="ARRAYCONTAINS" class="common-anchor-header">ARRAY_CONTAINS<button data-href="#ARRAYCONTAINS" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +61,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يتحقق المشغل <code translate="no">ARRAY_CONTAINS</code> من وجود عنصر محدد في حقل مصفوفة. يكون مفيدًا عندما تريد العثور على كيانات حيث يوجد عنصر معين في المصفوفة.</p>
+    </button></h2><p>يتحقق عامل <code translate="no">ARRAY_CONTAINS</code> من وجود عنصر محدد في حقل مصفوفة. وهو مفيد عندما تريد العثور على الكيانات التي يوجد فيها عنصر معين في المصفوفة.</p>
 <p><strong>مثال</strong></p>
 <p>لنفترض أن لديك حقل مصفوفة <code translate="no">history_temperatures</code> ، والذي يحتوي على أدنى درجات الحرارة المسجلة لسنوات مختلفة. للعثور على جميع الكيانات التي تحتوي فيها المصفوفة على القيمة <code translate="no">23</code> ، يمكنك استخدام تعبير التصفية التالي:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_CONTAINS(history_temperatures, 23)&#x27;</span>
@@ -124,9 +124,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يسمح لك المشغل <code translate="no">ARRAY_LENGTH</code> بتصفية الكيانات بناءً على عدد العناصر في حقل مصفوفة. هذا مفيد عندما تحتاج إلى العثور على كيانات ذات مصفوفات ذات طول معين.</p>
+    </button></h2><p>يُرجع <code translate="no">ARRAY_LENGTH</code> طول (عدد العناصر) لحقل مصفوفة. يقبل معلمة واحدة فقط: معرف حقل المصفوفة.</p>
 <p><strong>مثال</strong></p>
-<p>إذا كنت تريد العثور على جميع الكيانات التي تحتوي المصفوفة <code translate="no">history_temperatures</code> على أقل من 10 عناصر، يمكنك استخدام:</p>
+<p>للعثور على جميع الكيانات حيث تحتوي المصفوفة <code translate="no">history_temperatures</code> على أقل من 10 عناصر:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_LENGTH(history_temperatures) &lt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>سيؤدي هذا إلى إرجاع جميع الكيانات التي تحتوي المصفوفة <code translate="no">history_temperatures</code> على أقل من 10 عناصر.</p>
+<p>سيؤدي ذلك إلى إرجاع جميع الكيانات التي تحتوي المصفوفة <code translate="no">history_temperatures</code> على أقل من 10 عناصر.</p>

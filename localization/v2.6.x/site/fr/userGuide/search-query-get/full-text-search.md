@@ -6,9 +6,9 @@ summary: >-
   documents contenant des termes ou des phrases spécifiques dans des ensembles
   de données textuelles, puis de classer les résultats en fonction de leur
   pertinence. Cette fonction permet de surmonter les limites de la recherche
-  sémantique, qui peut négliger des termes précis, et de garantir que vous
-  recevrez les résultats les plus précis et les plus pertinents sur le plan
-  contextuel. En outre, elle simplifie les recherches vectorielles en acceptant
+  sémantique, qui peut négliger des termes précis, et de s'assurer que vous
+  recevez les résultats les plus précis et les plus pertinents en fonction du
+  contexte. En outre, elle simplifie les recherches vectorielles en acceptant
   les entrées de texte brut, convertissant automatiquement vos données
   textuelles en encastrements épars sans qu'il soit nécessaire de générer
   manuellement des encastrements vectoriels.
@@ -353,7 +353,7 @@ schema.WithFunction(function)
 <div class="alert note">
 <p>Si plusieurs champs <code translate="no">VARCHAR</code> nécessitent un traitement BM25, définissez <strong>une fonction BM25 par champ</strong>, chacune ayant un nom et un champ de sortie uniques.</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">Configuration de l'index<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
+<h3 id="Configure-the-index" class="common-anchor-header">Configurer l'index<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -609,6 +609,9 @@ client.insert(InsertReq.builder()
         ></path>
       </svg>
     </button></h2><p>Une fois que vous avez inséré des données dans votre collection, vous pouvez effectuer des recherches en texte intégral à l'aide de requêtes en texte brut. Milvus convertit automatiquement votre requête en un vecteur clair et classe les résultats de recherche correspondants à l'aide de l'algorithme BM25, puis renvoie les topK (<code translate="no">limit</code>) résultats.</p>
+<div class="alert note">
+<p>Vous pouvez mettre en évidence les termes correspondants dans les résultats de la recherche en configurant un surligneur de texte. Voir <a href="/docs/fr/text-highlighter.md">surligneur de texte</a> pour plus de détails.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(

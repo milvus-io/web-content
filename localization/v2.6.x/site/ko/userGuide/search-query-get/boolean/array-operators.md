@@ -39,10 +39,10 @@ summary: Milvus는 배열 필드를 쿼리할 수 있는 강력한 연산자를 
       </svg>
     </button></h2><p>ARRAY 연산자를 사용하면 Milvus에서 배열 필드를 세밀하게 쿼리할 수 있습니다. 이러한 연산자는 다음과 같습니다:</p>
 <ul>
-<li><p><code translate="no">ARRAY_CONTAINS(identifier, expr)</code>배열 필드에 특정 요소가 존재하는지 확인합니다.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code>는 지정된 목록의 모든 요소가 배열 필드에 있는지 확인합니다.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code>지정된 목록의 요소가 배열 필드에 있는지 확인합니다.</p></li>
-<li><p><code translate="no">ARRAY_LENGTH(identifier, expr)</code>배열 필드에 있는 요소의 수를 기준으로 엔티티를 필터링할 수 있습니다.</p></li>
+<li><p><a href="/docs/ko/array-operators.md#ARRAYCONTAINS"><code translate="no">ARRAY_CONTAINS(identifier, expr)</code></a>배열 필드에 특정 요소가 존재하는지 확인합니다.</p></li>
+<li><p><a href="/docs/ko/array-operators.md#ARRAYCONTAINSALL"><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code></a>는 지정된 목록의 모든 요소가 배열 필드에 있는지 확인합니다.</p></li>
+<li><p><a href="/docs/ko/array-operators.md#ARRAYCONTAINSANY"><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code></a>지정된 목록의 요소가 배열 필드에 있는지 확인합니다.</p></li>
+<li><p><a href="/docs/ko/array-operators.md#ARRAYLENGTH"><code translate="no">ARRAY_LENGTH(identifier)</code></a>배열 필드에 있는 요소의 수를 반환하며 비교 연산자와 결합하여 필터링할 수 있습니다.</p></li>
 </ul>
 <h2 id="ARRAYCONTAINS" class="common-anchor-header">ARRAY_CONTAINS<button data-href="#ARRAYCONTAINS" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ summary: Milvus는 배열 필드를 쿼리할 수 있는 강력한 연산자를 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_CONTAINS</code> 연산자는 배열 필드에 특정 요소가 있는지 확인합니다. 배열에 특정 요소가 있는 엔티티를 찾고자 할 때 유용합니다.</p>
+    </button></h2><p><code translate="no">ARRAY_CONTAINS</code> 연산자는 배열 필드에 특정 요소가 있는지 확인합니다. 지정된 요소가 배열에 있는 엔티티를 찾으려는 경우에 유용합니다.</p>
 <p><strong>예제</strong></p>
 <p>연도별로 기록된 최저 기온을 포함하는 배열 필드 <code translate="no">history_temperatures</code> 가 있다고 가정해 보겠습니다. 배열에 <code translate="no">23</code> 값이 포함된 모든 엔터티를 찾으려면 다음 필터 표현식을 사용할 수 있습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_CONTAINS(history_temperatures, 23)&#x27;</span>
@@ -122,9 +122,9 @@ summary: Milvus는 배열 필드를 쿼리할 수 있는 강력한 연산자를 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_LENGTH</code> 연산자를 사용하면 배열 필드에 있는 요소 수를 기준으로 엔티티를 필터링할 수 있습니다. 이 연산자는 특정 길이의 배열을 가진 엔티티를 찾아야 할 때 유용합니다.</p>
+    </button></h2><p><code translate="no">ARRAY_LENGTH</code> 은 배열 필드의 길이(요소 수)를 반환합니다. 정확히 하나의 매개 변수, 즉 배열 필드 식별자만 허용합니다.</p>
 <p><strong>예제</strong></p>
-<p><code translate="no">history_temperatures</code> 배열의 요소가 10개 미만인 모든 엔티티를 찾고자 하는 경우 다음을 사용할 수 있습니다:</p>
+<p><code translate="no">history_temperatures</code> 배열의 요소가 10개 미만인 모든 엔티티를 찾으려면:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_LENGTH(history_temperatures) &lt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그러면 <code translate="no">history_temperatures</code> 배열의 요소가 10개 미만인 모든 엔티티가 반환됩니다.</p>
+<p><code translate="no">history_temperatures</code> 배열의 요소가 10개 미만인 모든 엔티티를 반환합니다.</p>

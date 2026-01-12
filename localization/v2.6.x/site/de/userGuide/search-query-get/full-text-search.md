@@ -4,12 +4,12 @@ title: Volltextsuche
 summary: >-
   Die Volltextsuche ist eine Funktion, die Dokumente mit bestimmten Begriffen
   oder Phrasen in Textdatensätzen abruft und die Ergebnisse dann nach Relevanz
-  einstuft. Diese Funktion überwindet die Beschränkungen der semantischen Suche,
-  bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie
-  die genauesten und kontextuell relevanten Ergebnisse erhalten. Darüber hinaus
-  vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und Ihre
-  Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie
-  manuell Vektoreinbettungen erzeugen müssen.
+  einstuft. Diese Funktion überwindet die Einschränkungen der semantischen
+  Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher,
+  dass Sie die genauesten und kontextrelevanten Ergebnisse erhalten. Darüber
+  hinaus vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und
+  Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass
+  Sie manuell Vektoreinbettungen erzeugen müssen.
 ---
 <h1 id="Full-Text-Search" class="common-anchor-header">Volltextsuche<button data-href="#Full-Text-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: >-
 <li><p><strong>Rohtexteingabe</strong>: Sie fügen Textdokumente ein oder stellen eine Abfrage mit reinem Text, ohne Einbettungsmodelle.</p></li>
 <li><p><strong>Text-Analyse</strong>: Milvus verwendet einen <a href="/docs/de/analyzer-overview.md">Analysator</a>, um Ihren Text in sinnvolle Begriffe zu verarbeiten, die indiziert und durchsucht werden können.</p></li>
 <li><p><strong>BM25-Funktionsverarbeitung</strong>: Eine integrierte Funktion wandelt diese Begriffe in spärliche Vektordarstellungen um, die für die BM25-Bewertung optimiert sind.</p></li>
-<li><p><strong>Sammlungsspeicher</strong>: Milvus speichert die resultierenden spärlichen Einbettungen in einer Sammlung zum schnellen Abruf und Ranking.</p></li>
+<li><p><strong>Sammlungsspeicher</strong>: Milvus speichert die resultierenden spärlichen Einbettungen in einer Sammlung für schnelles Auffinden und Ranking.</p></li>
 <li><p><strong>BM25-Relevanz-Bewertung</strong>: Bei der Suche wendet Milvus die BM25-Bewertungsfunktion an, um die Relevanz der Dokumente zu berechnen und die am besten mit den Suchbegriffen übereinstimmenden Ergebnisse zu ermitteln.</p></li>
 </ol>
 <p>
@@ -454,7 +454,7 @@ indexes.add(IndexParam.builder()
    </tr>
    <tr>
      <td><p><code translate="no">params.inverted_index_algo</code></p></td>
-     <td><p>Der Algorithmus, der für den Aufbau und die Abfrage des Indexes verwendet wird. Gültige Werte:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (Standard): Optimierte Document-at-a-Time (DAAT)-Abfrageverarbeitung unter Verwendung des MaxScore-Algorithmus. MaxScore bietet eine bessere Leistung für hohe <em>k-Werte</em> oder Abfragen mit vielen Begriffen, indem Begriffe und Dokumente übersprungen werden, die wahrscheinlich nur geringe Auswirkungen haben. Dies wird erreicht, indem Begriffe auf der Grundlage ihrer maximalen Trefferquote in wesentliche und nicht wesentliche Gruppen unterteilt werden, wobei der Schwerpunkt auf Begriffen liegt, die zu den Top-k-Ergebnissen beitragen können.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Optimierte Verarbeitung von DAAT-Anfragen mit dem WAND-Algorithmus. WAND wertet weniger Trefferdokumente aus, indem es die maximalen Impact-Scores nutzt, um nicht konkurrierende Dokumente zu überspringen, aber es hat einen höheren Overhead pro Treffer. Dadurch ist WAND effizienter für Abfragen mit kleinen <em>k-Werten</em> oder kurzen Abfragen, bei denen das Überspringen von Dokumenten praktikabler ist.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Basic Term-at-a-Time (TAAT) Abfrageverarbeitung. Obwohl er im Vergleich zu <code translate="no">DAAT_MAXSCORE</code> und <code translate="no">DAAT_WAND</code> langsamer ist, bietet <code translate="no">TAAT_NAIVE</code> einen einzigartigen Vorteil. Im Gegensatz zu DAAT-Algorithmen, die zwischengespeicherte Maximalwerte verwenden, die unabhängig von Änderungen des globalen Sammelparameters (avgdl) statisch bleiben, passt sich <code translate="no">TAAT_NAIVE</code> dynamisch an solche Änderungen an.</p></li></ul></td>
+     <td><p>Der Algorithmus, der für den Aufbau und die Abfrage des Indexes verwendet wird. Gültige Werte:</p><ul><li><p><code translate="no">"DAAT_MAXSCORE"</code> (Standard): Optimierte Document-at-a-Time (DAAT)-Abfrageverarbeitung unter Verwendung des MaxScore-Algorithmus. MaxScore bietet eine bessere Leistung für hohe <em>k-Werte</em> oder Abfragen mit vielen Begriffen, indem Begriffe und Dokumente übersprungen werden, die wahrscheinlich nur geringe Auswirkungen haben. Dies wird erreicht, indem Begriffe auf der Grundlage ihrer maximalen Trefferquote in wesentliche und nicht wesentliche Gruppen unterteilt werden, wobei der Schwerpunkt auf Begriffen liegt, die zu den Top-k-Ergebnissen beitragen können.</p></li><li><p><code translate="no">"DAAT_WAND"</code>: Optimierte Verarbeitung von DAAT-Anfragen mit dem WAND-Algorithmus. WAND wertet weniger Trefferdokumente aus, indem es die maximalen Impact-Scores nutzt, um nicht konkurrierende Dokumente zu überspringen, aber es hat einen höheren Overhead pro Treffer. Dadurch ist WAND effizienter bei Abfragen mit kleinen <em>k-Werten</em> oder kurzen Abfragen, bei denen das Überspringen von Dokumenten praktikabler ist.</p></li><li><p><code translate="no">"TAAT_NAIVE"</code>: Basic Term-at-a-Time (TAAT) Abfrageverarbeitung. Obwohl er im Vergleich zu <code translate="no">DAAT_MAXSCORE</code> und <code translate="no">DAAT_WAND</code> langsamer ist, bietet <code translate="no">TAAT_NAIVE</code> einen einzigartigen Vorteil. Im Gegensatz zu DAAT-Algorithmen, die zwischengespeicherte Maximalwerte für die Auswirkung verwenden, die unabhängig von Änderungen des globalen Sammlungsparameters (avgdl) statisch bleiben, passt sich <code translate="no">TAAT_NAIVE</code> dynamisch an solche Änderungen an.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_k1</code></p></td>
@@ -607,6 +607,9 @@ client.insert(InsertReq.builder()
         ></path>
       </svg>
     </button></h2><p>Sobald Sie Daten in Ihre Sammlung eingefügt haben, können Sie eine Volltextsuche mit Rohtextabfragen durchführen. Milvus konvertiert Ihre Abfrage automatisch in einen Sparse-Vektor und ordnet die übereinstimmenden Suchergebnisse mit dem BM25-Algorithmus ein und gibt dann die TopK (<code translate="no">limit</code>) Ergebnisse zurück.</p>
+<div class="alert note">
+<p>Sie können die übereinstimmenden Begriffe in den Suchergebnissen hervorheben, indem Sie einen Text-Highlighter konfigurieren. Siehe <a href="/docs/de/text-highlighter.md">Text-Highlighter</a> für weitere Informationen.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -692,7 +695,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>Anteil der Begriffe mit geringer Bedeutung, die bei der Suche ignoriert werden sollen. Für Details siehe <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p></td>
+     <td><p>Anteil der unwichtigen Begriffe, die bei der Suche ignoriert werden sollen. Für Details siehe <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p></td>
    </tr>
    <tr>
      <td></td>
