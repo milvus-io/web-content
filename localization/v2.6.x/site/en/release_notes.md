@@ -569,6 +569,7 @@ title: Release Notes
     </button></h3><ul>
 <li>Struct in ARRAY:  Milvus introduced the new data type, Struct, allowing users to organize and manage multiple related fields within a single entity. Currently, Struct can only be used as an element under DataType.ARRAY, enabling features like Array of Vector, where each row contains multiple vectors, opening up new possibilities for complex data modeling and search. (<a href="https://github.com/milvus-io/milvus/pull/42148">#42148</a>)</li>
 <li>Supported Qwen GTE-rerank-v2 model in DashScope (<a href="https://github.com/milvus-io/milvus/pull/44660">#44660</a>)</li>
+<li>Supported AISAQ index - an all in storage index (<a href="https://github.com/zilliztech/knowhere/pull/1282">#1282</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
