@@ -314,6 +314,7 @@ We are excited to announce the release of Milvus 2.6.4, featuring a range of pow
 
 - Struct in ARRAY:  Milvus introduced the new data type, Struct, allowing users to organize and manage multiple related fields within a single entity. Currently, Struct can only be used as an element under DataType.ARRAY, enabling features like Array of Vector, where each row contains multiple vectors, opening up new possibilities for complex data modeling and search. ([#42148](https://github.com/milvus-io/milvus/pull/42148))
 - Supported Qwen GTE-rerank-v2 model in DashScope ([#44660](https://github.com/milvus-io/milvus/pull/44660))
+- Supported AISAQ index - an all in storage index ([#1282](https://github.com/zilliztech/knowhere/pull/1282))
 
 ### Improvements
 
