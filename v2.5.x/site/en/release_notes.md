@@ -8,6 +8,32 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.25
+
+Release date: January 12, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.5.25         | 2.5.18             | 2.5.13              | 2.5.14           | 2.5.14         |
+
+We are pleased to announce the release of Milvus 2.5.25! This update focuses on enhancing the reliability of storage operations and optimizing background task scheduling. Key improvements include a more robust retry mechanism for object storage under rate-limiting conditions and more accurate resource estimation for indexing tasks. This release also resolves several critical issues, including ETCD RPC limits during collection drops and consistency in geometry data conversions. We recommend all users on the 2.5 branch upgrade to this version for improved system stability.
+
+### Improvements
+
+- Prevented message loss in Pulsar consumers after client library upgrades ([#46591](https://github.com/milvus-io/milvus/pull/46591))
+- Made metadata batch processing configurable to prevent transaction errors ([#46514](https://github.com/milvus-io/milvus/pull/46514))
+- Improved reliability of object storage operations under high load with automatic retry on rate limit errors ([#46463](https://github.com/milvus-io/milvus/pull/46463))
+- Added configuration option for variable-length field size estimation ([#46301](https://github.com/milvus-io/milvus/pull/46301))
+- Improved slot allocation accuracy for indexing tasks ([#46260](https://github.com/milvus-io/milvus/pull/46260))
+
+### Bug fixes
+
+- Fixed geometry data conversion inconsistencies ([#46872](https://github.com/milvus-io/milvus/pull/46872))
+- Fixed inverted index compaction issue that could cause segment load failures ([#46868](https://github.com/milvus-io/milvus/pull/46868))
+- Fixed text log loading failure ([#46704](https://github.com/milvus-io/milvus/pull/46704))
+- Fixed ETCD error when dropping large collections ([#46580](https://github.com/milvus-io/milvus/pull/46580))
+- Fixed resource leak issue with proxy clients ([#46491](https://github.com/milvus-io/milvus/pull/46491))
+
 ## v2.5.24
 
 Release date: December 23, 2025
