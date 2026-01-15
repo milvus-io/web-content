@@ -7,7 +7,7 @@ title: In-memory Index
 
 # In-memory Index
 
-<div class="alert warn">
+<div class="alert warning">
 
 This page is deprecated. For the latest content, please refer to [Index Explained](index-explained.md).
 
