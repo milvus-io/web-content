@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "Pencarian Kunci Utama",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Pencarian Hibrida",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Pertanyaan",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "Penyaringan",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "Penjelasan Pemfilteran",
@@ -1007,49 +1013,49 @@
           {
             "label": "Pencarian Teks Lengkap",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Pencocokan Teks",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Penyorot Teks",
             "id": "text-highlighter.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Pencocokan Frasa",
             "id": "phrase-match.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Cari dengan Daftar Penyematan",
             "id": "search-with-embedding-lists.md",
-            "order": 10,
+            "order": 12,
             "children": []
           },
           {
             "label": "Kueri Elasticsearch ke Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 11,
+            "order": 13,
             "children": []
           },
           {
             "label": "Iterator Pencarian",
             "id": "with-iterators.md",
-            "order": 12,
+            "order": 14,
             "children": []
           },
           {
             "label": "Gunakan Kunci Partisi",
             "id": "use-partition-key.md",
-            "order": 13,
+            "order": 15,
             "children": []
           }
         ]

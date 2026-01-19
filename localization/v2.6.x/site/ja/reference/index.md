@@ -2,9 +2,9 @@
 id: index.md
 related_key: index
 summary: Milvusのインデックス機構。
-title: インメモリインデックス
+title: インメモリーインデックス
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">インメモリインデックス<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">インメモリーインデックス<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,10 @@ title: インメモリインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、Milvusがサポートする様々なタイプのインメモリインデックス、それぞれのインデックスが最適なシナリオ、および、より良い検索パフォーマンスを達成するためにユーザが設定できるパラメータについて説明します。オンディスクインデックスについては、<strong><a href="/docs/ja/disk_index.md">オンディスクインデックスを</a></strong>参照してください。</p>
+    </button></h1><div class="alert warning">
+<p>このページは非推奨です。最新の内容については、<a href="/docs/ja/index-explained.md">インデックスの</a>説明を参照してください。</p>
+</div>
+<p>このトピックでは、Milvusがサポートする様々なタイプのインメモリインデックス、それぞれのインデックスが最も適しているシナリオ、より良い検索パフォーマンスを実現するためにユーザが設定できるパラメータについて説明します。オンディスクインデックスについては、<strong><a href="/docs/ja/disk_index.md">オンディスクインデックスを</a></strong>参照してください。</p>
 <p>インデックスはデータを効率的に整理するプロセスであり、大規模なデータセットに対する時間のかかるクエリを劇的に高速化することで、類似検索を有用なものにする上で大きな役割を果たします。</p>
 <p>クエリー性能を向上させるために、各ベクトルフィールドに<a href="/docs/ja/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
 <div class="alert note">
@@ -753,7 +756,7 @@ title: インメモリインデックス
         ></path>
       </svg>
     </button></h3><p>このインデックスは IVF_FLAT と全く同じですが、バイナリ埋め込みにのみ使用できます。</p>
-<p>BIN_IVF_FLAT はベクトルデータを<code translate="no">nlist</code> クラスタ単位に分割し、ターゲット入力ベクトルと各クラスタの中心との距離を比較します。システムがクエリに設定するクラスタ数（<code translate="no">nprobe</code> ）に応じて、ターゲット入力と最も類似したクラスタ（複数可）内のベクトル間の比較に基づく類似性検索結果が返され、クエリ時間が大幅に短縮されます。</p>
+<p>BIN_IVF_FLAT はベクトルデータを<code translate="no">nlist</code> クラスタ単位に分割し、ターゲット入力ベクトルと各クラスタの中心との距離を比較します。システムがクエリに設定するクラスタ数 (<code translate="no">nprobe</code>) に応じて、ターゲット入力と最も類似したクラスタ内のベクトルとの比較のみに基づいて類似性検索結果が返され、クエリ時間が大幅に短縮されます。</p>
 <p><code translate="no">nprobe</code> を調整することで、精度と速度の理想的なバランスを見つけることができます。クエリ時間は、ターゲット入力ベクトルの数 (<code translate="no">nq</code>) と検索するクラスタの数 (<code translate="no">nprobe</code>) の両方が増加するにつれて急激に増加します。</p>
 <p>BIN_IVF_FLATは最も基本的なBIN_IVFインデックスであり、各ユニットに格納されるエンコードされたデータは元のデータと一致する。</p>
 <ul>
@@ -831,7 +834,7 @@ title: インメモリインデックス
 <tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>検索処理中に除外される小さなベクトル値の割合。このオプションは、クエリベクトル内の最小値を無視する比率を指定することで、検索処理を微調整することができます。検索精度とパフォーマンスのバランスをとるのに役立ちます。<code translate="no">drop_ratio_search</code> に設定する値が小さければ小さいほど、これらの小さな値が最終的なスコアに与える影響は小さくなります。いくつかの小さな値を無視することで、精度への影響を最小限に抑えながら検索性能を向上させることができる。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>検索処理中に除外される小さなベクトル値の割合。このオプションは、クエリベクトル内の最小値を無視する割合を指定することで、検索処理を微調整することができます。検索精度とパフォーマンスのバランスをとるのに役立ちます。<code translate="no">drop_ratio_search</code> に設定する値が小さければ小さいほど、これらの小さな値が最終的なスコアに与える影響は小さくなります。いくつかの小さな値を無視することで、精度への影響を最小限に抑えながら検索性能を向上させることができる。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

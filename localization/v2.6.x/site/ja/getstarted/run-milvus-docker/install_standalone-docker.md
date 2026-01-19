@@ -63,7 +63,7 @@ title: DockerでMilvusを起動する(Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.8の新機能</strong></p>
+<p><strong>v2.6.9の新機能</strong></p>
 <ul>
 <li><strong>ストリーミングノード</strong>：データ処理機能の強化</li>
 <li><a href="/docs/ja/use-woodpecker.md">Woodpecker</a><strong>MQ</strong>: メンテナンスのオーバーヘッドを削減した改良型メッセージキュー。</li>
@@ -76,7 +76,7 @@ title: DockerでMilvusを起動する(Linux)
 <p>インストールスクリプトの実行後</p>
 <ul>
 <li>milvus という名前の docker コンテナがポート<strong>19530</strong> で開始されました。</li>
-<li>milvusと一緒にembed etcdが同じコンテナにインストールされ、ポート<strong>2379で</strong>サービスを提供しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマップされています。</li>
+<li>milvusと一緒にembed etcdが同じコンテナにインストールされ、ポート<strong>2379で</strong>サービスを提供しています。その設定ファイルはカレントフォルダ内の<strong>embedEtcd.yamlに</strong>マッピングされています。</li>
 <li>Milvusのデフォルト設定を変更するには、カレントフォルダ内の<strong>user.yaml</strong>ファイルに設定を追加し、サービスを再起動します。</li>
 <li>Milvusデータボリュームはカレントフォルダ内の<strong>volumes/milvusに</strong>マッピングされます。</li>
 </ul>

@@ -60,27 +60,27 @@ summary: >-
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>Une distance L2 plus petite indique une plus grande similarité.</p></td>
-     <td><p>Pour ignorer les intégrations vectorielles les plus similaires, assurez-vous que <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Pour ignorer les intégrations vectorielles les plus similaires, il faut s'assurer que</p><p><code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>Une plus grande distance IP indique une plus grande similarité.</p></td>
-     <td><p>Pour ignorer les enregistrements vectoriels les plus similaires, assurez-vous que <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Pour ignorer les enregistrements vectoriels les plus similaires, il faut s'assurer que</p><p><code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>Une plus grande distance COSINE indique une plus grande similarité.</p></td>
-     <td><p>Pour ne pas tenir compte des enregistrements vectoriels les plus similaires, assurez-vous que <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Pour ne pas tenir compte des vector embeddings les plus similaires, il faut s'assurer que</p><p><code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>Une distance de Jaccard plus petite indique une plus grande similarité.</p></td>
-     <td><p>Pour ignorer les enregistrements vectoriels les plus similaires, il faut s'assurer que <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Pour ne pas tenir compte des vecteurs intégrés les plus similaires, il faut s'assurer que</p><p><code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>Une distance de Hamming plus petite indique une plus grande similarité.</p></td>
-     <td><p>Pour ignorer les enregistrements vectoriels les plus similaires, assurez-vous que <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Pour ignorer les vector embeddings les plus similaires, il faut s'assurer que</p><p><code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -250,3 +250,6 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Si les vecteurs d'interrogation existent déjà dans la collection cible, envisagez d'utiliser <code translate="no">ids</code> au lieu de les récupérer avant les recherches. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/primary-key-search.md">Recherche par clé primaire</a>.</p>
+</div>

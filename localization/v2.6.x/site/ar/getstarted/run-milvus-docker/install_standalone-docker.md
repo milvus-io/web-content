@@ -63,7 +63,7 @@ title: تشغيل Milvus في Docker (لينكس)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>ما الجديد في الإصدار 2.6.8:</strong></p>
+<p><strong>ما الجديد في الإصدار 2.6.9:</strong></p>
 <ul>
 <li><strong>عقدة التدفق</strong>: قدرات معالجة البيانات المحسّنة</li>
 <li><strong>نقار الخشب MQ</strong>: قائمة انتظار محسّنة للرسائل مع تقليل نفقات الصيانة، انظر <a href="/docs/ar/use-woodpecker.md">استخدام نقار الخشب</a> للحصول على التفاصيل</li>
@@ -80,7 +80,7 @@ title: تشغيل Milvus في Docker (لينكس)
 <li>لتغيير تكوين Milvus الافتراضي، أضف الإعدادات الخاصة بك إلى ملف <strong>user.yaml</strong> في المجلد الحالي ثم أعد تشغيل الخدمة.</li>
 <li>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>وحدات التخزين/ملف Milvus</strong> في المجلد الحالي.</li>
 </ul>
-<p>يمكنك الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. للحصول على التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>يمكنك الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد حول مثيل Milvus الخاص بك. للحصول على التفاصيل، راجع <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(اختياري) تحديث تكوينات Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

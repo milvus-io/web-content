@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "Ricerca con chiave primaria",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Ricerca ibrida",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Interrogazione",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "Filtraggio",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "Il filtraggio spiegato",
@@ -1007,49 +1013,49 @@
           {
             "label": "Ricerca a testo completo",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Corrispondenza del testo",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Evidenziatore di testo",
             "id": "text-highlighter.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Abbinamento di frasi",
             "id": "phrase-match.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Ricerca con elenchi incorporati",
             "id": "search-with-embedding-lists.md",
-            "order": 10,
+            "order": 12,
             "children": []
           },
           {
             "label": "Query Elasticsearch a Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 11,
+            "order": 13,
             "children": []
           },
           {
             "label": "Iteratori di ricerca",
             "id": "with-iterators.md",
-            "order": 12,
+            "order": 14,
             "children": []
           },
           {
             "label": "Utilizzare la chiave di partizione",
             "id": "use-partition-key.md",
-            "order": 13,
+            "order": 15,
             "children": []
           }
         ]

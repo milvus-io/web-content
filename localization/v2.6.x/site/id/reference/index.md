@@ -19,7 +19,10 @@ title: Indeks dalam memori
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Topik ini berisi daftar berbagai jenis indeks dalam memori yang didukung Milvus, skenario yang paling sesuai, dan parameter yang dapat dikonfigurasikan oleh pengguna untuk mendapatkan performa pencarian yang lebih baik. Untuk indeks dalam disk, lihat <strong><a href="/docs/id/disk_index.md">Indeks Dalam Disk</a></strong>.</p>
+    </button></h1><div class="alert warning">
+<p>Halaman ini sudah tidak digunakan lagi. Untuk konten terbaru, silakan lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks.</a></p>
+</div>
+<p>Topik ini berisi daftar berbagai jenis indeks dalam memori yang didukung Milvus, skenario yang paling sesuai, dan parameter yang dapat dikonfigurasikan oleh pengguna untuk mendapatkan kinerja pencarian yang lebih baik. Untuk indeks dalam disk, lihat <strong><a href="/docs/id/disk_index.md">Indeks Dalam Disk</a></strong>.</p>
 <p>Pengindeksan adalah proses pengorganisasian data secara efisien, dan ini memainkan peran utama dalam membuat pencarian kemiripan menjadi berguna dengan mempercepat kueri yang memakan waktu secara dramatis pada kumpulan data yang besar.</p>
 <p>Untuk meningkatkan kinerja kueri, Anda dapat <a href="/docs/id/index-vector-fields.md">menentukan jenis indeks</a> untuk setiap bidang vektor.</p>
 <div class="alert note">
@@ -723,7 +726,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
         ></path>
       </svg>
     </button></h3><p>Indeks ini persis sama dengan FLAT kecuali bahwa ini hanya dapat digunakan untuk penyematan biner.</p>
-<p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada kumpulan data yang relatif kecil (skala jutaan), indeks BIN_FLAT adalah pilihan yang baik. BIN_FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari BIN_FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
+<p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada dataset yang relatif kecil (skala jutaan), indeks BIN_FLAT adalah pilihan yang baik. BIN_FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari BIN_FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
 <p>BIN_FLAT akurat karena menggunakan pendekatan menyeluruh untuk pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan vektor dalam kumpulan data. Hal ini membuat BIN_FLAT menjadi indeks paling lambat dalam daftar kami, dan tidak cocok untuk kueri data vektor yang sangat besar. Tidak ada parameter untuk indeks BIN_FLAT di Milvus, dan menggunakannya tidak memerlukan pelatihan data atau penyimpanan tambahan.</p>
 <ul>
 <li><p>Parameter pencarian</p>

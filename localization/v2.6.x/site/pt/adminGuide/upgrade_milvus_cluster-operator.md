@@ -23,7 +23,7 @@ title: Atualização do Cluster Milvus com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia descreve como atualizar seu cluster Milvus da v2.5.x para a v2.6.8 usando o Milvus Operator.</p>
+    </button></h1><p>Este guia descreve como atualizar seu cluster Milvus da v2.5.x para a v2.6.9 usando o Milvus Operator.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Antes de começar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: Atualização do Cluster Milvus com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v268" class="common-anchor-header">O que há de novo na v2.6.8<button data-href="#Whats-new-in-v268" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v269" class="common-anchor-header">O que há de novo na v2.6.9<button data-href="#Whats-new-in-v269" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,9 +54,9 @@ title: Atualização do Cluster Milvus com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A atualização do Milvus 2.5.x para a 2.6.8 envolve mudanças significativas na arquitetura:</p>
+    </button></h3><p>A atualização do Milvus 2.5.x para a 2.6.9 envolve mudanças significativas na arquitetura:</p>
 <ul>
-<li><strong>Consolidação de coordenadores</strong>: Os coordenadores legados separados (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) foram consolidados num único <code translate="no">mixCoord</code></li>
+<li><strong>Consolidação de coordenadores</strong>: Os coordenadores separados (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) foram consolidados num único <code translate="no">mixCoord</code></li>
 <li><strong>Novos componentes</strong>: Introdução do Streaming Node para um melhor processamento de dados</li>
 <li><strong>Remoção de componentes</strong>: <code translate="no">indexNode</code> removido e consolidado</li>
 </ul>
@@ -84,11 +84,11 @@ title: Atualização do Cluster Milvus com o Milvus Operator
 </ul>
 <p><strong>Requisitos de compatibilidade:</strong></p>
 <ul>
-<li>O Milvus v2.6.0-rc1 <strong>não</strong> é <strong>compatível</strong> com a v2.6.8. Não são suportadas actualizações diretas a partir de versões candidatas.</li>
-<li>Se estiver a executar atualmente a v2.6.0-rc1 e necessitar de preservar os seus dados, consulte <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">este guia da comunidade</a> para obter assistência na migração.</li>
-<li>É <strong>necessário</strong> atualizar para a versão 2.5.16 ou posterior com <code translate="no">mixCoord</code> ativado antes de atualizar para a versão 2.6.8.</li>
+<li>O Milvus v2.6.0-rc1 <strong>não</strong> é <strong>compatível</strong> com a v2.6.9. Não são suportadas actualizações diretas a partir de versões candidatas.</li>
+<li>Se estiver a executar atualmente a v2.6.0-rc1 e precisar de preservar os seus dados, consulte <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">este guia da comunidade</a> para obter assistência na migração.</li>
+<li>É <strong>necessário</strong> atualizar para a versão 2.5.16 ou posterior com <code translate="no">mixCoord</code> ativado antes de atualizar para a versão 2.6.9.</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para a versão 2.6.8 do Milvus, é necessário manter a escolha atual da fila de mensagens. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte para a mudança de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para a versão 2.6.9 do Milvus, tem de manter a sua escolha atual de filas de mensagens. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte para a mudança de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +104,7 @@ title: Atualização do Cluster Milvus com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">Passo 1: Atualizar o Milvus Operator<button data-href="#Step-1-Upgrade-Milvus-Operator" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Upgrade-Milvus-Operator" class="common-anchor-header">Passo 1: Atualização do Milvus Operator<button data-href="#Step-1-Upgrade-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -167,7 +167,7 @@ helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvu
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Verify all pods are ready</span>
 kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="23-Upgrade-to-v268" class="common-anchor-header">2.3 Atualização para a v2.6.8</h4><p>Quando a v2.5.16 estiver a funcionar com êxito com <code translate="no">mixCoord</code>, actualize para a v2.6.8:</p>
+<h4 id="23-Upgrade-to-v269" class="common-anchor-header">2.3 Atualização para a v2.6.9</h4><p>Quando a v2.5.16 estiver a funcionar com êxito com <code translate="no">mixCoord</code>, actualize para a v2.6.9:</p>
 <p>Actualize o seu ficheiro de configuração (<code translate="no">milvusupgrade.yaml</code> neste exemplo):</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -175,7 +175,7 @@ kubectl get pods
   <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>  <span class="hljs-comment"># Replace with your actual release name</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.8</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Aplicar a atualização final:</p>
 <pre><code translate="no" class="language-bash">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge

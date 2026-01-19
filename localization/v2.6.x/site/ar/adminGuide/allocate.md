@@ -56,24 +56,54 @@ summary: تعرف على كيفية تخصيص الموارد لـ Milvus على
       </svg>
     </button></h2><p>استخدم Helm لتخصيص موارد وحدة المعالجة المركزية وموارد الذاكرة لمكونات Milvus.</p>
 <div class="alert note">
-سيؤدي استخدام Helm لترقية الموارد إلى إجراء تحديث متجدد للقرون قيد التشغيل.</div>
+سيؤدي استخدام Helm لترقية الموارد إلى قيام القرون قيد التشغيل بإجراء تحديث متجدد.</div>
 <p>هناك طريقتان لتخصيص الموارد:</p>
 <ul>
 <li><a href="/docs/ar/allocate.md#Allocate-resources-with-commands">استخدم الأوامر</a></li>
 <li><a href="/docs/ar/allocate.md#Allocate-resources-by-setting-configuration-file">تعيين المعلمات في الملف <code translate="no">YAML</code> </a></li>
 </ul>
-<h3 id="Allocate-resources-with-commands" class="common-anchor-header">تخصيص الموارد باستخدام الأوامر</h3><p>تحتاج إلى تعيين متغيرات الموارد لكل مكون من مكونات Milvus إذا كنت تستخدم <code translate="no">--set</code> لتحديث تكوينات الموارد.</p>
+<h3 id="Allocate-resources-with-commands" class="common-anchor-header">تخصيص الموارد باستخدام الأوامر<button data-href="#Allocate-resources-with-commands" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تحتاج إلى تعيين متغيرات الموارد لكل مكون من مكونات Milvus إذا كنت تستخدم <code translate="no">--set</code> لتحديث تكوينات الموارد.</p>
 <div class="filter">
  <a href="#cluster">عنقود</a><a href="#standalone">ميلفوس المستقل</a> <a href="#cluster">ميلفوس العنقودي</a></div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">تخصيص الموارد عن طريق تعيين ملف التكوين</h3><p>يمكنك أيضًا تخصيص موارد وحدة المعالجة المركزية وموارد الذاكرة عن طريق تحديد المعلمات <code translate="no">resources.requests</code> و <code translate="no">resources.limits</code> في الملف <code translate="no">resources.yaml</code>.</p>
+<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">تخصيص الموارد عن طريق تعيين ملف التكوين<button data-href="#Allocate-resources-by-setting-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك أيضًا تخصيص موارد وحدة المعالجة المركزية وموارد الذاكرة عن طريق تحديد المعلمات <code translate="no">resources.requests</code> و <code translate="no">resources.limits</code> في الملف <code translate="no">resources.yaml</code>.</p>
 <pre><code translate="no" class="language-Yaml"><span class="hljs-attr">dataNode:</span>
   <span class="hljs-attr">resources:</span>
     <span class="hljs-attr">limits:</span>

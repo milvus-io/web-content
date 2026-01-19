@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "البحث عن المفتاح الأساسي",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "البحث الهجين",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "استعلام",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "التصفية",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "شرح التصفية",
@@ -1007,49 +1013,49 @@
           {
             "label": "البحث في النص الكامل",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "تطابق النص",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "أداة تمييز النص",
             "id": "text-highlighter.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "تطابق العبارات",
             "id": "phrase-match.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "البحث باستخدام قوائم التضمين",
             "id": "search-with-embedding-lists.md",
-            "order": 10,
+            "order": 12,
             "children": []
           },
           {
             "label": "استعلامات البحث المرن إلى ميلفوس",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 11,
+            "order": 13,
             "children": []
           },
           {
             "label": "مكرر البحث",
             "id": "with-iterators.md",
-            "order": 12,
+            "order": 14,
             "children": []
           },
           {
             "label": "استخدام مفتاح التقسيم",
             "id": "use-partition-key.md",
-            "order": 13,
+            "order": 15,
             "children": []
           }
         ]

@@ -36,7 +36,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>検索結果のエンティティがスカラー・フィールドで同じ値を共有する場合、これは特定の属性で類似していることを示し、検索結果に悪影響を及ぼす可能性があります。</p>
-<p>コレクションに複数のドキュメント（<strong>docIdで</strong>示される）が格納されているとします。ドキュメントをベクトルに変換するときに、できるだけ多くの意味情報を保持するために、各ドキュメントは、小さくて管理しやすい段落（または<strong>チャンク</strong>）に分割され、別々のエンティティとして格納されます。ドキュメントがより小さなセクションに分割されても、ユーザーはどのドキュメントが自分のニーズに最も関連するかを特定することに興味を持つことが多い。</p>
+<p>コレクションに複数のドキュメント（<strong>docIdで</strong>示される）が格納されているとします。ドキュメントをベクトルに変換するときに、できるだけ多くの意味情報を保持するために、各ドキュメントは、小さくて管理しやすい段落（または<strong>チャンク</strong>）に分割され、別々のエンティティとして格納されます。ドキュメントがより小さなセクションに分割されても、ユーザーはどのドキュメントが自分のニーズに最も関連しているかを特定することに興味を持つことが多い。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
@@ -389,5 +389,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>インデックス作成</strong>：このグループ化機能は、これらのインデックス・タイプでインデックス付けされたコレクションに対してのみ機能します：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
 <li><p><strong>グループ数</strong>：<code translate="no">limit</code> パラメータは、各グループ内の特定のエンティティの数ではなく、検索結果が返されるグループの数を制御する。適切な<code translate="no">limit</code> を設定することで、検索の多様性とクエリ・パフォーマンスを制御することができます。データが高密度に分散している場合やパフォーマンスが懸念される場合は、<code translate="no">limit</code> を減らすことで計算コストを削減できます。</p></li>
 <li><p><strong>グループあたりのエンティティ</strong>数：<code translate="no">group_size</code> パラメータは、グループごとに返されるエンティティの数を制御します。ユースケースに基づいて<code translate="no">group_size</code> を調整すると、検索結果の豊かさが向上します。ただし、データが不均一に分散している場合、特にデータが限られたシナリオでは、<code translate="no">group_size</code> で指定した数よりも少ないエンティティしか返されないグループもあります。</p></li>
-<li><p><strong>厳格なグループサイズ</strong>：<code translate="no">strict_group_size=True</code> を指定すると、そのグループに十分なデータがない場合を除き、各グループで指定されたエンティティ数 (<code translate="no">group_size</code>) を返そうとします。この設定により、グループごとに一貫したエンティティ数が保証されますが、データ分散が不均一な場合やリソースが限られている場合、パフォーマンスが低下する可能性があります。厳密なエンティティ数が必要でない場合は、<code translate="no">strict_group_size=False</code> を設定するとクエリの速度が向上します。</p></li>
+<li><p><strong>厳格なグループサイズ</strong>：<code translate="no">strict_group_size=True</code> を指定すると、そのグループに十分なデータがない場合を除き、各グループで指定されたエンティティ数 (<code translate="no">group_size</code>) を返そうとします。この設定により、グループごとに一貫したエンティティ数が保証されますが、データ分散が不均一な場合やリソースが限られている場合、パフォーマンスが低下する可能性があります。厳密なエンティティ数が必要でない場合は、<code translate="no">strict_group_size=False</code> を設定することで、クエリの速度を向上させることができます。</p></li>
+<li><p>クエリ・ベクタがターゲット・コレクションに既に存在する場合は、検索前にそれらを取得する代わりに<code translate="no">ids</code> を使用することを検討してください。詳細については、<a href="/docs/ja/primary-key-search.md">プライマリ・キー検索を</a>参照してください。</p></li>
 </ul>

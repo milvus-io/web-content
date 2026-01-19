@@ -57,27 +57,27 @@ summary: >-
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>L2 거리가 작을수록 유사성이 높음을 나타냅니다.</p></td>
-     <td><p>가장 유사한 벡터 임베딩을 무시하려면 <code translate="no">range_filter</code> &lt;= 거리 &lt; <code translate="no">radius</code></p></td>
+     <td><p>가장 유사한 벡터 임베딩을 무시하려면 다음을 확인합니다.</p><p><code translate="no">range_filter</code> &lt;= 거리 &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>IP 거리가 클수록 유사도가 높음을 나타냅니다.</p></td>
-     <td><p>가장 유사한 벡터 임베딩을 무시하려면 <code translate="no">radius</code> &lt;= 거리 &lt;=인지 확인하세요. <code translate="no">range_filter</code></p></td>
+     <td><p>가장 유사한 벡터 임베딩을 무시하려면 다음을 확인합니다.</p><p><code translate="no">radius</code> &lt; 거리 &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>코사인 거리가 클수록 유사도가 높다는 것을 나타냅니다.</p></td>
-     <td><p>가장 유사한 벡터 임베딩을 무시하려면 <code translate="no">radius</code> &lt; 거리 &lt;=를 확인합니다. <code translate="no">range_filter</code></p></td>
+     <td><p>코사인 거리가 클수록 유사도가 높음을 나타냅니다.</p></td>
+     <td><p>가장 유사한 벡터 임베딩을 무시하려면 다음을 확인합니다.</p><p><code translate="no">radius</code> &lt; 거리 &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
-     <td><p>Jaccard 거리가 작을수록 유사도가 높음을 나타냅니다.</p></td>
-     <td><p>가장 유사한 벡터 임베딩을 무시하려면 <code translate="no">range_filter</code> &lt;= 거리 &lt;=가 되는지 확인하세요. <code translate="no">radius</code></p></td>
+     <td><p>자카드 거리가 작을수록 유사도가 높음을 나타냅니다.</p></td>
+     <td><p>가장 유사한 벡터 임베딩을 무시하려면 다음을 확인합니다.</p><p><code translate="no">range_filter</code> &lt;= 거리 &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>해밍 거리가 작을수록 유사도가 높다는 것을 나타냅니다.</p></td>
-     <td><p>가장 유사한 벡터 임베딩을 무시하려면 <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>가장 유사한 벡터 임베딩을 무시하려면 다음을 확인합니다.</p><p><code translate="no">range_filter</code> &lt;= 거리 &lt; <code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -95,7 +95,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 범위 검색을 수행하는 방법을 설명합니다. 다음 코드 스니펫의 검색 요청에는 메트릭 유형이 포함되어 있지 않으므로 기본 메트릭 유형인 <strong>COSINE이</strong> 적용됩니다. 이 경우 <strong>반경</strong> 값이 <strong>범위_필터</strong> 값보다 작은지 확인하세요.</p>
+    </button></h2><p>이 섹션에서는 범위 검색을 수행하는 방법을 설명합니다. 다음 코드 스니펫의 검색 요청에는 메트릭 유형이 포함되어 있지 않아 기본 메트릭 유형인 <strong>COSINE이</strong> 적용됩니다. 이 경우 <strong>반경</strong> 값이 <strong>범위_필터</strong> 값보다 작은지 확인하세요.</p>
 <p>다음 코드 조각에서 <code translate="no">radius</code> 을 <code translate="no">0.4</code> 으로, <code translate="no">range_filter</code> 을 <code translate="no">0.6</code> 으로 설정하여 Milvus가 쿼리 벡터와의 거리 또는 점수가 <strong>0.</strong> <strong>4~0.6</strong> 내에 속하는 모든 엔티티를 반환하도록 합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -247,3 +247,6 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>쿼리 벡터가 대상 컬렉션에 이미 존재하는 경우, 검색 전에 검색 벡터를 검색하는 대신 <code translate="no">ids</code> 을 사용하는 것을 고려하세요. 자세한 내용은 <a href="/docs/ko/primary-key-search.md">기본 키 검색을</a> 참조하세요.</p>
+</div>

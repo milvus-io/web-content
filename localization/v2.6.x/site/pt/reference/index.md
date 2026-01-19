@@ -19,7 +19,10 @@ title: Índice na memória
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este tópico lista os vários tipos de índices em memória que o Milvus suporta, os cenários que cada um deles melhor se adequa e os parâmetros que os utilizadores podem configurar para obter um melhor desempenho de pesquisa. Para índices no disco, veja <strong><a href="/docs/pt/disk_index.md">Índice no disco</a></strong>.</p>
+    </button></h1><div class="alert warning">
+<p>Esta página está obsoleta. Para obter o conteúdo mais recente, consulte <a href="/docs/pt/index-explained.md">Índice explicado</a>.</p>
+</div>
+<p>Este tópico lista os vários tipos de índices em memória que o Milvus suporta, os cenários que cada um deles melhor se adequa e os parâmetros que os utilizadores podem configurar para obter um melhor desempenho de pesquisa. Para índices no disco, veja <strong><a href="/docs/pt/disk_index.md">Índice no disco</a></strong>.</p>
 <p>A indexação é o processo de organização eficiente dos dados e desempenha um papel importante na utilidade da pesquisa por similaridade, acelerando drasticamente as consultas demoradas em grandes conjuntos de dados.</p>
 <p>Para melhorar o desempenho da consulta, é possível <a href="/docs/pt/index-vector-fields.md">especificar um tipo de índice</a> para cada campo de vetor.</p>
 <div class="alert note">
@@ -39,7 +42,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A maior parte dos tipos de índices vectoriais suportados pelo Milvus utilizam algoritmos de pesquisa ANNS (approximate nearest neighbors search). Em comparação com a recuperação exacta, que normalmente consome muito tempo, a ideia central do ANNS já não se limita a devolver o resultado mais exato, mas apenas a procurar os vizinhos do alvo. A ANNS melhora a eficiência da recuperação, sacrificando a exatidão dentro de um intervalo aceitável.</p>
+    </button></h2><p>A maior parte dos tipos de índices vectoriais suportados pelo Milvus utilizam algoritmos de pesquisa ANNS (approximate nearest neighbors search). Em comparação com a recuperação exacta, que normalmente consome muito tempo, a ideia central do ANNS já não se limita a devolver o resultado mais exato, mas apenas a procurar os vizinhos do alvo. A ANNS melhora a eficiência da recuperação sacrificando a precisão dentro de um intervalo aceitável.</p>
 <p>De acordo com os métodos de implementação, o índice vetorial ANNS pode ser classificado em quatro tipos: Baseado em árvore, baseado em gráfico, baseado em hash e baseado em quantização.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Índices suportados no Milvus<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -327,7 +330,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>IVF_FLAT divide os dados vectoriais em <code translate="no">nlist</code> unidades de clusters e, em seguida, compara as distâncias entre o vetor de entrada alvo e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
+    </button></h3><p>O IVF_FLAT divide os dados vectoriais em <code translate="no">nlist</code> unidades de clusters e, em seguida, compara as distâncias entre o vetor de entrada alvo e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
 <p>Ao ajustar <code translate="no">nprobe</code>, é possível encontrar um equilíbrio ideal entre precisão e velocidade para um determinado cenário. Os resultados do <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">teste de desempenho do IVF_FLAT</a> demonstram que o tempo de consulta aumenta drasticamente à medida que o número de vectores de entrada alvo (<code translate="no">nq</code>) e o número de clusters a pesquisar (<code translate="no">nprobe</code>) aumentam.</p>
 <p>O IVF_FLAT é o índice IVF mais básico, e os dados codificados armazenados em cada unidade são consistentes com os dados originais.</p>
 <ul>
@@ -754,7 +757,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
       </svg>
     </button></h3><p>Este índice é exatamente o mesmo que IVF_FLAT, exceto que só pode ser utilizado para embeddings binários.</p>
 <p>BIN_IVF_FLAT divide os dados do vetor em <code translate="no">nlist</code> unidades de cluster e, em seguida, compara as distâncias entre o vetor de entrada alvo e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
-<p>Ajustando <code translate="no">nprobe</code>, pode ser encontrado um equilíbrio ideal entre precisão e velocidade para um determinado cenário. O tempo de consulta aumenta drasticamente à medida que o número de vectores de entrada alvo (<code translate="no">nq</code>) e o número de clusters a pesquisar (<code translate="no">nprobe</code>) aumentam.</p>
+<p>Ao ajustar <code translate="no">nprobe</code>, é possível encontrar um equilíbrio ideal entre precisão e velocidade para um determinado cenário. O tempo de consulta aumenta drasticamente à medida que o número de vectores de entrada alvo (<code translate="no">nq</code>) e o número de clusters a pesquisar (<code translate="no">nprobe</code>) aumentam.</p>
 <p>BIN_IVF_FLAT é o índice BIN_IVF mais básico, e os dados codificados armazenados em cada unidade são consistentes com os dados originais.</p>
 <ul>
 <li><p>Parâmetros de construção do índice</p>

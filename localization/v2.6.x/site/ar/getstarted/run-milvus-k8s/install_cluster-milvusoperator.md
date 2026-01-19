@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>بمجرد تشغيل جراب مشغل Milvus، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم الأمر أعلاه بنشر مجموعة Milvus مع <strong>Woodpecker</strong> كقائمة انتظار للرسائل (موصى به للإصدار 2.6.8) وجميع المكونات المعمارية الجديدة بما في ذلك عقدة البث.</p>
+<p>يقوم الأمر أعلاه بنشر مجموعة Milvus مع <strong>Woodpecker</strong> كقائمة انتظار للرسائل (موصى به للإصدار 2.6.9) وجميع المكونات المعمارية الجديدة بما في ذلك عقدة البث.</p>
 <p><strong>أبرز الملامح المعمارية في هذا النشر:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: <a href="/docs/ar/use-woodpecker.md">يستخدم Woodpecker</a> (يقلل من صيانة البنية التحتية)</li>

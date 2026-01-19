@@ -19,7 +19,10 @@ title: Índice en memoria
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este tema enumera varios tipos de índices en memoria que Milvus soporta, los escenarios que mejor se adaptan a cada uno de ellos y los parámetros que los usuarios pueden configurar para lograr un mejor rendimiento de búsqueda. Para índices en disco, consulte <strong><a href="/docs/es/disk_index.md">Índice en disco</a></strong>.</p>
+    </button></h1><div class="alert warning">
+<p>Esta página está obsoleta. Para ver el contenido más reciente, consulte <a href="/docs/es/index-explained.md">Explicación de los índices</a>.</p>
+</div>
+<p>Este tema enumera varios tipos de índices en memoria que Milvus soporta, los escenarios que mejor se adaptan a cada uno de ellos y los parámetros que los usuarios pueden configurar para lograr un mejor rendimiento de búsqueda. Para los índices en disco, consulte <strong><a href="/docs/es/disk_index.md">Índice en disco</a></strong>.</p>
 <p>La indexación es el proceso de organización eficiente de los datos, y desempeña un papel fundamental en la utilidad de la búsqueda de similitudes al acelerar drásticamente las consultas que consumen mucho tiempo en grandes conjuntos de datos.</p>
 <p>Para mejorar el rendimiento de las consultas, puede <a href="/docs/es/index-vector-fields.md">especificar un tipo de índice</a> para cada campo vectorial.</p>
 <div class="alert note">
@@ -39,7 +42,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La mayoría de los tipos de índices vectoriales soportados por Milvus utilizan algoritmos de búsqueda aproximada de vecinos más cercanos (ANNS). En comparación con la recuperación exacta, que suele llevar mucho tiempo, la idea central de ANNS ya no se limita a devolver el resultado más exacto, sino que sólo busca los vecinos del objetivo. El ANNS mejora la eficiencia de la recuperación sacrificando la precisión dentro de un rango aceptable.</p>
+    </button></h2><p>La mayoría de los tipos de índices vectoriales soportados por Milvus utilizan algoritmos de búsqueda aproximada de vecinos más cercanos (ANNS). En comparación con la recuperación exacta, que suele llevar mucho tiempo, la idea central de ANNS ya no se limita a devolver el resultado más exacto, sino que sólo busca los vecinos del objetivo. ANNS mejora la eficiencia de la recuperación sacrificando la precisión dentro de un rango aceptable.</p>
 <p>Según los métodos de implementación, el índice vectorial ANNS puede clasificarse en cuatro tipos: Basado en árbol, Basado en grafo, Basado en hash y Basado en cuantificación.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Índices admitidos en Milvus<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -353,7 +356,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Rango de búsqueda</p>
+<li><p>Búsqueda por rangos</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
@@ -405,7 +408,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Búsqueda por rangos</p>
+<li><p>Rango de búsqueda</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
@@ -433,7 +436,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
         ></path>
       </svg>
     </button></h3><p><code translate="no">PQ</code> (Product Quantization) descompone uniformemente el espacio vectorial original de alta dimensión en productos cartesianos de <code translate="no">m</code> espacios vectoriales de baja dimensión y, a continuación, cuantiza los espacios vectoriales de baja dimensión descompuestos. En lugar de calcular las distancias entre el vector objetivo y el centro de todas las unidades, la cuantización de productos permite calcular las distancias entre el vector objetivo y el centro de agrupación de cada espacio de baja dimensión y reduce en gran medida la complejidad temporal y espacial del algoritmo.</p>
-<p>IVF_PQ realiza la agrupación de índices IVF antes de cuantificar el producto de vectores. Su archivo de índices es aún más pequeño que IVF_SQ8, pero también provoca una pérdida de precisión durante la búsqueda de vectores.</p>
+<p>IVF_PQ realiza la agrupación de índices IVF antes de cuantificar el producto de vectores. Su archivo de índices es incluso más pequeño que IVF_SQ8, pero también provoca una pérdida de precisión durante la búsqueda de vectores.</p>
 <div class="alert note">
 <p>Los parámetros de construcción del índice y los parámetros de búsqueda varían según la distribución Milvus. Seleccione primero su distribución de Milvus.</p>
 </div>
@@ -462,7 +465,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Búsqueda por rangos</p>
+<li><p>Rango de búsqueda</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
@@ -674,7 +677,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>PRQ es similar a PQ, y también divide el vector en grupos <code translate="no">m</code>. Cada subvector se codificará como <code translate="no">nbits</code>. Tras completar una cuantización pq, calculará el residuo entre el vector y el vector cuantizado pq, y aplicará la cuantización pq al vector residual. Se realizarán un total de <code translate="no">nrq</code> cuantizaciones pq completas, por lo que un vector flotante de longitud <code translate="no">dim</code> se codificará como <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
+    </button></h3><p>PRQ es similar a PQ, y también divide el vector en grupos <code translate="no">m</code>. Cada subvector se codificará como <code translate="no">nbits</code>. Tras completar una cuantización pq, calculará el residuo entre el vector y el vector cuantizado pq, y aplicará una cuantización pq al vector residual. Se realizarán un total de <code translate="no">nrq</code> cuantizaciones pq completas, por lo que un vector flotante de longitud <code translate="no">dim</code> se codificará como <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
 <p>Combinado con un cuantificador residual de producto (PRQ), HNSW_PRQ ofrece un equilibrio aún más controlable entre el tamaño del índice y la precisión. Tiene un valor QPS casi equivalente y una tasa de recuperación más alta que HNSW_PQ para la misma tasa de compresión. En comparación con HNSW_PQ, el tiempo de construcción del índice puede aumentar varias veces.</p>
 <ul>
 <li><p>Parámetros de creación de índices</p>
@@ -779,13 +782,13 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Búsqueda por rangos</p>
+<li><p>Rango de búsqueda</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de buckets que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de buckets vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de cubos que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de cubos vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>

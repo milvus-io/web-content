@@ -60,7 +60,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 </ul></li>
 <li>O armazenamento de mensagens não pode ser alterado enquanto o sistema Milvus estiver a funcionar.</li>
 <li>Apenas a versão 2.x ou 3.x do Kafka é suportada.</li>
-<li><strong>Limitações da atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao fazer a atualização para o Milvus v2.6.8, é necessário manter a escolha da fila de mensagens atual. Não é possível alternar entre sistemas de filas de mensagens diferentes durante a atualização. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</li>
+<li><strong>Limitações da atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao fazer a atualização para o Milvus v2.6.9, é necessário manter a escolha da fila de mensagens atual. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar o RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,7 +107,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 <h5 id="Key-configuration-options" class="common-anchor-header">Principais opções de configuração:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: Define explicitamente o RocksMQ como a fila de mensagens</li>
 <li><code translate="no">persistence.enabled</code>: Habilita o armazenamento persistente para os dados do RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Quando verdadeiro, o PVC será excluído quando a instância do Milvus for excluída</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Quando verdadeiro, o PVC será apagado quando a instância do Milvus for apagada</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Especificação padrão do PVC do Kubernetes</li>
 <li><code translate="no">accessModes</code>: Normalmente <code translate="no">ReadWriteOnce</code> para armazenamento em bloco</li>
 <li><code translate="no">storageClassName</code>: A classe de armazenamento do seu cluster</li>

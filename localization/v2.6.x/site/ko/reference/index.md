@@ -2,9 +2,9 @@
 id: index.md
 related_key: index
 summary: Milvus의 인덱스 메커니즘.
-title: 인메모리 인덱스
+title: 인메모리 색인
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">인메모리 인덱스<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">인메모리 색인<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,10 @@ title: 인메모리 인덱스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 항목에서는 Milvus가 지원하는 다양한 유형의 인메모리 인덱스, 각 인덱스가 가장 적합한 시나리오, 사용자가 더 나은 검색 성능을 달성하기 위해 구성할 수 있는 매개변수에 대해 설명합니다. 온디스크 인덱스에 대해서는 <strong><a href="/docs/ko/disk_index.md">온디스크 인덱스를</a></strong> 참조하세요.</p>
+    </button></h1><div class="alert warning">
+<p>이 페이지는 더 이상 사용되지 않습니다. 최신 콘텐츠는 <a href="/docs/ko/index-explained.md">색인 설명을</a> 참조하세요.</p>
+</div>
+<p>이 항목에서는 Milvus가 지원하는 다양한 유형의 인메모리 인덱스, 각 인덱스가 가장 적합한 시나리오, 사용자가 더 나은 검색 성능을 달성하기 위해 구성할 수 있는 매개변수를 나열합니다. 온디스크 인덱스에 대해서는 <strong><a href="/docs/ko/disk_index.md">온디스크 인덱스를</a></strong> 참조하세요.</p>
 <p>인덱싱은 데이터를 효율적으로 정리하는 과정으로, 대규모 데이터 세트에서 시간이 오래 걸리는 쿼리를 획기적으로 가속화하여 유사성 검색을 유용하게 만드는 데 중요한 역할을 합니다.</p>
 <p>쿼리 성능을 향상시키기 위해 각 벡터 필드에 <a href="/docs/ko/index-vector-fields.md">인덱스 유형을 지정할</a> 수 있습니다.</p>
 <div class="alert note">
@@ -831,7 +834,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 개선할 수 있습니다.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 향상시킬 수 있습니다.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

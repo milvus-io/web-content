@@ -56,7 +56,7 @@ summary: >-
 <ul>
 <li><p>Efetuar uma pesquisa ANN com base no vetor de consulta fornecido para encontrar todas as entidades mais semelhantes à consulta.</p></li>
 <li><p>Agrupa os resultados da pesquisa pelo endereço especificado <code translate="no">group_by_field</code>, como <code translate="no">docId</code>.</p></li>
-<li><p>Retorna os principais resultados de cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
+<li><p>Retorna os principais resultados para cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
 </ul>
 <div class="alert note">
 <p>Por padrão, a Pesquisa de agrupamento retorna apenas uma entidade por grupo. Se você quiser aumentar o número de resultados a serem retornados por grupo, poderá controlar isso com os parâmetros <code translate="no">group_size</code> e <code translate="no">strict_group_size</code>.</p>
@@ -229,7 +229,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;docId&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>No pedido acima, <code translate="no">limit=3</code> indica que o sistema devolverá resultados de pesquisa de três grupos, com cada grupo contendo a entidade mais semelhante ao vetor de consulta.</p>
+<p>No pedido acima, <code translate="no">limit=3</code> indica que o sistema retornará resultados de pesquisa de três grupos, com cada grupo contendo a única entidade mais semelhante ao vetor de consulta.</p>
 <h2 id="Configure-group-size" class="common-anchor-header">Configurar o tamanho do grupo<button data-href="#Configure-group-size" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -396,4 +396,5 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Número de grupos</strong>: O parâmetro <code translate="no">limit</code> controla o número de grupos dos quais os resultados da pesquisa são retornados, em vez do número específico de entidades em cada grupo. Definir um <code translate="no">limit</code> adequado ajuda a controlar a diversidade da pesquisa e o desempenho da consulta. A redução de <code translate="no">limit</code> pode reduzir os custos de computação se os dados forem densamente distribuídos ou se o desempenho for uma preocupação.</p></li>
 <li><p><strong>Entidades por grupo</strong>: O parâmetro <code translate="no">group_size</code> controla o número de entidades retornadas por grupo. Ajustar <code translate="no">group_size</code> com base no seu caso de uso pode aumentar a riqueza dos resultados da pesquisa. No entanto, se os dados forem distribuídos de forma desigual, alguns grupos podem retornar menos entidades do que o especificado por <code translate="no">group_size</code>, particularmente em cenários de dados limitados.</p></li>
 <li><p><strong>Tamanho rigoroso do grupo</strong>: Quando <code translate="no">strict_group_size=True</code>, o sistema tentará retornar o número especificado de entidades (<code translate="no">group_size</code>) para cada grupo, a menos que não haja dados suficientes nesse grupo. Essa configuração garante contagens consistentes de entidades por grupo, mas pode levar à degradação do desempenho com distribuição desigual de dados ou recursos limitados. Se não forem necessárias contagens rigorosas de entidades, a definição de <code translate="no">strict_group_size=False</code> pode melhorar a velocidade da consulta.</p></li>
+<li><p>Se os vectores de consulta já existirem na coleção de destino, considere a utilização de <code translate="no">ids</code> em vez de os recuperar antes das pesquisas. Para obter detalhes, consulte <a href="/docs/pt/primary-key-search.md">Pesquisa de chave primária</a>.</p></li>
 </ul>

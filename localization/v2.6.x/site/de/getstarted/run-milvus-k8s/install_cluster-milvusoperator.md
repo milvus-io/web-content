@@ -175,8 +175,8 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Sobald der Milvus Operator-Pod läuft, können Sie einen Milvus-Cluster wie folgt einrichten.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v2.6.8) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
-<p><strong>Architektur-Highlights in diesem Einsatz:</strong></p>
+<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v2.6.9) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
+<p><strong>Highlights der Architektur in diesem Einsatz:</strong></p>
 <ul>
 <li><strong>Nachrichten-Warteschlange</strong>: <a href="/docs/de/use-woodpecker.md">Verwendung von Woodpecker</a> (reduziert die Wartung der Infrastruktur)</li>
 <li><strong>Streaming-Knoten</strong>: Aktiviert für erweiterte Datenverarbeitung</li>

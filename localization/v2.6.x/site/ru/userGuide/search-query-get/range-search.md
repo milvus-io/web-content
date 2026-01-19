@@ -59,27 +59,27 @@ summary: >-
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>Меньшее расстояние L2 указывает на большее сходство.</p></td>
-     <td><p>Чтобы игнорировать наиболее похожие векторные вложения, убедитесь, что <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Чтобы игнорировать наиболее похожие векторные вложения, убедитесь, что</p><p><code translate="no">range_filter</code> &lt;= расстояние &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>Большее расстояние IP указывает на большее сходство.</p></td>
-     <td><p>Чтобы игнорировать наиболее похожие векторные вложения, убедитесь, что <code translate="no">radius</code> &lt; расстояние &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Чтобы игнорировать наиболее похожие векторные вложения, убедитесь, что</p><p><code translate="no">radius</code> &lt; расстояние &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>Большее расстояние COSINE указывает на большее сходство.</p></td>
-     <td><p>Чтобы проигнорировать наиболее похожие векторные вложения, убедитесь, что <code translate="no">radius</code> &lt; расстояние &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Чтобы проигнорировать наиболее похожие векторные вложения, убедитесь, что</p><p><code translate="no">radius</code> &lt; расстояние &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>Меньшее расстояние Жаккара указывает на большее сходство.</p></td>
-     <td><p>Чтобы проигнорировать наиболее похожие векторные вложения, убедитесь, что <code translate="no">range_filter</code> &lt;= расстояние &lt; <code translate="no">radius</code></p></td>
+     <td><p>Чтобы проигнорировать наиболее похожие векторные вложения, убедитесь, что</p><p><code translate="no">range_filter</code> &lt;= расстояние &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>Меньшее расстояние Хэмминга указывает на большее сходство.</p></td>
-     <td><p>Чтобы проигнорировать наиболее похожие векторные вложения, убедитесь, что <code translate="no">range_filter</code> &lt;= расстояние &lt; <code translate="no">radius</code></p></td>
+     <td><p>Чтобы игнорировать наиболее похожие векторные вложения, убедитесь, что</p><p><code translate="no">range_filter</code> &lt;= расстояние &lt; <code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">Примеры<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -97,7 +97,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В этом разделе показано, как выполнять поиск по диапазону. Поисковые запросы в следующих фрагментах кода не содержат метрического типа, что указывает на применение метрического типа по умолчанию <strong>COSINE</strong>. В этом случае убедитесь, что значение <strong>радиуса</strong> меньше значения <strong>range_filter</strong>.</p>
+    </button></h2><p>Этот раздел демонстрирует, как выполнять поиск по диапазону. Поисковые запросы в следующих фрагментах кода не содержат метрического типа, что указывает на применение метрического типа по умолчанию <strong>COSINE</strong>. В этом случае убедитесь, что значение <strong>радиуса</strong> меньше значения <strong>range_filter</strong>.</p>
 <p>В следующих фрагментах кода установите <code translate="no">radius</code> на <code translate="no">0.4</code> и <code translate="no">range_filter</code> на <code translate="no">0.6</code>, чтобы Milvus вернул все сущности, чьи расстояния или баллы до вектора запроса находятся в пределах от <strong>0,4</strong> до <strong>0,6</strong>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -249,3 +249,6 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Если векторы запросов уже существуют в целевой коллекции, используйте <code translate="no">ids</code> вместо того, чтобы извлекать их перед поиском. Подробнее см. в разделе <a href="/docs/ru/primary-key-search.md">Первично-ключевой поиск</a>.</p>
+</div>

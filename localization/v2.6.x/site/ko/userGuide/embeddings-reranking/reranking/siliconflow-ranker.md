@@ -44,7 +44,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 SiliconFlow Ranker를 구현하기 전에 다음 사항을 충족해야 합니다:</p>
+    </button></h2><p>Milvus에서 SiliconFlow Ranker를 구현하기 전에 다음이 필요합니다:</p>
 <ul>
 <li><p>재랭크할 텍스트가 포함된 <code translate="no">VARCHAR</code> 필드가 있는 Milvus 컬렉션</p></li>
 <li><p>재랭크 모델에 액세스할 수 있는 유효한 SiliconFlow API 키. <a href="https://www.siliconflow.com/">SiliconFlow 플랫폼에</a> 가입하여 API 자격 증명을 받습니다. 다음 중 하나를 수행할 수 있습니다:</p>
@@ -68,7 +68,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 애플리케이션에서 실리콘플로우 랭커를 사용하려면 재랭킹 작동 방식을 지정하는 함수 객체를 생성하세요. 이 함수는 Milvus 검색 작업에 전달되어 결과 순위를 향상시킵니다.</p>
+    </button></h2><p>Milvus 애플리케이션에서 실리콘플로우 랭커를 사용하려면, 재랭킹 작동 방식을 지정하는 함수 객체를 생성하세요. 이 함수는 Milvus 검색 작업에 전달되어 결과 순위를 향상시킵니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
@@ -124,7 +124,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="SiliconFlow-ranker-specific-parameters" class="common-anchor-header">실리콘 플로우 랭커 관련 파라미터<button data-href="#SiliconFlow-ranker-specific-parameters" class="anchor-icon" translate="no">
+<h3 id="SiliconFlow-ranker-specific-parameters" class="common-anchor-header">SiliconFlow 랭커 관련 파라미터<button data-href="#SiliconFlow-ranker-specific-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,7 +150,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>예</p></td>
-     <td><p>모델 순위 재지정을 사용하려면 <code translate="no">"model"</code> 로 설정해야 합니다.</p></td>
+     <td><p>모델 순위 재지정을 사용하려면 <code translate="no">"model"</code> 으로 설정해야 합니다.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
@@ -192,7 +192,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>아니요</p></td>
-     <td><p>SiliconFlow API 서비스에 액세스하기 위한 인증 자격증명입니다. 지정하지 않으면 시스템에서 <code translate="no">SILICONFLOW_API_KEY</code> 환경 변수를 찾습니다.</p></td>
+     <td><p>SiliconFlow API 서비스에 액세스하기 위한 인증 자격 증명입니다. 지정하지 않으면 시스템에서 <code translate="no">SILICONFLOW_API_KEY</code> 환경 변수를 찾습니다.</p></td>
      <td><p><em>"your-siliconflow-api-key"</em></p></td>
    </tr>
 </table>
@@ -246,83 +246,6 @@ results = client.search(
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용하기<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>실리콘플로우 랭커를 하이브리드 검색과 함께 사용하여 밀도 검색과 희소 검색 방법을 결합할 수도 있습니다:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
-
-<span class="hljs-comment"># Configure dense vector search</span>
-dense_search = AnnSearchRequest(
-    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
-    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    param={},
-    limit=<span class="hljs-number">5</span>
-)
-
-<span class="hljs-comment"># Configure sparse vector search  </span>
-sparse_search = AnnSearchRequest(
-    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
-    anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>, 
-    param={},
-    limit=<span class="hljs-number">5</span>
-)
-
-<span class="hljs-comment"># Execute hybrid search with SiliconFlow reranking</span>
-hybrid_results = client.hybrid_search(
-    collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
-    [dense_search, sparse_search],              <span class="hljs-comment"># Multiple search requests</span>
-<span class="highlighted-wrapper-line">    ranker=siliconflow_ranker,                 <span class="hljs-comment"># Apply SiliconFlow reranking to combined results</span></span>
-    limit=<span class="hljs-number">5</span>,                                   <span class="hljs-comment"># Final number of results</span>
-    output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-        
-List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
-        .vectors(Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding1), <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding2)))
-        .limit(<span class="hljs-number">5</span>)
-        .build());
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
-        .data(Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;AI Research Progress&quot;</span>), <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;What is AI&quot;</span>)))
-        .limit(<span class="hljs-number">5</span>)
-        .build());
-
-<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
-                .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
-                .searchRequests(searchRequests)
-                .ranker(ranker)
-                .limit(<span class="hljs-number">5</span>)
-                .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
-                .build();
-<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>

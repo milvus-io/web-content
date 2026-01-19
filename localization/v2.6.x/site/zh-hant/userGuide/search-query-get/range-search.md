@@ -42,7 +42,7 @@ summary: 範圍搜尋可將返回實體的距離或分數限制在特定範圍�
 <p>上圖顯示範圍搜尋請求包含兩個參數：<strong>半徑</strong>和<strong>range_filter</strong>。收到範圍搜尋請求後，Milvus 會執行下列動作：</p>
 <ul>
 <li><p>使用指定的度量類型<strong>(COSINE</strong>) 來尋找與查詢向量最相似的所有向量內嵌。</p></li>
-<li><p>篩選與查詢向量的<strong>距離</strong>或<strong>分數</strong>在<strong>半徑</strong>和<strong>range_filter</strong>參數指定範圍內的向量內嵌。</p></li>
+<li><p>篩選與查詢向量的<strong>距離</strong>或<strong>得分</strong>在<strong>半徑</strong>和<strong>range_filter</strong>參數指定範圍內的向量內嵌。</p></li>
 <li><p>從篩選出的實體中傳<strong>回前 K</strong>個實體。</p></li>
 </ul>
 <p>設定<strong>radius</strong>和<strong>range_filter</strong>的方式會因搜尋的度量類型而異。下表列出了在不同公制類型下設定這兩個參數的要求。</p>
@@ -55,27 +55,27 @@ summary: 範圍搜尋可將返回實體的距離或分數限制在特定範圍�
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>L2 距離越小，表示相似度越高。</p></td>
-     <td><p>若要忽略最相似的向量嵌入，請確保<code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></p></td>
+     <td><p>若要忽略最相似的向量嵌入，請確保</p><p><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>IP 距離越大，表示相似度越高。</p></td>
-     <td><p>若要忽略最相似的向量內嵌，請確保<code translate="no">radius</code> &lt; distance &lt;=<code translate="no">range_filter</code></p></td>
+     <td><p>若要忽略最相似的向量內嵌，請確保</p><p><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>COSINE 距離越大，表示相似度越高。</p></td>
-     <td><p>若要忽略最相似的向量嵌入，請確保<code translate="no">radius</code> &lt; distance &lt;=<code translate="no">range_filter</code></p></td>
+     <td><p>若要忽略最相似的向量內嵌，請確保</p><p><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>較小的 Jaccard 距離表示相似度較高。</p></td>
-     <td><p>若要忽略最相似的向量嵌入，請確保<code translate="no">range_filter</code> &lt;= distance &lt;=。<code translate="no">radius</code></p></td>
+     <td><p>若要忽略最相似的向量內嵌，請確保</p><p><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>Hamming 距離越小，表示相似度越高。</p></td>
-     <td><p>若要忽略最相似的向量嵌入，請確保<code translate="no">range_filter</code> &lt;= distance &lt;。<code translate="no">radius</code></p></td>
+     <td><p>若要忽略最相似的向量內嵌，請確保</p><p><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -245,3 +245,6 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>如果查詢向量已經存在於目標集合中，請考慮使用<code translate="no">ids</code> 來取代在搜尋前擷取它們。詳情請參閱<a href="/docs/zh-hant/primary-key-search.md">Primary-Key Search</a>。</p>
+</div>

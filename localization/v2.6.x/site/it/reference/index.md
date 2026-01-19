@@ -19,7 +19,10 @@ title: Indice in memoria
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questo argomento elenca i vari tipi di indici in-memory supportati da Milvus, gli scenari più adatti a ciascuno di essi e i parametri che gli utenti possono configurare per ottenere migliori prestazioni di ricerca. Per gli indici su disco, vedere <strong><a href="/docs/it/disk_index.md">Indice su disco</a></strong>.</p>
+    </button></h1><div class="alert warning">
+<p>Questa pagina è deprecata. Per i contenuti più recenti, consultare <a href="/docs/it/index-explained.md">Indice spiegato</a>.</p>
+</div>
+<p>Questo argomento elenca i vari tipi di indici in-memory supportati da Milvus, gli scenari più adatti a ciascuno di essi e i parametri che gli utenti possono configurare per ottenere migliori prestazioni di ricerca. Per gli indici su disco, vedere <strong><a href="/docs/it/disk_index.md">Indice su disco</a></strong>.</p>
 <p>L'indicizzazione è il processo di organizzazione efficiente dei dati e svolge un ruolo importante nel rendere utile la ricerca per similarità, accelerando notevolmente le interrogazioni che richiedono molto tempo su grandi insiemi di dati.</p>
 <p>Per migliorare le prestazioni delle query, è possibile <a href="/docs/it/index-vector-fields.md">specificare un tipo di indice</a> per ogni campo vettoriale.</p>
 <div class="alert note">
@@ -700,7 +703,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parametro che controlla il compromesso tempo di ricerca/accuratezza. Un valore più alto di <code translate="no">ef</code> porta a una ricerca più accurata ma più lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nessuno</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>Fattore di ingrandimento di refine rispetto a <em>k</em>.</td><td>[1, <em>float_max</em>] Nessuno</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Il fattore di ingrandimento di refine rispetto a <em>k</em>.</td><td>[1, <em>float_max</em>] Nessuno</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>

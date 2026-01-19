@@ -56,30 +56,30 @@ summary: >-
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>L2距離が小さいほど類似度が高いことを示す。</p></td>
-     <td><p>最も類似したベクトル埋め込みを無視するには、<code translate="no">range_filter</code> &lt;= distance &lt; を確保する。<code translate="no">radius</code></p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには</p><p><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
-     <td><p>IP距離が大きいほど類似度が高いことを示す。</p></td>
-     <td><p>最も類似したベクトル埋め込みを無視するには、<code translate="no">radius</code> &lt; distance &lt;= となるようにします。<code translate="no">range_filter</code></p></td>
+     <td><p>IP距離が大きいほど類似度が高い。</p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには</p><p><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>COSINE 距離が大きいほど類似度が高いことを示します。</p></td>
-     <td><p>最も類似したベクトル埋め込みを無視するには，<code translate="no">radius</code> &lt; distance &lt;= とする．<code translate="no">range_filter</code></p></td>
+     <td><p>COSINE距離が大きいほど，類似度が高いことを示す．</p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには</p><p><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
-     <td><p>Jaccard 距離が小さいほど，類似度が高いことを示す．</p></td>
-     <td><p>最も類似したベクトル埋め込みを無視するには、<code translate="no">range_filter</code> &lt;= distance &lt; を確認してください。<code translate="no">radius</code></p></td>
+     <td><p>Jaccard距離が小さいほど類似度が高いことを示す。</p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには</p><p><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>ハミング距離が小さいほど、類似度が高いことを示します。</p></td>
-     <td><p>最も類似したベクトル埋め込みを無視するには、<code translate="no">range_filter</code> &lt;= distance &lt; となるようにします。<code translate="no">radius</code></p></td>
+     <td><p>ハミング距離が小さいほど類似度が高いことを示します。</p></td>
+     <td><p>最も類似したベクトル埋め込みを無視するには</p><p><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p></td>
    </tr>
 </table>
-<h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
+<h2 id="Examples" class="common-anchor-header">例題<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,8 +94,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、範囲検索の方法を示します。以下のコードスニペットの検索リクエストはメトリックタイプを持たず、デフォルトのメトリックタイプ<strong>COSINEが</strong>適用されることを示しています。この場合、<strong>radius</strong>値が<strong>range_filter</strong>値より小さいことを確認してください。</p>
-<p>以下のコードスニペットでは、milvusがクエリベクトルに対する距離またはスコアが<strong>0.4から</strong> <strong>0.6の</strong>範囲内にあるすべてのエンティティを返すように、<code translate="no">radius</code> を<code translate="no">0.4</code> に、<code translate="no">range_filter</code> を<code translate="no">0.6</code> に設定します。</p>
+    </button></h2><p>このセクションでは、範囲検索の方法を示します。以下のコードスニペットの検索リクエストはメトリックタイプを持たないため、デフォルトのメトリックタイプ<strong>COSINEが</strong>適用されます。この場合、<strong>radius</strong>値が<strong>range_filter</strong>値より小さいことを確認してください。</p>
+<p>以下のコードスニペットでは、milvusがクエリベクトルとの距離またはスコアが<strong>0.4</strong>～<strong>0.6に</strong>収まるすべてのエンティティを返すように、<code translate="no">radius</code> を<code translate="no">0.4</code> に、<code translate="no">range_filter</code> を<code translate="no">0.6</code> に設定します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -246,3 +246,6 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>クエリベクターがすでにターゲットコレクションに存在する場合は、検索前にそれらを取得する代わりに<code translate="no">ids</code> 。詳細は<a href="/docs/ja/primary-key-search.md">プライマリ・キー検索を</a>参照。</p>
+</div>

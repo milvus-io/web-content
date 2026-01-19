@@ -19,7 +19,10 @@ title: In-Memory-Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dieses Thema listet verschiedene Arten von In-Memory-Indizes auf, die von Milvus unterstützt werden, die Szenarien, für die jeder von ihnen am besten geeignet ist, und die Parameter, die Benutzer konfigurieren können, um eine bessere Suchleistung zu erzielen. Für On-Disk-Indizes, siehe <strong><a href="/docs/de/disk_index.md">On-Disk-Index</a></strong>.</p>
+    </button></h1><div class="alert warning">
+<p>Diese Seite ist veraltet. Den neuesten Inhalt finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
+</div>
+<p>Dieses Thema listet verschiedene Arten von In-Memory-Indizes auf, die von Milvus unterstützt werden, die Szenarien, für die jeder von ihnen am besten geeignet ist, und die Parameter, die Benutzer konfigurieren können, um eine bessere Suchleistung zu erzielen. Für On-Disk-Indizes, siehe <strong><a href="/docs/de/disk_index.md">On-Disk-Index</a></strong>.</p>
 <p>Indizierung ist der Prozess der effizienten Organisation von Daten und spielt eine wichtige Rolle bei der Nützlichkeit der Ähnlichkeitssuche, indem sie zeitaufwändige Abfragen auf großen Datenbeständen drastisch beschleunigt.</p>
 <p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/index-vector-fields.md">einen Indextyp angeben</a>.</p>
 <div class="alert note">
@@ -39,7 +42,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die meisten der von Milvus unterstützten Vektorindex-Typen verwenden Algorithmen zur approximativen Suche nach den nächsten Nachbarn (ANNS). Verglichen mit der genauen Suche, die in der Regel sehr zeitaufwendig ist, beschränkt sich die Kernidee von ANNS nicht mehr darauf, das genaueste Ergebnis zu liefern, sondern sucht nur noch nach Nachbarn des Ziels. ANNS verbessert die Effizienz des Abrufs, indem es die Genauigkeit innerhalb eines akzeptablen Bereichs opfert.</p>
+    </button></h2><p>Die meisten der von Milvus unterstützten Vektorindex-Typen verwenden ANNS-Algorithmen (approximate nearest neighbors search). Verglichen mit der genauen Suche, die in der Regel sehr zeitaufwändig ist, beschränkt sich die Kernidee von ANNS nicht mehr darauf, das genaueste Ergebnis zu liefern, sondern sucht nur noch nach Nachbarn des Ziels. ANNS verbessert die Effizienz des Abrufs, indem es die Genauigkeit innerhalb eines akzeptablen Bereichs opfert.</p>
 <p>Je nach Implementierungsmethode kann der ANNS-Vektorindex in vier Typen eingeteilt werden: Baum-basiert, Graph-basiert, Hash-basiert und Quantisierungs-basiert.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">In Milvus unterstützte Indizes<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +78,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der Speicherplatzbedarf 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
+    </button></h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der benötigte Speicherplatz 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
 <p>Diese Arten von Indizes umfassen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code> und <code translate="no">SCANN</code> für CPU-basierte ANN-Suchen.</p>
 </div>
 <div class="filter-binary">
@@ -116,7 +119,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
     </button></h3><p>Indizes für spärliche Einbettungen unterstützen nur die Metriken <code translate="no">IP</code> und <code translate="no">BM25</code> (für Volltextsuche).</p>
 <p>Unterstützter Index-Typ für spärliche Einbettungen: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
-<p>Ab Milvus 2.5.4 wird <code translate="no">SPARSE_WAND</code> veraltet sein. Es wird empfohlen, stattdessen <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um Äquivalenz und Kompatibilität zu gewährleisten. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+<p>Ab Milvus 2.5.4 wird <code translate="no">SPARSE_WAND</code> veraltet sein. Stattdessen wird empfohlen, <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um Äquivalenz und Kompatibilität zu gewährleisten. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
 </div>
 </div>
 <div class="filter-floating table-wrapper">
@@ -135,7 +138,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
     <td>
       <ul>
         <li>Relativ kleiner Datensatz</li>
-        <li>Erfordert eine 100%ige Wiedererkennungsrate</li>
+        <li>Erfordert eine Wiedererkennungsrate von 100%.</li>
       </ul>
     </td>
   </tr>
@@ -585,7 +588,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Skalarquantisierung (SQ) ist eine Technik zur Diskretisierung von Fließkommadaten in eine endliche Menge von Werten auf der Grundlage ihres Betrags. <strong>SQ6</strong> steht beispielsweise für die Quantisierung in (2^6 = 64) diskrete Werte, wobei jede Fließkommazahl mit 6 Bits kodiert wird. In ähnlicher Weise quantisiert <strong>SQ8</strong> die Daten in (2^8 = 256) diskrete Werte, wobei jede Fließkommazahl durch 8 Bits dargestellt wird. Durch diese Quantisierung wird der Speicherplatzbedarf reduziert, während die wesentliche Struktur der Daten für eine effiziente Verarbeitung erhalten bleibt.</p>
+    </button></h3><p>Skalarquantisierung (SQ) ist eine Technik zur Diskretisierung von Fließkommadaten in eine endliche Menge von Werten auf der Grundlage ihres Betrags. <strong>SQ6</strong> steht beispielsweise für die Quantisierung in (2^6 = 64) diskrete Werte, wobei jede Fließkommazahl mit 6 Bits kodiert wird. Analog dazu quantisiert <strong>SQ8</strong> die Daten in (2^8 = 256) diskrete Werte, wobei jede Fließkommazahl durch 8 Bits dargestellt wird. Durch diese Quantisierung wird der Speicherplatzbedarf reduziert, während die wesentliche Struktur der Daten für eine effiziente Verarbeitung erhalten bleibt.</p>
 <p>In Kombination mit SQ bietet HNSW_SQ einen kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit, wobei eine hohe Abfrageleistung pro Sekunde (QPS) beibehalten wird. Im Vergleich zu Standard-HNSW führt dies zu einer bescheidenen Erhöhung der Indexaufbauzeit.</p>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
@@ -629,7 +632,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die Grundidee von PQ besteht darin, den Vektor in <code translate="no">m</code> Untervektoren aufzuteilen, von denen jeder <em>2^{nbits}</em> Zentroide auf der Grundlage von kmeans findet, und jeder Untervektor wählt den nächstgelegenen Zentroid als seinen ungefähren Untervektor. Dann zeichnen wir alle Zentroide auf, so dass jeder Untervektor als <code translate="no">nbits</code> kodiert werden kann, und ein fließender Vektor der Länge <code translate="no">dim</code> kann als <em>m ⋅ nbits</em> Bits kodiert werden.</p>
+    </button></h3><p>Die Grundidee von PQ besteht darin, den Vektor in <code translate="no">m</code> Untervektoren aufzuteilen, von denen jeder <em>2^{nbits}</em> Zentroide auf der Grundlage von kmeans findet, und jeder Untervektor wählt den nächstgelegenen Zentroid als seinen ungefähren Untervektor. Dann zeichnen wir alle Zentroide auf, so dass jeder Untervektor als <code translate="no">nbits</code> kodiert werden kann und ein fließender Vektor der Länge <code translate="no">dim</code> als <em>m ⋅ nbits</em> Bits kodiert werden kann.</p>
 <p>In Kombination mit PQ bietet HNSW_PQ einen kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit, hat aber einen niedrigeren QPS-Wert und eine höhere Wiederfindungsrate als HNSW_SQ bei gleicher Kompressionsrate. Im Vergleich zu HNSW_SQ dauert es länger, den Index aufzubauen.</p>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
@@ -822,7 +825,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </tbody>
 </table>
   <div class="alert note">
-<p>Der Parameter <code translate="no">drop_ratio_build</code> ist seit Milvus v2.5.4 veraltet. Er kann immer noch bei der Indexerstellung akzeptiert werden, hat aber keine Auswirkungen mehr auf den Index.</p>
+<p>Der Parameter <code translate="no">drop_ratio_build</code> ist seit Milvus v2.5.4 veraltet. Er kann immer noch während der Indexerstellung akzeptiert werden, hat aber keine Auswirkungen mehr auf den Index.</p>
   </div>
 </li>
 <li><p>Suchparameter</p>
@@ -854,7 +857,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
       </svg>
     </button></h2><p><details>
 <summary><font color="#4fc4f9">Was ist der Unterschied zwischen dem FLAT-Index und dem IVF_FLAT-Index?</font></summary></p>
-<p>Der IVF_FLAT-Index unterteilt einen Vektorraum in <code translate="no">nlist</code> -Cluster. Wenn Sie den Standardwert von <code translate="no">nlist</code> mit 16384 beibehalten, vergleicht Milvus die Abstände zwischen dem Zielvektor und den Zentren aller 16384 Cluster, um <code translate="no">nprobe</code> nächstgelegene Cluster zu erhalten. Anschließend vergleicht Milvus die Abstände zwischen dem Zielvektor und den Vektoren in den ausgewählten Clustern, um die nächstgelegenen Vektoren zu ermitteln. Im Gegensatz zu IVF_FLAT vergleicht FLAT direkt die Abstände zwischen dem Zielvektor und jedem einzelnen Vektor.</p>
+<p>Der IVF_FLAT-Index unterteilt einen Vektorraum in <code translate="no">nlist</code> -Cluster. Wenn Sie den Standardwert von <code translate="no">nlist</code> mit 16384 beibehalten, vergleicht Milvus die Abstände zwischen dem Zielvektor und den Zentren aller 16384 Cluster, um <code translate="no">nprobe</code> nächstgelegene Cluster zu erhalten. Dann vergleicht Milvus die Abstände zwischen dem Zielvektor und den Vektoren in den ausgewählten Clustern, um die nächstgelegenen Vektoren zu ermitteln. Im Gegensatz zu IVF_FLAT vergleicht FLAT direkt die Abstände zwischen dem Zielvektor und jedem einzelnen Vektor.</p>
 <p>
 Wenn die Gesamtzahl der Vektoren ungefähr <code translate="no">nlist</code> beträgt, unterscheiden sich IVF_FLAT und FLAT daher kaum in der Art der erforderlichen Berechnungen und der Suchleistung. Aber wenn die Anzahl der Vektoren auf das Zwei-, Drei- oder n-fache von <code translate="no">nlist</code> ansteigt, beginnt der IVF_FLAT-Index immer größere Vorteile zu zeigen.</p>
 <p>

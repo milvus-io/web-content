@@ -18,7 +18,127 @@ title: Catatan Rilis
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug dalam setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.6.0 di bagian ini. Kami menyarankan agar Anda secara teratur mengunjungi halaman ini untuk mempelajari tentang pembaruan.</p>
+    </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug dalam setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.6.0 di bagian ini. Kami menyarankan agar Anda mengunjungi halaman ini secara teratur untuk mengetahui pembaruan.</p>
+<h2 id="v269" class="common-anchor-header">v2.6.9<button data-href="#v269" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Tanggal rilis: 16 Januari 2026</p>
+<table>
+<thead>
+<tr><th style="text-align:left">Versi Milvus</th><th style="text-align:left">Versi Python SDK</th><th style="text-align:left">Versi SDK Node.js</th><th style="text-align:left">Versi Java SDK</th><th style="text-align:left">Versi Go SDK</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.12</td><td style="text-align:left">2.6.1</td></tr>
+</tbody>
+</table>
+<p>Kami dengan bangga mengumumkan peluncuran Milvus 2.6.9! Pembaruan ini memperkenalkan skor sorotan untuk hasil pencarian, meningkatkan manajemen segmen dengan dukungan untuk membuka kembali segmen ketika terjadi perubahan data atau skema, dan meningkatkan penanganan versi penyimpanan. Peningkatan utama termasuk kinerja pencatatan yang lebih baik, kontrol keamanan yang ditingkatkan untuk titik akhir ekspresi, dan pengoptimalan untuk penganalisis teks dan pembuatan indeks. Rilis ini juga menyelesaikan masalah kritis termasuk akurasi estimasi memori, konversi data geometri, dan berbagai perbaikan stabilitas. Kami merekomendasikan semua pengguna di cabang 2.6 untuk meningkatkan ke versi ini untuk meningkatkan keandalan dan kinerja sistem.</p>
+<h3 id="Features" class="common-anchor-header">Fitur<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Pencarian yang didukung oleh kunci primer<a href="https://github.com/milvus-io/milvus/pull/46528">(#46528</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Menambahkan metrik label versi penyimpanan untuk pengamatan yang lebih baik<a href="https://github.com/milvus-io/milvus/pull/47014">(#47014</a>)</li>
+<li>QueryCoord sekarang mendukung pembukaan kembali segmen ketika jalur manifes berubah<a href="https://github.com/milvus-io/milvus/pull/46921">(#46921</a>)</li>
+<li>Menambahkan dukungan untuk membuka kembali segmen ketika terjadi perubahan data atau skema<a href="https://github.com/milvus-io/milvus/pull/46412">(#46412</a>)</li>
+<li>Peningkatan kinerja dan efisiensi log yang lambat<a href="https://github.com/milvus-io/milvus/pull/47086">(#47086</a>)</li>
+<li>Menambahkan kebijakan pemadatan peningkatan versi penyimpanan untuk memfasilitasi migrasi versi<a href="https://github.com/milvus-io/milvus/pull/47011">(#47011</a>)</li>
+<li>Menghilangkan operasi penyalinan memori ekstra untuk pencatatan C++ untuk meningkatkan kinerja<a href="https://github.com/milvus-io/milvus/pull/46992">(#46992</a>)</li>
+<li>Menambahkan kontrol keamanan untuk titik akhir /expr untuk mencegah akses yang tidak sah<a href="https://github.com/milvus-io/milvus/pull/46978">(#46978</a>)</li>
+<li>Layanan streaming sekarang tetap diaktifkan sampai jumlah node streaming yang dibutuhkan tercapai<a href="https://github.com/milvus-io/milvus/pull/46982">(#46982</a>)</li>
+<li>Menghapus operasi put etcd yang berlebihan saat memperbarui informasi segmen<a href="https://github.com/milvus-io/milvus/pull/46794">(#46794</a>)</li>
+<li>Peningkatan validasi jumlah baris dan mengurangi log peringatan yang menyesatkan untuk pemadatan sort<a href="https://github.com/milvus-io/milvus/pull/46824">(#46824</a>)</li>
+<li>Membersihkan dan mengorganisir pesan log indeks build<a href="https://github.com/milvus-io/milvus/pull/46769">(#46769</a>)</li>
+<li>Membatasi jumlah pembuatan indeks vektor secara bersamaan per pekerja untuk mencegah kehabisan sumber daya<a href="https://github.com/milvus-io/milvus/pull/46877">(#46877</a>)</li>
+<li>Operasi kloning jieba dan lindera analyzer yang dioptimalkan untuk kinerja yang lebih baik<a href="https://github.com/milvus-io/milvus/pull/46757">(#46757</a>)</li>
+<li>Menambahkan glog sink untuk mentransfer log CGO ke dalam zap logger untuk penebangan terpadu<a href="https://github.com/milvus-io/milvus/pull/46741">(#46741)</a></li>
+<li>Penggunaan format penyimpanan V2 yang dipaksakan dan penulisan V1 yang sudah tidak digunakan lagi<a href="https://github.com/milvus-io/milvus/pull/46889">(#46889</a>)</li>
+<li>Menerapkan pemrosesan batch untuk operasi ngram untuk meningkatkan efisiensi<a href="https://github.com/milvus-io/milvus/pull/46703">(#46703</a>)</li>
+<li>Menambahkan mekanisme percobaan ulang otomatis untuk operasi penulisan binlog untuk meningkatkan keandalan<a href="https://github.com/milvus-io/milvus/pull/46854">(#46854</a>)</li>
+<li>Menyaring pesan-pesan timetick kosong dari sisi pemakaian untuk mengurangi pemrosesan yang tidak perlu<a href="https://github.com/milvus-io/milvus/pull/46730">(#46730</a>)</li>
+<li>Peningkatan pencarian berdasarkan kunci utama dengan pengecekan duplikat dan inferensi anns_field otomatis<a href="https://github.com/milvus-io/milvus/pull/46745">(#46745</a>)</li>
+<li>Menambahkan dukungan parameter dimensi untuk penyedia penyematan siliconflow dan cohere<a href="https://github.com/milvus-io/milvus/pull/47081">(#47081</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Memperbaiki penghitungan ganda memori indeks dalam estimasi pemuatan segmen<a href="https://github.com/milvus-io/milvus/pull/47046">(#47046</a>)</li>
+<li>Memperbaiki masalah kompilasi pada macOS 14<a href="https://github.com/milvus-io/milvus/pull/47048">(#47048</a>)</li>
+<li>Revisi yang digunakan sebagai versi global penemuan layanan streaming untuk konsistensi yang lebih baik<a href="https://github.com/milvus-io/milvus/pull/47023">(#47023</a>)</li>
+<li>Memastikan semua futures selesai pada pengecualian untuk mencegah crash setelah penggunaan bebas<a href="https://github.com/milvus-io/milvus/pull/46960">(#46960</a>)</li>
+<li>Memperbaiki pencegat pecahan yang secara tidak benar melewatkan operasi <code translate="no">FlushAllMsg</code> <a href="https://github.com/milvus-io/milvus/pull/47004">(#47004</a>)</li>
+<li>Menambahkan validasi rentang yang valid untuk TTL koleksi untuk mencegah konfigurasi yang tidak valid<a href="https://github.com/milvus-io/milvus/pull/47010">(#47010</a>)</li>
+<li>Memperbaiki <code translate="no">GetCredentialInfo</code> yang tidak menyimpan respons RPC<a href="https://github.com/milvus-io/milvus/pull/46945"> dalam</a> cache<a href="https://github.com/milvus-io/milvus/pull/46945">(#46945</a>)</li>
+<li>Memperbaiki masalah di mana <code translate="no">AlterFunction</code> tidak dapat dipanggil ketika beberapa fungsi menjadi tidak valid<a href="https://github.com/milvus-io/milvus/pull/46986">(#46986</a>)</li>
+<li>Memperbaiki file offset nol indeks terbalik yang tidak dipadatkan<a href="https://github.com/milvus-io/milvus/pull/46950">(#46950</a>)</li>
+<li>Memperbaiki kerusakan saat menggunakan is_null_expr pada bidang JSON yang diindeks<a href="https://github.com/milvus-io/milvus/pull/46894">(#46894</a>)</li>
+<li>Menambahkan pemeriksaan untuk flag allow_insert_auto_id di RESTful v2 insert API<a href="https://github.com/milvus-io/milvus/pull/46931">(#46931</a>)</li>
+<li>Menambahkan pemeriksaan keberadaan bidang dalam grup kolom sebelum membaca dari manifes loon<a href="https://github.com/milvus-io/milvus/pull/46924">(#46924</a>)</li>
+<li>Memperbaiki bug di mana parameter sorotan tidak berfungsi dengan benar<a href="https://github.com/milvus-io/milvus/pull/46876">(#46876</a>)</li>
+<li>Pusat kuota sekarang mengabaikan delegator ketika dalam keadaan pulih<a href="https://github.com/milvus-io/milvus/pull/46858">(#46858</a>)</li>
+<li>Opsi konversi WKT/WKB yang diselaraskan untuk memastikan perilaku yang konsisten di seluruh operasi<a href="https://github.com/milvus-io/milvus/pull/46874">(#46874</a>)</li>
+<li>Memperbaiki bug int8 model voyageai<a href="https://github.com/milvus-io/milvus/pull/46821">(#46821)</a></li>
+<li>Memperbaiki penanganan yang hilang dari <code translate="no">FlushAllMsg</code> dalam operasi penyimpanan pemulihan<a href="https://github.com/milvus-io/milvus/pull/46803">(#46803</a>)</li>
+<li>Memperbaiki bidang shardclientmgr yang hilang di querytask untuk mencegah kepanikan<a href="https://github.com/milvus-io/milvus/pull/46838">(#46838</a>)</li>
+<li>Menggunakan leaderid untuk penjadwal check-in basi leaderaction untuk meningkatkan akurasi<a href="https://github.com/milvus-io/milvus/pull/46788">(#46788</a>)</li>
+<li>Memulihkan dukungan tenant/namespace untuk Pulsar yang hilang di 2.6<a href="https://github.com/milvus-io/milvus/pull/46759">(#46759</a>)</li>
+<li>Menambahkan pengamat konfigurasi beban untuk mencegah modifikasi konfigurasi beban agar tidak hilang<a href="https://github.com/milvus-io/milvus/pull/46786">(#46786</a>)</li>
+<li>Memperbaiki bug antarmuka edit fungsi<a href="https://github.com/milvus-io/milvus/pull/46782">(#46782)</a></li>
+<li>Menambahkan validasi properti TTL koleksi untuk mencegah pemadatan agar tidak macet<a href="https://github.com/milvus-io/milvus/pull/46736">(#46736</a>)</li>
+</ul>
 <h2 id="v268" class="common-anchor-header">v2.6.8<button data-href="#v268" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -201,7 +321,7 @@ title: Catatan Rilis
         ></path>
       </svg>
     </button></h3><ul>
-<li>Menambahkan titik akhir <code translate="no">/livez</code> untuk mendukung probe kehidupan asli Kubernetes, meningkatkan stabilitas orkestrasi kontainer<a href="https://github.com/milvus-io/milvus/pull/45481">(#45481</a>).</li>
+<li>Menambahkan endpoint <code translate="no">/livez</code> untuk mendukung probe kehidupan asli Kubernetes, meningkatkan stabilitas orkestrasi kontainer<a href="https://github.com/milvus-io/milvus/pull/45481">(#45481</a>).</li>
 <li>Menambahkan dukungan untuk operasi <strong>GroupBy</strong> pada bidang <code translate="no">TIMESTAMPTZ</code>, meningkatkan kemampuan analisis deret waktu<a href="https://github.com/milvus-io/milvus/pull/45763">(#45763</a>)</li>
 <li>Mendukung <code translate="no">mmap</code> untuk indeks kunci bersama penghancuran JSON untuk mengurangi jejak RAM<a href="https://github.com/milvus-io/milvus/pull/45861">(#45861</a>)</li>
 </ul>
@@ -260,7 +380,7 @@ title: Catatan Rilis
 <li>Memastikan <code translate="no">HandleNodeUp</code> dipicu selama pengamatan ulang node untuk mempertahankan topologi penyeimbangan beban yang benar<a href="https://github.com/milvus-io/milvus/pull/45963">(#45963).</a></li>
 <li>Menerapkan fallback ke penyimpanan WAL jarak jauh jika penyimpanan WAL lokal tidak tersedia<a href="https://github.com/milvus-io/milvus/pull/45754">(#45754</a>).</li>
 <li>Menambahkan <code translate="no">EmptySessionWatcher</code> untuk mencegah kepanikan saat berjalan dalam mode pengikatan IndexNode<a href="https://github.com/milvus-io/milvus/pull/45912">(#45912).</a></li>
-<li>Memastikan konsistensi status memori ketika memulihkan tugas siaran dari buffer protokol<a href="https://github.com/milvus-io/milvus/pull/45788">(#45788).</a></li>
+<li>Memastikan konsistensi status memori saat memulihkan tugas siaran dari buffer protokol<a href="https://github.com/milvus-io/milvus/pull/45788">(#45788).</a></li>
 <li>Mengatasi masalah keamanan thread pada pembaruan skema koleksi SegCore<a href="https://github.com/milvus-io/milvus/pull/45618">(#45618).</a></li>
 <li>Pemeriksaan Enforced Access Control (RBAC) untuk API <code translate="no">ListImport</code> dan <code translate="no">GetImportProgress</code> <a href="https://github.com/milvus-io/milvus/pull/45862">(#45862</a>)<a href="https://github.com/milvus-io/milvus/pull/45862">.</a></li>
 <li>Memperbaiki bug di mana BulkImport akan gagal jika input berisi daftar struktur kosong<a href="https://github.com/milvus-io/milvus/pull/45692">(#45692).</a></li>
@@ -291,7 +411,7 @@ title: Catatan Rilis
 </table>
 <p>Kami dengan senang hati mengumumkan peluncuran Milvus 2.6.6, yang menampilkan berbagai kemampuan baru yang kuat, peningkatan kinerja, dan perbaikan bug yang penting. Pembaruan ini memperkenalkan fitur-fitur penting seperti tipe data Geospasial dan Timestampz, Boost ranker untuk penilaian ulang, dll. Rilis ini juga memiliki banyak peningkatan kinerja pemfilteran skalar yang penting. Beberapa bug penting juga telah diatasi untuk memastikan stabilitas dan keandalan yang lebih baik. Dengan rilis ini, Milvus terus memberikan pengalaman yang lebih kuat dan efisien untuk semua pengguna. Di bawah ini adalah sorotan utama dari rilis ini.</p>
 <ul>
-<li>Tipe Data Geospasial: Milvus memperkenalkan dukungan untuk tipe data <code translate="no">Geometry</code>, yang mewakili objek geometris yang sesuai dengan OGC seperti <code translate="no">POINT</code>, <code translate="no">LINESTRING</code>, dan <code translate="no">POLYGON</code>. Tipe ini mendukung beberapa operator hubungan spasial (st_contains, st_intersects, st_within, st_dwithin,...) dan menyediakan indeks spasial <code translate="no">RTREE</code> untuk mempercepat pemfilteran spasial dan eksekusi kueri. Hal ini memungkinkan penyimpanan dan kueri yang efisien dari bentuk geospasial untuk LBS, pemetaan, dan beban kerja spasial lainnya.</li>
+<li>Tipe Data Geospasial: Milvus memperkenalkan dukungan untuk tipe data <code translate="no">Geometry</code>, yang mewakili objek geometris yang sesuai dengan OGC seperti <code translate="no">POINT</code>, <code translate="no">LINESTRING</code>, dan <code translate="no">POLYGON</code>. Tipe ini mendukung beberapa operator hubungan spasial (st_contains, st_intersects, st_within, st_dwithin,...) dan menyediakan indeks spasial <code translate="no">RTREE</code> untuk mempercepat pemfilteran spasial dan eksekusi kueri. Hal ini memungkinkan penyimpanan dan kueri yang efisien untuk bentuk geospasial untuk LBS, pemetaan, dan beban kerja spasial lainnya.</li>
 <li>Tipe Data Timestamptz: Milvus memperkenalkan tipe data TIMESTAMPTZ, yang memberikan kesadaran zona waktu untuk semua data temporal. Fitur ini memungkinkan manajemen data yang konsisten di seluruh penerapan global dengan memungkinkan pengguna untuk menentukan konteks waktu default menggunakan properti zona waktu pada Database dan Koleksi. Yang terpenting, bidang ini sepenuhnya mendukung pemfilteran berbasis ekspresi untuk kueri rentang waktu, dan operasi pengambilan (kueri dan pencarian) mendukung parameter zona waktu untuk konversi stempel waktu secara instan ke dalam format lokal yang diperlukan pada saat keluaran.</li>
 <li>Meningkatkan Peringkat: Alih-alih hanya mengandalkan kemiripan semantik yang dihitung berdasarkan jarak vektor, Boost Ranker memungkinkan Milvus untuk menggunakan kondisi pemfilteran opsional dalam fungsi untuk menemukan kecocokan di antara kandidat hasil pencarian dan meningkatkan skor kecocokan tersebut dengan menerapkan bobot yang ditentukan, membantu meningkatkan atau menurunkan peringkat entitas yang cocok di hasil akhir.</li>
 <li>Indeks STL_SORT sekarang mendukung tipe data VARCHAR dan TIMESTAMPTZ.</li>
@@ -480,7 +600,7 @@ title: Catatan Rilis
 <tr><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.4</td><td style="text-align:left">2.6.7</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>Kami dengan senang hati mengumumkan rilis Milvus 2.6.5, yang mengatasi <strong>kerentanan keamanan kritis</strong> <a href="https://github.com/milvus-io/milvus/security/advisories/GHSA-mhjq-8c7m-3f7p">CVE-2025-64513</a> dan diupgrade ke Go 1.24.9. Kami sangat menyarankan <strong>semua pengguna Milvus 2.6.x untuk melakukan upgrade ke 2.6.5</strong> sesegera mungkin. Pembaruan ini juga mencakup beberapa peningkatan dan perbaikan bug lainnya, dan memberikan pengalaman yang lebih kuat dan efisien bagi pengguna.</p>
+<p>Kami dengan senang hati mengumumkan rilis Milvus 2.6.5, yang mengatasi <strong>kerentanan keamanan kritis</strong> <a href="https://github.com/milvus-io/milvus/security/advisories/GHSA-mhjq-8c7m-3f7p">CVE-2025-64513</a> dan diupgrade ke Go 1.24.9. Kami sangat menyarankan <strong>semua pengguna Milvus 2.6.x untuk melakukan upgrade ke 2.6.5</strong> sesegera mungkin. Pembaruan ini juga mencakup beberapa peningkatan dan perbaikan bug lainnya, dan memberikan pengalaman yang lebih kuat dan efisien kepada pengguna.</p>
 <h3 id="Improvements" class="common-anchor-header">Peningkatan<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -518,7 +638,7 @@ title: Catatan Rilis
     </button></h3><ul>
 <li>Nilai grup tidak ada<a href="https://github.com/milvus-io/milvus/pull/45421">(#45421</a>)</li>
 <li>Rentang stempel waktu yang diinisialisasi dalam penulis binlog komposit (<a href="https://github.com/milvus-io/milvus/pull/45402">#45402</a>)</li>
-<li>Menangani fielddata kosong dalam pengurangan / perangkingan ulang untuk skenario permintaan ulang (<a href="https://github.com/milvus-io/milvus/pull/45389">#45389</a>)</li>
+<li>Menangani fielddata kosong dalam pengurangan / perankingan ulang untuk skenario permintaan ulang (<a href="https://github.com/milvus-io/milvus/pull/45389">#45389</a>)</li>
 <li>Menambahkan pemeriksaan null untuk packed_writer_ di jsonstatsparquetwrite...<a href="https://github.com/milvus-io/milvus/pull/45376">(#45376</a>)</li>
 <li>Melewatkan pembuatan indeks teks untuk kolom yang baru ditambahkan<a href="https://github.com/milvus-io/milvus/pull/45358">(#45358</a>)</li>
 <li>Secara tidak sengaja mengabaikan segmen yang disegel dalam pemadatan l0<a href="https://github.com/milvus-io/milvus/pull/45351">(#45351</a>)</li>
@@ -568,9 +688,10 @@ title: Catatan Rilis
       </svg>
     </button></h3><ul>
 <li>Struct dalam ARRAY: Milvus memperkenalkan tipe data baru, Struct, yang memungkinkan pengguna untuk mengatur dan mengelola beberapa field yang terkait dalam satu entitas. Saat ini, Struct hanya dapat digunakan sebagai elemen di bawah DataType.ARRAY, yang memungkinkan fitur-fitur seperti Array of Vector, di mana setiap baris berisi beberapa vektor, membuka kemungkinan baru untuk pemodelan dan pencarian data yang kompleks.<a href="https://github.com/milvus-io/milvus/pull/42148">(#42148</a>)</li>
-<li>Mendukung model Qwen GTE-rerank-v2 yang didukung di DashScope<a href="https://github.com/milvus-io/milvus/pull/44660">(#44660</a>)</li>
+<li>Model Qwen GTE-rerank-v2 yang didukung di DashScope<a href="https://github.com/milvus-io/milvus/pull/44660">(#44660</a>)</li>
+<li>Indeks AISAQ yang didukung - indeks penyimpanan yang lengkap<a href="https://github.com/zilliztech/knowhere/pull/1282">(#1282</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Peningkatan<button data-href="#Improvements" class="anchor-icon" translate="no">
+<h3 id="Improvements" class="common-anchor-header">Perbaikan<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -898,7 +1019,7 @@ title: Catatan Rilis
 <li>Menambahkan pemeriksaan UTF-8 sebelum menjalankan fungsi BM25<a href="https://github.com/milvus-io/milvus/pull/44220">(#44220</a>)</li>
 <li>Mencoba ulang sesi lama jika ada<a href="https://github.com/milvus-io/milvus/pull/44208">(#44208</a>)</li>
 <li>Menambahkan batas ukuran buffer Kafka untuk mencegah OOM datanode<a href="https://github.com/milvus-io/milvus/pull/44106">(#44106</a>)</li>
-<li>Memperbaiki kepanikan dengan memperluas jangkauan pengamanan kunci<a href="https://github.com/milvus-io/milvus/pull/44130">(#44130</a>)</li>
+<li>Memperbaiki kepanikan dengan memperluas jangkauan penjagaan kunci<a href="https://github.com/milvus-io/milvus/pull/44130">(#44130</a>)</li>
 <li>Memperbaiki segmen yang sedang tumbuh agar tidak memerah pada perubahan skema<a href="https://github.com/milvus-io/milvus/pull/44412">(#44412</a>)</li>
 <li>[StorageV2] Menangani kesalahan IO<a href="https://github.com/milvus-io/milvus/pull/44255">(#44255</a>)</li>
 <li>Mencegah kepanikan jika jalur indeks Tantivy tidak ada<a href="https://github.com/milvus-io/milvus/pull/44135">(#44135</a>)</li>

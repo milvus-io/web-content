@@ -41,18 +41,48 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>No Milvus, as pesquisas filtradas são categorizadas em dois tipos - <strong>filtragem padrão</strong> e <strong>filtragem iterativa</strong> - dependendo do estágio em que a filtragem é aplicada.</p>
-<h3 id="Standard-filtering" class="common-anchor-header">Filtragem padrão</h3><p>Se uma coleção contiver tanto os embeddings vectoriais como os seus metadados, pode filtrar os metadados antes da pesquisa ANN para melhorar a relevância do resultado da pesquisa. Quando o Milvus recebe um pedido de pesquisa com uma condição de filtragem, restringe o âmbito da pesquisa às entidades que correspondem à condição de filtragem especificada.</p>
+<h3 id="Standard-filtering" class="common-anchor-header">Filtragem padrão<button data-href="#Standard-filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se uma coleção contiver tanto os embeddings vectoriais como os seus metadados, pode filtrar os metadados antes da pesquisa ANN para melhorar a relevância do resultado da pesquisa. Quando o Milvus recebe um pedido de pesquisa com uma condição de filtragem, restringe o âmbito da pesquisa às entidades que correspondem à condição de filtragem especificada.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" />
    </span> <span class="img-wrapper"> <span>Pesquisa filtrada</span> </span></p>
-<p>Como mostra o diagrama acima, o pedido de pesquisa tem <code translate="no">chunk like &quot;%red%&quot;</code> como condição de filtragem, indicando que Milvus deve efetuar a pesquisa ANN em todas as entidades que tenham a palavra <code translate="no">red</code> no campo <code translate="no">chunk</code>. Especificamente, o Milvus faz o seguinte:</p>
+<p>Como mostra o diagrama acima, o pedido de pesquisa tem <code translate="no">chunk like &quot;%red%&quot;</code> como condição de filtragem, indicando que Milvus deve efetuar a pesquisa ANN em todas as entidades que tenham a palavra <code translate="no">red</code> no campo <code translate="no">chunk</code>. Especificamente, Milvus faz o seguinte:</p>
 <ul>
 <li><p>Filtra as entidades que correspondem às condições de filtragem indicadas no pedido de pesquisa.</p></li>
 <li><p>Realiza a pesquisa ANN dentro das entidades filtradas.</p></li>
 <li><p>Devolve as entidades top-K.</p></li>
 </ul>
-<h3 id="Iterative-filtering" class="common-anchor-header">Filtragem iterativa</h3><p>O processo de filtragem padrão reduz efetivamente o âmbito da pesquisa a um pequeno intervalo. No entanto, expressões de filtragem demasiado complexas podem resultar numa latência de pesquisa muito elevada. Nesses casos, a filtragem iterativa pode servir como uma alternativa, ajudando a reduzir a carga de trabalho da filtragem escalar.</p>
+<h3 id="Iterative-filtering" class="common-anchor-header">Filtragem iterativa<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O processo de filtragem padrão reduz efetivamente o âmbito da pesquisa a um pequeno intervalo. No entanto, expressões de filtragem demasiado complexas podem resultar numa latência de pesquisa muito elevada. Nesses casos, a filtragem iterativa pode servir como uma alternativa, ajudando a reduzir a carga de trabalho da filtragem escalar.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" />
@@ -89,7 +119,25 @@ summary: >-
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">9</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.5718280481994695</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.24070317428066512</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.3737913482606834</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.06726932177492717</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6980531615588608</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;purple_4976&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;likes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">765</span><span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-standard-filtering" class="common-anchor-header">Pesquisa com filtragem padrão</h3><p>Os seguintes trechos de código demonstram uma pesquisa com filtragem padrão, e a solicitação no trecho de código a seguir carrega uma condição de filtragem e vários campos de saída.</p>
+<div class="alert note">
+<p>Se os vectores de consulta já existirem na coleção de destino, considere utilizar <code translate="no">ids</code> em vez de os recuperar antes das pesquisas. Para obter detalhes, consulte <a href="/docs/pt/primary-key-search.md">Pesquisa de chave primária</a>.</p>
+</div>
+<h3 id="Search-with-standard-filtering" class="common-anchor-header">Pesquisa com filtragem padrão<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Os trechos de código a seguir demonstram uma pesquisa com filtragem padrão, e a solicitação no trecho de código a seguir carrega uma condição de filtragem e vários campos de saída.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -175,25 +223,25 @@ client, err := client.New(ctx, &amp;client.ClientConfig{
 
 queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, <span class="hljs-number">-0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>}
 
-    resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-        <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
-        <span class="hljs-number">5</span>,               <span class="hljs-comment">// limit</span>
-        []entity.Vector{entity.FloatVector(queryVector)},
-    ).WithConsistencyLevel(entity.ClStrong).
-        WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
-        WithFilter(<span class="hljs-string">&quot;color like &#x27;red%&#x27; and likes &gt; 50&quot;</span>).
-        WithOutputFields(<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>))
-    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-        fmt.Println(err.Error())
-        <span class="hljs-comment">// handle error</span>
-    }
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">5</span>,               <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithConsistencyLevel(entity.ClStrong).
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like &#x27;red%&#x27; and likes &gt; 50&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 
-    <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
-        fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
-        fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
-        fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;color&quot;</span>).FieldData().GetScalars())
-        fmt.Println(<span class="hljs-string">&quot;likes: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;likes&quot;</span>).FieldData().GetScalars())
-    }
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;color&quot;</span>).FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;likes: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;likes&quot;</span>).FieldData().GetScalars())
+}
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
@@ -254,7 +302,22 @@ curl --request POST \
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para mais informações sobre os operadores que pode utilizar na filtragem de metadados, consulte <a href="/docs/pt/filtering">Filtragem</a>.</p>
-<h3 id="Search-with-iterative-filtering" class="common-anchor-header">Pesquisa com filtragem iterativa</h3><p>Para realizar uma pesquisa filtrada com filtragem iterativa, você pode fazer o seguinte:</p>
+<h3 id="Search-with-iterative-filtering" class="common-anchor-header">Pesquisa com filtragem iterativa<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Para realizar uma pesquisa filtrada com filtragem iterativa, você pode fazer o seguinte:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

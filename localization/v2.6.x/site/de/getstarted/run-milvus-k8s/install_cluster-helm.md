@@ -61,7 +61,7 @@ title: Milvus-Cluster mit Helm installieren
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Überprüfen Sie vor der Installation <a href="/docs/de/prerequisite-helm.md">die Hardware- und Softwareanforderungen</a>.</p></li>
+<li><p>Überprüfen Sie vor der Installation <a href="/docs/de/prerequisite-helm.md">die Hardware- und Software-Anforderungen</a>.</p></li>
 <li><p>Es wird empfohlen, vor der Installation von Milvus das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardware-Anforderungen auf der Grundlage Ihrer Datengröße abzuschätzen. Dies hilft, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation zu gewährleisten.</p></li>
 </ul>
 <div class="alert note">
@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Benötigen Sie stattdessen eine eigenständige Bereitstellung?</strong></p>
 <p>Wenn Sie Milvus lieber im Standalone-Modus (einzelner Knoten) für die Entwicklung oder für Tests einsetzen möchten, verwenden Sie diesen Befehl:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.8 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.9 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Hinweis</strong>: Der Standalone-Modus verwendet Woodpecker als Standard-Nachrichtenwarteschlange und aktiviert die Komponente Streaming Node. Weitere Informationen finden Sie in der <a href="/docs/de/architecture_overview.md">Architekturübersicht</a> und unter <a href="/docs/de/use-woodpecker.md">Verwendung von Woodpecker</a>.</p>
 </div>
 <p><strong>Milvus-Cluster bereitstellen:</strong></p>
-<p>Mit dem folgenden Befehl wird ein Milvus-Cluster mit optimierten Einstellungen für v2.6.8 bereitgestellt, wobei Woodpecker als empfohlene Nachrichtenwarteschlange verwendet wird:</p>
+<p>Mit dem folgenden Befehl wird ein Milvus-Cluster mit optimierten Einstellungen für v2.6.9 bereitgestellt, wobei Woodpecker als empfohlene Nachrichtenwarteschlange verwendet wird:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.8 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.9 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Alternative Nachrichtenwarteschlangen-Optionen:</strong></p>
 <p>Wenn Sie anstelle von Woodpecker lieber <strong>Pulsar</strong> (die traditionelle Wahl) verwenden möchten:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.8 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.9 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,7 +204,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Überprüfen Sie den Pod-Status, um sicherzugehen, dass Ihr Einsatz erfolgreich war:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Warten Sie, bis alle Pods den Status "Running" anzeigen.</strong> Bei der Konfiguration v2.6.8 sollten Sie Pods ähnlich wie folgt sehen:</p>
+<p><strong>Warten Sie, bis alle Pods den Status "Running" anzeigen.</strong> Bei der Konfiguration v2.6.9 sollten Sie Pods ähnlich wie folgt sehen:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s

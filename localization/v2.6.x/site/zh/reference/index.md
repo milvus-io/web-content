@@ -19,7 +19,10 @@ title: 内存索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主题列出了 Milvus 支持的各种类型的内存索引，每种索引最适合的场景，以及用户可以配置的参数，以实现更好的搜索性能。有关磁盘索引，请参阅<strong><a href="/docs/zh/disk_index.md">磁盘索引</a></strong>。</p>
+    </button></h1><div class="alert warning">
+<p>本页已废弃。有关最新内容，请参阅<a href="/docs/zh/index-explained.md">索引说明</a>。</p>
+</div>
+<p>本主题列出了 Milvus 支持的各种类型的内存索引，每种索引最适合的场景，以及用户可以配置以获得更好搜索性能的参数。有关磁盘索引，请参阅<strong><a href="/docs/zh/disk_index.md">磁盘索引</a></strong>。</p>
 <p>索引是有效组织数据的过程，它通过显著加快大型数据集上耗时查询的速度，在提高相似性搜索的实用性方面发挥着重要作用。</p>
 <p>为了提高查询性能，可以为每个向量场<a href="/docs/zh/index-vector-fields.md">指定一种索引类型</a>。</p>
 <div class="alert note">
@@ -675,7 +678,7 @@ title: 内存索引
         ></path>
       </svg>
     </button></h3><p>PRQ 与 PQ 类似，也是将向量分为<code translate="no">m</code> 组。每个子向量将被编码为<code translate="no">nbits</code> 。完成 pq 量化后，它会计算向量与 pq 量化向量之间的残差，并对残差向量应用 pq 量化。总共将进行<code translate="no">nrq</code> 次完整的 pq 量化，因此长度为<code translate="no">dim</code> 的浮动向量将被编码为<em>m ⋅ nbits ⋅ nrq</em>bits。</p>
-<p>HNSW_PRQ 与乘积残差量化器（PRQ）相结合，在索引大小和精确度之间提供了更高的可控权衡。与 HNSW_PQ 相比，在相同的压缩率下，HNSW_PRQ 的 QPS 值和召回率几乎相同。与 HNSW_PQ 相比，建立索引的时间可能会增加数倍。</p>
+<p>HNSW_PRQ 与乘积残差量化器（PRQ）相结合，在索引大小和精确度之间提供了更高的可控权衡。与 HNSW_PQ 相比，在相同的压缩率下，HNSW_PRQ 的 QPS 值和召回率几乎相当。与 HNSW_PQ 相比，建立索引的时间可能会增加数倍。</p>
 <ul>
 <li><p>索引建立参数</p>
 <table>
@@ -688,7 +691,7 @@ title: 内存索引
 <tr><td><code translate="no">m</code></td><td>将向量分割成的子向量组的个数。</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>每个子向量组量化成的比特数。</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>剩余子量化器的个数。</td><td>[1, 16]</td><td>2</td></tr>
-<tr><td><code translate="no">refine</code></td><td>建立索引时是否保留精炼数据。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>建立索引时是否保留细化数据。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_type</code></td><td>细化索引的数据类型。</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> 、<code translate="no">FP32</code></td><td>无</td></tr>
 </tbody>
 </table>
@@ -723,7 +726,7 @@ title: 内存索引
         ></path>
       </svg>
     </button></h3><p>该索引与 FLAT 完全相同，只是只能用于二进制嵌入。</p>
-<p>对于需要完美精确度并依赖于相对较小（百万级别）数据集的向量相似性搜索应用，BIN_FLAT 索引是一个不错的选择。BIN_FLAT 不压缩向量，是唯一能保证精确搜索结果的索引。BIN_FLAT 的结果还可以作为其他召回率低于 100% 的索引所产生结果的比较点。</p>
+<p>对于需要完美精确度且依赖于相对较小（百万级别）数据集的向量相似性搜索应用，BIN_FLAT 索引是一个不错的选择。BIN_FLAT 不压缩向量，是唯一能保证精确搜索结果的索引。BIN_FLAT 的结果还可以作为其他召回率低于 100% 的索引所产生结果的比较点。</p>
 <p>BIN_FLAT 之所以准确，是因为它采用了穷举搜索方法，这意味着每次查询都要将目标输入与数据集中的向量进行比较。这使得 BIN_FLAT 成为我们列表中速度最慢的索引，不适合查询海量向量数据。Milvus 中的 BIN_FLAT 索引没有参数，使用它不需要数据训练或额外存储。</p>
 <ul>
 <li><p>搜索参数</p>
@@ -831,7 +834,7 @@ title: 内存索引
 <tr><th>参数</th><th>说明</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>在搜索过程中排除的小向量值的比例。该选项可通过指定查询向量中最小值的忽略比例，对搜索过程进行微调。它有助于平衡搜索精度和性能。<code translate="no">drop_ratio_search</code> 的值越小，这些小值对最终得分的贡献就越小。通过忽略一些小值，可以提高搜索性能，同时将对精确度的影响降到最低。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>在搜索过程中排除的小向量值的比例。该选项可通过指定查询向量中忽略的最小值的比例，对搜索过程进行微调。它有助于平衡搜索精度和性能。<code translate="no">drop_ratio_search</code> 的值越小，这些小值对最终得分的贡献就越小。通过忽略一些小值，可以提高搜索性能，同时将对精确度的影响降到最低。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

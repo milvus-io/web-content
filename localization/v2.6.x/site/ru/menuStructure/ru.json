@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "Первично-ключевой поиск",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Гибридный поиск",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Запрос",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "Фильтрация",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "Объяснение фильтрации",
@@ -1007,49 +1013,49 @@
           {
             "label": "Полнотекстовый поиск",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Текстовое соответствие",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Выделитель текста",
             "id": "text-highlighter.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Сопоставление фраз",
             "id": "phrase-match.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Поиск с помощью вложенных списков",
             "id": "search-with-embedding-lists.md",
-            "order": 10,
+            "order": 12,
             "children": []
           },
           {
             "label": "Запросы Elasticsearch к Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 11,
+            "order": 13,
             "children": []
           },
           {
             "label": "Поисковые итераторы",
             "id": "with-iterators.md",
-            "order": 12,
+            "order": 14,
             "children": []
           },
           {
             "label": "Использование ключа раздела",
             "id": "use-partition-key.md",
-            "order": 13,
+            "order": 15,
             "children": []
           }
         ]

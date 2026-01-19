@@ -60,7 +60,7 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
 </ul></li>
 <li>Milvusシステムの実行中にメッセージストレージを変更することはできません。</li>
 <li>Kafka 2.x または 3.x バージョンのみがサポートされます。</li>
-<li><strong>アップグレードの制限</strong> <strong>メッセージキューの制限</strong>Milvus v2.6.8へアップグレードする場合、現在のメッセージキューを維持する必要があります。アップグレード中に異なるメッセージキューシステムを切り替えることはサポートされていません。メッセージキューシステムの変更は将来のバージョンでサポートされる予定です。</li>
+<li><strong>アップグレードの制限</strong> <strong>メッセージキューの制限</strong>Milvus v2.6.9にアップグレードする場合、現在のメッセージキューを維持する必要があります。アップグレード中に異なるメッセージキューシステムを切り替えることはサポートされていません。メッセージキューシステムの変更は将来のバージョンでサポートされる予定です。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ の設定<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

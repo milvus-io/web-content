@@ -63,7 +63,7 @@ title: Executar o Milvus no Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>O que há de novo na v2.6.8:</strong></p>
+<p><strong>O que há de novo na v2.6.9:</strong></p>
 <ul>
 <li><strong>Nó de streaming</strong>: Recursos aprimorados de processamento de dados</li>
 <li><strong>Woodpecker MQ</strong>: Fila de mensagens aprimorada com sobrecarga de manutenção reduzida, consulte <a href="/docs/pt/use-woodpecker.md">Usar o Woodpecker</a> para obter detalhes</li>
@@ -127,7 +127,7 @@ EOF
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>O comando de atualização automaticamente:</p>
+<p>O comando upgrade automaticamente:</p>
 <ul>
 <li>Baixa o script de instalação mais recente com configurações atualizadas</li>
 <li>Puxa a imagem mais recente do Milvus Docker</li>

@@ -50,32 +50,32 @@ summary: 范围搜索将返回实体的距离或得分限制在特定范围内�
    <tr>
      <th><p>度量类型</p></th>
      <th><p>名称</p></th>
-     <th><p>设置半径和范围过滤的要求</p></th>
+     <th><p>设置半径和范围筛选器的要求</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>L2 距离越小，表示相似度越高。</p></td>
-     <td><p>要忽略最相似的向量 Embeddings，请确保<code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></p></td>
+     <td><p>要忽略最相似的向量 Embeddings，请确保</p><p><code translate="no">range_filter</code> &lt;= 距离 &lt;<code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>IP 距离越大，表示相似度越高。</p></td>
-     <td><p>要忽略最相似的向量嵌入，请确保<code translate="no">radius</code> &lt; distance &lt;=<code translate="no">range_filter</code></p></td>
+     <td><p>要忽略最相似的向量嵌入，请确保</p><p><code translate="no">radius</code> &lt; 距离 &lt;=<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>COSINE 距离越大，表示相似度越高。</p></td>
-     <td><p>要忽略最相似的向量嵌入，请确保<code translate="no">radius</code> &lt; distance &lt;=<code translate="no">range_filter</code></p></td>
+     <td><p>要忽略最相似的向量嵌入，请确保</p><p><code translate="no">radius</code> &lt; 距离 &lt;=<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>Jaccard 距离越小，表示相似度越高。</p></td>
-     <td><p>要忽略最相似的向量嵌入，请确保<code translate="no">range_filter</code> &lt;= distance &lt;= 。<code translate="no">radius</code></p></td>
+     <td><p>要忽略最相似的向量嵌入，请确保</p><p><code translate="no">range_filter</code> &lt;= 距离 &lt;<code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>Hamming 距离越小，表示相似度越高。</p></td>
-     <td><p>要忽略最相似的向量嵌入，请确保<code translate="no">range_filter</code> &lt;= distance &lt;。<code translate="no">radius</code></p></td>
+     <td><p>汉明距离越小，表示相似度越高。</p></td>
+     <td><p>要忽略最相似的向量嵌入，请确保</p><p><code translate="no">range_filter</code> &lt;= 距离 &lt;<code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -93,7 +93,7 @@ summary: 范围搜索将返回实体的距离或得分限制在特定范围内�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本节演示如何进行范围搜索。以下代码片段中的搜索请求不带度量类型，表示使用默认度量类型<strong>COSINE</strong>。在这种情况下，请确保<strong>半径</strong>值小于<strong>range_filter</strong>值。</p>
+    </button></h2><p>本节演示如何进行范围搜索。以下代码片段中的搜索请求不带度量类型，表示默认度量类型为<strong>COSINE</strong>。在这种情况下，请确保<strong>半径</strong>值小于<strong>range_filter</strong>值。</p>
 <p>在以下代码片段中，将<code translate="no">radius</code> 设为<code translate="no">0.4</code> ，将<code translate="no">range_filter</code> 设为<code translate="no">0.6</code> ，这样 Milvus 就会返回与查询向量的距离或分数在<strong>0.4</strong>至<strong>0.6</strong> 范围内的所有实体。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -245,3 +245,6 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>如果查询向量已经存在于目标 Collections 中，请考虑使用<code translate="no">ids</code> 代替在搜索前检索它们。有关详情，请参阅<a href="/docs/zh/primary-key-search.md">主键搜索</a>。</p>
+</div>

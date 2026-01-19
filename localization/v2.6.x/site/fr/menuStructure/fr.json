@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "Recherche primaire-clé",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Recherche hybride",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Demande de renseignements",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "Filtrage",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "Le filtrage expliqué",
@@ -1007,49 +1013,49 @@
           {
             "label": "Recherche en texte intégral",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Correspondance des textes",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Surligneur de texte",
             "id": "text-highlighter.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Correspondance des phrases",
             "id": "phrase-match.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "Recherche avec listes intégrées",
             "id": "search-with-embedding-lists.md",
-            "order": 10,
+            "order": 12,
             "children": []
           },
           {
             "label": "Requêtes Elasticsearch vers Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 11,
+            "order": 13,
             "children": []
           },
           {
             "label": "Recherche d'itérateurs",
             "id": "with-iterators.md",
-            "order": 12,
+            "order": 14,
             "children": []
           },
           {
             "label": "Utiliser la clé de partition",
             "id": "use-partition-key.md",
-            "order": 13,
+            "order": 15,
             "children": []
           }
         ]
@@ -1857,7 +1863,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre dans un environnement S3",
+                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2264,7 +2270,7 @@
             "children": []
           },
           {
-            "label": "PrivateGPT",
+            "label": "PrivéGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []

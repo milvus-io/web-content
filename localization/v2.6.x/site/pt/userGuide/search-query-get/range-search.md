@@ -38,7 +38,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ao executar um pedido de Pesquisa de Intervalo, o Milvus utiliza os vectores mais semelhantes ao vetor de consulta dos resultados da Pesquisa ANN como centro, com o <strong>raio</strong> especificado no pedido de Pesquisa como o raio do círculo exterior e o <strong>filtro_de_intervalo</strong> como o raio do círculo interior para desenhar dois círculos concêntricos. Todos os vectores com pontuações de similaridade que se enquadram na região anular formada por estes dois círculos concêntricos serão devolvidos. Aqui, o <strong>filtro_de_intervalo</strong> pode ser definido como <strong>0</strong>, indicando que todas as entidades dentro da pontuação de similaridade especificada (raio) serão retornadas.</p>
+    </button></h2><p>Ao executar um pedido de Pesquisa de Intervalo, o Milvus utiliza os vectores mais semelhantes ao vetor de consulta dos resultados da Pesquisa ANN como centro, com o <strong>raio</strong> especificado no pedido de Pesquisa como o raio do círculo exterior e o <strong>filtro_de_intervalo</strong> como o raio do círculo interior para desenhar dois círculos concêntricos. Todos os vetores com pontuações de similaridade que se enquadram na região anular formada por esses dois círculos concêntricos serão retornados. Aqui, o <strong>filtro_de_intervalo</strong> pode ser definido como <strong>0</strong>, indicando que todas as entidades dentro da pontuação de similaridade especificada (raio) serão retornadas.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" />
@@ -59,27 +59,27 @@ summary: >-
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>Uma distância L2 mais pequena indica uma maior semelhança.</p></td>
-     <td><p>Para ignorar as incorporações de vetores mais semelhantes, certifique-se de que <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Para ignorar as incorporações de vetor mais semelhantes, certifique-se de que</p><p><code translate="no">range_filter</code> &lt;= distância &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>Uma distância IP maior indica uma maior similaridade.</p></td>
-     <td><p>Para ignorar as incorporações vectoriais mais semelhantes, certifique-se de que <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Para ignorar as incorporações de vetor mais semelhantes, certifique-se de que</p><p><code translate="no">radius</code> &lt; distância &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>Uma distância COSINE maior indica uma maior semelhança.</p></td>
-     <td><p>Para ignorar as incorporações vectoriais mais semelhantes, certifique-se de que <code translate="no">radius</code> &lt; distância &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Para ignorar as incorporações vectoriais mais semelhantes, certifique-se de que</p><p><code translate="no">radius</code> &lt; distância &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>Uma distância Jaccard menor indica uma maior semelhança.</p></td>
-     <td><p>Para ignorar as incorporações vectoriais mais semelhantes, certifique-se de que <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Para ignorar as incorporações vetoriais mais semelhantes, certifique-se de que</p><p><code translate="no">range_filter</code> &lt;= distância &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>Uma distância de Hamming mais pequena indica uma maior semelhança.</p></td>
-     <td><p>Para ignorar as incorporações vectoriais mais semelhantes, certifique-se de que <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>Para ignorar as incorporações vectoriais mais semelhantes, certifique-se de que</p><p><code translate="no">range_filter</code> &lt;= distância &lt; <code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -97,8 +97,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta secção demonstra como realizar uma pesquisa de intervalo. As solicitações de pesquisa nos trechos de código a seguir não contêm um tipo de métrica, indicando que o tipo de métrica padrão <strong>COSINE</strong> se aplica. Nesse caso, certifique-se de que o valor <strong>de raio</strong> seja menor que o valor <strong>de range_filter</strong>.</p>
-<p>Nos trechos de código a seguir, defina <code translate="no">radius</code> como <code translate="no">0.4</code> e <code translate="no">range_filter</code> como <code translate="no">0.6</code> para que o Milvus retorne todas as entidades cujas distâncias ou pontuações para o vetor de consulta estejam entre <strong>0,4</strong> e <strong>0,6</strong>.</p>
+    </button></h2><p>Esta secção demonstra como realizar uma pesquisa de intervalo. As solicitações de pesquisa nos trechos de código a seguir não carregam um tipo de métrica, indicando que o tipo de métrica padrão <strong>COSINE</strong> se aplica. Nesse caso, certifique-se de que o valor <strong>do raio</strong> seja menor que o valor <strong>de range_filter</strong>.</p>
+<p>Nos trechos de código a seguir, defina <code translate="no">radius</code> como <code translate="no">0.4</code> e <code translate="no">range_filter</code> como <code translate="no">0.6</code> para que Milvus retorne todas as entidades cujas distâncias ou pontuações para o vetor de consulta estejam entre <strong>0,4</strong> e <strong>0,6</strong>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -249,3 +249,6 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Se os vectores de consulta já existirem na coleção de destino, considere a utilização de <code translate="no">ids</code> em vez de os recuperar antes das pesquisas. Para obter detalhes, consulte <a href="/docs/pt/primary-key-search.md">Pesquisa de chave primária</a>.</p>
+</div>

@@ -2,9 +2,9 @@
 id: index.md
 related_key: index
 summary: Milvus 中的索引機制。
-title: 記憶體索引
+title: 記憶體內索引
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">記憶體索引<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">記憶體內索引<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,10 @@ title: 記憶體索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主題列出 Milvus 支援的各種類型的記憶體索引、每種索引最適合的情況，以及使用者可以設定的參數，以達到更好的搜尋效能。關於磁碟索引，請參閱<strong><a href="/docs/zh-hant/disk_index.md">磁碟索引</a></strong>。</p>
+    </button></h1><div class="alert warning">
+<p>本頁已廢棄。如需最新內容，請參閱<a href="/docs/zh-hant/index-explained.md">Index Explained</a>。</p>
+</div>
+<p>本主題列出 Milvus 支援的各類型記憶體索引、每種索引最適合的情況，以及使用者可以設定的參數，以達到更好的搜尋效能。關於磁碟索引，請參閱<strong><a href="/docs/zh-hant/disk_index.md">磁碟索引</a></strong>。</p>
 <p>索引是有效組織資料的過程，它透過大幅加速大型資料集上耗時的查詢，在使相似性搜尋有用方面扮演重要角色。</p>
 <p>為了改善查詢效能，您可以為每個向量欄位<a href="/docs/zh-hant/index-vector-fields.md">指定索引類型</a>。</p>
 <div class="alert note">
@@ -489,7 +492,7 @@ title: 記憶體索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ScaNN (Scalable Nearest Neighbors) 在向量聚類和乘積量化方面與 IVF_PQ 相似。它們的不同之處在於乘積量化的實作細節，以及使用 SIMD (Single-Instruction / Multi-data) 進行有效率的計算。</p>
+    </button></h3><p>ScaNN (Scalable Nearest Neighbors) 在向量聚類和乘積量化方面與 IVF_PQ 相似。它們的不同之處在於乘積量化的實作細節，以及使用 SIMD (Single-Instruction / Multi-data) 進行有效計算。</p>
 <ul>
 <li><p>索引建立參數</p>
 <table>
@@ -554,8 +557,8 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th><th>預設值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M 定義圖表中出線連線的最大數目。在固定的 ef/efConstruction 下，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction 控制索引搜尋速度/建立速度的取捨。增加 efConstruction 參數可能會提升索引品質，但也會延長索引建立時間。</td><td>[1, int_max］</td><td>無</td></tr>
+<tr><td><code translate="no">M</code></td><td>M 定義圖表中出線連線的最大數目。在固定 ef/efConstruction 時，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction 控制索引搜尋速度/建立速度的取捨。增加 efConstruction 參數可能會提高索引品質，但也會延長索引建立時間。</td><td>[1, int_max］</td><td>無</td></tr>
 </tbody>
 </table>
 </li>
@@ -630,7 +633,7 @@ title: 記憶體索引
         ></path>
       </svg>
     </button></h3><p>PQ 的基本概念是將向量分割成<code translate="no">m</code> 個子向量，每個子向量會根據 kmeans 找到<em>2^{nbits}</em> 的 centroids，每個子向量會選擇最接近的 centroids 作為它的近似子向量。然後，我們記錄所有的中心點，因此每個子向量可以編碼為<code translate="no">nbits</code> ，而長度為<code translate="no">dim</code> 的浮動向量可以編碼為<em>m ⋅ nbits</em>位元。</p>
-<p>結合 PQ，HNSW_PQ 在索引大小與精確度之間提供了可控制的折衷，但在相同的壓縮率下，它的 QPS 值比 HNSW_SQ 低，召回率也比 HNSW_SQ 高。與 HNSW_SQ 相比，它需要更長的時間來建立索引。</p>
+<p>結合 PQ，HNSW_PQ 在索引大小與精確度之間提供了一個可控制的折衷，但在相同的壓縮率下，它的 QPS 值比 HNSW_SQ 低，召回率也比 HNSW_SQ 高。與 HNSW_SQ 相比，它需要更長的時間來建立索引。</p>
 <ul>
 <li><p>索引建立參數</p>
 <table>
@@ -638,7 +641,7 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th><th>預設值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M 定義圖形中最大的出線連線數。在固定 ef/efConstruction 時，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
+<tr><td><code translate="no">M</code></td><td>M 定義圖表中出線連線的最大數目。在固定 ef/efConstruction 時，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction 控制索引搜尋速度/建立速度的取捨。增加 efConstruction 參數可能會提高索引品質，但也會延長索引建立時間。</td><td>[1, int_max］</td><td>無</td></tr>
 <tr><td><code translate="no">m</code></td><td>將向量分割成的子向量群組數。</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>每個子向量群量化成的位元數。</td><td>[1, 24]</td><td>8</td></tr>
@@ -831,7 +834,7 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>在搜尋過程中排除小向量值的比例。此選項允許微調搜尋過程，方法是指定忽略查詢向量中最小值的比例。它有助於平衡搜尋準確度與效能。<code translate="no">drop_ratio_search</code> 設定的值越小，這些小值對最終得分的貢獻就越小。藉由忽略一些小值，可以在對精確度影響最小的情況下提高搜尋效能。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>在搜尋過程中排除小向量值的比例。此選項允許微調搜尋過程，方法是指定忽略查詢向量中最小值的比例。它有助於平衡搜尋精確度與效能。<code translate="no">drop_ratio_search</code> 設定的值越小，這些小值對最終得分的貢獻就越小。藉由忽略一些小值，可以在對精確度影響最小的情況下提高搜尋效能。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

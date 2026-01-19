@@ -322,7 +322,7 @@
             "children": []
           },
           {
-            "label": "檢視收藏集",
+            "label": "檢視館藏",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "主鍵搜尋",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "混合搜尋",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "查詢",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "過濾",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "篩選說明",
@@ -1007,49 +1013,49 @@
           {
             "label": "全文檢索",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "文字匹配",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "文字螢光筆",
             "id": "text-highlighter.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "詞組搭配",
             "id": "phrase-match.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "使用內嵌清單搜尋",
             "id": "search-with-embedding-lists.md",
-            "order": 10,
+            "order": 12,
             "children": []
           },
           {
             "label": "Elasticsearch 查詢至 Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 11,
+            "order": 13,
             "children": []
           },
           {
             "label": "搜尋迭代器",
             "id": "with-iterators.md",
-            "order": 12,
+            "order": 14,
             "children": []
           },
           {
             "label": "使用磁碟分割金鑰",
             "id": "use-partition-key.md",
-            "order": 13,
+            "order": 15,
             "children": []
           }
         ]
@@ -1103,7 +1109,7 @@
                 "children": []
               },
               {
-                "label": "航程 AI",
+                "label": "Voyage AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -2344,7 +2350,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格",
+            "label": "拉格舞曲",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []

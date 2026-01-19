@@ -107,7 +107,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Menerapkan sebuah cluster Milvus<button data-href="#1-Deploy-a-Milvus-cluster" class="anchor-icon" translate="no">
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Menerapkan cluster Milvus<button data-href="#1-Deploy-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Perlu penerapan mandiri?</strong></p>
 <p>Jika Anda lebih suka menggunakan Milvus dalam mode mandiri (simpul tunggal) untuk pengembangan atau pengujian, gunakan perintah ini:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.8 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.9 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Catatan</strong>: Mode mandiri menggunakan Woodpecker sebagai antrean pesan default dan mengaktifkan komponen Streaming Node. Untuk detailnya, lihat <a href="/docs/id/architecture_overview.md">Gambaran Umum Arsitektur</a> dan <a href="/docs/id/use-woodpecker.md">Gunakan Woodpecker</a>.</p>
 </div>
 <p><strong>Menyebarkan cluster Milvus:</strong></p>
-<p>Perintah berikut ini menyebarkan cluster Milvus dengan pengaturan yang dioptimalkan untuk v2.6.8, menggunakan Woodpecker sebagai antrean pesan yang direkomendasikan:</p>
+<p>Perintah berikut ini menyebarkan cluster Milvus dengan pengaturan yang dioptimalkan untuk v2.6.9, menggunakan Woodpecker sebagai antrean pesan yang direkomendasikan:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.8 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.9 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Opsi Antrian Pesan Alternatif:</strong></p>
 <p>Jika Anda lebih suka menggunakan <strong>Pulsar</strong> (pilihan tradisional) daripada Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.8 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.9 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,7 +204,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Verifikasi bahwa penerapan Anda berhasil dengan memeriksa status pod:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Tunggu hingga semua pod menunjukkan status "Running".</strong> Dengan konfigurasi v2.6.8, Anda akan melihat pod yang mirip dengan:</p>
+<p><strong>Tunggu hingga semua pod menunjukkan status "Running".</strong> Dengan konfigurasi v2.6.9, Anda akan melihat pod yang mirip dengan:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -321,7 +321,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
         ></path>
       </svg>
     </button></h2><p>Milvus dilengkapi dengan alat GUI bawaan yang disebut Milvus WebUI yang dapat Anda akses melalui peramban. Milvus Web UI meningkatkan kemampuan pengamatan sistem dengan antarmuka yang sederhana dan intuitif. Anda dapat menggunakan Milvus Web UI untuk mengamati statistik dan metrik komponen dan ketergantungan Milvus, memeriksa detail basis data dan koleksi, dan membuat daftar konfigurasi Milvus yang terperinci. Untuk detail tentang Milvus Web UI, lihat <a href="/docs/id/milvus-webui.md">Milvus WebUI</a></p>
-<p>Untuk mengaktifkan akses ke Milvus Web UI, anda perlu meneruskan porta proxy pod ke porta lokal.</p>
+<p>Untuk mengaktifkan akses ke Milvus Web UI, anda perlu melakukan port-forward proxy pod ke port lokal.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>

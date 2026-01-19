@@ -173,11 +173,11 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Una vez que el pod Milvus Operator se está ejecutando, puede desplegar un cluster Milvus como sigue.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>El comando anterior despliega un cluster Milvus con <strong>Woodpecker</strong> como cola de mensajes (recomendado para v2.6.8) y todos los componentes arquitectónicos nuevos, incluido el Nodo de Streaming.</p>
+<p>El comando anterior despliega un cluster Milvus con <strong>Woodpecker</strong> como cola de mensajes (recomendado para v2.6.9) y todos los componentes arquitectónicos nuevos, incluido el Nodo de Streaming.</p>
 <p><strong>Aspectos destacados de la arquitectura en este despliegue:</strong></p>
 <ul>
 <li><strong>Cola de mensajes</strong>: <a href="/docs/es/use-woodpecker.md">Utiliza Woodpecker</a> (reduce el mantenimiento de la infraestructura)</li>
-<li><strong>Nodo de transmisión</strong>: Habilitado para un procesamiento de datos mejorado</li>
+<li><strong>Nodo de streaming</strong>: Habilitado para un procesamiento de datos mejorado</li>
 <li><strong>Coordinador mixto</strong>: Componentes de coordinador consolidados para mejorar la eficiencia</li>
 </ul>
 <p>Para personalizar estas configuraciones, le recomendamos que utilice <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> para ajustar las configuraciones en función del tamaño real de sus datos y, a continuación, descargue el archivo YAML correspondiente. Para obtener más información sobre los parámetros de configuración, consulte <a href="https://milvus.io/docs/system_configuration.md">Milvus System Configurations Checklist</a>.</p>

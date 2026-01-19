@@ -497,6 +497,44 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Primary-Key-Search--Milvus-269+" class="common-anchor-header">プライマリ・キー検索<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search--Milvus-269+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>クエリ・ベクタを設定する代わりに、クエリ・ベクタがターゲット・コレクションに既に存在する場合、プライマリ・キーを使用することができます。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+<span class="highlighted-comment-line">    ids=[<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>],</span>
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
+)
+
+<span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
+    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
+        <span class="hljs-built_in">print</span>(hit)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="ANN-Search-in-Partition" class="common-anchor-header">パーティション内のANN検索<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -666,7 +704,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusの検索結果には、デフォルトでトップKベクトル埋め込みを含むエンティティのプライマリフィールド値と類似距離/スコアが含まれます。ベクトルフィールドとスカラーフィールドの両方を含む対象フィールドの名前を出力フィールドとして検索リクエストに含めることで、検索結果にこれらのエンティティ内の他のフィールドの値を持たせることができます。</p>
+    </button></h2><p>Milvusの検索結果には、デフォルトでトップKベクトル埋め込みを含むエンティティのプライマリフィールド値と類似距離/スコアが含まれます。ベクトルフィールドとスカラーフィールドの両方を含む対象フィールドの名前を出力フィールドとして検索リクエストに含めることで、検索結果にこれらのエンティティの他のフィールドの値を持たせることができます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
@@ -1024,7 +1062,7 @@ curl --request POST \
 <p>Milvusのキーワードマッチは、特定の用語に基づいた正確な文書検索を可能にします。この機能は、主に特定の条件を満たすフィルタリング検索に使用され、スカラーフィルタリングを組み込んでクエリ結果を絞り込むことができるため、スカラー条件を満たすベクトル内の類似検索が可能です。</p>
 <p>キーワードマッチの詳細については、<a href="/docs/ja/keyword-match.md">キーワードマッチを</a>参照してください。</p></li>
 <li><p>パーティション・キーの使用</p>
-<p>複数のスカラー・フィールドをメタデータ・フィルタリングに関与させ、かなり複雑なフィルタリング条件を使用すると、検索効率に影響することがあります。スカラー・フィールドをパーティション・キーに設定し、検索リクエストでパーティション・キーを含むフィルタリング条件を使用すると、指定されたパーティション・キーの値に対応するパーティション内に検索範囲を制限することができます。</p>
+<p>複数のスカラー・フィールドをメタデータ・フィルタリングに関与させ、かなり複雑なフィルタリング条件を使用すると、検索効率に影響することがあります。スカラー・フィールドをパーティション・キーに設定し、検索リクエストでパーティション・キーを含むフィルタリング条件を使用すると、指定したパーティション・キーの値に対応するパーティション内に検索範囲を制限することができます。</p>
 <p>パーティション・キーの詳細については、「<a href="/docs/ja/use-partition-key.md">パーティション・キーの使用</a>」を参照してください。</p></li>
 <li><p>mmapを使用する</p>
 <p>mmap-settingsの詳細については、「<a href="/docs/ja/mmap.md">mmapを使用する</a>」を参照してください。</p></li>

@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "インメモリ・レプリカ",
+        "label": "インメモリーレプリカ",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "番号フィールド",
+            "label": "数字フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "主キー検索",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "ハイブリッド検索",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "クエリー",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "フィルタリング",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "フィルタリングの説明",
@@ -1007,49 +1013,49 @@
           {
             "label": "全文検索",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "テキストマッチ",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "テキスト蛍光ペン",
             "id": "text-highlighter.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "フレーズ一致",
             "id": "phrase-match.md",
-            "order": 10,
+            "order": 11,
             "children": []
           },
           {
             "label": "埋め込みリストを使った検索",
             "id": "search-with-embedding-lists.md",
-            "order": 10,
+            "order": 12,
             "children": []
           },
           {
-            "label": "Elasticsearchクエリからmilvusへ",
+            "label": "Elasticsearchからmilvusへのクエリ",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 11,
+            "order": 13,
             "children": []
           },
           {
             "label": "検索イテレータ",
             "id": "with-iterators.md",
-            "order": 12,
+            "order": 14,
             "children": []
           },
           {
             "label": "パーティション・キーの使用",
             "id": "use-partition-key.md",
-            "order": 13,
+            "order": 15,
             "children": []
           }
         ]

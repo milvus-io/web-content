@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
 <p>請考慮這些日常情境：</p>
 <ul>
 <li><p>在新聞搜尋中，昨天的文章應該比三年前的類似文章排名更高</p></li>
-<li><p>餐廳搜尋器會優先搜尋 5 分鐘路程內的餐廳，而不是需要開車 30 分鐘的餐廳</p></li>
+<li><p>餐廳搜尋器會優先搜尋 5 分鐘車程內的餐廳，而非 30 分鐘車程內的餐廳</p></li>
 <li><p>一個電子商務平台，能提升趨勢商品的排名，即使這些商品與搜尋查詢的相似度稍低。</p></li>
 </ul>
 <p>這些情境都有一個共同的需求：平衡向量相似度與其他數值因素，例如時間、距離或知名度。</p>
@@ -69,8 +69,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Decay ranking 將時間或地理距離等數字因素納入排序過程中，增強了傳統向量搜尋的功能。整個過程遵循以下幾個階段</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">階段 1：計算標準化的相似性分數<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
+    </button></h2><p>衰減排序將時間或地理距離等數字因素納入排序過程中，增強了傳統向量搜尋的功能。整個過程遵循以下幾個階段</p>
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">第一階段：計算標準化的相似性分數<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,7 +91,7 @@ beta: Milvus 2.6.x
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
 <button class="copy-code-btn"></button></code></pre>
 <p>這將距離轉換成 0-1 之間的相似性分數，越高越好。</p></li>
-<li><p>對於<strong>IP</strong>、<strong>COSINE</strong> 和<strong>BM25</strong>公制 (分數越高表示匹配度越高)：直接使用分數，無需標準化。</p></li>
+<li><p>對於<strong>IP</strong>、<strong>COSINE</strong> 和<strong>BM25</strong>公約 (分數越高表示匹配度越高)：直接使用分數，無需標準化。</p></li>
 </ul>
 <h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">第二階段：計算衰減分數<button data-href="#Stage-2-Calculate-decay-scores" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -403,7 +403,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.offset</code></p></td>
      <td><p>無</p></td>
-     <td><p>在<code translate="no">origin</code> 周圍建立「無衰減區」，讓項目保持滿分 (衰減分數 = 1.0)。</p><p>對於以時間為基礎的衰減，時間單位必須符合您的收集資料。</p><p>在<code translate="no">origin</code> 這個範圍內的項目可維持最大相關性。</p></td>
+     <td><p>在<code translate="no">origin</code> 周圍建立「無衰減區」，讓項目保持滿分 (衰減分數 = 1.0)。</p><p>對於以時間為基礎的衰減，時間單位必須符合您的收集資料。</p><p><code translate="no">origin</code> 此範圍內的項目可維持最大相關性。</p></td>
      <td><ul><li><p>對於時間：以秒為單位的週期 (例如：<code translate="no">24 * 60 * 60</code> 為 1 天)</p></li><li><p>對於距離：公尺 (例如：<code translate="no">500</code> 代表 500 公尺)</p></li></ul></td>
    </tr>
    <tr>
@@ -472,101 +472,3 @@ results = milvus_client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">應用於混合搜尋<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>衰減排名器也可以應用於結合多向量領域的混合搜尋作業：</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
-
-<span class="hljs-comment"># Define search requests for different vector fields</span>
-dense_request = AnnSearchRequest(
-    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
-    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    param={},
-    limit=<span class="hljs-number">20</span>
-)
-
-sparse_request = AnnSearchRequest(
-    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
-    anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-    param={},
-    limit=<span class="hljs-number">20</span>
-)
-
-<span class="hljs-comment"># Apply decay ranker to hybrid search</span>
-hybrid_results = milvus_client.hybrid_search(
-    collection_name,
-    [dense_request, sparse_request],
-<span class="highlighted-wrapper-line">    ranker=decay_ranker,                      <span class="hljs-comment"># Same decay ranker works with hybrid search</span></span>
-    limit=<span class="hljs-number">10</span>,
-    output_fields=[<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-        
-List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
-        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding)))
-        .limit(<span class="hljs-number">20</span>)
-        .build());
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
-        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;search query&quot;</span>)))
-        .limit(<span class="hljs-number">20</span>)
-        .build());
-
-<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
-                .collectionName(COLLECTION_NAME)
-                .searchRequests(searchRequests)
-                .ranker(ranker)
-                .limit(<span class="hljs-number">10</span>)
-                .outputFields(Arrays.asList(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
-                .build();
-<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> denseRequest = {
-  <span class="hljs-attr">data</span>: [your_query_vector_1], <span class="hljs-comment">// Replace with your query vector</span>
-  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
-  <span class="hljs-attr">param</span>: {},
-  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
-};
-
-<span class="hljs-keyword">const</span> sparseRequest = {
-  <span class="hljs-attr">data</span>: [your_query_vector_2], <span class="hljs-comment">// Replace with your query vector</span>
-  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;sparse_vector&quot;</span>,
-  <span class="hljs-attr">param</span>: {},
-  <span class="hljs-attr">limit</span>: <span class="hljs-number">20</span>,
-};
-
-<span class="hljs-keyword">const</span> hybridResults = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">hybrid_search</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
-  <span class="hljs-attr">data</span>: [denseRequest, sparseRequest],
-  <span class="hljs-attr">ranker</span>: decayRanker,
-  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
-  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>],
-});
-
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>在混合搜尋中，Milvus 首先從所有向量領域中找出最大相似性分數，然後將衰減係數應用在該分數上。</p>

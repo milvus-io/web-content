@@ -19,7 +19,10 @@ title: Index en mémoire
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette rubrique répertorie les différents types d'index en mémoire pris en charge par Milvus, les scénarios les mieux adaptés à chacun d'entre eux et les paramètres que les utilisateurs peuvent configurer pour obtenir de meilleures performances de recherche. Pour les index sur disque, voir <strong><a href="/docs/fr/disk_index.md">Index sur disque</a></strong>.</p>
+    </button></h1><div class="alert warning">
+<p>Cette page est obsolète. Pour le contenu le plus récent, veuillez vous référer à <a href="/docs/fr/index-explained.md">Index Explained</a>.</p>
+</div>
+<p>Cette rubrique répertorie les différents types d'index en mémoire pris en charge par Milvus, les scénarios les mieux adaptés à chacun d'entre eux et les paramètres que les utilisateurs peuvent configurer pour obtenir de meilleures performances de recherche. Pour les index sur disque, voir <strong><a href="/docs/fr/disk_index.md">Index sur disque</a></strong>.</p>
 <p>L'indexation est le processus d'organisation efficace des données et joue un rôle majeur dans l'utilité de la recherche par similarité en accélérant considérablement les requêtes fastidieuses sur de grands ensembles de données.</p>
 <p>Pour améliorer les performances des requêtes, vous pouvez <a href="/docs/fr/index-vector-fields.md">spécifier un type d'index</a> pour chaque champ vectoriel.</p>
 <div class="alert note">

@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>O Milvus usa Pulsar ou Kafka para gerenciar logs de mudanças recentes, gerar logs de fluxo e fornecer assinaturas de log. O Pulsar é o sistema de armazenamento de mensagens padrão. Este tópico apresenta como configurar o armazenamento de mensagens com o Docker Compose ou Helm.</p>
 <p>É possível configurar o Pulsar com o <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> ou no K8s e configurar o Kafka no K8s.</p>
 <div class="alert note">
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.8, você deve manter sua escolha atual de fila de mensagens. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte para alterar os sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.9, você deve manter sua escolha atual de fila de mensagens. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte para alterar os sistemas de filas de mensagens estará disponível em versões futuras.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Configurar a Pulsar com o Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,7 +81,7 @@ summary: >-
     </button></h3><p>Execute o seguinte comando para iniciar o Milvus que usa as configurações do Pulsar.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">As configurações só têm efeito depois que o Milvus é iniciado. Consulte <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Iniciar o Milvus</a> para obter mais informações.</div>
+<div class="alert note">As configurações só têm efeito após o início do Milvus. Consulte <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Iniciar o Milvus</a> para obter mais informações.</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">Configurar o Pulsar com o Helm<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -255,7 +255,7 @@ summary: >-
       securityProtocol: SASL_SSL    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Após configurar as seções anteriores e salvar o arquivo <code translate="no">values.yaml</code>, execute o seguinte comando para instalar o Milvus que usa as configurações do Kafka.</li>
+<li>Depois de configurar as seções anteriores e salvar o arquivo <code translate="no">values.yaml</code>, execute o seguinte comando para instalar o Milvus que usa as configurações do Kafka.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
