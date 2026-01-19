@@ -57,6 +57,12 @@ This section demonstrates how to conduct a filtered search. Code snippets in thi
 ]
 ```
 
+<div class="alert note">
+
+If the query vectors already exist in the target collection, consider using `ids` instead of retrieving them before searches. For details, refer to [Primary-Key Search](primary-key-search.md).
+
+</div>
+
 ### Search with standard filtering
 
 The following code snippets demonstrate a search with standard filtering, and the request in the following code snippet carries a filtering condition and several output fields.
@@ -159,25 +165,25 @@ defer client.Close(ctx)
 
 queryVector := []float32{0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592}
 
-    resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-        "my_collection", // collectionName
-        5,               // limit
-        []entity.Vector{entity.FloatVector(queryVector)},
-    ).WithConsistencyLevel(entity.ClStrong).
-        WithANNSField("vector").
-        WithFilter("color like 'red%' and likes > 50").
-        WithOutputFields("color", "likes"))
-    if err != nil {
-        fmt.Println(err.Error())
-        // handle error
-    }
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection", // collectionName
+    5,               // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithConsistencyLevel(entity.ClStrong).
+    WithANNSField("vector").
+    WithFilter("color like 'red%' and likes > 50").
+    WithOutputFields("color", "likes"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 
-    for _, resultSet := range resultSets {
-        fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
-        fmt.Println("Scores: ", resultSet.Scores)
-        fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
-        fmt.Println("likes: ", resultSet.GetColumn("likes").FieldData().GetScalars())
-    }
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
+    fmt.Println("likes: ", resultSet.GetColumn("likes").FieldData().GetScalars())
+}
 
 ```
 

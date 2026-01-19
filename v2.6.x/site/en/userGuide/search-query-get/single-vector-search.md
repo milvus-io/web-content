@@ -498,6 +498,50 @@ curl --request POST \
 # }
 ```
 
+## Primary-Key Search | Milvus 2.6.9+
+
+Instead of setting query vectors, you can use primary keys if the query vectors already exist in the target collection.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+res = client.search(
+    collection_name="quick_setup",
+    anns_field="vector",
+    # highlight-start
+    ids=[551, 296, 43],
+    # highlight-end
+    limit=3,
+    search_params={"metric_type": "IP"}
+)
+
+for hits in res:
+    for hit in hits:
+        print(hit)
+```
+
+```java
+// java
+```
+
+```javascript
+// node.js
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
 ## ANN Search in Partition
 
 Suppose you have created multiple partitions in a collection, and you can narrow the search scope to a specific number of partitions. In that case, you can include the target partition names in the search request to restrict the search scope within the specified partitions. Reducing the number of partitions involved in the search improves search performance.

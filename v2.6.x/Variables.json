@@ -1,6 +1,6 @@
 {
-  "milvus_release_version": "2.6.8",
-  "milvus_release_tag": "2.6.8",
+  "milvus_release_version": "2.6.9",
+  "milvus_release_tag": "2.6.9",
   "milvus_deb_amd64": "milvus_2.6.6-1_amd64.deb",
   "milvus_rpm_amd64": "milvus_2.6.6-1_amd64.rpm",
   "milvus_deb_arm64": "milvus_2.6.6-1_arm64.deb",
@@ -12,7 +12,7 @@
   "milvus_go_sdk_version": "2.3.x",
   "milvus_go_sdk_real_version": "2.6.1",
   "milvus_java_sdk_version": "2.4.x",
-  "milvus_java_sdk_real_version": "2.6.11",
+  "milvus_java_sdk_real_version": "2.6.12",
   "milvus_csharp_sdk_version": "2.2.x",
   "milvus_csharp_sdk_real_version": "2.2.14", 
   "milvus_restful_sdk_version": "2.4.x",

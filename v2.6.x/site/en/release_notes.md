@@ -8,6 +8,69 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.9
+
+Release date: January 16, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.6.9          | 2.6.6             | 2.6.9               | 2.6.12           | 2.6.1          |
+
+We are pleased to announce the release of Milvus 2.6.9! This update introduces highlight scores for search results, enhances segment management with support for reopening segments when data or schema changes occur, and improves storage version handling. Key improvements include better logging performance, enhanced security controls for expression endpoints, and optimizations for text analyzers and index building. This release also resolves critical issues including memory estimation accuracy, geometry data conversions, and various stability fixes. We recommend all users on the 2.6 branch upgrade to this version for improved system reliability and performance.
+
+### Features
+
+- Supported searching by primary keys ([#46528](https://github.com/milvus-io/milvus/pull/46528))
+
+### Improvements
+
+- Added a storage version label metric for better observability ([#47014](https://github.com/milvus-io/milvus/pull/47014))
+- QueryCoord now supports segment reopen when manifest path changes ([#46921](https://github.com/milvus-io/milvus/pull/46921))
+- Added support for reopening segments when data or schema changes occur ([#46412](https://github.com/milvus-io/milvus/pull/46412))
+- Improved slow log performance and efficiency ([#47086](https://github.com/milvus-io/milvus/pull/47086))
+- Added storage version upgrade compaction policy to facilitate version migrations ([#47011](https://github.com/milvus-io/milvus/pull/47011))
+- Eliminated extra memory copy operations for C++ logging to improve performance ([#46992](https://github.com/milvus-io/milvus/pull/46992))
+- Added security controls for the /expr endpoint to prevent unauthorized access ([#46978](https://github.com/milvus-io/milvus/pull/46978))
+- Streaming service now remains enabled until the required streaming node count is reached ([#46982](https://github.com/milvus-io/milvus/pull/46982))
+- Removed redundant etcd put operations when updating segment information ([#46794](https://github.com/milvus-io/milvus/pull/46794))
+- Improved row count validation and reduced misleading warning logs for sort compaction ([#46824](https://github.com/milvus-io/milvus/pull/46824))
+- Cleaned up and organized build index log messages ([#46769](https://github.com/milvus-io/milvus/pull/46769))
+- Limited the number of concurrent vector index builds per worker to prevent resource exhaustion ([#46877](https://github.com/milvus-io/milvus/pull/46877))
+- Optimized jieba and lindera analyzer cloning operations for better performance ([#46757](https://github.com/milvus-io/milvus/pull/46757))
+- Added glog sink to transfer CGO logs into zap logger for unified logging ([#46741](https://github.com/milvus-io/milvus/pull/46741))
+- Enforced storage V2 format usage and deprecated V1 writes ([#46889](https://github.com/milvus-io/milvus/pull/46889))
+- Implemented batch processing for ngram operations to improve efficiency ([#46703](https://github.com/milvus-io/milvus/pull/46703))
+- Added automatic retry mechanism for binlog write operations to improve reliability ([#46854](https://github.com/milvus-io/milvus/pull/46854))
+- Filtered empty timetick messages from the consuming side to reduce unnecessary processing ([#46730](https://github.com/milvus-io/milvus/pull/46730))
+- Improved search by primary key with duplicate checking and automatic anns_field inference ([#46745](https://github.com/milvus-io/milvus/pull/46745))
+- Added dimension parameter support for siliconflow and cohere embedding providers ([#47081](https://github.com/milvus-io/milvus/pull/47081))
+
+### Bug fixes
+
+- Fixed double counting of index memory in segment loading estimation ([#47046](https://github.com/milvus-io/milvus/pull/47046))
+- Fixed compilation issues on macOS 14 ([#47048](https://github.com/milvus-io/milvus/pull/47048))
+- Used revision as streaming service discovery global version for better consistency ([#47023](https://github.com/milvus-io/milvus/pull/47023))
+- Ensured all futures complete on exception to prevent use-after-free crashes ([#46960](https://github.com/milvus-io/milvus/pull/46960))
+- Fixed shard interceptor incorrectly skipping `FlushAllMsg` operations ([#47004](https://github.com/milvus-io/milvus/pull/47004))
+- Added valid range validation for collection TTL to prevent invalid configurations ([#47010](https://github.com/milvus-io/milvus/pull/47010))
+- Fixed `GetCredentialInfo` not caching RPC responses ([#46945](https://github.com/milvus-io/milvus/pull/46945))
+- Fixed issue where `AlterFunction` could not be invoked when multiple functions become invalid ([#46986](https://github.com/milvus-io/milvus/pull/46986))
+- Fixed inverted index null offset file not being compacted ([#46950](https://github.com/milvus-io/milvus/pull/46950))
+- Fixed crash when using is_null_expr on indexed JSON fields ([#46894](https://github.com/milvus-io/milvus/pull/46894))
+- Added check for allow_insert_auto_id flag in RESTful v2 insert API ([#46931](https://github.com/milvus-io/milvus/pull/46931))
+- Added field existence check in column groups before reading from loon manifest ([#46924](https://github.com/milvus-io/milvus/pull/46924))
+- Fixed bug where the highlight parameter was not working correctly ([#46876](https://github.com/milvus-io/milvus/pull/46876))
+- Quota center now ignores delegator when it is in recovering state ([#46858](https://github.com/milvus-io/milvus/pull/46858))
+- Aligned WKT/WKB conversion options to ensure consistent behavior across operations ([#46874](https://github.com/milvus-io/milvus/pull/46874))
+- Fixed voyageai model int8 bug ([#46821](https://github.com/milvus-io/milvus/pull/46821))
+- Fixed missing handling of `FlushAllMsg` in recovery storage operations ([#46803](https://github.com/milvus-io/milvus/pull/46803))
+- Fixed missing shardclientmgr field in querytask to prevent panic ([#46838](https://github.com/milvus-io/milvus/pull/46838))
+- Used leaderid for leaderaction stale check in scheduler to improve accuracy ([#46788](https://github.com/milvus-io/milvus/pull/46788))
+- Restored tenant/namespace support for Pulsar that was lost in 2.6 ([#46759](https://github.com/milvus-io/milvus/pull/46759))
+- Added load config watcher to prevent load config modifications from being lost ([#46786](https://github.com/milvus-io/milvus/pull/46786))
+- Fixed function edit interface bug ([#46782](https://github.com/milvus-io/milvus/pull/46782))
+- Added collection TTL property validation to prevent compaction from getting stuck ([#46736](https://github.com/milvus-io/milvus/pull/46736))
+
 ## v2.6.8
 
 Release date: January 4, 2026
