@@ -39,4 +39,4 @@ The following table lists the backup and restore compatibilities between differe
 
 ## Latest release
 
-- [v0.5.7](https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7)
+- [v0.5.10](https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.10)
