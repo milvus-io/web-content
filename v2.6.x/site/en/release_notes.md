@@ -14,7 +14,7 @@ Release date: January 16, 2026
 
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
 |:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.9          | 2.6.6             | 2.6.9               | 2.6.12           | 2.6.1          |
+| 2.6.9          | 2.6.6             | 2.6.9               | 2.6.13           | 2.6.1          |
 
 We are pleased to announce the release of Milvus 2.6.9! This update introduces highlight scores for search results, enhances segment management with support for reopening segments when data or schema changes occur, and improves storage version handling. Key improvements include better logging performance, enhanced security controls for expression endpoints, and optimizations for text analyzers and index building. This release also resolves critical issues including memory estimation accuracy, geometry data conversions, and various stability fixes. We recommend all users on the 2.6 branch upgrade to this version for improved system reliability and performance.
 
