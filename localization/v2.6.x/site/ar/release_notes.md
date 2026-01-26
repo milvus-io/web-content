@@ -40,7 +40,7 @@ title: ملاحظات الإصدار
 <tr><th style="text-align:left">إصدار ميلفوس</th><th style="text-align:left">إصدار Python SDK</th><th style="text-align:left">إصدار Node.js SDK</th><th style="text-align:left">إصدار Java SDK</th><th style="text-align:left">إصدار Go SDK</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.12</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.13</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
 <p>يسعدنا أن نعلن عن إصدار الإصدار 2.6.9 من ميلفوس 2.6.9! يقدم هذا التحديث درجات التمييز لنتائج البحث، ويعزز إدارة المقاطع مع دعم إعادة فتح المقاطع عند حدوث تغييرات في البيانات أو المخطط، ويحسن معالجة إصدار التخزين. تتضمن التحسينات الرئيسية أداءً أفضل للتسجيل، وعناصر تحكم أمنية محسّنة لنقاط نهاية التعبير، وتحسينات لمحللات النصوص وبناء الفهرس. يعمل هذا الإصدار أيضًا على حل المشكلات الحرجة بما في ذلك دقة تقدير الذاكرة، وتحويلات البيانات الهندسية، وإصلاحات الاستقرار المختلفة. نوصي جميع المستخدمين في الفرع 2.6 بالترقية إلى هذا الإصدار لتحسين موثوقية النظام وأدائه.</p>

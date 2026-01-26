@@ -5,9 +5,9 @@ related_key: RPM/DEB Package
 summary: >-
   Apprenez à installer Milvus de manière autonome avec un paquetage RPM/DEB
   préconstruit.
-title: Installation de Milvus Standalone avec un package RPM/DEB
+title: Installation autonome de Milvus avec un paquetage RPM/DEB
 ---
-<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">Installation de Milvus Standalone avec un package RPM/DEB<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">Installation autonome de Milvus avec un paquetage RPM/DEB<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,11 +59,11 @@ title: Installation de Milvus Standalone avec un package RPM/DEB
       </svg>
     </button></h2><p>Vous pouvez télécharger le paquetage RPM/DEB correspondant à l'architecture de votre système à partir de la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.9">page Milvus Releases</a>.</p>
 <ul>
-<li>Pour x86_64/amd64, téléchargez le paquet <strong>milvus_2.6.6-1_amd64.deb</strong> ou <strong>milvus_2.6.6-1_amd64.rpm</strong>.</li>
-<li>Pour ARM64, téléchargez le paquetage <strong>milvus_2.6.6-1_arm64.deb</strong> ou <strong>milvus_2.6.6-1_arm64.rpm</strong>.</li>
+<li>Pour x86_64/amd64, téléchargez le paquet <strong>milvus_2.6.9-1_amd64.deb</strong> ou <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
+<li>Pour ARM64, téléchargez le paquet <strong>milvus_2.6.9-1_arm64.deb</strong> ou <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
 </ul>
 <p>La commande suivante suppose que vous allez exécuter Milvus Standalone sur une machine x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.9-1_amd64.rpm -O milvus_2.6.9-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Installation du paquetage RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,11 +82,11 @@ title: Installation de Milvus Standalone avec un package RPM/DEB
       </svg>
     </button></h2><p>Pour installer le paquetage RPM/DEB, vous pouvez utiliser le gestionnaire de paquetages de votre système.</p>
 <p>Pour les systèmes basés sur RPM (tels que CentOS, Fedora et RHEL), utilisez la commande <code translate="no">yum</code> pour installer le paquetage.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour les systèmes basés sur DEB (tels qu'Ubuntu et Debian), utilisez la commande <code translate="no">apt</code> pour installer le paquet.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.6-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Démarrer Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -110,7 +110,7 @@ dpkg -l | grep milvus
 <p>Vous pouvez vérifier l'état du service Milvus à l'aide de la commande suivante :</p>
 <pre><code translate="no" class="language-shell">systemctl status milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Si Milvus fonctionne correctement, vous devriez obtenir le résultat suivant :</p>
+<p>Si Milvus fonctionne correctement, vous devriez voir le résultat suivant :</p>
 <pre><code translate="no"><span class="hljs-string">●</span> <span class="hljs-string">milvus.service</span> <span class="hljs-bullet">-</span> <span class="hljs-string">Milvus</span> <span class="hljs-string">Standalone</span> <span class="hljs-string">Server</span>
    <span class="hljs-attr">Loaded:</span> <span class="hljs-string">loaded</span> <span class="hljs-string">(/lib/systemd/system/milvus.service;</span> <span class="hljs-string">enabled;</span> <span class="hljs-attr">vendor preset:</span> <span class="hljs-string">enabled)</span>
    <span class="hljs-attr">Active:</span> <span class="hljs-string">active</span> <span class="hljs-string">(running)</span> <span class="hljs-string">since</span> <span class="hljs-string">Fri</span> <span class="hljs-number">2025-08-10 10:30:00 </span><span class="hljs-string">UTC;</span> <span class="hljs-string">5s</span> <span class="hljs-string">ago</span>

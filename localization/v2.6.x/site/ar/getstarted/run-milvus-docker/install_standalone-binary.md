@@ -57,11 +57,11 @@ title: تثبيت برنامج Milvus Standalone مع حزمة RPM/DEB
       </svg>
     </button></h2><p>يمكنك تنزيل حزمة RPM/DEB وفقاً لبنية نظامك من <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.9">صفحة إصدارات Milvus</a>.</p>
 <ul>
-<li>بالنسبة ل x86_64/amd64، قم بتنزيل حزمة <strong>milvus_2.6.6-1_amd64.deb</strong> أو حزمة <strong>milvus_2.6-1_amd64.rpm.</strong> </li>
-<li>بالنسبة ل ARM64، قم بتنزيل حزمة <strong>milvus_2.6.6-1_arm64.deb</strong> أو حزمة <strong>milvus_2.6-1_arm64.rpm.</strong> </li>
+<li>بالنسبة ل x86_64/amd64، قم بتنزيل حزمة <strong>milvus_2.6.9-1_amd64.deb</strong> أو حزمة <strong>milvus_2.6.9-1_amd64.rpm.</strong> </li>
+<li>بالنسبة ل ARM64، قم بتنزيل حزمة <strong>milvus_2.6.6.9-1_arm64.deb</strong> أو حزمة <strong>milvus_2.6.9-1_arm64.rpm.</strong> </li>
 </ul>
 <p>يفترض الأمر التالي أنك ستقوم بتشغيل Milvus Standalone على جهاز x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.9-1_amd64.rpm -O milvus_2.6.9-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">تثبيت حزمة RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,11 +80,11 @@ title: تثبيت برنامج Milvus Standalone مع حزمة RPM/DEB
       </svg>
     </button></h2><p>لتثبيت حزمة RPM/DEB، يمكنك استخدام مدير الحزم الخاص بنظامك.</p>
 <p>بالنسبة للأنظمة المستندة إلى RPM (مثل CentOS وFedora وRHEL)، استخدم الأمر <code translate="no">yum</code> لتثبيت الحزمة.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>بالنسبة للأنظمة المستندة إلى DEB (مثل Ubuntu و Debian)، استخدم الأمر <code translate="no">apt</code> لتثبيت الحزمة.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.6-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">ابدأ تشغيل ميلفوس Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -197,7 +197,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
 <li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
 <li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
+<li><a href="/docs/ar/insert-update-delete.md">إدراج وإضافة وحذف</a></li>
 <li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>

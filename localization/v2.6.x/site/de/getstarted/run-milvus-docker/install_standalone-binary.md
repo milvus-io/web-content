@@ -40,7 +40,7 @@ title: Milvus Standalone mit RPM/DEB-Paket installieren
       </svg>
     </button></h2><ul>
 <li>Sie haben bereits libstdc++ 8.5.0 oder eine neuere Version installiert.</li>
-<li><a href="/docs/de/prerequisite-docker.md">Prüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
+<li><a href="/docs/de/prerequisite-docker.md">Überprüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
 </ul>
 <h2 id="Download-the-RPMDEB-Package" class="common-anchor-header">Herunterladen des RPM/DEB-Pakets<button data-href="#Download-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,11 +59,11 @@ title: Milvus Standalone mit RPM/DEB-Paket installieren
       </svg>
     </button></h2><p>Sie können das RPM/DEB-Paket entsprechend Ihrer Systemarchitektur von der <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.9">Milvus Releases-Seite</a> herunterladen.</p>
 <ul>
-<li>Für x86_64/amd64 laden Sie das Paket <strong>milvus_2.6.6-1_amd64.deb</strong> oder <strong>milvus_2.6.6-1_amd64.rpm</strong> herunter.</li>
-<li>Für ARM64 laden Sie bitte das Paket <strong>milvus_2.6.6-1_arm64.deb</strong> oder <strong>milvus_2.6.6-1_arm64.rpm</strong> herunter.</li>
+<li>Für x86_64/amd64 laden Sie das Paket <strong>milvus_2.6.9-1_amd64.deb</strong> oder <strong>milvus_2.6.9-1_amd64.rpm</strong> herunter.</li>
+<li>Für ARM64 laden Sie bitte das Paket <strong>milvus_2.6.9-1_arm64.deb</strong> oder <strong>milvus_2.6.9-1_arm64.rpm</strong> herunter.</li>
 </ul>
 <p>Der folgende Befehl geht davon aus, dass Sie Milvus Standalone auf einem x86_64/amd64-Rechner ausführen werden.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.9-1_amd64.rpm -O milvus_2.6.9-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Installieren Sie das RPM/DEB-Paket<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,11 +82,11 @@ title: Milvus Standalone mit RPM/DEB-Paket installieren
       </svg>
     </button></h2><p>Um das RPM/DEB-Paket zu installieren, können Sie den Paketmanager Ihres Systems verwenden.</p>
 <p>Bei RPM-basierten Systemen (wie CentOS, Fedora und RHEL) verwenden Sie den Befehl <code translate="no">yum</code>, um das Paket zu installieren.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Bei DEB-basierten Systemen (z. B. Ubuntu und Debian) verwenden Sie den Befehl <code translate="no">apt</code>, um das Paket zu installieren.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.6-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Starten Sie Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">

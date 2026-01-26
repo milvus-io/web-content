@@ -57,11 +57,11 @@ title: 使用 RPM/DEB 套件安裝 Milvus 單機版
       </svg>
     </button></h2><p>您可以根據您的系統架構，從<a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.9">Milvus 發佈頁面下載</a> RPM/DEB 套件。</p>
 <ul>
-<li>對於 x86_64/amd64，請下載<strong>milvus_2.6.6-1_amd64.deb</strong>或<strong>milvus_2.6.6-1_amd64.rpm</strong>套件。</li>
-<li>對於 ARM64，請下載<strong>milvus_2.6.6-1_arm64.deb</strong>或<strong>milvus_2.6.6-1_arm64.rpm</strong>套件。</li>
+<li>對於 x86_64/amd64，請下載<strong>milvus_2.6.9-1_amd64.deb</strong>或<strong>milvus_2.6.9-1_amd64.rpm</strong>套件。</li>
+<li>對於 ARM64，請下載<strong>milvus_2.6.9-1_arm64.deb</strong>或<strong>milvus_2.6.9-1_arm64.rpm</strong>套件。</li>
 </ul>
 <p>以下指令假設您要在 x86_64/amd64 機器上執行 Milvus Standalone。</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.9-1_amd64.rpm -O milvus_2.6.9-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">安裝 RPM/DEB 套件<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,11 +80,11 @@ title: 使用 RPM/DEB 套件安裝 Milvus 單機版
       </svg>
     </button></h2><p>要安裝 RPM/DEB 套件，您可以使用系統的套件管理員。</p>
 <p>對於以 RPM 為基礎的系統 (例如 CentOS、Fedora 和 RHEL)，請使用<code translate="no">yum</code> 指令安裝套件。</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>對於以 DEB 為基礎的系統 (例如 Ubuntu 和 Debian)，請使用<code translate="no">apt</code> 指令來安裝套件。</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.6-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">啟動 Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">

@@ -24,6 +24,6 @@ summary: >-
     </button></h1><p>Milvus berdiri sebagai basis data vektor terdepan di kalangan pengguna perusahaan, dengan dukungan dari perusahaan-perusahaan terkemuka seperti Nvidia, Roblox, AT&amp;T, dan banyak lagi. Di bawah ini adalah daftar perusahaan yang telah berhasil mengintegrasikan Milvus ke dalam aplikasi mereka.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
+   <span class="img-wrapper"> <img translate="no" src="https://assets.zilliz.com/milvus_adopters_143e98c33b.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
    </span> <span class="img-wrapper"> <span>Pengadopsi Milvus</span> </span></p>
 <p>Kunjungi <a href="https://milvus.io/use-cases">halaman kasus penggunaan Milvus</a> untuk mengetahui bagaimana para pemimpin industri memanfaatkan Milvus untuk meningkatkan aplikasi AI mereka dan mempercepat pertumbuhan bisnis.</p>

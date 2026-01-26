@@ -59,11 +59,11 @@ title: Instalar o Milvus Standalone com o pacote RPM/DEB
       </svg>
     </button></h2><p>Pode descarregar o pacote RPM/DEB de acordo com a arquitetura do seu sistema a partir da <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.9">página Milvus Releases</a>.</p>
 <ul>
-<li>Para x86_64/amd64, baixe o pacote <strong>milvus_2.6.6-1_amd64.deb</strong> ou <strong>milvus_2.6.6-1_amd64.rpm</strong>.</li>
-<li>Para ARM64, baixe o pacote <strong>milvus_2.6.6-1_arm64.deb</strong> ou <strong>milvus_2.6.6-1_arm64.rpm</strong>.</li>
+<li>Para x86_64/amd64, baixe o pacote <strong>milvus_2.6.9-1_amd64.deb</strong> ou <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
+<li>Para ARM64, baixe o pacote <strong>milvus_2.6.9-1_arm64.deb</strong> ou <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>
 </ul>
 <p>O comando a seguir pressupõe que você vai executar o Milvus Standalone em uma máquina x86_64/amd64.</p>
-<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.6-1_amd64.rpm -O milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus_2.6.9-1_amd64.rpm -O milvus_2.6.9-1_amd64.rpm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-the-RPMDEB-Package" class="common-anchor-header">Instalar o pacote RPM/DEB<button data-href="#Install-the-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,11 +82,11 @@ title: Instalar o Milvus Standalone com o pacote RPM/DEB
       </svg>
     </button></h2><p>Para instalar o pacote RPM/DEB, você pode usar o gerenciador de pacotes do seu sistema.</p>
 <p>Para sistemas baseados em RPM (como CentOS, Fedora e RHEL), use o comando <code translate="no">yum</code> para instalar o pacote.</p>
-<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.6-1_amd64.rpm
+<pre><code translate="no" class="language-shell">yum install -y ./milvus_2.6.9-1_amd64.rpm
 rpm -qa| grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Para sistemas baseados em DEB (como Ubuntu e Debian), use o comando <code translate="no">apt</code> para instalar o pacote.</p>
-<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.6-1_amd64.deb
+<pre><code translate="no" class="language-shell">apt install -y  ./milvus_2.6.9-1_amd64.deb
 dpkg -l | grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus-Standalone" class="common-anchor-header">Iniciar o Milvus Standalone<button data-href="#Start-Milvus-Standalone" class="anchor-icon" translate="no">
@@ -214,6 +214,6 @@ dpkg -l | grep milvus
 <li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
 <li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
-<li><p>Explore o <a href="https://github.com/zilliztech/attu">Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

@@ -60,7 +60,7 @@ title: Milvus-Sicherung
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Aufbau von Milvus Backup</span> </span></p>
-<p>Milvus Backup ermöglicht die Sicherung und Wiederherstellung von Metadaten, Segmenten und Daten über Milvus-Instanzen hinweg. Es bietet Northbound-Schnittstellen, wie CLI, API und gRPC-basiertes Go-Modul, für die flexible Manipulation der Sicherungs- und Wiederherstellungsprozesse.</p>
+<p>Milvus Backup ermöglicht die Sicherung und Wiederherstellung von Metadaten, Segmenten und Daten über Milvus-Instanzen hinweg. Es bietet Northbound-Schnittstellen, wie CLI, API und gRPC-basiertes Go-Modul, für eine flexible Manipulation der Sicherungs- und Wiederherstellungsprozesse.</p>
 <p>Milvus Backup liest Sammlungsmetadaten und -segmente aus der Milvus-Quellinstanz, um ein Backup zu erstellen. Dann kopiert es Sammlungsdaten aus dem Stammverzeichnis der Milvus-Quellinstanz und speichert die kopierten Daten im Stammverzeichnis der Sicherung.</p>
 <p>Um von einem Backup wiederherzustellen, erstellt Milvus Backup eine neue Sammlung in der Ziel-Milvus-Instanz, basierend auf den Metadaten und Segmentinformationen der Sammlung im Backup. Anschließend kopiert es die Sicherungsdaten aus dem Stammverzeichnis der Sicherung in das Stammverzeichnis der Zielinstanz.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Kompatibilitätsmatrix<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
@@ -81,16 +81,17 @@ title: Milvus-Sicherung
     </button></h2><p>In der folgenden Tabelle sind die Kompatibilitäten zwischen den verschiedenen Milvus-Versionen seit Milvus Backup v0.5.7 aufgeführt.</p>
 <table>
 <thead>
-<tr><th>Sicherung ↓ / Wiederherstellung →</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th></tr>
+<tr><th>Sichern von ↓ / Wiederherstellen nach →</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th><th>Milvus v2.6.x</th></tr>
 </thead>
 <tbody>
-<tr><td>Milvus v2.2.x</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Milvus v2.3.x</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Milvus v2.4.x</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Milvus v2.5.x</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td></tr>
+<tr><td>Milvus v2.2.x</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Milvus v2.3.x</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Milvus v2.4.x</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Milvus v2.5.x</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Milvus v2.6.x</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td></tr>
 </tbody>
 </table>
-<h2 id="Latest-release" class="common-anchor-header">Neueste Version<button data-href="#Latest-release" class="anchor-icon" translate="no">
+<h2 id="Latest-release" class="common-anchor-header">Letzte Version<button data-href="#Latest-release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,5 +107,5 @@ title: Milvus-Sicherung
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7">v0.5.7</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.10">v0.5.10</a></li>
 </ul>

@@ -81,13 +81,14 @@ title: Резервное копирование Milvus
     </button></h2><p>В следующей таблице перечислены совместимости резервного копирования и восстановления между различными версиями Milvus, начиная с Milvus Backup v0.5.7.</p>
 <table>
 <thead>
-<tr><th>Резервное копирование ↓ / Восстановление →</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th></tr>
+<tr><th>Резервное копирование из ↓ / Восстановление в →</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th><th>Milvus v2.6.x</th></tr>
 </thead>
 <tbody>
-<tr><td>Milvus v2.2.x</td><td>Нет</td><td>Нет</td><td>Да</td><td>Да</td></tr>
-<tr><td>Milvus v2.3.x</td><td>Нет</td><td>Нет</td><td>Да</td><td>Да</td></tr>
-<tr><td>Milvus v2.4.x</td><td>Нет</td><td>Нет</td><td>Да</td><td>Да</td></tr>
-<tr><td>Milvus v2.5.x</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Да</td></tr>
+<tr><td>Milvus v2.2.x</td><td>Нет</td><td>Нет</td><td>Да</td><td>Да</td><td>Да</td></tr>
+<tr><td>Milvus v2.3.x</td><td>Нет</td><td>Нет</td><td>Да</td><td>Да</td><td>Да</td></tr>
+<tr><td>Milvus v2.4.x</td><td>Нет</td><td>Нет</td><td>Да</td><td>Да</td><td>Да</td></tr>
+<tr><td>Milvus v2.5.x</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Да</td><td>Да</td></tr>
+<tr><td>Milvus v2.6.x</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Да</td></tr>
 </tbody>
 </table>
 <h2 id="Latest-release" class="common-anchor-header">Последний релиз<button data-href="#Latest-release" class="anchor-icon" translate="no">
@@ -106,5 +107,5 @@ title: Резервное копирование Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7">v0.5.7</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.10">v0.5.10</a></li>
 </ul>

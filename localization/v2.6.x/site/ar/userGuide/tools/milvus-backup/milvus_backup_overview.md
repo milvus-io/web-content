@@ -79,13 +79,14 @@ title: ميلفوس النسخ الاحتياطي
     </button></h2><p>يسرد الجدول التالي قائمة بتوافق النسخ الاحتياطي والاستعادة بين إصدارات Milvus المختلفة منذ الإصدار 0.5.7 من Milvus Backup.</p>
 <table>
 <thead>
-<tr><th>النسخ الاحتياطي ↓/الاستعادة →</th><th>Milvus v2.2.x</th><th>ميلفوس v2.3.x</th><th>ميلفوس v2.4.x</th><th>Milvus v2.5.x</th></tr>
+<tr><th>النسخ الاحتياطي من ↓/الاستعادة إلى →</th><th>Milvus v2.2.x</th><th>ميلفوس v2.3.x</th><th>ميلفوس v2.4.x</th><th>Milvus v2.5.x</th><th>Milvus v2.6.x</th></tr>
 </thead>
 <tbody>
-<tr><td>Milvus v2.2.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>لا</td></tr>
-<tr><td>Milvus v2.3.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>نعم</td></tr>
-<tr><td>Milvus v2.4.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>نعم</td></tr>
-<tr><td>Milvus v2.5.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا يوجد</td><td>نعم</td></tr>
+<tr><td>Milvus v2.2.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>ميلفوس v2.3.x</td><td>لا يوجد</td><td>لا</td><td>لا</td><td>نعم</td><td>نعم</td></tr>
+<tr><td>Milvus v2.4.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>نعم نعم</td><td>نعم</td></tr>
+<tr><td>ميلفوس v2.5.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا يوجد</td><td>لا</td><td>لا</td></tr>
+<tr><td>ميلفوس v2.6.x</td><td>لا يوجد</td><td>لا يوجد</td><td>لا يوجد</td><td>لا يوجد</td><td>نعم</td></tr>
 </tbody>
 </table>
 <h2 id="Latest-release" class="common-anchor-header">أحدث إصدار<button data-href="#Latest-release" class="anchor-icon" translate="no">
@@ -104,5 +105,5 @@ title: ميلفوس النسخ الاحتياطي
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7">v0.5.7</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.10">v0.5.10</a></li>
 </ul>

@@ -40,10 +40,10 @@ title: 릴리스 노트
 <tr><th style="text-align:left">Milvus 버전</th><th style="text-align:left">Python SDK 버전</th><th style="text-align:left">Node.js SDK 버전</th><th style="text-align:left">Java SDK 버전</th><th style="text-align:left">Go SDK 버전</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.12</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.13</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.6.9의 출시를 발표하게 되어 기쁩니다! 이번 업데이트에서는 검색 결과에 대한 하이라이트 점수를 도입하고, 데이터 또는 스키마 변경 시 세그먼트 다시 열기 지원을 통해 세그먼트 관리를 강화하며, 스토리지 버전 처리를 개선했습니다. 주요 개선 사항으로는 로깅 성능 향상, 표현식 엔드포인트에 대한 보안 제어 강화, 텍스트 분석기 및 인덱스 구축 최적화가 있습니다. 이 릴리즈는 또한 메모리 추정 정확도, 기하학 데이터 변환, 다양한 안정성 수정 등 중요한 문제를 해결합니다. 2.6 브랜치를 사용 중인 모든 사용자는 시스템 안정성과 성능 향상을 위해 이 버전으로 업그레이드하는 것이 좋습니다.</p>
+<p>Milvus 2.6.9의 출시를 발표하게 되어 기쁘게 생각합니다! 이번 업데이트에서는 검색 결과에 대한 하이라이트 점수를 도입하고, 데이터 또는 스키마 변경 시 세그먼트 다시 열기 지원을 통해 세그먼트 관리를 강화하며, 스토리지 버전 처리를 개선했습니다. 주요 개선 사항으로는 로깅 성능 향상, 표현식 엔드포인트에 대한 보안 제어 강화, 텍스트 분석기 및 인덱스 구축 최적화가 있습니다. 이 릴리즈는 또한 메모리 추정 정확도, 기하학 데이터 변환, 다양한 안정성 수정 등 중요한 문제를 해결합니다. 2.6 브랜치를 사용 중인 모든 사용자는 시스템 안정성과 성능 향상을 위해 이 버전으로 업그레이드하는 것이 좋습니다.</p>
 <h3 id="Features" class="common-anchor-header">주요 기능<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -843,7 +843,7 @@ title: 릴리스 노트
 <li>문자열에서 이진 검색의 성능을 개선했습니다.<a href="https://github.com/milvus-io/milvus/pull/44469">(#44469</a>)</li>
 <li>쿼리에서 스파스 필터를 지원합니다. <a href="https://github.com/milvus-io/milvus/pull/44347">(#44347</a>)</li>
 <li>계층형 인덱스 기능 향상을 위한 다양한 업데이트.<a href="https://github.com/milvus-io/milvus/pull/44433">(#44433</a>)</li>
-<li>스칼라 및 벡터 검색에 대한 저장소 리소스 사용량 추적을 추가했습니다.<a href="https://github.com/milvus-io/milvus/pull/44414">(#44414</a> <a href="https://github.com/milvus-io/milvus/pull/44308">#44308</a>)</li>
+<li>스칼라 및 벡터 검색을 위한 저장 공간 리소스 사용량 추적이 추가되었습니다.<a href="https://github.com/milvus-io/milvus/pull/44414">(#44414</a> <a href="https://github.com/milvus-io/milvus/pull/44308">#44308</a>)</li>
 <li>삭제/삽입/보존에 대한 저장소 사용량 추가<a href="https://github.com/milvus-io/milvus/pull/44512">(#44512</a>)</li>
 <li><code translate="no">flushall</code> 작업에 대한 세분화된 플러시 타겟을 활성화했습니다.<a href="https://github.com/milvus-io/milvus/pull/44234">(#44234</a>)</li>
 <li>데이터노드는 이제 더 나은 리소스 관리를 위해 비싱글톤 파일 시스템을 사용합니다.<a href="https://github.com/milvus-io/milvus/pull/44418">(#44418</a>)</li>

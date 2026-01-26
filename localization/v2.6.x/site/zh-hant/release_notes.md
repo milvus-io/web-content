@@ -40,7 +40,7 @@ title: 發佈筆記
 <tr><th style="text-align:left">Milvus 版本</th><th style="text-align:left">Python SDK 版本</th><th style="text-align:left">Node.js SDK 版本</th><th style="text-align:left">Java SDK 版本</th><th style="text-align:left">Go SDK 版本</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.12</td><td style="text-align:left">2.6.1</td></tr>
+<tr><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.6</td><td style="text-align:left">2.6.9</td><td style="text-align:left">2.6.13</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
 <p>我們很高興地宣佈 Milvus 2.6.9 正式發行！此更新引入了搜尋結果的高亮度分數，增強了區段管理，支援在資料或模式變更時重新開啟區段，並改善了儲存版本處理。主要的改進包括更好的日誌記錄效能、增強表達端點的安全控制，以及優化文字分析器和索引建立。此版本還解決了包括記憶體估計精確度、幾何資料轉換等關鍵問題，以及各種穩定性修復。我們建議所有 2.6 分支的使用者升級至此版本，以改善系統的可靠性與效能。</p>
@@ -220,7 +220,7 @@ title: 發佈筆記
 <li>新增監控 Jemalloc 快取記憶體的指標<a href="https://github.com/milvus-io/milvus/pull/45973">(#45973</a>)</li>
 <li>當叢集配額改變時，改善了磁碟配額指標的準確性<a href="https://github.com/milvus-io/milvus/pull/46304">(#46304</a>)</li>
 <li>改善標量表達式的追蹤可觀察性<a href="https://github.com/milvus-io/milvus/pull/45823">(#45823</a>)</li>
-<li>拒絕 upsert 批次請求中重複的主索引鍵<a href="https://github.com/milvus-io/milvus/pull/46035">(#46035</a>)</li>
+<li>拒絕 upsert 批次請求中的重複主索引鍵<a href="https://github.com/milvus-io/milvus/pull/46035">(#46035</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">錯誤修正<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -241,7 +241,7 @@ title: 發佈筆記
 <li>修正了 RBAC ETCD 前綴匹配，以防止潛在的資料洩漏<a href="https://github.com/milvus-io/milvus/pull/46708">(#46708</a>)</li>
 <li>修正了本地存儲模式下錯誤的根路徑處理<a href="https://github.com/milvus-io/milvus/pull/46693">(#46693</a>)</li>
 <li>修正了 JSON 欄位中<code translate="no">int64</code>/<code translate="no">float</code> 混合類型的處理<a href="https://github.com/milvus-io/milvus/pull/46682">(#46682</a>)</li>
-<li>修正集群升級時文字日誌載入失敗的問題<a href="https://github.com/milvus-io/milvus/pull/46698">(#46698</a>)</li>
+<li>修正群集升級時文字日誌載入失敗的問題<a href="https://github.com/milvus-io/milvus/pull/46698">(#46698</a>)</li>
 <li>防止在原始資料清理過程中刪除其他欄位<a href="https://github.com/milvus-io/milvus/pull/46689">(#46689</a>)</li>
 <li>修正了使用多個分析器高亮時的失敗<a href="https://github.com/milvus-io/milvus/pull/46664">(#46664</a>)</li>
 <li>確保在作業系統退出時會刷新日誌<a href="https://github.com/milvus-io/milvus/pull/46609">(#46609</a>)</li>
@@ -792,7 +792,7 @@ title: 發佈筆記
 <tr><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.2</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.5</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>我們很高興地宣布推出 Milvus 2.6.3，它引入了各種令人興奮的新功能、改進和關鍵錯誤修復。該版本增強了系統性能，擴展了功能，並修復了關鍵問題，為所有用戶提供了更穩定的體驗。以下是此版本的重點內容：</p>
+<p>我們很高興地宣布推出 Milvus 2.6.3，它引入了各種令人振奮的新功能、改進和關鍵錯誤修復。該版本增強了系統性能，擴展了功能，並修復了關鍵問題，為所有用戶提供了更穩定的體驗。以下是此版本的重點內容：</p>
 <h3 id="New-Features" class="common-anchor-header">新功能<button data-href="#New-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1048,7 +1048,7 @@ title: 發佈筆記
 <tr><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.1</td><td style="text-align:left">2.6.0</td><td style="text-align:left">2.6.3</td><td style="text-align:left">2.6.1</td></tr>
 </tbody>
 </table>
-<p>我們很高興地宣佈 Milvus 2.6.1 正式發行！此版本以先前版本的主要架構進步為基礎，提供了專注於生產穩定性、效能和操作穩健性的重要增強功能。此版本回應了主要的社群回饋，並強化了系統的大規模部署。我們強烈鼓勵所有使用者升級，從更穩定、效能更佳且更可靠的系統中獲益。</p>
+<p>我們很高興地宣佈 Milvus 2.6.1 正式發行！此版本以先前版本的主要架構進展為基礎，提供了專注於生產穩定性、效能和操作穩健性的重要增強功能。此版本回應了主要的社群回饋，並強化了系統的大規模部署。我們強烈鼓勵所有使用者升級，從更穩定、效能更佳且更可靠的系統中獲益。</p>
 <h3 id="Improvements" class="common-anchor-header">改進<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1296,7 +1296,7 @@ title: 發佈筆記
 <li>Slop (選用)：一個可調整的參數，允許少量的詞彙間隔，以實現模糊短語匹配。</li>
 </ul>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/phrase-match.md">短語匹配</a>。</p>
-<h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">MinHash LSH 索引 (Beta)</h4><p>為解決模型訓練中重複資料刪除的需求，Milvus 2.6 新增 MINHASH_LSH 索引的支援。此功能提供了一種計算效率高且可擴充的方法，用來估計文件之間的 Jaccard 相似性，以辨識近乎重複的文件。使用者可以在預處理時為文字文件產生 MinHash 簽章，並在 Milvus 中使用 MINHASH_LSH 索引來有效率地在大型資料集中尋找相似的內容，改善資料清理與模型品質。</p>
+<h4 id="MinHash-LSH-Index-Beta" class="common-anchor-header">MinHash LSH 索引 (Beta)</h4><p>為解決模型訓練中重複資料刪除的需求，Milvus 2.6 新增 MINHASH_LSH 索引的支援。此功能提供了一種計算效率高且可擴充的方法，用來估計文件間的 Jaccard 相似性，以辨識近乎重複的文件。使用者可以在預處理時為文字文件產生 MinHash 簽章，並在 Milvus 中使用 MINHASH_LSH 索引來有效率地在大型資料集中尋找相似的內容，改善資料清理與模型品質。</p>
 <h4 id="Time-Aware-Decay-Functions" class="common-anchor-header">時間感知衰減函數</h4><p>Milvus 2.6 引入了時間感知衰減函數，以應對資訊價值隨時間變化的情況。在結果重新排序時，使用者可以根據時間戳欄位套用指數、高斯或線性衰減函數，以調整文件的相關性得分。這可確保較近期的內容能獲得優先排序，這對於新聞饋送、電子商務和 AI 代理的記憶體等應用程式來說至關重要。</p>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/decay-ranker-overview.md">Decay Ranker 概觀</a>。</p>
 <h4 id="Add-Field-for-Online-Schema-Evolution" class="common-anchor-header">新增線上模式演進欄位</h4><p>為了提供更高的模式彈性，Milvus 2.6 現在支援線上新增標量欄位到現有資料集的模式。這避免了在應用程式需求改變時，需要建立新的資料集和執行擾亂性的資料遷移。</p>
