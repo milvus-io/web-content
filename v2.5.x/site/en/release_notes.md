@@ -8,6 +8,31 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.26
+
+Release date: January 27, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.5.26         | 2.5.18             | 2.5.13              | 2.5.14           | 2.5.14         |
+
+We are pleased to announce the release of Milvus 2.5.26! This release includes critical security enhancements and important stability fixes. A key highlight is the addition of security controls for the internal `/expr` endpoint to prevent potential remote expression execution vulnerabilities. We have also upgraded the Pulsar client library to fix race conditions, resolved L0 segment data forwarding issues, and fixed Azure storage precheck configuration problems. We strongly recommend all users on the 2.5 branch upgrade to this version.
+
+### Security
+
+- Added security controls for the `/expr` endpoint to prevent remote expression execution vulnerabilities ([#47130](https://github.com/milvus-io/milvus/pull/47130))
+
+### Improvements
+
+- Upgraded pulsar-client-go to v0.17.0 to fix send buffer race conditions ([#47184](https://github.com/milvus-io/milvus/pull/47184))
+- Added gRPC metadata header for client request time tracking ([#46946](https://github.com/milvus-io/milvus/pull/46946))
+
+### Bug fixes
+
+- Fixed L0 growing segment data forwarding to use the correct bulk delta-load API ([#47231](https://github.com/milvus-io/milvus/pull/47231))
+- Fixed Azure blob storage precheck using incorrect bucket configuration ([#47204](https://github.com/milvus-io/milvus/pull/47204))
+- Fixed geometry data conversion inconsistencies in WKT/WKB options ([#46872](https://github.com/milvus-io/milvus/pull/46872))
+
 ## v2.5.25
 
 Release date: January 12, 2026
