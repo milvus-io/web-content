@@ -44,7 +44,7 @@ title: Обновление кластера Milvus с помощью диагр
 <li>Версия Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
-<p>Начиная с версии Milvus-Helm chart 4.2.21, мы ввели зависимость от графика pulsar-v3.x. Для обратной совместимости, пожалуйста, обновите ваш helm до версии 3.14 или более поздней, и не забудьте добавить опцию <code translate="no">--reset-then-reuse-values</code> при каждом использовании <code translate="no">helm upgrade</code>.</p>
+<p>Начиная с версии Milvus-Helm chart 4.2.21, мы добавили в качестве зависимости график pulsar-v3.x. Для обратной совместимости, пожалуйста, обновите ваш helm до версии 3.14 или более поздней, и не забудьте добавить опцию <code translate="no">--reset-then-reuse-values</code> при каждом использовании <code translate="no">helm upgrade</code>.</p>
 </div>
 <h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">Проверка диаграммы Milvus Helm<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы можете выбрать путь обновления для своего Milvus следующим образом:</p>
-<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.5.25.</div>
+<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.5.26.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.5.25.</p></li>
-<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.5.25.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.5.26.</p></li>
+<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.5.26.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Проведение скользящего обновления<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,14 +145,14 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Операция</td><td><code translate="no">update</code></td><td>Ложь</td></tr>
 </tbody>
 </table>
-<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.5.25.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.25 -w &#x27;milvusdb/milvus:v2.5.25&#x27;
+<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.5.26.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.26 -w &#x27;milvusdb/milvus:v2.5.26&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
 <li>Сценарий жестко кодирует порядок обновления развертываний и не может быть изменен.</li>
 <li>Сценарий использует <code translate="no">kubectl patch</code> для обновления развертываний и <code translate="no">kubectl rollout status</code> для отслеживания их состояния.</li>
-<li>Скрипт использует <code translate="no">kubectl patch</code> для обновления метки <code translate="no">app.kubernetes.io/version</code> развертываний на ту, которая указана после флага <code translate="no">-t</code> в команде.</li>
+<li>Скрипт использует <code translate="no">kubectl patch</code> для обновления метки <code translate="no">app.kubernetes.io/version</code> развертываний на метку, указанную после флага <code translate="no">-t</code> в команде.</li>
 </ol>
 </div>
 </div>
@@ -334,7 +334,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><p>Установите <code translate="no">-d true</code>, если вы хотите автоматически удалить миграционную капсулу после завершения миграции.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -w milvusdb/milvus:v2.2.0 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Откатитесь и выполните миграцию снова, если миграция не удалась.</p>
+<li><p>Откатитесь и выполните миграцию заново, если миграция не удалась.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o rollback -w milvusdb/milvus:v2.1.4
 ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o migrate -w milvusdb/milvus:v2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
