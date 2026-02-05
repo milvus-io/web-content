@@ -72,7 +72,7 @@ If you prefer to deploy Milvus in standalone mode (single node) for development 
 
 ```bash
 helm install my-release zilliztech/milvus \
-  --set image.all.tag=v2.6.9 \
+  --set image.all.tag=v2.6.10 \
   --set cluster.enabled=false \
   --set pulsarv3.enabled=false \
   --set standalone.messageQueue=woodpecker \
@@ -86,11 +86,11 @@ helm install my-release zilliztech/milvus \
 
 **Deploy Milvus cluster:**
 
-The following command deploys a Milvus cluster with optimized settings for v2.6.9, using Woodpecker as the recommended message queue:
+The following command deploys a Milvus cluster with optimized settings for v2.6.10, using Woodpecker as the recommended message queue:
 
 ```bash
 helm install my-release zilliztech/milvus \
-  --set image.all.tag=v2.6.9 \
+  --set image.all.tag=v2.6.10 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -121,7 +121,7 @@ If you prefer to use **Pulsar** (traditional choice) instead of Woodpecker:
 
 ```bash
 helm install my-release zilliztech/milvus \
-  --set image.all.tag=v2.6.9 \
+  --set image.all.tag=v2.6.10 \
   --set streaming.enabled=true \
   --set indexNode.enabled=false
 ```
@@ -157,7 +157,7 @@ Verify that your deployment is successful by checking the pod status:
 kubectl get pods
 ```
 
-**Wait for all pods to show "Running" status.** With the v2.6.9 configuration, you should see pods similar to:
+**Wait for all pods to show "Running" status.** With the v2.6.10 configuration, you should see pods similar to:
 
 ```
 NAME                                             READY  STATUS   RESTARTS  AGE

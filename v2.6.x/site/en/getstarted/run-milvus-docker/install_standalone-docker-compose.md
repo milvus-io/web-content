@@ -21,7 +21,7 @@ Milvus provides a Docker Compose configuration file in the Milvus repository. To
 
 ```shell
 # Download the configuration file
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.6.10/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 # Start Milvus
 $ sudo docker compose up -d
@@ -33,12 +33,12 @@ Creating milvus-standalone ... done
 
 <div class="alert note">
 
-**What's new in v2.6.9:**
+**What's new in v2.6.10:**
 - **Enhanced Architecture**: Features the new Streaming Node and optimized components
 - **Updated Dependencies**: Includes the latest MinIO and etcd versions
 - **Improved Configuration**: Optimized settings for better performance
 
-Always download the latest Docker Compose configuration to ensure compatibility with v2.6.9 features.
+Always download the latest Docker Compose configuration to ensure compatibility with v2.6.10 features.
 
 - If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If this is the case, you are advised to migrate to Docker Compose V2 due to the notes on [this page](https://docs.docker.com/compose/).
 
