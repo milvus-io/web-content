@@ -64,7 +64,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><p>Перед установкой Milvus рекомендуется использовать <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> для оценки требований к оборудованию в зависимости от объема данных. Это поможет обеспечить оптимальную производительность и распределение ресурсов при установке Milvus.</p></li>
 </ul>
 <div class="alert note">
-<p>Если у вас возникнут проблемы с установкой образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a> и подробно расскажите о проблеме, и мы предоставим вам необходимую поддержку.</p>
+<p>Если у вас возникнут проблемы с установкой образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a> и подробно расскажите о проблеме, и мы окажем вам необходимую поддержку.</p>
 </div>
 <h2 id="Install-Milvus-Operator" class="common-anchor-header">Установка Milvus Operator<button data-href="#Install-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>После того как капсула Milvus Operator запущена, вы можете развернуть кластер Milvus следующим образом.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Команда выше развертывает кластер Milvus с <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии 2.6.9) и всеми новыми архитектурными компонентами, включая Streaming Node.</p>
+<p>Команда выше развертывает кластер Milvus с <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии 2.6.10) и всеми новыми архитектурными компонентами, включая Streaming Node.</p>
 <p><strong>Основные элементы архитектуры в этом развертывании:</strong></p>
 <ul>
 <li><strong>Очередь сообщений</strong>: <a href="/docs/ru/use-woodpecker.md">Используется Woodpecker</a> (сокращает обслуживание инфраструктуры).</li>

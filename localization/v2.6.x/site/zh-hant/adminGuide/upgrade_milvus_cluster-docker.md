@@ -20,7 +20,7 @@ title: 使用 Docker Compose 升級 Milvus 叢集
         ></path>
       </svg>
     </button></h1><p>本主題描述如何使用 Docker Compose 升級您的 Milvus。</p>
-<p>在一般情況下，您可以<a href="#Upgrade-Milvus-by-changing-its-image">透過變更映像檔來升級 Milvus</a>。然而，在從 v2.1.x 升級到 v2.6.9 之前，您需要<a href="#Migrate-the-metadata">先遷移元資料</a>。</p>
+<p>在一般情況下，您可以<a href="#Upgrade-Milvus-by-changing-its-image">透過變更映像檔來升級 Milvus</a>。然而，在從 v2.1.x 升級到 v2.6.10 之前，您需要<a href="#Migrate-the-metadata">先遷移元資料</a>。</p>
 <div class="alert note">
 <p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.9 時，您必須維持目前的訊息佇列選擇。升級期間不支援在不同的訊息佇列系統之間切換。在未來的版本中，將會支援變更訊息佇列系統。</p>
 </div>
@@ -39,42 +39,42 @@ title: 使用 Docker Compose 升級 Milvus 叢集
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在一般情況下，您可以按以下方式升級 Milvus：</p>
+    </button></h2><p>在一般情況下，你可以按以下方法升級 Milvus：</p>
 <ol>
 <li><p>在<code translate="no">docker-compose.yaml</code> 中變更 Milvus 的映像標籤。</p>
 <p>請注意，您需要變更 Proxy、所有協調器和所有 Worker 節點的映像標籤。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">rootcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.10</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-proxy</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.10</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querycoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querycoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span>  
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.10</span>  
 <span class="hljs-string">...</span>
 <span class="hljs-attr">querynode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querynode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.10</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexcoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexcoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.10</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">indexnode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexnode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span> 
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.10</span> 
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datacoord:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datacoord</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span>   
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.10</span>   
 <span class="hljs-string">...</span>
 <span class="hljs-attr">datanode:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.10</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>執行下列指令以執行升級。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -108,7 +108,7 @@ docker compose up -d
   <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
 <span class="hljs-attr">config:</span>
   <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.9</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.6</span><span class="hljs-number">.10</span>
   <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
 <span class="hljs-attr">metastore:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>

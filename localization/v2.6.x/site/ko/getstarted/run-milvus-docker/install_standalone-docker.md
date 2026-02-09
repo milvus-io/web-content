@@ -63,7 +63,7 @@ title: Docker에서 Milvus 실행하기(Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.9의 새로운 기능:</strong></p>
+<p><strong>v2.6.10의 새로운 기능:</strong></p>
 <ul>
 <li><strong>스트리밍 노드</strong>: 향상된 데이터 처리 기능</li>
 <li><strong>Woodpecker MQ</strong>: 유지 관리 오버헤드가 줄어든 메시지 큐 개선, 자세한 내용은 <a href="/docs/ko/use-woodpecker.md">Woodpecker 사용</a> 참조</li>
@@ -197,5 +197,5 @@ EOF
 <li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
 <li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링하기</a>.</p></li>
 </ul>

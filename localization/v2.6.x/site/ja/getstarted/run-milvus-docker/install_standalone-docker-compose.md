@@ -57,7 +57,7 @@ title: Docker ComposeでMilvusを起動する(Linux)
       </svg>
     </button></h2><p>MilvusはDocker Composeの設定ファイルをMilvusリポジトリに用意しています。Docker Composeを使用してMilvusをインストールするには、以下を実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.10/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.9の新機能</strong></p>
+<p><strong>v2.6.10の新機能</strong></p>
 <ul>
 <li><strong>アーキテクチャの強化</strong>：新しいStreaming Nodeと最適化されたコンポーネントが特徴です。</li>
 <li><strong>更新された依存関係</strong>：最新のMinIOとetcdバージョンを含む</li>
 <li><strong>設定の改善</strong>：最適化された設定によりパフォーマンスが向上</li>
 </ul>
-<p>v2.6.9の機能との互換性を確保するため、常に最新のDocker Compose設定をダウンロードしてください。</p>
+<p>v2.6.10の機能との互換性を確保するため、常に最新のDocker Compose設定をダウンロードしてください。</p>
 <ul>
 <li><p>上記コマンドの実行に失敗した場合は、システムにDocker Compose V1がインストールされているか確認してください。もしそうであれば、<a href="https://docs.docker.com/compose/">このページの</a>注意事項に従ってDocker Compose V2に移行することをお勧めします。</p></li>
 <li><p>もしイメージのプルに関して問題が発生した場合は、<a href="mailto:community@zilliz.com">community@zilliz.com</a>まで問題の詳細をご連絡ください。</p></li>
@@ -83,7 +83,7 @@ Creating milvus-standalone ... done
 <ul>
 <li><strong>milvus-standalone</strong>、<strong>milvus-minio</strong>、<strong>milvus-etcdという</strong>名前のコンテナが立ち上がっています。<ul>
 <li><strong>milvus-etcd</strong>コンテナはホストにポートを公開せず、カレントフォルダ内の<strong>volumes/etcdに</strong>データをマッピングする。</li>
-<li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してポート<strong>9090</strong>および<strong>9091</strong>をローカルに提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマップする。</li>
+<li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してポート<strong>9090</strong>および<strong>9091</strong>をローカルに提供し、そのデータをカレントフォルダ内の<strong>volumes/minio</strong>にマップする。</li>
 <li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルにポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマップする。</li>
 </ul></li>
 </ul>

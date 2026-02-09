@@ -60,7 +60,7 @@ title: Instalar o Milvus Python SDK
     </button></h2><p>O PyMilvus está disponível no <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <div class="alert note">
 Recomenda-se a instalação de uma versão do PyMilvus que corresponda à versão do servidor Milvus que instalou. Para obter mais informações, consulte <a href="/docs/pt/release_notes.md">as Notas de versão</a>.</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">6</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">8</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verificar a instalação<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,7 +102,7 @@ Recomenda-se a instalação de uma versão do PyMilvus que corresponda à versã
 <li><a href="/docs/pt/manage-collections.md">Gerir colecções</a></li>
 <li><a href="/docs/pt/manage-partitions.md">Gerir partições</a></li>
 <li><a href="/docs/pt/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
-<li><a href="/docs/pt/single-vector-search.md">Pesquisa de um único vetor</a></li>
+<li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p>Explorar <a href="/api-reference/pymilvus/v2.4.x/About.md">a referência da API do PyMilvus</a></p></li>

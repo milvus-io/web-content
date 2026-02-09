@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>一旦 Milvus Operator pod 運行，您就可以按以下方式部署 Milvus 叢集。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面的指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列（建議使用 v2.6.9）的 Milvus 叢集，以及包括 Streaming Node 在內的所有新架構元件。</p>
+<p>上面的指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列（建議使用 v2.6.10）的 Milvus 叢集，以及包括 Streaming Node 在內的所有新架構元件。</p>
 <p><strong>此部署中的架構重點：</strong></p>
 <ul>
 <li><strong>訊息佇列</strong>：<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>(減少基礎架構維護)</li>
@@ -281,7 +281,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以選擇在上述指令中使用<code translate="no">:19530</code> 而不是<code translate="no">27017:19530</code> ，讓<code translate="no">kubectl</code> 替您分配一個本機連接埠，這樣您就不必管理連接埠衝突。</p>
-<p>預設情況下，kubectl 的連接埠轉發只會在<code translate="no">localhost</code> 上監聽。如果您希望 Milvus 監聽選定或所有的 IP 位址，請使用<code translate="no">address</code> 。以下指令會讓 port-forward 聆聽主機上所有的 IP 位址。</p>
+<p>預設情況下，kubectl 的連接埠轉發只會監聽<code translate="no">localhost</code> 。如果您希望 Milvus 監聽選定或所有的 IP 位址，請使用<code translate="no">address</code> 。以下指令會讓 port-forward 聆聽主機上所有的 IP 位址。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -401,7 +401,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>在 Docker 中安裝 Milvus 後，您就可以：</p>
 <ul>
-<li><p>檢查<a href="/docs/zh-hant/quickstart.md">Hello Milvus</a>，看看 Milvus 可以做什麼。</p></li>
+<li><p>檢查<a href="/docs/zh-hant/quickstart.md">Hello Milvus</a>，看看 Milvus 能做什麼。</p></li>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh-hant/manage_databases.md">管理資料庫</a></li>

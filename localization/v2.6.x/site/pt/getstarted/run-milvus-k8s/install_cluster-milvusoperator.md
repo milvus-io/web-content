@@ -2,7 +2,7 @@
 id: install_cluster-milvusoperator.md
 label: Milvus Operator
 related_key: Kubernetes
-summary: Saiba como instalar o cluster Milvus no Kubernetes usando o Milvus Operator
+summary: Saiba como instalar o cluster do Milvus no Kubernetes usando o Milvus Operator
 title: Instalar o Milvus Cluster com o Milvus Operator
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Executar o Milvus no Kubernetes com o Milvus Operator<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
@@ -173,8 +173,8 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Depois que o pod do Milvus Operator estiver em execução, você poderá implantar um cluster do Milvus da seguinte maneira.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O comando acima implementa um cluster Milvus com o <strong>Woodpecker</strong> como fila de mensagens (recomendado para a v2.6.9) e todos os novos componentes de arquitetura, incluindo o nó de fluxo contínuo.</p>
-<p><strong>Destaques da arquitetura nesta implementação:</strong></p>
+<p>O comando acima implementa um cluster Milvus com o <strong>Woodpecker</strong> como fila de mensagens (recomendado para a v2.6.10) e todos os novos componentes de arquitetura, incluindo o nó de fluxo contínuo.</p>
+<p><strong>Destaques da arquitetura nesta implantação:</strong></p>
 <ul>
 <li><strong>Fila de mensagens</strong>: <a href="/docs/pt/use-woodpecker.md">Usa o Woodpecker</a> (reduz a manutenção da infraestrutura)</li>
 <li><strong>Nó de streaming</strong>: Habilitado para processamento de dados aprimorado</li>
@@ -356,7 +356,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Quando você exclui o cluster do Milvus usando a configuração padrão, as dependências como etcd, Pulsar e MinIO não são excluídas. Portanto, da próxima vez que instalar a mesma instância do cluster Milvus, essas dependências serão usadas novamente.</li>
+<li>Quando você exclui o cluster do Milvus usando a configuração padrão, as dependências como etcd, Pulsar e MinIO não são excluídas. Portanto, na próxima vez que instalar a mesma instância do cluster Milvus, essas dependências serão usadas novamente.</li>
 <li>Para eliminar as dependências e as reivindicações de volume persistente (PVCs) juntamente com o cluster Milvus, consulte o <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">ficheiro de configuração</a>.</li>
 </ul>
 </div>

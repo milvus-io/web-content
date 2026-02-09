@@ -60,7 +60,7 @@ title: Milvus Python SDKのインストール
     </button></h2><p>PyMilvusは<a href="https://pypi.org/project/pymilvus/">Python Package Indexに</a>あります。</p>
 <div class="alert note">
 インストールしたMilvusサーバのバージョンに合ったバージョンのPyMilvusをインストールすることを推奨します。詳細については、<a href="/docs/ja/release_notes.md">リリースノートを</a>参照してください。</div>
-<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">6</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.6</span>.<span class="hljs-number">8</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">インストールの確認<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

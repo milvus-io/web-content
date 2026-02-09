@@ -90,7 +90,7 @@ title: 管理資源群組
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本頁面的所有程式碼範例都在 PyMilvus 2.6.6 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
+<p>本頁面的所有程式碼範例都在 PyMilvus 2.6.8 中。在執行它們之前，請先升級您的 PyMilvus 安裝。</p>
 </div>
 <ol>
 <li><p>建立資源群組</p>
@@ -136,7 +136,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>在資源群組之間轉移節點。</p>
-<p>您可能會注意到所描述的資源群組還沒有任何查詢節點。從預設資源群組移動一些節點到您建立的資源群組，如下所示： 假設目前群組的<strong>__default_resource_group</strong>中有 1 個 QueryNodes，而我們想要移動一個節點到建立的<strong>rg</strong>。<code translate="no">update_resource_groups</code> 確保多重組態變更的原子性，因此 Milvus 看不到任何中間狀態。</p>
+<p>您可能會注意到所描述的資源群組還沒有任何查詢節點。從預設資源群組移動一些節點到您建立的資源群組，如下所示：假設目前群組的<strong>__default_resource_group</strong>中有 1 個 QueryNodes，而我們想要將一個節點轉移到建立的<strong>rg</strong> 中。<code translate="no">update_resource_groups</code> 確保多重組態變更的原子性，因此 Milvus 看不到任何中間狀態。</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -197,7 +197,7 @@ num_replicas = <span class="hljs-number">1</span>
 
 <span class="hljs-comment"># Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>丟棄資源群組。</p>
+<li><p>刪除資源群組。</p>
 <p>您可以隨時刪除沒有查詢節點的資源群組 (<code translate="no">limits.node_num = 0</code>)。在本指南中，資源群組<code translate="no">rg</code> 現在有一個查詢節點。您需要先將資源群組<code translate="no">limits.node_num</code> 的配置變更為零。</p>
 <pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
 try:
