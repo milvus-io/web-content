@@ -11,7 +11,7 @@ This guide outlines the steps to build an index with GPU support in Milvus, whic
 
 <div class="alert warning">
 
-This page has been deprecated. For the latest implementation, refer to [GPU Index Overview](./gpu-index-overview.md)
+This page has been deprecated. For the latest implementation, refer to [GPU Index Overview](gpu-index-overview.md)
 
 </div>
 
