@@ -22,6 +22,9 @@ title: Index with GPU
         ></path>
       </svg>
     </button></h1><p>This guide outlines the steps to build an index with GPU support in Milvus, which can significantly improve search performance in high-throughput and high-recall scenarios. For details on the types of GPU indexes supported by Milvus, refer to <a href="/docs/gpu_index.md">GPU Index</a>.</p>
+<div class="alert warning">
+<p>This page has been deprecated. For the latest implementation, refer to <a href="/docs/./gpu-index-overview.md">GPU Index Overview</a></p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configure Milvus settings for GPU memory control<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
