@@ -9,6 +9,12 @@ title: Index Vector Fields
 
 This guide walks you through the basic operations on creating and managing indexes on vector fields in a collection. 
 
+<div class="alert warning">
+
+This page has been deprecated. For the latest implementation, refer to [IVF_FLAT](ivf-flat.md), [HNSW](hnsw.md), and more.
+
+</div>
+
 ## Overview
 
 Leveraging the metadata stored in an index file, Milvus organizes your data in a specialized structure, facilitating rapid retrieval of requested information during searches or queries.
