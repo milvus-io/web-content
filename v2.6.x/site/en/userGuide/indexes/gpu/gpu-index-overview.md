@@ -8,9 +8,23 @@ summary: "Building an index with GPU support in Milvus can significantly improve
 
 Building an index with GPU support in Milvus can significantly improve search performance in high-throughput and high-recall scenarios.
 
-The following figure compares the query throughput (queries per second) of various index configurations across different hardware setups, vector datasets (Cohere and OpenAI), and search batch sizes, showing that `GPU_CAGRA` consistently outperforms other methods.
+The following figure compares query throughput (queries per second) across index configurations, hardware setups, vector datasets (Cohere and OpenAI), and search batch sizes, showing that `GPU_CAGRA` consistently outperforms other methods.
 
 ![Gpu Index Performance](../../../../../assets/gpu-index-performance.png)
+
+## Configure GPU memory pool for Milvus
+
+Milvus supports a global GPU memory pool and provides two configuration parameters, `initMemSize` and `maxMemSize`, in [Milvus config file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769). 
+
+```yaml
+gpu:
+  initMemSize: 0 # set the initial memory pool size.
+  maxMemSize: 0 # sets the maximum memory usage limit. When the memory usage exceeds initMemSize, Milvus will attempt to expand the memory pool.
+```
+
+The default `initMemSize` is usually half the GPU memory when Milvus starts, and `maxMemSize` defaults to the entire GPU memory. The GPU memory pool size is initially set to `initMemSize` and will automatically expand to `maxMemSize` as needed.
+
+When a GPU-enabled index is specified, Milvus loads the target collection data into GPU memory before searches, so `maxMemSize` must be at least the data size.
 
 ## Limits
 
