@@ -22,6 +22,9 @@ title: Index Vector Fields
         ></path>
       </svg>
     </button></h1><p>This guide walks you through the basic operations on creating and managing indexes on vector fields in a collection.</p>
+<div class="alert warning">
+<p>This page has been deprecated. For the latest implementation, refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/hnsw.md">HNSW</a>, and more.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
