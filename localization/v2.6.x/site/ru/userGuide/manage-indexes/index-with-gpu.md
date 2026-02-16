@@ -21,7 +21,10 @@ title: Индекс с GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В этом руководстве описаны шаги по созданию индекса с поддержкой GPU в Milvus, который может значительно повысить производительность поиска в сценариях с высокой пропускной способностью и большим количеством обращений. Подробные сведения о типах индексов с поддержкой GPU в Milvus см. в разделе <a href="/docs/ru/gpu_index.md">Индекс GPU</a>.</p>
+    </button></h1><p>В этом руководстве описаны шаги по созданию индекса с поддержкой GPU в Milvus, который может значительно повысить производительность поиска в сценариях с высокой пропускной способностью и большим количеством обращений. Подробную информацию о типах индексов с поддержкой GPU в Milvus см. в разделе <a href="/docs/ru/gpu_index.md">Индекс GPU</a>.</p>
+<div class="alert warning">
+<p>Эта страница была устаревшей. Для получения информации о новейшей реализации см. раздел <a href="/docs/ru/gpu-index-overview.md">Обзор индексов GPU.</a></p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Настройка параметров Milvus для управления памятью GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +69,22 @@ title: Индекс с GPU
         ></path>
       </svg>
     </button></h2><p>В следующих примерах показано, как создавать GPU-индексы разных типов.</p>
-<h3 id="Prepare-index-parameters" class="common-anchor-header">Подготовка параметров индекса</h3><p>При настройке параметров индекса GPU определите <strong>index_type</strong>, <strong>metric_type</strong> и <strong>params</strong>:</p>
+<h3 id="Prepare-index-parameters" class="common-anchor-header">Подготовка параметров индекса<button data-href="#Prepare-index-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При настройке параметров индекса GPU определите <strong>index_type</strong>, <strong>metric_type</strong> и <strong>params</strong>:</p>
 <ul>
 <li><p><strong>index_type</strong><em>(string</em>): Тип индекса, используемого для ускорения векторного поиска. Возможные варианты: <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong> и <strong>GPU_BRUTE_FORCE</strong>.</p></li>
 <li><p><strong>metric_type</strong><em>(строка</em>): Тип метрики, используемой для измерения сходства векторов. Возможные варианты: <strong>IP</strong> и <strong>L2</strong>.</p></li>
@@ -114,7 +132,22 @@ title: Индекс с GPU
 <button class="copy-code-btn"></button></code></pre>
 <p>Никаких дополнительных конфигураций <strong>params</strong> не требуется.</p></li>
 </ul>
-<h3 id="Build-index" class="common-anchor-header">Построение индекса</h3><p>После настройки параметров индекса в <strong>index_params</strong> вызовите метод <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> для построения индекса.</p>
+<h3 id="Build-index" class="common-anchor-header">Построение индекса<button data-href="#Build-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>После настройки параметров индекса в <strong>index_params</strong> вызовите метод <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> для построения индекса.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get an existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
@@ -139,7 +172,22 @@ collection.create_index(
         ></path>
       </svg>
     </button></h2><p>После того как вы построили индекс GPU, следующим шагом будет подготовка параметров поиска перед выполнением поиска.</p>
-<h3 id="Prepare-search-parameters" class="common-anchor-header">Подготовка параметров поиска</h3><p>Ниже приведены примеры конфигураций для различных типов индексов:</p>
+<h3 id="Prepare-search-parameters" class="common-anchor-header">Подготовка параметров поиска<button data-href="#Prepare-search-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ниже приведены примеры конфигураций для различных типов индексов:</p>
 <ul>
 <li><p>Индекс<strong>GPU_BRUTE_FORCE</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -162,7 +210,7 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Ключевые параметры поиска включают:</p>
 <ul>
-<li><p><strong>itopk_size</strong>: Определяет размер промежуточных результатов, сохраняемых во время поиска. Большее значение может улучшить запоминание за счет снижения производительности поиска. Оно должно быть как минимум равно конечному значению top-k<strong>(limit</strong>) и обычно является показателем, равным 2 (например, 16, 32, 64, 128).</p></li>
+<li><p><strong>itopk_size</strong>: Определяет размер промежуточных результатов, сохраняемых во время поиска. Большее значение может улучшить запоминание за счет снижения производительности поиска. Оно должно быть как минимум равно конечному значению top-k<strong>(limit</strong>) и обычно является показателем степени 2 (например, 16, 32, 64, 128).</p></li>
 <li><p><strong>search_width</strong>: задает количество точек входа в граф CAGRA во время поиска. Увеличение этого значения может улучшить запоминание, но может повлиять на производительность поиска.</p></li>
 <li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: Эти параметры управляют процессом итераций поиска. По умолчанию они установлены в <strong>0</strong>, и CAGRA автоматически определяет количество итераций, основываясь на <strong>itopk_size</strong> и <strong>search_width</strong>. Настройка этих значений вручную может помочь сбалансировать производительность и точность.</p></li>
 <li><p><strong>team_size</strong>: Указывает количество потоков CUDA, используемых для вычисления метрического расстояния на GPU. Обычные значения - от 2 до 32 (например, 2, 4, 8, 16, 32). Это значение незначительно влияет на производительность поиска. Значение по умолчанию - <strong>0</strong>, при котором Milvus автоматически выбирает <strong>размер team_size</strong> на основе размерности вектора.</p></li>
@@ -175,7 +223,22 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Параметры поиска для этих двух типов индексов аналогичны тем, что используются в <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> и <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Дополнительные сведения см. в разделе <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Проведение поиска векторного сходства</a>.</p></li>
 </ul>
-<h3 id="Conduct-a-search" class="common-anchor-header">Выполните поиск</h3><p>Воспользуйтесь методом <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> для выполнения поиска векторного сходства в индексе GPU.</p>
+<h3 id="Conduct-a-search" class="common-anchor-header">Выполните поиск<button data-href="#Conduct-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Воспользуйтесь методом <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> для выполнения поиска векторного сходства в индексе GPU.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
 collection.load()
 
@@ -227,7 +290,7 @@ collection.search(
       </svg>
     </button></h2><ul>
 <li><p><strong>Когда целесообразно использовать GPU-индекс?</strong></p>
-<p>GPU-индекс особенно полезен в ситуациях, когда требуется высокая пропускная способность или высокий уровень отзыва. Например, при работе с большими партиями данных производительность индексирования на GPU может превышать производительность индексирования на CPU в 100 раз. В сценариях с небольшими партиями индексы на GPU по-прежнему значительно превосходят индексы на CPU по производительности. Кроме того, если требуется быстрая вставка данных, использование GPU может существенно ускорить процесс создания индексов.</p></li>
+<p>GPU-индекс особенно полезен в ситуациях, когда требуется высокая пропускная способность или высокая отзывчивость. Например, при работе с большими партиями данных производительность индексирования на GPU может превышать производительность индексирования на CPU в 100 раз. В сценариях с небольшими партиями индексы на GPU по-прежнему значительно превосходят индексы на CPU по производительности. Кроме того, если требуется быстрая вставка данных, использование GPU может существенно ускорить процесс создания индексов.</p></li>
 <li><p><strong>Для каких сценариев наиболее подходят индексы на GPU, такие как CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT и GPU_BRUTE_FORCE?</strong></p>
 <p>Индексы CAGRA идеально подходят для сценариев, требующих повышенной производительности, хотя и за счет потребления большего объема памяти. В средах, где приоритетом является экономия памяти, индекс <strong>GPU_IVF_PQ</strong> может помочь минимизировать требования к хранению данных, хотя при этом теряется точность. Индекс <strong>GPU_IVF_FLAT</strong> служит сбалансированным вариантом, предлагая компромисс между производительностью и использованием памяти. И наконец, индекс <strong>GPU_BRUTE_FORCE</strong> предназначен для операций исчерпывающего поиска, гарантируя коэффициент отзыва равный 1 при выполнении обходного поиска.</p></li>
 </ul>

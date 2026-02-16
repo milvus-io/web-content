@@ -21,7 +21,10 @@ title: فهرس الحقول العددية
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في Milvus، يتم استخدام الفهرس العددي لتسريع التصفية الوصفية حسب قيمة حقل معين غير متجه، على غرار فهرس قاعدة البيانات التقليدية. سيرشدك هذا الدليل إلى كيفية إنشاء وتكوين الفهارس العددية للحقول مثل الأعداد الصحيحة والسلاسل وغيرها.</p>
+    </button></h1><p>في Milvus، يتم استخدام الفهرس العددي لتسريع التصفية الوصفية حسب قيمة حقل معين غير متجه، على غرار فهرس قاعدة البيانات التقليدية. سيرشدك هذا الدليل خلال إنشاء وتكوين الفهارس العددية للحقول مثل الأعداد الصحيحة والسلاسل وغيرها.</p>
+<div class="alert warning">
+<p>تم إهمال هذه الصفحة. للحصول على أحدث التطبيقات، راجع <a href="/docs/ar/bitmap.md">BITMAP</a> و <a href="/docs/ar/inverted.md">INVERTED</a> و <a href="/docs/ar/ngram.md">NGRAM</a> و <a href="/docs/ar/rtree.md">RTREE</a> <a href="/docs/ar/stl-sort.md">STL_SORT</a> وغيرها.</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">أنواع الفهرسة العددية<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ title: فهرس الحقول العددية
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">الفهرسة التلقائية</a></strong>: يقرر Milvus تلقائيًا نوع الفهرس بناءً على نوع بيانات الحقل القياسي. وهذا مناسب عندما لا تحتاج إلى التحكم في نوع الفهرس المحدد.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">الفهرسة التلقائية</a></strong>: يقرر Milvus نوع الفهرسة تلقائيًا بناءً على نوع بيانات الحقل القياسي. وهذا مناسب عندما لا تحتاج إلى التحكم في نوع الفهرس المحدد.</p></li>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">الفهرسة المخصصة</a></strong>: يمكنك تحديد نوع الفهرس الدقيق، مثل الفهرس المقلوب أو <a href="/docs/ar/bitmap.md">الفهرس النقطي</a>. يوفر هذا المزيد من التحكم في تحديد نوع الفهرس.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">الفهرسة التلقائية<button data-href="#Auto-indexing" class="anchor-icon" translate="no">

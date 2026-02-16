@@ -171,7 +171,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de instalar o Docker Desktop no Microsoft Windows, pode aceder ao Docker CLI a partir do PowerShell ou do Prompt de Comando do Windows em modo <strong>de administrador</strong>. É possível executar o Docker Compose no PowerShell, no Prompt de Comando do Windows ou no WSL 2 para iniciar o Milvus.</p>
+    </button></h2><p>Depois de ter instalado o Docker Desktop no Microsoft Windows, pode aceder ao Docker CLI a partir do PowerShell ou do Prompt de Comando do Windows em modo <strong>de administrador</strong>. É possível executar o Docker Compose no PowerShell, no Prompt de Comando do Windows ou no WSL 2 para iniciar o Milvus.</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">No PowerShell ou no prompt de comando do Windows<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Abra o Docker Desktop no modo de administrador clicando com o botão direito do rato e selecionando <strong>Executar como administrador</strong>.</p></li>
 <li><p>Execute os seguintes comandos no PowerShell ou no prompt de comando do Windows para baixar o arquivo de configuração do Docker Compose para o Milvus Standalone e iniciar o Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.11/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -204,7 +204,7 @@ Creating milvus-standalone ... done​
 <ul>
 <li><p>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.</p></li>
 <li><p>O contentor <strong>milvus-minio</strong> serve as portas <strong>9090</strong> e <strong>9091</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</p></li>
-<li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</p></li>
+<li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as predefinições e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</p></li>
 </ul></li>
 </ol>
 <p>Também pode chamar a versão Linux dos comandos do Docker Compose se tiver a WSL 2 instalada.</p>
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Baixe o arquivo de configuração do Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.9/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.11/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicie o Milvus.</p>
@@ -277,7 +277,7 @@ Creating milvus-standalone ... done​
     </button></h3><p>Depois de instalar o Docker Desktop no Windows, poderá encontrar o erro <code translate="no">Docker Engine stopped</code> se o seu computador não estiver configurado corretamente. Nesse caso, pode ser necessário fazer as seguintes verificações.</p>
 <ol>
 <li><p>Verificar se a virtualização está activada.</p>
-<p>Pode verificar se a virtualização está activada consultando o separador <strong>Desempenho</strong> no <strong>Gestor de Tarefas</strong>.</p>
+<p>Pode verificar se a virtualização está activada consultando o separador <strong>Desempenho</strong> no Gestor <strong>de Tarefas</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
@@ -329,7 +329,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
       </svg>
     </button></h3><p>Se encontrou problemas relacionados com a WSL enquanto executava o Milvus a partir da WSL 2, poderá ter de verificar se configurou o Docker Desktop para utilizar o motor baseado na WSL 2 da seguinte forma.</p>
 <ol>
-<li><p>Certifique-se de que a opção "Utilizar o motor baseado na WSL 2" está selecionada em <strong>Definições</strong> &gt; <strong>Geral</strong>. </p>
+<li><p>Certifique-se de que a opção "Usar o mecanismo baseado na WSL 2" está marcada em <strong>Configurações</strong> &gt; <strong>Geral</strong>. </p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />

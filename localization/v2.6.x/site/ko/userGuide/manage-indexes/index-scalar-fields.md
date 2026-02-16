@@ -20,6 +20,9 @@ title: 스칼라 필드 인덱스
         ></path>
       </svg>
     </button></h1><p>Milvus에서 스칼라 인덱스는 기존 데이터베이스 인덱스와 유사하게 특정 비벡터 필드 값을 기준으로 메타필터링 속도를 높이는 데 사용됩니다. 이 가이드에서는 정수, 문자열 등과 같은 필드에 대한 스칼라 인덱스를 만들고 구성하는 방법을 안내합니다.</p>
+<div class="alert warning">
+<p>이 페이지는 더 이상 사용되지 않습니다. 최신 구현에 대해서는 <a href="/docs/ko/bitmap.md">BITMAP</a>, <a href="/docs/ko/inverted.md">INVERTED</a>, <a href="/docs/ko/ngram.md">NGRAM</a>, <a href="/docs/ko/rtree.md">RTREE</a> <a href="/docs/ko/stl-sort.md">STL_SORT</a> 등을 참조하세요.</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">스칼라 인덱싱의 유형<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -243,7 +246,7 @@ client.createIndex(createIndexReq);
 </ul></li>
 </ul>
 </div>
-<h2 id="Verifying-the-result" class="common-anchor-header">결과 확인하기<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
+<h2 id="Verifying-the-result" class="common-anchor-header">결과 확인<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

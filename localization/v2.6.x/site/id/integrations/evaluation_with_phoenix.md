@@ -448,7 +448,7 @@ results_df.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>apa spesifikasi kebutuhan perangkat keras ...</td>
+      <td>apa spesifikasi persyaratan perangkat keras ...</td>
       <td>[Persyaratan Perangkat Keras\n\nSpesifikasi berikut ini adalah spesifikasi ...</td>
       <td>Spesifikasi kebutuhan perangkat keras untuk membangun ...</td>
       <td>Jika Anda ingin membuat Milvus dan menjalankannya dari sumber ...</td>
@@ -479,7 +479,7 @@ results_df.head()
       <td>Sebelum menjalankan cakupan kode, Anda harus memastikan ...</td>
       <td>Sebelum menjalankan cakupan kode, Anda harus membuat ...</td>
       <td>[Cakupan kode\n\nSebelum mengirimkan pull ...</td>
-      <td>[Cakupan kode\n\nSebelum mengirimkan penarikan Anda ...</td>
+      <td>[Cakupan kode\n\nSebelum mengirimkan pull ...</td>
       <td>faktual</td>
       <td>Teks referensi menentukan bahwa sebelum menjalankan ...</td>
       <td>benar</td>

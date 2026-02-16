@@ -57,7 +57,7 @@ title: 使用 Docker Compose 运行 Milvus (Linux)
       </svg>
     </button></h2><p>Milvus 在 Milvus 资源库中提供了 Docker Compose 配置文件。要使用 Docker Compose 安装 Milvus，只需运行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.10/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.11/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.10 中的新功能：</strong></p>
+<p><strong>v2.6.11 中的新功能：</strong></p>
 <ul>
 <li><strong>增强的架构</strong>：采用新的流节点和优化组件</li>
-<li><strong>更新了依赖关系</strong>：包含最新的 MinIO 和 etcd 版本</li>
+<li><strong>更新了依赖关系</strong>：包括最新的 MinIO 和 etcd 版本</li>
 <li><strong>改进了配置</strong>：优化设置以提高性能</li>
 </ul>
-<p>请务必下载最新的 Docker Compose 配置，以确保与 v2.6.10 功能兼容。</p>
+<p>请务必下载最新的 Docker Compose 配置，以确保与 v2.6.11 功能兼容。</p>
 <ul>
 <li><p>如果运行上述命令失败，请检查您的系统是否已安装 Docker Compose V1。如果是这种情况，建议您根据<a href="https://docs.docker.com/compose/">本页面</a>的说明迁移到 Docker Compose V2。</p></li>
 <li><p>如果您在拉取镜像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p></li>

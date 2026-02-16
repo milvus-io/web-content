@@ -71,7 +71,7 @@ title: Primeros pasos con Dynamiq y Milvus
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Si utilizas Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y selecciona "Reiniciar sesión" en el menú desplegable).</p>
+<p>Si utilizas Google Colab, para activar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y selecciona "Reiniciar sesión" en el menú desplegable).</p>
 </div>
 <h3 id="Configure-the-LLM-agent" class="common-anchor-header">Configurar el agente LLM<button data-href="#Configure-the-LLM-agent" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -277,7 +277,7 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 <li>Configure la dirección y el puerto del servidor como <code translate="no">uri</code> (por ejemplo, <code translate="no">http://localhost:19530</code>).</li>
 <li>Si la autenticación está habilitada:</li>
 <li>Proporcione <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code> como el <code translate="no">token</code>.</li>
-<li>Si la autenticación está deshabilitada:</li>
+<li>Si la autenticación está desactivada:</li>
 <li>Deje <code translate="no">token</code> sin configurar.</li>
 </ul>
 <p><strong>Zilliz Cloud (servicio gestionado)</strong></p>

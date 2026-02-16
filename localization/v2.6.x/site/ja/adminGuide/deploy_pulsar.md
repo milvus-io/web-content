@@ -22,7 +22,7 @@ summary: Docker ComposeやHelmを使ってメッセージストレージを設�
     </button></h1><p>Milvusは、最近の変更のログ管理、ストリームログの出力、ログ購読の提供にPulsarまたはKafkaを使用します。Pulsarはデフォルトのメッセージ・ストレージ・システムです。このトピックでは、Docker ComposeまたはHelmを使用してメッセージ・ストレージを設定する方法を紹介します。</p>
 <p><a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>またはK8s上でPulsarを構成し、K8s上でKafkaを構成することができます。</p>
 <div class="alert note">
-<p><strong>メッセージ・キューの制限</strong>Milvus v2.6.9にアップグレードする場合、現在選択しているメッセージ・キューを維持する必要があります。アップグレード中の異なるメッセージキューシステム間の切り替えはサポートされていません。メッセージ・キュー・システムの変更は、将来のバージョンでサポートされる予定です。</p>
+<p><strong>メッセージ・キューの制限</strong>Milvus v2.6.11にアップグレードする場合、現在選択しているメッセージ・キューを維持する必要があります。アップグレード中の異なるメッセージキューシステム間の切り替えはサポートされていません。メッセージ・キュー・システムの変更は、将来のバージョンでサポートされる予定です。</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker ComposeでPulsarを構成する<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

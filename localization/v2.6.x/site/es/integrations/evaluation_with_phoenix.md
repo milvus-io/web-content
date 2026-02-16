@@ -24,7 +24,7 @@ title: Evaluación con Arize Pheonix
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_phoenix.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Esta guía muestra cómo utilizar <a href="https://phoenix.arize.com/">Arize Pheonix</a> para evaluar un sistema de generación mejorada por recuperación (RAG) basado en <a href="https://milvus.io/">Milvus</a>.</p>
 <p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar texto nuevo basado en una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
-<p>Arize Pheonix es un marco de trabajo que le ayuda a evaluar sus canalizaciones RAG. Existen herramientas y marcos de trabajo que le ayudan a construir estas canalizaciones, pero evaluarlas y cuantificar su rendimiento puede resultar difícil. Aquí es donde entra Arize Pheonix.</p>
+<p>Arize Pheonix es un marco de trabajo que le ayuda a evaluar sus canalizaciones RAG. Existen herramientas y marcos de trabajo que le ayudan a construir estas canalizaciones, pero evaluarlas y cuantificar su rendimiento puede ser difícil. Aquí es donde entra Arize Pheonix.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -464,7 +464,7 @@ results_df.head()
       <td>[CMake &amp; Conan\n\nLa biblioteca de algoritmos de Mil...</td>
       <td>El lenguaje de programación utilizado para escribir Knowher...</td>
       <td>El lenguaje de programación utilizado para escribir Knowher...</td>
-      <td>[CMake &amp; Conan\nLa biblioteca de algoritmos de Mil...</td>
+      <td>[CMake &amp; Conan La librería de algoritmos de Mil...</td>
       <td>[CMake &amp; Conan La biblioteca de algoritmos de Mil...</td>
       <td>factual</td>
       <td>Determinar si la respuesta es factual o hallu...</td>

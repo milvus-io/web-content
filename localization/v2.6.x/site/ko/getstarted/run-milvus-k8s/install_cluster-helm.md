@@ -61,7 +61,7 @@ title: 헬름으로 Milvus 클러스터 설치
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>설치 전 <a href="/docs/ko/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
+<li><p>설치하기 전에 <a href="/docs/ko/prerequisite-helm.md">하드웨어 및 소프트웨어 요구 사항을</a> 확인한다.</p></li>
 <li><p>밀버스를 설치하기 전에 <a href="https://milvus.io/tools/sizing">밀버스 사이징 툴을</a> 사용하여 데이터 크기에 따라 하드웨어 요구 사항을 추정하는 것을 권장합니다. 이렇게 하면 Milvus 설치를 위한 최적의 성능과 리소스 할당을 보장하는 데 도움이 됩니다.</p></li>
 </ul>
 <div class="alert note">
@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>대신 독립형 배포가 필요하신가요?</strong></p>
 <p>개발 또는 테스트를 위해 독립 실행형 모드(단일 노드)로 Milvus를 배포하려면 이 명령을 사용하세요:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.10 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.11 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>참고</strong>: 독립 실행형 모드는 기본 메시지 큐로 딱따구리를 사용하며 스트리밍 노드 구성 요소를 활성화합니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요</a> 및 <a href="/docs/ko/use-woodpecker.md">딱따구리 사용하기를</a> 참조하세요.</p>
 </div>
 <p><strong>Milvus 클러스터 배포:</strong></p>
-<p>다음 명령은 Woodpecker를 권장 메시지 큐로 사용하여 v2.6.10에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
+<p>다음 명령은 Woodpecker를 권장 메시지 큐로 사용하여 v2.6.11에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.10 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.11 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -147,10 +147,10 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>이 명령이 수행하는 작업</strong></p>
 <ul>
-<li>메시지 큐로 <strong>Woodpecker를</strong> 사용합니다(유지보수 감소를 위해 권장).</li>
+<li>메시지 큐로 <strong>Woodpecker를</strong> 사용합니다(유지보수 감소를 위해 권장됨).</li>
 <li>성능 향상을 위해 새로운 <strong>스트리밍 노드</strong> 구성 요소를 활성화합니다.</li>
 <li>레거시 <strong>인덱스 노드를</strong> 비활성화합니다(이제 데이터 노드에서 기능을 처리합니다).</li>
-<li>Pulsar를 비활성화하여 대신 Woodpecker 사용</li>
+<li>Pulsar를 비활성화하고 대신 Woodpecker를 사용합니다.</li>
 </ul>
 <div class="alert note">
 <p><strong>Milvus 2.6.x의 아키텍처 변경 사항:</strong></p>
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>대체 메시지 큐 옵션:</strong></p>
 <p>우드페커 대신 <strong>Pulsar</strong> (기존 선택 사항)를 사용하려는 경우:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.10 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.11 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,7 +204,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>파드 상태를 확인하여 배포가 성공했는지 확인한다:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>모든 파드가 "실행 중" 상태가 표시될 때까지 기다립니다.</strong> v2.6.10 구성에서는 다음과 유사한 파드가 표시되어야 합니다:</p>
+<p><strong>모든 파드가 "실행 중" 상태가 표시될 때까지 기다립니다.</strong> v2.6.11 구성에서는 다음과 유사한 파드가 표시되어야 합니다:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -228,7 +228,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>확인해야 할 주요 구성 요소</strong></p>
 <ul>
-<li><strong>Milvus 구성 요소</strong>: <code translate="no">mixcoord</code>, <code translate="no">datanode</code>, <code translate="no">querynode</code>, <code translate="no">proxy</code>, <code translate="no">streaming-node</code></li>
+<li><strong>밀버스 컴포넌트</strong> <code translate="no">mixcoord</code>, <code translate="no">datanode</code>, <code translate="no">querynode</code>, <code translate="no">proxy</code>, <code translate="no">streaming-node</code></li>
 <li><strong>종속성</strong>: <code translate="no">etcd</code> (메타데이터), <code translate="no">minio</code> (오브젝트 스토리지), <code translate="no">pulsar</code> (메시지 큐)</li>
 </ul>
 <p>포트 포워딩이 설정되면 <code translate="no">http://127.0.0.1:9091/webui/</code> 에서 <strong>Milvus 웹UI에</strong> 액세스할 수도 있습니다(다음 단계 참조). 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus WebUI를</a> 참조하세요.</p>

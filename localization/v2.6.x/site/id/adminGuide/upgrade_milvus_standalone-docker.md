@@ -23,7 +23,7 @@ title: Memutakhirkan Milvus Standalone dengan Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini menjelaskan cara memutakhirkan rilis mandiri Milvus Anda dari v2.5.x ke v2.6.10 menggunakan Docker Compose.</p>
+    </button></h1><p>Panduan ini menjelaskan cara memutakhirkan rilis mandiri Milvus Anda dari v2.5.x ke v2.6.11 menggunakan Docker Compose.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Sebelum Anda memulai<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: Memutakhirkan Milvus Standalone dengan Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Whats-new-in-v2610" class="common-anchor-header">Apa yang baru di v2.6.10<button data-href="#Whats-new-in-v2610" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Whats-new-in-v2611" class="common-anchor-header">Apa yang baru di v2.6.11<button data-href="#Whats-new-in-v2611" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,10 +54,10 @@ title: Memutakhirkan Milvus Standalone dengan Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Memutakhirkan dari Milvus 2.5.x ke 2.6.10 melibatkan perubahan arsitektur yang signifikan:</p>
+    </button></h3><p>Memutakhirkan dari Milvus 2.5.x ke 2.6.11 melibatkan perubahan arsitektur yang signifikan:</p>
 <ul>
 <li><strong>Konsolidasi koordinator</strong>: Koordinator terpisah yang lama (<code translate="no">dataCoord</code>, <code translate="no">queryCoord</code>, <code translate="no">indexCoord</code>) telah dikonsolidasikan menjadi satu <code translate="no">mixCoord</code></li>
-<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang ditingkatkan</li>
+<li><strong>Komponen baru</strong>: Pengenalan Streaming Node untuk pemrosesan data yang disempurnakan</li>
 <li><strong>Penghapusan komponen</strong>: <code translate="no">indexNode</code> telah dihapus dan dikonsolidasikan</li>
 </ul>
 <p>Proses peningkatan ini memastikan migrasi yang tepat ke arsitektur baru. Untuk informasi lebih lanjut tentang perubahan arsitektur, lihat <a href="/docs/id/architecture_overview.md">Tinjauan Arsitektur Milvus</a>.</p>
@@ -83,13 +83,13 @@ title: Memutakhirkan Milvus Standalone dengan Docker Compose
 </ul>
 <p><strong>Persyaratan kompatibilitas:</strong></p>
 <ul>
-<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.10. Upgrade langsung dari kandidat rilis tidak didukung.</li>
+<li>Milvus v2.6.0-rc1 <strong>tidak kompatibel</strong> dengan v2.6.11. Upgrade langsung dari kandidat rilis tidak didukung.</li>
 <li>Jika Anda saat ini menjalankan v2.6.0-rc1 dan perlu mempertahankan data Anda, silakan lihat <a href="https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997">panduan komunitas ini</a> untuk bantuan migrasi.</li>
-<li>Anda <strong>harus</strong> meng-upgrade ke v2.5.16 atau yang lebih baru sebelum meng-upgrade ke v2.6.10.</li>
+<li>Anda <strong>harus</strong> meng-upgrade ke v2.5.16 atau yang lebih baru sebelum meng-upgrade ke v2.6.11.</li>
 </ul>
-<p><strong>Keterbatasan Antrian Pesan</strong>: Ketika meningkatkan ke Milvus v2.6.9, anda harus mempertahankan pilihan antrean pesan anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</p>
+<p><strong>Keterbatasan Antrian Pesan</strong>: Ketika meningkatkan ke Milvus v2.6.11, anda harus mempertahankan pilihan antrean pesan anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</p>
 <div class="alter note">
-<p>Karena masalah keamanan, Milvus mengupgrade MinIO ke RELEASE.2024-12-18T13-15-44Z dengan rilis v2.6.10.</p>
+<p>Karena masalah keamanan, Milvus mengupgrade MinIO ke RELEASE.2024-12-18T13-15-44Z dengan rilis v2.6.11.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proses peningkatan<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -140,7 +140,7 @@ docker compose up -d
 <pre><code translate="no" class="language-bash">docker compose ps
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-2-Upgrade-to-v2610" class="common-anchor-header">Langkah 2: Tingkatkan ke v2.6.10<button data-href="#Step-2-Upgrade-to-v2610" class="anchor-icon" translate="no">
+<h3 id="Step-2-Upgrade-to-v2611" class="common-anchor-header">Langkah 2: Tingkatkan ke v2.6.11<button data-href="#Step-2-Upgrade-to-v2611" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,7 +155,7 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah v2.5.16 berjalan dengan sukses, tingkatkan ke v2.6.10:</p>
+    </button></h3><p>Setelah v2.5.16 berjalan dengan sukses, tingkatkan ke v2.6.11:</p>
 <ol>
 <li><p>Edit file <code translate="no">docker-compose.yaml</code> Anda yang sudah ada dan perbarui tag gambar Milvus dan MinIO:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -166,7 +166,7 @@ docker compose up -d
 <span class="hljs-string">...</span>
 <span class="hljs-attr">standalone:</span>
   <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.9</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.6.11</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Terapkan peningkatan akhir:</p>
 <pre><code translate="no" class="language-bash">docker compose down
@@ -188,7 +188,7 @@ docker compose up -d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Konfirmasikan penerapan mandiri Anda telah menjalankan versi yang baru:</p>
+    </button></h2><p>Konfirmasikan bahwa penyebaran mandiri Anda telah menjalankan versi yang baru:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check container status</span>
 docker compose ps
 

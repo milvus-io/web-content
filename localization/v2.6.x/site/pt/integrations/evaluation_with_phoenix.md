@@ -298,7 +298,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     <tr>
       <th>1</th>
       <td>Qual é a linguagem de programação usada para escrever...</td>
-      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos de Mil...</td>
+      <td>[CMake &amp; Conan\n\nA biblioteca de algoritmos do Milvus...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
       <td>A linguagem de programação usada para escrever o Knowher...</td>
     </tr>
@@ -357,7 +357,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <ul>
 <li><strong>Latência do aplicativo</strong>: Identificar e otimizar invocações LLM lentas e desempenho de componentes.</li>
 <li><strong>Uso de token</strong>: Divida o consumo de token para otimização de custos.</li>
-<li><strong>Exceções em tempo de execução</strong>: Capturar problemas críticos como limitação de taxa.</li>
+<li><strong>Exceções de tempo de execução</strong>: Capturar problemas críticos como limitação de taxa.</li>
 <li><strong>Documentos recuperados</strong>: Analise a recuperação, a pontuação e a ordem dos documentos.</li>
 </ul>
 <p>Ao utilizar o rastreamento do Phoenix, é possível <strong>identificar gargalos</strong>, <strong>otimizar recursos</strong> e <strong>garantir a confiabilidade do sistema</strong> em várias estruturas e linguagens.</p>

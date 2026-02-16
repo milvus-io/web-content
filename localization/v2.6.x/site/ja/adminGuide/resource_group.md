@@ -90,11 +90,11 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.6.8 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべて PyMilvus 2.6.9 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>
-<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行してください。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
+<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行します。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>

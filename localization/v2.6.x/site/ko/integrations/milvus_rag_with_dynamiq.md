@@ -332,7 +332,7 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 2024-11-19 22:14:10 - INFO - Flow b30b48ec-d5d2-4e4c-8e25-d6976c8a9c17: execution succeeded in 1.3s.
 2024-11-19 22:14:10 - INFO - Workflow 87878444-6a3d-43f3-ae32-0127564a959f: execution succeeded in 1.3s.
 </code></pre>
-<p>이 워크플로우를 통해 Milvus를 벡터 데이터베이스로, OpenAI의 의미 표현을 위한 임베딩 모델을 사용하여 문서 인덱싱 파이프라인을 성공적으로 구현했습니다. 이 설정은 빠르고 정확한 벡터 기반 검색을 가능하게 하여 시맨틱 검색, 문서 검색, 문맥 AI 기반 상호 작용과 같은 RAG 워크플로우의 토대를 형성합니다.</p>
+<p>이 워크플로우를 통해 밀버스를 벡터 데이터베이스로 사용하고 의미적 표현을 위한 OpenAI의 임베딩 모델을 사용하여 문서 인덱싱 파이프라인을 성공적으로 구현했습니다. 이 설정은 빠르고 정확한 벡터 기반 검색을 가능하게 하여 시맨틱 검색, 문서 검색, 문맥 AI 기반 상호 작용과 같은 RAG 워크플로우의 토대를 형성합니다.</p>
 <p>Milvus의 확장 가능한 스토리지 기능과 Dynamiq의 오케스트레이션을 통해 이 솔루션은 프로토타이핑과 대규모 프로덕션 배포에 모두 사용할 수 있습니다. 이제 이 파이프라인을 확장하여 검색 기반 질문 답변 또는 AI 기반 콘텐츠 생성과 같은 추가 작업을 포함할 수 있습니다.</p>
 <h2 id="RAG-Document-Retrieval-Flow" class="common-anchor-header">RAG 문서 검색 흐름<button data-href="#RAG-Document-Retrieval-Flow" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -37,7 +37,7 @@ title: Erste Schritte mit Dynamiq und Milvus
 <li><p><strong>Document Indexing Flow</strong>: Lernen Sie, wie Sie Eingabedateien (z.B. PDFs) verarbeiten, ihren Inhalt in Vektoreinbettungen umwandeln und sie in Milvus speichern. Die Nutzung der leistungsstarken Indizierungsfunktionen von Milvus stellt sicher, dass Ihre Daten für einen schnellen Abruf bereit sind.</p></li>
 <li><p><strong>Document Retrieval Flow</strong>: Erfahren Sie, wie Sie Milvus nach relevanten Dokumenteneinbettungen abfragen und diese nutzen, um mit den LLM-Agenten von Dynamiq aufschlussreiche, kontextbezogene Antworten zu generieren und so eine nahtlose KI-gestützte Benutzererfahrung zu schaffen.</p></li>
 </ul>
-<p>Am Ende dieses Tutorials werden Sie ein solides Verständnis dafür erlangen, wie Milvus und Dynamiq zusammenarbeiten, um skalierbare, kontextbezogene KI-Systeme zu entwickeln, die auf Ihre Bedürfnisse zugeschnitten sind.</p>
+<p>Am Ende dieses Tutorials werden Sie ein solides Verständnis dafür erlangen, wie Milvus und Dynamiq zusammenarbeiten, um skalierbare, kontextbewusste KI-Systeme zu entwickeln, die auf Ihre Bedürfnisse zugeschnitten sind.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -352,7 +352,7 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In diesem Tutorial implementieren wir einen Retrieval-Augmented Generation (RAG)-Workflow für die Dokumentensuche. Dieser Workflow nimmt eine Benutzeranfrage, generiert eine Vektoreinbettung für sie, ruft die relevantesten Dokumente aus einer Milvus-Vektordatenbank ab und verwendet ein großes Sprachmodell (LLM), um eine detaillierte und kontextbezogene Antwort auf der Grundlage der abgerufenen Dokumente zu generieren.</p>
+    </button></h2><p>In diesem Tutorial implementieren wir einen RAG-Workflow (Retrieval-Augmented Generation) zum Abrufen von Dokumenten. Dieser Workflow nimmt eine Benutzeranfrage, generiert eine Vektoreinbettung für sie, ruft die relevantesten Dokumente aus einer Milvus-Vektordatenbank ab und verwendet ein großes Sprachmodell (LLM), um eine detaillierte und kontextbezogene Antwort auf der Grundlage der abgerufenen Dokumente zu generieren.</p>
 <p>Wenn Sie diesen Arbeitsablauf befolgen, schaffen Sie eine End-to-End-Lösung für die semantische Suche und die Beantwortung von Fragen, indem Sie die Leistungsfähigkeit der vektorbasierten Dokumentensuche mit den Fähigkeiten der fortschrittlichen LLMs von OpenAI kombinieren. Dieser Ansatz ermöglicht effiziente und intelligente Antworten auf Benutzeranfragen, indem er das gespeicherte Wissen in Ihrer Dokumentendatenbank nutzt.</p>
 <h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Erforderliche Bibliotheken importieren und Workflow initialisieren<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -22,6 +22,9 @@ title: Indicizzare i campi vettoriali
         ></path>
       </svg>
     </button></h1><p>Questa guida illustra le operazioni di base per la creazione e la gestione degli indici sui campi vettoriali di una collezione.</p>
+<div class="alert warning">
+<p>Questa pagina è stata deprecata. Per le ultime implementazioni, consultare <a href="/docs/it/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/it/hnsw.md">HNSW</a> e altro.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

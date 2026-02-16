@@ -31,9 +31,9 @@ title: 开始使用 Dynamiq 和 Milvus
 <p>本分步指南将涵盖两个核心 RAG 工作流程：</p>
 <ul>
 <li><p><strong>文档索引流程</strong>：了解如何处理输入文件（如 PDF），将其内容转换为向量嵌入，并存储到 Milvus 中。利用 Milvus 的高性能索引功能，可确保您的数据随时可供快速检索。</p></li>
-<li><p><strong>文档检索流程</strong>：了解如何查询 Milvus 中的相关文档嵌入，并使用它们与 Dynamiq 的 LLM Agents 一起生成有洞察力的、上下文感知的响应，从而创建无缝的人工智能驱动的用户体验。</p></li>
+<li><p><strong>文档检索流程</strong>：了解如何查询 Milvus 中的相关文档嵌入，并利用它们与 Dynamiq 的 LLM Agents 一起生成有洞察力的上下文感知响应，从而创建无缝的人工智能驱动的用户体验。</p></li>
 </ul>
-<p>本教程结束时，您将对 Milvus 和 Dynamiq 如何协同工作以构建符合您需求的可扩展上下文感知人工智能系统有一个扎实的了解。</p>
+<p>本教程结束时，您将对 Milvus 和 Dynamiq 如何协同工作，根据您的需求量身打造可扩展的上下文感知人工智能系统有一个扎实的了解。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

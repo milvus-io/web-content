@@ -21,7 +21,10 @@ title: Vektorfelder indizieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dieser Leitfaden führt Sie durch die grundlegenden Vorgänge beim Erstellen und Verwalten von Indizes für Vektorfelder in einer Sammlung.</p>
+    </button></h1><p>Diese Anleitung führt Sie durch die grundlegenden Operationen zum Erstellen und Verwalten von Indizes für Vektorfelder in einer Sammlung.</p>
+<div class="alert warning">
+<p>Diese Seite ist veraltet. Die neueste Implementierung finden Sie unter <a href="/docs/de/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/de/hnsw.md">HNSW</a> und mehr.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ title: Vektorfelder indizieren
         ></path>
       </svg>
     </button></h2><p>Durch die Nutzung der in einer Indexdatei gespeicherten Metadaten organisiert Milvus Ihre Daten in einer spezialisierten Struktur, die ein schnelles Auffinden der gewünschten Informationen bei Suchen oder Abfragen erleichtert.</p>
-<p>Milvus bietet verschiedene Indextypen und Metriken zum Sortieren von Feldwerten für effiziente Ähnlichkeitssuchen. In der folgenden Tabelle sind die unterstützten Indextypen und Metriken für verschiedene Vektorfeldtypen aufgeführt. Derzeit unterstützt Milvus verschiedene Arten von Vektordaten, einschließlich Fließkomma-Einbettungen (oft auch als Fließkomma-Vektoren oder dichte Vektoren bezeichnet), binäre Einbettungen (auch als binäre Vektoren bezeichnet) und spärliche Einbettungen (auch als spärliche Vektoren bezeichnet). Weitere Informationen finden Sie unter <a href="/docs/de/index.md">Index-</a> und <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a> <a href="/docs/de/index.md">im Arbeitsspeicher</a>.</p>
+<p>Milvus bietet verschiedene Indextypen und Metriken zur Sortierung von Feldwerten für eine effiziente Ähnlichkeitssuche. In der folgenden Tabelle sind die unterstützten Indextypen und Metriken für verschiedene Vektorfeldtypen aufgeführt. Derzeit unterstützt Milvus verschiedene Arten von Vektordaten, einschließlich Fließkomma-Einbettungen (oft auch als Fließkomma-Vektoren oder dichte Vektoren bezeichnet), binäre Einbettungen (auch als binäre Vektoren bezeichnet) und spärliche Einbettungen (auch als spärliche Vektoren bezeichnet). Weitere Informationen finden Sie unter <a href="/docs/de/index.md">Index-</a> und <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a> <a href="/docs/de/index.md">im Arbeitsspeicher</a>.</p>
 <div class="filter">
  <a href="#floating">Fließkommaeinbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Einbettungen</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -430,7 +433,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald Sie einen Index erstellt haben, können Sie seine Details überprüfen.</p>
+    </button></h2><p>Nachdem Sie einen Index erstellt haben, können Sie seine Details überprüfen.</p>
 <div class="language-python">
 <p>Um die Indexdetails zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> um die Indexnamen aufzulisten und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> um die Indexdetails zu erhalten.</p>
 </div>

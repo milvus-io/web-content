@@ -4,9 +4,9 @@ order: 2
 summary: >-
   Questa guida illustra la creazione e la configurazione di indici scalari per
   campi come numeri interi, stringhe, ecc.
-title: Indici di campi scalari
+title: Indice dei campi scalari
 ---
-<h1 id="Index-Scalar-Fields" class="common-anchor-header">Indici di campi scalari<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Scalar-Fields" class="common-anchor-header">Indice dei campi scalari<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,6 +22,9 @@ title: Indici di campi scalari
         ></path>
       </svg>
     </button></h1><p>In Milvus, un indice scalare viene utilizzato per velocizzare il metafiltraggio in base a un valore specifico di un campo non vettoriale, in modo simile a un indice tradizionale di un database. Questa guida illustra la creazione e la configurazione di indici scalari per campi come numeri interi, stringhe, ecc.</p>
+<div class="alert warning">
+<p>Questa pagina è stata deprecata. Per le ultime implementazioni, consultare <a href="/docs/it/bitmap.md">BITMAP</a>, <a href="/docs/it/inverted.md">INVERTED</a>, <a href="/docs/it/ngram.md">NGRAM</a>, <a href="/docs/it/rtree.md">RTREE</a> <a href="/docs/it/stl-sort.md">STL_SORT</a> e altro.</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Tipi di indicizzazione scalare<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -219,10 +222,10 @@ client.createIndex(createIndexReq);
 <li><strong>indexType</strong><em>(String</em>) Il tipo di indice scalare da creare. Per l'indicizzazione implicita, lasciare vuoto o omettere questo parametro. Per l'indicizzazione personalizzata, i valori validi sono:<ul>
 <li><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/scalar_index.md">Indice scalare</a>.</li>
 <li><strong>STL_SORT</strong>: Ordina i campi scalari utilizzando l'algoritmo di ordinamento standard della libreria template. Supporta campi booleani e numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta campi VARCHAR.</li>
+<li><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta i campi VARCHAR.</li>
 </ul></li>
 </ul></li>
-<li><strong>CreateIndexReq</strong>Crea l'indice nella collezione specificata.<ul>
+<li><strong>CreateIndexReq</strong>Crea l'indice nell'insieme specificato.<ul>
 <li><strong>collectionName</strong><em>(String</em>) Il nome dell'insieme per il quale viene creato l'indice.</li>
 <li><strong>indexParams</strong><em>(Elenco<IndexParam></em>) Un elenco di oggetti IndexParam che contengono le configurazioni dell'indice.</li>
 </ul></li>

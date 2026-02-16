@@ -19,8 +19,11 @@ title: 索引向量字段
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南将向您介绍在 Collections 中创建和管理向量字段索引的基本操作。</p>
-<h2 id="Overview" class="common-anchor-header">索引概述<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>本指南将指导您完成在 Collections 中创建和管理向量字段索引的基本操作。</p>
+<div class="alert warning">
+<p>本页已被弃用。有关最新实现，请参阅<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>、<a href="/docs/zh/hnsw.md">HNSW</a> 等。</p>
+</div>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,7 +39,7 @@ title: 索引向量字段
         ></path>
       </svg>
     </button></h2><p>利用存储在索引文件中的元数据，Milvus 以专门的结构组织数据，便于在搜索或查询过程中快速检索所需的信息。</p>
-<p>Milvus 提供多种索引类型和指标，可对字段值进行排序，以实现高效的相似性搜索。下表列出了不同向量字段类型所支持的索引类型和度量。目前，Milvus 支持各种类型的向量数据，包括浮点嵌入（通常称为浮点向量或密集向量）、二进制嵌入（也称为二进制向量）和稀疏嵌入（也称为稀疏向量）。详情请参阅 "<a href="/docs/zh/index.md">内存索引</a>和<a href="/docs/zh/metric.md">相似度指标</a>"。</p>
+<p>Milvus 提供多种索引类型和指标，可对字段值进行排序，以实现高效的相似性搜索。下表列出了不同向量字段类型所支持的索引类型和度量。目前，Milvus 支持各种类型的向量数据，包括浮点嵌入（通常称为浮点向量或密集向量）、二进制嵌入（也称为二进制向量）和稀疏嵌入（也称为稀疏向量）。详情请参阅<a href="/docs/zh/index.md">内存索引</a>和<a href="/docs/zh/metric.md">相似度指标</a>。</p>
 <div class="filter">
  <a href="#floating">浮点嵌入</a> <a href="#binary">二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -231,7 +234,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>要为一个 Collection 创建索引或为一个 Collection 建立索引，可使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>准备索引参数，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a>来创建索引。</p>
+<p>要为一个 Collection 创建索引或为一个 Collection 建立索引，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>准备索引参数，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a>来创建索引。</p>
 </div>
 <div class="language-java">
 <p>要为集合创建索引或为集合建立索引，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>准备索引参数和 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a>来创建索引。</p>
@@ -371,7 +374,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>额外的索引参数。有关详细信息，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
+      <td>额外的索引参数。有关详情，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
   </tbody>
 </table>

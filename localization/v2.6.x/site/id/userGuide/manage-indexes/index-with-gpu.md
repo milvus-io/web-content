@@ -22,6 +22,9 @@ title: Indeks dengan GPU
         ></path>
       </svg>
     </button></h1><p>Panduan ini menguraikan langkah-langkah untuk membuat indeks dengan dukungan GPU di Milvus, yang secara signifikan dapat meningkatkan performa pencarian dalam skenario throughput tinggi dan recall tinggi. Untuk detail tentang jenis indeks GPU yang didukung oleh Milvus, lihat <a href="/docs/id/gpu_index.md">Indeks GPU</a>.</p>
+<div class="alert warning">
+<p>Halaman ini sudah tidak digunakan lagi. Untuk implementasi terbaru, lihat <a href="/docs/id/gpu-index-overview.md">Ikhtisar Indeks GPU</a></p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Mengonfigurasi pengaturan Milvus untuk kontrol memori GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +69,22 @@ title: Indeks dengan GPU
         ></path>
       </svg>
     </button></h2><p>Contoh berikut ini menunjukkan cara membuat indeks GPU dengan tipe yang berbeda.</p>
-<h3 id="Prepare-index-parameters" class="common-anchor-header">Menyiapkan parameter indeks</h3><p>Saat menyiapkan parameter indeks GPU, tentukan <strong>index_type</strong>, <strong>metric_type</strong>, dan <strong>params</strong>:</p>
+<h3 id="Prepare-index-parameters" class="common-anchor-header">Menyiapkan parameter indeks<button data-href="#Prepare-index-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Saat menyiapkan parameter indeks GPU, tentukan <strong>index_type</strong>, <strong>metric_type</strong>, dan <strong>params</strong>:</p>
 <ul>
 <li><p><strong>index_type</strong><em>(string</em>): Jenis indeks yang digunakan untuk mempercepat pencarian vektor. Pilihan yang valid termasuk <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong>, dan <strong>GPU_BRUTE_FORCE</strong>.</p></li>
 <li><p><strong>metric_type</strong><em>(string</em>): Jenis metrik yang digunakan untuk mengukur kemiripan vektor. Opsi yang valid adalah <strong>IP</strong> dan <strong>L2</strong>.</p></li>
@@ -114,7 +132,22 @@ title: Indeks dengan GPU
 <button class="copy-code-btn"></button></code></pre>
 <p>Tidak ada konfigurasi <strong>params</strong> tambahan yang diperlukan.</p></li>
 </ul>
-<h3 id="Build-index" class="common-anchor-header">Membangun indeks</h3><p>Setelah mengonfigurasi parameter indeks di <strong>index_params</strong>, panggil metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> untuk membangun indeks.</p>
+<h3 id="Build-index" class="common-anchor-header">Membangun indeks<button data-href="#Build-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah mengonfigurasi parameter indeks di <strong>index_params</strong>, panggil metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> untuk membangun indeks.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get an existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
@@ -139,7 +172,22 @@ collection.create_index(
         ></path>
       </svg>
     </button></h2><p>Setelah Anda membuat indeks GPU, langkah selanjutnya adalah menyiapkan parameter pencarian sebelum melakukan pencarian.</p>
-<h3 id="Prepare-search-parameters" class="common-anchor-header">Menyiapkan parameter pencarian</h3><p>Di bawah ini adalah contoh konfigurasi untuk berbagai jenis indeks:</p>
+<h3 id="Prepare-search-parameters" class="common-anchor-header">Menyiapkan parameter pencarian<button data-href="#Prepare-search-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di bawah ini adalah contoh konfigurasi untuk berbagai jenis indeks:</p>
 <ul>
 <li><p>Indeks<strong>GPU_BRUTE_FORCE</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -175,7 +223,22 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Parameter pencarian untuk kedua jenis indeks ini serupa dengan yang digunakan pada <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> dan <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Melakukan Pencarian Kemiripan Vektor</a>.</p></li>
 </ul>
-<h3 id="Conduct-a-search" class="common-anchor-header">Melakukan pencarian</h3><p>Gunakan metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> untuk melakukan pencarian kemiripan vektor pada indeks GPU.</p>
+<h3 id="Conduct-a-search" class="common-anchor-header">Melakukan pencarian<button data-href="#Conduct-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Gunakan metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> untuk melakukan pencarian kemiripan vektor pada indeks GPU.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
 collection.load()
 

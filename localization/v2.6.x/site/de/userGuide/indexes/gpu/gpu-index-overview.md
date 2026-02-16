@@ -20,13 +20,35 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der Aufbau eines Index mit GPU-Unterstützung in Milvus kann die Suchleistung in Szenarien mit hohem Durchsatz und hohem Abruf deutlich verbessern.</p>
-<p>Die folgende Abbildung vergleicht den Abfragedurchsatz (Abfragen pro Sekunde) verschiedener Indexkonfigurationen bei unterschiedlichen Hardwarekonfigurationen, Vektordatensätzen (Cohere und OpenAI) und Suchstapelgrößen. Es zeigt sich, dass <code translate="no">GPU_CAGRA</code> durchweg besser abschneidet als andere Methoden.</p>
+    </button></h1><p>Der Aufbau eines Index mit GPU-Unterstützung in Milvus kann die Suchleistung in Szenarien mit hohem Durchsatz und hohem Rückruf deutlich verbessern.</p>
+<p>Die folgende Abbildung vergleicht den Abfragedurchsatz (Abfragen pro Sekunde) über verschiedene Indexkonfigurationen, Hardwarekonfigurationen, Vektordatensätze (Cohere und OpenAI) und Suchstapelgrößen hinweg. Dabei zeigt sich, dass <code translate="no">GPU_CAGRA</code> durchweg besser abschneidet als andere Methoden.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu-index-performance.png" alt="Gpu Index Performance" class="doc-image" id="gpu-index-performance" />
-   </span> <span class="img-wrapper"> <span>Gpu Index Leistung</span> </span></p>
-<h2 id="Limits" class="common-anchor-header">Grenzwerte<button data-href="#Limits" class="anchor-icon" translate="no">
+   </span> <span class="img-wrapper"> <span>GPU-Indexleistung</span> </span></p>
+<h2 id="Configure-GPU-memory-pool-for-Milvus" class="common-anchor-header">Konfigurieren Sie den GPU-Speicherpool für Milvus<button data-href="#Configure-GPU-memory-pool-for-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus unterstützt einen globalen GPU-Speicherpool und bietet zwei Konfigurationsparameter, <code translate="no">initMemSize</code> und <code translate="no">maxMemSize</code>, in der <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus-Konfigurationsdatei</a>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
+  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># set the initial memory pool size.</span>
+  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># sets the maximum memory usage limit. When the memory usage exceeds initMemSize, Milvus will attempt to expand the memory pool.</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Der Standardwert <code translate="no">initMemSize</code> ist normalerweise die Hälfte des GPU-Speichers, wenn Milvus startet, und <code translate="no">maxMemSize</code> ist der Standardwert für den gesamten GPU-Speicher. Die Größe des GPU-Speicherpools ist anfänglich auf <code translate="no">initMemSize</code> eingestellt und wird bei Bedarf automatisch auf <code translate="no">maxMemSize</code> erweitert.</p>
+<p>Wenn ein GPU-aktivierter Index angegeben wird, lädt Milvus die Zielsammlungsdaten vor der Suche in den GPU-Speicher, so dass <code translate="no">maxMemSize</code> mindestens die Datengröße sein muss.</p>
+<h2 id="Limits" class="common-anchor-header">Begrenzungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,8 +64,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Für <code translate="no">GPU_IVF_FLAT</code> liegt der Höchstwert für <code translate="no">limit</code> bei 1.024.</p></li>
-<li><p>Für <code translate="no">GPU_IVF_PQ</code> und <code translate="no">GPU_CAGRA</code> liegt der Höchstwert für <code translate="no">limit</code> bei 1.024.</p></li>
+<li><p>Für <code translate="no">GPU_IVF_FLAT</code> beträgt der Höchstwert für <code translate="no">limit</code> 1.024.</p></li>
+<li><p>Für <code translate="no">GPU_IVF_PQ</code> und <code translate="no">GPU_CAGRA</code> ist der Höchstwert für <code translate="no">limit</code> 1.024.</p></li>
 <li><p>Während es für <code translate="no">GPU_BRUTE_FORCE</code> keinen festgelegten <code translate="no">limit</code> gibt, wird empfohlen, 4.096 nicht zu überschreiten, um mögliche Leistungsprobleme zu vermeiden.</p></li>
 <li><p>Derzeit unterstützen GPU-Indizes nicht den <code translate="no">COSINE</code> Abstand. Wenn der <code translate="no">COSINE</code> Abstand benötigt wird, sollten die Daten zuerst normalisiert werden, und dann kann der innere Produktabstand (IP) als Ersatz verwendet werden.</p></li>
 <li><p>Das Laden von OOM-Schutz für GPU-Indizes wird nicht vollständig unterstützt, zu viele Daten können zum Absturz von QueryNode führen.</p></li>
@@ -137,7 +159,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Wann ist es sinnvoll, einen GPU-Index zu verwenden?</strong></p>
-<p>Ein GPU-Index ist besonders vorteilhaft in Situationen, die einen hohen Durchsatz oder eine hohe Abrufrate erfordern. Bei großen Batches kann der Durchsatz der GPU-Indizierung beispielsweise den der CPU-Indizierung um das 100-fache übertreffen. In Szenarien mit kleineren Stapeln übertrifft die GPU-Indizierung die CPU-Indizierung in Bezug auf die Leistung immer noch deutlich. Darüber hinaus kann der Einsatz eines Grafikprozessors den Prozess der Indexerstellung erheblich beschleunigen, wenn Daten schnell eingefügt werden müssen.</p></li>
+<p>Ein GPU-Index ist besonders vorteilhaft in Situationen, die einen hohen Durchsatz oder eine hohe Abrufrate erfordern. Bei großen Batches kann der Durchsatz der GPU-Indizierung beispielsweise den der CPU-Indizierung um das 100-fache übertreffen. In Szenarien mit kleineren Stapeln übertrifft die GPU-Indizierung die CPU-Indizierung in Bezug auf die Leistung immer noch deutlich. Darüber hinaus kann die Einbindung einer GPU den Prozess der Indexerstellung erheblich beschleunigen, wenn Daten schnell eingefügt werden müssen.</p></li>
 <li><p><strong>Für welche Szenarien sind GPU-Indizes wie GPU_CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT und GPU_BRUTE_FORCE am besten geeignet?</strong></p>
-<p><code translate="no">GPU_CAGRA</code> GPU_IVF_PQ und GPU_BRUTE_FORCE-Indizes sind ideal für Szenarien, die eine höhere Leistung erfordern, allerdings um den Preis, dass mehr Speicher verbraucht wird. In Umgebungen, in denen Speicherplatzeinsparung eine Priorität ist, kann der Index <code translate="no">GPU_IVF_PQ</code> dazu beitragen, die Speicheranforderungen zu minimieren, auch wenn dies mit einem höheren Präzisionsverlust einhergeht. Der Index <code translate="no">GPU_IVF_FLAT</code> stellt eine ausgewogene Option dar, die einen Kompromiss zwischen Leistung und Speicherbedarf bietet. Der Index <code translate="no">GPU_BRUTE_FORCE</code> schließlich ist für erschöpfende Suchvorgänge konzipiert und garantiert eine Abrufrate von 1, indem er Traversalsuche durchführt.</p></li>
+<p><code translate="no">GPU_CAGRA</code> GPU_IVF_PQ und GPU_BRUTE_FORCE-Indizes sind ideal für Szenarien, die eine höhere Leistung erfordern, allerdings um den Preis, dass mehr Speicher verbraucht wird. In Umgebungen, in denen Speicherplatzeinsparung eine Priorität ist, kann der Index <code translate="no">GPU_IVF_PQ</code> dazu beitragen, die Speicheranforderungen zu minimieren, auch wenn dies mit einem höheren Präzisionsverlust einhergeht. Der Index <code translate="no">GPU_IVF_FLAT</code> stellt eine ausgewogene Option dar, die einen Kompromiss zwischen Leistung und Speicherbedarf bietet. Der Index <code translate="no">GPU_BRUTE_FORCE</code> schließlich ist für erschöpfende Suchvorgänge konzipiert und garantiert durch die Durchführung von Traversalsuchen eine Abrufrate von 1.</p></li>
 </ul>

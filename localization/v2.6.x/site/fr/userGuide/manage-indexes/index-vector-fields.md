@@ -22,6 +22,9 @@ title: Indexer des champs vectoriels
         ></path>
       </svg>
     </button></h1><p>Ce guide vous présente les opérations de base pour créer et gérer des index sur les champs vectoriels d'une collection.</p>
+<div class="alert warning">
+<p>Cette page est obsolète. Pour une mise en œuvre plus récente, reportez-vous à <a href="/docs/fr/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/fr/hnsw.md">HNSW</a>, etc.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ title: Indexer des champs vectoriels
         ></path>
       </svg>
     </button></h2><p>En exploitant les métadonnées stockées dans un fichier d'index, Milvus organise vos données dans une structure spécialisée, ce qui facilite la récupération rapide des informations demandées lors des recherches ou des requêtes.</p>
-<p>Milvus fournit plusieurs types d'index et de métriques pour trier les valeurs des champs afin d'effectuer des recherches de similarité efficaces. Le tableau suivant répertorie les types d'index et les métriques pris en charge pour différents types de champs vectoriels. Actuellement, Milvus prend en charge différents types de données vectorielles, notamment les encastrements à virgule flottante (souvent appelés vecteurs à virgule flottante ou vecteurs denses), les encastrements binaires (également appelés vecteurs binaires) et les encastrements épars (également appelés vecteurs épars). Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/index.md">Index en mémoire</a> et <a href="/docs/fr/metric.md">métriques de similarité</a>.</p>
+<p>Milvus fournit plusieurs types d'index et de métriques pour trier les valeurs de champ afin d'effectuer des recherches de similarité efficaces. Le tableau suivant répertorie les types d'index et les métriques pris en charge pour différents types de champs vectoriels. Actuellement, Milvus prend en charge différents types de données vectorielles, notamment les encastrements à virgule flottante (souvent appelés vecteurs à virgule flottante ou vecteurs denses), les encastrements binaires (également appelés vecteurs binaires) et les encastrements épars (également appelés vecteurs épars). Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/index.md">Index en mémoire</a> et <a href="/docs/fr/metric.md">métriques de similarité</a>.</p>
 <div class="filter">
  <a href="#floating">Encastrements en virgule flottante</a> <a href="#binary">Encastrements binaires</a> <a href="#sparse">Encastrements épars</a></div>
 <div class="filter-floating table-wrapper" markdown="block">

@@ -175,11 +175,11 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Setelah pod Milvus Operator berjalan, Anda dapat men-deploy cluster Milvus sebagai berikut.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas men-deploy cluster Milvus dengan <strong>Woodpecker</strong> sebagai antrean pesan (disarankan untuk v2.6.10) dan semua komponen arsitektur baru termasuk Streaming Node.</p>
+<p>Perintah di atas men-deploy cluster Milvus dengan <strong>Woodpecker</strong> sebagai antrean pesan (disarankan untuk v2.6.11) dan semua komponen arsitektur baru termasuk Streaming Node.</p>
 <p><strong>Sorotan arsitektur dalam penerapan ini:</strong></p>
 <ul>
 <li><strong>Antrian Pesan</strong>: <a href="/docs/id/use-woodpecker.md">Menggunakan Woodpecker</a> (mengurangi pemeliharaan infrastruktur)</li>
-<li><strong>Streaming Node</strong>: Diaktifkan untuk pemrosesan data yang ditingkatkan</li>
+<li><strong>Streaming Node</strong>: Diaktifkan untuk pemrosesan data yang lebih baik</li>
 <li><strong>Koordinator Campuran</strong>: Komponen koordinator yang terkonsolidasi untuk meningkatkan efisiensi</li>
 </ul>
 <p>Untuk menyesuaikan pengaturan ini, kami sarankan Anda menggunakan <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> untuk menyesuaikan konfigurasi berdasarkan ukuran data Anda yang sebenarnya, lalu mengunduh file YAML yang sesuai. Untuk mempelajari lebih lanjut tentang parameter konfigurasi, lihat <a href="https://milvus.io/docs/system_configuration.md">Daftar Periksa Konfigurasi Sistem Milvus.</a></p>

@@ -5,9 +5,9 @@ related_key: RPM/DEB Package
 summary: >-
   Apprenez à installer Milvus de manière autonome avec un paquetage RPM/DEB
   préconstruit.
-title: Installation de Milvus Standalone avec un package RPM/DEB
+title: Installation autonome de Milvus avec un paquetage RPM/DEB
 ---
-<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">Installation de Milvus Standalone avec un package RPM/DEB<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">Installation autonome de Milvus avec un paquetage RPM/DEB<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +57,7 @@ title: Installation de Milvus Standalone avec un package RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez télécharger le paquetage RPM/DEB correspondant à l'architecture de votre système à partir de la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.10">page Milvus Releases</a>.</p>
+    </button></h2><p>Vous pouvez télécharger le paquetage RPM/DEB correspondant à l'architecture de votre système à partir de la <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.11">page Milvus Releases</a>.</p>
 <ul>
 <li>Pour x86_64/amd64, téléchargez le paquet <strong>milvus_2.6.9-1_amd64.deb</strong> ou <strong>milvus_2.6.9-1_amd64.rpm</strong>.</li>
 <li>Pour ARM64, téléchargez le paquet <strong>milvus_2.6.9-1_arm64.deb</strong> ou <strong>milvus_2.6.9-1_arm64.rpm</strong>.</li>

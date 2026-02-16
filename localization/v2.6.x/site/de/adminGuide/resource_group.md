@@ -90,7 +90,7 @@ title: Verwalten von Ressourcengruppen
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.6.8. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
+<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.6.9. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
 </div>
 <ol>
 <li><p>Erstellen Sie eine Ressourcengruppe.</p>
@@ -181,7 +181,7 @@ partition = <span class="hljs-string">&quot;Novels&quot;</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
 <p>Beachten Sie, dass <code translate="no">_resource_groups</code> ein optionaler Parameter ist, und wenn Sie ihn nicht angeben, lädt Milvus die Replikate auf die Abfrageknoten in der Standard-Ressourcengruppe.</p>
-<p>Wenn Milus jedes Replikat einer Sammlung in eine separate Ressourcengruppe laden soll, stellen Sie sicher, dass die Anzahl der Ressourcengruppen gleich der Anzahl der Replikate ist.</p></li>
+<p>Damit Milus jedes Replikat einer Sammlung in eine eigene Ressourcengruppe lädt, stellen Sie sicher, dass die Anzahl der Ressourcengruppen gleich der Anzahl der Replikate ist.</p></li>
 <li><p>Übertragen Sie Replikate zwischen Ressourcengruppen.</p>
 <p>Milvus verwendet <a href="/docs/de/replica.md">Replikate</a>, um einen Lastausgleich zwischen <a href="/docs/de/glossary.md#Segment">Segmenten</a> zu erreichen, die über mehrere Abfrageknoten verteilt sind. Sie können bestimmte Replikate einer Sammlung wie folgt von einer Ressourcengruppe in eine andere verschieben:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>

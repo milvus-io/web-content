@@ -63,10 +63,10 @@ title: Запуск Milvus в Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Что нового в версии 2.6.10:</strong></p>
+<p><strong>Что нового в версии 2.6.11:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Расширенные возможности обработки данных</li>
-<li><strong>Woodpecker MQ</strong>: улучшенная очередь сообщений с меньшими затратами на обслуживание, подробнее см. в разделе <a href="/docs/ru/use-woodpecker.md">"Использование Woodpecker"</a>.</li>
+<li><strong>Woodpecker MQ</strong>: улучшенная очередь сообщений с уменьшенными затратами на обслуживание, подробнее см. в разделе <a href="/docs/ru/use-woodpecker.md">"Использование Woodpecker"</a>.</li>
 <li><strong>Оптимизированная архитектура</strong>: Консолидированные компоненты для повышения производительности</li>
 </ul>
 <p>Всегда загружайте последнюю версию сценария, чтобы убедиться, что вы получили самые последние конфигурации и улучшения архитектуры.</p>

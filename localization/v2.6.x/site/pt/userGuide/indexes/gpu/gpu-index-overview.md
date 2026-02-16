@@ -22,11 +22,33 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>A criação de um índice com suporte de GPU no Milvus pode melhorar significativamente o desempenho da pesquisa em cenários de alta taxa de transferência e alta recuperação.</p>
-<p>A figura a seguir compara a taxa de transferência de consultas (consultas por segundo) de várias configurações de índice em diferentes configurações de hardware, conjuntos de dados vetoriais (Cohere e OpenAI) e tamanhos de lote de pesquisa, mostrando que <code translate="no">GPU_CAGRA</code> supera consistentemente outros métodos.</p>
+<p>A figura a seguir compara a taxa de transferência de consultas (consultas por segundo) entre configurações de índice, configurações de hardware, conjuntos de dados vetoriais (Cohere e OpenAI) e tamanhos de lote de pesquisa, mostrando que <code translate="no">GPU_CAGRA</code> supera consistentemente outros métodos.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu-index-performance.png" alt="Gpu Index Performance" class="doc-image" id="gpu-index-performance" />
-   </span> <span class="img-wrapper"> <span>Desempenho do índice da GPU</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Desempenho do índice de GPU</span> </span></p>
+<h2 id="Configure-GPU-memory-pool-for-Milvus" class="common-anchor-header">Configurar pool de memória GPU para Milvus<button data-href="#Configure-GPU-memory-pool-for-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>O Milvus suporta um pool de memória GPU global e fornece dois parâmetros de configuração, <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code>, no <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">arquivo de configuração do Milvus</a>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
+  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># set the initial memory pool size.</span>
+  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># sets the maximum memory usage limit. When the memory usage exceeds initMemSize, Milvus will attempt to expand the memory pool.</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>O padrão <code translate="no">initMemSize</code> é geralmente metade da memória da GPU quando o Milvus é iniciado, e <code translate="no">maxMemSize</code> é o padrão para toda a memória da GPU. O tamanho do pool de memória da GPU é inicialmente definido como <code translate="no">initMemSize</code> e será automaticamente expandido para <code translate="no">maxMemSize</code> conforme necessário.</p>
+<p>Quando um índice habilitado para GPU é especificado, o Milvus carrega os dados da coleção de destino na memória da GPU antes das pesquisas, então <code translate="no">maxMemSize</code> deve ser pelo menos o tamanho dos dados.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +107,7 @@ summary: >-
    <tr>
      <td><p><a href="/docs/pt/gpu-ivf-pq.md">GPU_IVF_PQ</a></p></td>
      <td><p>GPU_IVF_PQ executa o agrupamento de índices IVF antes de quantizar o produto de vetores. Ao realizar pesquisas, observe que é possível definir o top-k (<code translate="no">limit</code>) até 8.192 para qualquer pesquisa em uma coleção indexada por GPU_IVF_FLAT.</p></td>
-     <td><p>Utiliza um espaço de memória menor, que depende das configurações do parâmetro de compressão.</p></td>
+     <td><p>Utiliza um espaço de memória menor, que depende das configurações dos parâmetros de compressão.</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/pt/gpu-brute-force.md">GPU_BRUTE_FORCE</a></p></td>

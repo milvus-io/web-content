@@ -19,11 +19,33 @@ summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高�
         ></path>
       </svg>
     </button></h1><p>在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高吞吐量和高调用情况下的搜索性能。</p>
-<p>下图比较了各种索引配置在不同硬件设置、向量数据集（Cohere 和 OpenAI）和搜索批量大小下的查询吞吐量（每秒查询次数），显示<code translate="no">GPU_CAGRA</code> 始终优于其他方法。</p>
+<p>下图比较了不同索引配置、硬件设置、向量数据集（Cohere 和 OpenAI）以及搜索批量大小的查询吞吐量（每秒查询次数），显示<code translate="no">GPU_CAGRA</code> 始终优于其他方法。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu-index-performance.png" alt="Gpu Index Performance" class="doc-image" id="gpu-index-performance" />
    </span> <span class="img-wrapper"> <span>GPU 索引性能</span> </span></p>
+<h2 id="Configure-GPU-memory-pool-for-Milvus" class="common-anchor-header">为 Milvus 配置 GPU 内存池<button data-href="#Configure-GPU-memory-pool-for-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus 支持全局 GPU 内存池，并在<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus 配置文件</a>中提供了两个配置参数：<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 。</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
+  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># set the initial memory pool size.</span>
+  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># sets the maximum memory usage limit. When the memory usage exceeds initMemSize, Milvus will attempt to expand the memory pool.</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>默认情况下，<code translate="no">initMemSize</code> 通常是 Milvus 启动时 GPU 内存的一半，而<code translate="no">maxMemSize</code> 默认为整个 GPU 内存。GPU 内存池大小初始设置为<code translate="no">initMemSize</code> ，并会根据需要自动扩展到<code translate="no">maxMemSize</code> 。</p>
+<p>指定启用 GPU 的索引时，Milvus 会在搜索前将目标 Collections 数据加载到 GPU 内存中，因此<code translate="no">maxMemSize</code> 必须至少是数据大小。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +64,7 @@ summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高�
     </button></h2><ul>
 <li><p>对于<code translate="no">GPU_IVF_FLAT</code> ，<code translate="no">limit</code> 的最大值为 1,024。</p></li>
 <li><p>对于<code translate="no">GPU_IVF_PQ</code> 和<code translate="no">GPU_CAGRA</code> ，<code translate="no">limit</code> 的最大值为 1,024。</p></li>
-<li><p>虽然<code translate="no">GPU_BRUTE_FORCE</code> 没有设定<code translate="no">limit</code> ，但建议不要超过 4,096 以避免潜在的性能问题。</p></li>
+<li><p>虽然<code translate="no">GPU_BRUTE_FORCE</code> 没有设置<code translate="no">limit</code> ，但建议不要超过 4,096 以避免潜在的性能问题。</p></li>
 <li><p>目前，GPU 索引不支持<code translate="no">COSINE</code> 距离。如果需要使用<code translate="no">COSINE</code> 距离，应首先对数据进行归一化处理，然后使用内积 (IP) 距离作为替代。</p></li>
 <li><p>GPU 索引不完全支持加载 OOM 保护，过多的数据可能会导致 QueryNode 崩溃。</p></li>
 <li><p>GPU 索引不支持<a href="/docs/zh/range-search.md">范围</a>搜索和<a href="/docs/zh/grouping-search.md">分组搜索</a>等搜索功能。</p></li>
@@ -137,5 +159,5 @@ summary: 在 Milvus 中建立一个支持 GPU 的索引，可以显著提高高�
 <li><p><strong>何时适合使用 GPU 索引？</strong></p>
 <p>GPU 索引尤其适用于需要高吞吐量或高召回率的情况。例如，在处理大批量数据时，GPU 索引的吞吐量可比 CPU 索引高出 100 倍之多。在批量较小的情况下，GPU 索引在性能上仍明显优于 CPU 索引。此外，如果需要快速插入数据，采用 GPU 可以大大加快索引的建立过程。</p></li>
 <li><p><strong>GPU_CAGRA、GPU_IVF_PQ、GPU_IVF_FLAT 和 GPU_BRUTE_FORCE 等 GPU 索引最适合哪些应用场景？</strong></p>
-<p><code translate="no">GPU_CAGRA</code> GPU_IVF_FLAT、GPU_BRUTE_FORCE 和 GPU_CAGRA 索引非常适合需要增强性能的应用场景，尽管代价是消耗更多内存。对于优先考虑节省内存的环境， 索引可以帮助最大限度地减少存储需求，不过这也会带来较高的精度损失。 索引是一个平衡的选择，在性能和内存使用之间提供了一个折中方案。最后， 索引专为穷举搜索操作而设计，通过执行遍历搜索来保证召回率为 1。<code translate="no">GPU_IVF_PQ</code> <code translate="no">GPU_IVF_FLAT</code> <code translate="no">GPU_BRUTE_FORCE</code> </p></li>
+<p><code translate="no">GPU_CAGRA</code> GPU_IVF_FLAT、GPU_BRUTE_FORCE 和 GPU_CAGRA 索引非常适合需要增强性能的应用场景，尽管代价是消耗更多内存。对于优先考虑节省内存的环境，<code translate="no">GPU_IVF_PQ</code> 索引可以帮助最大限度地减少存储需求，不过这也会带来较高的精度损失。<code translate="no">GPU_IVF_FLAT</code> 索引是一个平衡的选择，在性能和内存使用之间提供了一个折中方案。最后，<code translate="no">GPU_BRUTE_FORCE</code> 索引专为穷举搜索操作而设计，通过执行遍历搜索可保证召回率为 1。</p></li>
 </ul>

@@ -90,11 +90,11 @@ title: 管理资源组
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本页面上的所有代码示例都在 PyMilvus 2.6.8 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
+<p>本页面上的所有代码示例都在 PyMilvus 2.6.9 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
 </div>
 <ol>
 <li><p>创建资源组。</p>
-<p>要创建资源组，请在连接到 Milvus 实例后运行以下代码。以下代码段假定<code translate="no">default</code> 是 Milvus 连接的别名。</p>
+<p>要创建资源组，请在连接 Milvus 实例后运行以下代码。以下代码段假定<code translate="no">default</code> 是 Milvus 连接的别名。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>
