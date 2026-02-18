@@ -62,7 +62,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   &quot;tokenizer&quot;: &quot;whitespace&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The whitespace tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the <code translate="no">whitespace</code> tokenizer and <code translate="no">lowercase</code><a href="/docs/lowercase-filter.md"> filter</a>:</p>
+<p>The whitespace tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the <code translate="no">whitespace</code> tokenizer and <code translate="no">lowercase</code><a href="/docs/v2.6.x/lowercase-filter.md"> filter</a>:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -94,7 +94,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
+<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/v2.6.x/analyzer-overview.md#Example-use">Example use</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

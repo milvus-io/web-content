@@ -50,7 +50,7 @@ beta: Milvus 2.6.6+
 <li><p>You can set <code translate="no">nullable=True</code> for <code translate="no">TIMESTAMPTZ</code> fields to allow missing values.</p></li>
 <li><p>You can specify a default timestamp value using the <code translate="no">default_value</code> attribute in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.</p></li>
 </ul>
-<p>See <a href="/docs/nullable-and-default.md">Nullable & Default</a> for details.</p>
+<p>See <a href="/docs/v2.6.x/nullable-and-default.md">Nullable & Default</a> for details.</p>
 </div>
 <h2 id="Basic-operations" class="common-anchor-header">Basic operations<button data-href="#Basic-operations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -240,7 +240,7 @@ client.load_collection(collection_name)
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Query with timestamp filtering</h4><p>Use arithmetic operators like <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. For a full list of arithmetic operators available in Milvus, refer to <a href="/docs/basic-operators.md#Arithmetic-Operators">Arithmetic Operators</a>.</p>
+<h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Query with timestamp filtering</h4><p>Use arithmetic operators like <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. For a full list of arithmetic operators available in Milvus, refer to <a href="/docs/v2.6.x/basic-operators.md#Arithmetic-Operators">Arithmetic Operators</a>.</p>
 <p>The example below filters entities with timestamps (<code translate="no">tsz</code>) that are not equal to <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -355,7 +355,7 @@ res = client.search(
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If your collection has two or more vector fields, you can perform hybrid search operations with timestamp filtering. For details, refer to <a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
+<p>If your collection has two or more vector fields, you can perform hybrid search operations with timestamp filtering. For details, refer to <a href="/docs/v2.6.x/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
 </div>
 <h2 id="Advanced-usage" class="common-anchor-header">Advanced usage<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -417,11 +417,11 @@ res = client.search(
 </table>
 <p>For step-by-step instructions and code samples, refer to the dedicated pages:</p>
 <ul>
-<li><p><a href="/docs/modify-collection.md#Example-6-Set-collection-time-zone">Modify Collection</a></p></li>
-<li><p><a href="/docs/manage_databases.md#Manage-database-properties">Database</a></p></li>
-<li><p><a href="/docs/get-and-scalar-query.md#Temporarily-set-a-timezone-for-a-query">Query</a></p></li>
-<li><p><a href="/docs/single-vector-search.md#Temporarily-set-a-timezone-for-a-search">Basic Vector Search</a></p></li>
-<li><p><a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a></p></li>
+<li><p><a href="/docs/v2.6.x/modify-collection.md#Example-6-Set-collection-time-zone">Modify Collection</a></p></li>
+<li><p><a href="/docs/v2.6.x/manage_databases.md#Manage-database-properties">Database</a></p></li>
+<li><p><a href="/docs/v2.6.x/get-and-scalar-query.md#Temporarily-set-a-timezone-for-a-query">Query</a></p></li>
+<li><p><a href="/docs/v2.6.x/single-vector-search.md#Temporarily-set-a-timezone-for-a-search">Basic Vector Search</a></p></li>
+<li><p><a href="/docs/v2.6.x/multi-vector-search.md">Multi-Vector Hybrid Search</a></p></li>
 </ul>
 <h3 id="Accelerate-queries" class="common-anchor-header">Accelerate queries<button data-href="#Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -439,4 +439,4 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>By default, queries on <code translate="no">TIMESTAMPTZ</code> fields without an index will perform a full scan of all rows, which can be slow on large datasets. To accelerate timestamp queries, create an <code translate="no">STL_SORT</code> index on your <code translate="no">TIMESTAMPTZ</code> field.</p>
-<p>For details, refer to <a href="/docs/stl-sort.md">STL_SORT</a>.</p>
+<p>For details, refer to <a href="/docs/v2.6.x/stl-sort.md">STL_SORT</a>.</p>

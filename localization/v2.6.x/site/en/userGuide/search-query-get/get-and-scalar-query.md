@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.</p>
 <div class="alert note">
-<p>If you dynamically add new fields after the collection has been created, queries that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
+<p>If you dynamically add new fields after the collection has been created, queries that include these fields will return the defined default values or NULL for entities that have not explicitly set values. For details, refer to <a href="/docs/v2.6.x/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -642,7 +642,7 @@ curl --request POST \
       </svg>
     </button></h2><p>To extract a representative subset of data from your collection for data exploration or development testing, use the <code translate="no">RANDOM_SAMPLE(sampling_factor)</code> expression, where the <code translate="no">sampling_factor</code> is a float between 0 and 1 representing the percentage of data to sample.</p>
 <div class="alert note">
-<p>For detailed usage, advanced examples, and best practices, refer to <a href="/docs/random-sampling.md">Random Sampling</a>.</p>
+<p>For detailed usage, advanced examples, and best practices, refer to <a href="/docs/v2.6.x/random-sampling.md">Random Sampling</a>.</p>
 </div>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -768,7 +768,7 @@ resultSet, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs
         ></path>
       </svg>
     </button></h2><p>If your collection has a <code translate="no">TIMESTAMPTZ</code> field, you can temporarily override the database or collection default timezone for a single operation by setting the <code translate="no">timezone</code> parameter in the query call. This controls how <code translate="no">TIMESTAMPTZ</code> values are displayed and compared during the operation.</p>
-<p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p>
+<p>The value of <code translate="no">timezone</code> must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/v2.6.x/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p>
 <p>The example below shows how to temporarily set a timezone for a query operation:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>

@@ -6,7 +6,6 @@ summary: >-
   지정하면 검색 범위를 여러 파티션으로 좁힐 수 있어 검색 효율이 향상됩니다. 이 문서에서는 파티션 키의 사용 방법과 관련 고려 사항을
   소개합니다.
 ---
-
 <h1 id="Use-Partition-Key" class="common-anchor-header">파티션 키 사용<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>파티션 키는 파티션에 기반한 검색 최적화 솔루션입니다. 특정 스칼라 필드를 파티션 키로 지정하고 검색 시 파티션 키를 기반으로 필터링 조건을 지정하면 검색 범위를 여러 파티션으로 좁혀 검색 효율을 높일 수 있습니다. 이 문서에서는 파티션 키의 사용 방법과 관련 고려 사항을 소개합니다.</p>
+    </button></h1><p>파티션 키는 파티션에 기반한 검색 최적화 솔루션입니다. 특정 스칼라 필드를 파티션 키로 지정하고 검색 시 파티션 키를 기준으로 필터링 조건을 지정하면 검색 범위를 여러 파티션으로 좁혀 검색 효율을 높일 수 있습니다. 이 문서에서는 파티션 키의 사용 방법과 관련 고려 사항을 소개합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +73,22 @@ summary: >-
 <li><p><a href="/docs/ko/v2.5.x/use-partition-key.md#Set-Partition-Numbers">생성할 파티션 수 설정</a> (선택 사항), 그리고</p></li>
 <li><p><a href="/docs/ko/v2.5.x/use-partition-key.md#Create-Filtering-Condition">파티션 키를 기준으로 필터링 조건을 만듭니다</a>.</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">파티션 키 설정</h3><p>스칼라 필드를 파티션 키로 지정하려면 스칼라 필드를 추가할 때 <code translate="no">is_partition_key</code> 속성을 <code translate="no">true</code> 으로 설정해야 합니다.</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">파티션 키 설정<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>스칼라 필드를 파티션 키로 지정하려면 스칼라 필드를 추가할 때 <code translate="no">is_partition_key</code> 속성을 <code translate="no">true</code> 으로 설정해야 합니다.</p>
 <div class="alert note">
 <p>스칼라 필드를 파티션 키로 설정할 때 필드 값은 비어 있거나 null일 수 없습니다.</p>
 </div>
@@ -85,30 +99,28 @@ summary: >-
 )
 
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>,
-datatype=DataType.INT64,
-is_primary=<span class="hljs-literal">True</span>)
-
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>)
+    
 schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-datatype=DataType.FLOAT_VECTOR,
-dim=<span class="hljs-number">5</span>)
+    datatype=DataType.FLOAT_VECTOR,
+    dim=<span class="hljs-number">5</span>)
 
 <span class="hljs-comment"># Add the partition key</span>
 schema.add_field(
-field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
-datatype=DataType.VARCHAR,
-max_length=<span class="hljs-number">512</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-is_partition_key=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, 
+    datatype=DataType.VARCHAR, 
+    max_length=<span class="hljs-number">512</span>,
+<span class="highlighted-wrapper-line">    is_partition_key=<span class="hljs-literal">True</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -140,8 +152,7 @@ schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
         .dataType(DataType.VarChar)
         .maxLength(<span class="hljs-number">512</span>)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .isPartitionKey(<span class="hljs-literal">true</span>)
+<span class="highlighted-wrapper-line">        .isPartitionKey(<span class="hljs-literal">true</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
@@ -196,8 +207,7 @@ schema.WithField(entity.NewField().
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
         <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
-        <span class="hljs-comment">// highlight-next-line</span>
-        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span></span>
     }
 ]
 <button class="copy-code-btn"></button></code></pre>
@@ -228,27 +238,40 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">파티션 번호 설정</h3><p>컬렉션의 스칼라 필드를 파티션 키로 지정하면 Milvus는 자동으로 컬렉션에 16개의 파티션을 생성합니다. 엔티티를 받으면 Milvus는 이 엔티티의 파티션 키 값에 따라 파티션을 선택하고 해당 파티션에 엔티티를 저장하므로 일부 또는 모든 파티션에 다른 파티션 키 값을 가진 엔티티가 저장됩니다.</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">파티션 번호 설정<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션의 스칼라 필드를 파티션 키로 지정하면 Milvus는 자동으로 컬렉션에 16개의 파티션을 생성합니다. 엔티티를 받으면 Milvus는 이 엔티티의 파티션 키 값에 따라 파티션을 선택하고 해당 파티션에 엔티티를 저장하므로 일부 또는 모든 파티션에 다른 파티션 키 값을 가진 엔티티가 저장됩니다.</p>
 <p>컬렉션과 함께 생성할 파티션의 수를 결정할 수도 있습니다. 이는 파티션 키로 지정된 스칼라 필드가 있는 경우에만 유효합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    num_partitions=<span class="hljs-number">128</span>
+<span class="highlighted-wrapper-line">    num_partitions=<span class="hljs-number">128</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.numPartitions(<span class="hljs-number">128</span>)
-.build();
-client.createCollection(createCollectionReq);
+                .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                .collectionSchema(schema)
+                .numPartitions(<span class="hljs-number">128</span>)
+                .build();
+        client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithNumPartitions(<span class="hljs-number">128</span>))
@@ -280,7 +303,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">필터링 조건 생성</h3><p>파티션 키 기능이 활성화된 컬렉션에서 ANN 검색을 수행할 때는 검색 요청에 파티션 키와 관련된 필터링 표현식을 포함시켜야 합니다. 필터링 표현식에서 파티션 키 값을 특정 범위 내로 제한하면 밀버스에서 해당 파티션 내로 검색 범위를 제한할 수 있습니다.</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">필터링 조건 생성<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>파티션 키 기능이 활성화된 컬렉션에서 ANN 검색을 수행할 때는 검색 요청에 파티션 키와 관련된 필터링 표현식을 포함시켜야 합니다. 필터링 표현식에서 파티션 키 값을 특정 범위 내로 제한하면 밀버스에서 해당 파티션 내로 검색 범위를 제한할 수 있습니다.</p>
 <p>삭제 작업을 수행할 때 보다 효율적인 삭제를 위해 단일 파티션 키를 지정하는 필터 표현식을 포함하는 것이 좋습니다. 이 접근 방식은 삭제 작업을 특정 파티션으로 제한하여 압축 중에 쓰기 증폭을 줄이고 압축 및 인덱싱을 위한 리소스를 절약합니다.</p>
 <p>다음 예제에서는 특정 파티션 키 값과 파티션 키 값 집합을 기반으로 한 파티션 키 기반 필터링을 보여줍니다.</p>
 <div class="multipleCode">
@@ -291,7 +329,6 @@ curl --request POST \
 <span class="hljs-comment"># Filter based on multiple partition key values</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 
@@ -344,14 +381,28 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <div class="alert note">
 <p>현재 파티션 키 격리 기능은 인덱스 유형이 HNSW로 설정된 검색에만 적용됩니다.</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">파티션 키 격리 사용</h3><p>다음 코드 예제는 파티션 키 격리를 활성화하는 방법을 보여줍니다.</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">파티션 키 격리 사용<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 코드 예제는 파티션 키 격리를 활성화하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -360,13 +411,12 @@ Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <sp
 properties.put(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.properties(properties)
-.build();
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .properties(properties)
+        .build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithProperty(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-literal">true</span>))

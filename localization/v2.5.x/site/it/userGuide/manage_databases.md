@@ -6,7 +6,6 @@ summary: >-
   un modo più efficiente di gestire e organizzare i dati e supportando la
   multi-tenancy.
 ---
-
 <h1 id="Database" class="common-anchor-header">Database<button data-href="#Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, un database serve come unità logica per organizzare e gestire i dati. Per migliorare la sicurezza dei dati e ottenere la multi-tenancy, è possibile creare più database per isolare logicamente i dati per applicazioni o tenant diversi. Ad esempio, si crea un database per memorizzare i dati dell'utente A e un altro database per l'utente B.</p>
+    </button></h2><p>In Milvus, un database serve come unità logica per organizzare e gestire i dati. Per migliorare la sicurezza dei dati e ottenere la multi-tenancy, è possibile creare più database per isolare logicamente i dati per diverse applicazioni o tenant. Ad esempio, si crea un database per archiviare i dati dell'utente A e un altro database per l'utente B.</p>
 <h2 id="Create-database" class="common-anchor-header">Creare un database<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,15 +59,14 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.create_database(
-db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.database.request.*;
@@ -96,8 +94,8 @@ client.createDatabase(createDatabaseReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
-    Username: <span class="hljs-string">&quot;Milvus&quot;</span>,
-    Password: <span class="hljs-string">&quot;root&quot;</span>,
+    Username: <span class="hljs-string">&quot;root&quot;</span>,
+    Password: <span class="hljs-string">&quot;Milvus&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle err</span>
@@ -157,13 +155,12 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database_2&quot;,
-&quot;properties&quot;: {
-&quot;database.replica.number&quot;: 3
-}
+    &quot;dbName&quot;: &quot;my_database_2&quot;,
+    &quot;properties&quot;: {
+        &quot;database.replica.number&quot;: 3
+    }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="View-databases" class="common-anchor-header">Visualizzare i database<button data-href="#View-databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -190,13 +187,12 @@ client.list_databases()
 
 <span class="hljs-comment"># Check database details</span>
 client.describe_database(
-db_name=<span class="hljs-string">&quot;default&quot;</span>
+    db_name=<span class="hljs-string">&quot;default&quot;</span>
 )
 
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># {&quot;name&quot;: &quot;default&quot;}</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.database.response.*;
 
 <span class="hljs-type">ListDatabasesResp</span> <span class="hljs-variable">listDatabasesResp</span> <span class="hljs-operator">=</span> client.listDatabases();
@@ -287,7 +283,22 @@ curl --request POST \
      <td><p>Se forzare il database specificato a negare le operazioni di lettura.</p></td>
    </tr>
 </table>
-<h3 id="Alter-database-properties" class="common-anchor-header">Modifica delle proprietà del database</h3><p>È possibile modificare le proprietà di un database esistente come segue. L'esempio seguente limita il numero di collezioni che si possono creare nel database.</p>
+<h3 id="Alter-database-properties" class="common-anchor-header">Modifica delle proprietà del database<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile modificare le proprietà di un database esistente come segue. L'esempio seguente limita il numero di collezioni che si possono creare nel database.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
@@ -321,14 +332,28 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database&quot;,
-&quot;properties&quot;: {
-&quot;database.max.collections&quot;: 10
-}
+    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;properties&quot;: {
+        &quot;database.max.collections&quot;: 10
+    }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Drop-database-properties" class="common-anchor-header">Eliminare le proprietà del database</h3><p>È anche possibile ripristinare una proprietà del database eliminandola come segue. L'esempio seguente rimuove il limite del numero di collezioni che si possono creare nel database.</p>
+<h3 id="Drop-database-properties" class="common-anchor-header">Eliminare le proprietà del database<button data-href="#Drop-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È anche possibile ripristinare una proprietà del database eliminandola come segue. L'esempio seguente rimuove il limite del numero di collezioni che si possono creare nel database.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
@@ -361,13 +386,12 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database&quot;,
-&quot;propertyKeys&quot;: [
-&quot;database.max.collections&quot;
-]
+    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;propertyKeys&quot;: [
+        &quot;database.max.collections&quot;
+    ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Use-database" class="common-anchor-header">Usa database<button data-href="#Use-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -455,6 +479,6 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database&quot;
+    &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

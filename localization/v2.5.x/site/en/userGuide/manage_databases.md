@@ -98,8 +98,8 @@ client.createDatabase(createDatabaseReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
-    Username: <span class="hljs-string">&quot;Milvus&quot;</span>,
-    Password: <span class="hljs-string">&quot;root&quot;</span>,
+    Username: <span class="hljs-string">&quot;root&quot;</span>,
+    Password: <span class="hljs-string">&quot;Milvus&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle err</span>

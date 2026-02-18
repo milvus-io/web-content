@@ -29,7 +29,7 @@ summary: 了解如何为 Milvus 配置 quotaAndLimits。
 <p>可以启用</p>
 <ol>
 <li><p>DML 吞吐量限制；</p></li>
-<li><p>DDL 和 DQL qps/rps 限制；</p></li>
+<li><p>DDL、DQL qps/rps 限制；</p></li>
 <li><p>DQL 队列长度/延迟保护；</p></li>
 <li><p>DQL 结果速率保护；</p></li>
 </ol>
@@ -59,7 +59,7 @@ summary: 了解如何为 Milvus 配置 quotaAndLimits。
   <tbody>
     <tr>
       <td>        true "表示启用配额和限制，"false "表示禁用。      </td>
-      <td>true</td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -89,7 +89,7 @@ summary: 了解如何为 Milvus 配置 quotaAndLimits。
     <tr>
       <td>
         <li>quotaCenterCollectInterval 是 quotaCenter</li>      
-        <li>收集代理、查询群集和数据群集指标的时间间隔。</li>      
+        <li>从代理、查询群集和数据群集收集指标的时间间隔。</li>      
         <li>秒，（0 ~ 65536）</li>      </td>
       <td>3</td>
     </tr>

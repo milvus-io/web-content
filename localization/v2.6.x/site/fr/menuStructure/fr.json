@@ -1799,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "Type de commutateur MQ",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "Commutateur Milvus Cluster Type MQ",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvus Commutateur autonome Type MQ",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -1863,7 +1882,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
+                "label": "Migrer d'une instance à l'autre dans un environnement S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2270,7 +2289,7 @@
             "children": []
           },
           {
-            "label": "PrivéGPT",
+            "label": "PrivateGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []

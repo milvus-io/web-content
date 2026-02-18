@@ -8,7 +8,6 @@ summary: >-
   requerir bastante menos memoria, lo que lo convierte en una opción práctica
   para grandes conjuntos de datos.
 ---
-
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +40,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>IVF_PQ</strong> son las siglas de <strong>Inverted File with Product Quantization (Archivo invertido con cuantificación de productos</strong>), un enfoque híbrido que combina indexación y compresión para una búsqueda y recuperación vectorial eficientes. Aprovecha dos componentes básicos: El <strong>archivo invertido (IVF</strong> ) y la <strong>cuantificación de productos (PQ)</strong>.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF es como crear un índice en un libro. En lugar de escanear cada página (o, en nuestro caso, cada vector), se buscan palabras clave específicas (clusters) en el índice para encontrar rápidamente las páginas (vectores) relevantes. En nuestro caso, los vectores se agrupan en clusters, y el algoritmo buscará dentro de unos pocos clusters que estén cerca del vector de consulta.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF es como crear un índice en un libro. En lugar de escanear cada página (o, en nuestro caso, cada vector), se buscan palabras clave específicas (clusters) en el índice para encontrar rápidamente las páginas (vectores) relevantes. En nuestro caso, los vectores se agrupan en clusters, y el algoritmo buscará dentro de unos pocos clusters que estén cerca del vector de consulta.</p>
 <p>El funcionamiento es el siguiente</p>
 <ol>
 <li><p><strong>Agrupación:</strong> El conjunto de datos vectoriales se divide en un número determinado de clusters, utilizando un algoritmo de agrupación como k-means. Cada cluster tiene un centroide (un vector representativo del cluster).</p></li>
@@ -50,7 +64,22 @@ summary: >-
 <li><p><strong>Búsqueda:</strong> Cuando se buscan los vecinos más cercanos, el algoritmo de búsqueda compara el vector de consulta con los centroides de los clústeres y selecciona el clúster o clústeres más prometedores. A continuación, la búsqueda se reduce a los vectores que se encuentran dentro de esos clusters seleccionados.</p></li>
 </ol>
 <p>Para obtener más información sobre los detalles técnicos, consulte <a href="/docs/es/v2.5.x/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>La cuantificación de productos (PQ)</strong> es un método de compresión de vectores de alta dimensión que reduce significativamente los requisitos de almacenamiento y permite realizar rápidas operaciones de búsqueda de similitudes.</p>
+<h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>La cuantificación de productos (PQ)</strong> es un método de compresión de vectores de alta dimensión que reduce significativamente los requisitos de almacenamiento y permite realizar rápidas operaciones de búsqueda de similitudes.</p>
 <p>El proceso PQ consta de las siguientes etapas</p>
 <p>
   
@@ -72,7 +101,7 @@ summary: >-
 <p>Esto supone una reducción de 8 veces en los requisitos de almacenamiento.</p>
 </div>
 <p><strong>Cálculo de distancias con PQ</strong></p>
-<p>Cuando se realiza una búsqueda de similitud con un vector de consulta, PQ permite un cálculo eficaz de la distancia mediante los siguientes pasos:</p>
+<p>Cuando se realiza una búsqueda de similitud con un vector de consulta, PQ permite un cálculo eficiente de la distancia a través de los siguientes pasos:</p>
 <ol>
 <li><p><strong>Preprocesamiento de la consulta</strong></p>
 <ul>
@@ -91,7 +120,22 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
    </span> <span class="img-wrapper"> <span>Ivf Pq 2</span> </span></p>
-<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>El índice <strong>IVF_PQ</strong> combina los puntos fuertes de <strong>IVF</strong> y <strong>PQ</strong> para acelerar las búsquedas. El proceso funciona en dos etapas:</p>
+<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ<button data-href="#IVF-+-PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>El índice <strong>IVF_PQ</strong> combina los puntos fuertes de <strong>IVF</strong> y <strong>PQ</strong> para acelerar las búsquedas. El proceso funciona en dos etapas:</p>
 <ol>
 <li><p><strong>Filtrado grueso con IVF</strong>: IVF particiona el espacio vectorial en clusters, reduciendo el alcance de la búsqueda. En lugar de evaluar todo el conjunto de datos, el algoritmo se centra sólo en los clusters más cercanos al vector de consulta.</p></li>
 <li><p><strong>Comparación detallada con PQ</strong>: dentro de los conglomerados seleccionados, PQ utiliza representaciones vectoriales comprimidas y cuantizadas para calcular rápidamente distancias aproximadas.</p></li>
@@ -119,16 +163,15 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-params={
-<span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
-} <span class="hljs-comment"># Index building params</span>
+    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+    index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+    params={
+        <span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split each vector into</span>
+    } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <p>En esta configuración:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: El tipo de índice a construir. En este ejemplo, establezca el valor <code translate="no">IVF_PQ</code>.</p></li>
@@ -139,7 +182,7 @@ params={
 </ul>
 <p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="/docs/es/v2.5.x/ivf-pq.md#Index-building-params">Parámetros de construcción del índice</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/v2.5.x/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice al método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/v2.5.x/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,14 +206,13 @@ params={
 }
 
 res = MilvusClient.search(
-collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
-limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
-search_params=search_params
+    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
+    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
+    search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <p>En esta configuración:</p>
 <ul>
 <li><p><code translate="no">params</code>: Opciones de configuración adicionales para la búsqueda en el índice.</p>
@@ -195,7 +237,22 @@ search_params=search_params
         ></path>
       </svg>
     </button></h2><p>En esta sección se ofrece una descripción general de los parámetros utilizados para crear un índice y realizar búsquedas en él.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices</h3><p>La siguiente tabla enumera los parámetros que pueden configurarse en <code translate="no">params</code> al <a href="/docs/es/v2.5.x/ivf-pq.md#Build-index">crear un índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La siguiente tabla enumera los parámetros que pueden configurarse en <code translate="no">params</code> al <a href="/docs/es/v2.5.x/ivf-pq.md#Build-index">crear un índice</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -225,7 +282,22 @@ search_params=search_params
      <td><p>Un valor más alto de <code translate="no">nbits</code> permite libros de códigos más grandes, lo que potencialmente conduce a representaciones más precisas de los vectores originales. Sin embargo, también implica utilizar más bits para almacenar cada índice, lo que se traduce en una menor compresión. En la mayoría de los casos, recomendamos establecer un valor dentro de este rango: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos de cada índice</h3><p>En la tabla siguiente se enumeran los parámetros que pueden configurarse en <code translate="no">search_params.params</code> al <a href="/docs/es/v2.5.x/ivf-pq.md#Search-on-index">buscar en el índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos de cada índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>En la tabla siguiente se enumeran los parámetros que pueden configurarse en <code translate="no">search_params.params</code> al <a href="/docs/es/v2.5.x/ivf-pq.md#Search-on-index">buscar en el índice</a>.</p>
 <table>
    <tr>
      <th></th>

@@ -4,7 +4,7 @@ related_key: configure
 group: system_configuration.md
 summary: MilvusのquotaAndLimitsの設定方法について説明します。
 ---
-<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">quotaAndLimits関連設定<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">quotaAndLimits関連の設定<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,7 +59,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   <tbody>
     <tr>
       <td>        true`でクォータと制限を有効にし、`false`で無効にする。      </td>
-      <td>true</td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -177,7 +177,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        リミッターによる複雑な前方データの削除チェックの有無      </td>
+      <td>        リミッターによる前方データの複合削除チェックの有無      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -833,7 +833,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s、デフォルトは制限なし      </td>
+      <td>        MB/s, デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1190,7 +1190,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s、デフォルトは制限なし。TODO: dbのバルクロードレートを制限する      </td>
+      <td>        MB/s、デフォルトは制限なし、未サポート。TODO: dbのバルクロードレートを制限する      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1338,7 +1338,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        vps（1秒あたりのベクター数）、デフォルトは制限なし      </td>
+      <td>        vps (1秒あたりのベクター数)、デフォルトは制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1431,7 +1431,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
       <td>
         <li>1秒あたりの最大クエリー数。</li>      
         <li>この項目を100に設定すると、Milvusは毎秒100クエリしか許可しないことを示します。</li>      
-        <li>この設定を使用するには、同時にquotaAndLimits.dql.enabledをtrueに設定します。</li>      </td>
+        <li>この設定を使用するには、同時にquotaAndLimits.dql.enabledをtrueに設定してください。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1675,7 +1675,7 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1]、データノード内のmemoryHighWaterLevel      </td>
+      <td>        (0, 1]、データノードのmemoryHighWaterLevel      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1763,8 +1763,8 @@ summary: MilvusのquotaAndLimitsの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>成長セグメントのサイズがLow Watermarkより小さい場合は、何もしない。</li>      
-        <li>成長しているセグメントのサイズが低い透かしを超えた場合、dmlレートは低下する、</li>      
+        <li>成長セグメントのサイズがLow Watermarkより小さい場合は何もしない。</li>      
+        <li>成長しているセグメントのサイズが低い透かしを超えた場合、dmlのレートは低下する、</li>      
         <li>ただし、minRateRatio * dmlRateを下回ることはない。</li>      </td>
       <td>false</td>
     </tr>

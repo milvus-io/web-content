@@ -93,7 +93,7 @@ client.create_index(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>In this example, we create a bitmap index on the <code translate="no">category</code> field of the <code translate="no">my_collection</code> collection. The <code translate="no">add_index()</code> method is used to specify the field name, index type, and index name.</p>
-<p>Once the bitmap index is created, you can use the <code translate="no">filter</code> parameter in query operations to perform scalar filtering based on the indexed field. This allows you to efficiently narrow down the search results using the bitmap index. For more information, refer to <a href="/docs/boolean.md">Filtering Explained</a>.</p>
+<p>Once the bitmap index is created, you can use the <code translate="no">filter</code> parameter in query operations to perform scalar filtering based on the indexed field. This allows you to efficiently narrow down the search results using the bitmap index. For more information, refer to <a href="/docs/v2.6.x/boolean.md">Filtering Explained</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Drop an index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -59,7 +59,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   <tbody>
     <tr>
       <td>        할당량 및 제한을 활성화하려면 'true', 비활성화하려면 'false'입니다.      </td>
-      <td>true</td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -119,7 +119,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        속도 제한에서 순방향 데이터 할당 삭제 실패 시 재시도 시간      </td>
+      <td>        속도 제한에서 순방향 데이터 할당 삭제가 실패한 경우 재시도 시간      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -415,7 +415,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        DB 수준의 쿼터, 기본값 제한 없음, CreateCollection, DropCollection, LoadCollection, ReleaseCollection의 속도      </td>
+      <td>        DB 수준의 쿼터, 기본값 제한 없음, CreateCollection, DropCollection, LoadCollection, ReleaseCollection에 대한 속도      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1616,7 +1616,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
     <tr>
       <td>
         <li>메모리 사용량 &gt; memoryHighWaterLevel일 경우 모든 DML 요청이 거부됩니다;</li>      
-        <li>memoryLowWaterLevel &lt; 메모리 사용량 &lt; memoryHighWaterLevel일 경우, dml 비율을 줄입니다;</li>      
+        <li>memoryLowWaterLevel &lt; 메모리 사용량 &lt; memoryHighWaterLevel일 경우, dml 속도를 줄입니다;</li>      
         <li>메모리 사용량이 memoryLowWaterLevel &lt;이면 아무 조치도 취하지 않습니다.</li>      </td>
       <td>true</td>
     </tr>

@@ -59,7 +59,7 @@ summary: 'Erfahren Sie, wie Sie quotaAndLimits für Milvus konfigurieren.'
   <tbody>
     <tr>
       <td>        `true` zum Aktivieren von Quoten und Grenzen, `false` zum Deaktivieren.      </td>
-      <td>true</td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -682,7 +682,7 @@ summary: 'Erfahren Sie, wie Sie quotaAndLimits für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Gibt an, ob die manuelle Drosselung von Verdichtungsanfragen aktiviert ist.      </td>
+      <td>        Ob die manuelle Drosselung von Verdichtungsanfragen aktiviert ist.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -713,7 +713,7 @@ summary: 'Erfahren Sie, wie Sie quotaAndLimits für Milvus konfigurieren.'
     <tr>
       <td>
         <li>Maximale Anzahl der manuellen Verdichtungsanfragen pro Sekunde.</li>      
-        <li>Der Wert 10 bedeutet, dass Milvus nicht mehr als 10 manuelle Verdichtungsanfragen pro Sekunde verarbeitet.</li>      
+        <li>Die Einstellung 10 bedeutet, dass Milvus nicht mehr als 10 manuelle Verdichtungsanfragen pro Sekunde verarbeitet.</li>      
         <li>Um diese Einstellung zu verwenden, setzen Sie gleichzeitig quotaAndLimits.compaction.enabled auf true.</li>      </td>
       <td>-1</td>
     </tr>
@@ -1763,7 +1763,7 @@ summary: 'Erfahren Sie, wie Sie quotaAndLimits für Milvus konfigurieren.'
   <tbody>
     <tr>
       <td>
-        <li>Es werden keine Maßnahmen ergriffen, wenn die Größe der wachsenden Segmente kleiner als die niedrige Wasserstandsmarke ist.</li>      
+        <li>Es werden keine Maßnahmen ergriffen, wenn die Größe der wachsenden Segmente geringer ist als die niedrige Wasserstandsmarke.</li>      
         <li>Wenn die Größe der wachsenden Segmente das niedrige Wasserzeichen überschreitet, wird die dml-Rate reduziert,</li>      
         <li>aber die Rate wird nicht niedriger als minRateRatio * dmlRate sein.</li>      </td>
       <td>false</td>
@@ -2055,7 +2055,7 @@ summary: 'Erfahren Sie, wie Sie quotaAndLimits für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Quote für das Löschen der Pufferzeilenanzahl, niedriger Wasserstand      </td>
+      <td>        Quote für Pufferzeilenzählung löschen, niedriger Wasserstand      </td>
       <td>32768</td>
     </tr>
   </tbody>

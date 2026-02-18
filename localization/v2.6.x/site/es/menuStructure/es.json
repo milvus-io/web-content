@@ -1696,7 +1696,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1799,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "Conmutador Tipo MQ",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "Conmutador Milvus Cluster Tipo MQ",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvus Conmutador independiente Tipo MQ",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },

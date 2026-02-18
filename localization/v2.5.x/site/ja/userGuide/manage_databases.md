@@ -3,7 +3,6 @@ id: manage_databases.md
 title: データベース
 summary: Milvusはコレクションの上にデータベースレイヤーを導入し、マルチテナンシーをサポートしながら、データをより効率的に管理・整理する方法を提供します。
 ---
-
 <h1 id="Database" class="common-anchor-header">データベース<button data-href="#Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +18,7 @@ summary: Milvusはコレクションの上にデータベースレイヤーを�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusはコレクションの上に<strong>データベースレイヤーを</strong>導入し、マルチテナンシーをサポートしながら、より効率的なデータの管理・整理方法を提供します。</p>
+    </button></h1><p>Milvusはコレクションの上に<strong>データベースレイヤーを</strong>導入し、マルチテナントをサポートしながら、より効率的にデータを管理・整理する方法を提供します。</p>
 <h2 id="What-is-a-database" class="common-anchor-header">データベースとは<button data-href="#What-is-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,15 +56,14 @@ summary: Milvusはコレクションの上にデータベースレイヤーを�
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 client.create_database(
-db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.database.request.*;
@@ -93,8 +91,8 @@ client.createDatabase(createDatabaseReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
-    Username: <span class="hljs-string">&quot;Milvus&quot;</span>,
-    Password: <span class="hljs-string">&quot;root&quot;</span>,
+    Username: <span class="hljs-string">&quot;root&quot;</span>,
+    Password: <span class="hljs-string">&quot;Milvus&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle err</span>
@@ -154,13 +152,12 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database_2&quot;,
-&quot;properties&quot;: {
-&quot;database.replica.number&quot;: 3
-}
+    &quot;dbName&quot;: &quot;my_database_2&quot;,
+    &quot;properties&quot;: {
+        &quot;database.replica.number&quot;: 3
+    }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="View-databases" class="common-anchor-header">データベースの表示<button data-href="#View-databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -187,13 +184,12 @@ client.list_databases()
 
 <span class="hljs-comment"># Check database details</span>
 client.describe_database(
-db_name=<span class="hljs-string">&quot;default&quot;</span>
+    db_name=<span class="hljs-string">&quot;default&quot;</span>
 )
 
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># {&quot;name&quot;: &quot;default&quot;}</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.database.response.*;
 
 <span class="hljs-type">ListDatabasesResp</span> <span class="hljs-variable">listDatabasesResp</span> <span class="hljs-operator">=</span> client.listDatabases();
@@ -284,7 +280,22 @@ curl --request POST \
      <td><p>指定されたデータベースに読み取り操作を拒否させるかどうか。</p></td>
    </tr>
 </table>
-<h3 id="Alter-database-properties" class="common-anchor-header">データベースのプロパティの変更</h3><p>既存のデータベースのプロパティを以下のように変更できます。以下の例では、データベースで作成できるコレクションの数を制限しています。</p>
+<h3 id="Alter-database-properties" class="common-anchor-header">データベースのプロパティの変更<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>既存のデータベースのプロパティを以下のように変更できます。以下の例では、データベースで作成できるコレクションの数を制限しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
@@ -318,14 +329,28 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database&quot;,
-&quot;properties&quot;: {
-&quot;database.max.collections&quot;: 10
-}
+    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;properties&quot;: {
+        &quot;database.max.collections&quot;: 10
+    }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Drop-database-properties" class="common-anchor-header">データベースのプロパティの削除</h3><p>以下のように、データベースのプロパティを削除してリセットすることもできます。以下の例では、データベースで作成できるコレクション数の制限を削除しています。</p>
+<h3 id="Drop-database-properties" class="common-anchor-header">データベースのプロパティの削除<button data-href="#Drop-database-properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下のように、データベースのプロパティを削除してリセットすることもできます。以下の例では、データベースで作成できるコレクション数の制限を削除しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
@@ -358,13 +383,12 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database&quot;,
-&quot;propertyKeys&quot;: [
-&quot;database.max.collections&quot;
-]
+    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;propertyKeys&quot;: [
+        &quot;database.max.collections&quot;
+    ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Use-database" class="common-anchor-header">データベースの使用<button data-href="#Use-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -452,6 +476,6 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-&quot;dbName&quot;: &quot;my_database&quot;
+    &quot;dbName&quot;: &quot;my_database&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

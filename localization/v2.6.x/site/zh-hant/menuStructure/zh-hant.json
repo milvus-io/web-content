@@ -1109,7 +1109,7 @@
                 "children": []
               },
               {
-                "label": "Voyage AI",
+                "label": "航程 AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1799,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "開關 MQ 類型",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "Milvus 集群切換器 MQ 類型",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvus 獨立開關 MQ 類型",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },

@@ -1799,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "Beralih Jenis MQ",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "Sakelar Milvus Cluster Tipe MQ",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Sakelar Mandiri Milvus Tipe MQ",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },

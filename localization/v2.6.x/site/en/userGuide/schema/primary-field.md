@@ -110,7 +110,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>If you are unsure which mode to choose, <a href="/docs/primary-field.md#Quickstart-Use-AutoID">start with AutoID</a> for simpler ingestion and guaranteed uniqueness.</p></li>
+<li><p>If you are unsure which mode to choose, <a href="/docs/v2.6.x/primary-field.md#Quickstart-Use-AutoID">start with AutoID</a> for simpler ingestion and guaranteed uniqueness.</p></li>
 <li><p>You are advised to rely on <code translate="no">autoId</code> in all cases unless manually setting primary keys is beneficial.</p></li>
 </ul>
 </div>
@@ -690,7 +690,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
         ></path>
       </svg>
     </button></h3><p>To preserve existing IDs during data migration, enable the <code translate="no">allow_insert_auto_id</code> property by making the <code translate="no">alter_collection_properties</code> call. When set to true, Milvus accepts user-provided IDs even if AutoID is enabled.</p>
-<p>For configuration details, refer to <a href="/docs/modify-collection.md#Example-5-Enable-allowinsertautoid">Modify Collection</a>.</p>
+<p>For configuration details, refer to <a href="/docs/v2.6.x/modify-collection.md#Example-5-Enable-allowinsertautoid">Modify Collection</a>.</p>
 <h3 id="Ensure-global-AutoID-uniqueness-across-clusters" class="common-anchor-header">Ensure global AutoID uniqueness across clusters<button data-href="#Ensure-global-AutoID-uniqueness-across-clusters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -730,7 +730,7 @@ curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Understanding how AutoID generates unique identifiers internally can help you <a href="/docs/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">configure cluster IDs</a> correctly and troubleshoot ID-related issues.</p>
+    </button></h2><p>Understanding how AutoID generates unique identifiers internally can help you <a href="/docs/v2.6.x/primary-field.md#Ensure-global-AutoID-uniqueness-across-clusters">configure cluster IDs</a> correctly and troubleshoot ID-related issues.</p>
 <p>AutoID uses a structured 64-bit format to guarantee uniqueness:</p>
 <pre><code translate="no" class="language-plaintext">[sign_bit][cluster_id][physical_ts][logical_ts]
 <button class="copy-code-btn"></button></code></pre>

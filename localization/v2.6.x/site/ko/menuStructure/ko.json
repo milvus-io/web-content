@@ -1799,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "MQ 유형 전환",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "밀버스 클러스터 스위치 MQ 타입",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "밀버스 독립형 스위치 MQ 타입",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -2478,7 +2497,7 @@
             "children": []
           },
           {
-            "label": "SiliconFlow",
+            "label": "실리콘 플로우",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []

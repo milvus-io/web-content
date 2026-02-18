@@ -38,7 +38,7 @@ summary: >-
       </svg>
     </button></h2><p>The <code translate="no">english</code> analyzer uses the following components:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Uses the <code translate="no">standard</code><a href="/docs/standard-tokenizer.md"> tokenizer</a> to split text into discrete word units.</p></li>
+<li><p><strong>Tokenizer</strong>: Uses the <code translate="no">standard</code><a href="/docs/v2.6.x/standard-tokenizer.md"> tokenizer</a> to split text into discrete word units.</p></li>
 <li><p><strong>Filters</strong>: Includes multiple filters for comprehensive text processing:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Converts all tokens to lowercase, enabling case-insensitive searches.</p></li>
@@ -201,7 +201,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
+<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/v2.6.x/analyzer-overview.md#Example-use">Example use</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

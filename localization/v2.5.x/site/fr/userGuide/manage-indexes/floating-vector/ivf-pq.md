@@ -8,7 +8,6 @@ summary: >-
   sur les graphes, IVF_PQ nécessite souvent beaucoup moins de mémoire, ce qui en
   fait un choix pratique pour les grands ensembles de données.
 ---
-
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,16 +40,46 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>IVF_PQ</strong> signifie <strong>Inverted File with Product Quantization (fichier inversé avec quantification de produit)</strong>. Il s'agit d'une approche hybride qui combine l'indexation et la compression pour une recherche vectorielle et une récupération efficaces. Elle s'appuie sur deux composants essentiels : le <strong>fichier inversé (IVF)</strong> et la <strong>quantification de produit (PQ)</strong>.</p>
-<h3 id="IVF" class="common-anchor-header">FICHIER INVERSÉ</h3><p>L'IVF est comparable à la création d'un index dans un livre. Au lieu de parcourir chaque page (ou, dans notre cas, chaque vecteur), vous recherchez des mots-clés spécifiques (clusters) dans l'index pour trouver rapidement les pages (vecteurs) pertinentes. Dans notre scénario, les vecteurs sont regroupés en grappes et l'algorithme recherche dans quelques grappes proches du vecteur de la requête.</p>
+<h3 id="IVF" class="common-anchor-header">FICHIER INVERSÉ<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'IVF est comparable à la création d'un index dans un livre. Au lieu de parcourir chaque page (ou, dans notre cas, chaque vecteur), vous recherchez des mots-clés spécifiques (clusters) dans l'index pour trouver rapidement les pages (vecteurs) pertinentes. Dans notre scénario, les vecteurs sont regroupés en grappes et l'algorithme recherche dans quelques grappes proches du vecteur de la requête.</p>
 <p>Voici comment cela fonctionne :</p>
 <ol>
 <li><p><strong>Regroupement :</strong> Votre ensemble de données vectorielles est divisé en un nombre déterminé de grappes, à l'aide d'un algorithme de regroupement tel que les k-moyennes. Chaque grappe possède un centroïde (vecteur représentatif de la grappe).</p></li>
 <li><p><strong>Affectation :</strong> Chaque vecteur est affecté à la grappe dont le centroïde est le plus proche.</p></li>
 <li><p><strong>Index inversé :</strong> Un index est créé, mettant en correspondance chaque centroïde de grappe avec la liste des vecteurs assignés à cette grappe.</p></li>
-<li><p><strong>Recherche :</strong> Lorsque vous recherchez les voisins les plus proches, l'algorithme de recherche compare le vecteur de votre requête aux centroïdes des clusters et sélectionne le(s) cluster(s) le(s) plus prometteur(s). La recherche est alors limitée aux vecteurs contenus dans les grappes sélectionnées.</p></li>
+<li><p><strong>Recherche :</strong> Lorsque vous recherchez les voisins les plus proches, l'algorithme de recherche compare le vecteur de votre requête aux centroïdes des clusters et sélectionne le(s) cluster(s) le(s) plus prometteur(s). La recherche est ensuite limitée aux vecteurs contenus dans les grappes sélectionnées.</p></li>
 </ol>
 <p>Pour en savoir plus sur les détails techniques, reportez-vous à <a href="/docs/fr/v2.5.x/ivf-flat.md">IVF_FLAT</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p>La<strong>quantification de produit (PQ)</strong> est une méthode de compression pour les vecteurs à haute dimension qui réduit considérablement les besoins de stockage tout en permettant des opérations de recherche de similarité rapides.</p>
+<h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La<strong>quantification de produit (PQ)</strong> est une méthode de compression pour les vecteurs à haute dimension qui réduit considérablement les besoins de stockage tout en permettant des opérations de recherche de similarité rapides.</p>
 <p>Le processus de quantification de produit comprend les étapes suivantes :</p>
 <p>
   
@@ -58,7 +87,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
 <ol>
 <li><p><strong>Décomposition des dimensions</strong>: L'algorithme commence par décomposer chaque vecteur à haute dimension en <code translate="no">m</code> sous-vecteurs de taille égale. Cette décomposition transforme l'espace original à D dimensions en <code translate="no">m</code> sous-espaces disjoints, où chaque sous-espace contient <em>D/m</em> dimensions. Le paramètre <code translate="no">m</code> contrôle la granularité de la décomposition et influence directement le taux de compression.</p></li>
-<li><p><strong>Génération d'un codebook de sous-espace</strong>: Dans chaque sous-espace, l'algorithme applique le <a href="https://en.wikipedia.org/wiki/K-means_clustering">regroupement k-means</a> pour apprendre un ensemble de vecteurs représentatifs (centroïdes). Ces centroïdes forment collectivement un livre de codes pour ce sous-espace. Le nombre de centroïdes dans chaque codebook est déterminé par le paramètre <code translate="no">nbits</code>, où chaque codebook contient <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits centroïdes. Par exemple, si</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code>, chaque livre de codes contiendra 256 centroïdes. Chaque centroïde se voit attribuer un index unique de <code translate="no">nbits</code> bits.</p></li>
+<li><p><strong>Génération d'un codebook pour le sous-espace</strong>: Dans chaque sous-espace, l'algorithme applique le <a href="https://en.wikipedia.org/wiki/K-means_clustering">regroupement k-means</a> pour apprendre un ensemble de vecteurs représentatifs (centroïdes). Ces centroïdes forment collectivement un livre de codes pour ce sous-espace. Le nombre de centroïdes dans chaque codebook est déterminé par le paramètre <code translate="no">nbits</code>, où chaque codebook contient <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits centroïdes. Par exemple, si</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code>, chaque livre de codes contiendra 256 centroïdes. Chaque centroïde se voit attribuer un index unique de <code translate="no">nbits</code> bits.</p></li>
 <li><p><strong>Quantification du</strong><strong>vecteur</strong>: Pour chaque sous-vecteur du vecteur original, PQ identifie le centroïde le plus proche dans le sous-espace correspondant à l'aide d'un type de métrique spécifique. Ce processus permet de faire correspondre chaque sous-vecteur à son vecteur représentatif le plus proche dans le livre de codes. Au lieu de stocker les coordonnées complètes du sous-vecteur, seul l'index du centroïde correspondant est conservé.</p></li>
 <li><p><strong>Représentation comprimée</strong>: La représentation comprimée finale se compose de <code translate="no">m</code> indices, un pour chaque sous-espace, collectivement appelés <strong>codes PQ</strong>. Ce codage réduit le besoin de stockage de <em>D × 32</em> bits (en supposant des nombres à virgule flottante de 32 bits) à <em>m</em> × <em>nbits</em> bits, ce qui permet une compression substantielle tout en préservant la capacité d'approximation des distances vectorielles.</p></li>
 </ol>
@@ -91,7 +120,22 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
    </span> <span class="img-wrapper"> <span>Ivf Pq 2</span> </span></p>
-<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>L'indice <strong>IVF_PQ</strong> combine les forces de l'<strong>IVF</strong> et du <strong>PQ</strong> pour accélérer les recherches. Le processus se déroule en deux étapes :</p>
+<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ<button data-href="#IVF-+-PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>L'indice <strong>IVF_PQ</strong> combine les forces de l'<strong>IVF</strong> et du <strong>PQ</strong> pour accélérer les recherches. Le processus se déroule en deux étapes :</p>
 <ol>
 <li><p><strong>Filtrage grossier avec IVF</strong>: IVF divise l'espace vectoriel en grappes, ce qui réduit l'étendue de la recherche. Au lieu d'évaluer l'ensemble des données, l'algorithme se concentre uniquement sur les grappes les plus proches du vecteur de la requête.</p></li>
 <li><p><strong>Comparaison fine avec PQ</strong>: à l'intérieur des grappes sélectionnées, PQ utilise des représentations vectorielles compressées et quantifiées pour calculer rapidement des distances approximatives.</p></li>
@@ -119,16 +163,15 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-params={
-<span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
-} <span class="hljs-comment"># Index building params</span>
+    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+    index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+    params={
+        <span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split each vector into</span>
+    } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Dans cette configuration :</p>
 <ul>
 <li><p><code translate="no">index_type</code>: Le type d'index à construire. Dans cet exemple, la valeur est <code translate="no">IVF_PQ</code>.</p></li>
@@ -163,14 +206,13 @@ params={
 }
 
 res = MilvusClient.search(
-collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
-limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
-search_params=search_params
+    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
+    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
+    search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <p>Dans cette configuration :</p>
 <ul>
 <li><p><code translate="no">params</code>: Options de configuration supplémentaires pour la recherche sur l'index.</p>
@@ -195,7 +237,22 @@ search_params=search_params
         ></path>
       </svg>
     </button></h2><p>Cette section présente une vue d'ensemble des paramètres utilisés pour construire un index et effectuer des recherches sur l'index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/v2.5.x/ivf-pq.md#Build-index">création d'un index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/v2.5.x/ivf-pq.md#Build-index">création d'un index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -209,7 +266,7 @@ search_params=search_params
      <td><p><code translate="no">nlist</code></p></td>
      <td><p>Le nombre de grappes à créer à l'aide de l'algorithme k-means pendant la construction de l'index.</p></td>
      <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, 65536]</p><p><strong>Valeur par défaut</strong>: <code translate="no">128</code></p></td>
-     <td><p>Les valeurs élevées de <code translate="no">nlist</code> améliorent le rappel en créant des grappes plus fines, mais augmentent le temps de construction de l'index. Optimisez en fonction de la taille du jeu de données et des ressources disponibles. Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cet intervalle : [32, 4096].</p></td>
+     <td><p>Les valeurs plus élevées de <code translate="no">nlist</code> améliorent le rappel en créant des grappes plus fines, mais augmentent le temps de construction de l'index. Optimisez en fonction de la taille du jeu de données et des ressources disponibles. Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cet intervalle : [32, 4096].</p></td>
    </tr>
    <tr>
      <td rowspan="2"><p>PQ</p></td>
@@ -225,7 +282,22 @@ search_params=search_params
      <td><p>Une valeur plus élevée de <code translate="no">nbits</code> permet d'obtenir des livres de codes plus importants, ce qui peut conduire à des représentations plus précises des vecteurs d'origine. Cependant, cela signifie également qu'il faut utiliser plus de bits pour stocker chaque index, ce qui se traduit par une compression moindre. Dans la plupart des cas, nous vous recommandons de choisir une valeur comprise dans cette fourchette : [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques aux index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/v2.5.x/ivf-pq.md#Search-on-index">recherche sur l'index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques aux index<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/v2.5.x/ivf-pq.md#Search-on-index">recherche sur l'index</a>.</p>
 <table>
    <tr>
      <th></th>

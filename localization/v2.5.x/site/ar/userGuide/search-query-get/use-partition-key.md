@@ -7,7 +7,6 @@ summary: >-
   تضييق نطاق البحث إلى عدة أقسام، وبالتالي تحسين كفاءة البحث. ستقدم هذه المقالة
   كيفية استخدام مفتاح التقسيم والاعتبارات ذات الصلة.
 ---
-
 <h1 id="Use-Partition-Key" class="common-anchor-header">استخدام مفتاح التقسيم<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +43,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-vs-partition-key.png" alt="Partition Vs Partition Key" class="doc-image" id="partition-vs-partition-key" />
-   </span> <span class="img-wrapper"> <span>التقسيم مقابل مفتاح التقسيم</span> </span></p>
+   </span> <span class="img-wrapper"> <span>التقسيم مقابل مفتاح القسم</span> </span></p>
 <p>يوضح الشكل التالي كيفية معالجة Milvus لطلبات البحث في مجموعة مع تمكين ميزة مفتاح التقسيم أو بدونها.</p>
 <ul>
 <li><p>إذا تم تعطيل مفتاح التقسيم، يبحث Milvus عن الكيانات الأكثر تشابهًا مع متجه الاستعلام داخل المجموعة. يمكنك تضييق نطاق البحث إذا كنت تعرف القسم الذي يحتوي على أكثر النتائج ذات الصلة.</p></li>
@@ -75,7 +74,22 @@ summary: >-
 <li><p><a href="/docs/ar/v2.5.x/use-partition-key.md#Set-Partition-Numbers">تعيين عدد الأقسام المراد إنشاؤها</a> (اختياري)، و</p></li>
 <li><p><a href="/docs/ar/v2.5.x/use-partition-key.md#Create-Filtering-Condition">إنشاء شرط تصفية بناءً على مفتاح التقسيم</a>.</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">تعيين مفتاح التقسيم</h3><p>لتعيين حقل قياسي كمفتاح التقسيم، تحتاج إلى تعيين السمة <code translate="no">is_partition_key</code> الخاصة به إلى <code translate="no">true</code> عند إضافة الحقل القياسي.</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">تعيين مفتاح التقسيم<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتعيين حقل قياسي كمفتاح التقسيم، تحتاج إلى تعيين السمة <code translate="no">is_partition_key</code> الخاصة به إلى <code translate="no">true</code> عند إضافة الحقل القياسي.</p>
 <div class="alert note">
 <p>عندما تقوم بتعيين حقل قياسي كمفتاح التقسيم، لا يمكن أن تكون قيم الحقل فارغة أو فارغة.</p>
 </div>
@@ -86,30 +100,28 @@ summary: >-
 )
 
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>,
-datatype=DataType.INT64,
-is_primary=<span class="hljs-literal">True</span>)
-
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>)
+    
 schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-datatype=DataType.FLOAT_VECTOR,
-dim=<span class="hljs-number">5</span>)
+    datatype=DataType.FLOAT_VECTOR,
+    dim=<span class="hljs-number">5</span>)
 
 <span class="hljs-comment"># Add the partition key</span>
 schema.add_field(
-field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
-datatype=DataType.VARCHAR,
-max_length=<span class="hljs-number">512</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-is_partition_key=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, 
+    datatype=DataType.VARCHAR, 
+    max_length=<span class="hljs-number">512</span>,
+<span class="highlighted-wrapper-line">    is_partition_key=<span class="hljs-literal">True</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -141,8 +153,7 @@ schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
         .dataType(DataType.VarChar)
         .maxLength(<span class="hljs-number">512</span>)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .isPartitionKey(<span class="hljs-literal">true</span>)
+<span class="highlighted-wrapper-line">        .isPartitionKey(<span class="hljs-literal">true</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
@@ -197,8 +208,7 @@ schema.WithField(entity.NewField().
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
         <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
-        <span class="hljs-comment">// highlight-next-line</span>
-        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span></span>
     }
 ]
 <button class="copy-code-btn"></button></code></pre>
@@ -229,27 +239,40 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">تعيين أرقام التقسيم</h3><p>عندما تقوم بتعيين حقل قياسي في مجموعة كمفتاح قسم، يقوم Milvus تلقائيًا بإنشاء 16 قسمًا في المجموعة. عند استلام أحد الكيانات، يختار Milvus قسمًا استنادًا إلى قيمة مفتاح التقسيم لهذا الكيان ويخزن الكيان في القسم، مما يؤدي إلى احتواء بعض أو كل الأقسام على كيانات بقيم مفاتيح أقسام مختلفة.</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">تعيين أرقام التقسيم<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عندما تقوم بتعيين حقل قياسي في مجموعة كمفتاح قسم، يقوم Milvus تلقائيًا بإنشاء 16 قسمًا في المجموعة. عند استلام أحد الكيانات، يختار Milvus قسمًا استنادًا إلى قيمة مفتاح التقسيم لهذا الكيان ويخزن الكيان في القسم، مما يؤدي إلى احتواء بعض أو كل الأقسام على كيانات بقيم مفاتيح أقسام مختلفة.</p>
 <p>يمكنك أيضًا تحديد عدد الأقسام المراد إنشاؤها مع المجموعة. لا يكون هذا صالحًا إلا إذا كان لديك حقل قياسي معيّن كمفتاح التقسيم.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    num_partitions=<span class="hljs-number">128</span>
+<span class="highlighted-wrapper-line">    num_partitions=<span class="hljs-number">128</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.numPartitions(<span class="hljs-number">128</span>)
-.build();
-client.createCollection(createCollectionReq);
+                .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                .collectionSchema(schema)
+                .numPartitions(<span class="hljs-number">128</span>)
+                .build();
+        client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithNumPartitions(<span class="hljs-number">128</span>))
@@ -281,7 +304,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">إنشاء شرط التصفية</h3><p>عند إجراء عمليات بحث ANN في مجموعة مع تمكين ميزة مفتاح التقسيم، تحتاج إلى تضمين تعبير تصفية يتضمن مفتاح التقسيم في طلب البحث. في تعبير التصفية، يمكنك في تعبير التصفية تقييد قيمة مفتاح التقسيم ضمن نطاق محدد بحيث يقيد Milvus نطاق البحث ضمن الأقسام المقابلة.</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">إنشاء شرط التصفية<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>عند إجراء عمليات بحث ANN في مجموعة مع تمكين ميزة مفتاح التقسيم، تحتاج إلى تضمين تعبير تصفية يتضمن مفتاح التقسيم في طلب البحث. في تعبير التصفية، يمكنك في تعبير التصفية تقييد قيمة مفتاح التقسيم ضمن نطاق محدد بحيث يقيد Milvus نطاق البحث ضمن الأقسام المقابلة.</p>
 <p>عند تنفيذ عمليات الحذف، من المستحسن تضمين تعبير تصفية يحدد مفتاح قسم واحد لتحقيق حذف أكثر كفاءة. يحد هذا النهج عملية الحذف من عملية الحذف إلى قسم معين، مما يقلل من تضخيم الكتابة أثناء الضغط ويحافظ على الموارد اللازمة للضغط والفهرسة.</p>
 <p>توضّح الأمثلة التالية التصفية المستندة إلى مفتاح التقسيم استنادًا إلى قيمة مفتاح قسم معين ومجموعة من قيم مفاتيح التقسيم.</p>
 <div class="multipleCode">
@@ -292,7 +330,6 @@ curl --request POST \
 <span class="hljs-comment"># Filter based on multiple partition key values</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 
@@ -318,7 +355,7 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <span class="hljs-built_in">export</span> filter=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>عليك أن تستبدل <code translate="no">partition_key</code> باسم الحقل الذي تم تعيينه كمفتاح التقسيم.</p>
+<p>يجب عليك استبدال <code translate="no">partition_key</code> باسم الحقل الذي تم تعيينه كمفتاح التقسيم.</p>
 </div>
 <h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">استخدام عزل مفتاح التقسيم<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -341,18 +378,32 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
    </span> <span class="img-wrapper"> <span>عزل مفتاح التقسيم</span> </span></p>
 <p>كما هو موضح في الشكل أعلاه، يقوم Milvus بتجميع الكيانات بناءً على قيمة مفتاح التقسيم وإنشاء فهرس منفصل لكل مجموعة من هذه المجموعات. عند تلقي طلب بحث، يقوم ميلفوس بتحديد موقع الفهرس بناءً على قيمة مفتاح التقسيم المحددة في شرط التصفية ويقيد نطاق البحث داخل الكيانات المضمنة في الفهرس، وبالتالي تجنب مسح الكيانات غير ذات الصلة أثناء البحث وتحسين أداء البحث بشكل كبير.</p>
-<p>بمجرد تمكين عزل مفتاح التقسيم، يجب عليك تضمين قيمة محددة واحدة فقط في عامل التصفية المستند إلى مفتاح التقسيم حتى يتمكن ميلفوس من تقييد نطاق البحث داخل الكيانات المضمنة في الفهرس التي تتطابق.</p>
+<p>بمجرد تمكين عزل مفتاح التقسيم، يجب عليك تضمين قيمة محددة واحدة فقط في عامل التصفية المستند إلى مفتاح التقسيم حتى يتمكن ميلفوس من تقييد نطاق البحث ضمن الكيانات المضمنة في الفهرس التي تتطابق.</p>
 <div class="alert note">
 <p>في الوقت الحالي، تنطبق ميزة عزل مفتاح التقسيم فقط على عمليات البحث مع تعيين نوع الفهرس إلى HNSW.</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">تمكين عزل مفتاح التقسيم</h3><p>توضح الأمثلة البرمجية التالية كيفية تمكين عزل مفتاح التقسيم.</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">تمكين عزل مفتاح التقسيم<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>توضح الأمثلة البرمجية التالية كيفية تمكين عزل مفتاح التقسيم.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -361,13 +412,12 @@ Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <sp
 properties.put(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.properties(properties)
-.build();
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .properties(properties)
+        .build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithProperty(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-literal">true</span>))

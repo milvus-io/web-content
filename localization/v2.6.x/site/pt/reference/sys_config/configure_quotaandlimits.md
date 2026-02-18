@@ -59,7 +59,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   <tbody>
     <tr>
       <td>        `true` para ativar quotas e limites, `false` para desativar.      </td>
-      <td>true</td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -88,7 +88,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   <tbody>
     <tr>
       <td>
-        <li>quotaCenterCollectInterval é o intervalo de tempo que o quotaCenter</li>      
+        <li>quotaCenterCollectInterval é o intervalo de tempo em que o quotaCenter</li>      
         <li>recolhe métricas de Proxies, Cluster de consulta e Cluster de dados.</li>      
         <li>segundos, (0 ~ 65536)</li>      </td>
       <td>3</td>
@@ -322,7 +322,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Se a limitação de pedidos DDL está activada.      </td>
+      <td>        Se a limitação dos pedidos DDL está activada.      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -504,7 +504,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Número máximo de pedidos relacionados com o índice por segundo.</li>      
-        <li>Definir este item como 10 indica que o Milvus não processa mais de 10 pedidos relacionados com a partição por segundo, incluindo pedidos de criação de índices e pedidos de eliminação de índices.</li>      
+        <li>Definir este item como 10 indica que o Milvus não processa mais do que 10 pedidos relacionados com a partição por segundo, incluindo pedidos de criação de índices e pedidos de eliminação de índices.</li>      
         <li>Para utilizar esta definição, defina quotaAndLimits.indexRate.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -595,7 +595,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
       <td>
         <li>Número máximo de pedidos de descarga por segundo.</li>      
         <li>Se este item for definido como 10, indica que o Milvus não processa mais de 10 pedidos de descarga por segundo.</li>      
-        <li>Para usar esta definição, defina quotaAndLimits.flushRate.enabled para true ao mesmo tempo.</li>      </td>
+        <li>Para utilizar esta definição, defina quotaAndLimits.flushRate.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1308,7 +1308,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Número máximo de vectores a pesquisar por segundo.</li>      
-        <li>Definir este item para 100 indica que o Milvus só permite a pesquisa de 100 vectores por segundo, independentemente de estes 100 vectores estarem todos numa única pesquisa ou dispersos por várias pesquisas.</li>      
+        <li>Definir este item como 100 indica que o Milvus só permite a pesquisa de 100 vectores por segundo, independentemente de estes 100 vectores estarem todos numa única pesquisa ou dispersos por várias pesquisas.</li>      
         <li>Para usar esta configuração, defina quotaAndLimits.dql.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -1369,7 +1369,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Número máximo de vectores a pesquisar por coleção e por segundo.</li>      
-        <li>Definir este item para 100 indica que o Milvus apenas permite a pesquisa de 100 vectores por segundo por coleção, independentemente de estes 100 vectores estarem todos numa única pesquisa ou dispersos por várias pesquisas.</li>      
+        <li>Definir este item para 100 indica que o Milvus só permite a pesquisa de 100 vectores por segundo por coleção, independentemente de estes 100 vectores estarem todos numa única pesquisa ou dispersos por várias pesquisas.</li>      
         <li>Para utilizar esta definição, defina quotaAndLimits.dql.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -2026,7 +2026,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        comutador para ativar a quota de contagem de linhas da memória intermédia de eliminação      </td>
+      <td>        ativar a quota de contagem de linhas da memória intermédia de eliminação      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -2142,7 +2142,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        eliminar a quota de tamanho da memória intermédia, nível de água baixo     </td>
+      <td>        eliminar quota de tamanho da memória intermédia, nível de água baixo     </td>
       <td>134217728</td>
     </tr>
   </tbody>
@@ -2171,7 +2171,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        eliminar quota de tamanho da memória intermédia, nível de água elevado      </td>
+      <td>        eliminar a quota de tamanho da memória intermédia, nível de água elevado      </td>
       <td>268435456</td>
     </tr>
   </tbody>
