@@ -41,10 +41,10 @@ summary: >-
       </svg>
     </button></h2><p>The ARRAY operators allow for fine-grained querying of array fields in Milvus. These operators are:</p>
 <ul>
-<li><p><a href="/docs/v2.6.x/array-operators.md#ARRAYCONTAINS"><code translate="no">ARRAY_CONTAINS(identifier, expr)</code></a>: checks if a specific element exists in an array field.</p></li>
-<li><p><a href="/docs/v2.6.x/array-operators.md#ARRAYCONTAINSALL"><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code></a>: ensures that all elements of the specified list are present in the array field.</p></li>
-<li><p><a href="/docs/v2.6.x/array-operators.md#ARRAYCONTAINSANY"><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code></a>: checks if any of the elements from the specified list are present in the array field.</p></li>
-<li><p><a href="/docs/v2.6.x/array-operators.md#ARRAYLENGTH"><code translate="no">ARRAY_LENGTH(identifier)</code></a>: returns the number of elements in an array field and can be combined with comparison operators for filtering.</p></li>
+<li><p><a href="/docs/array-operators.md#ARRAYCONTAINS"><code translate="no">ARRAY_CONTAINS(identifier, expr)</code></a>: checks if a specific element exists in an array field.</p></li>
+<li><p><a href="/docs/array-operators.md#ARRAYCONTAINSALL"><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code></a>: ensures that all elements of the specified list are present in the array field.</p></li>
+<li><p><a href="/docs/array-operators.md#ARRAYCONTAINSANY"><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code></a>: checks if any of the elements from the specified list are present in the array field.</p></li>
+<li><p><a href="/docs/array-operators.md#ARRAYLENGTH"><code translate="no">ARRAY_LENGTH(identifier)</code></a>: returns the number of elements in an array field and can be combined with comparison operators for filtering.</p></li>
 </ul>
 <h2 id="ARRAYCONTAINS" class="common-anchor-header">ARRAY_CONTAINS<button data-href="#ARRAYCONTAINS" class="anchor-icon" translate="no">
       <svg translate="no"

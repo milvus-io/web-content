@@ -160,7 +160,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Exponential decay can be applied to both standard vector search and hybrid search operations in Milvus. Below are the key code snippets for implementing this feature.</p>
 <div class="alert note">
-<p>Before using decay functions, you must first create a collection with appropriate numeric fields (like timestamps, distances, etc.) that will be used for decay calculations. For complete working examples including collection setup, schema definition, and data insertion, refer to <a href="/docs/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker Tutorial</a>.</p>
+<p>Before using decay functions, you must first create a collection with appropriate numeric fields (like timestamps, distances, etc.) that will be used for decay calculations. For complete working examples including collection setup, schema definition, and data insertion, refer to <a href="/docs/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker Tutorial</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Create a decay ranker<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"

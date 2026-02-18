@@ -50,7 +50,7 @@ beta: Milvus 2.6.8+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you perform a BM25 full text search, you can highlight the <strong>search terms</strong> in the returned result to help explain why a document matches the query. To learn more about BM25 full text search, refer to <a href="/docs/v2.6.x/full-text-search.md">Full Text Search</a>.</p>
+    </button></h2><p>When you perform a BM25 full text search, you can highlight the <strong>search terms</strong> in the returned result to help explain why a document matches the query. To learn more about BM25 full text search, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
 <p>In this scenario, highlighted terms come directly from the search terms used in BM25 full text search. The Highlighter uses these terms to annotate matched text in the final result.</p>
 <p>Assume the following content is stored in a text field:</p>
 <pre><code translate="no" class="language-plaintext">Milvus supports full text search. Use BM25 for keyword relevance. Filters can narrow results.
@@ -89,7 +89,7 @@ highlighter = LexicalHighlighter(
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To control the position, length, and number of returned fragments, see <a href="/docs/v2.6.x/text-highlighter.md#Fragment-based-highlighting-output">Return highlighted text as fragments</a>.</p>
+<p>To control the position, length, and number of returned fragments, see <a href="/docs/text-highlighter.md#Fragment-based-highlighting-output">Return highlighted text as fragments</a>.</p>
 <h2 id="Query-term-highlighting-in-filtering" class="common-anchor-header">Query term highlighting in filtering<button data-href="#Query-term-highlighting-in-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,7 +107,7 @@ highlighter = LexicalHighlighter(
       </svg>
     </button></h2><p>In addition to highlighting search terms, you can highlight terms used in text-based filtering expressions.</p>
 <div class="alert note">
-<p>Currently, only the <code translate="no">TEXT_MATCH</code> filtering condition is supported for query term highlighting. To learn more, refer to <a href="/docs/v2.6.x/keyword-match.md">Text Match</a>.</p>
+<p>Currently, only the <code translate="no">TEXT_MATCH</code> filtering condition is supported for query term highlighting. To learn more, refer to <a href="/docs/keyword-match.md">Text Match</a>.</p>
 </div>
 <p>In this scenario, highlighted terms come from text-based filtering expressions. Filtering determines which documents match, while the Highlighter annotates the matched text spans.</p>
 <p>Assume the following content is stored in a text field:</p>
@@ -151,7 +151,7 @@ highlighter = LexicalHighlighter(
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To control the position, length, and number of returned fragments, see <a href="/docs/v2.6.x/text-highlighter.md#Fragment-based-highlighting-output">Return highlighted text as fragments</a>.</p>
+<p>To control the position, length, and number of returned fragments, see <a href="/docs/text-highlighter.md#Fragment-based-highlighting-output">Return highlighted text as fragments</a>.</p>
 <h2 id="Fragment-based-highlighting-output" class="common-anchor-header">Fragment-based highlighting output<button data-href="#Fragment-based-highlighting-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

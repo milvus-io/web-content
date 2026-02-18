@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <code translate="no">SPARSE_INVERTED_INDEX</code> index is an index type used by Milvus to efficiently store and search sparse vectors. This index type leverages the principles of inverted indexing to create a highly efficient search structure for sparse data. For more information, refer to <a href="/docs/v2.6.x/inverted.md">INVERTED</a>.</p>
+    </button></h1><p>The <code translate="no">SPARSE_INVERTED_INDEX</code> index is an index type used by Milvus to efficiently store and search sparse vectors. This index type leverages the principles of inverted indexing to create a highly efficient search structure for sparse data. For more information, refer to <a href="/docs/inverted.md">INVERTED</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +59,7 @@ index_params.add_index(
 <ul>
 <li><p><code translate="no">IP</code> (Inner Product): Measures similarity using dot product.</p></li>
 <li><p><code translate="no">BM25</code>: Typically used for full-text search, focusing on textual similarity.</p>
-<p>For further details, refer to <a href="/docs/v2.6.x/metric.md">Metric Types</a> and <a href="/docs/v2.6.x/full-text-search.md">Full Text Search</a>.</p></li>
+<p>For further details, refer to <a href="/docs/metric.md">Metric Types</a> and <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
 </ul></li>
 <li><p><code translate="no">params.inverted_index_algo</code>: The algorithm used for building and querying the index. Valid values:</p>
 <ul>
@@ -67,9 +67,9 @@ index_params.add_index(
 <li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small <em>k</em> values or short queries, where skipping is more feasible.</p></li>
 <li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to <code translate="no">DAAT_MAXSCORE</code> and <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (avgdl), <code translate="no">TAAT_NAIVE</code> dynamically adapts to such changes.</p></li>
 </ul>
-<p>To learn more building parameters available for the <code translate="no">SPARSE_INVERTED_INDEX</code> index, refer to <a href="/docs/v2.6.x/sparse-inverted-index.md#Index-building-params">Index building params</a>.</p></li>
+<p>To learn more building parameters available for the <code translate="no">SPARSE_INVERTED_INDEX</code> index, refer to <a href="/docs/sparse-inverted-index.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/v2.6.x/create-collection.md">Create Collection</a>.</p>
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,7 +96,7 @@ res = MilvusClient.search(
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>To learn more search parameters available for the <code translate="no">SPARSE_INVERTED_INDEX</code> index, refer to <a href="/docs/v2.6.x/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">Index-specific search params</a>.</p>
+<p>To learn more search parameters available for the <code translate="no">SPARSE_INVERTED_INDEX</code> index, refer to <a href="/docs/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">Index-specific search params</a>.</p>
 <h2 id="Index-params" class="common-anchor-header">Index params<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,7 +128,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/v2.6.x/sparse-inverted-index.md#Build-index">building an index</a>.</p>
+    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/sparse-inverted-index.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -158,7 +158,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/v2.6.x/sparse-inverted-index.md#Search-on-index">searching on the index</a>.</p>
+    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/sparse-inverted-index.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>

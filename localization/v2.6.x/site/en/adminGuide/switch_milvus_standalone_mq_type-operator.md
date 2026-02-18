@@ -35,7 +35,7 @@ title: Switch MQ Type for Milvus Standalone
         ></path>
       </svg>
     </button></h2><ul>
-<li>A running Milvus Standalone instance installed via <a href="/docs/v2.6.x/install_standalone-docker.md">Docker</a> or <a href="/docs/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a>.</li>
+<li>A running Milvus Standalone instance installed via <a href="/docs/install_standalone-docker.md">Docker</a> or <a href="/docs/install_standalone-docker-compose.md">Docker Compose</a>.</li>
 <li>The Milvus instance has been upgraded to the latest version that supports this Switch MQ feature.</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">General workflow<button data-href="#General-workflow" class="anchor-icon" translate="no">

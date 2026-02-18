@@ -45,7 +45,7 @@ summary: >-
 <li><p><strong>Range Filters</strong>: <code translate="no">IN</code> and <code translate="no">LIKE</code> help match specific value ranges or sets.</p></li>
 <li><p><strong>Arithmetic Operators</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, and <code translate="no">**</code> are used for calculations involving numeric fields.</p></li>
 <li><p><strong>Logical Operators</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code> combine multiple conditions into complex expressions.</p></li>
-<li><p><strong>IS NULL and IS NOT NULL Operators</strong>: The <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to <a href="/docs/v2.6.x/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Basic Operators</a>.</p></li>
+<li><p><strong>IS NULL and IS NOT NULL Operators</strong>: The <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> operators are used to filter fields based on whether they contain a null value (absence of data). For details, refer to <a href="/docs/basic-operators.md#IS-NULL-and-IS-NOT-NULL-Operators">Basic Operators</a>.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">Example: Filtering by Color<button data-href="#Example-Filtering-by-Color" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,7 +101,7 @@ summary: >-
     </button></h3><p>If you have an array field <code translate="no">history_temperatures</code> containing the records of average temperatures reported by observatories since the year 2000, and want to find observatories where the temperature in 2009 (the 10th recorded ) exceeds 23°C, use this expression:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on these basic operators, refer to <a href="/docs/v2.6.x/basic-operators.md">Basic Operators</a>.</p>
+<p>For more information on these basic operators, refer to <a href="/docs/basic-operators.md">Basic Operators</a>.</p>
 <h2 id="Filter-expression-templates" class="common-anchor-header">Filter expression templates<button data-href="#Filter-expression-templates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,7 +141,7 @@ summary: >-
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}
 <button class="copy-code-btn"></button></code></pre>
-<p>This approach reduces parsing overhead and improves query speed. For more information, see <a href="/docs/v2.6.x/filtering-templating.md">Filter Templating</a>.</p>
+<p>This approach reduces parsing overhead and improves query speed. For more information, see <a href="/docs/filtering-templating.md">Filter Templating</a>.</p>
 <h2 id="Data-type-specific-operators" class="common-anchor-header">Data type-specific operators<button data-href="#Data-type-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +186,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more details on JSON operators, refer to <a href="/docs/v2.6.x/json-operators.md">JSON Operators</a>.</p>
+<p>For more details on JSON operators, refer to <a href="/docs/json-operators.md">JSON Operators</a>.</p>
 <h3 id="ARRAY-field-specific-operators" class="common-anchor-header">ARRAY field-specific operators<button data-href="#ARRAY-field-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -215,7 +215,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_LENGTH</code>: Filters based on the length of the array.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more details on array operators, see <a href="/docs/v2.6.x/array-operators.md">ARRAY Operators</a>.</p>
+<p>For more details on array operators, see <a href="/docs/array-operators.md">ARRAY Operators</a>.</p>
 <h3 id="VARCHAR-field-specific-operators" class="common-anchor-header">VARCHAR field-specific operators<button data-href="#VARCHAR-field-specific-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -238,6 +238,6 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>Analyzer</strong>: Tokenizes and processes input text.</p></li>
 <li><p><strong>Indexing</strong>: Creates an inverted index mapping unique tokens to documents.</p></li>
 </ol>
-<p>For more details, refer to <a href="/docs/v2.6.x/keyword-match.md">Text Match</a>.</p>
+<p>For more details, refer to <a href="/docs/keyword-match.md">Text Match</a>.</p>
 <h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>The <strong>PHRASE_MATCH</strong> operator enables precise retrieval of documents based on exact phrase matches, considering both the order and adjacency of query terms.</p>
-<p>For more details, refer to <a href="/docs/v2.6.x/phrase-match.md">Phrase Match</a>.</p>
+<p>For more details, refer to <a href="/docs/phrase-match.md">Phrase Match</a>.</p>

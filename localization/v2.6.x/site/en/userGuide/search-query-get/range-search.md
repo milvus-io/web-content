@@ -256,5 +256,5 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If the query vectors already exist in the target collection, consider using <code translate="no">ids</code> instead of retrieving them before searches. For details, refer to <a href="/docs/v2.6.x/primary-key-search.md">Primary-Key Search</a>.</p>
+<p>If the query vectors already exist in the target collection, consider using <code translate="no">ids</code> instead of retrieving them before searches. For details, refer to <a href="/docs/primary-key-search.md">Primary-Key Search</a>.</p>
 </div>

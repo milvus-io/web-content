@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Docker Compose.
 title: Upgrade Milvus Standalone with Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/v2.6.x/upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/v2.6.x/upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="/docs/v2.6.x/upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="/docs/upgrade_milvus_standalone-docker.md" class='active '>Docker Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Upgrade Milvus Standalone with Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ title: Upgrade Milvus Standalone with Docker Compose
 <li><strong>New components</strong>: Introduction of Streaming Node for enhanced data processing</li>
 <li><strong>Component removal</strong>: <code translate="no">indexNode</code> removed and consolidated</li>
 </ul>
-<p>This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/v2.6.x/architecture_overview.md">Milvus Architecture Overview</a>.</p>
+<p>This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Requirements<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -213,12 +213,12 @@ docker compose logs standalone | grep <span class="hljs-string">&quot;version&qu
     </button></h2><ul>
 <li>You might also want to learn how to:
 <ul>
-<li><a href="/docs/v2.6.x/scaleout.md">Scale a Milvus cluster</a></li>
+<li><a href="/docs/scaleout.md">Scale a Milvus cluster</a></li>
 </ul></li>
 <li>If you are ready to deploy your cluster on clouds:
 <ul>
-<li>Learn how to <a href="/docs/v2.6.x/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
-<li>Learn how to <a href="/docs/v2.6.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li>Learn how to <a href="/docs/v2.6.x/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
+<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
+<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul></li>
 </ul>

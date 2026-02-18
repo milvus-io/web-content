@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: Learn how to upgrade Milvus cluster with Helm Chart.
 title: Upgrade Milvus Cluster with Helm Chart
 ---
-<div class="tab-wrapper"><a href="/docs/v2.6.x/upgrade_milvus_cluster-operator.md" class=''>Milvus Operator</a><a href="/docs/v2.6.x/upgrade_milvus_cluster-helm.md" class='active '>Helm</a></div>
+<div class="tab-wrapper"><a href="/docs/upgrade_milvus_cluster-operator.md" class=''>Milvus Operator</a><a href="/docs/upgrade_milvus_cluster-helm.md" class='active '>Helm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">Upgrade Milvus Cluster with Helm Chart<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ title: Upgrade Milvus Cluster with Helm Chart
 <li><strong>New components</strong>: Introduction of Streaming Node for enhanced data processing</li>
 <li><strong>Component removal</strong>: <code translate="no">indexNode</code> removed and consolidated</li>
 </ul>
-<p>This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/v2.6.x/architecture_overview.md">Milvus Architecture Overview</a>.</p>
+<p>This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to <a href="/docs/architecture_overview.md">Milvus Architecture Overview</a>.</p>
 <h3 id="Requirements" class="common-anchor-header">Requirements<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
