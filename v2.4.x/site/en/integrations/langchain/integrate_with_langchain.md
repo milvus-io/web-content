@@ -92,7 +92,7 @@ We will initialize a Milvus vector store with the documents, which load the docu
 
 
 ```python
-from langchain_milvus import Milvus, Zilliz
+from langchain_milvus.vectorstores import Milvus, Zilliz
 from langchain_openai import OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
