@@ -106,7 +106,7 @@ index_params.add_index(
     index_name="vector_index", # Name of the index to create
     metric_type="L2", # Metric type used to measure similarity
     params={
-        "m": 4, # Number of sub-vectors to split eahc vector into
+        "m": 4, # Number of sub-vectors to split each vector into
     } # Index building params
 )
 ```
