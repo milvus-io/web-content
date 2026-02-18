@@ -13,7 +13,11 @@ Setting `nlist` is scenario-specific. As a rule of thumb, the recommended value 
 
 The size of each segment is determined by the `datacoord.segment.maxSize` parameter, which is set to 512 MB by default. The total number of entities in a segment n can be estimated by dividing `datacoord.segment.maxSize` by the size of each entity.
 
+**Example**: If each vector is 50 KB, then $n = \frac{512\, \text{MB} \times 1024\, \text{KB/MB}}{50\, \text{KB per entity}} = 10,485 \text{ entities}$
+For the number of clusters, `nlist` $= 4 \times \sqrt{n} = 410$.
+
 Setting `nprobe` is specific to the dataset and scenario, and involves a trade-off between accuracy and query performance. We recommend finding the ideal value through repeated experimentation.
+If the data volume of the entities is within the millions, you might consider using brute-force search. In other words, set `nprobe` to `nlist`.
 
 The following charts are results from a test running on the sift50m dataset and IVF_SQ8 index, which compares recall and query performance of different `nlist`/`nprobe` pairs.
 
